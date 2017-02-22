@@ -9,10 +9,10 @@ enum ErrorCode {
 }
 
 message AccountRequest {
-	string id;
-	string name;
-	int state;
-	string logo_url;
+	string id = 1;
+	string name = 2;
+	int32 state = 3;
+	string logo_url = 4;
 }
 
 message CreateResponse {
@@ -35,13 +35,13 @@ message AccountResponse {
 	string error_description = 2;
 	string id = 3;
 	string name = 4;
-	int state = 5;
+	int32 state = 5;
 	string logo_url = 6;
 }
 
 service AccountMgr {
-	rpc Create(AccountRequest) returns CreateResponse {}
-	rpc Delete(IdRequest) returns Response {}
-	rpc Update(AccountRequest) returns Response {}
-	rpc Read(IdRequest) returns AccountResponse {}
+	rpc Create(AccountRequest) returns (CreateResponse) {}
+	rpc Delete(IdRequest) returns (Response) {}
+	rpc Update(AccountRequest) returns (Response) {}
+	rpc Read(IdRequest) returns (AccountResponse) {}
 }

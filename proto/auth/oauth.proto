@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package auth;
+
 message UserRequest {
 	string id = 1;
 	// required when using update only
@@ -50,10 +52,10 @@ message RenewTokenRequest {
 message TokenRequest {
 	GrantType grant_type = 1;
 	enum GrantType {
-		refresh_token = 0;
-		authorization_code = 1;
-		password = 2;
-		client_credentials = 3;
+		Refresh_token = 0;
+		Authorization_code = 1;
+		Password = 2;
+		Client_credentials = 3;
 	}
 	string username = 2;
 	string password = 3;
@@ -70,10 +72,10 @@ message AccessTokenResponse {
 	string access_token = 3;
 	TokenType token_type = 4;
 	enum TokenType {
-		bearer = 1;
-		mac = 2;
+		bearer = 0;
+		mac = 1;
 	}
-	long expires_in = 5;
+	int64 expires_in = 5;
 	string refresh_token = 6;
 	repeated string scope = 7;
 
@@ -83,13 +85,13 @@ message AccessTokenResponse {
 
 message AuthorizeRequest {
 	enum AuthorizeType {
-		code = 1;
-		token = 2;
+		code = 0;
+		token = 1;
 	}
 	AuthorizeType response_type = 1; /*must set to code*/
 	string client_id = 2;
 	string redirect_uri = 3;
-	repeted string scope = 4;
+	repeated string scope = 4;
 }
 
 message AuthorizeResponse {
@@ -99,8 +101,8 @@ message AuthorizeResponse {
 }
 
 message UnauthorizeRequest {
-	string client_id;
-	string user_id;
+	string client_id = 1;
+	string user_id = 2;
 }
 
 service Oauth2 {
@@ -115,7 +117,7 @@ service Oauth2 {
 
 	rpc CreateClient(ClientRequest) returns(Response) {}
 	rpc UpdateClient(ClientRequest) returns(Response) {}
-	rpc DeleteClient(IdRequest) returns (Response)xs{}
+	rpc DeleteClient(IdRequest) returns (Response) {}
 
 	rpc Token(TokenRequest) returns (AccessTokenResponse) {}
 	rpc Authorize(AuthorizeRequest) returns (AuthorizeResponse) {}

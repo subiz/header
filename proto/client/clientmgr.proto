@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package client;
+
+message Error {
+	ErrorCode code = 1;
+	string error_description = 2;
+}
+
+message Credential {
+	string account_id = 1;
+	string user_id = 2;
+	
+	repeated string user_scopes = 3;
+
+	// scope that the user allow
+	repeated string scopes = 4;
+
+	bool internal = 5;
+}
+
+message ClientCreateResponse {	
+	Error error = 1;
+	string id = 2;
+}
+
+enum ErrorCode {
+	NO_ERROR = 0;
+	RESOURCE_NOTFOUND = 1;
+	INVALID_REQUEST = 2;
+	UNAUTHORIZED = 3;
+	INTERNAL_ERROR = 4;
+}
+
+message ClientRequest {
+	Credential credential = 1;
+	Client client = 2;
+}
+
+message Client {
+	string id = 1;
+	string secret = 2;
+	string logo_url = 3;
+	string account_id = 4;
+	string contact_email = 5;
+	string description = 6;
+	string short_description = 7;
+	bool is_verified = 8;
+	string redirect_url = 9;
+	string webhook_url = 10;
+	
+	enum ClientType {
+		APP = 0;
+		CHANNEL = 1;
+	}
+	ClientType type = 11;
+	string name = 12;
+	bool is_internal = 13;
+
+	string version = 14;
+	string is_public = 15;
+	string publish_date = 16;
+}
+
+message ClientIdRequest {
+	string id = 1;
+	Credential credential = 2;
+}
+
+message ClientResponse {
+	string id = 1;
+	string secret = 2;
+	string logo_url = 3;
+	string account_id = 4;
+	string contact_email = 5;
+	string description = 6;
+	string short_description = 7;
+
+	// app is accessable from other account must have validated = true
+	bool validated = 8;
+	string redirect_url = 9;
+	string webhook = 10;
+	
+	// any client internal = true are grant unlimited access. Only set this field to internal client (service)
+	bool internal = 13;
+
+	Error error = 14;
+}
+
+message ListClientsRequest {
+	Credential credential = 6;
+	string start_id = 1;
+	string keyword = 2;
+	string limit = 3;
+	string account_id = 4;
+}
+
+message ListClientsResponse {
+	Error error = 1;
+	repeated Client clients = 3;
+}
+
+
+service ClientMgt {
+	rpc Create(ClientRequest) returns (ClientCreateResponse) {}
+	rpc Read(ClientIdRequest) returns (ClientResponse) {}
+	rpc List(ListClientsRequest) returns (ListClientsResponse) {}
+	rpc Delete(ClientIdRequest) returns (Error) {}
+	rpc Update(ClientRequest) returns (Error) {}
+}

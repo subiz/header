@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package scope;
+
+message Scope {
+	bool channel_manage = 1;
+	bool client_read = 2;
+	bool client_manage = 3;
+	bool client_validate = 4;
+	bool client_delete = 5;
+	bool client_verify = 6;
+}
