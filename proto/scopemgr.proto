@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+message ScopeCreateResponse {	
+	ErrorCode error = 1;
+	string error_description = 2;
+	string id = 3;
+}
+
+enum ErrorCode {
+	no_error = 0;
+	resource_notfoud = 1;
+	invalid_request = 2;
+	unauthorized = 3;
+	internal_error = 4;
+}
+
+message Scope {
+	string id = 1;
+	string name = 2;
+	string logo_url = 3;
+	string title = 4;
+	string description = 5;
+	repeated string methods = 6;
+}
+
+message ScopeIdRequest {
+	string id = 1;
+}
+
+message ScopeResponse {
+	string id = 1;
+	string name = 2;
+	string logo_url = 3;
+	string title = 4;
+	string description = 5;
+	
+	repeated string methods = 6;
+
+	ErrorCode error = 11;
+	string error_description = 12;
+}
+
+message ListScopesResponse {
+	ErrorCode error = 1;
+	string error_description = 2;
+	repeated Scope scopes = 3;
+}
+
+message Response {
+	ErrorCode error = 1;
+	string error_description = 2;
+}
+
+service ScopeMgt {
+	rpc Create(Scope) returns (ScopeCreateResponse) {}
+	rpc Read(ScopeIdRequest) returns (ScopeResponse) {}
+	rpc List(ListScopeRequest) returns (ListScopesResponse) {}
+	rpc Delete(ScopeIdRequest) returns (Response) {}
+	rpc Update(Scope) returns (Response) {}
+}

@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+message UserRequest {
+	string id = 1;
+	// required when using update only
+	
+	string password = 2;
+	string facebook_id = 3;
+	string google_id = 4;
+	string yahoo_id = 5;
+}
+
+message ClientRequest {
+	string id = 1;
+	string secret = 2;
+
+	// any client internal = true are grant unlimited access. Only set this field to internal client (service)
+	bool internal = 3;
+}
+
+enum ErrorCode {
+	no_error = 0;
+	resource_notfoud = 1;
+	invalid_request = 2;
+	unauthorized = 3;
+	invalide_client = 4;
+	invalid_grant = 5;
+	unauthorized_client = 6;
+	unsupported_grant_type = 7;
+	invalid_scope = 8;
+	access_denied = 9;
+	unsupported_response_type = 10;
+	server_error = 11;
+	temporarily_unavailable = 12;
+}
+
+message Response {
+	ErrorCode error = 1;
+	string error_description = 2;
+}
+
+message IdRequest {
+	string id = 1;
+}
+
+message RenewTokenRequest {
+	string refresh_token = 1;
+}
+
+message TokenRequest {
+	GrantType grant_type = 1;
+	enum GrantType {
+		refresh_token = 0;
+		authorization_code = 1;
+		password = 2;
+		client_credentials = 3;
+	}
+	string username = 2;
+	string password = 3;
+	string code = 4;
+	string redirect_uri = 5;
+	string client = 6;
+	repeated string scope = 7;
+	string refresh_token = 8;
+}
+
+message AccessTokenResponse {
+	ErrorCode error = 1;
+	string error_description = 2;
+	string access_token = 3;
+	TokenType token_type = 4;
+	enum TokenType {
+		bearer = 1;
+		mac = 2;
+	}
+	long expires_in = 5;
+	string refresh_token = 6;
+	repeated string scope = 7;
+
+	//authorize_code response
+	string code = 8;
+}
+
+message AuthorizeRequest {
+	enum AuthorizeType {
+		code = 1;
+		token = 2;
+	}
+	AuthorizeType response_type = 1; /*must set to code*/
+	string client_id = 2;
+	string redirect_uri = 3;
+	repeted string scope = 4;
+}
+
+message AuthorizeResponse {
+	ErrorCode error = 1;
+	string error_description = 2;
+
+}
+
+message UnauthorizeRequest {
+	string client_id;
+	string user_id;
+}
+
+service Oauth2 {
+	// Create a new user
+	rpc CreateUser(UserRequest) returns(Response) {}
+	
+	// Delete user
+	rpc DeleteUser(IdRequest) returns(Response) {}
+
+	// Update user info
+	rpc UpdateUser(UserRequest) returns(Response) {}
+
+	rpc CreateClient(ClientRequest) returns(Response) {}
+	rpc UpdateClient(ClientRequest) returns(Response) {}
+	rpc DeleteClient(IdRequest) returns (Response)xs{}
+
+	rpc Token(TokenRequest) returns (AccessTokenResponse) {}
+	rpc Authorize(AuthorizeRequest) returns (AuthorizeResponse) {}
+	rpc Unauthorize(UnauthorizeRequest) returns (Response) {}
+}
