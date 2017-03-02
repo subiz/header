@@ -2,16 +2,11 @@ syntax = "proto3";
 
 package client;
 
-import "bitbucket.org/subiz/servicespec/proto/common/auth/credential.proto";
+import "bitbucket.org/subiz/servicespec/proto/common/auth/auth.proto";
 
 message Error {
 	ErrorCode code = 1;
 	string error_description = 2;
-}
-
-message ClientCreateResponse {	
-	Error error = 1;
-	string id = 2;
 }
 
 enum ErrorCode {
@@ -62,6 +57,11 @@ message ClientResponse {
 	Error error = 2;
 }
 
+message SecretResponse {
+	string secret = 1;
+	Error error = 2;
+}
+
 message ListClientsRequest {
 	auth.Credential credential = 6;
 	string start_id = 1;
@@ -75,6 +75,11 @@ message ListClientsResponse {
 	repeated Client clients = 3;
 }
 
+message BoolValueRequest {
+	string id = 1;
+	bool value = 2;
+	auth.Credential credential = 3;
+}
 
 service ClientMgt {
 	rpc Create(ClientRequest) returns (ClientCreateResponse) {}
@@ -82,4 +87,48 @@ service ClientMgt {
 	rpc List(ListClientsRequest) returns (ListClientsResponse) {}
 	rpc Delete(ClientIdRequest) returns (Error) {}
 	rpc Update(ClientRequest) returns (Error) {}
+	rpc UpdateSecret(ClientIdRequest) returns(SecretResponse) {}
+	rpc Verify(BoolValueRequest) returns (Error) {}
+	rpc Publish(BoolValueRequest) returns (Error) {}
+}
+
+message ClientCreateResponse {	
+	Error error = 1;
+	string id = 2;
+}
+
+enum Event {
+	EVENT_CLIENT_CREATED = 0;
+	EVENT_CLIENT_DELETED = 1;
+	EVENT_CLIENT_UPDATED = 2;
+	EVENT_CLIENT_PUBLISHED = 3;
+	EVENT_CLIENT_VERIFIED = 4;
+	EVENT_CLIENT_SECRETUPDATED = 5;
+}
+
+message ClientCreatedEvent {
+	client.Client client = 1;
+}
+
+message ClientDeletedEvent {
+	string id = 1;
+}
+
+message ClientUpdatedEvent {
+	client.Client client = 1;
+}
+
+message ClientPublishedEvent {
+	string id = 1;
+	bool published = 2;
+}
+
+message ClientVerifiedEvent {
+	string id = 1;
+	bool verified = 2;
+}
+
+message ClientUpdatedSecretEvent {
+	string id = 1;
+	string secret = 2;
 }
