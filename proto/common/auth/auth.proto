@@ -10,3 +10,15 @@ message Scope {
 	bool client_delete = 5;
 	bool client_verify = 6;
 }
+
+message Credential {
+	string account_id = 1;
+	string user_id = 2;
+	
+	auth.Scope user_scope = 3;
+
+	// scope that the user allow
+	auth.Scope scope = 4;
+
+	bool internal = 5;
+}
