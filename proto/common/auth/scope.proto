@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package scope;
+package auth;
 
 message Scope {
 	bool channel_manage = 1;

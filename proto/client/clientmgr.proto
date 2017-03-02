@@ -2,21 +2,11 @@ syntax = "proto3";
 
 package client;
 
+import "bitbucket.org/subiz/servicespec/proto/common/auth/credential.proto";
+
 message Error {
 	ErrorCode code = 1;
 	string error_description = 2;
-}
-
-message Credential {
-	string account_id = 1;
-	string user_id = 2;
-	
-	repeated string user_scopes = 3;
-
-	// scope that the user allow
-	repeated string scopes = 4;
-
-	bool internal = 5;
 }
 
 message ClientCreateResponse {	
@@ -33,7 +23,7 @@ enum ErrorCode {
 }
 
 message ClientRequest {
-	Credential credential = 1;
+	auth.Credential credential = 1;
 	Client client = 2;
 }
 
@@ -46,8 +36,8 @@ message Client {
 	string description = 6;
 	string short_description = 7;
 	bool is_verified = 8;
-	string redirect_url = 9;
-	string webhook_url = 10;
+	repeated string redirect_urls = 9;
+	repeated string webhook_urls = 10;
 	
 	enum ClientType {
 		APP = 0;
@@ -58,40 +48,25 @@ message Client {
 	bool is_internal = 13;
 
 	string version = 14;
-	string is_public = 15;
+	bool is_public = 15;
 	string publish_date = 16;
 }
 
 message ClientIdRequest {
 	string id = 1;
-	Credential credential = 2;
+	auth.Credential credential = 2;
 }
 
 message ClientResponse {
-	string id = 1;
-	string secret = 2;
-	string logo_url = 3;
-	string account_id = 4;
-	string contact_email = 5;
-	string description = 6;
-	string short_description = 7;
-
-	// app is accessable from other account must have validated = true
-	bool validated = 8;
-	string redirect_url = 9;
-	string webhook = 10;
-	
-	// any client internal = true are grant unlimited access. Only set this field to internal client (service)
-	bool internal = 13;
-
-	Error error = 14;
+	Client client = 1;
+	Error error = 2;
 }
 
 message ListClientsRequest {
-	Credential credential = 6;
+	auth.Credential credential = 6;
 	string start_id = 1;
 	string keyword = 2;
-	string limit = 3;
+	int32 limit = 3;
 	string account_id = 4;
 }
 
