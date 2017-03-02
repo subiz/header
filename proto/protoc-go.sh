@@ -4,11 +4,11 @@ for i in `ls -R`; do
     LASTDIRECTORY=${i::-1}
   else
     if [[ $i == *".proto" ]]; then
-      echo -e "\033[0;32mcompilng" $LASTDIRECTORY/$i "\033[0;30m"
+      echo -e "\033[0;37mcompiling" $LASTDIRECTORY/$i "\033[0;31m"
       protoc --go_out=plugins:. --proto_path=../../../../ --proto_path=./  $LASTDIRECTORY/$i
       let "TOTAL += 1"
-    else
-      echo -e "\033[0;37mignore" $i "\033[0;30m"
+    # else
+     # echo -e "\033[0;37mignore" $i "\033[0;30m"
     fi;
   fi;
 done;
