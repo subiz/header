@@ -43,7 +43,7 @@ message AgentClient {
 	// true if client update their scope and agent haven't notice yet
 	bool InvalidScope = 3;
 	string RegisterDate = 4;
-	auth.Scope Scope = 5;
+	repeated auth.Scope Scopes = 5;
 }
 
 message AccountClient {
@@ -55,13 +55,13 @@ message AccountClient {
 	bool InvalidScope = 4;
 	string RegisterDate = 5;
 	string RegisterId = 6;
-	auth.Scope Scope = 7;
+	repeated auth.Scope Scopes = 7;
 }
 
 message RegistryClientRequest {
 	string AccountId = 1;
 	string ClientId = 2;
-	auth.Scope Scope = 3;
+	repeated auth.Scope Scopes = 3;
 }
 
 message RevokeClientRequest {
@@ -123,7 +123,7 @@ message SearchAgentRequest {
 message UpdatePermissionRequest {
 	string AccountId = 1;
 	string AgentId = 2;
-	auth.Scope Scope = 3;
+	auth.Scope Scopes = 3;
 }
 
 message RateRequest {
@@ -272,7 +272,7 @@ message AccountAgent {
 	string Language = 7;
 	string Timezone = 8;
 	string JobTitle = 9;
-	auth.Scope Scope = 10;
+	auth.Scope Scopes = 10;
 	enum Status {
 		Normal = 0;
 		Locked = 1;
