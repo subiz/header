@@ -3,22 +3,24 @@ syntax = "proto3";
 package auth;
 
 message Scope {
-	bool channel_manage = 1;
-	bool client_read = 2;
-	bool client_manage = 3;
-	bool client_validate = 4;
-	bool client_delete = 5;
-	bool client_verify = 6;
+	bool ChannelManage = 1;
+	bool ClientRead = 2;
+	bool ClientManage = 3;
+	bool ClientValidate = 4;
+	bool ClientDelete = 5;
+	bool ClientVerify = 6;
 }
 
 message Credential {
-	string account_id = 1;
-	string user_id = 2;
-	
-	auth.Scope user_scope = 3;
+	string AccountId = 1;
+	int32 AccountType = 2;
+	string UserId = 3;
+
+	Scope UserScope = 4;
 
 	// scope that the user allow
-	auth.Scope scope = 4;
+	Scope Scope = 5;
 
-	bool internal = 5;
+	bool IsInternal = 6;
 }
+
