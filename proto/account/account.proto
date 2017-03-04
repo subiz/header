@@ -1,5 +1,9 @@
 syntax = "proto3";
 
+package account;
+
+import "bitbucket.org/subiz/servicespec/proto/common/auth/auth.proto";
+
 enum ErrorCode {
 	no_error = 0;
 	resource_notfoud = 1;
@@ -8,40 +12,292 @@ enum ErrorCode {
 	internal_error = 4;
 }
 
-message AccountRequest {
-	string id = 1;
-	string name = 2;
-	int32 state = 3;
-	string logo_url = 4;
-}
+message Account {
+	string Id = 1;
+	string Name = 2;
+	int32 State = 3;
+	int32 Type = 4;
+	string LogoUrl = 7;
 
-message CreateResponse {
-	ErrorCode error = 1;
-	string error_description = 2;
-	string id = 3;
+	string OwnerId = 5;
+	bool IsClosed = 6;
 }
 
 message IdRequest {
-	string id = 1;
+	string Id = 1;
 }
 
-message Response {
-	ErrorCode error = 1;
-	string error_description = 2;
+message EmptyResponse {}
+
+message ReadLimitRequest {}
+
+message UpdateAccountTypeRequest {
+	string Id = 1;
+	int32 Type = 2;
 }
 
-message AccountResponse {
-	ErrorCode error = 1;
-	string error_description = 2;
-	string id = 3;
-	string name = 4;
-	int32 state = 5;
-	string logo_url = 6;
+message AgentClient {
+	string AgentId = 1;
+	string ClientId = 2;
+	
+	// true if client update their scope and agent haven't notice yet
+	bool InvalidScope = 3;
+	string RegisterDate = 4;
+	auth.Scope Scope = 5;
+}
+
+message AccountClient {
+	string AccountId = 1;
+	string ClientId = 2;
+	int32 ClientType = 3;
+
+	// true if client update their scope and owner haven't notice yet
+	bool InvalidScope = 4;
+	string RegisterDate = 5;
+	string RegisterId = 6;
+	auth.Scope Scope = 7;
+}
+
+message RegistryClientRequest {
+	string AccountId = 1;
+	string ClientId = 2;
+	auth.Scope Scope = 3;
+}
+
+message RevokeClientRequest {
+	string AccountId = 1;
+	string ClientId = 2;
 }
 
 service AccountMgr {
-	rpc Create(AccountRequest) returns (CreateResponse) {}
-	rpc Delete(IdRequest) returns (Response) {}
-	rpc Update(AccountRequest) returns (Response) {}
-	rpc Read(IdRequest) returns (AccountResponse) {}
+	rpc Create(Account) returns (CreateResponse) {}
+	rpc Close(IdRequest) returns (EmptyResponse) {}
+	rpc Delete(IdRequest) returns (EmptyResponse) {}
+	rpc UpdateInfo(Account) returns (EmptyResponse) {}
+	rpc Read(IdRequest) returns (Account) {}
+	//	rpc UpdateAccountBilling(
+	rpc UpdateType(UpdateAccountTypeRequest) returns (EmptyResponse) {}
+	rpc OpenAccount(IdRequest) returns (EmptyResponse) {}
+
+	rpc RegistryClient(RegistryClientRequest) returns (EmptyResponse) {}
+	rpc RevokeClient(RevokeClientRequest) returns (EmptyResponse) {}
+
+	
+	rpc ListClient(IdRequest) returns (ListAccountClientResponse) {}
+	// agent api
+	
+	rpc ListLimit(IdRequest) returns (LimitsResponse)  {}
+	
+	rpc PopulateCredential(auth.Credential) returns (auth.Credential) {}
+	// rpc ReadAccountType(IdRequest) returns (AccountTypeResponse) {}
+	// rpc ReadAgentScope(IdRequest) returns (auth.Scope) {}
+}
+
+message InviteAgentRequest {
+	// id of inviter
+	string InviterId = 1;
+
+	// id of account
+	string AccountId = 4;
+
+	// provide at least one, if Agent existed, provide AgentId and ignore AgentEmail,
+	// if agent doen't existed, provide agent email and ignore AgentId
+	string AgentId = 2;
+	string AgentEmail = 3;
+}
+
+message CancelInvitationRequest {
+	string AccountId = 1;
+
+	// provide at least one, if Agent existed, provide AgentId and ignore AgentEmail,
+	// if agent doen't existed, provide agent email and ignore AgentId
+	string AgentId = 2;
+	string AgentEmail = 3;
+}
+
+
+message SearchAgentRequest {
+	string Email = 1;
+}
+
+message UpdatePermissionRequest {
+	string AccountId = 1;
+	string AgentId = 2;
+	auth.Scope Scope = 3;
+}
+
+message RateRequest {
+	string AccountId = 1;
+	string AgentId = 2;
+	int32 Rate = 3;
+}
+
+message AccIdRequest {
+	string AccountId = 1;
+	string AgentId = 2;
+}
+
+message UpdateAvailableStateRequest {
+	string AccountId = 1;
+	string AgentId = 2;
+	AvailableState AvailableState = 3;
+}
+
+service AccAgentMgr {
+	rpc InviteAgent(InviteAgentRequest) returns (EmptyResponse) {}
+	rpc CancelInvitation(CancelInvitationRequest) returns (EmptyResponse) {}
+	rpc RejectInvitation(CancelInvitationRequest) returns (EmptyResponse) {}
+
+	rpc UpdateAccProfile(AccountAgent) returns (EmptyResponse) {}
+	rpc Read(AccIdRequest) returns (AccountAgent) {}
+	rpc Rate(RateRequest) returns (EmptyResponse) {}
+	rpc UpdateAccAgentPermission(UpdatePermissionRequest) returns (EmptyResponse) {}
+	rpc ListAccAgent(IdRequest) returns (ListAccAgentResponse) {}
+
+	
+	rpc UpdateAvailableState(UpdateAvailableStateRequest) returns (EmptyResponse) {}
+	
+}
+
+message LoginRequest {
+	string email = 1;
+	string password = 2;
+}
+
+message LoginGoogleRequest {
+}
+
+message ListAccAgentResponse {
+	repeated AccountAgent AccAgents = 1;
+}
+
+service AgentMgr {
+	rpc SearchAgent(SearchAgentRequest) returns (SearchAgentResponse) {}
+
+
+	rpc Register(Agent) returns (IdResponse) {}
+	rpc RegisterGoogle(Agent) returns (IdResponse) {}
+	rpc RegisterFacebook(Agent) returns (IdResponse) {}
+	
+	rpc Read(IdRequest) returns (Agent) {}
+	
+	rpc ListAgent(IdRequest) returns (ListAgentsResponse) {}
+	rpc Delete(IdRequest) returns (EmptyResponse) {}
+	rpc UnDelete(IdRequest) returns (EmptyResponse) {}
+	//	rpc ResetPW
+	rpc Confirm(IdRequest) returns (EmptyResponse) {}
+	rpc Login(LoginRequest) returns (IdResponse) {}
+	rpc LoginGoogle(LoginGoogleRequest) returns (IdResponse) {}
+	
+	rpc UpdateProfile(Agent) returns (EmptyResponse) {}	
+	rpc Update(Agent) returns (EmptyResponse) {}
+}
+
+message SearchAgentResponse {
+	repeated Agent Agents = 1;
+}
+
+message ListAccountClientResponse {
+	repeated AccountClient Clients = 1;
+}
+
+message ListAgentClientResponse {
+	repeated AgentClient Clients = 1;
+}
+
+message AccountTypeResponse {
+	int32 Type = 1;
+}
+
+message LimitsResponse {
+  repeated Limit Limits = 1;
+}
+
+message Limit {
+	int32 ConcurrentChat = 1;
+	int32 ChatHistory = 2;
+	int32 MaxTriggers = 3;
+	int32 MaxAgents = 4;
+}
+
+message CreateResponse {
+	string id = 3;
+}
+
+message AgentCreateResponse {	
+	ErrorCode error = 1;
+	string error_description = 2;
+	string id = 3;
+}
+
+message Agent {
+	string Id = 1;
+	string FirstName = 2;
+	string LastName = 3;
+	string Email = 4;
+	string FacebookId = 5;
+	string GoogleId = 6;
+	string YahooId = 7;
+	bool IsVerified = 8;
+	string LastLoginTime = 9;
+	string AvatarUrl = 11;
+	string Language = 12;
+	string Timezone = 13;
+	AccountAgent account = 14;
+}
+
+message Configuration {
+	bool Sound = 1;
+	bool NewChatNoti = 2;
+	NotificationConfig EmailNoti = 3;
+	NotificationConfig SubizNoti = 4;
+}
+
+message NotificationConfig {
+	bool NewDirectMessage = 1;
+	bool SubizMaintainMessage = 2;
+}
+enum AvailableState {
+	Available = 0;
+	Away = 1;
+};
+	
+message AccountAgent {
+	string AgentId = 1;
+	string IsOwner = 2;
+	string AccountId = 3;
+	string FirstName = 4;
+	string LastName = 5;
+	string AvatarUrl = 6;
+	string Language = 7;
+	string Timezone = 8;
+	string JobTitle = 9;
+	auth.Scope Scope = 10;
+	enum Status {
+		Normal = 0;
+		Locked = 1;
+	}
+	string HashedPassword = 11;
+	AvailableState AvailableState = 12;
+	int32 Rate = 13;
+
+	string JoinDate = 14;
+	string InviteFromAgentId = 15;
+	// set if account agent is removed from account
+	bool Deleted = 16;
+
+	// set to true if agent is being invited
+	bool IsInviting = 17;
+}
+
+message IdResponse {
+	string Id = 1;
+}
+
+message ListAgentsRequest {
+	string AccountId = 1;
+}
+
+message ListAgentsResponse {
+	repeated Agent agents = 1;
 }

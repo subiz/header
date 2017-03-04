@@ -9,17 +9,47 @@ It is generated from these files:
 	account/account.proto
 
 It has these top-level messages:
-	AccountRequest
-	CreateResponse
+	Account
 	IdRequest
-	Response
-	AccountResponse
+	EmptyResponse
+	ReadLimitRequest
+	UpdateAccountTypeRequest
+	AgentClient
+	AccountClient
+	RegistryClientRequest
+	RevokeClientRequest
+	InviteAgentRequest
+	CancelInvitationRequest
+	SearchAgentRequest
+	UpdatePermissionRequest
+	RateRequest
+	AccIdRequest
+	UpdateAvailableStateRequest
+	LoginRequest
+	LoginGoogleRequest
+	ListAccAgentResponse
+	SearchAgentResponse
+	ListAccountClientResponse
+	ListAgentClientResponse
+	AccountTypeResponse
+	LimitsResponse
+	Limit
+	CreateResponse
+	AgentCreateResponse
+	Agent
+	Configuration
+	NotificationConfig
+	AccountAgent
+	IdResponse
+	ListAgentsRequest
+	ListAgentsResponse
 */
 package account
 
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
+import auth "bitbucket.org/subiz/servicespec/proto/common/auth"
 
 import (
 	context "golang.org/x/net/context"
@@ -67,86 +97,120 @@ func (x ErrorCode) String() string {
 }
 func (ErrorCode) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-type AccountRequest struct {
-	Id      string `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Name    string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	State   int32  `protobuf:"varint,3,opt,name=state" json:"state,omitempty"`
-	LogoUrl string `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl" json:"logo_url,omitempty"`
+type AvailableState int32
+
+const (
+	AvailableState_Available AvailableState = 0
+	AvailableState_Away      AvailableState = 1
+)
+
+var AvailableState_name = map[int32]string{
+	0: "Available",
+	1: "Away",
+}
+var AvailableState_value = map[string]int32{
+	"Available": 0,
+	"Away":      1,
 }
 
-func (m *AccountRequest) Reset()                    { *m = AccountRequest{} }
-func (m *AccountRequest) String() string            { return proto.CompactTextString(m) }
-func (*AccountRequest) ProtoMessage()               {}
-func (*AccountRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (x AvailableState) String() string {
+	return proto.EnumName(AvailableState_name, int32(x))
+}
+func (AvailableState) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
-func (m *AccountRequest) GetId() string {
+type AccountAgent_Status int32
+
+const (
+	AccountAgent_Normal AccountAgent_Status = 0
+	AccountAgent_Locked AccountAgent_Status = 1
+)
+
+var AccountAgent_Status_name = map[int32]string{
+	0: "Normal",
+	1: "Locked",
+}
+var AccountAgent_Status_value = map[string]int32{
+	"Normal": 0,
+	"Locked": 1,
+}
+
+func (x AccountAgent_Status) String() string {
+	return proto.EnumName(AccountAgent_Status_name, int32(x))
+}
+func (AccountAgent_Status) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{30, 0} }
+
+type Account struct {
+	Id       string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Name     string `protobuf:"bytes,2,opt,name=Name,json=name" json:"Name,omitempty"`
+	State    int32  `protobuf:"varint,3,opt,name=State,json=state" json:"State,omitempty"`
+	Type     int32  `protobuf:"varint,4,opt,name=Type,json=type" json:"Type,omitempty"`
+	LogoUrl  string `protobuf:"bytes,7,opt,name=LogoUrl,json=logoUrl" json:"LogoUrl,omitempty"`
+	OwnerId  string `protobuf:"bytes,5,opt,name=OwnerId,json=ownerId" json:"OwnerId,omitempty"`
+	IsClosed bool   `protobuf:"varint,6,opt,name=IsClosed,json=isClosed" json:"IsClosed,omitempty"`
+}
+
+func (m *Account) Reset()                    { *m = Account{} }
+func (m *Account) String() string            { return proto.CompactTextString(m) }
+func (*Account) ProtoMessage()               {}
+func (*Account) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
+func (m *Account) GetId() string {
 	if m != nil {
 		return m.Id
 	}
 	return ""
 }
 
-func (m *AccountRequest) GetName() string {
+func (m *Account) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-func (m *AccountRequest) GetState() int32 {
+func (m *Account) GetState() int32 {
 	if m != nil {
 		return m.State
 	}
 	return 0
 }
 
-func (m *AccountRequest) GetLogoUrl() string {
+func (m *Account) GetType() int32 {
+	if m != nil {
+		return m.Type
+	}
+	return 0
+}
+
+func (m *Account) GetLogoUrl() string {
 	if m != nil {
 		return m.LogoUrl
 	}
 	return ""
 }
 
-type CreateResponse struct {
-	Error            ErrorCode `protobuf:"varint,1,opt,name=error,enum=ErrorCode" json:"error,omitempty"`
-	ErrorDescription string    `protobuf:"bytes,2,opt,name=error_description,json=errorDescription" json:"error_description,omitempty"`
-	Id               string    `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
-}
-
-func (m *CreateResponse) Reset()                    { *m = CreateResponse{} }
-func (m *CreateResponse) String() string            { return proto.CompactTextString(m) }
-func (*CreateResponse) ProtoMessage()               {}
-func (*CreateResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
-
-func (m *CreateResponse) GetError() ErrorCode {
+func (m *Account) GetOwnerId() string {
 	if m != nil {
-		return m.Error
-	}
-	return ErrorCode_no_error
-}
-
-func (m *CreateResponse) GetErrorDescription() string {
-	if m != nil {
-		return m.ErrorDescription
+		return m.OwnerId
 	}
 	return ""
 }
 
-func (m *CreateResponse) GetId() string {
+func (m *Account) GetIsClosed() bool {
 	if m != nil {
-		return m.Id
+		return m.IsClosed
 	}
-	return ""
+	return false
 }
 
 type IdRequest struct {
-	Id string `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
 }
 
 func (m *IdRequest) Reset()                    { *m = IdRequest{} }
 func (m *IdRequest) String() string            { return proto.CompactTextString(m) }
 func (*IdRequest) ProtoMessage()               {}
-func (*IdRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*IdRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
 func (m *IdRequest) GetId() string {
 	if m != nil {
@@ -155,93 +219,1054 @@ func (m *IdRequest) GetId() string {
 	return ""
 }
 
-type Response struct {
-	Error            ErrorCode `protobuf:"varint,1,opt,name=error,enum=ErrorCode" json:"error,omitempty"`
-	ErrorDescription string    `protobuf:"bytes,2,opt,name=error_description,json=errorDescription" json:"error_description,omitempty"`
+type EmptyResponse struct {
 }
 
-func (m *Response) Reset()                    { *m = Response{} }
-func (m *Response) String() string            { return proto.CompactTextString(m) }
-func (*Response) ProtoMessage()               {}
-func (*Response) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (m *EmptyResponse) Reset()                    { *m = EmptyResponse{} }
+func (m *EmptyResponse) String() string            { return proto.CompactTextString(m) }
+func (*EmptyResponse) ProtoMessage()               {}
+func (*EmptyResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
-func (m *Response) GetError() ErrorCode {
-	if m != nil {
-		return m.Error
-	}
-	return ErrorCode_no_error
+type ReadLimitRequest struct {
 }
 
-func (m *Response) GetErrorDescription() string {
-	if m != nil {
-		return m.ErrorDescription
-	}
-	return ""
+func (m *ReadLimitRequest) Reset()                    { *m = ReadLimitRequest{} }
+func (m *ReadLimitRequest) String() string            { return proto.CompactTextString(m) }
+func (*ReadLimitRequest) ProtoMessage()               {}
+func (*ReadLimitRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+
+type UpdateAccountTypeRequest struct {
+	Id   string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Type int32  `protobuf:"varint,2,opt,name=Type,json=type" json:"Type,omitempty"`
 }
 
-type AccountResponse struct {
-	Error            ErrorCode `protobuf:"varint,1,opt,name=error,enum=ErrorCode" json:"error,omitempty"`
-	ErrorDescription string    `protobuf:"bytes,2,opt,name=error_description,json=errorDescription" json:"error_description,omitempty"`
-	Id               string    `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
-	Name             string    `protobuf:"bytes,4,opt,name=name" json:"name,omitempty"`
-	State            int32     `protobuf:"varint,5,opt,name=state" json:"state,omitempty"`
-	LogoUrl          string    `protobuf:"bytes,6,opt,name=logo_url,json=logoUrl" json:"logo_url,omitempty"`
-}
+func (m *UpdateAccountTypeRequest) Reset()                    { *m = UpdateAccountTypeRequest{} }
+func (m *UpdateAccountTypeRequest) String() string            { return proto.CompactTextString(m) }
+func (*UpdateAccountTypeRequest) ProtoMessage()               {}
+func (*UpdateAccountTypeRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
-func (m *AccountResponse) Reset()                    { *m = AccountResponse{} }
-func (m *AccountResponse) String() string            { return proto.CompactTextString(m) }
-func (*AccountResponse) ProtoMessage()               {}
-func (*AccountResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
-
-func (m *AccountResponse) GetError() ErrorCode {
-	if m != nil {
-		return m.Error
-	}
-	return ErrorCode_no_error
-}
-
-func (m *AccountResponse) GetErrorDescription() string {
-	if m != nil {
-		return m.ErrorDescription
-	}
-	return ""
-}
-
-func (m *AccountResponse) GetId() string {
+func (m *UpdateAccountTypeRequest) GetId() string {
 	if m != nil {
 		return m.Id
 	}
 	return ""
 }
 
-func (m *AccountResponse) GetName() string {
+func (m *UpdateAccountTypeRequest) GetType() int32 {
 	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
-func (m *AccountResponse) GetState() int32 {
-	if m != nil {
-		return m.State
+		return m.Type
 	}
 	return 0
 }
 
-func (m *AccountResponse) GetLogoUrl() string {
+type AgentClient struct {
+	AgentId  string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	ClientId string `protobuf:"bytes,2,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
+	// true if client update their scope and agent haven't notice yet
+	InvalidScope bool        `protobuf:"varint,3,opt,name=InvalidScope,json=invalidScope" json:"InvalidScope,omitempty"`
+	RegisterDate string      `protobuf:"bytes,4,opt,name=RegisterDate,json=registerDate" json:"RegisterDate,omitempty"`
+	Scope        *auth.Scope `protobuf:"bytes,5,opt,name=Scope,json=scope" json:"Scope,omitempty"`
+}
+
+func (m *AgentClient) Reset()                    { *m = AgentClient{} }
+func (m *AgentClient) String() string            { return proto.CompactTextString(m) }
+func (*AgentClient) ProtoMessage()               {}
+func (*AgentClient) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+
+func (m *AgentClient) GetAgentId() string {
 	if m != nil {
-		return m.LogoUrl
+		return m.AgentId
 	}
 	return ""
 }
 
+func (m *AgentClient) GetClientId() string {
+	if m != nil {
+		return m.ClientId
+	}
+	return ""
+}
+
+func (m *AgentClient) GetInvalidScope() bool {
+	if m != nil {
+		return m.InvalidScope
+	}
+	return false
+}
+
+func (m *AgentClient) GetRegisterDate() string {
+	if m != nil {
+		return m.RegisterDate
+	}
+	return ""
+}
+
+func (m *AgentClient) GetScope() *auth.Scope {
+	if m != nil {
+		return m.Scope
+	}
+	return nil
+}
+
+type AccountClient struct {
+	AccountId  string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	ClientId   string `protobuf:"bytes,2,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
+	ClientType int32  `protobuf:"varint,3,opt,name=ClientType,json=clientType" json:"ClientType,omitempty"`
+	// true if client update their scope and owner haven't notice yet
+	InvalidScope bool        `protobuf:"varint,4,opt,name=InvalidScope,json=invalidScope" json:"InvalidScope,omitempty"`
+	RegisterDate string      `protobuf:"bytes,5,opt,name=RegisterDate,json=registerDate" json:"RegisterDate,omitempty"`
+	RegisterId   string      `protobuf:"bytes,6,opt,name=RegisterId,json=registerId" json:"RegisterId,omitempty"`
+	Scope        *auth.Scope `protobuf:"bytes,7,opt,name=Scope,json=scope" json:"Scope,omitempty"`
+}
+
+func (m *AccountClient) Reset()                    { *m = AccountClient{} }
+func (m *AccountClient) String() string            { return proto.CompactTextString(m) }
+func (*AccountClient) ProtoMessage()               {}
+func (*AccountClient) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+
+func (m *AccountClient) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *AccountClient) GetClientId() string {
+	if m != nil {
+		return m.ClientId
+	}
+	return ""
+}
+
+func (m *AccountClient) GetClientType() int32 {
+	if m != nil {
+		return m.ClientType
+	}
+	return 0
+}
+
+func (m *AccountClient) GetInvalidScope() bool {
+	if m != nil {
+		return m.InvalidScope
+	}
+	return false
+}
+
+func (m *AccountClient) GetRegisterDate() string {
+	if m != nil {
+		return m.RegisterDate
+	}
+	return ""
+}
+
+func (m *AccountClient) GetRegisterId() string {
+	if m != nil {
+		return m.RegisterId
+	}
+	return ""
+}
+
+func (m *AccountClient) GetScope() *auth.Scope {
+	if m != nil {
+		return m.Scope
+	}
+	return nil
+}
+
+type RegistryClientRequest struct {
+	AccountId string      `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	ClientId  string      `protobuf:"bytes,2,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
+	Scope     *auth.Scope `protobuf:"bytes,3,opt,name=Scope,json=scope" json:"Scope,omitempty"`
+}
+
+func (m *RegistryClientRequest) Reset()                    { *m = RegistryClientRequest{} }
+func (m *RegistryClientRequest) String() string            { return proto.CompactTextString(m) }
+func (*RegistryClientRequest) ProtoMessage()               {}
+func (*RegistryClientRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+
+func (m *RegistryClientRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *RegistryClientRequest) GetClientId() string {
+	if m != nil {
+		return m.ClientId
+	}
+	return ""
+}
+
+func (m *RegistryClientRequest) GetScope() *auth.Scope {
+	if m != nil {
+		return m.Scope
+	}
+	return nil
+}
+
+type RevokeClientRequest struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	ClientId  string `protobuf:"bytes,2,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
+}
+
+func (m *RevokeClientRequest) Reset()                    { *m = RevokeClientRequest{} }
+func (m *RevokeClientRequest) String() string            { return proto.CompactTextString(m) }
+func (*RevokeClientRequest) ProtoMessage()               {}
+func (*RevokeClientRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+
+func (m *RevokeClientRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *RevokeClientRequest) GetClientId() string {
+	if m != nil {
+		return m.ClientId
+	}
+	return ""
+}
+
+type InviteAgentRequest struct {
+	// id of inviter
+	InviterId string `protobuf:"bytes,1,opt,name=InviterId,json=inviterId" json:"InviterId,omitempty"`
+	// id of account
+	AccountId string `protobuf:"bytes,4,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	// provide at least one, if Agent existed, provide AgentId and ignore AgentEmail,
+	// if agent doen't existed, provide agent email and ignore AgentId
+	AgentId    string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	AgentEmail string `protobuf:"bytes,3,opt,name=AgentEmail,json=agentEmail" json:"AgentEmail,omitempty"`
+}
+
+func (m *InviteAgentRequest) Reset()                    { *m = InviteAgentRequest{} }
+func (m *InviteAgentRequest) String() string            { return proto.CompactTextString(m) }
+func (*InviteAgentRequest) ProtoMessage()               {}
+func (*InviteAgentRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+
+func (m *InviteAgentRequest) GetInviterId() string {
+	if m != nil {
+		return m.InviterId
+	}
+	return ""
+}
+
+func (m *InviteAgentRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *InviteAgentRequest) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *InviteAgentRequest) GetAgentEmail() string {
+	if m != nil {
+		return m.AgentEmail
+	}
+	return ""
+}
+
+type CancelInvitationRequest struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	// provide at least one, if Agent existed, provide AgentId and ignore AgentEmail,
+	// if agent doen't existed, provide agent email and ignore AgentId
+	AgentId    string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	AgentEmail string `protobuf:"bytes,3,opt,name=AgentEmail,json=agentEmail" json:"AgentEmail,omitempty"`
+}
+
+func (m *CancelInvitationRequest) Reset()                    { *m = CancelInvitationRequest{} }
+func (m *CancelInvitationRequest) String() string            { return proto.CompactTextString(m) }
+func (*CancelInvitationRequest) ProtoMessage()               {}
+func (*CancelInvitationRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+
+func (m *CancelInvitationRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *CancelInvitationRequest) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *CancelInvitationRequest) GetAgentEmail() string {
+	if m != nil {
+		return m.AgentEmail
+	}
+	return ""
+}
+
+type SearchAgentRequest struct {
+	Email string `protobuf:"bytes,1,opt,name=Email,json=email" json:"Email,omitempty"`
+}
+
+func (m *SearchAgentRequest) Reset()                    { *m = SearchAgentRequest{} }
+func (m *SearchAgentRequest) String() string            { return proto.CompactTextString(m) }
+func (*SearchAgentRequest) ProtoMessage()               {}
+func (*SearchAgentRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
+
+func (m *SearchAgentRequest) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+type UpdatePermissionRequest struct {
+	AccountId string      `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	AgentId   string      `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	Scope     *auth.Scope `protobuf:"bytes,3,opt,name=Scope,json=scope" json:"Scope,omitempty"`
+}
+
+func (m *UpdatePermissionRequest) Reset()                    { *m = UpdatePermissionRequest{} }
+func (m *UpdatePermissionRequest) String() string            { return proto.CompactTextString(m) }
+func (*UpdatePermissionRequest) ProtoMessage()               {}
+func (*UpdatePermissionRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
+
+func (m *UpdatePermissionRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *UpdatePermissionRequest) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *UpdatePermissionRequest) GetScope() *auth.Scope {
+	if m != nil {
+		return m.Scope
+	}
+	return nil
+}
+
+type RateRequest struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	Rate      int32  `protobuf:"varint,3,opt,name=Rate,json=rate" json:"Rate,omitempty"`
+}
+
+func (m *RateRequest) Reset()                    { *m = RateRequest{} }
+func (m *RateRequest) String() string            { return proto.CompactTextString(m) }
+func (*RateRequest) ProtoMessage()               {}
+func (*RateRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
+
+func (m *RateRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *RateRequest) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *RateRequest) GetRate() int32 {
+	if m != nil {
+		return m.Rate
+	}
+	return 0
+}
+
+type AccIdRequest struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+}
+
+func (m *AccIdRequest) Reset()                    { *m = AccIdRequest{} }
+func (m *AccIdRequest) String() string            { return proto.CompactTextString(m) }
+func (*AccIdRequest) ProtoMessage()               {}
+func (*AccIdRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
+
+func (m *AccIdRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *AccIdRequest) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+type UpdateAvailableStateRequest struct {
+	AccountId      string         `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	AgentId        string         `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	AvailableState AvailableState `protobuf:"varint,3,opt,name=AvailableState,json=availableState,enum=account.AvailableState" json:"AvailableState,omitempty"`
+}
+
+func (m *UpdateAvailableStateRequest) Reset()                    { *m = UpdateAvailableStateRequest{} }
+func (m *UpdateAvailableStateRequest) String() string            { return proto.CompactTextString(m) }
+func (*UpdateAvailableStateRequest) ProtoMessage()               {}
+func (*UpdateAvailableStateRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
+
+func (m *UpdateAvailableStateRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *UpdateAvailableStateRequest) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *UpdateAvailableStateRequest) GetAvailableState() AvailableState {
+	if m != nil {
+		return m.AvailableState
+	}
+	return AvailableState_Available
+}
+
+type LoginRequest struct {
+	Email    string `protobuf:"bytes,1,opt,name=email" json:"email,omitempty"`
+	Password string `protobuf:"bytes,2,opt,name=password" json:"password,omitempty"`
+}
+
+func (m *LoginRequest) Reset()                    { *m = LoginRequest{} }
+func (m *LoginRequest) String() string            { return proto.CompactTextString(m) }
+func (*LoginRequest) ProtoMessage()               {}
+func (*LoginRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
+
+func (m *LoginRequest) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+func (m *LoginRequest) GetPassword() string {
+	if m != nil {
+		return m.Password
+	}
+	return ""
+}
+
+type LoginGoogleRequest struct {
+}
+
+func (m *LoginGoogleRequest) Reset()                    { *m = LoginGoogleRequest{} }
+func (m *LoginGoogleRequest) String() string            { return proto.CompactTextString(m) }
+func (*LoginGoogleRequest) ProtoMessage()               {}
+func (*LoginGoogleRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
+
+type ListAccAgentResponse struct {
+	AccAgents []*AccountAgent `protobuf:"bytes,1,rep,name=AccAgents,json=accAgents" json:"AccAgents,omitempty"`
+}
+
+func (m *ListAccAgentResponse) Reset()                    { *m = ListAccAgentResponse{} }
+func (m *ListAccAgentResponse) String() string            { return proto.CompactTextString(m) }
+func (*ListAccAgentResponse) ProtoMessage()               {}
+func (*ListAccAgentResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
+
+func (m *ListAccAgentResponse) GetAccAgents() []*AccountAgent {
+	if m != nil {
+		return m.AccAgents
+	}
+	return nil
+}
+
+type SearchAgentResponse struct {
+	Agents []*Agent `protobuf:"bytes,1,rep,name=Agents,json=agents" json:"Agents,omitempty"`
+}
+
+func (m *SearchAgentResponse) Reset()                    { *m = SearchAgentResponse{} }
+func (m *SearchAgentResponse) String() string            { return proto.CompactTextString(m) }
+func (*SearchAgentResponse) ProtoMessage()               {}
+func (*SearchAgentResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
+
+func (m *SearchAgentResponse) GetAgents() []*Agent {
+	if m != nil {
+		return m.Agents
+	}
+	return nil
+}
+
+type ListAccountClientResponse struct {
+	Clients []*AccountClient `protobuf:"bytes,1,rep,name=Clients,json=clients" json:"Clients,omitempty"`
+}
+
+func (m *ListAccountClientResponse) Reset()                    { *m = ListAccountClientResponse{} }
+func (m *ListAccountClientResponse) String() string            { return proto.CompactTextString(m) }
+func (*ListAccountClientResponse) ProtoMessage()               {}
+func (*ListAccountClientResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
+
+func (m *ListAccountClientResponse) GetClients() []*AccountClient {
+	if m != nil {
+		return m.Clients
+	}
+	return nil
+}
+
+type ListAgentClientResponse struct {
+	Clients []*AgentClient `protobuf:"bytes,1,rep,name=Clients,json=clients" json:"Clients,omitempty"`
+}
+
+func (m *ListAgentClientResponse) Reset()                    { *m = ListAgentClientResponse{} }
+func (m *ListAgentClientResponse) String() string            { return proto.CompactTextString(m) }
+func (*ListAgentClientResponse) ProtoMessage()               {}
+func (*ListAgentClientResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{21} }
+
+func (m *ListAgentClientResponse) GetClients() []*AgentClient {
+	if m != nil {
+		return m.Clients
+	}
+	return nil
+}
+
+type AccountTypeResponse struct {
+	Type int32 `protobuf:"varint,1,opt,name=Type,json=type" json:"Type,omitempty"`
+}
+
+func (m *AccountTypeResponse) Reset()                    { *m = AccountTypeResponse{} }
+func (m *AccountTypeResponse) String() string            { return proto.CompactTextString(m) }
+func (*AccountTypeResponse) ProtoMessage()               {}
+func (*AccountTypeResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{22} }
+
+func (m *AccountTypeResponse) GetType() int32 {
+	if m != nil {
+		return m.Type
+	}
+	return 0
+}
+
+type LimitsResponse struct {
+	Limits []*Limit `protobuf:"bytes,1,rep,name=Limits,json=limits" json:"Limits,omitempty"`
+}
+
+func (m *LimitsResponse) Reset()                    { *m = LimitsResponse{} }
+func (m *LimitsResponse) String() string            { return proto.CompactTextString(m) }
+func (*LimitsResponse) ProtoMessage()               {}
+func (*LimitsResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{23} }
+
+func (m *LimitsResponse) GetLimits() []*Limit {
+	if m != nil {
+		return m.Limits
+	}
+	return nil
+}
+
+type Limit struct {
+	ConcurrentChat int32 `protobuf:"varint,1,opt,name=ConcurrentChat,json=concurrentChat" json:"ConcurrentChat,omitempty"`
+	ChatHistory    int32 `protobuf:"varint,2,opt,name=ChatHistory,json=chatHistory" json:"ChatHistory,omitempty"`
+	MaxTriggers    int32 `protobuf:"varint,3,opt,name=MaxTriggers,json=maxTriggers" json:"MaxTriggers,omitempty"`
+	MaxAgents      int32 `protobuf:"varint,4,opt,name=MaxAgents,json=maxAgents" json:"MaxAgents,omitempty"`
+}
+
+func (m *Limit) Reset()                    { *m = Limit{} }
+func (m *Limit) String() string            { return proto.CompactTextString(m) }
+func (*Limit) ProtoMessage()               {}
+func (*Limit) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{24} }
+
+func (m *Limit) GetConcurrentChat() int32 {
+	if m != nil {
+		return m.ConcurrentChat
+	}
+	return 0
+}
+
+func (m *Limit) GetChatHistory() int32 {
+	if m != nil {
+		return m.ChatHistory
+	}
+	return 0
+}
+
+func (m *Limit) GetMaxTriggers() int32 {
+	if m != nil {
+		return m.MaxTriggers
+	}
+	return 0
+}
+
+func (m *Limit) GetMaxAgents() int32 {
+	if m != nil {
+		return m.MaxAgents
+	}
+	return 0
+}
+
+type CreateResponse struct {
+	Id string `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+}
+
+func (m *CreateResponse) Reset()                    { *m = CreateResponse{} }
+func (m *CreateResponse) String() string            { return proto.CompactTextString(m) }
+func (*CreateResponse) ProtoMessage()               {}
+func (*CreateResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{25} }
+
+func (m *CreateResponse) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type AgentCreateResponse struct {
+	Error            ErrorCode `protobuf:"varint,1,opt,name=error,enum=account.ErrorCode" json:"error,omitempty"`
+	ErrorDescription string    `protobuf:"bytes,2,opt,name=error_description,json=errorDescription" json:"error_description,omitempty"`
+	Id               string    `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+}
+
+func (m *AgentCreateResponse) Reset()                    { *m = AgentCreateResponse{} }
+func (m *AgentCreateResponse) String() string            { return proto.CompactTextString(m) }
+func (*AgentCreateResponse) ProtoMessage()               {}
+func (*AgentCreateResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{26} }
+
+func (m *AgentCreateResponse) GetError() ErrorCode {
+	if m != nil {
+		return m.Error
+	}
+	return ErrorCode_no_error
+}
+
+func (m *AgentCreateResponse) GetErrorDescription() string {
+	if m != nil {
+		return m.ErrorDescription
+	}
+	return ""
+}
+
+func (m *AgentCreateResponse) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type Agent struct {
+	Id            string        `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	FirstName     string        `protobuf:"bytes,2,opt,name=FirstName,json=firstName" json:"FirstName,omitempty"`
+	LastName      string        `protobuf:"bytes,3,opt,name=LastName,json=lastName" json:"LastName,omitempty"`
+	Email         string        `protobuf:"bytes,4,opt,name=Email,json=email" json:"Email,omitempty"`
+	FacebookId    string        `protobuf:"bytes,5,opt,name=FacebookId,json=facebookId" json:"FacebookId,omitempty"`
+	GoogleId      string        `protobuf:"bytes,6,opt,name=GoogleId,json=googleId" json:"GoogleId,omitempty"`
+	YahooId       string        `protobuf:"bytes,7,opt,name=YahooId,json=yahooId" json:"YahooId,omitempty"`
+	IsVerified    bool          `protobuf:"varint,8,opt,name=IsVerified,json=isVerified" json:"IsVerified,omitempty"`
+	LastLoginTime string        `protobuf:"bytes,9,opt,name=LastLoginTime,json=lastLoginTime" json:"LastLoginTime,omitempty"`
+	AvatarUrl     string        `protobuf:"bytes,11,opt,name=AvatarUrl,json=avatarUrl" json:"AvatarUrl,omitempty"`
+	Language      string        `protobuf:"bytes,12,opt,name=Language,json=language" json:"Language,omitempty"`
+	Timezone      string        `protobuf:"bytes,13,opt,name=Timezone,json=timezone" json:"Timezone,omitempty"`
+	Account       *AccountAgent `protobuf:"bytes,14,opt,name=account" json:"account,omitempty"`
+}
+
+func (m *Agent) Reset()                    { *m = Agent{} }
+func (m *Agent) String() string            { return proto.CompactTextString(m) }
+func (*Agent) ProtoMessage()               {}
+func (*Agent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{27} }
+
+func (m *Agent) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Agent) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *Agent) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+func (m *Agent) GetEmail() string {
+	if m != nil {
+		return m.Email
+	}
+	return ""
+}
+
+func (m *Agent) GetFacebookId() string {
+	if m != nil {
+		return m.FacebookId
+	}
+	return ""
+}
+
+func (m *Agent) GetGoogleId() string {
+	if m != nil {
+		return m.GoogleId
+	}
+	return ""
+}
+
+func (m *Agent) GetYahooId() string {
+	if m != nil {
+		return m.YahooId
+	}
+	return ""
+}
+
+func (m *Agent) GetIsVerified() bool {
+	if m != nil {
+		return m.IsVerified
+	}
+	return false
+}
+
+func (m *Agent) GetLastLoginTime() string {
+	if m != nil {
+		return m.LastLoginTime
+	}
+	return ""
+}
+
+func (m *Agent) GetAvatarUrl() string {
+	if m != nil {
+		return m.AvatarUrl
+	}
+	return ""
+}
+
+func (m *Agent) GetLanguage() string {
+	if m != nil {
+		return m.Language
+	}
+	return ""
+}
+
+func (m *Agent) GetTimezone() string {
+	if m != nil {
+		return m.Timezone
+	}
+	return ""
+}
+
+func (m *Agent) GetAccount() *AccountAgent {
+	if m != nil {
+		return m.Account
+	}
+	return nil
+}
+
+type Configuration struct {
+	Sound       bool                `protobuf:"varint,1,opt,name=Sound,json=sound" json:"Sound,omitempty"`
+	NewChatNoti bool                `protobuf:"varint,2,opt,name=NewChatNoti,json=newChatNoti" json:"NewChatNoti,omitempty"`
+	EmailNoti   *NotificationConfig `protobuf:"bytes,3,opt,name=EmailNoti,json=emailNoti" json:"EmailNoti,omitempty"`
+	SubizNoti   *NotificationConfig `protobuf:"bytes,4,opt,name=SubizNoti,json=subizNoti" json:"SubizNoti,omitempty"`
+}
+
+func (m *Configuration) Reset()                    { *m = Configuration{} }
+func (m *Configuration) String() string            { return proto.CompactTextString(m) }
+func (*Configuration) ProtoMessage()               {}
+func (*Configuration) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{28} }
+
+func (m *Configuration) GetSound() bool {
+	if m != nil {
+		return m.Sound
+	}
+	return false
+}
+
+func (m *Configuration) GetNewChatNoti() bool {
+	if m != nil {
+		return m.NewChatNoti
+	}
+	return false
+}
+
+func (m *Configuration) GetEmailNoti() *NotificationConfig {
+	if m != nil {
+		return m.EmailNoti
+	}
+	return nil
+}
+
+func (m *Configuration) GetSubizNoti() *NotificationConfig {
+	if m != nil {
+		return m.SubizNoti
+	}
+	return nil
+}
+
+type NotificationConfig struct {
+	NewDirectMessage     bool `protobuf:"varint,1,opt,name=NewDirectMessage,json=newDirectMessage" json:"NewDirectMessage,omitempty"`
+	SubizMaintainMessage bool `protobuf:"varint,2,opt,name=SubizMaintainMessage,json=subizMaintainMessage" json:"SubizMaintainMessage,omitempty"`
+}
+
+func (m *NotificationConfig) Reset()                    { *m = NotificationConfig{} }
+func (m *NotificationConfig) String() string            { return proto.CompactTextString(m) }
+func (*NotificationConfig) ProtoMessage()               {}
+func (*NotificationConfig) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{29} }
+
+func (m *NotificationConfig) GetNewDirectMessage() bool {
+	if m != nil {
+		return m.NewDirectMessage
+	}
+	return false
+}
+
+func (m *NotificationConfig) GetSubizMaintainMessage() bool {
+	if m != nil {
+		return m.SubizMaintainMessage
+	}
+	return false
+}
+
+type AccountAgent struct {
+	AgentId           string         `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	IsOwner           string         `protobuf:"bytes,2,opt,name=IsOwner,json=isOwner" json:"IsOwner,omitempty"`
+	AccountId         string         `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	FirstName         string         `protobuf:"bytes,4,opt,name=FirstName,json=firstName" json:"FirstName,omitempty"`
+	LastName          string         `protobuf:"bytes,5,opt,name=LastName,json=lastName" json:"LastName,omitempty"`
+	AvatarUrl         string         `protobuf:"bytes,6,opt,name=AvatarUrl,json=avatarUrl" json:"AvatarUrl,omitempty"`
+	Language          string         `protobuf:"bytes,7,opt,name=Language,json=language" json:"Language,omitempty"`
+	Timezone          string         `protobuf:"bytes,8,opt,name=Timezone,json=timezone" json:"Timezone,omitempty"`
+	JobTitle          string         `protobuf:"bytes,9,opt,name=JobTitle,json=jobTitle" json:"JobTitle,omitempty"`
+	Scope             *auth.Scope    `protobuf:"bytes,10,opt,name=Scope,json=scope" json:"Scope,omitempty"`
+	HashedPassword    string         `protobuf:"bytes,11,opt,name=HashedPassword,json=hashedPassword" json:"HashedPassword,omitempty"`
+	AvailableState    AvailableState `protobuf:"varint,12,opt,name=AvailableState,json=availableState,enum=account.AvailableState" json:"AvailableState,omitempty"`
+	Rate              int32          `protobuf:"varint,13,opt,name=Rate,json=rate" json:"Rate,omitempty"`
+	JoinDate          string         `protobuf:"bytes,14,opt,name=JoinDate,json=joinDate" json:"JoinDate,omitempty"`
+	InviteFromAgentId string         `protobuf:"bytes,15,opt,name=InviteFromAgentId,json=inviteFromAgentId" json:"InviteFromAgentId,omitempty"`
+	// set if account agent is removed from account
+	Deleted bool `protobuf:"varint,16,opt,name=Deleted,json=deleted" json:"Deleted,omitempty"`
+	// set to true if agent is being invited
+	IsInviting bool `protobuf:"varint,17,opt,name=IsInviting,json=isInviting" json:"IsInviting,omitempty"`
+}
+
+func (m *AccountAgent) Reset()                    { *m = AccountAgent{} }
+func (m *AccountAgent) String() string            { return proto.CompactTextString(m) }
+func (*AccountAgent) ProtoMessage()               {}
+func (*AccountAgent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{30} }
+
+func (m *AccountAgent) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetIsOwner() string {
+	if m != nil {
+		return m.IsOwner
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetFirstName() string {
+	if m != nil {
+		return m.FirstName
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetLastName() string {
+	if m != nil {
+		return m.LastName
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetAvatarUrl() string {
+	if m != nil {
+		return m.AvatarUrl
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetLanguage() string {
+	if m != nil {
+		return m.Language
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetTimezone() string {
+	if m != nil {
+		return m.Timezone
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetJobTitle() string {
+	if m != nil {
+		return m.JobTitle
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetScope() *auth.Scope {
+	if m != nil {
+		return m.Scope
+	}
+	return nil
+}
+
+func (m *AccountAgent) GetHashedPassword() string {
+	if m != nil {
+		return m.HashedPassword
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetAvailableState() AvailableState {
+	if m != nil {
+		return m.AvailableState
+	}
+	return AvailableState_Available
+}
+
+func (m *AccountAgent) GetRate() int32 {
+	if m != nil {
+		return m.Rate
+	}
+	return 0
+}
+
+func (m *AccountAgent) GetJoinDate() string {
+	if m != nil {
+		return m.JoinDate
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetInviteFromAgentId() string {
+	if m != nil {
+		return m.InviteFromAgentId
+	}
+	return ""
+}
+
+func (m *AccountAgent) GetDeleted() bool {
+	if m != nil {
+		return m.Deleted
+	}
+	return false
+}
+
+func (m *AccountAgent) GetIsInviting() bool {
+	if m != nil {
+		return m.IsInviting
+	}
+	return false
+}
+
+type IdResponse struct {
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+}
+
+func (m *IdResponse) Reset()                    { *m = IdResponse{} }
+func (m *IdResponse) String() string            { return proto.CompactTextString(m) }
+func (*IdResponse) ProtoMessage()               {}
+func (*IdResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{31} }
+
+func (m *IdResponse) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type ListAgentsRequest struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+}
+
+func (m *ListAgentsRequest) Reset()                    { *m = ListAgentsRequest{} }
+func (m *ListAgentsRequest) String() string            { return proto.CompactTextString(m) }
+func (*ListAgentsRequest) ProtoMessage()               {}
+func (*ListAgentsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{32} }
+
+func (m *ListAgentsRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+type ListAgentsResponse struct {
+	Agents []*Agent `protobuf:"bytes,1,rep,name=agents" json:"agents,omitempty"`
+}
+
+func (m *ListAgentsResponse) Reset()                    { *m = ListAgentsResponse{} }
+func (m *ListAgentsResponse) String() string            { return proto.CompactTextString(m) }
+func (*ListAgentsResponse) ProtoMessage()               {}
+func (*ListAgentsResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{33} }
+
+func (m *ListAgentsResponse) GetAgents() []*Agent {
+	if m != nil {
+		return m.Agents
+	}
+	return nil
+}
+
 func init() {
-	proto.RegisterType((*AccountRequest)(nil), "AccountRequest")
-	proto.RegisterType((*CreateResponse)(nil), "CreateResponse")
-	proto.RegisterType((*IdRequest)(nil), "IdRequest")
-	proto.RegisterType((*Response)(nil), "Response")
-	proto.RegisterType((*AccountResponse)(nil), "AccountResponse")
-	proto.RegisterEnum("ErrorCode", ErrorCode_name, ErrorCode_value)
+	proto.RegisterType((*Account)(nil), "account.Account")
+	proto.RegisterType((*IdRequest)(nil), "account.IdRequest")
+	proto.RegisterType((*EmptyResponse)(nil), "account.EmptyResponse")
+	proto.RegisterType((*ReadLimitRequest)(nil), "account.ReadLimitRequest")
+	proto.RegisterType((*UpdateAccountTypeRequest)(nil), "account.UpdateAccountTypeRequest")
+	proto.RegisterType((*AgentClient)(nil), "account.AgentClient")
+	proto.RegisterType((*AccountClient)(nil), "account.AccountClient")
+	proto.RegisterType((*RegistryClientRequest)(nil), "account.RegistryClientRequest")
+	proto.RegisterType((*RevokeClientRequest)(nil), "account.RevokeClientRequest")
+	proto.RegisterType((*InviteAgentRequest)(nil), "account.InviteAgentRequest")
+	proto.RegisterType((*CancelInvitationRequest)(nil), "account.CancelInvitationRequest")
+	proto.RegisterType((*SearchAgentRequest)(nil), "account.SearchAgentRequest")
+	proto.RegisterType((*UpdatePermissionRequest)(nil), "account.UpdatePermissionRequest")
+	proto.RegisterType((*RateRequest)(nil), "account.RateRequest")
+	proto.RegisterType((*AccIdRequest)(nil), "account.AccIdRequest")
+	proto.RegisterType((*UpdateAvailableStateRequest)(nil), "account.UpdateAvailableStateRequest")
+	proto.RegisterType((*LoginRequest)(nil), "account.LoginRequest")
+	proto.RegisterType((*LoginGoogleRequest)(nil), "account.LoginGoogleRequest")
+	proto.RegisterType((*ListAccAgentResponse)(nil), "account.ListAccAgentResponse")
+	proto.RegisterType((*SearchAgentResponse)(nil), "account.SearchAgentResponse")
+	proto.RegisterType((*ListAccountClientResponse)(nil), "account.ListAccountClientResponse")
+	proto.RegisterType((*ListAgentClientResponse)(nil), "account.ListAgentClientResponse")
+	proto.RegisterType((*AccountTypeResponse)(nil), "account.AccountTypeResponse")
+	proto.RegisterType((*LimitsResponse)(nil), "account.LimitsResponse")
+	proto.RegisterType((*Limit)(nil), "account.Limit")
+	proto.RegisterType((*CreateResponse)(nil), "account.CreateResponse")
+	proto.RegisterType((*AgentCreateResponse)(nil), "account.AgentCreateResponse")
+	proto.RegisterType((*Agent)(nil), "account.Agent")
+	proto.RegisterType((*Configuration)(nil), "account.Configuration")
+	proto.RegisterType((*NotificationConfig)(nil), "account.NotificationConfig")
+	proto.RegisterType((*AccountAgent)(nil), "account.AccountAgent")
+	proto.RegisterType((*IdResponse)(nil), "account.IdResponse")
+	proto.RegisterType((*ListAgentsRequest)(nil), "account.ListAgentsRequest")
+	proto.RegisterType((*ListAgentsResponse)(nil), "account.ListAgentsResponse")
+	proto.RegisterEnum("account.ErrorCode", ErrorCode_name, ErrorCode_value)
+	proto.RegisterEnum("account.AvailableState", AvailableState_name, AvailableState_value)
+	proto.RegisterEnum("account.AccountAgent_Status", AccountAgent_Status_name, AccountAgent_Status_value)
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -255,10 +1280,19 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for AccountMgr service
 
 type AccountMgrClient interface {
-	Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*CreateResponse, error)
-	Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Response, error)
-	Update(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*Response, error)
-	Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*AccountResponse, error)
+	Create(ctx context.Context, in *Account, opts ...grpc.CallOption) (*CreateResponse, error)
+	Close(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	UpdateInfo(ctx context.Context, in *Account, opts ...grpc.CallOption) (*EmptyResponse, error)
+	Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Account, error)
+	// 	rpc UpdateAccountBilling(
+	UpdateType(ctx context.Context, in *UpdateAccountTypeRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	OpenAccount(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	RegistryClient(ctx context.Context, in *RegistryClientRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	RevokeClient(ctx context.Context, in *RevokeClientRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	ListClient(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*ListAccountClientResponse, error)
+	ListLimit(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*LimitsResponse, error)
+	PopulateCredential(ctx context.Context, in *auth.Credential, opts ...grpc.CallOption) (*auth.Credential, error)
 }
 
 type accountMgrClient struct {
@@ -269,36 +1303,108 @@ func NewAccountMgrClient(cc *grpc.ClientConn) AccountMgrClient {
 	return &accountMgrClient{cc}
 }
 
-func (c *accountMgrClient) Create(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
+func (c *accountMgrClient) Create(ctx context.Context, in *Account, opts ...grpc.CallOption) (*CreateResponse, error) {
 	out := new(CreateResponse)
-	err := grpc.Invoke(ctx, "/AccountMgr/Create", in, out, c.cc, opts...)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/Create", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountMgrClient) Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := grpc.Invoke(ctx, "/AccountMgr/Delete", in, out, c.cc, opts...)
+func (c *accountMgrClient) Close(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/Close", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountMgrClient) Update(ctx context.Context, in *AccountRequest, opts ...grpc.CallOption) (*Response, error) {
-	out := new(Response)
-	err := grpc.Invoke(ctx, "/AccountMgr/Update", in, out, c.cc, opts...)
+func (c *accountMgrClient) Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/Delete", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountMgrClient) Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*AccountResponse, error) {
-	out := new(AccountResponse)
-	err := grpc.Invoke(ctx, "/AccountMgr/Read", in, out, c.cc, opts...)
+func (c *accountMgrClient) UpdateInfo(ctx context.Context, in *Account, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/UpdateInfo", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Account, error) {
+	out := new(Account)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/Read", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdateType(ctx context.Context, in *UpdateAccountTypeRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/UpdateType", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) OpenAccount(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/OpenAccount", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RegistryClient(ctx context.Context, in *RegistryClientRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/RegistryClient", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RevokeClient(ctx context.Context, in *RevokeClientRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/RevokeClient", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ListClient(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*ListAccountClientResponse, error) {
+	out := new(ListAccountClientResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/ListClient", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ListLimit(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*LimitsResponse, error) {
+	out := new(LimitsResponse)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/ListLimit", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) PopulateCredential(ctx context.Context, in *auth.Credential, opts ...grpc.CallOption) (*auth.Credential, error) {
+	out := new(auth.Credential)
+	err := grpc.Invoke(ctx, "/account.AccountMgr/PopulateCredential", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -308,10 +1414,19 @@ func (c *accountMgrClient) Read(ctx context.Context, in *IdRequest, opts ...grpc
 // Server API for AccountMgr service
 
 type AccountMgrServer interface {
-	Create(context.Context, *AccountRequest) (*CreateResponse, error)
-	Delete(context.Context, *IdRequest) (*Response, error)
-	Update(context.Context, *AccountRequest) (*Response, error)
-	Read(context.Context, *IdRequest) (*AccountResponse, error)
+	Create(context.Context, *Account) (*CreateResponse, error)
+	Close(context.Context, *IdRequest) (*EmptyResponse, error)
+	Delete(context.Context, *IdRequest) (*EmptyResponse, error)
+	UpdateInfo(context.Context, *Account) (*EmptyResponse, error)
+	Read(context.Context, *IdRequest) (*Account, error)
+	// 	rpc UpdateAccountBilling(
+	UpdateType(context.Context, *UpdateAccountTypeRequest) (*EmptyResponse, error)
+	OpenAccount(context.Context, *IdRequest) (*EmptyResponse, error)
+	RegistryClient(context.Context, *RegistryClientRequest) (*EmptyResponse, error)
+	RevokeClient(context.Context, *RevokeClientRequest) (*EmptyResponse, error)
+	ListClient(context.Context, *IdRequest) (*ListAccountClientResponse, error)
+	ListLimit(context.Context, *IdRequest) (*LimitsResponse, error)
+	PopulateCredential(context.Context, *auth.Credential) (*auth.Credential, error)
 }
 
 func RegisterAccountMgrServer(s *grpc.Server, srv AccountMgrServer) {
@@ -319,7 +1434,7 @@ func RegisterAccountMgrServer(s *grpc.Server, srv AccountMgrServer) {
 }
 
 func _AccountMgr_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AccountRequest)
+	in := new(Account)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -328,10 +1443,28 @@ func _AccountMgr_Create_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/AccountMgr/Create",
+		FullMethod: "/account.AccountMgr/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).Create(ctx, req.(*AccountRequest))
+		return srv.(AccountMgrServer).Create(ctx, req.(*Account))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).Close(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/Close",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).Close(ctx, req.(*IdRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -346,7 +1479,7 @@ func _AccountMgr_Delete_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/AccountMgr/Delete",
+		FullMethod: "/account.AccountMgr/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountMgrServer).Delete(ctx, req.(*IdRequest))
@@ -354,20 +1487,20 @@ func _AccountMgr_Delete_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AccountRequest)
+func _AccountMgr_UpdateInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Account)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountMgrServer).Update(ctx, in)
+		return srv.(AccountMgrServer).UpdateInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/AccountMgr/Update",
+		FullMethod: "/account.AccountMgr/UpdateInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).Update(ctx, req.(*AccountRequest))
+		return srv.(AccountMgrServer).UpdateInfo(ctx, req.(*Account))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -382,7 +1515,7 @@ func _AccountMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/AccountMgr/Read",
+		FullMethod: "/account.AccountMgr/Read",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountMgrServer).Read(ctx, req.(*IdRequest))
@@ -390,8 +1523,134 @@ func _AccountMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountMgr_UpdateType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdateType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/UpdateType",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdateType(ctx, req.(*UpdateAccountTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_OpenAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).OpenAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/OpenAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).OpenAccount(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RegistryClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegistryClientRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RegistryClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/RegistryClient",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RegistryClient(ctx, req.(*RegistryClientRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RevokeClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeClientRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RevokeClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/RevokeClient",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RevokeClient(ctx, req.(*RevokeClientRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ListClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/ListClient",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListClient(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ListLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/ListLimit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListLimit(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_PopulateCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(auth.Credential)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).PopulateCredential(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccountMgr/PopulateCredential",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).PopulateCredential(ctx, req.(*auth.Credential))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _AccountMgr_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "AccountMgr",
+	ServiceName: "account.AccountMgr",
 	HandlerType: (*AccountMgrServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -399,16 +1658,838 @@ var _AccountMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _AccountMgr_Create_Handler,
 		},
 		{
+			MethodName: "Close",
+			Handler:    _AccountMgr_Close_Handler,
+		},
+		{
 			MethodName: "Delete",
 			Handler:    _AccountMgr_Delete_Handler,
 		},
 		{
-			MethodName: "Update",
-			Handler:    _AccountMgr_Update_Handler,
+			MethodName: "UpdateInfo",
+			Handler:    _AccountMgr_UpdateInfo_Handler,
 		},
 		{
 			MethodName: "Read",
 			Handler:    _AccountMgr_Read_Handler,
+		},
+		{
+			MethodName: "UpdateType",
+			Handler:    _AccountMgr_UpdateType_Handler,
+		},
+		{
+			MethodName: "OpenAccount",
+			Handler:    _AccountMgr_OpenAccount_Handler,
+		},
+		{
+			MethodName: "RegistryClient",
+			Handler:    _AccountMgr_RegistryClient_Handler,
+		},
+		{
+			MethodName: "RevokeClient",
+			Handler:    _AccountMgr_RevokeClient_Handler,
+		},
+		{
+			MethodName: "ListClient",
+			Handler:    _AccountMgr_ListClient_Handler,
+		},
+		{
+			MethodName: "ListLimit",
+			Handler:    _AccountMgr_ListLimit_Handler,
+		},
+		{
+			MethodName: "PopulateCredential",
+			Handler:    _AccountMgr_PopulateCredential_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "account/account.proto",
+}
+
+// Client API for AccAgentMgr service
+
+type AccAgentMgrClient interface {
+	InviteAgent(ctx context.Context, in *InviteAgentRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	CancelInvitation(ctx context.Context, in *CancelInvitationRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	RejectInvitation(ctx context.Context, in *CancelInvitationRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	UpdateAccProfile(ctx context.Context, in *AccountAgent, opts ...grpc.CallOption) (*EmptyResponse, error)
+	Read(ctx context.Context, in *AccIdRequest, opts ...grpc.CallOption) (*AccountAgent, error)
+	Rate(ctx context.Context, in *RateRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	UpdateAccAgentPermission(ctx context.Context, in *UpdatePermissionRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	ListAccAgent(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*ListAccAgentResponse, error)
+	UpdateAvailableState(ctx context.Context, in *UpdateAvailableStateRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+}
+
+type accAgentMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAccAgentMgrClient(cc *grpc.ClientConn) AccAgentMgrClient {
+	return &accAgentMgrClient{cc}
+}
+
+func (c *accAgentMgrClient) InviteAgent(ctx context.Context, in *InviteAgentRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/InviteAgent", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) CancelInvitation(ctx context.Context, in *CancelInvitationRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/CancelInvitation", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) RejectInvitation(ctx context.Context, in *CancelInvitationRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/RejectInvitation", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) UpdateAccProfile(ctx context.Context, in *AccountAgent, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/UpdateAccProfile", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) Read(ctx context.Context, in *AccIdRequest, opts ...grpc.CallOption) (*AccountAgent, error) {
+	out := new(AccountAgent)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/Read", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) Rate(ctx context.Context, in *RateRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/Rate", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) UpdateAccAgentPermission(ctx context.Context, in *UpdatePermissionRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/UpdateAccAgentPermission", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) ListAccAgent(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*ListAccAgentResponse, error) {
+	out := new(ListAccAgentResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/ListAccAgent", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accAgentMgrClient) UpdateAvailableState(ctx context.Context, in *UpdateAvailableStateRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AccAgentMgr/UpdateAvailableState", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for AccAgentMgr service
+
+type AccAgentMgrServer interface {
+	InviteAgent(context.Context, *InviteAgentRequest) (*EmptyResponse, error)
+	CancelInvitation(context.Context, *CancelInvitationRequest) (*EmptyResponse, error)
+	RejectInvitation(context.Context, *CancelInvitationRequest) (*EmptyResponse, error)
+	UpdateAccProfile(context.Context, *AccountAgent) (*EmptyResponse, error)
+	Read(context.Context, *AccIdRequest) (*AccountAgent, error)
+	Rate(context.Context, *RateRequest) (*EmptyResponse, error)
+	UpdateAccAgentPermission(context.Context, *UpdatePermissionRequest) (*EmptyResponse, error)
+	ListAccAgent(context.Context, *IdRequest) (*ListAccAgentResponse, error)
+	UpdateAvailableState(context.Context, *UpdateAvailableStateRequest) (*EmptyResponse, error)
+}
+
+func RegisterAccAgentMgrServer(s *grpc.Server, srv AccAgentMgrServer) {
+	s.RegisterService(&_AccAgentMgr_serviceDesc, srv)
+}
+
+func _AccAgentMgr_InviteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InviteAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).InviteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/InviteAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).InviteAgent(ctx, req.(*InviteAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_CancelInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelInvitationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).CancelInvitation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/CancelInvitation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).CancelInvitation(ctx, req.(*CancelInvitationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_RejectInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelInvitationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).RejectInvitation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/RejectInvitation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).RejectInvitation(ctx, req.(*CancelInvitationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_UpdateAccProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AccountAgent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).UpdateAccProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/UpdateAccProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).UpdateAccProfile(ctx, req.(*AccountAgent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AccIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).Read(ctx, req.(*AccIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_Rate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).Rate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/Rate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).Rate(ctx, req.(*RateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_UpdateAccAgentPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).UpdateAccAgentPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/UpdateAccAgentPermission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).UpdateAccAgentPermission(ctx, req.(*UpdatePermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_ListAccAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).ListAccAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/ListAccAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).ListAccAgent(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccAgentMgr_UpdateAvailableState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAvailableStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccAgentMgrServer).UpdateAvailableState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AccAgentMgr/UpdateAvailableState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccAgentMgrServer).UpdateAvailableState(ctx, req.(*UpdateAvailableStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AccAgentMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "account.AccAgentMgr",
+	HandlerType: (*AccAgentMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "InviteAgent",
+			Handler:    _AccAgentMgr_InviteAgent_Handler,
+		},
+		{
+			MethodName: "CancelInvitation",
+			Handler:    _AccAgentMgr_CancelInvitation_Handler,
+		},
+		{
+			MethodName: "RejectInvitation",
+			Handler:    _AccAgentMgr_RejectInvitation_Handler,
+		},
+		{
+			MethodName: "UpdateAccProfile",
+			Handler:    _AccAgentMgr_UpdateAccProfile_Handler,
+		},
+		{
+			MethodName: "Read",
+			Handler:    _AccAgentMgr_Read_Handler,
+		},
+		{
+			MethodName: "Rate",
+			Handler:    _AccAgentMgr_Rate_Handler,
+		},
+		{
+			MethodName: "UpdateAccAgentPermission",
+			Handler:    _AccAgentMgr_UpdateAccAgentPermission_Handler,
+		},
+		{
+			MethodName: "ListAccAgent",
+			Handler:    _AccAgentMgr_ListAccAgent_Handler,
+		},
+		{
+			MethodName: "UpdateAvailableState",
+			Handler:    _AccAgentMgr_UpdateAvailableState_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "account/account.proto",
+}
+
+// Client API for AgentMgr service
+
+type AgentMgrClient interface {
+	SearchAgent(ctx context.Context, in *SearchAgentRequest, opts ...grpc.CallOption) (*SearchAgentResponse, error)
+	Register(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*IdResponse, error)
+	RegisterGoogle(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*IdResponse, error)
+	RegisterFacebook(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*IdResponse, error)
+	Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Agent, error)
+	ListAgent(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*ListAgentsResponse, error)
+	Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	UnDelete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	// 	rpc ResetPW
+	Confirm(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*IdResponse, error)
+	LoginGoogle(ctx context.Context, in *LoginGoogleRequest, opts ...grpc.CallOption) (*IdResponse, error)
+	UpdateProfile(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*EmptyResponse, error)
+	Update(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*EmptyResponse, error)
+}
+
+type agentMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAgentMgrClient(cc *grpc.ClientConn) AgentMgrClient {
+	return &agentMgrClient{cc}
+}
+
+func (c *agentMgrClient) SearchAgent(ctx context.Context, in *SearchAgentRequest, opts ...grpc.CallOption) (*SearchAgentResponse, error) {
+	out := new(SearchAgentResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/SearchAgent", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) Register(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*IdResponse, error) {
+	out := new(IdResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/Register", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) RegisterGoogle(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*IdResponse, error) {
+	out := new(IdResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/RegisterGoogle", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) RegisterFacebook(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*IdResponse, error) {
+	out := new(IdResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/RegisterFacebook", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Agent, error) {
+	out := new(Agent)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/Read", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) ListAgent(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*ListAgentsResponse, error) {
+	out := new(ListAgentsResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/ListAgent", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/Delete", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) UnDelete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/UnDelete", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) Confirm(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/Confirm", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*IdResponse, error) {
+	out := new(IdResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/Login", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) LoginGoogle(ctx context.Context, in *LoginGoogleRequest, opts ...grpc.CallOption) (*IdResponse, error) {
+	out := new(IdResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/LoginGoogle", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) UpdateProfile(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/UpdateProfile", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentMgrClient) Update(ctx context.Context, in *Agent, opts ...grpc.CallOption) (*EmptyResponse, error) {
+	out := new(EmptyResponse)
+	err := grpc.Invoke(ctx, "/account.AgentMgr/Update", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for AgentMgr service
+
+type AgentMgrServer interface {
+	SearchAgent(context.Context, *SearchAgentRequest) (*SearchAgentResponse, error)
+	Register(context.Context, *Agent) (*IdResponse, error)
+	RegisterGoogle(context.Context, *Agent) (*IdResponse, error)
+	RegisterFacebook(context.Context, *Agent) (*IdResponse, error)
+	Read(context.Context, *IdRequest) (*Agent, error)
+	ListAgent(context.Context, *IdRequest) (*ListAgentsResponse, error)
+	Delete(context.Context, *IdRequest) (*EmptyResponse, error)
+	UnDelete(context.Context, *IdRequest) (*EmptyResponse, error)
+	// 	rpc ResetPW
+	Confirm(context.Context, *IdRequest) (*EmptyResponse, error)
+	Login(context.Context, *LoginRequest) (*IdResponse, error)
+	LoginGoogle(context.Context, *LoginGoogleRequest) (*IdResponse, error)
+	UpdateProfile(context.Context, *Agent) (*EmptyResponse, error)
+	Update(context.Context, *Agent) (*EmptyResponse, error)
+}
+
+func RegisterAgentMgrServer(s *grpc.Server, srv AgentMgrServer) {
+	s.RegisterService(&_AgentMgr_serviceDesc, srv)
+}
+
+func _AgentMgr_SearchAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).SearchAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/SearchAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).SearchAgent(ctx, req.(*SearchAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/Register",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).Register(ctx, req.(*Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_RegisterGoogle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).RegisterGoogle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/RegisterGoogle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).RegisterGoogle(ctx, req.(*Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_RegisterFacebook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).RegisterFacebook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/RegisterFacebook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).RegisterFacebook(ctx, req.(*Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).Read(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_ListAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).ListAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/ListAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).ListAgent(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).Delete(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_UnDelete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).UnDelete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/UnDelete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).UnDelete(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_Confirm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(IdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).Confirm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/Confirm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).Confirm(ctx, req.(*IdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_LoginGoogle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginGoogleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).LoginGoogle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/LoginGoogle",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).LoginGoogle(ctx, req.(*LoginGoogleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).UpdateProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/UpdateProfile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).UpdateProfile(ctx, req.(*Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentMgr_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentMgrServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/account.AgentMgr/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentMgrServer).Update(ctx, req.(*Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AgentMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "account.AgentMgr",
+	HandlerType: (*AgentMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchAgent",
+			Handler:    _AgentMgr_SearchAgent_Handler,
+		},
+		{
+			MethodName: "Register",
+			Handler:    _AgentMgr_Register_Handler,
+		},
+		{
+			MethodName: "RegisterGoogle",
+			Handler:    _AgentMgr_RegisterGoogle_Handler,
+		},
+		{
+			MethodName: "RegisterFacebook",
+			Handler:    _AgentMgr_RegisterFacebook_Handler,
+		},
+		{
+			MethodName: "Read",
+			Handler:    _AgentMgr_Read_Handler,
+		},
+		{
+			MethodName: "ListAgent",
+			Handler:    _AgentMgr_ListAgent_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _AgentMgr_Delete_Handler,
+		},
+		{
+			MethodName: "UnDelete",
+			Handler:    _AgentMgr_UnDelete_Handler,
+		},
+		{
+			MethodName: "Confirm",
+			Handler:    _AgentMgr_Confirm_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _AgentMgr_Login_Handler,
+		},
+		{
+			MethodName: "LoginGoogle",
+			Handler:    _AgentMgr_LoginGoogle_Handler,
+		},
+		{
+			MethodName: "UpdateProfile",
+			Handler:    _AgentMgr_UpdateProfile_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _AgentMgr_Update_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -418,29 +2499,129 @@ var _AccountMgr_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("account/account.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 375 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xbc, 0x53, 0x4d, 0xcf, 0x93, 0x40,
-	0x10, 0x2e, 0x14, 0xb0, 0x4c, 0xde, 0xc0, 0x3a, 0xbe, 0x26, 0xf8, 0x7a, 0xa9, 0x1c, 0x4c, 0xa3,
-	0x06, 0x93, 0xfa, 0x0b, 0x4c, 0xeb, 0xc1, 0x83, 0x17, 0x92, 0x1e, 0x3c, 0x91, 0x95, 0x1d, 0xeb,
-	0x1a, 0xdc, 0xc5, 0x65, 0xf1, 0xe0, 0x7f, 0xf2, 0xe8, 0xff, 0x33, 0x5d, 0x10, 0xa5, 0x69, 0x8f,
-	0x7a, 0xda, 0xf9, 0xca, 0xcc, 0x33, 0xf3, 0x3c, 0x0b, 0x0f, 0x79, 0x5d, 0xeb, 0x5e, 0xd9, 0x97,
-	0xe3, 0x5b, 0xb4, 0x46, 0x5b, 0x9d, 0x13, 0x24, 0xaf, 0x87, 0x40, 0x49, 0x5f, 0x7b, 0xea, 0x2c,
-	0x26, 0xe0, 0x4b, 0x91, 0x79, 0x6b, 0x6f, 0x13, 0x97, 0xbe, 0x14, 0x88, 0x10, 0x28, 0xfe, 0x85,
-	0x32, 0xdf, 0x45, 0x9c, 0x8d, 0xb7, 0x10, 0x76, 0x96, 0x5b, 0xca, 0x96, 0x6b, 0x6f, 0x13, 0x96,
-	0x83, 0x83, 0x8f, 0x60, 0xd5, 0xe8, 0xa3, 0xae, 0x7a, 0xd3, 0x64, 0x81, 0xab, 0xbe, 0x77, 0xf2,
-	0x0f, 0xa6, 0xc9, 0x35, 0x24, 0x3b, 0x43, 0xdc, 0x52, 0x49, 0x5d, 0xab, 0x55, 0x47, 0xb8, 0x86,
-	0x90, 0x8c, 0xd1, 0xc6, 0x4d, 0x4a, 0xb6, 0x50, 0xbc, 0x39, 0x79, 0x3b, 0x2d, 0xa8, 0x1c, 0x12,
-	0xf8, 0x1c, 0xee, 0x3b, 0xa3, 0x12, 0xd4, 0xd5, 0x46, 0xb6, 0x56, 0x6a, 0x35, 0xa2, 0x60, 0x2e,
-	0xb1, 0xff, 0x13, 0x1f, 0x51, 0x2f, 0x7f, 0xa3, 0xce, 0x1f, 0x43, 0xfc, 0x56, 0x5c, 0x59, 0x29,
-	0x7f, 0x0f, 0xab, 0x7f, 0x84, 0x23, 0xff, 0xe9, 0x41, 0x3a, 0x1d, 0xf4, 0xbf, 0xac, 0x3a, 0x11,
-	0x14, 0x5c, 0x22, 0x28, 0xbc, 0x46, 0x50, 0x34, 0x23, 0xe8, 0xd9, 0x67, 0x88, 0x27, 0x54, 0x78,
-	0x03, 0x2b, 0xa5, 0x2b, 0x37, 0x98, 0x2d, 0xf0, 0x16, 0x98, 0xa1, 0x4e, 0xf7, 0xa6, 0xa6, 0x4a,
-	0x69, 0xfb, 0x51, 0xf7, 0x82, 0x79, 0xf8, 0x00, 0x52, 0xa9, 0xbe, 0xf1, 0x46, 0x8a, 0xca, 0x0c,
-	0x67, 0x66, 0x3e, 0x32, 0xb8, 0xe9, 0x15, 0xef, 0xed, 0x27, 0x6d, 0xe4, 0x77, 0x12, 0x6c, 0x89,
-	0x08, 0x89, 0x54, 0x96, 0x8c, 0xe2, 0xcd, 0xd8, 0x30, 0xd8, 0xfe, 0xf0, 0x00, 0xc6, 0x1b, 0xbd,
-	0x3b, 0x1a, 0x7c, 0x01, 0xd1, 0xa0, 0x0d, 0x4c, 0x8b, 0xb9, 0x16, 0xef, 0xd2, 0x62, 0xae, 0x9a,
-	0x7c, 0x81, 0x4f, 0x20, 0xda, 0x53, 0x43, 0x96, 0x10, 0x8a, 0x89, 0xe1, 0xbb, 0xb8, 0xf8, 0xab,
-	0xe4, 0x29, 0x44, 0x87, 0x56, 0x5c, 0x6c, 0x78, 0x56, 0x17, 0x94, 0xc4, 0xc5, 0xac, 0x11, 0x2b,
-	0xce, 0xd8, 0xcb, 0x17, 0x1f, 0x22, 0xf7, 0x55, 0x5e, 0xfd, 0x0a, 0x00, 0x00, 0xff, 0xff, 0x77,
-	0x6f, 0x3d, 0xf1, 0x43, 0x03, 0x00, 0x00,
+	// 1971 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xac, 0x59, 0x4b, 0x73, 0x1b, 0xc7,
+	0x11, 0x26, 0x48, 0x2c, 0xb0, 0x68, 0x80, 0xd0, 0x72, 0x48, 0x85, 0x1b, 0x8a, 0x61, 0xd1, 0x5b,
+	0x2e, 0x17, 0xad, 0xb8, 0xc8, 0x98, 0x2e, 0xc5, 0x76, 0xe2, 0x38, 0x61, 0x81, 0x62, 0x0c, 0x85,
+	0xa4, 0x54, 0x2b, 0xc9, 0x55, 0x3e, 0xa9, 0x86, 0xbb, 0x43, 0x70, 0xa4, 0xc5, 0x0e, 0x3c, 0x3b,
+	0x20, 0x4d, 0x55, 0x7e, 0x81, 0x6e, 0xb9, 0xe4, 0x96, 0x73, 0x6e, 0xf9, 0x07, 0xf9, 0x13, 0xf9,
+	0x2d, 0x39, 0xe4, 0x16, 0xd7, 0x3c, 0xf6, 0x89, 0x47, 0x41, 0x8f, 0x8b, 0xc0, 0xee, 0x99, 0xfe,
+	0xba, 0x7b, 0xa6, 0xa7, 0x1f, 0x2b, 0xb8, 0x8b, 0x83, 0x80, 0x8d, 0x63, 0x71, 0x60, 0x7e, 0xf7,
+	0x47, 0x9c, 0x09, 0x86, 0x9a, 0x86, 0xdc, 0xfa, 0xe6, 0x82, 0x8a, 0x8b, 0x71, 0xf0, 0x8a, 0x88,
+	0x7d, 0xc6, 0x07, 0x07, 0xc9, 0xf8, 0x82, 0xbe, 0x3e, 0x48, 0x08, 0xbf, 0xa6, 0x01, 0x49, 0x46,
+	0x24, 0x38, 0x50, 0xfb, 0x0f, 0x02, 0x36, 0x1c, 0xb2, 0xf8, 0x00, 0x8f, 0xc5, 0x95, 0xfa, 0x47,
+	0xc3, 0x78, 0xff, 0xac, 0x41, 0xf3, 0x48, 0x23, 0xa1, 0x2e, 0x2c, 0xf7, 0x43, 0xb7, 0xb6, 0x5b,
+	0xdb, 0x6b, 0xf9, 0xcb, 0x34, 0x44, 0x08, 0xea, 0xe7, 0x78, 0x48, 0xdc, 0x65, 0xc5, 0xa9, 0xc7,
+	0x78, 0x48, 0xd0, 0x06, 0x58, 0x4f, 0x05, 0x16, 0xc4, 0x5d, 0xd9, 0xad, 0xed, 0x59, 0xbe, 0x95,
+	0x48, 0x42, 0xee, 0x7c, 0x76, 0x3b, 0x22, 0x6e, 0x5d, 0x31, 0xeb, 0xe2, 0x76, 0x44, 0x90, 0x0b,
+	0xcd, 0x53, 0x36, 0x60, 0xcf, 0x79, 0xe4, 0x36, 0x15, 0x40, 0x33, 0xd2, 0xa4, 0x5c, 0x79, 0x7c,
+	0x13, 0x13, 0xde, 0x0f, 0x5d, 0x4b, 0xaf, 0x30, 0x4d, 0xa2, 0x2d, 0xb0, 0xfb, 0x49, 0x2f, 0x62,
+	0x09, 0x09, 0xdd, 0xc6, 0x6e, 0x6d, 0xcf, 0xf6, 0x6d, 0x6a, 0x68, 0xef, 0x1e, 0xb4, 0xfa, 0xa1,
+	0x4f, 0x7e, 0x1c, 0x93, 0x64, 0xc2, 0x54, 0xef, 0x0e, 0xac, 0x3e, 0x1c, 0x8e, 0xc4, 0xad, 0x4f,
+	0x92, 0x11, 0x8b, 0x13, 0xe2, 0x21, 0x70, 0x7c, 0x82, 0xc3, 0x53, 0x3a, 0xa4, 0xc2, 0x08, 0x79,
+	0xdf, 0x82, 0xfb, 0x7c, 0x14, 0x62, 0x41, 0x8c, 0xc3, 0xd2, 0xe4, 0x19, 0x80, 0x99, 0x47, 0xcb,
+	0xb9, 0x47, 0xde, 0xbf, 0x6a, 0xd0, 0x3e, 0x1a, 0x90, 0x58, 0xf4, 0x22, 0x4a, 0x62, 0x21, 0xfd,
+	0x50, 0x64, 0x26, 0xd8, 0xc4, 0x9a, 0x94, 0x7e, 0xe8, 0x3d, 0xfd, 0xd0, 0x9c, 0x9e, 0x1d, 0x18,
+	0x1a, 0x79, 0xd0, 0xe9, 0xc7, 0xd7, 0x38, 0xa2, 0xe1, 0xd3, 0x80, 0x8d, 0xf4, 0x41, 0xda, 0x7e,
+	0x87, 0x16, 0x78, 0x72, 0x8f, 0x4f, 0x06, 0x34, 0x11, 0x84, 0x1f, 0xcb, 0xc3, 0xae, 0x2b, 0x8c,
+	0x0e, 0x2f, 0xf0, 0xd0, 0x47, 0x60, 0x69, 0x00, 0x79, 0x86, 0xed, 0xc3, 0xf6, 0xbe, 0xba, 0x55,
+	0xc5, 0xf2, 0xad, 0x44, 0xfe, 0x78, 0xff, 0xad, 0xc1, 0xaa, 0xf1, 0xd5, 0x98, 0xbc, 0x0d, 0x2d,
+	0xc3, 0xc8, 0x8c, 0x6e, 0xe1, 0x94, 0x31, 0xd7, 0xec, 0x1d, 0x00, 0xbd, 0xa6, 0x8e, 0x45, 0xdf,
+	0x3e, 0x04, 0x19, 0x67, 0xc2, 0xad, 0xfa, 0x02, 0x6e, 0x59, 0x53, 0xdc, 0xda, 0x01, 0x48, 0xf7,
+	0xf4, 0x75, 0x10, 0xb4, 0x7c, 0xe0, 0x19, 0x27, 0x77, 0xbb, 0x39, 0xd3, 0x6d, 0x01, 0x77, 0x35,
+	0x04, 0xbf, 0xd5, 0x26, 0xa7, 0x97, 0xfc, 0xee, 0xde, 0x67, 0x5a, 0x57, 0x66, 0x6a, 0x7d, 0x0c,
+	0xeb, 0x3e, 0xb9, 0x66, 0xaf, 0xc8, 0x07, 0xd2, 0xe9, 0xbd, 0xa9, 0x01, 0xea, 0xc7, 0xd7, 0x54,
+	0x10, 0x15, 0x65, 0x05, 0x40, 0xcd, 0xe5, 0x39, 0x20, 0x4d, 0x19, 0x65, 0x75, 0xf5, 0xaa, 0xba,
+	0x42, 0xc4, 0x2e, 0x97, 0x23, 0x76, 0x07, 0x40, 0xad, 0x3c, 0x1c, 0x62, 0x1a, 0x29, 0x2f, 0x5b,
+	0x3e, 0xe0, 0x8c, 0xe3, 0xfd, 0x08, 0x9b, 0x3d, 0x1c, 0x07, 0x24, 0x52, 0xba, 0xb1, 0xa0, 0x2c,
+	0x5e, 0xcc, 0xc3, 0x77, 0x57, 0x79, 0x1f, 0xd0, 0x53, 0x82, 0x79, 0x70, 0x55, 0x72, 0x7f, 0x03,
+	0x2c, 0x2d, 0xa0, 0x35, 0x59, 0x44, 0xed, 0x15, 0xb0, 0xa9, 0x9f, 0xf6, 0x13, 0xc2, 0x87, 0x34,
+	0x49, 0x3e, 0x80, 0x79, 0x0b, 0x5c, 0xf9, 0x0f, 0xd0, 0xf6, 0xb1, 0x20, 0xef, 0xab, 0x09, 0x41,
+	0xdd, 0xcf, 0x53, 0x6a, 0x9d, 0x63, 0x41, 0xbc, 0x13, 0xe8, 0x1c, 0x05, 0x41, 0x9e, 0xf0, 0xde,
+	0x11, 0xdb, 0xfb, 0x7b, 0x0d, 0xee, 0x99, 0xa4, 0x77, 0x8d, 0x69, 0x84, 0x2f, 0x22, 0xa2, 0xf2,
+	0xf7, 0xfb, 0xda, 0xfc, 0x47, 0xe8, 0x96, 0x01, 0x95, 0xf5, 0xdd, 0xc3, 0xcd, 0xfd, 0xb4, 0x4c,
+	0x55, 0xf4, 0x75, 0x71, 0x89, 0xf6, 0xfe, 0x04, 0x9d, 0x53, 0x36, 0xa0, 0x71, 0xe1, 0x5e, 0xc9,
+	0xc4, 0xbd, 0xca, 0xf7, 0x31, 0xc2, 0x49, 0x72, 0xc3, 0x78, 0xf6, 0x3e, 0x52, 0xda, 0xdb, 0x00,
+	0xa4, 0x10, 0xfe, 0xcc, 0xd8, 0x20, 0x4a, 0x1d, 0xf2, 0xfe, 0x02, 0x1b, 0xa7, 0x34, 0x11, 0x47,
+	0x41, 0x60, 0xc2, 0x46, 0x17, 0x04, 0xf4, 0x85, 0x72, 0x54, 0xf1, 0x12, 0xb7, 0xb6, 0xbb, 0xb2,
+	0xd7, 0x3e, 0xbc, 0x9b, 0xdb, 0xaa, 0x7f, 0xb5, 0x84, 0xf4, 0x5f, 0xef, 0xf3, 0xfe, 0x00, 0xeb,
+	0xa5, 0x10, 0x34, 0x58, 0x9f, 0x40, 0xa3, 0x04, 0xd4, 0xcd, 0x81, 0xd4, 0xbe, 0x06, 0xd6, 0xe2,
+	0x67, 0xf0, 0x4b, 0x63, 0x4b, 0x9e, 0x82, 0x33, 0x90, 0xdf, 0x40, 0x53, 0x73, 0x52, 0x94, 0x5f,
+	0x54, 0xcd, 0x31, 0x02, 0x4d, 0x9d, 0x11, 0x12, 0xaf, 0x0f, 0x9b, 0x0a, 0x2e, 0x2f, 0x41, 0x19,
+	0xd8, 0x7e, 0x15, 0x6c, 0xa3, 0x6c, 0x52, 0x15, 0xea, 0x53, 0x58, 0x2f, 0x15, 0x41, 0x03, 0x93,
+	0x56, 0xbd, 0x5a, 0xa1, 0xea, 0x7d, 0x05, 0x5d, 0x55, 0x45, 0x93, 0xa2, 0xfb, 0x9a, 0x33, 0xe1,
+	0xbe, 0x2e, 0xb7, 0x8d, 0x48, 0xad, 0x7a, 0x7f, 0xab, 0x81, 0xa5, 0x38, 0xe8, 0x13, 0xe8, 0xf6,
+	0x58, 0x1c, 0x8c, 0x39, 0x97, 0xb6, 0x5c, 0x61, 0x61, 0x34, 0x74, 0x83, 0x12, 0x17, 0xed, 0x42,
+	0x5b, 0xfe, 0x7e, 0x47, 0x13, 0xc1, 0xf8, 0xad, 0x29, 0xbe, 0xed, 0x20, 0x67, 0xc9, 0x1d, 0x67,
+	0xf8, 0xa7, 0x67, 0x9c, 0x0e, 0x06, 0x84, 0x27, 0xe6, 0xc9, 0xb4, 0x87, 0x39, 0x4b, 0x46, 0xf4,
+	0x19, 0xfe, 0xc9, 0xdc, 0x8f, 0x6e, 0x48, 0x5a, 0xc3, 0x94, 0xe1, 0xed, 0x42, 0xb7, 0xc7, 0x89,
+	0x7a, 0x00, 0xc6, 0x9b, 0x2e, 0x2c, 0xd3, 0xd0, 0xa4, 0x1f, 0xd9, 0x4a, 0xfc, 0x15, 0xd6, 0xf5,
+	0x91, 0x95, 0xb7, 0xed, 0x81, 0x45, 0x38, 0x67, 0x5c, 0x59, 0xde, 0x3d, 0x44, 0x99, 0xcf, 0x0f,
+	0x25, 0xb7, 0xc7, 0x42, 0xe2, 0xeb, 0x0d, 0xe8, 0xd7, 0xb0, 0xa6, 0xfe, 0x78, 0x11, 0x92, 0x24,
+	0xe0, 0x74, 0x24, 0x73, 0xa5, 0x09, 0x5e, 0x47, 0x2d, 0x1c, 0xe7, 0xfc, 0x09, 0xed, 0x6f, 0x56,
+	0xc0, 0x52, 0xea, 0x27, 0x3a, 0x92, 0x6d, 0x68, 0x9d, 0x50, 0x9e, 0x88, 0x42, 0x4b, 0xd6, 0xba,
+	0x4c, 0x19, 0xf2, 0xa1, 0x9c, 0x62, 0xb3, 0xa8, 0xd1, 0xec, 0xc8, 0xd0, 0x79, 0xca, 0xac, 0x17,
+	0x9f, 0xd6, 0x0e, 0xc0, 0x09, 0x0e, 0xc8, 0x05, 0x63, 0xaf, 0xb2, 0x46, 0x0c, 0x2e, 0x33, 0x8e,
+	0x44, 0xd4, 0x2f, 0x2b, 0x2b, 0xc3, 0xf6, 0xc0, 0xd0, 0x32, 0x2f, 0xfc, 0x80, 0xaf, 0x18, 0xeb,
+	0x87, 0x69, 0x6f, 0x77, 0xab, 0x49, 0x89, 0xda, 0x4f, 0xbe, 0x27, 0x9c, 0x5e, 0x52, 0x12, 0xba,
+	0xb6, 0x6a, 0x02, 0x80, 0x66, 0x1c, 0xf4, 0x31, 0xac, 0x4a, 0x3b, 0xd5, 0xc3, 0x7d, 0x46, 0x87,
+	0xc4, 0x6d, 0x29, 0xf9, 0xd5, 0xa8, 0xc8, 0x54, 0x59, 0xe9, 0x1a, 0x0b, 0xcc, 0x65, 0xf7, 0xd8,
+	0x36, 0x59, 0x29, 0x65, 0x68, 0x5f, 0xe3, 0xc1, 0x18, 0x0f, 0x88, 0xdb, 0x49, 0x7d, 0xd5, 0xb4,
+	0x5c, 0x93, 0x08, 0xaf, 0x59, 0x4c, 0xdc, 0x55, 0xbd, 0x26, 0x0c, 0x8d, 0x0e, 0x20, 0x6d, 0x9a,
+	0xdd, 0xae, 0xca, 0xe9, 0x33, 0x12, 0x40, 0xba, 0xcb, 0xfb, 0x77, 0x0d, 0x56, 0x7b, 0x2c, 0xbe,
+	0xa4, 0x83, 0x31, 0x57, 0x25, 0x4f, 0xb5, 0xbf, 0x6c, 0x1c, 0xeb, 0x7b, 0xb1, 0x7d, 0x2b, 0x91,
+	0x84, 0x0c, 0xca, 0x73, 0x72, 0x23, 0x23, 0xf7, 0x9c, 0x09, 0xaa, 0x2e, 0xc7, 0xf6, 0xdb, 0x71,
+	0xce, 0x42, 0x5f, 0x43, 0x4b, 0x5d, 0x81, 0x5a, 0xd7, 0x05, 0xe5, 0x5e, 0xa6, 0x5c, 0x32, 0x2f,
+	0x69, 0xa0, 0x34, 0x68, 0x75, 0x7e, 0x8b, 0xa4, 0xbb, 0xa5, 0xe8, 0x53, 0xd9, 0xd3, 0x2b, 0xd1,
+	0xfa, 0x02, 0xa2, 0x49, 0xba, 0xdb, 0x13, 0x80, 0x26, 0x37, 0xa0, 0xfb, 0xe0, 0x9c, 0x93, 0x9b,
+	0x63, 0xca, 0x49, 0x20, 0xce, 0x48, 0x92, 0xc8, 0x63, 0xd4, 0xee, 0x38, 0x71, 0x85, 0x8f, 0x0e,
+	0x61, 0x43, 0x29, 0x3f, 0xc3, 0x34, 0x16, 0x98, 0xc6, 0xe9, 0x7e, 0xed, 0xe2, 0x46, 0x32, 0x65,
+	0xcd, 0xfb, 0x4f, 0x5d, 0xd5, 0xae, 0xec, 0x3c, 0xe7, 0xf4, 0xc9, 0x2e, 0x34, 0xfb, 0x89, 0x9a,
+	0x05, 0xd2, 0xfa, 0x42, 0x35, 0x59, 0xae, 0x4b, 0x2b, 0xd5, 0xba, 0x54, 0x7a, 0x0b, 0xf5, 0x79,
+	0x6f, 0xc1, 0xaa, 0xbc, 0x85, 0x52, 0x64, 0x35, 0xe6, 0x45, 0x56, 0x73, 0x4e, 0x64, 0xd9, 0x95,
+	0xc8, 0xda, 0x02, 0xfb, 0x11, 0xbb, 0x78, 0x46, 0x45, 0x94, 0x06, 0xb4, 0xfd, 0xd2, 0xd0, 0x79,
+	0x1f, 0x01, 0xb3, 0xfa, 0x08, 0x99, 0x1e, 0xbf, 0xc3, 0xc9, 0x15, 0x09, 0x9f, 0xa4, 0xb5, 0x4e,
+	0xc7, 0x7c, 0xf7, 0xaa, 0xc4, 0x9d, 0x52, 0x74, 0x3b, 0x6f, 0x55, 0x74, 0xb3, 0x4e, 0x63, 0x35,
+	0xef, 0x34, 0xb4, 0xed, 0x34, 0x56, 0x0d, 0x79, 0x37, 0xb5, 0x5d, 0xd3, 0xe8, 0x33, 0x58, 0xd3,
+	0xbd, 0xe6, 0x09, 0x67, 0xc3, 0xf4, 0x0e, 0xef, 0xa8, 0x4d, 0x6b, 0xb4, 0xba, 0x20, 0x6f, 0xf3,
+	0x98, 0x44, 0x44, 0x90, 0xd0, 0x75, 0x54, 0x7c, 0x34, 0x43, 0x4d, 0xea, 0xac, 0xa0, 0x90, 0x68,
+	0x3c, 0x70, 0xd7, 0xd2, 0xac, 0x90, 0x72, 0xbc, 0x5d, 0x68, 0x48, 0x03, 0xc7, 0x09, 0x02, 0x68,
+	0x9c, 0x33, 0x3e, 0xc4, 0x91, 0xb3, 0x24, 0xff, 0x3e, 0x65, 0xc1, 0x2b, 0x12, 0x3a, 0x35, 0x6f,
+	0x1b, 0x40, 0x36, 0x43, 0x79, 0xce, 0x2e, 0x8d, 0x7f, 0x9f, 0xc3, 0x5a, 0x56, 0x19, 0x93, 0x85,
+	0x5a, 0x1b, 0xef, 0x1b, 0x40, 0x45, 0x91, 0xbc, 0xb4, 0xe1, 0x05, 0x2a, 0xfb, 0xfd, 0x97, 0xd0,
+	0xca, 0xf2, 0x3e, 0xea, 0x80, 0x1d, 0xb3, 0x17, 0x2a, 0xb5, 0x3b, 0x4b, 0x68, 0x03, 0x1c, 0x4e,
+	0x12, 0x36, 0xe6, 0x01, 0x79, 0x11, 0x33, 0x71, 0xc9, 0xc6, 0xa1, 0x53, 0x43, 0xeb, 0x70, 0xc7,
+	0x8c, 0x42, 0x2f, 0xb8, 0xb6, 0xcf, 0x59, 0x46, 0x0e, 0x74, 0xc6, 0xb1, 0x0c, 0x07, 0xc6, 0xe9,
+	0x6b, 0x12, 0x3a, 0x2b, 0x08, 0x41, 0x97, 0xc6, 0x82, 0xf0, 0x18, 0x47, 0x06, 0xb0, 0x7e, 0xff,
+	0xd3, 0xea, 0xad, 0xa3, 0x55, 0x15, 0xc4, 0x9a, 0xe3, 0x2c, 0x21, 0x1b, 0xea, 0x47, 0x37, 0xf8,
+	0xd6, 0xa9, 0x1d, 0xfe, 0xcf, 0x02, 0x30, 0x3e, 0x9f, 0x0d, 0x38, 0x7a, 0x00, 0x0d, 0x5d, 0xc5,
+	0x90, 0x53, 0xcd, 0x74, 0x5b, 0x79, 0xcc, 0x94, 0x0b, 0x9d, 0xb7, 0x84, 0x1e, 0x80, 0xa5, 0x66,
+	0x6e, 0x94, 0x17, 0xb9, 0xac, 0x11, 0xdd, 0xca, 0xbb, 0x94, 0xf2, 0xc0, 0xbd, 0x84, 0x7e, 0x0b,
+	0x0d, 0x7d, 0xfd, 0x6f, 0x29, 0xf7, 0x15, 0x80, 0xee, 0x50, 0xfb, 0xf1, 0x25, 0x9b, 0x62, 0xe9,
+	0x6c, 0xc9, 0x7d, 0xa8, 0xcb, 0x21, 0x7f, 0xaa, 0xbe, 0x09, 0x1c, 0x6f, 0x09, 0xf5, 0x53, 0x4d,
+	0x6a, 0x62, 0xfd, 0x28, 0xdb, 0x31, 0xeb, 0xab, 0xc0, 0x1c, 0xd5, 0xbf, 0x87, 0xf6, 0xe3, 0x11,
+	0x89, 0xd3, 0x4f, 0x27, 0x6f, 0xe7, 0xf1, 0x23, 0xe8, 0x96, 0x07, 0x54, 0xb4, 0x93, 0xed, 0x9d,
+	0x3a, 0xb9, 0xce, 0xc1, 0x3a, 0x91, 0x33, 0x75, 0x3e, 0x76, 0xa2, 0xed, 0x02, 0xd2, 0xc4, 0x34,
+	0x3a, 0x17, 0x07, 0xe4, 0x7b, 0x30, 0x28, 0xd3, 0xfc, 0xf1, 0x0a, 0x6d, 0xde, 0x8c, 0xa6, 0xd6,
+	0x5b, 0x42, 0xbf, 0x83, 0x96, 0x5c, 0xd6, 0x7d, 0xdf, 0x34, 0x98, 0xcd, 0x72, 0xb7, 0x98, 0x94,
+	0x64, 0xd1, 0x13, 0x36, 0x1a, 0x47, 0x58, 0x90, 0x1e, 0x27, 0x21, 0x89, 0x05, 0xc5, 0x91, 0x8c,
+	0x08, 0x99, 0x31, 0x73, 0xce, 0xd6, 0x04, 0xc7, 0x5b, 0x3a, 0xfc, 0x87, 0x05, 0xed, 0xb4, 0xc1,
+	0x97, 0xb1, 0x7f, 0x0c, 0xed, 0xc2, 0xf0, 0x8c, 0xf2, 0x92, 0x39, 0x39, 0x52, 0xcf, 0x39, 0x95,
+	0x73, 0x70, 0xaa, 0x63, 0x2f, 0xda, 0xcd, 0x5f, 0xce, 0xf4, 0x89, 0x78, 0x3e, 0x9e, 0x4f, 0x5e,
+	0x92, 0x40, 0x7c, 0x20, 0xbc, 0x1e, 0x38, 0x59, 0xf0, 0x3e, 0xe1, 0xec, 0x92, 0x46, 0x04, 0x4d,
+	0xef, 0x6a, 0xe6, 0x3e, 0x5c, 0xfd, 0x8c, 0x4a, 0x82, 0xf9, 0x85, 0x4d, 0xc7, 0x33, 0x72, 0x32,
+	0xb9, 0xe4, 0xb3, 0x46, 0x61, 0x1a, 0x9e, 0xa3, 0xef, 0xfb, 0xc2, 0x77, 0x38, 0x85, 0x95, 0x0f,
+	0xed, 0x85, 0xc3, 0x98, 0x31, 0xcf, 0xcf, 0x3d, 0x8c, 0x4e, 0x71, 0xf4, 0x9b, 0x1a, 0x7d, 0xbf,
+	0xaa, 0x06, 0x71, 0x69, 0xb2, 0x53, 0xc6, 0x6d, 0x4c, 0x9b, 0x97, 0xd1, 0xc7, 0xd5, 0x6c, 0x31,
+	0x6d, 0x9c, 0x9e, 0x6d, 0xdc, 0xe1, 0xff, 0x2d, 0xb0, 0xb3, 0xe0, 0x7c, 0x04, 0xed, 0xc2, 0x5c,
+	0x59, 0x08, 0xce, 0xc9, 0x0f, 0x1e, 0x5b, 0xdb, 0xd3, 0x17, 0x33, 0x83, 0x3f, 0x07, 0x3b, 0xfd,
+	0x60, 0x86, 0x2a, 0xe5, 0x6a, 0x6b, 0xbd, 0x74, 0x02, 0x99, 0xc8, 0x97, 0x69, 0xfe, 0x21, 0x5c,
+	0xb7, 0xf8, 0x8b, 0x0a, 0x7e, 0x2d, 0xc3, 0x57, 0x0b, 0xa6, 0xb3, 0xc3, 0xa2, 0xa2, 0x9f, 0xcd,
+	0xc9, 0xd5, 0x15, 0x08, 0x6f, 0x09, 0x7d, 0xab, 0xb3, 0xc8, 0xec, 0x7b, 0xbc, 0x57, 0xbe, 0xc7,
+	0x52, 0x15, 0x7f, 0xaf, 0x5a, 0x64, 0x3f, 0x8f, 0xdf, 0x49, 0xf2, 0x4b, 0x68, 0xaa, 0xfe, 0x9a,
+	0x0f, 0xdf, 0x52, 0xf0, 0x01, 0x58, 0x6a, 0xf0, 0x29, 0x3c, 0xbf, 0xe2, 0x87, 0x91, 0x59, 0xe7,
+	0x79, 0x04, 0xed, 0xc2, 0xd7, 0x8f, 0x42, 0x08, 0x4d, 0x7e, 0x13, 0x99, 0x7d, 0x9b, 0xab, 0xe6,
+	0x91, 0x99, 0xcc, 0x51, 0xbd, 0xca, 0xd9, 0x46, 0x1f, 0x42, 0x43, 0x8b, 0x2e, 0x2e, 0x73, 0xd1,
+	0x50, 0xff, 0xe3, 0xf0, 0xc5, 0xcf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x3f, 0x68, 0x0b, 0xfc, 0xd1,
+	0x18, 0x00, 0x00,
 }
