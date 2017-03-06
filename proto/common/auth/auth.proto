@@ -2,15 +2,19 @@ syntax = "proto3";
 
 package auth;
 
+enum Error {
+	NOERROR = 0;
+	INTERNALERROR = 500;
+	NOTFOUND = 404;
+}
+
 message Credential {
 	string AccountId = 1;
 	int32 AccountType = 2;
 	string UserId = 3;
-
-	repeated int32 UserScopes = 4;
-
+	
 	// scope that the user allow
-	repeated int32 Scopes = 5;
+	Method Method = 5;
 
 	bool IsInternal = 6;
 
@@ -75,7 +79,8 @@ message Method {
 	bool RegenerateClientSecret = 105;
 	bool VerifyClient = 106;
 	bool DeleteClient = 107;
-
+	bool CreateClient = 108;
+	
 	// acounts
 	bool ReadAccount = 120;
 	bool ListAccountClient = 121;
@@ -92,7 +97,7 @@ message Method {
 }
 
 message IdRequest {
-	string Id = 1;
+  int32 Id = 1;
 }
 
 message ScopesResponse {

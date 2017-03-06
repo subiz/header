@@ -2,19 +2,14 @@ syntax = "proto3";
 
 package client;
 
-message Error {
-	ErrorCode code = 1;
-	string error_description = 2;
-}
-
 message EmptyResponse {}
 
-enum ErrorCode {
+enum Error {
 	NO_ERROR = 0;
-	RESOURCE_NOTFOUND = 1;
-	INVALID_REQUEST = 2;
-	UNAUTHORIZED = 3;
-	INTERNAL_ERROR = 4;
+	RESOURCE_NOTFOUND = 404;
+	INVALID_REQUEST = 232;
+	UNAUTHORIZED = 405;
+	INTERNAL_ERROR = 500;
 }
 
 message Client {
@@ -70,7 +65,7 @@ service ClientMgt {
 	rpc Create(Client) returns (ClientCreateResponse) {}
 	rpc Read(IdRequest) returns (Client) {}
 	rpc List(ListClientsRequest) returns (ListClientsResponse) {}
-	rpc Delete(IdRequest) returns (Error) {}
+	rpc Delete(IdRequest) returns (EmptyResponse) {}
 	rpc Update(Client) returns (EmptyResponse) {}
 	rpc UpdateSecret(IdRequest) returns(SecretResponse) {}
 	rpc Verify(BoolValueRequest) returns (EmptyResponse) {}
