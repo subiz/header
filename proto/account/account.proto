@@ -5,18 +5,18 @@ package account;
 import "bitbucket.org/subiz/servicespec/proto/common/auth/auth.proto";
 
 enum ErrorCode {
-	no_error = 0;
-	resource_notfoud = 1;
-	invalid_request = 2;
-	unauthorized = 3;
-	internal_error = 4;
+	OK = 0;
+	NOTFOUND = 404;
+	INVALID = 400;
+	UNAUTHORIZED = 401;
+	INTERNAL_ERROR = 500;
 }
 
 message Account {
 	string Id = 1;
 	string Name = 2;
 	int32 State = 3;
-	int32 Type = 4;
+	int32 Plan = 4;
 	string LogoUrl = 7;
 
 	string OwnerId = 5;
@@ -27,70 +27,39 @@ message IdRequest {
 	string Id = 1;
 }
 
-message EmptyResponse {}
+message Empty {}
 
-message ReadLimitRequest {}
-
-message UpdateAccountTypeRequest {
+message UpdatePlanRequest {
 	string Id = 1;
-	int32 Type = 2;
+	int32 Plan = 2;
 }
 
-message AgentClient {
-	string AgentId = 1;
-	string ClientId = 2;
-	
-	// true if client update their scope and agent haven't notice yet
-	bool InvalidScope = 3;
-	string RegisterDate = 4;
-	repeated auth.Scope Scopes = 5;
-}
-
-message AccountClient {
-	string AccountId = 1;
-	string ClientId = 2;
-	int32 ClientType = 3;
-
-	// true if client update their scope and owner haven't notice yet
-	bool InvalidScope = 4;
-	string RegisterDate = 5;
-	string RegisterId = 6;
-	repeated auth.Scope Scopes = 7;
-}
-
-message RegistryClientRequest {
-	string AccountId = 1;
-	string ClientId = 2;
-	repeated auth.Scope Scopes = 3;
-}
-
-message RevokeClientRequest {
+message ChannelRegistryRequest {
 	string AccountId = 1;
 	string ClientId = 2;
 }
 
 service AccountMgr {
 	rpc Create(Account) returns (CreateResponse) {}
-	rpc Close(IdRequest) returns (EmptyResponse) {}
-	rpc Delete(IdRequest) returns (EmptyResponse) {}
-	rpc UpdateInfo(Account) returns (EmptyResponse) {}
+
+	rpc Close(IdRequest) returns (Empty) {}
+	rpc Open(IdRequest) returns (Empty) {}
+
+	rpc Delete(IdRequest) returns (Empty) {}
+	rpc UpdateInfo(Account) returns (Empty) {}
 	rpc Read(IdRequest) returns (Account) {}
-	//	rpc UpdateAccountBilling(
-	rpc UpdateType(UpdateAccountTypeRequest) returns (EmptyResponse) {}
-	rpc OpenAccount(IdRequest) returns (EmptyResponse) {}
 
-	rpc RegistryClient(RegistryClientRequest) returns (EmptyResponse) {}
-	rpc RevokeClient(RevokeClientRequest) returns (EmptyResponse) {}
+	// call by the system or subiz's agent to upgrade plan of
+	// account after verified
+	rpc UpdatePlan(UpdatePlanRequest) returns (Empty) {}
+	// call by account owner to update her plan
+	rpc RequestUpdatePlan(UpdatePlanRequest) returns (Empty) {}
 
-	
-	rpc ListClient(IdRequest) returns (ListAccountClientResponse) {}
-	// agent api
-	
-	rpc ListLimit(IdRequest) returns (LimitsResponse)  {}
-	
-	rpc PopulateCredential(auth.Credential) returns (auth.Credential) {}
-	// rpc ReadAccountType(IdRequest) returns (AccountTypeResponse) {}
-	// rpc ReadAgentScope(IdRequest) returns (auth.Scope) {}
+	rpc EnableChannel(ChannelRegistryRequest) returns (Empty) {}
+	rpc DisableChannel(ChannelRegistryRequest) returns (Empty) {}
+	rpc ListChannel(IdRequest) returns (ListAccountChannelResponse) {}
+
+	rpc ListLimit(EmptyRequest) returns (LimitsResponse)  {}
 }
 
 message InviteAgentRequest {
@@ -115,7 +84,6 @@ message CancelInvitationRequest {
 	string AgentEmail = 3;
 }
 
-
 message SearchAgentRequest {
 	string Email = 1;
 }
@@ -123,7 +91,7 @@ message SearchAgentRequest {
 message UpdatePermissionRequest {
 	string AccountId = 1;
 	string AgentId = 2;
-	auth.Scope Scopes = 3;
+	int32 Scope = 3;
 }
 
 message RateRequest {
@@ -144,19 +112,22 @@ message UpdateAvailableStateRequest {
 }
 
 service AccAgentMgr {
-	rpc InviteAgent(InviteAgentRequest) returns (EmptyResponse) {}
-	rpc CancelInvitation(CancelInvitationRequest) returns (EmptyResponse) {}
-	rpc RejectInvitation(CancelInvitationRequest) returns (EmptyResponse) {}
+	rpc InviteAgent(InviteAgentRequest) returns (Empty) {}
+	// delete invitation invoke by inviter
+	rpc CancelInvitation(CancelInvitationRequest) returns (Empty) {}
+	// delete invitation invoke by agent
+	rpc RejectInvitation(CancelInvitationRequest) returns (Empty) {}
 
-	rpc UpdateAccProfile(AccountAgent) returns (EmptyResponse) {}
+	rpc UpdateAccProfile(AccountAgent) returns (Empty) {}
 	rpc Read(AccIdRequest) returns (AccountAgent) {}
-	rpc Rate(RateRequest) returns (EmptyResponse) {}
-	rpc UpdateAccAgentPermission(UpdatePermissionRequest) returns (EmptyResponse) {}
-	rpc ListAccAgent(IdRequest) returns (ListAccAgentResponse) {}
+	rpc Rate(RateRequest) returns (Empty) {}
+	rpc UpdateAvailableState(UpdateAvailableStateRequest) returns (Empty) {}
+	rpc GrantPermission(UpdatePermissionRequest) returns (Empty) {}
+	rpc RevokePermission(UpdatePermissionRequest) returns (Empty) {}
 
-	
-	rpc UpdateAvailableState(UpdateAvailableStateRequest) returns (EmptyResponse) {}
-	
+	rpc List(IdRequest) returns (ListAccAgentResponse) {}
+	rpc Lock(AccIdRequest) returns (Empty) {}
+	rpc Unlock(AccIdRequest) returns (Empty) {}
 }
 
 message LoginRequest {
@@ -164,45 +135,50 @@ message LoginRequest {
 	string password = 2;
 }
 
-message LoginGoogleRequest {
-}
-
 message ListAccAgentResponse {
 	repeated AccountAgent AccAgents = 1;
 }
 
+message ResetPWRequest {
+	string AgentId = 1;
+	string NewPassword = 2;
+}
+
+message RegisterClientRequest {
+	string AgentId = 1;
+	string ClientId = 2;
+
+	// true if client update their scope and agent haven't notice yet
+	bool InvalidScope = 3;
+	string RegisterDate = 4;
+	repeated int32 ScopeIds = 5;
+}
+
 service AgentMgr {
-	rpc SearchAgent(SearchAgentRequest) returns (SearchAgentResponse) {}
-
-
+	rpc Search(SearchAgentRequest) returns (SearchAgentResponse) {}
 	rpc Register(Agent) returns (IdResponse) {}
-	rpc RegisterGoogle(Agent) returns (IdResponse) {}
-	rpc RegisterFacebook(Agent) returns (IdResponse) {}
-	
 	rpc Read(IdRequest) returns (Agent) {}
-	
-	rpc ListAgent(IdRequest) returns (ListAgentsResponse) {}
-	rpc Delete(IdRequest) returns (EmptyResponse) {}
-	rpc UnDelete(IdRequest) returns (EmptyResponse) {}
-	//	rpc ResetPW
-	rpc Confirm(IdRequest) returns (EmptyResponse) {}
+
+	rpc List(IdRequest) returns (ListAgentsResponse) {}
+	rpc Lock(IdRequest) returns (Empty) {}
+	rpc Unlock(IdRequest) returns (Empty) {}
+	rpc ResetPW(ResetPWRequest) returns (Empty) {}
+	rpc Confirm(IdRequest) returns (Empty) {}
 	rpc Login(LoginRequest) returns (IdResponse) {}
-	rpc LoginGoogle(LoginGoogleRequest) returns (IdResponse) {}
-	
-	rpc UpdateProfile(Agent) returns (EmptyResponse) {}	
-	rpc Update(Agent) returns (EmptyResponse) {}
+
+	rpc UpdateProfile(Agent) returns (Empty) {}
+
+	rpc AuthorizeClient(RegisterClientRequest) returns (Empty) {}
+	rpc RevokeClient(RegisterClientRequest) returns (Empty) {}
+	rpc ListClient(IdRequest) returns (ListClientsResponse) {}
 }
 
 message SearchAgentResponse {
 	repeated Agent Agents = 1;
 }
 
-message ListAccountClientResponse {
-	repeated AccountClient Clients = 1;
-}
-
-message ListAgentClientResponse {
-	repeated AgentClient Clients = 1;
+message ListAccountChannelResponse {
+	repeated string Ids = 1;
 }
 
 message AccountTypeResponse {
@@ -210,7 +186,7 @@ message AccountTypeResponse {
 }
 
 message LimitsResponse {
-  repeated Limit Limits = 1;
+	repeated Limit Limits = 1;
 }
 
 message Limit {
@@ -224,7 +200,7 @@ message CreateResponse {
 	string id = 3;
 }
 
-message AgentCreateResponse {	
+message AgentCreateResponse {
 	ErrorCode error = 1;
 	string error_description = 2;
 	string id = 3;
@@ -235,15 +211,12 @@ message Agent {
 	string FirstName = 2;
 	string LastName = 3;
 	string Email = 4;
-	string FacebookId = 5;
-	string GoogleId = 6;
-	string YahooId = 7;
 	bool IsVerified = 8;
 	string LastLoginTime = 9;
 	string AvatarUrl = 11;
 	string Language = 12;
 	string Timezone = 13;
-	AccountAgent account = 14;
+	Status Status = 14;
 }
 
 message Configuration {
@@ -261,7 +234,12 @@ enum AvailableState {
 	Available = 0;
 	Away = 1;
 };
-	
+
+enum Status {
+	Normal = 0;
+	Locked = 1;
+}
+
 message AccountAgent {
 	string AgentId = 1;
 	string IsOwner = 2;
@@ -273,10 +251,7 @@ message AccountAgent {
 	string Timezone = 8;
 	string JobTitle = 9;
 	auth.Scope Scopes = 10;
-	enum Status {
-		Normal = 0;
-		Locked = 1;
-	}
+	Status status = 18;
 	string HashedPassword = 11;
 	AvailableState AvailableState = 12;
 	int32 Rate = 13;
@@ -284,7 +259,6 @@ message AccountAgent {
 	string JoinDate = 14;
 	string InviteFromAgentId = 15;
 	// set if account agent is removed from account
-	bool Deleted = 16;
 
 	// set to true if agent is being invited
 	bool IsInviting = 17;
@@ -296,6 +270,10 @@ message IdResponse {
 
 message ListAgentsRequest {
 	string AccountId = 1;
+}
+
+message ListClientsResponse {
+	repeated int32 clients = 1;
 }
 
 message ListAgentsResponse {
