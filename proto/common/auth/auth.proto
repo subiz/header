@@ -3,8 +3,10 @@ syntax = "proto3";
 package auth;
 
 enum Error {
-	NOERROR = 0;
-	INTERNALERROR = 500;
+	OK = 0;
+	INVALID_REQUEST = 400;
+	UNAUTHORIZED = 401;
+	INTERNAL_ERROR = 500;
 	NOTFOUND = 404;
 }
 

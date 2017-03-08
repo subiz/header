@@ -5,10 +5,10 @@ package client;
 message EmptyResponse {}
 
 enum Error {
-	NO_ERROR = 0;
-	RESOURCE_NOTFOUND = 404;
-	INVALID_REQUEST = 232;
-	UNAUTHORIZED = 405;
+	OK = 0;
+	NOTFOUND = 404;
+	INVALID_REQUEST = 400;
+	UNAUTHORIZED = 401;
 	INTERNAL_ERROR = 500;
 }
 
