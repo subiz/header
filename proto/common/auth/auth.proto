@@ -10,36 +10,121 @@ enum Error {
 	NOTFOUND = 404;
 }
 
-// Credential used to control access
+service ScopeMgt {
+	rpc Read(IdRequest) returns (Scope) {}
+	rpc List(Empty) returns (ScopesResponse) {}
+}
+
 message Credential {
+	string AccountId = 1;
+	int32 AccountType = 2;
+	string UserId = 3;
+	
+	// scope that the user allow
+	Method Method = 5;
+
 	// set to true if this credential is generated from internal service.
 	// Internal credential is trusted and have full access to any function
 	// when internal is set to true, all other fields is ignored
-	bool IsInternal = 1;
+	bool IsInternal = 6;
+
+	// optional
+	string ApiKey = 7;
+}
+
+message Scope {
+	int32 Id = 1;
+	string Name = 2;
+	string LogoUrl = 3;
+	string Title = 4;
+	string Description = 5;
+	Method Method = 6;
+}
+
+message Method {
+
+	// trigger
+	bool UpdateTrigger = 50;
+	bool DeleteTrigger = 51;
+	bool CreateTrigger = 52;
+	bool ReadTrigger = 53;
+	bool ListTrigger = 54;
+	bool ReadAllTrigger = 55;
+	bool ListAllTrigger = 56;
+	bool UpdateAllTrigger = 57;
+	bool DeleteAllTrigger = 58;
+	bool CreateAllTrigger = 59;
+
+	// agents
+	bool InviteAgent = 70;
+	bool UpdateOthersAccAgentPermission = 71;
+	bool UpdateOthersAccAgentProfile = 72;
+	bool UpdateAccAgentProfile = 73;
+	bool UpdateAccAgentAvailableState = 74;
+
+	bool UpdateOthersAccAgentAvailableState = 76;
 	
-	// Account of the user
-	string AccountId = 2;
+	bool ReateOthersAccAgent = 77;
+	bool ReadAccAgentProfile = 78;
+	bool ReadOthersAccAgentProfile = 79;
+	bool ReadOthersAccAgentPermission = 80;
+	bool ReadAccAgentPermission = 81;
+	bool ReadAccAgentHistory = 82;
+	bool ReadAccAgentRate = 83;
+	bool ReadAccAgentAvaialbeState = 84;
 
-	// Id of the user
-	string UserId = 3;
+	bool ListAgentClient = 85;
+	bool UpdateAgentProfile = 86;
+	bool CloseAgentProfile = 87;
+	bool JoinAccount = 88;
+	bool RegisterAgentClient = 89;
+	bool RevokeAgentClient = 90;
+	bool DeleteAgent = 91;
+	bool DeleteOthersAgent = 92;
+	bool InviteOthersAgent = 93;
 
-	// Scope of user in the account
-	Scope UserScope = 4;
+	bool RemoveAccAgent = 94;
+	bool RemoveOthersAccAgent = 95;
+	// clients
+	bool ReadClient = 101;
+	bool ListClient = 102;
+	bool UpdateClientInfo = 103;
+	bool PublishClient = 104;
+	bool RegenerateClientSecret = 105;
+	bool VerifyClient = 106;
+	bool DeleteClient = 107;
+	bool CreateClient = 108;
 	
-	// scope of client
-	Scope Scope = 5;
+	// accounts
+	bool ReadAccount = 120;
+	bool ListAccountClient = 121;
+	bool UpdateAccountInfo = 122;
+	bool UpdateAccountPlan = 123;
+	bool CloseAccount = 124;
+	bool ViewAccountReport = 125;
+	bool EnableChannel = 126;
+	bool DisableChannel = 127;
+	bool UpdateAccountType = 128;
+	bool DeleteAccount = 129;
+	bool OpenAccount = 130;
 
+	bool ReadAccountChannel = 131;
+	bool EnableOthersChannel = 132;
+	bool DisableOthersChannel = 133;
+	bool ReadOthersAccountChannel = 134;
+	bool CloseOthersAccount = 135;
+	bool OpenOthersAccount = 136;
+	bool UpdateOthersAccountInfo = 137;
+	bool ReadOthersAccount = 138;
+	bool UpdateOthersAccountPlan = 139;
+}
+
+message IdRequest {
+  int32 Id = 1;
 }
 
 message ScopesResponse {
 	repeated Scope Scopes = 1;
 }
 
-message EmptyResponse {}
-
 message Empty {}
-
-service ScopeMgt {
-	rpc Read(IdRequest) returns (Scope) {}
-	rpc List(Empty) returns (ScopesResponse) {}
-}
