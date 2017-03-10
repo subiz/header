@@ -49,17 +49,13 @@ service AccountMgr {
 	rpc UpdateInfo(Account) returns (Empty) {}
 	rpc Read(IdRequest) returns (Account) {}
 
-	// call by the system or subiz's agent to upgrade plan of
-	// account after verified
 	rpc UpdatePlan(UpdatePlanRequest) returns (Empty) {}
-	// call by account owner to update her plan
-	rpc RequestUpdatePlan(UpdatePlanRequest) returns (Empty) {}
 
 	rpc EnableChannel(ChannelRegistryRequest) returns (Empty) {}
 	rpc DisableChannel(ChannelRegistryRequest) returns (Empty) {}
 	rpc ListChannel(IdRequest) returns (ListAccountChannelResponse) {}
 
-	rpc ListLimit(EmptyRequest) returns (LimitsResponse)  {}
+	rpc ListLimit(Empty) returns (LimitsResponse)  {}
 }
 
 message InviteAgentRequest {
@@ -144,7 +140,7 @@ message ResetPWRequest {
 	string NewPassword = 2;
 }
 
-message RegisterClientRequest {
+message RegisterClient {
 	string AgentId = 1;
 	string ClientId = 2;
 
@@ -168,9 +164,13 @@ service AgentMgr {
 
 	rpc UpdateProfile(Agent) returns (Empty) {}
 
-	rpc AuthorizeClient(RegisterClientRequest) returns (Empty) {}
-	rpc RevokeClient(RegisterClientRequest) returns (Empty) {}
-	rpc ListClient(IdRequest) returns (ListClientsResponse) {}
+	rpc AuthorizeClient(RegisterClient) returns (Empty) {}
+	rpc RevokeClient(RegisterClient) returns (Empty) {}
+	rpc ListClient(IdRequest) returns (ListRegistersResponse) {}
+}
+
+message ListRegistersResponse {
+	repeated RegisterClient Registrations = 1;
 }
 
 message SearchAgentResponse {
@@ -260,6 +260,7 @@ message AccountAgent {
 	string InviteFromAgentId = 15;
 	// set if account agent is removed from account
 
+	bool IsIn = 16;
 	// set to true if agent is being invited
 	bool IsInviting = 17;
 }
@@ -273,9 +274,9 @@ message ListAgentsRequest {
 }
 
 message ListClientsResponse {
-	repeated int32 clients = 1;
+	repeated int32 Clients = 1;
 }
 
 message ListAgentsResponse {
-	repeated Agent agents = 1;
+	repeated Agent Agents = 1;
 }
