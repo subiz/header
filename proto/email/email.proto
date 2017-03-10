@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package email;
+
+message Email {
+	string From = 1;
+	string To = 2;
+	string Subject = 3;
+	string Body = 4;
+}
+
+message Empty {}
+
+service EmailSender {
+	rpc Send(Email) returns (Empty) {}
+}
+
+
+message FormatRequest {
+	Email EmailTemplate = 1;
+	string JSONData = 2;
+}
+
+service TemplateFormater {
+	rpc Format(FormatRequest) returns (Email) {}
+}
+
