@@ -23,7 +23,7 @@ message ListRequest {
 	int32 ReaderId = 4;
 }
 
-message ListNotifications {
+message Notifications {
 	repeated Notification Notifications = 1;
 }
 
@@ -37,7 +37,7 @@ message SubscribeRequest {
 	string Address = 2;
 }
 
-service notifica {
+service Notifica {
 	rpc Subscribe(SubscribeRequest) returns (Empty) {}
 	rpc Create(Notification) returns (Empty) {}
 	rpc List(ListRequest) returns (Notifications) {}
