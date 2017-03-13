@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package scheduler;
+
+message ScheduleItem {
+	string Id = 1;
+	string ScheduleTime = 2;
+	string RunTime = 3;
+	string Topic = 4;
+	bytes Data = 5;
+}
+
+message IdRequest {
+	string Id = 1;
+}
+
+message Empty {}
+
+message BrokerList {
+	repeated string Brokers = 1;
+}
+
+service Scheduler {
+	rpc Registry(ScheduleItem) returns (Empty) {}
+	rpc Cancel(IdRequest) returns (Empty) {}
+	rpc GetBrokers(Empty) returns (BrokerList) {}
+}
