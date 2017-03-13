@@ -61,10 +61,9 @@ message Method {
 	bool UpdateOthersAccAgentProfile = 72;
 	bool UpdateAccAgentProfile = 73;
 	bool UpdateAccAgentAvailableState = 74;
-
+	bool ReadOthersAgentProfile = 75;
 	bool UpdateOthersAccAgentAvailableState = 76;
-	
-	bool ReateOthersAccAgent = 77;
+	bool RateOthersAccAgent = 77;
 	bool ReadAccAgentProfile = 78;
 	bool ReadOthersAccAgentProfile = 79;
 	bool ReadOthersAccAgentPermission = 80;
@@ -72,29 +71,26 @@ message Method {
 	bool ReadAccAgentHistory = 82;
 	bool ReadAccAgentRate = 83;
 	bool ReadAccAgentAvaialbeState = 84;
-
 	bool ListAgentClient = 85;
 	bool UpdateAgentProfile = 86;
 	bool CloseAgentProfile = 87;
 	bool JoinAccount = 88;
-	bool RegisterAgentClient = 89;
+	bool AuthorizeAgentClient = 89;
 	bool RevokeAgentClient = 90;
-	bool DeleteAgent = 91;
+	bool DeactivateAgent = 91;
 	bool DeleteOthersAgent = 92;
 	bool InviteOthersAgent = 93;
-
-	bool RemoveAccAgent = 94;
-	bool RemoveOthersAccAgent = 95;
-	// clients
-	bool ReadClient = 101;
-	bool ListClient = 102;
-	bool UpdateClientInfo = 103;
-	bool PublishClient = 104;
-	bool RegenerateClientSecret = 105;
-	bool VerifyClient = 106;
-	bool DeleteClient = 107;
-	bool CreateClient = 108;
-	
+	bool RemoveAccAgentFromAccount = 94;
+	bool RemoveOthersAccAgentFromAccount = 95;
+	bool LockOthersAccAgent = 96;
+	bool LockAccAgent = 97;
+	bool UpdateAccAgentConfiguration  = 98;
+	bool UpdateOthersAccAgentConfiguration = 99;
+	bool ReadAgentProfile = 100;
+	bool DeactivateOthersAgent = 101;
+	bool UpdateOthersAgentProfile = 102;
+	bool ReadAgentClient = 103;
+	bool ReadOthersAgentClient = 104;
 	// accounts
 	bool ReadAccount = 120;
 	bool ListAccountClient = 121;
@@ -117,6 +113,19 @@ message Method {
 	bool UpdateOthersAccountInfo = 137;
 	bool ReadOthersAccount = 138;
 	bool UpdateOthersAccountPlan = 139;
+
+
+	
+	// clients
+	bool ReadClient = 151;
+	bool ListClient = 152;
+	bool UpdateClientInfo = 153;
+	bool PublishClient = 154;
+	bool RegenerateClientSecret = 155;
+	bool VerifyClient = 156;
+	bool DeleteClient = 157;
+	bool CreateClient = 158;
+	
 }
 
 message IdRequest {
