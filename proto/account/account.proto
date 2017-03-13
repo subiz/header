@@ -41,20 +41,14 @@ message ChannelRegistryRequest {
 
 service AccountMgr {
 	rpc Create(Account) returns (CreateResponse) {}
-
 	rpc Close(IdRequest) returns (Empty) {}
 	rpc Open(IdRequest) returns (Empty) {}
-
-	rpc Delete(IdRequest) returns (Empty) {}
 	rpc UpdateInfo(Account) returns (Empty) {}
 	rpc Read(IdRequest) returns (Account) {}
-
 	rpc UpdatePlan(UpdatePlanRequest) returns (Empty) {}
-
 	rpc EnableChannel(ChannelRegistryRequest) returns (Empty) {}
 	rpc DisableChannel(ChannelRegistryRequest) returns (Empty) {}
 	rpc ListChannel(IdRequest) returns (ListAccountChannelResponse) {}
-
 	rpc ListLimit(Empty) returns (LimitsResponse)  {}
 }
 
@@ -96,34 +90,36 @@ message RateRequest {
 	int32 Rate = 3;
 }
 
-message AccIdRequest {
-	string AccountId = 1;
-	string AgentId = 2;
-}
-
 message UpdateAvailableStateRequest {
 	string AccountId = 1;
 	string AgentId = 2;
 	AvailableState AvailableState = 3;
 }
 
+message AccAgentId {
+	string AccountId = 1;
+	string AgentId = 2;
+}
+
+message AcceptInvitationRequest {
+	string Token = 1;
+}
+
 service AccAgentMgr {
 	rpc InviteAgent(InviteAgentRequest) returns (Empty) {}
-	// delete invitation invoke by inviter
-	rpc CancelInvitation(CancelInvitationRequest) returns (Empty) {}
+	rpc RemoveFromAccount(AccAgentId) returns (Empty) {}
 	// delete invitation invoke by agent
-	rpc RejectInvitation(CancelInvitationRequest) returns (Empty) {}
-
-	rpc UpdateAccProfile(AccountAgent) returns (Empty) {}
-	rpc Read(AccIdRequest) returns (AccountAgent) {}
+	rpc AcceptInvitation(AcceptInvitationRequest) returns (Empty) {}
+	rpc UpdateProfile(AccountAgent) returns (Empty) {}
+	rpc Read(AccAgentId) returns (AccountAgent) {}
 	rpc Rate(RateRequest) returns (Empty) {}
+	rpc UpdateConfiguration(AccAgentConfiguration) returns (Empty) {}
 	rpc UpdateAvailableState(UpdateAvailableStateRequest) returns (Empty) {}
 	rpc GrantPermission(UpdatePermissionRequest) returns (Empty) {}
 	rpc RevokePermission(UpdatePermissionRequest) returns (Empty) {}
-
 	rpc List(IdRequest) returns (ListAccAgentResponse) {}
-	rpc Lock(AccIdRequest) returns (Empty) {}
-	rpc Unlock(AccIdRequest) returns (Empty) {}
+	rpc Lock(AccAgentId) returns (Empty) {}
+	rpc Unlock(AccAgentId) returns (Empty) {}
 }
 
 message LoginRequest {
@@ -150,20 +146,26 @@ message RegisterClient {
 	repeated int32 ScopeIds = 5;
 }
 
+message Email {
+	string Email = 1;
+}
+
+message ChangePasswordRequest {
+	string AgentId = 1;
+	string Password = 2;
+}
+
 service AgentMgr {
-	rpc Search(SearchAgentRequest) returns (SearchAgentResponse) {}
 	rpc Register(Agent) returns (IdResponse) {}
 	rpc Read(IdRequest) returns (Agent) {}
-
-	rpc List(IdRequest) returns (ListAgentsResponse) {}
-	rpc Lock(IdRequest) returns (Empty) {}
-	rpc Unlock(IdRequest) returns (Empty) {}
+	rpc Deactivate(IdRequest) returns (Empty) {}
+	rpc Activate(IdRequest) returns (Empty) {}
+	rpc RequestResetPw(Email) returns (Empty) {}
+	rpc ChangePw(ChangePasswordRequest) returns (Empty) {}
 	rpc ResetPW(ResetPWRequest) returns (Empty) {}
 	rpc Confirm(IdRequest) returns (Empty) {}
-	rpc Login(LoginRequest) returns (IdResponse) {}
-
+	rpc CheckLogin(LoginRequest) returns (IdResponse) {}
 	rpc UpdateProfile(Agent) returns (Empty) {}
-
 	rpc AuthorizeClient(RegisterClient) returns (Empty) {}
 	rpc RevokeClient(RegisterClient) returns (Empty) {}
 	rpc ListClient(IdRequest) returns (ListRegistersResponse) {}
@@ -217,19 +219,35 @@ message Agent {
 	string Language = 12;
 	string Timezone = 13;
 	Status Status = 14;
+	bool IsConfirmed = 15;
 }
 
-message Configuration {
-	bool Sound = 1;
-	bool NewChatNoti = 2;
+message AccAgentConfiguration {
+	bool NotificationSound = 1;
+ 
 	NotificationConfig EmailNoti = 3;
-	NotificationConfig SubizNoti = 4;
+	NotificationConfig DesktopNoti = 4;
+	NotificationConfig MobileNoti = 5;
+	MobilePushTimmingConfig MobilePushTimming = 6;
+	EmailNotificationGroupingConfig EmailNotiGroup = 7;
+}
+
+message MobilePushTimmingConfig {
+	int32 DelayTimeInMinutes = 2;
+}
+
+message EmailNotificationGroupingConfig {
+	int32 GroupTimeInMinutes = 1;
 }
 
 message NotificationConfig {
-	bool NewDirectMessage = 1;
-	bool SubizMaintainMessage = 2;
+	bool AllActivity = 1;
+	bool MaintainenceMessage = 2;
+	bool DirectMessage = 3;
+	bool News = 4; /* for mobile only */
+	bool Nothing = 5;
 }
+
 enum AvailableState {
 	Available = 0;
 	Away = 1;
@@ -279,4 +297,8 @@ message ListClientsResponse {
 
 message ListAgentsResponse {
 	repeated Agent Agents = 1;
+}
+
+message RegisterTokenExpiredEvent {
+	string Email = 1;
 }
