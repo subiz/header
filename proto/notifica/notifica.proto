@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package notifica;
+
+// Address boardcast domain like inbox
+// for example Agent A, Agent B, Account A
+//
+//Agent A will read all noti sent to domain (agent a) and domain (account a)
+
+message Notification {
+	string Address = 1;
+	string Content = 2;
+	string Id = 3;
+	string Type = 4;
+	string CTime = 5;
+}
+
+message Empty {}
+
+message ListRequest {
+	int32 Limit = 2;
+	int32 StartId = 3;
+	int32 ReaderId = 4;
+}
+
+message ListNotifications {
+	repeated Notification Notifications = 1;
+}
+
+message SeenRequest {
+	string NotificationId = 1;
+	string UserId = 3;
+}
+
+message SubscribeRequest {
+	string UserId = 1;
+	string Address = 2;
+}
+
+service notifica {
+	rpc Subscribe(SubscribeRequest) returns (Empty) {}
+	rpc Create(Notification) returns (Empty) {}
+	rpc List(ListRequest) returns (Notifications) {}
+	rpc Seen(SeenRequest) returns (Empty) {}
+	rpc Unseen(SeenRequest) returns (Empty) {}
+}
+
+// one address would have multiple subscriber
