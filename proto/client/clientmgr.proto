@@ -13,7 +13,10 @@ enum Error {
 }
 
 message Client {
+	// 128 bit string identification of the client.
 	string Id = 1;
+
+	// Secret used to authorize client with oauth2 server
 	string Secret = 2;
 	string LogoUrl = 3;
 	string AccountId = 4;
@@ -21,20 +24,37 @@ message Client {
 	string Description = 6;
 	string ShortDescription = 7;
 	bool IsVerified = 8;
+	// List of URLs which client must register to subiz
 	repeated string RedirectUrls = 9;
 	repeated string WebhookUrls = 10;
-	
+
 	enum ClientType {
 		APP = 0;
 		CHANNEL = 1;
 	}
 	ClientType Type = 11;
 	string Name = 12;
+
+	// Set if app is created or trusted by subiz,
+	// the client will have privilenge to do any action.
 	bool IsInternal = 13;
 
+	// Version number of the client.
 	string Version = 14;
+
+	// If this field setted to true, client is visible to any account, else,
+	// only visible in owner account.
 	bool IsPublic = 15;
+
+	// PublishDate, a RFC3339 date string show when have the client is
+	// published.
 	string PublishDate = 16;
+
+	// Clients capable of maintaining the confidentiality of their
+	// credentials (e.g., client implemented on a secure server with
+	// restricted access to the client credentials), or capable of secure
+	// client authentication using other means.
+	bool IsConfidential = 17;
 }
 
 message IdRequest {
