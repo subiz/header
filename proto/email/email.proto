@@ -7,21 +7,13 @@ message Email {
 	string To = 2;
 	string Subject = 3;
 	string Body = 4;
+	string JSONData = 5;
+	repeated string AttachLinks = 6;
 }
 
 message Empty {}
 
 service EmailSender {
 	rpc Send(Email) returns (Empty) {}
-}
-
-
-message FormatRequest {
-	Email EmailTemplate = 1;
-	string JSONData = 2;
-}
-
-service TemplateFormater {
-	rpc Format(FormatRequest) returns (Email) {}
 }
 
