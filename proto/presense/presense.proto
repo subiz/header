@@ -1,0 +1,20 @@
+
+syntax = "proto3";
+
+package presense;
+
+message UserId {
+	string Id = 1;
+}
+
+message Empty {}
+
+message Status {
+	bool Focusing = 1;
+}
+
+service PresenseMgr {
+	rpc Ping(UserId) returns (Empty) {}
+	rpc Bye(UserId) returns (Empty) {}
+	rpc IsFocusing(UserId) returns (Status) {}
+}

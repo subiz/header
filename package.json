@@ -1,0 +1,16 @@
+{
+  "name": "@subiz/servicespec",
+  "version": "1.0.1",
+  "description": "Service description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/subiz/servicespec.git"
+  },
+  "author": "Pham Kieu Thanh",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/subiz/servicespec#readme"
+}
