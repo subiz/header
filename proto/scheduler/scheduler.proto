@@ -10,7 +10,15 @@ message ScheduleItem {
 	bytes Data = 5;
 }
 
-message IdRequest {
+enum Error {
+	OK = 0;
+	NOTFOUND = 404;
+	INVALID_REQUEST = 400;
+	UNAUTHORIZED = 401;
+	INTERNAL_ERROR = 500;
+}
+
+message Id {
 	string Id = 1;
 }
 
@@ -21,7 +29,6 @@ message BrokerList {
 }
 
 service Scheduler {
-	rpc Registry(ScheduleItem) returns (Empty) {}
-	rpc Cancel(IdRequest) returns (Empty) {}
-	rpc GetBrokers(Empty) returns (BrokerList) {}
+	rpc Register(ScheduleItem) returns (Id) {}
+	rpc Cancel(Id) returns (Empty) {}
 }
