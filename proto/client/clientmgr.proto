@@ -55,6 +55,10 @@ message Client {
 	// restricted access to the client credentials), or capable of secure
 	// client authentication using other means.
 	bool IsConfidential = 17;
+
+	// Channel only, conversations on this channel will be close if there
+	// are no message pass in last ClosedTimeout seconds
+	int32 ClosedTimeout = 18;
 }
 
 message IdRequest {
