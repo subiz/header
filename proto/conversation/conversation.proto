@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package chat;
+
+// for get basic conversation info
+
+message Message {
+	string Id = 1;
+	repeated string SeenBy = 2;
+
+	
+}
+
+message User {
+	string UserId = 1;
+	String Name = 2;
+	String ChannelId = 3;
+}
+
+
+// get number of unread message
+
+message Chat {
+	string Id = 1;
+	string AccountId = 2;
+	string CTime = 3;
+	string LTime = 4;
+	string CloseTime = 5;
+	repeated User Users = 6;
+	bool IsClosed = 7;
+}
+
+enum ChatEventCategory {
+	Message = 0;
+	StartChat = 1;
+	CloseChat = 2;
+	Join = 3;
+	Leave = 4;
+	Seen = 5;
+	Rate = 6;
+	
+}
+
+message Attachment {
+	string Type = 1;
+	string Payload = 2; // Custome JSON data
+}
+
+message ChatEvent {
+	string Id = 1;
+	ConvoEventCategory Category = 1;
+	string ChatId = 2;
+	string SendTime = 3;
+	string From = 4;
+
+	// Text could be raw text, could be JSON data based on category
+	string Text = 5;
+	repeated Attachment Attachments = 6;
+}
+
+message Id {
+	string Id = 1;
+}
+
+message Empty {}
+
+message ChatRequest {
+	string AccountId = 1;
+	string UserId = 2;
+}
+
+message Chats {
+	repeated Chat Chats = 1;
+}
+
+message ListChatRequest {
+	string UserId = 1;
+	string AccountId = 2;
+	string LastId = 1;
+	string Limit = 2;
+}
+
+message ListGroupUsers {
+	string UserId = 1;
+	int32 Limit = 2;
+	string AccountId = 3;
+	string LastGroupUserId = 4;
+}
+
+message GroupUser {
+	string Id = 1;
+	repeated string UserIds = 2;
+}
+
+message GroupUsers {
+	repeated GroupUser GroupUsers = 1;
+}
+
+message ChatEvents {
+	repeated ChatEvent Events = 1;
+}
+
+message ListGroupUserRequest {
+	string AccountId = 1;
+	string UserId = 2;
+	string GroupId = 3;
+	string LastId = 4;
+	int32 Limit = 5;
+}
+
+message ListChatByGroupUser {
+	string AccountId = 1;
+	string UserId = 2;
+	string GroupId = 3;
+	int32 Limit = 4;
+	string LastId = 5;
+}
+
+
+service ChatMgr {
+
+	rpc GetOrCreateActiveChat(Id) returns (Chat) {}
+	
+	// Send KeepAlive message to extends live of a chat session
+	rpc Ping(Id) returns (Empty) {}
+	rpc SendIfActive(ChatEvent) returns (Id) {}
+	rpc Send(ChatEvent) returns (Id) {}
+}
+
+service ChatQuerier {
+
+	rpc GetOrCreateActiveChat(Id) returns (Chat) {}
+	
+	// Send KeepAlive message to extends live of a chat session
+	rpc Ping(Id) returns (Empty) {}
+	rpc SendIfActive(ChatEvent) returns (Id) {}
+	rpc Send(ChatEvent) returns (Id) {}
+
+	
+	//rpc ListEvent(Id) returns (ChatEvents) {}
+	
+	// List chats for specific user
+	rpc ListChatByUser(ListChatRequest) returns (Chats) {}
+	rpc ListChatByGroup(ListChatByGroupUser) returns (Chats) {}
+	
+	rpc ListGroupUser(ListGroupUserRequest) returns (GroupUsers) {}
+ 
+	rpc GetChat(Id) returns (Chat) {}
+	rpc RequestChat(ChatRequest) returns (Id) {}
+	rpc CreateChat(Chat) returns (Id) {}
+	rpc CloseChat(Id) returns (Empty) {}
+}
