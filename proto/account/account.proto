@@ -111,7 +111,7 @@ service AccAgentMgr {
 	// delete invitation invoke by agent
 	rpc AcceptInvitation(AcceptInvitationRequest) returns (Empty) {}
 	rpc UpdateProfile(AccountAgent) returns (Empty) {}
-	rpc Read(Id) returns (AccountAgent) {}
+	rpc Read(AccAgentId) returns (AccountAgent) {}
 	rpc Rate(RateRequest) returns (Empty) {}
 	rpc Config(AccAgentConfiguration) returns (Empty) {}
 	rpc UpdateAvailableState(UpdateAvailableStateRequest) returns (Empty) {}
