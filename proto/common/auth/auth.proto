@@ -91,6 +91,9 @@ message Method {
 	bool UpdateOthersAgentProfile = 102;
 	bool ReadAgentClient = 103;
 	bool ReadOthersAgentClient = 104;
+	bool ReadAgentNotification = 105;
+	bool SeenAgentNotification = 106;
+	
 	// accounts
 	bool ReadAccount = 120;
 	bool ListAccountClient = 121;
