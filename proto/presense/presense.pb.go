@@ -11,7 +11,7 @@ It is generated from these files:
 It has these top-level messages:
 	UserId
 	Empty
-	Status
+	LastFocusTime
 */
 package presense
 
@@ -59,26 +59,26 @@ func (m *Empty) String() string            { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
-type Status struct {
-	Focusing bool `protobuf:"varint,1,opt,name=Focusing,json=focusing" json:"Focusing,omitempty"`
+type LastFocusTime struct {
+	TimeSpan string `protobuf:"bytes,1,opt,name=TimeSpan,json=timeSpan" json:"TimeSpan,omitempty"`
 }
 
-func (m *Status) Reset()                    { *m = Status{} }
-func (m *Status) String() string            { return proto.CompactTextString(m) }
-func (*Status) ProtoMessage()               {}
-func (*Status) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (m *LastFocusTime) Reset()                    { *m = LastFocusTime{} }
+func (m *LastFocusTime) String() string            { return proto.CompactTextString(m) }
+func (*LastFocusTime) ProtoMessage()               {}
+func (*LastFocusTime) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
-func (m *Status) GetFocusing() bool {
+func (m *LastFocusTime) GetTimeSpan() string {
 	if m != nil {
-		return m.Focusing
+		return m.TimeSpan
 	}
-	return false
+	return ""
 }
 
 func init() {
 	proto.RegisterType((*UserId)(nil), "presense.UserId")
 	proto.RegisterType((*Empty)(nil), "presense.Empty")
-	proto.RegisterType((*Status)(nil), "presense.Status")
+	proto.RegisterType((*LastFocusTime)(nil), "presense.LastFocusTime")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -94,7 +94,7 @@ const _ = grpc.SupportPackageIsVersion4
 type PresenseMgrClient interface {
 	Ping(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
 	Bye(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
-	IsFocusing(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Status, error)
+	LastFocusingTime(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*LastFocusTime, error)
 }
 
 type presenseMgrClient struct {
@@ -123,9 +123,9 @@ func (c *presenseMgrClient) Bye(ctx context.Context, in *UserId, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *presenseMgrClient) IsFocusing(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Status, error) {
-	out := new(Status)
-	err := grpc.Invoke(ctx, "/presense.PresenseMgr/IsFocusing", in, out, c.cc, opts...)
+func (c *presenseMgrClient) LastFocusingTime(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*LastFocusTime, error) {
+	out := new(LastFocusTime)
+	err := grpc.Invoke(ctx, "/presense.PresenseMgr/LastFocusingTime", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +137,7 @@ func (c *presenseMgrClient) IsFocusing(ctx context.Context, in *UserId, opts ...
 type PresenseMgrServer interface {
 	Ping(context.Context, *UserId) (*Empty, error)
 	Bye(context.Context, *UserId) (*Empty, error)
-	IsFocusing(context.Context, *UserId) (*Status, error)
+	LastFocusingTime(context.Context, *UserId) (*LastFocusTime, error)
 }
 
 func RegisterPresenseMgrServer(s *grpc.Server, srv PresenseMgrServer) {
@@ -180,20 +180,20 @@ func _PresenseMgr_Bye_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PresenseMgr_IsFocusing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PresenseMgr_LastFocusingTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UserId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PresenseMgrServer).IsFocusing(ctx, in)
+		return srv.(PresenseMgrServer).LastFocusingTime(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/presense.PresenseMgr/IsFocusing",
+		FullMethod: "/presense.PresenseMgr/LastFocusingTime",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenseMgrServer).IsFocusing(ctx, req.(*UserId))
+		return srv.(PresenseMgrServer).LastFocusingTime(ctx, req.(*UserId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -211,8 +211,8 @@ var _PresenseMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _PresenseMgr_Bye_Handler,
 		},
 		{
-			MethodName: "IsFocusing",
-			Handler:    _PresenseMgr_IsFocusing_Handler,
+			MethodName: "LastFocusingTime",
+			Handler:    _PresenseMgr_LastFocusingTime_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -222,16 +222,17 @@ var _PresenseMgr_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("presense/presense.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 175 bytes of a gzipped FileDescriptorProto
+	// 182 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0x12, 0x2f, 0x28, 0x4a, 0x2d,
 	0x4e, 0xcd, 0x2b, 0x4e, 0xd5, 0x87, 0x31, 0xf4, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2, 0x85, 0x38, 0x60,
 	0x7c, 0x25, 0x09, 0x2e, 0xb6, 0xd0, 0xe2, 0xd4, 0x22, 0xcf, 0x14, 0x21, 0x3e, 0x2e, 0x26, 0xcf,
 	0x14, 0x09, 0x46, 0x05, 0x46, 0x0d, 0xce, 0x20, 0xa6, 0xcc, 0x14, 0x25, 0x76, 0x2e, 0x56, 0xd7,
-	0xdc, 0x82, 0x92, 0x4a, 0x25, 0x15, 0x2e, 0xb6, 0xe0, 0x92, 0xc4, 0x92, 0xd2, 0x62, 0x21, 0x29,
-	0x2e, 0x0e, 0xb7, 0xfc, 0xe4, 0xd2, 0xe2, 0xcc, 0xbc, 0x74, 0xb0, 0x42, 0x8e, 0x20, 0x8e, 0x34,
-	0x28, 0xdf, 0x68, 0x16, 0x23, 0x17, 0x77, 0x00, 0xd4, 0x54, 0xdf, 0xf4, 0x22, 0x21, 0x6d, 0x2e,
-	0x96, 0x80, 0xcc, 0xbc, 0x74, 0x21, 0x01, 0x3d, 0xb8, 0xdd, 0x10, 0x8b, 0xa4, 0xf8, 0x11, 0x22,
-	0x10, 0x0b, 0x18, 0x84, 0xb4, 0xb8, 0x98, 0x9d, 0x2a, 0x53, 0x89, 0x53, 0x6b, 0xc4, 0xc5, 0xe5,
-	0x59, 0x0c, 0x73, 0x06, 0x16, 0x2d, 0x48, 0x22, 0x10, 0x67, 0x2b, 0x31, 0x24, 0xb1, 0x81, 0xbd,
-	0x6d, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x7e, 0xbe, 0xaa, 0x48, 0x11, 0x01, 0x00, 0x00,
+	0xdc, 0x82, 0x92, 0x4a, 0x25, 0x6d, 0x2e, 0x5e, 0x9f, 0xc4, 0xe2, 0x12, 0xb7, 0xfc, 0xe4, 0xd2,
+	0xe2, 0x90, 0xcc, 0xdc, 0x54, 0x21, 0x29, 0x2e, 0x0e, 0x10, 0x1d, 0x5c, 0x90, 0x98, 0x07, 0x55,
+	0xcf, 0x51, 0x02, 0xe5, 0x1b, 0x2d, 0x67, 0xe4, 0xe2, 0x0e, 0x80, 0x1a, 0xee, 0x9b, 0x5e, 0x24,
+	0xa4, 0xcd, 0xc5, 0x12, 0x90, 0x99, 0x97, 0x2e, 0x24, 0xa0, 0x07, 0x77, 0x02, 0xc4, 0x3e, 0x29,
+	0x7e, 0x84, 0x08, 0xc4, 0x1e, 0x06, 0x21, 0x2d, 0x2e, 0x66, 0xa7, 0xca, 0x54, 0xe2, 0xd4, 0xda,
+	0x73, 0x09, 0xc0, 0x5d, 0x95, 0x99, 0x97, 0x0e, 0x76, 0x18, 0xa6, 0x46, 0x71, 0x84, 0x08, 0x8a,
+	0x1f, 0x94, 0x18, 0x92, 0xd8, 0xc0, 0x41, 0x61, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0x7a, 0xfc,
+	0x77, 0xa9, 0x25, 0x01, 0x00, 0x00,
 }
