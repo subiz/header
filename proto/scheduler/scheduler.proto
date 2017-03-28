@@ -8,6 +8,7 @@ message ScheduleItem {
 	string RunTime = 3;
 	string Topic = 4;
 	bytes Data = 5;
+	string Text = 6;
 }
 
 enum Error {
