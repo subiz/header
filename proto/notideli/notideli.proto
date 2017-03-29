@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package notideli;
+
+message Empty {}
+
+message Id {
+	string Id = 1;
+}
+
+message Token {
+	string Token = 1;
+	string UserId = 2;
+	string UserType = 3;
+	string ExpiredIn = 4;	
+	DeviceType DeviceType = 5;
+	string JSONData = 6;
+}
+
+enum DeviceType {
+	DESKTOP = 0;
+	MOBILE = 1;
+}
+
+
+message TokenRemoveRequest {
+	string Token = 1;
+}
+
+message Tokens {
+	repeated string Tokens = 1;
+}
+
+message NotiConfiguration {
+	string UserId = 1;
+	string Email = 2;
+	bool EmailNoti = 3;
+	bool DesktopNoti = 4;
+	bool MobileNoti = 5;
+	int32 MobilePushTimming = 6; // deplay time in seconds
+	
+	int32 EmailNotiGroup = 7; // send atmost 1 email at this minutes
+}
+
+service NotiDeli {
+	rpc RegisterToken(Token) returns (Empty) {}
+	rpc RemoveToken(TokenRemoveRequest) returns (Empty) {}
+	
+	rpc Config(NotiConfiguration) returns (Empty) {}
+	// pass in userid
+	rpc GetConfig(Id) returns (NotiConfiguration) {}
+}
+
+// Hiden interface: Kafka
+// set kafka broker and topic name
