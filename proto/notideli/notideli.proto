@@ -14,7 +14,7 @@ message Token {
 	string UserType = 3;
 	string ExpiredIn = 4;	
 	DeviceType DeviceType = 5;
-	string JSONData = 6;
+	//	string JSONData = 6;
 }
 
 enum DeviceType {
@@ -22,13 +22,9 @@ enum DeviceType {
 	MOBILE = 1;
 }
 
-
 message TokenRemoveRequest {
-	string Token = 1;
-}
-
-message Tokens {
-	repeated string Tokens = 1;
+	string UserId = 1;
+	string Token = 2;
 }
 
 message NotiConfiguration {
