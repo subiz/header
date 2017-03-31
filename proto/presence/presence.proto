@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package presense;
+package presence;
 
 message Id {
 	string Id = 1;
@@ -12,7 +12,7 @@ message LastFocusTime {
 	string TimeSpan = 1;
 }
 
-service PresenseMgr {
+service PresenceMgr {
 	rpc Ping(Id) returns (Empty) {}
 	rpc Bye(Id) returns (Empty) {}
 	rpc LastFocusingTime(Id) returns (LastFocusTime) {}
