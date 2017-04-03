@@ -9,14 +9,15 @@ It is generated from these files:
 	client/clientmgr.proto
 
 It has these top-level messages:
-	EmptyResponse
+	Empty
+	Id
 	Client
-	IdRequest
-	SecretResponse
+	Secret
 	ListClientsRequest
-	ListClientsResponse
+	Clients
 	BoolValueRequest
-	ClientCreateResponse
+	Registration
+	Registrations
 	ClientCreatedEvent
 	ClientDeletedEvent
 	ClientUpdatedEvent
@@ -128,23 +129,40 @@ var Client_ClientType_value = map[string]int32{
 func (x Client_ClientType) String() string {
 	return proto.EnumName(Client_ClientType_name, int32(x))
 }
-func (Client_ClientType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{1, 0} }
+func (Client_ClientType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{2, 0} }
 
-type EmptyResponse struct {
+type Empty struct {
 }
 
-func (m *EmptyResponse) Reset()                    { *m = EmptyResponse{} }
-func (m *EmptyResponse) String() string            { return proto.CompactTextString(m) }
-func (*EmptyResponse) ProtoMessage()               {}
-func (*EmptyResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (m *Empty) Reset()                    { *m = Empty{} }
+func (m *Empty) String() string            { return proto.CompactTextString(m) }
+func (*Empty) ProtoMessage()               {}
+func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
+type Id struct {
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+}
+
+func (m *Id) Reset()                    { *m = Id{} }
+func (m *Id) String() string            { return proto.CompactTextString(m) }
+func (*Id) ProtoMessage()               {}
+func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *Id) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
 
 type Client struct {
 	// 128 bit string identification of the client.
 	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
 	// Secret used to authorize client with oauth2 server
-	Secret           string `protobuf:"bytes,2,opt,name=Secret,json=secret" json:"Secret,omitempty"`
-	LogoUrl          string `protobuf:"bytes,3,opt,name=LogoUrl,json=logoUrl" json:"LogoUrl,omitempty"`
-	AccountId        string `protobuf:"bytes,4,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	Secret  string `protobuf:"bytes,2,opt,name=Secret,json=secret" json:"Secret,omitempty"`
+	LogoUrl string `protobuf:"bytes,3,opt,name=LogoUrl,json=logoUrl" json:"LogoUrl,omitempty"`
+	// owner id, could be Account or Agent
+	OwnerId          string `protobuf:"bytes,4,opt,name=OwnerId,json=ownerId" json:"OwnerId,omitempty"`
 	ContactEmail     string `protobuf:"bytes,5,opt,name=ContactEmail,json=contactEmail" json:"ContactEmail,omitempty"`
 	Description      string `protobuf:"bytes,6,opt,name=Description,json=description" json:"Description,omitempty"`
 	ShortDescription string `protobuf:"bytes,7,opt,name=ShortDescription,json=shortDescription" json:"ShortDescription,omitempty"`
@@ -178,7 +196,7 @@ type Client struct {
 func (m *Client) Reset()                    { *m = Client{} }
 func (m *Client) String() string            { return proto.CompactTextString(m) }
 func (*Client) ProtoMessage()               {}
-func (*Client) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (*Client) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 func (m *Client) GetId() string {
 	if m != nil {
@@ -201,9 +219,9 @@ func (m *Client) GetLogoUrl() string {
 	return ""
 }
 
-func (m *Client) GetAccountId() string {
+func (m *Client) GetOwnerId() string {
 	if m != nil {
-		return m.AccountId
+		return m.OwnerId
 	}
 	return ""
 }
@@ -306,32 +324,16 @@ func (m *Client) GetClosedTimeout() int32 {
 	return 0
 }
 
-type IdRequest struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-}
-
-func (m *IdRequest) Reset()                    { *m = IdRequest{} }
-func (m *IdRequest) String() string            { return proto.CompactTextString(m) }
-func (*IdRequest) ProtoMessage()               {}
-func (*IdRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
-
-func (m *IdRequest) GetId() string {
-	if m != nil {
-		return m.Id
-	}
-	return ""
-}
-
-type SecretResponse struct {
+type Secret struct {
 	Secret string `protobuf:"bytes,1,opt,name=Secret,json=secret" json:"Secret,omitempty"`
 }
 
-func (m *SecretResponse) Reset()                    { *m = SecretResponse{} }
-func (m *SecretResponse) String() string            { return proto.CompactTextString(m) }
-func (*SecretResponse) ProtoMessage()               {}
-func (*SecretResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (m *Secret) Reset()                    { *m = Secret{} }
+func (m *Secret) String() string            { return proto.CompactTextString(m) }
+func (*Secret) ProtoMessage()               {}
+func (*Secret) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
-func (m *SecretResponse) GetSecret() string {
+func (m *Secret) GetSecret() string {
 	if m != nil {
 		return m.Secret
 	}
@@ -339,10 +341,10 @@ func (m *SecretResponse) GetSecret() string {
 }
 
 type ListClientsRequest struct {
-	StartId   string `protobuf:"bytes,1,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Keyword   string `protobuf:"bytes,2,opt,name=Keyword,json=keyword" json:"Keyword,omitempty"`
-	Limit     int32  `protobuf:"varint,3,opt,name=Limit,json=limit" json:"Limit,omitempty"`
-	AccountId string `protobuf:"bytes,4,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	OwnerId string `protobuf:"bytes,1,opt,name=OwnerId,json=ownerId" json:"OwnerId,omitempty"`
+	Keyword string `protobuf:"bytes,2,opt,name=Keyword,json=keyword" json:"Keyword,omitempty"`
+	StartId string `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId,omitempty"`
+	Limit   int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit,omitempty"`
 }
 
 func (m *ListClientsRequest) Reset()                    { *m = ListClientsRequest{} }
@@ -350,9 +352,9 @@ func (m *ListClientsRequest) String() string            { return proto.CompactTe
 func (*ListClientsRequest) ProtoMessage()               {}
 func (*ListClientsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
-func (m *ListClientsRequest) GetStartId() string {
+func (m *ListClientsRequest) GetOwnerId() string {
 	if m != nil {
-		return m.StartId
+		return m.OwnerId
 	}
 	return ""
 }
@@ -364,6 +366,13 @@ func (m *ListClientsRequest) GetKeyword() string {
 	return ""
 }
 
+func (m *ListClientsRequest) GetStartId() string {
+	if m != nil {
+		return m.StartId
+	}
+	return ""
+}
+
 func (m *ListClientsRequest) GetLimit() int32 {
 	if m != nil {
 		return m.Limit
@@ -371,23 +380,16 @@ func (m *ListClientsRequest) GetLimit() int32 {
 	return 0
 }
 
-func (m *ListClientsRequest) GetAccountId() string {
-	if m != nil {
-		return m.AccountId
-	}
-	return ""
-}
-
-type ListClientsResponse struct {
+type Clients struct {
 	Clients []*Client `protobuf:"bytes,3,rep,name=Clients,json=clients" json:"Clients,omitempty"`
 }
 
-func (m *ListClientsResponse) Reset()                    { *m = ListClientsResponse{} }
-func (m *ListClientsResponse) String() string            { return proto.CompactTextString(m) }
-func (*ListClientsResponse) ProtoMessage()               {}
-func (*ListClientsResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (m *Clients) Reset()                    { *m = Clients{} }
+func (m *Clients) String() string            { return proto.CompactTextString(m) }
+func (*Clients) ProtoMessage()               {}
+func (*Clients) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
-func (m *ListClientsResponse) GetClients() []*Client {
+func (m *Clients) GetClients() []*Client {
 	if m != nil {
 		return m.Clients
 	}
@@ -418,20 +420,68 @@ func (m *BoolValueRequest) GetValue() bool {
 	return false
 }
 
-type ClientCreateResponse struct {
-	Id string `protobuf:"bytes,2,opt,name=Id,json=id" json:"Id,omitempty"`
+type Registration struct {
+	UserId       string  `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId,omitempty"`
+	ClientId     string  `protobuf:"bytes,2,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
+	InvalidScope bool    `protobuf:"varint,3,opt,name=InvalidScope,json=invalidScope" json:"InvalidScope,omitempty"`
+	RegisterDate string  `protobuf:"bytes,4,opt,name=RegisterDate,json=registerDate" json:"RegisterDate,omitempty"`
+	ScopeIds     []int32 `protobuf:"varint,5,rep,packed,name=ScopeIds,json=scopeIds" json:"ScopeIds,omitempty"`
 }
 
-func (m *ClientCreateResponse) Reset()                    { *m = ClientCreateResponse{} }
-func (m *ClientCreateResponse) String() string            { return proto.CompactTextString(m) }
-func (*ClientCreateResponse) ProtoMessage()               {}
-func (*ClientCreateResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (m *Registration) Reset()                    { *m = Registration{} }
+func (m *Registration) String() string            { return proto.CompactTextString(m) }
+func (*Registration) ProtoMessage()               {}
+func (*Registration) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
 
-func (m *ClientCreateResponse) GetId() string {
+func (m *Registration) GetUserId() string {
 	if m != nil {
-		return m.Id
+		return m.UserId
 	}
 	return ""
+}
+
+func (m *Registration) GetClientId() string {
+	if m != nil {
+		return m.ClientId
+	}
+	return ""
+}
+
+func (m *Registration) GetInvalidScope() bool {
+	if m != nil {
+		return m.InvalidScope
+	}
+	return false
+}
+
+func (m *Registration) GetRegisterDate() string {
+	if m != nil {
+		return m.RegisterDate
+	}
+	return ""
+}
+
+func (m *Registration) GetScopeIds() []int32 {
+	if m != nil {
+		return m.ScopeIds
+	}
+	return nil
+}
+
+type Registrations struct {
+	Registraions []*Registration `protobuf:"bytes,1,rep,name=Registraions,json=registraions" json:"Registraions,omitempty"`
+}
+
+func (m *Registrations) Reset()                    { *m = Registrations{} }
+func (m *Registrations) String() string            { return proto.CompactTextString(m) }
+func (*Registrations) ProtoMessage()               {}
+func (*Registrations) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+
+func (m *Registrations) GetRegistraions() []*Registration {
+	if m != nil {
+		return m.Registraions
+	}
+	return nil
 }
 
 type ClientCreatedEvent struct {
@@ -441,7 +491,7 @@ type ClientCreatedEvent struct {
 func (m *ClientCreatedEvent) Reset()                    { *m = ClientCreatedEvent{} }
 func (m *ClientCreatedEvent) String() string            { return proto.CompactTextString(m) }
 func (*ClientCreatedEvent) ProtoMessage()               {}
-func (*ClientCreatedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+func (*ClientCreatedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
 
 func (m *ClientCreatedEvent) GetClient() *Client {
 	if m != nil {
@@ -457,7 +507,7 @@ type ClientDeletedEvent struct {
 func (m *ClientDeletedEvent) Reset()                    { *m = ClientDeletedEvent{} }
 func (m *ClientDeletedEvent) String() string            { return proto.CompactTextString(m) }
 func (*ClientDeletedEvent) ProtoMessage()               {}
-func (*ClientDeletedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+func (*ClientDeletedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
 
 func (m *ClientDeletedEvent) GetId() string {
 	if m != nil {
@@ -473,7 +523,7 @@ type ClientUpdatedEvent struct {
 func (m *ClientUpdatedEvent) Reset()                    { *m = ClientUpdatedEvent{} }
 func (m *ClientUpdatedEvent) String() string            { return proto.CompactTextString(m) }
 func (*ClientUpdatedEvent) ProtoMessage()               {}
-func (*ClientUpdatedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+func (*ClientUpdatedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
 
 func (m *ClientUpdatedEvent) GetClient() *Client {
 	if m != nil {
@@ -490,7 +540,7 @@ type ClientPublishedEvent struct {
 func (m *ClientPublishedEvent) Reset()                    { *m = ClientPublishedEvent{} }
 func (m *ClientPublishedEvent) String() string            { return proto.CompactTextString(m) }
 func (*ClientPublishedEvent) ProtoMessage()               {}
-func (*ClientPublishedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
+func (*ClientPublishedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
 
 func (m *ClientPublishedEvent) GetId() string {
 	if m != nil {
@@ -514,7 +564,7 @@ type ClientVerifiedEvent struct {
 func (m *ClientVerifiedEvent) Reset()                    { *m = ClientVerifiedEvent{} }
 func (m *ClientVerifiedEvent) String() string            { return proto.CompactTextString(m) }
 func (*ClientVerifiedEvent) ProtoMessage()               {}
-func (*ClientVerifiedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
+func (*ClientVerifiedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
 
 func (m *ClientVerifiedEvent) GetId() string {
 	if m != nil {
@@ -538,7 +588,7 @@ type ClientUpdatedSecretEvent struct {
 func (m *ClientUpdatedSecretEvent) Reset()                    { *m = ClientUpdatedSecretEvent{} }
 func (m *ClientUpdatedSecretEvent) String() string            { return proto.CompactTextString(m) }
 func (*ClientUpdatedSecretEvent) ProtoMessage()               {}
-func (*ClientUpdatedSecretEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
+func (*ClientUpdatedSecretEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
 
 func (m *ClientUpdatedSecretEvent) GetId() string {
 	if m != nil {
@@ -555,14 +605,15 @@ func (m *ClientUpdatedSecretEvent) GetSecret() string {
 }
 
 func init() {
-	proto.RegisterType((*EmptyResponse)(nil), "client.EmptyResponse")
+	proto.RegisterType((*Empty)(nil), "client.Empty")
+	proto.RegisterType((*Id)(nil), "client.Id")
 	proto.RegisterType((*Client)(nil), "client.Client")
-	proto.RegisterType((*IdRequest)(nil), "client.IdRequest")
-	proto.RegisterType((*SecretResponse)(nil), "client.SecretResponse")
+	proto.RegisterType((*Secret)(nil), "client.Secret")
 	proto.RegisterType((*ListClientsRequest)(nil), "client.ListClientsRequest")
-	proto.RegisterType((*ListClientsResponse)(nil), "client.ListClientsResponse")
+	proto.RegisterType((*Clients)(nil), "client.Clients")
 	proto.RegisterType((*BoolValueRequest)(nil), "client.BoolValueRequest")
-	proto.RegisterType((*ClientCreateResponse)(nil), "client.ClientCreateResponse")
+	proto.RegisterType((*Registration)(nil), "client.Registration")
+	proto.RegisterType((*Registrations)(nil), "client.Registrations")
 	proto.RegisterType((*ClientCreatedEvent)(nil), "client.ClientCreatedEvent")
 	proto.RegisterType((*ClientDeletedEvent)(nil), "client.ClientDeletedEvent")
 	proto.RegisterType((*ClientUpdatedEvent)(nil), "client.ClientUpdatedEvent")
@@ -585,14 +636,17 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for ClientMgt service
 
 type ClientMgtClient interface {
-	Create(ctx context.Context, in *Client, opts ...grpc.CallOption) (*ClientCreateResponse, error)
-	Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Client, error)
-	List(ctx context.Context, in *ListClientsRequest, opts ...grpc.CallOption) (*ListClientsResponse, error)
-	Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Update(ctx context.Context, in *Client, opts ...grpc.CallOption) (*EmptyResponse, error)
-	UpdateSecret(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*SecretResponse, error)
-	Verify(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
-	Publish(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*EmptyResponse, error)
+	Create(ctx context.Context, in *Client, opts ...grpc.CallOption) (*Id, error)
+	Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Client, error)
+	List(ctx context.Context, in *ListClientsRequest, opts ...grpc.CallOption) (*Clients, error)
+	Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	Update(ctx context.Context, in *Client, opts ...grpc.CallOption) (*Empty, error)
+	GenerateSecret(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Secret, error)
+	Verify(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*Empty, error)
+	Publish(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*Empty, error)
+	Authorize(ctx context.Context, in *Registration, opts ...grpc.CallOption) (*Empty, error)
+	Revoke(ctx context.Context, in *Registration, opts ...grpc.CallOption) (*Empty, error)
+	ListRegistrations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Registrations, error)
 }
 
 type clientMgtClient struct {
@@ -603,8 +657,8 @@ func NewClientMgtClient(cc *grpc.ClientConn) ClientMgtClient {
 	return &clientMgtClient{cc}
 }
 
-func (c *clientMgtClient) Create(ctx context.Context, in *Client, opts ...grpc.CallOption) (*ClientCreateResponse, error) {
-	out := new(ClientCreateResponse)
+func (c *clientMgtClient) Create(ctx context.Context, in *Client, opts ...grpc.CallOption) (*Id, error) {
+	out := new(Id)
 	err := grpc.Invoke(ctx, "/client.ClientMgt/Create", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -612,7 +666,7 @@ func (c *clientMgtClient) Create(ctx context.Context, in *Client, opts ...grpc.C
 	return out, nil
 }
 
-func (c *clientMgtClient) Read(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*Client, error) {
+func (c *clientMgtClient) Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Client, error) {
 	out := new(Client)
 	err := grpc.Invoke(ctx, "/client.ClientMgt/Read", in, out, c.cc, opts...)
 	if err != nil {
@@ -621,8 +675,8 @@ func (c *clientMgtClient) Read(ctx context.Context, in *IdRequest, opts ...grpc.
 	return out, nil
 }
 
-func (c *clientMgtClient) List(ctx context.Context, in *ListClientsRequest, opts ...grpc.CallOption) (*ListClientsResponse, error) {
-	out := new(ListClientsResponse)
+func (c *clientMgtClient) List(ctx context.Context, in *ListClientsRequest, opts ...grpc.CallOption) (*Clients, error) {
+	out := new(Clients)
 	err := grpc.Invoke(ctx, "/client.ClientMgt/List", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -630,8 +684,8 @@ func (c *clientMgtClient) List(ctx context.Context, in *ListClientsRequest, opts
 	return out, nil
 }
 
-func (c *clientMgtClient) Delete(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *clientMgtClient) Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := grpc.Invoke(ctx, "/client.ClientMgt/Delete", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -639,8 +693,8 @@ func (c *clientMgtClient) Delete(ctx context.Context, in *IdRequest, opts ...grp
 	return out, nil
 }
 
-func (c *clientMgtClient) Update(ctx context.Context, in *Client, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *clientMgtClient) Update(ctx context.Context, in *Client, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := grpc.Invoke(ctx, "/client.ClientMgt/Update", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -648,17 +702,17 @@ func (c *clientMgtClient) Update(ctx context.Context, in *Client, opts ...grpc.C
 	return out, nil
 }
 
-func (c *clientMgtClient) UpdateSecret(ctx context.Context, in *IdRequest, opts ...grpc.CallOption) (*SecretResponse, error) {
-	out := new(SecretResponse)
-	err := grpc.Invoke(ctx, "/client.ClientMgt/UpdateSecret", in, out, c.cc, opts...)
+func (c *clientMgtClient) GenerateSecret(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Secret, error) {
+	out := new(Secret)
+	err := grpc.Invoke(ctx, "/client.ClientMgt/GenerateSecret", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *clientMgtClient) Verify(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *clientMgtClient) Verify(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := grpc.Invoke(ctx, "/client.ClientMgt/Verify", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -666,9 +720,36 @@ func (c *clientMgtClient) Verify(ctx context.Context, in *BoolValueRequest, opts
 	return out, nil
 }
 
-func (c *clientMgtClient) Publish(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*EmptyResponse, error) {
-	out := new(EmptyResponse)
+func (c *clientMgtClient) Publish(ctx context.Context, in *BoolValueRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := grpc.Invoke(ctx, "/client.ClientMgt/Publish", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgtClient) Authorize(ctx context.Context, in *Registration, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := grpc.Invoke(ctx, "/client.ClientMgt/Authorize", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgtClient) Revoke(ctx context.Context, in *Registration, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := grpc.Invoke(ctx, "/client.ClientMgt/Revoke", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgtClient) ListRegistrations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Registrations, error) {
+	out := new(Registrations)
+	err := grpc.Invoke(ctx, "/client.ClientMgt/ListRegistrations", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -678,14 +759,17 @@ func (c *clientMgtClient) Publish(ctx context.Context, in *BoolValueRequest, opt
 // Server API for ClientMgt service
 
 type ClientMgtServer interface {
-	Create(context.Context, *Client) (*ClientCreateResponse, error)
-	Read(context.Context, *IdRequest) (*Client, error)
-	List(context.Context, *ListClientsRequest) (*ListClientsResponse, error)
-	Delete(context.Context, *IdRequest) (*EmptyResponse, error)
-	Update(context.Context, *Client) (*EmptyResponse, error)
-	UpdateSecret(context.Context, *IdRequest) (*SecretResponse, error)
-	Verify(context.Context, *BoolValueRequest) (*EmptyResponse, error)
-	Publish(context.Context, *BoolValueRequest) (*EmptyResponse, error)
+	Create(context.Context, *Client) (*Id, error)
+	Read(context.Context, *Id) (*Client, error)
+	List(context.Context, *ListClientsRequest) (*Clients, error)
+	Delete(context.Context, *Id) (*Empty, error)
+	Update(context.Context, *Client) (*Empty, error)
+	GenerateSecret(context.Context, *Id) (*Secret, error)
+	Verify(context.Context, *BoolValueRequest) (*Empty, error)
+	Publish(context.Context, *BoolValueRequest) (*Empty, error)
+	Authorize(context.Context, *Registration) (*Empty, error)
+	Revoke(context.Context, *Registration) (*Empty, error)
+	ListRegistrations(context.Context, *Id) (*Registrations, error)
 }
 
 func RegisterClientMgtServer(s *grpc.Server, srv ClientMgtServer) {
@@ -711,7 +795,7 @@ func _ClientMgt_Create_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 func _ClientMgt_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IdRequest)
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -723,7 +807,7 @@ func _ClientMgt_Read_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: "/client.ClientMgt/Read",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientMgtServer).Read(ctx, req.(*IdRequest))
+		return srv.(ClientMgtServer).Read(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -747,7 +831,7 @@ func _ClientMgt_List_Handler(srv interface{}, ctx context.Context, dec func(inte
 }
 
 func _ClientMgt_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IdRequest)
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -759,7 +843,7 @@ func _ClientMgt_Delete_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/client.ClientMgt/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientMgtServer).Delete(ctx, req.(*IdRequest))
+		return srv.(ClientMgtServer).Delete(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -782,20 +866,20 @@ func _ClientMgt_Update_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ClientMgt_UpdateSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(IdRequest)
+func _ClientMgt_GenerateSecret_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ClientMgtServer).UpdateSecret(ctx, in)
+		return srv.(ClientMgtServer).GenerateSecret(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/client.ClientMgt/UpdateSecret",
+		FullMethod: "/client.ClientMgt/GenerateSecret",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClientMgtServer).UpdateSecret(ctx, req.(*IdRequest))
+		return srv.(ClientMgtServer).GenerateSecret(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -836,6 +920,60 @@ func _ClientMgt_Publish_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ClientMgt_Authorize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Registration)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgtServer).Authorize(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/client.ClientMgt/Authorize",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgtServer).Authorize(ctx, req.(*Registration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgt_Revoke_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Registration)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgtServer).Revoke(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/client.ClientMgt/Revoke",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgtServer).Revoke(ctx, req.(*Registration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgt_ListRegistrations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgtServer).ListRegistrations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/client.ClientMgt/ListRegistrations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgtServer).ListRegistrations(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ClientMgt_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "client.ClientMgt",
 	HandlerType: (*ClientMgtServer)(nil),
@@ -861,8 +999,8 @@ var _ClientMgt_serviceDesc = grpc.ServiceDesc{
 			Handler:    _ClientMgt_Update_Handler,
 		},
 		{
-			MethodName: "UpdateSecret",
-			Handler:    _ClientMgt_UpdateSecret_Handler,
+			MethodName: "GenerateSecret",
+			Handler:    _ClientMgt_GenerateSecret_Handler,
 		},
 		{
 			MethodName: "Verify",
@@ -872,6 +1010,18 @@ var _ClientMgt_serviceDesc = grpc.ServiceDesc{
 			MethodName: "Publish",
 			Handler:    _ClientMgt_Publish_Handler,
 		},
+		{
+			MethodName: "Authorize",
+			Handler:    _ClientMgt_Authorize_Handler,
+		},
+		{
+			MethodName: "Revoke",
+			Handler:    _ClientMgt_Revoke_Handler,
+		},
+		{
+			MethodName: "ListRegistrations",
+			Handler:    _ClientMgt_ListRegistrations_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "client/clientmgr.proto",
@@ -880,65 +1030,72 @@ var _ClientMgt_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("client/clientmgr.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 957 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x9c, 0x56, 0xdd, 0x6a, 0xe3, 0x46,
-	0x14, 0xb6, 0x2d, 0x5b, 0xb2, 0x8f, 0x13, 0x47, 0x99, 0x64, 0xc3, 0xac, 0x77, 0x59, 0x8c, 0x58,
-	0x82, 0x49, 0x69, 0x4a, 0xd3, 0x5e, 0x2c, 0x74, 0xa1, 0x38, 0xd6, 0x2c, 0x11, 0xeb, 0x2a, 0xe9,
-	0xf8, 0xa7, 0x50, 0x0a, 0x41, 0x91, 0x66, 0x13, 0xb1, 0xb2, 0xe4, 0x4a, 0xe3, 0x2c, 0x86, 0x3e,
-	0x44, 0x0b, 0x7d, 0x8c, 0x3e, 0x4f, 0xdf, 0xa2, 0x77, 0x7d, 0x80, 0xa2, 0x19, 0x4b, 0xb1, 0xfc,
-	0x53, 0x68, 0xaf, 0x26, 0xe7, 0xfb, 0xce, 0xdf, 0x1c, 0x7d, 0x73, 0x62, 0x38, 0x71, 0x03, 0x9f,
-	0x85, 0xfc, 0x0b, 0x79, 0x4c, 0xef, 0xe3, 0xf3, 0x59, 0x1c, 0xf1, 0x08, 0xa9, 0x12, 0x30, 0x0e,
-	0x60, 0x9f, 0x4c, 0x67, 0x7c, 0x41, 0x59, 0x32, 0x8b, 0xc2, 0x84, 0x19, 0x7f, 0x55, 0x41, 0xed,
-	0x0b, 0x0e, 0xb5, 0xa0, 0x62, 0x79, 0xb8, 0xdc, 0x29, 0x77, 0x1b, 0xb4, 0xe2, 0x7b, 0xe8, 0x04,
-	0xd4, 0x21, 0x73, 0x63, 0xc6, 0x71, 0x45, 0x60, 0x6a, 0x22, 0x2c, 0x84, 0x41, 0x1b, 0x44, 0xf7,
-	0xd1, 0x38, 0x0e, 0xb0, 0x22, 0x08, 0x2d, 0x90, 0x26, 0x7a, 0x09, 0x8d, 0x9e, 0xeb, 0x46, 0xf3,
-	0x90, 0x5b, 0x1e, 0xae, 0x0a, 0xae, 0xe1, 0x64, 0x00, 0x32, 0x60, 0xaf, 0x1f, 0x85, 0xdc, 0x71,
-	0x39, 0x99, 0x3a, 0x7e, 0x80, 0x6b, 0xc2, 0x61, 0xcf, 0x5d, 0xc1, 0x50, 0x07, 0x9a, 0x26, 0x4b,
-	0xdc, 0xd8, 0x9f, 0x71, 0x3f, 0x0a, 0xb1, 0x2a, 0x5c, 0x9a, 0xde, 0x13, 0x84, 0xce, 0x40, 0x1f,
-	0x3e, 0x44, 0x31, 0x5f, 0x75, 0xd3, 0x84, 0x9b, 0x9e, 0xac, 0xe1, 0xe8, 0x15, 0x80, 0x95, 0x4c,
-	0x58, 0xec, 0x7f, 0xf0, 0x99, 0x87, 0xeb, 0x9d, 0x72, 0xb7, 0x4e, 0xc1, 0xcf, 0x91, 0xb4, 0x23,
-	0xca, 0x3c, 0x3f, 0x66, 0x2e, 0x1f, 0xc7, 0x41, 0x82, 0x1b, 0x1d, 0x25, 0xed, 0x28, 0x5e, 0xc1,
-	0xd2, 0x8e, 0x7e, 0x60, 0x77, 0x0f, 0x51, 0xf4, 0x51, 0xb8, 0x80, 0x70, 0x69, 0x7e, 0x7a, 0x82,
-	0xd0, 0xe7, 0x50, 0x1d, 0x2d, 0x66, 0x0c, 0x37, 0x3b, 0xe5, 0x6e, 0xeb, 0xe2, 0xf9, 0xb9, 0x1c,
-	0xf5, 0x79, 0x7f, 0xf5, 0x48, 0x1d, 0x68, 0x95, 0x2f, 0x66, 0x0c, 0x21, 0xa8, 0xda, 0xce, 0x94,
-	0xe1, 0x3d, 0xd1, 0x74, 0x35, 0x74, 0xa6, 0x4c, 0x36, 0x6a, 0x85, 0x9c, 0xc5, 0xa1, 0x13, 0xe0,
-	0xfd, 0xac, 0xd1, 0x0c, 0x49, 0x47, 0x3e, 0x61, 0x71, 0x92, 0xde, 0xb5, 0x25, 0x47, 0xfe, 0x28,
-	0x4d, 0xd4, 0x86, 0xba, 0x95, 0xdc, 0xcc, 0xef, 0x02, 0xdf, 0xc5, 0x07, 0x22, 0xae, 0xee, 0x2f,
-	0xed, 0xb4, 0x75, 0xf1, 0x57, 0xf2, 0x60, 0x3a, 0x9c, 0x61, 0x5d, 0x0e, 0x73, 0xf6, 0x04, 0xa1,
-	0x53, 0x68, 0x59, 0x49, 0x3f, 0x0a, 0x3f, 0xf8, 0x1e, 0x0b, 0xb9, 0xef, 0x04, 0xf8, 0x50, 0xe4,
-	0x68, 0xf9, 0x05, 0x14, 0xbd, 0x86, 0xfd, 0x7e, 0x10, 0x25, 0xcc, 0x1b, 0xf9, 0x53, 0x16, 0xcd,
-	0x39, 0x46, 0x9d, 0x72, 0xb7, 0x46, 0xf7, 0xdd, 0x55, 0xd0, 0x30, 0x00, 0x9e, 0x6e, 0x8b, 0x34,
-	0x50, 0x7a, 0x37, 0x37, 0x7a, 0x09, 0x35, 0x41, 0xeb, 0x5f, 0xf5, 0x6c, 0x9b, 0x0c, 0xf4, 0xb2,
-	0xf1, 0x02, 0x1a, 0x96, 0x47, 0xd9, 0xcf, 0x73, 0x96, 0x6c, 0x28, 0xce, 0xe8, 0x42, 0x4b, 0x2a,
-	0x2e, 0x93, 0xe7, 0x8a, 0x06, 0xcb, 0xab, 0x1a, 0x34, 0x7e, 0x01, 0x34, 0xf0, 0x13, 0x2e, 0xcb,
-	0x25, 0x59, 0x3e, 0x0c, 0xda, 0x90, 0x3b, 0x31, 0xcf, 0x93, 0x6a, 0x89, 0x34, 0x53, 0xe6, 0x3d,
-	0x5b, 0x7c, 0x8a, 0x62, 0x6f, 0x29, 0x66, 0xed, 0xa3, 0x34, 0xd1, 0x31, 0xd4, 0x06, 0xfe, 0xd4,
-	0xe7, 0x42, 0xcb, 0x35, 0x5a, 0x0b, 0x52, 0xe3, 0xdf, 0x95, 0x6c, 0x7c, 0x0b, 0x47, 0x85, 0xea,
-	0xcb, 0x66, 0xbb, 0xa0, 0x2d, 0x21, 0xac, 0x74, 0x94, 0x6e, 0xf3, 0xa2, 0x55, 0xd4, 0x02, 0xd5,
-	0xa4, 0x99, 0x18, 0x6f, 0x40, 0xbf, 0x8c, 0xa2, 0x60, 0xe2, 0x04, 0x73, 0xb6, 0x63, 0x18, 0x69,
-	0x63, 0x82, 0x17, 0x0d, 0xd7, 0x69, 0xed, 0x31, 0x35, 0x8c, 0x53, 0x38, 0x96, 0xc9, 0xfa, 0x31,
-	0x73, 0x38, 0xcb, 0x6b, 0xcb, 0xe8, 0x4a, 0x3e, 0xca, 0xb7, 0x80, 0x56, 0xfd, 0x3c, 0xf2, 0x98,
-	0x3e, 0xf1, 0xd3, 0xec, 0xb1, 0x8b, 0x3a, 0x9b, 0x0d, 0x66, 0x6b, 0xe2, 0x75, 0x16, 0x6d, 0xb2,
-	0x80, 0xe5, 0xd1, 0xeb, 0x9f, 0x2b, 0xaf, 0x31, 0x9e, 0x79, 0xff, 0xbd, 0x86, 0x99, 0xdd, 0x64,
-	0xa9, 0xd1, 0x1d, 0x55, 0xd2, 0x4f, 0x91, 0x7b, 0x2c, 0x67, 0xd1, 0x98, 0x65, 0x80, 0xd1, 0x83,
-	0x23, 0x99, 0x25, 0x7b, 0xd4, 0xdb, 0x93, 0xb4, 0xa1, 0x9e, 0xef, 0x01, 0x99, 0xa3, 0xfe, 0xb8,
-	0xb4, 0x8d, 0x4b, 0xc0, 0x85, 0x6b, 0x48, 0xc1, 0x6d, 0xcf, 0xb3, 0x63, 0x27, 0x9e, 0xfd, 0x04,
-	0x35, 0x12, 0xc7, 0x51, 0x8c, 0x54, 0xa8, 0x5c, 0xbf, 0xd7, 0x4b, 0x68, 0x1f, 0xea, 0xf6, 0xf5,
-	0xe8, 0xdd, 0xf5, 0xd8, 0x36, 0xf5, 0xdf, 0x15, 0x74, 0x0c, 0x07, 0x96, 0x3d, 0xe9, 0x0d, 0x2c,
-	0xf3, 0x96, 0x92, 0xef, 0xc7, 0x64, 0x38, 0xd2, 0x7f, 0x55, 0xd0, 0x21, 0xec, 0x8d, 0xed, 0xde,
-	0x78, 0x74, 0x75, 0x4d, 0xad, 0x1f, 0x89, 0xa9, 0xff, 0xa6, 0xa0, 0x23, 0x68, 0x59, 0xf6, 0x88,
-	0x50, 0xbb, 0x37, 0xb8, 0x25, 0x94, 0x5e, 0x53, 0xfd, 0x6f, 0xe5, 0xec, 0x8f, 0x32, 0xd4, 0x64,
-	0x3f, 0x18, 0x8e, 0xc9, 0x84, 0xd8, 0xa3, 0xdb, 0xfe, 0xc0, 0x12, 0x07, 0x25, 0xbd, 0x11, 0x31,
-	0xf5, 0xd2, 0x06, 0x63, 0x92, 0x01, 0x49, 0x99, 0xf2, 0x06, 0x33, 0xbe, 0x31, 0x45, 0x4c, 0x05,
-	0xb5, 0xe1, 0xa4, 0xc0, 0xdc, 0x8c, 0x2f, 0x07, 0xd6, 0xf0, 0x8a, 0x98, 0xba, 0x82, 0x9e, 0xc3,
-	0xb3, 0x02, 0x37, 0x21, 0xd4, 0x7a, 0x67, 0x11, 0x53, 0xaf, 0xa2, 0x57, 0xd0, 0x2e, 0x50, 0x43,
-	0xd2, 0xa7, 0x64, 0x94, 0xa5, 0xad, 0x5d, 0xfc, 0xa9, 0x40, 0x43, 0x4e, 0xf4, 0xbb, 0x7b, 0x8e,
-	0xde, 0x80, 0x2a, 0x35, 0x88, 0xd6, 0x94, 0xd0, 0x7e, 0x59, 0xb4, 0x8b, 0x8a, 0x36, 0x4a, 0xe8,
-	0x33, 0xa8, 0x52, 0xe6, 0x78, 0xe8, 0x30, 0xf3, 0xcb, 0x37, 0x47, 0x7b, 0x2d, 0x95, 0x51, 0x42,
-	0x3d, 0xa8, 0xa6, 0x6f, 0x12, 0xb5, 0x33, 0x66, 0x73, 0x3f, 0xb4, 0x5f, 0x6c, 0xe5, 0xf2, 0x7a,
-	0x5f, 0x83, 0x2a, 0xf5, 0xbe, 0xad, 0xe2, 0xb3, 0x0c, 0x2a, 0xfe, 0xff, 0x2c, 0xa1, 0x2f, 0x41,
-	0x95, 0xc2, 0xd9, 0xb8, 0xdf, 0xce, 0x90, 0x6f, 0x60, 0x4f, 0x86, 0x48, 0x2d, 0x6d, 0x2b, 0x77,
-	0x92, 0x41, 0xc5, 0x85, 0x28, 0x82, 0x55, 0x21, 0xe5, 0x05, 0xc2, 0x99, 0xcf, 0xfa, 0x2e, 0xd9,
-	0x5d, 0xf9, 0x2d, 0x68, 0xcb, 0xc7, 0xf4, 0x3f, 0xa2, 0xef, 0x54, 0xf1, 0x63, 0xe2, 0xab, 0x7f,
-	0x02, 0x00, 0x00, 0xff, 0xff, 0x29, 0x99, 0xc2, 0x19, 0x66, 0x08, 0x00, 0x00,
+	// 1069 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0x94, 0x56, 0xdd, 0x6e, 0xe2, 0x46,
+	0x14, 0xc6, 0x01, 0x1b, 0x38, 0xfc, 0xc4, 0x99, 0x65, 0xa3, 0x59, 0x54, 0xad, 0x90, 0x95, 0xae,
+	0x68, 0xa4, 0x66, 0xa5, 0xa4, 0x95, 0x72, 0xd1, 0x1b, 0x82, 0xbd, 0x8d, 0xb5, 0x14, 0x52, 0xf3,
+	0x53, 0xa9, 0xaa, 0x14, 0x39, 0x78, 0x36, 0xb1, 0x62, 0x6c, 0x3a, 0x33, 0x90, 0xa6, 0x4f, 0xd1,
+	0x4a, 0xbd, 0xec, 0x75, 0xaf, 0xfa, 0x62, 0xbd, 0xef, 0x03, 0x54, 0x33, 0x83, 0x89, 0x81, 0xac,
+	0xd4, 0xbd, 0x89, 0x7d, 0xbe, 0xef, 0xfc, 0xcd, 0xf1, 0x37, 0x27, 0xc0, 0xe1, 0x34, 0x0a, 0x49,
+	0xcc, 0xdf, 0xaa, 0xc7, 0xec, 0x96, 0x9e, 0xcc, 0x69, 0xc2, 0x13, 0x64, 0x28, 0xc0, 0x2a, 0x82,
+	0xee, 0xcc, 0xe6, 0xfc, 0xd1, 0x6a, 0xc0, 0x9e, 0x1b, 0xa0, 0xba, 0xf8, 0x8b, 0xb5, 0x96, 0xd6,
+	0x2e, 0x7b, 0x7b, 0x61, 0x60, 0xfd, 0x53, 0x00, 0xa3, 0x2b, 0x3d, 0xb7, 0x29, 0x74, 0x08, 0xc6,
+	0x90, 0x4c, 0x29, 0xe1, 0x78, 0x4f, 0x62, 0x06, 0x93, 0x16, 0xc2, 0x50, 0xec, 0x25, 0xb7, 0xc9,
+	0x98, 0x46, 0x38, 0x2f, 0x89, 0x62, 0xa4, 0x4c, 0xc1, 0x0c, 0x1e, 0x62, 0x42, 0xdd, 0x00, 0x17,
+	0x14, 0x93, 0x28, 0x13, 0x59, 0x50, 0xed, 0x26, 0x31, 0xf7, 0xa7, 0xdc, 0x99, 0xf9, 0x61, 0x84,
+	0x75, 0x49, 0x57, 0xa7, 0x19, 0x0c, 0xb5, 0xa0, 0x62, 0x13, 0x36, 0xa5, 0xe1, 0x9c, 0x87, 0x49,
+	0x8c, 0x0d, 0xe9, 0x52, 0x09, 0x9e, 0x20, 0x74, 0x0c, 0xe6, 0xf0, 0x2e, 0xa1, 0x3c, 0xeb, 0x56,
+	0x94, 0x6e, 0x26, 0xdb, 0xc2, 0xd1, 0x6b, 0x00, 0x97, 0x4d, 0x08, 0x0d, 0x3f, 0x84, 0x24, 0xc0,
+	0xa5, 0x96, 0xd6, 0x2e, 0x79, 0x10, 0xae, 0x11, 0xd1, 0x91, 0x47, 0x82, 0x90, 0x92, 0x29, 0x1f,
+	0xd3, 0x88, 0xe1, 0x72, 0x2b, 0x2f, 0x3a, 0xa2, 0x19, 0x4c, 0x74, 0xf4, 0x03, 0xb9, 0xb9, 0x4b,
+	0x92, 0x7b, 0xe9, 0x02, 0xd2, 0xa5, 0xf2, 0xf0, 0x04, 0xa1, 0x2f, 0xa1, 0x30, 0x7a, 0x9c, 0x13,
+	0x5c, 0x69, 0x69, 0xed, 0xfa, 0xe9, 0xab, 0x13, 0x35, 0xf4, 0x93, 0x6e, 0xf6, 0x21, 0x1c, 0xbc,
+	0x02, 0x7f, 0x9c, 0x13, 0x84, 0xa0, 0xd0, 0xf7, 0x67, 0x04, 0x57, 0x65, 0xd3, 0x85, 0xd8, 0x9f,
+	0x11, 0xd5, 0xa8, 0x1b, 0x73, 0x42, 0x63, 0x3f, 0xc2, 0xb5, 0xb4, 0xd1, 0x14, 0x11, 0x43, 0x9d,
+	0x10, 0xca, 0xc4, 0x59, 0xeb, 0x6a, 0xa8, 0x4b, 0x65, 0xa2, 0x26, 0x94, 0x5c, 0x76, 0xb5, 0xb8,
+	0x89, 0xc2, 0x29, 0xde, 0x97, 0x71, 0xa5, 0x70, 0x65, 0x8b, 0xd6, 0xe5, 0x1b, 0xbb, 0xb3, 0x7d,
+	0x4e, 0xb0, 0xa9, 0x86, 0x39, 0x7f, 0x82, 0xd0, 0x1b, 0xa8, 0xbb, 0xac, 0x9b, 0xc4, 0x1f, 0xc2,
+	0x80, 0xc4, 0x3c, 0xf4, 0x23, 0x7c, 0x20, 0x73, 0xd4, 0xc3, 0x0d, 0x14, 0x1d, 0x41, 0xad, 0x1b,
+	0x25, 0x8c, 0x04, 0xa3, 0x70, 0x46, 0x92, 0x05, 0xc7, 0xa8, 0xa5, 0xb5, 0x75, 0xaf, 0x36, 0xcd,
+	0x82, 0x96, 0x05, 0xf0, 0x74, 0x5a, 0x54, 0x84, 0x7c, 0xe7, 0xea, 0xca, 0xcc, 0xa1, 0x0a, 0x14,
+	0xbb, 0x97, 0x9d, 0x7e, 0xdf, 0xe9, 0x99, 0x9a, 0xd5, 0x4a, 0x05, 0x95, 0x91, 0x96, 0x96, 0x95,
+	0x96, 0xf5, 0x0b, 0xa0, 0x5e, 0xc8, 0xb8, 0xca, 0xc4, 0x3c, 0xf2, 0xf3, 0x82, 0x30, 0x9e, 0x95,
+	0x95, 0xb6, 0x29, 0x2b, 0x0c, 0xc5, 0xf7, 0xe4, 0xf1, 0x21, 0xa1, 0xc1, 0x4a, 0xa3, 0xc5, 0x7b,
+	0x65, 0x0a, 0x66, 0xc8, 0x7d, 0xca, 0xdd, 0x20, 0x15, 0x29, 0x53, 0x26, 0x6a, 0x80, 0xde, 0x0b,
+	0x67, 0x21, 0x97, 0x12, 0xd5, 0x3d, 0x3d, 0x12, 0x86, 0x75, 0x06, 0xc5, 0x55, 0x55, 0xd4, 0x5e,
+	0xbf, 0xe2, 0x7c, 0x2b, 0xdf, 0xae, 0x9c, 0xd6, 0x37, 0x3f, 0xab, 0x57, 0x54, 0x26, 0xb3, 0xce,
+	0xc1, 0xbc, 0x48, 0x92, 0x68, 0xe2, 0x47, 0x0b, 0x92, 0x36, 0xbb, 0x7d, 0x8b, 0x1a, 0xa0, 0x4b,
+	0x5e, 0x36, 0x58, 0xf2, 0xf4, 0xa5, 0x30, 0xac, 0xbf, 0x34, 0x21, 0xbf, 0xdb, 0x90, 0x71, 0xea,
+	0x4b, 0xb9, 0x1e, 0x82, 0x31, 0x66, 0x99, 0x23, 0x1a, 0x0b, 0x69, 0x89, 0x6f, 0xac, 0xaa, 0xba,
+	0xe9, 0x11, 0x4b, 0xd3, 0x95, 0x2d, 0x24, 0xec, 0xc6, 0x4b, 0x3f, 0x0a, 0x83, 0xe1, 0x34, 0x99,
+	0x13, 0x79, 0xd0, 0x92, 0x57, 0x0d, 0x33, 0x98, 0x92, 0xb9, 0xa8, 0x43, 0xa8, 0x14, 0x82, 0xba,
+	0x97, 0x55, 0x9a, 0xc1, 0x44, 0x0d, 0xe9, 0xec, 0x06, 0x0c, 0xeb, 0xad, 0x7c, 0x5b, 0xf7, 0x4a,
+	0x6c, 0x65, 0x5b, 0x2e, 0xd4, 0xb2, 0x7d, 0x32, 0x74, 0xfe, 0xd4, 0xb8, 0xb0, 0xb1, 0x26, 0x47,
+	0xd4, 0x48, 0x47, 0x94, 0x75, 0x4e, 0xcb, 0x28, 0x4f, 0xeb, 0x1b, 0x40, 0xea, 0x28, 0x5d, 0x4a,
+	0x7c, 0x4e, 0x02, 0x67, 0x29, 0xb6, 0xce, 0x9b, 0x74, 0xff, 0xc8, 0x83, 0xef, 0x0e, 0x3b, 0xdd,
+	0x63, 0x47, 0x69, 0xb4, 0x4d, 0x22, 0xb2, 0x8e, 0xde, 0x5e, 0x67, 0xeb, 0x1a, 0xe3, 0x79, 0xf0,
+	0xe9, 0x35, 0x6c, 0x68, 0x28, 0x64, 0x75, 0x75, 0x3e, 0x52, 0x05, 0x7d, 0x06, 0xe5, 0xb5, 0xc7,
+	0xea, 0xbb, 0x96, 0xe7, 0x29, 0x60, 0x75, 0xe0, 0x85, 0xca, 0x92, 0xee, 0x9a, 0xe7, 0x93, 0x34,
+	0xa1, 0xb4, 0x5e, 0x4f, 0x2a, 0x47, 0x69, 0xb9, 0xb2, 0xad, 0x0b, 0xc0, 0x1b, 0xc7, 0x50, 0x97,
+	0xe5, 0xf9, 0x3c, 0x1f, 0x59, 0xd3, 0xc7, 0x3f, 0x81, 0xee, 0x50, 0x9a, 0x50, 0x64, 0xc0, 0xde,
+	0xe0, 0xbd, 0x99, 0x43, 0x35, 0x28, 0xf5, 0x07, 0xa3, 0x77, 0x83, 0x71, 0xdf, 0x36, 0xff, 0xc8,
+	0xa3, 0x06, 0xec, 0xbb, 0xfd, 0x49, 0xa7, 0xe7, 0xda, 0xd7, 0x9e, 0xf3, 0xfd, 0xd8, 0x19, 0x8e,
+	0xcc, 0xdf, 0xf2, 0xe8, 0x00, 0xaa, 0xe3, 0x7e, 0x67, 0x3c, 0xba, 0x1c, 0x78, 0xee, 0x8f, 0x8e,
+	0x6d, 0xfe, 0x9e, 0x47, 0x2f, 0xa0, 0xee, 0xf6, 0x47, 0x8e, 0xd7, 0xef, 0xf4, 0xae, 0x1d, 0xcf,
+	0x1b, 0x78, 0xe6, 0xbf, 0xf9, 0xe3, 0xbf, 0x35, 0xd0, 0x55, 0x3f, 0x18, 0x1a, 0xce, 0xc4, 0xe9,
+	0x8f, 0xae, 0xbb, 0x3d, 0x57, 0x3e, 0x3c, 0xa7, 0x33, 0x72, 0x6c, 0x33, 0xb7, 0xc3, 0xd8, 0x4e,
+	0xcf, 0x11, 0x8c, 0xb6, 0xc3, 0x8c, 0xaf, 0x6c, 0x19, 0xb3, 0x87, 0x9a, 0x70, 0xb8, 0xc1, 0x5c,
+	0x8d, 0x2f, 0x7a, 0xee, 0xf0, 0xd2, 0xb1, 0xcd, 0x3c, 0x7a, 0x05, 0x2f, 0x37, 0xb8, 0x89, 0xe3,
+	0xb9, 0xef, 0x5c, 0xc7, 0x36, 0x0b, 0xe8, 0x35, 0x34, 0x37, 0xa8, 0xa1, 0xd3, 0xf5, 0x9c, 0x51,
+	0x9a, 0x56, 0x3f, 0xfd, 0xb3, 0x00, 0x65, 0x35, 0xd1, 0xef, 0x6e, 0x95, 0x1e, 0xa4, 0x06, 0xd1,
+	0x96, 0x12, 0x9a, 0x90, 0xda, 0x6e, 0x60, 0xe5, 0xd0, 0x11, 0x14, 0x3c, 0xe2, 0x07, 0x28, 0x83,
+	0x36, 0xb7, 0x22, 0xac, 0x1c, 0xfa, 0x1a, 0x0a, 0x62, 0x69, 0xa1, 0x66, 0xca, 0xec, 0xae, 0xb0,
+	0xe6, 0xfe, 0x66, 0x14, 0xb3, 0x72, 0xe8, 0x73, 0x30, 0x94, 0x94, 0x37, 0xd2, 0xd7, 0xd2, 0x77,
+	0xf5, 0x4f, 0x3b, 0x87, 0xbe, 0x00, 0x43, 0x89, 0x60, 0xa7, 0xd7, 0x1d, 0xd7, 0x13, 0xa8, 0x7f,
+	0x4b, 0x62, 0x42, 0x7d, 0x4e, 0x56, 0x7b, 0xf6, 0xd9, 0xc6, 0x15, 0x67, 0xe5, 0xd0, 0x19, 0x18,
+	0x52, 0x81, 0x8f, 0x08, 0xa7, 0xdc, 0xf6, 0x3a, 0xdb, 0x2d, 0xf2, 0x15, 0x14, 0x57, 0xda, 0xff,
+	0x94, 0xa8, 0x53, 0x28, 0x77, 0x16, 0xfc, 0x2e, 0xa1, 0xe1, 0xaf, 0x04, 0x3d, 0xbb, 0x2c, 0x76,
+	0x63, 0xde, 0x82, 0xe1, 0x91, 0x65, 0x72, 0xff, 0xbf, 0x03, 0xce, 0xe1, 0x40, 0x8c, 0x7e, 0x73,
+	0x5f, 0x65, 0x47, 0xf0, 0xf2, 0xb9, 0x3c, 0xcc, 0xca, 0xdd, 0x18, 0xf2, 0x37, 0xd3, 0xd9, 0x7f,
+	0x01, 0x00, 0x00, 0xff, 0xff, 0x3c, 0x35, 0x56, 0x51, 0x4d, 0x09, 0x00, 0x00,
 }

@@ -2,7 +2,9 @@ syntax = "proto3";
 
 package client;
 
-message EmptyResponse {}
+message Empty {}
+
+message Id {string Id = 1;}
 
 enum Error {
 	OK = 0;
@@ -19,7 +21,10 @@ message Client {
 	// Secret used to authorize client with oauth2 server
 	string Secret = 2;
 	string LogoUrl = 3;
-	string AccountId = 4;
+	
+	// owner id, could be Account or Agent
+	string OwnerId = 4;
+	
 	string ContactEmail = 5;
 	string Description = 6;
 	string ShortDescription = 7;
@@ -61,22 +66,18 @@ message Client {
 	int32 ClosedTimeout = 18;
 }
 
-message IdRequest {
-	string Id = 1;
-}
-
-message SecretResponse {
+message Secret {
 	string Secret = 1;
 }
 
 message ListClientsRequest {
-	string StartId = 1;
+	string OwnerId = 1;
 	string Keyword = 2;
-	int32 Limit = 3;
-	string AccountId = 4;
+	string StartId = 3;
+	int32 Limit = 4;
 }
 
-message ListClientsResponse {
+message Clients {
 	repeated Client Clients = 3;
 }
 
@@ -86,18 +87,31 @@ message BoolValueRequest {
 }
 
 service ClientMgt {
-	rpc Create(Client) returns (ClientCreateResponse) {}
-	rpc Read(IdRequest) returns (Client) {}
-	rpc List(ListClientsRequest) returns (ListClientsResponse) {}
-	rpc Delete(IdRequest) returns (EmptyResponse) {}
-	rpc Update(Client) returns (EmptyResponse) {}
-	rpc UpdateSecret(IdRequest) returns(SecretResponse) {}
-	rpc Verify(BoolValueRequest) returns (EmptyResponse) {}
-	rpc Publish(BoolValueRequest) returns (EmptyResponse) {}
+	rpc Create(Client) returns (Id) {}
+	rpc Read(Id) returns (Client) {}
+	rpc List(ListClientsRequest) returns (Clients) {}
+	rpc Delete(Id) returns (Empty) {}
+	rpc Update(Client) returns (Empty) {}
+	rpc GenerateSecret(Id) returns(Secret) {}
+	rpc Verify(BoolValueRequest) returns (Empty) {}
+	rpc Publish(BoolValueRequest) returns (Empty) {}
+
+	rpc Authorize(Registration) returns (Empty) {}
+	rpc Revoke(Registration) returns (Empty) {}
+	rpc ListRegistrations(Id) returns (Registrations) {}
 }
 
-message ClientCreateResponse {	
-	string Id = 2;
+message Registration {
+	string UserId = 1;
+	string ClientId = 2;
+
+	bool InvalidScope = 3;
+	string RegisterDate = 4;
+	repeated int32 ScopeIds = 5;
+}
+
+message Registrations {
+	repeated Registration Registraions = 1;
 }
 
 enum Event {
