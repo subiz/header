@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package router;
+
+enum Error {
+	OK = 0;
+	NoRouteMatch = 1;
+	NotFound = 404;
+	AccessDeny = 400;
+}
+
+service Router {
+	rpc Assign(AssignRequest) returns (RouteResult) {}
+  rpc Update(Route) returns (Empty) {}
+	rpc Create(Route) returns (Id) {}
+	rpc Delete(Id) returns (Empty) {}
+	// List all routes by account id
+	rpc List(Id) returns (Routes) {}
+}
+
+enum JoinOperator {
+	None = 0;
+	And = 1;
+	Or = 2;
+}
+
+message Id { string Id = 1;}
+
+message Empty {}
+
+message Route {
+	string Priority = 1;
+	AssignTo AssignTo = 2;
+	string AssignToAgentId = 3;
+	string AssignToGroupId = 4;
+	repeated string AssignToAgentIds = 6;
+	
+	repeated Condition Conditions = 7;
+	bool IsDisabled = 8;
+	string CTime = 9;
+}
+
+message Condition {
+	JoinOperator Join = 1;
+	string Key = 2; // unique
+	string Operator = 3; // = # regex
+	string Value = 4; // JSON
+}
+
+message Routes { repeated Route Routes = 1;}
+
+message RouteResult {
+	repeated string AgentId = 1;
+}
+
+enum DeviceType {
+	Unknown = 0;
+	Mobile = 1;
+	Tablet = 2;
+	Desktop = 3;
+}
+
+message UserInfo {
+	string Name = 1;
+	string Email = 2;
+	string Phone = 3;
+	string Sessions = 4;
+	string Country = 5;
+	string CountryCode = 6;
+	string City = 7;
+	string TimeZone = 8;
+	string Segment = 9;
+	string Label = 10;
+	bool Unsubscribed = 11;
+	bool MarkedSpam = 12;
+	bool HardBounced = 13;
+}
+
+message AssignRequest {
+	string ConvoId = 1;
+	string Channel = 2;
+	string MessageTo = 3;
+	string PageUrl = 4;
+	string PageTitle = 5;
+	string MessageContent = 6;
+	string BrowserLanguage = 7;
+	string Language = 8;
+	DeviceType DeviceType = 9;
+	UserInfo User = 10;
+	string AccountId = 11;
+}
+	
+enum AssignTo {
+	Unsetted = 0;
+	AllAgents = 1;
+	AgentGroup = 2;
+	SpecificAgent = 3;
+	MostRecent = 4;
+
+	RoundRobinAllAgents = 5;
+	RoundRobinAgents = 6;
+
+	BalancedAllAgents = 7;
+	BalancedAgents = 8;
+}
+
+message GroupDeleteEvent {
+	string GroupId = 1;
+}
+
+message GroupUpdateEvent {	
+	string GroupId = 1;
+	repeated string MemberIds = 2;
+}
+
+message AgentDeletedEvent {
+	string AgentId = 1;
+}
+
+message AgentUpdateEvent {
+	string AgentId = 1;
+	bool IsActive = 2;
+	bool IsConfirmed = 3;
+}
