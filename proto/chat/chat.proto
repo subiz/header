@@ -1,0 +1,140 @@
+syntax = "proto3";
+
+package chat;
+
+message User {
+	string Id = 1;
+	string Name = 2;
+	string ChannelId = 3;
+	string IsVisitor = 4;
+	string LastSeenId = 5;
+}
+
+// get number of unread message
+message Chat {
+	string Id = 1;
+	string AccountId = 2;
+	string CTime = 3;
+	string LTime = 4;
+	string CloseTime = 5;
+	repeated User Users = 6;
+	bool IsClosed = 7;
+	int32 EventCount = 8;
+}
+
+enum ChatEventType {
+	MESSAGE = 0;
+	OPENED = 1;
+	CLOSED = 2;
+	JOINED = 3;
+	LEAVED = 4;
+	SEEN = 5;
+	RATED = 6;
+}
+
+message Attachment {
+	string Type = 1;
+	string Payload = 2; // Custome JSON data
+}
+
+message ChatEvent {
+	string Id = 1;
+	ChatEventType Type = 2;
+	string ChatId = 3;
+	//string AccountId = 4;
+	string SendTime = 5;
+	string From = 6;
+
+	// Text could be raw text, could be JSON data based on type
+	string Text = 7;
+	repeated Attachment Attachments = 8;
+}
+
+message Id {string Id = 1;}
+
+message Empty {}
+
+enum DeviceType {
+	Unknown = 0;
+	Mobile = 1;
+	Tablet = 2;
+	Desktop = 3;
+}
+
+message UserInfo {
+	string UserId = 1;
+	string Name = 2;
+	repeated string Email = 3;
+	repeated string Phone = 4;
+	string Country = 5;
+	string CountryCode = 6;
+	string City = 7;
+	string TimeZone = 8;
+	repeated string Segment = 9;
+	repeated string Label = 10;
+	bool Unsubscribed = 11;
+	bool MarkedSpam = 12;
+	bool HardBounced = 13;
+	int32 TotalSessions = 14;
+}
+
+message ChatRequest {
+	string AccountId = 1;
+	string ChatId = 2;
+	string ChannelId = 4;
+	string MessageTo = 5;
+	string PageUrl = 6;
+	string PageTitle = 7;
+	string Message = 8;
+	string BrowserLanguage = 9;
+	string Language = 10;
+	DeviceType DeviceType = 11;
+	UserInfo User = 12;
+}
+
+message Chats {
+	repeated Chat Chats = 1;
+}
+
+message ChatEvents {
+	repeated ChatEvent Events = 1;
+}
+
+service ChatMgr {
+	// COLLECTOR for channel
+	// Send KeepAlive message to extends live of a chat session
+	rpc Ping(Id) returns (Empty) {}
+	rpc Send(ChatEvent) returns (Id) {}
+	// initialize chat session
+	rpc Request(ChatRequest) returns (Id) {}
+
+	// QUERRIER
+	// List chats for specific user
+	rpc ListUsersUnread(ListUsersUnreadRequest) returns (UsersUnread) {}
+	rpc ListChatsByUser(ListChatByUserRequest) returns (Chats) {}
+	rpc ListEvents(ListChatEventRequest) returns (Chat) {}
+}
+
+message ListUsersUnreadRequest {
+	string AccountId = 1;
+	string UserIds = 2;
+}
+
+message UsersUnread {
+	string UsersIds = 1;
+	int32 Unread = 2;
+}
+
+message ListChatEventRequest {
+	string ChatId = 1;
+	string StartId = 2;
+	string Limit = 3;
+}
+
+message ListChatByUserRequest {
+	string AccountId = 1;
+	string ChannelId = 2;
+	string UserId = 3; // must be visitor id
+	string StartId = 4;
+	string Limit = 5;
+}
