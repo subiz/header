@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package router;
+import "bitbucket.org/subiz/servicespec/proto/chat/chat.proto";
 
 enum Error {
 	OK = 0;
@@ -10,7 +11,7 @@ enum Error {
 }
 
 service Router {
-	rpc Assign(AssignRequest) returns (RouteResult) {}
+	rpc Assign(chat.ChatRequest) returns (RouteResult) {}
   rpc Update(Route) returns (Empty) {}
 	rpc Create(Route) returns (Id) {}
 	rpc Delete(Id) returns (Empty) {}
@@ -29,15 +30,14 @@ message Id { string Id = 1;}
 message Empty {}
 
 message Route {
-	string Priority = 1;
-	AssignTo AssignTo = 2;
-	string AssignToAgentId = 3;
-	string AssignToGroupId = 4;
-	repeated string AssignToAgentIds = 6;
-	
-	repeated Condition Conditions = 7;
-	bool IsDisabled = 8;
-	string CTime = 9;
+	string Id = 1;
+	string Priority = 2;
+	AssignStrategy Strategy = 3;
+  repeated string HandlerIds = 4;
+	int32 ConcurrentThreshold = 7;
+	repeated Condition Conditions = 8;
+	bool IsDisabled = 9;
+	string CTime = 10;
 }
 
 message Condition {
@@ -50,47 +50,12 @@ message Condition {
 message Routes { repeated Route Routes = 1;}
 
 message RouteResult {
-	repeated string AgentId = 1;
-}
-
-enum DeviceType {
-	Unknown = 0;
-	Mobile = 1;
-	Tablet = 2;
-	Desktop = 3;
-}
-
-message UserInfo {
-	string Name = 1;
-	string Email = 2;
-	string Phone = 3;
-	string Sessions = 4;
-	string Country = 5;
-	string CountryCode = 6;
-	string City = 7;
-	string TimeZone = 8;
-	string Segment = 9;
-	string Label = 10;
-	bool Unsubscribed = 11;
-	bool MarkedSpam = 12;
-	bool HardBounced = 13;
-}
-
-message AssignRequest {
-	string ConvoId = 1;
-	string Channel = 2;
-	string MessageTo = 3;
-	string PageUrl = 4;
-	string PageTitle = 5;
-	string MessageContent = 6;
-	string BrowserLanguage = 7;
-	string Language = 8;
-	DeviceType DeviceType = 9;
-	UserInfo User = 10;
-	string AccountId = 11;
+	AssignStrategy Strategy = 3;
+  repeated string HandlerIds = 4;
+	int32 ConcurrentThreshold = 7;
 }
 	
-enum AssignTo {
+enum AssignStrategy {
 	Unsetted = 0;
 	AllAgents = 1;
 	AgentGroup = 2;
