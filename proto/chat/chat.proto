@@ -6,7 +6,7 @@ message User {
 	string Id = 1;
 	string Name = 2;
 	string ChannelId = 3;
-	string IsVisitor = 4;
+	bool IsVisitor = 4;
 	string LastSeenId = 5;
 }
 
@@ -14,12 +14,15 @@ message User {
 message Chat {
 	string Id = 1;
 	string AccountId = 2;
+	// Creation time
 	string CTime = 3;
+	// Last active time
 	string LTime = 4;
-	string CloseTime = 5;
+	// Closed time
+	string XTime = 5;
 	repeated User Users = 6;
 	bool IsClosed = 7;
-	int32 EventCount = 8;
+	int32 EventsCount = 8;
 }
 
 enum ChatEventType {
@@ -37,17 +40,26 @@ message Attachment {
 	string Payload = 2; // Custome JSON data
 }
 
+message ChatEvents { repeated ChatEvent Events = 1;}
+
+enum ActorType {
+	UNDEFINED = 0;
+	USER = 1;
+	AGENT = 2;
+	SYSTEM = 3;
+}
+
 message ChatEvent {
 	string Id = 1;
 	ChatEventType Type = 2;
 	string ChatId = 3;
 	//string AccountId = 4;
 	string SendTime = 5;
-	string From = 6;
-
+	string ActorId = 6;
+	ActorType ActorType = 7;
 	// Text could be raw text, could be JSON data based on type
-	string Text = 7;
-	repeated Attachment Attachments = 8;
+	string Text = 8;
+	repeated Attachment Attachments = 9;
 }
 
 message Id {string Id = 1;}
@@ -55,10 +67,10 @@ message Id {string Id = 1;}
 message Empty {}
 
 enum DeviceType {
-	Unknown = 0;
-	Mobile = 1;
-	Tablet = 2;
-	Desktop = 3;
+	UNKNOWN = 0;
+	MOBILE = 1;
+	TABLET = 2;
+	DESKTOP = 3;
 }
 
 message UserInfo {
@@ -96,10 +108,6 @@ message Chats {
 	repeated Chat Chats = 1;
 }
 
-message ChatEvents {
-	repeated ChatEvent Events = 1;
-}
-
 service ChatMgr {
 	// COLLECTOR for channel
 	// Send KeepAlive message to extends live of a chat session
@@ -112,23 +120,27 @@ service ChatMgr {
 	// List chats for specific user
 	rpc ListUsersUnread(ListUsersUnreadRequest) returns (UsersUnread) {}
 	rpc ListChatsByUser(ListChatByUserRequest) returns (Chats) {}
-	rpc ListEvents(ListChatEventRequest) returns (Chat) {}
+	rpc ListEvents(ListChatEventRequest) returns (ChatEvents) {}
 }
 
 message ListUsersUnreadRequest {
 	string AccountId = 1;
-	string UserIds = 2;
+	repeated string UserIds = 2;
+}
+
+message Unread {
+	string UserIds = 1;
+	int32 Unread = 2;
 }
 
 message UsersUnread {
-	string UsersIds = 1;
-	int32 Unread = 2;
+	repeated Unread Unreads = 1;
 }
 
 message ListChatEventRequest {
 	string ChatId = 1;
 	string StartId = 2;
-	string Limit = 3;
+	int32 Limit = 3;
 }
 
 message ListChatByUserRequest {
@@ -136,5 +148,5 @@ message ListChatByUserRequest {
 	string ChannelId = 2;
 	string UserId = 3; // must be visitor id
 	string StartId = 4;
-	string Limit = 5;
+	int32 Limit = 5;
 }
