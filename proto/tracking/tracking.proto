@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package tracking;
+
+message Empty {};
+
+service Tracker {
+	// COLLECTOR
+	rpc Track(Event) returns (Empty) {}
+	rpc Update(Event) returns (Empty) {}
+
+	// Users will be merge if they have same identity
+	rpc Identify(UserInfo) returns (Empty) {}
+
+	// Merge recent UserId to former userId, all action caused from recent
+	// UserId are move to formerid, recent User will be deleted after 30 days
+	rpc Merge(MergeRequest) returns (Empty) {}
+		
+	rpc SetField (UserInfo) returns (Empty) {}
+	rpc AppendToField (UserInfo) returns (Empty) {}
+	rpc UnsetField (UserInfo) returns (Empty) {}
+
+	// QUERIER
+	rpc ListEventsByUser (ListEventsByUserRequest) returns (Events) {}
+	rpc ListEventsByTypeAndUser (ListEventsByTypeAndUserRequest) returns (Events) {}
+
+}
+
+message MergeRequest {
+	string FormerUser = 1;
+	string RecentUserId = 2;
+}
+
+message Events {repeated string Events = 1;}
+
+enum EventType {
+	NONE = 0;
+	VIEWCONTENT = 1;
+	SEARCH = 2;
+	ADDTOCART = 3;
+	CHECKOUT = 4;
+	PURCHASE = 5;
+}
+
+message KeyValue {
+	string Key = 1;
+	string Value = 2;
+}
+message Event {
+	string AccountId = 1;
+	string UserId = 2;
+	EventType Type = 3;
+	repeated KeyValue Fields = 4;
+	string CTime = 5;
+	string LTime = 6;
+}
+
+message ListEventsByTypeAndUserRequest {
+	string AccountId = 1;
+	EventType Type = 2;
+	string StartId = 3;
+	int32 Limit = 4;
+}
+
+message ListEventsByUserRequest {
+	string AccountId = 1;
+	string StartId = 3;
+	int32 Limit = 4;
+}
+
+message UserInfo {
+	string AccountId = 1;
+	string UserId = 2;
+	
+	string Key = 3;
+	string Value = 4;
+}
