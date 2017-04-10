@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package content;
+
+message KeyValue {
+	string Key = 1;
+	string Value = 2;
+}
+
+message Content {
+	string Id = 1; // user input id
+	string AccountId = 14;
+	string Description = 2;
+	string Title = 3;
+	string Link = 4;
+	string Type = 5;
+	string Category = 6;
+	string AttachmentLink = 7;
+	
+	string Labels = 8;
+	
+	bool Availability = 9;
+	string Price = 10;
+	string Currency = 11;
+	string SalePrice = 12;
+
+	repeated KeyValue Fields = 13;
+
+	repeated string RelatedIds = 15;
+}
+
+message Contents {
+	repeated Content Contents = 1;
+}
+
+message Ids {repeated string Id = 1;}
+message Id {string Id = 1;}
+
+message Empty {}
+
+message ListRequest {
+	string AccountId = 1;
+	string StartId = 2;
+	int32 Limit = 3;
+	string Keyword = 4;
+}
+
+service ContentMgr {
+	rpc Insert(Content) returns (Empty) {}
+	rpc InsertBulk (Contents) returns (Empty) {}
+	rpc Delete(Id) returns (Empty) {}
+	rpc DeleteBulk (Ids) returns (Empty) {}
+	rpc Read(Id) returns (Content) {}
+	rpc List(ListRequest) returns (Contents) {}
+}
