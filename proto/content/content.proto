@@ -13,11 +13,10 @@ message Content {
 	string Description = 2;
 	string Title = 3;
 	string Link = 4;
-	string Type = 5;
-	string Category = 6;
+	repeated string Categories = 6;
 	string AttachmentLink = 7;
 	
-	string Labels = 8;
+	repeated string Labels = 8;
 	
 	bool Availability = 9;
 	string Price = 10;
@@ -33,7 +32,7 @@ message Contents {
 	repeated Content Contents = 1;
 }
 
-message Ids {repeated string Id = 1;}
+message Ids {repeated string Ids = 1;}
 message Id {string Id = 1;}
 
 message Empty {}
@@ -41,8 +40,9 @@ message Empty {}
 message ListRequest {
 	string AccountId = 1;
 	string StartId = 2;
-	int32 Limit = 3;
-	string Keyword = 4;
+	string Category = 3;
+	int32 Limit = 4;
+	string Keyword = 5;
 }
 
 service ContentMgr {
