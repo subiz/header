@@ -4,7 +4,13 @@ package tracking;
 
 message Empty {};
 
+message Id { string Id = 1; }
+
+message Ids {repeated string Ids = 1;}
+
 service Tracker {
+	rpc Ban(Id) returns (Empty) {}
+	rpc Unban(Id) returns (Empty) {}
 	// COLLECTOR
 	rpc Track(Event) returns (Empty) {}
 	rpc Update(Event) returns (Empty) {}
@@ -15,19 +21,31 @@ service Tracker {
 	// Merge recent UserId to former userId, all action caused from recent
 	// UserId are move to formerid, recent User will be deleted after 30 days
 	rpc Merge(MergeRequest) returns (Empty) {}
-		
+
+	//control number of field to add on a user
 	rpc SetField (UserInfo) returns (Empty) {}
 	rpc AppendToField (UserInfo) returns (Empty) {}
 	rpc UnsetField (UserInfo) returns (Empty) {}
 
 	// QUERIER
-	rpc ListEventsByUser (ListEventsByUserRequest) returns (Events) {}
-	rpc ListEventsByTypeAndUser (ListEventsByTypeAndUserRequest) returns (Events) {}
+	rpc ListEvents(ListEventsByUserRequest) returns (Events) {}
+	rpc ListEventsByType(ListEventsByTypeAndUserRequest) returns (Events) {}
 
+	rpc ListFields(Ids) returns (UsersFields) {}
+}
+
+message UserFields {
+	string UserId = 1;
+	// no accountid
+	repeated KeyValue Fields = 2;
+}
+
+message UsersFields {
+	repeated UserFields UsersFields = 1;
 }
 
 message MergeRequest {
-	string FormerUser = 1;
+	string FormerUserId = 1;
 	string RecentUserId = 2;
 }
 
@@ -46,6 +64,7 @@ message KeyValue {
 	string Key = 1;
 	string Value = 2;
 }
+
 message Event {
 	string AccountId = 1;
 	string UserId = 2;
@@ -64,6 +83,7 @@ message ListEventsByTypeAndUserRequest {
 
 message ListEventsByUserRequest {
 	string AccountId = 1;
+	string UserId = 2;
 	string StartId = 3;
 	int32 Limit = 4;
 }
@@ -71,7 +91,6 @@ message ListEventsByUserRequest {
 message UserInfo {
 	string AccountId = 1;
 	string UserId = 2;
-	
 	string Key = 3;
 	string Value = 4;
 }
