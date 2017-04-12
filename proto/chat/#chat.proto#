@@ -140,6 +140,18 @@ service ChatMgr {
 	rpc CheckUnassignedChat(Ids) returns (Chats) {}
 }
 
+message UnassignChat {
+	string AccountId = 1;
+	bool IsAssigned = 2;
+	string Message = 3;
+
+	string Ip = 4;
+	string Name = 5;
+	repeated string Emails = 6;
+	repeated string Phones = 7;
+	
+}
+
 message Bools {
 	repeated boolean Bools = 1;
 }

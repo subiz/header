@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package chat;
+
+message FileTemplate {
+	string Id = 1;
+}
+
+message QuickRepliesTemplate {
+	string Text = 1;
+	string ContentType = 4; // listbutton or location or ...
+	repeated Button Replies = 5; // limit to 11
+}
+
+message GenericElement { // display
+	string Title = 1;
+	string ImageUrl = 2;
+	string Subtitle = 3; // limited character
+	Button DefaultAction = 4;
+	repeated Button Buttons = 5;
+}
+
+message Generic {
+	repeated GenericElement Elements = 1; // limit to 5
+}
+
+message Button {
+	string Type = 1;
+	///...
+}
+
+message UrlButton { // input
+	string Type = 1; // UrlButton
+	string Title = 2;
+	string Url = 3;
+}
+
+message PostbackButton {
+	string Type = 1; // PostbackButton
+	string Title = 2;
+	string Payload = 3;
+	string ImageUrl = 4;
+}
+
+message CallButton {
+}
+
+message LoginButton {
+}
+
+message EventButton {
+	string Type = 1; // EventButton
+	string Title = 2;
+	string ImageUrl = 4;
+	string Event = 3; // this event will sent to chat
+}
+
+message SurveyForm {
+	string Placeholder = 1;
+}
+
+message RateFormTemplate {
+	string Type = 1;
+}
