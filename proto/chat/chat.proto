@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package chat;
 
+message Ids {repeated string Ids = 1;}
+
 message User {
 	string Id = 1;
 	SenderType Type = 4;
@@ -27,9 +29,9 @@ enum ChatEventType {
 	NONE = 0;
 	MESSAGE = 1; // content= content of message, attachments attachment
 	CLOSED = 3; // content, attachments = null
-	
+
 	JOINED = 4; // ActorId: senderid || could be null, content: joinned id
-	
+
 	LEAVED = 5; // content, attachments = null
 	SEEN = 6; // content = event id, attachment = null
 	RATED = 7; // content = number of star
@@ -140,8 +142,20 @@ service ChatMgr {
 	rpc CheckUnassignedChat(Ids) returns (Chats) {}
 }
 
+message UnassignChat {
+	string AccountId = 1;
+	bool IsAssigned = 2;
+	string Message = 3;
+
+	string Ip = 4;
+	string Name = 5;
+	repeated string Emails = 6;
+	repeated string Phones = 7;
+
+}
+
 message Bools {
-	repeated boolean Bools = 1;
+	repeated bool Bools = 1;
 }
 
 message ListUsersUnreadRequest {
