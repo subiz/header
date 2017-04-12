@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package user;
+
+message User {
+	string Id = 1;
+	repeated string Alias = 2;
+	string AccountId = 3;
+
+	string FirstName = 4;
+	string LastName = 5;
+
+	repeated string Phones = 6;
+	repeated string Emails = 7;
+
+	repeated Trace Traces = 8;
+	repeated Device Devices = 9;
+
+	bool IsBan = 10;
+}
+
+message Users { repeated User Users = 1; }
+
+message Device {
+	int32 Id = 1;
+	int32 UserAgentZipped = 2;
+	string Resolution = 3;
+	int32 LanguageZipped = 4;
+}
+
+enum DeviceType {
+	UNKNOWN = 0;
+	DESKTOP = 1;
+	MOBILE = 2;
+	TABLET = 3;
+}
+
+message Trace {
+	string Id = 1;
+	string IP = 2;
+	int32 LocationZipped = 3;
+}
+
+message Id {string Id = 1;}
+
+message Empty {};
+
+service UserMgr {
+	rpc Greeting(GreetingRequest) returns (Id) {}
+	rpc Update(User) returns (Empty) {}
+	rpc Ban(Id) returns (Empty) {}
+	rpc Unban(Id) returns (Empty) {}
+	rpc Merge(MergeRequest) returns (Empty) {}
+	rpc ReadBulk(Ids) returns (Users) {}
+	rpc List(ListRequest) returns (Users) {}
+}
+
+message Ids {repeated string Ids = 1;}
+
+message ListRequest {
+	string AccountId = 1;
+	string StartId = 2;
+	int32 Limit = 3;
+	string Keyword = 4;
+}
+
+
+message MergeRequest {
+	string FormerUserId = 1;
+	string RecentUserId = 2;
+}
+
+message GreetingRequest {
+	string AccountId = 1;
+	string UserAgent = 2;
+	string UserId = 3;
+	string UUID = 4;
+}
