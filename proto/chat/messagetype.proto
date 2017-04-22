@@ -20,7 +20,7 @@ message GenericElement { // display
 	repeated Button Buttons = 5;
 }
 
-message Generic {
+message GenericTemplate {
 	repeated GenericElement Elements = 1; // limit to 5
 }
 

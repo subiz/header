@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package chat;
 
-message Ids {repeated string Ids = 1;}
+message Ids { repeated string Ids = 1; }
 
 message User {
 	string Id = 1;
@@ -23,6 +23,16 @@ message Chat {
 	repeated User Users = 6;
 	int32 EventsCount = 8;
 	string ChannelId = 9;
+	repeated string Tags = 10;
+}
+
+message ChatsWithEvents {
+	repeated ChatWithEvents Chats = 1;
+}
+
+message ChatWithEvents {
+	Chat Chat = 1;
+	repeated ChatEvent Events = 2;
 }
 
 enum ChatEventType {
@@ -30,23 +40,74 @@ enum ChatEventType {
 	MESSAGE = 1; // content= content of message, attachments attachment
 	CLOSED = 3; // content, attachments = null
 
-	JOINED = 4; // ActorId: senderid || could be null, content: joinned id
+	JOINED = 4; // SenderId: senderid || could be null, Content: joinner id, Attachmemts: null
 
-	LEAVED = 5; // content, attachments = null
-	SEEN = 6; // content = event id, attachment = null
-	RATED = 7; // content = number of star
+	//	LEFT = 5; // Content = leaver, attachments = null
+	SEEN = 6; // Content = event id, attachment = null
+	RATED = 7; // content = number of star, attachment = null
 	INPUT = 8; // content = refered message id; attachment depended on type of event
 
-	TAG = 9; // content = tag
-	UNTAG = 10; // content = tag
+	TAG = 9; // Content = tag
+	UNTAG = 10; // Content = tag
+	TRANSFERCHAT = 11; // Content = joinerid1,joinerid2 (',' delimiter)
 }
 
 message Attachment {
+	/* Type show type of attachment
+	 * Value:
+	 *   Template
+	 *     - file
+	 *       + video
+	 *       + audio
+	 *       + image
+	 *     - preview (preview for link)
+	 *     - content
+	 *     - template
+	 *
+	 *       + receipt, ticket, ...
+	 *     - quick_replies
+	 *       + ask_form
+	 *       + generic_template
+	 *       + list_template
+	 *   Input control
+	 *     - button           -> send list of event to chat
+   *     - url
+	 *     - postback_button (single button)
+	 *     - textbox           -> contains value
+	 *     - ratebox            -> rate the chat (like 5 buttons but have beautiful display)
+	 */
 	string Type = 1;
 	string Payload = 2; // Custome JSON data
 }
 
 message ChatEvents { repeated ChatEvent Events = 1;}
+
+message ChatEvent {
+	// ID of chat event, 128-bit, start with EVNT
+	string Id = 1;
+
+	// Type indicates type of chat event
+	ChatEventType Type = 2;
+
+	// ChatId refer to ID of chat which contains this chat event
+	string ChatId = 3;
+
+	//string AccountId = 4;
+
+	// CTime is a RFC3339 string, tell when was event sent
+	string CTime = 5;
+
+	// SenderId refer to who has sent the event, could be Agent, User or System
+	string SenderId = 6;
+
+	// SenderType indicate type of sender
+	SenderType SenderType = 7;
+
+	// Content could be raw text, could be JSON data based on type
+	string Content = 8;
+
+	repeated Attachment Attachments = 9;
+}
 
 enum SenderType {
 	UNDEFINED = 0;
@@ -55,20 +116,7 @@ enum SenderType {
 	SYSTEM = 3;
 }
 
-message ChatEvent {
-	string Id = 1;
-	ChatEventType Type = 2;
-	string ChatId = 3;
-	//string AccountId = 4;
-	string CTime = 5;
-	string SenderId = 6;
-	SenderType SenderType = 7;
-	// Text could be raw text, could be JSON data based on type
-	string Content = 8;
-	repeated Attachment Attachments = 9;
-}
-
-message Id {string Id = 1;}
+message Id { string Id = 1; }
 
 message Empty {}
 
@@ -122,10 +170,11 @@ message ChatStart {
 }
 
 service ChatMgr {
-	// COLLECTOR for channel
+	// COLLECTOR for channel only
 	// Send KeepAlive message to extends live of a chat session
 	rpc Ping(Id) returns (Empty) {}
 	rpc Send(ChatEvent) returns (Id) {}
+
 	// initialize chat session
 	rpc Request(ChatRequest) returns (Id) {}
 	rpc Start(ChatStart) returns (Id) {}
@@ -133,13 +182,26 @@ service ChatMgr {
 	// QUERRIER
 	// List chats for specific user
 	rpc ListUsersUnread(ListUsersUnreadRequest) returns (UsersUnread) {}
-	rpc ListChatsByUser(ListChatByUserRequest) returns (Chats) {}
+	rpc ListChatsByUser(ListChatsByUserRequest) returns (ChatsWithEvents) {}
 	rpc ListChatEvents(ListChatEventRequest) returns (ChatEvents) {}
 
-	// Waiting list
+	// Unassigned list
 	rpc ListUnassignedChats(Id) returns (Chats) {}
-	rpc AcceptUnassignedChat(Id) returns (Empty) {}
-	rpc CheckUnassignedChat(Ids) returns (Chats) {}
+	rpc AcceptUnassignedChat(AcceptRequest) returns (Empty) {}
+	rpc CheckUnassignedChats(Ids) returns (Chats) {}
+}
+
+
+message AcceptRequest {
+	string AccountId = 1;
+	string AgentId = 2;
+	string ChatId = 3;
+}
+
+message ListUnassignChatsRequest {
+	string AccountId = 1;
+	string StartId = 2;
+	int32 Limit = 3;
 }
 
 message UnassignChat {
@@ -151,7 +213,6 @@ message UnassignChat {
 	string Name = 5;
 	repeated string Emails = 6;
 	repeated string Phones = 7;
-
 }
 
 message Bools {
@@ -160,7 +221,8 @@ message Bools {
 
 message ListUsersUnreadRequest {
 	string AccountId = 1;
-	repeated string UserIds = 2;
+	string AgentId = 2;
+	repeated string UserIds = 3;
 }
 
 message Unread {
@@ -173,13 +235,13 @@ message UsersUnread {
 }
 
 message ListChatEventRequest {
-	string AccountId = 1;
+	//string AccountId = 1;
 	string ChatId = 2;
 	string StartId = 3;
 	int32 Limit = 4;
 }
 
-message ListChatByUserRequest {
+message ListChatsByUserRequest {
 	string AccountId = 1;
 	string ChannelId = 2; // if null -> all channel
 	string UserId = 3; // must be visitor id
