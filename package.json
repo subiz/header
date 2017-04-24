@@ -1,6 +1,6 @@
 {
   "name": "@subiz/servicespec",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Service description",
   "main": "index.js",
   "scripts": {
