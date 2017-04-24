@@ -17,6 +17,8 @@ message User {
 	repeated Device Devices = 9;
 
 	bool IsBan = 10;
+
+	string AvatarUrl = 11;
 }
 
 message Users { repeated User Users = 1; }
@@ -26,13 +28,6 @@ message Device {
 	int32 UserAgentZipped = 2;
 	string Resolution = 3;
 	int32 LanguageZipped = 4;
-}
-
-enum DeviceType {
-	UNKNOWN = 0;
-	DESKTOP = 1;
-	MOBILE = 2;
-	TABLET = 3;
 }
 
 message Trace {
