@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package downmsg;
+
+message SendRequest {
+	string UserId = 1;
+	string Content = 2; // JSON Data
+}
+
+message Id {
+	string Id = 1;
+}
+
+message Empty {}
+
+service DownstreamMsg {
+	rpc Send(SendRequest) returns (Empty) {}
+
+	// must call when client webhook is updated
+	rpc OnClientUpdated(Id) returns (Empty) {}
+
+	// must be call when registration change
+	rpc OnRevoke(Registration) returns (Empty) {}
+	rpc OnRegister(Registration) returns (Empty) {}
+}
+
+// wss://downmsg-3.subiz.com/ws/?token=accesstokenofclient&topic=""
+
+message Registration {
+	string UserId = 1;
+	string ClientId = 2;
+}
