@@ -4,7 +4,7 @@ package client;
 
 message Empty {}
 
-message Id {string Id = 1;}
+message Id { string Id = 1; }
 
 enum Error {
 	OK = 0;
@@ -14,12 +14,42 @@ enum Error {
 	INTERNAL_ERROR = 500;
 }
 
+enum ClientType {
+	// STONE is just default value, client should never have Type is STONE
+	STONE = 0
+
+	// APP is general client type
+	APP = 1;
+
+	// CHANNEL is special client, that can and only listen chat topics of an account
+	CHANNEL = 2;
+
+	// BOT reserve for future
+	BOT = 3;
+}
+
+message Webhook {
+	// Url of webhook, https only
+	string Url = 1;
+
+	// IsVerified set if we know the url is controlled by webhook creator
+	bool IsVerified = 2;
+
+	// Topics list of topics that will be sent to webhook
+	repeated string Topics = 3;
+
+	// IsEnabled decide the webhook is being used or not
+	bool IsEnabled = 4;
+}
+
 message Client {
 	// 128 bit string identification of the client.
 	string Id = 1;
 
 	// Secret used to authorize client with oauth2 server
 	string Secret = 2;
+
+	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
 	string LogoUrl = 3;
 	
 	// owner id, could be Account or Agent
@@ -28,15 +58,15 @@ message Client {
 	string ContactEmail = 5;
 	string Description = 6;
 	string ShortDescription = 7;
-	bool IsVerified = 8;
-	// List of URLs which client must register to subiz
-	repeated string RedirectUrls = 9;
-	repeated string WebhookUrls = 10;
 
-	enum ClientType {
-		APP = 0;
-		CHANNEL = 1;
-	}
+	// IsVerified will be true if client is verified by the authority
+	bool IsVerified = 8;
+
+	// List of URLs which client must register for oauth redirection
+	repeated string RedirectUrls = 9;
+
+	repeated Webhook Webhooks= 10; // if prefix with - -> disabled
+
 	ClientType Type = 11;
 	string Name = 12;
 
@@ -61,9 +91,14 @@ message Client {
 	// client authentication using other means.
 	bool IsConfidential = 17;
 
-	// Channel only, conversations on this channel will be close if there
+	// ============= CHANNEL ONLY SECTION ======
+
+	// conversations on this channel will be close if there
 	// are no message pass in last ClosedTimeout seconds
-	int32 ClosedTimeout = 18;
+	int32 DefaultClosedTimeout = 18;
+
+	//
+
 }
 
 message Secret {
@@ -98,7 +133,8 @@ service ClientMgt {
 
 	rpc Authorize(Registration) returns (Empty) {}
 	rpc Revoke(Registration) returns (Empty) {}
-	rpc ListRegistrations(Id) returns (Registrations) {}
+	rpc ListClientRegistrations(Id) returns (Registrations) {}
+	rpc ListChannelRegistrations(Id) returns (Registrations) {}
 }
 
 message Registration {
