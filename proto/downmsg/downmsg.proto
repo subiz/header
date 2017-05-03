@@ -24,8 +24,9 @@ service DownstreamMsg {
 	rpc OnRegister(Registration) returns (Empty) {}
 }
 
-// wss://downmsg-3.subiz.com/ws/?token=accesstokenofclient&topic=""
-
+// wss://downmsg-3.subiz.com/ws/?token=accesstokenofclient&topics=""&recent_event_id
+// downstream, upstream only for chat message and change topics
+// only one connection are allowed
 message Registration {
 	string UserId = 1;
 	string ClientId = 2;
