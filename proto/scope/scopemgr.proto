@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package scope;
 
-import "bitbucket.org/subiz/servicespec/proto/common/auth/auth.proto";
+import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
 
 enum ErrorCode {
 	NO_ERROR = 0;
