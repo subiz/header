@@ -2,37 +2,42 @@ syntax = "proto3";
 
 package account;
 
-import "bitbucket.org/subiz/servicespec/proto/common/auth/auth.proto";
+enum DefAgent {
+	AGNTSYSTEM = 0;
+}
 
 enum ErrorCode {
-	OK = 0;
-	NOTFOUND = 404;
-	INVALID = 400;
-	UNAUTHORIZED = 401;
-	INTERNAL_ERROR = 500;
+	Ok = 0;
+	NotFound = 404;
+	Invalid = 400;
+	Unauthorized = 401;
+	InternalError = 500;
+}
+
+enum AccountState {
+	Unconfirmed = 0; // waiting for email confirmation
+	Confirmed = 1;  // normal account
+	Locked = 2;  // subiz lock down account
 }
 
 message Account {
 	string Id = 1;
 	string Name = 2;
-	int32 State = 3;
 	int32 Plan = 4;
-	string LogoUrl = 7;
-
-	string OwnerId = 5;
-	bool IsClosed = 6;
+	string LogoUrl = 5;
+	string OwnerId = 6;
+	AccountState State = 7;
 }
 
-message Id {string Id = 1;}
+message Id {
+	string Id = 1;
+}
 
-message Ids {repeated string Ids = 1;}
+message Ids {
+	repeated string Ids = 1;
+}
 
 message Empty {}
-
-message UpdatePlanRequest {
-	string AccountId = 1;
-	int32 PlanId = 2;
-}
 
 message AgentGroup {
 	string Id = 1;
@@ -41,58 +46,65 @@ message AgentGroup {
 	string Tag = 4;
 }
 
-service AccountInfoMgr {
-	rpc Create(Account) returns (Id) {}
-	rpc Close(Id) returns (Empty) {}
-	rpc Open(Id) returns (Empty) {}
-	rpc Update(Account) returns (Empty) {}
-	rpc Read(Id) returns (Account) {}
-	rpc UpdatePlan(UpdatePlanRequest) returns (Empty) {}
-	rpc ListLimit(Empty) returns (LimitsResponse) {}
-}
+service AccountMgr {
+	rpc CreateAccount(CreateAccountRequest) returns (Id) {}
+	rpc UpdateAccount(Account) returns (Empty) {}
+	rpc ReadAccount(Id) returns (Account) {}
 
-service AgentMgr {
+	rpc ListLimits(Empty) returns (LimitsResponse) {}
+
 	rpc InviteAgent(InviteAgentRequest) returns (Empty) {}
 	// delete invitation invoke by agent
-	rpc AcceptInvitation(AcceptInvitationRequest) returns (Empty) {}
-	rpc UpdateProfile(Agent) returns (Empty) {}
-	rpc Read(Id) returns (Agent) {}
+	rpc UninviteAgent(Invitation) returns (Empty) {}
+	rpc AcceptInvitation(Invitation) returns (Empty) {}
+	rpc RejectInvitation(Invitation) returns (Empty) {}
+	// list all invitation by account
+	rpc ListInvitations(Id) returns (Invitations) {}
 
-	rpc Config(AccAgentConfiguration) returns (Empty) {}
-	rpc GrantPermission(UpdatePermissionRequest) returns (Empty) {}
-	rpc RevokePermission(UpdatePermissionRequest) returns (Empty) {}
-
+	rpc UpdateAgent(Agent) returns (Empty) {}
+	rpc ReadAgent(Id) returns (Agent) {}
+	rpc DeleteAgent(Id) returns (Empty) {}
+	rpc ConfigAgent(AgentConfiguration) returns (Empty) {}
 	// List by account
-	rpc List(Id) returns (Agents) {}
-	rpc Enable(Id) returns (Empty) {}
-	rpc Disable(Id) returns (Empty) {}
-	rpc Register(Agent) returns (Id) {}
+	rpc ListAgents(Id) returns (Agents) {}
 
-	rpc RequestResetPw(Email) returns (Empty) {}
-	// Change password, called by subiz agent || when user first login
-	rpc ChangePw(ChangePasswordRequest) returns (Empty) {}
-
-	rpc ResetPW(ChangePasswordRequest) returns (Empty) {}
-	rpc Confirm(Id) returns (Empty) {}
+	rpc ResetPW(NewPassword) returns (Empty) {}
 	rpc CheckLogin(LoginRequest) returns (Id) {}
 
 	rpc BatchRead(Ids) returns (Agents) {}
 
 	rpc CreateGroup(AgentGroup) returns (Id) {}
-	rpc JoinGroup(UpdateGroupRequest) returns (Empty) {}
-	rpc LeaveGroup(UpdateGroupRequest) returns (Empty) {}
+	rpc AddMember(UpdateGroupRequest) returns (Empty) {}
+	rpc RemoveMember(UpdateGroupRequest) returns (Empty) {}
+	rpc UpdateGroup(AgentGroup) returns (Empty) {}
 	rpc DeleteGroup(Id) returns (Empty) {}
-	rpc ListGroup(ListGroupAgentRequest) returns(AgentGroups) {}
+	rpc ListGroups(Id) returns(AgentGroups) {}
 	rpc ReadGroup(Id) returns (AgentGroup) {}
 
-	rpc ListGroupOfAgent(Id) returns (AgentGroups) {}
+	rpc ListGroupsOfAgent(Id) returns (AgentGroups) {}
+}
+
+message CreateAccountRequest {
+	string FirstName = 1;
+	string LastName = 2;
+	string Email = 3;
+	string Language = 4;
+	string Password = 5;
+	string AccountName = 6;
 }
 
 enum Gender {
-	UNSET = 0;
-	MALE = 1;
-	FEMALE = 2;
-	UNKNOWN = 3;
+	Unset = 0;
+	Male = 1;
+	Female = 2;
+	Unknown = 3;
+}
+
+enum AgentState {
+	Pending = 0;
+	Active = 1;
+	Deactive = 2;
+	Deleted = 3;
 }
 
 message Agent {
@@ -104,37 +116,47 @@ message Agent {
 	string AccountId = 6;
 	string JobTitle = 7;
 	Gender Gender = 8;
-	string LastLoginTime = 9;
+	string LastSeen = 9;
 	string AvatarUrl = 11;
 	string Language = 12;
 	string Timezone = 13;
-	//bool IsVerified = 8;
-	bool IsConfirmed = 15;
-	auth.Scope Scopes = 17;
-	string HashedPassword = 18;
-
-	string JoinDate = 19;
+	string EncryptedPassword = 18;
+  string JoinDate = 19;
+	string Phone = 22;
 	string InviteFromAgentId = 20;
-	bool IsIn = 21;
-	// set to true if agent is being invited
-	bool IsInviting = 22;
-	bool IsDisabled = 23;
+  AgentState State = 21;
+}
+
+enum InvitationState {
+	Sent = 0;
+	Accepted = 1;
+	Rejected = 2;
+}
+
+message Invitations {
+	repeated Invitation Invitations = 1;
+}
+
+message Invitation {
+	string AccountId = 1;
+	string FromId = 2;
+	string Email = 3;
+	InvitationState State = 4;
+	string SendTime = 5;
+	string ReplyTime = 6;
 }
 
 message LoginRequest {
 	string Email = 1;
 	string Password = 2;
+	string AccountId = 3;
 }
 
 message Agents {
 	repeated Agent Agents = 1;
 }
 
-message Email {
-	string Email = 1;
-}
-
-message ChangePasswordRequest {
+message NewPassword {
 	string AgentId = 1;
 	string Password = 2;
 }
@@ -151,9 +173,10 @@ message Limit {
 
 	int32 MaxAgentGroups = 5;
 	int32 MaxAgentInGroups = 6;
+
 }
 
-message AccAgentConfiguration {
+message AgentConfiguration {
 	bool NotificationSound = 1;
 	NotificationConfig EmailNoti = 2;
 	NotificationConfig DesktopNoti = 3;
@@ -168,16 +191,7 @@ message NotificationConfig {
 	bool Nothing = 5;
 }
 
-message RegisterTokenExpiredEvent {
-	string Email = 1;
-}
-
 message AgentGroups {repeated AgentGroups Groups = 1;}
-
-message ListGroupAgentRequest {
-	string Keyword = 1;
-	string AccountId = 2;
-}
 
 message UpdateGroupRequest {
 	string GroupId = 1;
@@ -196,17 +210,47 @@ message InviteAgentRequest {
 	string AgentLastName = 6;
 }
 
-message CancelInvitationRequest {
-	string AccountId = 1;
-	string AgentEmail = 2;
+message OutEventAccountCreated {
 }
 
-message UpdatePermissionRequest {
-	string AccountId = 1;
-	string AgentId = 2;
-	int32 Scope = 3;
+message OutEventAccountUpdated {
 }
 
-message AcceptInvitationRequest {
-	string Token = 1;
+message AccountPlanUpdated {
+}
+
+message OEInvitationCreated {
+}
+
+message OEInvitationDeleted {
+}
+
+message OEInvitationRejected {
+}
+
+message OEInvitationAccepted {
+}
+
+message OEAgentCreated {
+}
+
+message OEAgentUpdated {
+}
+
+message OEAgentActivated {
+}
+
+message OEAgentDeativated {
+}
+
+message OEAgentGroupUpserted {
+}
+
+message OEAgentGroupDeleted {
+}
+
+message OEMemberJoined {
+}
+
+message OEMemberLeft {
 }
