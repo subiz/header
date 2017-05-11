@@ -4,7 +4,9 @@ package client;
 
 message Empty {}
 
-message Id { string Id = 1; }
+message Id {
+	string Id = 1;
+}
 
 enum Error {
 	OK = 0;
@@ -16,7 +18,7 @@ enum Error {
 
 enum ClientType {
 	// STONE is just default value, client should never have Type is STONE
-	STONE = 0
+	STONE = 0;
 
 	// APP is general client type
 	APP = 1;
@@ -51,10 +53,10 @@ message Client {
 
 	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
 	string LogoUrl = 3;
-	
+
 	// owner id, could be Account or Agent
 	string OwnerId = 4;
-	
+
 	string ContactEmail = 5;
 	string Description = 6;
 	string ShortDescription = 7;
