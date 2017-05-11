@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package pubsub;
+
+message Empty {}
+
+message Subscription {
+	string Topic = 1;
+	string Subscriber = 2;
+}
+
+message ListRequest {
+	string Topic = 1;
+	string Start = 2;
+	int32 Limit = 3;
+}
+
+message Subscribers {
+	repeated string Subscribers = 1;
+}
+
+service Pubsub {
+	rpc Subscribe(Subscription) returns (Empty) {}
+	rpc Unsubscribe(Subscription) returns (Empty) {}
+	rpc ListSubscriber(ListRequest) returns (Subscribers) {}
+}
