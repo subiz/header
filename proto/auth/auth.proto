@@ -2,16 +2,18 @@ syntax = "proto3";
 
 package auth;
 
+message Empty {}
+
 enum Error {
-	OK = 0;
-	INVALID_REQUEST = 400;
-	UNAUTHORIZED = 401;
-	INTERNAL_ERROR = 500;
-	NOTFOUND = 404;
+	Ok = 0;
+	InvalidRequest = 400;
+	Unauthorized = 401;
+	InternalError = 500;
+	NotFound = 404;
 }
 
 service ScopeMgt {
-	rpc Read(IdRequest) returns (Scope) {}
+	rpc Read(ScopeId) returns (Scope) {}
 	rpc List(Empty) returns (ScopesResponse) {}
 }
 
@@ -22,14 +24,16 @@ message Credential {
 	
 	// scope that the user allow
 	Method Method = 5;
-
+	
 	// set to true if this credential is generated from internal service.
 	// Internal credential is trusted and have full access to any function
 	// when internal is set to true, all other fields is ignored
 	bool IsInternal = 6;
-
+	string ClientId = 7;
+	int32 ClientType = 8;
+	
 	// optional
-	string ApiKey = 7;
+	string ApiKey = 9;
 }
 
 message Scope {
@@ -42,7 +46,6 @@ message Scope {
 }
 
 message Method {
-
 	// trigger
 	bool UpdateTrigger = 50;
 	bool DeleteTrigger = 51;
@@ -117,8 +120,6 @@ message Method {
 	bool ReadOthersAccount = 138;
 	bool UpdateOthersAccountPlan = 139;
 
-
-	
 	// clients
 	bool ReadClient = 151;
 	bool ListClient = 152;
@@ -131,12 +132,30 @@ message Method {
 	
 }
 
-message IdRequest {
+message ScopeId {
   int32 Id = 1;
+}
+
+message UserId {
+	string Id = 1;
 }
 
 message ScopesResponse {
 	repeated Scope Scopes = 1;
 }
 
-message Empty {}
+message UserAuth {
+	string UserId = 1;
+	Scope Scopes = 2;
+}
+
+message UpdatePermissionRequest {
+	string UserId = 2;
+	int32 Scope = 3;
+}
+
+service AccAuth {
+	rpc List(UserId) returns (Scope) {}
+	rpc Grant(UpdatePermissionRequest) returns (Empty) {}
+	rpc Revoke(UpdatePermissionRequest) returns (Empty) {}
+}
