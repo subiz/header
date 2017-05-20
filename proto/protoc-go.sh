@@ -1,4 +1,6 @@
 TOTAL=0
+echo -e "\033[0;34m===========BUILDING PROTO SPEC======="
+
 for i in `ls -R`; do
   if [[ $i == *":"* ]]; then
     LASTDIRECTORY=${i::-1}
@@ -12,5 +14,5 @@ for i in `ls -R`; do
     fi;
   fi;
 done;
-echo -e "\033[0;34mDone. (total:" $TOTAL "files)\033[0;30m"
+echo -e "\033[0;32mDone. (total:" $TOTAL "files)\033[0;30m"
 
