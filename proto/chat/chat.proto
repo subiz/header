@@ -2,11 +2,134 @@ syntax = "proto3";
 
 package chat;
 
-message Ids { repeated string Ids = 1; }
+/////////////////////////
+/////   SERVICE    //////
+/////////////////////////
+
+service ChatMgr {
+	// COLLECTOR for channel only
+	// fire EvChatSent
+	rpc Send(ChatEvent) returns (Empty) {}
+
+	// request chat from user
+	// fire EvChatWaiting, EvChatCreated
+	rpc Request(ChatRequest) returns (Id) {}
+
+	// start chat from agent
+	// fire EvChatCreated
+	rpc Start(ChatStart) returns (Empty) {}
+
+	// QUERRIER
+	// List chats for specific use
+	rpc ListUsersUnread(ListUsersUnreadRequest) returns (UsersUnread) {}
+	rpc ListChatsByUser(ListChatsByUserRequest) returns (ChatsWithEvents) {}
+	rpc ListChatEvents(ListChatEventRequest) returns (ChatEvents) {}
+
+	// Unassigned list
+	rpc ListUnassignedChats(Id) returns (Chats) {}
+	rpc AcceptUnassignedChat(AcceptRequest) returns (Empty) {}
+
+	rpc Read(Id) returns (Chat) {}
+}
+
+
+enum Error {
+	OK = 0;
+	NoRouteMatch = 1;
+	NotFound = 404;
+	AccessDeny = 400;
+}
+
+service Router {
+	rpc Assign(chat.ChatRequest) returns (RouteResult) {}
+  rpc Update(Rule) returns (Empty) {}
+	rpc Create(Rule) returns (Id) {}
+	rpc Delete(Id) returns (Empty) {}
+
+	// list ALL rules by account
+	rpc List(Id) returns (Route) {}
+}
+
+enum JoinOperator {
+	None = 0;
+	And = 1;
+	Or = 2;
+}
+
+message Id { string Id = 1;}
+
+message Empty {}
+
+message Rule {
+	string Id = 1;
+	string AccountId = 2;
+	string Priority = 3;
+	AssignStrategy Strategy = 4;
+  repeated string AgentIds = 5;
+	repeated Condition Conditions = 6;
+	bool IsDisabled = 7;
+	string CTime = 8;
+}
+
+message Condition {
+	JoinOperator Join = 1;
+	string Key = 2; // unique
+	string Operator = 3; // = # regex
+	repeated string Value = 4; // JSON
+}
+
+message Route {
+	repeated Rule Route = 1;
+}
+
+message RouteResult {
+	string RuleId = 1;
+
+	AssignStrategy Strategy = 3;
+  repeated string AgentIds = 4;
+}
+
+enum AssignStrategy {
+	Unsetted = 0;
+	AllAgents = 1;
+	AgentGroup = 2;
+	SpecificAgent = 3;
+	MostRecent = 4;
+
+	RoundRobinAllAgents = 5;
+	RoundRobinAgents = 6;
+}
+
+message GroupDeleteEvent {
+	string GroupId = 1;
+}
+
+message GroupUpdateEvent {
+	string GroupId = 1;
+	repeated string MemberIds = 2;
+}
+
+message AgentDeletedEvent {
+	string AgentId = 1;
+}
+
+message AgentUpdateEvent {
+	string AgentId = 1;
+	bool IsActive = 2;
+	bool IsConfirmed = 3;
+}
+
+////////////////////////////
+/////   MESSAGE   //////////
+////////////////////////////
+
+message Ids {
+	repeated string Ids = 1;
+}
 
 message User {
 	string Id = 1;
-	SenderType Type = 4;
+	UserType Type = 4;
 	string LastSeenId = 5;
 }
 
@@ -24,6 +147,7 @@ message Chat {
 	int32 EventsCount = 8;
 	string ChannelId = 9;
 	repeated string Tags = 10;
+	repeated Id MutedUserIds = 11;
 }
 
 message ChatsWithEvents {
@@ -49,7 +173,7 @@ enum ChatEventType {
 
 	TAG = 9; // Content = tag
 	UNTAG = 10; // Content = tag
-	TRANSFERCHAT = 11; // Content = joinerid1,joinerid2 (',' delimiter)
+	TRANSFER = 11; // Content = joinerid1,joinerid2 (',' delimiter)
 }
 
 message Attachment {
@@ -80,10 +204,12 @@ message Attachment {
 	string Payload = 2; // Custome JSON data
 }
 
-message ChatEvents { repeated ChatEvent Events = 1;}
+message ChatEvents {
+	repeated ChatEvent Events = 1;
+}
 
 message ChatEvent {
-	// ID of chat event, 128-bit, start with EVNT
+	// ID of chat evet
 	string Id = 1;
 
 	// Type indicates type of chat event
@@ -92,8 +218,6 @@ message ChatEvent {
 	// ChatId refer to ID of chat which contains this chat event
 	string ChatId = 3;
 
-	//string AccountId = 4;
-
 	// CTime is a RFC3339 string, tell when was event sent
 	string CTime = 5;
 
@@ -101,24 +225,23 @@ message ChatEvent {
 	string SenderId = 6;
 
 	// SenderType indicate type of sender
-	SenderType SenderType = 7;
+	UserType SenderType = 7;
 
 	// Content could be raw text, could be JSON data based on type
-	string Content = 8;
+	string Text = 8;
 
-	repeated Attachment Attachments = 9;
+	// Could be "", "raw" or "markdown"
+	string Format = 9;
+
+	repeated Attachment Attachments = 10;
 }
 
-enum SenderType {
-	UNDEFINED = 0;
-	USER = 1;
-	AGENT = 2;
-	SYSTEM = 3;
+enum UserType {
+	UndefinedUserType = 0;
+	Visitor = 1;
+	Agent = 2;
+	System = 3;
 }
-
-message Id { string Id = 1; }
-
-message Empty {}
 
 enum DeviceType {
 	UNKNOWN = 0;
@@ -146,7 +269,6 @@ message UserInfo {
 
 message ChatRequest {
 	string AccountId = 1;
-	string ChatId = 2;
 	string ChannelId = 4;
 	string MessageTo = 5;
 	string PageUrl = 6;
@@ -168,29 +290,6 @@ message ChatStart {
 	string UserId = 2;
 	string ChannelId = 3;
 }
-
-service ChatMgr {
-	// COLLECTOR for channel only
-	// Send KeepAlive message to extends live of a chat session
-	rpc Ping(Id) returns (Empty) {}
-	rpc Send(ChatEvent) returns (Id) {}
-
-	// initialize chat session
-	rpc Request(ChatRequest) returns (Id) {}
-	rpc Start(ChatStart) returns (Id) {}
-
-	// QUERRIER
-	// List chats for specific user
-	rpc ListUsersUnread(ListUsersUnreadRequest) returns (UsersUnread) {}
-	rpc ListChatsByUser(ListChatsByUserRequest) returns (ChatsWithEvents) {}
-	rpc ListChatEvents(ListChatEventRequest) returns (ChatEvents) {}
-
-	// Unassigned list
-	rpc ListUnassignedChats(Id) returns (Chats) {}
-	rpc AcceptUnassignedChat(AcceptRequest) returns (Empty) {}
-	rpc CheckUnassignedChats(Ids) returns (Chats) {}
-}
-
 
 message AcceptRequest {
 	string AccountId = 1;
@@ -247,4 +346,92 @@ message ListChatsByUserRequest {
 	string UserId = 3; // must be visitor id
 	string StartId = 4;
 	int32 Limit = 5;
+}
+
+// Topic Chat.Sent
+message EvChatSent {
+	string RequestId = 1;
+	string Event = 2;
+
+	// ID of chat event, 128-bit, start with EVNT
+	string EventId = 3;
+
+	// Type indicates type of chat event
+	ChatEventType Type = 4;
+
+	// ChatId refer to ID of chat which contains this chat event
+	string ChatId = 5;
+
+	string AccountId = 6;
+
+	// CTime is a RFC3339 string, tell when was event sent
+	string CTime = 7;
+
+	// SenderId refer to who has sent the event, could be Agent, User or System
+	string SenderId = 8;
+
+	// SenderType indicate type of sender
+	UserType SenderType = 9;
+
+	// Content could be raw text, could be JSON data based on type
+	string Content = 10;
+
+	repeated Attachment Attachments = 11;
+}
+
+// Topic Chat.Assigned
+message EvChatAssigned {
+	string RequestId = 1;
+	string Event = 2;
+	string ChatId = 4;
+	string AccountId = 3;
+	string CreatedTime = 5;
+	repeated User Users = 6;
+	string ChannelId = 7;
+	repeated string Tags = 8;
+}
+
+// Topic Chat.Waiting
+message EvChatWaiting {
+	string RequestId = 1;
+	string Event = 2;
+	string ChatId = 4;
+	string AccountId = 3;
+	string CreatedTime = 5;
+	repeated User Users = 6;
+	string ChannelId = 7;
+	repeated string Tags = 8;
+}
+
+// lis
+message EvChatStartRequested {
+}
+
+message EvChatSendRequested {
+}
+
+message EvChatAcceptRequested {
+}
+
+message EvChatCreated {
+	string RequestId = 1; // request ID
+	string Event = 2;
+	string AccountId = 3;
+	string ChatId = 4;
+	repeated User Users = 5;
+	string ChannelId = 6;
+	string CreatedTime = 7;
+}
+
+message EvChatResult { // delete after 5mins, so be quick
+	string RequestId = 1; //request id
+	int32 Code = 2;
+	string CreatedTime = 3;
+	string Description = 4;
+}
+
+enum Event {
+	Chat_Error = 0;
+	Chat_Sent = 1;
+	Chat_Assigned = 2;
 }

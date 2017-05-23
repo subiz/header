@@ -9,6 +9,16 @@ It is generated from these files:
 	chat/chat.proto
 
 It has these top-level messages:
+	Id
+	Empty
+	Rule
+	Condition
+	Route
+	RouteResult
+	GroupDeleteEvent
+	GroupUpdateEvent
+	AgentDeletedEvent
+	AgentUpdateEvent
 	Ids
 	User
 	Chat
@@ -17,8 +27,6 @@ It has these top-level messages:
 	Attachment
 	ChatEvents
 	ChatEvent
-	Id
-	Empty
 	UserInfo
 	ChatRequest
 	Chats
@@ -32,6 +40,14 @@ It has these top-level messages:
 	UsersUnread
 	ListChatEventRequest
 	ListChatsByUserRequest
+	EvChatSent
+	EvChatAssigned
+	EvChatWaiting
+	EvChatStartRequested
+	EvChatSendRequested
+	EvChatAcceptRequested
+	EvChatCreated
+	EvChatResult
 */
 package chat
 
@@ -55,6 +71,93 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+type Error int32
+
+const (
+	Error_OK           Error = 0
+	Error_NoRouteMatch Error = 1
+	Error_NotFound     Error = 404
+	Error_AccessDeny   Error = 400
+)
+
+var Error_name = map[int32]string{
+	0:   "OK",
+	1:   "NoRouteMatch",
+	404: "NotFound",
+	400: "AccessDeny",
+}
+var Error_value = map[string]int32{
+	"OK":           0,
+	"NoRouteMatch": 1,
+	"NotFound":     404,
+	"AccessDeny":   400,
+}
+
+func (x Error) String() string {
+	return proto.EnumName(Error_name, int32(x))
+}
+func (Error) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
+type JoinOperator int32
+
+const (
+	JoinOperator_None JoinOperator = 0
+	JoinOperator_And  JoinOperator = 1
+	JoinOperator_Or   JoinOperator = 2
+)
+
+var JoinOperator_name = map[int32]string{
+	0: "None",
+	1: "And",
+	2: "Or",
+}
+var JoinOperator_value = map[string]int32{
+	"None": 0,
+	"And":  1,
+	"Or":   2,
+}
+
+func (x JoinOperator) String() string {
+	return proto.EnumName(JoinOperator_name, int32(x))
+}
+func (JoinOperator) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+type AssignStrategy int32
+
+const (
+	AssignStrategy_Unsetted            AssignStrategy = 0
+	AssignStrategy_AllAgents           AssignStrategy = 1
+	AssignStrategy_AgentGroup          AssignStrategy = 2
+	AssignStrategy_SpecificAgent       AssignStrategy = 3
+	AssignStrategy_MostRecent          AssignStrategy = 4
+	AssignStrategy_RoundRobinAllAgents AssignStrategy = 5
+	AssignStrategy_RoundRobinAgents    AssignStrategy = 6
+)
+
+var AssignStrategy_name = map[int32]string{
+	0: "Unsetted",
+	1: "AllAgents",
+	2: "AgentGroup",
+	3: "SpecificAgent",
+	4: "MostRecent",
+	5: "RoundRobinAllAgents",
+	6: "RoundRobinAgents",
+}
+var AssignStrategy_value = map[string]int32{
+	"Unsetted":            0,
+	"AllAgents":           1,
+	"AgentGroup":          2,
+	"SpecificAgent":       3,
+	"MostRecent":          4,
+	"RoundRobinAllAgents": 5,
+	"RoundRobinAgents":    6,
+}
+
+func (x AssignStrategy) String() string {
+	return proto.EnumName(AssignStrategy_name, int32(x))
+}
+func (AssignStrategy) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+
 type ChatEventType int32
 
 const (
@@ -63,12 +166,12 @@ const (
 	ChatEventType_CLOSED  ChatEventType = 3
 	ChatEventType_JOINED  ChatEventType = 4
 	// 	LEFT = 5; // Content = leaver, attachments = null
-	ChatEventType_SEEN         ChatEventType = 6
-	ChatEventType_RATED        ChatEventType = 7
-	ChatEventType_INPUT        ChatEventType = 8
-	ChatEventType_TAG          ChatEventType = 9
-	ChatEventType_UNTAG        ChatEventType = 10
-	ChatEventType_TRANSFERCHAT ChatEventType = 11
+	ChatEventType_SEEN     ChatEventType = 6
+	ChatEventType_RATED    ChatEventType = 7
+	ChatEventType_INPUT    ChatEventType = 8
+	ChatEventType_TAG      ChatEventType = 9
+	ChatEventType_UNTAG    ChatEventType = 10
+	ChatEventType_TRANSFER ChatEventType = 11
 )
 
 var ChatEventType_name = map[int32]string{
@@ -81,52 +184,52 @@ var ChatEventType_name = map[int32]string{
 	8:  "INPUT",
 	9:  "TAG",
 	10: "UNTAG",
-	11: "TRANSFERCHAT",
+	11: "TRANSFER",
 }
 var ChatEventType_value = map[string]int32{
-	"NONE":         0,
-	"MESSAGE":      1,
-	"CLOSED":       3,
-	"JOINED":       4,
-	"SEEN":         6,
-	"RATED":        7,
-	"INPUT":        8,
-	"TAG":          9,
-	"UNTAG":        10,
-	"TRANSFERCHAT": 11,
+	"NONE":     0,
+	"MESSAGE":  1,
+	"CLOSED":   3,
+	"JOINED":   4,
+	"SEEN":     6,
+	"RATED":    7,
+	"INPUT":    8,
+	"TAG":      9,
+	"UNTAG":    10,
+	"TRANSFER": 11,
 }
 
 func (x ChatEventType) String() string {
 	return proto.EnumName(ChatEventType_name, int32(x))
 }
-func (ChatEventType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (ChatEventType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
-type SenderType int32
+type UserType int32
 
 const (
-	SenderType_UNDEFINED SenderType = 0
-	SenderType_USER      SenderType = 1
-	SenderType_AGENT     SenderType = 2
-	SenderType_SYSTEM    SenderType = 3
+	UserType_UndefinedUserType UserType = 0
+	UserType_Visitor           UserType = 1
+	UserType_Agent             UserType = 2
+	UserType_System            UserType = 3
 )
 
-var SenderType_name = map[int32]string{
-	0: "UNDEFINED",
-	1: "USER",
-	2: "AGENT",
-	3: "SYSTEM",
+var UserType_name = map[int32]string{
+	0: "UndefinedUserType",
+	1: "Visitor",
+	2: "Agent",
+	3: "System",
 }
-var SenderType_value = map[string]int32{
-	"UNDEFINED": 0,
-	"USER":      1,
-	"AGENT":     2,
-	"SYSTEM":    3,
+var UserType_value = map[string]int32{
+	"UndefinedUserType": 0,
+	"Visitor":           1,
+	"Agent":             2,
+	"System":            3,
 }
 
-func (x SenderType) String() string {
-	return proto.EnumName(SenderType_name, int32(x))
+func (x UserType) String() string {
+	return proto.EnumName(UserType_name, int32(x))
 }
-func (SenderType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (UserType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
 type DeviceType int32
 
@@ -153,7 +256,303 @@ var DeviceType_value = map[string]int32{
 func (x DeviceType) String() string {
 	return proto.EnumName(DeviceType_name, int32(x))
 }
-func (DeviceType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (DeviceType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+
+type Event int32
+
+const (
+	Event_Chat_Error    Event = 0
+	Event_Chat_Sent     Event = 1
+	Event_Chat_Assigned Event = 2
+)
+
+var Event_name = map[int32]string{
+	0: "Chat_Error",
+	1: "Chat_Sent",
+	2: "Chat_Assigned",
+}
+var Event_value = map[string]int32{
+	"Chat_Error":    0,
+	"Chat_Sent":     1,
+	"Chat_Assigned": 2,
+}
+
+func (x Event) String() string {
+	return proto.EnumName(Event_name, int32(x))
+}
+func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+
+type Id struct {
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+}
+
+func (m *Id) Reset()                    { *m = Id{} }
+func (m *Id) String() string            { return proto.CompactTextString(m) }
+func (*Id) ProtoMessage()               {}
+func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
+func (m *Id) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type Empty struct {
+}
+
+func (m *Empty) Reset()                    { *m = Empty{} }
+func (m *Empty) String() string            { return proto.CompactTextString(m) }
+func (*Empty) ProtoMessage()               {}
+func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+type Rule struct {
+	Id         string         `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	AccountId  string         `protobuf:"bytes,2,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	Priority   string         `protobuf:"bytes,3,opt,name=Priority,json=priority" json:"Priority,omitempty"`
+	Strategy   AssignStrategy `protobuf:"varint,4,opt,name=Strategy,json=strategy,enum=chat.AssignStrategy" json:"Strategy,omitempty"`
+	AgentIds   []string       `protobuf:"bytes,5,rep,name=AgentIds,json=agentIds" json:"AgentIds,omitempty"`
+	Conditions []*Condition   `protobuf:"bytes,6,rep,name=Conditions,json=conditions" json:"Conditions,omitempty"`
+	IsDisabled bool           `protobuf:"varint,7,opt,name=IsDisabled,json=isDisabled" json:"IsDisabled,omitempty"`
+	CTime      string         `protobuf:"bytes,8,opt,name=CTime,json=cTime" json:"CTime,omitempty"`
+}
+
+func (m *Rule) Reset()                    { *m = Rule{} }
+func (m *Rule) String() string            { return proto.CompactTextString(m) }
+func (*Rule) ProtoMessage()               {}
+func (*Rule) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+
+func (m *Rule) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Rule) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *Rule) GetPriority() string {
+	if m != nil {
+		return m.Priority
+	}
+	return ""
+}
+
+func (m *Rule) GetStrategy() AssignStrategy {
+	if m != nil {
+		return m.Strategy
+	}
+	return AssignStrategy_Unsetted
+}
+
+func (m *Rule) GetAgentIds() []string {
+	if m != nil {
+		return m.AgentIds
+	}
+	return nil
+}
+
+func (m *Rule) GetConditions() []*Condition {
+	if m != nil {
+		return m.Conditions
+	}
+	return nil
+}
+
+func (m *Rule) GetIsDisabled() bool {
+	if m != nil {
+		return m.IsDisabled
+	}
+	return false
+}
+
+func (m *Rule) GetCTime() string {
+	if m != nil {
+		return m.CTime
+	}
+	return ""
+}
+
+type Condition struct {
+	Join     JoinOperator `protobuf:"varint,1,opt,name=Join,json=join,enum=chat.JoinOperator" json:"Join,omitempty"`
+	Key      string       `protobuf:"bytes,2,opt,name=Key,json=key" json:"Key,omitempty"`
+	Operator string       `protobuf:"bytes,3,opt,name=Operator,json=operator" json:"Operator,omitempty"`
+	Value    []string     `protobuf:"bytes,4,rep,name=Value,json=value" json:"Value,omitempty"`
+}
+
+func (m *Condition) Reset()                    { *m = Condition{} }
+func (m *Condition) String() string            { return proto.CompactTextString(m) }
+func (*Condition) ProtoMessage()               {}
+func (*Condition) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+
+func (m *Condition) GetJoin() JoinOperator {
+	if m != nil {
+		return m.Join
+	}
+	return JoinOperator_None
+}
+
+func (m *Condition) GetKey() string {
+	if m != nil {
+		return m.Key
+	}
+	return ""
+}
+
+func (m *Condition) GetOperator() string {
+	if m != nil {
+		return m.Operator
+	}
+	return ""
+}
+
+func (m *Condition) GetValue() []string {
+	if m != nil {
+		return m.Value
+	}
+	return nil
+}
+
+type Route struct {
+	Route []*Rule `protobuf:"bytes,1,rep,name=Route,json=route" json:"Route,omitempty"`
+}
+
+func (m *Route) Reset()                    { *m = Route{} }
+func (m *Route) String() string            { return proto.CompactTextString(m) }
+func (*Route) ProtoMessage()               {}
+func (*Route) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+
+func (m *Route) GetRoute() []*Rule {
+	if m != nil {
+		return m.Route
+	}
+	return nil
+}
+
+type RouteResult struct {
+	RuleId   string         `protobuf:"bytes,1,opt,name=RuleId,json=ruleId" json:"RuleId,omitempty"`
+	Strategy AssignStrategy `protobuf:"varint,3,opt,name=Strategy,json=strategy,enum=chat.AssignStrategy" json:"Strategy,omitempty"`
+	AgentIds []string       `protobuf:"bytes,4,rep,name=AgentIds,json=agentIds" json:"AgentIds,omitempty"`
+}
+
+func (m *RouteResult) Reset()                    { *m = RouteResult{} }
+func (m *RouteResult) String() string            { return proto.CompactTextString(m) }
+func (*RouteResult) ProtoMessage()               {}
+func (*RouteResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+
+func (m *RouteResult) GetRuleId() string {
+	if m != nil {
+		return m.RuleId
+	}
+	return ""
+}
+
+func (m *RouteResult) GetStrategy() AssignStrategy {
+	if m != nil {
+		return m.Strategy
+	}
+	return AssignStrategy_Unsetted
+}
+
+func (m *RouteResult) GetAgentIds() []string {
+	if m != nil {
+		return m.AgentIds
+	}
+	return nil
+}
+
+type GroupDeleteEvent struct {
+	GroupId string `protobuf:"bytes,1,opt,name=GroupId,json=groupId" json:"GroupId,omitempty"`
+}
+
+func (m *GroupDeleteEvent) Reset()                    { *m = GroupDeleteEvent{} }
+func (m *GroupDeleteEvent) String() string            { return proto.CompactTextString(m) }
+func (*GroupDeleteEvent) ProtoMessage()               {}
+func (*GroupDeleteEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+
+func (m *GroupDeleteEvent) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+type GroupUpdateEvent struct {
+	GroupId   string   `protobuf:"bytes,1,opt,name=GroupId,json=groupId" json:"GroupId,omitempty"`
+	MemberIds []string `protobuf:"bytes,2,rep,name=MemberIds,json=memberIds" json:"MemberIds,omitempty"`
+}
+
+func (m *GroupUpdateEvent) Reset()                    { *m = GroupUpdateEvent{} }
+func (m *GroupUpdateEvent) String() string            { return proto.CompactTextString(m) }
+func (*GroupUpdateEvent) ProtoMessage()               {}
+func (*GroupUpdateEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+
+func (m *GroupUpdateEvent) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
+func (m *GroupUpdateEvent) GetMemberIds() []string {
+	if m != nil {
+		return m.MemberIds
+	}
+	return nil
+}
+
+type AgentDeletedEvent struct {
+	AgentId string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+}
+
+func (m *AgentDeletedEvent) Reset()                    { *m = AgentDeletedEvent{} }
+func (m *AgentDeletedEvent) String() string            { return proto.CompactTextString(m) }
+func (*AgentDeletedEvent) ProtoMessage()               {}
+func (*AgentDeletedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+
+func (m *AgentDeletedEvent) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+type AgentUpdateEvent struct {
+	AgentId     string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	IsActive    bool   `protobuf:"varint,2,opt,name=IsActive,json=isActive" json:"IsActive,omitempty"`
+	IsConfirmed bool   `protobuf:"varint,3,opt,name=IsConfirmed,json=isConfirmed" json:"IsConfirmed,omitempty"`
+}
+
+func (m *AgentUpdateEvent) Reset()                    { *m = AgentUpdateEvent{} }
+func (m *AgentUpdateEvent) String() string            { return proto.CompactTextString(m) }
+func (*AgentUpdateEvent) ProtoMessage()               {}
+func (*AgentUpdateEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+
+func (m *AgentUpdateEvent) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *AgentUpdateEvent) GetIsActive() bool {
+	if m != nil {
+		return m.IsActive
+	}
+	return false
+}
+
+func (m *AgentUpdateEvent) GetIsConfirmed() bool {
+	if m != nil {
+		return m.IsConfirmed
+	}
+	return false
+}
 
 type Ids struct {
 	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids,omitempty"`
@@ -162,7 +561,7 @@ type Ids struct {
 func (m *Ids) Reset()                    { *m = Ids{} }
 func (m *Ids) String() string            { return proto.CompactTextString(m) }
 func (*Ids) ProtoMessage()               {}
-func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
 
 func (m *Ids) GetIds() []string {
 	if m != nil {
@@ -172,15 +571,15 @@ func (m *Ids) GetIds() []string {
 }
 
 type User struct {
-	Id         string     `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Type       SenderType `protobuf:"varint,4,opt,name=Type,json=type,enum=chat.SenderType" json:"Type,omitempty"`
-	LastSeenId string     `protobuf:"bytes,5,opt,name=LastSeenId,json=lastSeenId" json:"LastSeenId,omitempty"`
+	Id         string   `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Type       UserType `protobuf:"varint,4,opt,name=Type,json=type,enum=chat.UserType" json:"Type,omitempty"`
+	LastSeenId string   `protobuf:"bytes,5,opt,name=LastSeenId,json=lastSeenId" json:"LastSeenId,omitempty"`
 }
 
 func (m *User) Reset()                    { *m = User{} }
 func (m *User) String() string            { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()               {}
-func (*User) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (*User) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
 
 func (m *User) GetId() string {
 	if m != nil {
@@ -189,11 +588,11 @@ func (m *User) GetId() string {
 	return ""
 }
 
-func (m *User) GetType() SenderType {
+func (m *User) GetType() UserType {
 	if m != nil {
 		return m.Type
 	}
-	return SenderType_UNDEFINED
+	return UserType_UndefinedUserType
 }
 
 func (m *User) GetLastSeenId() string {
@@ -212,17 +611,18 @@ type Chat struct {
 	// Last active time
 	LTime string `protobuf:"bytes,4,opt,name=LTime,json=lTime" json:"LTime,omitempty"`
 	// Closed time
-	XTime       string   `protobuf:"bytes,5,opt,name=XTime,json=xTime" json:"XTime,omitempty"`
-	Users       []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
-	EventsCount int32    `protobuf:"varint,8,opt,name=EventsCount,json=eventsCount" json:"EventsCount,omitempty"`
-	ChannelId   string   `protobuf:"bytes,9,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
-	Tags        []string `protobuf:"bytes,10,rep,name=Tags,json=tags" json:"Tags,omitempty"`
+	XTime        string   `protobuf:"bytes,5,opt,name=XTime,json=xTime" json:"XTime,omitempty"`
+	Users        []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
+	EventsCount  int32    `protobuf:"varint,8,opt,name=EventsCount,json=eventsCount" json:"EventsCount,omitempty"`
+	ChannelId    string   `protobuf:"bytes,9,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
+	Tags         []string `protobuf:"bytes,10,rep,name=Tags,json=tags" json:"Tags,omitempty"`
+	MutedUserIds []*Id    `protobuf:"bytes,11,rep,name=MutedUserIds,json=mutedUserIds" json:"MutedUserIds,omitempty"`
 }
 
 func (m *Chat) Reset()                    { *m = Chat{} }
 func (m *Chat) String() string            { return proto.CompactTextString(m) }
 func (*Chat) ProtoMessage()               {}
-func (*Chat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*Chat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
 
 func (m *Chat) GetId() string {
 	if m != nil {
@@ -287,6 +687,13 @@ func (m *Chat) GetTags() []string {
 	return nil
 }
 
+func (m *Chat) GetMutedUserIds() []*Id {
+	if m != nil {
+		return m.MutedUserIds
+	}
+	return nil
+}
+
 type ChatsWithEvents struct {
 	Chats []*ChatWithEvents `protobuf:"bytes,1,rep,name=Chats,json=chats" json:"Chats,omitempty"`
 }
@@ -294,7 +701,7 @@ type ChatsWithEvents struct {
 func (m *ChatsWithEvents) Reset()                    { *m = ChatsWithEvents{} }
 func (m *ChatsWithEvents) String() string            { return proto.CompactTextString(m) }
 func (*ChatsWithEvents) ProtoMessage()               {}
-func (*ChatsWithEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (*ChatsWithEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
 
 func (m *ChatsWithEvents) GetChats() []*ChatWithEvents {
 	if m != nil {
@@ -311,7 +718,7 @@ type ChatWithEvents struct {
 func (m *ChatWithEvents) Reset()                    { *m = ChatWithEvents{} }
 func (m *ChatWithEvents) String() string            { return proto.CompactTextString(m) }
 func (*ChatWithEvents) ProtoMessage()               {}
-func (*ChatWithEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (*ChatWithEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
 
 func (m *ChatWithEvents) GetChat() *Chat {
 	if m != nil {
@@ -330,18 +737,26 @@ func (m *ChatWithEvents) GetEvents() []*ChatEvent {
 type Attachment struct {
 	// Type show type of attachment
 	// Value:
-	//   Display only (no input require)
-	//     - video
-	//     - audio
-	//     - image
-	//     - generic_file
-	//     - link
+	//   Template
+	//     - file
+	//       + video
+	//       + audio
+	//       + image
+	//     - preview (preview for link)
+	//     - content
+	//     - template
 	//
-	//   Display and also have input
-	//     - button (single button)
+	//       + receipt, ticket, ...
 	//     - quick_replies
-	//     - ask_form
-	//     - generic_template
+	//       + ask_form
+	//       + generic_template
+	//       + list_template
+	//   Input control
+	//     - button           -> send list of event to chat
+	//     - url
+	//     - postback_button (single button)
+	//     - textbox           -> contains value
+	//     - ratebox            -> rate the chat (like 5 buttons but have beautiful display)
 	Type    string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type,omitempty"`
 	Payload string `protobuf:"bytes,2,opt,name=Payload,json=payload" json:"Payload,omitempty"`
 }
@@ -349,7 +764,7 @@ type Attachment struct {
 func (m *Attachment) Reset()                    { *m = Attachment{} }
 func (m *Attachment) String() string            { return proto.CompactTextString(m) }
 func (*Attachment) ProtoMessage()               {}
-func (*Attachment) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (*Attachment) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
 
 func (m *Attachment) GetType() string {
 	if m != nil {
@@ -372,7 +787,7 @@ type ChatEvents struct {
 func (m *ChatEvents) Reset()                    { *m = ChatEvents{} }
 func (m *ChatEvents) String() string            { return proto.CompactTextString(m) }
 func (*ChatEvents) ProtoMessage()               {}
-func (*ChatEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*ChatEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
 
 func (m *ChatEvents) GetEvents() []*ChatEvent {
 	if m != nil {
@@ -382,7 +797,7 @@ func (m *ChatEvents) GetEvents() []*ChatEvent {
 }
 
 type ChatEvent struct {
-	// ID of chat event, 128-bit, start with EVNT
+	// ID of chat evet
 	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
 	// Type indicates type of chat event
 	Type ChatEventType `protobuf:"varint,2,opt,name=Type,json=type,enum=chat.ChatEventType" json:"Type,omitempty"`
@@ -393,16 +808,18 @@ type ChatEvent struct {
 	// SenderId refer to who has sent the event, could be Agent, User or System
 	SenderId string `protobuf:"bytes,6,opt,name=SenderId,json=senderId" json:"SenderId,omitempty"`
 	// SenderType indicate type of sender
-	SenderType SenderType `protobuf:"varint,7,opt,name=SenderType,json=senderType,enum=chat.SenderType" json:"SenderType,omitempty"`
+	SenderType UserType `protobuf:"varint,7,opt,name=SenderType,json=senderType,enum=chat.UserType" json:"SenderType,omitempty"`
 	// Content could be raw text, could be JSON data based on type
-	Content     string        `protobuf:"bytes,8,opt,name=Content,json=content" json:"Content,omitempty"`
-	Attachments []*Attachment `protobuf:"bytes,9,rep,name=Attachments,json=attachments" json:"Attachments,omitempty"`
+	Text string `protobuf:"bytes,8,opt,name=Text,json=text" json:"Text,omitempty"`
+	// Could be "", "raw" or "markdown"
+	Format      string        `protobuf:"bytes,9,opt,name=Format,json=format" json:"Format,omitempty"`
+	Attachments []*Attachment `protobuf:"bytes,10,rep,name=Attachments,json=attachments" json:"Attachments,omitempty"`
 }
 
 func (m *ChatEvent) Reset()                    { *m = ChatEvent{} }
 func (m *ChatEvent) String() string            { return proto.CompactTextString(m) }
 func (*ChatEvent) ProtoMessage()               {}
-func (*ChatEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (*ChatEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
 
 func (m *ChatEvent) GetId() string {
 	if m != nil {
@@ -439,16 +856,23 @@ func (m *ChatEvent) GetSenderId() string {
 	return ""
 }
 
-func (m *ChatEvent) GetSenderType() SenderType {
+func (m *ChatEvent) GetSenderType() UserType {
 	if m != nil {
 		return m.SenderType
 	}
-	return SenderType_UNDEFINED
+	return UserType_UndefinedUserType
 }
 
-func (m *ChatEvent) GetContent() string {
+func (m *ChatEvent) GetText() string {
 	if m != nil {
-		return m.Content
+		return m.Text
+	}
+	return ""
+}
+
+func (m *ChatEvent) GetFormat() string {
+	if m != nil {
+		return m.Format
 	}
 	return ""
 }
@@ -459,30 +883,6 @@ func (m *ChatEvent) GetAttachments() []*Attachment {
 	}
 	return nil
 }
-
-type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-}
-
-func (m *Id) Reset()                    { *m = Id{} }
-func (m *Id) String() string            { return proto.CompactTextString(m) }
-func (*Id) ProtoMessage()               {}
-func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
-
-func (m *Id) GetId() string {
-	if m != nil {
-		return m.Id
-	}
-	return ""
-}
-
-type Empty struct {
-}
-
-func (m *Empty) Reset()                    { *m = Empty{} }
-func (m *Empty) String() string            { return proto.CompactTextString(m) }
-func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
 
 type UserInfo struct {
 	Id          string   `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
@@ -498,7 +898,7 @@ type UserInfo struct {
 func (m *UserInfo) Reset()                    { *m = UserInfo{} }
 func (m *UserInfo) String() string            { return proto.CompactTextString(m) }
 func (*UserInfo) ProtoMessage()               {}
-func (*UserInfo) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+func (*UserInfo) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
 
 func (m *UserInfo) GetId() string {
 	if m != nil {
@@ -558,7 +958,6 @@ func (m *UserInfo) GetTimeZone() string {
 
 type ChatRequest struct {
 	AccountId       string     `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	ChatId          string     `protobuf:"bytes,2,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
 	ChannelId       string     `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
 	MessageTo       string     `protobuf:"bytes,5,opt,name=MessageTo,json=messageTo" json:"MessageTo,omitempty"`
 	PageUrl         string     `protobuf:"bytes,6,opt,name=PageUrl,json=pageUrl" json:"PageUrl,omitempty"`
@@ -574,18 +973,11 @@ type ChatRequest struct {
 func (m *ChatRequest) Reset()                    { *m = ChatRequest{} }
 func (m *ChatRequest) String() string            { return proto.CompactTextString(m) }
 func (*ChatRequest) ProtoMessage()               {}
-func (*ChatRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
+func (*ChatRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
 
 func (m *ChatRequest) GetAccountId() string {
 	if m != nil {
 		return m.AccountId
-	}
-	return ""
-}
-
-func (m *ChatRequest) GetChatId() string {
-	if m != nil {
-		return m.ChatId
 	}
 	return ""
 }
@@ -667,7 +1059,7 @@ type Chats struct {
 func (m *Chats) Reset()                    { *m = Chats{} }
 func (m *Chats) String() string            { return proto.CompactTextString(m) }
 func (*Chats) ProtoMessage()               {}
-func (*Chats) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
+func (*Chats) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
 
 func (m *Chats) GetChats() []*Chat {
 	if m != nil {
@@ -685,7 +1077,7 @@ type ChatStart struct {
 func (m *ChatStart) Reset()                    { *m = ChatStart{} }
 func (m *ChatStart) String() string            { return proto.CompactTextString(m) }
 func (*ChatStart) ProtoMessage()               {}
-func (*ChatStart) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
+func (*ChatStart) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{21} }
 
 func (m *ChatStart) GetAgentId() string {
 	if m != nil {
@@ -717,7 +1109,7 @@ type AcceptRequest struct {
 func (m *AcceptRequest) Reset()                    { *m = AcceptRequest{} }
 func (m *AcceptRequest) String() string            { return proto.CompactTextString(m) }
 func (*AcceptRequest) ProtoMessage()               {}
-func (*AcceptRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
+func (*AcceptRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{22} }
 
 func (m *AcceptRequest) GetAccountId() string {
 	if m != nil {
@@ -749,7 +1141,7 @@ type ListUnassignChatsRequest struct {
 func (m *ListUnassignChatsRequest) Reset()                    { *m = ListUnassignChatsRequest{} }
 func (m *ListUnassignChatsRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListUnassignChatsRequest) ProtoMessage()               {}
-func (*ListUnassignChatsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
+func (*ListUnassignChatsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{23} }
 
 func (m *ListUnassignChatsRequest) GetAccountId() string {
 	if m != nil {
@@ -785,7 +1177,7 @@ type UnassignChat struct {
 func (m *UnassignChat) Reset()                    { *m = UnassignChat{} }
 func (m *UnassignChat) String() string            { return proto.CompactTextString(m) }
 func (*UnassignChat) ProtoMessage()               {}
-func (*UnassignChat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
+func (*UnassignChat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{24} }
 
 func (m *UnassignChat) GetAccountId() string {
 	if m != nil {
@@ -843,7 +1235,7 @@ type Bools struct {
 func (m *Bools) Reset()                    { *m = Bools{} }
 func (m *Bools) String() string            { return proto.CompactTextString(m) }
 func (*Bools) ProtoMessage()               {}
-func (*Bools) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
+func (*Bools) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{25} }
 
 func (m *Bools) GetBools() []bool {
 	if m != nil {
@@ -861,7 +1253,7 @@ type ListUsersUnreadRequest struct {
 func (m *ListUsersUnreadRequest) Reset()                    { *m = ListUsersUnreadRequest{} }
 func (m *ListUsersUnreadRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListUsersUnreadRequest) ProtoMessage()               {}
-func (*ListUsersUnreadRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
+func (*ListUsersUnreadRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{26} }
 
 func (m *ListUsersUnreadRequest) GetAccountId() string {
 	if m != nil {
@@ -892,7 +1284,7 @@ type Unread struct {
 func (m *Unread) Reset()                    { *m = Unread{} }
 func (m *Unread) String() string            { return proto.CompactTextString(m) }
 func (*Unread) ProtoMessage()               {}
-func (*Unread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
+func (*Unread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{27} }
 
 func (m *Unread) GetUserId() string {
 	if m != nil {
@@ -915,7 +1307,7 @@ type UsersUnread struct {
 func (m *UsersUnread) Reset()                    { *m = UsersUnread{} }
 func (m *UsersUnread) String() string            { return proto.CompactTextString(m) }
 func (*UsersUnread) ProtoMessage()               {}
-func (*UsersUnread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
+func (*UsersUnread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{28} }
 
 func (m *UsersUnread) GetUnreads() []*Unread {
 	if m != nil {
@@ -934,7 +1326,7 @@ type ListChatEventRequest struct {
 func (m *ListChatEventRequest) Reset()                    { *m = ListChatEventRequest{} }
 func (m *ListChatEventRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListChatEventRequest) ProtoMessage()               {}
-func (*ListChatEventRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{21} }
+func (*ListChatEventRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{29} }
 
 func (m *ListChatEventRequest) GetChatId() string {
 	if m != nil {
@@ -968,7 +1360,7 @@ type ListChatsByUserRequest struct {
 func (m *ListChatsByUserRequest) Reset()                    { *m = ListChatsByUserRequest{} }
 func (m *ListChatsByUserRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListChatsByUserRequest) ProtoMessage()               {}
-func (*ListChatsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{22} }
+func (*ListChatsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{30} }
 
 func (m *ListChatsByUserRequest) GetAccountId() string {
 	if m != nil {
@@ -1005,7 +1397,396 @@ func (m *ListChatsByUserRequest) GetLimit() int32 {
 	return 0
 }
 
+// Topic Chat.Sent
+type EvChatSent struct {
+	RequestId string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
+	Event     string `protobuf:"bytes,2,opt,name=Event,json=event" json:"Event,omitempty"`
+	// ID of chat event, 128-bit, start with EVNT
+	EventId string `protobuf:"bytes,3,opt,name=EventId,json=eventId" json:"EventId,omitempty"`
+	// Type indicates type of chat event
+	Type ChatEventType `protobuf:"varint,4,opt,name=Type,json=type,enum=chat.ChatEventType" json:"Type,omitempty"`
+	// ChatId refer to ID of chat which contains this chat event
+	ChatId    string `protobuf:"bytes,5,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
+	AccountId string `protobuf:"bytes,6,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	// CTime is a RFC3339 string, tell when was event sent
+	CTime string `protobuf:"bytes,7,opt,name=CTime,json=cTime" json:"CTime,omitempty"`
+	// SenderId refer to who has sent the event, could be Agent, User or System
+	SenderId string `protobuf:"bytes,8,opt,name=SenderId,json=senderId" json:"SenderId,omitempty"`
+	// SenderType indicate type of sender
+	SenderType UserType `protobuf:"varint,9,opt,name=SenderType,json=senderType,enum=chat.UserType" json:"SenderType,omitempty"`
+	// Content could be raw text, could be JSON data based on type
+	Content     string        `protobuf:"bytes,10,opt,name=Content,json=content" json:"Content,omitempty"`
+	Attachments []*Attachment `protobuf:"bytes,11,rep,name=Attachments,json=attachments" json:"Attachments,omitempty"`
+}
+
+func (m *EvChatSent) Reset()                    { *m = EvChatSent{} }
+func (m *EvChatSent) String() string            { return proto.CompactTextString(m) }
+func (*EvChatSent) ProtoMessage()               {}
+func (*EvChatSent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{31} }
+
+func (m *EvChatSent) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetEvent() string {
+	if m != nil {
+		return m.Event
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetEventId() string {
+	if m != nil {
+		return m.EventId
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetType() ChatEventType {
+	if m != nil {
+		return m.Type
+	}
+	return ChatEventType_NONE
+}
+
+func (m *EvChatSent) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetCTime() string {
+	if m != nil {
+		return m.CTime
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetSenderId() string {
+	if m != nil {
+		return m.SenderId
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetSenderType() UserType {
+	if m != nil {
+		return m.SenderType
+	}
+	return UserType_UndefinedUserType
+}
+
+func (m *EvChatSent) GetContent() string {
+	if m != nil {
+		return m.Content
+	}
+	return ""
+}
+
+func (m *EvChatSent) GetAttachments() []*Attachment {
+	if m != nil {
+		return m.Attachments
+	}
+	return nil
+}
+
+// Topic Chat.Assigned
+type EvChatAssigned struct {
+	RequestId   string   `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
+	Event       string   `protobuf:"bytes,2,opt,name=Event,json=event" json:"Event,omitempty"`
+	ChatId      string   `protobuf:"bytes,4,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
+	AccountId   string   `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	CreatedTime string   `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	Users       []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
+	ChannelId   string   `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
+	Tags        []string `protobuf:"bytes,8,rep,name=Tags,json=tags" json:"Tags,omitempty"`
+}
+
+func (m *EvChatAssigned) Reset()                    { *m = EvChatAssigned{} }
+func (m *EvChatAssigned) String() string            { return proto.CompactTextString(m) }
+func (*EvChatAssigned) ProtoMessage()               {}
+func (*EvChatAssigned) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{32} }
+
+func (m *EvChatAssigned) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *EvChatAssigned) GetEvent() string {
+	if m != nil {
+		return m.Event
+	}
+	return ""
+}
+
+func (m *EvChatAssigned) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *EvChatAssigned) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *EvChatAssigned) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
+func (m *EvChatAssigned) GetUsers() []*User {
+	if m != nil {
+		return m.Users
+	}
+	return nil
+}
+
+func (m *EvChatAssigned) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *EvChatAssigned) GetTags() []string {
+	if m != nil {
+		return m.Tags
+	}
+	return nil
+}
+
+// Topic Chat.Waiting
+type EvChatWaiting struct {
+	RequestId   string   `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
+	Event       string   `protobuf:"bytes,2,opt,name=Event,json=event" json:"Event,omitempty"`
+	ChatId      string   `protobuf:"bytes,4,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
+	AccountId   string   `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	CreatedTime string   `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	Users       []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
+	ChannelId   string   `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
+	Tags        []string `protobuf:"bytes,8,rep,name=Tags,json=tags" json:"Tags,omitempty"`
+}
+
+func (m *EvChatWaiting) Reset()                    { *m = EvChatWaiting{} }
+func (m *EvChatWaiting) String() string            { return proto.CompactTextString(m) }
+func (*EvChatWaiting) ProtoMessage()               {}
+func (*EvChatWaiting) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{33} }
+
+func (m *EvChatWaiting) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *EvChatWaiting) GetEvent() string {
+	if m != nil {
+		return m.Event
+	}
+	return ""
+}
+
+func (m *EvChatWaiting) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *EvChatWaiting) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *EvChatWaiting) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
+func (m *EvChatWaiting) GetUsers() []*User {
+	if m != nil {
+		return m.Users
+	}
+	return nil
+}
+
+func (m *EvChatWaiting) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *EvChatWaiting) GetTags() []string {
+	if m != nil {
+		return m.Tags
+	}
+	return nil
+}
+
+// lis
+type EvChatStartRequested struct {
+}
+
+func (m *EvChatStartRequested) Reset()                    { *m = EvChatStartRequested{} }
+func (m *EvChatStartRequested) String() string            { return proto.CompactTextString(m) }
+func (*EvChatStartRequested) ProtoMessage()               {}
+func (*EvChatStartRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{34} }
+
+type EvChatSendRequested struct {
+}
+
+func (m *EvChatSendRequested) Reset()                    { *m = EvChatSendRequested{} }
+func (m *EvChatSendRequested) String() string            { return proto.CompactTextString(m) }
+func (*EvChatSendRequested) ProtoMessage()               {}
+func (*EvChatSendRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{35} }
+
+type EvChatAcceptRequested struct {
+}
+
+func (m *EvChatAcceptRequested) Reset()                    { *m = EvChatAcceptRequested{} }
+func (m *EvChatAcceptRequested) String() string            { return proto.CompactTextString(m) }
+func (*EvChatAcceptRequested) ProtoMessage()               {}
+func (*EvChatAcceptRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{36} }
+
+type EvChatCreated struct {
+	RequestId   string  `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
+	Event       string  `protobuf:"bytes,2,opt,name=Event,json=event" json:"Event,omitempty"`
+	AccountId   string  `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	ChatId      string  `protobuf:"bytes,4,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
+	Users       []*User `protobuf:"bytes,5,rep,name=Users,json=users" json:"Users,omitempty"`
+	ChannelId   string  `protobuf:"bytes,6,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
+	CreatedTime string  `protobuf:"bytes,7,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+}
+
+func (m *EvChatCreated) Reset()                    { *m = EvChatCreated{} }
+func (m *EvChatCreated) String() string            { return proto.CompactTextString(m) }
+func (*EvChatCreated) ProtoMessage()               {}
+func (*EvChatCreated) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{37} }
+
+func (m *EvChatCreated) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *EvChatCreated) GetEvent() string {
+	if m != nil {
+		return m.Event
+	}
+	return ""
+}
+
+func (m *EvChatCreated) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *EvChatCreated) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *EvChatCreated) GetUsers() []*User {
+	if m != nil {
+		return m.Users
+	}
+	return nil
+}
+
+func (m *EvChatCreated) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *EvChatCreated) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
+type EvChatResult struct {
+	RequestId   string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
+	Code        int32  `protobuf:"varint,2,opt,name=Code,json=code" json:"Code,omitempty"`
+	CreatedTime string `protobuf:"bytes,3,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	Description string `protobuf:"bytes,4,opt,name=Description,json=description" json:"Description,omitempty"`
+}
+
+func (m *EvChatResult) Reset()                    { *m = EvChatResult{} }
+func (m *EvChatResult) String() string            { return proto.CompactTextString(m) }
+func (*EvChatResult) ProtoMessage()               {}
+func (*EvChatResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{38} }
+
+func (m *EvChatResult) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *EvChatResult) GetCode() int32 {
+	if m != nil {
+		return m.Code
+	}
+	return 0
+}
+
+func (m *EvChatResult) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
+func (m *EvChatResult) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
 func init() {
+	proto.RegisterType((*Id)(nil), "chat.Id")
+	proto.RegisterType((*Empty)(nil), "chat.Empty")
+	proto.RegisterType((*Rule)(nil), "chat.Rule")
+	proto.RegisterType((*Condition)(nil), "chat.Condition")
+	proto.RegisterType((*Route)(nil), "chat.Route")
+	proto.RegisterType((*RouteResult)(nil), "chat.RouteResult")
+	proto.RegisterType((*GroupDeleteEvent)(nil), "chat.GroupDeleteEvent")
+	proto.RegisterType((*GroupUpdateEvent)(nil), "chat.GroupUpdateEvent")
+	proto.RegisterType((*AgentDeletedEvent)(nil), "chat.AgentDeletedEvent")
+	proto.RegisterType((*AgentUpdateEvent)(nil), "chat.AgentUpdateEvent")
 	proto.RegisterType((*Ids)(nil), "chat.Ids")
 	proto.RegisterType((*User)(nil), "chat.User")
 	proto.RegisterType((*Chat)(nil), "chat.Chat")
@@ -1014,8 +1795,6 @@ func init() {
 	proto.RegisterType((*Attachment)(nil), "chat.Attachment")
 	proto.RegisterType((*ChatEvents)(nil), "chat.ChatEvents")
 	proto.RegisterType((*ChatEvent)(nil), "chat.ChatEvent")
-	proto.RegisterType((*Id)(nil), "chat.Id")
-	proto.RegisterType((*Empty)(nil), "chat.Empty")
 	proto.RegisterType((*UserInfo)(nil), "chat.UserInfo")
 	proto.RegisterType((*ChatRequest)(nil), "chat.ChatRequest")
 	proto.RegisterType((*Chats)(nil), "chat.Chats")
@@ -1029,9 +1808,21 @@ func init() {
 	proto.RegisterType((*UsersUnread)(nil), "chat.UsersUnread")
 	proto.RegisterType((*ListChatEventRequest)(nil), "chat.ListChatEventRequest")
 	proto.RegisterType((*ListChatsByUserRequest)(nil), "chat.ListChatsByUserRequest")
+	proto.RegisterType((*EvChatSent)(nil), "chat.EvChatSent")
+	proto.RegisterType((*EvChatAssigned)(nil), "chat.EvChatAssigned")
+	proto.RegisterType((*EvChatWaiting)(nil), "chat.EvChatWaiting")
+	proto.RegisterType((*EvChatStartRequested)(nil), "chat.EvChatStartRequested")
+	proto.RegisterType((*EvChatSendRequested)(nil), "chat.EvChatSendRequested")
+	proto.RegisterType((*EvChatAcceptRequested)(nil), "chat.EvChatAcceptRequested")
+	proto.RegisterType((*EvChatCreated)(nil), "chat.EvChatCreated")
+	proto.RegisterType((*EvChatResult)(nil), "chat.EvChatResult")
+	proto.RegisterEnum("chat.Error", Error_name, Error_value)
+	proto.RegisterEnum("chat.JoinOperator", JoinOperator_name, JoinOperator_value)
+	proto.RegisterEnum("chat.AssignStrategy", AssignStrategy_name, AssignStrategy_value)
 	proto.RegisterEnum("chat.ChatEventType", ChatEventType_name, ChatEventType_value)
-	proto.RegisterEnum("chat.SenderType", SenderType_name, SenderType_value)
+	proto.RegisterEnum("chat.UserType", UserType_name, UserType_value)
 	proto.RegisterEnum("chat.DeviceType", DeviceType_name, DeviceType_value)
+	proto.RegisterEnum("chat.Event", Event_name, Event_value)
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1046,21 +1837,23 @@ const _ = grpc.SupportPackageIsVersion4
 
 type ChatMgrClient interface {
 	// COLLECTOR for channel only
-	// Send KeepAlive message to extends live of a chat session
-	Ping(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	Send(ctx context.Context, in *ChatEvent, opts ...grpc.CallOption) (*Id, error)
-	// initialize chat session
-	Request(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*Id, error)
-	Start(ctx context.Context, in *ChatStart, opts ...grpc.CallOption) (*Id, error)
+	// fire EvChatSent
+	Send(ctx context.Context, in *ChatEvent, opts ...grpc.CallOption) (*Empty, error)
+	// request chat from user
+	// fire EvChatWaiting, EvChatCreated
+	Request(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*Empty, error)
+	// start chat from agent
+	// fire EvChatCreated
+	Start(ctx context.Context, in *ChatStart, opts ...grpc.CallOption) (*Empty, error)
 	// QUERRIER
-	// List chats for specific user
+	// List chats for specific use
 	ListUsersUnread(ctx context.Context, in *ListUsersUnreadRequest, opts ...grpc.CallOption) (*UsersUnread, error)
 	ListChatsByUser(ctx context.Context, in *ListChatsByUserRequest, opts ...grpc.CallOption) (*ChatsWithEvents, error)
 	ListChatEvents(ctx context.Context, in *ListChatEventRequest, opts ...grpc.CallOption) (*ChatEvents, error)
 	// Unassigned list
 	ListUnassignedChats(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Chats, error)
 	AcceptUnassignedChat(ctx context.Context, in *AcceptRequest, opts ...grpc.CallOption) (*Empty, error)
-	CheckUnassignedChats(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Chats, error)
+	Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Chat, error)
 }
 
 type chatMgrClient struct {
@@ -1071,17 +1864,8 @@ func NewChatMgrClient(cc *grpc.ClientConn) ChatMgrClient {
 	return &chatMgrClient{cc}
 }
 
-func (c *chatMgrClient) Ping(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *chatMgrClient) Send(ctx context.Context, in *ChatEvent, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := grpc.Invoke(ctx, "/chat.ChatMgr/Ping", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *chatMgrClient) Send(ctx context.Context, in *ChatEvent, opts ...grpc.CallOption) (*Id, error) {
-	out := new(Id)
 	err := grpc.Invoke(ctx, "/chat.ChatMgr/Send", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -1089,8 +1873,8 @@ func (c *chatMgrClient) Send(ctx context.Context, in *ChatEvent, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *chatMgrClient) Request(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*Id, error) {
-	out := new(Id)
+func (c *chatMgrClient) Request(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := grpc.Invoke(ctx, "/chat.ChatMgr/Request", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -1098,8 +1882,8 @@ func (c *chatMgrClient) Request(ctx context.Context, in *ChatRequest, opts ...gr
 	return out, nil
 }
 
-func (c *chatMgrClient) Start(ctx context.Context, in *ChatStart, opts ...grpc.CallOption) (*Id, error) {
-	out := new(Id)
+func (c *chatMgrClient) Start(ctx context.Context, in *ChatStart, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
 	err := grpc.Invoke(ctx, "/chat.ChatMgr/Start", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -1152,9 +1936,9 @@ func (c *chatMgrClient) AcceptUnassignedChat(ctx context.Context, in *AcceptRequ
 	return out, nil
 }
 
-func (c *chatMgrClient) CheckUnassignedChats(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Chats, error) {
-	out := new(Chats)
-	err := grpc.Invoke(ctx, "/chat.ChatMgr/CheckUnassignedChats", in, out, c.cc, opts...)
+func (c *chatMgrClient) Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Chat, error) {
+	out := new(Chat)
+	err := grpc.Invoke(ctx, "/chat.ChatMgr/Read", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1165,43 +1949,27 @@ func (c *chatMgrClient) CheckUnassignedChats(ctx context.Context, in *Ids, opts 
 
 type ChatMgrServer interface {
 	// COLLECTOR for channel only
-	// Send KeepAlive message to extends live of a chat session
-	Ping(context.Context, *Id) (*Empty, error)
-	Send(context.Context, *ChatEvent) (*Id, error)
-	// initialize chat session
-	Request(context.Context, *ChatRequest) (*Id, error)
-	Start(context.Context, *ChatStart) (*Id, error)
+	// fire EvChatSent
+	Send(context.Context, *ChatEvent) (*Empty, error)
+	// request chat from user
+	// fire EvChatWaiting, EvChatCreated
+	Request(context.Context, *ChatRequest) (*Empty, error)
+	// start chat from agent
+	// fire EvChatCreated
+	Start(context.Context, *ChatStart) (*Empty, error)
 	// QUERRIER
-	// List chats for specific user
+	// List chats for specific use
 	ListUsersUnread(context.Context, *ListUsersUnreadRequest) (*UsersUnread, error)
 	ListChatsByUser(context.Context, *ListChatsByUserRequest) (*ChatsWithEvents, error)
 	ListChatEvents(context.Context, *ListChatEventRequest) (*ChatEvents, error)
 	// Unassigned list
 	ListUnassignedChats(context.Context, *Id) (*Chats, error)
 	AcceptUnassignedChat(context.Context, *AcceptRequest) (*Empty, error)
-	CheckUnassignedChats(context.Context, *Ids) (*Chats, error)
+	Read(context.Context, *Id) (*Chat, error)
 }
 
 func RegisterChatMgrServer(s *grpc.Server, srv ChatMgrServer) {
 	s.RegisterService(&_ChatMgr_serviceDesc, srv)
-}
-
-func _ChatMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ChatMgrServer).Ping(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/chat.ChatMgr/Ping",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatMgrServer).Ping(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _ChatMgr_Send_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1348,20 +2116,20 @@ func _ChatMgr_AcceptUnassignedChat_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ChatMgr_CheckUnassignedChats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
+func _ChatMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ChatMgrServer).CheckUnassignedChats(ctx, in)
+		return srv.(ChatMgrServer).Read(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/chat.ChatMgr/CheckUnassignedChats",
+		FullMethod: "/chat.ChatMgr/Read",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatMgrServer).CheckUnassignedChats(ctx, req.(*Ids))
+		return srv.(ChatMgrServer).Read(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1370,10 +2138,6 @@ var _ChatMgr_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "chat.ChatMgr",
 	HandlerType: (*ChatMgrServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Ping",
-			Handler:    _ChatMgr_Ping_Handler,
-		},
 		{
 			MethodName: "Send",
 			Handler:    _ChatMgr_Send_Handler,
@@ -1407,8 +2171,206 @@ var _ChatMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _ChatMgr_AcceptUnassignedChat_Handler,
 		},
 		{
-			MethodName: "CheckUnassignedChats",
-			Handler:    _ChatMgr_CheckUnassignedChats_Handler,
+			MethodName: "Read",
+			Handler:    _ChatMgr_Read_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "chat/chat.proto",
+}
+
+// Client API for Router service
+
+type RouterClient interface {
+	Assign(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*RouteResult, error)
+	Update(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Empty, error)
+	Create(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Id, error)
+	Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	// list ALL rules by account
+	List(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Route, error)
+}
+
+type routerClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRouterClient(cc *grpc.ClientConn) RouterClient {
+	return &routerClient{cc}
+}
+
+func (c *routerClient) Assign(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*RouteResult, error) {
+	out := new(RouteResult)
+	err := grpc.Invoke(ctx, "/chat.Router/Assign", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routerClient) Update(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := grpc.Invoke(ctx, "/chat.Router/Update", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routerClient) Create(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Id, error) {
+	out := new(Id)
+	err := grpc.Invoke(ctx, "/chat.Router/Create", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routerClient) Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := grpc.Invoke(ctx, "/chat.Router/Delete", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *routerClient) List(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Route, error) {
+	out := new(Route)
+	err := grpc.Invoke(ctx, "/chat.Router/List", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for Router service
+
+type RouterServer interface {
+	Assign(context.Context, *ChatRequest) (*RouteResult, error)
+	Update(context.Context, *Rule) (*Empty, error)
+	Create(context.Context, *Rule) (*Id, error)
+	Delete(context.Context, *Id) (*Empty, error)
+	// list ALL rules by account
+	List(context.Context, *Id) (*Route, error)
+}
+
+func RegisterRouterServer(s *grpc.Server, srv RouterServer) {
+	s.RegisterService(&_Router_serviceDesc, srv)
+}
+
+func _Router_Assign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RouterServer).Assign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.Router/Assign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RouterServer).Assign(ctx, req.(*ChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Router_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Rule)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RouterServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.Router/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RouterServer).Update(ctx, req.(*Rule))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Router_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Rule)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RouterServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.Router/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RouterServer).Create(ctx, req.(*Rule))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Router_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RouterServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.Router/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RouterServer).Delete(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Router_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RouterServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.Router/List",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RouterServer).List(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Router_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "chat.Router",
+	HandlerType: (*RouterServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Assign",
+			Handler:    _Router_Assign_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _Router_Update_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _Router_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _Router_Delete_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _Router_List_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1418,91 +2380,141 @@ var _ChatMgr_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("chat/chat.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 1366 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xa4, 0x57, 0xdf, 0x8e, 0xdb, 0xc4,
-	0x17, 0x8e, 0x63, 0x3b, 0x8e, 0x8f, 0xf7, 0x8f, 0x3b, 0xdd, 0x5f, 0x7f, 0xd6, 0xaa, 0x94, 0xc8,
-	0x54, 0x34, 0xec, 0x45, 0xa9, 0x16, 0x55, 0x42, 0x15, 0x20, 0xb2, 0x89, 0xdb, 0x86, 0x66, 0xb3,
-	0x2b, 0xc7, 0x51, 0x29, 0x20, 0x90, 0x6b, 0x0f, 0x89, 0x21, 0x71, 0x42, 0xc6, 0x29, 0xe4, 0x9e,
-	0x6b, 0x78, 0x01, 0x9e, 0x84, 0x47, 0xe0, 0x59, 0xb8, 0xe7, 0x16, 0x9d, 0x19, 0x3b, 0x1e, 0x67,
-	0xbb, 0x50, 0x89, 0x9b, 0xdd, 0x39, 0xdf, 0xcc, 0x9c, 0x33, 0xe7, 0x3b, 0xdf, 0x99, 0x71, 0xe0,
-	0x30, 0x9a, 0x86, 0xd9, 0xfb, 0xf8, 0xe7, 0xfe, 0x72, 0xb5, 0xc8, 0x16, 0x44, 0xc3, 0xb1, 0xfb,
-	0x7f, 0x50, 0xfb, 0x31, 0x23, 0x36, 0xff, 0xe7, 0x28, 0x2d, 0xb5, 0x6d, 0xfa, 0x6a, 0x12, 0x33,
-	0xf7, 0x2b, 0xd0, 0xc6, 0x8c, 0xae, 0xc8, 0x01, 0xd4, 0xfb, 0xb1, 0xa3, 0xb4, 0x94, 0xb6, 0xe9,
-	0xd7, 0x93, 0x98, 0xdc, 0x05, 0x2d, 0xd8, 0x2c, 0xa9, 0xa3, 0xb5, 0x94, 0xf6, 0xc1, 0xa9, 0x7d,
-	0x9f, 0x7b, 0x1c, 0xd1, 0x34, 0xa6, 0x2b, 0xc4, 0x7d, 0x2d, 0xdb, 0x2c, 0x29, 0xb9, 0x03, 0x30,
-	0x08, 0x59, 0x36, 0xa2, 0x34, 0xed, 0xc7, 0x8e, 0xce, 0x77, 0xc3, 0x6c, 0x8b, 0xb8, 0x7f, 0x2a,
-	0xa0, 0x75, 0xa7, 0x61, 0x76, 0xc5, 0xfd, 0x6d, 0x30, 0x3b, 0x51, 0xb4, 0x58, 0xa7, 0x59, 0x3f,
-	0x76, 0xea, 0x1c, 0x36, 0xc3, 0x02, 0x20, 0x47, 0xa0, 0x77, 0x83, 0x64, 0x4e, 0x1d, 0x95, 0xcf,
-	0xe8, 0x11, 0x1a, 0x88, 0x0e, 0x38, 0xaa, 0x09, 0x74, 0x56, 0xa0, 0x9f, 0x73, 0x54, 0x44, 0xd7,
-	0x7f, 0xe2, 0x68, 0x0b, 0x74, 0x4c, 0x8b, 0x39, 0x8d, 0x96, 0xda, 0xb6, 0x4e, 0x41, 0x9c, 0x1f,
-	0x21, 0x5f, 0x5f, 0xe3, 0x04, 0x69, 0x81, 0xe5, 0xbd, 0xa2, 0x69, 0xc6, 0xba, 0x18, 0xd4, 0x69,
-	0xb6, 0x94, 0xb6, 0xee, 0x5b, 0xb4, 0x84, 0xf0, 0x8c, 0xdd, 0x69, 0x98, 0xa6, 0x74, 0xd6, 0x8f,
-	0x1d, 0x53, 0x9c, 0x31, 0x2a, 0x00, 0x42, 0x40, 0x0b, 0xc2, 0x09, 0x73, 0x80, 0x73, 0xa9, 0x65,
-	0xe1, 0x84, 0xb9, 0x1f, 0xc3, 0x21, 0x66, 0xcb, 0x9e, 0x27, 0xd9, 0x54, 0x38, 0x27, 0x27, 0xa0,
-	0x73, 0x88, 0x73, 0x6e, 0x9d, 0x1e, 0x89, 0x83, 0x20, 0x54, 0x2e, 0xf2, 0x75, 0x04, 0x99, 0xfb,
-	0x02, 0x0e, 0xaa, 0x13, 0xe4, 0x8e, 0xa0, 0x8f, 0x13, 0xb7, 0xcd, 0x02, 0x11, 0x9f, 0x97, 0x95,
-	0xdc, 0x83, 0x86, 0x58, 0xe9, 0xd4, 0xb9, 0xfb, 0xc3, 0x72, 0x05, 0xc7, 0xfd, 0x86, 0x48, 0xc8,
-	0x7d, 0x04, 0xd0, 0xc9, 0xb2, 0x30, 0x9a, 0xce, 0x69, 0x9a, 0xf1, 0xb3, 0x63, 0x71, 0x45, 0x3d,
-	0x44, 0x29, 0x1d, 0x30, 0x2e, 0xc3, 0xcd, 0x6c, 0x11, 0x16, 0xf5, 0x30, 0x96, 0xc2, 0x74, 0x1f,
-	0x02, 0x6c, 0x1d, 0x32, 0x29, 0xa4, 0xf2, 0xcf, 0x21, 0x7f, 0xa9, 0x73, 0xfe, 0x04, 0x7a, 0x45,
-	0x00, 0xf7, 0xf2, 0x23, 0xd4, 0xb9, 0xbe, 0x6e, 0xee, 0x38, 0x91, 0x24, 0x76, 0x0b, 0x1a, 0x08,
-	0xf7, 0xe3, 0x5c, 0x0c, 0x8d, 0x88, 0x5b, 0xa5, 0x46, 0x74, 0x59, 0x23, 0xc7, 0xd0, 0x14, 0x22,
-	0xed, 0xc7, 0x4e, 0x83, 0x4f, 0x34, 0x59, 0x6e, 0x93, 0x07, 0x00, 0xa5, 0x80, 0x1d, 0xe3, 0x1a,
-	0x61, 0x03, 0xdb, 0x8e, 0x91, 0x93, 0xee, 0x22, 0xcd, 0x68, 0xae, 0x0f, 0xd3, 0x37, 0x22, 0x61,
-	0x92, 0x53, 0xb0, 0x4a, 0x3e, 0x99, 0x63, 0x72, 0x2a, 0x72, 0x67, 0xe5, 0x84, 0x6f, 0x85, 0xe5,
-	0x22, 0xf7, 0x08, 0x29, 0xd8, 0x25, 0xc2, 0x35, 0x40, 0xf7, 0xe6, 0xcb, 0x6c, 0xe3, 0xfe, 0xa1,
-	0x40, 0x13, 0x05, 0xda, 0x4f, 0xbf, 0x5d, 0x5c, 0xa1, 0x8b, 0x80, 0x36, 0x0c, 0xe7, 0x34, 0x2f,
-	0x8d, 0x96, 0x86, 0x73, 0xce, 0x8c, 0x37, 0x0f, 0x93, 0x19, 0x73, 0x54, 0xae, 0xc1, 0x06, 0xe5,
-	0x16, 0xe2, 0x97, 0xd3, 0x45, 0x4a, 0x99, 0xa3, 0x09, 0x7c, 0xc9, 0x2d, 0x91, 0xcd, 0x3a, 0xcd,
-	0x56, 0x9b, 0x9c, 0x33, 0x23, 0x12, 0x26, 0xf6, 0x42, 0x3e, 0xd3, 0x5d, 0xc4, 0x34, 0x27, 0xce,
-	0x8a, 0x4a, 0x08, 0xe3, 0x77, 0x93, 0x6c, 0xc3, 0x59, 0x33, 0x7d, 0x2d, 0x4a, 0xb2, 0x0d, 0x72,
-	0x8d, 0x9c, 0x7f, 0xb1, 0x48, 0x69, 0x4e, 0x4f, 0x33, 0xcb, 0x6d, 0xf7, 0xaf, 0x3a, 0x58, 0x5c,
-	0xa7, 0xf4, 0x87, 0x35, 0x65, 0x59, 0xb5, 0xdf, 0x95, 0xdd, 0x7e, 0x2f, 0x6b, 0x5c, 0xaf, 0xd4,
-	0xb8, 0xd2, 0x81, 0xda, 0x6e, 0x07, 0xde, 0x06, 0xf3, 0x9c, 0x32, 0x16, 0x4e, 0x68, 0xb0, 0xc8,
-	0x33, 0x32, 0xe7, 0x05, 0x20, 0xf4, 0x3c, 0xa1, 0xe3, 0xd5, 0x2c, 0xcf, 0xc7, 0x58, 0x0a, 0x13,
-	0xf7, 0xe1, 0x4c, 0x90, 0x64, 0x33, 0x9a, 0x27, 0x64, 0x2e, 0x0b, 0x00, 0xf7, 0xe5, 0x5e, 0x8b,
-	0x9a, 0xe7, 0x3e, 0x49, 0x1b, 0x0e, 0xcf, 0x56, 0x8b, 0x1f, 0x19, 0x5d, 0x0d, 0xc2, 0x74, 0xb2,
-	0xc6, 0x15, 0xe2, 0x56, 0x38, 0x7c, 0x59, 0x85, 0x91, 0x99, 0xed, 0x12, 0x10, 0xcc, 0xcc, 0x8a,
-	0xb9, 0x07, 0x00, 0x3d, 0xfa, 0x2a, 0x89, 0x28, 0x57, 0xa1, 0x25, 0xab, 0xb0, 0xc4, 0x7d, 0x88,
-	0xb7, 0x63, 0x64, 0x87, 0xeb, 0x22, 0x76, 0xf6, 0x04, 0x3b, 0x6b, 0x6e, 0x95, 0x1d, 0xb0, 0x2f,
-	0x75, 0x80, 0xfb, 0x5e, 0x7e, 0xe1, 0xe0, 0x15, 0x28, 0xdf, 0x3c, 0xf2, 0xe5, 0x91, 0xdf, 0x37,
-	0x5f, 0x8a, 0x06, 0x1d, 0x65, 0xe1, 0x2a, 0xc3, 0xbc, 0x3b, 0x13, 0x2a, 0xd5, 0xc7, 0x08, 0x85,
-	0x29, 0xc5, 0xaf, 0x57, 0xe2, 0x57, 0xaa, 0xa3, 0xee, 0x54, 0xc7, 0xfd, 0x06, 0xf6, 0x3b, 0x51,
-	0x44, 0x97, 0x6f, 0x28, 0x01, 0x29, 0x7c, 0xfd, 0x4a, 0xf8, 0xd7, 0x5d, 0x00, 0xee, 0x14, 0x9c,
-	0x41, 0xc2, 0xb2, 0x71, 0x1a, 0x32, 0x96, 0x4c, 0x52, 0x9e, 0xeb, 0x1b, 0xc7, 0xe2, 0x39, 0x97,
-	0xb1, 0x98, 0x30, 0xf9, 0x13, 0x93, 0xcc, 0x93, 0x8c, 0x87, 0xd2, 0x7d, 0x7d, 0x86, 0x86, 0xfb,
-	0xbb, 0x02, 0x7b, 0x72, 0x98, 0x7f, 0x71, 0x7f, 0x07, 0xa0, 0xcf, 0x3a, 0x7c, 0x35, 0x15, 0x11,
-	0x9a, 0x3e, 0x24, 0x5b, 0x44, 0x56, 0x98, 0x5a, 0x55, 0x18, 0x76, 0xfd, 0x32, 0x17, 0x7a, 0x3d,
-	0x59, 0x6e, 0xbb, 0x5e, 0x7f, 0x6d, 0xd7, 0x37, 0xae, 0xe9, 0x7a, 0x43, 0xee, 0x7a, 0xf7, 0x2d,
-	0xd0, 0xcf, 0x16, 0x8b, 0x19, 0xc3, 0xdc, 0xf8, 0x80, 0xeb, 0xa1, 0xe9, 0xeb, 0x2f, 0xd1, 0x70,
-	0xbf, 0x83, 0x5b, 0x9c, 0x45, 0x7c, 0x13, 0xc7, 0xe9, 0x8a, 0x86, 0xf1, 0x7f, 0xad, 0x97, 0x03,
-	0x86, 0x90, 0x4b, 0x71, 0x2f, 0x19, 0x42, 0x2f, 0xcc, 0xfd, 0x10, 0x1a, 0x22, 0x84, 0x24, 0x29,
-	0xa5, 0x22, 0xa9, 0x5b, 0xc5, 0x0a, 0xee, 0x54, 0xf7, 0x1b, 0x6b, 0x6e, 0xb9, 0x0f, 0xc1, 0x92,
-	0x4e, 0x48, 0xde, 0x05, 0x43, 0x8c, 0x0a, 0x71, 0xef, 0xe5, 0xef, 0xbb, 0x48, 0xc0, 0x10, 0xbb,
-	0x98, 0xfb, 0x35, 0x1c, 0x61, 0x72, 0xe5, 0xdb, 0x94, 0xa7, 0x76, 0xdd, 0x7d, 0x23, 0x09, 0x43,
-	0xbd, 0x46, 0x18, 0x9a, 0x2c, 0x8c, 0xdf, 0x14, 0xc1, 0x1e, 0xd7, 0xde, 0xd9, 0x86, 0x7f, 0x5e,
-	0xbc, 0x11, 0x7b, 0x95, 0xd6, 0xa9, 0xef, 0x5e, 0x6c, 0x25, 0x3b, 0x6a, 0x85, 0x1d, 0xe9, 0x78,
-	0xda, 0x35, 0xc7, 0xd3, 0xa5, 0xe3, 0x9d, 0xfc, 0xac, 0xc0, 0x7e, 0xe5, 0x49, 0x25, 0x4d, 0xd0,
-	0x86, 0x17, 0x43, 0xcf, 0xae, 0x11, 0x0b, 0x8c, 0x73, 0x6f, 0x34, 0xea, 0x3c, 0xf1, 0x6c, 0x85,
-	0x00, 0x34, 0xba, 0x83, 0x8b, 0x91, 0xd7, 0xb3, 0x55, 0x1c, 0x7f, 0x76, 0xd1, 0x1f, 0x7a, 0x3d,
-	0x5b, 0xc3, 0xe5, 0x23, 0xcf, 0x1b, 0xda, 0x0d, 0x62, 0x82, 0xee, 0x77, 0x02, 0xaf, 0x67, 0x1b,
-	0x38, 0xec, 0x0f, 0x2f, 0xc7, 0x81, 0xdd, 0x24, 0x06, 0xa8, 0x41, 0xe7, 0x89, 0x6d, 0x22, 0x36,
-	0x1e, 0xe2, 0x10, 0x88, 0x0d, 0x7b, 0x81, 0xdf, 0x19, 0x8e, 0x1e, 0x7b, 0x7e, 0xf7, 0x69, 0x27,
-	0xb0, 0xad, 0x93, 0x8f, 0xe4, 0x77, 0x97, 0xec, 0x83, 0x39, 0x1e, 0xf6, 0xbc, 0xc7, 0x3c, 0x44,
-	0x0d, 0x43, 0x8c, 0x47, 0x9e, 0x6f, 0x2b, 0xe8, 0xa3, 0xf3, 0xc4, 0x1b, 0x06, 0x76, 0x1d, 0xcf,
-	0x30, 0x7a, 0x31, 0x0a, 0xbc, 0x73, 0x5b, 0x3d, 0xf9, 0x44, 0xbe, 0x2f, 0xf1, 0xd8, 0xe3, 0xe1,
-	0xb3, 0xe1, 0xc5, 0xf3, 0xa1, 0x5d, 0xc3, 0x65, 0xe7, 0x17, 0x67, 0xfd, 0x41, 0x9e, 0x42, 0xd0,
-	0x39, 0x1b, 0x78, 0xb8, 0xdd, 0x02, 0xa3, 0xe7, 0x8d, 0x9e, 0x05, 0x17, 0x97, 0xb6, 0x7a, 0xfa,
-	0xab, 0x06, 0x06, 0x92, 0x70, 0x3e, 0x59, 0x91, 0xb7, 0x41, 0xbb, 0x4c, 0xd2, 0x09, 0x69, 0x0a,
-	0xb9, 0xf4, 0xe3, 0x63, 0x4b, 0x8c, 0xc4, 0x0b, 0x5c, 0x23, 0xef, 0x80, 0x86, 0x47, 0x25, 0xbb,
-	0x1f, 0x35, 0xc7, 0xdb, 0x1d, 0x6e, 0x8d, 0xb4, 0xc1, 0x28, 0xaa, 0x7c, 0x43, 0xba, 0x54, 0x05,
-	0x54, 0x59, 0x79, 0x17, 0x74, 0x71, 0xb9, 0x4a, 0xfe, 0x38, 0x50, 0x59, 0xd5, 0x83, 0xc3, 0x9d,
-	0x16, 0x24, 0xb7, 0xc5, 0xf4, 0xeb, 0x3b, 0xf3, 0xf8, 0x46, 0xf9, 0x35, 0x9b, 0xcf, 0xb8, 0x35,
-	0xf2, 0x54, 0x78, 0x91, 0xa4, 0x28, 0x7b, 0xb9, 0xaa, 0xd0, 0xe3, 0xff, 0x95, 0x67, 0x92, 0x3e,
-	0x58, 0xdd, 0x1a, 0xf9, 0x14, 0x0e, 0x2a, 0x5d, 0xc3, 0xc8, 0x71, 0xd5, 0x91, 0xdc, 0x4b, 0xc7,
-	0xf6, 0x0e, 0x55, 0xe8, 0xe1, 0x3e, 0xdc, 0x94, 0xaf, 0x66, 0x1a, 0x8b, 0x17, 0xe9, 0x0a, 0xed,
-	0x1c, 0x76, 0x6b, 0xe4, 0x11, 0x1c, 0x89, 0xb7, 0xa2, 0xba, 0x83, 0xe4, 0x9f, 0x85, 0x95, 0x77,
-	0x64, 0xb7, 0x64, 0x0f, 0xe0, 0xa8, 0x3b, 0xa5, 0xd1, 0xf7, 0xbb, 0xc1, 0xcc, 0x22, 0x18, 0xdb,
-	0x89, 0xf6, 0xb2, 0xc1, 0x7f, 0x18, 0x7d, 0xf0, 0x77, 0x00, 0x00, 0x00, 0xff, 0xff, 0x6b, 0xd5,
-	0x65, 0x54, 0x2b, 0x0d, 0x00, 0x00,
+	// 2163 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xdc, 0x58, 0x4b, 0x73, 0x1b, 0x59,
+	0x15, 0x56, 0xab, 0x5f, 0xd2, 0x91, 0x1f, 0x9d, 0x1b, 0x27, 0x51, 0xb9, 0x86, 0x60, 0x9a, 0xaa,
+	0x3c, 0xcc, 0x90, 0x49, 0x99, 0x9a, 0x2a, 0x98, 0x2a, 0x28, 0x14, 0x5b, 0x09, 0x4a, 0x6c, 0x39,
+	0xd5, 0x92, 0x27, 0x30, 0x54, 0x31, 0xd5, 0xee, 0xbe, 0x91, 0x3b, 0x48, 0xdd, 0xa2, 0xfb, 0x2a,
+	0x13, 0xed, 0x58, 0xc0, 0x1a, 0x16, 0xac, 0x28, 0x8a, 0x1f, 0xc2, 0x9e, 0x0d, 0x7f, 0x81, 0x05,
+	0x2b, 0x16, 0xac, 0xe0, 0x27, 0x50, 0xe7, 0xdc, 0xdb, 0x2f, 0xf9, 0x11, 0x67, 0xd8, 0xb1, 0xb1,
+	0xfb, 0x7c, 0xf7, 0xea, 0x9c, 0x73, 0xbf, 0x7b, 0x5e, 0xdd, 0xb0, 0x19, 0x9c, 0xf9, 0xe2, 0x13,
+	0xfc, 0xf3, 0x68, 0x9e, 0x26, 0x22, 0x61, 0x06, 0x3e, 0xbb, 0x5b, 0xd0, 0x1c, 0x84, 0x6c, 0x03,
+	0xff, 0x76, 0xb5, 0x1d, 0xed, 0x41, 0xdb, 0x6b, 0x46, 0xa1, 0x6b, 0x83, 0xd9, 0x9f, 0xcd, 0xc5,
+	0xd2, 0xfd, 0x6d, 0x13, 0x0c, 0x6f, 0x31, 0xe5, 0xab, 0x3b, 0xd8, 0x47, 0xd0, 0xee, 0x05, 0x41,
+	0xb2, 0x88, 0xc5, 0x20, 0xec, 0x36, 0x09, 0x6e, 0xfb, 0x39, 0xc0, 0xb6, 0xa1, 0xf5, 0x32, 0x8d,
+	0x92, 0x34, 0x12, 0xcb, 0xae, 0x4e, 0x8b, 0xad, 0xb9, 0x92, 0xd9, 0x63, 0x68, 0x8d, 0x44, 0xea,
+	0x0b, 0x3e, 0x59, 0x76, 0x8d, 0x1d, 0xed, 0xc1, 0xc6, 0xde, 0xd6, 0x23, 0x72, 0xab, 0x97, 0x65,
+	0xd1, 0x24, 0xce, 0xd7, 0xbc, 0x56, 0xa6, 0x9e, 0x50, 0x5b, 0x6f, 0xc2, 0x51, 0x71, 0xd6, 0x35,
+	0x77, 0x74, 0xd4, 0xe6, 0x2b, 0x99, 0x7d, 0x02, 0xb0, 0x9f, 0xc4, 0x61, 0x24, 0xa2, 0x24, 0xce,
+	0xba, 0xd6, 0x8e, 0xfe, 0xa0, 0xb3, 0xb7, 0x29, 0xf5, 0x15, 0xb8, 0x07, 0x41, 0xb1, 0x85, 0xdd,
+	0x05, 0x18, 0x64, 0x07, 0x51, 0xe6, 0x9f, 0x4e, 0x79, 0xd8, 0xb5, 0x77, 0xb4, 0x07, 0x2d, 0x0f,
+	0xa2, 0x02, 0x61, 0x5b, 0x60, 0xee, 0x8f, 0xa3, 0x19, 0xef, 0xb6, 0xc8, 0x6f, 0x33, 0x40, 0xc1,
+	0xfd, 0x0a, 0xda, 0x85, 0x3a, 0x76, 0x0f, 0x8c, 0xe7, 0x49, 0x14, 0x13, 0x1b, 0x1b, 0x7b, 0x4c,
+	0x5a, 0x43, 0xe4, 0x78, 0xce, 0x53, 0x5f, 0x24, 0xa9, 0x67, 0xbc, 0x49, 0xa2, 0x98, 0x39, 0xa0,
+	0xbf, 0xe0, 0x4b, 0xc5, 0x8e, 0xfe, 0x4b, 0x4e, 0x27, 0xc9, 0xf7, 0xe4, 0xbc, 0x24, 0x4a, 0x46,
+	0xc3, 0x9f, 0xfb, 0xd3, 0x05, 0xef, 0x1a, 0x74, 0x44, 0xf3, 0x2d, 0x0a, 0xee, 0x43, 0x30, 0xbd,
+	0x64, 0x21, 0x38, 0xdb, 0x51, 0x0f, 0x5d, 0x8d, 0xce, 0x08, 0xd2, 0x2a, 0xde, 0x8d, 0x67, 0xa6,
+	0xb8, 0xe0, 0x66, 0xd0, 0xa1, 0x1d, 0x1e, 0xcf, 0x16, 0x53, 0xc1, 0x6e, 0x83, 0x85, 0xab, 0xc5,
+	0xad, 0x59, 0x29, 0x49, 0x35, 0xfe, 0xf5, 0x0f, 0xe6, 0xdf, 0xa8, 0xf3, 0xef, 0x7e, 0x0c, 0xce,
+	0xb3, 0x34, 0x59, 0xcc, 0x0f, 0xf8, 0x94, 0x0b, 0xde, 0x7f, 0xcb, 0x63, 0xc1, 0xba, 0x60, 0x13,
+	0x56, 0x98, 0xb6, 0x27, 0x52, 0x74, 0x9f, 0xab, 0xdd, 0x27, 0xf3, 0xd0, 0x7f, 0xef, 0x6e, 0x8c,
+	0xb1, 0x23, 0x3e, 0x3b, 0xe5, 0x29, 0x1a, 0x6e, 0x92, 0xe1, 0xf6, 0x2c, 0x07, 0xdc, 0xef, 0xc2,
+	0x0d, 0xf2, 0x4a, 0x5a, 0x0e, 0x0b, 0x65, 0xca, 0xd5, 0x5c, 0x99, 0xf2, 0xd4, 0x7d, 0x03, 0x0e,
+	0xad, 0xac, 0x98, 0xbe, 0x78, 0x37, 0x1e, 0x79, 0x90, 0xf5, 0x02, 0x11, 0xbd, 0xe5, 0x74, 0x7f,
+	0x2d, 0xaf, 0x15, 0x29, 0x99, 0xed, 0x40, 0x67, 0x90, 0xed, 0x27, 0xf1, 0xeb, 0x28, 0x9d, 0xf1,
+	0x90, 0x38, 0x6c, 0x79, 0x9d, 0xa8, 0x84, 0xdc, 0x3b, 0xa0, 0x63, 0x6c, 0x3a, 0xf4, 0x8f, 0x2e,
+	0xac, 0xed, 0xe9, 0x51, 0x98, 0xb9, 0x5f, 0x80, 0x71, 0x92, 0xf1, 0xf4, 0x5c, 0x36, 0xb9, 0x60,
+	0x8c, 0x97, 0x73, 0xae, 0xf2, 0x61, 0x43, 0xde, 0x07, 0xee, 0x44, 0xd4, 0x33, 0xc4, 0x72, 0xce,
+	0x31, 0x70, 0x0f, 0xfd, 0x4c, 0x8c, 0x38, 0x8f, 0x07, 0x61, 0xd7, 0xa4, 0xdf, 0xc2, 0xb4, 0x40,
+	0xdc, 0x3f, 0x36, 0xc1, 0xd8, 0x3f, 0xf3, 0xc5, 0x07, 0xa6, 0x6a, 0x11, 0xef, 0x7a, 0x25, 0xde,
+	0x11, 0x3d, 0x24, 0xd4, 0x90, 0xe8, 0x34, 0x47, 0x7f, 0x4a, 0xa8, 0xb4, 0x6e, 0xbe, 0x23, 0x74,
+	0x07, 0x4c, 0x74, 0x35, 0xcf, 0x3e, 0x28, 0xbd, 0xf7, 0xcc, 0x05, 0x2e, 0x20, 0x63, 0x44, 0x78,
+	0xb6, 0x8f, 0x46, 0x29, 0xb3, 0x4c, 0xaf, 0xc3, 0x4b, 0x08, 0x7d, 0xdc, 0x3f, 0xf3, 0xe3, 0x98,
+	0x4f, 0x07, 0x61, 0xb7, 0x2d, 0x7d, 0x0c, 0x72, 0x80, 0x31, 0x30, 0xc6, 0xfe, 0x24, 0xeb, 0x02,
+	0x31, 0x69, 0x08, 0x7f, 0x92, 0xb1, 0x8f, 0x61, 0xed, 0x68, 0x21, 0x78, 0x88, 0x76, 0x90, 0xe5,
+	0x0e, 0x19, 0x6f, 0x49, 0xe3, 0x83, 0xd0, 0x5b, 0x9b, 0x55, 0x56, 0xdd, 0x1f, 0xc2, 0x26, 0x72,
+	0x93, 0xbd, 0x8a, 0xc4, 0x99, 0x74, 0x85, 0xed, 0x82, 0x49, 0x90, 0x4a, 0x28, 0x95, 0x04, 0x08,
+	0x95, 0x9b, 0x3c, 0x13, 0xc1, 0xcc, 0xfd, 0x19, 0x6c, 0xd4, 0x17, 0xd8, 0x5d, 0x49, 0x36, 0xd1,
+	0x5c, 0x9c, 0x19, 0x11, 0x8f, 0xea, 0x2a, 0xbb, 0x0f, 0x96, 0xdc, 0x49, 0x81, 0x5b, 0xd6, 0xa4,
+	0x33, 0x5f, 0x10, 0xee, 0x59, 0xf2, 0xf8, 0xee, 0x67, 0x00, 0x3d, 0x21, 0xfc, 0xe0, 0x6c, 0x86,
+	0x11, 0xc9, 0x54, 0x20, 0xc8, 0xdb, 0x93, 0x17, 0xdf, 0x05, 0xfb, 0xa5, 0xbf, 0x9c, 0x26, 0x7e,
+	0x7e, 0x7b, 0xf6, 0x5c, 0x8a, 0xee, 0xa7, 0x00, 0x85, 0xc2, 0xac, 0x62, 0x52, 0xbb, 0xda, 0xe4,
+	0x9f, 0x9b, 0xc4, 0xb6, 0x44, 0xcf, 0x85, 0xcb, 0x7d, 0xe5, 0x42, 0x93, 0x62, 0xf1, 0xe6, 0x8a,
+	0x92, 0x4a, 0x40, 0xde, 0x06, 0x0b, 0xe1, 0x41, 0xa8, 0x42, 0xc7, 0x0a, 0x48, 0x2a, 0x23, 0xca,
+	0xac, 0x46, 0xd4, 0x36, 0xb4, 0x46, 0x3c, 0x0e, 0xf1, 0x3a, 0xba, 0x96, 0x2c, 0x7d, 0x99, 0x92,
+	0xd9, 0x23, 0x00, 0xb9, 0x46, 0x86, 0xed, 0x0b, 0x93, 0x00, 0xb2, 0x62, 0x07, 0xb1, 0xc4, 0xdf,
+	0x09, 0x55, 0xa2, 0x0d, 0xc1, 0xdf, 0x51, 0xb9, 0x7b, 0x9a, 0xa4, 0x33, 0x5f, 0xa8, 0xf0, 0xb1,
+	0x5e, 0x93, 0xc4, 0xf6, 0xa0, 0x53, 0xf2, 0x2b, 0x43, 0xa8, 0xb3, 0xe7, 0xa8, 0x8a, 0x57, 0x2c,
+	0x78, 0x1d, 0xbf, 0xdc, 0xe4, 0xfe, 0x4d, 0x83, 0x16, 0x45, 0x4e, 0xfc, 0x3a, 0x39, 0xc7, 0x0f,
+	0x03, 0x63, 0xe8, 0xcf, 0xb8, 0xba, 0x0b, 0x23, 0xf6, 0x67, 0x44, 0x45, 0x7f, 0xe6, 0x47, 0xd3,
+	0xac, 0xab, 0x53, 0x88, 0x5a, 0x9c, 0x24, 0xc4, 0x5f, 0x9e, 0x25, 0x31, 0xcf, 0xeb, 0xa6, 0x35,
+	0x27, 0x09, 0xaf, 0x94, 0xe2, 0x3e, 0x5d, 0x2a, 0x92, 0xec, 0x40, 0x8a, 0x98, 0x2a, 0x6a, 0x65,
+	0x3f, 0x09, 0xb9, 0x62, 0xaa, 0x13, 0x94, 0x10, 0xda, 0xdf, 0xc7, 0xbe, 0x6a, 0x4b, 0xfb, 0x01,
+	0xf6, 0xd4, 0x6d, 0x68, 0x21, 0xc9, 0x5f, 0x24, 0x71, 0xde, 0xb7, 0x5a, 0x42, 0xc9, 0xee, 0x3f,
+	0x9a, 0xd0, 0xa1, 0xc0, 0xe4, 0xbf, 0x5a, 0xf0, 0x4c, 0xd4, 0xcb, 0x81, 0xb6, 0x5a, 0x0e, 0x6a,
+	0x89, 0x68, 0xac, 0x26, 0x22, 0x55, 0xe4, 0x2c, 0xf3, 0x27, 0x7c, 0x9c, 0x28, 0xcf, 0xdb, 0xb3,
+	0x1c, 0x90, 0x81, 0x3a, 0xe1, 0x27, 0xe9, 0x54, 0xf9, 0x6d, 0xcf, 0xa5, 0x88, 0xbf, 0xc3, 0x95,
+	0x71, 0x24, 0xa6, 0x5c, 0x39, 0xde, 0x9e, 0xe7, 0x00, 0xfe, 0x4e, 0x69, 0x55, 0xce, 0xdb, 0x4a,
+	0x27, 0x7b, 0x00, 0x9b, 0x4f, 0xd2, 0xe4, 0xab, 0x8c, 0xa7, 0x87, 0x7e, 0x3c, 0x59, 0xe0, 0x0e,
+	0x79, 0xbb, 0x9b, 0xa7, 0x75, 0x18, 0x19, 0x28, 0xb6, 0x80, 0x64, 0x60, 0x9a, 0xaf, 0x3d, 0x06,
+	0x38, 0xe0, 0x6f, 0xa3, 0x80, 0x53, 0x78, 0x75, 0x28, 0xbc, 0x54, 0x04, 0x94, 0xb8, 0x07, 0x61,
+	0xf1, 0x8c, 0xf7, 0x26, 0x2b, 0x47, 0x77, 0x4d, 0x06, 0xd3, 0x82, 0xa4, 0x32, 0xb4, 0xd7, 0xab,
+	0xc3, 0xc1, 0x43, 0x55, 0x49, 0xb0, 0x12, 0x56, 0x4b, 0x4a, 0xb5, 0x2a, 0xa8, 0x42, 0xf2, 0x73,
+	0x99, 0x79, 0x23, 0xe1, 0xa7, 0x57, 0xb5, 0x9f, 0xd2, 0x7e, 0xb3, 0x66, 0xbf, 0x76, 0x3b, 0xfa,
+	0xca, 0xed, 0xb8, 0x5f, 0xc2, 0x7a, 0x2f, 0x08, 0xf8, 0xfc, 0x9a, 0x57, 0x5d, 0x31, 0xdf, 0x3c,
+	0x67, 0xfe, 0xa2, 0xcc, 0x76, 0xcf, 0xa0, 0x7b, 0x18, 0x65, 0xe2, 0x24, 0xf6, 0x69, 0x54, 0xa0,
+	0xb3, 0x5e, 0xdb, 0x16, 0x9d, 0xb9, 0xb4, 0x95, 0x49, 0x91, 0x3a, 0x4d, 0x34, 0x8b, 0x04, 0x99,
+	0x32, 0x3d, 0x73, 0x8a, 0x82, 0xfb, 0x17, 0x0d, 0xd6, 0xaa, 0x66, 0xde, 0xa3, 0x9e, 0x86, 0x3a,
+	0x39, 0xbf, 0xf0, 0x50, 0x35, 0x6c, 0x88, 0x0a, 0xa4, 0x1a, 0x61, 0x7a, 0x3d, 0xc2, 0x30, 0xbb,
+	0xe7, 0x2a, 0xd0, 0x9b, 0xd1, 0xbc, 0xc8, 0x6e, 0xf3, 0xc2, 0xec, 0xb6, 0x2e, 0xc9, 0x6e, 0xbb,
+	0x9a, 0xdd, 0xee, 0x37, 0xc0, 0x7c, 0x92, 0x24, 0xd3, 0x0c, 0xcf, 0x46, 0x0f, 0x14, 0x0f, 0x2d,
+	0xcf, 0x3c, 0x45, 0xc1, 0x7d, 0x03, 0xb7, 0x89, 0x45, 0x6c, 0x8d, 0x27, 0x71, 0xca, 0xfd, 0xf0,
+	0x7f, 0xbd, 0xaf, 0x2e, 0xd8, 0x79, 0x1b, 0x94, 0xf5, 0xc7, 0x5e, 0xa8, 0xbe, 0xf7, 0x7d, 0xb0,
+	0xa4, 0x89, 0x4a, 0x48, 0x69, 0xb5, 0x90, 0xba, 0x9d, 0xef, 0x20, 0xa5, 0xa6, 0x67, 0x2d, 0x48,
+	0x72, 0x3f, 0x85, 0x4e, 0xc5, 0x43, 0x76, 0x0f, 0x6c, 0xf9, 0x94, 0x07, 0xf7, 0x9a, 0xaa, 0xcf,
+	0xf2, 0x00, 0xb6, 0xfc, 0x55, 0xe6, 0xfe, 0x02, 0xb6, 0xf0, 0x70, 0x65, 0xd3, 0x51, 0x47, 0x2b,
+	0x43, 0xaa, 0x59, 0x6b, 0x16, 0x95, 0xc0, 0xd0, 0x2f, 0x09, 0x0c, 0xa3, 0x1a, 0x18, 0x7f, 0xd2,
+	0x24, 0x7b, 0x14, 0x7b, 0x4f, 0x96, 0x34, 0x65, 0x7c, 0x78, 0x61, 0x6b, 0xae, 0x16, 0xb6, 0x92,
+	0x1d, 0xbd, 0xc6, 0x4e, 0xc5, 0x3d, 0xe3, 0x12, 0xf7, 0xcc, 0xaa, 0x7b, 0xff, 0x6a, 0x02, 0xf4,
+	0xdf, 0x52, 0x8a, 0x73, 0x39, 0xd6, 0x28, 0xef, 0x4a, 0x97, 0xd2, 0x1c, 0x40, 0x15, 0xc4, 0x91,
+	0x72, 0xc7, 0xe4, 0xf9, 0x50, 0x4a, 0x68, 0xc9, 0x08, 0x97, 0x62, 0xd1, 0x99, 0x8d, 0xeb, 0x77,
+	0x66, 0xb3, 0x46, 0x76, 0x8d, 0x21, 0xeb, 0xd2, 0x49, 0xd0, 0xbe, 0xac, 0x6f, 0xb7, 0xae, 0xec,
+	0xdb, 0xed, 0xf7, 0xf6, 0x6d, 0x6a, 0x7b, 0xb1, 0xc0, 0x23, 0x43, 0xde, 0xf6, 0x48, 0x5c, 0xed,
+	0xd2, 0x9d, 0xeb, 0x74, 0xe9, 0xff, 0x68, 0xb0, 0x21, 0xb9, 0x2e, 0xf2, 0xfc, 0xeb, 0xf0, 0x5d,
+	0x92, 0x65, 0x5c, 0x4e, 0x96, 0xbe, 0x4a, 0x16, 0xf6, 0xe9, 0x94, 0xfb, 0x82, 0x87, 0x95, 0x51,
+	0xa7, 0x13, 0x94, 0xd0, 0x35, 0xc6, 0xe2, 0x5a, 0x48, 0xda, 0x97, 0x0d, 0xbd, 0xad, 0x72, 0xe8,
+	0x75, 0xff, 0xad, 0xc1, 0xba, 0x3c, 0xf2, 0x2b, 0x3f, 0x12, 0x51, 0x3c, 0xf9, 0xbf, 0x3f, 0xf1,
+	0x6d, 0xd8, 0x52, 0xf9, 0x84, 0x79, 0xa7, 0x8e, 0xca, 0x43, 0xf7, 0x16, 0xdc, 0x2c, 0xf2, 0x2c,
+	0x2c, 0xe1, 0x3b, 0x70, 0x4b, 0x85, 0x44, 0xb5, 0x11, 0xf2, 0xd0, 0xfd, 0x7b, 0xc1, 0x9c, 0x3a,
+	0xc4, 0xd7, 0x62, 0xee, 0x6a, 0x86, 0x2e, 0xe3, 0xb5, 0xe0, 0xc5, 0xbc, 0x16, 0x2f, 0xd6, 0x2a,
+	0x2f, 0x2b, 0xcc, 0xdb, 0xe7, 0x98, 0x77, 0x7f, 0xa3, 0xc1, 0x9a, 0x3c, 0x9d, 0x7a, 0xf9, 0xbf,
+	0xfa, 0x70, 0x38, 0x42, 0xe2, 0x74, 0x29, 0x2b, 0xbe, 0x11, 0xe0, 0x58, 0xb9, 0x62, 0x44, 0xbf,
+	0xe8, 0x7a, 0x3b, 0x07, 0x3c, 0x0b, 0xd2, 0x68, 0x2e, 0xa2, 0x24, 0x56, 0x67, 0xec, 0x84, 0x25,
+	0xb4, 0xdb, 0x03, 0xb3, 0x9f, 0xa6, 0x49, 0xca, 0x2c, 0x68, 0x1e, 0xbf, 0x70, 0x1a, 0xcc, 0x81,
+	0xb5, 0x61, 0x42, 0x1f, 0x25, 0x8e, 0x7c, 0x11, 0x9c, 0x39, 0x1a, 0x5b, 0x87, 0xd6, 0x30, 0x11,
+	0x4f, 0x93, 0x45, 0x1c, 0x3a, 0x7f, 0xd0, 0xd9, 0x26, 0x00, 0xde, 0x54, 0x96, 0x1d, 0xf0, 0x78,
+	0xe9, 0xfc, 0x5e, 0xdf, 0x7d, 0x08, 0x6b, 0xd5, 0x2f, 0x29, 0xac, 0x05, 0xc6, 0x30, 0x89, 0xb9,
+	0xd3, 0x60, 0x36, 0xe8, 0xbd, 0x38, 0x74, 0x34, 0x52, 0x9e, 0x3a, 0xcd, 0xdd, 0xdf, 0x69, 0xb0,
+	0x51, 0xff, 0x66, 0xc1, 0xd6, 0xa0, 0x75, 0x12, 0x67, 0x5c, 0x08, 0x1e, 0x3a, 0x0d, 0xb6, 0x0e,
+	0xed, 0xde, 0x74, 0x4a, 0x3d, 0x33, 0x73, 0x34, 0xb6, 0x01, 0x40, 0xcf, 0xf4, 0xb5, 0xc1, 0x69,
+	0xb2, 0x1b, 0xb0, 0x3e, 0x9a, 0xf3, 0x20, 0x7a, 0x1d, 0x05, 0x84, 0x3b, 0x3a, 0x6e, 0x39, 0x4a,
+	0x32, 0xe1, 0xf1, 0x00, 0x65, 0x83, 0xdd, 0x81, 0x9b, 0x1e, 0xba, 0xea, 0x25, 0xa7, 0x51, 0x5c,
+	0xea, 0x32, 0xd9, 0x16, 0x38, 0x95, 0x05, 0x89, 0x5a, 0xbb, 0xbf, 0xd6, 0x60, 0xbd, 0x56, 0x8f,
+	0xc9, 0xfd, 0xe3, 0x61, 0xdf, 0x69, 0xb0, 0x0e, 0xd8, 0x47, 0xfd, 0xd1, 0xa8, 0xf7, 0xac, 0xef,
+	0x68, 0x0c, 0xc0, 0xda, 0x3f, 0x3c, 0x1e, 0xf5, 0x0f, 0x1c, 0x1d, 0x9f, 0x9f, 0x1f, 0x0f, 0x86,
+	0xfd, 0x03, 0xc7, 0xc0, 0xed, 0xa3, 0x7e, 0x7f, 0xe8, 0x58, 0xac, 0x0d, 0xa6, 0xd7, 0x1b, 0xf7,
+	0x0f, 0x1c, 0x1b, 0x1f, 0x07, 0xc3, 0x97, 0x27, 0x63, 0xa7, 0x85, 0x1c, 0x8c, 0x7b, 0xcf, 0x9c,
+	0x36, 0x62, 0x27, 0x43, 0x7c, 0x04, 0x3c, 0xf3, 0xd8, 0xeb, 0x0d, 0x47, 0x4f, 0xfb, 0x9e, 0xd3,
+	0xd9, 0xed, 0xcb, 0x37, 0x17, 0x32, 0x7e, 0x0b, 0x6e, 0x9c, 0xc4, 0x21, 0x7f, 0x1d, 0xc5, 0xf2,
+	0x45, 0x18, 0x41, 0xe9, 0xc9, 0xe7, 0x51, 0x16, 0x89, 0x24, 0x75, 0x34, 0x54, 0x24, 0x0f, 0xdf,
+	0x44, 0x47, 0x46, 0xcb, 0x4c, 0xf0, 0x99, 0xa3, 0xef, 0xfe, 0xa8, 0x3a, 0x32, 0xe3, 0x2f, 0x4e,
+	0x86, 0x2f, 0x86, 0xc7, 0xaf, 0x86, 0x4e, 0x03, 0xb7, 0x1d, 0x1d, 0x3f, 0x19, 0x1c, 0xaa, 0x73,
+	0x8c, 0x7b, 0x4f, 0x0e, 0xfb, 0x63, 0xa7, 0x89, 0x9b, 0x0e, 0xfa, 0xa3, 0x17, 0xe3, 0xe3, 0x97,
+	0x8e, 0xbe, 0xfb, 0x03, 0x95, 0x3e, 0xc8, 0x28, 0x32, 0xf2, 0x25, 0xc5, 0x85, 0xbc, 0x13, 0x92,
+	0xb1, 0x3d, 0x3a, 0x1a, 0xde, 0x01, 0x89, 0x79, 0x05, 0x77, 0x9a, 0x7b, 0xff, 0xd4, 0xc1, 0x46,
+	0xec, 0x68, 0x92, 0xb2, 0x7b, 0x60, 0x60, 0x7e, 0xb3, 0xd5, 0x57, 0xd9, 0xed, 0x8e, 0x04, 0xe4,
+	0x47, 0xca, 0x06, 0xfb, 0x0e, 0xd8, 0xf9, 0x14, 0x70, 0xa3, 0x32, 0x74, 0x4b, 0x68, 0x75, 0xf3,
+	0x7d, 0x30, 0xe5, 0xfc, 0x5d, 0xd1, 0x4a, 0xc0, 0xea, 0xc6, 0x03, 0xd8, 0x5c, 0x19, 0xd4, 0xd8,
+	0x47, 0x72, 0xc7, 0xc5, 0xf3, 0xdb, 0xf6, 0x8d, 0x32, 0xb3, 0xd5, 0x8a, 0xdb, 0x60, 0x3f, 0x91,
+	0x5a, 0x2a, 0x03, 0x4b, 0x55, 0xcb, 0xf9, 0x39, 0x66, 0xfb, 0x56, 0xe9, 0x56, 0xe5, 0x7b, 0x85,
+	0xdb, 0x60, 0x3f, 0x86, 0x8d, 0xda, 0x6c, 0x95, 0xb1, 0xed, 0xba, 0xa2, 0xea, 0xc4, 0xb5, 0xed,
+	0xac, 0x70, 0x86, 0x1a, 0x1e, 0xc1, 0xcd, 0xea, 0x00, 0xcf, 0x43, 0xf9, 0xde, 0x52, 0x7c, 0x35,
+	0xc9, 0x19, 0x20, 0xd8, 0x6d, 0xb0, 0xcf, 0x60, 0x4b, 0x16, 0xd2, 0xfa, 0x2f, 0x98, 0x9a, 0x3d,
+	0x6a, 0x45, 0x76, 0x95, 0xbd, 0xbb, 0x60, 0x78, 0x48, 0x59, 0xa9, 0xbc, 0xf2, 0x3e, 0xe4, 0x36,
+	0xf6, 0xfe, 0xaa, 0x81, 0x45, 0xa5, 0x21, 0x65, 0x8f, 0xc1, 0x92, 0x01, 0x70, 0xd1, 0xed, 0x29,
+	0xa8, 0xf2, 0x69, 0xd3, 0x6d, 0xb0, 0x6f, 0x83, 0x25, 0x3f, 0xe4, 0xb1, 0xca, 0x87, 0xd0, 0x55,
+	0x0f, 0x76, 0xc0, 0x92, 0x25, 0xad, 0xb6, 0xa9, 0xf0, 0xc7, 0x6d, 0xb0, 0x6f, 0x81, 0x25, 0x3f,
+	0x1f, 0x9e, 0xa7, 0x20, 0x57, 0xf2, 0x4d, 0x30, 0x90, 0xb2, 0xf3, 0x1b, 0xc8, 0x21, 0xb7, 0x71,
+	0x6a, 0xd1, 0xe7, 0xf4, 0xef, 0xfd, 0x37, 0x00, 0x00, 0xff, 0xff, 0xdc, 0x67, 0x5a, 0xd6, 0x61,
+	0x17, 0x00, 0x00,
 }
