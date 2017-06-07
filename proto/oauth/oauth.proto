@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package oauth;
+
+import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
+
+enum Error {
+	OK = 0;
+	NOTFOUND = 404;
+	INVALID_REQUEST = 400;
+	UNAUTHORIZED = 401;
+	invalide_client = 4;
+	invalid_grant = 5;
+	unauthorized_client = 6;
+	unsupported_grant_type = 7;
+	invalid_scope = 8;
+	access_denied = 9;
+	unsupported_response_type = 10;
+	server_error = 11;
+	temporarily_unavailable = 12;
+	INTERNAL_ERROR = 500;
+}
+
+message RevokeRequest {
+	string ClientId = 1;
+	string UserId = 2;
+	string AccountId = 3;
+}
+
+message IdRequest {
+	string Id = 1;
+}
+
+message Registration {
+	string ClientId = 1;
+	string ClientName = 2;
+	string ClientLogoUrl = 3;
+
+	repeated auth.Scope Scopes = 4;
+
+	string RegisterDate = 5;
+	string RegisterId = 6;
+}
+
+service Oauth2 {
+	rpc Revoke(RevokeRequest) returns (EmptyResponse) {}
+	rpc ListAccountRegistration(IdRequest) returns (Registrations) {}
+	rpc ListUserRegistration(IdRequest) returns (Registrations) {}
+}
+
+message EmptyResponse {}
+
+message Registrations {
+	repeated Registration Registrations = 1;
+}

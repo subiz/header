@@ -21,23 +21,31 @@ message Credential {
 	string AccountId = 1;
 	int32 AccountType = 2;
 	string UserId = 3;
-	
+
 	// scope that the user allow
 	Method Method = 5;
-	
+
 	// set to true if this credential is generated from internal service.
 	// Internal credential is trusted and have full access to any function
 	// when internal is set to true, all other fields is ignored
 	bool IsInternal = 6;
 	string ClientId = 7;
-	int32 ClientType = 8;
-	
-	// optional
-	string ApiKey = 9;
+	ClientType ClientType = 8;
+
+	// optional, used for secure service to service communication
+	string APIKey = 9;
+}
+
+enum ClientType {
+	Unknown = 0;
+	Channel = 1;
+	Widget = 2;
+	Dashboard = 3;
+	App = 4;
 }
 
 message Scope {
-	int32 Id = 1;
+	string Id = 1;
 	string Name = 2;
 	string LogoUrl = 3;
 	string Title = 4;
@@ -96,7 +104,7 @@ message Method {
 	bool ReadOthersAgentClient = 104;
 	bool ReadAgentNotification = 105;
 	bool SeenAgentNotification = 106;
-	
+
 	// accounts
 	bool ReadAccount = 120;
 	bool ListAccountClient = 121;
@@ -129,11 +137,22 @@ message Method {
 	bool VerifyClient = 156;
 	bool DeleteClient = 157;
 	bool CreateClient = 158;
-	
+
+	// rule
+	bool ReadRule = 180;
+	bool WriteRule = 181;
+	bool DeleteRule = 182;
+
+
+
+	// channel
+
+
+
 }
 
 message ScopeId {
-  int32 Id = 1;
+  string Id = 1;
 }
 
 message UserId {
@@ -146,16 +165,10 @@ message ScopesResponse {
 
 message UserAuth {
 	string UserId = 1;
-	Scope Scopes = 2;
-}
-
-message UpdatePermissionRequest {
-	string UserId = 2;
-	int32 Scope = 3;
+	Method Method = 2;
 }
 
 service AccAuth {
-	rpc List(UserId) returns (Scope) {}
-	rpc Grant(UpdatePermissionRequest) returns (Empty) {}
-	rpc Revoke(UpdatePermissionRequest) returns (Empty) {}
+	rpc ReadPermission(UserId) returns (Method) {}
+	rpc UpdatePermission(UserAuth) returns (Empty) {}
 }
