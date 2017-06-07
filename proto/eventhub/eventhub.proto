@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package eventhub;
+
+message Empty {}
+
+message UserRecallRequest {
+	string AccountId = 1;
+	string LastEventId = 2;
+	string UserId = 3;
+}
+
+message ChannelRecallRequest {
+	string AccountId = 1;
+	string LastEventId = 2;
+	string ChannelId = 3;
+}
+
+message Registration {
+	string AccountId = 1;
+	string AgentId = 2;
+	string Event = 3;
+}
+
+message Event {
+	string Id = 1;
+	string Payload = 2;
+}
+
+message Events {
+	repeated Event Events = 1;
+}
+
+service EventHub {
+	rpc Subscribe(Registration) returns (Empty) {}
+	rpc Unsubscribe(Registration) returns (Empty) {}
+	rpc RecallFromChannel(ChannelRecallRequest) returns (Events) {}
+	rpc RecallFromUser(UserRecallRequest) returns (Events) {}
+
+	rpc UpdateCluster(Cluster) returns (Empty) {}
+}
+
+message Cluster {
+	string Service = 1;
+	repeated string Hosts = 2;
+}
