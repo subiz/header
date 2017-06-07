@@ -9,7 +9,6 @@ message UserAgent {
 	string Os = 6;
 	string BrowserVersion = 7;
 	string DeviceType = 8;
-
 	string UserAgent = 9;
 }
 
@@ -21,10 +20,8 @@ service Detector {
 	rpc DetectLocation(String) returns (Location) {}
 	rpc ZipLanguage(String) returns (Zipped) {}
 	rpc UnzipLanguage(Zipped) returns (String) {}
-
-	//rpc ZipLocation(
-	
 }
+
 message String {
 	string String = 1;
 }
