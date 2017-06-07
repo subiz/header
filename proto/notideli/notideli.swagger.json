@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "notideli/notideli.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "notideliEmpty": {
+      "type": "object"
+    },
+    "notideliNotiConfiguration": {
+      "type": "object",
+      "properties": {
+        "UserId": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "EmailNoti": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DesktopNoti": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "MobileNoti": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "MobilePushTimming": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "EmailNotiGroup": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}

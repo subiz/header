@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "router/router.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "routerAssignStrategy": {
+      "type": "string",
+      "enum": [
+        "Unsetted",
+        "AllAgents",
+        "AgentGroup",
+        "SpecificAgent",
+        "MostRecent",
+        "RoundRobinAllAgents",
+        "RoundRobinAgents"
+      ],
+      "default": "Unsetted"
+    },
+    "routerCondition": {
+      "type": "object",
+      "properties": {
+        "Join": {
+          "$ref": "#/definitions/routerJoinOperator"
+        },
+        "Key": {
+          "type": "string"
+        },
+        "Operator": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "routerEmpty": {
+      "type": "object"
+    },
+    "routerId": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        }
+      }
+    },
+    "routerJoinOperator": {
+      "type": "string",
+      "enum": [
+        "None",
+        "And",
+        "Or"
+      ],
+      "default": "None"
+    },
+    "routerRoute": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Priority": {
+          "type": "string"
+        },
+        "Strategy": {
+          "$ref": "#/definitions/routerAssignStrategy"
+        },
+        "HandlerIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ConcurrentThreshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/routerCondition"
+          }
+        },
+        "IsDisabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CTime": {
+          "type": "string"
+        }
+      }
+    },
+    "routerRouteResult": {
+      "type": "object",
+      "properties": {
+        "RuleId": {
+          "type": "string"
+        },
+        "Strategy": {
+          "$ref": "#/definitions/routerAssignStrategy"
+        },
+        "AgentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "routerRoutes": {
+      "type": "object",
+      "properties": {
+        "Routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/routerRoute"
+          }
+        }
+      }
+    }
+  }
+}

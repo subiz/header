@@ -1,0 +1,294 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "account/account.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "accountAccount": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Plan": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "LogoUrl": {
+          "type": "string"
+        },
+        "OwnerId": {
+          "type": "string"
+        },
+        "State": {
+          "$ref": "#/definitions/accountAccountState"
+        },
+        "CreatedTime": {
+          "type": "string"
+        },
+        "ConfirmedTime": {
+          "type": "string"
+        },
+        "LastModifiedTime": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAccountState": {
+      "type": "string",
+      "enum": [
+        "Unconfirmed",
+        "Activated",
+        "Locked"
+      ],
+      "default": "Unconfirmed"
+    },
+    "accountAgent": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "AccountId": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "IsOwner": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "JobTitle": {
+          "type": "string"
+        },
+        "Gender": {
+          "$ref": "#/definitions/accountGender"
+        },
+        "AvatarUrl": {
+          "type": "string"
+        },
+        "Language": {
+          "type": "string"
+        },
+        "Timezone": {
+          "type": "string"
+        },
+        "EncryptedPassword": {
+          "type": "string"
+        },
+        "JoinTime": {
+          "type": "string"
+        },
+        "InviteFromAgentId": {
+          "type": "string"
+        },
+        "State": {
+          "$ref": "#/definitions/accountAgentState"
+        },
+        "LastPasswordChangeTime": {
+          "type": "string"
+        },
+        "LastSeenTime": {
+          "type": "string"
+        },
+        "LastUpdateTime": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAgentGroup": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "AccountId": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Members": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CreatedTime": {
+          "type": "string"
+        },
+        "LastModifiedTime": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAgentGroups": {
+      "type": "object",
+      "properties": {
+        "Groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgentGroups"
+          }
+        }
+      }
+    },
+    "accountAgentState": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Active",
+        "Inactive",
+        "Deleted"
+      ],
+      "default": "Pending"
+    },
+    "accountAgents": {
+      "type": "object",
+      "properties": {
+        "Agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          }
+        }
+      }
+    },
+    "accountEmpty": {
+      "type": "object"
+    },
+    "accountGender": {
+      "type": "string",
+      "enum": [
+        "Unset",
+        "Male",
+        "Female",
+        "Bisexual",
+        "Asexual"
+      ],
+      "default": "Unset"
+    },
+    "accountId": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        }
+      }
+    },
+    "accountInvitation": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "AccountId": {
+          "type": "string"
+        },
+        "FromId": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "State": {
+          "$ref": "#/definitions/accountInvitationState"
+        },
+        "SentTime": {
+          "type": "string"
+        },
+        "ReplyTime": {
+          "type": "string"
+        },
+        "AgentFirstName": {
+          "type": "string"
+        },
+        "AgentLastName": {
+          "type": "string"
+        }
+      }
+    },
+    "accountInvitationState": {
+      "type": "string",
+      "enum": [
+        "Sent",
+        "Accepted",
+        "Rejected"
+      ],
+      "default": "Sent"
+    },
+    "accountInvitations": {
+      "type": "object",
+      "properties": {
+        "Invitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountInvitation"
+          }
+        }
+      }
+    },
+    "accountLimit": {
+      "type": "object",
+      "properties": {
+        "ConcurrentChat": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ChatHistory": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxTriggers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxAgents": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxAgentGroups": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxAgentInGroups": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "accountLimitsResponse": {
+      "type": "object",
+      "properties": {
+        "Limits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountLimit"
+          }
+        }
+      }
+    }
+  }
+}

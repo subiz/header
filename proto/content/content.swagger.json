@@ -1,0 +1,105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "content/content.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "contentContent": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "AccountId": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "Link": {
+          "type": "string"
+        },
+        "Categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AttachmentLink": {
+          "type": "string"
+        },
+        "Labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Availability": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "Price": {
+          "type": "string"
+        },
+        "Currency": {
+          "type": "string"
+        },
+        "SalePrice": {
+          "type": "string"
+        },
+        "Fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contentKeyValue"
+          }
+        },
+        "RelatedIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "contentContents": {
+      "type": "object",
+      "properties": {
+        "Contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contentContent"
+          }
+        }
+      }
+    },
+    "contentEmpty": {
+      "type": "object"
+    },
+    "contentKeyValue": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

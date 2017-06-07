@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "client/clientmgr.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "clientClient": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "128 bit string identification of the client."
+        },
+        "Secret": {
+          "type": "string",
+          "title": "Secret used to authorize client with oauth2 server"
+        },
+        "LogoUrl": {
+          "type": "string",
+          "title": "LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB"
+        },
+        "OwnerId": {
+          "type": "string",
+          "title": "owner id, could be Account or Agent"
+        },
+        "ContactEmail": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "ShortDescription": {
+          "type": "string"
+        },
+        "IsVerified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "IsVerified will be true if client is verified by the authority"
+        },
+        "RedirectUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "List of URLs which client must register for oauth redirection"
+        },
+        "Webhooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/clientWebhook"
+          }
+        },
+        "Type": {
+          "$ref": "#/definitions/clientClientType"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "IsInternal": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": "Set if app is created or trusted by subiz,\nthe client will have privilenge to do any action."
+        },
+        "Version": {
+          "type": "string",
+          "description": "Version number of the client."
+        },
+        "IsPublic": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": "If this field setted to true, client is visible to any account, else,\nonly visible in owner account."
+        },
+        "PublishDate": {
+          "type": "string",
+          "description": "PublishDate, a RFC3339 date string show when have the client is\npublished."
+        },
+        "IsConfidential": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": "Clients capable of maintaining the confidentiality of their\ncredentials (e.g., client implemented on a secure server with\nrestricted access to the client credentials), or capable of secure\nclient authentication using other means."
+        },
+        "DefaultClosedTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "title": "conversations on this channel will be close if there\nare no message pass in last ClosedTimeout seconds"
+        }
+      }
+    },
+    "clientClientType": {
+      "type": "string",
+      "enum": [
+        "STONE",
+        "APP",
+        "CHANNEL",
+        "BOT"
+      ],
+      "default": "STONE",
+      "title": "- STONE: STONE is just default value, client should never have Type is STONE\n - APP: APP is general client type\n - CHANNEL: CHANNEL is special client, that can and only listen chat topics of an account\n - BOT: BOT reserve for future"
+    },
+    "clientClients": {
+      "type": "object",
+      "properties": {
+        "Clients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/clientClient"
+          }
+        }
+      }
+    },
+    "clientEmpty": {
+      "type": "object"
+    },
+    "clientId": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        }
+      }
+    },
+    "clientRegistration": {
+      "type": "object",
+      "properties": {
+        "UserId": {
+          "type": "string"
+        },
+        "ClientId": {
+          "type": "string"
+        },
+        "InvalidScope": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RegisterDate": {
+          "type": "string"
+        },
+        "ScopeIds": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "clientRegistrations": {
+      "type": "object",
+      "properties": {
+        "Registraions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/clientRegistration"
+          }
+        }
+      }
+    },
+    "clientSecret": {
+      "type": "object",
+      "properties": {
+        "Secret": {
+          "type": "string"
+        }
+      }
+    },
+    "clientWebhook": {
+      "type": "object",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "title": "Url of webhook, https only"
+        },
+        "IsVerified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "IsVerified set if we know the url is controlled by webhook creator"
+        },
+        "Topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Topics list of topics that will be sent to webhook"
+        },
+        "IsEnabled": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "IsEnabled decide the webhook is being used or not"
+        }
+      }
+    }
+  }
+}

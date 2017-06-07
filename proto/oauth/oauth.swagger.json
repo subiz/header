@@ -1,0 +1,405 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "oauth/oauth.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "authMethod": {
+      "type": "object",
+      "properties": {
+        "UpdateTrigger": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "trigger"
+        },
+        "DeleteTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ListTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ListAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "InviteAgent": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agents"
+        },
+        "UpdateOthersAccAgentPermission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateOthersAccAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAccAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAccAgentAvailableState": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadOthersAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateOthersAccAgentAvailableState": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RateOthersAccAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadOthersAccAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadOthersAccAgentPermission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccAgentPermission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccAgentHistory": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccAgentRate": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccAgentAvaialbeState": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ListAgentClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CloseAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "JoinAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "AuthorizeAgentClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RevokeAgentClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeactivateAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteOthersAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "InviteOthersAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RemoveAccAgentFromAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RemoveOthersAccAgentFromAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "LockOthersAccAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "LockAccAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAccAgentConfiguration": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateOthersAccAgentConfiguration": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeactivateOthersAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateOthersAgentProfile": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadOthersAgentClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentNotification": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "SeenAgentNotification": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccount": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "accounts"
+        },
+        "ListAccountClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAccountInfo": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAccountPlan": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CloseAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ViewAccountReport": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "EnableChannel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DisableChannel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAccountType": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "OpenAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccountChannel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "EnableOthersChannel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DisableOthersChannel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadOthersAccountChannel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CloseOthersAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "OpenOthersAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateOthersAccountInfo": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadOthersAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateOthersAccountPlan": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadClient": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "clients"
+        },
+        "ListClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateClientInfo": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "PublishClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RegenerateClientSecret": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "VerifyClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadRule": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "rule"
+        },
+        "WriteRule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteRule": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "authScope": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "LogoUrl": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Method": {
+          "$ref": "#/definitions/authMethod"
+        }
+      }
+    },
+    "oauthEmptyResponse": {
+      "type": "object"
+    },
+    "oauthRegistration": {
+      "type": "object",
+      "properties": {
+        "ClientId": {
+          "type": "string"
+        },
+        "ClientName": {
+          "type": "string"
+        },
+        "ClientLogoUrl": {
+          "type": "string"
+        },
+        "Scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/authScope"
+          }
+        },
+        "RegisterDate": {
+          "type": "string"
+        },
+        "RegisterId": {
+          "type": "string"
+        }
+      }
+    },
+    "oauthRegistrations": {
+      "type": "object",
+      "properties": {
+        "Registrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/oauthRegistration"
+          }
+        }
+      }
+    }
+  }
+}
