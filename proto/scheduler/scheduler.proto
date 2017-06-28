@@ -1,22 +1,17 @@
 syntax = "proto3";
 
+// schedule help publish a kafka event in future
 package scheduler;
 
 message ScheduleItem {
+	// Id of schedule item (should be 256 bit for very low collition rate)
 	string Id = 1;
-	string ScheduleTime = 2;
-	string RunTime = 3;
+	//string ScheduleTime = 2;
+	string CallbackTime = 3;
 	string Topic = 4;
-	bytes Data = 5;
-	string Text = 6;
-}
 
-enum Error {
-	OK = 0;
-	NOTFOUND = 404;
-	INVALID_REQUEST = 400;
-	UNAUTHORIZED = 401;
-	INTERNAL_ERROR = 500;
+	// Data is value of kafka event in bytes
+	bytes Data = 5;
 }
 
 message Id {
@@ -25,11 +20,12 @@ message Id {
 
 message Empty {}
 
-message BrokerList {
-	repeated string Brokers = 1;
+service Scheduler {
+	rpc Register(ScheduleItem) returns (Empty) {}
+	rpc Cancel(Id) returns (Empty) {}
 }
 
-service Scheduler {
-	rpc Register(ScheduleItem) returns (Id) {}
-	rpc Cancel(Id) returns (Empty) {}
+enum Event {
+	SchedulerCallbackRequested = 0;
+	SchedulerCallbackCancelled = 1;
 }

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "scheduler/scheduler.proto",
+    "title": "schedule help publish a kafka event in future",
     "version": "version not set"
   },
   "schemes": [
@@ -18,14 +18,6 @@
   "definitions": {
     "schedulerEmpty": {
       "type": "object"
-    },
-    "schedulerId": {
-      "type": "object",
-      "properties": {
-        "Id": {
-          "type": "string"
-        }
-      }
     }
   }
 }
