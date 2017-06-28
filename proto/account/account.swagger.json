@@ -67,10 +67,7 @@
         "AccountId": {
           "type": "string"
         },
-        "FirstName": {
-          "type": "string"
-        },
-        "LastName": {
+        "FullName": {
           "type": "string"
         },
         "Email": {
@@ -92,28 +89,31 @@
         "Language": {
           "type": "string"
         },
+        "Location": {
+          "type": "string"
+        },
         "Timezone": {
           "type": "string"
         },
         "EncryptedPassword": {
           "type": "string"
         },
-        "JoinTime": {
+        "JoinedTime": {
           "type": "string"
         },
-        "InviteFromAgentId": {
+        "InvitedByAgentId": {
           "type": "string"
         },
         "State": {
           "$ref": "#/definitions/accountAgentState"
         },
-        "LastPasswordChangeTime": {
+        "LastPasswordChangedTime": {
           "type": "string"
         },
         "LastSeenTime": {
           "type": "string"
         },
-        "LastUpdateTime": {
+        "LastUpdatedTime": {
           "type": "string"
         }
       }
@@ -130,17 +130,12 @@
         "Name": {
           "type": "string"
         },
-        "Members": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "LogoUrl": {
+          "type": "string"
         },
         "CreatedTime": {
-          "type": "string"
-        },
-        "LastModifiedTime": {
-          "type": "string"
+          "type": "string",
+          "title": "Members is list of 10 agents in group\nrepeated string Members = 5;"
         }
       }
     },
@@ -152,6 +147,20 @@
           "items": {
             "$ref": "#/definitions/accountAgentGroups"
           }
+        }
+      }
+    },
+    "accountAgentPerm": {
+      "type": "object",
+      "properties": {
+        "AccountId": {
+          "type": "string"
+        },
+        "AgentId": {
+          "type": "string"
+        },
+        "Method": {
+          "$ref": "#/definitions/authMethod"
         }
       }
     },
@@ -193,100 +202,202 @@
     "accountId": {
       "type": "object",
       "properties": {
-        "Id": {
-          "type": "string"
-        }
-      }
-    },
-    "accountInvitation": {
-      "type": "object",
-      "properties": {
-        "Id": {
-          "type": "string"
-        },
         "AccountId": {
           "type": "string"
         },
-        "FromId": {
-          "type": "string"
-        },
-        "Email": {
-          "type": "string"
-        },
-        "State": {
-          "$ref": "#/definitions/accountInvitationState"
-        },
-        "SentTime": {
-          "type": "string"
-        },
-        "ReplyTime": {
-          "type": "string"
-        },
-        "AgentFirstName": {
-          "type": "string"
-        },
-        "AgentLastName": {
+        "Id": {
           "type": "string"
         }
       }
     },
-    "accountInvitationState": {
-      "type": "string",
-      "enum": [
-        "Sent",
-        "Accepted",
-        "Rejected"
-      ],
-      "default": "Sent"
-    },
-    "accountInvitations": {
+    "authMethod": {
       "type": "object",
       "properties": {
-        "Invitations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/accountInvitation"
-          }
-        }
-      }
-    },
-    "accountLimit": {
-      "type": "object",
-      "properties": {
-        "ConcurrentChat": {
-          "type": "integer",
-          "format": "int32"
+        "UpdateTrigger": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "trigger"
         },
-        "ChatHistory": {
-          "type": "integer",
-          "format": "int32"
+        "DeleteTrigger": {
+          "type": "boolean",
+          "format": "boolean"
         },
-        "MaxTriggers": {
-          "type": "integer",
-          "format": "int32"
+        "CreateTrigger": {
+          "type": "boolean",
+          "format": "boolean"
         },
-        "MaxAgents": {
-          "type": "integer",
-          "format": "int32"
+        "ReadTrigger": {
+          "type": "boolean",
+          "format": "boolean"
         },
-        "MaxAgentGroups": {
-          "type": "integer",
-          "format": "int32"
+        "ListTrigger": {
+          "type": "boolean",
+          "format": "boolean"
         },
-        "MaxAgentInGroups": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "accountLimitsResponse": {
-      "type": "object",
-      "properties": {
-        "Limits": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/accountLimit"
-          }
+        "ReadAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ListAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentNotification": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool AuthorizeAgentClient = 89;\nbool RevokeAgentClient = 90;"
+        },
+        "SeenAgentNotification": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "Ping": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePasswords": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent"
+        },
+        "UpdatePassword": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "InviteAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ResetPassword": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentsPermission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentsState": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ListAgentClient = 85;"
+        },
+        "ConfirmAccount": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ReadAccount = 120; // default right"
+        },
+        "CreateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent group"
+        },
+        "DeleteAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePlan": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "account"
+        },
+        "CreateAccount": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ViewAccountReport = 125;\nbool EnableChannel = 126;\nbool DisableChannel = 127;"
+        },
+        "DeleteAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAccount": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadClient": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "clients"
+        },
+        "ListClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateClientInfo": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "PublishClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RegenerateClientSecret": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "VerifyClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadRule": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "rule"
+        },
+        "WriteRule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteRule": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     }
