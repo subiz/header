@@ -4,34 +4,22 @@ package auth;
 
 message Empty {}
 
-enum Error {
-	Ok = 0;
-	InvalidRequest = 400;
-	Unauthorized = 401;
-	InternalError = 500;
-	NotFound = 404;
-}
-
-service ScopeMgt {
-	rpc Read(ScopeId) returns (Scope) {}
+service Auth {
+	rpc ReadScope(ScopeId) returns (Scope) {}
 	rpc List(Empty) returns (ScopesResponse) {}
 }
 
 message Credential {
 	string AccountId = 1;
-	int32 AccountType = 2;
+	//int32 AccountPlan = 2;
 	string UserId = 3;
-
 	// scope that the user allow
 	Method Method = 5;
-
 	// set to true if this credential is generated from internal service.
 	// Internal credential is trusted and have full access to any function
 	// when internal is set to true, all other fields is ignored
-	bool IsInternal = 6;
 	string ClientId = 7;
 	ClientType ClientType = 8;
-
 	// optional, used for secure service to service communication
 	string APIKey = 9;
 }
@@ -67,66 +55,47 @@ message Method {
 	bool CreateAllTrigger = 59;
 
 	// agents
-	bool InviteAgent = 70;
-	bool UpdateOthersAccAgentPermission = 71;
-	bool UpdateOthersAccAgentProfile = 72;
-	bool UpdateAccAgentProfile = 73;
-	bool UpdateAccAgentAvailableState = 74;
-	bool ReadOthersAgentProfile = 75;
-	bool UpdateOthersAccAgentAvailableState = 76;
-	bool RateOthersAccAgent = 77;
-	bool ReadAccAgentProfile = 78;
-	bool ReadOthersAccAgentProfile = 79;
-	bool ReadOthersAccAgentPermission = 80;
-	bool ReadAccAgentPermission = 81;
-	bool ReadAccAgentHistory = 82;
-	bool ReadAccAgentRate = 83;
-	bool ReadAccAgentAvaialbeState = 84;
-	bool ListAgentClient = 85;
-	bool UpdateAgentProfile = 86;
-	bool CloseAgentProfile = 87;
-	bool JoinAccount = 88;
-	bool AuthorizeAgentClient = 89;
-	bool RevokeAgentClient = 90;
-	bool DeactivateAgent = 91;
-	bool DeleteOthersAgent = 92;
-	bool InviteOthersAgent = 93;
-	bool RemoveAccAgentFromAccount = 94;
-	bool RemoveOthersAccAgentFromAccount = 95;
-	bool LockOthersAccAgent = 96;
-	bool LockAccAgent = 97;
-	bool UpdateAccAgentConfiguration  = 98;
-	bool UpdateOthersAccAgentConfiguration = 99;
-	bool ReadAgentProfile = 100;
-	bool DeactivateOthersAgent = 101;
-	bool UpdateOthersAgentProfile = 102;
-	bool ReadAgentClient = 103;
-	bool ReadOthersAgentClient = 104;
+
+	//bool AuthorizeAgentClient = 89;
+	//bool RevokeAgentClient = 90;
 	bool ReadAgentNotification = 105;
 	bool SeenAgentNotification = 106;
 
-	// accounts
-	bool ReadAccount = 120;
-	bool ListAccountClient = 121;
-	bool UpdateAccountInfo = 122;
-	bool UpdateAccountPlan = 123;
-	bool CloseAccount = 124;
-	bool ViewAccountReport = 125;
-	bool EnableChannel = 126;
-	bool DisableChannel = 127;
-	bool UpdateAccountType = 128;
-	bool DeleteAccount = 129;
-	bool OpenAccount = 130;
+	bool Ping = 107;
+	// agent
+	bool UpdatePasswords = 109;
+	bool UpdatePassword = 108;
+		bool InviteAgents = 70;
+	bool UpdateAgent = 72;
+	bool UpdateAgents = 73;
+	bool ReadAgent = 76;
+	bool ReadAgents = 77;
+	bool ResetPassword = 78; // acc group
 
-	bool ReadAccountChannel = 131;
-	bool EnableOthersChannel = 132;
-	bool DisableOthersChannel = 133;
-	bool ReadOthersAccountChannel = 134;
-	bool CloseOthersAccount = 135;
-	bool OpenOthersAccount = 136;
-	bool UpdateOthersAccountInfo = 137;
-	bool ReadOthersAccount = 138;
-	bool UpdateOthersAccountPlan = 139;
+	bool UpdateAgentsPermission = 81;
+	//bool ListAgentClient = 85;
+	bool UpdateAgentsState = 86;
+
+
+	// bool ReadAccount = 120; // default right
+	bool ConfirmAccount = 120;
+	//bool ListAccountClient = 121;
+
+	// agent group
+	bool CreateAgentGroups = 124;
+	bool DeleteAgentGroups = 125;
+	bool ReadAgentGroups = 126;
+	bool UpdateAgentGroups = 127;
+
+	// account
+	bool UpdatePlan = 123; // only for subiz agent
+	//bool ViewAccountReport = 125;
+	//bool EnableChannel = 126;
+	//bool DisableChannel = 127;
+	bool CreateAccount = 129;
+	bool DeleteAccount = 130;
+	bool UpdateAccount  = 122;
+	bool ReadAccount = 131;
 
 	// clients
 	bool ReadClient = 151;
@@ -143,11 +112,7 @@ message Method {
 	bool WriteRule = 181;
 	bool DeleteRule = 182;
 
-
-
 	// channel
-
-
 
 }
 
@@ -166,9 +131,4 @@ message ScopesResponse {
 message UserAuth {
 	string UserId = 1;
 	Method Method = 2;
-}
-
-service AccAuth {
-	rpc ReadPermission(UserId) returns (Method) {}
-	rpc UpdatePermission(UserAuth) returns (Empty) {}
 }
