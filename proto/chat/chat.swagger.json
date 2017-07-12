@@ -63,11 +63,11 @@
           "type": "string",
           "title": "Creation time"
         },
-        "LTime": {
+        "LastActiveTime": {
           "type": "string",
           "title": "Last active time"
         },
-        "XTime": {
+        "ClosedTime": {
           "type": "string",
           "title": "Closed time"
         },
@@ -100,6 +100,10 @@
           "$ref": "#/definitions/chatChatEventType",
           "title": "Type indicates type of chat event"
         },
+        "AccountId": {
+          "type": "string",
+          "title": "AccountId refer to ID of account"
+        },
         "ChatId": {
           "type": "string",
           "title": "ChatId refer to ID of chat which contains this chat event"
@@ -122,12 +126,18 @@
         },
         "Format": {
           "type": "string",
-          "title": "Could be \"\", \"raw\" or \"markdown\""
+          "title": "Could be \"\", \"raw\" or \"markdown\", \"html\""
         },
         "Attachments": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/chatAttachment"
+          }
+        },
+        "State": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -139,14 +149,18 @@
         "MESSAGE",
         "CLOSED",
         "JOINED",
-        "SEEN",
+        "LEFT",
         "RATED",
         "INPUT",
         "TAG",
         "UNTAG",
-        "TRANSFER"
+        "TRANSFER",
+        "ACK",
+        "TYPING",
+        "STOPTYPING"
       ],
       "default": "NONE",
+      "description": "- RATED: SEEN = 6; // Content = event id, attachment = null",
       "title": "ChateEventType"
     },
     "chatChatEvents": {
@@ -160,7 +174,7 @@
         }
       }
     },
-    "chatChatWithEvents": {
+    "chatChatPreview": {
       "type": "object",
       "properties": {
         "Chat": {
@@ -171,27 +185,22 @@
           "items": {
             "$ref": "#/definitions/chatChatEvent"
           }
+        },
+        "Unread": {
+          "type": "string",
+          "format": "int64",
+          "title": "Unread number of unread event"
         }
-      }
+      },
+      "title": "ChatPreview is a chat header with some events in it"
     },
-    "chatChats": {
+    "chatChatPreviews": {
       "type": "object",
       "properties": {
-        "Chats": {
+        "Previews": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/chatChat"
-          }
-        }
-      }
-    },
-    "chatChatsWithEvents": {
-      "type": "object",
-      "properties": {
-        "Chats": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/chatChatWithEvents"
+            "$ref": "#/definitions/chatChatPreview"
           }
         }
       }
@@ -212,6 +221,16 @@
           "type": "string"
         }
       }
+    },
+    "chatDeviceType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "MOBILE",
+        "TABLET",
+        "DESKTOP"
+      ],
+      "default": "UNKNOWN"
     },
     "chatEmpty": {
       "type": "object"
@@ -280,6 +299,58 @@
         }
       }
     },
+    "chatUnassignedChat": {
+      "type": "object",
+      "properties": {
+        "AccountId": {
+          "type": "string"
+        },
+        "ChatId": {
+          "type": "string"
+        },
+        "ChannelId": {
+          "type": "string"
+        },
+        "MessageTo": {
+          "type": "string"
+        },
+        "PageUrl": {
+          "type": "string"
+        },
+        "PageTitle": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "BrowserLanguage": {
+          "type": "string"
+        },
+        "Language": {
+          "type": "string"
+        },
+        "DeviceType": {
+          "$ref": "#/definitions/chatDeviceType"
+        },
+        "User": {
+          "$ref": "#/definitions/chatUserInfo"
+        },
+        "CreatedTime": {
+          "type": "string"
+        }
+      }
+    },
+    "chatUnassignedChats": {
+      "type": "object",
+      "properties": {
+        "Chats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/chatUnassignedChat"
+          }
+        }
+      }
+    },
     "chatUser": {
       "type": "object",
       "properties": {
@@ -288,9 +359,69 @@
         },
         "Type": {
           "$ref": "#/definitions/chatUserType"
-        },
-        "LastSeenId": {
+        }
+      }
+    },
+    "chatUserInfo": {
+      "type": "object",
+      "properties": {
+        "Id": {
           "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Phones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Country": {
+          "type": "string"
+        },
+        "CountryCode": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "TimeZone": {
+          "type": "string"
+        },
+        "Segment": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Label": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Unsubscribed": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "MarkedSpam": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "HardBounced": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "TotalSessions": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -302,7 +433,8 @@
         "Agent",
         "System"
       ],
-      "default": "UndefinedUserType"
+      "default": "UndefinedUserType",
+      "title": "- UndefinedUserType: DONOT CHANGE THIS SINCE ITS CONSTANCE"
     }
   }
 }

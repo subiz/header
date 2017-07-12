@@ -3,7 +3,6 @@ syntax = "proto3";
 package chat;
 
 import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
-
 /////////////////////////
 /////   SERVICE    //////
 /////////////////////////
@@ -17,30 +16,62 @@ service ChatMgr {
 	// fire EvChatWaiting, EvChatCreated
 	rpc Request(ChatRequest) returns (Id) {}
 
+	// fire EvAssigned
+	rpc AckRequest(ChatRequestAck) returns (Empty) {}
+
 	// start chat from agent
 	// fire EvChatCreated
 	rpc Start(ChatStart) returns (Id) {}
 
 	// QUERRIER
 	// List chats for specific user
-	rpc ListChatsByUser(ListChatsByUserRequest) returns (ChatsWithEvents) {}
+	rpc ListChatsByUser(ListChatsByUserRequest) returns (ChatPreviews) {}
 	rpc ListChatEvents(ListChatEventRequest) returns (ChatEvents) {}
 
 	// Unassigned list
-	rpc ListUnassignedChats(Id) returns (Chats) {} // limit 300
+	rpc ListUnassignedChats(Id) returns (UnassignedChats) {} // limit 300
 	rpc AcceptUnassignedChat(AcceptRequest) returns (Bool) {}
 
-	rpc Read(Id) returns (Chat) {}
+	rpc Read(ChatId) returns (Chat) {}
 }
 
 service AccountMgr {
 	rpc UpsertAccount(Account) returns (Empty) {}
-	rpc UpdateAgent(AgentStatus) returns (Empty) {}
+	rpc UpsertAgent(AgentStatus) returns (Empty) {}
 	rpc DeleteAgent(AgentId) returns (Empty) {}
 	rpc AddAgentToGroup(AgentInGroup) returns (Empty) {}
 	rpc RemoveAgentFromGroup(AgentInGroup) returns (Empty) {}
-	rpc DeleteGroup(Id) returns (Empty) {}
+	rpc DeleteGroup(GroupId) returns (Empty) {}
 	rpc UpdatePermission(Permission) returns (Empty) {}
+}
+
+message UnassignedChat {
+	string AccountId = 1;
+	string ChatId = 2;
+	string ChannelId = 4;
+	string MessageTo = 5;
+	string PageUrl = 6;
+	string PageTitle = 7;
+	string Message = 8;
+	string BrowserLanguage = 9;
+	string Language = 10;
+	DeviceType DeviceType = 11;
+	UserInfo User = 12;
+	string CreatedTime = 13;
+}
+
+message UnassignedChats {
+	repeated UnassignedChat Chats = 1;
+}
+
+message ChatId {
+	string AccountId = 1;
+	string Id = 2;
+}
+
+message GroupId {
+	string AccountId = 1;
+	string GroupId = 2;
 }
 
 message Permission {
@@ -48,6 +79,7 @@ message Permission {
 	string AgentId = 2;
 	auth.Method Method = 3;
 }
+
 message AgentId {
 	string AccountId = 1;
 	string AgentId = 2;
@@ -66,10 +98,10 @@ message AgentStatus {
 }
 
 service Router {
-  rpc Update(Rule) returns (Empty) {}
+	rpc Update(Rule) returns (Empty) {}
 	rpc Create(Rule) returns (Id) {}
-	rpc Delete(Id) returns (Empty) {}
-	rpc Read(Id) returns (Rule) {}
+	rpc Delete(RuleId) returns (Empty) {}
+	rpc Read(RuleId) returns (Rule) {}
 	// list ALL rules by account, limit 300
 	rpc List(Id) returns (Route) {}
 }
@@ -89,6 +121,11 @@ enum JoinOperator {
 	Or = 2;
 }
 
+message RuleId {
+	string AccountId = 1;
+	string Id = 2;
+}
+
 message Id {
 	string Id = 1;
 }
@@ -100,7 +137,7 @@ message Rule {
 	string AccountId = 2;
 	string Priority = 3;
 	AssignStrategy Strategy = 4;
-  repeated string AssignTos = 5;
+	repeated string AssignTos = 5;
 	repeated Condition Conditions = 6;
 	bool IsDisabled = 7;
 	string CreatedTime = 8;
@@ -120,11 +157,11 @@ message Route {
 message RouteResult {
 	string RuleId = 1;
 	AssignStrategy Strategy = 3;
-  repeated string AgentIds = 4;
+	repeated string AgentIds = 4;
 }
 
 enum AssignStrategy {
-  ALLAGENTS = 0;
+	ALLAGENTS = 0;
 	AGENTGROUP = 2;
 	AGENTS = 3;
 	MOSTRECENT = 4;
@@ -161,8 +198,7 @@ message Ids {
 
 message User {
 	string Id = 1;
-	UserType Type = 4;
-	string LastSeenId = 5;
+	UserType Type = 2;
 }
 
 // get number of unread message
@@ -172,22 +208,26 @@ message Chat {
 	// Creation time
 	string CreatedTime = 3;
 	// Last active time
-	string LTime = 4;
+	string LastActiveTime = 4;
 	// Closed time
-	string XTime = 5;
+	string ClosedTime = 5;
 	repeated User Users = 6;
 
 	string ChannelId = 9;
 	repeated string Tags = 10;
 }
 
-message ChatsWithEvents {
-	repeated ChatWithEvents Chats = 1;
+message ChatPreviews {
+	repeated ChatPreview Previews = 1;
 }
 
-message ChatWithEvents {
+// ChatPreview is a chat header with some events in it
+message ChatPreview {
 	Chat Chat = 1;
 	repeated ChatEvent Events = 2;
+
+	// Unread number of unread event
+	int64 Unread = 3;
 }
 
 // ChateEventType
@@ -197,14 +237,17 @@ enum ChatEventType {
 	CLOSED = 3; // content, attachments = null
 
 	JOINED = 4; // SenderId: senderid || could be null, Content: joinner id, Attachmemts: null
-
-	SEEN = 6; // Content = event id, attachment = null
+	LEFT = 5; // senderid: senderid || could be null
+	//	SEEN = 6; // Content = event id, attachment = null
 	RATED = 7; // content = number of star, attachment = null
 	INPUT = 8; // content = refered message id; attachment depended on type of event
 
 	TAG = 9; // Content = tag
 	UNTAG = 10; // Content = tag
 	TRANSFER = 11; // Content = joinerid1,joinerid2 (',' delimiter)
+	ACK = 12;
+	TYPING = 13;
+	STOPTYPING = 14;
 }
 
 message Attachment {
@@ -226,7 +269,7 @@ message Attachment {
 	 *       + list_template
 	 *   Input control
 	 *     - button           -> send list of event to chat
-   *     - url
+	 *     - url
 	 *     - postback_button (single button)
 	 *     - textbox           -> contains value
 	 *     - ratebox            -> rate the chat (like 5 buttons but have beautiful display)
@@ -246,6 +289,9 @@ message ChatEvent {
 	// Type indicates type of chat event
 	ChatEventType Type = 2;
 
+	// AccountId refer to ID of account
+	string AccountId = 4;
+
 	// ChatId refer to ID of chat which contains this chat event
 	string ChatId = 3;
 
@@ -261,13 +307,16 @@ message ChatEvent {
 	// Content could be raw text, could be JSON data based on type
 	string Text = 8;
 
-	// Could be "", "raw" or "markdown"
+	// Could be "", "raw" or "markdown", "html"
 	string Format = 9;
 
 	repeated Attachment Attachments = 10;
+
+	repeated string State = 11;
 }
 
 enum UserType {
+	// DONOT CHANGE THIS SINCE ITS CONSTANCE
 	UndefinedUserType = 0;
 	Visitor = 1;
 	Agent = 2;
@@ -296,6 +345,22 @@ message UserInfo {
 	bool MarkedSpam = 12;
 	bool HardBounced = 13;
 	int32 TotalSessions = 14;
+}
+
+message ChatRequestAck {
+	string RequestId = 15;
+	string ChatId = 14;
+	string AccountId = 1;
+	string ChannelId = 4;
+	string MessageTo = 5;
+	string PageUrl = 6;
+	string PageTitle = 7;
+	string Message = 8;
+	string BrowserLanguage = 9;
+	string Language = 10;
+	DeviceType DeviceType = 11;
+	UserInfo User = 12;
+	string CreatedTime = 13;
 }
 
 message ChatRequest {
@@ -379,27 +444,8 @@ message ListChatsByUserRequest {
 	int32 Limit = 5;
 }
 
-// Topic Chat.Sent
-message EvChatSent {
-	string RequestId = 11;
-	//	bool Ok = 2;
-	//string ErrDescription = 3;
-
-	string Id = 1;
-	ChatEventType Type = 2;
-	string ChatId = 3;
-	string CreatedTime = 5;
-	string SenderId = 6;
-	UserType SenderType = 7;
-	string Text = 8;
-	string Format = 9;
-	repeated Attachment Attachments = 10;
-}
-
 // Topic Chat.Assigned
-message EvChatAssigned {
-	string RequestId = 1;
-	string Event = 2;
+message OEChatAssigned {
 	string ChatId = 4;
 	string AccountId = 3;
 	string CreatedTime = 5;
@@ -409,81 +455,15 @@ message EvChatAssigned {
 }
 
 // Topic Chat.Waiting
-message EvChatWaiting {
-	string RequestId = 1;
-	string Event = 2;
+message OEChatWaiting {
+	//string RequestId = 1;
+	//string Event = 2;
 	string ChatId = 4;
 	string AccountId = 3;
-	string CreatedTime = 5;
-	repeated User Users = 6;
+	//	string CreatedTime = 5;
+	UserInfo User = 6;
 	string ChannelId = 7;
 	repeated string Tags = 8;
-}
-
-// =======================EVENT
-message EvChatRequested {
-	string RequestId = 1;
-	ChatRequest ChatRequest = 2;
-}
-
-message EvChatRequestedReply {
-	string RequestId = 1;
-	bool Ok = 2;
-	string ErrDescription = 3;
-	string ErrDebugMessage = 4;
-	int32 ErrorCode = 5;
-	int32 ErrorClass = 6;
-
-	string ChatId = 8;
-	string CreatedTime = 9;
-}
-
-message EvChatStartRequested {
-	string RequestId = 1;
-	ChatStart ChatStart = 2;
-}
-
-message EvChatStartRequestedReply {
-	string RequestId = 1;
-	bool Ok = 2;
-	string ErrDescription = 3;
-	string ErrDebugMessage = 4;
-	int32 ErrorCode = 5;
-	int32 ErrorClass = 6;
-
-	string ChatId = 8;
-	string CreatedTime = 9;
-}
-
-message EvChatSendRequested {
-	string RequestId = 1;
-
-	ChatEventType Type = 2;
-	// ChatId refer to ID of chat which contains this chat event
-	string ChatId = 3;
-	string SenderId = 6;
-	UserType SenderType = 7;
-	string Text = 8;
-	string Format = 9;
-	repeated Attachment Attachments = 10;
-}
-
-message EvChatSendRequestedReply {
-	string RequestId = 1;
-	bool Ok = 2;
-	string ErrDescription = 3;
-	string ErrDebugMessage = 4;
-	int32 ErrorCode = 5;
-	int32 ErrorClass = 6;
-
-	// ID of chat event, 128-bit, start with EVNT
-	string EventId = 7;
-
-	// CreatedTime is a RFC3339 string, tell when was event sent
-	string CreatedTime = 8;
-}
-
-message EvChatAcceptRequested {
 }
 
 message EvChatCreated {
@@ -497,6 +477,25 @@ message EvChatCreated {
 	string CreatedTime = 8;
 }
 
+message OEChatDropped {
+	string AccountId = 1;
+	string ChatId = 2;
+	string ChannelId = 3;
+}
+
+message OEChatAccepted {
+	string AccountId = 2;
+	string ChatId = 3;
+	string AgentId = 4;
+}
+
+message OEChatStarted {
+	string AccountId = 2;
+	string ChatId = 3;
+	string ChannelId = 4;
+	string CreatedTime = 5;
+}
+
 message EvChatResult { // delete after 5mins, so be quick
 	string RequestId = 1; //request id
 	bool Ok = 2;
@@ -505,15 +504,49 @@ message EvChatResult { // delete after 5mins, so be quick
 	string Description = 5;
 }
 
-enum Event {
-	Chat_Error = 0;
-	Chat_Sent = 1;
-	Chat_Assigned = 2;
+message EvChatUserInfoRequested {
+	string RequestId = 1;
+	string ChatId = 2;
+	string AccountId = 3;
+	string ChannelId = 4;
+		string MessageTo = 5;
+	string PageUrl = 6;
+	string PageTitle = 7;
+	string Message = 8;
+	string BrowserLanguage = 9;
+	string Language = 10;
+	DeviceType DeviceType = 11;
+	string UserId = 12;
+	string CreatedTime = 13;
+}
 
-	Chat_Send_Requested = 3;
-	Chat_Start_Requested = 4;
-	Chat_Start_Requested_Reply = 5;
-	Chat_Send_Requested_Reply = 6;
+message EvChatUserInfoReply {
+	string RequestId = 1;
+	string ChatId = 2;
+	string AccountId = 3;
+	string ChannelId = 4;
+
+	string MessageTo = 5;
+	string PageUrl = 6;
+	string PageTitle = 7;
+	string Message = 8;
+	string BrowserLanguage = 9;
+	string Language = 10;
+	DeviceType DeviceType = 11;
+	UserInfo User = 12;
+	string CreatedTime = 13;
+}
+
+enum Event {
+	ChatAssigned = 0; // chat is assigned to an agent
+	ChatWaiting = 2; // new chat is added to unassigned list
+	ChatStarted = 3; // chat started from an agent
+	ChatAccepted = 4; // chat from unassigned list is accepted by an agent
+	ChatDropped = 5; // chat dropped from unassigned list
+
+	ChatUserInfoRequested = 8;
+	ChatUserInfoReply = 9;
+
 }
 // ==================
 
@@ -532,7 +565,7 @@ message GenericElement { // display
 	string ImageUrl = 2;
 	string Subtitle = 3; // limited character
 	Button DefaultAction = 4;
-	repeated Button Buttons = 5;
+	repeated Button Buttons = 5; // limit to 10
 }
 
 message GenericTemplate {

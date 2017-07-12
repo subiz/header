@@ -9,12 +9,17 @@ It is generated from these files:
 	chat/chat.proto
 
 It has these top-level messages:
+	UnassignedChat
+	UnassignedChats
+	ChatId
+	GroupId
 	Permission
 	AgentId
 	AgentInGroup
 	AgentStatus
 	Account
 	Bool
+	RuleId
 	Id
 	Empty
 	Rule
@@ -28,12 +33,13 @@ It has these top-level messages:
 	Ids
 	User
 	Chat
-	ChatsWithEvents
-	ChatWithEvents
+	ChatPreviews
+	ChatPreview
 	Attachment
 	ChatEvents
 	ChatEvent
 	UserInfo
+	ChatRequestAck
 	ChatRequest
 	Chats
 	ChatStart
@@ -46,18 +52,15 @@ It has these top-level messages:
 	UsersUnread
 	ListChatEventRequest
 	ListChatsByUserRequest
-	EvChatSent
-	EvChatAssigned
-	EvChatWaiting
-	EvChatRequested
-	EvChatRequestedReply
-	EvChatStartRequested
-	EvChatStartRequestedReply
-	EvChatSendRequested
-	EvChatSendRequestedReply
-	EvChatAcceptRequested
+	OEChatAssigned
+	OEChatWaiting
 	EvChatCreated
+	OEChatDropped
+	OEChatAccepted
+	OEChatStarted
 	EvChatResult
+	EvChatUserInfoRequested
+	EvChatUserInfoReply
 	FileTemplate
 	QuickRepliesTemplate
 	GenericElement
@@ -155,16 +158,20 @@ func (AssignStrategy) EnumDescriptor() ([]byte, []int) { return fileDescriptor0,
 type ChatEventType int32
 
 const (
-	ChatEventType_NONE     ChatEventType = 0
-	ChatEventType_MESSAGE  ChatEventType = 1
-	ChatEventType_CLOSED   ChatEventType = 3
-	ChatEventType_JOINED   ChatEventType = 4
-	ChatEventType_SEEN     ChatEventType = 6
-	ChatEventType_RATED    ChatEventType = 7
-	ChatEventType_INPUT    ChatEventType = 8
-	ChatEventType_TAG      ChatEventType = 9
-	ChatEventType_UNTAG    ChatEventType = 10
-	ChatEventType_TRANSFER ChatEventType = 11
+	ChatEventType_NONE    ChatEventType = 0
+	ChatEventType_MESSAGE ChatEventType = 1
+	ChatEventType_CLOSED  ChatEventType = 3
+	ChatEventType_JOINED  ChatEventType = 4
+	ChatEventType_LEFT    ChatEventType = 5
+	// 	SEEN = 6; // Content = event id, attachment = null
+	ChatEventType_RATED      ChatEventType = 7
+	ChatEventType_INPUT      ChatEventType = 8
+	ChatEventType_TAG        ChatEventType = 9
+	ChatEventType_UNTAG      ChatEventType = 10
+	ChatEventType_TRANSFER   ChatEventType = 11
+	ChatEventType_ACK        ChatEventType = 12
+	ChatEventType_TYPING     ChatEventType = 13
+	ChatEventType_STOPTYPING ChatEventType = 14
 )
 
 var ChatEventType_name = map[int32]string{
@@ -172,24 +179,30 @@ var ChatEventType_name = map[int32]string{
 	1:  "MESSAGE",
 	3:  "CLOSED",
 	4:  "JOINED",
-	6:  "SEEN",
+	5:  "LEFT",
 	7:  "RATED",
 	8:  "INPUT",
 	9:  "TAG",
 	10: "UNTAG",
 	11: "TRANSFER",
+	12: "ACK",
+	13: "TYPING",
+	14: "STOPTYPING",
 }
 var ChatEventType_value = map[string]int32{
-	"NONE":     0,
-	"MESSAGE":  1,
-	"CLOSED":   3,
-	"JOINED":   4,
-	"SEEN":     6,
-	"RATED":    7,
-	"INPUT":    8,
-	"TAG":      9,
-	"UNTAG":    10,
-	"TRANSFER": 11,
+	"NONE":       0,
+	"MESSAGE":    1,
+	"CLOSED":     3,
+	"JOINED":     4,
+	"LEFT":       5,
+	"RATED":      7,
+	"INPUT":      8,
+	"TAG":        9,
+	"UNTAG":      10,
+	"TRANSFER":   11,
+	"ACK":        12,
+	"TYPING":     13,
+	"STOPTYPING": 14,
 }
 
 func (x ChatEventType) String() string {
@@ -200,6 +213,7 @@ func (ChatEventType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, 
 type UserType int32
 
 const (
+	// DONOT CHANGE THIS SINCE ITS CONSTANCE
 	UserType_UndefinedUserType UserType = 0
 	UserType_Visitor           UserType = 1
 	UserType_Agent             UserType = 2
@@ -254,32 +268,32 @@ func (DeviceType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []i
 type Event int32
 
 const (
-	Event_Chat_Error                 Event = 0
-	Event_Chat_Sent                  Event = 1
-	Event_Chat_Assigned              Event = 2
-	Event_Chat_Send_Requested        Event = 3
-	Event_Chat_Start_Requested       Event = 4
-	Event_Chat_Start_Requested_Reply Event = 5
-	Event_Chat_Send_Requested_Reply  Event = 6
+	Event_ChatAssigned          Event = 0
+	Event_ChatWaiting           Event = 2
+	Event_ChatStarted           Event = 3
+	Event_ChatAccepted          Event = 4
+	Event_ChatDropped           Event = 5
+	Event_ChatUserInfoRequested Event = 8
+	Event_ChatUserInfoReply     Event = 9
 )
 
 var Event_name = map[int32]string{
-	0: "Chat_Error",
-	1: "Chat_Sent",
-	2: "Chat_Assigned",
-	3: "Chat_Send_Requested",
-	4: "Chat_Start_Requested",
-	5: "Chat_Start_Requested_Reply",
-	6: "Chat_Send_Requested_Reply",
+	0: "ChatAssigned",
+	2: "ChatWaiting",
+	3: "ChatStarted",
+	4: "ChatAccepted",
+	5: "ChatDropped",
+	8: "ChatUserInfoRequested",
+	9: "ChatUserInfoReply",
 }
 var Event_value = map[string]int32{
-	"Chat_Error":                 0,
-	"Chat_Sent":                  1,
-	"Chat_Assigned":              2,
-	"Chat_Send_Requested":        3,
-	"Chat_Start_Requested":       4,
-	"Chat_Start_Requested_Reply": 5,
-	"Chat_Send_Requested_Reply":  6,
+	"ChatAssigned":          0,
+	"ChatWaiting":           2,
+	"ChatStarted":           3,
+	"ChatAccepted":          4,
+	"ChatDropped":           5,
+	"ChatUserInfoRequested": 8,
+	"ChatUserInfoReply":     9,
 }
 
 func (x Event) String() string {
@@ -287,16 +301,184 @@ func (x Event) String() string {
 }
 func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
+type UnassignedChat struct {
+	AccountId       string     `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChatId          string     `protobuf:"bytes,2,opt,name=ChatId,json=chatId" json:"ChatId"`
+	ChannelId       string     `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	MessageTo       string     `protobuf:"bytes,5,opt,name=MessageTo,json=messageTo" json:"MessageTo"`
+	PageUrl         string     `protobuf:"bytes,6,opt,name=PageUrl,json=pageUrl" json:"PageUrl"`
+	PageTitle       string     `protobuf:"bytes,7,opt,name=PageTitle,json=pageTitle" json:"PageTitle"`
+	Message         string     `protobuf:"bytes,8,opt,name=Message,json=message" json:"Message"`
+	BrowserLanguage string     `protobuf:"bytes,9,opt,name=BrowserLanguage,json=browserLanguage" json:"BrowserLanguage"`
+	Language        string     `protobuf:"bytes,10,opt,name=Language,json=language" json:"Language"`
+	DeviceType      DeviceType `protobuf:"varint,11,opt,name=DeviceType,json=deviceType,enum=chat.DeviceType" json:"DeviceType"`
+	User            *UserInfo  `protobuf:"bytes,12,opt,name=User,json=user" json:"User"`
+	CreatedTime     string     `protobuf:"bytes,13,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
+}
+
+func (m *UnassignedChat) Reset()                    { *m = UnassignedChat{} }
+func (m *UnassignedChat) String() string            { return proto.CompactTextString(m) }
+func (*UnassignedChat) ProtoMessage()               {}
+func (*UnassignedChat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
+func (m *UnassignedChat) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetMessageTo() string {
+	if m != nil {
+		return m.MessageTo
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetPageUrl() string {
+	if m != nil {
+		return m.PageUrl
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetPageTitle() string {
+	if m != nil {
+		return m.PageTitle
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetBrowserLanguage() string {
+	if m != nil {
+		return m.BrowserLanguage
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetLanguage() string {
+	if m != nil {
+		return m.Language
+	}
+	return ""
+}
+
+func (m *UnassignedChat) GetDeviceType() DeviceType {
+	if m != nil {
+		return m.DeviceType
+	}
+	return DeviceType_UNKNOWN
+}
+
+func (m *UnassignedChat) GetUser() *UserInfo {
+	if m != nil {
+		return m.User
+	}
+	return nil
+}
+
+func (m *UnassignedChat) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
+type UnassignedChats struct {
+	Chats []*UnassignedChat `protobuf:"bytes,1,rep,name=Chats,json=chats" json:"Chats"`
+}
+
+func (m *UnassignedChats) Reset()                    { *m = UnassignedChats{} }
+func (m *UnassignedChats) String() string            { return proto.CompactTextString(m) }
+func (*UnassignedChats) ProtoMessage()               {}
+func (*UnassignedChats) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *UnassignedChats) GetChats() []*UnassignedChat {
+	if m != nil {
+		return m.Chats
+	}
+	return nil
+}
+
+type ChatId struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	Id        string `protobuf:"bytes,2,opt,name=Id,json=id" json:"Id"`
+}
+
+func (m *ChatId) Reset()                    { *m = ChatId{} }
+func (m *ChatId) String() string            { return proto.CompactTextString(m) }
+func (*ChatId) ProtoMessage()               {}
+func (*ChatId) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+
+func (m *ChatId) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *ChatId) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type GroupId struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	GroupId   string `protobuf:"bytes,2,opt,name=GroupId,json=groupId" json:"GroupId"`
+}
+
+func (m *GroupId) Reset()                    { *m = GroupId{} }
+func (m *GroupId) String() string            { return proto.CompactTextString(m) }
+func (*GroupId) ProtoMessage()               {}
+func (*GroupId) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+
+func (m *GroupId) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *GroupId) GetGroupId() string {
+	if m != nil {
+		return m.GroupId
+	}
+	return ""
+}
+
 type Permission struct {
-	AccountId string       `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	AgentId   string       `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	Method    *auth.Method `protobuf:"bytes,3,opt,name=Method,json=method" json:"Method,omitempty"`
+	AccountId string       `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	AgentId   string       `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId"`
+	Method    *auth.Method `protobuf:"bytes,3,opt,name=Method,json=method" json:"Method"`
 }
 
 func (m *Permission) Reset()                    { *m = Permission{} }
 func (m *Permission) String() string            { return proto.CompactTextString(m) }
 func (*Permission) ProtoMessage()               {}
-func (*Permission) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (*Permission) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
 func (m *Permission) GetAccountId() string {
 	if m != nil {
@@ -320,14 +502,14 @@ func (m *Permission) GetMethod() *auth.Method {
 }
 
 type AgentId struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId"`
 }
 
 func (m *AgentId) Reset()                    { *m = AgentId{} }
 func (m *AgentId) String() string            { return proto.CompactTextString(m) }
 func (*AgentId) ProtoMessage()               {}
-func (*AgentId) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (*AgentId) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
 func (m *AgentId) GetAccountId() string {
 	if m != nil {
@@ -344,15 +526,15 @@ func (m *AgentId) GetAgentId() string {
 }
 
 type AgentInGroup struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	GroupId   string `protobuf:"bytes,3,opt,name=GroupId,json=groupId" json:"GroupId,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId"`
+	GroupId   string `protobuf:"bytes,3,opt,name=GroupId,json=groupId" json:"GroupId"`
 }
 
 func (m *AgentInGroup) Reset()                    { *m = AgentInGroup{} }
 func (m *AgentInGroup) String() string            { return proto.CompactTextString(m) }
 func (*AgentInGroup) ProtoMessage()               {}
-func (*AgentInGroup) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*AgentInGroup) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
 
 func (m *AgentInGroup) GetAccountId() string {
 	if m != nil {
@@ -376,15 +558,15 @@ func (m *AgentInGroup) GetGroupId() string {
 }
 
 type AgentStatus struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	IsActive  bool   `protobuf:"varint,3,opt,name=IsActive,json=isActive" json:"IsActive,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId"`
+	IsActive  bool   `protobuf:"varint,3,opt,name=IsActive,json=isActive" json:"IsActive"`
 }
 
 func (m *AgentStatus) Reset()                    { *m = AgentStatus{} }
 func (m *AgentStatus) String() string            { return proto.CompactTextString(m) }
 func (*AgentStatus) ProtoMessage()               {}
-func (*AgentStatus) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (*AgentStatus) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
 
 func (m *AgentStatus) GetAccountId() string {
 	if m != nil {
@@ -408,14 +590,14 @@ func (m *AgentStatus) GetIsActive() bool {
 }
 
 type Account struct {
-	Id       string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	MaxRules int32  `protobuf:"varint,2,opt,name=MaxRules,json=maxRules" json:"MaxRules,omitempty"`
+	Id       string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	MaxRules int32  `protobuf:"varint,2,opt,name=MaxRules,json=maxRules" json:"MaxRules"`
 }
 
 func (m *Account) Reset()                    { *m = Account{} }
 func (m *Account) String() string            { return proto.CompactTextString(m) }
 func (*Account) ProtoMessage()               {}
-func (*Account) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (*Account) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
 
 func (m *Account) GetId() string {
 	if m != nil {
@@ -432,13 +614,13 @@ func (m *Account) GetMaxRules() int32 {
 }
 
 type Bool struct {
-	Bool bool `protobuf:"varint,1,opt,name=Bool,json=bool" json:"Bool,omitempty"`
+	Bool bool `protobuf:"varint,1,opt,name=Bool,json=bool" json:"Bool"`
 }
 
 func (m *Bool) Reset()                    { *m = Bool{} }
 func (m *Bool) String() string            { return proto.CompactTextString(m) }
 func (*Bool) ProtoMessage()               {}
-func (*Bool) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (*Bool) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
 
 func (m *Bool) GetBool() bool {
 	if m != nil {
@@ -447,14 +629,38 @@ func (m *Bool) GetBool() bool {
 	return false
 }
 
+type RuleId struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	Id        string `protobuf:"bytes,2,opt,name=Id,json=id" json:"Id"`
+}
+
+func (m *RuleId) Reset()                    { *m = RuleId{} }
+func (m *RuleId) String() string            { return proto.CompactTextString(m) }
+func (*RuleId) ProtoMessage()               {}
+func (*RuleId) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+
+func (m *RuleId) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *RuleId) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
 type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *Id) Reset()                    { *m = Id{} }
 func (m *Id) String() string            { return proto.CompactTextString(m) }
 func (*Id) ProtoMessage()               {}
-func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
 
 func (m *Id) GetId() string {
 	if m != nil {
@@ -469,23 +675,23 @@ type Empty struct {
 func (m *Empty) Reset()                    { *m = Empty{} }
 func (m *Empty) String() string            { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
 
 type Rule struct {
-	Id          string         `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	AccountId   string         `protobuf:"bytes,2,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	Priority    string         `protobuf:"bytes,3,opt,name=Priority,json=priority" json:"Priority,omitempty"`
-	Strategy    AssignStrategy `protobuf:"varint,4,opt,name=Strategy,json=strategy,enum=chat.AssignStrategy" json:"Strategy,omitempty"`
-	AssignTos   []string       `protobuf:"bytes,5,rep,name=AssignTos,json=assignTos" json:"AssignTos,omitempty"`
-	Conditions  []*Condition   `protobuf:"bytes,6,rep,name=Conditions,json=conditions" json:"Conditions,omitempty"`
-	IsDisabled  bool           `protobuf:"varint,7,opt,name=IsDisabled,json=isDisabled" json:"IsDisabled,omitempty"`
-	CreatedTime string         `protobuf:"bytes,8,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	Id          string         `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	AccountId   string         `protobuf:"bytes,2,opt,name=AccountId,json=accountId" json:"AccountId"`
+	Priority    string         `protobuf:"bytes,3,opt,name=Priority,json=priority" json:"Priority"`
+	Strategy    AssignStrategy `protobuf:"varint,4,opt,name=Strategy,json=strategy,enum=chat.AssignStrategy" json:"Strategy"`
+	AssignTos   []string       `protobuf:"bytes,5,rep,name=AssignTos,json=assignTos" json:"AssignTos"`
+	Conditions  []*Condition   `protobuf:"bytes,6,rep,name=Conditions,json=conditions" json:"Conditions"`
+	IsDisabled  bool           `protobuf:"varint,7,opt,name=IsDisabled,json=isDisabled" json:"IsDisabled"`
+	CreatedTime string         `protobuf:"bytes,8,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
 }
 
 func (m *Rule) Reset()                    { *m = Rule{} }
 func (m *Rule) String() string            { return proto.CompactTextString(m) }
 func (*Rule) ProtoMessage()               {}
-func (*Rule) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+func (*Rule) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
 
 func (m *Rule) GetId() string {
 	if m != nil {
@@ -544,16 +750,16 @@ func (m *Rule) GetCreatedTime() string {
 }
 
 type Condition struct {
-	Join     JoinOperator `protobuf:"varint,1,opt,name=Join,json=join,enum=chat.JoinOperator" json:"Join,omitempty"`
-	Key      string       `protobuf:"bytes,2,opt,name=Key,json=key" json:"Key,omitempty"`
-	Operator string       `protobuf:"bytes,3,opt,name=Operator,json=operator" json:"Operator,omitempty"`
-	Value    string       `protobuf:"bytes,4,opt,name=Value,json=value" json:"Value,omitempty"`
+	Join     JoinOperator `protobuf:"varint,1,opt,name=Join,json=join,enum=chat.JoinOperator" json:"Join"`
+	Key      string       `protobuf:"bytes,2,opt,name=Key,json=key" json:"Key"`
+	Operator string       `protobuf:"bytes,3,opt,name=Operator,json=operator" json:"Operator"`
+	Value    string       `protobuf:"bytes,4,opt,name=Value,json=value" json:"Value"`
 }
 
 func (m *Condition) Reset()                    { *m = Condition{} }
 func (m *Condition) String() string            { return proto.CompactTextString(m) }
 func (*Condition) ProtoMessage()               {}
-func (*Condition) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+func (*Condition) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
 
 func (m *Condition) GetJoin() JoinOperator {
 	if m != nil {
@@ -584,13 +790,13 @@ func (m *Condition) GetValue() string {
 }
 
 type Route struct {
-	Rules []*Rule `protobuf:"bytes,1,rep,name=Rules,json=rules" json:"Rules,omitempty"`
+	Rules []*Rule `protobuf:"bytes,1,rep,name=Rules,json=rules" json:"Rules"`
 }
 
 func (m *Route) Reset()                    { *m = Route{} }
 func (m *Route) String() string            { return proto.CompactTextString(m) }
 func (*Route) ProtoMessage()               {}
-func (*Route) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+func (*Route) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
 
 func (m *Route) GetRules() []*Rule {
 	if m != nil {
@@ -600,15 +806,15 @@ func (m *Route) GetRules() []*Rule {
 }
 
 type RouteResult struct {
-	RuleId   string         `protobuf:"bytes,1,opt,name=RuleId,json=ruleId" json:"RuleId,omitempty"`
-	Strategy AssignStrategy `protobuf:"varint,3,opt,name=Strategy,json=strategy,enum=chat.AssignStrategy" json:"Strategy,omitempty"`
-	AgentIds []string       `protobuf:"bytes,4,rep,name=AgentIds,json=agentIds" json:"AgentIds,omitempty"`
+	RuleId   string         `protobuf:"bytes,1,opt,name=RuleId,json=ruleId" json:"RuleId"`
+	Strategy AssignStrategy `protobuf:"varint,3,opt,name=Strategy,json=strategy,enum=chat.AssignStrategy" json:"Strategy"`
+	AgentIds []string       `protobuf:"bytes,4,rep,name=AgentIds,json=agentIds" json:"AgentIds"`
 }
 
 func (m *RouteResult) Reset()                    { *m = RouteResult{} }
 func (m *RouteResult) String() string            { return proto.CompactTextString(m) }
 func (*RouteResult) ProtoMessage()               {}
-func (*RouteResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
+func (*RouteResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
 
 func (m *RouteResult) GetRuleId() string {
 	if m != nil {
@@ -632,13 +838,13 @@ func (m *RouteResult) GetAgentIds() []string {
 }
 
 type GroupDeleteEvent struct {
-	GroupId string `protobuf:"bytes,1,opt,name=GroupId,json=groupId" json:"GroupId,omitempty"`
+	GroupId string `protobuf:"bytes,1,opt,name=GroupId,json=groupId" json:"GroupId"`
 }
 
 func (m *GroupDeleteEvent) Reset()                    { *m = GroupDeleteEvent{} }
 func (m *GroupDeleteEvent) String() string            { return proto.CompactTextString(m) }
 func (*GroupDeleteEvent) ProtoMessage()               {}
-func (*GroupDeleteEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
+func (*GroupDeleteEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
 
 func (m *GroupDeleteEvent) GetGroupId() string {
 	if m != nil {
@@ -648,14 +854,14 @@ func (m *GroupDeleteEvent) GetGroupId() string {
 }
 
 type GroupUpdateEvent struct {
-	GroupId   string   `protobuf:"bytes,1,opt,name=GroupId,json=groupId" json:"GroupId,omitempty"`
-	MemberIds []string `protobuf:"bytes,2,rep,name=MemberIds,json=memberIds" json:"MemberIds,omitempty"`
+	GroupId   string   `protobuf:"bytes,1,opt,name=GroupId,json=groupId" json:"GroupId"`
+	MemberIds []string `protobuf:"bytes,2,rep,name=MemberIds,json=memberIds" json:"MemberIds"`
 }
 
 func (m *GroupUpdateEvent) Reset()                    { *m = GroupUpdateEvent{} }
 func (m *GroupUpdateEvent) String() string            { return proto.CompactTextString(m) }
 func (*GroupUpdateEvent) ProtoMessage()               {}
-func (*GroupUpdateEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
+func (*GroupUpdateEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
 
 func (m *GroupUpdateEvent) GetGroupId() string {
 	if m != nil {
@@ -672,13 +878,13 @@ func (m *GroupUpdateEvent) GetMemberIds() []string {
 }
 
 type AgentDeletedEvent struct {
-	AgentId string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
+	AgentId string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId"`
 }
 
 func (m *AgentDeletedEvent) Reset()                    { *m = AgentDeletedEvent{} }
 func (m *AgentDeletedEvent) String() string            { return proto.CompactTextString(m) }
 func (*AgentDeletedEvent) ProtoMessage()               {}
-func (*AgentDeletedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
+func (*AgentDeletedEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
 
 func (m *AgentDeletedEvent) GetAgentId() string {
 	if m != nil {
@@ -688,15 +894,15 @@ func (m *AgentDeletedEvent) GetAgentId() string {
 }
 
 type AgentUpdateEvent struct {
-	AgentId     string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	IsActive    bool   `protobuf:"varint,2,opt,name=IsActive,json=isActive" json:"IsActive,omitempty"`
-	IsConfirmed bool   `protobuf:"varint,3,opt,name=IsConfirmed,json=isConfirmed" json:"IsConfirmed,omitempty"`
+	AgentId     string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId"`
+	IsActive    bool   `protobuf:"varint,2,opt,name=IsActive,json=isActive" json:"IsActive"`
+	IsConfirmed bool   `protobuf:"varint,3,opt,name=IsConfirmed,json=isConfirmed" json:"IsConfirmed"`
 }
 
 func (m *AgentUpdateEvent) Reset()                    { *m = AgentUpdateEvent{} }
 func (m *AgentUpdateEvent) String() string            { return proto.CompactTextString(m) }
 func (*AgentUpdateEvent) ProtoMessage()               {}
-func (*AgentUpdateEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
+func (*AgentUpdateEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
 
 func (m *AgentUpdateEvent) GetAgentId() string {
 	if m != nil {
@@ -720,13 +926,13 @@ func (m *AgentUpdateEvent) GetIsConfirmed() bool {
 }
 
 type Ids struct {
-	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids,omitempty"`
+	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids"`
 }
 
 func (m *Ids) Reset()                    { *m = Ids{} }
 func (m *Ids) String() string            { return proto.CompactTextString(m) }
 func (*Ids) ProtoMessage()               {}
-func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
+func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{21} }
 
 func (m *Ids) GetIds() []string {
 	if m != nil {
@@ -736,15 +942,14 @@ func (m *Ids) GetIds() []string {
 }
 
 type User struct {
-	Id         string   `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Type       UserType `protobuf:"varint,4,opt,name=Type,json=type,enum=chat.UserType" json:"Type,omitempty"`
-	LastSeenId string   `protobuf:"bytes,5,opt,name=LastSeenId,json=lastSeenId" json:"LastSeenId,omitempty"`
+	Id   string   `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Type UserType `protobuf:"varint,2,opt,name=Type,json=type,enum=chat.UserType" json:"Type"`
 }
 
 func (m *User) Reset()                    { *m = User{} }
 func (m *User) String() string            { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()               {}
-func (*User) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
+func (*User) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{22} }
 
 func (m *User) GetId() string {
 	if m != nil {
@@ -760,32 +965,25 @@ func (m *User) GetType() UserType {
 	return UserType_UndefinedUserType
 }
 
-func (m *User) GetLastSeenId() string {
-	if m != nil {
-		return m.LastSeenId
-	}
-	return ""
-}
-
 // get number of unread message
 type Chat struct {
-	Id        string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	AccountId string `protobuf:"bytes,2,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	Id        string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	AccountId string `protobuf:"bytes,2,opt,name=AccountId,json=accountId" json:"AccountId"`
 	// Creation time
-	CreatedTime string `protobuf:"bytes,3,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	CreatedTime string `protobuf:"bytes,3,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
 	// Last active time
-	LTime string `protobuf:"bytes,4,opt,name=LTime,json=lTime" json:"LTime,omitempty"`
+	LastActiveTime string `protobuf:"bytes,4,opt,name=LastActiveTime,json=lastActiveTime" json:"LastActiveTime"`
 	// Closed time
-	XTime     string   `protobuf:"bytes,5,opt,name=XTime,json=xTime" json:"XTime,omitempty"`
-	Users     []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
-	ChannelId string   `protobuf:"bytes,9,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
-	Tags      []string `protobuf:"bytes,10,rep,name=Tags,json=tags" json:"Tags,omitempty"`
+	ClosedTime string   `protobuf:"bytes,5,opt,name=ClosedTime,json=closedTime" json:"ClosedTime"`
+	Users      []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users"`
+	ChannelId  string   `protobuf:"bytes,9,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	Tags       []string `protobuf:"bytes,10,rep,name=Tags,json=tags" json:"Tags"`
 }
 
 func (m *Chat) Reset()                    { *m = Chat{} }
 func (m *Chat) String() string            { return proto.CompactTextString(m) }
 func (*Chat) ProtoMessage()               {}
-func (*Chat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
+func (*Chat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{23} }
 
 func (m *Chat) GetId() string {
 	if m != nil {
@@ -808,16 +1006,16 @@ func (m *Chat) GetCreatedTime() string {
 	return ""
 }
 
-func (m *Chat) GetLTime() string {
+func (m *Chat) GetLastActiveTime() string {
 	if m != nil {
-		return m.LTime
+		return m.LastActiveTime
 	}
 	return ""
 }
 
-func (m *Chat) GetXTime() string {
+func (m *Chat) GetClosedTime() string {
 	if m != nil {
-		return m.XTime
+		return m.ClosedTime
 	}
 	return ""
 }
@@ -843,44 +1041,54 @@ func (m *Chat) GetTags() []string {
 	return nil
 }
 
-type ChatsWithEvents struct {
-	Chats []*ChatWithEvents `protobuf:"bytes,1,rep,name=Chats,json=chats" json:"Chats,omitempty"`
+type ChatPreviews struct {
+	Previews []*ChatPreview `protobuf:"bytes,1,rep,name=Previews,json=previews" json:"Previews"`
 }
 
-func (m *ChatsWithEvents) Reset()                    { *m = ChatsWithEvents{} }
-func (m *ChatsWithEvents) String() string            { return proto.CompactTextString(m) }
-func (*ChatsWithEvents) ProtoMessage()               {}
-func (*ChatsWithEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
+func (m *ChatPreviews) Reset()                    { *m = ChatPreviews{} }
+func (m *ChatPreviews) String() string            { return proto.CompactTextString(m) }
+func (*ChatPreviews) ProtoMessage()               {}
+func (*ChatPreviews) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{24} }
 
-func (m *ChatsWithEvents) GetChats() []*ChatWithEvents {
+func (m *ChatPreviews) GetPreviews() []*ChatPreview {
 	if m != nil {
-		return m.Chats
+		return m.Previews
 	}
 	return nil
 }
 
-type ChatWithEvents struct {
-	Chat   *Chat        `protobuf:"bytes,1,opt,name=Chat,json=chat" json:"Chat,omitempty"`
-	Events []*ChatEvent `protobuf:"bytes,2,rep,name=Events,json=events" json:"Events,omitempty"`
+// ChatPreview is a chat header with some events in it
+type ChatPreview struct {
+	Chat   *Chat        `protobuf:"bytes,1,opt,name=Chat,json=chat" json:"Chat"`
+	Events []*ChatEvent `protobuf:"bytes,2,rep,name=Events,json=events" json:"Events"`
+	// Unread number of unread event
+	Unread int64 `protobuf:"varint,3,opt,name=Unread,json=unread" json:"Unread"`
 }
 
-func (m *ChatWithEvents) Reset()                    { *m = ChatWithEvents{} }
-func (m *ChatWithEvents) String() string            { return proto.CompactTextString(m) }
-func (*ChatWithEvents) ProtoMessage()               {}
-func (*ChatWithEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
+func (m *ChatPreview) Reset()                    { *m = ChatPreview{} }
+func (m *ChatPreview) String() string            { return proto.CompactTextString(m) }
+func (*ChatPreview) ProtoMessage()               {}
+func (*ChatPreview) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{25} }
 
-func (m *ChatWithEvents) GetChat() *Chat {
+func (m *ChatPreview) GetChat() *Chat {
 	if m != nil {
 		return m.Chat
 	}
 	return nil
 }
 
-func (m *ChatWithEvents) GetEvents() []*ChatEvent {
+func (m *ChatPreview) GetEvents() []*ChatEvent {
 	if m != nil {
 		return m.Events
 	}
 	return nil
+}
+
+func (m *ChatPreview) GetUnread() int64 {
+	if m != nil {
+		return m.Unread
+	}
+	return 0
 }
 
 type Attachment struct {
@@ -906,14 +1114,14 @@ type Attachment struct {
 	//     - postback_button (single button)
 	//     - textbox           -> contains value
 	//     - ratebox            -> rate the chat (like 5 buttons but have beautiful display)
-	Type    string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type,omitempty"`
-	Payload string `protobuf:"bytes,2,opt,name=Payload,json=payload" json:"Payload,omitempty"`
+	Type    string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type"`
+	Payload string `protobuf:"bytes,2,opt,name=Payload,json=payload" json:"Payload"`
 }
 
 func (m *Attachment) Reset()                    { *m = Attachment{} }
 func (m *Attachment) String() string            { return proto.CompactTextString(m) }
 func (*Attachment) ProtoMessage()               {}
-func (*Attachment) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{21} }
+func (*Attachment) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{26} }
 
 func (m *Attachment) GetType() string {
 	if m != nil {
@@ -930,13 +1138,13 @@ func (m *Attachment) GetPayload() string {
 }
 
 type ChatEvents struct {
-	Events []*ChatEvent `protobuf:"bytes,1,rep,name=Events,json=events" json:"Events,omitempty"`
+	Events []*ChatEvent `protobuf:"bytes,1,rep,name=Events,json=events" json:"Events"`
 }
 
 func (m *ChatEvents) Reset()                    { *m = ChatEvents{} }
 func (m *ChatEvents) String() string            { return proto.CompactTextString(m) }
 func (*ChatEvents) ProtoMessage()               {}
-func (*ChatEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{22} }
+func (*ChatEvents) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{27} }
 
 func (m *ChatEvents) GetEvents() []*ChatEvent {
 	if m != nil {
@@ -947,28 +1155,31 @@ func (m *ChatEvents) GetEvents() []*ChatEvent {
 
 type ChatEvent struct {
 	// ID of chat evet
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 	// Type indicates type of chat event
-	Type ChatEventType `protobuf:"varint,2,opt,name=Type,json=type,enum=chat.ChatEventType" json:"Type,omitempty"`
+	Type ChatEventType `protobuf:"varint,2,opt,name=Type,json=type,enum=chat.ChatEventType" json:"Type"`
+	// AccountId refer to ID of account
+	AccountId string `protobuf:"bytes,4,opt,name=AccountId,json=accountId" json:"AccountId"`
 	// ChatId refer to ID of chat which contains this chat event
-	ChatId string `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
+	ChatId string `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId"`
 	// CreatedTime is a RFC3339 string, tell when was event sent
-	CreatedTime string `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	CreatedTime string `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
 	// SenderId refer to who has sent the event, could be Agent, User or System
-	SenderId string `protobuf:"bytes,6,opt,name=SenderId,json=senderId" json:"SenderId,omitempty"`
+	SenderId string `protobuf:"bytes,6,opt,name=SenderId,json=senderId" json:"SenderId"`
 	// SenderType indicate type of sender
-	SenderType UserType `protobuf:"varint,7,opt,name=SenderType,json=senderType,enum=chat.UserType" json:"SenderType,omitempty"`
+	SenderType UserType `protobuf:"varint,7,opt,name=SenderType,json=senderType,enum=chat.UserType" json:"SenderType"`
 	// Content could be raw text, could be JSON data based on type
-	Text string `protobuf:"bytes,8,opt,name=Text,json=text" json:"Text,omitempty"`
-	// Could be "", "raw" or "markdown"
-	Format      string        `protobuf:"bytes,9,opt,name=Format,json=format" json:"Format,omitempty"`
-	Attachments []*Attachment `protobuf:"bytes,10,rep,name=Attachments,json=attachments" json:"Attachments,omitempty"`
+	Text string `protobuf:"bytes,8,opt,name=Text,json=text" json:"Text"`
+	// Could be "", "raw" or "markdown", "html"
+	Format      string        `protobuf:"bytes,9,opt,name=Format,json=format" json:"Format"`
+	Attachments []*Attachment `protobuf:"bytes,10,rep,name=Attachments,json=attachments" json:"Attachments"`
+	State       []string      `protobuf:"bytes,11,rep,name=State,json=state" json:"State"`
 }
 
 func (m *ChatEvent) Reset()                    { *m = ChatEvent{} }
 func (m *ChatEvent) String() string            { return proto.CompactTextString(m) }
 func (*ChatEvent) ProtoMessage()               {}
-func (*ChatEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{23} }
+func (*ChatEvent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{28} }
 
 func (m *ChatEvent) GetId() string {
 	if m != nil {
@@ -982,6 +1193,13 @@ func (m *ChatEvent) GetType() ChatEventType {
 		return m.Type
 	}
 	return ChatEventType_NONE
+}
+
+func (m *ChatEvent) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
 }
 
 func (m *ChatEvent) GetChatId() string {
@@ -1033,27 +1251,34 @@ func (m *ChatEvent) GetAttachments() []*Attachment {
 	return nil
 }
 
+func (m *ChatEvent) GetState() []string {
+	if m != nil {
+		return m.State
+	}
+	return nil
+}
+
 type UserInfo struct {
-	Id            string   `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Name          string   `protobuf:"bytes,2,opt,name=Name,json=name" json:"Name,omitempty"`
-	Emails        []string `protobuf:"bytes,3,rep,name=Emails,json=emails" json:"Emails,omitempty"`
-	Phones        []string `protobuf:"bytes,4,rep,name=Phones,json=phones" json:"Phones,omitempty"`
-	Country       string   `protobuf:"bytes,5,opt,name=Country,json=country" json:"Country,omitempty"`
-	CountryCode   string   `protobuf:"bytes,6,opt,name=CountryCode,json=countryCode" json:"CountryCode,omitempty"`
-	City          string   `protobuf:"bytes,7,opt,name=City,json=city" json:"City,omitempty"`
-	TimeZone      string   `protobuf:"bytes,8,opt,name=TimeZone,json=timeZone" json:"TimeZone,omitempty"`
-	Segment       []string `protobuf:"bytes,9,rep,name=Segment,json=segment" json:"Segment,omitempty"`
-	Label         []string `protobuf:"bytes,10,rep,name=Label,json=label" json:"Label,omitempty"`
-	Unsubscribed  bool     `protobuf:"varint,11,opt,name=Unsubscribed,json=unsubscribed" json:"Unsubscribed,omitempty"`
-	MarkedSpam    bool     `protobuf:"varint,12,opt,name=MarkedSpam,json=markedSpam" json:"MarkedSpam,omitempty"`
-	HardBounced   bool     `protobuf:"varint,13,opt,name=HardBounced,json=hardBounced" json:"HardBounced,omitempty"`
-	TotalSessions int32    `protobuf:"varint,14,opt,name=TotalSessions,json=totalSessions" json:"TotalSessions,omitempty"`
+	Id            string   `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Name          string   `protobuf:"bytes,2,opt,name=Name,json=name" json:"Name"`
+	Emails        []string `protobuf:"bytes,3,rep,name=Emails,json=emails" json:"Emails"`
+	Phones        []string `protobuf:"bytes,4,rep,name=Phones,json=phones" json:"Phones"`
+	Country       string   `protobuf:"bytes,5,opt,name=Country,json=country" json:"Country"`
+	CountryCode   string   `protobuf:"bytes,6,opt,name=CountryCode,json=countryCode" json:"CountryCode"`
+	City          string   `protobuf:"bytes,7,opt,name=City,json=city" json:"City"`
+	TimeZone      string   `protobuf:"bytes,8,opt,name=TimeZone,json=timeZone" json:"TimeZone"`
+	Segment       []string `protobuf:"bytes,9,rep,name=Segment,json=segment" json:"Segment"`
+	Label         []string `protobuf:"bytes,10,rep,name=Label,json=label" json:"Label"`
+	Unsubscribed  bool     `protobuf:"varint,11,opt,name=Unsubscribed,json=unsubscribed" json:"Unsubscribed"`
+	MarkedSpam    bool     `protobuf:"varint,12,opt,name=MarkedSpam,json=markedSpam" json:"MarkedSpam"`
+	HardBounced   bool     `protobuf:"varint,13,opt,name=HardBounced,json=hardBounced" json:"HardBounced"`
+	TotalSessions int32    `protobuf:"varint,14,opt,name=TotalSessions,json=totalSessions" json:"TotalSessions"`
 }
 
 func (m *UserInfo) Reset()                    { *m = UserInfo{} }
 func (m *UserInfo) String() string            { return proto.CompactTextString(m) }
 func (*UserInfo) ProtoMessage()               {}
-func (*UserInfo) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{24} }
+func (*UserInfo) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{29} }
 
 func (m *UserInfo) GetId() string {
 	if m != nil {
@@ -1153,24 +1378,136 @@ func (m *UserInfo) GetTotalSessions() int32 {
 	return 0
 }
 
+type ChatRequestAck struct {
+	RequestId       string     `protobuf:"bytes,15,opt,name=RequestId,json=requestId" json:"RequestId"`
+	ChatId          string     `protobuf:"bytes,14,opt,name=ChatId,json=chatId" json:"ChatId"`
+	AccountId       string     `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChannelId       string     `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	MessageTo       string     `protobuf:"bytes,5,opt,name=MessageTo,json=messageTo" json:"MessageTo"`
+	PageUrl         string     `protobuf:"bytes,6,opt,name=PageUrl,json=pageUrl" json:"PageUrl"`
+	PageTitle       string     `protobuf:"bytes,7,opt,name=PageTitle,json=pageTitle" json:"PageTitle"`
+	Message         string     `protobuf:"bytes,8,opt,name=Message,json=message" json:"Message"`
+	BrowserLanguage string     `protobuf:"bytes,9,opt,name=BrowserLanguage,json=browserLanguage" json:"BrowserLanguage"`
+	Language        string     `protobuf:"bytes,10,opt,name=Language,json=language" json:"Language"`
+	DeviceType      DeviceType `protobuf:"varint,11,opt,name=DeviceType,json=deviceType,enum=chat.DeviceType" json:"DeviceType"`
+	User            *UserInfo  `protobuf:"bytes,12,opt,name=User,json=user" json:"User"`
+	CreatedTime     string     `protobuf:"bytes,13,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
+}
+
+func (m *ChatRequestAck) Reset()                    { *m = ChatRequestAck{} }
+func (m *ChatRequestAck) String() string            { return proto.CompactTextString(m) }
+func (*ChatRequestAck) ProtoMessage()               {}
+func (*ChatRequestAck) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{30} }
+
+func (m *ChatRequestAck) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetMessageTo() string {
+	if m != nil {
+		return m.MessageTo
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetPageUrl() string {
+	if m != nil {
+		return m.PageUrl
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetPageTitle() string {
+	if m != nil {
+		return m.PageTitle
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetBrowserLanguage() string {
+	if m != nil {
+		return m.BrowserLanguage
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetLanguage() string {
+	if m != nil {
+		return m.Language
+	}
+	return ""
+}
+
+func (m *ChatRequestAck) GetDeviceType() DeviceType {
+	if m != nil {
+		return m.DeviceType
+	}
+	return DeviceType_UNKNOWN
+}
+
+func (m *ChatRequestAck) GetUser() *UserInfo {
+	if m != nil {
+		return m.User
+	}
+	return nil
+}
+
+func (m *ChatRequestAck) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
 type ChatRequest struct {
-	AccountId       string     `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	ChannelId       string     `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
-	MessageTo       string     `protobuf:"bytes,5,opt,name=MessageTo,json=messageTo" json:"MessageTo,omitempty"`
-	PageUrl         string     `protobuf:"bytes,6,opt,name=PageUrl,json=pageUrl" json:"PageUrl,omitempty"`
-	PageTitle       string     `protobuf:"bytes,7,opt,name=PageTitle,json=pageTitle" json:"PageTitle,omitempty"`
-	Message         string     `protobuf:"bytes,8,opt,name=Message,json=message" json:"Message,omitempty"`
-	BrowserLanguage string     `protobuf:"bytes,9,opt,name=BrowserLanguage,json=browserLanguage" json:"BrowserLanguage,omitempty"`
-	Language        string     `protobuf:"bytes,10,opt,name=Language,json=language" json:"Language,omitempty"`
-	DeviceType      DeviceType `protobuf:"varint,11,opt,name=DeviceType,json=deviceType,enum=chat.DeviceType" json:"DeviceType,omitempty"`
-	User            *UserInfo  `protobuf:"bytes,12,opt,name=User,json=user" json:"User,omitempty"`
-	CreatedTime     string     `protobuf:"bytes,13,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	AccountId       string     `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChannelId       string     `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	MessageTo       string     `protobuf:"bytes,5,opt,name=MessageTo,json=messageTo" json:"MessageTo"`
+	PageUrl         string     `protobuf:"bytes,6,opt,name=PageUrl,json=pageUrl" json:"PageUrl"`
+	PageTitle       string     `protobuf:"bytes,7,opt,name=PageTitle,json=pageTitle" json:"PageTitle"`
+	Message         string     `protobuf:"bytes,8,opt,name=Message,json=message" json:"Message"`
+	BrowserLanguage string     `protobuf:"bytes,9,opt,name=BrowserLanguage,json=browserLanguage" json:"BrowserLanguage"`
+	Language        string     `protobuf:"bytes,10,opt,name=Language,json=language" json:"Language"`
+	DeviceType      DeviceType `protobuf:"varint,11,opt,name=DeviceType,json=deviceType,enum=chat.DeviceType" json:"DeviceType"`
+	User            *UserInfo  `protobuf:"bytes,12,opt,name=User,json=user" json:"User"`
+	CreatedTime     string     `protobuf:"bytes,13,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
 }
 
 func (m *ChatRequest) Reset()                    { *m = ChatRequest{} }
 func (m *ChatRequest) String() string            { return proto.CompactTextString(m) }
 func (*ChatRequest) ProtoMessage()               {}
-func (*ChatRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{25} }
+func (*ChatRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{31} }
 
 func (m *ChatRequest) GetAccountId() string {
 	if m != nil {
@@ -1250,13 +1587,13 @@ func (m *ChatRequest) GetCreatedTime() string {
 }
 
 type Chats struct {
-	Chats []*Chat `protobuf:"bytes,1,rep,name=Chats,json=chats" json:"Chats,omitempty"`
+	Chats []*Chat `protobuf:"bytes,1,rep,name=Chats,json=chats" json:"Chats"`
 }
 
 func (m *Chats) Reset()                    { *m = Chats{} }
 func (m *Chats) String() string            { return proto.CompactTextString(m) }
 func (*Chats) ProtoMessage()               {}
-func (*Chats) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{26} }
+func (*Chats) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{32} }
 
 func (m *Chats) GetChats() []*Chat {
 	if m != nil {
@@ -1266,15 +1603,15 @@ func (m *Chats) GetChats() []*Chat {
 }
 
 type ChatStart struct {
-	AgentId   string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	ChannelId string `protobuf:"bytes,3,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
+	AgentId   string `protobuf:"bytes,1,opt,name=AgentId,json=agentId" json:"AgentId"`
+	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId"`
+	ChannelId string `protobuf:"bytes,3,opt,name=ChannelId,json=channelId" json:"ChannelId"`
 }
 
 func (m *ChatStart) Reset()                    { *m = ChatStart{} }
 func (m *ChatStart) String() string            { return proto.CompactTextString(m) }
 func (*ChatStart) ProtoMessage()               {}
-func (*ChatStart) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{27} }
+func (*ChatStart) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{33} }
 
 func (m *ChatStart) GetAgentId() string {
 	if m != nil {
@@ -1298,15 +1635,15 @@ func (m *ChatStart) GetChannelId() string {
 }
 
 type AcceptRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	ChatId    string `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId"`
+	ChatId    string `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId"`
 }
 
 func (m *AcceptRequest) Reset()                    { *m = AcceptRequest{} }
 func (m *AcceptRequest) String() string            { return proto.CompactTextString(m) }
 func (*AcceptRequest) ProtoMessage()               {}
-func (*AcceptRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{28} }
+func (*AcceptRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{34} }
 
 func (m *AcceptRequest) GetAccountId() string {
 	if m != nil {
@@ -1330,15 +1667,15 @@ func (m *AcceptRequest) GetChatId() string {
 }
 
 type ListUnassignChatsRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	StartId   string `protobuf:"bytes,2,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Limit     int32  `protobuf:"varint,3,opt,name=Limit,json=limit" json:"Limit,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	StartId   string `protobuf:"bytes,2,opt,name=StartId,json=startId" json:"StartId"`
+	Limit     int32  `protobuf:"varint,3,opt,name=Limit,json=limit" json:"Limit"`
 }
 
 func (m *ListUnassignChatsRequest) Reset()                    { *m = ListUnassignChatsRequest{} }
 func (m *ListUnassignChatsRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListUnassignChatsRequest) ProtoMessage()               {}
-func (*ListUnassignChatsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{29} }
+func (*ListUnassignChatsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{35} }
 
 func (m *ListUnassignChatsRequest) GetAccountId() string {
 	if m != nil {
@@ -1362,19 +1699,19 @@ func (m *ListUnassignChatsRequest) GetLimit() int32 {
 }
 
 type UnassignChat struct {
-	AccountId  string   `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	IsAssigned bool     `protobuf:"varint,2,opt,name=IsAssigned,json=isAssigned" json:"IsAssigned,omitempty"`
-	Message    string   `protobuf:"bytes,3,opt,name=Message,json=message" json:"Message,omitempty"`
-	Ip         string   `protobuf:"bytes,4,opt,name=Ip,json=ip" json:"Ip,omitempty"`
-	Name       string   `protobuf:"bytes,5,opt,name=Name,json=name" json:"Name,omitempty"`
-	Emails     []string `protobuf:"bytes,6,rep,name=Emails,json=emails" json:"Emails,omitempty"`
-	Phones     []string `protobuf:"bytes,7,rep,name=Phones,json=phones" json:"Phones,omitempty"`
+	AccountId  string   `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	IsAssigned bool     `protobuf:"varint,2,opt,name=IsAssigned,json=isAssigned" json:"IsAssigned"`
+	Message    string   `protobuf:"bytes,3,opt,name=Message,json=message" json:"Message"`
+	Ip         string   `protobuf:"bytes,4,opt,name=Ip,json=ip" json:"Ip"`
+	Name       string   `protobuf:"bytes,5,opt,name=Name,json=name" json:"Name"`
+	Emails     []string `protobuf:"bytes,6,rep,name=Emails,json=emails" json:"Emails"`
+	Phones     []string `protobuf:"bytes,7,rep,name=Phones,json=phones" json:"Phones"`
 }
 
 func (m *UnassignChat) Reset()                    { *m = UnassignChat{} }
 func (m *UnassignChat) String() string            { return proto.CompactTextString(m) }
 func (*UnassignChat) ProtoMessage()               {}
-func (*UnassignChat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{30} }
+func (*UnassignChat) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{36} }
 
 func (m *UnassignChat) GetAccountId() string {
 	if m != nil {
@@ -1426,13 +1763,13 @@ func (m *UnassignChat) GetPhones() []string {
 }
 
 type Bools struct {
-	Bools []bool `protobuf:"varint,1,rep,packed,name=Bools,json=bools" json:"Bools,omitempty"`
+	Bools []bool `protobuf:"varint,1,rep,packed,name=Bools,json=bools" json:"Bools"`
 }
 
 func (m *Bools) Reset()                    { *m = Bools{} }
 func (m *Bools) String() string            { return proto.CompactTextString(m) }
 func (*Bools) ProtoMessage()               {}
-func (*Bools) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{31} }
+func (*Bools) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{37} }
 
 func (m *Bools) GetBools() []bool {
 	if m != nil {
@@ -1442,15 +1779,15 @@ func (m *Bools) GetBools() []bool {
 }
 
 type ListUsersUnreadRequest struct {
-	AccountId string   `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	AgentId   string   `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	UserIds   []string `protobuf:"bytes,3,rep,name=UserIds,json=userIds" json:"UserIds,omitempty"`
+	AccountId string   `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	AgentId   string   `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId"`
+	UserIds   []string `protobuf:"bytes,3,rep,name=UserIds,json=userIds" json:"UserIds"`
 }
 
 func (m *ListUsersUnreadRequest) Reset()                    { *m = ListUsersUnreadRequest{} }
 func (m *ListUsersUnreadRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListUsersUnreadRequest) ProtoMessage()               {}
-func (*ListUsersUnreadRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{32} }
+func (*ListUsersUnreadRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{38} }
 
 func (m *ListUsersUnreadRequest) GetAccountId() string {
 	if m != nil {
@@ -1474,14 +1811,14 @@ func (m *ListUsersUnreadRequest) GetUserIds() []string {
 }
 
 type Unread struct {
-	UserId string `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	Unread int32  `protobuf:"varint,2,opt,name=Unread,json=unread" json:"Unread,omitempty"`
+	UserId string `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId"`
+	Unread int32  `protobuf:"varint,2,opt,name=Unread,json=unread" json:"Unread"`
 }
 
 func (m *Unread) Reset()                    { *m = Unread{} }
 func (m *Unread) String() string            { return proto.CompactTextString(m) }
 func (*Unread) ProtoMessage()               {}
-func (*Unread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{33} }
+func (*Unread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{39} }
 
 func (m *Unread) GetUserId() string {
 	if m != nil {
@@ -1498,13 +1835,13 @@ func (m *Unread) GetUnread() int32 {
 }
 
 type UsersUnread struct {
-	Unreads []*Unread `protobuf:"bytes,1,rep,name=Unreads,json=unreads" json:"Unreads,omitempty"`
+	Unreads []*Unread `protobuf:"bytes,1,rep,name=Unreads,json=unreads" json:"Unreads"`
 }
 
 func (m *UsersUnread) Reset()                    { *m = UsersUnread{} }
 func (m *UsersUnread) String() string            { return proto.CompactTextString(m) }
 func (*UsersUnread) ProtoMessage()               {}
-func (*UsersUnread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{34} }
+func (*UsersUnread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{40} }
 
 func (m *UsersUnread) GetUnreads() []*Unread {
 	if m != nil {
@@ -1514,16 +1851,16 @@ func (m *UsersUnread) GetUnreads() []*Unread {
 }
 
 type ListChatEventRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	ChatId    string `protobuf:"bytes,2,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	StartId   string `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Limit     int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChatId    string `protobuf:"bytes,2,opt,name=ChatId,json=chatId" json:"ChatId"`
+	StartId   string `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId"`
+	Limit     int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit"`
 }
 
 func (m *ListChatEventRequest) Reset()                    { *m = ListChatEventRequest{} }
 func (m *ListChatEventRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListChatEventRequest) ProtoMessage()               {}
-func (*ListChatEventRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{35} }
+func (*ListChatEventRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{41} }
 
 func (m *ListChatEventRequest) GetAccountId() string {
 	if m != nil {
@@ -1554,17 +1891,17 @@ func (m *ListChatEventRequest) GetLimit() int32 {
 }
 
 type ListChatsByUserRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	ChannelId string `protobuf:"bytes,2,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
-	UserId    string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	StartId   string `protobuf:"bytes,4,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Limit     int32  `protobuf:"varint,5,opt,name=Limit,json=limit" json:"Limit,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChannelId string `protobuf:"bytes,2,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	UserId    string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId"`
+	StartId   string `protobuf:"bytes,4,opt,name=StartId,json=startId" json:"StartId"`
+	Limit     int32  `protobuf:"varint,5,opt,name=Limit,json=limit" json:"Limit"`
 }
 
 func (m *ListChatsByUserRequest) Reset()                    { *m = ListChatsByUserRequest{} }
 func (m *ListChatsByUserRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListChatsByUserRequest) ProtoMessage()               {}
-func (*ListChatsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{36} }
+func (*ListChatsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{42} }
 
 func (m *ListChatsByUserRequest) GetAccountId() string {
 	if m != nil {
@@ -1601,162 +1938,57 @@ func (m *ListChatsByUserRequest) GetLimit() int32 {
 	return 0
 }
 
-// Topic Chat.Sent
-type EvChatSent struct {
-	RequestId   string        `protobuf:"bytes,11,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Id          string        `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Type        ChatEventType `protobuf:"varint,2,opt,name=Type,json=type,enum=chat.ChatEventType" json:"Type,omitempty"`
-	ChatId      string        `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	CreatedTime string        `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
-	SenderId    string        `protobuf:"bytes,6,opt,name=SenderId,json=senderId" json:"SenderId,omitempty"`
-	SenderType  UserType      `protobuf:"varint,7,opt,name=SenderType,json=senderType,enum=chat.UserType" json:"SenderType,omitempty"`
-	Text        string        `protobuf:"bytes,8,opt,name=Text,json=text" json:"Text,omitempty"`
-	Format      string        `protobuf:"bytes,9,opt,name=Format,json=format" json:"Format,omitempty"`
-	Attachments []*Attachment `protobuf:"bytes,10,rep,name=Attachments,json=attachments" json:"Attachments,omitempty"`
-}
-
-func (m *EvChatSent) Reset()                    { *m = EvChatSent{} }
-func (m *EvChatSent) String() string            { return proto.CompactTextString(m) }
-func (*EvChatSent) ProtoMessage()               {}
-func (*EvChatSent) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{37} }
-
-func (m *EvChatSent) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatSent) GetId() string {
-	if m != nil {
-		return m.Id
-	}
-	return ""
-}
-
-func (m *EvChatSent) GetType() ChatEventType {
-	if m != nil {
-		return m.Type
-	}
-	return ChatEventType_NONE
-}
-
-func (m *EvChatSent) GetChatId() string {
-	if m != nil {
-		return m.ChatId
-	}
-	return ""
-}
-
-func (m *EvChatSent) GetCreatedTime() string {
-	if m != nil {
-		return m.CreatedTime
-	}
-	return ""
-}
-
-func (m *EvChatSent) GetSenderId() string {
-	if m != nil {
-		return m.SenderId
-	}
-	return ""
-}
-
-func (m *EvChatSent) GetSenderType() UserType {
-	if m != nil {
-		return m.SenderType
-	}
-	return UserType_UndefinedUserType
-}
-
-func (m *EvChatSent) GetText() string {
-	if m != nil {
-		return m.Text
-	}
-	return ""
-}
-
-func (m *EvChatSent) GetFormat() string {
-	if m != nil {
-		return m.Format
-	}
-	return ""
-}
-
-func (m *EvChatSent) GetAttachments() []*Attachment {
-	if m != nil {
-		return m.Attachments
-	}
-	return nil
-}
-
 // Topic Chat.Assigned
-type EvChatAssigned struct {
-	RequestId   string   `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Event       string   `protobuf:"bytes,2,opt,name=Event,json=event" json:"Event,omitempty"`
-	ChatId      string   `protobuf:"bytes,4,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	AccountId   string   `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	CreatedTime string   `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
-	Users       []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
-	ChannelId   string   `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
-	Tags        []string `protobuf:"bytes,8,rep,name=Tags,json=tags" json:"Tags,omitempty"`
+type OEChatAssigned struct {
+	ChatId      string   `protobuf:"bytes,4,opt,name=ChatId,json=chatId" json:"ChatId"`
+	AccountId   string   `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId"`
+	CreatedTime string   `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
+	Users       []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users"`
+	ChannelId   string   `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	Tags        []string `protobuf:"bytes,8,rep,name=Tags,json=tags" json:"Tags"`
 }
 
-func (m *EvChatAssigned) Reset()                    { *m = EvChatAssigned{} }
-func (m *EvChatAssigned) String() string            { return proto.CompactTextString(m) }
-func (*EvChatAssigned) ProtoMessage()               {}
-func (*EvChatAssigned) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{38} }
+func (m *OEChatAssigned) Reset()                    { *m = OEChatAssigned{} }
+func (m *OEChatAssigned) String() string            { return proto.CompactTextString(m) }
+func (*OEChatAssigned) ProtoMessage()               {}
+func (*OEChatAssigned) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{43} }
 
-func (m *EvChatAssigned) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatAssigned) GetEvent() string {
-	if m != nil {
-		return m.Event
-	}
-	return ""
-}
-
-func (m *EvChatAssigned) GetChatId() string {
+func (m *OEChatAssigned) GetChatId() string {
 	if m != nil {
 		return m.ChatId
 	}
 	return ""
 }
 
-func (m *EvChatAssigned) GetAccountId() string {
+func (m *OEChatAssigned) GetAccountId() string {
 	if m != nil {
 		return m.AccountId
 	}
 	return ""
 }
 
-func (m *EvChatAssigned) GetCreatedTime() string {
+func (m *OEChatAssigned) GetCreatedTime() string {
 	if m != nil {
 		return m.CreatedTime
 	}
 	return ""
 }
 
-func (m *EvChatAssigned) GetUsers() []*User {
+func (m *OEChatAssigned) GetUsers() []*User {
 	if m != nil {
 		return m.Users
 	}
 	return nil
 }
 
-func (m *EvChatAssigned) GetChannelId() string {
+func (m *OEChatAssigned) GetChannelId() string {
 	if m != nil {
 		return m.ChannelId
 	}
 	return ""
 }
 
-func (m *EvChatAssigned) GetTags() []string {
+func (m *OEChatAssigned) GetTags() []string {
 	if m != nil {
 		return m.Tags
 	}
@@ -1764,441 +1996,72 @@ func (m *EvChatAssigned) GetTags() []string {
 }
 
 // Topic Chat.Waiting
-type EvChatWaiting struct {
-	RequestId   string   `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Event       string   `protobuf:"bytes,2,opt,name=Event,json=event" json:"Event,omitempty"`
-	ChatId      string   `protobuf:"bytes,4,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	AccountId   string   `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	CreatedTime string   `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
-	Users       []*User  `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
-	ChannelId   string   `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
-	Tags        []string `protobuf:"bytes,8,rep,name=Tags,json=tags" json:"Tags,omitempty"`
+type OEChatWaiting struct {
+	// string RequestId = 1;
+	// string Event = 2;
+	ChatId    string `protobuf:"bytes,4,opt,name=ChatId,json=chatId" json:"ChatId"`
+	AccountId string `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId"`
+	// 	string CreatedTime = 5;
+	User      *UserInfo `protobuf:"bytes,6,opt,name=User,json=user" json:"User"`
+	ChannelId string    `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	Tags      []string  `protobuf:"bytes,8,rep,name=Tags,json=tags" json:"Tags"`
 }
 
-func (m *EvChatWaiting) Reset()                    { *m = EvChatWaiting{} }
-func (m *EvChatWaiting) String() string            { return proto.CompactTextString(m) }
-func (*EvChatWaiting) ProtoMessage()               {}
-func (*EvChatWaiting) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{39} }
+func (m *OEChatWaiting) Reset()                    { *m = OEChatWaiting{} }
+func (m *OEChatWaiting) String() string            { return proto.CompactTextString(m) }
+func (*OEChatWaiting) ProtoMessage()               {}
+func (*OEChatWaiting) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{44} }
 
-func (m *EvChatWaiting) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatWaiting) GetEvent() string {
-	if m != nil {
-		return m.Event
-	}
-	return ""
-}
-
-func (m *EvChatWaiting) GetChatId() string {
+func (m *OEChatWaiting) GetChatId() string {
 	if m != nil {
 		return m.ChatId
 	}
 	return ""
 }
 
-func (m *EvChatWaiting) GetAccountId() string {
+func (m *OEChatWaiting) GetAccountId() string {
 	if m != nil {
 		return m.AccountId
 	}
 	return ""
 }
 
-func (m *EvChatWaiting) GetCreatedTime() string {
+func (m *OEChatWaiting) GetUser() *UserInfo {
 	if m != nil {
-		return m.CreatedTime
-	}
-	return ""
-}
-
-func (m *EvChatWaiting) GetUsers() []*User {
-	if m != nil {
-		return m.Users
+		return m.User
 	}
 	return nil
 }
 
-func (m *EvChatWaiting) GetChannelId() string {
+func (m *OEChatWaiting) GetChannelId() string {
 	if m != nil {
 		return m.ChannelId
 	}
 	return ""
 }
 
-func (m *EvChatWaiting) GetTags() []string {
+func (m *OEChatWaiting) GetTags() []string {
 	if m != nil {
 		return m.Tags
 	}
 	return nil
 }
 
-// =======================EVENT
-type EvChatRequested struct {
-	RequestId   string       `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	ChatRequest *ChatRequest `protobuf:"bytes,2,opt,name=ChatRequest,json=chatRequest" json:"ChatRequest,omitempty"`
-}
-
-func (m *EvChatRequested) Reset()                    { *m = EvChatRequested{} }
-func (m *EvChatRequested) String() string            { return proto.CompactTextString(m) }
-func (*EvChatRequested) ProtoMessage()               {}
-func (*EvChatRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{40} }
-
-func (m *EvChatRequested) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatRequested) GetChatRequest() *ChatRequest {
-	if m != nil {
-		return m.ChatRequest
-	}
-	return nil
-}
-
-type EvChatRequestedReply struct {
-	RequestId       string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Ok              bool   `protobuf:"varint,2,opt,name=Ok,json=ok" json:"Ok,omitempty"`
-	ErrDescription  string `protobuf:"bytes,3,opt,name=ErrDescription,json=errDescription" json:"ErrDescription,omitempty"`
-	ErrDebugMessage string `protobuf:"bytes,4,opt,name=ErrDebugMessage,json=errDebugMessage" json:"ErrDebugMessage,omitempty"`
-	ErrorCode       int32  `protobuf:"varint,5,opt,name=ErrorCode,json=errorCode" json:"ErrorCode,omitempty"`
-	ErrorClass      int32  `protobuf:"varint,6,opt,name=ErrorClass,json=errorClass" json:"ErrorClass,omitempty"`
-	ChatId          string `protobuf:"bytes,8,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	CreatedTime     string `protobuf:"bytes,9,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
-}
-
-func (m *EvChatRequestedReply) Reset()                    { *m = EvChatRequestedReply{} }
-func (m *EvChatRequestedReply) String() string            { return proto.CompactTextString(m) }
-func (*EvChatRequestedReply) ProtoMessage()               {}
-func (*EvChatRequestedReply) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{41} }
-
-func (m *EvChatRequestedReply) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatRequestedReply) GetOk() bool {
-	if m != nil {
-		return m.Ok
-	}
-	return false
-}
-
-func (m *EvChatRequestedReply) GetErrDescription() string {
-	if m != nil {
-		return m.ErrDescription
-	}
-	return ""
-}
-
-func (m *EvChatRequestedReply) GetErrDebugMessage() string {
-	if m != nil {
-		return m.ErrDebugMessage
-	}
-	return ""
-}
-
-func (m *EvChatRequestedReply) GetErrorCode() int32 {
-	if m != nil {
-		return m.ErrorCode
-	}
-	return 0
-}
-
-func (m *EvChatRequestedReply) GetErrorClass() int32 {
-	if m != nil {
-		return m.ErrorClass
-	}
-	return 0
-}
-
-func (m *EvChatRequestedReply) GetChatId() string {
-	if m != nil {
-		return m.ChatId
-	}
-	return ""
-}
-
-func (m *EvChatRequestedReply) GetCreatedTime() string {
-	if m != nil {
-		return m.CreatedTime
-	}
-	return ""
-}
-
-type EvChatStartRequested struct {
-	RequestId string     `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	ChatStart *ChatStart `protobuf:"bytes,2,opt,name=ChatStart,json=chatStart" json:"ChatStart,omitempty"`
-}
-
-func (m *EvChatStartRequested) Reset()                    { *m = EvChatStartRequested{} }
-func (m *EvChatStartRequested) String() string            { return proto.CompactTextString(m) }
-func (*EvChatStartRequested) ProtoMessage()               {}
-func (*EvChatStartRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{42} }
-
-func (m *EvChatStartRequested) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatStartRequested) GetChatStart() *ChatStart {
-	if m != nil {
-		return m.ChatStart
-	}
-	return nil
-}
-
-type EvChatStartRequestedReply struct {
-	RequestId       string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Ok              bool   `protobuf:"varint,2,opt,name=Ok,json=ok" json:"Ok,omitempty"`
-	ErrDescription  string `protobuf:"bytes,3,opt,name=ErrDescription,json=errDescription" json:"ErrDescription,omitempty"`
-	ErrDebugMessage string `protobuf:"bytes,4,opt,name=ErrDebugMessage,json=errDebugMessage" json:"ErrDebugMessage,omitempty"`
-	ErrorCode       int32  `protobuf:"varint,5,opt,name=ErrorCode,json=errorCode" json:"ErrorCode,omitempty"`
-	ErrorClass      int32  `protobuf:"varint,6,opt,name=ErrorClass,json=errorClass" json:"ErrorClass,omitempty"`
-	ChatId          string `protobuf:"bytes,8,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	CreatedTime     string `protobuf:"bytes,9,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
-}
-
-func (m *EvChatStartRequestedReply) Reset()                    { *m = EvChatStartRequestedReply{} }
-func (m *EvChatStartRequestedReply) String() string            { return proto.CompactTextString(m) }
-func (*EvChatStartRequestedReply) ProtoMessage()               {}
-func (*EvChatStartRequestedReply) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{43} }
-
-func (m *EvChatStartRequestedReply) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatStartRequestedReply) GetOk() bool {
-	if m != nil {
-		return m.Ok
-	}
-	return false
-}
-
-func (m *EvChatStartRequestedReply) GetErrDescription() string {
-	if m != nil {
-		return m.ErrDescription
-	}
-	return ""
-}
-
-func (m *EvChatStartRequestedReply) GetErrDebugMessage() string {
-	if m != nil {
-		return m.ErrDebugMessage
-	}
-	return ""
-}
-
-func (m *EvChatStartRequestedReply) GetErrorCode() int32 {
-	if m != nil {
-		return m.ErrorCode
-	}
-	return 0
-}
-
-func (m *EvChatStartRequestedReply) GetErrorClass() int32 {
-	if m != nil {
-		return m.ErrorClass
-	}
-	return 0
-}
-
-func (m *EvChatStartRequestedReply) GetChatId() string {
-	if m != nil {
-		return m.ChatId
-	}
-	return ""
-}
-
-func (m *EvChatStartRequestedReply) GetCreatedTime() string {
-	if m != nil {
-		return m.CreatedTime
-	}
-	return ""
-}
-
-type EvChatSendRequested struct {
-	RequestId string        `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Type      ChatEventType `protobuf:"varint,2,opt,name=Type,json=type,enum=chat.ChatEventType" json:"Type,omitempty"`
-	// ChatId refer to ID of chat which contains this chat event
-	ChatId      string        `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	SenderId    string        `protobuf:"bytes,6,opt,name=SenderId,json=senderId" json:"SenderId,omitempty"`
-	SenderType  UserType      `protobuf:"varint,7,opt,name=SenderType,json=senderType,enum=chat.UserType" json:"SenderType,omitempty"`
-	Text        string        `protobuf:"bytes,8,opt,name=Text,json=text" json:"Text,omitempty"`
-	Format      string        `protobuf:"bytes,9,opt,name=Format,json=format" json:"Format,omitempty"`
-	Attachments []*Attachment `protobuf:"bytes,10,rep,name=Attachments,json=attachments" json:"Attachments,omitempty"`
-}
-
-func (m *EvChatSendRequested) Reset()                    { *m = EvChatSendRequested{} }
-func (m *EvChatSendRequested) String() string            { return proto.CompactTextString(m) }
-func (*EvChatSendRequested) ProtoMessage()               {}
-func (*EvChatSendRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{44} }
-
-func (m *EvChatSendRequested) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatSendRequested) GetType() ChatEventType {
-	if m != nil {
-		return m.Type
-	}
-	return ChatEventType_NONE
-}
-
-func (m *EvChatSendRequested) GetChatId() string {
-	if m != nil {
-		return m.ChatId
-	}
-	return ""
-}
-
-func (m *EvChatSendRequested) GetSenderId() string {
-	if m != nil {
-		return m.SenderId
-	}
-	return ""
-}
-
-func (m *EvChatSendRequested) GetSenderType() UserType {
-	if m != nil {
-		return m.SenderType
-	}
-	return UserType_UndefinedUserType
-}
-
-func (m *EvChatSendRequested) GetText() string {
-	if m != nil {
-		return m.Text
-	}
-	return ""
-}
-
-func (m *EvChatSendRequested) GetFormat() string {
-	if m != nil {
-		return m.Format
-	}
-	return ""
-}
-
-func (m *EvChatSendRequested) GetAttachments() []*Attachment {
-	if m != nil {
-		return m.Attachments
-	}
-	return nil
-}
-
-type EvChatSendRequestedReply struct {
-	RequestId       string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Ok              bool   `protobuf:"varint,2,opt,name=Ok,json=ok" json:"Ok,omitempty"`
-	ErrDescription  string `protobuf:"bytes,3,opt,name=ErrDescription,json=errDescription" json:"ErrDescription,omitempty"`
-	ErrDebugMessage string `protobuf:"bytes,4,opt,name=ErrDebugMessage,json=errDebugMessage" json:"ErrDebugMessage,omitempty"`
-	ErrorCode       int32  `protobuf:"varint,5,opt,name=ErrorCode,json=errorCode" json:"ErrorCode,omitempty"`
-	ErrorClass      int32  `protobuf:"varint,6,opt,name=ErrorClass,json=errorClass" json:"ErrorClass,omitempty"`
-	// ID of chat event, 128-bit, start with EVNT
-	EventId string `protobuf:"bytes,7,opt,name=EventId,json=eventId" json:"EventId,omitempty"`
-	// CreatedTime is a RFC3339 string, tell when was event sent
-	CreatedTime string `protobuf:"bytes,8,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
-}
-
-func (m *EvChatSendRequestedReply) Reset()                    { *m = EvChatSendRequestedReply{} }
-func (m *EvChatSendRequestedReply) String() string            { return proto.CompactTextString(m) }
-func (*EvChatSendRequestedReply) ProtoMessage()               {}
-func (*EvChatSendRequestedReply) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{45} }
-
-func (m *EvChatSendRequestedReply) GetRequestId() string {
-	if m != nil {
-		return m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatSendRequestedReply) GetOk() bool {
-	if m != nil {
-		return m.Ok
-	}
-	return false
-}
-
-func (m *EvChatSendRequestedReply) GetErrDescription() string {
-	if m != nil {
-		return m.ErrDescription
-	}
-	return ""
-}
-
-func (m *EvChatSendRequestedReply) GetErrDebugMessage() string {
-	if m != nil {
-		return m.ErrDebugMessage
-	}
-	return ""
-}
-
-func (m *EvChatSendRequestedReply) GetErrorCode() int32 {
-	if m != nil {
-		return m.ErrorCode
-	}
-	return 0
-}
-
-func (m *EvChatSendRequestedReply) GetErrorClass() int32 {
-	if m != nil {
-		return m.ErrorClass
-	}
-	return 0
-}
-
-func (m *EvChatSendRequestedReply) GetEventId() string {
-	if m != nil {
-		return m.EventId
-	}
-	return ""
-}
-
-func (m *EvChatSendRequestedReply) GetCreatedTime() string {
-	if m != nil {
-		return m.CreatedTime
-	}
-	return ""
-}
-
-type EvChatAcceptRequested struct {
-}
-
-func (m *EvChatAcceptRequested) Reset()                    { *m = EvChatAcceptRequested{} }
-func (m *EvChatAcceptRequested) String() string            { return proto.CompactTextString(m) }
-func (*EvChatAcceptRequested) ProtoMessage()               {}
-func (*EvChatAcceptRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{46} }
-
 type EvChatCreated struct {
-	RequestId   string  `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Ok          bool    `protobuf:"varint,2,opt,name=Ok,json=ok" json:"Ok,omitempty"`
-	Event       string  `protobuf:"bytes,3,opt,name=Event,json=event" json:"Event,omitempty"`
-	AccountId   string  `protobuf:"bytes,4,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	ChatId      string  `protobuf:"bytes,5,opt,name=ChatId,json=chatId" json:"ChatId,omitempty"`
-	Users       []*User `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users,omitempty"`
-	ChannelId   string  `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
-	CreatedTime string  `protobuf:"bytes,8,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
+	RequestId   string  `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId"`
+	Ok          bool    `protobuf:"varint,2,opt,name=Ok,json=ok" json:"Ok"`
+	Event       string  `protobuf:"bytes,3,opt,name=Event,json=event" json:"Event"`
+	AccountId   string  `protobuf:"bytes,4,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChatId      string  `protobuf:"bytes,5,opt,name=ChatId,json=chatId" json:"ChatId"`
+	Users       []*User `protobuf:"bytes,6,rep,name=Users,json=users" json:"Users"`
+	ChannelId   string  `protobuf:"bytes,7,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	CreatedTime string  `protobuf:"bytes,8,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
 }
 
 func (m *EvChatCreated) Reset()                    { *m = EvChatCreated{} }
 func (m *EvChatCreated) String() string            { return proto.CompactTextString(m) }
 func (*EvChatCreated) ProtoMessage()               {}
-func (*EvChatCreated) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{47} }
+func (*EvChatCreated) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{45} }
 
 func (m *EvChatCreated) GetRequestId() string {
 	if m != nil {
@@ -2256,18 +2119,122 @@ func (m *EvChatCreated) GetCreatedTime() string {
 	return ""
 }
 
+type OEChatDropped struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChatId    string `protobuf:"bytes,2,opt,name=ChatId,json=chatId" json:"ChatId"`
+	ChannelId string `protobuf:"bytes,3,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+}
+
+func (m *OEChatDropped) Reset()                    { *m = OEChatDropped{} }
+func (m *OEChatDropped) String() string            { return proto.CompactTextString(m) }
+func (*OEChatDropped) ProtoMessage()               {}
+func (*OEChatDropped) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{46} }
+
+func (m *OEChatDropped) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *OEChatDropped) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *OEChatDropped) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+type OEChatAccepted struct {
+	AccountId string `protobuf:"bytes,2,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChatId    string `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId"`
+	AgentId   string `protobuf:"bytes,4,opt,name=AgentId,json=agentId" json:"AgentId"`
+}
+
+func (m *OEChatAccepted) Reset()                    { *m = OEChatAccepted{} }
+func (m *OEChatAccepted) String() string            { return proto.CompactTextString(m) }
+func (*OEChatAccepted) ProtoMessage()               {}
+func (*OEChatAccepted) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{47} }
+
+func (m *OEChatAccepted) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *OEChatAccepted) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *OEChatAccepted) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+type OEChatStarted struct {
+	AccountId   string `protobuf:"bytes,2,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChatId      string `protobuf:"bytes,3,opt,name=ChatId,json=chatId" json:"ChatId"`
+	ChannelId   string `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	CreatedTime string `protobuf:"bytes,5,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
+}
+
+func (m *OEChatStarted) Reset()                    { *m = OEChatStarted{} }
+func (m *OEChatStarted) String() string            { return proto.CompactTextString(m) }
+func (*OEChatStarted) ProtoMessage()               {}
+func (*OEChatStarted) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{48} }
+
+func (m *OEChatStarted) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *OEChatStarted) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *OEChatStarted) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *OEChatStarted) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
 type EvChatResult struct {
-	RequestId   string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Ok          bool   `protobuf:"varint,2,opt,name=Ok,json=ok" json:"Ok,omitempty"`
-	Code        int32  `protobuf:"varint,3,opt,name=Code,json=code" json:"Code,omitempty"`
-	CreatedTime string `protobuf:"bytes,4,opt,name=CreatedTime,json=createdTime" json:"CreatedTime,omitempty"`
-	Description string `protobuf:"bytes,5,opt,name=Description,json=description" json:"Description,omitempty"`
+	RequestId   string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId"`
+	Ok          bool   `protobuf:"varint,2,opt,name=Ok,json=ok" json:"Ok"`
+	Code        int32  `protobuf:"varint,3,opt,name=Code,json=code" json:"Code"`
+	CreatedTime string `protobuf:"bytes,4,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
+	Description string `protobuf:"bytes,5,opt,name=Description,json=description" json:"Description"`
 }
 
 func (m *EvChatResult) Reset()                    { *m = EvChatResult{} }
 func (m *EvChatResult) String() string            { return proto.CompactTextString(m) }
 func (*EvChatResult) ProtoMessage()               {}
-func (*EvChatResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{48} }
+func (*EvChatResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{49} }
 
 func (m *EvChatResult) GetRequestId() string {
 	if m != nil {
@@ -2304,14 +2271,238 @@ func (m *EvChatResult) GetDescription() string {
 	return ""
 }
 
+type EvChatUserInfoRequested struct {
+	RequestId       string     `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId"`
+	ChatId          string     `protobuf:"bytes,2,opt,name=ChatId,json=chatId" json:"ChatId"`
+	AccountId       string     `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChannelId       string     `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	MessageTo       string     `protobuf:"bytes,5,opt,name=MessageTo,json=messageTo" json:"MessageTo"`
+	PageUrl         string     `protobuf:"bytes,6,opt,name=PageUrl,json=pageUrl" json:"PageUrl"`
+	PageTitle       string     `protobuf:"bytes,7,opt,name=PageTitle,json=pageTitle" json:"PageTitle"`
+	Message         string     `protobuf:"bytes,8,opt,name=Message,json=message" json:"Message"`
+	BrowserLanguage string     `protobuf:"bytes,9,opt,name=BrowserLanguage,json=browserLanguage" json:"BrowserLanguage"`
+	Language        string     `protobuf:"bytes,10,opt,name=Language,json=language" json:"Language"`
+	DeviceType      DeviceType `protobuf:"varint,11,opt,name=DeviceType,json=deviceType,enum=chat.DeviceType" json:"DeviceType"`
+	UserId          string     `protobuf:"bytes,12,opt,name=UserId,json=userId" json:"UserId"`
+	CreatedTime     string     `protobuf:"bytes,13,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
+}
+
+func (m *EvChatUserInfoRequested) Reset()                    { *m = EvChatUserInfoRequested{} }
+func (m *EvChatUserInfoRequested) String() string            { return proto.CompactTextString(m) }
+func (*EvChatUserInfoRequested) ProtoMessage()               {}
+func (*EvChatUserInfoRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{50} }
+
+func (m *EvChatUserInfoRequested) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetMessageTo() string {
+	if m != nil {
+		return m.MessageTo
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetPageUrl() string {
+	if m != nil {
+		return m.PageUrl
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetPageTitle() string {
+	if m != nil {
+		return m.PageTitle
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetBrowserLanguage() string {
+	if m != nil {
+		return m.BrowserLanguage
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetLanguage() string {
+	if m != nil {
+		return m.Language
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetDeviceType() DeviceType {
+	if m != nil {
+		return m.DeviceType
+	}
+	return DeviceType_UNKNOWN
+}
+
+func (m *EvChatUserInfoRequested) GetUserId() string {
+	if m != nil {
+		return m.UserId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoRequested) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
+type EvChatUserInfoReply struct {
+	RequestId       string     `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId"`
+	ChatId          string     `protobuf:"bytes,2,opt,name=ChatId,json=chatId" json:"ChatId"`
+	AccountId       string     `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId"`
+	ChannelId       string     `protobuf:"bytes,4,opt,name=ChannelId,json=channelId" json:"ChannelId"`
+	MessageTo       string     `protobuf:"bytes,5,opt,name=MessageTo,json=messageTo" json:"MessageTo"`
+	PageUrl         string     `protobuf:"bytes,6,opt,name=PageUrl,json=pageUrl" json:"PageUrl"`
+	PageTitle       string     `protobuf:"bytes,7,opt,name=PageTitle,json=pageTitle" json:"PageTitle"`
+	Message         string     `protobuf:"bytes,8,opt,name=Message,json=message" json:"Message"`
+	BrowserLanguage string     `protobuf:"bytes,9,opt,name=BrowserLanguage,json=browserLanguage" json:"BrowserLanguage"`
+	Language        string     `protobuf:"bytes,10,opt,name=Language,json=language" json:"Language"`
+	DeviceType      DeviceType `protobuf:"varint,11,opt,name=DeviceType,json=deviceType,enum=chat.DeviceType" json:"DeviceType"`
+	User            *UserInfo  `protobuf:"bytes,12,opt,name=User,json=user" json:"User"`
+	CreatedTime     string     `protobuf:"bytes,13,opt,name=CreatedTime,json=createdTime" json:"CreatedTime"`
+}
+
+func (m *EvChatUserInfoReply) Reset()                    { *m = EvChatUserInfoReply{} }
+func (m *EvChatUserInfoReply) String() string            { return proto.CompactTextString(m) }
+func (*EvChatUserInfoReply) ProtoMessage()               {}
+func (*EvChatUserInfoReply) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{51} }
+
+func (m *EvChatUserInfoReply) GetRequestId() string {
+	if m != nil {
+		return m.RequestId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetChatId() string {
+	if m != nil {
+		return m.ChatId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetChannelId() string {
+	if m != nil {
+		return m.ChannelId
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetMessageTo() string {
+	if m != nil {
+		return m.MessageTo
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetPageUrl() string {
+	if m != nil {
+		return m.PageUrl
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetPageTitle() string {
+	if m != nil {
+		return m.PageTitle
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetMessage() string {
+	if m != nil {
+		return m.Message
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetBrowserLanguage() string {
+	if m != nil {
+		return m.BrowserLanguage
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetLanguage() string {
+	if m != nil {
+		return m.Language
+	}
+	return ""
+}
+
+func (m *EvChatUserInfoReply) GetDeviceType() DeviceType {
+	if m != nil {
+		return m.DeviceType
+	}
+	return DeviceType_UNKNOWN
+}
+
+func (m *EvChatUserInfoReply) GetUser() *UserInfo {
+	if m != nil {
+		return m.User
+	}
+	return nil
+}
+
+func (m *EvChatUserInfoReply) GetCreatedTime() string {
+	if m != nil {
+		return m.CreatedTime
+	}
+	return ""
+}
+
 type FileTemplate struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *FileTemplate) Reset()                    { *m = FileTemplate{} }
 func (m *FileTemplate) String() string            { return proto.CompactTextString(m) }
 func (*FileTemplate) ProtoMessage()               {}
-func (*FileTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{49} }
+func (*FileTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{52} }
 
 func (m *FileTemplate) GetId() string {
 	if m != nil {
@@ -2321,15 +2512,15 @@ func (m *FileTemplate) GetId() string {
 }
 
 type QuickRepliesTemplate struct {
-	Text        string    `protobuf:"bytes,1,opt,name=Text,json=text" json:"Text,omitempty"`
-	ContentType string    `protobuf:"bytes,4,opt,name=ContentType,json=contentType" json:"ContentType,omitempty"`
-	Replies     []*Button `protobuf:"bytes,5,rep,name=Replies,json=replies" json:"Replies,omitempty"`
+	Text        string    `protobuf:"bytes,1,opt,name=Text,json=text" json:"Text"`
+	ContentType string    `protobuf:"bytes,4,opt,name=ContentType,json=contentType" json:"ContentType"`
+	Replies     []*Button `protobuf:"bytes,5,rep,name=Replies,json=replies" json:"Replies"`
 }
 
 func (m *QuickRepliesTemplate) Reset()                    { *m = QuickRepliesTemplate{} }
 func (m *QuickRepliesTemplate) String() string            { return proto.CompactTextString(m) }
 func (*QuickRepliesTemplate) ProtoMessage()               {}
-func (*QuickRepliesTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{50} }
+func (*QuickRepliesTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{53} }
 
 func (m *QuickRepliesTemplate) GetText() string {
 	if m != nil {
@@ -2353,17 +2544,17 @@ func (m *QuickRepliesTemplate) GetReplies() []*Button {
 }
 
 type GenericElement struct {
-	Title         string    `protobuf:"bytes,1,opt,name=Title,json=title" json:"Title,omitempty"`
-	ImageUrl      string    `protobuf:"bytes,2,opt,name=ImageUrl,json=imageUrl" json:"ImageUrl,omitempty"`
-	Subtitle      string    `protobuf:"bytes,3,opt,name=Subtitle,json=subtitle" json:"Subtitle,omitempty"`
-	DefaultAction *Button   `protobuf:"bytes,4,opt,name=DefaultAction,json=defaultAction" json:"DefaultAction,omitempty"`
-	Buttons       []*Button `protobuf:"bytes,5,rep,name=Buttons,json=buttons" json:"Buttons,omitempty"`
+	Title         string    `protobuf:"bytes,1,opt,name=Title,json=title" json:"Title"`
+	ImageUrl      string    `protobuf:"bytes,2,opt,name=ImageUrl,json=imageUrl" json:"ImageUrl"`
+	Subtitle      string    `protobuf:"bytes,3,opt,name=Subtitle,json=subtitle" json:"Subtitle"`
+	DefaultAction *Button   `protobuf:"bytes,4,opt,name=DefaultAction,json=defaultAction" json:"DefaultAction"`
+	Buttons       []*Button `protobuf:"bytes,5,rep,name=Buttons,json=buttons" json:"Buttons"`
 }
 
 func (m *GenericElement) Reset()                    { *m = GenericElement{} }
 func (m *GenericElement) String() string            { return proto.CompactTextString(m) }
 func (*GenericElement) ProtoMessage()               {}
-func (*GenericElement) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{51} }
+func (*GenericElement) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{54} }
 
 func (m *GenericElement) GetTitle() string {
 	if m != nil {
@@ -2401,13 +2592,13 @@ func (m *GenericElement) GetButtons() []*Button {
 }
 
 type GenericTemplate struct {
-	Elements []*GenericElement `protobuf:"bytes,1,rep,name=Elements,json=elements" json:"Elements,omitempty"`
+	Elements []*GenericElement `protobuf:"bytes,1,rep,name=Elements,json=elements" json:"Elements"`
 }
 
 func (m *GenericTemplate) Reset()                    { *m = GenericTemplate{} }
 func (m *GenericTemplate) String() string            { return proto.CompactTextString(m) }
 func (*GenericTemplate) ProtoMessage()               {}
-func (*GenericTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{52} }
+func (*GenericTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{55} }
 
 func (m *GenericTemplate) GetElements() []*GenericElement {
 	if m != nil {
@@ -2417,13 +2608,13 @@ func (m *GenericTemplate) GetElements() []*GenericElement {
 }
 
 type Button struct {
-	Type string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type,omitempty"`
+	Type string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type"`
 }
 
 func (m *Button) Reset()                    { *m = Button{} }
 func (m *Button) String() string            { return proto.CompactTextString(m) }
 func (*Button) ProtoMessage()               {}
-func (*Button) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{53} }
+func (*Button) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{56} }
 
 func (m *Button) GetType() string {
 	if m != nil {
@@ -2433,15 +2624,15 @@ func (m *Button) GetType() string {
 }
 
 type UrlButton struct {
-	Type  string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type,omitempty"`
-	Title string `protobuf:"bytes,2,opt,name=Title,json=title" json:"Title,omitempty"`
-	Url   string `protobuf:"bytes,3,opt,name=Url,json=url" json:"Url,omitempty"`
+	Type  string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type"`
+	Title string `protobuf:"bytes,2,opt,name=Title,json=title" json:"Title"`
+	Url   string `protobuf:"bytes,3,opt,name=Url,json=url" json:"Url"`
 }
 
 func (m *UrlButton) Reset()                    { *m = UrlButton{} }
 func (m *UrlButton) String() string            { return proto.CompactTextString(m) }
 func (*UrlButton) ProtoMessage()               {}
-func (*UrlButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{54} }
+func (*UrlButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{57} }
 
 func (m *UrlButton) GetType() string {
 	if m != nil {
@@ -2465,16 +2656,16 @@ func (m *UrlButton) GetUrl() string {
 }
 
 type PostbackButton struct {
-	Type     string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type,omitempty"`
-	Title    string `protobuf:"bytes,2,opt,name=Title,json=title" json:"Title,omitempty"`
-	Payload  string `protobuf:"bytes,3,opt,name=Payload,json=payload" json:"Payload,omitempty"`
-	ImageUrl string `protobuf:"bytes,4,opt,name=ImageUrl,json=imageUrl" json:"ImageUrl,omitempty"`
+	Type     string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type"`
+	Title    string `protobuf:"bytes,2,opt,name=Title,json=title" json:"Title"`
+	Payload  string `protobuf:"bytes,3,opt,name=Payload,json=payload" json:"Payload"`
+	ImageUrl string `protobuf:"bytes,4,opt,name=ImageUrl,json=imageUrl" json:"ImageUrl"`
 }
 
 func (m *PostbackButton) Reset()                    { *m = PostbackButton{} }
 func (m *PostbackButton) String() string            { return proto.CompactTextString(m) }
 func (*PostbackButton) ProtoMessage()               {}
-func (*PostbackButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{55} }
+func (*PostbackButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{58} }
 
 func (m *PostbackButton) GetType() string {
 	if m != nil {
@@ -2510,7 +2701,7 @@ type CallButton struct {
 func (m *CallButton) Reset()                    { *m = CallButton{} }
 func (m *CallButton) String() string            { return proto.CompactTextString(m) }
 func (*CallButton) ProtoMessage()               {}
-func (*CallButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{56} }
+func (*CallButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{59} }
 
 type LoginButton struct {
 }
@@ -2518,19 +2709,19 @@ type LoginButton struct {
 func (m *LoginButton) Reset()                    { *m = LoginButton{} }
 func (m *LoginButton) String() string            { return proto.CompactTextString(m) }
 func (*LoginButton) ProtoMessage()               {}
-func (*LoginButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{57} }
+func (*LoginButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{60} }
 
 type EventButton struct {
-	Type     string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type,omitempty"`
-	Title    string `protobuf:"bytes,2,opt,name=Title,json=title" json:"Title,omitempty"`
-	ImageUrl string `protobuf:"bytes,4,opt,name=ImageUrl,json=imageUrl" json:"ImageUrl,omitempty"`
-	Event    string `protobuf:"bytes,3,opt,name=Event,json=event" json:"Event,omitempty"`
+	Type     string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type"`
+	Title    string `protobuf:"bytes,2,opt,name=Title,json=title" json:"Title"`
+	ImageUrl string `protobuf:"bytes,4,opt,name=ImageUrl,json=imageUrl" json:"ImageUrl"`
+	Event    string `protobuf:"bytes,3,opt,name=Event,json=event" json:"Event"`
 }
 
 func (m *EventButton) Reset()                    { *m = EventButton{} }
 func (m *EventButton) String() string            { return proto.CompactTextString(m) }
 func (*EventButton) ProtoMessage()               {}
-func (*EventButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{58} }
+func (*EventButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{61} }
 
 func (m *EventButton) GetType() string {
 	if m != nil {
@@ -2561,13 +2752,13 @@ func (m *EventButton) GetEvent() string {
 }
 
 type SurveyForm struct {
-	Placeholder string `protobuf:"bytes,1,opt,name=Placeholder,json=placeholder" json:"Placeholder,omitempty"`
+	Placeholder string `protobuf:"bytes,1,opt,name=Placeholder,json=placeholder" json:"Placeholder"`
 }
 
 func (m *SurveyForm) Reset()                    { *m = SurveyForm{} }
 func (m *SurveyForm) String() string            { return proto.CompactTextString(m) }
 func (*SurveyForm) ProtoMessage()               {}
-func (*SurveyForm) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{59} }
+func (*SurveyForm) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{62} }
 
 func (m *SurveyForm) GetPlaceholder() string {
 	if m != nil {
@@ -2577,13 +2768,13 @@ func (m *SurveyForm) GetPlaceholder() string {
 }
 
 type RateFormTemplate struct {
-	Type string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type,omitempty"`
+	Type string `protobuf:"bytes,1,opt,name=Type,json=type" json:"Type"`
 }
 
 func (m *RateFormTemplate) Reset()                    { *m = RateFormTemplate{} }
 func (m *RateFormTemplate) String() string            { return proto.CompactTextString(m) }
 func (*RateFormTemplate) ProtoMessage()               {}
-func (*RateFormTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{60} }
+func (*RateFormTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{63} }
 
 func (m *RateFormTemplate) GetType() string {
 	if m != nil {
@@ -2593,12 +2784,17 @@ func (m *RateFormTemplate) GetType() string {
 }
 
 func init() {
+	proto.RegisterType((*UnassignedChat)(nil), "chat.UnassignedChat")
+	proto.RegisterType((*UnassignedChats)(nil), "chat.UnassignedChats")
+	proto.RegisterType((*ChatId)(nil), "chat.ChatId")
+	proto.RegisterType((*GroupId)(nil), "chat.GroupId")
 	proto.RegisterType((*Permission)(nil), "chat.Permission")
 	proto.RegisterType((*AgentId)(nil), "chat.AgentId")
 	proto.RegisterType((*AgentInGroup)(nil), "chat.AgentInGroup")
 	proto.RegisterType((*AgentStatus)(nil), "chat.AgentStatus")
 	proto.RegisterType((*Account)(nil), "chat.Account")
 	proto.RegisterType((*Bool)(nil), "chat.Bool")
+	proto.RegisterType((*RuleId)(nil), "chat.RuleId")
 	proto.RegisterType((*Id)(nil), "chat.Id")
 	proto.RegisterType((*Empty)(nil), "chat.Empty")
 	proto.RegisterType((*Rule)(nil), "chat.Rule")
@@ -2612,12 +2808,13 @@ func init() {
 	proto.RegisterType((*Ids)(nil), "chat.Ids")
 	proto.RegisterType((*User)(nil), "chat.User")
 	proto.RegisterType((*Chat)(nil), "chat.Chat")
-	proto.RegisterType((*ChatsWithEvents)(nil), "chat.ChatsWithEvents")
-	proto.RegisterType((*ChatWithEvents)(nil), "chat.ChatWithEvents")
+	proto.RegisterType((*ChatPreviews)(nil), "chat.ChatPreviews")
+	proto.RegisterType((*ChatPreview)(nil), "chat.ChatPreview")
 	proto.RegisterType((*Attachment)(nil), "chat.Attachment")
 	proto.RegisterType((*ChatEvents)(nil), "chat.ChatEvents")
 	proto.RegisterType((*ChatEvent)(nil), "chat.ChatEvent")
 	proto.RegisterType((*UserInfo)(nil), "chat.UserInfo")
+	proto.RegisterType((*ChatRequestAck)(nil), "chat.ChatRequestAck")
 	proto.RegisterType((*ChatRequest)(nil), "chat.ChatRequest")
 	proto.RegisterType((*Chats)(nil), "chat.Chats")
 	proto.RegisterType((*ChatStart)(nil), "chat.ChatStart")
@@ -2630,18 +2827,15 @@ func init() {
 	proto.RegisterType((*UsersUnread)(nil), "chat.UsersUnread")
 	proto.RegisterType((*ListChatEventRequest)(nil), "chat.ListChatEventRequest")
 	proto.RegisterType((*ListChatsByUserRequest)(nil), "chat.ListChatsByUserRequest")
-	proto.RegisterType((*EvChatSent)(nil), "chat.EvChatSent")
-	proto.RegisterType((*EvChatAssigned)(nil), "chat.EvChatAssigned")
-	proto.RegisterType((*EvChatWaiting)(nil), "chat.EvChatWaiting")
-	proto.RegisterType((*EvChatRequested)(nil), "chat.EvChatRequested")
-	proto.RegisterType((*EvChatRequestedReply)(nil), "chat.EvChatRequestedReply")
-	proto.RegisterType((*EvChatStartRequested)(nil), "chat.EvChatStartRequested")
-	proto.RegisterType((*EvChatStartRequestedReply)(nil), "chat.EvChatStartRequestedReply")
-	proto.RegisterType((*EvChatSendRequested)(nil), "chat.EvChatSendRequested")
-	proto.RegisterType((*EvChatSendRequestedReply)(nil), "chat.EvChatSendRequestedReply")
-	proto.RegisterType((*EvChatAcceptRequested)(nil), "chat.EvChatAcceptRequested")
+	proto.RegisterType((*OEChatAssigned)(nil), "chat.OEChatAssigned")
+	proto.RegisterType((*OEChatWaiting)(nil), "chat.OEChatWaiting")
 	proto.RegisterType((*EvChatCreated)(nil), "chat.EvChatCreated")
+	proto.RegisterType((*OEChatDropped)(nil), "chat.OEChatDropped")
+	proto.RegisterType((*OEChatAccepted)(nil), "chat.OEChatAccepted")
+	proto.RegisterType((*OEChatStarted)(nil), "chat.OEChatStarted")
 	proto.RegisterType((*EvChatResult)(nil), "chat.EvChatResult")
+	proto.RegisterType((*EvChatUserInfoRequested)(nil), "chat.EvChatUserInfoRequested")
+	proto.RegisterType((*EvChatUserInfoReply)(nil), "chat.EvChatUserInfoReply")
 	proto.RegisterType((*FileTemplate)(nil), "chat.FileTemplate")
 	proto.RegisterType((*QuickRepliesTemplate)(nil), "chat.QuickRepliesTemplate")
 	proto.RegisterType((*GenericElement)(nil), "chat.GenericElement")
@@ -2679,17 +2873,19 @@ type ChatMgrClient interface {
 	// request chat from user
 	// fire EvChatWaiting, EvChatCreated
 	Request(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*Id, error)
+	// fire EvAssigned
+	AckRequest(ctx context.Context, in *ChatRequestAck, opts ...grpc.CallOption) (*Empty, error)
 	// start chat from agent
 	// fire EvChatCreated
 	Start(ctx context.Context, in *ChatStart, opts ...grpc.CallOption) (*Id, error)
 	// QUERRIER
 	// List chats for specific user
-	ListChatsByUser(ctx context.Context, in *ListChatsByUserRequest, opts ...grpc.CallOption) (*ChatsWithEvents, error)
+	ListChatsByUser(ctx context.Context, in *ListChatsByUserRequest, opts ...grpc.CallOption) (*ChatPreviews, error)
 	ListChatEvents(ctx context.Context, in *ListChatEventRequest, opts ...grpc.CallOption) (*ChatEvents, error)
 	// Unassigned list
-	ListUnassignedChats(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Chats, error)
+	ListUnassignedChats(ctx context.Context, in *Id, opts ...grpc.CallOption) (*UnassignedChats, error)
 	AcceptUnassignedChat(ctx context.Context, in *AcceptRequest, opts ...grpc.CallOption) (*Bool, error)
-	Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Chat, error)
+	Read(ctx context.Context, in *ChatId, opts ...grpc.CallOption) (*Chat, error)
 }
 
 type chatMgrClient struct {
@@ -2718,6 +2914,15 @@ func (c *chatMgrClient) Request(ctx context.Context, in *ChatRequest, opts ...gr
 	return out, nil
 }
 
+func (c *chatMgrClient) AckRequest(ctx context.Context, in *ChatRequestAck, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := grpc.Invoke(ctx, "/chat.ChatMgr/AckRequest", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *chatMgrClient) Start(ctx context.Context, in *ChatStart, opts ...grpc.CallOption) (*Id, error) {
 	out := new(Id)
 	err := grpc.Invoke(ctx, "/chat.ChatMgr/Start", in, out, c.cc, opts...)
@@ -2727,8 +2932,8 @@ func (c *chatMgrClient) Start(ctx context.Context, in *ChatStart, opts ...grpc.C
 	return out, nil
 }
 
-func (c *chatMgrClient) ListChatsByUser(ctx context.Context, in *ListChatsByUserRequest, opts ...grpc.CallOption) (*ChatsWithEvents, error) {
-	out := new(ChatsWithEvents)
+func (c *chatMgrClient) ListChatsByUser(ctx context.Context, in *ListChatsByUserRequest, opts ...grpc.CallOption) (*ChatPreviews, error) {
+	out := new(ChatPreviews)
 	err := grpc.Invoke(ctx, "/chat.ChatMgr/ListChatsByUser", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -2745,8 +2950,8 @@ func (c *chatMgrClient) ListChatEvents(ctx context.Context, in *ListChatEventReq
 	return out, nil
 }
 
-func (c *chatMgrClient) ListUnassignedChats(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Chats, error) {
-	out := new(Chats)
+func (c *chatMgrClient) ListUnassignedChats(ctx context.Context, in *Id, opts ...grpc.CallOption) (*UnassignedChats, error) {
+	out := new(UnassignedChats)
 	err := grpc.Invoke(ctx, "/chat.ChatMgr/ListUnassignedChats", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
@@ -2763,7 +2968,7 @@ func (c *chatMgrClient) AcceptUnassignedChat(ctx context.Context, in *AcceptRequ
 	return out, nil
 }
 
-func (c *chatMgrClient) Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Chat, error) {
+func (c *chatMgrClient) Read(ctx context.Context, in *ChatId, opts ...grpc.CallOption) (*Chat, error) {
 	out := new(Chat)
 	err := grpc.Invoke(ctx, "/chat.ChatMgr/Read", in, out, c.cc, opts...)
 	if err != nil {
@@ -2781,17 +2986,19 @@ type ChatMgrServer interface {
 	// request chat from user
 	// fire EvChatWaiting, EvChatCreated
 	Request(context.Context, *ChatRequest) (*Id, error)
+	// fire EvAssigned
+	AckRequest(context.Context, *ChatRequestAck) (*Empty, error)
 	// start chat from agent
 	// fire EvChatCreated
 	Start(context.Context, *ChatStart) (*Id, error)
 	// QUERRIER
 	// List chats for specific user
-	ListChatsByUser(context.Context, *ListChatsByUserRequest) (*ChatsWithEvents, error)
+	ListChatsByUser(context.Context, *ListChatsByUserRequest) (*ChatPreviews, error)
 	ListChatEvents(context.Context, *ListChatEventRequest) (*ChatEvents, error)
 	// Unassigned list
-	ListUnassignedChats(context.Context, *Id) (*Chats, error)
+	ListUnassignedChats(context.Context, *Id) (*UnassignedChats, error)
 	AcceptUnassignedChat(context.Context, *AcceptRequest) (*Bool, error)
-	Read(context.Context, *Id) (*Chat, error)
+	Read(context.Context, *ChatId) (*Chat, error)
 }
 
 func RegisterChatMgrServer(s *grpc.Server, srv ChatMgrServer) {
@@ -2830,6 +3037,24 @@ func _ChatMgr_Request_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ChatMgrServer).Request(ctx, req.(*ChatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ChatMgr_AckRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChatRequestAck)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatMgrServer).AckRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/chat.ChatMgr/AckRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatMgrServer).AckRequest(ctx, req.(*ChatRequestAck))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2925,7 +3150,7 @@ func _ChatMgr_AcceptUnassignedChat_Handler(srv interface{}, ctx context.Context,
 }
 
 func _ChatMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(ChatId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2937,7 +3162,7 @@ func _ChatMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interf
 		FullMethod: "/chat.ChatMgr/Read",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatMgrServer).Read(ctx, req.(*Id))
+		return srv.(ChatMgrServer).Read(ctx, req.(*ChatId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2953,6 +3178,10 @@ var _ChatMgr_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Request",
 			Handler:    _ChatMgr_Request_Handler,
+		},
+		{
+			MethodName: "AckRequest",
+			Handler:    _ChatMgr_AckRequest_Handler,
 		},
 		{
 			MethodName: "Start",
@@ -2987,11 +3216,11 @@ var _ChatMgr_serviceDesc = grpc.ServiceDesc{
 
 type AccountMgrClient interface {
 	UpsertAccount(ctx context.Context, in *Account, opts ...grpc.CallOption) (*Empty, error)
-	UpdateAgent(ctx context.Context, in *AgentStatus, opts ...grpc.CallOption) (*Empty, error)
+	UpsertAgent(ctx context.Context, in *AgentStatus, opts ...grpc.CallOption) (*Empty, error)
 	DeleteAgent(ctx context.Context, in *AgentId, opts ...grpc.CallOption) (*Empty, error)
 	AddAgentToGroup(ctx context.Context, in *AgentInGroup, opts ...grpc.CallOption) (*Empty, error)
 	RemoveAgentFromGroup(ctx context.Context, in *AgentInGroup, opts ...grpc.CallOption) (*Empty, error)
-	DeleteGroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	DeleteGroup(ctx context.Context, in *GroupId, opts ...grpc.CallOption) (*Empty, error)
 	UpdatePermission(ctx context.Context, in *Permission, opts ...grpc.CallOption) (*Empty, error)
 }
 
@@ -3012,9 +3241,9 @@ func (c *accountMgrClient) UpsertAccount(ctx context.Context, in *Account, opts 
 	return out, nil
 }
 
-func (c *accountMgrClient) UpdateAgent(ctx context.Context, in *AgentStatus, opts ...grpc.CallOption) (*Empty, error) {
+func (c *accountMgrClient) UpsertAgent(ctx context.Context, in *AgentStatus, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := grpc.Invoke(ctx, "/chat.AccountMgr/UpdateAgent", in, out, c.cc, opts...)
+	err := grpc.Invoke(ctx, "/chat.AccountMgr/UpsertAgent", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3048,7 +3277,7 @@ func (c *accountMgrClient) RemoveAgentFromGroup(ctx context.Context, in *AgentIn
 	return out, nil
 }
 
-func (c *accountMgrClient) DeleteGroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *accountMgrClient) DeleteGroup(ctx context.Context, in *GroupId, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := grpc.Invoke(ctx, "/chat.AccountMgr/DeleteGroup", in, out, c.cc, opts...)
 	if err != nil {
@@ -3070,11 +3299,11 @@ func (c *accountMgrClient) UpdatePermission(ctx context.Context, in *Permission,
 
 type AccountMgrServer interface {
 	UpsertAccount(context.Context, *Account) (*Empty, error)
-	UpdateAgent(context.Context, *AgentStatus) (*Empty, error)
+	UpsertAgent(context.Context, *AgentStatus) (*Empty, error)
 	DeleteAgent(context.Context, *AgentId) (*Empty, error)
 	AddAgentToGroup(context.Context, *AgentInGroup) (*Empty, error)
 	RemoveAgentFromGroup(context.Context, *AgentInGroup) (*Empty, error)
-	DeleteGroup(context.Context, *Id) (*Empty, error)
+	DeleteGroup(context.Context, *GroupId) (*Empty, error)
 	UpdatePermission(context.Context, *Permission) (*Empty, error)
 }
 
@@ -3100,20 +3329,20 @@ func _AccountMgr_UpsertAccount_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_UpdateAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AccountMgr_UpsertAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AgentStatus)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountMgrServer).UpdateAgent(ctx, in)
+		return srv.(AccountMgrServer).UpsertAgent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/chat.AccountMgr/UpdateAgent",
+		FullMethod: "/chat.AccountMgr/UpsertAgent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).UpdateAgent(ctx, req.(*AgentStatus))
+		return srv.(AccountMgrServer).UpsertAgent(ctx, req.(*AgentStatus))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3173,7 +3402,7 @@ func _AccountMgr_RemoveAgentFromGroup_Handler(srv interface{}, ctx context.Conte
 }
 
 func _AccountMgr_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(GroupId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3185,7 +3414,7 @@ func _AccountMgr_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/chat.AccountMgr/DeleteGroup",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).DeleteGroup(ctx, req.(*Id))
+		return srv.(AccountMgrServer).DeleteGroup(ctx, req.(*GroupId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3217,8 +3446,8 @@ var _AccountMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _AccountMgr_UpsertAccount_Handler,
 		},
 		{
-			MethodName: "UpdateAgent",
-			Handler:    _AccountMgr_UpdateAgent_Handler,
+			MethodName: "UpsertAgent",
+			Handler:    _AccountMgr_UpsertAgent_Handler,
 		},
 		{
 			MethodName: "DeleteAgent",
@@ -3250,8 +3479,8 @@ var _AccountMgr_serviceDesc = grpc.ServiceDesc{
 type RouterClient interface {
 	Update(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Empty, error)
 	Create(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Id, error)
-	Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Rule, error)
+	Delete(ctx context.Context, in *RuleId, opts ...grpc.CallOption) (*Empty, error)
+	Read(ctx context.Context, in *RuleId, opts ...grpc.CallOption) (*Rule, error)
 	// list ALL rules by account, limit 300
 	List(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Route, error)
 }
@@ -3282,7 +3511,7 @@ func (c *routerClient) Create(ctx context.Context, in *Rule, opts ...grpc.CallOp
 	return out, nil
 }
 
-func (c *routerClient) Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *routerClient) Delete(ctx context.Context, in *RuleId, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := grpc.Invoke(ctx, "/chat.Router/Delete", in, out, c.cc, opts...)
 	if err != nil {
@@ -3291,7 +3520,7 @@ func (c *routerClient) Delete(ctx context.Context, in *Id, opts ...grpc.CallOpti
 	return out, nil
 }
 
-func (c *routerClient) Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Rule, error) {
+func (c *routerClient) Read(ctx context.Context, in *RuleId, opts ...grpc.CallOption) (*Rule, error) {
 	out := new(Rule)
 	err := grpc.Invoke(ctx, "/chat.Router/Read", in, out, c.cc, opts...)
 	if err != nil {
@@ -3314,8 +3543,8 @@ func (c *routerClient) List(ctx context.Context, in *Id, opts ...grpc.CallOption
 type RouterServer interface {
 	Update(context.Context, *Rule) (*Empty, error)
 	Create(context.Context, *Rule) (*Id, error)
-	Delete(context.Context, *Id) (*Empty, error)
-	Read(context.Context, *Id) (*Rule, error)
+	Delete(context.Context, *RuleId) (*Empty, error)
+	Read(context.Context, *RuleId) (*Rule, error)
 	// list ALL rules by account, limit 300
 	List(context.Context, *Id) (*Route, error)
 }
@@ -3361,7 +3590,7 @@ func _Router_Create_Handler(srv interface{}, ctx context.Context, dec func(inter
 }
 
 func _Router_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(RuleId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3373,13 +3602,13 @@ func _Router_Delete_Handler(srv interface{}, ctx context.Context, dec func(inter
 		FullMethod: "/chat.Router/Delete",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RouterServer).Delete(ctx, req.(*Id))
+		return srv.(RouterServer).Delete(ctx, req.(*RuleId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Router_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(RuleId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3391,7 +3620,7 @@ func _Router_Read_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		FullMethod: "/chat.Router/Read",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RouterServer).Read(ctx, req.(*Id))
+		return srv.(RouterServer).Read(ctx, req.(*RuleId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3446,186 +3675,189 @@ var _Router_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("chat/chat.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 2887 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xec, 0x3a, 0x3d, 0x73, 0xe3, 0xd6,
-	0xb5, 0x22, 0xbe, 0x79, 0x28, 0x52, 0xd8, 0xbb, 0xf2, 0x1a, 0xe6, 0xac, 0xf7, 0xe9, 0xe1, 0x79,
-	0xd6, 0x6b, 0xbd, 0xe7, 0x95, 0x47, 0x7e, 0x3b, 0x13, 0x67, 0x26, 0x99, 0x50, 0x12, 0x57, 0xa6,
-	0x2d, 0x51, 0x0a, 0x48, 0xda, 0x89, 0x53, 0x6c, 0x40, 0xe0, 0x2e, 0x85, 0x15, 0x08, 0x30, 0xb8,
-	0x97, 0xf2, 0xca, 0x93, 0x22, 0x55, 0xca, 0x34, 0x76, 0xba, 0x14, 0xa9, 0x93, 0x32, 0x5d, 0xfe,
-	0x41, 0xfe, 0x40, 0xfe, 0x42, 0x8a, 0x14, 0x49, 0x97, 0x36, 0x73, 0x3f, 0x00, 0x02, 0x94, 0xb4,
-	0x92, 0xec, 0x2a, 0x4e, 0x1a, 0x09, 0xe7, 0xe3, 0xde, 0x73, 0xee, 0xf9, 0xc6, 0x05, 0x61, 0x2d,
-	0x38, 0xf1, 0xe9, 0x16, 0xfb, 0xf3, 0x78, 0x96, 0xa5, 0x34, 0x45, 0x1a, 0x7b, 0x6e, 0x3f, 0x19,
-	0x47, 0x74, 0x3c, 0x0f, 0x4e, 0x31, 0x7d, 0x9c, 0x66, 0x93, 0x2d, 0x32, 0x1f, 0x47, 0x5f, 0x6c,
-	0x11, 0x9c, 0x9d, 0x45, 0x01, 0x26, 0x33, 0x1c, 0x6c, 0x71, 0xe6, 0x2d, 0x7f, 0x4e, 0x4f, 0xf8,
-	0x1f, 0xb1, 0xd8, 0x7d, 0x01, 0x70, 0x8c, 0xb3, 0x69, 0x44, 0x48, 0x94, 0x26, 0xe8, 0x3e, 0xd4,
-	0x3b, 0x41, 0x90, 0xce, 0x13, 0xda, 0x0b, 0x9d, 0xda, 0x46, 0xed, 0x51, 0xdd, 0xab, 0xfb, 0x39,
-	0x02, 0x39, 0x60, 0x76, 0x26, 0x98, 0xd3, 0x14, 0x4e, 0x33, 0x7d, 0x01, 0xa2, 0xb7, 0xc0, 0x38,
-	0xc4, 0xf4, 0x24, 0x0d, 0x1d, 0x75, 0xa3, 0xf6, 0xa8, 0xb1, 0xbd, 0xfa, 0x98, 0x8b, 0x10, 0x38,
-	0xcf, 0x98, 0xf2, 0xff, 0x6e, 0xa7, 0x58, 0xff, 0x75, 0x05, 0xb9, 0x3f, 0x85, 0x55, 0x41, 0x49,
-	0xf6, 0xb3, 0x74, 0x3e, 0xfb, 0xda, 0x0a, 0x3b, 0x60, 0xf2, 0x0d, 0x7a, 0x42, 0xe3, 0xba, 0x67,
-	0x4e, 0x04, 0xe8, 0xfa, 0xd0, 0xe0, 0x6b, 0x06, 0xd4, 0xa7, 0x73, 0xf2, 0xb5, 0x05, 0xb4, 0xc1,
-	0xea, 0x91, 0x4e, 0x40, 0xa3, 0x33, 0xcc, 0x25, 0x58, 0x9e, 0x15, 0x49, 0xd8, 0x7d, 0x02, 0xa6,
-	0xdc, 0x13, 0xb5, 0x40, 0x29, 0xf6, 0x55, 0x22, 0xbe, 0xec, 0xd0, 0x7f, 0xe9, 0xcd, 0x63, 0x4c,
-	0xf8, 0x8e, 0xba, 0x67, 0x4d, 0x25, 0xec, 0xb6, 0x41, 0xdb, 0x49, 0xd3, 0x18, 0x21, 0xf1, 0x9f,
-	0xaf, 0xb2, 0x3c, 0x6d, 0x9c, 0xa6, 0xb1, 0xbb, 0xce, 0xf6, 0x59, 0xde, 0xcd, 0x35, 0x41, 0xef,
-	0x4e, 0x67, 0xf4, 0xdc, 0xfd, 0x52, 0x01, 0x8d, 0x6d, 0x72, 0x41, 0x5e, 0xe5, 0x78, 0xca, 0xf2,
-	0xf1, 0xda, 0x60, 0x1d, 0x67, 0x51, 0x9a, 0x45, 0xf4, 0x5c, 0x9a, 0xc9, 0x9a, 0x49, 0x18, 0xbd,
-	0x07, 0xd6, 0x80, 0x66, 0x3e, 0xc5, 0x93, 0x73, 0x47, 0xdb, 0xa8, 0x3d, 0x6a, 0x6d, 0xaf, 0x3f,
-	0xe6, 0x41, 0xd9, 0x21, 0x24, 0x9a, 0x24, 0x39, 0xcd, 0xb3, 0x88, 0x7c, 0xe2, 0xb2, 0x38, 0x6d,
-	0x98, 0x12, 0x47, 0xdf, 0x50, 0xb9, 0xac, 0x1c, 0x81, 0xb6, 0x00, 0x76, 0xd3, 0x24, 0x8c, 0x68,
-	0x94, 0x26, 0xc4, 0x31, 0x36, 0xd4, 0x47, 0x8d, 0xed, 0x35, 0xb1, 0x63, 0x81, 0xf7, 0x20, 0x28,
-	0x58, 0xd0, 0x03, 0x80, 0x1e, 0xd9, 0x8b, 0x88, 0x3f, 0x8e, 0x71, 0xe8, 0x98, 0xdc, 0x18, 0x10,
-	0x15, 0x18, 0xb4, 0x01, 0x8d, 0xdd, 0x0c, 0xfb, 0x14, 0x87, 0xc3, 0x68, 0x8a, 0x1d, 0x8b, 0xeb,
-	0xdf, 0x08, 0x16, 0x28, 0xf7, 0x73, 0xa8, 0x17, 0x5b, 0xa3, 0x87, 0xa0, 0x7d, 0x94, 0x46, 0x09,
-	0xb7, 0x4d, 0x6b, 0x1b, 0x09, 0xc9, 0x0c, 0x73, 0x34, 0xc3, 0x99, 0x4f, 0xd3, 0xcc, 0xd3, 0x5e,
-	0xa4, 0x51, 0x82, 0x6c, 0x50, 0x3f, 0xc6, 0xe7, 0xd2, 0x56, 0xea, 0x29, 0x3e, 0x67, 0x56, 0xca,
-	0x79, 0x72, 0x2b, 0xa5, 0x12, 0x46, 0xeb, 0xa0, 0x7f, 0xe2, 0xc7, 0x73, 0xcc, 0x4d, 0x54, 0xf7,
-	0xf4, 0x33, 0x06, 0xb8, 0xef, 0x80, 0xee, 0xa5, 0x73, 0x8a, 0xd1, 0x06, 0xe8, 0xc2, 0xd7, 0x35,
-	0x7e, 0x5e, 0x10, 0x52, 0x19, 0xca, 0xd3, 0x33, 0xee, 0x74, 0x02, 0x0d, 0xce, 0xea, 0x61, 0x32,
-	0x8f, 0x29, 0xba, 0x07, 0x06, 0xa3, 0x16, 0x3e, 0x34, 0x32, 0x0e, 0x55, 0xbc, 0xa1, 0xde, 0xc8,
-	0x1b, 0x6d, 0xb0, 0x64, 0xe8, 0x12, 0x47, 0xe3, 0xce, 0xb0, 0x64, 0xec, 0x12, 0xf7, 0xff, 0xc0,
-	0xe6, 0xd9, 0xb1, 0x87, 0x63, 0x4c, 0x71, 0xf7, 0x0c, 0x27, 0xb4, 0x9c, 0x31, 0xb5, 0x6a, 0xc6,
-	0x7c, 0x24, 0xb9, 0x47, 0xb3, 0xd0, 0xbf, 0x96, 0x9b, 0x45, 0xc1, 0x21, 0x9e, 0x8e, 0x71, 0xc6,
-	0x04, 0x2b, 0x22, 0x0a, 0xa6, 0x39, 0xc2, 0x7d, 0x17, 0xee, 0x70, 0xad, 0x84, 0xe4, 0xb0, 0xd8,
-	0x2c, 0xcf, 0xb2, 0x5a, 0xb5, 0x1c, 0xbc, 0x00, 0x9b, 0x53, 0x96, 0x44, 0x5f, 0xce, 0x5d, 0xc9,
-	0x49, 0xa5, 0x9a, 0x93, 0x2c, 0x5a, 0x7a, 0x64, 0x37, 0x4d, 0x9e, 0x47, 0xd9, 0x14, 0x87, 0x32,
-	0x65, 0x1b, 0xd1, 0x02, 0xe5, 0xbe, 0x0e, 0x6a, 0x2f, 0x24, 0xcc, 0xff, 0x4c, 0xf3, 0x1a, 0xd7,
-	0x5c, 0x8d, 0x42, 0xe2, 0x7e, 0x06, 0xda, 0x88, 0xe0, 0xec, 0x42, 0x6e, 0xb9, 0xa0, 0x0d, 0xcf,
-	0x67, 0x58, 0x66, 0x47, 0x4b, 0xf8, 0x83, 0x71, 0x32, 0xac, 0xa7, 0xd1, 0xf3, 0x19, 0x66, 0x41,
-	0x7c, 0xe0, 0x13, 0x3a, 0xc0, 0x38, 0xe9, 0x85, 0x8e, 0xce, 0xd7, 0x42, 0x5c, 0x60, 0xdc, 0x3f,
-	0xd7, 0x40, 0xdb, 0x3d, 0xf1, 0xe9, 0x2d, 0x13, 0x77, 0x29, 0xf6, 0xd5, 0x0b, 0xb1, 0xcf, 0x02,
-	0xf3, 0x80, 0xd3, 0x64, 0x60, 0xc6, 0x39, 0xf6, 0x47, 0x1c, 0x2b, 0x34, 0xd1, 0x5f, 0x72, 0xec,
-	0x06, 0xe8, 0x4c, 0xed, 0x3c, 0x2b, 0x61, 0x71, 0x12, 0x4f, 0x9f, 0x33, 0x02, 0xd3, 0x66, 0xf7,
-	0xc4, 0x4f, 0x12, 0x1c, 0xf7, 0x42, 0xa7, 0x2e, 0xb4, 0x09, 0x72, 0x04, 0x2b, 0x58, 0x43, 0x7f,
-	0x42, 0x1c, 0xe0, 0x36, 0xd3, 0xa8, 0x3f, 0x21, 0xee, 0xf7, 0x60, 0x8d, 0x9d, 0x8b, 0x7c, 0x1a,
-	0xd1, 0x13, 0xee, 0x37, 0x82, 0x36, 0x41, 0xe7, 0x28, 0x99, 0x0c, 0x32, 0x80, 0x19, 0x6a, 0xc1,
-	0xe4, 0xe9, 0x0c, 0x49, 0xdc, 0x1f, 0x43, 0xab, 0x4a, 0x40, 0x0f, 0x84, 0xa1, 0xb8, 0x89, 0x0a,
-	0x1d, 0x19, 0xc6, 0xe3, 0xfd, 0x11, 0xbd, 0x0d, 0x86, 0xe0, 0xe4, 0x41, 0xb7, 0xa8, 0x2d, 0x27,
-	0x3e, 0xe5, 0x78, 0xcf, 0xc0, 0x9c, 0xec, 0x7e, 0x17, 0xa0, 0x43, 0xa9, 0x1f, 0x9c, 0x4c, 0x59,
-	0x34, 0x21, 0xe9, 0x44, 0x61, 0x79, 0xe1, 0x34, 0x07, 0xcc, 0x63, 0xff, 0x3c, 0x4e, 0xfd, 0xa2,
-	0xea, 0xcf, 0x04, 0xe8, 0x3e, 0x01, 0x28, 0x36, 0x24, 0x25, 0x91, 0xb5, 0x57, 0x8b, 0xfc, 0x9d,
-	0xc2, 0xed, 0x27, 0xb0, 0x17, 0x5c, 0xfd, 0xb6, 0x54, 0x41, 0xe1, 0x71, 0x74, 0x77, 0x69, 0x93,
-	0x52, 0x30, 0xdd, 0x03, 0x83, 0xa1, 0x8b, 0x9e, 0x66, 0x04, 0x1c, 0x5a, 0x8e, 0x06, 0xfd, 0x62,
-	0x34, 0xb4, 0xc1, 0x1a, 0xe0, 0x24, 0x64, 0x39, 0xe8, 0x18, 0xa2, 0x84, 0x11, 0x09, 0xa3, 0xc7,
-	0x00, 0x82, 0xc6, 0x95, 0x30, 0x2f, 0x0d, 0x66, 0x20, 0x05, 0x07, 0xb7, 0x18, 0x7e, 0x49, 0x65,
-	0xc1, 0xd5, 0x28, 0x7e, 0xc9, 0xcb, 0xd6, 0xd3, 0x34, 0x9b, 0xfa, 0x54, 0x06, 0x87, 0xf1, 0x9c,
-	0x43, 0x68, 0x1b, 0x1a, 0x0b, 0x5b, 0x8b, 0x00, 0x69, 0x6c, 0xdb, 0xb2, 0x72, 0x15, 0x04, 0xaf,
-	0xe1, 0x2f, 0x98, 0xdc, 0x5f, 0xaa, 0x60, 0x31, 0xc1, 0xbd, 0xe4, 0x79, 0x7a, 0xc1, 0x56, 0x08,
-	0xb4, 0xbe, 0x3f, 0xc5, 0xd2, 0x2f, 0x5a, 0xe2, 0x4f, 0xb9, 0x59, 0xba, 0x53, 0x3f, 0x8a, 0x89,
-	0xa3, 0xf2, 0x00, 0x34, 0x30, 0x87, 0x18, 0xfe, 0xf8, 0x24, 0x4d, 0x70, 0x5e, 0xff, 0x8c, 0x19,
-	0x87, 0x98, 0x7b, 0x77, 0x59, 0x1e, 0x65, 0xe7, 0xd2, 0x54, 0x66, 0x20, 0x40, 0x6e, 0x48, 0xf1,
-	0xb8, 0x9b, 0x86, 0x58, 0x5a, 0xaa, 0x11, 0x2c, 0x50, 0x4c, 0xfe, 0x2e, 0xeb, 0x96, 0xa6, 0x90,
-	0x1f, 0xb0, 0x4e, 0xd9, 0x06, 0x8b, 0x19, 0xf9, 0xb3, 0x34, 0xc9, 0xbb, 0x90, 0x45, 0x25, 0xcc,
-	0x64, 0x0d, 0xf0, 0x84, 0x1d, 0xcc, 0xa9, 0x73, 0x25, 0x4c, 0x22, 0x40, 0x9e, 0xa0, 0xfe, 0x18,
-	0xc7, 0x32, 0x6b, 0xf4, 0x98, 0x01, 0xc8, 0x85, 0xd5, 0x51, 0x42, 0xe6, 0x63, 0x12, 0x64, 0xd1,
-	0x18, 0x87, 0x4e, 0x83, 0xd7, 0xa9, 0xd5, 0x79, 0x09, 0xc7, 0x6a, 0xca, 0xa1, 0x9f, 0x9d, 0xe2,
-	0x70, 0x30, 0xf3, 0xa7, 0xce, 0xaa, 0x68, 0x8c, 0xd3, 0x02, 0xc3, 0x4e, 0xf1, 0xa1, 0x9f, 0x85,
-	0x3b, 0xe9, 0x3c, 0x09, 0x70, 0xe8, 0x34, 0x45, 0xa9, 0x3b, 0x59, 0xa0, 0xd0, 0x5b, 0xd0, 0x1c,
-	0xa6, 0xd4, 0x8f, 0x07, 0x98, 0x8f, 0x85, 0xc4, 0x69, 0xf1, 0x51, 0xa4, 0x49, 0xcb, 0x48, 0xf7,
-	0x1f, 0x0a, 0x34, 0x78, 0x82, 0xe1, 0x9f, 0xcd, 0x31, 0xa1, 0xd7, 0x8c, 0x4a, 0x95, 0x12, 0xa1,
-	0x2d, 0x97, 0x08, 0xde, 0x15, 0x08, 0xf1, 0x27, 0x78, 0x98, 0x4a, 0xab, 0xd7, 0xa7, 0x39, 0x42,
-	0x24, 0xdc, 0x04, 0x8f, 0xb2, 0x58, 0xda, 0xdc, 0x9c, 0x09, 0x90, 0xad, 0x63, 0x94, 0x61, 0x44,
-	0x63, 0x2c, 0x8d, 0x5e, 0x9f, 0xe5, 0x08, 0xb6, 0x4e, 0xee, 0x2a, 0x0d, 0x6f, 0xca, 0x3d, 0xd1,
-	0x23, 0x58, 0xdb, 0xc9, 0xd2, 0xcf, 0x09, 0xce, 0x0e, 0xfc, 0x64, 0x32, 0x67, 0x1c, 0x22, 0x32,
-	0xd7, 0xc6, 0x55, 0x34, 0xf3, 0x5e, 0xc1, 0x02, 0xc2, 0x7b, 0x71, 0x4e, 0x7b, 0x0f, 0x60, 0x0f,
-	0xb3, 0x01, 0x9b, 0xa7, 0x46, 0x83, 0xa7, 0x86, 0x8c, 0xde, 0x05, 0xde, 0x83, 0xb0, 0x78, 0x66,
-	0x3d, 0x81, 0xc5, 0x2e, 0xf7, 0x4a, 0xa3, 0x9c, 0x46, 0x2c, 0x9a, 0x3d, 0x8d, 0x55, 0xd3, 0xe5,
-	0x74, 0x6d, 0x5e, 0x1c, 0x5c, 0xde, 0x91, 0x95, 0x92, 0x55, 0xe6, 0x72, 0xc9, 0x2c, 0x57, 0x3d,
-	0x59, 0x28, 0x7f, 0x22, 0x2a, 0xcb, 0x80, 0xfa, 0xd9, 0xab, 0x5a, 0xe3, 0x3d, 0x30, 0xb8, 0x16,
-	0x79, 0x45, 0x33, 0xe6, 0x1c, 0xaa, 0x7a, 0x4d, 0x5d, 0xf2, 0x9a, 0xfb, 0x0c, 0x9a, 0x9d, 0x20,
-	0xc0, 0xb3, 0x1b, 0x86, 0xc0, 0xd5, 0xd3, 0xf2, 0x15, 0x95, 0xcb, 0x3d, 0x01, 0xe7, 0x20, 0x22,
-	0x74, 0x94, 0x88, 0x39, 0x91, 0x9f, 0xf5, 0xc6, 0xb2, 0xf8, 0x99, 0x17, 0xb2, 0x88, 0x00, 0x79,
-	0x62, 0x45, 0xd3, 0x88, 0x72, 0x51, 0xba, 0xa7, 0xc7, 0x0c, 0x70, 0xff, 0x58, 0x63, 0x99, 0xb5,
-	0x10, 0x73, 0xcd, 0xf6, 0x7c, 0xf8, 0x14, 0xb3, 0x15, 0x0e, 0xe5, 0x30, 0x01, 0x51, 0x81, 0x29,
-	0x47, 0x9e, 0x5a, 0x8d, 0x3c, 0x56, 0xb1, 0x66, 0x32, 0x01, 0x94, 0x68, 0x56, 0x54, 0x2c, 0xfd,
-	0xd2, 0x8a, 0x65, 0x5c, 0x51, 0xb1, 0xcc, 0x72, 0xc5, 0x72, 0xdf, 0x04, 0x9d, 0xbd, 0x11, 0x10,
-	0x76, 0x36, 0xfe, 0xc0, 0xe3, 0xc1, 0xf2, 0x74, 0xf6, 0x6e, 0x40, 0xdc, 0x17, 0x70, 0x8f, 0x5b,
-	0x91, 0xb5, 0xea, 0x51, 0x92, 0x61, 0x3f, 0xfc, 0xa6, 0xfe, 0x72, 0xc0, 0x14, 0xe1, 0x92, 0xd7,
-	0x54, 0x53, 0xc4, 0x0b, 0x71, 0xbf, 0x03, 0x86, 0x10, 0x51, 0x0a, 0xa9, 0x5a, 0x25, 0xa4, 0xee,
-	0xe5, 0x1c, 0xf2, 0x05, 0xc7, 0x98, 0x73, 0xc8, 0x7d, 0x02, 0x8d, 0x92, 0x86, 0xe8, 0x21, 0x98,
-	0xe2, 0x29, 0x0f, 0xee, 0x55, 0x99, 0x2c, 0xe2, 0x00, 0xa6, 0x58, 0x45, 0xdc, 0x9f, 0xc3, 0x3a,
-	0x3b, 0xdc, 0xa2, 0xa9, 0xde, 0xe8, 0x68, 0x8b, 0x80, 0x53, 0x2a, 0xad, 0xb2, 0x14, 0x36, 0xea,
-	0x15, 0x61, 0xa3, 0x95, 0xc3, 0xe6, 0x37, 0x35, 0x61, 0x5b, 0x1e, 0x99, 0x3b, 0xe7, 0x7c, 0x26,
-	0xba, 0x7d, 0x39, 0x54, 0x96, 0xcb, 0xe1, 0xc2, 0x76, 0x6a, 0xc5, 0x76, 0x25, 0xf5, 0xb4, 0x2b,
-	0xd4, 0xd3, 0xcb, 0xea, 0xfd, 0x49, 0x01, 0xe8, 0x9e, 0xf1, 0x02, 0xc0, 0x7a, 0xca, 0x7d, 0xa8,
-	0x4b, 0xed, 0x7a, 0xa2, 0x75, 0xd4, 0xbd, 0x7a, 0x96, 0x23, 0xfe, 0x33, 0x77, 0xbc, 0x7a, 0xee,
-	0xf8, 0x7b, 0x0d, 0x5a, 0xc2, 0x96, 0x45, 0x96, 0x57, 0xec, 0x59, 0x5b, 0xb6, 0xe7, 0x3a, 0xe8,
-	0xdc, 0x52, 0xd2, 0xbd, 0x3a, 0x1f, 0xf6, 0x4a, 0xc6, 0xd2, 0x2a, 0xc6, 0xaa, 0x84, 0x8b, 0x7a,
-	0xcd, 0x40, 0x7f, 0x89, 0x29, 0x6f, 0x39, 0xa4, 0x9b, 0x57, 0x0d, 0xe9, 0x56, 0x69, 0x48, 0xff,
-	0x5b, 0x0d, 0x9a, 0xe2, 0xc8, 0x9f, 0xfa, 0x11, 0x8d, 0x92, 0xc9, 0xb7, 0xfe, 0xc4, 0x21, 0xac,
-	0x89, 0x03, 0xcb, 0x53, 0x5e, 0xeb, 0xe4, 0xf7, 0x2b, 0x33, 0x10, 0x3f, 0x78, 0x63, 0xfb, 0x4e,
-	0xa9, 0x0f, 0x0b, 0x82, 0xd7, 0x08, 0x16, 0x80, 0xfb, 0x2b, 0x05, 0xd6, 0x97, 0xc4, 0x78, 0x78,
-	0x16, 0x9f, 0x5f, 0x23, 0xab, 0x05, 0xca, 0xd1, 0xa9, 0x6c, 0x36, 0x4a, 0x7a, 0x8a, 0x1e, 0x42,
-	0xab, 0x9b, 0x65, 0x7b, 0x98, 0x0d, 0x7e, 0x33, 0x1a, 0xa5, 0x89, 0xb4, 0x62, 0x0b, 0x57, 0xb0,
-	0x6c, 0xd8, 0xe1, 0x7c, 0xe3, 0xf9, 0x24, 0x6f, 0x4a, 0xc2, 0x13, 0x6b, 0xb8, 0x8a, 0x66, 0xf2,
-	0xbb, 0x59, 0x96, 0x66, 0x7c, 0xbc, 0x15, 0x95, 0xa4, 0x8e, 0x73, 0x04, 0x6b, 0x7a, 0x82, 0x1a,
-	0xfb, 0x84, 0xf0, 0x7c, 0xd5, 0x3d, 0xc0, 0x05, 0xa6, 0xe4, 0x68, 0xeb, 0x55, 0x75, 0xa0, 0x7e,
-	0x71, 0xa0, 0x09, 0x72, 0x7b, 0xf0, 0xea, 0x76, 0x53, 0xdb, 0xbf, 0x5b, 0x9a, 0x6d, 0xa4, 0xe5,
-	0x4b, 0xaf, 0x58, 0x62, 0x2b, 0xe6, 0x6f, 0xf1, 0xe8, 0x7e, 0xa9, 0xc0, 0x1b, 0x97, 0x49, 0xf9,
-	0xf7, 0x36, 0xfd, 0x6f, 0x15, 0xb8, 0x5b, 0xb4, 0x88, 0xf0, 0xa6, 0xa6, 0xff, 0xc6, 0xbd, 0xe1,
-	0x5f, 0xa9, 0xf2, 0x7f, 0xa5, 0x80, 0x73, 0x89, 0x89, 0xbe, 0x0d, 0x71, 0xe3, 0x80, 0xc9, 0x3d,
-	0x56, 0xd4, 0x47, 0x13, 0x0b, 0xf0, 0x06, 0xd7, 0xa7, 0xaf, 0xc3, 0x6b, 0xb2, 0x1f, 0x96, 0xdf,
-	0x01, 0x70, 0xe8, 0xfe, 0xb5, 0x68, 0x1b, 0x72, 0x87, 0x5b, 0x1a, 0xa9, 0x68, 0x23, 0x6a, 0xb9,
-	0x8d, 0x54, 0xda, 0x85, 0x76, 0xf5, 0x40, 0xa7, 0x2f, 0x25, 0xc0, 0x37, 0x6b, 0x12, 0xd7, 0x9b,
-	0xe1, 0xab, 0x1a, 0xac, 0xe6, 0xc5, 0x9c, 0xdf, 0xd1, 0xde, 0xee, 0xb0, 0x08, 0x34, 0xee, 0x3a,
-	0xf1, 0x36, 0xa2, 0x05, 0xcc, 0x6b, 0x4b, 0x42, 0xb5, 0xcb, 0x7a, 0x5f, 0xa3, 0x1c, 0x44, 0xb2,
-	0x3b, 0x86, 0x0b, 0x94, 0xfb, 0x00, 0x56, 0x9f, 0x46, 0x31, 0x1e, 0xe2, 0xe9, 0x2c, 0xf6, 0xe9,
-	0x85, 0x9b, 0x7f, 0x97, 0xc2, 0xfa, 0x0f, 0xe7, 0x51, 0x70, 0xca, 0xa2, 0x38, 0xc2, 0xa4, 0xe0,
-	0xcb, 0x93, 0xa9, 0x56, 0x4a, 0x26, 0x7e, 0xef, 0x91, 0x50, 0x99, 0xd9, 0x85, 0x3e, 0x0b, 0x14,
-	0x9b, 0xd6, 0xe5, 0x46, 0xfc, 0x66, 0xbf, 0x98, 0xd6, 0x77, 0xe6, 0x94, 0xa6, 0x89, 0x67, 0x66,
-	0x82, 0xc8, 0x5e, 0xb3, 0x5a, 0xfb, 0x38, 0xc1, 0x59, 0x14, 0x74, 0x63, 0x9c, 0x5f, 0x74, 0x88,
-	0xd7, 0x77, 0x21, 0x51, 0xa7, 0xfc, 0xd5, 0xbd, 0x0d, 0x56, 0x6f, 0x2a, 0xdf, 0xf9, 0xc5, 0x34,
-	0x61, 0x45, 0x12, 0xe6, 0xb5, 0x63, 0x3e, 0xe6, 0x7c, 0xf9, 0x85, 0x3b, 0x91, 0x30, 0xda, 0x86,
-	0xe6, 0x1e, 0x7e, 0xee, 0xcf, 0x63, 0xda, 0x09, 0xb8, 0x69, 0x34, 0xf9, 0x41, 0xaa, 0xac, 0x4e,
-	0x33, 0x2c, 0xb3, 0x30, 0xe5, 0x05, 0xe1, 0x0a, 0xe5, 0xc7, 0x82, 0xe8, 0xee, 0xc2, 0x9a, 0xd4,
-	0xbd, 0xb0, 0xd6, 0x7b, 0x60, 0xc9, 0x73, 0x2c, 0x5d, 0x5b, 0x56, 0x0f, 0xe9, 0x59, 0x58, 0x72,
-	0xb9, 0xf7, 0xc1, 0x10, 0xfb, 0x5e, 0x76, 0xb5, 0xe8, 0xee, 0x43, 0x7d, 0x94, 0xc5, 0x57, 0x33,
-	0x2c, 0xac, 0xa5, 0x94, 0xad, 0x65, 0x83, 0xca, 0x0c, 0x25, 0x8c, 0xa1, 0xce, 0xb3, 0xd8, 0x9d,
-	0x41, 0xeb, 0x38, 0x25, 0x74, 0xec, 0x07, 0xa7, 0xb7, 0xde, 0xad, 0x74, 0xbf, 0xa9, 0x56, 0xee,
-	0x37, 0x2b, 0x5e, 0xd1, 0xaa, 0x5e, 0x71, 0x57, 0x01, 0x76, 0xfd, 0x58, 0xea, 0xee, 0x36, 0xa1,
-	0x71, 0x90, 0x4e, 0xa2, 0x44, 0x82, 0x11, 0x34, 0x78, 0x4a, 0xdf, 0x5a, 0x97, 0x57, 0x48, 0xbc,
-	0xbc, 0x4e, 0xb8, 0xac, 0x7b, 0xcc, 0xb3, 0x33, 0x7c, 0xce, 0xea, 0x3f, 0x0b, 0xdd, 0xe3, 0xd8,
-	0x0f, 0xf0, 0x49, 0x1a, 0x87, 0x38, 0x93, 0x02, 0x1b, 0xb3, 0x05, 0xca, 0x7d, 0x08, 0xb6, 0xe7,
-	0x53, 0xcc, 0xb8, 0x2b, 0x49, 0xb0, 0xa4, 0xdf, 0xe6, 0x3b, 0xb0, 0x5a, 0xfe, 0x1c, 0x84, 0x2c,
-	0xd0, 0xfa, 0x69, 0x82, 0xed, 0x15, 0x64, 0x82, 0xda, 0x49, 0x42, 0xbb, 0x86, 0x0c, 0x50, 0x8e,
-	0x32, 0x5b, 0xd9, 0xfc, 0x02, 0x5a, 0xd5, 0xef, 0x2e, 0xa8, 0x09, 0xf5, 0xce, 0xc1, 0x41, 0x67,
-	0xbf, 0xdb, 0x1f, 0x0e, 0xec, 0x15, 0xd4, 0x02, 0xe0, 0xcf, 0xfb, 0xde, 0xd1, 0xe8, 0xd8, 0x56,
-	0x10, 0x80, 0x21, 0x69, 0x2a, 0xa3, 0x1d, 0x1e, 0x0d, 0x86, 0x5e, 0x77, 0xb7, 0xdb, 0x1f, 0xda,
-	0x1a, 0x7a, 0x1d, 0xee, 0x7a, 0x47, 0xa3, 0xfe, 0x9e, 0x77, 0xb4, 0xd3, 0xeb, 0x2f, 0x36, 0xd1,
-	0xd1, 0x3a, 0xd8, 0x25, 0x82, 0xc0, 0x1a, 0x9b, 0xbf, 0xa8, 0x41, 0xb3, 0xd2, 0x88, 0xb9, 0xa2,
-	0x47, 0xfd, 0xae, 0xbd, 0x82, 0x1a, 0x60, 0x1e, 0x76, 0x07, 0x83, 0xce, 0x7e, 0xd7, 0xae, 0x31,
-	0x99, 0xbb, 0x07, 0x47, 0x83, 0xee, 0x9e, 0xad, 0xb2, 0xe7, 0x8f, 0x8e, 0x7a, 0xfd, 0xee, 0x9e,
-	0xad, 0x31, 0xf6, 0x41, 0xb7, 0xdb, 0xb7, 0x0d, 0x54, 0x07, 0xdd, 0xeb, 0x0c, 0xbb, 0x7b, 0xb6,
-	0xc9, 0x1e, 0x7b, 0xfd, 0xe3, 0xd1, 0xd0, 0xb6, 0xd8, 0x69, 0x87, 0x9d, 0x7d, 0xbb, 0xce, 0x70,
-	0xa3, 0x3e, 0x7b, 0x04, 0xb4, 0x0a, 0xd6, 0xd0, 0xeb, 0xf4, 0x07, 0x4f, 0xbb, 0x9e, 0xdd, 0xd8,
-	0xec, 0x8a, 0x0b, 0x5a, 0x2e, 0xfc, 0x35, 0xb8, 0x33, 0x4a, 0x42, 0xfc, 0x3c, 0x4a, 0x70, 0x98,
-	0x23, 0x85, 0x26, 0x9f, 0x44, 0x24, 0xa2, 0x69, 0x66, 0xd7, 0xd8, 0x46, 0xfc, 0x9e, 0x41, 0x18,
-	0x62, 0x70, 0x4e, 0x28, 0x9e, 0xda, 0xea, 0xe6, 0xf7, 0xcb, 0xb7, 0x6b, 0x6c, 0xc5, 0xa8, 0xff,
-	0x71, 0xff, 0xe8, 0xd3, 0xbe, 0xbd, 0xc2, 0xd8, 0x0e, 0x8f, 0x76, 0x7a, 0x07, 0xf2, 0x1c, 0xc3,
-	0xce, 0xce, 0x41, 0x77, 0x68, 0x2b, 0x8c, 0x69, 0xaf, 0x3b, 0xf8, 0x78, 0x78, 0x74, 0x6c, 0xab,
-	0x9b, 0xbf, 0xaf, 0xc9, 0xf8, 0x60, 0x26, 0x65, 0x26, 0x79, 0xc6, 0x5b, 0xa1, 0xbd, 0xc2, 0xbc,
-	0xc1, 0x61, 0xf6, 0x52, 0x6c, 0xd7, 0xd0, 0x1d, 0x61, 0xb1, 0x67, 0xf9, 0x7b, 0x9d, 0xad, 0x30,
-	0xa3, 0xe7, 0x1c, 0xe1, 0xb3, 0xa2, 0xb3, 0xd9, 0x2a, 0x72, 0x60, 0x5d, 0x10, 0xd8, 0x08, 0x59,
-	0xa2, 0x68, 0xe8, 0x01, 0xb4, 0x2f, 0xa3, 0x3c, 0xe3, 0x63, 0x82, 0xad, 0xa3, 0x37, 0xe1, 0x8d,
-	0x4b, 0xb6, 0x94, 0x64, 0x63, 0xfb, 0xd7, 0x2a, 0x98, 0x8c, 0x7e, 0x38, 0xc9, 0xd0, 0xff, 0x80,
-	0xc6, 0xb8, 0xd0, 0xf2, 0x07, 0x83, 0xb6, 0x25, 0x10, 0xbd, 0xd0, 0x5d, 0x41, 0x8f, 0x58, 0xc9,
-	0x15, 0x57, 0x0d, 0x17, 0xdf, 0x37, 0x2a, 0x9c, 0x6f, 0x81, 0x2e, 0xee, 0xff, 0x96, 0xa7, 0xe3,
-	0x0a, 0xd7, 0x87, 0xb0, 0xb6, 0x74, 0x93, 0x81, 0xee, 0x0b, 0xf2, 0xe5, 0x17, 0x1c, 0xed, 0xd7,
-	0x16, 0xbb, 0x95, 0x3e, 0xe3, 0xb8, 0x2b, 0xe8, 0x07, 0xd0, 0xaa, 0x5c, 0xc9, 0x10, 0xd4, 0xae,
-	0x6e, 0x54, 0xbe, 0xa8, 0x69, 0xdb, 0x4b, 0x87, 0x64, 0x3b, 0x3c, 0x86, 0xbb, 0xe5, 0x7b, 0x3f,
-	0x1c, 0x8a, 0xeb, 0xce, 0x42, 0xdd, 0x76, 0xa3, 0x24, 0xdb, 0x5d, 0x41, 0x1f, 0xc0, 0xba, 0x18,
-	0x42, 0xaa, 0x2b, 0x90, 0x1c, 0x4c, 0x2b, 0x03, 0x4a, 0x5b, 0xce, 0x00, 0x3b, 0x69, 0x1a, 0xbb,
-	0x2b, 0xe8, 0x01, 0x68, 0x1e, 0xf6, 0xc3, 0xd2, 0xde, 0xa5, 0x5b, 0x54, 0x77, 0x65, 0xfb, 0x2f,
-	0x0a, 0x80, 0x9c, 0x3b, 0x98, 0x6b, 0xde, 0x85, 0xe6, 0x68, 0x46, 0x70, 0x46, 0xf3, 0x2f, 0xf8,
-	0xcd, 0x42, 0x04, 0x03, 0x73, 0xc5, 0xc4, 0x67, 0xf7, 0x15, 0xb4, 0x05, 0x0d, 0xf1, 0x6d, 0x92,
-	0x07, 0x78, 0xee, 0xa8, 0xd2, 0x0f, 0x0c, 0x96, 0x17, 0xfc, 0x2f, 0x6b, 0xec, 0x31, 0xce, 0x17,
-	0x34, 0x4b, 0x0b, 0x16, 0xc7, 0xce, 0x99, 0xff, 0x1f, 0xd6, 0x3a, 0x61, 0xc8, 0x89, 0xc3, 0x54,
-	0xfc, 0x20, 0x02, 0x95, 0x17, 0x88, 0x1f, 0x49, 0x2c, 0xaf, 0xfa, 0x00, 0xd6, 0x3d, 0x3c, 0x4d,
-	0xcf, 0x84, 0x88, 0xa7, 0x59, 0x3a, 0xbd, 0xf1, 0xd2, 0x87, 0xb9, 0x76, 0x62, 0xc5, 0x05, 0x7f,
-	0xe4, 0x7c, 0xef, 0x83, 0x2d, 0x8e, 0x5d, 0xfa, 0x6d, 0x89, 0xf4, 0xf3, 0x02, 0xb3, 0xb4, 0x68,
-	0xfb, 0x0f, 0x35, 0x30, 0xf8, 0xb7, 0x6e, 0x96, 0x00, 0x86, 0x58, 0x8f, 0x4a, 0x9f, 0xc4, 0x97,
-	0x85, 0x6c, 0x80, 0x21, 0xa6, 0xa4, 0x0a, 0x53, 0x39, 0xa4, 0xff, 0x1b, 0x0c, 0xa1, 0xee, 0xd5,
-	0x9a, 0x5e, 0xe9, 0x7e, 0xb6, 0x99, 0xbb, 0x82, 0xfe, 0x0b, 0x34, 0x16, 0x89, 0x17, 0x37, 0xe0,
-	0x9a, 0xba, 0x2b, 0x63, 0x83, 0xff, 0x8e, 0xe6, 0xfd, 0x7f, 0x06, 0x00, 0x00, 0xff, 0xff, 0x01,
-	0xa6, 0x70, 0x82, 0x97, 0x23, 0x00, 0x00,
+	// 2938 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xec, 0x1a, 0x4d, 0x73, 0x23, 0x47,
+	0xd5, 0xd2, 0xcc, 0x48, 0xe3, 0xa7, 0x0f, 0x4f, 0x7a, 0x9d, 0x44, 0xa8, 0x42, 0x70, 0x0d, 0x61,
+	0xb3, 0x31, 0x64, 0x1d, 0x1c, 0x96, 0x4a, 0x52, 0x15, 0x0a, 0x59, 0xd6, 0x1a, 0x65, 0x6d, 0xc9,
+	0x8c, 0xa4, 0xa4, 0x80, 0x03, 0x19, 0x69, 0x7a, 0xe5, 0x59, 0x8f, 0x66, 0xc4, 0xf4, 0xc8, 0x59,
+	0xa7, 0xb8, 0xc2, 0x99, 0x02, 0x6e, 0x70, 0xe5, 0x48, 0x15, 0x17, 0x2e, 0xc0, 0xbf, 0xe0, 0xce,
+	0x1f, 0x80, 0x13, 0x17, 0xae, 0xd4, 0xeb, 0xee, 0xf9, 0xf4, 0xd7, 0x7a, 0x93, 0xa2, 0x38, 0xec,
+	0xc5, 0x9e, 0xf7, 0xfa, 0x75, 0xbf, 0xd7, 0xef, 0xa3, 0xdf, 0x7b, 0xdd, 0x82, 0x8d, 0xd9, 0x89,
+	0x1d, 0xed, 0xe0, 0x9f, 0xfb, 0xcb, 0x30, 0x88, 0x02, 0xa2, 0xe2, 0x77, 0xfb, 0xc1, 0xd4, 0x8d,
+	0xa6, 0xab, 0xd9, 0x29, 0x8d, 0xee, 0x07, 0xe1, 0x7c, 0x87, 0xad, 0xa6, 0xee, 0xe7, 0x3b, 0x8c,
+	0x86, 0x67, 0xee, 0x8c, 0xb2, 0x25, 0x9d, 0xed, 0x70, 0xe2, 0x1d, 0x7b, 0x15, 0x9d, 0xf0, 0x3f,
+	0x62, 0xb2, 0xf9, 0x6b, 0x05, 0x9a, 0x13, 0xdf, 0x66, 0xcc, 0x9d, 0xfb, 0xd4, 0xe9, 0x9e, 0xd8,
+	0x11, 0x79, 0x0d, 0xd6, 0x3b, 0xb3, 0x59, 0xb0, 0xf2, 0xa3, 0xbe, 0xd3, 0x2a, 0x6d, 0x95, 0xee,
+	0xad, 0x5b, 0xeb, 0x76, 0x8c, 0x20, 0xaf, 0x40, 0x05, 0xa9, 0xfa, 0x4e, 0xab, 0xcc, 0x87, 0x2a,
+	0x33, 0x0e, 0xe1, 0xac, 0xee, 0x89, 0xed, 0xfb, 0xd4, 0xeb, 0x3b, 0x2d, 0x55, 0xcc, 0x9a, 0xc5,
+	0x08, 0x1c, 0x3d, 0xa2, 0x8c, 0xd9, 0x73, 0x3a, 0x0e, 0x5a, 0x9a, 0x18, 0x5d, 0xc4, 0x08, 0xd2,
+	0x82, 0xea, 0xb1, 0x3d, 0xa7, 0x93, 0xd0, 0x6b, 0x55, 0xf8, 0x58, 0x75, 0x29, 0x40, 0x9c, 0x87,
+	0x23, 0x63, 0x37, 0xf2, 0x68, 0xab, 0x2a, 0xe6, 0x2d, 0x63, 0x04, 0xce, 0x93, 0xab, 0xb6, 0x74,
+	0x31, 0x4f, 0xae, 0x49, 0xee, 0xc1, 0xc6, 0x5e, 0x18, 0x7c, 0xc6, 0x68, 0x78, 0x68, 0xfb, 0xf3,
+	0x15, 0x52, 0xac, 0x73, 0x8a, 0x8d, 0x69, 0x1e, 0x4d, 0xda, 0xa0, 0x27, 0x24, 0xc0, 0x49, 0x74,
+	0x2f, 0x1e, 0x7b, 0x07, 0x60, 0x9f, 0xa2, 0x02, 0xc7, 0xe7, 0x4b, 0xda, 0xaa, 0x6d, 0x95, 0xee,
+	0x35, 0x77, 0x8d, 0xfb, 0x5c, 0xf5, 0x29, 0xde, 0x02, 0x27, 0xf9, 0x26, 0x26, 0xa8, 0x13, 0x46,
+	0xc3, 0x56, 0x7d, 0xab, 0x74, 0xaf, 0xb6, 0xdb, 0x14, 0xb4, 0x88, 0xe9, 0xfb, 0x8f, 0x03, 0x4b,
+	0x5d, 0x31, 0x1a, 0x92, 0x2d, 0xa8, 0x75, 0x43, 0x6a, 0x47, 0xd4, 0x19, 0xbb, 0x0b, 0xda, 0x6a,
+	0x70, 0xa6, 0xb5, 0x59, 0x8a, 0x32, 0x3f, 0x84, 0x8d, 0xbc, 0x4d, 0x18, 0xd9, 0x06, 0x8d, 0x7f,
+	0xb4, 0x4a, 0x5b, 0xca, 0xbd, 0xda, 0xee, 0xa6, 0x5c, 0x39, 0x47, 0x65, 0x69, 0x88, 0x64, 0xe6,
+	0x77, 0x63, 0x13, 0xdd, 0x60, 0xca, 0x26, 0x94, 0x13, 0x33, 0x96, 0x5d, 0xc7, 0xec, 0x40, 0xf5,
+	0x20, 0x0c, 0x56, 0xcb, 0x1b, 0x27, 0xb6, 0x12, 0x42, 0x39, 0xbb, 0x3a, 0x17, 0xa0, 0xf9, 0x04,
+	0xe0, 0x98, 0x86, 0x0b, 0x97, 0x31, 0x37, 0xf0, 0x6f, 0x5e, 0xa5, 0x33, 0xa7, 0x7e, 0xea, 0x4a,
+	0x55, 0x5b, 0x80, 0xe4, 0x0d, 0xa8, 0x1c, 0xd1, 0xe8, 0x24, 0x70, 0x5a, 0x0a, 0xd7, 0x63, 0xfd,
+	0x3e, 0xf7, 0x58, 0x81, 0xb3, 0x2a, 0x0b, 0xfe, 0x1f, 0xc5, 0x95, 0xf3, 0x9f, 0x97, 0x91, 0xf9,
+	0x29, 0xd4, 0xc5, 0x88, 0xcf, 0xf7, 0xf3, 0xdc, 0x02, 0x67, 0x14, 0xa2, 0xe4, 0x15, 0x62, 0x43,
+	0x8d, 0xcf, 0x19, 0x45, 0x76, 0xb4, 0x62, 0xcf, 0xcd, 0xa0, 0x0d, 0x7a, 0x9f, 0x75, 0x66, 0x91,
+	0x7b, 0x46, 0x39, 0x07, 0xdd, 0xd2, 0x5d, 0x09, 0x9b, 0x0f, 0xa0, 0x2a, 0xd7, 0x94, 0x16, 0x2d,
+	0xc5, 0x16, 0xc5, 0x69, 0x47, 0xf6, 0x53, 0x6b, 0xe5, 0x51, 0xc6, 0x57, 0xd4, 0x2c, 0x7d, 0x21,
+	0x61, 0xb3, 0x0d, 0xea, 0x5e, 0x10, 0x78, 0x84, 0x88, 0xff, 0x7c, 0x96, 0x6e, 0xa9, 0xd3, 0x20,
+	0xf0, 0xd0, 0x83, 0x90, 0xe8, 0xd6, 0x1e, 0xb4, 0x89, 0x70, 0x51, 0x0a, 0xb3, 0x0a, 0x5a, 0x6f,
+	0xb1, 0x8c, 0xce, 0xcd, 0xdf, 0x94, 0x41, 0xc5, 0x75, 0x2f, 0xc8, 0x99, 0xe3, 0x52, 0x2e, 0x72,
+	0x69, 0x83, 0x7e, 0x1c, 0xba, 0x41, 0xe8, 0x46, 0xe7, 0x52, 0xbd, 0xfa, 0x52, 0xc2, 0xe4, 0x1d,
+	0xd0, 0x47, 0x51, 0x68, 0x47, 0x74, 0x7e, 0xce, 0x4f, 0x9d, 0x66, 0x1c, 0x1a, 0x1d, 0x1e, 0x18,
+	0xf1, 0x98, 0xa5, 0x33, 0xf9, 0xc5, 0x79, 0xf1, 0xb1, 0x71, 0xc0, 0x5a, 0xda, 0x96, 0xc2, 0x79,
+	0xc5, 0x08, 0xb2, 0x03, 0xd0, 0x0d, 0x7c, 0xc7, 0x8d, 0xdc, 0xc0, 0x67, 0xad, 0x0a, 0x0f, 0xb6,
+	0x0d, 0xb1, 0x62, 0x82, 0xb7, 0x60, 0x96, 0x90, 0x90, 0xd7, 0x01, 0xfa, 0x6c, 0xdf, 0x65, 0xf6,
+	0xd4, 0xa3, 0x0e, 0x3f, 0xa2, 0x74, 0x0b, 0xdc, 0x04, 0x53, 0x8c, 0x76, 0xfd, 0x62, 0xb4, 0x7f,
+	0x06, 0xeb, 0xc9, 0xd2, 0xe4, 0x2e, 0xa8, 0x1f, 0x05, 0xae, 0xcf, 0x75, 0xd3, 0xdc, 0x25, 0x82,
+	0x33, 0x62, 0x86, 0x4b, 0x1a, 0xda, 0x51, 0x10, 0x5a, 0xea, 0x93, 0xc0, 0xf5, 0x89, 0x01, 0xca,
+	0x23, 0x7a, 0x2e, 0x75, 0xa5, 0x9c, 0xd2, 0x73, 0xd4, 0x52, 0x4c, 0x13, 0x6b, 0x29, 0x90, 0x30,
+	0xd9, 0x04, 0xed, 0x63, 0xdb, 0x5b, 0x51, 0x79, 0x30, 0x6b, 0x67, 0x08, 0x98, 0x6f, 0x81, 0x66,
+	0x05, 0xab, 0x88, 0x92, 0x2d, 0xd0, 0x84, 0x8f, 0x88, 0xc3, 0x05, 0x04, 0x57, 0x44, 0x59, 0x5a,
+	0xc8, 0x9d, 0x85, 0x41, 0x8d, 0x93, 0x5a, 0x94, 0xad, 0xbc, 0x08, 0x93, 0x80, 0xf0, 0x0f, 0x69,
+	0xc3, 0x4a, 0x28, 0xbc, 0x25, 0x6b, 0x0d, 0xe5, 0x99, 0xac, 0xd1, 0x06, 0x5d, 0xba, 0x3c, 0x6b,
+	0xa9, 0xdc, 0x18, 0xba, 0xf4, 0x79, 0x66, 0x7e, 0x0b, 0x0c, 0x1e, 0x55, 0xfb, 0xd4, 0xa3, 0x11,
+	0xed, 0x9d, 0x51, 0x3f, 0xca, 0x46, 0x5a, 0x29, 0x1f, 0x69, 0x1f, 0x49, 0xea, 0xc9, 0xd2, 0xb1,
+	0x6f, 0xa4, 0x16, 0x09, 0x69, 0x31, 0xa5, 0x21, 0x32, 0x2e, 0x0b, 0x2f, 0x58, 0xc4, 0x08, 0xf3,
+	0x6d, 0x78, 0x89, 0x4b, 0x25, 0x38, 0x3b, 0xc9, 0x62, 0x71, 0x74, 0x96, 0xf2, 0xc7, 0xc8, 0x13,
+	0x30, 0xf8, 0x48, 0x81, 0xf5, 0xe5, 0xd4, 0xb9, 0x58, 0x2e, 0xe7, 0x63, 0x19, 0xbd, 0xa5, 0xcf,
+	0xba, 0x81, 0xff, 0xd8, 0x0d, 0x17, 0xd4, 0x91, 0xa1, 0x5e, 0x73, 0x53, 0x94, 0xf9, 0x2a, 0x28,
+	0x7d, 0x87, 0xa1, 0xfd, 0x51, 0xf2, 0x12, 0x97, 0x5c, 0x71, 0x1d, 0x66, 0x7e, 0x20, 0x52, 0xcf,
+	0x85, 0xd8, 0x32, 0x41, 0xe5, 0xe9, 0xab, 0xcc, 0xed, 0x91, 0x49, 0x49, 0x3c, 0x79, 0xa9, 0xd1,
+	0xf9, 0x92, 0x9a, 0xff, 0x2e, 0x81, 0xca, 0x73, 0xff, 0xed, 0x02, 0xb3, 0xe0, 0xdb, 0xca, 0x05,
+	0xdf, 0x26, 0x77, 0xa1, 0x79, 0x68, 0xb3, 0x48, 0xec, 0x8e, 0x13, 0x09, 0x0f, 0x6c, 0x7a, 0x39,
+	0x2c, 0x46, 0x51, 0xd7, 0x0b, 0x98, 0x5c, 0x48, 0x14, 0x08, 0x30, 0x4b, 0x30, 0xe8, 0xa1, 0x28,
+	0x72, 0x1c, 0x91, 0x90, 0xee, 0xc2, 0xd2, 0x30, 0xa9, 0xb2, 0x7c, 0xfd, 0xb1, 0x5e, 0xac, 0x3f,
+	0x08, 0xa8, 0x63, 0x7b, 0xce, 0x5a, 0xc0, 0xf5, 0xa5, 0x46, 0xf6, 0x9c, 0x99, 0x1f, 0x42, 0x1d,
+	0xf7, 0x7c, 0x1c, 0xd2, 0x33, 0x97, 0x7e, 0xc6, 0xc8, 0xdb, 0x78, 0xcc, 0x88, 0x6f, 0x19, 0x08,
+	0x2f, 0xc9, 0xc0, 0x4f, 0xa9, 0xf0, 0xe4, 0x11, 0x24, 0xa6, 0x0f, 0xb5, 0xcc, 0x00, 0x79, 0x5d,
+	0x68, 0x90, 0xeb, 0x2e, 0x11, 0x90, 0x67, 0x65, 0x5e, 0x9f, 0x91, 0x37, 0xa1, 0xc2, 0x1d, 0x43,
+	0x78, 0x5b, 0x7a, 0xa8, 0x9c, 0xd8, 0x11, 0xc7, 0x5b, 0x15, 0xca, 0x87, 0x31, 0xb6, 0x26, 0x7e,
+	0x48, 0x6d, 0x61, 0x7d, 0xc5, 0xaa, 0xac, 0x38, 0x64, 0x7e, 0x00, 0xd0, 0x89, 0x22, 0x7b, 0x76,
+	0xb2, 0x40, 0xf7, 0x22, 0xd2, 0xaa, 0xc2, 0x54, 0xdc, 0x8a, 0xa2, 0x8c, 0x3a, 0xf7, 0x02, 0x3b,
+	0x49, 0x1f, 0x4b, 0x01, 0x9a, 0x0f, 0x00, 0x12, 0x46, 0x2c, 0x23, 0x4a, 0xe9, 0x5a, 0x51, 0xcc,
+	0x7f, 0x94, 0xb9, 0x52, 0x05, 0xf6, 0x82, 0x6f, 0xbc, 0x99, 0x73, 0xac, 0x3b, 0x85, 0x45, 0x52,
+	0xef, 0xca, 0x3b, 0x91, 0x7a, 0x75, 0x41, 0xa9, 0xe4, 0x0a, 0xca, 0x82, 0x73, 0x69, 0x17, 0x9d,
+	0xab, 0x0d, 0xfa, 0x88, 0xfa, 0x0e, 0x86, 0xac, 0xac, 0x1b, 0x75, 0x26, 0x61, 0x72, 0x1f, 0x40,
+	0x8c, 0x71, 0x11, 0xab, 0x97, 0xfa, 0x3e, 0xb0, 0x84, 0x82, 0xeb, 0x93, 0x3e, 0x8d, 0xe4, 0xf9,
+	0xac, 0x46, 0xf4, 0x29, 0x3f, 0xe5, 0x1e, 0x06, 0xe1, 0xc2, 0x8e, 0xa4, 0x3f, 0x55, 0x1e, 0x73,
+	0x88, 0xec, 0x42, 0x2d, 0xb5, 0x84, 0xf0, 0xa9, 0x5a, 0x5c, 0x17, 0xa6, 0x03, 0x56, 0xcd, 0x4e,
+	0x89, 0xf0, 0x04, 0xc6, 0x12, 0x00, 0xab, 0x48, 0xf4, 0x40, 0x8d, 0x21, 0x60, 0xfe, 0x52, 0x01,
+	0x3d, 0xae, 0x0e, 0x2f, 0xe8, 0x97, 0x80, 0x3a, 0xb0, 0x17, 0x54, 0xda, 0x52, 0xf5, 0xed, 0x05,
+	0x45, 0x91, 0x7a, 0x0b, 0xdb, 0xf5, 0x58, 0x4b, 0xe1, 0xeb, 0x54, 0x28, 0x87, 0x10, 0x7f, 0x7c,
+	0x12, 0xf8, 0x34, 0x3e, 0x44, 0x2b, 0x4b, 0x0e, 0xa1, 0x4b, 0x74, 0x51, 0xcf, 0xe1, 0xb9, 0x54,
+	0x60, 0x75, 0x26, 0x40, 0xae, 0x5e, 0xf1, 0xd9, 0x0d, 0x1c, 0x2a, 0xf5, 0x57, 0x9b, 0xa5, 0x28,
+	0xe4, 0xdf, 0xc5, 0x94, 0x2b, 0xca, 0x6e, 0x75, 0x86, 0xe9, 0xb6, 0x0d, 0x3a, 0xaa, 0xfe, 0xc7,
+	0x81, 0x1f, 0xa7, 0x32, 0x3d, 0x92, 0x30, 0xf2, 0x1a, 0xd1, 0x39, 0x6e, 0xb7, 0xb5, 0xce, 0x85,
+	0xa8, 0x32, 0x01, 0xe2, 0xe6, 0x0f, 0xed, 0x29, 0xf5, 0x64, 0xf8, 0x69, 0x1e, 0x02, 0xc4, 0x84,
+	0xfa, 0xc4, 0x67, 0xab, 0x29, 0x9b, 0x85, 0xee, 0x94, 0x3a, 0xbc, 0xbe, 0xd6, 0xad, 0xfa, 0x2a,
+	0x83, 0xc3, 0x73, 0xe1, 0xc8, 0x0e, 0x4f, 0xa9, 0x33, 0x5a, 0xda, 0x0b, 0x5e, 0x55, 0xeb, 0x16,
+	0x2c, 0x12, 0x0c, 0xee, 0xe2, 0x07, 0x76, 0xe8, 0xec, 0x05, 0x2b, 0x7f, 0x46, 0x1d, 0x5e, 0x4b,
+	0xeb, 0x56, 0xed, 0x24, 0x45, 0x91, 0x37, 0xa0, 0x31, 0x0e, 0x22, 0xdb, 0x1b, 0x51, 0x5e, 0x93,
+	0xb2, 0x56, 0x93, 0xd7, 0x41, 0x8d, 0x28, 0x8b, 0x34, 0xff, 0xa4, 0x40, 0x93, 0x07, 0x2b, 0xfd,
+	0xd9, 0x8a, 0xe2, 0xc9, 0x74, 0x8a, 0x5e, 0x2b, 0xa1, 0xbe, 0xd3, 0xda, 0x10, 0x5e, 0x1b, 0xc6,
+	0x88, 0x8c, 0xd7, 0x36, 0x8b, 0x6d, 0xd0, 0x35, 0xf5, 0xd2, 0x8b, 0x26, 0xe9, 0xcb, 0x6b, 0x92,
+	0xfe, 0x53, 0x16, 0x07, 0xb0, 0x34, 0xd2, 0x0b, 0xcd, 0xff, 0xcf, 0x34, 0xff, 0x96, 0xec, 0x45,
+	0x31, 0x2b, 0x67, 0x9b, 0xd2, 0x6c, 0xd2, 0x93, 0xad, 0xe8, 0x4f, 0x44, 0x02, 0x19, 0x45, 0x76,
+	0x78, 0x5d, 0x49, 0x84, 0x39, 0x8f, 0xf1, 0x73, 0x5c, 0x5e, 0x2a, 0xac, 0x38, 0x94, 0xb7, 0x9a,
+	0x52, 0xb0, 0x9a, 0xf9, 0x53, 0x68, 0x74, 0x66, 0x33, 0xba, 0x7c, 0x46, 0x17, 0xb8, 0xba, 0xbb,
+	0xba, 0x22, 0x05, 0x99, 0x27, 0xd0, 0x3a, 0x74, 0x59, 0x14, 0x77, 0xd9, 0x7c, 0xaf, 0xcf, 0xcc,
+	0x8b, 0xef, 0x39, 0xe5, 0xc5, 0x04, 0xc8, 0xcf, 0x42, 0x77, 0xe1, 0x46, 0x9c, 0x95, 0x66, 0x69,
+	0x1e, 0x02, 0xe6, 0x5f, 0x4a, 0x78, 0x18, 0xa6, 0x6c, 0x6e, 0x58, 0x9e, 0x37, 0x1d, 0x1d, 0xd9,
+	0xfa, 0xcb, 0x22, 0x12, 0xdc, 0x04, 0x93, 0xf5, 0x3c, 0x25, 0xef, 0x79, 0x98, 0x64, 0x96, 0x32,
+	0x00, 0xca, 0xee, 0x32, 0x49, 0x32, 0xda, 0xa5, 0x49, 0xa6, 0x72, 0x45, 0x92, 0xa9, 0x66, 0x93,
+	0x8c, 0xf9, 0x55, 0xd0, 0xb0, 0x83, 0xe4, 0x49, 0x8e, 0x7f, 0x70, 0x7f, 0xd0, 0x2d, 0x0d, 0x7b,
+	0x49, 0x66, 0x3e, 0x81, 0x57, 0xb8, 0x16, 0xb1, 0x4c, 0x13, 0x95, 0xcd, 0x17, 0xb5, 0x57, 0x0b,
+	0xaa, 0xc2, 0x5d, 0xe2, 0x34, 0x58, 0x15, 0xfe, 0xc2, 0xcc, 0xf7, 0xe2, 0xe2, 0x29, 0xe3, 0x52,
+	0xa5, 0x9c, 0x4b, 0xa5, 0xe5, 0x95, 0x68, 0x88, 0xe3, 0xf2, 0xea, 0x01, 0xd4, 0x32, 0x12, 0x92,
+	0xbb, 0x50, 0x15, 0x5f, 0xb1, 0x73, 0xd7, 0xe3, 0x1b, 0x17, 0xbe, 0x81, 0xaa, 0x98, 0xc5, 0xcc,
+	0x9f, 0xc3, 0x26, 0x6e, 0x2e, 0xad, 0x9d, 0x9e, 0x69, 0x6b, 0x57, 0x5d, 0xa2, 0x65, 0xdc, 0x46,
+	0xb9, 0xc2, 0x6d, 0xd4, 0xac, 0xdb, 0xfc, 0xbe, 0x24, 0x74, 0xcb, 0x3d, 0x73, 0xef, 0x9c, 0xd7,
+	0xc3, 0xb7, 0x3f, 0x0e, 0xcb, 0xc5, 0xe3, 0x30, 0xd5, 0x9d, 0x92, 0xd3, 0x5d, 0x46, 0x3c, 0xf5,
+	0x0a, 0xf1, 0xb4, 0xac, 0x78, 0x7f, 0x2b, 0x41, 0x73, 0xd8, 0x43, 0xe1, 0x12, 0xcf, 0x4c, 0x77,
+	0xae, 0x5e, 0x9d, 0x37, 0x95, 0x1b, 0x1a, 0x8d, 0x4b, 0x6a, 0xc1, 0x5b, 0x36, 0x08, 0xd5, 0xab,
+	0x1a, 0x04, 0x3d, 0xd3, 0x20, 0xfc, 0xae, 0x04, 0x0d, 0x21, 0xfe, 0x27, 0xb6, 0x1b, 0xb9, 0xfe,
+	0xfc, 0x39, 0xa5, 0x8f, 0x4f, 0xdd, 0xca, 0x35, 0xa7, 0xee, 0xed, 0xa5, 0xfb, 0x67, 0x09, 0x1a,
+	0xbd, 0x33, 0x14, 0x47, 0xaa, 0x26, 0x5f, 0xb1, 0x94, 0x8a, 0x15, 0x4b, 0x13, 0xca, 0xc3, 0x53,
+	0x79, 0x56, 0x94, 0x83, 0x53, 0x34, 0x19, 0xf7, 0x58, 0x29, 0xaf, 0xc6, 0x6b, 0xfe, 0x67, 0xae,
+	0xd5, 0xb5, 0x42, 0xad, 0xfe, 0xc5, 0xb4, 0x7f, 0xf3, 0x25, 0xc9, 0x2c, 0x36, 0xc5, 0x7e, 0x18,
+	0x2c, 0x97, 0xd4, 0xf9, 0x32, 0x6e, 0xa9, 0x2f, 0x24, 0x94, 0x4f, 0x13, 0x77, 0xe5, 0x69, 0x85,
+	0xde, 0xd4, 0xff, 0x5e, 0xd5, 0xba, 0x64, 0x4e, 0x2e, 0x35, 0x7f, 0x53, 0xf0, 0x8b, 0xc4, 0xa5,
+	0x78, 0x20, 0x3d, 0x37, 0x87, 0xeb, 0xcb, 0x99, 0x1b, 0xc3, 0xc5, 0xfc, 0x6d, 0x09, 0xea, 0xc2,
+	0x79, 0xe4, 0x8d, 0xce, 0xed, 0x7c, 0x07, 0x5b, 0x03, 0xec, 0x1a, 0x44, 0x0e, 0x53, 0x67, 0xd8,
+	0x2e, 0x14, 0x98, 0xaa, 0x97, 0xc5, 0x68, 0x6d, 0x9f, 0x62, 0x65, 0xbf, 0x8c, 0xdc, 0xc0, 0x8f,
+	0xc5, 0x72, 0x52, 0x94, 0xf9, 0x47, 0x05, 0x5e, 0x15, 0x62, 0x25, 0xe1, 0x21, 0x64, 0xb8, 0xd1,
+	0xbb, 0xaf, 0x31, 0xf8, 0x35, 0x91, 0xf9, 0xa2, 0x2a, 0xc4, 0xaa, 0x30, 0x3d, 0xee, 0xeb, 0xb9,
+	0xe3, 0xfe, 0xe6, 0x4a, 0xf0, 0xcf, 0x0a, 0xdc, 0x29, 0xda, 0x6b, 0xe9, 0x9d, 0xbf, 0xb0, 0xd5,
+	0xff, 0x79, 0x05, 0xff, 0x3a, 0xd4, 0x1f, 0xba, 0x1e, 0x1d, 0xd3, 0xc5, 0xd2, 0xb3, 0xa3, 0x0b,
+	0xf7, 0xf1, 0x66, 0x04, 0x9b, 0x3f, 0x5c, 0xb9, 0xb3, 0x53, 0xb4, 0xa6, 0x4b, 0x59, 0x42, 0x17,
+	0xdf, 0x92, 0x94, 0x32, 0xb7, 0x24, 0xfc, 0x22, 0xc1, 0x8f, 0xe4, 0x95, 0x4f, 0x12, 0xf7, 0x29,
+	0x0a, 0x6b, 0x29, 0xb9, 0x10, 0xbf, 0x6f, 0x4f, 0x6a, 0xa9, 0xbd, 0x55, 0x14, 0x05, 0xbe, 0x55,
+	0x0d, 0xc5, 0x20, 0x16, 0xc1, 0xcd, 0x03, 0xea, 0xd3, 0xd0, 0x9d, 0xf5, 0x3c, 0x1a, 0xdf, 0x1c,
+	0x08, 0xd3, 0x08, 0x8e, 0x5a, 0xc4, 0xcd, 0xd2, 0x06, 0xbd, 0xbf, 0x90, 0xf6, 0x14, 0x2e, 0xa4,
+	0xbb, 0x12, 0xe6, 0x97, 0x42, 0xab, 0x29, 0xa7, 0x8b, 0xaf, 0xc1, 0x99, 0x84, 0xc9, 0x2e, 0x34,
+	0xf6, 0xe9, 0x63, 0x7b, 0xe5, 0xf1, 0xab, 0xc7, 0xc0, 0xe7, 0xc2, 0x16, 0xc5, 0x69, 0x38, 0x59,
+	0x12, 0x14, 0x5e, 0x0c, 0x5c, 0x21, 0xfc, 0x54, 0x0c, 0x9a, 0x5d, 0xd8, 0x90, 0xb2, 0x27, 0xda,
+	0x7a, 0x07, 0x74, 0xb9, 0x8f, 0xc2, 0xb3, 0x5d, 0x7e, 0x93, 0x96, 0x4e, 0x25, 0x95, 0xf9, 0x1a,
+	0x54, 0xc4, 0xba, 0x97, 0xdd, 0xef, 0x99, 0x07, 0xb0, 0x3e, 0x09, 0xbd, 0xab, 0x09, 0x52, 0x6d,
+	0x95, 0xb3, 0xda, 0x32, 0x40, 0x41, 0x45, 0x09, 0x65, 0x28, 0xab, 0xd0, 0x33, 0x97, 0xd0, 0x3c,
+	0x0e, 0x58, 0x34, 0xb5, 0x67, 0xa7, 0xb7, 0x5e, 0x2d, 0x73, 0xc9, 0xa8, 0xe4, 0x2e, 0x19, 0x73,
+	0x56, 0x51, 0xf3, 0x56, 0x31, 0xeb, 0x00, 0x5d, 0xdb, 0x93, 0xb2, 0x9b, 0x0d, 0xa8, 0x1d, 0x06,
+	0x73, 0xd7, 0x97, 0xa0, 0x0b, 0x35, 0x5e, 0x89, 0xdc, 0x5a, 0x96, 0x6b, 0x38, 0x5e, 0x5e, 0xde,
+	0x98, 0xf7, 0x01, 0x46, 0xab, 0xf0, 0x8c, 0x9e, 0x3f, 0x0c, 0x42, 0x7e, 0x7b, 0x74, 0xec, 0xd9,
+	0x33, 0x7a, 0x12, 0x78, 0x0e, 0x0d, 0x25, 0xc3, 0xda, 0x32, 0x45, 0x99, 0x77, 0xc1, 0xb0, 0xec,
+	0x88, 0x22, 0x75, 0x2e, 0x08, 0x0a, 0xf2, 0x6d, 0xbf, 0x05, 0xf5, 0xec, 0x23, 0x0d, 0xd1, 0x41,
+	0x1d, 0x04, 0x3e, 0x35, 0xd6, 0x48, 0x15, 0x94, 0x8e, 0xef, 0x18, 0x25, 0x52, 0x81, 0xf2, 0x30,
+	0x34, 0xca, 0xdb, 0x9f, 0x43, 0x33, 0xff, 0x1a, 0x42, 0x1a, 0xb0, 0xde, 0x39, 0x3c, 0xec, 0x1c,
+	0xf4, 0x06, 0xe3, 0x91, 0xb1, 0x46, 0x9a, 0x00, 0xfc, 0xfb, 0xc0, 0x1a, 0x4e, 0x8e, 0x8d, 0x32,
+	0x01, 0xa8, 0xc8, 0x31, 0x05, 0xc7, 0x8e, 0x86, 0xa3, 0xb1, 0xd5, 0xeb, 0xf6, 0x06, 0x63, 0x43,
+	0x25, 0xaf, 0xc2, 0x1d, 0x6b, 0x38, 0x19, 0xec, 0x5b, 0xc3, 0xbd, 0xfe, 0x20, 0x5d, 0x44, 0x23,
+	0x9b, 0x60, 0x64, 0x06, 0x04, 0xb6, 0xb2, 0xfd, 0x87, 0x12, 0x34, 0x72, 0x37, 0xb4, 0x5c, 0xd0,
+	0xe1, 0xa0, 0x67, 0xac, 0x91, 0x1a, 0x54, 0x8f, 0x7a, 0xa3, 0x51, 0xe7, 0xa0, 0x67, 0x94, 0x90,
+	0x67, 0xf7, 0x70, 0x38, 0xea, 0xed, 0x1b, 0x0a, 0x7e, 0x7f, 0x34, 0xec, 0x0f, 0x7a, 0xfb, 0x86,
+	0x8a, 0xe4, 0x87, 0xbd, 0x87, 0x63, 0x43, 0x23, 0xeb, 0xa0, 0x59, 0x9d, 0x71, 0x6f, 0xdf, 0xa8,
+	0xe2, 0x67, 0x7f, 0x70, 0x3c, 0x19, 0x1b, 0x3a, 0xee, 0x76, 0xdc, 0x39, 0x30, 0xd6, 0x11, 0x37,
+	0x19, 0xe0, 0x27, 0x90, 0x3a, 0xe8, 0x63, 0xab, 0x33, 0x18, 0x3d, 0xec, 0x59, 0x46, 0x8d, 0xeb,
+	0xa3, 0xfb, 0xc8, 0xa8, 0xe3, 0xb2, 0xe3, 0x1f, 0x1d, 0xf7, 0x07, 0x07, 0x46, 0x03, 0xb7, 0x35,
+	0x1a, 0x0f, 0x8f, 0x25, 0xdc, 0xdc, 0xee, 0x89, 0x6b, 0x51, 0x2e, 0xe1, 0xcb, 0xf0, 0xd2, 0xc4,
+	0x77, 0xe8, 0x63, 0xd7, 0xa7, 0x4e, 0x8c, 0x14, 0xe2, 0x7e, 0xec, 0x32, 0x37, 0x0a, 0x42, 0xa3,
+	0x84, 0xdc, 0x78, 0xc1, 0x25, 0xb4, 0x35, 0x3a, 0x67, 0x11, 0x5d, 0x18, 0xca, 0xf6, 0xf7, 0xb2,
+	0xc7, 0x2b, 0xce, 0x98, 0x0c, 0x1e, 0x0d, 0x86, 0x9f, 0x0c, 0x8c, 0x35, 0x24, 0x3b, 0x1a, 0xee,
+	0xf5, 0x0f, 0xe5, 0x66, 0xc7, 0x9d, 0xbd, 0xc3, 0xde, 0xd8, 0x28, 0x23, 0xd1, 0x7e, 0x6f, 0xf4,
+	0x68, 0x3c, 0x3c, 0x36, 0x94, 0xed, 0x5f, 0x95, 0xa4, 0x13, 0x11, 0x43, 0xbc, 0x15, 0xc4, 0x6d,
+	0x8c, 0xb1, 0x46, 0x36, 0xc4, 0xed, 0x93, 0xec, 0x0c, 0x8c, 0x72, 0x8c, 0x90, 0x75, 0x9d, 0xa1,
+	0x24, 0x73, 0x64, 0x2d, 0x69, 0xa8, 0x31, 0x89, 0x2c, 0x61, 0x0d, 0x8d, 0x7c, 0x05, 0x5e, 0xbe,
+	0xb4, 0xd8, 0x31, 0x74, 0xdc, 0xf6, 0x85, 0xbc, 0x6a, 0xac, 0xef, 0xfe, 0x5d, 0x81, 0x2a, 0xe2,
+	0x8f, 0xe6, 0x21, 0xf9, 0x3a, 0xa8, 0x23, 0xea, 0x3b, 0xa4, 0x78, 0x7f, 0xdf, 0xd6, 0x05, 0xa2,
+	0xef, 0x98, 0x6b, 0xe4, 0x1e, 0x1e, 0xbe, 0xa2, 0x25, 0xcc, 0x3c, 0x67, 0x48, 0x54, 0x8e, 0xf2,
+	0xdb, 0x00, 0x1d, 0x3c, 0xf2, 0x05, 0xf1, 0xe6, 0x05, 0xe2, 0xce, 0xec, 0xb4, 0x5d, 0x13, 0x58,
+	0xf1, 0x9c, 0xbb, 0x46, 0xde, 0xe0, 0xb7, 0xda, 0x61, 0x94, 0x15, 0x81, 0x23, 0x72, 0x0b, 0xf7,
+	0x60, 0xa3, 0xd0, 0xa4, 0x92, 0xd7, 0xc4, 0xf0, 0xe5, 0xbd, 0x6b, 0x9b, 0x5c, 0x78, 0x77, 0x61,
+	0xe6, 0x1a, 0xf9, 0x3e, 0x34, 0x73, 0xad, 0x36, 0x23, 0xed, 0xfc, 0x2a, 0xd9, 0x06, 0xbc, 0x6d,
+	0x14, 0x94, 0x82, 0x2b, 0xbc, 0x07, 0x77, 0xb2, 0xf7, 0x39, 0xf1, 0x6f, 0x2b, 0x12, 0x59, 0xdb,
+	0x2f, 0x5f, 0xf6, 0xb3, 0x0a, 0x9c, 0xf9, 0x3e, 0x6c, 0x0a, 0x3b, 0x16, 0x7e, 0x2b, 0x23, 0x5f,
+	0x3d, 0x72, 0xd7, 0x50, 0x6d, 0xd9, 0xfe, 0xec, 0x05, 0x81, 0x67, 0xae, 0x61, 0xc6, 0xb6, 0xa8,
+	0xed, 0x90, 0x7a, 0x2a, 0x50, 0xdf, 0x69, 0x67, 0xee, 0xca, 0xcc, 0xb5, 0xdd, 0x7f, 0x95, 0x51,
+	0xf7, 0xbc, 0xd2, 0x41, 0xc3, 0xbe, 0x0d, 0x8d, 0xc9, 0x92, 0xd1, 0x30, 0x8a, 0xdf, 0xf5, 0x1b,
+	0x09, 0x1b, 0x04, 0x8b, 0x56, 0xd8, 0x81, 0x9a, 0x24, 0xc7, 0x18, 0x88, 0xcd, 0x9c, 0xf9, 0xd9,
+	0x41, 0x71, 0xc2, 0x37, 0xb1, 0x10, 0xf7, 0x68, 0x44, 0xc5, 0x84, 0x46, 0x66, 0x42, 0xdf, 0x29,
+	0x12, 0x7f, 0x07, 0x36, 0x3a, 0x8e, 0xc3, 0x07, 0xc7, 0x81, 0xf8, 0x99, 0x04, 0xc9, 0x4e, 0x10,
+	0x3f, 0x9d, 0x28, 0xce, 0x7a, 0x1f, 0x36, 0x2d, 0xba, 0x08, 0xce, 0x04, 0x8b, 0x87, 0x61, 0xb0,
+	0x78, 0xe6, 0xa9, 0x89, 0x74, 0x62, 0x86, 0x94, 0x4e, 0xbe, 0xe3, 0x16, 0x89, 0xdf, 0x05, 0x43,
+	0xbc, 0xba, 0x66, 0x7e, 0x76, 0x22, 0x4d, 0x9f, 0x62, 0x0a, 0x93, 0x76, 0xff, 0x5a, 0x82, 0x0a,
+	0x7f, 0xce, 0xc6, 0x18, 0xaa, 0x88, 0xf9, 0x24, 0xf3, 0xea, 0x5d, 0x64, 0xb2, 0x05, 0x15, 0x51,
+	0x50, 0xe5, 0x88, 0xb2, 0x2e, 0xfe, 0x0d, 0xa8, 0x08, 0x99, 0x63, 0x33, 0x8b, 0xe7, 0xf1, 0xe2,
+	0x42, 0x05, 0x5f, 0x90, 0x44, 0x99, 0x45, 0xcd, 0x35, 0xf2, 0x35, 0x50, 0xd1, 0x49, 0x33, 0x5e,
+	0x29, 0x17, 0xe1, 0x12, 0x9b, 0x6b, 0xd3, 0x0a, 0xff, 0xe5, 0xd6, 0xbb, 0xff, 0x0d, 0x00, 0x00,
+	0xff, 0xff, 0x2a, 0x5c, 0xec, 0x00, 0x09, 0x26, 0x00, 0x00,
 }
