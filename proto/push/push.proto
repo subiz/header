@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+// push pushs (almost) every events to unfocused users
+package push;
+
+message Empty {}
+
+message Id {
+	string Id = 1;
+}
+
+message Token {
+	string Token = 1;
+	string UserId = 2;
+	string ExpiredIn = 3;
+	DeviceType DeviceType = 4;
+}
+
+enum DeviceType {
+	DESKTOP = 0;
+	MOBILE = 1;
+}
+
+message TokenRemoveRequest {
+	string UserId = 1;
+	string Token = 2;
+}
+
+message UserPushConfiguration {
+	string AccountId = 1;
+	string UserId = 2;
+	string Email = 3;
+
+	// EmailNotificationEnabled is true if user want to receive
+	// notification emails
+	bool EmailNotificationEnabled = 4;
+
+	// DesktopPushNotificationEnabled is true if user enable desktop
+	// (browser) notification
+	bool DesktopPushNotificationEnabled = 5;
+
+	// MobilePushNotificationEnabled is true if user enable mobile
+	// push notification
+	bool MobilePushNotificationEnabled = 6;
+
+	// MobilePushDelayTiming is the seconds subiz delay sending
+	// notification to mobile after notifiy user in desktop device.
+	// If user sees the notification during this time, the push will
+	// be cancelled.
+	int32 MobilePushDelayTimming = 7;
+
+	// EmailThreshold is a duration (in minute) in which no more
+	// than 1 email is being sent
+	int32 EmailThreshold = 8;
+}
+
+service NotiDeli {
+	rpc RegisterToken(Token) returns (Empty) {}
+	rpc RemoveToken(TokenRemoveRequest) returns (Empty) {}
+
+	rpc Config(UserPushConfiguration) returns (Empty) {}
+	// GetConfig get notification config for specific user
+	rpc GetConfig(Id) returns (UserPushConfiguration) {}
+}
+
+// Hiden interface: Kafka
+// set kafka broker and topic name
+// presense ??

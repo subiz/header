@@ -1,0 +1,62 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "push pushs (almost) every events to unfocused users",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "pushEmpty": {
+      "type": "object"
+    },
+    "pushUserPushConfiguration": {
+      "type": "object",
+      "properties": {
+        "AccountId": {
+          "type": "string"
+        },
+        "UserId": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "EmailNotificationEnabled": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "EmailNotificationEnabled is true if user want to receive\nnotification emails"
+        },
+        "DesktopPushNotificationEnabled": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "DesktopPushNotificationEnabled is true if user enable desktop\n(browser) notification"
+        },
+        "MobilePushNotificationEnabled": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "MobilePushNotificationEnabled is true if user enable mobile\npush notification"
+        },
+        "MobilePushDelayTimming": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MobilePushDelayTiming is the seconds subiz delay sending\nnotification to mobile after notifiy user in desktop device.\nIf user sees the notification during this time, the push will\nbe cancelled."
+        },
+        "EmailThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "title": "EmailThreshold is a duration (in minute) in which no more\nthan 1 email is being sent"
+        }
+      }
+    }
+  }
+}
