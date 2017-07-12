@@ -1,0 +1,119 @@
+// some event will change ui and saved for futer -> notify
+// some event will just for change ui
+
+{
+	"Chat.Assigned": { // a incomming chat is assigned to agent
+		"Event": "Chat.Assigned",
+		"Methods": ["ChatRead"],
+		"Timestamp": "time stamp",
+		"Chat": {
+			"Id": "1",
+			"AccountId": "2",
+			"CTime": "3",
+			"LTime": "4";
+			"Users": {
+				"Id": 1,
+				"Type": 4,
+				"LastSeenId": 5,
+			},
+			"ChannelId": "9",
+			"Tags": ["string1", "string2"],
+		}
+	},
+	"Chat.Waiting": {
+	},
+	"Chat.<chatid>.Sent": { // new message has sent to chat
+		"scopes": [["ChatWrite", "ChatRead"]],
+	},
+	"emoji.updated": {
+	},
+	"rule.Updated": {
+		"Methods": [],
+	},
+	"Rule.AutoDisabled": {
+		"Methods": [],
+	},
+	"user.arrived": { // new user visited
+	},
+	"user.<userid>.eventtracked": {
+	},
+	"user.<userid>.typing": {
+	},
+	"user.<userid>.updated": {
+	},
+	"user.<userid>.banned": {
+	},
+	"user.<userid>.merge": {
+	},
+	"user.<userid>.eventtracked": {
+	},
+	"user.<userid>.customfiledupdated": {
+	},
+	"user.<userid>.ping": {
+	}, //only fired on registed user
+	"agent.goodbye": { // agent logout
+	},
+	"agent.hello": { // agent login
+	},
+	"agent.updated": {
+	},
+	"agent.confirmed": { // agent is added
+	},
+	"agent.deactivated": {
+	},
+	"agent.deleted": {
+	},
+	"agent.acceptinvitation": {
+	},
+	"agent.rejectinvitation": {
+	},
+	"agent.reactivated": {
+	},
+	"agent.grant": {
+	},
+	"agent.revoke": {
+	},
+	"agent.presence": {
+	},
+	"agent.permissionupdated" : {
+	},
+	"client.authorized": {
+	},
+	"client.revoked": {
+	},
+	"account.confirmed": {
+		"is_notify": true,
+	},
+	"content.updated": {
+	},
+	"content.added": {
+	},
+	"content.deleted": {
+	},
+	"account.rename": {
+	},
+	"account.changedlogo": {
+	},
+	"channel.added": {
+	},
+	"channel.deleted": {
+	},
+	"channel.updated": {
+	},
+	"notification.arrived": {
+	},
+	"notification.seen": {
+	},
+	"group.added": {
+	},
+	"group.deleted": {
+	},
+	"group.updated": {
+	},
+	"cannedresponse.added": {
+	},
+	"cannedresponse.deleted": {
+	},
+	"cannedresponse.updated": {
+	}
+}

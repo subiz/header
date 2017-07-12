@@ -1,0 +1,15 @@
+version: 1
+ChatAssigned: # New chat assigned to agent
+ChatWaiting: # New incomming chat has been pushed to unassigned list
+ChatStarted: # New chat from agent to user
+ChatAccepted: # Chat from unassigned list is accepted by an agent
+ChatDropped: # Chat dropped from unassigned list
+ChatSent: # icomming message from owned chat
+Chat_ChatId_Sent: # New incomming from chat guest chat
+
+# AgentInvited:
+AgentCreated:
+AgentUpdated:
+
+AccountCreated:
+AccountUpdated:

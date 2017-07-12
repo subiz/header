@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package event;
+
+//import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
+
+// message Event {
+// 	string Event = 1;
+// 	auth.Method Method = 2;
+// }
+
+message User {
+	string Id = 1;
+	UserType Type = 2;
+}
+
+enum UserType {
+	NONE = 0;
+	VISITOR = 1;
+	AGENT = 2;
+}
+
+enum Event {
+	Out_EventCreated = 0;
+}
+
+// OEEventCreated is a kafka event created when subiz want
+// to send message downstream
+message OEvent {
+	string Id = 1;
+	// Event is name of the event see ./event.json
+	string Event = 2;
+	string AccountId = 3;
+
+	// Users is list of user that event need to be sent to. (3000 max)
+	repeated User Users = 4;
+
+	// ChannelId is ID of channel this event is sent to. If this event
+	// is sent to subiz channel, then you can leave this field blank
+	string ChannelId = 5;
+
+	// Payload is content of event in JSON format, see ./event.json
+	string Payload = 7;
+}
