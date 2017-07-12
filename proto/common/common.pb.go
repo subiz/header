@@ -92,11 +92,11 @@ func (x ErrorCode) String() string {
 func (ErrorCode) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Err struct {
-	Ok              bool   `protobuf:"varint,1,opt,name=Ok,json=ok" json:"Ok,omitempty"`
-	ErrDescription  string `protobuf:"bytes,3,opt,name=ErrDescription,json=errDescription" json:"ErrDescription,omitempty"`
-	ErrDebugMessage string `protobuf:"bytes,4,opt,name=ErrDebugMessage,json=errDebugMessage" json:"ErrDebugMessage,omitempty"`
-	ErrCode         int32  `protobuf:"varint,5,opt,name=ErrCode,json=errCode" json:"ErrCode,omitempty"`
-	ErrClass        int32  `protobuf:"varint,6,opt,name=ErrClass,json=errClass" json:"ErrClass,omitempty"`
+	Ok              bool   `protobuf:"varint,1,opt,name=Ok,json=ok" json:"Ok"`
+	ErrDescription  string `protobuf:"bytes,3,opt,name=ErrDescription,json=errDescription" json:"ErrDescription"`
+	ErrDebugMessage string `protobuf:"bytes,4,opt,name=ErrDebugMessage,json=errDebugMessage" json:"ErrDebugMessage"`
+	ErrCode         int32  `protobuf:"varint,5,opt,name=ErrCode,json=errCode" json:"ErrCode"`
+	ErrClass        int32  `protobuf:"varint,6,opt,name=ErrClass,json=errClass" json:"ErrClass"`
 }
 
 func (m *Err) Reset()                    { *m = Err{} }
