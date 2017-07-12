@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='webpush/webpush.proto',
   package='webpush',
   syntax='proto3',
-  serialized_pb=_b('\n\x15webpush/webpush.proto\x12\x07webpush\"\x07\n\x05\x45mpty\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"u\n\x05Token\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05Token\x18\x03 \x01(\t\x12\x11\n\tExpiredIn\x18\x04 \x01(\t\x12\'\n\nDeviceType\x18\x05 \x01(\x0e\x32\x13.webpush.DeviceType\"F\n\x12TokenRemoveRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05Token\x18\x03 \x01(\t\"\x9a\x01\n\x0bPushRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\'\n\nDeviceType\x18\x03 \x01(\x0e\x32\x13.webpush.DeviceType\x12\r\n\x05Title\x18\x04 \x01(\t\x12\x0c\n\x04\x42ody\x18\x05 \x01(\t\x12\x0c\n\x04Icon\x18\x06 \x01(\t\x12\x13\n\x0b\x43lickAction\x18\x07 \x01(\t\"A\n\x06Result\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\x13\n\x0bSendSuccess\x18\x03 \x03(\x08*/\n\nDeviceType\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07\x42ROWSER\x10\x01\x12\n\n\x06MOBILE\x10\x02*i\n\x05\x45vent\x12\x18\n\x14WebpushRegisterToken\x10\x00\x12\x1e\n\x1aWebpushRegisterRemoveToken\x10\x02\x12\x0f\n\x0bWebpushPush\x10\x03\x12\x15\n\x11WebpushPushReturn\x10\x04\x32\xab\x01\n\x07Webpush\x12\x31\n\rRegisterToken\x12\x0e.webpush.Token\x1a\x0e.webpush.Empty\"\x00\x12<\n\x0bRemoveToken\x12\x1b.webpush.TokenRemoveRequest\x1a\x0e.webpush.Empty\"\x00\x12/\n\x04Push\x12\x14.webpush.PushRequest\x1a\x0f.webpush.Result\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x15webpush/webpush.proto\x12\x07webpush\"\x07\n\x05\x45mpty\"b\n\x05Token\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05Token\x18\x03 \x01(\t\x12\'\n\nDeviceType\x18\x05 \x01(\x0e\x32\x13.webpush.DeviceType\"F\n\x12TokenRemoveRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05Token\x18\x03 \x01(\t\"\x9a\x01\n\x0bPushRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\'\n\nDeviceType\x18\x03 \x01(\x0e\x32\x13.webpush.DeviceType\x12\r\n\x05Title\x18\x04 \x01(\t\x12\x0c\n\x04\x42ody\x18\x05 \x01(\t\x12\x0c\n\x04Icon\x18\x06 \x01(\t\x12\x13\n\x0b\x43lickAction\x18\x07 \x01(\t\"A\n\x06Result\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\x13\n\x0bSendSuccess\x18\x03 \x03(\x08*/\n\nDeviceType\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07\x42ROWSER\x10\x01\x12\n\n\x06MOBILE\x10\x02*a\n\x05\x45vent\x12\x18\n\x14WebpushRegisterToken\x10\x00\x12\x16\n\x12WebpushRemoveToken\x10\x02\x12\x0f\n\x0bWebpushPush\x10\x03\x12\x15\n\x11WebpushPushReturn\x10\x04\x32\xab\x01\n\x07Webpush\x12\x31\n\rRegisterToken\x12\x0e.webpush.Token\x1a\x0e.webpush.Empty\"\x00\x12<\n\x0bRemoveToken\x12\x1b.webpush.TokenRemoveRequest\x1a\x0e.webpush.Empty\"\x00\x12/\n\x04Push\x12\x14.webpush.PushRequest\x1a\x0f.webpush.Result\"\x00\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -45,8 +45,8 @@ _DEVICETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=476,
-  serialized_end=523,
+  serialized_start=439,
+  serialized_end=486,
 )
 _sym_db.RegisterEnumDescriptor(_DEVICETYPE)
 
@@ -62,7 +62,7 @@ _EVENT = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='WebpushRegisterRemoveToken', index=1, number=2,
+      name='WebpushRemoveToken', index=1, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -76,8 +76,8 @@ _EVENT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=525,
-  serialized_end=630,
+  serialized_start=488,
+  serialized_end=585,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
@@ -86,7 +86,7 @@ NONE = 0
 BROWSER = 1
 MOBILE = 2
 WebpushRegisterToken = 0
-WebpushRegisterRemoveToken = 2
+WebpushRemoveToken = 2
 WebpushPush = 3
 WebpushPushReturn = 4
 
@@ -113,37 +113,6 @@ _EMPTY = _descriptor.Descriptor(
   ],
   serialized_start=34,
   serialized_end=41,
-)
-
-
-_ID = _descriptor.Descriptor(
-  name='Id',
-  full_name='webpush.Id',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='webpush.Id.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=43,
-  serialized_end=59,
 )
 
 
@@ -176,14 +145,7 @@ _TOKEN = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ExpiredIn', full_name='webpush.Token.ExpiredIn', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='DeviceType', full_name='webpush.Token.DeviceType', index=4,
+      name='DeviceType', full_name='webpush.Token.DeviceType', index=3,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -201,8 +163,8 @@ _TOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=61,
-  serialized_end=178,
+  serialized_start=43,
+  serialized_end=141,
 )
 
 
@@ -246,8 +208,8 @@ _TOKENREMOVEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=180,
-  serialized_end=250,
+  serialized_start=143,
+  serialized_end=213,
 )
 
 
@@ -319,8 +281,8 @@ _PUSHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=253,
-  serialized_end=407,
+  serialized_start=216,
+  serialized_end=370,
 )
 
 
@@ -364,14 +326,13 @@ _RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=409,
-  serialized_end=474,
+  serialized_start=372,
+  serialized_end=437,
 )
 
 _TOKEN.fields_by_name['DeviceType'].enum_type = _DEVICETYPE
 _PUSHREQUEST.fields_by_name['DeviceType'].enum_type = _DEVICETYPE
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
-DESCRIPTOR.message_types_by_name['Id'] = _ID
 DESCRIPTOR.message_types_by_name['Token'] = _TOKEN
 DESCRIPTOR.message_types_by_name['TokenRemoveRequest'] = _TOKENREMOVEREQUEST
 DESCRIPTOR.message_types_by_name['PushRequest'] = _PUSHREQUEST
@@ -385,13 +346,6 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), d
   # @@protoc_insertion_point(class_scope:webpush.Empty)
   ))
 _sym_db.RegisterMessage(Empty)
-
-Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
-  DESCRIPTOR = _ID,
-  __module__ = 'webpush.webpush_pb2'
-  # @@protoc_insertion_point(class_scope:webpush.Id)
-  ))
-_sym_db.RegisterMessage(Id)
 
 Token = _reflection.GeneratedProtocolMessageType('Token', (_message.Message,), dict(
   DESCRIPTOR = _TOKEN,

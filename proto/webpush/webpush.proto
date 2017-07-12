@@ -4,15 +4,11 @@ package webpush;
 
 message Empty {}
 
-message Id {
-	string Id = 1;
-}
-
 message Token {
 	string AccountId = 1;
 	string UserId = 2;
 	string Token = 3;
-	string ExpiredIn = 4;
+	// string ExpiredIn = 4;
 	DeviceType DeviceType = 5;
 }
 
@@ -56,7 +52,7 @@ service Webpush {
 
 enum Event {
 	WebpushRegisterToken = 0; // TokenRegister
-	WebpushRegisterRemoveToken = 2; // TokenRemoveRequest
+	WebpushRemoveToken = 2; // TokenRemoveRequest
 	WebpushPush = 3; // PushRequest
 	WebpushPushReturn = 4; // Result
 }
