@@ -48,9 +48,9 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type UserRecallRequest struct {
-	AccountId   string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	LastEventId string `protobuf:"bytes,2,opt,name=LastEventId,json=lastEventId" json:"LastEventId,omitempty"`
-	UserId      string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId,omitempty"`
+	AccountId   string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	LastEventId string `protobuf:"bytes,2,opt,name=LastEventId,json=lastEventId" json:"LastEventId"`
+	UserId      string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId"`
 }
 
 func (m *UserRecallRequest) Reset()                    { *m = UserRecallRequest{} }
@@ -80,9 +80,9 @@ func (m *UserRecallRequest) GetUserId() string {
 }
 
 type ChannelRecallRequest struct {
-	AccountId   string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	LastEventId string `protobuf:"bytes,2,opt,name=LastEventId,json=lastEventId" json:"LastEventId,omitempty"`
-	ChannelId   string `protobuf:"bytes,3,opt,name=ChannelId,json=channelId" json:"ChannelId,omitempty"`
+	AccountId   string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	LastEventId string `protobuf:"bytes,2,opt,name=LastEventId,json=lastEventId" json:"LastEventId"`
+	ChannelId   string `protobuf:"bytes,3,opt,name=ChannelId,json=channelId" json:"ChannelId"`
 }
 
 func (m *ChannelRecallRequest) Reset()                    { *m = ChannelRecallRequest{} }
@@ -112,9 +112,9 @@ func (m *ChannelRecallRequest) GetChannelId() string {
 }
 
 type Registration struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId,omitempty"`
-	Event     string `protobuf:"bytes,3,opt,name=Event,json=event" json:"Event,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	AgentId   string `protobuf:"bytes,2,opt,name=AgentId,json=agentId" json:"AgentId"`
+	Event     string `protobuf:"bytes,3,opt,name=Event,json=event" json:"Event"`
 }
 
 func (m *Registration) Reset()                    { *m = Registration{} }
@@ -144,8 +144,8 @@ func (m *Registration) GetEvent() string {
 }
 
 type Event struct {
-	Id      string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Payload string `protobuf:"bytes,2,opt,name=Payload,json=payload" json:"Payload,omitempty"`
+	Id      string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Payload string `protobuf:"bytes,2,opt,name=Payload,json=payload" json:"Payload"`
 }
 
 func (m *Event) Reset()                    { *m = Event{} }
@@ -168,7 +168,7 @@ func (m *Event) GetPayload() string {
 }
 
 type Events struct {
-	Events []*Event `protobuf:"bytes,1,rep,name=Events,json=events" json:"Events,omitempty"`
+	Events []*Event `protobuf:"bytes,1,rep,name=Events,json=events" json:"Events"`
 }
 
 func (m *Events) Reset()                    { *m = Events{} }
@@ -184,8 +184,8 @@ func (m *Events) GetEvents() []*Event {
 }
 
 type Cluster struct {
-	Service string   `protobuf:"bytes,1,opt,name=Service,json=service" json:"Service,omitempty"`
-	Hosts   []string `protobuf:"bytes,2,rep,name=Hosts,json=hosts" json:"Hosts,omitempty"`
+	Service string   `protobuf:"bytes,1,opt,name=Service,json=service" json:"Service"`
+	Hosts   []string `protobuf:"bytes,2,rep,name=Hosts,json=hosts" json:"Hosts"`
 }
 
 func (m *Cluster) Reset()                    { *m = Cluster{} }

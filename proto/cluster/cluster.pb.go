@@ -43,8 +43,8 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Cluster struct {
-	Service string   `protobuf:"bytes,1,opt,name=Service,json=service" json:"Service,omitempty"`
-	Hosts   []string `protobuf:"bytes,2,rep,name=Hosts,json=hosts" json:"Hosts,omitempty"`
+	Service string   `protobuf:"bytes,1,opt,name=Service,json=service" json:"Service"`
+	Hosts   []string `protobuf:"bytes,2,rep,name=Hosts,json=hosts" json:"Hosts"`
 }
 
 func (m *Cluster) Reset()                    { *m = Cluster{} }

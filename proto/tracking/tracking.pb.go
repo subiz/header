@@ -86,7 +86,7 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *Id) Reset()                    { *m = Id{} }
@@ -102,7 +102,7 @@ func (m *Id) GetId() string {
 }
 
 type Ids struct {
-	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids,omitempty"`
+	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids"`
 }
 
 func (m *Ids) Reset()                    { *m = Ids{} }
@@ -118,9 +118,9 @@ func (m *Ids) GetIds() []string {
 }
 
 type UserFields struct {
-	UserId string `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId,omitempty"`
+	UserId string `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId"`
 	// no accountid
-	Fields []*KeyValue `protobuf:"bytes,2,rep,name=Fields,json=fields" json:"Fields,omitempty"`
+	Fields []*KeyValue `protobuf:"bytes,2,rep,name=Fields,json=fields" json:"Fields"`
 }
 
 func (m *UserFields) Reset()                    { *m = UserFields{} }
@@ -143,7 +143,7 @@ func (m *UserFields) GetFields() []*KeyValue {
 }
 
 type UsersFields struct {
-	UsersFields []*UserFields `protobuf:"bytes,1,rep,name=UsersFields,json=usersFields" json:"UsersFields,omitempty"`
+	UsersFields []*UserFields `protobuf:"bytes,1,rep,name=UsersFields,json=usersFields" json:"UsersFields"`
 }
 
 func (m *UsersFields) Reset()                    { *m = UsersFields{} }
@@ -159,8 +159,8 @@ func (m *UsersFields) GetUsersFields() []*UserFields {
 }
 
 type MergeRequest struct {
-	FormerUserId string `protobuf:"bytes,1,opt,name=FormerUserId,json=formerUserId" json:"FormerUserId,omitempty"`
-	RecentUserId string `protobuf:"bytes,2,opt,name=RecentUserId,json=recentUserId" json:"RecentUserId,omitempty"`
+	FormerUserId string `protobuf:"bytes,1,opt,name=FormerUserId,json=formerUserId" json:"FormerUserId"`
+	RecentUserId string `protobuf:"bytes,2,opt,name=RecentUserId,json=recentUserId" json:"RecentUserId"`
 }
 
 func (m *MergeRequest) Reset()                    { *m = MergeRequest{} }
@@ -183,7 +183,7 @@ func (m *MergeRequest) GetRecentUserId() string {
 }
 
 type Events struct {
-	Events []string `protobuf:"bytes,1,rep,name=Events,json=events" json:"Events,omitempty"`
+	Events []string `protobuf:"bytes,1,rep,name=Events,json=events" json:"Events"`
 }
 
 func (m *Events) Reset()                    { *m = Events{} }
@@ -199,8 +199,8 @@ func (m *Events) GetEvents() []string {
 }
 
 type KeyValue struct {
-	Key   string `protobuf:"bytes,1,opt,name=Key,json=key" json:"Key,omitempty"`
-	Value string `protobuf:"bytes,2,opt,name=Value,json=value" json:"Value,omitempty"`
+	Key   string `protobuf:"bytes,1,opt,name=Key,json=key" json:"Key"`
+	Value string `protobuf:"bytes,2,opt,name=Value,json=value" json:"Value"`
 }
 
 func (m *KeyValue) Reset()                    { *m = KeyValue{} }
@@ -223,12 +223,12 @@ func (m *KeyValue) GetValue() string {
 }
 
 type Event struct {
-	AccountId string      `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	UserId    string      `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	Type      EventType   `protobuf:"varint,3,opt,name=Type,json=type,enum=tracking.EventType" json:"Type,omitempty"`
-	Fields    []*KeyValue `protobuf:"bytes,4,rep,name=Fields,json=fields" json:"Fields,omitempty"`
-	CTime     string      `protobuf:"bytes,5,opt,name=CTime,json=cTime" json:"CTime,omitempty"`
-	LTime     string      `protobuf:"bytes,6,opt,name=LTime,json=lTime" json:"LTime,omitempty"`
+	AccountId string      `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	UserId    string      `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId"`
+	Type      EventType   `protobuf:"varint,3,opt,name=Type,json=type,enum=tracking.EventType" json:"Type"`
+	Fields    []*KeyValue `protobuf:"bytes,4,rep,name=Fields,json=fields" json:"Fields"`
+	CTime     string      `protobuf:"bytes,5,opt,name=CTime,json=cTime" json:"CTime"`
+	LTime     string      `protobuf:"bytes,6,opt,name=LTime,json=lTime" json:"LTime"`
 }
 
 func (m *Event) Reset()                    { *m = Event{} }
@@ -279,10 +279,10 @@ func (m *Event) GetLTime() string {
 }
 
 type ListEventsByTypeAndUserRequest struct {
-	AccountId string    `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	Type      EventType `protobuf:"varint,2,opt,name=Type,json=type,enum=tracking.EventType" json:"Type,omitempty"`
-	StartId   string    `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Limit     int32     `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit,omitempty"`
+	AccountId string    `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	Type      EventType `protobuf:"varint,2,opt,name=Type,json=type,enum=tracking.EventType" json:"Type"`
+	StartId   string    `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId"`
+	Limit     int32     `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit"`
 }
 
 func (m *ListEventsByTypeAndUserRequest) Reset()                    { *m = ListEventsByTypeAndUserRequest{} }
@@ -319,10 +319,10 @@ func (m *ListEventsByTypeAndUserRequest) GetLimit() int32 {
 }
 
 type ListEventsByUserRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	StartId   string `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Limit     int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId"`
+	StartId   string `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId"`
+	Limit     int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit"`
 }
 
 func (m *ListEventsByUserRequest) Reset()                    { *m = ListEventsByUserRequest{} }
@@ -359,10 +359,10 @@ func (m *ListEventsByUserRequest) GetLimit() int32 {
 }
 
 type UserInfo struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	Key       string `protobuf:"bytes,3,opt,name=Key,json=key" json:"Key,omitempty"`
-	Value     string `protobuf:"bytes,4,opt,name=Value,json=value" json:"Value,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId"`
+	Key       string `protobuf:"bytes,3,opt,name=Key,json=key" json:"Key"`
+	Value     string `protobuf:"bytes,4,opt,name=Value,json=value" json:"Value"`
 }
 
 func (m *UserInfo) Reset()                    { *m = UserInfo{} }

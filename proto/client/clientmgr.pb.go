@@ -151,7 +151,7 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *Id) Reset()                    { *m = Id{} }
@@ -168,13 +168,13 @@ func (m *Id) GetId() string {
 
 type Webhook struct {
 	// Url of webhook, https only
-	Url string `protobuf:"bytes,1,opt,name=Url,json=url" json:"Url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=Url,json=url" json:"Url"`
 	// IsVerified set if we know the url is controlled by webhook creator
-	IsVerified bool `protobuf:"varint,2,opt,name=IsVerified,json=isVerified" json:"IsVerified,omitempty"`
+	IsVerified bool `protobuf:"varint,2,opt,name=IsVerified,json=isVerified" json:"IsVerified"`
 	// Topics list of topics that will be sent to webhook
-	Topics []string `protobuf:"bytes,3,rep,name=Topics,json=topics" json:"Topics,omitempty"`
+	Topics []string `protobuf:"bytes,3,rep,name=Topics,json=topics" json:"Topics"`
 	// IsEnabled decide the webhook is being used or not
-	IsEnabled bool `protobuf:"varint,4,opt,name=IsEnabled,json=isEnabled" json:"IsEnabled,omitempty"`
+	IsEnabled bool `protobuf:"varint,4,opt,name=IsEnabled,json=isEnabled" json:"IsEnabled"`
 }
 
 func (m *Webhook) Reset()                    { *m = Webhook{} }
@@ -212,42 +212,42 @@ func (m *Webhook) GetIsEnabled() bool {
 
 type Client struct {
 	// 128 bit string identification of the client.
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 	// Secret used to authorize client with oauth2 server
-	Secret string `protobuf:"bytes,2,opt,name=Secret,json=secret" json:"Secret,omitempty"`
+	Secret string `protobuf:"bytes,2,opt,name=Secret,json=secret" json:"Secret"`
 	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
-	LogoUrl string `protobuf:"bytes,3,opt,name=LogoUrl,json=logoUrl" json:"LogoUrl,omitempty"`
+	LogoUrl string `protobuf:"bytes,3,opt,name=LogoUrl,json=logoUrl" json:"LogoUrl"`
 	// owner id, could be Account or Agent
-	OwnerId          string `protobuf:"bytes,4,opt,name=OwnerId,json=ownerId" json:"OwnerId,omitempty"`
-	ContactEmail     string `protobuf:"bytes,5,opt,name=ContactEmail,json=contactEmail" json:"ContactEmail,omitempty"`
-	Description      string `protobuf:"bytes,6,opt,name=Description,json=description" json:"Description,omitempty"`
-	ShortDescription string `protobuf:"bytes,7,opt,name=ShortDescription,json=shortDescription" json:"ShortDescription,omitempty"`
+	OwnerId          string `protobuf:"bytes,4,opt,name=OwnerId,json=ownerId" json:"OwnerId"`
+	ContactEmail     string `protobuf:"bytes,5,opt,name=ContactEmail,json=contactEmail" json:"ContactEmail"`
+	Description      string `protobuf:"bytes,6,opt,name=Description,json=description" json:"Description"`
+	ShortDescription string `protobuf:"bytes,7,opt,name=ShortDescription,json=shortDescription" json:"ShortDescription"`
 	// IsVerified will be true if client is verified by the authority
-	IsVerified bool `protobuf:"varint,8,opt,name=IsVerified,json=isVerified" json:"IsVerified,omitempty"`
+	IsVerified bool `protobuf:"varint,8,opt,name=IsVerified,json=isVerified" json:"IsVerified"`
 	// List of URLs which client must register for oauth redirection
-	RedirectUrls []string   `protobuf:"bytes,9,rep,name=RedirectUrls,json=redirectUrls" json:"RedirectUrls,omitempty"`
-	Webhooks     []*Webhook `protobuf:"bytes,10,rep,name=Webhooks,json=webhooks" json:"Webhooks,omitempty"`
-	Type         ClientType `protobuf:"varint,11,opt,name=Type,json=type,enum=client.ClientType" json:"Type,omitempty"`
-	Name         string     `protobuf:"bytes,12,opt,name=Name,json=name" json:"Name,omitempty"`
+	RedirectUrls []string   `protobuf:"bytes,9,rep,name=RedirectUrls,json=redirectUrls" json:"RedirectUrls"`
+	Webhooks     []*Webhook `protobuf:"bytes,10,rep,name=Webhooks,json=webhooks" json:"Webhooks"`
+	Type         ClientType `protobuf:"varint,11,opt,name=Type,json=type,enum=client.ClientType" json:"Type"`
+	Name         string     `protobuf:"bytes,12,opt,name=Name,json=name" json:"Name"`
 	// Set if app is created or trusted by subiz,
 	// the client will have privilenge to do any action.
-	IsInternal bool `protobuf:"varint,13,opt,name=IsInternal,json=isInternal" json:"IsInternal,omitempty"`
+	IsInternal bool `protobuf:"varint,13,opt,name=IsInternal,json=isInternal" json:"IsInternal"`
 	// Version number of the client.
-	Version string `protobuf:"bytes,14,opt,name=Version,json=version" json:"Version,omitempty"`
+	Version string `protobuf:"bytes,14,opt,name=Version,json=version" json:"Version"`
 	// If this field setted to true, client is visible to any account, else,
 	// only visible in owner account.
-	IsPublic bool `protobuf:"varint,15,opt,name=IsPublic,json=isPublic" json:"IsPublic,omitempty"`
+	IsPublic bool `protobuf:"varint,15,opt,name=IsPublic,json=isPublic" json:"IsPublic"`
 	// PublishDate, a RFC3339 date string show when have the client is
 	// published.
-	PublishDate string `protobuf:"bytes,16,opt,name=PublishDate,json=publishDate" json:"PublishDate,omitempty"`
+	PublishDate string `protobuf:"bytes,16,opt,name=PublishDate,json=publishDate" json:"PublishDate"`
 	// Clients capable of maintaining the confidentiality of their
 	// credentials (e.g., client implemented on a secure server with
 	// restricted access to the client credentials), or capable of secure
 	// client authentication using other means.
-	IsConfidential bool `protobuf:"varint,17,opt,name=IsConfidential,json=isConfidential" json:"IsConfidential,omitempty"`
+	IsConfidential bool `protobuf:"varint,17,opt,name=IsConfidential,json=isConfidential" json:"IsConfidential"`
 	// conversations on this channel will be close if there
 	// are no message pass in last ClosedTimeout seconds
-	DefaultClosedTimeout int32 `protobuf:"varint,18,opt,name=DefaultClosedTimeout,json=defaultClosedTimeout" json:"DefaultClosedTimeout,omitempty"`
+	DefaultClosedTimeout int32 `protobuf:"varint,18,opt,name=DefaultClosedTimeout,json=defaultClosedTimeout" json:"DefaultClosedTimeout"`
 }
 
 func (m *Client) Reset()                    { *m = Client{} }
@@ -382,7 +382,7 @@ func (m *Client) GetDefaultClosedTimeout() int32 {
 }
 
 type Secret struct {
-	Secret string `protobuf:"bytes,1,opt,name=Secret,json=secret" json:"Secret,omitempty"`
+	Secret string `protobuf:"bytes,1,opt,name=Secret,json=secret" json:"Secret"`
 }
 
 func (m *Secret) Reset()                    { *m = Secret{} }
@@ -398,10 +398,10 @@ func (m *Secret) GetSecret() string {
 }
 
 type ListClientsRequest struct {
-	OwnerId string `protobuf:"bytes,1,opt,name=OwnerId,json=ownerId" json:"OwnerId,omitempty"`
-	Keyword string `protobuf:"bytes,2,opt,name=Keyword,json=keyword" json:"Keyword,omitempty"`
-	StartId string `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Limit   int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit,omitempty"`
+	OwnerId string `protobuf:"bytes,1,opt,name=OwnerId,json=ownerId" json:"OwnerId"`
+	Keyword string `protobuf:"bytes,2,opt,name=Keyword,json=keyword" json:"Keyword"`
+	StartId string `protobuf:"bytes,3,opt,name=StartId,json=startId" json:"StartId"`
+	Limit   int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit"`
 }
 
 func (m *ListClientsRequest) Reset()                    { *m = ListClientsRequest{} }
@@ -438,7 +438,7 @@ func (m *ListClientsRequest) GetLimit() int32 {
 }
 
 type Clients struct {
-	Clients []*Client `protobuf:"bytes,3,rep,name=Clients,json=clients" json:"Clients,omitempty"`
+	Clients []*Client `protobuf:"bytes,3,rep,name=Clients,json=clients" json:"Clients"`
 }
 
 func (m *Clients) Reset()                    { *m = Clients{} }
@@ -454,8 +454,8 @@ func (m *Clients) GetClients() []*Client {
 }
 
 type BoolValueRequest struct {
-	Id    string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Value bool   `protobuf:"varint,2,opt,name=Value,json=value" json:"Value,omitempty"`
+	Id    string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Value bool   `protobuf:"varint,2,opt,name=Value,json=value" json:"Value"`
 }
 
 func (m *BoolValueRequest) Reset()                    { *m = BoolValueRequest{} }
@@ -478,11 +478,11 @@ func (m *BoolValueRequest) GetValue() bool {
 }
 
 type Registration struct {
-	UserId       string  `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	ClientId     string  `protobuf:"bytes,2,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
-	InvalidScope bool    `protobuf:"varint,3,opt,name=InvalidScope,json=invalidScope" json:"InvalidScope,omitempty"`
-	RegisterDate string  `protobuf:"bytes,4,opt,name=RegisterDate,json=registerDate" json:"RegisterDate,omitempty"`
-	ScopeIds     []int32 `protobuf:"varint,5,rep,packed,name=ScopeIds,json=scopeIds" json:"ScopeIds,omitempty"`
+	UserId       string  `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId"`
+	ClientId     string  `protobuf:"bytes,2,opt,name=ClientId,json=clientId" json:"ClientId"`
+	InvalidScope bool    `protobuf:"varint,3,opt,name=InvalidScope,json=invalidScope" json:"InvalidScope"`
+	RegisterDate string  `protobuf:"bytes,4,opt,name=RegisterDate,json=registerDate" json:"RegisterDate"`
+	ScopeIds     []int32 `protobuf:"varint,5,rep,packed,name=ScopeIds,json=scopeIds" json:"ScopeIds"`
 }
 
 func (m *Registration) Reset()                    { *m = Registration{} }
@@ -526,7 +526,7 @@ func (m *Registration) GetScopeIds() []int32 {
 }
 
 type Registrations struct {
-	Registraions []*Registration `protobuf:"bytes,1,rep,name=Registraions,json=registraions" json:"Registraions,omitempty"`
+	Registraions []*Registration `protobuf:"bytes,1,rep,name=Registraions,json=registraions" json:"Registraions"`
 }
 
 func (m *Registrations) Reset()                    { *m = Registrations{} }
@@ -542,7 +542,7 @@ func (m *Registrations) GetRegistraions() []*Registration {
 }
 
 type ClientCreatedEvent struct {
-	Client *Client `protobuf:"bytes,1,opt,name=Client,json=client" json:"Client,omitempty"`
+	Client *Client `protobuf:"bytes,1,opt,name=Client,json=client" json:"Client"`
 }
 
 func (m *ClientCreatedEvent) Reset()                    { *m = ClientCreatedEvent{} }
@@ -558,7 +558,7 @@ func (m *ClientCreatedEvent) GetClient() *Client {
 }
 
 type ClientDeletedEvent struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *ClientDeletedEvent) Reset()                    { *m = ClientDeletedEvent{} }
@@ -574,7 +574,7 @@ func (m *ClientDeletedEvent) GetId() string {
 }
 
 type ClientUpdatedEvent struct {
-	Client *Client `protobuf:"bytes,1,opt,name=Client,json=client" json:"Client,omitempty"`
+	Client *Client `protobuf:"bytes,1,opt,name=Client,json=client" json:"Client"`
 }
 
 func (m *ClientUpdatedEvent) Reset()                    { *m = ClientUpdatedEvent{} }
@@ -590,8 +590,8 @@ func (m *ClientUpdatedEvent) GetClient() *Client {
 }
 
 type ClientPublishedEvent struct {
-	Id        string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Published bool   `protobuf:"varint,2,opt,name=Published,json=published" json:"Published,omitempty"`
+	Id        string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Published bool   `protobuf:"varint,2,opt,name=Published,json=published" json:"Published"`
 }
 
 func (m *ClientPublishedEvent) Reset()                    { *m = ClientPublishedEvent{} }
@@ -614,8 +614,8 @@ func (m *ClientPublishedEvent) GetPublished() bool {
 }
 
 type ClientVerifiedEvent struct {
-	Id       string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Verified bool   `protobuf:"varint,2,opt,name=Verified,json=verified" json:"Verified,omitempty"`
+	Id       string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Verified bool   `protobuf:"varint,2,opt,name=Verified,json=verified" json:"Verified"`
 }
 
 func (m *ClientVerifiedEvent) Reset()                    { *m = ClientVerifiedEvent{} }
@@ -638,8 +638,8 @@ func (m *ClientVerifiedEvent) GetVerified() bool {
 }
 
 type ClientUpdatedSecretEvent struct {
-	Id     string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Secret string `protobuf:"bytes,2,opt,name=Secret,json=secret" json:"Secret,omitempty"`
+	Id     string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Secret string `protobuf:"bytes,2,opt,name=Secret,json=secret" json:"Secret"`
 }
 
 func (m *ClientUpdatedSecretEvent) Reset()                    { *m = ClientUpdatedSecretEvent{} }

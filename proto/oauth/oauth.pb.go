@@ -96,9 +96,9 @@ func (x Error) String() string {
 func (Error) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type RevokeRequest struct {
-	ClientId  string `protobuf:"bytes,1,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
-	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	AccountId string `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	ClientId  string `protobuf:"bytes,1,opt,name=ClientId,json=clientId" json:"ClientId"`
+	UserId    string `protobuf:"bytes,2,opt,name=UserId,json=userId" json:"UserId"`
+	AccountId string `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId"`
 }
 
 func (m *RevokeRequest) Reset()                    { *m = RevokeRequest{} }
@@ -128,7 +128,7 @@ func (m *RevokeRequest) GetAccountId() string {
 }
 
 type IdRequest struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *IdRequest) Reset()                    { *m = IdRequest{} }
@@ -144,12 +144,12 @@ func (m *IdRequest) GetId() string {
 }
 
 type Registration struct {
-	ClientId      string        `protobuf:"bytes,1,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
-	ClientName    string        `protobuf:"bytes,2,opt,name=ClientName,json=clientName" json:"ClientName,omitempty"`
-	ClientLogoUrl string        `protobuf:"bytes,3,opt,name=ClientLogoUrl,json=clientLogoUrl" json:"ClientLogoUrl,omitempty"`
-	Scopes        []*auth.Scope `protobuf:"bytes,4,rep,name=Scopes,json=scopes" json:"Scopes,omitempty"`
-	RegisterDate  string        `protobuf:"bytes,5,opt,name=RegisterDate,json=registerDate" json:"RegisterDate,omitempty"`
-	RegisterId    string        `protobuf:"bytes,6,opt,name=RegisterId,json=registerId" json:"RegisterId,omitempty"`
+	ClientId      string        `protobuf:"bytes,1,opt,name=ClientId,json=clientId" json:"ClientId"`
+	ClientName    string        `protobuf:"bytes,2,opt,name=ClientName,json=clientName" json:"ClientName"`
+	ClientLogoUrl string        `protobuf:"bytes,3,opt,name=ClientLogoUrl,json=clientLogoUrl" json:"ClientLogoUrl"`
+	Scopes        []*auth.Scope `protobuf:"bytes,4,rep,name=Scopes,json=scopes" json:"Scopes"`
+	RegisterDate  string        `protobuf:"bytes,5,opt,name=RegisterDate,json=registerDate" json:"RegisterDate"`
+	RegisterId    string        `protobuf:"bytes,6,opt,name=RegisterId,json=registerId" json:"RegisterId"`
 }
 
 func (m *Registration) Reset()                    { *m = Registration{} }
@@ -208,7 +208,7 @@ func (*EmptyResponse) ProtoMessage()               {}
 func (*EmptyResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
 type Registrations struct {
-	Registrations []*Registration `protobuf:"bytes,1,rep,name=Registrations,json=registrations" json:"Registrations,omitempty"`
+	Registrations []*Registration `protobuf:"bytes,1,rep,name=Registrations,json=registrations" json:"Registrations"`
 }
 
 func (m *Registrations) Reset()                    { *m = Registrations{} }

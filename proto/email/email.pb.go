@@ -35,12 +35,12 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Email struct {
-	From        string   `protobuf:"bytes,1,opt,name=From,json=from" json:"From,omitempty"`
-	To          string   `protobuf:"bytes,2,opt,name=To,json=to" json:"To,omitempty"`
-	Subject     string   `protobuf:"bytes,3,opt,name=Subject,json=subject" json:"Subject,omitempty"`
-	Body        string   `protobuf:"bytes,4,opt,name=Body,json=body" json:"Body,omitempty"`
-	JSONData    string   `protobuf:"bytes,5,opt,name=JSONData,json=jSONData" json:"JSONData,omitempty"`
-	AttachLinks []string `protobuf:"bytes,6,rep,name=AttachLinks,json=attachLinks" json:"AttachLinks,omitempty"`
+	From        string   `protobuf:"bytes,1,opt,name=From,json=from" json:"From"`
+	To          string   `protobuf:"bytes,2,opt,name=To,json=to" json:"To"`
+	Subject     string   `protobuf:"bytes,3,opt,name=Subject,json=subject" json:"Subject"`
+	Body        string   `protobuf:"bytes,4,opt,name=Body,json=body" json:"Body"`
+	JSONData    string   `protobuf:"bytes,5,opt,name=JSONData,json=jSONData" json:"JSONData"`
+	AttachLinks []string `protobuf:"bytes,6,rep,name=AttachLinks,json=attachLinks" json:"AttachLinks"`
 }
 
 func (m *Email) Reset()                    { *m = Email{} }

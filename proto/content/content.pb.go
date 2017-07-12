@@ -40,8 +40,8 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type KeyValue struct {
-	Key   string `protobuf:"bytes,1,opt,name=Key,json=key" json:"Key,omitempty"`
-	Value string `protobuf:"bytes,2,opt,name=Value,json=value" json:"Value,omitempty"`
+	Key   string `protobuf:"bytes,1,opt,name=Key,json=key" json:"Key"`
+	Value string `protobuf:"bytes,2,opt,name=Value,json=value" json:"Value"`
 }
 
 func (m *KeyValue) Reset()                    { *m = KeyValue{} }
@@ -64,20 +64,20 @@ func (m *KeyValue) GetValue() string {
 }
 
 type Content struct {
-	Id             string      `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	AccountId      string      `protobuf:"bytes,14,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	Description    string      `protobuf:"bytes,2,opt,name=Description,json=description" json:"Description,omitempty"`
-	Title          string      `protobuf:"bytes,3,opt,name=Title,json=title" json:"Title,omitempty"`
-	Link           string      `protobuf:"bytes,4,opt,name=Link,json=link" json:"Link,omitempty"`
-	Categories     []string    `protobuf:"bytes,6,rep,name=Categories,json=categories" json:"Categories,omitempty"`
-	AttachmentLink string      `protobuf:"bytes,7,opt,name=AttachmentLink,json=attachmentLink" json:"AttachmentLink,omitempty"`
-	Labels         []string    `protobuf:"bytes,8,rep,name=Labels,json=labels" json:"Labels,omitempty"`
-	Availability   bool        `protobuf:"varint,9,opt,name=Availability,json=availability" json:"Availability,omitempty"`
-	Price          string      `protobuf:"bytes,10,opt,name=Price,json=price" json:"Price,omitempty"`
-	Currency       string      `protobuf:"bytes,11,opt,name=Currency,json=currency" json:"Currency,omitempty"`
-	SalePrice      string      `protobuf:"bytes,12,opt,name=SalePrice,json=salePrice" json:"SalePrice,omitempty"`
-	Fields         []*KeyValue `protobuf:"bytes,13,rep,name=Fields,json=fields" json:"Fields,omitempty"`
-	RelatedIds     []string    `protobuf:"bytes,15,rep,name=RelatedIds,json=relatedIds" json:"RelatedIds,omitempty"`
+	Id             string      `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	AccountId      string      `protobuf:"bytes,14,opt,name=AccountId,json=accountId" json:"AccountId"`
+	Description    string      `protobuf:"bytes,2,opt,name=Description,json=description" json:"Description"`
+	Title          string      `protobuf:"bytes,3,opt,name=Title,json=title" json:"Title"`
+	Link           string      `protobuf:"bytes,4,opt,name=Link,json=link" json:"Link"`
+	Categories     []string    `protobuf:"bytes,6,rep,name=Categories,json=categories" json:"Categories"`
+	AttachmentLink string      `protobuf:"bytes,7,opt,name=AttachmentLink,json=attachmentLink" json:"AttachmentLink"`
+	Labels         []string    `protobuf:"bytes,8,rep,name=Labels,json=labels" json:"Labels"`
+	Availability   bool        `protobuf:"varint,9,opt,name=Availability,json=availability" json:"Availability"`
+	Price          string      `protobuf:"bytes,10,opt,name=Price,json=price" json:"Price"`
+	Currency       string      `protobuf:"bytes,11,opt,name=Currency,json=currency" json:"Currency"`
+	SalePrice      string      `protobuf:"bytes,12,opt,name=SalePrice,json=salePrice" json:"SalePrice"`
+	Fields         []*KeyValue `protobuf:"bytes,13,rep,name=Fields,json=fields" json:"Fields"`
+	RelatedIds     []string    `protobuf:"bytes,15,rep,name=RelatedIds,json=relatedIds" json:"RelatedIds"`
 }
 
 func (m *Content) Reset()                    { *m = Content{} }
@@ -184,7 +184,7 @@ func (m *Content) GetRelatedIds() []string {
 }
 
 type Contents struct {
-	Contents []*Content `protobuf:"bytes,1,rep,name=Contents,json=contents" json:"Contents,omitempty"`
+	Contents []*Content `protobuf:"bytes,1,rep,name=Contents,json=contents" json:"Contents"`
 }
 
 func (m *Contents) Reset()                    { *m = Contents{} }
@@ -200,7 +200,7 @@ func (m *Contents) GetContents() []*Content {
 }
 
 type Ids struct {
-	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids,omitempty"`
+	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids"`
 }
 
 func (m *Ids) Reset()                    { *m = Ids{} }
@@ -216,7 +216,7 @@ func (m *Ids) GetIds() []string {
 }
 
 type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *Id) Reset()                    { *m = Id{} }
@@ -240,11 +240,11 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
 type ListRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	StartId   string `protobuf:"bytes,2,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Category  string `protobuf:"bytes,3,opt,name=Category,json=category" json:"Category,omitempty"`
-	Limit     int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit,omitempty"`
-	Keyword   string `protobuf:"bytes,5,opt,name=Keyword,json=keyword" json:"Keyword,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	StartId   string `protobuf:"bytes,2,opt,name=StartId,json=startId" json:"StartId"`
+	Category  string `protobuf:"bytes,3,opt,name=Category,json=category" json:"Category"`
+	Limit     int32  `protobuf:"varint,4,opt,name=Limit,json=limit" json:"Limit"`
+	Keyword   string `protobuf:"bytes,5,opt,name=Keyword,json=keyword" json:"Keyword"`
 }
 
 func (m *ListRequest) Reset()                    { *m = ListRequest{} }

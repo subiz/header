@@ -37,15 +37,15 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type UserAgent struct {
-	Id                   int32  `protobuf:"varint,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	BrowserVersionFull   string `protobuf:"bytes,2,opt,name=BrowserVersionFull,json=browserVersionFull" json:"BrowserVersionFull,omitempty"`
-	LayoutEngine         string `protobuf:"bytes,3,opt,name=LayoutEngine,json=layoutEngine" json:"LayoutEngine,omitempty"`
-	LayoutEngineVersion  string `protobuf:"bytes,4,opt,name=LayoutEngineVersion,json=layoutEngineVersion" json:"LayoutEngineVersion,omitempty"`
-	HardwareArchitecture string `protobuf:"bytes,5,opt,name=HardwareArchitecture,json=hardwareArchitecture" json:"HardwareArchitecture,omitempty"`
-	Os                   string `protobuf:"bytes,6,opt,name=Os,json=os" json:"Os,omitempty"`
-	BrowserVersion       string `protobuf:"bytes,7,opt,name=BrowserVersion,json=browserVersion" json:"BrowserVersion,omitempty"`
-	DeviceType           string `protobuf:"bytes,8,opt,name=DeviceType,json=deviceType" json:"DeviceType,omitempty"`
-	UserAgent            string `protobuf:"bytes,9,opt,name=UserAgent,json=userAgent" json:"UserAgent,omitempty"`
+	Id                   int32  `protobuf:"varint,1,opt,name=Id,json=id" json:"Id"`
+	BrowserVersionFull   string `protobuf:"bytes,2,opt,name=BrowserVersionFull,json=browserVersionFull" json:"BrowserVersionFull"`
+	LayoutEngine         string `protobuf:"bytes,3,opt,name=LayoutEngine,json=layoutEngine" json:"LayoutEngine"`
+	LayoutEngineVersion  string `protobuf:"bytes,4,opt,name=LayoutEngineVersion,json=layoutEngineVersion" json:"LayoutEngineVersion"`
+	HardwareArchitecture string `protobuf:"bytes,5,opt,name=HardwareArchitecture,json=hardwareArchitecture" json:"HardwareArchitecture"`
+	Os                   string `protobuf:"bytes,6,opt,name=Os,json=os" json:"Os"`
+	BrowserVersion       string `protobuf:"bytes,7,opt,name=BrowserVersion,json=browserVersion" json:"BrowserVersion"`
+	DeviceType           string `protobuf:"bytes,8,opt,name=DeviceType,json=deviceType" json:"DeviceType"`
+	UserAgent            string `protobuf:"bytes,9,opt,name=UserAgent,json=userAgent" json:"UserAgent"`
 }
 
 func (m *UserAgent) Reset()                    { *m = UserAgent{} }
@@ -117,7 +117,7 @@ func (m *UserAgent) GetUserAgent() string {
 }
 
 type String struct {
-	String_ string `protobuf:"bytes,1,opt,name=String,json=string" json:"String,omitempty"`
+	String_ string `protobuf:"bytes,1,opt,name=String,json=string" json:"String"`
 }
 
 func (m *String) Reset()                    { *m = String{} }
@@ -133,7 +133,7 @@ func (m *String) GetString_() string {
 }
 
 type Zipped struct {
-	Id int32 `protobuf:"varint,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id int32 `protobuf:"varint,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *Zipped) Reset()                    { *m = Zipped{} }
@@ -149,11 +149,11 @@ func (m *Zipped) GetId() int32 {
 }
 
 type Location struct {
-	Id       int32  `protobuf:"varint,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Country  string `protobuf:"bytes,2,opt,name=Country,json=country" json:"Country,omitempty"`
-	City     string `protobuf:"bytes,3,opt,name=City,json=city" json:"City,omitempty"`
-	TimeZone string `protobuf:"bytes,4,opt,name=TimeZone,json=timeZone" json:"TimeZone,omitempty"`
-	Language string `protobuf:"bytes,5,opt,name=Language,json=language" json:"Language,omitempty"`
+	Id       int32  `protobuf:"varint,1,opt,name=Id,json=id" json:"Id"`
+	Country  string `protobuf:"bytes,2,opt,name=Country,json=country" json:"Country"`
+	City     string `protobuf:"bytes,3,opt,name=City,json=city" json:"City"`
+	TimeZone string `protobuf:"bytes,4,opt,name=TimeZone,json=timeZone" json:"TimeZone"`
+	Language string `protobuf:"bytes,5,opt,name=Language,json=language" json:"Language"`
 }
 
 func (m *Location) Reset()                    { *m = Location{} }

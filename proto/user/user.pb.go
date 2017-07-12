@@ -43,17 +43,17 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type User struct {
-	Id        string    `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Alias     []string  `protobuf:"bytes,2,rep,name=Alias,json=alias" json:"Alias,omitempty"`
-	AccountId string    `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	FirstName string    `protobuf:"bytes,4,opt,name=FirstName,json=firstName" json:"FirstName,omitempty"`
-	LastName  string    `protobuf:"bytes,5,opt,name=LastName,json=lastName" json:"LastName,omitempty"`
-	Phones    []string  `protobuf:"bytes,6,rep,name=Phones,json=phones" json:"Phones,omitempty"`
-	Emails    []string  `protobuf:"bytes,7,rep,name=Emails,json=emails" json:"Emails,omitempty"`
-	Traces    []*Trace  `protobuf:"bytes,8,rep,name=Traces,json=traces" json:"Traces,omitempty"`
-	Devices   []*Device `protobuf:"bytes,9,rep,name=Devices,json=devices" json:"Devices,omitempty"`
-	IsBan     bool      `protobuf:"varint,10,opt,name=IsBan,json=isBan" json:"IsBan,omitempty"`
-	AvatarUrl string    `protobuf:"bytes,11,opt,name=AvatarUrl,json=avatarUrl" json:"AvatarUrl,omitempty"`
+	Id        string    `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Alias     []string  `protobuf:"bytes,2,rep,name=Alias,json=alias" json:"Alias"`
+	AccountId string    `protobuf:"bytes,3,opt,name=AccountId,json=accountId" json:"AccountId"`
+	FirstName string    `protobuf:"bytes,4,opt,name=FirstName,json=firstName" json:"FirstName"`
+	LastName  string    `protobuf:"bytes,5,opt,name=LastName,json=lastName" json:"LastName"`
+	Phones    []string  `protobuf:"bytes,6,rep,name=Phones,json=phones" json:"Phones"`
+	Emails    []string  `protobuf:"bytes,7,rep,name=Emails,json=emails" json:"Emails"`
+	Traces    []*Trace  `protobuf:"bytes,8,rep,name=Traces,json=traces" json:"Traces"`
+	Devices   []*Device `protobuf:"bytes,9,rep,name=Devices,json=devices" json:"Devices"`
+	IsBan     bool      `protobuf:"varint,10,opt,name=IsBan,json=isBan" json:"IsBan"`
+	AvatarUrl string    `protobuf:"bytes,11,opt,name=AvatarUrl,json=avatarUrl" json:"AvatarUrl"`
 }
 
 func (m *User) Reset()                    { *m = User{} }
@@ -139,7 +139,7 @@ func (m *User) GetAvatarUrl() string {
 }
 
 type Users struct {
-	Users []*User `protobuf:"bytes,1,rep,name=Users,json=users" json:"Users,omitempty"`
+	Users []*User `protobuf:"bytes,1,rep,name=Users,json=users" json:"Users"`
 }
 
 func (m *Users) Reset()                    { *m = Users{} }
@@ -155,10 +155,10 @@ func (m *Users) GetUsers() []*User {
 }
 
 type Device struct {
-	Id              int32  `protobuf:"varint,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	UserAgentZipped int32  `protobuf:"varint,2,opt,name=UserAgentZipped,json=userAgentZipped" json:"UserAgentZipped,omitempty"`
-	Resolution      string `protobuf:"bytes,3,opt,name=Resolution,json=resolution" json:"Resolution,omitempty"`
-	LanguageZipped  int32  `protobuf:"varint,4,opt,name=LanguageZipped,json=languageZipped" json:"LanguageZipped,omitempty"`
+	Id              int32  `protobuf:"varint,1,opt,name=Id,json=id" json:"Id"`
+	UserAgentZipped int32  `protobuf:"varint,2,opt,name=UserAgentZipped,json=userAgentZipped" json:"UserAgentZipped"`
+	Resolution      string `protobuf:"bytes,3,opt,name=Resolution,json=resolution" json:"Resolution"`
+	LanguageZipped  int32  `protobuf:"varint,4,opt,name=LanguageZipped,json=languageZipped" json:"LanguageZipped"`
 }
 
 func (m *Device) Reset()                    { *m = Device{} }
@@ -195,9 +195,9 @@ func (m *Device) GetLanguageZipped() int32 {
 }
 
 type Trace struct {
-	Id             string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	IP             string `protobuf:"bytes,2,opt,name=IP,json=iP" json:"IP,omitempty"`
-	LocationZipped int32  `protobuf:"varint,3,opt,name=LocationZipped,json=locationZipped" json:"LocationZipped,omitempty"`
+	Id             string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	IP             string `protobuf:"bytes,2,opt,name=IP,json=iP" json:"IP"`
+	LocationZipped int32  `protobuf:"varint,3,opt,name=LocationZipped,json=locationZipped" json:"LocationZipped"`
 }
 
 func (m *Trace) Reset()                    { *m = Trace{} }
@@ -227,7 +227,7 @@ func (m *Trace) GetLocationZipped() int32 {
 }
 
 type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *Id) Reset()                    { *m = Id{} }
@@ -251,7 +251,7 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
 type Ids struct {
-	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids,omitempty"`
+	Ids []string `protobuf:"bytes,1,rep,name=Ids,json=ids" json:"Ids"`
 }
 
 func (m *Ids) Reset()                    { *m = Ids{} }
@@ -267,10 +267,10 @@ func (m *Ids) GetIds() []string {
 }
 
 type ListRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	StartId   string `protobuf:"bytes,2,opt,name=StartId,json=startId" json:"StartId,omitempty"`
-	Limit     int32  `protobuf:"varint,3,opt,name=Limit,json=limit" json:"Limit,omitempty"`
-	Keyword   string `protobuf:"bytes,4,opt,name=Keyword,json=keyword" json:"Keyword,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	StartId   string `protobuf:"bytes,2,opt,name=StartId,json=startId" json:"StartId"`
+	Limit     int32  `protobuf:"varint,3,opt,name=Limit,json=limit" json:"Limit"`
+	Keyword   string `protobuf:"bytes,4,opt,name=Keyword,json=keyword" json:"Keyword"`
 }
 
 func (m *ListRequest) Reset()                    { *m = ListRequest{} }
@@ -307,8 +307,8 @@ func (m *ListRequest) GetKeyword() string {
 }
 
 type MergeRequest struct {
-	FormerUserId string `protobuf:"bytes,1,opt,name=FormerUserId,json=formerUserId" json:"FormerUserId,omitempty"`
-	RecentUserId string `protobuf:"bytes,2,opt,name=RecentUserId,json=recentUserId" json:"RecentUserId,omitempty"`
+	FormerUserId string `protobuf:"bytes,1,opt,name=FormerUserId,json=formerUserId" json:"FormerUserId"`
+	RecentUserId string `protobuf:"bytes,2,opt,name=RecentUserId,json=recentUserId" json:"RecentUserId"`
 }
 
 func (m *MergeRequest) Reset()                    { *m = MergeRequest{} }
@@ -331,10 +331,10 @@ func (m *MergeRequest) GetRecentUserId() string {
 }
 
 type GreetingRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
-	UserAgent string `protobuf:"bytes,2,opt,name=UserAgent,json=userAgent" json:"UserAgent,omitempty"`
-	UserId    string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	UUID      string `protobuf:"bytes,4,opt,name=UUID,json=uUID" json:"UUID,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	UserAgent string `protobuf:"bytes,2,opt,name=UserAgent,json=userAgent" json:"UserAgent"`
+	UserId    string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId"`
+	UUID      string `protobuf:"bytes,4,opt,name=UUID,json=uUID" json:"UUID"`
 }
 
 func (m *GreetingRequest) Reset()                    { *m = GreetingRequest{} }

@@ -75,8 +75,8 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Event struct {
-	RequestId string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId,omitempty"`
-	Content   []byte `protobuf:"bytes,2,opt,name=Content,json=content,proto3" json:"Content,omitempty"`
+	RequestId string `protobuf:"bytes,1,opt,name=RequestId,json=requestId" json:"RequestId"`
+	Content   []byte `protobuf:"bytes,2,opt,name=Content,json=content,proto3" json:"Content"`
 }
 
 func (m *Event) Reset()                    { *m = Event{} }
@@ -99,12 +99,12 @@ func (m *Event) GetContent() []byte {
 }
 
 type RestRequest struct {
-	Method      Method `protobuf:"varint,1,opt,name=Method,json=method,enum=api.Method" json:"Method,omitempty"`
-	Path        string `protobuf:"bytes,2,opt,name=Path,json=path" json:"Path,omitempty"`
-	Token       string `protobuf:"bytes,3,opt,name=Token,json=token" json:"Token,omitempty"`
-	ContentType string `protobuf:"bytes,4,opt,name=ContentType,json=contentType" json:"ContentType,omitempty"`
-	Content     string `protobuf:"bytes,5,opt,name=Content,json=content" json:"Content,omitempty"`
-	Ip          string `protobuf:"bytes,6,opt,name=Ip,json=ip" json:"Ip,omitempty"`
+	Method      Method `protobuf:"varint,1,opt,name=Method,json=method,enum=api.Method" json:"Method"`
+	Path        string `protobuf:"bytes,2,opt,name=Path,json=path" json:"Path"`
+	Token       string `protobuf:"bytes,3,opt,name=Token,json=token" json:"Token"`
+	ContentType string `protobuf:"bytes,4,opt,name=ContentType,json=contentType" json:"ContentType"`
+	Content     string `protobuf:"bytes,5,opt,name=Content,json=content" json:"Content"`
+	Ip          string `protobuf:"bytes,6,opt,name=Ip,json=ip" json:"Ip"`
 }
 
 func (m *RestRequest) Reset()                    { *m = RestRequest{} }
@@ -155,9 +155,9 @@ func (m *RestRequest) GetIp() string {
 }
 
 type RestResponse struct {
-	Code        int32  `protobuf:"varint,1,opt,name=Code,json=code" json:"Code,omitempty"`
-	Content     string `protobuf:"bytes,2,opt,name=Content,json=content" json:"Content,omitempty"`
-	ContentType string `protobuf:"bytes,3,opt,name=ContentType,json=contentType" json:"ContentType,omitempty"`
+	Code        int32  `protobuf:"varint,1,opt,name=Code,json=code" json:"Code"`
+	Content     string `protobuf:"bytes,2,opt,name=Content,json=content" json:"Content"`
+	ContentType string `protobuf:"bytes,3,opt,name=ContentType,json=contentType" json:"ContentType"`
 }
 
 func (m *RestResponse) Reset()                    { *m = RestResponse{} }

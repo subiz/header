@@ -45,8 +45,8 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Subscription struct {
-	Topic      string `protobuf:"bytes,1,opt,name=Topic,json=topic" json:"Topic,omitempty"`
-	Subscriber string `protobuf:"bytes,2,opt,name=Subscriber,json=subscriber" json:"Subscriber,omitempty"`
+	Topic      string `protobuf:"bytes,1,opt,name=Topic,json=topic" json:"Topic"`
+	Subscriber string `protobuf:"bytes,2,opt,name=Subscriber,json=subscriber" json:"Subscriber"`
 }
 
 func (m *Subscription) Reset()                    { *m = Subscription{} }
@@ -69,9 +69,9 @@ func (m *Subscription) GetSubscriber() string {
 }
 
 type ListRequest struct {
-	Topic string `protobuf:"bytes,1,opt,name=Topic,json=topic" json:"Topic,omitempty"`
-	Start string `protobuf:"bytes,2,opt,name=Start,json=start" json:"Start,omitempty"`
-	Limit int32  `protobuf:"varint,3,opt,name=Limit,json=limit" json:"Limit,omitempty"`
+	Topic string `protobuf:"bytes,1,opt,name=Topic,json=topic" json:"Topic"`
+	Start string `protobuf:"bytes,2,opt,name=Start,json=start" json:"Start"`
+	Limit int32  `protobuf:"varint,3,opt,name=Limit,json=limit" json:"Limit"`
 }
 
 func (m *ListRequest) Reset()                    { *m = ListRequest{} }
@@ -101,7 +101,7 @@ func (m *ListRequest) GetLimit() int32 {
 }
 
 type Subscribers struct {
-	Subscribers []string `protobuf:"bytes,1,rep,name=Subscribers,json=subscribers" json:"Subscribers,omitempty"`
+	Subscribers []string `protobuf:"bytes,1,rep,name=Subscribers,json=subscribers" json:"Subscribers"`
 }
 
 func (m *Subscribers) Reset()                    { *m = Subscribers{} }
