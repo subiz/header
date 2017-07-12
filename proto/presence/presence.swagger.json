@@ -19,10 +19,21 @@
     "presenceEmpty": {
       "type": "object"
     },
-    "presenceLastFocusTime": {
+    "presenceTime": {
       "type": "object",
       "properties": {
-        "TimeSpan": {
+        "Time": {
+          "type": "string"
+        }
+      }
+    },
+    "presenceTimes": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Time": {
           "type": "string"
         }
       }

@@ -9,9 +9,11 @@ It is generated from these files:
 	presence/presence.proto
 
 It has these top-level messages:
-	Id
+	UserId
+	UserIds
 	Empty
-	LastFocusTime
+	Time
+	Times
 */
 package presence
 
@@ -35,20 +37,44 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+type UserId struct {
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
+	Id        string `protobuf:"bytes,2,opt,name=Id,json=id" json:"Id"`
 }
 
-func (m *Id) Reset()                    { *m = Id{} }
-func (m *Id) String() string            { return proto.CompactTextString(m) }
-func (*Id) ProtoMessage()               {}
-func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (m *UserId) Reset()                    { *m = UserId{} }
+func (m *UserId) String() string            { return proto.CompactTextString(m) }
+func (*UserId) ProtoMessage()               {}
+func (*UserId) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-func (m *Id) GetId() string {
+func (m *UserId) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *UserId) GetId() string {
 	if m != nil {
 		return m.Id
 	}
 	return ""
+}
+
+type UserIds struct {
+	UserIds []*UserId `protobuf:"bytes,1,rep,name=UserIds,json=userIds" json:"UserIds"`
+}
+
+func (m *UserIds) Reset()                    { *m = UserIds{} }
+func (m *UserIds) String() string            { return proto.CompactTextString(m) }
+func (*UserIds) ProtoMessage()               {}
+func (*UserIds) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *UserIds) GetUserIds() []*UserId {
+	if m != nil {
+		return m.UserIds
+	}
+	return nil
 }
 
 type Empty struct {
@@ -57,28 +83,54 @@ type Empty struct {
 func (m *Empty) Reset()                    { *m = Empty{} }
 func (m *Empty) String() string            { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
-type LastFocusTime struct {
-	TimeSpan string `protobuf:"bytes,1,opt,name=TimeSpan,json=timeSpan" json:"TimeSpan,omitempty"`
+type Time struct {
+	Time string `protobuf:"bytes,1,opt,name=Time,json=time" json:"Time"`
 }
 
-func (m *LastFocusTime) Reset()                    { *m = LastFocusTime{} }
-func (m *LastFocusTime) String() string            { return proto.CompactTextString(m) }
-func (*LastFocusTime) ProtoMessage()               {}
-func (*LastFocusTime) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (m *Time) Reset()                    { *m = Time{} }
+func (m *Time) String() string            { return proto.CompactTextString(m) }
+func (*Time) ProtoMessage()               {}
+func (*Time) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
-func (m *LastFocusTime) GetTimeSpan() string {
+func (m *Time) GetTime() string {
 	if m != nil {
-		return m.TimeSpan
+		return m.Time
+	}
+	return ""
+}
+
+type Times struct {
+	Id   string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Time string `protobuf:"bytes,2,opt,name=Time,json=time" json:"Time"`
+}
+
+func (m *Times) Reset()                    { *m = Times{} }
+func (m *Times) String() string            { return proto.CompactTextString(m) }
+func (*Times) ProtoMessage()               {}
+func (*Times) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+
+func (m *Times) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *Times) GetTime() string {
+	if m != nil {
+		return m.Time
 	}
 	return ""
 }
 
 func init() {
-	proto.RegisterType((*Id)(nil), "presence.Id")
+	proto.RegisterType((*UserId)(nil), "presence.UserId")
+	proto.RegisterType((*UserIds)(nil), "presence.UserIds")
 	proto.RegisterType((*Empty)(nil), "presence.Empty")
-	proto.RegisterType((*LastFocusTime)(nil), "presence.LastFocusTime")
+	proto.RegisterType((*Time)(nil), "presence.Time")
+	proto.RegisterType((*Times)(nil), "presence.Times")
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -92,9 +144,10 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for PresenceMgr service
 
 type PresenceMgrClient interface {
-	Ping(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	Bye(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	LastFocusingTime(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LastFocusTime, error)
+	Ping(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
+	Bye(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
+	GetLastPingTime(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Time, error)
+	ListLastPingTimes(ctx context.Context, in *UserIds, opts ...grpc.CallOption) (*Times, error)
 }
 
 type presenceMgrClient struct {
@@ -105,7 +158,7 @@ func NewPresenceMgrClient(cc *grpc.ClientConn) PresenceMgrClient {
 	return &presenceMgrClient{cc}
 }
 
-func (c *presenceMgrClient) Ping(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *presenceMgrClient) Ping(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := grpc.Invoke(ctx, "/presence.PresenceMgr/Ping", in, out, c.cc, opts...)
 	if err != nil {
@@ -114,7 +167,7 @@ func (c *presenceMgrClient) Ping(ctx context.Context, in *Id, opts ...grpc.CallO
 	return out, nil
 }
 
-func (c *presenceMgrClient) Bye(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *presenceMgrClient) Bye(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := grpc.Invoke(ctx, "/presence.PresenceMgr/Bye", in, out, c.cc, opts...)
 	if err != nil {
@@ -123,9 +176,18 @@ func (c *presenceMgrClient) Bye(ctx context.Context, in *Id, opts ...grpc.CallOp
 	return out, nil
 }
 
-func (c *presenceMgrClient) LastFocusingTime(ctx context.Context, in *Id, opts ...grpc.CallOption) (*LastFocusTime, error) {
-	out := new(LastFocusTime)
-	err := grpc.Invoke(ctx, "/presence.PresenceMgr/LastFocusingTime", in, out, c.cc, opts...)
+func (c *presenceMgrClient) GetLastPingTime(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Time, error) {
+	out := new(Time)
+	err := grpc.Invoke(ctx, "/presence.PresenceMgr/GetLastPingTime", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *presenceMgrClient) ListLastPingTimes(ctx context.Context, in *UserIds, opts ...grpc.CallOption) (*Times, error) {
+	out := new(Times)
+	err := grpc.Invoke(ctx, "/presence.PresenceMgr/ListLastPingTimes", in, out, c.cc, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -135,9 +197,10 @@ func (c *presenceMgrClient) LastFocusingTime(ctx context.Context, in *Id, opts .
 // Server API for PresenceMgr service
 
 type PresenceMgrServer interface {
-	Ping(context.Context, *Id) (*Empty, error)
-	Bye(context.Context, *Id) (*Empty, error)
-	LastFocusingTime(context.Context, *Id) (*LastFocusTime, error)
+	Ping(context.Context, *UserId) (*Empty, error)
+	Bye(context.Context, *UserId) (*Empty, error)
+	GetLastPingTime(context.Context, *UserId) (*Time, error)
+	ListLastPingTimes(context.Context, *UserIds) (*Times, error)
 }
 
 func RegisterPresenceMgrServer(s *grpc.Server, srv PresenceMgrServer) {
@@ -145,7 +208,7 @@ func RegisterPresenceMgrServer(s *grpc.Server, srv PresenceMgrServer) {
 }
 
 func _PresenceMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(UserId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -157,13 +220,13 @@ func _PresenceMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/presence.PresenceMgr/Ping",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceMgrServer).Ping(ctx, req.(*Id))
+		return srv.(PresenceMgrServer).Ping(ctx, req.(*UserId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _PresenceMgr_Bye_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+	in := new(UserId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -175,25 +238,43 @@ func _PresenceMgr_Bye_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/presence.PresenceMgr/Bye",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceMgrServer).Bye(ctx, req.(*Id))
+		return srv.(PresenceMgrServer).Bye(ctx, req.(*UserId))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PresenceMgr_LastFocusingTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
+func _PresenceMgr_GetLastPingTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserId)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PresenceMgrServer).LastFocusingTime(ctx, in)
+		return srv.(PresenceMgrServer).GetLastPingTime(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/presence.PresenceMgr/LastFocusingTime",
+		FullMethod: "/presence.PresenceMgr/GetLastPingTime",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceMgrServer).LastFocusingTime(ctx, req.(*Id))
+		return srv.(PresenceMgrServer).GetLastPingTime(ctx, req.(*UserId))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PresenceMgr_ListLastPingTimes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserIds)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PresenceMgrServer).ListLastPingTimes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/presence.PresenceMgr/ListLastPingTimes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PresenceMgrServer).ListLastPingTimes(ctx, req.(*UserIds))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -211,8 +292,12 @@ var _PresenceMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _PresenceMgr_Bye_Handler,
 		},
 		{
-			MethodName: "LastFocusingTime",
-			Handler:    _PresenceMgr_LastFocusingTime_Handler,
+			MethodName: "GetLastPingTime",
+			Handler:    _PresenceMgr_GetLastPingTime_Handler,
+		},
+		{
+			MethodName: "ListLastPingTimes",
+			Handler:    _PresenceMgr_ListLastPingTimes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -222,16 +307,21 @@ var _PresenceMgr_serviceDesc = grpc.ServiceDesc{
 func init() { proto.RegisterFile("presence/presence.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 175 bytes of a gzipped FileDescriptorProto
+	// 256 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x02, 0xff, 0xe2, 0x12, 0x2f, 0x28, 0x4a, 0x2d,
 	0x4e, 0xcd, 0x4b, 0x4e, 0xd5, 0x87, 0x31, 0xf4, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2, 0x85, 0x38, 0x60,
-	0x7c, 0x25, 0x11, 0x2e, 0x26, 0xcf, 0x14, 0x21, 0x3e, 0x10, 0x29, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1,
-	0x19, 0xc4, 0x94, 0x99, 0xa2, 0xc4, 0xce, 0xc5, 0xea, 0x9a, 0x5b, 0x50, 0x52, 0xa9, 0xa4, 0xcd,
-	0xc5, 0xeb, 0x93, 0x58, 0x5c, 0xe2, 0x96, 0x9f, 0x5c, 0x5a, 0x1c, 0x92, 0x99, 0x9b, 0x2a, 0x24,
-	0xc5, 0xc5, 0x01, 0xa2, 0x83, 0x0b, 0x12, 0xf3, 0xa0, 0xea, 0x39, 0x4a, 0xa0, 0x7c, 0xa3, 0xd9,
-	0x8c, 0x5c, 0xdc, 0x01, 0x50, 0x83, 0x7d, 0xd3, 0x8b, 0x84, 0xd4, 0xb9, 0x58, 0x02, 0x32, 0xf3,
-	0xd2, 0x85, 0x78, 0xf4, 0xe0, 0xd6, 0x7b, 0xa6, 0x48, 0xf1, 0x23, 0x78, 0x10, 0x3b, 0x18, 0x84,
-	0xd4, 0xb8, 0x98, 0x9d, 0x2a, 0x53, 0x09, 0xab, 0xb3, 0xe6, 0x12, 0x80, 0xbb, 0x26, 0x33, 0x2f,
-	0x1d, 0xec, 0x20, 0x54, 0x4d, 0xe2, 0x08, 0x1e, 0x8a, 0xbb, 0x95, 0x18, 0x92, 0xd8, 0xc0, 0x5e,
-	0x37, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0xfb, 0x93, 0xc1, 0xd6, 0x15, 0x01, 0x00, 0x00,
+	0x7c, 0x25, 0x33, 0x2e, 0xb6, 0xd0, 0xe2, 0xd4, 0x22, 0xcf, 0x14, 0x21, 0x19, 0x2e, 0x4e, 0xc7,
+	0xe4, 0xe4, 0xfc, 0xd2, 0xbc, 0x12, 0xcf, 0x14, 0x09, 0x46, 0x05, 0x46, 0x0d, 0xce, 0x20, 0xce,
+	0x44, 0x98, 0x80, 0x10, 0x1f, 0x17, 0x93, 0x67, 0x8a, 0x04, 0x13, 0x58, 0x98, 0x29, 0x33, 0x45,
+	0xc9, 0x94, 0x8b, 0x1d, 0xa2, 0xaf, 0x58, 0x48, 0x0b, 0xce, 0x94, 0x60, 0x54, 0x60, 0xd6, 0xe0,
+	0x36, 0x12, 0xd0, 0x83, 0x5b, 0x07, 0x91, 0x08, 0x62, 0x2f, 0x85, 0x28, 0x50, 0x62, 0xe7, 0x62,
+	0x75, 0xcd, 0x2d, 0x28, 0xa9, 0x54, 0x92, 0xe2, 0x62, 0x09, 0xc9, 0xcc, 0x4d, 0x15, 0x12, 0x82,
+	0xd0, 0x50, 0x0b, 0x59, 0x4a, 0x32, 0x73, 0x53, 0x95, 0xb4, 0xb9, 0x58, 0x41, 0x62, 0xc5, 0x50,
+	0x4b, 0x19, 0x61, 0x96, 0xc2, 0x15, 0x33, 0x21, 0x14, 0x1b, 0xdd, 0x60, 0xe4, 0xe2, 0x0e, 0x80,
+	0x5a, 0xe7, 0x9b, 0x5e, 0x24, 0xa4, 0xcd, 0xc5, 0x12, 0x90, 0x99, 0x97, 0x2e, 0x84, 0xe1, 0x08,
+	0x29, 0x7e, 0x84, 0x08, 0xc4, 0x0d, 0x0c, 0x42, 0x5a, 0x5c, 0xcc, 0x4e, 0x95, 0xa9, 0xc4, 0xa9,
+	0x35, 0xe5, 0xe2, 0x77, 0x4f, 0x2d, 0xf1, 0x49, 0x2c, 0x2e, 0x01, 0x99, 0x0f, 0x76, 0x3c, 0xa6,
+	0x3e, 0x3e, 0x84, 0x08, 0x48, 0x85, 0x12, 0x83, 0x90, 0x25, 0x97, 0xa0, 0x4f, 0x66, 0x31, 0x8a,
+	0xbe, 0x62, 0x21, 0x41, 0x74, 0x8d, 0xc5, 0xc8, 0x36, 0x82, 0xd5, 0x28, 0x31, 0x24, 0xb1, 0x81,
+	0x23, 0xcb, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x15, 0xcf, 0x41, 0x3d, 0xc7, 0x01, 0x00, 0x00,
 }
