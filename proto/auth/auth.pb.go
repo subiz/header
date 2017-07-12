@@ -79,18 +79,18 @@ func (*Empty) ProtoMessage()               {}
 func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Credential struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=AccountId,json=accountId" json:"AccountId"`
 	// int32 AccountPlan = 2;
-	UserId string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId,omitempty"`
+	UserId string `protobuf:"bytes,3,opt,name=UserId,json=userId" json:"UserId"`
 	// scope that the user allow
-	Method *Method `protobuf:"bytes,5,opt,name=Method,json=method" json:"Method,omitempty"`
+	Method *Method `protobuf:"bytes,5,opt,name=Method,json=method" json:"Method"`
 	// set to true if this credential is generated from internal service.
 	// Internal credential is trusted and have full access to any function
 	// when internal is set to true, all other fields is ignored
-	ClientId   string     `protobuf:"bytes,7,opt,name=ClientId,json=clientId" json:"ClientId,omitempty"`
-	ClientType ClientType `protobuf:"varint,8,opt,name=ClientType,json=clientType,enum=auth.ClientType" json:"ClientType,omitempty"`
+	ClientId   string     `protobuf:"bytes,7,opt,name=ClientId,json=clientId" json:"ClientId"`
+	ClientType ClientType `protobuf:"varint,8,opt,name=ClientType,json=clientType,enum=auth.ClientType" json:"ClientType"`
 	// optional, used for secure service to service communication
-	APIKey string `protobuf:"bytes,9,opt,name=APIKey,json=aPIKey" json:"APIKey,omitempty"`
+	APIKey string `protobuf:"bytes,9,opt,name=APIKey,json=aPIKey" json:"APIKey"`
 }
 
 func (m *Credential) Reset()                    { *m = Credential{} }
@@ -141,12 +141,12 @@ func (m *Credential) GetAPIKey() string {
 }
 
 type Scope struct {
-	Id          string  `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
-	Name        string  `protobuf:"bytes,2,opt,name=Name,json=name" json:"Name,omitempty"`
-	LogoUrl     string  `protobuf:"bytes,3,opt,name=LogoUrl,json=logoUrl" json:"LogoUrl,omitempty"`
-	Title       string  `protobuf:"bytes,4,opt,name=Title,json=title" json:"Title,omitempty"`
-	Description string  `protobuf:"bytes,5,opt,name=Description,json=description" json:"Description,omitempty"`
-	Method      *Method `protobuf:"bytes,6,opt,name=Method,json=method" json:"Method,omitempty"`
+	Id          string  `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
+	Name        string  `protobuf:"bytes,2,opt,name=Name,json=name" json:"Name"`
+	LogoUrl     string  `protobuf:"bytes,3,opt,name=LogoUrl,json=logoUrl" json:"LogoUrl"`
+	Title       string  `protobuf:"bytes,4,opt,name=Title,json=title" json:"Title"`
+	Description string  `protobuf:"bytes,5,opt,name=Description,json=description" json:"Description"`
+	Method      *Method `protobuf:"bytes,6,opt,name=Method,json=method" json:"Method"`
 }
 
 func (m *Scope) Reset()                    { *m = Scope{} }
@@ -198,62 +198,62 @@ func (m *Scope) GetMethod() *Method {
 
 type Method struct {
 	// trigger
-	UpdateTrigger    bool `protobuf:"varint,50,opt,name=UpdateTrigger,json=updateTrigger" json:"UpdateTrigger,omitempty"`
-	DeleteTrigger    bool `protobuf:"varint,51,opt,name=DeleteTrigger,json=deleteTrigger" json:"DeleteTrigger,omitempty"`
-	CreateTrigger    bool `protobuf:"varint,52,opt,name=CreateTrigger,json=createTrigger" json:"CreateTrigger,omitempty"`
-	ReadTrigger      bool `protobuf:"varint,53,opt,name=ReadTrigger,json=readTrigger" json:"ReadTrigger,omitempty"`
-	ListTrigger      bool `protobuf:"varint,54,opt,name=ListTrigger,json=listTrigger" json:"ListTrigger,omitempty"`
-	ReadAllTrigger   bool `protobuf:"varint,55,opt,name=ReadAllTrigger,json=readAllTrigger" json:"ReadAllTrigger,omitempty"`
-	ListAllTrigger   bool `protobuf:"varint,56,opt,name=ListAllTrigger,json=listAllTrigger" json:"ListAllTrigger,omitempty"`
-	UpdateAllTrigger bool `protobuf:"varint,57,opt,name=UpdateAllTrigger,json=updateAllTrigger" json:"UpdateAllTrigger,omitempty"`
-	DeleteAllTrigger bool `protobuf:"varint,58,opt,name=DeleteAllTrigger,json=deleteAllTrigger" json:"DeleteAllTrigger,omitempty"`
-	CreateAllTrigger bool `protobuf:"varint,59,opt,name=CreateAllTrigger,json=createAllTrigger" json:"CreateAllTrigger,omitempty"`
+	UpdateTrigger    bool `protobuf:"varint,50,opt,name=UpdateTrigger,json=updateTrigger" json:"UpdateTrigger"`
+	DeleteTrigger    bool `protobuf:"varint,51,opt,name=DeleteTrigger,json=deleteTrigger" json:"DeleteTrigger"`
+	CreateTrigger    bool `protobuf:"varint,52,opt,name=CreateTrigger,json=createTrigger" json:"CreateTrigger"`
+	ReadTrigger      bool `protobuf:"varint,53,opt,name=ReadTrigger,json=readTrigger" json:"ReadTrigger"`
+	ListTrigger      bool `protobuf:"varint,54,opt,name=ListTrigger,json=listTrigger" json:"ListTrigger"`
+	ReadAllTrigger   bool `protobuf:"varint,55,opt,name=ReadAllTrigger,json=readAllTrigger" json:"ReadAllTrigger"`
+	ListAllTrigger   bool `protobuf:"varint,56,opt,name=ListAllTrigger,json=listAllTrigger" json:"ListAllTrigger"`
+	UpdateAllTrigger bool `protobuf:"varint,57,opt,name=UpdateAllTrigger,json=updateAllTrigger" json:"UpdateAllTrigger"`
+	DeleteAllTrigger bool `protobuf:"varint,58,opt,name=DeleteAllTrigger,json=deleteAllTrigger" json:"DeleteAllTrigger"`
+	CreateAllTrigger bool `protobuf:"varint,59,opt,name=CreateAllTrigger,json=createAllTrigger" json:"CreateAllTrigger"`
 	// bool AuthorizeAgentClient = 89;
 	// bool RevokeAgentClient = 90;
-	ReadAgentNotification bool `protobuf:"varint,105,opt,name=ReadAgentNotification,json=readAgentNotification" json:"ReadAgentNotification,omitempty"`
-	SeenAgentNotification bool `protobuf:"varint,106,opt,name=SeenAgentNotification,json=seenAgentNotification" json:"SeenAgentNotification,omitempty"`
-	Ping                  bool `protobuf:"varint,107,opt,name=Ping,json=ping" json:"Ping,omitempty"`
+	ReadAgentNotification bool `protobuf:"varint,105,opt,name=ReadAgentNotification,json=readAgentNotification" json:"ReadAgentNotification"`
+	SeenAgentNotification bool `protobuf:"varint,106,opt,name=SeenAgentNotification,json=seenAgentNotification" json:"SeenAgentNotification"`
+	Ping                  bool `protobuf:"varint,107,opt,name=Ping,json=ping" json:"Ping"`
 	// agent
-	UpdatePasswords        bool `protobuf:"varint,109,opt,name=UpdatePasswords,json=updatePasswords" json:"UpdatePasswords,omitempty"`
-	UpdatePassword         bool `protobuf:"varint,108,opt,name=UpdatePassword,json=updatePassword" json:"UpdatePassword,omitempty"`
-	InviteAgents           bool `protobuf:"varint,70,opt,name=InviteAgents,json=inviteAgents" json:"InviteAgents,omitempty"`
-	UpdateAgent            bool `protobuf:"varint,72,opt,name=UpdateAgent,json=updateAgent" json:"UpdateAgent,omitempty"`
-	UpdateAgents           bool `protobuf:"varint,73,opt,name=UpdateAgents,json=updateAgents" json:"UpdateAgents,omitempty"`
-	ReadAgent              bool `protobuf:"varint,76,opt,name=ReadAgent,json=readAgent" json:"ReadAgent,omitempty"`
-	ReadAgents             bool `protobuf:"varint,77,opt,name=ReadAgents,json=readAgents" json:"ReadAgents,omitempty"`
-	ResetPassword          bool `protobuf:"varint,78,opt,name=ResetPassword,json=resetPassword" json:"ResetPassword,omitempty"`
-	UpdateAgentsPermission bool `protobuf:"varint,81,opt,name=UpdateAgentsPermission,json=updateAgentsPermission" json:"UpdateAgentsPermission,omitempty"`
+	UpdatePasswords        bool `protobuf:"varint,109,opt,name=UpdatePasswords,json=updatePasswords" json:"UpdatePasswords"`
+	UpdatePassword         bool `protobuf:"varint,108,opt,name=UpdatePassword,json=updatePassword" json:"UpdatePassword"`
+	InviteAgents           bool `protobuf:"varint,70,opt,name=InviteAgents,json=inviteAgents" json:"InviteAgents"`
+	UpdateAgent            bool `protobuf:"varint,72,opt,name=UpdateAgent,json=updateAgent" json:"UpdateAgent"`
+	UpdateAgents           bool `protobuf:"varint,73,opt,name=UpdateAgents,json=updateAgents" json:"UpdateAgents"`
+	ReadAgent              bool `protobuf:"varint,76,opt,name=ReadAgent,json=readAgent" json:"ReadAgent"`
+	ReadAgents             bool `protobuf:"varint,77,opt,name=ReadAgents,json=readAgents" json:"ReadAgents"`
+	ResetPassword          bool `protobuf:"varint,78,opt,name=ResetPassword,json=resetPassword" json:"ResetPassword"`
+	UpdateAgentsPermission bool `protobuf:"varint,81,opt,name=UpdateAgentsPermission,json=updateAgentsPermission" json:"UpdateAgentsPermission"`
 	// bool ListAgentClient = 85;
-	UpdateAgentsState bool `protobuf:"varint,86,opt,name=UpdateAgentsState,json=updateAgentsState" json:"UpdateAgentsState,omitempty"`
+	UpdateAgentsState bool `protobuf:"varint,86,opt,name=UpdateAgentsState,json=updateAgentsState" json:"UpdateAgentsState"`
 	// bool ReadAccount = 120; // default right
-	ConfirmAccount bool `protobuf:"varint,120,opt,name=ConfirmAccount,json=confirmAccount" json:"ConfirmAccount,omitempty"`
+	ConfirmAccount bool `protobuf:"varint,120,opt,name=ConfirmAccount,json=confirmAccount" json:"ConfirmAccount"`
 	// agent group
-	CreateAgentGroups bool `protobuf:"varint,124,opt,name=CreateAgentGroups,json=createAgentGroups" json:"CreateAgentGroups,omitempty"`
-	DeleteAgentGroups bool `protobuf:"varint,125,opt,name=DeleteAgentGroups,json=deleteAgentGroups" json:"DeleteAgentGroups,omitempty"`
-	ReadAgentGroups   bool `protobuf:"varint,126,opt,name=ReadAgentGroups,json=readAgentGroups" json:"ReadAgentGroups,omitempty"`
-	UpdateAgentGroups bool `protobuf:"varint,127,opt,name=UpdateAgentGroups,json=updateAgentGroups" json:"UpdateAgentGroups,omitempty"`
+	CreateAgentGroups bool `protobuf:"varint,124,opt,name=CreateAgentGroups,json=createAgentGroups" json:"CreateAgentGroups"`
+	DeleteAgentGroups bool `protobuf:"varint,125,opt,name=DeleteAgentGroups,json=deleteAgentGroups" json:"DeleteAgentGroups"`
+	ReadAgentGroups   bool `protobuf:"varint,126,opt,name=ReadAgentGroups,json=readAgentGroups" json:"ReadAgentGroups"`
+	UpdateAgentGroups bool `protobuf:"varint,127,opt,name=UpdateAgentGroups,json=updateAgentGroups" json:"UpdateAgentGroups"`
 	// account
-	UpdatePlan bool `protobuf:"varint,123,opt,name=UpdatePlan,json=updatePlan" json:"UpdatePlan,omitempty"`
+	UpdatePlan bool `protobuf:"varint,123,opt,name=UpdatePlan,json=updatePlan" json:"UpdatePlan"`
 	// bool ViewAccountReport = 125;
 	// bool EnableChannel = 126;
 	// bool DisableChannel = 127;
-	CreateAccount bool `protobuf:"varint,129,opt,name=CreateAccount,json=createAccount" json:"CreateAccount,omitempty"`
-	DeleteAccount bool `protobuf:"varint,130,opt,name=DeleteAccount,json=deleteAccount" json:"DeleteAccount,omitempty"`
-	UpdateAccount bool `protobuf:"varint,122,opt,name=UpdateAccount,json=updateAccount" json:"UpdateAccount,omitempty"`
-	ReadAccount   bool `protobuf:"varint,131,opt,name=ReadAccount,json=readAccount" json:"ReadAccount,omitempty"`
+	CreateAccount bool `protobuf:"varint,129,opt,name=CreateAccount,json=createAccount" json:"CreateAccount"`
+	DeleteAccount bool `protobuf:"varint,130,opt,name=DeleteAccount,json=deleteAccount" json:"DeleteAccount"`
+	UpdateAccount bool `protobuf:"varint,122,opt,name=UpdateAccount,json=updateAccount" json:"UpdateAccount"`
+	ReadAccount   bool `protobuf:"varint,131,opt,name=ReadAccount,json=readAccount" json:"ReadAccount"`
 	// clients
-	ReadClient             bool `protobuf:"varint,151,opt,name=ReadClient,json=readClient" json:"ReadClient,omitempty"`
-	ListClient             bool `protobuf:"varint,152,opt,name=ListClient,json=listClient" json:"ListClient,omitempty"`
-	UpdateClientInfo       bool `protobuf:"varint,153,opt,name=UpdateClientInfo,json=updateClientInfo" json:"UpdateClientInfo,omitempty"`
-	PublishClient          bool `protobuf:"varint,154,opt,name=PublishClient,json=publishClient" json:"PublishClient,omitempty"`
-	RegenerateClientSecret bool `protobuf:"varint,155,opt,name=RegenerateClientSecret,json=regenerateClientSecret" json:"RegenerateClientSecret,omitempty"`
-	VerifyClient           bool `protobuf:"varint,156,opt,name=VerifyClient,json=verifyClient" json:"VerifyClient,omitempty"`
-	DeleteClient           bool `protobuf:"varint,157,opt,name=DeleteClient,json=deleteClient" json:"DeleteClient,omitempty"`
-	CreateClient           bool `protobuf:"varint,158,opt,name=CreateClient,json=createClient" json:"CreateClient,omitempty"`
+	ReadClient             bool `protobuf:"varint,151,opt,name=ReadClient,json=readClient" json:"ReadClient"`
+	ListClient             bool `protobuf:"varint,152,opt,name=ListClient,json=listClient" json:"ListClient"`
+	UpdateClientInfo       bool `protobuf:"varint,153,opt,name=UpdateClientInfo,json=updateClientInfo" json:"UpdateClientInfo"`
+	PublishClient          bool `protobuf:"varint,154,opt,name=PublishClient,json=publishClient" json:"PublishClient"`
+	RegenerateClientSecret bool `protobuf:"varint,155,opt,name=RegenerateClientSecret,json=regenerateClientSecret" json:"RegenerateClientSecret"`
+	VerifyClient           bool `protobuf:"varint,156,opt,name=VerifyClient,json=verifyClient" json:"VerifyClient"`
+	DeleteClient           bool `protobuf:"varint,157,opt,name=DeleteClient,json=deleteClient" json:"DeleteClient"`
+	CreateClient           bool `protobuf:"varint,158,opt,name=CreateClient,json=createClient" json:"CreateClient"`
 	// rule
-	ReadRule   bool `protobuf:"varint,180,opt,name=ReadRule,json=readRule" json:"ReadRule,omitempty"`
-	WriteRule  bool `protobuf:"varint,181,opt,name=WriteRule,json=writeRule" json:"WriteRule,omitempty"`
-	DeleteRule bool `protobuf:"varint,182,opt,name=DeleteRule,json=deleteRule" json:"DeleteRule,omitempty"`
+	ReadRule   bool `protobuf:"varint,180,opt,name=ReadRule,json=readRule" json:"ReadRule"`
+	WriteRule  bool `protobuf:"varint,181,opt,name=WriteRule,json=writeRule" json:"WriteRule"`
+	DeleteRule bool `protobuf:"varint,182,opt,name=DeleteRule,json=deleteRule" json:"DeleteRule"`
 }
 
 func (m *Method) Reset()                    { *m = Method{} }
@@ -570,7 +570,7 @@ func (m *Method) GetDeleteRule() bool {
 }
 
 type ScopeId struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *ScopeId) Reset()                    { *m = ScopeId{} }
@@ -586,7 +586,7 @@ func (m *ScopeId) GetId() string {
 }
 
 type UserId struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *UserId) Reset()                    { *m = UserId{} }
@@ -602,7 +602,7 @@ func (m *UserId) GetId() string {
 }
 
 type ScopesResponse struct {
-	Scopes []*Scope `protobuf:"bytes,1,rep,name=Scopes,json=scopes" json:"Scopes,omitempty"`
+	Scopes []*Scope `protobuf:"bytes,1,rep,name=Scopes,json=scopes" json:"Scopes"`
 }
 
 func (m *ScopesResponse) Reset()                    { *m = ScopesResponse{} }
@@ -618,8 +618,8 @@ func (m *ScopesResponse) GetScopes() []*Scope {
 }
 
 type UserAuth struct {
-	UserId string  `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId,omitempty"`
-	Method *Method `protobuf:"bytes,2,opt,name=Method,json=method" json:"Method,omitempty"`
+	UserId string  `protobuf:"bytes,1,opt,name=UserId,json=userId" json:"UserId"`
+	Method *Method `protobuf:"bytes,2,opt,name=Method,json=method" json:"Method"`
 }
 
 func (m *UserAuth) Reset()                    { *m = UserAuth{} }
