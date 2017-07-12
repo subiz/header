@@ -17,21 +17,18 @@ enum ClientType {
 message Empty {}
 
 message UsersPackage {
-	string Id = 1; // why ?
 	repeated string UserIds = 2;
 	string Payload = 3;
 	string AccountId = 4;
 }
 
 message ChannelPackage {
-	string Id = 1; // why ?
 	string ChannelId = 2;
 	string Payload = 3;
 	string AccountId = 4;
 }
 
 message SubsPackage {
-	string Id = 1; // why ?
 	repeated string UserIds = 2;
 	repeated string ConnIds = 3;
 	string Payload = 4;
