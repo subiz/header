@@ -29,9 +29,9 @@ service AccountMgr {
 	rpc ResetPassword(NewPassword) returns (Empty) {}
 	rpc RequestResetPassword(ResetPasswordRequest) returns (Empty) {}
 	rpc UpdateAgentPermission(AgentPerm) returns (Empty) {}
-	rpc ReadAgentPermission(Id) returns (AgentPerm) {}
+	rpc ReadAgentPermission(Id) returns (auth.Method) {}
 	rpc CheckLogin(LoginRequest) returns (Id) {}
-	rpc BatchRead(Ids) returns (Agents) {}
+	rpc BatchRead(AgentIds) returns (Agents) {}
 	rpc ListAgents(ListAgentRequest) returns (Agents) {}
 	// AgentGroup methods
 	rpc CreateGroup(AgentGroup) returns (Id) {}
@@ -42,7 +42,6 @@ service AccountMgr {
 	rpc AddAgentToGroup(GroupMember) returns (Empty) {}
 	rpc ReadGroup(Id) returns (AgentGroup) {}
 }
-
 
 message Agent {
 	string Id = 1;
@@ -140,6 +139,11 @@ message Id {
 	string Id = 2;
 }
 
+message AgentIds {
+	string AccountId = 1;
+	repeated string Ids = 2;
+}
+
 message Ids {
 	repeated string Ids = 1;
 }
@@ -215,7 +219,7 @@ message Limit {
 }
 
 message AgentGroups {
-	repeated AgentGroups Groups = 1;
+	repeated AgentGroup Groups = 1;
 }
 
 message Token {
@@ -234,6 +238,7 @@ enum Event {
 	AgentStateUpdated = 8; // could be deleted
 	AgentPermissionUpdated = 9; // AgentPerm
 
+	// out event only
 	AgentRejected = 10; // id
 	AgentAccepted = 11; // id
 	AgentUninvited = 12; // id
@@ -247,4 +252,47 @@ enum Event {
 	AccountLimitUpdated = 18; // oelimitupdated
 	AccountConfirmRequest = 19; // token
 	HandleExpiredInvitation = 20;
+
+	AccountConfirmEmail = 21;
+	AccountResetPasswordEmail = 33;
+	//AccountPasswordChangedEmail = 34;
+	AccountInviteEmail = 22;
+}
+
+message ConfirmEmail {
+	string From = 1;
+	string To = 2;
+	string AccountId = 3;
+	string OwnerId = 4;
+	string Token = 5;
+
+	// ExpiredIn is a RFC3339 time string indicates when token will be expired
+	string ExpiredIn = 6;
+}
+
+message InviteEmail {
+	string From = 1;
+	string To = 2;
+	string AccountId = 3;
+	string SenderId = 4;
+	string ExpiredIn = 5;
+	// ExpiredIn is a RFC3339 time string indicates when token will be expired
+	string Token = 6;
+}
+
+message ResetPasswordEmail {
+	string From = 1;
+	string To = 2;
+	// ExpiredIn is a RFC3339 time string indicates when token will be expired
+	string ExpiredIn = 6;
+	string Token = 3;
+	string AccountId = 4;
+	string AgentId = 5;
+}
+
+message PasswordChangedEmail {
+	string From = 1;
+	string To = 2;
+	string AccountId = 3;
+	string AgentId = 4;
 }

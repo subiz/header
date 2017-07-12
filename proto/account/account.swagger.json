@@ -145,22 +145,8 @@
         "Groups": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/accountAgentGroups"
+            "$ref": "#/definitions/accountAgentGroup"
           }
-        }
-      }
-    },
-    "accountAgentPerm": {
-      "type": "object",
-      "properties": {
-        "AccountId": {
-          "type": "string"
-        },
-        "AgentId": {
-          "type": "string"
-        },
-        "Method": {
-          "$ref": "#/definitions/authMethod"
         }
       }
     },
