@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package template;
+
+message Template {
+	string Id = 1;
+	string Language = 2;
+	Type Type = 3;
+	EmailTemplate Email = 8;
+	WebPushTemplate WebPush = 9;
+	NotificationTemplate Notification = 10;
+}
+
+enum Type {
+	Email = 0;
+	WebPush = 1;
+	Notification = 2;
+}
+
+message EmailTemplate {
+	string Subject = 1;
+	string Body = 2;
+}
+
+message WebPushTemplate {
+	string Title = 1;
+	string Body = 2;
+	string Icon = 3;
+}
+
+message NotificationTemplate {
+	string Image = 1;
+	string Footer = 2;
+	string Body = 3;
+}
