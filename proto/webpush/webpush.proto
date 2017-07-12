@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package webpush;
+
+message Empty {}
+
+message Id {
+	string Id = 1;
+}
+
+message Token {
+	string AccountId = 1;
+	string UserId = 2;
+	string Token = 3;
+	string ExpiredIn = 4;
+	DeviceType DeviceType = 5;
+}
+
+message TokenRemoveRequest {
+	string AccountId = 1;
+	string UserId = 2;
+	string Token = 3;
+}
+
+message PushRequest {
+	string AccountId = 1;
+	repeated string UserIds = 2;
+	DeviceType DeviceType = 3;
+
+	string Title = 4;
+	string Body = 5;
+	string Icon = 6;
+	string ClickAction = 7;
+}
+
+enum DeviceType {
+	NONE = 0;
+	BROWSER = 1;
+	MOBILE = 2;
+}
+
+message Result {
+	string AccountId = 1;
+	repeated string UserIds = 2;
+	repeated bool SendSuccess = 3;
+}
+
+service Webpush {
+	rpc RegisterToken(Token) returns (Empty) {}
+	rpc RemoveToken(TokenRemoveRequest) returns (Empty) {}
+
+	// Push push notification to all token match query
+	// return error if none
+	rpc Push(PushRequest) returns (Result) {}
+}
+
+enum Event {
+	WebpushRegisterToken = 0; // TokenRegister
+	WebpushRegisterRemoveToken = 2; // TokenRemoveRequest
+	WebpushPush = 3; // PushRequest
+	WebpushPushReturn = 4; // Result
+}
