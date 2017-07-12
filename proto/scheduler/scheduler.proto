@@ -26,6 +26,6 @@ service Scheduler {
 }
 
 enum Event {
-	SchedulerCallbackRequested = 0;
-	SchedulerCallbackCancelled = 1;
+	SchedulerCallbackRequested = 0; // scheduleritem
+	SchedulerCallbackCancelled = 1; // Id
 }

@@ -60,12 +60,12 @@ func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0}
 
 type ScheduleItem struct {
 	// Id of schedule item (should be 256 bit for very low collition rate)
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 	// string ScheduleTime = 2;
-	CallbackTime string `protobuf:"bytes,3,opt,name=CallbackTime,json=callbackTime" json:"CallbackTime,omitempty"`
-	Topic        string `protobuf:"bytes,4,opt,name=Topic,json=topic" json:"Topic,omitempty"`
+	CallbackTime string `protobuf:"bytes,3,opt,name=CallbackTime,json=callbackTime" json:"CallbackTime"`
+	Topic        string `protobuf:"bytes,4,opt,name=Topic,json=topic" json:"Topic"`
 	// Data is value of kafka event in bytes
-	Data []byte `protobuf:"bytes,5,opt,name=Data,json=data,proto3" json:"Data,omitempty"`
+	Data []byte `protobuf:"bytes,5,opt,name=Data,json=data,proto3" json:"Data"`
 }
 
 func (m *ScheduleItem) Reset()                    { *m = ScheduleItem{} }
@@ -102,7 +102,7 @@ func (m *ScheduleItem) GetData() []byte {
 }
 
 type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id,omitempty"`
+	Id string `protobuf:"bytes,1,opt,name=Id,json=id" json:"Id"`
 }
 
 func (m *Id) Reset()                    { *m = Id{} }
