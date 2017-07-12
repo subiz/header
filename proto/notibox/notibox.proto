@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+// notibox store all notification in subiz
+// it DOESN'T take care of pushing notification to user
+package notibox;
+
+enum NotiType {
+
+	ChatUpdate = 0;
+	SystemMaintainance = 2;
+	RuleUpdate = 3;
+	AccountUpdate = 4;
+}
+
+// Notification represent an user's notification
+message Notification {
+	// Id of notification
+	// string Id = 1;
+	string Id = 1;
+	string Event = 2;
+
+	//	string Topic = 2;
+
+	// Content of notification in markdown for
+	//string Content = 3;
+
+	//repeated string RequiredTopics = 3;
+
+	// CreatedTime capture the time notification created (RFC3339 format)
+	string CreatedTime = 5;
+	string Payload = 7;
+}
+
+message Empty {}
+
+message UserId {
+	string AccountId = 1;
+	string UserId = 2;
+}
+
+message ListRequest {
+	string AccountId = 1;
+	string UserId = 2;
+	int32 Limit = 3;
+	string StartNotiId = 4;
+}
+
+message Notifications {
+	repeated Notification Notifications = 1;
+}
+
+message SeenRequest {
+	string AccountId = 1;
+	repeated string NotificationIds = 2;
+	string UserId = 3;
+}
+
+message SubscribeRequest {
+	string UserId = 1;
+	string Topic = 2;
+}
+
+message NumberOfUnseen {
+	int64 NumUnseen = 1;
+}
+
+// Notifica store all user's notification
+service Notifica {
+	// Create create notifications for multiple users that listen to
+	// specific topics
+	// only kafka can upsert
+	rpc Upsert(Notification) returns (Empty) {}
+
+	// List notifications specific user
+	rpc List(ListRequest) returns (Notifications) {}
+	//rpc FindFirstNotiSince(FindRequest) returns (Notification) {}
+
+	// Seen mark noti as seen, some noti will disappear, some wil stay
+	rpc Seen(SeenRequest) returns (Empty) {}
+	rpc CountUnseen(UserId) returns (NumberOfUnseen) {}
+}
+
+
+// TODO: this should move to noti
+message AgentConfiguration {
+	bool NotificationSound = 1;
+	NotificationConfig EmailNoti = 2;
+	NotificationConfig DesktopNoti = 3;
+	NotificationConfig MobileNoti = 4;
+}
+message NotificationConfig {
+	bool AllActivity = 1;
+	bool MaintainenceMessage = 2;
+	bool DirectMessage = 3;
+	bool News = 4; /* for mobile only */
+	bool Nothing = 5;
+}

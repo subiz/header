@@ -1,0 +1,63 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "notibox store all notification in subiz\nit DOESN'T take care of pushing notification to user",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "notiboxEmpty": {
+      "type": "object"
+    },
+    "notiboxNotification": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "title": "Id of notification\nstring Id = 1;"
+        },
+        "Event": {
+          "type": "string"
+        },
+        "CreatedTime": {
+          "type": "string",
+          "title": "CreatedTime capture the time notification created (RFC3339 format)"
+        },
+        "Payload": {
+          "type": "string"
+        }
+      },
+      "title": "Notification represent an user's notification"
+    },
+    "notiboxNotifications": {
+      "type": "object",
+      "properties": {
+        "Notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/notiboxNotification"
+          }
+        }
+      }
+    },
+    "notiboxNumberOfUnseen": {
+      "type": "object",
+      "properties": {
+        "NumUnseen": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}
