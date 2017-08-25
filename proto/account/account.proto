@@ -1,13 +1,13 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package account;
 
 import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
 
 enum AccountState {
-	Unconfirmed = 0; // waiting for email confirmation
-	Activated = 1;  // normal account
-	Locked = 2;  // subiz lock down account
+	UNCONFIRMED = 0; // waiting for email confirmation
+	ACTIVATED = 1;  // normal account
+	LOCKED = 2;  // subiz lock down account
 }
 
 service AccountMgr {
@@ -44,138 +44,136 @@ service AccountMgr {
 }
 
 message Agent {
-	string Id = 1;
-	string AccountId = 2;
-	string FullName = 3;
-	string Email = 5;
-	bool IsOwner = 6;
-	string JobTitle = 7;
-	Gender Gender = 8;
-	string AvatarUrl = 9;
-	string Language = 10;
-	string Location = 19;
-	string Timezone = 11;
-	string EncryptedPassword = 12;
-  string JoinedTime = 13;
-	string InvitedByAgentId = 14;
-  AgentState State = 15;
-	string LastPasswordChangedTime = 16;
-	string LastSeenTime = 17;
-	string LastUpdatedTime = 18;
+	optional string id = 1;
+	optional string account_id = 2;
+	optional string fullname = 3;
+	optional string email = 5;
+	repeated string emails = 4;
+	optional bool is_owner = 6;
+	optional string job_title = 7;
+	optional Gender gender = 8;
+	optional string avatar_url = 9;
+	optional string language = 10;
+	optional string location = 19;
+	optional string timezone = 11;
+	//optional string encrypted_password = 12;
+  optional string joined_time = 13;
+	optional string invited_by = 14;
+  optional AgentState state = 15;
+	optional string last_password_changed_time = 16;
+	optional int64 last_seen_time = 17;
+	optional int64 last_updated_time = 18;
 }
 
 message Invitation {
-	string Id = 1;
-	string AccountId = 2;
-	string FromId = 3;
-	string Email = 4;
-	string AgentId = 5;
-
-	string SentTime = 7;
-	string ReplyTime = 8;
-	string AgentFullName = 9;
-	string AgentJobTitle = 10;
-
-	// Token to very
-	string Token = 11;
+	optional string id = 1;
+	optional string account_id = 2;
+	optional string from_id = 3;
+	optional string email = 4;
+	optional string agent_id = 5;
+	optional string sent_time = 7;
+	optional string reply_time = 8;
+	optional string agent_fullname = 9;
+	optional string agent_jobtitle = 10;
+	optional string token = 11;
 }
 
 message AgentGroup {
-	string Id = 1;
-	string AccountId = 2;
-	string Name = 3;
-	string LogoUrl = 4;
+	optional string id = 1;				//
+	optional string account_id = 2;
+	optional string name = 3;
+	optional string logo_url = 4;
 
 	// Members is list of 10 agents in group
 	// repeated string Members = 5;
-	string CreatedTime = 6;
+	optional int64 created_time = 6;
 }
 
 message AgentStateUpdateRequest {
-	string AccountId = 1;
-	string AgentId = 2;
-	AgentState State = 3;
+	optional string account_id = 1;
+	optional string agent_id = 2;
+	optional AgentState state = 3;
 }
 
 message AccountStateUpdateRequest {
-	string AccountId = 1;
-	AccountState State = 2;
+	optional string account_id = 1;
+	optional AccountState state = 2;
 }
 
 message ResetPasswordRequest {
-	string Email = 2;
+	optional string email = 2;
 }
 
 message UpdatePlanRequest {
-	string AccountId = 1;
-	int32 Plan = 2;
+	optional string account_id = 1;
+	optional int32 plan = 2;
 }
 
 message AgentPerm {
-	string AccountId = 1;
-	string AgentId = 2;
-	auth.Method Method = 3;
+	optional string account_id = 1;
+	optional string agent_id = 2;
+	optional auth.Method method = 3;
 }
 
 message OELimitUpdated {
-	string AccountId = 1;
-	Limit Limit = 2;
+	optional string account_id = 1;
+	optional Limit limit = 2;
 }
 
 message Account {
-	string Id = 1;
-	string Name = 2;
-	int32 Plan = 3;
-	string LogoUrl = 4;
-	string OwnerId = 5;
-	AccountState State = 6;
-	string CreatedTime = 7;
-	string ConfirmedTime = 8;
-	string LastModifiedTime = 9;
+	optional string id = 1;
+	optional string name = 2;
+	optional int32 plan = 3;
+	optional string logo_url = 4;
+	optional string owner_id = 5;
+	optional AccountState state = 6;
+	optional int64 created_time = 7;
+	optional int64 confirmed_time = 8;
+	optional int64 last_modified_time = 9;
 }
 
 message Id {
-	string AccountId = 1;
-	string Id = 2;
+	optional string account_id = 1;
+	optional string id = 2;
 }
 
 message AgentIds {
-	string AccountId = 1;
-	repeated string Ids = 2;
+	optional string account_id = 1;
+	repeated string ids = 2;
 }
 
 message Ids {
-	repeated string Ids = 1;
+	repeated string ids = 1;
 }
 
 message Empty {}
 
 message ListAgentRequest {
-	string AccountId = 1;
-	string StartId = 2;
-	int32 Limit = 3;
-	string GroupId = 4; // optional
+	optional string account_id = 1;
+	optional string start_id = 2;
+	optional int32 limit = 3;
+	optional string group_id = 4; // optional
 }
 
 message ListGroupRequest {
-	string AccountId = 1;
-	string StartId = 2;
-	int32 Limit = 3;
+	optional string account_id = 1;
+	optional string start_id = 2;
+	optional int32 limit = 3;
 }
 
 message GroupMember {
-	string AccountId = 1;
-	string GroupId = 2;
-	string AgentId = 3;
+	optional string account_id = 1;
+	optional string group_id = 2;
+	optional string agent_id = 3;
 }
 
 message CreateAccountRequest {
-	string FullName = 1;
-	string Email = 3;
-	string Language = 4;
-	string Password = 5;
-	string AccountName = 6;
-	string AccountUrl = 7;
+	optional string fullname = 1;
+	optional string email = 3;
+	optional string language = 4;
+	optional string password = 5;
+	optional string account_name = 6;
+	optional string account_url = 7;
 }
 
 enum Gender {
@@ -194,8 +192,8 @@ enum AgentState {
 }
 
 message LoginRequest {
-	string Email = 1;
-	string Password = 2;
+	optional string email = 1;
+	optional string password = 2;
 }
 
 message Agents {
@@ -203,19 +201,18 @@ message Agents {
 }
 
 message NewPassword {
-	string Token = 1;
-	string NewPassword = 2;
+	optional string token = 1;
+	optional string new_password = 2;
 }
 
 message Limit {
 	//int32 ConcurrentChat = 1;
-	int32 ChatHistory = 2;
-	int32 MaxTriggers = 3;
-	int32 MaxAgents = 4;
-
-	int32 MaxAgentGroups = 5;
-	int32 MaxAgentInAGroup = 6;
-	int32 MaxRules = 7;
+	optional int32 chat_history = 2;
+	optional int32 max_triggers = 3;
+	optional int32 max_agents = 4;
+	optional int32 max_agent_groups = 5;
+	optional int32 max_agent_in_a_group = 6;
+	optional int32 max_rules = 7;
 }
 
 message AgentGroups {
@@ -223,7 +220,8 @@ message AgentGroups {
 }
 
 message Token {
-	string Token = 1;
+	optional bool is_set = 1; // true
+	optional string token = 2;
 }
 
 enum Event {
@@ -260,39 +258,37 @@ enum Event {
 }
 
 message ConfirmEmail {
-	string From = 1;
-	string To = 2;
-	string AccountId = 3;
-	string OwnerId = 4;
-	string Token = 5;
-
+	optional string from = 1;
+	optional string to = 2;
+	optional string account_id = 3;
+	optional string owner_id = 4;
+	optional string token = 5;
 	// ExpiredIn is a RFC3339 time string indicates when token will be expired
-	string ExpiredIn = 6;
+	optional string expired_in = 6;
 }
 
 message InviteEmail {
-	string From = 1;
-	string To = 2;
-	string AccountId = 3;
-	string SenderId = 4;
-	string ExpiredIn = 5;
-	// ExpiredIn is a RFC3339 time string indicates when token will be expired
-	string Token = 6;
+	optional string from = 1;
+	optional string to = 2;
+	optional string account_id = 3;
+	optional string sender_id = 4;
+	optional string expired_in = 5;
+	optional string token = 6;
 }
 
 message ResetPasswordEmail {
-	string From = 1;
-	string To = 2;
+	optional string from = 1;
+	optional string to = 2;
 	// ExpiredIn is a RFC3339 time string indicates when token will be expired
-	string ExpiredIn = 6;
-	string Token = 3;
-	string AccountId = 4;
-	string AgentId = 5;
+	optional string expired_in = 6;
+	optional string token = 3;
+	optional string account_id = 4;
+	optional string agent_id = 5;
 }
 
 message PasswordChangedEmail {
-	string From = 1;
-	string To = 2;
-	string AccountId = 3;
-	string AgentId = 4;
+	optional string from = 1;
+	optional string to = 2;
+	optional string account_id = 3;
+	optional string agent_id = 4;
 }

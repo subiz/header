@@ -20,11 +20,10 @@ from bitbucket.org.subiz.servicespec.proto.auth import auth_pb2 as bitbucket_dot
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='account/account.proto',
   package='account',
-  syntax='proto3',
-  serialized_pb=_b('\n\x15\x61\x63\x63ount/account.proto\x12\x07\x61\x63\x63ount\x1a\x35\x62itbucket.org/subiz/servicespec/proto/auth/auth.proto\"\x91\x03\n\x05\x41gent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x11\n\tAccountId\x18\x02 \x01(\t\x12\x10\n\x08\x46ullName\x18\x03 \x01(\t\x12\r\n\x05\x45mail\x18\x05 \x01(\t\x12\x0f\n\x07IsOwner\x18\x06 \x01(\x08\x12\x10\n\x08JobTitle\x18\x07 \x01(\t\x12\x1f\n\x06Gender\x18\x08 \x01(\x0e\x32\x0f.account.Gender\x12\x11\n\tAvatarUrl\x18\t \x01(\t\x12\x10\n\x08Language\x18\n \x01(\t\x12\x10\n\x08Location\x18\x13 \x01(\t\x12\x10\n\x08Timezone\x18\x0b \x01(\t\x12\x19\n\x11\x45ncryptedPassword\x18\x0c \x01(\t\x12\x12\n\nJoinedTime\x18\r \x01(\t\x12\x18\n\x10InvitedByAgentId\x18\x0e \x01(\t\x12\"\n\x05State\x18\x0f \x01(\x0e\x32\x13.account.AgentState\x12\x1f\n\x17LastPasswordChangedTime\x18\x10 \x01(\t\x12\x14\n\x0cLastSeenTime\x18\x11 \x01(\t\x12\x17\n\x0fLastUpdatedTime\x18\x12 \x01(\t\"\xbd\x01\n\nInvitation\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x11\n\tAccountId\x18\x02 \x01(\t\x12\x0e\n\x06\x46romId\x18\x03 \x01(\t\x12\r\n\x05\x45mail\x18\x04 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x05 \x01(\t\x12\x10\n\x08SentTime\x18\x07 \x01(\t\x12\x11\n\tReplyTime\x18\x08 \x01(\t\x12\x15\n\rAgentFullName\x18\t \x01(\t\x12\x15\n\rAgentJobTitle\x18\n \x01(\t\x12\r\n\x05Token\x18\x0b \x01(\t\"_\n\nAgentGroup\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x11\n\tAccountId\x18\x02 \x01(\t\x12\x0c\n\x04Name\x18\x03 \x01(\t\x12\x0f\n\x07LogoUrl\x18\x04 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x06 \x01(\t\"a\n\x17\x41gentStateUpdateRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\"\n\x05State\x18\x03 \x01(\x0e\x32\x13.account.AgentState\"T\n\x19\x41\x63\x63ountStateUpdateRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12$\n\x05State\x18\x02 \x01(\x0e\x32\x15.account.AccountState\"%\n\x14ResetPasswordRequest\x12\r\n\x05\x45mail\x18\x02 \x01(\t\"4\n\x11UpdatePlanRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0c\n\x04Plan\x18\x02 \x01(\x05\"M\n\tAgentPerm\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x1c\n\x06Method\x18\x03 \x01(\x0b\x32\x0c.auth.Method\"B\n\x0eOELimitUpdated\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x1d\n\x05Limit\x18\x02 \x01(\x0b\x32\x0e.account.Limit\"\xbf\x01\n\x07\x41\x63\x63ount\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x0c\n\x04Name\x18\x02 \x01(\t\x12\x0c\n\x04Plan\x18\x03 \x01(\x05\x12\x0f\n\x07LogoUrl\x18\x04 \x01(\t\x12\x0f\n\x07OwnerId\x18\x05 \x01(\t\x12$\n\x05State\x18\x06 \x01(\x0e\x32\x15.account.AccountState\x12\x13\n\x0b\x43reatedTime\x18\x07 \x01(\t\x12\x15\n\rConfirmedTime\x18\x08 \x01(\t\x12\x18\n\x10LastModifiedTime\x18\t \x01(\t\"#\n\x02Id\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\n\n\x02Id\x18\x02 \x01(\t\"*\n\x08\x41gentIds\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0b\n\x03Ids\x18\x02 \x03(\t\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x01 \x03(\t\"\x07\n\x05\x45mpty\"V\n\x10ListAgentRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07StartId\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\x12\x0f\n\x07GroupId\x18\x04 \x01(\t\"E\n\x10ListGroupRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07StartId\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\"B\n\x0bGroupMember\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07GroupId\x18\x02 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x03 \x01(\t\"\x84\x01\n\x14\x43reateAccountRequest\x12\x10\n\x08\x46ullName\x18\x01 \x01(\t\x12\r\n\x05\x45mail\x18\x03 \x01(\t\x12\x10\n\x08Language\x18\x04 \x01(\t\x12\x10\n\x08Password\x18\x05 \x01(\t\x12\x13\n\x0b\x41\x63\x63ountName\x18\x06 \x01(\t\x12\x12\n\nAccountUrl\x18\x07 \x01(\t\"/\n\x0cLoginRequest\x12\r\n\x05\x45mail\x18\x01 \x01(\t\x12\x10\n\x08Password\x18\x02 \x01(\t\"(\n\x06\x41gents\x12\x1e\n\x06\x41gents\x18\x01 \x03(\x0b\x32\x0e.account.Agent\"1\n\x0bNewPassword\x12\r\n\x05Token\x18\x01 \x01(\t\x12\x13\n\x0bNewPassword\x18\x02 \x01(\t\"\x88\x01\n\x05Limit\x12\x13\n\x0b\x43hatHistory\x18\x02 \x01(\x05\x12\x13\n\x0bMaxTriggers\x18\x03 \x01(\x05\x12\x11\n\tMaxAgents\x18\x04 \x01(\x05\x12\x16\n\x0eMaxAgentGroups\x18\x05 \x01(\x05\x12\x18\n\x10MaxAgentInAGroup\x18\x06 \x01(\x05\x12\x10\n\x08MaxRules\x18\x07 \x01(\x05\"2\n\x0b\x41gentGroups\x12#\n\x06Groups\x18\x01 \x03(\x0b\x32\x13.account.AgentGroup\"\x16\n\x05Token\x12\r\n\x05Token\x18\x01 \x01(\t\"n\n\x0c\x43onfirmEmail\x12\x0c\n\x04\x46rom\x18\x01 \x01(\t\x12\n\n\x02To\x18\x02 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x0f\n\x07OwnerId\x18\x04 \x01(\t\x12\r\n\x05Token\x18\x05 \x01(\t\x12\x11\n\tExpiredIn\x18\x06 \x01(\t\"n\n\x0bInviteEmail\x12\x0c\n\x04\x46rom\x18\x01 \x01(\t\x12\n\n\x02To\x18\x02 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x10\n\x08SenderId\x18\x04 \x01(\t\x12\x11\n\tExpiredIn\x18\x05 \x01(\t\x12\r\n\x05Token\x18\x06 \x01(\t\"t\n\x12ResetPasswordEmail\x12\x0c\n\x04\x46rom\x18\x01 \x01(\t\x12\n\n\x02To\x18\x02 \x01(\t\x12\x11\n\tExpiredIn\x18\x06 \x01(\t\x12\r\n\x05Token\x18\x03 \x01(\t\x12\x11\n\tAccountId\x18\x04 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x05 \x01(\t\"T\n\x14PasswordChangedEmail\x12\x0c\n\x04\x46rom\x18\x01 \x01(\t\x12\n\n\x02To\x18\x02 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x04 \x01(\t*:\n\x0c\x41\x63\x63ountState\x12\x0f\n\x0bUnconfirmed\x10\x00\x12\r\n\tActivated\x10\x01\x12\n\n\x06Locked\x10\x02*D\n\x06Gender\x12\t\n\x05Unset\x10\x00\x12\x08\n\x04Male\x10\x01\x12\n\n\x06\x46\x65male\x10\x02\x12\x0c\n\x08\x42isexual\x10\x03\x12\x0b\n\x07\x41sexual\x10\x04*@\n\nAgentState\x12\x0b\n\x07Pending\x10\x00\x12\n\n\x06\x41\x63tive\x10\x01\x12\x0c\n\x08Inactive\x10\x02\x12\x0b\n\x07\x44\x65leted\x10\x03*\xa5\x04\n\x05\x45vent\x12\x15\n\x11\x41gentGroupDeleted\x10\x00\x12\x12\n\x0e\x41gentLeftGroup\x10\x01\x12\x14\n\x10\x41gentJoinedGroup\x10\x02\x12\x15\n\x11\x41gentGroupUpdated\x10\x03\x12\x15\n\x11\x41gentGroupCreated\x10\x04\x12\x10\n\x0c\x41gentExpired\x10\x05\x12\x10\n\x0c\x41gentUpdated\x10\x06\x12\x10\n\x0c\x41gentCreated\x10\x07\x12\x15\n\x11\x41gentStateUpdated\x10\x08\x12\x1a\n\x16\x41gentPermissionUpdated\x10\t\x12\x11\n\rAgentRejected\x10\n\x12\x11\n\rAgentAccepted\x10\x0b\x12\x12\n\x0e\x41gentUninvited\x10\x0c\x12\x10\n\x0c\x41gentInvited\x10\r\x12\x12\n\x0e\x41\x63\x63ountUpdated\x10\x0e\x12\x12\n\x0e\x41\x63\x63ountCreated\x10\x0f\x12\x16\n\x12\x41\x63\x63ountPlanUpdated\x10\x10\x12\x17\n\x13\x41\x63\x63ountStateUpdated\x10\x11\x12\x17\n\x13\x41\x63\x63ountLimitUpdated\x10\x12\x12\x19\n\x15\x41\x63\x63ountConfirmRequest\x10\x13\x12\x1b\n\x17HandleExpiredInvitation\x10\x14\x12\x17\n\x13\x41\x63\x63ountConfirmEmail\x10\x15\x12\x1d\n\x19\x41\x63\x63ountResetPasswordEmail\x10!\x12\x16\n\x12\x41\x63\x63ountInviteEmail\x10\x16\x32\xfc\x0b\n\nAccountMgr\x12=\n\rCreateAccount\x12\x1d.account.CreateAccountRequest\x1a\x0b.account.Id\"\x00\x12\x33\n\rUpdateAccount\x12\x10.account.Account\x1a\x0e.account.Empty\"\x00\x12.\n\x0bReadAccount\x12\x0b.account.Id\x1a\x10.account.Account\"\x00\x12J\n\x12UpdateAccountState\x12\".account.AccountStateUpdateRequest\x1a\x0e.account.Empty\"\x00\x12:\n\nUpdatePlan\x12\x1a.account.UpdatePlanRequest\x1a\x0e.account.Empty\"\x00\x12\x32\n\x0e\x43onfirmAccount\x12\x0e.account.Token\x1a\x0e.account.Empty\"\x00\x12*\n\tReadAgent\x12\x0b.account.Id\x1a\x0e.account.Agent\"\x00\x12\x31\n\x0bInviteAgent\x12\x13.account.Invitation\x1a\x0b.account.Id\"\x00\x12.\n\rUninviteAgent\x12\x0b.account.Id\x1a\x0e.account.Empty\"\x00\x12\x34\n\x10\x41\x63\x63\x65ptInvitation\x12\x0e.account.Token\x1a\x0e.account.Empty\"\x00\x12\x34\n\x10RejectInvitation\x12\x0e.account.Token\x1a\x0e.account.Empty\"\x00\x12/\n\x0bUpdateAgent\x12\x0e.account.Agent\x1a\x0e.account.Empty\"\x00\x12\x46\n\x10UpdateAgentState\x12 .account.AgentStateUpdateRequest\x1a\x0e.account.Empty\"\x00\x12\x37\n\rResetPassword\x12\x14.account.NewPassword\x1a\x0e.account.Empty\"\x00\x12G\n\x14RequestResetPassword\x12\x1d.account.ResetPasswordRequest\x1a\x0e.account.Empty\"\x00\x12=\n\x15UpdateAgentPermission\x12\x12.account.AgentPerm\x1a\x0e.account.Empty\"\x00\x12\x32\n\x13ReadAgentPermission\x12\x0b.account.Id\x1a\x0c.auth.Method\"\x00\x12\x32\n\nCheckLogin\x12\x15.account.LoginRequest\x1a\x0b.account.Id\"\x00\x12\x31\n\tBatchRead\x12\x11.account.AgentIds\x1a\x0f.account.Agents\"\x00\x12:\n\nListAgents\x12\x19.account.ListAgentRequest\x1a\x0f.account.Agents\"\x00\x12\x31\n\x0b\x43reateGroup\x12\x13.account.AgentGroup\x1a\x0b.account.Id\"\x00\x12\x34\n\x0bUpdateGroup\x12\x13.account.AgentGroup\x1a\x0e.account.Empty\"\x00\x12,\n\x0b\x44\x65leteGroup\x12\x0b.account.Id\x1a\x0e.account.Empty\"\x00\x12?\n\nListGroups\x12\x19.account.ListGroupRequest\x1a\x14.account.AgentGroups\"\x00\x12>\n\x14RemoveAgentFromGroup\x12\x14.account.GroupMember\x1a\x0e.account.Empty\"\x00\x12\x39\n\x0f\x41\x64\x64\x41gentToGroup\x12\x14.account.GroupMember\x1a\x0e.account.Empty\"\x00\x12/\n\tReadGroup\x12\x0b.account.Id\x1a\x13.account.AgentGroup\"\x00\x62\x06proto3')
+  syntax='proto2',
+  serialized_pb=_b('\n\x15\x61\x63\x63ount/account.proto\x12\x07\x61\x63\x63ount\x1a\x35\x62itbucket.org/subiz/servicespec/proto/auth/auth.proto\"\x8c\x03\n\x05\x41gent\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x10\n\x08\x66ullname\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x05 \x01(\t\x12\x0e\n\x06\x65mails\x18\x04 \x03(\t\x12\x10\n\x08is_owner\x18\x06 \x01(\x08\x12\x11\n\tjob_title\x18\x07 \x01(\t\x12\x1f\n\x06gender\x18\x08 \x01(\x0e\x32\x0f.account.Gender\x12\x12\n\navatar_url\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12\x10\n\x08location\x18\x13 \x01(\t\x12\x10\n\x08timezone\x18\x0b \x01(\t\x12\x13\n\x0bjoined_time\x18\r \x01(\t\x12\x12\n\ninvited_by\x18\x0e \x01(\t\x12\"\n\x05state\x18\x0f \x01(\x0e\x32\x13.account.AgentState\x12\"\n\x1alast_password_changed_time\x18\x10 \x01(\t\x12\x16\n\x0elast_seen_time\x18\x11 \x01(\x03\x12\x19\n\x11last_updated_time\x18\x12 \x01(\x03\"\xc4\x01\n\nInvitation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x0f\n\x07\x66rom_id\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x05 \x01(\t\x12\x11\n\tsent_time\x18\x07 \x01(\t\x12\x12\n\nreply_time\x18\x08 \x01(\t\x12\x16\n\x0e\x61gent_fullname\x18\t \x01(\t\x12\x16\n\x0e\x61gent_jobtitle\x18\n \x01(\t\x12\r\n\x05token\x18\x0b \x01(\t\"b\n\nAgentGroup\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x10\n\x08logo_url\x18\x04 \x01(\t\x12\x14\n\x0c\x63reated_time\x18\x06 \x01(\x03\"c\n\x17\x41gentStateUpdateRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x02 \x01(\t\x12\"\n\x05state\x18\x03 \x01(\x0e\x32\x13.account.AgentState\"U\n\x19\x41\x63\x63ountStateUpdateRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12$\n\x05state\x18\x02 \x01(\x0e\x32\x15.account.AccountState\"%\n\x14ResetPasswordRequest\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"5\n\x11UpdatePlanRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x0c\n\x04plan\x18\x02 \x01(\x05\"O\n\tAgentPerm\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x02 \x01(\t\x12\x1c\n\x06method\x18\x03 \x01(\x0b\x32\x0c.auth.Method\"C\n\x0eOELimitUpdated\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x1d\n\x05limit\x18\x02 \x01(\x0b\x32\x0e.account.Limit\"\xc5\x01\n\x07\x41\x63\x63ount\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0c\n\x04plan\x18\x03 \x01(\x05\x12\x10\n\x08logo_url\x18\x04 \x01(\t\x12\x10\n\x08owner_id\x18\x05 \x01(\t\x12$\n\x05state\x18\x06 \x01(\x0e\x32\x15.account.AccountState\x12\x14\n\x0c\x63reated_time\x18\x07 \x01(\x03\x12\x16\n\x0e\x63onfirmed_time\x18\x08 \x01(\x03\x12\x1a\n\x12last_modified_time\x18\t \x01(\x03\"$\n\x02Id\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"+\n\x08\x41gentIds\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x12\n\x03Ids\x12\x0b\n\x03ids\x18\x01 \x03(\t\"\x07\n\x05\x45mpty\"Y\n\x10ListAgentRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08start_id\x18\x02 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x10\n\x08group_id\x18\x04 \x01(\t\"G\n\x10ListGroupRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08start_id\x18\x02 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\"E\n\x0bGroupMember\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08group_id\x18\x02 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x03 \x01(\t\"\x86\x01\n\x14\x43reateAccountRequest\x12\x10\n\x08\x66ullname\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x10\n\x08password\x18\x05 \x01(\t\x12\x14\n\x0c\x61\x63\x63ount_name\x18\x06 \x01(\t\x12\x13\n\x0b\x61\x63\x63ount_url\x18\x07 \x01(\t\"/\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"(\n\x06\x41gents\x12\x1e\n\x06\x41gents\x18\x01 \x03(\x0b\x32\x0e.account.Agent\"2\n\x0bNewPassword\x12\r\n\x05token\x18\x01 \x01(\t\x12\x14\n\x0cnew_password\x18\x02 \x01(\t\"\x92\x01\n\x05Limit\x12\x14\n\x0c\x63hat_history\x18\x02 \x01(\x05\x12\x14\n\x0cmax_triggers\x18\x03 \x01(\x05\x12\x12\n\nmax_agents\x18\x04 \x01(\x05\x12\x18\n\x10max_agent_groups\x18\x05 \x01(\x05\x12\x1c\n\x14max_agent_in_a_group\x18\x06 \x01(\x05\x12\x11\n\tmax_rules\x18\x07 \x01(\x05\"2\n\x0b\x41gentGroups\x12#\n\x06Groups\x18\x01 \x03(\x0b\x32\x13.account.AgentGroup\"&\n\x05Token\x12\x0e\n\x06is_set\x18\x01 \x01(\x08\x12\r\n\x05token\x18\x02 \x01(\t\"q\n\x0c\x43onfirmEmail\x12\x0c\n\x04\x66rom\x18\x01 \x01(\t\x12\n\n\x02to\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x10\n\x08owner_id\x18\x04 \x01(\t\x12\r\n\x05token\x18\x05 \x01(\t\x12\x12\n\nexpired_in\x18\x06 \x01(\t\"q\n\x0bInviteEmail\x12\x0c\n\x04\x66rom\x18\x01 \x01(\t\x12\n\n\x02to\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x11\n\tsender_id\x18\x04 \x01(\t\x12\x12\n\nexpired_in\x18\x05 \x01(\t\x12\r\n\x05token\x18\x06 \x01(\t\"w\n\x12ResetPasswordEmail\x12\x0c\n\x04\x66rom\x18\x01 \x01(\t\x12\n\n\x02to\x18\x02 \x01(\t\x12\x12\n\nexpired_in\x18\x06 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x05 \x01(\t\"V\n\x14PasswordChangedEmail\x12\x0c\n\x04\x66rom\x18\x01 \x01(\t\x12\n\n\x02to\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x04 \x01(\t*:\n\x0c\x41\x63\x63ountState\x12\x0f\n\x0bUNCONFIRMED\x10\x00\x12\r\n\tACTIVATED\x10\x01\x12\n\n\x06LOCKED\x10\x02*D\n\x06Gender\x12\t\n\x05Unset\x10\x00\x12\x08\n\x04Male\x10\x01\x12\n\n\x06\x46\x65male\x10\x02\x12\x0c\n\x08\x42isexual\x10\x03\x12\x0b\n\x07\x41sexual\x10\x04*@\n\nAgentState\x12\x0b\n\x07Pending\x10\x00\x12\n\n\x06\x41\x63tive\x10\x01\x12\x0c\n\x08Inactive\x10\x02\x12\x0b\n\x07\x44\x65leted\x10\x03*\xa5\x04\n\x05\x45vent\x12\x15\n\x11\x41gentGroupDeleted\x10\x00\x12\x12\n\x0e\x41gentLeftGroup\x10\x01\x12\x14\n\x10\x41gentJoinedGroup\x10\x02\x12\x15\n\x11\x41gentGroupUpdated\x10\x03\x12\x15\n\x11\x41gentGroupCreated\x10\x04\x12\x10\n\x0c\x41gentExpired\x10\x05\x12\x10\n\x0c\x41gentUpdated\x10\x06\x12\x10\n\x0c\x41gentCreated\x10\x07\x12\x15\n\x11\x41gentStateUpdated\x10\x08\x12\x1a\n\x16\x41gentPermissionUpdated\x10\t\x12\x11\n\rAgentRejected\x10\n\x12\x11\n\rAgentAccepted\x10\x0b\x12\x12\n\x0e\x41gentUninvited\x10\x0c\x12\x10\n\x0c\x41gentInvited\x10\r\x12\x12\n\x0e\x41\x63\x63ountUpdated\x10\x0e\x12\x12\n\x0e\x41\x63\x63ountCreated\x10\x0f\x12\x16\n\x12\x41\x63\x63ountPlanUpdated\x10\x10\x12\x17\n\x13\x41\x63\x63ountStateUpdated\x10\x11\x12\x17\n\x13\x41\x63\x63ountLimitUpdated\x10\x12\x12\x19\n\x15\x41\x63\x63ountConfirmRequest\x10\x13\x12\x1b\n\x17HandleExpiredInvitation\x10\x14\x12\x17\n\x13\x41\x63\x63ountConfirmEmail\x10\x15\x12\x1d\n\x19\x41\x63\x63ountResetPasswordEmail\x10!\x12\x16\n\x12\x41\x63\x63ountInviteEmail\x10\x16\x32\xfc\x0b\n\nAccountMgr\x12=\n\rCreateAccount\x12\x1d.account.CreateAccountRequest\x1a\x0b.account.Id\"\x00\x12\x33\n\rUpdateAccount\x12\x10.account.Account\x1a\x0e.account.Empty\"\x00\x12.\n\x0bReadAccount\x12\x0b.account.Id\x1a\x10.account.Account\"\x00\x12J\n\x12UpdateAccountState\x12\".account.AccountStateUpdateRequest\x1a\x0e.account.Empty\"\x00\x12:\n\nUpdatePlan\x12\x1a.account.UpdatePlanRequest\x1a\x0e.account.Empty\"\x00\x12\x32\n\x0e\x43onfirmAccount\x12\x0e.account.Token\x1a\x0e.account.Empty\"\x00\x12*\n\tReadAgent\x12\x0b.account.Id\x1a\x0e.account.Agent\"\x00\x12\x31\n\x0bInviteAgent\x12\x13.account.Invitation\x1a\x0b.account.Id\"\x00\x12.\n\rUninviteAgent\x12\x0b.account.Id\x1a\x0e.account.Empty\"\x00\x12\x34\n\x10\x41\x63\x63\x65ptInvitation\x12\x0e.account.Token\x1a\x0e.account.Empty\"\x00\x12\x34\n\x10RejectInvitation\x12\x0e.account.Token\x1a\x0e.account.Empty\"\x00\x12/\n\x0bUpdateAgent\x12\x0e.account.Agent\x1a\x0e.account.Empty\"\x00\x12\x46\n\x10UpdateAgentState\x12 .account.AgentStateUpdateRequest\x1a\x0e.account.Empty\"\x00\x12\x37\n\rResetPassword\x12\x14.account.NewPassword\x1a\x0e.account.Empty\"\x00\x12G\n\x14RequestResetPassword\x12\x1d.account.ResetPasswordRequest\x1a\x0e.account.Empty\"\x00\x12=\n\x15UpdateAgentPermission\x12\x12.account.AgentPerm\x1a\x0e.account.Empty\"\x00\x12\x32\n\x13ReadAgentPermission\x12\x0b.account.Id\x1a\x0c.auth.Method\"\x00\x12\x32\n\nCheckLogin\x12\x15.account.LoginRequest\x1a\x0b.account.Id\"\x00\x12\x31\n\tBatchRead\x12\x11.account.AgentIds\x1a\x0f.account.Agents\"\x00\x12:\n\nListAgents\x12\x19.account.ListAgentRequest\x1a\x0f.account.Agents\"\x00\x12\x31\n\x0b\x43reateGroup\x12\x13.account.AgentGroup\x1a\x0b.account.Id\"\x00\x12\x34\n\x0bUpdateGroup\x12\x13.account.AgentGroup\x1a\x0e.account.Empty\"\x00\x12,\n\x0b\x44\x65leteGroup\x12\x0b.account.Id\x1a\x0e.account.Empty\"\x00\x12?\n\nListGroups\x12\x19.account.ListGroupRequest\x1a\x14.account.AgentGroups\"\x00\x12>\n\x14RemoveAgentFromGroup\x12\x14.account.GroupMember\x1a\x0e.account.Empty\"\x00\x12\x39\n\x0f\x41\x64\x64\x41gentToGroup\x12\x14.account.GroupMember\x1a\x0e.account.Empty\"\x00\x12/\n\tReadGroup\x12\x0b.account.Id\x1a\x13.account.AgentGroup\"\x00')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2.DESCRIPTOR,])
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _ACCOUNTSTATE = _descriptor.EnumDescriptor(
   name='AccountState',
@@ -33,22 +32,22 @@ _ACCOUNTSTATE = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='Unconfirmed', index=0, number=0,
+      name='UNCONFIRMED', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Activated', index=1, number=1,
+      name='ACTIVATED', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Locked', index=2, number=2,
+      name='LOCKED', index=2, number=2,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=2658,
-  serialized_end=2716,
+  serialized_start=2726,
+  serialized_end=2784,
 )
 _sym_db.RegisterEnumDescriptor(_ACCOUNTSTATE)
 
@@ -82,8 +81,8 @@ _GENDER = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2718,
-  serialized_end=2786,
+  serialized_start=2786,
+  serialized_end=2854,
 )
 _sym_db.RegisterEnumDescriptor(_GENDER)
 
@@ -113,8 +112,8 @@ _AGENTSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2788,
-  serialized_end=2852,
+  serialized_start=2856,
+  serialized_end=2920,
 )
 _sym_db.RegisterEnumDescriptor(_AGENTSTATE)
 
@@ -224,15 +223,15 @@ _EVENT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2855,
-  serialized_end=3404,
+  serialized_start=2923,
+  serialized_end=3472,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
 Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
-Unconfirmed = 0
-Activated = 1
-Locked = 2
+UNCONFIRMED = 0
+ACTIVATED = 1
+LOCKED = 2
 Unset = 0
 Male = 1
 Female = 2
@@ -277,128 +276,128 @@ _AGENT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='account.Agent.Id', index=0,
+      name='id', full_name='account.Agent.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.Agent.AccountId', index=1,
+      name='account_id', full_name='account.Agent.account_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='FullName', full_name='account.Agent.FullName', index=2,
+      name='fullname', full_name='account.Agent.fullname', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Email', full_name='account.Agent.Email', index=3,
+      name='email', full_name='account.Agent.email', index=3,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='IsOwner', full_name='account.Agent.IsOwner', index=4,
+      name='emails', full_name='account.Agent.emails', index=4,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_owner', full_name='account.Agent.is_owner', index=5,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='JobTitle', full_name='account.Agent.JobTitle', index=5,
+      name='job_title', full_name='account.Agent.job_title', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Gender', full_name='account.Agent.Gender', index=6,
+      name='gender', full_name='account.Agent.gender', index=7,
       number=8, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AvatarUrl', full_name='account.Agent.AvatarUrl', index=7,
+      name='avatar_url', full_name='account.Agent.avatar_url', index=8,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Language', full_name='account.Agent.Language', index=8,
+      name='language', full_name='account.Agent.language', index=9,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Location', full_name='account.Agent.Location', index=9,
+      name='location', full_name='account.Agent.location', index=10,
       number=19, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Timezone', full_name='account.Agent.Timezone', index=10,
+      name='timezone', full_name='account.Agent.timezone', index=11,
       number=11, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='EncryptedPassword', full_name='account.Agent.EncryptedPassword', index=11,
-      number=12, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='JoinedTime', full_name='account.Agent.JoinedTime', index=12,
+      name='joined_time', full_name='account.Agent.joined_time', index=12,
       number=13, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='InvitedByAgentId', full_name='account.Agent.InvitedByAgentId', index=13,
+      name='invited_by', full_name='account.Agent.invited_by', index=13,
       number=14, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='State', full_name='account.Agent.State', index=14,
+      name='state', full_name='account.Agent.state', index=14,
       number=15, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LastPasswordChangedTime', full_name='account.Agent.LastPasswordChangedTime', index=15,
+      name='last_password_changed_time', full_name='account.Agent.last_password_changed_time', index=15,
       number=16, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LastSeenTime', full_name='account.Agent.LastSeenTime', index=16,
-      number=17, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='last_seen_time', full_name='account.Agent.last_seen_time', index=16,
+      number=17, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LastUpdatedTime', full_name='account.Agent.LastUpdatedTime', index=17,
-      number=18, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='last_updated_time', full_name='account.Agent.last_updated_time', index=17,
+      number=18, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -410,12 +409,12 @@ _AGENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
   serialized_start=90,
-  serialized_end=491,
+  serialized_end=486,
 )
 
 
@@ -427,70 +426,70 @@ _INVITATION = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='account.Invitation.Id', index=0,
+      name='id', full_name='account.Invitation.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.Invitation.AccountId', index=1,
+      name='account_id', full_name='account.Invitation.account_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='FromId', full_name='account.Invitation.FromId', index=2,
+      name='from_id', full_name='account.Invitation.from_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Email', full_name='account.Invitation.Email', index=3,
+      name='email', full_name='account.Invitation.email', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentId', full_name='account.Invitation.AgentId', index=4,
+      name='agent_id', full_name='account.Invitation.agent_id', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='SentTime', full_name='account.Invitation.SentTime', index=5,
+      name='sent_time', full_name='account.Invitation.sent_time', index=5,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ReplyTime', full_name='account.Invitation.ReplyTime', index=6,
+      name='reply_time', full_name='account.Invitation.reply_time', index=6,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentFullName', full_name='account.Invitation.AgentFullName', index=7,
+      name='agent_fullname', full_name='account.Invitation.agent_fullname', index=7,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentJobTitle', full_name='account.Invitation.AgentJobTitle', index=8,
+      name='agent_jobtitle', full_name='account.Invitation.agent_jobtitle', index=8,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Token', full_name='account.Invitation.Token', index=9,
+      name='token', full_name='account.Invitation.token', index=9,
       number=11, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -504,12 +503,12 @@ _INVITATION = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=494,
-  serialized_end=683,
+  serialized_start=489,
+  serialized_end=685,
 )
 
 
@@ -521,37 +520,37 @@ _AGENTGROUP = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='account.AgentGroup.Id', index=0,
+      name='id', full_name='account.AgentGroup.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.AgentGroup.AccountId', index=1,
+      name='account_id', full_name='account.AgentGroup.account_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Name', full_name='account.AgentGroup.Name', index=2,
+      name='name', full_name='account.AgentGroup.name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LogoUrl', full_name='account.AgentGroup.LogoUrl', index=3,
+      name='logo_url', full_name='account.AgentGroup.logo_url', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='CreatedTime', full_name='account.AgentGroup.CreatedTime', index=4,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='created_time', full_name='account.AgentGroup.created_time', index=4,
+      number=6, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -563,12 +562,12 @@ _AGENTGROUP = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=685,
-  serialized_end=780,
+  serialized_start=687,
+  serialized_end=785,
 )
 
 
@@ -580,21 +579,21 @@ _AGENTSTATEUPDATEREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.AgentStateUpdateRequest.AccountId', index=0,
+      name='account_id', full_name='account.AgentStateUpdateRequest.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentId', full_name='account.AgentStateUpdateRequest.AgentId', index=1,
+      name='agent_id', full_name='account.AgentStateUpdateRequest.agent_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='State', full_name='account.AgentStateUpdateRequest.State', index=2,
+      name='state', full_name='account.AgentStateUpdateRequest.state', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -608,12 +607,12 @@ _AGENTSTATEUPDATEREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=782,
-  serialized_end=879,
+  serialized_start=787,
+  serialized_end=886,
 )
 
 
@@ -625,14 +624,14 @@ _ACCOUNTSTATEUPDATEREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.AccountStateUpdateRequest.AccountId', index=0,
+      name='account_id', full_name='account.AccountStateUpdateRequest.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='State', full_name='account.AccountStateUpdateRequest.State', index=1,
+      name='state', full_name='account.AccountStateUpdateRequest.state', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -646,12 +645,12 @@ _ACCOUNTSTATEUPDATEREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=881,
-  serialized_end=965,
+  serialized_start=888,
+  serialized_end=973,
 )
 
 
@@ -663,7 +662,7 @@ _RESETPASSWORDREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Email', full_name='account.ResetPasswordRequest.Email', index=0,
+      name='email', full_name='account.ResetPasswordRequest.email', index=0,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -677,12 +676,12 @@ _RESETPASSWORDREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=967,
-  serialized_end=1004,
+  serialized_start=975,
+  serialized_end=1012,
 )
 
 
@@ -694,14 +693,14 @@ _UPDATEPLANREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.UpdatePlanRequest.AccountId', index=0,
+      name='account_id', full_name='account.UpdatePlanRequest.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Plan', full_name='account.UpdatePlanRequest.Plan', index=1,
+      name='plan', full_name='account.UpdatePlanRequest.plan', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -715,12 +714,12 @@ _UPDATEPLANREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1006,
-  serialized_end=1058,
+  serialized_start=1014,
+  serialized_end=1067,
 )
 
 
@@ -732,21 +731,21 @@ _AGENTPERM = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.AgentPerm.AccountId', index=0,
+      name='account_id', full_name='account.AgentPerm.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentId', full_name='account.AgentPerm.AgentId', index=1,
+      name='agent_id', full_name='account.AgentPerm.agent_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Method', full_name='account.AgentPerm.Method', index=2,
+      name='method', full_name='account.AgentPerm.method', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -760,12 +759,12 @@ _AGENTPERM = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1060,
-  serialized_end=1137,
+  serialized_start=1069,
+  serialized_end=1148,
 )
 
 
@@ -777,14 +776,14 @@ _OELIMITUPDATED = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.OELimitUpdated.AccountId', index=0,
+      name='account_id', full_name='account.OELimitUpdated.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Limit', full_name='account.OELimitUpdated.Limit', index=1,
+      name='limit', full_name='account.OELimitUpdated.limit', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -798,12 +797,12 @@ _OELIMITUPDATED = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1139,
-  serialized_end=1205,
+  serialized_start=1150,
+  serialized_end=1217,
 )
 
 
@@ -815,65 +814,65 @@ _ACCOUNT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='account.Account.Id', index=0,
+      name='id', full_name='account.Account.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Name', full_name='account.Account.Name', index=1,
+      name='name', full_name='account.Account.name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Plan', full_name='account.Account.Plan', index=2,
+      name='plan', full_name='account.Account.plan', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LogoUrl', full_name='account.Account.LogoUrl', index=3,
+      name='logo_url', full_name='account.Account.logo_url', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='OwnerId', full_name='account.Account.OwnerId', index=4,
+      name='owner_id', full_name='account.Account.owner_id', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='State', full_name='account.Account.State', index=5,
+      name='state', full_name='account.Account.state', index=5,
       number=6, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='CreatedTime', full_name='account.Account.CreatedTime', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='created_time', full_name='account.Account.created_time', index=6,
+      number=7, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ConfirmedTime', full_name='account.Account.ConfirmedTime', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='confirmed_time', full_name='account.Account.confirmed_time', index=7,
+      number=8, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LastModifiedTime', full_name='account.Account.LastModifiedTime', index=8,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='last_modified_time', full_name='account.Account.last_modified_time', index=8,
+      number=9, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -885,12 +884,12 @@ _ACCOUNT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1208,
-  serialized_end=1399,
+  serialized_start=1220,
+  serialized_end=1417,
 )
 
 
@@ -902,14 +901,14 @@ _ID = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.Id.AccountId', index=0,
+      name='account_id', full_name='account.Id.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Id', full_name='account.Id.Id', index=1,
+      name='id', full_name='account.Id.id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -923,12 +922,12 @@ _ID = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1401,
-  serialized_end=1436,
+  serialized_start=1419,
+  serialized_end=1455,
 )
 
 
@@ -940,14 +939,14 @@ _AGENTIDS = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.AgentIds.AccountId', index=0,
+      name='account_id', full_name='account.AgentIds.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Ids', full_name='account.AgentIds.Ids', index=1,
+      name='ids', full_name='account.AgentIds.ids', index=1,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -961,12 +960,12 @@ _AGENTIDS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1438,
-  serialized_end=1480,
+  serialized_start=1457,
+  serialized_end=1500,
 )
 
 
@@ -978,7 +977,7 @@ _IDS = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Ids', full_name='account.Ids.Ids', index=0,
+      name='ids', full_name='account.Ids.ids', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -992,12 +991,12 @@ _IDS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1482,
-  serialized_end=1500,
+  serialized_start=1502,
+  serialized_end=1520,
 )
 
 
@@ -1016,12 +1015,12 @@ _EMPTY = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1502,
-  serialized_end=1509,
+  serialized_start=1522,
+  serialized_end=1529,
 )
 
 
@@ -1033,28 +1032,28 @@ _LISTAGENTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.ListAgentRequest.AccountId', index=0,
+      name='account_id', full_name='account.ListAgentRequest.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='StartId', full_name='account.ListAgentRequest.StartId', index=1,
+      name='start_id', full_name='account.ListAgentRequest.start_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Limit', full_name='account.ListAgentRequest.Limit', index=2,
+      name='limit', full_name='account.ListAgentRequest.limit', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='GroupId', full_name='account.ListAgentRequest.GroupId', index=3,
+      name='group_id', full_name='account.ListAgentRequest.group_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1068,12 +1067,12 @@ _LISTAGENTREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1511,
-  serialized_end=1597,
+  serialized_start=1531,
+  serialized_end=1620,
 )
 
 
@@ -1085,21 +1084,21 @@ _LISTGROUPREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.ListGroupRequest.AccountId', index=0,
+      name='account_id', full_name='account.ListGroupRequest.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='StartId', full_name='account.ListGroupRequest.StartId', index=1,
+      name='start_id', full_name='account.ListGroupRequest.start_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Limit', full_name='account.ListGroupRequest.Limit', index=2,
+      name='limit', full_name='account.ListGroupRequest.limit', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1113,12 +1112,12 @@ _LISTGROUPREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1599,
-  serialized_end=1668,
+  serialized_start=1622,
+  serialized_end=1693,
 )
 
 
@@ -1130,21 +1129,21 @@ _GROUPMEMBER = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.GroupMember.AccountId', index=0,
+      name='account_id', full_name='account.GroupMember.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='GroupId', full_name='account.GroupMember.GroupId', index=1,
+      name='group_id', full_name='account.GroupMember.group_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentId', full_name='account.GroupMember.AgentId', index=2,
+      name='agent_id', full_name='account.GroupMember.agent_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1158,12 +1157,12 @@ _GROUPMEMBER = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1670,
-  serialized_end=1736,
+  serialized_start=1695,
+  serialized_end=1764,
 )
 
 
@@ -1175,42 +1174,42 @@ _CREATEACCOUNTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='FullName', full_name='account.CreateAccountRequest.FullName', index=0,
+      name='fullname', full_name='account.CreateAccountRequest.fullname', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Email', full_name='account.CreateAccountRequest.Email', index=1,
+      name='email', full_name='account.CreateAccountRequest.email', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Language', full_name='account.CreateAccountRequest.Language', index=2,
+      name='language', full_name='account.CreateAccountRequest.language', index=2,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Password', full_name='account.CreateAccountRequest.Password', index=3,
+      name='password', full_name='account.CreateAccountRequest.password', index=3,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountName', full_name='account.CreateAccountRequest.AccountName', index=4,
+      name='account_name', full_name='account.CreateAccountRequest.account_name', index=4,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountUrl', full_name='account.CreateAccountRequest.AccountUrl', index=5,
+      name='account_url', full_name='account.CreateAccountRequest.account_url', index=5,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1224,12 +1223,12 @@ _CREATEACCOUNTREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1739,
-  serialized_end=1871,
+  serialized_start=1767,
+  serialized_end=1901,
 )
 
 
@@ -1241,14 +1240,14 @@ _LOGINREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Email', full_name='account.LoginRequest.Email', index=0,
+      name='email', full_name='account.LoginRequest.email', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Password', full_name='account.LoginRequest.Password', index=1,
+      name='password', full_name='account.LoginRequest.password', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1262,12 +1261,12 @@ _LOGINREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1873,
-  serialized_end=1920,
+  serialized_start=1903,
+  serialized_end=1950,
 )
 
 
@@ -1293,12 +1292,12 @@ _AGENTS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1922,
-  serialized_end=1962,
+  serialized_start=1952,
+  serialized_end=1992,
 )
 
 
@@ -1310,14 +1309,14 @@ _NEWPASSWORD = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Token', full_name='account.NewPassword.Token', index=0,
+      name='token', full_name='account.NewPassword.token', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='NewPassword', full_name='account.NewPassword.NewPassword', index=1,
+      name='new_password', full_name='account.NewPassword.new_password', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1331,12 +1330,12 @@ _NEWPASSWORD = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1964,
-  serialized_end=2013,
+  serialized_start=1994,
+  serialized_end=2044,
 )
 
 
@@ -1348,42 +1347,42 @@ _LIMIT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ChatHistory', full_name='account.Limit.ChatHistory', index=0,
+      name='chat_history', full_name='account.Limit.chat_history', index=0,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MaxTriggers', full_name='account.Limit.MaxTriggers', index=1,
+      name='max_triggers', full_name='account.Limit.max_triggers', index=1,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MaxAgents', full_name='account.Limit.MaxAgents', index=2,
+      name='max_agents', full_name='account.Limit.max_agents', index=2,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MaxAgentGroups', full_name='account.Limit.MaxAgentGroups', index=3,
+      name='max_agent_groups', full_name='account.Limit.max_agent_groups', index=3,
       number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MaxAgentInAGroup', full_name='account.Limit.MaxAgentInAGroup', index=4,
+      name='max_agent_in_a_group', full_name='account.Limit.max_agent_in_a_group', index=4,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MaxRules', full_name='account.Limit.MaxRules', index=5,
+      name='max_rules', full_name='account.Limit.max_rules', index=5,
       number=7, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1397,12 +1396,12 @@ _LIMIT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2016,
-  serialized_end=2152,
+  serialized_start=2047,
+  serialized_end=2193,
 )
 
 
@@ -1428,12 +1427,12 @@ _AGENTGROUPS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2154,
-  serialized_end=2204,
+  serialized_start=2195,
+  serialized_end=2245,
 )
 
 
@@ -1445,8 +1444,15 @@ _TOKEN = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Token', full_name='account.Token.Token', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='is_set', full_name='account.Token.is_set', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='token', full_name='account.Token.token', index=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1459,12 +1465,12 @@ _TOKEN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2206,
-  serialized_end=2228,
+  serialized_start=2247,
+  serialized_end=2285,
 )
 
 
@@ -1476,42 +1482,42 @@ _CONFIRMEMAIL = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='From', full_name='account.ConfirmEmail.From', index=0,
+      name='from', full_name='account.ConfirmEmail.from', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='To', full_name='account.ConfirmEmail.To', index=1,
+      name='to', full_name='account.ConfirmEmail.to', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.ConfirmEmail.AccountId', index=2,
+      name='account_id', full_name='account.ConfirmEmail.account_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='OwnerId', full_name='account.ConfirmEmail.OwnerId', index=3,
+      name='owner_id', full_name='account.ConfirmEmail.owner_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Token', full_name='account.ConfirmEmail.Token', index=4,
+      name='token', full_name='account.ConfirmEmail.token', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ExpiredIn', full_name='account.ConfirmEmail.ExpiredIn', index=5,
+      name='expired_in', full_name='account.ConfirmEmail.expired_in', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1525,12 +1531,12 @@ _CONFIRMEMAIL = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2230,
-  serialized_end=2340,
+  serialized_start=2287,
+  serialized_end=2400,
 )
 
 
@@ -1542,42 +1548,42 @@ _INVITEEMAIL = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='From', full_name='account.InviteEmail.From', index=0,
+      name='from', full_name='account.InviteEmail.from', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='To', full_name='account.InviteEmail.To', index=1,
+      name='to', full_name='account.InviteEmail.to', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.InviteEmail.AccountId', index=2,
+      name='account_id', full_name='account.InviteEmail.account_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='SenderId', full_name='account.InviteEmail.SenderId', index=3,
+      name='sender_id', full_name='account.InviteEmail.sender_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ExpiredIn', full_name='account.InviteEmail.ExpiredIn', index=4,
+      name='expired_in', full_name='account.InviteEmail.expired_in', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Token', full_name='account.InviteEmail.Token', index=5,
+      name='token', full_name='account.InviteEmail.token', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1591,12 +1597,12 @@ _INVITEEMAIL = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2342,
-  serialized_end=2452,
+  serialized_start=2402,
+  serialized_end=2515,
 )
 
 
@@ -1608,42 +1614,42 @@ _RESETPASSWORDEMAIL = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='From', full_name='account.ResetPasswordEmail.From', index=0,
+      name='from', full_name='account.ResetPasswordEmail.from', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='To', full_name='account.ResetPasswordEmail.To', index=1,
+      name='to', full_name='account.ResetPasswordEmail.to', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ExpiredIn', full_name='account.ResetPasswordEmail.ExpiredIn', index=2,
+      name='expired_in', full_name='account.ResetPasswordEmail.expired_in', index=2,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Token', full_name='account.ResetPasswordEmail.Token', index=3,
+      name='token', full_name='account.ResetPasswordEmail.token', index=3,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.ResetPasswordEmail.AccountId', index=4,
+      name='account_id', full_name='account.ResetPasswordEmail.account_id', index=4,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentId', full_name='account.ResetPasswordEmail.AgentId', index=5,
+      name='agent_id', full_name='account.ResetPasswordEmail.agent_id', index=5,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1657,12 +1663,12 @@ _RESETPASSWORDEMAIL = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2454,
-  serialized_end=2570,
+  serialized_start=2517,
+  serialized_end=2636,
 )
 
 
@@ -1674,28 +1680,28 @@ _PASSWORDCHANGEDEMAIL = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='From', full_name='account.PasswordChangedEmail.From', index=0,
+      name='from', full_name='account.PasswordChangedEmail.from', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='To', full_name='account.PasswordChangedEmail.To', index=1,
+      name='to', full_name='account.PasswordChangedEmail.to', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='account.PasswordChangedEmail.AccountId', index=2,
+      name='account_id', full_name='account.PasswordChangedEmail.account_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AgentId', full_name='account.PasswordChangedEmail.AgentId', index=3,
+      name='agent_id', full_name='account.PasswordChangedEmail.agent_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1709,21 +1715,21 @@ _PASSWORDCHANGEDEMAIL = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2572,
-  serialized_end=2656,
+  serialized_start=2638,
+  serialized_end=2724,
 )
 
-_AGENT.fields_by_name['Gender'].enum_type = _GENDER
-_AGENT.fields_by_name['State'].enum_type = _AGENTSTATE
-_AGENTSTATEUPDATEREQUEST.fields_by_name['State'].enum_type = _AGENTSTATE
-_ACCOUNTSTATEUPDATEREQUEST.fields_by_name['State'].enum_type = _ACCOUNTSTATE
-_AGENTPERM.fields_by_name['Method'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2._METHOD
-_OELIMITUPDATED.fields_by_name['Limit'].message_type = _LIMIT
-_ACCOUNT.fields_by_name['State'].enum_type = _ACCOUNTSTATE
+_AGENT.fields_by_name['gender'].enum_type = _GENDER
+_AGENT.fields_by_name['state'].enum_type = _AGENTSTATE
+_AGENTSTATEUPDATEREQUEST.fields_by_name['state'].enum_type = _AGENTSTATE
+_ACCOUNTSTATEUPDATEREQUEST.fields_by_name['state'].enum_type = _ACCOUNTSTATE
+_AGENTPERM.fields_by_name['method'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2._METHOD
+_OELIMITUPDATED.fields_by_name['limit'].message_type = _LIMIT
+_ACCOUNT.fields_by_name['state'].enum_type = _ACCOUNTSTATE
 _AGENTS.fields_by_name['Agents'].message_type = _AGENT
 _AGENTGROUPS.fields_by_name['Groups'].message_type = _AGENTGROUP
 DESCRIPTOR.message_types_by_name['Agent'] = _AGENT
@@ -1758,6 +1764,7 @@ DESCRIPTOR.enum_types_by_name['AccountState'] = _ACCOUNTSTATE
 DESCRIPTOR.enum_types_by_name['Gender'] = _GENDER
 DESCRIPTOR.enum_types_by_name['AgentState'] = _AGENTSTATE
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Agent = _reflection.GeneratedProtocolMessageType('Agent', (_message.Message,), dict(
   DESCRIPTOR = _AGENT,
@@ -1955,5 +1962,263 @@ PasswordChangedEmail = _reflection.GeneratedProtocolMessageType('PasswordChanged
   ))
 _sym_db.RegisterMessage(PasswordChangedEmail)
 
+
+
+_ACCOUNTMGR = _descriptor.ServiceDescriptor(
+  name='AccountMgr',
+  full_name='account.AccountMgr',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=3475,
+  serialized_end=5007,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='CreateAccount',
+    full_name='account.AccountMgr.CreateAccount',
+    index=0,
+    containing_service=None,
+    input_type=_CREATEACCOUNTREQUEST,
+    output_type=_ID,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateAccount',
+    full_name='account.AccountMgr.UpdateAccount',
+    index=1,
+    containing_service=None,
+    input_type=_ACCOUNT,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReadAccount',
+    full_name='account.AccountMgr.ReadAccount',
+    index=2,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_ACCOUNT,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateAccountState',
+    full_name='account.AccountMgr.UpdateAccountState',
+    index=3,
+    containing_service=None,
+    input_type=_ACCOUNTSTATEUPDATEREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdatePlan',
+    full_name='account.AccountMgr.UpdatePlan',
+    index=4,
+    containing_service=None,
+    input_type=_UPDATEPLANREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ConfirmAccount',
+    full_name='account.AccountMgr.ConfirmAccount',
+    index=5,
+    containing_service=None,
+    input_type=_TOKEN,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReadAgent',
+    full_name='account.AccountMgr.ReadAgent',
+    index=6,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_AGENT,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='InviteAgent',
+    full_name='account.AccountMgr.InviteAgent',
+    index=7,
+    containing_service=None,
+    input_type=_INVITATION,
+    output_type=_ID,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UninviteAgent',
+    full_name='account.AccountMgr.UninviteAgent',
+    index=8,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AcceptInvitation',
+    full_name='account.AccountMgr.AcceptInvitation',
+    index=9,
+    containing_service=None,
+    input_type=_TOKEN,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RejectInvitation',
+    full_name='account.AccountMgr.RejectInvitation',
+    index=10,
+    containing_service=None,
+    input_type=_TOKEN,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateAgent',
+    full_name='account.AccountMgr.UpdateAgent',
+    index=11,
+    containing_service=None,
+    input_type=_AGENT,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateAgentState',
+    full_name='account.AccountMgr.UpdateAgentState',
+    index=12,
+    containing_service=None,
+    input_type=_AGENTSTATEUPDATEREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ResetPassword',
+    full_name='account.AccountMgr.ResetPassword',
+    index=13,
+    containing_service=None,
+    input_type=_NEWPASSWORD,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RequestResetPassword',
+    full_name='account.AccountMgr.RequestResetPassword',
+    index=14,
+    containing_service=None,
+    input_type=_RESETPASSWORDREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateAgentPermission',
+    full_name='account.AccountMgr.UpdateAgentPermission',
+    index=15,
+    containing_service=None,
+    input_type=_AGENTPERM,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReadAgentPermission',
+    full_name='account.AccountMgr.ReadAgentPermission',
+    index=16,
+    containing_service=None,
+    input_type=_ID,
+    output_type=bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2._METHOD,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CheckLogin',
+    full_name='account.AccountMgr.CheckLogin',
+    index=17,
+    containing_service=None,
+    input_type=_LOGINREQUEST,
+    output_type=_ID,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='BatchRead',
+    full_name='account.AccountMgr.BatchRead',
+    index=18,
+    containing_service=None,
+    input_type=_AGENTIDS,
+    output_type=_AGENTS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListAgents',
+    full_name='account.AccountMgr.ListAgents',
+    index=19,
+    containing_service=None,
+    input_type=_LISTAGENTREQUEST,
+    output_type=_AGENTS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateGroup',
+    full_name='account.AccountMgr.CreateGroup',
+    index=20,
+    containing_service=None,
+    input_type=_AGENTGROUP,
+    output_type=_ID,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateGroup',
+    full_name='account.AccountMgr.UpdateGroup',
+    index=21,
+    containing_service=None,
+    input_type=_AGENTGROUP,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='DeleteGroup',
+    full_name='account.AccountMgr.DeleteGroup',
+    index=22,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListGroups',
+    full_name='account.AccountMgr.ListGroups',
+    index=23,
+    containing_service=None,
+    input_type=_LISTGROUPREQUEST,
+    output_type=_AGENTGROUPS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RemoveAgentFromGroup',
+    full_name='account.AccountMgr.RemoveAgentFromGroup',
+    index=24,
+    containing_service=None,
+    input_type=_GROUPMEMBER,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AddAgentToGroup',
+    full_name='account.AccountMgr.AddAgentToGroup',
+    index=25,
+    containing_service=None,
+    input_type=_GROUPMEMBER,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReadGroup',
+    full_name='account.AccountMgr.ReadGroup',
+    index=26,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_AGENTGROUP,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_ACCOUNTMGR)
+
+DESCRIPTOR.services_by_name['AccountMgr'] = _ACCOUNTMGR
 
 # @@protoc_insertion_point(module_scope)

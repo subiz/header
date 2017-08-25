@@ -19,122 +19,132 @@
     "accountAccount": {
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "Plan": {
+        "plan": {
           "type": "integer",
           "format": "int32"
         },
-        "LogoUrl": {
+        "logo_url": {
           "type": "string"
         },
-        "OwnerId": {
+        "owner_id": {
           "type": "string"
         },
-        "State": {
+        "state": {
           "$ref": "#/definitions/accountAccountState"
         },
-        "CreatedTime": {
-          "type": "string"
+        "created_time": {
+          "type": "string",
+          "format": "int64"
         },
-        "ConfirmedTime": {
-          "type": "string"
+        "confirmed_time": {
+          "type": "string",
+          "format": "int64"
         },
-        "LastModifiedTime": {
-          "type": "string"
+        "last_modified_time": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
     "accountAccountState": {
       "type": "string",
       "enum": [
-        "Unconfirmed",
-        "Activated",
-        "Locked"
+        "UNCONFIRMED",
+        "ACTIVATED",
+        "LOCKED"
       ],
-      "default": "Unconfirmed"
+      "default": "UNCONFIRMED"
     },
     "accountAgent": {
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string"
         },
-        "AccountId": {
+        "account_id": {
           "type": "string"
         },
-        "FullName": {
+        "fullname": {
           "type": "string"
         },
-        "Email": {
+        "email": {
           "type": "string"
         },
-        "IsOwner": {
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_owner": {
           "type": "boolean",
           "format": "boolean"
         },
-        "JobTitle": {
+        "job_title": {
           "type": "string"
         },
-        "Gender": {
+        "gender": {
           "$ref": "#/definitions/accountGender"
         },
-        "AvatarUrl": {
+        "avatar_url": {
           "type": "string"
         },
-        "Language": {
+        "language": {
           "type": "string"
         },
-        "Location": {
+        "location": {
           "type": "string"
         },
-        "Timezone": {
+        "timezone": {
           "type": "string"
         },
-        "EncryptedPassword": {
+        "joined_time": {
+          "type": "string",
+          "title": "optional string encrypted_password = 12;"
+        },
+        "invited_by": {
           "type": "string"
         },
-        "JoinedTime": {
-          "type": "string"
-        },
-        "InvitedByAgentId": {
-          "type": "string"
-        },
-        "State": {
+        "state": {
           "$ref": "#/definitions/accountAgentState"
         },
-        "LastPasswordChangedTime": {
+        "last_password_changed_time": {
           "type": "string"
         },
-        "LastSeenTime": {
-          "type": "string"
+        "last_seen_time": {
+          "type": "string",
+          "format": "int64"
         },
-        "LastUpdatedTime": {
-          "type": "string"
+        "last_updated_time": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
     "accountAgentGroup": {
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string"
         },
-        "AccountId": {
+        "account_id": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "LogoUrl": {
+        "logo_url": {
           "type": "string"
         },
-        "CreatedTime": {
+        "created_time": {
           "type": "string",
+          "format": "int64",
           "title": "Members is list of 10 agents in group\nrepeated string Members = 5;"
         }
       }
@@ -188,10 +198,10 @@
     "accountId": {
       "type": "object",
       "properties": {
-        "AccountId": {
+        "account_id": {
           "type": "string"
         },
-        "Id": {
+        "id": {
           "type": "string"
         }
       }
