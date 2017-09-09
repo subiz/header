@@ -26,7 +26,7 @@ enum T {
 	unable_to_send_message = 11;
 	topic_is_empty = 12;
 	invalid_json = 15;
-
+	invalid_protobuf = 16;
 	unable_to_lock = 40;
 
 	empty = 41; // the varialbe must not be empty but is empty
