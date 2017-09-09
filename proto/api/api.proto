@@ -1,33 +1,13 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package api;
 
 service RestApi {
 	//	rpc Handle(RestRequest) returns (RestResponse) {}
-	rpc HandleRedirect(Event) returns (Empty) {}
+	//rpc HandleRedirect(Event) returns (Empty) {}
 }
 
 message Empty {}
-
-message Event {
-	string RequestId = 1;
-	bytes Content = 2;
-}
-
-message RestRequest {
-	Method Method = 1;
-	string Path = 2;
-	string Token = 3;
-	string ContentType = 4;
-	string Content = 5;
-	string Ip = 6;
-}
-
-message RestResponse {
-	int32 Code = 1;
-	string Content = 2;
-	string ContentType = 3;
-}
 
 enum Method {
 	GET = 0;
@@ -35,4 +15,21 @@ enum Method {
 	PUT = 2;
 	DELETE = 3;
 	PATCH = 4;
+}
+
+message SendMessageState {
+	optional string topic = 1;
+}
+
+message State {
+	optional string event = 3;
+
+
+}
+
+enum Event {
+
+	ConversationStart = 2;
+	ApiReply = 4;
+
 }
