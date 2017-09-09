@@ -16,6 +16,23 @@
   ],
   "paths": {},
   "definitions": {
+    "authEvent": {
+      "type": "object",
+      "properties": {
+        "conversation_started": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "conversation_sent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "conversation_joined": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
     "authMethod": {
       "type": "object",
       "properties": {
@@ -197,11 +214,24 @@
           "format": "boolean",
           "title": "rule"
         },
-        "WriteRule": {
+        "UpdateRule": {
           "type": "boolean",
           "format": "boolean"
         },
         "DeleteRule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "StartConversation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "converstation"
+        },
+        "ReadConversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "WriteConversation": {
           "type": "boolean",
           "format": "boolean"
         }
@@ -210,23 +240,26 @@
     "authScope": {
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "LogoUrl": {
+        "logo_url": {
           "type": "string"
         },
-        "Title": {
+        "title": {
           "type": "string"
         },
-        "Description": {
+        "description": {
           "type": "string"
         },
-        "Method": {
+        "method": {
           "$ref": "#/definitions/authMethod"
+        },
+        "event": {
+          "$ref": "#/definitions/authEvent"
         }
       }
     },
