@@ -116,4 +116,35 @@
 	},
 	"cannedresponse.updated": {
 	}
+};
+
+"${a}>6 and (${b} or ${c})"
+/* standard event */
+{
+	"ID"         : "0003.234283EVT"   /*required*/
+	"AccountID"  : "493fd4FADACC",    /*required*/
+	"AppID"      : "4KDsAPP",         /*required*/
+	"AuthedUser" : "435AGN",          /*required*/
+	"Type"       : "chat_message",
+	"Timestamp"  : "2017-08-07T11:38:37.337Z",
+	//...
 }
+
+{
+	"Type"         : "chat_message",
+	"ChatID"       : "00312",
+	"SenderID"     : "user.0043"
+	"SenderType"   : "Agent",
+	"Text"         : "123",
+	"Format"       : "raw",
+	"Attachments"  : []
+	"State"        : "received",
+}
+
+{
+	"Type"         : "chat_close",
+	"ChatID"       : "00312",
+}
+
+{
+	"Type"         : "chat_joined",

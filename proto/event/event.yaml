@@ -9,7 +9,158 @@ Chat_ChatId_Sent: # New incomming from chat guest chat
 
 # AgentInvited:
 AgentCreated:
-AgentUpdated:
+---
 
-AccountCreated:
-AccountUpdated:
+Event:
+  ID          : 00324324EVT
+  Account     :
+    ID        : 004395ACC
+    Name      : FPT Shop
+    Domain    : https://fptshop.com
+  AppID       : 0324345APP
+  AuthToken   : eyJhbGciOiJIUzI1N.eyJzdWIiOV9.TJVA9
+  Sender      :
+    ID        : 00534AGT
+    Type      : agent            # agent || user || connector || system
+    Name      : Alice
+    Emails    : [alice@gmail.com]
+    Phones    : ["0969133732", "01678616688"]
+    AvatarURL : http://subizuserfile.com/file/4354.png
+  Timestamp   : 1502701215086
+  Type        : conversation_message        # chat_close
+  Channel     :
+    ID        : 00234234CHN
+    Name      : Email
+  Topics      :
+  - ID        : 0032CONV
+    Name      : Conversation
+  - ID        : 0043THRE
+    Name      : Thread
+  Attachments : []
+  Message     :
+    Value     : hello world, 123
+    Format    : text/plain
+
+List:
+-
+  Type        : chat_message
+  Chat        : chat.00312
+  Text        : 123
+  Format      : raw
+  Attachments : []
+-
+  Type        : chat_close
+  Chat        : "chat.00312"
+-
+  Type        : chat_join
+  Chat        : chat.00312
+  User        : agent.0034
+
+-
+  Type        : chat_left
+  Chat        : chat.0043
+-
+  Type        : chat_tag
+  Chat        : chat.0032
+  Tag         : sales
+-
+  Type        : ChatUntag
+  Chat        : chat.0043
+  Tag         : sales
+-
+  Type        : ChatTransfer
+  Chat        : chat.0032
+  Agents      : agent.001, agent.002, agent.003
+-
+  Type        : ChatTyping
+  Chat        : chat.0043
+-
+  Type        : ChatStopTyping
+  Chat        : chat.0032
+-
+  Type        : ChatSeen
+  Chat        : chat.0043
+  Event       : evt.0012345356
+-
+  Type        : ChatACK // only send by driver
+  Chat        : chat.0032
+  Event       : evt.0043235466
+  State       : received || error
+  Message     : "access denied"
+
+---
+Chat:
+- Type        : chat_message
+  Chat        : chat.00312
+  Attachments :
+  - Type      : audio/mp3
+    Preview   : http://subizfiles.com/audio/4345.jpg
+    Name      : Screen3.mp3
+    Size      : 12345, # bytes
+    Link        : http://subizfiles.com/43453.jpg
+
+- Type        : chat_message
+  Chat        : chat.00312
+  Attachments :
+  - Type      : video/mp4
+    Preview   : http://subizfiles.com/audio/preview/4345.jpg
+    Link      : http://subizfiles.com/43453.mp4
+    Name      : Screen3.mp4
+    Size      : 1235, # bytes
+
+- Type        : chat_message
+  Chat        : chat.0043
+  Attachments :
+  - Type      : video/mp4
+    Preview   : http://subizfiles.com/audio/preview/4345.jpg
+    Link      : http://subizfiles.com/43453.mp4
+    Name      : Screen3.mp4
+    Size      : 1235, # bytes
+
+- Type        : chat_message
+  Chat        : chat.00432
+  Attachments :
+  - Type      : application/pdf
+    Name      : PriceList.pdf
+    Link      : https://subizfiles.com/pricelist.pdf
+    Preview   :
+    Size      : 34242
+
+- type        : chat_message
+  chat        : chat.0024
+  attachments :
+  - type      : template/list
+    elements  :
+    - title   : Classic T-Shirt Collection
+      image   : http://subizfile.com/imad3423.png
+      subtitle: See all our color
+      default_action: []
+      buttons : []
+    - title   : Classic Blue T-Shirt
+      image   :
+      subtitle:
+      buttons :
+
+- type        : chat_message
+  chat        : chat.00434
+  attachments :
+  - type      : button/url
+
+
+POST https://subiz.com/api/v1/conversation
+{
+  account:
+  timestamp:
+  members: []
+  channel
+  id: "234"
+
+}
+
+
+{
+  ACCOUNT:
+  format
+  text
+  attachment
+}

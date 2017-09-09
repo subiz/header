@@ -14,15 +14,19 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from bitbucket.org.subiz.servicespec.proto.common import common_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2
+from bitbucket.org.subiz.servicespec.proto.account import account_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_account_dot_account__pb2
+from bitbucket.org.subiz.servicespec.proto.client import client_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_client_dot_client__pb2
+from bitbucket.org.subiz.servicespec.proto.lang import lang_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_lang_dot_lang__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='event/event.proto',
   package='event',
-  syntax='proto3',
-  serialized_pb=_b('\n\x11\x65vent/event.proto\x12\x05\x65vent\"1\n\x04User\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x1d\n\x04Type\x18\x02 \x01(\x0e\x32\x0f.event.UserType\"v\n\x06OEvent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\r\n\x05\x45vent\x18\x02 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x1a\n\x05Users\x18\x04 \x03(\x0b\x32\x0b.event.User\x12\x11\n\tChannelId\x18\x05 \x01(\t\x12\x0f\n\x07Payload\x18\x07 \x01(\t*,\n\x08UserType\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07VISITOR\x10\x01\x12\t\n\x05\x41GENT\x10\x02*\x1d\n\x05\x45vent\x12\x14\n\x10Out_EventCreated\x10\x00\x62\x06proto3')
-)
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
+  syntax='proto2',
+  serialized_pb=_b('\n\x11\x65vent/event.proto\x12\x05\x65vent\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\x1a;bitbucket.org/subiz/servicespec/proto/account/account.proto\x1a\x39\x62itbucket.org/subiz/servicespec/proto/client/client.proto\x1a\x35\x62itbucket.org/subiz/servicespec/proto/lang/lang.proto\"1\n\x04User\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1d\n\x04type\x18\x02 \x01(\x0e\x32\x0f.event.UserType\"J\n\x16RawEventCreatedPayload\x12\x0f\n\x07sub_ids\x18\x03 \x03(\t\x12\x0e\n\x06topics\x18\x04 \x03(\t\x12\x0f\n\x07payload\x18\x05 \x01(\t\"8\n\tJSONEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\r\n\x05\x65vent\x18\x02 \x01(\x0c\"d\n\x06OEvent\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05\x65vent\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x1a\n\x05Users\x18\x04 \x03(\x0b\x32\x0b.event.User\x12\x0f\n\x07payload\x18\x07 \x01(\t\">\n\x0c\x43hatSentUser\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x14\n\x0clast_seen_id\x18\x03 \x01(\t\"\n\n\x08\x43hatSent\"3\n\x0c\x43hatAssigned\x12\x10\n\x08_Methods\x18\x01 \x01(\t\x12\x11\n\tTimestamp\x18\x02 \x01(\t\"2\n\x0b\x43hatWaiting\x12\x10\n\x08_Methods\x18\x01 \x01(\t\x12\x11\n\tTimestamp\x18\x02 \x01(\t\"\r\n\x0b\x43hat_X_Sent\"\xaa\x01\n\x08RawEvent\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\x12\x11\n\tsender_id\x18\x06 \x01(\t\x12\x13\n\x0bsender_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x12\n\nchannel_id\x18\n \x01(\t\x12\x11\n\ttopic_ids\x18\x0b \x03(\t\"\x9b\x02\n\x1aRawConversationJoinedEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\x12\x11\n\tsender_id\x18\x06 \x01(\t\x12\x13\n\x0bsender_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x12\n\nchannel_id\x18\n \x01(\t\x12\x11\n\ttopic_ids\x18\x0b \x03(\t\x12\x17\n\x0f\x63onversation_id\x18\r \x01(\t\x12\x11\n\tjoiner_id\x18\x0e \x01(\t\x12\x13\n\x0bjoiner_type\x18\x0f \x01(\t\"\xf4\x01\n\x1bRawConversationStartedEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\x12\x11\n\tsender_id\x18\x06 \x01(\t\x12\x13\n\x0bsender_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x12\n\nchannel_id\x18\n \x01(\t\x12\x11\n\ttopic_ids\x18\x0b \x03(\t\x12\x17\n\x0f\x63onversation_id\x18\x0f \x01(\t\"\xba\x02\n\x1bRawConversationMessageEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\x12\x11\n\tsender_id\x18\x06 \x01(\t\x12\x13\n\x0bsender_type\x18\x07 \x01(\t\x12\x11\n\ttimestamp\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x12\n\nchannel_id\x18\n \x01(\t\x12\x11\n\ttopic_ids\x18\x0b \x03(\t\x12\x17\n\x0f\x63onversation_id\x18\x13 \x01(\t\x12&\n\x0b\x61ttachments\x18\x14 \x03(\x0b\x32\x11.event.Attachment\x12\x0c\n\x04text\x18\x15 \x01(\t\x12\x0e\n\x06\x66ormat\x18\x16 \x01(\t\"\xf0\x01\n\x05\x45vent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x02 \x01(\t\x12!\n\x07\x61\x63\x63ount\x18\x03 \x01(\x0b\x32\x10.account.Account\x12\x1b\n\x03\x61pp\x18\x04 \x01(\x0b\x32\x0e.client.Client\x12\x1d\n\x06sender\x18\x08 \x01(\x0b\x32\r.event.Sender\x12\x11\n\ttimestamp\x18\x0c \x01(\x03\x12\x0c\n\x04type\x18\r \x01(\t\x12\x1f\n\x07\x63hannel\x18\x0f \x01(\x0b\x32\x0e.event.Channel\x12\x1c\n\x06topics\x18\x13 \x03(\x0b\x32\x0c.event.Topic\"#\n\x07\x43hannel\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"!\n\x05Topic\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"(\n\x07Message\x12\r\n\x05value\x18\x01 \x01(\t\x12\x0e\n\x06\x66ormat\x18\x02 \x01(\t\"\x0c\n\nAttachment\"d\n\x06Sender\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x0e\n\x06\x65mails\x18\x04 \x03(\t\x12\x0e\n\x06phones\x18\x06 \x01(\t\x12\x12\n\navatar_url\x18\x07 \x01(\t\"\x8d\x01\n\x05Reply\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0b\n\x03\x65rr\x18\n \x01(\x08\x12\x17\n\x0f\x65rr_description\x18\x0c \x01(\t\x12\x19\n\x08\x65rr_code\x18\r \x01(\x0e\x32\x07.lang.T\x12\x11\n\terr_class\x18\x0f \x01(\x05\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"?\n\x05\x45rror\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"R\n\x0cSubscription\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x12\n\naccount_id\x18\x06 \x01(\t\x12\x0e\n\x06sub_id\x18\x07 \x01(\t*5\n\x08UserType\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04USER\x10\x01\x12\t\n\x05\x41GENT\x10\x02\x12\n\n\x06SYSTEM\x10\x03*k\n\x05\x45VENT\x12\x14\n\x10Out_EventCreated\x10\x00\x12\t\n\x05Send_\x10\x01\x12\x0c\n\x08\x41piReply\x10\x02\x12\x13\n\x0fRawEventCreated\x10\x03\x12\r\n\tSubscribe\x10\x04\x12\x0f\n\x0bUnsubscribe\x10\x05*\xbc\x01\n\tEventType\x12\x18\n\x14\x63onversation_started\x10\x01\x12\x17\n\x13\x63onversation_joined\x10\x02\x12\x18\n\x14\x63onversation_message\x10\x03\x12\x15\n\x11\x63onversation_left\x10\x04\x12\x17\n\x13\x63onversation_closed\x10\x05\x12\x17\n\x13\x63onversation_tagged\x10\x06\x12\x19\n\x15\x63onversation_untagged\x10\x07*\'\n\x0eSubscribeScope\x12\x08\n\x04user\x10\x00\x12\x0b\n\x07\x63hannel\x10\x01*\x18\n\tSubPrefix\x12\x0b\n\x07Webhook\x10\x00')
+  ,
+  dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_account_dot_account__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_client_dot_client__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_lang_dot_lang__pb2.DESCRIPTOR,])
 
 _USERTYPE = _descriptor.EnumDescriptor(
   name='UserType',
@@ -35,25 +39,29 @@ _USERTYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='VISITOR', index=1, number=1,
+      name='USER', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
       name='AGENT', index=2, number=2,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SYSTEM', index=3, number=3,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=199,
-  serialized_end=243,
+  serialized_start=2534,
+  serialized_end=2587,
 )
 _sym_db.RegisterEnumDescriptor(_USERTYPE)
 
 UserType = enum_type_wrapper.EnumTypeWrapper(_USERTYPE)
 _EVENT = _descriptor.EnumDescriptor(
-  name='Event',
-  full_name='event.Event',
+  name='EVENT',
+  full_name='event.EVENT',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -61,19 +69,140 @@ _EVENT = _descriptor.EnumDescriptor(
       name='Out_EventCreated', index=0, number=0,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Send_', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ApiReply', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RawEventCreated', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Subscribe', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Unsubscribe', index=5, number=5,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=245,
-  serialized_end=274,
+  serialized_start=2589,
+  serialized_end=2696,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
-Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
+EVENT = enum_type_wrapper.EnumTypeWrapper(_EVENT)
+_EVENTTYPE = _descriptor.EnumDescriptor(
+  name='EventType',
+  full_name='event.EventType',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='conversation_started', index=0, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_joined', index=1, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_message', index=2, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_left', index=3, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_closed', index=4, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_tagged', index=5, number=6,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_untagged', index=6, number=7,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=2699,
+  serialized_end=2887,
+)
+_sym_db.RegisterEnumDescriptor(_EVENTTYPE)
+
+EventType = enum_type_wrapper.EnumTypeWrapper(_EVENTTYPE)
+_SUBSCRIBESCOPE = _descriptor.EnumDescriptor(
+  name='SubscribeScope',
+  full_name='event.SubscribeScope',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='user', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='channel', index=1, number=1,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=2889,
+  serialized_end=2928,
+)
+_sym_db.RegisterEnumDescriptor(_SUBSCRIBESCOPE)
+
+SubscribeScope = enum_type_wrapper.EnumTypeWrapper(_SUBSCRIBESCOPE)
+_SUBPREFIX = _descriptor.EnumDescriptor(
+  name='SubPrefix',
+  full_name='event.SubPrefix',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='Webhook', index=0, number=0,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=2930,
+  serialized_end=2954,
+)
+_sym_db.RegisterEnumDescriptor(_SUBPREFIX)
+
+SubPrefix = enum_type_wrapper.EnumTypeWrapper(_SUBPREFIX)
 NONE = 0
-VISITOR = 1
+USER = 1
 AGENT = 2
+SYSTEM = 3
 Out_EventCreated = 0
+Send_ = 1
+ApiReply = 2
+RawEventCreated = 3
+Subscribe = 4
+Unsubscribe = 5
+conversation_started = 1
+conversation_joined = 2
+conversation_message = 3
+conversation_left = 4
+conversation_closed = 5
+conversation_tagged = 6
+conversation_untagged = 7
+user = 0
+channel = 1
+Webhook = 0
 
 
 
@@ -85,14 +214,14 @@ _USER = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='event.User.Id', index=0,
+      name='id', full_name='event.User.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Type', full_name='event.User.Type', index=1,
+      name='type', full_name='event.User.type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -106,12 +235,95 @@ _USER = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=28,
-  serialized_end=77,
+  serialized_start=262,
+  serialized_end=311,
+)
+
+
+_RAWEVENTCREATEDPAYLOAD = _descriptor.Descriptor(
+  name='RawEventCreatedPayload',
+  full_name='event.RawEventCreatedPayload',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='sub_ids', full_name='event.RawEventCreatedPayload.sub_ids', index=0,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topics', full_name='event.RawEventCreatedPayload.topics', index=1,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='payload', full_name='event.RawEventCreatedPayload.payload', index=2,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=313,
+  serialized_end=387,
+)
+
+
+_JSONEVENT = _descriptor.Descriptor(
+  name='JSONEvent',
+  full_name='event.JSONEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='event.JSONEvent.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='event', full_name='event.JSONEvent.event', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=389,
+  serialized_end=445,
 )
 
 
@@ -123,21 +335,21 @@ _OEVENT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='event.OEvent.Id', index=0,
+      name='id', full_name='event.OEvent.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Event', full_name='event.OEvent.Event', index=1,
+      name='event', full_name='event.OEvent.event', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='event.OEvent.AccountId', index=2,
+      name='account_id', full_name='event.OEvent.account_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -151,14 +363,7 @@ _OEVENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ChannelId', full_name='event.OEvent.ChannelId', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Payload', full_name='event.OEvent.Payload', index=5,
+      name='payload', full_name='event.OEvent.payload', index=4,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -172,20 +377,1111 @@ _OEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=79,
-  serialized_end=197,
+  serialized_start=447,
+  serialized_end=547,
 )
 
-_USER.fields_by_name['Type'].enum_type = _USERTYPE
+
+_CHATSENTUSER = _descriptor.Descriptor(
+  name='ChatSentUser',
+  full_name='event.ChatSentUser',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.ChatSentUser.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='event.ChatSentUser.type', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='last_seen_id', full_name='event.ChatSentUser.last_seen_id', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=549,
+  serialized_end=611,
+)
+
+
+_CHATSENT = _descriptor.Descriptor(
+  name='ChatSent',
+  full_name='event.ChatSent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=613,
+  serialized_end=623,
+)
+
+
+_CHATASSIGNED = _descriptor.Descriptor(
+  name='ChatAssigned',
+  full_name='event.ChatAssigned',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='_Methods', full_name='event.ChatAssigned._Methods', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='Timestamp', full_name='event.ChatAssigned.Timestamp', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=625,
+  serialized_end=676,
+)
+
+
+_CHATWAITING = _descriptor.Descriptor(
+  name='ChatWaiting',
+  full_name='event.ChatWaiting',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='_Methods', full_name='event.ChatWaiting._Methods', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='Timestamp', full_name='event.ChatWaiting.Timestamp', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=678,
+  serialized_end=728,
+)
+
+
+_CHAT_X_SENT = _descriptor.Descriptor(
+  name='Chat_X_Sent',
+  full_name='event.Chat_X_Sent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=730,
+  serialized_end=743,
+)
+
+
+_RAWEVENT = _descriptor.Descriptor(
+  name='RawEvent',
+  full_name='event.RawEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.RawEvent.id', index=0,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='event.RawEvent.account_id', index=1,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='event.RawEvent.app_id', index=2,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_id', full_name='event.RawEvent.sender_id', index=3,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_type', full_name='event.RawEvent.sender_type', index=4,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='event.RawEvent.timestamp', index=5,
+      number=8, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='event.RawEvent.type', index=6,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_id', full_name='event.RawEvent.channel_id', index=7,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topic_ids', full_name='event.RawEvent.topic_ids', index=8,
+      number=11, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=746,
+  serialized_end=916,
+)
+
+
+_RAWCONVERSATIONJOINEDEVENT = _descriptor.Descriptor(
+  name='RawConversationJoinedEvent',
+  full_name='event.RawConversationJoinedEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='event.RawConversationJoinedEvent.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.RawConversationJoinedEvent.id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='event.RawConversationJoinedEvent.account_id', index=2,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='event.RawConversationJoinedEvent.app_id', index=3,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_id', full_name='event.RawConversationJoinedEvent.sender_id', index=4,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_type', full_name='event.RawConversationJoinedEvent.sender_type', index=5,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='event.RawConversationJoinedEvent.timestamp', index=6,
+      number=8, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='event.RawConversationJoinedEvent.type', index=7,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_id', full_name='event.RawConversationJoinedEvent.channel_id', index=8,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topic_ids', full_name='event.RawConversationJoinedEvent.topic_ids', index=9,
+      number=11, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='conversation_id', full_name='event.RawConversationJoinedEvent.conversation_id', index=10,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='joiner_id', full_name='event.RawConversationJoinedEvent.joiner_id', index=11,
+      number=14, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='joiner_type', full_name='event.RawConversationJoinedEvent.joiner_type', index=12,
+      number=15, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=919,
+  serialized_end=1202,
+)
+
+
+_RAWCONVERSATIONSTARTEDEVENT = _descriptor.Descriptor(
+  name='RawConversationStartedEvent',
+  full_name='event.RawConversationStartedEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='event.RawConversationStartedEvent.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.RawConversationStartedEvent.id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='event.RawConversationStartedEvent.account_id', index=2,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='event.RawConversationStartedEvent.app_id', index=3,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_id', full_name='event.RawConversationStartedEvent.sender_id', index=4,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_type', full_name='event.RawConversationStartedEvent.sender_type', index=5,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='event.RawConversationStartedEvent.timestamp', index=6,
+      number=8, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='event.RawConversationStartedEvent.type', index=7,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_id', full_name='event.RawConversationStartedEvent.channel_id', index=8,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topic_ids', full_name='event.RawConversationStartedEvent.topic_ids', index=9,
+      number=11, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='conversation_id', full_name='event.RawConversationStartedEvent.conversation_id', index=10,
+      number=15, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1205,
+  serialized_end=1449,
+)
+
+
+_RAWCONVERSATIONMESSAGEEVENT = _descriptor.Descriptor(
+  name='RawConversationMessageEvent',
+  full_name='event.RawConversationMessageEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='event.RawConversationMessageEvent.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.RawConversationMessageEvent.id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='event.RawConversationMessageEvent.account_id', index=2,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='event.RawConversationMessageEvent.app_id', index=3,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_id', full_name='event.RawConversationMessageEvent.sender_id', index=4,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender_type', full_name='event.RawConversationMessageEvent.sender_type', index=5,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='event.RawConversationMessageEvent.timestamp', index=6,
+      number=8, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='event.RawConversationMessageEvent.type', index=7,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_id', full_name='event.RawConversationMessageEvent.channel_id', index=8,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topic_ids', full_name='event.RawConversationMessageEvent.topic_ids', index=9,
+      number=11, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='conversation_id', full_name='event.RawConversationMessageEvent.conversation_id', index=10,
+      number=19, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='attachments', full_name='event.RawConversationMessageEvent.attachments', index=11,
+      number=20, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='text', full_name='event.RawConversationMessageEvent.text', index=12,
+      number=21, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='format', full_name='event.RawConversationMessageEvent.format', index=13,
+      number=22, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1452,
+  serialized_end=1766,
+)
+
+
+_EVENT = _descriptor.Descriptor(
+  name='Event',
+  full_name='event.Event',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='event.Event.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.Event.id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account', full_name='event.Event.account', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='app', full_name='event.Event.app', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sender', full_name='event.Event.sender', index=4,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='event.Event.timestamp', index=5,
+      number=12, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='event.Event.type', index=6,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel', full_name='event.Event.channel', index=7,
+      number=15, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topics', full_name='event.Event.topics', index=8,
+      number=19, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1769,
+  serialized_end=2009,
+)
+
+
+_CHANNEL = _descriptor.Descriptor(
+  name='Channel',
+  full_name='event.Channel',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.Channel.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='event.Channel.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2011,
+  serialized_end=2046,
+)
+
+
+_TOPIC = _descriptor.Descriptor(
+  name='Topic',
+  full_name='event.Topic',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.Topic.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='event.Topic.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2048,
+  serialized_end=2081,
+)
+
+
+_MESSAGE = _descriptor.Descriptor(
+  name='Message',
+  full_name='event.Message',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='event.Message.value', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='format', full_name='event.Message.format', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2083,
+  serialized_end=2123,
+)
+
+
+_ATTACHMENT = _descriptor.Descriptor(
+  name='Attachment',
+  full_name='event.Attachment',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2125,
+  serialized_end=2137,
+)
+
+
+_SENDER = _descriptor.Descriptor(
+  name='Sender',
+  full_name='event.Sender',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='event.Sender.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='event.Sender.type', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='event.Sender.name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='emails', full_name='event.Sender.emails', index=3,
+      number=4, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='phones', full_name='event.Sender.phones', index=4,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='avatar_url', full_name='event.Sender.avatar_url', index=5,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2139,
+  serialized_end=2239,
+)
+
+
+_REPLY = _descriptor.Descriptor(
+  name='Reply',
+  full_name='event.Reply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='event_id', full_name='event.Reply.event_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='state', full_name='event.Reply.state', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='err', full_name='event.Reply.err', index=2,
+      number=10, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='err_description', full_name='event.Reply.err_description', index=3,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='err_code', full_name='event.Reply.err_code', index=4,
+      number=13, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='err_class', full_name='event.Reply.err_class', index=5,
+      number=15, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='payload', full_name='event.Reply.payload', index=6,
+      number=7, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2242,
+  serialized_end=2383,
+)
+
+
+_ERROR = _descriptor.Descriptor(
+  name='Error',
+  full_name='event.Error',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='error', full_name='event.Error.error', index=0,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='request_id', full_name='event.Error.request_id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='event.Error.description', index=2,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2385,
+  serialized_end=2448,
+)
+
+
+_SUBSCRIPTION = _descriptor.Descriptor(
+  name='Subscription',
+  full_name='event.Subscription',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='topic', full_name='event.Subscription.topic', index=0,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='event.Subscription.user_id', index=1,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='event.Subscription.account_id', index=2,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='sub_id', full_name='event.Subscription.sub_id', index=3,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2450,
+  serialized_end=2532,
+)
+
+_USER.fields_by_name['type'].enum_type = _USERTYPE
+_JSONEVENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _OEVENT.fields_by_name['Users'].message_type = _USER
+_RAWCONVERSATIONJOINEDEVENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_RAWCONVERSATIONSTARTEDEVENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_RAWCONVERSATIONMESSAGEEVENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_RAWCONVERSATIONMESSAGEEVENT.fields_by_name['attachments'].message_type = _ATTACHMENT
+_EVENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_EVENT.fields_by_name['account'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_account_dot_account__pb2._ACCOUNT
+_EVENT.fields_by_name['app'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_client_dot_client__pb2._CLIENT
+_EVENT.fields_by_name['sender'].message_type = _SENDER
+_EVENT.fields_by_name['channel'].message_type = _CHANNEL
+_EVENT.fields_by_name['topics'].message_type = _TOPIC
+_REPLY.fields_by_name['err_code'].enum_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_lang_dot_lang__pb2._T
 DESCRIPTOR.message_types_by_name['User'] = _USER
+DESCRIPTOR.message_types_by_name['RawEventCreatedPayload'] = _RAWEVENTCREATEDPAYLOAD
+DESCRIPTOR.message_types_by_name['JSONEvent'] = _JSONEVENT
 DESCRIPTOR.message_types_by_name['OEvent'] = _OEVENT
+DESCRIPTOR.message_types_by_name['ChatSentUser'] = _CHATSENTUSER
+DESCRIPTOR.message_types_by_name['ChatSent'] = _CHATSENT
+DESCRIPTOR.message_types_by_name['ChatAssigned'] = _CHATASSIGNED
+DESCRIPTOR.message_types_by_name['ChatWaiting'] = _CHATWAITING
+DESCRIPTOR.message_types_by_name['Chat_X_Sent'] = _CHAT_X_SENT
+DESCRIPTOR.message_types_by_name['RawEvent'] = _RAWEVENT
+DESCRIPTOR.message_types_by_name['RawConversationJoinedEvent'] = _RAWCONVERSATIONJOINEDEVENT
+DESCRIPTOR.message_types_by_name['RawConversationStartedEvent'] = _RAWCONVERSATIONSTARTEDEVENT
+DESCRIPTOR.message_types_by_name['RawConversationMessageEvent'] = _RAWCONVERSATIONMESSAGEEVENT
+DESCRIPTOR.message_types_by_name['Event'] = _EVENT
+DESCRIPTOR.message_types_by_name['Channel'] = _CHANNEL
+DESCRIPTOR.message_types_by_name['Topic'] = _TOPIC
+DESCRIPTOR.message_types_by_name['Message'] = _MESSAGE
+DESCRIPTOR.message_types_by_name['Attachment'] = _ATTACHMENT
+DESCRIPTOR.message_types_by_name['Sender'] = _SENDER
+DESCRIPTOR.message_types_by_name['Reply'] = _REPLY
+DESCRIPTOR.message_types_by_name['Error'] = _ERROR
+DESCRIPTOR.message_types_by_name['Subscription'] = _SUBSCRIPTION
 DESCRIPTOR.enum_types_by_name['UserType'] = _USERTYPE
-DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
+DESCRIPTOR.enum_types_by_name['EVENT'] = _EVENT
+DESCRIPTOR.enum_types_by_name['EventType'] = _EVENTTYPE
+DESCRIPTOR.enum_types_by_name['SubscribeScope'] = _SUBSCRIBESCOPE
+DESCRIPTOR.enum_types_by_name['SubPrefix'] = _SUBPREFIX
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), dict(
   DESCRIPTOR = _USER,
@@ -194,12 +1490,152 @@ User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), dic
   ))
 _sym_db.RegisterMessage(User)
 
+RawEventCreatedPayload = _reflection.GeneratedProtocolMessageType('RawEventCreatedPayload', (_message.Message,), dict(
+  DESCRIPTOR = _RAWEVENTCREATEDPAYLOAD,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.RawEventCreatedPayload)
+  ))
+_sym_db.RegisterMessage(RawEventCreatedPayload)
+
+JSONEvent = _reflection.GeneratedProtocolMessageType('JSONEvent', (_message.Message,), dict(
+  DESCRIPTOR = _JSONEVENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.JSONEvent)
+  ))
+_sym_db.RegisterMessage(JSONEvent)
+
 OEvent = _reflection.GeneratedProtocolMessageType('OEvent', (_message.Message,), dict(
   DESCRIPTOR = _OEVENT,
   __module__ = 'event.event_pb2'
   # @@protoc_insertion_point(class_scope:event.OEvent)
   ))
 _sym_db.RegisterMessage(OEvent)
+
+ChatSentUser = _reflection.GeneratedProtocolMessageType('ChatSentUser', (_message.Message,), dict(
+  DESCRIPTOR = _CHATSENTUSER,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.ChatSentUser)
+  ))
+_sym_db.RegisterMessage(ChatSentUser)
+
+ChatSent = _reflection.GeneratedProtocolMessageType('ChatSent', (_message.Message,), dict(
+  DESCRIPTOR = _CHATSENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.ChatSent)
+  ))
+_sym_db.RegisterMessage(ChatSent)
+
+ChatAssigned = _reflection.GeneratedProtocolMessageType('ChatAssigned', (_message.Message,), dict(
+  DESCRIPTOR = _CHATASSIGNED,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.ChatAssigned)
+  ))
+_sym_db.RegisterMessage(ChatAssigned)
+
+ChatWaiting = _reflection.GeneratedProtocolMessageType('ChatWaiting', (_message.Message,), dict(
+  DESCRIPTOR = _CHATWAITING,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.ChatWaiting)
+  ))
+_sym_db.RegisterMessage(ChatWaiting)
+
+Chat_X_Sent = _reflection.GeneratedProtocolMessageType('Chat_X_Sent', (_message.Message,), dict(
+  DESCRIPTOR = _CHAT_X_SENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Chat_X_Sent)
+  ))
+_sym_db.RegisterMessage(Chat_X_Sent)
+
+RawEvent = _reflection.GeneratedProtocolMessageType('RawEvent', (_message.Message,), dict(
+  DESCRIPTOR = _RAWEVENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.RawEvent)
+  ))
+_sym_db.RegisterMessage(RawEvent)
+
+RawConversationJoinedEvent = _reflection.GeneratedProtocolMessageType('RawConversationJoinedEvent', (_message.Message,), dict(
+  DESCRIPTOR = _RAWCONVERSATIONJOINEDEVENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.RawConversationJoinedEvent)
+  ))
+_sym_db.RegisterMessage(RawConversationJoinedEvent)
+
+RawConversationStartedEvent = _reflection.GeneratedProtocolMessageType('RawConversationStartedEvent', (_message.Message,), dict(
+  DESCRIPTOR = _RAWCONVERSATIONSTARTEDEVENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.RawConversationStartedEvent)
+  ))
+_sym_db.RegisterMessage(RawConversationStartedEvent)
+
+RawConversationMessageEvent = _reflection.GeneratedProtocolMessageType('RawConversationMessageEvent', (_message.Message,), dict(
+  DESCRIPTOR = _RAWCONVERSATIONMESSAGEEVENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.RawConversationMessageEvent)
+  ))
+_sym_db.RegisterMessage(RawConversationMessageEvent)
+
+Event = _reflection.GeneratedProtocolMessageType('Event', (_message.Message,), dict(
+  DESCRIPTOR = _EVENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Event)
+  ))
+_sym_db.RegisterMessage(Event)
+
+Channel = _reflection.GeneratedProtocolMessageType('Channel', (_message.Message,), dict(
+  DESCRIPTOR = _CHANNEL,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Channel)
+  ))
+_sym_db.RegisterMessage(Channel)
+
+Topic = _reflection.GeneratedProtocolMessageType('Topic', (_message.Message,), dict(
+  DESCRIPTOR = _TOPIC,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Topic)
+  ))
+_sym_db.RegisterMessage(Topic)
+
+Message = _reflection.GeneratedProtocolMessageType('Message', (_message.Message,), dict(
+  DESCRIPTOR = _MESSAGE,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Message)
+  ))
+_sym_db.RegisterMessage(Message)
+
+Attachment = _reflection.GeneratedProtocolMessageType('Attachment', (_message.Message,), dict(
+  DESCRIPTOR = _ATTACHMENT,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Attachment)
+  ))
+_sym_db.RegisterMessage(Attachment)
+
+Sender = _reflection.GeneratedProtocolMessageType('Sender', (_message.Message,), dict(
+  DESCRIPTOR = _SENDER,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Sender)
+  ))
+_sym_db.RegisterMessage(Sender)
+
+Reply = _reflection.GeneratedProtocolMessageType('Reply', (_message.Message,), dict(
+  DESCRIPTOR = _REPLY,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Reply)
+  ))
+_sym_db.RegisterMessage(Reply)
+
+Error = _reflection.GeneratedProtocolMessageType('Error', (_message.Message,), dict(
+  DESCRIPTOR = _ERROR,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Error)
+  ))
+_sym_db.RegisterMessage(Error)
+
+Subscription = _reflection.GeneratedProtocolMessageType('Subscription', (_message.Message,), dict(
+  DESCRIPTOR = _SUBSCRIPTION,
+  __module__ = 'event.event_pb2'
+  # @@protoc_insertion_point(class_scope:event.Subscription)
+  ))
+_sym_db.RegisterMessage(Subscription)
 
 
 # @@protoc_insertion_point(module_scope)

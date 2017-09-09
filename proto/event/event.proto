@@ -1,44 +1,250 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package event;
 
-//import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
-
-// message Event {
-// 	string Event = 1;
-// 	auth.Method Method = 2;
-// }
+//import "bitbucket.org/subiz/servicespec/proto/chat/chat.proto";
+import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
+import "bitbucket.org/subiz/servicespec/proto/account/account.proto";
+import "bitbucket.org/subiz/servicespec/proto/client/client.proto";
+import "bitbucket.org/subiz/servicespec/proto/lang/lang.proto";
 
 message User {
-	string Id = 1;
-	UserType Type = 2;
+	optional string id = 1;
+	optional UserType type  = 2;
 }
 
 enum UserType {
 	NONE = 0;
-	VISITOR = 1;
+  USER= 1;
 	AGENT = 2;
+	SYSTEM = 3;
 }
 
-enum Event {
+message RawEventCreatedPayload {
+	repeated string sub_ids = 3;
+	repeated string topics = 4;
+	optional string payload = 5; //json format
+}
+
+enum EVENT {
 	Out_EventCreated = 0;
+	Send_ = 1;
+	ApiReply = 2;
+	RawEventCreated = 3;  //
+	Subscribe = 4; // subscription
+	Unsubscribe = 5; // subscription
+}
+
+message JSONEvent {
+	optional common.Context ctx = 1;
+	optional bytes event = 2;
 }
 
 // OEEventCreated is a kafka event created when subiz want
-// to send message downstream
+// to send downstream
 message OEvent {
-	string Id = 1;
+	optional string id = 1;
+
 	// Event is name of the event see ./event.json
-	string Event = 2;
-	string AccountId = 3;
+	optional string event = 2;
+
+	optional string account_id = 3;
 
 	// Users is list of user that event need to be sent to. (3000 max)
 	repeated User Users = 4;
 
-	// ChannelId is ID of channel this event is sent to. If this event
-	// is sent to subiz channel, then you can leave this field blank
-	string ChannelId = 5;
-
 	// Payload is content of event in JSON format, see ./event.json
-	string Payload = 7;
+	optional string payload = 7;
+}
+
+message ChatSentUser {
+	optional string id = 1;
+	optional string type = 2;
+	optional string last_seen_id = 3;
+}
+
+message ChatSent {
+
+}
+
+// An incomming chat is assigned to agent
+message ChatAssigned {
+	optional string _Methods = 1; // ReadChats | ReadChat
+	optional string Timestamp = 2;
+	//optional chat.Chat Chat = 3;
+}
+
+message ChatWaiting {
+	optional string _Methods = 1; // ReadChats | ReadChat
+	optional string Timestamp = 2;
+	//optional chat.UnassignedChat UnassignedChat = 3;
+}
+
+
+
+message Chat_X_Sent {}
+
+message RawEvent {
+	//optional common.Context ctx = 1;
+	optional string id = 3;
+	optional string account_id = 4;
+	optional string app_id = 5;
+	optional string sender_id = 6;
+	optional string sender_type = 7;
+
+	optional int64 timestamp = 8;
+	optional string type = 9;
+	optional string channel_id = 10;
+	repeated string topic_ids = 11;
+}
+
+message RawConversationJoinedEvent {
+		optional common.Context ctx = 1;
+		optional string id = 3;
+	optional string account_id = 4;
+	optional string app_id = 5;
+	optional string sender_id = 6;
+	optional string sender_type = 7;
+
+	optional int64 timestamp = 8;
+	optional string type = 9;
+	optional string channel_id = 10;
+	repeated string topic_ids = 11;
+
+	optional string conversation_id = 13;
+	optional string joiner_id = 14;
+	optional string joiner_type = 15;
+}
+
+message RawConversationStartedEvent {
+
+	optional common.Context ctx = 1;
+ 	optional string id = 3;
+	optional string account_id = 4;
+	optional string app_id = 5;
+	optional string sender_id = 6;
+	optional string sender_type = 7;
+
+	optional int64 timestamp = 8;
+	optional string type = 9;
+	optional string channel_id = 10;
+	repeated string topic_ids = 11;
+	//---
+	optional string conversation_id = 15;
+}
+
+message RawConversationMessageEvent {
+	optional common.Context ctx = 1;
+	optional string id = 3;
+	optional string account_id = 4;
+	optional string app_id = 5;
+	optional string sender_id = 6;
+	optional string sender_type = 7;
+
+	optional int64 timestamp = 8;
+	optional string type = 9;
+	optional string channel_id = 10;
+	repeated string topic_ids = 11;
+
+	optional string conversation_id = 19;
+	repeated Attachment attachments = 20;
+	optional string text = 21;
+	optional string format = 22;
+
+}
+
+message Event {
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional account.Account account = 3;
+	optional client.Client app = 4;
+	//optional string access_token = 6;
+	optional Sender sender = 8;
+	optional int64 timestamp = 12; // responly
+	optional string type = 13;
+	optional Channel channel = 15;
+	//optional string channel_id = 17;
+	repeated Topic topics = 19;
+	//===========================
+	//extensions 20 to max;
+	//repeated Attachment attachments = 20;
+	//optional Message message = 21;
+}
+
+
+message Channel {
+	optional string id = 1;
+	optional string name = 2;
+}
+
+message Topic {
+	optional string id = 1;
+	optional string name = 2;
+}
+
+message Message {
+	optional string value = 1;
+	optional string format = 2;
+}
+
+message Attachment {
+
+}
+
+message Sender {
+	optional string id = 1;
+	optional string type = 2;
+	optional string name = 3;
+	repeated string emails = 4;
+	optional string phones = 6;
+	optional string avatar_url = 7;
+}
+
+message Reply {
+	optional string event_id = 1;
+	optional bytes state = 2;
+
+	optional bool err = 10;
+	optional string err_description = 12;
+	optional lang.T err_code = 13;
+	optional int32 err_class = 15;
+
+	optional bytes payload = 7;
+}
+
+enum EventType {
+  conversation_started = 1;
+	conversation_joined = 2;
+
+	conversation_message = 3;
+	conversation_left = 4;
+	conversation_closed = 5;
+	conversation_tagged = 6;
+	conversation_untagged = 7;
+
+
+}
+
+message Error {
+	optional string error = 2;
+	optional string request_id = 3;
+	optional string description = 4;
+}
+
+enum SubscribeScope {
+	user = 0;
+	channel = 1;
+	//botuser = 2;
+}
+
+message Subscription {
+	optional string topic = 3;
+	optional string user_id = 4; // connectorid or userid
+	//optional SubscribeScope scope = 5;
+	optional string account_id = 6;
+	optional string sub_id = 7;
+}
+
+enum SubPrefix {
+	Webhook = 0;
 }
