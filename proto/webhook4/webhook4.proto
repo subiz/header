@@ -1,0 +1,35 @@
+syntax = "proto2";
+
+package webhook4;
+
+//import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
+//4import "bitbucket.org/subiz/servicespec/proto/event/event.proto";
+import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
+
+message Retry {
+	optional common.Context ctx = 1;
+	optional string partition = 2;
+	optional string queue = 3;
+	optional string job_id = 4;
+	optional int32 n_backoff = 5;
+}
+
+message Webhook {
+	optional common.Context ctx = 1;
+	optional string client_id = 2;
+	optional string url = 3;
+	optional string secret = 4;
+	optional bool is_enabled = 5;
+  repeated string events = 6; // conversation_start.account.#account_id.user.#user_id
+	// conversation_start.account.#account_id.channel.#client_id
+}
+
+enum Event {
+	Webhook4RetryCallback = 0;
+	Webhook4UpsertWebhookRequested = 1;
+	Webhook4DeleteWebhookRequested = 2;
+	Webhook4ReadWebhookRequested = 3;
+	Webhook4WebhookUpserted = 4;
+	Webhook4WebhookVerifyRequested = 5;
+
+}
