@@ -21,7 +21,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x11\x65mail/email.proto\x12\x05\x65mail\"g\n\x05\x45mail\x12\x0c\n\x04\x46rom\x18\x01 \x01(\t\x12\n\n\x02To\x18\x02 \x01(\t\x12\x0f\n\x07Subject\x18\x03 \x01(\t\x12\x0c\n\x04\x42ody\x18\x04 \x01(\t\x12\x10\n\x08JSONData\x18\x05 \x01(\t\x12\x13\n\x0b\x41ttachLinks\x18\x06 \x03(\t\"\x07\n\x05\x45mpty23\n\x0b\x45mailSender\x12$\n\x04Send\x12\x0c.email.Email\x1a\x0c.email.Empty\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -117,6 +116,7 @@ _EMPTY = _descriptor.Descriptor(
 
 DESCRIPTOR.message_types_by_name['Email'] = _EMAIL
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Email = _reflection.GeneratedProtocolMessageType('Email', (_message.Message,), dict(
   DESCRIPTOR = _EMAIL,
@@ -132,5 +132,29 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), d
   ))
 _sym_db.RegisterMessage(Empty)
 
+
+
+_EMAILSENDER = _descriptor.ServiceDescriptor(
+  name='EmailSender',
+  full_name='email.EmailSender',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=142,
+  serialized_end=193,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Send',
+    full_name='email.EmailSender.Send',
+    index=0,
+    containing_service=None,
+    input_type=_EMAIL,
+    output_type=_EMPTY,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_EMAILSENDER)
+
+DESCRIPTOR.services_by_name['EmailSender'] = _EMAILSENDER
 
 # @@protoc_insertion_point(module_scope)

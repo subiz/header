@@ -21,7 +21,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x15\x63luster/cluster.proto\x12\x07\x63luster\"\x07\n\x05\x45mpty\")\n\x07\x43luster\x12\x0f\n\x07Service\x18\x01 \x01(\t\x12\r\n\x05Hosts\x18\x02 \x03(\t2K\n\x14\x43lusterChangeHandler\x12\x33\n\rUpdateCluster\x12\x10.cluster.Cluster\x1a\x0e.cluster.Empty\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -89,6 +88,7 @@ _CLUSTER = _descriptor.Descriptor(
 
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['Cluster'] = _CLUSTER
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -104,5 +104,29 @@ Cluster = _reflection.GeneratedProtocolMessageType('Cluster', (_message.Message,
   ))
 _sym_db.RegisterMessage(Cluster)
 
+
+
+_CLUSTERCHANGEHANDLER = _descriptor.ServiceDescriptor(
+  name='ClusterChangeHandler',
+  full_name='cluster.ClusterChangeHandler',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=86,
+  serialized_end=161,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='UpdateCluster',
+    full_name='cluster.ClusterChangeHandler.UpdateCluster',
+    index=0,
+    containing_service=None,
+    input_type=_CLUSTER,
+    output_type=_EMPTY,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_CLUSTERCHANGEHANDLER)
+
+DESCRIPTOR.services_by_name['ClusterChangeHandler'] = _CLUSTERCHANGEHANDLER
 
 # @@protoc_insertion_point(module_scope)

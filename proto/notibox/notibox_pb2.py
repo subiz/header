@@ -22,7 +22,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x15notibox/notibox.proto\x12\x07notibox\"O\n\x0cNotification\x12\n\n\x02Id\x18\x01 \x01(\t\x12\r\n\x05\x45vent\x18\x02 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x05 \x01(\t\x12\x0f\n\x07Payload\x18\x07 \x01(\t\"\x07\n\x05\x45mpty\"+\n\x06UserId\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\"T\n\x0bListRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\x12\x13\n\x0bStartNotiId\x18\x04 \x01(\t\"=\n\rNotifications\x12,\n\rNotifications\x18\x01 \x03(\x0b\x32\x15.notibox.Notification\"I\n\x0bSeenRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x17\n\x0fNotificationIds\x18\x02 \x03(\t\x12\x0e\n\x06UserId\x18\x03 \x01(\t\"1\n\x10SubscribeRequest\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\r\n\x05Topic\x18\x02 \x01(\t\"#\n\x0eNumberOfUnseen\x12\x11\n\tNumUnseen\x18\x01 \x01(\x03\"\xc2\x01\n\x12\x41gentConfiguration\x12\x19\n\x11NotificationSound\x18\x01 \x01(\x08\x12.\n\tEmailNoti\x18\x02 \x01(\x0b\x32\x1b.notibox.NotificationConfig\x12\x30\n\x0b\x44\x65sktopNoti\x18\x03 \x01(\x0b\x32\x1b.notibox.NotificationConfig\x12/\n\nMobileNoti\x18\x04 \x01(\x0b\x32\x1b.notibox.NotificationConfig\"|\n\x12NotificationConfig\x12\x13\n\x0b\x41llActivity\x18\x01 \x01(\x08\x12\x1b\n\x13MaintainenceMessage\x18\x02 \x01(\x08\x12\x15\n\rDirectMessage\x18\x03 \x01(\x08\x12\x0c\n\x04News\x18\x04 \x01(\x08\x12\x0f\n\x07Nothing\x18\x05 \x01(\x08*U\n\x08NotiType\x12\x0e\n\nChatUpdate\x10\x00\x12\x16\n\x12SystemMaintainance\x10\x02\x12\x0e\n\nRuleUpdate\x10\x03\x12\x11\n\rAccountUpdate\x10\x04\x32\xe0\x01\n\x08Notifica\x12\x31\n\x06Upsert\x12\x15.notibox.Notification\x1a\x0e.notibox.Empty\"\x00\x12\x36\n\x04List\x12\x14.notibox.ListRequest\x1a\x16.notibox.Notifications\"\x00\x12.\n\x04Seen\x12\x14.notibox.SeenRequest\x1a\x0e.notibox.Empty\"\x00\x12\x39\n\x0b\x43ountUnseen\x12\x0f.notibox.UserId\x1a\x17.notibox.NumberOfUnseen\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _NOTITYPE = _descriptor.EnumDescriptor(
   name='NotiType',
@@ -498,6 +497,7 @@ DESCRIPTOR.message_types_by_name['NumberOfUnseen'] = _NUMBEROFUNSEEN
 DESCRIPTOR.message_types_by_name['AgentConfiguration'] = _AGENTCONFIGURATION
 DESCRIPTOR.message_types_by_name['NotificationConfig'] = _NOTIFICATIONCONFIG
 DESCRIPTOR.enum_types_by_name['NotiType'] = _NOTITYPE
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Notification = _reflection.GeneratedProtocolMessageType('Notification', (_message.Message,), dict(
   DESCRIPTOR = _NOTIFICATION,
@@ -569,5 +569,56 @@ NotificationConfig = _reflection.GeneratedProtocolMessageType('NotificationConfi
   ))
 _sym_db.RegisterMessage(NotificationConfig)
 
+
+
+_NOTIFICA = _descriptor.ServiceDescriptor(
+  name='Notifica',
+  full_name='notibox.Notifica',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=892,
+  serialized_end=1116,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Upsert',
+    full_name='notibox.Notifica.Upsert',
+    index=0,
+    containing_service=None,
+    input_type=_NOTIFICATION,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='List',
+    full_name='notibox.Notifica.List',
+    index=1,
+    containing_service=None,
+    input_type=_LISTREQUEST,
+    output_type=_NOTIFICATIONS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Seen',
+    full_name='notibox.Notifica.Seen',
+    index=2,
+    containing_service=None,
+    input_type=_SEENREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CountUnseen',
+    full_name='notibox.Notifica.CountUnseen',
+    index=3,
+    containing_service=None,
+    input_type=_USERID,
+    output_type=_NUMBEROFUNSEEN,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_NOTIFICA)
+
+DESCRIPTOR.services_by_name['Notifica'] = _NOTIFICA
 
 # @@protoc_insertion_point(module_scope)

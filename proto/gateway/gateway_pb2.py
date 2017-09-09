@@ -22,7 +22,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x15gateway/gateway.proto\x12\x07gateway\"\x07\n\x05\x45mpty\"C\n\x0cUsersPackage\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\x0f\n\x07Payload\x18\x03 \x01(\t\x12\x11\n\tAccountId\x18\x04 \x01(\t\"G\n\x0e\x43hannelPackage\x12\x11\n\tChannelId\x18\x02 \x01(\t\x12\x0f\n\x07Payload\x18\x03 \x01(\t\x12\x11\n\tAccountId\x18\x04 \x01(\t\"S\n\x0bSubsPackage\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\x0f\n\x07\x43onnIds\x18\x03 \x03(\t\x12\x0f\n\x07Payload\x18\x04 \x01(\t\x12\x11\n\tAccountId\x18\x05 \x01(\t*:\n\nClientType\x12\x0c\n\x08\x46orAgent\x10\x00\x12\x0e\n\nForVisitor\x10\x01\x12\x0e\n\nForAccount\x10\x02\x32\xb3\x01\n\x07Gateway\x12\x36\n\x0bSendToUsers\x12\x15.gateway.UsersPackage\x1a\x0e.gateway.Empty\"\x00\x12:\n\rSendToChannel\x12\x17.gateway.ChannelPackage\x1a\x0e.gateway.Empty\"\x00\x12\x34\n\nSendToSubs\x12\x14.gateway.SubsPackage\x1a\x0e.gateway.Empty\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _CLIENTTYPE = _descriptor.EnumDescriptor(
   name='ClientType',
@@ -227,6 +226,7 @@ DESCRIPTOR.message_types_by_name['UsersPackage'] = _USERSPACKAGE
 DESCRIPTOR.message_types_by_name['ChannelPackage'] = _CHANNELPACKAGE
 DESCRIPTOR.message_types_by_name['SubsPackage'] = _SUBSPACKAGE
 DESCRIPTOR.enum_types_by_name['ClientType'] = _CLIENTTYPE
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -256,5 +256,47 @@ SubsPackage = _reflection.GeneratedProtocolMessageType('SubsPackage', (_message.
   ))
 _sym_db.RegisterMessage(SubsPackage)
 
+
+
+_GATEWAY = _descriptor.ServiceDescriptor(
+  name='Gateway',
+  full_name='gateway.Gateway',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=331,
+  serialized_end=510,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='SendToUsers',
+    full_name='gateway.Gateway.SendToUsers',
+    index=0,
+    containing_service=None,
+    input_type=_USERSPACKAGE,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SendToChannel',
+    full_name='gateway.Gateway.SendToChannel',
+    index=1,
+    containing_service=None,
+    input_type=_CHANNELPACKAGE,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SendToSubs',
+    full_name='gateway.Gateway.SendToSubs',
+    index=2,
+    containing_service=None,
+    input_type=_SUBSPACKAGE,
+    output_type=_EMPTY,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_GATEWAY)
+
+DESCRIPTOR.services_by_name['Gateway'] = _GATEWAY
 
 # @@protoc_insertion_point(module_scope)

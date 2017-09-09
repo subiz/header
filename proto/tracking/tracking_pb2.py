@@ -22,7 +22,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x17tracking/tracking.proto\x12\x08tracking\"\x07\n\x05\x45mpty\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x01 \x03(\t\"@\n\nUserFields\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\"\n\x06\x46ields\x18\x02 \x03(\x0b\x32\x12.tracking.KeyValue\"8\n\x0bUsersFields\x12)\n\x0bUsersFields\x18\x01 \x03(\x0b\x32\x14.tracking.UserFields\":\n\x0cMergeRequest\x12\x14\n\x0c\x46ormerUserId\x18\x01 \x01(\t\x12\x14\n\x0cRecentUserId\x18\x02 \x01(\t\"\x18\n\x06\x45vents\x12\x0e\n\x06\x45vents\x18\x01 \x03(\t\"&\n\x08KeyValue\x12\x0b\n\x03Key\x18\x01 \x01(\t\x12\r\n\x05Value\x18\x02 \x01(\t\"\x8f\x01\n\x05\x45vent\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12!\n\x04Type\x18\x03 \x01(\x0e\x32\x13.tracking.EventType\x12\"\n\x06\x46ields\x18\x04 \x03(\x0b\x32\x12.tracking.KeyValue\x12\r\n\x05\x43Time\x18\x05 \x01(\t\x12\r\n\x05LTime\x18\x06 \x01(\t\"v\n\x1eListEventsByTypeAndUserRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12!\n\x04Type\x18\x02 \x01(\x0e\x32\x13.tracking.EventType\x12\x0f\n\x07StartId\x18\x03 \x01(\t\x12\r\n\x05Limit\x18\x04 \x01(\x05\"\\\n\x17ListEventsByUserRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\x0f\n\x07StartId\x18\x03 \x01(\t\x12\r\n\x05Limit\x18\x04 \x01(\x05\"I\n\x08UserInfo\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\x0b\n\x03Key\x18\x03 \x01(\t\x12\r\n\x05Value\x18\x04 \x01(\t*]\n\tEventType\x12\x08\n\x04NONE\x10\x00\x12\x0f\n\x0bVIEWCONTENT\x10\x01\x12\n\n\x06SEARCH\x10\x02\x12\r\n\tADDTOCART\x10\x03\x12\x0c\n\x08\x43HECKOUT\x10\x04\x12\x0c\n\x08PURCHASE\x10\x05\x32\x8a\x05\n\x07Tracker\x12&\n\x03\x42\x61n\x12\x0c.tracking.Id\x1a\x0f.tracking.Empty\"\x00\x12(\n\x05Unban\x12\x0c.tracking.Id\x1a\x0f.tracking.Empty\"\x00\x12+\n\x05Track\x12\x0f.tracking.Event\x1a\x0f.tracking.Empty\"\x00\x12,\n\x06Update\x12\x0f.tracking.Event\x1a\x0f.tracking.Empty\"\x00\x12\x31\n\x08Identify\x12\x12.tracking.UserInfo\x1a\x0f.tracking.Empty\"\x00\x12\x32\n\x05Merge\x12\x16.tracking.MergeRequest\x1a\x0f.tracking.Empty\"\x00\x12\x31\n\x08SetField\x12\x12.tracking.UserInfo\x1a\x0f.tracking.Empty\"\x00\x12\x36\n\rAppendToField\x12\x12.tracking.UserInfo\x1a\x0f.tracking.Empty\"\x00\x12\x33\n\nUnsetField\x12\x12.tracking.UserInfo\x1a\x0f.tracking.Empty\"\x00\x12\x43\n\nListEvents\x12!.tracking.ListEventsByUserRequest\x1a\x10.tracking.Events\"\x00\x12P\n\x10ListEventsByType\x12(.tracking.ListEventsByTypeAndUserRequest\x1a\x10.tracking.Events\"\x00\x12\x34\n\nListFields\x12\r.tracking.Ids\x1a\x15.tracking.UsersFields\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _EVENTTYPE = _descriptor.EnumDescriptor(
   name='EventType',
@@ -573,6 +572,7 @@ DESCRIPTOR.message_types_by_name['ListEventsByTypeAndUserRequest'] = _LISTEVENTS
 DESCRIPTOR.message_types_by_name['ListEventsByUserRequest'] = _LISTEVENTSBYUSERREQUEST
 DESCRIPTOR.message_types_by_name['UserInfo'] = _USERINFO
 DESCRIPTOR.enum_types_by_name['EventType'] = _EVENTTYPE
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -658,5 +658,128 @@ UserInfo = _reflection.GeneratedProtocolMessageType('UserInfo', (_message.Messag
   ))
 _sym_db.RegisterMessage(UserInfo)
 
+
+
+_TRACKER = _descriptor.ServiceDescriptor(
+  name='Tracker',
+  full_name='tracking.Tracker',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=865,
+  serialized_end=1515,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Ban',
+    full_name='tracking.Tracker.Ban',
+    index=0,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Unban',
+    full_name='tracking.Tracker.Unban',
+    index=1,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Track',
+    full_name='tracking.Tracker.Track',
+    index=2,
+    containing_service=None,
+    input_type=_EVENT,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Update',
+    full_name='tracking.Tracker.Update',
+    index=3,
+    containing_service=None,
+    input_type=_EVENT,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Identify',
+    full_name='tracking.Tracker.Identify',
+    index=4,
+    containing_service=None,
+    input_type=_USERINFO,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Merge',
+    full_name='tracking.Tracker.Merge',
+    index=5,
+    containing_service=None,
+    input_type=_MERGEREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SetField',
+    full_name='tracking.Tracker.SetField',
+    index=6,
+    containing_service=None,
+    input_type=_USERINFO,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='AppendToField',
+    full_name='tracking.Tracker.AppendToField',
+    index=7,
+    containing_service=None,
+    input_type=_USERINFO,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UnsetField',
+    full_name='tracking.Tracker.UnsetField',
+    index=8,
+    containing_service=None,
+    input_type=_USERINFO,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListEvents',
+    full_name='tracking.Tracker.ListEvents',
+    index=9,
+    containing_service=None,
+    input_type=_LISTEVENTSBYUSERREQUEST,
+    output_type=_EVENTS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListEventsByType',
+    full_name='tracking.Tracker.ListEventsByType',
+    index=10,
+    containing_service=None,
+    input_type=_LISTEVENTSBYTYPEANDUSERREQUEST,
+    output_type=_EVENTS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListFields',
+    full_name='tracking.Tracker.ListFields',
+    index=11,
+    containing_service=None,
+    input_type=_IDS,
+    output_type=_USERSFIELDS,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_TRACKER)
+
+DESCRIPTOR.services_by_name['Tracker'] = _TRACKER
 
 # @@protoc_insertion_point(module_scope)

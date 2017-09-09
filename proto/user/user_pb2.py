@@ -21,7 +21,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\"\xd7\x01\n\x04User\x12\n\n\x02Id\x18\x01 \x01(\t\x12\r\n\x05\x41lias\x18\x02 \x03(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x11\n\tFirstName\x18\x04 \x01(\t\x12\x10\n\x08LastName\x18\x05 \x01(\t\x12\x0e\n\x06Phones\x18\x06 \x03(\t\x12\x0e\n\x06\x45mails\x18\x07 \x03(\t\x12\x1b\n\x06Traces\x18\x08 \x03(\x0b\x32\x0b.user.Trace\x12\x1d\n\x07\x44\x65vices\x18\t \x03(\x0b\x32\x0c.user.Device\x12\r\n\x05IsBan\x18\n \x01(\x08\x12\x11\n\tAvatarUrl\x18\x0b \x01(\t\"\"\n\x05Users\x12\x19\n\x05Users\x18\x01 \x03(\x0b\x32\n.user.User\"Y\n\x06\x44\x65vice\x12\n\n\x02Id\x18\x01 \x01(\x05\x12\x17\n\x0fUserAgentZipped\x18\x02 \x01(\x05\x12\x12\n\nResolution\x18\x03 \x01(\t\x12\x16\n\x0eLanguageZipped\x18\x04 \x01(\x05\"7\n\x05Trace\x12\n\n\x02Id\x18\x01 \x01(\t\x12\n\n\x02IP\x18\x02 \x01(\t\x12\x16\n\x0eLocationZipped\x18\x03 \x01(\x05\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"\x07\n\x05\x45mpty\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x01 \x03(\t\"Q\n\x0bListRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07StartId\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\x12\x0f\n\x07Keyword\x18\x04 \x01(\t\":\n\x0cMergeRequest\x12\x14\n\x0c\x46ormerUserId\x18\x01 \x01(\t\x12\x14\n\x0cRecentUserId\x18\x02 \x01(\t\"U\n\x0fGreetingRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x11\n\tUserAgent\x18\x02 \x01(\t\x12\x0e\n\x06UserId\x18\x03 \x01(\t\x12\x0c\n\x04UUID\x18\x04 \x01(\t2\x9b\x02\n\x07UserMgr\x12-\n\x08Greeting\x12\x15.user.GreetingRequest\x1a\x08.user.Id\"\x00\x12#\n\x06Update\x12\n.user.User\x1a\x0b.user.Empty\"\x00\x12\x1e\n\x03\x42\x61n\x12\x08.user.Id\x1a\x0b.user.Empty\"\x00\x12 \n\x05Unban\x12\x08.user.Id\x1a\x0b.user.Empty\"\x00\x12*\n\x05Merge\x12\x12.user.MergeRequest\x1a\x0b.user.Empty\"\x00\x12$\n\x08ReadBulk\x12\t.user.Ids\x1a\x0b.user.Users\"\x00\x12(\n\x04List\x12\x11.user.ListRequest\x1a\x0b.user.Users\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -495,6 +494,7 @@ DESCRIPTOR.message_types_by_name['Ids'] = _IDS
 DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST
 DESCRIPTOR.message_types_by_name['MergeRequest'] = _MERGEREQUEST
 DESCRIPTOR.message_types_by_name['GreetingRequest'] = _GREETINGREQUEST
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), dict(
   DESCRIPTOR = _USER,
@@ -566,5 +566,83 @@ GreetingRequest = _reflection.GeneratedProtocolMessageType('GreetingRequest', (_
   ))
 _sym_db.RegisterMessage(GreetingRequest)
 
+
+
+_USERMGR = _descriptor.ServiceDescriptor(
+  name='UserMgr',
+  full_name='user.UserMgr',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=705,
+  serialized_end=988,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Greeting',
+    full_name='user.UserMgr.Greeting',
+    index=0,
+    containing_service=None,
+    input_type=_GREETINGREQUEST,
+    output_type=_ID,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Update',
+    full_name='user.UserMgr.Update',
+    index=1,
+    containing_service=None,
+    input_type=_USER,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Ban',
+    full_name='user.UserMgr.Ban',
+    index=2,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Unban',
+    full_name='user.UserMgr.Unban',
+    index=3,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Merge',
+    full_name='user.UserMgr.Merge',
+    index=4,
+    containing_service=None,
+    input_type=_MERGEREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ReadBulk',
+    full_name='user.UserMgr.ReadBulk',
+    index=5,
+    containing_service=None,
+    input_type=_IDS,
+    output_type=_USERS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='List',
+    full_name='user.UserMgr.List',
+    index=6,
+    containing_service=None,
+    input_type=_LISTREQUEST,
+    output_type=_USERS,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_USERMGR)
+
+DESCRIPTOR.services_by_name['UserMgr'] = _USERMGR
 
 # @@protoc_insertion_point(module_scope)

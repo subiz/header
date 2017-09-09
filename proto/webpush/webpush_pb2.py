@@ -22,7 +22,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x15webpush/webpush.proto\x12\x07webpush\"\x07\n\x05\x45mpty\"b\n\x05Token\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05Token\x18\x03 \x01(\t\x12\'\n\nDeviceType\x18\x05 \x01(\x0e\x32\x13.webpush.DeviceType\"F\n\x12TokenRemoveRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05Token\x18\x03 \x01(\t\"\x9a\x01\n\x0bPushRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\'\n\nDeviceType\x18\x03 \x01(\x0e\x32\x13.webpush.DeviceType\x12\r\n\x05Title\x18\x04 \x01(\t\x12\x0c\n\x04\x42ody\x18\x05 \x01(\t\x12\x0c\n\x04Icon\x18\x06 \x01(\t\x12\x13\n\x0b\x43lickAction\x18\x07 \x01(\t\"A\n\x06Result\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07UserIds\x18\x02 \x03(\t\x12\x13\n\x0bSendSuccess\x18\x03 \x03(\x08*/\n\nDeviceType\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07\x42ROWSER\x10\x01\x12\n\n\x06MOBILE\x10\x02*a\n\x05\x45vent\x12\x18\n\x14WebpushRegisterToken\x10\x00\x12\x16\n\x12WebpushRemoveToken\x10\x02\x12\x0f\n\x0bWebpushPush\x10\x03\x12\x15\n\x11WebpushPushReturn\x10\x04\x32\xab\x01\n\x07Webpush\x12\x31\n\rRegisterToken\x12\x0e.webpush.Token\x1a\x0e.webpush.Empty\"\x00\x12<\n\x0bRemoveToken\x12\x1b.webpush.TokenRemoveRequest\x1a\x0e.webpush.Empty\"\x00\x12/\n\x04Push\x12\x14.webpush.PushRequest\x1a\x0f.webpush.Result\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _DEVICETYPE = _descriptor.EnumDescriptor(
   name='DeviceType',
@@ -339,6 +338,7 @@ DESCRIPTOR.message_types_by_name['PushRequest'] = _PUSHREQUEST
 DESCRIPTOR.message_types_by_name['Result'] = _RESULT
 DESCRIPTOR.enum_types_by_name['DeviceType'] = _DEVICETYPE
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -375,5 +375,47 @@ Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,),
   ))
 _sym_db.RegisterMessage(Result)
 
+
+
+_WEBPUSH = _descriptor.ServiceDescriptor(
+  name='Webpush',
+  full_name='webpush.Webpush',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=588,
+  serialized_end=759,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='RegisterToken',
+    full_name='webpush.Webpush.RegisterToken',
+    index=0,
+    containing_service=None,
+    input_type=_TOKEN,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RemoveToken',
+    full_name='webpush.Webpush.RemoveToken',
+    index=1,
+    containing_service=None,
+    input_type=_TOKENREMOVEREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Push',
+    full_name='webpush.Webpush.Push',
+    index=2,
+    containing_service=None,
+    input_type=_PUSHREQUEST,
+    output_type=_RESULT,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_WEBPUSH)
+
+DESCRIPTOR.services_by_name['Webpush'] = _WEBPUSH
 
 # @@protoc_insertion_point(module_scope)

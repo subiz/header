@@ -44,3 +44,18 @@ message Cluster {
 	string Service = 1;
 	repeated string Hosts = 2;
 }
+
+enum Ev {
+	Pubsub_Subscribe = 0; // SubscribeMessage
+	Pubsub_Unsubscribe = 1; // UnsubscribeMessage
+}
+
+message SubscribeMessage {
+	repeated string UserIDs = 1;
+	repeated string Events = 2;
+}
+
+message UnsubscribeMessage {
+	 string UserID = 1;
+	string Event = 2;
+}

@@ -3,6 +3,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -19,10 +20,34 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='eventhub/eventhub.proto',
   package='eventhub',
   syntax='proto3',
-  serialized_pb=_b('\n\x17\x65venthub/eventhub.proto\x12\x08\x65venthub\"\x07\n\x05\x45mpty\"K\n\x11UserRecallRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x13\n\x0bLastEventId\x18\x02 \x01(\t\x12\x0e\n\x06UserId\x18\x03 \x01(\t\"Q\n\x14\x43hannelRecallRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x13\n\x0bLastEventId\x18\x02 \x01(\t\x12\x11\n\tChannelId\x18\x03 \x01(\t\"A\n\x0cRegistration\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\r\n\x05\x45vent\x18\x03 \x01(\t\"$\n\x05\x45vent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x0f\n\x07Payload\x18\x02 \x01(\t\")\n\x06\x45vents\x12\x1f\n\x06\x45vents\x18\x01 \x03(\x0b\x32\x0f.eventhub.Event\")\n\x07\x43luster\x12\x0f\n\x07Service\x18\x01 \x01(\t\x12\r\n\x05Hosts\x18\x02 \x03(\t2\xbf\x02\n\x08\x45ventHub\x12\x36\n\tSubscribe\x12\x16.eventhub.Registration\x1a\x0f.eventhub.Empty\"\x00\x12\x38\n\x0bUnsubscribe\x12\x16.eventhub.Registration\x1a\x0f.eventhub.Empty\"\x00\x12G\n\x11RecallFromChannel\x12\x1e.eventhub.ChannelRecallRequest\x1a\x10.eventhub.Events\"\x00\x12\x41\n\x0eRecallFromUser\x12\x1b.eventhub.UserRecallRequest\x1a\x10.eventhub.Events\"\x00\x12\x35\n\rUpdateCluster\x12\x11.eventhub.Cluster\x1a\x0f.eventhub.Empty\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x17\x65venthub/eventhub.proto\x12\x08\x65venthub\"\x07\n\x05\x45mpty\"K\n\x11UserRecallRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x13\n\x0bLastEventId\x18\x02 \x01(\t\x12\x0e\n\x06UserId\x18\x03 \x01(\t\"Q\n\x14\x43hannelRecallRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x13\n\x0bLastEventId\x18\x02 \x01(\t\x12\x11\n\tChannelId\x18\x03 \x01(\t\"A\n\x0cRegistration\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\r\n\x05\x45vent\x18\x03 \x01(\t\"$\n\x05\x45vent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x0f\n\x07Payload\x18\x02 \x01(\t\")\n\x06\x45vents\x12\x1f\n\x06\x45vents\x18\x01 \x03(\x0b\x32\x0f.eventhub.Event\")\n\x07\x43luster\x12\x0f\n\x07Service\x18\x01 \x01(\t\x12\r\n\x05Hosts\x18\x02 \x03(\t\"3\n\x10SubscribeMessage\x12\x0f\n\x07UserIDs\x18\x01 \x03(\t\x12\x0e\n\x06\x45vents\x18\x02 \x03(\t\"3\n\x12UnsubscribeMessage\x12\x0e\n\x06UserID\x18\x01 \x01(\t\x12\r\n\x05\x45vent\x18\x02 \x01(\t*2\n\x02\x45v\x12\x14\n\x10Pubsub_Subscribe\x10\x00\x12\x16\n\x12Pubsub_Unsubscribe\x10\x01\x32\xbf\x02\n\x08\x45ventHub\x12\x36\n\tSubscribe\x12\x16.eventhub.Registration\x1a\x0f.eventhub.Empty\"\x00\x12\x38\n\x0bUnsubscribe\x12\x16.eventhub.Registration\x1a\x0f.eventhub.Empty\"\x00\x12G\n\x11RecallFromChannel\x12\x1e.eventhub.ChannelRecallRequest\x1a\x10.eventhub.Events\"\x00\x12\x41\n\x0eRecallFromUser\x12\x1b.eventhub.UserRecallRequest\x1a\x10.eventhub.Events\"\x00\x12\x35\n\rUpdateCluster\x12\x11.eventhub.Cluster\x1a\x0f.eventhub.Empty\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
+_EV = _descriptor.EnumDescriptor(
+  name='Ev',
+  full_name='eventhub.Ev',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='Pubsub_Subscribe', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Pubsub_Unsubscribe', index=1, number=1,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=503,
+  serialized_end=553,
+)
+_sym_db.RegisterEnumDescriptor(_EV)
+
+Ev = enum_type_wrapper.EnumTypeWrapper(_EV)
+Pubsub_Subscribe = 0
+Pubsub_Unsubscribe = 1
 
 
 
@@ -291,6 +316,82 @@ _CLUSTER = _descriptor.Descriptor(
   serialized_end=395,
 )
 
+
+_SUBSCRIBEMESSAGE = _descriptor.Descriptor(
+  name='SubscribeMessage',
+  full_name='eventhub.SubscribeMessage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='UserIDs', full_name='eventhub.SubscribeMessage.UserIDs', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='Events', full_name='eventhub.SubscribeMessage.Events', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=397,
+  serialized_end=448,
+)
+
+
+_UNSUBSCRIBEMESSAGE = _descriptor.Descriptor(
+  name='UnsubscribeMessage',
+  full_name='eventhub.UnsubscribeMessage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='UserID', full_name='eventhub.UnsubscribeMessage.UserID', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='Event', full_name='eventhub.UnsubscribeMessage.Event', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=450,
+  serialized_end=501,
+)
+
 _EVENTS.fields_by_name['Events'].message_type = _EVENT
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['UserRecallRequest'] = _USERRECALLREQUEST
@@ -299,6 +400,10 @@ DESCRIPTOR.message_types_by_name['Registration'] = _REGISTRATION
 DESCRIPTOR.message_types_by_name['Event'] = _EVENT
 DESCRIPTOR.message_types_by_name['Events'] = _EVENTS
 DESCRIPTOR.message_types_by_name['Cluster'] = _CLUSTER
+DESCRIPTOR.message_types_by_name['SubscribeMessage'] = _SUBSCRIBEMESSAGE
+DESCRIPTOR.message_types_by_name['UnsubscribeMessage'] = _UNSUBSCRIBEMESSAGE
+DESCRIPTOR.enum_types_by_name['Ev'] = _EV
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -349,5 +454,79 @@ Cluster = _reflection.GeneratedProtocolMessageType('Cluster', (_message.Message,
   ))
 _sym_db.RegisterMessage(Cluster)
 
+SubscribeMessage = _reflection.GeneratedProtocolMessageType('SubscribeMessage', (_message.Message,), dict(
+  DESCRIPTOR = _SUBSCRIBEMESSAGE,
+  __module__ = 'eventhub.eventhub_pb2'
+  # @@protoc_insertion_point(class_scope:eventhub.SubscribeMessage)
+  ))
+_sym_db.RegisterMessage(SubscribeMessage)
+
+UnsubscribeMessage = _reflection.GeneratedProtocolMessageType('UnsubscribeMessage', (_message.Message,), dict(
+  DESCRIPTOR = _UNSUBSCRIBEMESSAGE,
+  __module__ = 'eventhub.eventhub_pb2'
+  # @@protoc_insertion_point(class_scope:eventhub.UnsubscribeMessage)
+  ))
+_sym_db.RegisterMessage(UnsubscribeMessage)
+
+
+
+_EVENTHUB = _descriptor.ServiceDescriptor(
+  name='EventHub',
+  full_name='eventhub.EventHub',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=556,
+  serialized_end=875,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Subscribe',
+    full_name='eventhub.EventHub.Subscribe',
+    index=0,
+    containing_service=None,
+    input_type=_REGISTRATION,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Unsubscribe',
+    full_name='eventhub.EventHub.Unsubscribe',
+    index=1,
+    containing_service=None,
+    input_type=_REGISTRATION,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RecallFromChannel',
+    full_name='eventhub.EventHub.RecallFromChannel',
+    index=2,
+    containing_service=None,
+    input_type=_CHANNELRECALLREQUEST,
+    output_type=_EVENTS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RecallFromUser',
+    full_name='eventhub.EventHub.RecallFromUser',
+    index=3,
+    containing_service=None,
+    input_type=_USERRECALLREQUEST,
+    output_type=_EVENTS,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateCluster',
+    full_name='eventhub.EventHub.UpdateCluster',
+    index=4,
+    containing_service=None,
+    input_type=_CLUSTER,
+    output_type=_EMPTY,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_EVENTHUB)
+
+DESCRIPTOR.services_by_name['EventHub'] = _EVENTHUB
 
 # @@protoc_insertion_point(module_scope)

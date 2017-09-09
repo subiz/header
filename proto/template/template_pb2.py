@@ -22,7 +22,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x17template/template.proto\x12\x08template\"\xd0\x01\n\x08Template\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x10\n\x08Language\x18\x02 \x01(\t\x12\x1c\n\x04Type\x18\x03 \x01(\x0e\x32\x0e.template.Type\x12&\n\x05\x45mail\x18\x08 \x01(\x0b\x32\x17.template.EmailTemplate\x12*\n\x07WebPush\x18\t \x01(\x0b\x32\x19.template.WebPushTemplate\x12\x34\n\x0cNotification\x18\n \x01(\x0b\x32\x1e.template.NotificationTemplate\".\n\rEmailTemplate\x12\x0f\n\x07Subject\x18\x01 \x01(\t\x12\x0c\n\x04\x42ody\x18\x02 \x01(\t\"<\n\x0fWebPushTemplate\x12\r\n\x05Title\x18\x01 \x01(\t\x12\x0c\n\x04\x42ody\x18\x02 \x01(\t\x12\x0c\n\x04Icon\x18\x03 \x01(\t\"C\n\x14NotificationTemplate\x12\r\n\x05Image\x18\x01 \x01(\t\x12\x0e\n\x06\x46ooter\x18\x02 \x01(\t\x12\x0c\n\x04\x42ody\x18\x03 \x01(\t*0\n\x04Type\x12\t\n\x05\x45mail\x10\x00\x12\x0b\n\x07WebPush\x10\x01\x12\x10\n\x0cNotification\x10\x02\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _TYPE = _descriptor.EnumDescriptor(
   name='Type',
@@ -259,6 +258,7 @@ DESCRIPTOR.message_types_by_name['EmailTemplate'] = _EMAILTEMPLATE
 DESCRIPTOR.message_types_by_name['WebPushTemplate'] = _WEBPUSHTEMPLATE
 DESCRIPTOR.message_types_by_name['NotificationTemplate'] = _NOTIFICATIONTEMPLATE
 DESCRIPTOR.enum_types_by_name['Type'] = _TYPE
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Template = _reflection.GeneratedProtocolMessageType('Template', (_message.Message,), dict(
   DESCRIPTOR = _TEMPLATE,

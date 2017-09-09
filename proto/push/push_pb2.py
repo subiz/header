@@ -22,7 +22,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x0fpush/push.proto\x12\x04push\"\x07\n\x05\x45mpty\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"_\n\x05Token\x12\r\n\x05Token\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\x11\n\tExpiredIn\x18\x03 \x01(\t\x12$\n\nDeviceType\x18\x04 \x01(\x0e\x32\x10.push.DeviceType\"3\n\x12TokenRemoveRequest\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\r\n\x05Token\x18\x02 \x01(\t\"\xf2\x01\n\x15UserPushConfiguration\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05\x45mail\x18\x03 \x01(\t\x12 \n\x18\x45mailNotificationEnabled\x18\x04 \x01(\x08\x12&\n\x1e\x44\x65sktopPushNotificationEnabled\x18\x05 \x01(\x08\x12%\n\x1dMobilePushNotificationEnabled\x18\x06 \x01(\x08\x12\x1e\n\x16MobilePushDelayTimming\x18\x07 \x01(\x05\x12\x16\n\x0e\x45mailThreshold\x18\x08 \x01(\x05*%\n\nDeviceType\x12\x0b\n\x07\x44\x45SKTOP\x10\x00\x12\n\n\x06MOBILE\x10\x01\x32\xdb\x01\n\x08NotiDeli\x12+\n\rRegisterToken\x12\x0b.push.Token\x1a\x0b.push.Empty\"\x00\x12\x36\n\x0bRemoveToken\x12\x18.push.TokenRemoveRequest\x1a\x0b.push.Empty\"\x00\x12\x34\n\x06\x43onfig\x12\x1b.push.UserPushConfiguration\x1a\x0b.push.Empty\"\x00\x12\x34\n\tGetConfig\x12\x08.push.Id\x1a\x1b.push.UserPushConfiguration\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _DEVICETYPE = _descriptor.EnumDescriptor(
   name='DeviceType',
@@ -283,6 +282,7 @@ DESCRIPTOR.message_types_by_name['Token'] = _TOKEN
 DESCRIPTOR.message_types_by_name['TokenRemoveRequest'] = _TOKENREMOVEREQUEST
 DESCRIPTOR.message_types_by_name['UserPushConfiguration'] = _USERPUSHCONFIGURATION
 DESCRIPTOR.enum_types_by_name['DeviceType'] = _DEVICETYPE
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -319,5 +319,56 @@ UserPushConfiguration = _reflection.GeneratedProtocolMessageType('UserPushConfig
   ))
 _sym_db.RegisterMessage(UserPushConfiguration)
 
+
+
+_NOTIDELI = _descriptor.ServiceDescriptor(
+  name='NotiDeli',
+  full_name='push.NotiDeli',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=487,
+  serialized_end=706,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='RegisterToken',
+    full_name='push.NotiDeli.RegisterToken',
+    index=0,
+    containing_service=None,
+    input_type=_TOKEN,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='RemoveToken',
+    full_name='push.NotiDeli.RemoveToken',
+    index=1,
+    containing_service=None,
+    input_type=_TOKENREMOVEREQUEST,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Config',
+    full_name='push.NotiDeli.Config',
+    index=2,
+    containing_service=None,
+    input_type=_USERPUSHCONFIGURATION,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetConfig',
+    full_name='push.NotiDeli.GetConfig',
+    index=3,
+    containing_service=None,
+    input_type=_ID,
+    output_type=_USERPUSHCONFIGURATION,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_NOTIDELI)
+
+DESCRIPTOR.services_by_name['NotiDeli'] = _NOTIDELI
 
 # @@protoc_insertion_point(module_scope)

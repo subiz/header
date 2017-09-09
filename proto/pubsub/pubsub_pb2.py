@@ -21,7 +21,6 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_pb=_b('\n\x13pubsub/pubsub.proto\x12\x06pubsub\"\x07\n\x05\x45mpty\"1\n\x0cSubscription\x12\r\n\x05Topic\x18\x01 \x01(\t\x12\x12\n\nSubscriber\x18\x02 \x01(\t\":\n\x0bListRequest\x12\r\n\x05Topic\x18\x01 \x01(\t\x12\r\n\x05Start\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\"\"\n\x0bSubscribers\x12\x13\n\x0bSubscribers\x18\x01 \x03(\t2\xb0\x01\n\x06Pubsub\x12\x32\n\tSubscribe\x12\x14.pubsub.Subscription\x1a\r.pubsub.Empty\"\x00\x12\x34\n\x0bUnsubscribe\x12\x14.pubsub.Subscription\x1a\r.pubsub.Empty\"\x00\x12<\n\x0eListSubscriber\x12\x13.pubsub.ListRequest\x1a\x13.pubsub.Subscribers\"\x00\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
@@ -167,6 +166,7 @@ DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['Subscription'] = _SUBSCRIPTION
 DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST
 DESCRIPTOR.message_types_by_name['Subscribers'] = _SUBSCRIBERS
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
   DESCRIPTOR = _EMPTY,
@@ -196,5 +196,47 @@ Subscribers = _reflection.GeneratedProtocolMessageType('Subscribers', (_message.
   ))
 _sym_db.RegisterMessage(Subscribers)
 
+
+
+_PUBSUB = _descriptor.ServiceDescriptor(
+  name='Pubsub',
+  full_name='pubsub.Pubsub',
+  file=DESCRIPTOR,
+  index=0,
+  options=None,
+  serialized_start=188,
+  serialized_end=364,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='Subscribe',
+    full_name='pubsub.Pubsub.Subscribe',
+    index=0,
+    containing_service=None,
+    input_type=_SUBSCRIPTION,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Unsubscribe',
+    full_name='pubsub.Pubsub.Unsubscribe',
+    index=1,
+    containing_service=None,
+    input_type=_SUBSCRIPTION,
+    output_type=_EMPTY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ListSubscriber',
+    full_name='pubsub.Pubsub.ListSubscriber',
+    index=2,
+    containing_service=None,
+    input_type=_LISTREQUEST,
+    output_type=_SUBSCRIBERS,
+    options=None,
+  ),
+])
+_sym_db.RegisterServiceDescriptor(_PUBSUB)
+
+DESCRIPTOR.services_by_name['Pubsub'] = _PUBSUB
 
 # @@protoc_insertion_point(module_scope)
