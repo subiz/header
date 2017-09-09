@@ -1,3 +1,6 @@
+# setup
+#go get github.com/favadi/protoc-go-inject-tag
+
 TOTAL=1
 echo -e "\033[0;34mcompiling proto files"
 
@@ -17,6 +20,9 @@ for i in `ls -R`; do
   fi;
 done;
 echo -e "\033[0;34mremoving all omitempty\033[0;31m"
-ls */*.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'
+# ls */*.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'
 let "TOTAL -= 1"
+
+#echo "\033[0;34minjecting golang custom tag\033[0;31m"
+#ls */*.pb.go | xargs -n1 -IX bash -c 'protoc-go-inject-tag -input=X'
 echo -e "\033[0;32mDone. (total:" $TOTAL "files)\033[0;30m"
