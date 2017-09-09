@@ -18,7 +18,7 @@ message ScheduleItem {
 
 message Id {
 	string id = 1;
-	string callback_time = 2;
+	int64 callback_time = 2;
 }
 
 enum Event {

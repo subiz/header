@@ -20,9 +20,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='scheduler/scheduler.proto',
   package='scheduler',
   syntax='proto3',
-  serialized_pb=_b('\n\x19scheduler/scheduler.proto\x12\tscheduler\"M\n\x0cScheduleItem\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x14\n\x0c\x43\x61llbackTime\x18\x03 \x01(\t\x12\r\n\x05Topic\x18\x04 \x01(\t\x12\x0c\n\x04\x44\x61ta\x18\x05 \x01(\x0c\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"\x07\n\x05\x45mpty*G\n\x05\x45vent\x12\x1e\n\x1aSchedulerCallbackRequested\x10\x00\x12\x1e\n\x1aSchedulerCallbackCancelled\x10\x01\x32q\n\tScheduler\x12\x37\n\x08Register\x12\x17.scheduler.ScheduleItem\x1a\x10.scheduler.Empty\"\x00\x12+\n\x06\x43\x61ncel\x12\r.scheduler.Id\x1a\x10.scheduler.Empty\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x19scheduler/scheduler.proto\x12\tscheduler\"[\n\x0cScheduleItem\x12\n\n\x02id\x18\x01 \x01(\t\x12\x15\n\rcallback_time\x18\x03 \x01(\x03\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\x0b\n\x03key\x18\x06 \x01(\x05\"\'\n\x02Id\x12\n\n\x02id\x18\x01 \x01(\t\x12\x15\n\rcallback_time\x18\x02 \x01(\x03*7\n\x05\x45vent\x12\x16\n\x12SchedulerRequested\x10\x00\x12\x16\n\x12SchedulerCancelled\x10\x01\x62\x06proto3')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _EVENT = _descriptor.EnumDescriptor(
   name='Event',
@@ -31,24 +30,24 @@ _EVENT = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='SchedulerCallbackRequested', index=0, number=0,
+      name='SchedulerRequested', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SchedulerCallbackCancelled', index=1, number=1,
+      name='SchedulerCancelled', index=1, number=1,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=146,
-  serialized_end=217,
+  serialized_start=174,
+  serialized_end=229,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
 Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
-SchedulerCallbackRequested = 0
-SchedulerCallbackCancelled = 1
+SchedulerRequested = 0
+SchedulerCancelled = 1
 
 
 
@@ -60,30 +59,37 @@ _SCHEDULEITEM = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='scheduler.ScheduleItem.Id', index=0,
+      name='id', full_name='scheduler.ScheduleItem.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='CallbackTime', full_name='scheduler.ScheduleItem.CallbackTime', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='callback_time', full_name='scheduler.ScheduleItem.callback_time', index=1,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Topic', full_name='scheduler.ScheduleItem.Topic', index=2,
+      name='topic', full_name='scheduler.ScheduleItem.topic', index=2,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Data', full_name='scheduler.ScheduleItem.Data', index=3,
+      name='data', full_name='scheduler.ScheduleItem.data', index=3,
       number=5, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='scheduler.ScheduleItem.key', index=4,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -100,7 +106,7 @@ _SCHEDULEITEM = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=40,
-  serialized_end=117,
+  serialized_end=131,
 )
 
 
@@ -112,9 +118,16 @@ _ID = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='scheduler.Id.Id', index=0,
+      name='id', full_name='scheduler.Id.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='callback_time', full_name='scheduler.Id.callback_time', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -130,38 +143,14 @@ _ID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=119,
-  serialized_end=135,
-)
-
-
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='scheduler.Empty',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=137,
-  serialized_end=144,
+  serialized_start=133,
+  serialized_end=172,
 )
 
 DESCRIPTOR.message_types_by_name['ScheduleItem'] = _SCHEDULEITEM
 DESCRIPTOR.message_types_by_name['Id'] = _ID
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 ScheduleItem = _reflection.GeneratedProtocolMessageType('ScheduleItem', (_message.Message,), dict(
   DESCRIPTOR = _SCHEDULEITEM,
@@ -176,13 +165,6 @@ Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
   # @@protoc_insertion_point(class_scope:scheduler.Id)
   ))
 _sym_db.RegisterMessage(Id)
-
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
-  DESCRIPTOR = _EMPTY,
-  __module__ = 'scheduler.scheduler_pb2'
-  # @@protoc_insertion_point(class_scope:scheduler.Empty)
-  ))
-_sym_db.RegisterMessage(Empty)
 
 
 # @@protoc_insertion_point(module_scope)
