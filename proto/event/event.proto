@@ -239,10 +239,16 @@ enum SubscribeScope {
 
 message Subscription {
 	optional string topic = 3;
-	optional string user_id = 4; // connectorid or userid
+	//optional string user_id = 4; // connectorid or userid
+
 	//optional SubscribeScope scope = 5;
 	optional string account_id = 6;
 	optional string sub_id = 7;
+
+	optional string subscriber_type = 8;
+	optional string subscriber_id = 9;
+	optional string target_topic = 10;
+	optional string target_partition = 11;
 }
 
 enum SubPrefix {
