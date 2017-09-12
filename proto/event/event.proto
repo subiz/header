@@ -7,6 +7,7 @@ import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 import "bitbucket.org/subiz/servicespec/proto/account/account.proto";
 import "bitbucket.org/subiz/servicespec/proto/client/client.proto";
 import "bitbucket.org/subiz/servicespec/proto/lang/lang.proto";
+import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
 
 message User {
 	optional string id = 1;
@@ -24,6 +25,11 @@ message RawEventCreatedPayload {
 	repeated string sub_ids = 3;
 	repeated string topics = 4;
 	optional string payload = 5; //json format
+}
+
+message UnsubscribeMessage {
+	optional string topic = 3;
+	optional string sub_id = 4;
 }
 
 enum EVENT {
@@ -231,24 +237,26 @@ message Error {
 	optional string description = 4;
 }
 
-enum SubscribeScope {
+enum SubscriberType {
 	user = 0;
 	channel = 1;
-	//botuser = 2;
 }
 
 message Subscription {
+	optional auth.Authorization authorization = 2;
 	optional string topic = 3;
 	//optional string user_id = 4; // connectorid or userid
 
 	//optional SubscribeScope scope = 5;
-	optional string account_id = 6;
+	//optional string account_id = 6;
 	optional string sub_id = 7;
 
-	optional string subscriber_type = 8;
-	optional string subscriber_id = 9;
+	//optional SubscriberType subscriber_type = 8;
+	//optional string subscriber_id = 9;
 	optional string target_topic = 10;
-	optional string target_partition = 11;
+	optional string target_key = 11;
+	// time to life in seconds
+	optional int64 ttls = 12;
 }
 
 enum SubPrefix {
