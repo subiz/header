@@ -32,4 +32,5 @@ enum Event {
 	Webhook4WebhookUpserted = 4;
 	Webhook4WebhookVerifyRequested = 5;
 
+	Webhook4Requested = 6; //eventpb.RawEventCreatedPayload
 }

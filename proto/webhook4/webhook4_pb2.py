@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='webhook4/webhook4.proto',
   package='webhook4',
   syntax='proto2',
-  serialized_pb=_b('\n\x17webhook4/webhook4.proto\x12\x08webhook4\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"j\n\x05Retry\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x11\n\tpartition\x18\x02 \x01(\t\x12\r\n\x05queue\x18\x03 \x01(\t\x12\x0e\n\x06job_id\x18\x04 \x01(\t\x12\x11\n\tn_backoff\x18\x05 \x01(\x05\"{\n\x07Webhook\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x11\n\tclient_id\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0e\n\x06secret\x18\x04 \x01(\t\x12\x12\n\nis_enabled\x18\x05 \x01(\x08\x12\x0e\n\x06\x65vents\x18\x06 \x03(\t*\xcd\x01\n\x05\x45vent\x12\x19\n\x15Webhook4RetryCallback\x10\x00\x12\"\n\x1eWebhook4UpsertWebhookRequested\x10\x01\x12\"\n\x1eWebhook4DeleteWebhookRequested\x10\x02\x12 \n\x1cWebhook4ReadWebhookRequested\x10\x03\x12\x1b\n\x17Webhook4WebhookUpserted\x10\x04\x12\"\n\x1eWebhook4WebhookVerifyRequested\x10\x05')
+  serialized_pb=_b('\n\x17webhook4/webhook4.proto\x12\x08webhook4\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"j\n\x05Retry\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x11\n\tpartition\x18\x02 \x01(\t\x12\r\n\x05queue\x18\x03 \x01(\t\x12\x0e\n\x06job_id\x18\x04 \x01(\t\x12\x11\n\tn_backoff\x18\x05 \x01(\x05\"{\n\x07Webhook\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x11\n\tclient_id\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0e\n\x06secret\x18\x04 \x01(\t\x12\x12\n\nis_enabled\x18\x05 \x01(\x08\x12\x0e\n\x06\x65vents\x18\x06 \x03(\t*\xe4\x01\n\x05\x45vent\x12\x19\n\x15Webhook4RetryCallback\x10\x00\x12\"\n\x1eWebhook4UpsertWebhookRequested\x10\x01\x12\"\n\x1eWebhook4DeleteWebhookRequested\x10\x02\x12 \n\x1cWebhook4ReadWebhookRequested\x10\x03\x12\x1b\n\x17Webhook4WebhookUpserted\x10\x04\x12\"\n\x1eWebhook4WebhookVerifyRequested\x10\x05\x12\x15\n\x11Webhook4Requested\x10\x06')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -55,11 +55,15 @@ _EVENT = _descriptor.EnumDescriptor(
       name='Webhook4WebhookVerifyRequested', index=5, number=5,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Webhook4Requested', index=6, number=6,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=330,
-  serialized_end=535,
+  serialized_end=558,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
@@ -70,6 +74,7 @@ Webhook4DeleteWebhookRequested = 2
 Webhook4ReadWebhookRequested = 3
 Webhook4WebhookUpserted = 4
 Webhook4WebhookVerifyRequested = 5
+Webhook4Requested = 6
 
 
 
