@@ -243,12 +243,24 @@ message Client {
 	optional bool is_enabled = 15;
 }
 
+enum AuthorizationType {
+	client = 0;
+	channel = 1;
+}
+
 message Authorization {
 	optional string account_id = 3;
-	optional string client_id = 4;
+
+	//	optional string client_id = 4;
+
 	optional string user_id = 5;
 	repeated string scopes = 6;
 	optional string user_type = 7;
+	//optional string channel_id = 8;
+	optional AuthorizationType type = 9;
+
+	optional string target_account_id = 10;
+	optional string target_id = 11;
 }
 
 enum EVENT {
