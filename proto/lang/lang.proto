@@ -34,4 +34,6 @@ enum T {
 	invalid_kafka_topic = 43;
 	database_error = 44;
 	timeout = 45;
+
+	websocket_error = 46;
 }
