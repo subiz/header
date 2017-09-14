@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='common/common.proto',
   package='common',
   syntax='proto2',
-  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a\x35\x62itbucket.org/subiz/servicespec/proto/auth/auth.proto\"\x07\n\x05\x45mpty\"%\n\x05\x45rror\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\"\x9c\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12\x16\n\x0ereply_patition\x18\x05 \x01(\x05\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c*\xcb\x02\n\tErrorCode\x12\x0b\n\x07NOERROR\x10\x00\x12\x13\n\x0fINVALID_REQUEST\x10\x01\x12\x12\n\x0eINVALID_CLIENT\x10\x02\x12\x11\n\rINVALID_GRANT\x10\x03\x12\x17\n\x13UNAUTHORIZED_CLIENT\x10\x04\x12\x1a\n\x16UNSUPPORTED_GRANT_TYPE\x10\x05\x12\x11\n\rINVALID_SCOPE\x10\x06\x12\x0e\n\tFORBIDDEN\x10\x93\x03\x12\r\n\x08NOTFOUND\x10\x94\x03\x12\x17\n\x12METHOD_NOT_ALLOWED\x10\x95\x03\x12\x13\n\x0eNOT_ACCEPTABLE\x10\x96\x03\x12\x14\n\x0fREQUEST_TIMEOUT\x10\x98\x03\x12\r\n\x08\x43ONFLICT\x10\x99\x03\x12\t\n\x04GONE\x10\x9a\x03\x12\x14\n\x0fGATEWAY_TIMEOUT\x10\xf8\x03\x12\x1a\n\x15INTERNAL_SERVER_ERROR\x10\xf4\x03')
+  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a\x35\x62itbucket.org/subiz/servicespec/proto/auth/auth.proto\"\x07\n\x05\x45mpty\"%\n\x05\x45rror\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\"\xb0\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12\x17\n\x0freply_partition\x18\x05 \x01(\x05\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c\x12\x11\n\treply_key\x18\x08 \x01(\t*\xcb\x02\n\tErrorCode\x12\x0b\n\x07NOERROR\x10\x00\x12\x13\n\x0fINVALID_REQUEST\x10\x01\x12\x12\n\x0eINVALID_CLIENT\x10\x02\x12\x11\n\rINVALID_GRANT\x10\x03\x12\x17\n\x13UNAUTHORIZED_CLIENT\x10\x04\x12\x1a\n\x16UNSUPPORTED_GRANT_TYPE\x10\x05\x12\x11\n\rINVALID_SCOPE\x10\x06\x12\x0e\n\tFORBIDDEN\x10\x93\x03\x12\r\n\x08NOTFOUND\x10\x94\x03\x12\x17\n\x12METHOD_NOT_ALLOWED\x10\x95\x03\x12\x13\n\x0eNOT_ACCEPTABLE\x10\x96\x03\x12\x14\n\x0fREQUEST_TIMEOUT\x10\x98\x03\x12\r\n\x08\x43ONFLICT\x10\x99\x03\x12\t\n\x04GONE\x10\x9a\x03\x12\x14\n\x0fGATEWAY_TIMEOUT\x10\xf8\x03\x12\x1a\n\x15INTERNAL_SERVER_ERROR\x10\xf4\x03')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2.DESCRIPTOR,])
 
@@ -98,8 +98,8 @@ _ERRORCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=294,
-  serialized_end=625,
+  serialized_start=314,
+  serialized_end=645,
 )
 _sym_db.RegisterEnumDescriptor(_ERRORCODE)
 
@@ -214,7 +214,7 @@ _CONTEXT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='reply_patition', full_name='common.Context.reply_patition', index=4,
+      name='reply_partition', full_name='common.Context.reply_partition', index=4,
       number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -234,6 +234,13 @@ _CONTEXT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='reply_key', full_name='common.Context.reply_key', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -247,7 +254,7 @@ _CONTEXT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=135,
-  serialized_end=291,
+  serialized_end=311,
 )
 
 _ERROR.fields_by_name['ctx'].message_type = _CONTEXT

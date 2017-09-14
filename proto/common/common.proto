@@ -35,7 +35,8 @@ message Context {
 	optional bytes state = 2;
 	optional string node = 3;
 	optional string reply_topic = 4;
-	optional int32 reply_patition = 5;
+	optional int32 reply_partition = 5;
 	optional auth.Credential credential = 6;
 	optional bytes tracing = 7;
+	optional string reply_key = 8;
 }
