@@ -21,8 +21,9 @@ enum UserType {
 }
 
 message RawEventCreatedPayload {
-	repeated string sub_ids = 3;
-	repeated string topics = 4;
+	optional common.Context ctx = 1;
+	optional string sub_id = 3;
+	optional string topic = 4;
 	optional string payload = 5; //json format
 }
 
@@ -199,6 +200,8 @@ message Attachment {
 }
 
 message Sender {
+
+	optional common.Context ctx = 5;
 	optional string id = 1;
 	optional string type = 2;
 	optional string name = 3;
@@ -208,6 +211,7 @@ message Sender {
 }
 
 message Reply {
+	optional common.Context ctx = 3;
 	optional string event_id = 1;
 	optional bytes state = 2;
 
@@ -241,7 +245,8 @@ enum SubscriberType {
 	channel = 1;
 }
 
-message Subscription {
+message Subscription { // raweventcreatedpayload
+	optional common.Context ctx = 1;
 	optional string topic = 3;
 	//optional string user_id = 4; // connectorid or userid
 

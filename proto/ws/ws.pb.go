@@ -73,9 +73,10 @@ func (x *Event) UnmarshalJSON(data []byte) error {
 func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Subscribe struct {
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Events           []string        `protobuf:"bytes,3,rep,name=events" json:"events,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Ctx *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	// optional string connection_id = 2;
+	Events           []string `protobuf:"bytes,3,rep,name=events" json:"events,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
 }
 
 func (m *Subscribe) Reset()                    { *m = Subscribe{} }

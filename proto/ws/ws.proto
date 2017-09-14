@@ -5,6 +5,7 @@ import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 
 message Subscribe {
 	optional common.Context ctx = 1;
+	//optional string connection_id = 2;
 	repeated string events = 3;
 }
 
@@ -14,9 +15,5 @@ message ListRequest {
 }
 
 enum Event {
-	WsSubscribeEvents = 0; // subscribe
-	WsUnsubscribeEvents = 1; // subscribe
-	WsListSubscribedEvents = 2;
 	WsSend = 3;
-	WsSubscribeReply = 5;
 }
