@@ -36,4 +36,5 @@ enum T {
 	timeout = 45;
 
 	websocket_error = 46;
+	kafka_error = 47;
 }
