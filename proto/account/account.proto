@@ -17,21 +17,23 @@ message Agent {
 	optional string account_id = 3;
 	optional string fullname = 4;
 	optional string email = 5;
-	optional bool is_owner = 6;
-	optional string job_title = 7;
-	optional Gender gender = 8;
-	optional string avatar_url = 9;
-	optional string language = 10;
-	optional string location = 19;
-	optional string timezone = 11;
-	repeated string emails = 12;
-	//optional string encrypted_password = 12;
-  optional string joined_time = 13;
-	optional string invited_by = 14;
-  optional AgentState state = 15;
-	optional string last_password_changed_time = 16;
-	optional int64 last_seen_time = 17;
-	optional int64 last_updated_time = 18;
+	repeated string emails = 6;
+	repeated string phones = 7;
+	optional string phone = 8;
+	optional bool is_owner = 10;
+	optional string job_title = 11;
+	optional Gender gender = 12;
+	optional string avatar_url = 13;
+	optional string language = 14;
+	optional string location = 15;
+	optional string timezone = 16;
+	optional string encrypted_password = 17;
+  optional int64 joined_time = 20;
+	optional string invited_by = 21;
+  optional AgentState state = 22;
+	optional int64 last_password_changed_time = 23;
+	//optional int64 last_seen_time = 24;
+	optional int64 last_modified_time = 25;
 }
 
 message Invitation {
@@ -41,10 +43,10 @@ message Invitation {
 	optional string from_id = 4;
 	optional string email = 5;
 	optional string agent_id = 6;
-	optional string sent_time = 7;
-	optional string reply_time = 8;
+	optional int64 sent_time = 7;
+	optional int64 reply_time = 8;
 	optional string agent_fullname = 9;
-	optional string agent_jobtitle = 10;
+	optional string agent_job_title = 10;
 	optional string token = 11;
 }
 
@@ -88,6 +90,8 @@ message Account {
 	optional int64 created_time = 8;
 	optional int64 confirmed_time = 9;
 	optional int64 last_modified_time = 10;
+
+	optional string referer_id = 11;
 }
 
 message Id {
@@ -176,6 +180,7 @@ message NewPassword {
 message Limit {
 	optional common.Context ctx = 1;
 	//int32 ConcurrentChat = 1;
+
 	optional int32 chat_history = 2;
 	optional int32 max_triggers = 3;
 	optional int32 max_agents = 4;
@@ -196,18 +201,19 @@ message Token {
 }
 
 enum Event {
-
-
 	CreateAccountRequested = 100; // createaccountrequested
 	UpdateAccountRequested = 101; //account
 	ReadAccountRequested = 102; // id
+
 	ConfirmAccountRequested = 103; // (Token) returns (Empty) {}
+
 	// Agent methods
 	ReadAgentRequested = 104;  // (Id) returns (Agent) {}
 	InviteAgentRequested = 105; //(Invitation) returns (Id) {}
 	UninviteAgentRequested = 106; //(Id) returns (Empty) {}
 	AcceptInvitationRequested = 107; //(Token) returns (Empty) {}
 	RejectInvitationRequested = 108; //(Token) returns (Empty) {}
+
 	UpdateAgentRequested = 109; //(Agent) returns (Empty) {}
 	ResetPasswordRequested = 111; //(NewPassword) returns (Empty) {}
 	RequestResetPasswordRequested = 112; //(ResetPasswordRequest) returns (Empty) {}
@@ -225,16 +231,13 @@ enum Event {
 	AddAgentToGroupRequested = 123; //(GroupMember) returns (Empty) {}
 	ReadGroupRequested = 124; //(Id) returns (AgentGroup) {}
 
-
-
-
 	AgentGroupDeleted = 0; // id
 	AgentLeftGroup = 1; // groupmember
 	AgentJoinedGroup = 2; // groupmember
 	AgentGroupUpserted = 4; // agentgroup
 	AgentExpired = 5; // oe only, id
-	AgentUpdated = 6; // agent
-	AgentCreated = 7; // agent
+	AgentUpserted = 6; // agent
+	//AgentCreated = 7; // agent
 	AgentStateUpdated = 8; // could be deleted
 	AgentPermissionUpdated = 9; // AgentPerm
 
@@ -252,7 +255,7 @@ enum Event {
 	AccountConfirmRequest = 19; // token
 	HandleExpiredInvitation = 20;
 
-	AccountConfirmEmail = 21;
+	AccountConfirmRequested = 21; // confirmemail
 	AccountResetPasswordEmail = 33;
 	//AccountPasswordChangedEmail = 34;
 	AccountInviteEmail = 22;
@@ -265,7 +268,7 @@ message ConfirmEmail {
 	optional string owner_id = 4;
 	optional string token = 5;
 	// ExpiredIn is a RFC3339 time string indicates when token will be expired
-	optional string expired_in = 6;
+	optional int64 expired_in = 6;
 }
 
 message InviteEmail {
@@ -273,7 +276,7 @@ message InviteEmail {
 	optional string to = 2;
 	optional string account_id = 3;
 	optional string sender_id = 4;
-	optional string expired_in = 5;
+	optional int64 expired_in = 5;
 	optional string token = 6;
 }
 
@@ -281,7 +284,7 @@ message ResetPasswordEmail {
 	optional string from = 1;
 	optional string to = 2;
 	// ExpiredIn is a RFC3339 time string indicates when token will be expired
-	optional string expired_in = 6;
+	optional int64 expired_in = 6;
 	optional string token = 3;
 	optional string account_id = 4;
 	optional string agent_id = 5;
