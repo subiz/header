@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='lang/lang.proto',
   package='lang',
   syntax='proto2',
-  serialized_pb=_b('\n\x0flang/lang.proto\x12\x04lang*\xef\x04\n\x01T\x12\r\n\tundefined\x10\x00\x12$\n user_has_already_in_conversation\x10\x01\x12\x17\n\x13\x63onversation_closed\x10\x02\x12\x12\n\x0einvalid_invite\x10\x03\x12\x11\n\rinvalid_agent\x10\x04\x12\x1f\n\x1buser_is_not_in_conversation\x10\x05\x12\x1a\n\x16\x63onversation_not_found\x10\x06\x12\x12\n\x0einternal_error\x10\x1e\x12\x11\n\rinvalid_input\x10\x16\x12\x10\n\x0cinvalid_form\x10\x14\x12\x18\n\x14\x61\x63\x63\x65ss_token_expired\x10\x15\x12\x16\n\x12invalid_credential\x10\r\x12\x16\n\x12\x63redential_not_set\x10\x07\x12\x1f\n\x1bwrong_account_in_credential\x10\x08\x12\x1c\n\x18wrong_user_in_credential\x10\n\x12\x0f\n\x0b\x61\x63\x63\x65ss_deny\x10\t\x12\x1a\n\x16unable_to_send_message\x10\x0b\x12\x12\n\x0etopic_is_empty\x10\x0c\x12\x10\n\x0cinvalid_json\x10\x0f\x12\x14\n\x10invalid_protobuf\x10\x10\x12\x12\n\x0eunable_to_lock\x10(\x12\t\n\x05\x65mpty\x10)\x12\x0e\n\nwrong_type\x10*\x12\x17\n\x13invalid_kafka_topic\x10+\x12\x12\n\x0e\x64\x61tabase_error\x10,\x12\x0b\n\x07timeout\x10-\x12\x13\n\x0fwebsocket_error\x10.\x12\x0f\n\x0bkafka_error\x10/')
+  serialized_pb=_b('\n\x0flang/lang.proto\x12\x04lang*\xc1\x05\n\x01T\x12\r\n\tundefined\x10\x00\x12$\n user_has_already_in_conversation\x10\x01\x12\x17\n\x13\x63onversation_closed\x10\x02\x12\x12\n\x0einvalid_invite\x10\x03\x12\x11\n\rinvalid_agent\x10\x04\x12\x1f\n\x1buser_is_not_in_conversation\x10\x05\x12\x1a\n\x16\x63onversation_not_found\x10\x06\x12\x12\n\x0einternal_error\x10\x1e\x12\x11\n\rinvalid_input\x10\x16\x12\x10\n\x0cinvalid_form\x10\x14\x12\x18\n\x14\x61\x63\x63\x65ss_token_expired\x10\x15\x12\x16\n\x12invalid_credential\x10\r\x12\x16\n\x12\x63redential_not_set\x10\x07\x12\x1f\n\x1bwrong_account_in_credential\x10\x08\x12\x1c\n\x18wrong_user_in_credential\x10\n\x12\x0f\n\x0b\x61\x63\x63\x65ss_deny\x10\t\x12\x1a\n\x16unable_to_send_message\x10\x0b\x12\x12\n\x0etopic_is_empty\x10\x0c\x12\x10\n\x0cinvalid_json\x10\x0f\x12\x14\n\x10invalid_protobuf\x10\x10\x12\x12\n\x0eunable_to_lock\x10(\x12\t\n\x05\x65mpty\x10)\x12\x0e\n\nwrong_type\x10*\x12\x17\n\x13invalid_kafka_topic\x10+\x12\x12\n\x0e\x64\x61tabase_error\x10,\x12\x0b\n\x07timeout\x10-\x12\x13\n\x0fwebsocket_error\x10.\x12\x0f\n\x0bkafka_error\x10/\x12\x11\n\rinvalid_token\x10\x30\x12\x15\n\x11\x61\x63\x63ount_not_found\x10\x31\x12\x13\n\x0f\x61gent_not_found\x10\x32\x12\x11\n\rinvalid_email\x10<')
 )
 
 _T = _descriptor.EnumDescriptor(
@@ -141,11 +141,27 @@ _T = _descriptor.EnumDescriptor(
       name='kafka_error', index=27, number=47,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='invalid_token', index=28, number=48,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='account_not_found', index=29, number=49,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='agent_not_found', index=30, number=50,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='invalid_email', index=31, number=60,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=26,
-  serialized_end=649,
+  serialized_end=731,
 )
 _sym_db.RegisterEnumDescriptor(_T)
 
@@ -178,6 +194,10 @@ database_error = 44
 timeout = 45
 websocket_error = 46
 kafka_error = 47
+invalid_token = 48
+account_not_found = 49
+agent_not_found = 50
+invalid_email = 60
 
 
 DESCRIPTOR.enum_types_by_name['T'] = _T

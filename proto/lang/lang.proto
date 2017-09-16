@@ -37,4 +37,9 @@ enum T {
 
 	websocket_error = 46;
 	kafka_error = 47;
+	invalid_token = 48;
+	account_not_found = 49;
+	agent_not_found = 50;
+
+	invalid_email = 60;
 }
