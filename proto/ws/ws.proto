@@ -17,3 +17,8 @@ message ListRequest {
 enum Event {
 	WsSend = 3;
 }
+
+message Payload {
+	optional int64 id = 3;
+	optional string message = 4;
+}

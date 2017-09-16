@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='ws/ws.proto',
   package='ws',
   syntax='proto2',
-  serialized_pb=_b('\n\x0bws/ws.proto\x12\x02ws\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"9\n\tSubscribe\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06\x65vents\x18\x03 \x03(\t\"B\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x15\n\rconnection_id\x18\x02 \x01(\t*u\n\x05\x45vent\x12\x15\n\x11WsSubscribeEvents\x10\x00\x12\x17\n\x13WsUnsubscribeEvents\x10\x01\x12\x1a\n\x16WsListSubscribedEvents\x10\x02\x12\n\n\x06WsSend\x10\x03\x12\x14\n\x10WsSubscribeReply\x10\x05')
+  serialized_pb=_b('\n\x0bws/ws.proto\x12\x02ws\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"9\n\tSubscribe\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06\x65vents\x18\x03 \x03(\t\"B\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x15\n\rconnection_id\x18\x02 \x01(\t\"&\n\x07Payload\x12\n\n\x02id\x18\x03 \x01(\x03\x12\x0f\n\x07message\x18\x04 \x01(\t*\x13\n\x05\x45vent\x12\n\n\x06WsSend\x10\x03')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -32,39 +32,19 @@ _EVENT = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='WsSubscribeEvents', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='WsUnsubscribeEvents', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='WsListSubscribedEvents', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='WsSend', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='WsSubscribeReply', index=4, number=5,
+      name='WsSend', index=0, number=3,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=205,
-  serialized_end=322,
+  serialized_start=245,
+  serialized_end=264,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
 Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
-WsSubscribeEvents = 0
-WsUnsubscribeEvents = 1
-WsListSubscribedEvents = 2
 WsSend = 3
-WsSubscribeReply = 5
 
 
 
@@ -143,10 +123,49 @@ _LISTREQUEST = _descriptor.Descriptor(
   serialized_end=203,
 )
 
+
+_PAYLOAD = _descriptor.Descriptor(
+  name='Payload',
+  full_name='ws.Payload',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='ws.Payload.id', index=0,
+      number=3, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='ws.Payload.message', index=1,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=205,
+  serialized_end=243,
+)
+
 _SUBSCRIBE.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _LISTREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['Subscribe'] = _SUBSCRIBE
 DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST
+DESCRIPTOR.message_types_by_name['Payload'] = _PAYLOAD
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -163,6 +182,13 @@ ListRequest = _reflection.GeneratedProtocolMessageType('ListRequest', (_message.
   # @@protoc_insertion_point(class_scope:ws.ListRequest)
   ))
 _sym_db.RegisterMessage(ListRequest)
+
+Payload = _reflection.GeneratedProtocolMessageType('Payload', (_message.Message,), dict(
+  DESCRIPTOR = _PAYLOAD,
+  __module__ = 'ws.ws_pb2'
+  # @@protoc_insertion_point(class_scope:ws.Payload)
+  ))
+_sym_db.RegisterMessage(Payload)
 
 
 # @@protoc_insertion_point(module_scope)
