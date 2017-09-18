@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "chat/chat.proto",
+    "title": "conversation/conversation.proto",
     "version": "version not set"
   },
   "schemes": [

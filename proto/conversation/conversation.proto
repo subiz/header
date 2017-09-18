@@ -1,8 +1,8 @@
 syntax = "proto2";
 
-package chat;
+package conversation;
 
-import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
+//import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
 import "bitbucket.org/subiz/servicespec/proto/event/event.proto";
 import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 
@@ -59,12 +59,6 @@ message Id {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string id = 3;
-}
-
-message Permission {
-	optional 	string AccountId = 1;
-	optional 	string AgentId = 2;
-	optional auth.Method Method = 3;
 }
 
 message AgentId {
