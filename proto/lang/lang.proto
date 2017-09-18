@@ -42,4 +42,6 @@ enum T {
 	agent_not_found = 50;
 
 	invalid_email = 60;
+	plan_not_found = 61;
+	agent_group_not_found = 62;
 }
