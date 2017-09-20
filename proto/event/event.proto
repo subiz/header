@@ -106,9 +106,33 @@ message RawEvent {
 	repeated string topic_ids = 11;
 }
 
+message RawConversationWaitingEvent {
+	optional common.Context ctx = 1;
+	optional string id = 3;
+	optional string account_id = 4;
+	optional string app_id = 5;
+	optional string sender_id = 6;
+	optional string sender_type = 7;
+
+	optional int64 timestamp = 8;
+	optional string type = 9;
+	optional string channel_id = 10;
+	repeated string topic_ids = 11;
+
+	optional string message_to = 15;
+	optional string page_url = 16;
+	optional string page_title = 17;
+	optional string message = 18;
+	optional string browser_language = 19;
+	optional string language = 20;
+	optional string device_type = 21;
+	optional string user_id = 22;
+	optional string conversation_id = 24;
+}
+
 message RawConversationJoinedEvent {
-		optional common.Context ctx = 1;
-		optional string id = 3;
+	optional common.Context ctx = 1;
+	optional string id = 3;
 	optional string account_id = 4;
 	optional string app_id = 5;
 	optional string sender_id = 6;
@@ -122,6 +146,24 @@ message RawConversationJoinedEvent {
 	optional string conversation_id = 13;
 	optional string joiner_id = 14;
 	optional string joiner_type = 15;
+}
+
+message RawConversationLeftEvent {
+	optional common.Context ctx = 1;
+	optional string id = 3;
+	optional string account_id = 4;
+	optional string app_id = 5;
+	optional string sender_id = 6;
+	optional string sender_type = 7;
+
+	optional int64 timestamp = 8;
+	optional string type = 9;
+	optional string channel_id = 10;
+	repeated string topic_ids = 11;
+
+	optional string conversation_id = 13;
+	optional string leaver_id = 14;
+	//optional string joiner_type = 15;
 }
 
 message RawConversationStartedEvent {
@@ -232,6 +274,8 @@ enum EventType {
 	conversation_closed = 5;
 	conversation_tagged = 6;
 	conversation_untagged = 7;
+
+	conversation_waiting = 8;
 }
 
 message Error {
