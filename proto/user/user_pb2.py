@@ -3,6 +3,7 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
+from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -13,15 +14,37 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from bitbucket.org.subiz.servicespec.proto.common import common_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='user/user.proto',
   package='user',
-  syntax='proto3',
-  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\"\xd7\x01\n\x04User\x12\n\n\x02Id\x18\x01 \x01(\t\x12\r\n\x05\x41lias\x18\x02 \x03(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x11\n\tFirstName\x18\x04 \x01(\t\x12\x10\n\x08LastName\x18\x05 \x01(\t\x12\x0e\n\x06Phones\x18\x06 \x03(\t\x12\x0e\n\x06\x45mails\x18\x07 \x03(\t\x12\x1b\n\x06Traces\x18\x08 \x03(\x0b\x32\x0b.user.Trace\x12\x1d\n\x07\x44\x65vices\x18\t \x03(\x0b\x32\x0c.user.Device\x12\r\n\x05IsBan\x18\n \x01(\x08\x12\x11\n\tAvatarUrl\x18\x0b \x01(\t\"\"\n\x05Users\x12\x19\n\x05Users\x18\x01 \x03(\x0b\x32\n.user.User\"Y\n\x06\x44\x65vice\x12\n\n\x02Id\x18\x01 \x01(\x05\x12\x17\n\x0fUserAgentZipped\x18\x02 \x01(\x05\x12\x12\n\nResolution\x18\x03 \x01(\t\x12\x16\n\x0eLanguageZipped\x18\x04 \x01(\x05\"7\n\x05Trace\x12\n\n\x02Id\x18\x01 \x01(\t\x12\n\n\x02IP\x18\x02 \x01(\t\x12\x16\n\x0eLocationZipped\x18\x03 \x01(\x05\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"\x07\n\x05\x45mpty\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x01 \x03(\t\"Q\n\x0bListRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07StartId\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\x12\x0f\n\x07Keyword\x18\x04 \x01(\t\":\n\x0cMergeRequest\x12\x14\n\x0c\x46ormerUserId\x18\x01 \x01(\t\x12\x14\n\x0cRecentUserId\x18\x02 \x01(\t\"U\n\x0fGreetingRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x11\n\tUserAgent\x18\x02 \x01(\t\x12\x0e\n\x06UserId\x18\x03 \x01(\t\x12\x0c\n\x04UUID\x18\x04 \x01(\t2\x9b\x02\n\x07UserMgr\x12-\n\x08Greeting\x12\x15.user.GreetingRequest\x1a\x08.user.Id\"\x00\x12#\n\x06Update\x12\n.user.User\x1a\x0b.user.Empty\"\x00\x12\x1e\n\x03\x42\x61n\x12\x08.user.Id\x1a\x0b.user.Empty\"\x00\x12 \n\x05Unban\x12\x08.user.Id\x1a\x0b.user.Empty\"\x00\x12*\n\x05Merge\x12\x12.user.MergeRequest\x1a\x0b.user.Empty\"\x00\x12$\n\x08ReadBulk\x12\t.user.Ids\x1a\x0b.user.Users\"\x00\x12(\n\x04List\x12\x11.user.ListRequest\x1a\x0b.user.Users\"\x00\x62\x06proto3')
-)
+  syntax='proto2',
+  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"\xdf\x02\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\r\n\x05IsBan\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\"\"\n\x05Users\x12\x19\n\x05Users\x18\x01 \x03(\x0b\x32\n.user.User\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"F\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02pP\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\"D\n\x03Ids\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x0b\n\x03ids\x18\x04 \x03(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t*\x1e\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00')
+  ,
+  dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,])
 
+_EVENT = _descriptor.EnumDescriptor(
+  name='Event',
+  full_name='user.Event',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UserReadRequested', index=0, number=0,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=1137,
+  serialized_end=1167,
+)
+_sym_db.RegisterEnumDescriptor(_EVENT)
+
+Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
+UserReadRequested = 0
 
 
 
@@ -33,79 +56,121 @@ _USER = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='user.User.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='ctx', full_name='user.User.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Alias', full_name='user.User.Alias', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='user.User.AccountId', index=2,
+      name='id', full_name='user.User.id', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='FirstName', full_name='user.User.FirstName', index=3,
+      name='account_id', full_name='user.User.account_id', index=2,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LastName', full_name='user.User.LastName', index=4,
+      name='fullname', full_name='user.User.fullname', index=3,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Phones', full_name='user.User.Phones', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Emails', full_name='user.User.Emails', index=6,
+      name='phones', full_name='user.User.phones', index=4,
       number=7, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Traces', full_name='user.User.Traces', index=7,
-      number=8, type=11, cpp_type=10, label=3,
+      name='emails', full_name='user.User.emails', index=5,
+      number=10, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Devices', full_name='user.User.Devices', index=8,
-      number=9, type=11, cpp_type=10, label=3,
+      name='traces', full_name='user.User.traces', index=6,
+      number=11, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='alias', full_name='user.User.alias', index=7,
+      number=12, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='devices', full_name='user.User.devices', index=8,
+      number=13, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='IsBan', full_name='user.User.IsBan', index=9,
-      number=10, type=8, cpp_type=7, label=1,
+      number=14, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AvatarUrl', full_name='user.User.AvatarUrl', index=10,
-      number=11, type=9, cpp_type=9, label=1,
+      name='avatar_url', full_name='user.User.avatar_url', index=10,
+      number=15, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='segments', full_name='user.User.segments', index=11,
+      number=19, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='labels', full_name='user.User.labels', index=12,
+      number=20, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='unsubscribed', full_name='user.User.unsubscribed', index=13,
+      number=21, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='marked_spam', full_name='user.User.marked_spam', index=14,
+      number=22, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hard_bounced', full_name='user.User.hard_bounced', index=15,
+      number=23, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='total_sessions', full_name='user.User.total_sessions', index=16,
+      number=24, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -117,12 +182,12 @@ _USER = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=26,
-  serialized_end=241,
+  serialized_start=85,
+  serialized_end=436,
 )
 
 
@@ -148,12 +213,12 @@ _USERS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=243,
-  serialized_end=277,
+  serialized_start=438,
+  serialized_end=472,
 )
 
 
@@ -165,30 +230,44 @@ _DEVICE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='user.Device.Id', index=0,
-      number=1, type=5, cpp_type=1, label=1,
+      name='id', full_name='user.Device.id', index=0,
+      number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='UserAgentZipped', full_name='user.Device.UserAgentZipped', index=1,
-      number=2, type=5, cpp_type=1, label=1,
+      name='useragent_id', full_name='user.Device.useragent_id', index=1,
+      number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Resolution', full_name='user.Device.Resolution', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      name='useragent', full_name='user.Device.useragent', index=2,
+      number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LanguageZipped', full_name='user.Device.LanguageZipped', index=3,
-      number=4, type=5, cpp_type=1, label=1,
+      name='resolution', full_name='user.Device.resolution', index=3,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='language_id', full_name='user.Device.language_id', index=4,
+      number=7, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='user.Device.language', index=5,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -200,12 +279,12 @@ _DEVICE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=279,
-  serialized_end=368,
+  serialized_start=474,
+  serialized_end=594,
 )
 
 
@@ -217,23 +296,30 @@ _TRACE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='user.Trace.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='id', full_name='user.Trace.id', index=0,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='IP', full_name='user.Trace.IP', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='pP', full_name='user.Trace.pP', index=1,
+      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='LocationZipped', full_name='user.Trace.LocationZipped', index=2,
-      number=3, type=5, cpp_type=1, label=1,
+      name='location_id', full_name='user.Trace.location_id', index=2,
+      number=5, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='location', full_name='user.Trace.location', index=3,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -245,12 +331,12 @@ _TRACE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=370,
-  serialized_end=425,
+  serialized_start=596,
+  serialized_end=666,
 )
 
 
@@ -262,8 +348,22 @@ _ID = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='user.Id.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='ctx', full_name='user.Id.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='user.Id.id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='user.Id.account_id', index=2,
+      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -276,36 +376,12 @@ _ID = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=427,
-  serialized_end=443,
-)
-
-
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='user.Empty',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=445,
-  serialized_end=452,
+  serialized_start=668,
+  serialized_end=734,
 )
 
 
@@ -317,8 +393,22 @@ _IDS = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Ids', full_name='user.Ids.Ids', index=0,
-      number=1, type=9, cpp_type=9, label=3,
+      name='ctx', full_name='user.Ids.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='user.Ids.account_id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ids', full_name='user.Ids.ids', index=2,
+      number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -331,12 +421,12 @@ _IDS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=454,
-  serialized_end=472,
+  serialized_start=736,
+  serialized_end=804,
 )
 
 
@@ -348,28 +438,35 @@ _LISTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='user.ListRequest.AccountId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='ctx', full_name='user.ListRequest.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='user.ListRequest.account_id', index=1,
+      number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='StartId', full_name='user.ListRequest.StartId', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='start_id', full_name='user.ListRequest.start_id', index=2,
+      number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Limit', full_name='user.ListRequest.Limit', index=2,
+      name='limit', full_name='user.ListRequest.limit', index=3,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Keyword', full_name='user.ListRequest.Keyword', index=3,
+      name='keyword', full_name='user.ListRequest.keyword', index=4,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -383,12 +480,12 @@ _LISTREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=474,
-  serialized_end=555,
+  serialized_start=806,
+  serialized_end=919,
 )
 
 
@@ -400,66 +497,28 @@ _MERGEREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='FormerUserId', full_name='user.MergeRequest.FormerUserId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='ctx', full_name='user.MergeRequest.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='RecentUserId', full_name='user.MergeRequest.RecentUserId', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=557,
-  serialized_end=615,
-)
-
-
-_GREETINGREQUEST = _descriptor.Descriptor(
-  name='GreetingRequest',
-  full_name='user.GreetingRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='user.GreetingRequest.AccountId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='UserAgent', full_name='user.GreetingRequest.UserAgent', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='UserId', full_name='user.GreetingRequest.UserId', index=2,
+      name='account_id', full_name='user.MergeRequest.account_id', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='UUID', full_name='user.GreetingRequest.UUID', index=3,
+      name='id', full_name='user.MergeRequest.id', index=2,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='recent_id', full_name='user.MergeRequest.recent_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -473,27 +532,92 @@ _GREETINGREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=617,
-  serialized_end=702,
+  serialized_start=921,
+  serialized_end=1016,
 )
 
-_USER.fields_by_name['Traces'].message_type = _TRACE
-_USER.fields_by_name['Devices'].message_type = _DEVICE
+
+_GREETINGREQUEST = _descriptor.Descriptor(
+  name='GreetingRequest',
+  full_name='user.GreetingRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='user.GreetingRequest.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='user.GreetingRequest.account_id', index=1,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='useragent', full_name='user.GreetingRequest.useragent', index=2,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='user.GreetingRequest.user_id', index=3,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='uuid', full_name='user.GreetingRequest.uuid', index=4,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1018,
+  serialized_end=1135,
+)
+
+_USER.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_USER.fields_by_name['traces'].message_type = _TRACE
+_USER.fields_by_name['devices'].message_type = _DEVICE
 _USERS.fields_by_name['Users'].message_type = _USER
+_ID.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_IDS.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_LISTREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_MERGEREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_GREETINGREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['User'] = _USER
 DESCRIPTOR.message_types_by_name['Users'] = _USERS
 DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
 DESCRIPTOR.message_types_by_name['Trace'] = _TRACE
 DESCRIPTOR.message_types_by_name['Id'] = _ID
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['Ids'] = _IDS
 DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST
 DESCRIPTOR.message_types_by_name['MergeRequest'] = _MERGEREQUEST
 DESCRIPTOR.message_types_by_name['GreetingRequest'] = _GREETINGREQUEST
+DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), dict(
@@ -531,13 +655,6 @@ Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
   ))
 _sym_db.RegisterMessage(Id)
 
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
-  DESCRIPTOR = _EMPTY,
-  __module__ = 'user.user_pb2'
-  # @@protoc_insertion_point(class_scope:user.Empty)
-  ))
-_sym_db.RegisterMessage(Empty)
-
 Ids = _reflection.GeneratedProtocolMessageType('Ids', (_message.Message,), dict(
   DESCRIPTOR = _IDS,
   __module__ = 'user.user_pb2'
@@ -566,83 +683,5 @@ GreetingRequest = _reflection.GeneratedProtocolMessageType('GreetingRequest', (_
   ))
 _sym_db.RegisterMessage(GreetingRequest)
 
-
-
-_USERMGR = _descriptor.ServiceDescriptor(
-  name='UserMgr',
-  full_name='user.UserMgr',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=705,
-  serialized_end=988,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='Greeting',
-    full_name='user.UserMgr.Greeting',
-    index=0,
-    containing_service=None,
-    input_type=_GREETINGREQUEST,
-    output_type=_ID,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Update',
-    full_name='user.UserMgr.Update',
-    index=1,
-    containing_service=None,
-    input_type=_USER,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Ban',
-    full_name='user.UserMgr.Ban',
-    index=2,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Unban',
-    full_name='user.UserMgr.Unban',
-    index=3,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Merge',
-    full_name='user.UserMgr.Merge',
-    index=4,
-    containing_service=None,
-    input_type=_MERGEREQUEST,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='ReadBulk',
-    full_name='user.UserMgr.ReadBulk',
-    index=5,
-    containing_service=None,
-    input_type=_IDS,
-    output_type=_USERS,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='List',
-    full_name='user.UserMgr.List',
-    index=6,
-    containing_service=None,
-    input_type=_LISTREQUEST,
-    output_type=_USERS,
-    options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_USERMGR)
-
-DESCRIPTOR.services_by_name['UserMgr'] = _USERMGR
 
 # @@protoc_insertion_point(module_scope)

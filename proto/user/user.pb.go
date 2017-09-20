@@ -13,7 +13,6 @@ It has these top-level messages:
 	Device
 	Trace
 	Id
-	Empty
 	Ids
 	ListRequest
 	MergeRequest
@@ -24,11 +23,7 @@ package user
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-
-import (
-	context "golang.org/x/net/context"
-	grpc "google.golang.org/grpc"
-)
+import common "bitbucket.org/subiz/servicespec/proto/common"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -41,18 +36,56 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+type Event int32
+
+const (
+	Event_UserReadRequested Event = 0
+)
+
+var Event_name = map[int32]string{
+	0: "UserReadRequested",
+}
+var Event_value = map[string]int32{
+	"UserReadRequested": 0,
+}
+
+func (x Event) Enum() *Event {
+	p := new(Event)
+	*p = x
+	return p
+}
+func (x Event) String() string {
+	return proto.EnumName(Event_name, int32(x))
+}
+func (x *Event) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(Event_value, data, "Event")
+	if err != nil {
+		return err
+	}
+	*x = Event(value)
+	return nil
+}
+func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
 type User struct {
-	Id        string    `protobuf:"bytes,1,opt,name=Id" json:"Id,omitempty"`
-	Alias     []string  `protobuf:"bytes,2,rep,name=Alias" json:"Alias,omitempty"`
-	AccountId string    `protobuf:"bytes,3,opt,name=AccountId" json:"AccountId,omitempty"`
-	FirstName string    `protobuf:"bytes,4,opt,name=FirstName" json:"FirstName,omitempty"`
-	LastName  string    `protobuf:"bytes,5,opt,name=LastName" json:"LastName,omitempty"`
-	Phones    []string  `protobuf:"bytes,6,rep,name=Phones" json:"Phones,omitempty"`
-	Emails    []string  `protobuf:"bytes,7,rep,name=Emails" json:"Emails,omitempty"`
-	Traces    []*Trace  `protobuf:"bytes,8,rep,name=Traces" json:"Traces,omitempty"`
-	Devices   []*Device `protobuf:"bytes,9,rep,name=Devices" json:"Devices,omitempty"`
-	IsBan     bool      `protobuf:"varint,10,opt,name=IsBan" json:"IsBan,omitempty"`
-	AvatarUrl string    `protobuf:"bytes,11,opt,name=AvatarUrl" json:"AvatarUrl,omitempty"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Id               *string         `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+	AccountId        *string         `protobuf:"bytes,4,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Fullname         *string         `protobuf:"bytes,5,opt,name=fullname" json:"fullname,omitempty"`
+	Phones           []string        `protobuf:"bytes,7,rep,name=phones" json:"phones,omitempty"`
+	Emails           []string        `protobuf:"bytes,10,rep,name=emails" json:"emails,omitempty"`
+	Traces           []*Trace        `protobuf:"bytes,11,rep,name=traces" json:"traces,omitempty"`
+	Alias            []string        `protobuf:"bytes,12,rep,name=alias" json:"alias,omitempty"`
+	Devices          []*Device       `protobuf:"bytes,13,rep,name=devices" json:"devices,omitempty"`
+	IsBan            *bool           `protobuf:"varint,14,opt,name=IsBan" json:"IsBan,omitempty"`
+	AvatarUrl        *string         `protobuf:"bytes,15,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
+	Segments         []string        `protobuf:"bytes,19,rep,name=segments" json:"segments,omitempty"`
+	Labels           []string        `protobuf:"bytes,20,rep,name=labels" json:"labels,omitempty"`
+	Unsubscribed     *bool           `protobuf:"varint,21,opt,name=unsubscribed" json:"unsubscribed,omitempty"`
+	MarkedSpam       *bool           `protobuf:"varint,22,opt,name=marked_spam,json=markedSpam" json:"marked_spam,omitempty"`
+	HardBounced      *bool           `protobuf:"varint,23,opt,name=hard_bounced,json=hardBounced" json:"hard_bounced,omitempty"`
+	TotalSessions    *int32          `protobuf:"varint,24,opt,name=total_sessions,json=totalSessions" json:"total_sessions,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *User) Reset()                    { *m = User{} }
@@ -60,37 +93,30 @@ func (m *User) String() string            { return proto.CompactTextString(m) }
 func (*User) ProtoMessage()               {}
 func (*User) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-func (m *User) GetId() string {
+func (m *User) GetCtx() *common.Context {
 	if m != nil {
-		return m.Id
-	}
-	return ""
-}
-
-func (m *User) GetAlias() []string {
-	if m != nil {
-		return m.Alias
+		return m.Ctx
 	}
 	return nil
 }
 
+func (m *User) GetId() string {
+	if m != nil && m.Id != nil {
+		return *m.Id
+	}
+	return ""
+}
+
 func (m *User) GetAccountId() string {
-	if m != nil {
-		return m.AccountId
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
 	}
 	return ""
 }
 
-func (m *User) GetFirstName() string {
-	if m != nil {
-		return m.FirstName
-	}
-	return ""
-}
-
-func (m *User) GetLastName() string {
-	if m != nil {
-		return m.LastName
+func (m *User) GetFullname() string {
+	if m != nil && m.Fullname != nil {
+		return *m.Fullname
 	}
 	return ""
 }
@@ -116,6 +142,13 @@ func (m *User) GetTraces() []*Trace {
 	return nil
 }
 
+func (m *User) GetAlias() []string {
+	if m != nil {
+		return m.Alias
+	}
+	return nil
+}
+
 func (m *User) GetDevices() []*Device {
 	if m != nil {
 		return m.Devices
@@ -124,21 +157,64 @@ func (m *User) GetDevices() []*Device {
 }
 
 func (m *User) GetIsBan() bool {
-	if m != nil {
-		return m.IsBan
+	if m != nil && m.IsBan != nil {
+		return *m.IsBan
 	}
 	return false
 }
 
 func (m *User) GetAvatarUrl() string {
-	if m != nil {
-		return m.AvatarUrl
+	if m != nil && m.AvatarUrl != nil {
+		return *m.AvatarUrl
 	}
 	return ""
 }
 
+func (m *User) GetSegments() []string {
+	if m != nil {
+		return m.Segments
+	}
+	return nil
+}
+
+func (m *User) GetLabels() []string {
+	if m != nil {
+		return m.Labels
+	}
+	return nil
+}
+
+func (m *User) GetUnsubscribed() bool {
+	if m != nil && m.Unsubscribed != nil {
+		return *m.Unsubscribed
+	}
+	return false
+}
+
+func (m *User) GetMarkedSpam() bool {
+	if m != nil && m.MarkedSpam != nil {
+		return *m.MarkedSpam
+	}
+	return false
+}
+
+func (m *User) GetHardBounced() bool {
+	if m != nil && m.HardBounced != nil {
+		return *m.HardBounced
+	}
+	return false
+}
+
+func (m *User) GetTotalSessions() int32 {
+	if m != nil && m.TotalSessions != nil {
+		return *m.TotalSessions
+	}
+	return 0
+}
+
 type Users struct {
-	Users []*User `protobuf:"bytes,1,rep,name=Users" json:"Users,omitempty"`
+	Users            []*User `protobuf:"bytes,1,rep,name=Users" json:"Users,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *Users) Reset()                    { *m = Users{} }
@@ -154,10 +230,13 @@ func (m *Users) GetUsers() []*User {
 }
 
 type Device struct {
-	Id              int32  `protobuf:"varint,1,opt,name=Id" json:"Id,omitempty"`
-	UserAgentZipped int32  `protobuf:"varint,2,opt,name=UserAgentZipped" json:"UserAgentZipped,omitempty"`
-	Resolution      string `protobuf:"bytes,3,opt,name=Resolution" json:"Resolution,omitempty"`
-	LanguageZipped  int32  `protobuf:"varint,4,opt,name=LanguageZipped" json:"LanguageZipped,omitempty"`
+	Id               *int32  `protobuf:"varint,3,opt,name=id" json:"id,omitempty"`
+	UseragentId      *int32  `protobuf:"varint,4,opt,name=useragent_id,json=useragentId" json:"useragent_id,omitempty"`
+	Useragent        *string `protobuf:"bytes,5,opt,name=useragent" json:"useragent,omitempty"`
+	Resolution       *string `protobuf:"bytes,6,opt,name=resolution" json:"resolution,omitempty"`
+	LanguageId       *int32  `protobuf:"varint,7,opt,name=language_id,json=languageId" json:"language_id,omitempty"`
+	Language         *string `protobuf:"bytes,8,opt,name=language" json:"language,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *Device) Reset()                    { *m = Device{} }
@@ -166,37 +245,53 @@ func (*Device) ProtoMessage()               {}
 func (*Device) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 func (m *Device) GetId() int32 {
-	if m != nil {
-		return m.Id
+	if m != nil && m.Id != nil {
+		return *m.Id
 	}
 	return 0
 }
 
-func (m *Device) GetUserAgentZipped() int32 {
-	if m != nil {
-		return m.UserAgentZipped
+func (m *Device) GetUseragentId() int32 {
+	if m != nil && m.UseragentId != nil {
+		return *m.UseragentId
 	}
 	return 0
 }
 
-func (m *Device) GetResolution() string {
-	if m != nil {
-		return m.Resolution
+func (m *Device) GetUseragent() string {
+	if m != nil && m.Useragent != nil {
+		return *m.Useragent
 	}
 	return ""
 }
 
-func (m *Device) GetLanguageZipped() int32 {
-	if m != nil {
-		return m.LanguageZipped
+func (m *Device) GetResolution() string {
+	if m != nil && m.Resolution != nil {
+		return *m.Resolution
+	}
+	return ""
+}
+
+func (m *Device) GetLanguageId() int32 {
+	if m != nil && m.LanguageId != nil {
+		return *m.LanguageId
 	}
 	return 0
 }
 
+func (m *Device) GetLanguage() string {
+	if m != nil && m.Language != nil {
+		return *m.Language
+	}
+	return ""
+}
+
 type Trace struct {
-	Id             string `protobuf:"bytes,1,opt,name=Id" json:"Id,omitempty"`
-	IP             string `protobuf:"bytes,2,opt,name=IP" json:"IP,omitempty"`
-	LocationZipped int32  `protobuf:"varint,3,opt,name=LocationZipped" json:"LocationZipped,omitempty"`
+	Id               *string `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+	PP               *string `protobuf:"bytes,4,opt,name=pP" json:"pP,omitempty"`
+	LocationId       *int32  `protobuf:"varint,5,opt,name=location_id,json=locationId" json:"location_id,omitempty"`
+	Location         *string `protobuf:"bytes,6,opt,name=location" json:"location,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *Trace) Reset()                    { *m = Trace{} }
@@ -205,28 +300,38 @@ func (*Trace) ProtoMessage()               {}
 func (*Trace) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
 func (m *Trace) GetId() string {
-	if m != nil {
-		return m.Id
+	if m != nil && m.Id != nil {
+		return *m.Id
 	}
 	return ""
 }
 
-func (m *Trace) GetIP() string {
-	if m != nil {
-		return m.IP
+func (m *Trace) GetPP() string {
+	if m != nil && m.PP != nil {
+		return *m.PP
 	}
 	return ""
 }
 
-func (m *Trace) GetLocationZipped() int32 {
-	if m != nil {
-		return m.LocationZipped
+func (m *Trace) GetLocationId() int32 {
+	if m != nil && m.LocationId != nil {
+		return *m.LocationId
 	}
 	return 0
 }
 
+func (m *Trace) GetLocation() string {
+	if m != nil && m.Location != nil {
+		return *m.Location
+	}
+	return ""
+}
+
 type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id" json:"Id,omitempty"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Id               *string         `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+	AccountId        *string         `protobuf:"bytes,4,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *Id) Reset()                    { *m = Id{} }
@@ -234,29 +339,64 @@ func (m *Id) String() string            { return proto.CompactTextString(m) }
 func (*Id) ProtoMessage()               {}
 func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
-func (m *Id) GetId() string {
+func (m *Id) GetCtx() *common.Context {
 	if m != nil {
-		return m.Id
+		return m.Ctx
+	}
+	return nil
+}
+
+func (m *Id) GetId() string {
+	if m != nil && m.Id != nil {
+		return *m.Id
 	}
 	return ""
 }
 
-type Empty struct {
+func (m *Id) GetAccountId() string {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return ""
 }
 
-func (m *Empty) Reset()                    { *m = Empty{} }
-func (m *Empty) String() string            { return proto.CompactTextString(m) }
-func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
-
+//
+// message Empty {};
+//
+// service UserMgr {
+// rpc Greeting(GreetingRequest) returns (Id) {}
+// rpc Update(User) returns (Empty) {}
+// rpc Ban(Id) returns (Empty) {}
+// rpc Unban(Id) returns (Empty) {}
+// rpc Merge(MergeRequest) returns (Empty) {}
+// rpc ReadBulk(Ids) returns (Users) {}
+// rpc List(ListRequest) returns (Users) {}
+// }
 type Ids struct {
-	Ids []string `protobuf:"bytes,1,rep,name=Ids" json:"Ids,omitempty"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId        *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Ids              []string        `protobuf:"bytes,4,rep,name=ids" json:"ids,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *Ids) Reset()                    { *m = Ids{} }
 func (m *Ids) String() string            { return proto.CompactTextString(m) }
 func (*Ids) ProtoMessage()               {}
-func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+
+func (m *Ids) GetCtx() *common.Context {
+	if m != nil {
+		return m.Ctx
+	}
+	return nil
+}
+
+func (m *Ids) GetAccountId() string {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return ""
+}
 
 func (m *Ids) GetIds() []string {
 	if m != nil {
@@ -266,105 +406,140 @@ func (m *Ids) GetIds() []string {
 }
 
 type ListRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId" json:"AccountId,omitempty"`
-	StartId   string `protobuf:"bytes,2,opt,name=StartId" json:"StartId,omitempty"`
-	Limit     int32  `protobuf:"varint,3,opt,name=Limit" json:"Limit,omitempty"`
-	Keyword   string `protobuf:"bytes,4,opt,name=Keyword" json:"Keyword,omitempty"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId        *string         `protobuf:"bytes,5,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	StartId          *string         `protobuf:"bytes,6,opt,name=start_id,json=startId" json:"start_id,omitempty"`
+	Limit            *int32          `protobuf:"varint,3,opt,name=limit" json:"limit,omitempty"`
+	Keyword          *string         `protobuf:"bytes,4,opt,name=keyword" json:"keyword,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *ListRequest) Reset()                    { *m = ListRequest{} }
 func (m *ListRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListRequest) ProtoMessage()               {}
-func (*ListRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (*ListRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+
+func (m *ListRequest) GetCtx() *common.Context {
+	if m != nil {
+		return m.Ctx
+	}
+	return nil
+}
 
 func (m *ListRequest) GetAccountId() string {
-	if m != nil {
-		return m.AccountId
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
 	}
 	return ""
 }
 
 func (m *ListRequest) GetStartId() string {
-	if m != nil {
-		return m.StartId
+	if m != nil && m.StartId != nil {
+		return *m.StartId
 	}
 	return ""
 }
 
 func (m *ListRequest) GetLimit() int32 {
-	if m != nil {
-		return m.Limit
+	if m != nil && m.Limit != nil {
+		return *m.Limit
 	}
 	return 0
 }
 
 func (m *ListRequest) GetKeyword() string {
-	if m != nil {
-		return m.Keyword
+	if m != nil && m.Keyword != nil {
+		return *m.Keyword
 	}
 	return ""
 }
 
 type MergeRequest struct {
-	FormerUserId string `protobuf:"bytes,1,opt,name=FormerUserId" json:"FormerUserId,omitempty"`
-	RecentUserId string `protobuf:"bytes,2,opt,name=RecentUserId" json:"RecentUserId,omitempty"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId        *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Id               *string         `protobuf:"bytes,5,opt,name=id" json:"id,omitempty"`
+	RecentId         *string         `protobuf:"bytes,4,opt,name=recent_id,json=recentId" json:"recent_id,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *MergeRequest) Reset()                    { *m = MergeRequest{} }
 func (m *MergeRequest) String() string            { return proto.CompactTextString(m) }
 func (*MergeRequest) ProtoMessage()               {}
-func (*MergeRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+func (*MergeRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
 
-func (m *MergeRequest) GetFormerUserId() string {
+func (m *MergeRequest) GetCtx() *common.Context {
 	if m != nil {
-		return m.FormerUserId
+		return m.Ctx
+	}
+	return nil
+}
+
+func (m *MergeRequest) GetAccountId() string {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
 	}
 	return ""
 }
 
-func (m *MergeRequest) GetRecentUserId() string {
-	if m != nil {
-		return m.RecentUserId
+func (m *MergeRequest) GetId() string {
+	if m != nil && m.Id != nil {
+		return *m.Id
+	}
+	return ""
+}
+
+func (m *MergeRequest) GetRecentId() string {
+	if m != nil && m.RecentId != nil {
+		return *m.RecentId
 	}
 	return ""
 }
 
 type GreetingRequest struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId" json:"AccountId,omitempty"`
-	UserAgent string `protobuf:"bytes,2,opt,name=UserAgent" json:"UserAgent,omitempty"`
-	UserId    string `protobuf:"bytes,3,opt,name=UserId" json:"UserId,omitempty"`
-	UUID      string `protobuf:"bytes,4,opt,name=UUID" json:"UUID,omitempty"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId        *string         `protobuf:"bytes,5,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Useragent        *string         `protobuf:"bytes,6,opt,name=useragent" json:"useragent,omitempty"`
+	UserId           *string         `protobuf:"bytes,3,opt,name=user_id,json=userId" json:"user_id,omitempty"`
+	Uuid             *string         `protobuf:"bytes,4,opt,name=uuid" json:"uuid,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *GreetingRequest) Reset()                    { *m = GreetingRequest{} }
 func (m *GreetingRequest) String() string            { return proto.CompactTextString(m) }
 func (*GreetingRequest) ProtoMessage()               {}
-func (*GreetingRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+func (*GreetingRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+
+func (m *GreetingRequest) GetCtx() *common.Context {
+	if m != nil {
+		return m.Ctx
+	}
+	return nil
+}
 
 func (m *GreetingRequest) GetAccountId() string {
-	if m != nil {
-		return m.AccountId
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
 	}
 	return ""
 }
 
-func (m *GreetingRequest) GetUserAgent() string {
-	if m != nil {
-		return m.UserAgent
+func (m *GreetingRequest) GetUseragent() string {
+	if m != nil && m.Useragent != nil {
+		return *m.Useragent
 	}
 	return ""
 }
 
 func (m *GreetingRequest) GetUserId() string {
-	if m != nil {
-		return m.UserId
+	if m != nil && m.UserId != nil {
+		return *m.UserId
 	}
 	return ""
 }
 
-func (m *GreetingRequest) GetUUID() string {
-	if m != nil {
-		return m.UUID
+func (m *GreetingRequest) GetUuid() string {
+	if m != nil && m.Uuid != nil {
+		return *m.Uuid
 	}
 	return ""
 }
@@ -375,323 +550,59 @@ func init() {
 	proto.RegisterType((*Device)(nil), "user.Device")
 	proto.RegisterType((*Trace)(nil), "user.Trace")
 	proto.RegisterType((*Id)(nil), "user.Id")
-	proto.RegisterType((*Empty)(nil), "user.Empty")
 	proto.RegisterType((*Ids)(nil), "user.Ids")
 	proto.RegisterType((*ListRequest)(nil), "user.ListRequest")
 	proto.RegisterType((*MergeRequest)(nil), "user.MergeRequest")
 	proto.RegisterType((*GreetingRequest)(nil), "user.GreetingRequest")
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// Client API for UserMgr service
-
-type UserMgrClient interface {
-	Greeting(ctx context.Context, in *GreetingRequest, opts ...grpc.CallOption) (*Id, error)
-	Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error)
-	Ban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	Unban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	Merge(ctx context.Context, in *MergeRequest, opts ...grpc.CallOption) (*Empty, error)
-	ReadBulk(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Users, error)
-	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Users, error)
-}
-
-type userMgrClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewUserMgrClient(cc *grpc.ClientConn) UserMgrClient {
-	return &userMgrClient{cc}
-}
-
-func (c *userMgrClient) Greeting(ctx context.Context, in *GreetingRequest, opts ...grpc.CallOption) (*Id, error) {
-	out := new(Id)
-	err := grpc.Invoke(ctx, "/user.UserMgr/Greeting", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/user.UserMgr/Update", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) Ban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/user.UserMgr/Ban", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) Unban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/user.UserMgr/Unban", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) Merge(ctx context.Context, in *MergeRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/user.UserMgr/Merge", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) ReadBulk(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Users, error) {
-	out := new(Users)
-	err := grpc.Invoke(ctx, "/user.UserMgr/ReadBulk", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userMgrClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Users, error) {
-	out := new(Users)
-	err := grpc.Invoke(ctx, "/user.UserMgr/List", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for UserMgr service
-
-type UserMgrServer interface {
-	Greeting(context.Context, *GreetingRequest) (*Id, error)
-	Update(context.Context, *User) (*Empty, error)
-	Ban(context.Context, *Id) (*Empty, error)
-	Unban(context.Context, *Id) (*Empty, error)
-	Merge(context.Context, *MergeRequest) (*Empty, error)
-	ReadBulk(context.Context, *Ids) (*Users, error)
-	List(context.Context, *ListRequest) (*Users, error)
-}
-
-func RegisterUserMgrServer(s *grpc.Server, srv UserMgrServer) {
-	s.RegisterService(&_UserMgr_serviceDesc, srv)
-}
-
-func _UserMgr_Greeting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GreetingRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).Greeting(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/user.UserMgr/Greeting",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).Greeting(ctx, req.(*GreetingRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/user.UserMgr/Update",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).Update(ctx, req.(*User))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_Ban_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).Ban(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/user.UserMgr/Ban",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).Ban(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_Unban_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).Unban(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/user.UserMgr/Unban",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).Unban(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_Merge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MergeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).Merge(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/user.UserMgr/Merge",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).Merge(ctx, req.(*MergeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_ReadBulk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).ReadBulk(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/user.UserMgr/ReadBulk",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).ReadBulk(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserMgr_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserMgrServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/user.UserMgr/List",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).List(ctx, req.(*ListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _UserMgr_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "user.UserMgr",
-	HandlerType: (*UserMgrServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Greeting",
-			Handler:    _UserMgr_Greeting_Handler,
-		},
-		{
-			MethodName: "Update",
-			Handler:    _UserMgr_Update_Handler,
-		},
-		{
-			MethodName: "Ban",
-			Handler:    _UserMgr_Ban_Handler,
-		},
-		{
-			MethodName: "Unban",
-			Handler:    _UserMgr_Unban_Handler,
-		},
-		{
-			MethodName: "Merge",
-			Handler:    _UserMgr_Merge_Handler,
-		},
-		{
-			MethodName: "ReadBulk",
-			Handler:    _UserMgr_ReadBulk_Handler,
-		},
-		{
-			MethodName: "List",
-			Handler:    _UserMgr_List_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "user/user.proto",
+	proto.RegisterEnum("user.Event", Event_name, Event_value)
 }
 
 func init() { proto.RegisterFile("user/user.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 600 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x54, 0xdd, 0x6e, 0xd3, 0x3e,
-	0x14, 0x5f, 0xf3, 0xd1, 0x26, 0xa7, 0xd3, 0xf6, 0xff, 0x5b, 0x03, 0xac, 0x69, 0x9a, 0x2a, 0x83,
-	0xa6, 0x80, 0xc4, 0x90, 0xc6, 0x13, 0x6c, 0xda, 0x86, 0x22, 0x3a, 0x98, 0x02, 0xe5, 0x82, 0x3b,
-	0xaf, 0xb1, 0x42, 0x44, 0x9b, 0x14, 0xdb, 0x19, 0xea, 0x2b, 0xf0, 0x0a, 0x3c, 0x07, 0xef, 0x87,
-	0x8e, 0xed, 0x74, 0x69, 0x90, 0x10, 0x37, 0x9b, 0x7f, 0x1f, 0x39, 0xc7, 0xe7, 0xc3, 0x85, 0xfd,
-	0x46, 0x09, 0xf9, 0x0a, 0xff, 0x9c, 0xae, 0x64, 0xad, 0x6b, 0x12, 0xe0, 0x99, 0xfd, 0xf2, 0x20,
-	0x98, 0x29, 0x21, 0xc9, 0x1e, 0x78, 0x69, 0x4e, 0x07, 0x93, 0x41, 0x12, 0x67, 0x5e, 0x9a, 0x93,
-	0x03, 0x08, 0xcf, 0x17, 0x25, 0x57, 0xd4, 0x9b, 0xf8, 0x49, 0x9c, 0x59, 0x40, 0x8e, 0x20, 0x3e,
-	0x9f, 0xcf, 0xeb, 0xa6, 0xd2, 0x69, 0x4e, 0x7d, 0x63, 0x7e, 0x20, 0x50, 0xbd, 0x2e, 0xa5, 0xd2,
-	0xef, 0xf8, 0x52, 0xd0, 0xc0, 0xaa, 0x1b, 0x82, 0x1c, 0x42, 0x34, 0xe5, 0x4e, 0x0c, 0x8d, 0xb8,
-	0xc1, 0xe4, 0x31, 0x0c, 0x6f, 0xbf, 0xd4, 0x95, 0x50, 0x74, 0x68, 0xd2, 0x39, 0x84, 0xfc, 0xd5,
-	0x92, 0x97, 0x0b, 0x45, 0x47, 0x96, 0xb7, 0x88, 0x3c, 0x85, 0xe1, 0x47, 0xc9, 0xe7, 0x42, 0xd1,
-	0x68, 0xe2, 0x27, 0xe3, 0xb3, 0xf1, 0xa9, 0xa9, 0xcc, 0x70, 0x99, 0x93, 0xc8, 0x09, 0x8c, 0x2e,
-	0xc5, 0x7d, 0x89, 0xae, 0xd8, 0xb8, 0x76, 0xad, 0xcb, 0x92, 0x59, 0x2b, 0x62, 0xa9, 0xa9, 0xba,
-	0xe0, 0x15, 0x85, 0xc9, 0x20, 0x89, 0x32, 0x0b, 0x4c, 0xa9, 0xf7, 0x5c, 0x73, 0x39, 0x93, 0x0b,
-	0x3a, 0x76, 0xa5, 0xb6, 0x04, 0x7b, 0x0e, 0x21, 0xb6, 0x4d, 0x91, 0x89, 0x3b, 0xd0, 0x81, 0x49,
-	0x01, 0x36, 0x05, 0x52, 0x99, 0x15, 0xd8, 0x8f, 0x01, 0x0c, 0x6d, 0xaa, 0x4e, 0x93, 0x43, 0xd3,
-	0xe4, 0x04, 0xf6, 0xd1, 0x73, 0x5e, 0x88, 0x4a, 0x7f, 0x2e, 0x57, 0x2b, 0x91, 0x53, 0xcf, 0x88,
-	0x7d, 0x9a, 0x1c, 0x03, 0x64, 0x42, 0xd5, 0x8b, 0x46, 0x97, 0x75, 0xe5, 0x3a, 0xdf, 0x61, 0xc8,
-	0x09, 0xec, 0x4d, 0x79, 0x55, 0x34, 0xbc, 0x10, 0x2e, 0x50, 0x60, 0x02, 0xf5, 0x58, 0xf6, 0x1e,
-	0x42, 0xd3, 0x9d, 0x3f, 0xe6, 0x8d, 0xf8, 0xd6, 0x64, 0x47, 0x7c, 0x6b, 0x02, 0xd6, 0x73, 0x8e,
-	0xc1, 0x5d, 0x40, 0xdf, 0x05, 0xdc, 0x62, 0xd9, 0x01, 0xb4, 0x5f, 0x77, 0xa2, 0xb1, 0x11, 0x84,
-	0x57, 0xcb, 0x95, 0x5e, 0xb3, 0x27, 0xe0, 0xa7, 0xb9, 0x22, 0xff, 0x99, 0x7f, 0xa6, 0x47, 0x71,
-	0x86, 0x47, 0xd6, 0xc0, 0x78, 0x5a, 0x2a, 0x9d, 0x89, 0x6f, 0x8d, 0x50, 0x7a, 0x7b, 0xb1, 0x06,
-	0xfd, 0xc5, 0xa2, 0x30, 0xfa, 0xa0, 0xb9, 0x44, 0xcd, 0xde, 0xb0, 0x85, 0x38, 0xbb, 0x69, 0xb9,
-	0x2c, 0xb5, 0xbb, 0x9d, 0x05, 0xe8, 0x7f, 0x2b, 0xd6, 0xdf, 0x6b, 0x99, 0xbb, 0x35, 0x6c, 0x21,
-	0xfb, 0x04, 0xbb, 0x37, 0x42, 0x16, 0xa2, 0xcd, 0xcb, 0x60, 0xf7, 0xba, 0x96, 0x4b, 0x21, 0xb1,
-	0xe1, 0x9b, 0xd4, 0x5b, 0x1c, 0x7a, 0x32, 0x31, 0x17, 0x95, 0x76, 0x1e, 0x7b, 0x85, 0x2d, 0x8e,
-	0xad, 0x61, 0xff, 0x8d, 0x14, 0x42, 0x97, 0x55, 0xf1, 0x6f, 0x25, 0x1d, 0x41, 0xbc, 0x99, 0xb1,
-	0x8b, 0xf8, 0x40, 0xe0, 0xde, 0xbb, 0x64, 0x76, 0xd4, 0x0e, 0x11, 0x02, 0xc1, 0x6c, 0x96, 0x5e,
-	0xba, 0xaa, 0xcc, 0xf9, 0xec, 0xa7, 0x07, 0x23, 0x94, 0x6f, 0x0a, 0x49, 0x5e, 0x42, 0xd4, 0x5e,
-	0x83, 0x3c, 0xb2, 0xab, 0xd8, 0xbb, 0xd6, 0x61, 0x64, 0xe9, 0x34, 0x67, 0x3b, 0xf8, 0x8c, 0x66,
-	0xab, 0x9c, 0x6b, 0x41, 0x3a, 0x7b, 0x7b, 0xe8, 0x1e, 0x93, 0x1d, 0xe0, 0x0e, 0x39, 0x06, 0x1f,
-	0xdf, 0xc3, 0xe6, 0xbb, 0xbe, 0x8e, 0x2f, 0xa0, 0xba, 0xfb, 0x9b, 0xe3, 0x05, 0x84, 0xa6, 0xe9,
-	0x84, 0x58, 0xbe, 0x3b, 0x81, 0xbe, 0xf7, 0x19, 0x44, 0x99, 0xe0, 0xf9, 0x45, 0xb3, 0xf8, 0x4a,
-	0xe2, 0x36, 0xa0, 0x6a, 0x5d, 0xf6, 0x45, 0xed, 0x90, 0x04, 0x02, 0xdc, 0x1e, 0xf2, 0xbf, 0xa5,
-	0x3b, 0x9b, 0xd4, 0x73, 0xde, 0x0d, 0xcd, 0xaf, 0xdd, 0xeb, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff,
-	0xa3, 0x23, 0xce, 0x63, 0x00, 0x05, 0x00, 0x00,
+	// 703 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x53, 0xcb, 0x6e, 0xdb, 0x46,
+	0x14, 0x2d, 0x45, 0x51, 0x8f, 0x4b, 0x59, 0x72, 0xa7, 0x7e, 0x4c, 0xdd, 0xd6, 0x95, 0x59, 0xb4,
+	0x50, 0xbb, 0x90, 0x00, 0xef, 0xba, 0x75, 0x5b, 0x14, 0x04, 0x12, 0xc0, 0xa0, 0xe3, 0x00, 0x59,
+	0x09, 0x23, 0xce, 0x8d, 0x3c, 0x30, 0x1f, 0xca, 0xcc, 0xd0, 0x71, 0x02, 0xe4, 0x47, 0xb2, 0xc8,
+	0x67, 0xe4, 0xf7, 0x12, 0xcc, 0x43, 0xf2, 0x6b, 0x93, 0x04, 0xde, 0x90, 0x73, 0xce, 0x9d, 0xb9,
+	0x8f, 0x83, 0x73, 0x61, 0xd4, 0x28, 0x94, 0x33, 0xf3, 0x99, 0xae, 0x64, 0xad, 0x6b, 0xd2, 0x36,
+	0xe7, 0x83, 0xbf, 0x17, 0x42, 0x2f, 0x9a, 0xfc, 0x12, 0xf5, 0xb4, 0x96, 0xcb, 0x99, 0x6a, 0x16,
+	0xe2, 0xed, 0x4c, 0xa1, 0xbc, 0x12, 0x39, 0xaa, 0x15, 0xe6, 0x33, 0x7b, 0x79, 0x96, 0xd7, 0x65,
+	0x59, 0x57, 0xfe, 0xe7, 0x12, 0x24, 0x9f, 0x42, 0x68, 0x9f, 0x2b, 0x94, 0xe4, 0x08, 0xc2, 0x5c,
+	0x5f, 0xd3, 0x60, 0x1c, 0x4c, 0xe2, 0xe3, 0xd1, 0xd4, 0x5f, 0xfa, 0xa7, 0xae, 0x34, 0x5e, 0xeb,
+	0xcc, 0xc4, 0xc8, 0x10, 0x5a, 0x82, 0xd3, 0x70, 0x1c, 0x4c, 0xfa, 0x59, 0x4b, 0x70, 0xf2, 0x0b,
+	0x00, 0xcb, 0xf3, 0xba, 0xa9, 0xf4, 0x5c, 0x70, 0xda, 0xb6, 0x7c, 0xdf, 0x33, 0x29, 0x27, 0x07,
+	0xd0, 0x7b, 0xd9, 0x14, 0x45, 0xc5, 0x4a, 0xa4, 0x91, 0x0d, 0x6e, 0x30, 0xd9, 0x83, 0xce, 0xea,
+	0xa2, 0xae, 0x50, 0xd1, 0xee, 0x38, 0x9c, 0xf4, 0x33, 0x8f, 0x0c, 0x8f, 0x25, 0x13, 0x85, 0xa2,
+	0xe0, 0x78, 0x87, 0xc8, 0x6f, 0xd0, 0xd1, 0x92, 0xe5, 0xa8, 0x68, 0x3c, 0x0e, 0x27, 0xf1, 0x71,
+	0x3c, 0xb5, 0x22, 0x3c, 0x33, 0x5c, 0xe6, 0x43, 0x64, 0x07, 0x22, 0x56, 0x08, 0xa6, 0xe8, 0xc0,
+	0xbe, 0x75, 0x80, 0xfc, 0x01, 0x5d, 0x8e, 0x56, 0x09, 0xba, 0x65, 0xdf, 0x0e, 0xdc, 0xdb, 0x7f,
+	0x2d, 0x99, 0xad, 0x83, 0xe6, 0x75, 0xaa, 0x4e, 0x58, 0x45, 0x87, 0xe3, 0x60, 0xd2, 0xcb, 0x1c,
+	0xb0, 0x33, 0x5e, 0x31, 0xcd, 0xe4, 0xbc, 0x91, 0x05, 0x1d, 0xf9, 0x19, 0x2d, 0x73, 0x2e, 0x0b,
+	0x33, 0xa3, 0xc2, 0x65, 0x89, 0x95, 0x56, 0xf4, 0x07, 0x5b, 0x75, 0x83, 0xcd, 0x2c, 0x05, 0x5b,
+	0x60, 0xa1, 0xe8, 0x8e, 0x9b, 0xc5, 0x21, 0x92, 0xc0, 0xa0, 0xa9, 0x54, 0xb3, 0x50, 0xb9, 0x14,
+	0x0b, 0xe4, 0x74, 0xd7, 0xd6, 0xbb, 0xc3, 0x91, 0x5f, 0x21, 0x2e, 0x99, 0xbc, 0x44, 0x3e, 0x57,
+	0x2b, 0x56, 0xd2, 0x3d, 0x7b, 0x05, 0x1c, 0x75, 0xb6, 0x62, 0x25, 0x39, 0x82, 0xc1, 0x05, 0x93,
+	0x7c, 0xbe, 0xa8, 0x9b, 0x2a, 0x47, 0x4e, 0xf7, 0xed, 0x8d, 0xd8, 0x70, 0x27, 0x8e, 0x22, 0xbf,
+	0xc3, 0x50, 0xd7, 0x9a, 0x15, 0x73, 0x85, 0x4a, 0x89, 0xba, 0x52, 0x94, 0x8e, 0x83, 0x49, 0x94,
+	0x6d, 0x59, 0xf6, 0xcc, 0x93, 0xc9, 0x9f, 0x10, 0x19, 0x03, 0x28, 0x32, 0xf6, 0x07, 0x1a, 0x58,
+	0x99, 0xc0, 0xc9, 0x64, 0xa8, 0xcc, 0x05, 0x92, 0x8f, 0x01, 0x74, 0x9c, 0x6c, 0xb7, 0xbc, 0x10,
+	0x59, 0x2f, 0x1c, 0xc1, 0xc0, 0x5c, 0x67, 0x4b, 0xbc, 0x71, 0x43, 0x94, 0xc5, 0x1b, 0x2e, 0xe5,
+	0xe4, 0x67, 0xe8, 0x6f, 0xa0, 0x37, 0xc4, 0x0d, 0x41, 0x0e, 0x01, 0x24, 0xaa, 0xba, 0x68, 0xb4,
+	0xa8, 0x2b, 0xda, 0xb1, 0xe1, 0x5b, 0x8c, 0x51, 0xa4, 0x60, 0xd5, 0xb2, 0x61, 0x4b, 0x34, 0xf9,
+	0xbb, 0x36, 0x3f, 0xac, 0x29, 0x67, 0xb7, 0x35, 0xa2, 0x3d, 0x67, 0xb7, 0x35, 0x4e, 0x38, 0x44,
+	0xd6, 0x2a, 0x0f, 0x2c, 0x3c, 0x84, 0xd6, 0xea, 0xd4, 0x5b, 0xb7, 0xb5, 0x3a, 0xb5, 0x55, 0xea,
+	0x9c, 0x99, 0x8a, 0xa6, 0x4a, 0xe4, 0xab, 0x78, 0xca, 0x57, 0xf1, 0xc8, 0x37, 0xb9, 0xc1, 0xc9,
+	0x73, 0x68, 0xa5, 0xfc, 0xf1, 0x17, 0x29, 0x79, 0x01, 0x61, 0xca, 0xd5, 0x97, 0x24, 0xbe, 0x9b,
+	0x28, 0xbc, 0xbf, 0x91, 0xdb, 0x10, 0x0a, 0xae, 0x68, 0xdb, 0xda, 0xd1, 0x1c, 0x93, 0xf7, 0x01,
+	0xc4, 0x4f, 0x84, 0xd2, 0x19, 0xbe, 0x6a, 0x50, 0xe9, 0xaf, 0xaf, 0x11, 0xdd, 0xaf, 0xf1, 0x23,
+	0xf4, 0x94, 0x66, 0xd2, 0x06, 0x9d, 0x40, 0x5d, 0x8b, 0x53, 0x6e, 0x36, 0xac, 0x10, 0xa5, 0xd0,
+	0xde, 0x36, 0x0e, 0x10, 0x0a, 0xdd, 0x4b, 0x7c, 0xf3, 0xba, 0x96, 0xeb, 0xc9, 0xd7, 0x30, 0x79,
+	0x07, 0x83, 0xa7, 0x28, 0x97, 0xf8, 0xcd, 0xcd, 0x3d, 0x10, 0xc0, 0x09, 0x1f, 0x6d, 0x84, 0xff,
+	0x09, 0xfa, 0x12, 0x73, 0xbc, 0xad, 0x7b, 0xcf, 0x11, 0x29, 0x4f, 0x3e, 0x04, 0x30, 0xfa, 0x5f,
+	0x22, 0x6a, 0x51, 0x2d, 0x1f, 0x4f, 0x9f, 0x3b, 0x5b, 0xd0, 0xb9, 0xbf, 0x05, 0xfb, 0xd0, 0x35,
+	0xe0, 0xa6, 0xf9, 0x8e, 0x81, 0x29, 0x27, 0x04, 0xda, 0x4d, 0xb3, 0x69, 0xd2, 0x9e, 0xff, 0x3a,
+	0x84, 0xe8, 0xbf, 0x2b, 0xf3, 0x6a, 0x17, 0xbe, 0xb7, 0x6b, 0x8a, 0x8c, 0xfb, 0x46, 0x91, 0x6f,
+	0x7f, 0xf7, 0x39, 0x00, 0x00, 0xff, 0xff, 0x90, 0x6c, 0x70, 0x66, 0x2e, 0x06, 0x00, 0x00,
 }
