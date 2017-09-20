@@ -7,7 +7,7 @@ import "bitbucket.org/subiz/servicespec/proto/event/event.proto";
 import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 
 /*
-service ChatMgr {
+	service ChatMgr {
 	// COLLECTOR for channel only
 	// fire EvChatSent
 	rpc Send(ChatEvent) returns (Id) {}
@@ -33,27 +33,8 @@ service ChatMgr {
 	rpc AcceptUnassignedChat(AcceptRequest) returns (Bool) {}
 
 	//rpc Read(Empty) returns (Empty) {}
-}
+	}
 */
-
-message UnassignedConversation {
-	optional string account_id = 1;
-	optional string id = 2;
-	optional string channel_id = 4;
-	optional string message_to = 5;
-	optional string page_url = 6;
-	optional string page_title = 7;
-	optional string message = 8;
-	optional string browser_language = 9;
-	optional string language = 10;
-	optional DeviceType device_type = 11;
-	optional UserInfo user = 12;
-	optional int64 created_time = 13;
-}
-
-message UnassignedChats {
-	repeated UnassignedConversation chats = 1;
-}
 
 message Id {
 	optional common.Context ctx = 1;
@@ -89,18 +70,16 @@ message Bool {
 }
 
 enum JoinOperator {
-	None = 0;
-	And = 1;
-	Or = 2;
+	none = 0;
+	and = 1;
+	or = 2;
 }
 
-message RuleId {
-	optional string AccountId = 1;
-	optional 	string Id = 2;
-}
+message Limit {
+	optional common.Context ctx = 1;
 
-message Idx {
-	optional 	string Id = 1;
+	optional string account_id = 3;
+	optional int32 max_rules = 7;
 }
 
 message Rule {
@@ -108,20 +87,21 @@ message Rule {
 	// @inject_tag: name:"ip"
 	optional string id = 2;
 	optional string account_id = 3;
-	optional string priority = 4;
+	//optional string priority = 4;
 	optional AssignStrategy strategy = 5;
 	repeated string assign_tos = 6;
 	repeated Condition conditions = 7;
 	optional bool enabled = 8;
 	optional int64 created_time = 9;
-
+	optional string prev_id = 10;
+	optional string next_id = 11;
 }
 
 message Condition {
-	optional JoinOperator Join = 1;
-	optional 	string Key = 2; // unique
-	optional 	string Operator = 3; // = # regex
-	optional string Value = 4; // JSON
+	optional JoinOperator join = 1;
+	optional string key = 2; // unique
+	optional string operator = 3; // = # regex
+	optional string value = 4; // JSON
 }
 
 message Route {
@@ -162,17 +142,13 @@ message AgentUpdateEvent {
 	optional 	bool IsConfirmed = 3;
 }
 
-////////////////////////////
-/////   MESSAGE   //////////
-////////////////////////////
-
 message Ids {
 	repeated string Ids = 1;
 }
 
 // get number of unread message
 message Conversation {
-
+	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
 	// Creation time
@@ -184,6 +160,17 @@ message Conversation {
 	repeated event.User users = 7;
 	optional string channel_id = 9;
 	repeated string tags = 10;
+
+	optional ConversationState state = 11;
+	optional string request_id = 13;
+}
+
+enum ConversationState {
+	conversation_none = 0;
+	assigning = 1;
+	unassigned = 2;
+	opened = 3;
+	closed = 4;
 }
 
 message Previews {
@@ -292,51 +279,26 @@ enum DeviceType {
 	DESKTOP = 3;
 }
 
-message UserInfo {
-	optional string Id = 1;
-	optional string Name = 2;
-	repeated string Emails = 3;
-	repeated string Phones = 4;
-	optional string Country = 5;
-	optional string CountryCode = 6;
-	optional string City = 7;
-	optional string TimeZone = 8;
-	repeated string Segment = 9;
-	repeated string Label = 10;
-	optional bool Unsubscribed = 11;
-	optional bool MarkedSpam = 12;
-	optional bool HardBounced = 13;
-	optional int32 TotalSessions = 14;
-}
-
-message ChatRequestAck {
-	optional string RequestId = 15;
-	optional string ChatId = 14;
-	optional string AccountId = 1;
-	optional string ChannelId = 4;
-	optional string MessageTo = 5;
-	optional string PageUrl = 6;
-	optional string PageTitle = 7;
-	optional string Message = 8;
-	optional string BrowserLanguage = 9;
-	optional string Language = 10;
-	optional DeviceType DeviceType = 11;
-	optional UserInfo User = 12;
-	optional string CreatedTime = 13;
-}
-
 message ChatRequest {
-	optional string AccountId = 1;
-	optional string ChannelId = 4;
-	optional string MessageTo = 5;
-	optional string PageUrl = 6;
-	optional string PageTitle = 7;
-	optional string Message = 8;
-	optional string BrowserLanguage = 9;
-	optional string Language = 10;
-	optional DeviceType DeviceType = 11;
-	optional UserInfo User = 12;
-	optional string CreatedTime = 13;
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string account_id = 3;
+	optional string channel_id = 4;
+	optional string message_to = 5;
+	optional string page_url = 6;
+	optional string page_title = 7;
+	optional string message = 8;
+	optional string browser_language = 9;
+	optional string language = 10;
+	optional DeviceType device_type = 11;
+	optional string user_id = 12;
+	optional int64 created_time = 13;
+	optional string conversation_id = 14;
+	optional string ip = 15;
+	optional string country = 16;
+	optional string country_code = 17;
+	optional string city = 18;
+	optional string time_zone = 19;
 }
 
 message Conversations {
@@ -407,39 +369,6 @@ message ListChatsByUserRequest {
 	optional int32 Limit = 5;
 }
 
-// Topic Chat.Assigned
-message OEChatAssigned {
-	optional 	string ChatId = 4;
-	optional 	string AccountId = 3;
-	optional 	string CreatedTime = 5;
- 	repeated event.User Users = 6;
-	optional 	string ChannelId = 7;
-	repeated string Tags = 8;
-}
-
-// Topic Chat.Waiting
-message OEChatWaiting {
-	//string RequestId = 1;
-	//string Event = 2;
-	optional string ChatId = 4;
-	optional string AccountId = 3;
-	//	string CreatedTime = 5;
-	optional UserInfo User = 6;
-	optional string ChannelId = 7;
-	repeated string Tags = 8;
-}
-
-message EvChatCreated {
-	optional string RequestId = 1; // request ID
-	optional bool Ok = 2;
-	optional string Event = 3;
-	optional string AccountId = 4;
-	optional string ChatId = 5;
-	repeated event.User Users = 6;
-	optional string ChannelId = 7;
-	optional string CreatedTime = 8;
-}
-
 message OEChatDropped {
 	optional string AccountId = 1;
 	optional string ChatId = 2;
@@ -483,29 +412,14 @@ message EvChatUserInfoRequested {
 	optional string CreatedTime = 13;
 }
 
-message EvChatUserInfoReply {
-	optional string RequestId = 1;
-	optional string ChatId = 2;
-	optional string AccountId = 3;
-	optional string ChannelId = 4;
-	optional string MessageTo = 5;
-	optional string PageUrl = 6;
-	optional string PageTitle = 7;
-	optional string Message = 8;
-	optional string BrowserLanguage = 9;
-	optional string Language = 10;
-	optional DeviceType DeviceType = 11;
-	optional UserInfo User = 12;
-	optional string CreatedTime = 13;
-}
-
 enum Event {
-	 ConversationAssigned = 0; // chat is assigned to an agent
-	 ConversationWaiting = 2; // new chat is added to unassigned list
-	 ConversationStartRequested = 3; // chat started from an agent // chatstart
+	ConversationAssigned = 0; // chat is assigned to an agent
+	ConversationWaiting = 2; // new chat is added to unassigned list
 
-	 ConversationAccepted = 4; // chat from unassigned list is accepted by an agent
-	 ConversationDropped = 5; // chat dropped from unassigned list
+	ConversationStartRequested = 3; // chat started from an agent // chatstart
+
+	ConversationAccepted = 4; // chat from unassigned list is accepted by an agent
+	ConversationDropped = 5; // chat dropped from unassigned list
 
 	ConversationEventCreated = 6;
 	ConversationJoinRequested = 7;
@@ -517,18 +431,19 @@ enum Event {
 
 
 
-	RuleUpdated = 20; // rule
-  RuleCreated = 21; // rule
-	RuleDeleted = 22; // id
-	RuleRead = 23; // id
-	RuleList = 24; // id accountid, return top N rule
+	ConversationUpdateRuleRequested = 20; // rule
+  ConversationCreateRuleRequested = 21; // rule
+	ConversationDeleteRuleRequested = 22; // id
+	ConversationReadRuleRequested = 23; // id
+	ConversationListRuleRequested = 24; // id accountid, return top N rule
 
 	ChatUserInfoRequested = 18;
 	ChatUserInfoReply = 19;
 
-	ConversationSubscribe = 30;
-	ConversationUnsubscribe = 31;
 
+	ConversationRequested = 50; // user request for new conversation
+	ConversationUserRequestReply = 51; // user
+	ConversationLimitUpdated = 52;
 }
 // ==================
 
@@ -591,4 +506,12 @@ message SurveyForm {
 
 message RateFormTemplate {
 	optional string Type = 1;
+}
+
+message RequestState {
+	optional string account_id = 1;
+	optional string conversation_id = 2;
+	optional string channel_id = 3;
+
+
 }

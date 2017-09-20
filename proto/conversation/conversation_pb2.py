@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='conversation/conversation.proto',
   package='conversation',
   syntax='proto2',
-  serialized_pb=_b('\n\x1f\x63onversation/conversation.proto\x12\x0c\x63onversation\x1a\x37\x62itbucket.org/subiz/servicespec/proto/event/event.proto\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"\xae\x02\n\x16UnassignedConversation\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\nchannel_id\x18\x04 \x01(\t\x12\x12\n\nmessage_to\x18\x05 \x01(\t\x12\x10\n\x08page_url\x18\x06 \x01(\t\x12\x12\n\npage_title\x18\x07 \x01(\t\x12\x0f\n\x07message\x18\x08 \x01(\t\x12\x18\n\x10\x62rowser_language\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12-\n\x0b\x64\x65vice_type\x18\x0b \x01(\x0e\x32\x18.conversation.DeviceType\x12$\n\x04user\x18\x0c \x01(\x0b\x32\x16.conversation.UserInfo\x12\x14\n\x0c\x63reated_time\x18\r \x01(\x03\"F\n\x0fUnassignedChats\x12\x33\n\x05\x63hats\x18\x01 \x03(\x0b\x32$.conversation.UnassignedConversation\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"-\n\x07\x41gentId\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\"C\n\x0c\x41gentInGroup\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x0f\n\x07GroupId\x18\x03 \x01(\t\"C\n\x0b\x41gentStatus\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x10\n\x08IsActive\x18\x03 \x01(\x08\"E\n\x07\x41\x63\x63ount\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02Id\x18\x02 \x01(\t\x12\x10\n\x08MaxRules\x18\x03 \x01(\x05\"\x14\n\x04\x42ool\x12\x0c\n\x04\x42ool\x18\x01 \x01(\x08\"\'\n\x06RuleId\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\n\n\x02Id\x18\x02 \x01(\t\"\x11\n\x03Idx\x12\n\n\x02Id\x18\x01 \x01(\t\"\xee\x01\n\x04Rule\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x10\n\x08priority\x18\x04 \x01(\t\x12.\n\x08strategy\x18\x05 \x01(\x0e\x32\x1c.conversation.AssignStrategy\x12\x12\n\nassign_tos\x18\x06 \x03(\t\x12+\n\nconditions\x18\x07 \x03(\x0b\x32\x17.conversation.Condition\x12\x0f\n\x07\x65nabled\x18\x08 \x01(\x08\x12\x14\n\x0c\x63reated_time\x18\t \x01(\x03\"c\n\tCondition\x12(\n\x04Join\x18\x01 \x01(\x0e\x32\x1a.conversation.JoinOperator\x12\x0b\n\x03Key\x18\x02 \x01(\t\x12\x10\n\x08Operator\x18\x03 \x01(\t\x12\r\n\x05Value\x18\x04 \x01(\t\"*\n\x05Route\x12!\n\x05Rules\x18\x01 \x03(\x0b\x32\x12.conversation.Rule\"_\n\x0bRouteResult\x12\x0e\n\x06RuleId\x18\x01 \x01(\t\x12.\n\x08Strategy\x18\x03 \x01(\x0e\x32\x1c.conversation.AssignStrategy\x12\x10\n\x08\x41gentIds\x18\x04 \x03(\t\"#\n\x10GroupDeleteEvent\x12\x0f\n\x07GroupId\x18\x01 \x01(\t\"6\n\x10GroupUpdateEvent\x12\x0f\n\x07GroupId\x18\x01 \x01(\t\x12\x11\n\tMemberIds\x18\x02 \x03(\t\"$\n\x11\x41gentDeletedEvent\x12\x0f\n\x07\x41gentId\x18\x01 \x01(\t\"J\n\x10\x41gentUpdateEvent\x12\x0f\n\x07\x41gentId\x18\x01 \x01(\t\x12\x10\n\x08IsActive\x18\x02 \x01(\x08\x12\x13\n\x0bIsConfirmed\x18\x03 \x01(\x08\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x01 \x03(\t\"\xb1\x01\n\x0c\x43onversation\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x14\n\x0c\x63reated_time\x18\x04 \x01(\x03\x12\x18\n\x10last_active_time\x18\x05 \x01(\x03\x12\x13\n\x0b\x63losed_time\x18\x06 \x01(\x03\x12\x1a\n\x05users\x18\x07 \x03(\x0b\x32\x0b.event.User\x12\x12\n\nchannel_id\x18\t \x01(\t\x12\x0c\n\x04tags\x18\n \x03(\t\"3\n\x08Previews\x12\'\n\x08previews\x18\x01 \x03(\x0b\x32\x15.conversation.Preview\"t\n\x07Preview\x12\x30\n\x0c\x63onversation\x18\x01 \x01(\x0b\x32\x1a.conversation.Conversation\x12\'\n\x06\x65vents\x18\x02 \x03(\x0b\x32\x17.conversation.ChatEvent\x12\x0e\n\x06Unread\x18\x03 \x01(\x03\"+\n\nAttachment\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\x0f\n\x07Payload\x18\x02 \x01(\t\"5\n\nChatEvents\x12\'\n\x06\x45vents\x18\x01 \x03(\x0b\x32\x17.conversation.ChatEvent\"\x8d\x02\n\tChatEvent\x12\n\n\x02Id\x18\x01 \x01(\t\x12)\n\x04Type\x18\x02 \x01(\x0e\x32\x1b.conversation.ChatEventType\x12\x11\n\tAccountId\x18\x04 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x05 \x01(\t\x12\x10\n\x08SenderId\x18\x06 \x01(\t\x12#\n\nSenderType\x18\x07 \x01(\x0e\x32\x0f.event.UserType\x12\x0c\n\x04Text\x18\x08 \x01(\t\x12\x0e\n\x06\x46ormat\x18\t \x01(\t\x12-\n\x0b\x41ttachments\x18\n \x03(\x0b\x32\x18.conversation.Attachment\x12\r\n\x05State\x18\x0b \x01(\t\"\x80\x02\n\x08UserInfo\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x0c\n\x04Name\x18\x02 \x01(\t\x12\x0e\n\x06\x45mails\x18\x03 \x03(\t\x12\x0e\n\x06Phones\x18\x04 \x03(\t\x12\x0f\n\x07\x43ountry\x18\x05 \x01(\t\x12\x13\n\x0b\x43ountryCode\x18\x06 \x01(\t\x12\x0c\n\x04\x43ity\x18\x07 \x01(\t\x12\x10\n\x08TimeZone\x18\x08 \x01(\t\x12\x0f\n\x07Segment\x18\t \x03(\t\x12\r\n\x05Label\x18\n \x03(\t\x12\x14\n\x0cUnsubscribed\x18\x0b \x01(\x08\x12\x12\n\nMarkedSpam\x18\x0c \x01(\x08\x12\x13\n\x0bHardBounced\x18\r \x01(\x08\x12\x15\n\rTotalSessions\x18\x0e \x01(\x05\"\xb5\x02\n\x0e\x43hatRequestAck\x12\x11\n\tRequestId\x18\x0f \x01(\t\x12\x0e\n\x06\x43hatId\x18\x0e \x01(\t\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x11\n\tChannelId\x18\x04 \x01(\t\x12\x11\n\tMessageTo\x18\x05 \x01(\t\x12\x0f\n\x07PageUrl\x18\x06 \x01(\t\x12\x11\n\tPageTitle\x18\x07 \x01(\t\x12\x0f\n\x07Message\x18\x08 \x01(\t\x12\x17\n\x0f\x42rowserLanguage\x18\t \x01(\t\x12\x10\n\x08Language\x18\n \x01(\t\x12,\n\nDeviceType\x18\x0b \x01(\x0e\x32\x18.conversation.DeviceType\x12$\n\x04User\x18\x0c \x01(\x0b\x32\x16.conversation.UserInfo\x12\x13\n\x0b\x43reatedTime\x18\r \x01(\t\"\x8f\x02\n\x0b\x43hatRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x11\n\tChannelId\x18\x04 \x01(\t\x12\x11\n\tMessageTo\x18\x05 \x01(\t\x12\x0f\n\x07PageUrl\x18\x06 \x01(\t\x12\x11\n\tPageTitle\x18\x07 \x01(\t\x12\x0f\n\x07Message\x18\x08 \x01(\t\x12\x17\n\x0f\x42rowserLanguage\x18\t \x01(\t\x12\x10\n\x08Language\x18\n \x01(\t\x12,\n\nDeviceType\x18\x0b \x01(\x0e\x32\x18.conversation.DeviceType\x12$\n\x04User\x18\x0c \x01(\x0b\x32\x16.conversation.UserInfo\x12\x13\n\x0b\x43reatedTime\x18\r \x01(\t\"B\n\rConversations\x12\x31\n\rconversations\x18\x01 \x03(\x0b\x32\x1a.conversation.Conversation\"t\n\tChatStart\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x12\n\nchannel_id\x18\x05 \x01(\t\"C\n\rAcceptRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\"M\n\x18ListUnassignChatsRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07StartId\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\"\x80\x01\n\x0cUnassignChat\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x12\n\nIsAssigned\x18\x02 \x01(\x08\x12\x0f\n\x07Message\x18\x03 \x01(\t\x12\n\n\x02Ip\x18\x04 \x01(\t\x12\x0c\n\x04Name\x18\x05 \x01(\t\x12\x0e\n\x06\x45mails\x18\x06 \x03(\t\x12\x0e\n\x06Phones\x18\x07 \x03(\t\"\x16\n\x05\x42ools\x12\r\n\x05\x42ools\x18\x01 \x03(\x08\"M\n\x16ListUsersUnreadRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x0f\n\x07UserIds\x18\x03 \x03(\t\"(\n\x06Unread\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\x0e\n\x06Unread\x18\x02 \x01(\x05\"4\n\x0bUsersUnread\x12%\n\x07Unreads\x18\x01 \x03(\x0b\x32\x14.conversation.Unread\"Y\n\x14ListChatEventRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x02 \x01(\t\x12\x0f\n\x07StartId\x18\x03 \x01(\t\x12\r\n\x05Limit\x18\x04 \x01(\x05\"n\n\x16ListChatsByUserRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x11\n\tChannelId\x18\x02 \x01(\t\x12\x0e\n\x06UserId\x18\x03 \x01(\t\x12\x0f\n\x07StartId\x18\x04 \x01(\t\x12\r\n\x05Limit\x18\x05 \x01(\x05\"\x85\x01\n\x0eOEChatAssigned\x12\x0e\n\x06\x43hatId\x18\x04 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x05 \x01(\t\x12\x1a\n\x05Users\x18\x06 \x03(\x0b\x32\x0b.event.User\x12\x11\n\tChannelId\x18\x07 \x01(\t\x12\x0c\n\x04Tags\x18\x08 \x03(\t\"y\n\rOEChatWaiting\x12\x0e\n\x06\x43hatId\x18\x04 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12$\n\x04User\x18\x06 \x01(\x0b\x32\x16.conversation.UserInfo\x12\x11\n\tChannelId\x18\x07 \x01(\t\x12\x0c\n\x04Tags\x18\x08 \x03(\t\"\xa4\x01\n\rEvChatCreated\x12\x11\n\tRequestId\x18\x01 \x01(\t\x12\n\n\x02Ok\x18\x02 \x01(\x08\x12\r\n\x05\x45vent\x18\x03 \x01(\t\x12\x11\n\tAccountId\x18\x04 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x05 \x01(\t\x12\x1a\n\x05Users\x18\x06 \x03(\x0b\x32\x0b.event.User\x12\x11\n\tChannelId\x18\x07 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x08 \x01(\t\"E\n\rOEChatDropped\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x02 \x01(\t\x12\x11\n\tChannelId\x18\x03 \x01(\t\"D\n\x0eOEChatAccepted\x12\x11\n\tAccountId\x18\x02 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x04 \x01(\t\"Z\n\rOEChatStarted\x12\x11\n\tAccountId\x18\x02 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\x12\x11\n\tChannelId\x18\x04 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x05 \x01(\t\"e\n\x0c\x45vChatResult\x12\x11\n\tRequestId\x18\x01 \x01(\t\x12\n\n\x02Ok\x18\x02 \x01(\x08\x12\x0c\n\x04\x43ode\x18\x03 \x01(\x05\x12\x13\n\x0b\x43reatedTime\x18\x04 \x01(\t\x12\x13\n\x0b\x44\x65scription\x18\x05 \x01(\t\"\xa8\x02\n\x17\x45vChatUserInfoRequested\x12\x11\n\tRequestId\x18\x01 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x02 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x11\n\tChannelId\x18\x04 \x01(\t\x12\x11\n\tMessageTo\x18\x05 \x01(\t\x12\x0f\n\x07PageUrl\x18\x06 \x01(\t\x12\x11\n\tPageTitle\x18\x07 \x01(\t\x12\x0f\n\x07Message\x18\x08 \x01(\t\x12\x17\n\x0f\x42rowserLanguage\x18\t \x01(\t\x12\x10\n\x08Language\x18\n \x01(\t\x12,\n\nDeviceType\x18\x0b \x01(\x0e\x32\x18.conversation.DeviceType\x12\x0e\n\x06UserId\x18\x0c \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\r \x01(\t\"\xba\x02\n\x13\x45vChatUserInfoReply\x12\x11\n\tRequestId\x18\x01 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x02 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x11\n\tChannelId\x18\x04 \x01(\t\x12\x11\n\tMessageTo\x18\x05 \x01(\t\x12\x0f\n\x07PageUrl\x18\x06 \x01(\t\x12\x11\n\tPageTitle\x18\x07 \x01(\t\x12\x0f\n\x07Message\x18\x08 \x01(\t\x12\x17\n\x0f\x42rowserLanguage\x18\t \x01(\t\x12\x10\n\x08Language\x18\n \x01(\t\x12,\n\nDeviceType\x18\x0b \x01(\x0e\x32\x18.conversation.DeviceType\x12$\n\x04User\x18\x0c \x01(\x0b\x32\x16.conversation.UserInfo\x12\x13\n\x0b\x43reatedTime\x18\r \x01(\t\"\x1a\n\x0c\x46ileTemplate\x12\n\n\x02Id\x18\x01 \x01(\t\"`\n\x14QuickRepliesTemplate\x12\x0c\n\x04Text\x18\x01 \x01(\t\x12\x13\n\x0b\x43ontentType\x18\x04 \x01(\t\x12%\n\x07Replies\x18\x05 \x03(\x0b\x32\x14.conversation.Button\"\x97\x01\n\x0eGenericElement\x12\r\n\x05Title\x18\x01 \x01(\t\x12\x10\n\x08ImageUrl\x18\x02 \x01(\t\x12\x10\n\x08Subtitle\x18\x03 \x01(\t\x12+\n\rDefaultAction\x18\x04 \x01(\x0b\x32\x14.conversation.Button\x12%\n\x07\x42uttons\x18\x05 \x03(\x0b\x32\x14.conversation.Button\"A\n\x0fGenericTemplate\x12.\n\x08\x45lements\x18\x01 \x03(\x0b\x32\x1c.conversation.GenericElement\"\x16\n\x06\x42utton\x12\x0c\n\x04Type\x18\x01 \x01(\t\"5\n\tUrlButton\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\r\n\x05Title\x18\x02 \x01(\t\x12\x0b\n\x03Url\x18\x03 \x01(\t\"P\n\x0ePostbackButton\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\r\n\x05Title\x18\x02 \x01(\t\x12\x0f\n\x07Payload\x18\x03 \x01(\t\x12\x10\n\x08ImageUrl\x18\x04 \x01(\t\"\x0c\n\nCallButton\"\r\n\x0bLoginButton\"K\n\x0b\x45ventButton\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\r\n\x05Title\x18\x02 \x01(\t\x12\x10\n\x08ImageUrl\x18\x04 \x01(\t\x12\r\n\x05\x45vent\x18\x03 \x01(\t\"!\n\nSurveyForm\x12\x13\n\x0bPlaceholder\x18\x01 \x01(\t\" \n\x10RateFormTemplate\x12\x0c\n\x04Type\x18\x01 \x01(\t*)\n\x0cJoinOperator\x12\x08\n\x04None\x10\x00\x12\x07\n\x03\x41nd\x10\x01\x12\x06\n\x02Or\x10\x02*z\n\x0e\x41ssignStrategy\x12\r\n\tALLAGENTS\x10\x00\x12\x0e\n\nAGENTGROUP\x10\x02\x12\n\n\x06\x41GENTS\x10\x03\x12\x0e\n\nMOSTRECENT\x10\x04\x12\x17\n\x13ROUNDROBINALLAGENTS\x10\x05\x12\x14\n\x10ROUNDROBINAGENTS\x10\x06*\xa2\x01\n\rChatEventType\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07MESSAGE\x10\x01\x12\n\n\x06\x43LOSED\x10\x03\x12\x07\n\x03\x41\x44\x44\x10\x04\x12\x08\n\x04LEFT\x10\x05\x12\t\n\x05RATED\x10\x07\x12\t\n\x05INPUT\x10\x08\x12\x07\n\x03TAG\x10\t\x12\t\n\x05UNTAG\x10\n\x12\x0c\n\x08TRANSFER\x10\x0b\x12\x07\n\x03\x41\x43K\x10\x0c\x12\n\n\x06TYPING\x10\r\x12\x0e\n\nSTOPTYPING\x10\x0e*>\n\nDeviceType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06MOBILE\x10\x01\x12\n\n\x06TABLET\x10\x02\x12\x0b\n\x07\x44\x45SKTOP\x10\x03*\xa3\x04\n\x05\x45vent\x12\x18\n\x14\x43onversationAssigned\x10\x00\x12\x17\n\x13\x43onversationWaiting\x10\x02\x12\x1e\n\x1a\x43onversationStartRequested\x10\x03\x12\x18\n\x14\x43onversationAccepted\x10\x04\x12\x17\n\x13\x43onversationDropped\x10\x05\x12\x1c\n\x18\x43onversationEventCreated\x10\x06\x12\x1d\n\x19\x43onversationJoinRequested\x10\x07\x12 \n\x1c\x43onversationMessageRequested\x10\x08\x12\x1e\n\x1a\x43onversationLeaveRequested\x10\t\x12\x1e\n\x1a\x43onversationCloseRequested\x10\n\x12\x1c\n\x18\x43onversationTagRequested\x10\x0b\x12\x1e\n\x1a\x43onversationUntagRequested\x10\x0c\x12\x0f\n\x0bRuleUpdated\x10\x14\x12\x0f\n\x0bRuleCreated\x10\x15\x12\x0f\n\x0bRuleDeleted\x10\x16\x12\x0c\n\x08RuleRead\x10\x17\x12\x0c\n\x08RuleList\x10\x18\x12\x19\n\x15\x43hatUserInfoRequested\x10\x12\x12\x15\n\x11\x43hatUserInfoReply\x10\x13\x12\x19\n\x15\x43onversationSubscribe\x10\x1e\x12\x1b\n\x17\x43onversationUnsubscribe\x10\x1f')
+  serialized_pb=_b('\n\x1f\x63onversation/conversation.proto\x12\x0c\x63onversation\x1a\x37\x62itbucket.org/subiz/servicespec/proto/event/event.proto\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"-\n\x07\x41gentId\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\"C\n\x0c\x41gentInGroup\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x0f\n\x07GroupId\x18\x03 \x01(\t\"C\n\x0b\x41gentStatus\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x10\n\x08IsActive\x18\x03 \x01(\x08\"E\n\x07\x41\x63\x63ount\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02Id\x18\x02 \x01(\t\x12\x10\n\x08MaxRules\x18\x03 \x01(\x05\"\x14\n\x04\x42ool\x12\x0c\n\x04\x42ool\x18\x01 \x01(\x08\"L\n\x05Limit\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x11\n\tmax_rules\x18\x07 \x01(\x05\"\xfe\x01\n\x04Rule\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12.\n\x08strategy\x18\x05 \x01(\x0e\x32\x1c.conversation.AssignStrategy\x12\x12\n\nassign_tos\x18\x06 \x03(\t\x12+\n\nconditions\x18\x07 \x03(\x0b\x32\x17.conversation.Condition\x12\x0f\n\x07\x65nabled\x18\x08 \x01(\x08\x12\x14\n\x0c\x63reated_time\x18\t \x01(\x03\x12\x0f\n\x07prev_id\x18\n \x01(\t\x12\x0f\n\x07next_id\x18\x0b \x01(\t\"c\n\tCondition\x12(\n\x04join\x18\x01 \x01(\x0e\x32\x1a.conversation.JoinOperator\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\x10\n\x08operator\x18\x03 \x01(\t\x12\r\n\x05value\x18\x04 \x01(\t\"*\n\x05Route\x12!\n\x05Rules\x18\x01 \x03(\x0b\x32\x12.conversation.Rule\"_\n\x0bRouteResult\x12\x0e\n\x06RuleId\x18\x01 \x01(\t\x12.\n\x08Strategy\x18\x03 \x01(\x0e\x32\x1c.conversation.AssignStrategy\x12\x10\n\x08\x41gentIds\x18\x04 \x03(\t\"#\n\x10GroupDeleteEvent\x12\x0f\n\x07GroupId\x18\x01 \x01(\t\"6\n\x10GroupUpdateEvent\x12\x0f\n\x07GroupId\x18\x01 \x01(\t\x12\x11\n\tMemberIds\x18\x02 \x03(\t\"$\n\x11\x41gentDeletedEvent\x12\x0f\n\x07\x41gentId\x18\x01 \x01(\t\"J\n\x10\x41gentUpdateEvent\x12\x0f\n\x07\x41gentId\x18\x01 \x01(\t\x12\x10\n\x08IsActive\x18\x02 \x01(\x08\x12\x13\n\x0bIsConfirmed\x18\x03 \x01(\x08\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x01 \x03(\t\"\x93\x02\n\x0c\x43onversation\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x14\n\x0c\x63reated_time\x18\x04 \x01(\x03\x12\x18\n\x10last_active_time\x18\x05 \x01(\x03\x12\x13\n\x0b\x63losed_time\x18\x06 \x01(\x03\x12\x1a\n\x05users\x18\x07 \x03(\x0b\x32\x0b.event.User\x12\x12\n\nchannel_id\x18\t \x01(\t\x12\x0c\n\x04tags\x18\n \x03(\t\x12.\n\x05state\x18\x0b \x01(\x0e\x32\x1f.conversation.ConversationState\x12\x12\n\nrequest_id\x18\r \x01(\t\"3\n\x08Previews\x12\'\n\x08previews\x18\x01 \x03(\x0b\x32\x15.conversation.Preview\"t\n\x07Preview\x12\x30\n\x0c\x63onversation\x18\x01 \x01(\x0b\x32\x1a.conversation.Conversation\x12\'\n\x06\x65vents\x18\x02 \x03(\x0b\x32\x17.conversation.ChatEvent\x12\x0e\n\x06Unread\x18\x03 \x01(\x03\"+\n\nAttachment\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\x0f\n\x07Payload\x18\x02 \x01(\t\"5\n\nChatEvents\x12\'\n\x06\x45vents\x18\x01 \x03(\x0b\x32\x17.conversation.ChatEvent\"\x8d\x02\n\tChatEvent\x12\n\n\x02Id\x18\x01 \x01(\t\x12)\n\x04Type\x18\x02 \x01(\x0e\x32\x1b.conversation.ChatEventType\x12\x11\n\tAccountId\x18\x04 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x05 \x01(\t\x12\x10\n\x08SenderId\x18\x06 \x01(\t\x12#\n\nSenderType\x18\x07 \x01(\x0e\x32\x0f.event.UserType\x12\x0c\n\x04Text\x18\x08 \x01(\t\x12\x0e\n\x06\x46ormat\x18\t \x01(\t\x12-\n\x0b\x41ttachments\x18\n \x03(\x0b\x32\x18.conversation.Attachment\x12\r\n\x05State\x18\x0b \x01(\t\"\x99\x03\n\x0b\x43hatRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x12\n\nchannel_id\x18\x04 \x01(\t\x12\x12\n\nmessage_to\x18\x05 \x01(\t\x12\x10\n\x08page_url\x18\x06 \x01(\t\x12\x12\n\npage_title\x18\x07 \x01(\t\x12\x0f\n\x07message\x18\x08 \x01(\t\x12\x18\n\x10\x62rowser_language\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12-\n\x0b\x64\x65vice_type\x18\x0b \x01(\x0e\x32\x18.conversation.DeviceType\x12\x0f\n\x07user_id\x18\x0c \x01(\t\x12\x14\n\x0c\x63reated_time\x18\r \x01(\x03\x12\x17\n\x0f\x63onversation_id\x18\x0e \x01(\t\x12\n\n\x02ip\x18\x0f \x01(\t\x12\x0f\n\x07\x63ountry\x18\x10 \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\x11 \x01(\t\x12\x0c\n\x04\x63ity\x18\x12 \x01(\t\x12\x11\n\ttime_zone\x18\x13 \x01(\t\"B\n\rConversations\x12\x31\n\rconversations\x18\x01 \x03(\x0b\x32\x1a.conversation.Conversation\"t\n\tChatStart\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x10\n\x08\x61gent_id\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x12\n\nchannel_id\x18\x05 \x01(\t\"C\n\rAcceptRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\"M\n\x18ListUnassignChatsRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07StartId\x18\x02 \x01(\t\x12\r\n\x05Limit\x18\x03 \x01(\x05\"\x80\x01\n\x0cUnassignChat\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x12\n\nIsAssigned\x18\x02 \x01(\x08\x12\x0f\n\x07Message\x18\x03 \x01(\t\x12\n\n\x02Ip\x18\x04 \x01(\t\x12\x0c\n\x04Name\x18\x05 \x01(\t\x12\x0e\n\x06\x45mails\x18\x06 \x03(\t\x12\x0e\n\x06Phones\x18\x07 \x03(\t\"\x16\n\x05\x42ools\x12\r\n\x05\x42ools\x18\x01 \x03(\x08\"M\n\x16ListUsersUnreadRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x02 \x01(\t\x12\x0f\n\x07UserIds\x18\x03 \x03(\t\"(\n\x06Unread\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\x0e\n\x06Unread\x18\x02 \x01(\x05\"4\n\x0bUsersUnread\x12%\n\x07Unreads\x18\x01 \x03(\x0b\x32\x14.conversation.Unread\"Y\n\x14ListChatEventRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x02 \x01(\t\x12\x0f\n\x07StartId\x18\x03 \x01(\t\x12\r\n\x05Limit\x18\x04 \x01(\x05\"n\n\x16ListChatsByUserRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x11\n\tChannelId\x18\x02 \x01(\t\x12\x0e\n\x06UserId\x18\x03 \x01(\t\x12\x0f\n\x07StartId\x18\x04 \x01(\t\x12\r\n\x05Limit\x18\x05 \x01(\x05\"E\n\rOEChatDropped\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x02 \x01(\t\x12\x11\n\tChannelId\x18\x03 \x01(\t\"D\n\x0eOEChatAccepted\x12\x11\n\tAccountId\x18\x02 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\x12\x0f\n\x07\x41gentId\x18\x04 \x01(\t\"Z\n\rOEChatStarted\x12\x11\n\tAccountId\x18\x02 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x03 \x01(\t\x12\x11\n\tChannelId\x18\x04 \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\x05 \x01(\t\"e\n\x0c\x45vChatResult\x12\x11\n\tRequestId\x18\x01 \x01(\t\x12\n\n\x02Ok\x18\x02 \x01(\x08\x12\x0c\n\x04\x43ode\x18\x03 \x01(\x05\x12\x13\n\x0b\x43reatedTime\x18\x04 \x01(\t\x12\x13\n\x0b\x44\x65scription\x18\x05 \x01(\t\"\xa8\x02\n\x17\x45vChatUserInfoRequested\x12\x11\n\tRequestId\x18\x01 \x01(\t\x12\x0e\n\x06\x43hatId\x18\x02 \x01(\t\x12\x11\n\tAccountId\x18\x03 \x01(\t\x12\x11\n\tChannelId\x18\x04 \x01(\t\x12\x11\n\tMessageTo\x18\x05 \x01(\t\x12\x0f\n\x07PageUrl\x18\x06 \x01(\t\x12\x11\n\tPageTitle\x18\x07 \x01(\t\x12\x0f\n\x07Message\x18\x08 \x01(\t\x12\x17\n\x0f\x42rowserLanguage\x18\t \x01(\t\x12\x10\n\x08Language\x18\n \x01(\t\x12,\n\nDeviceType\x18\x0b \x01(\x0e\x32\x18.conversation.DeviceType\x12\x0e\n\x06UserId\x18\x0c \x01(\t\x12\x13\n\x0b\x43reatedTime\x18\r \x01(\t\"\x1a\n\x0c\x46ileTemplate\x12\n\n\x02Id\x18\x01 \x01(\t\"`\n\x14QuickRepliesTemplate\x12\x0c\n\x04Text\x18\x01 \x01(\t\x12\x13\n\x0b\x43ontentType\x18\x04 \x01(\t\x12%\n\x07Replies\x18\x05 \x03(\x0b\x32\x14.conversation.Button\"\x97\x01\n\x0eGenericElement\x12\r\n\x05Title\x18\x01 \x01(\t\x12\x10\n\x08ImageUrl\x18\x02 \x01(\t\x12\x10\n\x08Subtitle\x18\x03 \x01(\t\x12+\n\rDefaultAction\x18\x04 \x01(\x0b\x32\x14.conversation.Button\x12%\n\x07\x42uttons\x18\x05 \x03(\x0b\x32\x14.conversation.Button\"A\n\x0fGenericTemplate\x12.\n\x08\x45lements\x18\x01 \x03(\x0b\x32\x1c.conversation.GenericElement\"\x16\n\x06\x42utton\x12\x0c\n\x04Type\x18\x01 \x01(\t\"5\n\tUrlButton\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\r\n\x05Title\x18\x02 \x01(\t\x12\x0b\n\x03Url\x18\x03 \x01(\t\"P\n\x0ePostbackButton\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\r\n\x05Title\x18\x02 \x01(\t\x12\x0f\n\x07Payload\x18\x03 \x01(\t\x12\x10\n\x08ImageUrl\x18\x04 \x01(\t\"\x0c\n\nCallButton\"\r\n\x0bLoginButton\"K\n\x0b\x45ventButton\x12\x0c\n\x04Type\x18\x01 \x01(\t\x12\r\n\x05Title\x18\x02 \x01(\t\x12\x10\n\x08ImageUrl\x18\x04 \x01(\t\x12\r\n\x05\x45vent\x18\x03 \x01(\t\"!\n\nSurveyForm\x12\x13\n\x0bPlaceholder\x18\x01 \x01(\t\" \n\x10RateFormTemplate\x12\x0c\n\x04Type\x18\x01 \x01(\t\"O\n\x0cRequestState\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x17\n\x0f\x63onversation_id\x18\x02 \x01(\t\x12\x12\n\nchannel_id\x18\x03 \x01(\t*)\n\x0cJoinOperator\x12\x08\n\x04none\x10\x00\x12\x07\n\x03\x61nd\x10\x01\x12\x06\n\x02or\x10\x02*z\n\x0e\x41ssignStrategy\x12\r\n\tALLAGENTS\x10\x00\x12\x0e\n\nAGENTGROUP\x10\x02\x12\n\n\x06\x41GENTS\x10\x03\x12\x0e\n\nMOSTRECENT\x10\x04\x12\x17\n\x13ROUNDROBINALLAGENTS\x10\x05\x12\x14\n\x10ROUNDROBINAGENTS\x10\x06*J\n\x11\x43onversationState\x12\r\n\tassigning\x10\x00\x12\x0e\n\nunassigned\x10\x01\x12\n\n\x06opened\x10\x02\x12\n\n\x06\x63losed\x10\x03*\xa2\x01\n\rChatEventType\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07MESSAGE\x10\x01\x12\n\n\x06\x43LOSED\x10\x03\x12\x07\n\x03\x41\x44\x44\x10\x04\x12\x08\n\x04LEFT\x10\x05\x12\t\n\x05RATED\x10\x07\x12\t\n\x05INPUT\x10\x08\x12\x07\n\x03TAG\x10\t\x12\t\n\x05UNTAG\x10\n\x12\x0c\n\x08TRANSFER\x10\x0b\x12\x07\n\x03\x41\x43K\x10\x0c\x12\n\n\x06TYPING\x10\r\x12\x0e\n\nSTOPTYPING\x10\x0e*>\n\nDeviceType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06MOBILE\x10\x01\x12\n\n\x06TABLET\x10\x02\x12\x0b\n\x07\x44\x45SKTOP\x10\x03*\xac\x05\n\x05\x45vent\x12\x18\n\x14\x43onversationAssigned\x10\x00\x12\x17\n\x13\x43onversationWaiting\x10\x02\x12\x1e\n\x1a\x43onversationStartRequested\x10\x03\x12\x18\n\x14\x43onversationAccepted\x10\x04\x12\x17\n\x13\x43onversationDropped\x10\x05\x12\x1c\n\x18\x43onversationEventCreated\x10\x06\x12\x1d\n\x19\x43onversationJoinRequested\x10\x07\x12 \n\x1c\x43onversationMessageRequested\x10\x08\x12\x1e\n\x1a\x43onversationLeaveRequested\x10\t\x12\x1e\n\x1a\x43onversationCloseRequested\x10\n\x12\x1c\n\x18\x43onversationTagRequested\x10\x0b\x12\x1e\n\x1a\x43onversationUntagRequested\x10\x0c\x12#\n\x1f\x43onversationUpdateRuleRequested\x10\x14\x12#\n\x1f\x43onversationCreateRuleRequested\x10\x15\x12#\n\x1f\x43onversationDeleteRuleRequested\x10\x16\x12!\n\x1d\x43onversationReadRuleRequested\x10\x17\x12!\n\x1d\x43onversationListRuleRequested\x10\x18\x12\x19\n\x15\x43hatUserInfoRequested\x10\x12\x12\x15\n\x11\x43hatUserInfoReply\x10\x13\x12\x19\n\x15\x43onversationRequested\x10\x32\x12 \n\x1c\x43onversationUserRequestReply\x10\x33\x12\x1c\n\x18\x43onversationLimitUpdated\x10\x34')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_event_dot_event__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -33,22 +33,22 @@ _JOINOPERATOR = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='None', index=0, number=0,
+      name='none', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='And', index=1, number=1,
+      name='and', index=1, number=1,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Or', index=2, number=2,
+      name='or', index=2, number=2,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=6154,
-  serialized_end=6195,
+  serialized_start=4814,
+  serialized_end=4855,
 )
 _sym_db.RegisterEnumDescriptor(_JOINOPERATOR)
 
@@ -86,12 +86,43 @@ _ASSIGNSTRATEGY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6197,
-  serialized_end=6319,
+  serialized_start=4857,
+  serialized_end=4979,
 )
 _sym_db.RegisterEnumDescriptor(_ASSIGNSTRATEGY)
 
 AssignStrategy = enum_type_wrapper.EnumTypeWrapper(_ASSIGNSTRATEGY)
+_CONVERSATIONSTATE = _descriptor.EnumDescriptor(
+  name='ConversationState',
+  full_name='conversation.ConversationState',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='assigning', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='unassigned', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='opened', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='closed', index=3, number=3,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=4981,
+  serialized_end=5055,
+)
+_sym_db.RegisterEnumDescriptor(_CONVERSATIONSTATE)
+
+ConversationState = enum_type_wrapper.EnumTypeWrapper(_CONVERSATIONSTATE)
 _CHATEVENTTYPE = _descriptor.EnumDescriptor(
   name='ChatEventType',
   full_name='conversation.ChatEventType',
@@ -153,8 +184,8 @@ _CHATEVENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6322,
-  serialized_end=6484,
+  serialized_start=5058,
+  serialized_end=5220,
 )
 _sym_db.RegisterEnumDescriptor(_CHATEVENTTYPE)
 
@@ -184,8 +215,8 @@ _DEVICETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=6486,
-  serialized_end=6548,
+  serialized_start=5222,
+  serialized_end=5284,
 )
 _sym_db.RegisterEnumDescriptor(_DEVICETYPE)
 
@@ -245,23 +276,23 @@ _EVENT = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RuleUpdated', index=12, number=20,
+      name='ConversationUpdateRuleRequested', index=12, number=20,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RuleCreated', index=13, number=21,
+      name='ConversationCreateRuleRequested', index=13, number=21,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RuleDeleted', index=14, number=22,
+      name='ConversationDeleteRuleRequested', index=14, number=22,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RuleRead', index=15, number=23,
+      name='ConversationReadRuleRequested', index=15, number=23,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RuleList', index=16, number=24,
+      name='ConversationListRuleRequested', index=16, number=24,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -273,31 +304,39 @@ _EVENT = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ConversationSubscribe', index=19, number=30,
+      name='ConversationRequested', index=19, number=50,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ConversationUnsubscribe', index=20, number=31,
+      name='ConversationUserRequestReply', index=20, number=51,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ConversationLimitUpdated', index=21, number=52,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=6551,
-  serialized_end=7098,
+  serialized_start=5287,
+  serialized_end=5971,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
 Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
-None = 0
-And = 1
-Or = 2
+none = 0
+and = 1
+or = 2
 ALLAGENTS = 0
 AGENTGROUP = 2
 AGENTS = 3
 MOSTRECENT = 4
 ROUNDROBINALLAGENTS = 5
 ROUNDROBINAGENTS = 6
+assigning = 0
+unassigned = 1
+opened = 2
+closed = 3
 NONE = 0
 MESSAGE = 1
 CLOSED = 3
@@ -327,155 +366,17 @@ ConversationLeaveRequested = 9
 ConversationCloseRequested = 10
 ConversationTagRequested = 11
 ConversationUntagRequested = 12
-RuleUpdated = 20
-RuleCreated = 21
-RuleDeleted = 22
-RuleRead = 23
-RuleList = 24
+ConversationUpdateRuleRequested = 20
+ConversationCreateRuleRequested = 21
+ConversationDeleteRuleRequested = 22
+ConversationReadRuleRequested = 23
+ConversationListRuleRequested = 24
 ChatUserInfoRequested = 18
 ChatUserInfoReply = 19
-ConversationSubscribe = 30
-ConversationUnsubscribe = 31
+ConversationRequested = 50
+ConversationUserRequestReply = 51
+ConversationLimitUpdated = 52
 
-
-
-_UNASSIGNEDCONVERSATION = _descriptor.Descriptor(
-  name='UnassignedConversation',
-  full_name='conversation.UnassignedConversation',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='account_id', full_name='conversation.UnassignedConversation.account_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='id', full_name='conversation.UnassignedConversation.id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='channel_id', full_name='conversation.UnassignedConversation.channel_id', index=2,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='message_to', full_name='conversation.UnassignedConversation.message_to', index=3,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='page_url', full_name='conversation.UnassignedConversation.page_url', index=4,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='page_title', full_name='conversation.UnassignedConversation.page_title', index=5,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='message', full_name='conversation.UnassignedConversation.message', index=6,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='browser_language', full_name='conversation.UnassignedConversation.browser_language', index=7,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='language', full_name='conversation.UnassignedConversation.language', index=8,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='device_type', full_name='conversation.UnassignedConversation.device_type', index=9,
-      number=11, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='user', full_name='conversation.UnassignedConversation.user', index=10,
-      number=12, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='created_time', full_name='conversation.UnassignedConversation.created_time', index=11,
-      number=13, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=166,
-  serialized_end=468,
-)
-
-
-_UNASSIGNEDCHATS = _descriptor.Descriptor(
-  name='UnassignedChats',
-  full_name='conversation.UnassignedChats',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='chats', full_name='conversation.UnassignedChats.chats', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=470,
-  serialized_end=540,
-)
 
 
 _ID = _descriptor.Descriptor(
@@ -518,8 +419,8 @@ _ID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=542,
-  serialized_end=608,
+  serialized_start=165,
+  serialized_end=231,
 )
 
 
@@ -556,8 +457,8 @@ _AGENTID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=610,
-  serialized_end=655,
+  serialized_start=233,
+  serialized_end=278,
 )
 
 
@@ -601,8 +502,8 @@ _AGENTINGROUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=657,
-  serialized_end=724,
+  serialized_start=280,
+  serialized_end=347,
 )
 
 
@@ -646,8 +547,8 @@ _AGENTSTATUS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=726,
-  serialized_end=793,
+  serialized_start=349,
+  serialized_end=416,
 )
 
 
@@ -691,8 +592,8 @@ _ACCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=795,
-  serialized_end=864,
+  serialized_start=418,
+  serialized_end=487,
 )
 
 
@@ -722,29 +623,36 @@ _BOOL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=866,
-  serialized_end=886,
+  serialized_start=489,
+  serialized_end=509,
 )
 
 
-_RULEID = _descriptor.Descriptor(
-  name='RuleId',
-  full_name='conversation.RuleId',
+_LIMIT = _descriptor.Descriptor(
+  name='Limit',
+  full_name='conversation.Limit',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='conversation.RuleId.AccountId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='ctx', full_name='conversation.Limit.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='conversation.Limit.account_id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Id', full_name='conversation.RuleId.Id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='max_rules', full_name='conversation.Limit.max_rules', index=2,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -760,39 +668,8 @@ _RULEID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=888,
-  serialized_end=927,
-)
-
-
-_IDX = _descriptor.Descriptor(
-  name='Idx',
-  full_name='conversation.Idx',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='conversation.Idx.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=929,
-  serialized_end=946,
+  serialized_start=511,
+  serialized_end=587,
 )
 
 
@@ -825,44 +702,51 @@ _RULE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='priority', full_name='conversation.Rule.priority', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='strategy', full_name='conversation.Rule.strategy', index=4,
+      name='strategy', full_name='conversation.Rule.strategy', index=3,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='assign_tos', full_name='conversation.Rule.assign_tos', index=5,
+      name='assign_tos', full_name='conversation.Rule.assign_tos', index=4,
       number=6, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='conditions', full_name='conversation.Rule.conditions', index=6,
+      name='conditions', full_name='conversation.Rule.conditions', index=5,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='enabled', full_name='conversation.Rule.enabled', index=7,
+      name='enabled', full_name='conversation.Rule.enabled', index=6,
       number=8, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='created_time', full_name='conversation.Rule.created_time', index=8,
+      name='created_time', full_name='conversation.Rule.created_time', index=7,
       number=9, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='prev_id', full_name='conversation.Rule.prev_id', index=8,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='next_id', full_name='conversation.Rule.next_id', index=9,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -878,8 +762,8 @@ _RULE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=949,
-  serialized_end=1187,
+  serialized_start=590,
+  serialized_end=844,
 )
 
 
@@ -891,28 +775,28 @@ _CONDITION = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Join', full_name='conversation.Condition.Join', index=0,
+      name='join', full_name='conversation.Condition.join', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Key', full_name='conversation.Condition.Key', index=1,
+      name='key', full_name='conversation.Condition.key', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Operator', full_name='conversation.Condition.Operator', index=2,
+      name='operator', full_name='conversation.Condition.operator', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Value', full_name='conversation.Condition.Value', index=3,
+      name='value', full_name='conversation.Condition.value', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -930,8 +814,8 @@ _CONDITION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1189,
-  serialized_end=1288,
+  serialized_start=846,
+  serialized_end=945,
 )
 
 
@@ -961,8 +845,8 @@ _ROUTE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1290,
-  serialized_end=1332,
+  serialized_start=947,
+  serialized_end=989,
 )
 
 
@@ -1006,8 +890,8 @@ _ROUTERESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1334,
-  serialized_end=1429,
+  serialized_start=991,
+  serialized_end=1086,
 )
 
 
@@ -1037,8 +921,8 @@ _GROUPDELETEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1431,
-  serialized_end=1466,
+  serialized_start=1088,
+  serialized_end=1123,
 )
 
 
@@ -1075,8 +959,8 @@ _GROUPUPDATEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1468,
-  serialized_end=1522,
+  serialized_start=1125,
+  serialized_end=1179,
 )
 
 
@@ -1106,8 +990,8 @@ _AGENTDELETEDEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1524,
-  serialized_end=1560,
+  serialized_start=1181,
+  serialized_end=1217,
 )
 
 
@@ -1151,8 +1035,8 @@ _AGENTUPDATEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1562,
-  serialized_end=1636,
+  serialized_start=1219,
+  serialized_end=1293,
 )
 
 
@@ -1182,8 +1066,8 @@ _IDS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1638,
-  serialized_end=1656,
+  serialized_start=1295,
+  serialized_end=1313,
 )
 
 
@@ -1195,58 +1079,79 @@ _CONVERSATION = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='conversation.Conversation.id', index=0,
+      name='ctx', full_name='conversation.Conversation.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='conversation.Conversation.id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='account_id', full_name='conversation.Conversation.account_id', index=1,
+      name='account_id', full_name='conversation.Conversation.account_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='created_time', full_name='conversation.Conversation.created_time', index=2,
+      name='created_time', full_name='conversation.Conversation.created_time', index=3,
       number=4, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='last_active_time', full_name='conversation.Conversation.last_active_time', index=3,
+      name='last_active_time', full_name='conversation.Conversation.last_active_time', index=4,
       number=5, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='closed_time', full_name='conversation.Conversation.closed_time', index=4,
+      name='closed_time', full_name='conversation.Conversation.closed_time', index=5,
       number=6, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='users', full_name='conversation.Conversation.users', index=5,
+      name='users', full_name='conversation.Conversation.users', index=6,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='channel_id', full_name='conversation.Conversation.channel_id', index=6,
+      name='channel_id', full_name='conversation.Conversation.channel_id', index=7,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='tags', full_name='conversation.Conversation.tags', index=7,
+      name='tags', full_name='conversation.Conversation.tags', index=8,
       number=10, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='state', full_name='conversation.Conversation.state', index=9,
+      number=11, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='request_id', full_name='conversation.Conversation.request_id', index=10,
+      number=13, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -1262,8 +1167,8 @@ _CONVERSATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1659,
-  serialized_end=1836,
+  serialized_start=1316,
+  serialized_end=1591,
 )
 
 
@@ -1293,8 +1198,8 @@ _PREVIEWS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1838,
-  serialized_end=1889,
+  serialized_start=1593,
+  serialized_end=1644,
 )
 
 
@@ -1338,8 +1243,8 @@ _PREVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1891,
-  serialized_end=2007,
+  serialized_start=1646,
+  serialized_end=1762,
 )
 
 
@@ -1376,8 +1281,8 @@ _ATTACHMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2009,
-  serialized_end=2052,
+  serialized_start=1764,
+  serialized_end=1807,
 )
 
 
@@ -1407,8 +1312,8 @@ _CHATEVENTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2054,
-  serialized_end=2107,
+  serialized_start=1809,
+  serialized_end=1862,
 )
 
 
@@ -1508,245 +1413,8 @@ _CHATEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2110,
-  serialized_end=2379,
-)
-
-
-_USERINFO = _descriptor.Descriptor(
-  name='UserInfo',
-  full_name='conversation.UserInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='conversation.UserInfo.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Name', full_name='conversation.UserInfo.Name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Emails', full_name='conversation.UserInfo.Emails', index=2,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Phones', full_name='conversation.UserInfo.Phones', index=3,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Country', full_name='conversation.UserInfo.Country', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='CountryCode', full_name='conversation.UserInfo.CountryCode', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='City', full_name='conversation.UserInfo.City', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='TimeZone', full_name='conversation.UserInfo.TimeZone', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Segment', full_name='conversation.UserInfo.Segment', index=8,
-      number=9, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Label', full_name='conversation.UserInfo.Label', index=9,
-      number=10, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Unsubscribed', full_name='conversation.UserInfo.Unsubscribed', index=10,
-      number=11, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='MarkedSpam', full_name='conversation.UserInfo.MarkedSpam', index=11,
-      number=12, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='HardBounced', full_name='conversation.UserInfo.HardBounced', index=12,
-      number=13, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='TotalSessions', full_name='conversation.UserInfo.TotalSessions', index=13,
-      number=14, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2382,
-  serialized_end=2638,
-)
-
-
-_CHATREQUESTACK = _descriptor.Descriptor(
-  name='ChatRequestAck',
-  full_name='conversation.ChatRequestAck',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='RequestId', full_name='conversation.ChatRequestAck.RequestId', index=0,
-      number=15, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChatId', full_name='conversation.ChatRequestAck.ChatId', index=1,
-      number=14, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='conversation.ChatRequestAck.AccountId', index=2,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChannelId', full_name='conversation.ChatRequestAck.ChannelId', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='MessageTo', full_name='conversation.ChatRequestAck.MessageTo', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='PageUrl', full_name='conversation.ChatRequestAck.PageUrl', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='PageTitle', full_name='conversation.ChatRequestAck.PageTitle', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Message', full_name='conversation.ChatRequestAck.Message', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='BrowserLanguage', full_name='conversation.ChatRequestAck.BrowserLanguage', index=8,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Language', full_name='conversation.ChatRequestAck.Language', index=9,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='DeviceType', full_name='conversation.ChatRequestAck.DeviceType', index=10,
-      number=11, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='User', full_name='conversation.ChatRequestAck.User', index=11,
-      number=12, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='CreatedTime', full_name='conversation.ChatRequestAck.CreatedTime', index=12,
-      number=13, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2641,
-  serialized_end=2950,
+  serialized_start=1865,
+  serialized_end=2134,
 )
 
 
@@ -1758,78 +1426,134 @@ _CHATREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='conversation.ChatRequest.AccountId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='ctx', full_name='conversation.ChatRequest.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='conversation.ChatRequest.id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ChannelId', full_name='conversation.ChatRequest.ChannelId', index=1,
+      name='account_id', full_name='conversation.ChatRequest.account_id', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_id', full_name='conversation.ChatRequest.channel_id', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MessageTo', full_name='conversation.ChatRequest.MessageTo', index=2,
+      name='message_to', full_name='conversation.ChatRequest.message_to', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='PageUrl', full_name='conversation.ChatRequest.PageUrl', index=3,
+      name='page_url', full_name='conversation.ChatRequest.page_url', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='PageTitle', full_name='conversation.ChatRequest.PageTitle', index=4,
+      name='page_title', full_name='conversation.ChatRequest.page_title', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Message', full_name='conversation.ChatRequest.Message', index=5,
+      name='message', full_name='conversation.ChatRequest.message', index=7,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='BrowserLanguage', full_name='conversation.ChatRequest.BrowserLanguage', index=6,
+      name='browser_language', full_name='conversation.ChatRequest.browser_language', index=8,
       number=9, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Language', full_name='conversation.ChatRequest.Language', index=7,
+      name='language', full_name='conversation.ChatRequest.language', index=9,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='DeviceType', full_name='conversation.ChatRequest.DeviceType', index=8,
+      name='device_type', full_name='conversation.ChatRequest.device_type', index=10,
       number=11, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='User', full_name='conversation.ChatRequest.User', index=9,
-      number=12, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='user_id', full_name='conversation.ChatRequest.user_id', index=11,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='CreatedTime', full_name='conversation.ChatRequest.CreatedTime', index=10,
-      number=13, type=9, cpp_type=9, label=1,
+      name='created_time', full_name='conversation.ChatRequest.created_time', index=12,
+      number=13, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='conversation_id', full_name='conversation.ChatRequest.conversation_id', index=13,
+      number=14, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='conversation.ChatRequest.ip', index=14,
+      number=15, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='country', full_name='conversation.ChatRequest.country', index=15,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='country_code', full_name='conversation.ChatRequest.country_code', index=16,
+      number=17, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='city', full_name='conversation.ChatRequest.city', index=17,
+      number=18, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='time_zone', full_name='conversation.ChatRequest.time_zone', index=18,
+      number=19, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1846,8 +1570,8 @@ _CHATREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2953,
-  serialized_end=3224,
+  serialized_start=2137,
+  serialized_end=2546,
 )
 
 
@@ -1877,8 +1601,8 @@ _CONVERSATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3226,
-  serialized_end=3292,
+  serialized_start=2548,
+  serialized_end=2614,
 )
 
 
@@ -1936,8 +1660,8 @@ _CHATSTART = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3294,
-  serialized_end=3410,
+  serialized_start=2616,
+  serialized_end=2732,
 )
 
 
@@ -1981,8 +1705,8 @@ _ACCEPTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3412,
-  serialized_end=3479,
+  serialized_start=2734,
+  serialized_end=2801,
 )
 
 
@@ -2026,8 +1750,8 @@ _LISTUNASSIGNCHATSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3481,
-  serialized_end=3558,
+  serialized_start=2803,
+  serialized_end=2880,
 )
 
 
@@ -2099,8 +1823,8 @@ _UNASSIGNCHAT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3561,
-  serialized_end=3689,
+  serialized_start=2883,
+  serialized_end=3011,
 )
 
 
@@ -2130,8 +1854,8 @@ _BOOLS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3691,
-  serialized_end=3713,
+  serialized_start=3013,
+  serialized_end=3035,
 )
 
 
@@ -2175,8 +1899,8 @@ _LISTUSERSUNREADREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3715,
-  serialized_end=3792,
+  serialized_start=3037,
+  serialized_end=3114,
 )
 
 
@@ -2213,8 +1937,8 @@ _UNREAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3794,
-  serialized_end=3834,
+  serialized_start=3116,
+  serialized_end=3156,
 )
 
 
@@ -2244,8 +1968,8 @@ _USERSUNREAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3836,
-  serialized_end=3888,
+  serialized_start=3158,
+  serialized_end=3210,
 )
 
 
@@ -2296,8 +2020,8 @@ _LISTCHATEVENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3890,
-  serialized_end=3979,
+  serialized_start=3212,
+  serialized_end=3301,
 )
 
 
@@ -2355,213 +2079,8 @@ _LISTCHATSBYUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3981,
-  serialized_end=4091,
-)
-
-
-_OECHATASSIGNED = _descriptor.Descriptor(
-  name='OEChatAssigned',
-  full_name='conversation.OEChatAssigned',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ChatId', full_name='conversation.OEChatAssigned.ChatId', index=0,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='conversation.OEChatAssigned.AccountId', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='CreatedTime', full_name='conversation.OEChatAssigned.CreatedTime', index=2,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Users', full_name='conversation.OEChatAssigned.Users', index=3,
-      number=6, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChannelId', full_name='conversation.OEChatAssigned.ChannelId', index=4,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Tags', full_name='conversation.OEChatAssigned.Tags', index=5,
-      number=8, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4094,
-  serialized_end=4227,
-)
-
-
-_OECHATWAITING = _descriptor.Descriptor(
-  name='OEChatWaiting',
-  full_name='conversation.OEChatWaiting',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ChatId', full_name='conversation.OEChatWaiting.ChatId', index=0,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='conversation.OEChatWaiting.AccountId', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='User', full_name='conversation.OEChatWaiting.User', index=2,
-      number=6, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChannelId', full_name='conversation.OEChatWaiting.ChannelId', index=3,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Tags', full_name='conversation.OEChatWaiting.Tags', index=4,
-      number=8, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4229,
-  serialized_end=4350,
-)
-
-
-_EVCHATCREATED = _descriptor.Descriptor(
-  name='EvChatCreated',
-  full_name='conversation.EvChatCreated',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='RequestId', full_name='conversation.EvChatCreated.RequestId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Ok', full_name='conversation.EvChatCreated.Ok', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Event', full_name='conversation.EvChatCreated.Event', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='conversation.EvChatCreated.AccountId', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChatId', full_name='conversation.EvChatCreated.ChatId', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Users', full_name='conversation.EvChatCreated.Users', index=5,
-      number=6, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChannelId', full_name='conversation.EvChatCreated.ChannelId', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='CreatedTime', full_name='conversation.EvChatCreated.CreatedTime', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=4353,
-  serialized_end=4517,
+  serialized_start=3303,
+  serialized_end=3413,
 )
 
 
@@ -2605,8 +2124,8 @@ _OECHATDROPPED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4519,
-  serialized_end=4588,
+  serialized_start=3415,
+  serialized_end=3484,
 )
 
 
@@ -2650,8 +2169,8 @@ _OECHATACCEPTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4590,
-  serialized_end=4658,
+  serialized_start=3486,
+  serialized_end=3554,
 )
 
 
@@ -2702,8 +2221,8 @@ _OECHATSTARTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4660,
-  serialized_end=4750,
+  serialized_start=3556,
+  serialized_end=3646,
 )
 
 
@@ -2761,8 +2280,8 @@ _EVCHATRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4752,
-  serialized_end=4853,
+  serialized_start=3648,
+  serialized_end=3749,
 )
 
 
@@ -2876,123 +2395,8 @@ _EVCHATUSERINFOREQUESTED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4856,
-  serialized_end=5152,
-)
-
-
-_EVCHATUSERINFOREPLY = _descriptor.Descriptor(
-  name='EvChatUserInfoReply',
-  full_name='conversation.EvChatUserInfoReply',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='RequestId', full_name='conversation.EvChatUserInfoReply.RequestId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChatId', full_name='conversation.EvChatUserInfoReply.ChatId', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='conversation.EvChatUserInfoReply.AccountId', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ChannelId', full_name='conversation.EvChatUserInfoReply.ChannelId', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='MessageTo', full_name='conversation.EvChatUserInfoReply.MessageTo', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='PageUrl', full_name='conversation.EvChatUserInfoReply.PageUrl', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='PageTitle', full_name='conversation.EvChatUserInfoReply.PageTitle', index=6,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Message', full_name='conversation.EvChatUserInfoReply.Message', index=7,
-      number=8, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='BrowserLanguage', full_name='conversation.EvChatUserInfoReply.BrowserLanguage', index=8,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Language', full_name='conversation.EvChatUserInfoReply.Language', index=9,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='DeviceType', full_name='conversation.EvChatUserInfoReply.DeviceType', index=10,
-      number=11, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='User', full_name='conversation.EvChatUserInfoReply.User', index=11,
-      number=12, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='CreatedTime', full_name='conversation.EvChatUserInfoReply.CreatedTime', index=12,
-      number=13, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=5155,
-  serialized_end=5469,
+  serialized_start=3752,
+  serialized_end=4048,
 )
 
 
@@ -3022,8 +2426,8 @@ _FILETEMPLATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5471,
-  serialized_end=5497,
+  serialized_start=4050,
+  serialized_end=4076,
 )
 
 
@@ -3067,8 +2471,8 @@ _QUICKREPLIESTEMPLATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5499,
-  serialized_end=5595,
+  serialized_start=4078,
+  serialized_end=4174,
 )
 
 
@@ -3126,8 +2530,8 @@ _GENERICELEMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5598,
-  serialized_end=5749,
+  serialized_start=4177,
+  serialized_end=4328,
 )
 
 
@@ -3157,8 +2561,8 @@ _GENERICTEMPLATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5751,
-  serialized_end=5816,
+  serialized_start=4330,
+  serialized_end=4395,
 )
 
 
@@ -3188,8 +2592,8 @@ _BUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5818,
-  serialized_end=5840,
+  serialized_start=4397,
+  serialized_end=4419,
 )
 
 
@@ -3233,8 +2637,8 @@ _URLBUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5842,
-  serialized_end=5895,
+  serialized_start=4421,
+  serialized_end=4474,
 )
 
 
@@ -3285,8 +2689,8 @@ _POSTBACKBUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5897,
-  serialized_end=5977,
+  serialized_start=4476,
+  serialized_end=4556,
 )
 
 
@@ -3309,8 +2713,8 @@ _CALLBUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5979,
-  serialized_end=5991,
+  serialized_start=4558,
+  serialized_end=4570,
 )
 
 
@@ -3333,8 +2737,8 @@ _LOGINBUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5993,
-  serialized_end=6006,
+  serialized_start=4572,
+  serialized_end=4585,
 )
 
 
@@ -3385,8 +2789,8 @@ _EVENTBUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6008,
-  serialized_end=6083,
+  serialized_start=4587,
+  serialized_end=4662,
 )
 
 
@@ -3416,8 +2820,8 @@ _SURVEYFORM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6085,
-  serialized_end=6118,
+  serialized_start=4664,
+  serialized_end=4697,
 )
 
 
@@ -3447,22 +2851,67 @@ _RATEFORMTEMPLATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6120,
-  serialized_end=6152,
+  serialized_start=4699,
+  serialized_end=4731,
 )
 
-_UNASSIGNEDCONVERSATION.fields_by_name['device_type'].enum_type = _DEVICETYPE
-_UNASSIGNEDCONVERSATION.fields_by_name['user'].message_type = _USERINFO
-_UNASSIGNEDCHATS.fields_by_name['chats'].message_type = _UNASSIGNEDCONVERSATION
+
+_REQUESTSTATE = _descriptor.Descriptor(
+  name='RequestState',
+  full_name='conversation.RequestState',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='conversation.RequestState.account_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='conversation_id', full_name='conversation.RequestState.conversation_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_id', full_name='conversation.RequestState.channel_id', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4733,
+  serialized_end=4812,
+)
+
 _ID.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _ACCOUNT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_LIMIT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _RULE.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _RULE.fields_by_name['strategy'].enum_type = _ASSIGNSTRATEGY
 _RULE.fields_by_name['conditions'].message_type = _CONDITION
-_CONDITION.fields_by_name['Join'].enum_type = _JOINOPERATOR
+_CONDITION.fields_by_name['join'].enum_type = _JOINOPERATOR
 _ROUTE.fields_by_name['Rules'].message_type = _RULE
 _ROUTERESULT.fields_by_name['Strategy'].enum_type = _ASSIGNSTRATEGY
+_CONVERSATION.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _CONVERSATION.fields_by_name['users'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_event_dot_event__pb2._USER
+_CONVERSATION.fields_by_name['state'].enum_type = _CONVERSATIONSTATE
 _PREVIEWS.fields_by_name['previews'].message_type = _PREVIEW
 _PREVIEW.fields_by_name['conversation'].message_type = _CONVERSATION
 _PREVIEW.fields_by_name['events'].message_type = _CHATEVENT
@@ -3470,33 +2919,23 @@ _CHATEVENTS.fields_by_name['Events'].message_type = _CHATEVENT
 _CHATEVENT.fields_by_name['Type'].enum_type = _CHATEVENTTYPE
 _CHATEVENT.fields_by_name['SenderType'].enum_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_event_dot_event__pb2._USERTYPE
 _CHATEVENT.fields_by_name['Attachments'].message_type = _ATTACHMENT
-_CHATREQUESTACK.fields_by_name['DeviceType'].enum_type = _DEVICETYPE
-_CHATREQUESTACK.fields_by_name['User'].message_type = _USERINFO
-_CHATREQUEST.fields_by_name['DeviceType'].enum_type = _DEVICETYPE
-_CHATREQUEST.fields_by_name['User'].message_type = _USERINFO
+_CHATREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_CHATREQUEST.fields_by_name['device_type'].enum_type = _DEVICETYPE
 _CONVERSATIONS.fields_by_name['conversations'].message_type = _CONVERSATION
 _CHATSTART.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _USERSUNREAD.fields_by_name['Unreads'].message_type = _UNREAD
-_OECHATASSIGNED.fields_by_name['Users'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_event_dot_event__pb2._USER
-_OECHATWAITING.fields_by_name['User'].message_type = _USERINFO
-_EVCHATCREATED.fields_by_name['Users'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_event_dot_event__pb2._USER
 _EVCHATUSERINFOREQUESTED.fields_by_name['DeviceType'].enum_type = _DEVICETYPE
-_EVCHATUSERINFOREPLY.fields_by_name['DeviceType'].enum_type = _DEVICETYPE
-_EVCHATUSERINFOREPLY.fields_by_name['User'].message_type = _USERINFO
 _QUICKREPLIESTEMPLATE.fields_by_name['Replies'].message_type = _BUTTON
 _GENERICELEMENT.fields_by_name['DefaultAction'].message_type = _BUTTON
 _GENERICELEMENT.fields_by_name['Buttons'].message_type = _BUTTON
 _GENERICTEMPLATE.fields_by_name['Elements'].message_type = _GENERICELEMENT
-DESCRIPTOR.message_types_by_name['UnassignedConversation'] = _UNASSIGNEDCONVERSATION
-DESCRIPTOR.message_types_by_name['UnassignedChats'] = _UNASSIGNEDCHATS
 DESCRIPTOR.message_types_by_name['Id'] = _ID
 DESCRIPTOR.message_types_by_name['AgentId'] = _AGENTID
 DESCRIPTOR.message_types_by_name['AgentInGroup'] = _AGENTINGROUP
 DESCRIPTOR.message_types_by_name['AgentStatus'] = _AGENTSTATUS
 DESCRIPTOR.message_types_by_name['Account'] = _ACCOUNT
 DESCRIPTOR.message_types_by_name['Bool'] = _BOOL
-DESCRIPTOR.message_types_by_name['RuleId'] = _RULEID
-DESCRIPTOR.message_types_by_name['Idx'] = _IDX
+DESCRIPTOR.message_types_by_name['Limit'] = _LIMIT
 DESCRIPTOR.message_types_by_name['Rule'] = _RULE
 DESCRIPTOR.message_types_by_name['Condition'] = _CONDITION
 DESCRIPTOR.message_types_by_name['Route'] = _ROUTE
@@ -3512,8 +2951,6 @@ DESCRIPTOR.message_types_by_name['Preview'] = _PREVIEW
 DESCRIPTOR.message_types_by_name['Attachment'] = _ATTACHMENT
 DESCRIPTOR.message_types_by_name['ChatEvents'] = _CHATEVENTS
 DESCRIPTOR.message_types_by_name['ChatEvent'] = _CHATEVENT
-DESCRIPTOR.message_types_by_name['UserInfo'] = _USERINFO
-DESCRIPTOR.message_types_by_name['ChatRequestAck'] = _CHATREQUESTACK
 DESCRIPTOR.message_types_by_name['ChatRequest'] = _CHATREQUEST
 DESCRIPTOR.message_types_by_name['Conversations'] = _CONVERSATIONS
 DESCRIPTOR.message_types_by_name['ChatStart'] = _CHATSTART
@@ -3526,15 +2963,11 @@ DESCRIPTOR.message_types_by_name['Unread'] = _UNREAD
 DESCRIPTOR.message_types_by_name['UsersUnread'] = _USERSUNREAD
 DESCRIPTOR.message_types_by_name['ListChatEventRequest'] = _LISTCHATEVENTREQUEST
 DESCRIPTOR.message_types_by_name['ListChatsByUserRequest'] = _LISTCHATSBYUSERREQUEST
-DESCRIPTOR.message_types_by_name['OEChatAssigned'] = _OECHATASSIGNED
-DESCRIPTOR.message_types_by_name['OEChatWaiting'] = _OECHATWAITING
-DESCRIPTOR.message_types_by_name['EvChatCreated'] = _EVCHATCREATED
 DESCRIPTOR.message_types_by_name['OEChatDropped'] = _OECHATDROPPED
 DESCRIPTOR.message_types_by_name['OEChatAccepted'] = _OECHATACCEPTED
 DESCRIPTOR.message_types_by_name['OEChatStarted'] = _OECHATSTARTED
 DESCRIPTOR.message_types_by_name['EvChatResult'] = _EVCHATRESULT
 DESCRIPTOR.message_types_by_name['EvChatUserInfoRequested'] = _EVCHATUSERINFOREQUESTED
-DESCRIPTOR.message_types_by_name['EvChatUserInfoReply'] = _EVCHATUSERINFOREPLY
 DESCRIPTOR.message_types_by_name['FileTemplate'] = _FILETEMPLATE
 DESCRIPTOR.message_types_by_name['QuickRepliesTemplate'] = _QUICKREPLIESTEMPLATE
 DESCRIPTOR.message_types_by_name['GenericElement'] = _GENERICELEMENT
@@ -3547,26 +2980,14 @@ DESCRIPTOR.message_types_by_name['LoginButton'] = _LOGINBUTTON
 DESCRIPTOR.message_types_by_name['EventButton'] = _EVENTBUTTON
 DESCRIPTOR.message_types_by_name['SurveyForm'] = _SURVEYFORM
 DESCRIPTOR.message_types_by_name['RateFormTemplate'] = _RATEFORMTEMPLATE
+DESCRIPTOR.message_types_by_name['RequestState'] = _REQUESTSTATE
 DESCRIPTOR.enum_types_by_name['JoinOperator'] = _JOINOPERATOR
 DESCRIPTOR.enum_types_by_name['AssignStrategy'] = _ASSIGNSTRATEGY
+DESCRIPTOR.enum_types_by_name['ConversationState'] = _CONVERSATIONSTATE
 DESCRIPTOR.enum_types_by_name['ChatEventType'] = _CHATEVENTTYPE
 DESCRIPTOR.enum_types_by_name['DeviceType'] = _DEVICETYPE
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-UnassignedConversation = _reflection.GeneratedProtocolMessageType('UnassignedConversation', (_message.Message,), dict(
-  DESCRIPTOR = _UNASSIGNEDCONVERSATION,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.UnassignedConversation)
-  ))
-_sym_db.RegisterMessage(UnassignedConversation)
-
-UnassignedChats = _reflection.GeneratedProtocolMessageType('UnassignedChats', (_message.Message,), dict(
-  DESCRIPTOR = _UNASSIGNEDCHATS,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.UnassignedChats)
-  ))
-_sym_db.RegisterMessage(UnassignedChats)
 
 Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
   DESCRIPTOR = _ID,
@@ -3610,19 +3031,12 @@ Bool = _reflection.GeneratedProtocolMessageType('Bool', (_message.Message,), dic
   ))
 _sym_db.RegisterMessage(Bool)
 
-RuleId = _reflection.GeneratedProtocolMessageType('RuleId', (_message.Message,), dict(
-  DESCRIPTOR = _RULEID,
+Limit = _reflection.GeneratedProtocolMessageType('Limit', (_message.Message,), dict(
+  DESCRIPTOR = _LIMIT,
   __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.RuleId)
+  # @@protoc_insertion_point(class_scope:conversation.Limit)
   ))
-_sym_db.RegisterMessage(RuleId)
-
-Idx = _reflection.GeneratedProtocolMessageType('Idx', (_message.Message,), dict(
-  DESCRIPTOR = _IDX,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.Idx)
-  ))
-_sym_db.RegisterMessage(Idx)
+_sym_db.RegisterMessage(Limit)
 
 Rule = _reflection.GeneratedProtocolMessageType('Rule', (_message.Message,), dict(
   DESCRIPTOR = _RULE,
@@ -3729,20 +3143,6 @@ ChatEvent = _reflection.GeneratedProtocolMessageType('ChatEvent', (_message.Mess
   ))
 _sym_db.RegisterMessage(ChatEvent)
 
-UserInfo = _reflection.GeneratedProtocolMessageType('UserInfo', (_message.Message,), dict(
-  DESCRIPTOR = _USERINFO,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.UserInfo)
-  ))
-_sym_db.RegisterMessage(UserInfo)
-
-ChatRequestAck = _reflection.GeneratedProtocolMessageType('ChatRequestAck', (_message.Message,), dict(
-  DESCRIPTOR = _CHATREQUESTACK,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.ChatRequestAck)
-  ))
-_sym_db.RegisterMessage(ChatRequestAck)
-
 ChatRequest = _reflection.GeneratedProtocolMessageType('ChatRequest', (_message.Message,), dict(
   DESCRIPTOR = _CHATREQUEST,
   __module__ = 'conversation.conversation_pb2'
@@ -3827,27 +3227,6 @@ ListChatsByUserRequest = _reflection.GeneratedProtocolMessageType('ListChatsByUs
   ))
 _sym_db.RegisterMessage(ListChatsByUserRequest)
 
-OEChatAssigned = _reflection.GeneratedProtocolMessageType('OEChatAssigned', (_message.Message,), dict(
-  DESCRIPTOR = _OECHATASSIGNED,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.OEChatAssigned)
-  ))
-_sym_db.RegisterMessage(OEChatAssigned)
-
-OEChatWaiting = _reflection.GeneratedProtocolMessageType('OEChatWaiting', (_message.Message,), dict(
-  DESCRIPTOR = _OECHATWAITING,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.OEChatWaiting)
-  ))
-_sym_db.RegisterMessage(OEChatWaiting)
-
-EvChatCreated = _reflection.GeneratedProtocolMessageType('EvChatCreated', (_message.Message,), dict(
-  DESCRIPTOR = _EVCHATCREATED,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.EvChatCreated)
-  ))
-_sym_db.RegisterMessage(EvChatCreated)
-
 OEChatDropped = _reflection.GeneratedProtocolMessageType('OEChatDropped', (_message.Message,), dict(
   DESCRIPTOR = _OECHATDROPPED,
   __module__ = 'conversation.conversation_pb2'
@@ -3882,13 +3261,6 @@ EvChatUserInfoRequested = _reflection.GeneratedProtocolMessageType('EvChatUserIn
   # @@protoc_insertion_point(class_scope:conversation.EvChatUserInfoRequested)
   ))
 _sym_db.RegisterMessage(EvChatUserInfoRequested)
-
-EvChatUserInfoReply = _reflection.GeneratedProtocolMessageType('EvChatUserInfoReply', (_message.Message,), dict(
-  DESCRIPTOR = _EVCHATUSERINFOREPLY,
-  __module__ = 'conversation.conversation_pb2'
-  # @@protoc_insertion_point(class_scope:conversation.EvChatUserInfoReply)
-  ))
-_sym_db.RegisterMessage(EvChatUserInfoReply)
 
 FileTemplate = _reflection.GeneratedProtocolMessageType('FileTemplate', (_message.Message,), dict(
   DESCRIPTOR = _FILETEMPLATE,
@@ -3973,6 +3345,13 @@ RateFormTemplate = _reflection.GeneratedProtocolMessageType('RateFormTemplate', 
   # @@protoc_insertion_point(class_scope:conversation.RateFormTemplate)
   ))
 _sym_db.RegisterMessage(RateFormTemplate)
+
+RequestState = _reflection.GeneratedProtocolMessageType('RequestState', (_message.Message,), dict(
+  DESCRIPTOR = _REQUESTSTATE,
+  __module__ = 'conversation.conversation_pb2'
+  # @@protoc_insertion_point(class_scope:conversation.RequestState)
+  ))
+_sym_db.RegisterMessage(RequestState)
 
 
 # @@protoc_insertion_point(module_scope)
