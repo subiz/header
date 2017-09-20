@@ -186,7 +186,7 @@ message Limit {
 	optional int32 max_agents = 4;
 	optional int32 max_agent_groups = 5;
 	optional int32 max_agent_in_a_group = 6;
-	optional int32 max_rules = 7;
+
 }
 
 message AgentGroups {
@@ -235,10 +235,10 @@ enum Event {
 	AgentLeftGroup = 1; // groupmember
 	AgentJoinedGroup = 2; // groupmember
 	AgentGroupUpserted = 4; // agentgroup
-	AgentExpired = 5; // oe only, id
+	//AgentExpired = 5; // oe only, id
 	AgentUpserted = 6; // agent
 	//AgentCreated = 7; // agent
-	AgentStateUpdated = 8; // could be deleted
+	//AgentStateUpdated = 8; // could be deleted
 	AgentPermissionUpdated = 9; // AgentPerm
 
 	// out event only
@@ -259,6 +259,7 @@ enum Event {
 	AccountResetPasswordEmail = 33;
 	//AccountPasswordChangedEmail = 34;
 	AccountInviteEmail = 22;
+	AccountDeleted = 24;
 }
 
 message ConfirmEmail {
