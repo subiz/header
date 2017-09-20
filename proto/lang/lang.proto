@@ -11,7 +11,7 @@ enum T {
 	invalid_agent = 4;
 	user_is_not_in_conversation = 5;
 	conversation_not_found = 6;
-
+	invalid_left = 14;
 	internal_error = 30;
 
 	invalid_input = 22;

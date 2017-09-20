@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='lang/lang.proto',
   package='lang',
   syntax='proto2',
-  serialized_pb=_b('\n\x0flang/lang.proto\x12\x04lang*\xf0\x05\n\x01T\x12\r\n\tundefined\x10\x00\x12$\n user_has_already_in_conversation\x10\x01\x12\x17\n\x13\x63onversation_closed\x10\x02\x12\x12\n\x0einvalid_invite\x10\x03\x12\x11\n\rinvalid_agent\x10\x04\x12\x1f\n\x1buser_is_not_in_conversation\x10\x05\x12\x1a\n\x16\x63onversation_not_found\x10\x06\x12\x12\n\x0einternal_error\x10\x1e\x12\x11\n\rinvalid_input\x10\x16\x12\x10\n\x0cinvalid_form\x10\x14\x12\x18\n\x14\x61\x63\x63\x65ss_token_expired\x10\x15\x12\x16\n\x12invalid_credential\x10\r\x12\x16\n\x12\x63redential_not_set\x10\x07\x12\x1f\n\x1bwrong_account_in_credential\x10\x08\x12\x1c\n\x18wrong_user_in_credential\x10\n\x12\x0f\n\x0b\x61\x63\x63\x65ss_deny\x10\t\x12\x1a\n\x16unable_to_send_message\x10\x0b\x12\x12\n\x0etopic_is_empty\x10\x0c\x12\x10\n\x0cinvalid_json\x10\x0f\x12\x14\n\x10invalid_protobuf\x10\x10\x12\x12\n\x0eunable_to_lock\x10(\x12\t\n\x05\x65mpty\x10)\x12\x0e\n\nwrong_type\x10*\x12\x17\n\x13invalid_kafka_topic\x10+\x12\x12\n\x0e\x64\x61tabase_error\x10,\x12\x0b\n\x07timeout\x10-\x12\x13\n\x0fwebsocket_error\x10.\x12\x0f\n\x0bkafka_error\x10/\x12\x11\n\rinvalid_token\x10\x30\x12\x15\n\x11\x61\x63\x63ount_not_found\x10\x31\x12\x13\n\x0f\x61gent_not_found\x10\x32\x12\x11\n\rinvalid_email\x10<\x12\x12\n\x0eplan_not_found\x10=\x12\x19\n\x15\x61gent_group_not_found\x10>')
+  serialized_pb=_b('\n\x0flang/lang.proto\x12\x04lang*\x82\x06\n\x01T\x12\r\n\tundefined\x10\x00\x12$\n user_has_already_in_conversation\x10\x01\x12\x17\n\x13\x63onversation_closed\x10\x02\x12\x12\n\x0einvalid_invite\x10\x03\x12\x11\n\rinvalid_agent\x10\x04\x12\x1f\n\x1buser_is_not_in_conversation\x10\x05\x12\x1a\n\x16\x63onversation_not_found\x10\x06\x12\x10\n\x0cinvalid_left\x10\x0e\x12\x12\n\x0einternal_error\x10\x1e\x12\x11\n\rinvalid_input\x10\x16\x12\x10\n\x0cinvalid_form\x10\x14\x12\x18\n\x14\x61\x63\x63\x65ss_token_expired\x10\x15\x12\x16\n\x12invalid_credential\x10\r\x12\x16\n\x12\x63redential_not_set\x10\x07\x12\x1f\n\x1bwrong_account_in_credential\x10\x08\x12\x1c\n\x18wrong_user_in_credential\x10\n\x12\x0f\n\x0b\x61\x63\x63\x65ss_deny\x10\t\x12\x1a\n\x16unable_to_send_message\x10\x0b\x12\x12\n\x0etopic_is_empty\x10\x0c\x12\x10\n\x0cinvalid_json\x10\x0f\x12\x14\n\x10invalid_protobuf\x10\x10\x12\x12\n\x0eunable_to_lock\x10(\x12\t\n\x05\x65mpty\x10)\x12\x0e\n\nwrong_type\x10*\x12\x17\n\x13invalid_kafka_topic\x10+\x12\x12\n\x0e\x64\x61tabase_error\x10,\x12\x0b\n\x07timeout\x10-\x12\x13\n\x0fwebsocket_error\x10.\x12\x0f\n\x0bkafka_error\x10/\x12\x11\n\rinvalid_token\x10\x30\x12\x15\n\x11\x61\x63\x63ount_not_found\x10\x31\x12\x13\n\x0f\x61gent_not_found\x10\x32\x12\x11\n\rinvalid_email\x10<\x12\x12\n\x0eplan_not_found\x10=\x12\x19\n\x15\x61gent_group_not_found\x10>')
 )
 
 _T = _descriptor.EnumDescriptor(
@@ -58,118 +58,122 @@ _T = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='internal_error', index=7, number=30,
+      name='invalid_left', index=7, number=14,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_input', index=8, number=22,
+      name='internal_error', index=8, number=30,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_form', index=9, number=20,
+      name='invalid_input', index=9, number=22,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='access_token_expired', index=10, number=21,
+      name='invalid_form', index=10, number=20,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_credential', index=11, number=13,
+      name='access_token_expired', index=11, number=21,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='credential_not_set', index=12, number=7,
+      name='invalid_credential', index=12, number=13,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='wrong_account_in_credential', index=13, number=8,
+      name='credential_not_set', index=13, number=7,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='wrong_user_in_credential', index=14, number=10,
+      name='wrong_account_in_credential', index=14, number=8,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='access_deny', index=15, number=9,
+      name='wrong_user_in_credential', index=15, number=10,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='unable_to_send_message', index=16, number=11,
+      name='access_deny', index=16, number=9,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='topic_is_empty', index=17, number=12,
+      name='unable_to_send_message', index=17, number=11,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_json', index=18, number=15,
+      name='topic_is_empty', index=18, number=12,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_protobuf', index=19, number=16,
+      name='invalid_json', index=19, number=15,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='unable_to_lock', index=20, number=40,
+      name='invalid_protobuf', index=20, number=16,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='empty', index=21, number=41,
+      name='unable_to_lock', index=21, number=40,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='wrong_type', index=22, number=42,
+      name='empty', index=22, number=41,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_kafka_topic', index=23, number=43,
+      name='wrong_type', index=23, number=42,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='database_error', index=24, number=44,
+      name='invalid_kafka_topic', index=24, number=43,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='timeout', index=25, number=45,
+      name='database_error', index=25, number=44,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='websocket_error', index=26, number=46,
+      name='timeout', index=26, number=45,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='kafka_error', index=27, number=47,
+      name='websocket_error', index=27, number=46,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_token', index=28, number=48,
+      name='kafka_error', index=28, number=47,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='account_not_found', index=29, number=49,
+      name='invalid_token', index=29, number=48,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='agent_not_found', index=30, number=50,
+      name='account_not_found', index=30, number=49,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='invalid_email', index=31, number=60,
+      name='agent_not_found', index=31, number=50,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='plan_not_found', index=32, number=61,
+      name='invalid_email', index=32, number=60,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='agent_group_not_found', index=33, number=62,
+      name='plan_not_found', index=33, number=61,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='agent_group_not_found', index=34, number=62,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=26,
-  serialized_end=778,
+  serialized_end=796,
 )
 _sym_db.RegisterEnumDescriptor(_T)
 
@@ -181,6 +185,7 @@ invalid_invite = 3
 invalid_agent = 4
 user_is_not_in_conversation = 5
 conversation_not_found = 6
+invalid_left = 14
 internal_error = 30
 invalid_input = 22
 invalid_form = 20
