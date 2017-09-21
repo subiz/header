@@ -3,7 +3,6 @@
 
 import sys
 _b=sys.version_info[0]<3 and (lambda x:x) or (lambda x:x.encode('latin1'))
-from google.protobuf.internal import enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
@@ -21,105 +20,10 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='common/common.proto',
   package='common',
   syntax='proto2',
-  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a\x35\x62itbucket.org/subiz/servicespec/proto/auth/auth.proto\"\x07\n\x05\x45mpty\"%\n\x05\x45rror\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\"\xb0\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12\x17\n\x0freply_partition\x18\x05 \x01(\x05\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c\x12\x11\n\treply_key\x18\x08 \x01(\t*\xcb\x02\n\tErrorCode\x12\x0b\n\x07NOERROR\x10\x00\x12\x13\n\x0fINVALID_REQUEST\x10\x01\x12\x12\n\x0eINVALID_CLIENT\x10\x02\x12\x11\n\rINVALID_GRANT\x10\x03\x12\x17\n\x13UNAUTHORIZED_CLIENT\x10\x04\x12\x1a\n\x16UNSUPPORTED_GRANT_TYPE\x10\x05\x12\x11\n\rINVALID_SCOPE\x10\x06\x12\x0e\n\tFORBIDDEN\x10\x93\x03\x12\r\n\x08NOTFOUND\x10\x94\x03\x12\x17\n\x12METHOD_NOT_ALLOWED\x10\x95\x03\x12\x13\n\x0eNOT_ACCEPTABLE\x10\x96\x03\x12\x14\n\x0fREQUEST_TIMEOUT\x10\x98\x03\x12\r\n\x08\x43ONFLICT\x10\x99\x03\x12\t\n\x04GONE\x10\x9a\x03\x12\x14\n\x0fGATEWAY_TIMEOUT\x10\xf8\x03\x12\x1a\n\x15INTERNAL_SERVER_ERROR\x10\xf4\x03')
+  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a\x35\x62itbucket.org/subiz/servicespec/proto/auth/auth.proto\"\x07\n\x05\x45mpty\"%\n\x05\x45rror\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\"\xb0\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12\x17\n\x0freply_partition\x18\x05 \x01(\x05\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c\x12\x11\n\treply_key\x18\x08 \x01(\t')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2.DESCRIPTOR,])
 
-_ERRORCODE = _descriptor.EnumDescriptor(
-  name='ErrorCode',
-  full_name='common.ErrorCode',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='NOERROR', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_REQUEST', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_CLIENT', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_GRANT', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='UNAUTHORIZED_CLIENT', index=4, number=4,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='UNSUPPORTED_GRANT_TYPE', index=5, number=5,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INVALID_SCOPE', index=6, number=6,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='FORBIDDEN', index=7, number=403,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOTFOUND', index=8, number=404,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='METHOD_NOT_ALLOWED', index=9, number=405,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='NOT_ACCEPTABLE', index=10, number=406,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='REQUEST_TIMEOUT', index=11, number=408,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CONFLICT', index=12, number=409,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GONE', index=13, number=410,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='GATEWAY_TIMEOUT', index=14, number=504,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='INTERNAL_SERVER_ERROR', index=15, number=500,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=314,
-  serialized_end=645,
-)
-_sym_db.RegisterEnumDescriptor(_ERRORCODE)
-
-ErrorCode = enum_type_wrapper.EnumTypeWrapper(_ERRORCODE)
-NOERROR = 0
-INVALID_REQUEST = 1
-INVALID_CLIENT = 2
-INVALID_GRANT = 3
-UNAUTHORIZED_CLIENT = 4
-UNSUPPORTED_GRANT_TYPE = 5
-INVALID_SCOPE = 6
-FORBIDDEN = 403
-NOTFOUND = 404
-METHOD_NOT_ALLOWED = 405
-NOT_ACCEPTABLE = 406
-REQUEST_TIMEOUT = 408
-CONFLICT = 409
-GONE = 410
-GATEWAY_TIMEOUT = 504
-INTERNAL_SERVER_ERROR = 500
 
 
 
@@ -262,7 +166,6 @@ _CONTEXT.fields_by_name['credential'].message_type = bitbucket_dot_org_dot_subiz
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['Error'] = _ERROR
 DESCRIPTOR.message_types_by_name['Context'] = _CONTEXT
-DESCRIPTOR.enum_types_by_name['ErrorCode'] = _ERRORCODE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
