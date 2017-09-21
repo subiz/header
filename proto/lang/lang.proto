@@ -44,4 +44,9 @@ enum T {
 	invalid_email = 60;
 	plan_not_found = 61;
 	agent_group_not_found = 62;
+
+	empty_client_type = 63;
+	empty_url = 64;
+	empty_name = 65;
+	client_not_found = 66;
 }
