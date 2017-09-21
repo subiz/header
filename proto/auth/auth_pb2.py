@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='auth/auth.proto',
   package='auth',
   syntax='proto2',
-  serialized_pb=_b('\n\x0f\x61uth/auth.proto\x12\x04\x61uth\"\x07\n\x05\x45mpty\"\xb4\x01\n\nCredential\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x1c\n\x06method\x18\x05 \x01(\x0b\x32\x0c.auth.Method\x12\x11\n\tclient_id\x18\x07 \x01(\t\x12%\n\x0b\x63lient_type\x18\x08 \x01(\x0e\x32\x10.auth.ClientType\x12\x0e\n\x06scopes\x18\t \x03(\t\x12\x19\n\x11\x63lient_account_id\x18\n \x01(\t\"\x91\x01\n\x05Scope\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08logo_url\x18\x03 \x02(\t\x12\r\n\x05title\x18\x04 \x02(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x02(\t\x12\x1c\n\x06method\x18\x06 \x02(\x0b\x32\x0c.auth.Method\x12\x1a\n\x05\x65vent\x18\x07 \x02(\x0b\x32\x0b.auth.Event\"]\n\x05\x45vent\x12\x1c\n\x14\x63onversation_started\x18\n \x01(\x08\x12\x19\n\x11\x63onversation_sent\x18\x0b \x01(\x08\x12\x1b\n\x13\x63onversation_joined\x18\x0c \x01(\x08\"\xf2\x08\n\x06Method\x12\x15\n\rUpdateTrigger\x18\x32 \x01(\x08\x12\x15\n\rDeleteTrigger\x18\x33 \x01(\x08\x12\x15\n\rCreateTrigger\x18\x34 \x01(\x08\x12\x13\n\x0bReadTrigger\x18\x35 \x01(\x08\x12\x13\n\x0bListTrigger\x18\x36 \x01(\x08\x12\x16\n\x0eReadAllTrigger\x18\x37 \x01(\x08\x12\x16\n\x0eListAllTrigger\x18\x38 \x01(\x08\x12\x18\n\x10UpdateAllTrigger\x18\x39 \x01(\x08\x12\x18\n\x10\x44\x65leteAllTrigger\x18: \x01(\x08\x12\x18\n\x10\x43reateAllTrigger\x18; \x01(\x08\x12\x1d\n\x15ReadAgentNotification\x18i \x01(\x08\x12\x1d\n\x15SeenAgentNotification\x18j \x01(\x08\x12\x0c\n\x04Ping\x18k \x01(\x08\x12\x17\n\x0fUpdatePasswords\x18m \x01(\x08\x12\x16\n\x0eUpdatePassword\x18l \x01(\x08\x12\x14\n\x0cInviteAgents\x18\x46 \x01(\x08\x12\x13\n\x0bUpdateAgent\x18H \x01(\x08\x12\x14\n\x0cUpdateAgents\x18I \x01(\x08\x12\x11\n\tReadAgent\x18L \x01(\x08\x12\x12\n\nReadAgents\x18M \x01(\x08\x12\x15\n\rResetPassword\x18N \x01(\x08\x12\x1e\n\x16UpdateAgentsPermission\x18Q \x01(\x08\x12\x19\n\x11UpdateAgentsState\x18V \x01(\x08\x12\x16\n\x0e\x43onfirmAccount\x18x \x01(\x08\x12\x19\n\x11\x43reateAgentGroups\x18| \x01(\x08\x12\x19\n\x11\x44\x65leteAgentGroups\x18} \x01(\x08\x12\x17\n\x0fReadAgentGroups\x18~ \x01(\x08\x12\x19\n\x11UpdateAgentGroups\x18\x7f \x01(\x08\x12\x12\n\nUpdatePlan\x18{ \x01(\x08\x12\x16\n\rCreateAccount\x18\x81\x01 \x01(\x08\x12\x16\n\rDeleteAccount\x18\x82\x01 \x01(\x08\x12\x15\n\rUpdateAccount\x18z \x01(\x08\x12\x14\n\x0bReadAccount\x18\x83\x01 \x01(\x08\x12\x13\n\nReadClient\x18\x97\x01 \x01(\x08\x12\x13\n\nListClient\x18\x98\x01 \x01(\x08\x12\x19\n\x10UpdateClientInfo\x18\x99\x01 \x01(\x08\x12\x16\n\rPublishClient\x18\x9a\x01 \x01(\x08\x12\x1f\n\x16RegenerateClientSecret\x18\x9b\x01 \x01(\x08\x12\x15\n\x0cVerifyClient\x18\x9c\x01 \x01(\x08\x12\x15\n\x0c\x44\x65leteClient\x18\x9d\x01 \x01(\x08\x12\x15\n\x0c\x43reateClient\x18\x9e\x01 \x01(\x08\x12\x11\n\x08ReadRule\x18\xb4\x01 \x01(\x08\x12\x13\n\nUpdateRule\x18\xb5\x01 \x01(\x08\x12\x13\n\nDeleteRule\x18\xb6\x01 \x01(\x08\x12\x1a\n\x11StartConversation\x18\xbe\x01 \x01(\x08\x12\x19\n\x10ReadConversation\x18\xbf\x01 \x01(\x08\x12\x1a\n\x11WriteConversation\x18\xc0\x01 \x01(\x08\"\x15\n\x07ScopeId\x12\n\n\x02Id\x18\x01 \x01(\t\"\x14\n\x06UserId\x12\n\n\x02Id\x18\x01 \x01(\t\"-\n\x0eScopesResponse\x12\x1b\n\x06Scopes\x18\x01 \x03(\x0b\x32\x0b.auth.Scope\"8\n\x08UserAuth\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\x1c\n\x06Method\x18\x02 \x01(\x0b\x32\x0c.auth.Method\"8\n\x12PasswordCredential\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"1\n\nAuthCookie\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\"\xc2\x01\n\x10OauthAccessToken\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x12\n\ntoken_type\x18\x03 \x01(\t\x12\x12\n\nexpires_in\x18\x04 \x01(\x03\x12\x15\n\rrefresh_token\x18\x05 \x01(\t\x12\r\n\x05scope\x18\x06 \x01(\t\x12\r\n\x05state\x18\x07 \x01(\t\x12\r\n\x05\x65rror\x18\x08 \x01(\t\x12\x19\n\x11\x65rror_description\x18\t \x01(\t\x12\x11\n\terror_uri\x18\n \x01(\t\"\x97\x01\n\x0b\x41\x63\x63\x65ssToken\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x11\n\tclient_id\x18\x02 \x01(\t\x12%\n\x0b\x63lient_type\x18\x03 \x01(\x0e\x32\x10.auth.ClientType\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x19\n\x11\x63lient_account_id\x18\x05 \x01(\t\x12\x0e\n\x06scopes\x18\x06 \x03(\t\"u\n\x0c\x43ookieExpire\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x15\n\rexpired_token\x18\x03 \x01(\t\x12\x13\n\x0b\x62\x65\x66ore_time\x18\x04 \x01(\x03\x12\x14\n\x0c\x65xcept_token\x18\x05 \x01(\t\"$\n\x02Id\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\"G\n\x04User\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\x12\x10\n\x08password\x18\x04 \x01(\t\"\xc8\x01\n\x06\x43lient\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06secret\x18\x02 \x01(\t\x12\x10\n\x08logo_url\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x13\n\x0bis_verified\x18\x08 \x01(\x08\x12\x14\n\x0credirect_url\x18\t \x01(\t\x12\x1e\n\x04type\x18\x0b \x01(\x0e\x32\x10.auth.ClientType\x12\x0c\n\x04name\x18\x0c \x01(\t\x12\x0f\n\x07version\x18\x0e \x01(\t\x12\x12\n\nis_enabled\x18\x0f \x01(\x08*6\n\nClientType\x12\t\n\x05STONE\x10\x00\x12\x07\n\x03\x41PP\x10\x01\x12\x0b\n\x07\x43HANNEL\x10\x02\x12\x07\n\x03\x42OT\x10\x03*,\n\x11\x41uthorizationType\x12\n\n\x06\x63lient\x10\x00\x12\x0b\n\x07\x63hannel\x10\x01*\xb4\x01\n\x05\x45VENT\x12\x16\n\x12\x41uthClientUpserted\x10\x00\x12\x15\n\x11\x41uthClientDeleted\x10\x01\x12\x14\n\x10\x41uthUserUpserted\x10\x02\x12\x13\n\x0f\x41uthUserDeleted\x10\x03\x12\x14\n\x10\x41uthExpireCookie\x10\x04\x12\x12\n\x0e\x43lientUpserted\x10\n\x12\x11\n\rClientDeleted\x10\x0b\x12\x14\n\x10\x43lientAuthorized\x10\x0c\x32^\n\x04\x41uth\x12)\n\tReadScope\x12\r.auth.ScopeId\x1a\x0b.auth.Scope\"\x00\x12+\n\x04List\x12\x0b.auth.Empty\x1a\x14.auth.ScopesResponse\"\x00')
+  serialized_pb=_b('\n\x0f\x61uth/auth.proto\x12\x04\x61uth\"\xb4\x01\n\nCredential\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x1c\n\x06method\x18\x05 \x01(\x0b\x32\x0c.auth.Method\x12\x11\n\tclient_id\x18\x07 \x01(\t\x12%\n\x0b\x63lient_type\x18\x08 \x01(\x0e\x32\x10.auth.ClientType\x12\x0e\n\x06scopes\x18\t \x03(\t\x12\x19\n\x11\x63lient_account_id\x18\n \x01(\t\"\x91\x01\n\x05Scope\x12\n\n\x02id\x18\x01 \x02(\t\x12\x0c\n\x04name\x18\x02 \x02(\t\x12\x10\n\x08logo_url\x18\x03 \x02(\t\x12\r\n\x05title\x18\x04 \x02(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x02(\t\x12\x1c\n\x06method\x18\x06 \x02(\x0b\x32\x0c.auth.Method\x12\x1a\n\x05\x65vent\x18\x07 \x02(\x0b\x32\x0b.auth.Event\"]\n\x05\x45vent\x12\x1c\n\x14\x63onversation_started\x18\n \x01(\x08\x12\x19\n\x11\x63onversation_sent\x18\x0b \x01(\x08\x12\x1b\n\x13\x63onversation_joined\x18\x0c \x01(\x08\"\xf7\x08\n\x06Method\x12\x16\n\x0eupdate_trigger\x18\x32 \x01(\x08\x12\x16\n\x0e\x64\x65lete_trigger\x18\x33 \x01(\x08\x12\x16\n\x0e\x63reate_trigger\x18\x34 \x01(\x08\x12\x14\n\x0cread_trigger\x18\x35 \x01(\x08\x12\x14\n\x0clist_trigger\x18\x36 \x01(\x08\x12\x16\n\x0eReadAllTrigger\x18\x37 \x01(\x08\x12\x16\n\x0eListAllTrigger\x18\x38 \x01(\x08\x12\x18\n\x10UpdateAllTrigger\x18\x39 \x01(\x08\x12\x18\n\x10\x44\x65leteAllTrigger\x18: \x01(\x08\x12\x18\n\x10\x43reateAllTrigger\x18; \x01(\x08\x12\x1d\n\x15ReadAgentNotification\x18i \x01(\x08\x12\x1d\n\x15SeenAgentNotification\x18j \x01(\x08\x12\x0c\n\x04Ping\x18k \x01(\x08\x12\x17\n\x0fUpdatePasswords\x18m \x01(\x08\x12\x16\n\x0eUpdatePassword\x18l \x01(\x08\x12\x14\n\x0cInviteAgents\x18\x46 \x01(\x08\x12\x13\n\x0bUpdateAgent\x18H \x01(\x08\x12\x14\n\x0cUpdateAgents\x18I \x01(\x08\x12\x11\n\tReadAgent\x18L \x01(\x08\x12\x12\n\nReadAgents\x18M \x01(\x08\x12\x15\n\rResetPassword\x18N \x01(\x08\x12\x1e\n\x16UpdateAgentsPermission\x18Q \x01(\x08\x12\x19\n\x11UpdateAgentsState\x18V \x01(\x08\x12\x16\n\x0e\x43onfirmAccount\x18x \x01(\x08\x12\x19\n\x11\x43reateAgentGroups\x18| \x01(\x08\x12\x19\n\x11\x44\x65leteAgentGroups\x18} \x01(\x08\x12\x17\n\x0fReadAgentGroups\x18~ \x01(\x08\x12\x19\n\x11UpdateAgentGroups\x18\x7f \x01(\x08\x12\x12\n\nUpdatePlan\x18{ \x01(\x08\x12\x16\n\rCreateAccount\x18\x81\x01 \x01(\x08\x12\x16\n\rDeleteAccount\x18\x82\x01 \x01(\x08\x12\x15\n\rUpdateAccount\x18z \x01(\x08\x12\x14\n\x0bReadAccount\x18\x83\x01 \x01(\x08\x12\x13\n\nReadClient\x18\x97\x01 \x01(\x08\x12\x13\n\nListClient\x18\x98\x01 \x01(\x08\x12\x19\n\x10UpdateClientInfo\x18\x99\x01 \x01(\x08\x12\x16\n\rPublishClient\x18\x9a\x01 \x01(\x08\x12\x1f\n\x16RegenerateClientSecret\x18\x9b\x01 \x01(\x08\x12\x15\n\x0cVerifyClient\x18\x9c\x01 \x01(\x08\x12\x15\n\x0c\x44\x65leteClient\x18\x9d\x01 \x01(\x08\x12\x15\n\x0c\x43reateClient\x18\x9e\x01 \x01(\x08\x12\x11\n\x08ReadRule\x18\xb4\x01 \x01(\x08\x12\x13\n\nUpdateRule\x18\xb5\x01 \x01(\x08\x12\x13\n\nDeleteRule\x18\xb6\x01 \x01(\x08\x12\x1a\n\x11StartConversation\x18\xbe\x01 \x01(\x08\x12\x19\n\x10ReadConversation\x18\xbf\x01 \x01(\x08\x12\x1a\n\x11WriteConversation\x18\xc0\x01 \x01(\x08\"8\n\x08UserAuth\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\x1c\n\x06Method\x18\x02 \x01(\x0b\x32\x0c.auth.Method\"8\n\x12PasswordCredential\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"1\n\nAuthCookie\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\"\xc2\x01\n\x10OauthAccessToken\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x12\n\ntoken_type\x18\x03 \x01(\t\x12\x12\n\nexpires_in\x18\x04 \x01(\x03\x12\x15\n\rrefresh_token\x18\x05 \x01(\t\x12\r\n\x05scope\x18\x06 \x01(\t\x12\r\n\x05state\x18\x07 \x01(\t\x12\r\n\x05\x65rror\x18\x08 \x01(\t\x12\x19\n\x11\x65rror_description\x18\t \x01(\t\x12\x11\n\terror_uri\x18\n \x01(\t\"\x97\x01\n\x0b\x41\x63\x63\x65ssToken\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x11\n\tclient_id\x18\x02 \x01(\t\x12%\n\x0b\x63lient_type\x18\x03 \x01(\x0e\x32\x10.auth.ClientType\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x19\n\x11\x63lient_account_id\x18\x05 \x01(\t\x12\x0e\n\x06scopes\x18\x06 \x03(\t\"u\n\x0c\x43ookieExpire\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x15\n\rexpired_token\x18\x03 \x01(\t\x12\x13\n\x0b\x62\x65\x66ore_time\x18\x04 \x01(\x03\x12\x14\n\x0c\x65xcept_token\x18\x05 \x01(\t\"\x9f\x01\n\x04User\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x05 \x01(\t\x12\x1a\n\x12\x65ncrypted_password\x18\x11 \x01(\tJ\x04\x08\x01\x10\x02J\x04\x08\x04\x10\x05J\x04\x08\x06\x10\x07J\x04\x08\x07\x10\x08J\x04\x08\x08\x10\tJ\x04\x08\t\x10\nJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\rJ\x04\x08\r\x10\x0eJ\x04\x08\x0e\x10\x0fJ\x04\x08\x0f\x10\x10J\x04\x08\x10\x10\x11*6\n\nClientType\x12\t\n\x05STONE\x10\x00\x12\x07\n\x03\x41PP\x10\x01\x12\x0b\n\x07\x43HANNEL\x10\x02\x12\x07\n\x03\x42OT\x10\x03*,\n\x11\x41uthorizationType\x12\n\n\x06\x63lient\x10\x00\x12\x0b\n\x07\x63hannel\x10\x01*3\n\x05\x45VENT\x12\x14\n\x10\x41uthExpireCookie\x10\x04\x12\x14\n\x10\x43lientAuthorized\x10\x0c')
 )
 
 _CLIENTTYPE = _descriptor.EnumDescriptor(
@@ -48,8 +48,8 @@ _CLIENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2644,
-  serialized_end=2698,
+  serialized_start=2396,
+  serialized_end=2450,
 )
 _sym_db.RegisterEnumDescriptor(_CLIENTTYPE)
 
@@ -71,8 +71,8 @@ _AUTHORIZATIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2700,
-  serialized_end=2744,
+  serialized_start=2452,
+  serialized_end=2496,
 )
 _sym_db.RegisterEnumDescriptor(_AUTHORIZATIONTYPE)
 
@@ -84,42 +84,18 @@ _EVENT = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='AuthClientUpserted', index=0, number=0,
+      name='AuthExpireCookie', index=0, number=4,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='AuthClientDeleted', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='AuthUserUpserted', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='AuthUserDeleted', index=3, number=3,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='AuthExpireCookie', index=4, number=4,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ClientUpserted', index=5, number=10,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ClientDeleted', index=6, number=11,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ClientAuthorized', index=7, number=12,
+      name='ClientAuthorized', index=1, number=12,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=2747,
-  serialized_end=2927,
+  serialized_start=2498,
+  serialized_end=2549,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
@@ -130,39 +106,9 @@ CHANNEL = 2
 BOT = 3
 client = 0
 channel = 1
-AuthClientUpserted = 0
-AuthClientDeleted = 1
-AuthUserUpserted = 2
-AuthUserDeleted = 3
 AuthExpireCookie = 4
-ClientUpserted = 10
-ClientDeleted = 11
 ClientAuthorized = 12
 
-
-
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='auth.Empty',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=25,
-  serialized_end=32,
-)
 
 
 _CREDENTIAL = _descriptor.Descriptor(
@@ -233,8 +179,8 @@ _CREDENTIAL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=35,
-  serialized_end=215,
+  serialized_start=26,
+  serialized_end=206,
 )
 
 
@@ -306,8 +252,8 @@ _SCOPE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=218,
-  serialized_end=363,
+  serialized_start=209,
+  serialized_end=354,
 )
 
 
@@ -351,8 +297,8 @@ _EVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=365,
-  serialized_end=458,
+  serialized_start=356,
+  serialized_end=449,
 )
 
 
@@ -364,35 +310,35 @@ _METHOD = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UpdateTrigger', full_name='auth.Method.UpdateTrigger', index=0,
+      name='update_trigger', full_name='auth.Method.update_trigger', index=0,
       number=50, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='DeleteTrigger', full_name='auth.Method.DeleteTrigger', index=1,
+      name='delete_trigger', full_name='auth.Method.delete_trigger', index=1,
       number=51, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='CreateTrigger', full_name='auth.Method.CreateTrigger', index=2,
+      name='create_trigger', full_name='auth.Method.create_trigger', index=2,
       number=52, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ReadTrigger', full_name='auth.Method.ReadTrigger', index=3,
+      name='read_trigger', full_name='auth.Method.read_trigger', index=3,
       number=53, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ListTrigger', full_name='auth.Method.ListTrigger', index=4,
+      name='list_trigger', full_name='auth.Method.list_trigger', index=4,
       number=54, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -704,101 +650,8 @@ _METHOD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=461,
-  serialized_end=1599,
-)
-
-
-_SCOPEID = _descriptor.Descriptor(
-  name='ScopeId',
-  full_name='auth.ScopeId',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='auth.ScopeId.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1601,
-  serialized_end=1622,
-)
-
-
-_USERID = _descriptor.Descriptor(
-  name='UserId',
-  full_name='auth.UserId',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='auth.UserId.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1624,
-  serialized_end=1644,
-)
-
-
-_SCOPESRESPONSE = _descriptor.Descriptor(
-  name='ScopesResponse',
-  full_name='auth.ScopesResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Scopes', full_name='auth.ScopesResponse.Scopes', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1646,
-  serialized_end=1691,
+  serialized_start=452,
+  serialized_end=1595,
 )
 
 
@@ -835,8 +688,8 @@ _USERAUTH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1693,
-  serialized_end=1749,
+  serialized_start=1597,
+  serialized_end=1653,
 )
 
 
@@ -873,8 +726,8 @@ _PASSWORDCREDENTIAL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1751,
-  serialized_end=1807,
+  serialized_start=1655,
+  serialized_end=1711,
 )
 
 
@@ -911,8 +764,8 @@ _AUTHCOOKIE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1809,
-  serialized_end=1858,
+  serialized_start=1713,
+  serialized_end=1762,
 )
 
 
@@ -998,8 +851,8 @@ _OAUTHACCESSTOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1861,
-  serialized_end=2055,
+  serialized_start=1765,
+  serialized_end=1959,
 )
 
 
@@ -1064,8 +917,8 @@ _ACCESSTOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2058,
-  serialized_end=2209,
+  serialized_start=1962,
+  serialized_end=2113,
 )
 
 
@@ -1123,46 +976,8 @@ _COOKIEEXPIRE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2211,
-  serialized_end=2328,
-)
-
-
-_ID = _descriptor.Descriptor(
-  name='Id',
-  full_name='auth.Id',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='auth.Id.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='account_id', full_name='auth.Id.account_id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2330,
-  serialized_end=2366,
+  serialized_start=2115,
+  serialized_end=2232,
 )
 
 
@@ -1175,28 +990,28 @@ _USER = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='id', full_name='auth.User.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='account_id', full_name='auth.User.account_id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='email', full_name='auth.User.email', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='password', full_name='auth.User.password', index=3,
-      number=4, type=9, cpp_type=9, label=1,
+      name='encrypted_password', full_name='auth.User.encrypted_password', index=3,
+      number=17, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1213,140 +1028,31 @@ _USER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2368,
-  serialized_end=2439,
-)
-
-
-_CLIENT = _descriptor.Descriptor(
-  name='Client',
-  full_name='auth.Client',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='auth.Client.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='secret', full_name='auth.Client.secret', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='logo_url', full_name='auth.Client.logo_url', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='account_id', full_name='auth.Client.account_id', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='is_verified', full_name='auth.Client.is_verified', index=4,
-      number=8, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='redirect_url', full_name='auth.Client.redirect_url', index=5,
-      number=9, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='auth.Client.type', index=6,
-      number=11, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='name', full_name='auth.Client.name', index=7,
-      number=12, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='version', full_name='auth.Client.version', index=8,
-      number=14, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='is_enabled', full_name='auth.Client.is_enabled', index=9,
-      number=15, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2442,
-  serialized_end=2642,
+  serialized_start=2235,
+  serialized_end=2394,
 )
 
 _CREDENTIAL.fields_by_name['method'].message_type = _METHOD
 _CREDENTIAL.fields_by_name['client_type'].enum_type = _CLIENTTYPE
 _SCOPE.fields_by_name['method'].message_type = _METHOD
 _SCOPE.fields_by_name['event'].message_type = _EVENT
-_SCOPESRESPONSE.fields_by_name['Scopes'].message_type = _SCOPE
 _USERAUTH.fields_by_name['Method'].message_type = _METHOD
 _ACCESSTOKEN.fields_by_name['client_type'].enum_type = _CLIENTTYPE
-_CLIENT.fields_by_name['type'].enum_type = _CLIENTTYPE
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['Credential'] = _CREDENTIAL
 DESCRIPTOR.message_types_by_name['Scope'] = _SCOPE
 DESCRIPTOR.message_types_by_name['Event'] = _EVENT
 DESCRIPTOR.message_types_by_name['Method'] = _METHOD
-DESCRIPTOR.message_types_by_name['ScopeId'] = _SCOPEID
-DESCRIPTOR.message_types_by_name['UserId'] = _USERID
-DESCRIPTOR.message_types_by_name['ScopesResponse'] = _SCOPESRESPONSE
 DESCRIPTOR.message_types_by_name['UserAuth'] = _USERAUTH
 DESCRIPTOR.message_types_by_name['PasswordCredential'] = _PASSWORDCREDENTIAL
 DESCRIPTOR.message_types_by_name['AuthCookie'] = _AUTHCOOKIE
 DESCRIPTOR.message_types_by_name['OauthAccessToken'] = _OAUTHACCESSTOKEN
 DESCRIPTOR.message_types_by_name['AccessToken'] = _ACCESSTOKEN
 DESCRIPTOR.message_types_by_name['CookieExpire'] = _COOKIEEXPIRE
-DESCRIPTOR.message_types_by_name['Id'] = _ID
 DESCRIPTOR.message_types_by_name['User'] = _USER
-DESCRIPTOR.message_types_by_name['Client'] = _CLIENT
 DESCRIPTOR.enum_types_by_name['ClientType'] = _CLIENTTYPE
 DESCRIPTOR.enum_types_by_name['AuthorizationType'] = _AUTHORIZATIONTYPE
 DESCRIPTOR.enum_types_by_name['EVENT'] = _EVENT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
-  DESCRIPTOR = _EMPTY,
-  __module__ = 'auth.auth_pb2'
-  # @@protoc_insertion_point(class_scope:auth.Empty)
-  ))
-_sym_db.RegisterMessage(Empty)
 
 Credential = _reflection.GeneratedProtocolMessageType('Credential', (_message.Message,), dict(
   DESCRIPTOR = _CREDENTIAL,
@@ -1375,27 +1081,6 @@ Method = _reflection.GeneratedProtocolMessageType('Method', (_message.Message,),
   # @@protoc_insertion_point(class_scope:auth.Method)
   ))
 _sym_db.RegisterMessage(Method)
-
-ScopeId = _reflection.GeneratedProtocolMessageType('ScopeId', (_message.Message,), dict(
-  DESCRIPTOR = _SCOPEID,
-  __module__ = 'auth.auth_pb2'
-  # @@protoc_insertion_point(class_scope:auth.ScopeId)
-  ))
-_sym_db.RegisterMessage(ScopeId)
-
-UserId = _reflection.GeneratedProtocolMessageType('UserId', (_message.Message,), dict(
-  DESCRIPTOR = _USERID,
-  __module__ = 'auth.auth_pb2'
-  # @@protoc_insertion_point(class_scope:auth.UserId)
-  ))
-_sym_db.RegisterMessage(UserId)
-
-ScopesResponse = _reflection.GeneratedProtocolMessageType('ScopesResponse', (_message.Message,), dict(
-  DESCRIPTOR = _SCOPESRESPONSE,
-  __module__ = 'auth.auth_pb2'
-  # @@protoc_insertion_point(class_scope:auth.ScopesResponse)
-  ))
-_sym_db.RegisterMessage(ScopesResponse)
 
 UserAuth = _reflection.GeneratedProtocolMessageType('UserAuth', (_message.Message,), dict(
   DESCRIPTOR = _USERAUTH,
@@ -1439,13 +1124,6 @@ CookieExpire = _reflection.GeneratedProtocolMessageType('CookieExpire', (_messag
   ))
 _sym_db.RegisterMessage(CookieExpire)
 
-Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
-  DESCRIPTOR = _ID,
-  __module__ = 'auth.auth_pb2'
-  # @@protoc_insertion_point(class_scope:auth.Id)
-  ))
-_sym_db.RegisterMessage(Id)
-
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), dict(
   DESCRIPTOR = _USER,
   __module__ = 'auth.auth_pb2'
@@ -1453,45 +1131,5 @@ User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), dic
   ))
 _sym_db.RegisterMessage(User)
 
-Client = _reflection.GeneratedProtocolMessageType('Client', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENT,
-  __module__ = 'auth.auth_pb2'
-  # @@protoc_insertion_point(class_scope:auth.Client)
-  ))
-_sym_db.RegisterMessage(Client)
-
-
-
-_AUTH = _descriptor.ServiceDescriptor(
-  name='Auth',
-  full_name='auth.Auth',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=2929,
-  serialized_end=3023,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='ReadScope',
-    full_name='auth.Auth.ReadScope',
-    index=0,
-    containing_service=None,
-    input_type=_SCOPEID,
-    output_type=_SCOPE,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='List',
-    full_name='auth.Auth.List',
-    index=1,
-    containing_service=None,
-    input_type=_EMPTY,
-    output_type=_SCOPESRESPONSE,
-    options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_AUTH)
-
-DESCRIPTOR.services_by_name['Auth'] = _AUTH
 
 # @@protoc_insertion_point(module_scope)

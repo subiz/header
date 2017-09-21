@@ -14,46 +14,18 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from bitbucket.org.subiz.servicespec.proto.auth import auth_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2
+from bitbucket.org.subiz.servicespec.proto.common import common_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='client/client.proto',
   package='client',
   syntax='proto2',
-  serialized_pb=_b('\n\x13\x63lient/client.proto\x12\x06\x63lient\"\x07\n\x05\x45mpty\"$\n\x02Id\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"O\n\x07Webhook\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x13\n\x0bis_verified\x18\x02 \x01(\x08\x12\x0e\n\x06Topics\x18\x03 \x03(\t\x12\x12\n\nis_enabled\x18\x04 \x01(\x08\"\xa0\x03\n\x06\x43lient\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06secret\x18\x02 \x01(\t\x12\x10\n\x08logo_url\x18\x03 \x01(\t\x12\x10\n\x08owner_id\x18\x04 \x01(\t\x12\x12\n\naccount_id\x18\x13 \x01(\t\x12\x15\n\rcontact_email\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\x19\n\x11short_description\x18\x07 \x01(\t\x12\x13\n\x0bis_verified\x18\x08 \x01(\x08\x12\x15\n\rredirect_urls\x18\t \x03(\t\x12 \n\x07webhook\x18\n \x01(\x0b\x32\x0f.client.Webhook\x12 \n\x04type\x18\x0b \x01(\x0e\x32\x12.client.ClientType\x12\x0c\n\x04name\x18\x0c \x01(\t\x12\x13\n\x0bis_internal\x18\r \x01(\x08\x12\x0f\n\x07version\x18\x0e \x01(\t\x12\x11\n\tis_public\x18\x0f \x01(\x08\x12\x14\n\x0cpublish_date\x18\x10 \x01(\t\x12\x17\n\x0fis_confidential\x18\x11 \x01(\x08\x12\x15\n\rclose_timeout\x18\x12 \x01(\x05\"\x18\n\x06Secret\x12\x0e\n\x06secret\x18\x01 \x01(\t\"I\n\x12ListClientsRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08start_id\x18\x03 \x01(\t\x12\r\n\x05limit\x18\x04 \x01(\x05\"*\n\x07\x43lients\x12\x1f\n\x07\x63lients\x18\x03 \x03(\x0b\x32\x0e.client.Client\"-\n\x10\x42oolValueRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x08\"n\n\x0cRegistration\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\x10\n\x08\x43lientId\x18\x02 \x01(\t\x12\x14\n\x0cInvalidScope\x18\x03 \x01(\x08\x12\x14\n\x0cRegisterDate\x18\x04 \x01(\t\x12\x10\n\x08ScopeIds\x18\x05 \x03(\x05\";\n\rRegistrations\x12*\n\x0cRegistraions\x18\x01 \x03(\x0b\x32\x14.client.Registration\"4\n\x12\x43lientCreatedEvent\x12\x1e\n\x06\x43lient\x18\x01 \x01(\x0b\x32\x0e.client.Client\" \n\x12\x43lientDeletedEvent\x12\n\n\x02Id\x18\x01 \x01(\t\"4\n\x12\x43lientUpdatedEvent\x12\x1e\n\x06\x43lient\x18\x01 \x01(\x0b\x32\x0e.client.Client\"5\n\x14\x43lientPublishedEvent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x11\n\tPublished\x18\x02 \x01(\x08\"3\n\x13\x43lientVerifiedEvent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x10\n\x08Verified\x18\x02 \x01(\x08\"6\n\x18\x43lientUpdatedSecretEvent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x0e\n\x06Secret\x18\x02 \x01(\t\"\"\n\x0e\x44isableWebhook\x12\x10\n\x08\x43lientID\x18\x01 \x01(\t*6\n\nClientType\x12\t\n\x05STONE\x10\x00\x12\x07\n\x03\x41PP\x10\x01\x12\x0b\n\x07\x43HANNEL\x10\x02\x12\x07\n\x03\x42OT\x10\x03*!\n\x05\x45vent\x12\x18\n\x14\x43lientDisableWebhook\x10\x00\x32\xb6\x03\n\tClientMgt\x12&\n\x06\x43reate\x12\x0e.client.Client\x1a\n.client.Id\"\x00\x12$\n\x04Read\x12\n.client.Id\x1a\x0e.client.Client\"\x00\x12\x35\n\x04List\x12\x1a.client.ListClientsRequest\x1a\x0f.client.Clients\"\x00\x12%\n\x06\x44\x65lete\x12\n.client.Id\x1a\r.client.Empty\"\x00\x12)\n\x06Update\x12\x0e.client.Client\x1a\r.client.Empty\"\x00\x12\x30\n\x10RegenerateSecret\x12\n.client.Id\x1a\x0e.client.Secret\"\x00\x12%\n\x06Verify\x12\n.client.Id\x1a\r.client.Empty\"\x00\x12\'\n\x08Unverify\x12\n.client.Id\x1a\r.client.Empty\"\x00\x12&\n\x07Publish\x12\n.client.Id\x1a\r.client.Empty\"\x00\x12(\n\tUnpublish\x12\n.client.Id\x1a\r.client.Empty\"\x00')
-)
+  serialized_pb=_b('\n\x13\x63lient/client.proto\x12\x06\x63lient\x1a\x35\x62itbucket.org/subiz/servicespec/proto/auth/auth.proto\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"H\n\x07\x43lients\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x1f\n\x07\x63lients\x18\x02 \x03(\x0b\x32\x0e.client.Client\"\x98\x02\n\x06\x43lient\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x0e\n\x06secret\x18\x04 \x01(\t\x12\x10\n\x08logo_url\x18\x05 \x01(\t\x12\x12\n\naccount_id\x18\x06 \x01(\t\x12\x13\n\x0bis_verified\x18\x08 \x01(\x08\x12\x14\n\x0credirect_url\x18\t \x01(\t\x12\x1e\n\x04type\x18\x0b \x01(\x0e\x32\x10.auth.ClientType\x12\x0c\n\x04name\x18\x0c \x01(\t\x12\x0f\n\x07version\x18\x0e \x01(\t\x12\x12\n\nis_enabled\x18\x0f \x01(\x08\x12\x14\n\x0c\x63reated_time\x18\x11 \x01(\x03\x12\x1a\n\x12last_modified_time\x18\x12 \x01(\x03\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t*\x8a\x01\n\x05\x45vent\x12\x19\n\x15\x43lientCreateRequested\x10\x14\x12\x19\n\x15\x43lientUpdateRequested\x10\x15\x12\x19\n\x15\x43lientDeleteRequested\x10\x16\x12\x17\n\x13\x43lientReadRequested\x10\x17\x12\x17\n\x13\x43lientListRequested\x10\x18')
+  ,
+  dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,])
 
-_CLIENTTYPE = _descriptor.EnumDescriptor(
-  name='ClientType',
-  full_name='client.ClientType',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='STONE', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='APP', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='CHANNEL', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='BOT', index=3, number=3,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=1285,
-  serialized_end=1339,
-)
-_sym_db.RegisterEnumDescriptor(_CLIENTTYPE)
-
-ClientType = enum_type_wrapper.EnumTypeWrapper(_CLIENTTYPE)
 _EVENT = _descriptor.EnumDescriptor(
   name='Event',
   full_name='client.Event',
@@ -61,123 +33,63 @@ _EVENT = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='ClientDisableWebhook', index=0, number=0,
+      name='ClientCreateRequested', index=0, number=20,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ClientUpdateRequested', index=1, number=21,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ClientDeleteRequested', index=2, number=22,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ClientReadRequested', index=3, number=23,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ClientListRequested', index=4, number=24,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1341,
-  serialized_end=1374,
+  serialized_start=571,
+  serialized_end=709,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
 Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
-STONE = 0
-APP = 1
-CHANNEL = 2
-BOT = 3
-ClientDisableWebhook = 0
+ClientCreateRequested = 20
+ClientUpdateRequested = 21
+ClientDeleteRequested = 22
+ClientReadRequested = 23
+ClientListRequested = 24
 
 
 
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='client.Empty',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=31,
-  serialized_end=38,
-)
-
-
-_ID = _descriptor.Descriptor(
-  name='Id',
-  full_name='client.Id',
+_CLIENTS = _descriptor.Descriptor(
+  name='Clients',
+  full_name='client.Clients',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='account_id', full_name='client.Id.account_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='ctx', full_name='client.Clients.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='id', full_name='client.Id.id', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=40,
-  serialized_end=76,
-)
-
-
-_WEBHOOK = _descriptor.Descriptor(
-  name='Webhook',
-  full_name='client.Webhook',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='url', full_name='client.Webhook.url', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='is_verified', full_name='client.Webhook.is_verified', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Topics', full_name='client.Webhook.Topics', index=2,
-      number=3, type=9, cpp_type=9, label=3,
+      name='clients', full_name='client.Clients.clients', index=1,
+      number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    _descriptor.FieldDescriptor(
-      name='is_enabled', full_name='client.Webhook.is_enabled', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -190,8 +102,8 @@ _WEBHOOK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=78,
-  serialized_end=157,
+  serialized_start=145,
+  serialized_end=217,
 )
 
 
@@ -203,134 +115,92 @@ _CLIENT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='client.Client.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='ctx', full_name='client.Client.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='secret', full_name='client.Client.secret', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='logo_url', full_name='client.Client.logo_url', index=2,
+      name='id', full_name='client.Client.id', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='owner_id', full_name='client.Client.owner_id', index=3,
+      name='secret', full_name='client.Client.secret', index=2,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='account_id', full_name='client.Client.account_id', index=4,
-      number=19, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='contact_email', full_name='client.Client.contact_email', index=5,
+      name='logo_url', full_name='client.Client.logo_url', index=3,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='description', full_name='client.Client.description', index=6,
+      name='account_id', full_name='client.Client.account_id', index=4,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='short_description', full_name='client.Client.short_description', index=7,
-      number=7, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='is_verified', full_name='client.Client.is_verified', index=8,
+      name='is_verified', full_name='client.Client.is_verified', index=5,
       number=8, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='redirect_urls', full_name='client.Client.redirect_urls', index=9,
-      number=9, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='redirect_url', full_name='client.Client.redirect_url', index=6,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='webhook', full_name='client.Client.webhook', index=10,
-      number=10, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='client.Client.type', index=11,
+      name='type', full_name='client.Client.type', index=7,
       number=11, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='name', full_name='client.Client.name', index=12,
+      name='name', full_name='client.Client.name', index=8,
       number=12, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='is_internal', full_name='client.Client.is_internal', index=13,
-      number=13, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='version', full_name='client.Client.version', index=14,
+      name='version', full_name='client.Client.version', index=9,
       number=14, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='is_public', full_name='client.Client.is_public', index=15,
+      name='is_enabled', full_name='client.Client.is_enabled', index=10,
       number=15, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='publish_date', full_name='client.Client.publish_date', index=16,
-      number=16, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='created_time', full_name='client.Client.created_time', index=11,
+      number=17, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='is_confidential', full_name='client.Client.is_confidential', index=17,
-      number=17, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='close_timeout', full_name='client.Client.close_timeout', index=18,
-      number=18, type=5, cpp_type=1, label=1,
+      name='last_modified_time', full_name='client.Client.last_modified_time', index=12,
+      number=18, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -347,431 +217,34 @@ _CLIENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=160,
-  serialized_end=576,
+  serialized_start=220,
+  serialized_end=500,
 )
 
 
-_SECRET = _descriptor.Descriptor(
-  name='Secret',
-  full_name='client.Secret',
+_ID = _descriptor.Descriptor(
+  name='Id',
+  full_name='client.Id',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='secret', full_name='client.Secret.secret', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=578,
-  serialized_end=602,
-)
-
-
-_LISTCLIENTSREQUEST = _descriptor.Descriptor(
-  name='ListClientsRequest',
-  full_name='client.ListClientsRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='account_id', full_name='client.ListClientsRequest.account_id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='ctx', full_name='client.Id.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='start_id', full_name='client.ListClientsRequest.start_id', index=1,
+      name='id', full_name='client.Id.id', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='limit', full_name='client.ListClientsRequest.limit', index=2,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=604,
-  serialized_end=677,
-)
-
-
-_CLIENTS = _descriptor.Descriptor(
-  name='Clients',
-  full_name='client.Clients',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='clients', full_name='client.Clients.clients', index=0,
-      number=3, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=679,
-  serialized_end=721,
-)
-
-
-_BOOLVALUEREQUEST = _descriptor.Descriptor(
-  name='BoolValueRequest',
-  full_name='client.BoolValueRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='id', full_name='client.BoolValueRequest.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='value', full_name='client.BoolValueRequest.value', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=723,
-  serialized_end=768,
-)
-
-
-_REGISTRATION = _descriptor.Descriptor(
-  name='Registration',
-  full_name='client.Registration',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='UserId', full_name='client.Registration.UserId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ClientId', full_name='client.Registration.ClientId', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='InvalidScope', full_name='client.Registration.InvalidScope', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='RegisterDate', full_name='client.Registration.RegisterDate', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ScopeIds', full_name='client.Registration.ScopeIds', index=4,
-      number=5, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=770,
-  serialized_end=880,
-)
-
-
-_REGISTRATIONS = _descriptor.Descriptor(
-  name='Registrations',
-  full_name='client.Registrations',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Registraions', full_name='client.Registrations.Registraions', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=882,
-  serialized_end=941,
-)
-
-
-_CLIENTCREATEDEVENT = _descriptor.Descriptor(
-  name='ClientCreatedEvent',
-  full_name='client.ClientCreatedEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Client', full_name='client.ClientCreatedEvent.Client', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=943,
-  serialized_end=995,
-)
-
-
-_CLIENTDELETEDEVENT = _descriptor.Descriptor(
-  name='ClientDeletedEvent',
-  full_name='client.ClientDeletedEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='client.ClientDeletedEvent.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=997,
-  serialized_end=1029,
-)
-
-
-_CLIENTUPDATEDEVENT = _descriptor.Descriptor(
-  name='ClientUpdatedEvent',
-  full_name='client.ClientUpdatedEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Client', full_name='client.ClientUpdatedEvent.Client', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1031,
-  serialized_end=1083,
-)
-
-
-_CLIENTPUBLISHEDEVENT = _descriptor.Descriptor(
-  name='ClientPublishedEvent',
-  full_name='client.ClientPublishedEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='client.ClientPublishedEvent.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Published', full_name='client.ClientPublishedEvent.Published', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1085,
-  serialized_end=1138,
-)
-
-
-_CLIENTVERIFIEDEVENT = _descriptor.Descriptor(
-  name='ClientVerifiedEvent',
-  full_name='client.ClientVerifiedEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='client.ClientVerifiedEvent.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Verified', full_name='client.ClientVerifiedEvent.Verified', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1140,
-  serialized_end=1191,
-)
-
-
-_CLIENTUPDATEDSECRETEVENT = _descriptor.Descriptor(
-  name='ClientUpdatedSecretEvent',
-  full_name='client.ClientUpdatedSecretEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='client.ClientUpdatedSecretEvent.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Secret', full_name='client.ClientUpdatedSecretEvent.Secret', index=1,
+      name='account_id', full_name='client.Id.account_id', index=2,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -789,109 +262,20 @@ _CLIENTUPDATEDSECRETEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1193,
-  serialized_end=1247,
+  serialized_start=502,
+  serialized_end=568,
 )
 
-
-_DISABLEWEBHOOK = _descriptor.Descriptor(
-  name='DisableWebhook',
-  full_name='client.DisableWebhook',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ClientID', full_name='client.DisableWebhook.ClientID', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1249,
-  serialized_end=1283,
-)
-
-_CLIENT.fields_by_name['webhook'].message_type = _WEBHOOK
-_CLIENT.fields_by_name['type'].enum_type = _CLIENTTYPE
+_CLIENTS.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _CLIENTS.fields_by_name['clients'].message_type = _CLIENT
-_REGISTRATIONS.fields_by_name['Registraions'].message_type = _REGISTRATION
-_CLIENTCREATEDEVENT.fields_by_name['Client'].message_type = _CLIENT
-_CLIENTUPDATEDEVENT.fields_by_name['Client'].message_type = _CLIENT
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
-DESCRIPTOR.message_types_by_name['Id'] = _ID
-DESCRIPTOR.message_types_by_name['Webhook'] = _WEBHOOK
-DESCRIPTOR.message_types_by_name['Client'] = _CLIENT
-DESCRIPTOR.message_types_by_name['Secret'] = _SECRET
-DESCRIPTOR.message_types_by_name['ListClientsRequest'] = _LISTCLIENTSREQUEST
+_CLIENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_CLIENT.fields_by_name['type'].enum_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_auth_dot_auth__pb2._CLIENTTYPE
+_ID.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['Clients'] = _CLIENTS
-DESCRIPTOR.message_types_by_name['BoolValueRequest'] = _BOOLVALUEREQUEST
-DESCRIPTOR.message_types_by_name['Registration'] = _REGISTRATION
-DESCRIPTOR.message_types_by_name['Registrations'] = _REGISTRATIONS
-DESCRIPTOR.message_types_by_name['ClientCreatedEvent'] = _CLIENTCREATEDEVENT
-DESCRIPTOR.message_types_by_name['ClientDeletedEvent'] = _CLIENTDELETEDEVENT
-DESCRIPTOR.message_types_by_name['ClientUpdatedEvent'] = _CLIENTUPDATEDEVENT
-DESCRIPTOR.message_types_by_name['ClientPublishedEvent'] = _CLIENTPUBLISHEDEVENT
-DESCRIPTOR.message_types_by_name['ClientVerifiedEvent'] = _CLIENTVERIFIEDEVENT
-DESCRIPTOR.message_types_by_name['ClientUpdatedSecretEvent'] = _CLIENTUPDATEDSECRETEVENT
-DESCRIPTOR.message_types_by_name['DisableWebhook'] = _DISABLEWEBHOOK
-DESCRIPTOR.enum_types_by_name['ClientType'] = _CLIENTTYPE
+DESCRIPTOR.message_types_by_name['Client'] = _CLIENT
+DESCRIPTOR.message_types_by_name['Id'] = _ID
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
-  DESCRIPTOR = _EMPTY,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Empty)
-  ))
-_sym_db.RegisterMessage(Empty)
-
-Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
-  DESCRIPTOR = _ID,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Id)
-  ))
-_sym_db.RegisterMessage(Id)
-
-Webhook = _reflection.GeneratedProtocolMessageType('Webhook', (_message.Message,), dict(
-  DESCRIPTOR = _WEBHOOK,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Webhook)
-  ))
-_sym_db.RegisterMessage(Webhook)
-
-Client = _reflection.GeneratedProtocolMessageType('Client', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENT,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Client)
-  ))
-_sym_db.RegisterMessage(Client)
-
-Secret = _reflection.GeneratedProtocolMessageType('Secret', (_message.Message,), dict(
-  DESCRIPTOR = _SECRET,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Secret)
-  ))
-_sym_db.RegisterMessage(Secret)
-
-ListClientsRequest = _reflection.GeneratedProtocolMessageType('ListClientsRequest', (_message.Message,), dict(
-  DESCRIPTOR = _LISTCLIENTSREQUEST,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.ListClientsRequest)
-  ))
-_sym_db.RegisterMessage(ListClientsRequest)
 
 Clients = _reflection.GeneratedProtocolMessageType('Clients', (_message.Message,), dict(
   DESCRIPTOR = _CLIENTS,
@@ -900,180 +284,19 @@ Clients = _reflection.GeneratedProtocolMessageType('Clients', (_message.Message,
   ))
 _sym_db.RegisterMessage(Clients)
 
-BoolValueRequest = _reflection.GeneratedProtocolMessageType('BoolValueRequest', (_message.Message,), dict(
-  DESCRIPTOR = _BOOLVALUEREQUEST,
+Client = _reflection.GeneratedProtocolMessageType('Client', (_message.Message,), dict(
+  DESCRIPTOR = _CLIENT,
   __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.BoolValueRequest)
+  # @@protoc_insertion_point(class_scope:client.Client)
   ))
-_sym_db.RegisterMessage(BoolValueRequest)
+_sym_db.RegisterMessage(Client)
 
-Registration = _reflection.GeneratedProtocolMessageType('Registration', (_message.Message,), dict(
-  DESCRIPTOR = _REGISTRATION,
+Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
+  DESCRIPTOR = _ID,
   __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Registration)
+  # @@protoc_insertion_point(class_scope:client.Id)
   ))
-_sym_db.RegisterMessage(Registration)
+_sym_db.RegisterMessage(Id)
 
-Registrations = _reflection.GeneratedProtocolMessageType('Registrations', (_message.Message,), dict(
-  DESCRIPTOR = _REGISTRATIONS,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Registrations)
-  ))
-_sym_db.RegisterMessage(Registrations)
-
-ClientCreatedEvent = _reflection.GeneratedProtocolMessageType('ClientCreatedEvent', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENTCREATEDEVENT,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.ClientCreatedEvent)
-  ))
-_sym_db.RegisterMessage(ClientCreatedEvent)
-
-ClientDeletedEvent = _reflection.GeneratedProtocolMessageType('ClientDeletedEvent', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENTDELETEDEVENT,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.ClientDeletedEvent)
-  ))
-_sym_db.RegisterMessage(ClientDeletedEvent)
-
-ClientUpdatedEvent = _reflection.GeneratedProtocolMessageType('ClientUpdatedEvent', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENTUPDATEDEVENT,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.ClientUpdatedEvent)
-  ))
-_sym_db.RegisterMessage(ClientUpdatedEvent)
-
-ClientPublishedEvent = _reflection.GeneratedProtocolMessageType('ClientPublishedEvent', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENTPUBLISHEDEVENT,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.ClientPublishedEvent)
-  ))
-_sym_db.RegisterMessage(ClientPublishedEvent)
-
-ClientVerifiedEvent = _reflection.GeneratedProtocolMessageType('ClientVerifiedEvent', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENTVERIFIEDEVENT,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.ClientVerifiedEvent)
-  ))
-_sym_db.RegisterMessage(ClientVerifiedEvent)
-
-ClientUpdatedSecretEvent = _reflection.GeneratedProtocolMessageType('ClientUpdatedSecretEvent', (_message.Message,), dict(
-  DESCRIPTOR = _CLIENTUPDATEDSECRETEVENT,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.ClientUpdatedSecretEvent)
-  ))
-_sym_db.RegisterMessage(ClientUpdatedSecretEvent)
-
-DisableWebhook = _reflection.GeneratedProtocolMessageType('DisableWebhook', (_message.Message,), dict(
-  DESCRIPTOR = _DISABLEWEBHOOK,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.DisableWebhook)
-  ))
-_sym_db.RegisterMessage(DisableWebhook)
-
-
-
-_CLIENTMGT = _descriptor.ServiceDescriptor(
-  name='ClientMgt',
-  full_name='client.ClientMgt',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=1377,
-  serialized_end=1815,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='Create',
-    full_name='client.ClientMgt.Create',
-    index=0,
-    containing_service=None,
-    input_type=_CLIENT,
-    output_type=_ID,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Read',
-    full_name='client.ClientMgt.Read',
-    index=1,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_CLIENT,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='List',
-    full_name='client.ClientMgt.List',
-    index=2,
-    containing_service=None,
-    input_type=_LISTCLIENTSREQUEST,
-    output_type=_CLIENTS,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Delete',
-    full_name='client.ClientMgt.Delete',
-    index=3,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Update',
-    full_name='client.ClientMgt.Update',
-    index=4,
-    containing_service=None,
-    input_type=_CLIENT,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='RegenerateSecret',
-    full_name='client.ClientMgt.RegenerateSecret',
-    index=5,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_SECRET,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Verify',
-    full_name='client.ClientMgt.Verify',
-    index=6,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Unverify',
-    full_name='client.ClientMgt.Unverify',
-    index=7,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Publish',
-    full_name='client.ClientMgt.Publish',
-    index=8,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Unpublish',
-    full_name='client.ClientMgt.Unpublish',
-    index=9,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_CLIENTMGT)
-
-DESCRIPTOR.services_by_name['ClientMgt'] = _CLIENTMGT
 
 # @@protoc_insertion_point(module_scope)

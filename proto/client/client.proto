@@ -2,182 +2,57 @@ syntax = "proto2";
 
 package client;
 
-message Empty {}
+import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
+//import "bitbucket.org/subiz/servicespec/proto/event/event.proto";
+import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 
-message Id {
-	optional string account_id = 1;
-	optional string id = 2;
-}
-
-enum ClientType {
-	// STONE is just default value, client should never have Type is STONE
-	STONE = 0;
-
-	// APP is general client type
-	APP = 1;
-
-	// CHANNEL is special client, that can and only listen chat topics of an account
-	CHANNEL = 2;
-
-	// BOT reserve for future
-	BOT = 3;
-}
-
-message Webhook {
-	// Url of webhook, https only
-	optional string url = 1;
-
-	// IsVerified set if we know the url is controlled by webhook creator
-	optional bool is_verified = 2;
-
-	// Topics list of topics that will be sent to webhook
-	repeated string Topics = 3;
-
-	// IsEnabled decide the webhook is being used or not
-	optional bool is_enabled = 4;
+message Clients {
+	optional common.Context ctx = 1;
+	repeated Client clients = 2;
 }
 
 message Client {
+	optional common.Context ctx = 1;
 	// 128 bit string identification of the client.
-	optional string id = 1;
+	optional string id = 3;
 
-	// secret used to authorize client with oauth2 server
-	optional string secret = 2;
+	// secre used to authorize client with oauth2 server
+	optional string secret = 4;
 
 	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
-	optional string logo_url = 3;
+	optional string logo_url = 5;
 
-	// owner id, could be Account or Agent
-	optional string owner_id = 4;
-
-	optional string account_id = 19;
-	optional string contact_email = 5;
-	optional string description = 6;
-	optional string short_description = 7;
+	optional string account_id = 6;
 
 	// IsVerified will be true if client is verified by the authority
 	optional bool is_verified = 8;
 
 	// List of URLs which client must register for oauth redirection
-  repeated string redirect_urls = 9;
+	optional string redirect_url = 9;
 
-	optional Webhook webhook = 10; // if prefix with - -> disabled
-
-	optional ClientType type = 11;
+	optional auth.ClientType type = 11;
 
 	optional string name = 12;
-
-	// Set if app is created or trusted by subiz,
-	// the client will have privilenge to do any action.
-	optional bool is_internal = 13;
 
 	// Version number of the client.
 	optional string version = 14;
 
-	// If this field setted to true, client is visible to any account, else,
-	// only visible in owner account.
-	optional bool is_public = 15;
+	optional bool is_enabled = 15;
 
-	// PublishDate, a RFC3339 date string show when have the client is
-	// published.
-	optional string publish_date = 16;
-
-	// Clients capable of maintaining the confidentiality of their
-	// credentials (e.g., client implemented on a secure server with
-	// restricted access to the client credentials), or capable of secure
-	// client authentication using other means.
-	optional bool is_confidential = 17;
-
-	// ============= CHANNEL ONLY SECTION ======
-	// conversations on this channel will be close if there
-	// are no message pass in last ClosedTimeout seconds
-	optional int32 close_timeout = 18;
-
-	//
-
-}
-
-message Secret {
-	optional string secret = 1;
-}
-
-message ListClientsRequest {
-	optional string account_id = 1;
-	optional string start_id = 3;
-	optional int32 limit = 4;
-}
-
-message Clients {
-	repeated Client clients = 3;
-}
-
-message BoolValueRequest {
-	optional string id = 1;
-	optional bool value = 2;
-}
-
-service ClientMgt {
-	rpc Create(Client) returns (Id) {}
-	rpc Read(Id) returns (Client) {}
-	rpc List(ListClientsRequest) returns (Clients) {}
-	rpc Delete(Id) returns (Empty) {}
-	rpc Update(Client) returns (Empty) {}
-	rpc RegenerateSecret(Id) returns(Secret) {}
-	rpc Verify(Id) returns (Empty) {}
-	rpc Unverify(Id) returns (Empty) {}
-	rpc Publish(Id) returns (Empty) {}
-	rpc Unpublish(Id) returns (Empty) {}
-
-	//rpc Authorize(Registration) returns (Empty) {}
-	//rpc Revoke(Registration) returns (Empty) {}
-	//rpc ListClientRegistrations(Id) returns (Registrations) {}
-	//rpc ListChannelRegistrations(Id) returns (Registrations) {}
-}
-
-message Registration {
-	optional string UserId = 1;
-	optional string ClientId = 2;
-
-	optional bool InvalidScope = 3;
-	optional string RegisterDate = 4;
-	repeated int32 ScopeIds = 5;
-}
-
-message Registrations {
-	repeated Registration Registraions = 1;
-}
-
-message ClientCreatedEvent {
-	optional Client Client = 1;
-}
-
-message ClientDeletedEvent {
-	optional string Id = 1;
-}
-
-message ClientUpdatedEvent {
-	optional Client Client = 1;
-}
-
-message ClientPublishedEvent {
-	optional string Id = 1;
-	optional bool Published = 2;
-}
-
-message ClientVerifiedEvent {
-	optional string Id = 1;
-	optional bool Verified = 2;
-}
-
-message ClientUpdatedSecretEvent {
-	optional string Id = 1;
-	optional string Secret = 2;
-}
-
-message DisableWebhook {
-	optional string ClientID = 1;
+	optional int64 created_time = 17;
+	optional int64 last_modified_time = 18;
 }
 
 enum Event {
-	ClientDisableWebhook = 0;
+	ClientCreateRequested = 20;
+	ClientUpdateRequested = 21;
+	ClientDeleteRequested = 22;
+	ClientReadRequested = 23;
+	ClientListRequested = 24;
+}
+
+message Id {
+	optional common.Context ctx = 1;
+	optional string id = 3;
+	optional string account_id = 2;
 }

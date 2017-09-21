@@ -2,34 +2,17 @@ syntax = "proto2";
 
 package auth;
 
-//import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
-//import "bitbucket.org/subiz/servicespec/proto/event/event.proto";
-//import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
-
-message Empty {}
-
-service Auth {
-	rpc ReadScope(ScopeId) returns (Scope) {}
-	rpc List(Empty) returns (ScopesResponse) {}
-}
-
-
 message Credential {
 	optional string account_id = 1;
 	//int32 AccountPlan = 2;
 	optional string user_id = 3;
 	// scope that the user allow
 	optional Method method = 5;
-	// set to true if this credential is generated from internal service.
-	// Internal credential is trusted and have full access to any function
-	// when internal is set to true, all other fields is ignored
+
 	optional string client_id = 7;
-
 	optional ClientType client_type = 8;
-
 	repeated string scopes = 9;
 	optional string client_account_id = 10;
-
 }
 
 message Scope {
@@ -51,11 +34,11 @@ message Event {
 
 message Method {
 	// trigger
-	optional bool UpdateTrigger = 50;
-	optional bool DeleteTrigger = 51;
-	optional bool CreateTrigger = 52;
-	optional bool ReadTrigger = 53;
-	optional bool ListTrigger = 54;
+	optional bool update_trigger = 50;
+	optional bool delete_trigger = 51;
+	optional bool create_trigger = 52;
+	optional bool read_trigger = 53;
+	optional bool list_trigger = 54;
 	optional bool ReadAllTrigger = 55;
 	optional bool ListAllTrigger = 56;
 	optional bool UpdateAllTrigger = 57;
@@ -129,18 +112,6 @@ message Method {
 	optional bool WriteConversation = 192;
 }
 
-message ScopeId {
-  optional string Id = 1;
-}
-
-message UserId {
-	optional string Id = 1;
-}
-
-message ScopesResponse {
-	repeated Scope Scopes = 1;
-}
-
 message UserAuth {
 	optional string UserId = 1;
 	optional Method Method = 2;
@@ -208,44 +179,13 @@ enum ClientType {
 	BOT = 3;
 }
 
-message Id {
-	optional string id = 1;
-	optional string account_id = 2;
-}
-
 message User {
-	optional string id = 1;
-	optional string account_id = 2;
-	optional string email = 3;
-	optional string password = 4;
-}
-
-message Client {
-	// 128 bit string identification of the client.
-	optional string id = 1;
-
-	// secre used to authorize client with oauth2 server
-	optional string secret = 2;
-
-	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
-	optional string logo_url = 3;
-
-	optional string account_id = 4;
-
-	// IsVerified will be true if client is verified by the authority
-	optional bool is_verified = 8;
-
-	// List of URLs which client must register for oauth redirection
-	optional string redirect_url = 9;
-
-	optional ClientType type = 11;
-
-	optional string name = 12;
-
-	// Version number of the client.
-	optional string version = 14;
-
-	optional bool is_enabled = 15;
+	reserved 1, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
+	//	optioanl common.Context ctx = 1;
+	optional string id = 2;
+	optional string account_id = 3;
+	optional string email = 5;
+	optional string encrypted_password = 17;
 }
 
 enum AuthorizationType {
@@ -254,14 +194,7 @@ enum AuthorizationType {
 }
 
 enum EVENT {
-	AuthClientUpserted = 0; // Client
-	AuthClientDeleted = 1; // Id
-	AuthUserUpserted = 2; // User
-	AuthUserDeleted = 3; // Id
 	AuthExpireCookie = 4; //CookieExpire
-
-	ClientUpserted = 10;
-	ClientDeleted = 11;
 
 	ClientAuthorized = 12;
 }
