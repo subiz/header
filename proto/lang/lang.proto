@@ -49,4 +49,8 @@ enum T {
 	empty_url = 64;
 	empty_name = 65;
 	client_not_found = 66;
+
+
+	empty_account = 70;
+	invalid_conversation_state = 71;
 }
