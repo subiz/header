@@ -2,7 +2,6 @@ syntax = "proto2";
 
 package event;
 
-//import "bitbucket.org/subiz/servicespec/proto/chat/chat.proto";
 import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 import "bitbucket.org/subiz/servicespec/proto/account/account.proto";
 import "bitbucket.org/subiz/servicespec/proto/client/client.proto";
@@ -33,7 +32,7 @@ message UnsubscribeMessage {
 }
 
 enum EVENT {
-	Out_EventCreated = 0;
+	//Out_EventCreated = 0;
 	Send_ = 1;
 	ApiReply = 2;
 	RawEventCreated = 3;  //
@@ -43,70 +42,11 @@ enum EVENT {
 	UnsubscribeReply = 7;
 }
 
-message JSONEvent {
-	optional common.Context ctx = 1;
-	optional bytes event = 2;
+message RawEvents {
+	repeated RawEvent events = 4;
 }
-
-// OEEventCreated is a kafka event created when subiz want
-// to send downstream
-message OEvent {
-	optional string id = 1;
-
-	// Event is name of the event see ./event.json
-	optional string event = 2;
-
-	optional string account_id = 3;
-
-	// Users is list of user that event need to be sent to. (3000 max)
-	repeated User Users = 4;
-
-	// Payload is content of event in JSON format, see ./event.json
-	optional string payload = 7;
-}
-
-message ChatSentUser {
-	optional string id = 1;
-	optional string type = 2;
-	optional string last_seen_id = 3;
-}
-
-message ChatSent {
-
-}
-
-// An incomming chat is assigned to agent
-message ChatAssigned {
-	optional string _Methods = 1; // ReadChats | ReadChat
-	optional string Timestamp = 2;
-	//optional chat.Chat Chat = 3;
-}
-
-message ChatWaiting {
-	optional string _Methods = 1; // ReadChats | ReadChat
-	optional string Timestamp = 2;
-	//optional chat.UnassignedChat UnassignedChat = 3;
-}
-
-
-
-message Chat_X_Sent {}
 
 message RawEvent {
-	//optional common.Context ctx = 1;
-	optional string id = 3;
-	optional string account_id = 4;
-	optional string app_id = 5;
-	optional string sender_id = 6;
-	optional string sender_type = 7;
-
-	optional int64 timestamp = 8;
-	optional string type = 9;
-	optional string channel_id = 10;
-	repeated string topic_ids = 11;
-}
-
-message RawConversationWaitingEvent {
 	optional common.Context ctx = 1;
 	optional string id = 3;
 	optional string account_id = 4;
@@ -117,91 +57,43 @@ message RawConversationWaitingEvent {
 	optional int64 timestamp = 8;
 	optional string type = 9;
 	optional string channel_id = 10;
-	repeated string topic_ids = 11;
-
-	optional string message_to = 15;
-	optional string page_url = 16;
-	optional string page_title = 17;
-	optional string message = 18;
-	optional string browser_language = 19;
-	optional string language = 20;
-	optional string device_type = 21;
-	optional string user_id = 22;
-	optional string conversation_id = 24;
-}
-
-message RawConversationJoinedEvent {
-	optional common.Context ctx = 1;
-	optional string id = 3;
-	optional string account_id = 4;
-	optional string app_id = 5;
-	optional string sender_id = 6;
-	optional string sender_type = 7;
-
-	optional int64 timestamp = 8;
-	optional string type = 9;
-	optional string channel_id = 10;
-	repeated string topic_ids = 11;
-
-	optional string conversation_id = 13;
-	optional string joiner_id = 14;
-	optional string joiner_type = 15;
-}
-
-message RawConversationLeftEvent {
-	optional common.Context ctx = 1;
-	optional string id = 3;
-	optional string account_id = 4;
-	optional string app_id = 5;
-	optional string sender_id = 6;
-	optional string sender_type = 7;
-
-	optional int64 timestamp = 8;
-	optional string type = 9;
-	optional string channel_id = 10;
-	repeated string topic_ids = 11;
-
-	optional string conversation_id = 13;
-	optional string leaver_id = 14;
-	//optional string joiner_type = 15;
-}
-
-message RawConversationStartedEvent {
-
-	optional common.Context ctx = 1;
- 	optional string id = 3;
-	optional string account_id = 4;
-	optional string app_id = 5;
-	optional string sender_id = 6;
-	optional string sender_type = 7;
-
-	optional int64 timestamp = 8;
-	optional string type = 9;
-	optional string channel_id = 10;
-	repeated string topic_ids = 11;
+	repeated string topics = 11;
 	//---
+
+
 	optional string conversation_id = 15;
+
+	// request
+	optional int32 state = 16;
+	optional string message_to = 17;
+	optional string page_url = 18;
+	optional string page_title = 19;
+	optional string message = 20;
+	optional string browser_language = 21;
+	optional string language = 22;
+	optional string device_type = 23;
+	optional string user_id = 24;
+	//optional string conversation_id = 25;
+
+	// joined event
+	//optional string conversation_id = 26;
+	optional string joiner_id = 27;
+	optional string joiner_type = 28;
+
+	// left event
+	optional string leaver_id = 29;
+	//optional string conversation_id = 25;
+
+	// message event
+	//optional string conversation_id = 19;
+	repeated Attachment attachments = 30;
+	optional string text = 31;
+	optional string format = 32;
+
+	repeated string deliverieds = 33;
 }
 
-message RawConversationMessageEvent {
-	optional common.Context ctx = 1;
-	optional string id = 3;
-	optional string account_id = 4;
-	optional string app_id = 5;
-	optional string sender_id = 6;
-	optional string sender_type = 7;
 
-	optional int64 timestamp = 8;
-	optional string type = 9;
-	optional string channel_id = 10;
-	repeated string topic_ids = 11;
-
-	optional string conversation_id = 19;
-	repeated Attachment attachments = 20;
-	optional string text = 21;
-	optional string format = 22;
-
-}
 
 message Event {
 	optional common.Context ctx = 1;
@@ -237,12 +129,49 @@ message Message {
 	optional string format = 2;
 }
 
+message Action {
+	optional string type = 2;
+
+	// post back
+	optional string title = 3;
+	optional string payload = 4;
+	optional string image_url = 5;
+
+	// event button
+
+  // url button
+}
+
+message GenericElementTemplate {
+	optional string title = 2;
+	optional string image_url = 3;
+	optional string subtitle = 4;
+	optional Action default_action = 5;
+	repeated Action actions = 6;
+}
+
 message Attachment {
+	optional string type = 12;
+	// file
+	optional string mimetype = 2;
+	optional string link = 3;
+	optional string preview = 4;
+	optional string name = 5;
+	optional string descrition = 6;
+	optional string data = 7; // for custom data
+	optional int32 size = 13; // byte
+
+	// generic
+	repeated GenericElementTemplate elements = 8;
+
+	// preview
+	optional string title = 9;
+	optional string color = 10;
+	optional string pretext = 11;
 
 }
 
 message Sender {
-
 	optional common.Context ctx = 5;
 	optional string id = 1;
 	optional string type = 2;
@@ -263,6 +192,18 @@ message Reply {
 	optional int32 err_class = 15;
 
 	optional bytes payload = 7;
+}
+
+enum ActionType {
+	url_button = 2;
+	postback_button = 3;
+	event_button = 4;
+}
+
+enum AttachmentType {
+	file = 2;
+	generic = 3;
+	preview = 4;
 }
 
 enum EventType {
@@ -290,6 +231,9 @@ enum SubscriberType {
 }
 
 message Subscription { // raweventcreatedpayload
+	reserved "target_partition";
+	reserved 13;
+
 	optional common.Context ctx = 1;
 	optional string topic = 3;
 	//optional string user_id = 4; // connectorid or userid
@@ -302,7 +246,7 @@ message Subscription { // raweventcreatedpayload
 	//optional string subscriber_id = 9;
 	optional string target_topic = 10;
 	optional string target_key = 11;
-	optional string target_partition = 13;
+	//optional string target_partition = 13;
 	// time to life in seconds
 	optional int64 ttls = 12;
 
