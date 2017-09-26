@@ -1,0 +1,47 @@
+syntax = "proto2";
+
+// notibox store all notification in subiz
+// it DOESN'T take care of pushing notification to user
+import "bitbucket.org/subiz/header/common/common.proto";
+import "bitbucket.org/subiz/header/push/push.proto";
+
+package notibox;
+
+// Notification represent an user's notification
+message Notification {
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string event = 3;
+
+	optional push.NotiType type = 4;
+	optional int64 created_time = 5;
+	optional string template = 6;
+	optional bytes data = 7;
+
+	optional string box_id = 8;
+	optional bool read = 9;
+}
+
+message AddNotificationRequest {
+	optional common.Context ctx = 1;
+	repeated string box_ids = 2;
+	optional Notification notification = 3;
+}
+
+message ReadNotification {
+	optional common.Context ctx = 1;
+	optional string box_id = 2;
+	repeated string noti_ids = 3;
+	optional bool read = 4;
+}
+
+message ListRequest {
+	optional common.Context ctx = 1;
+	optional string box_id = 3;
+	optional string start_id = 4;
+	optional int32 limit = 5;
+}
+
+message Notifications {
+	repeated Notification notifications = 1;
+}

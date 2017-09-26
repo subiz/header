@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package ws;
+
+import "bitbucket.org/subiz/header/common/common.proto";
+
+message Subscribe {
+	optional common.Context ctx = 1;
+	//optional string connection_id = 2;
+	repeated string events = 3;
+}
+
+message ListRequest {
+	optional common.Context ctx = 1;
+	optional string connection_id = 2;
+}
+
+enum Event {
+	WsSend = 3;
+}
+
+message Payload {
+	optional int64 id = 3;
+	optional string message = 4;
+}

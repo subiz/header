@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package push;
+
+import "bitbucket.org/subiz/header/common/common.proto";
+
+message Token {
+	string account_id = 1;
+	string user_id = 2;
+	string token = 3;
+	// string ExpiredIn = 4;
+	DeviceType device_type = 5;
+}
+
+message TokenRemoveRequest {
+	string account_id = 1;
+	string user_id = 2;
+	string token = 3;
+}
+
+message PushRequest {
+	string account_id = 1;
+	repeated string user_ids = 2;
+	DeviceType device_type = 3;
+
+	string title = 4;
+	string body = 5;
+	string icon = 6;
+	string click_action = 7;
+}
+
+enum DeviceType {
+	NONE = 0;
+	BROWSER = 1;
+	MOBILE = 2;
+}
+
+message Result {
+	string account_id = 1;
+	repeated string user_ids = 2;
+	repeated bool success = 3;
+}
+
+enum Event {
+	PushTokenRegisterRequested = 0; // TokenRegister
+	PushTokenRemoveRequested = 2; // TokenRemoveRequest
+	PushRequested = 3; // PushRequest
+	PushConfigUpdateRequested = 4;
+	PushConfigReadRequested = 5;
+}
+
+message Id {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+}
+
+enum NotiType {
+	SystemMaintainance = 0;
+	RuleUpdate = 3;
+	AccountUpdate = 4;
+	DirectMessage = 5;
+	News = 6; /* for mobile only */
+}
+
+message PushConfiguration {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string email = 5;
+
+	//optional bool NotificationSound = 1;
+	repeated NotiType email_notis = 6;
+	repeated NotiType desktop_notis = 7;
+  repeated NotiType mobile_notis = 9;
+
+	// MobilePushDelayTiming is the seconds subiz delay sending
+	// notification to mobile after notifiy user in desktop device.
+	// If user sees the notification during this time, the push will
+	// be cancelled.
+	int32 mobile_push_delay_seconds = 10;
+
+	// EmailThreshold is a duration (in minute) in which no more
+	// than 1 email is being sent
+	int32 email_threshold = 11;
+}
