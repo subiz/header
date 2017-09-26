@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='user/user.proto',
   package='user',
   syntax='proto2',
-  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"\xdf\x02\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\r\n\x05IsBan\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\"\"\n\x05Users\x12\x19\n\x05Users\x18\x01 \x03(\x0b\x32\n.user.User\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"F\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02pP\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\"D\n\x03Ids\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x0b\n\x03ids\x18\x04 \x03(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t*\x1e\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00')
+  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"\xe0\x02\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\x0e\n\x06is_ban\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\"\"\n\x05Users\x12\x19\n\x05users\x18\x01 \x03(\x0b\x32\n.user.User\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"F\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02pP\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\"D\n\x03Ids\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x0b\n\x03ids\x18\x04 \x03(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t*k\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00\x12\x17\n\x13UserUpdateRequested\x10\x02\x12\x17\n\x13UserCreateRequested\x10\x03\x12\x19\n\x15UserReadBulkRequested\x10\x04')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -35,16 +35,31 @@ _EVENT = _descriptor.EnumDescriptor(
       name='UserReadRequested', index=0, number=0,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserUpdateRequested', index=1, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserCreateRequested', index=2, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserReadBulkRequested', index=3, number=4,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1137,
-  serialized_end=1167,
+  serialized_start=1138,
+  serialized_end=1245,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
 Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
 UserReadRequested = 0
+UserUpdateRequested = 2
+UserCreateRequested = 3
+UserReadBulkRequested = 4
 
 
 
@@ -119,7 +134,7 @@ _USER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='IsBan', full_name='user.User.IsBan', index=9,
+      name='is_ban', full_name='user.User.is_ban', index=9,
       number=14, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -187,7 +202,7 @@ _USER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=85,
-  serialized_end=436,
+  serialized_end=437,
 )
 
 
@@ -199,7 +214,7 @@ _USERS = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Users', full_name='user.Users.Users', index=0,
+      name='users', full_name='user.Users.users', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -217,8 +232,8 @@ _USERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=438,
-  serialized_end=472,
+  serialized_start=439,
+  serialized_end=473,
 )
 
 
@@ -283,8 +298,8 @@ _DEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=474,
-  serialized_end=594,
+  serialized_start=475,
+  serialized_end=595,
 )
 
 
@@ -335,8 +350,8 @@ _TRACE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=596,
-  serialized_end=666,
+  serialized_start=597,
+  serialized_end=667,
 )
 
 
@@ -380,8 +395,8 @@ _ID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=668,
-  serialized_end=734,
+  serialized_start=669,
+  serialized_end=735,
 )
 
 
@@ -425,8 +440,8 @@ _IDS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=736,
-  serialized_end=804,
+  serialized_start=737,
+  serialized_end=805,
 )
 
 
@@ -484,8 +499,8 @@ _LISTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=806,
-  serialized_end=919,
+  serialized_start=807,
+  serialized_end=920,
 )
 
 
@@ -536,8 +551,8 @@ _MERGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=921,
-  serialized_end=1016,
+  serialized_start=922,
+  serialized_end=1017,
 )
 
 
@@ -595,14 +610,14 @@ _GREETINGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1018,
-  serialized_end=1135,
+  serialized_start=1019,
+  serialized_end=1136,
 )
 
 _USER.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _USER.fields_by_name['traces'].message_type = _TRACE
 _USER.fields_by_name['devices'].message_type = _DEVICE
-_USERS.fields_by_name['Users'].message_type = _USER
+_USERS.fields_by_name['users'].message_type = _USER
 _ID.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _IDS.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
 _LISTREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT

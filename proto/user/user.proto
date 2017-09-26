@@ -1,24 +1,20 @@
 syntax = "proto2";
 
 package user;
+
 import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 
 message User {
 	optional common.Context ctx = 1;
 	optional string id = 3;
 	optional string account_id = 4;
-
 	optional string fullname = 5;
-
 	repeated string phones = 7;
 	repeated string emails = 10;
-
 	repeated Trace traces = 11;
 	repeated string alias = 12;
 	repeated Device devices = 13;
-
-	optional bool IsBan = 14;
-
+	optional bool is_ban = 14;
 	optional string avatar_url = 15;
 
 
@@ -30,7 +26,9 @@ message User {
 	optional int32 total_sessions = 24;
 }
 
-message Users { repeated User Users = 1; }
+message Users {
+	repeated User users = 1;
+}
 
 message Device {
 	optional int32 id = 3;
@@ -58,9 +56,7 @@ message Empty {};
 
 service UserMgr {
 	rpc Greeting(GreetingRequest) returns (Id) {}
-	rpc Update(User) returns (Empty) {}
-	rpc Ban(Id) returns (Empty) {}
-	rpc Unban(Id) returns (Empty) {}
+
 	rpc Merge(MergeRequest) returns (Empty) {}
 	rpc ReadBulk(Ids) returns (Users) {}
 	rpc List(ListRequest) returns (Users) {}
@@ -80,7 +76,6 @@ message ListRequest {
 	optional string keyword = 4;
 }
 
-
 message MergeRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -98,4 +93,8 @@ message GreetingRequest {
 
 enum Event {
 	UserReadRequested = 0; // Id
+
+	UserUpdateRequested = 2; // User
+	UserCreateRequested = 3; // User
+	UserReadBulkRequested = 4; // Ids
 }
