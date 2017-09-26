@@ -6,67 +6,16 @@ package conversation;
 import "bitbucket.org/subiz/servicespec/proto/event/event.proto";
 import "bitbucket.org/subiz/servicespec/proto/common/common.proto";
 
-/*
-	service ChatMgr {
-	// COLLECTOR for channel only
-	// fire EvChatSent
-	rpc Send(ChatEvent) returns (Id) {}
-
-	// request chat from user
-	// fire EvChatWaiting, EvChatCreated
-	rpc Request(ChatRequest) returns (Id) {}
-
-	// fire EvAssigned
-	//rpc AckRequest(ChatRequestAck) returns (common.Empty) {}
-
-	// start chat from agent
-	// fire EvChatCreated
-	rpc Start(ChatStart) returns (Id) {}
-
-	// QUERRIER
-	// List chats for specific user
-	rpc ListChatsByUser(ListChatsByUserRequest) returns (ChatPreviews) {}
-	rpc ListChatEvents(ListChatEventRequest) returns (ChatEvents) {}
-
-	// Unassigned list
-	rpc ListUnassignedChats(Id) returns (UnassignedChats) {} // limit 300
-	rpc AcceptUnassignedChat(AcceptRequest) returns (Bool) {}
-
-	//rpc Read(Empty) returns (Empty) {}
-	}
-*/
-
 message Id {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string id = 3;
 }
 
-message AgentId {
-	optional string AccountId = 1;
-	optional string AgentId = 2;
-}
-
-message AgentInGroup {
-	optional string AccountId = 1;
-	optional 	string AgentId = 2;
-	optional 	string GroupId = 3;
-}
-
-message AgentStatus {
-	optional 	string AccountId = 1;
-	optional 	string AgentId = 2;
-	optional 	bool IsActive = 3;
-}
-
 message Account {
 	optional common.Context ctx = 1;
-	optional string Id = 2;
-	optional int32 MaxRules = 3;
-}
-
-message Bool {
-	optional 	bool Bool = 1;
+	optional string id = 2;
+	optional int32 max_rules = 3;
 }
 
 enum JoinOperator {
@@ -105,13 +54,13 @@ message Condition {
 }
 
 message Route {
-	repeated Rule Rules = 1;
+	repeated Rule rules = 1;
 }
 
 message RouteResult {
-	optional string RuleId = 1;
-	optional 	AssignStrategy Strategy = 3;
-	repeated string AgentIds = 4;
+	optional string rule_id = 1;
+	optional 	AssignStrategy strategy = 3;
+	repeated string agent_ids = 4;
 }
 
 enum AssignStrategy {
@@ -123,31 +72,11 @@ enum AssignStrategy {
 	ROUNDROBINAGENTS = 6;
 }
 
-message GroupDeleteEvent {
-	optional string GroupId = 1;
-}
-
-message GroupUpdateEvent {
-	optional 	string GroupId = 1;
-	repeated string MemberIds = 2;
-}
-
-message AgentDeletedEvent {
-	optional string AgentId = 1;
-}
-
-message AgentUpdateEvent {
-	optional 	string AgentId = 1;
-	optional 	bool IsActive = 2;
-	optional 	bool IsConfirmed = 3;
-}
-
-message Ids {
-	repeated string Ids = 1;
-}
-
 // get number of unread message
 message Conversation {
+	reserved "request_id";
+	reserved 13;
+
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
@@ -162,7 +91,14 @@ message Conversation {
 	repeated string tags = 10;
 
 	optional ConversationState state = 11;
-	optional string request_id = 13;
+	optional ChatRequest request = 14;
+}
+
+message UserConversation { // used in database
+	optional ConversationState state = 11;
+	optional string user_id = 2;
+	optional string convo_id = 4;
+	optional string last_seen_event = 5;
 }
 
 enum ConversationState {
@@ -171,19 +107,6 @@ enum ConversationState {
 	unassigned = 2;
 	opened = 3;
 	closed = 4;
-}
-
-message Previews {
-	repeated Preview previews = 1;
-}
-
-// ChatPreview is a chat header with some events in it
-message Preview {
-	optional Conversation conversation = 1;
-	repeated ChatEvent events = 2;
-
-	// Unread number of unread event
-	optional int64 Unread = 3;
 }
 
 // ChateEventType
@@ -205,71 +128,6 @@ enum ChatEventType {
 	ACK = 12;
 	TYPING = 13;
 	STOPTYPING = 14;
-}
-
-message Attachment {
-	/* Type show type of attachment
-	 * Value:
-	 *   Template
-	 *     - file
-	 *       + video
-	 *       + audio
-	 *       + image
-	 *     - preview (preview for link)
-	 *     - content
-	 *     - template
-	 *
-	 *       + receipt, ticket, ...
-	 *     - quick_replies
-	 *       + ask_form
-	 *       + generic_template
-	 *       + list_template
-	 *   Input control
-	 *     - button           -> send list of event to chat
-	 *     - url
-	 *     - postback_button (single button)
-	 *     - textbox           -> contains value
-	 *     - ratebox            -> rate the chat (like 5 buttons but have beautiful display)
-	 */
-	optional string Type = 1;
-	optional string Payload = 2; // Custome JSON data
-}
-
-message ChatEvents {
-	repeated ChatEvent Events = 1;
-}
-
-message ChatEvent {
-	// ID of chat evet
-	optional 	string Id = 1;
-
-	// Type indicates type of chat event
-	optional 	ChatEventType Type = 2;
-
-	// AccountId refer to ID of account
-	optional string AccountId = 4;
-
-	// ChatId refer to ID of chat which contains this chat event
-	optional 	string ChatId = 3;
-
-	// CreatedTime is a RFC3339 string, tell when was event sent
-	optional string CreatedTime = 5;
-
-	// SenderId refer to who has sent the event, could be Agent, User or System
-	optional 	string SenderId = 6;
-
-	// SenderType indicate type of sender
-	optional event.UserType SenderType = 7;
-
-	// Content could be raw text, could be JSON data based on type
-	optional string Text = 8;
-
-	// Could be "", "raw" or "markdown", "html"
-	optional string Format = 9;
-
-	repeated Attachment Attachments = 10;
-
-	optional string State = 11;
 }
 
 enum DeviceType {
@@ -313,30 +171,19 @@ message ChatStart {
 	optional string channel_id = 5;
 }
 
-message AcceptRequest {
-	optional string AccountId = 1;
-	optional string AgentId = 2;
-	optional string ChatId = 3;
+message ReplyConversationRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 4;
+	optional string agent_id = 2;
+	optional string conversation_id = 3;
 }
 
-message ListUnassignChatsRequest {
-	optional string AccountId = 1;
-	optional string StartId = 2;
-	optional int32 Limit = 3;
-}
-
-message UnassignChat {
-	optional string AccountId = 1;
-	optional bool IsAssigned = 2;
-	optional string Message = 3;
-	optional string Ip = 4;
-	optional string Name = 5;
-	repeated string Emails = 6;
-	repeated string Phones = 7;
-}
-
-message Bools {
-	repeated bool Bools = 1;
+message ListConversations {
+	optional common.Context ctx = 1;
+	optional string account_id = 3;
+	optional ConversationState state = 4;
+	optional int32 limit = 5;
+	optional string start_id = 6;
 }
 
 message ListUsersUnreadRequest {
@@ -354,11 +201,12 @@ message UsersUnread {
 	repeated Unread Unreads = 1;
 }
 
-message ListChatEventRequest {
-	optional string AccountId = 1;
-	optional string ChatId = 2;
-	optional string StartId = 3;
-	optional int32 Limit = 4;
+message ListEventsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string start_id = 4;
+	optional int32 limit = 6;
 }
 
 message ListChatsByUserRequest {
@@ -429,7 +277,9 @@ enum Event {
 	ConversationTagRequested = 11;
 	ConversationUntagRequested = 12;
 
-
+	ConversationReadRequested = 13;
+	ConversationListRequested = 14;
+	ConversationReplyRequested = 15;
 
 	ConversationUpdateRuleRequested = 20; // rule
   ConversationCreateRuleRequested = 21; // rule
@@ -444,6 +294,10 @@ enum Event {
 	ConversationRequested = 50; // user request for new conversation
 	ConversationUserRequestReply = 51; // user
 	ConversationLimitUpdated = 52;
+
+	ConversationRequestWaitTimeout = 60;
+
+	ConversationListEventsRequested = 61;
 }
 // ==================
 
