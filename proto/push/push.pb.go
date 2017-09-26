@@ -4,28 +4,23 @@
 /*
 Package push is a generated protocol buffer package.
 
-push pushs (almost) every events to unfocused users
-
 It is generated from these files:
 	push/push.proto
 
 It has these top-level messages:
-	Empty
-	Id
 	Token
 	TokenRemoveRequest
-	UserPushConfiguration
+	PushRequest
+	Result
+	Id
+	PushConfiguration
 */
 package push
 
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-
-import (
-	context "golang.org/x/net/context"
-	grpc "google.golang.org/grpc"
-)
+import common "bitbucket.org/subiz/servicespec/proto/common"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -41,17 +36,20 @@ const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 type DeviceType int32
 
 const (
-	DeviceType_DESKTOP DeviceType = 0
-	DeviceType_MOBILE  DeviceType = 1
+	DeviceType_NONE    DeviceType = 0
+	DeviceType_BROWSER DeviceType = 1
+	DeviceType_MOBILE  DeviceType = 2
 )
 
 var DeviceType_name = map[int32]string{
-	0: "DESKTOP",
-	1: "MOBILE",
+	0: "NONE",
+	1: "BROWSER",
+	2: "MOBILE",
 }
 var DeviceType_value = map[string]int32{
-	"DESKTOP": 0,
-	"MOBILE":  1,
+	"NONE":    0,
+	"BROWSER": 1,
+	"MOBILE":  2,
 }
 
 func (x DeviceType) String() string {
@@ -59,45 +57,82 @@ func (x DeviceType) String() string {
 }
 func (DeviceType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-type Empty struct {
+type Event int32
+
+const (
+	Event_PushTokenRegisterRequested Event = 0
+	Event_PushTokenRemoveRequested   Event = 2
+	Event_PushRequested              Event = 3
+	Event_PushConfigUpdateRequested  Event = 4
+	Event_PushConfigReadRequested    Event = 5
+)
+
+var Event_name = map[int32]string{
+	0: "PushTokenRegisterRequested",
+	2: "PushTokenRemoveRequested",
+	3: "PushRequested",
+	4: "PushConfigUpdateRequested",
+	5: "PushConfigReadRequested",
+}
+var Event_value = map[string]int32{
+	"PushTokenRegisterRequested": 0,
+	"PushTokenRemoveRequested":   2,
+	"PushRequested":              3,
+	"PushConfigUpdateRequested":  4,
+	"PushConfigReadRequested":    5,
 }
 
-func (m *Empty) Reset()                    { *m = Empty{} }
-func (m *Empty) String() string            { return proto.CompactTextString(m) }
-func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (x Event) String() string {
+	return proto.EnumName(Event_name, int32(x))
+}
+func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
-type Id struct {
-	Id string `protobuf:"bytes,1,opt,name=Id" json:"Id,omitempty"`
+type NotiType int32
+
+const (
+	NotiType_SystemMaintainance NotiType = 0
+	NotiType_RuleUpdate         NotiType = 3
+	NotiType_AccountUpdate      NotiType = 4
+	NotiType_DirectMessage      NotiType = 5
+	NotiType_News               NotiType = 6
+)
+
+var NotiType_name = map[int32]string{
+	0: "SystemMaintainance",
+	3: "RuleUpdate",
+	4: "AccountUpdate",
+	5: "DirectMessage",
+	6: "News",
+}
+var NotiType_value = map[string]int32{
+	"SystemMaintainance": 0,
+	"RuleUpdate":         3,
+	"AccountUpdate":      4,
+	"DirectMessage":      5,
+	"News":               6,
 }
 
-func (m *Id) Reset()                    { *m = Id{} }
-func (m *Id) String() string            { return proto.CompactTextString(m) }
-func (*Id) ProtoMessage()               {}
-func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
-
-func (m *Id) GetId() string {
-	if m != nil {
-		return m.Id
-	}
-	return ""
+func (x NotiType) String() string {
+	return proto.EnumName(NotiType_name, int32(x))
 }
+func (NotiType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 type Token struct {
-	Token      string     `protobuf:"bytes,1,opt,name=Token" json:"Token,omitempty"`
-	UserId     string     `protobuf:"bytes,2,opt,name=UserId" json:"UserId,omitempty"`
-	ExpiredIn  string     `protobuf:"bytes,3,opt,name=ExpiredIn" json:"ExpiredIn,omitempty"`
-	DeviceType DeviceType `protobuf:"varint,4,opt,name=DeviceType,enum=push.DeviceType" json:"DeviceType,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	UserId    string `protobuf:"bytes,2,opt,name=user_id,json=userId" json:"user_id,omitempty"`
+	Token     string `protobuf:"bytes,3,opt,name=token" json:"token,omitempty"`
+	// string ExpiredIn = 4;
+	DeviceType DeviceType `protobuf:"varint,5,opt,name=device_type,json=deviceType,enum=push.DeviceType" json:"device_type,omitempty"`
 }
 
 func (m *Token) Reset()                    { *m = Token{} }
 func (m *Token) String() string            { return proto.CompactTextString(m) }
 func (*Token) ProtoMessage()               {}
-func (*Token) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*Token) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-func (m *Token) GetToken() string {
+func (m *Token) GetAccountId() string {
 	if m != nil {
-		return m.Token
+		return m.AccountId
 	}
 	return ""
 }
@@ -109,9 +144,9 @@ func (m *Token) GetUserId() string {
 	return ""
 }
 
-func (m *Token) GetExpiredIn() string {
+func (m *Token) GetToken() string {
 	if m != nil {
-		return m.ExpiredIn
+		return m.Token
 	}
 	return ""
 }
@@ -120,18 +155,26 @@ func (m *Token) GetDeviceType() DeviceType {
 	if m != nil {
 		return m.DeviceType
 	}
-	return DeviceType_DESKTOP
+	return DeviceType_NONE
 }
 
 type TokenRemoveRequest struct {
-	UserId string `protobuf:"bytes,1,opt,name=UserId" json:"UserId,omitempty"`
-	Token  string `protobuf:"bytes,2,opt,name=Token" json:"Token,omitempty"`
+	AccountId string `protobuf:"bytes,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	UserId    string `protobuf:"bytes,2,opt,name=user_id,json=userId" json:"user_id,omitempty"`
+	Token     string `protobuf:"bytes,3,opt,name=token" json:"token,omitempty"`
 }
 
 func (m *TokenRemoveRequest) Reset()                    { *m = TokenRemoveRequest{} }
 func (m *TokenRemoveRequest) String() string            { return proto.CompactTextString(m) }
 func (*TokenRemoveRequest) ProtoMessage()               {}
-func (*TokenRemoveRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (*TokenRemoveRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *TokenRemoveRequest) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
 
 func (m *TokenRemoveRequest) GetUserId() string {
 	if m != nil {
@@ -147,84 +190,215 @@ func (m *TokenRemoveRequest) GetToken() string {
 	return ""
 }
 
-type UserPushConfiguration struct {
-	AccountId string `protobuf:"bytes,1,opt,name=AccountId" json:"AccountId,omitempty"`
-	UserId    string `protobuf:"bytes,2,opt,name=UserId" json:"UserId,omitempty"`
-	Email     string `protobuf:"bytes,3,opt,name=Email" json:"Email,omitempty"`
-	// EmailNotificationEnabled is true if user want to receive
-	// notification emails
-	EmailNotificationEnabled bool `protobuf:"varint,4,opt,name=EmailNotificationEnabled" json:"EmailNotificationEnabled,omitempty"`
-	// DesktopPushNotificationEnabled is true if user enable desktop
-	// (browser) notification
-	DesktopPushNotificationEnabled bool `protobuf:"varint,5,opt,name=DesktopPushNotificationEnabled" json:"DesktopPushNotificationEnabled,omitempty"`
-	// MobilePushNotificationEnabled is true if user enable mobile
-	// push notification
-	MobilePushNotificationEnabled bool `protobuf:"varint,6,opt,name=MobilePushNotificationEnabled" json:"MobilePushNotificationEnabled,omitempty"`
-	// MobilePushDelayTiming is the seconds subiz delay sending
-	// notification to mobile after notifiy user in desktop device.
-	// If user sees the notification during this time, the push will
-	// be cancelled.
-	MobilePushDelayTimming int32 `protobuf:"varint,7,opt,name=MobilePushDelayTimming" json:"MobilePushDelayTimming,omitempty"`
-	// EmailThreshold is a duration (in minute) in which no more
-	// than 1 email is being sent
-	EmailThreshold int32 `protobuf:"varint,8,opt,name=EmailThreshold" json:"EmailThreshold,omitempty"`
+type PushRequest struct {
+	AccountId   string     `protobuf:"bytes,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	UserIds     []string   `protobuf:"bytes,2,rep,name=user_ids,json=userIds" json:"user_ids,omitempty"`
+	DeviceType  DeviceType `protobuf:"varint,3,opt,name=device_type,json=deviceType,enum=push.DeviceType" json:"device_type,omitempty"`
+	Title       string     `protobuf:"bytes,4,opt,name=title" json:"title,omitempty"`
+	Body        string     `protobuf:"bytes,5,opt,name=body" json:"body,omitempty"`
+	Icon        string     `protobuf:"bytes,6,opt,name=icon" json:"icon,omitempty"`
+	ClickAction string     `protobuf:"bytes,7,opt,name=click_action,json=clickAction" json:"click_action,omitempty"`
 }
 
-func (m *UserPushConfiguration) Reset()                    { *m = UserPushConfiguration{} }
-func (m *UserPushConfiguration) String() string            { return proto.CompactTextString(m) }
-func (*UserPushConfiguration) ProtoMessage()               {}
-func (*UserPushConfiguration) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (m *PushRequest) Reset()                    { *m = PushRequest{} }
+func (m *PushRequest) String() string            { return proto.CompactTextString(m) }
+func (*PushRequest) ProtoMessage()               {}
+func (*PushRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
-func (m *UserPushConfiguration) GetAccountId() string {
+func (m *PushRequest) GetAccountId() string {
 	if m != nil {
 		return m.AccountId
 	}
 	return ""
 }
 
-func (m *UserPushConfiguration) GetUserId() string {
+func (m *PushRequest) GetUserIds() []string {
+	if m != nil {
+		return m.UserIds
+	}
+	return nil
+}
+
+func (m *PushRequest) GetDeviceType() DeviceType {
+	if m != nil {
+		return m.DeviceType
+	}
+	return DeviceType_NONE
+}
+
+func (m *PushRequest) GetTitle() string {
+	if m != nil {
+		return m.Title
+	}
+	return ""
+}
+
+func (m *PushRequest) GetBody() string {
+	if m != nil {
+		return m.Body
+	}
+	return ""
+}
+
+func (m *PushRequest) GetIcon() string {
+	if m != nil {
+		return m.Icon
+	}
+	return ""
+}
+
+func (m *PushRequest) GetClickAction() string {
+	if m != nil {
+		return m.ClickAction
+	}
+	return ""
+}
+
+type Result struct {
+	AccountId string   `protobuf:"bytes,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	UserIds   []string `protobuf:"bytes,2,rep,name=user_ids,json=userIds" json:"user_ids,omitempty"`
+	Success   []bool   `protobuf:"varint,3,rep,packed,name=success" json:"success,omitempty"`
+}
+
+func (m *Result) Reset()                    { *m = Result{} }
+func (m *Result) String() string            { return proto.CompactTextString(m) }
+func (*Result) ProtoMessage()               {}
+func (*Result) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+
+func (m *Result) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *Result) GetUserIds() []string {
+	if m != nil {
+		return m.UserIds
+	}
+	return nil
+}
+
+func (m *Result) GetSuccess() []bool {
+	if m != nil {
+		return m.Success
+	}
+	return nil
+}
+
+type Id struct {
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Id        string          `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+}
+
+func (m *Id) Reset()                    { *m = Id{} }
+func (m *Id) String() string            { return proto.CompactTextString(m) }
+func (*Id) ProtoMessage()               {}
+func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+
+func (m *Id) GetCtx() *common.Context {
+	if m != nil {
+		return m.Ctx
+	}
+	return nil
+}
+
+func (m *Id) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *Id) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+type PushConfiguration struct {
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	UserId    string          `protobuf:"bytes,3,opt,name=user_id,json=userId" json:"user_id,omitempty"`
+	Email     string          `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`
+	// optional bool NotificationSound = 1;
+	EmailNotis   []NotiType `protobuf:"varint,6,rep,packed,name=email_notis,json=emailNotis,enum=push.NotiType" json:"email_notis,omitempty"`
+	DesktopNotis []NotiType `protobuf:"varint,7,rep,packed,name=desktop_notis,json=desktopNotis,enum=push.NotiType" json:"desktop_notis,omitempty"`
+	MobileNotis  []NotiType `protobuf:"varint,9,rep,packed,name=mobile_notis,json=mobileNotis,enum=push.NotiType" json:"mobile_notis,omitempty"`
+	// MobilePushDelayTiming is the seconds subiz delay sending
+	// notification to mobile after notifiy user in desktop device.
+	// If user sees the notification during this time, the push will
+	// be cancelled.
+	MobilePushDelaySeconds int32 `protobuf:"varint,10,opt,name=mobile_push_delay_seconds,json=mobilePushDelaySeconds" json:"mobile_push_delay_seconds,omitempty"`
+	// EmailThreshold is a duration (in minute) in which no more
+	// than 1 email is being sent
+	EmailThreshold int32 `protobuf:"varint,11,opt,name=email_threshold,json=emailThreshold" json:"email_threshold,omitempty"`
+}
+
+func (m *PushConfiguration) Reset()                    { *m = PushConfiguration{} }
+func (m *PushConfiguration) String() string            { return proto.CompactTextString(m) }
+func (*PushConfiguration) ProtoMessage()               {}
+func (*PushConfiguration) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+
+func (m *PushConfiguration) GetCtx() *common.Context {
+	if m != nil {
+		return m.Ctx
+	}
+	return nil
+}
+
+func (m *PushConfiguration) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *PushConfiguration) GetUserId() string {
 	if m != nil {
 		return m.UserId
 	}
 	return ""
 }
 
-func (m *UserPushConfiguration) GetEmail() string {
+func (m *PushConfiguration) GetEmail() string {
 	if m != nil {
 		return m.Email
 	}
 	return ""
 }
 
-func (m *UserPushConfiguration) GetEmailNotificationEnabled() bool {
+func (m *PushConfiguration) GetEmailNotis() []NotiType {
 	if m != nil {
-		return m.EmailNotificationEnabled
+		return m.EmailNotis
 	}
-	return false
+	return nil
 }
 
-func (m *UserPushConfiguration) GetDesktopPushNotificationEnabled() bool {
+func (m *PushConfiguration) GetDesktopNotis() []NotiType {
 	if m != nil {
-		return m.DesktopPushNotificationEnabled
+		return m.DesktopNotis
 	}
-	return false
+	return nil
 }
 
-func (m *UserPushConfiguration) GetMobilePushNotificationEnabled() bool {
+func (m *PushConfiguration) GetMobileNotis() []NotiType {
 	if m != nil {
-		return m.MobilePushNotificationEnabled
+		return m.MobileNotis
 	}
-	return false
+	return nil
 }
 
-func (m *UserPushConfiguration) GetMobilePushDelayTimming() int32 {
+func (m *PushConfiguration) GetMobilePushDelaySeconds() int32 {
 	if m != nil {
-		return m.MobilePushDelayTimming
+		return m.MobilePushDelaySeconds
 	}
 	return 0
 }
 
-func (m *UserPushConfiguration) GetEmailThreshold() int32 {
+func (m *PushConfiguration) GetEmailThreshold() int32 {
 	if m != nil {
 		return m.EmailThreshold
 	}
@@ -232,217 +406,62 @@ func (m *UserPushConfiguration) GetEmailThreshold() int32 {
 }
 
 func init() {
-	proto.RegisterType((*Empty)(nil), "push.Empty")
-	proto.RegisterType((*Id)(nil), "push.Id")
 	proto.RegisterType((*Token)(nil), "push.Token")
 	proto.RegisterType((*TokenRemoveRequest)(nil), "push.TokenRemoveRequest")
-	proto.RegisterType((*UserPushConfiguration)(nil), "push.UserPushConfiguration")
+	proto.RegisterType((*PushRequest)(nil), "push.PushRequest")
+	proto.RegisterType((*Result)(nil), "push.Result")
+	proto.RegisterType((*Id)(nil), "push.Id")
+	proto.RegisterType((*PushConfiguration)(nil), "push.PushConfiguration")
 	proto.RegisterEnum("push.DeviceType", DeviceType_name, DeviceType_value)
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// Client API for NotiDeli service
-
-type NotiDeliClient interface {
-	RegisterToken(ctx context.Context, in *Token, opts ...grpc.CallOption) (*Empty, error)
-	RemoveToken(ctx context.Context, in *TokenRemoveRequest, opts ...grpc.CallOption) (*Empty, error)
-	Config(ctx context.Context, in *UserPushConfiguration, opts ...grpc.CallOption) (*Empty, error)
-	// GetConfig get notification config for specific user
-	GetConfig(ctx context.Context, in *Id, opts ...grpc.CallOption) (*UserPushConfiguration, error)
-}
-
-type notiDeliClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewNotiDeliClient(cc *grpc.ClientConn) NotiDeliClient {
-	return &notiDeliClient{cc}
-}
-
-func (c *notiDeliClient) RegisterToken(ctx context.Context, in *Token, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/push.NotiDeli/RegisterToken", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notiDeliClient) RemoveToken(ctx context.Context, in *TokenRemoveRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/push.NotiDeli/RemoveToken", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notiDeliClient) Config(ctx context.Context, in *UserPushConfiguration, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/push.NotiDeli/Config", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *notiDeliClient) GetConfig(ctx context.Context, in *Id, opts ...grpc.CallOption) (*UserPushConfiguration, error) {
-	out := new(UserPushConfiguration)
-	err := grpc.Invoke(ctx, "/push.NotiDeli/GetConfig", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for NotiDeli service
-
-type NotiDeliServer interface {
-	RegisterToken(context.Context, *Token) (*Empty, error)
-	RemoveToken(context.Context, *TokenRemoveRequest) (*Empty, error)
-	Config(context.Context, *UserPushConfiguration) (*Empty, error)
-	// GetConfig get notification config for specific user
-	GetConfig(context.Context, *Id) (*UserPushConfiguration, error)
-}
-
-func RegisterNotiDeliServer(s *grpc.Server, srv NotiDeliServer) {
-	s.RegisterService(&_NotiDeli_serviceDesc, srv)
-}
-
-func _NotiDeli_RegisterToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Token)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotiDeliServer).RegisterToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/push.NotiDeli/RegisterToken",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotiDeliServer).RegisterToken(ctx, req.(*Token))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotiDeli_RemoveToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TokenRemoveRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotiDeliServer).RemoveToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/push.NotiDeli/RemoveToken",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotiDeliServer).RemoveToken(ctx, req.(*TokenRemoveRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotiDeli_Config_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserPushConfiguration)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotiDeliServer).Config(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/push.NotiDeli/Config",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotiDeliServer).Config(ctx, req.(*UserPushConfiguration))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _NotiDeli_GetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(NotiDeliServer).GetConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/push.NotiDeli/GetConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NotiDeliServer).GetConfig(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _NotiDeli_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "push.NotiDeli",
-	HandlerType: (*NotiDeliServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "RegisterToken",
-			Handler:    _NotiDeli_RegisterToken_Handler,
-		},
-		{
-			MethodName: "RemoveToken",
-			Handler:    _NotiDeli_RemoveToken_Handler,
-		},
-		{
-			MethodName: "Config",
-			Handler:    _NotiDeli_Config_Handler,
-		},
-		{
-			MethodName: "GetConfig",
-			Handler:    _NotiDeli_GetConfig_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "push/push.proto",
+	proto.RegisterEnum("push.Event", Event_name, Event_value)
+	proto.RegisterEnum("push.NotiType", NotiType_name, NotiType_value)
 }
 
 func init() { proto.RegisterFile("push/push.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 446 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x53, 0xed, 0x6e, 0xd3, 0x40,
-	0x10, 0xcc, 0xa5, 0x8d, 0x93, 0x6c, 0x44, 0x88, 0x56, 0xa1, 0x3a, 0x95, 0x0f, 0x45, 0x96, 0x40,
-	0x11, 0x48, 0x05, 0x15, 0xd4, 0x1f, 0xfc, 0xa3, 0xd8, 0x20, 0x0b, 0x4a, 0x2b, 0x63, 0x1e, 0x20,
-	0x89, 0xb7, 0xc9, 0xa9, 0x8e, 0xcf, 0xd8, 0xe7, 0x8a, 0x3c, 0x00, 0x3f, 0x79, 0x42, 0x5e, 0x06,
-	0xdd, 0x9d, 0xd5, 0xb8, 0xa5, 0x6e, 0xff, 0x9c, 0x6e, 0x77, 0xe6, 0x66, 0x67, 0xad, 0x31, 0x3c,
-	0xcc, 0xca, 0x62, 0xf5, 0x5a, 0x1f, 0x07, 0x59, 0x2e, 0x95, 0xc4, 0x5d, 0x7d, 0x77, 0xbb, 0xd0,
-	0xf1, 0xd7, 0x99, 0xda, 0xb8, 0x63, 0x68, 0x07, 0x31, 0x0e, 0xf5, 0xc9, 0xd9, 0x84, 0x4d, 0xfb,
-	0x61, 0x3b, 0x88, 0xdd, 0xdf, 0x0c, 0x3a, 0x91, 0xbc, 0xa0, 0x14, 0xc7, 0xd5, 0xa5, 0x02, 0xab,
-	0xee, 0x1e, 0x38, 0x3f, 0x0a, 0xca, 0x83, 0x98, 0xb7, 0x4d, 0xbb, 0xaa, 0xf0, 0x09, 0xf4, 0xfd,
-	0x5f, 0x99, 0xc8, 0x29, 0x0e, 0x52, 0xbe, 0x63, 0xa0, 0x6d, 0x03, 0xdf, 0x00, 0x78, 0x74, 0x29,
-	0x16, 0x14, 0x6d, 0x32, 0xe2, 0xbb, 0x13, 0x36, 0x1d, 0x1e, 0x8e, 0x0e, 0x8c, 0xb7, 0x6d, 0x3f,
-	0xac, 0x71, 0xdc, 0x63, 0x40, 0x33, 0x30, 0xa4, 0xb5, 0xbc, 0xa4, 0x90, 0x7e, 0x96, 0x54, 0xa8,
-	0xda, 0x74, 0x76, 0x6d, 0xfa, 0x95, 0xd7, 0x76, 0xcd, 0xab, 0xfb, 0x67, 0x07, 0x1e, 0x69, 0xc2,
-	0x59, 0x59, 0xac, 0x3e, 0xca, 0xf4, 0x5c, 0x2c, 0xcb, 0x7c, 0xa6, 0x84, 0x4c, 0xb5, 0xdb, 0x0f,
-	0x8b, 0x85, 0x2c, 0x53, 0x75, 0x25, 0xb5, 0x6d, 0x34, 0xee, 0x38, 0xd6, 0x9f, 0x6e, 0x26, 0x92,
-	0x6a, 0x3f, 0x5b, 0xe0, 0x7b, 0xe0, 0xe6, 0xf2, 0x4d, 0x2a, 0x71, 0x2e, 0x16, 0x66, 0x80, 0x9f,
-	0xce, 0xe6, 0x09, 0xc5, 0x66, 0xd3, 0x5e, 0xd8, 0x88, 0xe3, 0x27, 0x78, 0xe6, 0x51, 0x71, 0xa1,
-	0x64, 0xa6, 0x3d, 0xde, 0xa6, 0xd0, 0x31, 0x0a, 0xf7, 0xb0, 0xd0, 0x83, 0xa7, 0x27, 0x72, 0x2e,
-	0x12, 0x6a, 0x92, 0x71, 0x8c, 0xcc, 0xdd, 0x24, 0x3c, 0x82, 0xbd, 0x2d, 0xc1, 0xa3, 0x64, 0xb6,
-	0x89, 0xc4, 0x7a, 0x2d, 0xd2, 0x25, 0xef, 0x4e, 0xd8, 0xb4, 0x13, 0x36, 0xa0, 0xf8, 0x02, 0x86,
-	0x66, 0xc3, 0x68, 0x95, 0x53, 0xb1, 0x92, 0x49, 0xcc, 0x7b, 0x86, 0x7f, 0xa3, 0xfb, 0xf2, 0x79,
-	0x3d, 0x05, 0x38, 0x80, 0xae, 0xe7, 0x7f, 0xff, 0x12, 0x9d, 0x9e, 0x8d, 0x5a, 0x08, 0xe0, 0x9c,
-	0x9c, 0x1e, 0x07, 0x5f, 0xfd, 0x11, 0x3b, 0xfc, 0xcb, 0xa0, 0xa7, 0xed, 0x79, 0x94, 0x08, 0x7c,
-	0x05, 0x0f, 0x42, 0x5a, 0x8a, 0x42, 0x51, 0x6e, 0x03, 0x38, 0xb0, 0xb1, 0x31, 0xc5, 0x7e, 0x55,
-	0xd8, 0x40, 0xb7, 0xf0, 0x08, 0x06, 0x36, 0x2f, 0x96, 0xca, 0x6b, 0xd4, 0x6b, 0x39, 0xba, 0xf9,
-	0xee, 0x1d, 0x38, 0x36, 0x1f, 0xf8, 0xd8, 0x02, 0xb7, 0xa6, 0xe6, 0xff, 0x57, 0xfd, 0xcf, 0xa4,
-	0xaa, 0x87, 0x3d, 0x8b, 0x05, 0xf1, 0xfe, 0x5d, 0x12, 0x6e, 0x6b, 0xee, 0x98, 0x9f, 0xf1, 0xed,
-	0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x9c, 0xf3, 0x20, 0x76, 0x9f, 0x03, 0x00, 0x00,
+	// 680 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x54, 0xcd, 0x4e, 0xdb, 0x4a,
+	0x14, 0xc6, 0x76, 0x7e, 0x8f, 0x21, 0x98, 0xd1, 0x15, 0x18, 0xee, 0xe5, 0x2a, 0x64, 0x73, 0x23,
+	0x16, 0x89, 0x80, 0x15, 0x4b, 0x7e, 0xb2, 0x88, 0x74, 0x81, 0x2b, 0xc3, 0x6d, 0x37, 0x95, 0x22,
+	0x7b, 0xe6, 0x34, 0x19, 0xc5, 0xf1, 0xa4, 0x9e, 0x31, 0x25, 0xdd, 0x75, 0xd7, 0x07, 0xe8, 0xdb,
+	0xf5, 0x65, 0xaa, 0x99, 0x31, 0x4d, 0x14, 0x21, 0xb5, 0x52, 0xd9, 0x24, 0x73, 0xbe, 0xef, 0x7c,
+	0xe7, 0x6f, 0xce, 0x18, 0xb6, 0xe7, 0x85, 0x9c, 0xf4, 0xf5, 0x4f, 0x6f, 0x9e, 0x0b, 0x25, 0x48,
+	0x45, 0x9f, 0x0f, 0xce, 0x13, 0xae, 0x92, 0x82, 0x4e, 0x51, 0xf5, 0x44, 0x3e, 0xee, 0xcb, 0x22,
+	0xe1, 0x9f, 0xfa, 0x12, 0xf3, 0x47, 0x4e, 0x51, 0xce, 0x91, 0xf6, 0x8d, 0x73, 0x9f, 0x8a, 0xd9,
+	0x4c, 0x64, 0xe5, 0x9f, 0x0d, 0xd0, 0xf9, 0xe2, 0x40, 0xf5, 0x41, 0x4c, 0x31, 0x23, 0x87, 0x00,
+	0x31, 0xa5, 0xa2, 0xc8, 0xd4, 0x88, 0xb3, 0xd0, 0x69, 0x3b, 0xdd, 0x66, 0xd4, 0x2c, 0x91, 0x21,
+	0x23, 0x7b, 0x50, 0x2f, 0x24, 0xe6, 0x9a, 0x73, 0x0d, 0x57, 0xd3, 0xe6, 0x90, 0x91, 0x3f, 0xa0,
+	0xaa, 0x74, 0x80, 0xd0, 0x33, 0xb0, 0x35, 0xc8, 0x09, 0xf8, 0x0c, 0x75, 0xfe, 0x91, 0x5a, 0xcc,
+	0x31, 0xac, 0xb6, 0x9d, 0x6e, 0xeb, 0x34, 0xe8, 0x99, 0xd2, 0xaf, 0x0d, 0xf1, 0xb0, 0x98, 0x63,
+	0x04, 0xec, 0xc7, 0xb9, 0x93, 0x00, 0x31, 0x95, 0x44, 0x38, 0x13, 0x8f, 0x18, 0xe1, 0x87, 0x02,
+	0xa5, 0x7a, 0xdd, 0xb2, 0x3a, 0xdf, 0x1c, 0xf0, 0xff, 0x2b, 0xe4, 0xe4, 0x17, 0xa3, 0xef, 0x43,
+	0xa3, 0x8c, 0x2e, 0x43, 0xb7, 0xed, 0x75, 0x9b, 0x51, 0xdd, 0x86, 0x97, 0xeb, 0x0d, 0x7a, 0x3f,
+	0x6f, 0xd0, 0x94, 0xc4, 0x55, 0x8a, 0x61, 0xa5, 0x2c, 0x49, 0x1b, 0x84, 0x40, 0x25, 0x11, 0x6c,
+	0x61, 0x46, 0xd4, 0x8c, 0xcc, 0x59, 0x63, 0x9c, 0x8a, 0x2c, 0xac, 0x59, 0x4c, 0x9f, 0xc9, 0x11,
+	0x6c, 0xd2, 0x94, 0xd3, 0xe9, 0x28, 0xa6, 0x8a, 0x8b, 0x2c, 0xac, 0x1b, 0xce, 0x37, 0xd8, 0x85,
+	0x81, 0x3a, 0xef, 0xa0, 0x16, 0xa1, 0x2c, 0xd2, 0xdf, 0xe9, 0x2b, 0x84, 0xba, 0x2c, 0x28, 0x45,
+	0x29, 0x43, 0xaf, 0xed, 0x75, 0x1b, 0xd1, 0xb3, 0xd9, 0x79, 0x03, 0xee, 0x90, 0x91, 0x23, 0xf0,
+	0xa8, 0x7a, 0x32, 0x21, 0xfd, 0xd3, 0xed, 0x5e, 0xb9, 0x4c, 0x57, 0x22, 0x53, 0xf8, 0xa4, 0x22,
+	0xcd, 0xad, 0x25, 0x77, 0xd7, 0x93, 0xb7, 0xc0, 0xe5, 0xac, 0xbc, 0x16, 0x97, 0xb3, 0xce, 0x67,
+	0x0f, 0x76, 0xf4, 0x9d, 0x5c, 0x89, 0xec, 0x3d, 0x1f, 0x17, 0x79, 0xac, 0x7b, 0x79, 0x85, 0x3c,
+	0x2b, 0xab, 0xe1, 0xad, 0xaf, 0x06, 0xce, 0x62, 0x9e, 0x96, 0x23, 0xb7, 0x06, 0xe9, 0x83, 0x6f,
+	0x0e, 0xa3, 0x4c, 0x28, 0x2e, 0xc3, 0x5a, 0xdb, 0xeb, 0xb6, 0x4e, 0x5b, 0xf6, 0x42, 0x6f, 0x85,
+	0xe2, 0xf6, 0x3a, 0x8d, 0x8b, 0x36, 0x25, 0x39, 0x83, 0x2d, 0x86, 0x72, 0xaa, 0xc4, 0xbc, 0x94,
+	0xd4, 0x5f, 0x94, 0x6c, 0x96, 0x4e, 0x56, 0x74, 0x02, 0x9b, 0x33, 0x91, 0xf0, 0x14, 0x4b, 0x4d,
+	0xf3, 0x45, 0x8d, 0x6f, 0x7d, 0xac, 0xe4, 0x1c, 0xf6, 0x4b, 0x89, 0x76, 0x1a, 0x31, 0x4c, 0xe3,
+	0xc5, 0x48, 0x22, 0x15, 0x19, 0x93, 0x21, 0xb4, 0x9d, 0x6e, 0x35, 0xda, 0xb5, 0x0e, 0x7a, 0x8a,
+	0xd7, 0x9a, 0xbe, 0xb7, 0x2c, 0xf9, 0x07, 0xb6, 0x6d, 0x4f, 0x6a, 0x92, 0xa3, 0x9c, 0x88, 0x94,
+	0x85, 0xbe, 0x11, 0xb4, 0x0c, 0xfc, 0xf0, 0x8c, 0x1e, 0xf7, 0x01, 0x96, 0x4b, 0x4b, 0x1a, 0x50,
+	0xb9, 0xbd, 0xbb, 0x1d, 0x04, 0x1b, 0xc4, 0x87, 0xfa, 0x65, 0x74, 0xf7, 0xf6, 0x7e, 0x10, 0x05,
+	0x0e, 0x01, 0xa8, 0xdd, 0xdc, 0x5d, 0x0e, 0xff, 0x1d, 0x04, 0xee, 0xf1, 0x57, 0x07, 0xaa, 0x83,
+	0x47, 0xcc, 0x14, 0xf9, 0x1b, 0x0e, 0x74, 0xde, 0xf2, 0xe9, 0x8e, 0xb9, 0x54, 0x98, 0x97, 0xcf,
+	0x0b, 0x59, 0xb0, 0x41, 0xfe, 0x82, 0x70, 0x85, 0x5f, 0x79, 0xda, 0xc8, 0x02, 0x97, 0xec, 0xc0,
+	0xd6, 0xca, 0x7b, 0x44, 0x16, 0x78, 0xe4, 0x10, 0xf6, 0x97, 0xeb, 0xf0, 0xff, 0x9c, 0xc5, 0x6a,
+	0x45, 0x51, 0x21, 0x7f, 0xc2, 0xde, 0x92, 0x8e, 0x30, 0x66, 0x4b, 0xb2, 0x7a, 0x9c, 0x40, 0xe3,
+	0x79, 0x88, 0x64, 0x17, 0xc8, 0xfd, 0x42, 0x2a, 0x9c, 0xdd, 0xc4, 0x3c, 0x53, 0x31, 0xcf, 0xe2,
+	0x8c, 0x62, 0xb0, 0x41, 0x5a, 0x00, 0x51, 0x91, 0xa2, 0x8d, 0x1c, 0x78, 0xba, 0x84, 0x0b, 0xbb,
+	0x34, 0x25, 0x54, 0xd1, 0xd0, 0x35, 0xcf, 0x91, 0xaa, 0x1b, 0x94, 0x32, 0x1e, 0x63, 0x50, 0x35,
+	0x33, 0xc1, 0x8f, 0x32, 0xa8, 0x25, 0x35, 0xf3, 0xe5, 0x3c, 0xfb, 0x1e, 0x00, 0x00, 0xff, 0xff,
+	0x5f, 0xbb, 0xb7, 0x7d, 0x8d, 0x05, 0x00, 0x00,
 }

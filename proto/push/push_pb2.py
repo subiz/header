@@ -14,14 +14,16 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
+from bitbucket.org.subiz.servicespec.proto.common import common_pb2 as bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='push/push.proto',
   package='push',
   syntax='proto3',
-  serialized_pb=_b('\n\x0fpush/push.proto\x12\x04push\"\x07\n\x05\x45mpty\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"_\n\x05Token\x12\r\n\x05Token\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\x11\n\tExpiredIn\x18\x03 \x01(\t\x12$\n\nDeviceType\x18\x04 \x01(\x0e\x32\x10.push.DeviceType\"3\n\x12TokenRemoveRequest\x12\x0e\n\x06UserId\x18\x01 \x01(\t\x12\r\n\x05Token\x18\x02 \x01(\t\"\xf2\x01\n\x15UserPushConfiguration\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0e\n\x06UserId\x18\x02 \x01(\t\x12\r\n\x05\x45mail\x18\x03 \x01(\t\x12 \n\x18\x45mailNotificationEnabled\x18\x04 \x01(\x08\x12&\n\x1e\x44\x65sktopPushNotificationEnabled\x18\x05 \x01(\x08\x12%\n\x1dMobilePushNotificationEnabled\x18\x06 \x01(\x08\x12\x1e\n\x16MobilePushDelayTimming\x18\x07 \x01(\x05\x12\x16\n\x0e\x45mailThreshold\x18\x08 \x01(\x05*%\n\nDeviceType\x12\x0b\n\x07\x44\x45SKTOP\x10\x00\x12\n\n\x06MOBILE\x10\x01\x32\xdb\x01\n\x08NotiDeli\x12+\n\rRegisterToken\x12\x0b.push.Token\x1a\x0b.push.Empty\"\x00\x12\x36\n\x0bRemoveToken\x12\x18.push.TokenRemoveRequest\x1a\x0b.push.Empty\"\x00\x12\x34\n\x06\x43onfig\x12\x1b.push.UserPushConfiguration\x1a\x0b.push.Empty\"\x00\x12\x34\n\tGetConfig\x12\x08.push.Id\x1a\x1b.push.UserPushConfiguration\"\x00\x62\x06proto3')
-)
+  serialized_pb=_b('\n\x0fpush/push.proto\x12\x04push\x1a\x39\x62itbucket.org/subiz/servicespec/proto/common/common.proto\"b\n\x05Token\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\x12%\n\x0b\x64\x65vice_type\x18\x05 \x01(\x0e\x32\x10.push.DeviceType\"H\n\x12TokenRemoveRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\"\x9b\x01\n\x0bPushRequest\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12%\n\x0b\x64\x65vice_type\x18\x03 \x01(\x0e\x32\x10.push.DeviceType\x12\r\n\x05title\x18\x04 \x01(\t\x12\x0c\n\x04\x62ody\x18\x05 \x01(\t\x12\x0c\n\x04icon\x18\x06 \x01(\t\x12\x14\n\x0c\x63lick_action\x18\x07 \x01(\t\"?\n\x06Result\x12\x12\n\naccount_id\x18\x01 \x01(\t\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12\x0f\n\x07success\x18\x03 \x03(\x08\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"\x93\x02\n\x11PushConfiguration\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x05 \x01(\t\x12#\n\x0b\x65mail_notis\x18\x06 \x03(\x0e\x32\x0e.push.NotiType\x12%\n\rdesktop_notis\x18\x07 \x03(\x0e\x32\x0e.push.NotiType\x12$\n\x0cmobile_notis\x18\t \x03(\x0e\x32\x0e.push.NotiType\x12!\n\x19mobile_push_delay_seconds\x18\n \x01(\x05\x12\x17\n\x0f\x65mail_threshold\x18\x0b \x01(\x05*/\n\nDeviceType\x12\x08\n\x04NONE\x10\x00\x12\x0b\n\x07\x42ROWSER\x10\x01\x12\n\n\x06MOBILE\x10\x02*\x94\x01\n\x05\x45vent\x12\x1e\n\x1aPushTokenRegisterRequested\x10\x00\x12\x1c\n\x18PushTokenRemoveRequested\x10\x02\x12\x11\n\rPushRequested\x10\x03\x12\x1d\n\x19PushConfigUpdateRequested\x10\x04\x12\x1b\n\x17PushConfigReadRequested\x10\x05*b\n\x08NotiType\x12\x16\n\x12SystemMaintainance\x10\x00\x12\x0e\n\nRuleUpdate\x10\x03\x12\x11\n\rAccountUpdate\x10\x04\x12\x11\n\rDirectMessage\x10\x05\x12\x08\n\x04News\x10\x06\x62\x06proto3')
+  ,
+  dependencies=[bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2.DESCRIPTOR,])
 
 _DEVICETYPE = _descriptor.EnumDescriptor(
   name='DeviceType',
@@ -30,80 +32,110 @@ _DEVICETYPE = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='DESKTOP', index=0, number=0,
+      name='NONE', index=0, number=0,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MOBILE', index=1, number=1,
+      name='BROWSER', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MOBILE', index=2, number=2,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=447,
-  serialized_end=484,
+  serialized_start=827,
+  serialized_end=874,
 )
 _sym_db.RegisterEnumDescriptor(_DEVICETYPE)
 
 DeviceType = enum_type_wrapper.EnumTypeWrapper(_DEVICETYPE)
-DESKTOP = 0
-MOBILE = 1
-
-
-
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='push.Empty',
+_EVENT = _descriptor.EnumDescriptor(
+  name='Event',
+  full_name='push.Event',
   filename=None,
   file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='PushTokenRegisterRequested', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PushTokenRemoveRequested', index=1, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PushRequested', index=2, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PushConfigUpdateRequested', index=3, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='PushConfigReadRequested', index=4, number=5,
+      options=None,
+      type=None),
+  ],
   containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
   options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=25,
-  serialized_end=32,
+  serialized_start=877,
+  serialized_end=1025,
 )
+_sym_db.RegisterEnumDescriptor(_EVENT)
 
-
-_ID = _descriptor.Descriptor(
-  name='Id',
-  full_name='push.Id',
+Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
+_NOTITYPE = _descriptor.EnumDescriptor(
+  name='NotiType',
+  full_name='push.NotiType',
   filename=None,
   file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='SystemMaintainance', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='RuleUpdate', index=1, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='AccountUpdate', index=2, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DirectMessage', index=3, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='News', index=4, number=6,
+      options=None,
+      type=None),
+  ],
   containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='Id', full_name='push.Id.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
   options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=34,
-  serialized_end=50,
+  serialized_start=1027,
+  serialized_end=1125,
 )
+_sym_db.RegisterEnumDescriptor(_NOTITYPE)
+
+NotiType = enum_type_wrapper.EnumTypeWrapper(_NOTITYPE)
+NONE = 0
+BROWSER = 1
+MOBILE = 2
+PushTokenRegisterRequested = 0
+PushTokenRemoveRequested = 2
+PushRequested = 3
+PushConfigUpdateRequested = 4
+PushConfigReadRequested = 5
+SystemMaintainance = 0
+RuleUpdate = 3
+AccountUpdate = 4
+DirectMessage = 5
+News = 6
+
 
 
 _TOKEN = _descriptor.Descriptor(
@@ -114,29 +146,29 @@ _TOKEN = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Token', full_name='push.Token.Token', index=0,
+      name='account_id', full_name='push.Token.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='UserId', full_name='push.Token.UserId', index=1,
+      name='user_id', full_name='push.Token.user_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ExpiredIn', full_name='push.Token.ExpiredIn', index=2,
+      name='token', full_name='push.Token.token', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='DeviceType', full_name='push.Token.DeviceType', index=3,
-      number=4, type=14, cpp_type=8, label=1,
+      name='device_type', full_name='push.Token.device_type', index=3,
+      number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -153,8 +185,8 @@ _TOKEN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=52,
-  serialized_end=147,
+  serialized_start=84,
+  serialized_end=182,
 )
 
 
@@ -166,15 +198,22 @@ _TOKENREMOVEREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UserId', full_name='push.TokenRemoveRequest.UserId', index=0,
+      name='account_id', full_name='push.TokenRemoveRequest.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Token', full_name='push.TokenRemoveRequest.Token', index=1,
+      name='user_id', full_name='push.TokenRemoveRequest.user_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='token', full_name='push.TokenRemoveRequest.token', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -191,70 +230,240 @@ _TOKENREMOVEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=149,
-  serialized_end=200,
+  serialized_start=184,
+  serialized_end=256,
 )
 
 
-_USERPUSHCONFIGURATION = _descriptor.Descriptor(
-  name='UserPushConfiguration',
-  full_name='push.UserPushConfiguration',
+_PUSHREQUEST = _descriptor.Descriptor(
+  name='PushRequest',
+  full_name='push.PushRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='push.UserPushConfiguration.AccountId', index=0,
+      name='account_id', full_name='push.PushRequest.account_id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='UserId', full_name='push.UserPushConfiguration.UserId', index=1,
+      name='user_ids', full_name='push.PushRequest.user_ids', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='device_type', full_name='push.PushRequest.device_type', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='title', full_name='push.PushRequest.title', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='body', full_name='push.PushRequest.body', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='icon', full_name='push.PushRequest.icon', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='click_action', full_name='push.PushRequest.click_action', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=259,
+  serialized_end=414,
+)
+
+
+_RESULT = _descriptor.Descriptor(
+  name='Result',
+  full_name='push.Result',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='push.Result.account_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='user_ids', full_name='push.Result.user_ids', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='success', full_name='push.Result.success', index=2,
+      number=3, type=8, cpp_type=7, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=416,
+  serialized_end=479,
+)
+
+
+_ID = _descriptor.Descriptor(
+  name='Id',
+  full_name='push.Id',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='push.Id.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='push.Id.account_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Email', full_name='push.UserPushConfiguration.Email', index=2,
+      name='id', full_name='push.Id.id', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=481,
+  serialized_end=547,
+)
+
+
+_PUSHCONFIGURATION = _descriptor.Descriptor(
+  name='PushConfiguration',
+  full_name='push.PushConfiguration',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='push.PushConfiguration.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='push.PushConfiguration.account_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='push.PushConfiguration.user_id', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='EmailNotificationEnabled', full_name='push.UserPushConfiguration.EmailNotificationEnabled', index=3,
-      number=4, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='email', full_name='push.PushConfiguration.email', index=3,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='DesktopPushNotificationEnabled', full_name='push.UserPushConfiguration.DesktopPushNotificationEnabled', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='email_notis', full_name='push.PushConfiguration.email_notis', index=4,
+      number=6, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MobilePushNotificationEnabled', full_name='push.UserPushConfiguration.MobilePushNotificationEnabled', index=5,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='desktop_notis', full_name='push.PushConfiguration.desktop_notis', index=5,
+      number=7, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='MobilePushDelayTimming', full_name='push.UserPushConfiguration.MobilePushDelayTimming', index=6,
-      number=7, type=5, cpp_type=1, label=1,
+      name='mobile_notis', full_name='push.PushConfiguration.mobile_notis', index=6,
+      number=9, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='mobile_push_delay_seconds', full_name='push.PushConfiguration.mobile_push_delay_seconds', index=7,
+      number=10, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='EmailThreshold', full_name='push.UserPushConfiguration.EmailThreshold', index=7,
-      number=8, type=5, cpp_type=1, label=1,
+      name='email_threshold', full_name='push.PushConfiguration.email_threshold', index=8,
+      number=11, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -271,32 +480,27 @@ _USERPUSHCONFIGURATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=203,
-  serialized_end=445,
+  serialized_start=550,
+  serialized_end=825,
 )
 
-_TOKEN.fields_by_name['DeviceType'].enum_type = _DEVICETYPE
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
-DESCRIPTOR.message_types_by_name['Id'] = _ID
+_TOKEN.fields_by_name['device_type'].enum_type = _DEVICETYPE
+_PUSHREQUEST.fields_by_name['device_type'].enum_type = _DEVICETYPE
+_ID.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_PUSHCONFIGURATION.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_servicespec_dot_proto_dot_common_dot_common__pb2._CONTEXT
+_PUSHCONFIGURATION.fields_by_name['email_notis'].enum_type = _NOTITYPE
+_PUSHCONFIGURATION.fields_by_name['desktop_notis'].enum_type = _NOTITYPE
+_PUSHCONFIGURATION.fields_by_name['mobile_notis'].enum_type = _NOTITYPE
 DESCRIPTOR.message_types_by_name['Token'] = _TOKEN
 DESCRIPTOR.message_types_by_name['TokenRemoveRequest'] = _TOKENREMOVEREQUEST
-DESCRIPTOR.message_types_by_name['UserPushConfiguration'] = _USERPUSHCONFIGURATION
+DESCRIPTOR.message_types_by_name['PushRequest'] = _PUSHREQUEST
+DESCRIPTOR.message_types_by_name['Result'] = _RESULT
+DESCRIPTOR.message_types_by_name['Id'] = _ID
+DESCRIPTOR.message_types_by_name['PushConfiguration'] = _PUSHCONFIGURATION
 DESCRIPTOR.enum_types_by_name['DeviceType'] = _DEVICETYPE
+DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
+DESCRIPTOR.enum_types_by_name['NotiType'] = _NOTITYPE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), dict(
-  DESCRIPTOR = _EMPTY,
-  __module__ = 'push.push_pb2'
-  # @@protoc_insertion_point(class_scope:push.Empty)
-  ))
-_sym_db.RegisterMessage(Empty)
-
-Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
-  DESCRIPTOR = _ID,
-  __module__ = 'push.push_pb2'
-  # @@protoc_insertion_point(class_scope:push.Id)
-  ))
-_sym_db.RegisterMessage(Id)
 
 Token = _reflection.GeneratedProtocolMessageType('Token', (_message.Message,), dict(
   DESCRIPTOR = _TOKEN,
@@ -312,63 +516,33 @@ TokenRemoveRequest = _reflection.GeneratedProtocolMessageType('TokenRemoveReques
   ))
 _sym_db.RegisterMessage(TokenRemoveRequest)
 
-UserPushConfiguration = _reflection.GeneratedProtocolMessageType('UserPushConfiguration', (_message.Message,), dict(
-  DESCRIPTOR = _USERPUSHCONFIGURATION,
+PushRequest = _reflection.GeneratedProtocolMessageType('PushRequest', (_message.Message,), dict(
+  DESCRIPTOR = _PUSHREQUEST,
   __module__ = 'push.push_pb2'
-  # @@protoc_insertion_point(class_scope:push.UserPushConfiguration)
+  # @@protoc_insertion_point(class_scope:push.PushRequest)
   ))
-_sym_db.RegisterMessage(UserPushConfiguration)
+_sym_db.RegisterMessage(PushRequest)
 
+Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
+  DESCRIPTOR = _RESULT,
+  __module__ = 'push.push_pb2'
+  # @@protoc_insertion_point(class_scope:push.Result)
+  ))
+_sym_db.RegisterMessage(Result)
 
+Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
+  DESCRIPTOR = _ID,
+  __module__ = 'push.push_pb2'
+  # @@protoc_insertion_point(class_scope:push.Id)
+  ))
+_sym_db.RegisterMessage(Id)
 
-_NOTIDELI = _descriptor.ServiceDescriptor(
-  name='NotiDeli',
-  full_name='push.NotiDeli',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=487,
-  serialized_end=706,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='RegisterToken',
-    full_name='push.NotiDeli.RegisterToken',
-    index=0,
-    containing_service=None,
-    input_type=_TOKEN,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='RemoveToken',
-    full_name='push.NotiDeli.RemoveToken',
-    index=1,
-    containing_service=None,
-    input_type=_TOKENREMOVEREQUEST,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Config',
-    full_name='push.NotiDeli.Config',
-    index=2,
-    containing_service=None,
-    input_type=_USERPUSHCONFIGURATION,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetConfig',
-    full_name='push.NotiDeli.GetConfig',
-    index=3,
-    containing_service=None,
-    input_type=_ID,
-    output_type=_USERPUSHCONFIGURATION,
-    options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_NOTIDELI)
+PushConfiguration = _reflection.GeneratedProtocolMessageType('PushConfiguration', (_message.Message,), dict(
+  DESCRIPTOR = _PUSHCONFIGURATION,
+  __module__ = 'push.push_pb2'
+  # @@protoc_insertion_point(class_scope:push.PushConfiguration)
+  ))
+_sym_db.RegisterMessage(PushConfiguration)
 
-DESCRIPTOR.services_by_name['NotiDeli'] = _NOTIDELI
 
 # @@protoc_insertion_point(module_scope)
