@@ -29,7 +29,6 @@ message Event {
 	optional bool conversation_started = 10;
 	optional bool conversation_sent = 11;
 	optional bool conversation_joined = 12;
-
 }
 
 message Method {
@@ -170,13 +169,20 @@ enum ClientType {
 	STONE = 0;
 
 	// APP is general client type
-	APP = 1;
+	app = 1;
 
 	// CHANNEL is special client, that can and only listen chat topics of an account
-	CHANNEL = 2;
+	channel = 2;
 
 	// BOT reserve for future
-	BOT = 3;
+	bot = 3;
+}
+
+enum UserType {
+	unknown = 0;
+  user = 1;
+	agent = 2;
+	subiz = 3;
 }
 
 message User {
@@ -189,12 +195,23 @@ message User {
 }
 
 enum AuthorizationType {
-	client = 0;
-	channel = 1;
+	client_auth = 0;
+	channel_auth = 1;
 }
 
 enum EVENT {
 	AuthExpireCookie = 4; //CookieExpire
 
 	ClientAuthorized = 12;
+}
+
+message By {
+	reserved 4;
+	reserved "email";
+	optional string type = 3; // usertype
+	optional string id = 8;
+	//optional
+	optional string name = 5;
+	optional string avatar_url = 6;
+	optional string app_id = 7;
 }

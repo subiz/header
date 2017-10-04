@@ -2,8 +2,8 @@ syntax = "proto2";
 
 package webhook4;
 
-//import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
-//4import "bitbucket.org/subiz/servicespec/proto/event/event.proto";
+//import "bitbucket.org/subiz/header/auth/auth.proto";
+//4import "bitbucket.org/subiz/header/event/event.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 
 message Retry {

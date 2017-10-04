@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='common/common.proto',
   package='common',
   syntax='proto2',
-  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a*bitbucket.org/subiz/header/auth/auth.proto\"\x07\n\x05\x45mpty\"%\n\x05\x45rror\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\"\xae\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c\x12\x11\n\treply_key\x18\x08 \x01(\tJ\x04\x08\x05\x10\x06R\x0freply_partition')
+  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a*bitbucket.org/subiz/header/auth/auth.proto\"\x07\n\x05\x45mpty\"\xae\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c\x12\x11\n\treply_key\x18\x08 \x01(\tJ\x04\x08\x05\x10\x06R\x0freply_partition')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2.DESCRIPTOR,])
 
@@ -48,37 +48,6 @@ _EMPTY = _descriptor.Descriptor(
   ],
   serialized_start=75,
   serialized_end=82,
-)
-
-
-_ERROR = _descriptor.Descriptor(
-  name='Error',
-  full_name='common.Error',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ctx', full_name='common.Error.ctx', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=84,
-  serialized_end=121,
 )
 
 
@@ -150,14 +119,12 @@ _CONTEXT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=124,
-  serialized_end=298,
+  serialized_start=85,
+  serialized_end=259,
 )
 
-_ERROR.fields_by_name['ctx'].message_type = _CONTEXT
 _CONTEXT.fields_by_name['credential'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2._CREDENTIAL
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
-DESCRIPTOR.message_types_by_name['Error'] = _ERROR
 DESCRIPTOR.message_types_by_name['Context'] = _CONTEXT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -167,13 +134,6 @@ Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), d
   # @@protoc_insertion_point(class_scope:common.Empty)
   ))
 _sym_db.RegisterMessage(Empty)
-
-Error = _reflection.GeneratedProtocolMessageType('Error', (_message.Message,), dict(
-  DESCRIPTOR = _ERROR,
-  __module__ = 'common.common_pb2'
-  # @@protoc_insertion_point(class_scope:common.Error)
-  ))
-_sym_db.RegisterMessage(Error)
 
 Context = _reflection.GeneratedProtocolMessageType('Context', (_message.Message,), dict(
   DESCRIPTOR = _CONTEXT,

@@ -6,10 +6,6 @@ import "bitbucket.org/subiz/header/auth/auth.proto";
 
 message Empty {}
 
-message Error {
-	optional Context ctx = 1; // ommit
-}
-
 message Context {
 	reserved "reply_partition";
 	reserved 5;

@@ -14,16 +14,15 @@ _sym_db = _symbol_database.Default()
 
 
 from bitbucket.org.subiz.header.common import common_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2
-from bitbucket.org.subiz.header.push import push_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_push_dot_push__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='notibox/notibox.proto',
   package='notibox',
   syntax='proto2',
-  serialized_pb=_b('\n\x15notibox/notibox.proto\x12\x07notibox\x1a.bitbucket.org/subiz/header/common/common.proto\x1a*bitbucket.org/subiz/header/push/push.proto\"\xb9\x01\n\x0cNotification\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x02 \x01(\t\x12\r\n\x05\x65vent\x18\x03 \x01(\t\x12\x1c\n\x04type\x18\x04 \x01(\x0e\x32\x0e.push.NotiType\x12\x14\n\x0c\x63reated_time\x18\x05 \x01(\x03\x12\x10\n\x08template\x18\x06 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x07 \x01(\x0c\x12\x0e\n\x06\x62ox_id\x18\x08 \x01(\t\x12\x0c\n\x04read\x18\t \x01(\x08\"t\n\x16\x41\x64\x64NotificationRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0f\n\x07\x62ox_ids\x18\x02 \x03(\t\x12+\n\x0cnotification\x18\x03 \x01(\x0b\x32\x15.notibox.Notification\"`\n\x10ReadNotification\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06\x62ox_id\x18\x02 \x01(\t\x12\x10\n\x08noti_ids\x18\x03 \x03(\t\x12\x0c\n\x04read\x18\x04 \x01(\x08\"\\\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06\x62ox_id\x18\x03 \x01(\t\x12\x10\n\x08start_id\x18\x04 \x01(\t\x12\r\n\x05limit\x18\x05 \x01(\x05\"=\n\rNotifications\x12,\n\rnotifications\x18\x01 \x03(\x0b\x32\x15.notibox.Notification')
+  serialized_pb=_b('\n\x15notibox/notibox.proto\x12\x07notibox\x1a.bitbucket.org/subiz/header/common/common.proto\"\x9b\x01\n\x0cNotification\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x02 \x01(\t\x12\r\n\x05\x65vent\x18\x03 \x01(\t\x12\x14\n\x0c\x63reated_time\x18\x05 \x01(\x03\x12\x10\n\x08template\x18\x06 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x07 \x01(\x0c\x12\x0e\n\x06\x62ox_id\x18\x08 \x01(\t\x12\x0c\n\x04read\x18\t \x01(\x08\"t\n\x16\x41\x64\x64NotificationRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0f\n\x07\x62ox_ids\x18\x02 \x03(\t\x12+\n\x0cnotification\x18\x03 \x01(\x0b\x32\x15.notibox.Notification\"`\n\x10ReadNotification\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06\x62ox_id\x18\x02 \x01(\t\x12\x10\n\x08noti_ids\x18\x03 \x03(\t\x12\x0c\n\x04read\x18\x04 \x01(\x08\"\\\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06\x62ox_id\x18\x03 \x01(\t\x12\x10\n\x08start_id\x18\x04 \x01(\t\x12\r\n\x05limit\x18\x05 \x01(\x05\"=\n\rNotifications\x12,\n\rnotifications\x18\x01 \x03(\x0b\x32\x15.notibox.Notification')
   ,
-  dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_push_dot_push__pb2.DESCRIPTOR,])
+  dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
 
 
 
@@ -57,42 +56,35 @@ _NOTIFICATION = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='type', full_name='notibox.Notification.type', index=3,
-      number=4, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='created_time', full_name='notibox.Notification.created_time', index=4,
+      name='created_time', full_name='notibox.Notification.created_time', index=3,
       number=5, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='template', full_name='notibox.Notification.template', index=5,
+      name='template', full_name='notibox.Notification.template', index=4,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='data', full_name='notibox.Notification.data', index=6,
+      name='data', full_name='notibox.Notification.data', index=5,
       number=7, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='box_id', full_name='notibox.Notification.box_id', index=7,
+      name='box_id', full_name='notibox.Notification.box_id', index=6,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='read', full_name='notibox.Notification.read', index=8,
+      name='read', full_name='notibox.Notification.read', index=7,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -110,8 +102,8 @@ _NOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=127,
-  serialized_end=312,
+  serialized_start=83,
+  serialized_end=238,
 )
 
 
@@ -155,8 +147,8 @@ _ADDNOTIFICATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=314,
-  serialized_end=430,
+  serialized_start=240,
+  serialized_end=356,
 )
 
 
@@ -207,8 +199,8 @@ _READNOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=432,
-  serialized_end=528,
+  serialized_start=358,
+  serialized_end=454,
 )
 
 
@@ -259,8 +251,8 @@ _LISTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=530,
-  serialized_end=622,
+  serialized_start=456,
+  serialized_end=548,
 )
 
 
@@ -290,12 +282,11 @@ _NOTIFICATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=624,
-  serialized_end=685,
+  serialized_start=550,
+  serialized_end=611,
 )
 
 _NOTIFICATION.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
-_NOTIFICATION.fields_by_name['type'].enum_type = bitbucket_dot_org_dot_subiz_dot_header_dot_push_dot_push__pb2._NOTITYPE
 _ADDNOTIFICATIONREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _ADDNOTIFICATIONREQUEST.fields_by_name['notification'].message_type = _NOTIFICATION
 _READNOTIFICATION.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT

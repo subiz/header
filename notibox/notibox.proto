@@ -3,7 +3,6 @@ syntax = "proto2";
 // notibox store all notification in subiz
 // it DOESN'T take care of pushing notification to user
 import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/push/push.proto";
 
 package notibox;
 
@@ -13,7 +12,7 @@ message Notification {
 	optional string id = 2;
 	optional string event = 3;
 
-	optional push.NotiType type = 4;
+	//optional push.NotiType type = 4;
 	optional int64 created_time = 5;
 	optional string template = 6;
 	optional bytes data = 7;

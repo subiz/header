@@ -6,9 +6,9 @@ import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 
 enum AccountState {
-	UNCONFIRMED = 0; // waiting for email confirmation
-	ACTIVATED = 1;  // normal account
-	LOCKED = 2;  // subiz lock down account
+	unconfirmed = 0; // waiting for email confirmation
+	activated = 1;  // normal account
+	locked = 2;  // subiz lock down account
 }
 
 message Agent {
@@ -22,18 +22,18 @@ message Agent {
 	optional string phone = 8;
 	optional bool is_owner = 10;
 	optional string job_title = 11;
-	optional Gender gender = 12;
+	optional string gender = 12; //gender
 	optional string avatar_url = 13;
-	optional string language = 14;
+	optional string lang = 14;
 	optional string location = 15;
 	optional string timezone = 16;
 	optional string encrypted_password = 17;
-  optional int64 joined_time = 20;
+  optional int64 joined = 20;
 	optional string invited_by = 21;
-  optional AgentState state = 22;
-	optional int64 last_password_changed_time = 23;
+  optional string state = 22; //Agent state
+	optional int64 last_password_changed = 23;
 	//optional int64 last_seen_time = 24;
-	optional int64 last_modified_time = 25;
+	optional int64 modified = 25;
 }
 
 message Invitation {
@@ -43,8 +43,8 @@ message Invitation {
 	optional string from_id = 4;
 	optional string email = 5;
 	optional string agent_id = 6;
-	optional int64 sent_time = 7;
-	optional int64 reply_time = 8;
+	optional int64 sent = 7;
+	optional int64 replied = 8;
 	optional string agent_fullname = 9;
 	optional string agent_job_title = 10;
 	optional string token = 11;
@@ -59,7 +59,7 @@ message AgentGroup {
 
 	// Members is list of 10 agents in group
 	// repeated string Members = 5;
-	optional int64 created_time = 6;
+	optional int64 created = 6;
 }
 
 message ResetPasswordRequest {
@@ -81,10 +81,10 @@ message Account {
 	optional int32 plan = 4;
 	optional string logo_url = 5;
 	optional string owner_id = 6;
-	optional AccountState state = 7;
-	optional int64 created_time = 8;
-	optional int64 confirmed_time = 9;
-	optional int64 last_modified_time = 10;
+	optional string state = 7; // accountstate
+	optional int64 created = 8;
+	optional int64 confirmed = 9;
+	optional int64 modified = 10;
 
 	optional string referer_id = 11;
 }
@@ -105,8 +105,6 @@ message Ids {
 	optional common.Context ctx = 1;
 	repeated string ids = 2;
 }
-
-message Empty {}
 
 message ListAgentRequest {
 	optional common.Context ctx = 1;
@@ -134,25 +132,25 @@ message CreateAccountRequest {
 	optional common.Context ctx = 1;
 	optional string fullname = 2;
 	optional string email = 3;
-	optional string language = 4;
+	optional string lang = 4;
 	optional string password = 5;
 	optional string account_name = 6;
 	optional string account_url = 7;
 }
 
 enum Gender {
-	Unset = 0;
-	Male = 1;
-	Female = 2;
-	Bisexual = 3;
-	Asexual = 4;
+	unset = 0;
+	male = 1;
+	female = 2;
+	bisexual = 3;
+	asexual = 4;
 }
 
 enum AgentState {
-	PENDING = 0; // waiting for invitation response
-  ACTIVE = 1;
-  INACTIVE = 2;
-	DELETED = 3;
+	pending = 0; // waiting for invitation response
+  active = 1;
+  inactive = 2;
+  deleted = 3;
 }
 
 message LoginRequest {
@@ -182,7 +180,6 @@ message Limit {
 	optional int32 max_agents = 4;
 	optional int32 max_agent_groups = 5;
 	optional int32 max_agent_in_a_group = 6;
-
 }
 
 message AgentGroups {
@@ -299,7 +296,7 @@ message Tag {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional string title = 4;
-	optional int64 created_time = 5;
+	optional int64 created = 5;
 	optional string creator_id = 6;
 	optional string color = 7;
 }
