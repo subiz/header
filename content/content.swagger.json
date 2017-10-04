@@ -19,67 +19,67 @@
     "contentContent": {
       "type": "object",
       "properties": {
-        "Id": {
+        "id": {
           "type": "string"
         },
-        "AccountId": {
+        "account_id": {
           "type": "string"
         },
-        "Description": {
+        "description": {
           "type": "string"
         },
-        "Title": {
+        "title": {
           "type": "string"
         },
-        "Link": {
+        "link": {
           "type": "string"
         },
-        "Categories": {
+        "labels": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "AttachmentLink": {
-          "type": "string"
-        },
-        "Labels": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "Availability": {
+        "availability": {
           "type": "boolean",
           "format": "boolean"
         },
-        "Price": {
+        "price": {
           "type": "string"
         },
-        "Currency": {
+        "currency": {
           "type": "string"
         },
-        "SalePrice": {
+        "sale_price": {
           "type": "string"
         },
-        "Fields": {
+        "fields": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/contentKeyValue"
           }
         },
-        "RelatedIds": {
+        "categories": {
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "related_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attachment_url": {
+          "type": "string"
         }
       }
     },
     "contentContents": {
       "type": "object",
       "properties": {
-        "Contents": {
+        "contents": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/contentContent"
@@ -93,10 +93,10 @@
     "contentKeyValue": {
       "type": "object",
       "properties": {
-        "Key": {
+        "key": {
           "type": "string"
         },
-        "Value": {
+        "value": {
           "type": "string"
         }
       }

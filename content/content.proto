@@ -1,48 +1,50 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package content;
 
 message KeyValue {
-	string Key = 1;
-	string Value = 2;
+	optional string key = 3;
+	optional string value = 4;
 }
 
 message Content {
-	string Id = 1; // user input id
-	string AccountId = 14;
-	string Description = 2;
-	string Title = 3;
-	string Link = 4;
-	repeated string Categories = 6;
-	string AttachmentLink = 7;
-	
-	repeated string Labels = 8;
-	
-	bool Availability = 9;
-	string Price = 10;
-	string Currency = 11;
-	string SalePrice = 12;
 
-	repeated KeyValue Fields = 13;
-
-	repeated string RelatedIds = 15;
+	optional string id = 2; // user input id
+	optional string account_id = 3;
+	optional string description = 5;
+	optional string title = 6;
+	optional string link = 7;
+	repeated string labels = 8;
+	optional bool availability = 9;
+	optional string price = 10;
+	optional string currency = 11;
+	optional string sale_price = 12;
+	repeated KeyValue fields = 13;
+	repeated string categories = 14;
+	repeated string related_ids = 15;
+	optional string attachment_url = 16;
 }
 
 message Contents {
-	repeated Content Contents = 1;
+	repeated Content contents = 1;
 }
 
-message Ids {repeated string Ids = 1;}
-message Id {string Id = 1;}
+message Ids {
+	repeated string Ids = 2;
+}
+
+message Id {
+	optional string id = 2;
+	optional string account_id = 3;
+}
 
 message Empty {}
 
 message ListRequest {
-	string AccountId = 1;
-	string StartId = 2;
-	string Category = 3;
-	int32 Limit = 4;
-	string Keyword = 5;
+	optional string account_id = 6;
+	optional string start_id = 2;
+	optional string category = 3;
+	optional int32 limit = 4;
 }
 
 service ContentMgr {

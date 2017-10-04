@@ -18,8 +18,8 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='content/content.proto',
   package='content',
-  syntax='proto3',
-  serialized_pb=_b('\n\x15\x63ontent/content.proto\x12\x07\x63ontent\"&\n\x08KeyValue\x12\x0b\n\x03Key\x18\x01 \x01(\t\x12\r\n\x05Value\x18\x02 \x01(\t\"\x97\x02\n\x07\x43ontent\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x11\n\tAccountId\x18\x0e \x01(\t\x12\x13\n\x0b\x44\x65scription\x18\x02 \x01(\t\x12\r\n\x05Title\x18\x03 \x01(\t\x12\x0c\n\x04Link\x18\x04 \x01(\t\x12\x12\n\nCategories\x18\x06 \x03(\t\x12\x16\n\x0e\x41ttachmentLink\x18\x07 \x01(\t\x12\x0e\n\x06Labels\x18\x08 \x03(\t\x12\x14\n\x0c\x41vailability\x18\t \x01(\x08\x12\r\n\x05Price\x18\n \x01(\t\x12\x10\n\x08\x43urrency\x18\x0b \x01(\t\x12\x11\n\tSalePrice\x18\x0c \x01(\t\x12!\n\x06\x46ields\x18\r \x03(\x0b\x32\x11.content.KeyValue\x12\x12\n\nRelatedIds\x18\x0f \x03(\t\".\n\x08\x43ontents\x12\"\n\x08\x43ontents\x18\x01 \x03(\x0b\x32\x10.content.Content\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x01 \x03(\t\"\x10\n\x02Id\x12\n\n\x02Id\x18\x01 \x01(\t\"\x07\n\x05\x45mpty\"c\n\x0bListRequest\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\x0f\n\x07StartId\x18\x02 \x01(\t\x12\x10\n\x08\x43\x61tegory\x18\x03 \x01(\t\x12\r\n\x05Limit\x18\x04 \x01(\x05\x12\x0f\n\x07Keyword\x18\x05 \x01(\t2\xa0\x02\n\nContentMgr\x12,\n\x06Insert\x12\x10.content.Content\x1a\x0e.content.Empty\"\x00\x12\x31\n\nInsertBulk\x12\x11.content.Contents\x1a\x0e.content.Empty\"\x00\x12\'\n\x06\x44\x65lete\x12\x0b.content.Id\x1a\x0e.content.Empty\"\x00\x12,\n\nDeleteBulk\x12\x0c.content.Ids\x1a\x0e.content.Empty\"\x00\x12\'\n\x04Read\x12\x0b.content.Id\x1a\x10.content.Content\"\x00\x12\x31\n\x04List\x12\x14.content.ListRequest\x1a\x11.content.Contents\"\x00\x62\x06proto3')
+  syntax='proto2',
+  serialized_pb=_b('\n\x15\x63ontent/content.proto\x12\x07\x63ontent\"&\n\x08KeyValue\x12\x0b\n\x03key\x18\x03 \x01(\t\x12\r\n\x05value\x18\x04 \x01(\t\"\x9a\x02\n\x07\x43ontent\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12\r\n\x05title\x18\x06 \x01(\t\x12\x0c\n\x04link\x18\x07 \x01(\t\x12\x0e\n\x06labels\x18\x08 \x03(\t\x12\x14\n\x0c\x61vailability\x18\t \x01(\x08\x12\r\n\x05price\x18\n \x01(\t\x12\x10\n\x08\x63urrency\x18\x0b \x01(\t\x12\x12\n\nsale_price\x18\x0c \x01(\t\x12!\n\x06\x66ields\x18\r \x03(\x0b\x32\x11.content.KeyValue\x12\x12\n\ncategories\x18\x0e \x03(\t\x12\x13\n\x0brelated_ids\x18\x0f \x03(\t\x12\x16\n\x0e\x61ttachment_url\x18\x10 \x01(\t\".\n\x08\x43ontents\x12\"\n\x08\x63ontents\x18\x01 \x03(\x0b\x32\x10.content.Content\"\x12\n\x03Ids\x12\x0b\n\x03Ids\x18\x02 \x03(\t\"$\n\x02Id\x12\n\n\x02id\x18\x02 \x01(\t\x12\x12\n\naccount_id\x18\x03 \x01(\t\"\x07\n\x05\x45mpty\"T\n\x0bListRequest\x12\x12\n\naccount_id\x18\x06 \x01(\t\x12\x10\n\x08start_id\x18\x02 \x01(\t\x12\x10\n\x08\x63\x61tegory\x18\x03 \x01(\t\x12\r\n\x05limit\x18\x04 \x01(\x05\x32\xa0\x02\n\nContentMgr\x12,\n\x06Insert\x12\x10.content.Content\x1a\x0e.content.Empty\"\x00\x12\x31\n\nInsertBulk\x12\x11.content.Contents\x1a\x0e.content.Empty\"\x00\x12\'\n\x06\x44\x65lete\x12\x0b.content.Id\x1a\x0e.content.Empty\"\x00\x12,\n\nDeleteBulk\x12\x0c.content.Ids\x1a\x0e.content.Empty\"\x00\x12\'\n\x04Read\x12\x0b.content.Id\x1a\x10.content.Content\"\x00\x12\x31\n\x04List\x12\x14.content.ListRequest\x1a\x11.content.Contents\"\x00')
 )
 
 
@@ -33,15 +33,15 @@ _KEYVALUE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Key', full_name='content.KeyValue.Key', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='key', full_name='content.KeyValue.key', index=0,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Value', full_name='content.KeyValue.Value', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='value', full_name='content.KeyValue.value', index=1,
+      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -54,7 +54,7 @@ _KEYVALUE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -71,100 +71,100 @@ _CONTENT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='content.Content.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='AccountId', full_name='content.Content.AccountId', index=1,
-      number=14, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Description', full_name='content.Content.Description', index=2,
+      name='id', full_name='content.Content.id', index=0,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Title', full_name='content.Content.Title', index=3,
+      name='account_id', full_name='content.Content.account_id', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Link', full_name='content.Content.Link', index=4,
-      number=4, type=9, cpp_type=9, label=1,
+      name='description', full_name='content.Content.description', index=2,
+      number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Categories', full_name='content.Content.Categories', index=5,
-      number=6, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='title', full_name='content.Content.title', index=3,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='AttachmentLink', full_name='content.Content.AttachmentLink', index=6,
+      name='link', full_name='content.Content.link', index=4,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Labels', full_name='content.Content.Labels', index=7,
+      name='labels', full_name='content.Content.labels', index=5,
       number=8, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Availability', full_name='content.Content.Availability', index=8,
+      name='availability', full_name='content.Content.availability', index=6,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Price', full_name='content.Content.Price', index=9,
+      name='price', full_name='content.Content.price', index=7,
       number=10, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Currency', full_name='content.Content.Currency', index=10,
+      name='currency', full_name='content.Content.currency', index=8,
       number=11, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='SalePrice', full_name='content.Content.SalePrice', index=11,
+      name='sale_price', full_name='content.Content.sale_price', index=9,
       number=12, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Fields', full_name='content.Content.Fields', index=12,
+      name='fields', full_name='content.Content.fields', index=10,
       number=13, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='RelatedIds', full_name='content.Content.RelatedIds', index=13,
+      name='categories', full_name='content.Content.categories', index=11,
+      number=14, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='related_ids', full_name='content.Content.related_ids', index=12,
       number=15, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='attachment_url', full_name='content.Content.attachment_url', index=13,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -176,12 +176,12 @@ _CONTENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
   serialized_start=75,
-  serialized_end=354,
+  serialized_end=357,
 )
 
 
@@ -193,7 +193,7 @@ _CONTENTS = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Contents', full_name='content.Contents.Contents', index=0,
+      name='contents', full_name='content.Contents.contents', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -207,12 +207,12 @@ _CONTENTS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=356,
-  serialized_end=402,
+  serialized_start=359,
+  serialized_end=405,
 )
 
 
@@ -225,7 +225,7 @@ _IDS = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='Ids', full_name='content.Ids.Ids', index=0,
-      number=1, type=9, cpp_type=9, label=3,
+      number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -238,12 +238,12 @@ _IDS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=404,
-  serialized_end=422,
+  serialized_start=407,
+  serialized_end=425,
 )
 
 
@@ -255,8 +255,15 @@ _ID = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='Id', full_name='content.Id.Id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='id', full_name='content.Id.id', index=0,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='content.Id.account_id', index=1,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -269,12 +276,12 @@ _ID = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=424,
-  serialized_end=440,
+  serialized_start=427,
+  serialized_end=463,
 )
 
 
@@ -293,12 +300,12 @@ _EMPTY = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=442,
-  serialized_end=449,
+  serialized_start=465,
+  serialized_end=472,
 )
 
 
@@ -310,37 +317,30 @@ _LISTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='AccountId', full_name='content.ListRequest.AccountId', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='account_id', full_name='content.ListRequest.account_id', index=0,
+      number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='StartId', full_name='content.ListRequest.StartId', index=1,
+      name='start_id', full_name='content.ListRequest.start_id', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Category', full_name='content.ListRequest.Category', index=2,
+      name='category', full_name='content.ListRequest.category', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='Limit', full_name='content.ListRequest.Limit', index=3,
+      name='limit', full_name='content.ListRequest.limit', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='Keyword', full_name='content.ListRequest.Keyword', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -352,16 +352,16 @@ _LISTREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto3',
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=451,
-  serialized_end=550,
+  serialized_start=474,
+  serialized_end=558,
 )
 
-_CONTENT.fields_by_name['Fields'].message_type = _KEYVALUE
-_CONTENTS.fields_by_name['Contents'].message_type = _CONTENT
+_CONTENT.fields_by_name['fields'].message_type = _KEYVALUE
+_CONTENTS.fields_by_name['contents'].message_type = _CONTENT
 DESCRIPTOR.message_types_by_name['KeyValue'] = _KEYVALUE
 DESCRIPTOR.message_types_by_name['Content'] = _CONTENT
 DESCRIPTOR.message_types_by_name['Contents'] = _CONTENTS
@@ -428,8 +428,8 @@ _CONTENTMGR = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=553,
-  serialized_end=841,
+  serialized_start=561,
+  serialized_end=849,
   methods=[
   _descriptor.MethodDescriptor(
     name='Insert',
