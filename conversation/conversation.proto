@@ -2,20 +2,14 @@ syntax = "proto2";
 
 package conversation;
 
-//import "bitbucket.org/subiz/servicespec/proto/auth/auth.proto";
-import "bitbucket.org/subiz/header/event/event.proto";
+//import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
+import "bitbucket.org/subiz/header/auth/auth.proto";
 
 message Id {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string id = 3;
-}
-
-message Account {
-	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional int32 max_rules = 3;
 }
 
 enum JoinOperator {
@@ -81,63 +75,40 @@ message Conversation {
 	optional string id = 2;
 	optional string account_id = 3;
 	// Creation time
-	optional int64 created_time = 4;
+	optional int64 created = 4;
 	// Last active time
-	optional int64 last_active_time = 5;
+	optional int64 last_actived = 5;
 	// Closed time
-	optional int64 closed_time = 6;
-	repeated event.User users = 7;
+	optional int64 closed = 6;
+	repeated auth.By users = 7;
 	optional string channel_id = 9;
 	repeated string tags = 10;
 
-	optional ConversationState state = 11;
-	optional ChatRequest request = 14;
+	optional string state = 11; // converation state
+	optional Request request = 14;
 }
 
 message UserConversation { // used in database
-	optional ConversationState state = 11;
+	optional string state = 11;
 	optional string user_id = 2;
 	optional string convo_id = 4;
 	optional string last_seen_event = 5;
 }
 
-enum ConversationState {
+enum State {
 	conversation_none = 0;
-	assigning = 1;
+
+	//	assigning = 1;
 	unassigned = 2;
-	opened = 3;
-	closed = 4;
+	//opened = 3;
+	//closed = 4;
+	started = 5;
+	active = 6;
+	ended = 8;
 }
 
-// ChateEventType
-enum ChatEventType {
-	NONE = 0;
-	MESSAGE = 1; // content= content of message, attachments attachment
-	CLOSED = 3; // content, attachments = null
 
-	ADD = 4;
-	//JOINED = 4; // SenderId: senderid || could be null, Content: joinner id, Attachmemts: null
-	LEFT = 5; // senderid: senderid || could be null
-	//	SEEN = 6; // Content = event id, attachment = null
-	RATED = 7; // content = number of star, attachment = null
-	INPUT = 8; // content = refered message id; attachment depended on type of event
-
-	TAG = 9; // Content = tag
-	UNTAG = 10; // Content = tag
-	TRANSFER = 11; // Content = joinerid1,joinerid2 (',' delimiter)
-	ACK = 12;
-	TYPING = 13;
-	STOPTYPING = 14;
-}
-
-enum DeviceType {
-	UNKNOWN = 0;
-	MOBILE = 1;
-	TABLET = 2;
-	DESKTOP = 3;
-}
-
-message ChatRequest {
+message Request {
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
@@ -148,7 +119,7 @@ message ChatRequest {
 	optional string message = 8;
 	optional string browser_language = 9;
 	optional string language = 10;
-	optional DeviceType device_type = 11;
+	optional string device_type = 11;
 	optional string user_id = 12;
 	optional int64 created_time = 13;
 	optional string conversation_id = 14;
@@ -163,12 +134,15 @@ message Conversations {
 	repeated Conversation conversations = 1;
 }
 
-message ChatStart {
+message Start {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string agent_id = 3;
 	optional string user_id = 4;
 	optional string channel_id = 5;
+	optional string user_name = 10;
+	optional string user_avatar_url = 11;
+
 }
 
 message ReplyConversationRequest {
@@ -181,7 +155,7 @@ message ReplyConversationRequest {
 message ListConversations {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
-	optional ConversationState state = 4;
+	optional State state = 4;
 	optional int32 limit = 5;
 	optional string start_id = 6;
 }
@@ -215,49 +189,6 @@ message ListChatsByUserRequest {
 	optional string UserId = 3; // must be visitor id
 	optional string StartId = 4;
 	optional int32 Limit = 5;
-}
-
-message OEChatDropped {
-	optional string AccountId = 1;
-	optional string ChatId = 2;
-	optional string ChannelId = 3;
-}
-
-message OEChatAccepted {
-	optional string AccountId = 2;
-	optional string ChatId = 3;
-	optional string AgentId = 4;
-}
-
-message OEChatStarted {
-	optional string AccountId = 2;
-	optional string ChatId = 3;
-	optional string ChannelId = 4;
-	optional string CreatedTime = 5;
-}
-
-message EvChatResult { // delete after 5mins, so be quick
-	optional string RequestId = 1; //request id
-	optional bool Ok = 2;
-	optional int32 Code = 3;
-	optional string CreatedTime = 4;
-	optional string Description = 5;
-}
-
-message EvChatUserInfoRequested {
-	optional string RequestId = 1;
-	optional string ChatId = 2;
-	optional string AccountId = 3;
-	optional string ChannelId = 4;
-	optional string MessageTo = 5;
-	optional string PageUrl = 6;
-	optional string PageTitle = 7;
-	optional string Message = 8;
-	optional string BrowserLanguage = 9;
-	optional string Language = 10;
-	optional DeviceType DeviceType = 11;
-	optional string UserId = 12;
-	optional string CreatedTime = 13;
 }
 
 enum Event {
@@ -299,73 +230,90 @@ enum Event {
 
 	ConversationListEventsRequested = 61;
 }
-// ==================
-
-message FileTemplate {
-	optional string Id = 1;
-}
-
-message QuickRepliesTemplate {
-	optional string Text = 1;
-	optional string ContentType = 4; // listbutton or location or ...
-	repeated Button Replies = 5; // limit to 11
-}
-
-message GenericElement { // display
-	optional string Title = 1;
-	optional string ImageUrl = 2;
-	optional string Subtitle = 3; // limited character
-	optional Button DefaultAction = 4;
-	repeated Button Buttons = 5; // limit to 10
-}
-
-message GenericTemplate {
-	repeated GenericElement Elements = 1; // limit to 5
-}
-
-message Button {
-	optional string Type = 1;
-	///...
-}
-
-message UrlButton { // input
-	optional string Type = 1; // UrlButton
-	optional string Title = 2;
-	optional string Url = 3;
-}
-
-message PostbackButton {
-	optional string Type = 1; // PostbackButton
-	optional string Title = 2;
-	optional string Payload = 3;
-	optional string ImageUrl = 4;
-}
-
-message CallButton {
-}
-
-message LoginButton {
-}
-
-message EventButton {
-	optional string Type = 1; // EventButton
-	optional string Title = 2;
-	optional string ImageUrl = 4;
-	optional string Event = 3; // this event will sent to chat
-}
-
-message SurveyForm {
-	optional string Placeholder = 1;
-}
-
-message RateFormTemplate {
-	optional string Type = 1;
-}
 
 message RequestState {
 	optional string account_id = 1;
 	optional string conversation_id = 2;
 	optional string channel_id = 3;
+}
 
 
+message Reaction {
+	optional string name = 3;
+	optional int32 count = 4;
+	repeated string users = 5;
+}
+
+message Message {
+	optional string text = 2;
+	optional string format = 3;
+	repeated Attachment attachments = 4;
+
+	repeated Reaction reactions = 7;
+	optional int32 opened = 8;
+	optional bool delivered = 9;
+
+	repeated Field fields = 10;
+}
+
+message Field {
+	optional string value = 3;
+	optional string key = 2;
+}
+
+message Button {
+	optional string type = 2;
+
+	// post back
+	optional string title = 3;
+	optional string payload = 4;
+	optional string image_url = 5;
+	optional string content_id = 10;
+
+	//	optional RawEvent event = 12;
+	optional string url = 14;
+}
+
+message GenericElementTemplate {
+	optional string title = 2;
+	optional string image_url = 3;
+	optional string subtitle = 4;
+	optional Button default_action = 5;
+	repeated Button buttons = 6;
+}
+
+message Attachment {
+	optional string type = 12;
+	// file
+	optional string mimetype = 2;
+	optional string url = 3;
+	optional string thumbnail_url = 4;
+	optional string name = 5;
+	optional string descrition = 6;
+	//optional string data = 7; // for custom data
+	optional int32 length = 15;
+	optional int32 size = 13; // byte
+
+	// generic
+	repeated GenericElementTemplate elements = 8;
+
+	// preview
+	optional string title = 9;
+	optional string color = 10;
+	optional string pretext = 11;
+
+	repeated Button buttons = 16;
+}
+
+enum ActionType {
+	url_button = 2;
+	postback_button = 3;
+	event_button = 4;
+}
+
+enum AttachmentType {
+	file = 2;
+	generic = 3;
+	preview = 4;
+	button = 5;
 }

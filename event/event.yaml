@@ -1,166 +1,335 @@
-version: 1
-ChatAssigned: # New chat assigned to agent
-ChatWaiting: # New incomming chat has been pushed to unassigned list
-ChatStarted: # New chat from agent to user
-ChatAccepted: # Chat from unassigned list is accepted by an agent
-ChatDropped: # Chat dropped from unassigned list
-ChatSent: # icomming message from owned chat
-Chat_ChatId_Sent: # New incomming from chat guest chat
 
-# AgentInvited:
-AgentCreated:
----
+# conversation
+content-viewed: # Phat sinh khi user view mot content hay mot url, page
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["user.32vs", "content.435"]
 
-Event:
-  ID          : 00324324EVT
-  Account     :
-    ID        : 004395ACC
-    Name      : FPT Shop
-    Domain    : https://fptshop.com
-  AppID       : 0324345APP
-  AuthToken   : eyJhbGciOiJIUzI1N.eyJzdWIiOV9.TJVA9
-  Sender      :
-    ID        : 00534AGT
-    Type      : agent            # agent || user || connector || system
-    Name      : Alice
-    Emails    : [alice@gmail.com]
-    Phones    : ["0969133732", "01678616688"]
-    AvatarURL : http://subizuserfile.com/file/4354.png
-  Timestamp   : 1502701215086
-  Type        : conversation_message        # chat_close
-  Channel     :
-    ID        : 00234234CHN
-    Name      : Email
-  Topics      :
-  - ID        : 0032CONV
-    Name      : Conversation
-  - ID        : 0043THRE
-    Name      : Thread
-  Attachments : []
-  Message     :
-    Value     : hello world, 123
-    Format    : text/plain
+  type: content_viewed
+  data:
+    url: http://home.example.com/
+     page: mainpage-33
 
-List:
--
-  Type        : chat_message
-  Chat        : chat.00312
-  Text        : 123
-  Format      : raw
-  Attachments : []
--
-  Type        : chat_close
-  Chat        : "chat.00312"
--
-  Type        : chat_join
-  Chat        : chat.00312
-  User        : agent.0034
+content-searched: # Phat sinh khi user tim kiem tren website hoac app
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["user.32vs"]
 
--
-  Type        : chat_left
-  Chat        : chat.0043
--
-  Type        : chat_tag
-  Chat        : chat.0032
-  Tag         : sales
--
-  Type        : ChatUntag
-  Chat        : chat.0043
-  Tag         : sales
--
-  Type        : ChatTransfer
-  Chat        : chat.0032
-  Agents      : agent.001, agent.002, agent.003
--
-  Type        : ChatTyping
-  Chat        : chat.0043
--
-  Type        : ChatStopTyping
-  Chat        : chat.0032
--
-  Type        : ChatSeen
-  Chat        : chat.0043
-  Event       : evt.0012345356
--
-  Type        : ChatACK // only send by driver
-  Chat        : chat.0032
-  Event       : evt.0043235466
-  State       : received || error
-  Message     : "access denied"
+  type: content_viewed
+  data:
+    keyword: laptop
+    category: category-7
+  type: content_searched
 
----
-Chat:
-- Type        : chat_message
-  Chat        : chat.00312
-  Attachments :
-  - Type      : audio/mp3
-    Preview   : http://subizfiles.com/audio/4345.jpg
-    Name      : Screen3.mp3
-    Size      : 12345, # bytes
-    Link        : http://subizfiles.com/43453.jpg
+content-addedtocart: # Phat sinh khi user cho mot content vao ro hang
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["user.32vs"]
 
-- Type        : chat_message
-  Chat        : chat.00312
-  Attachments :
-  - Type      : video/mp4
-    Preview   : http://subizfiles.com/audio/preview/4345.jpg
-    Link      : http://subizfiles.com/43453.mp4
-    Name      : Screen3.mp4
-    Size      : 1235, # bytes
+  type: content_viewed
+  data:
+    type: content
+    id: 43co
+    value: ??
+    currency: vnd
+    quantity: 4
+  type: content_addedtocart
 
-- Type        : chat_message
-  Chat        : chat.0043
-  Attachments :
-  - Type      : video/mp4
-    Preview   : http://subizfiles.com/audio/preview/4345.jpg
-    Link      : http://subizfiles.com/43453.mp4
-    Name      : Screen3.mp4
-    Size      : 1235, # bytes
+content_purchased: # phat sinh khi user mua hang
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["user.32vs", "content.431co", "content.430co"]
 
-- Type        : chat_message
-  Chat        : chat.00432
-  Attachments :
-  - Type      : application/pdf
-    Name      : PriceList.pdf
-    Link      : https://subizfiles.com/pricelist.pdf
-    Preview   :
-    Size      : 34242
+  type: content_purchased
+  data:
+  - content_id: 430co
+    value:
+    currency: vnd
+    quantity: 4
+  - content_id: 431co
+    value:
+    currency: vnd
+    quantity: 4
 
-- type        : chat_message
-  chat        : chat.0024
-  attachments :
-  - type      : template/list
-    elements  :
-    - title   : Classic T-Shirt Collection
-      image   : http://subizfile.com/imad3423.png
-      subtitle: See all our color
-      default_action: []
-      buttons : []
-    - title   : Classic Blue T-Shirt
-      image   :
-      subtitle:
-      buttons :
+custom_event: #custome event
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["custom-topic.1", "content.430co"]
 
-- type        : chat_message
-  chat        : chat.00434
-  attachments :
-  - type      : button/url
+  type: custom-event-1
+  data:
+    field1: a
+    field2: b
 
+conversation-started: # phat sinh khi agent chu dong tao conversation voi user
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["conversation_433"]
 
-POST https://subiz.com/api/v1/conversation
-{
-  account:
-  timestamp:
-  members: []
-  channel
-  id: "234"
+  type: conversation_started
 
-}
+  conversation:
+    id: 433cv
+    channel_id: 43ch
 
+conversation-joined:
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: agent
+    app_id: 43ap
+    email: abc@gmail.com
+    name: agent 1
+    avatar_url: http://i.subiz.com/a.png
+    id: 434ag
+  created: 15000433
+  topics: ["conversation_433"]
+  #object: 433cv | 123acc # scope | context
 
-{
-  ACCOUNT:
-  format
-  text
-  attachment
-}
+  type: conversation_joined
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+  data:
+    id: 4334ag
+    user-type: agent
+
+conversation_left:
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: agent
+    app_id: 43ap
+    email: abc@gmail.com
+    name: agent 1
+    avatar_url: http://i.subiz.com/a.png
+    id: 434ag
+  created: 15000433
+  topics: ["conversation_433"]
+  #object: 433cv | 123acc # scope | context
+
+  type: conversation_left
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+  data:
+    id: 4334ag
+
+conversation-closed:
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["conversation_433"]
+
+  type: conversation_closed
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+
+conversation-typing:
+ id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["conversation_433"]
+
+  type: conversation_typing
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+
+conversation-changestate:
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["conversation_433"]
+
+  type: conversation_updated
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+    state: 3
+
+conversation-tagged:
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["conversation_433"]
+
+  type: conversation_tagged
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+  data:
+    name: tag-red
+
+conversation-untagged:
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["conversation_433"]
+
+  type: conversation_untagged
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+  data:
+    name: tag-red
+
+conversation-seen:
+  id: 123ev
+  account_id: 432ac
+  by:
+    type: user
+    app_id: 43ap
+    id: 32us
+  created: 15000433
+  topics: ["conversation_433"]
+
+  type: message_seen
+  conversation:
+    id: 433cv
+    channel_id: 43ch
+  data:
+    id: 5344ev
+
+event-delivered:
+  id: 123ev4
+  by:
+    type: channel
+    id: 3423ch
+  created: 150043045
+  topics: ["conversation_433"]
+
+  type: message_delivered
+  conversation:
+    id: 434cv
+  data:
+    id: 434ev
+
+conversation-message:
+  id: 123ev4
+  account_id: 43acc
+  by:
+    type: agent
+    id: 4334ag
+    app_id: 34
+  conversation:
+    id: 345cv
+    channel_id: emailchannel
+  created: 15065850260084
+  topics: ["conversation_433"]
+  type: message_sent
+
+  computed:
+    reactions:
+    - name: smile
+      count: 3
+      users: [agent1, agent2, agent3]
+    state: 3 # delivered
+    opened: 4
+
+  data:
+    text: hello
+    markdown: "markdown :smile:"
+    html: <p>paragraph <i>1</i></p>
+
+    fields:
+    - name: to
+      value: abc@gmail.com, xyz@gmail.com
+    - name: cc
+      value:
+    - name: bcc
+
+    attachments:
+    - type: file
+      mimetype: audio/mp3
+      url: http://file.subiz.io/abc.mp3
+      preview: http:..file.subiz.io/preview/abc_mp3/png
+      name: cool audio
+      description: just another files
+      length: 350 # seconds
+    - type: preview
+      title: youtube is down for many users
+      color: #34543
+      image_url: http://file.subiz.io/a.png
+      thumbnail_url: http://file.subiz.io/thumbnail.png
+    - type: generic
+      elements:
+      - title: some item 1
+        image_url: http://file.subiz.com/pic.jpeg
+        description: just a short description
+        default_action:
+          type: url_button
+          title: A URL Button
+          url: https://subiz.io/buttona
+        buttons:
+        - type: postback_button
+          title: A Postback button
+          payload: opaque data to subiz
+          content_id: content 1
+          image_url: https://img.subiz.com/image.png
+        - type: event_button
+          title: Just a event button
+          image_url: https://img.subiz.com/image.png
+          event:
+            type: conversation_message
+            text: hello
+            format: markdown
+    - type: button
+      title: Here is a quick reply!
+      buttons:
+      - type: text_button
+        title: red
+        image_url: http://image.subiz.com/red.png
+        payload: opaque to subiz
+      - type: location_button

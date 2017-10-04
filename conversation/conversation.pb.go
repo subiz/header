@@ -9,7 +9,6 @@ It is generated from these files:
 
 It has these top-level messages:
 	Id
-	Account
 	Limit
 	Rule
 	Condition
@@ -17,9 +16,9 @@ It has these top-level messages:
 	RouteResult
 	Conversation
 	UserConversation
-	ChatRequest
+	Request
 	Conversations
-	ChatStart
+	Start
 	ReplyConversationRequest
 	ListConversations
 	ListUsersUnreadRequest
@@ -27,32 +26,21 @@ It has these top-level messages:
 	UsersUnread
 	ListEventsRequest
 	ListChatsByUserRequest
-	OEChatDropped
-	OEChatAccepted
-	OEChatStarted
-	EvChatResult
-	EvChatUserInfoRequested
-	FileTemplate
-	QuickRepliesTemplate
-	GenericElement
-	GenericTemplate
-	Button
-	UrlButton
-	PostbackButton
-	CallButton
-	LoginButton
-	EventButton
-	SurveyForm
-	RateFormTemplate
 	RequestState
+	Reaction
+	Message
+	Field
+	Button
+	GenericElementTemplate
+	Attachment
 */
 package conversation
 
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import event "bitbucket.org/subiz/header/event"
 import common "bitbucket.org/subiz/header/common"
+import auth "bitbucket.org/subiz/header/auth"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -148,158 +136,51 @@ func (x *AssignStrategy) UnmarshalJSON(data []byte) error {
 }
 func (AssignStrategy) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
-type ConversationState int32
+type State int32
 
 const (
-	ConversationState_conversation_none ConversationState = 0
-	ConversationState_assigning         ConversationState = 1
-	ConversationState_unassigned        ConversationState = 2
-	ConversationState_opened            ConversationState = 3
-	ConversationState_closed            ConversationState = 4
+	State_conversation_none State = 0
+	// 	assigning = 1;
+	State_unassigned State = 2
+	// opened = 3;
+	// closed = 4;
+	State_started State = 5
+	State_active  State = 6
+	State_ended   State = 8
 )
 
-var ConversationState_name = map[int32]string{
+var State_name = map[int32]string{
 	0: "conversation_none",
-	1: "assigning",
 	2: "unassigned",
-	3: "opened",
-	4: "closed",
+	5: "started",
+	6: "active",
+	8: "ended",
 }
-var ConversationState_value = map[string]int32{
+var State_value = map[string]int32{
 	"conversation_none": 0,
-	"assigning":         1,
 	"unassigned":        2,
-	"opened":            3,
-	"closed":            4,
+	"started":           5,
+	"active":            6,
+	"ended":             8,
 }
 
-func (x ConversationState) Enum() *ConversationState {
-	p := new(ConversationState)
+func (x State) Enum() *State {
+	p := new(State)
 	*p = x
 	return p
 }
-func (x ConversationState) String() string {
-	return proto.EnumName(ConversationState_name, int32(x))
+func (x State) String() string {
+	return proto.EnumName(State_name, int32(x))
 }
-func (x *ConversationState) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(ConversationState_value, data, "ConversationState")
+func (x *State) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(State_value, data, "State")
 	if err != nil {
 		return err
 	}
-	*x = ConversationState(value)
+	*x = State(value)
 	return nil
 }
-func (ConversationState) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
-
-// ChateEventType
-type ChatEventType int32
-
-const (
-	ChatEventType_NONE    ChatEventType = 0
-	ChatEventType_MESSAGE ChatEventType = 1
-	ChatEventType_CLOSED  ChatEventType = 3
-	ChatEventType_ADD     ChatEventType = 4
-	// JOINED = 4; // SenderId: senderid || could be null, Content: joinner id, Attachmemts: null
-	ChatEventType_LEFT ChatEventType = 5
-	// 	SEEN = 6; // Content = event id, attachment = null
-	ChatEventType_RATED      ChatEventType = 7
-	ChatEventType_INPUT      ChatEventType = 8
-	ChatEventType_TAG        ChatEventType = 9
-	ChatEventType_UNTAG      ChatEventType = 10
-	ChatEventType_TRANSFER   ChatEventType = 11
-	ChatEventType_ACK        ChatEventType = 12
-	ChatEventType_TYPING     ChatEventType = 13
-	ChatEventType_STOPTYPING ChatEventType = 14
-)
-
-var ChatEventType_name = map[int32]string{
-	0:  "NONE",
-	1:  "MESSAGE",
-	3:  "CLOSED",
-	4:  "ADD",
-	5:  "LEFT",
-	7:  "RATED",
-	8:  "INPUT",
-	9:  "TAG",
-	10: "UNTAG",
-	11: "TRANSFER",
-	12: "ACK",
-	13: "TYPING",
-	14: "STOPTYPING",
-}
-var ChatEventType_value = map[string]int32{
-	"NONE":       0,
-	"MESSAGE":    1,
-	"CLOSED":     3,
-	"ADD":        4,
-	"LEFT":       5,
-	"RATED":      7,
-	"INPUT":      8,
-	"TAG":        9,
-	"UNTAG":      10,
-	"TRANSFER":   11,
-	"ACK":        12,
-	"TYPING":     13,
-	"STOPTYPING": 14,
-}
-
-func (x ChatEventType) Enum() *ChatEventType {
-	p := new(ChatEventType)
-	*p = x
-	return p
-}
-func (x ChatEventType) String() string {
-	return proto.EnumName(ChatEventType_name, int32(x))
-}
-func (x *ChatEventType) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(ChatEventType_value, data, "ChatEventType")
-	if err != nil {
-		return err
-	}
-	*x = ChatEventType(value)
-	return nil
-}
-func (ChatEventType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
-
-type DeviceType int32
-
-const (
-	DeviceType_UNKNOWN DeviceType = 0
-	DeviceType_MOBILE  DeviceType = 1
-	DeviceType_TABLET  DeviceType = 2
-	DeviceType_DESKTOP DeviceType = 3
-)
-
-var DeviceType_name = map[int32]string{
-	0: "UNKNOWN",
-	1: "MOBILE",
-	2: "TABLET",
-	3: "DESKTOP",
-}
-var DeviceType_value = map[string]int32{
-	"UNKNOWN": 0,
-	"MOBILE":  1,
-	"TABLET":  2,
-	"DESKTOP": 3,
-}
-
-func (x DeviceType) Enum() *DeviceType {
-	p := new(DeviceType)
-	*p = x
-	return p
-}
-func (x DeviceType) String() string {
-	return proto.EnumName(DeviceType_name, int32(x))
-}
-func (x *DeviceType) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(DeviceType_value, data, "DeviceType")
-	if err != nil {
-		return err
-	}
-	*x = DeviceType(value)
-	return nil
-}
-func (DeviceType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (State) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 type Event int32
 
@@ -408,7 +289,84 @@ func (x *Event) UnmarshalJSON(data []byte) error {
 	*x = Event(value)
 	return nil
 }
-func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+
+type ActionType int32
+
+const (
+	ActionType_url_button      ActionType = 2
+	ActionType_postback_button ActionType = 3
+	ActionType_event_button    ActionType = 4
+)
+
+var ActionType_name = map[int32]string{
+	2: "url_button",
+	3: "postback_button",
+	4: "event_button",
+}
+var ActionType_value = map[string]int32{
+	"url_button":      2,
+	"postback_button": 3,
+	"event_button":    4,
+}
+
+func (x ActionType) Enum() *ActionType {
+	p := new(ActionType)
+	*p = x
+	return p
+}
+func (x ActionType) String() string {
+	return proto.EnumName(ActionType_name, int32(x))
+}
+func (x *ActionType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(ActionType_value, data, "ActionType")
+	if err != nil {
+		return err
+	}
+	*x = ActionType(value)
+	return nil
+}
+func (ActionType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+
+type AttachmentType int32
+
+const (
+	AttachmentType_file    AttachmentType = 2
+	AttachmentType_generic AttachmentType = 3
+	AttachmentType_preview AttachmentType = 4
+	AttachmentType_button  AttachmentType = 5
+)
+
+var AttachmentType_name = map[int32]string{
+	2: "file",
+	3: "generic",
+	4: "preview",
+	5: "button",
+}
+var AttachmentType_value = map[string]int32{
+	"file":    2,
+	"generic": 3,
+	"preview": 4,
+	"button":  5,
+}
+
+func (x AttachmentType) Enum() *AttachmentType {
+	p := new(AttachmentType)
+	*p = x
+	return p
+}
+func (x AttachmentType) String() string {
+	return proto.EnumName(AttachmentType_name, int32(x))
+}
+func (x *AttachmentType) UnmarshalJSON(data []byte) error {
+	value, err := proto.UnmarshalJSONEnum(AttachmentType_value, data, "AttachmentType")
+	if err != nil {
+		return err
+	}
+	*x = AttachmentType(value)
+	return nil
+}
+func (AttachmentType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
 type Id struct {
 	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
@@ -443,39 +401,6 @@ func (m *Id) GetId() string {
 	return ""
 }
 
-type Account struct {
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Id               *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
-	MaxRules         *int32          `protobuf:"varint,3,opt,name=max_rules,json=maxRules" json:"max_rules,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
-}
-
-func (m *Account) Reset()                    { *m = Account{} }
-func (m *Account) String() string            { return proto.CompactTextString(m) }
-func (*Account) ProtoMessage()               {}
-func (*Account) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
-
-func (m *Account) GetCtx() *common.Context {
-	if m != nil {
-		return m.Ctx
-	}
-	return nil
-}
-
-func (m *Account) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
-	}
-	return ""
-}
-
-func (m *Account) GetMaxRules() int32 {
-	if m != nil && m.MaxRules != nil {
-		return *m.MaxRules
-	}
-	return 0
-}
-
 type Limit struct {
 	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
 	AccountId        *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
@@ -486,7 +411,7 @@ type Limit struct {
 func (m *Limit) Reset()                    { *m = Limit{} }
 func (m *Limit) String() string            { return proto.CompactTextString(m) }
 func (*Limit) ProtoMessage()               {}
-func (*Limit) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*Limit) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
 func (m *Limit) GetCtx() *common.Context {
 	if m != nil {
@@ -528,7 +453,7 @@ type Rule struct {
 func (m *Rule) Reset()                    { *m = Rule{} }
 func (m *Rule) String() string            { return proto.CompactTextString(m) }
 func (*Rule) ProtoMessage()               {}
-func (*Rule) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (*Rule) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 func (m *Rule) GetCtx() *common.Context {
 	if m != nil {
@@ -611,7 +536,7 @@ type Condition struct {
 func (m *Condition) Reset()                    { *m = Condition{} }
 func (m *Condition) String() string            { return proto.CompactTextString(m) }
 func (*Condition) ProtoMessage()               {}
-func (*Condition) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (*Condition) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
 func (m *Condition) GetJoin() JoinOperator {
 	if m != nil && m.Join != nil {
@@ -649,7 +574,7 @@ type Route struct {
 func (m *Route) Reset()                    { *m = Route{} }
 func (m *Route) String() string            { return proto.CompactTextString(m) }
 func (*Route) ProtoMessage()               {}
-func (*Route) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (*Route) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
 func (m *Route) GetRules() []*Rule {
 	if m != nil {
@@ -668,7 +593,7 @@ type RouteResult struct {
 func (m *RouteResult) Reset()                    { *m = RouteResult{} }
 func (m *RouteResult) String() string            { return proto.CompactTextString(m) }
 func (*RouteResult) ProtoMessage()               {}
-func (*RouteResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*RouteResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
 func (m *RouteResult) GetRuleId() string {
 	if m != nil && m.RuleId != nil {
@@ -697,23 +622,23 @@ type Conversation struct {
 	Id        *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
 	AccountId *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	// Creation time
-	CreatedTime *int64 `protobuf:"varint,4,opt,name=created_time,json=createdTime" json:"created_time,omitempty"`
+	Created *int64 `protobuf:"varint,4,opt,name=created" json:"created,omitempty"`
 	// Last active time
-	LastActiveTime *int64 `protobuf:"varint,5,opt,name=last_active_time,json=lastActiveTime" json:"last_active_time,omitempty"`
+	LastActived *int64 `protobuf:"varint,5,opt,name=last_actived,json=lastActived" json:"last_actived,omitempty"`
 	// Closed time
-	ClosedTime       *int64             `protobuf:"varint,6,opt,name=closed_time,json=closedTime" json:"closed_time,omitempty"`
-	Users            []*event.User      `protobuf:"bytes,7,rep,name=users" json:"users,omitempty"`
-	ChannelId        *string            `protobuf:"bytes,9,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
-	Tags             []string           `protobuf:"bytes,10,rep,name=tags" json:"tags,omitempty"`
-	State            *ConversationState `protobuf:"varint,11,opt,name=state,enum=conversation.ConversationState" json:"state,omitempty"`
-	Request          *ChatRequest       `protobuf:"bytes,14,opt,name=request" json:"request,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	Closed           *int64     `protobuf:"varint,6,opt,name=closed" json:"closed,omitempty"`
+	Users            []*auth.By `protobuf:"bytes,7,rep,name=users" json:"users,omitempty"`
+	ChannelId        *string    `protobuf:"bytes,9,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	Tags             []string   `protobuf:"bytes,10,rep,name=tags" json:"tags,omitempty"`
+	State            *string    `protobuf:"bytes,11,opt,name=state" json:"state,omitempty"`
+	Request          *Request   `protobuf:"bytes,14,opt,name=request" json:"request,omitempty"`
+	XXX_unrecognized []byte     `json:"-"`
 }
 
 func (m *Conversation) Reset()                    { *m = Conversation{} }
 func (m *Conversation) String() string            { return proto.CompactTextString(m) }
 func (*Conversation) ProtoMessage()               {}
-func (*Conversation) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (*Conversation) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
 
 func (m *Conversation) GetCtx() *common.Context {
 	if m != nil {
@@ -736,28 +661,28 @@ func (m *Conversation) GetAccountId() string {
 	return ""
 }
 
-func (m *Conversation) GetCreatedTime() int64 {
-	if m != nil && m.CreatedTime != nil {
-		return *m.CreatedTime
+func (m *Conversation) GetCreated() int64 {
+	if m != nil && m.Created != nil {
+		return *m.Created
 	}
 	return 0
 }
 
-func (m *Conversation) GetLastActiveTime() int64 {
-	if m != nil && m.LastActiveTime != nil {
-		return *m.LastActiveTime
+func (m *Conversation) GetLastActived() int64 {
+	if m != nil && m.LastActived != nil {
+		return *m.LastActived
 	}
 	return 0
 }
 
-func (m *Conversation) GetClosedTime() int64 {
-	if m != nil && m.ClosedTime != nil {
-		return *m.ClosedTime
+func (m *Conversation) GetClosed() int64 {
+	if m != nil && m.Closed != nil {
+		return *m.Closed
 	}
 	return 0
 }
 
-func (m *Conversation) GetUsers() []*event.User {
+func (m *Conversation) GetUsers() []*auth.By {
 	if m != nil {
 		return m.Users
 	}
@@ -778,14 +703,14 @@ func (m *Conversation) GetTags() []string {
 	return nil
 }
 
-func (m *Conversation) GetState() ConversationState {
+func (m *Conversation) GetState() string {
 	if m != nil && m.State != nil {
 		return *m.State
 	}
-	return ConversationState_conversation_none
+	return ""
 }
 
-func (m *Conversation) GetRequest() *ChatRequest {
+func (m *Conversation) GetRequest() *Request {
 	if m != nil {
 		return m.Request
 	}
@@ -793,23 +718,23 @@ func (m *Conversation) GetRequest() *ChatRequest {
 }
 
 type UserConversation struct {
-	State            *ConversationState `protobuf:"varint,11,opt,name=state,enum=conversation.ConversationState" json:"state,omitempty"`
-	UserId           *string            `protobuf:"bytes,2,opt,name=user_id,json=userId" json:"user_id,omitempty"`
-	ConvoId          *string            `protobuf:"bytes,4,opt,name=convo_id,json=convoId" json:"convo_id,omitempty"`
-	LastSeenEvent    *string            `protobuf:"bytes,5,opt,name=last_seen_event,json=lastSeenEvent" json:"last_seen_event,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	State            *string `protobuf:"bytes,11,opt,name=state" json:"state,omitempty"`
+	UserId           *string `protobuf:"bytes,2,opt,name=user_id,json=userId" json:"user_id,omitempty"`
+	ConvoId          *string `protobuf:"bytes,4,opt,name=convo_id,json=convoId" json:"convo_id,omitempty"`
+	LastSeenEvent    *string `protobuf:"bytes,5,opt,name=last_seen_event,json=lastSeenEvent" json:"last_seen_event,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *UserConversation) Reset()                    { *m = UserConversation{} }
 func (m *UserConversation) String() string            { return proto.CompactTextString(m) }
 func (*UserConversation) ProtoMessage()               {}
-func (*UserConversation) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+func (*UserConversation) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
 
-func (m *UserConversation) GetState() ConversationState {
+func (m *UserConversation) GetState() string {
 	if m != nil && m.State != nil {
 		return *m.State
 	}
-	return ConversationState_conversation_none
+	return ""
 }
 
 func (m *UserConversation) GetUserId() string {
@@ -833,7 +758,7 @@ func (m *UserConversation) GetLastSeenEvent() string {
 	return ""
 }
 
-type ChatRequest struct {
+type Request struct {
 	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
 	Id               *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
 	AccountId        *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
@@ -844,7 +769,7 @@ type ChatRequest struct {
 	Message          *string         `protobuf:"bytes,8,opt,name=message" json:"message,omitempty"`
 	BrowserLanguage  *string         `protobuf:"bytes,9,opt,name=browser_language,json=browserLanguage" json:"browser_language,omitempty"`
 	Language         *string         `protobuf:"bytes,10,opt,name=language" json:"language,omitempty"`
-	DeviceType       *DeviceType     `protobuf:"varint,11,opt,name=device_type,json=deviceType,enum=conversation.DeviceType" json:"device_type,omitempty"`
+	DeviceType       *string         `protobuf:"bytes,11,opt,name=device_type,json=deviceType" json:"device_type,omitempty"`
 	UserId           *string         `protobuf:"bytes,12,opt,name=user_id,json=userId" json:"user_id,omitempty"`
 	CreatedTime      *int64          `protobuf:"varint,13,opt,name=created_time,json=createdTime" json:"created_time,omitempty"`
 	ConversationId   *string         `protobuf:"bytes,14,opt,name=conversation_id,json=conversationId" json:"conversation_id,omitempty"`
@@ -856,138 +781,138 @@ type ChatRequest struct {
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *ChatRequest) Reset()                    { *m = ChatRequest{} }
-func (m *ChatRequest) String() string            { return proto.CompactTextString(m) }
-func (*ChatRequest) ProtoMessage()               {}
-func (*ChatRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+func (m *Request) Reset()                    { *m = Request{} }
+func (m *Request) String() string            { return proto.CompactTextString(m) }
+func (*Request) ProtoMessage()               {}
+func (*Request) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
 
-func (m *ChatRequest) GetCtx() *common.Context {
+func (m *Request) GetCtx() *common.Context {
 	if m != nil {
 		return m.Ctx
 	}
 	return nil
 }
 
-func (m *ChatRequest) GetId() string {
+func (m *Request) GetId() string {
 	if m != nil && m.Id != nil {
 		return *m.Id
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetAccountId() string {
+func (m *Request) GetAccountId() string {
 	if m != nil && m.AccountId != nil {
 		return *m.AccountId
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetChannelId() string {
+func (m *Request) GetChannelId() string {
 	if m != nil && m.ChannelId != nil {
 		return *m.ChannelId
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetMessageTo() string {
+func (m *Request) GetMessageTo() string {
 	if m != nil && m.MessageTo != nil {
 		return *m.MessageTo
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetPageUrl() string {
+func (m *Request) GetPageUrl() string {
 	if m != nil && m.PageUrl != nil {
 		return *m.PageUrl
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetPageTitle() string {
+func (m *Request) GetPageTitle() string {
 	if m != nil && m.PageTitle != nil {
 		return *m.PageTitle
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetMessage() string {
+func (m *Request) GetMessage() string {
 	if m != nil && m.Message != nil {
 		return *m.Message
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetBrowserLanguage() string {
+func (m *Request) GetBrowserLanguage() string {
 	if m != nil && m.BrowserLanguage != nil {
 		return *m.BrowserLanguage
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetLanguage() string {
+func (m *Request) GetLanguage() string {
 	if m != nil && m.Language != nil {
 		return *m.Language
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetDeviceType() DeviceType {
+func (m *Request) GetDeviceType() string {
 	if m != nil && m.DeviceType != nil {
 		return *m.DeviceType
 	}
-	return DeviceType_UNKNOWN
+	return ""
 }
 
-func (m *ChatRequest) GetUserId() string {
+func (m *Request) GetUserId() string {
 	if m != nil && m.UserId != nil {
 		return *m.UserId
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetCreatedTime() int64 {
+func (m *Request) GetCreatedTime() int64 {
 	if m != nil && m.CreatedTime != nil {
 		return *m.CreatedTime
 	}
 	return 0
 }
 
-func (m *ChatRequest) GetConversationId() string {
+func (m *Request) GetConversationId() string {
 	if m != nil && m.ConversationId != nil {
 		return *m.ConversationId
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetIp() string {
+func (m *Request) GetIp() string {
 	if m != nil && m.Ip != nil {
 		return *m.Ip
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetCountry() string {
+func (m *Request) GetCountry() string {
 	if m != nil && m.Country != nil {
 		return *m.Country
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetCountryCode() string {
+func (m *Request) GetCountryCode() string {
 	if m != nil && m.CountryCode != nil {
 		return *m.CountryCode
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetCity() string {
+func (m *Request) GetCity() string {
 	if m != nil && m.City != nil {
 		return *m.City
 	}
 	return ""
 }
 
-func (m *ChatRequest) GetTimeZone() string {
+func (m *Request) GetTimeZone() string {
 	if m != nil && m.TimeZone != nil {
 		return *m.TimeZone
 	}
@@ -1002,7 +927,7 @@ type Conversations struct {
 func (m *Conversations) Reset()                    { *m = Conversations{} }
 func (m *Conversations) String() string            { return proto.CompactTextString(m) }
 func (*Conversations) ProtoMessage()               {}
-func (*Conversations) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+func (*Conversations) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
 
 func (m *Conversations) GetConversations() []*Conversation {
 	if m != nil {
@@ -1011,51 +936,67 @@ func (m *Conversations) GetConversations() []*Conversation {
 	return nil
 }
 
-type ChatStart struct {
+type Start struct {
 	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
 	AccountId        *string         `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	AgentId          *string         `protobuf:"bytes,3,opt,name=agent_id,json=agentId" json:"agent_id,omitempty"`
 	UserId           *string         `protobuf:"bytes,4,opt,name=user_id,json=userId" json:"user_id,omitempty"`
 	ChannelId        *string         `protobuf:"bytes,5,opt,name=channel_id,json=channelId" json:"channel_id,omitempty"`
+	UserName         *string         `protobuf:"bytes,10,opt,name=user_name,json=userName" json:"user_name,omitempty"`
+	UserAvatarUrl    *string         `protobuf:"bytes,11,opt,name=user_avatar_url,json=userAvatarUrl" json:"user_avatar_url,omitempty"`
 	XXX_unrecognized []byte          `json:"-"`
 }
 
-func (m *ChatStart) Reset()                    { *m = ChatStart{} }
-func (m *ChatStart) String() string            { return proto.CompactTextString(m) }
-func (*ChatStart) ProtoMessage()               {}
-func (*ChatStart) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
+func (m *Start) Reset()                    { *m = Start{} }
+func (m *Start) String() string            { return proto.CompactTextString(m) }
+func (*Start) ProtoMessage()               {}
+func (*Start) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
 
-func (m *ChatStart) GetCtx() *common.Context {
+func (m *Start) GetCtx() *common.Context {
 	if m != nil {
 		return m.Ctx
 	}
 	return nil
 }
 
-func (m *ChatStart) GetAccountId() string {
+func (m *Start) GetAccountId() string {
 	if m != nil && m.AccountId != nil {
 		return *m.AccountId
 	}
 	return ""
 }
 
-func (m *ChatStart) GetAgentId() string {
+func (m *Start) GetAgentId() string {
 	if m != nil && m.AgentId != nil {
 		return *m.AgentId
 	}
 	return ""
 }
 
-func (m *ChatStart) GetUserId() string {
+func (m *Start) GetUserId() string {
 	if m != nil && m.UserId != nil {
 		return *m.UserId
 	}
 	return ""
 }
 
-func (m *ChatStart) GetChannelId() string {
+func (m *Start) GetChannelId() string {
 	if m != nil && m.ChannelId != nil {
 		return *m.ChannelId
+	}
+	return ""
+}
+
+func (m *Start) GetUserName() string {
+	if m != nil && m.UserName != nil {
+		return *m.UserName
+	}
+	return ""
+}
+
+func (m *Start) GetUserAvatarUrl() string {
+	if m != nil && m.UserAvatarUrl != nil {
+		return *m.UserAvatarUrl
 	}
 	return ""
 }
@@ -1071,7 +1012,7 @@ type ReplyConversationRequest struct {
 func (m *ReplyConversationRequest) Reset()                    { *m = ReplyConversationRequest{} }
 func (m *ReplyConversationRequest) String() string            { return proto.CompactTextString(m) }
 func (*ReplyConversationRequest) ProtoMessage()               {}
-func (*ReplyConversationRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
+func (*ReplyConversationRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
 
 func (m *ReplyConversationRequest) GetCtx() *common.Context {
 	if m != nil {
@@ -1102,18 +1043,18 @@ func (m *ReplyConversationRequest) GetConversationId() string {
 }
 
 type ListConversations struct {
-	Ctx              *common.Context    `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId        *string            `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	State            *ConversationState `protobuf:"varint,4,opt,name=state,enum=conversation.ConversationState" json:"state,omitempty"`
-	Limit            *int32             `protobuf:"varint,5,opt,name=limit" json:"limit,omitempty"`
-	StartId          *string            `protobuf:"bytes,6,opt,name=start_id,json=startId" json:"start_id,omitempty"`
-	XXX_unrecognized []byte             `json:"-"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId        *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	State            *State          `protobuf:"varint,4,opt,name=state,enum=conversation.State" json:"state,omitempty"`
+	Limit            *int32          `protobuf:"varint,5,opt,name=limit" json:"limit,omitempty"`
+	StartId          *string         `protobuf:"bytes,6,opt,name=start_id,json=startId" json:"start_id,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *ListConversations) Reset()                    { *m = ListConversations{} }
 func (m *ListConversations) String() string            { return proto.CompactTextString(m) }
 func (*ListConversations) ProtoMessage()               {}
-func (*ListConversations) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
+func (*ListConversations) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{12} }
 
 func (m *ListConversations) GetCtx() *common.Context {
 	if m != nil {
@@ -1129,11 +1070,11 @@ func (m *ListConversations) GetAccountId() string {
 	return ""
 }
 
-func (m *ListConversations) GetState() ConversationState {
+func (m *ListConversations) GetState() State {
 	if m != nil && m.State != nil {
 		return *m.State
 	}
-	return ConversationState_conversation_none
+	return State_conversation_none
 }
 
 func (m *ListConversations) GetLimit() int32 {
@@ -1160,7 +1101,7 @@ type ListUsersUnreadRequest struct {
 func (m *ListUsersUnreadRequest) Reset()                    { *m = ListUsersUnreadRequest{} }
 func (m *ListUsersUnreadRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListUsersUnreadRequest) ProtoMessage()               {}
-func (*ListUsersUnreadRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
+func (*ListUsersUnreadRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{13} }
 
 func (m *ListUsersUnreadRequest) GetAccountId() string {
 	if m != nil && m.AccountId != nil {
@@ -1192,7 +1133,7 @@ type Unread struct {
 func (m *Unread) Reset()                    { *m = Unread{} }
 func (m *Unread) String() string            { return proto.CompactTextString(m) }
 func (*Unread) ProtoMessage()               {}
-func (*Unread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
+func (*Unread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{14} }
 
 func (m *Unread) GetUserId() string {
 	if m != nil && m.UserId != nil {
@@ -1216,7 +1157,7 @@ type UsersUnread struct {
 func (m *UsersUnread) Reset()                    { *m = UsersUnread{} }
 func (m *UsersUnread) String() string            { return proto.CompactTextString(m) }
 func (*UsersUnread) ProtoMessage()               {}
-func (*UsersUnread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
+func (*UsersUnread) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{15} }
 
 func (m *UsersUnread) GetUnreads() []*Unread {
 	if m != nil {
@@ -1237,7 +1178,7 @@ type ListEventsRequest struct {
 func (m *ListEventsRequest) Reset()                    { *m = ListEventsRequest{} }
 func (m *ListEventsRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListEventsRequest) ProtoMessage()               {}
-func (*ListEventsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
+func (*ListEventsRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{16} }
 
 func (m *ListEventsRequest) GetCtx() *common.Context {
 	if m != nil {
@@ -1286,7 +1227,7 @@ type ListChatsByUserRequest struct {
 func (m *ListChatsByUserRequest) Reset()                    { *m = ListChatsByUserRequest{} }
 func (m *ListChatsByUserRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListChatsByUserRequest) ProtoMessage()               {}
-func (*ListChatsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
+func (*ListChatsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{17} }
 
 func (m *ListChatsByUserRequest) GetAccountId() string {
 	if m != nil && m.AccountId != nil {
@@ -1323,575 +1264,6 @@ func (m *ListChatsByUserRequest) GetLimit() int32 {
 	return 0
 }
 
-type OEChatDropped struct {
-	AccountId        *string `protobuf:"bytes,1,opt,name=AccountId" json:"AccountId,omitempty"`
-	ChatId           *string `protobuf:"bytes,2,opt,name=ChatId" json:"ChatId,omitempty"`
-	ChannelId        *string `protobuf:"bytes,3,opt,name=ChannelId" json:"ChannelId,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *OEChatDropped) Reset()                    { *m = OEChatDropped{} }
-func (m *OEChatDropped) String() string            { return proto.CompactTextString(m) }
-func (*OEChatDropped) ProtoMessage()               {}
-func (*OEChatDropped) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
-
-func (m *OEChatDropped) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return ""
-}
-
-func (m *OEChatDropped) GetChatId() string {
-	if m != nil && m.ChatId != nil {
-		return *m.ChatId
-	}
-	return ""
-}
-
-func (m *OEChatDropped) GetChannelId() string {
-	if m != nil && m.ChannelId != nil {
-		return *m.ChannelId
-	}
-	return ""
-}
-
-type OEChatAccepted struct {
-	AccountId        *string `protobuf:"bytes,2,opt,name=AccountId" json:"AccountId,omitempty"`
-	ChatId           *string `protobuf:"bytes,3,opt,name=ChatId" json:"ChatId,omitempty"`
-	AgentId          *string `protobuf:"bytes,4,opt,name=AgentId" json:"AgentId,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *OEChatAccepted) Reset()                    { *m = OEChatAccepted{} }
-func (m *OEChatAccepted) String() string            { return proto.CompactTextString(m) }
-func (*OEChatAccepted) ProtoMessage()               {}
-func (*OEChatAccepted) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
-
-func (m *OEChatAccepted) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return ""
-}
-
-func (m *OEChatAccepted) GetChatId() string {
-	if m != nil && m.ChatId != nil {
-		return *m.ChatId
-	}
-	return ""
-}
-
-func (m *OEChatAccepted) GetAgentId() string {
-	if m != nil && m.AgentId != nil {
-		return *m.AgentId
-	}
-	return ""
-}
-
-type OEChatStarted struct {
-	AccountId        *string `protobuf:"bytes,2,opt,name=AccountId" json:"AccountId,omitempty"`
-	ChatId           *string `protobuf:"bytes,3,opt,name=ChatId" json:"ChatId,omitempty"`
-	ChannelId        *string `protobuf:"bytes,4,opt,name=ChannelId" json:"ChannelId,omitempty"`
-	CreatedTime      *string `protobuf:"bytes,5,opt,name=CreatedTime" json:"CreatedTime,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *OEChatStarted) Reset()                    { *m = OEChatStarted{} }
-func (m *OEChatStarted) String() string            { return proto.CompactTextString(m) }
-func (*OEChatStarted) ProtoMessage()               {}
-func (*OEChatStarted) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{21} }
-
-func (m *OEChatStarted) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return ""
-}
-
-func (m *OEChatStarted) GetChatId() string {
-	if m != nil && m.ChatId != nil {
-		return *m.ChatId
-	}
-	return ""
-}
-
-func (m *OEChatStarted) GetChannelId() string {
-	if m != nil && m.ChannelId != nil {
-		return *m.ChannelId
-	}
-	return ""
-}
-
-func (m *OEChatStarted) GetCreatedTime() string {
-	if m != nil && m.CreatedTime != nil {
-		return *m.CreatedTime
-	}
-	return ""
-}
-
-type EvChatResult struct {
-	RequestId        *string `protobuf:"bytes,1,opt,name=RequestId" json:"RequestId,omitempty"`
-	Ok               *bool   `protobuf:"varint,2,opt,name=Ok" json:"Ok,omitempty"`
-	Code             *int32  `protobuf:"varint,3,opt,name=Code" json:"Code,omitempty"`
-	CreatedTime      *string `protobuf:"bytes,4,opt,name=CreatedTime" json:"CreatedTime,omitempty"`
-	Description      *string `protobuf:"bytes,5,opt,name=Description" json:"Description,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *EvChatResult) Reset()                    { *m = EvChatResult{} }
-func (m *EvChatResult) String() string            { return proto.CompactTextString(m) }
-func (*EvChatResult) ProtoMessage()               {}
-func (*EvChatResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{22} }
-
-func (m *EvChatResult) GetRequestId() string {
-	if m != nil && m.RequestId != nil {
-		return *m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatResult) GetOk() bool {
-	if m != nil && m.Ok != nil {
-		return *m.Ok
-	}
-	return false
-}
-
-func (m *EvChatResult) GetCode() int32 {
-	if m != nil && m.Code != nil {
-		return *m.Code
-	}
-	return 0
-}
-
-func (m *EvChatResult) GetCreatedTime() string {
-	if m != nil && m.CreatedTime != nil {
-		return *m.CreatedTime
-	}
-	return ""
-}
-
-func (m *EvChatResult) GetDescription() string {
-	if m != nil && m.Description != nil {
-		return *m.Description
-	}
-	return ""
-}
-
-type EvChatUserInfoRequested struct {
-	RequestId        *string     `protobuf:"bytes,1,opt,name=RequestId" json:"RequestId,omitempty"`
-	ChatId           *string     `protobuf:"bytes,2,opt,name=ChatId" json:"ChatId,omitempty"`
-	AccountId        *string     `protobuf:"bytes,3,opt,name=AccountId" json:"AccountId,omitempty"`
-	ChannelId        *string     `protobuf:"bytes,4,opt,name=ChannelId" json:"ChannelId,omitempty"`
-	MessageTo        *string     `protobuf:"bytes,5,opt,name=MessageTo" json:"MessageTo,omitempty"`
-	PageUrl          *string     `protobuf:"bytes,6,opt,name=PageUrl" json:"PageUrl,omitempty"`
-	PageTitle        *string     `protobuf:"bytes,7,opt,name=PageTitle" json:"PageTitle,omitempty"`
-	Message          *string     `protobuf:"bytes,8,opt,name=Message" json:"Message,omitempty"`
-	BrowserLanguage  *string     `protobuf:"bytes,9,opt,name=BrowserLanguage" json:"BrowserLanguage,omitempty"`
-	Language         *string     `protobuf:"bytes,10,opt,name=Language" json:"Language,omitempty"`
-	DeviceType       *DeviceType `protobuf:"varint,11,opt,name=DeviceType,enum=conversation.DeviceType" json:"DeviceType,omitempty"`
-	UserId           *string     `protobuf:"bytes,12,opt,name=UserId" json:"UserId,omitempty"`
-	CreatedTime      *string     `protobuf:"bytes,13,opt,name=CreatedTime" json:"CreatedTime,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
-}
-
-func (m *EvChatUserInfoRequested) Reset()                    { *m = EvChatUserInfoRequested{} }
-func (m *EvChatUserInfoRequested) String() string            { return proto.CompactTextString(m) }
-func (*EvChatUserInfoRequested) ProtoMessage()               {}
-func (*EvChatUserInfoRequested) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{23} }
-
-func (m *EvChatUserInfoRequested) GetRequestId() string {
-	if m != nil && m.RequestId != nil {
-		return *m.RequestId
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetChatId() string {
-	if m != nil && m.ChatId != nil {
-		return *m.ChatId
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetChannelId() string {
-	if m != nil && m.ChannelId != nil {
-		return *m.ChannelId
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetMessageTo() string {
-	if m != nil && m.MessageTo != nil {
-		return *m.MessageTo
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetPageUrl() string {
-	if m != nil && m.PageUrl != nil {
-		return *m.PageUrl
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetPageTitle() string {
-	if m != nil && m.PageTitle != nil {
-		return *m.PageTitle
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetMessage() string {
-	if m != nil && m.Message != nil {
-		return *m.Message
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetBrowserLanguage() string {
-	if m != nil && m.BrowserLanguage != nil {
-		return *m.BrowserLanguage
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetLanguage() string {
-	if m != nil && m.Language != nil {
-		return *m.Language
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetDeviceType() DeviceType {
-	if m != nil && m.DeviceType != nil {
-		return *m.DeviceType
-	}
-	return DeviceType_UNKNOWN
-}
-
-func (m *EvChatUserInfoRequested) GetUserId() string {
-	if m != nil && m.UserId != nil {
-		return *m.UserId
-	}
-	return ""
-}
-
-func (m *EvChatUserInfoRequested) GetCreatedTime() string {
-	if m != nil && m.CreatedTime != nil {
-		return *m.CreatedTime
-	}
-	return ""
-}
-
-type FileTemplate struct {
-	Id               *string `protobuf:"bytes,1,opt,name=Id" json:"Id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *FileTemplate) Reset()                    { *m = FileTemplate{} }
-func (m *FileTemplate) String() string            { return proto.CompactTextString(m) }
-func (*FileTemplate) ProtoMessage()               {}
-func (*FileTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{24} }
-
-func (m *FileTemplate) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
-	}
-	return ""
-}
-
-type QuickRepliesTemplate struct {
-	Text             *string   `protobuf:"bytes,1,opt,name=Text" json:"Text,omitempty"`
-	ContentType      *string   `protobuf:"bytes,4,opt,name=ContentType" json:"ContentType,omitempty"`
-	Replies          []*Button `protobuf:"bytes,5,rep,name=Replies" json:"Replies,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
-}
-
-func (m *QuickRepliesTemplate) Reset()                    { *m = QuickRepliesTemplate{} }
-func (m *QuickRepliesTemplate) String() string            { return proto.CompactTextString(m) }
-func (*QuickRepliesTemplate) ProtoMessage()               {}
-func (*QuickRepliesTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{25} }
-
-func (m *QuickRepliesTemplate) GetText() string {
-	if m != nil && m.Text != nil {
-		return *m.Text
-	}
-	return ""
-}
-
-func (m *QuickRepliesTemplate) GetContentType() string {
-	if m != nil && m.ContentType != nil {
-		return *m.ContentType
-	}
-	return ""
-}
-
-func (m *QuickRepliesTemplate) GetReplies() []*Button {
-	if m != nil {
-		return m.Replies
-	}
-	return nil
-}
-
-type GenericElement struct {
-	Title            *string   `protobuf:"bytes,1,opt,name=Title" json:"Title,omitempty"`
-	ImageUrl         *string   `protobuf:"bytes,2,opt,name=ImageUrl" json:"ImageUrl,omitempty"`
-	Subtitle         *string   `protobuf:"bytes,3,opt,name=Subtitle" json:"Subtitle,omitempty"`
-	DefaultAction    *Button   `protobuf:"bytes,4,opt,name=DefaultAction" json:"DefaultAction,omitempty"`
-	Buttons          []*Button `protobuf:"bytes,5,rep,name=Buttons" json:"Buttons,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
-}
-
-func (m *GenericElement) Reset()                    { *m = GenericElement{} }
-func (m *GenericElement) String() string            { return proto.CompactTextString(m) }
-func (*GenericElement) ProtoMessage()               {}
-func (*GenericElement) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{26} }
-
-func (m *GenericElement) GetTitle() string {
-	if m != nil && m.Title != nil {
-		return *m.Title
-	}
-	return ""
-}
-
-func (m *GenericElement) GetImageUrl() string {
-	if m != nil && m.ImageUrl != nil {
-		return *m.ImageUrl
-	}
-	return ""
-}
-
-func (m *GenericElement) GetSubtitle() string {
-	if m != nil && m.Subtitle != nil {
-		return *m.Subtitle
-	}
-	return ""
-}
-
-func (m *GenericElement) GetDefaultAction() *Button {
-	if m != nil {
-		return m.DefaultAction
-	}
-	return nil
-}
-
-func (m *GenericElement) GetButtons() []*Button {
-	if m != nil {
-		return m.Buttons
-	}
-	return nil
-}
-
-type GenericTemplate struct {
-	Elements         []*GenericElement `protobuf:"bytes,1,rep,name=Elements" json:"Elements,omitempty"`
-	XXX_unrecognized []byte            `json:"-"`
-}
-
-func (m *GenericTemplate) Reset()                    { *m = GenericTemplate{} }
-func (m *GenericTemplate) String() string            { return proto.CompactTextString(m) }
-func (*GenericTemplate) ProtoMessage()               {}
-func (*GenericTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{27} }
-
-func (m *GenericTemplate) GetElements() []*GenericElement {
-	if m != nil {
-		return m.Elements
-	}
-	return nil
-}
-
-type Button struct {
-	Type             *string `protobuf:"bytes,1,opt,name=Type" json:"Type,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *Button) Reset()                    { *m = Button{} }
-func (m *Button) String() string            { return proto.CompactTextString(m) }
-func (*Button) ProtoMessage()               {}
-func (*Button) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{28} }
-
-func (m *Button) GetType() string {
-	if m != nil && m.Type != nil {
-		return *m.Type
-	}
-	return ""
-}
-
-type UrlButton struct {
-	Type             *string `protobuf:"bytes,1,opt,name=Type" json:"Type,omitempty"`
-	Title            *string `protobuf:"bytes,2,opt,name=Title" json:"Title,omitempty"`
-	Url              *string `protobuf:"bytes,3,opt,name=Url" json:"Url,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *UrlButton) Reset()                    { *m = UrlButton{} }
-func (m *UrlButton) String() string            { return proto.CompactTextString(m) }
-func (*UrlButton) ProtoMessage()               {}
-func (*UrlButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{29} }
-
-func (m *UrlButton) GetType() string {
-	if m != nil && m.Type != nil {
-		return *m.Type
-	}
-	return ""
-}
-
-func (m *UrlButton) GetTitle() string {
-	if m != nil && m.Title != nil {
-		return *m.Title
-	}
-	return ""
-}
-
-func (m *UrlButton) GetUrl() string {
-	if m != nil && m.Url != nil {
-		return *m.Url
-	}
-	return ""
-}
-
-type PostbackButton struct {
-	Type             *string `protobuf:"bytes,1,opt,name=Type" json:"Type,omitempty"`
-	Title            *string `protobuf:"bytes,2,opt,name=Title" json:"Title,omitempty"`
-	Payload          *string `protobuf:"bytes,3,opt,name=Payload" json:"Payload,omitempty"`
-	ImageUrl         *string `protobuf:"bytes,4,opt,name=ImageUrl" json:"ImageUrl,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *PostbackButton) Reset()                    { *m = PostbackButton{} }
-func (m *PostbackButton) String() string            { return proto.CompactTextString(m) }
-func (*PostbackButton) ProtoMessage()               {}
-func (*PostbackButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{30} }
-
-func (m *PostbackButton) GetType() string {
-	if m != nil && m.Type != nil {
-		return *m.Type
-	}
-	return ""
-}
-
-func (m *PostbackButton) GetTitle() string {
-	if m != nil && m.Title != nil {
-		return *m.Title
-	}
-	return ""
-}
-
-func (m *PostbackButton) GetPayload() string {
-	if m != nil && m.Payload != nil {
-		return *m.Payload
-	}
-	return ""
-}
-
-func (m *PostbackButton) GetImageUrl() string {
-	if m != nil && m.ImageUrl != nil {
-		return *m.ImageUrl
-	}
-	return ""
-}
-
-type CallButton struct {
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *CallButton) Reset()                    { *m = CallButton{} }
-func (m *CallButton) String() string            { return proto.CompactTextString(m) }
-func (*CallButton) ProtoMessage()               {}
-func (*CallButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{31} }
-
-type LoginButton struct {
-	XXX_unrecognized []byte `json:"-"`
-}
-
-func (m *LoginButton) Reset()                    { *m = LoginButton{} }
-func (m *LoginButton) String() string            { return proto.CompactTextString(m) }
-func (*LoginButton) ProtoMessage()               {}
-func (*LoginButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{32} }
-
-type EventButton struct {
-	Type             *string `protobuf:"bytes,1,opt,name=Type" json:"Type,omitempty"`
-	Title            *string `protobuf:"bytes,2,opt,name=Title" json:"Title,omitempty"`
-	ImageUrl         *string `protobuf:"bytes,4,opt,name=ImageUrl" json:"ImageUrl,omitempty"`
-	Event            *string `protobuf:"bytes,3,opt,name=Event" json:"Event,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *EventButton) Reset()                    { *m = EventButton{} }
-func (m *EventButton) String() string            { return proto.CompactTextString(m) }
-func (*EventButton) ProtoMessage()               {}
-func (*EventButton) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{33} }
-
-func (m *EventButton) GetType() string {
-	if m != nil && m.Type != nil {
-		return *m.Type
-	}
-	return ""
-}
-
-func (m *EventButton) GetTitle() string {
-	if m != nil && m.Title != nil {
-		return *m.Title
-	}
-	return ""
-}
-
-func (m *EventButton) GetImageUrl() string {
-	if m != nil && m.ImageUrl != nil {
-		return *m.ImageUrl
-	}
-	return ""
-}
-
-func (m *EventButton) GetEvent() string {
-	if m != nil && m.Event != nil {
-		return *m.Event
-	}
-	return ""
-}
-
-type SurveyForm struct {
-	Placeholder      *string `protobuf:"bytes,1,opt,name=Placeholder" json:"Placeholder,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *SurveyForm) Reset()                    { *m = SurveyForm{} }
-func (m *SurveyForm) String() string            { return proto.CompactTextString(m) }
-func (*SurveyForm) ProtoMessage()               {}
-func (*SurveyForm) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{34} }
-
-func (m *SurveyForm) GetPlaceholder() string {
-	if m != nil && m.Placeholder != nil {
-		return *m.Placeholder
-	}
-	return ""
-}
-
-type RateFormTemplate struct {
-	Type             *string `protobuf:"bytes,1,opt,name=Type" json:"Type,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *RateFormTemplate) Reset()                    { *m = RateFormTemplate{} }
-func (m *RateFormTemplate) String() string            { return proto.CompactTextString(m) }
-func (*RateFormTemplate) ProtoMessage()               {}
-func (*RateFormTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{35} }
-
-func (m *RateFormTemplate) GetType() string {
-	if m != nil && m.Type != nil {
-		return *m.Type
-	}
-	return ""
-}
-
 type RequestState struct {
 	AccountId        *string `protobuf:"bytes,1,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
 	ConversationId   *string `protobuf:"bytes,2,opt,name=conversation_id,json=conversationId" json:"conversation_id,omitempty"`
@@ -1902,7 +1274,7 @@ type RequestState struct {
 func (m *RequestState) Reset()                    { *m = RequestState{} }
 func (m *RequestState) String() string            { return proto.CompactTextString(m) }
 func (*RequestState) ProtoMessage()               {}
-func (*RequestState) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{36} }
+func (*RequestState) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{18} }
 
 func (m *RequestState) GetAccountId() string {
 	if m != nil && m.AccountId != nil {
@@ -1925,9 +1297,356 @@ func (m *RequestState) GetChannelId() string {
 	return ""
 }
 
+type Reaction struct {
+	Name             *string  `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
+	Count            *int32   `protobuf:"varint,4,opt,name=count" json:"count,omitempty"`
+	Users            []string `protobuf:"bytes,5,rep,name=users" json:"users,omitempty"`
+	XXX_unrecognized []byte   `json:"-"`
+}
+
+func (m *Reaction) Reset()                    { *m = Reaction{} }
+func (m *Reaction) String() string            { return proto.CompactTextString(m) }
+func (*Reaction) ProtoMessage()               {}
+func (*Reaction) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{19} }
+
+func (m *Reaction) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *Reaction) GetCount() int32 {
+	if m != nil && m.Count != nil {
+		return *m.Count
+	}
+	return 0
+}
+
+func (m *Reaction) GetUsers() []string {
+	if m != nil {
+		return m.Users
+	}
+	return nil
+}
+
+type Message struct {
+	Text             *string       `protobuf:"bytes,2,opt,name=text" json:"text,omitempty"`
+	Format           *string       `protobuf:"bytes,3,opt,name=format" json:"format,omitempty"`
+	Attachments      []*Attachment `protobuf:"bytes,4,rep,name=attachments" json:"attachments,omitempty"`
+	Reactions        []*Reaction   `protobuf:"bytes,7,rep,name=reactions" json:"reactions,omitempty"`
+	Opened           *int32        `protobuf:"varint,8,opt,name=opened" json:"opened,omitempty"`
+	Delivered        *bool         `protobuf:"varint,9,opt,name=delivered" json:"delivered,omitempty"`
+	Fields           []*Field      `protobuf:"bytes,10,rep,name=fields" json:"fields,omitempty"`
+	XXX_unrecognized []byte        `json:"-"`
+}
+
+func (m *Message) Reset()                    { *m = Message{} }
+func (m *Message) String() string            { return proto.CompactTextString(m) }
+func (*Message) ProtoMessage()               {}
+func (*Message) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{20} }
+
+func (m *Message) GetText() string {
+	if m != nil && m.Text != nil {
+		return *m.Text
+	}
+	return ""
+}
+
+func (m *Message) GetFormat() string {
+	if m != nil && m.Format != nil {
+		return *m.Format
+	}
+	return ""
+}
+
+func (m *Message) GetAttachments() []*Attachment {
+	if m != nil {
+		return m.Attachments
+	}
+	return nil
+}
+
+func (m *Message) GetReactions() []*Reaction {
+	if m != nil {
+		return m.Reactions
+	}
+	return nil
+}
+
+func (m *Message) GetOpened() int32 {
+	if m != nil && m.Opened != nil {
+		return *m.Opened
+	}
+	return 0
+}
+
+func (m *Message) GetDelivered() bool {
+	if m != nil && m.Delivered != nil {
+		return *m.Delivered
+	}
+	return false
+}
+
+func (m *Message) GetFields() []*Field {
+	if m != nil {
+		return m.Fields
+	}
+	return nil
+}
+
+type Field struct {
+	Value            *string `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
+	Key              *string `protobuf:"bytes,2,opt,name=key" json:"key,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *Field) Reset()                    { *m = Field{} }
+func (m *Field) String() string            { return proto.CompactTextString(m) }
+func (*Field) ProtoMessage()               {}
+func (*Field) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{21} }
+
+func (m *Field) GetValue() string {
+	if m != nil && m.Value != nil {
+		return *m.Value
+	}
+	return ""
+}
+
+func (m *Field) GetKey() string {
+	if m != nil && m.Key != nil {
+		return *m.Key
+	}
+	return ""
+}
+
+type Button struct {
+	Type *string `protobuf:"bytes,2,opt,name=type" json:"type,omitempty"`
+	// post back
+	Title     *string `protobuf:"bytes,3,opt,name=title" json:"title,omitempty"`
+	Payload   *string `protobuf:"bytes,4,opt,name=payload" json:"payload,omitempty"`
+	ImageUrl  *string `protobuf:"bytes,5,opt,name=image_url,json=imageUrl" json:"image_url,omitempty"`
+	ContentId *string `protobuf:"bytes,10,opt,name=content_id,json=contentId" json:"content_id,omitempty"`
+	// 	optional RawEvent event = 12;
+	Url              *string `protobuf:"bytes,14,opt,name=url" json:"url,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *Button) Reset()                    { *m = Button{} }
+func (m *Button) String() string            { return proto.CompactTextString(m) }
+func (*Button) ProtoMessage()               {}
+func (*Button) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{22} }
+
+func (m *Button) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
+
+func (m *Button) GetTitle() string {
+	if m != nil && m.Title != nil {
+		return *m.Title
+	}
+	return ""
+}
+
+func (m *Button) GetPayload() string {
+	if m != nil && m.Payload != nil {
+		return *m.Payload
+	}
+	return ""
+}
+
+func (m *Button) GetImageUrl() string {
+	if m != nil && m.ImageUrl != nil {
+		return *m.ImageUrl
+	}
+	return ""
+}
+
+func (m *Button) GetContentId() string {
+	if m != nil && m.ContentId != nil {
+		return *m.ContentId
+	}
+	return ""
+}
+
+func (m *Button) GetUrl() string {
+	if m != nil && m.Url != nil {
+		return *m.Url
+	}
+	return ""
+}
+
+type GenericElementTemplate struct {
+	Title            *string   `protobuf:"bytes,2,opt,name=title" json:"title,omitempty"`
+	ImageUrl         *string   `protobuf:"bytes,3,opt,name=image_url,json=imageUrl" json:"image_url,omitempty"`
+	Subtitle         *string   `protobuf:"bytes,4,opt,name=subtitle" json:"subtitle,omitempty"`
+	DefaultAction    *Button   `protobuf:"bytes,5,opt,name=default_action,json=defaultAction" json:"default_action,omitempty"`
+	Buttons          []*Button `protobuf:"bytes,6,rep,name=buttons" json:"buttons,omitempty"`
+	XXX_unrecognized []byte    `json:"-"`
+}
+
+func (m *GenericElementTemplate) Reset()                    { *m = GenericElementTemplate{} }
+func (m *GenericElementTemplate) String() string            { return proto.CompactTextString(m) }
+func (*GenericElementTemplate) ProtoMessage()               {}
+func (*GenericElementTemplate) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{23} }
+
+func (m *GenericElementTemplate) GetTitle() string {
+	if m != nil && m.Title != nil {
+		return *m.Title
+	}
+	return ""
+}
+
+func (m *GenericElementTemplate) GetImageUrl() string {
+	if m != nil && m.ImageUrl != nil {
+		return *m.ImageUrl
+	}
+	return ""
+}
+
+func (m *GenericElementTemplate) GetSubtitle() string {
+	if m != nil && m.Subtitle != nil {
+		return *m.Subtitle
+	}
+	return ""
+}
+
+func (m *GenericElementTemplate) GetDefaultAction() *Button {
+	if m != nil {
+		return m.DefaultAction
+	}
+	return nil
+}
+
+func (m *GenericElementTemplate) GetButtons() []*Button {
+	if m != nil {
+		return m.Buttons
+	}
+	return nil
+}
+
+type Attachment struct {
+	Type *string `protobuf:"bytes,12,opt,name=type" json:"type,omitempty"`
+	// file
+	Mimetype     *string `protobuf:"bytes,2,opt,name=mimetype" json:"mimetype,omitempty"`
+	Url          *string `protobuf:"bytes,3,opt,name=url" json:"url,omitempty"`
+	ThumbnailUrl *string `protobuf:"bytes,4,opt,name=thumbnail_url,json=thumbnailUrl" json:"thumbnail_url,omitempty"`
+	Name         *string `protobuf:"bytes,5,opt,name=name" json:"name,omitempty"`
+	Descrition   *string `protobuf:"bytes,6,opt,name=descrition" json:"descrition,omitempty"`
+	// optional string data = 7; // for custom data
+	Length *int32 `protobuf:"varint,15,opt,name=length" json:"length,omitempty"`
+	Size   *int32 `protobuf:"varint,13,opt,name=size" json:"size,omitempty"`
+	// generic
+	Elements []*GenericElementTemplate `protobuf:"bytes,8,rep,name=elements" json:"elements,omitempty"`
+	// preview
+	Title            *string   `protobuf:"bytes,9,opt,name=title" json:"title,omitempty"`
+	Color            *string   `protobuf:"bytes,10,opt,name=color" json:"color,omitempty"`
+	Pretext          *string   `protobuf:"bytes,11,opt,name=pretext" json:"pretext,omitempty"`
+	Buttons          []*Button `protobuf:"bytes,16,rep,name=buttons" json:"buttons,omitempty"`
+	XXX_unrecognized []byte    `json:"-"`
+}
+
+func (m *Attachment) Reset()                    { *m = Attachment{} }
+func (m *Attachment) String() string            { return proto.CompactTextString(m) }
+func (*Attachment) ProtoMessage()               {}
+func (*Attachment) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{24} }
+
+func (m *Attachment) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
+	}
+	return ""
+}
+
+func (m *Attachment) GetMimetype() string {
+	if m != nil && m.Mimetype != nil {
+		return *m.Mimetype
+	}
+	return ""
+}
+
+func (m *Attachment) GetUrl() string {
+	if m != nil && m.Url != nil {
+		return *m.Url
+	}
+	return ""
+}
+
+func (m *Attachment) GetThumbnailUrl() string {
+	if m != nil && m.ThumbnailUrl != nil {
+		return *m.ThumbnailUrl
+	}
+	return ""
+}
+
+func (m *Attachment) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *Attachment) GetDescrition() string {
+	if m != nil && m.Descrition != nil {
+		return *m.Descrition
+	}
+	return ""
+}
+
+func (m *Attachment) GetLength() int32 {
+	if m != nil && m.Length != nil {
+		return *m.Length
+	}
+	return 0
+}
+
+func (m *Attachment) GetSize() int32 {
+	if m != nil && m.Size != nil {
+		return *m.Size
+	}
+	return 0
+}
+
+func (m *Attachment) GetElements() []*GenericElementTemplate {
+	if m != nil {
+		return m.Elements
+	}
+	return nil
+}
+
+func (m *Attachment) GetTitle() string {
+	if m != nil && m.Title != nil {
+		return *m.Title
+	}
+	return ""
+}
+
+func (m *Attachment) GetColor() string {
+	if m != nil && m.Color != nil {
+		return *m.Color
+	}
+	return ""
+}
+
+func (m *Attachment) GetPretext() string {
+	if m != nil && m.Pretext != nil {
+		return *m.Pretext
+	}
+	return ""
+}
+
+func (m *Attachment) GetButtons() []*Button {
+	if m != nil {
+		return m.Buttons
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*Id)(nil), "conversation.Id")
-	proto.RegisterType((*Account)(nil), "conversation.Account")
 	proto.RegisterType((*Limit)(nil), "conversation.Limit")
 	proto.RegisterType((*Rule)(nil), "conversation.Rule")
 	proto.RegisterType((*Condition)(nil), "conversation.Condition")
@@ -1935,9 +1654,9 @@ func init() {
 	proto.RegisterType((*RouteResult)(nil), "conversation.RouteResult")
 	proto.RegisterType((*Conversation)(nil), "conversation.Conversation")
 	proto.RegisterType((*UserConversation)(nil), "conversation.UserConversation")
-	proto.RegisterType((*ChatRequest)(nil), "conversation.ChatRequest")
+	proto.RegisterType((*Request)(nil), "conversation.Request")
 	proto.RegisterType((*Conversations)(nil), "conversation.Conversations")
-	proto.RegisterType((*ChatStart)(nil), "conversation.ChatStart")
+	proto.RegisterType((*Start)(nil), "conversation.Start")
 	proto.RegisterType((*ReplyConversationRequest)(nil), "conversation.ReplyConversationRequest")
 	proto.RegisterType((*ListConversations)(nil), "conversation.ListConversations")
 	proto.RegisterType((*ListUsersUnreadRequest)(nil), "conversation.ListUsersUnreadRequest")
@@ -1945,179 +1664,158 @@ func init() {
 	proto.RegisterType((*UsersUnread)(nil), "conversation.UsersUnread")
 	proto.RegisterType((*ListEventsRequest)(nil), "conversation.ListEventsRequest")
 	proto.RegisterType((*ListChatsByUserRequest)(nil), "conversation.ListChatsByUserRequest")
-	proto.RegisterType((*OEChatDropped)(nil), "conversation.OEChatDropped")
-	proto.RegisterType((*OEChatAccepted)(nil), "conversation.OEChatAccepted")
-	proto.RegisterType((*OEChatStarted)(nil), "conversation.OEChatStarted")
-	proto.RegisterType((*EvChatResult)(nil), "conversation.EvChatResult")
-	proto.RegisterType((*EvChatUserInfoRequested)(nil), "conversation.EvChatUserInfoRequested")
-	proto.RegisterType((*FileTemplate)(nil), "conversation.FileTemplate")
-	proto.RegisterType((*QuickRepliesTemplate)(nil), "conversation.QuickRepliesTemplate")
-	proto.RegisterType((*GenericElement)(nil), "conversation.GenericElement")
-	proto.RegisterType((*GenericTemplate)(nil), "conversation.GenericTemplate")
-	proto.RegisterType((*Button)(nil), "conversation.Button")
-	proto.RegisterType((*UrlButton)(nil), "conversation.UrlButton")
-	proto.RegisterType((*PostbackButton)(nil), "conversation.PostbackButton")
-	proto.RegisterType((*CallButton)(nil), "conversation.CallButton")
-	proto.RegisterType((*LoginButton)(nil), "conversation.LoginButton")
-	proto.RegisterType((*EventButton)(nil), "conversation.EventButton")
-	proto.RegisterType((*SurveyForm)(nil), "conversation.SurveyForm")
-	proto.RegisterType((*RateFormTemplate)(nil), "conversation.RateFormTemplate")
 	proto.RegisterType((*RequestState)(nil), "conversation.RequestState")
+	proto.RegisterType((*Reaction)(nil), "conversation.Reaction")
+	proto.RegisterType((*Message)(nil), "conversation.Message")
+	proto.RegisterType((*Field)(nil), "conversation.Field")
+	proto.RegisterType((*Button)(nil), "conversation.Button")
+	proto.RegisterType((*GenericElementTemplate)(nil), "conversation.GenericElementTemplate")
+	proto.RegisterType((*Attachment)(nil), "conversation.Attachment")
 	proto.RegisterEnum("conversation.JoinOperator", JoinOperator_name, JoinOperator_value)
 	proto.RegisterEnum("conversation.AssignStrategy", AssignStrategy_name, AssignStrategy_value)
-	proto.RegisterEnum("conversation.ConversationState", ConversationState_name, ConversationState_value)
-	proto.RegisterEnum("conversation.ChatEventType", ChatEventType_name, ChatEventType_value)
-	proto.RegisterEnum("conversation.DeviceType", DeviceType_name, DeviceType_value)
+	proto.RegisterEnum("conversation.State", State_name, State_value)
 	proto.RegisterEnum("conversation.Event", Event_name, Event_value)
+	proto.RegisterEnum("conversation.ActionType", ActionType_name, ActionType_value)
+	proto.RegisterEnum("conversation.AttachmentType", AttachmentType_name, AttachmentType_value)
 }
 
 func init() { proto.RegisterFile("conversation/conversation.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 2311 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x58, 0xcd, 0x6f, 0xdb, 0xc8,
-	0x15, 0x8f, 0x44, 0xea, 0x83, 0x4f, 0x1f, 0x66, 0x26, 0x4e, 0xcc, 0x78, 0x9d, 0xc4, 0x61, 0x81,
-	0xad, 0xd7, 0x28, 0x1c, 0xd4, 0xdb, 0xa2, 0x69, 0xd1, 0x2d, 0x2a, 0x5b, 0x8a, 0xa1, 0x8d, 0x22,
-	0x79, 0x29, 0xa9, 0x8b, 0xed, 0x45, 0xa5, 0xc9, 0x89, 0xc3, 0x35, 0x45, 0xaa, 0xe4, 0xc8, 0xb5,
-	0x82, 0x16, 0x3d, 0xf5, 0x3f, 0xe8, 0xb1, 0x87, 0x62, 0x81, 0x9e, 0x7b, 0xea, 0xb1, 0xff, 0x40,
-	0xaf, 0x05, 0x0a, 0xf4, 0xbf, 0x29, 0xde, 0xcc, 0x50, 0x22, 0x29, 0xc7, 0xf9, 0xe8, 0xee, 0xc5,
-	0x9e, 0xf7, 0x31, 0x33, 0xbf, 0xf7, 0x7e, 0x6f, 0x66, 0x1e, 0x05, 0x8f, 0x9c, 0x30, 0xb8, 0xa4,
-	0x51, 0x6c, 0x33, 0x2f, 0x0c, 0x9e, 0xa4, 0x85, 0x83, 0x59, 0x14, 0xb2, 0x90, 0xd4, 0xd3, 0xba,
-	0xed, 0x1f, 0x9c, 0x79, 0xec, 0x6c, 0xee, 0x5c, 0x50, 0x76, 0x10, 0x46, 0xe7, 0x4f, 0xe2, 0xf9,
-	0x99, 0xf7, 0xfa, 0xc9, 0x2b, 0x6a, 0xbb, 0x34, 0x7a, 0x42, 0x2f, 0x69, 0xc0, 0xc4, 0x5f, 0x31,
-	0x77, 0xfb, 0xe0, 0x06, 0x6f, 0x27, 0x9c, 0x4e, 0xf9, 0x8e, 0xf8, 0x4f, 0xf8, 0x9b, 0xbf, 0x82,
-	0x62, 0xd7, 0x25, 0x8f, 0x41, 0x71, 0xd8, 0x95, 0x51, 0xd8, 0x2d, 0xec, 0xd5, 0x0e, 0x37, 0x0e,
-	0xa4, 0xc7, 0x71, 0x18, 0x30, 0x7a, 0xc5, 0x2c, 0xb4, 0x91, 0x07, 0x00, 0xb6, 0xe3, 0x84, 0xf3,
-	0x80, 0x4d, 0x3c, 0xd7, 0x28, 0xee, 0x16, 0xf6, 0x34, 0x4b, 0x93, 0x9a, 0xae, 0x4b, 0x9a, 0x50,
-	0xf4, 0x5c, 0x43, 0xe1, 0xea, 0xa2, 0xe7, 0x9a, 0x5f, 0x41, 0xa5, 0x25, 0x8c, 0xef, 0xb2, 0xb8,
-	0x98, 0x5d, 0x4c, 0x66, 0x93, 0x8f, 0x40, 0x9b, 0xda, 0x57, 0x93, 0x68, 0xee, 0xd3, 0x98, 0x2f,
-	0x5a, 0xb2, 0xaa, 0x53, 0xfb, 0xca, 0x42, 0xd9, 0x7c, 0x09, 0xa5, 0x9e, 0x37, 0xf5, 0xd8, 0xfb,
-	0xa3, 0x56, 0xf2, 0xa8, 0x33, 0xfb, 0x54, 0x72, 0xfb, 0xfc, 0xb7, 0x08, 0x2a, 0x8e, 0x3e, 0x24,
-	0x80, 0xb7, 0xec, 0xfb, 0x14, 0xaa, 0x31, 0x8b, 0x6c, 0x46, 0xcf, 0x17, 0x46, 0x69, 0xb7, 0xb0,
-	0xd7, 0x3c, 0xdc, 0x39, 0xc8, 0x14, 0x42, 0x2b, 0x8e, 0xbd, 0xf3, 0x60, 0x28, 0x7d, 0xac, 0xa5,
-	0x37, 0x5f, 0x98, 0xdb, 0x26, 0x2c, 0x8c, 0x8d, 0xf2, 0xae, 0xc2, 0x17, 0xe6, 0x9a, 0x51, 0x18,
-	0x93, 0x9f, 0x00, 0x38, 0x61, 0xe0, 0x7a, 0xb8, 0x08, 0x46, 0xa4, 0xec, 0xd5, 0x0e, 0xb7, 0xb2,
-	0x4b, 0x1f, 0x27, 0x76, 0x2b, 0xe5, 0x4a, 0x0c, 0xa8, 0xd0, 0xc0, 0x3e, 0xf3, 0xa9, 0x6b, 0x54,
-	0x77, 0x0b, 0x7b, 0x55, 0x2b, 0x11, 0xc9, 0x63, 0xa8, 0x3b, 0x11, 0xb5, 0x19, 0x75, 0x27, 0xcc,
-	0x9b, 0x52, 0x43, 0xdb, 0x2d, 0xec, 0x29, 0x56, 0x4d, 0xea, 0x46, 0xde, 0x94, 0x92, 0x2d, 0xa8,
-	0xcc, 0x22, 0x7a, 0x89, 0xa1, 0x02, 0x0f, 0xb5, 0x8c, 0x62, 0xd7, 0x45, 0x43, 0x40, 0xaf, 0x78,
-	0x0e, 0x6a, 0xc2, 0x80, 0x62, 0xd7, 0x35, 0xff, 0x08, 0xda, 0x12, 0x07, 0x39, 0x00, 0xf5, 0xeb,
-	0xd0, 0x0b, 0x78, 0x82, 0x9b, 0x87, 0xdb, 0x59, 0xb8, 0x9f, 0x87, 0x5e, 0x30, 0x98, 0xd1, 0xc8,
-	0x66, 0x61, 0x64, 0x71, 0x3f, 0xa2, 0x83, 0x72, 0x41, 0x17, 0x32, 0xdb, 0x38, 0x24, 0xdb, 0x50,
-	0x0d, 0xa5, 0x8f, 0x4c, 0xf6, 0x52, 0x26, 0x9b, 0x50, 0xba, 0xb4, 0xfd, 0x39, 0x35, 0x54, 0x6e,
-	0x10, 0x82, 0xf9, 0x43, 0x28, 0x59, 0xe1, 0x9c, 0x51, 0xb2, 0x07, 0x25, 0x41, 0x7f, 0x81, 0x27,
-	0x8b, 0x64, 0x77, 0x47, 0xfe, 0x2d, 0xe1, 0x60, 0xfe, 0x01, 0x6a, 0x7c, 0x8a, 0x45, 0xe3, 0xb9,
-	0xcf, 0x30, 0x36, 0xd4, 0x63, 0x6c, 0x05, 0x11, 0x1b, 0x8a, 0x39, 0x72, 0x95, 0xf7, 0x22, 0xf7,
-	0x23, 0xd0, 0xec, 0x73, 0xca, 0x6b, 0x26, 0x36, 0x54, 0xce, 0x6d, 0x95, 0x2b, 0xba, 0x6e, 0x6c,
-	0x7e, 0xa3, 0x40, 0xfd, 0x38, 0xb5, 0xcc, 0x77, 0x50, 0x96, 0x79, 0xaa, 0xd5, 0x75, 0xaa, 0xf7,
-	0x40, 0xf7, 0xed, 0x98, 0x4d, 0x6c, 0x87, 0x79, 0x97, 0x54, 0xb8, 0x95, 0xb8, 0x5b, 0x13, 0xf5,
-	0x2d, 0xae, 0xe6, 0x9e, 0x8f, 0xa0, 0xe6, 0xf8, 0x61, 0x9c, 0xac, 0x55, 0xe6, 0x4e, 0x20, 0x54,
-	0xdc, 0xe1, 0x31, 0x94, 0xe6, 0x31, 0x8d, 0x92, 0x32, 0xad, 0x1d, 0x88, 0x7b, 0x6c, 0x1c, 0xd3,
-	0xc8, 0x12, 0x16, 0xc4, 0xeb, 0xbc, 0xb2, 0x83, 0x80, 0xfa, 0x88, 0x57, 0x13, 0x78, 0xa5, 0xa6,
-	0xeb, 0x12, 0x02, 0x2a, 0xb3, 0xcf, 0x63, 0x03, 0x78, 0xaa, 0xf8, 0x98, 0xfc, 0x18, 0x4a, 0x31,
-	0xb3, 0x19, 0xe5, 0x05, 0xd7, 0x3c, 0x7c, 0xb4, 0x56, 0xfc, 0x4b, 0x61, 0x88, 0x6e, 0x96, 0xf0,
-	0x26, 0x9f, 0x42, 0x25, 0xa2, 0xbf, 0x9d, 0xd3, 0x98, 0x19, 0x4d, 0x9e, 0xd0, 0xfb, 0xb9, 0x89,
-	0xaf, 0x6c, 0x66, 0x09, 0x07, 0x2b, 0xf1, 0xfc, 0x5c, 0xad, 0x36, 0xf4, 0xa6, 0x05, 0x52, 0x9c,
-	0x78, 0xae, 0xf9, 0xb7, 0x02, 0xe8, 0x18, 0x40, 0x86, 0xa8, 0x0f, 0x84, 0xb4, 0x05, 0x15, 0xcc,
-	0xc2, 0xea, 0xba, 0x2d, 0xa3, 0xd8, 0x75, 0xc9, 0x7d, 0xa8, 0xe2, 0x0a, 0x21, 0x5a, 0x44, 0x51,
-	0x57, 0xb8, 0xdc, 0x75, 0xc9, 0xc7, 0xb0, 0xc1, 0xe9, 0x89, 0x29, 0x0d, 0x26, 0x3c, 0x9f, 0x9c,
-	0x1d, 0xcd, 0x6a, 0xa0, 0x7a, 0x48, 0x69, 0xd0, 0x41, 0xa5, 0xf9, 0x1f, 0x15, 0x6a, 0xa9, 0x90,
-	0xbe, 0x83, 0x5a, 0xca, 0x52, 0xa7, 0xe6, 0xa9, 0x7b, 0x00, 0x30, 0xa5, 0x71, 0x6c, 0x9f, 0xd3,
-	0x09, 0x0b, 0x25, 0x46, 0x4d, 0x6a, 0x46, 0x21, 0x86, 0x38, 0x43, 0xdb, 0x3c, 0xf2, 0x79, 0xe5,
-	0x68, 0x56, 0x05, 0xe5, 0x71, 0xe4, 0xe3, 0x4c, 0x6e, 0x62, 0x1e, 0xf3, 0x29, 0xbf, 0xb4, 0x35,
-	0x4b, 0x43, 0xcd, 0x08, 0x15, 0x78, 0x91, 0xc9, 0x65, 0xf8, 0x45, 0xa6, 0x59, 0x89, 0x48, 0x3e,
-	0x01, 0xfd, 0x2c, 0x0a, 0x7f, 0x87, 0x29, 0xf5, 0xed, 0xe0, 0x7c, 0x8e, 0x2e, 0xa2, 0xa4, 0x36,
-	0xa4, 0xbe, 0x27, 0xd5, 0x78, 0x9f, 0x2c, 0x5d, 0xc4, 0x8d, 0xb6, 0x94, 0xc9, 0x4f, 0xa1, 0xe6,
-	0xd2, 0x4b, 0xcf, 0xa1, 0x13, 0xb6, 0x98, 0x25, 0x9c, 0x1a, 0x59, 0x4e, 0xdb, 0xdc, 0x61, 0xb4,
-	0x98, 0x51, 0x0b, 0xdc, 0xe5, 0x38, 0xcd, 0x68, 0x3d, 0xc3, 0x68, 0xfe, 0xe0, 0x35, 0xd6, 0x0f,
-	0xde, 0xf7, 0x61, 0x23, 0xbd, 0x05, 0xae, 0xd1, 0xe4, 0x6b, 0x34, 0xd3, 0x6a, 0xf9, 0x12, 0xcf,
-	0x8c, 0x0d, 0xc9, 0xd3, 0x0c, 0x13, 0xc2, 0x39, 0x89, 0x16, 0x86, 0x9e, 0x14, 0x0b, 0x17, 0xf9,
-	0xae, 0x62, 0x38, 0x71, 0x42, 0x97, 0x1a, 0xb7, 0xb9, 0xb9, 0x26, 0x75, 0xc7, 0xa1, 0x4b, 0xf1,
-	0x84, 0x39, 0x1e, 0x5b, 0x18, 0x84, 0x9b, 0xf8, 0x18, 0x6f, 0x29, 0x04, 0x39, 0x79, 0x1d, 0x06,
-	0xd4, 0xb8, 0x23, 0xb2, 0x83, 0x8a, 0x5f, 0x87, 0x01, 0x35, 0xbf, 0x80, 0x46, 0xba, 0xa0, 0x63,
-	0xf2, 0x4b, 0x68, 0xa4, 0x01, 0x26, 0xf7, 0xec, 0xf6, 0x9b, 0x0f, 0x81, 0x95, 0x9d, 0x60, 0xfe,
-	0xb5, 0x00, 0x1a, 0xd6, 0xea, 0x90, 0xd9, 0x11, 0xfb, 0x16, 0x5a, 0x95, 0xfb, 0x50, 0x4d, 0x6e,
-	0x59, 0x59, 0xb6, 0x15, 0x79, 0xc9, 0xa6, 0x09, 0x52, 0x33, 0x04, 0x65, 0xab, 0xb9, 0x94, 0xab,
-	0x66, 0x84, 0x68, 0x58, 0x74, 0xe6, 0x2f, 0x32, 0x71, 0xbc, 0xfb, 0xd9, 0xca, 0x22, 0x56, 0x6f,
-	0x42, 0x5c, 0xcc, 0x22, 0xbe, 0xa6, 0x2c, 0x94, 0xeb, 0xca, 0xc2, 0xfc, 0x67, 0x01, 0x6e, 0xf7,
-	0xbc, 0x98, 0x65, 0xd9, 0xf9, 0xff, 0x5b, 0xa8, 0xe5, 0xe5, 0xa6, 0xbe, 0xd7, 0xe5, 0xb6, 0x09,
-	0x25, 0x1f, 0x9b, 0x38, 0x9e, 0xcb, 0x92, 0x25, 0x04, 0x0c, 0x34, 0x46, 0x96, 0x71, 0x27, 0x79,
-	0xec, 0xb9, 0xdc, 0x75, 0xcd, 0xaf, 0xe1, 0x1e, 0xc2, 0xc7, 0xcb, 0x35, 0x1e, 0x07, 0x11, 0xb5,
-	0xdd, 0x24, 0xbf, 0x3b, 0xa0, 0xb5, 0x12, 0x38, 0xf2, 0x29, 0x5e, 0x29, 0xb0, 0xfc, 0x5b, 0x22,
-	0x57, 0x49, 0xea, 0xa4, 0x88, 0x96, 0x31, 0x67, 0x17, 0x5b, 0x4c, 0x7c, 0x40, 0x12, 0xd1, 0x7c,
-	0x0a, 0x65, 0xb1, 0x05, 0xb9, 0x07, 0x65, 0xa1, 0x4c, 0xde, 0x78, 0x21, 0x71, 0x3d, 0xf7, 0xe0,
-	0x8b, 0x96, 0x2c, 0x29, 0x99, 0x9f, 0x41, 0x2d, 0x85, 0x90, 0x1c, 0x40, 0x45, 0x8c, 0x92, 0xb2,
-	0xdf, 0xcc, 0xa6, 0x47, 0x06, 0x92, 0x38, 0x99, 0x7f, 0x97, 0x24, 0xf1, 0x4b, 0x3a, 0xfe, 0xe0,
-	0x02, 0x5a, 0x2b, 0xf9, 0x77, 0xad, 0x92, 0x0c, 0x01, 0x6a, 0x86, 0x80, 0x15, 0x63, 0xe5, 0x14,
-	0x63, 0xe6, 0x5f, 0x0a, 0x82, 0x17, 0x3c, 0xa0, 0xf1, 0xd1, 0x82, 0x3f, 0xde, 0xef, 0xc4, 0xcb,
-	0x0e, 0x3f, 0xd4, 0xe2, 0xfc, 0x24, 0x80, 0x97, 0x8a, 0x54, 0xde, 0x95, 0x4c, 0xde, 0x0d, 0xa8,
-	0x0c, 0x05, 0x9e, 0x04, 0xde, 0x70, 0x05, 0xaf, 0x97, 0x2e, 0x28, 0x2e, 0x98, 0x0e, 0x34, 0x06,
-	0x1d, 0xc4, 0xd6, 0x8e, 0xc2, 0xd9, 0x8c, 0xba, 0x6f, 0x01, 0x75, 0x0f, 0xca, 0xe8, 0xbc, 0x44,
-	0x24, 0xa5, 0x2c, 0x58, 0x25, 0x07, 0xd6, 0xfc, 0x0d, 0x34, 0xc5, 0x26, 0x2d, 0xc7, 0xa1, 0x33,
-	0x96, 0xdf, 0xa5, 0xf8, 0xe6, 0x5d, 0x94, 0xcc, 0x2e, 0xa9, 0x52, 0x55, 0x33, 0xa5, 0x6a, 0xfe,
-	0xa9, 0x90, 0xc4, 0xc1, 0xc3, 0xfd, 0xe0, 0x1d, 0x32, 0x71, 0xa8, 0xf9, 0xa4, 0xef, 0x42, 0xed,
-	0x78, 0xf5, 0xe2, 0xc8, 0x5b, 0x2e, 0xad, 0x32, 0xff, 0x5c, 0x80, 0x7a, 0xe7, 0x52, 0x34, 0x0e,
-	0xbc, 0x09, 0xde, 0x01, 0x4d, 0xd2, 0xbd, 0x4a, 0xe7, 0x52, 0x81, 0x4f, 0xd1, 0xe0, 0x82, 0xa3,
-	0xab, 0x5a, 0xc5, 0xc1, 0x05, 0xbe, 0x26, 0xf8, 0xaa, 0xc8, 0x2f, 0x3a, 0x3e, 0xce, 0x6f, 0xaa,
-	0xae, 0x6d, 0x8a, 0x1e, 0x6d, 0x1a, 0x3b, 0x91, 0x37, 0xc3, 0x22, 0x4d, 0x60, 0xa5, 0x54, 0xe6,
-	0x3f, 0x14, 0xd8, 0x12, 0xb0, 0x78, 0x99, 0x04, 0x2f, 0x43, 0x89, 0x41, 0x24, 0xea, 0x06, 0x84,
-	0x37, 0x10, 0xbe, 0x4a, 0xaf, 0x72, 0x63, 0xed, 0xae, 0xa5, 0x71, 0x07, 0xb4, 0x17, 0x49, 0x23,
-	0x93, 0x3c, 0x15, 0x4b, 0x05, 0x92, 0x7c, 0x2a, 0x3a, 0x99, 0xe4, 0x86, 0x93, 0x22, 0xce, 0x3b,
-	0x4d, 0xda, 0x98, 0xa4, 0xaf, 0x39, 0x4d, 0xf7, 0x35, 0x2f, 0xb2, 0x7d, 0x8d, 0x14, 0xc9, 0x1e,
-	0x6c, 0x1c, 0x65, 0xfb, 0x97, 0xa4, 0xad, 0x39, 0x5a, 0x6f, 0x6b, 0x7a, 0xb9, 0xb6, 0x66, 0x69,
-	0x7b, 0x0a, 0xb0, 0xea, 0x5a, 0xde, 0xde, 0xd5, 0xac, 0xc6, 0xa9, 0xb3, 0x5a, 0xcf, 0x9c, 0xd5,
-	0x1c, 0xb3, 0x8d, 0xf5, 0x72, 0x7a, 0x08, 0xf5, 0x67, 0x9e, 0x4f, 0x47, 0x74, 0x3a, 0xf3, 0xf1,
-	0x51, 0x68, 0x42, 0x71, 0x49, 0x52, 0xb1, 0xeb, 0x9a, 0xbf, 0x87, 0xcd, 0x2f, 0xe6, 0x9e, 0x73,
-	0x81, 0x4f, 0xab, 0x47, 0xe3, 0xa5, 0x1f, 0x01, 0x75, 0x44, 0xaf, 0x98, 0xf4, 0xe4, 0x63, 0xbe,
-	0x1b, 0xde, 0x88, 0x01, 0xe3, 0x01, 0x24, 0x75, 0xb4, 0x52, 0xe1, 0x65, 0x2c, 0x17, 0x32, 0x4a,
-	0xd7, 0x5d, 0xc6, 0x47, 0x73, 0xc6, 0xc2, 0xc0, 0x4a, 0x9c, 0xcc, 0x7f, 0x15, 0xa0, 0x79, 0x42,
-	0x03, 0x1a, 0x79, 0x4e, 0xc7, 0xa7, 0x53, 0x1a, 0x30, 0xbc, 0x64, 0x04, 0x3d, 0x62, 0x67, 0x21,
-	0x60, 0x5a, 0xbb, 0x53, 0xc9, 0xa9, 0x28, 0xa3, 0xa5, 0x8c, 0xb6, 0xe1, 0xfc, 0x4c, 0xf4, 0xaa,
-	0xf2, 0xcb, 0x34, 0x91, 0xc9, 0xcf, 0xa0, 0xd1, 0xa6, 0x2f, 0xed, 0xb9, 0xcf, 0x3f, 0x9b, 0xc2,
-	0x80, 0x83, 0x7e, 0x13, 0xac, 0xac, 0x2b, 0x06, 0x23, 0x0c, 0x6f, 0x09, 0x46, 0x3a, 0x99, 0xcf,
-	0x61, 0x43, 0xc6, 0xb2, 0xcc, 0xe2, 0x53, 0xa8, 0xca, 0xb8, 0x92, 0xd7, 0x29, 0xf7, 0x9d, 0x9a,
-	0x0d, 0xde, 0x5a, 0x7a, 0x9b, 0x3b, 0x50, 0x16, 0xeb, 0x72, 0x26, 0x30, 0xdd, 0x09, 0x13, 0x8b,
-	0x19, 0x35, 0x4f, 0x40, 0x1b, 0x47, 0xfe, 0x9b, 0x1d, 0x56, 0x59, 0x2c, 0xa6, 0xb3, 0xa8, 0x83,
-	0x82, 0x09, 0x14, 0x49, 0xc2, 0xa1, 0x39, 0x83, 0xe6, 0x69, 0x18, 0xb3, 0x33, 0xdb, 0xb9, 0x78,
-	0xef, 0xd5, 0xf8, 0x31, 0x5b, 0xf8, 0xa1, 0xbd, 0xec, 0xf1, 0xa4, 0x98, 0x61, 0x4b, 0xcd, 0xb2,
-	0x65, 0xd6, 0x01, 0x8e, 0x6d, 0x5f, 0x62, 0x37, 0x1b, 0x50, 0xeb, 0x85, 0xe7, 0x5e, 0x20, 0x45,
-	0x0f, 0x6a, 0xfc, 0x5d, 0x7e, 0x6f, 0x2c, 0x37, 0xec, 0x88, 0x33, 0xf8, 0xa2, 0x12, 0xa5, 0x10,
-	0xcc, 0x03, 0x80, 0xe1, 0x3c, 0xba, 0xa4, 0x8b, 0x67, 0x61, 0x34, 0xc5, 0xd2, 0x3e, 0xf5, 0x6d,
-	0x87, 0xbe, 0x0a, 0x7d, 0x97, 0x46, 0x72, 0xc3, 0xb4, 0xca, 0xfc, 0x18, 0x74, 0xcb, 0x66, 0x14,
-	0xbd, 0x33, 0x87, 0x24, 0x4f, 0xcd, 0x1c, 0xea, 0xf2, 0xee, 0xe3, 0xcd, 0x58, 0xae, 0x6d, 0x28,
-	0xbc, 0x43, 0xdb, 0x50, 0xbc, 0xb6, 0x6d, 0xc8, 0xb6, 0xc7, 0x4a, 0xae, 0x3d, 0xde, 0xff, 0x04,
-	0xea, 0xe9, 0x9f, 0x71, 0x48, 0x15, 0xd4, 0x20, 0x0c, 0xa8, 0x7e, 0x8b, 0x54, 0x40, 0xb1, 0x03,
-	0x57, 0x2f, 0x90, 0x32, 0x14, 0xc3, 0x48, 0x2f, 0xee, 0xbf, 0x86, 0x66, 0xf6, 0xe7, 0x11, 0xd2,
-	0x00, 0xad, 0xd5, 0xeb, 0xb5, 0x4e, 0x3a, 0xfd, 0xd1, 0x50, 0xbf, 0x45, 0x9a, 0x00, 0x7c, 0x7c,
-	0x62, 0x0d, 0xc6, 0xa7, 0x7a, 0x91, 0x00, 0x94, 0xa5, 0x4d, 0x41, 0xdb, 0x8b, 0xc1, 0x70, 0x64,
-	0x75, 0x8e, 0x3b, 0xfd, 0x91, 0xae, 0x92, 0x2d, 0xb8, 0x63, 0x0d, 0xc6, 0xfd, 0xb6, 0x35, 0x38,
-	0xea, 0xf6, 0x57, 0x8b, 0x94, 0xc8, 0x26, 0xe8, 0x29, 0x83, 0xd0, 0x96, 0xf7, 0x6d, 0xb8, 0xbd,
-	0xd6, 0xaf, 0x92, 0xbb, 0x70, 0x3b, 0x93, 0x03, 0x09, 0xbc, 0x01, 0xf2, 0x57, 0x37, 0x2f, 0x38,
-	0xd7, 0x0b, 0xb8, 0xf3, 0x3c, 0x10, 0x0a, 0xea, 0x0a, 0x54, 0xe1, 0x8c, 0xe2, 0x58, 0xc1, 0xb1,
-	0xf8, 0xd5, 0x43, 0x57, 0xf7, 0xbf, 0x29, 0x40, 0x03, 0x9f, 0x18, 0x4e, 0x33, 0x2f, 0x99, 0x2a,
-	0xa8, 0xfd, 0x41, 0xbf, 0xa3, 0xdf, 0x22, 0x35, 0xa8, 0xbc, 0xe8, 0x0c, 0x87, 0xad, 0x93, 0x8e,
-	0x5e, 0xc0, 0x49, 0xc7, 0xbd, 0xc1, 0xb0, 0xd3, 0xd6, 0x15, 0x4c, 0x52, 0xab, 0xdd, 0xd6, 0x55,
-	0xf4, 0xed, 0x75, 0x9e, 0x8d, 0xf4, 0x12, 0xd1, 0xa0, 0x64, 0xb5, 0x46, 0x9d, 0xb6, 0x5e, 0xc1,
-	0x61, 0xb7, 0x7f, 0x3a, 0x1e, 0xe9, 0x55, 0x74, 0x1c, 0xb5, 0x4e, 0x74, 0x0d, 0x75, 0xe3, 0x3e,
-	0x0e, 0x81, 0xd4, 0xa1, 0x3a, 0xb2, 0x5a, 0xfd, 0xe1, 0xb3, 0x8e, 0xa5, 0xd7, 0xf8, 0x52, 0xc7,
-	0xcf, 0xf5, 0x3a, 0xae, 0x3f, 0xfa, 0xea, 0xb4, 0xdb, 0x3f, 0xd1, 0x1b, 0x08, 0x7e, 0x38, 0x1a,
-	0x9c, 0x4a, 0xb9, 0xb9, 0xff, 0x8b, 0xf4, 0x53, 0x80, 0xb0, 0xc6, 0xfd, 0xe7, 0xfd, 0xc1, 0x97,
-	0x7d, 0xfd, 0x16, 0x4e, 0x7b, 0x31, 0x38, 0xea, 0xf6, 0x24, 0xc4, 0x51, 0xeb, 0xa8, 0xd7, 0x19,
-	0xe9, 0x45, 0x74, 0x6a, 0x77, 0x86, 0xcf, 0x47, 0x83, 0x53, 0x5d, 0xd9, 0xff, 0x77, 0x59, 0x16,
-	0x35, 0x31, 0x60, 0x33, 0x9d, 0xd1, 0x56, 0x92, 0xa0, 0x5b, 0x48, 0x4d, 0xda, 0xf2, 0xa5, 0xed,
-	0x31, 0xcc, 0x64, 0x91, 0x3c, 0x84, 0xed, 0x1c, 0x09, 0x11, 0x5b, 0xbe, 0xe6, 0xba, 0xb2, 0xb6,
-	0xa4, 0x6c, 0xb9, 0x04, 0xdb, 0x69, 0x8b, 0xec, 0xf8, 0xf4, 0x12, 0xd9, 0x01, 0x23, 0x6d, 0xe0,
-	0xd0, 0xe4, 0x33, 0xa4, 0x97, 0xc9, 0x03, 0xb8, 0x9f, 0xb6, 0x62, 0xa1, 0xae, 0xf6, 0xab, 0x90,
-	0x5d, 0xd8, 0x49, 0x9b, 0xe5, 0xa3, 0xbb, 0xf2, 0xa8, 0xe6, 0x11, 0xf7, 0xa8, 0x7d, 0x99, 0xb2,
-	0x6b, 0x79, 0xfb, 0x31, 0xd6, 0xc2, 0xca, 0x0e, 0x79, 0x78, 0x23, 0xfb, 0x7c, 0x65, 0xad, 0xe5,
-	0x67, 0x8f, 0x03, 0x96, 0xb6, 0xd7, 0xf3, 0xf0, 0xad, 0xd5, 0x87, 0x11, 0x75, 0xf5, 0x46, 0xde,
-	0x8c, 0xad, 0xfa, 0xca, 0xdc, 0xcc, 0xaf, 0xce, 0xbf, 0x61, 0x57, 0xf6, 0x0d, 0xf2, 0x3d, 0x78,
-	0x94, 0xd9, 0x7d, 0xe6, 0xe2, 0x37, 0xdc, 0xdc, 0x4f, 0x05, 0xb0, 0x99, 0x77, 0x12, 0xa9, 0xcd,
-	0x3a, 0xdd, 0xcd, 0x3b, 0xb5, 0xa9, 0x4f, 0xf3, 0x4e, 0xf7, 0xc8, 0x63, 0x78, 0xb0, 0x16, 0x4c,
-	0xc6, 0x65, 0x2b, 0xef, 0xc2, 0x03, 0xca, 0xb8, 0x18, 0xe4, 0x3e, 0xdc, 0xbd, 0xb6, 0x17, 0xd4,
-	0x09, 0x9e, 0xe6, 0xac, 0x69, 0xe6, 0x2f, 0xf4, 0x3b, 0x7c, 0xc6, 0xfa, 0x97, 0x3b, 0x75, 0xf5,
-	0xc3, 0x3c, 0xff, 0xa9, 0x0f, 0x1c, 0x31, 0xf9, 0xd3, 0x3c, 0x7f, 0xfc, 0xc3, 0x43, 0x24, 0xca,
-	0xd5, 0x7f, 0x44, 0x4c, 0x78, 0x78, 0xcd, 0xd2, 0x58, 0xef, 0xd8, 0x02, 0x85, 0x73, 0xa6, 0xff,
-	0x3c, 0x9f, 0x9b, 0xb5, 0x2f, 0x40, 0xea, 0xea, 0x9f, 0xfd, 0x2f, 0x00, 0x00, 0xff, 0xff, 0x75,
-	0x94, 0xb2, 0xc5, 0x37, 0x1a, 0x00, 0x00,
+	// 2149 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x58, 0x5f, 0x6f, 0xe4, 0x48,
+	0x11, 0xdf, 0x19, 0x8f, 0x67, 0xec, 0x9a, 0x64, 0xe2, 0xed, 0xcd, 0xee, 0x7a, 0xb3, 0xff, 0xb2,
+	0x3e, 0x04, 0xd9, 0x20, 0x25, 0x22, 0x9c, 0xc4, 0x09, 0x38, 0x69, 0xb3, 0xd9, 0x65, 0x35, 0xab,
+	0xdc, 0x06, 0x3a, 0x09, 0x48, 0xbc, 0x8c, 0x1c, 0xbb, 0x33, 0xf1, 0xad, 0xc7, 0x1e, 0xec, 0xf6,
+	0x5c, 0x66, 0x25, 0xc4, 0x0b, 0x4f, 0xf0, 0x0d, 0x10, 0x0f, 0x7c, 0x03, 0xc4, 0x1b, 0xdf, 0x03,
+	0x5e, 0x78, 0xbc, 0x6f, 0x82, 0xaa, 0xba, 0x3d, 0x63, 0x3b, 0xe1, 0xc8, 0xc1, 0xdd, 0x4b, 0xe2,
+	0xfa, 0xd3, 0xd5, 0xd5, 0x55, 0xbf, 0xae, 0xaa, 0x1e, 0x78, 0x1a, 0xa4, 0xc9, 0x4c, 0x64, 0xb9,
+	0x2f, 0xa3, 0x34, 0xd9, 0xad, 0x12, 0x3b, 0xd3, 0x2c, 0x95, 0x29, 0x5b, 0xa9, 0xf2, 0x36, 0x76,
+	0xce, 0x22, 0x79, 0x56, 0x04, 0xef, 0x85, 0xdc, 0x49, 0xb3, 0xf1, 0x6e, 0x5e, 0x9c, 0x45, 0x1f,
+	0x76, 0x2f, 0x84, 0x1f, 0x8a, 0x6c, 0x37, 0x48, 0x27, 0x13, 0xb2, 0x81, 0xff, 0xd4, 0xea, 0x8d,
+	0xed, 0xaf, 0xd0, 0xf7, 0x0b, 0x79, 0x41, 0x7f, 0x94, 0xae, 0xf7, 0x4b, 0x68, 0x0f, 0x43, 0xf6,
+	0x0c, 0x8c, 0x40, 0x5e, 0xba, 0xad, 0xcd, 0xd6, 0x56, 0x7f, 0x6f, 0x6d, 0x47, 0x5b, 0x3b, 0x48,
+	0x13, 0x29, 0x2e, 0x25, 0x47, 0x19, 0x7b, 0x0c, 0xe0, 0x07, 0x41, 0x5a, 0x24, 0x72, 0x14, 0x85,
+	0x6e, 0x7b, 0xb3, 0xb5, 0x65, 0x73, 0x5b, 0x73, 0x86, 0x21, 0x1b, 0x40, 0x3b, 0x0a, 0x5d, 0x83,
+	0xd8, 0xed, 0x28, 0xf4, 0xce, 0xc1, 0x3c, 0x8c, 0x26, 0x91, 0xfc, 0xfa, 0xa6, 0x8d, 0xa6, 0xe9,
+	0x87, 0x60, 0x4f, 0xfc, 0xcb, 0x51, 0x56, 0xc4, 0x22, 0x77, 0x7b, 0x9b, 0xad, 0x2d, 0x93, 0x5b,
+	0x13, 0xff, 0x92, 0x23, 0xed, 0xfd, 0xab, 0x0d, 0x1d, 0xfc, 0xba, 0xc9, 0x3e, 0xca, 0xc7, 0x76,
+	0xe9, 0xe3, 0x7f, 0xdb, 0xf7, 0x13, 0xb0, 0x72, 0x99, 0xf9, 0x52, 0x8c, 0xe7, 0xae, 0xb9, 0xd9,
+	0xda, 0x1a, 0xec, 0x3d, 0xda, 0xa9, 0xe5, 0x6a, 0x3f, 0xcf, 0xa3, 0x71, 0x72, 0xac, 0x75, 0xf8,
+	0x42, 0x9b, 0x0c, 0x93, 0x6c, 0x24, 0xd3, 0xdc, 0xed, 0x6e, 0x1a, 0x64, 0x98, 0x38, 0x27, 0x69,
+	0xce, 0x7e, 0x04, 0x10, 0xa4, 0x49, 0x18, 0xa1, 0x11, 0x3c, 0x91, 0xb1, 0xd5, 0xdf, 0xbb, 0x5f,
+	0x37, 0x7d, 0x50, 0xca, 0x79, 0x45, 0x95, 0xb9, 0xd0, 0x13, 0x89, 0x7f, 0x16, 0x8b, 0xd0, 0xb5,
+	0x36, 0x5b, 0x5b, 0x16, 0x2f, 0x49, 0xf6, 0x0c, 0x56, 0x82, 0x4c, 0xf8, 0x52, 0x84, 0x23, 0x19,
+	0x4d, 0x84, 0x6b, 0x6f, 0xb6, 0xb6, 0x0c, 0xde, 0xd7, 0xbc, 0x93, 0x68, 0x22, 0xd8, 0x7d, 0xe8,
+	0x4d, 0x33, 0x31, 0xc3, 0xa3, 0x02, 0x1d, 0xb5, 0x8b, 0xe4, 0x30, 0x44, 0x41, 0x22, 0x2e, 0x29,
+	0x06, 0x7d, 0x25, 0x40, 0x72, 0x18, 0x7a, 0xbf, 0x03, 0x7b, 0xe1, 0x07, 0xdb, 0x81, 0xce, 0xe7,
+	0x69, 0x94, 0x50, 0x80, 0x07, 0x7b, 0x1b, 0x75, 0x77, 0xdf, 0xa6, 0x51, 0x72, 0x34, 0x15, 0x99,
+	0x2f, 0xd3, 0x8c, 0x93, 0x1e, 0x73, 0xc0, 0x78, 0x2f, 0xe6, 0x3a, 0xda, 0xf8, 0xc9, 0x36, 0xc0,
+	0x4a, 0xb5, 0x8e, 0x0e, 0xf6, 0x82, 0x66, 0xeb, 0x60, 0xce, 0xfc, 0xb8, 0x10, 0x6e, 0x87, 0x04,
+	0x8a, 0xf0, 0x7e, 0x00, 0x26, 0x4f, 0x0b, 0x29, 0xd8, 0x16, 0x98, 0x2a, 0xfd, 0x2d, 0x0a, 0x16,
+	0xab, 0xef, 0x8e, 0xf9, 0xe7, 0x4a, 0xc1, 0xfb, 0x2d, 0xf4, 0x69, 0x09, 0x17, 0x79, 0x11, 0x4b,
+	0x3c, 0x1b, 0xf2, 0xf1, 0x6c, 0x2d, 0x75, 0x36, 0x24, 0x1b, 0xc9, 0x35, 0xbe, 0x56, 0x72, 0x1f,
+	0x82, 0xed, 0x8f, 0x05, 0x61, 0x26, 0x77, 0x3b, 0x94, 0x5b, 0x8b, 0x18, 0xc3, 0x30, 0xf7, 0xbe,
+	0x6c, 0xc3, 0xca, 0x41, 0xc5, 0xcc, 0xb7, 0x00, 0x4b, 0x17, 0x7a, 0x3a, 0xad, 0x14, 0x2c, 0x83,
+	0x97, 0x24, 0x82, 0x20, 0xf6, 0x73, 0x39, 0xf2, 0x03, 0x19, 0xcd, 0x44, 0x48, 0xa0, 0x35, 0x78,
+	0x1f, 0x79, 0xfb, 0x8a, 0xc5, 0xee, 0x41, 0x37, 0x88, 0xd3, 0x5c, 0x84, 0x6e, 0x97, 0x84, 0x9a,
+	0x62, 0x4f, 0xc0, 0x2c, 0x72, 0x91, 0x95, 0x68, 0xb4, 0x76, 0xa8, 0x44, 0xbc, 0x9c, 0x73, 0xc5,
+	0x46, 0x9f, 0x82, 0x0b, 0x3f, 0x49, 0x44, 0x8c, 0x3e, 0xd9, 0xca, 0x27, 0xcd, 0x19, 0x86, 0x8c,
+	0x41, 0x47, 0xfa, 0xe3, 0xdc, 0x05, 0x0a, 0x07, 0x7d, 0x63, 0x4a, 0x73, 0xe9, 0x4b, 0xa1, 0x41,
+	0xa5, 0x08, 0xb6, 0x0b, 0xbd, 0x4c, 0xfc, 0xa6, 0x10, 0xb9, 0x74, 0x07, 0x14, 0x93, 0xbb, 0x8d,
+	0x5c, 0x2a, 0x21, 0x2f, 0xb5, 0xde, 0x76, 0xac, 0x55, 0x67, 0xc0, 0x41, 0x93, 0xa3, 0x28, 0xf4,
+	0x7e, 0xdf, 0x02, 0xe7, 0x34, 0x17, 0x59, 0x2d, 0xce, 0xd7, 0xef, 0x76, 0x1f, 0x7a, 0xe8, 0xff,
+	0xb2, 0x62, 0x75, 0x91, 0x1c, 0x86, 0xec, 0x01, 0x58, 0xb8, 0x6d, 0x8a, 0x12, 0x05, 0xb9, 0x1e,
+	0xd1, 0xc3, 0x90, 0x7d, 0x17, 0xd6, 0x28, 0x8a, 0xb9, 0x10, 0xc9, 0x48, 0xcc, 0x44, 0x22, 0x29,
+	0x90, 0x36, 0x5f, 0x45, 0xf6, 0xb1, 0x10, 0xc9, 0x6b, 0x64, 0x7a, 0x7f, 0xef, 0x40, 0x4f, 0x7b,
+	0xfb, 0x2d, 0x64, 0xb9, 0x1e, 0xf0, 0x4e, 0x33, 0xe0, 0x8f, 0x01, 0x26, 0x22, 0xcf, 0xfd, 0xb1,
+	0x18, 0xc9, 0x54, 0xfb, 0x67, 0x6b, 0xce, 0x49, 0x8a, 0xc7, 0x9b, 0xa2, 0xac, 0xc8, 0x62, 0x4a,
+	0xb4, 0xcd, 0x7b, 0x48, 0x9f, 0x66, 0x31, 0xae, 0x24, 0x91, 0x8c, 0x64, 0x2c, 0xa8, 0x9c, 0xda,
+	0xdc, 0x46, 0xce, 0x09, 0x32, 0x10, 0x5d, 0xda, 0x0c, 0x95, 0x18, 0x9b, 0x97, 0x24, 0x7b, 0x0e,
+	0xce, 0x59, 0x96, 0x7e, 0x81, 0xe1, 0x8c, 0xfd, 0x64, 0x5c, 0xa0, 0x8a, 0x02, 0xc2, 0x9a, 0xe6,
+	0x1f, 0x6a, 0x36, 0xde, 0xf4, 0x85, 0x8a, 0xaa, 0x35, 0x0b, 0x9a, 0x3d, 0x85, 0x7e, 0x28, 0x66,
+	0x51, 0x20, 0x46, 0x72, 0x3e, 0x2d, 0xd3, 0x05, 0x8a, 0x75, 0x32, 0x9f, 0xd6, 0x72, 0xb6, 0x52,
+	0xcb, 0x59, 0xb3, 0xc6, 0xad, 0x5e, 0xad, 0x71, 0xdf, 0x83, 0xb5, 0x2a, 0x9a, 0xd0, 0xc6, 0x80,
+	0x6c, 0x0c, 0xaa, 0x6c, 0xdd, 0xae, 0xa6, 0xee, 0x9a, 0xce, 0xc6, 0x94, 0x2e, 0x15, 0x46, 0x3e,
+	0x9b, 0xbb, 0x4e, 0x09, 0x07, 0x22, 0x69, 0x57, 0xf5, 0x39, 0x0a, 0xd2, 0x50, 0xb8, 0xb7, 0x49,
+	0xdc, 0xd7, 0xbc, 0x83, 0x34, 0x14, 0x88, 0xfe, 0x20, 0x92, 0x73, 0x97, 0x91, 0x88, 0xbe, 0xb1,
+	0x4a, 0xa0, 0x93, 0xa3, 0x0f, 0x69, 0x22, 0xdc, 0x3b, 0x2a, 0x06, 0xc8, 0xf8, 0x75, 0x9a, 0x08,
+	0xef, 0x17, 0xb0, 0x5a, 0x05, 0x6f, 0xce, 0x5e, 0xc0, 0x6a, 0xd5, 0xc1, 0xb2, 0xce, 0x6d, 0x5c,
+	0x69, 0x0a, 0x0b, 0x82, 0xd7, 0x17, 0x78, 0x5f, 0xb6, 0xc0, 0x3c, 0x96, 0x7e, 0x26, 0xbf, 0x81,
+	0x5e, 0xfe, 0x00, 0xac, 0xb2, 0xc2, 0x69, 0x60, 0xf6, 0x74, 0x81, 0xab, 0x26, 0xa7, 0x53, 0x4b,
+	0x4e, 0x1d, 0xaf, 0x66, 0x13, 0xaf, 0x0f, 0xc1, 0xa6, 0x75, 0x89, 0x3f, 0x59, 0x40, 0x02, 0x19,
+	0xef, 0xfc, 0x89, 0xc0, 0x1b, 0x47, 0x42, 0x7f, 0xe6, 0x4b, 0x3f, 0x23, 0xd0, 0x2a, 0x58, 0xac,
+	0x22, 0x7b, 0x9f, 0xb8, 0xa7, 0x59, 0xec, 0xfd, 0xa5, 0x05, 0x2e, 0x17, 0xd3, 0x78, 0x5e, 0x0b,
+	0xc4, 0xcd, 0xaf, 0x60, 0xfd, 0xd8, 0x9d, 0xaf, 0x3a, 0x76, 0xbb, 0x7e, 0xec, 0x6b, 0x70, 0x65,
+	0x5c, 0x87, 0x2b, 0xef, 0x6f, 0x2d, 0xb8, 0x7d, 0x18, 0xe5, 0xb2, 0x9e, 0xde, 0xff, 0x7f, 0x06,
+	0x7a, 0x5e, 0x96, 0xb7, 0x0e, 0xf5, 0xaa, 0x3b, 0x75, 0x60, 0x1c, 0xa3, 0xa8, 0xac, 0x79, 0xeb,
+	0x60, 0xc6, 0x38, 0x79, 0x51, 0x12, 0x4c, 0xae, 0x08, 0x3c, 0x5c, 0x8e, 0xf0, 0x40, 0xeb, 0xba,
+	0x22, 0x10, 0x3d, 0x0c, 0xbd, 0xcf, 0xe1, 0x1e, 0xba, 0x8c, 0x25, 0x35, 0x3f, 0x4d, 0x32, 0xe1,
+	0x87, 0x65, 0x4c, 0x1f, 0x81, 0xbd, 0x5f, 0xba, 0xa0, 0xfb, 0xe7, 0x92, 0x81, 0x77, 0x66, 0x5f,
+	0xc5, 0xa7, 0x0c, 0x97, 0x26, 0x51, 0x72, 0x4a, 0xb0, 0xc8, 0x5d, 0x83, 0x3a, 0x42, 0x49, 0x7a,
+	0x9f, 0x40, 0x57, 0x6d, 0x81, 0x9d, 0x48, 0x31, 0xcb, 0xc6, 0xac, 0x28, 0xe2, 0x93, 0x06, 0x19,
+	0x35, 0xb9, 0xa6, 0xbc, 0x4f, 0xa1, 0x5f, 0xf1, 0x90, 0xed, 0x40, 0x4f, 0x7d, 0x95, 0x77, 0x65,
+	0xbd, 0x1e, 0x12, 0x7d, 0x90, 0x52, 0xc9, 0xfb, 0xab, 0x4e, 0x0c, 0xd5, 0xee, 0xfc, 0x7f, 0x06,
+	0xcd, 0x95, 0xbb, 0x72, 0x53, 0x64, 0xd4, 0x12, 0xd0, 0xa9, 0x25, 0x60, 0x99, 0xb1, 0x6e, 0x25,
+	0x63, 0xde, 0x9f, 0x5b, 0x2a, 0x2f, 0x07, 0x17, 0xbe, 0xcc, 0x5f, 0xce, 0xf1, 0xf0, 0x37, 0xcb,
+	0xcb, 0x23, 0xb0, 0x0f, 0xca, 0x8b, 0x57, 0x3a, 0xbc, 0x60, 0x54, 0xe2, 0x6e, 0xd4, 0xe2, 0xee,
+	0x42, 0xef, 0x58, 0xf9, 0x53, 0xba, 0x77, 0xbc, 0x74, 0xef, 0xb0, 0x0a, 0x28, 0x22, 0xbc, 0x02,
+	0x56, 0xb4, 0x3b, 0x84, 0xbe, 0x46, 0x9c, 0x5a, 0x37, 0x88, 0x53, 0xfb, 0xda, 0x38, 0xd5, 0x0b,
+	0x89, 0xd1, 0x28, 0x24, 0xde, 0x5b, 0xb0, 0xb8, 0xc0, 0x01, 0x27, 0x4d, 0xb0, 0xee, 0x52, 0x3d,
+	0x51, 0x4a, 0xf4, 0x8d, 0xce, 0xd2, 0x96, 0x74, 0x08, 0x93, 0x2b, 0x02, 0xb9, 0x6a, 0xbc, 0x31,
+	0x09, 0x8e, 0x8a, 0xf0, 0xfe, 0xd0, 0x86, 0xde, 0x67, 0xba, 0xbb, 0xe1, 0x04, 0x23, 0x2e, 0xa5,
+	0x76, 0x8a, 0xbe, 0x31, 0x54, 0xe7, 0x69, 0x36, 0xf1, 0x65, 0x19, 0x2a, 0x45, 0xb1, 0x1f, 0x43,
+	0xdf, 0x97, 0xd2, 0x0f, 0x2e, 0x26, 0x88, 0x25, 0x9a, 0x01, 0xfb, 0x7b, 0x6e, 0x63, 0x7c, 0x5c,
+	0x28, 0xf0, 0xaa, 0x32, 0xfb, 0x18, 0xec, 0x4c, 0xfb, 0x5f, 0x0e, 0x5b, 0xf7, 0x9a, 0x13, 0x90,
+	0x12, 0xf3, 0xa5, 0x22, 0x7a, 0x92, 0x4e, 0x45, 0xa2, 0xe7, 0x7e, 0x93, 0x6b, 0x0a, 0x53, 0x1d,
+	0x8a, 0x38, 0x9a, 0x89, 0x4c, 0xa8, 0xa9, 0xcc, 0xe2, 0x4b, 0x06, 0xfb, 0x3e, 0x74, 0xcf, 0x23,
+	0x11, 0x87, 0x6a, 0x2e, 0xeb, 0x37, 0xab, 0xc6, 0xcf, 0x50, 0xc6, 0xb5, 0x8a, 0xb7, 0x0b, 0x26,
+	0x31, 0x96, 0xa3, 0xb8, 0x51, 0x19, 0xc5, 0xaf, 0x8e, 0xf3, 0xde, 0x9f, 0x5a, 0xd0, 0x7d, 0x59,
+	0x48, 0xa9, 0x12, 0x41, 0xcd, 0xbc, 0x0c, 0x1e, 0xb6, 0xf1, 0x75, 0x30, 0xd5, 0x88, 0xa1, 0xcd,
+	0xc8, 0x72, 0xbc, 0x98, 0xfa, 0xf3, 0x38, 0xf5, 0x17, 0x28, 0xd3, 0x24, 0x76, 0x88, 0x68, 0x52,
+	0xce, 0x2c, 0xaa, 0x7f, 0x58, 0xc4, 0xd0, 0x43, 0x4b, 0x80, 0x97, 0x52, 0x81, 0x0b, 0x34, 0x28,
+	0x14, 0x67, 0x18, 0xa2, 0x73, 0xb8, 0x4a, 0xb5, 0x7a, 0xfc, 0xf4, 0xfe, 0xd9, 0x82, 0x7b, 0x6f,
+	0x44, 0x22, 0xb2, 0x28, 0x78, 0x1d, 0x0b, 0x0c, 0xfd, 0x89, 0x98, 0x4c, 0x63, 0x5d, 0x1f, 0x95,
+	0x63, 0xed, 0xaa, 0x63, 0xb5, 0xed, 0x8d, 0xc6, 0xf6, 0x1b, 0x60, 0xe5, 0xc5, 0x99, 0x5a, 0xa5,
+	0xdc, 0x5e, 0xd0, 0xec, 0x27, 0x30, 0x08, 0xc5, 0xb9, 0x5f, 0xc4, 0x6a, 0xee, 0x4e, 0x13, 0x72,
+	0xfe, 0x4a, 0x3d, 0x52, 0x91, 0xe2, 0xab, 0x5a, 0x77, 0x3f, 0xd0, 0x8f, 0xaa, 0xde, 0x19, 0x09,
+	0xd4, 0x2b, 0xf1, 0x3f, 0xad, 0x2a, 0x95, 0xbc, 0x3f, 0x1a, 0x00, 0x4b, 0x64, 0x2d, 0xe2, 0xbe,
+	0x52, 0x89, 0xfb, 0x06, 0x58, 0x93, 0x68, 0x22, 0x2a, 0xf9, 0x58, 0xd0, 0x65, 0x9c, 0x8c, 0x45,
+	0x9c, 0xd8, 0x47, 0xb0, 0x2a, 0x2f, 0x8a, 0xc9, 0x59, 0xe2, 0x47, 0x31, 0x1d, 0x5d, 0x1d, 0x6f,
+	0x65, 0xc1, 0xc4, 0xe3, 0x97, 0xf7, 0xcc, 0xac, 0xdc, 0xb3, 0x27, 0x00, 0xa1, 0xc8, 0x83, 0x8c,
+	0x1e, 0x87, 0xba, 0xa3, 0x54, 0x38, 0x88, 0xd8, 0x58, 0x24, 0x63, 0x79, 0x41, 0x43, 0x96, 0xc9,
+	0x35, 0x85, 0xb6, 0xf2, 0xe8, 0x83, 0x1a, 0xde, 0x4c, 0x4e, 0xdf, 0xec, 0x05, 0x58, 0x42, 0x25,
+	0x29, 0x77, 0x2d, 0x0a, 0xc3, 0x77, 0xea, 0x61, 0xb8, 0x3e, 0x93, 0x7c, 0xb1, 0x6a, 0x99, 0x53,
+	0xbb, 0x9a, 0x53, 0xaa, 0x05, 0x71, 0x9a, 0x69, 0xc0, 0x28, 0x82, 0x20, 0x98, 0x09, 0xba, 0xec,
+	0x7d, 0x0d, 0x41, 0x45, 0x56, 0xb3, 0xe1, 0xdc, 0x20, 0x1b, 0xdb, 0xcf, 0x61, 0xa5, 0xfa, 0xf0,
+	0x65, 0x16, 0x74, 0x92, 0x34, 0x11, 0xce, 0x2d, 0xd6, 0x03, 0xc3, 0x4f, 0x42, 0xa7, 0xc5, 0xba,
+	0xd0, 0x4e, 0x33, 0xa7, 0xbd, 0xfd, 0x01, 0x06, 0xf5, 0x07, 0x25, 0x5b, 0x05, 0x7b, 0xff, 0xf0,
+	0x70, 0xff, 0xcd, 0xeb, 0x77, 0x27, 0xc7, 0xce, 0x2d, 0x36, 0x00, 0xa0, 0xef, 0x37, 0xfc, 0xe8,
+	0xf4, 0xe7, 0x4e, 0x9b, 0x01, 0x74, 0xb5, 0xcc, 0x40, 0xd9, 0x67, 0x47, 0xc7, 0x27, 0xfc, 0xf5,
+	0xc1, 0xeb, 0x77, 0x27, 0x4e, 0x87, 0xdd, 0x87, 0x3b, 0xfc, 0xe8, 0xf4, 0xdd, 0x2b, 0x7e, 0xf4,
+	0x72, 0xf8, 0x6e, 0x69, 0xc4, 0x64, 0xeb, 0xe0, 0x54, 0x04, 0x8a, 0xdb, 0xdd, 0xe6, 0x34, 0x19,
+	0x4a, 0xc1, 0xee, 0xc2, 0xed, 0x5a, 0x0d, 0xd6, 0xce, 0x0e, 0x00, 0x8a, 0x44, 0xfd, 0x3a, 0x21,
+	0x42, 0xa7, 0xcd, 0xfa, 0xa0, 0x3a, 0x93, 0x08, 0x1d, 0x13, 0xfd, 0x50, 0xcf, 0x49, 0xa7, 0xcb,
+	0x6c, 0x30, 0x45, 0x12, 0x8a, 0xd0, 0xb1, 0xb6, 0xff, 0xd1, 0x05, 0x93, 0x5a, 0x29, 0x73, 0x61,
+	0xbd, 0x3a, 0xec, 0xec, 0x97, 0x76, 0x6e, 0xa1, 0x9b, 0x55, 0xc9, 0xaf, 0xfc, 0x48, 0x46, 0xc9,
+	0xd8, 0x69, 0xb3, 0x27, 0xb0, 0x51, 0x15, 0x50, 0x9f, 0xd1, 0xbd, 0x44, 0x84, 0x8e, 0x71, 0xc5,
+	0x64, 0x10, 0x88, 0x29, 0x4a, 0x3a, 0x4d, 0x93, 0xaf, 0xb2, 0x74, 0x3a, 0x25, 0x37, 0x1f, 0x81,
+	0x5b, 0x15, 0x90, 0x6b, 0x07, 0xea, 0x61, 0xe0, 0x74, 0xd9, 0x63, 0x78, 0x50, 0x95, 0x62, 0xd2,
+	0x96, 0xfb, 0xf5, 0xd8, 0x26, 0x3c, 0xaa, 0x8a, 0x75, 0x4b, 0x58, 0x6a, 0x58, 0x4d, 0x8f, 0x0f,
+	0x85, 0x3f, 0xab, 0xc8, 0xed, 0xa6, 0xfc, 0x00, 0x1f, 0xd5, 0x4b, 0x39, 0x34, 0xdd, 0x3b, 0xf1,
+	0xc7, 0x4b, 0x69, 0xbf, 0xb9, 0xfa, 0x34, 0x91, 0x55, 0xf9, 0x4a, 0xd3, 0x7d, 0xbe, 0x9c, 0xd0,
+	0x44, 0xe8, 0xac, 0x36, 0xc5, 0x38, 0x33, 0x2c, 0xc5, 0x83, 0xa6, 0x75, 0x1a, 0xa0, 0x97, 0xf2,
+	0x35, 0xf6, 0x11, 0x3c, 0xad, 0xed, 0x3e, 0x0d, 0xf1, 0x6e, 0x15, 0x71, 0xe5, 0x00, 0xeb, 0x4d,
+	0x25, 0x15, 0xda, 0xba, 0xd2, 0xdd, 0xa6, 0xd2, 0x2b, 0x11, 0x8b, 0xa6, 0xd2, 0x3d, 0xf6, 0x0c,
+	0x1e, 0x5f, 0x39, 0x4c, 0x4d, 0xe5, 0x7e, 0x53, 0x85, 0x0e, 0x54, 0x53, 0x71, 0xd9, 0x03, 0xb8,
+	0x8b, 0x73, 0x11, 0xcd, 0x2e, 0xc9, 0x79, 0xba, 0x14, 0x31, 0x44, 0x79, 0x5d, 0x34, 0x8d, 0xe7,
+	0xce, 0x1d, 0x5a, 0x71, 0xf5, 0xd9, 0x20, 0x42, 0x67, 0xaf, 0x99, 0xff, 0xca, 0xa4, 0xa5, 0x16,
+	0xff, 0xb0, 0x99, 0x3f, 0x9a, 0x80, 0x54, 0xa0, 0x42, 0xe7, 0x63, 0xe6, 0xc1, 0x93, 0x6b, 0x4c,
+	0x23, 0xde, 0xf1, 0x51, 0x9a, 0x16, 0xd2, 0xf9, 0x69, 0x33, 0x36, 0x57, 0x46, 0x51, 0x11, 0x3a,
+	0x9f, 0x6e, 0x1f, 0x00, 0xa8, 0xc6, 0x40, 0x0f, 0x61, 0xbc, 0x97, 0x59, 0x3c, 0x52, 0xd5, 0xc6,
+	0x69, 0xb3, 0x3b, 0xb0, 0x36, 0x4d, 0x73, 0x79, 0xe6, 0x07, 0xef, 0x4b, 0xa6, 0xc1, 0x1c, 0x58,
+	0xa1, 0xdf, 0x28, 0x4a, 0x4e, 0x67, 0xfb, 0x05, 0x0c, 0x96, 0x2d, 0x82, 0x0c, 0x59, 0xd0, 0x39,
+	0x8f, 0x62, 0xa1, 0xae, 0xf6, 0x58, 0xd5, 0x52, 0xc7, 0x40, 0x62, 0x9a, 0x89, 0x59, 0x24, 0xbe,
+	0x70, 0x3a, 0x78, 0xcf, 0xb5, 0x05, 0xf3, 0xdf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x0b, 0x07, 0x6d,
+	0x2d, 0x9f, 0x16, 0x00, 0x00,
 }

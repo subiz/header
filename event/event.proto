@@ -3,21 +3,11 @@ syntax = "proto2";
 package event;
 
 import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/account/account.proto";
-import "bitbucket.org/subiz/header/client/client.proto";
 import "bitbucket.org/subiz/header/lang/lang.proto";
+import "bitbucket.org/subiz/header/auth/auth.proto";
 
-message User {
-	optional string id = 1;
-	optional UserType type  = 2;
-}
-
-enum UserType {
-	NONE = 0;
-  USER= 1;
-	AGENT = 2;
-	SYSTEM = 3;
-}
+import "bitbucket.org/subiz/header/account/account.proto";
+import "bitbucket.org/subiz/header/conversation/conversation.proto";
 
 message RawEventCreatedPayload {
 	optional common.Context ctx = 1;
@@ -46,139 +36,34 @@ message RawEvents {
 	repeated RawEvent events = 4;
 }
 
+message Conversation {
+	optional string id = 3;
+	optional string channel_id = 4;
+}
+
 message RawEvent {
+	reserved 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35;
+	reserved "state", "message_to", "page_url", "page_title", "browser_language", "device_type", "user_id", "joiner_id", "joiner_type", "leaver_id", "attachments", "text", "format", "deliverieds", "fields", "computed";
 	optional common.Context ctx = 1;
 	optional string id = 3;
 	optional string account_id = 4;
-	optional string app_id = 5;
-	optional string sender_id = 6;
-	optional string sender_type = 7;
-
-	optional int64 timestamp = 8;
+	optional int64 created = 8;
 	optional string type = 9;
-	optional string channel_id = 10;
+	//optional string channel_id = 10;
 	repeated string topics = 11;
 	//---
+	optional auth.By by = 12;
+	optional string object = 13;
+	//optional string conversation_id = 15;
+	optional string conversation_id = 20;
+	optional string channel_id = 40;
 
-
-	optional string conversation_id = 15;
-
-	// request
-	optional int32 state = 16;
-	optional string message_to = 17;
-	optional string page_url = 18;
-	optional string page_title = 19;
-	optional string message = 20;
-	optional string browser_language = 21;
-	optional string language = 22;
-	optional string device_type = 23;
-	optional string user_id = 24;
-	//optional string conversation_id = 25;
-
-	// joined event
-	//optional string conversation_id = 26;
-	optional string joiner_id = 27;
-	optional string joiner_type = 28;
-
-	// left event
-	optional string leaver_id = 29;
-	//optional string conversation_id = 25;
-
-	// message event
-	//optional string conversation_id = 19;
-	repeated Attachment attachments = 30;
-	optional string text = 31;
-	optional string format = 32;
-
-	repeated string deliverieds = 33;
-}
-
-
-
-message Event {
-	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional account.Account account = 3;
-	optional client.Client app = 4;
-	//optional string access_token = 6;
-	optional Sender sender = 8;
-	optional int64 timestamp = 12; // responly
-	optional string type = 13;
-	optional Channel channel = 15;
-	//optional string channel_id = 17;
-	repeated Topic topics = 19;
-	//===========================
-	//extensions 20 to max;
-	//repeated Attachment attachments = 20;
-	//optional Message message = 21;
-}
-
-
-message Channel {
-	optional string id = 1;
-	optional string name = 2;
-}
-
-message Topic {
-	optional string id = 1;
-	optional string name = 2;
-}
-
-message Message {
-	optional string value = 1;
-	optional string format = 2;
-}
-
-message Action {
-	optional string type = 2;
-
-	// post back
-	optional string title = 3;
-	optional string payload = 4;
-	optional string image_url = 5;
-
-	// event button
-
-  // url button
-}
-
-message GenericElementTemplate {
-	optional string title = 2;
-	optional string image_url = 3;
-	optional string subtitle = 4;
-	optional Action default_action = 5;
-	repeated Action actions = 6;
-}
-
-message Attachment {
-	optional string type = 12;
-	// file
-	optional string mimetype = 2;
-	optional string link = 3;
-	optional string preview = 4;
-	optional string name = 5;
-	optional string descrition = 6;
-	optional string data = 7; // for custom data
-	optional int32 size = 13; // byte
-
-	// generic
-	repeated GenericElementTemplate elements = 8;
-
-	// preview
-	optional string title = 9;
-	optional string color = 10;
-	optional string pretext = 11;
-
-}
-
-message Sender {
-	optional common.Context ctx = 5;
-	optional string id = 1;
-	optional string type = 2;
-	optional string name = 3;
-	repeated string emails = 4;
-	optional string phones = 6;
-	optional string avatar_url = 7;
+	oneof data {
+		account.Account account = 38;
+		account.Agent agent = 36;
+		conversation.Message message = 37;
+		conversation.Conversation conversation = 39;
+	};
 }
 
 message Reply {
@@ -194,29 +79,19 @@ message Reply {
 	optional bytes payload = 7;
 }
 
-enum ActionType {
-	url_button = 2;
-	postback_button = 3;
-	event_button = 4;
-}
-
-enum AttachmentType {
-	file = 2;
-	generic = 3;
-	preview = 4;
-}
-
 enum EventType {
-  conversation_started = 1;
+	conversation_updated = 9;
+	message_sent = 10;
+  //conversation_started = 1;
 	conversation_joined = 2;
 
-	conversation_message = 3;
+	//conversation_message = 3;
 	conversation_left = 4;
-	conversation_closed = 5;
+	//conversation_closed = 5;
 	conversation_tagged = 6;
 	conversation_untagged = 7;
 
-	conversation_waiting = 8;
+	//conversation_waiting = 8;
 }
 
 message Error {
@@ -255,4 +130,10 @@ message Subscription { // raweventcreatedpayload
 enum SubPrefix {
 	Webhook = 0;
 	Websocket = 1;
+}
+
+enum Object {
+	account = 0;
+	conversation = 1;
+	message = 2;
 }
