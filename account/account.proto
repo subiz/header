@@ -5,11 +5,6 @@ package account;
 import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 
-enum AccountState {
-	unconfirmed = 0; // waiting for email confirmation
-	activated = 1;  // normal account
-	locked = 2;  // subiz lock down account
-}
 
 message Agent {
 	optional common.Context ctx = 1;
@@ -87,6 +82,12 @@ message Account {
 	optional int64 modified = 10;
 
 	optional string referer_id = 11;
+	enum State {
+		pending = 0; // waiting for email confirmation
+		activated = 1;  // normal account
+		locked = 2;  // subiz lock down account
+		deleted = 3;
+	}
 }
 
 message Id {
@@ -173,9 +174,8 @@ message NewPassword {
 
 message Limit {
 	optional common.Context ctx = 1;
-	//int32 ConcurrentChat = 1;
 
-	optional int32 chat_history = 2;
+	optional int32 conversation_history = 2;
 	optional int32 max_triggers = 3;
 	optional int32 max_agents = 4;
 	optional int32 max_agent_groups = 5;
@@ -195,6 +195,7 @@ message Token {
 }
 
 enum Event {
+	//	deleted = 11111;
 	CreateAccountRequested = 100; // createaccountrequested
 	UpdateAccountRequested = 101; //account
 	ReadAccountRequested = 102; // id
@@ -290,13 +291,4 @@ message PasswordChangedEmail {
 	optional string to = 2;
 	optional string account_id = 3;
 	optional string agent_id = 4;
-}
-
-message Tag {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional string title = 4;
-	optional int64 created = 5;
-	optional string creator_id = 6;
-	optional string color = 7;
 }
