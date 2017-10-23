@@ -4,15 +4,21 @@ package auth;
 
 message Credential {
 	optional string account_id = 1;
-	//int32 AccountPlan = 2;
-	optional string user_id = 3;
-	// scope that the user allow
+	optional string issuer = 3;
+	optional Type type = 4;
+
 	optional Method method = 5;
 
 	optional string client_id = 7;
-	optional ClientType client_type = 8;
-	repeated string scopes = 9;
+	optional Type client_type = 8;
 	optional string client_account_id = 10;
+
+	repeated string scopes = 9;
+
+	// optional
+	optional string avatar_url = 15;
+	optional string name = 16;
+	optional string email = 17;
 }
 
 message Scope {
@@ -104,11 +110,18 @@ message Method {
 
 	// channel
 
-
 	// converstation
 	optional bool StartConversation = 190;
 	optional bool ReadConversation = 191;
 	optional bool WriteConversation = 192;
+
+	// connector integration
+	optional bool IntegrateConnector = 200;
+
+	optional bool ReadUserEmail = 205;
+	optional bool ReadUserFacebookId = 206;
+	optional bool ReadUserPhone = 207;
+
 }
 
 message UserAuth {
@@ -139,9 +152,10 @@ message OauthAccessToken {
 }
 
 message AccessToken {
-	optional string	user_id = 1;
+	optional string	issuer_id = 1;
+	optional string issuer_type = 7;
 	optional string client_id = 2;
-  optional ClientType	client_type = 3;
+  optional string	client_type = 3;
 	optional string	account_id = 4;
 	optional string	client_account_id = 5;
 	repeated string scopes = 6;
@@ -164,25 +178,21 @@ message CookieExpire {
 
 }
 
-enum ClientType {
-	// STONE is just default value, client should never have Type is STONE
-	STONE = 0;
-
-	// APP is general client type
-	app = 1;
-
-	// CHANNEL is special client, that can and only listen chat topics of an account
-	channel = 2;
-
-	// BOT reserve for future
-	bot = 3;
-}
-
-enum UserType {
+enum Type {
 	unknown = 0;
   user = 1;
 	agent = 2;
 	subiz = 3;
+
+
+	// APP is general client type
+	app = 5;
+
+	// CHANNEL is special client, that can and only listen chat topics of an account
+	connector = 6;
+
+	// BOT reserve for future
+	bot = 7;
 }
 
 message User {
@@ -203,15 +213,4 @@ enum EVENT {
 	AuthExpireCookie = 4; //CookieExpire
 
 	ClientAuthorized = 12;
-}
-
-message By {
-	reserved 4;
-	reserved "email";
-	optional string type = 3; // usertype
-	optional string id = 8;
-	//optional
-	optional string name = 5;
-	optional string avatar_url = 6;
-	optional string app_id = 7;
 }
