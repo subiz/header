@@ -1,18 +1,23 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package ws;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
 message Subscribe {
-	optional common.Context ctx = 1;
+	//common.Context ctx = 1;
 	//optional string connection_id = 2;
-	repeated string events = 3;
+	string events = 3;
+
+	// optional: only use this in widget; otherwise must provide credential through access token
+	string mask_id = 4;
+
+	string connection_id = 5;
 }
 
 message ListRequest {
-	optional common.Context ctx = 1;
-	optional string connection_id = 2;
+	common.Context ctx = 1;
+	string connection_id = 2;
 }
 
 enum Event {
@@ -20,6 +25,6 @@ enum Event {
 }
 
 message Payload {
-	optional int64 id = 3;
-	optional string message = 4;
+	int64 id = 3;
+	string message = 4;
 }
