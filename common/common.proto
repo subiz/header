@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package common;
 
@@ -6,16 +6,32 @@ import "bitbucket.org/subiz/header/auth/auth.proto";
 
 message Empty {}
 
+message Id {
+	Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+}
+
 message Context {
 	reserved "reply_partition";
 	reserved 5;
 
-	optional string event_id = 1;
-	optional bytes state = 2;
-	optional string node = 3;
-	optional string reply_topic = 4;
+	string event_id = 1;
+	bytes state = 2;
+	string node = 3;
+	string reply_topic = 4;
 	//	optional int32 reply_partition = 5;
-	optional auth.Credential credential = 6;
-	optional bytes tracing = 7;
-	optional string reply_key = 8;
+	auth.Credential credential = 6;
+	bytes tracing = 7;
+	string reply_key = 8;
+
+	Device by_device = 10;
+}
+
+message Device {
+	string ip = 3;
+	string user_agent = 4; // code
+	string screen_resolution = 5;
+	string timezone = 6;
+	string language = 7;
 }
