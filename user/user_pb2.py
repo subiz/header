@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='user/user.proto',
   package='user',
   syntax='proto2',
-  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a.bitbucket.org/subiz/header/common/common.proto\"\xe0\x02\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\x0e\n\x06is_ban\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\"\"\n\x05Users\x12\x19\n\x05users\x18\x01 \x03(\x0b\x32\n.user.User\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"F\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02pP\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\"D\n\x03Ids\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\x0b\n\x03ids\x18\x04 \x03(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"I\n\rCreateRequest\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x14\n\x0c\x63hallenge_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61nswer\x18\x04 \x01(\t*k\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00\x12\x17\n\x13UserUpdateRequested\x10\x02\x12\x17\n\x13UserCreateRequested\x10\x03\x12\x19\n\x15UserReadBulkRequested\x10\x04')
+  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a.bitbucket.org/subiz/header/common/common.proto\"\xe0\x02\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\x0e\n\x06is_ban\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\"\"\n\x05Users\x12\x19\n\x05users\x18\x01 \x03(\x0b\x32\n.user.User\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"F\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02pP\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"I\n\rCreateRequest\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x14\n\x0c\x63hallenge_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61nswer\x18\x04 \x01(\t*k\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00\x12\x17\n\x13UserUpdateRequested\x10\x02\x12\x17\n\x13UserCreateRequested\x10\x03\x12\x19\n\x15UserReadBulkRequested\x10\x04')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -50,8 +50,8 @@ _EVENT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1202,
-  serialized_end=1309,
+  serialized_start=1064,
+  serialized_end=1171,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
@@ -355,96 +355,6 @@ _TRACE = _descriptor.Descriptor(
 )
 
 
-_ID = _descriptor.Descriptor(
-  name='Id',
-  full_name='user.Id',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ctx', full_name='user.Id.ctx', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='id', full_name='user.Id.id', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='account_id', full_name='user.Id.account_id', index=2,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=658,
-  serialized_end=724,
-)
-
-
-_IDS = _descriptor.Descriptor(
-  name='Ids',
-  full_name='user.Ids',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ctx', full_name='user.Ids.ctx', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='account_id', full_name='user.Ids.account_id', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ids', full_name='user.Ids.ids', index=2,
-      number=4, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=726,
-  serialized_end=794,
-)
-
-
 _LISTREQUEST = _descriptor.Descriptor(
   name='ListRequest',
   full_name='user.ListRequest',
@@ -499,8 +409,8 @@ _LISTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=796,
-  serialized_end=909,
+  serialized_start=658,
+  serialized_end=771,
 )
 
 
@@ -551,8 +461,8 @@ _MERGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=911,
-  serialized_end=1006,
+  serialized_start=773,
+  serialized_end=868,
 )
 
 
@@ -610,8 +520,8 @@ _GREETINGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1008,
-  serialized_end=1125,
+  serialized_start=870,
+  serialized_end=987,
 )
 
 
@@ -655,16 +565,14 @@ _CREATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1127,
-  serialized_end=1200,
+  serialized_start=989,
+  serialized_end=1062,
 )
 
 _USER.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _USER.fields_by_name['traces'].message_type = _TRACE
 _USER.fields_by_name['devices'].message_type = _DEVICE
 _USERS.fields_by_name['users'].message_type = _USER
-_ID.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
-_IDS.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _LISTREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _MERGEREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _GREETINGREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
@@ -672,8 +580,6 @@ DESCRIPTOR.message_types_by_name['User'] = _USER
 DESCRIPTOR.message_types_by_name['Users'] = _USERS
 DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
 DESCRIPTOR.message_types_by_name['Trace'] = _TRACE
-DESCRIPTOR.message_types_by_name['Id'] = _ID
-DESCRIPTOR.message_types_by_name['Ids'] = _IDS
 DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST
 DESCRIPTOR.message_types_by_name['MergeRequest'] = _MERGEREQUEST
 DESCRIPTOR.message_types_by_name['GreetingRequest'] = _GREETINGREQUEST
@@ -708,20 +614,6 @@ Trace = _reflection.GeneratedProtocolMessageType('Trace', (_message.Message,), d
   # @@protoc_insertion_point(class_scope:user.Trace)
   ))
 _sym_db.RegisterMessage(Trace)
-
-Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
-  DESCRIPTOR = _ID,
-  __module__ = 'user.user_pb2'
-  # @@protoc_insertion_point(class_scope:user.Id)
-  ))
-_sym_db.RegisterMessage(Id)
-
-Ids = _reflection.GeneratedProtocolMessageType('Ids', (_message.Message,), dict(
-  DESCRIPTOR = _IDS,
-  __module__ = 'user.user_pb2'
-  # @@protoc_insertion_point(class_scope:user.Ids)
-  ))
-_sym_db.RegisterMessage(Ids)
 
 ListRequest = _reflection.GeneratedProtocolMessageType('ListRequest', (_message.Message,), dict(
   DESCRIPTOR = _LISTREQUEST,
