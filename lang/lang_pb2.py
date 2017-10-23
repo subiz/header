@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='lang/lang.proto',
   package='lang',
   syntax='proto2',
-  serialized_pb=_b('\n\x0flang/lang.proto\x12\x04lang*\x81\x07\n\x01T\x12\r\n\tundefined\x10\x00\x12$\n user_has_already_in_conversation\x10\x01\x12\x17\n\x13\x63onversation_closed\x10\x02\x12\x12\n\x0einvalid_invite\x10\x03\x12\x11\n\rinvalid_agent\x10\x04\x12\x1f\n\x1buser_is_not_in_conversation\x10\x05\x12\x1a\n\x16\x63onversation_not_found\x10\x06\x12\x10\n\x0cinvalid_left\x10\x0e\x12\x12\n\x0einternal_error\x10\x1e\x12\x11\n\rinvalid_input\x10\x16\x12\x10\n\x0cinvalid_form\x10\x14\x12\x18\n\x14\x61\x63\x63\x65ss_token_expired\x10\x15\x12\x16\n\x12invalid_credential\x10\r\x12\x16\n\x12\x63redential_not_set\x10\x07\x12\x1f\n\x1bwrong_account_in_credential\x10\x08\x12\x1c\n\x18wrong_user_in_credential\x10\n\x12\x0f\n\x0b\x61\x63\x63\x65ss_deny\x10\t\x12\x1a\n\x16unable_to_send_message\x10\x0b\x12\x12\n\x0etopic_is_empty\x10\x0c\x12\x10\n\x0cinvalid_json\x10\x0f\x12\x14\n\x10invalid_protobuf\x10\x10\x12\x12\n\x0eunable_to_lock\x10(\x12\t\n\x05\x65mpty\x10)\x12\x0e\n\nwrong_type\x10*\x12\x17\n\x13invalid_kafka_topic\x10+\x12\x12\n\x0e\x64\x61tabase_error\x10,\x12\x0b\n\x07timeout\x10-\x12\x13\n\x0fwebsocket_error\x10.\x12\x0f\n\x0bkafka_error\x10/\x12\x11\n\rinvalid_token\x10\x30\x12\x15\n\x11\x61\x63\x63ount_not_found\x10\x31\x12\x13\n\x0f\x61gent_not_found\x10\x32\x12\x11\n\rinvalid_email\x10<\x12\x12\n\x0eplan_not_found\x10=\x12\x19\n\x15\x61gent_group_not_found\x10>\x12\x15\n\x11\x65mpty_client_type\x10?\x12\r\n\tempty_url\x10@\x12\x0e\n\nempty_name\x10\x41\x12\x14\n\x10\x63lient_not_found\x10\x42\x12\x11\n\rempty_account\x10\x46\x12\x1e\n\x1ainvalid_conversation_state\x10G')
+  serialized_pb=_b('\n\x0flang/lang.proto\x12\x04lang*\xad\x07\n\x01T\x12\r\n\tundefined\x10\x00\x12$\n user_has_already_in_conversation\x10\x01\x12\x17\n\x13\x63onversation_closed\x10\x02\x12\x12\n\x0einvalid_invite\x10\x03\x12\x11\n\rinvalid_agent\x10\x04\x12!\n\x1dmember_is_not_in_conversation\x10\x05\x12\x1a\n\x16\x63onversation_not_found\x10\x06\x12\x10\n\x0cinvalid_left\x10\x0e\x12\x12\n\x0einternal_error\x10\x1e\x12\x11\n\rinvalid_input\x10\x16\x12\x10\n\x0cinvalid_form\x10\x14\x12\x18\n\x14\x61\x63\x63\x65ss_token_expired\x10\x15\x12\x16\n\x12invalid_credential\x10\r\x12\x16\n\x12\x63redential_not_set\x10\x07\x12\x1f\n\x1bwrong_account_in_credential\x10\x08\x12\x1c\n\x18wrong_user_in_credential\x10\n\x12\x0f\n\x0b\x61\x63\x63\x65ss_deny\x10\t\x12\x1a\n\x16unable_to_send_message\x10\x0b\x12\x12\n\x0etopic_is_empty\x10\x0c\x12\x10\n\x0cinvalid_json\x10\x0f\x12\x14\n\x10invalid_protobuf\x10\x10\x12\x12\n\x0eunable_to_lock\x10(\x12\t\n\x05\x65mpty\x10)\x12\x0e\n\nwrong_type\x10*\x12\x17\n\x13invalid_kafka_topic\x10+\x12\x12\n\x0e\x64\x61tabase_error\x10,\x12\x0b\n\x07timeout\x10-\x12\x13\n\x0fwebsocket_error\x10.\x12\x0f\n\x0bkafka_error\x10/\x12\x11\n\rinvalid_token\x10\x30\x12\x15\n\x11\x61\x63\x63ount_not_found\x10\x31\x12\x13\n\x0f\x61gent_not_found\x10\x32\x12\x11\n\rinvalid_email\x10<\x12\x12\n\x0eplan_not_found\x10=\x12\x19\n\x15\x61gent_group_not_found\x10>\x12\x15\n\x11\x65mpty_client_type\x10?\x12\r\n\tempty_url\x10@\x12\x0e\n\nempty_name\x10\x41\x12\x14\n\x10\x63lient_not_found\x10\x42\x12\x11\n\rempty_account\x10\x46\x12\x1e\n\x1ainvalid_conversation_state\x10G\x12\x16\n\x12invalid_message_id\x10P\x12\x10\n\x0cinvalid_mask\x10Q')
 )
 
 _T = _descriptor.EnumDescriptor(
@@ -50,7 +50,7 @@ _T = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='user_is_not_in_conversation', index=5, number=5,
+      name='member_is_not_in_conversation', index=5, number=5,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
@@ -193,11 +193,19 @@ _T = _descriptor.EnumDescriptor(
       name='invalid_conversation_state', index=40, number=71,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='invalid_message_id', index=41, number=80,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='invalid_mask', index=42, number=81,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=26,
-  serialized_end=923,
+  serialized_end=967,
 )
 _sym_db.RegisterEnumDescriptor(_T)
 
@@ -207,7 +215,7 @@ user_has_already_in_conversation = 1
 conversation_closed = 2
 invalid_invite = 3
 invalid_agent = 4
-user_is_not_in_conversation = 5
+member_is_not_in_conversation = 5
 conversation_not_found = 6
 invalid_left = 14
 internal_error = 30
@@ -243,6 +251,8 @@ empty_name = 65
 client_not_found = 66
 empty_account = 70
 invalid_conversation_state = 71
+invalid_message_id = 80
+invalid_mask = 81
 
 
 DESCRIPTOR.enum_types_by_name['T'] = _T
