@@ -14,7 +14,6 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-from bitbucket.org.subiz.header.auth import auth_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2
 from bitbucket.org.subiz.header.common import common_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2
 
 
@@ -22,9 +21,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='client/client.proto',
   package='client',
   syntax='proto2',
-  serialized_pb=_b('\n\x13\x63lient/client.proto\x12\x06\x63lient\x1a*bitbucket.org/subiz/header/auth/auth.proto\x1a.bitbucket.org/subiz/header/common/common.proto\"H\n\x07\x43lients\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x1f\n\x07\x63lients\x18\x02 \x03(\x0b\x32\x0e.client.Client\"\x98\x02\n\x06\x43lient\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x0e\n\x06secret\x18\x04 \x01(\t\x12\x10\n\x08logo_url\x18\x05 \x01(\t\x12\x12\n\naccount_id\x18\x06 \x01(\t\x12\x13\n\x0bis_verified\x18\x08 \x01(\x08\x12\x14\n\x0credirect_url\x18\t \x01(\t\x12\x1e\n\x04type\x18\x0b \x01(\x0e\x32\x10.auth.ClientType\x12\x0c\n\x04name\x18\x0c \x01(\t\x12\x0f\n\x07version\x18\x0e \x01(\t\x12\x12\n\nis_enabled\x18\x0f \x01(\x08\x12\x14\n\x0c\x63reated_time\x18\x11 \x01(\x03\x12\x1a\n\x12last_modified_time\x18\x12 \x01(\x03\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x02 \x01(\t*\x8a\x01\n\x05\x45vent\x12\x19\n\x15\x43lientCreateRequested\x10\x14\x12\x19\n\x15\x43lientUpdateRequested\x10\x15\x12\x19\n\x15\x43lientDeleteRequested\x10\x16\x12\x17\n\x13\x43lientReadRequested\x10\x17\x12\x17\n\x13\x43lientListRequested\x10\x18')
+  serialized_pb=_b('\n\x13\x63lient/client.proto\x12\x06\x63lient\x1a.bitbucket.org/subiz/header/common/common.proto\"H\n\x07\x43lients\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x1f\n\x07\x63lients\x18\x02 \x03(\x0b\x32\x0e.client.Client\"\x88\x02\n\tConnector\x12\n\n\x02id\x18\x03 \x01(\t\x12\x0e\n\x06secret\x18\x04 \x01(\t\x12\x10\n\x08logo_url\x18\x05 \x01(\t\x12\x12\n\naccount_id\x18\x06 \x01(\t\x12\x13\n\x0bis_verified\x18\x08 \x01(\x08\x12\x14\n\x0credirect_url\x18\t \x01(\t\x12\x0c\n\x04type\x18\x0b \x01(\t\x12\x0c\n\x04name\x18\x0c \x01(\t\x12\x0f\n\x07version\x18\x0e \x01(\t\x12\x12\n\nis_enabled\x18\x0f \x01(\x08\x12\x0f\n\x07\x63reated\x18\x11 \x01(\x03\x12\x10\n\x08modified\x18\x12 \x01(\x03\x12\x14\n\x0c\x63hannel_type\x18\x14 \x01(\t\x12\x14\n\x0c\x63hannel_name\x18\x15 \x01(\t\"\xf7\x01\n\x06\x43lient\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x0e\n\x06secret\x18\x04 \x01(\t\x12\x10\n\x08logo_url\x18\x05 \x01(\t\x12\x12\n\naccount_id\x18\x06 \x01(\t\x12\x13\n\x0bis_verified\x18\x08 \x01(\x08\x12\x14\n\x0credirect_url\x18\t \x01(\t\x12\x0c\n\x04type\x18\x0b \x01(\t\x12\x0c\n\x04name\x18\x0c \x01(\t\x12\x0f\n\x07version\x18\x0e \x01(\t\x12\x12\n\nis_enabled\x18\x0f \x01(\x08\x12\x0f\n\x07\x63reated\x18\x11 \x01(\x03\x12\x10\n\x08modified\x18\x12 \x01(\x03*\x8a\x01\n\x05\x45vent\x12\x19\n\x15\x43lientCreateRequested\x10\x14\x12\x19\n\x15\x43lientUpdateRequested\x10\x15\x12\x19\n\x15\x43lientDeleteRequested\x10\x16\x12\x17\n\x13\x43lientReadRequested\x10\x17\x12\x17\n\x13\x43lientListRequested\x10\x18')
   ,
-  dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
+  dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
 
 _EVENT = _descriptor.EnumDescriptor(
   name='Event',
@@ -55,8 +54,8 @@ _EVENT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=549,
-  serialized_end=687,
+  serialized_start=671,
+  serialized_end=809,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
@@ -102,8 +101,130 @@ _CLIENTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=123,
-  serialized_end=195,
+  serialized_start=79,
+  serialized_end=151,
+)
+
+
+_CONNECTOR = _descriptor.Descriptor(
+  name='Connector',
+  full_name='client.Connector',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='client.Connector.id', index=0,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='secret', full_name='client.Connector.secret', index=1,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='logo_url', full_name='client.Connector.logo_url', index=2,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='client.Connector.account_id', index=3,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_verified', full_name='client.Connector.is_verified', index=4,
+      number=8, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='redirect_url', full_name='client.Connector.redirect_url', index=5,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='client.Connector.type', index=6,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='name', full_name='client.Connector.name', index=7,
+      number=12, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='version', full_name='client.Connector.version', index=8,
+      number=14, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='is_enabled', full_name='client.Connector.is_enabled', index=9,
+      number=15, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='created', full_name='client.Connector.created', index=10,
+      number=17, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='modified', full_name='client.Connector.modified', index=11,
+      number=18, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_type', full_name='client.Connector.channel_type', index=12,
+      number=20, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='channel_name', full_name='client.Connector.channel_name', index=13,
+      number=21, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=154,
+  serialized_end=418,
 )
 
 
@@ -165,8 +286,8 @@ _CLIENT = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='type', full_name='client.Client.type', index=7,
-      number=11, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -192,14 +313,14 @@ _CLIENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='created_time', full_name='client.Client.created_time', index=11,
+      name='created', full_name='client.Client.created', index=11,
       number=17, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='last_modified_time', full_name='client.Client.last_modified_time', index=12,
+      name='modified', full_name='client.Client.modified', index=12,
       number=18, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -217,63 +338,16 @@ _CLIENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=198,
-  serialized_end=478,
-)
-
-
-_ID = _descriptor.Descriptor(
-  name='Id',
-  full_name='client.Id',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ctx', full_name='client.Id.ctx', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='id', full_name='client.Id.id', index=1,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='account_id', full_name='client.Id.account_id', index=2,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=480,
-  serialized_end=546,
+  serialized_start=421,
+  serialized_end=668,
 )
 
 _CLIENTS.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _CLIENTS.fields_by_name['clients'].message_type = _CLIENT
 _CLIENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
-_CLIENT.fields_by_name['type'].enum_type = bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2._CLIENTTYPE
-_ID.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['Clients'] = _CLIENTS
+DESCRIPTOR.message_types_by_name['Connector'] = _CONNECTOR
 DESCRIPTOR.message_types_by_name['Client'] = _CLIENT
-DESCRIPTOR.message_types_by_name['Id'] = _ID
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -284,19 +358,19 @@ Clients = _reflection.GeneratedProtocolMessageType('Clients', (_message.Message,
   ))
 _sym_db.RegisterMessage(Clients)
 
+Connector = _reflection.GeneratedProtocolMessageType('Connector', (_message.Message,), dict(
+  DESCRIPTOR = _CONNECTOR,
+  __module__ = 'client.client_pb2'
+  # @@protoc_insertion_point(class_scope:client.Connector)
+  ))
+_sym_db.RegisterMessage(Connector)
+
 Client = _reflection.GeneratedProtocolMessageType('Client', (_message.Message,), dict(
   DESCRIPTOR = _CLIENT,
   __module__ = 'client.client_pb2'
   # @@protoc_insertion_point(class_scope:client.Client)
   ))
 _sym_db.RegisterMessage(Client)
-
-Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
-  DESCRIPTOR = _ID,
-  __module__ = 'client.client_pb2'
-  # @@protoc_insertion_point(class_scope:client.Id)
-  ))
-_sym_db.RegisterMessage(Id)
 
 
 # @@protoc_insertion_point(module_scope)
