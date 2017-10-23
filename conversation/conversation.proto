@@ -4,13 +4,10 @@ package conversation;
 
 //import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/auth/auth.proto";
+//import "bitbucket.org/subiz/header/auth/auth.proto";
+import "bitbucket.org/subiz/header/client/client.proto";
 
-message Id {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string id = 3;
-}
+import "bitbucket.org/subiz/header/user/user.proto";
 
 enum JoinOperator {
 	none = 0;
@@ -27,7 +24,6 @@ message Limit {
 
 message Rule {
 	optional common.Context ctx = 1;
-	// @inject_tag: name:"ip"
 	optional string id = 2;
 	optional string account_id = 3;
 	//optional string priority = 4;
@@ -66,6 +62,22 @@ enum AssignStrategy {
 	ROUNDROBINAGENTS = 6;
 }
 
+message MemberSeen {
+	optional string member_id = 2;
+	optional string message_id = 3;
+}
+
+message Member {
+	optional string type = 3; // type
+	optional string subiz_id = 8;
+	optional string id = 4;
+	optional string name = 10;
+	optional string avatar_url = 6;
+
+	optional client.Connector connector = 9;
+	optional Domain domain = 12;
+}
+
 // get number of unread message
 message Conversation {
 	reserved "request_id";
@@ -78,21 +90,14 @@ message Conversation {
 	optional int64 created = 4;
 	// Last active time
 	optional int64 last_actived = 5;
-	// Closed time
+	// Closed timeph
 	optional int64 closed = 6;
-	repeated auth.By users = 7;
-	optional string channel_id = 9;
-	repeated string tags = 10;
+	repeated Member members = 7;
+	repeated Tag tags = 10;
 
 	optional string state = 11; // converation state
-	optional Request request = 14;
-}
 
-message UserConversation { // used in database
-	optional string state = 11;
-	optional string user_id = 2;
-	optional string convo_id = 4;
-	optional string last_seen_event = 5;
+	optional StartRequest request = 14;
 }
 
 enum State {
@@ -102,47 +107,73 @@ enum State {
 	unassigned = 2;
 	//opened = 3;
 	//closed = 4;
-	started = 5;
+	//started = 5;
 	active = 6;
 	ended = 8;
 }
 
+message UserConversation { // used in database
+	optional string state = 11;
+	optional string user_id = 2;
+	optional string convo_id = 4;
+	optional string last_seen_event = 5;
+}
 
-message Request {
+message StartRequest {
+	reserved 12;
+
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
-	optional string channel_id = 4;
-	optional string message_to = 5;
+	optional string connector_id = 4;
+	repeated string to = 5;
 	optional string page_url = 6;
 	optional string page_title = 7;
 	optional string message = 8;
 	optional string browser_language = 9;
 	optional string language = 10;
 	optional string device_type = 11;
-	optional string user_id = 12;
-	optional int64 created_time = 13;
+	optional Member user_member = 24;
+	optional int64 created = 13;
 	optional string conversation_id = 14;
 	optional string ip = 15;
 	optional string country = 16;
 	optional string country_code = 17;
 	optional string city = 18;
-	optional string time_zone = 19;
+	optional string timezone = 19;
+
+	optional string starter_id = 20;
+	optional string starter_type = 21;
+	repeated string agent_ids = 22;
+
+	optional user.User user = 25;
+
 }
 
 message Conversations {
 	repeated Conversation conversations = 1;
 }
 
-message Start {
+message ConnectedDomain {
 	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string agent_id = 3;
-	optional string user_id = 4;
-	optional string channel_id = 5;
-	optional string user_name = 10;
-	optional string user_avatar_url = 11;
+	optional string account_id = 3;
+	//optional ChannelConector connector = 4;
+	//optional bool is_en = 6;
+	optional string domain_id = 11;
+	optional string connector_id = 12;
+	optional int64 created = 7;
+	optional int64 modified = 9;
+	//optional auth.By by = 10;
+}
 
+message Domain {
+	optional common.Context ctx = 1;
+	optional string id = 6;
+	optional string name = 7;
+	optional string description = 8;
+	optional string payload = 9;
+	//optional bool is_enabled = 4;
+	optional int64 created = 5;
 }
 
 message ReplyConversationRequest {
@@ -152,10 +183,19 @@ message ReplyConversationRequest {
 	optional string conversation_id = 3;
 }
 
+message Search {
+	optional common.Context ctx = 1;
+	optional string account_id = 3;
+	optional string keyword = 4;
+	optional int32 limit = 5;
+	optional string before_id = 6;
+	optional string after_id = 7;
+}
+
 message ListConversations {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
-	optional State state = 4;
+	optional string state = 4;
 	optional int32 limit = 5;
 	optional string start_id = 6;
 }
@@ -183,7 +223,7 @@ message ListEventsRequest {
 	optional int32 limit = 6;
 }
 
-message ListChatsByUserRequest {
+message ListConversationsByUserRequest {
 	optional string AccountId = 1;
 	optional string ChannelId = 2; // if null -> all channel
 	optional string UserId = 3; // must be visitor id
@@ -192,19 +232,19 @@ message ListChatsByUserRequest {
 }
 
 enum Event {
-	ConversationAssigned = 0; // chat is assigned to an agent
-	ConversationWaiting = 2; // new chat is added to unassigned list
+	ConversationAssigned = 0; // conversation is assigned to an agent
+	ConversationWaiting = 2; // new conversation is added to unassigned list
 
-	ConversationStartRequested = 3; // chat started from an agent // chatstart
+	ConversationStartRequested = 3; // conversation started from an agent // conversationstart
 
-	ConversationAccepted = 4; // chat from unassigned list is accepted by an agent
-	ConversationDropped = 5; // chat dropped from unassigned list
+	ConversationAccepted = 4; // conversation from unassigned list is accepted by an agent
+	ConversationDropped = 5; // conversation dropped from unassigned list
 
 	ConversationEventCreated = 6;
 	ConversationJoinRequested = 7;
-	ConversationMessageRequested = 8;
-	ConversationLeaveRequested = 9;
-	ConversationCloseRequested = 10;
+	ConversationMessageRequested = 8; // message
+	ConversationLeaveRequested = 9; // conversation
+	ConversationCloseRequested = 10; // id
 	ConversationTagRequested = 11;
 	ConversationUntagRequested = 12;
 
@@ -218,17 +258,37 @@ enum Event {
 	ConversationReadRuleRequested = 23; // id
 	ConversationListRuleRequested = 24; // id accountid, return top N rule
 
-	ChatUserInfoRequested = 18;
-	ChatUserInfoReply = 19;
 
 
-	ConversationRequested = 50; // user request for new conversation
+	//ConversationRequested = 50; // user request for new conversation
 	ConversationUserRequestReply = 51; // user
 	ConversationLimitUpdated = 52;
 
 	ConversationRequestWaitTimeout = 60;
 
 	ConversationListEventsRequested = 61;
+
+	ChannelIntegrateRequested = 63;         // Integration -> integration
+	ChannelIntegrationDeleteRequested = 65;     // id -> empty
+	ChannelIntegrationUpdateRequested = 66;  // integration -> integration
+	ChannelIntegrationListRequested = 67; // id -> integrations
+	ChannelIntegrationGetRequested = 68; // id -> integration
+
+	CannedResponseCreateRequested = 80; // canned response
+	CannedResponseUpdateRequested = 81; // canned response
+	CannedResponseDeleteRequested = 82; // id
+	CannedResponseReadRequested = 83; // id
+	CannedResponseListRequested = 84; // search
+
+	TagCreateRequested = 85; // tag
+	TagUpdateRequested = 86; // tag
+	TagReadRequested = 87; // id
+	TagDeleteRequested = 88; // id
+	TagListRequested = 89; // search
+
+	ConversationMessageAckRequested = 90;
+	ConversationMessageReceiveRequested = 91;
+	ConversationMessageSeeRequested = 92;
 }
 
 message RequestState {
@@ -245,15 +305,39 @@ message Reaction {
 }
 
 message Message {
+	optional common.Context ctx = 1;
+	optional string conversation_id = 14;
+	optional string id = 11;
 	optional string text = 2;
 	optional string format = 3;
 	repeated Attachment attachments = 4;
 
 	repeated Reaction reactions = 7;
-	optional int32 opened = 8;
-	optional bool delivered = 9;
 
-	repeated Field fields = 10;
+	repeated Field fields =	10;
+	optional Computed computed = 12;
+}
+
+message Computed {
+	repeated Seen seen = 4;
+	repeated Ack ack = 5;
+	repeated Received received = 6;
+}
+
+message Seen {
+	optional string member_id = 6;
+	optional int64 at = 4;
+}
+
+message Ack {
+	optional string member_id = 5;
+	optional string error = 6;
+	optional int64 at = 4;
+}
+
+message Received {
+	optional string member_id = 4;
+	optional int64 at = 5;
 }
 
 message Field {
@@ -261,9 +345,15 @@ message Field {
 	optional string key = 2;
 }
 
+enum ButtonType {
+	url = 0;
+	postback = 1;
+};
+
 message Button {
 	optional string type = 2;
 
+	optional string id = 15;
 	// post back
 	optional string title = 3;
 	optional string payload = 4;
@@ -296,13 +386,14 @@ message Attachment {
 
 	// generic
 	repeated GenericElementTemplate elements = 8;
-
 	// preview
 	optional string title = 9;
 	optional string color = 10;
 	optional string pretext = 11;
 
 	repeated Button buttons = 16;
+	//repeated string inputtype = 17;
+
 }
 
 enum ActionType {
@@ -316,4 +407,47 @@ enum AttachmentType {
 	generic = 3;
 	preview = 4;
 	button = 5;
+	input = 6;
+}
+
+message Tag {
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string account_id = 3;
+	optional string title = 4;
+	optional int64 created = 5;
+	optional int64 modified = 6;
+	optional string creator_id = 7;
+	optional string color = 8;
+}
+
+message CannedResponse {
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string account_id = 3;
+	optional string text = 5;
+	repeated string keys = 6;
+	optional int64 created = 7;
+	optional int64 modified = 8;
+	optional string creator = 9;
+}
+
+message CannedResponses {
+	optional common.Context ctx = 1;
+	repeated CannedResponse responses = 3;
+}
+
+message Tags {
+	optional common.Context ctx = 1;
+	optional Tag tags = 4;
+}
+
+enum PlatformType {
+	message = 0;
+	email = 2;
+}
+
+message Postback {
+	optional Message message = 2;
+	optional Button button = 3;
 }
