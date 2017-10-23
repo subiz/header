@@ -4,7 +4,7 @@ package event;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 import "bitbucket.org/subiz/header/lang/lang.proto";
-import "bitbucket.org/subiz/header/auth/auth.proto";
+//import "bitbucket.org/subiz/header/auth/auth.proto";
 
 import "bitbucket.org/subiz/header/account/account.proto";
 import "bitbucket.org/subiz/header/conversation/conversation.proto";
@@ -21,7 +21,7 @@ message UnsubscribeMessage {
 	optional string sub_id = 4;
 }
 
-enum EVENT {
+enum Event {
 	//Out_EventCreated = 0;
 	Send_ = 1;
 	ApiReply = 2;
@@ -36,9 +36,10 @@ message RawEvents {
 	repeated RawEvent events = 4;
 }
 
-message Conversation {
-	optional string id = 3;
-	optional string channel_id = 4;
+message By {
+	optional common.Device device = 2;
+	optional string member_id = 3;
+	optional string client_id = 4;
 }
 
 message RawEvent {
@@ -48,22 +49,49 @@ message RawEvent {
 	optional string id = 3;
 	optional string account_id = 4;
 	optional int64 created = 8;
-	optional string type = 9;
+	optional string type = 9; // eventtype
 	//optional string channel_id = 10;
 	repeated string topics = 11;
 	//---
-	optional auth.By by = 12;
+	//optional string by_user_id = 12;
+
+	optional By by = 50;
 	optional string object = 13;
 	//optional string conversation_id = 15;
 	optional string conversation_id = 20;
-	optional string channel_id = 40;
+	//optional string channel_id = 40;
 
 	oneof data {
 		account.Account account = 38;
 		account.Agent agent = 36;
 		conversation.Message message = 37;
 		conversation.Conversation conversation = 39;
+		conversation.Postback postback = 40;
+		//conversation.Integration channel_integration = 41;
 	};
+}
+
+enum Type {
+	conversation_updated = 9;
+	message_sent = 10;
+	//conversation_started = 1;
+	conversation_joined = 2;
+
+	//conversation_message = 3;
+	conversation_left = 4;
+	//conversation_closed = 5;
+	conversation_tagged = 6;
+	conversation_untagged = 7;
+
+	//conversation_waiting = 8;
+	channel_deintegrated = 20;
+	channel_integrated = 21;
+
+	message_seen = 30;
+	message_acked = 31;
+	message_received = 32;
+	conversation_member_typing = 33;
+	conversation_postbacked = 34;
 }
 
 message Reply {
@@ -77,21 +105,6 @@ message Reply {
 	optional int32 err_class = 15;
 
 	optional bytes payload = 7;
-}
-
-enum EventType {
-	conversation_updated = 9;
-	message_sent = 10;
-  //conversation_started = 1;
-	conversation_joined = 2;
-
-	//conversation_message = 3;
-	conversation_left = 4;
-	//conversation_closed = 5;
-	conversation_tagged = 6;
-	conversation_untagged = 7;
-
-	//conversation_waiting = 8;
 }
 
 message Error {
@@ -136,4 +149,7 @@ enum Object {
 	account = 0;
 	conversation = 1;
 	message = 2;
+	integration = 3;
+	agent = 4;
+	postback = 5;
 }

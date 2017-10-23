@@ -16,7 +16,6 @@ _sym_db = _symbol_database.Default()
 
 from bitbucket.org.subiz.header.common import common_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2
 from bitbucket.org.subiz.header.lang import lang_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_lang_dot_lang__pb2
-from bitbucket.org.subiz.header.auth import auth_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2
 from bitbucket.org.subiz.header.account import account_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_account_dot_account__pb2
 from bitbucket.org.subiz.header.conversation import conversation_pb2 as bitbucket_dot_org_dot_subiz_dot_header_dot_conversation_dot_conversation__pb2
 
@@ -25,13 +24,13 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='event/event.proto',
   package='event',
   syntax='proto2',
-  serialized_pb=_b('\n\x11\x65vent/event.proto\x12\x05\x65vent\x1a.bitbucket.org/subiz/header/common/common.proto\x1a*bitbucket.org/subiz/header/lang/lang.proto\x1a*bitbucket.org/subiz/header/auth/auth.proto\x1a\x30\x62itbucket.org/subiz/header/account/account.proto\x1a:bitbucket.org/subiz/header/conversation/conversation.proto\"f\n\x16RawEventCreatedPayload\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06sub_id\x18\x03 \x01(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0f\n\x07payload\x18\x05 \x01(\t\"3\n\x12UnsubscribeMessage\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x04 \x01(\t\",\n\tRawEvents\x12\x1f\n\x06\x65vents\x18\x04 \x03(\x0b\x32\x0f.event.RawEvent\".\n\x0c\x43onversation\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\nchannel_id\x18\x04 \x01(\t\"\x90\x05\n\x08RawEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0f\n\x07\x63reated\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x0e\n\x06topics\x18\x0b \x03(\t\x12\x14\n\x02\x62y\x18\x0c \x01(\x0b\x32\x08.auth.By\x12\x0e\n\x06object\x18\r \x01(\t\x12\x17\n\x0f\x63onversation_id\x18\x14 \x01(\t\x12\x12\n\nchannel_id\x18( \x01(\t\x12#\n\x07\x61\x63\x63ount\x18& \x01(\x0b\x32\x10.account.AccountH\x00\x12\x1f\n\x05\x61gent\x18$ \x01(\x0b\x32\x0e.account.AgentH\x00\x12(\n\x07message\x18% \x01(\x0b\x32\x15.conversation.MessageH\x00\x12\x32\n\x0c\x63onversation\x18\' \x01(\x0b\x32\x1a.conversation.ConversationH\x00\x42\x06\n\x04\x64\x61taJ\x04\x08\x10\x10\x11J\x04\x08\x11\x10\x12J\x04\x08\x12\x10\x13J\x04\x08\x13\x10\x14J\x04\x08\x15\x10\x16J\x04\x08\x16\x10\x17J\x04\x08\x17\x10\x18J\x04\x08\x18\x10\x19J\x04\x08\x19\x10\x1aJ\x04\x08\x1a\x10\x1bJ\x04\x08\x1b\x10\x1cJ\x04\x08\x1c\x10\x1dJ\x04\x08\x1d\x10\x1eJ\x04\x08\x1e\x10\x1fJ\x04\x08\x1f\x10 J\x04\x08 \x10!J\x04\x08!\x10\"J\x04\x08#\x10$R\x05stateR\nmessage_toR\x08page_urlR\npage_titleR\x10\x62rowser_languageR\x0b\x64\x65vice_typeR\x07user_idR\tjoiner_idR\x0bjoiner_typeR\tleaver_idR\x0b\x61ttachmentsR\x04textR\x06\x66ormatR\x0b\x64\x65liveriedsR\x06\x66ieldsR\x08\x63omputed\"\xab\x01\n\x05Reply\x12\x1c\n\x03\x63tx\x18\x03 \x01(\x0b\x32\x0f.common.Context\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0b\n\x03\x65rr\x18\n \x01(\x08\x12\x17\n\x0f\x65rr_description\x18\x0c \x01(\t\x12\x19\n\x08\x65rr_code\x18\r \x01(\x0e\x32\x07.lang.T\x12\x11\n\terr_class\x18\x0f \x01(\x05\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"?\n\x05\x45rror\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"\x9b\x01\n\x0cSubscription\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x07 \x01(\t\x12\x14\n\x0ctarget_topic\x18\n \x01(\t\x12\x12\n\ntarget_key\x18\x0b \x01(\t\x12\x0c\n\x04ttls\x18\x0c \x01(\x03J\x04\x08\r\x10\x0eR\x10target_partition*\x7f\n\x05\x45VENT\x12\t\n\x05Send_\x10\x01\x12\x0c\n\x08\x41piReply\x10\x02\x12\x13\n\x0fRawEventCreated\x10\x03\x12\r\n\tSubscribe\x10\x04\x12\x12\n\x0eSubscribeReply\x10\x06\x12\x0f\n\x0bUnsubscribe\x10\x05\x12\x14\n\x10UnsubscribeReply\x10\x07*\x9b\x01\n\tEventType\x12\x18\n\x14\x63onversation_updated\x10\t\x12\x10\n\x0cmessage_sent\x10\n\x12\x17\n\x13\x63onversation_joined\x10\x02\x12\x15\n\x11\x63onversation_left\x10\x04\x12\x17\n\x13\x63onversation_tagged\x10\x06\x12\x19\n\x15\x63onversation_untagged\x10\x07*\'\n\x0eSubscriberType\x12\x08\n\x04user\x10\x00\x12\x0b\n\x07\x63hannel\x10\x01*\'\n\tSubPrefix\x12\x0b\n\x07Webhook\x10\x00\x12\r\n\tWebsocket\x10\x01*4\n\x06Object\x12\x0b\n\x07\x61\x63\x63ount\x10\x00\x12\x10\n\x0c\x63onversation\x10\x01\x12\x0b\n\x07message\x10\x02')
+  serialized_pb=_b('\n\x11\x65vent/event.proto\x12\x05\x65vent\x1a.bitbucket.org/subiz/header/common/common.proto\x1a*bitbucket.org/subiz/header/lang/lang.proto\x1a\x30\x62itbucket.org/subiz/header/account/account.proto\x1a:bitbucket.org/subiz/header/conversation/conversation.proto\"f\n\x16RawEventCreatedPayload\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06sub_id\x18\x03 \x01(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0f\n\x07payload\x18\x05 \x01(\t\"3\n\x12UnsubscribeMessage\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x04 \x01(\t\",\n\tRawEvents\x12\x1f\n\x06\x65vents\x18\x04 \x03(\x0b\x32\x0f.event.RawEvent\"J\n\x02\x42y\x12\x1e\n\x06\x64\x65vice\x18\x02 \x01(\x0b\x32\x0e.common.Device\x12\x11\n\tmember_id\x18\x03 \x01(\t\x12\x11\n\tclient_id\x18\x04 \x01(\t\"\xa9\x05\n\x08RawEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0f\n\x07\x63reated\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x0e\n\x06topics\x18\x0b \x03(\t\x12\x15\n\x02\x62y\x18\x32 \x01(\x0b\x32\t.event.By\x12\x0e\n\x06object\x18\r \x01(\t\x12\x17\n\x0f\x63onversation_id\x18\x14 \x01(\t\x12#\n\x07\x61\x63\x63ount\x18& \x01(\x0b\x32\x10.account.AccountH\x00\x12\x1f\n\x05\x61gent\x18$ \x01(\x0b\x32\x0e.account.AgentH\x00\x12(\n\x07message\x18% \x01(\x0b\x32\x15.conversation.MessageH\x00\x12\x32\n\x0c\x63onversation\x18\' \x01(\x0b\x32\x1a.conversation.ConversationH\x00\x12*\n\x08postback\x18( \x01(\x0b\x32\x16.conversation.PostbackH\x00\x42\x06\n\x04\x64\x61taJ\x04\x08\x10\x10\x11J\x04\x08\x11\x10\x12J\x04\x08\x12\x10\x13J\x04\x08\x13\x10\x14J\x04\x08\x15\x10\x16J\x04\x08\x16\x10\x17J\x04\x08\x17\x10\x18J\x04\x08\x18\x10\x19J\x04\x08\x19\x10\x1aJ\x04\x08\x1a\x10\x1bJ\x04\x08\x1b\x10\x1cJ\x04\x08\x1c\x10\x1dJ\x04\x08\x1d\x10\x1eJ\x04\x08\x1e\x10\x1fJ\x04\x08\x1f\x10 J\x04\x08 \x10!J\x04\x08!\x10\"J\x04\x08#\x10$R\x05stateR\nmessage_toR\x08page_urlR\npage_titleR\x10\x62rowser_languageR\x0b\x64\x65vice_typeR\x07user_idR\tjoiner_idR\x0bjoiner_typeR\tleaver_idR\x0b\x61ttachmentsR\x04textR\x06\x66ormatR\x0b\x64\x65liveriedsR\x06\x66ieldsR\x08\x63omputed\"\xab\x01\n\x05Reply\x12\x1c\n\x03\x63tx\x18\x03 \x01(\x0b\x32\x0f.common.Context\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0b\n\x03\x65rr\x18\n \x01(\x08\x12\x17\n\x0f\x65rr_description\x18\x0c \x01(\t\x12\x19\n\x08\x65rr_code\x18\r \x01(\x0e\x32\x07.lang.T\x12\x11\n\terr_class\x18\x0f \x01(\x05\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"?\n\x05\x45rror\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"\x9b\x01\n\x0cSubscription\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x07 \x01(\t\x12\x14\n\x0ctarget_topic\x18\n \x01(\t\x12\x12\n\ntarget_key\x18\x0b \x01(\t\x12\x0c\n\x04ttls\x18\x0c \x01(\x03J\x04\x08\r\x10\x0eR\x10target_partition*\x7f\n\x05\x45vent\x12\t\n\x05Send_\x10\x01\x12\x0c\n\x08\x41piReply\x10\x02\x12\x13\n\x0fRawEventCreated\x10\x03\x12\r\n\tSubscribe\x10\x04\x12\x12\n\x0eSubscribeReply\x10\x06\x12\x0f\n\x0bUnsubscribe\x10\x05\x12\x14\n\x10UnsubscribeReply\x10\x07*\xc0\x02\n\x04Type\x12\x18\n\x14\x63onversation_updated\x10\t\x12\x10\n\x0cmessage_sent\x10\n\x12\x17\n\x13\x63onversation_joined\x10\x02\x12\x15\n\x11\x63onversation_left\x10\x04\x12\x17\n\x13\x63onversation_tagged\x10\x06\x12\x19\n\x15\x63onversation_untagged\x10\x07\x12\x18\n\x14\x63hannel_deintegrated\x10\x14\x12\x16\n\x12\x63hannel_integrated\x10\x15\x12\x10\n\x0cmessage_seen\x10\x1e\x12\x11\n\rmessage_acked\x10\x1f\x12\x14\n\x10message_received\x10 \x12\x1e\n\x1a\x63onversation_member_typing\x10!\x12\x1b\n\x17\x63onversation_postbacked\x10\"*\'\n\x0eSubscriberType\x12\x08\n\x04user\x10\x00\x12\x0b\n\x07\x63hannel\x10\x01*\'\n\tSubPrefix\x12\x0b\n\x07Webhook\x10\x00\x12\r\n\tWebsocket\x10\x01*^\n\x06Object\x12\x0b\n\x07\x61\x63\x63ount\x10\x00\x12\x10\n\x0c\x63onversation\x10\x01\x12\x0b\n\x07message\x10\x02\x12\x0f\n\x0bintegration\x10\x03\x12\t\n\x05\x61gent\x10\x04\x12\x0c\n\x08postback\x10\x05')
   ,
-  dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_lang_dot_lang__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_account_dot_account__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_conversation_dot_conversation__pb2.DESCRIPTOR,])
+  dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_lang_dot_lang__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_account_dot_account__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_conversation_dot_conversation__pb2.DESCRIPTOR,])
 
 _EVENT = _descriptor.EnumDescriptor(
-  name='EVENT',
-  full_name='event.EVENT',
+  name='Event',
+  full_name='event.Event',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -66,15 +65,15 @@ _EVENT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1581,
-  serialized_end=1708,
+  serialized_start=1590,
+  serialized_end=1717,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
-EVENT = enum_type_wrapper.EnumTypeWrapper(_EVENT)
-_EVENTTYPE = _descriptor.EnumDescriptor(
-  name='EventType',
-  full_name='event.EventType',
+Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
+_TYPE = _descriptor.EnumDescriptor(
+  name='Type',
+  full_name='event.Type',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -102,15 +101,43 @@ _EVENTTYPE = _descriptor.EnumDescriptor(
       name='conversation_untagged', index=5, number=7,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='channel_deintegrated', index=6, number=20,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='channel_integrated', index=7, number=21,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='message_seen', index=8, number=30,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='message_acked', index=9, number=31,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='message_received', index=10, number=32,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_member_typing', index=11, number=33,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_postbacked', index=12, number=34,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1711,
-  serialized_end=1866,
+  serialized_start=1720,
+  serialized_end=2040,
 )
-_sym_db.RegisterEnumDescriptor(_EVENTTYPE)
+_sym_db.RegisterEnumDescriptor(_TYPE)
 
-EventType = enum_type_wrapper.EnumTypeWrapper(_EVENTTYPE)
+Type = enum_type_wrapper.EnumTypeWrapper(_TYPE)
 _SUBSCRIBERTYPE = _descriptor.EnumDescriptor(
   name='SubscriberType',
   full_name='event.SubscriberType',
@@ -128,8 +155,8 @@ _SUBSCRIBERTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1868,
-  serialized_end=1907,
+  serialized_start=2042,
+  serialized_end=2081,
 )
 _sym_db.RegisterEnumDescriptor(_SUBSCRIBERTYPE)
 
@@ -151,8 +178,8 @@ _SUBPREFIX = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1909,
-  serialized_end=1948,
+  serialized_start=2083,
+  serialized_end=2122,
 )
 _sym_db.RegisterEnumDescriptor(_SUBPREFIX)
 
@@ -175,11 +202,23 @@ _OBJECT = _descriptor.EnumDescriptor(
       name='message', index=2, number=2,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='integration', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='agent', index=4, number=4,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='postback', index=5, number=5,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1950,
-  serialized_end=2002,
+  serialized_start=2124,
+  serialized_end=2218,
 )
 _sym_db.RegisterEnumDescriptor(_OBJECT)
 
@@ -197,6 +236,13 @@ conversation_joined = 2
 conversation_left = 4
 conversation_tagged = 6
 conversation_untagged = 7
+channel_deintegrated = 20
+channel_integrated = 21
+message_seen = 30
+message_acked = 31
+message_received = 32
+conversation_member_typing = 33
+conversation_postbacked = 34
 user = 0
 channel = 1
 Webhook = 0
@@ -204,6 +250,9 @@ Websocket = 1
 account = 0
 conversation = 1
 message = 2
+integration = 3
+agent = 4
+postback = 5
 
 
 
@@ -254,8 +303,8 @@ _RAWEVENTCREATEDPAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=274,
-  serialized_end=376,
+  serialized_start=230,
+  serialized_end=332,
 )
 
 
@@ -292,8 +341,8 @@ _UNSUBSCRIBEMESSAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=378,
-  serialized_end=429,
+  serialized_start=334,
+  serialized_end=385,
 )
 
 
@@ -323,27 +372,34 @@ _RAWEVENTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=431,
-  serialized_end=475,
+  serialized_start=387,
+  serialized_end=431,
 )
 
 
-_CONVERSATION = _descriptor.Descriptor(
-  name='Conversation',
-  full_name='event.Conversation',
+_BY = _descriptor.Descriptor(
+  name='By',
+  full_name='event.By',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='event.Conversation.id', index=0,
+      name='device', full_name='event.By.device', index=0,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='member_id', full_name='event.By.member_id', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='channel_id', full_name='event.Conversation.channel_id', index=1,
+      name='client_id', full_name='event.By.client_id', index=2,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -361,8 +417,8 @@ _CONVERSATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=477,
-  serialized_end=523,
+  serialized_start=433,
+  serialized_end=507,
 )
 
 
@@ -417,7 +473,7 @@ _RAWEVENT = _descriptor.Descriptor(
       options=None),
     _descriptor.FieldDescriptor(
       name='by', full_name='event.RawEvent.by', index=6,
-      number=12, type=11, cpp_type=10, label=1,
+      number=50, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -437,36 +493,36 @@ _RAWEVENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='channel_id', full_name='event.RawEvent.channel_id', index=9,
-      number=40, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='account', full_name='event.RawEvent.account', index=10,
+      name='account', full_name='event.RawEvent.account', index=9,
       number=38, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='agent', full_name='event.RawEvent.agent', index=11,
+      name='agent', full_name='event.RawEvent.agent', index=10,
       number=36, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='message', full_name='event.RawEvent.message', index=12,
+      name='message', full_name='event.RawEvent.message', index=11,
       number=37, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='conversation', full_name='event.RawEvent.conversation', index=13,
+      name='conversation', full_name='event.RawEvent.conversation', index=12,
       number=39, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='postback', full_name='event.RawEvent.postback', index=13,
+      number=40, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -486,8 +542,8 @@ _RAWEVENT = _descriptor.Descriptor(
       name='data', full_name='event.RawEvent.data',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=526,
-  serialized_end=1182,
+  serialized_start=510,
+  serialized_end=1191,
 )
 
 
@@ -566,8 +622,8 @@ _REPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1185,
-  serialized_end=1356,
+  serialized_start=1194,
+  serialized_end=1365,
 )
 
 
@@ -611,8 +667,8 @@ _ERROR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1358,
-  serialized_end=1421,
+  serialized_start=1367,
+  serialized_end=1430,
 )
 
 
@@ -677,18 +733,20 @@ _SUBSCRIPTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1424,
-  serialized_end=1579,
+  serialized_start=1433,
+  serialized_end=1588,
 )
 
 _RAWEVENTCREATEDPAYLOAD.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _RAWEVENTS.fields_by_name['events'].message_type = _RAWEVENT
+_BY.fields_by_name['device'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._DEVICE
 _RAWEVENT.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
-_RAWEVENT.fields_by_name['by'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2._BY
+_RAWEVENT.fields_by_name['by'].message_type = _BY
 _RAWEVENT.fields_by_name['account'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_account_dot_account__pb2._ACCOUNT
 _RAWEVENT.fields_by_name['agent'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_account_dot_account__pb2._AGENT
 _RAWEVENT.fields_by_name['message'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_conversation_dot_conversation__pb2._MESSAGE
 _RAWEVENT.fields_by_name['conversation'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_conversation_dot_conversation__pb2._CONVERSATION
+_RAWEVENT.fields_by_name['postback'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_conversation_dot_conversation__pb2._POSTBACK
 _RAWEVENT.oneofs_by_name['data'].fields.append(
   _RAWEVENT.fields_by_name['account'])
 _RAWEVENT.fields_by_name['account'].containing_oneof = _RAWEVENT.oneofs_by_name['data']
@@ -701,19 +759,22 @@ _RAWEVENT.fields_by_name['message'].containing_oneof = _RAWEVENT.oneofs_by_name[
 _RAWEVENT.oneofs_by_name['data'].fields.append(
   _RAWEVENT.fields_by_name['conversation'])
 _RAWEVENT.fields_by_name['conversation'].containing_oneof = _RAWEVENT.oneofs_by_name['data']
+_RAWEVENT.oneofs_by_name['data'].fields.append(
+  _RAWEVENT.fields_by_name['postback'])
+_RAWEVENT.fields_by_name['postback'].containing_oneof = _RAWEVENT.oneofs_by_name['data']
 _REPLY.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _REPLY.fields_by_name['err_code'].enum_type = bitbucket_dot_org_dot_subiz_dot_header_dot_lang_dot_lang__pb2._T
 _SUBSCRIPTION.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['RawEventCreatedPayload'] = _RAWEVENTCREATEDPAYLOAD
 DESCRIPTOR.message_types_by_name['UnsubscribeMessage'] = _UNSUBSCRIBEMESSAGE
 DESCRIPTOR.message_types_by_name['RawEvents'] = _RAWEVENTS
-DESCRIPTOR.message_types_by_name['Conversation'] = _CONVERSATION
+DESCRIPTOR.message_types_by_name['By'] = _BY
 DESCRIPTOR.message_types_by_name['RawEvent'] = _RAWEVENT
 DESCRIPTOR.message_types_by_name['Reply'] = _REPLY
 DESCRIPTOR.message_types_by_name['Error'] = _ERROR
 DESCRIPTOR.message_types_by_name['Subscription'] = _SUBSCRIPTION
-DESCRIPTOR.enum_types_by_name['EVENT'] = _EVENT
-DESCRIPTOR.enum_types_by_name['EventType'] = _EVENTTYPE
+DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
+DESCRIPTOR.enum_types_by_name['Type'] = _TYPE
 DESCRIPTOR.enum_types_by_name['SubscriberType'] = _SUBSCRIBERTYPE
 DESCRIPTOR.enum_types_by_name['SubPrefix'] = _SUBPREFIX
 DESCRIPTOR.enum_types_by_name['Object'] = _OBJECT
@@ -740,12 +801,12 @@ RawEvents = _reflection.GeneratedProtocolMessageType('RawEvents', (_message.Mess
   ))
 _sym_db.RegisterMessage(RawEvents)
 
-Conversation = _reflection.GeneratedProtocolMessageType('Conversation', (_message.Message,), dict(
-  DESCRIPTOR = _CONVERSATION,
+By = _reflection.GeneratedProtocolMessageType('By', (_message.Message,), dict(
+  DESCRIPTOR = _BY,
   __module__ = 'event.event_pb2'
-  # @@protoc_insertion_point(class_scope:event.Conversation)
+  # @@protoc_insertion_point(class_scope:event.By)
   ))
-_sym_db.RegisterMessage(Conversation)
+_sym_db.RegisterMessage(By)
 
 RawEvent = _reflection.GeneratedProtocolMessageType('RawEvent', (_message.Message,), dict(
   DESCRIPTOR = _RAWEVENT,
