@@ -1,2 +1,2 @@
-node rest/index.js
-./protoc-go.sh
+# node rest/index.js
+bash ./protoc-go.sh
