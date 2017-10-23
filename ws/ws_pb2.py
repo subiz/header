@@ -20,8 +20,8 @@ from bitbucket.org.subiz.header.common import common_pb2 as bitbucket_dot_org_do
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='ws/ws.proto',
   package='ws',
-  syntax='proto2',
-  serialized_pb=_b('\n\x0bws/ws.proto\x12\x02ws\x1a.bitbucket.org/subiz/header/common/common.proto\"a\n\tSubscribe\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06\x65vents\x18\x03 \x03(\t\x12\x0f\n\x07mask_id\x18\x04 \x01(\t\x12\x15\n\rconnection_id\x18\x05 \x01(\t\"B\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x15\n\rconnection_id\x18\x02 \x01(\t\"&\n\x07Payload\x12\n\n\x02id\x18\x03 \x01(\x03\x12\x0f\n\x07message\x18\x04 \x01(\t*\x13\n\x05\x45vent\x12\n\n\x06WsSend\x10\x03')
+  syntax='proto3',
+  serialized_pb=_b('\n\x0bws/ws.proto\x12\x02ws\x1a.bitbucket.org/subiz/header/common/common.proto\"C\n\tSubscribe\x12\x0e\n\x06\x65vents\x18\x03 \x01(\t\x12\x0f\n\x07mask_id\x18\x04 \x01(\t\x12\x15\n\rconnection_id\x18\x05 \x01(\t\"B\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x15\n\rconnection_id\x18\x02 \x01(\t\"&\n\x07Payload\x12\n\n\x02id\x18\x03 \x01(\x03\x12\x0f\n\x07message\x18\x04 \x01(\t*\x13\n\x05\x45vent\x12\n\n\x06WsSend\x10\x00\x62\x06proto3')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -32,19 +32,19 @@ _EVENT = _descriptor.EnumDescriptor(
   file=DESCRIPTOR,
   values=[
     _descriptor.EnumValueDescriptor(
-      name='WsSend', index=0, number=3,
+      name='WsSend', index=0, number=0,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=274,
-  serialized_end=293,
+  serialized_start=244,
+  serialized_end=263,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
 Event = enum_type_wrapper.EnumTypeWrapper(_EVENT)
-WsSend = 3
+WsSend = 0
 
 
 
@@ -56,28 +56,21 @@ _SUBSCRIBE = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ctx', full_name='ws.Subscribe.ctx', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='events', full_name='ws.Subscribe.events', index=0,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='events', full_name='ws.Subscribe.events', index=1,
-      number=3, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='mask_id', full_name='ws.Subscribe.mask_id', index=2,
+      name='mask_id', full_name='ws.Subscribe.mask_id', index=1,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='connection_id', full_name='ws.Subscribe.connection_id', index=3,
+      name='connection_id', full_name='ws.Subscribe.connection_id', index=2,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -91,12 +84,12 @@ _SUBSCRIBE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
   serialized_start=67,
-  serialized_end=164,
+  serialized_end=134,
 )
 
 
@@ -129,12 +122,12 @@ _LISTREQUEST = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=166,
-  serialized_end=232,
+  serialized_start=136,
+  serialized_end=202,
 )
 
 
@@ -167,15 +160,14 @@ _PAYLOAD = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
+  syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=234,
-  serialized_end=272,
+  serialized_start=204,
+  serialized_end=242,
 )
 
-_SUBSCRIBE.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _LISTREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['Subscribe'] = _SUBSCRIBE
 DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST

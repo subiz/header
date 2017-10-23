@@ -21,7 +21,7 @@ message ListRequest {
 }
 
 enum Event {
-	WsSend = 3;
+	WsSend = 0;
 }
 
 message Payload {
