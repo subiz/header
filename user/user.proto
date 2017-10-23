@@ -91,6 +91,13 @@ message GreetingRequest {
 	optional string uuid = 4;
 }
 
+message CreateRequest {
+	optional string account_id = 2;
+	optional string challenge_id = 3;
+	optional string answer = 4;
+
+}
+
 enum Event {
 	UserReadRequested = 0; // Id
 
