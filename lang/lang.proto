@@ -57,4 +57,5 @@ enum T {
 
 	invalid_message_id = 80;
 	invalid_mask = 81;
+	randomize_error = 82;
 }
