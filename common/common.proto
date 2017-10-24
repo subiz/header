@@ -12,6 +12,12 @@ message Id {
 	string id = 3;
 }
 
+message Ids {
+	Context ctx = 1;
+  string account_id = 2;
+	repeated string ids = 3;
+}
+
 message Context {
 	reserved "reply_partition";
 	reserved 5;

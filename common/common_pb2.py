@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='common/common.proto',
   package='common',
   syntax='proto3',
-  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a*bitbucket.org/subiz/header/auth/auth.proto\"\x07\n\x05\x45mpty\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"\xd1\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c\x12\x11\n\treply_key\x18\x08 \x01(\t\x12!\n\tby_device\x18\n \x01(\x0b\x32\x0e.common.DeviceJ\x04\x08\x05\x10\x06R\x0freply_partition\"g\n\x06\x44\x65vice\x12\n\n\x02ip\x18\x03 \x01(\t\x12\x12\n\nuser_agent\x18\x04 \x01(\t\x12\x19\n\x11screen_resolution\x18\x05 \x01(\t\x12\x10\n\x08timezone\x18\x06 \x01(\t\x12\x10\n\x08language\x18\x07 \x01(\tb\x06proto3')
+  serialized_pb=_b('\n\x13\x63ommon/common.proto\x12\x06\x63ommon\x1a*bitbucket.org/subiz/header/auth/auth.proto\"\x07\n\x05\x45mpty\"B\n\x02Id\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\t\"D\n\x03Ids\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\"\xd1\x01\n\x07\x43ontext\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0c\n\x04node\x18\x03 \x01(\t\x12\x13\n\x0breply_topic\x18\x04 \x01(\t\x12$\n\ncredential\x18\x06 \x01(\x0b\x32\x10.auth.Credential\x12\x0f\n\x07tracing\x18\x07 \x01(\x0c\x12\x11\n\treply_key\x18\x08 \x01(\t\x12!\n\tby_device\x18\n \x01(\x0b\x32\x0e.common.DeviceJ\x04\x08\x05\x10\x06R\x0freply_partition\"g\n\x06\x44\x65vice\x12\n\n\x02ip\x18\x03 \x01(\t\x12\x12\n\nuser_agent\x18\x04 \x01(\t\x12\x19\n\x11screen_resolution\x18\x05 \x01(\t\x12\x10\n\x08timezone\x18\x06 \x01(\t\x12\x10\n\x08language\x18\x07 \x01(\tb\x06proto3')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2.DESCRIPTOR,])
 
@@ -93,6 +93,51 @@ _ID = _descriptor.Descriptor(
   ],
   serialized_start=84,
   serialized_end=150,
+)
+
+
+_IDS = _descriptor.Descriptor(
+  name='Ids',
+  full_name='common.Ids',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='common.Ids.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='common.Ids.account_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ids', full_name='common.Ids.ids', index=2,
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=152,
+  serialized_end=220,
 )
 
 
@@ -171,8 +216,8 @@ _CONTEXT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=153,
-  serialized_end=362,
+  serialized_start=223,
+  serialized_end=432,
 )
 
 
@@ -230,15 +275,17 @@ _DEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=364,
-  serialized_end=467,
+  serialized_start=434,
+  serialized_end=537,
 )
 
 _ID.fields_by_name['ctx'].message_type = _CONTEXT
+_IDS.fields_by_name['ctx'].message_type = _CONTEXT
 _CONTEXT.fields_by_name['credential'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_auth_dot_auth__pb2._CREDENTIAL
 _CONTEXT.fields_by_name['by_device'].message_type = _DEVICE
 DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['Id'] = _ID
+DESCRIPTOR.message_types_by_name['Ids'] = _IDS
 DESCRIPTOR.message_types_by_name['Context'] = _CONTEXT
 DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -256,6 +303,13 @@ Id = _reflection.GeneratedProtocolMessageType('Id', (_message.Message,), dict(
   # @@protoc_insertion_point(class_scope:common.Id)
   ))
 _sym_db.RegisterMessage(Id)
+
+Ids = _reflection.GeneratedProtocolMessageType('Ids', (_message.Message,), dict(
+  DESCRIPTOR = _IDS,
+  __module__ = 'common.common_pb2'
+  # @@protoc_insertion_point(class_scope:common.Ids)
+  ))
+_sym_db.RegisterMessage(Ids)
 
 Context = _reflection.GeneratedProtocolMessageType('Context', (_message.Message,), dict(
   DESCRIPTOR = _CONTEXT,
