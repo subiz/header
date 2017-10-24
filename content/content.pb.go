@@ -11,8 +11,6 @@ It has these top-level messages:
 	KeyValue
 	Content
 	Contents
-	Ids
-	Id
 	Empty
 	ListRequest
 */
@@ -21,11 +19,7 @@ package content
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-
-import (
-	context "golang.org/x/net/context"
-	grpc "google.golang.org/grpc"
-)
+import common "bitbucket.org/subiz/header/common"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -64,27 +58,36 @@ func (m *KeyValue) GetValue() string {
 }
 
 type Content struct {
-	Id               *string     `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
-	AccountId        *string     `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Description      *string     `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
-	Title            *string     `protobuf:"bytes,6,opt,name=title" json:"title,omitempty"`
-	Link             *string     `protobuf:"bytes,7,opt,name=link" json:"link,omitempty"`
-	Labels           []string    `protobuf:"bytes,8,rep,name=labels" json:"labels,omitempty"`
-	Availability     *bool       `protobuf:"varint,9,opt,name=availability" json:"availability,omitempty"`
-	Price            *string     `protobuf:"bytes,10,opt,name=price" json:"price,omitempty"`
-	Currency         *string     `protobuf:"bytes,11,opt,name=currency" json:"currency,omitempty"`
-	SalePrice        *string     `protobuf:"bytes,12,opt,name=sale_price,json=salePrice" json:"sale_price,omitempty"`
-	Fields           []*KeyValue `protobuf:"bytes,13,rep,name=fields" json:"fields,omitempty"`
-	Categories       []string    `protobuf:"bytes,14,rep,name=categories" json:"categories,omitempty"`
-	RelatedIds       []string    `protobuf:"bytes,15,rep,name=related_ids,json=relatedIds" json:"related_ids,omitempty"`
-	AttachmentUrl    *string     `protobuf:"bytes,16,opt,name=attachment_url,json=attachmentUrl" json:"attachment_url,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
+	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Id               *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
+	AccountId        *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Type             *string         `protobuf:"bytes,4,opt,name=type" json:"type,omitempty"`
+	Description      *string         `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
+	Title            *string         `protobuf:"bytes,6,opt,name=title" json:"title,omitempty"`
+	Link             *string         `protobuf:"bytes,7,opt,name=link" json:"link,omitempty"`
+	Labels           []string        `protobuf:"bytes,8,rep,name=labels" json:"labels,omitempty"`
+	Availability     *bool           `protobuf:"varint,9,opt,name=availability" json:"availability,omitempty"`
+	Price            *string         `protobuf:"bytes,10,opt,name=price" json:"price,omitempty"`
+	Currency         *string         `protobuf:"bytes,11,opt,name=currency" json:"currency,omitempty"`
+	SalePrice        *string         `protobuf:"bytes,12,opt,name=sale_price,json=salePrice" json:"sale_price,omitempty"`
+	Fields           []*KeyValue     `protobuf:"bytes,13,rep,name=fields" json:"fields,omitempty"`
+	Categories       []string        `protobuf:"bytes,14,rep,name=categories" json:"categories,omitempty"`
+	Relateds         []*Content      `protobuf:"bytes,15,rep,name=relateds" json:"relateds,omitempty"`
+	AttachmentUrl    *string         `protobuf:"bytes,16,opt,name=attachment_url,json=attachmentUrl" json:"attachment_url,omitempty"`
+	XXX_unrecognized []byte          `json:"-"`
 }
 
 func (m *Content) Reset()                    { *m = Content{} }
 func (m *Content) String() string            { return proto.CompactTextString(m) }
 func (*Content) ProtoMessage()               {}
 func (*Content) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *Content) GetCtx() *common.Context {
+	if m != nil {
+		return m.Ctx
+	}
+	return nil
+}
 
 func (m *Content) GetId() string {
 	if m != nil && m.Id != nil {
@@ -96,6 +99,13 @@ func (m *Content) GetId() string {
 func (m *Content) GetAccountId() string {
 	if m != nil && m.AccountId != nil {
 		return *m.AccountId
+	}
+	return ""
+}
+
+func (m *Content) GetType() string {
+	if m != nil && m.Type != nil {
+		return *m.Type
 	}
 	return ""
 }
@@ -170,9 +180,9 @@ func (m *Content) GetCategories() []string {
 	return nil
 }
 
-func (m *Content) GetRelatedIds() []string {
+func (m *Content) GetRelateds() []*Content {
 	if m != nil {
-		return m.RelatedIds
+		return m.Relateds
 	}
 	return nil
 }
@@ -201,48 +211,6 @@ func (m *Contents) GetContents() []*Content {
 	return nil
 }
 
-type Ids struct {
-	Ids              []string `protobuf:"bytes,2,rep,name=Ids" json:"Ids,omitempty"`
-	XXX_unrecognized []byte   `json:"-"`
-}
-
-func (m *Ids) Reset()                    { *m = Ids{} }
-func (m *Ids) String() string            { return proto.CompactTextString(m) }
-func (*Ids) ProtoMessage()               {}
-func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
-
-func (m *Ids) GetIds() []string {
-	if m != nil {
-		return m.Ids
-	}
-	return nil
-}
-
-type Id struct {
-	Id               *string `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
-	AccountId        *string `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *Id) Reset()                    { *m = Id{} }
-func (m *Id) String() string            { return proto.CompactTextString(m) }
-func (*Id) ProtoMessage()               {}
-func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
-
-func (m *Id) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
-	}
-	return ""
-}
-
-func (m *Id) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return ""
-}
-
 type Empty struct {
 	XXX_unrecognized []byte `json:"-"`
 }
@@ -250,7 +218,7 @@ type Empty struct {
 func (m *Empty) Reset()                    { *m = Empty{} }
 func (m *Empty) String() string            { return proto.CompactTextString(m) }
 func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
 type ListRequest struct {
 	AccountId        *string `protobuf:"bytes,6,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
@@ -263,7 +231,7 @@ type ListRequest struct {
 func (m *ListRequest) Reset()                    { *m = ListRequest{} }
 func (m *ListRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListRequest) ProtoMessage()               {}
-func (*ListRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*ListRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
 func (m *ListRequest) GetAccountId() string {
 	if m != nil && m.AccountId != nil {
@@ -297,284 +265,41 @@ func init() {
 	proto.RegisterType((*KeyValue)(nil), "content.KeyValue")
 	proto.RegisterType((*Content)(nil), "content.Content")
 	proto.RegisterType((*Contents)(nil), "content.Contents")
-	proto.RegisterType((*Ids)(nil), "content.Ids")
-	proto.RegisterType((*Id)(nil), "content.Id")
 	proto.RegisterType((*Empty)(nil), "content.Empty")
 	proto.RegisterType((*ListRequest)(nil), "content.ListRequest")
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// Client API for ContentMgr service
-
-type ContentMgrClient interface {
-	Insert(ctx context.Context, in *Content, opts ...grpc.CallOption) (*Empty, error)
-	InsertBulk(ctx context.Context, in *Contents, opts ...grpc.CallOption) (*Empty, error)
-	Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	DeleteBulk(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
-	Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Content, error)
-	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Contents, error)
-}
-
-type contentMgrClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewContentMgrClient(cc *grpc.ClientConn) ContentMgrClient {
-	return &contentMgrClient{cc}
-}
-
-func (c *contentMgrClient) Insert(ctx context.Context, in *Content, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/content.ContentMgr/Insert", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contentMgrClient) InsertBulk(ctx context.Context, in *Contents, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/content.ContentMgr/InsertBulk", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contentMgrClient) Delete(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/content.ContentMgr/Delete", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contentMgrClient) DeleteBulk(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/content.ContentMgr/DeleteBulk", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contentMgrClient) Read(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Content, error) {
-	out := new(Content)
-	err := grpc.Invoke(ctx, "/content.ContentMgr/Read", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *contentMgrClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Contents, error) {
-	out := new(Contents)
-	err := grpc.Invoke(ctx, "/content.ContentMgr/List", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for ContentMgr service
-
-type ContentMgrServer interface {
-	Insert(context.Context, *Content) (*Empty, error)
-	InsertBulk(context.Context, *Contents) (*Empty, error)
-	Delete(context.Context, *Id) (*Empty, error)
-	DeleteBulk(context.Context, *Ids) (*Empty, error)
-	Read(context.Context, *Id) (*Content, error)
-	List(context.Context, *ListRequest) (*Contents, error)
-}
-
-func RegisterContentMgrServer(s *grpc.Server, srv ContentMgrServer) {
-	s.RegisterService(&_ContentMgr_serviceDesc, srv)
-}
-
-func _ContentMgr_Insert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Content)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContentMgrServer).Insert(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/content.ContentMgr/Insert",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContentMgrServer).Insert(ctx, req.(*Content))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContentMgr_InsertBulk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Contents)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContentMgrServer).InsertBulk(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/content.ContentMgr/InsertBulk",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContentMgrServer).InsertBulk(ctx, req.(*Contents))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContentMgr_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContentMgrServer).Delete(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/content.ContentMgr/Delete",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContentMgrServer).Delete(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContentMgr_DeleteBulk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContentMgrServer).DeleteBulk(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/content.ContentMgr/DeleteBulk",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContentMgrServer).DeleteBulk(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContentMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContentMgrServer).Read(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/content.ContentMgr/Read",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContentMgrServer).Read(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _ContentMgr_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ContentMgrServer).List(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/content.ContentMgr/List",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ContentMgrServer).List(ctx, req.(*ListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _ContentMgr_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "content.ContentMgr",
-	HandlerType: (*ContentMgrServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Insert",
-			Handler:    _ContentMgr_Insert_Handler,
-		},
-		{
-			MethodName: "InsertBulk",
-			Handler:    _ContentMgr_InsertBulk_Handler,
-		},
-		{
-			MethodName: "Delete",
-			Handler:    _ContentMgr_Delete_Handler,
-		},
-		{
-			MethodName: "DeleteBulk",
-			Handler:    _ContentMgr_DeleteBulk_Handler,
-		},
-		{
-			MethodName: "Read",
-			Handler:    _ContentMgr_Read_Handler,
-		},
-		{
-			MethodName: "List",
-			Handler:    _ContentMgr_List_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "content/content.proto",
 }
 
 func init() { proto.RegisterFile("content/content.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 522 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x52, 0x4f, 0x8f, 0xd3, 0x3e,
-	0x10, 0xdd, 0x4d, 0xda, 0x34, 0x9d, 0x74, 0xfb, 0xeb, 0x5a, 0xfb, 0x03, 0x53, 0x09, 0xa8, 0x22,
-	0x21, 0x8a, 0x54, 0x2d, 0xa2, 0x5c, 0x38, 0xf3, 0xe7, 0x10, 0x01, 0x12, 0x8a, 0x04, 0xd7, 0xca,
-	0x1b, 0x0f, 0x8b, 0x55, 0x37, 0x29, 0xb6, 0xb3, 0x52, 0xbe, 0x0d, 0x07, 0x3e, 0x28, 0x8a, 0xed,
-	0x86, 0x6e, 0xdb, 0x0b, 0x27, 0xfb, 0xbd, 0x79, 0xe3, 0x79, 0x33, 0x63, 0xf8, 0xbf, 0xa8, 0x4a,
-	0x83, 0xa5, 0x79, 0xe9, 0xcf, 0xeb, 0xad, 0xaa, 0x4c, 0x45, 0x06, 0x1e, 0xa6, 0x4b, 0x88, 0x3f,
-	0x62, 0xf3, 0x8d, 0xc9, 0x1a, 0xc9, 0x04, 0xc2, 0x35, 0x36, 0x34, 0x9c, 0x9d, 0xcf, 0x87, 0x79,
-	0x7b, 0x25, 0x57, 0xd0, 0xbf, 0x6b, 0x43, 0xb4, 0x67, 0x39, 0x07, 0xd2, 0xdf, 0x21, 0x0c, 0xde,
-	0xb9, 0x7c, 0x32, 0x86, 0x40, 0x70, 0x1a, 0xd8, 0x70, 0x20, 0x38, 0x79, 0x0c, 0xc0, 0x8a, 0xa2,
-	0xaa, 0x4b, 0xb3, 0x12, 0xdc, 0x3f, 0x35, 0xf4, 0x4c, 0xc6, 0xc9, 0x0c, 0x12, 0x8e, 0xba, 0x50,
-	0x62, 0x6b, 0x44, 0x55, 0xd2, 0xbe, 0x8d, 0xef, 0x53, 0x6d, 0x49, 0x23, 0x8c, 0x44, 0x1a, 0xb9,
-	0x92, 0x16, 0x10, 0x02, 0x3d, 0x29, 0xca, 0x35, 0x1d, 0x58, 0xd2, 0xde, 0xc9, 0x03, 0x88, 0x24,
-	0xbb, 0x41, 0xa9, 0x69, 0x3c, 0x0b, 0xe7, 0xc3, 0xdc, 0x23, 0x92, 0xc2, 0x88, 0xdd, 0x31, 0x21,
-	0xd9, 0x8d, 0x90, 0xc2, 0x34, 0x74, 0x38, 0x3b, 0x9f, 0xc7, 0xf9, 0x3d, 0xae, 0xad, 0xb2, 0x55,
-	0xa2, 0x40, 0x0a, 0xae, 0x8a, 0x05, 0x64, 0x0a, 0x71, 0x51, 0x2b, 0x85, 0x65, 0xd1, 0xd0, 0xc4,
-	0x06, 0x3a, 0xdc, 0x36, 0xa6, 0x99, 0xc4, 0x95, 0x4b, 0x1b, 0xb9, 0xc6, 0x5a, 0xe6, 0x8b, 0x4d,
-	0x7d, 0x01, 0xd1, 0x77, 0x81, 0x92, 0x6b, 0x7a, 0x31, 0x0b, 0xe7, 0xc9, 0xf2, 0xf2, 0x7a, 0x37,
-	0xf0, 0xdd, 0x78, 0x73, 0x2f, 0x20, 0x4f, 0x00, 0x0a, 0x66, 0xf0, 0xb6, 0x52, 0x02, 0x35, 0x1d,
-	0x5b, 0xef, 0x7b, 0x0c, 0x79, 0x0a, 0x89, 0x42, 0xc9, 0x0c, 0xf2, 0x95, 0xe0, 0x9a, 0xfe, 0xe7,
-	0x04, 0x9e, 0xca, 0xb8, 0x26, 0xcf, 0x60, 0xcc, 0x8c, 0x61, 0xc5, 0x8f, 0x0d, 0x96, 0x66, 0x55,
-	0x2b, 0x49, 0x27, 0xd6, 0xce, 0xc5, 0x5f, 0xf6, 0xab, 0x92, 0xe9, 0x1b, 0x88, 0xfd, 0x96, 0x34,
-	0x59, 0x40, 0xec, 0xfd, 0x68, 0x7a, 0x6e, 0x0d, 0x4e, 0x3a, 0x83, 0x5e, 0x94, 0x77, 0x8a, 0xf4,
-	0x21, 0x84, 0x6d, 0x9d, 0x89, 0x3d, 0x68, 0x60, 0x0d, 0xb4, 0xd7, 0xf4, 0x35, 0x04, 0x19, 0xff,
-	0xc7, 0x9d, 0xa7, 0x03, 0xe8, 0x7f, 0xd8, 0x6c, 0x4d, 0x93, 0x36, 0x90, 0x7c, 0x12, 0xda, 0xe4,
-	0xf8, 0xb3, 0x46, 0x6d, 0x0e, 0xd2, 0xa2, 0xc3, 0xaf, 0xf2, 0x08, 0x62, 0x6d, 0x98, 0xb2, 0x41,
-	0x57, 0x6b, 0x60, 0x71, 0xc6, 0xed, 0x9e, 0xdc, 0xbc, 0x76, 0xbf, 0xb5, 0xc3, 0xed, 0x66, 0xa5,
-	0xd8, 0x08, 0x63, 0xbf, 0x6c, 0x3f, 0x77, 0x60, 0xf9, 0x2b, 0x00, 0xf0, 0x7d, 0x7e, 0xbe, 0x55,
-	0x64, 0x01, 0x51, 0x56, 0x6a, 0x54, 0x86, 0x1c, 0x8d, 0x61, 0x3a, 0xee, 0x18, 0xe7, 0xfa, 0x8c,
-	0xbc, 0x02, 0x70, 0xea, 0xb7, 0xb5, 0x5c, 0x93, 0xcb, 0xc3, 0x0c, 0x7d, 0x22, 0xe5, 0x39, 0x44,
-	0xef, 0x51, 0xa2, 0x41, 0x92, 0x74, 0xb1, 0x8c, 0x9f, 0x10, 0x2e, 0x00, 0x9c, 0xd0, 0xbe, 0x3d,
-	0xda, 0x13, 0x9f, 0x7e, 0xb6, 0x97, 0x23, 0xe3, 0xf7, 0x1f, 0x3d, 0x6a, 0xc1, 0x5a, 0xee, 0xb5,
-	0xa3, 0x26, 0x57, 0x5d, 0x6c, 0x6f, 0xf2, 0xd3, 0xe3, 0x16, 0xd2, 0xb3, 0x3f, 0x01, 0x00, 0x00,
-	0xff, 0xff, 0x0c, 0xb3, 0x43, 0x37, 0x2a, 0x04, 0x00, 0x00,
+	// 464 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x52, 0x5d, 0x6b, 0x13, 0x41,
+	0x14, 0x25, 0xd9, 0x26, 0xd9, 0xdc, 0xb4, 0x69, 0x1c, 0x54, 0xc6, 0x82, 0xb2, 0x2e, 0x08, 0x11,
+	0x24, 0x81, 0x3c, 0xf9, 0x2e, 0x3e, 0x14, 0x7d, 0x90, 0x05, 0x7d, 0x0d, 0x93, 0xd9, 0x6b, 0x3b,
+	0x64, 0xf6, 0xc3, 0x99, 0xbb, 0xa5, 0xeb, 0x2f, 0xf6, 0x67, 0xc8, 0x7c, 0x6c, 0xac, 0x85, 0x3e,
+	0xed, 0x9c, 0x73, 0xe7, 0x9e, 0x73, 0x67, 0xcf, 0x85, 0x17, 0xb2, 0xa9, 0x09, 0x6b, 0xda, 0xc6,
+	0xef, 0xa6, 0x35, 0x0d, 0x35, 0x6c, 0x16, 0xe1, 0xd5, 0xe6, 0xa0, 0xe8, 0xd0, 0xc9, 0x23, 0xd2,
+	0xa6, 0x31, 0x37, 0x5b, 0xdb, 0x1d, 0xd4, 0xef, 0xed, 0x2d, 0x8a, 0x12, 0xcd, 0x56, 0x36, 0x55,
+	0xd5, 0xd4, 0xf1, 0x13, 0x1a, 0xf3, 0x1d, 0xa4, 0x5f, 0xb0, 0xff, 0x21, 0x74, 0x87, 0x6c, 0x05,
+	0xc9, 0x11, 0x7b, 0x9e, 0x64, 0xa3, 0xf5, 0xbc, 0x70, 0x47, 0xf6, 0x1c, 0x26, 0x77, 0xae, 0xc4,
+	0xcf, 0x3c, 0x17, 0x40, 0xfe, 0x27, 0x81, 0xd9, 0xa7, 0xe0, 0xc7, 0xde, 0x42, 0x22, 0xe9, 0x9e,
+	0x8f, 0xb2, 0xd1, 0x7a, 0xb1, 0xbb, 0xdc, 0x44, 0x6d, 0x5f, 0xbd, 0xa7, 0xc2, 0xd5, 0xd8, 0x12,
+	0xc6, 0xaa, 0xe4, 0x63, 0xaf, 0x30, 0x56, 0x25, 0x7b, 0x0d, 0x20, 0xa4, 0x6c, 0xba, 0x9a, 0xf6,
+	0xaa, 0x8c, 0x6e, 0xf3, 0xc8, 0x5c, 0x97, 0x8c, 0xc1, 0x19, 0xf5, 0xed, 0x60, 0xe9, 0xcf, 0x2c,
+	0x83, 0x45, 0x89, 0x56, 0x1a, 0xd5, 0x92, 0x6a, 0x6a, 0x3e, 0xf1, 0xa5, 0x87, 0x94, 0x9b, 0x94,
+	0x14, 0x69, 0xe4, 0xd3, 0x30, 0xa9, 0x07, 0x4e, 0x4b, 0xab, 0xfa, 0xc8, 0x67, 0x41, 0xcb, 0x9d,
+	0xd9, 0x4b, 0x98, 0x6a, 0x71, 0x40, 0x6d, 0x79, 0x9a, 0x25, 0xeb, 0x79, 0x11, 0x11, 0xcb, 0xe1,
+	0x5c, 0xdc, 0x09, 0xa5, 0xc5, 0x41, 0x69, 0x45, 0x3d, 0x9f, 0x67, 0xa3, 0x75, 0x5a, 0xfc, 0xc7,
+	0x39, 0x97, 0xd6, 0x28, 0x89, 0x1c, 0x82, 0x8b, 0x07, 0xec, 0x0a, 0x52, 0xd9, 0x19, 0x83, 0xb5,
+	0xec, 0xf9, 0xc2, 0x17, 0x4e, 0xd8, 0x3d, 0xd6, 0x0a, 0x8d, 0xfb, 0xd0, 0x76, 0x1e, 0x1e, 0xeb,
+	0x98, 0x6f, 0xbe, 0xf5, 0x3d, 0x4c, 0x7f, 0x2a, 0xd4, 0xa5, 0xe5, 0x17, 0x59, 0xb2, 0x5e, 0xec,
+	0x9e, 0x6d, 0x86, 0x5c, 0x87, 0x54, 0x8a, 0x78, 0x81, 0xbd, 0x01, 0x90, 0x82, 0xf0, 0xa6, 0x31,
+	0x0a, 0x2d, 0x5f, 0xfa, 0xd9, 0x1f, 0x30, 0xec, 0x03, 0xa4, 0x06, 0xb5, 0x20, 0x2c, 0x2d, 0xbf,
+	0xf4, 0x62, 0xab, 0x93, 0x58, 0x4c, 0xab, 0x38, 0xdd, 0x60, 0xef, 0x60, 0x29, 0x88, 0x84, 0xbc,
+	0xad, 0xb0, 0xa6, 0x7d, 0x67, 0x34, 0x5f, 0xf9, 0xd9, 0x2e, 0xfe, 0xb1, 0xdf, 0x8d, 0xce, 0x3f,
+	0x42, 0x1a, 0x7b, 0xbd, 0x41, 0xd4, 0xb3, 0x7c, 0xf4, 0x94, 0xc1, 0x70, 0x23, 0x9f, 0xc1, 0xe4,
+	0x73, 0xd5, 0x52, 0x9f, 0xf7, 0xb0, 0xf8, 0xaa, 0x2c, 0x15, 0xf8, 0xab, 0x43, 0x4b, 0x8f, 0xd2,
+	0x9f, 0x3e, 0x4e, 0xff, 0x15, 0xa4, 0x96, 0x84, 0xf1, 0xc5, 0xb0, 0x32, 0x33, 0x8f, 0xaf, 0x4b,
+	0xff, 0x9b, 0xc3, 0x73, 0x87, 0x1d, 0x3d, 0x61, 0x17, 0x8c, 0x56, 0x95, 0x22, 0xbf, 0x35, 0x93,
+	0x22, 0x80, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x84, 0xa5, 0xb8, 0xd1, 0x2d, 0x03, 0x00, 0x00,
 }

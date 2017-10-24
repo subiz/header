@@ -1,5 +1,7 @@
 syntax = "proto2";
 
+import "bitbucket.org/subiz/header/common/common.proto";
+
 package content;
 
 message KeyValue {
@@ -8,9 +10,11 @@ message KeyValue {
 }
 
 message Content {
-
+	optional common.Context ctx = 1;
 	optional string id = 2; // user input id
 	optional string account_id = 3;
+	optional string type = 4;
+
 	optional string description = 5;
 	optional string title = 6;
 	optional string link = 7;
@@ -21,21 +25,12 @@ message Content {
 	optional string sale_price = 12;
 	repeated KeyValue fields = 13;
 	repeated string categories = 14;
-	repeated string related_ids = 15;
+	repeated Content relateds = 15;
 	optional string attachment_url = 16;
 }
 
 message Contents {
 	repeated Content contents = 1;
-}
-
-message Ids {
-	repeated string Ids = 2;
-}
-
-message Id {
-	optional string id = 2;
-	optional string account_id = 3;
 }
 
 message Empty {}
@@ -45,13 +40,4 @@ message ListRequest {
 	optional string start_id = 2;
 	optional string category = 3;
 	optional int32 limit = 4;
-}
-
-service ContentMgr {
-	rpc Insert(Content) returns (Empty) {}
-	rpc InsertBulk (Contents) returns (Empty) {}
-	rpc Delete(Id) returns (Empty) {}
-	rpc DeleteBulk (Ids) returns (Empty) {}
-	rpc Read(Id) returns (Content) {}
-	rpc List(ListRequest) returns (Contents) {}
 }
