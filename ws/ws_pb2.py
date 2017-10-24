@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='ws/ws.proto',
   package='ws',
   syntax='proto3',
-  serialized_pb=_b('\n\x0bws/ws.proto\x12\x02ws\x1a.bitbucket.org/subiz/header/common/common.proto\"C\n\tSubscribe\x12\x0e\n\x06\x65vents\x18\x03 \x01(\t\x12\x0f\n\x07mask_id\x18\x04 \x01(\t\x12\x15\n\rconnection_id\x18\x05 \x01(\t\"B\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x15\n\rconnection_id\x18\x02 \x01(\t\"&\n\x07Payload\x12\n\n\x02id\x18\x03 \x01(\x03\x12\x0f\n\x07message\x18\x04 \x01(\t*\x13\n\x05\x45vent\x12\n\n\x06WsSend\x10\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0bws/ws.proto\x12\x02ws\x1a.bitbucket.org/subiz/header/common/common.proto\"C\n\tSubscribe\x12\x0e\n\x06\x65vents\x18\x03 \x03(\t\x12\x0f\n\x07mask_id\x18\x04 \x01(\t\x12\x15\n\rconnection_id\x18\x05 \x01(\t\"B\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x15\n\rconnection_id\x18\x02 \x01(\t\"&\n\x07Payload\x12\n\n\x02id\x18\x03 \x01(\x03\x12\x0f\n\x07message\x18\x04 \x01(\t*\x13\n\x05\x45vent\x12\n\n\x06WsSend\x10\x00\x62\x06proto3')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -57,8 +57,8 @@ _SUBSCRIBE = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='events', full_name='ws.Subscribe.events', index=0,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=3, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),

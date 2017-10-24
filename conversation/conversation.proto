@@ -147,7 +147,6 @@ message StartRequest {
 	repeated string agent_ids = 22;
 
 	optional user.User user = 25;
-
 }
 
 message Conversations {
