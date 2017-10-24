@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='user/user.proto',
   package='user',
   syntax='proto2',
-  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a.bitbucket.org/subiz/header/common/common.proto\"\xe0\x02\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\x0e\n\x06is_ban\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\"\"\n\x05Users\x12\x19\n\x05users\x18\x01 \x03(\x0b\x32\n.user.User\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"F\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02pP\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"I\n\rCreateRequest\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x14\n\x0c\x63hallenge_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61nswer\x18\x04 \x01(\t*k\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00\x12\x17\n\x13UserUpdateRequested\x10\x02\x12\x17\n\x13UserCreateRequested\x10\x03\x12\x19\n\x15UserReadBulkRequested\x10\x04')
+  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a.bitbucket.org/subiz/header/common/common.proto\"\xd0\x03\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\x0e\n\x06is_ban\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\x12\x10\n\x08subiz_id\x18\x19 \x01(\t\x12\x10\n\x08timezone\x18\x1a \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\x1b \x01(\t\x12\x10\n\x08language\x18\x1c \x01(\t\x12\x0f\n\x07\x61liases\x18\x1e \x01(\t\x12\x11\n\tlast_seen\x18\x1f \x01(\x03\"\"\n\x05Users\x12\x19\n\x05users\x18\x01 \x03(\x0b\x32\n.user.User\"\n\n\x08Location\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"\x8f\x02\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02ip\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\x12\x11\n\tcity_code\x18\x07 \x01(\t\x12\x11\n\tcity_name\x18\x08 \x01(\t\x12\x14\n\x0c\x63ountry_name\x18\t \x01(\t\x12\x16\n\x0e\x63ontinent_code\x18\n \x01(\t\x12\x13\n\x0b\x63outry_code\x18\x0b \x01(\t\x12\x0f\n\x07latitue\x18\x0c \x01(\x05\x12\x11\n\tlongitude\x18\r \x01(\x05\x12\x13\n\x0bpostal_code\x18\x0e \x01(\t\x12\x13\n\x0bregion_name\x18\x0f \x01(\t\x12\x10\n\x08timezone\x18\x10 \x01(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"I\n\rCreateRequest\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x14\n\x0c\x63hallenge_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61nswer\x18\x04 \x01(\t*k\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00\x12\x17\n\x13UserUpdateRequested\x10\x02\x12\x17\n\x13UserCreateRequested\x10\x03\x12\x19\n\x15UserReadBulkRequested\x10\x04')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -50,8 +50,8 @@ _EVENT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1064,
-  serialized_end=1171,
+  serialized_start=1390,
+  serialized_end=1497,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
@@ -189,6 +189,48 @@ _USER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='subiz_id', full_name='user.User.subiz_id', index=17,
+      number=25, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timezone', full_name='user.User.timezone', index=18,
+      number=26, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='country_code', full_name='user.User.country_code', index=19,
+      number=27, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='language', full_name='user.User.language', index=20,
+      number=28, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='aliases', full_name='user.User.aliases', index=21,
+      number=30, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='last_seen', full_name='user.User.last_seen', index=22,
+      number=31, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -202,7 +244,7 @@ _USER = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=74,
-  serialized_end=426,
+  serialized_end=538,
 )
 
 
@@ -232,8 +274,32 @@ _USERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=428,
-  serialized_end=462,
+  serialized_start=540,
+  serialized_end=574,
+)
+
+
+_LOCATION = _descriptor.Descriptor(
+  name='Location',
+  full_name='user.Location',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=576,
+  serialized_end=586,
 )
 
 
@@ -298,8 +364,8 @@ _DEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=464,
-  serialized_end=584,
+  serialized_start=588,
+  serialized_end=708,
 )
 
 
@@ -318,7 +384,7 @@ _TRACE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='pP', full_name='user.Trace.pP', index=1,
+      name='ip', full_name='user.Trace.ip', index=1,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -338,6 +404,76 @@ _TRACE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='city_code', full_name='user.Trace.city_code', index=4,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='city_name', full_name='user.Trace.city_name', index=5,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='country_name', full_name='user.Trace.country_name', index=6,
+      number=9, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='continent_code', full_name='user.Trace.continent_code', index=7,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='coutry_code', full_name='user.Trace.coutry_code', index=8,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='latitue', full_name='user.Trace.latitue', index=9,
+      number=12, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='longitude', full_name='user.Trace.longitude', index=10,
+      number=13, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='postal_code', full_name='user.Trace.postal_code', index=11,
+      number=14, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='region_name', full_name='user.Trace.region_name', index=12,
+      number=15, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timezone', full_name='user.Trace.timezone', index=13,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -350,8 +486,8 @@ _TRACE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=586,
-  serialized_end=656,
+  serialized_start=711,
+  serialized_end=982,
 )
 
 
@@ -409,8 +545,8 @@ _LISTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=658,
-  serialized_end=771,
+  serialized_start=984,
+  serialized_end=1097,
 )
 
 
@@ -461,8 +597,8 @@ _MERGEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=773,
-  serialized_end=868,
+  serialized_start=1099,
+  serialized_end=1194,
 )
 
 
@@ -520,8 +656,8 @@ _GREETINGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=870,
-  serialized_end=987,
+  serialized_start=1196,
+  serialized_end=1313,
 )
 
 
@@ -565,8 +701,8 @@ _CREATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=989,
-  serialized_end=1062,
+  serialized_start=1315,
+  serialized_end=1388,
 )
 
 _USER.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
@@ -578,6 +714,7 @@ _MERGEREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_d
 _GREETINGREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['User'] = _USER
 DESCRIPTOR.message_types_by_name['Users'] = _USERS
+DESCRIPTOR.message_types_by_name['Location'] = _LOCATION
 DESCRIPTOR.message_types_by_name['Device'] = _DEVICE
 DESCRIPTOR.message_types_by_name['Trace'] = _TRACE
 DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST
@@ -600,6 +737,13 @@ Users = _reflection.GeneratedProtocolMessageType('Users', (_message.Message,), d
   # @@protoc_insertion_point(class_scope:user.Users)
   ))
 _sym_db.RegisterMessage(Users)
+
+Location = _reflection.GeneratedProtocolMessageType('Location', (_message.Message,), dict(
+  DESCRIPTOR = _LOCATION,
+  __module__ = 'user.user_pb2'
+  # @@protoc_insertion_point(class_scope:user.Location)
+  ))
+_sym_db.RegisterMessage(Location)
 
 Device = _reflection.GeneratedProtocolMessageType('Device', (_message.Message,), dict(
   DESCRIPTOR = _DEVICE,

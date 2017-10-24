@@ -17,17 +17,27 @@ message User {
 	optional bool is_ban = 14;
 	optional string avatar_url = 15;
 
-
 	repeated string segments = 19;
 	repeated string labels = 20;
 	optional bool unsubscribed = 21;
 	optional bool marked_spam = 22;
 	optional bool hard_bounced = 23;
 	optional int32 total_sessions = 24;
+
+	optional string subiz_id = 25;
+	optional string timezone = 26;
+	optional string country_code = 27;
+	optional string language = 28;
+
+	optional string aliases = 30;
+	optional int64 last_seen = 31;
 }
 
 message Users {
 	repeated User users = 1;
+}
+
+message Location {
 }
 
 message Device {
@@ -41,22 +51,22 @@ message Device {
 
 message Trace {
 	optional string id = 3;
-	optional string pP = 4;
+	optional string ip = 4;
 	optional int32 location_id = 5;
 	optional string location = 6;
+
+	optional string city_code = 7;
+	optional string city_name = 8;
+	optional string country_name = 9;
+	optional string continent_code = 10;
+	optional string coutry_code = 11;
+	optional int32 latitue = 12;
+	optional int32 longitude = 13;
+	optional string postal_code = 14;
+	optional string region_name = 15;
+	optional string timezone = 16;
+
 }
-
-/*
-message Empty {};
-
-service UserMgr {
-	rpc Greeting(GreetingRequest) returns (Id) {}
-
-	rpc Merge(MergeRequest) returns (Empty) {}
-	rpc ReadBulk(Ids) returns (Users) {}
-	rpc List(ListRequest) returns (Users) {}
-}
-*/
 
 message ListRequest {
 	optional common.Context ctx = 1;
