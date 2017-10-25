@@ -68,6 +68,7 @@ message MemberSeen {
 }
 
 message Member {
+
 	optional string type = 3; // type
 	optional string subiz_id = 8;
 	optional string id = 4;
@@ -438,7 +439,7 @@ message CannedResponses {
 
 message Tags {
 	optional common.Context ctx = 1;
-	optional Tag tags = 4;
+	repeated Tag tags = 4;
 }
 
 enum PlatformType {
