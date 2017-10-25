@@ -10,10 +10,3 @@ message Email {
 	string JSONData = 5;
 	repeated string AttachLinks = 6;
 }
-
-message Empty {}
-
-service EmailSender {
-	rpc Send(Email) returns (Empty) {}
-}
-

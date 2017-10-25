@@ -15,28 +15,5 @@
     "application/json"
   ],
   "paths": {},
-  "definitions": {
-    "presenceEmpty": {
-      "type": "object"
-    },
-    "presenceTime": {
-      "type": "object",
-      "properties": {
-        "Time": {
-          "type": "string"
-        }
-      }
-    },
-    "presenceTimes": {
-      "type": "object",
-      "properties": {
-        "Id": {
-          "type": "string"
-        },
-        "Time": {
-          "type": "string"
-        }
-      }
-    }
-  }
+  "definitions": {}
 }

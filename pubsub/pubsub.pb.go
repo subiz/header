@@ -19,11 +19,6 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
-import (
-	context "golang.org/x/net/context"
-	grpc "google.golang.org/grpc"
-)
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -122,148 +117,10 @@ func init() {
 	proto.RegisterType((*Subscribers)(nil), "pubsub.Subscribers")
 }
 
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// Client API for Pubsub service
-
-type PubsubClient interface {
-	Subscribe(ctx context.Context, in *Subscription, opts ...grpc.CallOption) (*Empty, error)
-	Unsubscribe(ctx context.Context, in *Subscription, opts ...grpc.CallOption) (*Empty, error)
-	ListSubscriber(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Subscribers, error)
-}
-
-type pubsubClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewPubsubClient(cc *grpc.ClientConn) PubsubClient {
-	return &pubsubClient{cc}
-}
-
-func (c *pubsubClient) Subscribe(ctx context.Context, in *Subscription, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/pubsub.Pubsub/Subscribe", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pubsubClient) Unsubscribe(ctx context.Context, in *Subscription, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/pubsub.Pubsub/Unsubscribe", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *pubsubClient) ListSubscriber(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*Subscribers, error) {
-	out := new(Subscribers)
-	err := grpc.Invoke(ctx, "/pubsub.Pubsub/ListSubscriber", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for Pubsub service
-
-type PubsubServer interface {
-	Subscribe(context.Context, *Subscription) (*Empty, error)
-	Unsubscribe(context.Context, *Subscription) (*Empty, error)
-	ListSubscriber(context.Context, *ListRequest) (*Subscribers, error)
-}
-
-func RegisterPubsubServer(s *grpc.Server, srv PubsubServer) {
-	s.RegisterService(&_Pubsub_serviceDesc, srv)
-}
-
-func _Pubsub_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Subscription)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PubsubServer).Subscribe(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pubsub.Pubsub/Subscribe",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubsubServer).Subscribe(ctx, req.(*Subscription))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Pubsub_Unsubscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Subscription)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PubsubServer).Unsubscribe(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pubsub.Pubsub/Unsubscribe",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubsubServer).Unsubscribe(ctx, req.(*Subscription))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Pubsub_ListSubscriber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PubsubServer).ListSubscriber(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pubsub.Pubsub/ListSubscriber",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubsubServer).ListSubscriber(ctx, req.(*ListRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _Pubsub_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "pubsub.Pubsub",
-	HandlerType: (*PubsubServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Subscribe",
-			Handler:    _Pubsub_Subscribe_Handler,
-		},
-		{
-			MethodName: "Unsubscribe",
-			Handler:    _Pubsub_Unsubscribe_Handler,
-		},
-		{
-			MethodName: "ListSubscriber",
-			Handler:    _Pubsub_ListSubscriber_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "pubsub/pubsub.proto",
-}
-
 func init() { proto.RegisterFile("pubsub/pubsub.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 233 bytes of a gzipped FileDescriptorProto
+	// 172 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2e, 0x28, 0x4d, 0x2a,
 	0x2e, 0x4d, 0xd2, 0x87, 0x50, 0x7a, 0x05, 0x45, 0xf9, 0x25, 0xf9, 0x42, 0x6c, 0x10, 0x9e, 0x12,
 	0x3b, 0x17, 0xab, 0x6b, 0x6e, 0x41, 0x49, 0xa5, 0x92, 0x0b, 0x17, 0x4f, 0x70, 0x69, 0x52, 0x71,
@@ -273,10 +130,6 @@ var fileDescriptor0 = []byte{
 	0x09, 0x4a, 0x2d, 0x2c, 0x4d, 0x2d, 0x2e, 0xc1, 0x61, 0x88, 0x08, 0x17, 0x6b, 0x70, 0x49, 0x62,
 	0x51, 0x09, 0x54, 0x3f, 0x84, 0x03, 0x12, 0xf5, 0xc9, 0xcc, 0xcd, 0x2c, 0x91, 0x60, 0x56, 0x60,
 	0xd4, 0x60, 0x0d, 0x82, 0x70, 0x94, 0xf4, 0xb9, 0xb8, 0x11, 0xc6, 0x17, 0x0b, 0x29, 0xa0, 0x70,
-	0x25, 0x18, 0x15, 0x98, 0x35, 0x38, 0x83, 0x90, 0x85, 0x8c, 0x36, 0x30, 0x72, 0xb1, 0x05, 0x80,
-	0xfd, 0x26, 0x64, 0xc4, 0xc5, 0x09, 0x97, 0x11, 0x12, 0xd1, 0x83, 0xfa, 0x1f, 0xd9, 0x97, 0x52,
-	0xbc, 0x30, 0x51, 0x48, 0x20, 0x30, 0x08, 0x99, 0x70, 0x71, 0x87, 0xe6, 0x15, 0x93, 0xaa, 0xcb,
-	0x86, 0x8b, 0x0f, 0xe4, 0x6d, 0x84, 0x3b, 0x84, 0x84, 0x61, 0x4a, 0x90, 0x82, 0x43, 0x4a, 0x18,
-	0xcd, 0x34, 0x90, 0x83, 0x95, 0x18, 0x92, 0xd8, 0xc0, 0x51, 0x62, 0x0c, 0x08, 0x00, 0x00, 0xff,
-	0xff, 0x2e, 0x82, 0x86, 0x1e, 0xa9, 0x01, 0x00, 0x00,
+	0x25, 0x18, 0x15, 0x98, 0x35, 0x38, 0x83, 0x90, 0x85, 0x92, 0xd8, 0xc0, 0xfe, 0x33, 0x06, 0x04,
+	0x00, 0x00, 0xff, 0xff, 0x3c, 0x7f, 0xfa, 0x93, 0xf6, 0x00, 0x00, 0x00,
 }

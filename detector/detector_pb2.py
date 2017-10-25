@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='detector/detector.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x17\x64\x65tector/detector.proto\"\xcf\x01\n\tUserAgent\x12\n\n\x02Id\x18\x01 \x01(\x05\x12\x1a\n\x12\x42rowserVersionFull\x18\x02 \x01(\t\x12\x14\n\x0cLayoutEngine\x18\x03 \x01(\t\x12\x1b\n\x13LayoutEngineVersion\x18\x04 \x01(\t\x12\x1c\n\x14HardwareArchitecture\x18\x05 \x01(\t\x12\n\n\x02Os\x18\x06 \x01(\t\x12\x16\n\x0e\x42rowserVersion\x18\x07 \x01(\t\x12\x12\n\nDeviceType\x18\x08 \x01(\t\x12\x11\n\tUserAgent\x18\t \x01(\t\"\x18\n\x06String\x12\x0e\n\x06String\x18\x01 \x01(\t\"\x14\n\x06Zipped\x12\n\n\x02Id\x18\x01 \x01(\x05\"Y\n\x08Location\x12\n\n\x02Id\x18\x01 \x01(\x05\x12\x0f\n\x07\x43ountry\x18\x02 \x01(\t\x12\x0c\n\x04\x43ity\x18\x03 \x01(\t\x12\x10\n\x08TimeZone\x18\x04 \x01(\t\x12\x10\n\x08Language\x18\x05 \x01(\t2\xf1\x01\n\x08\x44\x65tector\x12(\n\x0f\x44\x65tectUserAgent\x12\x07.String\x1a\n.UserAgent\"\x00\x12\"\n\x0cZipUserAgent\x12\x07.String\x1a\x07.Zipped\"\x00\x12\'\n\x0eUnzipUserAgent\x12\x07.Zipped\x1a\n.UserAgent\"\x00\x12&\n\x0e\x44\x65tectLocation\x12\x07.String\x1a\t.Location\"\x00\x12!\n\x0bZipLanguage\x12\x07.String\x1a\x07.Zipped\"\x00\x12#\n\rUnzipLanguage\x12\x07.Zipped\x1a\x07.String\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x17\x64\x65tector/detector.proto\"\xcf\x01\n\tUserAgent\x12\n\n\x02Id\x18\x01 \x01(\x05\x12\x1a\n\x12\x42rowserVersionFull\x18\x02 \x01(\t\x12\x14\n\x0cLayoutEngine\x18\x03 \x01(\t\x12\x1b\n\x13LayoutEngineVersion\x18\x04 \x01(\t\x12\x1c\n\x14HardwareArchitecture\x18\x05 \x01(\t\x12\n\n\x02Os\x18\x06 \x01(\t\x12\x16\n\x0e\x42rowserVersion\x18\x07 \x01(\t\x12\x12\n\nDeviceType\x18\x08 \x01(\t\x12\x11\n\tUserAgent\x18\t \x01(\t\"\x18\n\x06String\x12\x0e\n\x06String\x18\x01 \x01(\t\"\x14\n\x06Zipped\x12\n\n\x02Id\x18\x01 \x01(\x05\"Y\n\x08Location\x12\n\n\x02Id\x18\x01 \x01(\x05\x12\x0f\n\x07\x43ountry\x18\x02 \x01(\t\x12\x0c\n\x04\x43ity\x18\x03 \x01(\t\x12\x10\n\x08TimeZone\x18\x04 \x01(\t\x12\x10\n\x08Language\x18\x05 \x01(\tb\x06proto3')
 )
 
 
@@ -266,74 +266,5 @@ Location = _reflection.GeneratedProtocolMessageType('Location', (_message.Messag
   ))
 _sym_db.RegisterMessage(Location)
 
-
-
-_DETECTOR = _descriptor.ServiceDescriptor(
-  name='Detector',
-  full_name='Detector',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=377,
-  serialized_end=618,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='DetectUserAgent',
-    full_name='Detector.DetectUserAgent',
-    index=0,
-    containing_service=None,
-    input_type=_STRING,
-    output_type=_USERAGENT,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='ZipUserAgent',
-    full_name='Detector.ZipUserAgent',
-    index=1,
-    containing_service=None,
-    input_type=_STRING,
-    output_type=_ZIPPED,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='UnzipUserAgent',
-    full_name='Detector.UnzipUserAgent',
-    index=2,
-    containing_service=None,
-    input_type=_ZIPPED,
-    output_type=_USERAGENT,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='DetectLocation',
-    full_name='Detector.DetectLocation',
-    index=3,
-    containing_service=None,
-    input_type=_STRING,
-    output_type=_LOCATION,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='ZipLanguage',
-    full_name='Detector.ZipLanguage',
-    index=4,
-    containing_service=None,
-    input_type=_STRING,
-    output_type=_ZIPPED,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='UnzipLanguage',
-    full_name='Detector.UnzipLanguage',
-    index=5,
-    containing_service=None,
-    input_type=_ZIPPED,
-    output_type=_STRING,
-    options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_DETECTOR)
-
-DESCRIPTOR.services_by_name['Detector'] = _DETECTOR
 
 # @@protoc_insertion_point(module_scope)

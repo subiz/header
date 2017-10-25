@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='api/api.proto',
   package='api',
   syntax='proto2',
-  serialized_pb=_b('\n\rapi/api.proto\x12\x03\x61pi\"\x07\n\x05\x45mpty\"!\n\x10SendMessageState\x12\r\n\x05topic\x18\x01 \x01(\t\"\x16\n\x05State\x12\r\n\x05\x65vent\x18\x03 \x01(\t*;\n\x06Method\x12\x07\n\x03GET\x10\x00\x12\x08\n\x04POST\x10\x01\x12\x07\n\x03PUT\x10\x02\x12\n\n\x06\x44\x45LETE\x10\x03\x12\t\n\x05PATCH\x10\x04*,\n\x05\x45vent\x12\x15\n\x11\x43onversationStart\x10\x02\x12\x0c\n\x08\x41piReply\x10\x04\x32\t\n\x07RestApi')
+  serialized_pb=_b('\n\rapi/api.proto\x12\x03\x61pi\"\x07\n\x05\x45mpty\"!\n\x10SendMessageState\x12\r\n\x05topic\x18\x01 \x01(\t\"\x16\n\x05State\x12\r\n\x05\x65vent\x18\x03 \x01(\t*;\n\x06Method\x12\x07\n\x03GET\x10\x00\x12\x08\n\x04POST\x10\x01\x12\x07\n\x03PUT\x10\x02\x12\n\n\x06\x44\x45LETE\x10\x03\x12\t\n\x05PATCH\x10\x04*,\n\x05\x45vent\x12\x15\n\x11\x43onversationStart\x10\x02\x12\x0c\n\x08\x41piReply\x10\x04')
 )
 
 _METHOD = _descriptor.EnumDescriptor(
@@ -204,20 +204,5 @@ State = _reflection.GeneratedProtocolMessageType('State', (_message.Message,), d
   ))
 _sym_db.RegisterMessage(State)
 
-
-
-_RESTAPI = _descriptor.ServiceDescriptor(
-  name='RestApi',
-  full_name='api.RestApi',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=197,
-  serialized_end=206,
-  methods=[
-])
-_sym_db.RegisterServiceDescriptor(_RESTAPI)
-
-DESCRIPTOR.services_by_name['RestApi'] = _RESTAPI
 
 # @@protoc_insertion_point(module_scope)

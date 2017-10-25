@@ -20,11 +20,6 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
-import (
-	context "golang.org/x/net/context"
-	grpc "google.golang.org/grpc"
-)
-
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
 var _ = fmt.Errorf
@@ -132,181 +127,10 @@ func init() {
 	proto.RegisterType((*Times)(nil), "presence.Times")
 }
 
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// Client API for PresenceMgr service
-
-type PresenceMgrClient interface {
-	Ping(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
-	Bye(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error)
-	GetLastPingTime(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Time, error)
-	ListLastPingTimes(ctx context.Context, in *UserIds, opts ...grpc.CallOption) (*Times, error)
-}
-
-type presenceMgrClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewPresenceMgrClient(cc *grpc.ClientConn) PresenceMgrClient {
-	return &presenceMgrClient{cc}
-}
-
-func (c *presenceMgrClient) Ping(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/presence.PresenceMgr/Ping", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *presenceMgrClient) Bye(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/presence.PresenceMgr/Bye", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *presenceMgrClient) GetLastPingTime(ctx context.Context, in *UserId, opts ...grpc.CallOption) (*Time, error) {
-	out := new(Time)
-	err := grpc.Invoke(ctx, "/presence.PresenceMgr/GetLastPingTime", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *presenceMgrClient) ListLastPingTimes(ctx context.Context, in *UserIds, opts ...grpc.CallOption) (*Times, error) {
-	out := new(Times)
-	err := grpc.Invoke(ctx, "/presence.PresenceMgr/ListLastPingTimes", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for PresenceMgr service
-
-type PresenceMgrServer interface {
-	Ping(context.Context, *UserId) (*Empty, error)
-	Bye(context.Context, *UserId) (*Empty, error)
-	GetLastPingTime(context.Context, *UserId) (*Time, error)
-	ListLastPingTimes(context.Context, *UserIds) (*Times, error)
-}
-
-func RegisterPresenceMgrServer(s *grpc.Server, srv PresenceMgrServer) {
-	s.RegisterService(&_PresenceMgr_serviceDesc, srv)
-}
-
-func _PresenceMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserId)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PresenceMgrServer).Ping(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/presence.PresenceMgr/Ping",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceMgrServer).Ping(ctx, req.(*UserId))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PresenceMgr_Bye_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserId)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PresenceMgrServer).Bye(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/presence.PresenceMgr/Bye",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceMgrServer).Bye(ctx, req.(*UserId))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PresenceMgr_GetLastPingTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserId)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PresenceMgrServer).GetLastPingTime(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/presence.PresenceMgr/GetLastPingTime",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceMgrServer).GetLastPingTime(ctx, req.(*UserId))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _PresenceMgr_ListLastPingTimes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserIds)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PresenceMgrServer).ListLastPingTimes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/presence.PresenceMgr/ListLastPingTimes",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PresenceMgrServer).ListLastPingTimes(ctx, req.(*UserIds))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _PresenceMgr_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "presence.PresenceMgr",
-	HandlerType: (*PresenceMgrServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Ping",
-			Handler:    _PresenceMgr_Ping_Handler,
-		},
-		{
-			MethodName: "Bye",
-			Handler:    _PresenceMgr_Bye_Handler,
-		},
-		{
-			MethodName: "GetLastPingTime",
-			Handler:    _PresenceMgr_GetLastPingTime_Handler,
-		},
-		{
-			MethodName: "ListLastPingTimes",
-			Handler:    _PresenceMgr_ListLastPingTimes_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "presence/presence.proto",
-}
-
 func init() { proto.RegisterFile("presence/presence.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 248 bytes of a gzipped FileDescriptorProto
+	// 165 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2f, 0x28, 0x4a, 0x2d,
 	0x4e, 0xcd, 0x4b, 0x4e, 0xd5, 0x87, 0x31, 0xf4, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2, 0x85, 0x38, 0x60,
 	0x7c, 0x25, 0x33, 0x2e, 0xb6, 0xd0, 0xe2, 0xd4, 0x22, 0xcf, 0x14, 0x21, 0x19, 0x2e, 0x4e, 0xc7,
@@ -316,11 +140,6 @@ var fileDescriptor0 = []byte{
 	0xd0, 0x83, 0x5b, 0x07, 0x91, 0x08, 0x82, 0x29, 0x50, 0x62, 0xe7, 0x62, 0x75, 0xcd, 0x2d, 0x28,
 	0xa9, 0x54, 0x92, 0xe2, 0x62, 0x09, 0xc9, 0xcc, 0x4d, 0x15, 0x12, 0x82, 0xd0, 0x50, 0x0b, 0xc1,
 	0x6c, 0x25, 0x6d, 0x2e, 0x56, 0x10, 0x5d, 0x0c, 0xb5, 0x94, 0x11, 0x66, 0x29, 0x5c, 0x31, 0x13,
-	0x42, 0xb1, 0xd1, 0x0d, 0x46, 0x2e, 0xee, 0x00, 0xa8, 0x75, 0xbe, 0xe9, 0x45, 0x42, 0xda, 0x5c,
-	0x2c, 0x01, 0x99, 0x79, 0xe9, 0x42, 0x18, 0x8e, 0x90, 0xe2, 0x47, 0x88, 0x40, 0xdc, 0xc0, 0x20,
-	0xa4, 0xc5, 0xc5, 0xec, 0x54, 0x99, 0x4a, 0x9c, 0x5a, 0x53, 0x2e, 0x7e, 0xf7, 0xd4, 0x12, 0x9f,
-	0xc4, 0xe2, 0x12, 0x90, 0xf9, 0x60, 0xc7, 0x63, 0xea, 0xe3, 0x43, 0x88, 0x80, 0xbd, 0xc2, 0x20,
-	0x64, 0xc9, 0x25, 0xe8, 0x93, 0x59, 0x8c, 0xa2, 0xaf, 0x58, 0x48, 0x10, 0x5d, 0x63, 0x31, 0xb2,
-	0x8d, 0x60, 0x35, 0x4a, 0x0c, 0x49, 0x6c, 0xe0, 0xc8, 0x32, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff,
-	0x21, 0x66, 0xa2, 0xac, 0xc7, 0x01, 0x00, 0x00,
+	0x42, 0x71, 0x12, 0x1b, 0xd8, 0x47, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x81, 0x91, 0x9a,
+	0xa8, 0xec, 0x00, 0x00, 0x00,
 }

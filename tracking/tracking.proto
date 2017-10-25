@@ -2,12 +2,10 @@ syntax = "proto3";
 
 package tracking;
 
-message Empty {};
-
 message Id { string Id = 1; }
 
 message Ids {repeated string Ids = 1;}
-
+/*
 service Tracker {
 	rpc Ban(Id) returns (Empty) {}
 	rpc Unban(Id) returns (Empty) {}
@@ -33,7 +31,7 @@ service Tracker {
 
 	rpc ListFields(Ids) returns (UsersFields) {}
 }
-
+*/
 message UserFields {
 	string UserId = 1;
 	// no accountid

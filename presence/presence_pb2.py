@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='presence/presence.proto',
   package='presence',
   syntax='proto3',
-  serialized_pb=_b('\n\x17presence/presence.proto\x12\x08presence\"\'\n\x06UserId\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\n\n\x02Id\x18\x02 \x01(\t\",\n\x07UserIds\x12!\n\x07UserIds\x18\x01 \x03(\x0b\x32\x10.presence.UserId\"\x07\n\x05\x45mpty\"\x14\n\x04Time\x12\x0c\n\x04Time\x18\x01 \x01(\t\"!\n\x05Times\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x0c\n\x04Time\x18\x02 \x01(\t2\xd8\x01\n\x0bPresenceMgr\x12+\n\x04Ping\x12\x10.presence.UserId\x1a\x0f.presence.Empty\"\x00\x12*\n\x03\x42ye\x12\x10.presence.UserId\x1a\x0f.presence.Empty\"\x00\x12\x35\n\x0fGetLastPingTime\x12\x10.presence.UserId\x1a\x0e.presence.Time\"\x00\x12\x39\n\x11ListLastPingTimes\x12\x11.presence.UserIds\x1a\x0f.presence.Times\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x17presence/presence.proto\x12\x08presence\"\'\n\x06UserId\x12\x11\n\tAccountId\x18\x01 \x01(\t\x12\n\n\x02Id\x18\x02 \x01(\t\",\n\x07UserIds\x12!\n\x07UserIds\x18\x01 \x03(\x0b\x32\x10.presence.UserId\"\x07\n\x05\x45mpty\"\x14\n\x04Time\x12\x0c\n\x04Time\x18\x01 \x01(\t\"!\n\x05Times\x12\n\n\x02Id\x18\x01 \x01(\t\x12\x0c\n\x04Time\x18\x02 \x01(\tb\x06proto3')
 )
 
 
@@ -229,56 +229,5 @@ Times = _reflection.GeneratedProtocolMessageType('Times', (_message.Message,), d
   ))
 _sym_db.RegisterMessage(Times)
 
-
-
-_PRESENCEMGR = _descriptor.ServiceDescriptor(
-  name='PresenceMgr',
-  full_name='presence.PresenceMgr',
-  file=DESCRIPTOR,
-  index=0,
-  options=None,
-  serialized_start=191,
-  serialized_end=407,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='Ping',
-    full_name='presence.PresenceMgr.Ping',
-    index=0,
-    containing_service=None,
-    input_type=_USERID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='Bye',
-    full_name='presence.PresenceMgr.Bye',
-    index=1,
-    containing_service=None,
-    input_type=_USERID,
-    output_type=_EMPTY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetLastPingTime',
-    full_name='presence.PresenceMgr.GetLastPingTime',
-    index=2,
-    containing_service=None,
-    input_type=_USERID,
-    output_type=_TIME,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='ListLastPingTimes',
-    full_name='presence.PresenceMgr.ListLastPingTimes',
-    index=3,
-    containing_service=None,
-    input_type=_USERIDS,
-    output_type=_TIMES,
-    options=None,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_PRESENCEMGR)
-
-DESCRIPTOR.services_by_name['PresenceMgr'] = _PRESENCEMGR
 
 # @@protoc_insertion_point(module_scope)

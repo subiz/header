@@ -14,7 +14,7 @@ for i in `ls -R`; do
     if [[ $i == *".proto" ]]; then
       echo -e "\033[0;90m["$TOTAL"] compiling" $LASTDIRECTORY /$i "\033[0;31m"
       protoc --go_out=plugins:. --proto_path=../../../ --proto_path=./  $LASTDIRECTORY/$i
-			protoc -I/usr/local/include -I. -I$GOPATH/src -I$GOPATH/src/github.com/gengo/grpc-gateway/third_party/googleapis --swagger_out=logtostderr=true:. --proto_path=../../../ --proto_path=./ $LASTDIRECTORY/$i
+			protoc -I/usr/local/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=../../../ --proto_path=./ $LASTDIRECTORY/$i
 			protoc --python_out=plugins:. --proto_path=../../../ --proto_path=./ $LASTDIRECTORY/$i
       let "TOTAL += 1"
     # else
@@ -22,7 +22,7 @@ for i in `ls -R`; do
     fi;
   fi;
 done;
-echo -e "\033[0;34mremoving all omitempty\033[0;31m"
+# echo -e "\033[0;34mremoving all omitempty\033[0;31m"
 # ls */*.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'
 let "TOTAL -= 1"
 

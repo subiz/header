@@ -18,9 +18,9 @@ message ListRequest {
 message Subscribers {
 	repeated string Subscribers = 1;
 }
-
+/*
 service Pubsub {
 	rpc Subscribe(Subscription) returns (Empty) {}
 	rpc Unsubscribe(Subscription) returns (Empty) {}
 	rpc ListSubscriber(ListRequest) returns (Subscribers) {}
-}
+	}*/

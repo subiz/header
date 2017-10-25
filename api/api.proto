@@ -2,11 +2,6 @@ syntax = "proto2";
 
 package api;
 
-service RestApi {
-	//	rpc Handle(RestRequest) returns (RestResponse) {}
-	//rpc HandleRedirect(Event) returns (Empty) {}
-}
-
 message Empty {}
 
 enum Method {
@@ -23,7 +18,6 @@ message SendMessageState {
 
 message State {
 	optional string event = 3;
-
 
 }
 

@@ -8,7 +8,6 @@ It is generated from these files:
 	tracking/tracking.proto
 
 It has these top-level messages:
-	Empty
 	Id
 	Ids
 	UserFields
@@ -26,11 +25,6 @@ package tracking
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-
-import (
-	context "golang.org/x/net/context"
-	grpc "google.golang.org/grpc"
-)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -76,14 +70,6 @@ func (x EventType) String() string {
 }
 func (EventType) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
-type Empty struct {
-}
-
-func (m *Empty) Reset()                    { *m = Empty{} }
-func (m *Empty) String() string            { return proto.CompactTextString(m) }
-func (*Empty) ProtoMessage()               {}
-func (*Empty) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
-
 type Id struct {
 	Id string `protobuf:"bytes,1,opt,name=Id" json:"Id,omitempty"`
 }
@@ -91,7 +77,7 @@ type Id struct {
 func (m *Id) Reset()                    { *m = Id{} }
 func (m *Id) String() string            { return proto.CompactTextString(m) }
 func (*Id) ProtoMessage()               {}
-func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 func (m *Id) GetId() string {
 	if m != nil {
@@ -107,7 +93,7 @@ type Ids struct {
 func (m *Ids) Reset()                    { *m = Ids{} }
 func (m *Ids) String() string            { return proto.CompactTextString(m) }
 func (*Ids) ProtoMessage()               {}
-func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*Ids) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
 func (m *Ids) GetIds() []string {
 	if m != nil {
@@ -116,6 +102,32 @@ func (m *Ids) GetIds() []string {
 	return nil
 }
 
+//
+// service Tracker {
+// rpc Ban(Id) returns (Empty) {}
+// rpc Unban(Id) returns (Empty) {}
+// // COLLECTOR
+// rpc Track(Event) returns (Empty) {}
+// rpc Update(Event) returns (Empty) {}
+//
+// // Users will be merge if they have same identity
+// rpc Identify(UserInfo) returns (Empty) {}
+//
+// // Merge recent UserId to former userId, all action caused from recent
+// // UserId are move to formerid, recent User will be deleted after 30 days
+// rpc Merge(MergeRequest) returns (Empty) {}
+//
+// //control number of field to add on a user
+// rpc SetField (UserInfo) returns (Empty) {}
+// rpc AppendToField (UserInfo) returns (Empty) {}
+// rpc UnsetField (UserInfo) returns (Empty) {}
+//
+// // QUERIER
+// rpc ListEvents(ListEventsByUserRequest) returns (Events) {}
+// rpc ListEventsByType(ListEventsByTypeAndUserRequest) returns (Events) {}
+//
+// rpc ListFields(Ids) returns (UsersFields) {}
+// }
 type UserFields struct {
 	UserId string `protobuf:"bytes,1,opt,name=UserId" json:"UserId,omitempty"`
 	// no accountid
@@ -125,7 +137,7 @@ type UserFields struct {
 func (m *UserFields) Reset()                    { *m = UserFields{} }
 func (m *UserFields) String() string            { return proto.CompactTextString(m) }
 func (*UserFields) ProtoMessage()               {}
-func (*UserFields) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (*UserFields) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 func (m *UserFields) GetUserId() string {
 	if m != nil {
@@ -148,7 +160,7 @@ type UsersFields struct {
 func (m *UsersFields) Reset()                    { *m = UsersFields{} }
 func (m *UsersFields) String() string            { return proto.CompactTextString(m) }
 func (*UsersFields) ProtoMessage()               {}
-func (*UsersFields) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
+func (*UsersFields) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
 
 func (m *UsersFields) GetUsersFields() []*UserFields {
 	if m != nil {
@@ -165,7 +177,7 @@ type MergeRequest struct {
 func (m *MergeRequest) Reset()                    { *m = MergeRequest{} }
 func (m *MergeRequest) String() string            { return proto.CompactTextString(m) }
 func (*MergeRequest) ProtoMessage()               {}
-func (*MergeRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
+func (*MergeRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{4} }
 
 func (m *MergeRequest) GetFormerUserId() string {
 	if m != nil {
@@ -188,7 +200,7 @@ type Events struct {
 func (m *Events) Reset()                    { *m = Events{} }
 func (m *Events) String() string            { return proto.CompactTextString(m) }
 func (*Events) ProtoMessage()               {}
-func (*Events) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
+func (*Events) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{5} }
 
 func (m *Events) GetEvents() []string {
 	if m != nil {
@@ -205,7 +217,7 @@ type KeyValue struct {
 func (m *KeyValue) Reset()                    { *m = KeyValue{} }
 func (m *KeyValue) String() string            { return proto.CompactTextString(m) }
 func (*KeyValue) ProtoMessage()               {}
-func (*KeyValue) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
+func (*KeyValue) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{6} }
 
 func (m *KeyValue) GetKey() string {
 	if m != nil {
@@ -233,7 +245,7 @@ type Event struct {
 func (m *Event) Reset()                    { *m = Event{} }
 func (m *Event) String() string            { return proto.CompactTextString(m) }
 func (*Event) ProtoMessage()               {}
-func (*Event) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
+func (*Event) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{7} }
 
 func (m *Event) GetAccountId() string {
 	if m != nil {
@@ -287,7 +299,7 @@ type ListEventsByTypeAndUserRequest struct {
 func (m *ListEventsByTypeAndUserRequest) Reset()                    { *m = ListEventsByTypeAndUserRequest{} }
 func (m *ListEventsByTypeAndUserRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListEventsByTypeAndUserRequest) ProtoMessage()               {}
-func (*ListEventsByTypeAndUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
+func (*ListEventsByTypeAndUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{8} }
 
 func (m *ListEventsByTypeAndUserRequest) GetAccountId() string {
 	if m != nil {
@@ -327,7 +339,7 @@ type ListEventsByUserRequest struct {
 func (m *ListEventsByUserRequest) Reset()                    { *m = ListEventsByUserRequest{} }
 func (m *ListEventsByUserRequest) String() string            { return proto.CompactTextString(m) }
 func (*ListEventsByUserRequest) ProtoMessage()               {}
-func (*ListEventsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
+func (*ListEventsByUserRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{9} }
 
 func (m *ListEventsByUserRequest) GetAccountId() string {
 	if m != nil {
@@ -367,7 +379,7 @@ type UserInfo struct {
 func (m *UserInfo) Reset()                    { *m = UserInfo{} }
 func (m *UserInfo) String() string            { return proto.CompactTextString(m) }
 func (*UserInfo) ProtoMessage()               {}
-func (*UserInfo) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{11} }
+func (*UserInfo) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{10} }
 
 func (m *UserInfo) GetAccountId() string {
 	if m != nil {
@@ -398,7 +410,6 @@ func (m *UserInfo) GetValue() string {
 }
 
 func init() {
-	proto.RegisterType((*Empty)(nil), "tracking.Empty")
 	proto.RegisterType((*Id)(nil), "tracking.Id")
 	proto.RegisterType((*Ids)(nil), "tracking.Ids")
 	proto.RegisterType((*UserFields)(nil), "tracking.UserFields")
@@ -413,497 +424,39 @@ func init() {
 	proto.RegisterEnum("tracking.EventType", EventType_name, EventType_value)
 }
 
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// Client API for Tracker service
-
-type TrackerClient interface {
-	Ban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	Unban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	// COLLECTOR
-	Track(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Empty, error)
-	Update(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Empty, error)
-	// Users will be merge if they have same identity
-	Identify(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error)
-	// Merge recent UserId to former userId, all action caused from recent
-	// UserId are move to formerid, recent User will be deleted after 30 days
-	Merge(ctx context.Context, in *MergeRequest, opts ...grpc.CallOption) (*Empty, error)
-	// control number of field to add on a user
-	SetField(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error)
-	AppendToField(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error)
-	UnsetField(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error)
-	// QUERIER
-	ListEvents(ctx context.Context, in *ListEventsByUserRequest, opts ...grpc.CallOption) (*Events, error)
-	ListEventsByType(ctx context.Context, in *ListEventsByTypeAndUserRequest, opts ...grpc.CallOption) (*Events, error)
-	ListFields(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*UsersFields, error)
-}
-
-type trackerClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewTrackerClient(cc *grpc.ClientConn) TrackerClient {
-	return &trackerClient{cc}
-}
-
-func (c *trackerClient) Ban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/Ban", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) Unban(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/Unban", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) Track(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/Track", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) Update(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/Update", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) Identify(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/Identify", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) Merge(ctx context.Context, in *MergeRequest, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/Merge", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) SetField(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/SetField", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) AppendToField(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/AppendToField", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) UnsetField(ctx context.Context, in *UserInfo, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/UnsetField", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) ListEvents(ctx context.Context, in *ListEventsByUserRequest, opts ...grpc.CallOption) (*Events, error) {
-	out := new(Events)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/ListEvents", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) ListEventsByType(ctx context.Context, in *ListEventsByTypeAndUserRequest, opts ...grpc.CallOption) (*Events, error) {
-	out := new(Events)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/ListEventsByType", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *trackerClient) ListFields(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*UsersFields, error) {
-	out := new(UsersFields)
-	err := grpc.Invoke(ctx, "/tracking.Tracker/ListFields", in, out, c.cc, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Server API for Tracker service
-
-type TrackerServer interface {
-	Ban(context.Context, *Id) (*Empty, error)
-	Unban(context.Context, *Id) (*Empty, error)
-	// COLLECTOR
-	Track(context.Context, *Event) (*Empty, error)
-	Update(context.Context, *Event) (*Empty, error)
-	// Users will be merge if they have same identity
-	Identify(context.Context, *UserInfo) (*Empty, error)
-	// Merge recent UserId to former userId, all action caused from recent
-	// UserId are move to formerid, recent User will be deleted after 30 days
-	Merge(context.Context, *MergeRequest) (*Empty, error)
-	// control number of field to add on a user
-	SetField(context.Context, *UserInfo) (*Empty, error)
-	AppendToField(context.Context, *UserInfo) (*Empty, error)
-	UnsetField(context.Context, *UserInfo) (*Empty, error)
-	// QUERIER
-	ListEvents(context.Context, *ListEventsByUserRequest) (*Events, error)
-	ListEventsByType(context.Context, *ListEventsByTypeAndUserRequest) (*Events, error)
-	ListFields(context.Context, *Ids) (*UsersFields, error)
-}
-
-func RegisterTrackerServer(s *grpc.Server, srv TrackerServer) {
-	s.RegisterService(&_Tracker_serviceDesc, srv)
-}
-
-func _Tracker_Ban_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).Ban(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/Ban",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).Ban(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_Unban_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).Unban(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/Unban",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).Unban(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_Track_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Event)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).Track(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/Track",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).Track(ctx, req.(*Event))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Event)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/Update",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).Update(ctx, req.(*Event))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_Identify_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).Identify(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/Identify",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).Identify(ctx, req.(*UserInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_Merge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MergeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).Merge(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/Merge",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).Merge(ctx, req.(*MergeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_SetField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).SetField(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/SetField",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).SetField(ctx, req.(*UserInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_AppendToField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).AppendToField(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/AppendToField",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).AppendToField(ctx, req.(*UserInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_UnsetField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserInfo)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).UnsetField(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/UnsetField",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).UnsetField(ctx, req.(*UserInfo))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_ListEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListEventsByUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).ListEvents(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/ListEvents",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).ListEvents(ctx, req.(*ListEventsByUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_ListEventsByType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListEventsByTypeAndUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).ListEventsByType(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/ListEventsByType",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).ListEventsByType(ctx, req.(*ListEventsByTypeAndUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Tracker_ListFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TrackerServer).ListFields(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/tracking.Tracker/ListFields",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TrackerServer).ListFields(ctx, req.(*Ids))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _Tracker_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "tracking.Tracker",
-	HandlerType: (*TrackerServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Ban",
-			Handler:    _Tracker_Ban_Handler,
-		},
-		{
-			MethodName: "Unban",
-			Handler:    _Tracker_Unban_Handler,
-		},
-		{
-			MethodName: "Track",
-			Handler:    _Tracker_Track_Handler,
-		},
-		{
-			MethodName: "Update",
-			Handler:    _Tracker_Update_Handler,
-		},
-		{
-			MethodName: "Identify",
-			Handler:    _Tracker_Identify_Handler,
-		},
-		{
-			MethodName: "Merge",
-			Handler:    _Tracker_Merge_Handler,
-		},
-		{
-			MethodName: "SetField",
-			Handler:    _Tracker_SetField_Handler,
-		},
-		{
-			MethodName: "AppendToField",
-			Handler:    _Tracker_AppendToField_Handler,
-		},
-		{
-			MethodName: "UnsetField",
-			Handler:    _Tracker_UnsetField_Handler,
-		},
-		{
-			MethodName: "ListEvents",
-			Handler:    _Tracker_ListEvents_Handler,
-		},
-		{
-			MethodName: "ListEventsByType",
-			Handler:    _Tracker_ListEventsByType_Handler,
-		},
-		{
-			MethodName: "ListFields",
-			Handler:    _Tracker_ListFields_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "tracking/tracking.proto",
-}
-
 func init() { proto.RegisterFile("tracking/tracking.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 658 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x55, 0xc1, 0x4e, 0xdb, 0x4c,
-	0x10, 0x8e, 0xed, 0xd8, 0x24, 0x93, 0x00, 0xd6, 0xfc, 0xfc, 0x60, 0xa1, 0xaa, 0x4a, 0xf7, 0xd0,
-	0x5a, 0xb4, 0xa2, 0x6a, 0xa8, 0xb8, 0x1b, 0x63, 0x44, 0x04, 0x4d, 0x90, 0xe3, 0xd0, 0x53, 0x0f,
-	0x21, 0x5e, 0xa8, 0x55, 0xe2, 0xa4, 0xf6, 0x52, 0xc9, 0xa7, 0xde, 0xfb, 0x02, 0x7d, 0x9b, 0x3e,
-	0x5b, 0xb5, 0x6b, 0x3b, 0xb6, 0x69, 0x28, 0xa1, 0x17, 0xd8, 0x6f, 0xfc, 0xcd, 0xcc, 0x37, 0x33,
-	0xbb, 0x13, 0xd8, 0x61, 0xd1, 0x78, 0xf2, 0x25, 0x08, 0x6f, 0xde, 0xe6, 0x87, 0xfd, 0x79, 0x34,
-	0x63, 0x33, 0x6c, 0xe4, 0x98, 0xac, 0x81, 0xea, 0x4c, 0xe7, 0x2c, 0x21, 0x5b, 0x20, 0xf7, 0x7c,
-	0xdc, 0xe0, 0x7f, 0x0d, 0xa9, 0x23, 0x99, 0x4d, 0x57, 0xee, 0xf9, 0x64, 0x07, 0x94, 0x9e, 0x1f,
-	0xa3, 0x2e, 0xfe, 0x19, 0x52, 0x47, 0x31, 0x9b, 0x2e, 0x3f, 0x92, 0x0b, 0x80, 0x51, 0x4c, 0xa3,
-	0x93, 0x80, 0xde, 0xfa, 0x31, 0x6e, 0x83, 0xc6, 0xd1, 0xc2, 0x35, 0x43, 0xb8, 0x07, 0x5a, 0xca,
-	0x30, 0xe4, 0x8e, 0x62, 0xb6, 0xba, 0xb8, 0xbf, 0x10, 0x72, 0x46, 0x93, 0xcb, 0xf1, 0xed, 0x1d,
-	0x75, 0x33, 0x06, 0x71, 0xa0, 0xc5, 0xbd, 0xe2, 0x2c, 0xe4, 0x61, 0x05, 0x8a, 0xd4, 0xad, 0xee,
-	0x56, 0xe1, 0x5f, 0x64, 0x77, 0xcb, 0x44, 0x72, 0x09, 0xed, 0x0f, 0x34, 0xba, 0xa1, 0x2e, 0xfd,
-	0x7a, 0x47, 0x63, 0x86, 0x04, 0xda, 0x27, 0xb3, 0x68, 0x4a, 0xa3, 0x8a, 0xc0, 0x8a, 0x8d, 0x73,
-	0x5c, 0x3a, 0xa1, 0x21, 0xcb, 0x38, 0x72, 0xca, 0x29, 0xdb, 0x48, 0x07, 0x34, 0xe7, 0x1b, 0x0d,
-	0x99, 0x28, 0x36, 0x3d, 0x65, 0xfd, 0xc8, 0x10, 0xe9, 0x42, 0x23, 0x2f, 0x8a, 0x37, 0xec, 0x8c,
-	0x26, 0x59, 0x32, 0x7e, 0xc4, 0x2d, 0x50, 0xc5, 0xa7, 0x2c, 0x78, 0x0a, 0xc8, 0x2f, 0x09, 0x54,
-	0xe1, 0x8e, 0xcf, 0xa0, 0x69, 0x4d, 0x26, 0xb3, 0xbb, 0x90, 0x2d, 0x44, 0x16, 0x86, 0x52, 0x83,
-	0xe5, 0x4a, 0x83, 0x5f, 0x41, 0xdd, 0x4b, 0xe6, 0xd4, 0x50, 0x3a, 0x92, 0xb9, 0xd1, 0xfd, 0xaf,
-	0x68, 0x8f, 0x08, 0xca, 0x3f, 0xb9, 0x82, 0x50, 0x9a, 0x44, 0xfd, 0xb1, 0x49, 0x70, 0xa9, 0xb6,
-	0x17, 0x4c, 0xa9, 0xa1, 0xa6, 0x52, 0x05, 0xe0, 0xd6, 0x73, 0x61, 0xd5, 0x52, 0xab, 0x00, 0xe4,
-	0xa7, 0x04, 0xcf, 0xcf, 0x83, 0x98, 0xa5, 0x3d, 0x38, 0x4a, 0x78, 0x32, 0x2b, 0xf4, 0xb9, 0xbc,
-	0x7c, 0x02, 0x7f, 0xaf, 0x2c, 0xaf, 0x40, 0x7e, 0xac, 0x02, 0x03, 0xd6, 0x86, 0x6c, 0x1c, 0xf1,
-	0x20, 0x8a, 0x08, 0x92, 0x43, 0xa1, 0x2c, 0x98, 0x06, 0xcc, 0xa8, 0x77, 0x24, 0x53, 0x75, 0x53,
-	0x40, 0xbe, 0xc3, 0x4e, 0x59, 0xd8, 0xea, 0x8a, 0x1e, 0xea, 0xf5, 0x53, 0x05, 0x7c, 0x86, 0x86,
-	0xf0, 0x0c, 0xaf, 0x67, 0xff, 0x98, 0x31, 0xbb, 0x45, 0xca, 0x92, 0x5b, 0x54, 0x2f, 0xdd, 0xa2,
-	0xbd, 0x4f, 0xd0, 0x5c, 0x74, 0x0b, 0x1b, 0x50, 0xef, 0x0f, 0xfa, 0x8e, 0x5e, 0xc3, 0x4d, 0x68,
-	0x5d, 0xf6, 0x9c, 0x8f, 0xf6, 0xa0, 0xef, 0x39, 0x7d, 0x4f, 0x97, 0x10, 0x40, 0x1b, 0x3a, 0x96,
-	0x6b, 0x9f, 0xea, 0x32, 0xae, 0x43, 0xd3, 0x3a, 0x3e, 0xf6, 0x06, 0xb6, 0xe5, 0x7a, 0xba, 0x82,
-	0x6d, 0x68, 0xd8, 0xa7, 0x8e, 0x7d, 0x36, 0x18, 0x79, 0x7a, 0x9d, 0xa3, 0x8b, 0x91, 0x6b, 0x9f,
-	0x5a, 0x43, 0x47, 0x57, 0xbb, 0x3f, 0x54, 0x58, 0xf3, 0xf8, 0x58, 0x68, 0x84, 0x2f, 0x41, 0x39,
-	0x1a, 0x87, 0xd8, 0x2e, 0xe6, 0xd4, 0xf3, 0x77, 0x37, 0x4b, 0x53, 0x13, 0xcb, 0xa4, 0x86, 0x26,
-	0xa8, 0xa3, 0xf0, 0x6a, 0x15, 0xe6, 0x6b, 0x50, 0x45, 0x70, 0xdc, 0xbc, 0x37, 0xfb, 0x65, 0xe4,
-	0x37, 0xa0, 0x8d, 0xe6, 0xfe, 0x98, 0xd1, 0x95, 0xd8, 0xef, 0xa0, 0xd1, 0xf3, 0x69, 0xc8, 0x82,
-	0xeb, 0x04, 0xb1, 0xba, 0x3a, 0xf8, 0x54, 0x96, 0xb9, 0x74, 0x41, 0x15, 0xeb, 0x03, 0xb7, 0x8b,
-	0x6f, 0xe5, 0x7d, 0xf2, 0x40, 0x9a, 0x21, 0x65, 0xe2, 0xf1, 0xac, 0x9a, 0xe6, 0x10, 0xd6, 0xad,
-	0xf9, 0x9c, 0x86, 0xbe, 0x37, 0x7b, 0x92, 0xdf, 0x01, 0xc0, 0x28, 0x8c, 0x9f, 0x98, 0xcc, 0x06,
-	0x28, 0x5e, 0x02, 0xbe, 0x28, 0x08, 0x0f, 0xbc, 0x8f, 0x5d, 0xfd, 0x5e, 0x6f, 0x63, 0x52, 0xc3,
-	0x0b, 0xd0, 0xef, 0xbf, 0x73, 0x34, 0x97, 0x87, 0xfa, 0x73, 0x07, 0x2c, 0x8d, 0xf8, 0x3e, 0x95,
-	0x95, 0x2d, 0x9d, 0xf5, 0xf2, 0x3d, 0x89, 0x77, 0xff, 0xaf, 0x96, 0x96, 0x6f, 0xf7, 0xda, 0x95,
-	0x26, 0x7e, 0xc1, 0x0e, 0x7e, 0x07, 0x00, 0x00, 0xff, 0xff, 0x76, 0xfb, 0x9b, 0x74, 0xdc, 0x06,
-	0x00, 0x00,
+	// 486 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x54, 0x4d, 0x6f, 0xd3, 0x40,
+	0x10, 0xc5, 0x9f, 0xd8, 0x93, 0x50, 0xac, 0x25, 0x22, 0x3e, 0x20, 0x64, 0xed, 0x05, 0xab, 0x87,
+	0x22, 0x05, 0x89, 0xbb, 0x71, 0x5d, 0x25, 0x4a, 0x49, 0xaa, 0x8d, 0x13, 0x4e, 0x1c, 0x42, 0xbc,
+	0x14, 0x8b, 0xc6, 0x2e, 0xf6, 0x06, 0x29, 0x27, 0x7e, 0x06, 0xff, 0x86, 0xdf, 0x86, 0xf6, 0xc3,
+	0x89, 0x2d, 0x01, 0x01, 0x2e, 0xc9, 0xbc, 0xd9, 0x37, 0x33, 0x6f, 0xde, 0xae, 0x0c, 0x43, 0x56,
+	0xad, 0x37, 0x9f, 0xf3, 0xe2, 0xf6, 0x65, 0x13, 0x5c, 0xdc, 0x57, 0x25, 0x2b, 0x91, 0xd3, 0x60,
+	0x3c, 0x00, 0x7d, 0x92, 0xa1, 0x33, 0xfe, 0xeb, 0x6b, 0x81, 0x16, 0xba, 0x44, 0x9f, 0x64, 0x78,
+	0x08, 0xc6, 0x24, 0xab, 0x91, 0x27, 0xfe, 0x7c, 0x2d, 0x30, 0x42, 0x97, 0xf0, 0x10, 0xdf, 0x00,
+	0x2c, 0x6b, 0x5a, 0x5d, 0xe5, 0xf4, 0x2e, 0xab, 0xd1, 0x53, 0xb0, 0x39, 0x3a, 0x94, 0x2a, 0x84,
+	0xce, 0xc1, 0x96, 0x0c, 0x5f, 0x0f, 0x8c, 0xb0, 0x37, 0x42, 0x17, 0x87, 0xf9, 0x53, 0xba, 0x5f,
+	0xad, 0xef, 0x76, 0x94, 0x28, 0x06, 0x4e, 0xa0, 0xc7, 0xab, 0x6a, 0xd5, 0xf2, 0x75, 0x07, 0x8a,
+	0xd1, 0xbd, 0xd1, 0xe0, 0x58, 0x7f, 0x9c, 0x4e, 0xda, 0x44, 0xbc, 0x82, 0xfe, 0x5b, 0x5a, 0xdd,
+	0x52, 0x42, 0xbf, 0xec, 0x68, 0xcd, 0x10, 0x86, 0xfe, 0x55, 0x59, 0x6d, 0x69, 0xd5, 0x11, 0xd8,
+	0xc9, 0x71, 0x0e, 0xa1, 0x1b, 0x5a, 0x30, 0xc5, 0xd1, 0x25, 0xa7, 0x9d, 0xc3, 0x01, 0xd8, 0xc9,
+	0x57, 0x5a, 0x30, 0xb1, 0xac, 0x8c, 0x94, 0x1f, 0x0a, 0xe1, 0x11, 0x38, 0xcd, 0x52, 0xdc, 0xb0,
+	0x29, 0xdd, 0xab, 0x61, 0x3c, 0x44, 0x03, 0xb0, 0xc4, 0x91, 0x6a, 0x2e, 0x01, 0xfe, 0xa1, 0x81,
+	0x25, 0xca, 0xd1, 0x33, 0x70, 0xa3, 0xcd, 0xa6, 0xdc, 0x15, 0xec, 0x20, 0xf2, 0x98, 0x68, 0x19,
+	0xac, 0x77, 0x0c, 0x7e, 0x01, 0x66, 0xba, 0xbf, 0xa7, 0xbe, 0x11, 0x68, 0xe1, 0xd9, 0xe8, 0xc9,
+	0xd1, 0x1e, 0xd1, 0x94, 0x1f, 0x11, 0x41, 0x68, 0xdd, 0x84, 0x79, 0xea, 0x26, 0xb8, 0xd4, 0x38,
+	0xcd, 0xb7, 0xd4, 0xb7, 0xa4, 0x54, 0x01, 0x78, 0xf6, 0x5a, 0x64, 0x6d, 0x99, 0x15, 0x00, 0x7f,
+	0xd7, 0xe0, 0xf9, 0x75, 0x5e, 0x33, 0xe9, 0xc1, 0x9b, 0x3d, 0x1f, 0x16, 0x15, 0x19, 0x97, 0xd7,
+	0xdc, 0xc0, 0x9f, 0x37, 0x6b, 0x36, 0xd0, 0x4f, 0x6d, 0xe0, 0xc3, 0xc3, 0x05, 0x5b, 0x57, 0xbc,
+	0x89, 0x21, 0x9a, 0x34, 0x50, 0x28, 0xcb, 0xb7, 0x39, 0xf3, 0xcd, 0x40, 0x0b, 0x2d, 0x22, 0x01,
+	0xfe, 0x06, 0xc3, 0xb6, 0xb0, 0xbf, 0x57, 0xf4, 0x3b, 0xaf, 0xff, 0x55, 0xc0, 0x27, 0x70, 0x44,
+	0x65, 0xf1, 0xb1, 0xfc, 0xcf, 0x89, 0xea, 0x15, 0x19, 0xbf, 0x78, 0x45, 0x66, 0xeb, 0x15, 0x9d,
+	0xbf, 0x07, 0xf7, 0xe0, 0x16, 0x72, 0xc0, 0x9c, 0xcd, 0x67, 0x89, 0xf7, 0x00, 0x3d, 0x86, 0xde,
+	0x6a, 0x92, 0xbc, 0x8b, 0xe7, 0xb3, 0x34, 0x99, 0xa5, 0x9e, 0x86, 0x00, 0xec, 0x45, 0x12, 0x91,
+	0x78, 0xec, 0xe9, 0xe8, 0x11, 0xb8, 0xd1, 0xe5, 0x65, 0x3a, 0x8f, 0x23, 0x92, 0x7a, 0x06, 0xea,
+	0x83, 0x13, 0x8f, 0x93, 0x78, 0x3a, 0x5f, 0xa6, 0x9e, 0xc9, 0xd1, 0xcd, 0x92, 0xc4, 0xe3, 0x68,
+	0x91, 0x78, 0xd6, 0x07, 0x5b, 0x7c, 0x2b, 0x5e, 0xfd, 0x0c, 0x00, 0x00, 0xff, 0xff, 0xf1, 0xa3,
+	0xc9, 0x8d, 0x46, 0x04, 0x00, 0x00,
 }

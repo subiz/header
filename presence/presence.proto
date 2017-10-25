@@ -21,12 +21,12 @@ message Times {
 	string Id = 1;
 	string Time = 2;
 }
-
+/*
 service PresenceMgr {
 	rpc Ping(UserId) returns (Empty) {}
 	rpc Bye(UserId) returns (Empty) {}
 	rpc GetLastPingTime(UserId) returns (Time) {}
 	rpc ListLastPingTimes(UserIds) returns (Times) {}
-}
+	}*/
 
 // Account here to see the real permission
