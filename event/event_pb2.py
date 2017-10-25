@@ -24,7 +24,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='event/event.proto',
   package='event',
   syntax='proto2',
-  serialized_pb=_b('\n\x11\x65vent/event.proto\x12\x05\x65vent\x1a.bitbucket.org/subiz/header/common/common.proto\x1a*bitbucket.org/subiz/header/lang/lang.proto\x1a\x30\x62itbucket.org/subiz/header/account/account.proto\x1a:bitbucket.org/subiz/header/conversation/conversation.proto\"f\n\x16RawEventCreatedPayload\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06sub_id\x18\x03 \x01(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0f\n\x07payload\x18\x05 \x01(\t\"3\n\x12UnsubscribeMessage\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x04 \x01(\t\",\n\tRawEvents\x12\x1f\n\x06\x65vents\x18\x04 \x03(\x0b\x32\x0f.event.RawEvent\"C\n\x02\x42y\x12\x1e\n\x06\x64\x65vice\x18\x02 \x01(\x0b\x32\x0e.common.Device\x12\n\n\x02id\x18\x03 \x01(\t\x12\x11\n\tclient_id\x18\x04 \x01(\t\"\xa9\x05\n\x08RawEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0f\n\x07\x63reated\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x0e\n\x06topics\x18\x0b \x03(\t\x12\x15\n\x02\x62y\x18\x32 \x01(\x0b\x32\t.event.By\x12\x0e\n\x06object\x18\r \x01(\t\x12\x17\n\x0f\x63onversation_id\x18\x14 \x01(\t\x12#\n\x07\x61\x63\x63ount\x18& \x01(\x0b\x32\x10.account.AccountH\x00\x12\x1f\n\x05\x61gent\x18$ \x01(\x0b\x32\x0e.account.AgentH\x00\x12(\n\x07message\x18% \x01(\x0b\x32\x15.conversation.MessageH\x00\x12\x32\n\x0c\x63onversation\x18\' \x01(\x0b\x32\x1a.conversation.ConversationH\x00\x12*\n\x08postback\x18( \x01(\x0b\x32\x16.conversation.PostbackH\x00\x42\x06\n\x04\x64\x61taJ\x04\x08\x10\x10\x11J\x04\x08\x11\x10\x12J\x04\x08\x12\x10\x13J\x04\x08\x13\x10\x14J\x04\x08\x15\x10\x16J\x04\x08\x16\x10\x17J\x04\x08\x17\x10\x18J\x04\x08\x18\x10\x19J\x04\x08\x19\x10\x1aJ\x04\x08\x1a\x10\x1bJ\x04\x08\x1b\x10\x1cJ\x04\x08\x1c\x10\x1dJ\x04\x08\x1d\x10\x1eJ\x04\x08\x1e\x10\x1fJ\x04\x08\x1f\x10 J\x04\x08 \x10!J\x04\x08!\x10\"J\x04\x08#\x10$R\x05stateR\nmessage_toR\x08page_urlR\npage_titleR\x10\x62rowser_languageR\x0b\x64\x65vice_typeR\x07user_idR\tjoiner_idR\x0bjoiner_typeR\tleaver_idR\x0b\x61ttachmentsR\x04textR\x06\x66ormatR\x0b\x64\x65liveriedsR\x06\x66ieldsR\x08\x63omputed\"\xab\x01\n\x05Reply\x12\x1c\n\x03\x63tx\x18\x03 \x01(\x0b\x32\x0f.common.Context\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0b\n\x03\x65rr\x18\n \x01(\x08\x12\x17\n\x0f\x65rr_description\x18\x0c \x01(\t\x12\x19\n\x08\x65rr_code\x18\r \x01(\x0e\x32\x07.lang.T\x12\x11\n\terr_class\x18\x0f \x01(\x05\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"?\n\x05\x45rror\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"\x9b\x01\n\x0cSubscription\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x07 \x01(\t\x12\x14\n\x0ctarget_topic\x18\n \x01(\t\x12\x12\n\ntarget_key\x18\x0b \x01(\t\x12\x0c\n\x04ttls\x18\x0c \x01(\x03J\x04\x08\r\x10\x0eR\x10target_partition*\x7f\n\x05\x45vent\x12\t\n\x05Send_\x10\x01\x12\x0c\n\x08\x41piReply\x10\x02\x12\x13\n\x0fRawEventCreated\x10\x03\x12\r\n\tSubscribe\x10\x04\x12\x12\n\x0eSubscribeReply\x10\x06\x12\x0f\n\x0bUnsubscribe\x10\x05\x12\x14\n\x10UnsubscribeReply\x10\x07*\xc0\x02\n\x04Type\x12\x18\n\x14\x63onversation_updated\x10\t\x12\x10\n\x0cmessage_sent\x10\n\x12\x17\n\x13\x63onversation_joined\x10\x02\x12\x15\n\x11\x63onversation_left\x10\x04\x12\x17\n\x13\x63onversation_tagged\x10\x06\x12\x19\n\x15\x63onversation_untagged\x10\x07\x12\x18\n\x14\x63hannel_deintegrated\x10\x14\x12\x16\n\x12\x63hannel_integrated\x10\x15\x12\x10\n\x0cmessage_seen\x10\x1e\x12\x11\n\rmessage_acked\x10\x1f\x12\x14\n\x10message_received\x10 \x12\x1e\n\x1a\x63onversation_member_typing\x10!\x12\x1b\n\x17\x63onversation_postbacked\x10\"*\'\n\x0eSubscriberType\x12\x08\n\x04user\x10\x00\x12\x0b\n\x07\x63hannel\x10\x01*\'\n\tSubPrefix\x12\x0b\n\x07Webhook\x10\x00\x12\r\n\tWebsocket\x10\x01*^\n\x06Object\x12\x0b\n\x07\x61\x63\x63ount\x10\x00\x12\x10\n\x0c\x63onversation\x10\x01\x12\x0b\n\x07message\x10\x02\x12\x0f\n\x0bintegration\x10\x03\x12\t\n\x05\x61gent\x10\x04\x12\x0c\n\x08postback\x10\x05')
+  serialized_pb=_b('\n\x11\x65vent/event.proto\x12\x05\x65vent\x1a.bitbucket.org/subiz/header/common/common.proto\x1a*bitbucket.org/subiz/header/lang/lang.proto\x1a\x30\x62itbucket.org/subiz/header/account/account.proto\x1a:bitbucket.org/subiz/header/conversation/conversation.proto\"f\n\x16RawEventCreatedPayload\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x0e\n\x06sub_id\x18\x03 \x01(\t\x12\r\n\x05topic\x18\x04 \x01(\t\x12\x0f\n\x07payload\x18\x05 \x01(\t\"3\n\x12UnsubscribeMessage\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x04 \x01(\t\",\n\tRawEvents\x12\x1f\n\x06\x65vents\x18\x04 \x03(\x0b\x32\x0f.event.RawEvent\"C\n\x02\x42y\x12\x1e\n\x06\x64\x65vice\x18\x02 \x01(\x0b\x32\x0e.common.Device\x12\n\n\x02id\x18\x03 \x01(\t\x12\x11\n\tclient_id\x18\x04 \x01(\t\"\xa9\x05\n\x08RawEvent\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x0f\n\x07\x63reated\x18\x08 \x01(\x03\x12\x0c\n\x04type\x18\t \x01(\t\x12\x0e\n\x06topics\x18\x0b \x03(\t\x12\x15\n\x02\x62y\x18\x32 \x01(\x0b\x32\t.event.By\x12\x0e\n\x06object\x18\r \x01(\t\x12\x17\n\x0f\x63onversation_id\x18\x14 \x01(\t\x12#\n\x07\x61\x63\x63ount\x18& \x01(\x0b\x32\x10.account.AccountH\x00\x12\x1f\n\x05\x61gent\x18$ \x01(\x0b\x32\x0e.account.AgentH\x00\x12(\n\x07message\x18% \x01(\x0b\x32\x15.conversation.MessageH\x00\x12\x32\n\x0c\x63onversation\x18\' \x01(\x0b\x32\x1a.conversation.ConversationH\x00\x12*\n\x08postback\x18( \x01(\x0b\x32\x16.conversation.PostbackH\x00\x42\x06\n\x04\x64\x61taJ\x04\x08\x10\x10\x11J\x04\x08\x11\x10\x12J\x04\x08\x12\x10\x13J\x04\x08\x13\x10\x14J\x04\x08\x15\x10\x16J\x04\x08\x16\x10\x17J\x04\x08\x17\x10\x18J\x04\x08\x18\x10\x19J\x04\x08\x19\x10\x1aJ\x04\x08\x1a\x10\x1bJ\x04\x08\x1b\x10\x1cJ\x04\x08\x1c\x10\x1dJ\x04\x08\x1d\x10\x1eJ\x04\x08\x1e\x10\x1fJ\x04\x08\x1f\x10 J\x04\x08 \x10!J\x04\x08!\x10\"J\x04\x08#\x10$R\x05stateR\nmessage_toR\x08page_urlR\npage_titleR\x10\x62rowser_languageR\x0b\x64\x65vice_typeR\x07user_idR\tjoiner_idR\x0bjoiner_typeR\tleaver_idR\x0b\x61ttachmentsR\x04textR\x06\x66ormatR\x0b\x64\x65liveriedsR\x06\x66ieldsR\x08\x63omputed\"\xab\x01\n\x05Reply\x12\x1c\n\x03\x63tx\x18\x03 \x01(\x0b\x32\x0f.common.Context\x12\x10\n\x08\x65vent_id\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\x0c\x12\x0b\n\x03\x65rr\x18\n \x01(\x08\x12\x17\n\x0f\x65rr_description\x18\x0c \x01(\t\x12\x19\n\x08\x65rr_code\x18\r \x01(\x0e\x32\x07.lang.T\x12\x11\n\terr_class\x18\x0f \x01(\x05\x12\x0f\n\x07payload\x18\x07 \x01(\x0c\"?\n\x05\x45rror\x12\r\n\x05\x65rror\x18\x02 \x01(\t\x12\x12\n\nrequest_id\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"\x9b\x01\n\x0cSubscription\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0e\n\x06sub_id\x18\x07 \x01(\t\x12\x14\n\x0ctarget_topic\x18\n \x01(\t\x12\x12\n\ntarget_key\x18\x0b \x01(\t\x12\x0c\n\x04ttls\x18\x0c \x01(\x03J\x04\x08\r\x10\x0eR\x10target_partition*\x7f\n\x05\x45vent\x12\t\n\x05Send_\x10\x01\x12\x0c\n\x08\x41piReply\x10\x02\x12\x13\n\x0fRawEventCreated\x10\x03\x12\r\n\tSubscribe\x10\x04\x12\x12\n\x0eSubscribeReply\x10\x06\x12\x0f\n\x0bUnsubscribe\x10\x05\x12\x14\n\x10UnsubscribeReply\x10\x07*\xe0\x02\n\x04Type\x12\x18\n\x14\x63onversation_updated\x10\t\x12\x10\n\x0cmessage_sent\x10\n\x12\x1e\n\x1a\x63onversation_state_updated\x10\x0b\x12\x17\n\x13\x63onversation_joined\x10\x02\x12\x15\n\x11\x63onversation_left\x10\x04\x12\x17\n\x13\x63onversation_tagged\x10\x06\x12\x19\n\x15\x63onversation_untagged\x10\x07\x12\x18\n\x14\x63hannel_deintegrated\x10\x14\x12\x16\n\x12\x63hannel_integrated\x10\x15\x12\x10\n\x0cmessage_seen\x10\x1e\x12\x11\n\rmessage_acked\x10\x1f\x12\x14\n\x10message_received\x10 \x12\x1e\n\x1a\x63onversation_member_typing\x10!\x12\x1b\n\x17\x63onversation_postbacked\x10\"*\'\n\x0eSubscriberType\x12\x08\n\x04user\x10\x00\x12\x0b\n\x07\x63hannel\x10\x01*\'\n\tSubPrefix\x12\x0b\n\x07Webhook\x10\x00\x12\r\n\tWebsocket\x10\x01*^\n\x06Object\x12\x0b\n\x07\x61\x63\x63ount\x10\x00\x12\x10\n\x0c\x63onversation\x10\x01\x12\x0b\n\x07message\x10\x02\x12\x0f\n\x0bintegration\x10\x03\x12\t\n\x05\x61gent\x10\x04\x12\x0c\n\x08postback\x10\x05')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_lang_dot_lang__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_account_dot_account__pb2.DESCRIPTOR,bitbucket_dot_org_dot_subiz_dot_header_dot_conversation_dot_conversation__pb2.DESCRIPTOR,])
 
@@ -86,54 +86,58 @@ _TYPE = _descriptor.EnumDescriptor(
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='conversation_joined', index=2, number=2,
+      name='conversation_state_updated', index=2, number=11,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='conversation_left', index=3, number=4,
+      name='conversation_joined', index=3, number=2,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='conversation_tagged', index=4, number=6,
+      name='conversation_left', index=4, number=4,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='conversation_untagged', index=5, number=7,
+      name='conversation_tagged', index=5, number=6,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='channel_deintegrated', index=6, number=20,
+      name='conversation_untagged', index=6, number=7,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='channel_integrated', index=7, number=21,
+      name='channel_deintegrated', index=7, number=20,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='message_seen', index=8, number=30,
+      name='channel_integrated', index=8, number=21,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='message_acked', index=9, number=31,
+      name='message_seen', index=9, number=30,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='message_received', index=10, number=32,
+      name='message_acked', index=10, number=31,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='conversation_member_typing', index=11, number=33,
+      name='message_received', index=11, number=32,
       options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='conversation_postbacked', index=12, number=34,
+      name='conversation_member_typing', index=12, number=33,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='conversation_postbacked', index=13, number=34,
       options=None,
       type=None),
   ],
   containing_type=None,
   options=None,
   serialized_start=1713,
-  serialized_end=2033,
+  serialized_end=2065,
 )
 _sym_db.RegisterEnumDescriptor(_TYPE)
 
@@ -155,8 +159,8 @@ _SUBSCRIBERTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2035,
-  serialized_end=2074,
+  serialized_start=2067,
+  serialized_end=2106,
 )
 _sym_db.RegisterEnumDescriptor(_SUBSCRIBERTYPE)
 
@@ -178,8 +182,8 @@ _SUBPREFIX = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2076,
-  serialized_end=2115,
+  serialized_start=2108,
+  serialized_end=2147,
 )
 _sym_db.RegisterEnumDescriptor(_SUBPREFIX)
 
@@ -217,8 +221,8 @@ _OBJECT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2117,
-  serialized_end=2211,
+  serialized_start=2149,
+  serialized_end=2243,
 )
 _sym_db.RegisterEnumDescriptor(_OBJECT)
 
@@ -232,6 +236,7 @@ Unsubscribe = 5
 UnsubscribeReply = 7
 conversation_updated = 9
 message_sent = 10
+conversation_state_updated = 11
 conversation_joined = 2
 conversation_left = 4
 conversation_tagged = 6

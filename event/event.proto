@@ -74,6 +74,7 @@ message RawEvent {
 enum Type {
 	conversation_updated = 9;
 	message_sent = 10;
+	conversation_state_updated = 11;
 	//conversation_started = 1;
 	conversation_joined = 2;
 
