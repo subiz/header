@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='user/user.proto',
   package='user',
   syntax='proto2',
-  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a.bitbucket.org/subiz/header/common/common.proto\"\xd0\x03\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\x0e\n\x06is_ban\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\x12\x10\n\x08subiz_id\x18\x19 \x01(\t\x12\x10\n\x08timezone\x18\x1a \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\x1b \x01(\t\x12\x10\n\x08language\x18\x1c \x01(\t\x12\x0f\n\x07\x61liases\x18\x1e \x01(\t\x12\x11\n\tlast_seen\x18\x1f \x01(\x03\"\"\n\x05Users\x12\x19\n\x05users\x18\x01 \x03(\x0b\x32\n.user.User\"\n\n\x08Location\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"\x8f\x02\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02ip\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\x12\x11\n\tcity_code\x18\x07 \x01(\t\x12\x11\n\tcity_name\x18\x08 \x01(\t\x12\x14\n\x0c\x63ountry_name\x18\t \x01(\t\x12\x16\n\x0e\x63ontinent_code\x18\n \x01(\t\x12\x13\n\x0b\x63outry_code\x18\x0b \x01(\t\x12\x0f\n\x07latitue\x18\x0c \x01(\x05\x12\x11\n\tlongitude\x18\r \x01(\x05\x12\x13\n\x0bpostal_code\x18\x0e \x01(\t\x12\x13\n\x0bregion_name\x18\x0f \x01(\t\x12\x10\n\x08timezone\x18\x10 \x01(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"I\n\rCreateRequest\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x14\n\x0c\x63hallenge_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61nswer\x18\x04 \x01(\t*k\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00\x12\x17\n\x13UserUpdateRequested\x10\x02\x12\x17\n\x13UserCreateRequested\x10\x03\x12\x19\n\x15UserReadBulkRequested\x10\x04')
+  serialized_pb=_b('\n\x0fuser/user.proto\x12\x04user\x1a.bitbucket.org/subiz/header/common/common.proto\"\xd0\x03\n\x04User\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\n\n\x02id\x18\x03 \x01(\t\x12\x12\n\naccount_id\x18\x04 \x01(\t\x12\x10\n\x08\x66ullname\x18\x05 \x01(\t\x12\x0e\n\x06phones\x18\x07 \x03(\t\x12\x0e\n\x06\x65mails\x18\n \x03(\t\x12\x1b\n\x06traces\x18\x0b \x03(\x0b\x32\x0b.user.Trace\x12\r\n\x05\x61lias\x18\x0c \x03(\t\x12\x1d\n\x07\x64\x65vices\x18\r \x03(\x0b\x32\x0c.user.Device\x12\x0e\n\x06is_ban\x18\x0e \x01(\x08\x12\x12\n\navatar_url\x18\x0f \x01(\t\x12\x10\n\x08segments\x18\x13 \x03(\t\x12\x0e\n\x06labels\x18\x14 \x03(\t\x12\x14\n\x0cunsubscribed\x18\x15 \x01(\x08\x12\x13\n\x0bmarked_spam\x18\x16 \x01(\x08\x12\x14\n\x0chard_bounced\x18\x17 \x01(\x08\x12\x16\n\x0etotal_sessions\x18\x18 \x01(\x05\x12\x10\n\x08subiz_id\x18\x19 \x01(\t\x12\x10\n\x08timezone\x18\x1a \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\x1b \x01(\t\x12\x10\n\x08language\x18\x1c \x01(\t\x12\x0f\n\x07\x61liases\x18\x1e \x01(\t\x12\x11\n\tlast_seen\x18\x1f \x01(\x03\"\"\n\x05Users\x12\x19\n\x05users\x18\x01 \x03(\x0b\x32\n.user.User\"\n\n\x08Location\"x\n\x06\x44\x65vice\x12\n\n\x02id\x18\x03 \x01(\x05\x12\x14\n\x0cuseragent_id\x18\x04 \x01(\x05\x12\x11\n\tuseragent\x18\x05 \x01(\t\x12\x12\n\nresolution\x18\x06 \x01(\t\x12\x13\n\x0blanguage_id\x18\x07 \x01(\x05\x12\x10\n\x08language\x18\x08 \x01(\t\"\x8f\x02\n\x05Trace\x12\n\n\x02id\x18\x03 \x01(\t\x12\n\n\x02ip\x18\x04 \x01(\t\x12\x13\n\x0blocation_id\x18\x05 \x01(\x05\x12\x10\n\x08location\x18\x06 \x01(\t\x12\x11\n\tcity_code\x18\x07 \x01(\t\x12\x11\n\tcity_name\x18\x08 \x01(\t\x12\x14\n\x0c\x63ountry_name\x18\t \x01(\t\x12\x16\n\x0e\x63ontinent_code\x18\n \x01(\t\x12\x13\n\x0b\x63outry_code\x18\x0b \x01(\t\x12\x0f\n\x07latitue\x18\x0c \x01(\x05\x12\x11\n\tlongitude\x18\r \x01(\x05\x12\x13\n\x0bpostal_code\x18\x0e \x01(\t\x12\x13\n\x0bregion_name\x18\x0f \x01(\t\x12\x10\n\x08timezone\x18\x10 \x01(\t\"q\n\x0bListRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x10\n\x08start_id\x18\x06 \x01(\t\x12\r\n\x05limit\x18\x03 \x01(\x05\x12\x0f\n\x07keyword\x18\x04 \x01(\t\"_\n\x0cMergeRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x03 \x01(\t\x12\n\n\x02id\x18\x05 \x01(\t\x12\x11\n\trecent_id\x18\x04 \x01(\t\"u\n\x0fGreetingRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x05 \x01(\t\x12\x11\n\tuseragent\x18\x06 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"I\n\rCreateRequest\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x14\n\x0c\x63hallenge_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61nswer\x18\x04 \x01(\t\"\x0b\n\tUserTopic\"}\n\x05Topic\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\r\n\x05topic\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\t\x12\x14\n\x0ctotal_events\x18\x04 \x01(\x05\x12\x0f\n\x07user_id\x18\x07 \x01(\t\"\xc4\x01\n\x11ListEventsRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\r\n\x05\x61\x66ter\x18\x04 \x01(\x03\x12\x0e\n\x06\x62\x65\x66ore\x18\x05 \x01(\x03\x12\x0c\n\x04type\x18\x06 \x01(\t\x12\r\n\x05topic\x18\x07 \x01(\t\x12\x0f\n\x07keyword\x18\n \x01(\t\x12\x10\n\x08start_id\x18\x0b \x01(\t\x12\r\n\x05limit\x18\x0c \x01(\x05\"S\n\x10ReadEventRequest\x12\x1c\n\x03\x63tx\x18\x01 \x01(\x0b\x32\x0f.common.Context\x12\x12\n\naccount_id\x18\x02 \x01(\t\x12\r\n\x05topic\x18\x03 \x01(\t*\xc4\x01\n\x05\x45vent\x12\x15\n\x11UserReadRequested\x10\x00\x12\x17\n\x13UserUpdateRequested\x10\x02\x12\x17\n\x13UserCreateRequested\x10\x03\x12\x19\n\x15UserReadBulkRequested\x10\x04\x12\x1c\n\x18UserEventCreateRequested\x10\x05\x12\x1b\n\x17UserListEventsRequested\x10\x07\x12\x1c\n\x18UserTopicSumaryRequested\x10\x06')
   ,
   dependencies=[bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2.DESCRIPTOR,])
 
@@ -47,11 +47,23 @@ _EVENT = _descriptor.EnumDescriptor(
       name='UserReadBulkRequested', index=3, number=4,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserEventCreateRequested', index=4, number=5,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserListEventsRequested', index=5, number=7,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserTopicSumaryRequested', index=6, number=6,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1390,
-  serialized_end=1497,
+  serialized_start=1815,
+  serialized_end=2011,
 )
 _sym_db.RegisterEnumDescriptor(_EVENT)
 
@@ -60,6 +72,9 @@ UserReadRequested = 0
 UserUpdateRequested = 2
 UserCreateRequested = 3
 UserReadBulkRequested = 4
+UserEventCreateRequested = 5
+UserListEventsRequested = 7
+UserTopicSumaryRequested = 6
 
 
 
@@ -705,6 +720,235 @@ _CREATEREQUEST = _descriptor.Descriptor(
   serialized_end=1388,
 )
 
+
+_USERTOPIC = _descriptor.Descriptor(
+  name='UserTopic',
+  full_name='user.UserTopic',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1390,
+  serialized_end=1401,
+)
+
+
+_TOPIC = _descriptor.Descriptor(
+  name='Topic',
+  full_name='user.Topic',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='user.Topic.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='user.Topic.account_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topic', full_name='user.Topic.topic', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='user.Topic.type', index=3,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='total_events', full_name='user.Topic.total_events', index=4,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='user.Topic.user_id', index=5,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1403,
+  serialized_end=1528,
+)
+
+
+_LISTEVENTSREQUEST = _descriptor.Descriptor(
+  name='ListEventsRequest',
+  full_name='user.ListEventsRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='user.ListEventsRequest.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='user.ListEventsRequest.account_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='user.ListEventsRequest.user_id', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='after', full_name='user.ListEventsRequest.after', index=3,
+      number=4, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='before', full_name='user.ListEventsRequest.before', index=4,
+      number=5, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='user.ListEventsRequest.type', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topic', full_name='user.ListEventsRequest.topic', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='keyword', full_name='user.ListEventsRequest.keyword', index=7,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='start_id', full_name='user.ListEventsRequest.start_id', index=8,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='limit', full_name='user.ListEventsRequest.limit', index=9,
+      number=12, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1531,
+  serialized_end=1727,
+)
+
+
+_READEVENTREQUEST = _descriptor.Descriptor(
+  name='ReadEventRequest',
+  full_name='user.ReadEventRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ctx', full_name='user.ReadEventRequest.ctx', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='account_id', full_name='user.ReadEventRequest.account_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='topic', full_name='user.ReadEventRequest.topic', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1729,
+  serialized_end=1812,
+)
+
 _USER.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _USER.fields_by_name['traces'].message_type = _TRACE
 _USER.fields_by_name['devices'].message_type = _DEVICE
@@ -712,6 +956,9 @@ _USERS.fields_by_name['users'].message_type = _USER
 _LISTREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _MERGEREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 _GREETINGREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
+_TOPIC.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
+_LISTEVENTSREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
+_READEVENTREQUEST.fields_by_name['ctx'].message_type = bitbucket_dot_org_dot_subiz_dot_header_dot_common_dot_common__pb2._CONTEXT
 DESCRIPTOR.message_types_by_name['User'] = _USER
 DESCRIPTOR.message_types_by_name['Users'] = _USERS
 DESCRIPTOR.message_types_by_name['Location'] = _LOCATION
@@ -721,6 +968,10 @@ DESCRIPTOR.message_types_by_name['ListRequest'] = _LISTREQUEST
 DESCRIPTOR.message_types_by_name['MergeRequest'] = _MERGEREQUEST
 DESCRIPTOR.message_types_by_name['GreetingRequest'] = _GREETINGREQUEST
 DESCRIPTOR.message_types_by_name['CreateRequest'] = _CREATEREQUEST
+DESCRIPTOR.message_types_by_name['UserTopic'] = _USERTOPIC
+DESCRIPTOR.message_types_by_name['Topic'] = _TOPIC
+DESCRIPTOR.message_types_by_name['ListEventsRequest'] = _LISTEVENTSREQUEST
+DESCRIPTOR.message_types_by_name['ReadEventRequest'] = _READEVENTREQUEST
 DESCRIPTOR.enum_types_by_name['Event'] = _EVENT
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -786,6 +1037,34 @@ CreateRequest = _reflection.GeneratedProtocolMessageType('CreateRequest', (_mess
   # @@protoc_insertion_point(class_scope:user.CreateRequest)
   ))
 _sym_db.RegisterMessage(CreateRequest)
+
+UserTopic = _reflection.GeneratedProtocolMessageType('UserTopic', (_message.Message,), dict(
+  DESCRIPTOR = _USERTOPIC,
+  __module__ = 'user.user_pb2'
+  # @@protoc_insertion_point(class_scope:user.UserTopic)
+  ))
+_sym_db.RegisterMessage(UserTopic)
+
+Topic = _reflection.GeneratedProtocolMessageType('Topic', (_message.Message,), dict(
+  DESCRIPTOR = _TOPIC,
+  __module__ = 'user.user_pb2'
+  # @@protoc_insertion_point(class_scope:user.Topic)
+  ))
+_sym_db.RegisterMessage(Topic)
+
+ListEventsRequest = _reflection.GeneratedProtocolMessageType('ListEventsRequest', (_message.Message,), dict(
+  DESCRIPTOR = _LISTEVENTSREQUEST,
+  __module__ = 'user.user_pb2'
+  # @@protoc_insertion_point(class_scope:user.ListEventsRequest)
+  ))
+_sym_db.RegisterMessage(ListEventsRequest)
+
+ReadEventRequest = _reflection.GeneratedProtocolMessageType('ReadEventRequest', (_message.Message,), dict(
+  DESCRIPTOR = _READEVENTREQUEST,
+  __module__ = 'user.user_pb2'
+  # @@protoc_insertion_point(class_scope:user.ReadEventRequest)
+  ))
+_sym_db.RegisterMessage(ReadEventRequest)
 
 
 # @@protoc_insertion_point(module_scope)

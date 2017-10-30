@@ -98,10 +98,49 @@ message CreateRequest {
 
 }
 
+message UserTopic {
+
+}
+
+message Topic {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string topic = 3;
+	optional string type = 5;
+	optional int32 total_events = 4;
+
+	optional string user_id = 7;
+
+}
+
+message ListEventsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional int64 after = 4;
+	optional int64 before = 5;
+	optional string type = 6;
+	optional string topic = 7;
+	optional string keyword = 10;
+	optional string start_id = 11;
+	optional int32 limit = 12; // accept negative number
+
+}
+
+message ReadEventRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string topic = 3;
+}
+
 enum Event {
 	UserReadRequested = 0; // Id
 
 	UserUpdateRequested = 2; // User
 	UserCreateRequested = 3; // User
 	UserReadBulkRequested = 4; // Ids
+
+	UserEventCreateRequested = 5;
+	UserListEventsRequested = 7;
+	UserTopicSumaryRequested = 6;
 }
