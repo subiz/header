@@ -59,4 +59,6 @@ enum T {
 	invalid_mask = 81;
 	randomize_error = 82;
 	duplicated_message_received_error = 83;
+
+	network_error = 84;
 }
