@@ -8,6 +8,8 @@ import "bitbucket.org/subiz/header/lang/lang.proto";
 
 import "bitbucket.org/subiz/header/account/account.proto";
 import "bitbucket.org/subiz/header/conversation/conversation.proto";
+import "bitbucket.org/subiz/header/content/content.proto";
+import "bitbucket.org/subiz/header/user/user.proto";
 
 message RawEventCreatedPayload {
 	optional common.Context ctx = 1;
@@ -43,23 +45,18 @@ message By {
 }
 
 message RawEvent {
-	reserved 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35;
-	reserved "state", "message_to", "page_url", "page_title", "browser_language", "device_type", "user_id", "joiner_id", "joiner_type", "leaver_id", "attachments", "text", "format", "deliverieds", "fields", "computed";
+	reserved 10, 12, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35;
+	reserved "channel_id", "by_user_id", "state", "message_to", "page_url", "page_title", "browser_language", "device_type", "user_id", "joiner_id", "joiner_type", "leaver_id", "attachments", "text", "format", "deliverieds", "fields", "computed";
 	optional common.Context ctx = 1;
 	optional string id = 3;
 	optional string account_id = 4;
 	optional int64 created = 8;
 	optional string type = 9; // eventtype
-	//optional string channel_id = 10;
-	repeated string topics = 11;
-	//---
-	//optional string by_user_id = 12;
+	repeated string topics = 11;;
 
 	optional By by = 50;
 	optional string object = 13;
-	//optional string conversation_id = 15;
-	optional string conversation_id = 20;
-	//optional string channel_id = 40;
+	optional string conversation_id = 15;
 
 	oneof data {
 		account.Account account = 38;
@@ -67,6 +64,8 @@ message RawEvent {
 		conversation.Message message = 37;
 		conversation.Conversation conversation = 39;
 		conversation.Postback postback = 40;
+		content.Content content = 41;
+		user.Topic topic = 42;
 		//conversation.Integration channel_integration = 41;
 	};
 }
