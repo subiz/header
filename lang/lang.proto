@@ -61,4 +61,7 @@ enum T {
 	duplicated_message_received_error = 83;
 
 	network_error = 84;
+	rsa_key_not_found = 85;
+	jwt_sign_error = 86;
+	env_config_error = 87;
 }
