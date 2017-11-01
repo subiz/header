@@ -4,6 +4,8 @@ package api;
 
 message Empty {}
 
+import "bitbucket.org/subiz/header/common/common.proto";
+
 enum Method {
 	GET = 0;
 	POST = 1;
@@ -21,9 +23,42 @@ message State {
 
 }
 
+message WlDomain {
+	optional common.Context ctx = 1;
+
+	optional string account_id = 3;
+	optional string domain = 4;
+	optional int64 created = 5;
+	optional string by = 6;
+}
+
+message WlIP {
+	optional common.Context ctx = 1;
+
+	optional string account_id = 3;
+	optional string ip = 4;
+	optional int64 created = 5;
+	optional string by = 6;
+}
+
+message WlUser {
+	optional common.Context ctx = 1;
+
+	optional string account_id = 3;
+	optional string user_id = 4;
+	optional int64 created = 5;
+	optional string by = 6;
+}
+
+message ListRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string start = 3;
+	optional int32 limit = 4;
+}
+
 enum Event {
 
 	ConversationStart = 2;
 	ApiReply = 4;
-
 }
