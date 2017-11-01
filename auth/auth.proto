@@ -13,7 +13,7 @@ message Credential {
 	Type client_type = 8;
 	string client_account_id = 10;
 
-	string scopes = 9;
+	repeated string scopes = 9;
 
 	// optional
 	string avatar_url = 15;
