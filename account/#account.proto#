@@ -80,7 +80,6 @@ message Account {
 	optional int64 created = 8;
 	optional int64 confirmed = 9;
 	optional int64 modified = 10;
-	optional string slogan = 12;
 	optional string referer_id = 11;
 	enum State {
 		pending = 0; // waiting for email confirmation
@@ -88,6 +87,7 @@ message Account {
 		locked = 2;  // subiz lock down account
 		deleted = 3;
 	}
+	optional string slogan = 12;
 }
 
 message Id {
