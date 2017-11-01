@@ -2,5 +2,36 @@ syntax = "proto2";
 
 package widget;
 
+message Theme {
+	optional string background_color = 7;
+	optional string customize_css = 8;
+}
+
+message Sound {
+	optional bool enabled = 2;
+	optional string new_conversation = 3;
+	optional string file_create = 4;
+	optional string new_message = 5;
+	optional string message_send_failed = 6;
+}
+
 message WidgetSetting {
+	optional string account_id = 2;
+	optional bool blacklisted = 3; // requested based
+	optional Sound sound = 4;
+	optional string language = 5;
+	optional string welcome_message = 6;
+	optional Theme theme = 7;
+
+	optional int32 file_update_limit = 8;
+	optional int32 replytime = 9;
+}
+
+message User {
+	optional string account_id = 3;
+	optional string user_id = 4;
+	optional string sound_enabled = 5;
+	optional string language = 6;
+	optional string email = 7;
+	optional bool send_email_transcript = 8;
 }

@@ -8,7 +8,10 @@ It is generated from these files:
 	widget/widget.proto
 
 It has these top-level messages:
+	Theme
+	Sound
 	WidgetSetting
+	User
 */
 package widget
 
@@ -27,25 +30,249 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+type Theme struct {
+	BackgroundColor  *string `protobuf:"bytes,7,opt,name=background_color,json=backgroundColor" json:"background_color,omitempty"`
+	CustomizeCss     *string `protobuf:"bytes,8,opt,name=customize_css,json=customizeCss" json:"customize_css,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *Theme) Reset()                    { *m = Theme{} }
+func (m *Theme) String() string            { return proto.CompactTextString(m) }
+func (*Theme) ProtoMessage()               {}
+func (*Theme) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
+func (m *Theme) GetBackgroundColor() string {
+	if m != nil && m.BackgroundColor != nil {
+		return *m.BackgroundColor
+	}
+	return ""
+}
+
+func (m *Theme) GetCustomizeCss() string {
+	if m != nil && m.CustomizeCss != nil {
+		return *m.CustomizeCss
+	}
+	return ""
+}
+
+type Sound struct {
+	Enabled           *bool   `protobuf:"varint,2,opt,name=enabled" json:"enabled,omitempty"`
+	NewConversation   *string `protobuf:"bytes,3,opt,name=new_conversation,json=newConversation" json:"new_conversation,omitempty"`
+	FileCreate        *string `protobuf:"bytes,4,opt,name=file_create,json=fileCreate" json:"file_create,omitempty"`
+	NewMessage        *string `protobuf:"bytes,5,opt,name=new_message,json=newMessage" json:"new_message,omitempty"`
+	MessageSendFailed *string `protobuf:"bytes,6,opt,name=message_send_failed,json=messageSendFailed" json:"message_send_failed,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *Sound) Reset()                    { *m = Sound{} }
+func (m *Sound) String() string            { return proto.CompactTextString(m) }
+func (*Sound) ProtoMessage()               {}
+func (*Sound) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *Sound) GetEnabled() bool {
+	if m != nil && m.Enabled != nil {
+		return *m.Enabled
+	}
+	return false
+}
+
+func (m *Sound) GetNewConversation() string {
+	if m != nil && m.NewConversation != nil {
+		return *m.NewConversation
+	}
+	return ""
+}
+
+func (m *Sound) GetFileCreate() string {
+	if m != nil && m.FileCreate != nil {
+		return *m.FileCreate
+	}
+	return ""
+}
+
+func (m *Sound) GetNewMessage() string {
+	if m != nil && m.NewMessage != nil {
+		return *m.NewMessage
+	}
+	return ""
+}
+
+func (m *Sound) GetMessageSendFailed() string {
+	if m != nil && m.MessageSendFailed != nil {
+		return *m.MessageSendFailed
+	}
+	return ""
+}
+
 type WidgetSetting struct {
-	XXX_unrecognized []byte `json:"-"`
+	AccountId        *string `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Blacklisted      *bool   `protobuf:"varint,3,opt,name=blacklisted" json:"blacklisted,omitempty"`
+	Sound            *Sound  `protobuf:"bytes,4,opt,name=sound" json:"sound,omitempty"`
+	Language         *string `protobuf:"bytes,5,opt,name=language" json:"language,omitempty"`
+	WelcomeMessage   *string `protobuf:"bytes,6,opt,name=welcome_message,json=welcomeMessage" json:"welcome_message,omitempty"`
+	Theme            *Theme  `protobuf:"bytes,7,opt,name=theme" json:"theme,omitempty"`
+	FileUpdateLimit  *int32  `protobuf:"varint,8,opt,name=file_update_limit,json=fileUpdateLimit" json:"file_update_limit,omitempty"`
+	Replytime        *int32  `protobuf:"varint,9,opt,name=replytime" json:"replytime,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *WidgetSetting) Reset()                    { *m = WidgetSetting{} }
 func (m *WidgetSetting) String() string            { return proto.CompactTextString(m) }
 func (*WidgetSetting) ProtoMessage()               {}
-func (*WidgetSetting) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+func (*WidgetSetting) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+
+func (m *WidgetSetting) GetAccountId() string {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return ""
+}
+
+func (m *WidgetSetting) GetBlacklisted() bool {
+	if m != nil && m.Blacklisted != nil {
+		return *m.Blacklisted
+	}
+	return false
+}
+
+func (m *WidgetSetting) GetSound() *Sound {
+	if m != nil {
+		return m.Sound
+	}
+	return nil
+}
+
+func (m *WidgetSetting) GetLanguage() string {
+	if m != nil && m.Language != nil {
+		return *m.Language
+	}
+	return ""
+}
+
+func (m *WidgetSetting) GetWelcomeMessage() string {
+	if m != nil && m.WelcomeMessage != nil {
+		return *m.WelcomeMessage
+	}
+	return ""
+}
+
+func (m *WidgetSetting) GetTheme() *Theme {
+	if m != nil {
+		return m.Theme
+	}
+	return nil
+}
+
+func (m *WidgetSetting) GetFileUpdateLimit() int32 {
+	if m != nil && m.FileUpdateLimit != nil {
+		return *m.FileUpdateLimit
+	}
+	return 0
+}
+
+func (m *WidgetSetting) GetReplytime() int32 {
+	if m != nil && m.Replytime != nil {
+		return *m.Replytime
+	}
+	return 0
+}
+
+type User struct {
+	AccountId           *string `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	UserId              *string `protobuf:"bytes,4,opt,name=user_id,json=userId" json:"user_id,omitempty"`
+	SoundEnabled        *string `protobuf:"bytes,5,opt,name=sound_enabled,json=soundEnabled" json:"sound_enabled,omitempty"`
+	Language            *string `protobuf:"bytes,6,opt,name=language" json:"language,omitempty"`
+	Email               *string `protobuf:"bytes,7,opt,name=email" json:"email,omitempty"`
+	SendEmailTranscript *bool   `protobuf:"varint,8,opt,name=send_email_transcript,json=sendEmailTranscript" json:"send_email_transcript,omitempty"`
+	XXX_unrecognized    []byte  `json:"-"`
+}
+
+func (m *User) Reset()                    { *m = User{} }
+func (m *User) String() string            { return proto.CompactTextString(m) }
+func (*User) ProtoMessage()               {}
+func (*User) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+
+func (m *User) GetAccountId() string {
+	if m != nil && m.AccountId != nil {
+		return *m.AccountId
+	}
+	return ""
+}
+
+func (m *User) GetUserId() string {
+	if m != nil && m.UserId != nil {
+		return *m.UserId
+	}
+	return ""
+}
+
+func (m *User) GetSoundEnabled() string {
+	if m != nil && m.SoundEnabled != nil {
+		return *m.SoundEnabled
+	}
+	return ""
+}
+
+func (m *User) GetLanguage() string {
+	if m != nil && m.Language != nil {
+		return *m.Language
+	}
+	return ""
+}
+
+func (m *User) GetEmail() string {
+	if m != nil && m.Email != nil {
+		return *m.Email
+	}
+	return ""
+}
+
+func (m *User) GetSendEmailTranscript() bool {
+	if m != nil && m.SendEmailTranscript != nil {
+		return *m.SendEmailTranscript
+	}
+	return false
+}
 
 func init() {
+	proto.RegisterType((*Theme)(nil), "widget.Theme")
+	proto.RegisterType((*Sound)(nil), "widget.Sound")
 	proto.RegisterType((*WidgetSetting)(nil), "widget.WidgetSetting")
+	proto.RegisterType((*User)(nil), "widget.User")
 }
 
 func init() { proto.RegisterFile("widget/widget.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 58 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2e, 0xcf, 0x4c, 0x49,
-	0x4f, 0x2d, 0xd1, 0x87, 0x50, 0x7a, 0x05, 0x45, 0xf9, 0x25, 0xf9, 0x42, 0x6c, 0x10, 0x9e, 0x12,
-	0x3f, 0x17, 0x6f, 0x38, 0x98, 0x15, 0x9c, 0x5a, 0x52, 0x92, 0x99, 0x97, 0x0e, 0x08, 0x00, 0x00,
-	0xff, 0xff, 0xc2, 0x5b, 0xe5, 0xa6, 0x2e, 0x00, 0x00, 0x00,
+	// 465 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x92, 0xcd, 0x6e, 0x13, 0x31,
+	0x14, 0x85, 0x95, 0xb6, 0x93, 0x9f, 0x9b, 0x86, 0x50, 0x07, 0xc4, 0x08, 0x81, 0x88, 0x92, 0x05,
+	0x85, 0x45, 0x90, 0xfa, 0x0a, 0x51, 0x91, 0x2a, 0xc1, 0x66, 0xd2, 0xaa, 0x4b, 0xcb, 0xf1, 0xdc,
+	0x06, 0xab, 0x1e, 0x3b, 0xb2, 0x3d, 0x8c, 0xe0, 0x8d, 0x78, 0x09, 0xf6, 0xbc, 0x15, 0xf2, 0xf5,
+	0xe4, 0x47, 0x59, 0x45, 0xf7, 0x3b, 0x37, 0x63, 0x9f, 0x73, 0x0c, 0x93, 0x46, 0x95, 0x1b, 0x0c,
+	0x5f, 0xd2, 0xcf, 0x62, 0xeb, 0x6c, 0xb0, 0xac, 0x9b, 0xa6, 0xd9, 0x23, 0x64, 0xf7, 0x3f, 0xb0,
+	0x42, 0xf6, 0x09, 0x5e, 0xae, 0x85, 0x7c, 0xde, 0x38, 0x5b, 0x9b, 0x92, 0x4b, 0xab, 0xad, 0xcb,
+	0x7b, 0xd3, 0xce, 0xf5, 0xa0, 0x18, 0x1f, 0xf8, 0x32, 0x62, 0x36, 0x87, 0x91, 0xac, 0x7d, 0xb0,
+	0x95, 0xfa, 0x8d, 0x5c, 0x7a, 0x9f, 0xf7, 0x69, 0xef, 0x72, 0x0f, 0x97, 0xde, 0xcf, 0xfe, 0x76,
+	0x20, 0x5b, 0xc5, 0xff, 0xb0, 0x1c, 0x7a, 0x68, 0xc4, 0x5a, 0x63, 0x99, 0x9f, 0x4d, 0x3b, 0xd7,
+	0xfd, 0x62, 0x37, 0xc6, 0x33, 0x0d, 0x36, 0x5c, 0x5a, 0xf3, 0x13, 0x9d, 0x17, 0x41, 0x59, 0x93,
+	0x9f, 0xa7, 0x33, 0x0d, 0x36, 0xcb, 0x23, 0xcc, 0x3e, 0xc0, 0xf0, 0x49, 0x69, 0xe4, 0xd2, 0xa1,
+	0x08, 0x98, 0x5f, 0xd0, 0x16, 0x44, 0xb4, 0x24, 0x12, 0x17, 0xe2, 0xb7, 0x2a, 0xf4, 0x5e, 0x6c,
+	0x30, 0xcf, 0xd2, 0x82, 0xc1, 0xe6, 0x7b, 0x22, 0x6c, 0x01, 0x93, 0x56, 0xe4, 0x1e, 0x4d, 0xc9,
+	0x9f, 0x84, 0x8a, 0x57, 0xea, 0xd2, 0xe2, 0x55, 0x2b, 0xad, 0xd0, 0x94, 0x5f, 0x49, 0x98, 0xfd,
+	0x39, 0x83, 0xd1, 0x23, 0x85, 0xb4, 0xc2, 0x10, 0x94, 0xd9, 0xb0, 0xf7, 0x00, 0x42, 0x4a, 0x5b,
+	0x9b, 0xc0, 0x55, 0xf2, 0x32, 0x28, 0x06, 0x2d, 0xb9, 0x2b, 0xd9, 0x14, 0x86, 0x6b, 0x2d, 0xe4,
+	0xb3, 0x56, 0x3e, 0x60, 0x49, 0x46, 0xfa, 0xc5, 0x31, 0x62, 0x73, 0xc8, 0x7c, 0x8c, 0x84, 0xae,
+	0x3f, 0xbc, 0x19, 0x2d, 0xda, 0x4a, 0x28, 0xa7, 0x22, 0x69, 0xec, 0x2d, 0xf4, 0xb5, 0x30, 0x9b,
+	0xfa, 0xe0, 0x62, 0x3f, 0xb3, 0x8f, 0x30, 0x6e, 0x50, 0x4b, 0x5b, 0xe1, 0xde, 0x68, 0xba, 0xff,
+	0x8b, 0x16, 0xef, 0xcc, 0xce, 0x21, 0x0b, 0xb1, 0x56, 0xaa, 0xf0, 0xe8, 0x24, 0xea, 0xba, 0x48,
+	0x1a, 0xfb, 0x0c, 0x57, 0x94, 0x69, 0xbd, 0x2d, 0x45, 0x40, 0xae, 0x55, 0xa5, 0x02, 0x75, 0x99,
+	0x15, 0xe3, 0x28, 0x3c, 0x10, 0xff, 0x16, 0x31, 0x7b, 0x07, 0x03, 0x87, 0x5b, 0xfd, 0x2b, 0xa8,
+	0x0a, 0xf3, 0x01, 0xed, 0x1c, 0xc0, 0xec, 0x5f, 0x07, 0x2e, 0x1e, 0x3c, 0xba, 0x93, 0x88, 0xce,
+	0x4f, 0x23, 0x7a, 0x03, 0xbd, 0xda, 0xa3, 0x8b, 0x5a, 0x6a, 0xb0, 0x1b, 0xc7, 0xbb, 0x98, 0xcc,
+	0x88, 0xdc, 0xf3, 0xdd, 0x4b, 0x49, 0xce, 0x2f, 0x09, 0xde, 0xb6, 0xcf, 0xe5, 0x38, 0x99, 0xee,
+	0x49, 0x32, 0xaf, 0x20, 0xc3, 0x4a, 0x28, 0xdd, 0xbe, 0xd9, 0x34, 0xb0, 0x1b, 0x78, 0x4d, 0x5d,
+	0xd3, 0xc4, 0x83, 0x13, 0xc6, 0x4b, 0xa7, 0xb6, 0xc9, 0x65, 0xbf, 0x98, 0x44, 0xf1, 0x36, 0x6a,
+	0xf7, 0x7b, 0xe9, 0x7f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xdf, 0xc7, 0x16, 0x5c, 0x2f, 0x03, 0x00,
+	0x00,
 }
