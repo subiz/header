@@ -122,6 +122,18 @@ message Method {
 	bool ReadUserFacebookId = 206;
 	bool ReadUserPhone = 207;
 
+
+	bool update_widget_setting = 299;
+
+	bool create_whitelist_domain = 300;
+	bool create_whitelist_ip = 301;
+	bool create_whitelist_user = 302;
+	bool delete_whitelist_domain = 303;
+	bool delete_whitelist_ip = 304;
+	bool delete_whitelist_user = 305;
+	bool list_whitelist_ip = 306;
+	bool list_whitelist_user = 307;
+	bool list_whitelist_domain = 308;
 }
 
 message UserAuth {
