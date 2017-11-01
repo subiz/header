@@ -1,180 +1,180 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package auth;
 
 message Credential {
-	optional string account_id = 1;
-	optional string issuer = 3;
-	optional Type type = 4;
+	string account_id = 1;
+	string issuer = 3;
+	Type type = 4;
 
-	optional Method method = 5;
+	Method method = 5;
 
-	optional string client_id = 7;
-	optional Type client_type = 8;
-	optional string client_account_id = 10;
+	string client_id = 7;
+	Type client_type = 8;
+	string client_account_id = 10;
 
-	repeated string scopes = 9;
+	string scopes = 9;
 
 	// optional
-	optional string avatar_url = 15;
-	optional string name = 16;
-	optional string email = 17;
+	string avatar_url = 15;
+	string name = 16;
+	string email = 17;
 }
 
 message Scope {
-	required string id = 1;
-	required string name = 2;
-	required string logo_url = 3;
-	required string title = 4;
-  required string description = 5;
-	required Method method = 6;
-	required Event event = 7;
+	string id = 1;
+	string name = 2;
+	string logo_url = 3;
+	string title = 4;
+	string description = 5;
+	Method method = 6;
+	Event event = 7;
 }
 
 message Event {
-	optional bool conversation_started = 10;
-	optional bool conversation_sent = 11;
-	optional bool conversation_joined = 12;
+	bool conversation_started = 10;
+	bool conversation_sent = 11;
+	bool conversation_joined = 12;
 }
 
 message Method {
 	// trigger
-	optional bool update_trigger = 50;
-	optional bool delete_trigger = 51;
-	optional bool create_trigger = 52;
-	optional bool read_trigger = 53;
-	optional bool list_trigger = 54;
-	optional bool ReadAllTrigger = 55;
-	optional bool ListAllTrigger = 56;
-	optional bool UpdateAllTrigger = 57;
-	optional bool DeleteAllTrigger = 58;
-	optional bool CreateAllTrigger = 59;
+	bool update_trigger = 50;
+	bool delete_trigger = 51;
+	bool create_trigger = 52;
+	bool read_trigger = 53;
+	bool list_trigger = 54;
+	bool ReadAllTrigger = 55;
+	bool ListAllTrigger = 56;
+	bool UpdateAllTrigger = 57;
+	bool DeleteAllTrigger = 58;
+	bool CreateAllTrigger = 59;
 
 	// agents
 
 	//bool AuthorizeAgentClient = 89;
 	//bool RevokeAgentClient = 90;
-	optional bool ReadAgentNotification = 105;
-	optional bool SeenAgentNotification = 106;
+	bool ReadAgentNotification = 105;
+	bool SeenAgentNotification = 106;
 
-	optional bool Ping = 107;
+	bool Ping = 107;
 	// agent
-	optional bool UpdatePasswords = 109;
-	optional bool UpdatePassword = 108;
-	optional bool InviteAgents = 70;
-	optional bool UpdateAgent = 72;
-	optional bool UpdateAgents = 73;
-	optional bool ReadAgent = 76;
-	optional bool ReadAgents = 77;
-	optional bool ResetPassword = 78; // acc group
+	bool UpdatePasswords = 109;
+	bool UpdatePassword = 108;
+	bool InviteAgents = 70;
+	bool UpdateAgent = 72;
+	bool UpdateAgents = 73;
+	bool ReadAgent = 76;
+	bool ReadAgents = 77;
+	bool ResetPassword = 78; // acc group
 
-	optional bool UpdateAgentsPermission = 81;
+	bool UpdateAgentsPermission = 81;
 	//bool ListAgentClient = 85;
-	optional bool UpdateAgentsState = 86;
+	bool UpdateAgentsState = 86;
 
 
 	// bool ReadAccount = 120; // default right
-	optional bool ConfirmAccount = 120;
+	bool ConfirmAccount = 120;
 	//bool ListAccountClient = 121;
 
 	// agent group
-	optional bool CreateAgentGroups = 124;
-	optional bool DeleteAgentGroups = 125;
-	optional bool ReadAgentGroups = 126;
-	optional bool UpdateAgentGroups = 127;
+	bool CreateAgentGroups = 124;
+	bool DeleteAgentGroups = 125;
+	bool ReadAgentGroups = 126;
+	bool UpdateAgentGroups = 127;
 
 	// account
-	optional bool UpdatePlan = 123; // only for subiz agent
+	bool UpdatePlan = 123; // only for subiz agent
 	//bool ViewAccountReport = 125;
 	//bool EnableChannel = 126;
 	//bool DisableChannel = 127;
-	optional bool CreateAccount = 129;
-	optional bool DeleteAccount = 130;
-	optional bool UpdateAccount  = 122;
-	optional bool ReadAccount = 131;
+	bool CreateAccount = 129;
+	bool DeleteAccount = 130;
+	bool UpdateAccount  = 122;
+	bool ReadAccount = 131;
 
 	// clients
-	optional bool ReadClient = 151;
-	optional bool ListClient = 152;
-	optional bool UpdateClientInfo = 153;
-	optional bool PublishClient = 154;
-	optional bool RegenerateClientSecret = 155;
-	optional bool VerifyClient = 156;
-	optional bool DeleteClient = 157;
-	optional bool CreateClient = 158;
+	bool ReadClient = 151;
+	bool ListClient = 152;
+	bool UpdateClientInfo = 153;
+	bool PublishClient = 154;
+	bool RegenerateClientSecret = 155;
+	bool VerifyClient = 156;
+	bool DeleteClient = 157;
+	bool CreateClient = 158;
 
 	// rule
-	optional bool ReadRule = 180;
-	optional bool UpdateRule = 181;
-	optional bool DeleteRule = 182;
+	bool ReadRule = 180;
+	bool UpdateRule = 181;
+	bool DeleteRule = 182;
 
 	// channel
 
 	// converstation
-	optional bool StartConversation = 190;
-	optional bool ReadConversation = 191;
-	optional bool WriteConversation = 192;
+	bool StartConversation = 190;
+	bool ReadConversation = 191;
+	bool WriteConversation = 192;
 
 	// connector integration
-	optional bool IntegrateConnector = 200;
+	bool IntegrateConnector = 200;
 
-	optional bool ReadUserEmail = 205;
-	optional bool ReadUserFacebookId = 206;
-	optional bool ReadUserPhone = 207;
+	bool ReadUserEmail = 205;
+	bool ReadUserFacebookId = 206;
+	bool ReadUserPhone = 207;
 
 }
 
 message UserAuth {
-	optional string UserId = 1;
-	optional Method Method = 2;
+	string UserId = 1;
+	Method Method = 2;
 }
 
 message PasswordCredential {
-	optional string username = 1;
-	optional string password = 2;
+	string username = 1;
+	string password = 2;
 }
 
 message AuthCookie {
-	optional string user_id = 1;
-	optional string account_id = 2;
+	string user_id = 1;
+	string account_id = 2;
 }
 
 message OauthAccessToken {
-	optional string access_token = 1;
-	optional string token_type = 3;
-	optional int64 expires_in = 4;
-	optional string refresh_token = 5;
-	optional string scope = 6;
-	optional string state = 7;
-	optional string error = 8;
-	optional string error_description = 9;
-  optional string error_uri = 10;
+	string access_token = 1;
+	string token_type = 3;
+	int64 expires_in = 4;
+	string refresh_token = 5;
+	string scope = 6;
+	string state = 7;
+	string error = 8;
+	string error_description = 9;
+  string error_uri = 10;
 }
 
 message AccessToken {
-	optional string	issuer_id = 1;
-	optional string issuer_type = 7;
-	optional string client_id = 2;
-  optional string	client_type = 3;
-	optional string	account_id = 4;
-	optional string	client_account_id = 5;
+	string	issuer_id = 1;
+	string issuer_type = 7;
+	string client_id = 2;
+  string	client_type = 3;
+	string	account_id = 4;
+	string	client_account_id = 5;
 	repeated string scopes = 6;
 }
 
 message CookieExpire {
-	optional string user_id = 1;
-	optional string account_id = 2;
+	string user_id = 1;
+	string account_id = 2;
 
 	// expired_token will be mark as expired
-	optional string expired_token = 3;
+	string expired_token = 3;
 
 
 	// all token issue before before_time will be mark as expired, except for
 	// except_token
-	optional int64 before_time = 4;
+	int64 before_time = 4;
 
 	// this token will not be expired
-	optional string except_token = 5;
+	string except_token = 5;
 
 }
 
@@ -198,10 +198,10 @@ enum Type {
 message User {
 	reserved 1, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
 	//	optioanl common.Context ctx = 1;
-	optional string id = 2;
-	optional string account_id = 3;
-	optional string email = 5;
-	optional string encrypted_password = 17;
+	string id = 2;
+	string account_id = 3;
+	string email = 5;
+	string encrypted_password = 17;
 }
 
 enum AuthorizationType {
@@ -210,6 +210,7 @@ enum AuthorizationType {
 }
 
 enum EVENT {
+	AUTH = 0;
 	AuthExpireCookie = 4; //CookieExpire
 
 	ClientAuthorized = 12;
