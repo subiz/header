@@ -187,7 +187,7 @@ enum Type {
 
 	// APP is general client type
 	app = 5;
-
+	rest = 8;
 	// CHANNEL is special client, that can and only listen chat topics of an account
 	connector = 6;
 
