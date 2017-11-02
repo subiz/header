@@ -64,4 +64,6 @@ enum T {
 	rsa_key_not_found = 85;
 	jwt_sign_error = 86;
 	env_config_error = 87;
+	scrypt_error = 90;
+	challenge_not_found = 91;
 }
