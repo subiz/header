@@ -57,6 +57,21 @@ message ListRequest {
 	optional int32 limit = 4;
 }
 
+message ScryptChallenge {
+	optional common.Context ctx = 1;
+	optional string account_id = 9;
+	optional string id = 2; // very long string
+	optional int32 n = 3;
+	optional int32 p = 4;
+	optional int32 r = 5;
+	optional string salt = 6;
+	optional string hash = 8; // 32 bit hex
+
+	// only for subiz use
+	optional int32 answer = 10;
+	optional int64 created = 11;
+}
+
 enum Event {
 
 	ConversationStart = 2;
