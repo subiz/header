@@ -2,9 +2,24 @@ syntax = "proto2";
 
 package widget;
 
+import "bitbucket.org/subiz/header/account/account.proto";
+import "bitbucket.org/subiz/header/common/common.proto";
+import "bitbucket.org/subiz/header/user/user.proto";
+
 message Theme {
 	optional string background_color = 7;
-	optional string customize_css = 8;
+	optional string custom_css = 8;
+	optional string button_position = 3;
+	enum ButtonPosition {
+		left = 0;
+		right = 1;
+	}
+	optional string button_style = 4; // default subiz
+	optional string window_mode = 5;
+	enum WindowMode {
+		mini = 0;
+		full = 1;
+	}
 }
 
 message Sound {
@@ -16,22 +31,33 @@ message Sound {
 }
 
 message WidgetSetting {
+	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional bool blacklisted = 3; // requested based
+
 	optional Sound sound = 4;
 	optional string language = 5;
 	optional string welcome_message = 6;
 	optional Theme theme = 7;
 
-	optional int32 file_update_limit = 8;
 	optional int32 replytime = 9;
 }
 
-message User {
-	optional string account_id = 3;
-	optional string user_id = 4;
+message WidgetUserSetting {
+	optional common.Context ctx = 1;
+	optional account.Account account = 3;
+	optional string account_id = 2; // subiz use only
+	optional user.User user = 4;
+	optional string user_id = 7; // subiz use only
 	optional string sound_enabled = 5;
 	optional string language = 6;
-	optional string email = 7;
-	optional bool send_email_transcript = 8;
+	optional bool send_transcript = 8;
+	optional WidgetSetting account_setting = 9;
+	optional bool desktop_notification = 10;
+}
+
+enum Event {
+	WidgetUserSettingReadRequested = 0;
+	WidgetUserSettingUpdateRequested = 1;
+	WidgetSettingReadRequested = 2;
+	WidgetSettingUpdateRequested = 3;
 }
