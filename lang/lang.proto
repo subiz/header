@@ -66,4 +66,5 @@ enum T {
 	env_config_error = 87;
 	scrypt_error = 90;
 	challenge_not_found = 91;
+	wrong_answer = 92;
 }
