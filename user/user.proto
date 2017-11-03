@@ -12,7 +12,7 @@ message User {
 	repeated string phones = 7;
 	repeated string emails = 10;
 	repeated Trace traces = 11;
-	repeated string alias = 12;
+	//	repeated string alias = 12;
 	repeated Device devices = 13;
 	optional bool is_ban = 14;
 	optional string avatar_url = 15;
@@ -29,7 +29,7 @@ message User {
 	optional string country_code = 27;
 	optional string language = 28;
 
-	optional string aliases = 30;
+	repeated string aliases = 30;
 	optional int64 last_seen = 31;
 }
 
