@@ -68,7 +68,7 @@ message ScryptChallenge {
 	optional string hash = 8; // 32 bit hex
 
 	// only for subiz use
-	optional int32 answer = 10;
+	optional string answer = 10;
 	optional int64 created = 11;
 }
 
