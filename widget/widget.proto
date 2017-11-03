@@ -30,7 +30,7 @@ message Sound {
 	optional string message_send_failed = 6;
 }
 
-message WidgetSetting {
+message Setting {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 
@@ -42,7 +42,7 @@ message WidgetSetting {
 	optional int32 replytime = 9;
 }
 
-message WidgetUserSetting {
+message UserSetting {
 	optional common.Context ctx = 1;
 	optional account.Account account = 3;
 	optional string account_id = 2; // subiz use only
@@ -51,7 +51,7 @@ message WidgetUserSetting {
 	optional string sound_enabled = 5;
 	optional string language = 6;
 	optional bool send_transcript = 8;
-	optional WidgetSetting account_setting = 9;
+	optional Setting account_setting = 9;
 	optional bool desktop_notification = 10;
 }
 
