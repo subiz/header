@@ -40,6 +40,8 @@ message Setting {
 	optional Theme theme = 7;
 
 	optional int32 replytime = 9;
+	repeated account.Agent agents = 10;
+	repeated string agent_ids = 11; // subiz only
 }
 
 message UserSetting {
