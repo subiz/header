@@ -67,4 +67,6 @@ enum T {
 	scrypt_error = 90;
 	challenge_not_found = 91;
 	wrong_answer = 92;
+	server_listen_error = 93;
+	scrypt_file_not_found = 94;
 }
