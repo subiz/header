@@ -88,10 +88,10 @@ message Method {
 	//bool ViewAccountReport = 125;
 	//bool EnableChannel = 126;
 	//bool DisableChannel = 127;
-	bool CreateAccount = 129;
-	bool DeleteAccount = 130;
-	bool UpdateAccount  = 122;
-	bool ReadAccount = 131;
+	bool create_account = 129;
+	bool delete_account = 130;
+	bool update_account  = 122;
+	bool read_account = 131;
 
 	// clients
 	bool ReadClient = 151;
@@ -104,9 +104,9 @@ message Method {
 	bool CreateClient = 158;
 
 	// rule
-	bool ReadRule = 180;
-	bool UpdateRule = 181;
-	bool DeleteRule = 182;
+	bool read_rule = 180;
+	bool update_rule = 181;
+	bool delete_rule = 182;
 
 	// channel
 
@@ -118,10 +118,10 @@ message Method {
 	// connector integration
 	bool IntegrateConnector = 200;
 
-	bool ReadUserEmail = 205;
-	bool ReadUserFacebookId = 206;
-	bool ReadUserPhone = 207;
-
+	bool read_user_email = 205;
+	bool read_user_facebook_id = 206;
+	bool read_user_phones = 207;
+	bool read_user_widget_setting = 208;
 
 	bool update_widget_setting = 299;
 
