@@ -5,7 +5,6 @@ package account;
 import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 
-
 message Agent {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -90,21 +89,10 @@ message Account {
 	}
 }
 
-message Id {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string id = 3;
-}
-
 message AgentIds {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	repeated string ids = 3;
-}
-
-message Ids {
-	optional common.Context ctx = 1;
-	repeated string ids = 2;
 }
 
 message ListAgentRequest {
