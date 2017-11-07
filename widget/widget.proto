@@ -50,7 +50,7 @@ message UserSetting {
 	optional string account_id = 2; // subiz use only
 	optional user.User user = 4;
 	optional string user_id = 7; // subiz use only
-	optional string sound_enabled = 5;
+	optional bool sound_enabled = 5;
 	optional string language = 6;
 	optional bool send_transcript = 8;
 	optional Setting account_setting = 9;
