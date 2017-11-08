@@ -69,4 +69,5 @@ enum T {
 	wrong_answer = 92;
 	server_listen_error = 93;
 	scrypt_file_not_found = 94;
+	invalid_topic = 95;
 }
