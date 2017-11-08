@@ -198,6 +198,7 @@ message ListConversations {
 	optional string state = 4;
 	optional int32 limit = 5;
 	optional string start_id = 6;
+	optional string member_id = 8;
 }
 
 message ListUsersUnreadRequest {
