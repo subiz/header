@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package user;
+
+import "bitbucket.org/subiz/header/common/common.proto";
+
+message Segmentation {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3;
+
+	int64 user_count = 4;
+	repeated SegmentCondition query = 5; // suffix annotation
+	// a * b + (c + d) * e  ==>  + * a b * + c d e
+}
+
+message SegmentCondition {
+	enum Operator {
+		and = 0;
+		or = 1;
+	}
+	string op = 2;
+	bool is_op = 3;
+	string key = 4;
+	string operator = 5;
+	string value = 6; // JSON
+}
