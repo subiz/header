@@ -153,6 +153,11 @@ enum Event {
 	UserSegmentationReadRequested = 14;
 }
 
+message Segmentations {
+	optional common.Context ctx = 1;
+	repeated Segmentation segmentations = 3;
+}
+
 message Segmentation {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
