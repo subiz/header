@@ -125,6 +125,7 @@ message CreateAccountRequest {
 	optional string password = 5;
 	optional string account_name = 6;
 	optional string account_url = 7;
+	optional string avatar_url = 8;
 }
 
 enum Gender {
