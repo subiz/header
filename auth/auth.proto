@@ -50,6 +50,13 @@ message Method {
 	bool DeleteAllTrigger = 58;
 	bool CreateAllTrigger = 59;
 
+
+	// segmentation
+	bool read_segmentation = 60;
+	bool update_segmentation = 61;
+	bool delete_segmentation = 62;
+
+
 	// agents
 
 	//bool AuthorizeAgentClient = 89;
