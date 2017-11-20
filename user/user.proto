@@ -27,6 +27,8 @@ message User {
 	optional string subiz_id = 25;
 	optional string timezone = 26;
 	optional string country_code = 27;
+	optional string country = 29;
+	optional string city = 32;
 	optional string language = 28;
 
 	repeated string aliases = 30;
