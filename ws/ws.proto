@@ -10,7 +10,7 @@ message Subscribe {
 	repeated string events = 3;
 
 	// optional: only use this in widget; otherwise must provide credential through access token
-	string mask_id = 4;
+	//	string mask_id = 4;
 
 	string connection_id = 5;
 }
