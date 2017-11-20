@@ -145,6 +145,12 @@ enum Event {
 	UserEventCreateRequested = 5;
 	UserListEventsRequested = 7;
 	UserTopicSumaryRequested = 6;
+
+	UserSegmentationCreateRequested = 10;
+	UserSegmentationUpdateRequested = 11;
+	UserSegmentationDeleteRequested = 12;
+	UserSegmentationListRequested = 13;
+	UserSegmentationReadRequested = 14;
 }
 
 message Segmentation {
