@@ -146,3 +146,42 @@ enum Event {
 	UserListEventsRequested = 7;
 	UserTopicSumaryRequested = 6;
 }
+
+message Segmentation {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 5;
+	optional string name = 3;
+
+	optional int64 user_count = 4;
+	repeated Condition conditions = 6;
+	//repeated SegmentCondition query = 5; // suffix annotation
+	// a * b + (c + d) * e  ==>  + * a b * + c d e
+	optional int64 lastrun = 8;
+	optional int64 created = 9;
+	optional int64 modified = 10;
+}
+
+message SegmentCondition {
+	enum Operator {
+		and = 0;
+		or = 1;
+	}
+	optional string op = 2;
+	optional bool is_op = 3;
+	optional string key = 4;
+	optional string operator = 5;
+	optional string value = 6; // JSON
+}
+
+message Condition {
+	enum JoinOperator {
+		none = 0;
+		and = 1;
+		or = 2;
+	}
+	optional string join = 1;
+	optional string key = 2; // unique
+	optional string operator = 3; // = # regex
+	optional string value = 4; // JSON
+}
