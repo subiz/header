@@ -1,51 +1,44 @@
-syntax="proto2";
+syntax="proto3";
 
 package file;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
 message FileHeader {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string name = 3;
-	optional string type = 4;
-	optional int64 size = 5;
-	optional string md5 = 6;
-	optional string description = 7;
-}
-
-message Id {
-	optional common.Context ctx = 1;
-	optional string id = 3;
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3;
+	string type = 4;
+	int64 size = 5;
+	string md5 = 6;
+	string description = 7;
 }
 
 message PresignResult {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional string url = 4;
-	optional string id = 6;
-	optional string signed_url = 5;
+	common.Context ctx = 1;
+	string account_id = 3;
+	string url = 4;
+	string id = 6;
+	string signed_url = 5;
 }
 
 message File {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string name = 3;
-	optional string type = 4;
-	optional int64 size = 5;
-	optional string md5 = 6;
-
-	optional string description = 10;
-	optional string created = 7;
-	optional string url = 8;
-	optional string creator = 9;
-
-	optional string id = 11;
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3;
+	string type = 4;
+	int64 size = 5;
+	string md5 = 6;
+	string description = 10;
+	string created = 7;
+	string url = 8;
+	string creator = 9;
+	string id = 11;
 }
 
 enum Event {
-	FileSignRequested = 2;
-
+	FilePresignRequested = 0;
 	FileCreated = 3;
 	FileInfoRequested = 4;
+	FileUploaded = 6;
 }

@@ -9,7 +9,6 @@ It is generated from these files:
 
 It has these top-level messages:
 	FileHeader
-	Id
 	PresignResult
 	File
 */
@@ -34,49 +33,38 @@ const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 type Event int32
 
 const (
-	Event_FileSignRequested Event = 2
-	Event_FileCreated       Event = 3
-	Event_FileInfoRequested Event = 4
+	Event_FilePresignRequested Event = 0
+	Event_FileCreated          Event = 3
+	Event_FileInfoRequested    Event = 4
+	Event_FileUploaded         Event = 6
 )
 
 var Event_name = map[int32]string{
-	2: "FileSignRequested",
+	0: "FilePresignRequested",
 	3: "FileCreated",
 	4: "FileInfoRequested",
+	6: "FileUploaded",
 }
 var Event_value = map[string]int32{
-	"FileSignRequested": 2,
-	"FileCreated":       3,
-	"FileInfoRequested": 4,
+	"FilePresignRequested": 0,
+	"FileCreated":          3,
+	"FileInfoRequested":    4,
+	"FileUploaded":         6,
 }
 
-func (x Event) Enum() *Event {
-	p := new(Event)
-	*p = x
-	return p
-}
 func (x Event) String() string {
 	return proto.EnumName(Event_name, int32(x))
-}
-func (x *Event) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(Event_value, data, "Event")
-	if err != nil {
-		return err
-	}
-	*x = Event(value)
-	return nil
 }
 func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type FileHeader struct {
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId        *string         `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Name             *string         `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
-	Type             *string         `protobuf:"bytes,4,opt,name=type" json:"type,omitempty"`
-	Size             *int64          `protobuf:"varint,5,opt,name=size" json:"size,omitempty"`
-	Md5              *string         `protobuf:"bytes,6,opt,name=md5" json:"md5,omitempty"`
-	Description      *string         `protobuf:"bytes,7,opt,name=description" json:"description,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Ctx         *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId   string          `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Name        string          `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
+	Type        string          `protobuf:"bytes,4,opt,name=type" json:"type,omitempty"`
+	Size        int64           `protobuf:"varint,5,opt,name=size" json:"size,omitempty"`
+	Md5         string          `protobuf:"bytes,6,opt,name=md5" json:"md5,omitempty"`
+	Description string          `protobuf:"bytes,7,opt,name=description" json:"description,omitempty"`
 }
 
 func (m *FileHeader) Reset()                    { *m = FileHeader{} }
@@ -92,85 +80,59 @@ func (m *FileHeader) GetCtx() *common.Context {
 }
 
 func (m *FileHeader) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
+	if m != nil {
+		return m.AccountId
 	}
 	return ""
 }
 
 func (m *FileHeader) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
+	if m != nil {
+		return m.Name
 	}
 	return ""
 }
 
 func (m *FileHeader) GetType() string {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return ""
 }
 
 func (m *FileHeader) GetSize() int64 {
-	if m != nil && m.Size != nil {
-		return *m.Size
+	if m != nil {
+		return m.Size
 	}
 	return 0
 }
 
 func (m *FileHeader) GetMd5() string {
-	if m != nil && m.Md5 != nil {
-		return *m.Md5
+	if m != nil {
+		return m.Md5
 	}
 	return ""
 }
 
 func (m *FileHeader) GetDescription() string {
-	if m != nil && m.Description != nil {
-		return *m.Description
-	}
-	return ""
-}
-
-type Id struct {
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Id               *string         `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
-}
-
-func (m *Id) Reset()                    { *m = Id{} }
-func (m *Id) String() string            { return proto.CompactTextString(m) }
-func (*Id) ProtoMessage()               {}
-func (*Id) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
-
-func (m *Id) GetCtx() *common.Context {
 	if m != nil {
-		return m.Ctx
-	}
-	return nil
-}
-
-func (m *Id) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
+		return m.Description
 	}
 	return ""
 }
 
 type PresignResult struct {
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId        *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Url              *string         `protobuf:"bytes,4,opt,name=url" json:"url,omitempty"`
-	Id               *string         `protobuf:"bytes,6,opt,name=id" json:"id,omitempty"`
-	SignedUrl        *string         `protobuf:"bytes,5,opt,name=signed_url,json=signedUrl" json:"signed_url,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Url       string          `protobuf:"bytes,4,opt,name=url" json:"url,omitempty"`
+	Id        string          `protobuf:"bytes,6,opt,name=id" json:"id,omitempty"`
+	SignedUrl string          `protobuf:"bytes,5,opt,name=signed_url,json=signedUrl" json:"signed_url,omitempty"`
 }
 
 func (m *PresignResult) Reset()                    { *m = PresignResult{} }
 func (m *PresignResult) String() string            { return proto.CompactTextString(m) }
 func (*PresignResult) ProtoMessage()               {}
-func (*PresignResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
+func (*PresignResult) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
 
 func (m *PresignResult) GetCtx() *common.Context {
 	if m != nil {
@@ -180,52 +142,51 @@ func (m *PresignResult) GetCtx() *common.Context {
 }
 
 func (m *PresignResult) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
+	if m != nil {
+		return m.AccountId
 	}
 	return ""
 }
 
 func (m *PresignResult) GetUrl() string {
-	if m != nil && m.Url != nil {
-		return *m.Url
+	if m != nil {
+		return m.Url
 	}
 	return ""
 }
 
 func (m *PresignResult) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
+	if m != nil {
+		return m.Id
 	}
 	return ""
 }
 
 func (m *PresignResult) GetSignedUrl() string {
-	if m != nil && m.SignedUrl != nil {
-		return *m.SignedUrl
+	if m != nil {
+		return m.SignedUrl
 	}
 	return ""
 }
 
 type File struct {
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId        *string         `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Name             *string         `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
-	Type             *string         `protobuf:"bytes,4,opt,name=type" json:"type,omitempty"`
-	Size             *int64          `protobuf:"varint,5,opt,name=size" json:"size,omitempty"`
-	Md5              *string         `protobuf:"bytes,6,opt,name=md5" json:"md5,omitempty"`
-	Description      *string         `protobuf:"bytes,10,opt,name=description" json:"description,omitempty"`
-	Created          *string         `protobuf:"bytes,7,opt,name=created" json:"created,omitempty"`
-	Url              *string         `protobuf:"bytes,8,opt,name=url" json:"url,omitempty"`
-	Creator          *string         `protobuf:"bytes,9,opt,name=creator" json:"creator,omitempty"`
-	Id               *string         `protobuf:"bytes,11,opt,name=id" json:"id,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Ctx         *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId   string          `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Name        string          `protobuf:"bytes,3,opt,name=name" json:"name,omitempty"`
+	Type        string          `protobuf:"bytes,4,opt,name=type" json:"type,omitempty"`
+	Size        int64           `protobuf:"varint,5,opt,name=size" json:"size,omitempty"`
+	Md5         string          `protobuf:"bytes,6,opt,name=md5" json:"md5,omitempty"`
+	Description string          `protobuf:"bytes,10,opt,name=description" json:"description,omitempty"`
+	Created     string          `protobuf:"bytes,7,opt,name=created" json:"created,omitempty"`
+	Url         string          `protobuf:"bytes,8,opt,name=url" json:"url,omitempty"`
+	Creator     string          `protobuf:"bytes,9,opt,name=creator" json:"creator,omitempty"`
+	Id          string          `protobuf:"bytes,11,opt,name=id" json:"id,omitempty"`
 }
 
 func (m *File) Reset()                    { *m = File{} }
 func (m *File) String() string            { return proto.CompactTextString(m) }
 func (*File) ProtoMessage()               {}
-func (*File) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{3} }
+func (*File) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{2} }
 
 func (m *File) GetCtx() *common.Context {
 	if m != nil {
@@ -235,78 +196,77 @@ func (m *File) GetCtx() *common.Context {
 }
 
 func (m *File) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
+	if m != nil {
+		return m.AccountId
 	}
 	return ""
 }
 
 func (m *File) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
+	if m != nil {
+		return m.Name
 	}
 	return ""
 }
 
 func (m *File) GetType() string {
-	if m != nil && m.Type != nil {
-		return *m.Type
+	if m != nil {
+		return m.Type
 	}
 	return ""
 }
 
 func (m *File) GetSize() int64 {
-	if m != nil && m.Size != nil {
-		return *m.Size
+	if m != nil {
+		return m.Size
 	}
 	return 0
 }
 
 func (m *File) GetMd5() string {
-	if m != nil && m.Md5 != nil {
-		return *m.Md5
+	if m != nil {
+		return m.Md5
 	}
 	return ""
 }
 
 func (m *File) GetDescription() string {
-	if m != nil && m.Description != nil {
-		return *m.Description
+	if m != nil {
+		return m.Description
 	}
 	return ""
 }
 
 func (m *File) GetCreated() string {
-	if m != nil && m.Created != nil {
-		return *m.Created
+	if m != nil {
+		return m.Created
 	}
 	return ""
 }
 
 func (m *File) GetUrl() string {
-	if m != nil && m.Url != nil {
-		return *m.Url
+	if m != nil {
+		return m.Url
 	}
 	return ""
 }
 
 func (m *File) GetCreator() string {
-	if m != nil && m.Creator != nil {
-		return *m.Creator
+	if m != nil {
+		return m.Creator
 	}
 	return ""
 }
 
 func (m *File) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
+	if m != nil {
+		return m.Id
 	}
 	return ""
 }
 
 func init() {
 	proto.RegisterType((*FileHeader)(nil), "file.FileHeader")
-	proto.RegisterType((*Id)(nil), "file.Id")
 	proto.RegisterType((*PresignResult)(nil), "file.PresignResult")
 	proto.RegisterType((*File)(nil), "file.File")
 	proto.RegisterEnum("file.Event", Event_name, Event_value)
@@ -315,28 +275,29 @@ func init() {
 func init() { proto.RegisterFile("file/file.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 368 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x51, 0xcd, 0x4a, 0xeb, 0x40,
-	0x18, 0x25, 0x3f, 0x6d, 0x6f, 0xbf, 0x70, 0x6f, 0x73, 0x07, 0x2e, 0x0c, 0x17, 0x84, 0x98, 0x55,
-	0x71, 0x91, 0x80, 0x20, 0x3e, 0x40, 0xb1, 0xd8, 0x9d, 0x44, 0x5c, 0x97, 0x34, 0xf3, 0xb5, 0x0e,
-	0x26, 0x33, 0x75, 0x32, 0x91, 0xda, 0x87, 0x70, 0xe1, 0x03, 0xf9, 0x6c, 0x32, 0xc9, 0x84, 0x16,
-	0xdd, 0xe8, 0xce, 0x4d, 0x72, 0x72, 0xbe, 0x93, 0x39, 0xf3, 0x9d, 0x03, 0x93, 0x35, 0x2f, 0x31,
-	0x35, 0x8f, 0x64, 0xab, 0xa4, 0x96, 0xc4, 0x37, 0xf8, 0x7f, 0xb2, 0xe2, 0x7a, 0xd5, 0x14, 0x0f,
-	0xa8, 0x13, 0xa9, 0x36, 0x69, 0xdd, 0xac, 0xf8, 0x3e, 0xbd, 0xc7, 0x9c, 0xa1, 0x4a, 0x0b, 0x59,
-	0x55, 0x52, 0xd8, 0x57, 0xf7, 0x57, 0xfc, 0xe6, 0x00, 0xcc, 0x79, 0x89, 0xd7, 0xad, 0x84, 0x9c,
-	0x82, 0x57, 0xe8, 0x1d, 0x75, 0x22, 0x67, 0x1a, 0x9c, 0x4f, 0x12, 0x2b, 0x9d, 0x49, 0xa1, 0x71,
-	0xa7, 0x33, 0x33, 0x23, 0x27, 0x00, 0x79, 0x51, 0xc8, 0x46, 0xe8, 0x25, 0x67, 0xd4, 0x8d, 0x9c,
-	0xe9, 0x38, 0x1b, 0x5b, 0x66, 0xc1, 0x08, 0x01, 0x5f, 0xe4, 0x15, 0x52, 0xaf, 0x1d, 0xb4, 0xd8,
-	0x70, 0xfa, 0x79, 0x8b, 0xd4, 0xef, 0x38, 0x83, 0x0d, 0x57, 0xf3, 0x3d, 0xd2, 0x41, 0xe4, 0x4c,
-	0xbd, 0xac, 0xc5, 0x24, 0x04, 0xaf, 0x62, 0x17, 0x74, 0xd8, 0xca, 0x0c, 0x24, 0x11, 0x04, 0x0c,
-	0xeb, 0x42, 0xf1, 0xad, 0xe6, 0x52, 0xd0, 0x51, 0x3b, 0x39, 0xa6, 0xe2, 0x4b, 0x70, 0x17, 0xec,
-	0x2b, 0xf7, 0xfe, 0x03, 0x2e, 0x67, 0xf6, 0x5a, 0x2e, 0x67, 0xf1, 0xab, 0x03, 0xbf, 0x6f, 0x14,
-	0xd6, 0x7c, 0x23, 0x32, 0xac, 0x9b, 0x52, 0x7f, 0x7f, 0x79, 0xef, 0xe3, 0xf2, 0x21, 0x78, 0x8d,
-	0x2a, 0xed, 0x9e, 0x06, 0x5a, 0xd7, 0x61, 0xef, 0x6a, 0x0e, 0x30, 0x8e, 0xc8, 0x96, 0x46, 0x38,
-	0xe8, 0x0e, 0xe8, 0x98, 0x3b, 0x55, 0xc6, 0x2f, 0x2e, 0xf8, 0xa6, 0x8e, 0x9f, 0x5e, 0x04, 0x7c,
-	0x2a, 0x82, 0x50, 0x18, 0x15, 0x0a, 0x73, 0x8d, 0xcc, 0xd6, 0xd4, 0x7f, 0xf6, 0xa9, 0xfc, 0x3a,
-	0xa4, 0xd2, 0x6b, 0xa5, 0xa2, 0xe3, 0x23, 0xad, 0x54, 0x36, 0xaf, 0xa0, 0xcf, 0xeb, 0x6c, 0x0e,
-	0x83, 0xab, 0x27, 0x14, 0x9a, 0xfc, 0x83, 0xbf, 0x26, 0x98, 0xdb, 0xb6, 0xae, 0xc7, 0x06, 0x6b,
-	0x8d, 0x2c, 0x74, 0xc9, 0x04, 0x02, 0x43, 0xcf, 0x3a, 0xab, 0xd0, 0xeb, 0x75, 0x0b, 0xb1, 0x96,
-	0x07, 0x9d, 0xff, 0x1e, 0x00, 0x00, 0xff, 0xff, 0x87, 0x35, 0x29, 0x80, 0x2f, 0x03, 0x00, 0x00,
+	// 379 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x92, 0xcd, 0x8e, 0xd3, 0x30,
+	0x14, 0x85, 0xc9, 0x4f, 0x5b, 0x7a, 0x03, 0x34, 0x58, 0x20, 0x59, 0x48, 0x48, 0xa1, 0xab, 0x8a,
+	0x45, 0x22, 0x81, 0x78, 0x82, 0x0a, 0x44, 0x77, 0x28, 0x52, 0x57, 0x2c, 0xaa, 0x24, 0xbe, 0x2d,
+	0x16, 0x89, 0x1d, 0x1c, 0x07, 0x75, 0xfa, 0x10, 0xb3, 0x98, 0x07, 0x9a, 0x67, 0x1b, 0xdd, 0xfc,
+	0x4c, 0xab, 0x99, 0xd5, 0xec, 0x66, 0x93, 0x9c, 0x9c, 0x73, 0x62, 0xfb, 0x7e, 0x09, 0x2c, 0xf6,
+	0xb2, 0xc4, 0x84, 0x2e, 0x71, 0x6d, 0xb4, 0xd5, 0xcc, 0x27, 0xfd, 0x21, 0xce, 0xa5, 0xcd, 0xdb,
+	0xe2, 0x2f, 0xda, 0x58, 0x9b, 0x43, 0xd2, 0xb4, 0xb9, 0x3c, 0x25, 0x7f, 0x30, 0x13, 0x68, 0x92,
+	0x42, 0x57, 0x95, 0x56, 0xc3, 0xad, 0x7f, 0x6b, 0x79, 0xeb, 0x00, 0xfc, 0x90, 0x25, 0xfe, 0xec,
+	0x2a, 0xec, 0x13, 0x78, 0x85, 0x3d, 0x72, 0x27, 0x72, 0x56, 0xc1, 0x97, 0x45, 0x3c, 0x54, 0xd7,
+	0x5a, 0x59, 0x3c, 0xda, 0x94, 0x32, 0xf6, 0x11, 0x20, 0x2b, 0x0a, 0xdd, 0x2a, 0xbb, 0x93, 0x82,
+	0xbb, 0x91, 0xb3, 0x9a, 0xa7, 0xf3, 0xc1, 0xd9, 0x08, 0xc6, 0xc0, 0x57, 0x59, 0x85, 0xdc, 0xeb,
+	0x82, 0x4e, 0x93, 0x67, 0xaf, 0x6a, 0xe4, 0x7e, 0xef, 0x91, 0x26, 0xaf, 0x91, 0x27, 0xe4, 0x93,
+	0xc8, 0x59, 0x79, 0x69, 0xa7, 0x59, 0x08, 0x5e, 0x25, 0xbe, 0xf1, 0x69, 0x57, 0x23, 0xc9, 0x22,
+	0x08, 0x04, 0x36, 0x85, 0x91, 0xb5, 0x95, 0x5a, 0xf1, 0x59, 0x97, 0x5c, 0x5a, 0xcb, 0x1b, 0x07,
+	0x5e, 0xff, 0x32, 0xd8, 0xc8, 0x83, 0x4a, 0xb1, 0x69, 0x4b, 0xfb, 0xf4, 0x19, 0xbc, 0x87, 0x33,
+	0x84, 0xe0, 0xb5, 0xa6, 0x1c, 0x8e, 0x4b, 0x92, 0xbd, 0x01, 0x57, 0x8a, 0xe1, 0x60, 0xae, 0x14,
+	0xb4, 0x00, 0xed, 0x88, 0x62, 0x47, 0xc5, 0x49, 0xbf, 0x40, 0xef, 0x6c, 0x4d, 0xb9, 0xbc, 0x76,
+	0xc1, 0x27, 0xaa, 0xcf, 0x9d, 0x27, 0x3c, 0xe2, 0xc9, 0x38, 0xcc, 0x0a, 0x83, 0x99, 0x45, 0x31,
+	0xd0, 0x1e, 0x1f, 0x47, 0x2a, 0x2f, 0xcf, 0x54, 0xc6, 0xae, 0x36, 0x7c, 0x7e, 0xd1, 0xd5, 0x66,
+	0xe0, 0x15, 0x8c, 0xbc, 0x3e, 0xff, 0x86, 0xc9, 0xf7, 0xff, 0xa8, 0x2c, 0xe3, 0xf0, 0x8e, 0xc0,
+	0xdc, 0x7f, 0xb1, 0x7f, 0x2d, 0x36, 0x16, 0x45, 0xf8, 0x82, 0x2d, 0x20, 0xa0, 0x64, 0xdd, 0xef,
+	0x16, 0x7a, 0xec, 0x3d, 0xbc, 0x25, 0x63, 0xa3, 0xf6, 0xfa, 0xdc, 0xf3, 0x59, 0x08, 0xaf, 0xc8,
+	0xde, 0xd6, 0xa5, 0xce, 0x04, 0x8a, 0x70, 0x9a, 0x4f, 0xbb, 0x5f, 0xf9, 0xeb, 0x5d, 0x00, 0x00,
+	0x00, 0xff, 0xff, 0xec, 0xef, 0xfc, 0x6f, 0x13, 0x03, 0x00, 0x00,
 }
