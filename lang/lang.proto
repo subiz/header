@@ -71,6 +71,7 @@ enum T {
 	scrypt_file_not_found = 94;
 	invalid_topic = 95;
 
+	file_not_found = 99;
 	user_not_found = 100;
 	empty_md5 = 101;
 	base_convert_error = 102;
