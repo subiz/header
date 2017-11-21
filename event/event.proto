@@ -3,9 +3,6 @@ syntax = "proto3";
 package event;
 
 import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/lang/lang.proto";
-//import "bitbucket.org/subiz/header/auth/auth.proto";
-
 import "bitbucket.org/subiz/header/account/account.proto";
 import "bitbucket.org/subiz/header/conversation/conversation.proto";
 import "bitbucket.org/subiz/header/content/content.proto";
@@ -26,8 +23,6 @@ message UnsubscribeMessage {
 enum Event {
 	ZZZ = 0;
 	//Out_EventCreated = 0;
-	Send_ = 1;
-	ApiReply = 2;
 	RawEventCreated = 3;  //
 	Subscribe = 4; // subscription
 	SubscribeReply = 6;
@@ -94,25 +89,6 @@ enum Type {
 	message_received = 32;
 	conversation_member_typing = 33;
 	conversation_postbacked = 34;
-}
-
-message Reply {
-	common.Context ctx = 3;
-	string event_id = 1;
-	bytes state = 2;
-
-	bool err = 10;
-	string err_description = 12;
-	lang.T err_code = 13;
-	int32 err_class = 15;
-
-	bytes payload = 7;
-}
-
-message Error {
-	string error = 2;
-	string request_id = 3;
-	string description = 4;
 }
 
 enum SubscriberType {
