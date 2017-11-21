@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package common;
 
+import "bitbucket.org/subiz/header/lang/lang.proto";
 import "bitbucket.org/subiz/header/auth/auth.proto";
 
 message Empty {}
@@ -34,10 +35,41 @@ message Context {
 	Device by_device = 10;
 }
 
+message Reply {
+	common.Context ctx = 3;
+	string event_id = 1;
+	bytes state = 2;
+
+	string service = 5;
+	string service_id = 6;
+
+	bool err = 10;
+	string err_description = 12;
+	lang.T err_code = 13;
+	int32 err_class = 15;
+	string err_hash = 16;
+
+	bytes payload = 7;
+
+	int64 published = 20;
+}
+
+message Error {
+	string error = 2;
+	string request_id = 3;
+	string description = 4;
+	string hash = 5;
+}
+
 message Device {
 	string ip = 3;
 	string user_agent = 4; // code
 	string screen_resolution = 5;
 	string timezone = 6;
 	string language = 7;
+}
+
+enum Event {
+	Send_ = 0;
+	ApiReply = 2;
 }
