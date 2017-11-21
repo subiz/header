@@ -30,7 +30,7 @@ message File {
 	int64 size = 5;
 	string md5 = 6;
 	string description = 10;
-	string created = 7;
+	int64 created = 7;
 	string url = 8;
 	string creator = 9;
 	string id = 11;
