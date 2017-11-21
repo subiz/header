@@ -72,5 +72,9 @@ enum T {
 	invalid_topic = 95;
 
 	user_not_found = 100;
-
+	empty_md5 = 101;
+	base_convert_error = 102;
+	s3_error = 103;
+	aws_credential_error = 104;
+	aws_send_error = 105;
 }
