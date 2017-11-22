@@ -78,4 +78,6 @@ enum T {
 	s3_error = 103;
 	aws_credential_error = 104;
 	aws_send_error = 105;
+
+	elasticsearch_error = 200;
 }
