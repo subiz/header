@@ -214,3 +214,33 @@ message UserSearchRequest {
 	optional int32 limit = 6;
 	repeated string user_ids = 7; // maximum 20
 }
+
+message EventSearchResult {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 total = 3;
+	repeated string event_ids = 4;
+	optional string anchor = 5;
+}
+
+message IndexEvent {
+	optional string id = 3;
+	optional string account_id = 4;
+	optional string user_id = 5;
+	optional int64 created = 6;
+	optional string category = 7; // eventtype
+	repeated string topics = 8;
+	optional string object = 9;
+	optional string text = 10;
+}
+
+message EventSearchRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string query = 4;
+	optional string anchor = 5;
+	optional int32 limit = 6;
+	optional string category = 9;
+	repeated string event_ids = 7; // maximum 20
+}
