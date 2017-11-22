@@ -140,10 +140,10 @@ enum Event {
 
 	UserUpdateRequested = 2; // User
 	UserCreateRequested = 3; // User
-	UserReadBulkRequested = 4; // Ids
+	UserSearchRequested = 4; // Ids
 
 	UserEventCreateRequested = 5;
-	UserListEventsRequested = 7;
+	UserEventSearchRequested = 7;
 	UserTopicSumaryRequested = 6;
 
 	UserSegmentationCreateRequested = 10;
@@ -195,4 +195,21 @@ message Condition {
 	optional string key = 2; // unique
 	optional string operator = 3; // = # regex
 	optional string value = 4; // JSON
+}
+
+message UserSearchResult {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 total = 3;
+	repeated User users = 4;
+}
+
+message UserSearchRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string segmentation_id = 3;
+	optional string query = 4;
+	optional string anchor = 5;
+	optional int32 limit = 6;
+	repeated string user_ids = 7; // maximum 20
 }
