@@ -31,6 +31,7 @@ enum Event {
 }
 
 message RawEvents {
+	common.Context ctx = 1;
 	repeated RawEvent events = 4;
 }
 
@@ -48,7 +49,7 @@ message RawEvent {
 	string account_id = 4;
 	int64 created = 8;
 	string type = 9; // eventtype
-	repeated string topics = 11;;
+	repeated string topics = 11;
 
 	By by = 50;
 	string object = 13;
