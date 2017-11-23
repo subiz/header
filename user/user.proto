@@ -70,14 +70,6 @@ message Trace {
 
 }
 
-message ListRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 5;
-	optional string start_id = 6;
-	optional int32 limit = 3;
-	optional string keyword = 4;
-}
-
 message MergeRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -109,30 +101,11 @@ message Topic {
 	optional string account_id = 2;
 	optional string topic = 3;
 	optional string type = 5;
-	optional int32 total_events = 4;
+	optional int64 updated = 8;
+	//optional int32 total_events = 4;
 
-	optional string user_id = 7;
+	//optional string user_id = 7;
 
-}
-
-message ListEventsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional int64 after = 4;
-	optional int64 before = 5;
-	optional string type = 6;
-	optional string topic = 7;
-	optional string keyword = 10;
-	optional string start_id = 11;
-	optional int32 limit = 12; // accept negative number
-
-}
-
-message ReadEventRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string topic = 3;
 }
 
 enum Event {
@@ -151,6 +124,10 @@ enum Event {
 	UserSegmentationDeleteRequested = 12;
 	UserSegmentationListRequested = 13;
 	UserSegmentationReadRequested = 14;
+
+	UserAddToMyListRequest = 20;
+	UserGetListRequest = 21;
+
 }
 
 message Segmentations {
@@ -243,4 +220,42 @@ message EventSearchRequest {
 	optional int32 limit = 6;
 	optional string category = 9;
 	repeated string event_ids = 7; // maximum 20
+}
+
+message ListTopicsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string start_time = 5;
+	optional string start_id = 6;
+	optional string limit = 7;
+}
+
+message ListTopicsResult {
+	optional common.Context ctx = 1;
+	repeated Topic topics = 3;
+}
+
+message ListNewsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional int64 start_time = 4;
+ 	optional string limit = 7;
+}
+
+message ListEventsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+
+	optional string type = 5;
+	optional string start_time = 6;
+	optional int32 limit = 7; // accept negative number
+}
+
+message AddToMyList {
+	optional common.Context ctx = 1;
+	optional string agent_id = 2;
+	optional string user_id = 3;
 }
