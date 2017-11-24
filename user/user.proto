@@ -128,6 +128,15 @@ enum Event {
 	UserAddToMyListRequest = 20;
 	UserGetListRequest = 21;
 
+
+	UserEventCreateRequest = 30;
+	UserEventListRequest = 31;
+	UserEventTopicListRequest = 32;
+	UserEventUnreadTopicListRequest = 33;
+	UserEventTopicReadRequest = 34;
+
+	UserEventTopicSubscribeRequest = 35;
+	UserEventTopicUnsubscribeRequest = 36;
 }
 
 message Segmentations {
@@ -248,10 +257,18 @@ message ListEventsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string user_id = 3;
+	optional string category = 5;
 
-	optional string type = 5;
-	optional string start_time = 6;
+	// normal list events
+	optional int64 start_time = 6;
 	optional int32 limit = 7; // accept negative number
+
+	// search events
+	optional string query = 4;
+	optional string anchor = 8;
+
+	// batch read events
+	//repeated string event_ids = 7; // maximum 20
 }
 
 message AddToMyList {
