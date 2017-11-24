@@ -33,6 +33,8 @@ enum Event {
 message RawEvents {
 	common.Context ctx = 1;
 	repeated RawEvent events = 4;
+	int64 total = 2;
+	string anchor = 3;
 }
 
 message By {
