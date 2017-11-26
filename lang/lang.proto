@@ -81,3 +81,10 @@ enum T {
 
 	elasticsearch_error = 200;
 }
+
+enum L {
+	en = 0; // english
+	vn = 1; // vietnamese
+	cn = 3; // chinese
+	fr = 5; // french
+}
