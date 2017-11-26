@@ -4,6 +4,7 @@ package account;
 
 import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
+import "bitbucket.org/subiz/header/lang/lang.proto";
 
 message Agent {
 	optional common.Context ctx = 1;
@@ -252,8 +253,10 @@ message ConfirmEmail {
 	optional string account_id = 3;
 	optional string owner_id = 4;
 	optional string token = 5;
-	// ExpiredIn is a RFC3339 time string indicates when token will be expired
 	optional int64 expired_in = 6;
+	optional string account_name = 7;
+	optional lang.L lang = 8;
+	optional string owner_name = 9;
 }
 
 message InviteEmail {
