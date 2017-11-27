@@ -2,11 +2,18 @@ syntax = "proto3";
 
 package email;
 
+import "bitbucket.org/subiz/header/common/common.proto";
+
 message Email {
-	string From = 1;
-	string To = 2;
-	string Subject = 3;
-	string Body = 4;
-	string JSONData = 5;
-	repeated string AttachLinks = 6;
+	common.Context ctx = 1;
+	string from = 3;
+	string to = 4;
+	string subject = 5;
+	string body = 6;
+	map<string, string> header = 7;
+	repeated string Attachments = 8; // s3 links
+}
+
+enum Event {
+	Email_SendRequest = 0;
 }
