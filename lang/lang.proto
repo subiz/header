@@ -81,6 +81,7 @@ enum T {
 
 	elasticsearch_error = 200;
 	invalid_template = 203;
+	sendgrid_send_error = 204;
 }
 
 enum L {
