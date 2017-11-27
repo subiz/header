@@ -25,6 +25,14 @@ message Agent {
 	optional string encrypted_password = 17;
   optional int64 joined = 20;
 	optional string invited_by = 21;
+
+	enum AgentState {
+		pending = 0; // waiting for invitation response
+		active = 1;
+		inactive = 2;
+		deleted = 3;
+	}
+
   optional string state = 22; //Agent state
 	optional int64 last_password_changed = 23;
 	//optional int64 last_seen_time = 24;
@@ -135,13 +143,6 @@ enum Gender {
 	female = 2;
 	bisexual = 3;
 	asexual = 4;
-}
-
-enum AgentState {
-	pending = 0; // waiting for invitation response
-  active = 1;
-  inactive = 2;
-  deleted = 3;
 }
 
 message LoginRequest {
