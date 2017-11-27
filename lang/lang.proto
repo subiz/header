@@ -80,6 +80,7 @@ enum T {
 	aws_send_error = 105;
 
 	elasticsearch_error = 200;
+	invalid_template = 203;
 }
 
 enum L {
