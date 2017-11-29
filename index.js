@@ -3,7 +3,7 @@ var path = require("path");
 const { lstatSync, readdirSync } = require('fs');
 const { join } = require('path');
 
-var outdst = './subiz.swagger.json';
+var outdst = './header.swagger.json';
 
 console.log("\033[0;34m# BUILDING REST SPEC");
 
