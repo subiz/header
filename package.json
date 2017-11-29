@@ -1,16 +1,16 @@
 {
-  "name": "@subiz/servicespec",
+  "name": "@subiz/header",
   "version": "1.1.0",
   "description": "Service description",
   "main": "index.js",
   "scripts": {
-    "rest": "node ./rest/index.js"
+    "rest": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/subiz/servicespec.git"
+    "url": "git+ssh://git@bitbucket.org/subiz/header.git"
   },
   "author": "Pham Kieu Thanh",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/subiz/servicespec#readme"
+  "homepage": "https://bitbucket.org/subiz/header#readme"
 }
