@@ -14,6 +14,18 @@ enum Method {
 	PATCH = 4;
 }
 
+service X {
+	rpc Do(AllType) returns (AllType) {}
+}
+
+message AllType {
+	optional WlDomain domain = 2;
+	optional WlIP wlip = 3;
+	optional WlUser wluse = 4;
+	optional ListRequest lr = 5;
+	optional ScryptChallenge sc = 6;
+}
+
 message SendMessageState {
 	optional string topic = 1;
 }
