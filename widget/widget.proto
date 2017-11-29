@@ -42,6 +42,9 @@ message Setting {
 	optional int32 replytime = 9;
 	repeated account.Agent agents = 10;
 	repeated string agent_ids = 11; // subiz only
+
+	optional bool custom_language = 12; // read only
+	optional string language_path = 13; // read only
 }
 
 message UserSetting {
