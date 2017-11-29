@@ -6,6 +6,22 @@ import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 import "bitbucket.org/subiz/header/lang/lang.proto";
 
+message AllType {
+	optional Agent agent = 1;
+	optional Account account = 2;
+	optional Invitation invi = 3;
+	optional ResetPasswordRequest resetpwr = 5;
+	optional AgentGroup group = 6;
+	optional AgentPerm perm = 7;
+	optional ListAgentRequest ls = 8;
+	optional ListGroupRequest tg = 9;
+	optional GroupMember mb = 10;
+	optional CreateAccountRequest car = 11;
+	optional LoginRequest login = 12;
+	optional NewPassword np = 13;
+
+}
+
 message Agent {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -17,6 +33,15 @@ message Agent {
 	optional string phone = 8;
 	optional bool is_owner = 10;
 	optional string job_title = 11;
+
+	enum Gender {
+		unset = 0;
+		male = 1;
+		female = 2;
+		bisexual = 3;
+		asexual = 4;
+	}
+
 	optional string gender = 12; //gender
 	optional string avatar_url = 13;
 	optional string lang = 14;
@@ -37,6 +62,7 @@ message Agent {
 	optional int64 last_password_changed = 23;
 	//optional int64 last_seen_time = 24;
 	optional int64 modified = 25;
+
 }
 
 message Invitation {
@@ -96,6 +122,14 @@ message Account {
 		locked = 2;  // subiz lock down account
 		deleted = 3;
 	}
+	optional string city = 14;
+	optional string region = 15;
+	optional int32 zip_code = 16;
+	optional string tax_id = 17;
+	repeated string socials = 18;
+	optional string phone = 19;
+	optional string address = 20;
+	optional string url = 21;
 }
 
 message AgentIds {
@@ -107,16 +141,16 @@ message AgentIds {
 message ListAgentRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional string start_id = 3;
-	optional int32 limit = 4;
+	//optional string start_id = 3;
+	//optional int32 limit = 4;
 	optional string group_id = 5; // optional
 }
 
 message ListGroupRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional string start_id = 3;
-	optional int32 limit = 4;
+	//optional string start_id = 3;
+	//optional int32 limit = 4;
 }
 
 message GroupMember {
@@ -135,14 +169,6 @@ message CreateAccountRequest {
 	optional string account_name = 6;
 	optional string account_url = 7;
 	optional string avatar_url = 8;
-}
-
-enum Gender {
-	unset = 0;
-	male = 1;
-	female = 2;
-	bisexual = 3;
-	asexual = 4;
 }
 
 message LoginRequest {
@@ -298,4 +324,8 @@ message PasswordChangedEmail {
 	optional string agent_id = 4;
 	optional string agent_name = 5;
 	optional lang.L lang = 7;
+}
+
+service YourService {
+  rpc Do(AllType) returns (AllType) {}
 }
