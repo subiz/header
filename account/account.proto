@@ -13,8 +13,6 @@ message AllType {
 	optional ResetPasswordRequest resetpwr = 5;
 	optional AgentGroup group = 6;
 	optional AgentPerm perm = 7;
-	optional ListAgentRequest ls = 8;
-	optional ListGroupRequest tg = 9;
 	optional GroupMember mb = 10;
 	optional CreateAccountRequest car = 11;
 	optional LoginRequest login = 12;
@@ -60,8 +58,8 @@ message Agent {
 	}
 
   optional string state = 22; //Agent state
-	optional int64 last_password_changed = 23;
-	//optional int64 last_seen_time = 24;
+	optional int64 password_changed = 23;
+	optional int64 seen = 24;
 	optional int64 modified = 25;
 
 }
@@ -88,8 +86,9 @@ message AgentGroup {
 	optional string logo_url = 5;
 
 	// Members is list of 10 agents in group
-	// repeated string Members = 5;
+	repeated Agent Members = 7;
 	optional int64 created = 6;
+	optional int64 modified = 8;
 }
 
 message ResetPasswordRequest {
@@ -127,31 +126,12 @@ message Account {
 	optional string region = 15;
 	optional int32 zip_code = 16;
 	optional string tax_id = 17;
-	repeated string socials = 18;
+	optional string facebook = 18;
+	optional string twitter = 22;
 	optional string phone = 19;
 	optional string address = 20;
 	optional string url = 21;
-}
-
-message AgentIds {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	repeated string ids = 3;
-}
-
-message ListAgentRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	//optional string start_id = 3;
-	//optional int32 limit = 4;
-	optional string group_id = 5; // optional
-}
-
-message ListGroupRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	//optional string start_id = 3;
-	//optional int32 limit = 4;
+	optional string lang = 23;
 }
 
 message GroupMember {

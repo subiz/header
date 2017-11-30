@@ -72,11 +72,11 @@
         "tax_id": {
           "type": "string"
         },
-        "socials": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "facebook": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
         },
         "phone": {
           "type": "string"
@@ -85,6 +85,9 @@
           "type": "string"
         },
         "url": {
+          "type": "string"
+        },
+        "lang": {
           "type": "string"
         }
       }
@@ -157,14 +160,17 @@
         "state": {
           "type": "string"
         },
-        "last_password_changed": {
+        "password_changed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "seen": {
           "type": "string",
           "format": "int64"
         },
         "modified": {
           "type": "string",
-          "format": "int64",
-          "title": "optional int64 last_seen_time = 24;"
+          "format": "int64"
         }
       }
     },
@@ -186,10 +192,20 @@
         "logo_url": {
           "type": "string"
         },
+        "Members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          },
+          "title": "Members is list of 10 agents in group"
+        },
         "created": {
           "type": "string",
-          "format": "int64",
-          "title": "Members is list of 10 agents in group\nrepeated string Members = 5;"
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -230,12 +246,6 @@
         },
         "perm": {
           "$ref": "#/definitions/accountAgentPerm"
-        },
-        "ls": {
-          "$ref": "#/definitions/accountListAgentRequest"
-        },
-        "tg": {
-          "$ref": "#/definitions/accountListGroupRequest"
         },
         "mb": {
           "$ref": "#/definitions/accountGroupMember"
@@ -336,32 +346,6 @@
           "type": "string"
         },
         "token": {
-          "type": "string"
-        }
-      }
-    },
-    "accountListAgentRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "group_id": {
-          "type": "string",
-          "title": "optional string start_id = 3;\noptional int32 limit = 4;"
-        }
-      }
-    },
-    "accountListGroupRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
           "type": "string"
         }
       }
