@@ -19,6 +19,7 @@ message AllType {
 	optional CreateAccountRequest car = 11;
 	optional LoginRequest login = 12;
 	optional NewPassword np = 13;
+	optional Token tk = 15;
 
 }
 

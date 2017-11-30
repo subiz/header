@@ -248,6 +248,9 @@
         },
         "np": {
           "$ref": "#/definitions/accountNewPassword"
+        },
+        "tk": {
+          "$ref": "#/definitions/accountToken"
         }
       }
     },
@@ -401,6 +404,24 @@
           "$ref": "#/definitions/commonContext"
         },
         "email": {
+          "type": "string"
+        }
+      }
+    },
+    "accountToken": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "is_set": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "token": {
+          "type": "string"
+        },
+        "account_id": {
           "type": "string"
         }
       }
