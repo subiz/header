@@ -46,7 +46,16 @@ function readAllDef() {
 
 	// rename some types
 	filterAccountProp(def);
-	return def;
+	def = replaceDefsToComponentsSchema(def);
+	return {
+		components:{
+			schemas: def
+		}
+	};
+}
+
+function replaceDefsToComponentsSchema(def) {
+	return JSON.parse(JSON.stringify(def).replace(/"\$ref":"#\/definitions/g, `"$ref":"#/components/schemas`));
 }
 
 function filterAccountProp(def) {
