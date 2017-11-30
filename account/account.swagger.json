@@ -378,6 +378,9 @@
         },
         "account_id": {
           "type": "string"
+        },
+        "old_password": {
+          "type": "string"
         }
       }
     },

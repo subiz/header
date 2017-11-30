@@ -168,6 +168,7 @@ message NewPassword {
 	optional string token = 2;
 	optional string new_password = 3;
 	optional string account_id = 4;
+	optional string old_password = 5;
 }
 
 message Limit {
@@ -209,7 +210,7 @@ enum Event {
 
 	UpdateAgentRequested = 109; //(Agent) returns (Empty) {}
 	ResetPasswordRequested = 111; //(NewPassword) returns (Empty) {}
-	RequestResetPasswordRequested = 112; //(ResetPasswordRequest) returns (Empty) {}
+	RequestResetPasswordRequested = 112; //(ResetPasswordRequest) returns (Empty)
 	UpdateAgentPermissionRequested = 113; // =(AgentPerm) returns (Empty) {}
 	ReadAgentPermissionRequested = 114; //(Id) returns (auth.Method) {}
 	CheckLoginRequested = 115; //(LoginRequest) returns (Id) {}
