@@ -55,21 +55,26 @@ function readAllDef() {
 }
 
 function replaceDefsToComponentsSchema(def) {
-	return JSON.parse(JSON.stringify(def).replace(/"\$ref":"#\/definitions/g, `"$ref":"#/components/schemas`));
+	return JSON.parse(JSON.stringify(def)
+		.replace(/"\$ref":"#\/definitions/g, `"$ref":"#/components/schemas`)
+		.replace(/accountAgent/g, "Agent")
+		.replace(/accountAccount/g, "Account")
+		.replace(/accountAgentGroup/g, "AgentGroup")
+	);
 }
 
 function filterAccountProp(def) {
-	def.Account = def.accountAccount;
-	def.accountAccount = undefined;
+	//def.Account = def.accountAccount;
+	//def.accountAccount = undefined;
 
-	def.Agent = def.accountAgent;
-	def.accountAgent = undefined;
+	//def.Agent = def.accountAgent;
+	//def.accountAgent = undefined;
 
-	def.AgentGroup = def.accountAgentGroup;
-	def.accountAgentGroup = undefined;
+	//def.AgentGroup = def.accountAgentGroup;
+	//def.accountAgentGroup = undefined;
 
-	def.Invitation = def.accountInvitation;
-	def.accountInvitation = undefined;
+	def.commonContext = undefined;
+	def.authCredential = undefined;
 }
 
 fs.writeFileSync(outdst, JSON.stringify(readAllDef()));
