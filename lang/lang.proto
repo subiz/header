@@ -21,7 +21,9 @@ enum T {
 
 	credential_not_set = 7;
 	wrong_account_in_credential = 8;
+	wrong_password = 18;
 	wrong_user_in_credential = 10;
+	invalid_agent_state = 19;
 	access_deny = 9;
 	unable_to_send_message = 11;
 	topic_is_empty = 12;
