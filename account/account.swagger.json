@@ -376,13 +376,10 @@
         "new_password": {
           "type": "string"
         },
-        "account_id": {
-          "type": "string"
-        },
         "old_password": {
           "type": "string"
         },
-        "agent_id": {
+        "email": {
           "type": "string"
         }
       }

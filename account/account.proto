@@ -167,9 +167,8 @@ message NewPassword {
 	optional common.Context ctx = 1;
 	optional string token = 2;
 	optional string new_password = 3;
-	optional string account_id = 4;
 	optional string old_password = 5;
-	optional string agent_id = 6;
+	optional string email = 8;
 }
 
 message Limit {
