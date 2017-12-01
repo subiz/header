@@ -381,6 +381,9 @@
         },
         "old_password": {
           "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
         }
       }
     },

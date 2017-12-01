@@ -169,6 +169,7 @@ message NewPassword {
 	optional string new_password = 3;
 	optional string account_id = 4;
 	optional string old_password = 5;
+	optional string agent_id = 6;
 }
 
 message Limit {
