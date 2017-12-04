@@ -505,9 +505,6 @@
         "sr": {
           "$ref": "#/definitions/conversationStartRequest"
         },
-        "rcr": {
-          "$ref": "#/definitions/conversationReplyConversationRequest"
-        },
         "pb": {
           "$ref": "#/definitions/conversationPostback"
         },
@@ -552,9 +549,6 @@
         },
         "lcbur": {
           "$ref": "#/definitions/conversationListConversationsByUserRequest"
-        },
-        "rcrquest": {
-          "$ref": "#/definitions/conversationReplyConversationRequest"
         },
         "ler": {
           "$ref": "#/definitions/conversationListEventsRequest"
@@ -769,6 +763,10 @@
         },
         "request": {
           "$ref": "#/definitions/conversationStartRequest"
+        },
+        "accepted": {
+          "type": "string",
+          "format": "int64"
         }
       },
       "title": "get number of unread message"
@@ -1032,23 +1030,6 @@
         "at": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "conversationReplyConversationRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "agent_id": {
-          "type": "string"
-        },
-        "conversation_id": {
-          "type": "string"
         }
       }
     },

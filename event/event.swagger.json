@@ -887,6 +887,10 @@
         },
         "request": {
           "$ref": "#/definitions/conversationStartRequest"
+        },
+        "accepted": {
+          "type": "string",
+          "format": "int64"
         }
       },
       "title": "get number of unread message"

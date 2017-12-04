@@ -102,6 +102,7 @@ message Conversation {
 	}
 	optional string state = 11; // converation state
 	optional StartRequest request = 14;
+	optional int64 accepted = 15; // time chat is accepted after being in unassigned list
 }
 
 message UserConversation { // used in database
@@ -165,13 +166,6 @@ message Domain {
 	optional string payload = 9;
 	//optional bool is_enabled = 4;
 	optional int64 created = 5;
-}
-
-message ReplyConversationRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 4;
-	optional string agent_id = 2;
-	optional string conversation_id = 3;
 }
 
 message Search {
@@ -242,7 +236,7 @@ enum Event {
 
 	ConversationReadRequested = 13;
 	ConversationListRequested = 14;
-	ConversationReplyRequested = 15;
+	ConversationAcceptRequested = 15;
 
 	ConversationUpdateRuleRequested = 20; // rule
   ConversationCreateRuleRequested = 21; // rule
@@ -448,7 +442,6 @@ message AllType {
 	optional Member m = 13;
 	optional Conversation c = 14;
 	optional StartRequest sr = 16;
-	optional ReplyConversationRequest rcr = 17;
 	optional Postback pb = 18;
 	optional Tags tags = 20;
 	optional CannedResponse canr = 22;
@@ -464,7 +457,6 @@ message AllType {
 	optional Ack ack = 37;
 	optional Seen seen = 38;
 	optional ListConversationsByUserRequest lcbur = 39;
-	optional ReplyConversationRequest rcrquest = 40;
 	optional ListEventsRequest ler = 41;
 	optional Search search = 42;
 	optional ListConversations listcon = 43;
