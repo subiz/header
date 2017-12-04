@@ -2,22 +2,12 @@ syntax = "proto2";
 
 package conversation;
 
-//import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
-//import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/client/client.proto";
-
 import "bitbucket.org/subiz/header/user/user.proto";
-
-enum JoinOperator {
-	none = 0;
-	and = 1;
-	or = 2;
-}
 
 message Limit {
 	optional common.Context ctx = 1;
-
 	optional string account_id = 3;
 	optional int32 max_rules = 7;
 }
@@ -27,7 +17,15 @@ message Rule {
 	optional string id = 2;
 	optional string account_id = 3;
 	//optional string priority = 4;
-	optional AssignStrategy strategy = 5;
+	enum AssignStrategy {
+		all_agents = 0;
+		agentgroup = 2;
+		agents = 3;
+		most_recent = 4;
+		roundrobin_all_agents = 5;
+		roundrobin_agents = 6;
+	}
+	optional string strategy = 5;
 	repeated string assign_tos = 6;
 	repeated Condition conditions = 7;
 	optional bool enabled = 8;
@@ -37,7 +35,13 @@ message Rule {
 }
 
 message Condition {
-	optional JoinOperator join = 1;
+	enum JoinOperator {
+		none = 0;
+		and = 1;
+		or = 2;
+	}
+
+	optional string join = 1;
 	optional string key = 2; // unique
 	optional string operator = 3; // = # regex
 	optional string value = 4; // JSON
@@ -49,17 +53,8 @@ message Route {
 
 message RouteResult {
 	optional string rule_id = 1;
-	optional 	AssignStrategy strategy = 3;
+	optional string strategy = 3;
 	repeated string agent_ids = 4;
-}
-
-enum AssignStrategy {
-	ALLAGENTS = 0;
-	AGENTGROUP = 2;
-	AGENTS = 3;
-	MOSTRECENT = 4;
-	ROUNDROBINALLAGENTS = 5;
-	ROUNDROBINAGENTS = 6;
 }
 
 message MemberSeen {
@@ -68,7 +63,6 @@ message MemberSeen {
 }
 
 message Member {
-
 	optional string type = 3; // type
 	optional string subiz_id = 8;
 	optional string id = 4;
@@ -96,21 +90,18 @@ message Conversation {
 	repeated Member members = 7;
 	repeated Tag tags = 10;
 
+	enum State {
+		conversation_none = 0;
+		//	assigning = 1;
+		unassigned = 2;
+		//opened = 3;
+		//closed = 4;
+		//started = 5;
+		active = 6;
+		ended = 8;
+	}
 	optional string state = 11; // converation state
-
 	optional StartRequest request = 14;
-}
-
-enum State {
-	conversation_none = 0;
-
-	//	assigning = 1;
-	unassigned = 2;
-	//opened = 3;
-	//closed = 4;
-	//started = 5;
-	active = 6;
-	ended = 8;
 }
 
 message UserConversation { // used in database
@@ -225,11 +216,11 @@ message ListEventsRequest {
 }
 
 message ListConversationsByUserRequest {
-	optional string AccountId = 1;
-	optional string ChannelId = 2; // if null -> all channel
-	optional string UserId = 3; // must be visitor id
-	optional string StartId = 4;
-	optional int32 Limit = 5;
+	optional string account_id = 1;
+	optional string channel_id = 2; // if null -> all channel
+	optional string user_id = 3; // must be visitor id
+	optional string start_id = 4;
+	optional int32 limit = 5;
 }
 
 enum Event {
@@ -298,7 +289,6 @@ message RequestState {
 	optional string channel_id = 3;
 }
 
-
 message Reaction {
 	optional string name = 3;
 	optional int32 count = 4;
@@ -346,12 +336,13 @@ message Field {
 	optional string key = 2;
 }
 
-enum ButtonType {
-	url = 0;
-	postback = 1;
-};
-
 message Button {
+	enum ButtonType {
+		url_button = 2;
+		postback_button = 3;
+		event_button = 4;
+	}
+
 	optional string type = 2;
 
 	optional string id = 15;
@@ -374,6 +365,13 @@ message GenericElementTemplate {
 }
 
 message Attachment {
+	enum AttachmentType {
+		file = 2;
+		generic = 3;
+		preview = 4;
+		button = 5;
+		input = 6;
+	}
 	optional string type = 12;
 	// file
 	optional string mimetype = 2;
@@ -395,20 +393,6 @@ message Attachment {
 	repeated Button buttons = 16;
 	//repeated string inputtype = 17;
 
-}
-
-enum ActionType {
-	url_button = 2;
-	postback_button = 3;
-	event_button = 4;
-}
-
-enum AttachmentType {
-	file = 2;
-	generic = 3;
-	preview = 4;
-	button = 5;
-	input = 6;
 }
 
 message Tag {
@@ -443,12 +427,48 @@ message Tags {
 	repeated Tag tags = 4;
 }
 
-enum PlatformType {
-	message = 0;
-	email = 2;
-}
+//enum PlatformType {
+//message = 0;
+//email = 2;
+//}
 
 message Postback {
 	optional Message message = 2;
 	optional Button button = 3;
+}
+
+message AllType {
+	optional Limit l = 5;
+	optional Rule r = 6;
+	optional Condition co = 7;
+	optional Route ro = 8;
+	optional RouteResult rr = 9;
+	optional MemberSeen ms = 12;
+	optional Member m = 13;
+	optional Conversation c = 14;
+	optional StartRequest sr = 16;
+	optional ReplyConversationRequest rcr = 17;
+	optional Postback pb = 18;
+	optional Tags tags = 20;
+	optional CannedResponse canr = 22;
+	optional Tag tag = 23;
+	optional Attachment att = 25;
+	optional GenericElementTemplate getem = 26;
+	optional Button button = 27;
+	optional Message messa = 28;
+	optional Computed com = 29;
+	optional Reaction rea = 31;
+	optional Field fiel = 35;
+	optional Received reci = 36;
+	optional Ack ack = 37;
+	optional Seen seen = 38;
+	optional ListConversationsByUserRequest lcbur = 39;
+	optional ReplyConversationRequest rcrquest = 40;
+	optional ListEventsRequest ler = 41;
+	optional Search search = 42;
+	optional ListConversations listcon = 43;
+}
+
+service Converstation {
+	rpc Do(AllType) returns (AllType) {};
 }
