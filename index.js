@@ -55,11 +55,23 @@ function readAllDef() {
 }
 
 function replaceDefsToComponentsSchema(def) {
-	return JSON.parse(JSON.stringify(def)
-		.replace(/"\$ref":"#\/definitions/g, `"$ref":"#/components/schemas`)
-		.replace(/accountAgent/g, "Agent")
-		.replace(/accountAccount/g, "Account")
-		.replace(/accountAgentGroup/g, "AgentGroup")
+	return JSON.parse(
+		JSON.stringify(def)
+			.replace(/"\$ref":"#\/definitions/g, `"$ref":"#/components/schemas`)
+			.replace(/accountAgent/g, "Agent")
+			.replace(/accountAccount/g, "Account")
+			.replace(/accountAgentGroup/g, "AgentGroup")
+
+			.replace(/conversationConversation/g, "Conversation")
+			.replace(/conversationButton/g, "Button")
+			.replace(/conversationMessage/g, "Message")
+			.replace(/conversationAttachment/g, "Attachment")
+			.replace(/conversationCannedResponse/g, "CannedResponse")
+			.replace(/conversationPostback/g, "Postback")
+			.replace(/conversationStartRequest/g, "StartRequest")
+			.replace(/conversationRoute/g, "Route")
+			.replace(/conversationRule/g, "Rule")
+			.replace(/conversationGenericElementTemplate/g, "GenericElementTemplate")
 	);
 }
 
