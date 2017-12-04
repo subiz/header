@@ -15,5 +15,1483 @@
     "application/json"
   ],
   "paths": {},
-  "definitions": {}
+  "definitions": {
+    "RawEventData": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/accountAccount"
+        },
+        "agent": {
+          "$ref": "#/definitions/accountAgent"
+        },
+        "message": {
+          "$ref": "#/definitions/conversationMessage"
+        },
+        "conversation": {
+          "$ref": "#/definitions/conversationConversation"
+        },
+        "postback": {
+          "$ref": "#/definitions/conversationPostback"
+        },
+        "content": {
+          "$ref": "#/definitions/contentContent"
+        },
+        "topic": {
+          "$ref": "#/definitions/userTopic"
+        }
+      }
+    },
+    "accountAccount": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "plan": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "owner_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "confirmed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "slogan": {
+          "type": "string"
+        },
+        "referer_id": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "zip_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tax_id": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAgent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phone": {
+          "type": "string"
+        },
+        "is_owner": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "encrypted_password": {
+          "type": "string"
+        },
+        "joined": {
+          "type": "string",
+          "format": "int64"
+        },
+        "invited_by": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "password_changed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "seen": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "authCredential": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/authType"
+        },
+        "method": {
+          "$ref": "#/definitions/authMethod"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_type": {
+          "$ref": "#/definitions/authType"
+        },
+        "client_account_id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avatar_url": {
+          "type": "string",
+          "title": "optional"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "authMethod": {
+      "type": "object",
+      "properties": {
+        "update_trigger": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "trigger"
+        },
+        "delete_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ListAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_segmentation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "segmentation"
+        },
+        "update_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentNotification": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool AuthorizeAgentClient = 89;\nbool RevokeAgentClient = 90;"
+        },
+        "SeenAgentNotification": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "Ping": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePasswords": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent"
+        },
+        "UpdatePassword": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "InviteAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ResetPassword": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentsPermission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentsState": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ListAgentClient = 85;"
+        },
+        "ConfirmAccount": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ReadAccount = 120; // default right"
+        },
+        "CreateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent group"
+        },
+        "DeleteAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePlan": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "account"
+        },
+        "create_account": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ViewAccountReport = 125;\nbool EnableChannel = 126;\nbool DisableChannel = 127;"
+        },
+        "delete_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadClient": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "clients"
+        },
+        "ListClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateClientInfo": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "PublishClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RegenerateClientSecret": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "VerifyClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_rule": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "rule"
+        },
+        "update_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "StartConversation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "converstation"
+        },
+        "ReadConversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "WriteConversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "IntegrateConnector": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "connector integration"
+        },
+        "read_user_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_facebook_id": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_phones": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "authType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "user",
+        "agent",
+        "subiz",
+        "app",
+        "rest",
+        "connector",
+        "bot"
+      ],
+      "default": "unknown",
+      "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - bot: BOT reserve for future"
+    },
+    "clientConnector": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "128 bit string identification of the client."
+        },
+        "secret": {
+          "type": "string",
+          "title": "secre used to authorize client with oauth2 server"
+        },
+        "logo_url": {
+          "type": "string",
+          "title": "LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "is_verified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "IsVerified will be true if client is verified by the authority"
+        },
+        "redirect_url": {
+          "type": "string",
+          "title": "List of URLs which client must register for oauth redirection"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version number of the client."
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "channel_type": {
+          "type": "string"
+        },
+        "channel_name": {
+          "type": "string"
+        }
+      }
+    },
+    "commonContext": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "byte"
+        },
+        "node": {
+          "type": "string"
+        },
+        "reply_topic": {
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "#/definitions/authCredential",
+          "title": "optional int32 reply_partition = 5;"
+        },
+        "tracing": {
+          "type": "string",
+          "format": "byte"
+        },
+        "reply_key": {
+          "type": "string"
+        },
+        "by_device": {
+          "$ref": "#/definitions/commonDevice"
+        }
+      }
+    },
+    "commonDevice": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        }
+      }
+    },
+    "contentContent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "link": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "price": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "sale_price": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contentKeyValue"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relateds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contentContent"
+          }
+        },
+        "attachment_url": {
+          "type": "string"
+        }
+      }
+    },
+    "contentKeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAck": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAttachment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "mimetype": {
+          "type": "string",
+          "title": "file"
+        },
+        "url": {
+          "type": "string"
+        },
+        "thumbnail_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "descrition": {
+          "type": "string"
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "title": "optional string data = 7; // for custom data"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationGenericElementTemplate"
+          },
+          "title": "generic"
+        },
+        "title": {
+          "type": "string",
+          "title": "preview"
+        },
+        "color": {
+          "type": "string"
+        },
+        "pretext": {
+          "type": "string"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        }
+      }
+    },
+    "conversationButton": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "title": "post back"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "content_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "title": "optional RawEvent event = 12;"
+        }
+      }
+    },
+    "conversationComputed": {
+      "type": "object",
+      "properties": {
+        "seen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationSeen"
+          }
+        },
+        "ack": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAck"
+          }
+        },
+        "received": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationReceived"
+          }
+        }
+      }
+    },
+    "conversationConversation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64",
+          "title": "Creation time"
+        },
+        "last_actived": {
+          "type": "string",
+          "format": "int64",
+          "title": "Last active time"
+        },
+        "closed": {
+          "type": "string",
+          "format": "int64",
+          "title": "Closed timeph"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationMember"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTag"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/definitions/conversationStartRequest"
+        }
+      },
+      "title": "get number of unread message"
+    },
+    "conversationDomain": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64",
+          "title": "optional bool is_enabled = 4;"
+        }
+      }
+    },
+    "conversationField": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationGenericElementTemplate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "default_action": {
+          "$ref": "#/definitions/conversationButton"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        }
+      }
+    },
+    "conversationMember": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "subiz_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "connector": {
+          "$ref": "#/definitions/clientConnector"
+        },
+        "domain": {
+          "$ref": "#/definitions/conversationDomain"
+        }
+      }
+    },
+    "conversationMessage": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAttachment"
+          }
+        },
+        "reactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationReaction"
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationField"
+          }
+        },
+        "computed": {
+          "$ref": "#/definitions/conversationComputed"
+        }
+      }
+    },
+    "conversationPostback": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/conversationMessage"
+        },
+        "button": {
+          "$ref": "#/definitions/conversationButton"
+        }
+      }
+    },
+    "conversationReaction": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conversationReceived": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationSeen": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationStartRequest": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "connector_id": {
+          "type": "string"
+        },
+        "to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "page_url": {
+          "type": "string"
+        },
+        "page_title": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "browser_language": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "device_type": {
+          "type": "string"
+        },
+        "user_member": {
+          "$ref": "#/definitions/conversationMember"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "starter_id": {
+          "type": "string"
+        },
+        "starter_type": {
+          "type": "string"
+        },
+        "agent_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        }
+      }
+    },
+    "conversationTag": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator_id": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "eventAllType": {
+      "type": "object",
+      "properties": {
+        "o": {
+          "$ref": "#/definitions/eventObject"
+        },
+        "e": {
+          "$ref": "#/definitions/eventRawEvent"
+        },
+        "b": {
+          "$ref": "#/definitions/eventBy"
+        },
+        "es": {
+          "$ref": "#/definitions/eventRawEvents"
+        }
+      }
+    },
+    "eventBy": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "$ref": "#/definitions/commonDevice"
+        },
+        "id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        }
+      }
+    },
+    "eventObject": {
+      "type": "string",
+      "enum": [
+        "none",
+        "account",
+        "agent",
+        "message",
+        "conversation",
+        "integration",
+        "postback",
+        "content",
+        "topic"
+      ],
+      "default": "none"
+    },
+    "eventRawEvent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "by": {
+          "$ref": "#/definitions/eventBy"
+        },
+        "object": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/RawEventData"
+        }
+      }
+    },
+    "eventRawEvents": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventRawEvent"
+          }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "userDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "useragent_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "useragent": {
+          "type": "string"
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "language_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "language": {
+          "type": "string"
+        }
+      }
+    },
+    "userTopic": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "userTrace": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "location_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "location": {
+          "type": "string"
+        },
+        "city_code": {
+          "type": "string"
+        },
+        "city_name": {
+          "type": "string"
+        },
+        "country_name": {
+          "type": "string"
+        },
+        "continent_code": {
+          "type": "string"
+        },
+        "coutry_code": {
+          "type": "string"
+        },
+        "latitue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "longitude": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "region_name": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        }
+      }
+    },
+    "userUser": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userTrace"
+          }
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userDevice"
+          },
+          "title": "repeated string alias = 12;"
+        },
+        "is_ban": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unsubscribed": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "marked_spam": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "hard_bounced": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "total_sessions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subiz_id": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "last_seen": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
 }

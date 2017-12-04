@@ -72,6 +72,8 @@ function replaceDefsToComponentsSchema(def) {
 			.replace(/conversationRoute/g, "Route")
 			.replace(/conversationRule/g, "Rule")
 			.replace(/conversationGenericElementTemplate/g, "GenericElementTemplate")
+			.replace(/eventRawEvent/g, "RawEvent")
+			.replace(/eventBy/g, "By")
 	);
 }
 
