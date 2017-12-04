@@ -297,6 +297,7 @@ message Reaction {
 
 message Message {
 	optional common.Context ctx = 1;
+	optional string account_id = 5;
 	optional string conversation_id = 14;
 	optional string id = 11;
 	optional string text = 2;

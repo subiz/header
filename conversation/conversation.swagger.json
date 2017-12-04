@@ -956,6 +956,9 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
+        "account_id": {
+          "type": "string"
+        },
         "conversation_id": {
           "type": "string"
         },
