@@ -156,6 +156,9 @@ message PasswordCredential {
 message AuthCookie {
 	string user_id = 1;
 	string account_id = 2;
+	int32 expired = 4;
+	int32 issued = 5;
+	string type = 3;
 }
 
 message OauthAccessToken {
@@ -177,7 +180,7 @@ message AccessToken {
   string client_type = 3;
 	string account_id = 4;
 	string client_account_id = 5;
-	int32 expires_in = 8;
+	int32 expired = 8;
 	repeated string scopes = 6;
 }
 
