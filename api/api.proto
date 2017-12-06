@@ -85,6 +85,13 @@ message ScryptChallenge {
 	optional int64 created = 11;
 }
 
+message Apikey {
+	optional string key = 3;
+	optional string account_id = 4;
+	optional string client_id = 5;
+	optional string client_type = 6;
+}
+
 enum Event {
 
 	ConversationStart = 2;
