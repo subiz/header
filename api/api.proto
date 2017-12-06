@@ -86,7 +86,7 @@ message ScryptChallenge {
 }
 
 message Apikey {
-	optional string key = 3;
+	optional string secret = 3;
 	optional string account_id = 4;
 	optional string client_id = 5;
 	optional string client_type = 6;
