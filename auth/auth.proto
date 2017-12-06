@@ -204,8 +204,6 @@ enum Type {
   user = 1;
 	agent = 2;
 	subiz = 3;
-
-
 	// APP is general client type
 	app = 5;
 	rest = 8;
@@ -214,6 +212,8 @@ enum Type {
 
 	// BOT reserve for future
 	bot = 7;
+	dashboard = 10;
+
 }
 
 message User {
