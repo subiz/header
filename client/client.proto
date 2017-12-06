@@ -83,4 +83,6 @@ enum Event {
 	ClientDeleteRequested = 22;
 	ClientReadRequested = 23;
 	ClientListRequested = 24;
+	ClientUpserted = 25;
+	ClientDeleted = 26;
 }
