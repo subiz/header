@@ -4,6 +4,15 @@ package user;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
+message AllType {
+  optional User user = 2;
+	optional CreateRequest cr = 3;
+}
+
+service MyServer {
+	rpc Do(AllType) returns(AllType) {}
+}
+
 message User {
 	optional common.Context ctx = 1;
 	optional string id = 3;

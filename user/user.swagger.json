@@ -15,5 +15,600 @@
     "application/json"
   ],
   "paths": {},
-  "definitions": {}
+  "definitions": {
+    "authCredential": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/authType"
+        },
+        "method": {
+          "$ref": "#/definitions/authMethod"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_type": {
+          "$ref": "#/definitions/authType"
+        },
+        "client_account_id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avatar_url": {
+          "type": "string",
+          "title": "optional"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "authMethod": {
+      "type": "object",
+      "properties": {
+        "update_trigger": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "trigger"
+        },
+        "delete_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ListAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_segmentation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "segmentation"
+        },
+        "update_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentNotification": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool AuthorizeAgentClient = 89;\nbool RevokeAgentClient = 90;"
+        },
+        "SeenAgentNotification": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "Ping": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePasswords": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent"
+        },
+        "UpdatePassword": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "InviteAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ResetPassword": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentsPermission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentsState": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ListAgentClient = 85;"
+        },
+        "ConfirmAccount": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ReadAccount = 120; // default right"
+        },
+        "CreateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent group"
+        },
+        "DeleteAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePlan": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "account"
+        },
+        "create_account": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ViewAccountReport = 125;\nbool EnableChannel = 126;\nbool DisableChannel = 127;"
+        },
+        "delete_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadClient": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "clients"
+        },
+        "ListClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateClientInfo": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "PublishClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RegenerateClientSecret": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "VerifyClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_rule": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "rule"
+        },
+        "update_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "StartConversation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "converstation"
+        },
+        "ReadConversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "WriteConversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "IntegrateConnector": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "connector integration"
+        },
+        "read_user_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_facebook_id": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_phones": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "list_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "authType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "user",
+        "agent",
+        "subiz",
+        "app",
+        "rest",
+        "connector",
+        "bot",
+        "dashboard"
+      ],
+      "default": "unknown",
+      "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - bot: BOT reserve for future"
+    },
+    "commonContext": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "byte"
+        },
+        "node": {
+          "type": "string"
+        },
+        "reply_topic": {
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "#/definitions/authCredential",
+          "title": "optional int32 reply_partition = 5;"
+        },
+        "tracing": {
+          "type": "string",
+          "format": "byte"
+        },
+        "reply_key": {
+          "type": "string"
+        },
+        "by_device": {
+          "$ref": "#/definitions/commonDevice"
+        }
+      }
+    },
+    "commonDevice": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        }
+      }
+    },
+    "userAllType": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "cr": {
+          "$ref": "#/definitions/userCreateRequest"
+        }
+      }
+    },
+    "userCreateRequest": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "challenge_id": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "userDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "useragent_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "useragent": {
+          "type": "string"
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "language_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "language": {
+          "type": "string"
+        }
+      }
+    },
+    "userTrace": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "location_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "location": {
+          "type": "string"
+        },
+        "city_code": {
+          "type": "string"
+        },
+        "city_name": {
+          "type": "string"
+        },
+        "country_name": {
+          "type": "string"
+        },
+        "continent_code": {
+          "type": "string"
+        },
+        "coutry_code": {
+          "type": "string"
+        },
+        "latitue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "longitude": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "region_name": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        }
+      }
+    },
+    "userUser": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userTrace"
+          }
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userDevice"
+          },
+          "title": "repeated string alias = 12;"
+        },
+        "is_ban": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unsubscribed": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "marked_spam": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "hard_bounced": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "total_sessions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subiz_id": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "last_seen": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
 }
