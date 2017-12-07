@@ -15,5 +15,29 @@
     "application/json"
   ],
   "paths": {},
-  "definitions": {}
+  "definitions": {
+    "wsAllType": {
+      "type": "object",
+      "properties": {
+        "sub": {
+          "$ref": "#/definitions/wsSubscribe"
+        }
+      }
+    },
+    "wsSubscribe": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "common.Context ctx = 1;\noptional string connection_id = 2;"
+        },
+        "connection_id": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

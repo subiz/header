@@ -4,6 +4,14 @@ package ws;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
+message AllType {
+  Subscribe sub = 2;
+}
+
+service MyServer {
+	rpc Do(AllType) returns(AllType) {}
+}
+
 message Subscribe {
 	//common.Context ctx = 1;
 	//optional string connection_id = 2;
