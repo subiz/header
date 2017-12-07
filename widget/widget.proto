@@ -6,6 +6,17 @@ import "bitbucket.org/subiz/header/account/account.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 import "bitbucket.org/subiz/header/user/user.proto";
 
+message AllType {
+	optional Theme theme = 2;
+	optional Sound sound = 3;
+	optional Setting setting = 4;
+	optional UserSetting us = 5;
+}
+
+service MyServer {
+	rpc Do(AllType) returns(AllType) {}
+}
+
 message Theme {
 	optional string background_color = 7;
 	optional string custom_css = 8;
