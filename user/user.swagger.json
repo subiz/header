@@ -412,6 +412,38 @@
         },
         "cr": {
           "$ref": "#/definitions/userCreateRequest"
+        },
+        "connectorfield": {
+          "$ref": "#/definitions/userConnectorField"
+        },
+        "customefield": {
+          "$ref": "#/definitions/userCustomeField"
+        },
+        "ucr": {
+          "$ref": "#/definitions/userUserCreateResult"
+        }
+      }
+    },
+    "userConnectorField": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "integration_id": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -425,6 +457,26 @@
           "type": "string"
         },
         "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "userCustomeField": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "field_id": {
+          "type": "string"
+        },
+        "value": {
           "type": "string"
         }
       }
@@ -607,6 +659,20 @@
         "last_seen": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "userUserCreateResult": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "mask": {
+          "type": "string"
         }
       }
     }
