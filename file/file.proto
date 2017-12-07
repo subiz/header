@@ -4,6 +4,16 @@ package file;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
+message AllType {
+	FileHeader fh = 2;
+	PresignResult ps = 3;
+	File f = 4;
+}
+
+service MyServer {
+	rpc Do(AllType) returns(AllType) {}
+}
+
 message FileHeader {
 	common.Context ctx = 1;
 	string account_id = 2;
