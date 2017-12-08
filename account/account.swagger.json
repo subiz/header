@@ -192,12 +192,12 @@
         "logo_url": {
           "type": "string"
         },
-        "Members": {
+        "members": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/accountAgent"
           },
-          "title": "Members is list of 10 agents in group"
+          "title": "members is list of 10 agents in group"
         },
         "created": {
           "type": "string",

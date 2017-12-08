@@ -85,8 +85,8 @@ message AgentGroup {
 	optional string name = 4;
 	optional string logo_url = 5;
 
-	// Members is list of 10 agents in group
-	repeated Agent Members = 7;
+	// members is list of 10 agents in group
+	repeated Agent members = 7;
 	optional int64 created = 6;
 	optional int64 modified = 8;
 }
