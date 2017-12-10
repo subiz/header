@@ -209,6 +209,24 @@ message UserSearchResult {
 	optional string anchor = 5;
 }
 
+message MyUsersSearchRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	optional string query = 4;
+	optional string anchor = 5;
+	optional int32 limit = 6;
+	optional bool unread = 7;
+}
+
+message MyUsersSearchResult {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string anchor = 3;
+	repeated User users = 4;
+	repeated int32 unreads = 5;
+}
+
 message UserSearchRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -256,11 +274,13 @@ message ListTopicsRequest {
 	optional string start_time = 5;
 	optional string start_id = 6;
 	optional string limit = 7;
+	optional string unread = 8;
 }
 
 message ListTopicsResult {
 	optional common.Context ctx = 1;
 	repeated Topic topics = 3;
+	repeated int32 unreads = 4;
 }
 
 message ListNewsRequest {
