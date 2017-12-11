@@ -10,6 +10,9 @@ message AllType {
 	optional ConnectorField connectorfield = 4;
 	optional CustomeField customefield = 5;
 	optional UserCreateResult ucr = 6;
+	optional ReadTopicRequest rpr = 8;
+	optional UserSearchRequest usersearchrequest = 9;
+	optional UserSearchResult usersearchresult = 10;
 }
 
 service MyServer {
@@ -107,11 +110,6 @@ message CreateRequest {
 	optional string account_id = 2;
 	optional string challenge_id = 3;
 	optional string answer = 4;
-
-}
-
-message UserTopic {
-
 }
 
 message Topic {
@@ -121,9 +119,17 @@ message Topic {
 	optional string type = 5;
 	optional int64 updated = 8;
 	//optional int32 total_events = 4;
-
+	optional int32 unread = 9;
 	//optional string user_id = 7;
 
+}
+
+message ReadTopicRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string topic = 3;
+	optional string user_id = 4;
+	optional string agent_id = 5;
 }
 
 enum Event {
@@ -133,9 +139,9 @@ enum Event {
 	UserCreateRequested = 3; // User
 	UserSearchRequested = 4; // Ids
 
-	UserEventCreateRequested = 5;
-	UserEventSearchRequested = 7;
-	UserTopicSumaryRequested = 6;
+	UserEventCreateRequested = 5; // rawevent -> raw event
+	UserEventSearchRequested = 7; // listeventsrequest -> rawevents
+	UserTopicSearchRequested = 6; // listtopicsrequest -> listtopicsresult
 
 	UserSegmentationCreateRequested = 10;
 	UserSegmentationUpdateRequested = 11;
@@ -144,17 +150,13 @@ enum Event {
 	UserSegmentationReadRequested = 14;
 
 	UserAddToMyListRequest = 20;
-	UserGetListRequest = 21;
-
 
 	UserEventCreateRequest = 30;
-	UserEventListRequest = 31;
-	UserEventTopicListRequest = 32;
-	UserEventUnreadTopicListRequest = 33;
-	UserEventTopicReadRequest = 34;
 
 	UserEventTopicSubscribeRequest = 35;
 	UserEventTopicUnsubscribeRequest = 36;
+
+	UserReadTopicRequested = 41;  // ReadTopicRequest -> Empty
 }
 
 message Segmentations {
@@ -207,24 +209,7 @@ message UserSearchResult {
 	optional int64 total = 3;
 	repeated User users = 4;
 	optional string anchor = 5;
-}
-
-message MyUsersSearchRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string agent_id = 3;
-	optional string query = 4;
-	optional string anchor = 5;
-	optional int32 limit = 6;
-	optional bool unread = 7;
-}
-
-message MyUsersSearchResult {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string anchor = 3;
-	repeated User users = 4;
-	repeated int32 unreads = 5;
+	optional int32 unreads = 6; // only used when search my users
 }
 
 message UserSearchRequest {
@@ -234,15 +219,8 @@ message UserSearchRequest {
 	optional string query = 4;
 	optional string anchor = 5;
 	optional int32 limit = 6;
-	repeated string user_ids = 7; // maximum 20
-}
-
-message EventSearchResult {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 total = 3;
-	repeated string event_ids = 4;
-	optional string anchor = 5;
+	optional string agent_id = 8; // search my user of agent
+	optional string unread = 9; // search my user of agent
 }
 
 message IndexEvent {
@@ -256,31 +234,19 @@ message IndexEvent {
 	optional string text = 10;
 }
 
-message EventSearchRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string query = 4;
-	optional string anchor = 5;
-	optional int32 limit = 6;
-	optional string category = 9;
-	repeated string event_ids = 7; // maximum 20
-}
-
 message ListTopicsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string user_id = 3;
-	optional string start_time = 5;
-	optional string start_id = 6;
-	optional string limit = 7;
+	optional string anchor = 4;
+	optional int32 limit = 7;
 	optional string unread = 8;
 }
 
 message ListTopicsResult {
 	optional common.Context ctx = 1;
 	repeated Topic topics = 3;
-	repeated int32 unreads = 4;
+	optional string anchor = 5;
 }
 
 message ListNewsRequest {
@@ -289,24 +255,6 @@ message ListNewsRequest {
 	optional string user_id = 3;
 	optional int64 start_time = 4;
  	optional string limit = 7;
-}
-
-message ListEventsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string category = 5;
-
-	// normal list events
-	optional int64 start_time = 6;
-	optional int32 limit = 7; // accept negative number
-
-	// search events
-	optional string query = 4;
-	optional string anchor = 8;
-
-	// batch read events
-	//repeated string event_ids = 7; // maximum 20
 }
 
 message AddToMyList {

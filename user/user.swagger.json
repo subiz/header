@@ -421,6 +421,15 @@
         },
         "ucr": {
           "$ref": "#/definitions/userUserCreateResult"
+        },
+        "rpr": {
+          "$ref": "#/definitions/userReadTopicRequest"
+        },
+        "usersearchrequest": {
+          "$ref": "#/definitions/userUserSearchRequest"
+        },
+        "usersearchresult": {
+          "$ref": "#/definitions/userUserSearchResult"
         }
       }
     },
@@ -503,6 +512,26 @@
           "format": "int32"
         },
         "language": {
+          "type": "string"
+        }
+      }
+    },
+    "userReadTopicRequest": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "agent_id": {
           "type": "string"
         }
       }
@@ -673,6 +702,64 @@
         },
         "mask": {
           "type": "string"
+        }
+      }
+    },
+    "userUserSearchRequest": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "segmentation_id": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "unread": {
+          "type": "string"
+        }
+      }
+    },
+    "userUserSearchResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userUser"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "unreads": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }

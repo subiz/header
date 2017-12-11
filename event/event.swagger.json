@@ -559,7 +559,7 @@
           "format": "boolean",
           "title": "IsVerified will be true if client is verified by the authority"
         },
-        "redirect_url": {
+        "webhook_url": {
           "type": "string",
           "title": "List of URLs which client must register for oauth redirection"
         },
@@ -590,6 +590,13 @@
         },
         "channel_name": {
           "type": "string"
+        },
+        "field_prefix": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -1204,6 +1211,9 @@
         },
         "es": {
           "$ref": "#/definitions/eventRawEvents"
+        },
+        "ler": {
+          "$ref": "#/definitions/eventListEventsRequest"
         }
       }
     },
@@ -1217,6 +1227,33 @@
           "type": "string"
         },
         "client_id": {
+          "type": "string"
+        }
+      }
+    },
+    "eventListEventsRequest": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "category": {
           "type": "string"
         }
       }
@@ -1340,6 +1377,11 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "unread": {
+          "type": "integer",
+          "format": "int32",
+          "title": "optional int32 total_events = 4;"
         }
       }
     },
