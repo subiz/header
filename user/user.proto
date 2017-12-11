@@ -209,7 +209,7 @@ message UserSearchResult {
 	optional int64 total = 3;
 	repeated User users = 4;
 	optional string anchor = 5;
-	optional int32 unreads = 6; // only used when search my users
+	repeated int32 unreads = 6; // only used when search my users
 }
 
 message UserSearchRequest {
@@ -220,7 +220,7 @@ message UserSearchRequest {
 	optional string anchor = 5;
 	optional int32 limit = 6;
 	optional string agent_id = 8; // search my user of agent
-	optional string unread = 9; // search my user of agent
+	optional bool unread = 9; // search my user of agent
 }
 
 message IndexEvent {

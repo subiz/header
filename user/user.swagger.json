@@ -731,7 +731,8 @@
           "type": "string"
         },
         "unread": {
-          "type": "string"
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -758,8 +759,11 @@
           "type": "string"
         },
         "unreads": {
-          "type": "integer",
-          "format": "int32"
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       }
     }
