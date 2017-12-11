@@ -238,9 +238,10 @@ message ListTopicsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string user_id = 3;
+	optional string agent_id = 5;
 	optional string anchor = 4;
 	optional int32 limit = 7;
-	optional string unread = 8;
+	optional bool unread = 8;
 }
 
 message ListTopicsResult {
