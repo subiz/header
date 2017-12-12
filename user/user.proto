@@ -20,6 +20,13 @@ service MyServer {
 	rpc Do(AllType) returns(AllType) {}
 }
 
+message AddToMyRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	repeated string agent_ids = 5;
+}
+
 message UserCreateResult {
 	optional string account_id = 2;
 	optional string id = 3;
