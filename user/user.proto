@@ -13,6 +13,7 @@ message AllType {
 	optional ReadTopicRequest rpr = 8;
 	optional UserSearchRequest usersearchrequest = 9;
 	optional UserSearchResult usersearchresult = 10;
+	optional MaskResponse ms = 11;
 }
 
 service MyServer {
@@ -157,6 +158,28 @@ enum Event {
 	UserEventTopicUnsubscribeRequest = 36;
 
 	UserReadTopicRequested = 41;  // ReadTopicRequest -> Empty
+
+	UserSubizId = 42;
+}
+
+message SubizIDRequest {
+	optional common.Context ctx = 1;
+	optional string subiz_id = 2;
+	optional string account_id = 3;
+}
+
+message MaskResponse {
+	optional string subiz_id = 2;
+	optional string account_id = 3;
+	optional string user_id = 4;
+	optional string mask = 5;
+}
+
+message SubizIDResponse {
+	optional common.Context ctx = 1;
+	optional string subiz_id = 2;
+	optional string account_id = 3;
+	optional string user_id = 4;
 }
 
 message Segmentations {

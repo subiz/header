@@ -430,6 +430,9 @@
         },
         "usersearchresult": {
           "$ref": "#/definitions/userUserSearchResult"
+        },
+        "ms": {
+          "$ref": "#/definitions/userMaskResponse"
         }
       }
     },
@@ -512,6 +515,23 @@
           "format": "int32"
         },
         "language": {
+          "type": "string"
+        }
+      }
+    },
+    "userMaskResponse": {
+      "type": "object",
+      "properties": {
+        "subiz_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "mask": {
           "type": "string"
         }
       }
