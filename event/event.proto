@@ -160,3 +160,10 @@ message ListEventsRequest {
 	int32 limit = 6;
 	string category = 9;
 }
+
+message UserEvent {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string user_id = 4;
+	RawEvent event = 5;
+}

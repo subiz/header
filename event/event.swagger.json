@@ -899,6 +899,12 @@
         "accepted": {
           "type": "string",
           "format": "int64"
+        },
+        "connector_id": {
+          "type": "string"
+        },
+        "channel_type": {
+          "type": "string"
         }
       },
       "title": "get number of unread message"
