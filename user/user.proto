@@ -140,6 +140,13 @@ message ReadTopicRequest {
 	optional string agent_id = 5;
 }
 
+message SubscribeRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	repeated string topics = 4;
+}
+
 enum Event {
 	UserReadRequested = 0; // Id
 
@@ -157,12 +164,11 @@ enum Event {
 	UserSegmentationListRequested = 13;
 	UserSegmentationReadRequested = 14;
 
-	UserAddToMyListRequest = 20;
+	UserAddToMyListRequested = 20;
 
-	UserEventCreateRequest = 30;
 
-	UserEventTopicSubscribeRequest = 35;
-	UserEventTopicUnsubscribeRequest = 36;
+	UserEventTopicSubscribeRequested = 35;
+	UserEventTopicUnsubscribeRequested = 36;
 
 	UserReadTopicRequested = 41;  // ReadTopicRequest -> Empty
 
