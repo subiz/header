@@ -84,6 +84,10 @@ enum T {
 	elasticsearch_error = 200;
 	invalid_template = 203;
 	sendgrid_send_error = 204;
+
+	whitelist_domain_not_found = 205;
+	blacklist_ip_not_found = 206;
+	blocked_user_not_found = 207;
 }
 
 enum L {
