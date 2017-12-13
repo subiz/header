@@ -352,63 +352,6 @@
       "default": "unknown",
       "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - bot: BOT reserve for future"
     },
-    "clientConnector": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "128 bit string identification of the client."
-        },
-        "secret": {
-          "type": "string",
-          "title": "secre used to authorize client with oauth2 server"
-        },
-        "logo_url": {
-          "type": "string",
-          "title": "LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "is_verified": {
-          "type": "boolean",
-          "format": "boolean",
-          "title": "IsVerified will be true if client is verified by the authority"
-        },
-        "redirect_url": {
-          "type": "string",
-          "title": "List of URLs which client must register for oauth redirection"
-        },
-        "type": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version number of the client."
-        },
-        "is_enabled": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "modified": {
-          "type": "string",
-          "format": "int64"
-        },
-        "channel_type": {
-          "type": "string"
-        },
-        "channel_name": {
-          "type": "string"
-        }
-      }
-    },
     "commonContext": {
       "type": "object",
       "properties": {
@@ -559,6 +502,9 @@
         },
         "listcon": {
           "$ref": "#/definitions/conversationListConversations"
+        },
+        "connector": {
+          "$ref": "#/definitions/conversationConnector"
         }
       }
     },
@@ -720,6 +666,64 @@
         }
       }
     },
+    "conversationConnector": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "is_verified": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "webhook_url": {
+          "type": "string"
+        },
+        "newconversation_endpoint": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "channel_type": {
+          "type": "string"
+        },
+        "field_prefix": {
+          "type": "string"
+        },
+        "verified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "conversationConversation": {
       "type": "object",
       "properties": {
@@ -768,6 +772,12 @@
         "accepted": {
           "type": "string",
           "format": "int64"
+        },
+        "connector_id": {
+          "type": "string"
+        },
+        "channel_type": {
+          "type": "string"
         }
       },
       "title": "get number of unread message"
@@ -931,7 +941,7 @@
           "type": "string"
         },
         "connector": {
-          "$ref": "#/definitions/clientConnector"
+          "$ref": "#/definitions/conversationConnector"
         },
         "domain": {
           "$ref": "#/definitions/conversationDomain"
