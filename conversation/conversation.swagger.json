@@ -741,15 +741,9 @@
           "format": "int64",
           "title": "Creation time"
         },
-        "last_actived": {
-          "type": "string",
-          "format": "int64",
-          "title": "Last active time"
-        },
         "closed": {
           "type": "string",
-          "format": "int64",
-          "title": "Closed timeph"
+          "format": "int64"
         },
         "members": {
           "type": "array",
@@ -773,37 +767,12 @@
           "type": "string",
           "format": "int64"
         },
-        "connector_id": {
-          "type": "string"
-        },
         "channel_type": {
-          "type": "string"
-        }
-      },
-      "title": "get number of unread message"
-    },
-    "conversationDomain": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "payload": {
-          "type": "string"
-        },
-        "created": {
           "type": "string",
-          "format": "int64",
-          "title": "optional bool is_enabled = 4;"
+          "title": "optional string connector_id = 16;"
+        },
+        "integration": {
+          "$ref": "#/definitions/conversationIntegration"
         }
       }
     },
@@ -838,6 +807,43 @@
           "items": {
             "$ref": "#/definitions/conversationButton"
           }
+        }
+      }
+    },
+    "conversationIntegration": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "connector_id": {
+          "type": "string"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "integrated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "by": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
         }
       }
     },
@@ -939,12 +945,6 @@
         },
         "avatar_url": {
           "type": "string"
-        },
-        "connector": {
-          "$ref": "#/definitions/conversationConnector"
-        },
-        "domain": {
-          "$ref": "#/definitions/conversationDomain"
         }
       }
     },
@@ -1163,7 +1163,7 @@
         "account_id": {
           "type": "string"
         },
-        "connector_id": {
+        "channel_type": {
           "type": "string"
         },
         "to": {

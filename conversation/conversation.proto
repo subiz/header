@@ -67,24 +67,15 @@ message Member {
 	optional string id = 4;
 	optional string name = 10;
 	optional string avatar_url = 6;
-
-	optional Connector connector = 9;
-	optional Domain domain = 12;
 }
 
-// get number of unread message
 message Conversation {
-	reserved "request_id";
-	reserved 13;
-
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
 	// Creation time
 	optional int64 created = 4;
-	// Last active time
-	optional int64 last_actived = 5;
-	// Closed timeph
+
 	optional int64 closed = 6;
 	repeated Member members = 7;
 	repeated Tag tags = 10;
@@ -99,8 +90,9 @@ message Conversation {
 	optional StartRequest request = 14;
 	optional int64 accepted = 15; // time chat is accepted after being in unassigned list
 
-	optional string connector_id = 16;
+	//	optional string connector_id = 16;
 	optional string channel_type = 17;
+	optional Integration integration = 18;
 }
 
 message UserConversation { // used in database
@@ -111,12 +103,10 @@ message UserConversation { // used in database
 }
 
 message StartRequest {
-	reserved 12;
-
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
-	optional string connector_id = 4;
+	optional string channel_type = 4;
 	repeated string to = 5;
 	optional string page_url = 6;
 	optional string page_title = 7;
@@ -144,28 +134,6 @@ message Conversations {
 	repeated Conversation conversations = 1;
 }
 
-message ConnectedDomain {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	//optional ChannelConector connector = 4;
-	//optional bool is_en = 6;
-	optional string domain_id = 11;
-	optional string connector_id = 12;
-	optional int64 created = 7;
-	optional int64 modified = 9;
-	//optional auth.By by = 10;
-}
-
-message Domain {
-	optional common.Context ctx = 1;
-	optional string id = 6;
-	optional string name = 7;
-	optional string description = 8;
-	optional string payload = 9;
-	//optional bool is_enabled = 4;
-	optional int64 created = 5;
-}
-
 message Search {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -182,21 +150,6 @@ message ListConversations {
 	optional int32 limit = 5;
 	optional string start_id = 6;
 	optional string member_id = 8;
-}
-
-message ListUsersUnreadRequest {
-	optional string AccountId = 1;
-	optional string AgentId = 2;
-	repeated string UserIds = 3;
-}
-
-message Unread {
-	optional string UserId = 1;
-	optional int32 Unread = 2;
-}
-
-message UsersUnread {
-	repeated Unread Unreads = 1;
 }
 
 message ListEventsRequest {
@@ -241,7 +194,6 @@ enum Event {
 	ConversationDeleteRuleRequested = 22; // id
 	ConversationReadRuleRequested = 23; // id
 	ConversationListRuleRequested = 24; // id accountid, return top N rule
-
 
 
 	//ConversationRequested = 50; // user request for new conversation
@@ -420,11 +372,6 @@ message Tags {
 	optional common.Context ctx = 1;
 	repeated Tag tags = 4;
 }
-
-//enum PlatformType {
-//message = 0;
-//email = 2;
-//}
 
 message Postback {
 	optional Message message = 2;
