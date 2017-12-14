@@ -1,0 +1,24 @@
+syntax = "proto2";
+
+package mailkon;
+
+//import "bitbucket.org/subiz/header/common/common.proto";
+
+message Address {
+	optional string account_id = 1;
+	optional string address = 2;
+	optional int64 updated = 3;
+}
+
+message Message {
+	optional string message_id = 2;
+	optional string account_id = 3;
+	optional string conversation_id = 4;
+	optional string from_addr = 5;
+	optional string to_addr = 6;
+	optional string subject = 7;
+	optional string body = 8;
+	optional string header = 9;
+	repeated string attachments = 10;
+	optional int64 created = 11;
+}
