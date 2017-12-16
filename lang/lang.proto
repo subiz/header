@@ -88,6 +88,9 @@ enum T {
 	whitelist_domain_not_found = 205;
 	blacklist_ip_not_found = 206;
 	blocked_user_not_found = 207;
+
+	invalid_content_type = 210;
+	parse_file_error = 211;
 }
 
 enum L {
