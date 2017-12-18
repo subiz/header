@@ -6,13 +6,10 @@ message Credential {
 	string account_id = 1;
 	string issuer = 3;
 	Type type = 4;
-
 	Method method = 5;
-
 	string client_id = 7;
 	Type client_type = 8;
 	string client_account_id = 10;
-
 	repeated string scopes = 9;
 
 	// optional

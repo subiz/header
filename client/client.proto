@@ -27,6 +27,11 @@ message Client {
 	// List of URLs which client must register for oauth redirection
 	optional string redirect_url = 10;
 	optional string type = 11;
+	enum Type {
+		app = 0;
+		connector = 1;
+		bot = 3;
+	}
 	optional string name = 12;
 	// Version number of the client.
 	optional string version = 14;
@@ -35,6 +40,16 @@ message Client {
 	optional int64 modified = 18;
 	optional string webhook_url = 20;
 	repeated string events = 19; // subscribed event
+
+
+	// for connector only
+	optional string channel_type = 21;
+	enum ChannelType {
+		subiz = 0;
+		email = 1;
+		facebook = 2;
+		viber = 3;
+	}
 }
 
 enum Event {
