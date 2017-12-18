@@ -115,6 +115,7 @@ message Account {
 	optional int64 confirmed = 9;
 	optional int64 modified = 10;
 	optional string slogan = 12;
+
 	optional string referer_id = 11;
 	enum State {
 		pending = 0; // waiting for email confirmation
@@ -132,6 +133,7 @@ message Account {
 	optional string address = 20;
 	optional string url = 21;
 	optional string lang = 23;
+	optional string referer_from = 24;
 }
 
 message GroupMember {
@@ -173,9 +175,8 @@ message NewPassword {
 
 message Limit {
 	optional common.Context ctx = 1;
-
-	optional int32 conversation_history = 2;
-	optional int32 max_triggers = 3;
+	optional string account_id = 2;
+	optional int32 plan = 3;
 	optional int32 max_agents = 4;
 	optional int32 max_agent_groups = 5;
 	optional int32 max_agent_in_a_group = 6;

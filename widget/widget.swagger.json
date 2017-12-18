@@ -89,6 +89,9 @@
         },
         "lang": {
           "type": "string"
+        },
+        "referer_from": {
+          "type": "string"
         }
       }
     },
