@@ -91,6 +91,10 @@ enum T {
 
 	invalid_content_type = 210;
 	parse_file_error = 211;
+
+	invalid_integration_id = 220;
+	invalid_integration = 221;
+
 }
 
 enum L {
