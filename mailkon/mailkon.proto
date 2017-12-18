@@ -22,3 +22,9 @@ message Message {
 	repeated string attachments = 10;
 	optional int64 created = 11;
 }
+
+message User {
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string email_address = 4;
+}
