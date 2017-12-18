@@ -413,11 +413,8 @@
         "cr": {
           "$ref": "#/definitions/userCreateRequest"
         },
-        "connectorfield": {
-          "$ref": "#/definitions/userConnectorField"
-        },
-        "customefield": {
-          "$ref": "#/definitions/userCustomeField"
+        "fields": {
+          "$ref": "#/definitions/userField"
         },
         "ucr": {
           "$ref": "#/definitions/userUserCreateResult"
@@ -439,29 +436,6 @@
         }
       }
     },
-    "userConnectorField": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "integration_id": {
-          "type": "string"
-        },
-        "values": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "userCreateRequest": {
       "type": "object",
       "properties": {
@@ -472,26 +446,6 @@
           "type": "string"
         },
         "answer": {
-          "type": "string"
-        }
-      }
-    },
-    "userCustomeField": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "field_id": {
-          "type": "string"
-        },
-        "value": {
           "type": "string"
         }
       }
@@ -518,6 +472,33 @@
           "format": "int32"
         },
         "language": {
+          "type": "string"
+        }
+      }
+    },
+    "userField": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "setter": {
+          "type": "string"
+        },
+        "setter_type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "data": {
           "type": "string"
         }
       }
@@ -753,6 +734,12 @@
         "last_seen": {
           "type": "string",
           "format": "int64"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userField"
+          }
         }
       }
     },
