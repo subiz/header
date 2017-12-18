@@ -1042,6 +1042,9 @@
         "channel_type": {
           "type": "string"
         },
+        "from": {
+          "type": "string"
+        },
         "to": {
           "type": "array",
           "items": {
@@ -1301,6 +1304,33 @@
         }
       }
     },
+    "userField": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "setter": {
+          "type": "string"
+        },
+        "setter_type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "data": {
+          "type": "string"
+        }
+      }
+    },
     "userTopic": {
       "type": "object",
       "properties": {
@@ -1478,6 +1508,12 @@
         "last_seen": {
           "type": "string",
           "format": "int64"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userField"
+          }
         }
       }
     }
