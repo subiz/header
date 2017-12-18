@@ -8,6 +8,7 @@ import "bitbucket.org/subiz/header/user/user.proto";
 message Limit {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
+	optional int32 conversation_history = 2;
 	optional int32 max_rules = 7;
 }
 
@@ -107,6 +108,7 @@ message StartRequest {
 	optional string id = 2;
 	optional string account_id = 3;
 	optional string channel_type = 4;
+	optional string from = 12;
 	repeated string to = 5;
 	optional string page_url = 6;
 	optional string page_title = 7;
