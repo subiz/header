@@ -92,6 +92,9 @@ enum Type {
 	message_received = 32;
 	conversation_member_typing = 33;
 	conversation_postbacked = 34;
+
+	conversation_unassigned = 35;
+	conversation_assigned = 36;
 }
 
 enum SubscriberType {
