@@ -209,6 +209,10 @@
         "modified": {
           "type": "string",
           "format": "int64"
+        },
+        "members_count": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

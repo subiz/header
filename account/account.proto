@@ -89,6 +89,7 @@ message AgentGroup {
 	repeated Agent members = 7;
 	optional int64 created = 6;
 	optional int64 modified = 8;
+	optional int32 members_count = 9;
 }
 
 message ResetPasswordRequest {
