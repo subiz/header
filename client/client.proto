@@ -3,6 +3,7 @@ syntax = "proto2";
 package client;
 
 import "bitbucket.org/subiz/header/common/common.proto";
+import "bitbucket.org/subiz/header/auth/auth.proto";
 
 message AllType {
 	optional Clients client = 2;
@@ -61,4 +62,19 @@ enum Event {
 
 	ClientUpserted = 25;
 	ClientDeleted = 26;
+
+	ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
+}
+
+message Authorization {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string issuer = 3;
+	optional auth.Type type = 4;
+	optional auth.Method method = 5;
+	optional string client_id = 7;
+	optional auth.Type client_type = 8;
+	optional string client_account_id = 10;
+	repeated string scopes = 9;
+	optional string integration_id = 11;
 }

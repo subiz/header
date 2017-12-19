@@ -231,5 +231,5 @@ enum EVENT {
 	AUTH = 0;
 	AuthExpireCookie = 4; //CookieExpire
 
-	ClientAuthorized = 12;
+	ClientAuthorized = 12; // auth send to webhook to update webhook
 }
