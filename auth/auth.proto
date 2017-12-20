@@ -25,102 +25,74 @@ message Scope {
 	string title = 4;
 	string description = 5;
 	Method method = 6;
-	Event event = 7;
-}
-
-message Event {
-	bool conversation_started = 10;
-	bool conversation_sent = 11;
-	bool conversation_joined = 12;
+	repeated string event = 7;
 }
 
 message Method {
+	bool ping = 1;
 	// trigger
 	bool update_trigger = 50;
 	bool delete_trigger = 51;
 	bool create_trigger = 52;
 	bool read_trigger = 53;
-	bool list_trigger = 54;
-	bool ReadAllTrigger = 55;
-	bool ListAllTrigger = 56;
-	bool UpdateAllTrigger = 57;
-	bool DeleteAllTrigger = 58;
-	bool CreateAllTrigger = 59;
-
 
 	// segmentation
 	bool read_segmentation = 60;
 	bool update_segmentation = 61;
 	bool delete_segmentation = 62;
+	bool create_segmentation = 63;
 
-
-	// agents
-
-	//bool AuthorizeAgentClient = 89;
-	//bool RevokeAgentClient = 90;
-	bool ReadAgentNotification = 105;
-	bool SeenAgentNotification = 106;
-
-	bool Ping = 107;
 	// agent
-	bool UpdatePasswords = 109;
-	bool UpdatePassword = 108;
-	bool InviteAgents = 70;
-	bool UpdateAgent = 72;
-	bool UpdateAgents = 73;
-	bool ReadAgent = 76;
-	bool ReadAgents = 77;
-	bool ResetPassword = 78; // acc group
+	bool invite_agent = 70;
+	bool update_agent = 72;
+	bool update_agents = 73;
+	bool read_agent = 76;
+	bool read_agents = 77;
+	bool reset_password = 78; // acc group
 
-	bool UpdateAgentsPermission = 81;
-	//bool ListAgentClient = 85;
-	bool UpdateAgentsState = 86;
+	bool update_agents_permission = 81;
+	bool read_agent_permission = 85;
+	bool update_agents_state = 86;
 
-
-	// bool ReadAccount = 120; // default right
-	bool ConfirmAccount = 120;
-	//bool ListAccountClient = 121;
+	bool read_account = 120; // default right
 
 	// agent group
-	bool CreateAgentGroups = 124;
-	bool DeleteAgentGroups = 125;
-	bool ReadAgentGroups = 126;
-	bool UpdateAgentGroups = 127;
+	bool create_agent_group = 124;
+	bool delete_agent_group = 125;
+	bool read_agent_group = 126;
+	bool update_agent_group = 127;
 
 	// account
-	bool UpdatePlan = 123; // only for subiz agent
+	bool update_plan = 123; // only for subiz agent
 	//bool ViewAccountReport = 125;
 	//bool EnableChannel = 126;
 	//bool DisableChannel = 127;
-	bool create_account = 129;
-	bool delete_account = 130;
-	bool update_account  = 122;
-	bool read_account = 131;
+	//bool create_account = 129;
+	//bool delete_account = 130;
+	bool update_account_infomation  = 122;
 
 	// clients
-	bool ReadClient = 151;
-	bool ListClient = 152;
-	bool UpdateClientInfo = 153;
-	bool PublishClient = 154;
-	bool RegenerateClientSecret = 155;
-	bool VerifyClient = 156;
-	bool DeleteClient = 157;
-	bool CreateClient = 158;
+	bool read_client = 151;
+	bool update_client = 153;
+	//bool RegenerateClientSecret = 155;
+	//bool VerifyClient = 156;
+	bool delete_client = 157;
+	bool create_client = 158;
 
 	// rule
 	bool read_rule = 180;
-	bool update_rule = 181;
+	bool create_rule = 181;
 	bool delete_rule = 182;
-
-	// channel
+	bool update_rule = 183;
 
 	// converstation
-	bool StartConversation = 190;
-	bool ReadConversation = 191;
-	bool WriteConversation = 192;
+	bool start_conversation = 190;
+	bool read_conversation = 191; // basic permission
+	bool export_conversations = 192;
+	bool read_teammates_conversations = 193;
 
 	// connector integration
-	bool IntegrateConnector = 200;
+	bool integrate_connector = 200;
 
 	bool read_user_email = 205;
 	bool read_user_facebook_id = 206;
@@ -138,11 +110,18 @@ message Method {
 	bool list_whitelist_ip = 306;
 	bool list_whitelist_user = 307;
 	bool list_whitelist_domain = 308;
+
+	bool purchase_service = 310;
+	bool update_payment_method = 311;
+	bool add_credit = 312;
+	bool update_billing_cycle = 313;
+	bool read_invoices = 314;
+	bool read_subscriptions = 315;
 }
 
 message UserAuth {
-	string UserId = 1;
-	Method Method = 2;
+	string user_id = 1;
+	Method method = 2;
 }
 
 message PasswordCredential {
@@ -227,7 +206,7 @@ enum AuthorizationType {
 	channel_auth = 1;
 }
 
-enum EVENT {
+enum Event {
 	AUTH = 0;
 	AuthExpireCookie = 4; //CookieExpire
 
