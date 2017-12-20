@@ -27,9 +27,9 @@ for i in `ls -R`; do
 				fi
 				if [[ $i == *".proto" ]]; then
 						echo -e "\033[0;90m["$TOTAL"] compiling" $LASTDIRECTORY /$i "\033[0;31m"
-						./protoc --go_out=plugins:. --proto_path=../../../ --proto_path=./  $LASTDIRECTORY/$i
-						./protoc -I./protobuf/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=../../../ --proto_path=./ $LASTDIRECTORY/$i
-						#./protoc --python_out=plugins:. --proto_path=../../../ --proto_path=./ $LASTDIRECTORY/$i
+						./protoc --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LASTDIRECTORY/$i
+						./protoc -I./protobuf/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
+						#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
 						let "TOTAL += 1"
 						# else
 						# echo -e "\033[0;37mignore" $i "\033[0;30m"
