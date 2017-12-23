@@ -2,8 +2,6 @@ syntax = "proto2";
 
 package webhook4;
 
-//import "bitbucket.org/subiz/header/auth/auth.proto";
-//4import "bitbucket.org/subiz/header/event/event.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 
 message Retry {
@@ -16,21 +14,33 @@ message Retry {
 
 message Webhook {
 	optional common.Context ctx = 1;
+	optional string account_id = 12;
 	optional string client_id = 2;
 	optional string url = 3;
 	optional string secret = 4;
-	optional bool is_enabled = 5;
-  repeated string events = 6; // conversation_start.account.#account_id.user.#user_id
-	// conversation_start.account.#account_id.channel.#client_id
+
+  repeated string events = 6;
+	optional string state = 7;
+	enum State {
+		normal = 0;
+		backoff = 1;
+		inactive = 2;
+	}
+
+	optional int64 next_hook_at = 8;
+	optional int64 last_hook_at = 9;
+	optional int64 last_hook_id = 10;
+	optional int32 last_hook_result = 11;
+	optional int64 events_count = 13;
 }
 
 enum Event {
 	Webhook4RetryCallback = 0;
-	Webhook4UpsertWebhookRequested = 1;
-	Webhook4DeleteWebhookRequested = 2;
-	Webhook4ReadWebhookRequested = 3;
+	Webhook4WebhookReadRequested = 3;
 	Webhook4WebhookUpserted = 4;
 	Webhook4WebhookVerifyRequested = 5;
 
 	Webhook4Requested = 6; //eventpb.RawEventCreatedPayload
+	Webhook4ClearBackoffRequested = 7;
+	Webhook4PurgeQueueRequested = 8;
 }
