@@ -775,6 +775,9 @@
         "account_id": {
           "type": "string"
         },
+        "widget_version": {
+          "type": "string"
+        },
         "sound": {
           "$ref": "#/definitions/widgetSound"
         },
@@ -801,6 +804,18 @@
           }
         },
         "language_url": {
+          "type": "string"
+        },
+        "custom_language_url": {
+          "type": "string"
+        },
+        "css_url": {
+          "type": "string"
+        },
+        "custom_css_url": {
+          "type": "string"
+        },
+        "custom_language": {
           "type": "string"
         }
       }
@@ -835,16 +850,10 @@
         "account_id": {
           "type": "string"
         },
-        "background_color": {
-          "type": "string"
-        },
         "custom_css": {
           "type": "string"
         },
-        "button_position": {
-          "type": "string"
-        },
-        "button_style": {
+        "widget_position": {
           "type": "string"
         },
         "window_mode": {
@@ -887,9 +896,6 @@
         "desktop_notification": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "language_url": {
-          "type": "string"
         }
       }
     }
