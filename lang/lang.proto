@@ -95,6 +95,13 @@ enum T {
 	invalid_integration_id = 220;
 	invalid_integration = 221;
 
+	webhook_not_found = 222;
+	tempfile_error = 223;
+	write_file_error = 224;
+	close_file_error = 225;
+	execute_shell_error = 226;
+
+	invalid_css = 227;
 }
 
 enum L {
