@@ -781,9 +781,6 @@
         "language": {
           "type": "string"
         },
-        "welcome_message": {
-          "type": "string"
-        },
         "theme": {
           "$ref": "#/definitions/widgetTheme"
         },
@@ -803,11 +800,7 @@
             "type": "string"
           }
         },
-        "custom_language": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "language_path": {
+        "language_url": {
           "type": "string"
         }
       }
@@ -815,6 +808,9 @@
     "widgetSound": {
       "type": "object",
       "properties": {
+        "account_id": {
+          "type": "string"
+        },
         "enabled": {
           "type": "boolean",
           "format": "boolean"
@@ -836,6 +832,9 @@
     "widgetTheme": {
       "type": "object",
       "properties": {
+        "account_id": {
+          "type": "string"
+        },
         "background_color": {
           "type": "string"
         },
@@ -888,6 +887,9 @@
         "desktop_notification": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "language_url": {
+          "type": "string"
         }
       }
     }
