@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package dashboard;
 
+import "bitbucket.org/subiz/header/common/common.proto";
+
 message SessionCookie {
 	string refresh_token = 3;
 	int64 expired_at = 4;
@@ -9,4 +11,19 @@ message SessionCookie {
 	string type = 6;
 	string email = 7;
 	bool remember_me = 8;
+}
+
+// global setting. eg: dashboard_4/4234098234
+message Global { //used only inside subiz
+	common.Context ctx = 1;
+	string name = 2;
+	string data = 3;
+	string pk = 4;
+}
+
+enum Event {
+	DashboardVersionUpdated = 0; // reload js and css
+	DashboardLanguageUpdated = 5;
+
+	DashboardLanguageUpdateRequested = 7;
 }
