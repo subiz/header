@@ -90,6 +90,6 @@ enum Event {
 	WidgetSettingCssVersionUpdated = 4;
 	WidgetSettingLanguageUpdated = 5;
 
-	WidgetSettingCssVersionUpdateRequest = 6;
-	WidgetSettingLanguageVersionUpdatedRequest = 7;
+	WidgetSettingCssVersionUpdateRequested = 6;
+	WidgetSettingLanguageUpdateRequested = 7;
 }
