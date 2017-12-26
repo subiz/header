@@ -102,6 +102,7 @@ enum T {
 	execute_shell_error = 226;
 
 	invalid_css = 227;
+	invalid_hmac = 228;
 }
 
 enum L {
