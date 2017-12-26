@@ -804,8 +804,7 @@
           "format": "int64"
         },
         "channel_type": {
-          "type": "string",
-          "title": "optional string connector_id = 16;"
+          "type": "string"
         },
         "integration": {
           "$ref": "#/definitions/conversationIntegration"
@@ -900,6 +899,10 @@
         },
         "avatar_url": {
           "type": "string"
+        },
+        "left": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -1042,9 +1045,6 @@
         "device_type": {
           "type": "string"
         },
-        "user_member": {
-          "$ref": "#/definitions/conversationMember"
-        },
         "created": {
           "type": "string",
           "format": "int64"
@@ -1081,6 +1081,9 @@
         },
         "user": {
           "$ref": "#/definitions/userUser"
+        },
+        "integration_id": {
+          "type": "string"
         }
       }
     },
