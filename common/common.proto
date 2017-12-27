@@ -5,7 +5,9 @@ package common;
 import "bitbucket.org/subiz/header/lang/lang.proto";
 import "bitbucket.org/subiz/header/auth/auth.proto";
 
-message Empty {}
+message Empty {
+	Context ctx = 1;
+}
 
 message Id {
 	Context ctx = 1;
@@ -33,6 +35,8 @@ message Context {
 	string reply_key = 8;
 
 	Device by_device = 10;
+
+	string topic = 11; // kafka topic
 }
 
 message Reply {
