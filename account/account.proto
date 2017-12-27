@@ -196,6 +196,9 @@ message Token {
 }
 
 enum Event {
+	AccountRequested = 1000;
+	AccountSyned = 1001;
+
 	//	deleted = 11111;
 	CreateAccountRequested = 100; // createaccountrequested
 	UpdateAccountRequested = 101; //account
