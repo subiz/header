@@ -64,6 +64,7 @@ enum Event {
 	ClientDeleted = 26;
 
 	ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
+	ClientRequested = 30;
 }
 
 message Authorization {
