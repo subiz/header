@@ -538,6 +538,9 @@
         },
         "by_device": {
           "$ref": "#/definitions/commonDevice"
+        },
+        "topic": {
+          "type": "string"
         }
       }
     },
