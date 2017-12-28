@@ -93,7 +93,7 @@ message Apikey {
 }
 
 enum Event {
-
+	ApiRequested = 0;
 	ConversationStart = 2;
 	ApiReply = 4;
 }
