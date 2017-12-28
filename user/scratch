@@ -1,0 +1,39 @@
+string id
+string account_id
+string fullname
+string phones[]
+string primary_email
+string emails[]
+Trace traces[]  // danh sach location cua nguoi dung
+Device devices[] // danh sach cac thiet bi nguoi dung da tung dung
+bool is_ban
+string avatar_url
+string segments[]
+string labels[]      // danh sach label duoc gan cho nguoi dung
+bool unsubscribed
+bool marked_spam
+bool hard_bounced
+int32 total_sessions
+string subiz_id
+string timezone
+string country_code
+string country
+string city
+string language
+string aliases[]
+int64 last_seen
+Field fields[]
+
+conversation:connector] [conversation_joined.account.{account_id}.integration.{integration_id} conversation_left.account.{account_id}.integration.{integration_id} conversation_member_typing.account.{account_id}.integration.{integration_id} conversation_postbacked.account.{account_id}.integration.{integration_id} conversation_state_updated.account.{account_id}.integration.{integration_id} conversation_updated.account.{account_id}.integration.{integration_id} message_acked.account.{account_id}.integration.{integration_id} message_received.account.{account_id}.integration.{integration_id} message_seen.account.{account_id}.integration.{integration_id} message_send.account.{account_id}.integration.{integration_id}
+
+
+conversation_state_updated.account.{account_id}.integration.{integration_id}
+conversation_state_updated.account.{account_id}.integration.{integration_id}
+
+
+curl 'http://localhost:8088/accounts/acpwhnofgritddhyouse/agents/agpwlqkrfvhktjuyjj/permission' -H 'Content-Type: application/json;charset=UTF-8' -H 'X-Access-Token: QjP+vpDS/DA+diM66m3/T6hjBA3luWNJsrDrZWxj2LAPl/C9QcY/aXZa39JF3Zi/a1EAkX0W1rb1x/xy6LK2RrsAL3sEViLrrfb/ejLp9Gnk+Vjk7+w5lA==' --data-binary '{"method":{"export_conversations":true,"read_teammates_conversations":true,"ping":true,"invite_agent":true,"update_agent":true,"update_agents":true,"read_user_widget_setting":true,"update_widget_setting":true,"create_whitelist_domain":true,"create_whitelist_ip":true,"create_whitelist_user":true,"delete_whitelist_domain":true,"delete_whitelist_ip":true,"delete_whitelist_user":true}}'
+
+curl 'http://localhost:8088/accounts/acpwhnofgritddhyouse/agents/agpwlqkrfvhktjuyjj/permission' -H 'Content-Type: application/json;charset=UTF-8' -H 'X-Access-Token: QjP+vpDS/DA+diM66m3/T6hjBA3luWNJsrDrZWxj2LAPl/C9QcY/aXZa39JF3Zi/a1EAkX0W1rb1x/xy6LK2RrsAL3sEViLrrfb/ejLp9Gnk+Vjk7+w5lA=='
+
+
+curl -X 'POST' -d '[{"id":"evpwmgokthoyhxrabtskaldgi","created":1513911520665,"type":"conversation_state_updated","topics":["account..conversation.cspwmgokthkyuojfqu"],"by":{"device":{},"client_id":"subiz_email_channel"},"object":"conversation","conversation_id":"cspwmgokthkyuojfqu","data":{"conversation":{"id":"cspwmgokthkyuojfqu","account_id":"acpwmgojznpugdtjfcri","created":1513911520663,"state":"unassigned","request":{"account_id":"acpwmgojznpugdtjfcri","channel_type":"email","from":"me6lDZ@sendgrid.thanh.cf","to":["acpwmgojznpugdtjfcri@sendgrid-channel.thanh.cf"],"message":"I am \u003cstring\u003ebatman\u003c/string\u003e\u003cimg src=\"https://u6468596.ct.sendgrid.net/wf/open?upn=7POqCiIlilvD51mEc4Ds7pR86gcGtvJWcmRJYZiGcFiApBGBdH2PH4k1EMtP5uHxdwfe0XN0UnwUtfE0RCGoyIyeajR4LDh-2BD8vEeemuM8xhh-2B2FlGLd8IPj-2BLm-2FxKppU58WncWgfRhJVuEzwLGiNmp-2FPyUxnDayk1sTwUMUDC-2BcwXNDkrAxYBnQScpGYQEDcr3-2FpLIpPJzbnZFDNoGeiwGymHchWpgpUNm-2Bf1CfNN01Rc4E-2BKdMezRalP7V641g\" alt=\"\" width=\"1\" height=\"1\" border=\"0\" style=\"height:1px !important;width:1px !important;border-width:0 !important;margin-top:0 !important;margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !important;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !important;padding-left:0 !important;\"/\u003e\n","starter_id":"uspwmgoksuxxzbqablgjm","starter_type":"user","user":{"id":"uspwmgoksuxxzbqablgjm","account_id":"acpwmgojznpugdtjfcri"},"integration_id":"acpwmgojznpugdtjfcri.subiz_email_channel.subiz"},"integration":{"account_id":"acpwmgojznpugdtjfcri","connector_id":"subiz_email_channel","name":"email","state":"activated","id":"acpwmgojznpugdtjfcri.subiz_email_channel.subiz"}}}}]' -H 'Content-Length: 1679' -H 'Content-Type: application/json' -H 'User-Agent: Subiz-Gun/4.012' -H 'X-Subiz-Retry-Num: 0' -H 'X-Subiz-Signature: 3Mnbii6q2qwsjoJH9lgT5/ST9f/9eYboWwzNBr/oLvQ=' -H 'X-Subiz-Timestamp: 1513911520' 'http://mailkon-0.mailkon:8080/hook/subiz-events'

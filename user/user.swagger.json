@@ -351,6 +351,9 @@
         },
         "by_device": {
           "$ref": "#/definitions/commonDevice"
+        },
+        "topic": {
+          "type": "string"
         }
       }
     },
@@ -403,6 +406,26 @@
         },
         "ltr": {
           "$ref": "#/definitions/userListTopicsResult"
+        },
+        "sg": {
+          "$ref": "#/definitions/userSegmentation"
+        }
+      }
+    },
+    "userCondition": {
+      "type": "object",
+      "properties": {
+        "join": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
         }
       }
     },
@@ -524,6 +547,49 @@
         },
         "agent_id": {
           "type": "string"
+        }
+      }
+    },
+    "userSegmentation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "user_count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCondition"
+          }
+        },
+        "ran": {
+          "type": "string",
+          "format": "int64",
+          "title": "repeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==\u003e  + * a b * + c d e"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

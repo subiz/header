@@ -14,6 +14,7 @@ message AllType {
 	optional UserSearchResult usersearchresult = 10;
 	optional MaskResponse ms = 11;
 	optional ListTopicsResult ltr = 12;
+	optional Segmentation sg = 14;
 }
 
 service MyServer {
