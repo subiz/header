@@ -351,6 +351,9 @@
         },
         "by_device": {
           "$ref": "#/definitions/commonDevice"
+        },
+        "topic": {
+          "type": "string"
         }
       }
     },
@@ -963,6 +966,9 @@
     "conversationRoute": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "rules": {
           "type": "array",
           "items": {
@@ -1000,6 +1006,9 @@
         "account_id": {
           "type": "string"
         },
+        "priority": {
+          "type": "string"
+        },
         "strategy": {
           "type": "string"
         },
@@ -1019,14 +1028,18 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "created_time": {
+        "created": {
           "type": "string",
           "format": "int64"
         },
-        "prev_id": {
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
           "type": "string"
         },
-        "next_id": {
+        "description": {
           "type": "string"
         }
       }

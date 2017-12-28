@@ -16,7 +16,7 @@ message Rule {
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
-	//optional string priority = 4;
+	optional string priority = 4;
 	enum AssignStrategy {
 		all_agents = 0;
 		agentgroup = 2;
@@ -29,9 +29,10 @@ message Rule {
 	repeated string assign_tos = 6;
 	repeated Condition conditions = 7;
 	optional bool enabled = 8;
-	optional int64 created_time = 9;
-	optional string prev_id = 10;
-	optional string next_id = 11;
+	optional int64 created = 9;
+	optional int64 modified = 12;
+	optional string name = 10;
+	optional string description = 11;
 }
 
 message Condition {
@@ -48,7 +49,8 @@ message Condition {
 }
 
 message Route {
-	repeated Rule rules = 1;
+	optional common.Context ctx = 1;
+	repeated Rule rules = 2;
 }
 
 message RouteResult {
@@ -229,6 +231,8 @@ enum Event {
 	ConversationMessageAckRequested = 90;
 	ConversationMessageReceiveRequested = 91;
 	ConversationMessageSeeRequested = 92;
+
+	ConversationRequested = 100;
 }
 
 message RequestState {
