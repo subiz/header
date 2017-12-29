@@ -21,7 +21,7 @@ message UnsubscribeMessage {
 }
 
 enum Event {
-	ZZZ = 0;
+	Sub = 0;
 	//Out_EventCreated = 0;
 	RawEventCreated = 3;  //
 	Subscribe = 4; // subscription
