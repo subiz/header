@@ -40,8 +40,8 @@ message Context {
 }
 
 message Reply {
-	common.Context ctx = 3;
-	string event_id = 1;
+	common.Context ctx = 1;
+	string event_id = 3;
 	bytes state = 2;
 
 	string service = 5;

@@ -262,8 +262,7 @@ enum Event {
 }
 
 message ConfirmEmail {
-	optional common.Context ctx = 10;
-	optional string from = 1;
+	optional common.Context ctx = 1;
 	optional string to = 2;
 	optional string account_id = 3;
 	optional string owner_id = 4;
@@ -272,11 +271,11 @@ message ConfirmEmail {
 	optional string account_name = 7;
 	optional lang.L lang = 8;
 	optional string owner_name = 9;
+	optional string from = 10;
 }
 
 message InviteEmail {
-	optional common.Context ctx = 7;
-	optional string from = 1;
+	optional common.Context ctx = 1;
 	optional string to = 2;
 	optional string account_id = 3;
 	optional string sender_id = 4;
@@ -288,6 +287,7 @@ message InviteEmail {
 	optional string sender_name = 10;
 	optional string account_name = 11;
 	optional string account_logo_url = 12;
+	optional string from = 14;
 }
 
 message ResetPasswordEmail {
@@ -304,13 +304,13 @@ message ResetPasswordEmail {
 }
 
 message PasswordChangedEmail {
-	optional common.Context ctx = 6;
-	optional string from = 1;
+	optional common.Context ctx = 1;
 	optional string to = 2;
 	optional string account_id = 3;
 	optional string agent_id = 4;
 	optional string agent_name = 5;
 	optional lang.L lang = 7;
+	optional string from = 9;
 }
 
 service YourService {
