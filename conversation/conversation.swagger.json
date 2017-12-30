@@ -1007,7 +1007,8 @@
           "type": "string"
         },
         "priority": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         },
         "strategy": {
           "type": "string"

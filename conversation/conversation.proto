@@ -16,7 +16,7 @@ message Rule {
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
-	optional string priority = 4;
+	optional int32 priority = 4;
 	enum AssignStrategy {
 		all_agents = 0;
 		agentgroup = 2;
