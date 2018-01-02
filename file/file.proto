@@ -51,4 +51,5 @@ enum Event {
 	FileCreated = 3;
 	FileInfoRequested = 4;
 	FileUploaded = 6;
+	FileRequested = 10;
 }
