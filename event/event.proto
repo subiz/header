@@ -147,6 +147,7 @@ message AllType {
 	By b = 4;
 	RawEvents es = 5;
 	ListEventsRequest ler = 6;
+	UserEvent userevent = 7;
 }
 
 // for generating swagger data

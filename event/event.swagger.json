@@ -1138,6 +1138,9 @@
         },
         "ler": {
           "$ref": "#/definitions/eventListEventsRequest"
+        },
+        "userevent": {
+          "$ref": "#/definitions/eventUserEvent"
         }
       }
     },
@@ -1254,6 +1257,23 @@
         },
         "anchor": {
           "type": "string"
+        }
+      }
+    },
+    "eventUserEvent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "event": {
+          "$ref": "#/definitions/eventRawEvent"
         }
       }
     },
