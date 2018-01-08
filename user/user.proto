@@ -334,10 +334,10 @@ message Visitor {
 	optional User user = 4;
 	optional int64 pinged = 5;
 	optional string page_url = 6;
-	optional string page_updated = 7;
+	optional int64 page_viewed = 7;
 }
 
 message Visitors {
 	optional common.Context ctx = 1;
-	repeated Visitor vistors = 2;
+	repeated Visitor visitors = 2;
 }

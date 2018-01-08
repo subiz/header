@@ -925,8 +925,9 @@
         "page_url": {
           "type": "string"
         },
-        "page_updated": {
-          "type": "string"
+        "page_viewed": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -936,7 +937,7 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "vistors": {
+        "visitors": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/userVisitor"
