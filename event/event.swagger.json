@@ -43,9 +43,6 @@
         "presence": {
           "$ref": "#/definitions/userPresence"
         },
-        "previewing": {
-          "$ref": "#/definitions/userPreviewing"
-        },
         "user": {
           "$ref": "#/definitions/userUser"
         }
@@ -1202,10 +1199,12 @@
         "agent",
         "message",
         "conversation",
-        "integration",
         "postback",
         "content",
-        "topic"
+        "topic",
+        "presence",
+        "user",
+        "integration"
       ],
       "default": "none"
     },
@@ -1352,27 +1351,6 @@
           "type": "string"
         },
         "pinged": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "userPreviewing": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "page_url": {
-          "type": "string"
-        },
-        "updated": {
           "type": "string",
           "format": "int64"
         }

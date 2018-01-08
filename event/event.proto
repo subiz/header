@@ -66,7 +66,6 @@ message RawEvent {
 		content.Content content = 6;
 		user.Topic topic = 7;
 		user.Presence presence = 8;
-		user.Previewing previewing = 9;
 		user.User user = 10;
 	}
 	Data data = 20;
@@ -98,11 +97,18 @@ enum Type {
 
 	conversation_unassigned = 35;
 	conversation_assigned = 36;
+
+	presence_updated = 38; // presence
+	content_viewed = 39; // content
+	content_searched = 40; // content
+	content_addedtocart = 41; // content
+	content_checkedout = 42; // content
+	content_purchased = 43; // content
 }
 
 enum SubscriberType {
-	user = 0;
-	channel = 1;
+	st_user = 0;
+	st_channel = 1;
 }
 
 message Subscription { // raweventcreatedpayload
@@ -124,7 +130,6 @@ message Subscription { // raweventcreatedpayload
 	//optional string target_partition = 13;
 	// time to life in seconds
 	int64 ttls = 12;
-
 }
 
 enum SubPrefix {
@@ -138,10 +143,12 @@ enum Object {
 	agent = 2;
 	message = 3;
 	conversation = 4;
-	integration = 30;
 	postback = 5;
 	content = 6;
 	topic = 7;
+	presence = 8;
+	user = 10;
+	integration = 30;
 }
 
 message AllType {
