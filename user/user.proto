@@ -17,6 +17,8 @@ message AllType {
 	optional Segmentation sg = 14;
 	optional Presence presn = 15;
 	optional Previewing previ = 16;
+	optional Visitor vi = 17;
+	optional Visitors vis = 18;
 }
 
 service MyServer {
@@ -173,6 +175,7 @@ enum Event {
 	UserRequested = 100;
 	UserSynced = 101;
 
+
 }
 
 message SubizIDRequest {
@@ -323,4 +326,18 @@ message Previewing {
 	optional string user_id = 4;
 	optional string page_url = 5;
 	optional int64 updated = 6;
+}
+
+message Visitor {
+	optional common.Context ctx = 1;
+	optional string account_id = 3;
+	optional User user = 4;
+	optional int64 pinged = 5;
+	optional string page_url = 6;
+	optional string page_updated = 7;
+}
+
+message Visitors {
+	optional common.Context ctx = 1;
+	repeated Visitor vistors = 2;
 }

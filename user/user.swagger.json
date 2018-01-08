@@ -415,6 +415,12 @@
         },
         "previ": {
           "$ref": "#/definitions/userPreviewing"
+        },
+        "vi": {
+          "$ref": "#/definitions/userVisitor"
+        },
+        "vis": {
+          "$ref": "#/definitions/userVisitors"
         }
       }
     },
@@ -896,6 +902,44 @@
           "items": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      }
+    },
+    "userVisitor": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "pinged": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page_url": {
+          "type": "string"
+        },
+        "page_updated": {
+          "type": "string"
+        }
+      }
+    },
+    "userVisitors": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "vistors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userVisitor"
           }
         }
       }
