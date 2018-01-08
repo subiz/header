@@ -39,6 +39,15 @@
         },
         "topic": {
           "$ref": "#/definitions/userTopic"
+        },
+        "presence": {
+          "$ref": "#/definitions/userPresence"
+        },
+        "previewing": {
+          "$ref": "#/definitions/userPreviewing"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
         }
       }
     },
@@ -1327,6 +1336,45 @@
         },
         "data": {
           "type": "string"
+        }
+      }
+    },
+    "userPresence": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "pinged": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "userPreviewing": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "page_url": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

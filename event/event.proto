@@ -65,6 +65,9 @@ message RawEvent {
 		conversation.Postback postback = 5;
 		content.Content content = 6;
 		user.Topic topic = 7;
+		user.Presence presence = 8;
+		user.Previewing previewing = 9;
+		user.User user = 10;
 	}
 	Data data = 20;
 }
