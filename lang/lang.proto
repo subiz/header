@@ -103,6 +103,8 @@ enum T {
 
 	invalid_css = 227;
 	invalid_hmac = 228;
+
+	consul_error = 230;
 }
 
 enum L {
