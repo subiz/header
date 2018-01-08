@@ -165,8 +165,14 @@ enum Event {
 	UserReadTopicRequested = 41;  // ReadTopicRequest -> Empty
 
 	UserSubizId = 42;
+
+	UserPresenceReadRequested = 44;
+	UserPreviewingReadRequested = 46;
+	UserListTopRequested = 47;
+
 	UserRequested = 100;
 	UserSynced = 101;
+
 }
 
 message SubizIDRequest {
