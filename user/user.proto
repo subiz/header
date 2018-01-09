@@ -216,6 +216,11 @@ message Segmentation {
 	optional int64 ran = 8;
 	optional int64 created = 9;
 	optional int64 modified = 10;
+	optional string state = 12;
+	enum State {
+		active = 0;
+		inactive = 1;
+	}
 }
 
 message SegmentCondition {

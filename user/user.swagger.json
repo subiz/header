@@ -374,6 +374,9 @@
         },
         "language": {
           "type": "string"
+        },
+        "referrer": {
+          "type": "string"
         }
       }
     },
@@ -641,6 +644,9 @@
         "modified": {
           "type": "string",
           "format": "int64"
+        },
+        "state": {
+          "type": "string"
         }
       }
     },
