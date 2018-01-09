@@ -36,3 +36,10 @@ message User {
 	optional string user_id = 3;
 	optional string email_address = 4;
 }
+
+enum Event {
+	MaikonRequested = 1000;
+	MailkonSynced = 1001;
+
+	MailkonCreateAccountRequested = 0;
+}
