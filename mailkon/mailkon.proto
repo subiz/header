@@ -10,6 +10,14 @@ message Address {
 	optional int64 updated = 3;
 }
 
+message Domain {
+	optional string account_id = 1;
+	optional string address = 2;
+	optional int64 updated = 3;
+	optional string dnstype = 4;
+	optional string data = 5;
+}
+
 message Message {
 	optional string message_id = 2;
 	optional string account_id = 3;
