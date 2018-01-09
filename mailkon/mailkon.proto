@@ -12,7 +12,7 @@ message Address {
 
 message Domain {
 	optional string account_id = 1;
-	optional string address = 2;
+	optional string domain = 2;
 	optional int64 updated = 3;
 	optional string dnstype = 4;
 	optional string data = 5;
