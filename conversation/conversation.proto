@@ -289,6 +289,8 @@ message Field {
 	optional string key = 2;
 }
 
+
+
 message Button {
 	enum ButtonType {
 		url_button = 2;
@@ -309,6 +311,31 @@ message Button {
 	optional string url = 14;
 }
 
+message AskInfomationAnswer {
+	optional string message_id = 2;
+	optional string answer = 3;
+}
+
+message AskInfomation {
+	optional string question = 2;
+	optional string input_type = 3;
+	optional string key = 4; // user.name user.phone
+	optional string answer = 5;
+	optional int64 answered = 6;
+	enum InputType {
+		phone = 0;
+		email = 1;
+		text = 2;
+		password = 3;
+		number = 4;
+		date = 5;
+		color = 6;
+		location = 7;
+		time = 8;
+		url = 9;
+	}
+}
+
 message GenericElementTemplate {
 	optional string title = 2;
 	optional string image_url = 3;
@@ -324,6 +351,8 @@ message Attachment {
 		preview = 4;
 		button = 5;
 		input = 6;
+		ask_info_form = 7;
+		ask_info_form_answer = 8;
 	}
 	optional string type = 12;
 	// file
@@ -344,6 +373,8 @@ message Attachment {
 	optional string pretext = 11;
 
 	repeated Button buttons = 16;
+	optional AskInfomation ask_info = 17;
+	optional AskInfomationAnswer ask_info_answer = 18;
 	//repeated string inputtype = 17;
 
 }
