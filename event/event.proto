@@ -130,6 +130,7 @@ message Subscription { // raweventcreatedpayload
 	//optional string target_partition = 13;
 	// time to life in seconds
 	int64 ttls = 12;
+	string router_topic = 14;
 }
 
 enum SubPrefix {
