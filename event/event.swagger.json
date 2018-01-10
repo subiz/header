@@ -665,6 +665,38 @@
         }
       }
     },
+    "conversationAskInfomation": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "input_type": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAskInfomationAnswer": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
     "conversationAttachment": {
       "type": "object",
       "properties": {
@@ -718,6 +750,12 @@
           "items": {
             "$ref": "#/definitions/conversationButton"
           }
+        },
+        "ask_info": {
+          "$ref": "#/definitions/conversationAskInfomation"
+        },
+        "ask_info_answer": {
+          "$ref": "#/definitions/conversationAskInfomationAnswer"
         }
       }
     },

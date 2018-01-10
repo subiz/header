@@ -535,6 +535,9 @@
         },
         "language": {
           "type": "string"
+        },
+        "referrer": {
+          "type": "string"
         }
       }
     },
