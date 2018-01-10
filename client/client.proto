@@ -63,7 +63,9 @@ enum Event {
 	ClientUpserted = 25;
 	ClientDeleted = 26;
 
-	ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
+	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
+	ClientAuthorized = 12; // auth send to webhook to update webhook
+
 	ClientRequested = 30;
 	ClientSynced = 31;
 }
