@@ -54,6 +54,8 @@ message Client {
 }
 
 enum Event {
+
+
 	ClientCreateRequested = 20;
 	ClientUpdateRequested = 21;
 	ClientDeleteRequested = 22;
@@ -65,9 +67,9 @@ enum Event {
 
 	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
 	ClientAuthorized = 12; // auth send to webhook to update webhook
-
 	ClientRequested = 30;
 	ClientSynced = 31;
+	ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
 }
 
 message Authorization {
