@@ -604,6 +604,9 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "page_title": {
+          "type": "string"
         }
       }
     },
@@ -985,6 +988,9 @@
         "page_viewed": {
           "type": "string",
           "format": "int64"
+        },
+        "page_title": {
+          "type": "string"
         }
       }
     },

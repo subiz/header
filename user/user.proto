@@ -350,6 +350,7 @@ message Previewing {
 	optional string user_id = 4;
 	optional string page_url = 5;
 	optional int64 updated = 6;
+	optional string page_title = 7;
 }
 
 message Visitor {
@@ -359,6 +360,7 @@ message Visitor {
 	optional int64 pinged = 5;
 	optional string page_url = 6;
 	optional int64 page_viewed = 7;
+	optional string page_title = 8;
 }
 
 message Visitors {
