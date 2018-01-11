@@ -1398,6 +1398,10 @@
         },
         "user": {
           "$ref": "#/definitions/userUser"
+        },
+        "unread": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

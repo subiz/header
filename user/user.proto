@@ -45,6 +45,7 @@ message MyUser {
 	optional common.Context ctx = 1;
 	optional string agent_id = 2;
 	optional User user = 3;
+	optional int32 unread = 4;
 }
 
 message User {
