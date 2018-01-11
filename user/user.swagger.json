@@ -424,6 +424,15 @@
         },
         "vis": {
           "$ref": "#/definitions/userVisitors"
+        },
+        "topic": {
+          "$ref": "#/definitions/userTopic"
+        },
+        "utopic": {
+          "$ref": "#/definitions/userUnreadTopic"
+        },
+        "myuser": {
+          "$ref": "#/definitions/userMyUser"
         }
       }
     },
@@ -542,6 +551,20 @@
         },
         "mask": {
           "type": "string"
+        }
+      }
+    },
+    "userMyUser": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
         }
       }
     },
@@ -722,6 +745,34 @@
         },
         "timezone": {
           "type": "string"
+        }
+      }
+    },
+    "userUnreadTopic": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "unread": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

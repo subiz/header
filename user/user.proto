@@ -19,6 +19,9 @@ message AllType {
 	optional Previewing previ = 16;
 	optional Visitor vi = 17;
 	optional Visitors vis = 18;
+	optional Topic topic = 19;
+	optional UnreadTopic utopic = 20;
+	optional MyUser myuser = 21;
 }
 
 service MyServer {
@@ -36,6 +39,12 @@ message UserCreateResult {
 	optional string account_id = 2;
 	optional string id = 3;
 	optional string mask = 5;
+}
+
+message MyUser {
+	optional common.Context ctx = 1;
+	optional string agent_id = 2;
+	optional User user = 3;
 }
 
 message User {
@@ -122,6 +131,16 @@ message Topic {
 	optional string account_id = 2;
 	optional string topic = 3;
 	optional string type = 5;
+	optional int64 updated = 8;
+	optional int32 unread = 9;
+}
+
+message UnreadTopic {
+	optional common.Context ctx = 1;
+	optional string topic = 3;
+	optional string agent_id = 4;
+	optional string user_id = 5;
+	optional string type = 6;
 	optional int64 updated = 8;
 	optional int32 unread = 9;
 }
