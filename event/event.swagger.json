@@ -45,6 +45,12 @@
         },
         "user": {
           "$ref": "#/definitions/userUser"
+        },
+        "unread_topic": {
+          "$ref": "#/definitions/userUnreadTopic"
+        },
+        "my_user": {
+          "$ref": "#/definitions/userMyUser"
         }
       }
     },
@@ -1245,6 +1251,8 @@
         "topic",
         "presence",
         "user",
+        "unread_topic",
+        "my_user",
         "integration"
       ],
       "default": "none"
@@ -1379,6 +1387,20 @@
         }
       }
     },
+    "userMyUser": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        }
+      }
+    },
     "userPresence": {
       "type": "object",
       "properties": {
@@ -1469,6 +1491,34 @@
         },
         "timezone": {
           "type": "string"
+        }
+      }
+    },
+    "userUnreadTopic": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "unread": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

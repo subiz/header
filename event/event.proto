@@ -16,6 +16,7 @@ message RawEventCreatedPayload {
 }
 
 message UnsubscribeMessage {
+	common.Context ctx = 1;
 	string topic = 3;
 	string sub_id = 4;
 }
@@ -67,6 +68,8 @@ message RawEvent {
 		user.Topic topic = 7;
 		user.Presence presence = 8;
 		user.User user = 10;
+		user.UnreadTopic unread_topic = 11;
+		user.MyUser my_user = 12;
 	}
 	Data data = 20;
 }
@@ -104,6 +107,13 @@ enum Type {
 	content_addedtocart = 41; // content
 	content_checkedout = 42; // content
 	content_purchased = 43; // content
+
+	topic_read = 44;      // topic
+	subscribed_topic_updated = 45; // topic
+
+	my_user_upserted = 46;    // user
+	user_info_updated = 48; // user
+	agent_info_updated = 49; // agent
 }
 
 enum SubscriberType {
@@ -149,6 +159,8 @@ enum Object {
 	topic = 7;
 	presence = 8;
 	user = 10;
+	unread_topic = 11;
+	my_user = 12;
 	integration = 30;
 }
 
