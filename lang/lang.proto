@@ -105,6 +105,7 @@ enum T {
 	invalid_hmac = 228;
 
 	consul_error = 230;
+	maxminddb_err = 231;
 }
 
 enum L {
