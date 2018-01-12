@@ -100,18 +100,19 @@ message Trace {
 	optional string id = 3;
 	optional string ip = 4;
 	optional int32 location_id = 5;
-	optional string location = 6;
 
-	optional string city_code = 7;
 	optional string city_name = 8;
 	optional string country_name = 9;
 	optional string continent_code = 10;
+	optional string continent_name = 18;
+
 	optional string coutry_code = 11;
-	optional int32 latitue = 12;
+	optional int32 latitude = 12;
 	optional int32 longitude = 13;
 	optional string postal_code = 14;
-	optional string region_name = 15;
 	optional string timezone = 16;
+
+	optional string isp = 17;
 }
 
 message MergeRequest {

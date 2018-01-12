@@ -718,12 +718,6 @@
           "type": "integer",
           "format": "int32"
         },
-        "location": {
-          "type": "string"
-        },
-        "city_code": {
-          "type": "string"
-        },
         "city_name": {
           "type": "string"
         },
@@ -733,10 +727,13 @@
         "continent_code": {
           "type": "string"
         },
+        "continent_name": {
+          "type": "string"
+        },
         "coutry_code": {
           "type": "string"
         },
-        "latitue": {
+        "latitude": {
           "type": "integer",
           "format": "int32"
         },
@@ -747,10 +744,10 @@
         "postal_code": {
           "type": "string"
         },
-        "region_name": {
+        "timezone": {
           "type": "string"
         },
-        "timezone": {
+        "isp": {
           "type": "string"
         }
       }
