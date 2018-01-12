@@ -1467,6 +1467,9 @@
         "country_name": {
           "type": "string"
         },
+        "country_code": {
+          "type": "string"
+        },
         "continent_code": {
           "type": "string"
         },
@@ -1477,12 +1480,12 @@
           "type": "string"
         },
         "latitude": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "float"
         },
         "longitude": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "float"
         },
         "postal_code": {
           "type": "string"

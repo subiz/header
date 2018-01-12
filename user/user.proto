@@ -103,12 +103,13 @@ message Trace {
 
 	optional string city_name = 8;
 	optional string country_name = 9;
+	optional string country_code = 19;
 	optional string continent_code = 10;
 	optional string continent_name = 18;
 
 	optional string coutry_code = 11;
-	optional int32 latitude = 12;
-	optional int32 longitude = 13;
+	optional float latitude = 12;
+	optional float longitude = 13;
 	optional string postal_code = 14;
 	optional string timezone = 16;
 
