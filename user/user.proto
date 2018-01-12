@@ -91,7 +91,7 @@ message Device {
 	optional int32 id = 3;
 	optional int32 useragent_id = 4;
 	optional string useragent = 5;
-	optional string resolution = 6;
+	optional string screen_resolution = 6;
 	optional int32 language_id  = 7;
 	optional string language = 8;
 }

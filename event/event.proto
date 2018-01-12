@@ -10,9 +10,13 @@ import "bitbucket.org/subiz/header/user/user.proto";
 
 message RawEventCreatedPayload {
 	common.Context ctx = 1;
-	string sub_id = 3;
-	string topic = 4;
+	repeated string subs = 3;
+	string target_topic = 4;
 	string payload = 5; //json format
+	string target_key = 6;
+	repeated string payloads = 7; // payload for each sub, payload must be empty
+	string topic = 9;
+
 }
 
 message UnsubscribeMessage {
@@ -122,8 +126,6 @@ enum SubscriberType {
 }
 
 message Subscription { // raweventcreatedpayload
-	reserved "target_partition";
-	reserved 13;
 
 	common.Context ctx = 1;
 	string topic = 3;
@@ -137,10 +139,7 @@ message Subscription { // raweventcreatedpayload
 	//optional string subscriber_id = 9;
 	string target_topic = 10;
 	string target_key = 11;
-	//optional string target_partition = 13;
-	// time to life in seconds
 	int64 ttls = 12;
-	string router_topic = 14;
 }
 
 enum SubPrefix {

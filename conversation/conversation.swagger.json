@@ -1265,7 +1265,7 @@
         "useragent": {
           "type": "string"
         },
-        "resolution": {
+        "screen_resolution": {
           "type": "string"
         },
         "language_id": {
