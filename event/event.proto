@@ -16,7 +16,7 @@ message RawEventCreatedPayload {
 	string target_key = 6;
 	repeated string payloads = 7; // payload for each sub, payload must be empty
 	string topic = 9;
-
+	string router_topic = 10;
 }
 
 message UnsubscribeMessage {
@@ -127,7 +127,6 @@ enum SubscriberType {
 }
 
 message Subscription { // raweventcreatedpayload
-
 	common.Context ctx = 1;
 	string topic = 3;
 	//optional string user_id = 4; // connectorid or userid
@@ -141,6 +140,7 @@ message Subscription { // raweventcreatedpayload
 	string target_topic = 10;
 	string target_key = 11;
 	int64 ttls = 12;
+	string router_topic = 13;
 }
 
 enum SubPrefix {
