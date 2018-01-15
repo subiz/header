@@ -106,6 +106,8 @@ enum T {
 
 	consul_error = 230;
 	maxminddb_err = 231;
+
+	invalid_condition_key = 232;
 }
 
 enum L {
