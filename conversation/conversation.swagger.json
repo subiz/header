@@ -607,6 +607,12 @@
         "availability": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "string"
         }
       }
     },

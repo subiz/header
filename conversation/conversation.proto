@@ -45,6 +45,8 @@ message AvailabilityCheckRequest {
 message AvailabilityCheckResult {
 	optional common.Context ctx = 1;
 	optional bool availability = 2;
+	optional string reason = 3;
+	optional string payload = 5;
 }
 
 message Condition {
