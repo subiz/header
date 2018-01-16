@@ -834,10 +834,13 @@
           "type": "integer",
           "format": "int32"
         },
-        "start_id": {
+        "anchor": {
           "type": "string"
         },
         "member_id": {
+          "type": "string"
+        },
+        "group_by": {
           "type": "string"
         }
       }

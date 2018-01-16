@@ -130,13 +130,15 @@ message StartRequest {
 	optional string starter_id = 20;
 	optional string starter_type = 21;
 	repeated string agent_ids = 22;
-
 	optional user.User user = 25;
 	optional string integration_id = 26;
 }
 
 message Conversations {
-	repeated Conversation conversations = 1;
+	optional common.Context ctx = 1;
+	repeated Conversation conversations = 3;
+	optional string anchor = 4;
+	repeated string user_ids = 5;
 }
 
 message Search {
@@ -153,8 +155,9 @@ message ListConversations {
 	optional string account_id = 3;
 	optional string state = 4;
 	optional int32 limit = 5;
-	optional string start_id = 6;
+	optional string anchor = 6;
 	optional string member_id = 8;
+	optional string group_by = 9;
 }
 
 message ListEventsRequest {
