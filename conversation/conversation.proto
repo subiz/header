@@ -99,6 +99,7 @@ message Conversation {
 }
 
 message UserConversation { // used in database
+	optional string account_id = 6;
 	optional string state = 11;
 	optional string user_id = 2;
 	optional string convo_id = 4;
