@@ -35,6 +35,18 @@ message Rule {
 	optional string description = 11;
 }
 
+message AvailabilityCheckRequest {
+	optional common.Context ctx = 1;
+	optional string integration_id = 3;
+	optional user.User user = 4;
+	optional string account_id = 5;
+}
+
+message AvailabilityCheckResult {
+	optional common.Context ctx = 1;
+	optional bool availability = 2;
+}
+
 message Condition {
 	enum JoinOperator {
 		none = 0;
@@ -217,6 +229,7 @@ enum Event {
 	ChannelIntegrateRequested = 66;  // integration -> integration
 	ChannelIntegrationListRequested = 67; // id -> integrations
 
+
 	ConnectorUpsertRequested = 68;
 	ConnectorListRequested = 69;
 
@@ -235,7 +248,7 @@ enum Event {
 	ConversationMessageAckRequested = 90;
 	ConversationMessageReceiveRequested = 91;
 	ConversationMessageSeeRequested = 92;
-
+	ChannelIntegrationAvailabilityCheck = 93;
 	ConversationRequested = 100;
 }
 
@@ -448,6 +461,8 @@ message AllType {
 	optional ListEventsRequest ler = 41;
 	optional Search search = 42;
 	optional ListConversations listcon = 43;
+	optional AvailabilityCheckRequest acreq = 44;
+	optional AvailabilityCheckResult acres = 45;
 }
 
 service Converstation {

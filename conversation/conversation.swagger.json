@@ -478,6 +478,12 @@
         },
         "listcon": {
           "$ref": "#/definitions/conversationListConversations"
+        },
+        "acreq": {
+          "$ref": "#/definitions/conversationAvailabilityCheckRequest"
+        },
+        "acres": {
+          "$ref": "#/definitions/conversationAvailabilityCheckResult"
         }
       }
     },
@@ -572,6 +578,35 @@
         },
         "ask_info_answer": {
           "$ref": "#/definitions/conversationAskInfomationAnswer"
+        }
+      }
+    },
+    "conversationAvailabilityCheckRequest": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "integration_id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "account_id": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAvailabilityCheckResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "availability": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
