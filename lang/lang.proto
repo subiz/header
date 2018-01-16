@@ -108,6 +108,7 @@ enum T {
 	maxminddb_err = 231;
 
 	invalid_condition_key = 232;
+	invalid_po_file = 233;
 }
 
 enum L {
