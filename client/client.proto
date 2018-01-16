@@ -42,7 +42,6 @@ message Client {
 	optional string webhook_url = 20;
 	repeated string events = 19; // subscribed event
 
-
 	// for connector only
 	optional string channel_type = 21;
 	enum ChannelType {
@@ -51,6 +50,9 @@ message Client {
 		facebook = 2;
 		viber = 3;
 	}
+
+	optional string availability_url = 22;
+	optional string ping_url = 23;
 }
 
 enum Event {
