@@ -108,7 +108,7 @@ message Trace {
 	optional string continent_code = 10;
 	optional string continent_name = 18;
 
-	optional string coutry_code = 11;
+	//optional string coutry_code = 11;
 	optional float latitude = 12;
 	optional float longitude = 13;
 	optional string postal_code = 14;

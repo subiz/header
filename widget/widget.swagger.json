@@ -622,12 +622,10 @@
         "continent_name": {
           "type": "string"
         },
-        "coutry_code": {
-          "type": "string"
-        },
         "latitude": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "title": "optional string coutry_code = 11;"
         },
         "longitude": {
           "type": "number",
