@@ -43,3 +43,20 @@ enum Event {
 
 	MailkonCreateAccountRequested = 0;
 }
+
+message SendgridEvent {
+	optional string event_id = 3;
+	optional string account_id = 4;
+	optional string user_id = 5;
+	optional string conversation_id = 6;
+	optional string message_id = 7;
+	repeated string data = 8;
+}
+
+message UserAvail {
+	optional string account_id = 3;
+	optional string user_id = 4;
+	optional string email_address = 5;
+	optional bool availability = 6;
+	optional int64 updated = 7;
+}
