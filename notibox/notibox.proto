@@ -9,33 +9,30 @@ package notibox;
 // Notification represent an user's notification
 message Notification {
 	optional common.Context ctx = 1;
-	optional string box_id = 3;
-
-	optional string id = 4;
-	optional string event = 5; // type
-
-	optional int64 created = 6;
-	optional string template = 7;
+	optional string box = 3;
+	optional string topic = 10;
+	optional string type = 5; // type
 	optional string data = 8; //json
+	optional int64 created = 6;
 	optional int64 read = 9;
 }
 
 message AddNotificationRequest {
 	optional common.Context ctx = 1;
-	repeated string box_ids = 2;
+	repeated string boxs = 2;
 	optional Notification notification = 3;
 }
 
 message ReadNotification {
 	optional common.Context ctx = 1;
-	optional string box_id = 2;
-	repeated string noti_ids = 3;
+	optional string box = 2;
+	repeated string topics = 3;
 	optional bool read = 4;
 }
 
 message ListRequest {
 	optional common.Context ctx = 1;
-	optional string box_id = 3;
+	optional string box = 3;
 	optional string anchor = 4;
 	optional int32 limit = 5;
 }
@@ -46,9 +43,9 @@ message Notifications {
 	optional string anchor = 3;
 }
 
-message NewCount {
+message Box {
 	optional common.Context ctx = 1;
-	optional string box_id = 2;
+	optional string box = 2;
 	optional int64 new_count = 3;
 }
 
@@ -58,6 +55,7 @@ message AllType {
 	optional ReadNotification rno = 4;
 	optional AddNotificationRequest anorfr = 5;
 	optional Notification noti = 6;
+	optional Box box = 8;
 }
 
 service YourService {

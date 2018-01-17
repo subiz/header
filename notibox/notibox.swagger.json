@@ -386,7 +386,7 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "box_ids": {
+        "boxs": {
           "type": "array",
           "items": {
             "type": "string"
@@ -414,6 +414,24 @@
         },
         "noti": {
           "$ref": "#/definitions/notiboxNotification"
+        },
+        "box": {
+          "$ref": "#/definitions/notiboxBox"
+        }
+      }
+    },
+    "notiboxBox": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "box": {
+          "type": "string"
+        },
+        "new_count": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -423,7 +441,7 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "box_id": {
+        "box": {
           "type": "string"
         },
         "anchor": {
@@ -441,24 +459,21 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "box_id": {
+        "box": {
           "type": "string"
         },
-        "id": {
+        "topic": {
           "type": "string"
         },
-        "event": {
+        "type": {
+          "type": "string"
+        },
+        "data": {
           "type": "string"
         },
         "created": {
           "type": "string",
           "format": "int64"
-        },
-        "template": {
-          "type": "string"
-        },
-        "data": {
-          "type": "string"
         },
         "read": {
           "type": "string",
@@ -490,10 +505,10 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "box_id": {
+        "box": {
           "type": "string"
         },
-        "noti_ids": {
+        "topics": {
           "type": "array",
           "items": {
             "type": "string"
