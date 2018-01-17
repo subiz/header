@@ -1402,6 +1402,10 @@
         "unread": {
           "type": "integer",
           "format": "int32"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
