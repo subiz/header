@@ -46,6 +46,12 @@ message Notifications {
 	optional string anchor = 3;
 }
 
+message NewCount {
+	optional common.Context ctx = 1;
+	optional string box_id = 2;
+	optional int64 new_count = 3;
+}
+
 message AllType {
   optional Notifications nts = 2;
 	optional ListRequest listr = 3;
@@ -56,4 +62,17 @@ message AllType {
 
 service YourService {
   rpc Do(AllType) returns (AllType) {}
+}
+
+enum Event {
+	NotiboxRequested = 0;
+
+	NotiUpsertRequest = 1;
+	NotiReadRequest = 2;
+	NotiUnreadRequest = 4;
+	NotiListRequest = 5;
+	NotiDecreaseNewRequest = 6;
+	NotiNewReadRequested = 7;
+
+	NotiboxSynced = 101;
 }
