@@ -17,6 +17,18 @@ message Notification {
 	optional int64 read = 9;
 }
 
+enum Type {
+	account_created = 0;
+	trial_almost_expired = 2;
+	trial_expired = 3;
+	system_maintainance_scheduled_1 = 4;
+	system_maintainance_scheduled_2 = 5;
+	system_maintainance_completed = 6;
+	agent_activated = 7;
+	conversation_unassigned = 8;
+	agent_permission_updated = 9;
+}
+
 message AddNotificationRequest {
 	optional common.Context ctx = 1;
 	repeated string boxs = 2;
