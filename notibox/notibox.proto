@@ -9,16 +9,15 @@ package notibox;
 // Notification represent an user's notification
 message Notification {
 	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional string event = 3;
+	optional string box_id = 3;
 
-	//optional push.NotiType type = 4;
-	optional int64 created_time = 5;
-	optional string template = 6;
-	optional bytes data = 7;
+	optional string id = 4;
+	optional string event = 5; // type
 
-	optional string box_id = 8;
-	optional bool read = 9;
+	optional int64 created = 6;
+	optional string template = 7;
+	optional string data = 8; //json
+	optional int64 read = 9;
 }
 
 message AddNotificationRequest {
@@ -37,10 +36,24 @@ message ReadNotification {
 message ListRequest {
 	optional common.Context ctx = 1;
 	optional string box_id = 3;
-	optional string start_id = 4;
+	optional string anchor = 4;
 	optional int32 limit = 5;
 }
 
 message Notifications {
-	repeated Notification notifications = 1;
+	optional common.Context ctx = 1;
+	repeated Notification notifications = 2;
+	optional string anchor = 3;
+}
+
+message AllType {
+  optional Notifications nts = 2;
+	optional ListRequest listr = 3;
+	optional ReadNotification rno = 4;
+	optional AddNotificationRequest anorfr = 5;
+	optional Notification noti = 6;
+}
+
+service YourService {
+  rpc Do(AllType) returns (AllType) {}
 }
