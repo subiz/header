@@ -7,6 +7,7 @@ import "bitbucket.org/subiz/header/account/account.proto";
 import "bitbucket.org/subiz/header/conversation/conversation.proto";
 import "bitbucket.org/subiz/header/content/content.proto";
 import "bitbucket.org/subiz/header/user/user.proto";
+import "bitbucket.org/subiz/header/notibox/notibox.proto";
 
 message RawEventCreatedPayload {
 	common.Context ctx = 1;
@@ -33,6 +34,7 @@ enum Event {
 	SubscribeReply = 6;
 	Unsubscribe = 5; // subscription
 	UnsubscribeReply = 7;
+
 }
 
 message RawEvents {
@@ -74,6 +76,8 @@ message RawEvent {
 		user.User user = 10;
 		user.UnreadTopic unread_topic = 11;
 		user.MyUser my_user = 12;
+		notibox.Notification notification = 14;
+		notibox.Box notibox = 15;
 	}
 	Data data = 20;
 }
@@ -119,6 +123,9 @@ enum Type {
 	user_info_updated = 48; // user
 	agent_info_updated = 49; // agent
 	user_topic_updated = 50; //topic
+
+	notification_upserted = 52;
+	notibox_upserted = 53;
 }
 
 enum SubscriberType {
@@ -161,6 +168,8 @@ enum Object {
 	user = 10;
 	unread_topic = 11;
 	my_user = 12;
+	notification = 14;
+	notibox = 15;
 	integration = 30;
 }
 

@@ -51,6 +51,12 @@
         },
         "my_user": {
           "$ref": "#/definitions/userMyUser"
+        },
+        "notification": {
+          "$ref": "#/definitions/notiboxNotification"
+        },
+        "notibox": {
+          "$ref": "#/definitions/notiboxBox"
         }
       }
     },
@@ -1253,6 +1259,8 @@
         "user",
         "unread_topic",
         "my_user",
+        "notification",
+        "notibox",
         "integration"
       ],
       "default": "none"
@@ -1333,6 +1341,50 @@
           "$ref": "#/definitions/eventRawEvent"
         }
       }
+    },
+    "notiboxBox": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "box": {
+          "type": "string"
+        },
+        "new_count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "notiboxNotification": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "box": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "read": {
+          "type": "string",
+          "format": "int64"
+        }
+      },
+      "title": "Notification represent an user's notification"
     },
     "userDevice": {
       "type": "object",
