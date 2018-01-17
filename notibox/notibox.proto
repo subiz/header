@@ -65,11 +65,11 @@ service YourService {
 enum Event {
 	NotiboxRequested = 0;
 
-	NotiUpsertRequest = 1;
-	NotiReadRequest = 2;
-	NotiUnreadRequest = 4;
-	NotiListRequest = 5;
-	NotiDecreaseNewRequest = 6;
+	NotiUpsertRequested = 1;
+	NotiReadRequested = 2;
+	NotiUnreadRequested = 4;
+	NotiListRequested = 5;
+	NotiDecreaseNewRequested = 6;
 	NotiNewReadRequested = 7;
 
 	NotiboxSynced = 101;
