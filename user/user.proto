@@ -339,6 +339,7 @@ message Field {
 	optional string setter_type = 6;
 	optional int64 updated = 8;
 	optional string data = 9;
+	optional string id = 10;
 }
 
 message Presence {
