@@ -369,8 +369,7 @@
         },
         "update_account_infomation": {
           "type": "boolean",
-          "format": "boolean",
-          "title": "bool ViewAccountReport = 125;\nbool EnableChannel = 126;\nbool DisableChannel = 127;\nbool create_account = 129;\nbool delete_account = 130;"
+          "format": "boolean"
         },
         "read_client": {
           "type": "boolean",
@@ -445,6 +444,18 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "read_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "update_widget_setting": {
           "type": "boolean",
           "format": "boolean"
@@ -473,15 +484,15 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "list_whitelist_ip": {
+        "read_whitelist_ip": {
           "type": "boolean",
           "format": "boolean"
         },
-        "list_whitelist_user": {
+        "read_whitelist_user": {
           "type": "boolean",
           "format": "boolean"
         },
-        "list_whitelist_domain": {
+        "read_whitelist_domain": {
           "type": "boolean",
           "format": "boolean"
         },
