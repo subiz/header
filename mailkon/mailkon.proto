@@ -50,8 +50,8 @@ message SendgridEvent {
 	optional string conversation_id = 6;
 	optional string message_id = 7;
 	repeated string data = 8;
-	repeated string full_message_id = 9;
-	repeated string subject = 10;
+	optional string full_message_id = 9;
+	optional string subject = 10;
 }
 
 message UserAvail {
