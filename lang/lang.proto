@@ -11,26 +11,24 @@ enum T {
 	invalid_agent = 4;
 	member_is_not_in_conversation = 5;
 	conversation_not_found = 6;
-	invalid_left = 14;
 	internal_error = 30;
-
 	invalid_input = 22;
 	invalid_form = 20;
 	access_token_expired = 21;
-	invalid_credential = 13;
-
 	credential_not_set = 7;
 	wrong_account_in_credential = 8;
-	wrong_password = 18;
-	wrong_user_in_credential = 10;
-	invalid_agent_state = 19;
 	access_deny = 9;
+	wrong_user_in_credential = 10;
 	unable_to_send_message = 11;
 	topic_is_empty = 12;
+	invalid_credential = 13;
+	invalid_left = 14;
 	invalid_json = 15;
 	invalid_protobuf = 16;
+	invalid_password = 17;
+	wrong_password = 18;
+	invalid_agent_state = 19;
 	unable_to_lock = 40;
-
 	empty = 41; // the varialbe must not be empty but is empty
 	wrong_type = 42;
 	invalid_kafka_topic = 43;
@@ -100,16 +98,12 @@ enum T {
 	write_file_error = 224;
 	close_file_error = 225;
 	execute_shell_error = 226;
-
 	invalid_css = 227;
 	invalid_hmac = 228;
-
 	consul_error = 230;
 	maxminddb_err = 231;
-
 	invalid_condition_key = 232;
 	invalid_po_file = 233;
-
 	integration_not_found = 234;
 }
 
