@@ -210,7 +210,8 @@ enum Event {
 	ReadAgentRequested = 104;  // (Id) returns (Agent) {}
 	InviteAgentRequested = 105; //(Invitation) returns (Id) {}
 	UninviteAgentRequested = 106; //(Id) returns (Empty) {}
-	AcceptInvitationRequested = 107; //(Token) returns (Empty) {}
+	AcceptInvitationRequested = 107; //(NewPassword) returns (Agent) {}
+	ReadInvitationRequested = 110; //(Token) returns (Agent) {}
 	RejectInvitationRequested = 108; //(Token) returns (Empty) {}
 
 	UpdateAgentRequested = 109; //(Agent) returns (Empty) {}
