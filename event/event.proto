@@ -79,6 +79,8 @@ message RawEvent {
 		notibox.Notification notification = 14;
 		notibox.Box notibox = 15;
 		account.AgentPerm agent_perm = 16;
+		account.GroupMember group_member = 17;
+		account.AgentGroup group = 18;
 	}
 	Data data = 20;
 }
@@ -134,7 +136,6 @@ enum Type {
 	group_info_updated = 64;
 	group_joined = 65;
 	group_left = 66;
-	invitation_send = 67;
 	invitation_accepted = 68;
 	agent_deleted = 69;
 	agent_info_updated = 70;
@@ -184,6 +185,8 @@ enum Object {
 	notification = 14;
 	notibox = 15;
 	agent_perm = 16;
+	group_member = 17;
+	group = 18;
 	integration = 30;
 }
 

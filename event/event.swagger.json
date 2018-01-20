@@ -60,6 +60,12 @@
         },
         "agent_perm": {
           "$ref": "#/definitions/accountAgentPerm"
+        },
+        "group_member": {
+          "$ref": "#/definitions/accountGroupMember"
+        },
+        "group": {
+          "$ref": "#/definitions/accountAgentGroup"
         }
       }
     },
@@ -224,6 +230,45 @@
         }
       }
     },
+    "accountAgentGroup": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          },
+          "title": "members is list of 10 agents in group"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "members_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "accountAgentPerm": {
       "type": "object",
       "properties": {
@@ -238,6 +283,23 @@
         },
         "method": {
           "$ref": "#/definitions/authMethod"
+        }
+      }
+    },
+    "accountGroupMember": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "group_id": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
         }
       }
     },
@@ -1293,6 +1355,8 @@
         "notification",
         "notibox",
         "agent_perm",
+        "group_member",
+        "group",
         "integration"
       ],
       "default": "none"
