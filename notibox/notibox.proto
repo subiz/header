@@ -15,6 +15,7 @@ message Notification {
 	optional string data = 8; //json
 	optional int64 created = 6;
 	optional int64 read = 9;
+	optional bool view = 11;
 }
 
 enum Type {

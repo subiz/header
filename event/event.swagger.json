@@ -1393,6 +1393,10 @@
         "read": {
           "type": "string",
           "format": "int64"
+        },
+        "view": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "Notification represent an user's notification"
