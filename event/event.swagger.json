@@ -57,6 +57,9 @@
         },
         "notibox": {
           "$ref": "#/definitions/notiboxBox"
+        },
+        "agent_perm": {
+          "$ref": "#/definitions/accountAgentPerm"
         }
       }
     },
@@ -218,6 +221,23 @@
         "modified": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "accountAgentPerm": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/authMethod"
         }
       }
     },
@@ -1272,6 +1292,7 @@
         "my_user",
         "notification",
         "notibox",
+        "agent_perm",
         "integration"
       ],
       "default": "none"

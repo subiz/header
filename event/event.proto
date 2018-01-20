@@ -78,6 +78,7 @@ message RawEvent {
 		user.MyUser my_user = 12;
 		notibox.Notification notification = 14;
 		notibox.Box notibox = 15;
+		account.AgentPerm agent_perm = 16;
 	}
 	Data data = 20;
 }
@@ -121,11 +122,23 @@ enum Type {
 
 	my_user_upserted = 46;    // user
 	user_info_updated = 48; // user
-	agent_info_updated = 49; // agent
 	user_topic_updated = 50; //topic
 
 	notification_upserted = 52;
 	notibox_upserted = 53;
+
+	account_deleted = 60;
+	account_info_updated = 61;
+	group_created = 62;
+	group_deleted = 63;
+	group_info_updated = 64;
+	group_joined = 65;
+	group_left = 66;
+	invitation_send = 67;
+	invitation_accepted = 68;
+	agent_deleted = 69;
+	agent_info_updated = 70;
+	agent_permission_updated = 71;
 }
 
 enum SubscriberType {
@@ -170,6 +183,7 @@ enum Object {
 	my_user = 12;
 	notification = 14;
 	notibox = 15;
+	agent_perm = 16;
 	integration = 30;
 }
 
