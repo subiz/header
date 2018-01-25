@@ -684,13 +684,13 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
+        "sbid": {
+          "type": "string"
+        },
         "id": {
           "type": "string"
         },
         "account_id": {
-          "type": "string"
-        },
-        "type": {
           "type": "string"
         },
         "description": {
@@ -699,7 +699,7 @@
         "title": {
           "type": "string"
         },
-        "link": {
+        "url": {
           "type": "string"
         },
         "labels": {
@@ -709,17 +709,18 @@
           }
         },
         "availability": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "string"
         },
         "price": {
-          "type": "string"
+          "type": "number",
+          "format": "float"
         },
         "currency": {
           "type": "string"
         },
         "sale_price": {
-          "type": "string"
+          "type": "number",
+          "format": "float"
         },
         "fields": {
           "type": "array",
@@ -733,13 +734,19 @@
             "type": "string"
           }
         },
-        "relateds": {
+        "relates": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/contentContent"
+            "type": "string"
           }
         },
-        "attachment_url": {
+        "attachment_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
           "type": "string"
         }
       }

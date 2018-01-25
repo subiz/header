@@ -40,6 +40,7 @@ message AvailabilityCheckRequest {
 	optional string integration_id = 3;
 	optional user.User user = 4;
 	optional string account_id = 5;
+	optional string user_id = 6;
 }
 
 message AvailabilityCheckResult {
