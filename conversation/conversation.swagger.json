@@ -897,6 +897,9 @@
         },
         "group_by": {
           "type": "string"
+        },
+        "integration_id": {
+          "type": "string"
         }
       }
     },
