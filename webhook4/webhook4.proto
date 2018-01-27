@@ -30,9 +30,10 @@ message Webhook {
 	optional int64 next_hook_at = 8;
 	optional int64 last_hook_at = 9;
 	optional int64 last_hook_id = 10;
+	optional int64 events_count = 13;
 	optional string last_hook_response = 14;
 	optional int32 last_hook_status = 15;
-	optional int64 events_count = 13;
+	optional string last_hook_payload = 16;
 }
 
 enum Event {
