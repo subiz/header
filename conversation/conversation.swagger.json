@@ -780,6 +780,10 @@
         },
         "integration": {
           "$ref": "#/definitions/conversationIntegration"
+        },
+        "actived": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

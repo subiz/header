@@ -111,6 +111,7 @@ message Conversation {
 
 	optional string channel_type = 17;
 	optional Integration integration = 18;
+	optional int64 actived = 19;
 }
 
 message UserConversation { // used in database
