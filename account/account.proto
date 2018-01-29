@@ -257,6 +257,7 @@ enum Event {
 	HandleExpiredInvitation = 20;
 
 	AccountConfirmRequested = 21; // confirmemail
+	AccountConfirmSuccessEmailRequested = 25;
 	AccountResetPasswordEmail = 33;
 	AccountPasswordChangedEmailRequested = 34;
 	AccountInviteEmail = 22;
@@ -313,6 +314,18 @@ message PasswordChangedEmail {
 	optional string agent_name = 5;
 	optional lang.L lang = 7;
 	optional string from = 9;
+}
+
+message AccountConfirmSuccessEmail {
+	optional common.Context ctx = 1;
+	optional string to = 2;
+	optional string account_id = 3;
+	optional string agent_id = 4;
+	optional string agent_name = 5;
+	optional lang.L lang = 7;
+	optional string from = 9;
+	optional int64 from_time = 10;
+	optional int64 to_time = 11;
 }
 
 service YourService {
