@@ -105,6 +105,7 @@ enum T {
 	invalid_condition_key = 232;
 	invalid_po_file = 233;
 	integration_not_found = 234;
+	webhook_is_disabled = 235;
 }
 
 enum L {
