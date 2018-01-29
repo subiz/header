@@ -4,14 +4,6 @@ package webhook4;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
-message Retry {
-	optional common.Context ctx = 1;
-	optional string partition = 2;
-	optional string queue = 3;
-	optional string job_id = 4;
-	optional int32 n_backoff = 5;
-}
-
 message Webhook {
 	optional common.Context ctx = 1;
 	optional string account_id = 12;
@@ -27,17 +19,16 @@ message Webhook {
 		inactive = 2;
 	}
 
-	optional int64 next_hook_at = 8;
 	optional int64 last_hook_at = 9;
 	optional int64 last_hook_id = 10;
 	optional int64 events_count = 13;
 	optional string last_hook_response = 14;
 	optional int32 last_hook_status = 15;
 	optional string last_hook_payload = 16;
+	optional int64 backoffs_count = 17;
 }
 
 enum Event {
-	Webhook4RetryCallback = 0;
 	Webhook4WebhookReadRequested = 3;
 	Webhook4WebhookUpserted = 4;
 	Webhook4WebhookVerifyRequested = 5;
