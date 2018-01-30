@@ -197,6 +197,8 @@ message User {
 	string account_id = 3;
 	string email = 5;
 	string encrypted_password = 17;
+	bool is_active = 18;
+	int64 upserted = 19;
 }
 
 enum AuthorizationType {
