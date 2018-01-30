@@ -106,6 +106,7 @@ enum T {
 	invalid_po_file = 233;
 	integration_not_found = 234;
 	webhook_is_disabled = 235;
+	agent_not_activated = 240;
 }
 
 enum L {
