@@ -372,3 +372,12 @@ message Visitors {
 	optional common.Context ctx = 1;
 	repeated Visitor visitors = 2;
 }
+
+message LastView {
+	optional string account_id = 3;
+	optional string user_id = 4;
+	optional string url = 5;
+	optional string ua = 6;
+	optional string ip = 7;
+	optional int64 created = 8;
+}
