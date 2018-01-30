@@ -380,4 +380,5 @@ message LastView {
 	optional string ua = 6;
 	optional string ip = 7;
 	optional int64 created = 8;
+	optional string event_id = 9;
 }
