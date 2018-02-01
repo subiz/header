@@ -1,0 +1,26 @@
+syntax = "proto2";
+
+package logan;
+
+import "bitbucket.org/subiz/header/common/common.proto";
+
+message Log {
+	optional common.Context ctx = 1;
+	optional string service = 4;
+	optional string service_id = 5;
+	repeated string tags = 6;
+	optional int64 created = 8;
+	optional string level = 10;
+
+	optional string string = 13;
+	optional string struct = 14;
+	optional string number = 16;
+	optional bool boolean = 17;
+}
+
+enum Event {
+	LogRequested = 1000;
+	LogSynced = 1001;
+
+	LogLogRequested = 1;
+}
