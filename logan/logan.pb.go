@@ -9,6 +9,7 @@ It is generated from these files:
 
 It has these top-level messages:
 	Log
+	MemStats
 */
 package logan
 
@@ -31,52 +32,42 @@ const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 type Event int32
 
 const (
+	Event_LogLogRequested Event = 0
 	Event_LogRequested    Event = 1000
 	Event_LogSynced       Event = 1001
-	Event_LogLogRequested Event = 1
 )
 
 var Event_name = map[int32]string{
+	0:    "LogLogRequested",
 	1000: "LogRequested",
 	1001: "LogSynced",
-	1:    "LogLogRequested",
 }
 var Event_value = map[string]int32{
+	"LogLogRequested": 0,
 	"LogRequested":    1000,
 	"LogSynced":       1001,
-	"LogLogRequested": 1,
 }
 
-func (x Event) Enum() *Event {
-	p := new(Event)
-	*p = x
-	return p
-}
 func (x Event) String() string {
 	return proto.EnumName(Event_name, int32(x))
-}
-func (x *Event) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(Event_value, data, "Event")
-	if err != nil {
-		return err
-	}
-	*x = Event(value)
-	return nil
 }
 func (Event) EnumDescriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
 
 type Log struct {
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Service          *string         `protobuf:"bytes,4,opt,name=service" json:"service,omitempty"`
-	ServiceId        *string         `protobuf:"bytes,5,opt,name=service_id,json=serviceId" json:"service_id,omitempty"`
-	Tags             []string        `protobuf:"bytes,6,rep,name=tags" json:"tags,omitempty"`
-	Created          *int64          `protobuf:"varint,8,opt,name=created" json:"created,omitempty"`
-	Level            *string         `protobuf:"bytes,10,opt,name=level" json:"level,omitempty"`
-	String_          *string         `protobuf:"bytes,13,opt,name=string" json:"string,omitempty"`
-	Struct           *string         `protobuf:"bytes,14,opt,name=struct" json:"struct,omitempty"`
-	Number           *string         `protobuf:"bytes,16,opt,name=number" json:"number,omitempty"`
-	Boolean          *bool           `protobuf:"varint,17,opt,name=boolean" json:"boolean,omitempty"`
-	XXX_unrecognized []byte          `json:"-"`
+	Ctx          *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	ServiceId    string          `protobuf:"bytes,5,opt,name=service_id,json=serviceId" json:"service_id,omitempty"`
+	Tags         []string        `protobuf:"bytes,6,rep,name=tags" json:"tags,omitempty"`
+	Created      int64           `protobuf:"varint,8,opt,name=created" json:"created,omitempty"`
+	Level        string          `protobuf:"bytes,10,opt,name=level" json:"level,omitempty"`
+	String_      string          `protobuf:"bytes,13,opt,name=string" json:"string,omitempty"`
+	Struct       string          `protobuf:"bytes,14,opt,name=struct" json:"struct,omitempty"`
+	Number       string          `protobuf:"bytes,16,opt,name=number" json:"number,omitempty"`
+	Boolean      bool            `protobuf:"varint,17,opt,name=boolean" json:"boolean,omitempty"`
+	Mem          *MemStats       `protobuf:"bytes,18,opt,name=mem" json:"mem,omitempty"`
+	GoVersion    string          `protobuf:"bytes,19,opt,name=go_version,json=goVersion" json:"go_version,omitempty"`
+	NumCpu       int32           `protobuf:"varint,20,opt,name=num_cpu,json=numCpu" json:"num_cpu,omitempty"`
+	NumGoroutine int32           `protobuf:"varint,21,opt,name=num_goroutine,json=numGoroutine" json:"num_goroutine,omitempty"`
+	StackTrace   []byte          `protobuf:"bytes,22,opt,name=stack_trace,json=stackTrace,proto3" json:"stack_trace,omitempty"`
 }
 
 func (m *Log) Reset()                    { *m = Log{} }
@@ -91,16 +82,9 @@ func (m *Log) GetCtx() *common.Context {
 	return nil
 }
 
-func (m *Log) GetService() string {
-	if m != nil && m.Service != nil {
-		return *m.Service
-	}
-	return ""
-}
-
 func (m *Log) GetServiceId() string {
-	if m != nil && m.ServiceId != nil {
-		return *m.ServiceId
+	if m != nil {
+		return m.ServiceId
 	}
 	return ""
 }
@@ -113,73 +97,488 @@ func (m *Log) GetTags() []string {
 }
 
 func (m *Log) GetCreated() int64 {
-	if m != nil && m.Created != nil {
-		return *m.Created
+	if m != nil {
+		return m.Created
 	}
 	return 0
 }
 
 func (m *Log) GetLevel() string {
-	if m != nil && m.Level != nil {
-		return *m.Level
+	if m != nil {
+		return m.Level
 	}
 	return ""
 }
 
 func (m *Log) GetString_() string {
-	if m != nil && m.String_ != nil {
-		return *m.String_
+	if m != nil {
+		return m.String_
 	}
 	return ""
 }
 
 func (m *Log) GetStruct() string {
-	if m != nil && m.Struct != nil {
-		return *m.Struct
+	if m != nil {
+		return m.Struct
 	}
 	return ""
 }
 
 func (m *Log) GetNumber() string {
-	if m != nil && m.Number != nil {
-		return *m.Number
+	if m != nil {
+		return m.Number
 	}
 	return ""
 }
 
 func (m *Log) GetBoolean() bool {
-	if m != nil && m.Boolean != nil {
-		return *m.Boolean
+	if m != nil {
+		return m.Boolean
 	}
 	return false
 }
 
+func (m *Log) GetMem() *MemStats {
+	if m != nil {
+		return m.Mem
+	}
+	return nil
+}
+
+func (m *Log) GetGoVersion() string {
+	if m != nil {
+		return m.GoVersion
+	}
+	return ""
+}
+
+func (m *Log) GetNumCpu() int32 {
+	if m != nil {
+		return m.NumCpu
+	}
+	return 0
+}
+
+func (m *Log) GetNumGoroutine() int32 {
+	if m != nil {
+		return m.NumGoroutine
+	}
+	return 0
+}
+
+func (m *Log) GetStackTrace() []byte {
+	if m != nil {
+		return m.StackTrace
+	}
+	return nil
+}
+
+type MemStats struct {
+	Alloc uint64 `protobuf:"varint,2,opt,name=alloc" json:"alloc,omitempty"`
+	// TotalAlloc is cumulative bytes allocated for heap objects.
+	//
+	// TotalAlloc increases as heap objects are allocated, but
+	// unlike Alloc and HeapAlloc, it does not decrease when
+	// objects are freed.
+	TotalAlloc uint64 `protobuf:"varint,3,opt,name=total_alloc,json=totalAlloc" json:"total_alloc,omitempty"`
+	// Sys is the total bytes of memory obtained from the OS.
+	//
+	// Sys is the sum of the XSys fields below. Sys measures the
+	// virtual address space reserved by the Go runtime for the
+	// heap, stacks, and other internal data structures. It's
+	// likely that not all of the virtual address space is backed
+	// by physical memory at any given moment, though in general
+	// it all was at some point.
+	Sys uint64 `protobuf:"varint,4,opt,name=sys" json:"sys,omitempty"`
+	// Lookups is the number of pointer lookups performed by the
+	// runtime.
+	//
+	// This is primarily useful for debugging runtime internals.
+	Lookups uint64 `protobuf:"varint,5,opt,name=lookups" json:"lookups,omitempty"`
+	// Mallocs is the cumulative count of heap objects allocated.
+	// The number of live objects is Mallocs - Frees.
+	Mallocs uint64 `protobuf:"varint,6,opt,name=mallocs" json:"mallocs,omitempty"`
+	// Frees is the cumulative count of heap objects freed.
+	Frees uint64 `protobuf:"varint,7,opt,name=frees" json:"frees,omitempty"`
+	// HeapAlloc is bytes of allocated heap objects.
+	//
+	// "Allocated" heap objects include all reachable objects, as
+	// well as unreachable objects that the garbage collector has
+	// not yet freed. Specifically, HeapAlloc increases as heap
+	// objects are allocated and decreases as the heap is swept
+	// and unreachable objects are freed. Sweeping occurs
+	// incrementally between GC cycles, so these two processes
+	// occur simultaneously, and as a result HeapAlloc tends to
+	// change smoothly (in contrast with the sawtooth that is
+	// typical of stop-the-world garbage collectors).
+	HeapAlloc uint64 `protobuf:"varint,8,opt,name=heap_alloc,json=heapAlloc" json:"heap_alloc,omitempty"`
+	// HeapSys is bytes of heap memory obtained from the OS.
+	//
+	// HeapSys measures the amount of virtual address space
+	// reserved for the heap. This includes virtual address space
+	// that has been reserved but not yet used, which consumes no
+	// physical memory, but tends to be small, as well as virtual
+	// address space for which the physical memory has been
+	// returned to the OS after it became unused (see HeapReleased
+	// for a measure of the latter).
+	//
+	// HeapSys estimates the largest size the heap has had.
+	HeapSys uint64 `protobuf:"varint,9,opt,name=heap_sys,json=heapSys" json:"heap_sys,omitempty"`
+	// HeapIdle is bytes in idle (unused) spans.
+	//
+	// Idle spans have no objects in them. These spans could be
+	// (and may already have been) returned to the OS, or they can
+	// be reused for heap allocations, or they can be reused as
+	// stack memory.
+	//
+	// HeapIdle minus HeapReleased estimates the amount of memory
+	// that could be returned to the OS, but is being retained by
+	// the runtime so it can grow the heap without requesting more
+	// memory from the OS. If this difference is significantly
+	// larger than the heap size, it indicates there was a recent
+	// transient spike in live heap size.
+	HeapIdle uint64 `protobuf:"varint,10,opt,name=heap_idle,json=heapIdle" json:"heap_idle,omitempty"`
+	// HeapInuse is bytes in in-use spans.
+	//
+	// In-use spans have at least one object in them. These spans
+	// can only be used for other objects of roughly the same
+	// size.
+	//
+	// HeapInuse minus HeapAlloc esimates the amount of memory
+	// that has been dedicated to particular size classes, but is
+	// not currently being used. This is an upper bound on
+	// fragmentation, but in general this memory can be reused
+	// efficiently.
+	HeapInuse uint64 `protobuf:"varint,11,opt,name=heap_inuse,json=heapInuse" json:"heap_inuse,omitempty"`
+	// HeapReleased is bytes of physical memory returned to the OS.
+	//
+	// This counts heap memory from idle spans that was returned
+	// to the OS and has not yet been reacquired for the heap.
+	HeapReleased uint64 `protobuf:"varint,12,opt,name=heap_released,json=heapReleased" json:"heap_released,omitempty"`
+	// HeapObjects is the number of allocated heap objects.
+	//
+	// Like HeapAlloc, this increases as objects are allocated and
+	// decreases as the heap is swept and unreachable objects are
+	// freed.
+	HeapObjects uint64 `protobuf:"varint,13,opt,name=heap_objects,json=heapObjects" json:"heap_objects,omitempty"`
+	// StackInuse is bytes in stack spans.
+	//
+	// In-use stack spans have at least one stack in them. These
+	// spans can only be used for other stacks of the same size.
+	//
+	// There is no StackIdle because unused stack spans are
+	// returned to the heap (and hence counted toward HeapIdle).
+	StackInuse uint64 `protobuf:"varint,14,opt,name=stack_inuse,json=stackInuse" json:"stack_inuse,omitempty"`
+	// StackSys is bytes of stack memory obtained from the OS.
+	//
+	// StackSys is StackInuse, plus any memory obtained directly
+	// from the OS for OS thread stacks (which should be minimal).
+	StackSys uint64 `protobuf:"varint,15,opt,name=stack_sys,json=stackSys" json:"stack_sys,omitempty"`
+	// MSpanInuse is bytes of allocated mspan structures.
+	MSpanInuse uint64 `protobuf:"varint,16,opt,name=m_span_inuse,json=mSpanInuse" json:"m_span_inuse,omitempty"`
+	// MSpanSys is bytes of memory obtained from the OS for mspan
+	// structures.
+	MSpanSys uint64 `protobuf:"varint,17,opt,name=m_span_sys,json=mSpanSys" json:"m_span_sys,omitempty"`
+	// MCacheInuse is bytes of allocated mcache structures.
+	MCacheInuse uint64 `protobuf:"varint,18,opt,name=m_cache_inuse,json=mCacheInuse" json:"m_cache_inuse,omitempty"`
+	// MCacheSys is bytes of memory obtained from the OS for
+	// mcache structures.
+	MCacheSys uint64 `protobuf:"varint,19,opt,name=m_cache_sys,json=mCacheSys" json:"m_cache_sys,omitempty"`
+	// BuckHashSys is bytes of memory in profiling bucket hash tables.
+	BuckHashSys uint64 `protobuf:"varint,20,opt,name=buck_hash_sys,json=buckHashSys" json:"buck_hash_sys,omitempty"`
+	// GCSys is bytes of memory in garbage collection metadata.
+	GcSys uint64 `protobuf:"varint,21,opt,name=gc_sys,json=gcSys" json:"gc_sys,omitempty"`
+	// OtherSys is bytes of memory in miscellaneous off-heap
+	// runtime allocations.
+	OtherSys uint64 `protobuf:"varint,22,opt,name=other_sys,json=otherSys" json:"other_sys,omitempty"`
+	// NextGC is the target heap size of the next GC cycle.
+	//
+	// The garbage collector's goal is to keep HeapAlloc ≤ NextGC.
+	// At the end of each GC cycle, the target for the next cycle
+	// is computed based on the amount of reachable data and the
+	// value of GOGC.
+	NextGc uint64 `protobuf:"varint,23,opt,name=next_gc,json=nextGc" json:"next_gc,omitempty"`
+	// LastGC is the time the last garbage collection finished, as
+	// nanoseconds since 1970 (the UNIX epoch).
+	LastGc uint64 `protobuf:"varint,24,opt,name=last_gc,json=lastGc" json:"last_gc,omitempty"`
+	// PauseTotalNs is the cumulative nanoseconds in GC
+	// stop-the-world pauses since the program started.
+	//
+	// During a stop-the-world pause, all goroutines are paused
+	// and only the garbage collector can run.
+	PauseTotalNs uint64 `protobuf:"varint,25,opt,name=pause_total_ns,json=pauseTotalNs" json:"pause_total_ns,omitempty"`
+	// NumGC is the number of completed GC cycles.
+	NumGc uint32 `protobuf:"varint,26,opt,name=num_gc,json=numGc" json:"num_gc,omitempty"`
+	// NumForcedGC is the number of GC cycles that were forced by
+	// the application calling the GC function.
+	NumForcedGc uint32 `protobuf:"varint,27,opt,name=num_forced_gc,json=numForcedGc" json:"num_forced_gc,omitempty"`
+	// GCCPUFraction is the fraction of this program's available
+	// CPU time used by the GC since the program started.
+	//
+	// GCCPUFraction is expressed as a number between 0 and 1,
+	// where 0 means GC has consumed none of this program's CPU. A
+	// program's available CPU time is defined as the integral of
+	// GOMAXPROCS since the program started. That is, if
+	// GOMAXPROCS is 2 and a program has been running for 10
+	// seconds, its "available CPU" is 20 seconds. GCCPUFraction
+	// does not include CPU time used for write barrier activity.
+	//
+	// This is the same as the fraction of CPU reported by
+	// GODEBUG=gctrace=1.
+	GcCpuFraction float64 `protobuf:"fixed64,28,opt,name=gc_cpu_fraction,json=gcCpuFraction" json:"gc_cpu_fraction,omitempty"`
+}
+
+func (m *MemStats) Reset()                    { *m = MemStats{} }
+func (m *MemStats) String() string            { return proto.CompactTextString(m) }
+func (*MemStats) ProtoMessage()               {}
+func (*MemStats) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *MemStats) GetAlloc() uint64 {
+	if m != nil {
+		return m.Alloc
+	}
+	return 0
+}
+
+func (m *MemStats) GetTotalAlloc() uint64 {
+	if m != nil {
+		return m.TotalAlloc
+	}
+	return 0
+}
+
+func (m *MemStats) GetSys() uint64 {
+	if m != nil {
+		return m.Sys
+	}
+	return 0
+}
+
+func (m *MemStats) GetLookups() uint64 {
+	if m != nil {
+		return m.Lookups
+	}
+	return 0
+}
+
+func (m *MemStats) GetMallocs() uint64 {
+	if m != nil {
+		return m.Mallocs
+	}
+	return 0
+}
+
+func (m *MemStats) GetFrees() uint64 {
+	if m != nil {
+		return m.Frees
+	}
+	return 0
+}
+
+func (m *MemStats) GetHeapAlloc() uint64 {
+	if m != nil {
+		return m.HeapAlloc
+	}
+	return 0
+}
+
+func (m *MemStats) GetHeapSys() uint64 {
+	if m != nil {
+		return m.HeapSys
+	}
+	return 0
+}
+
+func (m *MemStats) GetHeapIdle() uint64 {
+	if m != nil {
+		return m.HeapIdle
+	}
+	return 0
+}
+
+func (m *MemStats) GetHeapInuse() uint64 {
+	if m != nil {
+		return m.HeapInuse
+	}
+	return 0
+}
+
+func (m *MemStats) GetHeapReleased() uint64 {
+	if m != nil {
+		return m.HeapReleased
+	}
+	return 0
+}
+
+func (m *MemStats) GetHeapObjects() uint64 {
+	if m != nil {
+		return m.HeapObjects
+	}
+	return 0
+}
+
+func (m *MemStats) GetStackInuse() uint64 {
+	if m != nil {
+		return m.StackInuse
+	}
+	return 0
+}
+
+func (m *MemStats) GetStackSys() uint64 {
+	if m != nil {
+		return m.StackSys
+	}
+	return 0
+}
+
+func (m *MemStats) GetMSpanInuse() uint64 {
+	if m != nil {
+		return m.MSpanInuse
+	}
+	return 0
+}
+
+func (m *MemStats) GetMSpanSys() uint64 {
+	if m != nil {
+		return m.MSpanSys
+	}
+	return 0
+}
+
+func (m *MemStats) GetMCacheInuse() uint64 {
+	if m != nil {
+		return m.MCacheInuse
+	}
+	return 0
+}
+
+func (m *MemStats) GetMCacheSys() uint64 {
+	if m != nil {
+		return m.MCacheSys
+	}
+	return 0
+}
+
+func (m *MemStats) GetBuckHashSys() uint64 {
+	if m != nil {
+		return m.BuckHashSys
+	}
+	return 0
+}
+
+func (m *MemStats) GetGcSys() uint64 {
+	if m != nil {
+		return m.GcSys
+	}
+	return 0
+}
+
+func (m *MemStats) GetOtherSys() uint64 {
+	if m != nil {
+		return m.OtherSys
+	}
+	return 0
+}
+
+func (m *MemStats) GetNextGc() uint64 {
+	if m != nil {
+		return m.NextGc
+	}
+	return 0
+}
+
+func (m *MemStats) GetLastGc() uint64 {
+	if m != nil {
+		return m.LastGc
+	}
+	return 0
+}
+
+func (m *MemStats) GetPauseTotalNs() uint64 {
+	if m != nil {
+		return m.PauseTotalNs
+	}
+	return 0
+}
+
+func (m *MemStats) GetNumGc() uint32 {
+	if m != nil {
+		return m.NumGc
+	}
+	return 0
+}
+
+func (m *MemStats) GetNumForcedGc() uint32 {
+	if m != nil {
+		return m.NumForcedGc
+	}
+	return 0
+}
+
+func (m *MemStats) GetGcCpuFraction() float64 {
+	if m != nil {
+		return m.GcCpuFraction
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*Log)(nil), "logan.Log")
+	proto.RegisterType((*MemStats)(nil), "logan.MemStats")
 	proto.RegisterEnum("logan.Event", Event_name, Event_value)
 }
 
 func init() { proto.RegisterFile("logan/logan.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 294 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x8d, 0xcd, 0x4e, 0xb4, 0x30,
-	0x14, 0x86, 0xc3, 0xc7, 0x30, 0x33, 0x9c, 0x4f, 0xe7, 0xa7, 0x1a, 0xd3, 0x98, 0x98, 0xa0, 0x2b,
-	0xe2, 0x02, 0x12, 0x6f, 0xc0, 0x85, 0x71, 0x61, 0xc2, 0x0a, 0x2f, 0xc0, 0x40, 0x39, 0xa9, 0x44,
-	0xa6, 0x47, 0xcb, 0x61, 0x32, 0x7a, 0x03, 0xde, 0xaa, 0xde, 0x85, 0x01, 0x8a, 0x89, 0x9b, 0xf6,
-	0x3c, 0xcf, 0x79, 0xfb, 0x16, 0xb6, 0x0d, 0xe9, 0xc2, 0xa4, 0xc3, 0x99, 0xbc, 0x5a, 0x62, 0x12,
-	0xc1, 0x00, 0xe7, 0x49, 0x59, 0x73, 0xd9, 0xa9, 0x17, 0xe4, 0x84, 0xac, 0x4e, 0xdb, 0xae, 0xac,
-	0x3f, 0xd2, 0x67, 0x2c, 0x2a, 0xb4, 0xa9, 0xa2, 0xdd, 0x8e, 0x8c, 0xbb, 0xc6, 0x67, 0x57, 0x9f,
-	0xff, 0xc0, 0xcf, 0x48, 0x8b, 0x4b, 0xf0, 0x15, 0x1f, 0xa4, 0x17, 0x79, 0xf1, 0xff, 0x9b, 0x75,
-	0xe2, 0x32, 0x77, 0x64, 0x18, 0x0f, 0x9c, 0xf7, 0x3b, 0x21, 0x61, 0xd1, 0xa2, 0xdd, 0xd7, 0x0a,
-	0xe5, 0x2c, 0xf2, 0xe2, 0x30, 0x9f, 0x50, 0x5c, 0x00, 0xb8, 0xf1, 0xa9, 0xae, 0x64, 0x30, 0x2c,
-	0x43, 0x67, 0x1e, 0x2a, 0x21, 0x60, 0xc6, 0x85, 0x6e, 0xe5, 0x3c, 0xf2, 0xe3, 0x30, 0x1f, 0xe6,
-	0xbe, 0x4c, 0x59, 0x2c, 0x18, 0x2b, 0xb9, 0x8c, 0xbc, 0xd8, 0xcf, 0x27, 0x14, 0xa7, 0x10, 0x34,
-	0xb8, 0xc7, 0x46, 0xc2, 0xd0, 0x33, 0x82, 0x38, 0x83, 0x79, 0xcb, 0xb6, 0x36, 0x5a, 0x1e, 0x0f,
-	0xda, 0x91, 0xf3, 0x9d, 0x62, 0xb9, 0xfa, 0xf5, 0x9d, 0xe2, 0xde, 0x9b, 0x6e, 0x57, 0xa2, 0x95,
-	0x9b, 0xd1, 0x8f, 0xd4, 0xff, 0x5b, 0x12, 0x35, 0x58, 0x18, 0xb9, 0x8d, 0xbc, 0x78, 0x99, 0x4f,
-	0x78, 0x7d, 0x0b, 0xc1, 0xfd, 0x1e, 0x0d, 0x8b, 0x2d, 0x1c, 0x65, 0xa4, 0x73, 0x7c, 0xeb, 0xb0,
-	0x65, 0xac, 0x36, 0x5f, 0x0b, 0xb1, 0x82, 0x30, 0x23, 0xfd, 0xf8, 0x6e, 0x14, 0x56, 0x9b, 0xef,
-	0x85, 0x38, 0x81, 0x75, 0x46, 0xfa, 0x4f, 0xca, 0xfb, 0x09, 0x00, 0x00, 0xff, 0xff, 0x5e, 0x87,
-	0x42, 0x31, 0x95, 0x01, 0x00, 0x00,
+	// 772 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x94, 0xff, 0x6e, 0xe4, 0x34,
+	0x10, 0xc7, 0x09, 0xfb, 0x7b, 0x76, 0xb7, 0xdd, 0xba, 0x3f, 0xce, 0x77, 0x3d, 0x20, 0x57, 0x10,
+	0x8a, 0xf8, 0xa3, 0x95, 0xe0, 0x01, 0x10, 0xaa, 0xb8, 0x52, 0x69, 0x01, 0x29, 0x7b, 0xe2, 0xdf,
+	0xc8, 0xeb, 0x4c, 0xb3, 0xa1, 0x89, 0x1d, 0x62, 0x67, 0xd5, 0xf2, 0x10, 0x3c, 0x0b, 0x8f, 0x05,
+	0x6f, 0x81, 0x66, 0x9c, 0xbd, 0x8a, 0x7f, 0xda, 0x7c, 0x3f, 0xdf, 0xf1, 0x8c, 0x67, 0x6c, 0x2f,
+	0x9c, 0x54, 0xb6, 0x50, 0xe6, 0x86, 0xff, 0x5e, 0x37, 0xad, 0xf5, 0x56, 0x8c, 0x58, 0xbc, 0xb9,
+	0xde, 0x96, 0x7e, 0xdb, 0xe9, 0x47, 0xf4, 0xd7, 0xb6, 0x2d, 0x6e, 0x5c, 0xb7, 0x2d, 0xff, 0xbc,
+	0xd9, 0xa1, 0xca, 0xb1, 0xbd, 0xd1, 0xb6, 0xae, 0xad, 0xe9, 0xff, 0x85, 0x65, 0x57, 0x7f, 0x0d,
+	0x60, 0xb0, 0xb6, 0x85, 0x78, 0x07, 0x03, 0xed, 0x9f, 0x64, 0x14, 0x47, 0xc9, 0xfc, 0xdb, 0xe3,
+	0xeb, 0x3e, 0xe6, 0xd6, 0x1a, 0x8f, 0x4f, 0x3e, 0x25, 0x4f, 0x7c, 0x06, 0xe0, 0xb0, 0xdd, 0x97,
+	0x1a, 0xb3, 0x32, 0x97, 0xa3, 0x38, 0x4a, 0x66, 0xe9, 0xac, 0x27, 0xf7, 0xb9, 0x10, 0x30, 0xf4,
+	0xaa, 0x70, 0x72, 0x1c, 0x0f, 0x92, 0x59, 0xca, 0xdf, 0x42, 0xc2, 0x44, 0xb7, 0xa8, 0x3c, 0xe6,
+	0x72, 0x1a, 0x47, 0xc9, 0x20, 0x3d, 0x48, 0x71, 0x06, 0xa3, 0x0a, 0xf7, 0x58, 0x49, 0xe0, 0x3c,
+	0x41, 0x88, 0x0b, 0x18, 0x3b, 0xdf, 0x96, 0xa6, 0x90, 0x4b, 0xc6, 0xbd, 0xea, 0x79, 0xa7, 0xbd,
+	0x3c, 0xfa, 0xc8, 0x3b, 0xed, 0x89, 0x9b, 0xae, 0xde, 0x62, 0x2b, 0x57, 0x81, 0x07, 0x45, 0x75,
+	0xb7, 0xd6, 0x56, 0xa8, 0x8c, 0x3c, 0x89, 0xa3, 0x64, 0x9a, 0x1e, 0x24, 0xf5, 0x59, 0x63, 0x2d,
+	0x45, 0xdf, 0x67, 0x98, 0xe0, 0xcf, 0x58, 0x6f, 0xbc, 0xf2, 0x2e, 0x25, 0x8f, 0xfa, 0x2c, 0x6c,
+	0xb6, 0xc7, 0xd6, 0x95, 0xd6, 0xc8, 0xd3, 0xd0, 0x67, 0x61, 0x7f, 0x0b, 0x40, 0xbc, 0x82, 0x89,
+	0xe9, 0xea, 0x4c, 0x37, 0x9d, 0x3c, 0x8b, 0xa3, 0x64, 0xc4, 0x45, 0x6f, 0x9b, 0x4e, 0x7c, 0x09,
+	0x4b, 0x32, 0x0a, 0xdb, 0xda, 0xce, 0x97, 0x06, 0xe5, 0x39, 0xdb, 0x0b, 0xd3, 0xd5, 0x77, 0x07,
+	0x26, 0xbe, 0x80, 0xb9, 0xf3, 0x4a, 0x3f, 0x66, 0xbe, 0x55, 0x1a, 0xe5, 0x45, 0x1c, 0x25, 0x8b,
+	0x14, 0x18, 0x7d, 0x20, 0x72, 0xf5, 0xf7, 0x18, 0xa6, 0x87, 0xfd, 0xd0, 0x94, 0x54, 0x55, 0x59,
+	0x2d, 0x3f, 0x8d, 0xa3, 0x64, 0x98, 0x06, 0x41, 0x39, 0xbc, 0xf5, 0xaa, 0xca, 0x82, 0x37, 0x60,
+	0x0f, 0x18, 0xfd, 0xc0, 0x01, 0x2b, 0x18, 0xb8, 0x67, 0x27, 0x87, 0x6c, 0xd0, 0x27, 0x0d, 0xa4,
+	0xb2, 0xf6, 0xb1, 0x6b, 0x1c, 0x1f, 0xdc, 0x30, 0x3d, 0x48, 0x72, 0x6a, 0xce, 0x43, 0x27, 0xc7,
+	0x4e, 0x2f, 0xa9, 0xf8, 0x43, 0x8b, 0xe8, 0xe4, 0x24, 0x14, 0x67, 0x41, 0xd3, 0xd9, 0xa1, 0x6a,
+	0xfa, 0xda, 0x53, 0xb6, 0x66, 0x44, 0x42, 0xe9, 0xd7, 0x30, 0x65, 0x9b, 0xea, 0xcf, 0x42, 0x3e,
+	0xd2, 0x9b, 0x67, 0x27, 0x2e, 0x81, 0xe3, 0xb2, 0x32, 0xaf, 0x90, 0x8f, 0x7d, 0x98, 0x72, 0xec,
+	0x7d, 0x5e, 0xe1, 0xc7, 0xb4, 0xa5, 0xe9, 0x1c, 0xca, 0xf9, 0x4b, 0xda, 0x7b, 0x02, 0x34, 0x5b,
+	0xb6, 0x5b, 0xac, 0x50, 0x39, 0xcc, 0xe5, 0x82, 0x23, 0x16, 0x04, 0xd3, 0x9e, 0x89, 0x77, 0xc0,
+	0x3a, 0xb3, 0xdb, 0xdf, 0x51, 0x7b, 0xc7, 0x77, 0x68, 0x98, 0xce, 0x89, 0xfd, 0x1a, 0xd0, 0xcb,
+	0xf8, 0x43, 0x9d, 0xa3, 0x30, 0x3a, 0x46, 0xa1, 0xd0, 0x25, 0xcc, 0x42, 0x00, 0x35, 0x70, 0x1c,
+	0x36, 0xc9, 0x80, 0x3a, 0x88, 0x61, 0x51, 0x67, 0xae, 0x51, 0xa6, 0x5f, 0xbe, 0x0a, 0xcb, 0xeb,
+	0x4d, 0xa3, 0x4c, 0x58, 0xfe, 0x16, 0xa0, 0x8f, 0xa0, 0xf5, 0x27, 0x61, 0x3d, 0xfb, 0xb4, 0xfe,
+	0x0a, 0x96, 0x75, 0xa6, 0x95, 0xde, 0x61, 0x9f, 0x40, 0x84, 0x1d, 0xd6, 0xb7, 0xc4, 0x42, 0x86,
+	0xcf, 0x61, 0x7e, 0x88, 0xa1, 0x14, 0xa7, 0x61, 0x12, 0x21, 0xa2, 0xcf, 0x41, 0xef, 0x3b, 0xdb,
+	0x29, 0xb7, 0xe3, 0x88, 0xb3, 0x90, 0x83, 0xe0, 0x4f, 0xca, 0xed, 0x28, 0xe6, 0x1c, 0xc6, 0x85,
+	0x66, 0xf3, 0x3c, 0x1c, 0x5d, 0xa1, 0xfb, 0x03, 0xb0, 0x7e, 0x87, 0x2d, 0x3b, 0x17, 0x61, 0x6f,
+	0x0c, 0xc8, 0xa4, 0x6b, 0x8d, 0x4f, 0x3e, 0x2b, 0xb4, 0x7c, 0xc5, 0xd6, 0x98, 0xe4, 0x9d, 0x26,
+	0xa3, 0x52, 0x8e, 0x0d, 0x19, 0x0c, 0x92, 0x77, 0x5a, 0x7c, 0x05, 0x47, 0x8d, 0xea, 0x1c, 0x66,
+	0xe1, 0x32, 0x1a, 0x27, 0x5f, 0x87, 0x43, 0x61, 0xfa, 0x81, 0xe0, 0x2f, 0xbc, 0x17, 0x7e, 0x15,
+	0x5a, 0xbe, 0x89, 0xa3, 0x64, 0x99, 0x8e, 0xe8, 0x39, 0x68, 0x6a, 0x83, 0xf0, 0x83, 0x6d, 0x35,
+	0xe6, 0xe4, 0x5e, 0xb2, 0x3b, 0x37, 0x5d, 0xfd, 0x9e, 0xd9, 0x9d, 0x16, 0x5f, 0xc3, 0x71, 0xa1,
+	0xe9, 0xa1, 0x65, 0x0f, 0xad, 0xd2, 0x9e, 0x5e, 0xe3, 0xdb, 0x38, 0x4a, 0xa2, 0x74, 0x59, 0xe8,
+	0xdb, 0xa6, 0x7b, 0xdf, 0xc3, 0x6f, 0xbe, 0x87, 0xd1, 0x8f, 0x7b, 0x34, 0x5e, 0x9c, 0xc2, 0xf1,
+	0xda, 0x16, 0x6b, 0x5b, 0xa4, 0xf8, 0x47, 0x87, 0xce, 0x63, 0xbe, 0xfa, 0x44, 0x9c, 0xc0, 0xe2,
+	0x7f, 0xe4, 0x9f, 0x89, 0x38, 0x82, 0xd9, 0xda, 0x16, 0x9b, 0x67, 0xa3, 0x31, 0x5f, 0xfd, 0x3b,
+	0xd9, 0x8e, 0xf9, 0xb7, 0xf0, 0xbb, 0xff, 0x02, 0x00, 0x00, 0xff, 0xff, 0x0d, 0xdf, 0x39, 0x94,
+	0x57, 0x05, 0x00, 0x00,
 }
