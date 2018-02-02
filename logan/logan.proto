@@ -4,23 +4,41 @@ package logan;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
+message Trace {
+	MemStats mem_stats = 2;
+	int32 num_cpu = 3;
+	int32 num_goroutine = 4;
+	bytes stack_trace = 5;
+	string hostname = 6;
+}
+
+message KafkaInfo {
+	string topic = 2;
+	int32 parition = 3;
+	int64 offset = 4;
+}
+
 message Log {
 	common.Context ctx = 1;
-	string service_id = 5;
-	repeated string tags = 6;
+	string id = 4;
+	string hostname = 5;
 	int64 created = 8;
 	string level = 10;
 
-	string string = 13;
-	string struct = 14;
-	string number = 16;
-	bool boolean = 17;
+	Trace trace = 22;
+	KafkaInfo kafka = 23;
+	bytes text = 24;
+}
 
-	MemStats mem = 18;
-	string go_version = 19;
-	int32 num_cpu = 20;
-	int32 num_goroutine = 21;
-	bytes stack_trace = 22;
+enum Level {
+	debug = 0;
+	info = 1;
+	notice = 2;
+	warning = 3;
+	error = 4;
+	critical = 5;
+	alert = 6;
+	emergency = 7;
 }
 
 enum Event {
