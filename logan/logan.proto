@@ -24,7 +24,7 @@ message Log {
 	string trace_id = 2;
 	int64 created = 8;
 	string level = 10;
-
+	repeated string tags = 4;
 	Debug debug = 22;
 	bytes message = 24;
 	bytes messages = 25;
