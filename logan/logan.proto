@@ -4,12 +4,13 @@ package logan;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
-message Trace {
+message Debug {
 	MemStats mem_stats = 2;
 	int32 num_cpu = 3;
 	int32 num_goroutine = 4;
 	bytes stack_trace = 5;
 	string hostname = 6;
+	KafkaInfo kafka = 23;
 }
 
 message KafkaInfo {
@@ -24,9 +25,10 @@ message Log {
 	int64 created = 8;
 	string level = 10;
 
-	Trace trace = 22;
-	KafkaInfo kafka = 23;
-	bytes text = 24;
+	Debug debug = 22;
+	bytes message = 24;
+	bytes messages = 25;
+
 }
 
 enum Level {
