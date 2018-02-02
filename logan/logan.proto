@@ -14,7 +14,7 @@ message Trace {
 
 message KafkaInfo {
 	string topic = 2;
-	int32 parition = 3;
+	int32 partition = 3;
 	int64 offset = 4;
 }
 
