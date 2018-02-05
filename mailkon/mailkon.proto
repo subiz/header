@@ -60,3 +60,9 @@ message UserAvail {
 	optional bool availability = 6;
 	optional int64 updated = 7;
 }
+
+message HttpChunk {
+	optional string id = 3;
+	optional int32 chunk_id = 4;
+	optional bytes data = 5;
+}
