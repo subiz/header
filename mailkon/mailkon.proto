@@ -41,6 +41,7 @@ enum Event {
 	MaikonRequested = 1000;
 	MailkonSynced = 1001;
 
+	MailkonJob = 2;
 	MailkonCreateAccountRequested = 0;
 }
 
@@ -65,4 +66,20 @@ message HttpChunk {
 	optional string id = 3;
 	optional int32 chunk_id = 4;
 	optional bytes data = 5;
+}
+
+message Job {
+	optional string topic = 2;
+	optional int32 partition  = 3;
+	optional int64 offset = 4;
+
+	optional string content_type = 5;
+	optional string type = 6;
+	optional string request_id = 7;
+}
+
+enum JobType {
+	sendgrid_inbound = 0;
+	sendgrid_event = 1;
+	subiz_event = 3;
 }
