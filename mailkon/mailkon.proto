@@ -66,6 +66,7 @@ message HttpChunk {
 	optional string id = 3;
 	optional int32 chunk_id = 4;
 	optional bytes data = 5;
+	optional int32 chunk_size = 6;
 }
 
 message Job {
