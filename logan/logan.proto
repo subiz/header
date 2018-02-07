@@ -27,7 +27,6 @@ message Log {
 	repeated string tags = 4;
 	Debug debug = 22;
 	bytes message = 24;
-	bytes messages = 25;
 
 }
 
