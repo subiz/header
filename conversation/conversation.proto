@@ -112,6 +112,7 @@ message Conversation {
 	optional string channel_type = 17;
 	optional Integration integration = 18;
 	optional int64 actived = 19;
+	optional string preview = 20;
 }
 
 message UserConversation { // used in database
@@ -254,6 +255,8 @@ enum Event {
 	ConversationMessageReceiveRequested = 91;
 	ConversationMessageSeeRequested = 92;
 	ChannelIntegrationAvailabilityCheck = 93;
+
+	ConversationMessageSearchRequest = 94;
 	ConversationRequested = 100;
 }
 

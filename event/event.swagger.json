@@ -974,6 +974,9 @@
         "actived": {
           "type": "string",
           "format": "int64"
+        },
+        "preview": {
+          "type": "string"
         }
       }
     },
