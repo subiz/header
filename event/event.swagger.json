@@ -828,7 +828,7 @@
         "name": {
           "type": "string"
         },
-        "descrition": {
+        "description": {
           "type": "string"
         },
         "length": {

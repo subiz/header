@@ -269,6 +269,16 @@ message Reaction {
 	repeated string users = 5;
 }
 
+message EsMessage {
+	optional string id = 2;
+	optional string account_id = 3;
+	optional string conversation_id = 4;
+	repeated string member_ids = 5;
+	optional string text = 6;
+	repeated string attachments = 7;
+	repeated string fields = 8;
+}
+
 message Message {
 	optional common.Context ctx = 1;
 	optional string account_id = 5;
@@ -310,8 +320,6 @@ message Field {
 	optional string value = 3;
 	optional string key = 2;
 }
-
-
 
 message Button {
 	enum ButtonType {
@@ -382,7 +390,7 @@ message Attachment {
 	optional string url = 3;
 	optional string thumbnail_url = 4;
 	optional string name = 5;
-	optional string descrition = 6;
+	optional string description = 6;
 	//optional string data = 7; // for custom data
 	optional int32 length = 15;
 	optional int32 size = 13; // byte
