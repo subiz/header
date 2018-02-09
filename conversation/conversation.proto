@@ -527,7 +527,7 @@ message SearchMessageRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string conversation_id = 3;
-	repeated string user_id = 4;
+	repeated string user_ids = 4;
 	optional string query = 5;
 	optional string anchor = 6;
 	optional int32 limit = 7;
