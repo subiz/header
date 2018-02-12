@@ -24,7 +24,8 @@ message AllType {
 message Agent {
 	optional common.Context ctx = 1;
 	optional string id = 2;
-	optional string account_id = 3;
+	optional string account_id = 3; // subiz only
+
 	optional string fullname = 4;
 	optional string email = 5;
 	repeated string emails = 6;
@@ -62,6 +63,8 @@ message Agent {
 	optional int64 seen = 24;
 	optional int64 modified = 25;
 
+	optional auth.Method method = 27;
+	optional Account account = 28;
 }
 
 message Invitation {

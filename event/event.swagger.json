@@ -227,6 +227,12 @@
         "modified": {
           "type": "string",
           "format": "int64"
+        },
+        "method": {
+          "$ref": "#/definitions/authMethod"
+        },
+        "account": {
+          "$ref": "#/definitions/accountAccount"
         }
       }
     },
