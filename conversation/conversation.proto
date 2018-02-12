@@ -112,7 +112,8 @@ message Conversation {
 	optional string channel_type = 17;
 	optional Integration integration = 18;
 	optional int64 actived = 19;
-	optional string preview = 20;
+	optional string last_message_id = 21; // internal use only
+	optional Message last_message = 20;
 }
 
 message UserConversation { // used in database
