@@ -218,6 +218,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "send_message": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "integrate_connector": {
           "type": "boolean",
           "format": "boolean",

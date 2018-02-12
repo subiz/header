@@ -107,6 +107,18 @@ enum T {
 	integration_not_found = 234;
 	webhook_is_disabled = 235;
 	agent_not_activated = 240;
+
+	empty_message = 242;
+	message_too_large = 243;
+	unknown_message_format = 244;
+	too_many_attachments = 245;
+	too_many_fields = 246;
+	attachment_too_large = 247;
+	invalid_end = 248;
+	invalid_ack = 249;
+	message_not_found = 250;
+	invalid_apikey = 255;
+	invalid_access_token = 256;
 }
 
 enum L {

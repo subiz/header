@@ -505,6 +505,10 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "send_message": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "integrate_connector": {
           "type": "boolean",
           "format": "boolean",
@@ -975,8 +979,11 @@
           "type": "string",
           "format": "int64"
         },
-        "preview": {
+        "last_message_id": {
           "type": "string"
+        },
+        "last_message": {
+          "$ref": "#/definitions/conversationMessage"
         }
       }
     },
