@@ -85,6 +85,7 @@ message Method {
 	bool read_conversation = 191; // basic permission
 	bool export_conversations = 192;
 	bool read_teammates_conversations = 193;
+	bool send_message = 194;
 
 	// connector integration
 	bool integrate_connector = 200;
