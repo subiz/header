@@ -119,6 +119,8 @@ enum T {
 	message_not_found = 250;
 	invalid_apikey = 255;
 	invalid_access_token = 256;
+	field_too_long = 257;
+	invalid_join = 258;
 }
 
 enum L {
