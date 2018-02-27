@@ -699,6 +699,18 @@
         },
         "state": {
           "type": "string"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
+        },
+        "scaned": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_active": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

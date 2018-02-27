@@ -243,7 +243,12 @@ message Segmentation {
 	enum State {
 		active = 0;
 		inactive = 1;
+
 	}
+
+	optional int64 started = 13;
+	optional int64 scaned = 14;
+	optional bool is_active = 16;
 }
 
 message SegmentCondition {
@@ -381,4 +386,33 @@ message LastView {
 	optional string ip = 7;
 	optional int64 created = 8;
 	optional string event_id = 9;
+}
+
+message Automation {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 3;
+	optional string channel = 4;
+	optional string name = 5;
+	optional string description = 6;
+	repeated Condition conditions = 7;
+
+	//repeated SegmentCondition query = 5; // suffix annotation
+	// a * b + (c + d) * e  ==>  + * a b * + c d e
+
+	optional int64 created = 9;
+	optional int64 modified = 10;
+	optional string state = 12;
+	enum State {
+		active = 0;
+		inactive = 1;
+	}
+
+	optional string action_type = 13;
+	enum ActionType {
+		user_message = 0;
+		agent_notification = 1;
+		user_notification = 2;
+	}
+	optional string action_data = 14;
 }
