@@ -448,6 +448,72 @@
         },
         "myuser": {
           "$ref": "#/definitions/userMyUser"
+        },
+        "automation": {
+          "$ref": "#/definitions/userAutomation"
+        },
+        "automations": {
+          "$ref": "#/definitions/userAutomations"
+        }
+      }
+    },
+    "userAutomation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCondition"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "action_type": {
+          "type": "string"
+        },
+        "action_data": {
+          "type": "string"
+        }
+      }
+    },
+    "userAutomations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "automations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userAutomation"
+          }
         }
       }
     },

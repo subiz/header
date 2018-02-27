@@ -22,6 +22,8 @@ message AllType {
 	optional Topic topic = 19;
 	optional UnreadTopic utopic = 20;
 	optional MyUser myuser = 21;
+	optional Automation automation = 23;
+	optional Automations automations = 25;
 }
 
 service MyServer {
@@ -195,10 +197,14 @@ enum Event {
 	UserPreviewingReadRequested = 46;
 	UserListTopRequested = 47;
 
+
+	UserAutomationUpsertRequest = 50;
+	UserAutomationDeleteRequest = 51;
+	UserAutomationListRequest = 52;
+	UserAutomationReadRequest = 53;
+
 	UserRequested = 100;
 	UserSynced = 101;
-
-
 }
 
 message SubizIDRequest {
@@ -415,4 +421,9 @@ message Automation {
 		user_notification = 2;
 	}
 	optional string action_data = 14;
+}
+
+message Automations {
+	optional common.Context ctx = 1;
+	repeated Automation automations = 2;
 }
