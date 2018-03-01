@@ -49,8 +49,8 @@ message By {
 }
 
 message RawEvent {
-	reserved 10, 12, 13, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 42;
-	reserved "channel_id", "by_user_id", "state", "message_to", "page_url", "page_title", "browser_language", "device_type", "user_id", "joiner_id", "joiner_type", "leaver_id", "attachments", "text", "format", "deliverieds", "fields", "computed", "account", "agent", "message", "conversation", "postback", "content", "topic", "object";
+	reserved 10, 12, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 42;
+	reserved "channel_id", "by_user_id", "state", "message_to", "page_url", "page_title", "browser_language", "device_type", "user_id", "joiner_id", "joiner_type", "leaver_id", "attachments", "text", "format", "deliverieds", "fields", "computed", "account", "agent", "message", "postback", "content", "topic";
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
@@ -58,6 +58,8 @@ message RawEvent {
 	string type = 9; // eventtype
 	repeated string topics = 11;
 	By by = 50;
+	string object = 13;
+	string conversation_id = 15;
 	message Data {
 		account.Account account = 1;
 		account.Agent agent = 2;

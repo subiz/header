@@ -1416,6 +1416,12 @@
         "by": {
           "$ref": "#/definitions/eventBy"
         },
+        "object": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
         "data": {
           "$ref": "#/definitions/RawEventData"
         }
