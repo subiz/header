@@ -801,7 +801,7 @@
         "platform": {
           "type": "string"
         },
-        "referer": {
+        "referrer": {
           "type": "string"
         },
         "search_engine": {
@@ -819,8 +819,8 @@
           "type": "string"
         },
         "events_count": {
-          "type": "string",
-          "format": "int64"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
