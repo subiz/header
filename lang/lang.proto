@@ -121,6 +121,10 @@ enum T {
 	invalid_access_token = 256;
 	field_too_long = 257;
 	invalid_join = 258;
+
+	automation_not_found = 259;
+	invalid_automation_condition = 260;
+	automation_cache_miss = 261;
 }
 
 enum L {
