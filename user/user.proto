@@ -24,6 +24,7 @@ message AllType {
 	optional MyUser myuser = 21;
 	optional Automation automation = 23;
 	optional Automations automations = 25;
+	optional Session session = 26;
 }
 
 service MyServer {
@@ -426,4 +427,23 @@ message Automation {
 message Automations {
 	optional common.Context ctx = 1;
 	repeated Automation automations = 2;
+}
+
+message Session {
+	optional common.Context ctx = 1;
+	optional string account_id = 3;
+	optional string user_id = 4;
+	optional string id = 5;
+	optional string platform = 7;
+	enum Platform {
+		web = 0;
+		mobile = 2;
+		desktop = 4;
+	}
+	optional string referer = 8;
+	optional string search_engine = 9;
+	optional int64 started = 10;
+	optional int64 tracked = 11;
+	optional string status = 12;
+	optional int64 events_count = 13;
 }
