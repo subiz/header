@@ -199,10 +199,10 @@ enum Event {
 	UserListTopRequested = 47;
 
 
-	UserAutomationUpsertRequest = 50;
-	UserAutomationDeleteRequest = 51;
-	UserAutomationListRequest = 52;
-	UserAutomationReadRequest = 53;
+	UserAutomationUpsertRequested = 50;
+	UserAutomationDeleteRequested = 51;
+	UserAutomationListRequested = 52;
+	UserAutomationReadRequested = 53;
 
 	AutomationAgentNotificationFired = 54;
 	AutomationConversationMessageFired = 55;
