@@ -559,6 +559,9 @@
         },
         "referrer": {
           "type": "string"
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
