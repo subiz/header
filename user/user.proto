@@ -204,8 +204,13 @@ enum Event {
 	UserAutomationListRequested = 52;
 	UserAutomationReadRequested = 53;
 
+
 	AutomationAgentNotificationFired = 54;
 	AutomationConversationMessageFired = 55;
+
+	UserSessionUpdateRequested = 65;
+	UserSessionCreateRequested = 66;
+	UserSessionReadRequested = 67;
 
 	AutomationSynced = 102;
 	AutomationFired = 103;
