@@ -392,6 +392,9 @@
         },
         "referrer": {
           "type": "string"
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
@@ -821,6 +824,13 @@
         "events_count": {
           "type": "integer",
           "format": "int32"
+        },
+        "content_views_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "search_term": {
+          "type": "string"
         }
       }
     },

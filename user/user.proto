@@ -447,6 +447,7 @@ message Session {
 	}
 	optional string referrer = 8;
 	optional string search_engine = 9;
+
 	optional int64 started = 10;
 	optional int64 tracked = 11;
 	optional string status = 12;
@@ -455,6 +456,8 @@ message Session {
 		closed = 1;
 	}
 	optional int32 events_count = 13;
+	optional int32 content_views_count = 14;
+	optional string search_term = 15;
 }
 
 message AutomationEvent {
