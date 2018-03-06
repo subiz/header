@@ -125,6 +125,9 @@ enum T {
 	automation_not_found = 259;
 	invalid_automation_condition = 260;
 	automation_cache_miss = 261;
+
+	segment_loop_duplicated = 262;
+	segment_loop_stale = 263;
 }
 
 enum L {
