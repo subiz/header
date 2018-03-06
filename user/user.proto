@@ -244,13 +244,17 @@ message Segmentations {
 	repeated Segmentation segmentations = 3;
 }
 
+message SegmentState {
+	optional string id = 2;
+	optional int64 current_cursor = 5;
+}
+
 message SegmentLoopState {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional string segment_id = 3;
-	optional string loop_number = 4;
-	optional int64 current_cursor = 5;
-	optional int64 created = 6;
+	repeated SegmentState segments = 5;
+	optional int64 loop_created = 6;
+	optional int64 loop_number = 7;
 }
 
 message Segmentation {
@@ -270,12 +274,20 @@ message Segmentation {
 	enum State {
 		active = 0;
 		inactive = 1;
-
 	}
 
-	optional int64 scanned = 19;
-	optional int64 loop_number = 17;
 	optional int64 current_cursor = 18;
+}
+
+message SegmentTracking {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 last_kafka_offset = 3;
+	optional int32 last_kafka_partition = 4;
+	optional string last_kafka_topic = 5;
+	optional int64 loop_created = 6;
+	optional int64 loop_number = 7;
+	optional string published = 8;
 }
 
 message SegmentCondition {

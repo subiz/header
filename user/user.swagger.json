@@ -772,14 +772,6 @@
         "state": {
           "type": "string"
         },
-        "scanned": {
-          "type": "string",
-          "format": "int64"
-        },
-        "loop_number": {
-          "type": "string",
-          "format": "int64"
-        },
         "current_cursor": {
           "type": "string",
           "format": "int64"
