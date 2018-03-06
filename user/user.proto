@@ -75,15 +75,14 @@ message User {
 	optional string subiz_id = 25;
 	optional string timezone = 26;
 	optional string country_code = 27;
-	optional string country = 29;
 	optional string city = 32;
 	optional string language = 28;
 
 	repeated string aliases = 30;
-	optional int64 last_seen = 31;
+	optional int64 seen = 31;
 	repeated Field fields = 33;
 
-	optional int32 user_par = 34;
+	optional int32 par = 34;
 	optional int32 modified_hour = 35;
 	optional int64 modified = 36;
 }

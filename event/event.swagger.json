@@ -1797,9 +1797,6 @@
         "country_code": {
           "type": "string"
         },
-        "country": {
-          "type": "string"
-        },
         "city": {
           "type": "string"
         },
@@ -1812,7 +1809,7 @@
             "type": "string"
           }
         },
-        "last_seen": {
+        "seen": {
           "type": "string",
           "format": "int64"
         },
@@ -1822,7 +1819,7 @@
             "$ref": "#/definitions/userField"
           }
         },
-        "user_par": {
+        "par": {
           "type": "integer",
           "format": "int32"
         },
