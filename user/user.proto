@@ -198,7 +198,6 @@ enum Event {
 	UserPreviewingReadRequested = 46;
 	UserListTopRequested = 47;
 
-
 	UserAutomationUpsertRequested = 50;
 	UserAutomationDeleteRequested = 51;
 	UserAutomationListRequested = 52;
@@ -211,6 +210,8 @@ enum Event {
 	UserSessionUpdateRequested = 65;
 	UserSessionCreateRequested = 66;
 	UserSessionReadRequested = 67;
+
+	SegmentationLoop = 68;
 
 	AutomationSynced = 102;
 	AutomationFired = 103;
@@ -243,6 +244,15 @@ message Segmentations {
 	repeated Segmentation segmentations = 3;
 }
 
+message SegmentLoopState {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string segment_id = 3;
+	optional string loop_number = 4;
+	optional int64 current_cursor = 5;
+	optional int64 created = 6;
+}
+
 message Segmentation {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -263,9 +273,9 @@ message Segmentation {
 
 	}
 
-	optional int64 started = 13;
-	optional int64 scaned = 14;
-	optional bool is_active = 16;
+	optional int64 scanned = 19;
+	optional int64 loop_number = 17;
+	optional int64 current_cursor = 18;
 }
 
 message SegmentCondition {
@@ -472,4 +482,11 @@ message AutomationEvent {
 	optional Automation automation = 5;
 	optional Session session = 6;
 	optional User user = 7;
+}
+
+service Segmentator {
+  rpc CreateSegmenmt(Segmentation) returns (Segmentation) {}
+  rpc UpdateSegment (Segmentation) returns (Segmentation) {}
+	rpc ListSemgent (Segmentation) returns (Segmentation) {}
+	rpc DeleteSegment (Segmentation) returns (Segmentation) {}
 }

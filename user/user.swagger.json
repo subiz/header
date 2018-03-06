@@ -772,17 +772,17 @@
         "state": {
           "type": "string"
         },
-        "started": {
+        "scanned": {
           "type": "string",
           "format": "int64"
         },
-        "scaned": {
+        "loop_number": {
           "type": "string",
           "format": "int64"
         },
-        "is_active": {
-          "type": "boolean",
-          "format": "boolean"
+        "current_cursor": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
