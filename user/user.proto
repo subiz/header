@@ -82,6 +82,10 @@ message User {
 	repeated string aliases = 30;
 	optional int64 last_seen = 31;
 	repeated Field fields = 33;
+
+	optional int32 user_par = 34;
+	optional int32 modified_hour = 35;
+	optional int64 modified = 36;
 }
 
 message Users {
@@ -244,15 +248,10 @@ message Segmentations {
 	repeated Segmentation segmentations = 3;
 }
 
-message SegmentState {
-	optional string id = 2;
-	optional int64 current_cursor = 5;
-}
-
 message SegmentLoopState {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	repeated SegmentState segments = 5;
+	optional int32 user_par = 3;
 	optional int64 loop_created = 6;
 	optional int64 loop_number = 7;
 }
@@ -281,13 +280,11 @@ message Segmentation {
 
 message SegmentTracking {
 	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 last_kafka_offset = 3;
-	optional int32 last_kafka_partition = 4;
-	optional string last_kafka_topic = 5;
-	optional int64 loop_created = 6;
-	optional int64 loop_number = 7;
-	optional string published = 8;
+	optional int32 user_par = 2;
+	optional string account_id = 3;
+
+	optional int64 loop_created = 7;
+	optional int64 loop_number = 8;
 }
 
 message SegmentCondition {

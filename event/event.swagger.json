@@ -1821,6 +1821,18 @@
           "items": {
             "$ref": "#/definitions/userField"
           }
+        },
+        "user_par": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "modified_hour": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
         }
       }
     }
