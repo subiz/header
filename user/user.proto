@@ -274,7 +274,7 @@ message Segmentation {
 		inactive = 1;
 	}
 
-	optional int64 current_cursor = 18;
+	optional string current_cursor = 18;
 }
 
 message SegmentTracking {

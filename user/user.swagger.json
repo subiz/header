@@ -773,8 +773,7 @@
           "type": "string"
         },
         "current_cursor": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         }
       }
     },
