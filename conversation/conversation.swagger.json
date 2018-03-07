@@ -1543,13 +1543,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "modified_hour": {
-          "type": "integer",
-          "format": "int32"
-        },
         "modified": {
           "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "title": "optional int32 modified_hour = 35;"
+        },
+        "modified_week": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }
