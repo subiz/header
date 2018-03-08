@@ -220,4 +220,9 @@ message UserEvent {
 service EventMgr {
 	rpc SearchEvents (ListEventsRequest) returns (RawEvents) {}
 	rpc CreateEvent (UserEvent) returns (RawEvent) {}
+	rpc Subscribe (user.SubscribeRequest) returns (common.Empty) {}
+	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty) {}
+	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty) {}
+	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult) {}
+
 }

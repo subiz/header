@@ -691,6 +691,14 @@
         }
       }
     },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
     "contentContent": {
       "type": "object",
       "properties": {
@@ -1568,6 +1576,23 @@
           "type": "string"
         },
         "id": {
+          "type": "string"
+        }
+      }
+    },
+    "userListTopicsResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userTopic"
+          }
+        },
+        "anchor": {
           "type": "string"
         }
       }

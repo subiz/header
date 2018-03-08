@@ -508,13 +508,9 @@ service VisitorMgr {
 }
 
 service UserMgr {
-	rpc SearchTopics (ListTopicsRequest) returns (ListTopicsResult) {}
-	rpc SearchUser (UserSearchRequest) returns (UserSearchResult) {}
+	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult) {}
 	rpc SubizID (SubizIDRequest) returns (SubizIDResponse) {}
 	rpc AddToMy (AddToMyRequest) returns (common.Empty) {}
-	rpc Subscribe (SubscribeRequest) returns (common.Empty) {}
-	rpc Unsubscribe (SubscribeRequest) returns (common.Empty) {}
-	rpc ReadTopic (ReadTopicRequest) returns (common.Empty) {}
 	rpc CreateUser (User) returns (User) {}
 	rpc UpdateUser (User) returns (User) {}
 	rpc ReadUser (common.Id) returns (User) {}
@@ -531,4 +527,5 @@ service AutomationMgr {
 service SessionMgr {
 	rpc CreateSession(Session) returns (Session) {}
 	rpc ReadSession(Session) returns (Session) {}
+	rpc UpdateSession(Session) returns (Session) {}
 }
