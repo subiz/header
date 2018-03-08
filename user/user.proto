@@ -496,7 +496,7 @@ message AutomationEvent {
 service SegmentationMgr {
   rpc CreateSegment (Segmentation) returns (Segmentation) {}
   rpc UpdateSegment (Segmentation) returns (Segmentation) {}
-	rpc ListSegments (Segmentation) returns (Segmentations) {}
+	rpc ListSegments (common.Id) returns (Segmentations) {}
 	rpc DeleteSegment (common.Id) returns (common.Empty) {}
 	rpc ReadSegment (common.Id) returns (Segmentation) {}
 }
