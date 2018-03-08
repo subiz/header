@@ -216,3 +216,8 @@ message UserEvent {
 	string user_id = 4;
 	RawEvent event = 5;
 }
+
+service EventMgr {
+	rpc SearchEvents (ListEventsRequest) returns (RawEvents) {}
+	rpc CreateEvent (UserEvent) returns (RawEvent) {}
+}
