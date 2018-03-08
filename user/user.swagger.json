@@ -398,6 +398,14 @@
         }
       }
     },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
     "userAllType": {
       "type": "object",
       "properties": {
@@ -777,6 +785,20 @@
         }
       }
     },
+    "userSegmentations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "segmentations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userSegmentation"
+          }
+        }
+      }
+    },
     "userSession": {
       "type": "object",
       "properties": {
@@ -821,6 +843,23 @@
           "format": "int32"
         },
         "search_term": {
+          "type": "string"
+        }
+      }
+    },
+    "userSubizIDResponse": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "subiz_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
           "type": "string"
         }
       }

@@ -493,9 +493,42 @@ message AutomationEvent {
 	optional User user = 7;
 }
 
-service Segmentator {
-  rpc CreateSegmenmt(Segmentation) returns (Segmentation) {}
+service SegmentationMgr {
+  rpc CreateSegment (Segmentation) returns (Segmentation) {}
   rpc UpdateSegment (Segmentation) returns (Segmentation) {}
-	rpc ListSemgent (Segmentation) returns (Segmentation) {}
-	rpc DeleteSegment (Segmentation) returns (Segmentation) {}
+	rpc ListSemgents (Segmentation) returns (Segmentations) {}
+	rpc DeleteSegment (Segmentation) returns (common.Empty) {}
+	rpc ReadSegment (common.Id) returns (Segmentation) {}
+}
+
+service VisitorMgr {
+	rpc ReadPresence (common.Id) returns (Presence) {}
+	rpc ReadPreview (common.Id) returns (Previewing) {}
+	rpc ListTopVisitors (common.Id) returns (Visitors) {}
+}
+
+service UserMgr {
+	rpc SearchTopics (ListTopicsRequest) returns (ListTopicsResult) {}
+	rpc SearchUser (UserSearchRequest) returns (UserSearchResult) {}
+	rpc SubizID (SubizIDRequest) returns (SubizIDResponse) {}
+	rpc AddToMy (AddToMyRequest) returns (common.Empty) {}
+	rpc Subscribe (SubscribeRequest) returns (common.Empty) {}
+	rpc Unsubscribe (SubscribeRequest) returns (common.Empty) {}
+	rpc ReadTopic (ReadTopicRequest) returns (common.Empty) {}
+	rpc CreateUser (User) returns (User) {}
+	rpc UpdateUser (User) returns (User) {}
+	rpc ReadUser (common.Id) returns (User) {}
+}
+
+service AutomationMgr {
+	rpc ListAutomations(common.Id) returns (Automations) {}
+	rpc UpdateAutomation(Automation) returns (Automation) {}
+	rpc DeleteAutomation(common.Id) returns (common.Empty) {}
+	rpc ReadAutomation(common.Id) returns (Automation) {}
+	rpc CreateAutomation(Automation) returns (Automation) {}
+}
+
+service SessionMgr {
+	rpc CreateSession(Session) returns (Session) {}
+	rpc ReadSession(Session) returns (Session) {}
 }
