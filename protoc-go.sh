@@ -17,7 +17,7 @@ fi
 
 TOTAL=1
 echo -e "\033[0;34mcompiling proto files"
-
+./protoc --version
 for i in `ls -R`; do
 		if [[ $i == *":"* ]]; then
 				LASTDIRECTORY=${i::-1}
