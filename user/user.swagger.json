@@ -551,9 +551,6 @@
     "userCreateRequest": {
       "type": "object",
       "properties": {
-        "account_id": {
-          "type": "string"
-        },
         "challenge_id": {
           "type": "string"
         },
@@ -721,9 +718,6 @@
       "properties": {
         "ctx": {
           "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
         },
         "topic": {
           "type": "string"
@@ -1089,9 +1083,6 @@
     "userUserCreateResult": {
       "type": "object",
       "properties": {
-        "account_id": {
-          "type": "string"
-        },
         "id": {
           "type": "string"
         },
@@ -1105,9 +1096,6 @@
       "properties": {
         "ctx": {
           "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
         },
         "segmentation_id": {
           "type": "string"
@@ -1136,9 +1124,6 @@
       "properties": {
         "ctx": {
           "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
         },
         "total": {
           "type": "string",

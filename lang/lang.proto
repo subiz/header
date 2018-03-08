@@ -128,6 +128,7 @@ enum T {
 
 	segment_loop_duplicated = 262;
 	segment_loop_stale = 263;
+	segment_not_found = 264;
 }
 
 enum L {
