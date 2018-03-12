@@ -10,6 +10,7 @@ message FacebookPage {
 	optional int64 created = 3;
 	optional string picture_url = 4;
 	optional string name = 5;
+	optional string access_token = 6;
 }
 
 enum Event {
@@ -102,4 +103,52 @@ message FbDelivery {
 message FbSendResponse {
 	optional string recipient_id = 2;
   optional string message_id = 3;
+}
+
+message Conversation {
+	optional string account_id = 2;
+	optional string id = 3;
+	optional string page_id = 4;
+	optional int64 created  = 5;
+}
+
+message CurrentConvo {
+	optional string account_id = 2;
+	optional string convo_id = 3;
+	optional string page_id = 4;
+	optional string fbuser_id = 5;
+	optional string sbuser_id = 6;
+}
+
+message UserAvail {
+	optional string account_id = 3;
+	optional string fbuser_id = 5;
+	optional bool availability = 6;
+	optional int64 updated = 7;
+}
+
+message FbPagePicture {
+	optional FbPagePictureData data = 2;
+}
+
+message FbPagePictureData {
+	optional string url = 2;
+}
+message FbPageEntry {
+	optional string name = 2;
+	optional FbPagePicture picture = 3;
+	optional string id = 5;
+}
+
+message FbPageRet {
+	repeated FbPageEntry data = 2;
+}
+
+message FacebookUser {
+	optional string first_name = 2;
+	optional string last_name = 4;
+	optional string profile_pic = 5;
+	optional string local = 6;
+	optional int32 timezone = 7;
+	optional string gender = 8;
 }
