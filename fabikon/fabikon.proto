@@ -4,9 +4,9 @@ package fabikon;
 
 //import "bitbucket.org/subiz/header/common/common.proto";
 
-message Page {
+message FacebookPage {
 	optional string account_id = 1;
-	optional string page = 2;
+	optional string id = 2;
 	optional int64 created = 3;
 	optional string picture_url = 4;
 	optional string name = 5;
