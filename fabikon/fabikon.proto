@@ -42,7 +42,18 @@ enum JobType {
 	subiz_event = 3;
 }
 
-message FbEvent {
+message FbWebhookEvent {
+	optional string object = 2;
+	repeated FbEntry entry = 3;
+}
+
+message FbEntry {
+	optional string id = 3;
+	optional int64 time = 5;
+	repeated FbMessaging messaging = 6;
+}
+
+message FbMessaging {
 	optional FbSender sender = 2;
 	optional FbRecipient recipient = 3;
 	optional int64 timestamp = 4;
