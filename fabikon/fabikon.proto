@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package fabikon;
+
+//import "bitbucket.org/subiz/header/common/common.proto";
+
+message Page {
+	optional string account_id = 1;
+	optional string page = 2;
+	optional int64 created = 3;
+	optional string picture_url = 4;
+	optional string name = 5;
+}
+
+enum Event {
+	FabikonRequested = 1000;
+	FabikonSynced = 1001;
+
+	FabikonJob = 2;
+	FabikonCreateAccountRequested = 0;
+}
+
+message HttpChunk {
+	optional string id = 3;
+	optional int32 chunk_id = 4;
+	optional bytes data = 5;
+	optional int32 chunk_size = 6;
+}
+
+message Job {
+	optional string topic = 2;
+	optional int32 partition  = 3;
+	optional int64 offset = 4;
+
+	optional string content_type = 5;
+	optional string type = 6;
+	optional string request_id = 7;
+}
+
+enum JobType {
+	facebook_hook = 0;
+	subiz_event = 3;
+}
