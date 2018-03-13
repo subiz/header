@@ -163,3 +163,9 @@ message Fb2SbEvent {
 	optional string sbmid = 5;
 	optional string page_id = 6;
 }
+
+message LongLivedAccessToken {
+	optional string access_token = 2;
+	optional string token_type = 3;
+	optional int32 expires_in = 5;
+}
