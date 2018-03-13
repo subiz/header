@@ -65,8 +65,10 @@ message FbMessaging {
 message FbMessage {
 	optional string mid = 2;
 	optional string text = 3;
-	repeated FbAttachments attachments = 4;
+	repeated FbAttachment attachments = 4;
 	optional FbRead read = 5;
+	optional FbAttachment attachment = 6;
+	optional string message_type = 7;
 }
 
 message FbSender {
@@ -77,7 +79,7 @@ message FbRecipient {
 	optional string id = 2;
 }
 
-message FbAttachments {
+message FbAttachment {
 	optional string type = 2;
 	optional FbPayload payload = 3;
 	optional string title = 4;
@@ -110,6 +112,8 @@ message Conversation {
 	optional string id = 3;
 	optional string page_id = 4;
 	optional int64 created  = 5;
+	optional string fbusid = 6;
+	optional string sbusid = 7;
 }
 
 message CurrentConvo {
@@ -148,7 +152,15 @@ message FacebookUser {
 	optional string first_name = 2;
 	optional string last_name = 4;
 	optional string profile_pic = 5;
-	optional string local = 6;
+	optional string locale = 6;
 	optional int32 timezone = 7;
 	optional string gender = 8;
+}
+
+message Fb2SbEvent {
+	optional string fbmid = 2;
+	optional string account_id = 3;
+	optional string conversation_id = 4;
+	optional string sbmid = 5;
+	optional string page_id = 6;
 }
