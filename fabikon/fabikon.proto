@@ -33,7 +33,6 @@ message Job {
 	optional int32 partition  = 3;
 	optional int64 offset = 4;
 
-	optional string content_type = 5;
 	optional string type = 6;
 	optional string request_id = 7;
 }
