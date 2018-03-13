@@ -60,6 +60,7 @@ message FbMessaging {
 	optional int64 timestamp = 4;
 	optional FbMessage message = 5;
 	optional FbDelivery delivery = 6;
+	optional string message_type = 7;
 }
 
 message FbMessage {
@@ -68,7 +69,6 @@ message FbMessage {
 	repeated FbAttachment attachments = 4;
 	optional FbRead read = 5;
 	optional FbAttachment attachment = 6;
-	optional string message_type = 7;
 }
 
 message FbSender {
