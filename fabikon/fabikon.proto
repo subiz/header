@@ -141,6 +141,7 @@ message FbPageEntry {
 	optional string name = 2;
 	optional FbPagePicture picture = 3;
 	optional string id = 5;
+	optional string access_token = 6;
 }
 
 message FbPageRet {
