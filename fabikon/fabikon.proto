@@ -111,8 +111,8 @@ message Conversation {
 	optional string id = 3;
 	optional string page_id = 4;
 	optional int64 created  = 5;
-	optional string fbusid = 6;
-	optional string sbusid = 7;
+	optional string fbuserid = 6;
+	optional string sbuserid = 7;
 }
 
 message CurrentConvo {
