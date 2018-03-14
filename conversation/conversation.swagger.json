@@ -852,6 +852,9 @@
         "name": {
           "type": "string"
         },
+        "connector_type": {
+          "type": "string"
+        },
         "integrated": {
           "type": "string",
           "format": "int64"
@@ -859,9 +862,6 @@
         "updated": {
           "type": "string",
           "format": "int64"
-        },
-        "by": {
-          "type": "string"
         },
         "state": {
           "type": "string"
