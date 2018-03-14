@@ -226,3 +226,8 @@ service EventMgr {
 	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult) {}
 
 }
+
+service ConversationEventReader {
+	rpc ListEvents(conversation.ListEventsRequest) returns (RawEvents);
+	rpc SearchEvents(conversation.SearchMessageRequest) returns (RawEvents);
+}
