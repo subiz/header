@@ -169,7 +169,7 @@ message Search {
 	optional string after_id = 7;
 }
 
-message ListConversations {
+message ListConversationsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional string state = 4;
@@ -477,7 +477,7 @@ message AllType {
 	optional ListConversationsByUserRequest lcbur = 39;
 	optional ListEventsRequest ler = 41;
 	optional Search search = 42;
-	optional ListConversations listcon = 43;
+	optional ListConversationsRequest listcon = 43;
 	optional AvailabilityCheckRequest acreq = 44;
 	optional AvailabilityCheckResult acres = 45;
 }
@@ -531,4 +531,47 @@ message SearchMessageRequest {
 	optional string query = 5;
 	optional string anchor = 6;
 	optional int32 limit = 7;
+}
+
+service RuleMgr {
+	rpc UpdateRule(Rule) returns (Rule);
+	rpc CreateRule(Rule) returns (Rule);
+	rpc DeleteRule(common.Id) returns (common.Empty);
+	rpc ReadRule(common.Id) returns (Rule);
+}
+
+service ConversationMgr {
+	rpc SendMessage(Message) returns (Message);
+	rpc SeenMessage(Message) returns (Message);
+	rpc ReceiveMessage(Message) returns (Message);
+	rpc AckMessage(Message) returns (Message);
+	rpc StartConversation(StartRequest) returns (Conversation);
+	rpc EndConversation(common.Id) returns (Conversation);
+	rpc GetConversation(common.Id) returns (Conversation);
+	rpc ListConversations(ListConversationsRequest) returns (Conversations);
+	rpc AcceptConversation(common.Id) returns (Conversation);
+	rpc TagConversation(Tag) returns (common.Empty);
+	rpc UntagConversation(Tag) returns (common.Empty);
+}
+
+service CannedResponseMgr {
+	rpc CreateCannedResponse(CannedResponse) returns (CannedResponse);
+	rpc UpdateCannedResponse(CannedResponse) returns (CannedResponse);
+	rpc ListCannedResponses(Search) returns (CannedResponses);
+	rpc DeleteCannedResponse(common.Id) returns (common.Empty);
+}
+
+service TagMgr {
+	rpc CreateTag(Tag) returns (Tag);
+	rpc UpdateTag(Tag) returns (Tag);
+	rpc DeleteTag(common.Id) returns (common.Empty);
+	rpc ListTag(Search) returns (Tags);
+	rpc GetTag(common.Id) returns (Tag);
+}
+
+service IntegrationMgr {
+	rpc Deintegrate(common.Id) returns (common.Empty);
+	rpc ListIntegrations(common.Id) returns (Integrations);
+	rpc Integrate(Integration) returns (Integration);
+	rpc CheckAvailability(AvailabilityCheckRequest) returns (AvailabilityCheckResult);
 }

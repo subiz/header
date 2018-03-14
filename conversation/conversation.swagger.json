@@ -398,6 +398,14 @@
         }
       }
     },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
     "conversationAck": {
       "type": "object",
       "properties": {
@@ -495,7 +503,7 @@
           "$ref": "#/definitions/conversationSearch"
         },
         "listcon": {
-          "$ref": "#/definitions/conversationListConversations"
+          "$ref": "#/definitions/conversationListConversationsRequest"
         },
         "acreq": {
           "$ref": "#/definitions/conversationAvailabilityCheckRequest"
@@ -699,6 +707,20 @@
         }
       }
     },
+    "conversationCannedResponses": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationCannedResponse"
+          }
+        }
+      }
+    },
     "conversationComputed": {
       "type": "object",
       "properties": {
@@ -800,6 +822,29 @@
         }
       }
     },
+    "conversationConversations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationConversation"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "user_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "conversationField": {
       "type": "object",
       "properties": {
@@ -871,6 +916,23 @@
         }
       }
     },
+    "conversationIntegrations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "integrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationIntegration"
+          }
+        }
+      }
+    },
     "conversationLimit": {
       "type": "object",
       "properties": {
@@ -890,7 +952,28 @@
         }
       }
     },
-    "conversationListConversations": {
+    "conversationListConversationsByUserRequest": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "channel_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "start_id": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "conversationListConversationsRequest": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -917,27 +1000,6 @@
         },
         "integration_id": {
           "type": "string"
-        }
-      }
-    },
-    "conversationListConversationsByUserRequest": {
-      "type": "object",
-      "properties": {
-        "account_id": {
-          "type": "string"
-        },
-        "channel_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "start_id": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
