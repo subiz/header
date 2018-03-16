@@ -471,15 +471,6 @@ message Session {
 	optional string search_term = 15;
 }
 
-message AutomationEvent {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional Automation automation = 5;
-	optional Session session = 6;
-	optional User user = 7;
-}
-
 service SegmentationMgr {
   rpc CreateSegment (Segmentation) returns (Segmentation) {}
   rpc UpdateSegment (Segmentation) returns (Segmentation) {}
