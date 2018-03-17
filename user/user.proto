@@ -492,6 +492,7 @@ service UserMgr {
 	rpc CreateUser (User) returns (User) {}
 	rpc UpdateUser (User) returns (User) {}
 	rpc ReadUser (common.Id) returns (User) {}
+	rpc RemoveFromMy (common.Id) returns (common.Empty) {}
 }
 
 service AutomationMgr {
