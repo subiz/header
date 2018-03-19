@@ -555,7 +555,7 @@ message MessageAck {
 service ConversationMgr {
 	rpc SeenMessage(MessageId) returns (common.Empty);
 	rpc ReceiveMessage(MessageId) returns (common.Empty);
-	rpc AckMessage(MessageId) returns (common.Empty);
+	rpc AckMessage(MessageAck) returns (common.Empty);
 
 	rpc StartConversation(StartRequest) returns (Conversation);
 	rpc EndConversation(common.Id) returns (Conversation);
