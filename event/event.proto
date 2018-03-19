@@ -105,6 +105,9 @@ enum Type {
 	conversation_member_typing = 33;
 	conversation_postbacked = 34;
 
+	conversation_unassigned = 35;
+	conversation_assigned = 36;
+
 	presence_updated = 38; // presence
 	content_viewed = 39; // content
 	content_searched = 40; // content
