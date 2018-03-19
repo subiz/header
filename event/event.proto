@@ -228,6 +228,7 @@ service EventMgr {
 }
 
 service ConversationEventReader {
+	rpc SendMessage(RawEvent) returns (RawEvent);
 	rpc ListEvents(conversation.ListEventsRequest) returns (RawEvents);
 	rpc SearchEvents(conversation.SearchMessageRequest) returns (RawEvents);
 }

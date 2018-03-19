@@ -1078,6 +1078,9 @@
     "conversationMember": {
       "type": "object",
       "properties": {
+        "account_id": {
+          "type": "string"
+        },
         "type": {
           "type": "string"
         },
@@ -1096,6 +1099,9 @@
         "left": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "conversation_id": {
+          "type": "string"
         }
       }
     },
