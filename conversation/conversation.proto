@@ -562,8 +562,8 @@ service ConversationMgr {
 	rpc GetConversation(common.Id) returns (Conversation);
 	rpc ListConversations(ListConversationsRequest) returns (Conversations);
 	rpc AcceptConversation(common.Id) returns (Conversation);
-	rpc TagConversation(Tag) returns (common.Empty);
-	rpc UntagConversation(Tag) returns (common.Empty);
+	rpc TagConversation(TagRequest) returns (common.Empty);
+	rpc UntagConversation(TagRequest) returns (common.Empty);
 
 	rpc JoinConversation(Member) returns (common.Empty);
 	rpc LeftConversation(Member) returns (common.Empty);
@@ -590,4 +590,9 @@ service IntegrationMgr {
 	rpc ListIntegrations(common.Id) returns (Integrations);
 	rpc Integrate(Integration) returns (Integration);
 	rpc CheckAvailability(AvailabilityCheckRequest) returns (AvailabilityCheckResult);
+}
+
+message TagRequest {
+	optional string conversation_id = 3;
+	optional string id = 4;
 }
