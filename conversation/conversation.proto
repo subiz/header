@@ -574,7 +574,7 @@ service CannedResponseMgr {
 	rpc UpdateCannedResponse(CannedResponse) returns (CannedResponse);
 	rpc ListCannedResponses(common.Id) returns (CannedResponses);
 	rpc DeleteCannedResponse(common.Id) returns (common.Empty);
-	rpc GetCannedResponse(common.Id) returns (common.Empty);
+	rpc GetCannedResponse(common.Id) returns (CannedResponse);
 }
 
 service TagMgr {
