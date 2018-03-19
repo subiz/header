@@ -306,6 +306,9 @@
         },
         "timezone": {
           "type": "string"
+        },
+        "phone": {
+          "type": "string"
         }
       }
     },
@@ -474,10 +477,6 @@
     "authMethod": {
       "type": "object",
       "properties": {
-        "ping": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "update_trigger": {
           "type": "boolean",
           "format": "boolean",
@@ -495,6 +494,30 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "list_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ListAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateAllTrigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "read_segmentation": {
           "type": "boolean",
           "format": "boolean",
@@ -508,44 +531,98 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "create_segmentation": {
+        "ReadAgentNotification": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool AuthorizeAgentClient = 89;\nbool RevokeAgentClient = 90;"
+        },
+        "SeenAgentNotification": {
           "type": "boolean",
           "format": "boolean"
         },
-        "invite_agent": {
+        "Ping": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePasswords": {
           "type": "boolean",
           "format": "boolean",
           "title": "agent"
         },
-        "update_agent": {
+        "UpdatePassword": {
           "type": "boolean",
           "format": "boolean"
         },
-        "update_agents": {
+        "InviteAgents": {
           "type": "boolean",
           "format": "boolean"
         },
-        "read_agent": {
+        "UpdateAgent": {
           "type": "boolean",
           "format": "boolean"
         },
-        "read_agents": {
+        "UpdateAgents": {
           "type": "boolean",
           "format": "boolean"
         },
-        "reset_password": {
+        "ReadAgent": {
           "type": "boolean",
           "format": "boolean"
         },
-        "update_agents_permission": {
+        "ReadAgents": {
           "type": "boolean",
           "format": "boolean"
         },
-        "read_agent_permission": {
+        "ResetPassword": {
           "type": "boolean",
           "format": "boolean"
         },
-        "update_agents_state": {
+        "UpdateAgentsPermission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentsState": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ListAgentClient = 85;"
+        },
+        "ConfirmAccount": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ReadAccount = 120; // default right"
+        },
+        "CreateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent group"
+        },
+        "DeleteAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ReadAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdateAgentGroups": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "UpdatePlan": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "account"
+        },
+        "create_account": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool ViewAccountReport = 125;\nbool EnableChannel = 126;\nbool DisableChannel = 127;"
+        },
+        "delete_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_account": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -553,47 +630,36 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "create_agent_group": {
-          "type": "boolean",
-          "format": "boolean",
-          "title": "agent group"
-        },
-        "delete_agent_group": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "read_agent_group": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "update_agent_group": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "update_plan": {
-          "type": "boolean",
-          "format": "boolean",
-          "title": "account"
-        },
-        "update_account_infomation": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "read_client": {
+        "ReadClient": {
           "type": "boolean",
           "format": "boolean",
           "title": "clients"
         },
-        "update_client": {
+        "ListClient": {
           "type": "boolean",
           "format": "boolean"
         },
-        "delete_client": {
+        "UpdateClientInfo": {
           "type": "boolean",
-          "format": "boolean",
-          "title": "bool RegenerateClientSecret = 155;\nbool VerifyClient = 156;"
+          "format": "boolean"
         },
-        "create_client": {
+        "PublishClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "RegenerateClientSecret": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "VerifyClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "DeleteClient": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "CreateClient": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -602,7 +668,7 @@
           "format": "boolean",
           "title": "rule"
         },
-        "create_rule": {
+        "update_rule": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -610,32 +676,20 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "update_rule": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "start_conversation": {
+        "StartConversation": {
           "type": "boolean",
           "format": "boolean",
           "title": "converstation"
         },
-        "read_conversation": {
+        "ReadConversation": {
           "type": "boolean",
           "format": "boolean"
         },
-        "export_conversations": {
+        "WriteConversation": {
           "type": "boolean",
           "format": "boolean"
         },
-        "read_teammates_conversations": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "send_message": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "integrate_connector": {
+        "IntegrateConnector": {
           "type": "boolean",
           "format": "boolean",
           "title": "connector integration"
@@ -653,18 +707,6 @@
           "format": "boolean"
         },
         "read_user_widget_setting": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "read_tag": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "update_tag": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "delete_tag": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -696,39 +738,15 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "read_whitelist_ip": {
+        "list_whitelist_ip": {
           "type": "boolean",
           "format": "boolean"
         },
-        "read_whitelist_user": {
+        "list_whitelist_user": {
           "type": "boolean",
           "format": "boolean"
         },
-        "read_whitelist_domain": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "purchase_service": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "update_payment_method": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "add_credit": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "update_billing_cycle": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "read_invoices": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "read_subscriptions": {
+        "list_whitelist_domain": {
           "type": "boolean",
           "format": "boolean"
         }
@@ -779,9 +797,6 @@
         },
         "by_device": {
           "$ref": "#/definitions/commonDevice"
-        },
-        "topic": {
-          "type": "string"
         }
       }
     },
@@ -801,12 +816,6 @@
           "type": "string"
         },
         "language": {
-          "type": "string"
-        },
-        "referrer": {
-          "type": "string"
-        },
-        "type": {
           "type": "string"
         }
       }

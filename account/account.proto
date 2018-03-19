@@ -157,6 +157,7 @@ message CreateAccountRequest {
 	optional string account_url = 7;
 	optional string avatar_url = 8;
 	optional string timezone = 9;
+  optional string phone = 10;
 }
 
 message LoginRequest {
