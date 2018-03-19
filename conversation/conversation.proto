@@ -86,6 +86,7 @@ message Member {
 	optional string name = 10;
 	optional string avatar_url = 6;
 	optional bool left = 11;
+	optional string conversation_id = 13;
 }
 
 message Conversation {
@@ -537,13 +538,25 @@ service RuleMgr {
 	rpc CreateRule(Rule) returns (Rule);
 	rpc DeleteRule(common.Id) returns (common.Empty);
 	rpc ReadRule(common.Id) returns (Rule);
+	rpc ListRules(common.Id) returns (Route);
+}
+
+message MessageId {
+	optional string conversation_id = 3;
+	optional string message_id = 4;
+}
+
+message MessageAck {
+	optional string conversation_id = 3;
+	optional string message_id = 4;
+	optional string error = 5;
 }
 
 service ConversationMgr {
-	rpc SendMessage(Message) returns (Message);
-	rpc SeenMessage(Message) returns (Message);
-	rpc ReceiveMessage(Message) returns (Message);
-	rpc AckMessage(Message) returns (Message);
+	rpc SeenMessage(MessageId) returns (common.Empty);
+	rpc ReceiveMessage(MessageId) returns (common.Empty);
+	rpc AckMessage(MessageId) returns (common.Empty);
+
 	rpc StartConversation(StartRequest) returns (Conversation);
 	rpc EndConversation(common.Id) returns (Conversation);
 	rpc GetConversation(common.Id) returns (Conversation);
@@ -551,20 +564,24 @@ service ConversationMgr {
 	rpc AcceptConversation(common.Id) returns (Conversation);
 	rpc TagConversation(Tag) returns (common.Empty);
 	rpc UntagConversation(Tag) returns (common.Empty);
+
+	rpc JoinConversation(Member) returns (common.Empty);
+	rpc LeftConversation(Member) returns (common.Empty);
 }
 
 service CannedResponseMgr {
 	rpc CreateCannedResponse(CannedResponse) returns (CannedResponse);
 	rpc UpdateCannedResponse(CannedResponse) returns (CannedResponse);
-	rpc ListCannedResponses(Search) returns (CannedResponses);
+	rpc ListCannedResponses(common.Id) returns (CannedResponses);
 	rpc DeleteCannedResponse(common.Id) returns (common.Empty);
+	rpc GetCannedResponse(common.Id) returns (common.Empty);
 }
 
 service TagMgr {
 	rpc CreateTag(Tag) returns (Tag);
 	rpc UpdateTag(Tag) returns (Tag);
 	rpc DeleteTag(common.Id) returns (common.Empty);
-	rpc ListTag(Search) returns (Tags);
+	rpc ListTags(common.Id) returns (Tags);
 	rpc GetTag(common.Id) returns (Tag);
 }
 
