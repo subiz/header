@@ -291,11 +291,10 @@ message Message {
 	optional string text = 2;
 	optional string format = 3;
 	repeated Attachment attachments = 4;
-
 	repeated Reaction reactions = 7;
-
 	repeated Field fields =	10;
 	optional Computed computed = 12;
+	optional string integration_id = 15;
 }
 
 message Computed {

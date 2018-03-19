@@ -1140,6 +1140,9 @@
         },
         "computed": {
           "$ref": "#/definitions/conversationComputed"
+        },
+        "integration_id": {
+          "type": "string"
         }
       }
     },
