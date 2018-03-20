@@ -63,6 +63,7 @@ message Error {
 	string request_id = 3;
 	string description = 4;
 	string hash = 5;
+	string debug = 6;
 }
 
 message Device {
