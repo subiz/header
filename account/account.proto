@@ -253,7 +253,6 @@ enum Event {
 	AgentInvited = 13; // invitation
 	AgentDeleted = 15; //id
 	AccountUpserted = 14; // account
-
 	AccountPlanUpdated = 16; // account
 	AccountStateUpdated = 17; // AccountStateUpdateRequest
 	AccountLimitUpdated = 18; // oelimitupdated
@@ -265,7 +264,15 @@ enum Event {
 	AccountResetPasswordEmail = 33;
 	AccountPasswordChangedEmailRequested = 34;
 	AccountInviteEmail = 22;
+
 	AccountDeleted = 24;
+	AccountCreated = 45; // account
+	AccountActivated = 46; // account
+	AccountInfoUpdated = 47;
+
+	AgentActivated = 50;
+	AgentDeativated = 51;
+	AgentInfoUpdated = 59;
 }
 
 message ConfirmEmail {
