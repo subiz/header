@@ -819,6 +819,10 @@
         },
         "last_message": {
           "$ref": "#/definitions/conversationMessage"
+        },
+        "response_sec": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
