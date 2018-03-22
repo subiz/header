@@ -645,6 +645,15 @@
         }
       }
     },
+    "conversationAvgResponseTimeResponse": {
+      "type": "object",
+      "properties": {
+        "avg_response_sec": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "conversationButton": {
       "type": "object",
       "properties": {
@@ -845,6 +854,18 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        }
+      }
+    },
+    "conversationCountByAgentsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
           }
         }
       }

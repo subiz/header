@@ -597,3 +597,43 @@ message TagRequest {
 	optional string conversation_id = 3;
 	optional string id = 4;
 }
+
+message CountByAgentsRequest {
+	optional string account_id = 2;
+	optional string integration_id = 3;
+	repeated string agent_ids = 4;
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional int32 n = 7;
+}
+
+message CountByTagsRequest {
+	optional string account_id = 2;
+	optional string integration_id = 3;
+	repeated string tag_ids = 4;
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional int32 n = 7;
+}
+
+message CountByAgentsResponse {
+	repeated int64 data = 1;
+}
+
+message AvgResponseTimeRequest {
+	optional string account_id = 2;
+	optional string integration_id = 3;
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional int32 n = 7;
+}
+
+message AvgResponseTimeResponse {
+	optional double avg_response_sec = 2;
+}
+
+service ConversationReport {
+	rpc CountConversationsByAgents(CountByAgentsRequest) returns (CountByAgentsResponse);
+	rpc CountConversationByTags(CountByTagsRequest) returns (CountByAgentsResponse);
+	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
+}
