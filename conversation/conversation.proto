@@ -93,9 +93,7 @@ message Conversation {
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
-	// Creation time
 	optional int64 created = 4;
-
 	optional int64 closed = 6;
 	repeated Member members = 7;
 	repeated Tag tags = 10;
@@ -599,7 +597,6 @@ message TagRequest {
 }
 
 message CountByAgentsRequest {
-	optional string account_id = 2;
 	optional string integration_id = 3;
 	repeated string agent_ids = 4;
 	optional int32 from = 5;
@@ -608,7 +605,6 @@ message CountByAgentsRequest {
 }
 
 message CountByTagsRequest {
-	optional string account_id = 2;
 	optional string integration_id = 3;
 	repeated string tag_ids = 4;
 	optional int32 from = 5;
@@ -621,7 +617,6 @@ message CountByAgentsResponse {
 }
 
 message AvgResponseTimeRequest {
-	optional string account_id = 2;
 	optional string integration_id = 3;
 	optional int32 from = 5;
 	optional int32 to = 6;
@@ -632,8 +627,8 @@ message AvgResponseTimeResponse {
 	optional double avg_response_sec = 2;
 }
 
-service ConversationReport {
+service ConversationReporter {
 	rpc CountConversationsByAgents(CountByAgentsRequest) returns (CountByAgentsResponse);
-	rpc CountConversationByTags(CountByTagsRequest) returns (CountByAgentsResponse);
+	rpc CountConversationsByTags(CountByTagsRequest) returns (CountByAgentsResponse);
 	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
 }

@@ -784,8 +784,7 @@
         },
         "created": {
           "type": "string",
-          "format": "int64",
-          "title": "Creation time"
+          "format": "int64"
         },
         "closed": {
           "type": "string",
