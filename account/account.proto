@@ -129,7 +129,6 @@ message Account {
 		deleted = 3;
 	}
 	optional string city = 14;
-	optional string region = 15;
 	optional int32 zip_code = 16;
 	optional string tax_id = 17;
 	optional string facebook = 18;
