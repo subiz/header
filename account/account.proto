@@ -158,6 +158,7 @@ message CreateAccountRequest {
 	optional string avatar_url = 8;
 	optional string timezone = 9;
   optional string phone = 10;
+	optional string country_code = 11;
 }
 
 message LoginRequest {
@@ -341,4 +342,30 @@ message AccountConfirmSuccessEmail {
 
 service YourService {
   rpc Do(AllType) returns (AllType) {}
+}
+
+service AccountMgr {
+	rpc CreateGroup(AgentGroup) returns (AgentGroup);
+	rpc UpdateGroup(AgentGroup) returns (AgentGroup);
+	rpc GetGroup(common.Id) returns (AgentGroup);
+	rpc GetAgentPermission(common.Id) returns (auth.Method);
+	rpc UpdateAgentPermission(AgentPerm) returns (auth.Method);
+	rpc RequestResestPassword(ResetPasswordRequest) returns (common.Empty);
+	rpc UpdatePassword(NewPassword) returns (Agent);
+	rpc UpdateAgent(Agent) returns (Agent);
+	rpc AcceptInvitation(NewPassword) returns (Agent);
+	rpc GetInvitation(Token) returns (Agent);
+	rpc CancelInvitation(common.Id) returns (common.Empty);
+	rpc InviteAgent(Agent) returns (Agent);
+	rpc GetAgent(common.Id) returns (Agent);
+	rpc ConfirmAccount(Token) returns (Account);
+	rpc GetAccount(common.Id) returns (Account);
+	rpc UpdateAccount(Account) returns (Account);
+	rpc CreateAccount(CreateAccountRequest) returns (Account);
+	rpc ListAgents(common.Id) returns (Agents);
+	rpc CheckLogin(LoginRequest) returns (common.Id);
+	rpc DeleteGroup(common.Id) returns (AgentGroup);
+	rpc ListGroups(common.Id) returns (AgentGroups);
+	rpc AddAgentToGroup(GroupMember) returns (common.Empty);
+	rpc RemoveAgentFromGroup(GroupMember) returns (common.Empty);
 }

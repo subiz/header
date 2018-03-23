@@ -222,6 +222,20 @@
         }
       }
     },
+    "accountAgentGroups": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "Groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgentGroup"
+          }
+        }
+      }
+    },
     "accountAgentPerm": {
       "type": "object",
       "properties": {
@@ -236,6 +250,20 @@
         },
         "method": {
           "$ref": "#/definitions/authMethod"
+        }
+      }
+    },
+    "accountAgents": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "Agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          }
         }
       }
     },
@@ -810,6 +838,28 @@
           "type": "string"
         },
         "type": {
+          "type": "string"
+        }
+      }
+    },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
+    "commonId": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
           "type": "string"
         }
       }
