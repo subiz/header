@@ -115,9 +115,6 @@
         "city": {
           "type": "string"
         },
-        "region": {
-          "type": "string"
-        },
         "zip_code": {
           "type": "integer",
           "format": "int32"
@@ -233,6 +230,9 @@
         },
         "account": {
           "$ref": "#/definitions/accountAccount"
+        },
+        "country_code": {
+          "type": "string"
         }
       }
     },

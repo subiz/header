@@ -1421,6 +1421,15 @@
         }
       }
     },
+    "conversationTotalConversationResponse": {
+      "type": "object",
+      "properties": {
+        "total_conversation": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "userDevice": {
       "type": "object",
       "properties": {

@@ -620,15 +620,19 @@ message AvgResponseTimeRequest {
 	optional string integration_id = 3;
 	optional int32 from = 5;
 	optional int32 to = 6;
-	optional int32 n = 7;
 }
 
 message AvgResponseTimeResponse {
 	optional double avg_response_sec = 2;
 }
 
+message TotalConversationResponse {
+	optional int64 total_conversation = 2;
+}
+
 service ConversationReporter {
 	rpc CountConversationsByAgents(CountByAgentsRequest) returns (CountByAgentsResponse);
 	rpc CountConversationsByTags(CountByTagsRequest) returns (CountByAgentsResponse);
 	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
+	rpc GetTotalConversation(AvgResponseTimeRequest) returns (TotalConversationResponse);
 }
