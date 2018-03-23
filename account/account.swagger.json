@@ -180,6 +180,9 @@
         },
         "account": {
           "$ref": "#/definitions/accountAccount"
+        },
+        "country_code": {
+          "type": "string"
         }
       }
     },
@@ -336,6 +339,9 @@
           "type": "string"
         },
         "phone": {
+          "type": "string"
+        },
+        "country_code": {
           "type": "string"
         }
       }

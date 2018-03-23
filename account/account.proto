@@ -65,6 +65,7 @@ message Agent {
 
 	optional auth.Method method = 27;
 	optional Account account = 28;
+	optional string country_code = 29;
 }
 
 message Invitation {
