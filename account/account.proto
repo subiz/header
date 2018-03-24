@@ -355,7 +355,6 @@ service AccountMgr {
 	rpc UpdateAgent(Agent) returns (Agent);
 	rpc AcceptInvitation(NewPassword) returns (Agent);
 	rpc GetInvitation(Token) returns (Agent);
-	rpc CancelInvitation(common.Id) returns (common.Empty);
 	rpc InviteAgent(Agent) returns (Agent);
 	rpc GetAgent(common.Id) returns (Agent);
 	rpc ConfirmAccount(Token) returns (Account);
