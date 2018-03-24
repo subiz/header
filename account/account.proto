@@ -350,7 +350,7 @@ service AccountMgr {
 	rpc GetGroup(common.Id) returns (AgentGroup);
 	rpc GetAgentPermission(common.Id) returns (auth.Method);
 	rpc UpdateAgentPermission(AgentPerm) returns (auth.Method);
-	rpc RequestResestPassword(ResetPasswordRequest) returns (common.Empty);
+	rpc RequestResetPassword(ResetPasswordRequest) returns (common.Empty);
 	rpc UpdatePassword(NewPassword) returns (Agent);
 	rpc UpdateAgent(Agent) returns (Agent);
 	rpc AcceptInvitation(NewPassword) returns (Agent);
