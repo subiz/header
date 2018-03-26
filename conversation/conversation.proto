@@ -566,6 +566,7 @@ service ConversationMgr {
 
 	rpc JoinConversation(Member) returns (common.Empty);
 	rpc LeftConversation(Member) returns (common.Empty);
+	rpc Typing(common.Id) returns (common.Empty);
 }
 
 service CannedResponseMgr {
