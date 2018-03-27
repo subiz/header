@@ -84,6 +84,7 @@ message User {
 	// optional int32 modified_hour = 35;
 	optional int64 modified = 36;
 	optional int32 modified_week = 37;
+	optional int64 activated = 38;
 }
 
 message Users {
