@@ -136,6 +136,8 @@ enum Type {
 	agent_deleted = 69;
 	agent_info_updated = 70;
 	agent_permission_updated = 71;
+
+	automation_invite_message = 80;
 }
 
 enum SubscriberType {
@@ -224,7 +226,6 @@ service EventMgr {
 	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty) {}
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty) {}
 	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult) {}
-
 }
 
 service ConversationEventReader {
