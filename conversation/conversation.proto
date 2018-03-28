@@ -625,8 +625,22 @@ message CountByTagsRequest {
 	}
 }
 
+message CountByAgent {
+	optional string agent_id = 2;
+	repeated int64 data = 3;
+}
+
+message CountByTag {
+	optional string tag_id = 2;
+	repeated int64 data = 3;
+}
+
+message CountByTagsResponse {
+	repeated CountByTag data = 2;
+}
+
 message CountByAgentsResponse {
-	repeated int64 data = 1;
+	repeated CountByAgent data = 2;
 }
 
 message AvgResponseTimeRequest {
@@ -645,7 +659,7 @@ message TotalConversationResponse {
 
 service ConversationReporter {
 	rpc CountConversationsByAgents(CountByAgentsRequest) returns (CountByAgentsResponse);
-	rpc CountConversationsByTags(CountByTagsRequest) returns (CountByAgentsResponse);
+	rpc CountConversationsByTags(CountByTagsRequest) returns (CountByTagsResponse);
 	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
 	rpc GetTotalConversation(AvgResponseTimeRequest) returns (TotalConversationResponse);
 }
