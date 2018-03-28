@@ -787,6 +787,10 @@
         "modified_week": {
           "type": "integer",
           "format": "int32"
+        },
+        "activated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
