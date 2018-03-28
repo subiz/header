@@ -223,7 +223,6 @@ enum Event {
 	ConversationReadRuleRequested = 23; // id
 	ConversationListRuleRequested = 24; // id accountid, return top N rule
 
-
 	//ConversationRequested = 50; // user request for new conversation
 	ConversationUserRequestReply = 51; // user
 	ConversationLimitUpdated = 52;
@@ -235,7 +234,6 @@ enum Event {
 	ChannelDeintegrateRequested = 65;     // id -> empty
 	ChannelIntegrateRequested = 66;  // integration -> integration
 	ChannelIntegrationListRequested = 67; // id -> integrations
-
 
 	ConnectorUpsertRequested = 68;
 	ConnectorListRequested = 69;
@@ -252,6 +250,10 @@ enum Event {
 	TagDeleteRequested = 88; // id
 	TagListRequested = 89; // search
 
+	TagCreated = 95;
+	ConversationUpserted = 97; // conversation
+	ConversationMessageSent = 99; // message
+
 	ConversationMessageAckRequested = 90;
 	ConversationMessageReceiveRequested = 91;
 	ConversationMessageSeeRequested = 92;
@@ -259,6 +261,7 @@ enum Event {
 
 	ConversationMessageSearchRequest = 94;
 	ConversationRequested = 100;
+	ConversationSynced = 101;
 }
 
 message RequestState {
@@ -593,6 +596,7 @@ service IntegrationMgr {
 }
 
 message TagRequest {
+	optional common.Context ctx = 1;
 	optional string conversation_id = 3;
 	optional string id = 4;
 }
