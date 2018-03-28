@@ -606,7 +606,11 @@ message CountByAgentsRequest {
 	repeated string agent_ids = 4;
 	optional int32 from = 5;
 	optional int32 to = 6;
-	optional int32 n = 7;
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
 }
 
 message CountByTagsRequest {
@@ -614,7 +618,11 @@ message CountByTagsRequest {
 	repeated string tag_ids = 4;
 	optional int32 from = 5;
 	optional int32 to = 6;
-	optional int32 n = 7;
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
 }
 
 message CountByAgentsResponse {
