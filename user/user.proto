@@ -212,7 +212,9 @@ enum Event {
 	AutomationSynced = 102;
 	AutomationFired = 103;
 	UserRequested = 100;
+
 	UserSynced = 101;
+	UserUpserted = 105;
 }
 
 message SubizIDRequest {
