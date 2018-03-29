@@ -33,6 +33,8 @@ enum Event {
 	SubscribeReply = 6;
 	Unsubscribe = 5; // subscription
 	UnsubscribeReply = 7;
+	EventSync = 8;
+	EventCreated = 9;
 }
 
 message RawEvents {
