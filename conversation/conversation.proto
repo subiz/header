@@ -103,6 +103,7 @@ message Conversation {
 		unassigned = 2;
 		active = 6;
 		ended = 8;
+		pending = 9;
 	}
 	optional string state = 11; // converation state
 	optional StartRequest request = 14;
