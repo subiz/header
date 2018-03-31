@@ -139,7 +139,7 @@ enum Type {
 	agent_info_updated = 70;
 	agent_permission_updated = 71;
 
-	automation_invite_message = 80;
+	conversation_pending = 81;
 }
 
 enum SubscriberType {
