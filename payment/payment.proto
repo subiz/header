@@ -16,7 +16,6 @@ message StripeInfo {
 }
 
 message PaymentMethod {
-
 	enum Name {
 		cash = 0;
 		stripe = 1;
@@ -48,7 +47,7 @@ message Plan {
 	optional string name = 2;
 	optional Limit limit = 3;
 	optional float price = 4;
-	optional Currency currency = 5;
+	optional string currency = 5;
 	optional int64 created = 8;
 	optional int32 trial_period_days = 9; // default 30
 	optional int32 period = 10; // default 1
@@ -72,7 +71,7 @@ message Plan {
 message Subscription {
 	optional string id = 2;
 	optional string account_id = 3;
-	optional string discount_id = 4;
+	optional string promotion_code = 4;
 
 	optional int64 period_start = 5;
 	optional int64 period_end = 6;
@@ -95,6 +94,7 @@ message Subscription {
 	optional float plan_price = 20;
 	repeated Addon addons = 21;
 	optional Limit limit = 22;
+	optional int32 year = 23;
 }
 
 message Bill {
@@ -105,15 +105,16 @@ message Bill {
 	optional int64 created = 7;
 	optional Contact customer_info = 8;
 	optional string payment_method = 10;
+	optional int32 year = 11;
 }
 
 message Invoice {
 	optional string account_id = 2;
 	optional string id = 3;
 	optional float amount_due = 4;
-	optional string discount_id = 5;
+	optional string promotion_code = 5;
 	optional string description = 6;
-	optional Currency currency = 7;
+	optional string currency = 7;
 	optional BillingInfo billing_info = 8;
 	optional int64 due_date = 9;
 
@@ -132,6 +133,7 @@ message Invoice {
 	optional float tax = 16;
 	optional float total = 17;
 	optional int64 updated = 18;
+	optional int32 year = 19;
 }
 
 message InvoiceItem {
@@ -187,8 +189,7 @@ message Customer {
 	optional BillingInfo billing_info = 6;
 }
 
-message Discount {
-	optional string id = 2;
+message PromotionCode {
 	optional string description = 3;
 
 	enum Type {
@@ -203,7 +204,6 @@ message Discount {
 	optional string created_by = 9;
 	optional int64 created = 10;
 	optional string code = 11;
-
 	optional Constraint constraint = 12;
 	optional string name = 13;
 }
@@ -226,8 +226,8 @@ message Credit {
 }
 
 message ExchangeRate {
-	optional Currency from_currency = 2;
-	optional Currency to_currency = 3;
+	optional string from_currency = 2;
+	optional string to_currency = 3;
 	optional float exchange_rate = 4;
 	optional int64 exchange_date = 5;
 }
@@ -271,6 +271,8 @@ message Log {
 	optional string action = 3;
 	optional int64 created = 4;
 	optional string description = 5;
+	optional string account_id = 6;
+	optional int32 month = 7;
 }
 
 message Addon {
