@@ -249,7 +249,7 @@ message InvoiceNote {
 
 message Log {
 	optional string user = 2;
-
+	optional string id = 8;
 	enum Action {
 		create_invoice = 0;
 		change_invoice_status = 1;
