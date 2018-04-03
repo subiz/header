@@ -442,6 +442,11 @@ message Automation {
 		automation_invite_message = 4;
 	}
 	optional string action_data = 14;
+	enum Scope {
+		conversation = 2;
+		user = 3;
+	}
+	optional string scope = 15;
 }
 
 message Automations {
