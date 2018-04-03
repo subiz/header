@@ -512,3 +512,11 @@ service SessionMgr {
 	rpc ReadSession(Session) returns (Session) {}
 	rpc UpdateSession(Session) returns (Session) {}
 }
+
+message AutomationCheck {
+	optional string account_id = 2;
+	optional string automation_id = 3;
+	optional string user_id = 4;
+	optional string event_id = 5;
+	optional string scope = 6;
+}
