@@ -4,11 +4,9 @@ syntax = "proto3";
 package scheduler;
 
 message Task {
-	// Id of schedule item (should be 256 bit for very low collition rate)
-
 	string id = 2;
-	//string ScheduleTime = 2;
-	// callback_time is *nano second*, golang: time.Now().Unix(), node: new Dat() * 1000000
+	// callback_time is *nano second*, golang: time.Now().Unix(),
+	// node: new Date() * 1000000
 	int64 callback_time = 3;
 	string topic = 4;
 
@@ -16,7 +14,12 @@ message Task {
 	bytes data = 5;
 
 	string key = 6;
+
+	int64 called = 8; // internal only
+	int64 sec = 9; // internal only
+	string par = 10; // internal only
 }
+
 
 message Id {
 	string id = 1;
