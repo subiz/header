@@ -14,7 +14,7 @@ message Email {
 	repeated Attachment attachments = 8; // s3 links
 	repeated string to = 9;
 	repeated string cc = 10;
-
+	repeated string bcc = 11;
 }
 
 message Attachment {
