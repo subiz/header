@@ -66,11 +66,11 @@ message Plan {
 		standard = 1;
 		advanced = 2;
 	}
-	optional string type = 12;
+	optional int32 level = 14;
+
 }
 
 message Subscription {
-	optional string id = 2;
 	optional string account_id = 3;
 	optional string promotion_code = 4;
 

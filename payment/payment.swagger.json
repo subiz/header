@@ -15,5 +15,747 @@
     "application/json"
   ],
   "paths": {},
-  "definitions": {}
+  "definitions": {
+    "authCredential": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/authType"
+        },
+        "method": {
+          "$ref": "#/definitions/authMethod"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_type": {
+          "$ref": "#/definitions/authType"
+        },
+        "client_account_id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avatar_url": {
+          "type": "string",
+          "title": "optional"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "authMethod": {
+      "type": "object",
+      "properties": {
+        "ping": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_trigger": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "trigger"
+        },
+        "delete_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_segmentation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "segmentation"
+        },
+        "update_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "invite_agent": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent"
+        },
+        "update_agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reset_password": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agents_permission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agent_permission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agents_state": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_agent_group": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent group"
+        },
+        "delete_agent_group": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agent_group": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agent_group": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_plan": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "account"
+        },
+        "update_account_infomation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_client": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "clients"
+        },
+        "update_client": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_client": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool RegenerateClientSecret = 155;\nbool VerifyClient = 156;"
+        },
+        "create_client": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_rule": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "rule"
+        },
+        "create_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "start_conversation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "converstation"
+        },
+        "read_conversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "export_conversations": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_teammates_conversations": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "send_message": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "integrate_connector": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "connector integration"
+        },
+        "read_user_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_facebook_id": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_phones": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "purchase_service": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_payment_method": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "add_credit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_billing_cycle": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_invoices": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_subscriptions": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "authType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "user",
+        "agent",
+        "subiz",
+        "app",
+        "rest",
+        "connector",
+        "bot",
+        "dashboard"
+      ],
+      "default": "unknown",
+      "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - bot: BOT reserve for future"
+    },
+    "commonContext": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "byte"
+        },
+        "node": {
+          "type": "string"
+        },
+        "reply_topic": {
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "#/definitions/authCredential",
+          "title": "optional int32 reply_partition = 5;"
+        },
+        "tracing": {
+          "type": "string",
+          "format": "byte"
+        },
+        "reply_key": {
+          "type": "string"
+        },
+        "by_device": {
+          "$ref": "#/definitions/commonDevice"
+        },
+        "topic": {
+          "type": "string"
+        }
+      }
+    },
+    "commonDevice": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "referrer": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
+    "paymentAddon": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "$ref": "#/definitions/paymentCurrency"
+        },
+        "charge_type": {
+          "type": "string"
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "period_unit": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentBill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "invoice_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "customer_info": {
+          "$ref": "#/definitions/paymentContact"
+        },
+        "payment_method": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentBillingInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "vat": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentConstraint": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "int64"
+        },
+        "end": {
+          "type": "string",
+          "format": "int64"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "max_redemptions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "referrer_id": {
+          "type": "string"
+        },
+        "min_amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "max_amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "addon": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentContact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "paymentCurrency": {
+      "type": "string",
+      "enum": [
+        "usd",
+        "vnd",
+        "brl"
+      ],
+      "default": "usd"
+    },
+    "paymentCustomer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentContact"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "billing_info": {
+          "$ref": "#/definitions/paymentBillingInfo"
+        }
+      }
+    },
+    "paymentLimit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "max_automations": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_concurrents": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_conversations": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_segments": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_agents": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentPaymentMethod": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "stripe_info": {
+          "$ref": "#/definitions/paymentStripeInfo"
+        },
+        "status": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "stripe_token": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "paymentPromotionCode": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number",
+          "format": "float"
+        },
+        "times_redeemed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "code": {
+          "type": "string"
+        },
+        "constraint": {
+          "$ref": "#/definitions/paymentConstraint"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentStripeInfo": {
+      "type": "object",
+      "properties": {
+        "card_last4": {
+          "type": "string"
+        },
+        "customer_id": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentSubscription": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "promotion_code": {
+          "type": "string"
+        },
+        "billing_cycle_start": {
+          "type": "string",
+          "format": "int64"
+        },
+        "billing_cycle_end": {
+          "type": "string",
+          "format": "int64"
+        },
+        "auto_renew": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "status": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "next_billing_cycle_month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "trial_start": {
+          "type": "string",
+          "format": "int64"
+        },
+        "trial_end": {
+          "type": "string",
+          "format": "int64"
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentAddon"
+          }
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "plan_price": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    }
+  }
 }
