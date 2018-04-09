@@ -32,6 +32,7 @@ message PaymentMethod {
 	}
 	optional string status = 5;
 	optional bool primary = 6;
+	optional bool stripe_token = 7;
 }
 
 message Limit {
@@ -73,28 +74,33 @@ message Subscription {
 	optional string account_id = 3;
 	optional string promotion_code = 4;
 
-	optional int64 period_start = 5;
-	optional int64 period_end = 6;
+	optional int64 billing_cycle_start = 5;
+	optional int64 billing_cycle_end = 6;
 	optional bool auto_renew = 9;
 
 	enum Status {
-		pending = 0;
+		pending = 0; // waiting for payment
 		active = 1;
-		inactive = 2;
+		inactive = 2; //
 		trialing = 3;
 	}
 	optional string status = 10;
 	optional int64 created = 11;
 
-	optional int32 billing_cycle = 15;
-	optional string plan = 16;
-	optional int32 plan_quantity = 17;
+	optional int32 billing_cycle_month = 15;
+	optional int32 next_billing_cycle_month = 16;
+
+	optional string plan = 17;
+
 	optional int64 trial_start = 18;
 	optional int64 trial_end = 19;
-	optional float plan_price = 20;
+
 	repeated Addon addons = 21;
 	optional Limit limit = 22;
+
 	optional int32 year = 23;
+	optional int32 agent_count = 24;
+	optional float plan_price = 25;
 }
 
 message Bill {
@@ -306,4 +312,22 @@ message Addon {
 enum Event {
 	LimitSynced = 0;
 	LimitUpdated = 1;
+}
+
+service SubizInternalPaymentMgr {
+	rpc CreateBill(Bill) returns (Bill);
+}
+
+service PaymentMgr {
+	rpc UpdateSubscription(Subscription) returns (Subscription);
+	rpc GetSubscription(common.Empty) returns (Subscription);
+	rpc GetCredit(common.Empty) returns (Subscription);
+	rpc GetPromotionCode(String) returns (PromotionCode);
+	rpc AddPaymentMethod(PaymentMethod) returns (PaymentMethod);
+	rpc DeletePaymentMethod(String) returns (common.Empty);
+	rpc CreateCustomer(Customer) returns (Customer);
+}
+
+message String {
+	optional string str = 2;
 }
