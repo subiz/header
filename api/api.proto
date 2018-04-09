@@ -96,4 +96,12 @@ enum Event {
 	ApiRequested = 0;
 	ConversationStart = 2;
 	ApiReply = 4;
+
+	ApiWhiteListSynced = 5;
+	DomainWhiteListCreated = 6;
+	DomainWhiteListDeleted = 7;
+	UserWhiteListCreated = 8;
+    UserWhiteListDeleted = 9;
+    IpWhiteListCreated = 10;
+    IpWhiteListDeleted = 11;
 }
