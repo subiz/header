@@ -1,7 +1,7 @@
 # setup for the first time
 #go get github.com/favadi/protoc-go-inject-tag
 #go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-tar xzvf protobuf/bin/protoc.tar.gz
+tar xvf protobuf/bin/protoc.tar.gz
 
 if [ ! -f $GOPATH/bin/protoc-gen-go ]; then
 		echo -e "\033[0;34minstalling protoc-gen-go..."
