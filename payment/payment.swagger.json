@@ -569,34 +569,6 @@
         }
       }
     },
-    "paymentLimit": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "max_automations": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "max_concurrents": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "max_conversations": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "max_segments": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "max_agents": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "paymentNote": {
       "type": "object",
       "properties": {
@@ -803,9 +775,6 @@
             "$ref": "#/definitions/paymentAddon"
           }
         },
-        "limit": {
-          "$ref": "#/definitions/paymentLimit"
-        },
         "year": {
           "type": "integer",
           "format": "int32"
@@ -827,6 +796,9 @@
           "items": {
             "$ref": "#/definitions/paymentNote"
           }
+        },
+        "referral_by": {
+          "type": "string"
         }
       }
     }

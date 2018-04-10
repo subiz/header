@@ -74,9 +74,7 @@ message Subscription {
 	optional string account_id = 3;
 	optional int64 created = 11;
 	optional string promotion_code = 4;
-
 	optional int64 started = 5;
-
 	optional bool auto_renew = 9;
 
 	enum Status {
@@ -95,13 +93,13 @@ message Subscription {
 	optional int64 trial_end = 19;
 
 	repeated Addon addons = 21;
-	optional Limit limit = 22;
 
-	optional int32 year = 23;
+	optional int32 year = 23; // for cassandra partitioning
 	optional int32 agent_count = 24;
 	optional float unit_price = 25;
 	optional float credit = 27;
 	repeated Note notes = 28;
+	optional string referral_by = 29; // account_id
 }
 
 message Bill {
