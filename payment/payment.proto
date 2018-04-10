@@ -16,15 +16,15 @@ message StripeInfo {
 }
 
 message PaymentMethod {
-	enum Name {
-		cash = 0;
-		stripe = 1;
+	enum Type {
+		bank_transfer = 0;
+		credit_card = 1;
 	}
 
-	optional string name = 2;
-	optional string account_id = 3;
+	optional string type = 2;
+	optional string id = 3;
+	optional string account_id = 4;
 
-	optional StripeInfo stripe_info = 4;
 
 	enum Status {
 		active = 0;
@@ -32,7 +32,9 @@ message PaymentMethod {
 	}
 	optional string status = 5;
 	optional bool primary = 6;
-	optional bool stripe_token = 7;
+	optional bool created = 8;
+	optional bool stripe_token = 7; // REST only
+	optional StripeInfo stripe_info = 9;
 }
 
 message Limit {
@@ -47,8 +49,7 @@ message Limit {
 message Plan {
 	optional string name = 2;
 	optional Limit limit = 3;
-	optional float price = 4;
-	optional string currency = 5;
+	optional float price = 4; // usd
 	optional int64 created = 8;
 	optional int32 trial_period_days = 9; // default 30
 	optional int32 period = 10; // default 1
@@ -67,15 +68,15 @@ message Plan {
 		advanced = 2;
 	}
 	optional int32 level = 14;
-
 }
 
 message Subscription {
 	optional string account_id = 3;
+	optional int64 created = 11;
 	optional string promotion_code = 4;
 
-	optional int64 billing_cycle_start = 5;
-	optional int64 billing_cycle_end = 6;
+	optional int64 started = 5;
+
 	optional bool auto_renew = 9;
 
 	enum Status {
@@ -85,11 +86,9 @@ message Subscription {
 		trialing = 3;
 	}
 	optional string status = 10;
-	optional int64 created = 11;
 
 	optional int32 billing_cycle_month = 15;
 	optional int32 next_billing_cycle_month = 16;
-
 	optional string plan = 17;
 
 	optional int64 trial_start = 18;
@@ -100,7 +99,9 @@ message Subscription {
 
 	optional int32 year = 23;
 	optional int32 agent_count = 24;
-	optional float plan_price = 25;
+	optional float unit_price = 25;
+	optional float credit = 27;
+	repeated Note notes = 28;
 }
 
 message Bill {
@@ -112,6 +113,12 @@ message Bill {
 	optional Contact customer_info = 8;
 	optional string payment_method = 10;
 	optional int32 year = 11;
+}
+
+message Note {
+	optional string message = 4;
+	optional string creator = 5;
+	optional int64 created = 6;
 }
 
 message Invoice {
@@ -132,7 +139,7 @@ message Invoice {
 	}
 	optional string status = 10;
 	optional int64 created = 11;
-	repeated InvoiceItem line_items = 12;
+	repeated InvoiceItem items = 12;
 	optional ExchangeRate exchange_rate = 13;
 	optional float subtotal = 14;
 	optional float tax_percent = 15;
@@ -140,10 +147,25 @@ message Invoice {
 	optional float total = 17;
 	optional int64 updated = 18;
 	optional int32 year = 19;
+	repeated Note notes = 22;
+}
+
+message UpgradePlanInvoiceItem {
+	optional int64 start_period = 8;
+	optional int64 end_period = 9;
+}
+
+message AddAgentInvoiceItem {
+	optional int32 agent_count = 8;
+}
+
+message RenewInvoiceItem {
+}
+
+message SubscribeInvoiceItem {
 }
 
 message InvoiceItem {
-	optional string id = 1;
 	optional float amount = 2;
 	optional Currency currency = 3;
 	optional string account_id = 4;
@@ -151,8 +173,13 @@ message InvoiceItem {
 	optional string invoice_id = 6;
 	optional int32 quantity = 7;
 
-	optional int64 start_period = 8;
-	optional int64 end_period = 9;
+	message Data {
+		optional UpgradePlanInvoiceItem upgrade_plan = 1;
+		optional RenewInvoiceItem review = 2;
+		optional AddAgentInvoiceItem add_agent = 3;
+		optional SubscribeInvoiceItem subscribe = 4;
+	}
+	optional Data data = 9;
 
 	enum Type {
 		plan = 0;
@@ -195,40 +222,56 @@ message Customer {
 	optional BillingInfo billing_info = 6;
 }
 
+message FixedAmountPromotionCode {
+	optional float amount = 2;
+}
+
+message PercentPromotionCode {
+	optional float percent = 2;
+	optional float min_amount = 7;
+	optional float max_amount = 8;
+}
+
+message CreditCode {
+	optional float credit = 2;
+}
+
+message ReferralCreditCode {
+	optional string referrer_id = 2;
+	optional float credit = 3;
+}
+
 message PromotionCode {
 	optional string description = 3;
 
 	enum Type {
-		fixed_amount = 0;
-		percent = 1;
-		credit = 2;
-		referral_credit = 3;
+		fixed_amount_promotion_code = 0;
+		percent_promotion_code = 1;
+		credit_code = 2;
+		referral_credit_code = 3;
 	}
 	optional string type = 6;
 	optional float value = 4;
-	optional int32 times_redeemed = 5;
-	optional string created_by = 9;
+
+	optional int32 redeem_count = 5;
+	optional string creator = 9;
 	optional int64 created = 10;
 	optional string code = 11;
-	optional Constraint constraint = 12;
-	optional string name = 13;
-}
 
-message Constraint {
-	optional int64 start = 1;
-	optional int64 end = 2;
-	optional string plan = 3;
-	optional string account_id = 4;
-	optional int32 max_redemptions = 5;
-	optional string referrer_id = 6;
-	optional float min_amount = 7;
-	optional float max_amount = 8;
-	optional string addon = 9;
-}
+	message Data {
+		optional FixedAmountPromotionCode fixed_amount = 1;
+		optional PercentPromotionCode percent = 2;
+		optional CreditCode credit = 3;
+		optional ReferralCreditCode referral = 4;
+	}
+	optional Data data = 14;
 
-message Credit {
-	optional string account_id = 2;
-	optional float amount = 3;
+	optional int64 start = 16;
+	optional int64 end = 17;
+	optional string for_plan = 18;
+	optional string for_account_id = 19;
+	optional int32 max_redemptions = 20;
+	optional string addon = 21;
 }
 
 message ExchangeRate {
@@ -238,42 +281,27 @@ message ExchangeRate {
 	optional int64 exchange_date = 5;
 }
 
-message AccountNote {
-	optional string account_id = 2;
-	optional string message = 3;
-	optional string created_by = 4;
-	optional int64 created = 5;
-}
-
-message InvoiceNote {
-	optional string account_id = 2;
-	optional string invoice_id = 3;
-	optional string message = 4;
-	optional string created_by = 5;
-	optional int64 created = 6;
+enum Action {
+	create_invoice = 0;
+	change_invoice_status = 1;
+	create_discount = 2;
+	delete_discount = 3;
+	redeem_discount = 4;
+	add_credit = 5;
+	redeem_credit = 6;
+	delete_account = 7;
+	change_plan = 8;
+	change_subscription_status = 9;
+	renew_subscription = 10;
+	click_subscribe_button = 11;
+	pay_for_referrer = 12;
+	add_money_for_referrer = 13;
+	pay_invoice = 14;
 }
 
 message Log {
 	optional string user = 2;
 	optional string id = 8;
-	enum Action {
-		create_invoice = 0;
-		change_invoice_status = 1;
-		create_discount = 2;
-		delete_discount = 3;
-		redeem_discount = 4;
-		add_credit = 5;
-		redeem_credit = 6;
-		delete_account = 7;
-		change_plan = 8;
-		change_subscription_status = 9;
-		renew_subscription = 10;
-		click_subscribe_button = 11;
-		pay_for_referrer = 12;
-		add_money_for_referrer = 13;
-		pay_invoice = 14;
-	}
-
 	optional string action = 3;
 	optional int64 created = 4;
 	optional string description = 5;
@@ -321,10 +349,11 @@ service SubizInternalPaymentMgr {
 service PaymentMgr {
 	rpc UpdateSubscription(Subscription) returns (Subscription);
 	rpc GetSubscription(common.Empty) returns (Subscription);
-	rpc GetCredit(common.Empty) returns (Subscription);
 	rpc GetPromotionCode(String) returns (PromotionCode);
 	rpc AddPaymentMethod(PaymentMethod) returns (PaymentMethod);
-	rpc DeletePaymentMethod(String) returns (common.Empty);
+	rpc UpdatePaymentMethod(PaymentMethod) returns (PaymentMethod);
+	rpc DeletePaymentMethod(common.Id) returns (common.Empty);
+
 	rpc CreateCustomer(Customer) returns (Customer);
 }
 

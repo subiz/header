@@ -494,43 +494,6 @@
         }
       }
     },
-    "paymentConstraint": {
-      "type": "object",
-      "properties": {
-        "start": {
-          "type": "string",
-          "format": "int64"
-        },
-        "end": {
-          "type": "string",
-          "format": "int64"
-        },
-        "plan": {
-          "type": "string"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "max_redemptions": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "referrer_id": {
-          "type": "string"
-        },
-        "min_amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "max_amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "addon": {
-          "type": "string"
-        }
-      }
-    },
     "paymentContact": {
       "type": "object",
       "properties": {
@@ -552,6 +515,15 @@
         "primary": {
           "type": "boolean",
           "format": "boolean"
+        }
+      }
+    },
+    "paymentCreditCode": {
+      "type": "object",
+      "properties": {
+        "credit": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
@@ -588,6 +560,15 @@
         }
       }
     },
+    "paymentFixedAmountPromotionCode": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
     "paymentLimit": {
       "type": "object",
       "properties": {
@@ -616,17 +597,32 @@
         }
       }
     },
+    "paymentNote": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "paymentPaymentMethod": {
       "type": "object",
       "properties": {
-        "name": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
           "type": "string"
         },
         "account_id": {
           "type": "string"
-        },
-        "stripe_info": {
-          "$ref": "#/definitions/paymentStripeInfo"
         },
         "status": {
           "type": "string"
@@ -635,9 +631,33 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "created": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "stripe_token": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "stripe_info": {
+          "$ref": "#/definitions/paymentStripeInfo"
+        }
+      }
+    },
+    "paymentPercentPromotionCode": {
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "number",
+          "format": "float"
+        },
+        "min_amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "max_amount": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
@@ -654,11 +674,11 @@
           "type": "number",
           "format": "float"
         },
-        "times_redeemed": {
+        "redeem_count": {
           "type": "integer",
           "format": "int32"
         },
-        "created_by": {
+        "creator": {
           "type": "string"
         },
         "created": {
@@ -668,11 +688,58 @@
         "code": {
           "type": "string"
         },
-        "constraint": {
-          "$ref": "#/definitions/paymentConstraint"
+        "data": {
+          "$ref": "#/definitions/paymentPromotionCodeData"
         },
-        "name": {
+        "start": {
+          "type": "string",
+          "format": "int64"
+        },
+        "end": {
+          "type": "string",
+          "format": "int64"
+        },
+        "for_plan": {
           "type": "string"
+        },
+        "for_account_id": {
+          "type": "string"
+        },
+        "max_redemptions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "addon": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentPromotionCodeData": {
+      "type": "object",
+      "properties": {
+        "fixed_amount": {
+          "$ref": "#/definitions/paymentFixedAmountPromotionCode"
+        },
+        "percent": {
+          "$ref": "#/definitions/paymentPercentPromotionCode"
+        },
+        "credit": {
+          "$ref": "#/definitions/paymentCreditCode"
+        },
+        "referral": {
+          "$ref": "#/definitions/paymentReferralCreditCode"
+        }
+      }
+    },
+    "paymentReferralCreditCode": {
+      "type": "object",
+      "properties": {
+        "referrer_id": {
+          "type": "string"
+        },
+        "credit": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
@@ -693,14 +760,14 @@
         "account_id": {
           "type": "string"
         },
-        "promotion_code": {
-          "type": "string"
-        },
-        "billing_cycle_start": {
+        "created": {
           "type": "string",
           "format": "int64"
         },
-        "billing_cycle_end": {
+        "promotion_code": {
+          "type": "string"
+        },
+        "started": {
           "type": "string",
           "format": "int64"
         },
@@ -710,10 +777,6 @@
         },
         "status": {
           "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
         },
         "billing_cycle_month": {
           "type": "integer",
@@ -751,9 +814,19 @@
           "type": "integer",
           "format": "int32"
         },
-        "plan_price": {
+        "unit_price": {
           "type": "number",
           "format": "float"
+        },
+        "credit": {
+          "type": "number",
+          "format": "float"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentNote"
+          }
         }
       }
     }
