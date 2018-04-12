@@ -129,10 +129,15 @@ enum T {
 	segment_loop_duplicated = 262;
 	segment_loop_stale = 263;
 	segment_not_found = 264;
-
 	domain_is_blocked = 265;
 	user_is_blocked = 266;
 	ip_is_blocked = 267;
+
+	stripe_error = 270;
+	missing_stripe_token = 271;
+	missing_stripe_customer_id = 272;
+	payment_method_not_found = 273;
+	not_enough_money = 274;
 }
 
 enum L {
