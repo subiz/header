@@ -186,7 +186,7 @@ message InvoiceItem {
 	optional string description = 5;
 	optional string invoice_id = 6;
 	optional int32 quantity = 7;
-	optional int32 price = 8; // per unit
+	optional float price = 8; // per unit
 	message Data {
 		optional UpgradePlanInvoiceItem upgrade_plan = 1;
 		optional RenewInvoiceItem renew = 2;
@@ -384,6 +384,7 @@ message PayRequest {
 	repeated string invoice_ids = 6;
 	optional string description = 7;
 	optional Contact CustomerInfo = 9;
+	optional float amount = 10;
 }
 
 message RenewCycle {

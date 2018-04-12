@@ -728,8 +728,8 @@
           "format": "int32"
         },
         "price": {
-          "type": "integer",
-          "format": "int32"
+          "type": "number",
+          "format": "float"
         },
         "data": {
           "$ref": "#/definitions/paymentInvoiceItemData"
