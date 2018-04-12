@@ -474,6 +474,9 @@
         "year": {
           "type": "integer",
           "format": "int32"
+        },
+        "description": {
+          "type": "string"
         }
       }
     },
@@ -560,12 +563,230 @@
         }
       }
     },
+    "paymentExchangeRate": {
+      "type": "object",
+      "properties": {
+        "from_currency": {
+          "type": "string"
+        },
+        "to_currency": {
+          "type": "string"
+        },
+        "exchange_rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "exchange_date": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentExtraChangeAgentCountInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/paymentPlan"
+        },
+        "day_left": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "old_agent_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "new_agent_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentExtraUpdateSubscriptionInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "old_plan": {
+          "$ref": "#/definitions/paymentPlan"
+        },
+        "new_plan": {
+          "$ref": "#/definitions/paymentPlan"
+        },
+        "day_left": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "old_agent_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "new_agent_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "paymentFixedAmountPromotionCode": {
       "type": "object",
       "properties": {
         "amount": {
           "type": "number",
           "format": "float"
+        }
+      }
+    },
+    "paymentInvoice": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "amount_due": {
+          "type": "number",
+          "format": "float"
+        },
+        "promotion_code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "billing_info": {
+          "$ref": "#/definitions/paymentBillingInfo"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentInvoiceItem"
+          }
+        },
+        "exchange_rate": {
+          "$ref": "#/definitions/paymentExchangeRate"
+        },
+        "subtotal": {
+          "type": "number",
+          "format": "float"
+        },
+        "tax_percent": {
+          "type": "number",
+          "format": "float"
+        },
+        "tax": {
+          "type": "number",
+          "format": "float"
+        },
+        "total": {
+          "type": "number",
+          "format": "float"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentNote"
+          }
+        },
+        "bills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "paymentInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "invoice_id": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "price": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "data": {
+          "$ref": "#/definitions/paymentInvoiceItemData"
+        }
+      }
+    },
+    "paymentInvoiceItemData": {
+      "type": "object",
+      "properties": {
+        "upgrade_plan": {
+          "$ref": "#/definitions/paymentUpgradePlanInvoiceItem"
+        },
+        "renew": {
+          "$ref": "#/definitions/paymentRenewInvoiceItem"
+        },
+        "extra_change_agent_count": {
+          "$ref": "#/definitions/paymentExtraChangeAgentCountInvoiceItem"
+        },
+        "subscribe": {
+          "$ref": "#/definitions/paymentSubscribeInvoiceItem"
+        },
+        "extra_update_subscription": {
+          "$ref": "#/definitions/paymentExtraUpdateSubscriptionInvoiceItem"
+        }
+      }
+    },
+    "paymentInvoices": {
+      "type": "object",
+      "properties": {
+        "invoices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentInvoice"
+          }
+        }
+      }
+    },
+    "paymentLimit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "max_automations": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_conversations": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_segments": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "max_agents": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -599,20 +820,12 @@
         "status": {
           "type": "string"
         },
-        "primary": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "created": {
           "type": "boolean",
           "format": "boolean"
         },
-        "stripe_token": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "stripe_info": {
-          "$ref": "#/definitions/paymentStripeInfo"
+        "stripe": {
+          "$ref": "#/definitions/paymentStripe"
         }
       }
     },
@@ -630,6 +843,40 @@
         "max_amount": {
           "type": "number",
           "format": "float"
+        }
+      }
+    },
+    "paymentPlan": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "trial_period_days": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "period_unit": {
+          "type": "string"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -715,7 +962,23 @@
         }
       }
     },
-    "paymentStripeInfo": {
+    "paymentRenewInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/paymentPlan"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentStripe": {
       "type": "object",
       "properties": {
         "card_last4": {
@@ -723,8 +986,14 @@
         },
         "customer_id": {
           "type": "string"
+        },
+        "token": {
+          "type": "string"
         }
       }
+    },
+    "paymentSubscribeInvoiceItem": {
+      "type": "object"
     },
     "paymentSubscription": {
       "type": "object",
@@ -799,6 +1068,29 @@
         },
         "referral_by": {
           "type": "string"
+        },
+        "paid": {
+          "type": "string",
+          "format": "int64"
+        },
+        "customer": {
+          "$ref": "#/definitions/paymentCustomer"
+        },
+        "default_payment_method": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentUpgradePlanInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "start_period": {
+          "type": "string",
+          "format": "int64"
+        },
+        "end_period": {
+          "type": "string",
+          "format": "int64"
         }
       }
     }
