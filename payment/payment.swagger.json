@@ -696,6 +696,10 @@
           "type": "string",
           "format": "int64"
         },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
         "notes": {
           "type": "array",
           "items": {

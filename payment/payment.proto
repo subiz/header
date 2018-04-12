@@ -148,7 +148,7 @@ message Invoice {
 	optional float tax = 16;
 	optional float total = 17;
 	optional int64 updated = 18;
-
+	optional int32 year = 19;
 	repeated Note notes = 22;
 	repeated string bills = 23;
 }
