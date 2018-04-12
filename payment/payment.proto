@@ -25,13 +25,11 @@ message PaymentMethod {
 	optional string type = 2;
 	optional string id = 3;
 	optional string account_id = 4;
-
-
-	enum Status {
+	enum State {
 		active = 0;
 		inactive = 1;
 	}
-	optional string status = 5;
+	optional string state = 5;
 	optional bool created = 8;
 	optional Stripe stripe = 9;
 }
@@ -76,13 +74,13 @@ message Subscription {
 	optional int64 started = 5; // dont ever change this
 	optional bool auto_renew = 9;
 
-	enum Status {
+	enum State {
 		pending = 0; // waiting for payment
 		active = 1;
 		inactive = 2; //
 		trialing = 3;
 	}
-	optional string status = 10;
+	optional string state = 10;
 
 	optional int32 billing_cycle_month = 15;
 	optional int32 next_billing_cycle_month = 16;
@@ -93,7 +91,6 @@ message Subscription {
 
 	repeated Addon addons = 21;
 
-	optional int32 year = 23; // for cassandra partitioning
 	optional int32 agent_count = 24;
 	optional float unit_price = 25;
 	optional float credit = 27;
@@ -292,7 +289,6 @@ message ExchangeRate {
 }
 
 message Log {
-
 	enum Action {
 		create_invoice = 0;
 		change_invoice_status = 1;

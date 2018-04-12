@@ -817,7 +817,7 @@
         "account_id": {
           "type": "string"
         },
-        "status": {
+        "state": {
           "type": "string"
         },
         "created": {
@@ -1016,7 +1016,7 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "status": {
+        "state": {
           "type": "string"
         },
         "billing_cycle_month": {
@@ -1043,10 +1043,6 @@
           "items": {
             "$ref": "#/definitions/paymentAddon"
           }
-        },
-        "year": {
-          "type": "integer",
-          "format": "int32"
         },
         "agent_count": {
           "type": "integer",
