@@ -1038,6 +1038,10 @@
           "type": "string",
           "format": "int64"
         },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
+        },
         "auto_renew": {
           "type": "boolean",
           "format": "boolean"
