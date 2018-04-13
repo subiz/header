@@ -138,6 +138,8 @@ enum T {
 	missing_stripe_customer_id = 272;
 	payment_method_not_found = 273;
 	not_enough_money = 274;
+	invalid_account = 275;
+	invalid_payment_method = 276;
 }
 
 enum L {
