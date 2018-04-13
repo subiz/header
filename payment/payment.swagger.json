@@ -825,8 +825,8 @@
           "type": "string"
         },
         "created": {
-          "type": "boolean",
-          "format": "boolean"
+          "type": "string",
+          "format": "int64"
         },
         "stripe": {
           "$ref": "#/definitions/paymentStripe"

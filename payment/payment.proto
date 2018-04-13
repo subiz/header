@@ -30,7 +30,7 @@ message PaymentMethod {
 		inactive = 1;
 	}
 	optional string state = 5;
-	optional bool created = 8;
+	optional int64 created = 8;
 	optional Stripe stripe = 9;
 }
 
