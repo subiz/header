@@ -47,6 +47,10 @@ message Limit {
 	optional int32 max_agents = 8;
 }
 
+message Plans {
+	repeated Plan plans = 2;
+}
+
 message Plan {
 	optional string name = 2;
 	optional Limit limit = 3;
@@ -377,6 +381,7 @@ service PaymentMgr {
 	rpc Pay(PayRequest) returns (Bill);
 	rpc ListInvoices(common.Id) returns (Invoices);
 	// rpc Creat(Customer) returns (Customer);
+	rpc ListPlans(common.Empty) returns (Plans);
 }
 
 message String {

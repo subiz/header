@@ -895,6 +895,17 @@
         }
       }
     },
+    "paymentPlans": {
+      "type": "object",
+      "properties": {
+        "plans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentPlan"
+          }
+        }
+      }
+    },
     "paymentPromotionCode": {
       "type": "object",
       "properties": {
