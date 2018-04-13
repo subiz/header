@@ -833,6 +833,17 @@
         }
       }
     },
+    "paymentPaymentMethods": {
+      "type": "object",
+      "properties": {
+        "payment_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentPaymentMethod"
+          }
+        }
+      }
+    },
     "paymentPercentPromotionCode": {
       "type": "object",
       "properties": {

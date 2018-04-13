@@ -16,6 +16,10 @@ message Stripe {
 	optional string token = 4; // REST only
 }
 
+message PaymentMethods {
+	repeated PaymentMethod payment_methods = 2;
+}
+
 message PaymentMethod {
 	enum Type {
 		bank_transfer = 0;
@@ -369,7 +373,7 @@ service PaymentMgr {
 	rpc AddPaymentMethod(PaymentMethod) returns (PaymentMethod);
 	rpc UpdatePaymentMethod(PaymentMethod) returns (PaymentMethod);
 	rpc DeletePaymentMethod(common.Id) returns (common.Empty);
-
+	rpc ListPaymentMethods(common.Empty) returns (PaymentMethods);
 	rpc Pay(PayRequest) returns (Bill);
 	rpc ListInvoices(common.Id) returns (Invoices);
 	// rpc Creat(Customer) returns (Customer);
