@@ -378,6 +378,7 @@ message Presence {
 	optional string account_id = 3;
 	optional string user_id = 4;
 	optional int64 pinged = 5;
+	optional int64 pinged_minute = 6;
 }
 
 message Previewing {
