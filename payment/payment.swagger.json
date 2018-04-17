@@ -711,6 +711,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "payment_made": {
+          "type": "number",
+          "format": "float"
         }
       }
     },

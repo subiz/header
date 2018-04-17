@@ -160,6 +160,7 @@ message Invoice {
 	optional int32 year = 19;
 	repeated Note notes = 22;
 	repeated string bills = 23;
+	optional float payment_made = 24;
 }
 
 message UpgradePlanInvoiceItem {
