@@ -140,6 +140,9 @@ enum T {
 	not_enough_money = 274;
 	invalid_account = 275;
 	invalid_payment_method = 276;
+
+	invalid_subscription = 278;
+	invalid_plan = 279;
 }
 
 enum L {
