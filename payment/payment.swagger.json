@@ -576,7 +576,7 @@
           "type": "number",
           "format": "float"
         },
-        "exchange_date": {
+        "exchange_time": {
           "type": "string",
           "format": "int64"
         }
@@ -672,9 +672,6 @@
           "items": {
             "$ref": "#/definitions/paymentInvoiceItem"
           }
-        },
-        "exchange_rate": {
-          "$ref": "#/definitions/paymentExchangeRate"
         },
         "subtotal": {
           "type": "number",

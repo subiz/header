@@ -151,7 +151,6 @@ message Invoice {
 	optional string state = 10;
 	optional int64 created = 11;
 	repeated InvoiceItem items = 12;
-	optional ExchangeRate exchange_rate = 13;
 	optional float subtotal = 14;
 	optional float tax_percent = 15;
 	optional float tax = 16;
@@ -297,7 +296,7 @@ message ExchangeRate {
 	optional string from_currency = 2;
 	optional string to_currency = 3;
 	optional float exchange_rate = 4;
-	optional int64 exchange_date = 5;
+	optional int64 exchange_time = 5; // nanosec
 }
 
 message Log {
@@ -372,6 +371,7 @@ message PaymentRenewCycleRequested {
 
 service SubizInternalPaymentMgr {
 	rpc CreateBill(Bill) returns (Bill);
+	rpc UpdateExchangeRate(ExchangeRate) returns (ExchangeRate);
 }
 
 service PaymentMgr {
