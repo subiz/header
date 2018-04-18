@@ -1014,6 +1014,14 @@
         }
       }
     },
+    "paymentString": {
+      "type": "object",
+      "properties": {
+        "str": {
+          "type": "string"
+        }
+      }
+    },
     "paymentStripe": {
       "type": "object",
       "properties": {

@@ -386,6 +386,7 @@ service PaymentMgr {
 	rpc ListInvoices(common.Id) returns (Invoices);
 	// rpc Creat(Customer) returns (Customer);
 	rpc ListPlans(common.Empty) returns (Plans);
+	rpc ExportInvoice(common.Id) returns (String);
 }
 
 message String {
