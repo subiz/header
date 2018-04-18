@@ -167,30 +167,36 @@ message Invoice {
 message UpgradePlanInvoiceItem {
 	optional int64 start_period = 8;
 	optional int64 end_period = 9;
+	optional string old_plan = 10;
+	optional string new_plan = 11;
 }
 
 message ExtraChangeAgentCountInvoiceItem {
-	optional Plan plan = 3;
+	optional string plan = 3;
 	optional int32 day_left = 4;
 	optional int32 old_agent_count = 5;
 	optional int32 new_agent_count = 6;
 }
 
 message RenewInvoiceItem {
-	optional Plan plan = 3;
+	optional string plan = 3;
 	optional int32 billing_cycle_month = 4;
 	optional int32 agent_count = 5;
+	optional int64 from_time = 6;
 }
 
 message SubscribeInvoiceItem {
+	optional int32 agent_count = 2;
+	optional string plan = 3;
+	optional int64 started = 4;
+	optional int32 billing_cycle_month = 5;
 }
 
 message ExtraUpdateSubscriptionInvoiceItem {
-	optional Plan old_plan = 2;
-	optional Plan new_plan = 3;
+	optional string old_plan = 2;
+	optional string new_plan = 3;
 	optional int32 day_left = 4;
-	optional int32 old_agent_count = 5;
-	optional int32 new_agent_count = 6;
+	optional int32 agent_count = 5;
 }
 
 message InvoiceItem {

@@ -586,7 +586,7 @@
       "type": "object",
       "properties": {
         "plan": {
-          "$ref": "#/definitions/paymentPlan"
+          "type": "string"
         },
         "day_left": {
           "type": "integer",
@@ -606,20 +606,16 @@
       "type": "object",
       "properties": {
         "old_plan": {
-          "$ref": "#/definitions/paymentPlan"
+          "type": "string"
         },
         "new_plan": {
-          "$ref": "#/definitions/paymentPlan"
+          "type": "string"
         },
         "day_left": {
           "type": "integer",
           "format": "int32"
         },
-        "old_agent_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "new_agent_count": {
+        "agent_count": {
           "type": "integer",
           "format": "int32"
         }
@@ -999,7 +995,7 @@
       "type": "object",
       "properties": {
         "plan": {
-          "$ref": "#/definitions/paymentPlan"
+          "type": "string"
         },
         "billing_cycle_month": {
           "type": "integer",
@@ -1008,6 +1004,10 @@
         "agent_count": {
           "type": "integer",
           "format": "int32"
+        },
+        "from_time": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -1034,7 +1034,24 @@
       }
     },
     "paymentSubscribeInvoiceItem": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "agent_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "paymentSubscription": {
       "type": "object",
@@ -1132,6 +1149,12 @@
         "end_period": {
           "type": "string",
           "format": "int64"
+        },
+        "old_plan": {
+          "type": "string"
+        },
+        "new_plan": {
+          "type": "string"
         }
       }
     }
