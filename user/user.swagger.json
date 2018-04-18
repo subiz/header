@@ -442,9 +442,6 @@
         "presn": {
           "$ref": "#/definitions/userPresence"
         },
-        "previ": {
-          "$ref": "#/definitions/userPreviewing"
-        },
         "vi": {
           "$ref": "#/definitions/userVisitor"
         },
@@ -618,6 +615,36 @@
         }
       }
     },
+    "userLastView": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "ua": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "event_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
     "userListTopicsResult": {
       "type": "object",
       "properties": {
@@ -693,30 +720,6 @@
         "pinged_minute": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "userPreviewing": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "page_url": {
-          "type": "string"
-        },
-        "updated": {
-          "type": "string",
-          "format": "int64"
-        },
-        "page_title": {
-          "type": "string"
         }
       }
     },

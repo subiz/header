@@ -16,7 +16,6 @@ message AllType {
 	optional ListTopicsResult ltr = 12;
 	optional Segmentation sg = 14;
 	optional Presence presn = 15;
-	optional Previewing previ = 16;
 	optional Visitor vi = 17;
 	optional Visitors vis = 18;
 	optional Topic topic = 19;
@@ -381,15 +380,6 @@ message Presence {
 	optional int64 pinged_minute = 6;
 }
 
-message Previewing {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional string page_url = 5;
-	optional int64 updated = 6;
-	optional string page_title = 7;
-}
-
 message Visitor {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -413,6 +403,7 @@ message LastView {
 	optional string ip = 7;
 	optional int64 created = 8;
 	optional string event_id = 9;
+	optional string title = 10;
 }
 
 message Automation {
@@ -491,7 +482,7 @@ service SegmentationMgr {
 
 service VisitorMgr {
 	rpc ReadPresence (common.Id) returns (Presence) {}
-	rpc ReadPreview (common.Id) returns (Previewing) {}
+	rpc ReadPreview (common.Id) returns (LastView) {}
 	rpc ListTopVisitors (common.Id) returns (Visitors) {}
 }
 
