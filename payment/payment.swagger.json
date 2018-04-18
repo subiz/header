@@ -715,6 +715,12 @@
         "payment_made": {
           "type": "number",
           "format": "float"
+        },
+        "current_sub": {
+          "$ref": "#/definitions/paymentSubscription"
+        },
+        "current_plan": {
+          "$ref": "#/definitions/paymentPlan"
         }
       }
     },

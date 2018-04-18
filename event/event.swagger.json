@@ -1643,6 +1643,10 @@
         "pinged": {
           "type": "string",
           "format": "int64"
+        },
+        "pinged_minute": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

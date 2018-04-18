@@ -161,6 +161,8 @@ message Invoice {
 	repeated Note notes = 22;
 	repeated string bills = 23;
 	optional float payment_made = 24;
+	optional Subscription current_sub = 25;
+	optional Plan current_plan = 26;
 }
 
 message UpgradePlanInvoiceItem {
