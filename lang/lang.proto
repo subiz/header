@@ -143,6 +143,9 @@ enum T {
 
 	invalid_subscription = 278;
 	invalid_plan = 279;
+	invoice_not_found = 280;
+	billing_not_found = 281;
+	exchange_rate_not_found = 282;
 }
 
 enum L {
