@@ -393,6 +393,7 @@ service PaymentMgr {
 	// rpc Creat(Customer) returns (Customer);
 	rpc ListPlans(common.Empty) returns (Plans);
 	rpc ExportInvoice(common.Id) returns (String);
+	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 }
 
 message String {
