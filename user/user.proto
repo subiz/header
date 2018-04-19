@@ -5,7 +5,7 @@ package user;
 import "bitbucket.org/subiz/header/common/common.proto";
 
 message AllType {
-  optional User user = 2;
+	optional User user = 2;
 	optional CreateRequest cr = 3;
 	optional Field fields = 5;
 	optional UserCreateResult ucr = 6;
@@ -95,7 +95,7 @@ message Device {
 	optional int32 useragent_id = 4;
 	optional string useragent = 5;
 	optional string screen_resolution = 6;
-	optional int32 language_id  = 7;
+	optional int32 language_id = 7;
 	optional string language = 8;
 }
 
@@ -185,7 +185,7 @@ enum Event {
 	UserEventTopicSubscribeRequested = 35;
 	UserEventTopicUnsubscribeRequested = 36;
 
-	UserReadTopicRequested = 41;  // ReadTopicRequest -> Empty
+	UserReadTopicRequested = 41; // ReadTopicRequest -> Empty
 
 	UserSubizId = 42;
 
@@ -380,6 +380,11 @@ message Presence {
 	optional int64 pinged_minute = 6;
 }
 
+message Presences {
+	optional common.Context ctx = 1;
+	repeated Presence presences = 2;
+}
+
 message Visitor {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -473,8 +478,8 @@ message Session {
 }
 
 service SegmentationMgr {
-  rpc CreateSegment (Segmentation) returns (Segmentation) {}
-  rpc UpdateSegment (Segmentation) returns (Segmentation) {}
+	rpc CreateSegment (Segmentation) returns (Segmentation) {}
+	rpc UpdateSegment (Segmentation) returns (Segmentation) {}
 	rpc ListSegments (common.Id) returns (Segmentations) {}
 	rpc DeleteSegment (common.Id) returns (common.Empty) {}
 	rpc ReadSegment (common.Id) returns (Segmentation) {}
@@ -482,6 +487,7 @@ service SegmentationMgr {
 
 service VisitorMgr {
 	rpc ReadPresence (common.Id) returns (Presence) {}
+	rpc ReadPresences (common.Ids) returns (Presences) {}
 	rpc ReadPreview (common.Id) returns (LastView) {}
 	rpc ListTopVisitors (common.Id) returns (Visitors) {}
 }

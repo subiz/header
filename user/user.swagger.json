@@ -723,6 +723,20 @@
         }
       }
     },
+    "userPresences": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "presences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userPresence"
+          }
+        }
+      }
+    },
     "userReadTopicRequest": {
       "type": "object",
       "properties": {
