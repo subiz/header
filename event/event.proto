@@ -221,6 +221,11 @@ message UserEvent {
 	RawEvent event = 5;
 }
 
+service Publisher {
+	rpc Subscribe(Subscription) returns (common.Empty);
+	rpc Unsubscribe(Subscription) returns (common.Empty);
+}
+
 service EventMgr {
 	rpc SearchEvents (ListEventsRequest) returns (RawEvents) {}
 	rpc CreateEvent (UserEvent) returns (RawEvent) {}
