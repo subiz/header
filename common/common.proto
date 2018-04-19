@@ -86,3 +86,15 @@ enum Event {
 	Send_ = 0;
 	ApiReply = 2;
 }
+
+message PingRequest {
+	string message = 2;
+}
+
+message Pong {
+	string message = 3;
+}
+
+service Agent {
+	rpc Ping(PingRequest) returns (Pong);
+}
