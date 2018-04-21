@@ -41,10 +41,10 @@ message PaymentMethod {
 message Limit {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
-	optional int32 max_automations = 4;
-	optional int32 max_conversations = 6;
-	optional int32 max_segments = 7;
-	optional int32 max_agents = 8;
+	optional uint32 max_automations = 4;
+	optional uint32 max_conversations = 6;
+	optional uint32 max_segments = 7;
+	optional uint32 max_agents = 8;
 }
 
 message Plans {
@@ -55,52 +55,34 @@ message Plan {
 	optional string name = 2;
 	optional Limit limit = 3;
 	optional float price = 4; // usd
-	optional int64 created = 8;
-	optional int32 trial_period_days = 9; // default 30
-	optional int32 period = 10; // default 1
-
-	enum PeriodUnit {
-		day = 0;
-		week = 1;
-		month = 2;
-		year = 3;
-	}
-
-	optional string period_unit = 11;
 	enum Type {
-		free = 0;
-		standard = 1;
-		advanced = 2;
+		trial = 0;
+		free = 1;
+		standard = 2;
+		advanced = 3;
 	}
-	optional int32 level = 14;
+	optional uint32 level = 14;
+	optional bool can_buy_agent = 15;
+	optional bool can_buy = 16;
+
 }
 
 message Subscription {
 	optional string account_id = 3;
 	optional int64 created = 11;
 	optional string promotion_code = 4;
-	optional int64 started = 5; // dont ever change this
+	optional int64 started = 5;
 	optional int64 due_date = 6; // read-only
 	optional bool auto_renew = 9;
 
-	enum State {
-		pending = 0; // waiting for payment
-		active = 1;
-		inactive = 2; //
-		trialing = 3;
-	}
-	optional string state = 10;
-
-	optional int32 billing_cycle_month = 15;
-	optional int32 next_billing_cycle_month = 16;
+	optional uint32 billing_cycle_month = 15;
+	optional uint32 next_billing_cycle_month = 16;
 	optional string plan = 17;
 
-	optional int64 trial_start = 18;
-	optional int64 trial_end = 19;
-
 	repeated Addon addons = 21;
+	optional int64 trial_end = 22;
 
-	optional int32 agent_count = 24;
+	optional uint32 agent_count = 24;
 	optional float unit_price = 25;
 	optional float credit = 27;
 	repeated Note notes = 28;
@@ -108,6 +90,8 @@ message Subscription {
 	optional int64 paid = 30;
 	optional Customer customer = 31;
 	optional string default_payment_method = 32;
+	optional string renew_cycle_id = 40;
+	optional string trial_cycle_id = 41;
 }
 
 message Bill {
@@ -144,9 +128,10 @@ message Invoice {
 	enum State {
 		draft = 0;
 		open = 1;
-		paid = 2;
-		voided = 3;
-		queueing = 4;
+		overdue = 2;
+		paid = 3;
+		voided = 4;
+		queueing = 5;
 	}
 	optional string state = 10;
 	optional int64 created = 11;
@@ -164,39 +149,28 @@ message Invoice {
 	optional Plan current_plan = 26;
 }
 
-message UpgradePlanInvoiceItem {
-	optional int64 start_period = 8;
-	optional int64 end_period = 9;
-	optional string old_plan = 10;
-	optional string new_plan = 11;
-}
-
-message ExtraChangeAgentCountInvoiceItem {
+message AgentInvoiceItem {
 	optional string plan = 3;
 	optional int32 day_left = 4;
-	optional int32 old_agent_count = 5;
-	optional int32 new_agent_count = 6;
+	optional uint32 old = 5;
+	optional uint32 new = 6;
 }
 
 message RenewInvoiceItem {
 	optional string plan = 3;
-	optional int32 billing_cycle_month = 4;
-	optional int32 agent_count = 5;
+	optional uint32 billing_cycle_month = 4;
+	optional uint32 agent_count = 5;
 	optional int64 from_time = 6;
 }
 
-message SubscribeInvoiceItem {
-	optional int32 agent_count = 2;
-	optional string plan = 3;
-	optional int64 started = 4;
+message PlanInvoiceItem {
+	optional uint32 agent_count = 2;
 	optional int32 billing_cycle_month = 5;
-}
-
-message ExtraUpdateSubscriptionInvoiceItem {
-	optional string old_plan = 2;
+	optional string old_plan = 6;
 	optional string new_plan = 3;
 	optional int32 day_left = 4;
-	optional int32 agent_count = 5;
+
+	optional int64 started = 8;
 }
 
 message InvoiceItem {
@@ -205,11 +179,9 @@ message InvoiceItem {
 	optional int32 quantity = 7;
 	optional float price = 8; // per unit
 	message Data {
-		optional UpgradePlanInvoiceItem upgrade_plan = 1;
 		optional RenewInvoiceItem renew = 2;
-		optional ExtraChangeAgentCountInvoiceItem extra_change_agent_count = 3;
-		optional SubscribeInvoiceItem subscribe = 4;
-		optional ExtraUpdateSubscriptionInvoiceItem extra_update_subscription = 5;
+		optional AgentInvoiceItem agent = 3;
+		optional PlanInvoiceItem plan = 5;
 	}
 	optional Data data = 9;
 }
@@ -296,6 +268,7 @@ message PromotionCode {
 	optional string for_account_id = 19;
 	optional int32 max_redemptions = 20;
 	optional string addon = 21;
+	repeated string for_items = 23;
 }
 
 message ExchangeRate {
@@ -381,6 +354,7 @@ service SubizInternalPaymentMgr {
 }
 
 service PaymentMgr {
+	rpc Purchase(Subscription) returns (Subscription);
 	rpc UpdateSubscription(Subscription) returns (Subscription);
 	rpc GetSubscription(common.Empty) returns (Subscription);
 	rpc GetPromotionCode(String) returns (PromotionCode);
@@ -406,10 +380,4 @@ message PayRequest {
 	optional string description = 7;
 	optional Contact CustomerInfo = 9;
 	optional float amount = 10;
-}
-
-message RenewCycle {
-	optional string account_id = 2;
-	optional string id = 3;
-	optional int64 done = 4;
 }

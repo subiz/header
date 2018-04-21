@@ -442,6 +442,26 @@
         }
       }
     },
+    "paymentAgentInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "string"
+        },
+        "day_left": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "old": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "paymentBill": {
       "type": "object",
       "properties": {
@@ -582,45 +602,6 @@
         }
       }
     },
-    "paymentExtraChangeAgentCountInvoiceItem": {
-      "type": "object",
-      "properties": {
-        "plan": {
-          "type": "string"
-        },
-        "day_left": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "old_agent_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "new_agent_count": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "paymentExtraUpdateSubscriptionInvoiceItem": {
-      "type": "object",
-      "properties": {
-        "old_plan": {
-          "type": "string"
-        },
-        "new_plan": {
-          "type": "string"
-        },
-        "day_left": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "agent_count": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "paymentFixedAmountPromotionCode": {
       "type": "object",
       "properties": {
@@ -742,20 +723,14 @@
     "paymentInvoiceItemData": {
       "type": "object",
       "properties": {
-        "upgrade_plan": {
-          "$ref": "#/definitions/paymentUpgradePlanInvoiceItem"
-        },
         "renew": {
           "$ref": "#/definitions/paymentRenewInvoiceItem"
         },
-        "extra_change_agent_count": {
-          "$ref": "#/definitions/paymentExtraChangeAgentCountInvoiceItem"
+        "agent": {
+          "$ref": "#/definitions/paymentAgentInvoiceItem"
         },
-        "subscribe": {
-          "$ref": "#/definitions/paymentSubscribeInvoiceItem"
-        },
-        "extra_update_subscription": {
-          "$ref": "#/definitions/paymentExtraUpdateSubscriptionInvoiceItem"
+        "plan": {
+          "$ref": "#/definitions/paymentPlanInvoiceItem"
         }
       }
     },
@@ -781,19 +756,19 @@
         },
         "max_automations": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "max_conversations": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "max_segments": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "max_agents": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         }
       }
     },
@@ -877,24 +852,44 @@
           "type": "number",
           "format": "float"
         },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "trial_period_days": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "period": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "period_unit": {
-          "type": "string"
-        },
         "level": {
           "type": "integer",
+          "format": "int64"
+        },
+        "can_buy_agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "can_buy": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "paymentPlanInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "agent_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
           "format": "int32"
+        },
+        "old_plan": {
+          "type": "string"
+        },
+        "new_plan": {
+          "type": "string"
+        },
+        "day_left": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -959,6 +954,12 @@
         },
         "addon": {
           "type": "string"
+        },
+        "for_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -999,11 +1000,11 @@
         },
         "billing_cycle_month": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "agent_count": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "from_time": {
           "type": "string",
@@ -1033,26 +1034,6 @@
         }
       }
     },
-    "paymentSubscribeInvoiceItem": {
-      "type": "object",
-      "properties": {
-        "agent_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "plan": {
-          "type": "string"
-        },
-        "started": {
-          "type": "string",
-          "format": "int64"
-        },
-        "billing_cycle_month": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "paymentSubscription": {
       "type": "object",
       "properties": {
@@ -1078,27 +1059,16 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "state": {
-          "type": "string"
-        },
         "billing_cycle_month": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "next_billing_cycle_month": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "plan": {
           "type": "string"
-        },
-        "trial_start": {
-          "type": "string",
-          "format": "int64"
-        },
-        "trial_end": {
-          "type": "string",
-          "format": "int64"
         },
         "addons": {
           "type": "array",
@@ -1106,9 +1076,13 @@
             "$ref": "#/definitions/paymentAddon"
           }
         },
+        "trial_end": {
+          "type": "string",
+          "format": "int64"
+        },
         "agent_count": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "unit_price": {
           "type": "number",
@@ -1136,24 +1110,11 @@
         },
         "default_payment_method": {
           "type": "string"
-        }
-      }
-    },
-    "paymentUpgradePlanInvoiceItem": {
-      "type": "object",
-      "properties": {
-        "start_period": {
-          "type": "string",
-          "format": "int64"
         },
-        "end_period": {
-          "type": "string",
-          "format": "int64"
-        },
-        "old_plan": {
+        "renew_cycle_id": {
           "type": "string"
         },
-        "new_plan": {
+        "trial_cycle_id": {
           "type": "string"
         }
       }
