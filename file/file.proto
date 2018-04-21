@@ -14,6 +14,12 @@ service MyServer {
 	rpc Do(AllType) returns(AllType) {}
 }
 
+service FileMgr {
+	rpc Presign(FileHeader) returns (PresignResult) {}
+	rpc Read(FileRequest) returns (File) {}
+	rpc Uploaded(FileRequest) returns (File) {}
+}
+
 message FileHeader {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -30,6 +36,12 @@ message PresignResult {
 	string url = 4;
 	string id = 6;
 	string signed_url = 5;
+}
+
+message FileRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
 }
 
 message File {
