@@ -18,8 +18,8 @@ service MyServer {
 }
 
 service WidgetService {
-	rpc ReadSetting(common.Id) returns (Setting) {}
-	rpc UpdateSetting(Setting) returns (Setting) {}
+	rpc Read(common.Id) returns (Setting) {}
+	rpc Update(Setting) returns (Setting) {}
 	rpc ReadUserSetting(common.Id) returns (UserSetting) {}
 	rpc UpdateUserSetting(UserSetting) returns (UserSetting) {}
 }
