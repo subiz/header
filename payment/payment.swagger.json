@@ -1100,10 +1100,6 @@
         "referral_by": {
           "type": "string"
         },
-        "paid": {
-          "type": "string",
-          "format": "int64"
-        },
         "customer": {
           "$ref": "#/definitions/paymentCustomer"
         },

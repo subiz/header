@@ -87,7 +87,6 @@ message Subscription {
 	optional float credit = 27;
 	repeated Note notes = 28;
 	optional string referral_by = 29; // account_id
-	optional int64 paid = 30;
 	optional Customer customer = 31;
 	optional string primary_payment_method = 32;
 	optional string renew_cycle_id = 40;
