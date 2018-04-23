@@ -398,6 +398,14 @@
         }
       }
     },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
     "notiboxAddNotificationRequest": {
       "type": "object",
       "properties": {

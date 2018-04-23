@@ -50,6 +50,12 @@ message ListRequest {
 	optional int32 limit = 5;
 }
 
+message NotiboxRequest {
+	optional common.Context ctx = 1;
+	optional string box = 2;
+	optional string topic = 3;
+}
+
 message Notifications {
 	optional common.Context ctx = 1;
 	repeated Notification notifications = 2;
@@ -63,7 +69,7 @@ message Box {
 }
 
 message AllType {
-  optional Notifications nts = 2;
+  	optional Notifications nts = 2;
 	optional ListRequest listr = 3;
 	optional ReadNotification rno = 4;
 	optional AddNotificationRequest anorfr = 5;
@@ -73,6 +79,15 @@ message AllType {
 
 service YourService {
   rpc Do(AllType) returns (AllType) {}
+}
+
+service NotiboxService {
+	rpc Upsert(Notification) returns (Notification) {}
+	rpc ReadTopic(NotiboxRequest) returns (common.Empty) {}
+	rpc UnreadTopic(NotiboxRequest) returns (common.Empty) {}
+	rpc ListNotis(ListRequest) returns (Notifications) {}
+	rpc DecreaseNew(NotiboxRequest) returns (Box) {}
+	rpc ReadBox(NotiboxRequest) returns (Box) {}
 }
 
 enum Event {
