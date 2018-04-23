@@ -39,3 +39,9 @@ enum Event {
 
 	Webhook4ShardSend = 9;
 }
+
+service WebhookService {
+	rpc Read(common.Id) returns (Webhook) {}
+	rpc ClearBackoff(common.Id) returns (common.Empty) {}
+	rpc PurgeQueue(common.Id) returns (common.Empty) {}
+}
