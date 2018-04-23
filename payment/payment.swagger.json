@@ -1076,10 +1076,6 @@
             "$ref": "#/definitions/paymentAddon"
           }
         },
-        "unit_price": {
-          "type": "number",
-          "format": "float"
-        },
         "credit": {
           "type": "number",
           "format": "float"

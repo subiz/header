@@ -81,7 +81,6 @@ message Subscription {
 
 	repeated Addon addons = 21;
 
-	optional float unit_price = 25;
 	optional float credit = 27;
 	repeated Note notes = 28;
 	optional string referral_by = 29; // account_id
@@ -288,7 +287,6 @@ message Log {
 		redeem_credit = 6;
 		delete_account = 7;
 		change_plan = 8;
-		change_subscription_status = 9;
 		renew_subscription = 10;
 		click_subscribe_button = 11;
 		pay_for_referrer = 12;
