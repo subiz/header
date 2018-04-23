@@ -808,6 +808,13 @@
         },
         "stripe": {
           "$ref": "#/definitions/paymentStripe"
+        },
+        "failed_message": {
+          "type": "string"
+        },
+        "charged": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -1031,6 +1038,10 @@
         },
         "token": {
           "type": "string"
+        },
+        "paid": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -1096,7 +1107,7 @@
         "customer": {
           "$ref": "#/definitions/paymentCustomer"
         },
-        "default_payment_method": {
+        "primary_payment_method": {
           "type": "string"
         },
         "renew_cycle_id": {

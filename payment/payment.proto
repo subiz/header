@@ -14,6 +14,7 @@ message Stripe {
 	optional string card_last4 = 2;
 	optional string customer_id = 3;
 	optional string token = 4; // REST only
+	optional int64 paid = 5;
 }
 
 message PaymentMethods {
@@ -31,11 +32,13 @@ message PaymentMethod {
 	optional string account_id = 4;
 	enum State {
 		active = 0;
-		inactive = 1;
+		failed = 1;
 	}
 	optional string state = 5;
 	optional int64 created = 8;
 	optional Stripe stripe = 9;
+	optional string failed_message = 10;
+	optional int64 charged = 11;
 }
 
 message Limit {
@@ -86,7 +89,7 @@ message Subscription {
 	optional string referral_by = 29; // account_id
 	optional int64 paid = 30;
 	optional Customer customer = 31;
-	optional string default_payment_method = 32;
+	optional string primary_payment_method = 32;
 	optional string renew_cycle_id = 40;
 	optional string trial_cycle_id = 41;
 	optional Limit limit = 42;
