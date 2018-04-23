@@ -379,7 +379,12 @@ message PayRequest {
 	optional float amount = 10;
 }
 
-message ESubscription {
+message ESubscription { // subscription with error
 	optional Subscription sub = 2;
 	optional string err = 3;
+}
+
+message EInvoice { // invoice with error
+	optional Invoice inv = 3;
+	optional string err = 4;
 }
