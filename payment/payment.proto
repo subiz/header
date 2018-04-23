@@ -80,9 +80,7 @@ message Subscription {
 	optional string plan = 17;
 
 	repeated Addon addons = 21;
-	optional int64 trial_end = 22;
 
-	optional uint32 agent_count = 24;
 	optional float unit_price = 25;
 	optional float credit = 27;
 	repeated Note notes = 28;
@@ -92,6 +90,7 @@ message Subscription {
 	optional string default_payment_method = 32;
 	optional string renew_cycle_id = 40;
 	optional string trial_cycle_id = 41;
+	optional Limit limit = 42;
 }
 
 message Bill {
@@ -380,4 +379,9 @@ message PayRequest {
 	optional string description = 7;
 	optional Contact CustomerInfo = 9;
 	optional float amount = 10;
+}
+
+message ESubscription {
+	optional Subscription sub = 2;
+	optional string err = 3;
 }

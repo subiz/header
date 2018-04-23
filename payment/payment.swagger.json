@@ -1076,14 +1076,6 @@
             "$ref": "#/definitions/paymentAddon"
           }
         },
-        "trial_end": {
-          "type": "string",
-          "format": "int64"
-        },
-        "agent_count": {
-          "type": "integer",
-          "format": "int64"
-        },
         "unit_price": {
           "type": "number",
           "format": "float"
@@ -1116,6 +1108,9 @@
         },
         "trial_cycle_id": {
           "type": "string"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
         }
       }
     }
