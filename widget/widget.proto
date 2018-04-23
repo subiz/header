@@ -17,6 +17,13 @@ service MyServer {
 	rpc Do(AllType) returns(AllType) {}
 }
 
+service WidgetService {
+	rpc ReadSetting(common.Id) returns (Setting) {}
+	rpc UpdateSetting(Setting) returns (Setting) {}
+	rpc ReadUserSetting(common.Id) returns (UserSetting) {}
+	rpc UpdateUserSetting(UserSetting) returns (UserSetting) {}
+}
+
 message Theme {
 	optional string account_id = 2;
 	optional string custom_css = 8; // for setting only
