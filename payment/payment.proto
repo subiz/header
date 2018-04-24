@@ -14,7 +14,6 @@ message Stripe {
 	optional string card_last4 = 2;
 	optional string customer_id = 3;
 	optional string token = 4; // REST only
-	optional int64 paid = 5;
 }
 
 message PaymentMethods {
@@ -67,6 +66,7 @@ message Plan {
 	optional uint32 level = 14;
 	optional bool can_buy_agent = 15;
 	optional bool can_buy = 16;
+	optional bool has_start_time = 17;
 
 }
 
@@ -89,8 +89,6 @@ message Subscription {
 	optional string referral_by = 29; // account_id
 	optional Customer customer = 31;
 	optional string primary_payment_method = 32;
-	optional string renew_cycle_id = 40;
-	optional string trial_cycle_id = 41;
 	optional Limit limit = 42;
 }
 
@@ -152,8 +150,7 @@ message Invoice {
 message AgentInvoiceItem {
 	optional string plan = 3;
 	optional int32 day_left = 4;
-	optional uint32 old = 5;
-	optional uint32 new = 6;
+	optional uint32 agent_count = 8;
 }
 
 message RenewInvoiceItem {
@@ -168,20 +165,28 @@ message PlanInvoiceItem {
 	optional int32 billing_cycle_month = 5;
 	optional string old_plan = 6;
 	optional string new_plan = 3;
-	optional int32 day_left = 4;
-
+	optional float save_percentage = 9;
 	optional int64 started = 8;
 }
 
+message PaybackInvoiceItem {
+	optional string plan = 3;
+	optional uint32 agent_count = 4;
+	optional int32 day_left = 5;
+	optional int64 started = 8;
+	optional int32 billing_cycle_month = 9;
+}
+
 message InvoiceItem {
-	optional string description = 5;
-	optional string invoice_id = 6;
+	optional string description = 5; // remove
+	optional string invoice_id = 6; // remove
 	optional int32 quantity = 7;
 	optional float price = 8; // per unit
 	message Data {
 		optional RenewInvoiceItem renew = 2;
 		optional AgentInvoiceItem agent = 3;
 		optional PlanInvoiceItem plan = 5;
+		optional PaybackInvoiceItem payback = 6;
 	}
 	optional Data data = 9;
 }

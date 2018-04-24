@@ -452,11 +452,7 @@
           "type": "integer",
           "format": "int32"
         },
-        "old": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "new": {
+        "agent_count": {
           "type": "integer",
           "format": "int64"
         }
@@ -731,6 +727,9 @@
         },
         "plan": {
           "$ref": "#/definitions/paymentPlanInvoiceItem"
+        },
+        "payback": {
+          "$ref": "#/definitions/paymentPaybackInvoiceItem"
         }
       }
     },
@@ -784,6 +783,30 @@
         "created": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "paymentPaybackInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "string"
+        },
+        "agent_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "day_left": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -870,6 +893,10 @@
         "can_buy": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "has_start_time": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -890,9 +917,9 @@
         "new_plan": {
           "type": "string"
         },
-        "day_left": {
-          "type": "integer",
-          "format": "int32"
+        "save_percentage": {
+          "type": "number",
+          "format": "float"
         },
         "started": {
           "type": "string",
@@ -1038,10 +1065,6 @@
         },
         "token": {
           "type": "string"
-        },
-        "paid": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },
@@ -1104,12 +1127,6 @@
           "$ref": "#/definitions/paymentCustomer"
         },
         "primary_payment_method": {
-          "type": "string"
-        },
-        "renew_cycle_id": {
-          "type": "string"
-        },
-        "trial_cycle_id": {
           "type": "string"
         },
         "limit": {
