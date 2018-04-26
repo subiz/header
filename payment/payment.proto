@@ -364,6 +364,7 @@ service PaymentMgr {
 	rpc ListPlans(common.Empty) returns (Plans);
 	rpc ExportInvoice(common.Id) returns (String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
+	rpc TransferMoney(PayRequest) returns (Bill);
 }
 
 message String {
