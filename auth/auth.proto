@@ -128,6 +128,20 @@ message PasswordCredential {
 	string password = 2;
 }
 
+message SuperPasswordCredential {
+	string subiz_username = 1;
+	string subiz_password = 2;
+	string subiz_token = 3;
+
+	string issuer_id = 5; // default: owner
+	// string client_id = 7; // default subiz
+  // string client_type = 8;
+	string account_id = 9;
+	// string client_account_id = 10; // subiz
+	int32 expired = 11; // default 24 hour
+	repeated string scopes = 12; // default all
+}
+
 message AuthCookie {
 	string user_id = 1;
 	string account_id = 2;
