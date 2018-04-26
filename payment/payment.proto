@@ -162,19 +162,12 @@ message RenewInvoiceItem {
 
 message PlanInvoiceItem {
 	optional uint32 agent_count = 2;
-	optional int32 billing_cycle_month = 5;
+	optional uint32 billing_cycle_month = 5;
 	optional string old_plan = 6;
 	optional string new_plan = 3;
 	optional float save_percentage = 9;
 	optional int64 started = 8;
-}
-
-message PaybackInvoiceItem {
-	optional string plan = 3;
-	optional uint32 agent_count = 4;
-	optional int32 day_left = 5;
-	optional int64 started = 8;
-	optional int32 billing_cycle_month = 9;
+	optional int32 day_left = 4;
 }
 
 message InvoiceItem {
@@ -186,7 +179,6 @@ message InvoiceItem {
 		optional RenewInvoiceItem renew = 2;
 		optional AgentInvoiceItem agent = 3;
 		optional PlanInvoiceItem plan = 5;
-		optional PaybackInvoiceItem payback = 6;
 	}
 	optional Data data = 9;
 }
