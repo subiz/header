@@ -1468,6 +1468,18 @@
         }
       }
     },
+    "eventSubscriptionResponse": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
     "eventUserEvent": {
       "type": "object",
       "properties": {

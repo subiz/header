@@ -221,9 +221,14 @@ message UserEvent {
 	RawEvent event = 5;
 }
 
+message SubscriptionResponse {
+	common.Context ctx = 1;
+	bool status = 2;
+}
+
 service Publisher {
-	rpc Subscribe(Subscription) returns (common.Empty);
-	rpc Unsubscribe(Subscription) returns (common.Empty);
+	rpc Subscribe(Subscription) returns (SubscriptionResponse);
+	rpc Unsubscribe(Subscription) returns (SubscriptionResponse);
 }
 
 service EventMgr {
