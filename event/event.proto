@@ -83,63 +83,69 @@ message RawEvent {
 	Data data = 20;
 }
 
-enum Type {
+enum AccountType {
+	a = 0;
+	account_deleted = 60;
+	account_info_updated = 61;
+	group_created = 62;
+	group_deleted = 63;
+	group_info_updated = 64;
+	group_joined = 65;
+	group_left = 66;
+	invitation_accepted = 68;
+	agent_deleted = 69;
+	agent_info_updated = 70;
+	agent_permission_updated = 71;
+}
+
+enum UserType {
+	u = 0;
+	my_user_upserted = 46;
+	user_info_updated = 48;
+}
+
+enum EventType {
+	e = 0;
+	presence_updated = 38;
+	content_viewed = 39;
+	content_searched = 40;
+	content_addedtocart = 41;
+	content_checkedout = 42;
+	content_purchased = 43;
+	topic_read = 44;
+	subscribed_topic_updated = 45;
+	user_topic_updated = 50;
+}
+
+enum ConvoType {
 	c = 0;
-	conversation_updated = 9; // conversation
-	message_sent = 10; // conversation
-	conversation_state_updated = 11; // conversation
+	conversation_updated = 9;
+	message_sent = 10;
+	conversation_state_updated = 11;
 	//conversation_started = 1;
-	conversation_joined = 2; // conversation
-
+	conversation_joined = 2;
 	//conversation_message = 3;
-	conversation_left = 4; // conversation
+	conversation_left = 4;
 	//conversation_closed = 5;
-	conversation_tagged = 6; // conversation
-	conversation_untagged = 7; // conversation
-
+	conversation_tagged = 6;
+	conversation_untagged = 7;
 	//conversation_waiting = 8;
-	channel_deintegrated = 20; // conversation
-	channel_integrated = 21; // conversation
+	channel_deintegrated = 20;
+	channel_integrated = 21;
+	message_seen = 30;
+	message_acked = 31;
+	message_received = 32;
+	conversation_member_typing = 33;
+	conversation_postbacked = 34;
+	conversation_unassigned = 35;
+	conversation_assigned = 36;
+	conversation_pending = 81;
+}
 
-	message_seen = 30; // conversation
-	message_acked = 31; // conversation
-	message_received = 32; // conversation
-	conversation_member_typing = 33; // conversation
-	conversation_postbacked = 34; // conversation
-
-	conversation_unassigned = 35; // conversation
-	conversation_assigned = 36; // conversation
-
-	presence_updated = 38; // user
-	content_viewed = 39; // user
-	content_searched = 40; // user
-	content_addedtocart = 41; // user
-	content_checkedout = 42; // user
-	content_purchased = 43; // user
-
-	topic_read = 44;      // user
-	subscribed_topic_updated = 45; // user
-
-	my_user_upserted = 46;    // user
-	user_info_updated = 48; // user
-	user_topic_updated = 50; //topic
-
-	notification_upserted = 52; // notibox
-	notibox_upserted = 53; // notibox
-
-	account_deleted = 60;          // account
-	account_info_updated = 61;		 // account
-	group_created = 62;						 // account
-	group_deleted = 63;						 // account
-	group_info_updated = 64;			 // account
-	group_joined = 65;						 // account
-	group_left = 66;							 // account
-	invitation_accepted = 68;			 // account
-	agent_deleted = 69;						 // account
-	agent_info_updated = 70;			 // account
-	agent_permission_updated = 71; // account
-
-	conversation_pending = 81; // conversation
+enum NotiboxType {
+	n = 0;
+	notification_upserted = 52;
+	notibox_upserted = 53;
 }
 
 enum SubscriberType {
