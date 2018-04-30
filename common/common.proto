@@ -36,7 +36,10 @@ message Context {
 
 	Device by_device = 10;
 
-	string topic = 11; // kafka topic
+	// for kafka
+	string topic = 11;
+	int32 partition = 13;
+	int64 offset = 14;
 }
 
 message Reply {
