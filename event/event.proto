@@ -8,6 +8,7 @@ import "bitbucket.org/subiz/header/conversation/conversation.proto";
 import "bitbucket.org/subiz/header/content/content.proto";
 import "bitbucket.org/subiz/header/user/user.proto";
 import "bitbucket.org/subiz/header/notibox/notibox.proto";
+import "bitbucket.org/subiz/header/payment/payment.proto";
 
 message RawEventCreatedPayload {
 	common.Context ctx = 1;
@@ -79,6 +80,7 @@ message RawEvent {
 		account.AgentPerm agent_perm = 16;
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
+		payment.Limit limit = 19;
 	}
 	Data data = 20;
 }
@@ -96,6 +98,7 @@ enum AccountType {
 	agent_deleted = 69;
 	agent_info_updated = 70;
 	agent_permission_updated = 71;
+	limit_updated = 72;
 }
 
 enum UserType {
@@ -194,6 +197,7 @@ enum Object {
 	group_member = 17;
 	group = 18;
 	integration = 30;
+	limit = 19;
 }
 
 message AllType {

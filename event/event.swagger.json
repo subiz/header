@@ -16,59 +16,6 @@
   ],
   "paths": {},
   "definitions": {
-    "RawEventData": {
-      "type": "object",
-      "properties": {
-        "account": {
-          "$ref": "#/definitions/accountAccount"
-        },
-        "agent": {
-          "$ref": "#/definitions/accountAgent"
-        },
-        "message": {
-          "$ref": "#/definitions/conversationMessage"
-        },
-        "conversation": {
-          "$ref": "#/definitions/conversationConversation"
-        },
-        "postback": {
-          "$ref": "#/definitions/conversationPostback"
-        },
-        "content": {
-          "$ref": "#/definitions/contentContent"
-        },
-        "topic": {
-          "$ref": "#/definitions/userTopic"
-        },
-        "presence": {
-          "$ref": "#/definitions/userPresence"
-        },
-        "user": {
-          "$ref": "#/definitions/userUser"
-        },
-        "unread_topic": {
-          "$ref": "#/definitions/userUnreadTopic"
-        },
-        "my_user": {
-          "$ref": "#/definitions/userMyUser"
-        },
-        "notification": {
-          "$ref": "#/definitions/notiboxNotification"
-        },
-        "notibox": {
-          "$ref": "#/definitions/notiboxBox"
-        },
-        "agent_perm": {
-          "$ref": "#/definitions/accountAgentPerm"
-        },
-        "group_member": {
-          "$ref": "#/definitions/accountGroupMember"
-        },
-        "group": {
-          "$ref": "#/definitions/accountAgentGroup"
-        }
-      }
-    },
     "accountAccount": {
       "type": "object",
       "properties": {
@@ -1413,7 +1360,8 @@
         "agent_perm",
         "group_member",
         "group",
-        "integration"
+        "integration",
+        "limit"
       ],
       "default": "none"
     },
@@ -1452,7 +1400,63 @@
           "type": "string"
         },
         "data": {
-          "$ref": "#/definitions/RawEventData"
+          "$ref": "#/definitions/eventRawEventData"
+        }
+      }
+    },
+    "eventRawEventData": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/accountAccount"
+        },
+        "agent": {
+          "$ref": "#/definitions/accountAgent"
+        },
+        "message": {
+          "$ref": "#/definitions/conversationMessage"
+        },
+        "conversation": {
+          "$ref": "#/definitions/conversationConversation"
+        },
+        "postback": {
+          "$ref": "#/definitions/conversationPostback"
+        },
+        "content": {
+          "$ref": "#/definitions/contentContent"
+        },
+        "topic": {
+          "$ref": "#/definitions/userTopic"
+        },
+        "presence": {
+          "$ref": "#/definitions/userPresence"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "unread_topic": {
+          "$ref": "#/definitions/userUnreadTopic"
+        },
+        "my_user": {
+          "$ref": "#/definitions/userMyUser"
+        },
+        "notification": {
+          "$ref": "#/definitions/notiboxNotification"
+        },
+        "notibox": {
+          "$ref": "#/definitions/notiboxBox"
+        },
+        "agent_perm": {
+          "$ref": "#/definitions/accountAgentPerm"
+        },
+        "group_member": {
+          "$ref": "#/definitions/accountGroupMember"
+        },
+        "group": {
+          "$ref": "#/definitions/accountAgentGroup"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
         }
       }
     },
@@ -1553,6 +1557,33 @@
         }
       },
       "title": "Notification represent an user's notification"
+    },
+    "paymentLimit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "max_automations": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_conversations": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_segments": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_agents": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
     },
     "userDevice": {
       "type": "object",
