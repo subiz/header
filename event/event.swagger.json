@@ -89,6 +89,9 @@
         },
         "referer_from": {
           "type": "string"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
         }
       }
     },

@@ -5,6 +5,7 @@ package account;
 import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 import "bitbucket.org/subiz/header/lang/lang.proto";
+import "bitbucket.org/subiz/header/payment/payment.proto";
 
 message Agent {
 	optional common.Context ctx = 1;
@@ -123,6 +124,7 @@ message Account {
 	optional string url = 21;
 	optional string lang = 23;
 	optional string referer_from = 24;
+	optional payment.Limit limit = 25;
 }
 
 message GroupMember {

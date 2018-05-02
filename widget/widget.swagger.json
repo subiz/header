@@ -89,6 +89,9 @@
         },
         "referer_from": {
           "type": "string"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
         }
       }
     },
@@ -571,6 +574,33 @@
         },
         "type": {
           "type": "string"
+        }
+      }
+    },
+    "paymentLimit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "max_automations": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_conversations": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_segments": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_agents": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
