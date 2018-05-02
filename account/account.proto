@@ -6,21 +6,6 @@ import "bitbucket.org/subiz/header/auth/auth.proto";
 import "bitbucket.org/subiz/header/common/common.proto";
 import "bitbucket.org/subiz/header/lang/lang.proto";
 
-message AllType {
-	optional Agent agent = 1;
-	optional Account account = 2;
-	optional Invitation invi = 3;
-	optional ResetPasswordRequest resetpwr = 5;
-	optional AgentGroup group = 6;
-	optional AgentPerm perm = 7;
-	optional GroupMember mb = 10;
-	optional CreateAccountRequest car = 11;
-	optional LoginRequest login = 12;
-	optional NewPassword np = 13;
-	optional Token tk = 15;
-
-}
-
 message Agent {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -180,15 +165,6 @@ message NewPassword {
 	optional string email = 8;
 }
 
-message Limit {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int32 plan = 3;
-	optional int32 max_agents = 4;
-	optional int32 max_agent_groups = 5;
-	optional int32 max_agent_in_a_group = 6;
-}
-
 message AgentGroups {
 	optional common.Context ctx = 1;
 	repeated AgentGroup Groups = 2;
@@ -256,7 +232,6 @@ enum Event {
 	AccountUpserted = 14; // account
 	AccountPlanUpdated = 16; // account
 	AccountStateUpdated = 17; // AccountStateUpdateRequest
-	AccountLimitUpdated = 18; // oelimitupdated
 	AccountConfirmRequest = 19; // token
 	HandleExpiredInvitation = 20;
 
@@ -338,10 +313,6 @@ message AccountConfirmSuccessEmail {
 	optional string from = 9;
 	optional int64 from_time = 10;
 	optional int64 to_time = 11;
-}
-
-service YourService {
-  rpc Do(AllType) returns (AllType) {}
 }
 
 service AccountMgr {
