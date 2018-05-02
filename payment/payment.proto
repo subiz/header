@@ -47,6 +47,8 @@ message Limit {
 	optional uint32 max_conversations = 6;
 	optional uint32 max_segments = 7;
 	optional uint32 max_agents = 8;
+
+	optional uint32 can_buy_agent = 10;
 }
 
 message Plans {

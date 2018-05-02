@@ -90,6 +90,9 @@
         "referer_from": {
           "type": "string"
         },
+        "timezone": {
+          "type": "string"
+        },
         "limit": {
           "$ref": "#/definitions/paymentLimit"
         }
@@ -1583,6 +1586,10 @@
           "format": "int64"
         },
         "max_agents": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "can_buy_agent": {
           "type": "integer",
           "format": "int64"
         }
