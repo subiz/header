@@ -124,6 +124,7 @@ message Account {
 	optional string url = 21;
 	optional string lang = 23;
 	optional string referer_from = 24;
+	optional string timezone = 26;
 	optional payment.Limit limit = 25;
 }
 
@@ -328,7 +329,7 @@ service AccountMgr {
 	rpc UpdateAgent(Agent) returns (Agent);
 	rpc AcceptInvitation(NewPassword) returns (Agent);
 	rpc GetInvitation(Token) returns (Agent);
-	rpc InviteAgent(Agent) returns (Agent);
+	rpc InviteAgent(Agent) returns (Agent); // allow to call multiple time
 	rpc GetAgent(common.Id) returns (Agent);
 	rpc ConfirmAccount(Token) returns (Account);
 	rpc GetAccount(common.Id) returns (Account);
