@@ -776,8 +776,8 @@
           "format": "int64"
         },
         "can_buy_agent": {
-          "type": "integer",
-          "format": "int64"
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -1069,6 +1069,9 @@
           "format": "int64"
         },
         "promotion_code": {
+          "type": "string"
+        },
+        "name": {
           "type": "string"
         },
         "started": {

@@ -1590,8 +1590,8 @@
           "format": "int64"
         },
         "can_buy_agent": {
-          "type": "integer",
-          "format": "int64"
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
