@@ -295,6 +295,7 @@ service AccountMgr {
 	rpc RequestResetPassword(ResetPasswordRequest) returns (common.Empty);
 	rpc UpdatePassword(NewPassword) returns (Agent);
 	rpc UpdateAgent(Agent) returns (Agent);
+	rpc DeleteAgent(common.Id) returns (common.Empty);
 	rpc AcceptInvitation(NewPassword) returns (Agent);
 	rpc GetInvitation(Token) returns (Agent);
 	rpc InviteAgent(Agent) returns (Agent); // allow to call multiple time
