@@ -184,38 +184,6 @@ enum Event {
 	AccountRequested = 1000;
 	AccountSynced = 1001;
 
-	//	deleted = 11111;
-	CreateAccountRequested = 100; // createaccountrequested
-	UpdateAccountRequested = 101; //account
-	ReadAccountRequested = 102; // id
-
-	ConfirmAccountRequested = 103; // (Token) returns (Empty) {}
-
-	// Agent methods
-	ReadAgentRequested = 104;  // (Id) returns (Agent) {}
-	InviteAgentRequested = 105; //(Invitation) returns (Id) {}
-	UninviteAgentRequested = 106; //(Id) returns (Empty) {}
-	AcceptInvitationRequested = 107; //(NewPassword) returns (Agent) {}
-	ReadInvitationRequested = 110; //(Token) returns (Agent) {}
-	RejectInvitationRequested = 108; //(Token) returns (Empty) {}
-
-	UpdateAgentRequested = 109; //(Agent) returns (Empty) {}
-	ResetPasswordRequested = 111; //(NewPassword) returns (Empty) {}
-	RequestResetPasswordRequested = 112; //(ResetPasswordRequest) returns (Empty)
-	UpdateAgentPermissionRequested = 113; // =(AgentPerm) returns (Empty) {}
-	ReadAgentPermissionRequested = 114; //(Id) returns (auth.Method) {}
-	CheckLoginRequested = 115; //(LoginRequest) returns (Id) {}
-	BatchReadRequested = 116;//(AgentIds) returns (ent Agents) {}
-	ListAgentsRequested = 117;//(ListAgentRequest) returns (Agents) {}
-	//AgentGroup methods
-	CreateGroupRequested = 118; //(AgentGroup) returns (Id) {}
-	UpdateGroupRequested = 119;//(AgentGroup) returns (Empty) {}
-	DeleteGroupRequested = 120; //(Id) returns (Empty) {}
-	ListGroupsRequested = 121; //(ListGroupRequest) returns(AgentGroups) {}
-	RemoveAgentFromGroupRequested = 122; //(GroupMember) returns (Empty) {}
-	AddAgentToGroupRequested = 123; //(GroupMember) returns (Empty) {}
-	ReadGroupRequested = 124; //(Id) returns (AgentGroup) {}
-
 	AgentGroupDeleted = 0; // id
 	AgentLeftGroup = 1; // groupmember
 	AgentJoinedGroup = 2; // groupmember
@@ -227,11 +195,7 @@ enum Event {
 	AgentPermissionUpdated = 9; // AgentPerm
 
 	// out event only
-	AgentRejected = 10; // id
-	AgentAccepted = 11; // id
-	AgentUninvited = 12; // id
-	AgentInvited = 13; // invitation
-	AgentDeleted = 15; //id
+
 	AccountUpserted = 14; // account
 	AccountPlanUpdated = 16; // account
 	AccountStateUpdated = 17; // AccountStateUpdateRequest
@@ -249,8 +213,12 @@ enum Event {
 	AccountActivated = 46; // account
 	AccountInfoUpdated = 47;
 
+	AgentRejected = 10; // id
+	AgentAccepted = 11; // id
+	AgentInvited = 13; // invitation
+	AgentDeleted = 15; //id
 	AgentActivated = 50;
-	AgentDeativated = 51;
+	AgentDeactivated = 51;
 	AgentInfoUpdated = 59;
 }
 
