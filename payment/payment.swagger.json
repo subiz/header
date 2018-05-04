@@ -763,13 +763,10 @@
           "type": "integer",
           "format": "int64"
         },
-        "max_conversations": {
-          "type": "integer",
-          "format": "int64"
-        },
         "max_segments": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "optional uint32 max_conversations = 6;"
         },
         "max_agents": {
           "type": "integer",
@@ -778,6 +775,22 @@
         "can_buy_agent": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "automation_webhook_quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "automation_email_quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "automation_message_quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_rules": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },

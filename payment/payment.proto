@@ -44,11 +44,15 @@ message Limit {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional uint32 max_automations = 4;
-	optional uint32 max_conversations = 6;
+	// optional uint32 max_conversations = 6;
 	optional uint32 max_segments = 7;
 	optional uint32 max_agents = 8;
-
 	optional bool can_buy_agent = 10;
+
+	optional uint32 automation_webhook_quota = 12;
+	optional uint32 automation_email_quota = 13;
+	optional uint32 automation_message_quota = 14;
+	optional uint32 max_rules = 16;
 }
 
 message Plans {
