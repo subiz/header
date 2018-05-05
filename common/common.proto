@@ -40,6 +40,8 @@ message Context {
 	string topic = 11;
 	int32 partition = 13;
 	int64 offset = 14;
+	uint64 term = 15;
+	string router_topic = 16;
 }
 
 message Reply {

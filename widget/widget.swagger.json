@@ -551,6 +551,13 @@
         "offset": {
           "type": "string",
           "format": "int64"
+        },
+        "term": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "router_topic": {
+          "type": "string"
         }
       }
     },
