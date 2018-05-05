@@ -17,13 +17,13 @@ message Setting {
 	optional SettingType web = 4;
 	optional SettingType mobile = 5;
 	message Email {
-		optional SettingType email = 1;
+		optional SettingType type = 1;
 		optional int64 after = 2;
 	}
 	optional Email email = 6;
 }
 
-service Noti5Serive {
+service Noti5Service {
     rpc ReadNotificationSetting(common.Id) returns (Setting) {};
     rpc UpdateNotificationSetting(Setting) returns (common.Empty) {};
 }

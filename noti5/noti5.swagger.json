@@ -19,7 +19,7 @@
     "SettingEmail": {
       "type": "object",
       "properties": {
-        "email": {
+        "type": {
           "$ref": "#/definitions/noti5SettingType"
         },
         "after": {
