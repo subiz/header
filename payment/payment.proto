@@ -158,7 +158,7 @@ message Invoice {
 message AgentInvoiceItem {
 	optional string plan = 3;
 	optional int32 day_left = 4;
-	optional uint32 agent_count = 8;
+	optional int32 agent_count = 8;
 }
 
 message RenewInvoiceItem {
