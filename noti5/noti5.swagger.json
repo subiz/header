@@ -390,6 +390,13 @@
         "offset": {
           "type": "string",
           "format": "int64"
+        },
+        "term": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "router_topic": {
+          "type": "string"
         }
       }
     },
@@ -453,11 +460,11 @@
     "noti5SettingType": {
       "type": "string",
       "enum": [
-        "NewMessage",
-        "NewConversation",
-        "Nothing"
+        "new_message",
+        "new_conversation",
+        "nothing"
       ],
-      "default": "NewMessage"
+      "default": "new_message"
     }
   }
 }

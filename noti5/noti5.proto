@@ -5,9 +5,9 @@ package noti5;
 import "bitbucket.org/subiz/header/common/common.proto";
 
 enum SettingType {
-	NewMessage = 0;
-	NewConversation = 1;
-	Nothing = 2;
+	new_message = 0;
+	new_conversation = 1;
+	nothing = 2;
 }
 
 message Setting {
