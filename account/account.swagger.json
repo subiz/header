@@ -95,6 +95,9 @@
         },
         "limit": {
           "$ref": "#/definitions/paymentLimit"
+        },
+        "country": {
+          "type": "string"
         }
       }
     },

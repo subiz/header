@@ -126,6 +126,7 @@ message Account {
 	optional string referer_from = 24;
 	optional string timezone = 26;
 	optional payment.Limit limit = 25;
+	optional string country = 27;
 }
 
 message GroupMember {
