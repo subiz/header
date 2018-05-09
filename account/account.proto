@@ -181,10 +181,16 @@ message Token {
 	optional string account_id = 4;
 }
 
+message AccountV3 {
+	optional common.Context ctx = 1;
+	optional Account account = 2;
+	optional Agent owner = 3;
+}
+
 enum Event {
 	AccountRequested = 1000;
 	AccountSynced = 1001;
-	AccountSyncedv3 = 1002;
+	AccountSyncedv3	 = 1002;
 
 	AgentGroupDeleted = 0; // id
 	AgentLeftGroup = 1; // groupmember
