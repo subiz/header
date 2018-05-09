@@ -184,6 +184,7 @@ message Token {
 enum Event {
 	AccountRequested = 1000;
 	AccountSynced = 1001;
+	AccountSyncedv3 = 1002;
 
 	AgentGroupDeleted = 0; // id
 	AgentLeftGroup = 1; // groupmember
