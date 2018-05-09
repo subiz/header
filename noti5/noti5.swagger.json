@@ -435,28 +435,19 @@
           "type": "string"
         },
         "web_type": {
-          "$ref": "#/definitions/noti5SettingType"
+          "type": "string"
         },
         "mobile_type": {
-          "$ref": "#/definitions/noti5SettingType"
+          "type": "string"
         },
         "email_type": {
-          "$ref": "#/definitions/noti5SettingType"
+          "type": "string"
         },
         "email_after": {
           "type": "integer",
           "format": "int32"
         }
       }
-    },
-    "noti5SettingType": {
-      "type": "string",
-      "enum": [
-        "new_message",
-        "new_conversation",
-        "nothing"
-      ],
-      "default": "new_message"
     }
   }
 }
