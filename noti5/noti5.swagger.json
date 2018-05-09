@@ -16,18 +16,6 @@
   ],
   "paths": {},
   "definitions": {
-    "SettingEmail": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/noti5SettingType"
-        },
-        "after": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
     "authCredential": {
       "type": "object",
       "properties": {
@@ -446,14 +434,18 @@
         "agent_id": {
           "type": "string"
         },
-        "web": {
+        "web_type": {
           "$ref": "#/definitions/noti5SettingType"
         },
-        "mobile": {
+        "mobile_type": {
           "$ref": "#/definitions/noti5SettingType"
         },
-        "email": {
-          "$ref": "#/definitions/SettingEmail"
+        "email_type": {
+          "$ref": "#/definitions/noti5SettingType"
+        },
+        "email_after": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

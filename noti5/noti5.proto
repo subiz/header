@@ -11,19 +11,16 @@ enum SettingType {
 }
 
 message Setting {
-    optional common.Context ctx = 1;
-    optional string account_id = 2;
-    optional string agent_id = 3;
-	optional SettingType web = 4;
-	optional SettingType mobile = 5;
-	message Email {
-		optional SettingType type = 1;
-		optional int64 after = 2;
-	}
-	optional Email email = 6;
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	optional SettingType web_type = 4;
+	optional SettingType mobile_type = 5;
+	optional SettingType email_type = 6;
+	optional int32 email_after = 7;
 }
 
 service Noti5Service {
-    rpc ReadNotificationSetting(common.Id) returns (Setting) {};
+    rpc ReadNotificationSetting(common.Empty) returns (Setting) {};
     rpc UpdateNotificationSetting(Setting) returns (common.Empty) {};
 }
