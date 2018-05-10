@@ -437,98 +437,6 @@
         }
       }
     },
-    "conversationAllType": {
-      "type": "object",
-      "properties": {
-        "l": {
-          "$ref": "#/definitions/conversationLimit"
-        },
-        "r": {
-          "$ref": "#/definitions/conversationRule"
-        },
-        "co": {
-          "$ref": "#/definitions/conversationCondition"
-        },
-        "ro": {
-          "$ref": "#/definitions/conversationRoute"
-        },
-        "rr": {
-          "$ref": "#/definitions/conversationRouteResult"
-        },
-        "ms": {
-          "$ref": "#/definitions/conversationMemberSeen"
-        },
-        "m": {
-          "$ref": "#/definitions/conversationMember"
-        },
-        "c": {
-          "$ref": "#/definitions/conversationConversation"
-        },
-        "sr": {
-          "$ref": "#/definitions/conversationStartRequest"
-        },
-        "pb": {
-          "$ref": "#/definitions/conversationPostback"
-        },
-        "tags": {
-          "$ref": "#/definitions/conversationTags"
-        },
-        "canr": {
-          "$ref": "#/definitions/conversationCannedResponse"
-        },
-        "tag": {
-          "$ref": "#/definitions/conversationTag"
-        },
-        "att": {
-          "$ref": "#/definitions/conversationAttachment"
-        },
-        "getem": {
-          "$ref": "#/definitions/conversationGenericElementTemplate"
-        },
-        "button": {
-          "$ref": "#/definitions/conversationButton"
-        },
-        "messa": {
-          "$ref": "#/definitions/conversationMessage"
-        },
-        "com": {
-          "$ref": "#/definitions/conversationComputed"
-        },
-        "rea": {
-          "$ref": "#/definitions/conversationReaction"
-        },
-        "fiel": {
-          "$ref": "#/definitions/conversationField"
-        },
-        "reci": {
-          "$ref": "#/definitions/conversationReceived"
-        },
-        "ack": {
-          "$ref": "#/definitions/conversationAck"
-        },
-        "seen": {
-          "$ref": "#/definitions/conversationSeen"
-        },
-        "lcbur": {
-          "$ref": "#/definitions/conversationListConversationsByUserRequest"
-        },
-        "ler": {
-          "$ref": "#/definitions/conversationListEventsRequest"
-        },
-        "search": {
-          "$ref": "#/definitions/conversationSearch"
-        },
-        "listcon": {
-          "$ref": "#/definitions/conversationListConversationsRequest"
-        },
-        "acreq": {
-          "$ref": "#/definitions/conversationAvailabilityCheckRequest"
-        },
-        "acres": {
-          "$ref": "#/definitions/conversationAvailabilityCheckResult"
-        }
-      }
-    },
     "conversationAskInfomation": {
       "type": "object",
       "properties": {
@@ -620,26 +528,6 @@
         },
         "ask_info_answer": {
           "$ref": "#/definitions/conversationAskInfomationAnswer"
-        }
-      }
-    },
-    "conversationAvailabilityCheckRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "integration_id": {
-          "type": "string"
-        },
-        "user": {
-          "$ref": "#/definitions/userUser"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
         }
       }
     },
@@ -1013,97 +901,6 @@
         }
       }
     },
-    "conversationLimit": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "conversation_history": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "max_rules": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "conversationListConversationsByUserRequest": {
-      "type": "object",
-      "properties": {
-        "account_id": {
-          "type": "string"
-        },
-        "channel_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "start_id": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "conversationListConversationsRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "anchor": {
-          "type": "string"
-        },
-        "member_id": {
-          "type": "string"
-        },
-        "group_by": {
-          "type": "string"
-        },
-        "integration_id": {
-          "type": "string"
-        }
-      }
-    },
-    "conversationListEventsRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "conversation_id": {
-          "type": "string"
-        },
-        "start_id": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "conversationMember": {
       "type": "object",
       "properties": {
@@ -1127,17 +924,6 @@
           "format": "boolean"
         },
         "conversation_id": {
-          "type": "string"
-        }
-      }
-    },
-    "conversationMemberSeen": {
-      "type": "object",
-      "properties": {
-        "member_id": {
-          "type": "string"
-        },
-        "message_id": {
           "type": "string"
         }
       }
@@ -1189,17 +975,6 @@
         }
       }
     },
-    "conversationPostback": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "$ref": "#/definitions/conversationMessage"
-        },
-        "button": {
-          "$ref": "#/definitions/conversationButton"
-        }
-      }
-    },
     "conversationReaction": {
       "type": "object",
       "properties": {
@@ -1240,23 +1015,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/conversationRule"
-          }
-        }
-      }
-    },
-    "conversationRouteResult": {
-      "type": "object",
-      "properties": {
-        "rule_id": {
-          "type": "string"
-        },
-        "strategy": {
-          "type": "string"
-        },
-        "agent_ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
           }
         }
       }
@@ -1308,30 +1066,6 @@
           "type": "string"
         },
         "description": {
-          "type": "string"
-        }
-      }
-    },
-    "conversationSearch": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "keyword": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "before_id": {
-          "type": "string"
-        },
-        "after_id": {
           "type": "string"
         }
       }

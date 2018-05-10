@@ -5,13 +5,6 @@ package conversation;
 import "bitbucket.org/subiz/header/common/common.proto";
 import "bitbucket.org/subiz/header/user/user.proto";
 
-message Limit {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional int32 conversation_history = 2;
-	optional int32 max_rules = 7;
-}
-
 message Rule {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -77,6 +70,16 @@ message RouteResult {
 message MemberSeen {
 	optional string member_id = 2;
 	optional string message_id = 3;
+}
+
+message MemberV3 {
+	optional common.Context ctx = 1;
+	optional string id = 4;
+	optional string conversation_id = 5;
+	optional string account_id = 6;
+	optional string name = 7;
+	optional string avatar_url = 8;
+	optional string type = 9; // agent || user
 }
 
 message Member {
@@ -454,41 +457,6 @@ message Postback {
 	optional Button button = 3;
 }
 
-message AllType {
-	optional Limit l = 5;
-	optional Rule r = 6;
-	optional Condition co = 7;
-	optional Route ro = 8;
-	optional RouteResult rr = 9;
-	optional MemberSeen ms = 12;
-	optional Member m = 13;
-	optional Conversation c = 14;
-	optional StartRequest sr = 16;
-	optional Postback pb = 18;
-	optional Tags tags = 20;
-	optional CannedResponse canr = 22;
-	optional Tag tag = 23;
-	optional Attachment att = 25;
-	optional GenericElementTemplate getem = 26;
-	optional Button button = 27;
-	optional Message messa = 28;
-	optional Computed com = 29;
-	optional Reaction rea = 31;
-	optional Field fiel = 35;
-	optional Received reci = 36;
-	optional Ack ack = 37;
-	optional Seen seen = 38;
-	optional ListConversationsByUserRequest lcbur = 39;
-	optional ListEventsRequest ler = 41;
-	optional Search search = 42;
-	optional ListConversationsRequest listcon = 43;
-	optional AvailabilityCheckRequest acreq = 44;
-	optional AvailabilityCheckResult acres = 45;
-}
-
-service Converstation {
-	rpc Do(AllType) returns (AllType) {};
-}
 
 message UseConnector {
 	optional string account_id = 2;
