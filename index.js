@@ -91,5 +91,5 @@ function filterAccountProp(def) {
 	def.authCredential = undefined;
 }
 
-fs.writeFileSync(outdst, JSON.stringify(readAllDef()));
+fs.writeFileSync(outdst, JSON.stringify(readAllDef(), null, 2));
 console.log("\033[0;32mDone. (" + path.resolve(outdst) + ")\033[0;30m\n");
