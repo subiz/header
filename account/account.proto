@@ -185,12 +185,12 @@ message AccountV3 {
 	optional common.Context ctx = 1;
 	optional Account account = 2;
 	optional Agent owner = 3;
+	optional payment.Subscription subscription = 4;
 }
 
 enum Event {
 	AccountRequested = 1000;
 	AccountSynced = 1001;
-	AccountSyncedv3	 = 1002;
 
 	AgentGroupDeleted = 0; // id
 	AgentLeftGroup = 1; // groupmember
@@ -203,7 +203,6 @@ enum Event {
 	AgentPermissionUpdated = 9; // AgentPerm
 
 	// out event only
-
 	AccountUpserted = 14; // account
 	AccountPlanUpdated = 16; // account
 	AccountStateUpdated = 17; // AccountStateUpdateRequest
@@ -228,6 +227,7 @@ enum Event {
 	AgentActivated = 50;
 	AgentDeactivated = 51;
 	AgentInfoUpdated = 59;
+	AccountCreatedV3 = 60;
 }
 
 message ConfirmEmail {
