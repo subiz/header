@@ -191,7 +191,7 @@ message AccountV3 {
 enum Event {
 	AccountRequested = 1000;
 	AccountSynced = 1001;
-	AccountSyncedv3 = 1002;
+	AccountV3Synced = 1002;
 
 	AgentGroupDeleted = 0; // id
 	AgentLeftGroup = 1; // groupmember
@@ -228,8 +228,8 @@ enum Event {
 	AgentActivated = 50;
 	AgentDeactivated = 51;
 	AgentInfoUpdated = 59;
-	AccountCreatedV3 = 60;
-	AccountV3PaymentSynced = 63;
+	AccountV3Created = 60;
+	AccountPaymentV3Synced = 63;
 }
 
 message ConfirmEmail {
