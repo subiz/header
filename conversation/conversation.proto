@@ -263,6 +263,7 @@ enum Event {
 	ConversationMessageSearchRequest = 94;
 	ConversationRequested = 100;
 	ConversationSynced = 101;
+	ConversationV3Synced = 102;
 }
 
 message RequestState {
