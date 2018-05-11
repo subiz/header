@@ -214,6 +214,7 @@ enum Event {
 
 	UserSynced = 101;
 	UserUpserted = 105;
+	UserV3Synced = 106;
 }
 
 message SubizIDRequest {
