@@ -345,6 +345,7 @@ enum Event {
 	InvoiceCreatedEmailSend = 6;
 	PaymentV3Synced = 8;
 
+	SubscriptionUpdated = 14;
 	InvoiceUpdated = 10;
 	PaymentMethodUpdated = 11;
 	BillingUpdated = 12;
