@@ -2267,6 +2267,24 @@
           }
         }
       },
+      "kvValue": {
+        "type": "object",
+        "properties": {
+          "partition": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "blob": {
+            "type": "string",
+            "format": "byte"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
       "noti5Setting": {
         "type": "object",
         "properties": {

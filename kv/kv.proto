@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package kv;
+
+message Key {
+	string partition = 2;
+	string key = 3;
+}
+
+message Value {
+	string partition = 2;
+	string key = 3;
+	bytes blob = 4;
+	string text = 5;
+}
+
+service KV {
+	rpc Set(Value) returns (Value);
+	rpc Get(Key) returns (Value);
+}
