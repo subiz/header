@@ -229,8 +229,6 @@ message FixedAmountPromotionCode {
 
 message PercentPromotionCode {
 	optional float percent = 2;
-	optional float min_amount = 7;
-	optional float max_amount = 8;
 }
 
 message CreditCode {
@@ -274,6 +272,9 @@ message PromotionCode {
 	optional int32 max_redemptions = 20;
 	optional string addon = 21;
 	repeated string for_items = 23;
+
+	optional float min_amount = 24;
+	optional float max_amount = 25;
 }
 
 message ExchangeRate {

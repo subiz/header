@@ -864,14 +864,6 @@
         "percent": {
           "type": "number",
           "format": "float"
-        },
-        "min_amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "max_amount": {
-          "type": "number",
-          "format": "float"
         }
       }
     },
@@ -1004,6 +996,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "min_amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "max_amount": {
+          "type": "number",
+          "format": "float"
         }
       }
     },
