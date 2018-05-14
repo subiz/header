@@ -535,6 +535,9 @@
     "paymentContact": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "name": {
           "type": "string"
         },

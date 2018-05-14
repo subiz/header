@@ -203,6 +203,7 @@ message BillingInfo {
 }
 
 message Contact {
+	optional common.Context ctx = 1;
 	optional string name = 2;
 	optional string email = 3;
 	optional string phone = 4;
