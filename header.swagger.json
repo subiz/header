@@ -2280,7 +2280,7 @@
             "type": "string",
             "format": "byte"
           },
-          "text": {
+          "value": {
             "type": "string"
           }
         }

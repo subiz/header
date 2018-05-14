@@ -11,7 +11,7 @@ message Value {
 	string partition = 2;
 	string key = 3;
 	bytes blob = 4;
-	string text = 5;
+	string value = 5;
 }
 
 service KV {
