@@ -350,6 +350,7 @@ enum Event {
 	PaymentMethodUpdated = 11;
 	BillingUpdated = 12;
 	LogUpdated = 13;
+	PromotionCodeUpdated = 15;
 }
 
 message PaymentRenewCycleRequested {
