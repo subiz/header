@@ -148,6 +148,7 @@ enum T {
 	exchange_rate_not_found = 282;
 	invalid_join_free = 283;
 	invalid_active_free = 284;
+	kv_not_found = 285;
 }
 
 enum L {
