@@ -34,7 +34,7 @@ message Agent {
 	optional string location = 15;
 	optional string timezone = 16;
 	optional string encrypted_password = 17;
-  optional int64 joined = 20;
+	optional int64 joined = 20;
 	optional string invited_by = 21;
 
 	enum AgentState {
@@ -44,7 +44,7 @@ message Agent {
 		deleted = 3;
 	}
 
-  optional string state = 22; //Agent state
+	optional string state = 22; //Agent state
 	optional int64 password_changed = 23;
 	optional int64 seen = 24;
 	optional int64 modified = 25;
@@ -70,7 +70,7 @@ message Invitation {
 
 message AgentGroup {
 	optional common.Context ctx = 1;
-	optional string id = 2;				//
+	optional string id = 2;
 	optional string account_id = 3;
 	optional string name = 4;
 	optional string logo_url = 5;
@@ -98,7 +98,6 @@ message Account {
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string name = 3;
-	optional int32 plan = 4;
 	optional string logo_url = 5;
 	optional string owner_id = 6;
 	optional string state = 7; // accountstate
@@ -146,7 +145,7 @@ message CreateAccountRequest {
 	optional string account_url = 7;
 	optional string avatar_url = 8;
 	optional string timezone = 9;
-  optional string phone = 10;
+	optional string phone = 10;
 	optional string country_code = 11;
 }
 

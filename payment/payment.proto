@@ -250,7 +250,6 @@ message PromotionCode {
 		referral_credit_code = 3;
 	}
 	optional string type = 6;
-	optional float value = 4;
 
 	optional int32 redeem_count = 5;
 	optional string creator = 9;
