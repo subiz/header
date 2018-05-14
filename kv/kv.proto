@@ -10,7 +10,7 @@ message Key {
 message Value {
 	string partition = 2;
 	string key = 3;
-	bytes blob = 4;
+	bytes bytes = 4;
 	string value = 5;
 }
 

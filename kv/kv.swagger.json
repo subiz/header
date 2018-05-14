@@ -34,7 +34,7 @@
         "key": {
           "type": "string"
         },
-        "blob": {
+        "bytes": {
           "type": "string",
           "format": "byte"
         },
