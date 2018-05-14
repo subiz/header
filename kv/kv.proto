@@ -14,7 +14,12 @@ message Value {
 	string value = 5;
 }
 
+message Bool {
+	bool value = 2;
+}
+
 service KV {
 	rpc Set(Value) returns (Value);
 	rpc Get(Key) returns (Value);
+	rpc Has(Key) returns (Bool);
 }

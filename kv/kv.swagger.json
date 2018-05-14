@@ -16,6 +16,15 @@
   ],
   "paths": {},
   "definitions": {
+    "kvBool": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
     "kvValue": {
       "type": "object",
       "properties": {
