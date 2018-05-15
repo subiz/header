@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # setup for the first time
 #go get github.com/favadi/protoc-go-inject-tag
 #go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
