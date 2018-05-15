@@ -22,6 +22,7 @@ message PaymentMethods {
 }
 
 message PaymentMethod {
+	optional common.Context ctx = 1;
 	enum Type {
 		bank_transfer = 0;
 		credit_card = 1;
@@ -78,6 +79,7 @@ message Plan {
 }
 
 message Subscription {
+	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional int64 created = 11;
 	optional string promotion_code = 4;
@@ -101,6 +103,7 @@ message Subscription {
 }
 
 message Bill {
+	optional common.Context ctx = 1;
 	optional string id = 3;
 	optional string account_id = 4;
 	optional float amount = 5;
@@ -123,6 +126,7 @@ message Invoices {
 }
 
 message Invoice {
+	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string id = 3;
 	optional float amount_due = 4;
@@ -241,6 +245,7 @@ message ReferralCreditCode {
 }
 
 message PromotionCode {
+	optional common.Context ctx = 1;
 	optional string description = 3;
 
 	enum Type {
@@ -284,6 +289,7 @@ message ExchangeRate {
 }
 
 message Log {
+	optional common.Context ctx = 1;
 	enum Action {
 		create_invoice = 0;
 		change_invoice_status = 1;

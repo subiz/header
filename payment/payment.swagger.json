@@ -477,6 +477,9 @@
     "paymentBill": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "id": {
           "type": "string"
         },
@@ -626,6 +629,9 @@
     "paymentInvoice": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "account_id": {
           "type": "string"
         },
@@ -819,6 +825,9 @@
     "paymentPaymentMethod": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "type": {
           "type": "string"
         },
@@ -943,6 +952,9 @@
     "paymentPromotionCode": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "description": {
           "type": "string"
         },
@@ -1077,6 +1089,9 @@
     "paymentSubscription": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "account_id": {
           "type": "string"
         },
