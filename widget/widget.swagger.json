@@ -28,10 +28,6 @@
         "name": {
           "type": "string"
         },
-        "plan": {
-          "type": "integer",
-          "format": "int32"
-        },
         "logo_url": {
           "type": "string"
         },

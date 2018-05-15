@@ -10,10 +10,6 @@
           "name": {
             "type": "string"
           },
-          "plan": {
-            "type": "integer",
-            "format": "int32"
-          },
           "logo_url": {
             "type": "string"
           },
@@ -2861,10 +2857,6 @@
           },
           "type": {
             "type": "string"
-          },
-          "value": {
-            "type": "number",
-            "format": "float"
           },
           "redeem_count": {
             "type": "integer",
