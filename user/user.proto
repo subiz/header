@@ -49,6 +49,38 @@ message MyUser {
 	optional int64 updated = 5;
 }
 
+
+enum AtributeType {
+	text = 0;
+	number = 1;
+	boolean = 2;
+	datetime = 3;
+	list = 4;
+}
+
+message AtributeDefinition {
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string account_id = 3;
+	required string name = 4;
+	optional string description = 5;
+	required AtributeType type = 6;
+	required string key = 7;
+	optional int64 updated = 8;
+}
+
+message AttributeData {
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string account_id = 3;
+	optional string user_id = 4;
+	required string key = 5;
+	required string value = 6;
+	optional string state = 7;
+	optional int64 created = 8;
+	optional int64 modified = 9;
+}
+
 message User {
 	optional common.Context ctx = 1;
 	optional string id = 3;
@@ -61,6 +93,8 @@ message User {
 	repeated Device devices = 13;
 	optional bool is_ban = 14;
 	optional string avatar_url = 15;
+
+	repeated AttributeData attributes = 18;
 
 	repeated string segments = 19;
 	repeated string labels = 20;

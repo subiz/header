@@ -630,6 +630,40 @@
         }
       }
     },
+    "userAttributeData": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "userDevice": {
       "type": "object",
       "properties": {
@@ -780,6 +814,12 @@
         },
         "avatar_url": {
           "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userAttributeData"
+          }
         },
         "segments": {
           "type": "array",

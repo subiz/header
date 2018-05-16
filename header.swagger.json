@@ -1583,6 +1583,37 @@
           }
         }
       },
+      "userAttributeData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "userDevice": {
         "type": "object",
         "properties": {
@@ -1730,6 +1761,12 @@
           },
           "avatar_url": {
             "type": "string"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userAttributeData"
+            }
           },
           "segments": {
             "type": "array",
