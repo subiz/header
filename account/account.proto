@@ -52,6 +52,8 @@ message Agent {
 	optional auth.Method method = 27;
 	optional Account account = 28;
 	optional string country_code = 29;
+	optional int32 v3_state = 30 ; // 0: not v3, 1: v3 but not convert, 2: converted v3
+	optional string v3_hashed_password = 31;
 }
 
 message Invitation {
@@ -126,6 +128,8 @@ message Account {
 	optional string timezone = 26;
 	optional payment.Limit limit = 25;
 	optional string country = 27;
+
+	optional int32 v3_state = 28; // 0: not v3, 1: v3 but not convert, 2: converted v3
 }
 
 message GroupMember {

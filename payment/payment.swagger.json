@@ -1158,6 +1158,10 @@
         },
         "limit": {
           "$ref": "#/definitions/paymentLimit"
+        },
+        "v3_state": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }

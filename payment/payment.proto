@@ -100,6 +100,7 @@ message Subscription {
 	optional Customer customer = 31;
 	optional string primary_payment_method = 32;
 	optional Limit limit = 42;
+	optional int32 v3_state = 43;
 }
 
 message Bill {
