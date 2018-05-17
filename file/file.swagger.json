@@ -319,10 +319,14 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "create_attribute": {
+        "read_attribute": {
           "type": "boolean",
           "format": "boolean",
           "title": "user attribute"
+        },
+        "create_attribute": {
+          "type": "boolean",
+          "format": "boolean"
         },
         "update_attribute": {
           "type": "boolean",

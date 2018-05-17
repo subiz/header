@@ -118,9 +118,10 @@ message Method {
 	bool read_subscriptions = 315;
 
 	// user attribute
-	bool create_attribute = 316;
-	bool update_attribute = 317;
-	bool delete_attribute = 318;
+	bool read_attribute = 316;
+	bool create_attribute = 317;
+	bool update_attribute = 318;
+	bool delete_attribute = 319;
 }
 
 message UserAuth {
