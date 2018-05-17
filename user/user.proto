@@ -74,6 +74,11 @@ message AttributeDefinitions {
 	repeated AttributeDefinition attributes = 2;
 }
 
+enum AttributeDataState {
+	live = 0;
+	deleted = 1;
+}
+
 message AttributeData {
 	optional common.Context ctx = 1;
 	optional string id = 2;

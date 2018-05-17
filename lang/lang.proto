@@ -149,6 +149,8 @@ enum T {
 	invalid_join_free = 283;
 	invalid_active_free = 284;
 	kv_not_found = 285;
+	attribute_not_found = 286;
+	attribute_key_not_found = 287;
 }
 
 enum L {
