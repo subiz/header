@@ -94,6 +94,10 @@
         },
         "country": {
           "type": "string"
+        },
+        "v3_state": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -184,6 +188,13 @@
           "$ref": "#/definitions/accountAccount"
         },
         "country_code": {
+          "type": "string"
+        },
+        "v3_state": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "v3_hashed_password": {
           "type": "string"
         }
       }

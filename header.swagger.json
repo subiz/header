@@ -76,6 +76,10 @@
           },
           "country": {
             "type": "string"
+          },
+          "v3_state": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -163,6 +167,13 @@
             "$ref": "#/components/schemas/Account"
           },
           "country_code": {
+            "type": "string"
+          },
+          "v3_state": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "v3_hashed_password": {
             "type": "string"
           }
         }
@@ -3086,6 +3097,10 @@
           },
           "limit": {
             "$ref": "#/components/schemas/paymentLimit"
+          },
+          "v3_state": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -3246,6 +3261,38 @@
           }
         }
       },
+      "userSegmentCondition": {
+        "type": "object",
+        "properties": {
+          "join": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "composition": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userCondition"
+            }
+          },
+          "left_condition": {
+            "$ref": "#/components/schemas/userSegmentCondition"
+          },
+          "right_condition": {
+            "$ref": "#/components/schemas/userSegmentCondition"
+          }
+        }
+      },
       "userSegmentation": {
         "type": "object",
         "properties": {
@@ -3265,16 +3312,10 @@
             "type": "integer",
             "format": "int64"
           },
-          "conditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userCondition"
-            }
-          },
           "ran": {
             "type": "integer",
             "format": "int64",
-            "title": "repeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==>  + * a b * + c d e"
+            "title": "repeated Condition conditions = 6;\nrepeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==>  + * a b * + c d e"
           },
           "created": {
             "type": "integer",
@@ -3286,6 +3327,9 @@
           },
           "state": {
             "type": "string"
+          },
+          "condition": {
+            "$ref": "#/components/schemas/userSegmentCondition"
           },
           "current_cursor": {
             "type": "string"
