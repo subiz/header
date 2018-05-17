@@ -246,6 +246,7 @@ enum Event {
 	AutomationFired = 103;
 	UserRequested = 100;
 
+
 	UserSynced = 101;
 	UserUpserted = 105;
 	UserV3Synced = 106;
@@ -284,6 +285,14 @@ message SegmentLoopState {
 	optional int64 loop_number = 7;
 }
 
+message UserSegmentCache {
+		optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 3;
+	optional string condition_id = 4;
+
+}
+
 message Segmentation {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -291,7 +300,7 @@ message Segmentation {
 	optional string name = 3;
 	optional string description = 11;
 	optional int64 user_count = 4;
-	repeated Condition conditions = 6;
+	// repeated Condition conditions = 6;
 	//repeated SegmentCondition query = 5; // suffix annotation
 	// a * b + (c + d) * e  ==>  + * a b * + c d e
 	optional int64 ran = 8;
@@ -303,6 +312,7 @@ message Segmentation {
 		inactive = 1;
 	}
 
+	optional SegmentCondition condition = 19;
 	optional string current_cursor = 18;
 }
 
@@ -316,15 +326,30 @@ message SegmentTracking {
 }
 
 message SegmentCondition {
-	enum Operator {
-		and = 0;
-		or = 1;
+	enum JoinOperator {
+		none = 0;
+		and = 1;
+		or = 2;
 	}
-	optional string op = 2;
-	optional bool is_op = 3;
-	optional string key = 4;
-	optional string operator = 5;
-	optional string value = 6; // JSON
+
+	optional string join = 2;
+
+	optional string id = 4;
+	optional string event_type = 5;
+
+	enum Composition {
+		true = 0;
+		sum = 1; // rurn number
+		avg = 2; // return number
+		count = 3; // return number
+	}
+	optional string composition = 6;
+	optional string key = 7;
+
+	repeated Condition conditions = 8;
+
+	optional SegmentCondition left_condition = 11;
+	optional SegmentCondition right_condition = 12;
 }
 
 message Condition {

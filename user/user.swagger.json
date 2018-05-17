@@ -804,6 +804,38 @@
         }
       }
     },
+    "userSegmentCondition": {
+      "type": "object",
+      "properties": {
+        "join": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "composition": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCondition"
+          }
+        },
+        "left_condition": {
+          "$ref": "#/definitions/userSegmentCondition"
+        },
+        "right_condition": {
+          "$ref": "#/definitions/userSegmentCondition"
+        }
+      }
+    },
     "userSegmentation": {
       "type": "object",
       "properties": {
@@ -826,16 +858,10 @@
           "type": "string",
           "format": "int64"
         },
-        "conditions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userCondition"
-          }
-        },
         "ran": {
           "type": "string",
           "format": "int64",
-          "title": "repeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==\u003e  + * a b * + c d e"
+          "title": "repeated Condition conditions = 6;\nrepeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==\u003e  + * a b * + c d e"
         },
         "created": {
           "type": "string",
@@ -847,6 +873,9 @@
         },
         "state": {
           "type": "string"
+        },
+        "condition": {
+          "$ref": "#/definitions/userSegmentCondition"
         },
         "current_cursor": {
           "type": "string"
