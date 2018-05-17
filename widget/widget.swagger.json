@@ -501,6 +501,19 @@
         "read_subscriptions": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "create_attribute": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "user attribute"
+        },
+        "update_attribute": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_attribute": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

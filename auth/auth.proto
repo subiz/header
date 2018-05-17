@@ -116,6 +116,11 @@ message Method {
 	bool update_billing_cycle = 313;
 	bool read_invoices = 314;
 	bool read_subscriptions = 315;
+
+	// user attribute
+	bool create_attribute = 316;
+	bool update_attribute = 317;
+	bool delete_attribute = 318;
 }
 
 message UserAuth {
