@@ -1480,6 +1480,9 @@
         },
         "limit": {
           "$ref": "#/definitions/paymentLimit"
+        },
+        "user_attribute": {
+          "$ref": "#/definitions/userAttributeData"
         }
       }
     },

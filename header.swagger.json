@@ -2048,6 +2048,9 @@
           },
           "limit": {
             "$ref": "#/components/schemas/paymentLimit"
+          },
+          "user_attribute": {
+            "$ref": "#/components/schemas/userAttributeData"
           }
         }
       },
@@ -3101,6 +3104,55 @@
           "v3_state": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "userAtributeType": {
+        "type": "string",
+        "enum": [
+          "text",
+          "number",
+          "boolean",
+          "datetime",
+          "list"
+        ],
+        "default": "text"
+      },
+      "userAttributeDefinition": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/userAtributeType"
+          },
+          "key": {
+            "type": "string"
+          },
+          "updated": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "userAttributeDefinitions": {
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userAttributeDefinition"
+            }
           }
         }
       },

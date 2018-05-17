@@ -81,6 +81,7 @@ message RawEvent {
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
 		payment.Limit limit = 19;
+		user.AttributeData user_attribute = 20;
 	}
 	Data data = 20;
 }
@@ -118,6 +119,9 @@ enum EventType {
 	topic_read = 44;
 	subscribed_topic_updated = 45;
 	user_topic_updated = 50;
+	user_attribute_created = 51;
+	user_attribute_updated = 52;
+	user_attribute_deleted = 55;
 }
 
 enum ConvoType {

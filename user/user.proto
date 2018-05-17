@@ -58,7 +58,7 @@ enum AtributeType {
 	list = 4;
 }
 
-message AtributeDefinition {
+message AttributeDefinition {
 	optional common.Context ctx = 1;
 	optional string id = 2;
 	optional string account_id = 3;
@@ -67,6 +67,11 @@ message AtributeDefinition {
 	required AtributeType type = 6;
 	required string key = 7;
 	optional int64 updated = 8;
+}
+
+message AttributeDefinitions {
+	optional common.Context ctx = 1;
+	repeated AttributeDefinition attributes = 2;
 }
 
 message AttributeData {
@@ -574,6 +579,16 @@ service SessionMgr {
 	rpc CreateSession(Session) returns (Session) {}
 	rpc ReadSession(Session) returns (Session) {}
 	rpc UpdateSession(Session) returns (Session) {}
+}
+
+service AttributeMgr {
+	rpc ListAttributeDefinitions(common.Id) returns (AttributeDefinitions) {}
+	rpc ReadAttributeDefinition(common.Id) returns (AttributeDefinition) {}
+	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
+	rpc UpdateAttributeDefinition(AttributeDefinition) returns (common.Empty) {}
+	rpc DeleteAttributeDefinition(common.Id) returns (common.Empty) {}
+	rpc UpdateAttributeData(AttributeData) returns (common.Empty) {}
+	rpc DeleteAttributeData(AttributeData) returns (common.Empty) {}
 }
 
 message AutomationCheck {

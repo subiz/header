@@ -484,6 +484,17 @@
         }
       }
     },
+    "userAtributeType": {
+      "type": "string",
+      "enum": [
+        "text",
+        "number",
+        "boolean",
+        "datetime",
+        "list"
+      ],
+      "default": "text"
+    },
     "userAttributeData": {
       "type": "object",
       "properties": {
@@ -515,6 +526,50 @@
         "modified": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "userAttributeDefinition": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/userAtributeType"
+        },
+        "key": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "userAttributeDefinitions": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userAttributeDefinition"
+          }
         }
       }
     },
