@@ -501,17 +501,6 @@
         }
       }
     },
-    "userAtributeType": {
-      "type": "string",
-      "enum": [
-        "text",
-        "number",
-        "boolean",
-        "datetime",
-        "list"
-      ],
-      "default": "text"
-    },
     "userAttributeData": {
       "type": "object",
       "properties": {
@@ -565,7 +554,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/userAtributeType"
+          "$ref": "#/definitions/userAttributeType"
         },
         "key": {
           "type": "string"
@@ -589,6 +578,17 @@
           }
         }
       }
+    },
+    "userAttributeType": {
+      "type": "string",
+      "enum": [
+        "text",
+        "number",
+        "boolean",
+        "datetime",
+        "list"
+      ],
+      "default": "text"
     },
     "userAutomation": {
       "type": "object",

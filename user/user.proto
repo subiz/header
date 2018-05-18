@@ -50,7 +50,7 @@ message MyUser {
 }
 
 
-enum AtributeType {
+enum AttributeType {
 	text = 0;
 	number = 1;
 	boolean = 2;
@@ -64,7 +64,7 @@ message AttributeDefinition {
 	optional string account_id = 3;
 	required string name = 4;
 	optional string description = 5;
-	required AtributeType type = 6;
+	required AttributeType type = 6;
 	required string key = 7;
 	optional int64 updated = 8;
 }
@@ -547,6 +547,13 @@ message Session {
 	optional string search_term = 15;
 }
 
+message DeleteAttrDataRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string key = 4;
+}
+
 service SegmentationMgr {
 	rpc CreateSegment (Segmentation) returns (Segmentation) {}
 	rpc UpdateSegment (Segmentation) returns (Segmentation) {}
@@ -593,7 +600,7 @@ service AttributeMgr {
 	rpc UpdateAttributeDefinition(AttributeDefinition) returns (common.Empty) {}
 	rpc DeleteAttributeDefinition(common.Id) returns (common.Empty) {}
 	rpc UpdateAttributeData(AttributeData) returns (common.Empty) {}
-	rpc DeleteAttributeData(AttributeData) returns (common.Empty) {}
+	rpc DeleteAttributeData(DeleteAttrDataRequest) returns (common.Empty) {}
 }
 
 message AutomationCheck {

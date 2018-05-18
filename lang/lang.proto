@@ -151,6 +151,8 @@ enum T {
 	kv_not_found = 285;
 	attribute_not_found = 286;
 	attribute_key_not_found = 287;
+	attribute_max_allowed = 288;
+	invalid_attribute = 289;
 }
 
 enum L {

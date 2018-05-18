@@ -3124,17 +3124,6 @@
           }
         }
       },
-      "userAtributeType": {
-        "type": "string",
-        "enum": [
-          "text",
-          "number",
-          "boolean",
-          "datetime",
-          "list"
-        ],
-        "default": "text"
-      },
       "userAttributeDefinition": {
         "type": "object",
         "properties": {
@@ -3151,7 +3140,7 @@
             "type": "string"
           },
           "type": {
-            "$ref": "#/components/schemas/userAtributeType"
+            "$ref": "#/components/schemas/userAttributeType"
           },
           "key": {
             "type": "string"
@@ -3172,6 +3161,17 @@
             }
           }
         }
+      },
+      "userAttributeType": {
+        "type": "string",
+        "enum": [
+          "text",
+          "number",
+          "boolean",
+          "datetime",
+          "list"
+        ],
+        "default": "text"
       },
       "userAutomation": {
         "type": "object",
