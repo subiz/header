@@ -81,14 +81,13 @@ enum AttributeDataState {
 
 message AttributeData {
 	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional string account_id = 3;
-	optional string user_id = 4;
-	required string key = 5;
-	required string value = 6;
-	optional string state = 7;
-	optional int64 created = 8;
-	optional int64 modified = 9;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	required string key = 4;
+	required string value = 5;
+	optional string state = 6;
+	optional int64 created = 7;
+	optional int64 modified = 8;
 }
 
 message User {

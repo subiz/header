@@ -664,9 +664,6 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "id": {
-          "type": "string"
-        },
         "account_id": {
           "type": "string"
         },
