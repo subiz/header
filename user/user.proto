@@ -595,9 +595,9 @@ service AttributeMgr {
 	rpc ListAttributeDefinitions(common.Id) returns (AttributeDefinitions) {}
 	rpc ReadAttributeDefinition(common.Id) returns (AttributeDefinition) {}
 	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
-	rpc UpdateAttributeDefinition(AttributeDefinition) returns (common.Empty) {}
+	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
 	rpc DeleteAttributeDefinition(common.Id) returns (common.Empty) {}
-	rpc UpdateAttributeData(AttributeData) returns (common.Empty) {}
+	rpc UpdateAttributeData(AttributeData) returns (AttributeData) {}
 	rpc DeleteAttributeData(DeleteAttrDataRequest) returns (common.Empty) {}
 }
 
