@@ -3124,9 +3124,6 @@
       "userAttributeDefinition": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "account_id": {
             "type": "string"
           },
