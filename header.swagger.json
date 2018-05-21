@@ -3380,6 +3380,10 @@
             "format": "int64",
             "title": "repeated Condition conditions = 6;\nrepeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==>  + * a b * + c d e"
           },
+          "started_from": {
+            "type": "integer",
+            "format": "int64"
+          },
           "created": {
             "type": "integer",
             "format": "int64"

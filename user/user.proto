@@ -324,7 +324,9 @@ message Segmentation {
 	// repeated Condition conditions = 6;
 	//repeated SegmentCondition query = 5; // suffix annotation
 	// a * b + (c + d) * e  ==>  + * a b * + c d e
-	optional int64 ran = 8;
+	optional int64 ran = 8; // time start run
+	optional int64 started_from = 7;
+
 	optional int64 created = 9;
 	optional int64 modified = 10;
 	optional string state = 12;

@@ -932,6 +932,10 @@
           "format": "int64",
           "title": "repeated Condition conditions = 6;\nrepeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==\u003e  + * a b * + c d e"
         },
+        "started_from": {
+          "type": "string",
+          "format": "int64"
+        },
         "created": {
           "type": "string",
           "format": "int64"
