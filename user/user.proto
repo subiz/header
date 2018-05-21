@@ -58,6 +58,14 @@ enum AttributeType {
 	list = 4;
 }
 
+enum AttributeProtected {
+	id = 0;
+	account_id = 1;
+	fullname = 2;
+	emails = 3;
+	phones = 4;
+}
+
 message AttributeDefinition {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -87,6 +95,11 @@ message AttributeData {
 	optional string state = 6;
 	optional int64 created = 7;
 	optional int64 modified = 8;
+}
+
+message AttributeDatas {
+	optional common.Context ctx = 1;
+	optional AttributeData data = 2;
 }
 
 message User {
@@ -545,11 +558,15 @@ message Session {
 	optional string search_term = 15;
 }
 
+message DeleteAttrRequest {
+	optional common.Context ctx = 1;
+	optional string key = 2;
+}
+
 message DeleteAttrDataRequest {
 	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string key = 4;
+	optional string user_id = 2;
+	optional string key = 3;
 }
 
 service SegmentationMgr {
@@ -592,12 +609,11 @@ service SessionMgr {
 }
 
 service AttributeMgr {
-	rpc ListAttributeDefinitions(common.Id) returns (AttributeDefinitions) {}
-	rpc ReadAttributeDefinition(common.Id) returns (AttributeDefinition) {}
+	rpc ListAttributeDefinitions(common.Empty) returns (AttributeDefinitions) {}
 	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
 	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
-	rpc DeleteAttributeDefinition(common.Id) returns (common.Empty) {}
-	rpc UpdateAttributeData(AttributeData) returns (AttributeData) {}
+	rpc DeleteAttributeDefinition(DeleteAttrRequest) returns (common.Empty) {}
+	rpc UpdateAttributeData(AttributeDatas) returns (AttributeDatas) {}
 	rpc DeleteAttributeData(DeleteAttrDataRequest) returns (common.Empty) {}
 }
 

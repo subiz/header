@@ -3121,6 +3121,14 @@
           }
         }
       },
+      "userAttributeDatas": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/userAttributeData"
+          }
+        }
+      },
       "userAttributeDefinition": {
         "type": "object",
         "properties": {

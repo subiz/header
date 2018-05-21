@@ -532,6 +532,17 @@
         }
       }
     },
+    "userAttributeDatas": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "data": {
+          "$ref": "#/definitions/userAttributeData"
+        }
+      }
+    },
     "userAttributeDefinition": {
       "type": "object",
       "properties": {
