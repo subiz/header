@@ -562,7 +562,7 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/userAttributeType"
+          "type": "string"
         },
         "key": {
           "type": "string"
@@ -586,17 +586,6 @@
           }
         }
       }
-    },
-    "userAttributeType": {
-      "type": "string",
-      "enum": [
-        "text",
-        "number",
-        "boolean",
-        "datetime",
-        "list"
-      ],
-      "default": "text"
     },
     "userAutomation": {
       "type": "object",

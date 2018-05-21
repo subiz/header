@@ -71,7 +71,7 @@ message AttributeDefinition {
 	optional string account_id = 2;
 	required string name = 3;
 	optional string description = 4;
-	required AttributeType type = 5;
+	required string type = 5;
 	required string key = 6;
 	optional int64 updated = 7;
 }
