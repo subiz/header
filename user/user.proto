@@ -99,7 +99,7 @@ message AttributeData {
 
 message AttributeDatas {
 	optional common.Context ctx = 1;
-	optional AttributeData data = 2;
+	repeated AttributeData data = 2;
 }
 
 message User {

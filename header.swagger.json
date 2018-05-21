@@ -3125,7 +3125,10 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/userAttributeData"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userAttributeData"
+            }
           }
         }
       },

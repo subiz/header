@@ -539,7 +539,10 @@
           "$ref": "#/definitions/commonContext"
         },
         "data": {
-          "$ref": "#/definitions/userAttributeData"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userAttributeData"
+          }
         }
       }
     },
