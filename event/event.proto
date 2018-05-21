@@ -19,6 +19,7 @@ message RawEventCreatedPayload {
 	repeated string payloads = 7; // payload for each sub, payload must be empty
 	string topic = 9;
 	string router_topic = 10;
+	string sub = 11;
 }
 
 message UnsubscribeMessage {
