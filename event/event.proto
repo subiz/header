@@ -182,7 +182,7 @@ message Subscription { // raweventcreatedpayload
 	string target_key = 11;
 	int64 ttls = 12;
 	string router_topic = 13;
-	string target_partition = 14;
+	int32 target_partition = 14;
 }
 
 enum SubPrefix {
