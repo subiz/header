@@ -22,6 +22,12 @@ message RawEventCreatedPayload {
 	string sub = 11;
 }
 
+message PubSubMessage {
+	common.Context ctx = 1;
+	Subscription sub = 2;
+	bytes payload = 3;
+}
+
 message UnsubscribeMessage {
 	common.Context ctx = 1;
 	string topic = 3;
