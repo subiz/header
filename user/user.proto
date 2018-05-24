@@ -97,11 +97,6 @@ message AttributeData {
 	optional int64 modified = 8;
 }
 
-message AttributeDatas {
-	optional common.Context ctx = 1;
-	repeated AttributeData data = 2;
-}
-
 message User {
 	optional common.Context ctx = 1;
 	optional string id = 3;
@@ -565,12 +560,6 @@ message DeleteAttrRequest {
 	optional string key = 2;
 }
 
-message DeleteAttrDataRequest {
-	optional common.Context ctx = 1;
-	optional string user_id = 2;
-	optional string key = 3;
-}
-
 service SegmentationMgr {
 	rpc CreateSegment (Segmentation) returns (Segmentation) {}
 	rpc UpdateSegment (Segmentation) returns (Segmentation) {}
@@ -615,8 +604,6 @@ service AttributeMgr {
 	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
 	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
 	rpc DeleteAttributeDefinition(DeleteAttrRequest) returns (common.Empty) {}
-	rpc UpdateAttributeData(AttributeDatas) returns (AttributeDatas) {}
-	rpc DeleteAttributeData(DeleteAttrDataRequest) returns (common.Empty) {}
 }
 
 message AutomationCheck {

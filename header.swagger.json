@@ -3121,17 +3121,6 @@
           }
         }
       },
-      "userAttributeDatas": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userAttributeData"
-            }
-          }
-        }
-      },
       "userAttributeDefinition": {
         "type": "object",
         "properties": {
