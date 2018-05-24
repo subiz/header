@@ -384,7 +384,7 @@ service PaymentMgr {
 	rpc ListPaymentMethods(common.Empty) returns (PaymentMethods);
 	rpc Pay(PayRequest) returns (Bill);
 	rpc ListInvoices(common.Id) returns (Invoices);
-	rpc CreateInvoices(Invoice) returns (Invoice);
+	rpc CreateInvoice(Invoice) returns (Invoice);
 	// rpc Creat(Customer) returns (Customer);
 	rpc ListPlans(common.Empty) returns (Plans);
 	rpc ExportInvoice(common.Id) returns (String);
