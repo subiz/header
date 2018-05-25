@@ -69,10 +69,10 @@ enum AttributeProtected {
 message AttributeDefinition {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	required string name = 3;
+	optional string name = 3;
 	optional string description = 4;
-	required string type = 5;
-	required string key = 6;
+	optional string type = 5;
+	optional string key = 6;
 	optional int64 updated = 7;
 }
 
@@ -90,8 +90,8 @@ message AttributeData {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string user_id = 3;
-	required string key = 4;
-	required string value = 5;
+	optional string key = 4;
+	optional string value = 5;
 	optional string state = 6;
 	optional int64 created = 7;
 	optional int64 modified = 8;
