@@ -5232,6 +5232,8 @@ export namespace pubsub {
         topics?: (string[]|null);
         payload?: (Uint8Array|null);
         user_ids_filter?: (Uint8Array|null);
+        filter_item_bit_size?: (number|null);
+        filter_hash_count?: (number|null);
         neg_user_ids_filter?: (Uint8Array|null);
     }
 
@@ -5241,6 +5243,8 @@ export namespace pubsub {
         public topics: string[];
         public payload: Uint8Array;
         public user_ids_filter: Uint8Array;
+        public filter_item_bit_size: number;
+        public filter_hash_count: number;
         public neg_user_ids_filter: Uint8Array;
     }
 

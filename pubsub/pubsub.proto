@@ -30,6 +30,8 @@ message PublishMessage {
 
 	// user_ids bloom filter: only those users can get message
 	bytes user_ids_filter = 5;
+	int32 filter_item_bit_size = 7; // 300
+	int32 filter_hash_count = 8; // 5
 
 	// negative user_ids bloom filter: those users wont get the message
 	bytes neg_user_ids_filter = 6;

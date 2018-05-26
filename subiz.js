@@ -22057,6 +22057,8 @@ export const pubsub = $root.pubsub = (() => {
          * @property {Array.<string>|null} [topics] PublishMessage topics
          * @property {Uint8Array|null} [payload] PublishMessage payload
          * @property {Uint8Array|null} [user_ids_filter] PublishMessage user_ids_filter
+         * @property {number|null} [filter_item_bit_size] PublishMessage filter_item_bit_size
+         * @property {number|null} [filter_hash_count] PublishMessage filter_hash_count
          * @property {Uint8Array|null} [neg_user_ids_filter] PublishMessage neg_user_ids_filter
          */
 
@@ -22107,6 +22109,22 @@ export const pubsub = $root.pubsub = (() => {
          * @instance
          */
         PublishMessage.prototype.user_ids_filter = $util.newBuffer([]);
+
+        /**
+         * PublishMessage filter_item_bit_size.
+         * @member {number} filter_item_bit_size
+         * @memberof pubsub.PublishMessage
+         * @instance
+         */
+        PublishMessage.prototype.filter_item_bit_size = 0;
+
+        /**
+         * PublishMessage filter_hash_count.
+         * @member {number} filter_hash_count
+         * @memberof pubsub.PublishMessage
+         * @instance
+         */
+        PublishMessage.prototype.filter_hash_count = 0;
 
         /**
          * PublishMessage neg_user_ids_filter.
