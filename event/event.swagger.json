@@ -1316,29 +1316,6 @@
         }
       }
     },
-    "eventAllType": {
-      "type": "object",
-      "properties": {
-        "o": {
-          "$ref": "#/definitions/eventObject"
-        },
-        "e": {
-          "$ref": "#/definitions/eventRawEvent"
-        },
-        "b": {
-          "$ref": "#/definitions/eventBy"
-        },
-        "es": {
-          "$ref": "#/definitions/eventRawEvents"
-        },
-        "ler": {
-          "$ref": "#/definitions/eventListEventsRequest"
-        },
-        "userevent": {
-          "$ref": "#/definitions/eventUserEvent"
-        }
-      }
-    },
     "eventBy": {
       "type": "object",
       "properties": {
@@ -1352,58 +1329,6 @@
           "type": "string"
         }
       }
-    },
-    "eventListEventsRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "query": {
-          "type": "string"
-        },
-        "anchor": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "category": {
-          "type": "string"
-        }
-      }
-    },
-    "eventObject": {
-      "type": "string",
-      "enum": [
-        "none",
-        "account",
-        "agent",
-        "message",
-        "conversation",
-        "postback",
-        "content",
-        "topic",
-        "presence",
-        "user",
-        "unread_topic",
-        "my_user",
-        "notification",
-        "notibox",
-        "agent_perm",
-        "group_member",
-        "group",
-        "integration",
-        "limit"
-      ],
-      "default": "none"
     },
     "eventRawEvent": {
       "type": "object",
@@ -1533,23 +1458,6 @@
         "status": {
           "type": "boolean",
           "format": "boolean"
-        }
-      }
-    },
-    "eventUserEvent": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "event": {
-          "$ref": "#/definitions/eventRawEvent"
         }
       }
     },

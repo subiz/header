@@ -212,20 +212,6 @@ enum Object {
 	limit = 19;
 }
 
-message AllType {
-	Object o = 2;
-	RawEvent e = 3;
-	By b = 4;
-	RawEvents es = 5;
-	ListEventsRequest ler = 6;
-	UserEvent userevent = 7;
-}
-
-// for generating swagger data
-service MyService {
-	rpc Do(AllType) returns (AllType) {}
-}
-
 message ListEventsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
