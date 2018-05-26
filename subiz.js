@@ -21930,38 +21930,13 @@ export const pubsub = $root.pubsub = (() => {
      */
     const pubsub = {};
 
-    pubsub.Empty = (function() {
-
-        /**
-         * Properties of an Empty.
-         * @memberof pubsub
-         * @interface IEmpty
-         */
-
-        /**
-         * Constructs a new Empty.
-         * @memberof pubsub
-         * @classdesc Represents an Empty.
-         * @implements IEmpty
-         * @constructor
-         * @param {pubsub.IEmpty=} [p] Properties to set
-         */
-        function Empty(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        return Empty;
-    })();
-
     pubsub.Subscription = (function() {
 
         /**
          * Properties of a Subscription.
          * @memberof pubsub
          * @interface ISubscription
+         * @property {common.IContext|null} [ctx] Subscription ctx
          * @property {string|null} [user_id] Subscription user_id
          * @property {string|null} [topic] Subscription topic
          * @property {string|null} [sub_id] Subscription sub_id
@@ -21988,6 +21963,14 @@ export const pubsub = $root.pubsub = (() => {
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
+
+        /**
+         * Subscription ctx.
+         * @member {common.IContext|null|undefined} ctx
+         * @memberof pubsub.Subscription
+         * @instance
+         */
+        Subscription.prototype.ctx = null;
 
         /**
          * Subscription user_id.
@@ -22070,6 +22053,7 @@ export const pubsub = $root.pubsub = (() => {
          * Properties of a PublishMessage.
          * @memberof pubsub
          * @interface IPublishMessage
+         * @property {common.IContext|null} [ctx] PublishMessage ctx
          * @property {string|null} [topics] PublishMessage topics
          * @property {Uint8Array|null} [payload] PublishMessage payload
          * @property {Uint8Array|null} [user_ids_filter] PublishMessage user_ids_filter
@@ -22090,6 +22074,14 @@ export const pubsub = $root.pubsub = (() => {
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
+
+        /**
+         * PublishMessage ctx.
+         * @member {common.IContext|null|undefined} ctx
+         * @memberof pubsub.PublishMessage
+         * @instance
+         */
+        PublishMessage.prototype.ctx = null;
 
         /**
          * PublishMessage topics.
@@ -22126,93 +22118,124 @@ export const pubsub = $root.pubsub = (() => {
         return PublishMessage;
     })();
 
-    pubsub.ListRequest = (function() {
+    pubsub.Pubsub = (function() {
 
         /**
-         * Properties of a ListRequest.
+         * Constructs a new Pubsub service.
          * @memberof pubsub
-         * @interface IListRequest
-         * @property {string|null} [Topic] ListRequest Topic
-         * @property {string|null} [Start] ListRequest Start
-         * @property {number|null} [Limit] ListRequest Limit
-         */
-
-        /**
-         * Constructs a new ListRequest.
-         * @memberof pubsub
-         * @classdesc Represents a ListRequest.
-         * @implements IListRequest
+         * @classdesc Represents a Pubsub
+         * @extends $protobuf.rpc.Service
          * @constructor
-         * @param {pubsub.IListRequest=} [p] Properties to set
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
          */
-        function ListRequest(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
+        function Pubsub(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
         }
 
+        (Pubsub.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Pubsub;
+
         /**
-         * ListRequest Topic.
-         * @member {string} Topic
-         * @memberof pubsub.ListRequest
+         * Callback as used by {@link pubsub.Pubsub#subscribe}.
+         * @memberof pubsub.Pubsub
+         * @typedef SubscribeCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {common.Empty} [response] Empty
+         */
+
+        /**
+         * Calls Subscribe.
+         * @function subscribe
+         * @memberof pubsub.Pubsub
          * @instance
+         * @param {pubsub.ISubscription} request Subscription message or plain object
+         * @param {pubsub.Pubsub.SubscribeCallback} callback Node-style callback called with the error, if any, and Empty
+         * @returns {undefined}
+         * @variation 1
          */
-        ListRequest.prototype.Topic = "";
+        Pubsub.prototype.subscribe = function subscribe(request, callback) {
+            return this.rpcCall(subscribe, $root.pubsub.Subscription, $root.common.Empty, request, callback);
+        };
 
         /**
-         * ListRequest Start.
-         * @member {string} Start
-         * @memberof pubsub.ListRequest
+         * Calls Subscribe.
+         * @function subscribe
+         * @memberof pubsub.Pubsub
          * @instance
+         * @param {pubsub.ISubscription} request Subscription message or plain object
+         * @returns {Promise<common.Empty>} Promise
+         * @variation 2
          */
-        ListRequest.prototype.Start = "";
 
         /**
-         * ListRequest Limit.
-         * @member {number} Limit
-         * @memberof pubsub.ListRequest
+         * Callback as used by {@link pubsub.Pubsub#unsubscribe}.
+         * @memberof pubsub.Pubsub
+         * @typedef UnsubscribeCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {common.Empty} [response] Empty
+         */
+
+        /**
+         * Calls Unsubscribe.
+         * @function unsubscribe
+         * @memberof pubsub.Pubsub
          * @instance
+         * @param {pubsub.ISubscription} request Subscription message or plain object
+         * @param {pubsub.Pubsub.UnsubscribeCallback} callback Node-style callback called with the error, if any, and Empty
+         * @returns {undefined}
+         * @variation 1
          */
-        ListRequest.prototype.Limit = 0;
-
-        return ListRequest;
-    })();
-
-    pubsub.Subscribers = (function() {
+        Pubsub.prototype.unsubscribe = function unsubscribe(request, callback) {
+            return this.rpcCall(unsubscribe, $root.pubsub.Subscription, $root.common.Empty, request, callback);
+        };
 
         /**
-         * Properties of a Subscribers.
-         * @memberof pubsub
-         * @interface ISubscribers
-         * @property {Array.<string>|null} [Subscribers] Subscribers Subscribers
-         */
-
-        /**
-         * Constructs a new Subscribers.
-         * @memberof pubsub
-         * @classdesc Represents a Subscribers.
-         * @implements ISubscribers
-         * @constructor
-         * @param {pubsub.ISubscribers=} [p] Properties to set
-         */
-        function Subscribers(p) {
-            this.Subscribers = [];
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        /**
-         * Subscribers Subscribers.
-         * @member {Array.<string>} Subscribers
-         * @memberof pubsub.Subscribers
+         * Calls Unsubscribe.
+         * @function unsubscribe
+         * @memberof pubsub.Pubsub
          * @instance
+         * @param {pubsub.ISubscription} request Subscription message or plain object
+         * @returns {Promise<common.Empty>} Promise
+         * @variation 2
          */
-        Subscribers.prototype.Subscribers = $util.emptyArray;
 
-        return Subscribers;
+        /**
+         * Callback as used by {@link pubsub.Pubsub#publish}.
+         * @memberof pubsub.Pubsub
+         * @typedef PublishCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {common.Empty} [response] Empty
+         */
+
+        /**
+         * Calls Publish.
+         * @function publish
+         * @memberof pubsub.Pubsub
+         * @instance
+         * @param {pubsub.IPublishMessage} request PublishMessage message or plain object
+         * @param {pubsub.Pubsub.PublishCallback} callback Node-style callback called with the error, if any, and Empty
+         * @returns {undefined}
+         * @variation 1
+         */
+        Pubsub.prototype.publish = function publish(request, callback) {
+            return this.rpcCall(publish, $root.pubsub.PublishMessage, $root.common.Empty, request, callback);
+        };
+
+        /**
+         * Calls Publish.
+         * @function publish
+         * @memberof pubsub.Pubsub
+         * @instance
+         * @param {pubsub.IPublishMessage} request PublishMessage message or plain object
+         * @returns {Promise<common.Empty>} Promise
+         * @variation 2
+         */
+
+        return Pubsub;
     })();
 
     return pubsub;
@@ -23121,10 +23144,10 @@ export const user = $root.user = (() => {
          * @interface IAttributeDefinition
          * @property {common.IContext|null} [ctx] AttributeDefinition ctx
          * @property {string|null} [account_id] AttributeDefinition account_id
-         * @property {string} name AttributeDefinition name
+         * @property {string|null} [name] AttributeDefinition name
          * @property {string|null} [description] AttributeDefinition description
-         * @property {string} type AttributeDefinition type
-         * @property {string} key AttributeDefinition key
+         * @property {string|null} [type] AttributeDefinition type
+         * @property {string|null} [key] AttributeDefinition key
          * @property {number|Long|null} [updated] AttributeDefinition updated
          */
 
@@ -23270,8 +23293,8 @@ export const user = $root.user = (() => {
          * @property {common.IContext|null} [ctx] AttributeData ctx
          * @property {string|null} [account_id] AttributeData account_id
          * @property {string|null} [user_id] AttributeData user_id
-         * @property {string} key AttributeData key
-         * @property {string} value AttributeData value
+         * @property {string|null} [key] AttributeData key
+         * @property {string|null} [value] AttributeData value
          * @property {string|null} [state] AttributeData state
          * @property {number|Long|null} [created] AttributeData created
          * @property {number|Long|null} [modified] AttributeData modified

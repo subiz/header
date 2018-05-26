@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package pubsub;
 
-message Empty {}
+import "bitbucket.org/subiz/header/common/common.proto";
 
 message Subscription {
-	//common.Context ctx = 1;
+	common.Context ctx = 1;
 	string user_id = 2;
 	string topic = 3;
 
@@ -24,6 +24,7 @@ message Subscription {
 }
 
 message PublishMessage {
+	common.Context ctx = 1;
 	string topics = 2;
 	bytes payload = 4;
 
@@ -34,18 +35,8 @@ message PublishMessage {
 	bytes neg_user_ids_filter = 6;
 }
 
-message ListRequest {
-	string Topic = 1;
-	string Start = 2;
-	int32 Limit = 3;
-}
-
-message Subscribers {
-	repeated string Subscribers = 1;
-}
-/*
 service Pubsub {
-	rpc Subscribe(Subscription) returns (Empty) {}
-	rpc Unsubscribe(Subscription) returns (Empty) {}
-	rpc ListSubscriber(ListRequest) returns (Subscribers) {}
-	}*/
+	rpc Subscribe(Subscription) returns (common.Empty) {}
+	rpc Unsubscribe(Subscription) returns (common.Empty) {}
+	rpc Publish(PublishMessage) returns (common.Empty) {}
+}

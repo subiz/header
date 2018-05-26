@@ -5200,14 +5200,8 @@ export namespace payment {
 
 export namespace pubsub {
 
-    interface IEmpty {
-    }
-
-    class Empty implements IEmpty {
-        constructor(p?: pubsub.IEmpty);
-    }
-
     interface ISubscription {
+        ctx?: (common.IContext|null);
         user_id?: (string|null);
         topic?: (string|null);
         sub_id?: (string|null);
@@ -5221,6 +5215,7 @@ export namespace pubsub {
 
     class Subscription implements ISubscription {
         constructor(p?: pubsub.ISubscription);
+        public ctx?: (common.IContext|null);
         public user_id: string;
         public topic: string;
         public sub_id: string;
@@ -5233,6 +5228,7 @@ export namespace pubsub {
     }
 
     interface IPublishMessage {
+        ctx?: (common.IContext|null);
         topics?: (string|null);
         payload?: (Uint8Array|null);
         user_ids_filter?: (Uint8Array|null);
@@ -5241,32 +5237,30 @@ export namespace pubsub {
 
     class PublishMessage implements IPublishMessage {
         constructor(p?: pubsub.IPublishMessage);
+        public ctx?: (common.IContext|null);
         public topics: string;
         public payload: Uint8Array;
         public user_ids_filter: Uint8Array;
         public neg_user_ids_filter: Uint8Array;
     }
 
-    interface IListRequest {
-        Topic?: (string|null);
-        Start?: (string|null);
-        Limit?: (number|null);
+    class Pubsub extends $protobuf.rpc.Service {
+        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+        public subscribe(request: pubsub.ISubscription, callback: pubsub.Pubsub.SubscribeCallback): void;
+        public subscribe(request: pubsub.ISubscription): Promise<common.Empty>;
+        public unsubscribe(request: pubsub.ISubscription, callback: pubsub.Pubsub.UnsubscribeCallback): void;
+        public unsubscribe(request: pubsub.ISubscription): Promise<common.Empty>;
+        public publish(request: pubsub.IPublishMessage, callback: pubsub.Pubsub.PublishCallback): void;
+        public publish(request: pubsub.IPublishMessage): Promise<common.Empty>;
     }
 
-    class ListRequest implements IListRequest {
-        constructor(p?: pubsub.IListRequest);
-        public Topic: string;
-        public Start: string;
-        public Limit: number;
-    }
+    namespace Pubsub {
 
-    interface ISubscribers {
-        Subscribers?: (string[]|null);
-    }
+        type SubscribeCallback = (error: (Error|null), response?: common.Empty) => void;
 
-    class Subscribers implements ISubscribers {
-        constructor(p?: pubsub.ISubscribers);
-        public Subscribers: string[];
+        type UnsubscribeCallback = (error: (Error|null), response?: common.Empty) => void;
+
+        type PublishCallback = (error: (Error|null), response?: common.Empty) => void;
     }
 }
 
@@ -5495,10 +5489,10 @@ export namespace user {
     interface IAttributeDefinition {
         ctx?: (common.IContext|null);
         account_id?: (string|null);
-        name: string;
+        name?: (string|null);
         description?: (string|null);
-        type: string;
-        key: string;
+        type?: (string|null);
+        key?: (string|null);
         updated?: (number|Long|null);
     }
 
@@ -5533,8 +5527,8 @@ export namespace user {
         ctx?: (common.IContext|null);
         account_id?: (string|null);
         user_id?: (string|null);
-        key: string;
-        value: string;
+        key?: (string|null);
+        value?: (string|null);
         state?: (string|null);
         created?: (number|Long|null);
         modified?: (number|Long|null);
