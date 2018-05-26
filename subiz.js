@@ -22054,7 +22054,7 @@ export const pubsub = $root.pubsub = (() => {
          * @memberof pubsub
          * @interface IPublishMessage
          * @property {common.IContext|null} [ctx] PublishMessage ctx
-         * @property {string|null} [topics] PublishMessage topics
+         * @property {Array.<string>|null} [topics] PublishMessage topics
          * @property {Uint8Array|null} [payload] PublishMessage payload
          * @property {Uint8Array|null} [user_ids_filter] PublishMessage user_ids_filter
          * @property {Uint8Array|null} [neg_user_ids_filter] PublishMessage neg_user_ids_filter
@@ -22069,6 +22069,7 @@ export const pubsub = $root.pubsub = (() => {
          * @param {pubsub.IPublishMessage=} [p] Properties to set
          */
         function PublishMessage(p) {
+            this.topics = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -22085,11 +22086,11 @@ export const pubsub = $root.pubsub = (() => {
 
         /**
          * PublishMessage topics.
-         * @member {string} topics
+         * @member {Array.<string>} topics
          * @memberof pubsub.PublishMessage
          * @instance
          */
-        PublishMessage.prototype.topics = "";
+        PublishMessage.prototype.topics = $util.emptyArray;
 
         /**
          * PublishMessage payload.

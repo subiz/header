@@ -5229,7 +5229,7 @@ export namespace pubsub {
 
     interface IPublishMessage {
         ctx?: (common.IContext|null);
-        topics?: (string|null);
+        topics?: (string[]|null);
         payload?: (Uint8Array|null);
         user_ids_filter?: (Uint8Array|null);
         neg_user_ids_filter?: (Uint8Array|null);
@@ -5238,7 +5238,7 @@ export namespace pubsub {
     class PublishMessage implements IPublishMessage {
         constructor(p?: pubsub.IPublishMessage);
         public ctx?: (common.IContext|null);
-        public topics: string;
+        public topics: string[];
         public payload: Uint8Array;
         public user_ids_filter: Uint8Array;
         public neg_user_ids_filter: Uint8Array;

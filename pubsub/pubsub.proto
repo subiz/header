@@ -25,7 +25,7 @@ message Subscription {
 
 message PublishMessage {
 	common.Context ctx = 1;
-	string topics = 2;
+	repeated string topics = 2;
 	bytes payload = 4;
 
 	// user_ids bloom filter: only those users can get message
