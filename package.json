@@ -2,7 +2,7 @@
   "name": "@subiz/header",
   "version": "1.2.0",
   "description": "Service description",
-  "main": "index.js",
+  "main": "subiz.js",
   "scripts": {
     "rest": "node index.js"
   },
@@ -12,5 +12,8 @@
   },
   "author": "Pham Kieu Thanh",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/subiz/header#readme"
+  "homepage": "https://bitbucket.org/subiz/header#readme",
+  "dependencies": {
+    "protobufjs": "6.8.6"
+  }
 }

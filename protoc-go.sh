@@ -17,14 +17,24 @@ if [ ! -f $GOPATH/bin/protoc-gen-swagger ]; then
 		echo "done"
 fi
 
+if [ ! -f ./node_modules/protobufjs/bin ]; then
+		echo -e "\033[0;34minstalling protobufjs..."
+		npm i
+		echo "done"
+fi
+
 TOTAL=1
 echo -e "\033[0;34mcompiling proto files"
 ./protoc --version
+
+
+ALLPROTO=""
+
 for i in `ls -R`; do
 		if [[ $i == *":"* ]]; then
 				LASTDIRECTORY=${i::-1}
 		else
-				if [[ $i == "vendor" ]] || [[ $i == "proto" ]] || [[ $LASTDIRECTORY == ./vendor* ]] || [[ $LASTDIRECTORY == ./proto* ]]; then
+				if [[ $i == "vendor" ]] || [[ $i == "proto" ]] || [[ $LASTDIRECTORY == ./node_modules* ]] || [[ $LASTDIRECTORY == ./vendor* ]] || [[ $LASTDIRECTORY == ./proto* ]]; then
 						continue
 				fi
 				if [[ $i == *".proto" ]]; then
@@ -32,15 +42,21 @@ for i in `ls -R`; do
 						./protoc --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LASTDIRECTORY/$i
 						./protoc -I./protobuf/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
 						#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
+						ALLPROTO="$ALLPROTO $LASTDIRECTORY/$i"
 						let "TOTAL += 1"
 						# else
 						# echo -e "\033[0;37mignore" $i "\033[0;30m"
 				fi;
 		fi;
 done;
+
+echo -e "\033[0;90m["$TOTAL"] generating subiz.d.ts\033[0;31m"
+npx pbjs --es6 --keep-case --no-convert --no-create --no-encode --no-decode --no-verify --no-delimited --no-beautify -t static-module -w commonjs -o subiz.js $ALLPROTO
+npx pbts --no-comments -o subiz.d.ts subiz.js
+
 # echo -e "\033[0;34mremoving all omitempty\033[0;31m"
 # ls */*.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'
-let "TOTAL -= 1"
+
 
 #echo "\033[0;34minjecting golang custom tag\033[0;31m"
 #ls */*.pb.go | xargs -n1 -IX bash -c 'protoc-go-inject-tag -input=X'
