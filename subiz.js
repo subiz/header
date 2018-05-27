@@ -10904,6 +10904,176 @@ export const conversation = $root.conversation = (() => {
         return TagRequest;
     })();
 
+    conversation.CountByAgentRequest = (function() {
+
+        /**
+         * Properties of a CountByAgentRequest.
+         * @memberof conversation
+         * @interface ICountByAgentRequest
+         * @property {string|null} [integration_id] CountByAgentRequest integration_id
+         * @property {string|null} [agent_id] CountByAgentRequest agent_id
+         * @property {number|null} [from] CountByAgentRequest from
+         * @property {number|null} [to] CountByAgentRequest to
+         * @property {string|null} [range] CountByAgentRequest range
+         */
+
+        /**
+         * Constructs a new CountByAgentRequest.
+         * @memberof conversation
+         * @classdesc Represents a CountByAgentRequest.
+         * @implements ICountByAgentRequest
+         * @constructor
+         * @param {conversation.ICountByAgentRequest=} [p] Properties to set
+         */
+        function CountByAgentRequest(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * CountByAgentRequest integration_id.
+         * @member {string} integration_id
+         * @memberof conversation.CountByAgentRequest
+         * @instance
+         */
+        CountByAgentRequest.prototype.integration_id = "";
+
+        /**
+         * CountByAgentRequest agent_id.
+         * @member {string} agent_id
+         * @memberof conversation.CountByAgentRequest
+         * @instance
+         */
+        CountByAgentRequest.prototype.agent_id = "";
+
+        /**
+         * CountByAgentRequest from.
+         * @member {number} from
+         * @memberof conversation.CountByAgentRequest
+         * @instance
+         */
+        CountByAgentRequest.prototype.from = 0;
+
+        /**
+         * CountByAgentRequest to.
+         * @member {number} to
+         * @memberof conversation.CountByAgentRequest
+         * @instance
+         */
+        CountByAgentRequest.prototype.to = 0;
+
+        /**
+         * CountByAgentRequest range.
+         * @member {string} range
+         * @memberof conversation.CountByAgentRequest
+         * @instance
+         */
+        CountByAgentRequest.prototype.range = "";
+
+        /**
+         * Range enum.
+         * @name conversation.CountByAgentRequest.Range
+         * @enum {string}
+         * @property {number} hour=0 hour value
+         * @property {number} day=1 day value
+         */
+        CountByAgentRequest.Range = (function() {
+            const valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "hour"] = 0;
+            values[valuesById[1] = "day"] = 1;
+            return values;
+        })();
+
+        return CountByAgentRequest;
+    })();
+
+    conversation.CountByGroupRequest = (function() {
+
+        /**
+         * Properties of a CountByGroupRequest.
+         * @memberof conversation
+         * @interface ICountByGroupRequest
+         * @property {string|null} [integration_id] CountByGroupRequest integration_id
+         * @property {string|null} [group_id] CountByGroupRequest group_id
+         * @property {number|null} [from] CountByGroupRequest from
+         * @property {number|null} [to] CountByGroupRequest to
+         * @property {string|null} [range] CountByGroupRequest range
+         */
+
+        /**
+         * Constructs a new CountByGroupRequest.
+         * @memberof conversation
+         * @classdesc Represents a CountByGroupRequest.
+         * @implements ICountByGroupRequest
+         * @constructor
+         * @param {conversation.ICountByGroupRequest=} [p] Properties to set
+         */
+        function CountByGroupRequest(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * CountByGroupRequest integration_id.
+         * @member {string} integration_id
+         * @memberof conversation.CountByGroupRequest
+         * @instance
+         */
+        CountByGroupRequest.prototype.integration_id = "";
+
+        /**
+         * CountByGroupRequest group_id.
+         * @member {string} group_id
+         * @memberof conversation.CountByGroupRequest
+         * @instance
+         */
+        CountByGroupRequest.prototype.group_id = "";
+
+        /**
+         * CountByGroupRequest from.
+         * @member {number} from
+         * @memberof conversation.CountByGroupRequest
+         * @instance
+         */
+        CountByGroupRequest.prototype.from = 0;
+
+        /**
+         * CountByGroupRequest to.
+         * @member {number} to
+         * @memberof conversation.CountByGroupRequest
+         * @instance
+         */
+        CountByGroupRequest.prototype.to = 0;
+
+        /**
+         * CountByGroupRequest range.
+         * @member {string} range
+         * @memberof conversation.CountByGroupRequest
+         * @instance
+         */
+        CountByGroupRequest.prototype.range = "";
+
+        /**
+         * Range enum.
+         * @name conversation.CountByGroupRequest.Range
+         * @enum {string}
+         * @property {number} hour=0 hour value
+         * @property {number} day=1 day value
+         */
+        CountByGroupRequest.Range = (function() {
+            const valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "hour"] = 0;
+            values[valuesById[1] = "day"] = 1;
+            return values;
+        })();
+
+        return CountByGroupRequest;
+    })();
+
     conversation.CountByAgentsRequest = (function() {
 
         /**
@@ -11119,6 +11289,51 @@ export const conversation = $root.conversation = (() => {
         CountByAgent.prototype.data = $util.emptyArray;
 
         return CountByAgent;
+    })();
+
+    conversation.CountByGroup = (function() {
+
+        /**
+         * Properties of a CountByGroup.
+         * @memberof conversation
+         * @interface ICountByGroup
+         * @property {string|null} [group_id] CountByGroup group_id
+         * @property {Array.<number|Long>|null} [data] CountByGroup data
+         */
+
+        /**
+         * Constructs a new CountByGroup.
+         * @memberof conversation
+         * @classdesc Represents a CountByGroup.
+         * @implements ICountByGroup
+         * @constructor
+         * @param {conversation.ICountByGroup=} [p] Properties to set
+         */
+        function CountByGroup(p) {
+            this.data = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * CountByGroup group_id.
+         * @member {string} group_id
+         * @memberof conversation.CountByGroup
+         * @instance
+         */
+        CountByGroup.prototype.group_id = "";
+
+        /**
+         * CountByGroup data.
+         * @member {Array.<number|Long>} data
+         * @memberof conversation.CountByGroup
+         * @instance
+         */
+        CountByGroup.prototype.data = $util.emptyArray;
+
+        return CountByGroup;
     })();
 
     conversation.CountByTag = (function() {
@@ -11380,6 +11595,39 @@ export const conversation = $root.conversation = (() => {
         (ConversationReporter.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = ConversationReporter;
 
         /**
+         * Callback as used by {@link conversation.ConversationReporter#countConversationsByAgent}.
+         * @memberof conversation.ConversationReporter
+         * @typedef CountConversationsByAgentCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {conversation.CountByAgent} [response] CountByAgent
+         */
+
+        /**
+         * Calls CountConversationsByAgent.
+         * @function countConversationsByAgent
+         * @memberof conversation.ConversationReporter
+         * @instance
+         * @param {conversation.ICountByAgentRequest} request CountByAgentRequest message or plain object
+         * @param {conversation.ConversationReporter.CountConversationsByAgentCallback} callback Node-style callback called with the error, if any, and CountByAgent
+         * @returns {undefined}
+         * @variation 1
+         */
+        ConversationReporter.prototype.countConversationsByAgent = function countConversationsByAgent(request, callback) {
+            return this.rpcCall(countConversationsByAgent, $root.conversation.CountByAgentRequest, $root.conversation.CountByAgent, request, callback);
+        };
+
+        /**
+         * Calls CountConversationsByAgent.
+         * @function countConversationsByAgent
+         * @memberof conversation.ConversationReporter
+         * @instance
+         * @param {conversation.ICountByAgentRequest} request CountByAgentRequest message or plain object
+         * @returns {Promise<conversation.CountByAgent>} Promise
+         * @variation 2
+         */
+
+        /**
          * Callback as used by {@link conversation.ConversationReporter#countConversationsByAgents}.
          * @memberof conversation.ConversationReporter
          * @typedef CountConversationsByAgentsCallback
@@ -11409,6 +11657,39 @@ export const conversation = $root.conversation = (() => {
          * @instance
          * @param {conversation.ICountByAgentsRequest} request CountByAgentsRequest message or plain object
          * @returns {Promise<conversation.CountByAgentsResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link conversation.ConversationReporter#countConversationsByGroup}.
+         * @memberof conversation.ConversationReporter
+         * @typedef CountConversationsByGroupCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {conversation.CountByGroup} [response] CountByGroup
+         */
+
+        /**
+         * Calls CountConversationsByGroup.
+         * @function countConversationsByGroup
+         * @memberof conversation.ConversationReporter
+         * @instance
+         * @param {conversation.ICountByGroupRequest} request CountByGroupRequest message or plain object
+         * @param {conversation.ConversationReporter.CountConversationsByGroupCallback} callback Node-style callback called with the error, if any, and CountByGroup
+         * @returns {undefined}
+         * @variation 1
+         */
+        ConversationReporter.prototype.countConversationsByGroup = function countConversationsByGroup(request, callback) {
+            return this.rpcCall(countConversationsByGroup, $root.conversation.CountByGroupRequest, $root.conversation.CountByGroup, request, callback);
+        };
+
+        /**
+         * Calls CountConversationsByGroup.
+         * @function countConversationsByGroup
+         * @memberof conversation.ConversationReporter
+         * @instance
+         * @param {conversation.ICountByGroupRequest} request CountByGroupRequest message or plain object
+         * @returns {Promise<conversation.CountByGroup>} Promise
          * @variation 2
          */
 

@@ -573,6 +573,30 @@ message TagRequest {
 	optional string id = 4;
 }
 
+message CountByAgentRequest {
+	optional string integration_id = 3;
+	optional string agent_id = 4;
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
+}
+
+message CountByGroupRequest {
+	optional string integration_id = 3;
+	optional string group_id = 4;
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
+}
+
 message CountByAgentsRequest {
 	optional string integration_id = 3;
 	repeated string agent_ids = 4;
@@ -599,6 +623,11 @@ message CountByTagsRequest {
 
 message CountByAgent {
 	optional string agent_id = 2;
+	repeated int64 data = 3;
+}
+
+message CountByGroup {
+	optional string group_id = 2;
 	repeated int64 data = 3;
 }
 
@@ -630,7 +659,9 @@ message TotalConversationResponse {
 }
 
 service ConversationReporter {
+	rpc CountConversationsByAgent(CountByAgentRequest) returns (CountByAgent);
 	rpc CountConversationsByAgents(CountByAgentsRequest) returns (CountByAgentsResponse);
+	rpc CountConversationsByGroup(CountByGroupRequest) returns (CountByGroup);
 	rpc CountConversationsByTags(CountByTagsRequest) returns (CountByTagsResponse);
 	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
 	rpc GetTotalConversation(AvgResponseTimeRequest) returns (TotalConversationResponse);

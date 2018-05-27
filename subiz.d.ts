@@ -2501,6 +2501,56 @@ export namespace conversation {
         public id: string;
     }
 
+    interface ICountByAgentRequest {
+        integration_id?: (string|null);
+        agent_id?: (string|null);
+        from?: (number|null);
+        to?: (number|null);
+        range?: (string|null);
+    }
+
+    class CountByAgentRequest implements ICountByAgentRequest {
+        constructor(p?: conversation.ICountByAgentRequest);
+        public integration_id: string;
+        public agent_id: string;
+        public from: number;
+        public to: number;
+        public range: string;
+    }
+
+    namespace CountByAgentRequest {
+
+        enum Range {
+            hour = 0,
+            day = 1
+        }
+    }
+
+    interface ICountByGroupRequest {
+        integration_id?: (string|null);
+        group_id?: (string|null);
+        from?: (number|null);
+        to?: (number|null);
+        range?: (string|null);
+    }
+
+    class CountByGroupRequest implements ICountByGroupRequest {
+        constructor(p?: conversation.ICountByGroupRequest);
+        public integration_id: string;
+        public group_id: string;
+        public from: number;
+        public to: number;
+        public range: string;
+    }
+
+    namespace CountByGroupRequest {
+
+        enum Range {
+            hour = 0,
+            day = 1
+        }
+    }
+
     interface ICountByAgentsRequest {
         integration_id?: (string|null);
         agent_ids?: (string[]|null);
@@ -2559,6 +2609,17 @@ export namespace conversation {
     class CountByAgent implements ICountByAgent {
         constructor(p?: conversation.ICountByAgent);
         public agent_id: string;
+        public data: (number|Long)[];
+    }
+
+    interface ICountByGroup {
+        group_id?: (string|null);
+        data?: ((number|Long)[]|null);
+    }
+
+    class CountByGroup implements ICountByGroup {
+        constructor(p?: conversation.ICountByGroup);
+        public group_id: string;
         public data: (number|Long)[];
     }
 
@@ -2624,8 +2685,12 @@ export namespace conversation {
 
     class ConversationReporter extends $protobuf.rpc.Service {
         constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+        public countConversationsByAgent(request: conversation.ICountByAgentRequest, callback: conversation.ConversationReporter.CountConversationsByAgentCallback): void;
+        public countConversationsByAgent(request: conversation.ICountByAgentRequest): Promise<conversation.CountByAgent>;
         public countConversationsByAgents(request: conversation.ICountByAgentsRequest, callback: conversation.ConversationReporter.CountConversationsByAgentsCallback): void;
         public countConversationsByAgents(request: conversation.ICountByAgentsRequest): Promise<conversation.CountByAgentsResponse>;
+        public countConversationsByGroup(request: conversation.ICountByGroupRequest, callback: conversation.ConversationReporter.CountConversationsByGroupCallback): void;
+        public countConversationsByGroup(request: conversation.ICountByGroupRequest): Promise<conversation.CountByGroup>;
         public countConversationsByTags(request: conversation.ICountByTagsRequest, callback: conversation.ConversationReporter.CountConversationsByTagsCallback): void;
         public countConversationsByTags(request: conversation.ICountByTagsRequest): Promise<conversation.CountByTagsResponse>;
         public getAvgResponseTimes(request: conversation.IAvgResponseTimeRequest, callback: conversation.ConversationReporter.GetAvgResponseTimesCallback): void;
@@ -2636,7 +2701,11 @@ export namespace conversation {
 
     namespace ConversationReporter {
 
+        type CountConversationsByAgentCallback = (error: (Error|null), response?: conversation.CountByAgent) => void;
+
         type CountConversationsByAgentsCallback = (error: (Error|null), response?: conversation.CountByAgentsResponse) => void;
+
+        type CountConversationsByGroupCallback = (error: (Error|null), response?: conversation.CountByGroup) => void;
 
         type CountConversationsByTagsCallback = (error: (Error|null), response?: conversation.CountByTagsResponse) => void;
 

@@ -1202,6 +1202,21 @@
           }
         }
       },
+      "conversationCountByGroup": {
+        "type": "object",
+        "properties": {
+          "group_id": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "int64"
+            }
+          }
+        }
+      },
       "conversationCountByTag": {
         "type": "object",
         "properties": {
