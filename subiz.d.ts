@@ -1520,6 +1520,7 @@ export namespace conversation {
         rule_id?: (string|null);
         strategy?: (string|null);
         agent_ids?: (string[]|null);
+        group_id?: (string|null);
     }
 
     class RouteResult implements IRouteResult {
@@ -1527,6 +1528,7 @@ export namespace conversation {
         public rule_id: string;
         public strategy: string;
         public agent_ids: string[];
+        public group_id: string;
     }
 
     interface IMemberSeen {

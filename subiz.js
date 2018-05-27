@@ -6540,6 +6540,7 @@ export const conversation = $root.conversation = (() => {
          * @property {string|null} [rule_id] RouteResult rule_id
          * @property {string|null} [strategy] RouteResult strategy
          * @property {Array.<string>|null} [agent_ids] RouteResult agent_ids
+         * @property {string|null} [group_id] RouteResult group_id
          */
 
         /**
@@ -6581,6 +6582,14 @@ export const conversation = $root.conversation = (() => {
          * @instance
          */
         RouteResult.prototype.agent_ids = $util.emptyArray;
+
+        /**
+         * RouteResult group_id.
+         * @member {string} group_id
+         * @memberof conversation.RouteResult
+         * @instance
+         */
+        RouteResult.prototype.group_id = "";
 
         return RouteResult;
     })();

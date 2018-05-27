@@ -65,6 +65,7 @@ message RouteResult {
 	optional string rule_id = 1;
 	optional string strategy = 3;
 	repeated string agent_ids = 4;
+	optional string group_id = 5;
 }
 
 message MemberSeen {
