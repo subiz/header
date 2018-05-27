@@ -17,7 +17,7 @@ if [ ! -f $GOPATH/bin/protoc-gen-swagger ]; then
 		echo "done"
 fi
 
-if [ ! -f ./node_modules/protobufjs/bin ]; then
+if [ ! -f ./node_modules/protobufjs/bin/pbjs ]; then
 		echo -e "\033[0;34minstalling protobufjs..."
 		npm i
 		echo "done"
@@ -27,8 +27,8 @@ TOTAL=1
 echo -e "\033[0;34mcompiling proto files"
 ./protoc --version
 
-
 ALLPROTO=""
+
 
 for i in `ls -R`; do
 		if [[ $i == *":"* ]]; then
@@ -56,7 +56,6 @@ npx pbts --no-comments -o subiz.d.ts subiz.js
 
 # echo -e "\033[0;34mremoving all omitempty\033[0;31m"
 # ls */*.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'
-
 
 #echo "\033[0;34minjecting golang custom tag\033[0;31m"
 #ls */*.pb.go | xargs -n1 -IX bash -c 'protoc-go-inject-tag -input=X'
