@@ -40,5 +40,10 @@ message PublishMessage {
 service Pubsub {
 	rpc Subscribe(Subscription) returns (common.Empty) {}
 	rpc Unsubscribe(Subscription) returns (common.Empty) {}
-	rpc Publish(PublishMessage) returns (common.Empty) {}
+}
+
+enum Event {
+	PubsubSynced = 0;
+	PubsubRequested = 1;
+	PubsubPublish = 2;
 }

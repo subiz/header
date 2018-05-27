@@ -5254,8 +5254,6 @@ export namespace pubsub {
         public subscribe(request: pubsub.ISubscription): Promise<common.Empty>;
         public unsubscribe(request: pubsub.ISubscription, callback: pubsub.Pubsub.UnsubscribeCallback): void;
         public unsubscribe(request: pubsub.ISubscription): Promise<common.Empty>;
-        public publish(request: pubsub.IPublishMessage, callback: pubsub.Pubsub.PublishCallback): void;
-        public publish(request: pubsub.IPublishMessage): Promise<common.Empty>;
     }
 
     namespace Pubsub {
@@ -5263,8 +5261,12 @@ export namespace pubsub {
         type SubscribeCallback = (error: (Error|null), response?: common.Empty) => void;
 
         type UnsubscribeCallback = (error: (Error|null), response?: common.Empty) => void;
+    }
 
-        type PublishCallback = (error: (Error|null), response?: common.Empty) => void;
+    enum Event {
+        PubsubSynced = 0,
+        PubsubRequested = 1,
+        PubsubPublish = 2
     }
 }
 

@@ -22221,40 +22221,23 @@ export const pubsub = $root.pubsub = (() => {
          * @variation 2
          */
 
-        /**
-         * Callback as used by {@link pubsub.Pubsub#publish}.
-         * @memberof pubsub.Pubsub
-         * @typedef PublishCallback
-         * @type {function}
-         * @param {Error|null} error Error, if any
-         * @param {common.Empty} [response] Empty
-         */
-
-        /**
-         * Calls Publish.
-         * @function publish
-         * @memberof pubsub.Pubsub
-         * @instance
-         * @param {pubsub.IPublishMessage} request PublishMessage message or plain object
-         * @param {pubsub.Pubsub.PublishCallback} callback Node-style callback called with the error, if any, and Empty
-         * @returns {undefined}
-         * @variation 1
-         */
-        Pubsub.prototype.publish = function publish(request, callback) {
-            return this.rpcCall(publish, $root.pubsub.PublishMessage, $root.common.Empty, request, callback);
-        };
-
-        /**
-         * Calls Publish.
-         * @function publish
-         * @memberof pubsub.Pubsub
-         * @instance
-         * @param {pubsub.IPublishMessage} request PublishMessage message or plain object
-         * @returns {Promise<common.Empty>} Promise
-         * @variation 2
-         */
-
         return Pubsub;
+    })();
+
+    /**
+     * Event enum.
+     * @name pubsub.Event
+     * @enum {string}
+     * @property {number} PubsubSynced=0 PubsubSynced value
+     * @property {number} PubsubRequested=1 PubsubRequested value
+     * @property {number} PubsubPublish=2 PubsubPublish value
+     */
+    pubsub.Event = (function() {
+        const valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "PubsubSynced"] = 0;
+        values[valuesById[1] = "PubsubRequested"] = 1;
+        values[valuesById[2] = "PubsubPublish"] = 2;
+        return values;
     })();
 
     return pubsub;
