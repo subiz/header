@@ -29,7 +29,6 @@ echo -e "\033[0;34mcompiling proto files"
 
 ALLPROTO=""
 
-
 for i in `ls -R`; do
 		if [[ $i == *":"* ]]; then
 				LASTDIRECTORY=${i::-1}
