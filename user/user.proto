@@ -388,6 +388,7 @@ message UserSearchResult {
 	repeated User users = 4;
 	optional string anchor = 5;
 	repeated int32 unreads = 6; // only used when search my users
+	map<string, int32> unread_counts = 7;
 }
 
 message UserSearchRequest {

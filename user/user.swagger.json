@@ -1316,6 +1316,13 @@
             "type": "integer",
             "format": "int32"
           }
+        },
+        "unread_counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       }
     },

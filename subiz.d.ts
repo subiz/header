@@ -6093,6 +6093,7 @@ export namespace user {
         users?: (user.IUser[]|null);
         anchor?: (string|null);
         unreads?: (number[]|null);
+        unread_counts?: ({ [k: string]: number }|null);
     }
 
     class UserSearchResult implements IUserSearchResult {
@@ -6102,6 +6103,7 @@ export namespace user {
         public users: user.IUser[];
         public anchor: string;
         public unreads: number[];
+        public unread_counts: { [k: string]: number };
     }
 
     interface IUserSearchRequest {

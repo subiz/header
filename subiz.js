@@ -25498,6 +25498,7 @@ export const user = $root.user = (() => {
          * @property {Array.<user.IUser>|null} [users] UserSearchResult users
          * @property {string|null} [anchor] UserSearchResult anchor
          * @property {Array.<number>|null} [unreads] UserSearchResult unreads
+         * @property {Object.<string,number>|null} [unread_counts] UserSearchResult unread_counts
          */
 
         /**
@@ -25511,6 +25512,7 @@ export const user = $root.user = (() => {
         function UserSearchResult(p) {
             this.users = [];
             this.unreads = [];
+            this.unread_counts = {};
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -25556,6 +25558,14 @@ export const user = $root.user = (() => {
          * @instance
          */
         UserSearchResult.prototype.unreads = $util.emptyArray;
+
+        /**
+         * UserSearchResult unread_counts.
+         * @member {Object.<string,number>} unread_counts
+         * @memberof user.UserSearchResult
+         * @instance
+         */
+        UserSearchResult.prototype.unread_counts = $util.emptyObject;
 
         return UserSearchResult;
     })();
