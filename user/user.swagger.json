@@ -550,7 +550,16 @@
         "type": {
           "type": "string"
         },
+        "list_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "key": {
+          "type": "string"
+        },
+        "kind": {
           "type": "string"
         },
         "updated": {

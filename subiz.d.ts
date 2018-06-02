@@ -5555,12 +5555,10 @@ export namespace user {
         list = 4
     }
 
-    enum AttributeProtected {
-        id = 0,
-        account_id = 1,
-        fullname = 2,
-        emails = 3,
-        phones = 4
+    enum AttributeKind {
+        system = 0,
+        default = 1,
+        custom = 2
     }
 
     interface IAttributeDefinition {
@@ -5569,7 +5567,9 @@ export namespace user {
         name?: (string|null);
         description?: (string|null);
         type?: (string|null);
+        list_items?: (string[]|null);
         key?: (string|null);
+        kind?: (string|null);
         updated?: (number|Long|null);
     }
 
@@ -5580,7 +5580,9 @@ export namespace user {
         public name: string;
         public description: string;
         public type: string;
+        public list_items: string[];
         public key: string;
+        public kind: string;
         public updated: (number|Long);
     }
 

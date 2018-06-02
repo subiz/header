@@ -23409,22 +23409,18 @@ export const user = $root.user = (() => {
     })();
 
     /**
-     * AttributeProtected enum.
-     * @name user.AttributeProtected
+     * AttributeKind enum.
+     * @name user.AttributeKind
      * @enum {string}
-     * @property {number} id=0 id value
-     * @property {number} account_id=1 account_id value
-     * @property {number} fullname=2 fullname value
-     * @property {number} emails=3 emails value
-     * @property {number} phones=4 phones value
+     * @property {number} system=0 system value
+     * @property {number} default=1 default value
+     * @property {number} custom=2 custom value
      */
-    user.AttributeProtected = (function() {
+    user.AttributeKind = (function() {
         const valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "id"] = 0;
-        values[valuesById[1] = "account_id"] = 1;
-        values[valuesById[2] = "fullname"] = 2;
-        values[valuesById[3] = "emails"] = 3;
-        values[valuesById[4] = "phones"] = 4;
+        values[valuesById[0] = "system"] = 0;
+        values[valuesById[1] = "default"] = 1;
+        values[valuesById[2] = "custom"] = 2;
         return values;
     })();
 
@@ -23439,7 +23435,9 @@ export const user = $root.user = (() => {
          * @property {string|null} [name] AttributeDefinition name
          * @property {string|null} [description] AttributeDefinition description
          * @property {string|null} [type] AttributeDefinition type
+         * @property {Array.<string>|null} [list_items] AttributeDefinition list_items
          * @property {string|null} [key] AttributeDefinition key
+         * @property {string|null} [kind] AttributeDefinition kind
          * @property {number|Long|null} [updated] AttributeDefinition updated
          */
 
@@ -23452,6 +23450,7 @@ export const user = $root.user = (() => {
          * @param {user.IAttributeDefinition=} [p] Properties to set
          */
         function AttributeDefinition(p) {
+            this.list_items = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -23499,12 +23498,28 @@ export const user = $root.user = (() => {
         AttributeDefinition.prototype.type = "";
 
         /**
+         * AttributeDefinition list_items.
+         * @member {Array.<string>} list_items
+         * @memberof user.AttributeDefinition
+         * @instance
+         */
+        AttributeDefinition.prototype.list_items = $util.emptyArray;
+
+        /**
          * AttributeDefinition key.
          * @member {string} key
          * @memberof user.AttributeDefinition
          * @instance
          */
         AttributeDefinition.prototype.key = "";
+
+        /**
+         * AttributeDefinition kind.
+         * @member {string} kind
+         * @memberof user.AttributeDefinition
+         * @instance
+         */
+        AttributeDefinition.prototype.kind = "";
 
         /**
          * AttributeDefinition updated.

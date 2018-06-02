@@ -49,7 +49,6 @@ message MyUser {
 	optional int64 updated = 5;
 }
 
-
 enum AttributeType {
 	text = 0;
 	number = 1;
@@ -58,12 +57,10 @@ enum AttributeType {
 	list = 4;
 }
 
-enum AttributeProtected {
-	id = 0;
-	account_id = 1;
-	fullname = 2;
-	emails = 3;
-	phones = 4;
+enum AttributeKind {
+	system = 0;
+	default = 1;
+	custom = 2;
 }
 
 message AttributeDefinition {
@@ -72,8 +69,10 @@ message AttributeDefinition {
 	optional string name = 3;
 	optional string description = 4;
 	optional string type = 5;
-	optional string key = 6;
-	optional int64 updated = 7;
+	repeated string list_items = 6;
+	optional string key = 7;
+	optional string kind = 8;
+	optional int64 updated = 9;
 }
 
 message AttributeDefinitions {
