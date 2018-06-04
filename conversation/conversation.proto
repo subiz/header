@@ -386,16 +386,20 @@ message GenericElementTemplate {
 	repeated Button buttons = 6;
 }
 
+enum AttachmentType {
+	file = 2;
+	generic = 3;
+	preview = 4;
+	button = 5;
+	input = 6;
+	ask_info_form = 7;
+	ask_info_form_answer = 8;
+	form = 9;
+	form_submit = 10;
+}
+
 message Attachment {
-	enum AttachmentType {
-		file = 2;
-		generic = 3;
-		preview = 4;
-		button = 5;
-		input = 6;
-		ask_info_form = 7;
-		ask_info_form_answer = 8;
-	}
+
 	optional string type = 12;
 	// file
 	optional string mimetype = 2;
@@ -419,6 +423,31 @@ message Attachment {
 	optional AskInfomationAnswer ask_info_answer = 18;
 	//repeated string inputtype = 17;
 
+	optional Form form = 20;
+	optional FormSubmit form_submit = 21;
+}
+
+message Form {
+	optional string title = 2;
+	optional string state = 3;
+	repeated FormField fields = 4;
+	optional string submit_url = 5;
+}
+
+message FormSubmit {
+	optional string form_message_id = 2;
+	repeated FormField fields = 3;
+}
+
+message FormField {
+	optional string input_type = 2;
+	repeated string items = 3;
+	optional string state = 4;
+	optional string title = 5;
+	optional string image_url = 6;
+	optional string name = 7;
+	optional string answer = 8;
+	optional int64 answered = 9;
 }
 
 message Tag {

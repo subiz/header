@@ -2076,6 +2076,18 @@ export namespace conversation {
         public buttons: conversation.IButton[];
     }
 
+    enum AttachmentType {
+        file = 2,
+        generic = 3,
+        preview = 4,
+        button = 5,
+        input = 6,
+        ask_info_form = 7,
+        ask_info_form_answer = 8,
+        form = 9,
+        form_submit = 10
+    }
+
     interface IAttachment {
         type?: (string|null);
         mimetype?: (string|null);
@@ -2092,6 +2104,8 @@ export namespace conversation {
         buttons?: (conversation.IButton[]|null);
         ask_info?: (conversation.IAskInfomation|null);
         ask_info_answer?: (conversation.IAskInfomationAnswer|null);
+        form?: (conversation.IForm|null);
+        form_submit?: (conversation.IFormSubmit|null);
     }
 
     class Attachment implements IAttachment {
@@ -2111,19 +2125,57 @@ export namespace conversation {
         public buttons: conversation.IButton[];
         public ask_info?: (conversation.IAskInfomation|null);
         public ask_info_answer?: (conversation.IAskInfomationAnswer|null);
+        public form?: (conversation.IForm|null);
+        public form_submit?: (conversation.IFormSubmit|null);
     }
 
-    namespace Attachment {
+    interface IForm {
+        title?: (string|null);
+        state?: (string|null);
+        fields?: (conversation.IFormField[]|null);
+        submit_url?: (string|null);
+    }
 
-        enum AttachmentType {
-            file = 2,
-            generic = 3,
-            preview = 4,
-            button = 5,
-            input = 6,
-            ask_info_form = 7,
-            ask_info_form_answer = 8
-        }
+    class Form implements IForm {
+        constructor(p?: conversation.IForm);
+        public title: string;
+        public state: string;
+        public fields: conversation.IFormField[];
+        public submit_url: string;
+    }
+
+    interface IFormSubmit {
+        form_message_id?: (string|null);
+        fields?: (conversation.IFormField[]|null);
+    }
+
+    class FormSubmit implements IFormSubmit {
+        constructor(p?: conversation.IFormSubmit);
+        public form_message_id: string;
+        public fields: conversation.IFormField[];
+    }
+
+    interface IFormField {
+        input_type?: (string|null);
+        items?: (string[]|null);
+        state?: (string|null);
+        title?: (string|null);
+        image_url?: (string|null);
+        name?: (string|null);
+        answer?: (string|null);
+        answered?: (number|Long|null);
+    }
+
+    class FormField implements IFormField {
+        constructor(p?: conversation.IFormField);
+        public input_type: string;
+        public items: string[];
+        public state: string;
+        public title: string;
+        public image_url: string;
+        public name: string;
+        public answer: string;
+        public answered: (number|Long);
     }
 
     interface ITag {

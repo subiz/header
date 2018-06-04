@@ -8707,6 +8707,34 @@ export const conversation = $root.conversation = (() => {
         return GenericElementTemplate;
     })();
 
+    /**
+     * AttachmentType enum.
+     * @name conversation.AttachmentType
+     * @enum {string}
+     * @property {number} file=2 file value
+     * @property {number} generic=3 generic value
+     * @property {number} preview=4 preview value
+     * @property {number} button=5 button value
+     * @property {number} input=6 input value
+     * @property {number} ask_info_form=7 ask_info_form value
+     * @property {number} ask_info_form_answer=8 ask_info_form_answer value
+     * @property {number} form=9 form value
+     * @property {number} form_submit=10 form_submit value
+     */
+    conversation.AttachmentType = (function() {
+        const valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[2] = "file"] = 2;
+        values[valuesById[3] = "generic"] = 3;
+        values[valuesById[4] = "preview"] = 4;
+        values[valuesById[5] = "button"] = 5;
+        values[valuesById[6] = "input"] = 6;
+        values[valuesById[7] = "ask_info_form"] = 7;
+        values[valuesById[8] = "ask_info_form_answer"] = 8;
+        values[valuesById[9] = "form"] = 9;
+        values[valuesById[10] = "form_submit"] = 10;
+        return values;
+    })();
+
     conversation.Attachment = (function() {
 
         /**
@@ -8728,6 +8756,8 @@ export const conversation = $root.conversation = (() => {
          * @property {Array.<conversation.IButton>|null} [buttons] Attachment buttons
          * @property {conversation.IAskInfomation|null} [ask_info] Attachment ask_info
          * @property {conversation.IAskInfomationAnswer|null} [ask_info_answer] Attachment ask_info_answer
+         * @property {conversation.IForm|null} [form] Attachment form
+         * @property {conversation.IFormSubmit|null} [form_submit] Attachment form_submit
          */
 
         /**
@@ -8868,30 +8898,229 @@ export const conversation = $root.conversation = (() => {
         Attachment.prototype.ask_info_answer = null;
 
         /**
-         * AttachmentType enum.
-         * @name conversation.Attachment.AttachmentType
-         * @enum {string}
-         * @property {number} file=2 file value
-         * @property {number} generic=3 generic value
-         * @property {number} preview=4 preview value
-         * @property {number} button=5 button value
-         * @property {number} input=6 input value
-         * @property {number} ask_info_form=7 ask_info_form value
-         * @property {number} ask_info_form_answer=8 ask_info_form_answer value
+         * Attachment form.
+         * @member {conversation.IForm|null|undefined} form
+         * @memberof conversation.Attachment
+         * @instance
          */
-        Attachment.AttachmentType = (function() {
-            const valuesById = {}, values = Object.create(valuesById);
-            values[valuesById[2] = "file"] = 2;
-            values[valuesById[3] = "generic"] = 3;
-            values[valuesById[4] = "preview"] = 4;
-            values[valuesById[5] = "button"] = 5;
-            values[valuesById[6] = "input"] = 6;
-            values[valuesById[7] = "ask_info_form"] = 7;
-            values[valuesById[8] = "ask_info_form_answer"] = 8;
-            return values;
-        })();
+        Attachment.prototype.form = null;
+
+        /**
+         * Attachment form_submit.
+         * @member {conversation.IFormSubmit|null|undefined} form_submit
+         * @memberof conversation.Attachment
+         * @instance
+         */
+        Attachment.prototype.form_submit = null;
 
         return Attachment;
+    })();
+
+    conversation.Form = (function() {
+
+        /**
+         * Properties of a Form.
+         * @memberof conversation
+         * @interface IForm
+         * @property {string|null} [title] Form title
+         * @property {string|null} [state] Form state
+         * @property {Array.<conversation.IFormField>|null} [fields] Form fields
+         * @property {string|null} [submit_url] Form submit_url
+         */
+
+        /**
+         * Constructs a new Form.
+         * @memberof conversation
+         * @classdesc Represents a Form.
+         * @implements IForm
+         * @constructor
+         * @param {conversation.IForm=} [p] Properties to set
+         */
+        function Form(p) {
+            this.fields = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * Form title.
+         * @member {string} title
+         * @memberof conversation.Form
+         * @instance
+         */
+        Form.prototype.title = "";
+
+        /**
+         * Form state.
+         * @member {string} state
+         * @memberof conversation.Form
+         * @instance
+         */
+        Form.prototype.state = "";
+
+        /**
+         * Form fields.
+         * @member {Array.<conversation.IFormField>} fields
+         * @memberof conversation.Form
+         * @instance
+         */
+        Form.prototype.fields = $util.emptyArray;
+
+        /**
+         * Form submit_url.
+         * @member {string} submit_url
+         * @memberof conversation.Form
+         * @instance
+         */
+        Form.prototype.submit_url = "";
+
+        return Form;
+    })();
+
+    conversation.FormSubmit = (function() {
+
+        /**
+         * Properties of a FormSubmit.
+         * @memberof conversation
+         * @interface IFormSubmit
+         * @property {string|null} [form_message_id] FormSubmit form_message_id
+         * @property {Array.<conversation.IFormField>|null} [fields] FormSubmit fields
+         */
+
+        /**
+         * Constructs a new FormSubmit.
+         * @memberof conversation
+         * @classdesc Represents a FormSubmit.
+         * @implements IFormSubmit
+         * @constructor
+         * @param {conversation.IFormSubmit=} [p] Properties to set
+         */
+        function FormSubmit(p) {
+            this.fields = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * FormSubmit form_message_id.
+         * @member {string} form_message_id
+         * @memberof conversation.FormSubmit
+         * @instance
+         */
+        FormSubmit.prototype.form_message_id = "";
+
+        /**
+         * FormSubmit fields.
+         * @member {Array.<conversation.IFormField>} fields
+         * @memberof conversation.FormSubmit
+         * @instance
+         */
+        FormSubmit.prototype.fields = $util.emptyArray;
+
+        return FormSubmit;
+    })();
+
+    conversation.FormField = (function() {
+
+        /**
+         * Properties of a FormField.
+         * @memberof conversation
+         * @interface IFormField
+         * @property {string|null} [input_type] FormField input_type
+         * @property {Array.<string>|null} [items] FormField items
+         * @property {string|null} [state] FormField state
+         * @property {string|null} [title] FormField title
+         * @property {string|null} [image_url] FormField image_url
+         * @property {string|null} [name] FormField name
+         * @property {string|null} [answer] FormField answer
+         * @property {number|Long|null} [answered] FormField answered
+         */
+
+        /**
+         * Constructs a new FormField.
+         * @memberof conversation
+         * @classdesc Represents a FormField.
+         * @implements IFormField
+         * @constructor
+         * @param {conversation.IFormField=} [p] Properties to set
+         */
+        function FormField(p) {
+            this.items = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        /**
+         * FormField input_type.
+         * @member {string} input_type
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.input_type = "";
+
+        /**
+         * FormField items.
+         * @member {Array.<string>} items
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.items = $util.emptyArray;
+
+        /**
+         * FormField state.
+         * @member {string} state
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.state = "";
+
+        /**
+         * FormField title.
+         * @member {string} title
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.title = "";
+
+        /**
+         * FormField image_url.
+         * @member {string} image_url
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.image_url = "";
+
+        /**
+         * FormField name.
+         * @member {string} name
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.name = "";
+
+        /**
+         * FormField answer.
+         * @member {string} answer
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.answer = "";
+
+        /**
+         * FormField answered.
+         * @member {number|Long} answered
+         * @memberof conversation.FormField
+         * @instance
+         */
+        FormField.prototype.answered = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        return FormField;
     })();
 
     conversation.Tag = (function() {

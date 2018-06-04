@@ -958,6 +958,12 @@
           },
           "ask_info_answer": {
             "$ref": "#/components/schemas/conversationAskInfomationAnswer"
+          },
+          "form": {
+            "$ref": "#/components/schemas/conversationForm"
+          },
+          "form_submit": {
+            "$ref": "#/components/schemas/conversationFormSubmit"
           }
         }
       },
@@ -1251,6 +1257,73 @@
           },
           "key": {
             "type": "string"
+          }
+        }
+      },
+      "conversationForm": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationFormField"
+            }
+          },
+          "submit_url": {
+            "type": "string"
+          }
+        }
+      },
+      "conversationFormField": {
+        "type": "object",
+        "properties": {
+          "input_type": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "state": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "answered": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "conversationFormSubmit": {
+        "type": "object",
+        "properties": {
+          "form_message_id": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationFormField"
+            }
           }
         }
       },

@@ -885,6 +885,12 @@
         },
         "ask_info_answer": {
           "$ref": "#/definitions/conversationAskInfomationAnswer"
+        },
+        "form": {
+          "$ref": "#/definitions/conversationForm"
+        },
+        "form_submit": {
+          "$ref": "#/definitions/conversationFormSubmit"
         }
       }
     },
@@ -1011,6 +1017,73 @@
         },
         "key": {
           "type": "string"
+        }
+      }
+    },
+    "conversationForm": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
+        },
+        "submit_url": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationFormField": {
+      "type": "object",
+      "properties": {
+        "input_type": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationFormSubmit": {
+      "type": "object",
+      "properties": {
+        "form_message_id": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
         }
       }
     },
