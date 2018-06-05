@@ -41,6 +41,7 @@ for i in `ls -R`; do
 						./protoc --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LASTDIRECTORY/$i
 						./protoc -I./protobuf/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
 						#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
+						./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LASTDIRECTORY/$i
 						ALLPROTO="$ALLPROTO $LASTDIRECTORY/$i"
 						let "TOTAL += 1"
 						# else
