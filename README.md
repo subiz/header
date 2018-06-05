@@ -9,10 +9,13 @@
 ./protoc-go.sh
 ```
 ## build rest
-1. npm run rest
+npm run rest
 
-## build all
-1. ./build.sh
+## build all (go, typescript, scala)
+./build.sh all
+
+## quick build go only
+./ build
 
 # How to update protoc
 
