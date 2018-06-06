@@ -261,6 +261,8 @@ enum Event {
 	AutomationFired = 103;
 	UserRequested = 100;
 
+	UserCreated = 70;
+	UserAttributeAdded = 71;
 
 	UserSynced = 101;
 	UserUpserted = 105;
@@ -517,11 +519,12 @@ message Automation {
 		automation_invite_message = 4;
 	}
 	optional string action_data = 14;
-	enum Scope {
-		conversation = 2;
-		user = 3;
-	}
 	optional string scope = 15;
+}
+
+enum AutomationScope {
+	conversation = 2;
+	user = 3;
 }
 
 message Automations {
@@ -575,6 +578,42 @@ service VisitorMgr {
 	rpc ListTopVisitors (common.Id) returns (Visitors) {}
 }
 
+message CountMyUserRequest {
+	optional string agent_id = 4;
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
+}
+
+message CountUserRequest {
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
+}
+
+message CountUserByAttributeRequest {
+	optional string attribute_key = 4;
+	optional int32 from = 5;
+	optional int32 to = 6;
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
+}
+
+message CountResponse {
+	repeated int32 data = 3;
+}
+
 service UserMgr {
 	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult) {}
 	rpc SubizID (SubizIDRequest) returns (SubizIDResponse) {}
@@ -583,6 +622,10 @@ service UserMgr {
 	rpc UpdateUser (User) returns (User) {}
 	rpc ReadUser (common.Id) returns (User) {}
 	rpc RemoveFromMy (common.Id) returns (common.Empty) {}
+
+	rpc CountMyUser(CountMyUserRequest) returns (CountResponse) {}
+	rpc CountUser(CountUserRequest) returns (CountResponse) {}
+	rpc CountUserByAttribute(CountUserByAttributeRequest) returns (CountResponse) {}
 }
 
 service AutomationMgr {

@@ -1,8 +1,8 @@
 #!/bin/bash -e
-[ -f bin ] && echo "should not contains any file name: bin, lib, protoc" || exit
-[ -f bin ] && echo "should not contains any file name: bin, lib, protoc" || exit
-[ -f lib ] && echo "should not contains any file name: bin, lib, protoc" || exit
-[ -d lib ] && echo "should not contains any file name: bin, lib, protoc" || exit
+[ ! -f bin ] && echo "should not contains any file name: bin, lib, protoc" || exit
+[ ! -f bin ] && echo "should not contains any file name: bin, lib, protoc" || exit
+[ ! -f lib ] && echo "should not contains any file name: bin, lib, protoc" || exit
+[ ! -d lib ] && echo "should not contains any file name: bin, lib, protoc" || exit
 
 # setup for the first time
 #go get github.com/favadi/protoc-go-inject-tag

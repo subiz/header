@@ -375,43 +375,6 @@ object Automation extends scalapb.GeneratedMessageCompanion[user.Automation] {
     def javaDescriptor: _root_.com.google.protobuf.Descriptors.EnumDescriptor = user.Automation.javaDescriptor.getEnumTypes.get(1)
     def scalaDescriptor: _root_.scalapb.descriptors.EnumDescriptor = user.Automation.scalaDescriptor.enums(1)
   }
-  sealed trait Scope extends _root_.scalapb.GeneratedEnum {
-    type EnumType = Scope
-    def isconversation: _root_.scala.Boolean = false
-    def isuser: _root_.scala.Boolean = false
-    def companion: _root_.scalapb.GeneratedEnumCompanion[Scope] = user.Automation.Scope
-  }
-  
-  object Scope extends _root_.scalapb.GeneratedEnumCompanion[Scope] {
-    implicit def enumCompanion: _root_.scalapb.GeneratedEnumCompanion[Scope] = this
-    @SerialVersionUID(0L)
-    case object conversation extends Scope {
-      val value = 2
-      val index = 0
-      val name = "conversation"
-      override def isconversation: _root_.scala.Boolean = true
-    }
-    
-    @SerialVersionUID(0L)
-    case object user extends Scope {
-      val value = 3
-      val index = 1
-      val name = "user"
-      override def isuser: _root_.scala.Boolean = true
-    }
-    
-    @SerialVersionUID(0L)
-    final case class Unrecognized(value: _root_.scala.Int) extends Scope with _root_.scalapb.UnrecognizedEnum
-    
-    lazy val values = scala.collection.Seq(conversation, user)
-    def fromValue(value: _root_.scala.Int): Scope = value match {
-      case 2 => conversation
-      case 3 => user
-      case __other => Unrecognized(__other)
-    }
-    def javaDescriptor: _root_.com.google.protobuf.Descriptors.EnumDescriptor = user.Automation.javaDescriptor.getEnumTypes.get(2)
-    def scalaDescriptor: _root_.scalapb.descriptors.EnumDescriptor = user.Automation.scalaDescriptor.enums(2)
-  }
   implicit class AutomationLens[UpperPB](_l: _root_.scalapb.lenses.Lens[UpperPB, user.Automation]) extends _root_.scalapb.lenses.ObjectLens[UpperPB, user.Automation](_l) {
     def ctx: _root_.scalapb.lenses.Lens[UpperPB, common.Context] = field(_.getCtx)((c_, f_) => c_.copy(ctx = Option(f_)))
     def optionalCtx: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[common.Context]] = field(_.ctx)((c_, f_) => c_.copy(ctx = f_))

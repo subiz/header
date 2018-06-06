@@ -3264,6 +3264,18 @@
           }
         }
       },
+      "userCountResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
       "userCreateRequest": {
         "type": "object",
         "properties": {
