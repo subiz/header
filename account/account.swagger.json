@@ -193,9 +193,6 @@
         "v3_state": {
           "type": "integer",
           "format": "int32"
-        },
-        "v3_hashed_password": {
-          "type": "string"
         }
       }
     },

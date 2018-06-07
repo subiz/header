@@ -53,7 +53,6 @@ message Agent {
 	optional Account account = 28;
 	optional string country_code = 29;
 	optional int32 v3_state = 30 ; // 0: not v3, 1: v3 but not convert, 2: converted v3
-	optional string v3_hashed_password = 31;
 }
 
 message Invitation {
