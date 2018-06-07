@@ -220,6 +220,7 @@ message User {
 	string encrypted_password = 17;
 	bool is_active = 18;
 	int64 upserted = 19;
+	int32 v3_state = 20; // 0: not v3, 1: v3 but not convert, 2: converted v3
 }
 
 enum AuthorizationType {
