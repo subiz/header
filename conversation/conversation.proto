@@ -437,6 +437,7 @@ message Form {
 message FormSubmit {
 	optional string form_message_id = 2;
 	repeated FormField fields = 3;
+	optional string state = 4;
 }
 
 message FormField {

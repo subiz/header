@@ -926,6 +926,9 @@
           "items": {
             "$ref": "#/definitions/conversationFormField"
           }
+        },
+        "state": {
+          "type": "string"
         }
       }
     },
