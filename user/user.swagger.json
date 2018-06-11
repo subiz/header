@@ -529,6 +529,26 @@
         "modified": {
           "type": "string",
           "format": "int64"
+        },
+        "text": {
+          "type": "string"
+        },
+        "number": {
+          "type": "number",
+          "format": "double"
+        },
+        "boolean": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "date": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

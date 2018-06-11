@@ -94,6 +94,12 @@ message AttributeData {
 	optional string state = 6;
 	optional int64 created = 7;
 	optional int64 modified = 8;
+
+	optional string text = 10;
+	optional double number = 11;
+	optional bool boolean = 12;
+	optional string date = 13;
+	repeated string list = 14;
 }
 
 message User {
