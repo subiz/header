@@ -193,9 +193,6 @@
         "v3_state": {
           "type": "integer",
           "format": "int32"
-        },
-        "v3_hashed_password": {
-          "type": "string"
         }
       }
     },
@@ -1084,6 +1081,9 @@
           "items": {
             "$ref": "#/definitions/conversationFormField"
           }
+        },
+        "state": {
+          "type": "string"
         }
       }
     },
@@ -1654,6 +1654,26 @@
         "modified": {
           "type": "string",
           "format": "int64"
+        },
+        "text": {
+          "type": "string"
+        },
+        "number": {
+          "type": "number",
+          "format": "double"
+        },
+        "boolean": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "date": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
