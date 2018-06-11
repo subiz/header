@@ -98,8 +98,11 @@ message AttributeData {
 	optional string text = 10;
 	optional double number = 11;
 	optional bool boolean = 12;
-	optional string date = 13;
+	optional string datetime = 13;
 	repeated string list = 14;
+
+	optional string setter = 16;
+	optional string setter_type = 17;
 }
 
 message User {
