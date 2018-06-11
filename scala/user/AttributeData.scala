@@ -14,7 +14,12 @@ final case class AttributeData(
     value: scala.Option[_root_.scala.Predef.String] = None,
     state: scala.Option[_root_.scala.Predef.String] = None,
     created: scala.Option[_root_.scala.Long] = None,
-    modified: scala.Option[_root_.scala.Long] = None
+    modified: scala.Option[_root_.scala.Long] = None,
+    text: scala.Option[_root_.scala.Predef.String] = None,
+    number: scala.Option[_root_.scala.Double] = None,
+    boolean: scala.Option[_root_.scala.Boolean] = None,
+    date: scala.Option[_root_.scala.Predef.String] = None,
+    list: _root_.scala.collection.Seq[_root_.scala.Predef.String] = _root_.scala.collection.Seq.empty
     ) extends scalapb.GeneratedMessage with scalapb.Message[AttributeData] with scalapb.lenses.Updatable[AttributeData] {
     @transient
     private[this] var __serializedSizeCachedValue: _root_.scala.Int = 0
@@ -28,6 +33,11 @@ final case class AttributeData(
       if (state.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(6, state.get) }
       if (created.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeInt64Size(7, created.get) }
       if (modified.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeInt64Size(8, modified.get) }
+      if (text.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(10, text.get) }
+      if (number.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeDoubleSize(11, number.get) }
+      if (boolean.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeBoolSize(12, boolean.get) }
+      if (date.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(13, date.get) }
+      list.foreach(list => __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(14, list))
       __size
     }
     final override def serializedSize: _root_.scala.Int = {
@@ -65,6 +75,21 @@ final case class AttributeData(
       modified.foreach { __v =>
         _output__.writeInt64(8, __v)
       };
+      text.foreach { __v =>
+        _output__.writeString(10, __v)
+      };
+      number.foreach { __v =>
+        _output__.writeDouble(11, __v)
+      };
+      boolean.foreach { __v =>
+        _output__.writeBool(12, __v)
+      };
+      date.foreach { __v =>
+        _output__.writeString(13, __v)
+      };
+      list.foreach { __v =>
+        _output__.writeString(14, __v)
+      };
     }
     def mergeFrom(`_input__`: _root_.com.google.protobuf.CodedInputStream): user.AttributeData = {
       var __ctx = this.ctx
@@ -75,6 +100,11 @@ final case class AttributeData(
       var __state = this.state
       var __created = this.created
       var __modified = this.modified
+      var __text = this.text
+      var __number = this.number
+      var __boolean = this.boolean
+      var __date = this.date
+      val __list = (_root_.scala.collection.immutable.Vector.newBuilder[_root_.scala.Predef.String] ++= this.list)
       var _done__ = false
       while (!_done__) {
         val _tag__ = _input__.readTag()
@@ -96,6 +126,16 @@ final case class AttributeData(
             __created = Option(_input__.readInt64())
           case 64 =>
             __modified = Option(_input__.readInt64())
+          case 82 =>
+            __text = Option(_input__.readString())
+          case 89 =>
+            __number = Option(_input__.readDouble())
+          case 96 =>
+            __boolean = Option(_input__.readBool())
+          case 106 =>
+            __date = Option(_input__.readString())
+          case 114 =>
+            __list += _input__.readString()
           case tag => _input__.skipField(tag)
         }
       }
@@ -107,7 +147,12 @@ final case class AttributeData(
           value = __value,
           state = __state,
           created = __created,
-          modified = __modified
+          modified = __modified,
+          text = __text,
+          number = __number,
+          boolean = __boolean,
+          date = __date,
+          list = __list.result()
       )
     }
     def getCtx: common.Context = ctx.getOrElse(common.Context.defaultInstance)
@@ -134,6 +179,22 @@ final case class AttributeData(
     def getModified: _root_.scala.Long = modified.getOrElse(0L)
     def clearModified: AttributeData = copy(modified = None)
     def withModified(__v: _root_.scala.Long): AttributeData = copy(modified = Option(__v))
+    def getText: _root_.scala.Predef.String = text.getOrElse("")
+    def clearText: AttributeData = copy(text = None)
+    def withText(__v: _root_.scala.Predef.String): AttributeData = copy(text = Option(__v))
+    def getNumber: _root_.scala.Double = number.getOrElse(0.0)
+    def clearNumber: AttributeData = copy(number = None)
+    def withNumber(__v: _root_.scala.Double): AttributeData = copy(number = Option(__v))
+    def getBoolean: _root_.scala.Boolean = boolean.getOrElse(false)
+    def clearBoolean: AttributeData = copy(boolean = None)
+    def withBoolean(__v: _root_.scala.Boolean): AttributeData = copy(boolean = Option(__v))
+    def getDate: _root_.scala.Predef.String = date.getOrElse("")
+    def clearDate: AttributeData = copy(date = None)
+    def withDate(__v: _root_.scala.Predef.String): AttributeData = copy(date = Option(__v))
+    def clearList = copy(list = _root_.scala.collection.Seq.empty)
+    def addList(__vs: _root_.scala.Predef.String*): AttributeData = addAllList(__vs)
+    def addAllList(__vs: TraversableOnce[_root_.scala.Predef.String]): AttributeData = copy(list = list ++ __vs)
+    def withList(__v: _root_.scala.collection.Seq[_root_.scala.Predef.String]): AttributeData = copy(list = __v)
     def getFieldByNumber(__fieldNumber: _root_.scala.Int): scala.Any = {
       (__fieldNumber: @_root_.scala.unchecked) match {
         case 1 => ctx.orNull
@@ -144,6 +205,11 @@ final case class AttributeData(
         case 6 => state.orNull
         case 7 => created.orNull
         case 8 => modified.orNull
+        case 10 => text.orNull
+        case 11 => number.orNull
+        case 12 => boolean.orNull
+        case 13 => date.orNull
+        case 14 => list
       }
     }
     def getField(__field: _root_.scalapb.descriptors.FieldDescriptor): _root_.scalapb.descriptors.PValue = {
@@ -157,6 +223,11 @@ final case class AttributeData(
         case 6 => state.map(_root_.scalapb.descriptors.PString).getOrElse(_root_.scalapb.descriptors.PEmpty)
         case 7 => created.map(_root_.scalapb.descriptors.PLong).getOrElse(_root_.scalapb.descriptors.PEmpty)
         case 8 => modified.map(_root_.scalapb.descriptors.PLong).getOrElse(_root_.scalapb.descriptors.PEmpty)
+        case 10 => text.map(_root_.scalapb.descriptors.PString).getOrElse(_root_.scalapb.descriptors.PEmpty)
+        case 11 => number.map(_root_.scalapb.descriptors.PDouble).getOrElse(_root_.scalapb.descriptors.PEmpty)
+        case 12 => boolean.map(_root_.scalapb.descriptors.PBoolean).getOrElse(_root_.scalapb.descriptors.PEmpty)
+        case 13 => date.map(_root_.scalapb.descriptors.PString).getOrElse(_root_.scalapb.descriptors.PEmpty)
+        case 14 => _root_.scalapb.descriptors.PRepeated(list.map(_root_.scalapb.descriptors.PString)(_root_.scala.collection.breakOut))
       }
     }
     def toProtoString: _root_.scala.Predef.String = _root_.scalapb.TextFormat.printToUnicodeString(this)
@@ -176,7 +247,12 @@ object AttributeData extends scalapb.GeneratedMessageCompanion[user.AttributeDat
       __fieldsMap.get(__fields.get(4)).asInstanceOf[scala.Option[_root_.scala.Predef.String]],
       __fieldsMap.get(__fields.get(5)).asInstanceOf[scala.Option[_root_.scala.Predef.String]],
       __fieldsMap.get(__fields.get(6)).asInstanceOf[scala.Option[_root_.scala.Long]],
-      __fieldsMap.get(__fields.get(7)).asInstanceOf[scala.Option[_root_.scala.Long]]
+      __fieldsMap.get(__fields.get(7)).asInstanceOf[scala.Option[_root_.scala.Long]],
+      __fieldsMap.get(__fields.get(8)).asInstanceOf[scala.Option[_root_.scala.Predef.String]],
+      __fieldsMap.get(__fields.get(9)).asInstanceOf[scala.Option[_root_.scala.Double]],
+      __fieldsMap.get(__fields.get(10)).asInstanceOf[scala.Option[_root_.scala.Boolean]],
+      __fieldsMap.get(__fields.get(11)).asInstanceOf[scala.Option[_root_.scala.Predef.String]],
+      __fieldsMap.getOrElse(__fields.get(12), Nil).asInstanceOf[_root_.scala.collection.Seq[_root_.scala.Predef.String]]
     )
   }
   implicit def messageReads: _root_.scalapb.descriptors.Reads[user.AttributeData] = _root_.scalapb.descriptors.Reads{
@@ -190,7 +266,12 @@ object AttributeData extends scalapb.GeneratedMessageCompanion[user.AttributeDat
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(5).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]]),
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(6).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]]),
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(7).get).flatMap(_.as[scala.Option[_root_.scala.Long]]),
-        __fieldsMap.get(scalaDescriptor.findFieldByNumber(8).get).flatMap(_.as[scala.Option[_root_.scala.Long]])
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(8).get).flatMap(_.as[scala.Option[_root_.scala.Long]]),
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(10).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]]),
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(11).get).flatMap(_.as[scala.Option[_root_.scala.Double]]),
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(12).get).flatMap(_.as[scala.Option[_root_.scala.Boolean]]),
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(13).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]]),
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(14).get).map(_.as[_root_.scala.collection.Seq[_root_.scala.Predef.String]]).getOrElse(_root_.scala.collection.Seq.empty)
       )
     case _ => throw new RuntimeException("Expected PMessage")
   }
@@ -224,6 +305,15 @@ object AttributeData extends scalapb.GeneratedMessageCompanion[user.AttributeDat
     def optionalCreated: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Long]] = field(_.created)((c_, f_) => c_.copy(created = f_))
     def modified: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Long] = field(_.getModified)((c_, f_) => c_.copy(modified = Option(f_)))
     def optionalModified: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Long]] = field(_.modified)((c_, f_) => c_.copy(modified = f_))
+    def text: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Predef.String] = field(_.getText)((c_, f_) => c_.copy(text = Option(f_)))
+    def optionalText: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Predef.String]] = field(_.text)((c_, f_) => c_.copy(text = f_))
+    def number: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Double] = field(_.getNumber)((c_, f_) => c_.copy(number = Option(f_)))
+    def optionalNumber: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Double]] = field(_.number)((c_, f_) => c_.copy(number = f_))
+    def boolean: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Boolean] = field(_.getBoolean)((c_, f_) => c_.copy(boolean = Option(f_)))
+    def optionalBoolean: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Boolean]] = field(_.boolean)((c_, f_) => c_.copy(boolean = f_))
+    def date: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Predef.String] = field(_.getDate)((c_, f_) => c_.copy(date = Option(f_)))
+    def optionalDate: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Predef.String]] = field(_.date)((c_, f_) => c_.copy(date = f_))
+    def list: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.collection.Seq[_root_.scala.Predef.String]] = field(_.list)((c_, f_) => c_.copy(list = f_))
   }
   final val CTX_FIELD_NUMBER = 1
   final val ACCOUNT_ID_FIELD_NUMBER = 2
@@ -233,4 +323,9 @@ object AttributeData extends scalapb.GeneratedMessageCompanion[user.AttributeDat
   final val STATE_FIELD_NUMBER = 6
   final val CREATED_FIELD_NUMBER = 7
   final val MODIFIED_FIELD_NUMBER = 8
+  final val TEXT_FIELD_NUMBER = 10
+  final val NUMBER_FIELD_NUMBER = 11
+  final val BOOLEAN_FIELD_NUMBER = 12
+  final val DATE_FIELD_NUMBER = 13
+  final val LIST_FIELD_NUMBER = 14
 }

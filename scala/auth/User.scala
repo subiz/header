@@ -7,6 +7,8 @@ package auth
 
 /** @param id
   *  	optioanl common.Context ctx = 1;
+  * @param v3State
+  *   0: not v3, 1: v3 but not convert, 2: converted v3
   */
 @SerialVersionUID(0L)
 final case class User(
@@ -15,7 +17,8 @@ final case class User(
     email: _root_.scala.Predef.String = "",
     encryptedPassword: _root_.scala.Predef.String = "",
     isActive: _root_.scala.Boolean = false,
-    upserted: _root_.scala.Long = 0L
+    upserted: _root_.scala.Long = 0L,
+    v3State: _root_.scala.Int = 0
     ) extends scalapb.GeneratedMessage with scalapb.Message[User] with scalapb.lenses.Updatable[User] {
     @transient
     private[this] var __serializedSizeCachedValue: _root_.scala.Int = 0
@@ -27,6 +30,7 @@ final case class User(
       if (encryptedPassword != "") { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(17, encryptedPassword) }
       if (isActive != false) { __size += _root_.com.google.protobuf.CodedOutputStream.computeBoolSize(18, isActive) }
       if (upserted != 0L) { __size += _root_.com.google.protobuf.CodedOutputStream.computeInt64Size(19, upserted) }
+      if (v3State != 0) { __size += _root_.com.google.protobuf.CodedOutputStream.computeInt32Size(20, v3State) }
       __size
     }
     final override def serializedSize: _root_.scala.Int = {
@@ -74,6 +78,12 @@ final case class User(
           _output__.writeInt64(19, __v)
         }
       };
+      {
+        val __v = v3State
+        if (__v != 0) {
+          _output__.writeInt32(20, __v)
+        }
+      };
     }
     def mergeFrom(`_input__`: _root_.com.google.protobuf.CodedInputStream): auth.User = {
       var __id = this.id
@@ -82,6 +92,7 @@ final case class User(
       var __encryptedPassword = this.encryptedPassword
       var __isActive = this.isActive
       var __upserted = this.upserted
+      var __v3State = this.v3State
       var _done__ = false
       while (!_done__) {
         val _tag__ = _input__.readTag()
@@ -99,6 +110,8 @@ final case class User(
             __isActive = _input__.readBool()
           case 152 =>
             __upserted = _input__.readInt64()
+          case 160 =>
+            __v3State = _input__.readInt32()
           case tag => _input__.skipField(tag)
         }
       }
@@ -108,7 +121,8 @@ final case class User(
           email = __email,
           encryptedPassword = __encryptedPassword,
           isActive = __isActive,
-          upserted = __upserted
+          upserted = __upserted,
+          v3State = __v3State
       )
     }
     def withId(__v: _root_.scala.Predef.String): User = copy(id = __v)
@@ -117,6 +131,7 @@ final case class User(
     def withEncryptedPassword(__v: _root_.scala.Predef.String): User = copy(encryptedPassword = __v)
     def withIsActive(__v: _root_.scala.Boolean): User = copy(isActive = __v)
     def withUpserted(__v: _root_.scala.Long): User = copy(upserted = __v)
+    def withV3State(__v: _root_.scala.Int): User = copy(v3State = __v)
     def getFieldByNumber(__fieldNumber: _root_.scala.Int): scala.Any = {
       (__fieldNumber: @_root_.scala.unchecked) match {
         case 2 => {
@@ -143,6 +158,10 @@ final case class User(
           val __t = upserted
           if (__t != 0L) __t else null
         }
+        case 20 => {
+          val __t = v3State
+          if (__t != 0) __t else null
+        }
       }
     }
     def getField(__field: _root_.scalapb.descriptors.FieldDescriptor): _root_.scalapb.descriptors.PValue = {
@@ -154,6 +173,7 @@ final case class User(
         case 17 => _root_.scalapb.descriptors.PString(encryptedPassword)
         case 18 => _root_.scalapb.descriptors.PBoolean(isActive)
         case 19 => _root_.scalapb.descriptors.PLong(upserted)
+        case 20 => _root_.scalapb.descriptors.PInt(v3State)
       }
     }
     def toProtoString: _root_.scala.Predef.String = _root_.scalapb.TextFormat.printToUnicodeString(this)
@@ -171,7 +191,8 @@ object User extends scalapb.GeneratedMessageCompanion[auth.User] {
       __fieldsMap.getOrElse(__fields.get(2), "").asInstanceOf[_root_.scala.Predef.String],
       __fieldsMap.getOrElse(__fields.get(3), "").asInstanceOf[_root_.scala.Predef.String],
       __fieldsMap.getOrElse(__fields.get(4), false).asInstanceOf[_root_.scala.Boolean],
-      __fieldsMap.getOrElse(__fields.get(5), 0L).asInstanceOf[_root_.scala.Long]
+      __fieldsMap.getOrElse(__fields.get(5), 0L).asInstanceOf[_root_.scala.Long],
+      __fieldsMap.getOrElse(__fields.get(6), 0).asInstanceOf[_root_.scala.Int]
     )
   }
   implicit def messageReads: _root_.scalapb.descriptors.Reads[auth.User] = _root_.scalapb.descriptors.Reads{
@@ -183,7 +204,8 @@ object User extends scalapb.GeneratedMessageCompanion[auth.User] {
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(5).get).map(_.as[_root_.scala.Predef.String]).getOrElse(""),
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(17).get).map(_.as[_root_.scala.Predef.String]).getOrElse(""),
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(18).get).map(_.as[_root_.scala.Boolean]).getOrElse(false),
-        __fieldsMap.get(scalaDescriptor.findFieldByNumber(19).get).map(_.as[_root_.scala.Long]).getOrElse(0L)
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(19).get).map(_.as[_root_.scala.Long]).getOrElse(0L),
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(20).get).map(_.as[_root_.scala.Int]).getOrElse(0)
       )
     case _ => throw new RuntimeException("Expected PMessage")
   }
@@ -201,6 +223,7 @@ object User extends scalapb.GeneratedMessageCompanion[auth.User] {
     def encryptedPassword: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Predef.String] = field(_.encryptedPassword)((c_, f_) => c_.copy(encryptedPassword = f_))
     def isActive: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Boolean] = field(_.isActive)((c_, f_) => c_.copy(isActive = f_))
     def upserted: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Long] = field(_.upserted)((c_, f_) => c_.copy(upserted = f_))
+    def v3State: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Int] = field(_.v3State)((c_, f_) => c_.copy(v3State = f_))
   }
   final val ID_FIELD_NUMBER = 2
   final val ACCOUNT_ID_FIELD_NUMBER = 3
@@ -208,4 +231,5 @@ object User extends scalapb.GeneratedMessageCompanion[auth.User] {
   final val ENCRYPTED_PASSWORD_FIELD_NUMBER = 17
   final val IS_ACTIVE_FIELD_NUMBER = 18
   final val UPSERTED_FIELD_NUMBER = 19
+  final val V3_STATE_FIELD_NUMBER = 20
 }

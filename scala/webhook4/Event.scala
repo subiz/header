@@ -13,6 +13,7 @@ sealed trait Event extends _root_.scalapb.GeneratedEnum {
   def isWebhook4Requested: _root_.scala.Boolean = false
   def isWebhook4ClearBackoffRequested: _root_.scala.Boolean = false
   def isWebhook4PurgeQueueRequested: _root_.scala.Boolean = false
+  def isWebhook4WebhookFire: _root_.scala.Boolean = false
   def isWebhook4ShardSend: _root_.scala.Boolean = false
   def companion: _root_.scalapb.GeneratedEnumCompanion[Event] = webhook4.Event
 }
@@ -68,9 +69,17 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
   }
   
   @SerialVersionUID(0L)
+  case object Webhook4WebhookFire extends Event {
+    val value = 11
+    val index = 6
+    val name = "Webhook4WebhookFire"
+    override def isWebhook4WebhookFire: _root_.scala.Boolean = true
+  }
+  
+  @SerialVersionUID(0L)
   case object Webhook4ShardSend extends Event {
     val value = 9
-    val index = 6
+    val index = 7
     val name = "Webhook4ShardSend"
     override def isWebhook4ShardSend: _root_.scala.Boolean = true
   }
@@ -78,7 +87,7 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
   @SerialVersionUID(0L)
   final case class Unrecognized(value: _root_.scala.Int) extends Event with _root_.scalapb.UnrecognizedEnum
   
-  lazy val values = scala.collection.Seq(Webhook4WebhookReadRequested, Webhook4WebhookUpserted, Webhook4WebhookVerifyRequested, Webhook4Requested, Webhook4ClearBackoffRequested, Webhook4PurgeQueueRequested, Webhook4ShardSend)
+  lazy val values = scala.collection.Seq(Webhook4WebhookReadRequested, Webhook4WebhookUpserted, Webhook4WebhookVerifyRequested, Webhook4Requested, Webhook4ClearBackoffRequested, Webhook4PurgeQueueRequested, Webhook4WebhookFire, Webhook4ShardSend)
   def fromValue(value: _root_.scala.Int): Event = value match {
     case 3 => Webhook4WebhookReadRequested
     case 4 => Webhook4WebhookUpserted
@@ -87,6 +96,7 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
     case 7 => Webhook4ClearBackoffRequested
     case 8 => Webhook4PurgeQueueRequested
     case 9 => Webhook4ShardSend
+    case 11 => Webhook4WebhookFire
     case __other => Unrecognized(__other)
   }
   def javaDescriptor: _root_.com.google.protobuf.Descriptors.EnumDescriptor = Webhook4Proto.javaDescriptor.getEnumTypes.get(0)

@@ -10,7 +10,8 @@ object Webhook4Proto extends _root_.scalapb.GeneratedFileObject {
     common.CommonProto
   )
   lazy val messagesCompanions: Seq[_root_.scalapb.GeneratedMessageCompanion[_]] = Seq(
-    webhook4.Webhook
+    webhook4.Webhook,
+    webhook4.WebhookFire
   )
   private lazy val ProtoBytes: Array[Byte] =
       scalapb.Encoding.fromBase64(scala.collection.Seq(
@@ -22,12 +23,14 @@ object Webhook4Proto extends _root_.scalapb.GeneratedFileObject {
   BIhCgxldmVudHNfY291bnQYDSABKANSC2V2ZW50c0NvdW50EiwKEmxhc3RfaG9va19yZXNwb25zZRgOIAEoCVIQbGFzdEhvb2tSZ
   XNwb25zZRIoChBsYXN0X2hvb2tfc3RhdHVzGA8gASgFUg5sYXN0SG9va1N0YXR1cxIqChFsYXN0X2hvb2tfcGF5bG9hZBgQIAEoC
   VIPbGFzdEhvb2tQYXlsb2FkEiUKDmJhY2tvZmZzX2NvdW50GBEgASgDUg1iYWNrb2Zmc0NvdW50Ii4KBVN0YXRlEgoKBm5vcm1hb
-  BAAEgsKB2JhY2tvZmYQARIMCghpbmFjdGl2ZRACKtwBCgVFdmVudBIgChxXZWJob29rNFdlYmhvb2tSZWFkUmVxdWVzdGVkEAMSG
-  woXV2ViaG9vazRXZWJob29rVXBzZXJ0ZWQQBBIiCh5XZWJob29rNFdlYmhvb2tWZXJpZnlSZXF1ZXN0ZWQQBRIVChFXZWJob29rN
-  FJlcXVlc3RlZBAGEiEKHVdlYmhvb2s0Q2xlYXJCYWNrb2ZmUmVxdWVzdGVkEAcSHwobV2ViaG9vazRQdXJnZVF1ZXVlUmVxdWVzd
-  GVkEAgSFQoRV2ViaG9vazRTaGFyZFNlbmQQCTKRAQoOV2ViaG9va1NlcnZpY2USJwoEUmVhZBIKLmNvbW1vbi5JZBoRLndlYmhvb
-  2s0LldlYmhvb2siABIrCgxDbGVhckJhY2tvZmYSCi5jb21tb24uSWQaDS5jb21tb24uRW1wdHkiABIpCgpQdXJnZVF1ZXVlEgouY
-  29tbW9uLklkGg0uY29tbW9uLkVtcHR5IgA="""
+  BAAEgsKB2JhY2tvZmYQARIMCghpbmFjdGl2ZRACImcKC1dlYmhvb2tGaXJlEiEKA2N0eBgBIAEoCzIPLmNvbW1vbi5Db250ZXh0U
+  gNjdHgSGwoJY2xpZW50X2lkGAIgASgJUghjbGllbnRJZBIYCgdwYXlsb2FkGAMgASgMUgdwYXlsb2FkKvUBCgVFdmVudBIgChxXZ
+  WJob29rNFdlYmhvb2tSZWFkUmVxdWVzdGVkEAMSGwoXV2ViaG9vazRXZWJob29rVXBzZXJ0ZWQQBBIiCh5XZWJob29rNFdlYmhvb
+  2tWZXJpZnlSZXF1ZXN0ZWQQBRIVChFXZWJob29rNFJlcXVlc3RlZBAGEiEKHVdlYmhvb2s0Q2xlYXJCYWNrb2ZmUmVxdWVzdGVkE
+  AcSHwobV2ViaG9vazRQdXJnZVF1ZXVlUmVxdWVzdGVkEAgSFwoTV2ViaG9vazRXZWJob29rRmlyZRALEhUKEVdlYmhvb2s0U2hhc
+  mRTZW5kEAkykQEKDldlYmhvb2tTZXJ2aWNlEicKBFJlYWQSCi5jb21tb24uSWQaES53ZWJob29rNC5XZWJob29rIgASKwoMQ2xlY
+  XJCYWNrb2ZmEgouY29tbW9uLklkGg0uY29tbW9uLkVtcHR5IgASKQoKUHVyZ2VRdWV1ZRIKLmNvbW1vbi5JZBoNLmNvbW1vbi5Fb
+  XB0eSIA"""
       ).mkString)
   lazy val scalaDescriptor: _root_.scalapb.descriptors.FileDescriptor = {
     val scalaProto = com.google.protobuf.descriptor.FileDescriptorProto.parseFrom(ProtoBytes)

@@ -40,6 +40,8 @@ sealed trait Event extends _root_.scalapb.GeneratedEnum {
   def isAutomationSynced: _root_.scala.Boolean = false
   def isAutomationFired: _root_.scala.Boolean = false
   def isUserRequested: _root_.scala.Boolean = false
+  def isUserCreated: _root_.scala.Boolean = false
+  def isUserAttributeAdded: _root_.scala.Boolean = false
   def isUserSynced: _root_.scala.Boolean = false
   def isUserUpserted: _root_.scala.Boolean = false
   def isUserV3Synced: _root_.scala.Boolean = false
@@ -313,9 +315,25 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
   }
   
   @SerialVersionUID(0L)
+  case object UserCreated extends Event {
+    val value = 70
+    val index = 33
+    val name = "UserCreated"
+    override def isUserCreated: _root_.scala.Boolean = true
+  }
+  
+  @SerialVersionUID(0L)
+  case object UserAttributeAdded extends Event {
+    val value = 71
+    val index = 34
+    val name = "UserAttributeAdded"
+    override def isUserAttributeAdded: _root_.scala.Boolean = true
+  }
+  
+  @SerialVersionUID(0L)
   case object UserSynced extends Event {
     val value = 101
-    val index = 33
+    val index = 35
     val name = "UserSynced"
     override def isUserSynced: _root_.scala.Boolean = true
   }
@@ -323,7 +341,7 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
   @SerialVersionUID(0L)
   case object UserUpserted extends Event {
     val value = 105
-    val index = 34
+    val index = 36
     val name = "UserUpserted"
     override def isUserUpserted: _root_.scala.Boolean = true
   }
@@ -331,7 +349,7 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
   @SerialVersionUID(0L)
   case object UserV3Synced extends Event {
     val value = 106
-    val index = 35
+    val index = 37
     val name = "UserV3Synced"
     override def isUserV3Synced: _root_.scala.Boolean = true
   }
@@ -339,7 +357,7 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
   @SerialVersionUID(0L)
   final case class Unrecognized(value: _root_.scala.Int) extends Event with _root_.scalapb.UnrecognizedEnum
   
-  lazy val values = scala.collection.Seq(UserReadRequested, UserUpdateRequested, UserCreateRequested, UserSearchRequested, UserEventCreateRequested, UserEventSearchRequested, UserTopicSearchRequested, UserSegmentationCreateRequested, UserSegmentationUpdateRequested, UserSegmentationDeleteRequested, UserSegmentationListRequested, UserSegmentationReadRequested, UserAddToMyListRequested, UserEventTopicSubscribeRequested, UserEventTopicUnsubscribeRequested, UserReadTopicRequested, UserSubizId, UserPresenceReadRequested, UserPreviewingReadRequested, UserListTopRequested, UserAutomationUpsertRequested, UserAutomationDeleteRequested, UserAutomationListRequested, UserAutomationReadRequested, AutomationAgentNotificationFired, AutomationConversationMessageFired, UserSessionUpdateRequested, UserSessionCreateRequested, UserSessionReadRequested, SegmentationLoop, AutomationSynced, AutomationFired, UserRequested, UserSynced, UserUpserted, UserV3Synced)
+  lazy val values = scala.collection.Seq(UserReadRequested, UserUpdateRequested, UserCreateRequested, UserSearchRequested, UserEventCreateRequested, UserEventSearchRequested, UserTopicSearchRequested, UserSegmentationCreateRequested, UserSegmentationUpdateRequested, UserSegmentationDeleteRequested, UserSegmentationListRequested, UserSegmentationReadRequested, UserAddToMyListRequested, UserEventTopicSubscribeRequested, UserEventTopicUnsubscribeRequested, UserReadTopicRequested, UserSubizId, UserPresenceReadRequested, UserPreviewingReadRequested, UserListTopRequested, UserAutomationUpsertRequested, UserAutomationDeleteRequested, UserAutomationListRequested, UserAutomationReadRequested, AutomationAgentNotificationFired, AutomationConversationMessageFired, UserSessionUpdateRequested, UserSessionCreateRequested, UserSessionReadRequested, SegmentationLoop, AutomationSynced, AutomationFired, UserRequested, UserCreated, UserAttributeAdded, UserSynced, UserUpserted, UserV3Synced)
   def fromValue(value: _root_.scala.Int): Event = value match {
     case 0 => UserReadRequested
     case 2 => UserUpdateRequested
@@ -371,6 +389,8 @@ object Event extends _root_.scalapb.GeneratedEnumCompanion[Event] {
     case 66 => UserSessionCreateRequested
     case 67 => UserSessionReadRequested
     case 68 => SegmentationLoop
+    case 70 => UserCreated
+    case 71 => UserAttributeAdded
     case 100 => UserRequested
     case 101 => UserSynced
     case 102 => AutomationSynced

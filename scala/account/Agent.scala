@@ -41,8 +41,7 @@ final case class Agent(
     method: scala.Option[auth.Method] = None,
     account: scala.Option[_root_.account.Account] = None,
     countryCode: scala.Option[_root_.scala.Predef.String] = None,
-    v3State: scala.Option[_root_.scala.Int] = None,
-    v3HashedPassword: scala.Option[_root_.scala.Predef.String] = None
+    v3State: scala.Option[_root_.scala.Int] = None
     ) extends scalapb.GeneratedMessage with scalapb.Message[Agent] with scalapb.lenses.Updatable[Agent] {
     @transient
     private[this] var __serializedSizeCachedValue: _root_.scala.Int = 0
@@ -74,7 +73,6 @@ final case class Agent(
       if (account.isDefined) { __size += 2 + _root_.com.google.protobuf.CodedOutputStream.computeUInt32SizeNoTag(account.get.serializedSize) + account.get.serializedSize }
       if (countryCode.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(29, countryCode.get) }
       if (v3State.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeInt32Size(30, v3State.get) }
-      if (v3HashedPassword.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(31, v3HashedPassword.get) }
       __size
     }
     final override def serializedSize: _root_.scala.Int = {
@@ -170,9 +168,6 @@ final case class Agent(
       v3State.foreach { __v =>
         _output__.writeInt32(30, __v)
       };
-      v3HashedPassword.foreach { __v =>
-        _output__.writeString(31, __v)
-      };
     }
     def mergeFrom(`_input__`: _root_.com.google.protobuf.CodedInputStream): _root_.account.Agent = {
       var __ctx = this.ctx
@@ -201,7 +196,6 @@ final case class Agent(
       var __account = this.account
       var __countryCode = this.countryCode
       var __v3State = this.v3State
-      var __v3HashedPassword = this.v3HashedPassword
       var _done__ = false
       while (!_done__) {
         val _tag__ = _input__.readTag()
@@ -259,8 +253,6 @@ final case class Agent(
             __countryCode = Option(_input__.readString())
           case 240 =>
             __v3State = Option(_input__.readInt32())
-          case 250 =>
-            __v3HashedPassword = Option(_input__.readString())
           case tag => _input__.skipField(tag)
         }
       }
@@ -290,8 +282,7 @@ final case class Agent(
           method = __method,
           account = __account,
           countryCode = __countryCode,
-          v3State = __v3State,
-          v3HashedPassword = __v3HashedPassword
+          v3State = __v3State
       )
     }
     def getCtx: common.Context = ctx.getOrElse(common.Context.defaultInstance)
@@ -374,9 +365,6 @@ final case class Agent(
     def getV3State: _root_.scala.Int = v3State.getOrElse(0)
     def clearV3State: Agent = copy(v3State = None)
     def withV3State(__v: _root_.scala.Int): Agent = copy(v3State = Option(__v))
-    def getV3HashedPassword: _root_.scala.Predef.String = v3HashedPassword.getOrElse("")
-    def clearV3HashedPassword: Agent = copy(v3HashedPassword = None)
-    def withV3HashedPassword(__v: _root_.scala.Predef.String): Agent = copy(v3HashedPassword = Option(__v))
     def getFieldByNumber(__fieldNumber: _root_.scala.Int): scala.Any = {
       (__fieldNumber: @_root_.scala.unchecked) match {
         case 1 => ctx.orNull
@@ -405,7 +393,6 @@ final case class Agent(
         case 28 => account.orNull
         case 29 => countryCode.orNull
         case 30 => v3State.orNull
-        case 31 => v3HashedPassword.orNull
       }
     }
     def getField(__field: _root_.scalapb.descriptors.FieldDescriptor): _root_.scalapb.descriptors.PValue = {
@@ -437,7 +424,6 @@ final case class Agent(
         case 28 => account.map(_.toPMessage).getOrElse(_root_.scalapb.descriptors.PEmpty)
         case 29 => countryCode.map(_root_.scalapb.descriptors.PString).getOrElse(_root_.scalapb.descriptors.PEmpty)
         case 30 => v3State.map(_root_.scalapb.descriptors.PInt).getOrElse(_root_.scalapb.descriptors.PEmpty)
-        case 31 => v3HashedPassword.map(_root_.scalapb.descriptors.PString).getOrElse(_root_.scalapb.descriptors.PEmpty)
       }
     }
     def toProtoString: _root_.scala.Predef.String = _root_.scalapb.TextFormat.printToUnicodeString(this)
@@ -475,8 +461,7 @@ object Agent extends scalapb.GeneratedMessageCompanion[account.Agent] {
       __fieldsMap.get(__fields.get(22)).asInstanceOf[scala.Option[auth.Method]],
       __fieldsMap.get(__fields.get(23)).asInstanceOf[scala.Option[_root_.account.Account]],
       __fieldsMap.get(__fields.get(24)).asInstanceOf[scala.Option[_root_.scala.Predef.String]],
-      __fieldsMap.get(__fields.get(25)).asInstanceOf[scala.Option[_root_.scala.Int]],
-      __fieldsMap.get(__fields.get(26)).asInstanceOf[scala.Option[_root_.scala.Predef.String]]
+      __fieldsMap.get(__fields.get(25)).asInstanceOf[scala.Option[_root_.scala.Int]]
     )
   }
   implicit def messageReads: _root_.scalapb.descriptors.Reads[account.Agent] = _root_.scalapb.descriptors.Reads{
@@ -508,8 +493,7 @@ object Agent extends scalapb.GeneratedMessageCompanion[account.Agent] {
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(27).get).flatMap(_.as[scala.Option[auth.Method]]),
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(28).get).flatMap(_.as[scala.Option[_root_.account.Account]]),
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(29).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]]),
-        __fieldsMap.get(scalaDescriptor.findFieldByNumber(30).get).flatMap(_.as[scala.Option[_root_.scala.Int]]),
-        __fieldsMap.get(scalaDescriptor.findFieldByNumber(31).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]])
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(30).get).flatMap(_.as[scala.Option[_root_.scala.Int]])
       )
     case _ => throw new RuntimeException("Expected PMessage")
   }
@@ -703,8 +687,6 @@ object Agent extends scalapb.GeneratedMessageCompanion[account.Agent] {
     def optionalCountryCode: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Predef.String]] = field(_.countryCode)((c_, f_) => c_.copy(countryCode = f_))
     def v3State: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Int] = field(_.getV3State)((c_, f_) => c_.copy(v3State = Option(f_)))
     def optionalV3State: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Int]] = field(_.v3State)((c_, f_) => c_.copy(v3State = f_))
-    def v3HashedPassword: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Predef.String] = field(_.getV3HashedPassword)((c_, f_) => c_.copy(v3HashedPassword = Option(f_)))
-    def optionalV3HashedPassword: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Predef.String]] = field(_.v3HashedPassword)((c_, f_) => c_.copy(v3HashedPassword = f_))
   }
   final val CTX_FIELD_NUMBER = 1
   final val ID_FIELD_NUMBER = 2
@@ -732,5 +714,4 @@ object Agent extends scalapb.GeneratedMessageCompanion[account.Agent] {
   final val ACCOUNT_FIELD_NUMBER = 28
   final val COUNTRY_CODE_FIELD_NUMBER = 29
   final val V3_STATE_FIELD_NUMBER = 30
-  final val V3_HASHED_PASSWORD_FIELD_NUMBER = 31
 }

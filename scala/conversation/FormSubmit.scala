@@ -8,7 +8,8 @@ package conversation
 @SerialVersionUID(0L)
 final case class FormSubmit(
     formMessageId: scala.Option[_root_.scala.Predef.String] = None,
-    fields: _root_.scala.collection.Seq[conversation.FormField] = _root_.scala.collection.Seq.empty
+    fields: _root_.scala.collection.Seq[conversation.FormField] = _root_.scala.collection.Seq.empty,
+    state: scala.Option[_root_.scala.Predef.String] = None
     ) extends scalapb.GeneratedMessage with scalapb.Message[FormSubmit] with scalapb.lenses.Updatable[FormSubmit] {
     @transient
     private[this] var __serializedSizeCachedValue: _root_.scala.Int = 0
@@ -16,6 +17,7 @@ final case class FormSubmit(
       var __size = 0
       if (formMessageId.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(2, formMessageId.get) }
       fields.foreach(fields => __size += 1 + _root_.com.google.protobuf.CodedOutputStream.computeUInt32SizeNoTag(fields.serializedSize) + fields.serializedSize)
+      if (state.isDefined) { __size += _root_.com.google.protobuf.CodedOutputStream.computeStringSize(4, state.get) }
       __size
     }
     final override def serializedSize: _root_.scala.Int = {
@@ -35,10 +37,14 @@ final case class FormSubmit(
         _output__.writeUInt32NoTag(__v.serializedSize)
         __v.writeTo(_output__)
       };
+      state.foreach { __v =>
+        _output__.writeString(4, __v)
+      };
     }
     def mergeFrom(`_input__`: _root_.com.google.protobuf.CodedInputStream): conversation.FormSubmit = {
       var __formMessageId = this.formMessageId
       val __fields = (_root_.scala.collection.immutable.Vector.newBuilder[conversation.FormField] ++= this.fields)
+      var __state = this.state
       var _done__ = false
       while (!_done__) {
         val _tag__ = _input__.readTag()
@@ -48,12 +54,15 @@ final case class FormSubmit(
             __formMessageId = Option(_input__.readString())
           case 26 =>
             __fields += _root_.scalapb.LiteParser.readMessage(_input__, conversation.FormField.defaultInstance)
+          case 34 =>
+            __state = Option(_input__.readString())
           case tag => _input__.skipField(tag)
         }
       }
       conversation.FormSubmit(
           formMessageId = __formMessageId,
-          fields = __fields.result()
+          fields = __fields.result(),
+          state = __state
       )
     }
     def getFormMessageId: _root_.scala.Predef.String = formMessageId.getOrElse("")
@@ -63,10 +72,14 @@ final case class FormSubmit(
     def addFields(__vs: conversation.FormField*): FormSubmit = addAllFields(__vs)
     def addAllFields(__vs: TraversableOnce[conversation.FormField]): FormSubmit = copy(fields = fields ++ __vs)
     def withFields(__v: _root_.scala.collection.Seq[conversation.FormField]): FormSubmit = copy(fields = __v)
+    def getState: _root_.scala.Predef.String = state.getOrElse("")
+    def clearState: FormSubmit = copy(state = None)
+    def withState(__v: _root_.scala.Predef.String): FormSubmit = copy(state = Option(__v))
     def getFieldByNumber(__fieldNumber: _root_.scala.Int): scala.Any = {
       (__fieldNumber: @_root_.scala.unchecked) match {
         case 2 => formMessageId.orNull
         case 3 => fields
+        case 4 => state.orNull
       }
     }
     def getField(__field: _root_.scalapb.descriptors.FieldDescriptor): _root_.scalapb.descriptors.PValue = {
@@ -74,6 +87,7 @@ final case class FormSubmit(
       (__field.number: @_root_.scala.unchecked) match {
         case 2 => formMessageId.map(_root_.scalapb.descriptors.PString).getOrElse(_root_.scalapb.descriptors.PEmpty)
         case 3 => _root_.scalapb.descriptors.PRepeated(fields.map(_.toPMessage)(_root_.scala.collection.breakOut))
+        case 4 => state.map(_root_.scalapb.descriptors.PString).getOrElse(_root_.scalapb.descriptors.PEmpty)
       }
     }
     def toProtoString: _root_.scala.Predef.String = _root_.scalapb.TextFormat.printToUnicodeString(this)
@@ -87,7 +101,8 @@ object FormSubmit extends scalapb.GeneratedMessageCompanion[conversation.FormSub
     val __fields = javaDescriptor.getFields
     conversation.FormSubmit(
       __fieldsMap.get(__fields.get(0)).asInstanceOf[scala.Option[_root_.scala.Predef.String]],
-      __fieldsMap.getOrElse(__fields.get(1), Nil).asInstanceOf[_root_.scala.collection.Seq[conversation.FormField]]
+      __fieldsMap.getOrElse(__fields.get(1), Nil).asInstanceOf[_root_.scala.collection.Seq[conversation.FormField]],
+      __fieldsMap.get(__fields.get(2)).asInstanceOf[scala.Option[_root_.scala.Predef.String]]
     )
   }
   implicit def messageReads: _root_.scalapb.descriptors.Reads[conversation.FormSubmit] = _root_.scalapb.descriptors.Reads{
@@ -95,7 +110,8 @@ object FormSubmit extends scalapb.GeneratedMessageCompanion[conversation.FormSub
       require(__fieldsMap.keys.forall(_.containingMessage == scalaDescriptor), "FieldDescriptor does not match message type.")
       conversation.FormSubmit(
         __fieldsMap.get(scalaDescriptor.findFieldByNumber(2).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]]),
-        __fieldsMap.get(scalaDescriptor.findFieldByNumber(3).get).map(_.as[_root_.scala.collection.Seq[conversation.FormField]]).getOrElse(_root_.scala.collection.Seq.empty)
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(3).get).map(_.as[_root_.scala.collection.Seq[conversation.FormField]]).getOrElse(_root_.scala.collection.Seq.empty),
+        __fieldsMap.get(scalaDescriptor.findFieldByNumber(4).get).flatMap(_.as[scala.Option[_root_.scala.Predef.String]])
       )
     case _ => throw new RuntimeException("Expected PMessage")
   }
@@ -116,7 +132,10 @@ object FormSubmit extends scalapb.GeneratedMessageCompanion[conversation.FormSub
     def formMessageId: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Predef.String] = field(_.getFormMessageId)((c_, f_) => c_.copy(formMessageId = Option(f_)))
     def optionalFormMessageId: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Predef.String]] = field(_.formMessageId)((c_, f_) => c_.copy(formMessageId = f_))
     def fields: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.collection.Seq[conversation.FormField]] = field(_.fields)((c_, f_) => c_.copy(fields = f_))
+    def state: _root_.scalapb.lenses.Lens[UpperPB, _root_.scala.Predef.String] = field(_.getState)((c_, f_) => c_.copy(state = Option(f_)))
+    def optionalState: _root_.scalapb.lenses.Lens[UpperPB, scala.Option[_root_.scala.Predef.String]] = field(_.state)((c_, f_) => c_.copy(state = f_))
   }
   final val FORM_MESSAGE_ID_FIELD_NUMBER = 2
   final val FIELDS_FIELD_NUMBER = 3
+  final val STATE_FIELD_NUMBER = 4
 }
