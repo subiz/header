@@ -1736,7 +1736,7 @@
             "type": "boolean",
             "format": "boolean"
           },
-          "date": {
+          "datetime": {
             "type": "string"
           },
           "list": {
@@ -1744,6 +1744,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "setter": {
+            "type": "string"
+          },
+          "setter_type": {
+            "type": "string"
           }
         }
       },
@@ -3253,6 +3259,10 @@
           },
           "scope": {
             "type": "string"
+          },
+          "cross_channel": {
+            "type": "boolean",
+            "format": "boolean"
           }
         }
       },

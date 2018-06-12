@@ -654,6 +654,10 @@
         },
         "scope": {
           "type": "string"
+        },
+        "cross_channel": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

@@ -529,6 +529,7 @@ message Automation {
 	}
 	optional string action_data = 14;
 	optional string scope = 15;
+	optional bool cross_channel = 16;
 }
 
 enum AutomationScope {
