@@ -525,11 +525,12 @@ message Automation {
 		conversation_message = 0;
 		agent_notification = 1;
 		//user_notification = 2;
-		automation_invite_message = 4;
+		// automation_invite_message = 4;
 	}
 	optional string action_data = 14;
 	optional string scope = 15;
 	optional bool cross_channel = 16;
+	optional string metadata = 17;
 }
 
 enum AutomationScope {

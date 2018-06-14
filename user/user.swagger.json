@@ -658,6 +658,9 @@
         "cross_channel": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "metadata": {
+          "type": "string"
         }
       }
     },
