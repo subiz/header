@@ -340,8 +340,7 @@ message Segmentation {
 		inactive = 1;
 	}
 
-	optional SegmentCondition condition = 19;
-	optional string current_cursor = 18;
+	repeated SegmentCondition condition = 19;
 }
 
 message SegmentTracking {
@@ -351,33 +350,6 @@ message SegmentTracking {
 
 	optional int64 loop_created = 7;
 	optional int64 loop_number = 8;
-}
-
-message SegmentCondition {
-	enum JoinOperator {
-		none = 0;
-		and = 1;
-		or = 2;
-	}
-
-	optional string join = 2;
-
-	optional string id = 4;
-	optional string event_type = 5;
-
-	enum Composition {
-		true = 0;
-		sum = 1; // rurn number
-		avg = 2; // return number
-		count = 3; // return number
-	}
-	optional string composition = 6;
-	optional string key = 7;
-
-	repeated Condition conditions = 8;
-
-	optional SegmentCondition left_condition = 11;
-	optional SegmentCondition right_condition = 12;
 }
 
 message Condition {
@@ -390,6 +362,33 @@ message Condition {
 	optional string key = 2; // unique
 	optional string operator = 3; // = # regex
 	optional string value = 4; // JSON
+	optional string id = 6;
+}
+
+enum JoinOperator {
+	none = 0;
+	and = 1;
+	or = 2;
+}
+
+enum ConditionType {
+	attribute = 0;
+	event = 1;
+}
+message SegmentCondition {
+	optional string id = 2;
+	optional string type = 3;
+	optional string join = 4;
+	optional Condition attribute_condition = 5;
+	optional EventCondition event_condition = 6;
+}
+
+// eg: has event.type='content_view' & event.data.content.url contains 'abc';
+// eg: not has event.type='content_view'
+message EventCondition {
+	optional string id = 2;
+	optional bool has = 3;
+	repeated Condition conditions = 5;
 }
 
 message UserSearchResult {

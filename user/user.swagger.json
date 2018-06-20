@@ -692,6 +692,9 @@
         },
         "value": {
           "type": "string"
+        },
+        "id": {
+          "type": "string"
         }
       }
     },
@@ -743,6 +746,25 @@
           "type": "string"
         }
       }
+    },
+    "userEventCondition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "has": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCondition"
+          }
+        }
+      },
+      "title": "eg: has event.type='content_view' \u0026 event.data.content.url contains 'abc';\neg: not has event.type='content_view'"
     },
     "userField": {
       "type": "object",
@@ -916,32 +938,20 @@
     "userSegmentCondition": {
       "type": "object",
       "properties": {
-        "join": {
-          "type": "string"
-        },
         "id": {
           "type": "string"
         },
-        "event_type": {
+        "type": {
           "type": "string"
         },
-        "composition": {
+        "join": {
           "type": "string"
         },
-        "key": {
-          "type": "string"
+        "attribute_condition": {
+          "$ref": "#/definitions/userCondition"
         },
-        "conditions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userCondition"
-          }
-        },
-        "left_condition": {
-          "$ref": "#/definitions/userSegmentCondition"
-        },
-        "right_condition": {
-          "$ref": "#/definitions/userSegmentCondition"
+        "event_condition": {
+          "$ref": "#/definitions/userEventCondition"
         }
       }
     },
@@ -988,10 +998,10 @@
           "type": "string"
         },
         "condition": {
-          "$ref": "#/definitions/userSegmentCondition"
-        },
-        "current_cursor": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userSegmentCondition"
+          }
         }
       }
     },
