@@ -1033,6 +1033,12 @@
         },
         "conversation_id": {
           "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationField"
+          }
         }
       }
     },

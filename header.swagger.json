@@ -1422,6 +1422,12 @@
           },
           "conversation_id": {
             "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationField"
+            }
           }
         }
       },

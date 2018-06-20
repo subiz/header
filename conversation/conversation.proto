@@ -91,6 +91,7 @@ message Member {
 	optional string avatar_url = 6;
 	optional bool left = 11;
 	optional string conversation_id = 13;
+	repeated Field fields = 14;
 }
 
 message Conversation {
