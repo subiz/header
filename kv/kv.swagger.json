@@ -16,6 +16,14 @@
   ],
   "paths": {},
   "definitions": {
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "kvBool": {
       "type": "object",
       "properties": {

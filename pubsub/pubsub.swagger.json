@@ -438,6 +438,14 @@
           "$ref": "#/definitions/commonContext"
         }
       }
+    },
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
     }
   }
 }

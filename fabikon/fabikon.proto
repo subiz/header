@@ -103,7 +103,7 @@ message FbDelivery {
 
 message FbSendResponse {
 	optional string recipient_id = 2;
-  optional string message_id = 3;
+	optional string message_id = 3;
 }
 
 message Conversation {

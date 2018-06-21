@@ -152,12 +152,12 @@ message Invoice {
 	optional float tax = 16;
 	optional float total = 17;
 	optional int64 updated = 18;
-	optional int32 year = 19;
+	optional int32 year = 19; // optional
 	repeated Note notes = 22;
 	repeated string bills = 23;
 	optional float payment_made = 24;
-	optional Subscription current_sub = 25;
-	optional Plan current_plan = 26;
+	optional Subscription current_sub = 25; // optional
+	optional Plan current_plan = 26; // optional
 }
 
 message AgentInvoiceItem {
@@ -371,6 +371,7 @@ message PaymentRenewCycleRequested {
 service SubizInternalPaymentMgr {
 	rpc CreateBill(Bill) returns (Bill);
 	rpc UpdateExchangeRate(ExchangeRate) returns (ExchangeRate);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service PaymentMgr {
@@ -390,6 +391,7 @@ service PaymentMgr {
 	rpc ExportInvoice(common.Id) returns (String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc TransferMoney(PayRequest) returns (Bill);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message String {

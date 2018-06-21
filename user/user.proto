@@ -27,7 +27,8 @@ message AllType {
 }
 
 service MyServer {
-	rpc Do(AllType) returns(AllType) {}
+	rpc Do(AllType) returns(AllType);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message AddToMyRequest {
@@ -440,7 +441,7 @@ message ListNewsRequest {
 	optional common.Context ctx = 1;
 	optional string user_id = 3;
 	optional int64 start_time = 4;
- 	optional string limit = 7;
+	optional string limit = 7;
 }
 
 message AddToMyList {
@@ -574,18 +575,20 @@ message DeleteAttrRequest {
 }
 
 service SegmentationMgr {
-	rpc CreateSegment (Segmentation) returns (Segmentation) {}
-	rpc UpdateSegment (Segmentation) returns (Segmentation) {}
-	rpc ListSegments (common.Id) returns (Segmentations) {}
-	rpc DeleteSegment (common.Id) returns (common.Empty) {}
-	rpc ReadSegment (common.Id) returns (Segmentation) {}
+	rpc CreateSegment (Segmentation) returns (Segmentation);
+	rpc UpdateSegment (Segmentation) returns (Segmentation);
+	rpc ListSegments (common.Id) returns (Segmentations);
+	rpc DeleteSegment (common.Id) returns (common.Empty);
+	rpc ReadSegment (common.Id) returns (Segmentation);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service VisitorMgr {
-	rpc ReadPresence (common.Id) returns (Presence) {}
-	rpc ReadPresences (common.Ids) returns (Presences) {}
-	rpc ReadPreview (common.Id) returns (LastView) {}
-	rpc ListTopVisitors (common.Id) returns (Visitors) {}
+	rpc ReadPresence (common.Id) returns (Presence);
+	rpc ReadPresences (common.Ids) returns (Presences);
+	rpc ReadPreview (common.Id) returns (LastView);
+	rpc ListTopVisitors (common.Id) returns (Visitors);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message CountMyUserRequest {
@@ -625,38 +628,42 @@ message CountResponse {
 }
 
 service UserMgr {
-	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult) {}
-	rpc SubizID (SubizIDRequest) returns (SubizIDResponse) {}
-	rpc AddToMy (AddToMyRequest) returns (common.Empty) {}
-	rpc CreateUser (User) returns (User) {}
-	rpc UpdateUser (User) returns (User) {}
-	rpc ReadUser (common.Id) returns (User) {}
-	rpc RemoveFromMy (common.Id) returns (common.Empty) {}
+	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult);
+	rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
+	rpc AddToMy (AddToMyRequest) returns (common.Empty);
+	rpc CreateUser (User) returns (User);
+	rpc UpdateUser (User) returns (User);
+	rpc ReadUser (common.Id) returns (User);
+	rpc RemoveFromMy (common.Id) returns (common.Empty);
 
-	rpc CountMyUser(CountMyUserRequest) returns (CountResponse) {}
-	rpc CountUser(CountUserRequest) returns (CountResponse) {}
-	rpc CountUserByAttribute(CountUserByAttributeRequest) returns (CountResponse) {}
+	rpc CountMyUser(CountMyUserRequest) returns (CountResponse);
+	rpc CountUser(CountUserRequest) returns (CountResponse);
+	rpc CountUserByAttribute(CountUserByAttributeRequest) returns (CountResponse);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service AutomationMgr {
-	rpc ListAutomations(common.Id) returns (Automations) {}
-	rpc UpdateAutomation(Automation) returns (Automation) {}
-	rpc DeleteAutomation(common.Id) returns (common.Empty) {}
-	rpc ReadAutomation(common.Id) returns (Automation) {}
-	rpc CreateAutomation(Automation) returns (Automation) {}
+	rpc ListAutomations(common.Id) returns (Automations);
+	rpc UpdateAutomation(Automation) returns (Automation);
+	rpc DeleteAutomation(common.Id) returns (common.Empty);
+	rpc ReadAutomation(common.Id) returns (Automation);
+	rpc CreateAutomation(Automation) returns (Automation);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service SessionMgr {
-	rpc CreateSession(Session) returns (Session) {}
-	rpc ReadSession(Session) returns (Session) {}
-	rpc UpdateSession(Session) returns (Session) {}
+	rpc CreateSession(Session) returns (Session);
+	rpc ReadSession(Session) returns (Session);
+	rpc UpdateSession(Session) returns (Session);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service AttributeMgr {
-	rpc ListAttributeDefinitions(common.Empty) returns (AttributeDefinitions) {}
-	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
-	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition) {}
-	rpc DeleteAttributeDefinition(DeleteAttrRequest) returns (common.Empty) {}
+	rpc ListAttributeDefinitions(common.Empty) returns (AttributeDefinitions);
+	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
+	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
+	rpc DeleteAttributeDefinition(DeleteAttrRequest) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message AutomationCheck {

@@ -165,14 +165,14 @@ message OauthAccessToken {
 	string state = 7;
 	string error = 8;
 	string error_description = 9;
-  string error_uri = 10;
+	string error_uri = 10;
 }
 
 message AccessToken {
 	string issuer_id = 1;
 	string issuer_type = 7;
 	string client_id = 2;
-  string client_type = 3;
+	string client_type = 3;
 	string account_id = 4;
 	string client_account_id = 5;
 	int32 expired = 8;
@@ -196,7 +196,7 @@ message CookieExpire {
 
 enum Type {
 	unknown = 0;
-  user = 1;
+	user = 1;
 	agent = 2;
 	subiz = 3;
 	// APP is general client type

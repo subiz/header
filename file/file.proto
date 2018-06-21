@@ -11,13 +11,15 @@ message AllType {
 }
 
 service MyServer {
-	rpc Do(AllType) returns(AllType) {}
+	rpc Do(AllType) returns(AllType);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service FileMgr {
-	rpc Presign(FileHeader) returns (PresignResult) {}
-	rpc Read(FileRequest) returns (File) {}
-	rpc Uploaded(FileRequest) returns (File) {}
+	rpc Presign(FileHeader) returns (PresignResult);
+	rpc Read(FileRequest) returns (File);
+	rpc Uploaded(FileRequest) returns (File);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message FileHeader {

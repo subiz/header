@@ -11,7 +11,7 @@ message Webhook {
 	optional string url = 3;
 	optional string secret = 4;
 
-  repeated string events = 6;
+	repeated string events = 6;
 	optional string state = 7;
 	enum State {
 		normal = 0;
@@ -46,7 +46,8 @@ enum Event {
 }
 
 service WebhookService {
-	rpc Read(common.Id) returns (Webhook) {}
-	rpc ClearBackoff(common.Id) returns (common.Empty) {}
-	rpc PurgeQueue(common.Id) returns (common.Empty) {}
+	rpc Read(common.Id) returns (Webhook);
+	rpc ClearBackoff(common.Id) returns (common.Empty);
+	rpc PurgeQueue(common.Id) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }

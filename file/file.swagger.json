@@ -431,6 +431,14 @@
         }
       }
     },
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "fileAllType": {
       "type": "object",
       "properties": {

@@ -237,21 +237,24 @@ message SubscriptionResponse {
 service Publisher {
 	rpc Subscribe(Subscription) returns (SubscriptionResponse);
 	rpc Unsubscribe(Subscription) returns (SubscriptionResponse);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service EventMgr {
-	rpc SearchEvents (ListEventsRequest) returns (RawEvents) {}
-	rpc CreateEvent (UserEvent) returns (RawEvent) {}
-	rpc Subscribe (user.SubscribeRequest) returns (common.Empty) {}
-	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty) {}
-	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty) {}
-	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult) {}
+	rpc SearchEvents (ListEventsRequest) returns (RawEvents);
+	rpc CreateEvent (UserEvent) returns (RawEvent);
+	rpc Subscribe (user.SubscribeRequest) returns (common.Empty);
+	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty);
+	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
+	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service ConversationEventReader {
 	rpc SendMessage(RawEvent) returns (RawEvent);
 	rpc ListEvents(conversation.ListEventsRequest) returns (RawEvents);
 	rpc SearchEvents(conversation.SearchMessageRequest) returns (RawEvents);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message AutomationEvent {

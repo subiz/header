@@ -439,6 +439,14 @@
         }
       }
     },
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "userAllType": {
       "type": "object",
       "properties": {

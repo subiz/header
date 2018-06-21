@@ -700,6 +700,14 @@
         }
       }
     },
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "paymentLimit": {
       "type": "object",
       "properties": {

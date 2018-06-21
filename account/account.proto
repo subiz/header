@@ -322,4 +322,5 @@ service AccountMgr {
 	rpc ListGroups(common.Id) returns (AgentGroups);
 	rpc AddAgentToGroup(GroupMember) returns (common.Empty);
 	rpc RemoveAgentFromGroup(GroupMember) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }

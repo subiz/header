@@ -14,14 +14,16 @@ message AllType {
 }
 
 service MyServer {
-	rpc Do(AllType) returns(AllType) {}
+	rpc Do(AllType) returns(AllType);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service WidgetService {
-	rpc Read(common.Id) returns (Setting) {}
-	rpc Update(Setting) returns (Setting) {}
-	rpc ReadUserSetting(common.Id) returns (UserSetting) {}
-	rpc UpdateUserSetting(UserSetting) returns (UserSetting) {}
+	rpc Read(common.Id) returns (Setting);
+	rpc Update(Setting) returns (Setting);
+	rpc ReadUserSetting(common.Id) returns (UserSetting);
+	rpc UpdateUserSetting(UserSetting) returns (UserSetting);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message Theme {

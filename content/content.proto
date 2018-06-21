@@ -5,13 +5,14 @@ import "bitbucket.org/subiz/header/common/common.proto";
 package content;
 
 message AllType {
-  optional Content content = 2;
+	optional Content content = 2;
 	optional Contents contents = 3;
 	optional ListRequest lr = 5;
 }
 
 service MyServer {
-	rpc Do(AllType) returns(AllType) {}
+	rpc Do(AllType) returns(AllType);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message KeyValue {
@@ -38,7 +39,6 @@ message Content {
 	repeated string relates = 15;
 	repeated string attachment_urls = 16;
 	optional string type = 17;
-
 }
 
 message Contents {

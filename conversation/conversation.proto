@@ -224,7 +224,7 @@ enum Event {
 	ConversationAcceptRequested = 15;
 
 	ConversationUpdateRuleRequested = 20; // rule
-  ConversationCreateRuleRequested = 21; // rule
+	ConversationCreateRuleRequested = 21; // rule
 	ConversationDeleteRuleRequested = 22; // id
 	ConversationReadRuleRequested = 23; // id
 	ConversationListRuleRequested = 24; // id accountid, return top N rule
@@ -543,6 +543,7 @@ service RuleMgr {
 	rpc DeleteRule(common.Id) returns (common.Empty);
 	rpc ReadRule(common.Id) returns (Rule);
 	rpc ListRules(common.Id) returns (Route);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message MessageId {
@@ -572,6 +573,7 @@ service ConversationMgr {
 	rpc JoinConversation(Member) returns (common.Empty);
 	rpc LeftConversation(Member) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service CannedResponseMgr {
@@ -580,6 +582,7 @@ service CannedResponseMgr {
 	rpc ListCannedResponses(common.Id) returns (CannedResponses);
 	rpc DeleteCannedResponse(common.Id) returns (common.Empty);
 	rpc GetCannedResponse(common.Id) returns (CannedResponse);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service TagMgr {
@@ -588,6 +591,7 @@ service TagMgr {
 	rpc DeleteTag(common.Id) returns (common.Empty);
 	rpc ListTags(common.Id) returns (Tags);
 	rpc GetTag(common.Id) returns (Tag);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service IntegrationMgr {
@@ -595,6 +599,7 @@ service IntegrationMgr {
 	rpc ListIntegrations(common.Id) returns (Integrations);
 	rpc Integrate(Integration) returns (Integration);
 	rpc CheckAvailability(AvailabilityCheckRequest) returns (AvailabilityCheckResult);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message TagRequest {
@@ -696,4 +701,5 @@ service ConversationReporter {
 	rpc CountConversationsByTags(CountByTagsRequest) returns (CountByTagsResponse);
 	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
 	rpc GetTotalConversation(AvgResponseTimeRequest) returns (TotalConversationResponse);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }

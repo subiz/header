@@ -15,7 +15,8 @@ enum Method {
 }
 
 service X {
-	rpc Do(AllType) returns (AllType) {}
+	rpc Do(AllType) returns (AllType);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message AllType {
@@ -32,7 +33,6 @@ message SendMessageState {
 
 message State {
 	optional string event = 3;
-
 }
 
 message WlDomain {

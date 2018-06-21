@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package kv;
 
+import "bitbucket.org/subiz/header/common/common.proto";
+
 message Key {
 	string partition = 2;
 	string key = 3;
@@ -22,4 +24,5 @@ service KV {
 	rpc Set(Value) returns (Value);
 	rpc Get(Key) returns (Value);
 	rpc Has(Key) returns (Bool);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }

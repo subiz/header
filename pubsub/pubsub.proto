@@ -38,8 +38,9 @@ message PublishMessage {
 }
 
 service Pubsub {
-	rpc Subscribe(Subscription) returns (common.Empty) {}
-	rpc Unsubscribe(Subscription) returns (common.Empty) {}
+	rpc Subscribe(Subscription) returns (common.Empty);
+	rpc Unsubscribe(Subscription) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 enum Event {

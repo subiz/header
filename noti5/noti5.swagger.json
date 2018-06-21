@@ -439,6 +439,14 @@
         }
       }
     },
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "noti5Setting": {
       "type": "object",
       "properties": {
