@@ -673,3 +673,30 @@ message AutomationCheck {
 	optional string event_id = 5;
 	optional string scope = 6;
 }
+
+// can be
+// {id, join, event_time, conditions} (grouped event condition)
+// {id, join, conditions} (grouped condition)
+// {id, key, operator, value} (user condition || simple event condition)
+message SCondition {
+	optional string id = 3;
+
+	enum JoinOperator {
+		and = 0;
+		or = 1;
+	}
+
+	optional string key = 4; // unique
+	optional string operator = 5; // = # regex
+	optional string value = 6; // JSON
+
+	enum EventTime {
+		none = 0; // not an event
+		current = 1;
+		lastest = 2;
+		past = 3; // exists
+	}
+	optional string join = 7;
+	optional string event_time = 8; // is past event
+	repeated SCondition conditions = 9; // dont use join
+}

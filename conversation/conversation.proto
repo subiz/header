@@ -516,6 +516,7 @@ message Integration {
 	optional string connector_id = 3;
 	optional string logo_url = 4;
 	optional string name = 5;
+
 	optional string connector_type = 12; // see client.Client_ChannelType
 	optional int64 integrated = 6;
 	optional int64 updated = 7;
