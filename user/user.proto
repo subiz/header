@@ -681,11 +681,6 @@ message AutomationCheck {
 message SCondition {
 	optional string id = 3;
 
-	enum JoinOperator {
-		and = 0;
-		or = 1;
-	}
-
 	optional string key = 4; // unique
 	optional string operator = 5; // = # regex
 	optional string value = 6; // JSON
@@ -693,10 +688,18 @@ message SCondition {
 	enum EventTime {
 		none = 0; // not an event
 		current = 1;
-		lastest = 2;
+		latest = 2;
 		past = 3; // exists
 	}
+
+	enum JoinOperator {
+		and = 0;
+		or = 1;
+	}
 	optional string join = 7;
-	optional string event_time = 8; // is past event
-	repeated SCondition conditions = 9; // dont use join
+	optional string event_type_time = 8; //
+	optional string event_type = 10;
+	repeated SCondition conditions = 9;
+
+	optional int32 priority = 12;
 }
