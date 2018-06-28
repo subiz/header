@@ -158,6 +158,10 @@ message Device {
 	optional string language = 8;
 }
 
+message Traces {
+	repeated Trace traces = 3;
+}
+
 message Trace {
 	optional string id = 3;
 	optional string ip = 4;
