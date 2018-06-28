@@ -703,3 +703,10 @@ message SCondition {
 
 	optional int32 priority = 12;
 }
+
+message Alias {
+	//optional common.Context ctx = 1;
+	optional string user_id = 3;
+	optional string account_id = 4;
+	optional string alias = 5;
+}
