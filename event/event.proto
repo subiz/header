@@ -89,6 +89,7 @@ message RawEvent {
 		account.AgentGroup group = 18;
 		payment.Limit limit = 19;
 		user.AttributeData user_attribute = 20;
+		user.Alias alias = 22;
 	}
 	Data data = 20;
 }
@@ -113,6 +114,8 @@ enum UserType {
 	u = 0;
 	my_user_upserted = 46;
 	user_info_updated = 48;
+	alias_updated = 49;
+	alias_deleted = 50;
 }
 
 enum EventType {
@@ -210,6 +213,8 @@ enum Object {
 	group = 18;
 	integration = 30;
 	limit = 19;
+	user_attribute = 20;
+	alias = 22;
 }
 
 message ListEventsRequest {

@@ -1512,6 +1512,9 @@
         },
         "user_attribute": {
           "$ref": "#/definitions/userAttributeData"
+        },
+        "alias": {
+          "$ref": "#/definitions/userAlias"
         }
       }
     },
@@ -1637,6 +1640,21 @@
         "max_rules": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "userAlias": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "optional common.Context ctx = 1;"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "alias": {
+          "type": "string"
         }
       }
     },
