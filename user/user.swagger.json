@@ -643,6 +643,9 @@
             "$ref": "#/definitions/userCondition"
           }
         },
+        "condition": {
+          "$ref": "#/definitions/userSCondition"
+        },
         "created": {
           "type": "string",
           "format": "int64"
@@ -942,6 +945,43 @@
           "type": "string"
         }
       }
+    },
+    "userSCondition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "join": {
+          "type": "string"
+        },
+        "event_type_time": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userSCondition"
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
     },
     "userSegmentCondition": {
       "type": "object",

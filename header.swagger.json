@@ -2136,6 +2136,9 @@
           },
           "user_attribute": {
             "$ref": "#/components/schemas/userAttributeData"
+          },
+          "alias": {
+            "$ref": "#/components/schemas/userAlias"
           }
         }
       },
@@ -2207,6 +2210,21 @@
           }
         },
         "title": "Notification represent an user's notification"
+      },
+      "userAlias": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "title": "optional common.Context ctx = 1;"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string"
+          }
+        }
       },
       "userListTopicsResult": {
         "type": "object",
@@ -3246,6 +3264,9 @@
               "$ref": "#/components/schemas/userCondition"
             }
           },
+          "condition": {
+            "$ref": "#/components/schemas/userSCondition"
+          },
           "created": {
             "type": "integer",
             "format": "int64"
@@ -3419,6 +3440,43 @@
             "type": "string"
           }
         }
+      },
+      "userSCondition": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "join": {
+            "type": "string"
+          },
+          "event_type_time": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userSCondition"
+            }
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
       },
       "userSegmentCondition": {
         "type": "object",

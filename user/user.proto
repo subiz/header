@@ -277,6 +277,13 @@ enum Event {
 	UserSynced = 101;
 	UserUpserted = 105;
 	UserV3Synced = 106;
+
+	UserWorkerJob = 200;
+
+	UserResolvedEventCreated = 201;
+	UserAliasAdded = 202;
+	UserAliasDeleted = 203;
+	UserEventCreated = 204;
 }
 
 message SubizIDRequest {
@@ -508,6 +515,7 @@ message Automation {
 	optional string name = 5;
 	optional string description = 6;
 	repeated Condition conditions = 7;
+	optional SCondition condition = 8;
 
 	//repeated SegmentCondition query = 5; // suffix annotation
 	// a * b + (c + d) * e  ==>  + * a b * + c d e
