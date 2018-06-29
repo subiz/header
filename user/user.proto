@@ -289,6 +289,26 @@ enum Event {
 	UserAliasAdded = 202;
 	UserAliasDeleted = 203;
 	UserEventCreated = 204;
+	UserAggregateUserCount = 205;
+	UserAggregateUserAttributeCount = 206;
+	UserAggregated = 207;
+}
+
+message AggregateUserCount {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 min = 3;
+	optional int64 count = 5;
+	optional int64 created = 6;
+}
+
+message AggregateUserAttributeCount {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 min = 3;
+	optional string attribute_key = 4;
+	optional int64 count = 5;
+	optional int64 created = 6;
 }
 
 message SubizIDRequest {
