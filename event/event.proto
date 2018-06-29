@@ -116,6 +116,7 @@ enum UserType {
 	user_info_updated = 48;
 	alias_updated = 49;
 	alias_deleted = 50;
+	user_added_to_my_list = 51;
 }
 
 enum EventType {

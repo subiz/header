@@ -48,6 +48,7 @@ message MyUser {
 	optional User user = 3;
 	optional int32 unread = 4;
 	optional int64 updated = 5;
+	optional string account_id = 7;
 }
 
 enum AttributeType {
@@ -717,8 +718,16 @@ message SCondition {
 }
 
 message Alias {
-	//optional common.Context ctx = 1;
+	optional common.Context ctx = 1;
 	optional string user_id = 3;
 	optional string account_id = 4;
 	optional string alias = 5;
+}
+
+message UserSegment {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string segmentation_id = 4;
+	optional int64 created = 5;
 }

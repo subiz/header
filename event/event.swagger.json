@@ -1646,9 +1646,11 @@
     "userAlias": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "user_id": {
-          "type": "string",
-          "title": "optional common.Context ctx = 1;"
+          "type": "string"
         },
         "account_id": {
           "type": "string"
@@ -1807,6 +1809,9 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "account_id": {
+          "type": "string"
         }
       }
     },

@@ -890,6 +890,9 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "account_id": {
+          "type": "string"
         }
       }
     },
