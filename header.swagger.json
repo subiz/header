@@ -3341,17 +3341,6 @@
           }
         }
       },
-      "userCreateRequest": {
-        "type": "object",
-        "properties": {
-          "challenge_id": {
-            "type": "string"
-          },
-          "answer": {
-            "type": "string"
-          }
-        }
-      },
       "userEventCondition": {
         "type": "object",
         "properties": {
@@ -3401,23 +3390,6 @@
           }
         }
       },
-      "userMaskResponse": {
-        "type": "object",
-        "properties": {
-          "subiz_id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "mask": {
-            "type": "string"
-          }
-        }
-      },
       "userPresences": {
         "type": "object",
         "properties": {
@@ -3426,20 +3398,6 @@
             "items": {
               "$ref": "#/components/schemas/userPresence"
             }
-          }
-        }
-      },
-      "userReadTopicRequest": {
-        "type": "object",
-        "properties": {
-          "topic": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "agent_id": {
-            "type": "string"
           }
         }
       },
@@ -3614,42 +3572,6 @@
           },
           "user_id": {
             "type": "string"
-          }
-        }
-      },
-      "userUserCreateResult": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "mask": {
-            "type": "string"
-          }
-        }
-      },
-      "userUserSearchRequest": {
-        "type": "object",
-        "properties": {
-          "segmentation_id": {
-            "type": "string"
-          },
-          "query": {
-            "type": "string"
-          },
-          "anchor": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "agent_id": {
-            "type": "string"
-          },
-          "unread": {
-            "type": "boolean",
-            "format": "boolean"
           }
         }
       },

@@ -447,68 +447,6 @@
         }
       }
     },
-    "userAllType": {
-      "type": "object",
-      "properties": {
-        "user": {
-          "$ref": "#/definitions/userUser"
-        },
-        "cr": {
-          "$ref": "#/definitions/userCreateRequest"
-        },
-        "fields": {
-          "$ref": "#/definitions/userField"
-        },
-        "ucr": {
-          "$ref": "#/definitions/userUserCreateResult"
-        },
-        "rpr": {
-          "$ref": "#/definitions/userReadTopicRequest"
-        },
-        "usersearchrequest": {
-          "$ref": "#/definitions/userUserSearchRequest"
-        },
-        "usersearchresult": {
-          "$ref": "#/definitions/userUserSearchResult"
-        },
-        "ms": {
-          "$ref": "#/definitions/userMaskResponse"
-        },
-        "ltr": {
-          "$ref": "#/definitions/userListTopicsResult"
-        },
-        "sg": {
-          "$ref": "#/definitions/userSegmentation"
-        },
-        "presn": {
-          "$ref": "#/definitions/userPresence"
-        },
-        "vi": {
-          "$ref": "#/definitions/userVisitor"
-        },
-        "vis": {
-          "$ref": "#/definitions/userVisitors"
-        },
-        "topic": {
-          "$ref": "#/definitions/userTopic"
-        },
-        "utopic": {
-          "$ref": "#/definitions/userUnreadTopic"
-        },
-        "myuser": {
-          "$ref": "#/definitions/userMyUser"
-        },
-        "automation": {
-          "$ref": "#/definitions/userAutomation"
-        },
-        "automations": {
-          "$ref": "#/definitions/userAutomations"
-        },
-        "session": {
-          "$ref": "#/definitions/userSession"
-        }
-      }
-    },
     "userAttributeData": {
       "type": "object",
       "properties": {
@@ -721,17 +659,6 @@
         }
       }
     },
-    "userCreateRequest": {
-      "type": "object",
-      "properties": {
-        "challenge_id": {
-          "type": "string"
-        },
-        "answer": {
-          "type": "string"
-        }
-      }
-    },
     "userDevice": {
       "type": "object",
       "properties": {
@@ -837,65 +764,6 @@
         }
       }
     },
-    "userListTopicsResult": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "topics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userTopic"
-          }
-        },
-        "anchor": {
-          "type": "string"
-        }
-      }
-    },
-    "userMaskResponse": {
-      "type": "object",
-      "properties": {
-        "subiz_id": {
-          "type": "string"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "mask": {
-          "type": "string"
-        }
-      }
-    },
-    "userMyUser": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "agent_id": {
-          "type": "string"
-        },
-        "user": {
-          "$ref": "#/definitions/userUser"
-        },
-        "unread": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "updated": {
-          "type": "string",
-          "format": "int64"
-        },
-        "account_id": {
-          "type": "string"
-        }
-      }
-    },
     "userPresence": {
       "type": "object",
       "properties": {
@@ -929,23 +797,6 @@
           "items": {
             "$ref": "#/definitions/userPresence"
           }
-        }
-      }
-    },
-    "userReadTopicRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "topic": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "agent_id": {
-          "type": "string"
         }
       }
     },
@@ -1135,31 +986,6 @@
         }
       }
     },
-    "userTopic": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "topic": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "updated": {
-          "type": "string",
-          "format": "int64"
-        },
-        "unread": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
     "userTrace": {
       "type": "object",
       "properties": {
@@ -1205,34 +1031,6 @@
         },
         "isp": {
           "type": "string"
-        }
-      }
-    },
-    "userUnreadTopic": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "topic": {
-          "type": "string"
-        },
-        "agent_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "updated": {
-          "type": "string",
-          "format": "int64"
-        },
-        "unread": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -1364,45 +1162,6 @@
         "activated": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "userUserCreateResult": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "mask": {
-          "type": "string"
-        }
-      }
-    },
-    "userUserSearchRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "segmentation_id": {
-          "type": "string"
-        },
-        "query": {
-          "type": "string"
-        },
-        "anchor": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "agent_id": {
-          "type": "string"
-        },
-        "unread": {
-          "type": "boolean",
-          "format": "boolean"
         }
       }
     },

@@ -4,37 +4,19 @@ package user;
 
 import "bitbucket.org/subiz/header/common/common.proto";
 
-message AllType {
-	optional User user = 2;
-	optional CreateRequest cr = 3;
-	optional Field fields = 5;
-	optional UserCreateResult ucr = 6;
-	optional ReadTopicRequest rpr = 8;
-	optional UserSearchRequest usersearchrequest = 9;
-	optional UserSearchResult usersearchresult = 10;
-	optional MaskResponse ms = 11;
-	optional ListTopicsResult ltr = 12;
-	optional Segmentation sg = 14;
-	optional Presence presn = 15;
-	optional Visitor vi = 17;
-	optional Visitors vis = 18;
-	optional Topic topic = 19;
-	optional UnreadTopic utopic = 20;
-	optional MyUser myuser = 21;
-	optional Automation automation = 23;
-	optional Automations automations = 25;
-	optional Session session = 26;
-}
-
-service MyServer {
-	rpc Do(AllType) returns(AllType);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message AddToMyRequest {
 	optional common.Context ctx = 1;
 	optional string user_id = 3;
 	repeated string agent_ids = 5;
+	optional string account_id = 2; // used within user service only
+}
+
+message MyAgents {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	repeated string agent_ids = 5;
+	optional int64 updated = 6;
 }
 
 message UserCreateResult {
@@ -185,8 +167,9 @@ message Trace {
 
 message MergeRequest {
 	optional common.Context ctx = 1;
-	optional string id = 5;
-	optional string recent_id = 4;
+	optional string account_id = 3;
+	optional string destination_user_id = 5;
+	optional string source_user_id = 4;
 }
 
 message CreateRequest {
@@ -244,8 +227,7 @@ enum Event {
 	UserSegmentationReadRequested = 14;
 
 	UserAddToMyListRequested = 20;
-
-
+	UserRemoveFromMyListRequested = 21;
 	UserEventTopicSubscribeRequested = 35;
 	UserEventTopicUnsubscribeRequested = 36;
 
@@ -262,7 +244,6 @@ enum Event {
 	UserAutomationListRequested = 52;
 	UserAutomationReadRequested = 53;
 
-
 	AutomationAgentNotificationFired = 54;
 	AutomationConversationMessageFired = 55;
 
@@ -277,13 +258,16 @@ enum Event {
 	UserRequested = 100;
 
 	UserCreated = 70;
+
 	UserAttributeAdded = 71;
+	UserUpdated = 72;
 
 	UserSynced = 101;
 	UserUpserted = 105;
 	UserV3Synced = 106;
 
-	UserWorkerJob = 200;
+	UserJob = 199; // useraliasadded, useraliasdeleted,
+	UserResolvedJob = 200;
 
 	UserResolvedEventCreated = 201;
 	UserAliasAdded = 202;
@@ -664,8 +648,8 @@ service UserMgr {
 	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult);
 	rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
 	rpc AddToMy (AddToMyRequest) returns (common.Empty);
-	rpc CreateUser (User) returns (User);
-	rpc UpdateUser (User) returns (User);
+	rpc CreateUser (User) returns (common.Empty);
+	rpc UpdateUser (User) returns (common.Empty);
 	rpc ReadUser (common.Id) returns (User);
 	rpc RemoveFromMy (common.Id) returns (common.Empty);
 
@@ -673,6 +657,9 @@ service UserMgr {
 	rpc CountUser(CountUserRequest) returns (CountResponse);
 	rpc CountUserByAttribute(CountUserByAttributeRequest) returns (CountResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+
+	rpc AddAlias(Alias) returns (common.Empty);
+	rpc MoveUserActivity(MergeRequest) returns (common.Empty);
 }
 
 service AutomationMgr {
