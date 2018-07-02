@@ -198,6 +198,7 @@ message UnreadTopic {
 
 message ReadTopicRequest {
 	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional string topic = 3;
 	optional string user_id = 4;
 	optional string agent_id = 5;
