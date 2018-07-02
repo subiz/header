@@ -649,8 +649,8 @@ service UserMgr {
 	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult);
 	rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
 	rpc AddToMy (AddToMyRequest) returns (common.Empty);
-	rpc CreateUser (User) returns (common.Empty);
-	rpc UpdateUser (User) returns (common.Empty);
+	rpc CreateUser (User) returns (common.Id);
+	rpc UpdateUser (User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (User);
 	rpc RemoveFromMy (common.Id) returns (common.Empty);
 
