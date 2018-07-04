@@ -74,7 +74,7 @@ message AttributeData {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string key = 4;
-	optional string value = 5;
+
 	optional string state = 6;
 	optional int64 created = 7;
 	optional int64 modified = 8;

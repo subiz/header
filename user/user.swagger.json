@@ -476,9 +476,6 @@
         "key": {
           "type": "string"
         },
-        "value": {
-          "type": "string"
-        },
         "state": {
           "type": "string"
         },
