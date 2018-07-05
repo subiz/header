@@ -78,6 +78,11 @@ message FbRecipient {
 	optional string id = 2;
 }
 
+message FbAction {
+	optional string type = 2;
+	optional string url = 3;
+}
+
 message FbAttachment {
 	optional string type = 2;
 	optional FbPayload payload = 3;
@@ -85,9 +90,20 @@ message FbAttachment {
 	optional string URL = 5;
 }
 
+message GenericElement {
+	optional string title = 2;
+	optional string item_url = 3;
+	optional string image_url = 4;
+	optional string subtitle = 5;
+	optional FbAction default_action = 6;
+}
+
 message FbPayload {
 	optional string url = 2;
 	optional bool is_reuseable = 3;
+	optional string template_type = 4;
+	optional bool sharable = 5;
+	repeated GenericElement elements = 6;
 }
 
 message FbRead {
