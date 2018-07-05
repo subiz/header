@@ -397,6 +397,7 @@ enum AttachmentType {
 	ask_info_form_answer = 8;
 	form = 9;
 	form_submit = 10;
+	fallback = 11;
 }
 
 message Attachment {
