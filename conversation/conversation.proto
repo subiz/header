@@ -120,6 +120,8 @@ message Conversation {
 	optional string last_message_id = 21; // internal use only
 	optional Message last_message = 20;
 	optional int64 response_sec = 22;
+
+	optional string chain_id = 24;
 }
 
 message UserConversation { // used in database
@@ -305,6 +307,7 @@ message Message {
 	repeated Field fields =	10;
 	optional Computed computed = 12;
 	optional string integration_id = 15;
+	optional string chain_id = 16;
 }
 
 message Computed {
@@ -694,6 +697,12 @@ message AvgResponseTimeResponse {
 
 message TotalConversationResponse {
 	optional int64 total_conversation = 2;
+}
+
+message Chain {
+	optional string account_id = 2;
+	optional string id = 3;
+	optional string conversation_id = 4;
 }
 
 service ConversationReporter {

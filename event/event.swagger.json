@@ -1011,6 +1011,9 @@
         "response_sec": {
           "type": "string",
           "format": "int64"
+        },
+        "chain_id": {
+          "type": "string"
         }
       }
     },
@@ -1231,6 +1234,9 @@
           "$ref": "#/definitions/conversationComputed"
         },
         "integration_id": {
+          "type": "string"
+        },
+        "chain_id": {
           "type": "string"
         }
       }
