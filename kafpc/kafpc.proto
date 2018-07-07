@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package kafpc;
+
+message Request {
+	string id = 2;
+	string response_host = 3;
+	bytes body = 5;
+}
+
+message Response {
+	string request_id = 3;
+	bytes body = 4;
+	int32 code = 5;
+	bytes error = 6;
+}
+
+message Empty {}
+
+service Kafpc {
+	rpc Reply(Response) returns (Empty);
+}

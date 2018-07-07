@@ -2408,6 +2408,9 @@
           }
         }
       },
+      "kafpcEmpty": {
+        "type": "object"
+      },
       "kvBool": {
         "type": "object",
         "properties": {
