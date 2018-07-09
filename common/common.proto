@@ -22,9 +22,6 @@ message Ids {
 }
 
 message Context {
-	reserved "reply_partition";
-	reserved 5;
-
 	string event_id = 1;
 	bytes state = 2;
 	string node = 3;

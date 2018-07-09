@@ -1014,6 +1014,12 @@
         },
         "chain_id": {
           "type": "string"
+        },
+        "all_members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationMember"
+          }
         }
       }
     },
@@ -1374,6 +1380,9 @@
           "$ref": "#/definitions/userUser"
         },
         "integration_id": {
+          "type": "string"
+        },
+        "chain_id": {
           "type": "string"
         }
       }

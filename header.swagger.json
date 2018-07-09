@@ -1159,6 +1159,12 @@
           },
           "chain_id": {
             "type": "string"
+          },
+          "all_members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationMember"
+            }
           }
         }
       },
@@ -1659,6 +1665,9 @@
             "$ref": "#/components/schemas/userUser"
           },
           "integration_id": {
+            "type": "string"
+          },
+          "chain_id": {
             "type": "string"
           }
         }

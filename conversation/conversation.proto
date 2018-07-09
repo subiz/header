@@ -102,7 +102,6 @@ message Conversation {
 	optional int64 closed = 6;
 	repeated Member members = 7;
 	repeated Tag tags = 10;
-
 	enum State {
 		conversation_none = 0;
 		unassigned = 2;
@@ -122,6 +121,7 @@ message Conversation {
 	optional int64 response_sec = 22;
 
 	optional string chain_id = 24;
+	repeated Member all_members = 25;
 }
 
 message UserConversation { // used in database
@@ -159,6 +159,7 @@ message StartRequest {
 	repeated string agent_ids = 22;
 	optional user.User user = 25;
 	optional string integration_id = 26;
+	optional string chain_id = 27;
 }
 
 message Conversations {
@@ -713,4 +714,18 @@ service ConversationReporter {
 	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
 	rpc GetTotalConversation(AvgResponseTimeRequest) returns (TotalConversationResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+}
+
+enum Path {
+	ConversationSendMessageToConvo = 0;
+	ConversationSendMessageToChain = 1;
+	ConversationEndChain = 2;
+	ConversationEndConvo = 3;
+	ConversationStartConvo = 4;
+	ConversationStartInChain = 5;
+	ConversationAcceptConvo = 6;
+	ConversationJoinConvo = 7;
+	ConversationJoin = 8;
+	ConversationLeave = 9;
+	ConversatinoLeaveChain = 10;
 }
