@@ -1029,6 +1029,9 @@
     "conversationMember": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "type": {
           "type": "string"
         },
