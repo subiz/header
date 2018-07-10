@@ -770,7 +770,7 @@
         "chain_id": {
           "type": "string"
         },
-        "all_members": {
+        "left_members": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/conversationMember"

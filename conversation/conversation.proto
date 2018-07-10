@@ -122,7 +122,7 @@ message Conversation {
 	optional int64 response_sec = 22;
 
 	optional string chain_id = 24;
-	repeated Member all_members = 25;
+	repeated Member left_members = 25;
 }
 
 message UserConversation { // used in database
