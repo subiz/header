@@ -7,6 +7,7 @@ message Request {
 	string response_host = 3;
 	bytes body = 5;
 	string path = 6;
+	int64 created = 7;
 }
 
 message Response {
