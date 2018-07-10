@@ -1387,6 +1387,9 @@
         },
         "chain_id": {
           "type": "string"
+        },
+        "state": {
+          "type": "string"
         }
       }
     },

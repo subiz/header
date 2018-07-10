@@ -161,6 +161,7 @@ message StartRequest {
 	optional user.User user = 25;
 	optional string integration_id = 26;
 	optional string chain_id = 27;
+	optional string state = 28; // pending
 }
 
 message Conversations {
