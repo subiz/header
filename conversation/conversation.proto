@@ -162,6 +162,7 @@ message StartRequest {
 	optional string integration_id = 26;
 	optional string chain_id = 27;
 	optional string state = 28; // pending
+	optional string automation_id = 29;
 }
 
 message Conversations {

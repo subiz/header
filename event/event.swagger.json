@@ -1390,6 +1390,9 @@
         },
         "state": {
           "type": "string"
+        },
+        "automation_id": {
+          "type": "string"
         }
       }
     },
