@@ -734,4 +734,6 @@ enum Path {
 	ConversationLeaveChain = 11;
 	ConversationTagConvo = 13;
 	ConversationTagChain = 14;
+	ConversationJustSendConvo = 15;
+	ConversationJustSendChain = 16;
 }
