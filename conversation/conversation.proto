@@ -725,8 +725,11 @@ enum Path {
 	ConversationStartConvo = 4;
 	ConversationStartInChain = 5;
 	ConversationAcceptConvo = 6;
-	ConversationJoinConvo = 7;
-	ConversationJoin = 8;
-	ConversationLeave = 9;
-	ConversatinoLeaveChain = 10;
+	ConversationAcceptChain = 7;
+	ConversationJoinConvo = 8;
+	ConversationJoinChain = 9;
+	ConversationLeaveConvo = 10;
+	ConversationLeaveChain = 11;
+	ConversationTagConvo = 13;
+	ConversationTagChain = 14;
 }
