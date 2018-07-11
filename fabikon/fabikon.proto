@@ -11,6 +11,7 @@ message FacebookPage {
 	optional string picture_url = 4;
 	optional string name = 5;
 	optional string access_token = 6;
+	optional int64 updated = 7;
 }
 
 enum Event {
