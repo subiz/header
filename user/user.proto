@@ -93,39 +93,21 @@ message User {
 	optional common.Context ctx = 1;
 	optional string id = 3;
 	optional string account_id = 4;
-	optional string fullname = 5;
-	repeated string phones = 7;
-	repeated string emails = 10;
 	repeated Trace traces = 11;
 	//	repeated string alias = 12;
-	repeated Device devices = 13;
 	optional bool is_ban = 14;
-	optional string avatar_url = 15;
 
 	repeated AttributeData attributes = 18;
 
 	repeated string segments = 19;
-	repeated string labels = 20;
-	optional bool unsubscribed = 21;
-	optional bool marked_spam = 22;
-	optional bool hard_bounced = 23;
-	optional int32 total_sessions = 24;
-
 	optional string subiz_id = 25;
-	optional string timezone = 26;
-	optional string country_code = 27;
-	optional string city = 32;
-	optional string language = 28;
 
 	repeated string aliases = 30;
-	optional int64 seen = 31;
-	repeated Field fields = 33;
 
 	optional int32 par = 34;
 	// optional int32 modified_hour = 35;
 	optional int64 modified = 36;
 	optional int32 modified_week = 37;
-	optional int64 activated = 38;
 }
 
 message Users {
