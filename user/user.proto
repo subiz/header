@@ -259,6 +259,9 @@ enum Event {
 	UserAggregateUserCount = 205;
 	UserAggregateUserAttributeCount = 206;
 	UserAggregated = 207;
+
+	UserTopicJob = 208;
+	UserEventTopicPublished = 209;
 }
 
 message AggregateUserCount {
