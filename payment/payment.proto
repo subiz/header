@@ -2,8 +2,8 @@ syntax = "proto2";
 
 package payment;
 
-import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/lang/lang.proto";
+import "git.subiz.net/header/common/common.proto";
+import "git.subiz.net/header/lang/lang.proto";
 
 enum Currency {
 	usd = 0;

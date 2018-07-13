@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package user;
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 message AddToMyRequest {
 	optional common.Context ctx = 1;

@@ -2,7 +2,7 @@ syntax = "proto2";
 
 // notibox store all notification in subiz
 // it DOESN'T take care of pushing notification to user
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 package notibox;
 

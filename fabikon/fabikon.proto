@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package fabikon;
 
-//import "bitbucket.org/subiz/header/common/common.proto";
+//import "git.subiz.net/header/common/common.proto";
 
 message FacebookPage {
 	optional string account_id = 1;

@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package mailkon;
 
-//import "bitbucket.org/subiz/header/common/common.proto";
+//import "git.subiz.net/header/common/common.proto";
 
 message Address {
 	optional string account_id = 1;

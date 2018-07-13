@@ -2,8 +2,8 @@ syntax = "proto2";
 
 package client;
 
-import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/auth/auth.proto";
+import "git.subiz.net/header/common/common.proto";
+import "git.subiz.net/header/auth/auth.proto";
 
 message AllType {
 	optional Clients client = 2;

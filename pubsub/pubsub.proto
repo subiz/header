@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package pubsub;
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 message Subscription {
 	common.Context ctx = 1;

@@ -2,10 +2,10 @@ syntax = "proto2";
 
 package account;
 
-import "bitbucket.org/subiz/header/auth/auth.proto";
-import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/lang/lang.proto";
-import "bitbucket.org/subiz/header/payment/payment.proto";
+import "git.subiz.net/header/auth/auth.proto";
+import "git.subiz.net/header/common/common.proto";
+import "git.subiz.net/header/lang/lang.proto";
+import "git.subiz.net/header/payment/payment.proto";
 
 message Agent {
 	optional common.Context ctx = 1;

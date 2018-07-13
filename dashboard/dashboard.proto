@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dashboard;
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 message SessionCookie {
 	string refresh_token = 3;

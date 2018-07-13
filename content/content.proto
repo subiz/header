@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 package content;
 

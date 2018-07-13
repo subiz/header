@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package common;
 
-import "bitbucket.org/subiz/header/lang/lang.proto";
-import "bitbucket.org/subiz/header/auth/auth.proto";
+import "git.subiz.net/header/lang/lang.proto";
+import "git.subiz.net/header/auth/auth.proto";
 
 message Empty {
 	Context ctx = 1;

@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package noti5;
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 enum Type {
 	new_message = 0;

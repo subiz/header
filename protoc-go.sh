@@ -52,7 +52,7 @@ for i in `ls -R`; do
 						let "TOTAL += 1"
 						# else
 						# echo -e "\033[0;37mignore" $i "\033[0;30m"
-					  [ "$1" = 'all' ] && ./bin/scalapbc -v351 -I $GOPATH/src --scala_out=flat_package:./scala $GOPATH/src/bitbucket.org/subiz/header/$LASTDIRECTORY/$i > /dev/null
+					  [ "$1" = 'all' ] && ./bin/scalapbc -v351 -I $GOPATH/src --scala_out=flat_package:./scala $GOPATH/src/git.subiz.net/header/$LASTDIRECTORY/$i > /dev/null
 				fi;
 		fi;
 done;

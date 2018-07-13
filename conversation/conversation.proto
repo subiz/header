@@ -2,8 +2,8 @@ syntax = "proto2";
 
 package conversation;
 
-import "bitbucket.org/subiz/header/common/common.proto";
-import "bitbucket.org/subiz/header/user/user.proto";
+import "git.subiz.net/header/common/common.proto";
+import "git.subiz.net/header/user/user.proto";
 
 message Rule {
 	optional common.Context ctx = 1;

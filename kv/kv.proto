@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package kv;
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 message Key {
 	string partition = 2;

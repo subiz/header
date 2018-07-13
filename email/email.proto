@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package email;
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 message Email {
 	common.Context ctx = 1;
