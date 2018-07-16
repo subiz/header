@@ -262,6 +262,7 @@ enum Event {
 
 	UserTopicJob = 208;
 	UserEventTopicPublished = 209;
+	UserNotifyMyUserRequested = 210;
 }
 
 message AggregateUserCount {
@@ -723,4 +724,23 @@ message UserSegment {
 	optional string user_id = 3;
 	optional string segmentation_id = 4;
 	optional int64 created = 5;
+}
+
+message PublishSubscribed {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 4;
+	optional string topic = 5;
+	optional string event_id = 6;
+	optional string by = 8;
+}
+
+message PublishSubscribedReply {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	repeated string agent_ids = 3;
+	optional string user_id = 4;
+	optional string topic = 5;
+	optional string event_id = 6;
+	optional string by = 8;
 }
