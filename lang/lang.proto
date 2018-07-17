@@ -161,3 +161,8 @@ enum L {
 	cn = 3; // chinese
 	fr = 5; // french
 }
+
+enum E {
+	no_error = 0;
+	unknown = 1;
+}
