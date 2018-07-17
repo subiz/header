@@ -41,6 +41,8 @@ message AvailabilityCheckResult {
 	optional bool availability = 2;
 	optional string reason = 3;
 	optional string payload = 5;
+	optional string integration_id = 6;
+	optional string account_id = 7;
 }
 
 message Condition {
