@@ -269,7 +269,7 @@ message AutomationEvent {
 	string account_id = 3;
 	string user_id = 4;
 	user.Automation automation = 5;
-	user.Session session = 6;
+	// user.Session session = 6;
 	user.User user = 7;
 	RawEvent event = 9;
 }

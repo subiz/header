@@ -307,22 +307,6 @@ message Segmentations {
 	repeated Segmentation segmentations = 3;
 }
 
-message SegmentLoopState {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int32 user_par = 3;
-	optional int64 loop_created = 6;
-	optional int64 loop_number = 7;
-}
-
-message UserSegmentCache {
-		optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string id = 3;
-	optional string condition_id = 4;
-
-}
-
 message Segmentation {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -330,9 +314,7 @@ message Segmentation {
 	optional string name = 3;
 	optional string description = 11;
 	optional int64 user_count = 4;
-	// repeated Condition conditions = 6;
-	//repeated SegmentCondition query = 5; // suffix annotation
-	// a * b + (c + d) * e  ==>  + * a b * + c d e
+
 	optional int64 ran = 8; // time start run
 	optional int64 started_from = 7;
 
@@ -344,16 +326,13 @@ message Segmentation {
 		inactive = 1;
 	}
 
-	repeated SegmentCondition condition = 19;
-}
-
-message SegmentTracking {
-	optional common.Context ctx = 1;
-	optional int32 user_par = 2;
-	optional string account_id = 3;
-
-	optional int64 loop_created = 7;
-	optional int64 loop_number = 8;
+	repeated SCondition condition = 19;
+	optional string creator = 20;
+	optional string scope = 21;
+	enum Scope {
+		agent = 0;
+		account = 1;
+	}
 }
 
 message Condition {
@@ -378,21 +357,6 @@ enum JoinOperator {
 enum ConditionType {
 	attribute = 0;
 	event = 1;
-}
-message SegmentCondition {
-	optional string id = 2;
-	optional string type = 3;
-	optional string join = 4;
-	optional Condition attribute_condition = 5;
-	optional EventCondition event_condition = 6;
-}
-
-// eg: has event.type='content_view' & event.data.content.url contains 'abc';
-// eg: not has event.type='content_view'
-message EventCondition {
-	optional string id = 2;
-	optional bool has = 3;
-	repeated Condition conditions = 5;
 }
 
 message UserSearchResult {
@@ -451,17 +415,6 @@ message AddToMyList {
 	optional common.Context ctx = 1;
 	optional string agent_id = 2;
 	optional string user_id = 3;
-}
-
-message Field {
-	optional string name = 2;
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional string setter = 5;
-	optional string setter_type = 6;
-	optional int64 updated = 8;
-	optional string data = 9;
-	optional string id = 10;
 }
 
 message Presence {
@@ -545,32 +498,6 @@ enum AutomationScope {
 message Automations {
 	optional common.Context ctx = 1;
 	repeated Automation automations = 2;
-}
-
-message Session {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional string id = 5;
-	optional string platform = 7;
-	enum Platform {
-		web = 0;
-		mobile = 2;
-		desktop = 4;
-	}
-	optional string referrer = 8;
-	optional string search_engine = 9;
-
-	optional int64 started = 10;
-	optional int64 tracked = 11;
-	optional string status = 12;
-	enum Status {
-		open = 0;
-		closed = 1;
-	}
-	optional int32 events_count = 13;
-	optional int32 content_views_count = 14;
-	optional string search_term = 15;
 }
 
 message DeleteAttrRequest {
@@ -658,13 +585,6 @@ service AutomationMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
-service SessionMgr {
-	rpc CreateSession(Session) returns (Session);
-	rpc ReadSession(Session) returns (Session);
-	rpc UpdateSession(Session) returns (Session);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 service AttributeMgr {
 	rpc ListAttributeDefinitions(common.Empty) returns (AttributeDefinitions);
 	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
@@ -679,6 +599,24 @@ message AutomationCheck {
 	optional string user_id = 4;
 	optional string event_id = 5;
 	optional string scope = 6;
+}
+
+message SegmentIndex {
+	optional string account_id = 2;
+	optional string segmentation_id = 3;
+	optional int32 year = 4;
+	optional int32 day = 5;
+	optional int32 hour = 6;
+}
+
+message SegmentUser {
+	optional string account_id = 2;
+	optional string segmentation_id = 3;
+	optional int32 day = 4;
+	optional int32 hour = 5;
+	optional string user_id = 6;
+	optional int64 activated = 7;
+	optional string picked_by = 8; // agent id or system
 }
 
 // can be
@@ -709,6 +647,7 @@ message SCondition {
 	repeated SCondition conditions = 9;
 
 	optional int32 priority = 12;
+	optional bool event_existed = 13;
 }
 
 message Alias {
@@ -716,14 +655,6 @@ message Alias {
 	optional string user_id = 3;
 	optional string account_id = 4;
 	optional string alias = 5;
-}
-
-message UserSegment {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string segmentation_id = 4;
-	optional int64 created = 5;
 }
 
 message PublishSubscribed {

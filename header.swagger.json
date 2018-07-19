@@ -3240,25 +3240,6 @@
           }
         }
       },
-      "userEventCondition": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "has": {
-            "type": "boolean",
-            "format": "boolean"
-          },
-          "conditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userCondition"
-            }
-          }
-        },
-        "title": "eg: has event.type='content_view' & event.data.content.url contains 'abc';\neg: not has event.type='content_view'"
-      },
       "userLastView": {
         "type": "object",
         "properties": {
@@ -3333,29 +3314,13 @@
           "priority": {
             "type": "integer",
             "format": "int32"
+          },
+          "event_existed": {
+            "type": "boolean",
+            "format": "boolean"
           }
         },
         "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
-      },
-      "userSegmentCondition": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "join": {
-            "type": "string"
-          },
-          "attribute_condition": {
-            "$ref": "#/components/schemas/userCondition"
-          },
-          "event_condition": {
-            "$ref": "#/components/schemas/userEventCondition"
-          }
-        }
       },
       "userSegmentation": {
         "type": "object",
@@ -3378,8 +3343,7 @@
           },
           "ran": {
             "type": "integer",
-            "format": "int64",
-            "title": "repeated Condition conditions = 6;\nrepeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==>  + * a b * + c d e"
+            "format": "int64"
           },
           "started_from": {
             "type": "integer",
@@ -3399,8 +3363,14 @@
           "condition": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/userSegmentCondition"
+              "$ref": "#/components/schemas/userSCondition"
             }
+          },
+          "creator": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
           }
         }
       },
@@ -3412,51 +3382,6 @@
             "items": {
               "$ref": "#/components/schemas/userSegmentation"
             }
-          }
-        }
-      },
-      "userSession": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "platform": {
-            "type": "string"
-          },
-          "referrer": {
-            "type": "string"
-          },
-          "search_engine": {
-            "type": "string"
-          },
-          "started": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "tracked": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "status": {
-            "type": "string"
-          },
-          "events_count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "content_views_count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "search_term": {
-            "type": "string"
           }
         }
       },

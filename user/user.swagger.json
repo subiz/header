@@ -670,25 +670,6 @@
         }
       }
     },
-    "userEventCondition": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "has": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "conditions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userCondition"
-          }
-        }
-      },
-      "title": "eg: has event.type='content_view' \u0026 event.data.content.url contains 'abc';\neg: not has event.type='content_view'"
-    },
     "userLastView": {
       "type": "object",
       "properties": {
@@ -788,29 +769,13 @@
         "priority": {
           "type": "integer",
           "format": "int32"
+        },
+        "event_existed": {
+          "type": "boolean",
+          "format": "boolean"
         }
       },
       "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
-    },
-    "userSegmentCondition": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "join": {
-          "type": "string"
-        },
-        "attribute_condition": {
-          "$ref": "#/definitions/userCondition"
-        },
-        "event_condition": {
-          "$ref": "#/definitions/userEventCondition"
-        }
-      }
     },
     "userSegmentation": {
       "type": "object",
@@ -836,8 +801,7 @@
         },
         "ran": {
           "type": "string",
-          "format": "int64",
-          "title": "repeated Condition conditions = 6;\nrepeated SegmentCondition query = 5; // suffix annotation\na * b + (c + d) * e  ==\u003e  + * a b * + c d e"
+          "format": "int64"
         },
         "started_from": {
           "type": "string",
@@ -857,8 +821,14 @@
         "condition": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/userSegmentCondition"
+            "$ref": "#/definitions/userSCondition"
           }
+        },
+        "creator": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
         }
       }
     },
@@ -873,54 +843,6 @@
           "items": {
             "$ref": "#/definitions/userSegmentation"
           }
-        }
-      }
-    },
-    "userSession": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "referrer": {
-          "type": "string"
-        },
-        "search_engine": {
-          "type": "string"
-        },
-        "started": {
-          "type": "string",
-          "format": "int64"
-        },
-        "tracked": {
-          "type": "string",
-          "format": "int64"
-        },
-        "status": {
-          "type": "string"
-        },
-        "events_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "content_views_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "search_term": {
-          "type": "string"
         }
       }
     },
