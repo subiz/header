@@ -3341,10 +3341,6 @@
             "type": "integer",
             "format": "int64"
           },
-          "ran": {
-            "type": "integer",
-            "format": "int64"
-          },
           "started_from": {
             "type": "integer",
             "format": "int64"
@@ -3360,7 +3356,7 @@
           "state": {
             "type": "string"
           },
-          "condition": {
+          "conditions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/userSCondition"
@@ -3371,6 +3367,10 @@
           },
           "scope": {
             "type": "string"
+          },
+          "is_system": {
+            "type": "boolean",
+            "format": "boolean"
           }
         }
       },

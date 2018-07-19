@@ -799,10 +799,6 @@
           "type": "string",
           "format": "int64"
         },
-        "ran": {
-          "type": "string",
-          "format": "int64"
-        },
         "started_from": {
           "type": "string",
           "format": "int64"
@@ -818,7 +814,7 @@
         "state": {
           "type": "string"
         },
-        "condition": {
+        "conditions": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/userSCondition"
@@ -829,6 +825,10 @@
         },
         "scope": {
           "type": "string"
+        },
+        "is_system": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
