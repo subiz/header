@@ -263,6 +263,8 @@ enum Event {
 	UserTopicJob = 208;
 	UserEventTopicPublished = 209;
 	UserNotifyMyUserRequested = 210;
+	UserSegmentPickRequested = 211;
+	UserSegmentUnpickRequested = 212;
 }
 
 message AggregateUserCount {
@@ -558,14 +560,23 @@ message CountResponse {
 	repeated int32 data = 3;
 }
 
+message PickRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string agent_id = 4;
+	optional string segmentation_id = 5;
+}
+
 service UserMgr {
 	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult);
 	rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
-	rpc AddToMy (AddToMyRequest) returns (common.Empty);
+	rpc PickToSegmentation(PickRequest) returns (common.Empty);
+	rpc DeleteFromSegmentation(PickRequest) returns (common.Empty);
+
 	rpc CreateUser (User) returns (common.Id);
 	rpc UpdateUser (User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (User);
-	rpc RemoveFromMy (common.Id) returns (common.Empty);
 
 	rpc CountMyUser(CountMyUserRequest) returns (CountResponse);
 	rpc CountUser(CountUserRequest) returns (CountResponse);
