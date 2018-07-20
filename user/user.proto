@@ -566,6 +566,7 @@ message PickRequest {
 	optional string user_id = 3;
 	optional string agent_id = 4;
 	optional string segmentation_id = 5;
+	optional int64 activated = 6;
 }
 
 service UserMgr {
