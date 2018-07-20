@@ -170,7 +170,7 @@ message FacebookUser {
 	optional string last_name = 4;
 	optional string profile_pic = 5;
 	optional string locale = 6;
-	optional int32 timezone = 7;
+	optional float timezone = 7;
 	optional string gender = 8;
 }
 
