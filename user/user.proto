@@ -265,6 +265,16 @@ enum Event {
 	UserNotifyMyUserRequested = 210;
 	UserSegmentPickRequested = 211;
 	UserSegmentUnpickRequested = 212;
+	UserAggregateSegmentUserCount = 213;
+}
+
+message AggregateSegmentUserCount {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 min = 3;
+	optional int64 count = 5;
+	optional int64 created = 6;
+	optional string segmentation_id = 7;
 }
 
 message AggregateUserCount {
@@ -524,8 +534,8 @@ service VisitorMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
-message CountMyUserRequest {
-	optional string agent_id = 4;
+message CountSegmentationUserRequest {
+	optional string segmentation_id = 4;
 	optional int32 from = 5;
 	optional int32 to = 6;
 	optional string range = 8;
@@ -579,7 +589,7 @@ service UserMgr {
 	rpc UpdateUser (User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (User);
 
-	rpc CountMyUser(CountMyUserRequest) returns (CountResponse);
+	rpc CountSegmentationUser(CountSegmentationUserRequest) returns (CountResponse);
 	rpc CountUser(CountUserRequest) returns (CountResponse);
 	rpc CountUserByAttribute(CountUserByAttributeRequest) returns (CountResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
