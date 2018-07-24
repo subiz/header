@@ -630,6 +630,7 @@ message CountByAgentRequest {
 		hour = 0;
 		day = 1;
 	}
+	optional bool has_user = 9;
 }
 
 message CountByGroupRequest {
@@ -642,6 +643,7 @@ message CountByGroupRequest {
 		hour = 0;
 		day = 1;
 	}
+	optional bool has_user = 9;
 }
 
 message CountByAgentsRequest {
@@ -654,6 +656,7 @@ message CountByAgentsRequest {
 		hour = 0;
 		day = 1;
 	}
+	optional bool has_user = 9;
 }
 
 message CountByTagsRequest {
@@ -666,6 +669,7 @@ message CountByTagsRequest {
 		hour = 0;
 		day = 1;
 	}
+	optional bool has_user = 9;
 }
 
 message CountByAgent {
