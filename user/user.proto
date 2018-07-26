@@ -251,6 +251,7 @@ enum Event {
 
 	UserJob = 199; // useraliasadded, useraliasdeleted,
 	UserResolvedJob = 200;
+	UserResolvedJob2 = 198;;
 
 	UserResolvedEventCreated = 201;
 	UserAliasAdded = 202;
