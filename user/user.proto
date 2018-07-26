@@ -525,29 +525,11 @@ service VisitorMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
-message CountSegmentationUserRequest {
+message CountSegmentationUserByAttributeRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string attribute_key = 3;
 	optional string segmentation_id = 4;
-	optional int32 from = 5;
-	optional int32 to = 6;
-	optional string range = 8;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-}
-
-message CountUserRequest {
-	optional int32 from = 5;
-	optional int32 to = 6;
-	optional string range = 8;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-}
-
-message CountUserByAttributeRequest {
-	optional string attribute_key = 4;
 	optional int32 from = 5;
 	optional int32 to = 6;
 	optional string range = 8;
@@ -587,9 +569,7 @@ service UserMgr {
 	rpc UpdateUser (User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (User);
 
-	rpc CountSegmentationUser(CountSegmentationUserRequest) returns (CountResponse);
-	rpc CountUser(CountUserRequest) returns (CountResponse);
-	rpc CountUserByAttribute(CountUserByAttributeRequest) returns (CountResponse);
+	rpc CountSegmentationUserByAttribute(CountSegmentationUserByAttributeRequest) returns (CountResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
 	rpc AddAlias(Alias) returns (common.Empty);
