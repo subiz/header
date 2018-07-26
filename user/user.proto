@@ -256,8 +256,6 @@ enum Event {
 	UserAliasAdded = 202;
 	UserAliasDeleted = 203;
 	UserEventCreated = 204;
-	UserAggregateUserCount = 205;
-	UserAggregateUserAttributeCount = 206;
 	UserAggregated = 207;
 
 	UserTopicJob = 208;
@@ -265,33 +263,26 @@ enum Event {
 	UserNotifyMyUserRequested = 210;
 	UserSegmentPickRequested = 211;
 	UserSegmentUnpickRequested = 212;
-	UserAggregateSegmentUserCount = 213;
+	UserAggregateSegmentAttrCount = 214;
+	UserAggregateUpdateInteracted = 215;
 }
 
-message AggregateSegmentUserCount {
+message AggregateUpdateInteracted {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional int64 interacted = 5;
+	optional int64 created = 6;
+}
+
+message AggregateSegmentAttrCount {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional int64 min = 3;
 	optional int64 count = 5;
 	optional int64 created = 6;
 	optional string segmentation_id = 7;
-}
-
-message AggregateUserCount {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 min = 3;
-	optional int64 count = 5;
-	optional int64 created = 6;
-}
-
-message AggregateUserAttributeCount {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 min = 3;
-	optional string attribute_key = 4;
-	optional int64 count = 5;
-	optional int64 created = 6;
+	optional string attribute = 8;
 }
 
 message SubizIDRequest {
@@ -570,20 +561,27 @@ message CountResponse {
 	repeated int32 data = 3;
 }
 
+message UnpickRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string segmentation_id = 5;
+}
+
 message PickRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string agent_id = 4;
 	optional string segmentation_id = 5;
-	optional int64 activated = 6;
+	optional int64 added = 7;
 }
 
 service UserMgr {
 	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult);
 	rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
 	rpc PickToSegmentation(PickRequest) returns (common.Empty);
-	rpc DeleteFromSegmentation(PickRequest) returns (common.Empty);
+	rpc DeleteFromSegmentation(UnpickRequest) returns (common.Empty);
 
 	rpc CreateUser (User) returns (common.Id);
 	rpc UpdateUser (User) returns (common.Id);
