@@ -573,11 +573,11 @@ service ConversationMgr {
 	rpc ReceiveMessage(MessageId) returns (common.Empty);
 	rpc AckMessage(MessageAck) returns (common.Empty);
 
+	rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(StartRequest) returns (Conversation);
 	rpc EndConversation(common.Id) returns (Conversation);
 	rpc GetConversation(common.Id) returns (Conversation);
 	rpc ListConversations(ListConversationsRequest) returns (Conversations);
-	rpc AcceptConversation(common.Id) returns (Conversation);
 	rpc TagConversation(TagRequest) returns (common.Empty);
 	rpc UntagConversation(TagRequest) returns (common.Empty);
 
@@ -742,4 +742,6 @@ enum Path {
 	ConversationTagChain = 14;
 	ConversationJustSendConvo = 15;
 	ConversationJustSendChain = 16;
+	ConversationUpdateStateConvo = 17;
+	ConversationUpdateStateChain = 18;
 }
