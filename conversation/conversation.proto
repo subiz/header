@@ -125,6 +125,7 @@ message Conversation {
 
 	optional string chain_id = 24;
 	repeated Member left_members = 25;
+	optional RouteResult assign_to = 26;
 }
 
 message UserConversation { // used in database

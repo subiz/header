@@ -1171,6 +1171,9 @@
             "items": {
               "$ref": "#/components/schemas/conversationMember"
             }
+          },
+          "assign_to": {
+            "$ref": "#/components/schemas/RouteResult"
           }
         }
       },
@@ -1531,6 +1534,26 @@
             "items": {
               "$ref": "#/components/schemas/Rule"
             }
+          }
+        }
+      },
+      "RouteResult": {
+        "type": "object",
+        "properties": {
+          "rule_id": {
+            "type": "string"
+          },
+          "strategy": {
+            "type": "string"
+          },
+          "agent_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "group_id": {
+            "type": "string"
           }
         }
       },
