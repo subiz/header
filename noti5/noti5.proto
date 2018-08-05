@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package noti5;
 
-import "git.subiz.net/header/common/common.proto";
+import "bitbucket.org/subiz/header/common/common.proto";
 
 enum Type {
 	new_message = 0;
@@ -23,5 +23,32 @@ message Setting {
 service Noti5Service {
 	rpc ReadNotificationSetting(common.Empty) returns (Setting);
 	rpc UpdateNotificationSetting(Setting) returns (common.Empty);
+	rpc AddToken(Token) returns (common.Empty);
+	rpc RemoveToken(Token) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+}
+
+message Token {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string user_type = 4;
+	optional string token = 5;
+	optional string device_id = 6;
+	optional string platform = 7; // desktop, mobile
+	optional int64 created = 8;
+	repeated string topics = 9;
+}
+
+message PushNoti {
+	optional string account_id = 3;
+	optional string user_id = 4;
+	optional string platform = 5;
+	optional string title = 6;
+	optional string body = 7;
+}
+
+enum Event {
+	Noti5Requested = 0;
+	Noti5PushRequested = 1;
 }
