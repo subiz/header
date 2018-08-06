@@ -54,6 +54,7 @@ message PushNoti {
 	optional string platform = 5;
 	optional string title = 6;
 	optional string body = 7;
+	optional string conversation_id = 8;
 }
 
 message Message {
