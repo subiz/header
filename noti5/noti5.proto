@@ -41,11 +41,18 @@ message Token {
 }
 
 message PushNoti {
+	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional string user_id = 4;
 	optional string platform = 5;
 	optional string title = 6;
 	optional string body = 7;
+}
+
+message Message {
+	optional string token = 2;
+	optional string title = 3;
+	optional string body = 4;
 }
 
 enum Event {
