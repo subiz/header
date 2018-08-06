@@ -50,11 +50,13 @@ message Token {
 message PushNoti {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
-	optional string user_id = 4;
+	optional string user_id = 4; // to user
 	optional string platform = 5;
 	optional string title = 6;
 	optional string body = 7;
 	optional string conversation_id = 8;
+	optional string sender_id = 9;
+	optional string sender_type = 10;
 }
 
 message Message {
