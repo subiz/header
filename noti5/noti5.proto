@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package noti5;
 
-import "bitbucket.org/subiz/header/common/common.proto";
+import "git.subiz.net/header/common/common.proto";
 
 enum Type {
 	new_message = 0;
@@ -21,8 +21,8 @@ message Setting {
 }
 
 service Noti5Service {
-	rpc ReadNotificationSetting(common.Empty) returns (Setting);
-	rpc UpdateNotificationSetting(Setting) returns (common.Empty);
+	// rpc ReadNotificationSetting(common.Empty) returns (Setting);
+	// rpc UpdateNotificationSetting(Setting) returns (common.Empty);
 	rpc AddToken(Token) returns (common.Empty);
 	rpc RemoveToken(Token) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);

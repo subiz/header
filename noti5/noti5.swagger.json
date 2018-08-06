@@ -446,33 +446,6 @@
           "type": "string"
         }
       }
-    },
-    "noti5Setting": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "agent_id": {
-          "type": "string"
-        },
-        "web_type": {
-          "type": "string"
-        },
-        "mobile_type": {
-          "type": "string"
-        },
-        "email_type": {
-          "type": "string"
-        },
-        "email_after": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
     }
   }
 }
