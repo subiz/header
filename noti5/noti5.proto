@@ -36,6 +36,10 @@ message Token {
 	optional string token = 5;
 	optional string device_id = 6;
 	optional string platform = 7; // desktop, mobile
+	enum Platform {
+		desktop = 0;
+		mobile = 1;
+	}
 	optional int64 created = 8;
 	repeated string topics = 9;
 }
