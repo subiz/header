@@ -33,7 +33,7 @@ message Token {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string user_type = 4;
-	optional string token = 5;
+	optional string fcm_token = 5;
 	optional string device_id = 6;
 	optional string platform = 7; // desktop, mobile
 	enum Platform {
@@ -54,7 +54,7 @@ message PushNoti {
 }
 
 message Message {
-	optional string token = 2;
+	optional string fcm_token = 2;
 	optional string title = 3;
 	optional string body = 4;
 }
