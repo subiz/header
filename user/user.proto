@@ -266,6 +266,17 @@ enum Event {
 	UserSegmentUnpickRequested = 212;
 	UserAggregateSegmentAttrCount = 214;
 	UserAggregateUpdateInteracted = 215;
+
+	UserAggregateSegmentCount = 216;
+	UserSegmentAggregated = 217;
+}
+
+message AggregateSegmentCount {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string segmentation_id = 3;
+	optional int64 count = 4;
+	optional int64 created = 5;
 }
 
 message AggregateUpdateInteracted {
