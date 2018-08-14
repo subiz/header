@@ -359,6 +359,19 @@ enum Event {
 	BillingUpdated = 12;
 	LogUpdated = 13;
 	PromotionCodeUpdated = 15;
+
+	PaymentJob = 16;
+	PaymentJobAddPaymentMethod = 17;
+	PaymentJobDeletePaymentMethod = 18;
+	PaymentJobPayInvoice = 19;
+	PaymentJobPay = 20;
+	PaymentJobPurchase = 21;
+	PaymentJobUpdateSubscription = 22;
+	PaymentJobRenew = 23;
+	PaymentJobUpdatePaymentMethod = 24;
+	PaymentJobTransferMoney = 25;
+	PaymentJobUpsertAgent = 26;
+	PaymentJobCreateInvoice = 27;
 }
 
 message PaymentRenewCycleRequested {
