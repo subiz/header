@@ -79,6 +79,8 @@ message Device {
 enum E {
 	no_error = 0;
 	unknown = 1;
+	missing_account_id = 10;
+	missing_stripe_info = 212;
 }
 
 message Error {
