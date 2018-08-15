@@ -80,6 +80,15 @@ enum E {
 	no_error = 0;
 	unknown = 1;
 	missing_account_id = 10;
+	proto_marshal_error = 11;
+
+	subscription_not_found = 1012;
+	payment_method_not_found = 1013;
+	missing_primary_payment_method = 1014;
+	payment_method_state_is_failed = 1015;
+	primary_payment_method_is_not_credit_card = 1016;
+	missing_payment_method_id = 1017;
+
 	missing_stripe_info = 212;
 }
 
