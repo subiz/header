@@ -22,7 +22,7 @@ message Setting {
 
 service Noti5Service {
 	rpc ReadNotificationSetting(common.Empty) returns (Setting);
-	rpc UpdateNotificationSetting(Setting) returns (common.Empty);
+	rpc UpdateNotificationSetting(Setting) returns (Setting);
 }
 
 service Noti5TokenService {
