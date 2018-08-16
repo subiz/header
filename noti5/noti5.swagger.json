@@ -402,6 +402,9 @@
         },
         "router_topic": {
           "type": "string"
+        },
+        "idempotent_key": {
+          "type": "string"
         }
       }
     },

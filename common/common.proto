@@ -39,6 +39,7 @@ message Context {
 	int64 offset = 14;
 	uint64 term = 15;
 	string router_topic = 16;
+	string idempotent_key = 17;
 }
 
 message Reply {
@@ -88,6 +89,8 @@ enum E {
 	payment_method_state_is_failed = 1015;
 	primary_payment_method_is_not_credit_card = 1016;
 	missing_payment_method_id = 1017;
+	plan_not_found = 1018;
+	invalid_plan_cannot_buy = 1019;
 
 	missing_stripe_info = 212;
 }
