@@ -117,6 +117,7 @@ message Bill {
 }
 
 message Note {
+	optional common.Context ctx = 1;
 	optional string message = 4;
 	optional string creator = 5;
 	optional int64 created = 6;
@@ -412,6 +413,7 @@ message String {
 }
 
 message PayRequest {
+	optional common.Context ctx = 1;
 	optional string account_id = 8;
 	repeated string invoice_ids = 6;
 	optional string description = 7;

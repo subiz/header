@@ -841,6 +841,9 @@
     "paymentNote": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "message": {
           "type": "string"
         },
