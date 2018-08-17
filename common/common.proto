@@ -94,6 +94,9 @@ enum E {
 	missing_payment_method_id = 1017;
 	plan_not_found = 1018;
 	invalid_plan_cannot_buy = 1019;
+	missing_next_billing_cycle_month = 1020;
+	trial_package_cannot_buy = 1021;
+	missing_billing_cycle_month = 1022;
 
 	missing_stripe_info = 212;
 }
