@@ -2351,6 +2351,10 @@
           },
           "value": {
             "type": "string"
+          },
+          "ttl": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },

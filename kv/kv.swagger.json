@@ -48,6 +48,10 @@
         },
         "value": {
           "type": "string"
+        },
+        "ttl": {
+          "type": "string",
+          "format": "int64"
         }
       }
     }

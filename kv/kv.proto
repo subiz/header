@@ -14,6 +14,7 @@ message Value {
 	string key = 3;
 	bytes bytes = 4;
 	string value = 5;
+	int64 ttl = 6;
 }
 
 message Bool {
