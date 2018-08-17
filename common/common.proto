@@ -82,6 +82,9 @@ enum E {
 	unknown = 1;
 	missing_account_id = 10;
 	proto_marshal_error = 11;
+	database_error = 12;
+
+	kv_key_not_found = 1500;
 
 	subscription_not_found = 1012;
 	payment_method_not_found = 1013;
