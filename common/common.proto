@@ -83,6 +83,7 @@ enum E {
 	missing_account_id = 10;
 	proto_marshal_error = 11;
 	database_error = 12;
+	access_deny = 13;
 
 	kv_key_not_found = 1500;
 
@@ -97,8 +98,18 @@ enum E {
 	missing_next_billing_cycle_month = 1020;
 	trial_package_cannot_buy = 1021;
 	missing_billing_cycle_month = 1022;
+	primary_payment_method_must_be_credit_card = 1023;
+	bank_transfer_payment_method_not_found = 1024;
+	invoice_not_found = 1025;
+	invoice_template_error = 1026;
+	execute_invoice_template_error = 1027;
+	missing_stripe_token = 1028;
+	missing_stripe_info = 1029;
+	stripe_call_error = 1030;
+	missing_stripe_customer_id	= 1031;
 
-	missing_stripe_info = 212;
+	s3_call_error = 1503;
+	pdf_generate_error = 1504;
 }
 
 message Error {

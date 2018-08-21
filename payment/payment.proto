@@ -389,7 +389,7 @@ service SubizInternalPaymentMgr {
 }
 
 service PaymentMgr {
-	rpc Purchase(Subscription) returns (Subscription);
+	rpc Purchase(Subscription) returns (Invoice);
 	rpc UpdateSubscription(Subscription) returns (Subscription);
 	rpc GetSubscription(common.Empty) returns (Subscription);
 	rpc GetPromotionCode(String) returns (PromotionCode);
@@ -400,7 +400,7 @@ service PaymentMgr {
 	rpc Pay(PayRequest) returns (Bill);
 	rpc ListInvoices(common.Id) returns (Invoices);
 	rpc CreateInvoice(Invoice) returns (Invoice);
-	// rpc Creat(Customer) returns (Customer);
+
 	rpc ListPlans(common.Empty) returns (Plans);
 	rpc ExportInvoice(common.Id) returns (String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
