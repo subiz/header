@@ -208,7 +208,8 @@ enum Type {
 	// BOT reserve for future
 	bot = 7;
 	dashboard = 10;
-
+	// accmgr
+	accmgr = 11;
 }
 
 message User {

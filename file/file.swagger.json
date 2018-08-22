@@ -349,10 +349,11 @@
         "rest",
         "connector",
         "bot",
-        "dashboard"
+        "dashboard",
+        "accmgr"
       ],
       "default": "unknown",
-      "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - bot: BOT reserve for future"
+      "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - bot: BOT reserve for future\n - accmgr: accmgr"
     },
     "commonContext": {
       "type": "object",
