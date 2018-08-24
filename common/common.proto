@@ -84,6 +84,8 @@ enum E {
 	proto_marshal_error = 11;
 	database_error = 12;
 	access_deny = 13;
+	json_marshal_error = 14;
+	idempotency_input_changed = 15;
 
 	kv_key_not_found = 1500;
 
@@ -107,6 +109,9 @@ enum E {
 	missing_stripe_info = 1029;
 	stripe_call_error = 1030;
 	missing_stripe_customer_id	= 1031;
+	invalid_invoice_id = 1032;
+	invalid_payment_log_id = 1034;
+	invalid_bill_id = 1035;
 
 	s3_call_error = 1503;
 	pdf_generate_error = 1504;
