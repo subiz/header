@@ -651,7 +651,7 @@
         "router_topic": {
           "type": "string"
         },
-        "idempotent_key": {
+        "idempotency_key": {
           "type": "string"
         }
       }
