@@ -113,6 +113,8 @@ enum E {
 	invalid_payment_log_id = 1034;
 	invalid_bill_id = 1035;
 
+	kafka_rpc_timeout = 2150;
+
 	s3_call_error = 1503;
 	pdf_generate_error = 1504;
 }

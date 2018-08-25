@@ -8,6 +8,7 @@ message Request {
 	bytes body = 5;
 	string path = 6;
 	int64 created = 7;
+	bool forget = 8;
 }
 
 message Response {
@@ -21,8 +22,4 @@ message Empty {}
 
 service Kafpc {
 	rpc Reply(Response) returns (Empty);
-}
-
-enum Event {
-	Kafpc_Requested = 0;
 }
