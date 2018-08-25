@@ -373,6 +373,12 @@ enum Event {
 	PaymentJobTransferMoney = 25;
 	PaymentJobUpsertAgent = 26;
 	PaymentJobCreateInvoice = 27;
+
+	PaymentDowngradeCron = 28;
+	PayemntGenerateInvoiceCron = 29;
+	PaymentPayCron = 30;
+
+	PaymentWorkerJob = 40;
 }
 
 message PaymentRenewCycleRequested {
