@@ -53,6 +53,8 @@ message Client {
 
 	optional string availability_url = 22;
 	optional string ping_url = 23;
+
+	optional bool is_internal = 24;
 }
 
 enum Event {

@@ -16,6 +16,8 @@ message Credential {
 	string avatar_url = 15;
 	string name = 16;
 	string email = 17;
+
+	bool is_internal_client = 18;
 }
 
 message Scope {

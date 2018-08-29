@@ -308,6 +308,10 @@
         },
         "email": {
           "type": "string"
+        },
+        "is_internal_client": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
