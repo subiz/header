@@ -298,6 +298,11 @@ message AccountConfirmSuccessEmail {
 	optional int64 to_time = 11;
 }
 
+message SearchAgentsRequest {
+	optional common.Context ctx = 1;
+	optional string email = 2;
+}
+
 service AccountMgr {
 	rpc CreateGroup(AgentGroup) returns (AgentGroup);
 	rpc UpdateGroup(AgentGroup) returns (AgentGroup);
@@ -323,4 +328,5 @@ service AccountMgr {
 	rpc AddAgentToGroup(GroupMember) returns (common.Empty);
 	rpc RemoveAgentFromGroup(GroupMember) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+	rpc SearchAgents(SearchAgentsRequest) returns (Agents);
 }
