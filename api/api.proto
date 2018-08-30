@@ -90,6 +90,7 @@ message Apikey {
 	optional string account_id = 4;
 	optional string client_id = 5;
 	optional string client_type = 6;
+	optional bool is_internal = 7;
 }
 
 enum Event {
