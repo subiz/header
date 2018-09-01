@@ -278,6 +278,8 @@ enum Event {
 	ConversationRequested = 100;
 	ConversationSynced = 101;
 	ConversationV3Synced = 102;
+
+	ConversationWorkerJob = 103;
 }
 
 message RequestState {
@@ -624,8 +626,8 @@ message TagRequest {
 message CountByAgentRequest {
 	optional string integration_id = 3;
 	optional string agent_id = 4;
-	optional int32 from = 5;
-	optional int32 to = 6;
+	optional int32 from = 5; // deprecated
+	optional int32 to = 6; // deprecated
 	optional string range = 8;
 	enum Range {
 		hour = 0;
@@ -639,8 +641,8 @@ message CountByAgentRequest {
 message CountByGroupRequest {
 	optional string integration_id = 3;
 	optional string group_id = 4;
-	optional int32 from = 5;
-	optional int32 to = 6;
+	optional int32 from = 5; // deprecated
+	optional int32 to = 6; // deprecated
 	optional string range = 8;
 	enum Range {
 		hour = 0;
@@ -654,8 +656,8 @@ message CountByGroupRequest {
 message CountByAgentsRequest {
 	optional string integration_id = 3;
 	repeated string agent_ids = 4;
-	optional int32 from = 5;
-	optional int32 to = 6;
+	optional int32 from = 5; // deprecated
+	optional int32 to = 6; // deprecated
 	optional string range = 8;
 	enum Range {
 		hour = 0;
@@ -669,8 +671,8 @@ message CountByAgentsRequest {
 message CountByTagsRequest {
 	optional string integration_id = 3;
 	repeated string tag_ids = 4;
-	optional int32 from = 5;
-	optional int32 to = 6;
+	optional int32 from = 5; // deprecated
+	optional int32 to = 6; // deprecated
 	optional string range = 8;
 	enum Range {
 		hour = 0;
@@ -706,8 +708,8 @@ message CountByAgentsResponse {
 
 message AvgResponseTimeRequest {
 	optional string integration_id = 3;
-	optional int32 from = 5;
-	optional int32 to = 6;
+	optional int32 from = 5; // deprecated
+	optional int32 to = 6; // deprecated
 	optional int32 fromHour = 7;
 	optional int32 toHour = 8;
 }
