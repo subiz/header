@@ -542,13 +542,15 @@ message CountSegmentationUserByAttributeRequest {
 	optional string account_id = 2;
 	optional string attribute_key = 3;
 	optional string segmentation_id = 4;
-	optional int32 from = 5;
-	optional int32 to = 6;
+	optional int32 from = 5; // deprecated
+	optional int32 to = 6; // deprecated
 	optional string range = 8;
 	enum Range {
 		hour = 0;
 		day = 1;
 	}
+	optional int32 from_hour = 9;
+	optional int32 to_hour = 10;
 }
 
 message CountResponse {
