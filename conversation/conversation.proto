@@ -634,8 +634,8 @@ message CountByAgentRequest {
 		day = 1;
 	}
 	optional bool has_user = 9;
-	optional int32 fromHour = 10;
-	optional int32 toHour = 11;
+	optional int32 from_hour = 10;
+	optional int32 to_hour = 11;
 }
 
 message CountByGroupRequest {
@@ -649,8 +649,8 @@ message CountByGroupRequest {
 		day = 1;
 	}
 	optional bool has_user = 9;
-	optional int32 fromHour = 10;
-	optional int32 toHour = 11;
+	optional int32 from_hour = 10;
+	optional int32 to_hour = 11;
 }
 
 message CountByAgentsRequest {
@@ -664,8 +664,8 @@ message CountByAgentsRequest {
 		day = 1;
 	}
 	optional bool has_user = 9;
-	optional int32 fromHour = 10;
-	optional int32 toHour = 11;
+	optional int32 from_hour = 10;
+	optional int32 to_hour = 11;
 }
 
 message CountByTagsRequest {
@@ -679,8 +679,8 @@ message CountByTagsRequest {
 		day = 1;
 	}
 	optional bool has_user = 9;
-	optional int32 fromHour = 10;
-	optional int32 toHour = 11;
+	optional int32 from_hour = 10;
+	optional int32 to_hour = 11;
 }
 
 message CountByAgent {
@@ -710,8 +710,8 @@ message AvgResponseTimeRequest {
 	optional string integration_id = 3;
 	optional int32 from = 5; // deprecated
 	optional int32 to = 6; // deprecated
-	optional int32 fromHour = 7;
-	optional int32 toHour = 8;
+	optional int32 from_hour = 7;
+	optional int32 to_hour = 8;
 }
 
 message AvgResponseTimeResponse {
