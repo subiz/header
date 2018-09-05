@@ -125,6 +125,7 @@ enum E {
 	corrupted_user_data = 3007;
 	auth_token_expired = 3008;
 	hash_bcrypt_error = 3009;
+	invalid_cipher_size = 3010;
 
 	inactive_agent = 4000;
 }
