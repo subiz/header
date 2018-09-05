@@ -86,7 +86,8 @@ enum E {
 	access_deny = 13;
 	json_marshal_error = 14;
 	idempotency_input_changed = 15;
-
+	account_not_found = 16;
+	invalid_credential = 17;
 	kv_key_not_found = 1500;
 
 	subscription_not_found = 1012;
@@ -117,6 +118,15 @@ enum E {
 
 	s3_call_error = 1503;
 	pdf_generate_error = 1504;
+
+	client_not_found = 3004;
+	missing_redirect_url = 3005;
+	missing_client_name	= 3006;
+	corrupted_user_data = 3007;
+	auth_token_expired = 3008;
+	hash_bcrypt_error = 3009;
+
+	inactive_agent = 4000;
 }
 
 message Error {
