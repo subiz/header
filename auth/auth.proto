@@ -131,9 +131,14 @@ message UserAuth {
 	Method method = 2;
 }
 
+message GoogleCredential {
+	string id_token = 2;
+}
+
 message PasswordCredential {
 	string username = 1;
 	string password = 2;
+	GoogleCredential google = 3;
 }
 
 message SuperPasswordCredential {
