@@ -88,6 +88,9 @@ enum E {
 	idempotency_input_changed = 15;
 	account_not_found = 16;
 	invalid_credential = 17;
+	http_call_error = 18;
+
+
 	kv_key_not_found = 1500;
 
 	subscription_not_found = 1012;
@@ -126,6 +129,7 @@ enum E {
 	auth_token_expired = 3008;
 	hash_bcrypt_error = 3009;
 	invalid_cipher_size = 3010;
+	invalid_google_auth_response = 3011;
 
 	inactive_agent = 4000;
 }
