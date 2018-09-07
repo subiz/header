@@ -6,16 +6,18 @@ import "git.subiz.net/header/common/common.proto";
 import "git.subiz.net/header/account/account.proto";
 
 message DashboardAgent {
-	account.Account account = 2;
-	account.Agent agent = 3;
-	int64 tour_guide_web_showed = 4;
-	string refresh_token = 5;
-	string access_token = 6;
-	string language_url = 7;
+	string account_id = 2;
+	string id = 3;
+	account.Account account = 4;
+	account.Agent agent = 5;
+	int64 tour_guide_web_showed = 6;
+	string refresh_token = 7;
+	string access_token = 8;
+	string language_url = 9;
 }
 
 message DashboardAccount {
-	string account_id = 2;
+	string id = 2;
 	account.Account account = 3;
 }
 
