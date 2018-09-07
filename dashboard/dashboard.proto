@@ -22,37 +22,39 @@ message DashboardAccount {
 }
 
 message AccessLog {
-	string account_id = 2;
-	string id = 3;
 
-	string ac_token = 4;
-	string rf_token = 5;
-	string ip = 6;
-	int32 location_id = 7;
+	string id = 2;
+	string account_id = 3;
+	string agent_id = 4;
 
-	string city_name = 8;
-	string country_name = 9;
-	string country_code = 19;
-	string continent_code = 10;
-	string continent_name = 18;
+	string ac_token = 5;
+	string rf_token = 6;
+	string ip = 7;
+	int32 location_id = 8;
 
-	//optional string coutry_code = 11;
-	float latitude = 12;
-	float longitude = 13;
-	string postal_code = 14;
-	string timezone = 16;
+	string city_name = 9;
+	string country_name = 10;
+	string country_code = 11;
+	string continent_code = 12;
+	string continent_name = 13;
 
-	string isp = 17;
+	//optional string coutry_code = 14;
+	float latitude = 15;
+	float longitude = 16;
+	string postal_code = 17;
+	string timezone = 18;
+
+	string isp = 19;
 	string user_agent = 20;
 
-	int64 created = 21;
-	int32 day = 22;
+	int64 created = 22;
+	int32 day = 23;
 	enum Action {
 		login = 0;
 		refresh_token = 1;
 		logout = 2;
 	}
-	string action = 23;
+	string action = 24;
 }
 
 message SessionCookie {
