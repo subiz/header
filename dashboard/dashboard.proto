@@ -50,9 +50,11 @@ message AccessLog {
 	int64 created = 22;
 	int32 day = 23;
 	enum Action {
-		login = 0;
-		refresh_token = 1;
+		login_success = 0;
+		refresh_token_sucess = 1;
 		logout = 2;
+		login_failed = 3;
+		refresh_token_failed = 4;
 	}
 	string action = 24;
 }
