@@ -510,6 +510,18 @@
           "delete_attribute": {
             "type": "boolean",
             "format": "boolean"
+          },
+          "read_all_accounts": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "read_all_invoices": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "read_all_agents": {
+            "type": "boolean",
+            "format": "boolean"
           }
         }
       },

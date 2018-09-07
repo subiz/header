@@ -3,6 +3,44 @@ syntax = "proto3";
 package dashboard;
 
 import "git.subiz.net/header/common/common.proto";
+import "git.subiz.net/header/account/account.proto";
+
+message DashboardAgent {
+	account.Account account = 2;
+	account.Agent agent = 3;
+	int64 tour_guide_web_showed = 4;
+	string refresh_token = 5;
+	string access_token = 6;
+	string language_url = 7;
+}
+
+message AccessLog {
+	string account_id = 2;
+	string id = 3;
+
+	string access_token = 4;
+	string refresh_token = 5;
+
+	string ip = 6;
+	int32 location_id = 7;
+
+	string city_name = 8;
+	string country_name = 9;
+	string country_code = 19;
+	string continent_code = 10;
+	string continent_name = 18;
+
+	//optional string coutry_code = 11;
+	float latitude = 12;
+	float longitude = 13;
+	string postal_code = 14;
+	string timezone = 16;
+
+	string isp = 17;
+	string user_agent = 20;
+	int64 created = 21;
+	int32 month = 22;
+}
 
 message SessionCookie {
 	string refresh_token = 3;
