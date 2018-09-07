@@ -124,6 +124,11 @@ message Method {
 	bool create_attribute = 317;
 	bool update_attribute = 318;
 	bool delete_attribute = 319;
+
+	bool read_all_accounts = 1000;
+	bool read_all_invoices = 1001;
+	bool read_all_agents = 1002;
+
 }
 
 message UserAuth {
