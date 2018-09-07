@@ -18,9 +18,8 @@ message AccessLog {
 	string account_id = 2;
 	string id = 3;
 
-	string access_token = 4;
-	string refresh_token = 5;
-
+	string ac_token = 4;
+	string rf_token = 5;
 	string ip = 6;
 	int32 location_id = 7;
 
@@ -38,8 +37,15 @@ message AccessLog {
 
 	string isp = 17;
 	string user_agent = 20;
+
 	int64 created = 21;
-	int32 month = 22;
+	int32 day = 22;
+	enum Action {
+		login = 0;
+		refresh_token = 1;
+		logout = 2;
+	}
+	string action = 23;
 }
 
 message SessionCookie {
