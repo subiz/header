@@ -14,6 +14,11 @@ message DashboardAgent {
 	string language_url = 7;
 }
 
+message DashboardAccount {
+	string account_id = 2;
+	account.Account account = 3;
+}
+
 message AccessLog {
 	string account_id = 2;
 	string id = 3;
