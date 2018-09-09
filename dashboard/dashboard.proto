@@ -22,7 +22,6 @@ message DashboardAccount {
 }
 
 message AccessLog {
-
 	string id = 2;
 	string account_id = 3;
 	string agent_id = 4;
@@ -66,6 +65,8 @@ message SessionCookie {
 	string type = 6;
 	string email = 7;
 	bool remember_me = 8;
+	string account_id = 9;
+	string agent_id = 10;
 }
 
 // global setting. eg: dashboard_4/4234098234
