@@ -50,7 +50,7 @@ message AccessLog {
 	int32 day = 23;
 	enum Action {
 		login_success = 0;
-		refresh_token_sucess = 1;
+		refresh_token_success = 1;
 		logout = 2;
 		login_failed = 3;
 		refresh_token_failed = 4;
