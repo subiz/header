@@ -577,6 +577,53 @@
         }
       }
     },
+    "paymentComment": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "object_type": {
+          "type": "string"
+        },
+        "author_id": {
+          "type": "string"
+        },
+        "author_email": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentComments": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentComment"
+          }
+        }
+      }
+    },
     "paymentContact": {
       "type": "object",
       "properties": {
@@ -808,6 +855,12 @@
           "items": {
             "$ref": "#/definitions/paymentInvoice"
           }
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "anchor": {
+          "type": "string"
         }
       }
     },

@@ -11,6 +11,29 @@ enum Currency {
 	brl = 2;
 }
 
+message ListCommentsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string object_type = 3;
+}
+
+message Comments {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	repeated Comment comments = 3;
+}
+
+message Comment {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 3;
+	optional string object_type = 4;
+	optional string author_id = 5;
+	optional string author_email = 6;
+	optional string content = 7;
+	optional int64 created = 8;
+}
+
 message Stripe {
 	optional string card_last4 = 2;
 	optional string customer_id = 3;
@@ -125,6 +148,15 @@ message Note {
 
 message Invoices {
 	repeated Invoice invoices = 2;
+	optional string account_id = 3;
+	optional string anchor = 4;
+}
+
+message ListInvoiceByStateRequest {
+	optional common.Context ctx = 1;
+	optional string state = 2;
+	optional int32 limit = 3;
+	optional string anchor = 4;
 }
 
 message Invoice {
@@ -406,7 +438,11 @@ service PaymentMgr {
 	rpc Pay(PayRequest) returns (Bill);
 	rpc ListInvoices(common.Id) returns (Invoices);
 	rpc CreateInvoice(Invoice) returns (Invoice);
+	rpc UpdateInvoice(Invoice) returns (Invoice);
+	rpc ListInvoicesByState(ListInvoiceByStateRequest) returns (Invoices);
 
+	rpc ListComments(ListCommentsRequest) returns (Comments);
+	rpc AddComment(Comment) returns (Comment);
 	rpc ListPlans(common.Empty) returns (Plans);
 	rpc ExportInvoice(common.Id) returns (String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
