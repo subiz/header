@@ -126,8 +126,12 @@ message Method {
 	bool delete_attribute = 319;
 
 	bool read_all_accounts = 1000;
-	bool read_all_invoices = 1001;
 	bool read_all_agents = 1002;
+	bool read_payment_comments = 1003;
+	bool add_payment_comments = 1004;
+	bool read_all_bills = 1005;
+	bool write_all_invoices = 1006;
+	bool read_all_invoices = 1007;
 
 }
 

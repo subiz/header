@@ -515,11 +515,27 @@
             "type": "boolean",
             "format": "boolean"
           },
-          "read_all_invoices": {
+          "read_all_agents": {
             "type": "boolean",
             "format": "boolean"
           },
-          "read_all_agents": {
+          "read_payment_comments": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "add_payment_comments": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "read_all_bills": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "write_all_invoices": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "read_all_invoices": {
             "type": "boolean",
             "format": "boolean"
           }
@@ -2572,7 +2588,13 @@
           "id": {
             "type": "string"
           },
-          "object_type": {
+          "topic_id": {
+            "type": "string"
+          },
+          "topic_type": {
+            "type": "string"
+          },
+          "author_account_id": {
             "type": "string"
           },
           "author_id": {
