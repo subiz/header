@@ -14,7 +14,7 @@ enum Currency {
 message ListCommentsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional string object_type = 3;
+	optional string topic_id = 3;
 }
 
 message Comments {
