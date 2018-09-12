@@ -758,20 +758,6 @@
         }
       }
     },
-    "userPresences": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "presences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userPresence"
-          }
-        }
-      }
-    },
     "userSCondition": {
       "type": "object",
       "properties": {

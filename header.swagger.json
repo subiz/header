@@ -3379,17 +3379,6 @@
           }
         }
       },
-      "userPresences": {
-        "type": "object",
-        "properties": {
-          "presences": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userPresence"
-            }
-          }
-        }
-      },
       "userSCondition": {
         "type": "object",
         "properties": {
