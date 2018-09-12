@@ -154,11 +154,12 @@ message Invoices {
 	optional string anchor = 4;
 }
 
-message ListInvoiceByStateRequest {
+message ListInvoiceRequest {
 	optional common.Context ctx = 1;
 	optional string state = 2;
 	optional int32 limit = 3;
 	optional string anchor = 4;
+	optional string account_id = 5;
 }
 
 message Invoice {
@@ -428,6 +429,14 @@ service SubizInternalPaymentMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
+message SearchInvoiceRequest {
+	optional common.Context ctx = 1;
+	optional string query = 4;
+	optional string anchor = 5;
+	optional string state = 6;
+	optional int32 limit = 7;
+}
+
 service PaymentMgr {
 	rpc Purchase(Subscription) returns (Invoice);
 	rpc UpdateSubscription(Subscription) returns (Subscription);
@@ -441,7 +450,7 @@ service PaymentMgr {
 	rpc ListInvoices(common.Id) returns (Invoices);
 	rpc CreateInvoice(Invoice) returns (Invoice);
 	rpc UpdateInvoice(Invoice) returns (Invoice);
-	rpc ListInvoicesByState(ListInvoiceByStateRequest) returns (Invoices);
+	rpc FilterInvoices(ListInvoiceRequest) returns (Invoices);
 	rpc DraftInvoice(Invoice) returns (Invoice);
 
 	rpc ListComments(ListCommentsRequest) returns (Comments);

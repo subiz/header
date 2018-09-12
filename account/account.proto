@@ -329,4 +329,18 @@ service AccountMgr {
 	rpc RemoveAgentFromGroup(GroupMember) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc SearchAgents(SearchAgentsRequest) returns (Agents);
+	rpc SearchSub(SearchSubRequest) returns (AccSubs);
+}
+
+message AccSubs {
+	repeated Account accounts = 2;
+	repeated payment.Subscription subscriptions = 3;
+	optional string anchor = 4;
+}
+
+message SearchSubRequest {
+	optional common.Context ctx = 1;
+	optional string query = 4;
+	optional string anchor = 5;
+	optional int32 limit = 6;
 }

@@ -16,6 +16,26 @@
   ],
   "paths": {},
   "definitions": {
+    "accountAccSubs": {
+      "type": "object",
+      "properties": {
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAccount"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentSubscription"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
     "accountAccount": {
       "type": "object",
       "properties": {
@@ -744,6 +764,119 @@
         }
       }
     },
+    "paymentAddon": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "$ref": "#/definitions/paymentCurrency"
+        },
+        "charge_type": {
+          "type": "string"
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "period_unit": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentBillingInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "vat": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentContact": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "paymentCurrency": {
+      "type": "string",
+      "enum": [
+        "usd",
+        "vnd",
+        "brl"
+      ],
+      "default": "usd"
+    },
+    "paymentCustomer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentContact"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "billing_info": {
+          "$ref": "#/definitions/paymentBillingInfo"
+        }
+      }
+    },
     "paymentLimit": {
       "type": "object",
       "properties": {
@@ -785,6 +918,100 @@
         "max_rules": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "paymentNote": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "message": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentSubscription": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "promotion_code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
+        },
+        "auto_renew": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "next_billing_cycle_month": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentAddon"
+          }
+        },
+        "credit": {
+          "type": "number",
+          "format": "float"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentNote"
+          }
+        },
+        "referral_by": {
+          "type": "string"
+        },
+        "customer": {
+          "$ref": "#/definitions/paymentCustomer"
+        },
+        "primary_payment_method": {
+          "type": "string"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
+        },
+        "v3_state": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }
