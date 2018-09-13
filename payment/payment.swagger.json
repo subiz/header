@@ -930,6 +930,54 @@
         }
       }
     },
+    "paymentLog": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "user": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentLogs": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLog"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
     "paymentNote": {
       "type": "object",
       "properties": {

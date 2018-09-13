@@ -326,6 +326,19 @@ message ExchangeRate {
 	optional int64 exchange_time = 5; // nanosec
 }
 
+message ListLogsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int32 limit = 3;
+	optional string anchor = 4;
+}
+
+message Logs {
+	optional common.Context ctx = 1;
+	repeated Log logs = 5;
+	optional string anchor = 4;
+}
+
 message Log {
 	optional common.Context ctx = 1;
 	enum Action {
@@ -460,6 +473,7 @@ service PaymentMgr {
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc TransferMoney(PayRequest) returns (Bill);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+	rpc ListLogs(ListLogsRequest) returns (Logs);
 }
 
 message String {

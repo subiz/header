@@ -2968,6 +2968,48 @@
           }
         }
       },
+      "paymentLog": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "month": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "paymentLogs": {
+        "type": "object",
+        "properties": {
+          "logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/paymentLog"
+            }
+          },
+          "anchor": {
+            "type": "string"
+          }
+        }
+      },
       "paymentPaymentMethod": {
         "type": "object",
         "properties": {
