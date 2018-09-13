@@ -16,19 +16,36 @@
   ],
   "paths": {},
   "definitions": {
+    "accountAccSub": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/accountAccount"
+        },
+        "subscription": {
+          "$ref": "#/definitions/paymentSubscription"
+        },
+        "agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          }
+        },
+        "stringify": {
+          "type": "string"
+        }
+      }
+    },
     "accountAccSubs": {
       "type": "object",
       "properties": {
-        "accounts": {
+        "accsub": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/accountAccount"
-          }
-        },
-        "subscriptions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/paymentSubscription"
+            "$ref": "#/definitions/accountAccSub"
           }
         },
         "anchor": {

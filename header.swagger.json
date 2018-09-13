@@ -1,19 +1,36 @@
 {
   "components": {
     "schemas": {
+      "accountAccSub": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/paymentSubscription"
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Agent"
+            }
+          },
+          "stringify": {
+            "type": "string"
+          }
+        }
+      },
       "accountAccSubs": {
         "type": "object",
         "properties": {
-          "accounts": {
+          "accsub": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Account"
-            }
-          },
-          "subscriptions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/paymentSubscription"
+              "$ref": "#/components/schemas/accountAccSub"
             }
           },
           "anchor": {
