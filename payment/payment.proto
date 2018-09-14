@@ -464,7 +464,7 @@ service PaymentMgr {
 	rpc CreateInvoice(Invoice) returns (Invoice);
 	rpc UpdateInvoice(Invoice) returns (Invoice);
 	rpc FilterInvoices(ListInvoiceRequest) returns (Invoices);
-	rpc DraftInvoice(Invoice) returns (Invoice);
+	rpc DraftInvoice(Subscription) returns (Invoice);
 
 	rpc ListComments(ListCommentsRequest) returns (Comments);
 	rpc AddComment(Comment) returns (Comment);
