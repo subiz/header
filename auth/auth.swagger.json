@@ -19,6 +19,17 @@
     "authEmpty": {
       "type": "object"
     },
+    "authListUsersResponse": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "authMethod": {
       "type": "object",
       "properties": {

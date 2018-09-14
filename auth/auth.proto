@@ -277,9 +277,21 @@ message Pong {
 
 message Empty {}
 
+message ListUsersRequest {
+	string account_id = 1;
+	Method method = 2;
+	string start_id = 3;
+	int32 limit = 4;
+}
+
+message ListUsersResponse {
+	repeated string ids = 1;
+}
+
 service Perm {
 	rpc Update(UpdatePermRequest) returns (Empty);
 	rpc UpdateState(UpdateStateRequest) returns (Empty);
 	rpc Read(ReadPermRequest) returns (Method);
+	rpc ListUsersByMethod(ListUsersRequest) returns (ListUsersResponse);
 	rpc Ping(PingRequest) returns (Pong);
 }

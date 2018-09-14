@@ -1000,6 +1000,17 @@
       "authEmpty": {
         "type": "object"
       },
+      "authListUsersResponse": {
+        "type": "object",
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "authPong": {
         "type": "object",
         "properties": {
