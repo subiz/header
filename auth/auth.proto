@@ -249,3 +249,37 @@ enum Event {
 	AUTH = 0;
 	AuthExpireCookie = 4; //CookieExpire
 }
+
+message UpdatePermRequest {
+	string account_id = 1;
+	string user_id = 2;
+	Method method = 3;
+}
+
+message UpdateStateRequest {
+	string account_id = 1;
+	string user_id = 2;
+	bool is_active = 3;
+}
+
+message ReadPermRequest {
+	string account_id = 1;
+	string user_id = 2;
+}
+
+message PingRequest {
+	string message = 2;
+}
+
+message Pong {
+	string message = 3;
+}
+
+message Empty {}
+
+service Perm {
+	rpc Update(UpdatePermRequest) returns (Empty);
+	rpc UpdateState(UpdateStateRequest) returns (Empty);
+	rpc Read(ReadPermRequest) returns (Method);
+	rpc Ping(PingRequest) returns (Pong);
+}

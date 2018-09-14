@@ -997,6 +997,17 @@
           }
         }
       },
+      "authEmpty": {
+        "type": "object"
+      },
+      "authPong": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "contentContent": {
         "type": "object",
         "properties": {
