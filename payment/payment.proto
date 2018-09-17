@@ -421,6 +421,7 @@ enum Event {
 	PaymentJobTransferMoney = 25;
 	PaymentJobUpsertAgent = 26;
 	PaymentJobCreateInvoice = 27;
+	PaymentJobUpdateInvoice = 41;
 
 	PaymentDowngradeCron = 28;
 	PaymentGenerateInvoiceCron = 29;
