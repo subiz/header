@@ -14,6 +14,8 @@ message DashboardAgent {
 	string refresh_token = 7;
 	string access_token = 8;
 	string language_url = 9;
+	int64 tour_guide_getting_started_web_showed = 10;
+	int64 tour_guide_channel_installing_web_showed = 11;
 }
 
 message DashboardAccount {
