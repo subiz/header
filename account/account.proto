@@ -353,4 +353,8 @@ message SearchSubRequest {
 	optional string query = 4;
 	optional string anchor = 5;
 	optional int32 limit = 6;
+	optional string plan = 7;
+	optional uint32 billing_cycle_month = 8;
+	optional int64 from_due_date = 9;
+	optional int64 to_due_date = 10;
 }
