@@ -354,6 +354,6 @@ message SearchSubRequest {
 	optional string anchor = 5;
 	optional int32 limit = 6;
 	optional string plan = 7;
-	optional uint32 billing_cycle_month = 8;
+	// optional uint32 billing_cycle_month = 8;
 	optional string order_by = 10;
 }
