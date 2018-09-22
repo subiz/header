@@ -160,6 +160,7 @@ message ListInvoiceRequest {
 	optional int32 limit = 3;
 	optional string anchor = 4;
 	optional string account_id = 5;
+	optional string id = 7;
 	optional string order_by = 6;
 }
 
