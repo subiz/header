@@ -153,6 +153,7 @@ enum T {
 	attribute_key_not_found = 287;
 	attribute_max_allowed = 288;
 	invalid_attribute = 289;
+	invalid_user = 290;
 }
 
 enum L {
