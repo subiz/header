@@ -428,7 +428,7 @@ enum Event {
 	PaymentDowngradeCron = 28;
 	PaymentGenerateInvoiceCron = 29;
 	PaymentPayCron = 30;
-
+	PaymentRenewCron = 31;
 	PaymentWorkerJob = 40;
 }
 
