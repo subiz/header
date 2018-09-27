@@ -1,8 +1,8 @@
 #!/bin/bash -e
-[ ! -f bin ] && echo "should not contains any file name: bin, lib, protoc" || exit
-[ ! -f bin ] && echo "should not contains any file name: bin, lib, protoc" || exit
-[ ! -f lib ] && echo "should not contains any file name: bin, lib, protoc" || exit
-[ ! -d lib ] && echo "should not contains any file name: bin, lib, protoc" || exit
+
+if [ -f bin ] || [ -d bin ] || [ -f lib ] || [ -d lib ]; then
+	echo "should not contains any file name: bin, lib, protoc" && exit
+fi
 
 # setup for the first time
 #go get github.com/favadi/protoc-go-inject-tag
@@ -10,21 +10,21 @@
 tar xvf protobuf/bin/protoc2.tar.gz
 
 if [ ! -f $GOPATH/bin/protoc-gen-go ]; then
-		echo -e "\033[0;34minstalling protoc-gen-go..."
-		go get -u github.com/golang/protobuf/protoc-gen-go
-		echo "done"
+	echo -e "\033[0;34minstalling protoc-gen-go..."
+	go get -u github.com/golang/protobuf/protoc-gen-go
+	echo "done"
 fi
 
 if [ ! -f $GOPATH/bin/protoc-gen-swagger ]; then
-		echo -e "\033[0;34minstalling proto-gen-swagger..."
-		go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-		echo "done"
+	echo -e "\033[0;34minstalling proto-gen-swagger..."
+	go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+	echo "done"
 fi
 
 [ "$1" = 'all' ] && if [ ! -f ./node_modules/protobufjs/bin/pbjs ]; then
-		echo -e "\033[0;34minstalling protobufjs..."
-		npm i
-		echo "done"
+	echo -e "\033[0;34minstalling protobufjs..."
+	npm i
+	echo "done"
 fi
 
 TOTAL=1
@@ -36,25 +36,27 @@ mkdir -p scala
 ALLPROTO=""
 
 for i in `ls -R`; do
-		if [[ $i == *":"* ]]; then
-				LASTDIRECTORY=${i::-1}
-		else
-				if [[ $i == "vendor" ]] || [[ $i == "proto" ]] || [[ $LASTDIRECTORY == ./node_modules* ]] || [[ $LASTDIRECTORY == ./vendor* ]] || [[ $LASTDIRECTORY == ./proto* ]]; then
-						continue
-				fi
-				if [[ $i == *".proto" ]]; then
-						echo -e "\033[0;90m["$TOTAL"] compiling" $LASTDIRECTORY /$i "\033[0;31m" &
-						./protoc --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LASTDIRECTORY/$i &
-						./protoc -I./protobuf/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
-						#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LASTDIRECTORY/$i
-						# ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LASTDIRECTORY/$i
-						ALLPROTO="$ALLPROTO $LASTDIRECTORY/$i"
-						let "TOTAL += 1"
-						# else
-						# echo -e "\033[0;37mignore" $i "\033[0;30m"
-					  [ "$1" = 'all' ] && ./bin/scalapbc -v351 -I $GOPATH/src --scala_out=flat_package:./scala $GOPATH/src/git.subiz.net/header/$LASTDIRECTORY/$i > /dev/null
-				fi;
-		fi;
+	if [[ $i == *":"* ]]; then
+		LAST_DIR=${i::-1}
+		continue
+	fi
+
+	if [[ $i == "vendor" ]] || [[ $i == "proto" ]] || [[ $LAST_DIR == ./node_modules* ]] || [[ $LAST_DIR == ./vendor* ]] || [[ $LAST_DIR == ./proto* ]]; then
+		continue
+	fi
+
+	if [[ $i == *".proto" ]]; then
+		echo -e "\033[0;90m["$TOTAL"] compiling" $LAST_DIR /$i "\033[0;31m" &
+		./protoc --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LAST_DIR/$i &
+		./protoc -I./protobuf/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
+		#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
+		# ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
+		ALLPROTO="$ALLPROTO $LAST_DIR/$i"
+		let "TOTAL += 1"
+		# else
+		# echo -e "\033[0;37mignore" $i "\033[0;30m"
+		[ "$1" = 'all' ] && ./bin/scalapbc -v351 -I $GOPATH/src --scala_out=flat_package:./scala $GOPATH/src/git.subiz.net/header/$LAST_DIR/$i > /dev/null
+	fi
 done;
 
 wait
@@ -68,8 +70,8 @@ wait
 
 #echo "\033[0;34minjecting golang custom tag\033[0;31m"
 #ls */*.pb.go | xargs -n1 -IX bash -c 'protoc-go-inject-tag -input=X'
-rm protoc
-rm bin -R
-rm lib -R
+rm ./protoc
+rm -r ./bin/
+rm -r ./lib/
 
 echo -e "\033[0;32mDone. (total:" $TOTAL "files)\033[0;30m"
