@@ -31,6 +31,9 @@
         "method": {
           "$ref": "#/definitions/authMethod"
         },
+        "perm": {
+          "$ref": "#/definitions/authPerm"
+        },
         "client_id": {
           "type": "string"
         },
@@ -399,6 +402,111 @@
         "grant_all_perm": {
           "type": "boolean",
           "format": "boolean"
+        }
+      }
+    },
+    "authPerm": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_password": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "basic_scope_permission": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "all_scope_permission": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_group": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "segmentation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "client": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rule": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "integration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "canned_response": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_ip": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_domain": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "widget": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subscription": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "invoice": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_method": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bill": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_log": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_comment": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "automation": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

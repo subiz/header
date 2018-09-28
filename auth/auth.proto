@@ -7,6 +7,7 @@ message Credential {
 	string issuer = 3;
 	Type type = 4;
 	Method method = 5;
+	Perm perm = 6;
 	string client_id = 7;
 	Type client_type = 8;
 	string client_account_id = 10;
@@ -28,6 +29,34 @@ message Scope {
 	string description = 5;
 	Method method = 6;
 	repeated string event = 7;
+}
+
+message Perm {
+	int32 account = 2;
+	int32 agent = 3;
+	int32 agent_password = 4;
+	int32 basic_scope_permission = 5;
+	int32 all_scope_permission = 6;
+	int32 agent_group = 7;
+	int32 segmentation = 10;
+	int32 client = 12;
+	int32 rule = 13;
+	int32 conversation = 14;
+	int32 integration = 15;
+	int32 canned_response = 16;
+	int32 tag = 17;
+	int32 whitelist_ip = 20;
+	int32 whitelist_user = 21;
+	int32 whitelist_domain = 22;
+	int32 widget = 23;
+	int32 subscription = 24;
+	int32 invoice = 25;
+	int32 payment_method = 26;
+	int32 bill = 27;
+	int32 payment_log = 28;
+	int32 payment_comment = 29;
+	int32 user = 30;
+	int32 automation = 31;
 }
 
 message Method {
@@ -261,6 +290,7 @@ message UpdatePermRequest {
 	string account_id = 1;
 	string user_id = 2;
 	Method method = 3;
+	Perm perm = 4;
 }
 
 message UpdateStateRequest {
@@ -289,13 +319,14 @@ message ListUsersRequest {
 	Method method = 2;
 	string start_id = 3;
 	int32 limit = 4;
+	Perm perm = 5;
 }
 
 message ListUsersResponse {
 	repeated string ids = 1;
 }
 
-service Perm {
+service PermService {
 	rpc Update(UpdatePermRequest) returns (Empty);
 	rpc UpdateState(UpdateStateRequest) returns (Empty);
 	rpc Read(ReadPermRequest) returns (Method);
