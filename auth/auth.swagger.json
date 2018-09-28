@@ -275,7 +275,7 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "add_credit": {
+        "pay_invoice": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -283,11 +283,11 @@
           "type": "boolean",
           "format": "boolean"
         },
-        "read_invoices": {
+        "read_invoice": {
           "type": "boolean",
           "format": "boolean"
         },
-        "read_subscriptions": {
+        "read_subscription": {
           "type": "boolean",
           "format": "boolean"
         },
@@ -333,6 +333,38 @@
           "format": "boolean"
         },
         "read_all_invoices": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "purchase_all_services": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_subscriptions": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "add_credit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_all_subscriptions": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pay_all_invoices": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "transfer_money": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_logs": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "grant_all_perm": {
           "type": "boolean",
           "format": "boolean"
         }

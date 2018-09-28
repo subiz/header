@@ -114,10 +114,10 @@ message Method {
 
 	bool purchase_service = 310;
 	bool update_payment_method = 311;
-	bool add_credit = 312;
+	bool pay_invoice = 312;
 	bool update_billing_cycle = 313;
-	bool read_invoices = 314;
-	bool read_subscriptions = 315;
+	bool read_invoice = 314;
+	bool read_subscription = 315;
 
 	// user attribute
 	bool read_attribute = 316;
@@ -132,7 +132,14 @@ message Method {
 	bool read_all_bills = 1005;
 	bool write_all_invoices = 1006;
 	bool read_all_invoices = 1007;
-
+	bool purchase_all_services = 1008;
+	bool read_all_subscriptions = 1009;
+	bool add_credit = 1010;
+	bool update_all_subscriptions = 1011;
+	bool pay_all_invoices = 1012;
+	bool transfer_money = 1013;
+	bool read_all_logs = 1014;
+	bool grant_all_perm = 4000; // SUPER! DONOT GRANT
 }
 
 message UserAuth {
