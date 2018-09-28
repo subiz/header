@@ -456,7 +456,7 @@ message SearchInvoiceRequest {
 service PaymentMgr {
 	rpc Purchase(Subscription) returns (Invoice);
 	rpc UpdateSubscription(Subscription) returns (Subscription);
-	rpc GetSubscription(common.Empty) returns (Subscription);
+	rpc GetSubscription(common.Id) returns (Subscription);
 	rpc GetPromotionCode(String) returns (PromotionCode);
 	rpc AddPaymentMethod(PaymentMethod) returns (PaymentMethod);
 	rpc UpdatePaymentMethod(PaymentMethod) returns (PaymentMethod);
