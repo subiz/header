@@ -461,7 +461,7 @@ service PaymentMgr {
 	rpc AddPaymentMethod(PaymentMethod) returns (PaymentMethod);
 	rpc UpdatePaymentMethod(PaymentMethod) returns (PaymentMethod);
 	rpc DeletePaymentMethod(common.Id) returns (common.Empty);
-	rpc ListPaymentMethods(common.Empty) returns (PaymentMethods);
+	rpc ListPaymentMethods(common.Id) returns (PaymentMethods);
 	rpc Pay(PayRequest) returns (Bill);
 	rpc ListInvoices(common.Id) returns (Invoices);
 	rpc CreateInvoice(Invoice) returns (Invoice);
