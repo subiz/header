@@ -181,7 +181,7 @@
           "$ref": "#/definitions/authMethod"
         },
         "perm": {
-          "$ref": "#/definitions/authPerm"
+          "$ref": "#/definitions/authPermission"
         },
         "client_id": {
           "type": "string"
@@ -554,7 +554,7 @@
         }
       }
     },
-    "authPerm": {
+    "authPermission": {
       "type": "object",
       "properties": {
         "account": {

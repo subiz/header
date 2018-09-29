@@ -610,7 +610,7 @@
           }
         }
       },
-      "authPerm": {
+      "authPermission": {
         "type": "object",
         "properties": {
           "account": {
