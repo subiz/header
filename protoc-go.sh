@@ -43,7 +43,7 @@ ALLPROTO=""
 
 for i in `ls -R`; do
 	if [[ $i == *":"* ]]; then
-		LAST_DIR=${i::-1}
+		LAST_DIR=${i%?} # trim last char
 		continue
 	fi
 
