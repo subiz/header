@@ -116,6 +116,7 @@ enum E {
 	invalid_invoice_id = 1032;
 	invalid_payment_log_id = 1034;
 	invalid_bill_id = 1035;
+	unable_to_load_permission = 1036;
 
 	kafka_rpc_timeout = 2150;
 
