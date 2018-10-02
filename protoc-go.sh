@@ -1,13 +1,19 @@
 #!/bin/bash -e
 
-if [ -f bin ] || [ -d bin ] || [ -f lib ] || [ -d lib ]; then
-	echo "should not contains any file name: bin, lib, protoc" && exit
+PROTOC_FILE="protoc-3.6.1-linux-x86_64.zip"
+PROTOC_PATH="protobuf/protoc"
+PROTOC="protobuf/protoc/bin/protoc"
+
+OS=$(uname -s)
+if [ $OS = "Darwin" ]; then
+	PROTOC_FILE="protoc-3.6.1-osx-x86_64.zip"
 fi
 
 # setup for the first time
 #go get github.com/favadi/protoc-go-inject-tag
 #go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-tar xvf protobuf/bin/protoc2.tar.gz
+rm -fr $PROTOC_PATH && mkdir -p $PROTOC_PATH
+unzip -q protobuf/$PROTOC_FILE -d $PROTOC_PATH
 
 if [ ! -f $GOPATH/bin/protoc-gen-go ]; then
 	echo -e "\033[0;34minstalling protoc-gen-go..."
@@ -29,7 +35,7 @@ fi
 
 TOTAL=1
 echo -e "\033[0;34mcompiling proto files"
-./protoc --version
+$PROTOC --version
 
 mkdir -p scala
 [ "$1" = 'all' ] && rm scala/* -Rf
@@ -47,8 +53,8 @@ for i in `ls -R`; do
 
 	if [[ $i == *".proto" ]]; then
 		echo -e "\033[0;90m["$TOTAL"] compiling" $LAST_DIR /$i "\033[0;31m" &
-		./protoc --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LAST_DIR/$i &
-		./protoc -I./protobuf/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
+		$PROTOC --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LAST_DIR/$i &
+		$PROTOC -I$PROTOC_PATH/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
 		#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
 		# ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
 		ALLPROTO="$ALLPROTO $LAST_DIR/$i"
@@ -65,13 +71,6 @@ wait
 [ "$2" = 'all' ] && npx pbjs --es6 --keep-case --no-convert --no-create --no-encode --no-decode --no-verify --no-delimited --no-beautify -t static-module -w commonjs -o subiz.js $ALLPROTO
 [ "$1" = 'all' ] && npx pbts --no-comments -o subiz.d.ts subiz.js
 
-# echo -e "\033[0;34mremoving all omitempty\033[0;31m"
-# ls */*.pb.go | xargs -n1 -IX bash -c 'sed s/,omitempty// X > X.tmp && mv X{.tmp,}'
-
-#echo "\033[0;34minjecting golang custom tag\033[0;31m"
-#ls */*.pb.go | xargs -n1 -IX bash -c 'protoc-go-inject-tag -input=X'
-rm ./protoc
-rm -r ./bin/
-rm -r ./lib/
+rm -fr $PROTOC_PATH
 
 echo -e "\033[0;32mDone. (total:" $TOTAL "files)\033[0;30m"
