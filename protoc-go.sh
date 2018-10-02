@@ -1,12 +1,14 @@
 #!/bin/bash -e
 
-PROTOC_FILE="protoc-3.6.1-linux-x86_64.zip"
+#PROTOC_FILE="protoc-3.6.1-linux-x86_64.zip"
+PROTOC_FILE="protoc-3.5.1-linux-x86_64.zip"
 PROTOC_PATH="protobuf/protoc"
 PROTOC="protobuf/protoc/bin/protoc"
 
 OS=$(uname -s)
 if [ $OS = "Darwin" ]; then
-	PROTOC_FILE="protoc-3.6.1-osx-x86_64.zip"
+	#PROTOC_FILE="protoc-3.6.1-osx-x86_64.zip"
+	PROTOC_FILE="protoc-3.5.1-osx-x86_64.zip"
 fi
 
 # setup for the first time
