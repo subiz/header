@@ -193,6 +193,9 @@
         "v3_state": {
           "type": "integer",
           "format": "int32"
+        },
+        "perm": {
+          "$ref": "#/definitions/authPermission"
         }
       }
     },

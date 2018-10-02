@@ -357,6 +357,7 @@ service Perm {
 	rpc Update(UpdatePermRequest) returns (Empty);
 	rpc UpdateState(UpdateStateRequest) returns (Empty);
 	rpc Read(ReadPermRequest) returns (Method);
+	rpc ReadPerm(ReadPermRequest) returns (Permission);
 	rpc ListUsersByMethod(ListUsersRequest) returns (ListUsersResponse);
 	rpc Ping(PingRequest) returns (Pong);
 }

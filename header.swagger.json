@@ -209,6 +209,9 @@
           "v3_state": {
             "type": "integer",
             "format": "int32"
+          },
+          "perm": {
+            "$ref": "#/components/schemas/authPermission"
           }
         }
       },
@@ -256,6 +259,23 @@
             "items": {
               "$ref": "#/components/schemas/AgentGroup"
             }
+          }
+        }
+      },
+      "AgentPerm": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "agent_id": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/authMethod"
+          },
+          "perm": {
+            "$ref": "#/components/schemas/authPermission"
           }
         }
       },
@@ -2326,20 +2346,6 @@
           "modified_week": {
             "type": "integer",
             "format": "int32"
-          }
-        }
-      },
-      "AgentPerm": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "agent_id": {
-            "type": "string"
-          },
-          "method": {
-            "$ref": "#/components/schemas/authMethod"
           }
         }
       },
