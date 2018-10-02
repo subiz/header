@@ -60,11 +60,10 @@ message RequirePerm {
 }
 
 message Permission {
-	int32 account = 2;
-	int32 agent = 3;
+	int32 account = 2;  //    ogu
+	int32 agent = 3;    // 0x0777
 	int32 agent_password = 4;
-	int32 basic_scope_permission = 5;
-	int32 all_scope_permission = 6;
+	int32 permission = 6;
 	int32 agent_group = 7;
 	int32 segmentation = 10;
 	int32 client = 12;

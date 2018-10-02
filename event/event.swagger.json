@@ -673,11 +673,7 @@
           "type": "integer",
           "format": "int32"
         },
-        "basic_scope_permission": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "all_scope_permission": {
+        "permission": {
           "type": "integer",
           "format": "int32"
         },
