@@ -109,6 +109,10 @@ enum E {
 	owner_state_cannot_be_changed = 35;
 	pending_agent_state_cannot_be_changed = 36;
 	deleted_agent_state_cannot_be_changed = 37;
+	invalid_form_web_type = 38;
+	invalid_form_mobile_type = 39;
+	invalid_form_email_type = 40;
+
 	kv_key_not_found = 1500;
 
 	subscription_not_found = 1012;
