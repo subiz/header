@@ -57,6 +57,7 @@ message RequirePerm {
 	string payment_comment = 29;
 	string user = 30;
 	string automation = 31;
+	string agent_notification = 32;
 }
 
 message Permission {

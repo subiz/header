@@ -21,7 +21,7 @@ message Setting {
 }
 
 service Noti5Service {
-	rpc ReadNotificationSetting(common.Empty) returns (Setting);
+	rpc ReadNotificationSetting(common.Id) returns (Setting);
 	rpc UpdateNotificationSetting(Setting) returns (Setting);
 }
 

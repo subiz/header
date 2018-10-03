@@ -262,23 +262,6 @@
           }
         }
       },
-      "AgentPerm": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "agent_id": {
-            "type": "string"
-          },
-          "method": {
-            "$ref": "#/components/schemas/authMethod"
-          },
-          "perm": {
-            "$ref": "#/components/schemas/authPermission"
-          }
-        }
-      },
       "Agents": {
         "type": "object",
         "properties": {
@@ -2354,6 +2337,23 @@
           "modified_week": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "AgentPerm": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "agent_id": {
+            "type": "string"
+          },
+          "method": {
+            "$ref": "#/components/schemas/authMethod"
+          },
+          "perm": {
+            "$ref": "#/components/schemas/authPermission"
           }
         }
       },
