@@ -686,6 +686,14 @@
         "automation": {
           "type": "integer",
           "format": "int32"
+        },
+        "ping": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "attribute": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

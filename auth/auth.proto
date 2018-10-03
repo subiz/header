@@ -84,6 +84,8 @@ message Permission {
 	int32 payment_comment = 29;
 	int32 user = 30;
 	int32 automation = 31;
+	int32 ping = 32;
+	int32 attribute = 33;
 }
 
 message Method {
