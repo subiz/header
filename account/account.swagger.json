@@ -798,6 +798,10 @@
         "attribute": {
           "type": "integer",
           "format": "int32"
+        },
+        "agent_notification": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

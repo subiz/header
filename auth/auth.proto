@@ -31,35 +31,6 @@ message Scope {
 	repeated string event = 7;
 }
 
-message RequirePerm {
-	string account = 2;
-	string agent = 3;
-	string agent_password = 4;
-	string basic_scope_permission = 5;
-	string all_scope_permission = 6;
-	string agent_group = 7;
-	string segmentation = 10;
-	string client = 12;
-	string rule = 13;
-	string conversation = 14;
-	string integration = 15;
-	string canned_response = 16;
-	string tag = 17;
-	string whitelist_ip = 20;
-	string whitelist_user = 21;
-	string whitelist_domain = 22;
-	string widget = 23;
-	string subscription = 24;
-	string invoice = 25;
-	string payment_method = 26;
-	string bill = 27;
-	string payment_log = 28;
-	string payment_comment = 29;
-	string user = 30;
-	string automation = 31;
-	string agent_notification = 32;
-}
-
 message Permission {
 	int32 account = 2;  //    ogu
 	int32 agent = 3;    // 0x0777
@@ -87,6 +58,7 @@ message Permission {
 	int32 automation = 31;
 	int32 ping = 32;
 	int32 attribute = 33;
+	int32 agent_notification = 34;
 }
 
 message Method {
