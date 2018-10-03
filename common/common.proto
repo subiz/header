@@ -90,7 +90,25 @@ enum E {
 	invalid_credential = 17;
 	http_call_error = 18;
 
+	agent_group_not_found = 20;
+	token_type_is_invalid = 21;
+	jwt_token_is_invalid = 22;
+	agent_not_found = 23;
 
+	account_fullname_is_empty = 24;
+	password_is_empty = 25;
+	password_too_weak = 26;
+	email_is_empty = 27;
+	email_is_invalid = 28;
+	email_is_used = 29;
+	token_is_invalid = 30;
+	token_expired = 31;
+	agent_is_not_active = 32;
+	wrong_password = 33;
+	change_own_state = 34;
+	owner_state_cannot_be_changed = 35;
+	pending_agent_state_cannot_be_changed = 36;
+	deleted_agent_state_cannot_be_changed = 37;
 	kv_key_not_found = 1500;
 
 	subscription_not_found = 1012;
