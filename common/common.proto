@@ -112,7 +112,7 @@ enum E {
 	invalid_form_web_type = 38;
 	invalid_form_mobile_type = 39;
 	invalid_form_email_type = 40;
-
+	permission_not_enough = 41;
 	kv_key_not_found = 1500;
 
 	subscription_not_found = 1012;
