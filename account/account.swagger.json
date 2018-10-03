@@ -289,26 +289,6 @@
         }
       }
     },
-    "accountAgentPerm": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "agent_id": {
-          "type": "string"
-        },
-        "method": {
-          "$ref": "#/definitions/authMethod"
-        },
-        "perm": {
-          "$ref": "#/definitions/authPermission"
-        }
-      }
-    },
     "accountAgents": {
       "type": "object",
       "properties": {

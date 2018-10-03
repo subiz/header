@@ -313,8 +313,6 @@ service AccountMgr {
 	rpc CreateGroup(AgentGroup) returns (AgentGroup);
 	rpc UpdateGroup(AgentGroup) returns (AgentGroup);
 	rpc GetGroup(common.Id) returns (AgentGroup);
-	rpc GetAgentPermission(common.Id) returns (AgentPerm);
-	rpc UpdateAgentPermission(AgentPerm) returns (AgentPerm);
 	rpc RequestResetPassword(ResetPasswordRequest) returns (common.Empty);
 	rpc UpdatePassword(NewPassword) returns (Agent);
 	rpc UpdateAgent(Agent) returns (Agent);
@@ -334,7 +332,6 @@ service AccountMgr {
 	rpc AddAgentToGroup(GroupMember) returns (common.Empty);
 	rpc RemoveAgentFromGroup(GroupMember) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc SearchAgents(SearchAgentsRequest) returns (Agents);
 }
 
 message AccSub {
