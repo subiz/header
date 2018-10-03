@@ -3752,6 +3752,9 @@
       "userUserSearchResult": {
         "type": "object",
         "properties": {
+          "account_id": {
+            "type": "string"
+          },
           "total": {
             "type": "integer",
             "format": "int64"

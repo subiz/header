@@ -376,6 +376,7 @@ enum ConditionType {
 
 message UserSearchResult {
 	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional int64 total = 3;
 	repeated User users = 4;
 	optional string anchor = 5;
@@ -385,6 +386,7 @@ message UserSearchResult {
 
 message UserSearchRequest {
 	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional string segmentation_id = 3;
 	optional string query = 4;
 	optional string anchor = 5;
@@ -406,6 +408,7 @@ message IndexEvent {
 
 message ListTopicsRequest {
 	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string agent_id = 5;
 	optional string anchor = 4;
@@ -421,6 +424,7 @@ message ListTopicsResult {
 
 message ListNewsRequest {
 	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional string user_id = 3;
 	optional int64 start_time = 4;
 	optional string limit = 7;
@@ -430,6 +434,7 @@ message AddToMyList {
 	optional common.Context ctx = 1;
 	optional string agent_id = 2;
 	optional string user_id = 3;
+	optional string account_id = 5;
 }
 
 message Presence {
