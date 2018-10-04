@@ -3631,6 +3631,44 @@
           }
         }
       },
+      "userNote": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "creator_id": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "userNotes": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userNote"
+            }
+          }
+        }
+      },
       "userSCondition": {
         "type": "object",
         "properties": {

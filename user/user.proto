@@ -622,6 +622,9 @@ service UserMgr {
 
 	rpc AddAlias(Alias) returns (common.Empty);
 	rpc MoveUserActivity(MergeRequest) returns (common.Empty);
+
+	rpc ListNotes(ListNotesRequest) returns (Notes);
+	rpc AddNote(Note) returns (Note);
 }
 
 service AutomationMgr {
@@ -722,4 +725,26 @@ message PublishSubscribedReply {
 	optional string topic = 5;
 	optional string event_id = 6;
 	optional string by = 8;
+}
+
+message Note {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 3;
+	optional string user_id = 4;
+	optional string creator_id = 5;
+	optional string content = 6;
+	optional int64 created = 7;
+}
+
+message Notes {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	repeated Note notes = 3;
+}
+
+message ListNotesRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
 }
