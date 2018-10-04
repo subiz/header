@@ -1234,6 +1234,14 @@
           },
           "type": {
             "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updated": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -1255,30 +1263,6 @@
             "type": "string"
           },
           "value": {
-            "type": "string"
-          }
-        }
-      },
-      "contentListRequest": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "anchor": {
-            "type": "string"
-          },
-          "category": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "label": {
-            "type": "string"
-          },
-          "query": {
             "type": "string"
           }
         }

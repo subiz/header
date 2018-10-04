@@ -4,15 +4,23 @@ import "git.subiz.net/header/common/common.proto";
 
 package content;
 
-message AllType {
-	optional Content content = 2;
-	optional Contents contents = 3;
-	optional ListRequest lr = 5;
+service ServiceContentManager {
+	rpc Ping(common.PingRequest) returns (common.Pong);
+	rpc ImportContents(Contents) returns (Contents);
+	rpc UpsertContent(Content) returns (Content);
+	rpc DeleteContents(common.Ids) returns (common.Empty);
+	rpc DeleteAllContents(common.Id) returns (common.Empty);
+	rpc GetContent(common.Id) returns (Content);
+	rpc SearchContents(SearchContentRequest) returns (Contents);
 }
 
-service MyServer {
-	rpc Do(AllType) returns(AllType);
-	rpc Ping(common.PingRequest) returns (common.Pong);
+message SearchContentRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string query = 3;
+	optional int32 limit = 6;
+	optional string plan = 7;
+	optional string order_by = 10;
 }
 
 message KeyValue {
@@ -39,6 +47,8 @@ message Content {
 	repeated string relates = 15;
 	repeated string attachment_urls = 16;
 	optional string type = 17;
+	optional int64 created = 18;
+	optional int64 updated = 19;
 }
 
 message Contents {
