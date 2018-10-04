@@ -269,6 +269,23 @@ enum Event {
 
 	UserAggregateSegmentCount = 216;
 	UserSegmentAggregated = 217;
+
+	AutomationBlockUserFired = 218;
+	AutomationUpdateUserAttributeFired = 219;
+	AutomationMergeUsersFired = 220;
+	AutomationUserNotificationFired = 221;
+	AutomationUserWebhookFired = 222;
+	AutomationUserNoteFired = 223;
+
+	AutomationCreateConversationFired = 224;
+	AutomationConversationMessage2Fired = 225; // send to exists conversation
+	AutomationConversationWebhookFired = 226;
+	AutomationAddAgentToConversationFired = 227;
+	AutomationCreateTicketFired = 228;
+	AutomationConversationTagFired = 229;
+
+	// AutomationAgentNotificationFired = 54;
+	AutomationAddUserToSegmentationFired = 231;
 }
 
 message AggregateSegmentCount {
@@ -498,7 +515,25 @@ message Automation {
 		agent_notification = 1;
 		//user_notification = 2;
 		// automation_invite_message = 4;
+
+		block_user = 5;
+		update_user_attribute = 6;
+		merge_users = 7;
+		user_notification = 8;
+		user_webhook = 9;
+		user_note = 10;
+
+		create_conversation = 11;
+		conversation_message2 = 12;
+		conversation_webhook = 13;
+		add_agent_to_conversation = 14;
+		create_ticket = 15;
+		conversation_tag = 16;
+
+		// agent_notification = 17;
+		add_user_to_segmentation = 18;
 	}
+
 	optional string action_data = 14;
 	optional string scope = 15;
 	optional bool cross_channel = 16;
