@@ -59,6 +59,7 @@ message Permission {
 	int32 ping = 32;
 	int32 attribute = 33;
 	int32 agent_notification = 34;
+	int32 conversation_export = 35;
 }
 
 message Method {

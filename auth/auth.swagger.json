@@ -480,6 +480,10 @@
         "agent_notification": {
           "type": "integer",
           "format": "int32"
+        },
+        "conversation_export": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
