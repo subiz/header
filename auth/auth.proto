@@ -60,6 +60,7 @@ message Permission {
 	int32 attribute = 33;
 	int32 agent_notification = 34;
 	int32 conversation_export = 35;
+	int32 conversation_report = 36;
 }
 
 message Method {

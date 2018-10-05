@@ -806,6 +806,10 @@
         "conversation_export": {
           "type": "integer",
           "format": "int32"
+        },
+        "conversation_report": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
