@@ -144,6 +144,8 @@ enum E {
 
 	s3_call_error = 1503;
 	pdf_generate_error = 1504;
+	subscription_started_is_invalid = 1505;
+	subscription_is_nil = 1506;
 
 	client_not_found = 3004;
 	missing_redirect_url = 3005;
