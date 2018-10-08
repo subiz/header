@@ -1768,6 +1768,9 @@
         },
         "alias": {
           "$ref": "#/definitions/userAlias"
+        },
+        "note": {
+          "$ref": "#/definitions/userNote"
         }
       }
     },
@@ -2006,6 +2009,33 @@
         },
         "account_id": {
           "type": "string"
+        }
+      }
+    },
+    "userNote": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "creator_id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

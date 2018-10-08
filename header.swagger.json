@@ -2487,6 +2487,9 @@
           },
           "alias": {
             "$ref": "#/components/schemas/userAlias"
+          },
+          "note": {
+            "$ref": "#/components/schemas/userNote"
           }
         }
       },
@@ -2606,6 +2609,30 @@
           },
           "account_id": {
             "type": "string"
+          }
+        }
+      },
+      "userNote": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "creator_id": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -3620,30 +3647,6 @@
           },
           "title": {
             "type": "string"
-          }
-        }
-      },
-      "userNote": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "creator_id": {
-            "type": "string"
-          },
-          "content": {
-            "type": "string"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
           }
         }
       },

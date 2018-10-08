@@ -90,6 +90,7 @@ message RawEvent {
 		payment.Limit limit = 19;
 		user.AttributeData user_attribute = 20;
 		user.Alias alias = 22;
+		user.Note note = 23;
 	}
 	Data data = 20;
 }
@@ -118,6 +119,7 @@ enum UserType {
 	alias_deleted = 50;
 	user_added_to_my_list = 51;
 	user_created = 52;
+	note_created = 53;
 }
 
 enum EventType {
@@ -217,6 +219,7 @@ enum Object {
 	limit = 19;
 	user_attribute = 20;
 	alias = 22;
+	note = 23;
 }
 
 message ListEventsRequest {
