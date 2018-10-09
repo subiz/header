@@ -91,6 +91,7 @@ message RawEvent {
 		user.AttributeData user_attribute = 20;
 		user.Alias alias = 22;
 		user.Note note = 23;
+		conversation.Ticket ticket = 24;
 	}
 	Data data = 20;
 }
@@ -161,6 +162,8 @@ enum ConvoType {
 	conversation_unassigned = 35;
 	conversation_assigned = 36;
 	conversation_pending = 81;
+	ticket_created = 82;
+	ticket_updated = 83;
 }
 
 enum NotiboxType {
@@ -220,6 +223,7 @@ enum Object {
 	user_attribute = 20;
 	alias = 22;
 	note = 23;
+	// ticket = 24;
 }
 
 message ListEventsRequest {

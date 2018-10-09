@@ -1597,6 +1597,9 @@
           },
           "assign_to": {
             "$ref": "#/components/schemas/RouteResult"
+          },
+          "ticket": {
+            "$ref": "#/components/schemas/conversationTicket"
           }
         }
       },
@@ -2169,6 +2172,30 @@
           }
         }
       },
+      "conversationTicket": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "conversation_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "conversationTotalConversationResponse": {
         "type": "object",
         "properties": {
@@ -2487,6 +2514,9 @@
           },
           "note": {
             "$ref": "#/components/schemas/userNote"
+          },
+          "ticket": {
+            "$ref": "#/components/schemas/conversationTicket"
           }
         }
       },

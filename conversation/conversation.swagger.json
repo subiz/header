@@ -976,6 +976,9 @@
         },
         "assign_to": {
           "$ref": "#/definitions/conversationRouteResult"
+        },
+        "ticket": {
+          "$ref": "#/definitions/conversationTicket"
         }
       }
     },
@@ -1575,6 +1578,30 @@
           "items": {
             "$ref": "#/definitions/conversationTag"
           }
+        }
+      }
+    },
+    "conversationTicket": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

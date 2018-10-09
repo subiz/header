@@ -126,6 +126,7 @@ message Conversation {
 	optional string chain_id = 24;
 	repeated Member left_members = 25;
 	optional RouteResult assign_to = 26;
+	optional Ticket ticket = 27;
 }
 
 message UserConversation { // used in database
@@ -413,7 +414,6 @@ enum AttachmentType {
 }
 
 message Attachment {
-
 	optional string type = 12;
 	// file
 	optional string mimetype = 2;
@@ -502,7 +502,6 @@ message Postback {
 	optional Button button = 3;
 }
 
-
 message UseConnector {
 	optional string account_id = 2;
 	optional string connector_id = 3;
@@ -588,6 +587,9 @@ service ConversationMgr {
 	rpc LeftConversation(Member) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+
+	rpc CreateTicket(Conversation) returns (Conversation);
+	rpc UpdateTicket(Conversation) returns (Conversation);
 }
 
 service CannedResponseMgr {
@@ -672,7 +674,6 @@ message CountByAgentsRequest {
 }
 
 message CountByTagsRequest {
-
 	optional string account_id = 2;
 	optional string integration_id = 3;
 	repeated string tag_ids = 4;
@@ -763,4 +764,24 @@ enum Path {
 	ConversationJustSendChain = 16;
 	ConversationUpdateStateConvo = 17;
 	ConversationUpdateStateChain = 18;
+}
+
+message Ticket {
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string id = 4;
+	optional string state = 5;
+	enum State {
+		open = 0;
+		closed = 1;
+	}
+	optional string priority = 6;
+	enum Priority {
+		low = 0;
+		medium = 1;
+		hight = 2;
+		urgent = 3;
+	}
+	optional int64 due_date = 7;
+	// optional string subject = 8;
 }

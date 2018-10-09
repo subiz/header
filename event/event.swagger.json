@@ -1226,6 +1226,9 @@
         },
         "assign_to": {
           "$ref": "#/definitions/conversationRouteResult"
+        },
+        "ticket": {
+          "$ref": "#/definitions/conversationTicket"
         }
       }
     },
@@ -1653,6 +1656,30 @@
         }
       }
     },
+    "conversationTicket": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "eventBy": {
       "type": "object",
       "properties": {
@@ -1768,6 +1795,9 @@
         },
         "note": {
           "$ref": "#/definitions/userNote"
+        },
+        "ticket": {
+          "$ref": "#/definitions/conversationTicket"
         }
       }
     },
