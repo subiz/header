@@ -1240,9 +1240,6 @@
               "type": "string"
             }
           },
-          "type": {
-            "type": "string"
-          },
           "created": {
             "type": "integer",
             "format": "int64"

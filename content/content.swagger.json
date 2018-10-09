@@ -707,9 +707,6 @@
             "type": "string"
           }
         },
-        "type": {
-          "type": "string"
-        },
         "created": {
           "type": "string",
           "format": "int64"
