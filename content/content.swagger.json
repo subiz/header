@@ -728,6 +728,13 @@
           "items": {
             "$ref": "#/definitions/contentContent"
           }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
