@@ -5,11 +5,12 @@ package content
 
 import (
 	fmt "fmt"
+	math "math"
+
 	common "git.subiz.net/header/common"
 	proto "github.com/golang/protobuf/proto"
 	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
-	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -39,6 +40,7 @@ type SearchContentRequest struct {
 	Query                *string         `protobuf:"bytes,13,opt,name=query" json:"query,omitempty"`
 	Limit                *int32          `protobuf:"varint,14,opt,name=limit" json:"limit,omitempty"`
 	Anchor               *string         `protobuf:"bytes,15,opt,name=anchor" json:"anchor,omitempty"`
+	Stringify            *string         `protobuf:"bytes,16,opt,name=stringify" json:"stringify,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
@@ -170,6 +172,13 @@ func (m *SearchContentRequest) GetLimit() int32 {
 func (m *SearchContentRequest) GetAnchor() string {
 	if m != nil && m.Anchor != nil {
 		return *m.Anchor
+	}
+	return ""
+}
+
+func (m *SearchContentRequest) GetStringify() string {
+	if m != nil && m.Stringify != nil {
+		return *m.Stringify
 	}
 	return ""
 }

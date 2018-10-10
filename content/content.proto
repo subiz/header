@@ -30,6 +30,7 @@ message SearchContentRequest {
 	optional string query = 13;
 	optional int32 limit = 14;
 	optional string anchor = 15;
+	optional string stringify = 16;
 }
 
 message KeyValue {
@@ -65,12 +66,3 @@ message Contents {
 	optional string anchor = 3;
 	optional int64 total = 4;
 }
-
-// message ListRequest {
-// 	optional string account_id = 6;
-// 	optional string anchor = 2;
-// 	optional string category = 3;
-// 	optional int32 limit = 4;
-// 	optional string label = 5;
-// 	optional string query = 7;
-// }
