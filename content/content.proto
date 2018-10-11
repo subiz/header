@@ -8,7 +8,7 @@ service ServiceContentManager {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ImportContents(Contents) returns (Contents);
 	rpc UpsertContent(Content) returns (Content);
-	rpc DeleteContents(common.Ids) returns (common.Empty);
+	rpc DeleteContent(common.Id) returns (common.Empty);
 	rpc DeleteAllContents(common.Id) returns (common.Empty);
 	rpc GetContent(common.Id) returns (Content);
 	rpc SearchContents(SearchContentRequest) returns (Contents);
