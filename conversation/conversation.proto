@@ -764,6 +764,9 @@ enum Path {
 	ConversationJustSendChain = 16;
 	ConversationUpdateStateConvo = 17;
 	ConversationUpdateStateChain = 18;
+	ConversationCreateTicket = 19;
+	ConversationUpdateTicket = 20;
+	ConversationSendWebhook = 21;
 }
 
 message Ticket {
