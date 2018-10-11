@@ -21,9 +21,6 @@ message SearchContentRequest {
 	optional string title = 4;
 	optional string url = 5;
 	optional string labels = 6;
-	optional string availability = 7;
-	optional float price = 8;
-	optional float sale_price = 9;
 	optional string categories = 10;
 	optional string relates = 11;
 	optional string fields = 12;
