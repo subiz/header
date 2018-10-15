@@ -973,10 +973,6 @@
         "updated": {
           "type": "string",
           "format": "int64"
-        },
-        "is_overwrite": {
-          "type": "boolean",
-          "format": "boolean"
         }
       }
     },
