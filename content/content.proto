@@ -6,7 +6,6 @@ package content;
 
 service ServiceContentManager {
 	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc ImportContents(Contents) returns (Contents);
 	rpc UpsertContent(Content) returns (Content);
 	rpc DeleteContent(common.Id) returns (common.Empty);
 	rpc DeleteAllContents(common.Id) returns (common.Empty);
