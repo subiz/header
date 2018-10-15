@@ -1217,10 +1217,7 @@
             "format": "float"
           },
           "fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/contentKeyValue"
-            }
+            "type": "string"
           },
           "categories": {
             "type": "array",
@@ -1265,17 +1262,6 @@
           "total": {
             "type": "integer",
             "format": "int64"
-          }
-        }
-      },
-      "contentKeyValue": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
           }
         }
       },

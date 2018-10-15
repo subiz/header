@@ -684,10 +684,7 @@
           "format": "float"
         },
         "fields": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/contentKeyValue"
-          }
+          "type": "string"
         },
         "categories": {
           "type": "array",
@@ -735,17 +732,6 @@
         "total": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "contentKeyValue": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
         }
       }
     }

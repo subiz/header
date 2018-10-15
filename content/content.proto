@@ -48,7 +48,7 @@ message Content {
 	optional float price = 10;
 	optional string currency = 11;
 	optional float sale_price = 12;
-	repeated KeyValue fields = 13;
+	optional string fields = 13;
 	repeated string categories = 14;
 	repeated string relates = 15;
 	repeated string attachment_urls = 16;
