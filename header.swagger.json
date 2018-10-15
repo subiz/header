@@ -1247,6 +1247,10 @@
           "updated": {
             "type": "integer",
             "format": "int64"
+          },
+          "is_overwrite": {
+            "type": "boolean",
+            "format": "boolean"
           }
         }
       },
