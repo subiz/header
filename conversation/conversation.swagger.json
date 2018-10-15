@@ -523,6 +523,10 @@
         "conversation_report": {
           "type": "integer",
           "format": "int32"
+        },
+        "content": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
