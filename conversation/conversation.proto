@@ -771,20 +771,82 @@ enum Path {
 
 message Ticket {
 	optional string account_id = 2;
-	optional string conversation_id = 3;
+	// optional string conversation_id = 3;
 	optional string id = 4;
-	optional string state = 5;
-	enum State {
-		open = 0;
-		closed = 1;
-	}
-	optional string priority = 6;
-	enum Priority {
-		low = 0;
-		medium = 1;
-		hight = 2;
-		urgent = 3;
-	}
-	optional int64 due_date = 7;
+	// optional string state = 5;
+	// optional string priority = 6;
+	// optional int64 due_date = 7;
 	// optional string subject = 8;
+	// optional int64 created = 9;
+	repeated TicketAttributeData attributes = 10;
+}
+
+enum TicketState {
+	open = 0;
+	pending = 1;
+	resolved = 2;
+	closed = 3;
+}
+
+enum TicketPriority {
+	low = 0;
+	medium = 1;
+	hight = 2;
+	urgent = 3;
+}
+
+enum TicketAttributeType {
+	text = 0;
+	number = 1;
+	boolean = 2;
+	datetime = 3;
+	list = 4;
+}
+
+enum TicketAttributeKind {
+	system = 0;
+	default = 1;
+	custom = 2;
+}
+
+message TicketAttributeDefinition {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string name = 3;
+	optional string description = 4;
+	optional string type = 5;
+	repeated string list_items = 6;
+	optional string key = 7;
+	optional string kind = 8;
+	optional int64 updated = 9;
+}
+
+message TicketAttributeDefinitions {
+	optional common.Context ctx = 1;
+	repeated TicketAttributeDefinition attributes = 2;
+}
+
+enum TicketAttributeDataState {
+	live = 0;
+	deleted = 1;
+}
+
+message TicketAttributeData {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string ticket_id = 3;
+	optional string key = 4;
+
+	optional string state = 6;
+	optional int64 created = 7;
+	optional int64 modified = 8;
+
+	optional string text = 10;
+	optional double number = 11;
+	optional bool boolean = 12;
+	optional string datetime = 13;
+	repeated string list = 14;
+
+	optional string setter = 16;
+	optional string setter_type = 17;
 }

@@ -2189,21 +2189,67 @@
           "account_id": {
             "type": "string"
           },
-          "conversation_id": {
+          "id": {
+            "type": "string",
+            "title": "optional string conversation_id = 3;"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationTicketAttributeData"
+            },
+            "title": "optional string state = 5;\noptional string priority = 6;\noptional int64 due_date = 7;\noptional string subject = 8;\noptional int64 created = 9;"
+          }
+        }
+      },
+      "conversationTicketAttributeData": {
+        "type": "object",
+        "properties": {
+          "account_id": {
             "type": "string"
           },
-          "id": {
+          "ticket_id": {
+            "type": "string"
+          },
+          "key": {
             "type": "string"
           },
           "state": {
             "type": "string"
           },
-          "priority": {
-            "type": "string"
-          },
-          "due_date": {
+          "created": {
             "type": "integer",
             "format": "int64"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "text": {
+            "type": "string"
+          },
+          "number": {
+            "type": "number",
+            "format": "double"
+          },
+          "boolean": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "datetime": {
+            "type": "string"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "setter": {
+            "type": "string"
+          },
+          "setter_type": {
+            "type": "string"
           }
         }
       },
