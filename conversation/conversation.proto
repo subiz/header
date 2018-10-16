@@ -587,9 +587,6 @@ service ConversationMgr {
 	rpc LeftConversation(Member) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
-
-	rpc CreateTicket(Conversation) returns (Conversation);
-	rpc UpdateTicket(Conversation) returns (Conversation);
 }
 
 service CannedResponseMgr {
@@ -772,7 +769,7 @@ enum Path {
 message Ticket {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	// optional string conversation_id = 3;
+	optional string conversation_id = 3;
 	optional string id = 4;
 	// optional string state = 5;
 	// optional string priority = 6;
@@ -850,4 +847,25 @@ message TicketAttributeData {
 
 	optional string setter = 16;
 	optional string setter_type = 17;
+}
+
+service TicketMgr {
+	rpc CreateTicket(Ticket) returns (Ticket);
+	rpc UpdateTicket(Ticket) returns (Ticket);
+	rpc DeleteTicket(common.Id) returns (common.Empty);
+	rpc GetTicket(common.Id) returns (Ticket);
+	rpc Ping(common.PingRequest) returns (common.Pong);
+}
+
+message DeleteTicketAttrRequest {
+	optional common.Context ctx = 1;
+	optional string key = 2;
+}
+
+service TicketAttributeMgr {
+	rpc ListTicketAttributeDefinitions(common.Empty) returns (TicketAttributeDefinitions);
+	rpc CreateTicketAttributeDefinition(TicketAttributeDefinition) returns (TicketAttributeDefinition);
+	rpc UpdateTicketAttributeDefinition(TicketAttributeDefinition) returns (TicketAttributeDefinition);
+	rpc DeleteTicketAttributeDefinition(DeleteTicketAttrRequest) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }

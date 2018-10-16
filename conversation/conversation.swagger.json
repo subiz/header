@@ -1594,9 +1594,11 @@
         "account_id": {
           "type": "string"
         },
+        "conversation_id": {
+          "type": "string"
+        },
         "id": {
-          "type": "string",
-          "title": "optional string conversation_id = 3;"
+          "type": "string"
         },
         "attributes": {
           "type": "array",
@@ -1658,6 +1660,56 @@
         },
         "setter_type": {
           "type": "string"
+        }
+      }
+    },
+    "conversationTicketAttributeDefinition": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "list_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationTicketAttributeDefinitions": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTicketAttributeDefinition"
+          }
         }
       }
     },

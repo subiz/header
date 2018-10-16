@@ -1669,9 +1669,11 @@
         "account_id": {
           "type": "string"
         },
+        "conversation_id": {
+          "type": "string"
+        },
         "id": {
-          "type": "string",
-          "title": "optional string conversation_id = 3;"
+          "type": "string"
         },
         "attributes": {
           "type": "array",
