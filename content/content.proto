@@ -22,11 +22,12 @@ message SearchContentRequest {
 	optional string labels = 6;
 	optional string categories = 10;
 	optional string relates = 11;
-	optional string fields = 12;
+	optional string fieldkeys = 12;
 	optional string query = 13;
 	optional int32 limit = 14;
 	optional string anchor = 15;
 	optional string stringify = 16;
+	optional string fieldvalues = 17;
 }
 
 message KeyValue {
