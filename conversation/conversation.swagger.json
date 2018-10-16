@@ -1588,6 +1588,9 @@
     "conversationTicket": {
       "type": "object",
       "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
         "account_id": {
           "type": "string"
         },

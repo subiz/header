@@ -770,6 +770,7 @@ enum Path {
 }
 
 message Ticket {
+	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	// optional string conversation_id = 3;
 	optional string id = 4;
