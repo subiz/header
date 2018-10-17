@@ -146,6 +146,8 @@ enum E {
 	invalid_payment_log_id = 1034;
 	invalid_bill_id = 1035;
 	unable_to_load_permission = 1036;
+	auto_charge_is_not_enabled = 1037;
+	stripe_customer_is_not_valid = 1038;
 
 	kafka_rpc_timeout = 2150;
 
