@@ -1493,6 +1493,10 @@
         "v3_state": {
           "type": "integer",
           "format": "int32"
+        },
+        "auto_charge": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     }

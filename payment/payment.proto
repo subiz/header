@@ -126,6 +126,8 @@ message Subscription {
 	optional string primary_payment_method = 32;
 	optional Limit limit = 42;
 	optional int32 v3_state = 43;
+
+	optional bool auto_charge = 44;
 }
 
 message Bill {
@@ -358,6 +360,8 @@ message Log {
 		pay_for_referrer = 12;
 		add_money_for_referrer = 13;
 		pay_invoice = 14;
+		charge_stripe = 15;
+		create_bill = 16;
 	}
 	optional string user = 2;
 	optional string id = 8;
