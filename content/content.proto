@@ -35,6 +35,12 @@ message KeyValue {
 	optional string value = 4;
 }
 
+message Attachment {
+	optional string url = 1;
+	optional string type = 2;
+	optional bool default_image = 3;
+}
+
 message Content {
 	optional common.Context ctx = 1;
 	optional string sbid = 2;
@@ -52,7 +58,7 @@ message Content {
 	repeated KeyValue fields = 13;
 	repeated string categories = 14;
 	repeated string relates = 15;
-	repeated string attachment_urls = 16;
+	repeated Attachment attachment_urls = 16;
 	optional int64 created = 17;
 	optional int64 updated = 18;
 	repeated string image_urls = 19;

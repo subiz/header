@@ -902,6 +902,21 @@
         }
       }
     },
+    "contentAttachment": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "default_image": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
     "contentContent": {
       "type": "object",
       "properties": {
@@ -967,7 +982,7 @@
         "attachment_urls": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/contentAttachment"
           }
         },
         "created": {
