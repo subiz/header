@@ -1255,6 +1255,12 @@
           "updated": {
             "type": "integer",
             "format": "int64"
+          },
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },

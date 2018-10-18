@@ -718,6 +718,12 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "image_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
