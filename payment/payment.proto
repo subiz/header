@@ -477,6 +477,7 @@ service PaymentMgr {
 	rpc AddComment(Comment) returns (Comment);
 	rpc ListPlans(common.Empty) returns (Plans);
 	rpc ExportInvoice(common.Id) returns (String);
+	rpc ConvertInvoiceToHtml(Invoice) returns (String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc TransferMoney(PayRequest) returns (Bill);
 	rpc Ping(common.PingRequest) returns (common.Pong);
