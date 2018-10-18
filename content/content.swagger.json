@@ -643,21 +643,6 @@
         }
       }
     },
-    "contentAttachment": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "default_image": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
     "contentContent": {
       "type": "object",
       "properties": {
@@ -720,10 +705,10 @@
             "type": "string"
           }
         },
-        "attachment_urls": {
+        "attachments": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/contentAttachment"
+            "$ref": "#/definitions/conversationAttachment"
           }
         },
         "created": {
@@ -765,6 +750,227 @@
         },
         "value": {
           "type": "string"
+        }
+      }
+    },
+    "conversationAskInfomation": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "input_type": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAskInfomationAnswer": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAttachment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "mimetype": {
+          "type": "string",
+          "title": "file"
+        },
+        "url": {
+          "type": "string"
+        },
+        "thumbnail_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "title": "optional string data = 7; // for custom data"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationGenericElementTemplate"
+          },
+          "title": "generic"
+        },
+        "title": {
+          "type": "string",
+          "title": "preview"
+        },
+        "color": {
+          "type": "string"
+        },
+        "pretext": {
+          "type": "string"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        },
+        "ask_info": {
+          "$ref": "#/definitions/conversationAskInfomation"
+        },
+        "ask_info_answer": {
+          "$ref": "#/definitions/conversationAskInfomationAnswer"
+        },
+        "form": {
+          "$ref": "#/definitions/conversationForm"
+        },
+        "form_submit": {
+          "$ref": "#/definitions/conversationFormSubmit"
+        }
+      }
+    },
+    "conversationButton": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "title": "post back"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "content_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "title": "optional RawEvent event = 12;"
+        }
+      }
+    },
+    "conversationForm": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
+        },
+        "submit_url": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationFormField": {
+      "type": "object",
+      "properties": {
+        "input_type": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationFormSubmit": {
+      "type": "object",
+      "properties": {
+        "form_message_id": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationGenericElementTemplate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "default_action": {
+          "$ref": "#/definitions/conversationButton"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
         }
       }
     }

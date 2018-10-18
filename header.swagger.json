@@ -1183,21 +1183,6 @@
           }
         }
       },
-      "contentAttachment": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "default_image": {
-            "type": "boolean",
-            "format": "boolean"
-          }
-        }
-      },
       "contentContent": {
         "type": "object",
         "properties": {
@@ -1257,10 +1242,10 @@
               "type": "string"
             }
           },
-          "attachment_urls": {
+          "attachments": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/contentAttachment"
+              "$ref": "#/components/schemas/Attachment"
             }
           },
           "created": {
@@ -1299,21 +1284,6 @@
           },
           "value": {
             "type": "string"
-          }
-        }
-      },
-      "conversationAck": {
-        "type": "object",
-        "properties": {
-          "member_id": {
-            "type": "string"
-          },
-          "error": {
-            "type": "string"
-          },
-          "at": {
-            "type": "integer",
-            "format": "int64"
           }
         }
       },
@@ -1417,6 +1387,142 @@
           }
         }
       },
+      "Button": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "title": "post back"
+          },
+          "payload": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "content_id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "title": "optional RawEvent event = 12;"
+          }
+        }
+      },
+      "conversationForm": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationFormField"
+            }
+          },
+          "submit_url": {
+            "type": "string"
+          }
+        }
+      },
+      "conversationFormField": {
+        "type": "object",
+        "properties": {
+          "input_type": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "state": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "answered": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "conversationFormSubmit": {
+        "type": "object",
+        "properties": {
+          "form_message_id": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationFormField"
+            }
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      },
+      "GenericElementTemplate": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "default_action": {
+            "$ref": "#/components/schemas/Button"
+          },
+          "buttons": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Button"
+            }
+          }
+        }
+      },
+      "conversationAck": {
+        "type": "object",
+        "properties": {
+          "member_id": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          },
+          "at": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "conversationAvailabilityCheckResult": {
         "type": "object",
         "properties": {
@@ -1444,34 +1550,6 @@
           "avg_response_sec": {
             "type": "number",
             "format": "double"
-          }
-        }
-      },
-      "Button": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string",
-            "title": "post back"
-          },
-          "payload": {
-            "type": "string"
-          },
-          "image_url": {
-            "type": "string"
-          },
-          "content_id": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string",
-            "title": "optional RawEvent event = 12;"
           }
         }
       },
@@ -1728,99 +1806,6 @@
           },
           "key": {
             "type": "string"
-          }
-        }
-      },
-      "conversationForm": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/conversationFormField"
-            }
-          },
-          "submit_url": {
-            "type": "string"
-          }
-        }
-      },
-      "conversationFormField": {
-        "type": "object",
-        "properties": {
-          "input_type": {
-            "type": "string"
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "state": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "image_url": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "answer": {
-            "type": "string"
-          },
-          "answered": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "conversationFormSubmit": {
-        "type": "object",
-        "properties": {
-          "form_message_id": {
-            "type": "string"
-          },
-          "fields": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/conversationFormField"
-            }
-          },
-          "state": {
-            "type": "string"
-          }
-        }
-      },
-      "GenericElementTemplate": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string"
-          },
-          "image_url": {
-            "type": "string"
-          },
-          "subtitle": {
-            "type": "string"
-          },
-          "default_action": {
-            "$ref": "#/components/schemas/Button"
-          },
-          "buttons": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Button"
-            }
           }
         }
       },

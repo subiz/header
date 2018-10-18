@@ -1,6 +1,7 @@
 syntax = "proto2";
 
 import "git.subiz.net/header/common/common.proto";
+import "git.subiz.net/header/conversation/conversation.proto";
 
 package content;
 
@@ -58,7 +59,7 @@ message Content {
 	repeated KeyValue fields = 13;
 	repeated string categories = 14;
 	repeated string relates = 15;
-	repeated Attachment attachment_urls = 16;
+	repeated conversation.Attachment attachments = 16;
 	optional int64 created = 17;
 	optional int64 updated = 18;
 }
