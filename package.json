@@ -14,6 +14,6 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/subiz/header#readme",
   "dependencies": {
-    "protobufjs": "6.8.6"
+    "protobufjs": "^6.8.8"
   }
 }
