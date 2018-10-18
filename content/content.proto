@@ -61,7 +61,6 @@ message Content {
 	repeated Attachment attachment_urls = 16;
 	optional int64 created = 17;
 	optional int64 updated = 18;
-	repeated string image_urls = 19;
 }
 
 message Contents {
