@@ -1,0 +1,1128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "messagetemplate/messagetemplate.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "authCredential": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/authType"
+        },
+        "method": {
+          "$ref": "#/definitions/authMethod"
+        },
+        "perm": {
+          "$ref": "#/definitions/authPermission"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_type": {
+          "$ref": "#/definitions/authType"
+        },
+        "client_account_id": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avatar_url": {
+          "type": "string",
+          "title": "optional"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "is_internal_client": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "authMethod": {
+      "type": "object",
+      "properties": {
+        "ping": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_trigger": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "trigger"
+        },
+        "delete_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_trigger": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_segmentation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "segmentation"
+        },
+        "update_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_segmentation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "invite_agent": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent"
+        },
+        "update_agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reset_password": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agents_permission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agent_permission": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agents_state": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_agent_group": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "agent group"
+        },
+        "delete_agent_group": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_agent_group": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_agent_group": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_plan": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "account"
+        },
+        "update_account_infomation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_client": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "clients"
+        },
+        "update_client": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_client": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "bool RegenerateClientSecret = 155;\nbool VerifyClient = 156;"
+        },
+        "create_client": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_rule": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "rule"
+        },
+        "create_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_rule": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "start_conversation": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "converstation"
+        },
+        "read_conversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "export_conversations": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_teammates_conversations": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "send_message": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "integrate_connector": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "connector integration"
+        },
+        "read_user_email": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_facebook_id": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_phones": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_user_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_tag": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_widget_setting": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "create_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_whitelist_ip": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_whitelist_user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_whitelist_domain": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "purchase_service": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_payment_method": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pay_invoice": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_billing_cycle": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_invoice": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_subscription": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_attribute": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "user attribute"
+        },
+        "create_attribute": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_attribute": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_attribute": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_accounts": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_agents": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_payment_comments": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "add_payment_comments": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_bills": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "write_all_invoices": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_invoices": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "purchase_all_services": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_subscriptions": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "add_credit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_all_subscriptions": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "pay_all_invoices": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "transfer_money": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "read_all_logs": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "grant_all_perm": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "authPermission": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_password": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "permission": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_group": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "segmentation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "client": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rule": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "integration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "canned_response": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_ip": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_domain": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "widget": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subscription": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "invoice": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_method": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bill": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_log": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_comment": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "automation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ping": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "attribute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_notification": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation_export": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation_report": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "authType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "user",
+        "agent",
+        "subiz",
+        "app",
+        "rest",
+        "connector",
+        "bot",
+        "dashboard",
+        "accmgr"
+      ],
+      "default": "unknown",
+      "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - bot: BOT reserve for future\n - accmgr: accmgr"
+    },
+    "commonContext": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "byte"
+        },
+        "node": {
+          "type": "string"
+        },
+        "reply_topic": {
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "#/definitions/authCredential",
+          "title": "optional int32 reply_partition = 5;"
+        },
+        "tracing": {
+          "type": "string",
+          "format": "byte"
+        },
+        "reply_key": {
+          "type": "string"
+        },
+        "by_device": {
+          "$ref": "#/definitions/commonDevice"
+        },
+        "topic": {
+          "type": "string",
+          "title": "for kafka"
+        },
+        "partition": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "term": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "router_topic": {
+          "type": "string"
+        },
+        "idempotency_key": {
+          "type": "string"
+        }
+      }
+    },
+    "commonDevice": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "referrer": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAck": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAskInfomation": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "input_type": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAskInfomationAnswer": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAttachment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "mimetype": {
+          "type": "string",
+          "title": "file"
+        },
+        "url": {
+          "type": "string"
+        },
+        "thumbnail_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "title": "optional string data = 7; // for custom data"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationGenericElementTemplate"
+          },
+          "title": "generic"
+        },
+        "title": {
+          "type": "string",
+          "title": "preview"
+        },
+        "color": {
+          "type": "string"
+        },
+        "pretext": {
+          "type": "string"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        },
+        "ask_info": {
+          "$ref": "#/definitions/conversationAskInfomation"
+        },
+        "ask_info_answer": {
+          "$ref": "#/definitions/conversationAskInfomationAnswer"
+        },
+        "form": {
+          "$ref": "#/definitions/conversationForm"
+        },
+        "form_submit": {
+          "$ref": "#/definitions/conversationFormSubmit"
+        }
+      }
+    },
+    "conversationButton": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "title": "post back"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "content_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "title": "optional RawEvent event = 12;"
+        }
+      }
+    },
+    "conversationComputed": {
+      "type": "object",
+      "properties": {
+        "seen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationSeen"
+          }
+        },
+        "ack": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAck"
+          }
+        },
+        "received": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationReceived"
+          }
+        }
+      }
+    },
+    "conversationField": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationForm": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
+        },
+        "submit_url": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationFormField": {
+      "type": "object",
+      "properties": {
+        "input_type": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationFormSubmit": {
+      "type": "object",
+      "properties": {
+        "form_message_id": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationGenericElementTemplate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "default_action": {
+          "$ref": "#/definitions/conversationButton"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        }
+      }
+    },
+    "conversationMessage": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAttachment"
+          }
+        },
+        "reactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationReaction"
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationField"
+          }
+        },
+        "computed": {
+          "$ref": "#/definitions/conversationComputed"
+        },
+        "integration_id": {
+          "type": "string"
+        },
+        "chain_id": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationReaction": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conversationReceived": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationSeen": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "emailAttachment": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mimetype": {
+          "type": "string"
+        }
+      }
+    },
+    "emailEmail": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "from": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string",
+          "title": "string to = 4;"
+        },
+        "body": {
+          "type": "string"
+        },
+        "header": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emailAttachment"
+          }
+        },
+        "to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cc": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bcc": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "messagetemplateMessageTemplate": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationMessage"
+          }
+        },
+        "email": {
+          "$ref": "#/definitions/emailEmail"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "is_public": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
+    "messagetemplateMessageTemplates": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "message_templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/messagetemplateMessageTemplate"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}
