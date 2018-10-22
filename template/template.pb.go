@@ -5,7 +5,12 @@ package template
 
 import (
 	fmt "fmt"
+	common "git.subiz.net/header/common"
+	conversation "git.subiz.net/header/conversation"
+	email "git.subiz.net/header/email"
 	proto "github.com/golang/protobuf/proto"
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
 	math "math"
 )
 
@@ -20,44 +25,19 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type Type int32
-
-const (
-	Type_Email        Type = 0
-	Type_WebPush      Type = 1
-	Type_Notification Type = 2
-)
-
-var Type_name = map[int32]string{
-	0: "Email",
-	1: "WebPush",
-	2: "Notification",
-}
-
-var Type_value = map[string]int32{
-	"Email":        0,
-	"WebPush":      1,
-	"Notification": 2,
-}
-
-func (x Type) String() string {
-	return proto.EnumName(Type_name, int32(x))
-}
-
-func (Type) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_dca67df6b60706ce, []int{0}
-}
-
 type Template struct {
-	Id                   string                `protobuf:"bytes,1,opt,name=Id,proto3" json:"Id,omitempty"`
-	Language             string                `protobuf:"bytes,2,opt,name=Language,proto3" json:"Language,omitempty"`
-	Type                 Type                  `protobuf:"varint,3,opt,name=Type,proto3,enum=template.Type" json:"Type,omitempty"`
-	Email                *EmailTemplate        `protobuf:"bytes,8,opt,name=Email,proto3" json:"Email,omitempty"`
-	WebPush              *WebPushTemplate      `protobuf:"bytes,9,opt,name=WebPush,proto3" json:"WebPush,omitempty"`
-	Notification         *NotificationTemplate `protobuf:"bytes,10,opt,name=Notification,proto3" json:"Notification,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	AccountId            string                  `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AgentId              string                  `protobuf:"bytes,2,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Type                 string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Messages             []*conversation.Message `protobuf:"bytes,4,rep,name=messages,proto3" json:"messages,omitempty"`
+	Email                *email.Email            `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
+	Channel              string                  `protobuf:"bytes,6,opt,name=channel,proto3" json:"channel,omitempty"`
+	IsPublic             bool                    `protobuf:"varint,7,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
+	Id                   string                  `protobuf:"bytes,8,opt,name=id,proto3" json:"id,omitempty"`
+	Ctx                  *common.Context         `protobuf:"bytes,9,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
+	XXX_unrecognized     []byte                  `json:"-"`
+	XXX_sizecache        int32                   `json:"-"`
 }
 
 func (m *Template) Reset()         { *m = Template{} }
@@ -85,6 +65,55 @@ func (m *Template) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Template proto.InternalMessageInfo
 
+func (m *Template) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
+	}
+	return ""
+}
+
+func (m *Template) GetAgentId() string {
+	if m != nil {
+		return m.AgentId
+	}
+	return ""
+}
+
+func (m *Template) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
+}
+
+func (m *Template) GetMessages() []*conversation.Message {
+	if m != nil {
+		return m.Messages
+	}
+	return nil
+}
+
+func (m *Template) GetEmail() *email.Email {
+	if m != nil {
+		return m.Email
+	}
+	return nil
+}
+
+func (m *Template) GetChannel() string {
+	if m != nil {
+		return m.Channel
+	}
+	return ""
+}
+
+func (m *Template) GetIsPublic() bool {
+	if m != nil {
+		return m.IsPublic
+	}
+	return false
+}
+
 func (m *Template) GetId() string {
 	if m != nil {
 		return m.Id
@@ -92,228 +121,406 @@ func (m *Template) GetId() string {
 	return ""
 }
 
-func (m *Template) GetLanguage() string {
+func (m *Template) GetCtx() *common.Context {
 	if m != nil {
-		return m.Language
-	}
-	return ""
-}
-
-func (m *Template) GetType() Type {
-	if m != nil {
-		return m.Type
-	}
-	return Type_Email
-}
-
-func (m *Template) GetEmail() *EmailTemplate {
-	if m != nil {
-		return m.Email
+		return m.Ctx
 	}
 	return nil
 }
 
-func (m *Template) GetWebPush() *WebPushTemplate {
-	if m != nil {
-		return m.WebPush
-	}
-	return nil
+type SearchTemplate struct {
+	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId            string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	AgentId              string          `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	Type                 string          `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
+	Query                string          `protobuf:"bytes,5,opt,name=query,proto3" json:"query,omitempty"`
+	Channel              string          `protobuf:"bytes,6,opt,name=channel,proto3" json:"channel,omitempty"`
+	IsPublic             bool            `protobuf:"varint,7,opt,name=is_public,json=isPublic,proto3" json:"is_public,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
-func (m *Template) GetNotification() *NotificationTemplate {
-	if m != nil {
-		return m.Notification
-	}
-	return nil
-}
-
-type EmailTemplate struct {
-	Subject              string   `protobuf:"bytes,1,opt,name=Subject,proto3" json:"Subject,omitempty"`
-	Body                 string   `protobuf:"bytes,2,opt,name=Body,proto3" json:"Body,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *EmailTemplate) Reset()         { *m = EmailTemplate{} }
-func (m *EmailTemplate) String() string { return proto.CompactTextString(m) }
-func (*EmailTemplate) ProtoMessage()    {}
-func (*EmailTemplate) Descriptor() ([]byte, []int) {
+func (m *SearchTemplate) Reset()         { *m = SearchTemplate{} }
+func (m *SearchTemplate) String() string { return proto.CompactTextString(m) }
+func (*SearchTemplate) ProtoMessage()    {}
+func (*SearchTemplate) Descriptor() ([]byte, []int) {
 	return fileDescriptor_dca67df6b60706ce, []int{1}
 }
 
-func (m *EmailTemplate) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_EmailTemplate.Unmarshal(m, b)
+func (m *SearchTemplate) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_SearchTemplate.Unmarshal(m, b)
 }
-func (m *EmailTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_EmailTemplate.Marshal(b, m, deterministic)
+func (m *SearchTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_SearchTemplate.Marshal(b, m, deterministic)
 }
-func (m *EmailTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_EmailTemplate.Merge(m, src)
+func (m *SearchTemplate) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_SearchTemplate.Merge(m, src)
 }
-func (m *EmailTemplate) XXX_Size() int {
-	return xxx_messageInfo_EmailTemplate.Size(m)
+func (m *SearchTemplate) XXX_Size() int {
+	return xxx_messageInfo_SearchTemplate.Size(m)
 }
-func (m *EmailTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_EmailTemplate.DiscardUnknown(m)
+func (m *SearchTemplate) XXX_DiscardUnknown() {
+	xxx_messageInfo_SearchTemplate.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_EmailTemplate proto.InternalMessageInfo
+var xxx_messageInfo_SearchTemplate proto.InternalMessageInfo
 
-func (m *EmailTemplate) GetSubject() string {
+func (m *SearchTemplate) GetCtx() *common.Context {
 	if m != nil {
-		return m.Subject
+		return m.Ctx
+	}
+	return nil
+}
+
+func (m *SearchTemplate) GetAccountId() string {
+	if m != nil {
+		return m.AccountId
 	}
 	return ""
 }
 
-func (m *EmailTemplate) GetBody() string {
+func (m *SearchTemplate) GetAgentId() string {
 	if m != nil {
-		return m.Body
+		return m.AgentId
 	}
 	return ""
 }
 
-type WebPushTemplate struct {
-	Title                string   `protobuf:"bytes,1,opt,name=Title,proto3" json:"Title,omitempty"`
-	Body                 string   `protobuf:"bytes,2,opt,name=Body,proto3" json:"Body,omitempty"`
-	Icon                 string   `protobuf:"bytes,3,opt,name=Icon,proto3" json:"Icon,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+func (m *SearchTemplate) GetType() string {
+	if m != nil {
+		return m.Type
+	}
+	return ""
 }
 
-func (m *WebPushTemplate) Reset()         { *m = WebPushTemplate{} }
-func (m *WebPushTemplate) String() string { return proto.CompactTextString(m) }
-func (*WebPushTemplate) ProtoMessage()    {}
-func (*WebPushTemplate) Descriptor() ([]byte, []int) {
+func (m *SearchTemplate) GetQuery() string {
+	if m != nil {
+		return m.Query
+	}
+	return ""
+}
+
+func (m *SearchTemplate) GetChannel() string {
+	if m != nil {
+		return m.Channel
+	}
+	return ""
+}
+
+func (m *SearchTemplate) GetIsPublic() bool {
+	if m != nil {
+		return m.IsPublic
+	}
+	return false
+}
+
+type Templates struct {
+	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Templates            []*Template     `protobuf:"bytes,2,rep,name=templates,proto3" json:"templates,omitempty"`
+	Anchor               string          `protobuf:"bytes,3,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	Total                int64           `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *Templates) Reset()         { *m = Templates{} }
+func (m *Templates) String() string { return proto.CompactTextString(m) }
+func (*Templates) ProtoMessage()    {}
+func (*Templates) Descriptor() ([]byte, []int) {
 	return fileDescriptor_dca67df6b60706ce, []int{2}
 }
 
-func (m *WebPushTemplate) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_WebPushTemplate.Unmarshal(m, b)
+func (m *Templates) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Templates.Unmarshal(m, b)
 }
-func (m *WebPushTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_WebPushTemplate.Marshal(b, m, deterministic)
+func (m *Templates) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Templates.Marshal(b, m, deterministic)
 }
-func (m *WebPushTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_WebPushTemplate.Merge(m, src)
+func (m *Templates) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Templates.Merge(m, src)
 }
-func (m *WebPushTemplate) XXX_Size() int {
-	return xxx_messageInfo_WebPushTemplate.Size(m)
+func (m *Templates) XXX_Size() int {
+	return xxx_messageInfo_Templates.Size(m)
 }
-func (m *WebPushTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_WebPushTemplate.DiscardUnknown(m)
+func (m *Templates) XXX_DiscardUnknown() {
+	xxx_messageInfo_Templates.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_WebPushTemplate proto.InternalMessageInfo
+var xxx_messageInfo_Templates proto.InternalMessageInfo
 
-func (m *WebPushTemplate) GetTitle() string {
+func (m *Templates) GetCtx() *common.Context {
 	if m != nil {
-		return m.Title
+		return m.Ctx
+	}
+	return nil
+}
+
+func (m *Templates) GetTemplates() []*Template {
+	if m != nil {
+		return m.Templates
+	}
+	return nil
+}
+
+func (m *Templates) GetAnchor() string {
+	if m != nil {
+		return m.Anchor
 	}
 	return ""
 }
 
-func (m *WebPushTemplate) GetBody() string {
+func (m *Templates) GetTotal() int64 {
 	if m != nil {
-		return m.Body
+		return m.Total
 	}
-	return ""
-}
-
-func (m *WebPushTemplate) GetIcon() string {
-	if m != nil {
-		return m.Icon
-	}
-	return ""
-}
-
-type NotificationTemplate struct {
-	Image                string   `protobuf:"bytes,1,opt,name=Image,proto3" json:"Image,omitempty"`
-	Footer               string   `protobuf:"bytes,2,opt,name=Footer,proto3" json:"Footer,omitempty"`
-	Body                 string   `protobuf:"bytes,3,opt,name=Body,proto3" json:"Body,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *NotificationTemplate) Reset()         { *m = NotificationTemplate{} }
-func (m *NotificationTemplate) String() string { return proto.CompactTextString(m) }
-func (*NotificationTemplate) ProtoMessage()    {}
-func (*NotificationTemplate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_dca67df6b60706ce, []int{3}
-}
-
-func (m *NotificationTemplate) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_NotificationTemplate.Unmarshal(m, b)
-}
-func (m *NotificationTemplate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_NotificationTemplate.Marshal(b, m, deterministic)
-}
-func (m *NotificationTemplate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_NotificationTemplate.Merge(m, src)
-}
-func (m *NotificationTemplate) XXX_Size() int {
-	return xxx_messageInfo_NotificationTemplate.Size(m)
-}
-func (m *NotificationTemplate) XXX_DiscardUnknown() {
-	xxx_messageInfo_NotificationTemplate.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_NotificationTemplate proto.InternalMessageInfo
-
-func (m *NotificationTemplate) GetImage() string {
-	if m != nil {
-		return m.Image
-	}
-	return ""
-}
-
-func (m *NotificationTemplate) GetFooter() string {
-	if m != nil {
-		return m.Footer
-	}
-	return ""
-}
-
-func (m *NotificationTemplate) GetBody() string {
-	if m != nil {
-		return m.Body
-	}
-	return ""
+	return 0
 }
 
 func init() {
-	proto.RegisterEnum("template.Type", Type_name, Type_value)
 	proto.RegisterType((*Template)(nil), "template.Template")
-	proto.RegisterType((*EmailTemplate)(nil), "template.EmailTemplate")
-	proto.RegisterType((*WebPushTemplate)(nil), "template.WebPushTemplate")
-	proto.RegisterType((*NotificationTemplate)(nil), "template.NotificationTemplate")
+	proto.RegisterType((*SearchTemplate)(nil), "template.SearchTemplate")
+	proto.RegisterType((*Templates)(nil), "template.Templates")
 }
 
 func init() { proto.RegisterFile("template/template.proto", fileDescriptor_dca67df6b60706ce) }
 
 var fileDescriptor_dca67df6b60706ce = []byte{
-	// 311 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x92, 0xcb, 0x4b, 0xc3, 0x40,
-	0x10, 0xc6, 0x4d, 0xfa, 0x4a, 0xa6, 0x5a, 0xc3, 0x50, 0xec, 0xea, 0x41, 0x42, 0x4e, 0x41, 0xb0,
-	0x4a, 0x7b, 0xf6, 0x52, 0x50, 0x08, 0x88, 0x4a, 0x0c, 0xe8, 0x35, 0x8f, 0xb5, 0x46, 0x92, 0x6c,
-	0xa8, 0x9b, 0x43, 0xaf, 0xfe, 0xe5, 0x92, 0xcd, 0x66, 0x63, 0xa4, 0xb7, 0xfd, 0x66, 0xe6, 0x37,
-	0x33, 0x7c, 0xb3, 0xb0, 0xe0, 0x34, 0x2f, 0xb3, 0x90, 0xd3, 0x9b, 0xf6, 0xb1, 0x2c, 0x77, 0x8c,
-	0x33, 0x34, 0x5a, 0xed, 0xfc, 0xe8, 0x60, 0x04, 0x52, 0xe0, 0x0c, 0x74, 0x2f, 0x21, 0x9a, 0xad,
-	0xb9, 0xa6, 0xaf, 0x7b, 0x09, 0x5e, 0x80, 0xf1, 0x18, 0x16, 0xdb, 0x2a, 0xdc, 0x52, 0xa2, 0x8b,
-	0xa8, 0xd2, 0xe8, 0xc0, 0x30, 0xd8, 0x97, 0x94, 0x0c, 0x6c, 0xcd, 0x9d, 0xad, 0x66, 0x4b, 0x35,
-	0xa1, 0x8e, 0xfa, 0x22, 0x87, 0xd7, 0x30, 0xba, 0xcf, 0xc3, 0x34, 0x23, 0x86, 0xad, 0xb9, 0xd3,
-	0xd5, 0xa2, 0x2b, 0x12, 0xe1, 0x76, 0xae, 0xdf, 0x54, 0xe1, 0x1a, 0x26, 0x6f, 0x34, 0x7a, 0xa9,
-	0xbe, 0x3f, 0x89, 0x29, 0x80, 0xf3, 0x0e, 0x90, 0x09, 0x85, 0xb4, 0x95, 0xb8, 0x81, 0xe3, 0x27,
-	0xc6, 0xd3, 0x8f, 0x34, 0x0e, 0x79, 0xca, 0x0a, 0x02, 0x82, 0xbc, 0xec, 0xc8, 0xbf, 0x59, 0x85,
-	0xf7, 0x18, 0xe7, 0x0e, 0x4e, 0x7a, 0x0b, 0x21, 0x81, 0xc9, 0x6b, 0x15, 0x7d, 0xd1, 0x98, 0x4b,
-	0x37, 0x5a, 0x89, 0x08, 0xc3, 0x0d, 0x4b, 0xf6, 0xd2, 0x0e, 0xf1, 0x76, 0x9e, 0xe1, 0xf4, 0xdf,
-	0x7a, 0x38, 0x87, 0x51, 0x90, 0xf2, 0x8c, 0x4a, 0xbc, 0x11, 0x87, 0xe0, 0x3a, 0xe6, 0xc5, 0xac,
-	0x10, 0x3e, 0x9a, 0xbe, 0x78, 0x3b, 0xef, 0x30, 0x3f, 0xb4, 0x75, 0xdd, 0xd5, 0xcb, 0xeb, 0x63,
-	0xc8, 0xae, 0x42, 0xe0, 0x19, 0x8c, 0x1f, 0x18, 0xe3, 0x74, 0x27, 0xfb, 0x4a, 0xa5, 0xa6, 0x0d,
-	0xba, 0x69, 0x57, 0xb7, 0xcd, 0xd5, 0xd0, 0x94, 0x97, 0xb1, 0x8e, 0x70, 0xaa, 0x5c, 0xb7, 0x34,
-	0xb4, 0xfa, 0x6e, 0x5a, 0x7a, 0x34, 0x16, 0x3f, 0x66, 0xfd, 0x1b, 0x00, 0x00, 0xff, 0xff, 0x7c,
-	0x1e, 0x38, 0x88, 0x4c, 0x02, 0x00, 0x00,
+	// 494 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x53, 0x4d, 0x6f, 0xd3, 0x40,
+	0x10, 0x95, 0xed, 0x34, 0xb1, 0x27, 0x25, 0x95, 0xb6, 0x7c, 0x2c, 0x46, 0x48, 0x21, 0x07, 0x64,
+	0x84, 0x70, 0x20, 0x70, 0xe0, 0x88, 0x04, 0x15, 0xca, 0x01, 0xa9, 0x72, 0xe1, 0x5c, 0x6d, 0xec,
+	0x91, 0xb3, 0x92, 0xbd, 0x76, 0xbd, 0xeb, 0xaa, 0xe1, 0x47, 0x70, 0xe2, 0xc2, 0x9f, 0xe2, 0x37,
+	0x21, 0xef, 0xda, 0x4e, 0x0b, 0x2e, 0x42, 0x5c, 0x9c, 0x7d, 0x33, 0xef, 0x8d, 0xdf, 0xbc, 0xac,
+	0xe1, 0x81, 0xc2, 0xbc, 0xcc, 0x98, 0xc2, 0x65, 0x77, 0x08, 0xcb, 0xaa, 0x50, 0x05, 0x71, 0x3b,
+	0xec, 0x07, 0x29, 0x57, 0xa1, 0xac, 0x37, 0xfc, 0x6b, 0x28, 0x50, 0x2d, 0xb7, 0xc8, 0x12, 0xac,
+	0x96, 0x71, 0x91, 0xe7, 0x85, 0x68, 0x7f, 0x8c, 0xc6, 0x7f, 0x73, 0x0b, 0x53, 0x5c, 0x62, 0x25,
+	0x99, 0xe2, 0x9a, 0xbf, 0x07, 0xad, 0xea, 0xe9, 0xa0, 0x0a, 0x73, 0xc6, 0x33, 0xf3, 0x34, 0xbc,
+	0xc5, 0x0f, 0x1b, 0xdc, 0xcf, 0xad, 0x29, 0xf2, 0x18, 0x80, 0xc5, 0x71, 0x51, 0x0b, 0x75, 0xce,
+	0x13, 0x6a, 0xcd, 0xad, 0xc0, 0x8b, 0xbc, 0xb6, 0xb2, 0x4e, 0xc8, 0x43, 0x70, 0x59, 0x8a, 0xa6,
+	0x69, 0xeb, 0xe6, 0x44, 0xe3, 0x75, 0x42, 0x08, 0x8c, 0xd4, 0xae, 0x44, 0xea, 0xe8, 0xb2, 0x3e,
+	0x93, 0x57, 0xe0, 0xe6, 0x28, 0x25, 0x4b, 0x51, 0xd2, 0xd1, 0xdc, 0x09, 0xa6, 0xab, 0x7b, 0xe1,
+	0x0d, 0xa7, 0x9f, 0x4c, 0x37, 0xea, 0x69, 0x64, 0x01, 0x07, 0xda, 0x1c, 0x3d, 0x98, 0x5b, 0xc1,
+	0x74, 0x75, 0x18, 0x1a, 0xab, 0x27, 0xcd, 0x33, 0x32, 0x2d, 0x42, 0x61, 0x12, 0x6f, 0x99, 0x10,
+	0x98, 0xd1, 0xb1, 0x31, 0xd1, 0x42, 0xf2, 0x08, 0x3c, 0x2e, 0xcf, 0xcb, 0x7a, 0x93, 0xf1, 0x98,
+	0x4e, 0xe6, 0x56, 0xe0, 0x46, 0x2e, 0x97, 0xa7, 0x1a, 0x93, 0x19, 0xd8, 0x3c, 0xa1, 0xae, 0x56,
+	0xd8, 0x3c, 0x21, 0x4f, 0xc0, 0x89, 0xd5, 0x15, 0xf5, 0xf4, 0x8b, 0x8e, 0xc2, 0x36, 0xf2, 0xf7,
+	0x85, 0x50, 0x78, 0xa5, 0xa2, 0xa6, 0xb7, 0xf8, 0x69, 0xc1, 0xec, 0x0c, 0x59, 0x15, 0x6f, 0xfb,
+	0x84, 0x5a, 0x95, 0x75, 0xbb, 0xea, 0xb7, 0x10, 0xed, 0xbf, 0x85, 0xe8, 0x0c, 0x87, 0x38, 0xba,
+	0x16, 0xe2, 0x5d, 0x38, 0xb8, 0xa8, 0xb1, 0xda, 0xe9, 0x44, 0xbc, 0xc8, 0x80, 0xff, 0xcc, 0x60,
+	0xf1, 0xcd, 0x02, 0xaf, 0x5b, 0x45, 0xfe, 0xcb, 0x2e, 0x2f, 0xc1, 0xeb, 0x6e, 0xac, 0xa4, 0xb6,
+	0xfe, 0x0f, 0x49, 0xd8, 0xdf, 0xe9, 0x6e, 0x54, 0xb4, 0x27, 0x91, 0xfb, 0x30, 0x66, 0x22, 0xde,
+	0x16, 0x55, 0xbb, 0x5c, 0x8b, 0x9a, 0x3d, 0x54, 0xa1, 0x58, 0xa6, 0x97, 0x73, 0x22, 0x03, 0x56,
+	0xdf, 0x6d, 0x38, 0x3a, 0xc3, 0xea, 0x92, 0xc7, 0xd8, 0x47, 0xfc, 0x0c, 0x46, 0xa7, 0x5c, 0xa4,
+	0xe4, 0xb8, 0x73, 0xd4, 0xa0, 0x08, 0x2f, 0x6a, 0x94, 0xca, 0x3f, 0xec, 0x8b, 0x85, 0x48, 0xc9,
+	0x5b, 0x98, 0x7d, 0x29, 0x25, 0x56, 0xaa, 0x17, 0x0f, 0xb8, 0xf3, 0x07, 0x6a, 0xe4, 0x39, 0xcc,
+	0x3e, 0x60, 0x86, 0x6a, 0xff, 0x5a, 0xe8, 0x26, 0xaf, 0x13, 0xff, 0x4e, 0x77, 0x3e, 0xc9, 0x4b,
+	0xb5, 0x23, 0x2f, 0x60, 0xfa, 0x11, 0xd5, 0x20, 0x73, 0x68, 0xf6, 0xbb, 0x66, 0xa7, 0xeb, 0xb7,
+	0x46, 0x12, 0xba, 0xa7, 0xdd, 0x6c, 0xf9, 0xc7, 0x7f, 0x0e, 0x90, 0x9b, 0xb1, 0xfe, 0x36, 0x5f,
+	0xff, 0x0a, 0x00, 0x00, 0xff, 0xff, 0x81, 0x07, 0x6e, 0xcf, 0x48, 0x04, 0x00, 0x00,
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// ServiceTemplateClient is the client API for ServiceTemplate service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ServiceTemplateClient interface {
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	UpsertTemplate(ctx context.Context, in *Template, opts ...grpc.CallOption) (*Template, error)
+	DeleteTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	GetTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Template, error)
+	SearchTemplates(ctx context.Context, in *SearchTemplate, opts ...grpc.CallOption) (*Templates, error)
+}
+
+type serviceTemplateClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewServiceTemplateClient(cc *grpc.ClientConn) ServiceTemplateClient {
+	return &serviceTemplateClient{cc}
+}
+
+func (c *serviceTemplateClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/template.ServiceTemplate/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceTemplateClient) UpsertTemplate(ctx context.Context, in *Template, opts ...grpc.CallOption) (*Template, error) {
+	out := new(Template)
+	err := c.cc.Invoke(ctx, "/template.ServiceTemplate/UpsertTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceTemplateClient) DeleteTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/template.ServiceTemplate/DeleteTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceTemplateClient) GetTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Template, error) {
+	out := new(Template)
+	err := c.cc.Invoke(ctx, "/template.ServiceTemplate/GetTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceTemplateClient) SearchTemplates(ctx context.Context, in *SearchTemplate, opts ...grpc.CallOption) (*Templates, error) {
+	out := new(Templates)
+	err := c.cc.Invoke(ctx, "/template.ServiceTemplate/SearchTemplates", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ServiceTemplateServer is the server API for ServiceTemplate service.
+type ServiceTemplateServer interface {
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	UpsertTemplate(context.Context, *Template) (*Template, error)
+	DeleteTemplate(context.Context, *common.Id) (*common.Empty, error)
+	GetTemplate(context.Context, *common.Id) (*Template, error)
+	SearchTemplates(context.Context, *SearchTemplate) (*Templates, error)
+}
+
+func RegisterServiceTemplateServer(s *grpc.Server, srv ServiceTemplateServer) {
+	s.RegisterService(&_ServiceTemplate_serviceDesc, srv)
+}
+
+func _ServiceTemplate_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceTemplateServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/template.ServiceTemplate/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceTemplateServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceTemplate_UpsertTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Template)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceTemplateServer).UpsertTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/template.ServiceTemplate/UpsertTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceTemplateServer).UpsertTemplate(ctx, req.(*Template))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceTemplate_DeleteTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceTemplateServer).DeleteTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/template.ServiceTemplate/DeleteTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceTemplateServer).DeleteTemplate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceTemplate_GetTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceTemplateServer).GetTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/template.ServiceTemplate/GetTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceTemplateServer).GetTemplate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceTemplate_SearchTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchTemplate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceTemplateServer).SearchTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/template.ServiceTemplate/SearchTemplates",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceTemplateServer).SearchTemplates(ctx, req.(*SearchTemplate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ServiceTemplate_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "template.ServiceTemplate",
+	HandlerType: (*ServiceTemplateServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Ping",
+			Handler:    _ServiceTemplate_Ping_Handler,
+		},
+		{
+			MethodName: "UpsertTemplate",
+			Handler:    _ServiceTemplate_UpsertTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteTemplate",
+			Handler:    _ServiceTemplate_DeleteTemplate_Handler,
+		},
+		{
+			MethodName: "GetTemplate",
+			Handler:    _ServiceTemplate_GetTemplate_Handler,
+		},
+		{
+			MethodName: "SearchTemplates",
+			Handler:    _ServiceTemplate_SearchTemplates_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "template/template.proto",
 }

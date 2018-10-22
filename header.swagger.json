@@ -2948,116 +2948,6 @@
           }
         }
       },
-      "emailAttachment": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "mimetype": {
-            "type": "string"
-          }
-        }
-      },
-      "emailEmail": {
-        "type": "object",
-        "properties": {
-          "from": {
-            "type": "string"
-          },
-          "subject": {
-            "type": "string",
-            "title": "string to = 4;"
-          },
-          "body": {
-            "type": "string"
-          },
-          "header": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "attachments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/emailAttachment"
-            }
-          },
-          "to": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "cc": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "bcc": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "messagetemplateMessageTemplate": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "agent_id": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Message"
-            }
-          },
-          "email": {
-            "$ref": "#/components/schemas/emailEmail"
-          },
-          "channel": {
-            "type": "string"
-          },
-          "is_public": {
-            "type": "boolean",
-            "format": "boolean"
-          },
-          "id": {
-            "type": "string"
-          }
-        }
-      },
-      "messagetemplateMessageTemplates": {
-        "type": "object",
-        "properties": {
-          "message_templates": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/messagetemplateMessageTemplate"
-            }
-          },
-          "anchor": {
-            "type": "string"
-          },
-          "total": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
       "noti5Setting": {
         "type": "object",
         "properties": {
@@ -3718,6 +3608,116 @@
           },
           "token": {
             "type": "string"
+          }
+        }
+      },
+      "emailAttachment": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "mimetype": {
+            "type": "string"
+          }
+        }
+      },
+      "emailEmail": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string",
+            "title": "string to = 4;"
+          },
+          "body": {
+            "type": "string"
+          },
+          "header": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/emailAttachment"
+            }
+          },
+          "to": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "templateTemplate": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "agent_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          },
+          "email": {
+            "$ref": "#/components/schemas/emailEmail"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "is_public": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "templateTemplates": {
+        "type": "object",
+        "properties": {
+          "templates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/templateTemplate"
+            }
+          },
+          "anchor": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
