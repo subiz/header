@@ -12,7 +12,7 @@ message Template{
     string type = 3;
     repeated conversation.Message messages = 4;
     email.Email email = 5;
-    string channel = 6;
+    repeated string channel = 6;
     bool is_public = 7;
     string id = 8;
     common.Context ctx = 9;

@@ -3692,7 +3692,10 @@
             "$ref": "#/components/schemas/emailEmail"
           },
           "channel": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "is_public": {
             "type": "boolean",
