@@ -283,7 +283,8 @@ enum Event {
 
 	ConversationWorkerJob = 103;
 
-	TemplateUpsertRequested = 105;
+	TemplateCreateRequested = 104;
+	TemplateUpdateRequested = 105;
 	TemplateDeleteRequested = 106;
 	TemplateReadRequested = 107;
 	TemplateListRequested = 108;
@@ -630,7 +631,8 @@ service CannedResponseMgr {
 
 service TemplateMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
-  rpc UpsertTemplate(Template) returns (Template);
+  rpc CreateTemplate(Template) returns (Template);
+  rpc UpdateTemplate(Template) returns (Template);
 	rpc DeleteTemplate(common.Id) returns (common.Empty);
 	rpc GetTemplate(common.Id) returns (Template);
 	rpc ListTemplates(common.Id) returns (Templates);
