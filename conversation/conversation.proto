@@ -4,6 +4,7 @@ package conversation;
 
 import "git.subiz.net/header/common/common.proto";
 import "git.subiz.net/header/user/user.proto";
+import "git.subiz.net/header/email/email.proto";
 
 message Rule {
 	optional common.Context ctx = 1;
@@ -281,6 +282,12 @@ enum Event {
 	ConversationV3Synced = 102;
 
 	ConversationWorkerJob = 103;
+
+	TemplateUpsertRequested = 105;
+	TemplateDeleteRequested = 106;
+	TemplateReadRequested = 107;
+	TemplateListRequested = 108;
+
 }
 
 message RequestState {
@@ -476,6 +483,22 @@ message Tag {
 	optional string color = 8;
 }
 
+message Template {
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string account_id =3;
+	optional string name = 5;
+	optional string key = 6;
+	optional string type = 7;
+	repeated Message messages = 8;
+	optional email.Email email = 9;
+	repeated string channel = 10;
+	optional bool is_public = 11;
+	optional int64 created = 12;
+	optional int64 modified = 13;
+	optional string creator = 14;
+}
+
 message CannedResponse {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -485,6 +508,13 @@ message CannedResponse {
 	optional int64 created = 7;
 	optional int64 modified = 8;
 	optional string creator = 9;
+}
+
+message Templates {
+		optional common.Context ctx = 1;
+		repeated Template templates = 2;
+		optional string anchor = 3;
+		optional int64 total = 4;
 }
 
 message CannedResponses {
@@ -597,6 +627,15 @@ service CannedResponseMgr {
 	rpc GetCannedResponse(common.Id) returns (CannedResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
+
+service TemplateMgr {
+	rpc Ping(common.PingRequest) returns (common.Pong);
+  rpc UpsertTemplate(Template) returns (Template);
+	rpc DeleteTemplate(common.Id) returns (common.Empty);
+	rpc GetTemplate(common.Id) returns (Template);
+	rpc ListTemplates(common.Id) returns (Templates);
+}
+
 
 service TagMgr {
 	rpc CreateTag(Tag) returns (Tag);
