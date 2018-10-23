@@ -148,7 +148,7 @@ enum E {
 	unable_to_load_permission = 1036;
 	auto_charge_is_not_enabled = 1037;
 	stripe_customer_is_not_valid = 1038;
-
+	invoice_duedate_empty = 1039;
 	kafka_rpc_timeout = 2150;
 
 	s3_call_error = 1503;
