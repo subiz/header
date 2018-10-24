@@ -500,6 +500,12 @@ message Template {
 	optional string creator = 14;
 }
 
+message SearchTemplate {
+				optional common.Context ctx = 1;
+				optional string anchor = 2;
+				optional int32 limit = 3;
+}
+
 message CannedResponse {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -635,7 +641,7 @@ service TemplateMgr {
   rpc UpdateTemplate(Template) returns (Template);
 	rpc DeleteTemplate(common.Id) returns (common.Empty);
 	rpc GetTemplate(common.Id) returns (Template);
-	rpc ListTemplates(common.Id) returns (Templates);
+	rpc ListTemplates(SearchTemplate) returns (Templates);
 }
 
 
