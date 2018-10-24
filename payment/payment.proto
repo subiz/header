@@ -362,6 +362,9 @@ message Log {
 		pay_invoice = 14;
 		charge_stripe = 15;
 		create_bill = 16;
+		use_credit = 17;
+		edit_subscription = 18;
+		edit_invoice = 19;
 	}
 	optional string user = 2;
 	optional string id = 8;
