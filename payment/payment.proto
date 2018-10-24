@@ -365,6 +365,7 @@ message Log {
 		use_credit = 17;
 		edit_subscription = 18;
 		edit_invoice = 19;
+		downgrade = 20;
 	}
 	optional string user = 2;
 	optional string id = 8;
