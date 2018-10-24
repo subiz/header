@@ -164,7 +164,7 @@ enum E {
 	hash_bcrypt_error = 3009;
 	invalid_cipher_size = 3010;
 	invalid_google_auth_response = 3011;
-
+	challenge_not_found = 3054;
 	inactive_agent = 4000;
 }
 
