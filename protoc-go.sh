@@ -17,10 +17,21 @@ fi
 rm -fr $PROTOC_PATH && mkdir -p $PROTOC_PATH
 unzip -q protobuf/$PROTOC_FILE -d $PROTOC_PATH
 
+PROTOC_GO_VERSION="ddf22928ea3c56eb4292a0adbbf5001b1e8e7d0d"
+PROTOC_GO_REPO="github.com/golang/protobuf/protoc-gen-go"
+
 if [ ! -f $GOPATH/bin/protoc-gen-go ]; then
 	echo -e "\033[0;34minstalling protoc-gen-go..."
-	go get -u github.com/golang/protobuf/protoc-gen-go
+	go get -u $PROTOC_GO_REPO
 	echo "done"
+fi
+
+CURRENT_VERSION=`git -C $GOPATH/src/$PROTOC_GO_REPO rev-parse HEAD`
+if [ "$CURRENT_VERSION" != "$PROTOC_GO_VERSION" ]; then
+	echo "reset protoc-gen-go version to $PROTOC_GO_VERSION"
+	git -C $GOPATH/src/$PROTOC_GO_REPO fetch -p
+	git -C $GOPATH/src/$PROTOC_GO_REPO reset --hard $PROTOC_GO_VERSION
+	go install -i $PROTOC_GO_REPO
 fi
 
 if [ ! -f $GOPATH/bin/protoc-gen-swagger ]; then
