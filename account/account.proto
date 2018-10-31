@@ -7,6 +7,11 @@ import "git.subiz.net/header/common/common.proto";
 import "git.subiz.net/header/lang/lang.proto";
 import "git.subiz.net/header/payment/payment.proto";
 
+service UseDoc {
+	rpc f1(NewPassword) returns (NewPassword) {}
+	rpc f2(CreateAccountRequest) returns (CreateAccountRequest) {}
+}
+
 message Agent {
 	optional common.Context ctx = 1;
 	optional string id = 2;

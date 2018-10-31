@@ -273,6 +273,58 @@
           }
         }
       },
+      "accountCreateAccountRequest": {
+        "type": "object",
+        "properties": {
+          "fullname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "account_name": {
+            "type": "string"
+          },
+          "account_url": {
+            "type": "string"
+          },
+          "avatar_url": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          }
+        }
+      },
+      "accountNewPassword": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "new_password": {
+            "type": "string"
+          },
+          "old_password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
       "authMethod": {
         "type": "object",
         "properties": {
@@ -3911,6 +3963,23 @@
           }
         }
       },
+      "userMaskResponse": {
+        "type": "object",
+        "properties": {
+          "subiz_id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "mask": {
+            "type": "string"
+          }
+        }
+      },
       "userNotes": {
         "type": "object",
         "properties": {
@@ -4039,6 +4108,17 @@
             "type": "string"
           },
           "user_id": {
+            "type": "string"
+          }
+        }
+      },
+      "userUserCreateResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "mask": {
             "type": "string"
           }
         }

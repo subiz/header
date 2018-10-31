@@ -896,6 +896,23 @@
         }
       }
     },
+    "userMaskResponse": {
+      "type": "object",
+      "properties": {
+        "subiz_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "mask": {
+          "type": "string"
+        }
+      }
+    },
     "userNote": {
       "type": "object",
       "properties": {
@@ -1193,6 +1210,17 @@
         "modified_week": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "userUserCreateResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mask": {
+          "type": "string"
         }
       }
     },

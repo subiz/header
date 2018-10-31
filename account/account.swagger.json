@@ -303,6 +303,64 @@
         }
       }
     },
+    "accountCreateAccountRequest": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "account_name": {
+          "type": "string"
+        },
+        "account_url": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        }
+      }
+    },
+    "accountNewPassword": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "token": {
+          "type": "string"
+        },
+        "new_password": {
+          "type": "string"
+        },
+        "old_password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
     "authCredential": {
       "type": "object",
       "properties": {

@@ -4,6 +4,11 @@ package user;
 
 import "git.subiz.net/header/common/common.proto";
 
+service UseDoc {
+	rpc f1(MaskResponse) returns (MaskResponse) {}
+	rpc f3(UserCreateResult) returns (UserCreateResult) {}
+}
+
 message AddToMyRequest {
 	optional common.Context ctx = 1;
 	optional string user_id = 3;
