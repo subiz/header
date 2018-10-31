@@ -29,6 +29,7 @@ message SearchContentRequest {
 	optional string anchor = 15;
 	optional string stringify = 16;
 	optional string fieldvalues = 17;
+	optional int64 created = 18;
 }
 
 message KeyValue {
