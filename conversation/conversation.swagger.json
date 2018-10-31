@@ -1674,12 +1674,36 @@
         "id": {
           "type": "string"
         },
+        "state": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
         "attributes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/conversationTicketAttributeData"
-          },
-          "title": "optional string state = 5;\noptional string priority = 6;\noptional int64 due_date = 7;\noptional string subject = 8;\noptional int64 created = 9;"
+          }
+        },
+        "created_week": {
+          "type": "string",
+          "format": "int64"
+        },
+        "due_date_week": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

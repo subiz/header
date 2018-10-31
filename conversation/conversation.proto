@@ -813,24 +813,54 @@ enum Path {
 	ConversationSendWebhook = 21;
 }
 
+message TicketUser {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string ticket_id = 3;
+	optional string user_id = 4;
+}
+
 message Ticket {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string conversation_id = 3;
 	optional string id = 4;
-	// optional string state = 5;
-	// optional string priority = 6;
-	// optional int64 due_date = 7;
-	// optional string subject = 8;
-	// optional int64 created = 9;
+	optional string state = 5;
+	optional string priority = 6;
+	optional int64 due_date = 7;
+	optional string subject = 8;
+	optional int64 created = 9;
 	repeated TicketAttributeData attributes = 10;
+
+	optional int64 created_week = 12;
+	optional int64 due_date_week = 13;
+}
+
+message TicketListRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string state = 3; // all, open, resolve
+	optional string group = 4;
+	enum TicketListOrderBy {
+		created = 1;
+		duedate = 2;
+		updated = 3;
+	}
+	optional string order_by = 5;
+}
+
+message TicketUsers {
+	optional common.Context ctx = 1;
+	repeated TicketUser users = 2;
+	optional string anchor = 3;
 }
 
 enum TicketState {
-	open = 0;
-	pending = 1;
-	resolved = 2;
-	closed = 3;
+	all = 0;
+	open = 1;
+	pending = 2;
+	resolved = 3;
+	closed = 4;
 }
 
 enum TicketPriority {
