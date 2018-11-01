@@ -156,6 +156,9 @@ enum E {
 	subscription_started_is_invalid = 1505;
 	subscription_is_nil = 1506;
 
+	ticket_list_anchor_is_invalid = 1600;
+	elastic_search_error = 1601;
+
 	client_not_found = 3004;
 	missing_redirect_url = 3005;
 	missing_client_name	= 3006;
