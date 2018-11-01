@@ -16,6 +16,7 @@ message Response {
 	bytes body = 4;
 	int32 code = 5;
 	bytes error = 6;
+	string path = 7;
 	int64 created = 8;
 }
 
