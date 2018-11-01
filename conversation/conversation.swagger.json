@@ -983,6 +983,9 @@
         },
         "ticket": {
           "$ref": "#/definitions/conversationTicket"
+        },
+        "ticket_id": {
+          "type": "string"
         }
       }
     },
@@ -1697,13 +1700,24 @@
             "$ref": "#/definitions/conversationTicketAttributeData"
           }
         },
-        "created_week": {
-          "type": "string",
-          "format": "int64"
+        "updated": {
+          "type": "string"
         },
-        "due_date_week": {
-          "type": "string",
-          "format": "int64"
+        "user_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agent_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_assigned": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

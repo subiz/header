@@ -1760,6 +1760,9 @@
           },
           "ticket": {
             "$ref": "#/components/schemas/conversationTicket"
+          },
+          "ticket_id": {
+            "type": "string"
           }
         }
       },
@@ -2319,12 +2322,47 @@
           "id": {
             "type": "string"
           },
+          "state": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
           "attributes": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/conversationTicketAttributeData"
-            },
-            "title": "optional string state = 5;\noptional string priority = 6;\noptional int64 due_date = 7;\noptional string subject = 8;\noptional int64 created = 9;"
+            }
+          },
+          "updated": {
+            "type": "string"
+          },
+          "user_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "agent_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "is_assigned": {
+            "type": "boolean",
+            "format": "boolean"
           }
         }
       },
