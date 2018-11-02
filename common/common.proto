@@ -159,6 +159,10 @@ enum E {
 	ticket_list_anchor_is_invalid = 1600;
 	elastic_search_error = 1601;
 	conversation_not_found = 1602;
+	conversation_id_missing = 1603;
+	ticket_id_missing = 1604;
+	ticket_id_is_invalid = 1605;
+	conversation_id_is_invalid = 1606;
 
 	client_not_found = 3004;
 	missing_redirect_url = 3005;
