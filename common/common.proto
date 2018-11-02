@@ -163,6 +163,8 @@ enum E {
 	ticket_id_missing = 1604;
 	ticket_id_is_invalid = 1605;
 	conversation_id_is_invalid = 1606;
+	conversation_already_had_a_ticket = 1607;
+	ticket_not_found = 1608;
 
 	client_not_found = 3004;
 	missing_redirect_url = 3005;
