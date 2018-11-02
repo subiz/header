@@ -812,6 +812,7 @@ enum Path {
 	ConversationCreateTicket = 19;
 	ConversationUpdateTicket = 20;
 	ConversationSendWebhook = 21;
+	ConversationDeleteTicket = 22;
 }
 
 message TicketUser {
@@ -828,12 +829,12 @@ message Ticket {
 	optional string id = 4;
 	optional string state = 5;
 	optional string priority = 6;
-	optional int64 due_date = 7;
+	optional int64 duedate = 7;
 	optional string subject = 8;
 	optional int64 created = 9;
 	repeated TicketAttributeData attributes = 10;
 
-	optional string updated = 11;
+	optional int64 updated = 11;
 	repeated string user_ids = 12;
 	repeated string agent_ids = 13;
 	optional bool is_assigned = 14;

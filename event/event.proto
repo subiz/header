@@ -164,6 +164,7 @@ enum ConvoType {
 	conversation_pending = 81;
 	ticket_created = 82;
 	ticket_updated = 83;
+	ticket_deleted = 84;
 }
 
 enum NotiboxType {
@@ -223,7 +224,7 @@ enum Object {
 	user_attribute = 20;
 	alias = 22;
 	note = 23;
-	// ticket = 24;
+	ticket = 24;
 }
 
 message ListEventsRequest {

@@ -2328,7 +2328,7 @@
           "priority": {
             "type": "string"
           },
-          "due_date": {
+          "duedate": {
             "type": "integer",
             "format": "int64"
           },
@@ -2346,7 +2346,8 @@
             }
           },
           "updated": {
-            "type": "string"
+            "type": "integer",
+            "format": "int64"
           },
           "user_ids": {
             "type": "array",
