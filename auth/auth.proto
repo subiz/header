@@ -198,7 +198,7 @@ message SuperPasswordCredential {
 
 	string issuer_id = 5; // default: owner
 	// string client_id = 7; // default subiz
-  // string client_type = 8;
+	// string client_type = 8;
 	string account_id = 9;
 	// string client_account_id = 10; // subiz
 	int32 expired = 11; // default 24 hour

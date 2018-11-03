@@ -502,9 +502,9 @@ message Template {
 }
 
 message SearchTemplate {
-				optional common.Context ctx = 1;
-				optional string anchor = 2;
-				optional int32 limit = 3;
+	optional common.Context ctx = 1;
+	optional string anchor = 2;
+	optional int32 limit = 3;
 }
 
 message CannedResponse {
@@ -519,10 +519,10 @@ message CannedResponse {
 }
 
 message Templates {
-		optional common.Context ctx = 1;
-		repeated Template templates = 2;
-		optional string anchor = 3;
-		optional int64 total = 4;
+	optional common.Context ctx = 1;
+	repeated Template templates = 2;
+	optional string anchor = 3;
+	optional int64 total = 4;
 }
 
 message CannedResponses {
@@ -638,8 +638,8 @@ service CannedResponseMgr {
 
 service TemplateMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
-  rpc CreateTemplate(Template) returns (Template);
-  rpc UpdateTemplate(Template) returns (Template);
+	rpc CreateTemplate(Template) returns (Template);
+	rpc UpdateTemplate(Template) returns (Template);
 	rpc DeleteTemplate(common.Id) returns (common.Empty);
 	rpc GetTemplate(common.Id) returns (Template);
 	rpc ListTemplates(SearchTemplate) returns (Templates);

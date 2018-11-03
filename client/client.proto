@@ -58,8 +58,6 @@ message Client {
 }
 
 enum Event {
-
-
 	ClientCreateRequested = 20;
 	ClientUpdateRequested = 21;
 	ClientDeleteRequested = 22;
