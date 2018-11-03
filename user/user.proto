@@ -740,11 +740,25 @@ message Note {
 	optional string creator_id = 5;
 	optional string content = 6;
 	optional int64 created = 7;
+	optional string creator_type = 8;
+	enum CreatorType {
+		agent = 0;
+		system = 1;
+	}
+	optional string target_id = 9;
+	optional string target_type = 10;
+	optional string link_id = 11;
+	optional string link_type = 12;
+	enum Type {
+		conversation = 0; // link
+		ticket = 1;
+		deal = 2;
+		user = 3; // target
+	}
 }
 
 message Notes {
 	optional common.Context ctx = 1;
-	optional string account_id = 2;
 	repeated Note notes = 3;
 }
 

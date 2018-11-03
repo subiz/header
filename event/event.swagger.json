@@ -2160,6 +2160,21 @@
         "created": {
           "type": "string",
           "format": "int64"
+        },
+        "creator_type": {
+          "type": "string"
+        },
+        "target_id": {
+          "type": "string"
+        },
+        "target_type": {
+          "type": "string"
+        },
+        "link_id": {
+          "type": "string"
+        },
+        "link_type": {
+          "type": "string"
         }
       }
     },
