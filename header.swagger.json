@@ -2973,13 +2973,11 @@
           "id": {
             "type": "string"
           },
-          "user_id": {
-            "type": "string"
-          },
           "creator_id": {
-            "type": "string"
+            "type": "string",
+            "title": "optional string user_id = 4;"
           },
-          "content": {
+          "text": {
             "type": "string"
           },
           "created": {
@@ -2999,6 +2997,9 @@
             "type": "string"
           },
           "link_type": {
+            "type": "string"
+          },
+          "format": {
             "type": "string"
           }
         }

@@ -736,9 +736,9 @@ message Note {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string id = 3;
-	optional string user_id = 4;
+	// optional string user_id = 4;
 	optional string creator_id = 5;
-	optional string content = 6;
+	optional string text = 6;
 	optional int64 created = 7;
 	optional string creator_type = 8;
 	enum CreatorType {
@@ -755,6 +755,12 @@ message Note {
 		deal = 2;
 		user = 3; // target
 	}
+	optional string format = 13;
+	enum Format {
+		plaintext = 0;
+		markdown = 1;
+		html = 2;
+	}
 }
 
 message Notes {
@@ -765,5 +771,6 @@ message Notes {
 message ListNotesRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional string user_id = 3;
+	// optional string user_id = 3;
+	optional string target_id = 4;
 }
