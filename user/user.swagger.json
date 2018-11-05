@@ -967,6 +967,9 @@
           "items": {
             "$ref": "#/definitions/userNote"
           }
+        },
+        "anchor": {
+          "type": "string"
         }
       }
     },

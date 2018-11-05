@@ -766,6 +766,7 @@ message Note {
 message Notes {
 	optional common.Context ctx = 1;
 	repeated Note notes = 3;
+	optional string anchor = 4;
 }
 
 message ListNotesRequest {
@@ -773,4 +774,6 @@ message ListNotesRequest {
 	optional string account_id = 2;
 	// optional string user_id = 3;
 	optional string target_id = 4;
+	optional int32 limit = 5;
+	optional string anchor = 6;
 }

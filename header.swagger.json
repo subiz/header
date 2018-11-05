@@ -4043,6 +4043,9 @@
             "items": {
               "$ref": "#/components/schemas/userNote"
             }
+          },
+          "anchor": {
+            "type": "string"
           }
         }
       },
