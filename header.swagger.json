@@ -2254,17 +2254,17 @@
           "name": {
             "type": "string"
           },
-          "key": {
-            "type": "string"
+          "keys": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "type": {
             "type": "string"
           },
-          "messages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Message"
-            }
+          "message": {
+            "$ref": "#/components/schemas/Message"
           },
           "email": {
             "$ref": "#/components/schemas/emailEmail"
