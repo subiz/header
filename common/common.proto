@@ -165,6 +165,8 @@ enum E {
 	conversation_id_is_invalid = 1606;
 	conversation_already_had_a_ticket = 1607;
 	ticket_not_found = 1608;
+	webhook_not_found = 1609;
+	webhook_is_disabled = 1610;
 
 	client_not_found = 3004;
 	missing_redirect_url = 3005;
