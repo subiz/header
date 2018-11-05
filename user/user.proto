@@ -410,7 +410,7 @@ message UserSearchRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string segmentation_id = 3;
-	optional string query = 4;
+	repeated SCondition conditions = 4;
 	optional string anchor = 5;
 	optional int32 limit = 6;
 	optional string agent_id = 8; // search my user of agent
