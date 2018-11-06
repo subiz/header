@@ -5,9 +5,9 @@ package noti5;
 import "git.subiz.net/header/common/common.proto";
 
 enum Type {
+	nothing = 2;
 	new_message = 0;
 	new_conversation = 1;
-	nothing = 2;
 }
 
 message Setting {
@@ -18,6 +18,7 @@ message Setting {
 	optional string mobile_type = 5;
 	optional string email_type = 6;
 	optional int32 email_after = 7;
+	optional int64 updated = 8;
 }
 
 service Noti5Service {

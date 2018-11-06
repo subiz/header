@@ -3220,6 +3220,10 @@
           "email_after": {
             "type": "integer",
             "format": "int32"
+          },
+          "updated": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
