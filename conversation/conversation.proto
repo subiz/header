@@ -815,13 +815,6 @@ enum Path {
 	ConversationDeleteTicket = 22;
 }
 
-message TicketUser {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string ticket_id = 3;
-	optional string user_id = 4;
-}
-
 message Ticket {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -843,16 +836,17 @@ message Ticket {
 message TicketListRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional string state = 3; // all, open, resolve
-	optional string group = 4;
+	optional string state = 3; // "", "open", "resolved"
+	optional string agent_id = 4;
 	enum TicketListOrderBy {
 		created = 1;
 		duedate = 2;
 		updated = 3;
 	}
-	optional string order_by = 5;
+	optional string order_by = 5; // created, duedate, updated
 	optional string anchor = 6;
 	optional int32 limit = 7;
+	optional bool is_assigned = 8;
 }
 
 message Tickets {
@@ -938,6 +932,7 @@ service TicketMgr {
 	rpc UpdateTicket(Ticket) returns (Ticket);
 	rpc DeleteTicket(DeleteTicketRequest) returns (common.Empty);
 	rpc GetTicket(GetTicketRequest) returns (Ticket);
+	rpc SearchTicket(TicketListRequest) returns (Tickets);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 

@@ -1826,6 +1826,26 @@
         }
       }
     },
+    "conversationTickets": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "tickets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTicket"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
     "conversationTotalConversationResponse": {
       "type": "object",
       "properties": {

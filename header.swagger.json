@@ -2462,6 +2462,23 @@
           }
         }
       },
+      "conversationTickets": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "tickets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationTicket"
+            }
+          },
+          "anchor": {
+            "type": "string"
+          }
+        }
+      },
       "conversationTotalConversationResponse": {
         "type": "object",
         "properties": {
