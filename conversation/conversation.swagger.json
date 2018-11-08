@@ -1615,6 +1615,12 @@
         "message": {
           "$ref": "#/definitions/conversationMessage"
         },
+        "template_datas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTemplateData"
+          }
+        },
         "email": {
           "$ref": "#/definitions/emailEmail"
         },
@@ -1638,6 +1644,23 @@
         },
         "creator": {
           "type": "string"
+        }
+      }
+    },
+    "conversationTemplateData": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

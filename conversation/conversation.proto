@@ -485,6 +485,12 @@ message Tag {
 	optional string color = 8;
 }
 
+message TemplateData {
+	optional string name = 1;
+	optional string key = 2;
+	repeated string ids = 3;
+}
+
 message Template {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -493,6 +499,7 @@ message Template {
 	repeated string keys = 6;
 	optional string type = 7;
 	optional Message message = 8;
+	repeated TemplateData template_datas = 15;
 	optional email.Email email = 9;
 	repeated string channel = 10;
 	optional bool is_public = 11;

@@ -2266,6 +2266,12 @@
           "message": {
             "$ref": "#/components/schemas/Message"
           },
+          "template_datas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationTemplateData"
+            }
+          },
           "email": {
             "$ref": "#/components/schemas/emailEmail"
           },
@@ -2289,6 +2295,23 @@
           },
           "creator": {
             "type": "string"
+          }
+        }
+      },
+      "conversationTemplateData": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
