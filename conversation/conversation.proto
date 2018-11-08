@@ -4,7 +4,6 @@ package conversation;
 
 import "git.subiz.net/header/common/common.proto";
 import "git.subiz.net/header/user/user.proto";
-import "git.subiz.net/header/email/email.proto";
 
 message Rule {
 	optional common.Context ctx = 1;
@@ -486,7 +485,7 @@ message Tag {
 }
 
 message TemplateData {
-	optional string name = 1;
+	optional string type = 4; 
 	optional string key = 2;
 	repeated string ids = 3;
 }
@@ -494,14 +493,11 @@ message TemplateData {
 message Template {
 	optional common.Context ctx = 1;
 	optional string id = 2;
-	optional string account_id =3;
-	optional string name = 5;
+	optional string account_id = 3;
 	repeated string keys = 6;
-	optional string type = 7;
+	optional string channel_type = 17;
 	optional Message message = 8;
-	repeated TemplateData template_datas = 15;
-	optional email.Email email = 9;
-	repeated string channels = 16;
+	repeated TemplateData data = 18;
 	optional bool is_public = 11;
 	optional int64 created = 12;
 	optional int64 modified = 13;

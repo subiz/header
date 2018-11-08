@@ -2251,34 +2251,22 @@
           "account_id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
           "keys": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "type": {
+          "channel_type": {
             "type": "string"
           },
           "message": {
             "$ref": "#/components/schemas/Message"
           },
-          "template_datas": {
+          "data": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/conversationTemplateData"
-            }
-          },
-          "email": {
-            "$ref": "#/components/schemas/emailEmail"
-          },
-          "channels": {
-            "type": "array",
-            "items": {
-              "type": "string"
             }
           },
           "is_public": {
@@ -2301,7 +2289,7 @@
       "conversationTemplateData": {
         "type": "object",
         "properties": {
-          "name": {
+          "type": {
             "type": "string"
           },
           "key": {
@@ -2508,65 +2496,6 @@
           "total_conversation": {
             "type": "integer",
             "format": "int64"
-          }
-        }
-      },
-      "emailAttachment": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "mimetype": {
-            "type": "string"
-          }
-        }
-      },
-      "emailEmail": {
-        "type": "object",
-        "properties": {
-          "from": {
-            "type": "string"
-          },
-          "subject": {
-            "type": "string",
-            "title": "string to = 4;"
-          },
-          "body": {
-            "type": "string"
-          },
-          "header": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          },
-          "attachments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/emailAttachment"
-            }
-          },
-          "to": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "cc": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "bcc": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
       },
