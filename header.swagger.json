@@ -2275,7 +2275,7 @@
           "email": {
             "$ref": "#/components/schemas/emailEmail"
           },
-          "channel": {
+          "channels": {
             "type": "array",
             "items": {
               "type": "string"

@@ -1624,7 +1624,7 @@
         "email": {
           "$ref": "#/definitions/emailEmail"
         },
-        "channel": {
+        "channels": {
           "type": "array",
           "items": {
             "type": "string"
