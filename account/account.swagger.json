@@ -135,6 +135,9 @@
         "v3_state": {
           "type": "integer",
           "format": "int32"
+        },
+        "date_format": {
+          "type": "string"
         }
       }
     },
