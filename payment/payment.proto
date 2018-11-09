@@ -461,6 +461,12 @@ message SearchInvoiceRequest {
 	optional int32 limit = 7;
 }
 
+message DiffSubRequest {
+	optional common.Context ctx = 1;
+	optional Subscription dst = 2;
+	optional Subscription src = 3;
+}
+
 service PaymentMgr {
 	rpc Purchase(Subscription) returns (Invoice);
 	rpc UpdateSubscription(Subscription) returns (Subscription);
@@ -476,7 +482,7 @@ service PaymentMgr {
 	rpc UpdateInvoice(Invoice) returns (Invoice);
 	rpc FilterInvoices(ListInvoiceRequest) returns (Invoices);
 	rpc DraftInvoice(Subscription) returns (Invoice);
-
+	rpc DiffSubscriptions(DiffSubRequest) returns (Invoice);
 	rpc ListComments(ListCommentsRequest) returns (Comments);
 	rpc AddComment(Comment) returns (Comment);
 	rpc ListPlans(common.Empty) returns (Plans);
