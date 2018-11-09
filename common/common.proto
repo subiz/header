@@ -178,6 +178,8 @@ enum E {
 	invalid_google_auth_response = 3011;
 	challenge_not_found = 3054;
 	inactive_agent = 4000;
+
+	date_format_is_invalid = 4001;
 }
 
 message Error {
