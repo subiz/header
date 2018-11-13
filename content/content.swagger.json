@@ -878,6 +878,9 @@
         "url": {
           "type": "string",
           "title": "optional RawEvent event = 12;"
+        },
+        "phone_number": {
+          "type": "string"
         }
       }
     },

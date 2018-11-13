@@ -360,6 +360,7 @@ message Button {
 		url_button = 2;
 		postback_button = 3;
 		event_button = 4;
+		call_button = 5;
 	}
 
 	optional string type = 2;
@@ -373,6 +374,8 @@ message Button {
 
 	//	optional RawEvent event = 12;
 	optional string url = 14;
+
+	optional string phone_number = 16;
 }
 
 message AskInfomationAnswer {
@@ -485,7 +488,7 @@ message Tag {
 }
 
 message TemplateData {
-	optional string type = 4; 
+	optional string type = 4;
 	optional string key = 2;
 	repeated string ids = 3;
 }
