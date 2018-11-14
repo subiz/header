@@ -750,8 +750,8 @@ message Note {
 	}
 	optional string target_id = 9;
 	optional string target_type = 10;
-	optional string link_id = 11;
-	optional string link_type = 12;
+	optional string link_id = 11; // deprecated
+	optional string link_type = 12; // deprecated
 	enum Type {
 		conversation = 0; // link
 		ticket = 1;
@@ -764,6 +764,12 @@ message Note {
 		markdown = 1;
 		html = 2;
 	}
+	repeated NoteLink links = 14;
+}
+
+message NoteLink {
+	optional string id = 1;
+	optional string type = 2;
 }
 
 message Notes {

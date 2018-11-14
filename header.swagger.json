@@ -2997,6 +2997,23 @@
           },
           "format": {
             "type": "string"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userNoteLink"
+            }
+          }
+        }
+      },
+      "userNoteLink": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
           }
         }
       },

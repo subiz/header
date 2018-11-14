@@ -974,6 +974,23 @@
         },
         "format": {
           "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userNoteLink"
+          }
+        }
+      }
+    },
+    "userNoteLink": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
