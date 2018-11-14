@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+package pipeline;
+
+import "git.subiz.net/header/common/common.proto";
+
+message Stage {
+  optional common.Context ctx = 1;
+  optional string id = 2;
+  optional string pipeline_id = 3;
+  optional string name = 4;
+  optional float probability = 5;
+  optional int32 display_order = 6;
+  optional bool close_won = 7;
+  optional bool close_lost = 8;
+  optional int64 created = 9;
+  optional int64 updated = 10;
+}
+
+message Pipeline {
+  optional common.Context ctx = 1;
+  optional string account_id = 2;
+  optional string id = 3;
+  optional bool is_default = 4;
+  repeated Stage stages = 5;
+  optional int64 created = 9;
+  optional int64 updated = 10;
+}
+
+message Pipelines {
+  optional common.Context ctx = 1;
+  repeated Pipeline pipelines = 2;
+}
+
+service PipelineService {
+  rpc CreatePipeline(Pipeline) returns (Pipeline);
+  rpc UpdatePipeline(Pipeline) returns (Pipeline);
+  rpc ListPipelines(common.Id) returns (Pipelines);
+  rpc GetPipeline(common.Id) returns (Pipeline);
+  rpc DeletePipeline(common.Id) returns (common.Empty);
+}

@@ -180,6 +180,10 @@ enum E {
 	inactive_agent = 4000;
 
 	date_format_is_invalid = 4001;
+	
+	pipeline_not_found = 4002;
+	pipeline_is_invalid = 4003;
+	stage_is_invalid = 4004;
 }
 
 message Error {
