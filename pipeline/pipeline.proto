@@ -8,13 +8,14 @@ message Stage {
   optional common.Context ctx = 1;
   optional string id = 2;
   optional string pipeline_id = 3;
-  optional string name = 4;
-  optional float probability = 5;
-  optional int32 display_order = 6;
-  optional bool close_won = 7;
-  optional bool close_lost = 8;
-  optional int64 created = 9;
-  optional int64 updated = 10;
+  optional string type = 4;
+  optional string name = 5;
+  optional float probability = 6;
+  optional int32 display_order = 7;
+  optional bool close_won = 8;
+  optional bool close_lost = 9;
+  optional int64 created = 10;
+  optional int64 updated = 11;
 }
 
 message Pipeline {
@@ -32,10 +33,16 @@ message Pipelines {
   repeated Pipeline pipelines = 2;
 }
 
+enum StageTypes {
+  won = 0;
+  lost = 1;
+  custom = 2;
+}
+
 service PipelineService {
   rpc CreatePipeline(Pipeline) returns (Pipeline);
   rpc UpdatePipeline(Pipeline) returns (Pipeline);
+  rpc DeletePipeline(common.Id) returns (common.Empty);
   rpc ListPipelines(common.Id) returns (Pipelines);
   rpc GetPipeline(common.Id) returns (Pipeline);
-  rpc DeletePipeline(common.Id) returns (common.Empty);
 }

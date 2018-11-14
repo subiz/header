@@ -159,6 +159,12 @@ message Method {
 	bool update_attribute = 318;
 	bool delete_attribute = 319;
 
+	// pipeline
+	bool read_pipeline = 320;
+	bool cread_pipeline = 321;
+	bool update_pipeline = 322;
+	bool delete_pipeline = 323;
+
 	bool read_all_accounts = 1000;
 	bool read_all_agents = 1002;
 	bool read_payment_comments = 1003;

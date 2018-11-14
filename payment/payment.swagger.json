@@ -343,6 +343,23 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "read_pipeline": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "pipeline"
+        },
+        "cread_pipeline": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_pipeline": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_pipeline": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "read_all_accounts": {
           "type": "boolean",
           "format": "boolean"
