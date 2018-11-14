@@ -43,6 +43,6 @@ service PipelineService {
   rpc CreatePipeline(Pipeline) returns (Pipeline);
   rpc UpdatePipeline(Pipeline) returns (Pipeline);
   rpc DeletePipeline(common.Id) returns (common.Empty);
-  rpc ListPipelines(common.Id) returns (Pipelines);
+  rpc ListPipelines(common.Empty) returns (Pipelines);
   rpc GetPipeline(common.Id) returns (Pipeline);
 }
