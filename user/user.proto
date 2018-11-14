@@ -631,6 +631,8 @@ service UserMgr {
 
 	rpc ListNotes(ListNotesRequest) returns (Notes);
 	rpc AddNote(Note) returns (Note);
+	rpc UpdateNote(Note) returns (Note);
+	rpc DeleteNote(DeleteNoteRequest) returns (common.Empty);
 }
 
 service AutomationMgr {
@@ -777,4 +779,10 @@ message ListNotesRequest {
 	optional string target_id = 4;
 	optional int32 limit = 5;
 	optional string anchor = 6;
+}
+
+message DeleteNoteRequest {
+	optional string account_id = 2;
+	optional string target_id = 3;
+	optional string id = 4;
 }
