@@ -62,6 +62,7 @@ message Permission {
 	int32 conversation_export = 35;
 	int32 conversation_report = 36;
 	int32 content = 37;
+	int32 pipeline = 38;
 }
 
 message Method {

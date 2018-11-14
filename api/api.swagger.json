@@ -693,6 +693,10 @@
         "content": {
           "type": "integer",
           "format": "int32"
+        },
+        "pipeline": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
