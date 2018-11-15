@@ -623,6 +623,23 @@
             "type": "boolean",
             "format": "boolean"
           },
+          "read_currency": {
+            "type": "boolean",
+            "format": "boolean",
+            "title": "currency"
+          },
+          "cread_currency": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "update_currency": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "delete_currency": {
+            "type": "boolean",
+            "format": "boolean"
+          },
           "read_all_accounts": {
             "type": "boolean",
             "format": "boolean"
@@ -809,6 +826,10 @@
             "format": "int32"
           },
           "pipeline": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "currency": {
             "type": "integer",
             "format": "int32"
           }
@@ -2678,6 +2699,110 @@
           "modified_week": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "CurrencyDecimalPlace": {
+        "type": "string",
+        "enum": [
+          "zero",
+          "one",
+          "two",
+          "three",
+          "four",
+          "five"
+        ],
+        "default": "zero"
+      },
+      "CurrencyFormat": {
+        "type": "string",
+        "enum": [
+          "DotComma",
+          "CommaDot",
+          "SpaceComma"
+        ],
+        "default": "DotComma"
+      },
+      "dealCurrencies": {
+        "type": "object",
+        "properties": {
+          "currencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/dealCurrency"
+            }
+          }
+        }
+      },
+      "dealCurrency": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "is_base": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string"
+          },
+          "decimal_place": {
+            "$ref": "#/components/schemas/CurrencyDecimalPlace"
+          },
+          "format": {
+            "$ref": "#/components/schemas/CurrencyFormat"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updated": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "dealExchangeRate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "currency_id": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "number",
+            "format": "float"
+          },
+          "effective_date": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "dealExchangeRates": {
+        "type": "object",
+        "properties": {
+          "exchange_rates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/dealExchangeRate"
+            }
           }
         }
       },

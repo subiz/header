@@ -63,6 +63,7 @@ message Permission {
 	int32 conversation_report = 36;
 	int32 content = 37;
 	int32 pipeline = 38;
+	int32 currency = 39;
 }
 
 message Method {
@@ -165,6 +166,12 @@ message Method {
 	bool cread_pipeline = 321;
 	bool update_pipeline = 322;
 	bool delete_pipeline = 323;
+
+	// currency
+	bool read_currency = 324;
+	bool cread_currency = 325;
+	bool update_currency = 326;
+	bool delete_currency = 327;
 
 	bool read_all_accounts = 1000;
 	bool read_all_agents = 1002;

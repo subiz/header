@@ -546,6 +546,23 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "read_currency": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "currency"
+        },
+        "cread_currency": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_currency": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_currency": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "read_all_accounts": {
           "type": "boolean",
           "format": "boolean"
@@ -732,6 +749,10 @@
           "format": "int32"
         },
         "pipeline": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "currency": {
           "type": "integer",
           "format": "int32"
         }
