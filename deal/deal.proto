@@ -105,7 +105,7 @@ service DealService {
   rpc CreateCurrency(Currency) returns (Currency);
   rpc UpdateCurrency(Currency) returns (Currency);
   rpc DeleteCurrency(common.Id) returns (common.Empty);
-  rpc ListExchangeRates(common.Empty) returns (ExchangeRates);
+  rpc ListExchangeRates(common.Id) returns (ExchangeRates);
   rpc GetExchangeRate(common.Id) returns (ExchangeRate);
   rpc CreateExchangeRate(ExchangeRate) returns (ExchangeRate);
   rpc DeleteExchangeRate(DeleteExchangeRateRequest) returns (common.Empty);
