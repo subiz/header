@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "pipeline/pipeline.proto",
+    "title": "deal/deal.proto",
     "version": "version not set"
   },
   "schemes": [
@@ -656,7 +656,7 @@
         }
       }
     },
-    "pipelinePipeline": {
+    "dealPipeline": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -675,7 +675,7 @@
         "stages": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/pipelineStage"
+            "$ref": "#/definitions/dealStage"
           }
         },
         "created": {
@@ -688,7 +688,7 @@
         }
       }
     },
-    "pipelinePipelines": {
+    "dealPipelines": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -697,12 +697,12 @@
         "pipelines": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/pipelinePipeline"
+            "$ref": "#/definitions/dealPipeline"
           }
         }
       }
     },
-    "pipelineStage": {
+    "dealStage": {
       "type": "object",
       "properties": {
         "ctx": {

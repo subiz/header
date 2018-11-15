@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package pipeline;
+package deal;
 
 import "git.subiz.net/header/common/common.proto";
 
@@ -24,8 +24,8 @@ message Pipeline {
   optional string id = 3;
   optional bool is_default = 4;
   repeated Stage stages = 5;
-  optional int64 created = 9;
-  optional int64 updated = 10;
+  optional int64 created = 10;
+  optional int64 updated = 11;
 }
 
 message Pipelines {
@@ -39,7 +39,7 @@ enum StageTypes {
   custom = 2;
 }
 
-service PipelineService {
+service DealService {
   rpc CreatePipeline(Pipeline) returns (Pipeline);
   rpc UpdatePipeline(Pipeline) returns (Pipeline);
   rpc DeletePipeline(common.Id) returns (common.Empty);
