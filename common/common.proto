@@ -184,6 +184,10 @@ enum E {
 	pipeline_not_found = 4002;
 	pipeline_is_invalid = 4003;
 	stage_is_invalid = 4004;
+	currency_not_found = 4005;
+	currency_is_invalid = 4006;
+	exchange_rate_not_found = 4007;
+	exchange_rate_is_invalid = 4008;
 }
 
 message Error {
