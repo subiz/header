@@ -102,6 +102,5 @@ service DealService {
   rpc ListExchangeRates(common.Empty) returns (ExchangeRates);
   rpc GetExchangeRate(common.Id) returns (ExchangeRate);
   rpc CreateExchangeRate(ExchangeRate) returns (ExchangeRate);
-  rpc UpdateExchangeRate(ExchangeRate) returns (ExchangeRate);
   rpc DeleteExchangeRate(common.Id) returns (common.Empty);
 }
