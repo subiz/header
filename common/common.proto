@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package common;
 
-import "git.subiz.net/header/lang/lang.proto";
 import "git.subiz.net/header/auth/auth.proto";
 
 // A string
@@ -68,7 +67,7 @@ message Reply {
 
 	bool err = 10;
 	string err_description = 12;
-	lang.T err_code = 13;
+	// lang.T err_code = 13;
 	int32 err_class = 15;
 	string err_hash = 16;
 
