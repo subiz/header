@@ -333,6 +333,7 @@ service AccountMgr {
 	rpc CreateAccount(CreateAccountRequest) returns (Account);
 	rpc ListAgents(common.Id) returns (Agents);
 	rpc CheckLogin(LoginRequest) returns (common.Id);
+	rpc Login(LoginRequest) returns (Agent);
 	rpc DeleteGroup(common.Id) returns (common.Empty);
 	rpc ListGroups(common.Id) returns (AgentGroups);
 	rpc AddAgentToGroup(GroupMember) returns (common.Empty);
