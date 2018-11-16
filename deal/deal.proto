@@ -87,7 +87,7 @@ message Currencies {
   repeated Currency currencies = 2;
 }
 
-message DeleteExchangeRateRequest {
+message ExchangeRateRequest {
   optional common.Context ctx = 1;
   optional string currency_id = 2;
   optional string id = 3;
@@ -105,8 +105,8 @@ service DealService {
   rpc CreateCurrency(Currency) returns (Currency);
   rpc UpdateCurrency(Currency) returns (Currency);
   rpc DeleteCurrency(common.Id) returns (common.Empty);
-  rpc ListExchangeRates(common.Id) returns (ExchangeRates);
-  rpc GetExchangeRate(common.Id) returns (ExchangeRate);
+  rpc ListExchangeRates(ExchangeRateRequest) returns (ExchangeRates);
+  rpc GetExchangeRate(ExchangeRateRequest) returns (ExchangeRate);
   rpc CreateExchangeRate(ExchangeRate) returns (ExchangeRate);
-  rpc DeleteExchangeRate(DeleteExchangeRateRequest) returns (common.Empty);
+  rpc DeleteExchangeRate(ExchangeRateRequest) returns (common.Empty);
 }
