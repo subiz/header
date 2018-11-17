@@ -311,6 +311,60 @@ message SearchAgentsRequest {
 	optional string email = 2;
 }
 
+message ExchangeRate {
+  optional common.Context ctx = 1;
+  optional string id = 2;
+  optional string currency_id = 3;
+  optional float rate = 4;
+  optional int64 effective_date = 5;
+  optional int64 created = 10;
+}
+
+message ExchangeRates {
+  optional common.Context ctx = 1;
+  repeated ExchangeRate exchange_rates = 2;
+}
+
+message Currency {
+  optional common.Context ctx = 1;
+  optional string account_id = 2;
+  optional string id = 3;
+  optional bool is_base = 4;
+  optional string name = 5;
+  optional string code = 6;
+  optional string symbol = 7;
+
+  enum DecimalPlace {
+    zero = 0;
+    one = 1;
+    two = 2;
+    three = 3;
+    four = 4;
+    five = 5;
+  }
+  optional DecimalPlace decimal_place = 8;
+
+  enum Format {
+    DotComma = 0;     // 12.345.678,01
+    CommaDot = 1;     // 12,345,678.01
+    SpaceComma = 2;   // 12 345 678,01
+  }
+  optional Format format = 9;
+  optional int64 created = 10;
+  optional int64 updated = 11;
+}
+
+message Currencies {
+  optional common.Context ctx = 1;
+  repeated Currency currencies = 2;
+}
+
+message ExchangeRateRequest {
+  optional common.Context ctx = 1;
+  optional string currency_id = 2;
+  optional string id = 3;
+}
+
 service AccSubMgr {
 	rpc SearchSub(SearchSubRequest) returns (AccSubs);
 }
@@ -338,6 +392,19 @@ service AccountMgr {
 	rpc ListGroups(common.Id) returns (AgentGroups);
 	rpc AddAgentToGroup(GroupMember) returns (common.Empty);
 	rpc RemoveAgentFromGroup(GroupMember) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
+}
+
+service CurrencyMgr {
+	rpc ListCurrencies(common.Empty) returns (Currencies);
+	rpc GetCurrency(common.Id) returns (Currency);
+	rpc CreateCurrency(Currency) returns (Currency);
+	rpc UpdateCurrency(Currency) returns (Currency);
+	rpc DeleteCurrency(common.Id) returns (common.Empty);
+	rpc ListExchangeRates(ExchangeRateRequest) returns (ExchangeRates);
+	rpc GetExchangeRate(ExchangeRateRequest) returns (ExchangeRate);
+	rpc CreateExchangeRate(ExchangeRate) returns (ExchangeRate);
+	rpc DeleteExchangeRate(ExchangeRateRequest) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 

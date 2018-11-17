@@ -66,101 +66,6 @@ func (StageTypes) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_7ad123631c1433c8, []int{0}
 }
 
-type Currency_DecimalPlace int32
-
-const (
-	Currency_zero  Currency_DecimalPlace = 0
-	Currency_one   Currency_DecimalPlace = 1
-	Currency_two   Currency_DecimalPlace = 2
-	Currency_three Currency_DecimalPlace = 3
-	Currency_four  Currency_DecimalPlace = 4
-	Currency_five  Currency_DecimalPlace = 5
-)
-
-var Currency_DecimalPlace_name = map[int32]string{
-	0: "zero",
-	1: "one",
-	2: "two",
-	3: "three",
-	4: "four",
-	5: "five",
-}
-
-var Currency_DecimalPlace_value = map[string]int32{
-	"zero":  0,
-	"one":   1,
-	"two":   2,
-	"three": 3,
-	"four":  4,
-	"five":  5,
-}
-
-func (x Currency_DecimalPlace) Enum() *Currency_DecimalPlace {
-	p := new(Currency_DecimalPlace)
-	*p = x
-	return p
-}
-
-func (x Currency_DecimalPlace) String() string {
-	return proto.EnumName(Currency_DecimalPlace_name, int32(x))
-}
-
-func (x *Currency_DecimalPlace) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(Currency_DecimalPlace_value, data, "Currency_DecimalPlace")
-	if err != nil {
-		return err
-	}
-	*x = Currency_DecimalPlace(value)
-	return nil
-}
-
-func (Currency_DecimalPlace) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_7ad123631c1433c8, []int{5, 0}
-}
-
-type Currency_Format int32
-
-const (
-	Currency_DotComma   Currency_Format = 0
-	Currency_CommaDot   Currency_Format = 1
-	Currency_SpaceComma Currency_Format = 2
-)
-
-var Currency_Format_name = map[int32]string{
-	0: "DotComma",
-	1: "CommaDot",
-	2: "SpaceComma",
-}
-
-var Currency_Format_value = map[string]int32{
-	"DotComma":   0,
-	"CommaDot":   1,
-	"SpaceComma": 2,
-}
-
-func (x Currency_Format) Enum() *Currency_Format {
-	p := new(Currency_Format)
-	*p = x
-	return p
-}
-
-func (x Currency_Format) String() string {
-	return proto.EnumName(Currency_Format_name, int32(x))
-}
-
-func (x *Currency_Format) UnmarshalJSON(data []byte) error {
-	value, err := proto.UnmarshalJSONEnum(Currency_Format_value, data, "Currency_Format")
-	if err != nil {
-		return err
-	}
-	*x = Currency_Format(value)
-	return nil
-}
-
-func (Currency_Format) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_7ad123631c1433c8, []int{5, 1}
-}
-
 type Stage struct {
 	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
 	Id                   *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
@@ -414,428 +319,50 @@ func (m *Pipelines) GetPipelines() []*Pipeline {
 	return nil
 }
 
-type ExchangeRate struct {
-	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Id                   *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
-	CurrencyId           *string         `protobuf:"bytes,3,opt,name=currency_id,json=currencyId" json:"currency_id,omitempty"`
-	Rate                 *float32        `protobuf:"fixed32,4,opt,name=rate" json:"rate,omitempty"`
-	EffectiveDate        *int64          `protobuf:"varint,5,opt,name=effective_date,json=effectiveDate" json:"effective_date,omitempty"`
-	Created              *int64          `protobuf:"varint,10,opt,name=created" json:"created,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ExchangeRate) Reset()         { *m = ExchangeRate{} }
-func (m *ExchangeRate) String() string { return proto.CompactTextString(m) }
-func (*ExchangeRate) ProtoMessage()    {}
-func (*ExchangeRate) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7ad123631c1433c8, []int{3}
-}
-
-func (m *ExchangeRate) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ExchangeRate.Unmarshal(m, b)
-}
-func (m *ExchangeRate) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ExchangeRate.Marshal(b, m, deterministic)
-}
-func (m *ExchangeRate) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ExchangeRate.Merge(m, src)
-}
-func (m *ExchangeRate) XXX_Size() int {
-	return xxx_messageInfo_ExchangeRate.Size(m)
-}
-func (m *ExchangeRate) XXX_DiscardUnknown() {
-	xxx_messageInfo_ExchangeRate.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ExchangeRate proto.InternalMessageInfo
-
-func (m *ExchangeRate) GetCtx() *common.Context {
-	if m != nil {
-		return m.Ctx
-	}
-	return nil
-}
-
-func (m *ExchangeRate) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
-	}
-	return ""
-}
-
-func (m *ExchangeRate) GetCurrencyId() string {
-	if m != nil && m.CurrencyId != nil {
-		return *m.CurrencyId
-	}
-	return ""
-}
-
-func (m *ExchangeRate) GetRate() float32 {
-	if m != nil && m.Rate != nil {
-		return *m.Rate
-	}
-	return 0
-}
-
-func (m *ExchangeRate) GetEffectiveDate() int64 {
-	if m != nil && m.EffectiveDate != nil {
-		return *m.EffectiveDate
-	}
-	return 0
-}
-
-func (m *ExchangeRate) GetCreated() int64 {
-	if m != nil && m.Created != nil {
-		return *m.Created
-	}
-	return 0
-}
-
-type ExchangeRates struct {
-	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	ExchangeRates        []*ExchangeRate `protobuf:"bytes,2,rep,name=exchange_rates,json=exchangeRates" json:"exchange_rates,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ExchangeRates) Reset()         { *m = ExchangeRates{} }
-func (m *ExchangeRates) String() string { return proto.CompactTextString(m) }
-func (*ExchangeRates) ProtoMessage()    {}
-func (*ExchangeRates) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7ad123631c1433c8, []int{4}
-}
-
-func (m *ExchangeRates) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ExchangeRates.Unmarshal(m, b)
-}
-func (m *ExchangeRates) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ExchangeRates.Marshal(b, m, deterministic)
-}
-func (m *ExchangeRates) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ExchangeRates.Merge(m, src)
-}
-func (m *ExchangeRates) XXX_Size() int {
-	return xxx_messageInfo_ExchangeRates.Size(m)
-}
-func (m *ExchangeRates) XXX_DiscardUnknown() {
-	xxx_messageInfo_ExchangeRates.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ExchangeRates proto.InternalMessageInfo
-
-func (m *ExchangeRates) GetCtx() *common.Context {
-	if m != nil {
-		return m.Ctx
-	}
-	return nil
-}
-
-func (m *ExchangeRates) GetExchangeRates() []*ExchangeRate {
-	if m != nil {
-		return m.ExchangeRates
-	}
-	return nil
-}
-
-type Currency struct {
-	Ctx                  *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId            *string                `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Id                   *string                `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
-	IsBase               *bool                  `protobuf:"varint,4,opt,name=is_base,json=isBase" json:"is_base,omitempty"`
-	Name                 *string                `protobuf:"bytes,5,opt,name=name" json:"name,omitempty"`
-	Code                 *string                `protobuf:"bytes,6,opt,name=code" json:"code,omitempty"`
-	Symbol               *string                `protobuf:"bytes,7,opt,name=symbol" json:"symbol,omitempty"`
-	DecimalPlace         *Currency_DecimalPlace `protobuf:"varint,8,opt,name=decimal_place,json=decimalPlace,enum=deal.Currency_DecimalPlace" json:"decimal_place,omitempty"`
-	Format               *Currency_Format       `protobuf:"varint,9,opt,name=format,enum=deal.Currency_Format" json:"format,omitempty"`
-	Created              *int64                 `protobuf:"varint,10,opt,name=created" json:"created,omitempty"`
-	Updated              *int64                 `protobuf:"varint,11,opt,name=updated" json:"updated,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
-	XXX_unrecognized     []byte                 `json:"-"`
-	XXX_sizecache        int32                  `json:"-"`
-}
-
-func (m *Currency) Reset()         { *m = Currency{} }
-func (m *Currency) String() string { return proto.CompactTextString(m) }
-func (*Currency) ProtoMessage()    {}
-func (*Currency) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7ad123631c1433c8, []int{5}
-}
-
-func (m *Currency) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Currency.Unmarshal(m, b)
-}
-func (m *Currency) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Currency.Marshal(b, m, deterministic)
-}
-func (m *Currency) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Currency.Merge(m, src)
-}
-func (m *Currency) XXX_Size() int {
-	return xxx_messageInfo_Currency.Size(m)
-}
-func (m *Currency) XXX_DiscardUnknown() {
-	xxx_messageInfo_Currency.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Currency proto.InternalMessageInfo
-
-func (m *Currency) GetCtx() *common.Context {
-	if m != nil {
-		return m.Ctx
-	}
-	return nil
-}
-
-func (m *Currency) GetAccountId() string {
-	if m != nil && m.AccountId != nil {
-		return *m.AccountId
-	}
-	return ""
-}
-
-func (m *Currency) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
-	}
-	return ""
-}
-
-func (m *Currency) GetIsBase() bool {
-	if m != nil && m.IsBase != nil {
-		return *m.IsBase
-	}
-	return false
-}
-
-func (m *Currency) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
-	}
-	return ""
-}
-
-func (m *Currency) GetCode() string {
-	if m != nil && m.Code != nil {
-		return *m.Code
-	}
-	return ""
-}
-
-func (m *Currency) GetSymbol() string {
-	if m != nil && m.Symbol != nil {
-		return *m.Symbol
-	}
-	return ""
-}
-
-func (m *Currency) GetDecimalPlace() Currency_DecimalPlace {
-	if m != nil && m.DecimalPlace != nil {
-		return *m.DecimalPlace
-	}
-	return Currency_zero
-}
-
-func (m *Currency) GetFormat() Currency_Format {
-	if m != nil && m.Format != nil {
-		return *m.Format
-	}
-	return Currency_DotComma
-}
-
-func (m *Currency) GetCreated() int64 {
-	if m != nil && m.Created != nil {
-		return *m.Created
-	}
-	return 0
-}
-
-func (m *Currency) GetUpdated() int64 {
-	if m != nil && m.Updated != nil {
-		return *m.Updated
-	}
-	return 0
-}
-
-type Currencies struct {
-	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Currencies           []*Currency     `protobuf:"bytes,2,rep,name=currencies" json:"currencies,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *Currencies) Reset()         { *m = Currencies{} }
-func (m *Currencies) String() string { return proto.CompactTextString(m) }
-func (*Currencies) ProtoMessage()    {}
-func (*Currencies) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7ad123631c1433c8, []int{6}
-}
-
-func (m *Currencies) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_Currencies.Unmarshal(m, b)
-}
-func (m *Currencies) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_Currencies.Marshal(b, m, deterministic)
-}
-func (m *Currencies) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Currencies.Merge(m, src)
-}
-func (m *Currencies) XXX_Size() int {
-	return xxx_messageInfo_Currencies.Size(m)
-}
-func (m *Currencies) XXX_DiscardUnknown() {
-	xxx_messageInfo_Currencies.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_Currencies proto.InternalMessageInfo
-
-func (m *Currencies) GetCtx() *common.Context {
-	if m != nil {
-		return m.Ctx
-	}
-	return nil
-}
-
-func (m *Currencies) GetCurrencies() []*Currency {
-	if m != nil {
-		return m.Currencies
-	}
-	return nil
-}
-
-type ExchangeRateRequest struct {
-	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	CurrencyId           *string         `protobuf:"bytes,2,opt,name=currency_id,json=currencyId" json:"currency_id,omitempty"`
-	Id                   *string         `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ExchangeRateRequest) Reset()         { *m = ExchangeRateRequest{} }
-func (m *ExchangeRateRequest) String() string { return proto.CompactTextString(m) }
-func (*ExchangeRateRequest) ProtoMessage()    {}
-func (*ExchangeRateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_7ad123631c1433c8, []int{7}
-}
-
-func (m *ExchangeRateRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ExchangeRateRequest.Unmarshal(m, b)
-}
-func (m *ExchangeRateRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ExchangeRateRequest.Marshal(b, m, deterministic)
-}
-func (m *ExchangeRateRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ExchangeRateRequest.Merge(m, src)
-}
-func (m *ExchangeRateRequest) XXX_Size() int {
-	return xxx_messageInfo_ExchangeRateRequest.Size(m)
-}
-func (m *ExchangeRateRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ExchangeRateRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ExchangeRateRequest proto.InternalMessageInfo
-
-func (m *ExchangeRateRequest) GetCtx() *common.Context {
-	if m != nil {
-		return m.Ctx
-	}
-	return nil
-}
-
-func (m *ExchangeRateRequest) GetCurrencyId() string {
-	if m != nil && m.CurrencyId != nil {
-		return *m.CurrencyId
-	}
-	return ""
-}
-
-func (m *ExchangeRateRequest) GetId() string {
-	if m != nil && m.Id != nil {
-		return *m.Id
-	}
-	return ""
-}
-
 func init() {
 	proto.RegisterEnum("deal.StageTypes", StageTypes_name, StageTypes_value)
-	proto.RegisterEnum("deal.Currency_DecimalPlace", Currency_DecimalPlace_name, Currency_DecimalPlace_value)
-	proto.RegisterEnum("deal.Currency_Format", Currency_Format_name, Currency_Format_value)
 	proto.RegisterType((*Stage)(nil), "deal.Stage")
 	proto.RegisterType((*Pipeline)(nil), "deal.Pipeline")
 	proto.RegisterType((*Pipelines)(nil), "deal.Pipelines")
-	proto.RegisterType((*ExchangeRate)(nil), "deal.ExchangeRate")
-	proto.RegisterType((*ExchangeRates)(nil), "deal.ExchangeRates")
-	proto.RegisterType((*Currency)(nil), "deal.Currency")
-	proto.RegisterType((*Currencies)(nil), "deal.Currencies")
-	proto.RegisterType((*ExchangeRateRequest)(nil), "deal.ExchangeRateRequest")
 }
 
 func init() { proto.RegisterFile("deal/deal.proto", fileDescriptor_7ad123631c1433c8) }
 
 var fileDescriptor_7ad123631c1433c8 = []byte{
-	// 908 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x54, 0xef, 0x6e, 0xe3, 0x44,
-	0x10, 0xaf, 0x9d, 0x3f, 0x8d, 0x27, 0x8d, 0x6b, 0xf6, 0x04, 0x98, 0x9e, 0x2a, 0x42, 0x4e, 0x48,
-	0x81, 0x83, 0x14, 0x22, 0xbe, 0x20, 0x21, 0x74, 0x22, 0x39, 0x4e, 0x95, 0x4e, 0xe2, 0xe4, 0x82,
-	0xf8, 0x82, 0x64, 0x6d, 0xec, 0x49, 0xbb, 0x92, 0xed, 0x35, 0xde, 0x4d, 0xdb, 0xdc, 0x8b, 0x21,
-	0xf1, 0x1c, 0x7c, 0xe3, 0x1d, 0x78, 0x06, 0xb4, 0xbb, 0xb6, 0xcf, 0xf1, 0x05, 0x14, 0x55, 0xba,
-	0x2f, 0xc9, 0xec, 0xfc, 0xf3, 0xcc, 0x6f, 0x7e, 0x33, 0x70, 0x1a, 0x23, 0x4d, 0x2e, 0xd4, 0xcf,
-	0x2c, 0x2f, 0xb8, 0xe4, 0xa4, 0xab, 0xe4, 0xb3, 0xe9, 0x35, 0x93, 0x33, 0xb1, 0x59, 0xb1, 0xd7,
-	0xb3, 0x0c, 0xe5, 0xc5, 0x0d, 0xd2, 0x18, 0x8b, 0x8b, 0x88, 0xa7, 0x29, 0xcf, 0xca, 0x3f, 0xe3,
-	0x3f, 0xf9, 0xd3, 0x86, 0xde, 0x95, 0xa4, 0xd7, 0x48, 0x3e, 0x81, 0x4e, 0x24, 0xef, 0x7d, 0x6b,
-	0x6c, 0x4d, 0x87, 0xf3, 0xd3, 0x59, 0xe9, 0xb5, 0xe0, 0x99, 0xc4, 0x7b, 0x19, 0x28, 0x1b, 0x71,
-	0xc1, 0x66, 0xb1, 0x6f, 0x8f, 0xad, 0xa9, 0x13, 0xd8, 0x2c, 0x26, 0x1f, 0xc3, 0x30, 0x67, 0x39,
-	0x26, 0x2c, 0xc3, 0x90, 0xc5, 0x7e, 0x47, 0x1b, 0xa0, 0x52, 0x5d, 0xc6, 0x84, 0x40, 0x57, 0x6e,
-	0x73, 0xf4, 0xbb, 0xda, 0xa2, 0x65, 0xa5, 0xcb, 0x68, 0x8a, 0x7e, 0xcf, 0xe8, 0x94, 0x4c, 0xc6,
-	0x30, 0xcc, 0x0b, 0xbe, 0xa2, 0x2b, 0x96, 0x30, 0xb9, 0xf5, 0xfb, 0x63, 0x6b, 0x6a, 0x07, 0x4d,
-	0x15, 0x79, 0x02, 0xa3, 0x98, 0x89, 0x3c, 0xa1, 0xdb, 0x90, 0x17, 0x31, 0x16, 0xfe, 0xf1, 0xd8,
-	0x9a, 0xf6, 0x82, 0x93, 0x52, 0xf9, 0x93, 0xd2, 0x91, 0xc7, 0xe0, 0x44, 0x09, 0x17, 0x18, 0xde,
-	0xf1, 0xcc, 0x1f, 0x8c, 0xad, 0xe9, 0x20, 0x18, 0x68, 0xc5, 0xaf, 0x3c, 0x23, 0xe7, 0x00, 0xc6,
-	0x98, 0x70, 0x21, 0x7d, 0x47, 0x5b, 0x8d, 0xfb, 0x4b, 0x2e, 0x24, 0xf1, 0xe1, 0x38, 0x2a, 0x90,
-	0x4a, 0x8c, 0x7d, 0x18, 0x5b, 0xd3, 0x4e, 0x50, 0x3d, 0x95, 0x65, 0x93, 0xc7, 0xda, 0x32, 0x34,
-	0x96, 0xf2, 0x39, 0xf9, 0xcb, 0x82, 0xc1, 0xab, 0xb2, 0xdb, 0x43, 0xf0, 0x3b, 0x07, 0xa0, 0x51,
-	0xc4, 0x37, 0x99, 0x0c, 0x6b, 0x1c, 0x9d, 0x52, 0x73, 0x19, 0x97, 0xf0, 0x76, 0x6a, 0x78, 0xcf,
-	0x01, 0x98, 0x08, 0x63, 0x5c, 0xd3, 0x4d, 0x22, 0x35, 0x86, 0x83, 0xc0, 0x61, 0x62, 0x69, 0x14,
-	0xe4, 0x09, 0xf4, 0x85, 0x9a, 0x9c, 0xf0, 0x7b, 0xe3, 0xce, 0x74, 0x38, 0x1f, 0xce, 0x34, 0x0f,
-	0xf4, 0x34, 0x83, 0xd2, 0xf4, 0xa0, 0xb6, 0x7e, 0x03, 0xa7, 0xea, 0x4a, 0x1c, 0xd2, 0xd6, 0x17,
-	0xe0, 0x54, 0x33, 0x17, 0xbe, 0xad, 0x6b, 0x71, 0x4d, 0x2d, 0x55, 0x9a, 0xe0, 0x8d, 0xc3, 0xe4,
-	0x0f, 0x0b, 0x4e, 0x9e, 0xdf, 0x47, 0x37, 0x34, 0xbb, 0xc6, 0x80, 0xca, 0x87, 0x12, 0x2f, 0xda,
-	0x14, 0x05, 0x66, 0xd1, 0xb6, 0x41, 0xbc, 0x4a, 0x65, 0x88, 0x57, 0x50, 0x69, 0x88, 0x67, 0x07,
-	0x5a, 0x26, 0x9f, 0x82, 0x8b, 0xeb, 0x35, 0x46, 0x92, 0xdd, 0x62, 0xa8, 0x3a, 0xd5, 0x14, 0xec,
-	0x04, 0xa3, 0x5a, 0xbb, 0x54, 0x6e, 0xff, 0x89, 0xd8, 0x24, 0x85, 0x51, 0xb3, 0xf0, 0x83, 0xb0,
-	0xf9, 0x16, 0x5c, 0x2c, 0x63, 0x42, 0x55, 0x45, 0x05, 0x10, 0x31, 0x00, 0x35, 0xf3, 0x05, 0x23,
-	0x6c, 0x66, 0x9f, 0xfc, 0xdd, 0x81, 0xc1, 0xa2, 0x6c, 0xe9, 0x1d, 0xb0, 0xeb, 0x43, 0x38, 0x66,
-	0x22, 0x5c, 0x51, 0x81, 0x25, 0xb5, 0xfa, 0x4c, 0xfc, 0x40, 0xc5, 0xfe, 0x05, 0x25, 0xd0, 0x8d,
-	0x78, 0x8c, 0x7a, 0x33, 0x9d, 0x40, 0xcb, 0xe4, 0x03, 0xe8, 0x8b, 0x6d, 0xba, 0xe2, 0x89, 0xde,
-	0x45, 0x27, 0x28, 0x5f, 0xe4, 0x19, 0x8c, 0x62, 0x8c, 0x58, 0x4a, 0x93, 0x30, 0x4f, 0x68, 0x84,
-	0x7a, 0x13, 0xdd, 0xf9, 0x63, 0xd3, 0x71, 0xd5, 0xd1, 0x6c, 0x69, 0x7c, 0x5e, 0x29, 0x97, 0xe0,
-	0x24, 0x6e, 0xbc, 0xc8, 0x97, 0xd0, 0x5f, 0xf3, 0x22, 0xa5, 0x66, 0x4d, 0xdd, 0xf9, 0xfb, 0xad,
-	0xd0, 0x1f, 0xb5, 0x31, 0x28, 0x9d, 0x1e, 0xc4, 0xf1, 0x4b, 0x38, 0x69, 0x16, 0x40, 0x06, 0xd0,
-	0x7d, 0x8d, 0x05, 0xf7, 0x8e, 0xc8, 0x31, 0x74, 0x78, 0x86, 0x9e, 0xa5, 0x04, 0x79, 0xc7, 0x3d,
-	0x9b, 0x38, 0xd0, 0x93, 0x37, 0x05, 0xa2, 0xd7, 0x51, 0x6e, 0x6b, 0xbe, 0x29, 0xbc, 0xae, 0x96,
-	0xd8, 0x2d, 0x7a, 0xbd, 0xc9, 0x37, 0xd0, 0x37, 0x05, 0x91, 0x13, 0x18, 0x2c, 0xb9, 0x5c, 0xf0,
-	0x34, 0xa5, 0xde, 0x91, 0x7a, 0x69, 0x71, 0xc9, 0xa5, 0x67, 0x11, 0x17, 0xe0, 0x2a, 0xa7, 0x11,
-	0x1a, 0xab, 0x3d, 0x09, 0x01, 0xca, 0x7e, 0xd8, 0x61, 0x4c, 0x9a, 0x41, 0x45, 0x70, 0xd6, 0x5e,
-	0xb3, 0x0a, 0x98, 0xa0, 0xe1, 0x31, 0x61, 0xf0, 0x68, 0x87, 0x5d, 0xf8, 0xfb, 0x06, 0x85, 0x3c,
-	0xe4, 0x4b, 0xad, 0xed, 0xb2, 0xdf, 0xda, 0xae, 0x16, 0x95, 0x3e, 0x7f, 0x0a, 0xa0, 0xaf, 0xce,
-	0xcf, 0xdb, 0x1c, 0x85, 0xc2, 0xed, 0x8e, 0x67, 0xde, 0x91, 0x82, 0x48, 0xdd, 0x5a, 0xcf, 0x22,
-	0x00, 0xfd, 0x68, 0x23, 0x24, 0x4f, 0x3d, 0x7b, 0xfe, 0x4f, 0x0f, 0x86, 0x4b, 0xa4, 0xc9, 0x15,
-	0x16, 0xb7, 0x2c, 0x42, 0xf2, 0x15, 0xb8, 0x0b, 0x3d, 0xae, 0xfa, 0x92, 0xb6, 0x8e, 0xc7, 0x59,
-	0xeb, 0xad, 0x22, 0x7e, 0xd1, 0x63, 0x3c, 0x38, 0xe2, 0x29, 0xb8, 0x4b, 0x4c, 0xb0, 0x11, 0x01,
-	0x55, 0xe7, 0x97, 0xf1, 0xd9, 0xa8, 0x92, 0x9f, 0xa7, 0xb9, 0xdc, 0x92, 0x0b, 0x18, 0xbd, 0x64,
-	0x42, 0xbe, 0x39, 0x81, 0xbb, 0xf6, 0xb3, 0xd3, 0xdd, 0xe4, 0x82, 0x7c, 0x06, 0xc3, 0x17, 0x28,
-	0xf7, 0xa6, 0x6e, 0x17, 0xf2, 0x35, 0xb8, 0x2a, 0x77, 0x63, 0xf2, 0xad, 0xe4, 0xde, 0xce, 0x44,
-	0x59, 0x9d, 0xbd, 0x3e, 0x04, 0x7b, 0xb2, 0xd7, 0xb6, 0x1a, 0xca, 0x5a, 0xd3, 0xf2, 0xd8, 0x17,
-	0x61, 0xa0, 0x3c, 0x38, 0xa2, 0x86, 0x72, 0x6f, 0x45, 0x2d, 0x28, 0x17, 0xf0, 0x9e, 0x6a, 0x77,
-	0xf7, 0x6a, 0x7e, 0xb4, 0xe7, 0xf4, 0x19, 0x72, 0x9e, 0x3d, 0x7a, 0xdb, 0x24, 0xc8, 0x33, 0x38,
-	0x7d, 0x81, 0x3b, 0x39, 0xfe, 0x2f, 0xc5, 0x9e, 0xc3, 0x4a, 0xbe, 0x03, 0x62, 0x70, 0xd9, 0xd1,
-	0xee, 0xf1, 0xdc, 0x1b, 0xfd, 0x3d, 0x10, 0xd3, 0xf1, 0xa1, 0x25, 0xec, 0x82, 0xf0, 0x6f, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0x69, 0x84, 0x21, 0xf2, 0xa4, 0x09, 0x00, 0x00,
+	// 518 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xdb, 0x6e, 0xd3, 0x40,
+	0x10, 0xc5, 0x76, 0xd2, 0xd8, 0xe3, 0xe6, 0xa2, 0xe1, 0x65, 0x15, 0x14, 0x61, 0xda, 0x17, 0x97,
+	0xa2, 0x04, 0xe5, 0x17, 0x1a, 0x84, 0x22, 0x55, 0xa2, 0x72, 0x41, 0xbc, 0x20, 0x45, 0x8e, 0x77,
+	0x08, 0x2b, 0x39, 0x5e, 0xe3, 0x5d, 0xd3, 0x86, 0xff, 0xe1, 0x27, 0xf8, 0x0e, 0x3e, 0x08, 0x79,
+	0x6d, 0xa7, 0x69, 0xc5, 0x43, 0xc4, 0x4b, 0x32, 0x73, 0xce, 0x19, 0xfb, 0xcc, 0x19, 0xc3, 0x90,
+	0x53, 0x9c, 0xce, 0xaa, 0x9f, 0x69, 0x5e, 0x48, 0x2d, 0xb1, 0x53, 0xd5, 0xe3, 0x70, 0x23, 0xf4,
+	0x54, 0x95, 0x6b, 0xf1, 0x73, 0x9a, 0x91, 0x9e, 0x7d, 0xa3, 0x98, 0x53, 0x31, 0x4b, 0xe4, 0x76,
+	0x2b, 0xb3, 0xe6, 0xaf, 0xd6, 0x9f, 0xfd, 0xb6, 0xa1, 0x7b, 0xab, 0xe3, 0x0d, 0xe1, 0x2b, 0x70,
+	0x12, 0x7d, 0xcf, 0xac, 0xc0, 0x0a, 0xfd, 0xf9, 0x70, 0xda, 0xa8, 0xae, 0x64, 0xa6, 0xe9, 0x5e,
+	0x47, 0x15, 0x87, 0x03, 0xb0, 0x05, 0x67, 0x76, 0x60, 0x85, 0x5e, 0x64, 0x0b, 0x8e, 0x2f, 0xc1,
+	0xcf, 0x45, 0x4e, 0xa9, 0xc8, 0x68, 0x25, 0x38, 0x73, 0x0c, 0x01, 0x2d, 0xb4, 0xe4, 0x88, 0xd0,
+	0xd1, 0xbb, 0x9c, 0x58, 0xc7, 0x30, 0xa6, 0xae, 0xb0, 0x2c, 0xde, 0x12, 0xeb, 0xd6, 0x58, 0x55,
+	0x63, 0x00, 0x7e, 0x5e, 0xc8, 0x75, 0xbc, 0x16, 0xa9, 0xd0, 0x3b, 0x76, 0x12, 0x58, 0xa1, 0x1d,
+	0x1d, 0x42, 0x78, 0x0e, 0x7d, 0x2e, 0x54, 0x9e, 0xc6, 0xbb, 0x95, 0x2c, 0x38, 0x15, 0xac, 0x17,
+	0x58, 0x61, 0x37, 0x3a, 0x6d, 0xc0, 0x0f, 0x15, 0x86, 0x2f, 0xc0, 0x4b, 0x52, 0xa9, 0x68, 0x75,
+	0x27, 0x33, 0xe6, 0x06, 0x56, 0xe8, 0x46, 0xae, 0x01, 0x3e, 0xcb, 0x0c, 0x27, 0x00, 0x35, 0x99,
+	0x4a, 0xa5, 0x99, 0x67, 0xd8, 0x5a, 0x7e, 0x2d, 0x95, 0x46, 0x06, 0xbd, 0xa4, 0xa0, 0x58, 0x13,
+	0x67, 0x10, 0x58, 0xa1, 0x13, 0xb5, 0x6d, 0xc5, 0x94, 0x39, 0x37, 0x8c, 0x5f, 0x33, 0x4d, 0x7b,
+	0xf6, 0xc7, 0x02, 0xf7, 0xa6, 0xd9, 0xf6, 0x98, 0xfc, 0x26, 0x00, 0x71, 0x92, 0xc8, 0x32, 0xd3,
+	0xab, 0x7d, 0x8e, 0x5e, 0x83, 0x2c, 0x79, 0x13, 0xaf, 0xb3, 0x8f, 0x77, 0x02, 0x20, 0xd4, 0x8a,
+	0xd3, 0xd7, 0xb8, 0x4c, 0xb5, 0xc9, 0xd0, 0x8d, 0x3c, 0xa1, 0x16, 0x35, 0x80, 0xe7, 0x70, 0xa2,
+	0xaa, 0xcb, 0x29, 0xd6, 0x0d, 0x9c, 0xd0, 0x9f, 0xfb, 0x53, 0xf3, 0x1d, 0x98, 0x6b, 0x46, 0x0d,
+	0xf5, 0x5f, 0x6b, 0x7d, 0x01, 0xaf, 0xdd, 0x4a, 0x1d, 0xb3, 0xd6, 0x1b, 0xf0, 0xda, 0x9b, 0x2b,
+	0x66, 0x1b, 0x2f, 0x83, 0xda, 0x4b, 0xfb, 0x98, 0xe8, 0x41, 0xf0, 0xfa, 0x12, 0xc0, 0x58, 0xfc,
+	0xb8, 0xcb, 0x49, 0x61, 0x0f, 0x9c, 0x3b, 0x99, 0x8d, 0x9e, 0xa1, 0x0b, 0x9d, 0xea, 0x30, 0x23,
+	0x0b, 0x01, 0x4e, 0x92, 0x52, 0x69, 0xb9, 0x1d, 0xd9, 0xf3, 0x5f, 0x36, 0xf8, 0x0b, 0x8a, 0xd3,
+	0x5b, 0x2a, 0x7e, 0x88, 0x84, 0x70, 0x06, 0xfd, 0x6b, 0xa1, 0xf4, 0x83, 0xbd, 0x7e, 0xeb, 0xe8,
+	0xdd, 0x36, 0xd7, 0xbb, 0xf1, 0xf0, 0xf1, 0x7b, 0x15, 0x5e, 0x80, 0xff, 0x9e, 0xf6, 0x7a, 0x84,
+	0x56, 0xbe, 0xe4, 0xe3, 0x27, 0x1e, 0xf1, 0x2d, 0x0c, 0xae, 0x4c, 0x36, 0x7b, 0xe4, 0x89, 0xe2,
+	0x5f, 0x13, 0x9f, 0x4c, 0x66, 0x47, 0x4f, 0x5c, 0xc2, 0x60, 0x41, 0x29, 0x1d, 0x4c, 0x1c, 0x3a,
+	0x7a, 0xbc, 0x0c, 0x5e, 0x40, 0xe7, 0x46, 0x64, 0x1b, 0x7c, 0xde, 0xc2, 0x55, 0x17, 0xd1, 0xf7,
+	0x92, 0x94, 0x1e, 0x9f, 0xee, 0x41, 0x99, 0x6d, 0xfe, 0x06, 0x00, 0x00, 0xff, 0xff, 0xe4, 0x94,
+	0x94, 0x43, 0x08, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -850,20 +377,12 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type DealServiceClient interface {
+	ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*Pipelines, error)
+	GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Pipeline, error)
 	CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
 	UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
 	DeletePipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
-	ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*Pipelines, error)
-	GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Pipeline, error)
-	ListCurrencies(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*Currencies, error)
-	GetCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Currency, error)
-	CreateCurrency(ctx context.Context, in *Currency, opts ...grpc.CallOption) (*Currency, error)
-	UpdateCurrency(ctx context.Context, in *Currency, opts ...grpc.CallOption) (*Currency, error)
-	DeleteCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
-	ListExchangeRates(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (*ExchangeRates, error)
-	GetExchangeRate(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (*ExchangeRate, error)
-	CreateExchangeRate(ctx context.Context, in *ExchangeRate, opts ...grpc.CallOption) (*ExchangeRate, error)
-	DeleteExchangeRate(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
 }
 
 type dealServiceClient struct {
@@ -872,6 +391,24 @@ type dealServiceClient struct {
 
 func NewDealServiceClient(cc *grpc.ClientConn) DealServiceClient {
 	return &dealServiceClient{cc}
+}
+
+func (c *dealServiceClient) ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*Pipelines, error) {
+	out := new(Pipelines)
+	err := c.cc.Invoke(ctx, "/deal.DealService/ListPipelines", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Pipeline, error) {
+	out := new(Pipeline)
+	err := c.cc.Invoke(ctx, "/deal.DealService/GetPipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *dealServiceClient) CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error) {
@@ -901,99 +438,9 @@ func (c *dealServiceClient) DeletePipeline(ctx context.Context, in *common.Id, o
 	return out, nil
 }
 
-func (c *dealServiceClient) ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*Pipelines, error) {
-	out := new(Pipelines)
-	err := c.cc.Invoke(ctx, "/deal.DealService/ListPipelines", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Pipeline, error) {
-	out := new(Pipeline)
-	err := c.cc.Invoke(ctx, "/deal.DealService/GetPipeline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) ListCurrencies(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*Currencies, error) {
-	out := new(Currencies)
-	err := c.cc.Invoke(ctx, "/deal.DealService/ListCurrencies", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) GetCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Currency, error) {
-	out := new(Currency)
-	err := c.cc.Invoke(ctx, "/deal.DealService/GetCurrency", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) CreateCurrency(ctx context.Context, in *Currency, opts ...grpc.CallOption) (*Currency, error) {
-	out := new(Currency)
-	err := c.cc.Invoke(ctx, "/deal.DealService/CreateCurrency", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) UpdateCurrency(ctx context.Context, in *Currency, opts ...grpc.CallOption) (*Currency, error) {
-	out := new(Currency)
-	err := c.cc.Invoke(ctx, "/deal.DealService/UpdateCurrency", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) DeleteCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
-	out := new(common.Empty)
-	err := c.cc.Invoke(ctx, "/deal.DealService/DeleteCurrency", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) ListExchangeRates(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (*ExchangeRates, error) {
-	out := new(ExchangeRates)
-	err := c.cc.Invoke(ctx, "/deal.DealService/ListExchangeRates", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) GetExchangeRate(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (*ExchangeRate, error) {
-	out := new(ExchangeRate)
-	err := c.cc.Invoke(ctx, "/deal.DealService/GetExchangeRate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) CreateExchangeRate(ctx context.Context, in *ExchangeRate, opts ...grpc.CallOption) (*ExchangeRate, error) {
-	out := new(ExchangeRate)
-	err := c.cc.Invoke(ctx, "/deal.DealService/CreateExchangeRate", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *dealServiceClient) DeleteExchangeRate(ctx context.Context, in *ExchangeRateRequest, opts ...grpc.CallOption) (*common.Empty, error) {
-	out := new(common.Empty)
-	err := c.cc.Invoke(ctx, "/deal.DealService/DeleteExchangeRate", in, out, opts...)
+func (c *dealServiceClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/deal.DealService/Ping", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1002,24 +449,52 @@ func (c *dealServiceClient) DeleteExchangeRate(ctx context.Context, in *Exchange
 
 // DealServiceServer is the server API for DealService service.
 type DealServiceServer interface {
+	ListPipelines(context.Context, *common.Empty) (*Pipelines, error)
+	GetPipeline(context.Context, *common.Id) (*Pipeline, error)
 	CreatePipeline(context.Context, *Pipeline) (*Pipeline, error)
 	UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error)
 	DeletePipeline(context.Context, *common.Id) (*common.Empty, error)
-	ListPipelines(context.Context, *common.Empty) (*Pipelines, error)
-	GetPipeline(context.Context, *common.Id) (*Pipeline, error)
-	ListCurrencies(context.Context, *common.Empty) (*Currencies, error)
-	GetCurrency(context.Context, *common.Id) (*Currency, error)
-	CreateCurrency(context.Context, *Currency) (*Currency, error)
-	UpdateCurrency(context.Context, *Currency) (*Currency, error)
-	DeleteCurrency(context.Context, *common.Id) (*common.Empty, error)
-	ListExchangeRates(context.Context, *ExchangeRateRequest) (*ExchangeRates, error)
-	GetExchangeRate(context.Context, *ExchangeRateRequest) (*ExchangeRate, error)
-	CreateExchangeRate(context.Context, *ExchangeRate) (*ExchangeRate, error)
-	DeleteExchangeRate(context.Context, *ExchangeRateRequest) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
 }
 
 func RegisterDealServiceServer(s *grpc.Server, srv DealServiceServer) {
 	s.RegisterService(&_DealService_serviceDesc, srv)
+}
+
+func _DealService_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).ListPipelines(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/deal.DealService/ListPipelines",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).ListPipelines(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_GetPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).GetPipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/deal.DealService/GetPipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).GetPipeline(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _DealService_CreatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1076,200 +551,20 @@ func _DealService_DeletePipeline_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DealService_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
+func _DealService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DealServiceServer).ListPipelines(ctx, in)
+		return srv.(DealServiceServer).Ping(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/deal.DealService/ListPipelines",
+		FullMethod: "/deal.DealService/Ping",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).ListPipelines(ctx, req.(*common.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_GetPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).GetPipeline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/GetPipeline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).GetPipeline(ctx, req.(*common.Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).ListCurrencies(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/ListCurrencies",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).ListCurrencies(ctx, req.(*common.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_GetCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).GetCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/GetCurrency",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).GetCurrency(ctx, req.(*common.Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_CreateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Currency)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).CreateCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/CreateCurrency",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).CreateCurrency(ctx, req.(*Currency))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_UpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Currency)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).UpdateCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/UpdateCurrency",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).UpdateCurrency(ctx, req.(*Currency))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_DeleteCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(common.Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).DeleteCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/DeleteCurrency",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).DeleteCurrency(ctx, req.(*common.Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_ListExchangeRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExchangeRateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).ListExchangeRates(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/ListExchangeRates",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).ListExchangeRates(ctx, req.(*ExchangeRateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_GetExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExchangeRateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).GetExchangeRate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/GetExchangeRate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).GetExchangeRate(ctx, req.(*ExchangeRateRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_CreateExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExchangeRate)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).CreateExchangeRate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/CreateExchangeRate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).CreateExchangeRate(ctx, req.(*ExchangeRate))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _DealService_DeleteExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExchangeRateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(DealServiceServer).DeleteExchangeRate(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/deal.DealService/DeleteExchangeRate",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DealServiceServer).DeleteExchangeRate(ctx, req.(*ExchangeRateRequest))
+		return srv.(DealServiceServer).Ping(ctx, req.(*common.PingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1278,6 +573,14 @@ var _DealService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "deal.DealService",
 	HandlerType: (*DealServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListPipelines",
+			Handler:    _DealService_ListPipelines_Handler,
+		},
+		{
+			MethodName: "GetPipeline",
+			Handler:    _DealService_GetPipeline_Handler,
+		},
 		{
 			MethodName: "CreatePipeline",
 			Handler:    _DealService_CreatePipeline_Handler,
@@ -1291,48 +594,8 @@ var _DealService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _DealService_DeletePipeline_Handler,
 		},
 		{
-			MethodName: "ListPipelines",
-			Handler:    _DealService_ListPipelines_Handler,
-		},
-		{
-			MethodName: "GetPipeline",
-			Handler:    _DealService_GetPipeline_Handler,
-		},
-		{
-			MethodName: "ListCurrencies",
-			Handler:    _DealService_ListCurrencies_Handler,
-		},
-		{
-			MethodName: "GetCurrency",
-			Handler:    _DealService_GetCurrency_Handler,
-		},
-		{
-			MethodName: "CreateCurrency",
-			Handler:    _DealService_CreateCurrency_Handler,
-		},
-		{
-			MethodName: "UpdateCurrency",
-			Handler:    _DealService_UpdateCurrency_Handler,
-		},
-		{
-			MethodName: "DeleteCurrency",
-			Handler:    _DealService_DeleteCurrency_Handler,
-		},
-		{
-			MethodName: "ListExchangeRates",
-			Handler:    _DealService_ListExchangeRates_Handler,
-		},
-		{
-			MethodName: "GetExchangeRate",
-			Handler:    _DealService_GetExchangeRate_Handler,
-		},
-		{
-			MethodName: "CreateExchangeRate",
-			Handler:    _DealService_CreateExchangeRate_Handler,
-		},
-		{
-			MethodName: "DeleteExchangeRate",
-			Handler:    _DealService_DeleteExchangeRate_Handler,
+			MethodName: "Ping",
+			Handler:    _DealService_Ping_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -16,6 +16,27 @@
   ],
   "paths": {},
   "definitions": {
+    "CurrencyDecimalPlace": {
+      "type": "string",
+      "enum": [
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five"
+      ],
+      "default": "zero"
+    },
+    "CurrencyFormat": {
+      "type": "string",
+      "enum": [
+        "DotComma",
+        "CommaDot",
+        "SpaceComma"
+      ],
+      "default": "DotComma"
+    },
     "accountAccSub": {
       "type": "object",
       "properties": {
@@ -341,6 +362,101 @@
         },
         "country_code": {
           "type": "string"
+        }
+      }
+    },
+    "accountCurrencies": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "currencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountCurrency"
+          }
+        }
+      }
+    },
+    "accountCurrency": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "is_base": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "decimal_place": {
+          "$ref": "#/definitions/CurrencyDecimalPlace"
+        },
+        "format": {
+          "$ref": "#/definitions/CurrencyFormat"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "accountExchangeRate": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "currency_id": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "effective_date": {
+          "type": "string",
+          "format": "int64"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "accountExchangeRates": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "exchange_rates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountExchangeRate"
+          }
         }
       }
     },
