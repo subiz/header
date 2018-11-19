@@ -4,53 +4,6 @@ package api;
 
 import "git.subiz.net/header/common/common.proto";
 
-service X {
-	rpc Do(AllType) returns (AllType);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-message AllType {
-	optional WlDomain domain = 2;
-	optional WlIP wlip = 3;
-	optional WlUser wluse = 4;
-	optional ScryptChallenge sc = 6;
-}
-
-message SendMessageState {
-	optional string topic = 1;
-}
-
-message State {
-	optional string event = 3;
-}
-
-message WlDomain {
-	optional common.Context ctx = 1;
-
-	optional string account_id = 3;
-	optional string domain = 4;
-	optional int64 created = 5;
-	optional string by = 6;
-}
-
-message WlIP {
-	optional common.Context ctx = 1;
-
-	optional string account_id = 3;
-	optional string ip = 4;
-	optional int64 created = 5;
-	optional string by = 6;
-}
-
-message WlUser {
-	optional common.Context ctx = 1;
-
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional int64 created = 5;
-	optional string by = 6;
-}
-
 message ScryptChallenge {
 	optional common.Context ctx = 1;
 	optional string account_id = 9;
@@ -73,23 +26,4 @@ message Apikey {
 	optional string client_id = 5;
 	optional string client_type = 6;
 	optional bool is_internal = 7;
-}
-
-enum Event {
-	ApiRequested = 0;
-	ConversationStart = 2;
-	ApiReply = 4;
-
-	ApiWhiteListSynced = 5;
-	DomainWhiteListCreated = 6;
-	DomainWhiteListDeleted = 7;
-	UserWhiteListCreated = 8;
-	UserWhiteListDeleted = 9;
-	IpWhiteListCreated = 10;
-	IpWhiteListDeleted = 11;
-
-	BlacklistDomainUpdated = 12;
-	BannedUserUpdated = 13;
-	BlacklistIpUpdated = 14;
-	WhitelistUrlUpdated = 15;
 }

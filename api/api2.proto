@@ -38,3 +38,16 @@ message BannedUser {
 	int64 created = 5;
 	string by = 6;
 }
+
+enum Event {
+	ApiWhiteListSynced = 0;
+
+	BlacklistDomainCreated = 12;
+	BannedUserCreated = 13;
+	BlacklistIpCreated = 14;
+	WhitelistUrlCrated = 15;
+	BlacklistDomainDeleted = 16;
+	BannedUserDeleted = 17;
+	BlacklistIpDeleted = 18;
+	WhitelistUrlDeleted = 19;
+}
