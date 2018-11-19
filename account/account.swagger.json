@@ -43,12 +43,10 @@
           "type": "string"
         },
         "start_time": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
-        "finish_time": {
-          "type": "string",
-          "format": "int64"
+        "end_time": {
+          "type": "string"
         }
       }
     },

@@ -28,12 +28,10 @@
             "type": "string"
           },
           "start_time": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
-          "finish_time": {
-            "type": "integer",
-            "format": "int64"
+          "end_time": {
+            "type": "string"
           }
         }
       },

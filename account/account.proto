@@ -373,8 +373,8 @@ message BusinessHours {
 
 	message WorkingDay {
 		optional string weekday = 1;
-		optional int64 start_time = 2;
-		optional int64 finish_time = 3;
+		optional string start_time = 2;
+		optional string end_time = 3;
 	}
 	repeated WorkingDay working_days = 4;
 
