@@ -1,6 +1,42 @@
 {
   "components": {
     "schemas": {
+      "BusinessHoursHoliday": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "month": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "day": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weekday": {
+            "type": "string"
+          }
+        }
+      },
+      "BusinessHoursWorkingDay": {
+        "type": "object",
+        "properties": {
+          "weekday": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "finish_time": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "CurrencyDecimalPlace": {
         "type": "string",
         "enum": [
@@ -141,6 +177,9 @@
           },
           "date_format": {
             "type": "string"
+          },
+          "business_hours": {
+            "$ref": "#/components/schemas/accountBusinessHours"
           }
         }
       },
@@ -293,6 +332,29 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Agent"
+            }
+          }
+        }
+      },
+      "accountBusinessHours": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "working_days": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BusinessHoursWorkingDay"
+            }
+          },
+          "holidays": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BusinessHoursHoliday"
             }
           }
         }

@@ -137,6 +137,7 @@ message Account {
 
 	optional int32 v3_state = 28; // 0: not v3, 1: v3 but not convert, 2: converted v3
 	optional string date_format = 29;
+	optional BusinessHours business_hours = 30;
 }
 
 message GroupMember {
@@ -312,57 +313,78 @@ message SearchAgentsRequest {
 }
 
 message ExchangeRate {
-  optional common.Context ctx = 1;
-  optional string id = 2;
-  optional string currency_id = 3;
-  optional float rate = 4;
-  optional int64 effective_date = 5;
-  optional int64 created = 10;
+	optional common.Context ctx = 1;
+	optional string id = 2;
+	optional string currency_id = 3;
+	optional float rate = 4;
+	optional int64 effective_date = 5;
+	optional int64 created = 10;
 }
 
 message ExchangeRates {
-  optional common.Context ctx = 1;
-  repeated ExchangeRate exchange_rates = 2;
+	optional common.Context ctx = 1;
+	repeated ExchangeRate exchange_rates = 2;
 }
 
 message Currency {
-  optional common.Context ctx = 1;
-  optional string account_id = 2;
-  optional string id = 3;
-  optional bool is_base = 4;
-  optional string name = 5;
-  optional string code = 6;
-  optional string symbol = 7;
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 3;
+	optional bool is_base = 4;
+	optional string name = 5;
+	optional string code = 6;
+	optional string symbol = 7;
 
-  enum DecimalPlace {
-    zero = 0;
-    one = 1;
-    two = 2;
-    three = 3;
-    four = 4;
-    five = 5;
-  }
-  optional DecimalPlace decimal_place = 8;
+	enum DecimalPlace {
+		zero = 0;
+		one = 1;
+		two = 2;
+		three = 3;
+		four = 4;
+		five = 5;
+	}
+	optional DecimalPlace decimal_place = 8;
 
-  enum Format {
-    DotComma = 0;     // 12.345.678,01
-    CommaDot = 1;     // 12,345,678.01
-    SpaceComma = 2;   // 12 345 678,01
-  }
-  optional Format format = 9;
-  optional int64 created = 10;
-  optional int64 updated = 11;
+	enum Format {
+		DotComma = 0;     // 12.345.678,01
+		CommaDot = 1;     // 12,345,678.01
+		SpaceComma = 2;   // 12 345 678,01
+	}
+	optional Format format = 9;
+	optional int64 created = 10;
+	optional int64 updated = 11;
 }
 
 message Currencies {
-  optional common.Context ctx = 1;
-  repeated Currency currencies = 2;
+	optional common.Context ctx = 1;
+	repeated Currency currencies = 2;
 }
 
 message ExchangeRateRequest {
-  optional common.Context ctx = 1;
-  optional string currency_id = 2;
-  optional string id = 3;
+	optional common.Context ctx = 1;
+	optional string currency_id = 2;
+	optional string id = 3;
+}
+
+message BusinessHours {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 3;
+
+	message WorkingDay {
+		optional string weekday = 1;
+		optional int64 start_time = 2;
+		optional int64 finish_time = 3;
+	}
+	repeated WorkingDay working_days = 4;
+
+	message Holiday {
+		optional int32 year = 1;
+		optional int32 month = 2;
+		optional int32 day = 3;
+		optional string weekday = 4; 
+	}
+	repeated Holiday holidays = 5;
 }
 
 service AccSubMgr {
@@ -405,6 +427,11 @@ service CurrencyMgr {
 	rpc GetExchangeRate(ExchangeRateRequest) returns (ExchangeRate);
 	rpc CreateExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc DeleteExchangeRate(ExchangeRateRequest) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
+}
+
+service BusinessHoursMgr {
+	rpc UpdateBusinessHours(BusinessHours) returns (BusinessHours);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
