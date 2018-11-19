@@ -1355,24 +1355,6 @@
           }
         }
       },
-      "apiWhitelistUrl": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "by": {
-            "type": "string"
-          }
-        }
-      },
       "apiWlDomain": {
         "type": "object",
         "properties": {
