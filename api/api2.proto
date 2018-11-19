@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package api;
+
+import "git.subiz.net/header/common/common.proto";
+
+message WhitelistUrl {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string url = 4;
+	int64 created = 5;
+	string by = 6;
+}
+
+message BlacklistDomain {
+	common.Context ctx = 1;
+
+	string account_id = 3;
+	string domain = 4;
+	int64 created = 5;
+	string by = 6;
+}
+
+message BlacklistIP {
+	common.Context ctx = 1;
+
+	string account_id = 3;
+	string ip = 4;
+	int64 created = 5;
+	string by = 6;
+}
+
+message BannedUser {
+	common.Context ctx = 1;
+
+	string account_id = 3;
+	string id = 4;
+	int64 created = 5;
+	string by = 6;
+}

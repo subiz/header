@@ -1310,21 +1310,6 @@
           }
         }
       },
-      "apiListRequest": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "start": {
-            "type": "string"
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
       "apiScryptChallenge": {
         "type": "object",
         "properties": {
@@ -1367,6 +1352,24 @@
           "created": {
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "apiWhitelistUrl": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "by": {
+            "type": "string"
           }
         }
       },

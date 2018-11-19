@@ -28,29 +28,8 @@
         "wluse": {
           "$ref": "#/definitions/apiWlUser"
         },
-        "lr": {
-          "$ref": "#/definitions/apiListRequest"
-        },
         "sc": {
           "$ref": "#/definitions/apiScryptChallenge"
-        }
-      }
-    },
-    "apiListRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "start": {
-          "type": "string"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },

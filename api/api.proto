@@ -2,17 +2,7 @@ syntax = "proto2";
 
 package api;
 
-message Empty {}
-
 import "git.subiz.net/header/common/common.proto";
-
-enum Method {
-	GET = 0;
-	POST = 1;
-	PUT = 2;
-	DELETE = 3;
-	PATCH = 4;
-}
 
 service X {
 	rpc Do(AllType) returns (AllType);
@@ -23,7 +13,6 @@ message AllType {
 	optional WlDomain domain = 2;
 	optional WlIP wlip = 3;
 	optional WlUser wluse = 4;
-	optional ListRequest lr = 5;
 	optional ScryptChallenge sc = 6;
 }
 
@@ -62,13 +51,6 @@ message WlUser {
 	optional string by = 6;
 }
 
-message ListRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string start = 3;
-	optional int32 limit = 4;
-}
-
 message ScryptChallenge {
 	optional common.Context ctx = 1;
 	optional string account_id = 9;
@@ -102,7 +84,12 @@ enum Event {
 	DomainWhiteListCreated = 6;
 	DomainWhiteListDeleted = 7;
 	UserWhiteListCreated = 8;
-    UserWhiteListDeleted = 9;
-    IpWhiteListCreated = 10;
-    IpWhiteListDeleted = 11;
+	UserWhiteListDeleted = 9;
+	IpWhiteListCreated = 10;
+	IpWhiteListDeleted = 11;
+
+	BlacklistDomainUpdated = 12;
+	BannedUserUpdated = 13;
+	BlacklistIpUpdated = 14;
+	WhitelistUrlUpdated = 15;
 }
