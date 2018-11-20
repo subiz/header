@@ -455,8 +455,7 @@
             "format": "float"
           },
           "effective_date": {
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           "created": {
             "type": "integer",

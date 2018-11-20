@@ -500,8 +500,7 @@
           "format": "float"
         },
         "effective_date": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
         "created": {
           "type": "string",

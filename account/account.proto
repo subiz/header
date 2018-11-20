@@ -317,7 +317,7 @@ message ExchangeRate {
 	optional string id = 2;
 	optional string currency_id = 3;
 	optional float rate = 4;
-	optional int64 effective_date = 5;
+	optional string effective_date = 5;
 	optional int64 created = 10;
 }
 
