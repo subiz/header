@@ -35,27 +35,6 @@
           }
         }
       },
-      "CurrencyDecimalPlace": {
-        "type": "string",
-        "enum": [
-          "zero",
-          "one",
-          "two",
-          "three",
-          "four",
-          "five"
-        ],
-        "default": "zero"
-      },
-      "CurrencyFormat": {
-        "type": "string",
-        "enum": [
-          "DotComma",
-          "CommaDot",
-          "SpaceComma"
-        ],
-        "default": "DotComma"
-      },
       "accountAccSub": {
         "type": "object",
         "properties": {
@@ -426,10 +405,11 @@
             "type": "string"
           },
           "decimal_place": {
-            "$ref": "#/components/schemas/CurrencyDecimalPlace"
+            "type": "integer",
+            "format": "int32"
           },
           "format": {
-            "$ref": "#/components/schemas/CurrencyFormat"
+            "type": "string"
           },
           "created": {
             "type": "integer",

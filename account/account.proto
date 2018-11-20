@@ -343,14 +343,14 @@ message Currency {
 		four = 4;
 		five = 5;
 	}
-	optional DecimalPlace decimal_place = 8;
+	optional int32 decimal_place = 8;
 
 	enum Format {
-		DotComma = 0;     // 12.345.678,01
-		CommaDot = 1;     // 12,345,678.01
-		SpaceComma = 2;   // 12 345 678,01
+		dot_comma = 0;     // 12.345.678,01
+		comma_dot = 1;     // 12,345,678.01
+		space_comma = 2;   // 12 345 678,01
 	}
-	optional Format format = 9;
+	optional string format = 9;
 	optional int64 created = 10;
 	optional int64 updated = 11;
 }
