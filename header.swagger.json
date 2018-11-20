@@ -2164,6 +2164,10 @@
           },
           "description": {
             "type": "string"
+          },
+          "available_agents_only": {
+            "type": "boolean",
+            "format": "boolean"
           }
         }
       },

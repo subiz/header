@@ -26,6 +26,7 @@ message Rule {
 	optional int64 modified = 12;
 	optional string name = 10;
 	optional string description = 11;
+	optional bool available_agents_only = 13;
 }
 
 message AvailabilityCheckRequest {
@@ -967,4 +968,15 @@ message DeleteTicketRequest {
 	optional string account_id = 2;
 	optional string conversation_id = 3;
 	optional string id = 4;
+}
+
+message PresencePing {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	optional int64 pinged = 4;
+}
+
+service AgentPresenceMgr {
+	rpc UpdatePresence(PresencePing) returns (common.Empty);
 }
