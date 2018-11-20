@@ -334,21 +334,12 @@ message Currency {
 	optional string name = 5;
 	optional string code = 6;
 	optional string symbol = 7;
-
-	enum DecimalPlace {
-		zero = 0;
-		one = 1;
-		two = 2;
-		three = 3;
-		four = 4;
-		five = 5;
-	}
 	optional int32 decimal_place = 8;
 
 	enum Format {
-		dot_comma = 0;     // 12.345.678,01
-		comma_dot = 1;     // 12,345,678.01
-		space_comma = 2;   // 12 345 678,01
+		DOT_COMMA = 0;     // 12.345.678,01
+		COMMA_DOT = 1;     // 12,345,678.01
+		SPACE_COMMA = 2;   // 12 345 678,01
 	}
 	optional string format = 9;
 	optional int64 created = 10;
