@@ -1569,6 +1569,10 @@
         "targets": {
           "$ref": "#/definitions/ServiceLevelAgreementTarget"
         },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "created": {
           "type": "string",
           "format": "int64"

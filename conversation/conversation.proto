@@ -959,9 +959,9 @@ message ServiceLevelAgreement  {
 		optional bool notification = 4;
 	}
 	optional Target targets = 8;
-
-	optional int64 created = 9;
-  optional int64 updated = 10;
+	optional bool is_default = 9;
+	optional int64 created = 10;
+	optional int64 updated = 11;
 }
 
 message ServiceLevelAgreements {

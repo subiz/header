@@ -2250,6 +2250,10 @@
           "targets": {
             "$ref": "#/components/schemas/ServiceLevelAgreementTarget"
           },
+          "is_default": {
+            "type": "boolean",
+            "format": "boolean"
+          },
           "created": {
             "type": "integer",
             "format": "int64"
