@@ -934,6 +934,16 @@ message TicketAttributeData {
 	optional string setter_type = 17;
 }
 
+message ServiceLevelAgreementTarget {
+	optional string priority = 1;
+	optional int32 resolve_within = 2;
+	enum OperationalHours {
+		BUSINESS_HOURS = 0;
+	}
+	optional string operational_hours = 3;
+	optional bool notification = 4;
+}
+
 message ServiceLevelAgreement  {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -949,16 +959,7 @@ message ServiceLevelAgreement  {
 	optional string strategy = 6;
 	optional string assign_to = 7;
 	
-	message Target {
-		optional string priority = 1;
-		optional int32 resolve_within = 2;
-		enum OperationalHours {
-			BUSINESS_HOURS = 0;
-		}
-		optional string operational_hours = 3;
-		optional bool notification = 4;
-	}
-	repeated Target targets = 8;
+	repeated ServiceLevelAgreementTarget targets = 8;
 	optional bool is_default = 9;
 	optional int64 created = 10;
 	optional int64 updated = 11;

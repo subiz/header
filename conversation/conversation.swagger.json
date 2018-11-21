@@ -16,25 +16,6 @@
   ],
   "paths": {},
   "definitions": {
-    "ServiceLevelAgreementTarget": {
-      "type": "object",
-      "properties": {
-        "priority": {
-          "type": "string"
-        },
-        "resolve_within": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "operational_hours": {
-          "type": "string"
-        },
-        "notification": {
-          "type": "boolean",
-          "format": "boolean"
-        }
-      }
-    },
     "authCredential": {
       "type": "object",
       "properties": {
@@ -1587,7 +1568,7 @@
         "targets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServiceLevelAgreementTarget"
+            "$ref": "#/definitions/conversationServiceLevelAgreementTarget"
           }
         },
         "is_default": {
@@ -1601,6 +1582,25 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "conversationServiceLevelAgreementTarget": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "type": "string"
+        },
+        "resolve_within": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "operational_hours": {
+          "type": "string"
+        },
+        "notification": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
