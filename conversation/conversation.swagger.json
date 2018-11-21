@@ -824,6 +824,15 @@
         }
       }
     },
+    "conversationAvgResolveTimeResponse": {
+      "type": "object",
+      "properties": {
+        "avg_resolve_sec": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "conversationAvgResponseTimeResponse": {
       "type": "object",
       "properties": {
@@ -1120,6 +1129,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/conversationCountByTag"
+          }
+        }
+      }
+    },
+    "conversationCountTicketResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
           }
         }
       }

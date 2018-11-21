@@ -941,6 +941,8 @@ service TicketMgr {
 	rpc GetTicket(GetTicketRequest) returns (Ticket);
 	rpc SearchTicket(TicketListRequest) returns (Tickets);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+	rpc CountTicket(CountTicketRequest) returns (CountTicketResponse);
+	rpc GetAvgResolveTimes(AvgResolveTimeRequest) returns (AvgResolveTimeResponse);
 }
 
 message DeleteTicketAttrRequest {
@@ -979,4 +981,52 @@ message PresencePing {
 
 service AgentPresenceMgr {
 	rpc UpdatePresence(PresencePing) returns (common.Empty);
+}
+
+message ReportTicket {
+	optional string id = 2;
+	optional string account_id = 3;
+	optional string integration_id = 4;
+	optional string state = 5;
+	optional string priority = 6;
+	repeated string agent_ids = 7;
+	repeated string tag_ids = 8;
+	optional int64 created_at = 9;
+	optional int64 resolved_at = 10;
+	optional bool is_resolved = 11;
+	optional int64 resolve_time = 12;
+	repeated string group_ids = 13;
+}
+
+message CountTicketRequest {
+	optional string account_id = 3;
+	optional string integration_id = 4;
+	optional string state = 5;
+	optional string priority = 6;
+	optional string agent_id = 7;
+	optional string tag_id = 8;
+	optional string group_id = 9;
+	optional bool is_resolved = 10;
+	optional bool has_agent = 11;
+	optional int32 from_hour = 13;
+	optional int32 to_hour = 14;
+}
+
+message CountTicketResponse {
+	repeated int64 data = 2;
+}
+
+message AvgResolveTimeRequest {
+	optional string account_id = 2;
+	optional string integration_id = 3;
+	optional string priority = 4;
+	optional string agent_id = 5;
+	optional string tag_id = 6;
+	optional string group_id = 7;
+	optional int32 from_hour = 9;
+	optional int32 to_hour = 10;
+}
+
+message AvgResolveTimeResponse {
+	optional double avg_resolve_sec = 2;
 }
