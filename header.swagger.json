@@ -2269,7 +2269,10 @@
             }
           },
           "targets": {
-            "$ref": "#/components/schemas/ServiceLevelAgreementTarget"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceLevelAgreementTarget"
+            }
           },
           "is_default": {
             "type": "boolean",
