@@ -1626,6 +1626,25 @@
           }
         }
       },
+      "ServiceLevelAgreementTarget": {
+        "type": "object",
+        "properties": {
+          "priotity": {
+            "type": "string"
+          },
+          "resolve_within": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "operational_hours": {
+            "type": "string"
+          },
+          "notification": {
+            "type": "boolean",
+            "format": "boolean"
+          }
+        }
+      },
       "conversationAck": {
         "type": "object",
         "properties": {
@@ -2201,6 +2220,54 @@
           "at": {
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "conversationServiceLevelAgreement": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "strategy": {
+            "type": "string"
+          },
+          "assign_to": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "targets": {
+            "$ref": "#/components/schemas/ServiceLevelAgreementTarget"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updated": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "conversationServiceLevelAgreements": {
+        "type": "object",
+        "properties": {
+          "service_level_agreements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationServiceLevelAgreement"
+            }
           }
         }
       },
