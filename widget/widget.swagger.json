@@ -626,6 +626,23 @@
           "type": "boolean",
           "format": "boolean"
         },
+        "read_service_level_agreement": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "service level agreement"
+        },
+        "cread_service_level_agreement": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "update_service_level_agreement": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delete_service_level_agreement": {
+          "type": "boolean",
+          "format": "boolean"
+        },
         "read_all_accounts": {
           "type": "boolean",
           "format": "boolean"
@@ -816,6 +833,10 @@
           "format": "int32"
         },
         "currency": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "service_level_agreement": {
           "type": "integer",
           "format": "int32"
         }

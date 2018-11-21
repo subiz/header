@@ -64,6 +64,7 @@ message Permission {
 	int32 content = 37;
 	int32 pipeline = 38;
 	int32 currency = 39;
+	int32 service_level_agreement = 40;
 }
 
 message Method {
@@ -172,6 +173,12 @@ message Method {
 	bool cread_currency = 325;
 	bool update_currency = 326;
 	bool delete_currency = 327;
+
+	// service level agreement
+	bool read_service_level_agreement = 328;
+	bool cread_service_level_agreement = 329;
+	bool update_service_level_agreement = 330;
+	bool delete_service_level_agreement = 331;
 
 	bool read_all_accounts = 1000;
 	bool read_all_agents = 1002;

@@ -149,6 +149,10 @@
         "currency": {
           "type": "integer",
           "format": "int32"
+        },
+        "service_level_agreement": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
