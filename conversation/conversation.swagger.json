@@ -19,7 +19,7 @@
     "ServiceLevelAgreementTarget": {
       "type": "object",
       "properties": {
-        "priotity": {
+        "priority": {
           "type": "string"
         },
         "resolve_within": {
@@ -1582,10 +1582,7 @@
           "type": "string"
         },
         "assign_to": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "targets": {
           "type": "array",

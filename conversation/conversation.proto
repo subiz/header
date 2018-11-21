@@ -947,10 +947,10 @@ message ServiceLevelAgreement  {
 		AGENT = 2;
 	}
 	optional string strategy = 6;
-	repeated string assign_to = 7;
+	optional string assign_to = 7;
 	
 	message Target {
-		optional string priotity = 1;
+		optional string priority = 1;
 		optional int32 resolve_within = 2;
 		enum OperationalHours {
 			BUSINESS_HOURS = 0;
