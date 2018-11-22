@@ -958,7 +958,7 @@ message ServiceLevelAgreement  {
 	}
 	optional string strategy = 6;
 	optional string assign_to = 7;
-	
+
 	repeated ServiceLevelAgreementTarget targets = 8;
 	optional bool is_default = 9;
 	optional int64 created = 10;
@@ -1051,6 +1051,11 @@ message CountTicketRequest {
 	optional bool has_agent = 11;
 	optional int32 from_hour = 13;
 	optional int32 to_hour = 14;
+	optional string range = 15;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
 }
 
 message CountTicketResponse {
@@ -1066,6 +1071,11 @@ message AvgResolveTimeRequest {
 	optional string group_id = 7;
 	optional int32 from_hour = 9;
 	optional int32 to_hour = 10;
+	optional string range = 11;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
 }
 
 message AvgResolveTimeResponse {
