@@ -18,6 +18,9 @@
           },
           "weekday": {
             "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         }
       },
