@@ -423,6 +423,7 @@ service CurrencyMgr {
 
 service BusinessHoursMgr {
 	rpc UpdateBusinessHours(BusinessHours) returns (BusinessHours);
+	rpc SyncPublicHolidays(common.Empty) returns (BusinessHours);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
