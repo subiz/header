@@ -4102,6 +4102,20 @@
           }
         }
       },
+      "placeholderResolved": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "userAttributeDefinition": {
         "type": "object",
         "properties": {
