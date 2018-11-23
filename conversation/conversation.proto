@@ -1038,6 +1038,7 @@ message ReportTicket {
 	optional int64 resolve_time = 12;
 	optional string group_id = 14;
 	optional int64 closed_at = 15;
+	optional bool is_unresolved = 16;
 }
 
 message CountTicketRequest {
@@ -1057,6 +1058,7 @@ message CountTicketRequest {
 		hour = 0;
 		day = 1;
 	}
+	optional bool is_unresolved = 16;
 }
 
 message CountTicketResponse {
