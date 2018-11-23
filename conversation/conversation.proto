@@ -1036,7 +1036,8 @@ message ReportTicket {
 	optional int64 resolved_at = 10;
 	optional bool is_resolved = 11;
 	optional int64 resolve_time = 12;
-	repeated string group_ids = 13;
+	optional string group_id = 14;
+	optional int64 closed_at = 15;
 }
 
 message CountTicketRequest {
