@@ -572,6 +572,7 @@ service SegmentationMgr {
 
 service VisitorMgr {
 	rpc ReadPresence (common.Id) returns (Presence);
+	rpc UpdatePresence(common.Id) returns (Presence);
 	rpc ReadPreview (common.Id) returns (LastView);
 	rpc ListTopVisitors (common.Id) returns (Visitors);
 	rpc Ping(common.PingRequest) returns (common.Pong);
