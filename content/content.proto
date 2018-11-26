@@ -71,3 +71,10 @@ message Contents {
 	optional string anchor = 3;
 	optional int64 total = 4;
 }
+
+message ContentUrl {
+	optional string account_id = 2;
+	optional int32 partition = 3;
+	optional string url = 4;
+	optional string err = 5;
+}
