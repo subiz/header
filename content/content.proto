@@ -81,5 +81,5 @@ message ContentUrl {
 
 enum Event {
 	ContentRequested = 2;
-	ContentViewd = 3;
+	ContentViewed = 3;
 }
