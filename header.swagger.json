@@ -4259,6 +4259,15 @@
           }
         }
       },
+      "userCountTotalResponse": {
+        "type": "object",
+        "properties": {
+          "total_user": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
       "userLastView": {
         "type": "object",
         "properties": {

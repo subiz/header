@@ -631,6 +631,7 @@ service UserMgr {
 	rpc ReadUser (common.Id) returns (User);
 
 	rpc CountSegmentationUserByAttribute(CountSegmentationUserByAttributeRequest) returns (CountResponse);
+	rpc CountTotal(CountTotalRequest) returns (CountTotalResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
 	rpc AddAlias(Alias) returns (common.Empty);
@@ -798,4 +799,13 @@ message DeleteNoteRequest {
 	optional string account_id = 2;
 	optional string target_id = 3;
 	optional string id = 4;
+}
+
+message CountTotalRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+}
+
+message CountTotalResponse {
+	optional double total_user = 2;
 }
