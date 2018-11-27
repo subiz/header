@@ -463,8 +463,7 @@ message AddToMyList {
 message Presences {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional Presence presences = 4;
-	optional int64 pinged = 5;
+	repeated Presence presences = 4;
 }
 
 message Presence {
