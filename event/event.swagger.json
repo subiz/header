@@ -918,6 +918,18 @@
         "service_level_agreement": {
           "type": "integer",
           "format": "int32"
+        },
+        "message_template": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_presence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_preference": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

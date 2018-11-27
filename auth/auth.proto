@@ -65,6 +65,9 @@ message Permission {
 	int32 pipeline = 38;
 	int32 currency = 39;
 	int32 service_level_agreement = 40;
+ 	int32 message_template = 41;
+	int32 agent_presence = 42;
+ 	int32 agent_preference = 43;
 }
 
 message Method {
