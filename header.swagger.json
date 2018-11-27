@@ -2736,6 +2736,25 @@
           }
         }
       },
+      "userPresence": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "pinged": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "pinged_minute": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "userTrace": {
         "type": "object",
         "properties": {
@@ -3254,25 +3273,6 @@
           },
           "type": {
             "type": "string"
-          }
-        }
-      },
-      "userPresence": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "pinged": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "pinged_minute": {
-            "type": "integer",
-            "format": "int64"
           }
         }
       },

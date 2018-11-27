@@ -2088,6 +2088,28 @@
         }
       }
     },
+    "userPresence": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "pinged": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pinged_minute": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "userTrace": {
       "type": "object",
       "properties": {

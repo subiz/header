@@ -290,6 +290,8 @@ enum Event {
 	TemplateReadRequested = 107;
 	TemplateListRequested = 108;
 
+	ConversationAgentPresenceUpdated = 109;
+
 }
 
 message RequestState {
@@ -593,6 +595,11 @@ message SearchMessageRequest {
 	optional string query = 5;
 	optional string anchor = 6;
 	optional int32 limit = 7;
+}
+
+service AgentPresenceMgr {
+	rpc ReadPresence (common.Id) returns (user.Presence);
+	rpc UpdatePresence (common.Id) returns (user.Presence);
 }
 
 service RuleMgr {
@@ -1011,17 +1018,6 @@ message DeleteTicketRequest {
 	optional string account_id = 2;
 	optional string conversation_id = 3;
 	optional string id = 4;
-}
-
-message PresencePing {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string agent_id = 3;
-	optional int64 pinged = 4;
-}
-
-service AgentPresenceMgr {
-	rpc UpdatePresence(PresencePing) returns (common.Empty);
 }
 
 message ReportTicket {

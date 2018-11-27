@@ -460,6 +460,13 @@ message AddToMyList {
 	optional string account_id = 5;
 }
 
+message Presences {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional Presence presences = 4;
+	optional int64 pinged = 5;
+}
+
 message Presence {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -572,7 +579,7 @@ service SegmentationMgr {
 
 service VisitorMgr {
 	rpc ReadPresence (common.Id) returns (Presence);
-	rpc UpdatePresence(common.Id) returns (Presence);
+	rpc UpdatePresence (common.Id) returns (Presence);
 	rpc ReadPreview (common.Id) returns (LastView);
 	rpc ListTopVisitors (common.Id) returns (Visitors);
 	rpc Ping(common.PingRequest) returns (common.Pong);
