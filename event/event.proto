@@ -242,6 +242,7 @@ message UserEvent {
 	string account_id = 3;
 	string user_id = 4;
 	RawEvent event = 5;
+	user.User user = 6;
 }
 
 message SubscriptionResponse {
