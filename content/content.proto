@@ -12,6 +12,8 @@ service ServiceContentManager {
 	rpc DeleteAllContents(common.Id) returns (common.Empty);
 	rpc GetContent(common.Id) returns (Content);
 	rpc SearchContents(SearchContentRequest) returns (Contents);
+	rpc GetContentIdByUrl(common.Id) returns (ContentUrl);
+	rpc CreateContentUrl(ContentUrl) returns (ContentUrl);
 }
 
 message SearchContentRequest {
@@ -60,9 +62,16 @@ message Content {
 	repeated KeyValue fields = 13;
 	repeated string categories = 14;
 	repeated string relates = 15;
-	repeated conversation.Attachment attachments = 16;
+	repeated conversation.Attachment attachments = 16; //TODO: delete
 	optional int64 created = 17;
 	optional int64 updated = 18;
+	repeated AttachmentUrl attachment_urls = 19;
+}
+
+message AttachmentUrl {
+	optional string url = 1;
+	optional string type = 2;
+	optional bool default_image = 3;
 }
 
 message Contents {
@@ -73,10 +82,10 @@ message Contents {
 }
 
 message ContentUrl {
-	optional string account_id = 2;
-	optional int32 par = 3;
-	optional string url = 4;
-	optional string err = 5;
+	optional common.Context ctx =	6;
+	optional string account_id = 7;
+	repeated string id = 8;
+	optional string url = 9;
 }
 
 enum Event {

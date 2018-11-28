@@ -718,6 +718,21 @@
         }
       }
     },
+    "contentAttachmentUrl": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "default_image": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
     "contentContent": {
       "type": "object",
       "properties": {
@@ -793,6 +808,32 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "attachment_urls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contentAttachmentUrl"
+          }
+        }
+      }
+    },
+    "contentContentUrl": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "url": {
+          "type": "string"
         }
       }
     },
