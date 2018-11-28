@@ -13,7 +13,7 @@ service ServiceContentManager {
 	rpc GetContent(common.Id) returns (Content);
 	rpc SearchContents(SearchContentRequest) returns (Contents);
 	rpc GetContentIdByUrl(common.Id) returns (ContentUrl);
-	rpc CreateContentUrl(ContentUrl) returns (ContentUrl);
+	rpc UpsertContentUrl(ContentUrl) returns (ContentUrl);
 }
 
 message SearchContentRequest {
