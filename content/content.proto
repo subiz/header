@@ -11,7 +11,7 @@ service ServiceContentManager {
 	rpc DeleteContent(common.Id) returns (common.Empty);
 	rpc GetContent(common.Id) returns (Content);
 	rpc SearchContents(SearchContentRequest) returns (Contents);
-	rpc GetContentIdsByUrl(common.String) returns (common.Ids);
+	rpc GetContentIdsByUrl(common.String) returns (ContentIds);
 	rpc UpsertContentIdsForUrl(ContentIds) returns (ContentIds);
 }
 
