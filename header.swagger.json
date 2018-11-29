@@ -1334,6 +1334,20 @@
           }
         }
       },
+      "commonIds": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "contentAttachmentUrl": {
         "type": "object",
         "properties": {
@@ -1430,13 +1444,13 @@
           }
         }
       },
-      "contentContentUrl": {
+      "contentContentIds": {
         "type": "object",
         "properties": {
           "account_id": {
             "type": "string"
           },
-          "id": {
+          "ids": {
             "type": "array",
             "items": {
               "type": "string"

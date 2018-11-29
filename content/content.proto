@@ -9,11 +9,10 @@ service ServiceContentManager {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc UpsertContent(Content) returns (Content);
 	rpc DeleteContent(common.Id) returns (common.Empty);
-	rpc DeleteAllContents(common.Id) returns (common.Empty);
 	rpc GetContent(common.Id) returns (Content);
 	rpc SearchContents(SearchContentRequest) returns (Contents);
-	rpc GetContentIdByUrl(common.Id) returns (ContentUrl);
-	rpc UpsertContentUrl(ContentUrl) returns (ContentUrl);
+	rpc GetContentIdsByUrl(common.String) returns (common.Ids);
+	rpc UpsertContentIdsForUrl(ContentIds) returns (ContentIds);
 }
 
 message SearchContentRequest {
@@ -81,10 +80,10 @@ message Contents {
 	optional int64 total = 4;
 }
 
-message ContentUrl {
+message ContentIds{
 	optional common.Context ctx =	6;
 	optional string account_id = 7;
-	repeated string id = 8;
+	repeated string ids = 10;
 	optional string url = 9;
 }
 

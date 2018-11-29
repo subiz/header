@@ -710,6 +710,23 @@
         }
       }
     },
+    "commonIds": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "commonPong": {
       "type": "object",
       "properties": {
@@ -817,7 +834,7 @@
         }
       }
     },
-    "contentContentUrl": {
+    "contentContentIds": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -826,7 +843,7 @@
         "account_id": {
           "type": "string"
         },
-        "id": {
+        "ids": {
           "type": "array",
           "items": {
             "type": "string"
