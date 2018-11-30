@@ -83,6 +83,13 @@ message Contents {
 	optional int64 total = 4;
 }
 
+message ContentUrl {
+	optional string account_id = 2;
+	optional int32 par = 3;
+	optional string url = 4;
+	optional string err = 5;
+}
+
 enum Event {
 	ContentRequested = 2;
 	ContentViewed = 3;
