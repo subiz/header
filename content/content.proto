@@ -100,3 +100,9 @@ enum Event {
 	ContentRequested = 2;
 	ContentViewed = 3;
 }
+
+message ContentsByUrlTable{
+	optional string account_id = 1;
+	optional string url = 2;
+	repeated string ids = 3;
+}
