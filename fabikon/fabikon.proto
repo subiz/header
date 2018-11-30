@@ -194,3 +194,15 @@ message LongLivedAccessToken {
 message SubscribeRet {
 	optional bool success = 2;
 }
+
+message Error {
+	optional int32 code = 3;
+	optional int32 error_subcode = 4;
+	optional string fbtrace_id = 5;
+	optional string message = 6;
+	optional string type = 7;
+}
+
+message FbResponse {
+	optional Error error = 2;
+}
