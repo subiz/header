@@ -11,8 +11,14 @@ service ServiceContentManager {
 	rpc DeleteContent(common.Id) returns (common.Empty);
 	rpc GetContent(common.Id) returns (Content);
 	rpc SearchContents(SearchContentRequest) returns (Contents);
-	rpc LookupContentsByUrl(common.String) returns (common.Ids);
+	rpc LookupContentsByUrl(LookupRequest) returns (common.Ids);
 	rpc LinkContentsToUrl(LinkRequest) returns (common.Empty);
+}
+
+message LookupRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string url = 3;
 }
 
 message LinkRequest {
