@@ -1340,29 +1340,26 @@
           }
         }
       },
-      "contentAttachmentUrl": {
+      "commonIds": {
         "type": "object",
         "properties": {
-          "url": {
+          "account_id": {
             "type": "string"
           },
-          "type": {
-            "type": "string"
-          },
-          "default_image": {
-            "type": "boolean",
-            "format": "boolean"
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
       "contentContent": {
         "type": "object",
         "properties": {
-          "sbid": {
-            "type": "string"
-          },
           "id": {
-            "type": "string"
+            "type": "string",
+            "title": "optional string sbid = 2;"
           },
           "account_id": {
             "type": "string"
@@ -1431,25 +1428,14 @@
           "attachment_urls": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/contentAttachmentUrl"
+              "type": "string"
             }
-          }
-        }
-      },
-      "contentContentIds": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
           },
-          "ids": {
+          "related_ids": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "url": {
-            "type": "string"
           }
         }
       },

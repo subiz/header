@@ -11,8 +11,15 @@ service ServiceContentManager {
 	rpc DeleteContent(common.Id) returns (common.Empty);
 	rpc GetContent(common.Id) returns (Content);
 	rpc SearchContents(SearchContentRequest) returns (Contents);
-	rpc GetContentIdsByUrl(common.String) returns (ContentIds);
-	rpc UpsertContentIdsForUrl(ContentIds) returns (ContentIds);
+	rpc LookupContentsByUrl(common.String) returns (common.Ids);
+	rpc LinkContentsToUrl(LinkRequest) returns (common.Empty);
+}
+
+message LinkRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string url = 3;
+	repeated string ids = 4;
 }
 
 message SearchContentRequest {
@@ -38,15 +45,9 @@ message KeyValue {
 	optional string value = 4;
 }
 
-message Attachment {
-	optional string url = 1;
-	optional string type = 2;
-	optional bool default_image = 3;
-}
-
 message Content {
 	optional common.Context ctx = 1;
-	optional string sbid = 2;
+	// optional string sbid = 2;
 	optional string id = 3; // user input id
 	optional string account_id = 4;
 
@@ -54,23 +55,25 @@ message Content {
 	optional string title = 6;
 	optional string url = 7;
 	repeated string labels = 8;
+	enum Availability {
+		in_stock = 1;
+		out_of_stock = 2;
+		preorder = 3;
+		discontinued = 4;
+	}
 	optional string availability = 9;
+
 	optional float price = 10;
 	optional string currency = 11;
 	optional float sale_price = 12;
 	repeated KeyValue fields = 13;
 	repeated string categories = 14;
-	repeated string relates = 15;
+	repeated string relates = 15; //  TODO: delete
 	repeated conversation.Attachment attachments = 16; //TODO: delete
 	optional int64 created = 17;
 	optional int64 updated = 18;
-	repeated AttachmentUrl attachment_urls = 19;
-}
-
-message AttachmentUrl {
-	optional string url = 1;
-	optional string type = 2;
-	optional bool default_image = 3;
+	repeated string attachment_urls = 20;
+	repeated string related_ids = 21; // releated content ids
 }
 
 message Contents {
@@ -78,13 +81,6 @@ message Contents {
 	repeated Content contents = 2;
 	optional string anchor = 3;
 	optional int64 total = 4;
-}
-
-message ContentIds{
-	optional common.Context ctx =	6;
-	optional string account_id = 7;
-	repeated string ids = 10;
-	optional string url = 9;
 }
 
 enum Event {
