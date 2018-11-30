@@ -2,8 +2,6 @@ syntax = "proto2";
 
 package fabikon;
 
-//import "git.subiz.net/header/common/common.proto";
-
 message FacebookPage {
 	optional string account_id = 1;
 	optional string id = 2;
@@ -20,27 +18,6 @@ enum Event {
 
 	FabikonJob = 2;
 	FabikonCreateAccountRequested = 0;
-}
-
-message HttpChunk {
-	optional string id = 3;
-	optional int32 chunk_id = 4;
-	optional bytes data = 5;
-	optional int32 chunk_size = 6;
-}
-
-message Job {
-	optional string topic = 2;
-	optional int32 partition  = 3;
-	optional int64 offset = 4;
-
-	optional string type = 6;
-	optional string request_id = 7;
-}
-
-enum JobType {
-	facebook_hook = 0;
-	subiz_event = 3;
 }
 
 message FbWebhookEvent {
