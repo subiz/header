@@ -262,6 +262,7 @@ enum Event {
 	UserAliasAdded = 202;
 	UserAliasDeleted = 203;
 	UserEventCreated = 204;
+	UserContentViewed = 205;
 	UserAggregated = 207;
 
 	UserTopicJob = 208;
@@ -291,6 +292,7 @@ enum Event {
 
 	// AutomationAgentNotificationFired = 54;
 	AutomationAddUserToSegmentationFired = 231;
+
 }
 
 message AggregateSegmentCount {
