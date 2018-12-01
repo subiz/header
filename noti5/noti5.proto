@@ -29,6 +29,7 @@ service Noti5Service {
 service Noti5TokenService {
 	rpc AddToken(Token) returns (common.Empty);
 	rpc RemoveToken(Token) returns (common.Empty);
+	rpc CheckTokenExists(Token) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
