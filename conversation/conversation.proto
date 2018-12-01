@@ -970,6 +970,7 @@ message ServiceLevelAgreement  {
 	optional bool is_default = 9;
 	optional int64 created = 10;
 	optional int64 updated = 11;
+	optional string order = 12;
 }
 
 message ServiceLevelAgreements {
