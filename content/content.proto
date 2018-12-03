@@ -80,6 +80,7 @@ message Content {
 	optional int64 updated = 18;
 	repeated string attachment_urls = 20;
 	repeated string related_ids = 21; // releated content ids
+	optional string image_url = 22;
 }
 
 message Contents {

@@ -803,6 +803,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "image_url": {
+          "type": "string"
         }
       }
     },
@@ -1037,6 +1040,9 @@
           "items": {
             "$ref": "#/definitions/conversationButton"
           }
+        },
+        "id": {
+          "type": "string"
         }
       }
     },
