@@ -876,6 +876,8 @@ message Ticket {
 	repeated string user_ids = 12;
 	repeated string agent_ids = 13;
 	optional bool is_assigned = 14;
+	optional string updated_by = 15;
+	optional string created_by = 16;
 }
 
 message TicketListRequest {

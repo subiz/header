@@ -1954,6 +1954,12 @@
         "is_assigned": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "updated_by": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
         }
       }
     },
