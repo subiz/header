@@ -1062,6 +1062,9 @@
           "items": {
             "$ref": "#/definitions/conversationButton"
           }
+        },
+        "id": {
+          "type": "string"
         }
       }
     },

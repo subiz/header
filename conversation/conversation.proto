@@ -430,6 +430,7 @@ message ContentTemplate {
 
 	optional Button default_action = 22;
 	repeated Button buttons = 23;
+	optional string id = 24;
 }
 
 message GenericElementTemplate {
