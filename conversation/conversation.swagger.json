@@ -1667,7 +1667,8 @@
           "format": "int64"
         },
         "order": {
-          "type": "string"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
