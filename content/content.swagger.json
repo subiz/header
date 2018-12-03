@@ -935,6 +935,13 @@
         },
         "form_submit": {
           "$ref": "#/definitions/conversationFormSubmit"
+        },
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationContentTemplate"
+          },
+          "title": "content template"
         }
       }
     },
@@ -966,6 +973,70 @@
         },
         "phone_number": {
           "type": "string"
+        }
+      }
+    },
+    "conversationContentTemplate": {
+      "type": "object",
+      "properties": {
+        "image_url": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "sale_price": {
+          "type": "number",
+          "format": "float"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attachment_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "related_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "default_action": {
+          "$ref": "#/definitions/conversationButton"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
         }
       }
     },

@@ -406,6 +406,32 @@ message AskInfomation {
 	}
 }
 
+message ContentTemplate {
+	optional string image_url = 2;
+	optional string description = 5;
+	optional string title = 6;
+	optional string url = 7;
+	repeated string labels = 8;
+	enum Availability {
+		in_stock = 1;
+		out_of_stock = 2;
+		preorder = 3;
+		discontinued = 4;
+	}
+	optional string availability = 9;
+
+	optional float price = 10;
+	optional string currency = 11;
+	optional float sale_price = 12;
+
+	repeated string categories = 14;
+	repeated string attachment_urls = 20;
+	repeated string related_ids = 21; // releated content ids
+
+	optional Button default_action = 22;
+	repeated Button buttons = 23;
+}
+
 message GenericElementTemplate {
 	optional string title = 2;
 	optional string image_url = 3;
@@ -425,6 +451,7 @@ enum AttachmentType {
 	form = 9;
 	form_submit = 10;
 	fallback = 11;
+	content_template = 12;
 }
 
 message Attachment {
@@ -441,6 +468,7 @@ message Attachment {
 
 	// generic
 	repeated GenericElementTemplate elements = 8;
+
 	// preview
 	optional string title = 9;
 	optional string color = 10;
@@ -453,6 +481,9 @@ message Attachment {
 
 	optional Form form = 20;
 	optional FormSubmit form_submit = 21;
+
+	// content template
+	repeated ContentTemplate contents = 22;
 }
 
 message Form {
