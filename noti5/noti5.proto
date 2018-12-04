@@ -59,6 +59,7 @@ message PushNoti {
 	optional string conversation_id = 8;
 	optional string sender_id = 9;
 	optional string sender_type = 10;
+	optional string icon_url = 11;
 }
 
 message Message {
