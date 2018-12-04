@@ -35,6 +35,12 @@ message Ids {
 	repeated string ids = 3;
 }
 
+message ObjectPathRequest {
+  Context ctx = 1;
+	string id = 2;
+	string path = 3;
+}
+
 
 message Context {
 	string event_id = 1;
