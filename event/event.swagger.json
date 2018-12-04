@@ -1659,6 +1659,9 @@
           "items": {
             "$ref": "#/definitions/conversationField"
           }
+        },
+        "last_page_view_url": {
+          "type": "string"
         }
       }
     },

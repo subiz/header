@@ -96,6 +96,7 @@ message Member {
 	optional bool left = 11;
 	optional string conversation_id = 13;
 	repeated Field fields = 14;
+	optional string last_page_view_url = 15;
 }
 
 message Conversation {
