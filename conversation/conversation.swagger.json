@@ -710,6 +710,23 @@
         }
       }
     },
+    "commonIds": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "commonPong": {
       "type": "object",
       "properties": {

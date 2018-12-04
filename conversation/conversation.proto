@@ -660,6 +660,7 @@ service ConversationMgr {
 	rpc LeftConversation(Member) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
 }
 
 service TemplateMgr {
