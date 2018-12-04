@@ -410,6 +410,7 @@ service AccountMgr {
 	rpc RemoveAgentFromGroup(GroupMember) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ChangeEmail(Agent) returns (Agent);
+	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
 }
 
 service CurrencyMgr {
