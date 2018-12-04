@@ -453,6 +453,7 @@ enum AttachmentType {
 	form_submit = 10;
 	fallback = 11;
 	content_template = 12;
+	quick_replies = 13;
 }
 
 message Attachment {
@@ -485,6 +486,15 @@ message Attachment {
 
 	// content template
 	repeated ContentTemplate contents = 22;
+
+	repeated QuickReply quick_replies = 23;
+}
+
+message QuickReply {
+	optional string content_type = 2; // should be 'text'
+	optional string title = 3;
+	optional string payload = 4;
+	optional string image_url = 5;
 }
 
 message Form {

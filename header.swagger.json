@@ -1561,6 +1561,12 @@
               "$ref": "#/components/schemas/conversationContentTemplate"
             },
             "title": "content template"
+          },
+          "quick_replies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationQuickReply"
+            }
           }
         }
       },
@@ -1752,6 +1758,23 @@
             "items": {
               "$ref": "#/components/schemas/Button"
             }
+          }
+        }
+      },
+      "conversationQuickReply": {
+        "type": "object",
+        "properties": {
+          "content_type": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "payload": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
           }
         }
       },

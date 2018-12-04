@@ -945,6 +945,12 @@
             "$ref": "#/definitions/conversationContentTemplate"
           },
           "title": "content template"
+        },
+        "quick_replies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationQuickReply"
+          }
         }
       }
     },
@@ -1136,6 +1142,23 @@
           "items": {
             "$ref": "#/definitions/conversationButton"
           }
+        }
+      }
+    },
+    "conversationQuickReply": {
+      "type": "object",
+      "properties": {
+        "content_type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
         }
       }
     }
