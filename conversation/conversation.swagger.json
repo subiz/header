@@ -919,54 +919,6 @@
         }
       }
     },
-    "conversationCannedResponse": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "id": {
-          "type": "string"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        },
-        "keys": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "modified": {
-          "type": "string",
-          "format": "int64"
-        },
-        "creator": {
-          "type": "string"
-        }
-      }
-    },
-    "conversationCannedResponses": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "responses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/conversationCannedResponse"
-          }
-        }
-      }
-    },
     "conversationComputed": {
       "type": "object",
       "properties": {

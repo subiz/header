@@ -1832,48 +1832,6 @@
           }
         }
       },
-      "CannedResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "text": {
-            "type": "string"
-          },
-          "keys": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modified": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "creator": {
-            "type": "string"
-          }
-        }
-      },
-      "CannedResponses": {
-        "type": "object",
-        "properties": {
-          "responses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CannedResponse"
-            }
-          }
-        }
-      },
       "conversationComputed": {
         "type": "object",
         "properties": {

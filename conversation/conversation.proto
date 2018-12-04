@@ -257,12 +257,6 @@ enum Event {
 	ConnectorUpsertRequested = 68;
 	ConnectorListRequested = 69;
 
-	CannedResponseCreateRequested = 80; // canned response
-	CannedResponseUpdateRequested = 81; // canned response
-	CannedResponseDeleteRequested = 82; // id
-	CannedResponseReadRequested = 83; // id
-	CannedResponseListRequested = 84; // search
-
 	TagCreateRequested = 85; // tag
 	TagUpdateRequested = 86; // tag
 	TagReadRequested = 87; // id
@@ -559,27 +553,11 @@ message SearchTemplate {
 	optional int32 limit = 3;
 }
 
-message CannedResponse {
-	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional string account_id = 3;
-	optional string text = 5;
-	repeated string keys = 6;
-	optional int64 created = 7;
-	optional int64 modified = 8;
-	optional string creator = 9;
-}
-
 message Templates {
 	optional common.Context ctx = 1;
 	repeated Template templates = 2;
 	optional string anchor = 3;
 	optional int64 total = 4;
-}
-
-message CannedResponses {
-	optional common.Context ctx = 1;
-	repeated CannedResponse responses = 3;
 }
 
 message Tags {
@@ -684,15 +662,6 @@ service ConversationMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
-service CannedResponseMgr {
-	rpc CreateCannedResponse(CannedResponse) returns (CannedResponse);
-	rpc UpdateCannedResponse(CannedResponse) returns (CannedResponse);
-	rpc ListCannedResponses(common.Id) returns (CannedResponses);
-	rpc DeleteCannedResponse(common.Id) returns (common.Empty);
-	rpc GetCannedResponse(common.Id) returns (CannedResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 service TemplateMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc CreateTemplate(Template) returns (Template);
@@ -701,7 +670,6 @@ service TemplateMgr {
 	rpc GetTemplate(common.Id) returns (Template);
 	rpc ListTemplates(SearchTemplate) returns (Templates);
 }
-
 
 service TagMgr {
 	rpc CreateTag(Tag) returns (Tag);
