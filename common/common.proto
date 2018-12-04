@@ -39,6 +39,7 @@ message ObjectPathRequest {
   Context ctx = 1;
 	string id = 2;
 	string path = 3;
+	string account_id = 4;
 }
 
 
