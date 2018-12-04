@@ -72,4 +72,6 @@ message Message {
 enum Event {
 	Noti5Requested = 0;
 	Noti5PushRequested = 1;
+	Noti5Sync = 2;
+	Noti5SubscribeStatusUpdated = 3;
 }
