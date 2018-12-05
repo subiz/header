@@ -96,10 +96,9 @@ for i in `ls -R`; do
 	fi
 
 	if [[ $i == *".proto" ]]; then
-	  easyjson -all $LAST_DIR/$(sed "s/.proto/.pb.go/g" <<< "$i") &
+		[ "$1" = 'json' ] && easyjson -all $LAST_DIR/$(sed "s/.proto/.pb.go/g" <<< "$i")
 	fi
 done;
-wait
 printf "\e[32m\nDone (%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
 
