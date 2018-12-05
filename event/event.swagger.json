@@ -1632,6 +1632,9 @@
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
+        "account_id": {
+          "type": "string"
+        },
         "type": {
           "type": "string"
         },

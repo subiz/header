@@ -22,6 +22,7 @@ PROTOC_GO_REPO="github.com/golang/protobuf/protoc-gen-go"
 if [ ! -f $GOPATH/bin/easyjson ]; then
 	echo -e "\033[0;34minstalling easyjson..."
 	go get -u github.com/mailru/easyjson/...
+
 	echo "done"
 fi
 
@@ -101,12 +102,8 @@ for i in `ls -R`; do
 done;
 printf "\e[32m\nDone (%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
-
-		#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
-		# ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
-
-
-
+#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
+# ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
 
 [ "$1" = 'all' ] && echo -e "\033[0;90m["$TOTAL"] generating subiz.d.ts\033[0;31m"
 [ "$2" = 'all' ] && npx pbjs --es6 --keep-case --no-convert --no-create --no-encode --no-decode --no-verify --no-delimited --no-beautify -t static-module -w commonjs -o subiz.js $ALLPROTO

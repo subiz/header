@@ -88,6 +88,7 @@ message MemberV3 {
 
 message Member {
 	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional string type = 3; // type
 	optional string subiz_id = 8;
 	optional string id = 4;
