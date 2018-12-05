@@ -69,6 +69,13 @@ message Message {
 	optional string body = 4;
 }
 
+message SubscribeStatus {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional bool	status = 4;
+}
+
 enum Event {
 	Noti5Requested = 0;
 	Noti5PushRequested = 1;
