@@ -635,11 +635,15 @@ service RuleMgr {
 }
 
 message MessageId {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional string conversation_id = 3;
 	optional string message_id = 4;
 }
 
 message MessageAck {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
 	optional string conversation_id = 3;
 	optional string message_id = 4;
 	optional string error = 5;
