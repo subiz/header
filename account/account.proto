@@ -4,7 +4,6 @@ package account;
 
 import "git.subiz.net/header/auth/auth.proto";
 import "git.subiz.net/header/common/common.proto";
-import "git.subiz.net/header/lang/lang.proto";
 import "git.subiz.net/header/payment/payment.proto";
 
 service UseDoc {
@@ -251,7 +250,7 @@ message ConfirmEmail {
 	optional string token = 5;
 	optional int64 expired_in = 6;
 	optional string account_name = 7;
-	optional lang.L lang = 8;
+	optional common.L lang = 8;
 	optional string owner_name = 9;
 	optional string from = 10;
 }
@@ -263,7 +262,7 @@ message InviteEmail {
 	optional string sender_id = 4;
 	optional int64 expired_in = 5;
 	optional string token = 6;
-	optional lang.L lang = 8;
+	optional common.L lang = 8;
 
 	optional string fullname = 9;
 	optional string sender_name = 10;
@@ -282,7 +281,7 @@ message ResetPasswordEmail {
 	optional string account_id = 6;
 	optional string agent_id = 7;
 	optional string agent_name = 8;
-	optional lang.L lang = 9;
+	optional common.L lang = 9;
 }
 
 message PasswordChangedEmail {
@@ -291,7 +290,7 @@ message PasswordChangedEmail {
 	optional string account_id = 3;
 	optional string agent_id = 4;
 	optional string agent_name = 5;
-	optional lang.L lang = 7;
+	optional common.L lang = 7;
 	optional string from = 9;
 }
 
@@ -301,7 +300,7 @@ message AccountConfirmSuccessEmail {
 	optional string account_id = 3;
 	optional string agent_id = 4;
 	optional string agent_name = 5;
-	optional lang.L lang = 7;
+	optional common.L lang = 7;
 	optional string from = 9;
 	optional int64 from_time = 10;
 	optional int64 to_time = 11;

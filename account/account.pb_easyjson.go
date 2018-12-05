@@ -6,7 +6,6 @@ import (
 	json "encoding/json"
 	auth "git.subiz.net/header/auth"
 	common "git.subiz.net/header/common"
-	lang "git.subiz.net/header/lang"
 	payment "git.subiz.net/header/payment"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
@@ -937,9 +936,9 @@ func easyjsonC9b74c43DecodeGitSubizNetHeaderAccount9(in *jlexer.Lexer, out *Rese
 				out.Lang = nil
 			} else {
 				if out.Lang == nil {
-					out.Lang = new(lang.L)
+					out.Lang = new(common.L)
 				}
-				*out.Lang = lang.L(in.Int32())
+				*out.Lang = common.L(in.Int32())
 			}
 		default:
 			in.SkipRecursive()
@@ -1146,9 +1145,9 @@ func easyjsonC9b74c43DecodeGitSubizNetHeaderAccount10(in *jlexer.Lexer, out *Pas
 				out.Lang = nil
 			} else {
 				if out.Lang == nil {
-					out.Lang = new(lang.L)
+					out.Lang = new(common.L)
 				}
-				*out.Lang = lang.L(in.Int32())
+				*out.Lang = common.L(in.Int32())
 			}
 		case "from":
 			if in.IsNull() {
@@ -1633,9 +1632,9 @@ func easyjsonC9b74c43DecodeGitSubizNetHeaderAccount13(in *jlexer.Lexer, out *Inv
 				out.Lang = nil
 			} else {
 				if out.Lang == nil {
-					out.Lang = new(lang.L)
+					out.Lang = new(common.L)
 				}
-				*out.Lang = lang.L(in.Int32())
+				*out.Lang = common.L(in.Int32())
 			}
 		case "fullname":
 			if in.IsNull() {
@@ -3482,9 +3481,9 @@ func easyjsonC9b74c43DecodeGitSubizNetHeaderAccount22(in *jlexer.Lexer, out *Con
 				out.Lang = nil
 			} else {
 				if out.Lang == nil {
-					out.Lang = new(lang.L)
+					out.Lang = new(common.L)
 				}
-				*out.Lang = lang.L(in.Int32())
+				*out.Lang = common.L(in.Int32())
 			}
 		case "owner_name":
 			if in.IsNull() {
@@ -5746,9 +5745,9 @@ func easyjsonC9b74c43DecodeGitSubizNetHeaderAccount30(in *jlexer.Lexer, out *Acc
 				out.Lang = nil
 			} else {
 				if out.Lang == nil {
-					out.Lang = new(lang.L)
+					out.Lang = new(common.L)
 				}
-				*out.Lang = lang.L(in.Int32())
+				*out.Lang = common.L(in.Int32())
 			}
 		case "from":
 			if in.IsNull() {

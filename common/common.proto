@@ -126,3 +126,10 @@ message Pong {
 service Agent {
 	rpc Ping(PingRequest) returns (Pong);
 }
+
+enum L {
+	en = 0; // english
+	vn = 1; // vietnamese
+	cn = 3; // chinese
+	fr = 5; // french
+}

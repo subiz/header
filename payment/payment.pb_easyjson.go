@@ -5,7 +5,6 @@ package payment
 import (
 	json "encoding/json"
 	common "git.subiz.net/header/common"
-	lang "git.subiz.net/header/lang"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
@@ -4844,9 +4843,9 @@ func easyjson3258bd9eDecodeGitSubizNetHeaderPayment26(in *jlexer.Lexer, out *Inv
 				out.Lang = nil
 			} else {
 				if out.Lang == nil {
-					out.Lang = new(lang.L)
+					out.Lang = new(common.L)
 				}
-				*out.Lang = lang.L(in.Int32())
+				*out.Lang = common.L(in.Int32())
 			}
 		case "from":
 			if in.IsNull() {

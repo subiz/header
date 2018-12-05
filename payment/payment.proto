@@ -3,7 +3,6 @@ syntax = "proto2";
 package payment;
 
 import "git.subiz.net/header/common/common.proto";
-import "git.subiz.net/header/lang/lang.proto";
 
 enum Currency {
 	usd = 0;
@@ -524,6 +523,6 @@ message InvoiceCreatedEmail {
 	optional string billing_name = 4;
 	optional string invoice_id = 5;
 	optional int64 created = 6;
-	optional lang.L lang = 8;
+	optional common.L lang = 8;
 	optional string from = 10;
 }
