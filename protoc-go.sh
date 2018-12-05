@@ -4,7 +4,6 @@
 PROTOC_FILE="protoc-3.5.1-linux-x86_64.zip"
 PROTOC_PATH="protobuf/protoc"
 PROTOC="protobuf/protoc/bin/protoc"
-
 OS=$(uname -s)
 if [ $OS = "Darwin" ]; then
 	#PROTOC_FILE="protoc-3.6.1-osx-x86_64.zip"
@@ -19,6 +18,12 @@ unzip -q protobuf/$PROTOC_FILE -d $PROTOC_PATH
 
 PROTOC_GO_VERSION="ddf22928ea3c56eb4292a0adbbf5001b1e8e7d0d"
 PROTOC_GO_REPO="github.com/golang/protobuf/protoc-gen-go"
+
+if [ ! -f $GOPATH/bin/easyjson ]; then
+	echo -e "\033[0;34minstalling easyjson..."
+	go get -u github.com/mailru/easyjson/...
+	echo "done"
+fi
 
 if [ ! -f $GOPATH/bin/protoc-gen-go ]; then
 	echo -e "\033[0;34minstalling protoc-gen-go..."
@@ -50,10 +55,8 @@ TOTAL=1
 echo -e "\033[0;34mcompiling proto files"
 $PROTOC --version
 
-mkdir -p scala
-[ "$1" = 'all' ] && rm scala/* -Rf
 ALLPROTO=""
-
+starttime=$(date +%s.%N)
 for i in `ls -R`; do
 	if [[ $i == *":"* ]]; then
 		LAST_DIR=${i%?} # trim last char
@@ -65,20 +68,46 @@ for i in `ls -R`; do
 	fi
 
 	if [[ $i == *".proto" ]]; then
-		echo -e "\033[0;90m["$TOTAL"] compiling" $LAST_DIR /$i "\033[0;31m" &
+		printf "\033[0;90m["%d"] compiling %s %s \033[0;31m\n" $TOTAL $LAST_DIR /$i
 		$PROTOC --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LAST_DIR/$i &
-		$PROTOC -I$PROTOC_PATH/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
-		#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
-		# ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
+		$PROTOC -I$PROTOC_PATH/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i &
+
+
 		ALLPROTO="$ALLPROTO $LAST_DIR/$i"
 		let "TOTAL += 1"
 		# else
 		# echo -e "\033[0;37mignore" $i "\033[0;30m"
-		[ "$1" = 'all' ] && ./bin/scalapbc -v351 -I $GOPATH/src --scala_out=flat_package:./scala $GOPATH/src/git.subiz.net/header/$LAST_DIR/$i > /dev/null
 	fi
 done;
-
 wait
+printf "\e[32mDone \e[32m(%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
+
+# GENERATEING JSON
+starttime=$(date +%s.%N)
+printf "\e[32mgenerating json... (this could take up to 20 sec)"
+for i in `ls -R`; do
+	if [[ $i == *":"* ]]; then
+		LAST_DIR=${i%?} # trim last char
+		continue
+	fi
+
+	if [[ $i == "vendor" ]] || [[ $i == "proto" ]] || [[ $LAST_DIR == ./node_modules* ]] || [[ $LAST_DIR == ./vendor* ]] || [[ $LAST_DIR == ./proto* ]]; then
+		continue
+	fi
+
+	if [[ $i == *".proto" ]]; then
+	  easyjson -all $LAST_DIR/$(sed "s/.proto/.pb.go/g" <<< "$i") &
+	fi
+done;
+wait
+printf "\e[32m\nDone (%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
+
+
+		#./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
+		# ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
+
+
+
 
 [ "$1" = 'all' ] && echo -e "\033[0;90m["$TOTAL"] generating subiz.d.ts\033[0;31m"
 [ "$2" = 'all' ] && npx pbjs --es6 --keep-case --no-convert --no-create --no-encode --no-decode --no-verify --no-delimited --no-beautify -t static-module -w commonjs -o subiz.js $ALLPROTO
