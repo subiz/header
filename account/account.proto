@@ -380,6 +380,11 @@ message BusinessHours {
 	repeated Holiday holidays = 5;
 }
 
+message SyncPublicHolidaysRequest {
+	optional common.Context ctx = 1;
+	optional string country_code = 2;
+}
+
 service AccSubMgr {
 	rpc SearchSub(SearchSubRequest) returns (AccSubs);
 }
@@ -427,7 +432,7 @@ service CurrencyMgr {
 
 service BusinessHoursMgr {
 	rpc UpdateBusinessHours(BusinessHours) returns (BusinessHours);
-	rpc SyncPublicHolidays(common.Empty) returns (BusinessHours);
+	rpc SyncPublicHolidays(SyncPublicHolidaysRequest) returns (BusinessHours);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
