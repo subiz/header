@@ -383,6 +383,7 @@ message BusinessHours {
 message SyncPublicHolidaysRequest {
 	optional common.Context ctx = 1;
 	optional string country_code = 2;
+	optional string lang = 3;
 }
 
 service AccSubMgr {
