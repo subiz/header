@@ -963,7 +963,7 @@ message TicketAttributeData {
 
 message ServiceLevelAgreementTarget {
 	optional string priority = 1;
-	optional int32 resolve_within = 2;
+	optional int32 resolve_within = 2; // hours
 	enum OperationalHours {
 		BUSINESS_HOURS = 0;
 	}
@@ -984,7 +984,7 @@ message ServiceLevelAgreement  {
 		AGENT = 2;
 	}
 	optional string strategy = 6;
-	optional string assign_to = 7;
+	optional string assign_to = 7; // agent id, group id
 
 	repeated ServiceLevelAgreementTarget targets = 8;
 	optional bool is_default = 9;
@@ -1052,10 +1052,11 @@ message ReportTicket {
 	optional int64 created_at = 9;
 	optional int64 resolved_at = 10;
 	optional bool is_resolved = 11;
-	optional int64 resolve_time = 12;
+	optional int64 resolve_time = 12; // seconds
 	optional string group_id = 14;
 	optional int64 closed_at = 15;
 	optional bool is_unresolved = 16;
+	optional bool is_violated = 17;
 }
 
 message CountTicketRequest {

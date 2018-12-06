@@ -372,7 +372,7 @@ message BusinessHours {
 		optional int32 year = 1;
 		optional int32 month = 2;
 		optional int32 day = 3;
-		optional string weekday = 4;
+		optional string weekday = 4; // deprecated
 		optional string name = 5;
 		optional string start_time = 6;
 		optional string end_time = 7;
