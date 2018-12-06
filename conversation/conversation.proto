@@ -1077,6 +1077,7 @@ message CountTicketRequest {
 		day = 1;
 	}
 	optional bool is_unresolved = 16;
+	optional bool is_violated = 17;
 }
 
 message CountTicketResponse {
