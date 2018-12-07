@@ -901,7 +901,7 @@ enum TicketState {
 enum TicketPriority {
 	low = 0;
 	medium = 1;
-	hight = 2;
+	high = 2;
 	urgent = 3;
 }
 
