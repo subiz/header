@@ -1043,6 +1043,7 @@ message ReportTicket {
 	optional int64 closed_at = 15;
 	optional bool is_unresolved = 16;
 	optional bool is_violated = 17;
+	optional bool has_agent = 18;
 }
 
 message CountTicketRequest {

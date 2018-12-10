@@ -7277,6 +7277,16 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation36(in *jlexer.Lexer, out
 				}
 				*out.IsViolated = bool(in.Bool())
 			}
+		case "has_agent":
+			if in.IsNull() {
+				in.Skip()
+				out.HasAgent = nil
+			} else {
+				if out.HasAgent == nil {
+					out.HasAgent = new(bool)
+				}
+				*out.HasAgent = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -7458,6 +7468,16 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation36(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.IsViolated))
+	}
+	if in.HasAgent != nil {
+		const prefix string = ",\"has_agent\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.HasAgent))
 	}
 	out.RawByte('}')
 }
