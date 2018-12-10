@@ -14108,16 +14108,6 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation73(in *jlexer.Lexer, out
 				}
 				*out.State = string(in.String())
 			}
-		case "request":
-			if in.IsNull() {
-				in.Skip()
-				out.Request = nil
-			} else {
-				if out.Request == nil {
-					out.Request = new(StartRequest)
-				}
-				(*out.Request).UnmarshalEasyJSON(in)
-			}
 		case "accepted":
 			if in.IsNull() {
 				in.Skip()
@@ -14228,16 +14218,6 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation73(in *jlexer.Lexer, out
 					in.WantComma()
 				}
 				in.Delim(']')
-			}
-		case "assign_to":
-			if in.IsNull() {
-				in.Skip()
-				out.AssignTo = nil
-			} else {
-				if out.AssignTo == nil {
-					out.AssignTo = new(RouteResult)
-				}
-				(*out.AssignTo).UnmarshalEasyJSON(in)
 			}
 		case "ticket":
 			if in.IsNull() {
@@ -14379,16 +14359,6 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation73(out *jwriter.Writer, 
 		}
 		out.String(string(*in.State))
 	}
-	if in.Request != nil {
-		const prefix string = ",\"request\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Request).MarshalEasyJSON(out)
-	}
 	if in.Accepted != nil {
 		const prefix string = ",\"accepted\":"
 		if first {
@@ -14491,16 +14461,6 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation73(out *jwriter.Writer, 
 			}
 			out.RawByte(']')
 		}
-	}
-	if in.AssignTo != nil {
-		const prefix string = ",\"assign_to\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.AssignTo).MarshalEasyJSON(out)
 	}
 	if in.Ticket != nil {
 		const prefix string = ",\"ticket\":"
