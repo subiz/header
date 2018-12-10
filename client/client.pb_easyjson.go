@@ -46,7 +46,7 @@ func easyjson19c08265DecodeGitSubizNetHeaderClient(in *jlexer.Lexer, out *Client
 				if out.Ctx == nil {
 					out.Ctx = new(common.Context)
 				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
+				easyjson19c08265DecodeGitSubizNetHeaderCommon(in, &*out.Ctx)
 			}
 		case "clients":
 			if in.IsNull() {
@@ -101,7 +101,7 @@ func easyjson19c08265EncodeGitSubizNetHeaderClient(out *jwriter.Writer, in Clien
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Ctx).MarshalEasyJSON(out)
+		easyjson19c08265EncodeGitSubizNetHeaderCommon(out, *in.Ctx)
 	}
 	if len(in.Clients) != 0 {
 		const prefix string = ",\"clients\":"
@@ -152,6 +152,354 @@ func (v *Clients) UnmarshalJSON(data []byte) error {
 func (v *Clients) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson19c08265DecodeGitSubizNetHeaderClient(l, v)
 }
+func easyjson19c08265DecodeGitSubizNetHeaderCommon(in *jlexer.Lexer, out *common.Context) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "event_id":
+			out.EventId = string(in.String())
+		case "state":
+			if in.IsNull() {
+				in.Skip()
+				out.State = nil
+			} else {
+				out.State = in.Bytes()
+			}
+		case "node":
+			out.Node = string(in.String())
+		case "reply_topic":
+			out.ReplyTopic = string(in.String())
+		case "credential":
+			if in.IsNull() {
+				in.Skip()
+				out.Credential = nil
+			} else {
+				if out.Credential == nil {
+					out.Credential = new(auth.Credential)
+				}
+				(*out.Credential).UnmarshalEasyJSON(in)
+			}
+		case "tracing":
+			if in.IsNull() {
+				in.Skip()
+				out.Tracing = nil
+			} else {
+				out.Tracing = in.Bytes()
+			}
+		case "reply_key":
+			out.ReplyKey = string(in.String())
+		case "by_device":
+			if in.IsNull() {
+				in.Skip()
+				out.ByDevice = nil
+			} else {
+				if out.ByDevice == nil {
+					out.ByDevice = new(common.Device)
+				}
+				easyjson19c08265DecodeGitSubizNetHeaderCommon1(in, &*out.ByDevice)
+			}
+		case "topic":
+			out.Topic = string(in.String())
+		case "partition":
+			out.Partition = int32(in.Int32())
+		case "offset":
+			out.Offset = int64(in.Int64())
+		case "term":
+			out.Term = uint64(in.Uint64())
+		case "router_topic":
+			out.RouterTopic = string(in.String())
+		case "idempotency_key":
+			out.IdempotencyKey = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson19c08265EncodeGitSubizNetHeaderCommon(out *jwriter.Writer, in common.Context) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.EventId != "" {
+		const prefix string = ",\"event_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.EventId))
+	}
+	if len(in.State) != 0 {
+		const prefix string = ",\"state\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Base64Bytes(in.State)
+	}
+	if in.Node != "" {
+		const prefix string = ",\"node\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Node))
+	}
+	if in.ReplyTopic != "" {
+		const prefix string = ",\"reply_topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ReplyTopic))
+	}
+	if in.Credential != nil {
+		const prefix string = ",\"credential\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Credential).MarshalEasyJSON(out)
+	}
+	if len(in.Tracing) != 0 {
+		const prefix string = ",\"tracing\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Base64Bytes(in.Tracing)
+	}
+	if in.ReplyKey != "" {
+		const prefix string = ",\"reply_key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ReplyKey))
+	}
+	if in.ByDevice != nil {
+		const prefix string = ",\"by_device\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		easyjson19c08265EncodeGitSubizNetHeaderCommon1(out, *in.ByDevice)
+	}
+	if in.Topic != "" {
+		const prefix string = ",\"topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Topic))
+	}
+	if in.Partition != 0 {
+		const prefix string = ",\"partition\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.Partition))
+	}
+	if in.Offset != 0 {
+		const prefix string = ",\"offset\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Offset))
+	}
+	if in.Term != 0 {
+		const prefix string = ",\"term\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.Term))
+	}
+	if in.RouterTopic != "" {
+		const prefix string = ",\"router_topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.RouterTopic))
+	}
+	if in.IdempotencyKey != "" {
+		const prefix string = ",\"idempotency_key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.IdempotencyKey))
+	}
+	out.RawByte('}')
+}
+func easyjson19c08265DecodeGitSubizNetHeaderCommon1(in *jlexer.Lexer, out *common.Device) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ip":
+			out.Ip = string(in.String())
+		case "user_agent":
+			out.UserAgent = string(in.String())
+		case "screen_resolution":
+			out.ScreenResolution = string(in.String())
+		case "timezone":
+			out.Timezone = string(in.String())
+		case "language":
+			out.Language = string(in.String())
+		case "referrer":
+			out.Referrer = string(in.String())
+		case "type":
+			out.Type = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson19c08265EncodeGitSubizNetHeaderCommon1(out *jwriter.Writer, in common.Device) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ip != "" {
+		const prefix string = ",\"ip\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Ip))
+	}
+	if in.UserAgent != "" {
+		const prefix string = ",\"user_agent\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.UserAgent))
+	}
+	if in.ScreenResolution != "" {
+		const prefix string = ",\"screen_resolution\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ScreenResolution))
+	}
+	if in.Timezone != "" {
+		const prefix string = ",\"timezone\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Timezone))
+	}
+	if in.Language != "" {
+		const prefix string = ",\"language\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Language))
+	}
+	if in.Referrer != "" {
+		const prefix string = ",\"referrer\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Referrer))
+	}
+	if in.Type != "" {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Type))
+	}
+	out.RawByte('}')
+}
 func easyjson19c08265DecodeGitSubizNetHeaderClient1(in *jlexer.Lexer, out *Client) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
@@ -179,7 +527,7 @@ func easyjson19c08265DecodeGitSubizNetHeaderClient1(in *jlexer.Lexer, out *Clien
 				if out.Ctx == nil {
 					out.Ctx = new(common.Context)
 				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
+				easyjson19c08265DecodeGitSubizNetHeaderCommon(in, &*out.Ctx)
 			}
 		case "id":
 			if in.IsNull() {
@@ -337,9 +685,9 @@ func easyjson19c08265DecodeGitSubizNetHeaderClient1(in *jlexer.Lexer, out *Clien
 					out.Events = (out.Events)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v4 string
-					v4 = string(in.String())
-					out.Events = append(out.Events, v4)
+					var v10 string
+					v10 = string(in.String())
+					out.Events = append(out.Events, v10)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -406,7 +754,7 @@ func easyjson19c08265EncodeGitSubizNetHeaderClient1(out *jwriter.Writer, in Clie
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Ctx).MarshalEasyJSON(out)
+		easyjson19c08265EncodeGitSubizNetHeaderCommon(out, *in.Ctx)
 	}
 	if in.Id != nil {
 		const prefix string = ",\"id\":"
@@ -558,11 +906,11 @@ func easyjson19c08265EncodeGitSubizNetHeaderClient1(out *jwriter.Writer, in Clie
 		}
 		{
 			out.RawByte('[')
-			for v5, v6 := range in.Events {
-				if v5 > 0 {
+			for v11, v12 := range in.Events {
+				if v11 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v6))
+				out.String(string(v12))
 			}
 			out.RawByte(']')
 		}
@@ -660,7 +1008,7 @@ func easyjson19c08265DecodeGitSubizNetHeaderClient2(in *jlexer.Lexer, out *Autho
 				if out.Ctx == nil {
 					out.Ctx = new(common.Context)
 				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
+				easyjson19c08265DecodeGitSubizNetHeaderCommon(in, &*out.Ctx)
 			}
 		case "account_id":
 			if in.IsNull() {
@@ -748,9 +1096,9 @@ func easyjson19c08265DecodeGitSubizNetHeaderClient2(in *jlexer.Lexer, out *Autho
 					out.Scopes = (out.Scopes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v7 string
-					v7 = string(in.String())
-					out.Scopes = append(out.Scopes, v7)
+					var v13 string
+					v13 = string(in.String())
+					out.Scopes = append(out.Scopes, v13)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -787,7 +1135,7 @@ func easyjson19c08265EncodeGitSubizNetHeaderClient2(out *jwriter.Writer, in Auth
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Ctx).MarshalEasyJSON(out)
+		easyjson19c08265EncodeGitSubizNetHeaderCommon(out, *in.Ctx)
 	}
 	if in.AccountId != nil {
 		const prefix string = ",\"account_id\":"
@@ -869,11 +1217,11 @@ func easyjson19c08265EncodeGitSubizNetHeaderClient2(out *jwriter.Writer, in Auth
 		}
 		{
 			out.RawByte('[')
-			for v8, v9 := range in.Scopes {
-				if v8 > 0 {
+			for v14, v15 := range in.Scopes {
+				if v14 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v9))
+				out.String(string(v15))
 			}
 			out.RawByte(']')
 		}

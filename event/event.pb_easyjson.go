@@ -252,7 +252,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEvent3(in *jlexer.Lexer, out *UserEv
 				if out.User == nil {
 					out.User = new(user.User)
 				}
-				(*out.User).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser(in, &*out.User)
 			}
 		default:
 			in.SkipRecursive()
@@ -316,7 +316,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEvent3(out *jwriter.Writer, in UserE
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.User).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser(out, *in.User)
 	}
 	out.RawByte('}')
 }
@@ -343,6 +343,1025 @@ func (v *UserEvent) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *UserEvent) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson524579e4DecodeGitSubizNetHeaderEvent3(l, v)
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser(in *jlexer.Lexer, out *user.User) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "traces":
+			if in.IsNull() {
+				in.Skip()
+				out.Traces = nil
+			} else {
+				in.Delim('[')
+				if out.Traces == nil {
+					if !in.IsDelim(']') {
+						out.Traces = make([]*user.Trace, 0, 8)
+					} else {
+						out.Traces = []*user.Trace{}
+					}
+				} else {
+					out.Traces = (out.Traces)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v1 *user.Trace
+					if in.IsNull() {
+						in.Skip()
+						v1 = nil
+					} else {
+						if v1 == nil {
+							v1 = new(user.Trace)
+						}
+						easyjson524579e4DecodeGitSubizNetHeaderUser1(in, &*v1)
+					}
+					out.Traces = append(out.Traces, v1)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "is_ban":
+			if in.IsNull() {
+				in.Skip()
+				out.IsBan = nil
+			} else {
+				if out.IsBan == nil {
+					out.IsBan = new(bool)
+				}
+				*out.IsBan = bool(in.Bool())
+			}
+		case "attributes":
+			if in.IsNull() {
+				in.Skip()
+				out.Attributes = nil
+			} else {
+				in.Delim('[')
+				if out.Attributes == nil {
+					if !in.IsDelim(']') {
+						out.Attributes = make([]*user.AttributeData, 0, 8)
+					} else {
+						out.Attributes = []*user.AttributeData{}
+					}
+				} else {
+					out.Attributes = (out.Attributes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v2 *user.AttributeData
+					if in.IsNull() {
+						in.Skip()
+						v2 = nil
+					} else {
+						if v2 == nil {
+							v2 = new(user.AttributeData)
+						}
+						easyjson524579e4DecodeGitSubizNetHeaderUser2(in, &*v2)
+					}
+					out.Attributes = append(out.Attributes, v2)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "segments":
+			if in.IsNull() {
+				in.Skip()
+				out.Segments = nil
+			} else {
+				in.Delim('[')
+				if out.Segments == nil {
+					if !in.IsDelim(']') {
+						out.Segments = make([]string, 0, 4)
+					} else {
+						out.Segments = []string{}
+					}
+				} else {
+					out.Segments = (out.Segments)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v3 string
+					v3 = string(in.String())
+					out.Segments = append(out.Segments, v3)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "subiz_id":
+			if in.IsNull() {
+				in.Skip()
+				out.SubizId = nil
+			} else {
+				if out.SubizId == nil {
+					out.SubizId = new(string)
+				}
+				*out.SubizId = string(in.String())
+			}
+		case "aliases":
+			if in.IsNull() {
+				in.Skip()
+				out.Aliases = nil
+			} else {
+				in.Delim('[')
+				if out.Aliases == nil {
+					if !in.IsDelim(']') {
+						out.Aliases = make([]string, 0, 4)
+					} else {
+						out.Aliases = []string{}
+					}
+				} else {
+					out.Aliases = (out.Aliases)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v4 string
+					v4 = string(in.String())
+					out.Aliases = append(out.Aliases, v4)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "par":
+			if in.IsNull() {
+				in.Skip()
+				out.Par = nil
+			} else {
+				if out.Par == nil {
+					out.Par = new(int32)
+				}
+				*out.Par = int32(in.Int32())
+			}
+		case "modified":
+			if in.IsNull() {
+				in.Skip()
+				out.Modified = nil
+			} else {
+				if out.Modified == nil {
+					out.Modified = new(int64)
+				}
+				*out.Modified = int64(in.Int64())
+			}
+		case "modified_week":
+			if in.IsNull() {
+				in.Skip()
+				out.ModifiedWeek = nil
+			} else {
+				if out.ModifiedWeek == nil {
+					out.ModifiedWeek = new(int32)
+				}
+				*out.ModifiedWeek = int32(in.Int32())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser(out *jwriter.Writer, in user.User) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if len(in.Traces) != 0 {
+		const prefix string = ",\"traces\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v5, v6 := range in.Traces {
+				if v5 > 0 {
+					out.RawByte(',')
+				}
+				if v6 == nil {
+					out.RawString("null")
+				} else {
+					easyjson524579e4EncodeGitSubizNetHeaderUser1(out, *v6)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.IsBan != nil {
+		const prefix string = ",\"is_ban\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.IsBan))
+	}
+	if len(in.Attributes) != 0 {
+		const prefix string = ",\"attributes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v7, v8 := range in.Attributes {
+				if v7 > 0 {
+					out.RawByte(',')
+				}
+				if v8 == nil {
+					out.RawString("null")
+				} else {
+					easyjson524579e4EncodeGitSubizNetHeaderUser2(out, *v8)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.Segments) != 0 {
+		const prefix string = ",\"segments\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v9, v10 := range in.Segments {
+				if v9 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v10))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.SubizId != nil {
+		const prefix string = ",\"subiz_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.SubizId))
+	}
+	if len(in.Aliases) != 0 {
+		const prefix string = ",\"aliases\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v11, v12 := range in.Aliases {
+				if v11 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v12))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Par != nil {
+		const prefix string = ",\"par\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.Par))
+	}
+	if in.Modified != nil {
+		const prefix string = ",\"modified\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Modified))
+	}
+	if in.ModifiedWeek != nil {
+		const prefix string = ",\"modified_week\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.ModifiedWeek))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser2(in *jlexer.Lexer, out *user.AttributeData) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "user_id":
+			if in.IsNull() {
+				in.Skip()
+				out.UserId = nil
+			} else {
+				if out.UserId == nil {
+					out.UserId = new(string)
+				}
+				*out.UserId = string(in.String())
+			}
+		case "key":
+			if in.IsNull() {
+				in.Skip()
+				out.Key = nil
+			} else {
+				if out.Key == nil {
+					out.Key = new(string)
+				}
+				*out.Key = string(in.String())
+			}
+		case "state":
+			if in.IsNull() {
+				in.Skip()
+				out.State = nil
+			} else {
+				if out.State == nil {
+					out.State = new(string)
+				}
+				*out.State = string(in.String())
+			}
+		case "created":
+			if in.IsNull() {
+				in.Skip()
+				out.Created = nil
+			} else {
+				if out.Created == nil {
+					out.Created = new(int64)
+				}
+				*out.Created = int64(in.Int64())
+			}
+		case "modified":
+			if in.IsNull() {
+				in.Skip()
+				out.Modified = nil
+			} else {
+				if out.Modified == nil {
+					out.Modified = new(int64)
+				}
+				*out.Modified = int64(in.Int64())
+			}
+		case "text":
+			if in.IsNull() {
+				in.Skip()
+				out.Text = nil
+			} else {
+				if out.Text == nil {
+					out.Text = new(string)
+				}
+				*out.Text = string(in.String())
+			}
+		case "number":
+			if in.IsNull() {
+				in.Skip()
+				out.Number = nil
+			} else {
+				if out.Number == nil {
+					out.Number = new(float64)
+				}
+				*out.Number = float64(in.Float64())
+			}
+		case "boolean":
+			if in.IsNull() {
+				in.Skip()
+				out.Boolean = nil
+			} else {
+				if out.Boolean == nil {
+					out.Boolean = new(bool)
+				}
+				*out.Boolean = bool(in.Bool())
+			}
+		case "datetime":
+			if in.IsNull() {
+				in.Skip()
+				out.Datetime = nil
+			} else {
+				if out.Datetime == nil {
+					out.Datetime = new(string)
+				}
+				*out.Datetime = string(in.String())
+			}
+		case "list":
+			if in.IsNull() {
+				in.Skip()
+				out.List = nil
+			} else {
+				in.Delim('[')
+				if out.List == nil {
+					if !in.IsDelim(']') {
+						out.List = make([]string, 0, 4)
+					} else {
+						out.List = []string{}
+					}
+				} else {
+					out.List = (out.List)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v13 string
+					v13 = string(in.String())
+					out.List = append(out.List, v13)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "setter":
+			if in.IsNull() {
+				in.Skip()
+				out.Setter = nil
+			} else {
+				if out.Setter == nil {
+					out.Setter = new(string)
+				}
+				*out.Setter = string(in.String())
+			}
+		case "setter_type":
+			if in.IsNull() {
+				in.Skip()
+				out.SetterType = nil
+			} else {
+				if out.SetterType == nil {
+					out.SetterType = new(string)
+				}
+				*out.SetterType = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser2(out *jwriter.Writer, in user.AttributeData) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.UserId != nil {
+		const prefix string = ",\"user_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.UserId))
+	}
+	if in.Key != nil {
+		const prefix string = ",\"key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Key))
+	}
+	if in.State != nil {
+		const prefix string = ",\"state\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.State))
+	}
+	if in.Created != nil {
+		const prefix string = ",\"created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Created))
+	}
+	if in.Modified != nil {
+		const prefix string = ",\"modified\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Modified))
+	}
+	if in.Text != nil {
+		const prefix string = ",\"text\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Text))
+	}
+	if in.Number != nil {
+		const prefix string = ",\"number\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float64(float64(*in.Number))
+	}
+	if in.Boolean != nil {
+		const prefix string = ",\"boolean\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.Boolean))
+	}
+	if in.Datetime != nil {
+		const prefix string = ",\"datetime\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Datetime))
+	}
+	if len(in.List) != 0 {
+		const prefix string = ",\"list\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v14, v15 := range in.List {
+				if v14 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v15))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Setter != nil {
+		const prefix string = ",\"setter\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Setter))
+	}
+	if in.SetterType != nil {
+		const prefix string = ",\"setter_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.SetterType))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser1(in *jlexer.Lexer, out *user.Trace) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		case "ip":
+			if in.IsNull() {
+				in.Skip()
+				out.Ip = nil
+			} else {
+				if out.Ip == nil {
+					out.Ip = new(string)
+				}
+				*out.Ip = string(in.String())
+			}
+		case "location_id":
+			if in.IsNull() {
+				in.Skip()
+				out.LocationId = nil
+			} else {
+				if out.LocationId == nil {
+					out.LocationId = new(int32)
+				}
+				*out.LocationId = int32(in.Int32())
+			}
+		case "city_name":
+			if in.IsNull() {
+				in.Skip()
+				out.CityName = nil
+			} else {
+				if out.CityName == nil {
+					out.CityName = new(string)
+				}
+				*out.CityName = string(in.String())
+			}
+		case "country_name":
+			if in.IsNull() {
+				in.Skip()
+				out.CountryName = nil
+			} else {
+				if out.CountryName == nil {
+					out.CountryName = new(string)
+				}
+				*out.CountryName = string(in.String())
+			}
+		case "country_code":
+			if in.IsNull() {
+				in.Skip()
+				out.CountryCode = nil
+			} else {
+				if out.CountryCode == nil {
+					out.CountryCode = new(string)
+				}
+				*out.CountryCode = string(in.String())
+			}
+		case "continent_code":
+			if in.IsNull() {
+				in.Skip()
+				out.ContinentCode = nil
+			} else {
+				if out.ContinentCode == nil {
+					out.ContinentCode = new(string)
+				}
+				*out.ContinentCode = string(in.String())
+			}
+		case "continent_name":
+			if in.IsNull() {
+				in.Skip()
+				out.ContinentName = nil
+			} else {
+				if out.ContinentName == nil {
+					out.ContinentName = new(string)
+				}
+				*out.ContinentName = string(in.String())
+			}
+		case "latitude":
+			if in.IsNull() {
+				in.Skip()
+				out.Latitude = nil
+			} else {
+				if out.Latitude == nil {
+					out.Latitude = new(float32)
+				}
+				*out.Latitude = float32(in.Float32())
+			}
+		case "longitude":
+			if in.IsNull() {
+				in.Skip()
+				out.Longitude = nil
+			} else {
+				if out.Longitude == nil {
+					out.Longitude = new(float32)
+				}
+				*out.Longitude = float32(in.Float32())
+			}
+		case "postal_code":
+			if in.IsNull() {
+				in.Skip()
+				out.PostalCode = nil
+			} else {
+				if out.PostalCode == nil {
+					out.PostalCode = new(string)
+				}
+				*out.PostalCode = string(in.String())
+			}
+		case "timezone":
+			if in.IsNull() {
+				in.Skip()
+				out.Timezone = nil
+			} else {
+				if out.Timezone == nil {
+					out.Timezone = new(string)
+				}
+				*out.Timezone = string(in.String())
+			}
+		case "isp":
+			if in.IsNull() {
+				in.Skip()
+				out.Isp = nil
+			} else {
+				if out.Isp == nil {
+					out.Isp = new(string)
+				}
+				*out.Isp = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser1(out *jwriter.Writer, in user.Trace) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	if in.Ip != nil {
+		const prefix string = ",\"ip\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Ip))
+	}
+	if in.LocationId != nil {
+		const prefix string = ",\"location_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.LocationId))
+	}
+	if in.CityName != nil {
+		const prefix string = ",\"city_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.CityName))
+	}
+	if in.CountryName != nil {
+		const prefix string = ",\"country_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.CountryName))
+	}
+	if in.CountryCode != nil {
+		const prefix string = ",\"country_code\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.CountryCode))
+	}
+	if in.ContinentCode != nil {
+		const prefix string = ",\"continent_code\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ContinentCode))
+	}
+	if in.ContinentName != nil {
+		const prefix string = ",\"continent_name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ContinentName))
+	}
+	if in.Latitude != nil {
+		const prefix string = ",\"latitude\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float32(float32(*in.Latitude))
+	}
+	if in.Longitude != nil {
+		const prefix string = ",\"longitude\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float32(float32(*in.Longitude))
+	}
+	if in.PostalCode != nil {
+		const prefix string = ",\"postal_code\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.PostalCode))
+	}
+	if in.Timezone != nil {
+		const prefix string = ",\"timezone\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Timezone))
+	}
+	if in.Isp != nil {
+		const prefix string = ",\"isp\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Isp))
+	}
+	out.RawByte('}')
 }
 func easyjson524579e4DecodeGitSubizNetHeaderEvent4(in *jlexer.Lexer, out *UnsubscribeMessage) {
 	isTopLevel := in.IsStart()
@@ -746,17 +1765,17 @@ func easyjson524579e4DecodeGitSubizNetHeaderEvent7(in *jlexer.Lexer, out *RawEve
 					out.Events = (out.Events)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 *RawEvent
+					var v16 *RawEvent
 					if in.IsNull() {
 						in.Skip()
-						v1 = nil
+						v16 = nil
 					} else {
-						if v1 == nil {
-							v1 = new(RawEvent)
+						if v16 == nil {
+							v16 = new(RawEvent)
 						}
-						(*v1).UnmarshalEasyJSON(in)
+						(*v16).UnmarshalEasyJSON(in)
 					}
-					out.Events = append(out.Events, v1)
+					out.Events = append(out.Events, v16)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -799,14 +1818,14 @@ func easyjson524579e4EncodeGitSubizNetHeaderEvent7(out *jwriter.Writer, in RawEv
 		}
 		{
 			out.RawByte('[')
-			for v2, v3 := range in.Events {
-				if v2 > 0 {
+			for v17, v18 := range in.Events {
+				if v17 > 0 {
 					out.RawByte(',')
 				}
-				if v3 == nil {
+				if v18 == nil {
 					out.RawString("null")
 				} else {
-					(*v3).MarshalEasyJSON(out)
+					(*v18).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -945,7 +1964,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.Topic == nil {
 					out.Topic = new(user.Topic)
 				}
-				(*out.Topic).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser3(in, &*out.Topic)
 			}
 		case "presence":
 			if in.IsNull() {
@@ -955,7 +1974,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.Presence == nil {
 					out.Presence = new(user.Presence)
 				}
-				(*out.Presence).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser4(in, &*out.Presence)
 			}
 		case "user":
 			if in.IsNull() {
@@ -965,7 +1984,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.User == nil {
 					out.User = new(user.User)
 				}
-				(*out.User).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser(in, &*out.User)
 			}
 		case "unread_topic":
 			if in.IsNull() {
@@ -975,7 +1994,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.UnreadTopic == nil {
 					out.UnreadTopic = new(user.UnreadTopic)
 				}
-				(*out.UnreadTopic).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser5(in, &*out.UnreadTopic)
 			}
 		case "my_user":
 			if in.IsNull() {
@@ -985,7 +2004,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.MyUser == nil {
 					out.MyUser = new(user.MyUser)
 				}
-				(*out.MyUser).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser6(in, &*out.MyUser)
 			}
 		case "notification":
 			if in.IsNull() {
@@ -995,7 +2014,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.Notification == nil {
 					out.Notification = new(notibox.Notification)
 				}
-				(*out.Notification).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderNotibox(in, &*out.Notification)
 			}
 		case "notibox":
 			if in.IsNull() {
@@ -1005,7 +2024,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.Notibox == nil {
 					out.Notibox = new(notibox.Box)
 				}
-				(*out.Notibox).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderNotibox1(in, &*out.Notibox)
 			}
 		case "agent_perm":
 			if in.IsNull() {
@@ -1045,7 +2064,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.Limit == nil {
 					out.Limit = new(payment.Limit)
 				}
-				(*out.Limit).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderPayment(in, &*out.Limit)
 			}
 		case "user_attribute":
 			if in.IsNull() {
@@ -1055,7 +2074,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.UserAttribute == nil {
 					out.UserAttribute = new(user.AttributeData)
 				}
-				(*out.UserAttribute).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser2(in, &*out.UserAttribute)
 			}
 		case "alias":
 			if in.IsNull() {
@@ -1065,7 +2084,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.Alias == nil {
 					out.Alias = new(user.Alias)
 				}
-				(*out.Alias).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser7(in, &*out.Alias)
 			}
 		case "note":
 			if in.IsNull() {
@@ -1075,7 +2094,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(in *jlexer.Lexer, out 
 				if out.Note == nil {
 					out.Note = new(user.Note)
 				}
-				(*out.Note).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser8(in, &*out.Note)
 			}
 		case "ticket":
 			if in.IsNull() {
@@ -1169,7 +2188,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Topic).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser3(out, *in.Topic)
 	}
 	if in.Presence != nil {
 		const prefix string = ",\"presence\":"
@@ -1179,7 +2198,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Presence).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser4(out, *in.Presence)
 	}
 	if in.User != nil {
 		const prefix string = ",\"user\":"
@@ -1189,7 +2208,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.User).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser(out, *in.User)
 	}
 	if in.UnreadTopic != nil {
 		const prefix string = ",\"unread_topic\":"
@@ -1199,7 +2218,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.UnreadTopic).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser5(out, *in.UnreadTopic)
 	}
 	if in.MyUser != nil {
 		const prefix string = ",\"my_user\":"
@@ -1209,7 +2228,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.MyUser).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser6(out, *in.MyUser)
 	}
 	if in.Notification != nil {
 		const prefix string = ",\"notification\":"
@@ -1219,7 +2238,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Notification).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderNotibox(out, *in.Notification)
 	}
 	if in.Notibox != nil {
 		const prefix string = ",\"notibox\":"
@@ -1229,7 +2248,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Notibox).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderNotibox1(out, *in.Notibox)
 	}
 	if in.AgentPerm != nil {
 		const prefix string = ",\"agent_perm\":"
@@ -1269,7 +2288,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Limit).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderPayment(out, *in.Limit)
 	}
 	if in.UserAttribute != nil {
 		const prefix string = ",\"user_attribute\":"
@@ -1279,7 +2298,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.UserAttribute).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser2(out, *in.UserAttribute)
 	}
 	if in.Alias != nil {
 		const prefix string = ",\"alias\":"
@@ -1289,7 +2308,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Alias).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser7(out, *in.Alias)
 	}
 	if in.Note != nil {
 		const prefix string = ",\"note\":"
@@ -1299,7 +2318,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEventRawEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Note).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser8(out, *in.Note)
 	}
 	if in.Ticket != nil {
 		const prefix string = ",\"ticket\":"
@@ -1336,6 +2355,1670 @@ func (v *RawEvent_Data) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *RawEvent_Data) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson524579e4DecodeGitSubizNetHeaderEventRawEvent(l, v)
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser8(in *jlexer.Lexer, out *user.Note) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		case "creator_id":
+			if in.IsNull() {
+				in.Skip()
+				out.CreatorId = nil
+			} else {
+				if out.CreatorId == nil {
+					out.CreatorId = new(string)
+				}
+				*out.CreatorId = string(in.String())
+			}
+		case "text":
+			if in.IsNull() {
+				in.Skip()
+				out.Text = nil
+			} else {
+				if out.Text == nil {
+					out.Text = new(string)
+				}
+				*out.Text = string(in.String())
+			}
+		case "created":
+			if in.IsNull() {
+				in.Skip()
+				out.Created = nil
+			} else {
+				if out.Created == nil {
+					out.Created = new(int64)
+				}
+				*out.Created = int64(in.Int64())
+			}
+		case "creator_type":
+			if in.IsNull() {
+				in.Skip()
+				out.CreatorType = nil
+			} else {
+				if out.CreatorType == nil {
+					out.CreatorType = new(string)
+				}
+				*out.CreatorType = string(in.String())
+			}
+		case "target_id":
+			if in.IsNull() {
+				in.Skip()
+				out.TargetId = nil
+			} else {
+				if out.TargetId == nil {
+					out.TargetId = new(string)
+				}
+				*out.TargetId = string(in.String())
+			}
+		case "target_type":
+			if in.IsNull() {
+				in.Skip()
+				out.TargetType = nil
+			} else {
+				if out.TargetType == nil {
+					out.TargetType = new(string)
+				}
+				*out.TargetType = string(in.String())
+			}
+		case "link_id":
+			if in.IsNull() {
+				in.Skip()
+				out.LinkId = nil
+			} else {
+				if out.LinkId == nil {
+					out.LinkId = new(string)
+				}
+				*out.LinkId = string(in.String())
+			}
+		case "link_type":
+			if in.IsNull() {
+				in.Skip()
+				out.LinkType = nil
+			} else {
+				if out.LinkType == nil {
+					out.LinkType = new(string)
+				}
+				*out.LinkType = string(in.String())
+			}
+		case "format":
+			if in.IsNull() {
+				in.Skip()
+				out.Format = nil
+			} else {
+				if out.Format == nil {
+					out.Format = new(string)
+				}
+				*out.Format = string(in.String())
+			}
+		case "links":
+			if in.IsNull() {
+				in.Skip()
+				out.Links = nil
+			} else {
+				in.Delim('[')
+				if out.Links == nil {
+					if !in.IsDelim(']') {
+						out.Links = make([]*user.NoteLink, 0, 8)
+					} else {
+						out.Links = []*user.NoteLink{}
+					}
+				} else {
+					out.Links = (out.Links)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v19 *user.NoteLink
+					if in.IsNull() {
+						in.Skip()
+						v19 = nil
+					} else {
+						if v19 == nil {
+							v19 = new(user.NoteLink)
+						}
+						easyjson524579e4DecodeGitSubizNetHeaderUser9(in, &*v19)
+					}
+					out.Links = append(out.Links, v19)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser8(out *jwriter.Writer, in user.Note) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	if in.CreatorId != nil {
+		const prefix string = ",\"creator_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.CreatorId))
+	}
+	if in.Text != nil {
+		const prefix string = ",\"text\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Text))
+	}
+	if in.Created != nil {
+		const prefix string = ",\"created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Created))
+	}
+	if in.CreatorType != nil {
+		const prefix string = ",\"creator_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.CreatorType))
+	}
+	if in.TargetId != nil {
+		const prefix string = ",\"target_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.TargetId))
+	}
+	if in.TargetType != nil {
+		const prefix string = ",\"target_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.TargetType))
+	}
+	if in.LinkId != nil {
+		const prefix string = ",\"link_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.LinkId))
+	}
+	if in.LinkType != nil {
+		const prefix string = ",\"link_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.LinkType))
+	}
+	if in.Format != nil {
+		const prefix string = ",\"format\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Format))
+	}
+	if len(in.Links) != 0 {
+		const prefix string = ",\"links\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v20, v21 := range in.Links {
+				if v20 > 0 {
+					out.RawByte(',')
+				}
+				if v21 == nil {
+					out.RawString("null")
+				} else {
+					easyjson524579e4EncodeGitSubizNetHeaderUser9(out, *v21)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser9(in *jlexer.Lexer, out *user.NoteLink) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+				out.Type = nil
+			} else {
+				if out.Type == nil {
+					out.Type = new(string)
+				}
+				*out.Type = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser9(out *jwriter.Writer, in user.NoteLink) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	if in.Type != nil {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Type))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser7(in *jlexer.Lexer, out *user.Alias) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "user_id":
+			if in.IsNull() {
+				in.Skip()
+				out.UserId = nil
+			} else {
+				if out.UserId == nil {
+					out.UserId = new(string)
+				}
+				*out.UserId = string(in.String())
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "alias":
+			if in.IsNull() {
+				in.Skip()
+				out.Alias = nil
+			} else {
+				if out.Alias == nil {
+					out.Alias = new(string)
+				}
+				*out.Alias = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser7(out *jwriter.Writer, in user.Alias) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.UserId != nil {
+		const prefix string = ",\"user_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.UserId))
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.Alias != nil {
+		const prefix string = ",\"alias\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Alias))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderPayment(in *jlexer.Lexer, out *payment.Limit) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "max_automations":
+			if in.IsNull() {
+				in.Skip()
+				out.MaxAutomations = nil
+			} else {
+				if out.MaxAutomations == nil {
+					out.MaxAutomations = new(uint32)
+				}
+				*out.MaxAutomations = uint32(in.Uint32())
+			}
+		case "max_segments":
+			if in.IsNull() {
+				in.Skip()
+				out.MaxSegments = nil
+			} else {
+				if out.MaxSegments == nil {
+					out.MaxSegments = new(uint32)
+				}
+				*out.MaxSegments = uint32(in.Uint32())
+			}
+		case "max_agents":
+			if in.IsNull() {
+				in.Skip()
+				out.MaxAgents = nil
+			} else {
+				if out.MaxAgents == nil {
+					out.MaxAgents = new(uint32)
+				}
+				*out.MaxAgents = uint32(in.Uint32())
+			}
+		case "can_buy_agent":
+			if in.IsNull() {
+				in.Skip()
+				out.CanBuyAgent = nil
+			} else {
+				if out.CanBuyAgent == nil {
+					out.CanBuyAgent = new(bool)
+				}
+				*out.CanBuyAgent = bool(in.Bool())
+			}
+		case "automation_webhook_quota":
+			if in.IsNull() {
+				in.Skip()
+				out.AutomationWebhookQuota = nil
+			} else {
+				if out.AutomationWebhookQuota == nil {
+					out.AutomationWebhookQuota = new(uint32)
+				}
+				*out.AutomationWebhookQuota = uint32(in.Uint32())
+			}
+		case "automation_email_quota":
+			if in.IsNull() {
+				in.Skip()
+				out.AutomationEmailQuota = nil
+			} else {
+				if out.AutomationEmailQuota == nil {
+					out.AutomationEmailQuota = new(uint32)
+				}
+				*out.AutomationEmailQuota = uint32(in.Uint32())
+			}
+		case "automation_message_quota":
+			if in.IsNull() {
+				in.Skip()
+				out.AutomationMessageQuota = nil
+			} else {
+				if out.AutomationMessageQuota == nil {
+					out.AutomationMessageQuota = new(uint32)
+				}
+				*out.AutomationMessageQuota = uint32(in.Uint32())
+			}
+		case "max_rules":
+			if in.IsNull() {
+				in.Skip()
+				out.MaxRules = nil
+			} else {
+				if out.MaxRules == nil {
+					out.MaxRules = new(uint32)
+				}
+				*out.MaxRules = uint32(in.Uint32())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderPayment(out *jwriter.Writer, in payment.Limit) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.MaxAutomations != nil {
+		const prefix string = ",\"max_automations\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint32(uint32(*in.MaxAutomations))
+	}
+	if in.MaxSegments != nil {
+		const prefix string = ",\"max_segments\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint32(uint32(*in.MaxSegments))
+	}
+	if in.MaxAgents != nil {
+		const prefix string = ",\"max_agents\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint32(uint32(*in.MaxAgents))
+	}
+	if in.CanBuyAgent != nil {
+		const prefix string = ",\"can_buy_agent\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.CanBuyAgent))
+	}
+	if in.AutomationWebhookQuota != nil {
+		const prefix string = ",\"automation_webhook_quota\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint32(uint32(*in.AutomationWebhookQuota))
+	}
+	if in.AutomationEmailQuota != nil {
+		const prefix string = ",\"automation_email_quota\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint32(uint32(*in.AutomationEmailQuota))
+	}
+	if in.AutomationMessageQuota != nil {
+		const prefix string = ",\"automation_message_quota\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint32(uint32(*in.AutomationMessageQuota))
+	}
+	if in.MaxRules != nil {
+		const prefix string = ",\"max_rules\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint32(uint32(*in.MaxRules))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderNotibox1(in *jlexer.Lexer, out *notibox.Box) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "box":
+			if in.IsNull() {
+				in.Skip()
+				out.Box = nil
+			} else {
+				if out.Box == nil {
+					out.Box = new(string)
+				}
+				*out.Box = string(in.String())
+			}
+		case "new_count":
+			if in.IsNull() {
+				in.Skip()
+				out.NewCount = nil
+			} else {
+				if out.NewCount == nil {
+					out.NewCount = new(int64)
+				}
+				*out.NewCount = int64(in.Int64())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderNotibox1(out *jwriter.Writer, in notibox.Box) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.Box != nil {
+		const prefix string = ",\"box\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Box))
+	}
+	if in.NewCount != nil {
+		const prefix string = ",\"new_count\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.NewCount))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderNotibox(in *jlexer.Lexer, out *notibox.Notification) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "box":
+			if in.IsNull() {
+				in.Skip()
+				out.Box = nil
+			} else {
+				if out.Box == nil {
+					out.Box = new(string)
+				}
+				*out.Box = string(in.String())
+			}
+		case "topic":
+			if in.IsNull() {
+				in.Skip()
+				out.Topic = nil
+			} else {
+				if out.Topic == nil {
+					out.Topic = new(string)
+				}
+				*out.Topic = string(in.String())
+			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+				out.Type = nil
+			} else {
+				if out.Type == nil {
+					out.Type = new(string)
+				}
+				*out.Type = string(in.String())
+			}
+		case "data":
+			if in.IsNull() {
+				in.Skip()
+				out.Data = nil
+			} else {
+				if out.Data == nil {
+					out.Data = new(string)
+				}
+				*out.Data = string(in.String())
+			}
+		case "created":
+			if in.IsNull() {
+				in.Skip()
+				out.Created = nil
+			} else {
+				if out.Created == nil {
+					out.Created = new(int64)
+				}
+				*out.Created = int64(in.Int64())
+			}
+		case "read":
+			if in.IsNull() {
+				in.Skip()
+				out.Read = nil
+			} else {
+				if out.Read == nil {
+					out.Read = new(int64)
+				}
+				*out.Read = int64(in.Int64())
+			}
+		case "view":
+			if in.IsNull() {
+				in.Skip()
+				out.View = nil
+			} else {
+				if out.View == nil {
+					out.View = new(bool)
+				}
+				*out.View = bool(in.Bool())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderNotibox(out *jwriter.Writer, in notibox.Notification) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.Box != nil {
+		const prefix string = ",\"box\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Box))
+	}
+	if in.Topic != nil {
+		const prefix string = ",\"topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Topic))
+	}
+	if in.Type != nil {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Type))
+	}
+	if in.Data != nil {
+		const prefix string = ",\"data\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Data))
+	}
+	if in.Created != nil {
+		const prefix string = ",\"created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Created))
+	}
+	if in.Read != nil {
+		const prefix string = ",\"read\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Read))
+	}
+	if in.View != nil {
+		const prefix string = ",\"view\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.View))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser6(in *jlexer.Lexer, out *user.MyUser) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "agent_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AgentId = nil
+			} else {
+				if out.AgentId == nil {
+					out.AgentId = new(string)
+				}
+				*out.AgentId = string(in.String())
+			}
+		case "user":
+			if in.IsNull() {
+				in.Skip()
+				out.User = nil
+			} else {
+				if out.User == nil {
+					out.User = new(user.User)
+				}
+				easyjson524579e4DecodeGitSubizNetHeaderUser(in, &*out.User)
+			}
+		case "unread":
+			if in.IsNull() {
+				in.Skip()
+				out.Unread = nil
+			} else {
+				if out.Unread == nil {
+					out.Unread = new(int32)
+				}
+				*out.Unread = int32(in.Int32())
+			}
+		case "updated":
+			if in.IsNull() {
+				in.Skip()
+				out.Updated = nil
+			} else {
+				if out.Updated == nil {
+					out.Updated = new(int64)
+				}
+				*out.Updated = int64(in.Int64())
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser6(out *jwriter.Writer, in user.MyUser) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AgentId != nil {
+		const prefix string = ",\"agent_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AgentId))
+	}
+	if in.User != nil {
+		const prefix string = ",\"user\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		easyjson524579e4EncodeGitSubizNetHeaderUser(out, *in.User)
+	}
+	if in.Unread != nil {
+		const prefix string = ",\"unread\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.Unread))
+	}
+	if in.Updated != nil {
+		const prefix string = ",\"updated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Updated))
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser5(in *jlexer.Lexer, out *user.UnreadTopic) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "topic":
+			if in.IsNull() {
+				in.Skip()
+				out.Topic = nil
+			} else {
+				if out.Topic == nil {
+					out.Topic = new(string)
+				}
+				*out.Topic = string(in.String())
+			}
+		case "agent_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AgentId = nil
+			} else {
+				if out.AgentId == nil {
+					out.AgentId = new(string)
+				}
+				*out.AgentId = string(in.String())
+			}
+		case "user_id":
+			if in.IsNull() {
+				in.Skip()
+				out.UserId = nil
+			} else {
+				if out.UserId == nil {
+					out.UserId = new(string)
+				}
+				*out.UserId = string(in.String())
+			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+				out.Type = nil
+			} else {
+				if out.Type == nil {
+					out.Type = new(string)
+				}
+				*out.Type = string(in.String())
+			}
+		case "updated":
+			if in.IsNull() {
+				in.Skip()
+				out.Updated = nil
+			} else {
+				if out.Updated == nil {
+					out.Updated = new(int64)
+				}
+				*out.Updated = int64(in.Int64())
+			}
+		case "unread":
+			if in.IsNull() {
+				in.Skip()
+				out.Unread = nil
+			} else {
+				if out.Unread == nil {
+					out.Unread = new(int32)
+				}
+				*out.Unread = int32(in.Int32())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser5(out *jwriter.Writer, in user.UnreadTopic) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.Topic != nil {
+		const prefix string = ",\"topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Topic))
+	}
+	if in.AgentId != nil {
+		const prefix string = ",\"agent_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AgentId))
+	}
+	if in.UserId != nil {
+		const prefix string = ",\"user_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.UserId))
+	}
+	if in.Type != nil {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Type))
+	}
+	if in.Updated != nil {
+		const prefix string = ",\"updated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Updated))
+	}
+	if in.Unread != nil {
+		const prefix string = ",\"unread\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.Unread))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser4(in *jlexer.Lexer, out *user.Presence) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "user_id":
+			if in.IsNull() {
+				in.Skip()
+				out.UserId = nil
+			} else {
+				if out.UserId == nil {
+					out.UserId = new(string)
+				}
+				*out.UserId = string(in.String())
+			}
+		case "pinged":
+			if in.IsNull() {
+				in.Skip()
+				out.Pinged = nil
+			} else {
+				if out.Pinged == nil {
+					out.Pinged = new(int64)
+				}
+				*out.Pinged = int64(in.Int64())
+			}
+		case "pinged_minute":
+			if in.IsNull() {
+				in.Skip()
+				out.PingedMinute = nil
+			} else {
+				if out.PingedMinute == nil {
+					out.PingedMinute = new(int64)
+				}
+				*out.PingedMinute = int64(in.Int64())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser4(out *jwriter.Writer, in user.Presence) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.UserId != nil {
+		const prefix string = ",\"user_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.UserId))
+	}
+	if in.Pinged != nil {
+		const prefix string = ",\"pinged\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Pinged))
+	}
+	if in.PingedMinute != nil {
+		const prefix string = ",\"pinged_minute\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.PingedMinute))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser3(in *jlexer.Lexer, out *user.Topic) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "topic":
+			if in.IsNull() {
+				in.Skip()
+				out.Topic = nil
+			} else {
+				if out.Topic == nil {
+					out.Topic = new(string)
+				}
+				*out.Topic = string(in.String())
+			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+				out.Type = nil
+			} else {
+				if out.Type == nil {
+					out.Type = new(string)
+				}
+				*out.Type = string(in.String())
+			}
+		case "updated":
+			if in.IsNull() {
+				in.Skip()
+				out.Updated = nil
+			} else {
+				if out.Updated == nil {
+					out.Updated = new(int64)
+				}
+				*out.Updated = int64(in.Int64())
+			}
+		case "unread":
+			if in.IsNull() {
+				in.Skip()
+				out.Unread = nil
+			} else {
+				if out.Unread == nil {
+					out.Unread = new(int32)
+				}
+				*out.Unread = int32(in.Int32())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser3(out *jwriter.Writer, in user.Topic) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.Topic != nil {
+		const prefix string = ",\"topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Topic))
+	}
+	if in.Type != nil {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Type))
+	}
+	if in.Updated != nil {
+		const prefix string = ",\"updated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Updated))
+	}
+	if in.Unread != nil {
+		const prefix string = ",\"unread\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.Unread))
+	}
+	out.RawByte('}')
 }
 func easyjson524579e4DecodeGitSubizNetHeaderEvent8(in *jlexer.Lexer, out *RawEventCreatedPayload) {
 	isTopLevel := in.IsStart()
@@ -1382,9 +4065,9 @@ func easyjson524579e4DecodeGitSubizNetHeaderEvent8(in *jlexer.Lexer, out *RawEve
 					out.Subs = (out.Subs)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v4 string
-					v4 = string(in.String())
-					out.Subs = append(out.Subs, v4)
+					var v22 string
+					v22 = string(in.String())
+					out.Subs = append(out.Subs, v22)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1411,9 +4094,9 @@ func easyjson524579e4DecodeGitSubizNetHeaderEvent8(in *jlexer.Lexer, out *RawEve
 					out.Payloads = (out.Payloads)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v5 string
-					v5 = string(in.String())
-					out.Payloads = append(out.Payloads, v5)
+					var v23 string
+					v23 = string(in.String())
+					out.Payloads = append(out.Payloads, v23)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1458,11 +4141,11 @@ func easyjson524579e4EncodeGitSubizNetHeaderEvent8(out *jwriter.Writer, in RawEv
 		}
 		{
 			out.RawByte('[')
-			for v6, v7 := range in.Subs {
-				if v6 > 0 {
+			for v24, v25 := range in.Subs {
+				if v24 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v7))
+				out.String(string(v25))
 			}
 			out.RawByte(']')
 		}
@@ -1507,11 +4190,11 @@ func easyjson524579e4EncodeGitSubizNetHeaderEvent8(out *jwriter.Writer, in RawEv
 		}
 		{
 			out.RawByte('[')
-			for v8, v9 := range in.Payloads {
-				if v8 > 0 {
+			for v26, v27 := range in.Payloads {
+				if v26 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v9))
+				out.String(string(v27))
 			}
 			out.RawByte(']')
 		}
@@ -1625,9 +4308,9 @@ func easyjson524579e4DecodeGitSubizNetHeaderEvent9(in *jlexer.Lexer, out *RawEve
 					out.Topics = (out.Topics)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v10 string
-					v10 = string(in.String())
-					out.Topics = append(out.Topics, v10)
+					var v28 string
+					v28 = string(in.String())
+					out.Topics = append(out.Topics, v28)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1730,11 +4413,11 @@ func easyjson524579e4EncodeGitSubizNetHeaderEvent9(out *jwriter.Writer, in RawEv
 		}
 		{
 			out.RawByte('[')
-			for v11, v12 := range in.Topics {
-				if v11 > 0 {
+			for v29, v30 := range in.Topics {
+				if v29 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v12))
+				out.String(string(v30))
 			}
 			out.RawByte(']')
 		}
@@ -2216,7 +4899,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEvent13(in *jlexer.Lexer, out *Autom
 				if out.Automation == nil {
 					out.Automation = new(user.Automation)
 				}
-				(*out.Automation).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser10(in, &*out.Automation)
 			}
 		case "user":
 			if in.IsNull() {
@@ -2226,7 +4909,7 @@ func easyjson524579e4DecodeGitSubizNetHeaderEvent13(in *jlexer.Lexer, out *Autom
 				if out.User == nil {
 					out.User = new(user.User)
 				}
-				(*out.User).UnmarshalEasyJSON(in)
+				easyjson524579e4DecodeGitSubizNetHeaderUser(in, &*out.User)
 			}
 		case "event":
 			if in.IsNull() {
@@ -2290,7 +4973,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEvent13(out *jwriter.Writer, in Auto
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Automation).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser10(out, *in.Automation)
 	}
 	if in.User != nil {
 		const prefix string = ",\"user\":"
@@ -2300,7 +4983,7 @@ func easyjson524579e4EncodeGitSubizNetHeaderEvent13(out *jwriter.Writer, in Auto
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.User).MarshalEasyJSON(out)
+		easyjson524579e4EncodeGitSubizNetHeaderUser(out, *in.User)
 	}
 	if in.Event != nil {
 		const prefix string = ",\"event\":"
@@ -2337,4 +5020,797 @@ func (v *AutomationEvent) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *AutomationEvent) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson524579e4DecodeGitSubizNetHeaderEvent13(l, v)
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser10(in *jlexer.Lexer, out *user.Automation) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		case "channel":
+			if in.IsNull() {
+				in.Skip()
+				out.Channel = nil
+			} else {
+				if out.Channel == nil {
+					out.Channel = new(string)
+				}
+				*out.Channel = string(in.String())
+			}
+		case "name":
+			if in.IsNull() {
+				in.Skip()
+				out.Name = nil
+			} else {
+				if out.Name == nil {
+					out.Name = new(string)
+				}
+				*out.Name = string(in.String())
+			}
+		case "description":
+			if in.IsNull() {
+				in.Skip()
+				out.Description = nil
+			} else {
+				if out.Description == nil {
+					out.Description = new(string)
+				}
+				*out.Description = string(in.String())
+			}
+		case "conditions":
+			if in.IsNull() {
+				in.Skip()
+				out.Conditions = nil
+			} else {
+				in.Delim('[')
+				if out.Conditions == nil {
+					if !in.IsDelim(']') {
+						out.Conditions = make([]*user.Condition, 0, 8)
+					} else {
+						out.Conditions = []*user.Condition{}
+					}
+				} else {
+					out.Conditions = (out.Conditions)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v34 *user.Condition
+					if in.IsNull() {
+						in.Skip()
+						v34 = nil
+					} else {
+						if v34 == nil {
+							v34 = new(user.Condition)
+						}
+						easyjson524579e4DecodeGitSubizNetHeaderUser11(in, &*v34)
+					}
+					out.Conditions = append(out.Conditions, v34)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "condition":
+			if in.IsNull() {
+				in.Skip()
+				out.Condition = nil
+			} else {
+				if out.Condition == nil {
+					out.Condition = new(user.SCondition)
+				}
+				easyjson524579e4DecodeGitSubizNetHeaderUser12(in, &*out.Condition)
+			}
+		case "created":
+			if in.IsNull() {
+				in.Skip()
+				out.Created = nil
+			} else {
+				if out.Created == nil {
+					out.Created = new(int64)
+				}
+				*out.Created = int64(in.Int64())
+			}
+		case "modified":
+			if in.IsNull() {
+				in.Skip()
+				out.Modified = nil
+			} else {
+				if out.Modified == nil {
+					out.Modified = new(int64)
+				}
+				*out.Modified = int64(in.Int64())
+			}
+		case "state":
+			if in.IsNull() {
+				in.Skip()
+				out.State = nil
+			} else {
+				if out.State == nil {
+					out.State = new(string)
+				}
+				*out.State = string(in.String())
+			}
+		case "action_type":
+			if in.IsNull() {
+				in.Skip()
+				out.ActionType = nil
+			} else {
+				if out.ActionType == nil {
+					out.ActionType = new(string)
+				}
+				*out.ActionType = string(in.String())
+			}
+		case "action_data":
+			if in.IsNull() {
+				in.Skip()
+				out.ActionData = nil
+			} else {
+				if out.ActionData == nil {
+					out.ActionData = new(string)
+				}
+				*out.ActionData = string(in.String())
+			}
+		case "scope":
+			if in.IsNull() {
+				in.Skip()
+				out.Scope = nil
+			} else {
+				if out.Scope == nil {
+					out.Scope = new(string)
+				}
+				*out.Scope = string(in.String())
+			}
+		case "cross_channel":
+			if in.IsNull() {
+				in.Skip()
+				out.CrossChannel = nil
+			} else {
+				if out.CrossChannel == nil {
+					out.CrossChannel = new(bool)
+				}
+				*out.CrossChannel = bool(in.Bool())
+			}
+		case "metadata":
+			if in.IsNull() {
+				in.Skip()
+				out.Metadata = nil
+			} else {
+				if out.Metadata == nil {
+					out.Metadata = new(string)
+				}
+				*out.Metadata = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser10(out *jwriter.Writer, in user.Automation) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	if in.Channel != nil {
+		const prefix string = ",\"channel\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Channel))
+	}
+	if in.Name != nil {
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Name))
+	}
+	if in.Description != nil {
+		const prefix string = ",\"description\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Description))
+	}
+	if len(in.Conditions) != 0 {
+		const prefix string = ",\"conditions\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v35, v36 := range in.Conditions {
+				if v35 > 0 {
+					out.RawByte(',')
+				}
+				if v36 == nil {
+					out.RawString("null")
+				} else {
+					easyjson524579e4EncodeGitSubizNetHeaderUser11(out, *v36)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Condition != nil {
+		const prefix string = ",\"condition\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		easyjson524579e4EncodeGitSubizNetHeaderUser12(out, *in.Condition)
+	}
+	if in.Created != nil {
+		const prefix string = ",\"created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Created))
+	}
+	if in.Modified != nil {
+		const prefix string = ",\"modified\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Modified))
+	}
+	if in.State != nil {
+		const prefix string = ",\"state\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.State))
+	}
+	if in.ActionType != nil {
+		const prefix string = ",\"action_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ActionType))
+	}
+	if in.ActionData != nil {
+		const prefix string = ",\"action_data\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ActionData))
+	}
+	if in.Scope != nil {
+		const prefix string = ",\"scope\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Scope))
+	}
+	if in.CrossChannel != nil {
+		const prefix string = ",\"cross_channel\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.CrossChannel))
+	}
+	if in.Metadata != nil {
+		const prefix string = ",\"metadata\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Metadata))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser12(in *jlexer.Lexer, out *user.SCondition) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		case "key":
+			if in.IsNull() {
+				in.Skip()
+				out.Key = nil
+			} else {
+				if out.Key == nil {
+					out.Key = new(string)
+				}
+				*out.Key = string(in.String())
+			}
+		case "operator":
+			if in.IsNull() {
+				in.Skip()
+				out.Operator = nil
+			} else {
+				if out.Operator == nil {
+					out.Operator = new(string)
+				}
+				*out.Operator = string(in.String())
+			}
+		case "value":
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(string)
+				}
+				*out.Value = string(in.String())
+			}
+		case "join":
+			if in.IsNull() {
+				in.Skip()
+				out.Join = nil
+			} else {
+				if out.Join == nil {
+					out.Join = new(string)
+				}
+				*out.Join = string(in.String())
+			}
+		case "event_type_time":
+			if in.IsNull() {
+				in.Skip()
+				out.EventTypeTime = nil
+			} else {
+				if out.EventTypeTime == nil {
+					out.EventTypeTime = new(string)
+				}
+				*out.EventTypeTime = string(in.String())
+			}
+		case "event_type":
+			if in.IsNull() {
+				in.Skip()
+				out.EventType = nil
+			} else {
+				if out.EventType == nil {
+					out.EventType = new(string)
+				}
+				*out.EventType = string(in.String())
+			}
+		case "conditions":
+			if in.IsNull() {
+				in.Skip()
+				out.Conditions = nil
+			} else {
+				in.Delim('[')
+				if out.Conditions == nil {
+					if !in.IsDelim(']') {
+						out.Conditions = make([]*user.SCondition, 0, 8)
+					} else {
+						out.Conditions = []*user.SCondition{}
+					}
+				} else {
+					out.Conditions = (out.Conditions)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v37 *user.SCondition
+					if in.IsNull() {
+						in.Skip()
+						v37 = nil
+					} else {
+						if v37 == nil {
+							v37 = new(user.SCondition)
+						}
+						easyjson524579e4DecodeGitSubizNetHeaderUser12(in, &*v37)
+					}
+					out.Conditions = append(out.Conditions, v37)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "priority":
+			if in.IsNull() {
+				in.Skip()
+				out.Priority = nil
+			} else {
+				if out.Priority == nil {
+					out.Priority = new(int32)
+				}
+				*out.Priority = int32(in.Int32())
+			}
+		case "event_existed":
+			if in.IsNull() {
+				in.Skip()
+				out.EventExisted = nil
+			} else {
+				if out.EventExisted == nil {
+					out.EventExisted = new(bool)
+				}
+				*out.EventExisted = bool(in.Bool())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser12(out *jwriter.Writer, in user.SCondition) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	if in.Key != nil {
+		const prefix string = ",\"key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Key))
+	}
+	if in.Operator != nil {
+		const prefix string = ",\"operator\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Operator))
+	}
+	if in.Value != nil {
+		const prefix string = ",\"value\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Value))
+	}
+	if in.Join != nil {
+		const prefix string = ",\"join\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Join))
+	}
+	if in.EventTypeTime != nil {
+		const prefix string = ",\"event_type_time\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.EventTypeTime))
+	}
+	if in.EventType != nil {
+		const prefix string = ",\"event_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.EventType))
+	}
+	if len(in.Conditions) != 0 {
+		const prefix string = ",\"conditions\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v38, v39 := range in.Conditions {
+				if v38 > 0 {
+					out.RawByte(',')
+				}
+				if v39 == nil {
+					out.RawString("null")
+				} else {
+					easyjson524579e4EncodeGitSubizNetHeaderUser12(out, *v39)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Priority != nil {
+		const prefix string = ",\"priority\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.Priority))
+	}
+	if in.EventExisted != nil {
+		const prefix string = ",\"event_existed\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.EventExisted))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGitSubizNetHeaderUser11(in *jlexer.Lexer, out *user.Condition) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "join":
+			if in.IsNull() {
+				in.Skip()
+				out.Join = nil
+			} else {
+				if out.Join == nil {
+					out.Join = new(string)
+				}
+				*out.Join = string(in.String())
+			}
+		case "key":
+			if in.IsNull() {
+				in.Skip()
+				out.Key = nil
+			} else {
+				if out.Key == nil {
+					out.Key = new(string)
+				}
+				*out.Key = string(in.String())
+			}
+		case "operator":
+			if in.IsNull() {
+				in.Skip()
+				out.Operator = nil
+			} else {
+				if out.Operator == nil {
+					out.Operator = new(string)
+				}
+				*out.Operator = string(in.String())
+			}
+		case "value":
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(string)
+				}
+				*out.Value = string(in.String())
+			}
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGitSubizNetHeaderUser11(out *jwriter.Writer, in user.Condition) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Join != nil {
+		const prefix string = ",\"join\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Join))
+	}
+	if in.Key != nil {
+		const prefix string = ",\"key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Key))
+	}
+	if in.Operator != nil {
+		const prefix string = ",\"operator\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Operator))
+	}
+	if in.Value != nil {
+		const prefix string = ",\"value\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Value))
+	}
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	out.RawByte('}')
 }

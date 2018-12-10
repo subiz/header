@@ -84,6 +84,11 @@ wait
 printf "\e[32mDone \e[32m(%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
 # GENERATEING JSON
+
+if [[ $i == *".proto" ]]; then
+	rm -rf */*easyjson.go
+fi
+
 starttime=$(date +%s.%N)
 printf "\e[32mgenerating json... (this could take up to 20 sec)"
 for i in `ls -R`; do
