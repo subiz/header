@@ -1737,18 +1737,6 @@
         "conversation_id": {
           "type": "string"
         },
-        "starter_id": {
-          "type": "string"
-        },
-        "starter_type": {
-          "type": "string"
-        },
-        "agent_ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "user": {
           "$ref": "#/definitions/userUser"
         },
