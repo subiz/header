@@ -3783,66 +3783,6 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation24(in *jlexer.Lexer, out
 				}
 				in.Delim(']')
 			}
-		case "page_url":
-			if in.IsNull() {
-				in.Skip()
-				out.PageUrl = nil
-			} else {
-				if out.PageUrl == nil {
-					out.PageUrl = new(string)
-				}
-				*out.PageUrl = string(in.String())
-			}
-		case "page_title":
-			if in.IsNull() {
-				in.Skip()
-				out.PageTitle = nil
-			} else {
-				if out.PageTitle == nil {
-					out.PageTitle = new(string)
-				}
-				*out.PageTitle = string(in.String())
-			}
-		case "message":
-			if in.IsNull() {
-				in.Skip()
-				out.Message = nil
-			} else {
-				if out.Message == nil {
-					out.Message = new(string)
-				}
-				*out.Message = string(in.String())
-			}
-		case "browser_language":
-			if in.IsNull() {
-				in.Skip()
-				out.BrowserLanguage = nil
-			} else {
-				if out.BrowserLanguage == nil {
-					out.BrowserLanguage = new(string)
-				}
-				*out.BrowserLanguage = string(in.String())
-			}
-		case "language":
-			if in.IsNull() {
-				in.Skip()
-				out.Language = nil
-			} else {
-				if out.Language == nil {
-					out.Language = new(string)
-				}
-				*out.Language = string(in.String())
-			}
-		case "device_type":
-			if in.IsNull() {
-				in.Skip()
-				out.DeviceType = nil
-			} else {
-				if out.DeviceType == nil {
-					out.DeviceType = new(string)
-				}
-				*out.DeviceType = string(in.String())
-			}
 		case "created":
 			if in.IsNull() {
 				in.Skip()
@@ -3862,56 +3802,6 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation24(in *jlexer.Lexer, out
 					out.ConversationId = new(string)
 				}
 				*out.ConversationId = string(in.String())
-			}
-		case "ip":
-			if in.IsNull() {
-				in.Skip()
-				out.Ip = nil
-			} else {
-				if out.Ip == nil {
-					out.Ip = new(string)
-				}
-				*out.Ip = string(in.String())
-			}
-		case "country":
-			if in.IsNull() {
-				in.Skip()
-				out.Country = nil
-			} else {
-				if out.Country == nil {
-					out.Country = new(string)
-				}
-				*out.Country = string(in.String())
-			}
-		case "country_code":
-			if in.IsNull() {
-				in.Skip()
-				out.CountryCode = nil
-			} else {
-				if out.CountryCode == nil {
-					out.CountryCode = new(string)
-				}
-				*out.CountryCode = string(in.String())
-			}
-		case "city":
-			if in.IsNull() {
-				in.Skip()
-				out.City = nil
-			} else {
-				if out.City == nil {
-					out.City = new(string)
-				}
-				*out.City = string(in.String())
-			}
-		case "timezone":
-			if in.IsNull() {
-				in.Skip()
-				out.Timezone = nil
-			} else {
-				if out.Timezone == nil {
-					out.Timezone = new(string)
-				}
-				*out.Timezone = string(in.String())
 			}
 		case "starter_id":
 			if in.IsNull() {
@@ -4089,66 +3979,6 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation24(out *jwriter.Writer, 
 			out.RawByte(']')
 		}
 	}
-	if in.PageUrl != nil {
-		const prefix string = ",\"page_url\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.PageUrl))
-	}
-	if in.PageTitle != nil {
-		const prefix string = ",\"page_title\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.PageTitle))
-	}
-	if in.Message != nil {
-		const prefix string = ",\"message\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Message))
-	}
-	if in.BrowserLanguage != nil {
-		const prefix string = ",\"browser_language\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.BrowserLanguage))
-	}
-	if in.Language != nil {
-		const prefix string = ",\"language\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Language))
-	}
-	if in.DeviceType != nil {
-		const prefix string = ",\"device_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.DeviceType))
-	}
 	if in.Created != nil {
 		const prefix string = ",\"created\":"
 		if first {
@@ -4168,56 +3998,6 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation24(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ConversationId))
-	}
-	if in.Ip != nil {
-		const prefix string = ",\"ip\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Ip))
-	}
-	if in.Country != nil {
-		const prefix string = ",\"country\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Country))
-	}
-	if in.CountryCode != nil {
-		const prefix string = ",\"country_code\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.CountryCode))
-	}
-	if in.City != nil {
-		const prefix string = ",\"city\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.City))
-	}
-	if in.Timezone != nil {
-		const prefix string = ",\"timezone\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Timezone))
 	}
 	if in.StarterId != nil {
 		const prefix string = ",\"starter_id\":"
@@ -5087,6 +4867,16 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation29(in *jlexer.Lexer, out
 				}
 				*out.Limit = int32(in.Int32())
 			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -5130,6 +4920,16 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation29(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		out.Int32(int32(*in.Limit))
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
 	}
 	out.RawByte('}')
 }
@@ -6530,6 +6330,16 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation36(in *jlexer.Lexer, out
 				}
 				*out.IsUnresolved = bool(in.Bool())
 			}
+		case "is_violated":
+			if in.IsNull() {
+				in.Skip()
+				out.IsViolated = nil
+			} else {
+				if out.IsViolated == nil {
+					out.IsViolated = new(bool)
+				}
+				*out.IsViolated = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -6701,6 +6511,16 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation36(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.IsUnresolved))
+	}
+	if in.IsViolated != nil {
+		const prefix string = ",\"is_violated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.IsViolated))
 	}
 	out.RawByte('}')
 }
@@ -7225,6 +7045,26 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation41(in *jlexer.Lexer, out
 			continue
 		}
 		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
 		case "conversation_id":
 			if in.IsNull() {
 				in.Skip()
@@ -7259,6 +7099,26 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation41(out *jwriter.Writer, 
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
 	if in.ConversationId != nil {
 		const prefix string = ",\"conversation_id\":"
 		if first {
@@ -7324,6 +7184,26 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation42(in *jlexer.Lexer, out
 			continue
 		}
 		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
 		case "conversation_id":
 			if in.IsNull() {
 				in.Skip()
@@ -7368,6 +7248,26 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation42(out *jwriter.Writer, 
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
 	if in.ConversationId != nil {
 		const prefix string = ",\"conversation_id\":"
 		if first {
@@ -8152,6 +8052,16 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation46(in *jlexer.Lexer, out
 				}
 				(*out.Ctx).UnmarshalEasyJSON(in)
 			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
 		case "type":
 			if in.IsNull() {
 				in.Skip()
@@ -8286,6 +8196,16 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation46(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
 	}
 	if in.Type != nil {
 		const prefix string = ",\"type\":"
@@ -11116,6 +11036,16 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation62(in *jlexer.Lexer, out
 				}
 				*out.IsUnresolved = bool(in.Bool())
 			}
+		case "is_violated":
+			if in.IsNull() {
+				in.Skip()
+				out.IsViolated = nil
+			} else {
+				if out.IsViolated == nil {
+					out.IsViolated = new(bool)
+				}
+				*out.IsViolated = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -11259,6 +11189,16 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation62(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.IsUnresolved))
+	}
+	if in.IsViolated != nil {
+		const prefix string = ",\"is_violated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.IsViolated))
 	}
 	out.RawByte('}')
 }

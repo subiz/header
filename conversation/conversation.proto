@@ -148,20 +148,9 @@ message StartRequest {
 	optional string channel_type = 4;
 	optional string from = 12;
 	repeated string to = 5;
-	optional string page_url = 6;
-	optional string page_title = 7;
-	optional string message = 8;
-	optional string browser_language = 9;
-	optional string language = 10;
-	optional string device_type = 11;
 
 	optional int64 created = 13;
 	optional string conversation_id = 14;
-	optional string ip = 15;
-	optional string country = 16;
-	optional string country_code = 17;
-	optional string city = 18;
-	optional string timezone = 19;
 
 	optional string starter_id = 20;
 	optional string starter_type = 21;
