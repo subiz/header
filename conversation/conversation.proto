@@ -129,7 +129,6 @@ message Conversation {
 	repeated Member left_members = 25;
 	optional Ticket ticket = 27;
 	optional string ticket_id = 28;
-	optional int64 ended = 29;
 }
 
 message UserConversation { // used in database

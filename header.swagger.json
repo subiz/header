@@ -1918,9 +1918,6 @@
           "state": {
             "type": "string"
           },
-          "request": {
-            "$ref": "#/components/schemas/StartRequest"
-          },
           "accepted": {
             "type": "integer",
             "format": "int64"
@@ -1953,9 +1950,6 @@
             "items": {
               "$ref": "#/components/schemas/conversationMember"
             }
-          },
-          "assign_to": {
-            "$ref": "#/components/schemas/RouteResult"
           },
           "ticket": {
             "$ref": "#/components/schemas/conversationTicket"
@@ -2250,26 +2244,6 @@
           }
         }
       },
-      "RouteResult": {
-        "type": "object",
-        "properties": {
-          "rule_id": {
-            "type": "string"
-          },
-          "strategy": {
-            "type": "string"
-          },
-          "agent_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "group_id": {
-            "type": "string"
-          }
-        }
-      },
       "Rule": {
         "type": "object",
         "properties": {
@@ -2406,51 +2380,6 @@
             "items": {
               "$ref": "#/components/schemas/conversationServiceLevelAgreement"
             }
-          }
-        }
-      },
-      "StartRequest": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "channel_type": {
-            "type": "string"
-          },
-          "from": {
-            "type": "string"
-          },
-          "to": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "conversation_id": {
-            "type": "string"
-          },
-          "user": {
-            "$ref": "#/components/schemas/userUser"
-          },
-          "integration_id": {
-            "type": "string"
-          },
-          "chain_id": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "automation_id": {
-            "type": "string"
           }
         }
       },
@@ -2756,57 +2685,6 @@
           }
         }
       },
-      "userAttributeData": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "key": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modified": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "text": {
-            "type": "string"
-          },
-          "number": {
-            "type": "number",
-            "format": "double"
-          },
-          "boolean": {
-            "type": "boolean",
-            "format": "boolean"
-          },
-          "datetime": {
-            "type": "string"
-          },
-          "list": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "setter": {
-            "type": "string"
-          },
-          "setter_type": {
-            "type": "string"
-          }
-        }
-      },
       "userPresence": {
         "type": "object",
         "properties": {
@@ -2823,110 +2701,6 @@
           "pinged_minute": {
             "type": "integer",
             "format": "int64"
-          }
-        }
-      },
-      "userTrace": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "ip": {
-            "type": "string"
-          },
-          "location_id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "city_name": {
-            "type": "string"
-          },
-          "country_name": {
-            "type": "string"
-          },
-          "country_code": {
-            "type": "string"
-          },
-          "continent_code": {
-            "type": "string"
-          },
-          "continent_name": {
-            "type": "string"
-          },
-          "latitude": {
-            "type": "number",
-            "format": "float",
-            "title": "optional string coutry_code = 11;"
-          },
-          "longitude": {
-            "type": "number",
-            "format": "float"
-          },
-          "postal_code": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "isp": {
-            "type": "string"
-          }
-        }
-      },
-      "userUser": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "traces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userTrace"
-            }
-          },
-          "is_ban": {
-            "type": "boolean",
-            "format": "boolean",
-            "title": "repeated string alias = 12;"
-          },
-          "attributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userAttributeData"
-            }
-          },
-          "segments": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "subiz_id": {
-            "type": "string"
-          },
-          "aliases": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "par": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modified": {
-            "type": "integer",
-            "format": "int64",
-            "title": "optional int32 modified_hour = 35;"
-          },
-          "modified_week": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
@@ -3254,6 +3028,57 @@
           }
         }
       },
+      "userAttributeData": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "text": {
+            "type": "string"
+          },
+          "number": {
+            "type": "number",
+            "format": "double"
+          },
+          "boolean": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "datetime": {
+            "type": "string"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "setter": {
+            "type": "string"
+          },
+          "setter_type": {
+            "type": "string"
+          }
+        }
+      },
       "userListTopicsResult": {
         "type": "object",
         "properties": {
@@ -3369,6 +3194,54 @@
           }
         }
       },
+      "userTrace": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "location_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "city_name": {
+            "type": "string"
+          },
+          "country_name": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          },
+          "continent_code": {
+            "type": "string"
+          },
+          "continent_name": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "float",
+            "title": "optional string coutry_code = 11;"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "isp": {
+            "type": "string"
+          }
+        }
+      },
       "userUnreadTopic": {
         "type": "object",
         "properties": {
@@ -3389,6 +3262,62 @@
             "format": "int64"
           },
           "unread": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "userUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "traces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userTrace"
+            }
+          },
+          "is_ban": {
+            "type": "boolean",
+            "format": "boolean",
+            "title": "repeated string alias = 12;"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userAttributeData"
+            }
+          },
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subiz_id": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "par": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64",
+            "title": "optional int32 modified_hour = 35;"
+          },
+          "modified_week": {
             "type": "integer",
             "format": "int32"
           }

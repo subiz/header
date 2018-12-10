@@ -1438,9 +1438,6 @@
         "state": {
           "type": "string"
         },
-        "request": {
-          "$ref": "#/definitions/conversationStartRequest"
-        },
         "accepted": {
           "type": "string",
           "format": "int64"
@@ -1473,9 +1470,6 @@
           "items": {
             "$ref": "#/definitions/conversationMember"
           }
-        },
-        "assign_to": {
-          "$ref": "#/definitions/conversationRouteResult"
         },
         "ticket": {
           "$ref": "#/definitions/conversationTicket"
@@ -1776,26 +1770,6 @@
         }
       }
     },
-    "conversationRouteResult": {
-      "type": "object",
-      "properties": {
-        "rule_id": {
-          "type": "string"
-        },
-        "strategy": {
-          "type": "string"
-        },
-        "agent_ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "group_id": {
-          "type": "string"
-        }
-      }
-    },
     "conversationSeen": {
       "type": "object",
       "properties": {
@@ -1805,54 +1779,6 @@
         "at": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "conversationStartRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "id": {
-          "type": "string"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "channel_type": {
-          "type": "string"
-        },
-        "from": {
-          "type": "string"
-        },
-        "to": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "conversation_id": {
-          "type": "string"
-        },
-        "user": {
-          "$ref": "#/definitions/userUser"
-        },
-        "integration_id": {
-          "type": "string"
-        },
-        "chain_id": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "automation_id": {
-          "type": "string"
         }
       }
     },
