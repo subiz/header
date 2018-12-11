@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package user;
+
+import "git.subiz.net/header/common/common.proto";
+
+message TotalConvoUpdateRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	int32 total = 4;
+}

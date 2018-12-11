@@ -293,6 +293,7 @@ enum Event {
 	// AutomationAgentNotificationFired = 54;
 	AutomationAddUserToSegmentationFired = 231;
 
+	UserTotalConvoUpdated = 232;
 }
 
 message AggregateSegmentCount {
