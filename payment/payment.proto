@@ -285,12 +285,18 @@ message ReferralCreditCode {
 	optional float credit = 3;
 }
 
+message PromotionCodeRequest {
+	optional common.Context = 1;
+	optional string code = 2;
+	optinal string account_id = 3;
+}
+
 message PromotionCode {
 	optional common.Context ctx = 1;
 	optional string description = 3;
 
 	enum Type {
-		fixed_amount_promotion_code = 0;
+		fixed_amount_promotion_code = 0; // TODO : Delete
 		percent_promotion_code = 1;
 		credit_code = 2;
 		referral_credit_code = 3;
@@ -303,7 +309,7 @@ message PromotionCode {
 	optional string code = 11;
 
 	message Data {
-		optional FixedAmountPromotionCode fixed_amount = 1;
+		optional FixedAmountPromotionCode fixed_amount = 1; // TODO: Delete
 		optional PercentPromotionCode percent = 2;
 		optional CreditCode credit = 3;
 		optional ReferralCreditCode referral = 4;
@@ -317,9 +323,19 @@ message PromotionCode {
 	optional int32 max_redemptions = 20;
 	optional string addon = 21;
 	repeated string for_items = 23;
+	optional float min_amount = 24; //TODO: Delete
+	optional float max_amount = 25; //TODO: Delete
+	repeated string for_plans = 26;
+	repeated string for_account_ids = 27;
+	repeated string for_number_of_agents = 28;
+	repeated string for_channels = 29;
+	optional bool is_deleted = 30;
+}
 
-	optional float min_amount = 24;
-	optional float max_amount = 25;
+message LogPromotionCodeUsed {
+	optional string code = 1;
+	optional string account_id = 2;
+	optional int64 created = 3
 }
 
 message ExchangeRate {
@@ -473,6 +489,29 @@ service PaymentMgr {
 	rpc TransferMoney(PayRequest) returns (Bill);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ListLogs(ListLogsRequest) returns (Logs);
+	rpc CheckPromotionCode(PromotionCodeRequest) returns (CheckPromotionCodeRequest);
+	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
+	rpc DeletePromotionCode(common.String) returns (common.Empty);
+}
+
+message PromotionCodes{
+	optional common.Context ctx = 1;
+	repeated PromotionCode promotionCodes = 2;
+	optional string anchor = 3;
+	optional int64 total = 4;
+}
+
+message ListPromotionCodeRequest{
+  optional common.Context ctx = 1;
+	optinal string anchor = 2;
+	optional int64 limit = 3;
+}
+
+message CheckPromotionCodeRequest{
+	optional common.Context ctx = 1;
+	optional bool status = 2;
+	optional string error = 3;
+	optional PromotionCode promotioncode = 4;
 }
 
 message String {
