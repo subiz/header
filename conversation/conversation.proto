@@ -1042,6 +1042,7 @@ message ReportTicket {
 	optional bool is_unresolved = 16;
 	optional bool is_violated = 17;
 	optional bool has_agent = 18;
+	repeated string user_ids = 19;
 }
 
 message CountTicketRequest {
