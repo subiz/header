@@ -12003,6 +12003,16 @@ func easyjsonB8de26a5DecodeGitSubizNetHeaderConversation62(in *jlexer.Lexer, out
 				}
 				*out.IsViolated = bool(in.Bool())
 			}
+		case "user_id":
+			if in.IsNull() {
+				in.Skip()
+				out.UserId = nil
+			} else {
+				if out.UserId == nil {
+					out.UserId = new(string)
+				}
+				*out.UserId = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -12156,6 +12166,16 @@ func easyjsonB8de26a5EncodeGitSubizNetHeaderConversation62(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.IsViolated))
+	}
+	if in.UserId != nil {
+		const prefix string = ",\"user_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.UserId))
 	}
 	out.RawByte('}')
 }

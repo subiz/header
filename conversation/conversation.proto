@@ -1063,6 +1063,7 @@ message CountTicketRequest {
 	}
 	optional bool is_unresolved = 16;
 	optional bool is_violated = 17;
+	optional string user_id = 18;
 }
 
 message CountTicketResponse {

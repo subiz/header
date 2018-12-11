@@ -10,3 +10,10 @@ message TotalConvoUpdateRequest {
 	string user_id = 3;
 	int32 total = 4;
 }
+
+message TotalOpenTicket {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	int32 total = 4;
+}

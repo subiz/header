@@ -294,6 +294,7 @@ enum Event {
 	AutomationAddUserToSegmentationFired = 231;
 
 	UserTotalConvoUpdated = 232;
+	UserTotalOpenTicketUpdated = 233;
 }
 
 message AggregateSegmentCount {
