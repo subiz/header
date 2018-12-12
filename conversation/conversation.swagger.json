@@ -1075,6 +1075,10 @@
             "$ref": "#/definitions/conversationTag"
           }
         },
+        "ended": {
+          "type": "string",
+          "format": "int64"
+        },
         "state": {
           "type": "string"
         },
@@ -1116,6 +1120,12 @@
         },
         "ticket_id": {
           "type": "string"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userUser"
+          }
         }
       }
     },

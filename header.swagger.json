@@ -1915,6 +1915,10 @@
               "$ref": "#/components/schemas/conversationTag"
             }
           },
+          "ended": {
+            "type": "integer",
+            "format": "int64"
+          },
           "state": {
             "type": "string"
           },
@@ -1956,6 +1960,12 @@
           },
           "ticket_id": {
             "type": "string"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userUser"
+            }
           }
         }
       },

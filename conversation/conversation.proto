@@ -100,6 +100,19 @@ message Member {
 	optional string last_page_view_url = 15;
 }
 
+enum State {
+	none = 0; // convo
+	unassigned = 2; // convo
+	active = 6; // convo
+	ended = 8; // convo
+	pending = 9; // ticket and convo
+
+	all = 10; // ticket
+	open = 11; // ticket
+	resolved = 13; // ticket
+	closed = 14; // ticket
+}
+
 message Conversation {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -108,13 +121,8 @@ message Conversation {
 	optional int64 closed = 6; // remove
 	repeated Member members = 7;
 	repeated Tag tags = 10;
-	enum State {
-		conversation_none = 0;
-		unassigned = 2;
-		active = 6;
-		ended = 8;
-		pending = 9;
-	}
+	optional int64 ended = 12;
+
 	optional string state = 11; // converation state
 	optional int64 accepted = 15; // time chat is accepted after being in unassigned list
 
@@ -129,6 +137,7 @@ message Conversation {
 	repeated Member left_members = 25;
 	optional Ticket ticket = 27;
 	optional string ticket_id = 28;
+	repeated user.User users = 29; // internal user only
 }
 
 message UserConversation { // used in database
@@ -872,14 +881,6 @@ message Tickets {
 	optional string account_id = 2;
 	repeated Ticket tickets = 3;
 	optional string anchor = 4;
-}
-
-enum TicketState {
-	all = 0;
-	open = 1;
-	pending = 2;
-	resolved = 3;
-	closed = 4;
 }
 
 enum TicketPriority {
