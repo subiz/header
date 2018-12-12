@@ -1937,29 +1937,6 @@ func easyjson3258bd9eDecodeGitSubizNetHeaderPayment10(in *jlexer.Lexer, out *Pro
 				}
 				in.Delim(']')
 			}
-		case "for_number_of_agents":
-			if in.IsNull() {
-				in.Skip()
-				out.ForNumberOfAgents = nil
-			} else {
-				in.Delim('[')
-				if out.ForNumberOfAgents == nil {
-					if !in.IsDelim(']') {
-						out.ForNumberOfAgents = make([]string, 0, 4)
-					} else {
-						out.ForNumberOfAgents = []string{}
-					}
-				} else {
-					out.ForNumberOfAgents = (out.ForNumberOfAgents)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v13 string
-					v13 = string(in.String())
-					out.ForNumberOfAgents = append(out.ForNumberOfAgents, v13)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
 		case "for_channels":
 			if in.IsNull() {
 				in.Skip()
@@ -1976,9 +1953,9 @@ func easyjson3258bd9eDecodeGitSubizNetHeaderPayment10(in *jlexer.Lexer, out *Pro
 					out.ForChannels = (out.ForChannels)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v14 string
-					v14 = string(in.String())
-					out.ForChannels = append(out.ForChannels, v14)
+					var v13 string
+					v13 = string(in.String())
+					out.ForChannels = append(out.ForChannels, v13)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1992,6 +1969,29 @@ func easyjson3258bd9eDecodeGitSubizNetHeaderPayment10(in *jlexer.Lexer, out *Pro
 					out.IsDeleted = new(bool)
 				}
 				*out.IsDeleted = bool(in.Bool())
+			}
+		case "for_number_of_agents":
+			if in.IsNull() {
+				in.Skip()
+				out.ForNumberOfAgents = nil
+			} else {
+				in.Delim('[')
+				if out.ForNumberOfAgents == nil {
+					if !in.IsDelim(']') {
+						out.ForNumberOfAgents = make([]int32, 0, 16)
+					} else {
+						out.ForNumberOfAgents = []int32{}
+					}
+				} else {
+					out.ForNumberOfAgents = (out.ForNumberOfAgents)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v14 int32
+					v14 = int32(in.Int32())
+					out.ForNumberOfAgents = append(out.ForNumberOfAgents, v14)
+					in.WantComma()
+				}
+				in.Delim(']')
 			}
 		default:
 			in.SkipRecursive()
@@ -2224,25 +2224,6 @@ func easyjson3258bd9eEncodeGitSubizNetHeaderPayment10(out *jwriter.Writer, in Pr
 			out.RawByte(']')
 		}
 	}
-	if len(in.ForNumberOfAgents) != 0 {
-		const prefix string = ",\"for_number_of_agents\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v21, v22 := range in.ForNumberOfAgents {
-				if v21 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v22))
-			}
-			out.RawByte(']')
-		}
-	}
 	if len(in.ForChannels) != 0 {
 		const prefix string = ",\"for_channels\":"
 		if first {
@@ -2253,11 +2234,11 @@ func easyjson3258bd9eEncodeGitSubizNetHeaderPayment10(out *jwriter.Writer, in Pr
 		}
 		{
 			out.RawByte('[')
-			for v23, v24 := range in.ForChannels {
-				if v23 > 0 {
+			for v21, v22 := range in.ForChannels {
+				if v21 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v24))
+				out.String(string(v22))
 			}
 			out.RawByte(']')
 		}
@@ -2271,6 +2252,25 @@ func easyjson3258bd9eEncodeGitSubizNetHeaderPayment10(out *jwriter.Writer, in Pr
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.IsDeleted))
+	}
+	if len(in.ForNumberOfAgents) != 0 {
+		const prefix string = ",\"for_number_of_agents\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v23, v24 := range in.ForNumberOfAgents {
+				if v23 > 0 {
+					out.RawByte(',')
+				}
+				out.Int32(int32(v24))
+			}
+			out.RawByte(']')
+		}
 	}
 	out.RawByte('}')
 }
