@@ -828,6 +828,24 @@
         }
       }
     },
+    "paymentCheckPromotionCodeRequest": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "error": {
+          "type": "string"
+        },
+        "promotioncode": {
+          "$ref": "#/definitions/paymentPromotionCode"
+        }
+      }
+    },
     "paymentComment": {
       "type": "object",
       "properties": {
@@ -1421,6 +1439,34 @@
         "max_amount": {
           "type": "number",
           "format": "float"
+        },
+        "for_plans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "for_account_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "for_number_of_agents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "for_channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_deleted": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -1438,6 +1484,27 @@
         },
         "referral": {
           "$ref": "#/definitions/paymentReferralCreditCode"
+        }
+      }
+    },
+    "paymentPromotionCodes": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "promotionCodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentPromotionCode"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
