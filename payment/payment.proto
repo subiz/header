@@ -286,9 +286,9 @@ message ReferralCreditCode {
 }
 
 message PromotionCodeRequest {
-	optional common.Context = 1;
+	optional common.Context ctx = 1;
 	optional string code = 2;
-	optinal string account_id = 3;
+	optional string account_id = 3;
 }
 
 message PromotionCode {
@@ -335,7 +335,7 @@ message PromotionCode {
 message LogPromotionCodeUsed {
 	optional string code = 1;
 	optional string account_id = 2;
-	optional int64 created = 3
+	optional int64 created = 3;
 }
 
 message ExchangeRate {
@@ -356,7 +356,7 @@ message Logs {
 	optional common.Context ctx = 1;
 	repeated Log logs = 5;
 	optional string anchor = 4;
-}
+	}
 
 message Log {
 	optional common.Context ctx = 1;
@@ -503,7 +503,7 @@ message PromotionCodes{
 
 message ListPromotionCodeRequest{
   optional common.Context ctx = 1;
-	optinal string anchor = 2;
+	optional string anchor = 2;
 	optional int64 limit = 3;
 }
 
