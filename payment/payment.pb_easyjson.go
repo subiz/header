@@ -1978,16 +1978,16 @@ func easyjson3258bd9eDecodeGitSubizNetHeaderPayment10(in *jlexer.Lexer, out *Pro
 				in.Delim('[')
 				if out.ForNumberOfAgents == nil {
 					if !in.IsDelim(']') {
-						out.ForNumberOfAgents = make([]int32, 0, 16)
+						out.ForNumberOfAgents = make([]uint32, 0, 16)
 					} else {
-						out.ForNumberOfAgents = []int32{}
+						out.ForNumberOfAgents = []uint32{}
 					}
 				} else {
 					out.ForNumberOfAgents = (out.ForNumberOfAgents)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v14 int32
-					v14 = int32(in.Int32())
+					var v14 uint32
+					v14 = uint32(in.Uint32())
 					out.ForNumberOfAgents = append(out.ForNumberOfAgents, v14)
 					in.WantComma()
 				}
@@ -2267,7 +2267,7 @@ func easyjson3258bd9eEncodeGitSubizNetHeaderPayment10(out *jwriter.Writer, in Pr
 				if v23 > 0 {
 					out.RawByte(',')
 				}
-				out.Int32(int32(v24))
+				out.Uint32(uint32(v24))
 			}
 			out.RawByte(']')
 		}
