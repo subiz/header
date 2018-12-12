@@ -1120,12 +1120,6 @@
         },
         "ticket_id": {
           "type": "string"
-        },
-        "users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userUser"
-          }
         }
       }
     },
@@ -2019,60 +2013,6 @@
         }
       }
     },
-    "userAttributeData": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "user_id": {
-          "type": "string"
-        },
-        "key": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "modified": {
-          "type": "string",
-          "format": "int64"
-        },
-        "text": {
-          "type": "string"
-        },
-        "number": {
-          "type": "number",
-          "format": "double"
-        },
-        "boolean": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "datetime": {
-          "type": "string"
-        },
-        "list": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "setter": {
-          "type": "string"
-        },
-        "setter_type": {
-          "type": "string"
-        }
-      }
-    },
     "userPresence": {
       "type": "object",
       "properties": {
@@ -2092,113 +2032,6 @@
         "pinged_minute": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "userTrace": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "ip": {
-          "type": "string"
-        },
-        "location_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "city_name": {
-          "type": "string"
-        },
-        "country_name": {
-          "type": "string"
-        },
-        "country_code": {
-          "type": "string"
-        },
-        "continent_code": {
-          "type": "string"
-        },
-        "continent_name": {
-          "type": "string"
-        },
-        "latitude": {
-          "type": "number",
-          "format": "float",
-          "title": "optional string coutry_code = 11;"
-        },
-        "longitude": {
-          "type": "number",
-          "format": "float"
-        },
-        "postal_code": {
-          "type": "string"
-        },
-        "timezone": {
-          "type": "string"
-        },
-        "isp": {
-          "type": "string"
-        }
-      }
-    },
-    "userUser": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "id": {
-          "type": "string"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "traces": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userTrace"
-          }
-        },
-        "is_ban": {
-          "type": "boolean",
-          "format": "boolean",
-          "title": "repeated string alias = 12;"
-        },
-        "attributes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userAttributeData"
-          }
-        },
-        "segments": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "subiz_id": {
-          "type": "string"
-        },
-        "aliases": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "par": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "modified": {
-          "type": "string",
-          "format": "int64",
-          "title": "optional int32 modified_hour = 35;"
-        },
-        "modified_week": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     }
