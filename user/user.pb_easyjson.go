@@ -2315,15 +2315,15 @@ func easyjson2c075341DecodeGitSubizNetHeaderUser16(in *jlexer.Lexer, out *Trace)
 			continue
 		}
 		switch key {
-		case "id":
+		case "event_id":
 			if in.IsNull() {
 				in.Skip()
-				out.Id = nil
+				out.EventId = nil
 			} else {
-				if out.Id == nil {
-					out.Id = new(string)
+				if out.EventId == nil {
+					out.EventId = new(string)
 				}
-				*out.Id = string(in.String())
+				*out.EventId = string(in.String())
 			}
 		case "ip":
 			if in.IsNull() {
@@ -2600,15 +2600,15 @@ func easyjson2c075341EncodeGitSubizNetHeaderUser16(out *jwriter.Writer, in Trace
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.Id != nil {
-		const prefix string = ",\"id\":"
+	if in.EventId != nil {
+		const prefix string = ",\"event_id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.Id))
+		out.String(string(*in.EventId))
 	}
 	if in.Ip != nil {
 		const prefix string = ",\"ip\":"

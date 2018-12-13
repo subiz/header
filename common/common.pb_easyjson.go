@@ -1196,6 +1196,8 @@ func easyjson89b94fcfDecodeGitSubizNetHeaderCommon11(in *jlexer.Lexer, out *Devi
 			out.Referrer = string(in.String())
 		case "type":
 			out.Type = string(in.String())
+		case "platform":
+			out.Platform = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -1279,6 +1281,16 @@ func easyjson89b94fcfEncodeGitSubizNetHeaderCommon11(out *jwriter.Writer, in Dev
 			out.RawString(prefix)
 		}
 		out.String(string(in.Type))
+	}
+	if in.Platform != "" {
+		const prefix string = ",\"platform\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Platform))
 	}
 	out.RawByte('}')
 }

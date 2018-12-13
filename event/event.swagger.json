@@ -1033,6 +1033,9 @@
         },
         "type": {
           "type": "string"
+        },
+        "platform": {
+          "type": "string"
         }
       }
     },
@@ -2426,7 +2429,7 @@
     "userTrace": {
       "type": "object",
       "properties": {
-        "id": {
+        "event_id": {
           "type": "string"
         },
         "ip": {

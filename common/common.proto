@@ -91,6 +91,7 @@ message Device {
 	string language = 7;
 	string referrer = 8;
 	string type = 9;
+	string platform = 10;
 	enum DeviceType {
 		unknown = 0;
 		mobile = 1;

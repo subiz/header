@@ -1214,6 +1214,9 @@
         },
         "type": {
           "type": "string"
+        },
+        "platform": {
+          "type": "string"
         }
       }
     },
