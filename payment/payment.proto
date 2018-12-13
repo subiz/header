@@ -492,7 +492,7 @@ service PaymentMgr {
 	rpc ListLogs(ListLogsRequest) returns (Logs);
 	rpc CheckPromotionCode(PromotionCodeRequest) returns (CheckPromotionCodeRequest);
 	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
-	rpc DeletePromotionCode(common.String) returns (common.Empty);
+	rpc DeletePromotionCode(common.Id) returns (common.Empty);
 }
 
 message PromotionCodes{
