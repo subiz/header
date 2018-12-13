@@ -4255,9 +4255,9 @@ func easyjson3258bd9eDecodeGitSubizNetHeaderPayment23(in *jlexer.Lexer, out *Lis
 				out.Limit = nil
 			} else {
 				if out.Limit == nil {
-					out.Limit = new(int64)
+					out.Limit = new(int32)
 				}
-				*out.Limit = int64(in.Int64())
+				*out.Limit = int32(in.Int32())
 			}
 		default:
 			in.SkipRecursive()
@@ -4301,7 +4301,7 @@ func easyjson3258bd9eEncodeGitSubizNetHeaderPayment23(out *jwriter.Writer, in Li
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(*in.Limit))
+		out.Int32(int32(*in.Limit))
 	}
 	out.RawByte('}')
 }
