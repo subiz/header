@@ -469,7 +469,6 @@ service PaymentMgr {
 	rpc Purchase(Subscription) returns (Invoice);
 	rpc UpdateSubscription(Subscription) returns (Subscription);
 	rpc GetSubscription(common.Id) returns (Subscription);
-	rpc GetPromotionCode(String) returns (PromotionCode);
 	rpc AddPaymentMethod(PaymentMethod) returns (PaymentMethod);
 	rpc UpdatePaymentMethod(PaymentMethod) returns (PaymentMethod);
 	rpc DeletePaymentMethod(common.Id) returns (common.Empty);
@@ -490,6 +489,8 @@ service PaymentMgr {
 	rpc TransferMoney(PayRequest) returns (Bill);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ListLogs(ListLogsRequest) returns (Logs);
+	rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
+	rpc GetPromotionCode(String) returns (PromotionCode);
 	rpc CheckPromotionCode(PromotionCodeRequest) returns (CheckPromotionCodeRequest);
 	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
 	rpc DeletePromotionCode(common.Id) returns (common.Empty);
