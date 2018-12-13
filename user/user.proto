@@ -132,24 +132,64 @@ message Traces {
 	repeated Trace traces = 3;
 }
 
+message SessionTracking {
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional int64 started = 4;
+	optional string start_event = 5;
+
+	optional int64 tracked = 6;
+	optional string latest_event = 7;
+}
+
 message Trace {
-	optional string id = 3;
+	optional string id = 3;  // remove
 	optional string ip = 4;
-	optional int32 location_id = 5;
+	optional int32 location_id = 5; // remove
 
-	optional string city_name = 8;
-	optional string country_name = 9;
-	optional string country_code = 19;
-	optional string continent_code = 10;
-	optional string continent_name = 18;
+	optional string city_name = 8;            // filled
+	optional string country_name = 9;         // filled
+	optional string continent_code = 10;      // filled
+	optional float latitude = 12;             // filled
+	optional float longitude = 13;            // filled
+	optional string postal_code = 14;         // filled
 
-	//optional string coutry_code = 11;
-	optional float latitude = 12;
-	optional float longitude = 13;
-	optional string postal_code = 14;
 	optional string timezone = 16;
 
-	optional string isp = 17;
+	optional string isp = 17;                 // filled
+	optional string continent_name = 18;      // filled
+	optional string country_code = 19;        // filled
+
+	optional string platform = 20;
+
+	optional string device_type = 21;         // filled
+	enum DeviceType {
+		unknown = 0;
+		mobile = 1;
+		tablet = 2;
+		desktop = 3;
+	}
+
+	optional string browser_name = 22;        // filled
+	optional string language = 23;
+	optional string user_agent = 24;
+	optional string screen_resolution = 25;
+
+	optional string ga_client_id = 26;
+	optional string ga_tracking_id = 27;
+	optional string ads_netword = 28;
+
+	repeated Campaign campaigns = 29;
+	optional int64 created = 30;
+	optional int64 tracked = 31;
+}
+
+message Campaign {
+	optional string name = 2;
+	optional string source = 3;
+	optional string medium = 4;
+	optional string term = 5;
+	optional string content = 6;
 }
 
 message MergeRequest {

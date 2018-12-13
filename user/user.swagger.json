@@ -909,6 +909,26 @@
         }
       }
     },
+    "userCampaign": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "medium": {
+          "type": "string"
+        },
+        "term": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
     "userCondition": {
       "type": "object",
       "properties": {
@@ -1242,19 +1262,12 @@
         "country_name": {
           "type": "string"
         },
-        "country_code": {
-          "type": "string"
-        },
         "continent_code": {
-          "type": "string"
-        },
-        "continent_name": {
           "type": "string"
         },
         "latitude": {
           "type": "number",
-          "format": "float",
-          "title": "optional string coutry_code = 11;"
+          "format": "float"
         },
         "longitude": {
           "type": "number",
@@ -1268,6 +1281,53 @@
         },
         "isp": {
           "type": "string"
+        },
+        "continent_name": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "device_type": {
+          "type": "string"
+        },
+        "browser_name": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "ga_client_id": {
+          "type": "string"
+        },
+        "ga_tracking_id": {
+          "type": "string"
+        },
+        "ads_netword": {
+          "type": "string"
+        },
+        "campaigns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCampaign"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tracked": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
