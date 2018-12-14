@@ -285,12 +285,6 @@ message ReferralCreditCode {
 	optional float credit = 3;
 }
 
-message PromotionCodeRequest {
-	optional common.Context ctx = 1;
-	optional string code = 2;
-	optional string account_id = 3;
-}
-
 message PromotionCode {
 	optional common.Context ctx = 1;
 	optional string description = 3;
@@ -489,11 +483,11 @@ service PaymentMgr {
 	rpc TransferMoney(PayRequest) returns (Bill);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ListLogs(ListLogsRequest) returns (Logs);
-	rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
-	rpc GetPromotionCode(String) returns (PromotionCode);
-	rpc CheckPromotionCode(PromotionCodeRequest) returns (CheckPromotionCodeRequest);
-	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
-	rpc DeletePromotionCode(common.Id) returns (common.Empty);
+	//rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
+	//rpc GetPromotionCode(String) returns (PromotionCode);
+	//rpc ValidatePromotionCode(ValidatePCRequest) returns (ValidatePCResponse)
+	//rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
+	//rpc DeletePromotionCode(common.Id4) returns (common.Empty);
 }
 
 message PromotionCodes{
@@ -501,6 +495,12 @@ message PromotionCodes{
 	repeated PromotionCode promotionCodes = 2;
 	optional string anchor = 3;
 	optional int64 total = 4;
+}
+
+message PromotionCodeRequest {
+	optional common.Context ctx = 1;
+	optional string code = 2;
+	optional string account_id = 3;
 }
 
 message ListPromotionCodeRequest{

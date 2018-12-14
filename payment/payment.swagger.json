@@ -831,24 +831,6 @@
         }
       }
     },
-    "paymentCheckPromotionCodeRequest": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "status": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "error": {
-          "type": "string"
-        },
-        "promotioncode": {
-          "$ref": "#/definitions/paymentPromotionCode"
-        }
-      }
-    },
     "paymentComment": {
       "type": "object",
       "properties": {
@@ -929,15 +911,6 @@
         }
       }
     },
-    "paymentCreditCode": {
-      "type": "object",
-      "properties": {
-        "credit": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
     "paymentCurrency": {
       "type": "string",
       "enum": [
@@ -987,15 +960,6 @@
         "exchange_time": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "paymentFixedAmountPromotionCode": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "number",
-          "format": "float"
         }
       }
     },
@@ -1297,15 +1261,6 @@
         }
       }
     },
-    "paymentPercentPromotionCode": {
-      "type": "object",
-      "properties": {
-        "percent": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
     "paymentPlan": {
       "type": "object",
       "properties": {
@@ -1376,152 +1331,6 @@
           "items": {
             "$ref": "#/definitions/paymentPlan"
           }
-        }
-      }
-    },
-    "paymentPromotionCode": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "description": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "redeem_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "creator": {
-          "type": "string"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "code": {
-          "type": "string"
-        },
-        "data": {
-          "$ref": "#/definitions/paymentPromotionCodeData"
-        },
-        "start": {
-          "type": "string",
-          "format": "int64"
-        },
-        "end": {
-          "type": "string",
-          "format": "int64"
-        },
-        "for_plan": {
-          "type": "string"
-        },
-        "for_account_id": {
-          "type": "string"
-        },
-        "max_redemptions": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "addon": {
-          "type": "string"
-        },
-        "for_items": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "min_amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "max_amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "for_plans": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "for_account_ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "for_channels": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "is_deleted": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "for_number_of_agents": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "title": "repeated int32 for_number_of_agents = 31;"
-        }
-      }
-    },
-    "paymentPromotionCodeData": {
-      "type": "object",
-      "properties": {
-        "fixed_amount": {
-          "$ref": "#/definitions/paymentFixedAmountPromotionCode"
-        },
-        "percent": {
-          "$ref": "#/definitions/paymentPercentPromotionCode"
-        },
-        "credit": {
-          "$ref": "#/definitions/paymentCreditCode"
-        },
-        "referral": {
-          "$ref": "#/definitions/paymentReferralCreditCode"
-        }
-      }
-    },
-    "paymentPromotionCodes": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "promotionCodes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/paymentPromotionCode"
-          }
-        },
-        "anchor": {
-          "type": "string"
-        },
-        "total": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "paymentReferralCreditCode": {
-      "type": "object",
-      "properties": {
-        "referrer_id": {
-          "type": "string"
-        },
-        "credit": {
-          "type": "number",
-          "format": "float"
         }
       }
     },
