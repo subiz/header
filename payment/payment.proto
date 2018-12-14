@@ -514,7 +514,7 @@ message PromotionCodeResponse{
 	optional common.Context ctx = 1;
 	optional bool status = 2;
 	optional string error = 3;
-	optional PromotionCode promotioncode = 4;
+	optional PromotionCode promotionCode = 4;
 }
 
 message String {

@@ -1619,15 +1619,15 @@ func easyjson3258bd9eDecodeGitSubizNetHeaderPayment9(in *jlexer.Lexer, out *Prom
 				}
 				*out.Error = string(in.String())
 			}
-		case "promotioncode":
+		case "promotionCode":
 			if in.IsNull() {
 				in.Skip()
-				out.Promotioncode = nil
+				out.PromotionCode = nil
 			} else {
-				if out.Promotioncode == nil {
-					out.Promotioncode = new(PromotionCode)
+				if out.PromotionCode == nil {
+					out.PromotionCode = new(PromotionCode)
 				}
-				(*out.Promotioncode).UnmarshalEasyJSON(in)
+				(*out.PromotionCode).UnmarshalEasyJSON(in)
 			}
 		default:
 			in.SkipRecursive()
@@ -1673,15 +1673,15 @@ func easyjson3258bd9eEncodeGitSubizNetHeaderPayment9(out *jwriter.Writer, in Pro
 		}
 		out.String(string(*in.Error))
 	}
-	if in.Promotioncode != nil {
-		const prefix string = ",\"promotioncode\":"
+	if in.PromotionCode != nil {
+		const prefix string = ",\"promotionCode\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Promotioncode).MarshalEasyJSON(out)
+		(*in.PromotionCode).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

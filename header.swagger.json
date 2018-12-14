@@ -4181,7 +4181,7 @@
           "error": {
             "type": "string"
           },
-          "promotioncode": {
+          "promotionCode": {
             "$ref": "#/components/schemas/paymentPromotionCode"
           }
         }

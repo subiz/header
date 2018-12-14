@@ -1487,7 +1487,7 @@
         "error": {
           "type": "string"
         },
-        "promotioncode": {
+        "promotionCode": {
           "$ref": "#/definitions/paymentPromotionCode"
         }
       }
