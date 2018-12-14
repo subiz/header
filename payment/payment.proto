@@ -485,7 +485,7 @@ service PaymentMgr {
 	rpc ListLogs(ListLogsRequest) returns (Logs);
 	rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
 	rpc GetPromotionCode(String) returns (PromotionCode);
-	rpc AddPromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
+	rpc UsePromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
 	rpc ValidatePromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
 	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
 	rpc DeletePromotionCode(common.Id) returns (common.Empty);

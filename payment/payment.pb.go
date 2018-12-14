@@ -4217,7 +4217,7 @@ func init() {
 func init() { proto.RegisterFile("payment/payment.proto", fileDescriptor_66a39aceed8019db) }
 
 var fileDescriptor_66a39aceed8019db = []byte{
-	// 4064 bytes of a gzipped FileDescriptorProto
+	// 4065 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x5a, 0xcd, 0x8f, 0xdc, 0xc8,
 	0x75, 0x9f, 0xfe, 0x60, 0x7f, 0xbc, 0xfe, 0x18, 0x4e, 0x4d, 0x4b, 0xa2, 0x46, 0x96, 0x35, 0xe2,
 	0xee, 0x5a, 0x5a, 0x59, 0x2b, 0x2d, 0x24, 0x25, 0x8a, 0x91, 0xc0, 0x6b, 0x69, 0x34, 0x76, 0xc6,
@@ -4467,11 +4467,12 @@ var fileDescriptor_66a39aceed8019db = []byte{
 	0xf6, 0x3b, 0x04, 0xaa, 0xc7, 0xd0, 0x7b, 0xa5, 0xff, 0x2a, 0xf9, 0x12, 0x2f, 0xc6, 0x97, 0xb2,
 	0xe8, 0xcb, 0x47, 0x37, 0x0c, 0x67, 0x69, 0xfd, 0x88, 0x59, 0x05, 0x25, 0xe5, 0x4a, 0x4a, 0xb9,
 	0xf9, 0x89, 0xf1, 0x10, 0x76, 0x95, 0x0b, 0x94, 0x5e, 0x1c, 0xd6, 0x83, 0xbb, 0xbd, 0x0d, 0x74,
-	0xf6, 0xc7, 0x60, 0xfe, 0x4c, 0x94, 0x5e, 0x21, 0xca, 0x12, 0xdc, 0x38, 0xf8, 0x0b, 0x15, 0xd8,
-	0x0a, 0xb4, 0x9b, 0x1b, 0xd0, 0xa5, 0x3e, 0xc5, 0xf7, 0x37, 0x75, 0x6b, 0x10, 0xfc, 0x15, 0x5c,
-	0xf9, 0x8a, 0x4f, 0x7d, 0x6f, 0xe5, 0x60, 0xdf, 0x71, 0xde, 0x5f, 0xc0, 0xce, 0x0a, 0xc6, 0x67,
-	0xb7, 0x0b, 0xc2, 0x5e, 0x3b, 0xef, 0xb5, 0xf5, 0xf3, 0xc6, 0xb9, 0x48, 0x5a, 0x98, 0x72, 0x73,
-	0x24, 0xfd, 0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xee, 0x61, 0xb0, 0x54, 0xb6, 0x2f, 0x00, 0x00,
+	0xf6, 0xc7, 0x60, 0xfe, 0x4c, 0x94, 0x5e, 0x21, 0xca, 0x12, 0xdc, 0x38, 0xf8, 0x0b, 0x30, 0xbf,
+	0x8c, 0x4b, 0x1b, 0xb8, 0xb9, 0x01, 0x5d, 0xea, 0x53, 0x7c, 0x7f, 0x53, 0xb7, 0x06, 0xc1, 0x5f,
+	0xc1, 0x95, 0xaf, 0xf8, 0xd4, 0xf7, 0x56, 0x0e, 0xf6, 0x1d, 0xe7, 0xfd, 0x05, 0xec, 0xac, 0x60,
+	0x7c, 0x76, 0xbb, 0x20, 0xec, 0xb5, 0xf3, 0x5e, 0x5b, 0x3f, 0x6f, 0x9c, 0x8b, 0xa4, 0x85, 0x29,
+	0x37, 0x47, 0xd2, 0xff, 0x0b, 0x00, 0x00, 0xff, 0xff, 0x8e, 0x48, 0x5b, 0xbe, 0xb6, 0x2f, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -4641,7 +4642,7 @@ type PaymentMgrClient interface {
 	ListLogs(ctx context.Context, in *ListLogsRequest, opts ...grpc.CallOption) (*Logs, error)
 	CreatePromotionCode(ctx context.Context, in *PromotionCode, opts ...grpc.CallOption) (*PromotionCode, error)
 	GetPromotionCode(ctx context.Context, in *String, opts ...grpc.CallOption) (*PromotionCode, error)
-	AddPromotionCode(ctx context.Context, in *PromotionCodeRequest, opts ...grpc.CallOption) (*PromotionCodeResponse, error)
+	UsePromotionCode(ctx context.Context, in *PromotionCodeRequest, opts ...grpc.CallOption) (*PromotionCodeResponse, error)
 	ValidatePromotionCode(ctx context.Context, in *PromotionCodeRequest, opts ...grpc.CallOption) (*PromotionCodeResponse, error)
 	ListPromotionCode(ctx context.Context, in *ListPromotionCodeRequest, opts ...grpc.CallOption) (*PromotionCodes, error)
 	DeletePromotionCode(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
@@ -4880,9 +4881,9 @@ func (c *paymentMgrClient) GetPromotionCode(ctx context.Context, in *String, opt
 	return out, nil
 }
 
-func (c *paymentMgrClient) AddPromotionCode(ctx context.Context, in *PromotionCodeRequest, opts ...grpc.CallOption) (*PromotionCodeResponse, error) {
+func (c *paymentMgrClient) UsePromotionCode(ctx context.Context, in *PromotionCodeRequest, opts ...grpc.CallOption) (*PromotionCodeResponse, error) {
 	out := new(PromotionCodeResponse)
-	err := c.cc.Invoke(ctx, "/payment.PaymentMgr/AddPromotionCode", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/payment.PaymentMgr/UsePromotionCode", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -4943,7 +4944,7 @@ type PaymentMgrServer interface {
 	ListLogs(context.Context, *ListLogsRequest) (*Logs, error)
 	CreatePromotionCode(context.Context, *PromotionCode) (*PromotionCode, error)
 	GetPromotionCode(context.Context, *String) (*PromotionCode, error)
-	AddPromotionCode(context.Context, *PromotionCodeRequest) (*PromotionCodeResponse, error)
+	UsePromotionCode(context.Context, *PromotionCodeRequest) (*PromotionCodeResponse, error)
 	ValidatePromotionCode(context.Context, *PromotionCodeRequest) (*PromotionCodeResponse, error)
 	ListPromotionCode(context.Context, *ListPromotionCodeRequest) (*PromotionCodes, error)
 	DeletePromotionCode(context.Context, *common.Id) (*common.Empty, error)
@@ -5403,20 +5404,20 @@ func _PaymentMgr_GetPromotionCode_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentMgr_AddPromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PaymentMgr_UsePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PromotionCodeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentMgrServer).AddPromotionCode(ctx, in)
+		return srv.(PaymentMgrServer).UsePromotionCode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/payment.PaymentMgr/AddPromotionCode",
+		FullMethod: "/payment.PaymentMgr/UsePromotionCode",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentMgrServer).AddPromotionCode(ctx, req.(*PromotionCodeRequest))
+		return srv.(PaymentMgrServer).UsePromotionCode(ctx, req.(*PromotionCodeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5580,8 +5581,8 @@ var _PaymentMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _PaymentMgr_GetPromotionCode_Handler,
 		},
 		{
-			MethodName: "AddPromotionCode",
-			Handler:    _PaymentMgr_AddPromotionCode_Handler,
+			MethodName: "UsePromotionCode",
+			Handler:    _PaymentMgr_UsePromotionCode_Handler,
 		},
 		{
 			MethodName: "ValidatePromotionCode",
