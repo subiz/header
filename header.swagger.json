@@ -1810,6 +1810,32 @@
           }
         }
       },
+      "conversationAutomationCredit": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "remaining_in_month": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "conversationAutomationCredits": {
+        "type": "object",
+        "properties": {
+          "credits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/conversationAutomationCredit"
+            }
+          }
+        }
+      },
       "conversationAvailabilityCheckResult": {
         "type": "object",
         "properties": {

@@ -866,6 +866,38 @@
         }
       }
     },
+    "conversationAutomationCredit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "remaining_in_month": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAutomationCredits": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "credits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAutomationCredit"
+          }
+        }
+      }
+    },
     "conversationAvailabilityCheckResult": {
       "type": "object",
       "properties": {
