@@ -3516,16 +3516,6 @@ func easyjson2c075341DecodeGitSubizNetHeaderUser21(in *jlexer.Lexer, out *Sessio
 				}
 				*out.Started = int64(in.Int64())
 			}
-		case "start_event":
-			if in.IsNull() {
-				in.Skip()
-				out.StartEvent = nil
-			} else {
-				if out.StartEvent == nil {
-					out.StartEvent = new(string)
-				}
-				*out.StartEvent = string(in.String())
-			}
 		case "tracked":
 			if in.IsNull() {
 				in.Skip()
@@ -3536,15 +3526,15 @@ func easyjson2c075341DecodeGitSubizNetHeaderUser21(in *jlexer.Lexer, out *Sessio
 				}
 				*out.Tracked = int64(in.Int64())
 			}
-		case "latest_event":
+		case "total":
 			if in.IsNull() {
 				in.Skip()
-				out.LatestEvent = nil
+				out.Total = nil
 			} else {
-				if out.LatestEvent == nil {
-					out.LatestEvent = new(string)
+				if out.Total == nil {
+					out.Total = new(int32)
 				}
-				*out.LatestEvent = string(in.String())
+				*out.Total = int32(in.Int32())
 			}
 		default:
 			in.SkipRecursive()
@@ -3590,16 +3580,6 @@ func easyjson2c075341EncodeGitSubizNetHeaderUser21(out *jwriter.Writer, in Sessi
 		}
 		out.Int64(int64(*in.Started))
 	}
-	if in.StartEvent != nil {
-		const prefix string = ",\"start_event\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.StartEvent))
-	}
 	if in.Tracked != nil {
 		const prefix string = ",\"tracked\":"
 		if first {
@@ -3610,15 +3590,15 @@ func easyjson2c075341EncodeGitSubizNetHeaderUser21(out *jwriter.Writer, in Sessi
 		}
 		out.Int64(int64(*in.Tracked))
 	}
-	if in.LatestEvent != nil {
-		const prefix string = ",\"latest_event\":"
+	if in.Total != nil {
+		const prefix string = ",\"total\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.LatestEvent))
+		out.Int32(int32(*in.Total))
 	}
 	out.RawByte('}')
 }

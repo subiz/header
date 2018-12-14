@@ -136,10 +136,8 @@ message SessionTracking {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional int64 started = 4;
-	optional string start_event = 5;
-
 	optional int64 tracked = 6;
-	optional string latest_event = 7;
+	optional int32 total = 7; // number of session
 }
 
 message Trace {
