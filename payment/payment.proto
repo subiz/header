@@ -483,11 +483,12 @@ service PaymentMgr {
 	rpc TransferMoney(PayRequest) returns (Bill);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ListLogs(ListLogsRequest) returns (Logs);
-	//rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
-	//rpc GetPromotionCode(String) returns (PromotionCode);
-	//rpc ValidatePromotionCode(ValidatePCRequest) returns (ValidatePCResponse)
-	//rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
-	//rpc DeletePromotionCode(common.Id4) returns (common.Empty);
+	rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
+	rpc GetPromotionCode(String) returns (PromotionCode);
+	rpc AddPromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
+	rpc ValidatePromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
+	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
+	rpc DeletePromotionCode(common.Id) returns (common.Empty);
 }
 
 message PromotionCodes{
@@ -509,7 +510,7 @@ message ListPromotionCodeRequest{
 	optional int32 limit = 4;
 }
 
-message CheckPromotionCodeRequest{
+message PromotionCodeResponse{
 	optional common.Context ctx = 1;
 	optional bool status = 2;
 	optional string error = 3;
