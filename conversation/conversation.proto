@@ -1109,5 +1109,5 @@ message AutomationCredits {
 }
 
 service AutomationCreditReportMgr {
-	rpc GetRemainingAutomationCredits(common.Id) returns (AutomationCredits);
+	rpc GetRemainingAutomationCredits(common.Empty) returns (AutomationCredits);
 }
