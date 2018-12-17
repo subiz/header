@@ -860,6 +860,10 @@
         "agent_preference": {
           "type": "integer",
           "format": "int32"
+        },
+        "promotion_code": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

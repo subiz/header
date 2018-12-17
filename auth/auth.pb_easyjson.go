@@ -1178,6 +1178,8 @@ func easyjsonA8fbe0d0DecodeGitSubizNetHeaderAuth10(in *jlexer.Lexer, out *Permis
 			out.AgentPresence = int32(in.Int32())
 		case "agent_preference":
 			out.AgentPreference = int32(in.Int32())
+		case "promotion_code":
+			out.PromotionCode = int32(in.Int32())
 		default:
 			in.SkipRecursive()
 		}
@@ -1551,6 +1553,16 @@ func easyjsonA8fbe0d0EncodeGitSubizNetHeaderAuth10(out *jwriter.Writer, in Permi
 			out.RawString(prefix)
 		}
 		out.Int32(int32(in.AgentPreference))
+	}
+	if in.PromotionCode != 0 {
+		const prefix string = ",\"promotion_code\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.PromotionCode))
 	}
 	out.RawByte('}')
 }
