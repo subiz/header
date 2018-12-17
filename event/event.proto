@@ -137,6 +137,7 @@ enum EventType {
 	user_attribute_created = 51;
 	user_attribute_updated = 52;
 	user_attribute_deleted = 55;
+	automation_credit_limited = 70;
 }
 
 enum ConvoType {

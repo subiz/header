@@ -1090,24 +1090,3 @@ message AvgResolveTimeRequest {
 message AvgResolveTimeResponse {
 	optional double avg_resolve_sec = 2;
 }
-
-message AutomationCredit {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	enum Type {
-		message = 0;
-		email = 1;
-		webhook = 2;
-	}
-	optional string type = 3;
-	optional uint32 remaining_in_month = 4;
-}
-
-message AutomationCredits {
-	optional common.Context ctx = 1;
-	repeated AutomationCredit credits = 2;
-}
-
-service AutomationCreditReportMgr {
-	rpc GetRemainingAutomationCredits(common.Empty) returns (AutomationCredits);
-}
