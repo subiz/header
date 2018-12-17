@@ -180,7 +180,7 @@ message Invoice {
 		open = 1;
 		overdue = 2;
 		paid = 3;
-		voided = 4;
+		void = 4;
 		queueing = 5;
 	}
 	optional string state = 10;
