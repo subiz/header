@@ -4366,10 +4366,6 @@
           "fired_in_month": {
             "type": "integer",
             "format": "int64"
-          },
-          "remaining_in_month": {
-            "type": "integer",
-            "format": "int64"
           }
         }
       },

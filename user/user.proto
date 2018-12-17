@@ -863,7 +863,6 @@ message AutomationCredit {
 	optional string type = 3;
 	optional uint32 credit_in_month = 4;
 	optional uint32 fired_in_month = 5;
-	optional uint32 remaining_in_month = 6;
 }
 
 message AutomationCredits {
@@ -871,6 +870,6 @@ message AutomationCredits {
 	repeated AutomationCredit automation_credits = 2;
 }
 
-service AutomationCreditReportMgr {
-	rpc GetRemainingAutomationCredits(common.Empty) returns (AutomationCredits);
+service AutomationCreditMgr {
+	rpc ListAutomationCredits(common.Empty) returns (AutomationCredits);
 }
