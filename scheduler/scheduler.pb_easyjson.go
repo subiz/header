@@ -17,7 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjsonFa65a999DecodeGitSubizNetHeaderScheduler(in *jlexer.Lexer, out *Task) {
+func easyjsonFa65a999DecodeGithubComSubizHeaderScheduler(in *jlexer.Lexer, out *Task) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -67,7 +67,7 @@ func easyjsonFa65a999DecodeGitSubizNetHeaderScheduler(in *jlexer.Lexer, out *Tas
 		in.Consumed()
 	}
 }
-func easyjsonFa65a999EncodeGitSubizNetHeaderScheduler(out *jwriter.Writer, in Task) {
+func easyjsonFa65a999EncodeGithubComSubizHeaderScheduler(out *jwriter.Writer, in Task) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -157,27 +157,27 @@ func easyjsonFa65a999EncodeGitSubizNetHeaderScheduler(out *jwriter.Writer, in Ta
 // MarshalJSON supports json.Marshaler interface
 func (v Task) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonFa65a999EncodeGitSubizNetHeaderScheduler(&w, v)
+	easyjsonFa65a999EncodeGithubComSubizHeaderScheduler(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Task) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonFa65a999EncodeGitSubizNetHeaderScheduler(w, v)
+	easyjsonFa65a999EncodeGithubComSubizHeaderScheduler(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Task) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonFa65a999DecodeGitSubizNetHeaderScheduler(&r, v)
+	easyjsonFa65a999DecodeGithubComSubizHeaderScheduler(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Task) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonFa65a999DecodeGitSubizNetHeaderScheduler(l, v)
+	easyjsonFa65a999DecodeGithubComSubizHeaderScheduler(l, v)
 }
-func easyjsonFa65a999DecodeGitSubizNetHeaderScheduler1(in *jlexer.Lexer, out *Id) {
+func easyjsonFa65a999DecodeGithubComSubizHeaderScheduler1(in *jlexer.Lexer, out *Id) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -210,7 +210,7 @@ func easyjsonFa65a999DecodeGitSubizNetHeaderScheduler1(in *jlexer.Lexer, out *Id
 		in.Consumed()
 	}
 }
-func easyjsonFa65a999EncodeGitSubizNetHeaderScheduler1(out *jwriter.Writer, in Id) {
+func easyjsonFa65a999EncodeGithubComSubizHeaderScheduler1(out *jwriter.Writer, in Id) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -240,23 +240,23 @@ func easyjsonFa65a999EncodeGitSubizNetHeaderScheduler1(out *jwriter.Writer, in I
 // MarshalJSON supports json.Marshaler interface
 func (v Id) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonFa65a999EncodeGitSubizNetHeaderScheduler1(&w, v)
+	easyjsonFa65a999EncodeGithubComSubizHeaderScheduler1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Id) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonFa65a999EncodeGitSubizNetHeaderScheduler1(w, v)
+	easyjsonFa65a999EncodeGithubComSubizHeaderScheduler1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Id) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonFa65a999DecodeGitSubizNetHeaderScheduler1(&r, v)
+	easyjsonFa65a999DecodeGithubComSubizHeaderScheduler1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Id) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonFa65a999DecodeGitSubizNetHeaderScheduler1(l, v)
+	easyjsonFa65a999DecodeGithubComSubizHeaderScheduler1(l, v)
 }

@@ -2,8 +2,6 @@ syntax = "proto2";
 
 package mailkon;
 
-//import "git.subiz.net/header/common/common.proto";
-
 message Address {
 	optional string account_id = 1;
 	optional string address = 2;

@@ -1,7 +1,7 @@
 syntax = "proto2";
 
-import "git.subiz.net/header/common/common.proto";
-import "git.subiz.net/header/conversation/conversation.proto";
+import "github.com/subiz/header/common/common.proto";
+import "github.com/subiz/header/conversation/conversation.proto";
 
 package content;
 

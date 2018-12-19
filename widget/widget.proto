@@ -2,9 +2,9 @@ syntax = "proto2";
 
 package widget;
 
-import "git.subiz.net/header/account/account.proto";
-import "git.subiz.net/header/common/common.proto";
-import "git.subiz.net/header/user/user.proto";
+import "github.com/subiz/header/account/account.proto";
+import "github.com/subiz/header/common/common.proto";
+import "github.com/subiz/header/user/user.proto";
 
 message AllType {
 	optional Theme theme = 2;

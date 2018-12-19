@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package user;
 
-import "git.subiz.net/header/common/common.proto";
+import "github.com/subiz/header/common/common.proto";
 
 service UseDoc {
 	rpc f1(MaskResponse) returns (MaskResponse) {}

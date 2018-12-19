@@ -4,10 +4,10 @@ package email
 
 import (
 	json "encoding/json"
-	common "git.subiz.net/header/common"
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
+	common "github.com/subiz/header/common"
 )
 
 // suppress unused package warning
@@ -18,7 +18,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson210eb774DecodeGitSubizNetHeaderEmail(in *jlexer.Lexer, out *Email) {
+func easyjson210eb774DecodeGithubComSubizHeaderEmail(in *jlexer.Lexer, out *Email) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -183,7 +183,7 @@ func easyjson210eb774DecodeGitSubizNetHeaderEmail(in *jlexer.Lexer, out *Email) 
 		in.Consumed()
 	}
 }
-func easyjson210eb774EncodeGitSubizNetHeaderEmail(out *jwriter.Writer, in Email) {
+func easyjson210eb774EncodeGithubComSubizHeaderEmail(out *jwriter.Writer, in Email) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -337,27 +337,27 @@ func easyjson210eb774EncodeGitSubizNetHeaderEmail(out *jwriter.Writer, in Email)
 // MarshalJSON supports json.Marshaler interface
 func (v Email) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson210eb774EncodeGitSubizNetHeaderEmail(&w, v)
+	easyjson210eb774EncodeGithubComSubizHeaderEmail(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Email) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson210eb774EncodeGitSubizNetHeaderEmail(w, v)
+	easyjson210eb774EncodeGithubComSubizHeaderEmail(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Email) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson210eb774DecodeGitSubizNetHeaderEmail(&r, v)
+	easyjson210eb774DecodeGithubComSubizHeaderEmail(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Email) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson210eb774DecodeGitSubizNetHeaderEmail(l, v)
+	easyjson210eb774DecodeGithubComSubizHeaderEmail(l, v)
 }
-func easyjson210eb774DecodeGitSubizNetHeaderEmail1(in *jlexer.Lexer, out *Attachment) {
+func easyjson210eb774DecodeGithubComSubizHeaderEmail1(in *jlexer.Lexer, out *Attachment) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -392,7 +392,7 @@ func easyjson210eb774DecodeGitSubizNetHeaderEmail1(in *jlexer.Lexer, out *Attach
 		in.Consumed()
 	}
 }
-func easyjson210eb774EncodeGitSubizNetHeaderEmail1(out *jwriter.Writer, in Attachment) {
+func easyjson210eb774EncodeGithubComSubizHeaderEmail1(out *jwriter.Writer, in Attachment) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -432,23 +432,23 @@ func easyjson210eb774EncodeGitSubizNetHeaderEmail1(out *jwriter.Writer, in Attac
 // MarshalJSON supports json.Marshaler interface
 func (v Attachment) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson210eb774EncodeGitSubizNetHeaderEmail1(&w, v)
+	easyjson210eb774EncodeGithubComSubizHeaderEmail1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Attachment) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson210eb774EncodeGitSubizNetHeaderEmail1(w, v)
+	easyjson210eb774EncodeGithubComSubizHeaderEmail1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Attachment) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson210eb774DecodeGitSubizNetHeaderEmail1(&r, v)
+	easyjson210eb774DecodeGithubComSubizHeaderEmail1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Attachment) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson210eb774DecodeGitSubizNetHeaderEmail1(l, v)
+	easyjson210eb774DecodeGithubComSubizHeaderEmail1(l, v)
 }

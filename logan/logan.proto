@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package logan;
 
-import "git.subiz.net/header/common/common.proto";
+import "github.com/subiz/header/common/common.proto";
 
 message Debug {
 	bytes stack_trace = 5;

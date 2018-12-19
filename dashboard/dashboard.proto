@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package dashboard;
 
-import "git.subiz.net/header/common/common.proto";
-import "git.subiz.net/header/account/account.proto";
+import "github.com/subiz/header/common/common.proto";
+import "github.com/subiz/header/account/account.proto";
 
 message DashboardAgent {
 	string account_id = 2;

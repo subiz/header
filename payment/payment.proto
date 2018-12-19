@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package payment;
 
-import "git.subiz.net/header/common/common.proto";
+import "github.com/subiz/header/common/common.proto";
 
 enum Currency {
 	usd = 0;

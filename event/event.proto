@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package event;
 
-import "git.subiz.net/header/common/common.proto";
-import "git.subiz.net/header/account/account.proto";
-import "git.subiz.net/header/conversation/conversation.proto";
-import "git.subiz.net/header/content/content.proto";
-import "git.subiz.net/header/user/user.proto";
-import "git.subiz.net/header/notibox/notibox.proto";
-import "git.subiz.net/header/payment/payment.proto";
+import "github.com/subiz/header/common/common.proto";
+import "github.com/subiz/header/account/account.proto";
+import "github.com/subiz/header/conversation/conversation.proto";
+import "github.com/subiz/header/content/content.proto";
+import "github.com/subiz/header/user/user.proto";
+import "github.com/subiz/header/notibox/notibox.proto";
+import "github.com/subiz/header/payment/payment.proto";
 
 message RawEventCreatedPayload {
 	common.Context ctx = 1;
