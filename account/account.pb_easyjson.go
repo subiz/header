@@ -5582,6 +5582,16 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAccount22(in *jlexer.Lexer, out *
 				}
 				*out.CountryCode = string(in.String())
 			}
+		case "referrer_from":
+			if in.IsNull() {
+				in.Skip()
+				out.ReferrerFrom = nil
+			} else {
+				if out.ReferrerFrom == nil {
+					out.ReferrerFrom = new(string)
+				}
+				*out.ReferrerFrom = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -5705,6 +5715,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAccount22(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.String(string(*in.CountryCode))
+	}
+	if in.ReferrerFrom != nil {
+		const prefix string = ",\"referrer_from\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ReferrerFrom))
 	}
 	out.RawByte('}')
 }
@@ -9903,16 +9923,6 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAccount32(in *jlexer.Lexer, out *
 				}
 				*out.Slogan = string(in.String())
 			}
-		case "referer_id":
-			if in.IsNull() {
-				in.Skip()
-				out.RefererId = nil
-			} else {
-				if out.RefererId == nil {
-					out.RefererId = new(string)
-				}
-				*out.RefererId = string(in.String())
-			}
 		case "city":
 			if in.IsNull() {
 				in.Skip()
@@ -10003,16 +10013,6 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAccount32(in *jlexer.Lexer, out *
 				}
 				*out.Lang = string(in.String())
 			}
-		case "referer_from":
-			if in.IsNull() {
-				in.Skip()
-				out.RefererFrom = nil
-			} else {
-				if out.RefererFrom == nil {
-					out.RefererFrom = new(string)
-				}
-				*out.RefererFrom = string(in.String())
-			}
 		case "timezone":
 			if in.IsNull() {
 				in.Skip()
@@ -10072,6 +10072,16 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAccount32(in *jlexer.Lexer, out *
 					out.BusinessHours = new(BusinessHours)
 				}
 				(*out.BusinessHours).UnmarshalEasyJSON(in)
+			}
+		case "referrer_from":
+			if in.IsNull() {
+				in.Skip()
+				out.ReferrerFrom = nil
+			} else {
+				if out.ReferrerFrom == nil {
+					out.ReferrerFrom = new(string)
+				}
+				*out.ReferrerFrom = string(in.String())
 			}
 		default:
 			in.SkipRecursive()
@@ -10187,16 +10197,6 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAccount32(out *jwriter.Writer, in
 		}
 		out.String(string(*in.Slogan))
 	}
-	if in.RefererId != nil {
-		const prefix string = ",\"referer_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.RefererId))
-	}
 	if in.City != nil {
 		const prefix string = ",\"city\":"
 		if first {
@@ -10287,16 +10287,6 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAccount32(out *jwriter.Writer, in
 		}
 		out.String(string(*in.Lang))
 	}
-	if in.RefererFrom != nil {
-		const prefix string = ",\"referer_from\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.RefererFrom))
-	}
 	if in.Timezone != nil {
 		const prefix string = ",\"timezone\":"
 		if first {
@@ -10356,6 +10346,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAccount32(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		(*in.BusinessHours).MarshalEasyJSON(out)
+	}
+	if in.ReferrerFrom != nil {
+		const prefix string = ",\"referrer_from\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ReferrerFrom))
 	}
 	out.RawByte('}')
 }

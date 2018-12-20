@@ -132,9 +132,6 @@
         "slogan": {
           "type": "string"
         },
-        "referer_id": {
-          "type": "string"
-        },
         "city": {
           "type": "string"
         },
@@ -163,11 +160,9 @@
         "lang": {
           "type": "string"
         },
-        "referer_from": {
-          "type": "string"
-        },
         "timezone": {
-          "type": "string"
+          "type": "string",
+          "title": "optional string referer_from = 24;"
         },
         "limit": {
           "$ref": "#/definitions/paymentLimit"
@@ -184,6 +179,9 @@
         },
         "business_hours": {
           "$ref": "#/definitions/accountBusinessHours"
+        },
+        "referrer_from": {
+          "type": "string"
         }
       }
     },
@@ -412,6 +410,9 @@
           "type": "string"
         },
         "country_code": {
+          "type": "string"
+        },
+        "referrer_from": {
           "type": "string"
         }
       }

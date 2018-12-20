@@ -777,6 +777,26 @@
         }
       }
     },
+    "paymentBankInfo": {
+      "type": "object",
+      "properties": {
+        "bank_name": {
+          "type": "string"
+        },
+        "account_number": {
+          "type": "string"
+        },
+        "card_number": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "fullname": {
+          "type": "string"
+        }
+      }
+    },
     "paymentBill": {
       "type": "object",
       "properties": {
@@ -1203,6 +1223,118 @@
         }
       }
     },
+    "paymentLogAccountInvited": {
+      "type": "object",
+      "properties": {
+        "referrer_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentLogAccountInviteds": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "log_account_inviteds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLogAccountInvited"
+          }
+        }
+      }
+    },
+    "paymentLogBillByAccountInvited": {
+      "type": "object",
+      "properties": {
+        "referrer_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "commission_rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bill_id": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentLogBillByAccountInviteds": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "log_bill_by_account_inviteds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLogBillByAccountInvited"
+          }
+        }
+      }
+    },
+    "paymentLogPayForAgentReferrer": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "referrer_id": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "transation_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentLogPayForAgentReferrers": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "log_pay_for_agent_referrers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLogPayForAgentReferrer"
+          }
+        }
+      }
+    },
     "paymentLogs": {
       "type": "object",
       "properties": {
@@ -1526,6 +1658,43 @@
         "credit": {
           "type": "number",
           "format": "float"
+        }
+      }
+    },
+    "paymentReferralProgram": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "referrer_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "earning": {
+          "type": "number",
+          "format": "float"
+        },
+        "commission_rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "bank_info": {
+          "$ref": "#/definitions/paymentBankInfo"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
