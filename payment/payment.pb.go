@@ -4849,7 +4849,7 @@ func init() {
 func init() { proto.RegisterFile("payment/payment.proto", fileDescriptor_66a39aceed8019db) }
 
 var fileDescriptor_66a39aceed8019db = []byte{
-	// 4586 bytes of a gzipped FileDescriptorProto
+	// 4584 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x7b, 0xcd, 0x6f, 0x23, 0x47,
 	0x76, 0xb8, 0xc8, 0x66, 0xf3, 0xe3, 0xf1, 0x43, 0xad, 0x12, 0x25, 0xf5, 0x48, 0x1e, 0x8f, 0xa6,
 	0x6d, 0xaf, 0xc7, 0x63, 0x7b, 0xc6, 0x98, 0xf1, 0xef, 0x37, 0xd9, 0x24, 0x58, 0xef, 0x48, 0x33,
@@ -5135,8 +5135,8 @@ var fileDescriptor_66a39aceed8019db = []byte{
 	0xd2, 0x4b, 0x05, 0x7d, 0x91, 0xdb, 0xd7, 0x95, 0xcc, 0x63, 0xf2, 0x09, 0xec, 0x49, 0x67, 0xb1,
 	0x50, 0x19, 0xd7, 0x57, 0x3a, 0xbc, 0xa6, 0x18, 0x1c, 0x93, 0xdf, 0x06, 0xf2, 0x09, 0x4b, 0x8a,
 	0x87, 0xd6, 0xd7, 0x58, 0x4d, 0x9a, 0xdf, 0x07, 0x47, 0xd0, 0xf9, 0x88, 0x06, 0xcf, 0x25, 0x86,
-	0xcf, 0x42, 0xb5, 0xf6, 0x22, 0xd1, 0x0b, 0xd7, 0x7b, 0xab, 0x57, 0xfe, 0xdf, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0x01, 0x47, 0xd5, 0x2f, 0x31, 0x38, 0x00, 0x00,
+	0xcf, 0xc2, 0xd5, 0x44, 0x2f, 0x5c, 0xef, 0xad, 0x5e, 0xf9, 0x7f, 0x03, 0x00, 0x00, 0xff, 0xff,
+	0x5b, 0xe3, 0xe1, 0x2b, 0x31, 0x38, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -5315,7 +5315,7 @@ type PaymentMgrClient interface {
 	ListBillByAccountInvited(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*LogBillByAccountInviteds, error)
 	ListPayForAgentReferrer(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*LogPayForAgentReferrers, error)
 	GetReferralProgram(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*ReferralProgram, error)
-	UpdateBankAccountToReferrerProgram(ctx context.Context, in *BankInfoRequest, opts ...grpc.CallOption) (*ReferralProgram, error)
+	UpdateBankAccountToReferralProgram(ctx context.Context, in *BankInfoRequest, opts ...grpc.CallOption) (*ReferralProgram, error)
 }
 
 type paymentMgrClient struct {
@@ -5632,9 +5632,9 @@ func (c *paymentMgrClient) GetReferralProgram(ctx context.Context, in *common.Id
 	return out, nil
 }
 
-func (c *paymentMgrClient) UpdateBankAccountToReferrerProgram(ctx context.Context, in *BankInfoRequest, opts ...grpc.CallOption) (*ReferralProgram, error) {
+func (c *paymentMgrClient) UpdateBankAccountToReferralProgram(ctx context.Context, in *BankInfoRequest, opts ...grpc.CallOption) (*ReferralProgram, error) {
 	out := new(ReferralProgram)
-	err := c.cc.Invoke(ctx, "/payment.PaymentMgr/UpdateBankAccountToReferrerProgram", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/payment.PaymentMgr/UpdateBankAccountToReferralProgram", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -5677,7 +5677,7 @@ type PaymentMgrServer interface {
 	ListBillByAccountInvited(context.Context, *common.Id) (*LogBillByAccountInviteds, error)
 	ListPayForAgentReferrer(context.Context, *common.Id) (*LogPayForAgentReferrers, error)
 	GetReferralProgram(context.Context, *common.Id) (*ReferralProgram, error)
-	UpdateBankAccountToReferrerProgram(context.Context, *BankInfoRequest) (*ReferralProgram, error)
+	UpdateBankAccountToReferralProgram(context.Context, *BankInfoRequest) (*ReferralProgram, error)
 }
 
 func RegisterPaymentMgrServer(s *grpc.Server, srv PaymentMgrServer) {
@@ -6296,20 +6296,20 @@ func _PaymentMgr_GetReferralProgram_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentMgr_UpdateBankAccountToReferrerProgram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PaymentMgr_UpdateBankAccountToReferralProgram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BankInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PaymentMgrServer).UpdateBankAccountToReferrerProgram(ctx, in)
+		return srv.(PaymentMgrServer).UpdateBankAccountToReferralProgram(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/payment.PaymentMgr/UpdateBankAccountToReferrerProgram",
+		FullMethod: "/payment.PaymentMgr/UpdateBankAccountToReferralProgram",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentMgrServer).UpdateBankAccountToReferrerProgram(ctx, req.(*BankInfoRequest))
+		return srv.(PaymentMgrServer).UpdateBankAccountToReferralProgram(ctx, req.(*BankInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6455,8 +6455,8 @@ var _PaymentMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _PaymentMgr_GetReferralProgram_Handler,
 		},
 		{
-			MethodName: "UpdateBankAccountToReferrerProgram",
-			Handler:    _PaymentMgr_UpdateBankAccountToReferrerProgram_Handler,
+			MethodName: "UpdateBankAccountToReferralProgram",
+			Handler:    _PaymentMgr_UpdateBankAccountToReferralProgram_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
