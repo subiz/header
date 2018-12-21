@@ -566,6 +566,7 @@ service PaymentMgr {
 	rpc ListPayForAgentReferrer(common.Id) returns (LogPayForAgentReferrers);
 	rpc GetReferralProgram(common.Id) returns (ReferralProgram);
 	rpc UpdateBankAccountToReferralProgram(BankInfoRequest) returns (ReferralProgram);
+	rpc PayForAgentReferrer(LogPayForAgentReferrer) returns (LogPayForAgentReferrer);
 }
 
 message PromotionCodes{
