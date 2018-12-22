@@ -3612,22 +3612,46 @@
           }
         }
       },
-      "paymentBankInfo": {
+      "paymentAgentReferInfo": {
         "type": "object",
         "properties": {
+          "agent_id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "earning": {
+            "type": "number",
+            "format": "float"
+          },
+          "commission_rate": {
+            "type": "number",
+            "format": "float"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
           "bank_name": {
             "type": "string"
           },
-          "account_number": {
+          "bank_account_number": {
             "type": "string"
           },
-          "card_number": {
+          "bank_card_number": {
             "type": "string"
           },
-          "branch": {
+          "bank_branch": {
             "type": "string"
           },
-          "fullname": {
+          "bank_fullname": {
+            "type": "string"
+          },
+          "referrer_id": {
             "type": "string"
           }
         }
@@ -3934,6 +3958,12 @@
           "created": {
             "type": "integer",
             "format": "int64"
+          },
+          "referrer_account_id": {
+            "type": "string"
+          },
+          "referrer_agent_id": {
+            "type": "string"
           }
         }
       },
@@ -3975,6 +4005,12 @@
           "year": {
             "type": "integer",
             "format": "int32"
+          },
+          "referrer_account_id": {
+            "type": "string"
+          },
+          "referrer_agent_id": {
+            "type": "string"
           }
         }
       },
@@ -4006,7 +4042,10 @@
             "type": "integer",
             "format": "int64"
           },
-          "creator": {
+          "referrer_account_id": {
+            "type": "string"
+          },
+          "referrer_agent_id": {
             "type": "string"
           }
         }
@@ -4312,40 +4351,6 @@
           "credit": {
             "type": "number",
             "format": "float"
-          }
-        }
-      },
-      "paymentReferralProgram": {
-        "type": "object",
-        "properties": {
-          "referrer_id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "status": {
-            "type": "boolean",
-            "format": "boolean"
-          },
-          "earning": {
-            "type": "number",
-            "format": "float"
-          },
-          "commission_rate": {
-            "type": "number",
-            "format": "float"
-          },
-          "bank_info": {
-            "$ref": "#/components/schemas/paymentBankInfo"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "updated": {
-            "type": "integer",
-            "format": "int64"
           }
         }
       },

@@ -333,41 +333,33 @@ message LogPromotionCodeUsed {
 	optional int64 created = 3;
 }
 
-message ReferralProgram {
+message AgentReferInfo {
 	optional common.Context ctx = 1;
-  optional string referrer_id = 2; // is agent_id
+  optional string agent_id = 2; // is referrer_id
 	optional string account_id = 3;
-	optional bool status = 5;
+	enum Status {
+		active = 0; // duoc phep refer nguoi khac
+		inactive = 1;
+  }
+	optional string status = 5;
 	optional float earning = 6;
 	optional float commission_rate = 7;
-	optional BankInfo bank_info = 8;
 	optional int64 created = 9;
-	optional int64 updated = 10;
-}
 
-message BankInfoRequest {
-	optional common.Context ctx = 1;
-	optional string referrer_id = 2;
-	optional string bank_name = 3;
-  optional string account_number = 4;
-  optional string card_number = 5;
-  optional string branch = 6;
-  optional string fullname = 7;
-
-}
-
-message BankInfo{
-  optional string bank_name = 1;
-  optional string account_number = 2;
-  optional string card_number = 3;
-  optional string branch = 4;
-  optional string fullname = 5;
+	optional string bank_name = 11;
+  optional string bank_account_number = 12;
+  optional string bank_card_number = 13;
+  optional string bank_branch = 14;
+  optional string bank_fullname = 15;
+	optional string referrer_id = 16;
 }
 
 message LogAccountReferred {
   optional string referrer_id = 1;
 	optional string account_id = 2;
 	optional int64 created = 3;
+  optional string referrer_account_id = 4;
+	optional string referrer_agent_id = 5;
 }
 
 message LogAccountReferreds{
@@ -383,6 +375,8 @@ message LogBillByAccountReferred {
 	optional int64 created = 5;
 	optional string bill_id = 6;
 	optional int32 year = 7;
+  optional string referrer_account_id = 8;
+	optional string referrer_agent_id = 9;
 }
 
 message LogBillByAccountReferreds {
@@ -396,7 +390,8 @@ message LogPaidForAgentReferrer {
 	optional float amount = 3;
 	optional string transation_id = 4;
 	optional int64 created = 5;
-	optional string creator = 6;
+  optional string referrer_account_id = 6;
+	optional string referrer_agent_id = 7;
 }
 
 message LogPaidForAgentReferrers {
@@ -560,12 +555,12 @@ service PaymentMgr {
 	rpc ValidatePromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
 	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
 	rpc DeletePromotionCode(common.Id) returns (common.Empty);
-	rpc UpdateReferralProgram(ReferralProgram) returns (ReferralProgram);
-	rpc ListAccountReferredByReferrerId(common.Id) returns (LogAccountReferreds);
+
+	rpc GetAgentReferInfo(common.Id) returns (AgentReferInfo);
+  rpc UpdateAgentReferInfo(AgentReferInfo) returns (AgentReferInfo);
+	rpc ListAccountReferred(common.Id) returns (LogAccountReferreds);
   rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
 	rpc ListPaidForAgentReferrer(common.Id) returns (LogPaidForAgentReferrers);
-	rpc GetReferralProgram(common.Id) returns (ReferralProgram);
-	rpc UpdateBankAccountForReferrer(BankInfoRequest) returns (ReferralProgram);
 	rpc PaidForAgentReferrer(LogPaidForAgentReferrer) returns (common.Empty);
 }
 
