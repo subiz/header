@@ -364,18 +364,18 @@ message BankInfo{
   optional string fullname = 5;
 }
 
-message LogAccountInvited {
+message LogAccountReferred {
   optional string referrer_id = 1;
 	optional string account_id = 2;
 	optional int64 created = 3;
 }
 
-message LogAccountInviteds{
+message LogAccountReferreds{
   optional common.Context ctx = 1;
-	repeated LogAccountInvited log_account_inviteds = 2;
+	repeated LogAccountReferred log_account_referreds = 2;
 }
 
-message LogBillByAccountInvited {
+message LogBillByAccountReferred {
 	optional string referrer_id = 1;
 	optional string account_id = 2;
   optional float commission_rate = 3;
@@ -385,9 +385,9 @@ message LogBillByAccountInvited {
 	optional int32 year = 7;
 }
 
-message LogBillByAccountInviteds {
+message LogBillByAccountReferreds {
   optional common.Context ctx = 1;
-	repeated LogBillByAccountInvited log_bill_by_account_inviteds = 2;
+	repeated LogBillByAccountReferred log_bill_by_account_referreds = 2;
 }
 
 message LogPayForAgentReferrer {
@@ -561,8 +561,8 @@ service PaymentMgr {
 	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
 	rpc DeletePromotionCode(common.Id) returns (common.Empty);
 	rpc UpdateReferralProgram(ReferralProgram) returns (ReferralProgram);
-	rpc ListAccountInvitedByReferrerId(common.Id) returns (LogAccountInviteds);
-  rpc ListBillByAccountInvited(common.Id) returns (LogBillByAccountInviteds);
+	rpc ListAccountReferredByReferrerId(common.Id) returns (LogAccountReferreds);
+  rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
 	rpc ListPayForAgentReferrer(common.Id) returns (LogPayForAgentReferrers);
 	rpc GetReferralProgram(common.Id) returns (ReferralProgram);
 	rpc UpdateBankAccountToReferralProgram(BankInfoRequest) returns (ReferralProgram);

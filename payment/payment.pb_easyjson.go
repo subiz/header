@@ -4681,7 +4681,7 @@ func (v *LogPayForAgentReferrer) UnmarshalJSON(data []byte) error {
 func (v *LogPayForAgentReferrer) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment25(l, v)
 }
-func easyjson3258bd9eDecodeGithubComSubizHeaderPayment26(in *jlexer.Lexer, out *LogBillByAccountInviteds) {
+func easyjson3258bd9eDecodeGithubComSubizHeaderPayment26(in *jlexer.Lexer, out *LogBillByAccountReferreds) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4710,33 +4710,33 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment26(in *jlexer.Lexer, out *
 				}
 				(*out.Ctx).UnmarshalEasyJSON(in)
 			}
-		case "log_bill_by_account_inviteds":
+		case "log_bill_by_account_referreds":
 			if in.IsNull() {
 				in.Skip()
-				out.LogBillByAccountInviteds = nil
+				out.LogBillByAccountReferreds = nil
 			} else {
 				in.Delim('[')
-				if out.LogBillByAccountInviteds == nil {
+				if out.LogBillByAccountReferreds == nil {
 					if !in.IsDelim(']') {
-						out.LogBillByAccountInviteds = make([]*LogBillByAccountInvited, 0, 8)
+						out.LogBillByAccountReferreds = make([]*LogBillByAccountReferred, 0, 8)
 					} else {
-						out.LogBillByAccountInviteds = []*LogBillByAccountInvited{}
+						out.LogBillByAccountReferreds = []*LogBillByAccountReferred{}
 					}
 				} else {
-					out.LogBillByAccountInviteds = (out.LogBillByAccountInviteds)[:0]
+					out.LogBillByAccountReferreds = (out.LogBillByAccountReferreds)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v40 *LogBillByAccountInvited
+					var v40 *LogBillByAccountReferred
 					if in.IsNull() {
 						in.Skip()
 						v40 = nil
 					} else {
 						if v40 == nil {
-							v40 = new(LogBillByAccountInvited)
+							v40 = new(LogBillByAccountReferred)
 						}
 						(*v40).UnmarshalEasyJSON(in)
 					}
-					out.LogBillByAccountInviteds = append(out.LogBillByAccountInviteds, v40)
+					out.LogBillByAccountReferreds = append(out.LogBillByAccountReferreds, v40)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4751,7 +4751,7 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment26(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson3258bd9eEncodeGithubComSubizHeaderPayment26(out *jwriter.Writer, in LogBillByAccountInviteds) {
+func easyjson3258bd9eEncodeGithubComSubizHeaderPayment26(out *jwriter.Writer, in LogBillByAccountReferreds) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4765,8 +4765,8 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment26(out *jwriter.Writer, in
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
 	}
-	if len(in.LogBillByAccountInviteds) != 0 {
-		const prefix string = ",\"log_bill_by_account_inviteds\":"
+	if len(in.LogBillByAccountReferreds) != 0 {
+		const prefix string = ",\"log_bill_by_account_referreds\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
@@ -4775,7 +4775,7 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment26(out *jwriter.Writer, in
 		}
 		{
 			out.RawByte('[')
-			for v41, v42 := range in.LogBillByAccountInviteds {
+			for v41, v42 := range in.LogBillByAccountReferreds {
 				if v41 > 0 {
 					out.RawByte(',')
 				}
@@ -4792,29 +4792,29 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment26(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v LogBillByAccountInviteds) MarshalJSON() ([]byte, error) {
+func (v LogBillByAccountReferreds) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment26(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v LogBillByAccountInviteds) MarshalEasyJSON(w *jwriter.Writer) {
+func (v LogBillByAccountReferreds) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment26(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *LogBillByAccountInviteds) UnmarshalJSON(data []byte) error {
+func (v *LogBillByAccountReferreds) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment26(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *LogBillByAccountInviteds) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *LogBillByAccountReferreds) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment26(l, v)
 }
-func easyjson3258bd9eDecodeGithubComSubizHeaderPayment27(in *jlexer.Lexer, out *LogBillByAccountInvited) {
+func easyjson3258bd9eDecodeGithubComSubizHeaderPayment27(in *jlexer.Lexer, out *LogBillByAccountReferred) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4913,7 +4913,7 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment27(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson3258bd9eEncodeGithubComSubizHeaderPayment27(out *jwriter.Writer, in LogBillByAccountInvited) {
+func easyjson3258bd9eEncodeGithubComSubizHeaderPayment27(out *jwriter.Writer, in LogBillByAccountReferred) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4991,29 +4991,29 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment27(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v LogBillByAccountInvited) MarshalJSON() ([]byte, error) {
+func (v LogBillByAccountReferred) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment27(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v LogBillByAccountInvited) MarshalEasyJSON(w *jwriter.Writer) {
+func (v LogBillByAccountReferred) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment27(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *LogBillByAccountInvited) UnmarshalJSON(data []byte) error {
+func (v *LogBillByAccountReferred) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment27(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *LogBillByAccountInvited) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *LogBillByAccountReferred) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment27(l, v)
 }
-func easyjson3258bd9eDecodeGithubComSubizHeaderPayment28(in *jlexer.Lexer, out *LogAccountInviteds) {
+func easyjson3258bd9eDecodeGithubComSubizHeaderPayment28(in *jlexer.Lexer, out *LogAccountReferreds) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5042,33 +5042,33 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment28(in *jlexer.Lexer, out *
 				}
 				(*out.Ctx).UnmarshalEasyJSON(in)
 			}
-		case "log_account_inviteds":
+		case "log_account_referreds":
 			if in.IsNull() {
 				in.Skip()
-				out.LogAccountInviteds = nil
+				out.LogAccountReferreds = nil
 			} else {
 				in.Delim('[')
-				if out.LogAccountInviteds == nil {
+				if out.LogAccountReferreds == nil {
 					if !in.IsDelim(']') {
-						out.LogAccountInviteds = make([]*LogAccountInvited, 0, 8)
+						out.LogAccountReferreds = make([]*LogAccountReferred, 0, 8)
 					} else {
-						out.LogAccountInviteds = []*LogAccountInvited{}
+						out.LogAccountReferreds = []*LogAccountReferred{}
 					}
 				} else {
-					out.LogAccountInviteds = (out.LogAccountInviteds)[:0]
+					out.LogAccountReferreds = (out.LogAccountReferreds)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v43 *LogAccountInvited
+					var v43 *LogAccountReferred
 					if in.IsNull() {
 						in.Skip()
 						v43 = nil
 					} else {
 						if v43 == nil {
-							v43 = new(LogAccountInvited)
+							v43 = new(LogAccountReferred)
 						}
 						(*v43).UnmarshalEasyJSON(in)
 					}
-					out.LogAccountInviteds = append(out.LogAccountInviteds, v43)
+					out.LogAccountReferreds = append(out.LogAccountReferreds, v43)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5083,7 +5083,7 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment28(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson3258bd9eEncodeGithubComSubizHeaderPayment28(out *jwriter.Writer, in LogAccountInviteds) {
+func easyjson3258bd9eEncodeGithubComSubizHeaderPayment28(out *jwriter.Writer, in LogAccountReferreds) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5097,8 +5097,8 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment28(out *jwriter.Writer, in
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
 	}
-	if len(in.LogAccountInviteds) != 0 {
-		const prefix string = ",\"log_account_inviteds\":"
+	if len(in.LogAccountReferreds) != 0 {
+		const prefix string = ",\"log_account_referreds\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
@@ -5107,7 +5107,7 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment28(out *jwriter.Writer, in
 		}
 		{
 			out.RawByte('[')
-			for v44, v45 := range in.LogAccountInviteds {
+			for v44, v45 := range in.LogAccountReferreds {
 				if v44 > 0 {
 					out.RawByte(',')
 				}
@@ -5124,29 +5124,29 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment28(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v LogAccountInviteds) MarshalJSON() ([]byte, error) {
+func (v LogAccountReferreds) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment28(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v LogAccountInviteds) MarshalEasyJSON(w *jwriter.Writer) {
+func (v LogAccountReferreds) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment28(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *LogAccountInviteds) UnmarshalJSON(data []byte) error {
+func (v *LogAccountReferreds) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment28(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *LogAccountInviteds) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *LogAccountReferreds) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment28(l, v)
 }
-func easyjson3258bd9eDecodeGithubComSubizHeaderPayment29(in *jlexer.Lexer, out *LogAccountInvited) {
+func easyjson3258bd9eDecodeGithubComSubizHeaderPayment29(in *jlexer.Lexer, out *LogAccountReferred) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5205,7 +5205,7 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment29(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson3258bd9eEncodeGithubComSubizHeaderPayment29(out *jwriter.Writer, in LogAccountInvited) {
+func easyjson3258bd9eEncodeGithubComSubizHeaderPayment29(out *jwriter.Writer, in LogAccountReferred) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5243,26 +5243,26 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment29(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v LogAccountInvited) MarshalJSON() ([]byte, error) {
+func (v LogAccountReferred) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment29(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v LogAccountInvited) MarshalEasyJSON(w *jwriter.Writer) {
+func (v LogAccountReferred) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment29(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *LogAccountInvited) UnmarshalJSON(data []byte) error {
+func (v *LogAccountReferred) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment29(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *LogAccountInvited) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *LogAccountReferred) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment29(l, v)
 }
 func easyjson3258bd9eDecodeGithubComSubizHeaderPayment30(in *jlexer.Lexer, out *Log) {

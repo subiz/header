@@ -1223,7 +1223,7 @@
         }
       }
     },
-    "paymentLogAccountInvited": {
+    "paymentLogAccountReferred": {
       "type": "object",
       "properties": {
         "referrer_id": {
@@ -1238,21 +1238,21 @@
         }
       }
     },
-    "paymentLogAccountInviteds": {
+    "paymentLogAccountReferreds": {
       "type": "object",
       "properties": {
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "log_account_inviteds": {
+        "log_account_referreds": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/paymentLogAccountInvited"
+            "$ref": "#/definitions/paymentLogAccountReferred"
           }
         }
       }
     },
-    "paymentLogBillByAccountInvited": {
+    "paymentLogBillByAccountReferred": {
       "type": "object",
       "properties": {
         "referrer_id": {
@@ -1282,16 +1282,16 @@
         }
       }
     },
-    "paymentLogBillByAccountInviteds": {
+    "paymentLogBillByAccountReferreds": {
       "type": "object",
       "properties": {
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "log_bill_by_account_inviteds": {
+        "log_bill_by_account_referreds": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/paymentLogBillByAccountInvited"
+            "$ref": "#/definitions/paymentLogBillByAccountReferred"
           }
         }
       }
