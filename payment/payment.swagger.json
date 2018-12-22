@@ -1296,7 +1296,7 @@
         }
       }
     },
-    "paymentLogPayForAgentReferrer": {
+    "paymentLogPaidForAgentReferrer": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -1321,16 +1321,16 @@
         }
       }
     },
-    "paymentLogPayForAgentReferrers": {
+    "paymentLogPaidForAgentReferrers": {
       "type": "object",
       "properties": {
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "log_pay_for_agent_referrers": {
+        "log_paid_for_agent_referrers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/paymentLogPayForAgentReferrer"
+            "$ref": "#/definitions/paymentLogPaidForAgentReferrer"
           }
         }
       }

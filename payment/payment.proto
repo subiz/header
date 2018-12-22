@@ -390,7 +390,7 @@ message LogBillByAccountReferreds {
 	repeated LogBillByAccountReferred log_bill_by_account_referreds = 2;
 }
 
-message LogPayForAgentReferrer {
+message LogPaidForAgentReferrer {
   optional common.Context ctx = 1;
   optional string referrer_id = 2;
 	optional float amount = 3;
@@ -399,9 +399,9 @@ message LogPayForAgentReferrer {
 	optional string creator = 6;
 }
 
-message LogPayForAgentReferrers {
+message LogPaidForAgentReferrers {
     optional common.Context ctx = 1;
-		repeated LogPayForAgentReferrer log_pay_for_agent_referrers = 2;
+		repeated LogPaidForAgentReferrer log_paid_for_agent_referrers = 2;
 }
 
 message ExchangeRate {
@@ -563,10 +563,10 @@ service PaymentMgr {
 	rpc UpdateReferralProgram(ReferralProgram) returns (ReferralProgram);
 	rpc ListAccountReferredByReferrerId(common.Id) returns (LogAccountReferreds);
   rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
-	rpc ListPayForAgentReferrer(common.Id) returns (LogPayForAgentReferrers);
+	rpc ListPaidForAgentReferrer(common.Id) returns (LogPaidForAgentReferrers);
 	rpc GetReferralProgram(common.Id) returns (ReferralProgram);
-	rpc UpdateBankAccountToReferralProgram(BankInfoRequest) returns (ReferralProgram);
-	rpc PayForAgentReferrer(LogPayForAgentReferrer) returns (common.Empty);
+	rpc UpdateBankAccountForReferrer(BankInfoRequest) returns (ReferralProgram);
+	rpc PaidForAgentReferrer(LogPaidForAgentReferrer) returns (common.Empty);
 }
 
 message PromotionCodes{

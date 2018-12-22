@@ -4369,7 +4369,7 @@ func (v *LogPromotionCodeUsed) UnmarshalJSON(data []byte) error {
 func (v *LogPromotionCodeUsed) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment23(l, v)
 }
-func easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(in *jlexer.Lexer, out *LogPayForAgentReferrers) {
+func easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(in *jlexer.Lexer, out *LogPaidForAgentReferrers) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4398,33 +4398,33 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(in *jlexer.Lexer, out *
 				}
 				(*out.Ctx).UnmarshalEasyJSON(in)
 			}
-		case "log_pay_for_agent_referrers":
+		case "log_paid_for_agent_referrers":
 			if in.IsNull() {
 				in.Skip()
-				out.LogPayForAgentReferrers = nil
+				out.LogPaidForAgentReferrers = nil
 			} else {
 				in.Delim('[')
-				if out.LogPayForAgentReferrers == nil {
+				if out.LogPaidForAgentReferrers == nil {
 					if !in.IsDelim(']') {
-						out.LogPayForAgentReferrers = make([]*LogPayForAgentReferrer, 0, 8)
+						out.LogPaidForAgentReferrers = make([]*LogPaidForAgentReferrer, 0, 8)
 					} else {
-						out.LogPayForAgentReferrers = []*LogPayForAgentReferrer{}
+						out.LogPaidForAgentReferrers = []*LogPaidForAgentReferrer{}
 					}
 				} else {
-					out.LogPayForAgentReferrers = (out.LogPayForAgentReferrers)[:0]
+					out.LogPaidForAgentReferrers = (out.LogPaidForAgentReferrers)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v37 *LogPayForAgentReferrer
+					var v37 *LogPaidForAgentReferrer
 					if in.IsNull() {
 						in.Skip()
 						v37 = nil
 					} else {
 						if v37 == nil {
-							v37 = new(LogPayForAgentReferrer)
+							v37 = new(LogPaidForAgentReferrer)
 						}
 						(*v37).UnmarshalEasyJSON(in)
 					}
-					out.LogPayForAgentReferrers = append(out.LogPayForAgentReferrers, v37)
+					out.LogPaidForAgentReferrers = append(out.LogPaidForAgentReferrers, v37)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4439,7 +4439,7 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(out *jwriter.Writer, in LogPayForAgentReferrers) {
+func easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(out *jwriter.Writer, in LogPaidForAgentReferrers) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4453,8 +4453,8 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(out *jwriter.Writer, in
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
 	}
-	if len(in.LogPayForAgentReferrers) != 0 {
-		const prefix string = ",\"log_pay_for_agent_referrers\":"
+	if len(in.LogPaidForAgentReferrers) != 0 {
+		const prefix string = ",\"log_paid_for_agent_referrers\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
@@ -4463,7 +4463,7 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(out *jwriter.Writer, in
 		}
 		{
 			out.RawByte('[')
-			for v38, v39 := range in.LogPayForAgentReferrers {
+			for v38, v39 := range in.LogPaidForAgentReferrers {
 				if v38 > 0 {
 					out.RawByte(',')
 				}
@@ -4480,29 +4480,29 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v LogPayForAgentReferrers) MarshalJSON() ([]byte, error) {
+func (v LogPaidForAgentReferrers) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v LogPayForAgentReferrers) MarshalEasyJSON(w *jwriter.Writer) {
+func (v LogPaidForAgentReferrers) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *LogPayForAgentReferrers) UnmarshalJSON(data []byte) error {
+func (v *LogPaidForAgentReferrers) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *LogPayForAgentReferrers) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *LogPaidForAgentReferrers) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(l, v)
 }
-func easyjson3258bd9eDecodeGithubComSubizHeaderPayment25(in *jlexer.Lexer, out *LogPayForAgentReferrer) {
+func easyjson3258bd9eDecodeGithubComSubizHeaderPayment25(in *jlexer.Lexer, out *LogPaidForAgentReferrer) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4591,7 +4591,7 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment25(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson3258bd9eEncodeGithubComSubizHeaderPayment25(out *jwriter.Writer, in LogPayForAgentReferrer) {
+func easyjson3258bd9eEncodeGithubComSubizHeaderPayment25(out *jwriter.Writer, in LogPaidForAgentReferrer) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4659,26 +4659,26 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment25(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v LogPayForAgentReferrer) MarshalJSON() ([]byte, error) {
+func (v LogPaidForAgentReferrer) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment25(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v LogPayForAgentReferrer) MarshalEasyJSON(w *jwriter.Writer) {
+func (v LogPaidForAgentReferrer) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjson3258bd9eEncodeGithubComSubizHeaderPayment25(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *LogPayForAgentReferrer) UnmarshalJSON(data []byte) error {
+func (v *LogPaidForAgentReferrer) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment25(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *LogPayForAgentReferrer) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *LogPaidForAgentReferrer) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3258bd9eDecodeGithubComSubizHeaderPayment25(l, v)
 }
 func easyjson3258bd9eDecodeGithubComSubizHeaderPayment26(in *jlexer.Lexer, out *LogBillByAccountReferreds) {
