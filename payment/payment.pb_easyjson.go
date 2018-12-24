@@ -4312,16 +4312,6 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(in *jlexer.Lexer, out *
 				}
 				*out.Amount = float32(in.Float32())
 			}
-		case "transation_id":
-			if in.IsNull() {
-				in.Skip()
-				out.TransationId = nil
-			} else {
-				if out.TransationId == nil {
-					out.TransationId = new(string)
-				}
-				*out.TransationId = string(in.String())
-			}
 		case "created":
 			if in.IsNull() {
 				in.Skip()
@@ -4351,6 +4341,16 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment24(in *jlexer.Lexer, out *
 					out.ReferrerAgentId = new(string)
 				}
 				*out.ReferrerAgentId = string(in.String())
+			}
+		case "transaction_id":
+			if in.IsNull() {
+				in.Skip()
+				out.TransactionId = nil
+			} else {
+				if out.TransactionId == nil {
+					out.TransactionId = new(string)
+				}
+				*out.TransactionId = string(in.String())
 			}
 		default:
 			in.SkipRecursive()
@@ -4396,16 +4396,6 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(out *jwriter.Writer, in
 		}
 		out.Float32(float32(*in.Amount))
 	}
-	if in.TransationId != nil {
-		const prefix string = ",\"transation_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.TransationId))
-	}
 	if in.Created != nil {
 		const prefix string = ",\"created\":"
 		if first {
@@ -4435,6 +4425,16 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment24(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ReferrerAgentId))
+	}
+	if in.TransactionId != nil {
+		const prefix string = ",\"transaction_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.TransactionId))
 	}
 	out.RawByte('}')
 }

@@ -388,10 +388,11 @@ message LogPaidForAgentReferrer {
   optional common.Context ctx = 1;
   optional string referrer_id = 2;
 	optional float amount = 3;
-	optional string transation_id = 4;
 	optional int64 created = 5;
   optional string referrer_account_id = 6;
 	optional string referrer_agent_id = 7;
+	optional string transaction_id = 8;
+
 }
 
 message LogPaidForAgentReferrers {

@@ -1348,9 +1348,6 @@
           "type": "number",
           "format": "float"
         },
-        "transation_id": {
-          "type": "string"
-        },
         "created": {
           "type": "string",
           "format": "int64"
@@ -1359,6 +1356,9 @@
           "type": "string"
         },
         "referrer_agent_id": {
+          "type": "string"
+        },
+        "transaction_id": {
           "type": "string"
         }
       }
