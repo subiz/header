@@ -289,7 +289,7 @@ var ConvoType_name = map[int32]string{
 }
 
 var ConvoType_value = map[string]int32{
-	"c":                          0,
+	"c": 0,
 	"conversation_updated":       9,
 	"message_sent":               10,
 	"conversation_state_updated": 11,
@@ -335,7 +335,7 @@ var NotiboxType_name = map[int32]string{
 }
 
 var NotiboxType_value = map[string]int32{
-	"n":                     0,
+	"n": 0,
 	"notification_upserted": 52,
 	"notibox_upserted":      53,
 }

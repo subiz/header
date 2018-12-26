@@ -160,6 +160,7 @@ message CreateAccountRequest {
 	optional string phone = 10;
 	optional string country_code = 11;
 	optional string referrer_from = 12;
+	optional string ga_client_id = 13;
 }
 
 message LoginRequest {

@@ -5592,6 +5592,16 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAccount22(in *jlexer.Lexer, out *
 				}
 				*out.ReferrerFrom = string(in.String())
 			}
+		case "ga_client_id":
+			if in.IsNull() {
+				in.Skip()
+				out.GaClientId = nil
+			} else {
+				if out.GaClientId == nil {
+					out.GaClientId = new(string)
+				}
+				*out.GaClientId = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -5725,6 +5735,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAccount22(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ReferrerFrom))
+	}
+	if in.GaClientId != nil {
+		const prefix string = ",\"ga_client_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.GaClientId))
 	}
 	out.RawByte('}')
 }

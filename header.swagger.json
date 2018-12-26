@@ -378,6 +378,9 @@
           },
           "referrer_from": {
             "type": "string"
+          },
+          "ga_client_id": {
+            "type": "string"
           }
         }
       },
