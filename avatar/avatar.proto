@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package avatar;
+
+import "github.com/subiz/header/common/common.proto";
+
+message Avatar {
+	common.Context ctx = 1;
+	string key = 2;
+	string avatar_url = 3;
+	bool auto_update = 4;
+}
+
+service ServiceAvatarManager {
+ rpc GetAvatar(common.Id) returns (Avatar);
+ rpc UpsertAvatar(Avatar) returns (common.Empty);
+}

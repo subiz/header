@@ -1362,6 +1362,21 @@
           }
         }
       },
+      "avatarAvatar": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "avatar_url": {
+            "type": "string"
+          },
+          "auto_update": {
+            "type": "boolean",
+            "format": "boolean"
+          }
+        }
+      },
       "contentContent": {
         "type": "object",
         "properties": {
