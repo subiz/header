@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package partitioner;
+
+// A string
+message Configuration {
+	string version = 1;
+	int32 term = 2;
+	repeated WorkerConfiguration workers = 3;
+}
+
+message ConfigurationResponse {
+	string version = 1;
+	int32 term = 2;
+	enum Type {
+		// coordinator is in middle of configuration change process
+		PENDING = 0;
+		NORMAL = 1;
+	}
+	// indicates current state of coordinator
+	string state = 4;
+	repeated WorkerConfiguration workers = 3;
+}
+
+message WorkerConfiguration {
+	string version = 1;
+	int32 term = 2;
+
+	// unique string for each workers, ex: web-1, web-2
+	string id = 3;
+
+	// list of job
+	repeated int32 partitions = 4;
+}
+
+// Event used by coordinator to notify workers about configuration change process
+message Event {
+	string version = 1;
+	int32 term = 2;
+	enum Type {
+		ABORT = 0;
+		APPLY = 1;
+		BLOCK = 2;
+	}
+	string type = 3;
+	Configuration configuration = 4;
+	int64 created = 5;
+}
