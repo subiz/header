@@ -191,6 +191,8 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner1(in *jlexer.Lexer, ou
 			}
 		case "created":
 			out.Created = int64(in.Int64())
+		case "cluster":
+			out.Cluster = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -254,6 +256,16 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner1(out *jwriter.Writer,
 			out.RawString(prefix)
 		}
 		out.Int64(int64(in.Created))
+	}
+	if in.Cluster != "" {
+		const prefix string = ",\"cluster\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Cluster))
 	}
 	out.RawByte('}')
 }
@@ -337,6 +349,8 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(in *jlexer.Lexer, ou
 				}
 				in.Delim(']')
 			}
+		case "cluster":
+			out.Cluster = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -403,6 +417,16 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner2(out *jwriter.Writer,
 			}
 			out.RawByte(']')
 		}
+	}
+	if in.Cluster != "" {
+		const prefix string = ",\"cluster\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Cluster))
 	}
 	out.RawByte('}')
 }
@@ -484,6 +508,8 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, ou
 				}
 				in.Delim(']')
 			}
+		case "cluster":
+			out.Cluster = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -540,6 +566,16 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer,
 			}
 			out.RawByte(']')
 		}
+	}
+	if in.Cluster != "" {
+		const prefix string = ",\"cluster\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Cluster))
 	}
 	out.RawByte('}')
 }
