@@ -6,15 +6,15 @@ package partitioner;
 message Configuration {
 	string version = 1;
 	int32 term = 2;
-	repeated WorkerConfiguration workers = 3;
-
 	// ID of the cluster
-	string cluster = 4;
+	string cluster = 3;
+	repeated WorkerConfiguration workers = 4;
 }
 
 message ConfigurationResponse {
 	string version = 1;
 	int32 term = 2;
+	string cluster = 3;
 
 	enum Type {
 		// coordinator is in middle of configuration change process
@@ -23,32 +23,50 @@ message ConfigurationResponse {
 	}
 	// indicates current state of coordinator
 	string state = 4;
-	repeated WorkerConfiguration workers = 3;
-	string cluster = 5;
+	repeated WorkerConfiguration workers = 5;
 }
 
 message WorkerConfiguration {
 	string version = 1;
 	int32 term = 2;
 
+	string cluster = 3;
+
 	// unique string for each workers, ex: web-1, web-2
-	string id = 3;
+	string id = 4;
 
 	// list of job
-	repeated int32 partitions = 4;
+	repeated int32 partitions = 5;
+
+	// used to contact worker, web-4:9090, 192.168.5.111:7070
+	string host = 6;
 }
 
 // Event used by coordinator to notify workers about configuration change process
 message Event {
 	string version = 1;
 	int32 term = 2;
+	string cluster = 3;
+
 	enum Type {
 		ABORT = 0;
 		APPLY = 1;
 		BLOCK = 2;
 	}
-	string type = 3;
-	Configuration configuration = 4;
-	int64 created = 5;
-	string cluster = 6;
+	string type = 4;
+	Configuration configuration = 5;
+	int64 created = 6;
+}
+
+message JoinClusterRequest {
+	string version = 1;
+	int32 term = 2;
+
+	string cluster = 3;
+
+	// unique string for each workers, ex: web-1, web-2
+	string id = 4;
+
+	// used to contact worker, examples:  web-4:9090, 192.168.5.134:9090
+	string host = 5;
 }
