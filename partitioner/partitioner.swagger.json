@@ -15,5 +15,70 @@
     "application/json"
   ],
   "paths": {},
-  "definitions": {}
+  "definitions": {
+    "partitionerConfiguration": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cluster": {
+          "type": "string",
+          "title": "ID of the cluster"
+        },
+        "state": {
+          "type": "string",
+          "title": "indicates current state of coordinator"
+        },
+        "workers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/partitionerWorkerConfiguration"
+          }
+        },
+        "total_partitions": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "partitionerEmpty": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "cluster": {
+          "type": "string",
+          "title": "ID of the cluster"
+        }
+      }
+    },
+    "partitionerWorkerConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "partitions": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
 }
