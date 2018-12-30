@@ -260,7 +260,7 @@ func (v *WorkerConfiguration) UnmarshalJSON(data []byte) error {
 func (v *WorkerConfiguration) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(l, v)
 }
-func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, out *JoinClusterRequest) {
+func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, out *JoinRequest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -299,7 +299,7 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer, in JoinClusterRequest) {
+func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer, in JoinRequest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -357,26 +357,26 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer,
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v JoinClusterRequest) MarshalJSON() ([]byte, error) {
+func (v JoinRequest) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v JoinClusterRequest) MarshalEasyJSON(w *jwriter.Writer) {
+func (v JoinRequest) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *JoinClusterRequest) UnmarshalJSON(data []byte) error {
+func (v *JoinRequest) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *JoinClusterRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *JoinRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(l, v)
 }
 func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner4(in *jlexer.Lexer, out *Empty) {
@@ -400,8 +400,6 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner4(in *jlexer.Lexer, ou
 		switch key {
 		case "version":
 			out.Version = string(in.String())
-		case "term":
-			out.Term = int32(in.Int32())
 		case "cluster":
 			out.Cluster = string(in.String())
 		default:
@@ -427,16 +425,6 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner4(out *jwriter.Writer,
 			out.RawString(prefix)
 		}
 		out.String(string(in.Version))
-	}
-	if in.Term != 0 {
-		const prefix string = ",\"term\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(in.Term))
 	}
 	if in.Cluster != "" {
 		const prefix string = ",\"cluster\":"

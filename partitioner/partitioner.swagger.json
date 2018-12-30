@@ -52,10 +52,6 @@
         "version": {
           "type": "string"
         },
-        "term": {
-          "type": "integer",
-          "format": "int32"
-        },
         "cluster": {
           "type": "string",
           "title": "ID of the cluster"
