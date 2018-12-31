@@ -522,6 +522,8 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner5(in *jlexer.Lexer, ou
 			}
 		case "total_partitions":
 			out.TotalPartitions = int32(in.Int32())
+		case "next_term":
+			out.NextTerm = int32(in.Int32())
 		default:
 			in.SkipRecursive()
 		}
@@ -608,6 +610,16 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner5(out *jwriter.Writer,
 			out.RawString(prefix)
 		}
 		out.Int32(int32(in.TotalPartitions))
+	}
+	if in.NextTerm != 0 {
+		const prefix string = ",\"next_term\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.NextTerm))
 	}
 	out.RawByte('}')
 }

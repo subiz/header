@@ -3641,6 +3641,10 @@
           "total_partitions": {
             "type": "integer",
             "format": "int32"
+          },
+          "next_term": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

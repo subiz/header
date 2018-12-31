@@ -19,6 +19,7 @@ message Configuration {
 
 	repeated WorkerConfiguration workers = 5;
 	int32 total_partitions = 6;
+	int32 next_term = 7;
 }
 
 message WorkerConfiguration {
