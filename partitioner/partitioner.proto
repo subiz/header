@@ -16,6 +16,7 @@ message Configuration {
 }
 
 message WorkerHost {
+	string id = 4;
 	string host = 5;
 }
 
@@ -28,6 +29,7 @@ message Empty {}
 
 service Coordinator {
 	rpc GetConfig(Empty) returns (Configuration) {}
+	rpc Join(WorkerHost) returns (Empty) {}
 }
 
 service Worker {

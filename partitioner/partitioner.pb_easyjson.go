@@ -267,6 +267,8 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, ou
 			continue
 		}
 		switch key {
+		case "id":
+			out.Id = string(in.String())
 		case "host":
 			out.Host = string(in.String())
 		default:
@@ -283,6 +285,16 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer,
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.Id != "" {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Id))
+	}
 	if in.Host != "" {
 		const prefix string = ",\"host\":"
 		if first {
