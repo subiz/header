@@ -267,6 +267,8 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, ou
 			continue
 		}
 		switch key {
+		case "cluster":
+			out.Cluster = string(in.String())
 		case "id":
 			out.Id = string(in.String())
 		case "host":
@@ -285,6 +287,16 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer,
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.Cluster != "" {
+		const prefix string = ",\"cluster\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Cluster))
+	}
 	if in.Id != "" {
 		const prefix string = ",\"id\":"
 		if first {
@@ -608,4 +620,75 @@ func (v *Configuration) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Configuration) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner5(l, v)
+}
+func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner6(in *jlexer.Lexer, out *Cluster) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "id":
+			out.Id = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner6(out *jwriter.Writer, in Cluster) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Id != "" {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Id))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Cluster) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner6(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Cluster) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner6(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Cluster) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner6(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Cluster) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner6(l, v)
 }

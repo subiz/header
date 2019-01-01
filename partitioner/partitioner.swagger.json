@@ -59,6 +59,9 @@
     "partitionerWorkerHost": {
       "type": "object",
       "properties": {
+        "cluster": {
+          "type": "string"
+        },
         "id": {
           "type": "string"
         },

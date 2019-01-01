@@ -16,6 +16,7 @@ message Configuration {
 }
 
 message WorkerHost {
+	string cluster = 1;
 	string id = 4;
 	string host = 5;
 }
@@ -27,13 +28,17 @@ message WorkerPartitions {
 
 message Empty {}
 
+message Cluster {
+	string id = 1;
+}
+
 service Coordinator {
-	rpc GetConfig(Empty) returns (Configuration) {}
+	rpc GetConfig(Cluster) returns (Configuration) {}
 	rpc Join(WorkerHost) returns (Empty) {}
 }
 
 service Worker {
-	rpc GetConfig(Empty) returns (Configuration) {}
-	rpc GetHost(Empty) returns (WorkerHost) {}
+	rpc GetConfig(Cluster) returns (Configuration) {}
+	rpc GetHost(Cluster) returns (WorkerHost) {}
 	rpc Prepare(Configuration) returns (Empty) {}
 }
