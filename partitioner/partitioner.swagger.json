@@ -30,45 +30,44 @@
           "type": "string",
           "title": "ID of the cluster"
         },
-        "state": {
-          "type": "string",
-          "title": "indicates current state of coordinator"
-        },
-        "workers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/partitionerWorkerConfiguration"
-          }
-        },
         "total_partitions": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "title": "repeated WorkerConfiguration workers = 5;"
         },
         "next_term": {
           "type": "integer",
           "format": "int32"
+        },
+        "partitions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/partitionerWorkerPartitions"
+          }
+        },
+        "hosts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "partitionerEmpty": {
+      "type": "object"
+    },
+    "partitionerWorkerHost": {
       "type": "object",
       "properties": {
-        "version": {
+        "host": {
           "type": "string"
-        },
-        "cluster": {
-          "type": "string",
-          "title": "ID of the cluster"
         }
       }
     },
-    "partitionerWorkerConfiguration": {
+    "partitionerWorkerPartitions": {
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
-        },
-        "host": {
           "type": "string"
         },
         "partitions": {

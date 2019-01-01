@@ -22,45 +22,19 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
-type Configuration_Type int32
-
-const (
-	// coordinator is in middle of configuration change process
-	Configuration_PENDING Configuration_Type = 0
-	Configuration_NORMAL  Configuration_Type = 1
-)
-
-var Configuration_Type_name = map[int32]string{
-	0: "PENDING",
-	1: "NORMAL",
-}
-
-var Configuration_Type_value = map[string]int32{
-	"PENDING": 0,
-	"NORMAL":  1,
-}
-
-func (x Configuration_Type) String() string {
-	return proto.EnumName(Configuration_Type_name, int32(x))
-}
-
-func (Configuration_Type) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_e94f51d1df456051, []int{0, 0}
-}
-
 type Configuration struct {
 	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
 	Term    int32  `protobuf:"varint,2,opt,name=term,proto3" json:"term,omitempty"`
 	// ID of the cluster
 	Cluster string `protobuf:"bytes,3,opt,name=cluster,proto3" json:"cluster,omitempty"`
-	// indicates current state of coordinator
-	State                string                 `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
-	Workers              []*WorkerConfiguration `protobuf:"bytes,5,rep,name=workers,proto3" json:"workers,omitempty"`
-	TotalPartitions      int32                  `protobuf:"varint,6,opt,name=total_partitions,json=totalPartitions,proto3" json:"total_partitions,omitempty"`
-	NextTerm             int32                  `protobuf:"varint,7,opt,name=next_term,json=nextTerm,proto3" json:"next_term,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}               `json:"-"`
-	XXX_unrecognized     []byte                 `json:"-"`
-	XXX_sizecache        int32                  `json:"-"`
+	// 	repeated WorkerConfiguration workers = 5;
+	TotalPartitions      int32                        `protobuf:"varint,6,opt,name=total_partitions,json=totalPartitions,proto3" json:"total_partitions,omitempty"`
+	NextTerm             int32                        `protobuf:"varint,7,opt,name=next_term,json=nextTerm,proto3" json:"next_term,omitempty"`
+	Partitions           map[string]*WorkerPartitions `protobuf:"bytes,9,rep,name=partitions,proto3" json:"partitions,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Hosts                map[string]string            `protobuf:"bytes,10,rep,name=hosts,proto3" json:"hosts,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	XXX_NoUnkeyedLiteral struct{}                     `json:"-"`
+	XXX_unrecognized     []byte                       `json:"-"`
+	XXX_sizecache        int32                        `json:"-"`
 }
 
 func (m *Configuration) Reset()         { *m = Configuration{} }
@@ -109,20 +83,6 @@ func (m *Configuration) GetCluster() string {
 	return ""
 }
 
-func (m *Configuration) GetState() string {
-	if m != nil {
-		return m.State
-	}
-	return ""
-}
-
-func (m *Configuration) GetWorkers() []*WorkerConfiguration {
-	if m != nil {
-		return m.Workers
-	}
-	return nil
-}
-
 func (m *Configuration) GetTotalPartitions() int32 {
 	if m != nil {
 		return m.TotalPartitions
@@ -137,138 +97,107 @@ func (m *Configuration) GetNextTerm() int32 {
 	return 0
 }
 
-type WorkerConfiguration struct {
-	Id                   string   `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	Host                 string   `protobuf:"bytes,5,opt,name=host,proto3" json:"host,omitempty"`
-	Partitions           []int32  `protobuf:"varint,7,rep,packed,name=partitions,proto3" json:"partitions,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *WorkerConfiguration) Reset()         { *m = WorkerConfiguration{} }
-func (m *WorkerConfiguration) String() string { return proto.CompactTextString(m) }
-func (*WorkerConfiguration) ProtoMessage()    {}
-func (*WorkerConfiguration) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e94f51d1df456051, []int{1}
-}
-
-func (m *WorkerConfiguration) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_WorkerConfiguration.Unmarshal(m, b)
-}
-func (m *WorkerConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_WorkerConfiguration.Marshal(b, m, deterministic)
-}
-func (m *WorkerConfiguration) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_WorkerConfiguration.Merge(m, src)
-}
-func (m *WorkerConfiguration) XXX_Size() int {
-	return xxx_messageInfo_WorkerConfiguration.Size(m)
-}
-func (m *WorkerConfiguration) XXX_DiscardUnknown() {
-	xxx_messageInfo_WorkerConfiguration.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_WorkerConfiguration proto.InternalMessageInfo
-
-func (m *WorkerConfiguration) GetId() string {
-	if m != nil {
-		return m.Id
-	}
-	return ""
-}
-
-func (m *WorkerConfiguration) GetHost() string {
-	if m != nil {
-		return m.Host
-	}
-	return ""
-}
-
-func (m *WorkerConfiguration) GetPartitions() []int32 {
+func (m *Configuration) GetPartitions() map[string]*WorkerPartitions {
 	if m != nil {
 		return m.Partitions
 	}
 	return nil
 }
 
-type JoinRequest struct {
-	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	Term    int32  `protobuf:"varint,2,opt,name=term,proto3" json:"term,omitempty"`
-	Cluster string `protobuf:"bytes,3,opt,name=cluster,proto3" json:"cluster,omitempty"`
-	// unique string for each workers, ex: web-1, web-2
-	Id string `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	// used to contact worker, examples:  web-4:9090, 192.168.5.134:9090
+func (m *Configuration) GetHosts() map[string]string {
+	if m != nil {
+		return m.Hosts
+	}
+	return nil
+}
+
+type WorkerHost struct {
 	Host                 string   `protobuf:"bytes,5,opt,name=host,proto3" json:"host,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *JoinRequest) Reset()         { *m = JoinRequest{} }
-func (m *JoinRequest) String() string { return proto.CompactTextString(m) }
-func (*JoinRequest) ProtoMessage()    {}
-func (*JoinRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_e94f51d1df456051, []int{2}
+func (m *WorkerHost) Reset()         { *m = WorkerHost{} }
+func (m *WorkerHost) String() string { return proto.CompactTextString(m) }
+func (*WorkerHost) ProtoMessage()    {}
+func (*WorkerHost) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e94f51d1df456051, []int{1}
 }
 
-func (m *JoinRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_JoinRequest.Unmarshal(m, b)
+func (m *WorkerHost) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_WorkerHost.Unmarshal(m, b)
 }
-func (m *JoinRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_JoinRequest.Marshal(b, m, deterministic)
+func (m *WorkerHost) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_WorkerHost.Marshal(b, m, deterministic)
 }
-func (m *JoinRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_JoinRequest.Merge(m, src)
+func (m *WorkerHost) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_WorkerHost.Merge(m, src)
 }
-func (m *JoinRequest) XXX_Size() int {
-	return xxx_messageInfo_JoinRequest.Size(m)
+func (m *WorkerHost) XXX_Size() int {
+	return xxx_messageInfo_WorkerHost.Size(m)
 }
-func (m *JoinRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_JoinRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_JoinRequest proto.InternalMessageInfo
-
-func (m *JoinRequest) GetVersion() string {
-	if m != nil {
-		return m.Version
-	}
-	return ""
+func (m *WorkerHost) XXX_DiscardUnknown() {
+	xxx_messageInfo_WorkerHost.DiscardUnknown(m)
 }
 
-func (m *JoinRequest) GetTerm() int32 {
-	if m != nil {
-		return m.Term
-	}
-	return 0
-}
+var xxx_messageInfo_WorkerHost proto.InternalMessageInfo
 
-func (m *JoinRequest) GetCluster() string {
-	if m != nil {
-		return m.Cluster
-	}
-	return ""
-}
-
-func (m *JoinRequest) GetId() string {
-	if m != nil {
-		return m.Id
-	}
-	return ""
-}
-
-func (m *JoinRequest) GetHost() string {
+func (m *WorkerHost) GetHost() string {
 	if m != nil {
 		return m.Host
 	}
 	return ""
 }
 
+type WorkerPartitions struct {
+	Id                   string   `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	Partitions           []int32  `protobuf:"varint,7,rep,packed,name=partitions,proto3" json:"partitions,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *WorkerPartitions) Reset()         { *m = WorkerPartitions{} }
+func (m *WorkerPartitions) String() string { return proto.CompactTextString(m) }
+func (*WorkerPartitions) ProtoMessage()    {}
+func (*WorkerPartitions) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e94f51d1df456051, []int{2}
+}
+
+func (m *WorkerPartitions) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_WorkerPartitions.Unmarshal(m, b)
+}
+func (m *WorkerPartitions) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_WorkerPartitions.Marshal(b, m, deterministic)
+}
+func (m *WorkerPartitions) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_WorkerPartitions.Merge(m, src)
+}
+func (m *WorkerPartitions) XXX_Size() int {
+	return xxx_messageInfo_WorkerPartitions.Size(m)
+}
+func (m *WorkerPartitions) XXX_DiscardUnknown() {
+	xxx_messageInfo_WorkerPartitions.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_WorkerPartitions proto.InternalMessageInfo
+
+func (m *WorkerPartitions) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func (m *WorkerPartitions) GetPartitions() []int32 {
+	if m != nil {
+		return m.Partitions
+	}
+	return nil
+}
+
 type Empty struct {
-	Version string `protobuf:"bytes,1,opt,name=version,proto3" json:"version,omitempty"`
-	// ID of the cluster
-	Cluster              string   `protobuf:"bytes,3,opt,name=cluster,proto3" json:"cluster,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -299,56 +228,45 @@ func (m *Empty) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Empty proto.InternalMessageInfo
 
-func (m *Empty) GetVersion() string {
-	if m != nil {
-		return m.Version
-	}
-	return ""
-}
-
-func (m *Empty) GetCluster() string {
-	if m != nil {
-		return m.Cluster
-	}
-	return ""
-}
-
 func init() {
-	proto.RegisterEnum("partitioner.Configuration_Type", Configuration_Type_name, Configuration_Type_value)
 	proto.RegisterType((*Configuration)(nil), "partitioner.Configuration")
-	proto.RegisterType((*WorkerConfiguration)(nil), "partitioner.WorkerConfiguration")
-	proto.RegisterType((*JoinRequest)(nil), "partitioner.JoinRequest")
+	proto.RegisterMapType((map[string]string)(nil), "partitioner.Configuration.HostsEntry")
+	proto.RegisterMapType((map[string]*WorkerPartitions)(nil), "partitioner.Configuration.PartitionsEntry")
+	proto.RegisterType((*WorkerHost)(nil), "partitioner.WorkerHost")
+	proto.RegisterType((*WorkerPartitions)(nil), "partitioner.WorkerPartitions")
 	proto.RegisterType((*Empty)(nil), "partitioner.Empty")
 }
 
 func init() { proto.RegisterFile("partitioner/partitioner.proto", fileDescriptor_e94f51d1df456051) }
 
 var fileDescriptor_e94f51d1df456051 = []byte{
-	// 381 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x93, 0xcf, 0x4b, 0xfb, 0x40,
-	0x10, 0xc5, 0x9b, 0x34, 0x3f, 0xbe, 0x9d, 0xf0, 0xd5, 0x32, 0x7a, 0x58, 0x2a, 0x6a, 0xc8, 0x29,
-	0x5e, 0x2a, 0xd4, 0x9b, 0x45, 0x41, 0x6a, 0x29, 0x8a, 0xd6, 0x12, 0x0a, 0xe2, 0xa9, 0x44, 0xbb,
-	0xea, 0x62, 0x9b, 0x8d, 0x9b, 0xad, 0xda, 0xbb, 0x47, 0x4f, 0xfe, 0xc5, 0x92, 0x4d, 0x5b, 0x12,
-	0xa8, 0x45, 0xd0, 0xdb, 0xcc, 0x27, 0x6f, 0x32, 0x2f, 0x6f, 0x08, 0x6c, 0xc7, 0xa1, 0x90, 0x4c,
-	0x32, 0x1e, 0x51, 0xb1, 0x9f, 0xab, 0xeb, 0xb1, 0xe0, 0x92, 0xa3, 0x93, 0x43, 0xde, 0xa7, 0x0e,
-	0xff, 0x5b, 0x3c, 0xba, 0x67, 0x0f, 0x13, 0x11, 0xa6, 0x0c, 0x09, 0xd8, 0x2f, 0x54, 0x24, 0x8c,
-	0x47, 0x44, 0x73, 0x35, 0xbf, 0x12, 0xcc, 0x5b, 0x44, 0x30, 0x24, 0x15, 0x63, 0xa2, 0xbb, 0x9a,
-	0x6f, 0x06, 0xaa, 0x4e, 0xd5, 0x77, 0xa3, 0x49, 0x22, 0xa9, 0x20, 0xe5, 0x4c, 0x3d, 0x6b, 0x71,
-	0x13, 0xcc, 0x44, 0x86, 0x92, 0x12, 0x43, 0xf1, 0xac, 0xc1, 0x43, 0xb0, 0x5f, 0xb9, 0x78, 0xa2,
-	0x22, 0x21, 0xa6, 0x5b, 0xf6, 0x9d, 0x86, 0x5b, 0xcf, 0x3b, 0xbc, 0x56, 0xcf, 0x0a, 0x86, 0x82,
-	0xf9, 0x00, 0xee, 0x41, 0x55, 0x72, 0x19, 0x8e, 0x06, 0x8b, 0x89, 0x84, 0x58, 0xca, 0xcb, 0xba,
-	0xe2, 0xbd, 0x05, 0xc6, 0x2d, 0xa8, 0x44, 0xf4, 0x4d, 0x0e, 0x94, 0x5f, 0x5b, 0x69, 0xfe, 0xa5,
-	0xa0, 0x4f, 0xc5, 0xd8, 0xdb, 0x05, 0xa3, 0x3f, 0x8d, 0x29, 0x3a, 0x60, 0xf7, 0xda, 0xdd, 0xd3,
-	0xb3, 0x6e, 0xa7, 0x5a, 0x42, 0x00, 0xab, 0x7b, 0x15, 0x5c, 0x9e, 0x5c, 0x54, 0x35, 0xef, 0x06,
-	0x36, 0x96, 0x18, 0xc1, 0x35, 0xd0, 0xd9, 0x70, 0xf6, 0x39, 0x3a, 0x1b, 0xa6, 0x79, 0x3c, 0xf2,
-	0x44, 0x12, 0x53, 0x11, 0x55, 0xe3, 0x0e, 0x40, 0xce, 0x9d, 0xed, 0x96, 0x7d, 0x33, 0xc8, 0x11,
-	0x6f, 0x0a, 0xce, 0x39, 0x67, 0x51, 0x40, 0x9f, 0x27, 0x34, 0x91, 0x7f, 0x16, 0xf6, 0x0f, 0xac,
-	0x79, 0x4d, 0x30, 0xdb, 0xe3, 0x58, 0x4e, 0x57, 0x2c, 0xfd, 0x76, 0x41, 0xe3, 0x43, 0x03, 0xa7,
-	0xc5, 0xb9, 0x18, 0xb2, 0x28, 0x94, 0x5c, 0xe0, 0x11, 0x54, 0x3a, 0x54, 0x66, 0xf9, 0x20, 0x16,
-	0x6e, 0xa8, 0x96, 0xd4, 0x6a, 0x05, 0x56, 0x08, 0xd2, 0x2b, 0xe1, 0x31, 0x18, 0x69, 0x0c, 0x48,
-	0x0a, 0xaa, 0x5c, 0x32, 0xab, 0xe7, 0x1b, 0xef, 0x1a, 0x58, 0xd9, 0x89, 0x7e, 0xeb, 0xa4, 0x09,
-	0xf6, 0xfc, 0x18, 0x2b, 0x84, 0xb5, 0x25, 0x2f, 0xf6, 0x4a, 0xb7, 0x96, 0xfa, 0xa3, 0x0e, 0xbe,
-	0x02, 0x00, 0x00, 0xff, 0xff, 0xb3, 0xae, 0x7c, 0x8a, 0x72, 0x03, 0x00, 0x00,
+	// 401 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x93, 0x41, 0xab, 0xd3, 0x40,
+	0x14, 0x85, 0x9b, 0xa4, 0x69, 0xcc, 0x0d, 0xda, 0x72, 0x11, 0x1c, 0x22, 0x95, 0x10, 0x10, 0xa2,
+	0x8b, 0x0a, 0xe9, 0xa6, 0x58, 0xdc, 0x58, 0x4a, 0x45, 0x5c, 0x94, 0x20, 0xb8, 0x11, 0x4a, 0xb4,
+	0xa3, 0x86, 0xb6, 0x99, 0x30, 0x99, 0x16, 0xfb, 0xe7, 0xc4, 0x9f, 0xf6, 0x98, 0x99, 0xbe, 0x76,
+	0x52, 0xf2, 0xba, 0x79, 0xbb, 0x9b, 0xcb, 0x39, 0xdf, 0x99, 0x39, 0x43, 0x60, 0x58, 0xe5, 0x5c,
+	0x14, 0xa2, 0x60, 0x25, 0xe5, 0xef, 0x8c, 0x79, 0x54, 0x71, 0x26, 0x18, 0x06, 0xc6, 0x2a, 0xfe,
+	0xef, 0xc0, 0xd3, 0x19, 0x2b, 0x7f, 0x15, 0xbf, 0xf7, 0x3c, 0x97, 0x3b, 0x24, 0xe0, 0x1d, 0x28,
+	0xaf, 0x0b, 0x56, 0x12, 0x2b, 0xb2, 0x12, 0x3f, 0xbb, 0xff, 0x44, 0x84, 0xae, 0xa0, 0x7c, 0x47,
+	0xec, 0xc8, 0x4a, 0xdc, 0x4c, 0xcd, 0x52, 0xfd, 0x73, 0xbb, 0xaf, 0x05, 0xe5, 0xc4, 0xd1, 0xea,
+	0xd3, 0x27, 0xbe, 0x81, 0x81, 0x60, 0x22, 0xdf, 0xae, 0xce, 0x71, 0x35, 0xe9, 0x29, 0x67, 0x5f,
+	0xed, 0x97, 0xe7, 0x35, 0xbe, 0x04, 0xbf, 0xa4, 0x7f, 0xc5, 0x4a, 0xd1, 0x3d, 0xa5, 0x79, 0x22,
+	0x17, 0x5f, 0x65, 0xc2, 0x67, 0x00, 0x83, 0xe0, 0x47, 0x4e, 0x12, 0xa4, 0x6f, 0x47, 0xe6, 0xb5,
+	0x1a, 0xe7, 0x1f, 0x5d, 0xb8, 0xf3, 0x52, 0xf0, 0x63, 0x66, 0xb8, 0x71, 0x0a, 0xee, 0x1f, 0x56,
+	0x8b, 0x9a, 0x80, 0xc2, 0xbc, 0xbe, 0x81, 0xf9, 0x24, 0x75, 0x9a, 0xa0, 0x3d, 0xe1, 0x77, 0xe8,
+	0x5f, 0xb1, 0x71, 0x00, 0xce, 0x86, 0x1e, 0x4f, 0x3d, 0xc9, 0x11, 0xc7, 0xe0, 0x1e, 0xf2, 0xed,
+	0x9e, 0xaa, 0x92, 0x82, 0x74, 0xd8, 0x48, 0xf8, 0xc6, 0xf8, 0x86, 0xf2, 0x0b, 0x24, 0xd3, 0xda,
+	0xf7, 0xf6, 0xc4, 0x0a, 0x27, 0x00, 0x97, 0xc8, 0x16, 0xf0, 0x73, 0x13, 0xec, 0x1b, 0xce, 0x38,
+	0x02, 0xd0, 0x60, 0xe9, 0x97, 0x8f, 0x24, 0x8f, 0x4b, 0x5c, 0x25, 0x53, 0x73, 0xfc, 0x11, 0x06,
+	0xd7, 0xd1, 0xf8, 0x0c, 0xec, 0x62, 0x4d, 0xba, 0x4a, 0x65, 0x17, 0x6b, 0x7c, 0xd5, 0xa8, 0xd9,
+	0x8b, 0x9c, 0xc4, 0x35, 0xab, 0x8b, 0x3d, 0x70, 0xe7, 0xbb, 0x4a, 0x1c, 0xd3, 0x2f, 0x10, 0xcc,
+	0x18, 0xe3, 0xeb, 0xa2, 0xcc, 0x05, 0xe3, 0xf8, 0x01, 0xfc, 0x05, 0x15, 0xba, 0x3b, 0xc4, 0xc6,
+	0x75, 0x95, 0x3e, 0x0c, 0x1f, 0x2e, 0x39, 0xee, 0xa4, 0xff, 0x2c, 0xe8, 0xe9, 0xb3, 0x3d, 0x92,
+	0x84, 0x13, 0xf0, 0x16, 0x54, 0xe8, 0x0e, 0x5a, 0xcc, 0x2f, 0x5a, 0x5e, 0x42, 0x8a, 0xe3, 0x0e,
+	0x4e, 0xc1, 0x5b, 0x72, 0x5a, 0xe5, 0x9c, 0xe2, 0x8d, 0x88, 0xb0, 0x85, 0x1a, 0x77, 0x7e, 0xf4,
+	0xd4, 0x4f, 0x35, 0xbe, 0x0b, 0x00, 0x00, 0xff, 0xff, 0xe0, 0x23, 0xf0, 0x87, 0x75, 0x03, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -364,7 +282,6 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type CoordinatorClient interface {
 	GetConfig(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Configuration, error)
-	Join(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*Configuration, error)
 }
 
 type coordinatorClient struct {
@@ -384,19 +301,9 @@ func (c *coordinatorClient) GetConfig(ctx context.Context, in *Empty, opts ...gr
 	return out, nil
 }
 
-func (c *coordinatorClient) Join(ctx context.Context, in *JoinRequest, opts ...grpc.CallOption) (*Configuration, error) {
-	out := new(Configuration)
-	err := c.cc.Invoke(ctx, "/partitioner.Coordinator/Join", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // CoordinatorServer is the server API for Coordinator service.
 type CoordinatorServer interface {
 	GetConfig(context.Context, *Empty) (*Configuration, error)
-	Join(context.Context, *JoinRequest) (*Configuration, error)
 }
 
 func RegisterCoordinatorServer(s *grpc.Server, srv CoordinatorServer) {
@@ -421,24 +328,6 @@ func _Coordinator_GetConfig_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Coordinator_Join_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JoinRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoordinatorServer).Join(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/partitioner.Coordinator/Join",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoordinatorServer).Join(ctx, req.(*JoinRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 var _Coordinator_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "partitioner.Coordinator",
 	HandlerType: (*CoordinatorServer)(nil),
@@ -446,10 +335,6 @@ var _Coordinator_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetConfig",
 			Handler:    _Coordinator_GetConfig_Handler,
-		},
-		{
-			MethodName: "Join",
-			Handler:    _Coordinator_Join_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -461,7 +346,8 @@ var _Coordinator_serviceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type WorkerClient interface {
 	GetConfig(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Configuration, error)
-	Request(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Empty, error)
+	GetHost(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*WorkerHost, error)
+	Prepare(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type workerClient struct {
@@ -481,9 +367,18 @@ func (c *workerClient) GetConfig(ctx context.Context, in *Empty, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *workerClient) Request(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Empty, error) {
+func (c *workerClient) GetHost(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*WorkerHost, error) {
+	out := new(WorkerHost)
+	err := c.cc.Invoke(ctx, "/partitioner.Worker/GetHost", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workerClient) Prepare(ctx context.Context, in *Configuration, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/partitioner.Worker/Request", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/partitioner.Worker/Prepare", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -493,7 +388,8 @@ func (c *workerClient) Request(ctx context.Context, in *Configuration, opts ...g
 // WorkerServer is the server API for Worker service.
 type WorkerServer interface {
 	GetConfig(context.Context, *Empty) (*Configuration, error)
-	Request(context.Context, *Configuration) (*Empty, error)
+	GetHost(context.Context, *Empty) (*WorkerHost, error)
+	Prepare(context.Context, *Configuration) (*Empty, error)
 }
 
 func RegisterWorkerServer(s *grpc.Server, srv WorkerServer) {
@@ -518,20 +414,38 @@ func _Worker_GetConfig_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Worker_Request_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Worker_GetHost_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkerServer).GetHost(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/partitioner.Worker/GetHost",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkerServer).GetHost(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Worker_Prepare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Configuration)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkerServer).Request(ctx, in)
+		return srv.(WorkerServer).Prepare(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/partitioner.Worker/Request",
+		FullMethod: "/partitioner.Worker/Prepare",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkerServer).Request(ctx, req.(*Configuration))
+		return srv.(WorkerServer).Prepare(ctx, req.(*Configuration))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -545,8 +459,12 @@ var _Worker_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Worker_GetConfig_Handler,
 		},
 		{
-			MethodName: "Request",
-			Handler:    _Worker_Request_Handler,
+			MethodName: "GetHost",
+			Handler:    _Worker_GetHost_Handler,
+		},
+		{
+			MethodName: "Prepare",
+			Handler:    _Worker_Prepare_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

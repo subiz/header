@@ -135,7 +135,7 @@ func (v *coordinatorClient) UnmarshalJSON(data []byte) error {
 func (v *coordinatorClient) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner1(l, v)
 }
-func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(in *jlexer.Lexer, out *WorkerConfiguration) {
+func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(in *jlexer.Lexer, out *WorkerPartitions) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -156,8 +156,6 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(in *jlexer.Lexer, ou
 		switch key {
 		case "id":
 			out.Id = string(in.String())
-		case "host":
-			out.Host = string(in.String())
 		case "partitions":
 			if in.IsNull() {
 				in.Skip()
@@ -191,7 +189,7 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner2(out *jwriter.Writer, in WorkerConfiguration) {
+func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner2(out *jwriter.Writer, in WorkerPartitions) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -204,16 +202,6 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner2(out *jwriter.Writer,
 			out.RawString(prefix)
 		}
 		out.String(string(in.Id))
-	}
-	if in.Host != "" {
-		const prefix string = ",\"host\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Host))
 	}
 	if len(in.Partitions) != 0 {
 		const prefix string = ",\"partitions\":"
@@ -238,29 +226,29 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner2(out *jwriter.Writer,
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v WorkerConfiguration) MarshalJSON() ([]byte, error) {
+func (v WorkerPartitions) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner2(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v WorkerConfiguration) MarshalEasyJSON(w *jwriter.Writer) {
+func (v WorkerPartitions) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner2(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *WorkerConfiguration) UnmarshalJSON(data []byte) error {
+func (v *WorkerPartitions) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *WorkerConfiguration) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *WorkerPartitions) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner2(l, v)
 }
-func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, out *JoinRequest) {
+func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, out *WorkerHost) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -279,14 +267,6 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, ou
 			continue
 		}
 		switch key {
-		case "version":
-			out.Version = string(in.String())
-		case "term":
-			out.Term = int32(in.Int32())
-		case "cluster":
-			out.Cluster = string(in.String())
-		case "id":
-			out.Id = string(in.String())
 		case "host":
 			out.Host = string(in.String())
 		default:
@@ -299,50 +279,10 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer, in JoinRequest) {
+func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer, in WorkerHost) {
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.Version != "" {
-		const prefix string = ",\"version\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Version))
-	}
-	if in.Term != 0 {
-		const prefix string = ",\"term\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(in.Term))
-	}
-	if in.Cluster != "" {
-		const prefix string = ",\"cluster\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Cluster))
-	}
-	if in.Id != "" {
-		const prefix string = ",\"id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Id))
-	}
 	if in.Host != "" {
 		const prefix string = ",\"host\":"
 		if first {
@@ -357,26 +297,26 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(out *jwriter.Writer,
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v JoinRequest) MarshalJSON() ([]byte, error) {
+func (v WorkerHost) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v JoinRequest) MarshalEasyJSON(w *jwriter.Writer) {
+func (v WorkerHost) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner3(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *JoinRequest) UnmarshalJSON(data []byte) error {
+func (v *WorkerHost) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *JoinRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *WorkerHost) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner3(l, v)
 }
 func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner4(in *jlexer.Lexer, out *Empty) {
@@ -398,10 +338,6 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner4(in *jlexer.Lexer, ou
 			continue
 		}
 		switch key {
-		case "version":
-			out.Version = string(in.String())
-		case "cluster":
-			out.Cluster = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -416,26 +352,6 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner4(out *jwriter.Writer,
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.Version != "" {
-		const prefix string = ",\"version\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Version))
-	}
-	if in.Cluster != "" {
-		const prefix string = ",\"cluster\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Cluster))
-	}
 	out.RawByte('}')
 }
 
@@ -487,43 +403,58 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner5(in *jlexer.Lexer, ou
 			out.Term = int32(in.Int32())
 		case "cluster":
 			out.Cluster = string(in.String())
-		case "state":
-			out.State = string(in.String())
-		case "workers":
+		case "total_partitions":
+			out.TotalPartitions = int32(in.Int32())
+		case "next_term":
+			out.NextTerm = int32(in.Int32())
+		case "partitions":
 			if in.IsNull() {
 				in.Skip()
-				out.Workers = nil
 			} else {
-				in.Delim('[')
-				if out.Workers == nil {
-					if !in.IsDelim(']') {
-						out.Workers = make([]*WorkerConfiguration, 0, 8)
-					} else {
-						out.Workers = []*WorkerConfiguration{}
-					}
+				in.Delim('{')
+				if !in.IsDelim('}') {
+					out.Partitions = make(map[string]*WorkerPartitions)
 				} else {
-					out.Workers = (out.Workers)[:0]
+					out.Partitions = nil
 				}
-				for !in.IsDelim(']') {
-					var v4 *WorkerConfiguration
+				for !in.IsDelim('}') {
+					key := string(in.String())
+					in.WantColon()
+					var v4 *WorkerPartitions
 					if in.IsNull() {
 						in.Skip()
 						v4 = nil
 					} else {
 						if v4 == nil {
-							v4 = new(WorkerConfiguration)
+							v4 = new(WorkerPartitions)
 						}
 						(*v4).UnmarshalEasyJSON(in)
 					}
-					out.Workers = append(out.Workers, v4)
+					(out.Partitions)[key] = v4
 					in.WantComma()
 				}
-				in.Delim(']')
+				in.Delim('}')
 			}
-		case "total_partitions":
-			out.TotalPartitions = int32(in.Int32())
-		case "next_term":
-			out.NextTerm = int32(in.Int32())
+		case "hosts":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				in.Delim('{')
+				if !in.IsDelim('}') {
+					out.Hosts = make(map[string]string)
+				} else {
+					out.Hosts = nil
+				}
+				for !in.IsDelim('}') {
+					key := string(in.String())
+					in.WantColon()
+					var v5 string
+					v5 = string(in.String())
+					(out.Hosts)[key] = v5
+					in.WantComma()
+				}
+				in.Delim('}')
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -568,39 +499,6 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner5(out *jwriter.Writer,
 		}
 		out.String(string(in.Cluster))
 	}
-	if in.State != "" {
-		const prefix string = ",\"state\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.State))
-	}
-	if len(in.Workers) != 0 {
-		const prefix string = ",\"workers\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v5, v6 := range in.Workers {
-				if v5 > 0 {
-					out.RawByte(',')
-				}
-				if v6 == nil {
-					out.RawString("null")
-				} else {
-					(*v6).MarshalEasyJSON(out)
-				}
-			}
-			out.RawByte(']')
-		}
-	}
 	if in.TotalPartitions != 0 {
 		const prefix string = ",\"total_partitions\":"
 		if first {
@@ -620,6 +518,58 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner5(out *jwriter.Writer,
 			out.RawString(prefix)
 		}
 		out.Int32(int32(in.NextTerm))
+	}
+	if len(in.Partitions) != 0 {
+		const prefix string = ",\"partitions\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('{')
+			v6First := true
+			for v6Name, v6Value := range in.Partitions {
+				if v6First {
+					v6First = false
+				} else {
+					out.RawByte(',')
+				}
+				out.String(string(v6Name))
+				out.RawByte(':')
+				if v6Value == nil {
+					out.RawString("null")
+				} else {
+					(*v6Value).MarshalEasyJSON(out)
+				}
+			}
+			out.RawByte('}')
+		}
+	}
+	if len(in.Hosts) != 0 {
+		const prefix string = ",\"hosts\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('{')
+			v7First := true
+			for v7Name, v7Value := range in.Hosts {
+				if v7First {
+					v7First = false
+				} else {
+					out.RawByte(',')
+				}
+				out.String(string(v7Name))
+				out.RawByte(':')
+				out.String(string(v7Value))
+			}
+			out.RawByte('}')
+		}
 	}
 	out.RawByte('}')
 }
