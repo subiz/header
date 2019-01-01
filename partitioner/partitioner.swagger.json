@@ -56,6 +56,14 @@
     "partitionerEmpty": {
       "type": "object"
     },
+    "partitionerString": {
+      "type": "object",
+      "properties": {
+        "str": {
+          "type": "string"
+        }
+      }
+    },
     "partitionerWorkerHost": {
       "type": "object",
       "properties": {

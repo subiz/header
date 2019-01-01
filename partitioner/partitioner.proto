@@ -42,3 +42,15 @@ service Worker {
 	rpc GetHost(Cluster) returns (WorkerHost) {}
 	rpc Prepare(Configuration) returns (Empty) {}
 }
+
+message String {
+	string str = 1;
+}
+
+service Hello {
+	rpc Hello(String) returns (String) {}
+}
+
+service Goodbye {
+	rpc Goodbye(String) returns (String) {}
+}
