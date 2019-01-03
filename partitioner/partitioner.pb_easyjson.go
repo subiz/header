@@ -272,8 +272,6 @@ func easyjsonEeb4d5ddDecodeGithubComSubizHeaderPartitioner4(in *jlexer.Lexer, ou
 			continue
 		}
 		switch key {
-		case "id":
-			out.Id = string(in.String())
 		case "partitions":
 			if in.IsNull() {
 				in.Skip()
@@ -311,16 +309,6 @@ func easyjsonEeb4d5ddEncodeGithubComSubizHeaderPartitioner4(out *jwriter.Writer,
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.Id != "" {
-		const prefix string = ",\"id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Id))
-	}
 	if len(in.Partitions) != 0 {
 		const prefix string = ",\"partitions\":"
 		if first {

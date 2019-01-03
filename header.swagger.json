@@ -3662,26 +3662,9 @@
           }
         }
       },
-      "partitionerWorkerHost": {
-        "type": "object",
-        "properties": {
-          "cluster": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "host": {
-            "type": "string"
-          }
-        }
-      },
       "partitionerWorkerPartitions": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "partitions": {
             "type": "array",
             "items": {

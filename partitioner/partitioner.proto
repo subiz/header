@@ -22,7 +22,6 @@ message WorkerHost {
 }
 
 message WorkerPartitions {
-	string id = 4;
 	repeated int32 partitions = 7;
 }
 
@@ -39,7 +38,6 @@ service Coordinator {
 
 service Worker {
 	rpc GetConfig(Cluster) returns (Configuration) {}
-	rpc GetHost(Cluster) returns (WorkerHost) {}
 	rpc Prepare(Configuration) returns (Empty) {}
 }
 
