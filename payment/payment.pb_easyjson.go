@@ -9366,16 +9366,6 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment51(in *jlexer.Lexer, out *
 				}
 				*out.BankAccountNumber = string(in.String())
 			}
-		case "bank_card_number":
-			if in.IsNull() {
-				in.Skip()
-				out.BankCardNumber = nil
-			} else {
-				if out.BankCardNumber == nil {
-					out.BankCardNumber = new(string)
-				}
-				*out.BankCardNumber = string(in.String())
-			}
 		case "bank_branch":
 			if in.IsNull() {
 				in.Skip()
@@ -9405,6 +9395,16 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment51(in *jlexer.Lexer, out *
 					out.ReferrerId = new(string)
 				}
 				*out.ReferrerId = string(in.String())
+			}
+		case "minimum_payment":
+			if in.IsNull() {
+				in.Skip()
+				out.MinimumPayment = nil
+			} else {
+				if out.MinimumPayment == nil {
+					out.MinimumPayment = new(float32)
+				}
+				*out.MinimumPayment = float32(in.Float32())
 			}
 		default:
 			in.SkipRecursive()
@@ -9510,16 +9510,6 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment51(out *jwriter.Writer, in
 		}
 		out.String(string(*in.BankAccountNumber))
 	}
-	if in.BankCardNumber != nil {
-		const prefix string = ",\"bank_card_number\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.BankCardNumber))
-	}
 	if in.BankBranch != nil {
 		const prefix string = ",\"bank_branch\":"
 		if first {
@@ -9549,6 +9539,16 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment51(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ReferrerId))
+	}
+	if in.MinimumPayment != nil {
+		const prefix string = ",\"minimum_payment\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float32(float32(*in.MinimumPayment))
 	}
 	out.RawByte('}')
 }

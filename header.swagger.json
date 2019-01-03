@@ -3737,9 +3737,6 @@
           "bank_account_number": {
             "type": "string"
           },
-          "bank_card_number": {
-            "type": "string"
-          },
           "bank_branch": {
             "type": "string"
           },
@@ -3748,6 +3745,10 @@
           },
           "referrer_id": {
             "type": "string"
+          },
+          "minimum_payment": {
+            "type": "number",
+            "format": "float"
           }
         }
       },

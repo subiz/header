@@ -348,10 +348,10 @@ message AgentReferInfo {
 
 	optional string bank_name = 11;
   optional string bank_account_number = 12;
-  optional string bank_card_number = 13;
   optional string bank_branch = 14;
   optional string bank_fullname = 15;
 	optional string referrer_id = 16;
+	optional float minimum_payment = 17;
 }
 
 message LogAccountReferred {
