@@ -563,7 +563,7 @@ service PaymentMgr {
 	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
 	rpc DeletePromotionCode(common.Id) returns (common.Empty);
 
-	rpc GetAgentReferInfo(common.Id) returns (AgentReferInfo);
+	rpc GetAgentReferInfo(common.Empty) returns (AgentReferInfo);
   rpc UpdateAgentReferInfo(AgentReferInfo) returns (AgentReferInfo);
 	rpc ListAccountReferred(common.Id) returns (LogAccountReferreds);
   rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
