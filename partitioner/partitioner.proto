@@ -32,6 +32,7 @@ service Coordinator {
 	rpc GetConfig(Cluster) returns (Configuration) {}
 	rpc Rebalance(WorkerID) returns (stream Configuration) {}
 	rpc Accept(WorkerID) returns (Empty) {}
+	rpc Deny(WorkerID) returns (Empty) {}
 }
 
 service Worker {
