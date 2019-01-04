@@ -5,20 +5,11 @@ package partitioner;
 message Configuration {
 	string version = 1;
 	int32 term = 2;
-	// ID of the cluster
-	string cluster = 3;
+	string cluster = 3; // ID of the cluster
 
-	//	repeated WorkerConfiguration workers = 5;
 	int32 total_partitions = 6;
 	int32 next_term = 7;
 	map<string, WorkerPartitions> partitions = 9;
-	map<string, string> hosts = 10;
-}
-
-message WorkerHost {
-	string cluster = 1;
-	string id = 4;
-	string host = 5;
 }
 
 message WorkerPartitions {
@@ -31,24 +22,26 @@ message Cluster {
 	string id = 1;
 }
 
+message WorkerID {
+	string cluster = 1;
+	string id = 2;
+	int32 term = 3;
+}
+
 service Coordinator {
 	rpc GetConfig(Cluster) returns (Configuration) {}
-	rpc Join(WorkerHost) returns (Empty) {}
+	rpc Rebalance(WorkerID) returns (stream Configuration) {}
+	rpc Accept(WorkerID) returns (Empty) {}
 }
 
 service Worker {
 	rpc GetConfig(Cluster) returns (Configuration) {}
-	rpc Prepare(Configuration) returns (Empty) {}
-}
-
-message String {
-	string str = 1;
 }
 
 service Hello {
-	rpc Hello(String) returns (String) {}
+	rpc Hello(Cluster) returns (WorkerID) {}
 }
 
 service Goodbye {
-	rpc Goodbye(String) returns (String) {}
+	rpc Goodbye(Cluster) returns (WorkerID) {}
 }

@@ -27,13 +27,11 @@
           "format": "int32"
         },
         "cluster": {
-          "type": "string",
-          "title": "ID of the cluster"
+          "type": "string"
         },
         "total_partitions": {
           "type": "integer",
-          "format": "int32",
-          "title": "repeated WorkerConfiguration workers = 5;"
+          "format": "int32"
         },
         "next_term": {
           "type": "integer",
@@ -44,23 +42,24 @@
           "additionalProperties": {
             "$ref": "#/definitions/partitionerWorkerPartitions"
           }
-        },
-        "hosts": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
     "partitionerEmpty": {
       "type": "object"
     },
-    "partitionerString": {
+    "partitionerWorkerID": {
       "type": "object",
       "properties": {
-        "str": {
+        "cluster": {
           "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "term": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
