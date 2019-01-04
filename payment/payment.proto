@@ -354,6 +354,12 @@ message AgentReferInfo {
 	optional float minimum_payment = 17;
 }
 
+message AgentByReferId {
+	optional string referrer_id = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+}
+
 message LogAccountReferred {
   optional string referrer_id = 1;
 	optional string account_id = 2;
