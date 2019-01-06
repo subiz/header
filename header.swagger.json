@@ -3640,13 +3640,19 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/partitionerWorkerPartitions"
             }
+          },
+          "hosts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       },
       "partitionerEmpty": {
         "type": "object"
       },
-      "partitionerWorkerID": {
+      "partitionerWorkerHost": {
         "type": "object",
         "properties": {
           "cluster": {
@@ -3658,6 +3664,9 @@
           "term": {
             "type": "integer",
             "format": "int32"
+          },
+          "host": {
+            "type": "string"
           }
         }
       },

@@ -10,6 +10,7 @@ message Configuration {
 	int32 total_partitions = 6;
 	int32 next_term = 7;
 	map<string, WorkerPartitions> partitions = 9;
+	map<string, string> hosts = 10;
 }
 
 message WorkerPartitions {
@@ -22,17 +23,18 @@ message Cluster {
 	string id = 1;
 }
 
-message WorkerID {
+message WorkerHost {
 	string cluster = 1;
 	string id = 2;
 	int32 term = 3;
+	string host = 4;
 }
 
 service Coordinator {
 	rpc GetConfig(Cluster) returns (Configuration) {}
-	rpc Rebalance(WorkerID) returns (stream Configuration) {}
-	rpc Accept(WorkerID) returns (Empty) {}
-	rpc Deny(WorkerID) returns (Empty) {}
+	rpc Rebalance(WorkerHost) returns (stream Configuration) {}
+	rpc Accept(WorkerHost) returns (Empty) {}
+	rpc Deny(WorkerHost) returns (Empty) {}
 }
 
 service Worker {
@@ -40,9 +42,9 @@ service Worker {
 }
 
 service Hello {
-	rpc Hello(Cluster) returns (WorkerID) {}
+	rpc Hello(Cluster) returns (WorkerHost) {}
 }
 
 service Goodbye {
-	rpc Goodbye(Cluster) returns (WorkerID) {}
+	rpc Goodbye(Cluster) returns (WorkerHost) {}
 }

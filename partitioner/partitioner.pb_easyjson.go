@@ -29,12 +29,12 @@ func (* Empty ) UnmarshalEasyJSON(l *jlexer.Lexer) {}
 
 type EasyJSON_exporter_Empty *Empty
 
-func ( WorkerID ) MarshalJSON() ([]byte, error) { return nil, nil }
-func (* WorkerID ) UnmarshalJSON([]byte) error { return nil }
-func ( WorkerID ) MarshalEasyJSON(w *jwriter.Writer) {}
-func (* WorkerID ) UnmarshalEasyJSON(l *jlexer.Lexer) {}
+func ( WorkerHost ) MarshalJSON() ([]byte, error) { return nil, nil }
+func (* WorkerHost ) UnmarshalJSON([]byte) error { return nil }
+func ( WorkerHost ) MarshalEasyJSON(w *jwriter.Writer) {}
+func (* WorkerHost ) UnmarshalEasyJSON(l *jlexer.Lexer) {}
 
-type EasyJSON_exporter_WorkerID *WorkerID
+type EasyJSON_exporter_WorkerHost *WorkerHost
 
 func ( WorkerPartitions ) MarshalJSON() ([]byte, error) { return nil, nil }
 func (* WorkerPartitions ) UnmarshalJSON([]byte) error { return nil }
