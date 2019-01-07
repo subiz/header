@@ -6,7 +6,7 @@ message Credential {
 	string account_id = 1;
 	string issuer = 3;
 	Type type = 4;
-	Method method = 5;
+	// Method method = 5;
 	Permission perm = 6;
 	string client_id = 7;
 	Type client_type = 8;
@@ -27,7 +27,7 @@ message Scope {
 	string logo_url = 3;
 	string title = 4;
 	string description = 5;
-	Method method = 6;
+	// Method method = 6;
 	repeated string event = 7;
 }
 
@@ -69,141 +69,6 @@ message Permission {
 	int32 agent_presence = 42;
  	int32 agent_preference = 43;
 	int32 promotion_code = 44;
-}
-
-message Method {
-	bool ping = 1;
-	// trigger
-	bool update_trigger = 50;
-	bool delete_trigger = 51;
-	bool create_trigger = 52;
-	bool read_trigger = 53;
-
-	// segmentation
-	bool read_segmentation = 60;
-	bool update_segmentation = 61;
-	bool delete_segmentation = 62;
-	bool create_segmentation = 63;
-
-	// agent
-	bool invite_agent = 70;
-	bool update_agent = 72;
-	bool update_agents = 73;
-	bool read_agent = 76;
-	bool read_agents = 77;
-	bool reset_password = 78; // acc group
-
-	bool update_agents_permission = 81;
-	bool read_agent_permission = 85;
-	bool update_agents_state = 86;
-
-	bool read_account = 120; // default right
-
-	// agent group
-	bool create_agent_group = 124;
-	bool delete_agent_group = 125;
-	bool read_agent_group = 126;
-	bool update_agent_group = 127;
-
-	// account
-	bool update_plan = 123; // only for subiz agent
-	bool update_account_infomation  = 122;
-
-	// clients
-	bool read_client = 151;
-	bool update_client = 153;
-	//bool RegenerateClientSecret = 155;
-	//bool VerifyClient = 156;
-	bool delete_client = 157;
-	bool create_client = 158;
-
-	// rule
-	bool read_rule = 180;
-	bool create_rule = 181;
-	bool delete_rule = 182;
-	bool update_rule = 183;
-
-	// converstation
-	bool start_conversation = 190;
-	bool read_conversation = 191; // basic permission
-	bool export_conversations = 192;
-	bool read_teammates_conversations = 193;
-	bool send_message = 194;
-
-	// connector integration
-	bool integrate_connector = 200;
-
-	bool read_user_email = 205;
-	bool read_user_facebook_id = 206;
-	bool read_user_phones = 207;
-	bool read_user_widget_setting = 208;
-
-	bool read_tag = 209;
-	bool update_tag = 210;
-	bool delete_tag = 211;
-
-	bool update_widget_setting = 299;
-	bool create_whitelist_domain = 300;
-	bool create_whitelist_ip = 301;
-	bool create_whitelist_user = 302;
-	bool delete_whitelist_domain = 303;
-	bool delete_whitelist_ip = 304;
-	bool delete_whitelist_user = 305;
-	bool read_whitelist_ip = 306;
-	bool read_whitelist_user = 307;
-	bool read_whitelist_domain = 308;
-
-	bool purchase_service = 310;
-	bool update_payment_method = 311;
-	bool pay_invoice = 312;
-	bool update_billing_cycle = 313;
-	bool read_invoice = 314;
-	bool read_subscription = 315;
-
-	// user attribute
-	bool read_attribute = 316;
-	bool create_attribute = 317;
-	bool update_attribute = 318;
-	bool delete_attribute = 319;
-
-	// pipeline
-	bool read_pipeline = 320;
-	bool cread_pipeline = 321;
-	bool update_pipeline = 322;
-	bool delete_pipeline = 323;
-
-	// currency
-	bool read_currency = 324;
-	bool cread_currency = 325;
-	bool update_currency = 326;
-	bool delete_currency = 327;
-
-	// service level agreement
-	bool read_service_level_agreement = 328;
-	bool cread_service_level_agreement = 329;
-	bool update_service_level_agreement = 330;
-	bool delete_service_level_agreement = 331;
-
-	bool read_all_accounts = 1000;
-	bool read_all_agents = 1002;
-	bool read_payment_comments = 1003;
-	bool add_payment_comments = 1004;
-	bool read_all_bills = 1005;
-	bool write_all_invoices = 1006;
-	bool read_all_invoices = 1007;
-	bool purchase_all_services = 1008;
-	bool read_all_subscriptions = 1009;
-	bool add_credit = 1010;
-	bool update_all_subscriptions = 1011;
-	bool pay_all_invoices = 1012;
-	bool transfer_money = 1013;
-	bool read_all_logs = 1014;
-	bool grant_all_perm = 4000; // SUPER! DONOT GRANT
-}
-
-message UserAuth {
-	string user_id = 1;
-	Method method = 2;
 }
 
 message GoogleCredential {
@@ -346,7 +211,7 @@ message Empty {}
 
 message ListUsersRequest {
 	string account_id = 1;
-	Method method = 2;
+	// Method method = 2;
 	string start_id = 3;
 	int32 limit = 4;
 	Permission perm = 5;

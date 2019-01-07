@@ -79,10 +79,11 @@ message Authorization {
 	optional string account_id = 2;
 	optional string issuer = 3;
 	optional auth.Type type = 4;
-	optional auth.Method method = 5;
+	// optional auth.Method method = 5;
 	optional string client_id = 7;
 	optional auth.Type client_type = 8;
 	optional string client_account_id = 10;
 	repeated string scopes = 9;
 	optional string integration_id = 11;
+	optional auth.Permission perm = 12;
 }

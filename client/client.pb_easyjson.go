@@ -968,16 +968,6 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient2(in *jlexer.Lexer, out *Au
 				}
 				*out.Type = auth.Type(in.Int32())
 			}
-		case "method":
-			if in.IsNull() {
-				in.Skip()
-				out.Method = nil
-			} else {
-				if out.Method == nil {
-					out.Method = new(auth.Method)
-				}
-				(*out.Method).UnmarshalEasyJSON(in)
-			}
 		case "client_id":
 			if in.IsNull() {
 				in.Skip()
@@ -1041,6 +1031,16 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient2(in *jlexer.Lexer, out *Au
 				}
 				*out.IntegrationId = string(in.String())
 			}
+		case "perm":
+			if in.IsNull() {
+				in.Skip()
+				out.Perm = nil
+			} else {
+				if out.Perm == nil {
+					out.Perm = new(auth.Permission)
+				}
+				(*out.Perm).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1094,16 +1094,6 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient2(out *jwriter.Writer, in A
 			out.RawString(prefix)
 		}
 		out.Int32(int32(*in.Type))
-	}
-	if in.Method != nil {
-		const prefix string = ",\"method\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Method).MarshalEasyJSON(out)
 	}
 	if in.ClientId != nil {
 		const prefix string = ",\"client_id\":"
@@ -1163,6 +1153,16 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient2(out *jwriter.Writer, in A
 			out.RawString(prefix)
 		}
 		out.String(string(*in.IntegrationId))
+	}
+	if in.Perm != nil {
+		const prefix string = ",\"perm\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Perm).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
