@@ -678,6 +678,9 @@
           },
           "platform": {
             "type": "string"
+          },
+          "source_referrer": {
+            "type": "string"
           }
         }
       },

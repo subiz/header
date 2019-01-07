@@ -78,6 +78,7 @@ message Device {
 		tablet = 2;
 		desktop = 3;
 	}
+	string source_referrer = 11; // referrer of referrer
 }
 
 message Error {

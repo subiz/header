@@ -457,6 +457,8 @@ func easyjson8e21b7afDecodeGithubComSubizHeaderCommon1(in *jlexer.Lexer, out *co
 			out.Type = string(in.String())
 		case "platform":
 			out.Platform = string(in.String())
+		case "source_referrer":
+			out.SourceReferrer = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -550,6 +552,16 @@ func easyjson8e21b7afEncodeGithubComSubizHeaderCommon1(out *jwriter.Writer, in c
 			out.RawString(prefix)
 		}
 		out.String(string(in.Platform))
+	}
+	if in.SourceReferrer != "" {
+		const prefix string = ",\"source_referrer\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.SourceReferrer))
 	}
 	out.RawByte('}')
 }
