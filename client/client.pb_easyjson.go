@@ -180,6 +180,10 @@ func easyjson19c08265DecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 			} else {
 				out.State = in.Bytes()
 			}
+		case "node":
+			out.Node = string(in.String())
+		case "reply_topic":
+			out.ReplyTopic = string(in.String())
 		case "credential":
 			if in.IsNull() {
 				in.Skip()
@@ -209,6 +213,16 @@ func easyjson19c08265DecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 				}
 				easyjson19c08265DecodeGithubComSubizHeaderCommon1(in, &*out.ByDevice)
 			}
+		case "topic":
+			out.Topic = string(in.String())
+		case "partition":
+			out.Partition = int32(in.Int32())
+		case "offset":
+			out.Offset = int64(in.Int64())
+		case "term":
+			out.Term = uint64(in.Uint64())
+		case "router_topic":
+			out.RouterTopic = string(in.String())
 		case "idempotency_key":
 			out.IdempotencyKey = string(in.String())
 		default:
@@ -244,6 +258,26 @@ func easyjson19c08265EncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 			out.RawString(prefix)
 		}
 		out.Base64Bytes(in.State)
+	}
+	if in.Node != "" {
+		const prefix string = ",\"node\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Node))
+	}
+	if in.ReplyTopic != "" {
+		const prefix string = ",\"reply_topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ReplyTopic))
 	}
 	if in.Credential != nil {
 		const prefix string = ",\"credential\":"
@@ -284,6 +318,56 @@ func easyjson19c08265EncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 			out.RawString(prefix)
 		}
 		easyjson19c08265EncodeGithubComSubizHeaderCommon1(out, *in.ByDevice)
+	}
+	if in.Topic != "" {
+		const prefix string = ",\"topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Topic))
+	}
+	if in.Partition != 0 {
+		const prefix string = ",\"partition\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.Partition))
+	}
+	if in.Offset != 0 {
+		const prefix string = ",\"offset\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Offset))
+	}
+	if in.Term != 0 {
+		const prefix string = ",\"term\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.Term))
+	}
+	if in.RouterTopic != "" {
+		const prefix string = ",\"router_topic\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.RouterTopic))
 	}
 	if in.IdempotencyKey != "" {
 		const prefix string = ",\"idempotency_key\":"
