@@ -171,6 +171,14 @@ message Trace {
 	repeated Campaign campaigns = 29;
 	optional int64 created = 30;
 	optional int64 tracked = 31;
+
+	optional string referrer = 32;
+	enum Source {
+		direct = 0;
+		referring = 1;
+		organic = 2;
+	}
+	optional string source = 33;
 }
 
 message Campaign {

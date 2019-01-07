@@ -1358,6 +1358,26 @@ func easyjson524579e4DecodeGithubComSubizHeaderUser1(in *jlexer.Lexer, out *user
 				}
 				*out.Tracked = int64(in.Int64())
 			}
+		case "referrer":
+			if in.IsNull() {
+				in.Skip()
+				out.Referrer = nil
+			} else {
+				if out.Referrer == nil {
+					out.Referrer = new(string)
+				}
+				*out.Referrer = string(in.String())
+			}
+		case "source":
+			if in.IsNull() {
+				in.Skip()
+				out.Source = nil
+			} else {
+				if out.Source == nil {
+					out.Source = new(string)
+				}
+				*out.Source = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1634,6 +1654,26 @@ func easyjson524579e4EncodeGithubComSubizHeaderUser1(out *jwriter.Writer, in use
 			out.RawString(prefix)
 		}
 		out.Int64(int64(*in.Tracked))
+	}
+	if in.Referrer != nil {
+		const prefix string = ",\"referrer\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Referrer))
+	}
+	if in.Source != nil {
+		const prefix string = ",\"source\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Source))
 	}
 	out.RawByte('}')
 }

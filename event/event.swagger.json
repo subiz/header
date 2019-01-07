@@ -2119,6 +2119,12 @@
         "tracked": {
           "type": "string",
           "format": "int64"
+        },
+        "referrer": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
         }
       }
     },
