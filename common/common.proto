@@ -46,21 +46,13 @@ message ObjectPathRequest {
 message Context {
 	string event_id = 1;
 	bytes state = 2;
-	string node = 3;
-	string reply_topic = 4;
-	//	optional int32 reply_partition = 5;
+
 	auth.Credential credential = 6;
 	bytes tracing = 7;
 	string reply_key = 8;
 
 	Device by_device = 10;
 
-	// for kafka
-	string topic = 11;
-	int32 partition = 13;
-	int64 offset = 14;
-	uint64 term = 15;
-	string router_topic = 16;
 	string idempotency_key = 17;
 }
 

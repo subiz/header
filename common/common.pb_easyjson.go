@@ -1346,10 +1346,6 @@ func easyjson89b94fcfDecodeGithubComSubizHeaderCommon12(in *jlexer.Lexer, out *C
 			} else {
 				out.State = in.Bytes()
 			}
-		case "node":
-			out.Node = string(in.String())
-		case "reply_topic":
-			out.ReplyTopic = string(in.String())
 		case "credential":
 			if in.IsNull() {
 				in.Skip()
@@ -1379,16 +1375,6 @@ func easyjson89b94fcfDecodeGithubComSubizHeaderCommon12(in *jlexer.Lexer, out *C
 				}
 				(*out.ByDevice).UnmarshalEasyJSON(in)
 			}
-		case "topic":
-			out.Topic = string(in.String())
-		case "partition":
-			out.Partition = int32(in.Int32())
-		case "offset":
-			out.Offset = int64(in.Int64())
-		case "term":
-			out.Term = uint64(in.Uint64())
-		case "router_topic":
-			out.RouterTopic = string(in.String())
 		case "idempotency_key":
 			out.IdempotencyKey = string(in.String())
 		default:
@@ -1424,26 +1410,6 @@ func easyjson89b94fcfEncodeGithubComSubizHeaderCommon12(out *jwriter.Writer, in 
 			out.RawString(prefix)
 		}
 		out.Base64Bytes(in.State)
-	}
-	if in.Node != "" {
-		const prefix string = ",\"node\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Node))
-	}
-	if in.ReplyTopic != "" {
-		const prefix string = ",\"reply_topic\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.ReplyTopic))
 	}
 	if in.Credential != nil {
 		const prefix string = ",\"credential\":"
@@ -1484,56 +1450,6 @@ func easyjson89b94fcfEncodeGithubComSubizHeaderCommon12(out *jwriter.Writer, in 
 			out.RawString(prefix)
 		}
 		(*in.ByDevice).MarshalEasyJSON(out)
-	}
-	if in.Topic != "" {
-		const prefix string = ",\"topic\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Topic))
-	}
-	if in.Partition != 0 {
-		const prefix string = ",\"partition\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(in.Partition))
-	}
-	if in.Offset != 0 {
-		const prefix string = ",\"offset\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.Offset))
-	}
-	if in.Term != 0 {
-		const prefix string = ",\"term\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Uint64(uint64(in.Term))
-	}
-	if in.RouterTopic != "" {
-		const prefix string = ",\"router_topic\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.RouterTopic))
 	}
 	if in.IdempotencyKey != "" {
 		const prefix string = ",\"idempotency_key\":"

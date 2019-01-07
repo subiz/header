@@ -654,15 +654,8 @@
           "type": "string",
           "format": "byte"
         },
-        "node": {
-          "type": "string"
-        },
-        "reply_topic": {
-          "type": "string"
-        },
         "credential": {
-          "$ref": "#/definitions/authCredential",
-          "title": "optional int32 reply_partition = 5;"
+          "$ref": "#/definitions/authCredential"
         },
         "tracing": {
           "type": "string",
@@ -673,25 +666,6 @@
         },
         "by_device": {
           "$ref": "#/definitions/commonDevice"
-        },
-        "topic": {
-          "type": "string",
-          "title": "for kafka"
-        },
-        "partition": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "offset": {
-          "type": "string",
-          "format": "int64"
-        },
-        "term": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "router_topic": {
-          "type": "string"
         },
         "idempotency_key": {
           "type": "string"
