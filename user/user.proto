@@ -177,6 +177,7 @@ message Trace {
 		direct = 0;
 		referring = 1;
 		organic = 2;
+		social = 3;
 	}
 	optional string source = 33;
 }
