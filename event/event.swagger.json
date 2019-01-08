@@ -241,6 +241,10 @@
         },
         "perm": {
           "$ref": "#/definitions/authPermission"
+        },
+        "last_login": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
