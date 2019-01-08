@@ -991,6 +991,29 @@ func easyjson89b94fcfDecodeGithubComSubizHeaderCommon10(in *jlexer.Lexer, out *D
 			out.Platform = string(in.String())
 		case "source_referrer":
 			out.SourceReferrer = string(in.String())
+		case "ga_tracking_ids":
+			if in.IsNull() {
+				in.Skip()
+				out.GaTrackingIds = nil
+			} else {
+				in.Delim('[')
+				if out.GaTrackingIds == nil {
+					if !in.IsDelim(']') {
+						out.GaTrackingIds = make([]string, 0, 4)
+					} else {
+						out.GaTrackingIds = []string{}
+					}
+				} else {
+					out.GaTrackingIds = (out.GaTrackingIds)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v4 string
+					v4 = string(in.String())
+					out.GaTrackingIds = append(out.GaTrackingIds, v4)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1094,6 +1117,25 @@ func easyjson89b94fcfEncodeGithubComSubizHeaderCommon10(out *jwriter.Writer, in 
 			out.RawString(prefix)
 		}
 		out.String(string(in.SourceReferrer))
+	}
+	if len(in.GaTrackingIds) != 0 {
+		const prefix string = ",\"ga_tracking_ids\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v5, v6 := range in.GaTrackingIds {
+				if v5 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v6))
+			}
+			out.RawByte(']')
+		}
 	}
 	out.RawByte('}')
 }

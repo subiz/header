@@ -418,6 +418,29 @@ func easyjson19c08265DecodeGithubComSubizHeaderCommon1(in *jlexer.Lexer, out *co
 			out.Platform = string(in.String())
 		case "source_referrer":
 			out.SourceReferrer = string(in.String())
+		case "ga_tracking_ids":
+			if in.IsNull() {
+				in.Skip()
+				out.GaTrackingIds = nil
+			} else {
+				in.Delim('[')
+				if out.GaTrackingIds == nil {
+					if !in.IsDelim(']') {
+						out.GaTrackingIds = make([]string, 0, 4)
+					} else {
+						out.GaTrackingIds = []string{}
+					}
+				} else {
+					out.GaTrackingIds = (out.GaTrackingIds)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v10 string
+					v10 = string(in.String())
+					out.GaTrackingIds = append(out.GaTrackingIds, v10)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -521,6 +544,25 @@ func easyjson19c08265EncodeGithubComSubizHeaderCommon1(out *jwriter.Writer, in c
 			out.RawString(prefix)
 		}
 		out.String(string(in.SourceReferrer))
+	}
+	if len(in.GaTrackingIds) != 0 {
+		const prefix string = ",\"ga_tracking_ids\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v11, v12 := range in.GaTrackingIds {
+				if v11 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v12))
+			}
+			out.RawByte(']')
+		}
 	}
 	out.RawByte('}')
 }
@@ -709,9 +751,9 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient1(in *jlexer.Lexer, out *Cl
 					out.Events = (out.Events)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v10 string
-					v10 = string(in.String())
-					out.Events = append(out.Events, v10)
+					var v13 string
+					v13 = string(in.String())
+					out.Events = append(out.Events, v13)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -930,11 +972,11 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient1(out *jwriter.Writer, in C
 		}
 		{
 			out.RawByte('[')
-			for v11, v12 := range in.Events {
-				if v11 > 0 {
+			for v14, v15 := range in.Events {
+				if v14 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v12))
+				out.String(string(v15))
 			}
 			out.RawByte(']')
 		}
@@ -1110,9 +1152,9 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient2(in *jlexer.Lexer, out *Au
 					out.Scopes = (out.Scopes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v13 string
-					v13 = string(in.String())
-					out.Scopes = append(out.Scopes, v13)
+					var v16 string
+					v16 = string(in.String())
+					out.Scopes = append(out.Scopes, v16)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1231,11 +1273,11 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient2(out *jwriter.Writer, in A
 		}
 		{
 			out.RawByte('[')
-			for v14, v15 := range in.Scopes {
-				if v14 > 0 {
+			for v17, v18 := range in.Scopes {
+				if v17 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v15))
+				out.String(string(v18))
 			}
 			out.RawByte(']')
 		}

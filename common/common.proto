@@ -79,6 +79,7 @@ message Device {
 		desktop = 3;
 	}
 	string source_referrer = 11; // referrer of referrer
+	repeated string ga_tracking_ids = 12;
 }
 
 message Error {

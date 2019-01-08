@@ -334,6 +334,12 @@
         },
         "source_referrer": {
           "type": "string"
+        },
+        "ga_tracking_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

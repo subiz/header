@@ -316,6 +316,12 @@
         },
         "source_referrer": {
           "type": "string"
+        },
+        "ga_tracking_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -962,8 +968,11 @@
         "ga_client_id": {
           "type": "string"
         },
-        "ga_tracking_id": {
-          "type": "string"
+        "ga_tracking_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "ads_netword": {
           "type": "string"

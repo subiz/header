@@ -165,7 +165,10 @@ message Trace {
 	optional string screen_resolution = 25;
 
 	optional string ga_client_id = 26;
-	optional string ga_tracking_id = 27;
+	repeated string ga_tracking_ids = 27;
+	enum AdsNetwork {
+		google_adwords = 1;
+	}
 	optional string ads_netword = 28;
 
 	repeated Campaign campaigns = 29;
@@ -178,6 +181,7 @@ message Trace {
 		referring = 1;
 		organic = 2;
 		social = 3;
+		advertising = 4;
 	}
 	optional string source = 33;
 }
