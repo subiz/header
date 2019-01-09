@@ -1636,8 +1636,8 @@ func easyjsonAe8eb074DecodeGithubComSubizHeaderUser10(in *jlexer.Lexer, out *Tra
 				}
 				in.Delim(']')
 			}
-		case "ads_netword":
-			out.AdsNetword = string(in.String())
+		case "ads_network":
+			out.AdsNetwork = string(in.String())
 		case "campaigns":
 			if in.IsNull() {
 				in.Skip()
@@ -1910,15 +1910,15 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser10(out *jwriter.Writer, in Tr
 			out.RawByte(']')
 		}
 	}
-	if in.AdsNetword != "" {
-		const prefix string = ",\"ads_netword\":"
+	if in.AdsNetwork != "" {
+		const prefix string = ",\"ads_network\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.AdsNetword))
+		out.String(string(in.AdsNetwork))
 	}
 	if len(in.Campaigns) != 0 {
 		const prefix string = ",\"campaigns\":"

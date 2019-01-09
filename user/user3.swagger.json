@@ -571,7 +571,7 @@
             "type": "string"
           }
         },
-        "ads_netword": {
+        "ads_network": {
           "type": "string"
         },
         "campaigns": {

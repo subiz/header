@@ -159,7 +159,7 @@ message Trace {
 	enum AdsNetwork {
 		google_adwords = 0;
 	}
-	string ads_netword = 28;
+	string ads_network = 28;
 
 	repeated Campaign campaigns = 29;
 	int64 created = 30;
