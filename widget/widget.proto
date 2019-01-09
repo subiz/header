@@ -4,7 +4,7 @@ package widget;
 
 import "github.com/subiz/header/account/account.proto";
 import "github.com/subiz/header/common/common.proto";
-import "github.com/subiz/header/user/user.proto";
+import "github.com/subiz/header/user/user3.proto";
 
 message AllType {
 	optional Theme theme = 2;

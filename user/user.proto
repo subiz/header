@@ -29,15 +29,6 @@ message UserCreateResult {
 	optional string mask = 5;
 }
 
-message MyUser {
-	optional common.Context ctx = 1;
-	optional string agent_id = 2;
-	optional User user = 3;
-	optional int32 unread = 4;
-	optional int64 updated = 5;
-	optional string account_id = 7;
-}
-
 enum AttributeType {
 	text = 0;
 	number = 1;
@@ -69,141 +60,12 @@ message AttributeDefinitions {
 	repeated AttributeDefinition attributes = 2;
 }
 
-enum AttributeDataState {
-	live = 0;
-	deleted = 1;
-}
-
-message AttributeData {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string key = 4;
-
-	optional string state = 6;
-	optional int64 created = 7;
-	optional int64 modified = 8;
-
-	optional string text = 10;
-	optional double number = 11;
-	optional bool boolean = 12;
-	optional string datetime = 13;
-	repeated string list = 14;
-
-	optional string setter = 16;
-	optional string setter_type = 17;
-}
-
-message User {
-	optional common.Context ctx = 1;
-	optional string id = 3;
-	optional string account_id = 4;
-	repeated Trace traces = 11;
-	//	repeated string alias = 12;
-	optional bool is_ban = 14;
-
-	repeated AttributeData attributes = 18;
-
-	repeated string segments = 19;
-	optional string subiz_id = 25;
-
-	repeated string aliases = 30;
-
-	optional int32 par = 34;
-	// optional int32 modified_hour = 35;
-	optional int64 modified = 36;
-	optional int32 modified_week = 37;
-}
-
-message Users {
-	repeated User users = 1;
-}
-
-message Traces {
-	repeated Trace traces = 3;
-}
-
 message SessionTracking {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional int64 started = 4;
 	optional int64 tracked = 6;
 	optional int32 total = 7; // number of session
-}
-
-message Trace {
-	optional string event_id = 3;
-	optional string ip = 4;
-	optional int32 location_id = 5; // remove
-
-	optional string city_name = 8;            // filled
-	optional string country_name = 9;         // filled
-	optional string continent_code = 10;      // filled
-	optional float latitude = 12;             // filled
-	optional float longitude = 13;            // filled
-	optional string postal_code = 14;         // filled
-
-	optional string timezone = 16;
-
-	optional string isp = 17;                 // filled
-	optional string continent_name = 18;      // filled
-	optional string country_code = 19;        // filled
-
-	optional string platform = 20;
-
-	optional string device_type = 21;         // filled
-	enum DeviceType {
-		unknown = 0;
-		mobile = 1;
-		tablet = 2;
-		desktop = 3;
-	}
-
-	optional string browser_name = 22;        // filled
-	optional string language = 23;
-	optional string user_agent = 24;
-	optional string screen_resolution = 25;
-
-	optional string ga_client_id = 26;
-	repeated string ga_tracking_ids = 27;
-	enum AdsNetwork {
-		google_adwords = 1;
-	}
-	optional string ads_netword = 28;
-
-	repeated Campaign campaigns = 29;
-	optional int64 created = 30;
-	optional int64 tracked = 31;
-
-	optional string referrer = 32;
-	enum Source {
-		direct = 0;
-		referring = 1;
-		organic = 2;
-		social = 3;
-		advertising = 4;
-	}
-	optional string source = 33;
-}
-
-message Campaign {
-	optional string name = 2;
-	optional string source = 3;
-	optional string medium = 4;
-	optional string term = 5;
-	optional string content = 6;
-}
-
-message MergeRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional string destination_user_id = 5;
-	optional string source_user_id = 4;
-}
-
-message CreateRequest {
-	optional string challenge_id = 3;
-	optional string answer = 4;
 }
 
 message Topic {
@@ -435,28 +297,6 @@ enum ConditionType {
 	event = 1;
 }
 
-message UserSearchResult {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 total = 3;
-	repeated User users = 4;
-	optional string anchor = 5;
-	repeated int32 unreads = 6; // only used when search my users
-	map<string, int32> unread_counts = 7;
-}
-
-message UserSearchRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string segmentation_id = 3;
-	optional string query = 4; // TODO: delete
-	optional string condition = 10;
-	optional string anchor = 5;
-	optional int32 limit = 6;
-	optional string agent_id = 8; // search my user of agent
-	optional bool unread = 9; // search my user of agent
-}
-
 message IndexEvent {
 	optional string id = 3;
 	optional string account_id = 4;
@@ -497,46 +337,6 @@ message AddToMyList {
 	optional string agent_id = 2;
 	optional string user_id = 3;
 	optional string account_id = 5;
-}
-
-message Presences {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	repeated Presence presences = 4;
-}
-
-message Presence {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional int64 pinged = 5;
-	optional int64 pinged_minute = 6;
-}
-
-message Visitor {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional User user = 4;
-	optional int64 pinged = 5;
-	optional string page_url = 6;
-	optional int64 page_viewed = 7;
-	optional string page_title = 8;
-}
-
-message Visitors {
-	optional common.Context ctx = 1;
-	repeated Visitor visitors = 2;
-}
-
-message LastView {
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional string url = 5;
-	optional string ua = 6;
-	optional string ip = 7;
-	optional int64 created = 8;
-	optional string event_id = 9;
-	optional string title = 10;
 }
 
 message Automation {
@@ -615,90 +415,6 @@ service SegmentationMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
-service VisitorMgr {
-	rpc ReadPresence (common.Id) returns (Presence);
-	rpc UpdatePresence (common.Id) returns (Presence);
-	rpc ReadPreview (common.Id) returns (LastView);
-	rpc ListTopVisitors (common.Id) returns (Visitors);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-message CountSegmentationUserByAttributeRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string attribute_key = 3;
-	optional string segmentation_id = 4;
-	optional int32 from = 5; // deprecated
-	optional int32 to = 6; // deprecated
-	optional string range = 8;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-	optional int32 from_hour = 9;
-	optional int32 to_hour = 10;
-}
-
-message CountResponse {
-	repeated int32 data = 3;
-}
-
-message UnpickRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string segmentation_id = 5;
-}
-
-message PickRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string agent_id = 4;
-	optional string segmentation_id = 5;
-	optional int64 added = 7;
-}
-
-service UserMgr {
-	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult);
-	rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
-	rpc PickToSegmentation(PickRequest) returns (common.Empty);
-	rpc DeleteFromSegmentation(UnpickRequest) returns (common.Empty);
-
-	rpc CreateUser (User) returns (common.Id);
-	rpc UpdateUser (User) returns (common.Id);
-	rpc ReadUser (common.Id) returns (User);
-
-	rpc CountSegmentationUserByAttribute(CountSegmentationUserByAttributeRequest) returns (CountResponse);
-	rpc CountTotal(CountTotalRequest) returns (CountTotalResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-
-	rpc AddAlias(Alias) returns (common.Empty);
-	rpc MoveUserActivity(MergeRequest) returns (common.Empty);
-
-	rpc ListNotes(ListNotesRequest) returns (Notes);
-	rpc AddNote(Note) returns (Note);
-	rpc UpdateNote(Note) returns (Note);
-	rpc DeleteNote(DeleteNoteRequest) returns (common.Empty);
-}
-
-service AutomationMgr {
-	rpc ListAutomations(common.Id) returns (Automations);
-	rpc UpdateAutomation(Automation) returns (Automation);
-	rpc DeleteAutomation(common.Id) returns (common.Empty);
-	rpc ReadAutomation(common.Id) returns (Automation);
-	rpc CreateAutomation(Automation) returns (Automation);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service AttributeMgr {
-	rpc ListAttributeDefinitions(common.Empty) returns (AttributeDefinitions);
-	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
-	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
-	rpc DeleteAttributeDefinition(DeleteAttrRequest) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message AutomationCheck {
 	optional string account_id = 2;
 	optional string automation_id = 3;
@@ -754,13 +470,6 @@ message SCondition {
 
 	optional int32 priority = 12;
 	optional bool event_existed = 13;
-}
-
-message Alias {
-	optional common.Context ctx = 1;
-	optional string user_id = 3;
-	optional string account_id = 4;
-	optional string alias = 5;
 }
 
 message PublishSubscribed {
@@ -840,15 +549,6 @@ message DeleteNoteRequest {
 	optional string id = 4;
 }
 
-message CountTotalRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-}
-
-message CountTotalResponse {
-	optional double total_user = 2;
-}
-
 message AutomationCredit {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -869,4 +569,28 @@ message AutomationCredits {
 
 service AutomationCreditMgr {
 	rpc ListAutomationCredits(common.Empty) returns (AutomationCredits);
+}
+
+service NoteMgr {
+	rpc ListNotes(ListNotesRequest) returns (Notes);
+	rpc AddNote(Note) returns (Note);
+	rpc UpdateNote(Note) returns (Note);
+	rpc DeleteNote(DeleteNoteRequest) returns (common.Empty);
+}
+
+service AutomationMgr {
+	rpc ListAutomations(common.Id) returns (Automations);
+	rpc UpdateAutomation(Automation) returns (Automation);
+	rpc DeleteAutomation(common.Id) returns (common.Empty);
+	rpc ReadAutomation(common.Id) returns (Automation);
+	rpc CreateAutomation(Automation) returns (Automation);
+	rpc Ping(common.PingRequest) returns (common.Pong);
+}
+
+service AttributeMgr {
+	rpc ListAttributeDefinitions(common.Empty) returns (AttributeDefinitions);
+	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
+	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
+	rpc DeleteAttributeDefinition(DeleteAttrRequest) returns (common.Empty);
+	rpc Ping(common.PingRequest) returns (common.Pong);
 }

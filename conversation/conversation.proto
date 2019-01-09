@@ -3,7 +3,7 @@ syntax = "proto2";
 package conversation;
 
 import "github.com/subiz/header/common/common.proto";
-import "github.com/subiz/header/user/user.proto";
+import "github.com/subiz/header/user/user3.proto";
 
 message Rule {
 	optional common.Context ctx = 1;

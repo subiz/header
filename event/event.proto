@@ -6,6 +6,7 @@ import "github.com/subiz/header/common/common.proto";
 import "github.com/subiz/header/account/account.proto";
 import "github.com/subiz/header/conversation/conversation.proto";
 import "github.com/subiz/header/content/content.proto";
+import "github.com/subiz/header/user/user3.proto";
 import "github.com/subiz/header/user/user.proto";
 import "github.com/subiz/header/notibox/notibox.proto";
 import "github.com/subiz/header/payment/payment.proto";

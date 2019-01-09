@@ -676,10 +676,7 @@
           "type": "string"
         },
         "list": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         },
         "setter": {
           "type": "string"
@@ -857,7 +854,7 @@
         "modified": {
           "type": "string",
           "format": "int64",
-          "title": "optional int32 modified_hour = 35;"
+          "title": "int32 modified_hour = 35;"
         },
         "modified_week": {
           "type": "integer",

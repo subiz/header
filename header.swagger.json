@@ -2373,10 +2373,7 @@
             "type": "string"
           },
           "list": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+            "type": "string"
           },
           "setter": {
             "type": "string"
@@ -2570,7 +2567,7 @@
           "modified": {
             "type": "integer",
             "format": "int64",
-            "title": "optional int32 modified_hour = 35;"
+            "title": "int32 modified_hour = 35;"
           },
           "modified_week": {
             "type": "integer",
@@ -4285,57 +4282,6 @@
           }
         }
       },
-      "userCountResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        }
-      },
-      "userCountTotalResponse": {
-        "type": "object",
-        "properties": {
-          "total_user": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "userLastView": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "ua": {
-            "type": "string"
-          },
-          "ip": {
-            "type": "string"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "event_id": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          }
-        }
-      },
       "userMaskResponse": {
         "type": "object",
         "properties": {
@@ -4471,20 +4417,6 @@
           }
         }
       },
-      "userSubizIDResponse": {
-        "type": "object",
-        "properties": {
-          "subiz_id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          }
-        }
-      },
       "userUserCreateResult": {
         "type": "object",
         "properties": {
@@ -4492,6 +4424,57 @@
             "type": "string"
           },
           "mask": {
+            "type": "string"
+          }
+        }
+      },
+      "userCountResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "userCountTotalResponse": {
+        "type": "object",
+        "properties": {
+          "total_user": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "userLastView": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "ua": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "title": {
             "type": "string"
           }
         }
