@@ -3726,16 +3726,6 @@ func easyjsonAe8eb074DecodeGithubComSubizHeaderUser25(in *jlexer.Lexer, out *Att
 			continue
 		}
 		switch key {
-		case "ctx":
-			if in.IsNull() {
-				in.Skip()
-				out.Ctx = nil
-			} else {
-				if out.Ctx == nil {
-					out.Ctx = new(common.Context)
-				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
-			}
 		case "account_id":
 			out.AccountId = string(in.String())
 		case "user_id":
@@ -3757,7 +3747,28 @@ func easyjsonAe8eb074DecodeGithubComSubizHeaderUser25(in *jlexer.Lexer, out *Att
 		case "datetime":
 			out.Datetime = string(in.String())
 		case "list":
-			out.List = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.List = nil
+			} else {
+				in.Delim('[')
+				if out.List == nil {
+					if !in.IsDelim(']') {
+						out.List = make([]string, 0, 4)
+					} else {
+						out.List = []string{}
+					}
+				} else {
+					out.List = (out.List)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v42 string
+					v42 = string(in.String())
+					out.List = append(out.List, v42)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
 		case "setter":
 			out.Setter = string(in.String())
 		case "setter_type":
@@ -3776,16 +3787,6 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser25(out *jwriter.Writer, in At
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.Ctx != nil {
-		const prefix string = ",\"ctx\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Ctx).MarshalEasyJSON(out)
-	}
 	if in.AccountId != "" {
 		const prefix string = ",\"account_id\":"
 		if first {
@@ -3886,7 +3887,7 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser25(out *jwriter.Writer, in At
 		}
 		out.String(string(in.Datetime))
 	}
-	if in.List != "" {
+	if len(in.List) != 0 {
 		const prefix string = ",\"list\":"
 		if first {
 			first = false
@@ -3894,7 +3895,16 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser25(out *jwriter.Writer, in At
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.List))
+		{
+			out.RawByte('[')
+			for v43, v44 := range in.List {
+				if v43 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v44))
+			}
+			out.RawByte(']')
+		}
 	}
 	if in.Setter != "" {
 		const prefix string = ",\"setter\":"

@@ -358,9 +358,6 @@
     "userAttributeData": {
       "type": "object",
       "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
         "account_id": {
           "type": "string"
         },
@@ -396,7 +393,10 @@
           "type": "string"
         },
         "list": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "setter": {
           "type": "string"
