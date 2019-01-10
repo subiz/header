@@ -9,7 +9,6 @@ message Subscription {
 	string user_id = 2;
 	string topic = 3;
 
-
 	//optional SubscribeScope scope = 5;
 	//optional string account_id = 6;
 	string sub_id = 7;
@@ -40,11 +39,11 @@ message PublishMessage {
 service Pubsub {
 	rpc Subscribe(Subscription) returns (common.Empty);
 	rpc Unsubscribe(Subscription) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 enum Event {
 	PubsubSynced = 0;
 	PubsubRequested = 1;
 	PubsubPublish = 2;
+	PubsubWorkerJob = 7;
 }
