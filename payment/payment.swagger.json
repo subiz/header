@@ -441,6 +441,20 @@
         }
       }
     },
+    "paymentAgentReferInfos": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "agent_refer_infos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentAgentReferInfo"
+          }
+        }
+      }
+    },
     "paymentBill": {
       "type": "object",
       "properties": {

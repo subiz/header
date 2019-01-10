@@ -354,6 +354,11 @@ message AgentReferInfo {
 	optional float minimum_payment = 17;
 }
 
+message AgentReferInfos{
+	optional common.Context ctx = 1;
+	repeated AgentReferInfo agent_refer_infos = 2;
+}
+
 message AgentByReferId {
 	optional string referrer_id = 1;
 	optional string account_id = 2;
@@ -556,6 +561,7 @@ service PaymentMgr {
 	rpc TransferMoney(PayRequest) returns (Bill);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ListLogs(ListLogsRequest) returns (Logs);
+
 	rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
 	rpc GetPromotionCode(String) returns (PromotionCode);
 	rpc UsePromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
@@ -564,7 +570,9 @@ service PaymentMgr {
 	rpc DeletePromotionCode(common.Id) returns (common.Empty);
 
 	rpc GetAgentReferInfo(common.Empty) returns (AgentReferInfo);
-  rpc UpdateAgentReferInfo(AgentReferInfo) returns (AgentReferInfo);
+	rpc GetAgentRerferInfoByReferId (common.Id) returns (AgentReferInfo);
+	rpc GetAgentReferInfos(common.Empty) returns (AgentReferInfos);
+	rpc UpdateAgentReferInfo(AgentReferInfo) returns (AgentReferInfo);
 	rpc ListAccountReferred(common.Id) returns (LogAccountReferreds);
   rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
 	rpc ListPaidForAgentReferrer(common.Id) returns (LogPaidForAgentReferrers);
