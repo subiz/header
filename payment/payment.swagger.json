@@ -1263,6 +1263,9 @@
             "format": "int64"
           },
           "title": "repeated int32 for_number_of_agents = 31;"
+        },
+        "id": {
+          "type": "string"
         }
       }
     },

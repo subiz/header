@@ -325,6 +325,12 @@ message PromotionCode {
 	optional bool is_deleted = 30;
 //repeated int32 for_number_of_agents = 31;
 	repeated uint32 for_number_of_agents = 32;
+	optional string id = 33;
+}
+
+message PromotionCodeByCode{
+	optional string code = 1;
+	optional string id = 2;
 }
 
 message LogPromotionCodeUsed {
