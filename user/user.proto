@@ -200,7 +200,8 @@ enum Event {
 	UserTotalConvoUpdated = 232;
 	UserTotalOpenTicketUpdated = 233;
 
-	AutomationCreditAggregate = 235;
+	AutomationCreditAggregated = 235;
+	AutomationCreditCountAggregate = 236;
 }
 
 message AggregateUpdateInteracted {

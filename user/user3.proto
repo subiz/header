@@ -302,7 +302,10 @@ service AutomationCreditMgr {
 
 message AutomationCreditsAggregate {
 	common.Context ctx = 1;
-	repeated AutomationCredit credits = 2;
+	string account_id = 2;
+	int64 webhook_fired = 3;
+	int64 message_fired = 4;
+	int64 email_fired = 5;
 	int64 min = 6;
 }
 

@@ -3795,37 +3795,14 @@ func easyjsonAe8eb074DecodeGithubComSubizHeaderUser26(in *jlexer.Lexer, out *Aut
 				}
 				(*out.Ctx).UnmarshalEasyJSON(in)
 			}
-		case "credits":
-			if in.IsNull() {
-				in.Skip()
-				out.Credits = nil
-			} else {
-				in.Delim('[')
-				if out.Credits == nil {
-					if !in.IsDelim(']') {
-						out.Credits = make([]*AutomationCredit, 0, 8)
-					} else {
-						out.Credits = []*AutomationCredit{}
-					}
-				} else {
-					out.Credits = (out.Credits)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v42 *AutomationCredit
-					if in.IsNull() {
-						in.Skip()
-						v42 = nil
-					} else {
-						if v42 == nil {
-							v42 = new(AutomationCredit)
-						}
-						(*v42).UnmarshalEasyJSON(in)
-					}
-					out.Credits = append(out.Credits, v42)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "webhook_fired":
+			out.WebhookFired = int64(in.Int64())
+		case "message_fired":
+			out.MessageFired = int64(in.Int64())
+		case "email_fired":
+			out.EmailFired = int64(in.Int64())
 		case "min":
 			out.Min = int64(in.Int64())
 		default:
@@ -3852,28 +3829,45 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser26(out *jwriter.Writer, in Au
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
 	}
-	if len(in.Credits) != 0 {
-		const prefix string = ",\"credits\":"
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		{
-			out.RawByte('[')
-			for v43, v44 := range in.Credits {
-				if v43 > 0 {
-					out.RawByte(',')
-				}
-				if v44 == nil {
-					out.RawString("null")
-				} else {
-					(*v44).MarshalEasyJSON(out)
-				}
-			}
-			out.RawByte(']')
+		out.String(string(in.AccountId))
+	}
+	if in.WebhookFired != 0 {
+		const prefix string = ",\"webhook_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
 		}
+		out.Int64(int64(in.WebhookFired))
+	}
+	if in.MessageFired != 0 {
+		const prefix string = ",\"message_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.MessageFired))
+	}
+	if in.EmailFired != 0 {
+		const prefix string = ",\"email_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.EmailFired))
 	}
 	if in.Min != 0 {
 		const prefix string = ",\"min\":"
@@ -4177,9 +4171,9 @@ func easyjsonAe8eb074DecodeGithubComSubizHeaderUser28(in *jlexer.Lexer, out *Att
 					out.List = (out.List)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v45 string
-					v45 = string(in.String())
-					out.List = append(out.List, v45)
+					var v42 string
+					v42 = string(in.String())
+					out.List = append(out.List, v42)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -4312,11 +4306,11 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser28(out *jwriter.Writer, in At
 		}
 		{
 			out.RawByte('[')
-			for v46, v47 := range in.List {
-				if v46 > 0 {
+			for v43, v44 := range in.List {
+				if v43 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v47))
+				out.String(string(v44))
 			}
 			out.RawByte(']')
 		}
