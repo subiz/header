@@ -341,7 +341,7 @@ message LogPromotionCodeUsed {
 
 message AgentReferInfo {
 	optional common.Context ctx = 1;
-  optional string agent_id = 2; // is referrer_id
+  optional string agent_id = 2;
 	optional string account_id = 3;
 	enum Status {
 		active = 0; // duoc phep refer nguoi khac
@@ -358,6 +358,7 @@ message AgentReferInfo {
   optional string bank_fullname = 15;
 	optional string referrer_id = 16;
 	optional float minimum_payment = 17;
+	optional int32 number_of_refer = 18;
 }
 
 message AgentReferInfos{
@@ -371,12 +372,39 @@ message AgentByReferId {
 	optional string agent_id = 3;
 }
 
+message AgentReferRequest{
+	optional int32 past_day = 1;
+}
+
+message NumberOfReferByAgent{
+  optional string agent_id = 1;
+	optional string account_id = 2;
+	optional float earning = 3;
+	optional int32 number_of_refer = 4;
+	optional int32 number_of_refer_by_day = 5;
+}
+
+message AgentReferResponse{
+	optional common.Context ctx = 1;
+	repeated NumberOfReferByAgent number_of_refer_by_agent = 2;
+}
+
 message LogAccountReferred {
   optional string referrer_id = 1;
 	optional string account_id = 2;
 	optional int64 created = 3;
   optional string referrer_account_id = 4;
 	optional string referrer_agent_id = 5;
+}
+
+message LogAccountReferredByTime{
+	optional string time = 1;
+	optional string referrer_id = 2;
+	optional string account_id = 3;
+	optional int64 created = 4;
+  optional string referrer_account_id = 5;
+	optional string referrer_agent_id = 6;
+
 }
 
 message LogAccountReferreds{
@@ -391,7 +419,6 @@ message LogBillByAccountReferred {
 	optional float amount = 4;
 	optional int64 created = 5;
 	optional string bill_id = 6;
-	optional int32 year = 7;
   optional string referrer_account_id = 8;
 	optional string referrer_agent_id = 9;
 }
@@ -570,20 +597,21 @@ service PaymentMgr {
 
 	rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
 	rpc GetPromotionCode(String) returns (PromotionCode);
-	rpc UsePromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
-	rpc ValidatePromotionCode(PromotionCodeRequest) returns (PromotionCodeResponse);
+	rpc UsePromotionCode(PromotionCodeRequest) returns (common.Empty);
+	rpc ValidatePromotionCode(PromotionCodeRequest) returns (PromotionCode);
 	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
 	rpc DeletePromotionCode(common.Id) returns (common.Empty);
 
 	rpc GetAgentReferInfo(common.Empty) returns (AgentReferInfo);
-	rpc GetAgentRerferInfoByReferId (common.Id) returns (AgentReferInfo);
-	rpc GetAgentReferInfos(common.Empty) returns (AgentReferInfos);
+	rpc GetAgentReferInfoByReferId (common.Id) returns (AgentReferInfo);
+	rpc ListNumberOfReferByAgent(AgentReferRequest) returns (AgentReferResponse);
 	rpc UpdateAgentReferInfo(AgentReferInfo) returns (AgentReferInfo);
 	rpc ListAccountReferred(common.Id) returns (LogAccountReferreds);
   rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
 	rpc ListPaidForAgentReferrer(common.Id) returns (LogPaidForAgentReferrers);
 	rpc PaidForAgentReferrer(LogPaidForAgentReferrer) returns (common.Empty);
 }
+
 
 message PromotionCodes{
 	optional common.Context ctx = 1;

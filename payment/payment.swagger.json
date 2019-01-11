@@ -438,19 +438,23 @@
         "minimum_payment": {
           "type": "number",
           "format": "float"
+        },
+        "number_of_refer": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
-    "paymentAgentReferInfos": {
+    "paymentAgentReferResponse": {
       "type": "object",
       "properties": {
         "ctx": {
           "$ref": "#/definitions/commonContext"
         },
-        "agent_refer_infos": {
+        "number_of_refer_by_agent": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/paymentAgentReferInfo"
+            "$ref": "#/definitions/paymentNumberOfReferByAgent"
           }
         }
       }
@@ -940,10 +944,6 @@
         "bill_id": {
           "type": "string"
         },
-        "year": {
-          "type": "integer",
-          "format": "int32"
-        },
         "referrer_account_id": {
           "type": "string"
         },
@@ -1040,6 +1040,29 @@
         "created": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "paymentNumberOfReferByAgent": {
+      "type": "object",
+      "properties": {
+        "agent_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "earning": {
+          "type": "number",
+          "format": "float"
+        },
+        "number_of_refer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "number_of_refer_by_day": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -1283,24 +1306,6 @@
         },
         "referral": {
           "$ref": "#/definitions/paymentReferralCreditCode"
-        }
-      }
-    },
-    "paymentPromotionCodeResponse": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "status": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "error": {
-          "type": "string"
-        },
-        "promotionCode": {
-          "$ref": "#/definitions/paymentPromotionCode"
         }
       }
     },
