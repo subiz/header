@@ -199,6 +199,8 @@ enum Event {
 
 	UserTotalConvoUpdated = 232;
 	UserTotalOpenTicketUpdated = 233;
+
+	AutomationCreditAggregate = 235;
 }
 
 message AggregateUpdateInteracted {
@@ -547,28 +549,6 @@ message DeleteNoteRequest {
 	optional string account_id = 2;
 	optional string target_id = 3;
 	optional string id = 4;
-}
-
-message AutomationCredit {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	enum Type {
-		message = 0;
-		email = 1;
-		webhook = 2;
-	}
-	optional string type = 3;
-	optional uint32 credit_in_month = 4;
-	optional uint32 fired_in_month = 5;
-}
-
-message AutomationCredits {
-	optional common.Context ctx = 1;
-	repeated AutomationCredit automation_credits = 2;
-}
-
-service AutomationCreditMgr {
-	rpc ListAutomationCredits(common.Empty) returns (AutomationCredits);
 }
 
 service NoteMgr {

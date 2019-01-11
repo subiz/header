@@ -406,6 +406,57 @@
         }
       }
     },
+    "userAutomationCredit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "webhook_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "month": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "userCampaign": {
       "type": "object",
       "properties": {

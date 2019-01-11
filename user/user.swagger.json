@@ -450,42 +450,6 @@
         }
       }
     },
-    "userAutomationCredit": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "credit_in_month": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "fired_in_month": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "userAutomationCredits": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "automation_credits": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userAutomationCredit"
-          }
-        }
-      }
-    },
     "userAutomations": {
       "type": "object",
       "properties": {
