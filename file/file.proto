@@ -60,6 +60,17 @@ message File {
 	string id = 11;
 }
 
+message FileMeta {
+	string account_id = 2;
+	string id = 3;
+	int64 uploaded = 4;
+	string name = 5;
+	int64 size = 6;
+	string full_url = 7;
+	string mime_type = 8;
+	int64 downloaded = 10;
+}
+
 enum Event {
 	FilePresignRequested = 0;
 	FileCreated = 3;
