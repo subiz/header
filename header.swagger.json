@@ -2386,6 +2386,62 @@
           }
         }
       },
+      "userAutomation": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userCondition"
+            }
+          },
+          "condition": {
+            "$ref": "#/components/schemas/userSCondition"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "state": {
+            "type": "string"
+          },
+          "action_type": {
+            "type": "string"
+          },
+          "action_data": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "cross_channel": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "metadata": {
+            "type": "string"
+          }
+        }
+      },
       "userCampaign": {
         "type": "object",
         "properties": {
@@ -2814,6 +2870,9 @@
           },
           "ticket": {
             "$ref": "#/components/schemas/conversationTicket"
+          },
+          "automation": {
+            "$ref": "#/components/schemas/userAutomation"
           }
         }
       },
@@ -2896,6 +2955,26 @@
             "type": "string"
           },
           "alias": {
+            "type": "string"
+          }
+        }
+      },
+      "userCondition": {
+        "type": "object",
+        "properties": {
+          "join": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "id": {
             "type": "string"
           }
         }
@@ -2992,6 +3071,47 @@
             "type": "string"
           }
         }
+      },
+      "userSCondition": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "join": {
+            "type": "string"
+          },
+          "event_type_time": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userSCondition"
+            }
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "event_existed": {
+            "type": "boolean",
+            "format": "boolean"
+          }
+        },
+        "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
       },
       "userTopic": {
         "type": "object",
@@ -4190,62 +4310,6 @@
           }
         }
       },
-      "userAutomation": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "channel": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "conditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userCondition"
-            }
-          },
-          "condition": {
-            "$ref": "#/components/schemas/userSCondition"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modified": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "state": {
-            "type": "string"
-          },
-          "action_type": {
-            "type": "string"
-          },
-          "action_data": {
-            "type": "string"
-          },
-          "scope": {
-            "type": "string"
-          },
-          "cross_channel": {
-            "type": "boolean",
-            "format": "boolean"
-          },
-          "metadata": {
-            "type": "string"
-          }
-        }
-      },
       "userAutomations": {
         "type": "object",
         "properties": {
@@ -4254,26 +4318,6 @@
             "items": {
               "$ref": "#/components/schemas/userAutomation"
             }
-          }
-        }
-      },
-      "userCondition": {
-        "type": "object",
-        "properties": {
-          "join": {
-            "type": "string"
-          },
-          "key": {
-            "type": "string"
-          },
-          "operator": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
           }
         }
       },
@@ -4307,47 +4351,6 @@
             "type": "string"
           }
         }
-      },
-      "userSCondition": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "key": {
-            "type": "string"
-          },
-          "operator": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
-          },
-          "join": {
-            "type": "string"
-          },
-          "event_type_time": {
-            "type": "string"
-          },
-          "event_type": {
-            "type": "string"
-          },
-          "conditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userSCondition"
-            }
-          },
-          "priority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "event_existed": {
-            "type": "boolean",
-            "format": "boolean"
-          }
-        },
-        "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
       },
       "userSegmentation": {
         "type": "object",

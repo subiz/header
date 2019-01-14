@@ -1676,6 +1676,9 @@
         },
         "ticket": {
           "$ref": "#/definitions/conversationTicket"
+        },
+        "automation": {
+          "$ref": "#/definitions/userAutomation"
         }
       }
     },
@@ -1872,6 +1875,65 @@
         }
       }
     },
+    "userAutomation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCondition"
+          }
+        },
+        "condition": {
+          "$ref": "#/definitions/userSCondition"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "action_type": {
+          "type": "string"
+        },
+        "action_data": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "cross_channel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "metadata": {
+          "type": "string"
+        }
+      }
+    },
     "userCampaign": {
       "type": "object",
       "properties": {
@@ -1888,6 +1950,26 @@
           "type": "string"
         },
         "content": {
+          "type": "string"
+        }
+      }
+    },
+    "userCondition": {
+      "type": "object",
+      "properties": {
+        "join": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "id": {
           "type": "string"
         }
       }
@@ -2015,6 +2097,47 @@
           "format": "int64"
         }
       }
+    },
+    "userSCondition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "join": {
+          "type": "string"
+        },
+        "event_type_time": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userSCondition"
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "event_existed": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
     },
     "userTopic": {
       "type": "object",

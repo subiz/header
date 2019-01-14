@@ -93,6 +93,7 @@ message RawEvent {
 		user.Alias alias = 22;
 		user.Note note = 23;
 		conversation.Ticket ticket = 24;
+		user.Automation automation = 25;
 	}
 	Data data = 20;
 }
@@ -138,7 +139,7 @@ enum EventType {
 	user_attribute_created = 51;
 	user_attribute_updated = 52;
 	user_attribute_deleted = 55;
-	automation_credit_limited = 70;
+	automation_out_of_credit = 70;
 }
 
 enum ConvoType {
@@ -227,6 +228,7 @@ enum Object {
 	alias = 22;
 	note = 23;
 	ticket = 24;
+	automation = 25;
 }
 
 message ListEventsRequest {
