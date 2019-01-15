@@ -3445,17 +3445,6 @@
           }
         }
       },
-      "paymentAgentReferResponse": {
-        "type": "object",
-        "properties": {
-          "number_of_refer_by_agent": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/paymentNumberOfReferByAgent"
-            }
-          }
-        }
-      },
       "paymentBill": {
         "type": "object",
         "properties": {
@@ -3872,29 +3861,6 @@
           },
           "anchor": {
             "type": "string"
-          }
-        }
-      },
-      "paymentNumberOfReferByAgent": {
-        "type": "object",
-        "properties": {
-          "agent_id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "earning": {
-            "type": "number",
-            "format": "float"
-          },
-          "number_of_refer": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "number_of_refer_by_day": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },

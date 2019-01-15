@@ -574,7 +574,7 @@ service PaymentMgr {
 
 	rpc SearchReferral(SearchReferredRequest) returns (Referral);
 	rpc GetReferral(common.Id) returns (Referral);
-	rpc ListNumberOfReferByAgent(AgentReferRequest) returns (AgentReferResponse);
+	//	rpc ListNumberOfReferByAgent(AgentReferRequest) returns (AgentReferResponse);
 	rpc UpdateReferral(Referral) returns (Referral);
 	rpc ListAccountReferred(common.Id) returns (LogAccountReferreds);
   rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
