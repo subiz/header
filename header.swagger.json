@@ -2386,62 +2386,6 @@
           }
         }
       },
-      "userAutomation": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "id": {
-            "type": "string"
-          },
-          "channel": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "conditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userCondition"
-            }
-          },
-          "condition": {
-            "$ref": "#/components/schemas/userSCondition"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modified": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "state": {
-            "type": "string"
-          },
-          "action_type": {
-            "type": "string"
-          },
-          "action_data": {
-            "type": "string"
-          },
-          "scope": {
-            "type": "string"
-          },
-          "cross_channel": {
-            "type": "boolean",
-            "format": "boolean"
-          },
-          "metadata": {
-            "type": "string"
-          }
-        }
-      },
       "userCampaign": {
         "type": "object",
         "properties": {
@@ -2959,6 +2903,62 @@
           }
         }
       },
+      "userAutomation": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userCondition"
+            }
+          },
+          "condition": {
+            "$ref": "#/components/schemas/userSCondition"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "state": {
+            "type": "string"
+          },
+          "action_type": {
+            "type": "string"
+          },
+          "action_data": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "cross_channel": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "metadata": {
+            "type": "string"
+          }
+        }
+      },
       "userCondition": {
         "type": "object",
         "properties": {
@@ -3445,55 +3445,6 @@
           }
         }
       },
-      "paymentAgentReferInfo": {
-        "type": "object",
-        "properties": {
-          "agent_id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "earning": {
-            "type": "number",
-            "format": "float"
-          },
-          "commission_rate": {
-            "type": "number",
-            "format": "float"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "bank_name": {
-            "type": "string"
-          },
-          "bank_account_number": {
-            "type": "string"
-          },
-          "bank_branch": {
-            "type": "string"
-          },
-          "bank_fullname": {
-            "type": "string"
-          },
-          "referrer_id": {
-            "type": "string"
-          },
-          "minimum_payment": {
-            "type": "number",
-            "format": "float"
-          },
-          "number_of_refer": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
       "paymentAgentReferResponse": {
         "type": "object",
         "properties": {
@@ -3851,6 +3802,10 @@
           "bill_id": {
             "type": "string"
           },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
           "referrer_account_id": {
             "type": "string"
           },
@@ -4183,7 +4138,7 @@
       "paymentPromotionCodes": {
         "type": "object",
         "properties": {
-          "promotionCodes": {
+          "promotion_codes": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/paymentPromotionCode"
@@ -4195,6 +4150,59 @@
           "total": {
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "paymentReferral": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "earning": {
+            "type": "number",
+            "format": "float"
+          },
+          "commission_rate": {
+            "type": "number",
+            "format": "float"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "bank_name": {
+            "type": "string"
+          },
+          "bank_account_number": {
+            "type": "string"
+          },
+          "bank_branch": {
+            "type": "string"
+          },
+          "bank_fullname": {
+            "type": "string"
+          },
+          "referrer_id": {
+            "type": "string"
+          },
+          "minimum_payment": {
+            "type": "number",
+            "format": "float"
+          },
+          "number_of_refer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number_of_refer_by_day": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
