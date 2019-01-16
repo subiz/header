@@ -172,6 +172,10 @@ message SubscribeRet {
 	optional bool success = 2;
 }
 
+message SubscribeAppRequest {
+	repeated string subscribed_fields = 2;
+}
+
 message Error {
 	optional int32 code = 3;
 	optional int32 error_subcode = 4;
