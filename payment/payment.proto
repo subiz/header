@@ -574,7 +574,7 @@ service PaymentMgr {
 
 	rpc SearchReferral(SearchReferredRequest) returns (Referral);
 	rpc GetReferral(common.Id) returns (Referral);
-	//	rpc ListNumberOfReferByAgent(AgentReferRequest) returns (AgentReferResponse);
+	rpc ListTopReferral(common.Empty) returns (ReferralResponse);
 	rpc UpdateReferral(Referral) returns (Referral);
 	rpc ListAccountReferred(common.Id) returns (LogAccountReferreds);
   rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
@@ -590,23 +590,18 @@ message LogAccountReferredByTime{
 	optional int64 created = 5;
 }
 
-message AgentReferRequest{
-	optional int32 past_day = 1;
-}
-
 message NumberOfReferByAgent{
   optional string agent_id = 1;
 	optional string account_id = 2;
 	optional float earning = 3;
 	optional int32 number_of_refer = 4;
-	optional int32 number_of_refer_by_day = 5;
+	optional int32 number_of_recent_refer = 5;
 }
 
-message AgentReferResponse{
+message ReferralResponse{
 	optional common.Context ctx = 1;
-	repeated NumberOfReferByAgent number_of_refer_by_agent = 2;
+	repeated NumberOfReferByAgent top_referrals = 2;
 }
-
 
 message SearchReferredRequest{
 	optional common.Context ctx = 1;

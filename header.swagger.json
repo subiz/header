@@ -2335,6 +2335,77 @@
           }
         }
       },
+      "userAttributeData": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "text": {
+            "type": "string"
+          },
+          "number": {
+            "type": "number",
+            "format": "double"
+          },
+          "boolean": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "datetime": {
+            "type": "string"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "setter": {
+            "type": "string"
+          },
+          "setter_type": {
+            "type": "string"
+          }
+        }
+      },
+      "userCampaign": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "medium": {
+            "type": "string"
+          },
+          "term": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
       "userPresence": {
         "type": "object",
         "properties": {
@@ -2351,6 +2422,159 @@
           "pinged_minute": {
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "userTrace": {
+        "type": "object",
+        "properties": {
+          "event_id": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "location_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "city_name": {
+            "type": "string"
+          },
+          "country_name": {
+            "type": "string"
+          },
+          "continent_code": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "postal_code": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "isp": {
+            "type": "string"
+          },
+          "continent_name": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          },
+          "platform": {
+            "type": "string"
+          },
+          "device_type": {
+            "type": "string"
+          },
+          "browser_name": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "user_agent": {
+            "type": "string"
+          },
+          "screen_resolution": {
+            "type": "string"
+          },
+          "ga_client_id": {
+            "type": "string"
+          },
+          "ga_tracking_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ads_network": {
+            "type": "string"
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userCampaign"
+            }
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tracked": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "referrer": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "userUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "traces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userTrace"
+            }
+          },
+          "is_ban": {
+            "type": "boolean",
+            "format": "boolean",
+            "title": "repeated string alias = 12;"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/userAttributeData"
+            }
+          },
+          "segments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subiz_id": {
+            "type": "string"
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "par": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64",
+            "title": "int32 modified_hour = 35;"
+          },
+          "modified_week": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -2679,57 +2903,6 @@
           }
         }
       },
-      "userAttributeData": {
-        "type": "object",
-        "properties": {
-          "account_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "string"
-          },
-          "key": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modified": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "text": {
-            "type": "string"
-          },
-          "number": {
-            "type": "number",
-            "format": "double"
-          },
-          "boolean": {
-            "type": "boolean",
-            "format": "boolean"
-          },
-          "datetime": {
-            "type": "string"
-          },
-          "list": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "setter": {
-            "type": "string"
-          },
-          "setter_type": {
-            "type": "string"
-          }
-        }
-      },
       "userAutomation": {
         "type": "object",
         "properties": {
@@ -2782,26 +2955,6 @@
             "format": "boolean"
           },
           "metadata": {
-            "type": "string"
-          }
-        }
-      },
-      "userCampaign": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "source": {
-            "type": "string"
-          },
-          "medium": {
-            "type": "string"
-          },
-          "term": {
-            "type": "string"
-          },
-          "content": {
             "type": "string"
           }
         }
@@ -2982,103 +3135,6 @@
           }
         }
       },
-      "userTrace": {
-        "type": "object",
-        "properties": {
-          "event_id": {
-            "type": "string"
-          },
-          "ip": {
-            "type": "string"
-          },
-          "location_id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "city_name": {
-            "type": "string"
-          },
-          "country_name": {
-            "type": "string"
-          },
-          "continent_code": {
-            "type": "string"
-          },
-          "latitude": {
-            "type": "number",
-            "format": "float"
-          },
-          "longitude": {
-            "type": "number",
-            "format": "float"
-          },
-          "postal_code": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "isp": {
-            "type": "string"
-          },
-          "continent_name": {
-            "type": "string"
-          },
-          "country_code": {
-            "type": "string"
-          },
-          "platform": {
-            "type": "string"
-          },
-          "device_type": {
-            "type": "string"
-          },
-          "browser_name": {
-            "type": "string"
-          },
-          "language": {
-            "type": "string"
-          },
-          "user_agent": {
-            "type": "string"
-          },
-          "screen_resolution": {
-            "type": "string"
-          },
-          "ga_client_id": {
-            "type": "string"
-          },
-          "ga_tracking_ids": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "ads_network": {
-            "type": "string"
-          },
-          "campaigns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userCampaign"
-            }
-          },
-          "created": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "tracked": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "referrer": {
-            "type": "string"
-          },
-          "source": {
-            "type": "string"
-          }
-        }
-      },
       "userUnreadTopic": {
         "type": "object",
         "properties": {
@@ -3099,62 +3155,6 @@
             "format": "int64"
           },
           "unread": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "userUser": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "account_id": {
-            "type": "string"
-          },
-          "traces": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userTrace"
-            }
-          },
-          "is_ban": {
-            "type": "boolean",
-            "format": "boolean",
-            "title": "repeated string alias = 12;"
-          },
-          "attributes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/userAttributeData"
-            }
-          },
-          "segments": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "subiz_id": {
-            "type": "string"
-          },
-          "aliases": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "par": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "modified": {
-            "type": "integer",
-            "format": "int64",
-            "title": "int32 modified_hour = 35;"
-          },
-          "modified_week": {
             "type": "integer",
             "format": "int32"
           }
@@ -3864,6 +3864,29 @@
           }
         }
       },
+      "paymentNumberOfReferByAgent": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "earning": {
+            "type": "number",
+            "format": "float"
+          },
+          "number_of_refer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number_of_recent_refer": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "paymentPaymentMethod": {
         "type": "object",
         "properties": {
@@ -4181,6 +4204,17 @@
           "credit": {
             "type": "number",
             "format": "float"
+          }
+        }
+      },
+      "paymentReferralResponse": {
+        "type": "object",
+        "properties": {
+          "top_referrals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/paymentNumberOfReferByAgent"
+            }
           }
         }
       },

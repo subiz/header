@@ -981,6 +981,29 @@
         }
       }
     },
+    "paymentNumberOfReferByAgent": {
+      "type": "object",
+      "properties": {
+        "agent_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "earning": {
+          "type": "number",
+          "format": "float"
+        },
+        "number_of_refer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "number_of_recent_refer": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "paymentPaymentMethod": {
       "type": "object",
       "properties": {
@@ -1310,6 +1333,20 @@
         "credit": {
           "type": "number",
           "format": "float"
+        }
+      }
+    },
+    "paymentReferralResponse": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "top_referrals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentNumberOfReferByAgent"
+          }
         }
       }
     },
