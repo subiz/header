@@ -2595,41 +2595,18 @@ func easyjsonA8fbe0d0DecodeGithubComSubizHeaderAuth19(in *jlexer.Lexer, out *Acc
 		switch key {
 		case "issuer_id":
 			out.IssuerId = string(in.String())
-		case "issuer_type":
-			out.IssuerType = string(in.String())
 		case "client_id":
 			out.ClientId = string(in.String())
-		case "client_type":
-			out.ClientType = string(in.String())
 		case "account_id":
 			out.AccountId = string(in.String())
-		case "client_account_id":
-			out.ClientAccountId = string(in.String())
 		case "expired":
 			out.Expired = int32(in.Int32())
+		case "issuer_type":
+			out.IssuerType = Type(in.Int32())
+		case "client_type":
+			out.ClientType = Type(in.Int32())
 		case "scopes":
-			if in.IsNull() {
-				in.Skip()
-				out.Scopes = nil
-			} else {
-				in.Delim('[')
-				if out.Scopes == nil {
-					if !in.IsDelim(']') {
-						out.Scopes = make([]string, 0, 4)
-					} else {
-						out.Scopes = []string{}
-					}
-				} else {
-					out.Scopes = (out.Scopes)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v13 string
-					v13 = string(in.String())
-					out.Scopes = append(out.Scopes, v13)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
+			out.Scopes = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -2654,16 +2631,6 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth19(out *jwriter.Writer, in Ac
 		}
 		out.String(string(in.IssuerId))
 	}
-	if in.IssuerType != "" {
-		const prefix string = ",\"issuer_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.IssuerType))
-	}
 	if in.ClientId != "" {
 		const prefix string = ",\"client_id\":"
 		if first {
@@ -2673,16 +2640,6 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth19(out *jwriter.Writer, in Ac
 			out.RawString(prefix)
 		}
 		out.String(string(in.ClientId))
-	}
-	if in.ClientType != "" {
-		const prefix string = ",\"client_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.ClientType))
 	}
 	if in.AccountId != "" {
 		const prefix string = ",\"account_id\":"
@@ -2694,16 +2651,6 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth19(out *jwriter.Writer, in Ac
 		}
 		out.String(string(in.AccountId))
 	}
-	if in.ClientAccountId != "" {
-		const prefix string = ",\"client_account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.ClientAccountId))
-	}
 	if in.Expired != 0 {
 		const prefix string = ",\"expired\":"
 		if first {
@@ -2714,7 +2661,27 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth19(out *jwriter.Writer, in Ac
 		}
 		out.Int32(int32(in.Expired))
 	}
-	if len(in.Scopes) != 0 {
+	if in.IssuerType != 0 {
+		const prefix string = ",\"issuer_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.IssuerType))
+	}
+	if in.ClientType != 0 {
+		const prefix string = ",\"client_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.ClientType))
+	}
+	if in.Scopes != "" {
 		const prefix string = ",\"scopes\":"
 		if first {
 			first = false
@@ -2722,16 +2689,7 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth19(out *jwriter.Writer, in Ac
 		} else {
 			out.RawString(prefix)
 		}
-		{
-			out.RawByte('[')
-			for v14, v15 := range in.Scopes {
-				if v14 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v15))
-			}
-			out.RawByte(']')
-		}
+		out.String(string(in.Scopes))
 	}
 	out.RawByte('}')
 }

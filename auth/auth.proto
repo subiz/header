@@ -117,13 +117,16 @@ message OauthAccessToken {
 
 message AccessToken {
 	string issuer_id = 1;
-	string issuer_type = 7;
+	// string issuer_type = 7;
 	string client_id = 2;
-	string client_type = 3;
+	// string client_type = 3;
 	string account_id = 4;
-	string client_account_id = 5;
+	// string client_account_id = 5;
+	// repeated string scopes = 6;
 	int32 expired = 8;
-	repeated string scopes = 6;
+	Type issuer_type = 9;
+	Type client_type = 10;
+	string scopes = 11;
 }
 
 message CookieExpire {
@@ -152,7 +155,6 @@ enum Type {
 	// CHANNEL is special client, that can and only listen chat topics of an account
 	connector = 6;
 
-	// BOT reserve for future
 	bot = 7;
 	dashboard = 10;
 	// accmgr
