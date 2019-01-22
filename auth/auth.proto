@@ -29,6 +29,8 @@ message Scope {
 	string description = 5;
 	// Method method = 6;
 	repeated string event = 7;
+	bool review_required = 8;
+	Permission permission = 9;
 }
 
 message Permission {

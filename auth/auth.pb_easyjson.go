@@ -642,6 +642,18 @@ func easyjsonA8fbe0d0DecodeGithubComSubizHeaderAuth5(in *jlexer.Lexer, out *Scop
 				}
 				in.Delim(']')
 			}
+		case "review_required":
+			out.ReviewRequired = bool(in.Bool())
+		case "permission":
+			if in.IsNull() {
+				in.Skip()
+				out.Permission = nil
+			} else {
+				if out.Permission == nil {
+					out.Permission = new(Permission)
+				}
+				(*out.Permission).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -724,6 +736,26 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth5(out *jwriter.Writer, in Sco
 			}
 			out.RawByte(']')
 		}
+	}
+	if in.ReviewRequired {
+		const prefix string = ",\"review_required\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.ReviewRequired))
+	}
+	if in.Permission != nil {
+		const prefix string = ",\"permission\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Permission).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
