@@ -2136,29 +2136,6 @@ func easyjsonA8fbe0d0DecodeGithubComSubizHeaderAuth16(in *jlexer.Lexer, out *Cre
 			out.ClientType = Type(in.Int32())
 		case "client_account_id":
 			out.ClientAccountId = string(in.String())
-		case "scopes":
-			if in.IsNull() {
-				in.Skip()
-				out.Scopes = nil
-			} else {
-				in.Delim('[')
-				if out.Scopes == nil {
-					if !in.IsDelim(']') {
-						out.Scopes = make([]string, 0, 4)
-					} else {
-						out.Scopes = []string{}
-					}
-				} else {
-					out.Scopes = (out.Scopes)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v10 string
-					v10 = string(in.String())
-					out.Scopes = append(out.Scopes, v10)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
 		case "avatar_url":
 			out.AvatarUrl = string(in.String())
 		case "name":
@@ -2250,25 +2227,6 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth16(out *jwriter.Writer, in Cr
 			out.RawString(prefix)
 		}
 		out.String(string(in.ClientAccountId))
-	}
-	if len(in.Scopes) != 0 {
-		const prefix string = ",\"scopes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v11, v12 := range in.Scopes {
-				if v11 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v12))
-			}
-			out.RawByte(']')
-		}
 	}
 	if in.AvatarUrl != "" {
 		const prefix string = ",\"avatar_url\":"
@@ -2605,8 +2563,16 @@ func easyjsonA8fbe0d0DecodeGithubComSubizHeaderAuth19(in *jlexer.Lexer, out *Acc
 			out.IssuerType = Type(in.Int32())
 		case "client_type":
 			out.ClientType = Type(in.Int32())
-		case "scopes":
-			out.Scopes = string(in.String())
+		case "permission":
+			if in.IsNull() {
+				in.Skip()
+				out.Permission = nil
+			} else {
+				if out.Permission == nil {
+					out.Permission = new(Permission)
+				}
+				(*out.Permission).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -2681,15 +2647,15 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth19(out *jwriter.Writer, in Ac
 		}
 		out.Int32(int32(in.ClientType))
 	}
-	if in.Scopes != "" {
-		const prefix string = ",\"scopes\":"
+	if in.Permission != nil {
+		const prefix string = ",\"permission\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Scopes))
+		(*in.Permission).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

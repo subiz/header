@@ -601,29 +601,6 @@ func easyjson3c29e0fcDecodeGithubComSubizHeaderAuth(in *jlexer.Lexer, out *auth.
 			out.ClientType = auth.Type(in.Int32())
 		case "client_account_id":
 			out.ClientAccountId = string(in.String())
-		case "scopes":
-			if in.IsNull() {
-				in.Skip()
-				out.Scopes = nil
-			} else {
-				in.Delim('[')
-				if out.Scopes == nil {
-					if !in.IsDelim(']') {
-						out.Scopes = make([]string, 0, 4)
-					} else {
-						out.Scopes = []string{}
-					}
-				} else {
-					out.Scopes = (out.Scopes)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v10 string
-					v10 = string(in.String())
-					out.Scopes = append(out.Scopes, v10)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
 		case "avatar_url":
 			out.AvatarUrl = string(in.String())
 		case "name":
@@ -715,25 +692,6 @@ func easyjson3c29e0fcEncodeGithubComSubizHeaderAuth(out *jwriter.Writer, in auth
 			out.RawString(prefix)
 		}
 		out.String(string(in.ClientAccountId))
-	}
-	if len(in.Scopes) != 0 {
-		const prefix string = ",\"scopes\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v11, v12 := range in.Scopes {
-				if v11 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v12))
-			}
-			out.RawByte(']')
-		}
 	}
 	if in.AvatarUrl != "" {
 		const prefix string = ",\"avatar_url\":"

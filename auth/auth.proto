@@ -11,7 +11,7 @@ message Credential {
 	string client_id = 7;
 	Type client_type = 8;
 	string client_account_id = 10;
-	repeated string scopes = 9;
+	// repeated string scopes = 9;
 
 	// optional
 	string avatar_url = 15;
@@ -126,7 +126,7 @@ message AccessToken {
 	int32 expired = 8;
 	Type issuer_type = 9;
 	Type client_type = 10;
-	string scopes = 11;
+	Permission permission = 11;
 }
 
 message CookieExpire {

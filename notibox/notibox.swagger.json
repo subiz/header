@@ -41,12 +41,6 @@
         "client_account_id": {
           "type": "string"
         },
-        "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "avatar_url": {
           "type": "string",
           "title": "optional"
