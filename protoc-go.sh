@@ -81,7 +81,7 @@ for i in `ls -R`; do
 	fi
 done;
 wait
-printf "\e[32mDone \e[32m(%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
+LC_NUMERIC="en_US.UTF-8" printf "\e[32mDone \e[32m(%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
 # GENERATEING JSON
 [ "$1" = 'json' ] && rm -rf */*easyjson.go
@@ -102,7 +102,7 @@ for i in `ls -R`; do
 		[ "$1" = 'json' ] && easyjson -all $LAST_DIR/$(sed "s/.proto/.pb.go/g" <<< "$i")
 	fi
 done;
-printf "\e[32m\nDone (%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
+LC_NUMERIC="en_US.UTF-8" printf "\e[32m\nDone (%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
 #./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
 # ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
