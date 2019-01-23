@@ -1096,15 +1096,15 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient2(in *jlexer.Lexer, out *Au
 				}
 				*out.Issuer = string(in.String())
 			}
-		case "type":
+		case "kind":
 			if in.IsNull() {
 				in.Skip()
-				out.Type = nil
+				out.Kind = nil
 			} else {
-				if out.Type == nil {
-					out.Type = new(auth.Type)
+				if out.Kind == nil {
+					out.Kind = new(auth.Type)
 				}
-				*out.Type = auth.Type(in.Int32())
+				*out.Kind = auth.Type(in.Int32())
 			}
 		case "client_id":
 			if in.IsNull() {
@@ -1115,26 +1115,6 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient2(in *jlexer.Lexer, out *Au
 					out.ClientId = new(string)
 				}
 				*out.ClientId = string(in.String())
-			}
-		case "client_type":
-			if in.IsNull() {
-				in.Skip()
-				out.ClientType = nil
-			} else {
-				if out.ClientType == nil {
-					out.ClientType = new(auth.Type)
-				}
-				*out.ClientType = auth.Type(in.Int32())
-			}
-		case "client_account_id":
-			if in.IsNull() {
-				in.Skip()
-				out.ClientAccountId = nil
-			} else {
-				if out.ClientAccountId == nil {
-					out.ClientAccountId = new(string)
-				}
-				*out.ClientAccountId = string(in.String())
 			}
 		case "scopes":
 			if in.IsNull() {
@@ -1223,15 +1203,15 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient2(out *jwriter.Writer, in A
 		}
 		out.String(string(*in.Issuer))
 	}
-	if in.Type != nil {
-		const prefix string = ",\"type\":"
+	if in.Kind != nil {
+		const prefix string = ",\"kind\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int32(int32(*in.Type))
+		out.Int32(int32(*in.Kind))
 	}
 	if in.ClientId != nil {
 		const prefix string = ",\"client_id\":"
@@ -1242,26 +1222,6 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient2(out *jwriter.Writer, in A
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ClientId))
-	}
-	if in.ClientType != nil {
-		const prefix string = ",\"client_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(*in.ClientType))
-	}
-	if in.ClientAccountId != nil {
-		const prefix string = ",\"client_account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.ClientAccountId))
 	}
 	if len(in.Scopes) != 0 {
 		const prefix string = ",\"scopes\":"
