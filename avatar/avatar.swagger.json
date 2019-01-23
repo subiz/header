@@ -29,16 +29,9 @@
           "$ref": "#/definitions/authType"
         },
         "perm": {
-          "$ref": "#/definitions/authPermission",
-          "title": "Method method = 5;"
+          "$ref": "#/definitions/authPermission"
         },
         "client_id": {
-          "type": "string"
-        },
-        "client_type": {
-          "$ref": "#/definitions/authType"
-        },
-        "client_account_id": {
           "type": "string"
         },
         "avatar_url": {
@@ -50,10 +43,6 @@
         },
         "email": {
           "type": "string"
-        },
-        "is_internal_client": {
-          "type": "boolean",
-          "format": "boolean"
         }
       }
     },
@@ -218,14 +207,13 @@
         "agent",
         "subiz",
         "app",
-        "rest",
         "connector",
         "bot",
         "dashboard",
         "accmgr"
       ],
       "default": "unknown",
-      "title": "- app: APP is general client type\n - connector: CHANNEL is special client, that can and only listen chat topics of an account\n - accmgr: accmgr"
+      "title": "- app: APP is general client type\n - connector: rest = 8;\nCHANNEL is special client, that can and only listen chat topics of an account\n - accmgr: accmgr"
     },
     "avatarAvatar": {
       "type": "object",

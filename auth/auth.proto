@@ -6,11 +6,10 @@ message Credential {
 	string account_id = 1;
 	string issuer = 3;
 	Type type = 4;
-	// Method method = 5;
 	Permission perm = 6;
 	string client_id = 7;
-	Type client_type = 8;
-	string client_account_id = 10;
+	// Type client_type = 8;
+	// string client_account_id = 10;
 	// repeated string scopes = 9;
 
 	// optional
@@ -18,7 +17,7 @@ message Credential {
 	string name = 16;
 	string email = 17;
 
-	bool is_internal_client = 18;
+	// bool is_internal_client = 18;
 }
 
 message Scope {
@@ -115,10 +114,11 @@ message OauthAccessToken {
 	string error = 8;
 	string error_description = 9;
 	string error_uri = 10;
+	string kind = 11; // should be agent, connector or bot
 }
 
 message AccessToken {
-	string issuer_id = 1;
+	string issuer = 1;
 	// string issuer_type = 7;
 	string client_id = 2;
 	// string client_type = 3;
@@ -126,8 +126,8 @@ message AccessToken {
 	// string client_account_id = 5;
 	// repeated string scopes = 6;
 	int32 expired = 8;
-	Type issuer_type = 9;
-	Type client_type = 10;
+	// Type issuer_type = 9;
+	Type kind = 10; // should e agent, connector or bot
 	Permission permission = 11;
 }
 
@@ -153,7 +153,7 @@ enum Type {
 	subiz = 3;
 	// APP is general client type
 	app = 5;
-	rest = 8;
+	// rest = 8;
 	// CHANNEL is special client, that can and only listen chat topics of an account
 	connector = 6;
 
@@ -203,14 +203,6 @@ message ReadPermRequest {
 	string user_id = 2;
 }
 
-message PingRequest {
-	string message = 2;
-}
-
-message Pong {
-	string message = 3;
-}
-
 message Empty {}
 
 message ListUsersRequest {
@@ -229,5 +221,4 @@ service Perm {
 	rpc Update(UpdatePermRequest) returns (Empty);
 	rpc UpdateState(UpdateStateRequest) returns (Empty);
 	rpc ReadPerm(ReadPermRequest) returns (Permission);
-	rpc Ping(PingRequest) returns (Pong);
 }

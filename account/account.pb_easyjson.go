@@ -905,18 +905,12 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAuth(in *jlexer.Lexer, out *auth.
 			}
 		case "client_id":
 			out.ClientId = string(in.String())
-		case "client_type":
-			out.ClientType = auth.Type(in.Int32())
-		case "client_account_id":
-			out.ClientAccountId = string(in.String())
 		case "avatar_url":
 			out.AvatarUrl = string(in.String())
 		case "name":
 			out.Name = string(in.String())
 		case "email":
 			out.Email = string(in.String())
-		case "is_internal_client":
-			out.IsInternalClient = bool(in.Bool())
 		default:
 			in.SkipRecursive()
 		}
@@ -981,26 +975,6 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAuth(out *jwriter.Writer, in auth
 		}
 		out.String(string(in.ClientId))
 	}
-	if in.ClientType != 0 {
-		const prefix string = ",\"client_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(in.ClientType))
-	}
-	if in.ClientAccountId != "" {
-		const prefix string = ",\"client_account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.ClientAccountId))
-	}
 	if in.AvatarUrl != "" {
 		const prefix string = ",\"avatar_url\":"
 		if first {
@@ -1030,16 +1004,6 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAuth(out *jwriter.Writer, in auth
 			out.RawString(prefix)
 		}
 		out.String(string(in.Email))
-	}
-	if in.IsInternalClient {
-		const prefix string = ",\"is_internal_client\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.IsInternalClient))
 	}
 	out.RawByte('}')
 }
