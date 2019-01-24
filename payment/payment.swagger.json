@@ -983,6 +983,9 @@
         "number_of_recent_refer": {
           "type": "integer",
           "format": "int32"
+        },
+        "referrer_id": {
+          "type": "string"
         }
       }
     },

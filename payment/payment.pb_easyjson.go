@@ -4379,6 +4379,16 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment23(in *jlexer.Lexer, out *
 				}
 				*out.NumberOfRecentRefer = int32(in.Int32())
 			}
+		case "referrer_id":
+			if in.IsNull() {
+				in.Skip()
+				out.ReferrerId = nil
+			} else {
+				if out.ReferrerId == nil {
+					out.ReferrerId = new(string)
+				}
+				*out.ReferrerId = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -4442,6 +4452,16 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment23(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.Int32(int32(*in.NumberOfRecentRefer))
+	}
+	if in.ReferrerId != nil {
+		const prefix string = ",\"referrer_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ReferrerId))
 	}
 	out.RawByte('}')
 }

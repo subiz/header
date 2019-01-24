@@ -596,6 +596,7 @@ message NumberOfReferByAgent{
 	optional float earning = 3;
 	optional int32 number_of_refer = 4;
 	optional int32 number_of_recent_refer = 5;
+	optional string referrer_id = 6;
 }
 
 message ReferralResponse{
