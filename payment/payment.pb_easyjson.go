@@ -4389,6 +4389,16 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment23(in *jlexer.Lexer, out *
 				}
 				*out.ReferrerId = string(in.String())
 			}
+		case "status":
+			if in.IsNull() {
+				in.Skip()
+				out.Status = nil
+			} else {
+				if out.Status == nil {
+					out.Status = new(string)
+				}
+				*out.Status = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -4462,6 +4472,16 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment23(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ReferrerId))
+	}
+	if in.Status != nil {
+		const prefix string = ",\"status\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Status))
 	}
 	out.RawByte('}')
 }

@@ -3878,6 +3878,9 @@
           },
           "referrer_id": {
             "type": "string"
+          },
+          "status": {
+            "type": "string"
           }
         }
       },
