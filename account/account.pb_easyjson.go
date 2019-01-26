@@ -1100,6 +1100,8 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAuth1(in *jlexer.Lexer, out *auth
 			out.AgentPreference = int32(in.Int32())
 		case "promotion_code":
 			out.PromotionCode = int32(in.Int32())
+		case "referral":
+			out.Referral = int32(in.Int32())
 		default:
 			in.SkipRecursive()
 		}
@@ -1483,6 +1485,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAuth1(out *jwriter.Writer, in aut
 			out.RawString(prefix)
 		}
 		out.Int32(int32(in.PromotionCode))
+	}
+	if in.Referral != 0 {
+		const prefix string = ",\"referral\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.Referral))
 	}
 	out.RawByte('}')
 }

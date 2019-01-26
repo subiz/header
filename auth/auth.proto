@@ -70,6 +70,7 @@ message Permission {
 	int32 agent_presence = 42;
  	int32 agent_preference = 43;
 	int32 promotion_code = 44;
+	int32 referral = 45;
 }
 
 message GoogleCredential {

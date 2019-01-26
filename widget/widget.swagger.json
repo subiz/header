@@ -454,6 +454,10 @@
         "promotion_code": {
           "type": "integer",
           "format": "int32"
+        },
+        "referral": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
