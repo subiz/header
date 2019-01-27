@@ -655,15 +655,15 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient1(in *jlexer.Lexer, out *Cl
 				}
 				*out.Verified = int64(in.Int64())
 			}
-		case "redirect_url":
+		case "redirect_uri":
 			if in.IsNull() {
 				in.Skip()
-				out.RedirectUrl = nil
+				out.RedirectUri = nil
 			} else {
-				if out.RedirectUrl == nil {
-					out.RedirectUrl = new(string)
+				if out.RedirectUri == nil {
+					out.RedirectUri = new(string)
 				}
-				*out.RedirectUrl = string(in.String())
+				*out.RedirectUri = string(in.String())
 			}
 		case "type":
 			if in.IsNull() {
@@ -882,15 +882,15 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient1(out *jwriter.Writer, in C
 		}
 		out.Int64(int64(*in.Verified))
 	}
-	if in.RedirectUrl != nil {
-		const prefix string = ",\"redirect_url\":"
+	if in.RedirectUri != nil {
+		const prefix string = ",\"redirect_uri\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.RedirectUrl))
+		out.String(string(*in.RedirectUri))
 	}
 	if in.Type != nil {
 		const prefix string = ",\"type\":"
@@ -1287,83 +1287,4 @@ func (v *Authorization) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Authorization) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson19c08265DecodeGithubComSubizHeaderClient2(l, v)
-}
-func easyjson19c08265DecodeGithubComSubizHeaderClient3(in *jlexer.Lexer, out *AllType) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "client":
-			if in.IsNull() {
-				in.Skip()
-				out.Client = nil
-			} else {
-				if out.Client == nil {
-					out.Client = new(Clients)
-				}
-				(*out.Client).UnmarshalEasyJSON(in)
-			}
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson19c08265EncodeGithubComSubizHeaderClient3(out *jwriter.Writer, in AllType) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Client != nil {
-		const prefix string = ",\"client\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Client).MarshalEasyJSON(out)
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v AllType) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjson19c08265EncodeGithubComSubizHeaderClient3(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v AllType) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson19c08265EncodeGithubComSubizHeaderClient3(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *AllType) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjson19c08265DecodeGithubComSubizHeaderClient3(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *AllType) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson19c08265DecodeGithubComSubizHeaderClient3(l, v)
 }

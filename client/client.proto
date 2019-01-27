@@ -5,10 +5,6 @@ package client;
 import "github.com/subiz/header/common/common.proto";
 import "github.com/subiz/header/auth/auth.proto";
 
-message AllType {
-	optional Clients client = 2;
-}
-
 message Clients {
 	optional common.Context ctx = 1;
 	repeated Client clients = 2;
@@ -26,7 +22,7 @@ message Client {
 	optional bool is_verified = 8;
 	optional int64 verified = 9;
 	// List of URLs which client must register for oauth redirection
-	optional string redirect_url = 10;
+	optional string redirect_uri = 10;
 	optional string type = 11;
 	enum Type {
 		app = 0;
