@@ -3,7 +3,6 @@ syntax = "proto2";
 package client;
 
 import "github.com/subiz/header/common/common.proto";
-import "github.com/subiz/header/auth/auth.proto";
 
 message Clients {
 	optional common.Context ctx = 1;
@@ -64,22 +63,8 @@ enum Event {
 	ClientDeleted = 26;
 
 	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
-	ClientAuthorized = 12; // auth send to webhook to update webhook
 	ClientRequested = 30;
 	ClientSynced = 31;
+	ClientSubscribed = 33;
 	ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
-}
-
-message Authorization {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string issuer = 3;
-	optional auth.Type kind = 4;
-	// optional auth.Method method = 5;
-	optional string client_id = 7;
-	//optional auth.Type kind = 8;
-	// optional string client_account_id = 10;
-	repeated string scopes = 9;
-	optional string integration_id = 11;
-	optional auth.Permission perm = 12;
 }
