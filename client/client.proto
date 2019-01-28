@@ -35,7 +35,7 @@ message Client {
 	optional bool is_enabled = 15;
 	optional int64 created = 17;
 	optional int64 modified = 18;
-	optional string webhook_url = 20;
+	optional string webhook_uri = 20;
 	repeated string events = 19; // subscribed event
 
 	// for connector only
@@ -47,10 +47,10 @@ message Client {
 		viber = 3;
 	}
 
-	optional string availability_url = 22;
-	optional string ping_url = 23;
-
+	optional string availability_uri = 22;
+	optional string ping_uri = 23;
 	optional bool is_internal = 24;
+	optional string unsubscribe_uri = 25;
 }
 
 enum Event {

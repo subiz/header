@@ -725,15 +725,15 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient1(in *jlexer.Lexer, out *Cl
 				}
 				*out.Modified = int64(in.Int64())
 			}
-		case "webhook_url":
+		case "webhook_uri":
 			if in.IsNull() {
 				in.Skip()
-				out.WebhookUrl = nil
+				out.WebhookUri = nil
 			} else {
-				if out.WebhookUrl == nil {
-					out.WebhookUrl = new(string)
+				if out.WebhookUri == nil {
+					out.WebhookUri = new(string)
 				}
-				*out.WebhookUrl = string(in.String())
+				*out.WebhookUri = string(in.String())
 			}
 		case "events":
 			if in.IsNull() {
@@ -768,25 +768,25 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient1(in *jlexer.Lexer, out *Cl
 				}
 				*out.ChannelType = string(in.String())
 			}
-		case "availability_url":
+		case "availability_uri":
 			if in.IsNull() {
 				in.Skip()
-				out.AvailabilityUrl = nil
+				out.AvailabilityUri = nil
 			} else {
-				if out.AvailabilityUrl == nil {
-					out.AvailabilityUrl = new(string)
+				if out.AvailabilityUri == nil {
+					out.AvailabilityUri = new(string)
 				}
-				*out.AvailabilityUrl = string(in.String())
+				*out.AvailabilityUri = string(in.String())
 			}
-		case "ping_url":
+		case "ping_uri":
 			if in.IsNull() {
 				in.Skip()
-				out.PingUrl = nil
+				out.PingUri = nil
 			} else {
-				if out.PingUrl == nil {
-					out.PingUrl = new(string)
+				if out.PingUri == nil {
+					out.PingUri = new(string)
 				}
-				*out.PingUrl = string(in.String())
+				*out.PingUri = string(in.String())
 			}
 		case "is_internal":
 			if in.IsNull() {
@@ -797,6 +797,16 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient1(in *jlexer.Lexer, out *Cl
 					out.IsInternal = new(bool)
 				}
 				*out.IsInternal = bool(in.Bool())
+			}
+		case "unsubscribe_uri":
+			if in.IsNull() {
+				in.Skip()
+				out.UnsubscribeUri = nil
+			} else {
+				if out.UnsubscribeUri == nil {
+					out.UnsubscribeUri = new(string)
+				}
+				*out.UnsubscribeUri = string(in.String())
 			}
 		default:
 			in.SkipRecursive()
@@ -952,15 +962,15 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient1(out *jwriter.Writer, in C
 		}
 		out.Int64(int64(*in.Modified))
 	}
-	if in.WebhookUrl != nil {
-		const prefix string = ",\"webhook_url\":"
+	if in.WebhookUri != nil {
+		const prefix string = ",\"webhook_uri\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.WebhookUrl))
+		out.String(string(*in.WebhookUri))
 	}
 	if len(in.Events) != 0 {
 		const prefix string = ",\"events\":"
@@ -991,25 +1001,25 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient1(out *jwriter.Writer, in C
 		}
 		out.String(string(*in.ChannelType))
 	}
-	if in.AvailabilityUrl != nil {
-		const prefix string = ",\"availability_url\":"
+	if in.AvailabilityUri != nil {
+		const prefix string = ",\"availability_uri\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.AvailabilityUrl))
+		out.String(string(*in.AvailabilityUri))
 	}
-	if in.PingUrl != nil {
-		const prefix string = ",\"ping_url\":"
+	if in.PingUri != nil {
+		const prefix string = ",\"ping_uri\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.PingUrl))
+		out.String(string(*in.PingUri))
 	}
 	if in.IsInternal != nil {
 		const prefix string = ",\"is_internal\":"
@@ -1020,6 +1030,16 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient1(out *jwriter.Writer, in C
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.IsInternal))
+	}
+	if in.UnsubscribeUri != nil {
+		const prefix string = ",\"unsubscribe_uri\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.UnsubscribeUri))
 	}
 	out.RawByte('}')
 }
