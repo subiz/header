@@ -2759,6 +2759,16 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAccount14(in *jlexer.Lexer, out *
 				}
 				*out.Created = int64(in.Int64())
 			}
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				easyjsonC9b74c43DecodeGithubComSubizHeaderCommon(in, &*out.Ctx)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -2802,6 +2812,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAccount14(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.Int64(int64(*in.Created))
+	}
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		easyjsonC9b74c43EncodeGithubComSubizHeaderCommon(out, *in.Ctx)
 	}
 	out.RawByte('}')
 }

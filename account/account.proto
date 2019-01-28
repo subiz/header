@@ -471,4 +471,5 @@ message LogAgentLoggedIn {
 	optional string account_id = 1;
 	optional string agent_id = 2;
 	optional int64 created = 3;
+	optional common.Context ctx = 4;
 }
