@@ -15,5 +15,407 @@
     "application/json"
   ],
   "paths": {},
-  "definitions": {}
+  "definitions": {
+    "authCredential": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/authType"
+        },
+        "perm": {
+          "$ref": "#/definitions/authPermission"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string",
+          "title": "optional"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "authPermission": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_password": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "permission": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_group": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "segmentation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "client": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rule": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "integration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "canned_response": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_ip": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_domain": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "widget": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subscription": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "invoice": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_method": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bill": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_log": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_comment": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "automation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ping": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "attribute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_notification": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation_export": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation_report": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pipeline": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "service_level_agreement": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message_template": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_presence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_preference": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "promotion_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "referral": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "authType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "user",
+        "agent",
+        "subiz",
+        "app",
+        "connector",
+        "bot",
+        "dashboard",
+        "accmgr"
+      ],
+      "default": "unknown",
+      "title": "- app: APP is general client type\n - connector: rest = 8;\nCHANNEL is special client, that can and only listen chat topics of an account\n - accmgr: accmgr"
+    },
+    "clientAuthorizedClient": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "client": {
+          "$ref": "#/definitions/clientClient"
+        },
+        "issue_account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        }
+      }
+    },
+    "clientClient": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string",
+          "title": "secre used to authorize client with oauth2 server"
+        },
+        "logo_url": {
+          "type": "string",
+          "title": "LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "is_verified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "IsVerified will be true if client is verified by the authority"
+        },
+        "verified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "redirect_uri": {
+          "type": "string",
+          "title": "List of URLs which client must register for oauth redirection"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version number of the client."
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_uri": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "channel_type": {
+          "type": "string",
+          "title": "for connector only"
+        },
+        "availability_uri": {
+          "type": "string"
+        },
+        "ping_uri": {
+          "type": "string"
+        },
+        "is_internal": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "unsubscribe_uri": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commonContext": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "byte"
+        },
+        "node": {
+          "type": "string"
+        },
+        "reply_topic": {
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "#/definitions/authCredential",
+          "title": "optional int32 reply_partition = 5;"
+        },
+        "tracing": {
+          "type": "string",
+          "format": "byte"
+        },
+        "reply_key": {
+          "type": "string"
+        },
+        "by_device": {
+          "$ref": "#/definitions/commonDevice"
+        },
+        "topic": {
+          "type": "string",
+          "title": "for kafka"
+        },
+        "partition": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "term": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "router_topic": {
+          "type": "string"
+        },
+        "idempotency_key": {
+          "type": "string"
+        }
+      }
+    },
+    "commonDevice": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "referrer": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "source_referrer": {
+          "type": "string"
+        },
+        "ga_tracking_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 }

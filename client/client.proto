@@ -50,7 +50,16 @@ message Client {
 	optional string ping_uri = 23;
 	optional bool is_internal = 24;
 	optional string unsubscribe_uri = 25;
+	repeated string scopes = 26;
 }
+
+message AuthorizedClient {
+	optional common.Context ctx = 1;
+	optional Client client  = 2;
+	optional string issue_account_id = 3;
+	optional string issuer = 4;
+}
+
 
 enum Event {
 	ClientCreateRequested = 20;
@@ -65,6 +74,14 @@ enum Event {
 	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
 	ClientRequested = 30;
 	ClientSynced = 31;
-	ClientSubscribed = 33;
-	ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
+	ClientAuthorized = 33;
+	ClientDeauthorized = 34;
+}
+
+service ClientMgr {
+	rpc Create(Client) returns (Client);
+	rpc Update(Client) returns (Client);
+	rpc Read(Client) returns (Client);
+	rpc ListIntegratedClients(common.Id) returns (AuthorizedClient); // account id
+	rpc ListAuthorizedClients(common.Id) returns (AuthorizedClient); // agent id
 }

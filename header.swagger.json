@@ -995,6 +995,106 @@
           }
         }
       },
+      "clientAuthorizedClient": {
+        "type": "object",
+        "properties": {
+          "client": {
+            "$ref": "#/components/schemas/clientClient"
+          },
+          "issue_account_id": {
+            "type": "string"
+          },
+          "issuer": {
+            "type": "string"
+          }
+        }
+      },
+      "clientClient": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string",
+            "title": "secre used to authorize client with oauth2 server"
+          },
+          "logo_url": {
+            "type": "string",
+            "title": "LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB"
+          },
+          "account_id": {
+            "type": "string"
+          },
+          "is_verified": {
+            "type": "boolean",
+            "format": "boolean",
+            "title": "IsVerified will be true if client is verified by the authority"
+          },
+          "verified": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "redirect_uri": {
+            "type": "string",
+            "title": "List of URLs which client must register for oauth redirection"
+          },
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version number of the client."
+          },
+          "is_enabled": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "created": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modified": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "webhook_uri": {
+            "type": "string"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "channel_type": {
+            "type": "string",
+            "title": "for connector only"
+          },
+          "availability_uri": {
+            "type": "string"
+          },
+          "ping_uri": {
+            "type": "string"
+          },
+          "is_internal": {
+            "type": "boolean",
+            "format": "boolean"
+          },
+          "unsubscribe_uri": {
+            "type": "string"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "contentContent": {
         "type": "object",
         "properties": {
