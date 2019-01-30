@@ -786,25 +786,25 @@ func easyjsonA8fbe0d0DecodeGithubComSubizHeaderAuth6(in *jlexer.Lexer, out *Scop
 			out.Title = string(in.String())
 		case "description":
 			out.Description = string(in.String())
-		case "event":
+		case "available_events":
 			if in.IsNull() {
 				in.Skip()
-				out.Event = nil
+				out.AvailableEvents = nil
 			} else {
 				in.Delim('[')
-				if out.Event == nil {
+				if out.AvailableEvents == nil {
 					if !in.IsDelim(']') {
-						out.Event = make([]string, 0, 4)
+						out.AvailableEvents = make([]string, 0, 4)
 					} else {
-						out.Event = []string{}
+						out.AvailableEvents = []string{}
 					}
 				} else {
-					out.Event = (out.Event)[:0]
+					out.AvailableEvents = (out.AvailableEvents)[:0]
 				}
 				for !in.IsDelim(']') {
 					var v4 string
 					v4 = string(in.String())
-					out.Event = append(out.Event, v4)
+					out.AvailableEvents = append(out.AvailableEvents, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -885,8 +885,8 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth6(out *jwriter.Writer, in Sco
 		}
 		out.String(string(in.Description))
 	}
-	if len(in.Event) != 0 {
-		const prefix string = ",\"event\":"
+	if len(in.AvailableEvents) != 0 {
+		const prefix string = ",\"available_events\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
@@ -895,7 +895,7 @@ func easyjsonA8fbe0d0EncodeGithubComSubizHeaderAuth6(out *jwriter.Writer, in Sco
 		}
 		{
 			out.RawByte('[')
-			for v5, v6 := range in.Event {
+			for v5, v6 := range in.AvailableEvents {
 				if v5 > 0 {
 					out.RawByte(',')
 				}
