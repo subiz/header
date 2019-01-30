@@ -47,5 +47,4 @@ enum Event {
 
 service WebhookService {
 	rpc Read(common.Id) returns (Webhook);
-	rpc ClearBackoff(common.Id) returns (common.Empty);
 }

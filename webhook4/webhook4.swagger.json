@@ -311,14 +311,6 @@
         }
       }
     },
-    "commonEmpty": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        }
-      }
-    },
     "webhook4Webhook": {
       "type": "object",
       "properties": {
