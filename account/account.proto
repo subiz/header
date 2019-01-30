@@ -6,11 +6,6 @@ import "github.com/subiz/header/auth/auth.proto";
 import "github.com/subiz/header/common/common.proto";
 import "github.com/subiz/header/payment/payment.proto";
 
-service UseDoc {
-	rpc f1(NewPassword) returns (NewPassword) {}
-	rpc f2(CreateAccountRequest) returns (CreateAccountRequest) {}
-}
-
 message Agent {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -59,6 +54,8 @@ message Agent {
 	optional int32 v3_state = 30 ; // 0: not v3, 1: v3 but not convert, 2: converted v3
 	optional auth.Permission perm = 31;
 	optional int64 last_login = 32;
+
+	optional string type = 33; // bot or agent (default is agent)
 }
 
 message Invitation {
@@ -393,6 +390,36 @@ message SyncPublicHolidaysRequest {
 	optional string lang = 3;
 }
 
+message AccSub {
+	optional string id = 2;
+	optional Account account = 3;
+	optional payment.Subscription subscription = 4;
+	repeated Agent agents = 5;
+	optional string stringify = 6;
+}
+
+message AccSubs {
+	repeated AccSub accsub = 2;
+	optional string anchor = 4;
+}
+
+message SearchSubRequest {
+	optional common.Context ctx = 1;
+	optional string query = 4;
+	optional string anchor = 5;
+	optional int32 limit = 6;
+	optional string plan = 7;
+	// optional uint32 billing_cycle_month = 8;
+	optional string order_by = 10;
+}
+
+message LogAgentLoggedIn {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	optional int64 created = 4;
+}
+
 service AccSubMgr {
 	rpc SearchSub(SearchSubRequest) returns (AccSubs);
 }
@@ -423,6 +450,7 @@ service AccountMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ChangeEmail(Agent) returns (Agent);
 	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
+	rpc IntegrateBot(Agent) returns (Agent);
 }
 
 service CurrencyMgr {
@@ -442,34 +470,4 @@ service BusinessHoursMgr {
 	rpc UpdateBusinessHours(BusinessHours) returns (BusinessHours);
 	rpc SyncPublicHolidays(SyncPublicHolidaysRequest) returns (BusinessHours);
 	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-message AccSub {
-	optional string id = 2;
-	optional Account account = 3;
-	optional payment.Subscription subscription = 4;
-	repeated Agent agents = 5;
-	optional string stringify = 6;
-}
-
-message AccSubs {
-	repeated AccSub accsub = 2;
-	optional string anchor = 4;
-}
-
-message SearchSubRequest {
-	optional common.Context ctx = 1;
-	optional string query = 4;
-	optional string anchor = 5;
-	optional int32 limit = 6;
-	optional string plan = 7;
-	// optional uint32 billing_cycle_month = 8;
-	optional string order_by = 10;
-}
-
-message LogAgentLoggedIn {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string agent_id = 3;
-	optional int64 created = 4;
 }

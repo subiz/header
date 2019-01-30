@@ -261,6 +261,9 @@
           "last_login": {
             "type": "integer",
             "format": "int64"
+          },
+          "type": {
+            "type": "string"
           }
         }
       },
@@ -345,47 +348,6 @@
           }
         }
       },
-      "accountCreateAccountRequest": {
-        "type": "object",
-        "properties": {
-          "fullname": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
-          },
-          "lang": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "account_name": {
-            "type": "string"
-          },
-          "account_url": {
-            "type": "string"
-          },
-          "avatar_url": {
-            "type": "string"
-          },
-          "timezone": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "country_code": {
-            "type": "string"
-          },
-          "referrer_from": {
-            "type": "string"
-          },
-          "ga_client_id": {
-            "type": "string"
-          }
-        }
-      },
       "accountCurrencies": {
         "type": "object",
         "properties": {
@@ -466,23 +428,6 @@
             "items": {
               "$ref": "#/components/schemas/accountExchangeRate"
             }
-          }
-        }
-      },
-      "accountNewPassword": {
-        "type": "object",
-        "properties": {
-          "token": {
-            "type": "string"
-          },
-          "new_password": {
-            "type": "string"
-          },
-          "old_password": {
-            "type": "string"
-          },
-          "email": {
-            "type": "string"
           }
         }
       },
