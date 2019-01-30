@@ -951,6 +951,15 @@
           },
           "issuer": {
             "type": "string"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "kind": {
+            "type": "string"
           }
         }
       },

@@ -1227,6 +1227,39 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient3(in *jlexer.Lexer, out *Au
 				}
 				*out.Issuer = string(in.String())
 			}
+		case "scopes":
+			if in.IsNull() {
+				in.Skip()
+				out.Scopes = nil
+			} else {
+				in.Delim('[')
+				if out.Scopes == nil {
+					if !in.IsDelim(']') {
+						out.Scopes = make([]string, 0, 4)
+					} else {
+						out.Scopes = []string{}
+					}
+				} else {
+					out.Scopes = (out.Scopes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v19 string
+					v19 = string(in.String())
+					out.Scopes = append(out.Scopes, v19)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "kind":
+			if in.IsNull() {
+				in.Skip()
+				out.Kind = nil
+			} else {
+				if out.Kind == nil {
+					out.Kind = new(string)
+				}
+				*out.Kind = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1280,6 +1313,35 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient3(out *jwriter.Writer, in A
 			out.RawString(prefix)
 		}
 		out.String(string(*in.Issuer))
+	}
+	if len(in.Scopes) != 0 {
+		const prefix string = ",\"scopes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v20, v21 := range in.Scopes {
+				if v20 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v21))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Kind != nil {
+		const prefix string = ",\"kind\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Kind))
 	}
 	out.RawByte('}')
 }

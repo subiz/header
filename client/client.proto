@@ -58,8 +58,9 @@ message AuthorizedClient {
 	optional Client client  = 2;
 	optional string issue_account_id = 3;
 	optional string issuer = 4;
+	repeated string scopes = 5;
+	optional string kind = 6;
 }
-
 
 enum Event {
 	ClientCreateRequested = 20;
