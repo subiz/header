@@ -319,14 +319,6 @@
         }
       }
     },
-    "commonPong": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        }
-      }
-    },
     "webhook4Webhook": {
       "type": "object",
       "properties": {

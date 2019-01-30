@@ -48,6 +48,4 @@ enum Event {
 service WebhookService {
 	rpc Read(common.Id) returns (Webhook);
 	rpc ClearBackoff(common.Id) returns (common.Empty);
-	rpc PurgeQueue(common.Id) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
