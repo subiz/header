@@ -28,6 +28,14 @@ message Webhook {
 	optional int64 backoffs_count = 17;
 }
 
+message WebhookPayload {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string hub_id = 3;
+	optional bytes payload = 4; //json format
+	optional string event = 5;
+}
+
 message WebhookFire {
 	optional common.Context ctx = 1;
 	optional string client_id = 2;
@@ -43,6 +51,7 @@ enum Event {
 	Webhook4PurgeQueueRequested = 8;
 	Webhook4WebhookFire = 11;
 	Webhook4ShardSend = 9;
+	Webhook4Send = 12;
 }
 
 service WebhookService {
