@@ -15,7 +15,7 @@ message Setting {
 message Action {
 	string action_type = 1;
 	conversation.Message message = 2;
-	string typing = 3;
+	Typing typing = 3;
 	int32 sleep = 4;
 }
 

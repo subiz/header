@@ -385,7 +385,15 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot3(in *jlexer.Lexer, out *
 				(*out.Message).UnmarshalEasyJSON(in)
 			}
 		case "typing":
-			out.Typing = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Typing = nil
+			} else {
+				if out.Typing == nil {
+					out.Typing = new(Typing)
+				}
+				(*out.Typing).UnmarshalEasyJSON(in)
+			}
 		case "sleep":
 			out.Sleep = int32(in.Int32())
 		default:
@@ -422,7 +430,7 @@ func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot3(out *jwriter.Writer, in
 		}
 		(*in.Message).MarshalEasyJSON(out)
 	}
-	if in.Typing != "" {
+	if in.Typing != nil {
 		const prefix string = ",\"typing\":"
 		if first {
 			first = false
@@ -430,7 +438,7 @@ func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot3(out *jwriter.Writer, in
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Typing))
+		(*in.Typing).MarshalEasyJSON(out)
 	}
 	if in.Sleep != 0 {
 		const prefix string = ",\"sleep\":"
