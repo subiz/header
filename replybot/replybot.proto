@@ -18,8 +18,8 @@ message Action {
 	int32 delay = 3;
 }
 
-
-message JoinedConversation {
-	string conversation_id = 1;
-	int64 created  = 2;
+message ExecutedConversation {
+	string account_id = 1;
+	string conversation_id = 2;
+	int64 created  = 3;
 }

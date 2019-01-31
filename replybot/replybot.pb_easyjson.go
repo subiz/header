@@ -167,7 +167,7 @@ func (v *Setting) UnmarshalJSON(data []byte) error {
 func (v *Setting) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot(l, v)
 }
-func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(in *jlexer.Lexer, out *JoinedConversation) {
+func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(in *jlexer.Lexer, out *ExecutedConversation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -186,6 +186,8 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(in *jlexer.Lexer, out *
 			continue
 		}
 		switch key {
+		case "account_id":
+			out.AccountId = string(in.String())
 		case "conversation_id":
 			out.ConversationId = string(in.String())
 		case "created":
@@ -200,10 +202,20 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(out *jwriter.Writer, in JoinedConversation) {
+func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(out *jwriter.Writer, in ExecutedConversation) {
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
 	if in.ConversationId != "" {
 		const prefix string = ",\"conversation_id\":"
 		if first {
@@ -228,26 +240,26 @@ func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v JoinedConversation) MarshalJSON() ([]byte, error) {
+func (v ExecutedConversation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
 	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v JoinedConversation) MarshalEasyJSON(w *jwriter.Writer) {
+func (v ExecutedConversation) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *JoinedConversation) UnmarshalJSON(data []byte) error {
+func (v *ExecutedConversation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *JoinedConversation) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *ExecutedConversation) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(l, v)
 }
 func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(in *jlexer.Lexer, out *Action) {
