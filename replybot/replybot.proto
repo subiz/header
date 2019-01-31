@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package replybot;
 
-import 	"github.com/subiz/header/conversation/conversation.proto";
+import 	"github.com/subiz/header/event/event.proto";
 
 
 message Setting {
@@ -13,19 +13,13 @@ message Setting {
 }
 
 message Action {
-	string action_type = 1;
-	conversation.Message message = 2;
-	Typing typing = 3;
-	int32 sleep = 4;
+	//string action_type = 1;
+	event.RawEvent event = 2;
+	int32 delay = 3;
 }
 
-message Typing {
-	conversation.Message message = 1;
-	int32 sleep = 2;
-}
 
-message LogUser {
-	string account_id = 1;
-	string user_id = 2;
-	int64 created  = 3;
+message JoinedConversation {
+	string conversation_id = 1;
+	int64 created  = 2;
 }

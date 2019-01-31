@@ -7,7 +7,7 @@ import (
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
-	conversation "github.com/subiz/header/conversation"
+	event "github.com/subiz/header/event"
 )
 
 // suppress unused package warning
@@ -18,98 +18,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot(in *jlexer.Lexer, out *Typing) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "message":
-			if in.IsNull() {
-				in.Skip()
-				out.Message = nil
-			} else {
-				if out.Message == nil {
-					out.Message = new(conversation.Message)
-				}
-				(*out.Message).UnmarshalEasyJSON(in)
-			}
-		case "sleep":
-			out.Sleep = int32(in.Int32())
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot(out *jwriter.Writer, in Typing) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Message != nil {
-		const prefix string = ",\"message\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Message).MarshalEasyJSON(out)
-	}
-	if in.Sleep != 0 {
-		const prefix string = ",\"sleep\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(in.Sleep))
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v Typing) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v Typing) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *Typing) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *Typing) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot(l, v)
-}
-func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(in *jlexer.Lexer, out *Setting) {
+func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot(in *jlexer.Lexer, out *Setting) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -175,7 +84,7 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(out *jwriter.Writer, in Setting) {
+func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot(out *jwriter.Writer, in Setting) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -238,27 +147,27 @@ func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(out *jwriter.Writer, in
 // MarshalJSON supports json.Marshaler interface
 func (v Setting) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(&w, v)
+	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Setting) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(w, v)
+	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Setting) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(&r, v)
+	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Setting) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(l, v)
+	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot(l, v)
 }
-func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(in *jlexer.Lexer, out *LogUser) {
+func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(in *jlexer.Lexer, out *JoinedConversation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -277,10 +186,8 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(in *jlexer.Lexer, out *
 			continue
 		}
 		switch key {
-		case "account_id":
-			out.AccountId = string(in.String())
-		case "user_id":
-			out.UserId = string(in.String())
+		case "conversation_id":
+			out.ConversationId = string(in.String())
 		case "created":
 			out.Created = int64(in.Int64())
 		default:
@@ -293,29 +200,19 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot2(out *jwriter.Writer, in LogUser) {
+func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(out *jwriter.Writer, in JoinedConversation) {
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.AccountId != "" {
-		const prefix string = ",\"account_id\":"
+	if in.ConversationId != "" {
+		const prefix string = ",\"conversation_id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.AccountId))
-	}
-	if in.UserId != "" {
-		const prefix string = ",\"user_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.UserId))
+		out.String(string(in.ConversationId))
 	}
 	if in.Created != 0 {
 		const prefix string = ",\"created\":"
@@ -331,29 +228,29 @@ func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot2(out *jwriter.Writer, in
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v LogUser) MarshalJSON() ([]byte, error) {
+func (v JoinedConversation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot2(&w, v)
+	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v LogUser) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot2(w, v)
+func (v JoinedConversation) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *LogUser) UnmarshalJSON(data []byte) error {
+func (v *JoinedConversation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(&r, v)
+	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *LogUser) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(l, v)
+func (v *JoinedConversation) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot1(l, v)
 }
-func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot3(in *jlexer.Lexer, out *Action) {
+func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(in *jlexer.Lexer, out *Action) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -372,30 +269,18 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot3(in *jlexer.Lexer, out *
 			continue
 		}
 		switch key {
-		case "action_type":
-			out.ActionType = string(in.String())
-		case "message":
+		case "event":
 			if in.IsNull() {
 				in.Skip()
-				out.Message = nil
+				out.Event = nil
 			} else {
-				if out.Message == nil {
-					out.Message = new(conversation.Message)
+				if out.Event == nil {
+					out.Event = new(event.RawEvent)
 				}
-				(*out.Message).UnmarshalEasyJSON(in)
+				(*out.Event).UnmarshalEasyJSON(in)
 			}
-		case "typing":
-			if in.IsNull() {
-				in.Skip()
-				out.Typing = nil
-			} else {
-				if out.Typing == nil {
-					out.Typing = new(Typing)
-				}
-				(*out.Typing).UnmarshalEasyJSON(in)
-			}
-		case "sleep":
-			out.Sleep = int32(in.Int32())
+		case "delay":
+			out.Delay = int32(in.Int32())
 		default:
 			in.SkipRecursive()
 		}
@@ -406,49 +291,29 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot3(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot3(out *jwriter.Writer, in Action) {
+func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot2(out *jwriter.Writer, in Action) {
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.ActionType != "" {
-		const prefix string = ",\"action_type\":"
+	if in.Event != nil {
+		const prefix string = ",\"event\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.ActionType))
+		(*in.Event).MarshalEasyJSON(out)
 	}
-	if in.Message != nil {
-		const prefix string = ",\"message\":"
+	if in.Delay != 0 {
+		const prefix string = ",\"delay\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Message).MarshalEasyJSON(out)
-	}
-	if in.Typing != nil {
-		const prefix string = ",\"typing\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Typing).MarshalEasyJSON(out)
-	}
-	if in.Sleep != 0 {
-		const prefix string = ",\"sleep\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(in.Sleep))
+		out.Int32(int32(in.Delay))
 	}
 	out.RawByte('}')
 }
@@ -456,23 +321,23 @@ func easyjsonB4e27493EncodeGithubComSubizHeaderReplybot3(out *jwriter.Writer, in
 // MarshalJSON supports json.Marshaler interface
 func (v Action) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot3(&w, v)
+	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot2(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Action) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot3(w, v)
+	easyjsonB4e27493EncodeGithubComSubizHeaderReplybot2(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Action) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot3(&r, v)
+	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Action) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot3(l, v)
+	easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(l, v)
 }
