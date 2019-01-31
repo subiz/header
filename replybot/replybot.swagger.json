@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "replybot.proto",
+    "title": "replybot/replybot.proto",
     "version": "version not set"
   },
   "schemes": [
