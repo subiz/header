@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package replybot;
+
+import 	"github.com/subiz/header/conversation/conversation.proto";
+
+
+message Setting {
+	string account_id = 1;
+	repeated Action actions = 2;
+	int64 created = 3;
+	int64 updated = 4;
+}
+
+message Action {
+	string action_type = 1;
+	conversation.Message message = 2;
+	string typing = 3;
+	int32 sleep = 4;
+}
+
+message Typing {
+	conversation.Message message = 1;
+	int32 sleep = 2;
+}
+
+message LogUser {
+	string account_id = 1;
+	string user_id = 2;
+	int64 created  = 3;
+}
