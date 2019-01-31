@@ -56,6 +56,7 @@ message Agent {
 	optional int64 last_login = 32;
 
 	optional string type = 33; // bot or agent (default is agent)
+	optional string client_id = 34; // ID of bot
 }
 
 message Invitation {
