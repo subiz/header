@@ -5,7 +5,7 @@ package auth;
 message Credential {
 	string account_id = 1;
 	string issuer = 3;
-	Type type = 4;
+	Type type = 4; // should be agent, user or connector (not bot)
 	Permission perm = 6;
 	string client_id = 7;
 
@@ -13,8 +13,6 @@ message Credential {
 	string avatar_url = 15;
 	string name = 16;
 	string email = 17;
-
-	// bool is_internal_client = 18;
 }
 
 message Scope {
@@ -79,20 +77,6 @@ message PasswordCredential {
 	GoogleCredential google = 3;
 }
 
-message SuperPasswordCredential {
-	string subiz_username = 1;
-	string subiz_password = 2;
-	string subiz_token = 3;
-
-	string issuer_id = 5; // default: owner
-	// string client_id = 7; // default subiz
-	// string client_type = 8;
-	string account_id = 9;
-	// string client_account_id = 10; // subiz
-	int32 expired = 11; // default 24 hour
-	repeated string scopes = 12; // default all
-}
-
 message AuthCookie {
 	string user_id = 1;
 	string account_id = 2;
@@ -124,23 +108,8 @@ message AccessToken {
 	// repeated string scopes = 6;
 	int32 expired = 8;
 	// Type issuer_type = 9;
-	Type kind = 10; // should e agent, connector or bot
+	Type kind = 10; // should be agent, connector or bot
 	Permission permission = 11;
-}
-
-message CookieExpire {
-	string user_id = 1;
-	string account_id = 2;
-
-	// expired_token will be mark as expired
-	string expired_token = 3;
-
-	// all token issue before before_time will be mark as expired, except for
-	// except_token
-	int64 before_time = 4;
-
-	// this token will not be expired
-	string except_token = 5;
 }
 
 enum Type {
@@ -148,32 +117,10 @@ enum Type {
 	user = 1;
 	agent = 2;
 	subiz = 3;
-	// APP is general client type
-	app = 5;
-	// rest = 8;
-	// CHANNEL is special client, that can and only listen chat topics of an account
-	connector = 6;
-
-	bot = 7;
-	dashboard = 10;
-	// accmgr
-	accmgr = 11;
+	app = 4; // dashboard, accmgr
+	connector = 6; // fabikon, mailkon
+	bot = 7; // subot-reply
 }
-
-message UserData {
-	//	optioanl common.Context ctx = 1;
-	string id = 2;
-	string account_id = 3;
-	string email = 5;
-	string encrypted_password = 17;
-	bool is_active = 18;
-	int64 upserted = 19;
-	int32 v3_state = 20; // 0: not v3, 1: v3 but not convert, 2: converted v3
-
-	Type kind = 22;
-	string issuer = 23;
-}
-
 
 message User {
 	reserved 1, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
@@ -185,16 +132,6 @@ message User {
 	bool is_active = 18;
 	int64 upserted = 19;
 	int32 v3_state = 20; // 0: not v3, 1: v3 but not convert, 2: converted v3
-}
-
-enum AuthorizationType {
-	client_auth = 0;
-	channel_auth = 1;
-}
-
-enum Event {
-	AUTH = 0;
-	AuthExpireCookie = 4; //CookieExpire
 }
 
 message UpdatePermRequest {

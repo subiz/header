@@ -285,6 +285,9 @@
         },
         "type": {
           "type": "string"
+        },
+        "client_id": {
+          "type": "string"
         }
       }
     },
@@ -672,12 +675,9 @@
         "subiz",
         "app",
         "connector",
-        "bot",
-        "dashboard",
-        "accmgr"
+        "bot"
       ],
-      "default": "unknown",
-      "title": "- app: APP is general client type\n - connector: rest = 8;\nCHANNEL is special client, that can and only listen chat topics of an account\n - accmgr: accmgr"
+      "default": "unknown"
     },
     "commonContext": {
       "type": "object",
