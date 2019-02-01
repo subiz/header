@@ -352,6 +352,8 @@ message Button {
 		postback_button = 3;
 		event_button = 4;
 		call_button = 5;
+		widget_ask_desktop_notify_button = 6;
+		widget_ask_contact_info_button = 7;
 	}
 
 	optional string type = 2;

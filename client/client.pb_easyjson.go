@@ -890,6 +890,26 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient2(in *jlexer.Lexer, out *Cl
 				}
 				in.Delim(']')
 			}
+		case "bot_default_job_title":
+			if in.IsNull() {
+				in.Skip()
+				out.BotDefaultJobTitle = nil
+			} else {
+				if out.BotDefaultJobTitle == nil {
+					out.BotDefaultJobTitle = new(string)
+				}
+				*out.BotDefaultJobTitle = string(in.String())
+			}
+		case "bot_default_fullname":
+			if in.IsNull() {
+				in.Skip()
+				out.BotDefaultFullname = nil
+			} else {
+				if out.BotDefaultFullname == nil {
+					out.BotDefaultFullname = new(string)
+				}
+				*out.BotDefaultFullname = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1141,6 +1161,26 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient2(out *jwriter.Writer, in C
 			}
 			out.RawByte(']')
 		}
+	}
+	if in.BotDefaultJobTitle != nil {
+		const prefix string = ",\"bot_default_job_title\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.BotDefaultJobTitle))
+	}
+	if in.BotDefaultFullname != nil {
+		const prefix string = ",\"bot_default_fullname\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.BotDefaultFullname))
 	}
 	out.RawByte('}')
 }
