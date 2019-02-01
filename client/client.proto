@@ -80,6 +80,8 @@ enum Event {
 	ClientSynced = 31;
 	ClientAuthorized = 33;
 	ClientDeauthorized = 34;
+
+	BotAuthorizeRequest = 35;
 }
 
 service ClientMgr {
