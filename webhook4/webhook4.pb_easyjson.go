@@ -77,7 +77,163 @@ func (v *webhookServiceClient) UnmarshalJSON(data []byte) error {
 func (v *webhookServiceClient) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson756e1f29DecodeGithubComSubizHeaderWebhook4(l, v)
 }
-func easyjson756e1f29DecodeGithubComSubizHeaderWebhook41(in *jlexer.Lexer, out *WebhookPayload) {
+func easyjson756e1f29DecodeGithubComSubizHeaderWebhook41(in *jlexer.Lexer, out *WebhookPayloadResolved) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "client_id":
+			if in.IsNull() {
+				in.Skip()
+				out.ClientId = nil
+			} else {
+				if out.ClientId == nil {
+					out.ClientId = new(string)
+				}
+				*out.ClientId = string(in.String())
+			}
+		case "payload":
+			if in.IsNull() {
+				in.Skip()
+				out.Payload = nil
+			} else {
+				out.Payload = in.Bytes()
+			}
+		case "event":
+			if in.IsNull() {
+				in.Skip()
+				out.Event = nil
+			} else {
+				if out.Event == nil {
+					out.Event = new(string)
+				}
+				*out.Event = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson756e1f29EncodeGithubComSubizHeaderWebhook41(out *jwriter.Writer, in WebhookPayloadResolved) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.ClientId != nil {
+		const prefix string = ",\"client_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ClientId))
+	}
+	if len(in.Payload) != 0 {
+		const prefix string = ",\"payload\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Base64Bytes(in.Payload)
+	}
+	if in.Event != nil {
+		const prefix string = ",\"event\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Event))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v WebhookPayloadResolved) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook41(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v WebhookPayloadResolved) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook41(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *WebhookPayloadResolved) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook41(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *WebhookPayloadResolved) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook41(l, v)
+}
+func easyjson756e1f29DecodeGithubComSubizHeaderWebhook42(in *jlexer.Lexer, out *WebhookPayload) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -153,7 +309,7 @@ func easyjson756e1f29DecodeGithubComSubizHeaderWebhook41(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson756e1f29EncodeGithubComSubizHeaderWebhook41(out *jwriter.Writer, in WebhookPayload) {
+func easyjson756e1f29EncodeGithubComSubizHeaderWebhook42(out *jwriter.Writer, in WebhookPayload) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -213,27 +369,27 @@ func easyjson756e1f29EncodeGithubComSubizHeaderWebhook41(out *jwriter.Writer, in
 // MarshalJSON supports json.Marshaler interface
 func (v WebhookPayload) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson756e1f29EncodeGithubComSubizHeaderWebhook41(&w, v)
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook42(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v WebhookPayload) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson756e1f29EncodeGithubComSubizHeaderWebhook41(w, v)
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook42(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *WebhookPayload) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson756e1f29DecodeGithubComSubizHeaderWebhook41(&r, v)
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook42(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *WebhookPayload) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson756e1f29DecodeGithubComSubizHeaderWebhook41(l, v)
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook42(l, v)
 }
-func easyjson756e1f29DecodeGithubComSubizHeaderWebhook42(in *jlexer.Lexer, out *WebhookFire) {
+func easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(in *jlexer.Lexer, out *WebhookFire) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -289,7 +445,7 @@ func easyjson756e1f29DecodeGithubComSubizHeaderWebhook42(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson756e1f29EncodeGithubComSubizHeaderWebhook42(out *jwriter.Writer, in WebhookFire) {
+func easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(out *jwriter.Writer, in WebhookFire) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -329,27 +485,27 @@ func easyjson756e1f29EncodeGithubComSubizHeaderWebhook42(out *jwriter.Writer, in
 // MarshalJSON supports json.Marshaler interface
 func (v WebhookFire) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson756e1f29EncodeGithubComSubizHeaderWebhook42(&w, v)
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v WebhookFire) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson756e1f29EncodeGithubComSubizHeaderWebhook42(w, v)
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *WebhookFire) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson756e1f29DecodeGithubComSubizHeaderWebhook42(&r, v)
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *WebhookFire) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson756e1f29DecodeGithubComSubizHeaderWebhook42(l, v)
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(l, v)
 }
-func easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(in *jlexer.Lexer, out *Webhook) {
+func easyjson756e1f29DecodeGithubComSubizHeaderWebhook44(in *jlexer.Lexer, out *Webhook) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -434,9 +590,9 @@ func easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(in *jlexer.Lexer, out *
 					out.Events = (out.Events)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v7 string
-					v7 = string(in.String())
-					out.Events = append(out.Events, v7)
+					var v10 string
+					v10 = string(in.String())
+					out.Events = append(out.Events, v10)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -531,7 +687,7 @@ func easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(out *jwriter.Writer, in Webhook) {
+func easyjson756e1f29EncodeGithubComSubizHeaderWebhook44(out *jwriter.Writer, in Webhook) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -595,11 +751,11 @@ func easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(out *jwriter.Writer, in
 		}
 		{
 			out.RawByte('[')
-			for v8, v9 := range in.Events {
-				if v8 > 0 {
+			for v11, v12 := range in.Events {
+				if v11 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v9))
+				out.String(string(v12))
 			}
 			out.RawByte(']')
 		}
@@ -690,23 +846,23 @@ func easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(out *jwriter.Writer, in
 // MarshalJSON supports json.Marshaler interface
 func (v Webhook) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(&w, v)
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook44(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Webhook) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson756e1f29EncodeGithubComSubizHeaderWebhook43(w, v)
+	easyjson756e1f29EncodeGithubComSubizHeaderWebhook44(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Webhook) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(&r, v)
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook44(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Webhook) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson756e1f29DecodeGithubComSubizHeaderWebhook43(l, v)
+	easyjson756e1f29DecodeGithubComSubizHeaderWebhook44(l, v)
 }

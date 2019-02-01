@@ -36,6 +36,14 @@ message WebhookPayload {
 	optional string event = 5;
 }
 
+message WebhookPayloadResolved {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string client_id = 3;
+	optional bytes payload = 4; //json format
+	optional string event = 5;
+}
+
 message WebhookFire {
 	optional common.Context ctx = 1;
 	optional string client_id = 2;
@@ -52,6 +60,7 @@ enum Event {
 	Webhook4WebhookFire = 11;
 	Webhook4ShardSend = 9;
 	Webhook4Send = 12;
+	Webhook4RequestResolved = 14;
 }
 
 service WebhookService {
