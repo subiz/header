@@ -51,6 +51,9 @@ message Client {
 	optional bool is_internal = 24;
 	optional string unsubscribe_uri = 25;
 	repeated string scopes = 26;
+
+	optional string bot_default_job_title = 28;
+	optional string bot_default_fullname = 29;
 }
 
 message AuthorizedClient {
