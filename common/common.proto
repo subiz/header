@@ -61,6 +61,14 @@ message Context {
 	uint64 term = 15;
 	string router_topic = 16;
 	string idempotency_key = 17;
+	string env = 18; // "test", "produnction"
+}
+
+enum Env {
+	production = 0;
+	test = 1;
+	development = 2;
+	stagging = 3;
 }
 
 message Device {

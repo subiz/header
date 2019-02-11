@@ -468,6 +468,8 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 			out.RouterTopic = string(in.String())
 		case "idempotency_key":
 			out.IdempotencyKey = string(in.String())
+		case "env":
+			out.Env = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -621,6 +623,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 			out.RawString(prefix)
 		}
 		out.String(string(in.IdempotencyKey))
+	}
+	if in.Env != "" {
+		const prefix string = ",\"env\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Env))
 	}
 	out.RawByte('}')
 }

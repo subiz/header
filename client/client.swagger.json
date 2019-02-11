@@ -388,6 +388,9 @@
         },
         "idempotency_key": {
           "type": "string"
+        },
+        "env": {
+          "type": "string"
         }
       }
     },
