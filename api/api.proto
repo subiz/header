@@ -4,6 +4,19 @@ package api;
 
 import "github.com/subiz/header/common/common.proto";
 
+message BatchOp {
+	common.Context ctx = 1;
+	string method = 2;
+	string url    = 3;
+	string body = 4;
+}
+
+message BatchRequest {
+	common.Context ctx = 1;
+	repeated string paths = 2;
+	repeated BatchOp ops = 3;
+}
+
 message WhitelistUrl {
 	common.Context ctx = 1;
 	string account_id = 3;
