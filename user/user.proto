@@ -167,6 +167,7 @@ enum Event {
 	UserAliasDeleted = 203;
 	UserEventCreated = 204;
 	UserContentViewed = 205;
+	UserMessageSent = 206;
 	UserAggregated = 207;
 
 	UserTopicJob = 208;
@@ -202,6 +203,7 @@ enum Event {
 
 	AutomationCreditAggregated = 235;
 	AutomationCreditCountAggregate = 236;
+
 }
 
 message AggregateUpdateInteracted {
