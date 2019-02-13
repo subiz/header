@@ -452,6 +452,7 @@ service AccountMgr {
 	rpc ChangeEmail(Agent) returns (Agent);
 	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
 	rpc IntegrateBot(Agent) returns (Agent);
+	rpc SyncPublicHolidays(SyncPublicHolidaysRequest) returns (BusinessHours);
 }
 
 service CurrencyMgr {
@@ -464,11 +465,5 @@ service CurrencyMgr {
 	rpc GetExchangeRate(ExchangeRateRequest) returns (ExchangeRate);
 	rpc CreateExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc DeleteExchangeRate(ExchangeRateRequest) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service BusinessHoursMgr {
-	rpc UpdateBusinessHours(BusinessHours) returns (BusinessHours);
-	rpc SyncPublicHolidays(SyncPublicHolidaysRequest) returns (BusinessHours);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
