@@ -4,7 +4,6 @@ package replybot;
 
 import 	"github.com/subiz/header/event/event.proto";
 
-
 message Setting {
 	string account_id = 1;
 	repeated Action actions = 2;
@@ -14,7 +13,7 @@ message Setting {
 
 message Action {
 	//string action_type = 1;
-	event.RawEvent event = 2;
+	event.Event event = 2;
 	int32 delay = 3;
 }
 

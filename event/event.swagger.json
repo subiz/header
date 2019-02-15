@@ -1567,7 +1567,7 @@
         }
       }
     },
-    "eventRawEvent": {
+    "eventEvent": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -1596,11 +1596,11 @@
           "$ref": "#/definitions/eventBy"
         },
         "data": {
-          "$ref": "#/definitions/eventRawEventData"
+          "$ref": "#/definitions/eventEventData"
         }
       }
     },
-    "eventRawEventData": {
+    "eventEventData": {
       "type": "object",
       "properties": {
         "account": {
@@ -1671,7 +1671,7 @@
         }
       }
     },
-    "eventRawEvents": {
+    "eventEvents": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -1680,7 +1680,7 @@
         "events": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/eventRawEvent"
+            "$ref": "#/definitions/eventEvent"
           }
         },
         "total": {

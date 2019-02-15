@@ -23,7 +23,7 @@ message RawEventCreatedPayload {
 	string sub = 11;
 }
 
-enum Event {
+enum E {
 	Sub = 0;
 	RawEventCreated = 3;  //
 	Subscribe = 4; // subscription
@@ -34,9 +34,9 @@ enum Event {
 	EventCreated = 9;
 }
 
-message RawEvents {
+message Events {
 	common.Context ctx = 1;
-	repeated RawEvent events = 4;
+	repeated Event events = 4;
 	int64 total = 2;
 	string anchor = 3;
 }
@@ -48,7 +48,7 @@ message By {
 	string type = 6; // agent, user, connector
 }
 
-message RawEvent {
+message Event {
 	reserved 10, 12, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 42, 13, 15;
 	common.Context ctx = 1;
 	string id = 3;
@@ -203,7 +203,7 @@ message UserEvent {
 	common.Context ctx = 1;
 	string account_id = 3;
 	string user_id = 4;
-	RawEvent event = 5;
+	Event event = 5;
 	user.User user = 6;
 }
 
@@ -219,8 +219,7 @@ service Publisher {
 }
 
 service EventMgr {
-	rpc SearchEvents (ListEventsRequest) returns (RawEvents);
-	rpc CreateEvent (UserEvent) returns (RawEvent);
+	rpc SearchEvents (ListEventsRequest) returns (Events);
 	rpc Subscribe (user.SubscribeRequest) returns (common.Empty);
 	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty);
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
@@ -229,14 +228,14 @@ service EventMgr {
 }
 
 service ConversationEventReader {
-	rpc SendMessage(RawEvent) returns (RawEvent);
-	rpc ListEvents(conversation.ListEventsRequest) returns (RawEvents);
-	rpc SearchEvents(conversation.SearchMessageRequest) returns (RawEvents);
+	rpc SendMessage(Event) returns (Event);
+	rpc ListEvents(conversation.ListEventsRequest) returns (Events);
+	rpc SearchEvents(conversation.SearchMessageRequest) returns (Events);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service EventCreator {
-	rpc CreateEvent (RawEvent) returns (RawEvent);
+	rpc CreateEvent (Event) returns (Event);
 }
 
 message AutomationEvent {
@@ -246,5 +245,5 @@ message AutomationEvent {
 	user.Automation automation = 5;
 	// user.Session session = 6;
 	user.User user = 7;
-	RawEvent event = 9;
+	Event event = 9;
 }

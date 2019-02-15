@@ -287,7 +287,7 @@ func easyjsonB4e27493DecodeGithubComSubizHeaderReplybot2(in *jlexer.Lexer, out *
 				out.Event = nil
 			} else {
 				if out.Event == nil {
-					out.Event = new(event.RawEvent)
+					out.Event = new(event.Event)
 				}
 				(*out.Event).UnmarshalEasyJSON(in)
 			}

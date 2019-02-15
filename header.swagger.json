@@ -2547,7 +2547,7 @@
           }
         }
       },
-      "RawEvent": {
+      "eventEvent": {
         "type": "object",
         "properties": {
           "id": {
@@ -2573,11 +2573,11 @@
             "$ref": "#/components/schemas/By"
           },
           "data": {
-            "$ref": "#/components/schemas/RawEventData"
+            "$ref": "#/components/schemas/eventEventData"
           }
         }
       },
-      "RawEventData": {
+      "eventEventData": {
         "type": "object",
         "properties": {
           "account": {
@@ -2648,13 +2648,13 @@
           }
         }
       },
-      "RawEvents": {
+      "eventEvents": {
         "type": "object",
         "properties": {
           "events": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/RawEvent"
+              "$ref": "#/components/schemas/eventEvent"
             }
           },
           "total": {
