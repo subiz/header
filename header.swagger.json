@@ -2541,6 +2541,9 @@
           },
           "client_id": {
             "type": "string"
+          },
+          "type": {
+            "type": "string"
           }
         }
       },
@@ -2568,12 +2571,6 @@
           },
           "by": {
             "$ref": "#/components/schemas/By"
-          },
-          "object": {
-            "type": "string"
-          },
-          "conversation_id": {
-            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/RawEventData"

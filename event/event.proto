@@ -166,11 +166,6 @@ enum NotiboxType {
 	notibox_upserted = 53;
 }
 
-enum SubscriberType {
-	st_user = 0;
-	st_channel = 1;
-}
-
 message Subscription { // raweventcreatedpayload
 	common.Context ctx = 1;
 	string topic = 3;
@@ -238,6 +233,10 @@ service ConversationEventReader {
 	rpc ListEvents(conversation.ListEventsRequest) returns (RawEvents);
 	rpc SearchEvents(conversation.SearchMessageRequest) returns (RawEvents);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+}
+
+service EventCreator {
+	rpc CreateEvent (RawEvent) returns (RawEvent);
 }
 
 message AutomationEvent {

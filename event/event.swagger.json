@@ -1561,6 +1561,9 @@
         },
         "client_id": {
           "type": "string"
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
@@ -1591,12 +1594,6 @@
         },
         "by": {
           "$ref": "#/definitions/eventBy"
-        },
-        "object": {
-          "type": "string"
-        },
-        "conversation_id": {
-          "type": "string"
         },
         "data": {
           "$ref": "#/definitions/eventRawEventData"
