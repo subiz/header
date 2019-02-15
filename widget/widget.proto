@@ -6,18 +6,6 @@ import "github.com/subiz/header/account/account.proto";
 import "github.com/subiz/header/common/common.proto";
 import "github.com/subiz/header/user/user3.proto";
 
-message AllType {
-	optional Theme theme = 2;
-	optional Sound sound = 3;
-	optional Setting setting = 4;
-	optional UserSetting us = 5;
-}
-
-service MyServer {
-	rpc Do(AllType) returns(AllType);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 service WidgetService {
 	rpc Read(common.Id) returns (Setting);
 	rpc Update(Setting) returns (Setting);

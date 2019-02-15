@@ -854,23 +854,6 @@
         }
       }
     },
-    "widgetAllType": {
-      "type": "object",
-      "properties": {
-        "theme": {
-          "$ref": "#/definitions/widgetTheme"
-        },
-        "sound": {
-          "$ref": "#/definitions/widgetSound"
-        },
-        "setting": {
-          "$ref": "#/definitions/widgetSetting"
-        },
-        "us": {
-          "$ref": "#/definitions/widgetUserSetting"
-        }
-      }
-    },
     "widgetSetting": {
       "type": "object",
       "properties": {

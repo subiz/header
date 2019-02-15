@@ -4,15 +4,6 @@ package ws;
 
 import "github.com/subiz/header/common/common.proto";
 
-message AllType {
-	Subscribe sub = 2;
-}
-
-service MyServer {
-	rpc Do(AllType) returns(AllType);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message Subscribe {
 	//common.Context ctx = 1;
 	//optional string connection_id = 2;

@@ -11,7 +11,7 @@ import "github.com/subiz/header/user/user.proto";
 import "github.com/subiz/header/notibox/notibox.proto";
 import "github.com/subiz/header/payment/payment.proto";
 
-message RawEventCreatedPayload {
+message RawEventCreatedPayload { // used for websocket
 	common.Context ctx = 1;
 	repeated string subs = 3;
 	string target_topic = 4;
@@ -21,18 +21,6 @@ message RawEventCreatedPayload {
 	string topic = 9;
 	string router_topic = 10;
 	string sub = 11;
-}
-
-message PubSubMessage {
-	common.Context ctx = 1;
-	Subscription sub = 2;
-	bytes payload = 3;
-}
-
-message UnsubscribeMessage {
-	common.Context ctx = 1;
-	string topic = 3;
-	string sub_id = 4;
 }
 
 enum Event {
@@ -61,7 +49,6 @@ message By {
 
 message RawEvent {
 	reserved 10, 12, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 42;
-	reserved "channel_id", "by_user_id", "state", "message_to", "page_url", "page_title", "browser_language", "device_type", "user_id", "joiner_id", "joiner_type", "leaver_id", "attachments", "text", "format", "deliverieds", "fields", "computed", "account", "agent", "message", "postback", "content", "topic";
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
@@ -140,6 +127,10 @@ enum EventType {
 	user_attribute_updated = 52;
 	user_attribute_deleted = 55;
 	automation_out_of_credit = 70;
+}
+
+enum WidgetType {
+	w = 0;
 }
 
 enum ConvoType {
