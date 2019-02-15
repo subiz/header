@@ -1,5 +1,5 @@
 /**/npm-debug.log
-vendor
+/vendor
 /node_modules
 ./bin
 ./lib
