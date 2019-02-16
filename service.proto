@@ -285,6 +285,7 @@ service EventMgr {
 	rpc SearchEvents (event.ListEventsRequest) returns (event.Events);
 	rpc Subscribe (user.SubscribeRequest) returns (common.Empty);
 	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty);
+	rpc CreateEvent (event.UserEvent) returns (event.Event);
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
 	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult);
 	rpc Ping(common.PingRequest) returns (common.Pong);
@@ -295,10 +296,6 @@ service ConversationEventReader {
 	rpc ListEvents(conversation.ListEventsRequest) returns (event.Events);
 	rpc SearchEvents(conversation.SearchMessageRequest) returns (event.Events);
 	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service EventCreator {
-	rpc CreateEvent (event.Event) returns (event.Event);
 }
 
 // file services
