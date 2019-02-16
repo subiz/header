@@ -17,66 +17,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjson81541a67DecodeGithubComSubizHeaderKv(in *jlexer.Lexer, out *kVClient) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson81541a67EncodeGithubComSubizHeaderKv(out *jwriter.Writer, in kVClient) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v kVClient) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjson81541a67EncodeGithubComSubizHeaderKv(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v kVClient) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson81541a67EncodeGithubComSubizHeaderKv(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *kVClient) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjson81541a67DecodeGithubComSubizHeaderKv(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *kVClient) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson81541a67DecodeGithubComSubizHeaderKv(l, v)
-}
-func easyjson81541a67DecodeGithubComSubizHeaderKv1(in *jlexer.Lexer, out *Value) {
+func easyjson81541a67DecodeGithubComSubizHeaderKv(in *jlexer.Lexer, out *Value) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -120,7 +61,7 @@ func easyjson81541a67DecodeGithubComSubizHeaderKv1(in *jlexer.Lexer, out *Value)
 		in.Consumed()
 	}
 }
-func easyjson81541a67EncodeGithubComSubizHeaderKv1(out *jwriter.Writer, in Value) {
+func easyjson81541a67EncodeGithubComSubizHeaderKv(out *jwriter.Writer, in Value) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -180,27 +121,27 @@ func easyjson81541a67EncodeGithubComSubizHeaderKv1(out *jwriter.Writer, in Value
 // MarshalJSON supports json.Marshaler interface
 func (v Value) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson81541a67EncodeGithubComSubizHeaderKv1(&w, v)
+	easyjson81541a67EncodeGithubComSubizHeaderKv(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Value) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson81541a67EncodeGithubComSubizHeaderKv1(w, v)
+	easyjson81541a67EncodeGithubComSubizHeaderKv(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Value) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson81541a67DecodeGithubComSubizHeaderKv1(&r, v)
+	easyjson81541a67DecodeGithubComSubizHeaderKv(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Value) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson81541a67DecodeGithubComSubizHeaderKv1(l, v)
+	easyjson81541a67DecodeGithubComSubizHeaderKv(l, v)
 }
-func easyjson81541a67DecodeGithubComSubizHeaderKv2(in *jlexer.Lexer, out *Key) {
+func easyjson81541a67DecodeGithubComSubizHeaderKv1(in *jlexer.Lexer, out *Key) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -233,7 +174,7 @@ func easyjson81541a67DecodeGithubComSubizHeaderKv2(in *jlexer.Lexer, out *Key) {
 		in.Consumed()
 	}
 }
-func easyjson81541a67EncodeGithubComSubizHeaderKv2(out *jwriter.Writer, in Key) {
+func easyjson81541a67EncodeGithubComSubizHeaderKv1(out *jwriter.Writer, in Key) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -263,27 +204,27 @@ func easyjson81541a67EncodeGithubComSubizHeaderKv2(out *jwriter.Writer, in Key) 
 // MarshalJSON supports json.Marshaler interface
 func (v Key) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson81541a67EncodeGithubComSubizHeaderKv2(&w, v)
+	easyjson81541a67EncodeGithubComSubizHeaderKv1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Key) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson81541a67EncodeGithubComSubizHeaderKv2(w, v)
+	easyjson81541a67EncodeGithubComSubizHeaderKv1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Key) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson81541a67DecodeGithubComSubizHeaderKv2(&r, v)
+	easyjson81541a67DecodeGithubComSubizHeaderKv1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Key) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson81541a67DecodeGithubComSubizHeaderKv2(l, v)
+	easyjson81541a67DecodeGithubComSubizHeaderKv1(l, v)
 }
-func easyjson81541a67DecodeGithubComSubizHeaderKv3(in *jlexer.Lexer, out *Bool) {
+func easyjson81541a67DecodeGithubComSubizHeaderKv2(in *jlexer.Lexer, out *Bool) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -314,7 +255,7 @@ func easyjson81541a67DecodeGithubComSubizHeaderKv3(in *jlexer.Lexer, out *Bool) 
 		in.Consumed()
 	}
 }
-func easyjson81541a67EncodeGithubComSubizHeaderKv3(out *jwriter.Writer, in Bool) {
+func easyjson81541a67EncodeGithubComSubizHeaderKv2(out *jwriter.Writer, in Bool) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -334,23 +275,23 @@ func easyjson81541a67EncodeGithubComSubizHeaderKv3(out *jwriter.Writer, in Bool)
 // MarshalJSON supports json.Marshaler interface
 func (v Bool) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson81541a67EncodeGithubComSubizHeaderKv3(&w, v)
+	easyjson81541a67EncodeGithubComSubizHeaderKv2(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Bool) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson81541a67EncodeGithubComSubizHeaderKv3(w, v)
+	easyjson81541a67EncodeGithubComSubizHeaderKv2(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Bool) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson81541a67DecodeGithubComSubizHeaderKv3(&r, v)
+	easyjson81541a67DecodeGithubComSubizHeaderKv2(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Bool) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson81541a67DecodeGithubComSubizHeaderKv3(l, v)
+	easyjson81541a67DecodeGithubComSubizHeaderKv2(l, v)
 }

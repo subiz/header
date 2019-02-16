@@ -1,0 +1,5063 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "service.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "BusinessHoursHoliday": {
+      "type": "object",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "day": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "weekday": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "end_time": {
+          "type": "string"
+        }
+      }
+    },
+    "BusinessHoursWorkingDay": {
+      "type": "object",
+      "properties": {
+        "weekday": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "end_time": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAccSub": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/accountAccount"
+        },
+        "subscription": {
+          "$ref": "#/definitions/paymentSubscription"
+        },
+        "agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          }
+        },
+        "stringify": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAccSubs": {
+      "type": "object",
+      "properties": {
+        "accsub": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAccSub"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAccount": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "owner_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "confirmed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "slogan": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "zip_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tax_id": {
+          "type": "string"
+        },
+        "facebook": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string",
+          "title": "optional string referer_from = 24;"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
+        },
+        "country": {
+          "type": "string"
+        },
+        "v3_state": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date_format": {
+          "type": "string"
+        },
+        "business_hours": {
+          "$ref": "#/definitions/accountBusinessHours"
+        },
+        "referrer_from": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAgent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "fullname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phone": {
+          "type": "string"
+        },
+        "is_owner": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "encrypted_password": {
+          "type": "string"
+        },
+        "joined": {
+          "type": "string",
+          "format": "int64"
+        },
+        "invited_by": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "password_changed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "seen": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "account": {
+          "$ref": "#/definitions/accountAccount",
+          "title": "optional auth.Method method = 27;"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "v3_state": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "perm": {
+          "$ref": "#/definitions/authPermission"
+        },
+        "last_login": {
+          "type": "string",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        }
+      }
+    },
+    "accountAgentGroup": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          },
+          "title": "members is list of 10 agents in group"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "members_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "accountAgentGroups": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "Groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgentGroup"
+          }
+        }
+      }
+    },
+    "accountAgentPerm": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "perm": {
+          "$ref": "#/definitions/authPermission",
+          "title": "optional auth.Method method = 4;"
+        }
+      }
+    },
+    "accountAgents": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "Agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          }
+        }
+      }
+    },
+    "accountBusinessHours": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "working_days": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BusinessHoursWorkingDay"
+          }
+        },
+        "holidays": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BusinessHoursHoliday"
+          }
+        }
+      }
+    },
+    "accountCurrencies": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "currencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountCurrency"
+          }
+        }
+      }
+    },
+    "accountCurrency": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "is_base": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "decimal_place": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "format": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "accountExchangeRate": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "currency_id": {
+          "type": "string"
+        },
+        "rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "effective_date": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "accountExchangeRates": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "exchange_rates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountExchangeRate"
+          }
+        }
+      }
+    },
+    "accountGroupMember": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "group_id": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        }
+      }
+    },
+    "authCredential": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/authType"
+        },
+        "perm": {
+          "$ref": "#/definitions/authPermission"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string",
+          "title": "optional"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "authEmpty": {
+      "type": "object"
+    },
+    "authPermission": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_password": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "permission": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_group": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "segmentation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "client": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rule": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "integration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "canned_response": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "tag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_ip": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "whitelist_domain": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "widget": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "subscription": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "invoice": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_method": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bill": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_log": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payment_comment": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "user": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "automation": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ping": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "attribute": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_notification": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation_export": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "conversation_report": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "content": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pipeline": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "service_level_agreement": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message_template": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_presence": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_preference": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "promotion_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "referral": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "authType": {
+      "type": "string",
+      "enum": [
+        "unknown",
+        "user",
+        "agent",
+        "subiz",
+        "app",
+        "connector",
+        "bot"
+      ],
+      "default": "unknown"
+    },
+    "avatarAvatar": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "key": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "auto_update": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "clientAuthorizedClient": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "client": {
+          "$ref": "#/definitions/clientClient"
+        },
+        "issue_account_id": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string"
+        }
+      }
+    },
+    "clientClient": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string",
+          "title": "secre used to authorize client with oauth2 server"
+        },
+        "logo_url": {
+          "type": "string",
+          "title": "LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "is_verified": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "IsVerified will be true if client is verified by the authority"
+        },
+        "verified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "redirect_uri": {
+          "type": "string",
+          "title": "List of URLs which client must register for oauth redirection"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version number of the client."
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_uri": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "channel_type": {
+          "type": "string",
+          "title": "for connector only"
+        },
+        "availability_uri": {
+          "type": "string"
+        },
+        "ping_uri": {
+          "type": "string"
+        },
+        "is_internal": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "unsubscribe_uri": {
+          "type": "string"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bot_default_job_title": {
+          "type": "string"
+        },
+        "bot_default_fullname": {
+          "type": "string"
+        }
+      }
+    },
+    "commonContext": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "format": "byte"
+        },
+        "node": {
+          "type": "string"
+        },
+        "reply_topic": {
+          "type": "string"
+        },
+        "credential": {
+          "$ref": "#/definitions/authCredential",
+          "title": "optional int32 reply_partition = 5;"
+        },
+        "tracing": {
+          "type": "string",
+          "format": "byte"
+        },
+        "reply_key": {
+          "type": "string"
+        },
+        "by_device": {
+          "$ref": "#/definitions/commonDevice"
+        },
+        "topic": {
+          "type": "string",
+          "title": "for kafka"
+        },
+        "partition": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "offset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "term": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "router_topic": {
+          "type": "string"
+        },
+        "idempotency_key": {
+          "type": "string"
+        },
+        "env": {
+          "type": "string"
+        }
+      }
+    },
+    "commonDevice": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "referrer": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "source_referrer": {
+          "type": "string"
+        },
+        "ga_tracking_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commonEmpty": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        }
+      }
+    },
+    "commonId": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "commonIds": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commonPong": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "contentContent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string",
+          "title": "optional string sbid = 2;"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "sale_price": {
+          "type": "number",
+          "format": "float"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contentKeyValue"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAttachment"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attachment_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "related_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "image_url": {
+          "type": "string"
+        }
+      }
+    },
+    "contentContents": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/contentContent"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "contentKeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAck": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAskInfomation": {
+      "type": "object",
+      "properties": {
+        "question": {
+          "type": "string"
+        },
+        "input_type": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationAskInfomationAnswer": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAttachment": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "mimetype": {
+          "type": "string",
+          "title": "file"
+        },
+        "url": {
+          "type": "string"
+        },
+        "thumbnail_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "title": "optional string data = 7; // for custom data"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationGenericElementTemplate"
+          },
+          "title": "generic"
+        },
+        "title": {
+          "type": "string",
+          "title": "preview"
+        },
+        "color": {
+          "type": "string"
+        },
+        "pretext": {
+          "type": "string"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        },
+        "ask_info": {
+          "$ref": "#/definitions/conversationAskInfomation"
+        },
+        "ask_info_answer": {
+          "$ref": "#/definitions/conversationAskInfomationAnswer"
+        },
+        "form": {
+          "$ref": "#/definitions/conversationForm"
+        },
+        "form_submit": {
+          "$ref": "#/definitions/conversationFormSubmit"
+        },
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationContentTemplate"
+          },
+          "title": "content template"
+        },
+        "quick_replies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationQuickReply"
+          }
+        }
+      }
+    },
+    "conversationAvailabilityCheckResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "availability": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "integration_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationAvgResolveTimeResponse": {
+      "type": "object",
+      "properties": {
+        "avg_resolve_sec": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "conversationAvgResponseTimeResponse": {
+      "type": "object",
+      "properties": {
+        "avg_response_sec": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "conversationButton": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "title": "post back"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "content_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "title": "optional RawEvent event = 12;"
+        },
+        "phone_number": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationComputed": {
+      "type": "object",
+      "properties": {
+        "seen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationSeen"
+          }
+        },
+        "ack": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAck"
+          }
+        },
+        "received": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationReceived"
+          }
+        }
+      }
+    },
+    "conversationCondition": {
+      "type": "object",
+      "properties": {
+        "join": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationContentTemplate": {
+      "type": "object",
+      "properties": {
+        "image_url": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availability": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "sale_price": {
+          "type": "number",
+          "format": "float"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attachment_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "related_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "default_action": {
+          "$ref": "#/definitions/conversationButton"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationConversation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "closed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationMember"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTag"
+          }
+        },
+        "ended": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "accepted": {
+          "type": "string",
+          "format": "int64"
+        },
+        "channel_type": {
+          "type": "string"
+        },
+        "integration": {
+          "$ref": "#/definitions/conversationIntegration"
+        },
+        "actived": {
+          "type": "string",
+          "format": "int64"
+        },
+        "last_message_id": {
+          "type": "string"
+        },
+        "last_message": {
+          "$ref": "#/definitions/conversationMessage"
+        },
+        "response_sec": {
+          "type": "string",
+          "format": "int64"
+        },
+        "chain_id": {
+          "type": "string"
+        },
+        "left_members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationMember"
+          }
+        },
+        "ticket": {
+          "$ref": "#/definitions/conversationTicket"
+        },
+        "ticket_id": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationConversations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "conversations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationConversation"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "user_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conversationCountByAgent": {
+      "type": "object",
+      "properties": {
+        "agent_id": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "conversationCountByAgentsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationCountByAgent"
+          }
+        }
+      }
+    },
+    "conversationCountByGroup": {
+      "type": "object",
+      "properties": {
+        "group_id": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "conversationCountByTag": {
+      "type": "object",
+      "properties": {
+        "tag_id": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "conversationCountByTagsResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationCountByTag"
+          }
+        }
+      }
+    },
+    "conversationCountTicketResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "conversationField": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationForm": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
+        },
+        "submit_url": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationFormField": {
+      "type": "object",
+      "properties": {
+        "input_type": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationFormSubmit": {
+      "type": "object",
+      "properties": {
+        "form_message_id": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationFormField"
+          }
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationGenericElementTemplate": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "default_action": {
+          "$ref": "#/definitions/conversationButton"
+        },
+        "buttons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationButton"
+          }
+        }
+      }
+    },
+    "conversationIntegration": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "connector_id": {
+          "type": "string"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "connector_type": {
+          "type": "string"
+        },
+        "integrated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationIntegrations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "integrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationIntegration"
+          }
+        }
+      }
+    },
+    "conversationMember": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "subiz_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "avatar_url": {
+          "type": "string"
+        },
+        "left": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationField"
+          }
+        },
+        "last_page_view_url": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationMessage": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationAttachment"
+          }
+        },
+        "reactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationReaction"
+          }
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationField"
+          }
+        },
+        "computed": {
+          "$ref": "#/definitions/conversationComputed"
+        },
+        "integration_id": {
+          "type": "string"
+        },
+        "chain_id": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationPostback": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/conversationMessage"
+        },
+        "button": {
+          "$ref": "#/definitions/conversationButton"
+        }
+      }
+    },
+    "conversationQuickReply": {
+      "type": "object",
+      "properties": {
+        "content_type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationReaction": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conversationReceived": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationRoute": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationRule"
+          }
+        }
+      }
+    },
+    "conversationRule": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "strategy": {
+          "type": "string"
+        },
+        "assign_tos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationCondition"
+          }
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "available_agents_only": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "conversationSeen": {
+      "type": "object",
+      "properties": {
+        "member_id": {
+          "type": "string"
+        },
+        "at": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationServiceLevelAgreement": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "strategy": {
+          "type": "string"
+        },
+        "assign_to": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationServiceLevelAgreementTarget"
+          }
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "conversationServiceLevelAgreementTarget": {
+      "type": "object",
+      "properties": {
+        "priority": {
+          "type": "string"
+        },
+        "resolve_within": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "operational_hours": {
+          "type": "string"
+        },
+        "notification": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "conversationServiceLevelAgreements": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "service_level_agreements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationServiceLevelAgreement"
+          }
+        }
+      }
+    },
+    "conversationTag": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator_id": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationTags": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTag"
+          }
+        }
+      }
+    },
+    "conversationTemplate": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "channel_type": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/definitions/conversationMessage"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTemplateData"
+          }
+        },
+        "is_public": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationTemplateData": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conversationTemplates": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTemplate"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationTicket": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "duedate": {
+          "type": "string",
+          "format": "int64"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTicketAttributeData"
+          }
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "user_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agent_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_assigned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "updated_by": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationTicketAttributeData": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "ticket_id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "text": {
+          "type": "string"
+        },
+        "number": {
+          "type": "number",
+          "format": "double"
+        },
+        "boolean": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "setter": {
+          "type": "string"
+        },
+        "setter_type": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationTicketAttributeDefinition": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "list_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "conversationTicketAttributeDefinitions": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTicketAttributeDefinition"
+          }
+        }
+      }
+    },
+    "conversationTickets": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "tickets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/conversationTicket"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "conversationTotalConversationResponse": {
+      "type": "object",
+      "properties": {
+        "total_conversation": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "dealPipeline": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "is_default": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dealStage"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "dealPipelines": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "pipelines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dealPipeline"
+          }
+        }
+      }
+    },
+    "dealStage": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "pipeline_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "probability": {
+          "type": "number",
+          "format": "float"
+        },
+        "display_order": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "close_won": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "close_lost": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "eventBy": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "$ref": "#/definitions/commonDevice"
+        },
+        "id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "eventEvent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "by": {
+          "$ref": "#/definitions/eventBy"
+        },
+        "data": {
+          "$ref": "#/definitions/eventEventData"
+        }
+      }
+    },
+    "eventEventData": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/accountAccount"
+        },
+        "agent": {
+          "$ref": "#/definitions/accountAgent"
+        },
+        "message": {
+          "$ref": "#/definitions/conversationMessage"
+        },
+        "conversation": {
+          "$ref": "#/definitions/conversationConversation"
+        },
+        "postback": {
+          "$ref": "#/definitions/conversationPostback"
+        },
+        "content": {
+          "$ref": "#/definitions/contentContent"
+        },
+        "topic": {
+          "$ref": "#/definitions/userTopic"
+        },
+        "presence": {
+          "$ref": "#/definitions/userPresence"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "unread_topic": {
+          "$ref": "#/definitions/userUnreadTopic"
+        },
+        "my_user": {
+          "$ref": "#/definitions/userMyUser"
+        },
+        "notification": {
+          "$ref": "#/definitions/notiboxNotification"
+        },
+        "notibox": {
+          "$ref": "#/definitions/notiboxBox"
+        },
+        "agent_perm": {
+          "$ref": "#/definitions/accountAgentPerm"
+        },
+        "group_member": {
+          "$ref": "#/definitions/accountGroupMember"
+        },
+        "group": {
+          "$ref": "#/definitions/accountAgentGroup"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
+        },
+        "user_attribute": {
+          "$ref": "#/definitions/userAttributeData"
+        },
+        "alias": {
+          "$ref": "#/definitions/userAlias"
+        },
+        "note": {
+          "$ref": "#/definitions/userNote"
+        },
+        "ticket": {
+          "$ref": "#/definitions/conversationTicket"
+        },
+        "automation": {
+          "$ref": "#/definitions/userAutomation"
+        }
+      }
+    },
+    "eventEvents": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventEvent"
+          }
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "eventSubscriptionResponse": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "status": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "fileFile": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "md5": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "url": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "filePresignResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "signed_url": {
+          "type": "string"
+        }
+      }
+    },
+    "kafpcEmpty": {
+      "type": "object"
+    },
+    "kvBool": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "kvValue": {
+      "type": "object",
+      "properties": {
+        "partition": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "bytes": {
+          "type": "string",
+          "format": "byte"
+        },
+        "value": {
+          "type": "string"
+        },
+        "ttl": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "noti5Setting": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "web_type": {
+          "type": "string"
+        },
+        "mobile_type": {
+          "type": "string"
+        },
+        "email_type": {
+          "type": "string"
+        },
+        "email_after": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "notiboxBox": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "box": {
+          "type": "string"
+        },
+        "new_count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "notiboxNotification": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "box": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "read": {
+          "type": "string",
+          "format": "int64"
+        },
+        "view": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "Notification represent an user's notification"
+    },
+    "notiboxNotifications": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/notiboxNotification"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentAddon": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "currency": {
+          "$ref": "#/definitions/paymentCurrency"
+        },
+        "charge_type": {
+          "type": "string"
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "period_unit": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentAgentInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "string"
+        },
+        "day_left": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agent_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentBill": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "invoice_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "customer_info": {
+          "$ref": "#/definitions/paymentContact"
+        },
+        "payment_method": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentBillingInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "vat": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentComment": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "topic_id": {
+          "type": "string"
+        },
+        "topic_type": {
+          "type": "string"
+        },
+        "author_account_id": {
+          "type": "string"
+        },
+        "author_id": {
+          "type": "string"
+        },
+        "author_email": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentComments": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentComment"
+          }
+        }
+      }
+    },
+    "paymentContact": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "job_title": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "paymentCreditCode": {
+      "type": "object",
+      "properties": {
+        "credit": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "paymentCurrency": {
+      "type": "string",
+      "enum": [
+        "usd",
+        "vnd",
+        "brl"
+      ],
+      "default": "usd"
+    },
+    "paymentCustomer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentContact"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "billing_info": {
+          "$ref": "#/definitions/paymentBillingInfo"
+        }
+      }
+    },
+    "paymentExchangeRate": {
+      "type": "object",
+      "properties": {
+        "from_currency": {
+          "type": "string"
+        },
+        "to_currency": {
+          "type": "string"
+        },
+        "exchange_rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "exchange_time": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentFixedAmountPromotionCode": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "paymentInvoice": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "amount_due": {
+          "type": "number",
+          "format": "float"
+        },
+        "promotion_code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "billing_info": {
+          "$ref": "#/definitions/paymentBillingInfo"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentInvoiceItem"
+          }
+        },
+        "subtotal": {
+          "type": "number",
+          "format": "float"
+        },
+        "tax_percent": {
+          "type": "number",
+          "format": "float"
+        },
+        "tax": {
+          "type": "number",
+          "format": "float"
+        },
+        "total": {
+          "type": "number",
+          "format": "float"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentNote"
+          }
+        },
+        "bills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "payment_made": {
+          "type": "number",
+          "format": "float"
+        },
+        "current_sub": {
+          "$ref": "#/definitions/paymentSubscription"
+        },
+        "current_plan": {
+          "$ref": "#/definitions/paymentPlan"
+        }
+      }
+    },
+    "paymentInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "invoice_id": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "data": {
+          "$ref": "#/definitions/paymentInvoiceItemData"
+        }
+      }
+    },
+    "paymentInvoiceItemData": {
+      "type": "object",
+      "properties": {
+        "renew": {
+          "$ref": "#/definitions/paymentRenewInvoiceItem"
+        },
+        "agent": {
+          "$ref": "#/definitions/paymentAgentInvoiceItem"
+        },
+        "plan": {
+          "$ref": "#/definitions/paymentPlanInvoiceItem"
+        }
+      }
+    },
+    "paymentInvoices": {
+      "type": "object",
+      "properties": {
+        "invoices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentInvoice"
+          }
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentLimit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "max_automations": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_segments": {
+          "type": "integer",
+          "format": "int64",
+          "title": "optional uint32 max_conversations = 6;"
+        },
+        "max_agents": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "can_buy_agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "automation_webhook_quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "automation_email_quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "automation_message_quota": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_rules": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentLog": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "user": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "month": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentLogAccountReferred": {
+      "type": "object",
+      "properties": {
+        "referrer_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "referrer_account_id": {
+          "type": "string"
+        },
+        "referrer_agent_id": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentLogAccountReferreds": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "log_account_referreds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLogAccountReferred"
+          }
+        }
+      }
+    },
+    "paymentLogBillByAccountReferred": {
+      "type": "object",
+      "properties": {
+        "referrer_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "commission_rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bill_id": {
+          "type": "string"
+        },
+        "year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "referrer_account_id": {
+          "type": "string"
+        },
+        "referrer_agent_id": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentLogBillByAccountReferreds": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "log_bill_by_account_referreds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLogBillByAccountReferred"
+          }
+        }
+      }
+    },
+    "paymentLogPaidForAgentReferrer": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "referrer_id": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "referrer_account_id": {
+          "type": "string"
+        },
+        "referrer_agent_id": {
+          "type": "string"
+        },
+        "transaction_id": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentLogPaidForAgentReferrers": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "log_paid_for_agent_referrers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLogPaidForAgentReferrer"
+          }
+        }
+      }
+    },
+    "paymentLogs": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentLog"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentNote": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "message": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentNumberOfReferByAgent": {
+      "type": "object",
+      "properties": {
+        "agent_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "earning": {
+          "type": "number",
+          "format": "float"
+        },
+        "number_of_refer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "number_of_recent_refer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "referrer_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentPaymentMethod": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "stripe": {
+          "$ref": "#/definitions/paymentStripe"
+        },
+        "failed_message": {
+          "type": "string"
+        },
+        "charged": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentPaymentMethods": {
+      "type": "object",
+      "properties": {
+        "payment_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentPaymentMethod"
+          }
+        }
+      }
+    },
+    "paymentPercentPromotionCode": {
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "paymentPlan": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
+        },
+        "price": {
+          "type": "number",
+          "format": "float"
+        },
+        "level": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "can_buy_agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "can_buy": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "has_start_time": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "paymentPlanInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "agent_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "old_plan": {
+          "type": "string"
+        },
+        "new_plan": {
+          "type": "string"
+        },
+        "save_percentage": {
+          "type": "number",
+          "format": "float"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
+        },
+        "day_left": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentPlans": {
+      "type": "object",
+      "properties": {
+        "plans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentPlan"
+          }
+        }
+      }
+    },
+    "paymentPromotionCode": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "redeem_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "code": {
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/definitions/paymentPromotionCodeData"
+        },
+        "start": {
+          "type": "string",
+          "format": "int64"
+        },
+        "end": {
+          "type": "string",
+          "format": "int64"
+        },
+        "for_plan": {
+          "type": "string"
+        },
+        "for_account_id": {
+          "type": "string"
+        },
+        "max_redemptions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "addon": {
+          "type": "string"
+        },
+        "for_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "min_amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "max_amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "for_plans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "for_account_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "for_channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_deleted": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "for_number_of_agents": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "title": "repeated int32 for_number_of_agents = 31;"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentPromotionCodeData": {
+      "type": "object",
+      "properties": {
+        "fixed_amount": {
+          "$ref": "#/definitions/paymentFixedAmountPromotionCode"
+        },
+        "percent": {
+          "$ref": "#/definitions/paymentPercentPromotionCode"
+        },
+        "credit": {
+          "$ref": "#/definitions/paymentCreditCode"
+        },
+        "referral": {
+          "$ref": "#/definitions/paymentReferralCreditCode"
+        }
+      }
+    },
+    "paymentPromotionCodes": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "promotion_codes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentPromotionCode"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentReferral": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "earning": {
+          "type": "number",
+          "format": "float"
+        },
+        "commission_rate": {
+          "type": "number",
+          "format": "float"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bank_name": {
+          "type": "string"
+        },
+        "bank_account_number": {
+          "type": "string"
+        },
+        "bank_branch": {
+          "type": "string"
+        },
+        "bank_fullname": {
+          "type": "string"
+        },
+        "referrer_id": {
+          "type": "string"
+        },
+        "minimum_payment": {
+          "type": "number",
+          "format": "float"
+        },
+        "number_of_refer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "number_of_refer_by_day": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "paymentReferralCreditCode": {
+      "type": "object",
+      "properties": {
+        "referrer_id": {
+          "type": "string"
+        },
+        "credit": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "paymentReferralResponse": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "top_referrals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentNumberOfReferByAgent"
+          }
+        }
+      }
+    },
+    "paymentRenewInvoiceItem": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "type": "string"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "agent_count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "from_time": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "paymentString": {
+      "type": "object",
+      "properties": {
+        "str": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentStripe": {
+      "type": "object",
+      "properties": {
+        "card_last4": {
+          "type": "string"
+        },
+        "customer_id": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "paymentSubscription": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "promotion_code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "int64"
+        },
+        "auto_renew": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "billing_cycle_month": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "next_billing_cycle_month": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "plan": {
+          "type": "string"
+        },
+        "addons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentAddon"
+          }
+        },
+        "credit": {
+          "type": "number",
+          "format": "float"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/paymentNote"
+          }
+        },
+        "referral_by": {
+          "type": "string"
+        },
+        "customer": {
+          "$ref": "#/definitions/paymentCustomer"
+        },
+        "primary_payment_method": {
+          "type": "string"
+        },
+        "limit": {
+          "$ref": "#/definitions/paymentLimit"
+        },
+        "v3_state": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "auto_charge": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "placeholderResolved": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "text": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "userAlias": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "alias": {
+          "type": "string"
+        }
+      }
+    },
+    "userAttributeData": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "text": {
+          "type": "string"
+        },
+        "number": {
+          "type": "number",
+          "format": "double"
+        },
+        "boolean": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "setter": {
+          "type": "string"
+        },
+        "setter_type": {
+          "type": "string"
+        }
+      }
+    },
+    "userAttributeDefinition": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "list_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "key": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "userAttributeDefinitions": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userAttributeDefinition"
+          }
+        }
+      }
+    },
+    "userAutomation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCondition"
+          }
+        },
+        "condition": {
+          "$ref": "#/definitions/userSCondition"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "action_type": {
+          "type": "string"
+        },
+        "action_data": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "cross_channel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "metadata": {
+          "type": "string"
+        }
+      }
+    },
+    "userAutomationCredit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "webhook_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "month": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "userAutomations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "automations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userAutomation"
+          }
+        }
+      }
+    },
+    "userCampaign": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "medium": {
+          "type": "string"
+        },
+        "term": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "userCondition": {
+      "type": "object",
+      "properties": {
+        "join": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "userCountResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "userCountTotalResponse": {
+      "type": "object",
+      "properties": {
+        "total_user": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "userLastView": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "ua": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "event_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "userListTopicsResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userTopic"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "userMyUser": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "unread": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "account_id": {
+          "type": "string"
+        }
+      }
+    },
+    "userNote": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "creator_id": {
+          "type": "string",
+          "title": "optional string user_id = 4;"
+        },
+        "text": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator_type": {
+          "type": "string"
+        },
+        "target_id": {
+          "type": "string"
+        },
+        "target_type": {
+          "type": "string"
+        },
+        "link_id": {
+          "type": "string"
+        },
+        "link_type": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string"
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userNoteLink"
+          }
+        }
+      }
+    },
+    "userNoteLink": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "userNotes": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userNote"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        }
+      }
+    },
+    "userPresence": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "pinged": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pinged_minute": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "userSCondition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "operator": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "join": {
+          "type": "string"
+        },
+        "event_type_time": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userSCondition"
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "event_existed": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "can be\n{id, join, event_time, conditions} (grouped event condition)\n{id, join, conditions} (grouped condition)\n{id, key, operator, value} (user condition || simple event condition)"
+    },
+    "userSegmentation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "user_count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "started_from": {
+          "type": "string",
+          "format": "int64"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userSCondition"
+          }
+        },
+        "creator": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "is_system": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "userSegmentations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "segmentations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userSegmentation"
+          }
+        }
+      }
+    },
+    "userTopic": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "unread": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "userTrace": {
+      "type": "object",
+      "properties": {
+        "event_id": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "location_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "city_name": {
+          "type": "string"
+        },
+        "country_name": {
+          "type": "string"
+        },
+        "continent_code": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "isp": {
+          "type": "string"
+        },
+        "continent_name": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "device_type": {
+          "type": "string"
+        },
+        "browser_name": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "user_agent": {
+          "type": "string"
+        },
+        "screen_resolution": {
+          "type": "string"
+        },
+        "ga_client_id": {
+          "type": "string"
+        },
+        "ga_tracking_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ads_network": {
+          "type": "string"
+        },
+        "campaigns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCampaign"
+          }
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tracked": {
+          "type": "string",
+          "format": "int64"
+        },
+        "referrer": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "userUnreadTopic": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "updated": {
+          "type": "string",
+          "format": "int64"
+        },
+        "unread": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "userUser": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "id": {
+          "type": "string"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "traces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userTrace"
+          }
+        },
+        "is_ban": {
+          "type": "boolean",
+          "format": "boolean",
+          "title": "repeated string alias = 12;"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userAttributeData"
+          }
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subiz_id": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "par": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64",
+          "title": "int32 modified_hour = 35;"
+        },
+        "modified_week": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "userUserSearchResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "total": {
+          "type": "string",
+          "format": "int64"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userUser"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "unreads": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "unread_counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "userVisitor": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "pinged": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page_url": {
+          "type": "string"
+        },
+        "page_viewed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "page_title": {
+          "type": "string"
+        }
+      }
+    },
+    "userVisitors": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "visitors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userVisitor"
+          }
+        }
+      }
+    },
+    "webhook4Webhook": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "last_hook_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "last_hook_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "events_count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "last_hook_response": {
+          "type": "string"
+        },
+        "last_hook_status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "last_hook_payload": {
+          "type": "string"
+        },
+        "backoffs_count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "widgetSetting": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "widget_version": {
+          "type": "string"
+        },
+        "sound": {
+          "$ref": "#/definitions/widgetSound"
+        },
+        "language": {
+          "type": "string"
+        },
+        "theme": {
+          "$ref": "#/definitions/widgetTheme"
+        },
+        "replytime": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "agents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/accountAgent"
+          }
+        },
+        "agent_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "language_url": {
+          "type": "string"
+        },
+        "custom_language_url": {
+          "type": "string"
+        },
+        "css_url": {
+          "type": "string"
+        },
+        "custom_css_url": {
+          "type": "string"
+        },
+        "custom_language": {
+          "type": "string"
+        }
+      }
+    },
+    "widgetSound": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "new_conversation": {
+          "type": "string"
+        },
+        "file_create": {
+          "type": "string"
+        },
+        "new_message": {
+          "type": "string"
+        },
+        "message_send_failed": {
+          "type": "string"
+        }
+      }
+    },
+    "widgetTheme": {
+      "type": "object",
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "custom_css": {
+          "type": "string"
+        },
+        "widget_position": {
+          "type": "string"
+        },
+        "window_mode": {
+          "type": "string"
+        }
+      }
+    },
+    "widgetUserSetting": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account": {
+          "$ref": "#/definitions/accountAccount"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "sound_enabled": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "language": {
+          "type": "string"
+        },
+        "send_transcript": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "account_setting": {
+          "$ref": "#/definitions/widgetSetting"
+        },
+        "desktop_notification": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    }
+  }
+}
