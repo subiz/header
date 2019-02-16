@@ -71,8 +71,9 @@ for i in `ls -R`; do
 	if [[ $i == *".proto" ]]; then
 		printf "\033[0;90m["%d"] compiling %s %s \033[0;31m\n" $TOTAL $LAST_DIR /$i
 		$PROTOC --go_out=plugins:. --proto_path=$GOPATH/src --proto_path=./  $LAST_DIR/$i &
-		$PROTOC -I$PROTOC_PATH/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i &
-
+		if [[ $i == 'service.proto' ]]; then
+			 $PROTOC -I$PROTOC_PATH/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i &
+		fi
 
 		ALLPROTO="$ALLPROTO $LAST_DIR/$i"
 		let "TOTAL += 1"
@@ -99,6 +100,9 @@ for i in `ls -R`; do
 	fi
 
 	if [[ $i == *".proto" ]]; then
+		if [[ $i == 'service.proto' ]]; then
+			continue
+		fi
 		[ "$1" = 'json' ] && easyjson -all $LAST_DIR/$(sed "s/.proto/.pb.go/g" <<< "$i")
 	fi
 done;
