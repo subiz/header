@@ -42,3 +42,8 @@ enum Event {
 	PubsubPublish = 2;
 	PubsubWorkerJob = 7;
 }
+
+service Pubsub {
+	rpc Subscribe(Subscription) returns (common.Empty);
+	rpc Unsubscribe(Subscription) returns (common.Empty);
+}
