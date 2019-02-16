@@ -77,21 +77,6 @@ message AllType {
 	optional Box box = 8;
 }
 
-service YourService {
-	rpc Do(AllType) returns (AllType);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service NotiboxService {
-	rpc Upsert(Notification) returns (Notification);
-	rpc ReadTopic(NotiboxRequest) returns (common.Empty);
-	rpc UnreadTopic(NotiboxRequest) returns (common.Empty);
-	rpc ListNotis(ListRequest) returns (Notifications);
-	rpc DecreaseNew(NotiboxRequest) returns (Box);
-	rpc ReadBox(NotiboxRequest) returns (Box);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 enum Event {
 	NotiboxRequested = 0;
 

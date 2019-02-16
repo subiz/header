@@ -6,14 +6,6 @@ import "github.com/subiz/header/account/account.proto";
 import "github.com/subiz/header/common/common.proto";
 import "github.com/subiz/header/user/user3.proto";
 
-service WidgetService {
-	rpc Read(common.Id) returns (Setting);
-	rpc Update(Setting) returns (Setting);
-	rpc ReadUserSetting(common.Id) returns (UserSetting);
-	rpc UpdateUserSetting(UserSetting) returns (UserSetting);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message Theme {
 	optional string account_id = 2;
 	optional string custom_css = 8; // for setting only

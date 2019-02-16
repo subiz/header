@@ -114,10 +114,6 @@ message Pong {
 	string message = 3;
 }
 
-service Agent {
-	rpc Ping(PingRequest) returns (Pong);
-}
-
 enum L {
 	en = 0; // english
 	vn = 1; // vietnamese

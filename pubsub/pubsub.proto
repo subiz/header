@@ -36,11 +36,6 @@ message PublishMessage {
 	bytes neg_user_ids_filter = 6;
 }
 
-service Pubsub {
-	rpc Subscribe(Subscription) returns (common.Empty);
-	rpc Unsubscribe(Subscription) returns (common.Empty);
-}
-
 enum Event {
 	PubsubSynced = 0;
 	PubsubRequested = 1;

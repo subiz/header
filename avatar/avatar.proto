@@ -10,8 +10,3 @@ message Avatar {
 	string avatar_url = 3;
 	bool auto_update = 4;
 }
-
-service ServiceAvatarManager {
- rpc GetAvatar(common.Id) returns (Avatar);
- rpc UpsertAvatar(Avatar) returns (common.Empty);
-}

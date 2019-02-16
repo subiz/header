@@ -614,20 +614,6 @@ message SearchMessageRequest {
 	optional int32 limit = 7;
 }
 
-service AgentPresenceMgr {
-	rpc ReadPresence (common.Id) returns (user.Presence);
-	rpc UpdatePresence (common.Id) returns (user.Presence);
-}
-
-service RuleMgr {
-	rpc UpdateRule(Rule) returns (Rule);
-	rpc CreateRule(Rule) returns (Rule);
-	rpc DeleteRule(common.Id) returns (common.Empty);
-	rpc ReadRule(common.Id) returns (Rule);
-	rpc ListRules(common.Id) returns (Route);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message MessageId {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -641,52 +627,6 @@ message MessageAck {
 	optional string conversation_id = 3;
 	optional string message_id = 4;
 	optional string error = 5;
-}
-
-service ConversationMgr {
-	rpc SeenMessage(MessageId) returns (common.Empty);
-	rpc ReceiveMessage(MessageId) returns (common.Empty);
-	rpc AckMessage(MessageAck) returns (common.Empty);
-
-	// rpc UpdateConversationState(Conversation) returns (Conversation);
-	rpc StartConversation(StartRequest) returns (Conversation);
-	rpc EndConversation(common.Id) returns (Conversation);
-	rpc GetConversation(common.Id) returns (Conversation);
-	rpc ListConversations(ListConversationsRequest) returns (Conversations);
-	rpc TagConversation(TagRequest) returns (common.Empty);
-	rpc UntagConversation(TagRequest) returns (common.Empty);
-
-	rpc JoinConversation(Member) returns (common.Empty);
-	rpc LeftConversation(Member) returns (common.Empty);
-	rpc Typing(common.Id) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
-}
-
-service TemplateMgr {
-	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc CreateTemplate(Template) returns (Template);
-	rpc UpdateTemplate(Template) returns (Template);
-	rpc DeleteTemplate(common.Id) returns (common.Empty);
-	rpc GetTemplate(common.Id) returns (Template);
-	rpc ListTemplates(SearchTemplate) returns (Templates);
-}
-
-service TagMgr {
-	rpc CreateTag(Tag) returns (Tag);
-	rpc UpdateTag(Tag) returns (Tag);
-	rpc DeleteTag(common.Id) returns (common.Empty);
-	rpc ListTags(common.Id) returns (Tags);
-	rpc GetTag(common.Id) returns (Tag);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service IntegrationMgr {
-	rpc Deintegrate(common.Id) returns (common.Empty);
-	rpc ListIntegrations(common.Id) returns (Integrations);
-	rpc Integrate(Integration) returns (Integration);
-	rpc CheckAvailability(AvailabilityCheckRequest) returns (AvailabilityCheckResult);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message TagRequest {
@@ -804,16 +744,6 @@ message Chain {
 	optional string account_id = 2;
 	optional string id = 3;
 	optional string conversation_id = 4;
-}
-
-service ConversationReporter {
-	rpc CountConversationsByAgent(CountByAgentRequest) returns (CountByAgent);
-	rpc CountConversationsByAgents(CountByAgentsRequest) returns (CountByAgentsResponse);
-	rpc CountConversationsByGroup(CountByGroupRequest) returns (CountByGroup);
-	rpc CountConversationsByTags(CountByTagsRequest) returns (CountByTagsResponse);
-	rpc GetAvgResponseTimes(AvgResponseTimeRequest) returns (AvgResponseTimeResponse);
-	rpc GetTotalConversation(AvgResponseTimeRequest) returns (TotalConversationResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 enum Path {
@@ -984,33 +914,9 @@ message ServiceLevelAgreements {
 	repeated ServiceLevelAgreement service_level_agreements = 2;
 }
 
-service TicketMgr {
-	rpc CreateTicket(Ticket) returns (Ticket);
-	rpc UpdateTicket(Ticket) returns (Ticket);
-	rpc DeleteTicket(DeleteTicketRequest) returns (common.Empty);
-	rpc GetTicket(GetTicketRequest) returns (Ticket);
-	rpc SearchTicket(TicketListRequest) returns (Tickets);
-	rpc ListSLAs(common.Empty) returns (ServiceLevelAgreements);
-	rpc GetSLA(common.Id) returns (ServiceLevelAgreement);
-	rpc CreateSLA(ServiceLevelAgreement) returns (ServiceLevelAgreement);
-	rpc UpdateSLA(ServiceLevelAgreement) returns (ServiceLevelAgreement);
-	rpc DeleteSLA(common.Id) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc CountTicket(CountTicketRequest) returns (CountTicketResponse);
-	rpc GetAvgResolveTimes(AvgResolveTimeRequest) returns (AvgResolveTimeResponse);
-}
-
 message DeleteTicketAttrRequest {
 	optional common.Context ctx = 1;
 	optional string key = 2;
-}
-
-service TicketAttributeMgr {
-	rpc ListTicketAttributeDefinitions(common.Empty) returns (TicketAttributeDefinitions);
-	rpc CreateTicketAttributeDefinition(TicketAttributeDefinition) returns (TicketAttributeDefinition);
-	rpc UpdateTicketAttributeDefinition(TicketAttributeDefinition) returns (TicketAttributeDefinition);
-	rpc DeleteTicketAttributeDefinition(DeleteTicketAttrRequest) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 message GetTicketRequest {

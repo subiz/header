@@ -62,7 +62,3 @@ enum Event {
 	Webhook4Send = 12;
 	Webhook4RequestResolved = 14;
 }
-
-service WebhookService {
-	rpc Read(common.Id) returns (Webhook);
-}

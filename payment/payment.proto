@@ -520,12 +520,6 @@ message PaymentRenewCycleRequested {
 	optional string cycle_id = 4;
 }
 
-service SubizInternalPaymentMgr {
-	rpc CreateBill(Bill) returns (Bill);
-	rpc UpdateExchangeRate(ExchangeRate) returns (ExchangeRate);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message SearchInvoiceRequest {
 	optional common.Context ctx = 1;
 	optional string query = 4;
@@ -538,48 +532,6 @@ message DiffSubRequest {
 	optional common.Context ctx = 1;
 	optional Subscription dst = 2;
 	optional Subscription src = 3;
-}
-
-service PaymentMgr {
-	rpc Purchase(Subscription) returns (Invoice);
-	rpc UpdateSubscription(Subscription) returns (Subscription);
-	rpc GetSubscription(common.Id) returns (Subscription);
-	rpc AddPaymentMethod(PaymentMethod) returns (PaymentMethod);
-	rpc UpdatePaymentMethod(PaymentMethod) returns (PaymentMethod);
-	rpc DeletePaymentMethod(common.Id) returns (common.Empty);
-	rpc ListPaymentMethods(common.Id) returns (PaymentMethods);
-	rpc Pay(PayRequest) returns (Bill);
-	rpc ListInvoices(common.Id) returns (Invoices);
-	rpc CreateInvoice(Invoice) returns (Invoice);
-	rpc UpdateInvoice(Invoice) returns (Invoice);
-	rpc FilterInvoices(ListInvoiceRequest) returns (Invoices);
-	rpc DraftInvoice(Subscription) returns (Invoice);
-	rpc DiffSubscriptions(DiffSubRequest) returns (Invoice);
-	rpc ListComments(ListCommentsRequest) returns (Comments);
-	rpc AddComment(Comment) returns (Comment);
-	rpc ListPlans(common.Empty) returns (Plans);
-	rpc ExportInvoice(common.Id) returns (String);
-	rpc ConvertInvoiceToHtml(Invoice) returns (String);
-	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
-	rpc TransferMoney(PayRequest) returns (Bill);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc ListLogs(ListLogsRequest) returns (Logs);
-
-	rpc CreatePromotionCode(PromotionCode) returns (PromotionCode);
-	rpc GetPromotionCode(String) returns (PromotionCode);
-	rpc UsePromotionCode(PromotionCodeRequest) returns (common.Empty);
-	rpc ValidatePromotionCode(PromotionCodeRequest) returns (PromotionCode);
-	rpc ListPromotionCode(ListPromotionCodeRequest) returns (PromotionCodes);
-	rpc DeletePromotionCode(common.Id) returns (common.Empty);
-
-	rpc SearchReferral(SearchReferredRequest) returns (Referral);
-	rpc GetReferral(common.Id) returns (Referral);
-	rpc ListTopReferral(common.Empty) returns (ReferralResponse);
-	rpc UpdateReferral(Referral) returns (Referral);
-	rpc ListAccountReferred(common.Id) returns (LogAccountReferreds);
-  rpc ListBillByAccountReferred(common.Id) returns (LogBillByAccountReferreds);
-	rpc ListPaidForAgentReferrer(common.Id) returns (LogPaidForAgentReferrers);
-	rpc PaidForAgentReferrer(LogPaidForAgentReferrer) returns (common.Empty);
 }
 
 message LogAccountReferredByTime{

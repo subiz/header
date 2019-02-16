@@ -83,11 +83,3 @@ enum Event {
 
 	BotAuthorizeRequest = 35;
 }
-
-service ClientMgr {
-	rpc Create(Client) returns (Client);
-	rpc Update(Client) returns (Client);
-	rpc Read(Client) returns (Client);
-	rpc ListIntegratedClients(common.Id) returns (AuthorizedClient); // account id
-	rpc ListAuthorizedClients(common.Id) returns (AuthorizedClient); // agent id
-}

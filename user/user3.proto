@@ -269,37 +269,6 @@ message LastView {
 	string title = 10;
 }
 
-service UserMgr {
-	rpc SearchUsers (UserSearchRequest) returns (UserSearchResult);
-	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
-	rpc PickToSegmentation(PickRequest) returns (common.Empty);
-	rpc DeleteFromSegmentation(UnpickRequest) returns (common.Empty);
-
-	rpc CreateUser (User) returns (common.Id);
-	rpc UpdateUser (User) returns (common.Id);
-	rpc ReadUser (common.Id) returns (User);
-
-	rpc CountSegmentationUserByAttribute(CountSegmentationUserByAttributeRequest) returns (CountResponse);
-	rpc CountTotal(CountTotalRequest) returns (CountTotalResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-
-	rpc AddAlias(Alias) returns (common.Empty);
-	rpc MoveUserActivity(MergeRequest) returns (common.Empty);
-}
-
-service VisitorMgr {
-	rpc ReadPresence (common.Id) returns (Presence);
-	rpc UpdatePresence (common.Id) returns (Presence);
-	rpc ReadPreview (common.Id) returns (LastView);
-	rpc ListTopVisitors (common.Id) returns (Visitors);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service AutomationCreditMgr {
-	rpc GetAutomationCredit(common.Id) returns (AutomationCredit);
-	rpc AddAutomationCredit(AutomationCredit) returns (common.Empty);
-}
-
 message AutomationCreditsAggregate {
 	common.Context ctx = 1;
 	string account_id = 2;

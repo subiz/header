@@ -21,7 +21,3 @@ message Response {
 }
 
 message Empty {}
-
-service Kafpc {
-	rpc Reply(Response) returns (Empty);
-}

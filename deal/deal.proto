@@ -38,12 +38,3 @@ message Pipelines {
   optional common.Context ctx = 1;
   repeated Pipeline pipelines = 2;
 }
-
-service DealService {
-  rpc ListPipelines(common.Empty) returns (Pipelines);
-  rpc GetPipeline(common.Id) returns (Pipeline);
-  rpc CreatePipeline(Pipeline) returns (Pipeline);
-  rpc UpdatePipeline(Pipeline) returns (Pipeline);
-  rpc DeletePipeline(common.Id) returns (common.Empty);
-  rpc Ping(common.PingRequest) returns (common.Pong);
-}

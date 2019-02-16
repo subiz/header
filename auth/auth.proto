@@ -153,9 +153,3 @@ message ReadPermRequest {
 }
 
 message Empty {}
-
-service Perm {
-	rpc Update(UpdatePermRequest) returns (Empty);
-	rpc UpdateState(UpdateStateRequest) returns (Empty);
-	rpc ReadPerm(ReadPermRequest) returns (Permission);
-}

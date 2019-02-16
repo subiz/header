@@ -212,32 +212,6 @@ message SubscriptionResponse {
 	bool status = 2;
 }
 
-service Publisher {
-	rpc Subscribe(Subscription) returns (SubscriptionResponse);
-	rpc Unsubscribe(Subscription) returns (SubscriptionResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service EventMgr {
-	rpc SearchEvents (ListEventsRequest) returns (Events);
-	rpc Subscribe (user.SubscribeRequest) returns (common.Empty);
-	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty);
-	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
-	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service ConversationEventReader {
-	rpc SendMessage(Event) returns (Event);
-	rpc ListEvents(conversation.ListEventsRequest) returns (Events);
-	rpc SearchEvents(conversation.SearchMessageRequest) returns (Events);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service EventCreator {
-	rpc CreateEvent (Event) returns (Event);
-}
-
 message AutomationEvent {
 	common.Context ctx = 1;
 	string account_id = 3;

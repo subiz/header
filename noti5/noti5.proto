@@ -21,18 +21,6 @@ message Setting {
 	optional int64 updated = 8;
 }
 
-service Noti5Service {
-	rpc ReadNotificationSetting(common.Id) returns (Setting);
-	rpc UpdateNotificationSetting(Setting) returns (Setting);
-}
-
-service Noti5TokenService {
-	rpc AddToken(Token) returns (common.Empty);
-	rpc RemoveToken(Token) returns (common.Empty);
-	rpc CheckTokenExists(Token) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message Token {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;

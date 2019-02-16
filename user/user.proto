@@ -4,11 +4,6 @@ package user;
 
 import "github.com/subiz/header/common/common.proto";
 
-service UseDoc {
-	rpc f1(MaskResponse) returns (MaskResponse) {}
-	rpc f3(UserCreateResult) returns (UserCreateResult) {}
-}
-
 message AddToMyRequest {
 	optional common.Context ctx = 1;
 	optional string user_id = 3;
@@ -411,15 +406,6 @@ message DeleteAttrRequest {
 	optional string key = 2;
 }
 
-service SegmentationMgr {
-	rpc CreateSegment (Segmentation) returns (Segmentation);
-	rpc UpdateSegment (Segmentation) returns (Segmentation);
-	rpc ListSegments (common.Id) returns (Segmentations);
-	rpc DeleteSegment (common.Id) returns (common.Empty);
-	rpc ReadSegment (common.Id) returns (Segmentation);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
 message AutomationCheck {
 	optional string account_id = 2;
 	optional string automation_id = 3;
@@ -552,28 +538,4 @@ message DeleteNoteRequest {
 	optional string account_id = 2;
 	optional string target_id = 3;
 	optional string id = 4;
-}
-
-service NoteMgr {
-	rpc ListNotes(ListNotesRequest) returns (Notes);
-	rpc AddNote(Note) returns (Note);
-	rpc UpdateNote(Note) returns (Note);
-	rpc DeleteNote(DeleteNoteRequest) returns (common.Empty);
-}
-
-service AutomationMgr {
-	rpc ListAutomations(common.Id) returns (Automations);
-	rpc UpdateAutomation(Automation) returns (Automation);
-	rpc DeleteAutomation(common.Id) returns (common.Empty);
-	rpc ReadAutomation(common.Id) returns (Automation);
-	rpc CreateAutomation(Automation) returns (Automation);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-}
-
-service AttributeMgr {
-	rpc ListAttributeDefinitions(common.Empty) returns (AttributeDefinitions);
-	rpc CreateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
-	rpc UpdateAttributeDefinition(AttributeDefinition) returns (AttributeDefinition);
-	rpc DeleteAttributeDefinition(DeleteAttrRequest) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }

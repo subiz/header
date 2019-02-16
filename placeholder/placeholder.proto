@@ -42,10 +42,6 @@ message Resolved {
 	repeated string errors = 3;
 }
 
-service PlaceHolder {
-	rpc Resolve(ResolveRequest) returns (Resolved) {}
-}
-
 enum Event {
 	PlaceholderSynced = 0;
 

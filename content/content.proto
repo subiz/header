@@ -5,16 +5,6 @@ import "github.com/subiz/header/conversation/conversation.proto";
 
 package content;
 
-service ServiceContentManager {
-	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc UpsertContent(Content) returns (Content);
-	rpc DeleteContent(common.Id) returns (common.Empty);
-	rpc GetContent(common.Id) returns (Content);
-	rpc SearchContents(SearchContentRequest) returns (Contents);
-	rpc LookupContentsByUrl(LookupRequest) returns (Contents);
-	rpc LinkContentsToUrl(LinkRequest) returns (common.Empty);
-}
-
 message LookupRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
