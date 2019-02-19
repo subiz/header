@@ -268,31 +268,3 @@ message LastView {
 	string event_id = 9;
 	string title = 10;
 }
-
-message AutomationCreditsAggregate {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 webhook_fired = 3;
-	int64 message_fired = 4;
-	int64 email_fired = 5;
-	int64 min = 6;
-}
-
-message AutomationCredit {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	int64 webhook_fired = 3;
-	int64 message_fired = 4;
-	int64 email_fired = 5;
-
-	int64 webhook_addon = 8;
-	int64 message_addon = 9;
-	int64 email_addon = 10;
-
-	int64 webhook_credits = 14;
-	int64 message_credits = 15;
-	int64 email_credits = 16;
-
-	int64 month = 20;
-}

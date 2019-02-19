@@ -2500,6 +2500,225 @@
         }
       }
     },
+    "emailAttachment": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mimetype": {
+          "type": "string"
+        }
+      }
+    },
+    "emailEmail": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "from": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string",
+          "title": "string to = 4;"
+        },
+        "body": {
+          "type": "string"
+        },
+        "header": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/emailAttachment"
+          }
+        },
+        "to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cc": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bcc": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "eventAutomation": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/userCondition"
+          }
+        },
+        "condition": {
+          "$ref": "#/definitions/userSCondition"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "state": {
+          "type": "string"
+        },
+        "action_type": {
+          "type": "string"
+        },
+        "action_data": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "cross_channel": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "actions": {
+          "$ref": "#/definitions/eventAutomationAction"
+        },
+        "delay_sec": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "eventAutomationAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser"
+        },
+        "email": {
+          "$ref": "#/definitions/emailEmail"
+        },
+        "user_note": {
+          "$ref": "#/definitions/userNote"
+        },
+        "event": {
+          "$ref": "#/definitions/eventEvent"
+        },
+        "agent_id": {
+          "type": "string"
+        },
+        "tag_id": {
+          "type": "string"
+        }
+      }
+    },
+    "eventAutomationCredit": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "webhook_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_fired": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_addon": {
+          "type": "string",
+          "format": "int64"
+        },
+        "webhook_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "message_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "email_credits": {
+          "type": "string",
+          "format": "int64"
+        },
+        "month": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "eventAutomations": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "automations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventAutomation"
+          }
+        }
+      }
+    },
     "eventBy": {
       "type": "object",
       "properties": {
@@ -2617,7 +2836,7 @@
           "$ref": "#/definitions/conversationTicket"
         },
         "automation": {
-          "$ref": "#/definitions/userAutomation"
+          "$ref": "#/definitions/eventAutomation"
         }
       }
     },
@@ -4112,130 +4331,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/userAttributeDefinition"
-          }
-        }
-      }
-    },
-    "userAutomation": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "channel": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "conditions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userCondition"
-          }
-        },
-        "condition": {
-          "$ref": "#/definitions/userSCondition"
-        },
-        "created": {
-          "type": "string",
-          "format": "int64"
-        },
-        "modified": {
-          "type": "string",
-          "format": "int64"
-        },
-        "state": {
-          "type": "string"
-        },
-        "action_type": {
-          "type": "string"
-        },
-        "action_data": {
-          "type": "string"
-        },
-        "scope": {
-          "type": "string"
-        },
-        "cross_channel": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "metadata": {
-          "type": "string"
-        }
-      }
-    },
-    "userAutomationCredit": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "webhook_fired": {
-          "type": "string",
-          "format": "int64"
-        },
-        "message_fired": {
-          "type": "string",
-          "format": "int64"
-        },
-        "email_fired": {
-          "type": "string",
-          "format": "int64"
-        },
-        "webhook_addon": {
-          "type": "string",
-          "format": "int64"
-        },
-        "message_addon": {
-          "type": "string",
-          "format": "int64"
-        },
-        "email_addon": {
-          "type": "string",
-          "format": "int64"
-        },
-        "webhook_credits": {
-          "type": "string",
-          "format": "int64"
-        },
-        "message_credits": {
-          "type": "string",
-          "format": "int64"
-        },
-        "email_credits": {
-          "type": "string",
-          "format": "int64"
-        },
-        "month": {
-          "type": "string",
-          "format": "int64"
-        }
-      }
-    },
-    "userAutomations": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "automations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/userAutomation"
           }
         }
       }

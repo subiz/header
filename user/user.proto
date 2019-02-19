@@ -339,84 +339,10 @@ message AddToMyList {
 	optional string account_id = 5;
 }
 
-message Automation {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string id = 3;
-	optional string channel = 4; // deprecated
-	optional string name = 5;
-	optional string description = 6;
-	repeated Condition conditions = 7; // deprecated
-	optional SCondition condition = 8;
-
-	//repeated SegmentCondition query = 5; // suffix annotation
-	// a * b + (c + d) * e  ==>  + * a b * + c d e
-
-	optional int64 created = 9;
-	optional int64 modified = 10;
-
-	optional string state = 12;
-	enum State {
-		active = 0;
-		inactive = 1;
-	}
-
-	optional string action_type = 13;
-	enum ActionType {
-		conversation_message = 0;
-		agent_notification = 1;
-		//user_notification = 2;
-		// automation_invite_message = 4;
-
-		block_user = 5;
-		merge_users = 7;
-		user_notification = 8;
-		user_webhook = 9;
-		user_note = 10;
-
-		conversation_message2 = 12;
-		conversation_webhook = 13;
-		add_agent_to_conversation = 14;
-		create_ticket = 15;
-		conversation_tag = 16;
-
-		// agent_notification = 17;
-		add_user_to_segmentation = 18;
-
-		send_event = 19; // update_user, ban_user
-		send_webhook = 20;
-		create_conversation = 11;
-		create_user_note = 22;
-		update_user_attribute = 6;
-	}
-
-	optional string action_data = 14;
-	optional string scope = 15;
-	optional bool cross_channel = 16; // deprecated
-	optional string metadata = 17;
-}
-
-enum AutomationScope {
-	conversation = 2;
-	user = 3;
-}
-
-message Automations {
-	optional common.Context ctx = 1;
-	repeated Automation automations = 2;
-}
 
 message DeleteAttrRequest {
 	optional common.Context ctx = 1;
 	optional string key = 2;
-}
-
-message AutomationCheck {
-	optional string account_id = 2;
-	optional string automation_id = 3;
-	optional string user_id = 4;
-	optional string event_id = 5;
-	optional string scope = 6;
 }
 
 message SegmentIndex {

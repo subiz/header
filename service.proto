@@ -102,8 +102,8 @@ service VisitorMgr {
 }
 
 service AutomationCreditMgr {
-	rpc GetAutomationCredit(common.Id) returns (user.AutomationCredit);
-	rpc AddAutomationCredit(user.AutomationCredit) returns (common.Empty);
+	rpc GetAutomationCredit(common.Id) returns (event.AutomationCredit);
+	rpc AddAutomationCredit(event.AutomationCredit) returns (common.Empty);
 }
 
 service NoteMgr {
@@ -114,11 +114,11 @@ service NoteMgr {
 }
 
 service AutomationMgr {
-	rpc ListAutomations(common.Id) returns (user.Automations);
-	rpc UpdateAutomation(user.Automation) returns (user.Automation);
+	rpc ListAutomations(common.Id) returns (event.Automations);
+	rpc UpdateAutomation(event.Automation) returns (event.Automation);
 	rpc DeleteAutomation(common.Id) returns (common.Empty);
-	rpc ReadAutomation(common.Id) returns (user.Automation);
-	rpc CreateAutomation(user.Automation) returns (user.Automation);
+	rpc ReadAutomation(common.Id) returns (event.Automation);
+	rpc CreateAutomation(event.Automation) returns (event.Automation);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 

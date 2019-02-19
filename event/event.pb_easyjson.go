@@ -11,6 +11,7 @@ import (
 	common "github.com/subiz/header/common"
 	content "github.com/subiz/header/content"
 	conversation "github.com/subiz/header/conversation"
+	email "github.com/subiz/header/email"
 	notibox "github.com/subiz/header/notibox"
 	payment "github.com/subiz/header/payment"
 	user "github.com/subiz/header/user"
@@ -2277,9 +2278,9 @@ func easyjson524579e4DecodeGithubComSubizHeaderEventEvent(in *jlexer.Lexer, out 
 				out.Automation = nil
 			} else {
 				if out.Automation == nil {
-					out.Automation = new(user.Automation)
+					out.Automation = new(Automation)
 				}
-				easyjson524579e4DecodeGithubComSubizHeaderUser10(in, &*out.Automation)
+				(*out.Automation).UnmarshalEasyJSON(in)
 			}
 		default:
 			in.SkipRecursive()
@@ -2513,7 +2514,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderEventEvent(out *jwriter.Writer, i
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson524579e4EncodeGithubComSubizHeaderUser10(out, *in.Automation)
+		(*in.Automation).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
@@ -2540,799 +2541,6 @@ func (v *Event_Data) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Event_Data) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson524579e4DecodeGithubComSubizHeaderEventEvent(l, v)
-}
-func easyjson524579e4DecodeGithubComSubizHeaderUser10(in *jlexer.Lexer, out *user.Automation) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "ctx":
-			if in.IsNull() {
-				in.Skip()
-				out.Ctx = nil
-			} else {
-				if out.Ctx == nil {
-					out.Ctx = new(common.Context)
-				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
-			}
-		case "account_id":
-			if in.IsNull() {
-				in.Skip()
-				out.AccountId = nil
-			} else {
-				if out.AccountId == nil {
-					out.AccountId = new(string)
-				}
-				*out.AccountId = string(in.String())
-			}
-		case "id":
-			if in.IsNull() {
-				in.Skip()
-				out.Id = nil
-			} else {
-				if out.Id == nil {
-					out.Id = new(string)
-				}
-				*out.Id = string(in.String())
-			}
-		case "channel":
-			if in.IsNull() {
-				in.Skip()
-				out.Channel = nil
-			} else {
-				if out.Channel == nil {
-					out.Channel = new(string)
-				}
-				*out.Channel = string(in.String())
-			}
-		case "name":
-			if in.IsNull() {
-				in.Skip()
-				out.Name = nil
-			} else {
-				if out.Name == nil {
-					out.Name = new(string)
-				}
-				*out.Name = string(in.String())
-			}
-		case "description":
-			if in.IsNull() {
-				in.Skip()
-				out.Description = nil
-			} else {
-				if out.Description == nil {
-					out.Description = new(string)
-				}
-				*out.Description = string(in.String())
-			}
-		case "conditions":
-			if in.IsNull() {
-				in.Skip()
-				out.Conditions = nil
-			} else {
-				in.Delim('[')
-				if out.Conditions == nil {
-					if !in.IsDelim(']') {
-						out.Conditions = make([]*user.Condition, 0, 8)
-					} else {
-						out.Conditions = []*user.Condition{}
-					}
-				} else {
-					out.Conditions = (out.Conditions)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v31 *user.Condition
-					if in.IsNull() {
-						in.Skip()
-						v31 = nil
-					} else {
-						if v31 == nil {
-							v31 = new(user.Condition)
-						}
-						easyjson524579e4DecodeGithubComSubizHeaderUser11(in, &*v31)
-					}
-					out.Conditions = append(out.Conditions, v31)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "condition":
-			if in.IsNull() {
-				in.Skip()
-				out.Condition = nil
-			} else {
-				if out.Condition == nil {
-					out.Condition = new(user.SCondition)
-				}
-				easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*out.Condition)
-			}
-		case "created":
-			if in.IsNull() {
-				in.Skip()
-				out.Created = nil
-			} else {
-				if out.Created == nil {
-					out.Created = new(int64)
-				}
-				*out.Created = int64(in.Int64())
-			}
-		case "modified":
-			if in.IsNull() {
-				in.Skip()
-				out.Modified = nil
-			} else {
-				if out.Modified == nil {
-					out.Modified = new(int64)
-				}
-				*out.Modified = int64(in.Int64())
-			}
-		case "state":
-			if in.IsNull() {
-				in.Skip()
-				out.State = nil
-			} else {
-				if out.State == nil {
-					out.State = new(string)
-				}
-				*out.State = string(in.String())
-			}
-		case "action_type":
-			if in.IsNull() {
-				in.Skip()
-				out.ActionType = nil
-			} else {
-				if out.ActionType == nil {
-					out.ActionType = new(string)
-				}
-				*out.ActionType = string(in.String())
-			}
-		case "action_data":
-			if in.IsNull() {
-				in.Skip()
-				out.ActionData = nil
-			} else {
-				if out.ActionData == nil {
-					out.ActionData = new(string)
-				}
-				*out.ActionData = string(in.String())
-			}
-		case "scope":
-			if in.IsNull() {
-				in.Skip()
-				out.Scope = nil
-			} else {
-				if out.Scope == nil {
-					out.Scope = new(string)
-				}
-				*out.Scope = string(in.String())
-			}
-		case "cross_channel":
-			if in.IsNull() {
-				in.Skip()
-				out.CrossChannel = nil
-			} else {
-				if out.CrossChannel == nil {
-					out.CrossChannel = new(bool)
-				}
-				*out.CrossChannel = bool(in.Bool())
-			}
-		case "metadata":
-			if in.IsNull() {
-				in.Skip()
-				out.Metadata = nil
-			} else {
-				if out.Metadata == nil {
-					out.Metadata = new(string)
-				}
-				*out.Metadata = string(in.String())
-			}
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson524579e4EncodeGithubComSubizHeaderUser10(out *jwriter.Writer, in user.Automation) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Ctx != nil {
-		const prefix string = ",\"ctx\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Ctx).MarshalEasyJSON(out)
-	}
-	if in.AccountId != nil {
-		const prefix string = ",\"account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.AccountId))
-	}
-	if in.Id != nil {
-		const prefix string = ",\"id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Id))
-	}
-	if in.Channel != nil {
-		const prefix string = ",\"channel\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Channel))
-	}
-	if in.Name != nil {
-		const prefix string = ",\"name\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Name))
-	}
-	if in.Description != nil {
-		const prefix string = ",\"description\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Description))
-	}
-	if len(in.Conditions) != 0 {
-		const prefix string = ",\"conditions\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v32, v33 := range in.Conditions {
-				if v32 > 0 {
-					out.RawByte(',')
-				}
-				if v33 == nil {
-					out.RawString("null")
-				} else {
-					easyjson524579e4EncodeGithubComSubizHeaderUser11(out, *v33)
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	if in.Condition != nil {
-		const prefix string = ",\"condition\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *in.Condition)
-	}
-	if in.Created != nil {
-		const prefix string = ",\"created\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(*in.Created))
-	}
-	if in.Modified != nil {
-		const prefix string = ",\"modified\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(*in.Modified))
-	}
-	if in.State != nil {
-		const prefix string = ",\"state\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.State))
-	}
-	if in.ActionType != nil {
-		const prefix string = ",\"action_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.ActionType))
-	}
-	if in.ActionData != nil {
-		const prefix string = ",\"action_data\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.ActionData))
-	}
-	if in.Scope != nil {
-		const prefix string = ",\"scope\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Scope))
-	}
-	if in.CrossChannel != nil {
-		const prefix string = ",\"cross_channel\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(*in.CrossChannel))
-	}
-	if in.Metadata != nil {
-		const prefix string = ",\"metadata\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Metadata))
-	}
-	out.RawByte('}')
-}
-func easyjson524579e4DecodeGithubComSubizHeaderUser12(in *jlexer.Lexer, out *user.SCondition) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "id":
-			if in.IsNull() {
-				in.Skip()
-				out.Id = nil
-			} else {
-				if out.Id == nil {
-					out.Id = new(string)
-				}
-				*out.Id = string(in.String())
-			}
-		case "key":
-			if in.IsNull() {
-				in.Skip()
-				out.Key = nil
-			} else {
-				if out.Key == nil {
-					out.Key = new(string)
-				}
-				*out.Key = string(in.String())
-			}
-		case "operator":
-			if in.IsNull() {
-				in.Skip()
-				out.Operator = nil
-			} else {
-				if out.Operator == nil {
-					out.Operator = new(string)
-				}
-				*out.Operator = string(in.String())
-			}
-		case "value":
-			if in.IsNull() {
-				in.Skip()
-				out.Value = nil
-			} else {
-				if out.Value == nil {
-					out.Value = new(string)
-				}
-				*out.Value = string(in.String())
-			}
-		case "join":
-			if in.IsNull() {
-				in.Skip()
-				out.Join = nil
-			} else {
-				if out.Join == nil {
-					out.Join = new(string)
-				}
-				*out.Join = string(in.String())
-			}
-		case "event_type_time":
-			if in.IsNull() {
-				in.Skip()
-				out.EventTypeTime = nil
-			} else {
-				if out.EventTypeTime == nil {
-					out.EventTypeTime = new(string)
-				}
-				*out.EventTypeTime = string(in.String())
-			}
-		case "event_type":
-			if in.IsNull() {
-				in.Skip()
-				out.EventType = nil
-			} else {
-				if out.EventType == nil {
-					out.EventType = new(string)
-				}
-				*out.EventType = string(in.String())
-			}
-		case "conditions":
-			if in.IsNull() {
-				in.Skip()
-				out.Conditions = nil
-			} else {
-				in.Delim('[')
-				if out.Conditions == nil {
-					if !in.IsDelim(']') {
-						out.Conditions = make([]*user.SCondition, 0, 8)
-					} else {
-						out.Conditions = []*user.SCondition{}
-					}
-				} else {
-					out.Conditions = (out.Conditions)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v34 *user.SCondition
-					if in.IsNull() {
-						in.Skip()
-						v34 = nil
-					} else {
-						if v34 == nil {
-							v34 = new(user.SCondition)
-						}
-						easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*v34)
-					}
-					out.Conditions = append(out.Conditions, v34)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
-		case "priority":
-			if in.IsNull() {
-				in.Skip()
-				out.Priority = nil
-			} else {
-				if out.Priority == nil {
-					out.Priority = new(int32)
-				}
-				*out.Priority = int32(in.Int32())
-			}
-		case "event_existed":
-			if in.IsNull() {
-				in.Skip()
-				out.EventExisted = nil
-			} else {
-				if out.EventExisted == nil {
-					out.EventExisted = new(bool)
-				}
-				*out.EventExisted = bool(in.Bool())
-			}
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson524579e4EncodeGithubComSubizHeaderUser12(out *jwriter.Writer, in user.SCondition) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Id != nil {
-		const prefix string = ",\"id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Id))
-	}
-	if in.Key != nil {
-		const prefix string = ",\"key\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Key))
-	}
-	if in.Operator != nil {
-		const prefix string = ",\"operator\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Operator))
-	}
-	if in.Value != nil {
-		const prefix string = ",\"value\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Value))
-	}
-	if in.Join != nil {
-		const prefix string = ",\"join\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Join))
-	}
-	if in.EventTypeTime != nil {
-		const prefix string = ",\"event_type_time\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.EventTypeTime))
-	}
-	if in.EventType != nil {
-		const prefix string = ",\"event_type\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.EventType))
-	}
-	if len(in.Conditions) != 0 {
-		const prefix string = ",\"conditions\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v35, v36 := range in.Conditions {
-				if v35 > 0 {
-					out.RawByte(',')
-				}
-				if v36 == nil {
-					out.RawString("null")
-				} else {
-					easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *v36)
-				}
-			}
-			out.RawByte(']')
-		}
-	}
-	if in.Priority != nil {
-		const prefix string = ",\"priority\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int32(int32(*in.Priority))
-	}
-	if in.EventExisted != nil {
-		const prefix string = ",\"event_existed\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(*in.EventExisted))
-	}
-	out.RawByte('}')
-}
-func easyjson524579e4DecodeGithubComSubizHeaderUser11(in *jlexer.Lexer, out *user.Condition) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "join":
-			if in.IsNull() {
-				in.Skip()
-				out.Join = nil
-			} else {
-				if out.Join == nil {
-					out.Join = new(string)
-				}
-				*out.Join = string(in.String())
-			}
-		case "key":
-			if in.IsNull() {
-				in.Skip()
-				out.Key = nil
-			} else {
-				if out.Key == nil {
-					out.Key = new(string)
-				}
-				*out.Key = string(in.String())
-			}
-		case "operator":
-			if in.IsNull() {
-				in.Skip()
-				out.Operator = nil
-			} else {
-				if out.Operator == nil {
-					out.Operator = new(string)
-				}
-				*out.Operator = string(in.String())
-			}
-		case "value":
-			if in.IsNull() {
-				in.Skip()
-				out.Value = nil
-			} else {
-				if out.Value == nil {
-					out.Value = new(string)
-				}
-				*out.Value = string(in.String())
-			}
-		case "id":
-			if in.IsNull() {
-				in.Skip()
-				out.Id = nil
-			} else {
-				if out.Id == nil {
-					out.Id = new(string)
-				}
-				*out.Id = string(in.String())
-			}
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjson524579e4EncodeGithubComSubizHeaderUser11(out *jwriter.Writer, in user.Condition) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Join != nil {
-		const prefix string = ",\"join\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Join))
-	}
-	if in.Key != nil {
-		const prefix string = ",\"key\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Key))
-	}
-	if in.Operator != nil {
-		const prefix string = ",\"operator\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Operator))
-	}
-	if in.Value != nil {
-		const prefix string = ",\"value\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Value))
-	}
-	if in.Id != nil {
-		const prefix string = ",\"id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.Id))
-	}
-	out.RawByte('}')
 }
 func easyjson524579e4DecodeGithubComSubizHeaderUser9(in *jlexer.Lexer, out *user.Note) {
 	isTopLevel := in.IsStart()
@@ -3489,17 +2697,17 @@ func easyjson524579e4DecodeGithubComSubizHeaderUser9(in *jlexer.Lexer, out *user
 					out.Links = (out.Links)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v37 *user.NoteLink
+					var v31 *user.NoteLink
 					if in.IsNull() {
 						in.Skip()
-						v37 = nil
+						v31 = nil
 					} else {
-						if v37 == nil {
-							v37 = new(user.NoteLink)
+						if v31 == nil {
+							v31 = new(user.NoteLink)
 						}
-						easyjson524579e4DecodeGithubComSubizHeaderUser13(in, &*v37)
+						easyjson524579e4DecodeGithubComSubizHeaderUser10(in, &*v31)
 					}
-					out.Links = append(out.Links, v37)
+					out.Links = append(out.Links, v31)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3648,14 +2856,14 @@ func easyjson524579e4EncodeGithubComSubizHeaderUser9(out *jwriter.Writer, in use
 		}
 		{
 			out.RawByte('[')
-			for v38, v39 := range in.Links {
-				if v38 > 0 {
+			for v32, v33 := range in.Links {
+				if v32 > 0 {
 					out.RawByte(',')
 				}
-				if v39 == nil {
+				if v33 == nil {
 					out.RawString("null")
 				} else {
-					easyjson524579e4EncodeGithubComSubizHeaderUser13(out, *v39)
+					easyjson524579e4EncodeGithubComSubizHeaderUser10(out, *v33)
 				}
 			}
 			out.RawByte(']')
@@ -3663,7 +2871,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderUser9(out *jwriter.Writer, in use
 	}
 	out.RawByte('}')
 }
-func easyjson524579e4DecodeGithubComSubizHeaderUser13(in *jlexer.Lexer, out *user.NoteLink) {
+func easyjson524579e4DecodeGithubComSubizHeaderUser10(in *jlexer.Lexer, out *user.NoteLink) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3712,7 +2920,7 @@ func easyjson524579e4DecodeGithubComSubizHeaderUser13(in *jlexer.Lexer, out *use
 		in.Consumed()
 	}
 }
-func easyjson524579e4EncodeGithubComSubizHeaderUser13(out *jwriter.Writer, in user.NoteLink) {
+func easyjson524579e4EncodeGithubComSubizHeaderUser10(out *jwriter.Writer, in user.NoteLink) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4963,9 +4171,9 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent6(in *jlexer.Lexer, out *Eve
 					out.Topics = (out.Topics)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v40 string
-					v40 = string(in.String())
-					out.Topics = append(out.Topics, v40)
+					var v34 string
+					v34 = string(in.String())
+					out.Topics = append(out.Topics, v34)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5064,11 +4272,11 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent6(out *jwriter.Writer, in Ev
 		}
 		{
 			out.RawByte('[')
-			for v41, v42 := range in.Topics {
-				if v41 > 0 {
+			for v35, v36 := range in.Topics {
+				if v35 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v42))
+				out.String(string(v36))
 			}
 			out.RawByte(']')
 		}
@@ -5234,7 +4442,140 @@ func (v *By) UnmarshalJSON(data []byte) error {
 func (v *By) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson524579e4DecodeGithubComSubizHeaderEvent7(l, v)
 }
-func easyjson524579e4DecodeGithubComSubizHeaderEvent8(in *jlexer.Lexer, out *AutomationEvent) {
+func easyjson524579e4DecodeGithubComSubizHeaderEvent8(in *jlexer.Lexer, out *Automations) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "automations":
+			if in.IsNull() {
+				in.Skip()
+				out.Automations = nil
+			} else {
+				in.Delim('[')
+				if out.Automations == nil {
+					if !in.IsDelim(']') {
+						out.Automations = make([]*Automation, 0, 8)
+					} else {
+						out.Automations = []*Automation{}
+					}
+				} else {
+					out.Automations = (out.Automations)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v37 *Automation
+					if in.IsNull() {
+						in.Skip()
+						v37 = nil
+					} else {
+						if v37 == nil {
+							v37 = new(Automation)
+						}
+						(*v37).UnmarshalEasyJSON(in)
+					}
+					out.Automations = append(out.Automations, v37)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderEvent8(out *jwriter.Writer, in Automations) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if len(in.Automations) != 0 {
+		const prefix string = ",\"automations\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v38, v39 := range in.Automations {
+				if v38 > 0 {
+					out.RawByte(',')
+				}
+				if v39 == nil {
+					out.RawString("null")
+				} else {
+					(*v39).MarshalEasyJSON(out)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Automations) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson524579e4EncodeGithubComSubizHeaderEvent8(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Automations) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson524579e4EncodeGithubComSubizHeaderEvent8(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Automations) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson524579e4DecodeGithubComSubizHeaderEvent8(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Automations) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson524579e4DecodeGithubComSubizHeaderEvent8(l, v)
+}
+func easyjson524579e4DecodeGithubComSubizHeaderEvent9(in *jlexer.Lexer, out *AutomationEvent) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -5273,9 +4614,9 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent8(in *jlexer.Lexer, out *Aut
 				out.Automation = nil
 			} else {
 				if out.Automation == nil {
-					out.Automation = new(user.Automation)
+					out.Automation = new(Automation)
 				}
-				easyjson524579e4DecodeGithubComSubizHeaderUser10(in, &*out.Automation)
+				(*out.Automation).UnmarshalEasyJSON(in)
 			}
 		case "user":
 			if in.IsNull() {
@@ -5307,7 +4648,7 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent8(in *jlexer.Lexer, out *Aut
 		in.Consumed()
 	}
 }
-func easyjson524579e4EncodeGithubComSubizHeaderEvent8(out *jwriter.Writer, in AutomationEvent) {
+func easyjson524579e4EncodeGithubComSubizHeaderEvent9(out *jwriter.Writer, in AutomationEvent) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -5349,7 +4690,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent8(out *jwriter.Writer, in Au
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson524579e4EncodeGithubComSubizHeaderUser10(out, *in.Automation)
+		(*in.Automation).MarshalEasyJSON(out)
 	}
 	if in.User != nil {
 		const prefix string = ",\"user\":"
@@ -5377,23 +4718,1412 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent8(out *jwriter.Writer, in Au
 // MarshalJSON supports json.Marshaler interface
 func (v AutomationEvent) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson524579e4EncodeGithubComSubizHeaderEvent8(&w, v)
+	easyjson524579e4EncodeGithubComSubizHeaderEvent9(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v AutomationEvent) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson524579e4EncodeGithubComSubizHeaderEvent8(w, v)
+	easyjson524579e4EncodeGithubComSubizHeaderEvent9(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *AutomationEvent) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson524579e4DecodeGithubComSubizHeaderEvent8(&r, v)
+	easyjson524579e4DecodeGithubComSubizHeaderEvent9(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *AutomationEvent) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson524579e4DecodeGithubComSubizHeaderEvent8(l, v)
+	easyjson524579e4DecodeGithubComSubizHeaderEvent9(l, v)
+}
+func easyjson524579e4DecodeGithubComSubizHeaderEvent10(in *jlexer.Lexer, out *AutomationCreditsAggregate) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "webhook_fired":
+			out.WebhookFired = int64(in.Int64())
+		case "message_fired":
+			out.MessageFired = int64(in.Int64())
+		case "email_fired":
+			out.EmailFired = int64(in.Int64())
+		case "min":
+			out.Min = int64(in.Int64())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderEvent10(out *jwriter.Writer, in AutomationCreditsAggregate) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
+	if in.WebhookFired != 0 {
+		const prefix string = ",\"webhook_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.WebhookFired))
+	}
+	if in.MessageFired != 0 {
+		const prefix string = ",\"message_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.MessageFired))
+	}
+	if in.EmailFired != 0 {
+		const prefix string = ",\"email_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.EmailFired))
+	}
+	if in.Min != 0 {
+		const prefix string = ",\"min\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Min))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v AutomationCreditsAggregate) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson524579e4EncodeGithubComSubizHeaderEvent10(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v AutomationCreditsAggregate) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson524579e4EncodeGithubComSubizHeaderEvent10(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *AutomationCreditsAggregate) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson524579e4DecodeGithubComSubizHeaderEvent10(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *AutomationCreditsAggregate) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson524579e4DecodeGithubComSubizHeaderEvent10(l, v)
+}
+func easyjson524579e4DecodeGithubComSubizHeaderEvent11(in *jlexer.Lexer, out *AutomationCredit) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "webhook_fired":
+			out.WebhookFired = int64(in.Int64())
+		case "message_fired":
+			out.MessageFired = int64(in.Int64())
+		case "email_fired":
+			out.EmailFired = int64(in.Int64())
+		case "webhook_addon":
+			out.WebhookAddon = int64(in.Int64())
+		case "message_addon":
+			out.MessageAddon = int64(in.Int64())
+		case "email_addon":
+			out.EmailAddon = int64(in.Int64())
+		case "webhook_credits":
+			out.WebhookCredits = int64(in.Int64())
+		case "message_credits":
+			out.MessageCredits = int64(in.Int64())
+		case "email_credits":
+			out.EmailCredits = int64(in.Int64())
+		case "month":
+			out.Month = int64(in.Int64())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderEvent11(out *jwriter.Writer, in AutomationCredit) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
+	if in.WebhookFired != 0 {
+		const prefix string = ",\"webhook_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.WebhookFired))
+	}
+	if in.MessageFired != 0 {
+		const prefix string = ",\"message_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.MessageFired))
+	}
+	if in.EmailFired != 0 {
+		const prefix string = ",\"email_fired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.EmailFired))
+	}
+	if in.WebhookAddon != 0 {
+		const prefix string = ",\"webhook_addon\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.WebhookAddon))
+	}
+	if in.MessageAddon != 0 {
+		const prefix string = ",\"message_addon\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.MessageAddon))
+	}
+	if in.EmailAddon != 0 {
+		const prefix string = ",\"email_addon\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.EmailAddon))
+	}
+	if in.WebhookCredits != 0 {
+		const prefix string = ",\"webhook_credits\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.WebhookCredits))
+	}
+	if in.MessageCredits != 0 {
+		const prefix string = ",\"message_credits\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.MessageCredits))
+	}
+	if in.EmailCredits != 0 {
+		const prefix string = ",\"email_credits\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.EmailCredits))
+	}
+	if in.Month != 0 {
+		const prefix string = ",\"month\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Month))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v AutomationCredit) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson524579e4EncodeGithubComSubizHeaderEvent11(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v AutomationCredit) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson524579e4EncodeGithubComSubizHeaderEvent11(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *AutomationCredit) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson524579e4DecodeGithubComSubizHeaderEvent11(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *AutomationCredit) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson524579e4DecodeGithubComSubizHeaderEvent11(l, v)
+}
+func easyjson524579e4DecodeGithubComSubizHeaderEvent12(in *jlexer.Lexer, out *AutomationCheck) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "automation_id":
+			out.AutomationId = string(in.String())
+		case "user_id":
+			out.UserId = string(in.String())
+		case "event_id":
+			out.EventId = string(in.String())
+		case "scope":
+			out.Scope = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderEvent12(out *jwriter.Writer, in AutomationCheck) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
+	if in.AutomationId != "" {
+		const prefix string = ",\"automation_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AutomationId))
+	}
+	if in.UserId != "" {
+		const prefix string = ",\"user_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.UserId))
+	}
+	if in.EventId != "" {
+		const prefix string = ",\"event_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.EventId))
+	}
+	if in.Scope != "" {
+		const prefix string = ",\"scope\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Scope))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v AutomationCheck) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson524579e4EncodeGithubComSubizHeaderEvent12(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v AutomationCheck) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson524579e4EncodeGithubComSubizHeaderEvent12(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *AutomationCheck) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson524579e4DecodeGithubComSubizHeaderEvent12(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *AutomationCheck) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson524579e4DecodeGithubComSubizHeaderEvent12(l, v)
+}
+func easyjson524579e4DecodeGithubComSubizHeaderEvent13(in *jlexer.Lexer, out *AutomationAction) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "type":
+			out.Type = string(in.String())
+		case "user":
+			if in.IsNull() {
+				in.Skip()
+				out.User = nil
+			} else {
+				if out.User == nil {
+					out.User = new(user.User)
+				}
+				easyjson524579e4DecodeGithubComSubizHeaderUser(in, &*out.User)
+			}
+		case "email":
+			if in.IsNull() {
+				in.Skip()
+				out.Email = nil
+			} else {
+				if out.Email == nil {
+					out.Email = new(email.Email)
+				}
+				(*out.Email).UnmarshalEasyJSON(in)
+			}
+		case "user_note":
+			if in.IsNull() {
+				in.Skip()
+				out.UserNote = nil
+			} else {
+				if out.UserNote == nil {
+					out.UserNote = new(user.Note)
+				}
+				easyjson524579e4DecodeGithubComSubizHeaderUser9(in, &*out.UserNote)
+			}
+		case "event":
+			if in.IsNull() {
+				in.Skip()
+				out.Event = nil
+			} else {
+				if out.Event == nil {
+					out.Event = new(Event)
+				}
+				(*out.Event).UnmarshalEasyJSON(in)
+			}
+		case "agent_id":
+			out.AgentId = string(in.String())
+		case "tag_id":
+			out.TagId = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderEvent13(out *jwriter.Writer, in AutomationAction) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Type != "" {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Type))
+	}
+	if in.User != nil {
+		const prefix string = ",\"user\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		easyjson524579e4EncodeGithubComSubizHeaderUser(out, *in.User)
+	}
+	if in.Email != nil {
+		const prefix string = ",\"email\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Email).MarshalEasyJSON(out)
+	}
+	if in.UserNote != nil {
+		const prefix string = ",\"user_note\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		easyjson524579e4EncodeGithubComSubizHeaderUser9(out, *in.UserNote)
+	}
+	if in.Event != nil {
+		const prefix string = ",\"event\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Event).MarshalEasyJSON(out)
+	}
+	if in.AgentId != "" {
+		const prefix string = ",\"agent_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AgentId))
+	}
+	if in.TagId != "" {
+		const prefix string = ",\"tag_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.TagId))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v AutomationAction) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson524579e4EncodeGithubComSubizHeaderEvent13(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v AutomationAction) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson524579e4EncodeGithubComSubizHeaderEvent13(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *AutomationAction) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson524579e4DecodeGithubComSubizHeaderEvent13(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *AutomationAction) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson524579e4DecodeGithubComSubizHeaderEvent13(l, v)
+}
+func easyjson524579e4DecodeGithubComSubizHeaderEvent14(in *jlexer.Lexer, out *Automation) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "id":
+			out.Id = string(in.String())
+		case "channel":
+			out.Channel = string(in.String())
+		case "name":
+			out.Name = string(in.String())
+		case "description":
+			out.Description = string(in.String())
+		case "conditions":
+			if in.IsNull() {
+				in.Skip()
+				out.Conditions = nil
+			} else {
+				in.Delim('[')
+				if out.Conditions == nil {
+					if !in.IsDelim(']') {
+						out.Conditions = make([]*user.Condition, 0, 8)
+					} else {
+						out.Conditions = []*user.Condition{}
+					}
+				} else {
+					out.Conditions = (out.Conditions)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v40 *user.Condition
+					if in.IsNull() {
+						in.Skip()
+						v40 = nil
+					} else {
+						if v40 == nil {
+							v40 = new(user.Condition)
+						}
+						easyjson524579e4DecodeGithubComSubizHeaderUser11(in, &*v40)
+					}
+					out.Conditions = append(out.Conditions, v40)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "condition":
+			if in.IsNull() {
+				in.Skip()
+				out.Condition = nil
+			} else {
+				if out.Condition == nil {
+					out.Condition = new(user.SCondition)
+				}
+				easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*out.Condition)
+			}
+		case "created":
+			out.Created = int64(in.Int64())
+		case "modified":
+			out.Modified = int64(in.Int64())
+		case "state":
+			out.State = string(in.String())
+		case "action_type":
+			out.ActionType = string(in.String())
+		case "action_data":
+			out.ActionData = string(in.String())
+		case "scope":
+			out.Scope = string(in.String())
+		case "cross_channel":
+			out.CrossChannel = bool(in.Bool())
+		case "metadata":
+			out.Metadata = string(in.String())
+		case "actions":
+			if in.IsNull() {
+				in.Skip()
+				out.Actions = nil
+			} else {
+				if out.Actions == nil {
+					out.Actions = new(AutomationAction)
+				}
+				(*out.Actions).UnmarshalEasyJSON(in)
+			}
+		case "delay_sec":
+			out.DelaySec = int32(in.Int32())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderEvent14(out *jwriter.Writer, in Automation) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
+	if in.Id != "" {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Id))
+	}
+	if in.Channel != "" {
+		const prefix string = ",\"channel\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Channel))
+	}
+	if in.Name != "" {
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Name))
+	}
+	if in.Description != "" {
+		const prefix string = ",\"description\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Description))
+	}
+	if len(in.Conditions) != 0 {
+		const prefix string = ",\"conditions\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v41, v42 := range in.Conditions {
+				if v41 > 0 {
+					out.RawByte(',')
+				}
+				if v42 == nil {
+					out.RawString("null")
+				} else {
+					easyjson524579e4EncodeGithubComSubizHeaderUser11(out, *v42)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Condition != nil {
+		const prefix string = ",\"condition\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *in.Condition)
+	}
+	if in.Created != 0 {
+		const prefix string = ",\"created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Created))
+	}
+	if in.Modified != 0 {
+		const prefix string = ",\"modified\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Modified))
+	}
+	if in.State != "" {
+		const prefix string = ",\"state\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.State))
+	}
+	if in.ActionType != "" {
+		const prefix string = ",\"action_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ActionType))
+	}
+	if in.ActionData != "" {
+		const prefix string = ",\"action_data\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ActionData))
+	}
+	if in.Scope != "" {
+		const prefix string = ",\"scope\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Scope))
+	}
+	if in.CrossChannel {
+		const prefix string = ",\"cross_channel\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.CrossChannel))
+	}
+	if in.Metadata != "" {
+		const prefix string = ",\"metadata\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Metadata))
+	}
+	if in.Actions != nil {
+		const prefix string = ",\"actions\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Actions).MarshalEasyJSON(out)
+	}
+	if in.DelaySec != 0 {
+		const prefix string = ",\"delay_sec\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(in.DelaySec))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Automation) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson524579e4EncodeGithubComSubizHeaderEvent14(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Automation) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson524579e4EncodeGithubComSubizHeaderEvent14(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Automation) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson524579e4DecodeGithubComSubizHeaderEvent14(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Automation) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson524579e4DecodeGithubComSubizHeaderEvent14(l, v)
+}
+func easyjson524579e4DecodeGithubComSubizHeaderUser12(in *jlexer.Lexer, out *user.SCondition) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		case "key":
+			if in.IsNull() {
+				in.Skip()
+				out.Key = nil
+			} else {
+				if out.Key == nil {
+					out.Key = new(string)
+				}
+				*out.Key = string(in.String())
+			}
+		case "operator":
+			if in.IsNull() {
+				in.Skip()
+				out.Operator = nil
+			} else {
+				if out.Operator == nil {
+					out.Operator = new(string)
+				}
+				*out.Operator = string(in.String())
+			}
+		case "value":
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(string)
+				}
+				*out.Value = string(in.String())
+			}
+		case "join":
+			if in.IsNull() {
+				in.Skip()
+				out.Join = nil
+			} else {
+				if out.Join == nil {
+					out.Join = new(string)
+				}
+				*out.Join = string(in.String())
+			}
+		case "event_type_time":
+			if in.IsNull() {
+				in.Skip()
+				out.EventTypeTime = nil
+			} else {
+				if out.EventTypeTime == nil {
+					out.EventTypeTime = new(string)
+				}
+				*out.EventTypeTime = string(in.String())
+			}
+		case "event_type":
+			if in.IsNull() {
+				in.Skip()
+				out.EventType = nil
+			} else {
+				if out.EventType == nil {
+					out.EventType = new(string)
+				}
+				*out.EventType = string(in.String())
+			}
+		case "conditions":
+			if in.IsNull() {
+				in.Skip()
+				out.Conditions = nil
+			} else {
+				in.Delim('[')
+				if out.Conditions == nil {
+					if !in.IsDelim(']') {
+						out.Conditions = make([]*user.SCondition, 0, 8)
+					} else {
+						out.Conditions = []*user.SCondition{}
+					}
+				} else {
+					out.Conditions = (out.Conditions)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v43 *user.SCondition
+					if in.IsNull() {
+						in.Skip()
+						v43 = nil
+					} else {
+						if v43 == nil {
+							v43 = new(user.SCondition)
+						}
+						easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*v43)
+					}
+					out.Conditions = append(out.Conditions, v43)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "priority":
+			if in.IsNull() {
+				in.Skip()
+				out.Priority = nil
+			} else {
+				if out.Priority == nil {
+					out.Priority = new(int32)
+				}
+				*out.Priority = int32(in.Int32())
+			}
+		case "event_existed":
+			if in.IsNull() {
+				in.Skip()
+				out.EventExisted = nil
+			} else {
+				if out.EventExisted == nil {
+					out.EventExisted = new(bool)
+				}
+				*out.EventExisted = bool(in.Bool())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderUser12(out *jwriter.Writer, in user.SCondition) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	if in.Key != nil {
+		const prefix string = ",\"key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Key))
+	}
+	if in.Operator != nil {
+		const prefix string = ",\"operator\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Operator))
+	}
+	if in.Value != nil {
+		const prefix string = ",\"value\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Value))
+	}
+	if in.Join != nil {
+		const prefix string = ",\"join\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Join))
+	}
+	if in.EventTypeTime != nil {
+		const prefix string = ",\"event_type_time\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.EventTypeTime))
+	}
+	if in.EventType != nil {
+		const prefix string = ",\"event_type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.EventType))
+	}
+	if len(in.Conditions) != 0 {
+		const prefix string = ",\"conditions\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v44, v45 := range in.Conditions {
+				if v44 > 0 {
+					out.RawByte(',')
+				}
+				if v45 == nil {
+					out.RawString("null")
+				} else {
+					easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *v45)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Priority != nil {
+		const prefix string = ",\"priority\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.Priority))
+	}
+	if in.EventExisted != nil {
+		const prefix string = ",\"event_existed\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.EventExisted))
+	}
+	out.RawByte('}')
+}
+func easyjson524579e4DecodeGithubComSubizHeaderUser11(in *jlexer.Lexer, out *user.Condition) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "join":
+			if in.IsNull() {
+				in.Skip()
+				out.Join = nil
+			} else {
+				if out.Join == nil {
+					out.Join = new(string)
+				}
+				*out.Join = string(in.String())
+			}
+		case "key":
+			if in.IsNull() {
+				in.Skip()
+				out.Key = nil
+			} else {
+				if out.Key == nil {
+					out.Key = new(string)
+				}
+				*out.Key = string(in.String())
+			}
+		case "operator":
+			if in.IsNull() {
+				in.Skip()
+				out.Operator = nil
+			} else {
+				if out.Operator == nil {
+					out.Operator = new(string)
+				}
+				*out.Operator = string(in.String())
+			}
+		case "value":
+			if in.IsNull() {
+				in.Skip()
+				out.Value = nil
+			} else {
+				if out.Value == nil {
+					out.Value = new(string)
+				}
+				*out.Value = string(in.String())
+			}
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.Id = nil
+			} else {
+				if out.Id == nil {
+					out.Id = new(string)
+				}
+				*out.Id = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson524579e4EncodeGithubComSubizHeaderUser11(out *jwriter.Writer, in user.Condition) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Join != nil {
+		const prefix string = ",\"join\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Join))
+	}
+	if in.Key != nil {
+		const prefix string = ",\"key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Key))
+	}
+	if in.Operator != nil {
+		const prefix string = ",\"operator\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Operator))
+	}
+	if in.Value != nil {
+		const prefix string = ",\"value\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Value))
+	}
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Id))
+	}
+	out.RawByte('}')
 }

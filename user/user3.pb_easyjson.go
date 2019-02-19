@@ -3589,357 +3589,7 @@ func (v *Campaign) UnmarshalJSON(data []byte) error {
 func (v *Campaign) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonAe8eb074DecodeGithubComSubizHeaderUser22(l, v)
 }
-func easyjsonAe8eb074DecodeGithubComSubizHeaderUser23(in *jlexer.Lexer, out *AutomationCreditsAggregate) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "ctx":
-			if in.IsNull() {
-				in.Skip()
-				out.Ctx = nil
-			} else {
-				if out.Ctx == nil {
-					out.Ctx = new(common.Context)
-				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
-			}
-		case "account_id":
-			out.AccountId = string(in.String())
-		case "webhook_fired":
-			out.WebhookFired = int64(in.Int64())
-		case "message_fired":
-			out.MessageFired = int64(in.Int64())
-		case "email_fired":
-			out.EmailFired = int64(in.Int64())
-		case "min":
-			out.Min = int64(in.Int64())
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjsonAe8eb074EncodeGithubComSubizHeaderUser23(out *jwriter.Writer, in AutomationCreditsAggregate) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Ctx != nil {
-		const prefix string = ",\"ctx\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Ctx).MarshalEasyJSON(out)
-	}
-	if in.AccountId != "" {
-		const prefix string = ",\"account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.AccountId))
-	}
-	if in.WebhookFired != 0 {
-		const prefix string = ",\"webhook_fired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.WebhookFired))
-	}
-	if in.MessageFired != 0 {
-		const prefix string = ",\"message_fired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.MessageFired))
-	}
-	if in.EmailFired != 0 {
-		const prefix string = ",\"email_fired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.EmailFired))
-	}
-	if in.Min != 0 {
-		const prefix string = ",\"min\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.Min))
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v AutomationCreditsAggregate) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser23(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v AutomationCreditsAggregate) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser23(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *AutomationCreditsAggregate) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser23(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *AutomationCreditsAggregate) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser23(l, v)
-}
-func easyjsonAe8eb074DecodeGithubComSubizHeaderUser24(in *jlexer.Lexer, out *AutomationCredit) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "ctx":
-			if in.IsNull() {
-				in.Skip()
-				out.Ctx = nil
-			} else {
-				if out.Ctx == nil {
-					out.Ctx = new(common.Context)
-				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
-			}
-		case "account_id":
-			out.AccountId = string(in.String())
-		case "webhook_fired":
-			out.WebhookFired = int64(in.Int64())
-		case "message_fired":
-			out.MessageFired = int64(in.Int64())
-		case "email_fired":
-			out.EmailFired = int64(in.Int64())
-		case "webhook_addon":
-			out.WebhookAddon = int64(in.Int64())
-		case "message_addon":
-			out.MessageAddon = int64(in.Int64())
-		case "email_addon":
-			out.EmailAddon = int64(in.Int64())
-		case "webhook_credits":
-			out.WebhookCredits = int64(in.Int64())
-		case "message_credits":
-			out.MessageCredits = int64(in.Int64())
-		case "email_credits":
-			out.EmailCredits = int64(in.Int64())
-		case "month":
-			out.Month = int64(in.Int64())
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjsonAe8eb074EncodeGithubComSubizHeaderUser24(out *jwriter.Writer, in AutomationCredit) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Ctx != nil {
-		const prefix string = ",\"ctx\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Ctx).MarshalEasyJSON(out)
-	}
-	if in.AccountId != "" {
-		const prefix string = ",\"account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.AccountId))
-	}
-	if in.WebhookFired != 0 {
-		const prefix string = ",\"webhook_fired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.WebhookFired))
-	}
-	if in.MessageFired != 0 {
-		const prefix string = ",\"message_fired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.MessageFired))
-	}
-	if in.EmailFired != 0 {
-		const prefix string = ",\"email_fired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.EmailFired))
-	}
-	if in.WebhookAddon != 0 {
-		const prefix string = ",\"webhook_addon\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.WebhookAddon))
-	}
-	if in.MessageAddon != 0 {
-		const prefix string = ",\"message_addon\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.MessageAddon))
-	}
-	if in.EmailAddon != 0 {
-		const prefix string = ",\"email_addon\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.EmailAddon))
-	}
-	if in.WebhookCredits != 0 {
-		const prefix string = ",\"webhook_credits\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.WebhookCredits))
-	}
-	if in.MessageCredits != 0 {
-		const prefix string = ",\"message_credits\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.MessageCredits))
-	}
-	if in.EmailCredits != 0 {
-		const prefix string = ",\"email_credits\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.EmailCredits))
-	}
-	if in.Month != 0 {
-		const prefix string = ",\"month\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.Month))
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v AutomationCredit) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser24(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v AutomationCredit) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser24(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *AutomationCredit) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser24(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *AutomationCredit) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser24(l, v)
-}
-func easyjsonAe8eb074DecodeGithubComSubizHeaderUser25(in *jlexer.Lexer, out *AttributeData) {
+func easyjsonAe8eb074DecodeGithubComSubizHeaderUser23(in *jlexer.Lexer, out *AttributeData) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4015,7 +3665,7 @@ func easyjsonAe8eb074DecodeGithubComSubizHeaderUser25(in *jlexer.Lexer, out *Att
 		in.Consumed()
 	}
 }
-func easyjsonAe8eb074EncodeGithubComSubizHeaderUser25(out *jwriter.Writer, in AttributeData) {
+func easyjsonAe8eb074EncodeGithubComSubizHeaderUser23(out *jwriter.Writer, in AttributeData) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4164,27 +3814,27 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser25(out *jwriter.Writer, in At
 // MarshalJSON supports json.Marshaler interface
 func (v AttributeData) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser25(&w, v)
+	easyjsonAe8eb074EncodeGithubComSubizHeaderUser23(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v AttributeData) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser25(w, v)
+	easyjsonAe8eb074EncodeGithubComSubizHeaderUser23(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *AttributeData) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser25(&r, v)
+	easyjsonAe8eb074DecodeGithubComSubizHeaderUser23(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *AttributeData) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser25(l, v)
+	easyjsonAe8eb074DecodeGithubComSubizHeaderUser23(l, v)
 }
-func easyjsonAe8eb074DecodeGithubComSubizHeaderUser26(in *jlexer.Lexer, out *Alias) {
+func easyjsonAe8eb074DecodeGithubComSubizHeaderUser24(in *jlexer.Lexer, out *Alias) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4229,7 +3879,7 @@ func easyjsonAe8eb074DecodeGithubComSubizHeaderUser26(in *jlexer.Lexer, out *Ali
 		in.Consumed()
 	}
 }
-func easyjsonAe8eb074EncodeGithubComSubizHeaderUser26(out *jwriter.Writer, in Alias) {
+func easyjsonAe8eb074EncodeGithubComSubizHeaderUser24(out *jwriter.Writer, in Alias) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -4279,23 +3929,23 @@ func easyjsonAe8eb074EncodeGithubComSubizHeaderUser26(out *jwriter.Writer, in Al
 // MarshalJSON supports json.Marshaler interface
 func (v Alias) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser26(&w, v)
+	easyjsonAe8eb074EncodeGithubComSubizHeaderUser24(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Alias) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonAe8eb074EncodeGithubComSubizHeaderUser26(w, v)
+	easyjsonAe8eb074EncodeGithubComSubizHeaderUser24(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Alias) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser26(&r, v)
+	easyjsonAe8eb074DecodeGithubComSubizHeaderUser24(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Alias) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonAe8eb074DecodeGithubComSubizHeaderUser26(l, v)
+	easyjsonAe8eb074DecodeGithubComSubizHeaderUser24(l, v)
 }
