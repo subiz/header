@@ -103,6 +103,9 @@ for i in `ls -R`; do
 		if [[ $i == 'service.proto' ]]; then
 			continue
 		fi
+		if [[ $i == 'const.proto' ]]; then
+			continue
+		fi
 		[ "$1" = 'json' ] && easyjson -all $LAST_DIR/$(sed "s/.proto/.pb.go/g" <<< "$i")
 	fi
 done;

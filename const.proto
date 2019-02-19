@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package header;
+
 enum E {
 	Sub = 0;
 	RawEventCreated = 3;  //
@@ -9,4 +11,178 @@ enum E {
 	UnsubscribeReply = 7;
 	EventSync = 8;
 	EventCreated = 9;
+
+	UserReadRequested = 1110; // Id
+
+	UserUpdateRequested = 1112; // User
+	UserCreateRequested = 1113; // User
+	UserSearchRequested = 1114; // Ids
+
+	UserEventCreateRequested = 1115; // rawevent -> raw event
+	UserEventSearchRequested = 1117; // listeventsrequest -> rawevents
+	UserTopicSearchRequested = 1116; // listtopicsrequest -> listtopicsresult
+
+	UserSegmentationCreateRequested = 11110;
+	UserSegmentationUpdateRequested = 11111;
+	UserSegmentationDeleteRequested = 11112;
+	UserSegmentationListRequested = 11113;
+	UserSegmentationReadRequested = 11114;
+
+	UserAddToMyListRequested = 11120;
+	UserRemoveFromMyListRequested = 11121;
+	UserEventTopicSubscribeRequested = 11135;
+	UserEventTopicUnsubscribeRequested = 11136;
+
+	UserReadTopicRequested = 41; // ReadTopicRequest -> 111Empty
+
+	UserSubizId = 11142;
+
+	UserPresenceReadRequested = 11144;
+	UserPreviewingReadRequested = 11146;
+	UserListTopRequested = 11147;
+
+	UserAutomationUpsertRequested = 11150;
+	UserAutomationDeleteRequested = 11151;
+	UserAutomationListRequested = 11152;
+	UserAutomationReadRequested = 11153;
+
+	AutomationAgentNotificationFired = 11154;
+	AutomationConversationMessageFired = 11155;
+
+	UserSessionUpdateRequested = 11165;
+	UserSessionCreateRequested = 11166;
+	UserSessionReadRequested = 11167;
+
+	SegmentationLoop = 11168;
+
+	AutomationSynced = 111102;
+	AutomationFired = 111103;
+	UserRequested = 111100;
+
+	UserCreated = 11170;
+
+	UserAttributeAdded = 11171;
+	UserUpdated = 11172;
+
+	UserSynced = 111101;
+	UserUpserted = 111105;
+	UserV3Synced = 111106;
+
+	UserJob = 111199; // useraliasadded, useraliasdeleted,
+	UserResolvedJob = 111200;
+	UserResolvedJob2 = 111198;;
+
+	UserResolvedEventCreated = 111201;
+	UserAliasAdded = 111202;
+	UserAliasDeleted = 111203;
+	UserEventCreated = 111204;
+	UserContentViewed = 111205;
+	UserMessageSent = 111206;
+	UserAggregated = 111207;
+
+	UserTopicJob = 111208;
+	UserEventTopicPublished = 111209;
+	UserNotifyMyUserRequested = 111210;
+	UserSegmentPickRequested = 111211;
+	UserSegmentUnpickRequested = 111212;
+	UserAggregateSegmentAttrCount = 111214;
+	UserAggregateUpdateInteracted = 111215;
+
+	//UserAggregateSegmentCount = 216;
+	UserSegmentAggregated = 111217;
+
+	AutomationBlockUserFired = 111218;
+	AutomationUpdateUserAttributeFired = 111219;
+	AutomationMergeUsersFired = 111220;
+	AutomationUserNotificationFired = 111221;
+	AutomationUserWebhookFired = 111222;
+	AutomationUserNoteFired = 111223;
+
+	AutomationCreateConversationFired = 111224;
+	AutomationConversationMessage2Fired = 111225;
+	AutomationConversationWebhookFired = 111226;
+	AutomationAddAgentToConversationFired = 111227;
+	AutomationCreateTicketFired = 111228;
+	AutomationConversationTagFired = 111229;
+
+	// AutomationAgentNotificationFired = 54;
+	AutomationAddUserToSegmentationFired = 111231;
+
+	UserTotalConvoUpdated = 111232;
+	UserTotalOpenTicketUpdated = 111233;
+
+	AutomationCreditAggregated = 111235;
+	AutomationCreditCountAggregate = 111236;
+
+
+	ConversationAssigned = 1000; // conversation is assigned to an agent
+	ConversationWaiting = 1002; // new conversation is added to unassigned list
+
+	ConversationStartRequested = 1003; // conversation started from an agent // conversationstart
+
+	ConversationAccepted = 1004; // conversation from unassigned list is accepted by an agent
+	ConversationDropped = 1005; // conversation dropped from unassigned list
+
+	ConversationEventCreated = 1006;
+	ConversationJoinRequested = 1007;
+	ConversationMessageRequested = 1008; // message
+	ConversationLeaveRequested = 1009; // conversation
+	ConversationCloseRequested = 10010; // id
+	ConversationTagRequested = 10011;
+	ConversationUntagRequested = 10012;
+
+	ConversationReadRequested = 10013;
+	ConversationListRequested = 10014;
+	ConversationAcceptRequested = 10015;
+
+	ConversationUpdateRuleRequested = 10020; // rule
+	ConversationCreateRuleRequested = 10021; // rule
+	ConversationDeleteRuleRequested = 10022; // id
+	ConversationReadRuleRequested = 10023; // id
+	ConversationListRuleRequested = 10024; // id accountid, return top N rule
+
+	//ConversationRequested = 50; // user request for new conversation
+	ConversationUserRequestReply = 10051; // user
+	ConversationLimitUpdated = 10052;
+
+	ConversationRequestWaitTimeout = 10060;
+
+	ConversationListEventsRequested = 10061;
+
+	ChannelDeintegrateRequested = 10065;     // id -> empty
+	ChannelIntegrateRequested = 10066;  // integration -> integration
+	ChannelIntegrationListRequested = 10067; // id -> integrations
+
+	ConnectorUpsertRequested = 10068;
+	ConnectorListRequested = 10069;
+
+	TagCreateRequested = 10085; // tag
+	TagUpdateRequested = 10086; // tag
+	TagReadRequested = 10087; // id
+	TagDeleteRequested = 10088; // id
+	TagListRequested = 10089; // search
+
+	TagCreated = 10095;
+	ConversationUpserted = 10097; // conversation
+	ConversationMessageSent = 10099; // message
+
+	ConversationMessageAckRequested = 10090;
+	ConversationMessageReceiveRequested = 10091;
+	ConversationMessageSeeRequested = 10092;
+	ChannelIntegrationAvailabilityCheck = 10093;
+
+	ConversationMessageSearchRequest = 10094;
+	ConversationRequested = 100100;
+	ConversationSynced = 100101;
+	ConversationV3Synced = 100102;
+
+	ConversationWorkerJob = 100103;
+
+	TemplateCreateRequested = 100104;
+	TemplateUpdateRequested = 100105;
+	TemplateDeleteRequested = 100106;
+	TemplateReadRequested = 100107;
+	TemplateListRequested = 100108;
+
+	ConversationAgentPresenceUpdated = 100109;
 }
