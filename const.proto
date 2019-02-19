@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+enum E {
+	Sub = 0;
+	RawEventCreated = 3;  //
+	Subscribe = 4; // subscription
+	SubscribeReply = 6;
+	Unsubscribe = 5; // subscription
+	UnsubscribeReply = 7;
+	EventSync = 8;
+	EventCreated = 9;
+}
