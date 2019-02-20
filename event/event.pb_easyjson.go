@@ -5483,13 +5483,34 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent14(in *jlexer.Lexer, out *Au
 				in.Skip()
 				out.Actions = nil
 			} else {
+				in.Delim('[')
 				if out.Actions == nil {
-					out.Actions = new(AutomationAction)
+					if !in.IsDelim(']') {
+						out.Actions = make([]*AutomationAction, 0, 8)
+					} else {
+						out.Actions = []*AutomationAction{}
+					}
+				} else {
+					out.Actions = (out.Actions)[:0]
 				}
-				(*out.Actions).UnmarshalEasyJSON(in)
+				for !in.IsDelim(']') {
+					var v41 *AutomationAction
+					if in.IsNull() {
+						in.Skip()
+						v41 = nil
+					} else {
+						if v41 == nil {
+							v41 = new(AutomationAction)
+						}
+						(*v41).UnmarshalEasyJSON(in)
+					}
+					out.Actions = append(out.Actions, v41)
+					in.WantComma()
+				}
+				in.Delim(']')
 			}
 		case "delay_sec":
-			out.DelaySec = int32(in.Int32())
+			out.DelaySec = uint32(in.Uint32())
 		default:
 			in.SkipRecursive()
 		}
@@ -5574,14 +5595,14 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent14(out *jwriter.Writer, in A
 		}
 		{
 			out.RawByte('[')
-			for v41, v42 := range in.Conditions {
-				if v41 > 0 {
+			for v42, v43 := range in.Conditions {
+				if v42 > 0 {
 					out.RawByte(',')
 				}
-				if v42 == nil {
+				if v43 == nil {
 					out.RawString("null")
 				} else {
-					easyjson524579e4EncodeGithubComSubizHeaderUser11(out, *v42)
+					easyjson524579e4EncodeGithubComSubizHeaderUser11(out, *v43)
 				}
 			}
 			out.RawByte(']')
@@ -5677,7 +5698,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent14(out *jwriter.Writer, in A
 		}
 		out.String(string(in.Metadata))
 	}
-	if in.Actions != nil {
+	if len(in.Actions) != 0 {
 		const prefix string = ",\"actions\":"
 		if first {
 			first = false
@@ -5685,7 +5706,20 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent14(out *jwriter.Writer, in A
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Actions).MarshalEasyJSON(out)
+		{
+			out.RawByte('[')
+			for v44, v45 := range in.Actions {
+				if v44 > 0 {
+					out.RawByte(',')
+				}
+				if v45 == nil {
+					out.RawString("null")
+				} else {
+					(*v45).MarshalEasyJSON(out)
+				}
+			}
+			out.RawByte(']')
+		}
 	}
 	if in.DelaySec != 0 {
 		const prefix string = ",\"delay_sec\":"
@@ -5695,7 +5729,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent14(out *jwriter.Writer, in A
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int32(int32(in.DelaySec))
+		out.Uint32(uint32(in.DelaySec))
 	}
 	out.RawByte('}')
 }
@@ -5828,17 +5862,17 @@ func easyjson524579e4DecodeGithubComSubizHeaderUser12(in *jlexer.Lexer, out *use
 					out.Conditions = (out.Conditions)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v43 *user.SCondition
+					var v46 *user.SCondition
 					if in.IsNull() {
 						in.Skip()
-						v43 = nil
+						v46 = nil
 					} else {
-						if v43 == nil {
-							v43 = new(user.SCondition)
+						if v46 == nil {
+							v46 = new(user.SCondition)
 						}
-						easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*v43)
+						easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*v46)
 					}
-					out.Conditions = append(out.Conditions, v43)
+					out.Conditions = append(out.Conditions, v46)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5957,14 +5991,14 @@ func easyjson524579e4EncodeGithubComSubizHeaderUser12(out *jwriter.Writer, in us
 		}
 		{
 			out.RawByte('[')
-			for v44, v45 := range in.Conditions {
-				if v44 > 0 {
+			for v47, v48 := range in.Conditions {
+				if v47 > 0 {
 					out.RawByte(',')
 				}
-				if v45 == nil {
+				if v48 == nil {
 					out.RawString("null")
 				} else {
-					easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *v45)
+					easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *v48)
 				}
 			}
 			out.RawByte(']')

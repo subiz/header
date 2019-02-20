@@ -268,8 +268,8 @@ message Automation {
 	bool cross_channel = 16; // deprecated
 	string metadata = 17;
 
-	AutomationAction actions = 18;
-	int32 delay_sec = 19;
+	repeated AutomationAction actions = 18;
+	uint32 delay_sec = 19;
 }
 
 message AutomationAction {

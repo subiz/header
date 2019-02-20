@@ -2620,11 +2620,14 @@
           "type": "string"
         },
         "actions": {
-          "$ref": "#/definitions/eventAutomationAction"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventAutomationAction"
+          }
         },
         "delay_sec": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         }
       }
     },
