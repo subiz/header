@@ -210,6 +210,7 @@ message AutomationEvent {
 	// user.Session session = 6;
 	user.User user = 7;
 	Event event = 9;
+	AutomationAction action = 10;
 }
 
 message Automation {
@@ -280,7 +281,7 @@ message AutomationAction {
 		notify_user = 4; // not yet defined
 		send_email = 5; // prop email
 		add_user_note = 6; // note
-		create_conversation = 7; // event
+		create_conversation = 7; // events
 		send_message = 8; // event
 		assign_agent_to_conversation = 9; // prop agent ids
 		convert_conversation_to_ticket = 10; // no prop
@@ -295,9 +296,9 @@ message AutomationAction {
 	email.Email email = 5;
 	user.Note user_note = 6;
 	Event event = 7;
-
 	string agent_id = 8;
 	string tag_id = 9;
+	repeated Event events = 10;
 }
 
 message Automations {

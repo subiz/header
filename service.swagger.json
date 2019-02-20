@@ -2654,6 +2654,12 @@
         },
         "tag_id": {
           "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eventEvent"
+          }
         }
       }
     },
