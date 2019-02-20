@@ -5323,6 +5323,18 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent13(in *jlexer.Lexer, out *Au
 				}
 				in.Delim(']')
 			}
+		case "ticket":
+			if in.IsNull() {
+				in.Skip()
+				out.Ticket = nil
+			} else {
+				if out.Ticket == nil {
+					out.Ticket = new(conversation.Ticket)
+				}
+				(*out.Ticket).UnmarshalEasyJSON(in)
+			}
+		case "integration_id":
+			out.IntegrationId = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -5429,6 +5441,26 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent13(out *jwriter.Writer, in A
 			}
 			out.RawByte(']')
 		}
+	}
+	if in.Ticket != nil {
+		const prefix string = ",\"ticket\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ticket).MarshalEasyJSON(out)
+	}
+	if in.IntegrationId != "" {
+		const prefix string = ",\"integration_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.IntegrationId))
 	}
 	out.RawByte('}')
 }

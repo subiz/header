@@ -281,7 +281,7 @@ message AutomationAction {
 		notify_user = 4; // not yet defined
 		send_email = 5; // prop email
 		add_user_note = 6; // note
-		create_conversation = 7; // events
+		create_conversation = 7; // events, integration_id
 		send_message = 8; // event
 		assign_agent_to_conversation = 9; // prop agent ids
 		convert_conversation_to_ticket = 10; // no prop
@@ -299,6 +299,8 @@ message AutomationAction {
 	string agent_id = 8;
 	string tag_id = 9;
 	repeated Event events = 10;
+	conversation.Ticket ticket = 11;
+	string integration_id = 12;
 }
 
 message Automations {

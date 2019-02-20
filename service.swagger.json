@@ -2660,6 +2660,12 @@
           "items": {
             "$ref": "#/definitions/eventEvent"
           }
+        },
+        "ticket": {
+          "$ref": "#/definitions/conversationTicket"
+        },
+        "integration_id": {
+          "type": "string"
         }
       }
     },
