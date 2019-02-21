@@ -2666,6 +2666,9 @@
         },
         "integration_id": {
           "type": "string"
+        },
+        "segmentation_id": {
+          "type": "string"
         }
       }
     },

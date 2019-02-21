@@ -109,6 +109,7 @@ enum E {
 
 	// AutomationAgentNotificationFired = 54;
 	AutomationAddUserToSegmentationFired = 111231;
+	AutomationRemoveUserFromSegmentationFired = 111433;
 
 	UserTotalConvoUpdated = 111232;
 	UserTotalOpenTicketUpdated = 111233;

@@ -288,7 +288,8 @@ message AutomationAction {
 		tag_conversation = 11; // tag id
 		send_webhook = 12; // not yet defined
 		open_widget_screen = 14; // not yet defined
-		add_to_my_list = 15; // agent_id
+		add_user_to_segmentation = 15; // segmentation_id
+		remove_user_from_segmentation = 16; // segmentation_id
 	}
 	string type = 2;
 
@@ -301,6 +302,7 @@ message AutomationAction {
 	repeated Event events = 10;
 	conversation.Ticket ticket = 11;
 	string integration_id = 12;
+	string segmentation_id = 13;
 }
 
 message Automations {

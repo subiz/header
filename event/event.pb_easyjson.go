@@ -5335,6 +5335,8 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent13(in *jlexer.Lexer, out *Au
 			}
 		case "integration_id":
 			out.IntegrationId = string(in.String())
+		case "segmentation_id":
+			out.SegmentationId = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -5461,6 +5463,16 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent13(out *jwriter.Writer, in A
 			out.RawString(prefix)
 		}
 		out.String(string(in.IntegrationId))
+	}
+	if in.SegmentationId != "" {
+		const prefix string = ",\"segmentation_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.SegmentationId))
 	}
 	out.RawByte('}')
 }
