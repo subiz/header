@@ -144,6 +144,8 @@ enum ConvoType {
 	conversation_postbacked = 34;
 	conversation_unassigned = 35;
 	conversation_assigned = 36;
+	message_updated = 38;
+
 	conversation_pending = 81;
 	ticket_created = 82;
 	ticket_updated = 83;
