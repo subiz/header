@@ -293,6 +293,7 @@ service EventMgr {
 
 service ConversationEventReader {
 	rpc SendMessage(event.Event) returns (event.Event);
+	rpc UpdateMessage(event.Event) returns (event.Event);
 	rpc ListEvents(conversation.ListEventsRequest) returns (event.Events);
 	rpc SearchEvents(conversation.SearchMessageRequest) returns (event.Events);
 	rpc Ping(common.PingRequest) returns (common.Pong);
