@@ -7,6 +7,7 @@ import (
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
+	event "github.com/subiz/header/event"
 )
 
 // suppress unused package warning
@@ -397,6 +398,16 @@ func easyjsonEbdc5db9DecodeGithubComSubizHeaderMailkon2(in *jlexer.Lexer, out *S
 				}
 				*out.Subject = string(in.String())
 			}
+		case "event":
+			if in.IsNull() {
+				in.Skip()
+				out.Event = nil
+			} else {
+				if out.Event == nil {
+					out.Event = new(event.Event)
+				}
+				(*out.Event).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -489,6 +500,16 @@ func easyjsonEbdc5db9EncodeGithubComSubizHeaderMailkon2(out *jwriter.Writer, in 
 			out.RawString(prefix)
 		}
 		out.String(string(*in.Subject))
+	}
+	if in.Event != nil {
+		const prefix string = ",\"event\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Event).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

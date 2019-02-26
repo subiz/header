@@ -2,6 +2,8 @@ syntax = "proto2";
 
 package mailkon;
 
+import "github.com/subiz/header/event/event.proto";
+
 message Address {
 	optional string account_id = 1;
 	optional string address = 2;
@@ -52,6 +54,7 @@ message SendgridEvent {
 	repeated string data = 8;
 	optional string full_message_id = 9;
 	optional string subject = 10;
+	optional event.Event event = 11;
 }
 
 message UserAvail {
