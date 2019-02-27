@@ -4,6 +4,19 @@ package api;
 
 import "github.com/subiz/header/common/common.proto";
 
+message Request {
+  map<string, string> header = 2;
+  bytes body = 3;
+	string method = 4;
+	string path = 5;
+}
+
+message Response {
+	map<string, string> header = 2;
+	bytes body = 3;
+	int32 code = 4;
+}
+
 message BatchOp {
 	common.Context ctx = 1;
 	string method = 2;

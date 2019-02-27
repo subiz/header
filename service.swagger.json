@@ -514,6 +514,25 @@
         }
       }
     },
+    "apiResponse": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "body": {
+          "type": "string",
+          "format": "byte"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "authCredential": {
       "type": "object",
       "properties": {
