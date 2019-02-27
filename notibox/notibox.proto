@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 
 // notibox store all notification in subiz
 // it DOESN'T take care of pushing notification to user
@@ -8,14 +8,31 @@ package notibox;
 
 // Notification represent an user's notification
 message Notification {
-	optional common.Context ctx = 1;
-	optional string box = 3;
-	optional string topic = 10;
-	optional string type = 5; // type
-	optional string data = 8; //json
-	optional int64 created = 6;
-	optional int64 read = 9;
-	optional bool view = 11;
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string topic = 10;
+	string type = 5; // type
+	string data = 8; //json
+	int64 created = 6;
+	int64 read = 9;
+	int64 seen = 12;
+	bool view = 11;
+}
+
+message Subscription {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	bool trial_expired = 4;
+	bool system_maintainance_scheduled_1 = 5;
+	bool system_maintainance_scheduled_2 = 6;
+	bool system_maintainance_completed = 7;
+	bool agent_activated = 8;
+	bool conversation_unassigned = 9;
+	bool agent_permission_updated = 10;
+	bool account_created = 11;
+	bool trial_almost_expired = 12;
 }
 
 enum Type {
@@ -31,50 +48,38 @@ enum Type {
 }
 
 message AddNotificationRequest {
-	optional common.Context ctx = 1;
-	repeated string boxs = 2;
-	optional Notification notification = 3;
-}
-
-message ReadNotification {
-	optional common.Context ctx = 1;
-	optional string box = 2;
-	repeated string topics = 3;
-	optional bool read = 4;
+	common.Context ctx = 1;
+	repeated string account_ids = 2;
+	repeated string agent_ids = 4;
+	Notification notification = 3;
 }
 
 message ListRequest {
-	optional common.Context ctx = 1;
-	optional string box = 3;
-	optional string anchor = 4;
-	optional int32 limit = 5;
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string anchor = 4;
+	int32 limit = 5;
 }
 
-message NotiboxRequest {
-	optional common.Context ctx = 1;
-	optional string box = 2;
-	optional string topic = 3;
+message TopicRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string topics = 4;
 }
 
 message Notifications {
-	optional common.Context ctx = 1;
-	repeated Notification notifications = 2;
-	optional string anchor = 3;
+	common.Context ctx = 1;
+	Notification notifications = 2;
+	string anchor = 3;
 }
 
 message Box {
-	optional common.Context ctx = 1;
-	optional string box = 2;
-	optional int64 new_count = 3;
-}
-
-message AllType {
-  	optional Notifications nts = 2;
-	optional ListRequest listr = 3;
-	optional ReadNotification rno = 4;
-	optional AddNotificationRequest anorfr = 5;
-	optional Notification noti = 6;
-	optional Box box = 8;
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 new_count = 3;
+	string agent_id = 4;
 }
 
 enum Event {

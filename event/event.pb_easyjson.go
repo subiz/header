@@ -3301,26 +3301,12 @@ func easyjson524579e4DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *n
 				}
 				(*out.Ctx).UnmarshalEasyJSON(in)
 			}
-		case "box":
-			if in.IsNull() {
-				in.Skip()
-				out.Box = nil
-			} else {
-				if out.Box == nil {
-					out.Box = new(string)
-				}
-				*out.Box = string(in.String())
-			}
+		case "account_id":
+			out.AccountId = string(in.String())
 		case "new_count":
-			if in.IsNull() {
-				in.Skip()
-				out.NewCount = nil
-			} else {
-				if out.NewCount == nil {
-					out.NewCount = new(int64)
-				}
-				*out.NewCount = int64(in.Int64())
-			}
+			out.NewCount = int64(in.Int64())
+		case "agent_id":
+			out.AgentId = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -3345,17 +3331,17 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in 
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
 	}
-	if in.Box != nil {
-		const prefix string = ",\"box\":"
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.Box))
+		out.String(string(in.AccountId))
 	}
-	if in.NewCount != nil {
+	if in.NewCount != 0 {
 		const prefix string = ",\"new_count\":"
 		if first {
 			first = false
@@ -3363,7 +3349,17 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(*in.NewCount))
+		out.Int64(int64(in.NewCount))
+	}
+	if in.AgentId != "" {
+		const prefix string = ",\"agent_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AgentId))
 	}
 	out.RawByte('}')
 }
@@ -3396,76 +3392,24 @@ func easyjson524579e4DecodeGithubComSubizHeaderNotibox(in *jlexer.Lexer, out *no
 				}
 				(*out.Ctx).UnmarshalEasyJSON(in)
 			}
-		case "box":
-			if in.IsNull() {
-				in.Skip()
-				out.Box = nil
-			} else {
-				if out.Box == nil {
-					out.Box = new(string)
-				}
-				*out.Box = string(in.String())
-			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "agent_id":
+			out.AgentId = string(in.String())
 		case "topic":
-			if in.IsNull() {
-				in.Skip()
-				out.Topic = nil
-			} else {
-				if out.Topic == nil {
-					out.Topic = new(string)
-				}
-				*out.Topic = string(in.String())
-			}
+			out.Topic = string(in.String())
 		case "type":
-			if in.IsNull() {
-				in.Skip()
-				out.Type = nil
-			} else {
-				if out.Type == nil {
-					out.Type = new(string)
-				}
-				*out.Type = string(in.String())
-			}
+			out.Type = string(in.String())
 		case "data":
-			if in.IsNull() {
-				in.Skip()
-				out.Data = nil
-			} else {
-				if out.Data == nil {
-					out.Data = new(string)
-				}
-				*out.Data = string(in.String())
-			}
+			out.Data = string(in.String())
 		case "created":
-			if in.IsNull() {
-				in.Skip()
-				out.Created = nil
-			} else {
-				if out.Created == nil {
-					out.Created = new(int64)
-				}
-				*out.Created = int64(in.Int64())
-			}
+			out.Created = int64(in.Int64())
 		case "read":
-			if in.IsNull() {
-				in.Skip()
-				out.Read = nil
-			} else {
-				if out.Read == nil {
-					out.Read = new(int64)
-				}
-				*out.Read = int64(in.Int64())
-			}
+			out.Read = int64(in.Int64())
+		case "seen":
+			out.Seen = int64(in.Int64())
 		case "view":
-			if in.IsNull() {
-				in.Skip()
-				out.View = nil
-			} else {
-				if out.View == nil {
-					out.View = new(bool)
-				}
-				*out.View = bool(in.Bool())
-			}
+			out.View = bool(in.Bool())
 		default:
 			in.SkipRecursive()
 		}
@@ -3490,17 +3434,27 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
 	}
-	if in.Box != nil {
-		const prefix string = ",\"box\":"
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.Box))
+		out.String(string(in.AccountId))
 	}
-	if in.Topic != nil {
+	if in.AgentId != "" {
+		const prefix string = ",\"agent_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AgentId))
+	}
+	if in.Topic != "" {
 		const prefix string = ",\"topic\":"
 		if first {
 			first = false
@@ -3508,9 +3462,9 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.Topic))
+		out.String(string(in.Topic))
 	}
-	if in.Type != nil {
+	if in.Type != "" {
 		const prefix string = ",\"type\":"
 		if first {
 			first = false
@@ -3518,9 +3472,9 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.Type))
+		out.String(string(in.Type))
 	}
-	if in.Data != nil {
+	if in.Data != "" {
 		const prefix string = ",\"data\":"
 		if first {
 			first = false
@@ -3528,9 +3482,9 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.Data))
+		out.String(string(in.Data))
 	}
-	if in.Created != nil {
+	if in.Created != 0 {
 		const prefix string = ",\"created\":"
 		if first {
 			first = false
@@ -3538,9 +3492,9 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(*in.Created))
+		out.Int64(int64(in.Created))
 	}
-	if in.Read != nil {
+	if in.Read != 0 {
 		const prefix string = ",\"read\":"
 		if first {
 			first = false
@@ -3548,9 +3502,19 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(*in.Read))
+		out.Int64(int64(in.Read))
 	}
-	if in.View != nil {
+	if in.Seen != 0 {
+		const prefix string = ",\"seen\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Seen))
+	}
+	if in.View {
 		const prefix string = ",\"view\":"
 		if first {
 			first = false
@@ -3558,7 +3522,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		} else {
 			out.RawString(prefix)
 		}
-		out.Bool(bool(*in.View))
+		out.Bool(bool(in.View))
 	}
 	out.RawByte('}')
 }
