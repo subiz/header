@@ -52,7 +52,28 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox(in *jlexer.Lexer, out *To
 		case "agent_id":
 			out.AgentId = string(in.String())
 		case "topics":
-			out.Topics = string(in.String())
+			if in.IsNull() {
+				in.Skip()
+				out.Topics = nil
+			} else {
+				in.Delim('[')
+				if out.Topics == nil {
+					if !in.IsDelim(']') {
+						out.Topics = make([]string, 0, 4)
+					} else {
+						out.Topics = []string{}
+					}
+				} else {
+					out.Topics = (out.Topics)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v1 string
+					v1 = string(in.String())
+					out.Topics = append(out.Topics, v1)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -97,7 +118,7 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in T
 		}
 		out.String(string(in.AgentId))
 	}
-	if in.Topics != "" {
+	if len(in.Topics) != 0 {
 		const prefix string = ",\"topics\":"
 		if first {
 			first = false
@@ -105,7 +126,16 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in T
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Topics))
+		{
+			out.RawByte('[')
+			for v2, v3 := range in.Topics {
+				if v2 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v3))
+			}
+			out.RawByte(']')
+		}
 	}
 	out.RawByte('}')
 }
@@ -167,10 +197,31 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *N
 				in.Skip()
 				out.Notifications = nil
 			} else {
+				in.Delim('[')
 				if out.Notifications == nil {
-					out.Notifications = new(Notification)
+					if !in.IsDelim(']') {
+						out.Notifications = make([]*Notification, 0, 8)
+					} else {
+						out.Notifications = []*Notification{}
+					}
+				} else {
+					out.Notifications = (out.Notifications)[:0]
 				}
-				(*out.Notifications).UnmarshalEasyJSON(in)
+				for !in.IsDelim(']') {
+					var v4 *Notification
+					if in.IsNull() {
+						in.Skip()
+						v4 = nil
+					} else {
+						if v4 == nil {
+							v4 = new(Notification)
+						}
+						(*v4).UnmarshalEasyJSON(in)
+					}
+					out.Notifications = append(out.Notifications, v4)
+					in.WantComma()
+				}
+				in.Delim(']')
 			}
 		case "anchor":
 			out.Anchor = string(in.String())
@@ -198,7 +249,7 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in 
 		}
 		(*in.Ctx).MarshalEasyJSON(out)
 	}
-	if in.Notifications != nil {
+	if len(in.Notifications) != 0 {
 		const prefix string = ",\"notifications\":"
 		if first {
 			first = false
@@ -206,7 +257,20 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Notifications).MarshalEasyJSON(out)
+		{
+			out.RawByte('[')
+			for v5, v6 := range in.Notifications {
+				if v5 > 0 {
+					out.RawByte(',')
+				}
+				if v6 == nil {
+					out.RawString("null")
+				} else {
+					(*v6).MarshalEasyJSON(out)
+				}
+			}
+			out.RawByte(']')
+		}
 	}
 	if in.Anchor != "" {
 		const prefix string = ",\"anchor\":"
@@ -838,9 +902,9 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(in *jlexer.Lexer, out *A
 					out.AccountIds = (out.AccountIds)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 string
-					v1 = string(in.String())
-					out.AccountIds = append(out.AccountIds, v1)
+					var v7 string
+					v7 = string(in.String())
+					out.AccountIds = append(out.AccountIds, v7)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -861,9 +925,9 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(in *jlexer.Lexer, out *A
 					out.AgentIds = (out.AgentIds)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v2 string
-					v2 = string(in.String())
-					out.AgentIds = append(out.AgentIds, v2)
+					var v8 string
+					v8 = string(in.String())
+					out.AgentIds = append(out.AgentIds, v8)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -912,11 +976,11 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(out *jwriter.Writer, in 
 		}
 		{
 			out.RawByte('[')
-			for v3, v4 := range in.AccountIds {
-				if v3 > 0 {
+			for v9, v10 := range in.AccountIds {
+				if v9 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v4))
+				out.String(string(v10))
 			}
 			out.RawByte(']')
 		}
@@ -931,11 +995,11 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(out *jwriter.Writer, in 
 		}
 		{
 			out.RawByte('[')
-			for v5, v6 := range in.AgentIds {
-				if v5 > 0 {
+			for v11, v12 := range in.AgentIds {
+				if v11 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v6))
+				out.String(string(v12))
 			}
 			out.RawByte(']')
 		}

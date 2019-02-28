@@ -2845,9 +2845,6 @@
         "notification": {
           "$ref": "#/definitions/notiboxNotification"
         },
-        "notibox": {
-          "$ref": "#/definitions/notiboxNotibox"
-        },
         "agent_perm": {
           "$ref": "#/definitions/accountAgentPerm"
         },
@@ -3135,7 +3132,10 @@
           "$ref": "#/definitions/commonContext"
         },
         "notifications": {
-          "$ref": "#/definitions/notiboxNotification"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/notiboxNotification"
+          }
         },
         "anchor": {
           "type": "string"
