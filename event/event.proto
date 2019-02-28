@@ -60,7 +60,7 @@ message Event {
 		user.UnreadTopic unread_topic = 11;
 		user.MyUser my_user = 12;
 		notibox.Notification notification = 14;
-		notibox.Box notibox = 15;
+		notibox.Notibox notibox = 15;
 		account.AgentPerm agent_perm = 16;
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;

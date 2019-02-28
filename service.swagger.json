@@ -2846,7 +2846,7 @@
           "$ref": "#/definitions/notiboxNotification"
         },
         "notibox": {
-          "$ref": "#/definitions/notiboxBox"
+          "$ref": "#/definitions/notiboxNotibox"
         },
         "agent_perm": {
           "$ref": "#/definitions/accountAgentPerm"
@@ -3035,7 +3035,7 @@
         }
       }
     },
-    "notiboxBox": {
+    "notiboxNotibox": {
       "type": "object",
       "properties": {
         "ctx": {
@@ -3044,12 +3044,51 @@
         "account_id": {
           "type": "string"
         },
+        "agent_id": {
+          "type": "string"
+        },
         "new_count": {
           "type": "string",
           "format": "int64"
         },
-        "agent_id": {
+        "start_anchor": {
           "type": "string"
+        },
+        "trial_expired": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "system_maintainance_scheduled_1": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "system_maintainance_scheduled_2": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "system_maintainance_completed": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "conversation_unassigned": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "agent_permission_updated": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "account_created": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "trial_almost_expired": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "agent_activated": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -3083,10 +3122,6 @@
           "format": "int64"
         },
         "seen": {
-          "type": "string",
-          "format": "int64"
-        },
-        "view": {
           "type": "boolean",
           "format": "boolean"
         }
@@ -3104,56 +3139,6 @@
         },
         "anchor": {
           "type": "string"
-        }
-      }
-    },
-    "notiboxSubscription": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "agent_id": {
-          "type": "string"
-        },
-        "trial_expired": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "system_maintainance_scheduled_1": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "system_maintainance_scheduled_2": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "system_maintainance_completed": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "agent_activated": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "conversation_unassigned": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "agent_permission_updated": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "account_created": {
-          "type": "boolean",
-          "format": "boolean"
-        },
-        "trial_almost_expired": {
-          "type": "boolean",
-          "format": "boolean"
         }
       }
     },

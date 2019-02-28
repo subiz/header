@@ -2188,7 +2188,7 @@ func easyjson524579e4DecodeGithubComSubizHeaderEventEvent(in *jlexer.Lexer, out 
 				out.Notibox = nil
 			} else {
 				if out.Notibox == nil {
-					out.Notibox = new(notibox.Box)
+					out.Notibox = new(notibox.Notibox)
 				}
 				easyjson524579e4DecodeGithubComSubizHeaderNotibox1(in, &*out.Notibox)
 			}
@@ -3272,7 +3272,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderPayment(out *jwriter.Writer, in p
 	}
 	out.RawByte('}')
 }
-func easyjson524579e4DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *notibox.Box) {
+func easyjson524579e4DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *notibox.Notibox) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3303,10 +3303,30 @@ func easyjson524579e4DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *n
 			}
 		case "account_id":
 			out.AccountId = string(in.String())
-		case "new_count":
-			out.NewCount = int64(in.Int64())
 		case "agent_id":
 			out.AgentId = string(in.String())
+		case "new_count":
+			out.NewCount = int64(in.Int64())
+		case "start_anchor":
+			out.StartAnchor = string(in.String())
+		case "trial_expired":
+			out.TrialExpired = bool(in.Bool())
+		case "system_maintainance_scheduled_1":
+			out.SystemMaintainanceScheduled_1 = bool(in.Bool())
+		case "system_maintainance_scheduled_2":
+			out.SystemMaintainanceScheduled_2 = bool(in.Bool())
+		case "system_maintainance_completed":
+			out.SystemMaintainanceCompleted = bool(in.Bool())
+		case "conversation_unassigned":
+			out.ConversationUnassigned = bool(in.Bool())
+		case "agent_permission_updated":
+			out.AgentPermissionUpdated = bool(in.Bool())
+		case "account_created":
+			out.AccountCreated = bool(in.Bool())
+		case "trial_almost_expired":
+			out.TrialAlmostExpired = bool(in.Bool())
+		case "agent_activated":
+			out.AgentActivated = bool(in.Bool())
 		default:
 			in.SkipRecursive()
 		}
@@ -3317,7 +3337,7 @@ func easyjson524579e4DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *n
 		in.Consumed()
 	}
 }
-func easyjson524579e4EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in notibox.Box) {
+func easyjson524579e4EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in notibox.Notibox) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -3341,6 +3361,16 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in 
 		}
 		out.String(string(in.AccountId))
 	}
+	if in.AgentId != "" {
+		const prefix string = ",\"agent_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AgentId))
+	}
 	if in.NewCount != 0 {
 		const prefix string = ",\"new_count\":"
 		if first {
@@ -3351,15 +3381,105 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in 
 		}
 		out.Int64(int64(in.NewCount))
 	}
-	if in.AgentId != "" {
-		const prefix string = ",\"agent_id\":"
+	if in.StartAnchor != "" {
+		const prefix string = ",\"start_anchor\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.AgentId))
+		out.String(string(in.StartAnchor))
+	}
+	if in.TrialExpired {
+		const prefix string = ",\"trial_expired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.TrialExpired))
+	}
+	if in.SystemMaintainanceScheduled_1 {
+		const prefix string = ",\"system_maintainance_scheduled_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.SystemMaintainanceScheduled_1))
+	}
+	if in.SystemMaintainanceScheduled_2 {
+		const prefix string = ",\"system_maintainance_scheduled_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.SystemMaintainanceScheduled_2))
+	}
+	if in.SystemMaintainanceCompleted {
+		const prefix string = ",\"system_maintainance_completed\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.SystemMaintainanceCompleted))
+	}
+	if in.ConversationUnassigned {
+		const prefix string = ",\"conversation_unassigned\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.ConversationUnassigned))
+	}
+	if in.AgentPermissionUpdated {
+		const prefix string = ",\"agent_permission_updated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.AgentPermissionUpdated))
+	}
+	if in.AccountCreated {
+		const prefix string = ",\"account_created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.AccountCreated))
+	}
+	if in.TrialAlmostExpired {
+		const prefix string = ",\"trial_almost_expired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.TrialAlmostExpired))
+	}
+	if in.AgentActivated {
+		const prefix string = ",\"agent_activated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.AgentActivated))
 	}
 	out.RawByte('}')
 }
@@ -3407,9 +3527,7 @@ func easyjson524579e4DecodeGithubComSubizHeaderNotibox(in *jlexer.Lexer, out *no
 		case "read":
 			out.Read = int64(in.Int64())
 		case "seen":
-			out.Seen = int64(in.Int64())
-		case "view":
-			out.View = bool(in.Bool())
+			out.Seen = bool(in.Bool())
 		default:
 			in.SkipRecursive()
 		}
@@ -3504,7 +3622,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		}
 		out.Int64(int64(in.Read))
 	}
-	if in.Seen != 0 {
+	if in.Seen {
 		const prefix string = ",\"seen\":"
 		if first {
 			first = false
@@ -3512,17 +3630,7 @@ func easyjson524579e4EncodeGithubComSubizHeaderNotibox(out *jwriter.Writer, in n
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(in.Seen))
-	}
-	if in.View {
-		const prefix string = ",\"view\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.View))
+		out.Bool(bool(in.Seen))
 	}
 	out.RawByte('}')
 }

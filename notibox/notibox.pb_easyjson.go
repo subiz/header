@@ -133,218 +133,7 @@ func (v *TopicRequest) UnmarshalJSON(data []byte) error {
 func (v *TopicRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox(l, v)
 }
-func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *Subscription) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "ctx":
-			if in.IsNull() {
-				in.Skip()
-				out.Ctx = nil
-			} else {
-				if out.Ctx == nil {
-					out.Ctx = new(common.Context)
-				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
-			}
-		case "account_id":
-			out.AccountId = string(in.String())
-		case "agent_id":
-			out.AgentId = string(in.String())
-		case "trial_expired":
-			out.TrialExpired = bool(in.Bool())
-		case "system_maintainance_scheduled_1":
-			out.SystemMaintainanceScheduled_1 = bool(in.Bool())
-		case "system_maintainance_scheduled_2":
-			out.SystemMaintainanceScheduled_2 = bool(in.Bool())
-		case "system_maintainance_completed":
-			out.SystemMaintainanceCompleted = bool(in.Bool())
-		case "agent_activated":
-			out.AgentActivated = bool(in.Bool())
-		case "conversation_unassigned":
-			out.ConversationUnassigned = bool(in.Bool())
-		case "agent_permission_updated":
-			out.AgentPermissionUpdated = bool(in.Bool())
-		case "account_created":
-			out.AccountCreated = bool(in.Bool())
-		case "trial_almost_expired":
-			out.TrialAlmostExpired = bool(in.Bool())
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in Subscription) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Ctx != nil {
-		const prefix string = ",\"ctx\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Ctx).MarshalEasyJSON(out)
-	}
-	if in.AccountId != "" {
-		const prefix string = ",\"account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.AccountId))
-	}
-	if in.AgentId != "" {
-		const prefix string = ",\"agent_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.AgentId))
-	}
-	if in.TrialExpired {
-		const prefix string = ",\"trial_expired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.TrialExpired))
-	}
-	if in.SystemMaintainanceScheduled_1 {
-		const prefix string = ",\"system_maintainance_scheduled_1\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.SystemMaintainanceScheduled_1))
-	}
-	if in.SystemMaintainanceScheduled_2 {
-		const prefix string = ",\"system_maintainance_scheduled_2\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.SystemMaintainanceScheduled_2))
-	}
-	if in.SystemMaintainanceCompleted {
-		const prefix string = ",\"system_maintainance_completed\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.SystemMaintainanceCompleted))
-	}
-	if in.AgentActivated {
-		const prefix string = ",\"agent_activated\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.AgentActivated))
-	}
-	if in.ConversationUnassigned {
-		const prefix string = ",\"conversation_unassigned\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.ConversationUnassigned))
-	}
-	if in.AgentPermissionUpdated {
-		const prefix string = ",\"agent_permission_updated\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.AgentPermissionUpdated))
-	}
-	if in.AccountCreated {
-		const prefix string = ",\"account_created\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.AccountCreated))
-	}
-	if in.TrialAlmostExpired {
-		const prefix string = ",\"trial_almost_expired\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.TrialAlmostExpired))
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v Subscription) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v Subscription) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *Subscription) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox1(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *Subscription) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox1(l, v)
-}
-func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox2(in *jlexer.Lexer, out *Notifications) {
+func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox1(in *jlexer.Lexer, out *Notifications) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -395,7 +184,7 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox2(in *jlexer.Lexer, out *N
 		in.Consumed()
 	}
 }
-func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox2(out *jwriter.Writer, in Notifications) {
+func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(out *jwriter.Writer, in Notifications) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -435,27 +224,27 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox2(out *jwriter.Writer, in 
 // MarshalJSON supports json.Marshaler interface
 func (v Notifications) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox2(&w, v)
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Notifications) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox2(w, v)
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox1(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Notifications) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox2(&r, v)
+	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox1(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Notifications) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox2(l, v)
+	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox1(l, v)
 }
-func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox3(in *jlexer.Lexer, out *Notification) {
+func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox2(in *jlexer.Lexer, out *Notification) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -499,9 +288,7 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox3(in *jlexer.Lexer, out *N
 		case "read":
 			out.Read = int64(in.Int64())
 		case "seen":
-			out.Seen = int64(in.Int64())
-		case "view":
-			out.View = bool(in.Bool())
+			out.Seen = bool(in.Bool())
 		default:
 			in.SkipRecursive()
 		}
@@ -512,7 +299,7 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox3(in *jlexer.Lexer, out *N
 		in.Consumed()
 	}
 }
-func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(out *jwriter.Writer, in Notification) {
+func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox2(out *jwriter.Writer, in Notification) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -596,7 +383,7 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(out *jwriter.Writer, in 
 		}
 		out.Int64(int64(in.Read))
 	}
-	if in.Seen != 0 {
+	if in.Seen {
 		const prefix string = ",\"seen\":"
 		if first {
 			first = false
@@ -604,17 +391,7 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(in.Seen))
-	}
-	if in.View {
-		const prefix string = ",\"view\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(in.View))
+		out.Bool(bool(in.Seen))
 	}
 	out.RawByte('}')
 }
@@ -622,24 +399,259 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(out *jwriter.Writer, in 
 // MarshalJSON supports json.Marshaler interface
 func (v Notification) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(&w, v)
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox2(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Notification) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(w, v)
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox2(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Notification) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox2(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Notification) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox2(l, v)
+}
+func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox3(in *jlexer.Lexer, out *Notibox) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "agent_id":
+			out.AgentId = string(in.String())
+		case "new_count":
+			out.NewCount = int64(in.Int64())
+		case "start_anchor":
+			out.StartAnchor = string(in.String())
+		case "trial_expired":
+			out.TrialExpired = bool(in.Bool())
+		case "system_maintainance_scheduled_1":
+			out.SystemMaintainanceScheduled_1 = bool(in.Bool())
+		case "system_maintainance_scheduled_2":
+			out.SystemMaintainanceScheduled_2 = bool(in.Bool())
+		case "system_maintainance_completed":
+			out.SystemMaintainanceCompleted = bool(in.Bool())
+		case "conversation_unassigned":
+			out.ConversationUnassigned = bool(in.Bool())
+		case "agent_permission_updated":
+			out.AgentPermissionUpdated = bool(in.Bool())
+		case "account_created":
+			out.AccountCreated = bool(in.Bool())
+		case "trial_almost_expired":
+			out.TrialAlmostExpired = bool(in.Bool())
+		case "agent_activated":
+			out.AgentActivated = bool(in.Bool())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(out *jwriter.Writer, in Notibox) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
+	if in.AgentId != "" {
+		const prefix string = ",\"agent_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AgentId))
+	}
+	if in.NewCount != 0 {
+		const prefix string = ",\"new_count\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.NewCount))
+	}
+	if in.StartAnchor != "" {
+		const prefix string = ",\"start_anchor\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.StartAnchor))
+	}
+	if in.TrialExpired {
+		const prefix string = ",\"trial_expired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.TrialExpired))
+	}
+	if in.SystemMaintainanceScheduled_1 {
+		const prefix string = ",\"system_maintainance_scheduled_1\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.SystemMaintainanceScheduled_1))
+	}
+	if in.SystemMaintainanceScheduled_2 {
+		const prefix string = ",\"system_maintainance_scheduled_2\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.SystemMaintainanceScheduled_2))
+	}
+	if in.SystemMaintainanceCompleted {
+		const prefix string = ",\"system_maintainance_completed\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.SystemMaintainanceCompleted))
+	}
+	if in.ConversationUnassigned {
+		const prefix string = ",\"conversation_unassigned\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.ConversationUnassigned))
+	}
+	if in.AgentPermissionUpdated {
+		const prefix string = ",\"agent_permission_updated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.AgentPermissionUpdated))
+	}
+	if in.AccountCreated {
+		const prefix string = ",\"account_created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.AccountCreated))
+	}
+	if in.TrialAlmostExpired {
+		const prefix string = ",\"trial_almost_expired\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.TrialAlmostExpired))
+	}
+	if in.AgentActivated {
+		const prefix string = ",\"agent_activated\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.AgentActivated))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Notibox) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Notibox) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox3(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Notibox) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
 	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox3(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *Notification) UnmarshalEasyJSON(l *jlexer.Lexer) {
+func (v *Notibox) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox3(l, v)
 }
 func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox4(in *jlexer.Lexer, out *ListRequest) {
@@ -679,6 +691,8 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox4(in *jlexer.Lexer, out *L
 			out.Anchor = string(in.String())
 		case "limit":
 			out.Limit = int32(in.Int32())
+		case "seen":
+			out.Seen = bool(in.Bool())
 		default:
 			in.SkipRecursive()
 		}
@@ -743,6 +757,16 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox4(out *jwriter.Writer, in 
 		}
 		out.Int32(int32(in.Limit))
 	}
+	if in.Seen {
+		const prefix string = ",\"seen\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(in.Seen))
+	}
 	out.RawByte('}')
 }
 
@@ -769,122 +793,7 @@ func (v *ListRequest) UnmarshalJSON(data []byte) error {
 func (v *ListRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox4(l, v)
 }
-func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(in *jlexer.Lexer, out *Box) {
-	isTopLevel := in.IsStart()
-	if in.IsNull() {
-		if isTopLevel {
-			in.Consumed()
-		}
-		in.Skip()
-		return
-	}
-	in.Delim('{')
-	for !in.IsDelim('}') {
-		key := in.UnsafeString()
-		in.WantColon()
-		if in.IsNull() {
-			in.Skip()
-			in.WantComma()
-			continue
-		}
-		switch key {
-		case "ctx":
-			if in.IsNull() {
-				in.Skip()
-				out.Ctx = nil
-			} else {
-				if out.Ctx == nil {
-					out.Ctx = new(common.Context)
-				}
-				(*out.Ctx).UnmarshalEasyJSON(in)
-			}
-		case "account_id":
-			out.AccountId = string(in.String())
-		case "new_count":
-			out.NewCount = int64(in.Int64())
-		case "agent_id":
-			out.AgentId = string(in.String())
-		default:
-			in.SkipRecursive()
-		}
-		in.WantComma()
-	}
-	in.Delim('}')
-	if isTopLevel {
-		in.Consumed()
-	}
-}
-func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(out *jwriter.Writer, in Box) {
-	out.RawByte('{')
-	first := true
-	_ = first
-	if in.Ctx != nil {
-		const prefix string = ",\"ctx\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		(*in.Ctx).MarshalEasyJSON(out)
-	}
-	if in.AccountId != "" {
-		const prefix string = ",\"account_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.AccountId))
-	}
-	if in.NewCount != 0 {
-		const prefix string = ",\"new_count\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.NewCount))
-	}
-	if in.AgentId != "" {
-		const prefix string = ",\"agent_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.AgentId))
-	}
-	out.RawByte('}')
-}
-
-// MarshalJSON supports json.Marshaler interface
-func (v Box) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
-// MarshalEasyJSON supports easyjson.Marshaler interface
-func (v Box) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *Box) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(&r, v)
-	return r.Error()
-}
-
-// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *Box) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(l, v)
-}
-func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox6(in *jlexer.Lexer, out *AddNotificationRequest) {
+func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(in *jlexer.Lexer, out *AddNotificationRequest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -979,7 +888,7 @@ func easyjsonD06bf781DecodeGithubComSubizHeaderNotibox6(in *jlexer.Lexer, out *A
 		in.Consumed()
 	}
 }
-func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox6(out *jwriter.Writer, in AddNotificationRequest) {
+func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(out *jwriter.Writer, in AddNotificationRequest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1047,23 +956,23 @@ func easyjsonD06bf781EncodeGithubComSubizHeaderNotibox6(out *jwriter.Writer, in 
 // MarshalJSON supports json.Marshaler interface
 func (v AddNotificationRequest) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox6(&w, v)
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v AddNotificationRequest) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox6(w, v)
+	easyjsonD06bf781EncodeGithubComSubizHeaderNotibox5(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *AddNotificationRequest) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox6(&r, v)
+	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *AddNotificationRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox6(l, v)
+	easyjsonD06bf781DecodeGithubComSubizHeaderNotibox5(l, v)
 }

@@ -353,7 +353,8 @@ service NotiboxService {
 	rpc ListNotis(notibox.ListRequest) returns (notibox.Notifications);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
-	rpc UpdateNotiboxSubscription(notibox.Subscription) returns (notibox.Subscription);
+	rpc UpdateNotibox(notibox.Notibox) returns (notibox.Notibox);
+	rpc ReadNotibox(common.Id) returns (notibox.Notibox);
 }
 
 // payment services
