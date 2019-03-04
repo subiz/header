@@ -10,6 +10,12 @@ enum Type {
 	new_conversation = 1;
 }
 
+message Subscription {
+	optional bool new_message = 3;
+	optional bool unassigned_conversation = 4;
+	optional int32 delay = 10;
+}
+
 message Setting {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -17,8 +23,13 @@ message Setting {
 	optional string web_type = 4;
 	optional string mobile_type = 5;
 	optional string email_type = 6;
+
 	optional int32 email_after = 7;
 	optional int64 updated = 8;
+
+	optional Subscription web = 9;
+	optional Subscription mobile = 10;
+	optional Subscription email = 11;
 }
 
 message Token {

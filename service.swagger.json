@@ -3029,6 +3029,32 @@
         "updated": {
           "type": "string",
           "format": "int64"
+        },
+        "web": {
+          "$ref": "#/definitions/noti5Subscription"
+        },
+        "mobile": {
+          "$ref": "#/definitions/noti5Subscription"
+        },
+        "email": {
+          "$ref": "#/definitions/noti5Subscription"
+        }
+      }
+    },
+    "noti5Subscription": {
+      "type": "object",
+      "properties": {
+        "new_message": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "unassigned_conversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "delay": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
