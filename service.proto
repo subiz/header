@@ -45,8 +45,8 @@ service AccountMgr {
 	rpc UpdatePassword(account.NewPassword) returns (account.Agent);
 	rpc UpdateAgent(account.Agent) returns (account.Agent);
 	rpc DeleteAgent(common.Id) returns (account.Agent);
-	rpc RequestChangeEmail(account.Agent) returns (account.Agent);// require password
-	rpc ConfirmChangeEmail(account.Agent) returns (account.Agent);
+	rpc RequestChangeEmail(account.Agent) returns (common.Empty);// require password
+	rpc ConfirmChangeEmail(account.Token) returns (account.Agent);
 	rpc AcceptInvitation(account.NewPassword) returns (account.Agent);
 	rpc GetInvitation(account.Token) returns (account.Agent);
 	rpc InviteAgent(account.Agent) returns (account.Agent); // allow to call multiple time
