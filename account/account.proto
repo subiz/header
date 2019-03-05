@@ -227,6 +227,7 @@ enum Event {
 	AccountConfirmSuccessEmailRequested = 25;
 	AccountResetPasswordEmail = 33;
 	AccountPasswordChangedEmailRequested = 34;
+	AccountConfirmChangeEmailEmailRequested = 35;
 	AccountInviteEmail = 22;
 
 	AccountDeleted = 24;
@@ -258,6 +259,21 @@ message ConfirmEmail {
 	optional common.L lang = 8;
 	optional string owner_name = 9;
 	optional string from = 10;
+}
+
+message ChangeEmailEmail {
+	optional common.Context ctx = 1;
+	optional string to = 2;
+	optional string account_id = 3;
+	optional int64 expired_in = 5;
+	optional string token = 6;
+	optional common.L lang = 8;
+
+	optional string fullname = 9;
+	optional string sender_name = 10;
+	optional string account_name = 11;
+	optional string account_logo_url = 12;
+	optional string from = 14;
 }
 
 message InviteEmail {
