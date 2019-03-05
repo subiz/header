@@ -60,6 +60,8 @@ message PushNoti {
 	optional string sender_type = 10;
 	optional string icon_url = 11;
 	optional string last_page_view_url = 12;
+	optional string type = 13;
+	optional bytes payload = 14;
 }
 
 message Message {

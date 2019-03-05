@@ -945,6 +945,23 @@ func easyjson7e984e63DecodeGithubComSubizHeaderNoti54(in *jlexer.Lexer, out *Pus
 				}
 				*out.LastPageViewUrl = string(in.String())
 			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+				out.Type = nil
+			} else {
+				if out.Type == nil {
+					out.Type = new(string)
+				}
+				*out.Type = string(in.String())
+			}
+		case "payload":
+			if in.IsNull() {
+				in.Skip()
+				out.Payload = nil
+			} else {
+				out.Payload = in.Bytes()
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1068,6 +1085,26 @@ func easyjson7e984e63EncodeGithubComSubizHeaderNoti54(out *jwriter.Writer, in Pu
 			out.RawString(prefix)
 		}
 		out.String(string(*in.LastPageViewUrl))
+	}
+	if in.Type != nil {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Type))
+	}
+	if len(in.Payload) != 0 {
+		const prefix string = ",\"payload\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Base64Bytes(in.Payload)
 	}
 	out.RawByte('}')
 }
