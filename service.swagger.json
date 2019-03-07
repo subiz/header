@@ -1941,6 +1941,27 @@
         }
       }
     },
+    "conversationReportResponse": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "from": {
+          "type": "string"
+        },
+        "range": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
     "conversationRoute": {
       "type": "object",
       "properties": {

@@ -166,6 +166,8 @@ service ConversationReporter {
 	rpc GetAvgResponseTimes(conversation.AvgResponseTimeRequest) returns (conversation.AvgResponseTimeResponse);
 	rpc GetTotalConversation(conversation.AvgResponseTimeRequest) returns (conversation.TotalConversationResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
+	rpc ReportConversations(conversation.CountReportRequest) returns (conversation.ReportResponse);
+	rpc ReportAvailibilities(conversation.AvailibilityReportRequest) returns (conversation.ReportResponse);
 }
 
 service AgentPresenceMgr {
