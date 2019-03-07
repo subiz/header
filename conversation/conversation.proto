@@ -122,7 +122,6 @@ message Conversation {
 	repeated Member members = 7;
 	repeated Tag tags = 10;
 	optional int64 ended = 12;
-
 	optional string state = 11; // converation state
 	optional int64 accepted = 15; // time chat is accepted after being in unassigned list
 
@@ -137,6 +136,7 @@ message Conversation {
 	repeated Member left_members = 25;
 	optional Ticket ticket = 27;
 	optional string ticket_id = 28;
+	optional RouteResult assigned_to = 30;
 }
 
 message UserConversation { // used in database

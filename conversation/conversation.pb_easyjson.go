@@ -14418,6 +14418,16 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation67(in *jlexer.Lexer, 
 				}
 				*out.TicketId = string(in.String())
 			}
+		case "assigned_to":
+			if in.IsNull() {
+				in.Skip()
+				out.AssignedTo = nil
+			} else {
+				if out.AssignedTo == nil {
+					out.AssignedTo = new(RouteResult)
+				}
+				(*out.AssignedTo).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -14670,6 +14680,16 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation67(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.String(string(*in.TicketId))
+	}
+	if in.AssignedTo != nil {
+		const prefix string = ",\"assigned_to\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.AssignedTo).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

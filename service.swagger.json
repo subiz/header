@@ -1525,6 +1525,9 @@
         },
         "ticket_id": {
           "type": "string"
+        },
+        "assigned_to": {
+          "$ref": "#/definitions/conversationRouteResult"
         }
       }
     },
@@ -1949,6 +1952,26 @@
           "items": {
             "$ref": "#/definitions/conversationRule"
           }
+        }
+      }
+    },
+    "conversationRouteResult": {
+      "type": "object",
+      "properties": {
+        "rule_id": {
+          "type": "string"
+        },
+        "strategy": {
+          "type": "string"
+        },
+        "agent_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "group_id": {
+          "type": "string"
         }
       }
     },
