@@ -946,10 +946,10 @@ message CountReportRequest {
 	optional string integration_id = 3;
 	optional string metric = 4;
 	enum Metric {
-		conversations_created = 0; // all conversation
-		conversations_created_by_agent = 2;
-		conversations_created_by_group = 3;
-		conversations_created_by_tag = 4;
+		created_conversations = 0; // all conversation
+		created_conversations_by_agent = 2;
+		created_conversations_by_group = 3;
+		created_conversations_by_tag = 4;
 
 		agent_replied_conversations = 6;
 		agent_replied_conversations_by_agent = 7;
@@ -964,7 +964,6 @@ message CountReportRequest {
 		agent_repling_conversations = 18;
 		agent_repling_conversations_by_agent = 19;
 		agent_repling_conversations_by_group = 20;
-		agent_repling_conversations_by_tag = 21;
 	}
 	optional string from = 5; // try date --rfc-3339=seconds
 	optional string to = 6; // date in rfc 3339 seconds standard. E.g: 2019-03-07 10:42:01+07:00
