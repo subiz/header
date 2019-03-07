@@ -924,3 +924,72 @@ message AvgResolveTimeRequest {
 message AvgResolveTimeResponse {
 	optional double avg_resolve_sec = 2;
 }
+
+message AvailibilityReportRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	optional string from = 5; // try date --rfc-3339=seconds
+	optional string to = 6; // date in rfc 3339 seconds standard. E.g: 2019-03-07 10:42:01+07:00
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+		month = 2;
+	}
+}
+
+message CountReportRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+
+	optional string integration_id = 3;
+	optional string metric = 4;
+	enum Metric {
+		conversations_created = 0; // all conversation
+		conversations_created_by_agent = 2;
+		conversations_created_by_group = 3;
+		conversations_created_by_tag = 4;
+
+		agent_replied_conversations = 6;
+		agent_replied_conversations_by_agent = 7;
+		agent_replied_conversations_by_group = 8;
+		agent_replied_conversations_by_tag = 9;
+
+		user_replied_conversations = 12;
+		user_replied_conversations_by_agent = 13;
+		user_replied_conversations_by_group = 14;
+		user_replied_conversations_by_tag = 15;
+
+		agent_repling_conversations = 18;
+		agent_repling_conversations_by_agent = 19;
+		agent_repling_conversations_by_group = 20;
+		agent_repling_conversations_by_tag = 21;
+	}
+	optional string from = 5; // try date --rfc-3339=seconds
+	optional string to = 6; // date in rfc 3339 seconds standard. E.g: 2019-03-07 10:42:01+07:00
+	optional string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
+
+	optional string agent_id = 10;
+	optional string group_id = 11;
+	optional string tag_id = 12;
+}
+
+message ReportResponse {
+	optional common.Context ctx = 1;
+	optional string from = 3;
+	optional string range = 4;
+	repeated int64 data = 5;
+}
+
+message ConversationAgg {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string metric = 3;
+	optional int32 hour = 4;
+	optional string integration_id = 5;
+}

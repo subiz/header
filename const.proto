@@ -188,4 +188,5 @@ enum E {
 	TemplateListRequested = 100108;
 
 	ConversationAgentPresenceUpdated = 100109;
+	ConversationReportAggregated = 100110;
 }
