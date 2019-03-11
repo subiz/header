@@ -38,8 +38,8 @@ func easyjson9d006cbdDecodeGithubComSubizHeaderCallback(in *jlexer.Lexer, out *T
 		switch key {
 		case "id":
 			out.Id = string(in.String())
-		case "callback_time":
-			out.CallbackTime = int64(in.Int64())
+		case "callback_sec":
+			out.CallbackSec = int64(in.Int64())
 		case "topic":
 			out.Topic = string(in.String())
 		case "data":
@@ -53,10 +53,6 @@ func easyjson9d006cbdDecodeGithubComSubizHeaderCallback(in *jlexer.Lexer, out *T
 			out.Key = string(in.String())
 		case "called":
 			out.Called = int64(in.Int64())
-		case "sec":
-			out.Sec = int64(in.Int64())
-		case "par":
-			out.Par = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -81,15 +77,15 @@ func easyjson9d006cbdEncodeGithubComSubizHeaderCallback(out *jwriter.Writer, in 
 		}
 		out.String(string(in.Id))
 	}
-	if in.CallbackTime != 0 {
-		const prefix string = ",\"callback_time\":"
+	if in.CallbackSec != 0 {
+		const prefix string = ",\"callback_sec\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(in.CallbackTime))
+		out.Int64(int64(in.CallbackSec))
 	}
 	if in.Topic != "" {
 		const prefix string = ",\"topic\":"
@@ -130,26 +126,6 @@ func easyjson9d006cbdEncodeGithubComSubizHeaderCallback(out *jwriter.Writer, in 
 			out.RawString(prefix)
 		}
 		out.Int64(int64(in.Called))
-	}
-	if in.Sec != 0 {
-		const prefix string = ",\"sec\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(in.Sec))
-	}
-	if in.Par != "" {
-		const prefix string = ",\"par\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.Par))
 	}
 	out.RawByte('}')
 }
