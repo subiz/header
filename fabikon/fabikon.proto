@@ -12,14 +12,6 @@ message FacebookPage {
 	optional int64 updated = 7;
 }
 
-enum Event {
-	FabikonRequested = 1000;
-	FabikonSynced = 1001;
-
-	FabikonJob = 2;
-	FabikonCreateAccountRequested = 0;
-}
-
 message FbWebhookEvent {
 	optional string object = 2;
 	repeated FbEntry entry = 3;

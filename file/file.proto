@@ -58,11 +58,3 @@ message FileMeta {
 	string mime_type = 8;
 	int64 downloaded = 10;
 }
-
-enum Event {
-	FilePresignRequested = 0;
-	FileCreated = 3;
-	FileInfoRequested = 4;
-	FileUploaded = 6;
-	FileRequested = 10;
-}

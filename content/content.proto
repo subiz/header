@@ -87,11 +87,6 @@ message ContentUrl {
 	optional string err = 5;
 }
 
-enum Event {
-	ContentRequested = 2;
-	ContentViewed = 3;
-}
-
 message ContentsByUrlTable{
 	optional string account_id = 1;
 	optional string url = 2;

@@ -101,11 +101,6 @@ message Error {
 	string code = 4;
 }
 
-enum Event {
-	Send_ = 0;
-	ApiReply = 2;
-}
-
 message PingRequest {
 	string message = 2;
 }

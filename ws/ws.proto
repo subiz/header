@@ -20,12 +20,6 @@ message ListRequest {
 	string connection_id = 2;
 }
 
-enum Event {
-	WsSynced = 0;
-	WsRequested = 1;
-	WsSend = 10;
-}
-
 message Payload {
 	int64 id = 3;
 	string message = 4;

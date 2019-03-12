@@ -69,21 +69,3 @@ message Global { //used only inside subiz
 	optional string data = 3;
 	optional string pk = 4;
 }
-
-enum Event {
-	WidgetUserSettingReadRequested = 0;
-	WidgetUserSettingUpdateRequested = 1;
-	WidgetSettingReadRequested = 2;
-	WidgetSettingUpdateRequested = 3;
-
-	WidgetSettingCssVersionUpdated = 4;
-	WidgetSettingLanguageUpdated = 5;
-
-	WidgetSettingCssVersionUpdateRequested = 6;
-	WidgetSettingLanguageUpdateRequested = 7;
-	WidgetRequested = 8;
-
-	WidgetSettingUpserted = 10;
-	WidgetSynced = 100;
-	WidgetV3Synced = 103;
-}

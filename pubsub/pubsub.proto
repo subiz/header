@@ -35,10 +35,3 @@ message PublishMessage {
 	// negative user_ids bloom filter: those users wont get the message
 	bytes neg_user_ids_filter = 6;
 }
-
-enum Event {
-	PubsubSynced = 0;
-	PubsubRequested = 1;
-	PubsubPublish = 2;
-	PubsubWorkerJob = 7;
-}

@@ -5,6 +5,7 @@ package callback;
 
 message Task {
 	string id = 2;
+
 	// callback_sec is second*, golang: time.Now().Unix(),
 	// node: new Date() * 1000000
 	int64 callback_sec = 3;
@@ -16,10 +17,5 @@ message Task {
 
 	string key = 6;
 
-	int64 called = 8; // internal only
-}
-
-enum Event {
-	SchedulerRequested = 0; // scheduleritem
-	SchedulerCancelled = 1; // Id
+	int64 called = 8; // internal use only
 }

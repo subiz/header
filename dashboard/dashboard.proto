@@ -78,10 +78,3 @@ message Global { //used only inside subiz
 	string data = 3;
 	string pk = 4;
 }
-
-enum Event {
-	DashboardVersionUpdated = 0; // reload js and css
-	DashboardLanguageUpdated = 5;
-
-	DashboardLanguageUpdateRequested = 7;
-}

@@ -189,4 +189,180 @@ enum E {
 
 	ConversationAgentPresenceUpdated = 100109;
 	ConversationReportAggregated = 100110;
+
+	SchedulerRequested = 10201; // scheduleritem
+	SchedulerCancelled = 10202; // Id
+
+	ApiWhiteListSynced = 10300;
+
+	BlacklistDomainCreated = 103012;
+	BannedUserCreated = 103013;
+	BlacklistIpCreated = 103014;
+	WhitelistUrlCreated = 103015;
+	BlacklistDomainDeleted = 103016;
+	BannedUserDeleted = 103017;
+	BlacklistIpDeleted = 103018;
+	WhitelistUrlDeleted = 103019;
+
+	ClientCreateRequested = 104020;
+	ClientUpdateRequested = 104021;
+	ClientDeleteRequested = 104022;
+	ClientReadRequested = 104023;
+	ClientListRequested = 104024;
+
+	ClientUpserted = 104025;
+	ClientDeleted = 104026;
+
+	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
+	ClientRequested = 104030;
+	ClientSynced = 104031;
+	ClientAuthorized = 104033;
+	ClientDeauthorized = 104034;
+
+	BotAuthorizeRequest = 104035;
+
+	ContentRequested = 10502;
+	ContentViewed = 10503;
+
+	Email_SendRequest =10600;
+
+	WsSynced = 10700;
+	WsRequested = 10701;
+	WsSend = 10710;
+
+	WidgetUserSettingReadRequested = 10800;
+	WidgetUserSettingUpdateRequested = 10801;
+	WidgetSettingReadRequested = 10802;
+	WidgetSettingUpdateRequested = 10803;
+
+	WidgetSettingCssVersionUpdated = 10804;
+	WidgetSettingLanguageUpdated = 10805;
+
+	WidgetSettingCssVersionUpdateRequested = 10806;
+	WidgetSettingLanguageUpdateRequested = 10807;
+	WidgetRequested = 10808;
+
+	WidgetSettingUpserted = 108010;
+	WidgetSynced = 108011;
+	WidgetV3Synced = 108013;
+
+	Webhook4WebhookReadRequested = 10903;
+	Webhook4WebhookUpserted = 10904;
+	Webhook4WebhookVerifyRequested = 10905;
+	Webhook4Requested = 10906; //eventpb.RawEventCreatedPayload
+	Webhook4ClearBackoffRequested = 10907;
+	Webhook4PurgeQueueRequested = 10908;
+	Webhook4WebhookFire = 109011;
+	Webhook4ShardSend = 10909;
+	Webhook4Send = 109012;
+	Webhook4RequestResolved = 109014;
+
+	PubsubSynced = 11000;
+	PubsubRequested = 11001;
+	PubsubPublish = 11002;
+	PubsubWorkerJob = 11007;
+
+	NotiboxRequested = 11010;
+
+	NotiUpsertRequested = 11011;
+	NotiReadRequested = 11012;
+	NotiUnreadRequested = 11014;
+	NotiListRequested = 11015;
+	NotiDecreaseNewRequested = 11016;
+	NotiNewReadRequested = 11017;
+
+	NotiboxSynced = 1101101;
+
+	PlaceholderSynced = 11020;
+	ResolveRequested = 11021;
+
+	FilePresignRequested = 11030;
+	FileCreated = 11033;
+	FileInfoRequested = 11034;
+	FileUploaded = 11036;
+	FileRequested = 110310;
+
+	PaymentSynced = 11040;
+	LimitUpdated = 11041;
+	PaymentRequested = 11044;
+	PaymentRenewCycle = 11045;
+	InvoiceCreatedEmailSend = 11046;
+	PaymentV3Synced = 11048;
+
+	SubscriptionUpdated = 110414;
+	InvoiceUpdated = 110410;
+	PaymentMethodUpdated = 110411;
+	BillingUpdated = 110412;
+	LogUpdated = 110413;
+	PromotionCodeUpdated = 110415;
+	PaymentWorkerJob = 110440;
+
+	AccountRequested = 110016;
+	AccountSynced = 110017;
+	AccountV3Synced = 110018;
+
+	AgentGroupDeleted = 11050; // id
+	AgentLeftGroup = 11051; // groupmember
+	AgentJoinedGroup = 11052; // groupmember
+	AgentGroupUpserted = 11054; // agentgroup
+	//AgentExpired = 5; // oe only, id
+	AgentUpserted = 11056; // agent
+	//AgentCreated = 7; // agent
+	//AgentStateUpdated = 8; // could be deleted
+	AgentPermissionUpdated = 11059; // AgentPerm
+
+	// out event only
+	AccountUpserted = 110514; // account
+	AccountPlanUpdated = 110516; // account
+	AccountStateUpdated = 110517; // AccountStateUpdateRequest
+	AccountConfirmRequest = 110519; // token
+	HandleExpiredInvitation = 110520;
+
+	AccountConfirmRequested = 110521; // confirmemail
+	AccountConfirmSuccessEmailRequested = 110525;
+	AccountResetPasswordEmail = 110533;
+	AccountPasswordChangedEmailRequested = 110534;
+	AccountConfirmChangeEmailEmailRequested = 110535;
+	AccountInviteEmail = 110522;
+
+	AccountDeleted = 110524;
+	AccountCreated = 110545; // account
+	AccountActivated = 110546; // account
+	AccountInfoUpdated = 110547;
+
+	AgentRejected = 110510; // id
+	AgentAccepted = 110511; // id
+	AgentInvited = 110513; // invitation
+	AgentDeleted = 110515; //id
+	AgentActivated = 110550;
+	AgentDeactivated = 110551;
+	AgentInfoUpdated = 110559;
+	AccountV3Created = 110560;
+	AccountPaymentV3Synced = 110563;
+	AccountDeactivated = 110564;
+	AgentLoggedIn = 110565;
+
+		MaikonRequested = 11060;
+	MailkonSynced = 11061;
+
+	MailkonJob = 11062;
+	MailkonCreateAccountRequested = 11063;
+
+	Send_ = 50;
+	ApiReply = 52;
+
+	LogLogRequested = 11100;
+	LogRequested = 11101;
+	LogSynced = 11102;
+
+
+	Noti5Requested = 11129;
+	Noti5PushRequested = 11128;
+	Noti5Sync = 11122;
+	Noti5SubscribeStatusUpdated = 11123;
+
+	DashboardVersionUpdated = 11139; // reload js and css
+	DashboardLanguageUpdated = 11138;
+
+	DashboardLanguageUpdateRequested = 11137;
 }

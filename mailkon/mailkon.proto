@@ -38,14 +38,6 @@ message User {
 	optional int64 seen = 5;
 }
 
-enum Event {
-	MaikonRequested = 1000;
-	MailkonSynced = 1001;
-
-	MailkonJob = 2;
-	MailkonCreateAccountRequested = 0;
-}
-
 message SendgridEvent {
 	optional string event_id = 3;
 	optional string account_id = 4;

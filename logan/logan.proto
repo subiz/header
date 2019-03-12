@@ -39,9 +39,3 @@ enum Level {
 	panic = 8;
 	fatal = 9;
 }
-
-enum Event {
-	LogLogRequested = 0;
-	LogRequested = 1000;
-	LogSynced = 1001;
-}

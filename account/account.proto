@@ -201,53 +201,6 @@ message AccountV3 {
 	optional payment.Subscription subscription = 4;
 }
 
-enum Event {
-	AccountRequested = 1000;
-	AccountSynced = 1001;
-	AccountV3Synced = 1002;
-
-	AgentGroupDeleted = 0; // id
-	AgentLeftGroup = 1; // groupmember
-	AgentJoinedGroup = 2; // groupmember
-	AgentGroupUpserted = 4; // agentgroup
-	//AgentExpired = 5; // oe only, id
-	AgentUpserted = 6; // agent
-	//AgentCreated = 7; // agent
-	//AgentStateUpdated = 8; // could be deleted
-	AgentPermissionUpdated = 9; // AgentPerm
-
-	// out event only
-	AccountUpserted = 14; // account
-	AccountPlanUpdated = 16; // account
-	AccountStateUpdated = 17; // AccountStateUpdateRequest
-	AccountConfirmRequest = 19; // token
-	HandleExpiredInvitation = 20;
-
-	AccountConfirmRequested = 21; // confirmemail
-	AccountConfirmSuccessEmailRequested = 25;
-	AccountResetPasswordEmail = 33;
-	AccountPasswordChangedEmailRequested = 34;
-	AccountConfirmChangeEmailEmailRequested = 35;
-	AccountInviteEmail = 22;
-
-	AccountDeleted = 24;
-	AccountCreated = 45; // account
-	AccountActivated = 46; // account
-	AccountInfoUpdated = 47;
-
-	AgentRejected = 10; // id
-	AgentAccepted = 11; // id
-	AgentInvited = 13; // invitation
-	AgentDeleted = 15; //id
-	AgentActivated = 50;
-	AgentDeactivated = 51;
-	AgentInfoUpdated = 59;
-	AccountV3Created = 60;
-	AccountPaymentV3Synced = 63;
-	AccountDeactivated = 64;
-	AgentLoggedIn = 65;
-}
-
 message ConfirmEmail {
 	optional common.Context ctx = 1;
 	optional string to = 2;

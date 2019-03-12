@@ -22,7 +22,3 @@ message Attachment {
 	string name = 3;
 	string mimetype = 4;
 }
-
-enum Event {
-	Email_SendRequest = 0;
-}

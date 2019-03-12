@@ -81,19 +81,6 @@ message ScryptChallenge {
 	int64 created = 11;
 }
 
-enum Event {
-	ApiWhiteListSynced = 0;
-
-	BlacklistDomainCreated = 12;
-	BannedUserCreated = 13;
-	BlacklistIpCreated = 14;
-	WhitelistUrlCreated = 15;
-	BlacklistDomainDeleted = 16;
-	BannedUserDeleted = 17;
-	BlacklistIpDeleted = 18;
-	WhitelistUrlDeleted = 19;
-}
-
 message Apikey {
 	string secret = 3;
 	string account_id = 4;

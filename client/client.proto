@@ -64,22 +64,3 @@ message AuthorizedClient {
 	repeated string scopes = 5;
 	optional string kind = 6;
 }
-
-enum Event {
-	ClientCreateRequested = 20;
-	ClientUpdateRequested = 21;
-	ClientDeleteRequested = 22;
-	ClientReadRequested = 23;
-	ClientListRequested = 24;
-
-	ClientUpserted = 25;
-	ClientDeleted = 26;
-
-	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
-	ClientRequested = 30;
-	ClientSynced = 31;
-	ClientAuthorized = 33;
-	ClientDeauthorized = 34;
-
-	BotAuthorizeRequest = 35;
-}

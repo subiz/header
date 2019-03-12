@@ -76,10 +76,3 @@ message SubscribeStatus {
 	optional string user_id = 3;
 	optional bool	status = 4;
 }
-
-enum Event {
-	Noti5Requested = 0;
-	Noti5PushRequested = 1;
-	Noti5Sync = 2;
-	Noti5SubscribeStatusUpdated = 3;
-}

@@ -76,16 +76,3 @@ message Notifications {
 	repeated Notification notifications = 2;
 	string anchor = 3;
 }
-
-enum Event {
-	NotiboxRequested = 0;
-
-	NotiUpsertRequested = 1;
-	NotiReadRequested = 2;
-	NotiUnreadRequested = 4;
-	NotiListRequested = 5;
-	NotiDecreaseNewRequested = 6;
-	NotiNewReadRequested = 7;
-
-	NotiboxSynced = 101;
-}

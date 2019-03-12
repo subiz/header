@@ -495,24 +495,6 @@ message Addon {
 	optional int64 created = 10;
 }
 
-enum Event {
-	PaymentSynced = 0;
-	LimitUpdated = 1;
-	PaymentRequested = 4;
-	PaymentRenewCycle = 5;
-	InvoiceCreatedEmailSend = 6;
-	PaymentV3Synced = 8;
-
-	SubscriptionUpdated = 14;
-	InvoiceUpdated = 10;
-	PaymentMethodUpdated = 11;
-	BillingUpdated = 12;
-	LogUpdated = 13;
-	PromotionCodeUpdated = 15;
-
-	PaymentWorkerJob = 40;
-}
-
 message PaymentRenewCycleRequested {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
