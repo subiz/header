@@ -14049,6 +14049,26 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation66(in *jlexer.Lexer, 
 				}
 				in.Delim(']')
 			}
+		case "created":
+			if in.IsNull() {
+				in.Skip()
+				out.Created = nil
+			} else {
+				if out.Created == nil {
+					out.Created = new(int64)
+				}
+				*out.Created = int64(in.Int64())
+			}
+		case "integration_id":
+			if in.IsNull() {
+				in.Skip()
+				out.IntegrationId = nil
+			} else {
+				if out.IntegrationId == nil {
+					out.IntegrationId = new(string)
+				}
+				*out.IntegrationId = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -14111,6 +14131,26 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation66(out *jwriter.Write
 			}
 			out.RawByte(']')
 		}
+	}
+	if in.Created != nil {
+		const prefix string = ",\"created\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Created))
+	}
+	if in.IntegrationId != nil {
+		const prefix string = ",\"integration_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.IntegrationId))
 	}
 	out.RawByte('}')
 }

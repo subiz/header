@@ -1008,5 +1008,6 @@ message ConversationMetadata {
 	optional bool user_replied = 4;
 	repeated string replied_agents = 5;
 	// optional string state = 6;
-	// optional int64 created = 7;
+  optional int64 created = 7;
+	optional string integration_id = 8;
 }
