@@ -971,8 +971,8 @@ message CountReportRequest {
 		agent_non_replied_before_5min = 32;
 		agent_non_replied_before_5min_by_agent = 33;
 
-		agent_non_replied_before_24h = 34;
-		agent_non_replied_before_24h_by_agent = 35;
+		agent_non_replied_before_24hour = 34;
+		agent_non_replied_before_24hour_by_agent = 35;
 	}
 	optional string from = 5; // try date --rfc-3339=seconds
 	optional string to = 6; // date in rfc 3339 seconds standard. E.g: 2019-03-07 10:42:01+07:00

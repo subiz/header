@@ -190,6 +190,11 @@ enum E {
 	ConversationAgentPresenceUpdated = 100109;
 	ConversationReportAggregated = 100110;
 
+	ConversationReportCallback = 100111;
+	ConversationReportCallbackNonRepliedIn5min = 100112;
+	ConversationReportCallbackNonRepliedIn15min = 100113;
+	ConversationReportCallbackNonRepliedIn24hour = 100114;
+
 	SchedulerRequested = 10201; // scheduleritem
 	SchedulerCancelled = 10202; // Id
 
