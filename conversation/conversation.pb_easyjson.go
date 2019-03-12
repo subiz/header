@@ -14006,15 +14006,15 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation66(in *jlexer.Lexer, 
 				}
 				*out.AccountId = string(in.String())
 			}
-		case "conversation_id":
+		case "id":
 			if in.IsNull() {
 				in.Skip()
-				out.ConversationId = nil
+				out.Id = nil
 			} else {
-				if out.ConversationId == nil {
-					out.ConversationId = new(string)
+				if out.Id == nil {
+					out.Id = new(string)
 				}
-				*out.ConversationId = string(in.String())
+				*out.Id = string(in.String())
 			}
 		case "user_replied":
 			if in.IsNull() {
@@ -14022,9 +14022,9 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation66(in *jlexer.Lexer, 
 				out.UserReplied = nil
 			} else {
 				if out.UserReplied == nil {
-					out.UserReplied = new(string)
+					out.UserReplied = new(bool)
 				}
-				*out.UserReplied = string(in.String())
+				*out.UserReplied = bool(in.Bool())
 			}
 		case "replied_agents":
 			if in.IsNull() {
@@ -14048,26 +14048,6 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation66(in *jlexer.Lexer, 
 					in.WantComma()
 				}
 				in.Delim(']')
-			}
-		case "state":
-			if in.IsNull() {
-				in.Skip()
-				out.State = nil
-			} else {
-				if out.State == nil {
-					out.State = new(string)
-				}
-				*out.State = string(in.String())
-			}
-		case "created":
-			if in.IsNull() {
-				in.Skip()
-				out.Created = nil
-			} else {
-				if out.Created == nil {
-					out.Created = new(int64)
-				}
-				*out.Created = int64(in.Int64())
 			}
 		default:
 			in.SkipRecursive()
@@ -14093,15 +14073,15 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation66(out *jwriter.Write
 		}
 		out.String(string(*in.AccountId))
 	}
-	if in.ConversationId != nil {
-		const prefix string = ",\"conversation_id\":"
+	if in.Id != nil {
+		const prefix string = ",\"id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.ConversationId))
+		out.String(string(*in.Id))
 	}
 	if in.UserReplied != nil {
 		const prefix string = ",\"user_replied\":"
@@ -14111,7 +14091,7 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation66(out *jwriter.Write
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(*in.UserReplied))
+		out.Bool(bool(*in.UserReplied))
 	}
 	if len(in.RepliedAgents) != 0 {
 		const prefix string = ",\"replied_agents\":"
@@ -14131,26 +14111,6 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation66(out *jwriter.Write
 			}
 			out.RawByte(']')
 		}
-	}
-	if in.State != nil {
-		const prefix string = ",\"state\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.State))
-	}
-	if in.Created != nil {
-		const prefix string = ",\"created\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Int64(int64(*in.Created))
 	}
 	out.RawByte('}')
 }
