@@ -1001,3 +1001,12 @@ message ConversationAgg {
 	optional int32 hour = 4;
 	optional string integration_id = 5;
 }
+
+message ConversationMetadata {
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string user_replied = 4;
+	repeated string replied_agents = 5;
+	optional string state = 6;
+	optional int64 created = 7;
+}
