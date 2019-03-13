@@ -14069,6 +14069,16 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation66(in *jlexer.Lexer, 
 				}
 				*out.IntegrationId = string(in.String())
 			}
+		case "activated_by":
+			if in.IsNull() {
+				in.Skip()
+				out.ActivatedBy = nil
+			} else {
+				if out.ActivatedBy == nil {
+					out.ActivatedBy = new(string)
+				}
+				*out.ActivatedBy = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -14151,6 +14161,16 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation66(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.String(string(*in.IntegrationId))
+	}
+	if in.ActivatedBy != nil {
+		const prefix string = ",\"activated_by\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ActivatedBy))
 	}
 	out.RawByte('}')
 }

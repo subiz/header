@@ -813,7 +813,7 @@ message ServiceLevelAgreementTarget {
 	optional bool notification = 4;
 }
 
-message ServiceLevelAgreement  {
+message ServiceLevelAgreement {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string id = 3;
@@ -966,10 +966,10 @@ message CountReportRequest {
 		agent_repling_conversations_by_group = 20;
 
 		no_agent_replied_in_15min_conversations = 30;
-	  agent_non_replied_in_15min_conversations = 31;
+		agent_non_replied_in_15min_conversations = 31;
 
-	  no_agent_replied_in_5min_conversations = 32;
-	  agent_non_replied_in_5min_conversations = 33;
+		no_agent_replied_in_5min_conversations = 32;
+		agent_non_replied_in_5min_conversations = 33;
 
 		no_agent_replied_in_24hour_conversations = 34;
 		agent_non_replied_in_24hour_conversations = 35;
@@ -1008,6 +1008,7 @@ message ConversationMetadata {
 	optional bool user_replied = 4;
 	repeated string replied_agents = 5;
 	// optional string state = 6;
-  optional int64 created = 7;
+	optional int64 created = 7;
 	optional string integration_id = 8;
+	optional string activated_by = 9;
 }
