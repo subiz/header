@@ -14016,39 +14016,6 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation66(in *jlexer.Lexer, 
 				}
 				*out.Id = string(in.String())
 			}
-		case "user_replied":
-			if in.IsNull() {
-				in.Skip()
-				out.UserReplied = nil
-			} else {
-				if out.UserReplied == nil {
-					out.UserReplied = new(bool)
-				}
-				*out.UserReplied = bool(in.Bool())
-			}
-		case "replied_agents":
-			if in.IsNull() {
-				in.Skip()
-				out.RepliedAgents = nil
-			} else {
-				in.Delim('[')
-				if out.RepliedAgents == nil {
-					if !in.IsDelim(']') {
-						out.RepliedAgents = make([]string, 0, 4)
-					} else {
-						out.RepliedAgents = []string{}
-					}
-				} else {
-					out.RepliedAgents = (out.RepliedAgents)[:0]
-				}
-				for !in.IsDelim(']') {
-					var v163 string
-					v163 = string(in.String())
-					out.RepliedAgents = append(out.RepliedAgents, v163)
-					in.WantComma()
-				}
-				in.Delim(']')
-			}
 		case "created":
 			if in.IsNull() {
 				in.Skip()
@@ -14078,6 +14045,56 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation66(in *jlexer.Lexer, 
 					out.ActivatedBy = new(string)
 				}
 				*out.ActivatedBy = string(in.String())
+			}
+		case "first_user_replied":
+			if in.IsNull() {
+				in.Skip()
+				out.FirstUserReplied = nil
+			} else {
+				if out.FirstUserReplied == nil {
+					out.FirstUserReplied = new(int64)
+				}
+				*out.FirstUserReplied = int64(in.Int64())
+			}
+		case "first_agent_replied":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				in.Delim('{')
+				if !in.IsDelim('}') {
+					out.FirstAgentReplied = make(map[string]int64)
+				} else {
+					out.FirstAgentReplied = nil
+				}
+				for !in.IsDelim('}') {
+					key := string(in.String())
+					in.WantColon()
+					var v163 int64
+					v163 = int64(in.Int64())
+					(out.FirstAgentReplied)[key] = v163
+					in.WantComma()
+				}
+				in.Delim('}')
+			}
+		case "agent_joined":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				in.Delim('{')
+				if !in.IsDelim('}') {
+					out.AgentJoined = make(map[string]int64)
+				} else {
+					out.AgentJoined = nil
+				}
+				for !in.IsDelim('}') {
+					key := string(in.String())
+					in.WantColon()
+					var v164 int64
+					v164 = int64(in.Int64())
+					(out.AgentJoined)[key] = v164
+					in.WantComma()
+				}
+				in.Delim('}')
 			}
 		default:
 			in.SkipRecursive()
@@ -14113,35 +14130,6 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation66(out *jwriter.Write
 		}
 		out.String(string(*in.Id))
 	}
-	if in.UserReplied != nil {
-		const prefix string = ",\"user_replied\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.Bool(bool(*in.UserReplied))
-	}
-	if len(in.RepliedAgents) != 0 {
-		const prefix string = ",\"replied_agents\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		{
-			out.RawByte('[')
-			for v164, v165 := range in.RepliedAgents {
-				if v164 > 0 {
-					out.RawByte(',')
-				}
-				out.String(string(v165))
-			}
-			out.RawByte(']')
-		}
-	}
 	if in.Created != nil {
 		const prefix string = ",\"created\":"
 		if first {
@@ -14171,6 +14159,64 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation66(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ActivatedBy))
+	}
+	if in.FirstUserReplied != nil {
+		const prefix string = ",\"first_user_replied\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.FirstUserReplied))
+	}
+	if len(in.FirstAgentReplied) != 0 {
+		const prefix string = ",\"first_agent_replied\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('{')
+			v165First := true
+			for v165Name, v165Value := range in.FirstAgentReplied {
+				if v165First {
+					v165First = false
+				} else {
+					out.RawByte(',')
+				}
+				out.String(string(v165Name))
+				out.RawByte(':')
+				out.Int64(int64(v165Value))
+			}
+			out.RawByte('}')
+		}
+	}
+	if len(in.AgentJoined) != 0 {
+		const prefix string = ",\"agent_joined\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('{')
+			v166First := true
+			for v166Name, v166Value := range in.AgentJoined {
+				if v166First {
+					v166First = false
+				} else {
+					out.RawByte(',')
+				}
+				out.String(string(v166Name))
+				out.RawByte(':')
+				out.Int64(int64(v166Value))
+			}
+			out.RawByte('}')
+		}
 	}
 	out.RawByte('}')
 }
@@ -14442,17 +14488,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation68(in *jlexer.Lexer, 
 					out.Members = (out.Members)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v166 *Member
+					var v167 *Member
 					if in.IsNull() {
 						in.Skip()
-						v166 = nil
+						v167 = nil
 					} else {
-						if v166 == nil {
-							v166 = new(Member)
+						if v167 == nil {
+							v167 = new(Member)
 						}
-						(*v166).UnmarshalEasyJSON(in)
+						(*v167).UnmarshalEasyJSON(in)
 					}
-					out.Members = append(out.Members, v166)
+					out.Members = append(out.Members, v167)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -14473,17 +14519,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation68(in *jlexer.Lexer, 
 					out.Tags = (out.Tags)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v167 *Tag
+					var v168 *Tag
 					if in.IsNull() {
 						in.Skip()
-						v167 = nil
+						v168 = nil
 					} else {
-						if v167 == nil {
-							v167 = new(Tag)
+						if v168 == nil {
+							v168 = new(Tag)
 						}
-						(*v167).UnmarshalEasyJSON(in)
+						(*v168).UnmarshalEasyJSON(in)
 					}
-					out.Tags = append(out.Tags, v167)
+					out.Tags = append(out.Tags, v168)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -14604,17 +14650,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation68(in *jlexer.Lexer, 
 					out.LeftMembers = (out.LeftMembers)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v168 *Member
+					var v169 *Member
 					if in.IsNull() {
 						in.Skip()
-						v168 = nil
+						v169 = nil
 					} else {
-						if v168 == nil {
-							v168 = new(Member)
+						if v169 == nil {
+							v169 = new(Member)
 						}
-						(*v168).UnmarshalEasyJSON(in)
+						(*v169).UnmarshalEasyJSON(in)
 					}
-					out.LeftMembers = append(out.LeftMembers, v168)
+					out.LeftMembers = append(out.LeftMembers, v169)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -14723,14 +14769,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation68(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v169, v170 := range in.Members {
-				if v169 > 0 {
+			for v170, v171 := range in.Members {
+				if v170 > 0 {
 					out.RawByte(',')
 				}
-				if v170 == nil {
+				if v171 == nil {
 					out.RawString("null")
 				} else {
-					(*v170).MarshalEasyJSON(out)
+					(*v171).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -14746,14 +14792,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation68(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v171, v172 := range in.Tags {
-				if v171 > 0 {
+			for v172, v173 := range in.Tags {
+				if v172 > 0 {
 					out.RawByte(',')
 				}
-				if v172 == nil {
+				if v173 == nil {
 					out.RawString("null")
 				} else {
-					(*v172).MarshalEasyJSON(out)
+					(*v173).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -14869,14 +14915,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation68(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v173, v174 := range in.LeftMembers {
-				if v173 > 0 {
+			for v174, v175 := range in.LeftMembers {
+				if v174 > 0 {
 					out.RawByte(',')
 				}
-				if v174 == nil {
+				if v175 == nil {
 					out.RawString("null")
 				} else {
-					(*v174).MarshalEasyJSON(out)
+					(*v175).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -15013,9 +15059,9 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation69(in *jlexer.Lexer, 
 					out.Labels = (out.Labels)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v175 string
-					v175 = string(in.String())
-					out.Labels = append(out.Labels, v175)
+					var v176 string
+					v176 = string(in.String())
+					out.Labels = append(out.Labels, v176)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15076,9 +15122,9 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation69(in *jlexer.Lexer, 
 					out.Categories = (out.Categories)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v176 string
-					v176 = string(in.String())
-					out.Categories = append(out.Categories, v176)
+					var v177 string
+					v177 = string(in.String())
+					out.Categories = append(out.Categories, v177)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15099,9 +15145,9 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation69(in *jlexer.Lexer, 
 					out.AttachmentUrls = (out.AttachmentUrls)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v177 string
-					v177 = string(in.String())
-					out.AttachmentUrls = append(out.AttachmentUrls, v177)
+					var v178 string
+					v178 = string(in.String())
+					out.AttachmentUrls = append(out.AttachmentUrls, v178)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15122,9 +15168,9 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation69(in *jlexer.Lexer, 
 					out.RelatedIds = (out.RelatedIds)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v178 string
-					v178 = string(in.String())
-					out.RelatedIds = append(out.RelatedIds, v178)
+					var v179 string
+					v179 = string(in.String())
+					out.RelatedIds = append(out.RelatedIds, v179)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15155,17 +15201,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation69(in *jlexer.Lexer, 
 					out.Buttons = (out.Buttons)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v179 *Button
+					var v180 *Button
 					if in.IsNull() {
 						in.Skip()
-						v179 = nil
+						v180 = nil
 					} else {
-						if v179 == nil {
-							v179 = new(Button)
+						if v180 == nil {
+							v180 = new(Button)
 						}
-						(*v179).UnmarshalEasyJSON(in)
+						(*v180).UnmarshalEasyJSON(in)
 					}
-					out.Buttons = append(out.Buttons, v179)
+					out.Buttons = append(out.Buttons, v180)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15244,11 +15290,11 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation69(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v180, v181 := range in.Labels {
-				if v180 > 0 {
+			for v181, v182 := range in.Labels {
+				if v181 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v181))
+				out.String(string(v182))
 			}
 			out.RawByte(']')
 		}
@@ -15303,11 +15349,11 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation69(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v182, v183 := range in.Categories {
-				if v182 > 0 {
+			for v183, v184 := range in.Categories {
+				if v183 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v183))
+				out.String(string(v184))
 			}
 			out.RawByte(']')
 		}
@@ -15322,11 +15368,11 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation69(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v184, v185 := range in.AttachmentUrls {
-				if v184 > 0 {
+			for v185, v186 := range in.AttachmentUrls {
+				if v185 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v185))
+				out.String(string(v186))
 			}
 			out.RawByte(']')
 		}
@@ -15341,11 +15387,11 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation69(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v186, v187 := range in.RelatedIds {
-				if v186 > 0 {
+			for v187, v188 := range in.RelatedIds {
+				if v187 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v187))
+				out.String(string(v188))
 			}
 			out.RawByte(']')
 		}
@@ -15370,14 +15416,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation69(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v188, v189 := range in.Buttons {
-				if v188 > 0 {
+			for v189, v190 := range in.Buttons {
+				if v189 > 0 {
 					out.RawByte(',')
 				}
-				if v189 == nil {
+				if v190 == nil {
 					out.RawString("null")
 				} else {
-					(*v189).MarshalEasyJSON(out)
+					(*v190).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -15593,17 +15639,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation71(in *jlexer.Lexer, 
 					out.Seen = (out.Seen)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v190 *Seen
+					var v191 *Seen
 					if in.IsNull() {
 						in.Skip()
-						v190 = nil
+						v191 = nil
 					} else {
-						if v190 == nil {
-							v190 = new(Seen)
+						if v191 == nil {
+							v191 = new(Seen)
 						}
-						(*v190).UnmarshalEasyJSON(in)
+						(*v191).UnmarshalEasyJSON(in)
 					}
-					out.Seen = append(out.Seen, v190)
+					out.Seen = append(out.Seen, v191)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15624,17 +15670,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation71(in *jlexer.Lexer, 
 					out.Ack = (out.Ack)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v191 *Ack
+					var v192 *Ack
 					if in.IsNull() {
 						in.Skip()
-						v191 = nil
+						v192 = nil
 					} else {
-						if v191 == nil {
-							v191 = new(Ack)
+						if v192 == nil {
+							v192 = new(Ack)
 						}
-						(*v191).UnmarshalEasyJSON(in)
+						(*v192).UnmarshalEasyJSON(in)
 					}
-					out.Ack = append(out.Ack, v191)
+					out.Ack = append(out.Ack, v192)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15655,17 +15701,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation71(in *jlexer.Lexer, 
 					out.Received = (out.Received)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v192 *Received
+					var v193 *Received
 					if in.IsNull() {
 						in.Skip()
-						v192 = nil
+						v193 = nil
 					} else {
-						if v192 == nil {
-							v192 = new(Received)
+						if v193 == nil {
+							v193 = new(Received)
 						}
-						(*v192).UnmarshalEasyJSON(in)
+						(*v193).UnmarshalEasyJSON(in)
 					}
-					out.Received = append(out.Received, v192)
+					out.Received = append(out.Received, v193)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -15694,14 +15740,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation71(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v193, v194 := range in.Seen {
-				if v193 > 0 {
+			for v194, v195 := range in.Seen {
+				if v194 > 0 {
 					out.RawByte(',')
 				}
-				if v194 == nil {
+				if v195 == nil {
 					out.RawString("null")
 				} else {
-					(*v194).MarshalEasyJSON(out)
+					(*v195).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -15717,14 +15763,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation71(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v195, v196 := range in.Ack {
-				if v195 > 0 {
+			for v196, v197 := range in.Ack {
+				if v196 > 0 {
 					out.RawByte(',')
 				}
-				if v196 == nil {
+				if v197 == nil {
 					out.RawString("null")
 				} else {
-					(*v196).MarshalEasyJSON(out)
+					(*v197).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -15740,14 +15786,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation71(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v197, v198 := range in.Received {
-				if v197 > 0 {
+			for v198, v199 := range in.Received {
+				if v198 > 0 {
 					out.RawByte(',')
 				}
-				if v198 == nil {
+				if v199 == nil {
 					out.RawString("null")
 				} else {
-					(*v198).MarshalEasyJSON(out)
+					(*v199).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -17325,17 +17371,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation81(in *jlexer.Lexer, 
 					out.Elements = (out.Elements)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v199 *GenericElementTemplate
+					var v200 *GenericElementTemplate
 					if in.IsNull() {
 						in.Skip()
-						v199 = nil
+						v200 = nil
 					} else {
-						if v199 == nil {
-							v199 = new(GenericElementTemplate)
+						if v200 == nil {
+							v200 = new(GenericElementTemplate)
 						}
-						(*v199).UnmarshalEasyJSON(in)
+						(*v200).UnmarshalEasyJSON(in)
 					}
-					out.Elements = append(out.Elements, v199)
+					out.Elements = append(out.Elements, v200)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -17386,17 +17432,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation81(in *jlexer.Lexer, 
 					out.Buttons = (out.Buttons)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v200 *Button
+					var v201 *Button
 					if in.IsNull() {
 						in.Skip()
-						v200 = nil
+						v201 = nil
 					} else {
-						if v200 == nil {
-							v200 = new(Button)
+						if v201 == nil {
+							v201 = new(Button)
 						}
-						(*v200).UnmarshalEasyJSON(in)
+						(*v201).UnmarshalEasyJSON(in)
 					}
-					out.Buttons = append(out.Buttons, v200)
+					out.Buttons = append(out.Buttons, v201)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -17457,17 +17503,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation81(in *jlexer.Lexer, 
 					out.Contents = (out.Contents)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v201 *ContentTemplate
+					var v202 *ContentTemplate
 					if in.IsNull() {
 						in.Skip()
-						v201 = nil
+						v202 = nil
 					} else {
-						if v201 == nil {
-							v201 = new(ContentTemplate)
+						if v202 == nil {
+							v202 = new(ContentTemplate)
 						}
-						(*v201).UnmarshalEasyJSON(in)
+						(*v202).UnmarshalEasyJSON(in)
 					}
-					out.Contents = append(out.Contents, v201)
+					out.Contents = append(out.Contents, v202)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -17488,17 +17534,17 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation81(in *jlexer.Lexer, 
 					out.QuickReplies = (out.QuickReplies)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v202 *QuickReply
+					var v203 *QuickReply
 					if in.IsNull() {
 						in.Skip()
-						v202 = nil
+						v203 = nil
 					} else {
-						if v202 == nil {
-							v202 = new(QuickReply)
+						if v203 == nil {
+							v203 = new(QuickReply)
 						}
-						(*v202).UnmarshalEasyJSON(in)
+						(*v203).UnmarshalEasyJSON(in)
 					}
-					out.QuickReplies = append(out.QuickReplies, v202)
+					out.QuickReplies = append(out.QuickReplies, v203)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -17607,14 +17653,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation81(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v203, v204 := range in.Elements {
-				if v203 > 0 {
+			for v204, v205 := range in.Elements {
+				if v204 > 0 {
 					out.RawByte(',')
 				}
-				if v204 == nil {
+				if v205 == nil {
 					out.RawString("null")
 				} else {
-					(*v204).MarshalEasyJSON(out)
+					(*v205).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -17660,14 +17706,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation81(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v205, v206 := range in.Buttons {
-				if v205 > 0 {
+			for v206, v207 := range in.Buttons {
+				if v206 > 0 {
 					out.RawByte(',')
 				}
-				if v206 == nil {
+				if v207 == nil {
 					out.RawString("null")
 				} else {
-					(*v206).MarshalEasyJSON(out)
+					(*v207).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -17723,14 +17769,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation81(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v207, v208 := range in.Contents {
-				if v207 > 0 {
+			for v208, v209 := range in.Contents {
+				if v208 > 0 {
 					out.RawByte(',')
 				}
-				if v208 == nil {
+				if v209 == nil {
 					out.RawString("null")
 				} else {
-					(*v208).MarshalEasyJSON(out)
+					(*v209).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -17746,14 +17792,14 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation81(out *jwriter.Write
 		}
 		{
 			out.RawByte('[')
-			for v209, v210 := range in.QuickReplies {
-				if v209 > 0 {
+			for v210, v211 := range in.QuickReplies {
+				if v210 > 0 {
 					out.RawByte(',')
 				}
-				if v210 == nil {
+				if v211 == nil {
 					out.RawString("null")
 				} else {
-					(*v210).MarshalEasyJSON(out)
+					(*v211).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')

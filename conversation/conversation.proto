@@ -1005,10 +1005,11 @@ message ConversationAgg {
 message ConversationMetadata {
 	optional string account_id = 2;
 	optional string id = 3;
-	optional bool user_replied = 4;
-	repeated string replied_agents = 5;
 	// optional string state = 6;
 	optional int64 created = 7;
 	optional string integration_id = 8;
 	optional string activated_by = 9;
+	optional int64 first_user_replied = 10;
+	map<string,int64> first_agent_replied = 11;
+	map<string,int64> agent_joined = 12;
 }
