@@ -929,14 +929,14 @@ message AvailibilityReportRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string agent_id = 3;
-	optional string from = 5; // try date --rfc-3339=seconds
-	optional string to = 6; // date in rfc 3339 seconds standard. E.g: 2019-03-07 10:42:01+07:00
+	optional string from = 5; // try date --rfc-3339=seconds date in rfc 3339 seconds standard. E.g: 2019-03-07T10:42:01+07:00
 	optional string range = 8;
 	enum Range {
 		hour = 0;
 		day = 1;
 		month = 2;
 	}
+	optional int32 number_of_points = 13;
 }
 
 message CountReportRequest {
@@ -975,7 +975,6 @@ message CountReportRequest {
 		agent_non_replied_in_24hour_conversations = 35;
 	}
 	optional string from = 5; // try date --rfc-3339=seconds
-	optional string to = 6; // date in rfc 3339 seconds standard. E.g: 2019-03-07 10:42:01+07:00
 	optional string range = 8;
 	enum Range {
 		hour = 0;
@@ -985,6 +984,7 @@ message CountReportRequest {
 	optional string agent_id = 10;
 	optional string group_id = 11;
 	optional string tag_id = 12;
+	optional int32 number_of_points = 13;
 }
 
 message ReportResponse {

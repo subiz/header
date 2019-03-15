@@ -12003,16 +12003,6 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation55(in *jlexer.Lexer, 
 				}
 				*out.From = string(in.String())
 			}
-		case "to":
-			if in.IsNull() {
-				in.Skip()
-				out.To = nil
-			} else {
-				if out.To == nil {
-					out.To = new(string)
-				}
-				*out.To = string(in.String())
-			}
 		case "range":
 			if in.IsNull() {
 				in.Skip()
@@ -12052,6 +12042,16 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation55(in *jlexer.Lexer, 
 					out.TagId = new(string)
 				}
 				*out.TagId = string(in.String())
+			}
+		case "number_of_points":
+			if in.IsNull() {
+				in.Skip()
+				out.NumberOfPoints = nil
+			} else {
+				if out.NumberOfPoints == nil {
+					out.NumberOfPoints = new(int32)
+				}
+				*out.NumberOfPoints = int32(in.Int32())
 			}
 		default:
 			in.SkipRecursive()
@@ -12117,16 +12117,6 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation55(out *jwriter.Write
 		}
 		out.String(string(*in.From))
 	}
-	if in.To != nil {
-		const prefix string = ",\"to\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.To))
-	}
 	if in.Range != nil {
 		const prefix string = ",\"range\":"
 		if first {
@@ -12166,6 +12156,16 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation55(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.String(string(*in.TagId))
+	}
+	if in.NumberOfPoints != nil {
+		const prefix string = ",\"number_of_points\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.NumberOfPoints))
 	}
 	out.RawByte('}')
 }
@@ -16798,16 +16798,6 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation78(in *jlexer.Lexer, 
 				}
 				*out.From = string(in.String())
 			}
-		case "to":
-			if in.IsNull() {
-				in.Skip()
-				out.To = nil
-			} else {
-				if out.To == nil {
-					out.To = new(string)
-				}
-				*out.To = string(in.String())
-			}
 		case "range":
 			if in.IsNull() {
 				in.Skip()
@@ -16817,6 +16807,16 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation78(in *jlexer.Lexer, 
 					out.Range = new(string)
 				}
 				*out.Range = string(in.String())
+			}
+		case "number_of_points":
+			if in.IsNull() {
+				in.Skip()
+				out.NumberOfPoints = nil
+			} else {
+				if out.NumberOfPoints == nil {
+					out.NumberOfPoints = new(int32)
+				}
+				*out.NumberOfPoints = int32(in.Int32())
 			}
 		default:
 			in.SkipRecursive()
@@ -16872,16 +16872,6 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation78(out *jwriter.Write
 		}
 		out.String(string(*in.From))
 	}
-	if in.To != nil {
-		const prefix string = ",\"to\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(*in.To))
-	}
 	if in.Range != nil {
 		const prefix string = ",\"range\":"
 		if first {
@@ -16891,6 +16881,16 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation78(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.String(string(*in.Range))
+	}
+	if in.NumberOfPoints != nil {
+		const prefix string = ",\"number_of_points\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int32(int32(*in.NumberOfPoints))
 	}
 	out.RawByte('}')
 }
