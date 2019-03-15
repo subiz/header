@@ -57,6 +57,7 @@ message Condition {
 	optional string key = 2; // unique
 	optional string operator = 3; // = # regex
 	optional string value = 4; // JSON
+	optional string type = 5; // text, bool, ...
 }
 
 message Route {

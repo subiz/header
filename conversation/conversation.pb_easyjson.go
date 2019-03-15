@@ -15524,6 +15524,16 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation70(in *jlexer.Lexer, 
 				}
 				*out.Value = string(in.String())
 			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+				out.Type = nil
+			} else {
+				if out.Type == nil {
+					out.Type = new(string)
+				}
+				*out.Type = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -15577,6 +15587,16 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation70(out *jwriter.Write
 			out.RawString(prefix)
 		}
 		out.String(string(*in.Value))
+	}
+	if in.Type != nil {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Type))
 	}
 	out.RawByte('}')
 }

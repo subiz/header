@@ -1378,6 +1378,9 @@
         },
         "value": {
           "type": "string"
+        },
+        "type": {
+          "type": "string"
         }
       }
     },
