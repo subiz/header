@@ -344,4 +344,10 @@ message AutomationCredit {
 	int64 email_credits = 16;
 
 	int64 month = 20;
+
+	enum Type {
+		email = 0;
+		webhook = 1;
+		message = 2;
+	}
 }
