@@ -6541,6 +6541,16 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderAccount26(in *jlexer.Lexer, out *
 				}
 				*out.ClientId = string(in.String())
 			}
+		case "is_supervisor":
+			if in.IsNull() {
+				in.Skip()
+				out.IsSupervisor = nil
+			} else {
+				if out.IsSupervisor == nil {
+					out.IsSupervisor = new(bool)
+				}
+				*out.IsSupervisor = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -6862,6 +6872,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderAccount26(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		out.String(string(*in.ClientId))
+	}
+	if in.IsSupervisor != nil {
+		const prefix string = ",\"is_supervisor\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.IsSupervisor))
 	}
 	out.RawByte('}')
 }

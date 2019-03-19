@@ -288,6 +288,10 @@
         },
         "client_id": {
           "type": "string"
+        },
+        "is_supervisor": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
