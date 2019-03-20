@@ -5203,6 +5203,36 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation19(in *jlexer.Lexer, 
 			continue
 		}
 		switch key {
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "conversation_id":
+			if in.IsNull() {
+				in.Skip()
+				out.ConversationId = nil
+			} else {
+				if out.ConversationId == nil {
+					out.ConversationId = new(string)
+				}
+				*out.ConversationId = string(in.String())
+			}
+		case "event_id":
+			if in.IsNull() {
+				in.Skip()
+				out.EventId = nil
+			} else {
+				if out.EventId == nil {
+					out.EventId = new(string)
+				}
+				*out.EventId = string(in.String())
+			}
 		case "member_id":
 			if in.IsNull() {
 				in.Skip()
@@ -5237,6 +5267,36 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation19(out *jwriter.Write
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.ConversationId != nil {
+		const prefix string = ",\"conversation_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ConversationId))
+	}
+	if in.EventId != nil {
+		const prefix string = ",\"event_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.EventId))
+	}
 	if in.MemberId != nil {
 		const prefix string = ",\"member_id\":"
 		if first {
@@ -7255,6 +7315,36 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation29(in *jlexer.Lexer, 
 			continue
 		}
 		switch key {
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "conversation_id":
+			if in.IsNull() {
+				in.Skip()
+				out.ConversationId = nil
+			} else {
+				if out.ConversationId == nil {
+					out.ConversationId = new(string)
+				}
+				*out.ConversationId = string(in.String())
+			}
+		case "event_id":
+			if in.IsNull() {
+				in.Skip()
+				out.EventId = nil
+			} else {
+				if out.EventId == nil {
+					out.EventId = new(string)
+				}
+				*out.EventId = string(in.String())
+			}
 		case "member_id":
 			if in.IsNull() {
 				in.Skip()
@@ -7289,6 +7379,36 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation29(out *jwriter.Write
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.ConversationId != nil {
+		const prefix string = ",\"conversation_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ConversationId))
+	}
+	if in.EventId != nil {
+		const prefix string = ",\"event_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.EventId))
+	}
 	if in.MemberId != nil {
 		const prefix string = ",\"member_id\":"
 		if first {
@@ -18128,6 +18248,36 @@ func easyjsonB8de26a5DecodeGithubComSubizHeaderConversation84(in *jlexer.Lexer, 
 			continue
 		}
 		switch key {
+		case "account_id":
+			if in.IsNull() {
+				in.Skip()
+				out.AccountId = nil
+			} else {
+				if out.AccountId == nil {
+					out.AccountId = new(string)
+				}
+				*out.AccountId = string(in.String())
+			}
+		case "conversation_id":
+			if in.IsNull() {
+				in.Skip()
+				out.ConversationId = nil
+			} else {
+				if out.ConversationId == nil {
+					out.ConversationId = new(string)
+				}
+				*out.ConversationId = string(in.String())
+			}
+		case "event_id":
+			if in.IsNull() {
+				in.Skip()
+				out.EventId = nil
+			} else {
+				if out.EventId == nil {
+					out.EventId = new(string)
+				}
+				*out.EventId = string(in.String())
+			}
 		case "member_id":
 			if in.IsNull() {
 				in.Skip()
@@ -18172,6 +18322,36 @@ func easyjsonB8de26a5EncodeGithubComSubizHeaderConversation84(out *jwriter.Write
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.AccountId != nil {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.AccountId))
+	}
+	if in.ConversationId != nil {
+		const prefix string = ",\"conversation_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ConversationId))
+	}
+	if in.EventId != nil {
+		const prefix string = ",\"event_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.EventId))
+	}
 	if in.MemberId != nil {
 		const prefix string = ",\"member_id\":"
 		if first {

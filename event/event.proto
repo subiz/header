@@ -70,6 +70,9 @@ message Event {
 		conversation.Ticket ticket = 24;
 		Automation automation = 25;
 		Event event = 26;
+		conversation.Seen message_seen = 27;
+		conversation.Ack message_ack = 28;
+		conversation.Received message_received = 29;
 	}
 	Data data = 20;
 }

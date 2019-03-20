@@ -253,17 +253,26 @@ message Computed {
 }
 
 message Seen {
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string event_id = 10;
 	optional string member_id = 6;
 	optional int64 at = 4;
 }
 
 message Ack {
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string event_id = 10;
 	optional string member_id = 5;
 	optional string error = 6;
 	optional int64 at = 4;
 }
 
 message Received {
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string event_id = 10;
 	optional string member_id = 4;
 	optional int64 at = 5;
 }

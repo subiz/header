@@ -1147,6 +1147,15 @@
     "conversationAck": {
       "type": "object",
       "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "event_id": {
+          "type": "string"
+        },
         "member_id": {
           "type": "string"
         },
@@ -1939,6 +1948,15 @@
     "conversationReceived": {
       "type": "object",
       "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "event_id": {
+          "type": "string"
+        },
         "member_id": {
           "type": "string"
         },
@@ -2061,6 +2079,15 @@
     "conversationSeen": {
       "type": "object",
       "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "conversation_id": {
+          "type": "string"
+        },
+        "event_id": {
+          "type": "string"
+        },
         "member_id": {
           "type": "string"
         },
@@ -2925,6 +2952,15 @@
         },
         "event": {
           "$ref": "#/definitions/eventEvent"
+        },
+        "message_seen": {
+          "$ref": "#/definitions/conversationSeen"
+        },
+        "message_ack": {
+          "$ref": "#/definitions/conversationAck"
+        },
+        "message_received": {
+          "$ref": "#/definitions/conversationReceived"
         }
       }
     },

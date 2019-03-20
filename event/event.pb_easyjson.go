@@ -2282,6 +2282,36 @@ func easyjson524579e4DecodeGithubComSubizHeaderEventEvent(in *jlexer.Lexer, out 
 				}
 				(*out.Event).UnmarshalEasyJSON(in)
 			}
+		case "message_seen":
+			if in.IsNull() {
+				in.Skip()
+				out.MessageSeen = nil
+			} else {
+				if out.MessageSeen == nil {
+					out.MessageSeen = new(conversation.Seen)
+				}
+				(*out.MessageSeen).UnmarshalEasyJSON(in)
+			}
+		case "message_ack":
+			if in.IsNull() {
+				in.Skip()
+				out.MessageAck = nil
+			} else {
+				if out.MessageAck == nil {
+					out.MessageAck = new(conversation.Ack)
+				}
+				(*out.MessageAck).UnmarshalEasyJSON(in)
+			}
+		case "message_received":
+			if in.IsNull() {
+				in.Skip()
+				out.MessageReceived = nil
+			} else {
+				if out.MessageReceived == nil {
+					out.MessageReceived = new(conversation.Received)
+				}
+				(*out.MessageReceived).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -2515,6 +2545,36 @@ func easyjson524579e4EncodeGithubComSubizHeaderEventEvent(out *jwriter.Writer, i
 			out.RawString(prefix)
 		}
 		(*in.Event).MarshalEasyJSON(out)
+	}
+	if in.MessageSeen != nil {
+		const prefix string = ",\"message_seen\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.MessageSeen).MarshalEasyJSON(out)
+	}
+	if in.MessageAck != nil {
+		const prefix string = ",\"message_ack\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.MessageAck).MarshalEasyJSON(out)
+	}
+	if in.MessageReceived != nil {
+		const prefix string = ",\"message_received\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.MessageReceived).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
