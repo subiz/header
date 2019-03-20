@@ -69,6 +69,7 @@ message Event {
 		user.Note note = 23;
 		conversation.Ticket ticket = 24;
 		Automation automation = 25;
+		Event event = 26;
 	}
 	Data data = 20;
 }

@@ -2272,6 +2272,16 @@ func easyjson524579e4DecodeGithubComSubizHeaderEventEvent(in *jlexer.Lexer, out 
 				}
 				(*out.Automation).UnmarshalEasyJSON(in)
 			}
+		case "event":
+			if in.IsNull() {
+				in.Skip()
+				out.Event = nil
+			} else {
+				if out.Event == nil {
+					out.Event = new(Event)
+				}
+				(*out.Event).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -2495,6 +2505,16 @@ func easyjson524579e4EncodeGithubComSubizHeaderEventEvent(out *jwriter.Writer, i
 			out.RawString(prefix)
 		}
 		(*in.Automation).MarshalEasyJSON(out)
+	}
+	if in.Event != nil {
+		const prefix string = ",\"event\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Event).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }

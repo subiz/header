@@ -2922,6 +2922,9 @@
         },
         "automation": {
           "$ref": "#/definitions/eventAutomation"
+        },
+        "event": {
+          "$ref": "#/definitions/eventEvent"
         }
       }
     },
