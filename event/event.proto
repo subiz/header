@@ -80,15 +80,15 @@ message Event {
 enum AccountType {
 	a = 0;
 	account_deleted = 60;
-	account_info_updated = 61;
+	account_updated = 61;
 	group_created = 62;
 	group_deleted = 63;
-	group_info_updated = 64;
+	group_updated = 64;
 	group_joined = 65;
 	group_left = 66;
 	invitation_accepted = 68;
 	agent_deleted = 69;
-	agent_info_updated = 70;
+	agent_updated = 70;
 	agent_permission_updated = 71;
 	limit_updated = 72;
 }
@@ -127,7 +127,7 @@ enum WidgetType {
 
 enum ConvoType {
 	c = 0;
-	conversation_updated = 9;
+	// conversation_updated = 9;
 	message_sent = 10;
 	conversation_state_updated = 11;
 	//conversation_started = 1;
@@ -141,9 +141,9 @@ enum ConvoType {
 	channel_deintegrated = 20;
 	channel_integrated = 21;
 	message_seen = 30;
-	message_acked = 31;
+	message_ack = 31;
 	message_received = 32;
-	conversation_member_typing = 33;
+	conversation_typing = 33;
 	conversation_postbacked = 34;
 	conversation_unassigned = 35;
 	conversation_assigned = 36;
