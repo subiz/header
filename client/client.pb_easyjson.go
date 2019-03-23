@@ -863,6 +863,16 @@ func easyjson19c08265DecodeGithubComSubizHeaderClient1(in *jlexer.Lexer, out *Cl
 				}
 				*out.BotDefaultFullname = string(in.String())
 			}
+		case "bot_is_supervisor":
+			if in.IsNull() {
+				in.Skip()
+				out.BotIsSupervisor = nil
+			} else {
+				if out.BotIsSupervisor == nil {
+					out.BotIsSupervisor = new(bool)
+				}
+				*out.BotIsSupervisor = bool(in.Bool())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -1134,6 +1144,16 @@ func easyjson19c08265EncodeGithubComSubizHeaderClient1(out *jwriter.Writer, in C
 			out.RawString(prefix)
 		}
 		out.String(string(*in.BotDefaultFullname))
+	}
+	if in.BotIsSupervisor != nil {
+		const prefix string = ",\"bot_is_supervisor\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Bool(bool(*in.BotIsSupervisor))
 	}
 	out.RawByte('}')
 }

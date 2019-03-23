@@ -876,6 +876,10 @@
         },
         "bot_default_fullname": {
           "type": "string"
+        },
+        "bot_is_supervisor": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

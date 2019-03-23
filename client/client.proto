@@ -54,6 +54,7 @@ message Client {
 
 	optional string bot_default_job_title = 28;
 	optional string bot_default_fullname = 29;
+	optional bool bot_is_supervisor = 30;
 }
 
 message AuthorizedClient {
