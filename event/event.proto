@@ -36,6 +36,7 @@ message By {
 	string id = 3;
 	string client_id = 4;
 	string type = 6; // agent, user, connector
+	string display_id = 7;
 }
 
 message Event {

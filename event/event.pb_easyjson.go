@@ -4283,6 +4283,8 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent7(in *jlexer.Lexer, out *By)
 			out.ClientId = string(in.String())
 		case "type":
 			out.Type = string(in.String())
+		case "display_id":
+			out.DisplayId = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -4336,6 +4338,16 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent7(out *jwriter.Writer, in By
 			out.RawString(prefix)
 		}
 		out.String(string(in.Type))
+	}
+	if in.DisplayId != "" {
+		const prefix string = ",\"display_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.DisplayId))
 	}
 	out.RawByte('}')
 }

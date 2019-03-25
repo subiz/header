@@ -2852,6 +2852,9 @@
         },
         "type": {
           "type": "string"
+        },
+        "display_id": {
+          "type": "string"
         }
       }
     },
