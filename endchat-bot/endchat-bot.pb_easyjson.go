@@ -198,7 +198,7 @@ func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot1(in *jlexer.Lexer, out
 		case "id":
 			out.Id = string(in.String())
 		case "created":
-			out.Created = string(in.String())
+			out.Created = int64(in.Int64())
 		case "last_message_sent":
 			out.LastMessageSent = int64(in.Int64())
 		case "last_user_message_sent":
@@ -213,8 +213,8 @@ func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot1(in *jlexer.Lexer, out
 			out.State = string(in.String())
 		case "integration_id":
 			out.IntegrationId = string(in.String())
-		case "channel_id":
-			out.ChannelId = string(in.String())
+		case "connector_id":
+			out.ConnectorId = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -249,7 +249,7 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, 
 		}
 		out.String(string(in.Id))
 	}
-	if in.Created != "" {
+	if in.Created != 0 {
 		const prefix string = ",\"created\":"
 		if first {
 			first = false
@@ -257,7 +257,7 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Created))
+		out.Int64(int64(in.Created))
 	}
 	if in.LastMessageSent != 0 {
 		const prefix string = ",\"last_message_sent\":"
@@ -329,15 +329,15 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, 
 		}
 		out.String(string(in.IntegrationId))
 	}
-	if in.ChannelId != "" {
-		const prefix string = ",\"channel_id\":"
+	if in.ConnectorId != "" {
+		const prefix string = ",\"connector_id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.ChannelId))
+		out.String(string(in.ConnectorId))
 	}
 	out.RawByte('}')
 }
