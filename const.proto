@@ -191,13 +191,7 @@ enum E {
 	ConversationReportAggregated = 100110;
 
 	ConversationReportCallback = 100111;
-	ConversationReportCallbackNonRepliedIn5min = 100112;
-	ConversationReportCallbackNonRepliedIn15min = 100113;
-	ConversationReportCallbackNonRepliedIn24hour = 100114;
-
-	ConversationReportCallbackNoAgentRepliedIn5min = 100115;
-	ConversationReportCallbackNoAgentRepliedIn15min = 100116;
-	ConversationReportCallbackNoAgentRepliedIn24hour = 100117;
+	ConversationReportCallbackNonReplied = 100118;
 
 	SchedulerRequested = 10201; // scheduleritem
 	SchedulerCancelled = 10202; // Id
