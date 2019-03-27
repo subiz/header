@@ -16,7 +16,7 @@ message ConnectorSetting {
 
 message Setting {
 	string account_id = 2;
-	repeated ConnectorSetting connector_settingss = 3;
+	repeated ConnectorSetting connector_settings = 3;
 	ConnectorSetting global_setting = 4;
 	int64 updated = 5;
 }

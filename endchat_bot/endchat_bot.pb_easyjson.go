@@ -39,20 +39,20 @@ func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot(in *jlexer.Lexer, out 
 		switch key {
 		case "account_id":
 			out.AccountId = string(in.String())
-		case "connector_settingss":
+		case "connector_settings":
 			if in.IsNull() {
 				in.Skip()
-				out.ConnectorSettingss = nil
+				out.ConnectorSettings = nil
 			} else {
 				in.Delim('[')
-				if out.ConnectorSettingss == nil {
+				if out.ConnectorSettings == nil {
 					if !in.IsDelim(']') {
-						out.ConnectorSettingss = make([]*ConnectorSetting, 0, 8)
+						out.ConnectorSettings = make([]*ConnectorSetting, 0, 8)
 					} else {
-						out.ConnectorSettingss = []*ConnectorSetting{}
+						out.ConnectorSettings = []*ConnectorSetting{}
 					}
 				} else {
-					out.ConnectorSettingss = (out.ConnectorSettingss)[:0]
+					out.ConnectorSettings = (out.ConnectorSettings)[:0]
 				}
 				for !in.IsDelim(']') {
 					var v1 *ConnectorSetting
@@ -65,7 +65,7 @@ func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot(in *jlexer.Lexer, out 
 						}
 						(*v1).UnmarshalEasyJSON(in)
 					}
-					out.ConnectorSettingss = append(out.ConnectorSettingss, v1)
+					out.ConnectorSettings = append(out.ConnectorSettings, v1)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -106,8 +106,8 @@ func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, i
 		}
 		out.String(string(in.AccountId))
 	}
-	if len(in.ConnectorSettingss) != 0 {
-		const prefix string = ",\"connector_settingss\":"
+	if len(in.ConnectorSettings) != 0 {
+		const prefix string = ",\"connector_settings\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
@@ -116,7 +116,7 @@ func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, i
 		}
 		{
 			out.RawByte('[')
-			for v2, v3 := range in.ConnectorSettingss {
+			for v2, v3 := range in.ConnectorSettings {
 				if v2 > 0 {
 					out.RawByte(',')
 				}
