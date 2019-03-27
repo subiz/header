@@ -7,6 +7,7 @@ import (
 	easyjson "github.com/mailru/easyjson"
 	jlexer "github.com/mailru/easyjson/jlexer"
 	jwriter "github.com/mailru/easyjson/jwriter"
+	common "github.com/subiz/header/common"
 )
 
 // suppress unused package warning
@@ -17,7 +18,7 @@ var (
 	_ easyjson.Marshaler
 )
 
-func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot(in *jlexer.Lexer, out *Setting) {
+func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot(in *jlexer.Lexer, out *Setting) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -38,46 +39,46 @@ func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot(in *jlexer.Lexer, out 
 		switch key {
 		case "account_id":
 			out.AccountId = string(in.String())
-		case "channels":
+		case "connector_settingss":
 			if in.IsNull() {
 				in.Skip()
-				out.Channels = nil
+				out.ConnectorSettingss = nil
 			} else {
 				in.Delim('[')
-				if out.Channels == nil {
+				if out.ConnectorSettingss == nil {
 					if !in.IsDelim(']') {
-						out.Channels = make([]*ChannelSetting, 0, 8)
+						out.ConnectorSettingss = make([]*ConnectorSetting, 0, 8)
 					} else {
-						out.Channels = []*ChannelSetting{}
+						out.ConnectorSettingss = []*ConnectorSetting{}
 					}
 				} else {
-					out.Channels = (out.Channels)[:0]
+					out.ConnectorSettingss = (out.ConnectorSettingss)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 *ChannelSetting
+					var v1 *ConnectorSetting
 					if in.IsNull() {
 						in.Skip()
 						v1 = nil
 					} else {
 						if v1 == nil {
-							v1 = new(ChannelSetting)
+							v1 = new(ConnectorSetting)
 						}
 						(*v1).UnmarshalEasyJSON(in)
 					}
-					out.Channels = append(out.Channels, v1)
+					out.ConnectorSettingss = append(out.ConnectorSettingss, v1)
 					in.WantComma()
 				}
 				in.Delim(']')
 			}
-		case "global":
+		case "global_setting":
 			if in.IsNull() {
 				in.Skip()
-				out.Global = nil
+				out.GlobalSetting = nil
 			} else {
-				if out.Global == nil {
-					out.Global = new(ChannelSetting)
+				if out.GlobalSetting == nil {
+					out.GlobalSetting = new(ConnectorSetting)
 				}
-				(*out.Global).UnmarshalEasyJSON(in)
+				(*out.GlobalSetting).UnmarshalEasyJSON(in)
 			}
 		case "updated":
 			out.Updated = int64(in.Int64())
@@ -91,7 +92,7 @@ func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot(in *jlexer.Lexer, out 
 		in.Consumed()
 	}
 }
-func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, in Setting) {
+func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, in Setting) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -105,8 +106,8 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, i
 		}
 		out.String(string(in.AccountId))
 	}
-	if len(in.Channels) != 0 {
-		const prefix string = ",\"channels\":"
+	if len(in.ConnectorSettingss) != 0 {
+		const prefix string = ",\"connector_settingss\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
@@ -115,7 +116,7 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, i
 		}
 		{
 			out.RawByte('[')
-			for v2, v3 := range in.Channels {
+			for v2, v3 := range in.ConnectorSettingss {
 				if v2 > 0 {
 					out.RawByte(',')
 				}
@@ -128,15 +129,15 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, i
 			out.RawByte(']')
 		}
 	}
-	if in.Global != nil {
-		const prefix string = ",\"global\":"
+	if in.GlobalSetting != nil {
+		const prefix string = ",\"global_setting\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Global).MarshalEasyJSON(out)
+		(*in.GlobalSetting).MarshalEasyJSON(out)
 	}
 	if in.Updated != 0 {
 		const prefix string = ",\"updated\":"
@@ -154,27 +155,233 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot(out *jwriter.Writer, i
 // MarshalJSON supports json.Marshaler interface
 func (v Setting) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot(&w, v)
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Setting) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot(w, v)
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Setting) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot(&r, v)
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Setting) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot(l, v)
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot(l, v)
 }
-func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot1(in *jlexer.Lexer, out *Conversation) {
+func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot1(in *jlexer.Lexer, out *MidnightCallback) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "midnight_sec":
+			out.MidnightSec = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, in MidnightCallback) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
+	if in.MidnightSec != "" {
+		const prefix string = ",\"midnight_sec\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.MidnightSec))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v MidnightCallback) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot1(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v MidnightCallback) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot1(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *MidnightCallback) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot1(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *MidnightCallback) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot1(l, v)
+}
+func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot2(in *jlexer.Lexer, out *EndCallback) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "ctx":
+			if in.IsNull() {
+				in.Skip()
+				out.Ctx = nil
+			} else {
+				if out.Ctx == nil {
+					out.Ctx = new(common.Context)
+				}
+				(*out.Ctx).UnmarshalEasyJSON(in)
+			}
+		case "account_id":
+			out.AccountId = string(in.String())
+		case "conversation_id":
+			out.ConversationId = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot2(out *jwriter.Writer, in EndCallback) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Ctx != nil {
+		const prefix string = ",\"ctx\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Ctx).MarshalEasyJSON(out)
+	}
+	if in.AccountId != "" {
+		const prefix string = ",\"account_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.AccountId))
+	}
+	if in.ConversationId != "" {
+		const prefix string = ",\"conversation_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ConversationId))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v EndCallback) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot2(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v EndCallback) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot2(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *EndCallback) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot2(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *EndCallback) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot2(l, v)
+}
+func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot3(in *jlexer.Lexer, out *Conversation) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -225,7 +432,7 @@ func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot1(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, in Conversation) {
+func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot3(out *jwriter.Writer, in Conversation) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -345,27 +552,27 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, 
 // MarshalJSON supports json.Marshaler interface
 func (v Conversation) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot1(&w, v)
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot3(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Conversation) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot1(w, v)
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot3(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Conversation) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot1(&r, v)
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot3(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Conversation) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot1(l, v)
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot3(l, v)
 }
-func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot2(in *jlexer.Lexer, out *ChannelSetting) {
+func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot4(in *jlexer.Lexer, out *ConnectorSetting) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -384,8 +591,8 @@ func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot2(in *jlexer.Lexer, out
 			continue
 		}
 		switch key {
-		case "channel_id":
-			out.ChannelId = string(in.String())
+		case "connector_id":
+			out.ConnectorId = string(in.String())
 		case "at_midnight":
 			out.AtMidnight = bool(in.Bool())
 		case "after_agent_message":
@@ -408,19 +615,19 @@ func easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot2(in *jlexer.Lexer, out
 		in.Consumed()
 	}
 }
-func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot2(out *jwriter.Writer, in ChannelSetting) {
+func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot4(out *jwriter.Writer, in ConnectorSetting) {
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.ChannelId != "" {
-		const prefix string = ",\"channel_id\":"
+	if in.ConnectorId != "" {
+		const prefix string = ",\"connector_id\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.ChannelId))
+		out.String(string(in.ConnectorId))
 	}
 	if in.AtMidnight {
 		const prefix string = ",\"at_midnight\":"
@@ -486,25 +693,25 @@ func easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot2(out *jwriter.Writer, 
 }
 
 // MarshalJSON supports json.Marshaler interface
-func (v ChannelSetting) MarshalJSON() ([]byte, error) {
+func (v ConnectorSetting) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot2(&w, v)
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot4(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
-func (v ChannelSetting) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjsonC0e0e117EncodeGithubComSubizHeaderEndchatBot2(w, v)
+func (v ConnectorSetting) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot4(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
-func (v *ChannelSetting) UnmarshalJSON(data []byte) error {
+func (v *ConnectorSetting) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot2(&r, v)
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot4(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
-func (v *ChannelSetting) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjsonC0e0e117DecodeGithubComSubizHeaderEndchatBot2(l, v)
+func (v *ConnectorSetting) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot4(l, v)
 }

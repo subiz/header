@@ -1,7 +1,11 @@
 syntax = "proto3";
 
-message ChannelSetting {
-	string channel_id = 3;
+package endchat_bot;
+
+import "github.com/subiz/header/common/common.proto";
+
+message ConnectorSetting {
+	string connector_id = 3;
 	bool at_midnight = 4;
 	int64 after_agent_message = 6;
 	int64 after_any_message = 7;
@@ -12,8 +16,8 @@ message ChannelSetting {
 
 message Setting {
 	string account_id = 2;
-	repeated ChannelSetting channels = 3;
-	ChannelSetting global = 4;
+	repeated ConnectorSetting connector_settingss = 3;
+	ConnectorSetting global_setting = 4;
 	int64 updated = 5;
 }
 
@@ -31,4 +35,16 @@ message Conversation {
 	string state = 10;
 	string integration_id = 11;
 	string connector_id = 12;
+}
+
+message EndCallback {
+	common.Context ctx = 1;
+	string account_id= 2;
+	string conversation_id = 3;
+}
+
+message MidnightCallback {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string midnight_sec = 3;
 }

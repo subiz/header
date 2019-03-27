@@ -345,7 +345,7 @@ enum E {
 	AccountDeactivated = 110564;
 	AgentLoggedIn = 110565;
 
-		MaikonRequested = 11060;
+	MaikonRequested = 11060;
 	MailkonSynced = 11061;
 
 	MailkonJob = 11062;
@@ -368,4 +368,8 @@ enum E {
 	DashboardLanguageUpdated = 11138;
 
 	DashboardLanguageUpdateRequested = 11137;
+
+	EndChatBotMidnightCalledback=11140;
+	EndChatBotEndCalledback=11141;
+	EndChatBotCallbacked = 11143;
 }
