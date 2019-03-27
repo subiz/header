@@ -4,6 +4,7 @@ package conversation;
 
 import "github.com/subiz/header/common/common.proto";
 import "github.com/subiz/header/user/user3.proto";
+import "github.com/subiz/header/user/user.proto";
 
 message Rule {
 	optional common.Context ctx = 1;
@@ -27,6 +28,7 @@ message Rule {
 	optional string name = 10;
 	optional string description = 11;
 	optional bool available_agents_only = 13;
+	optional user.SCondition condition = 14;
 }
 
 message AvailabilityCheckRequest {

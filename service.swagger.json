@@ -2077,6 +2077,9 @@
         "available_agents_only": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "condition": {
+          "$ref": "#/definitions/userSCondition"
         }
       }
     },
