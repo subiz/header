@@ -41,6 +41,7 @@ message EndCallback {
 	common.Context ctx = 1;
 	string account_id= 2;
 	string conversation_id = 3;
+	string connector_id = 4;
 }
 
 message MidnightCallback {
