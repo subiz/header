@@ -207,7 +207,7 @@ func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot1(in *jlexer.Lexer, out
 		case "account_id":
 			out.AccountId = string(in.String())
 		case "midnight_sec":
-			out.MidnightSec = string(in.String())
+			out.MidnightSec = int64(in.Int64())
 		default:
 			in.SkipRecursive()
 		}
@@ -242,7 +242,7 @@ func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, 
 		}
 		out.String(string(in.AccountId))
 	}
-	if in.MidnightSec != "" {
+	if in.MidnightSec != 0 {
 		const prefix string = ",\"midnight_sec\":"
 		if first {
 			first = false
@@ -250,7 +250,7 @@ func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, 
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.MidnightSec))
+		out.Int64(int64(in.MidnightSec))
 	}
 	out.RawByte('}')
 }

@@ -47,5 +47,5 @@ message EndCallback {
 message MidnightCallback {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string midnight_sec = 3;
+	int64 midnight_sec = 3;
 }
