@@ -208,6 +208,8 @@ func easyjson8f72fa59DecodeGithubComSubizHeaderEndchatBot1(in *jlexer.Lexer, out
 			out.AccountId = string(in.String())
 		case "midnight_sec":
 			out.MidnightSec = int64(in.Int64())
+		case "connector_id":
+			out.ConnectorId = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -251,6 +253,16 @@ func easyjson8f72fa59EncodeGithubComSubizHeaderEndchatBot1(out *jwriter.Writer, 
 			out.RawString(prefix)
 		}
 		out.Int64(int64(in.MidnightSec))
+	}
+	if in.ConnectorId != "" {
+		const prefix string = ",\"connector_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ConnectorId))
 	}
 	out.RawByte('}')
 }

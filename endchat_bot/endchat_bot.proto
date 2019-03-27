@@ -48,4 +48,5 @@ message MidnightCallback {
 	common.Context ctx = 1;
 	string account_id = 2;
 	int64 midnight_sec = 3;
+	string connector_id = 4;
 }
