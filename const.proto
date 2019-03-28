@@ -63,6 +63,9 @@ enum E {
 
 	UserAttributeAdded = 11171;
 	UserUpdated = 11172;
+	UserAttributeUpdated = 11173;
+	UserAttributeDeleted = 11174;
+	UserAttributeSynced = 11175;
 
 	UserSynced = 111101;
 	UserUpserted = 111105;
