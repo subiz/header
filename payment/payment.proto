@@ -223,7 +223,8 @@ message PlanInvoiceItem {
 }
 
 message InvoiceItem {
-	optional string description = 5; // remove
+	optional string headline = 4;
+	optional string description = 5;
 	optional string invoice_id = 6; // remove
 	optional int32 quantity = 7;
 	optional float price = 8; // per unit

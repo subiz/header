@@ -7302,6 +7302,16 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment39(in *jlexer.Lexer, out *
 			continue
 		}
 		switch key {
+		case "headline":
+			if in.IsNull() {
+				in.Skip()
+				out.Headline = nil
+			} else {
+				if out.Headline == nil {
+					out.Headline = new(string)
+				}
+				*out.Headline = string(in.String())
+			}
 		case "description":
 			if in.IsNull() {
 				in.Skip()
@@ -7366,6 +7376,16 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment39(out *jwriter.Writer, in
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.Headline != nil {
+		const prefix string = ",\"headline\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.Headline))
+	}
 	if in.Description != nil {
 		const prefix string = ",\"description\":"
 		if first {

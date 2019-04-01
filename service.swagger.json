@@ -3621,6 +3621,9 @@
     "paymentInvoiceItem": {
       "type": "object",
       "properties": {
+        "headline": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
