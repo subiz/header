@@ -1574,47 +1574,6 @@
         }
       }
     },
-    "conversationCountByAgent": {
-      "type": "object",
-      "properties": {
-        "agent_id": {
-          "type": "string"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "int64"
-          }
-        }
-      }
-    },
-    "conversationCountByAgentsResponse": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/conversationCountByAgent"
-          }
-        }
-      }
-    },
-    "conversationCountByGroup": {
-      "type": "object",
-      "properties": {
-        "group_id": {
-          "type": "string"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "int64"
-          }
-        }
-      }
-    },
     "conversationCountByTag": {
       "type": "object",
       "properties": {

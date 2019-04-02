@@ -211,12 +211,6 @@ message ListConversationsByUserRequest {
 	optional int32 limit = 5;
 }
 
-message RequestState {
-	optional string account_id = 1;
-	optional string conversation_id = 2;
-	optional string channel_id = 3;
-}
-
 message Reaction {
 	optional string name = 3;
 	optional int32 count = 4;
@@ -574,54 +568,6 @@ message TagRequest {
 	optional string id = 4;
 }
 
-message CountByAgentRequest {
-	optional string account_id = 2;
-	optional string integration_id = 3;
-	optional string agent_id = 4;
-	optional int32 from = 5; // deprecated
-	optional int32 to = 6; // deprecated
-	optional string range = 8;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-	optional bool has_user = 9;
-	optional int32 from_hour = 10;
-	optional int32 to_hour = 11;
-}
-
-message CountByGroupRequest {
-	optional string account_id = 2;
-	optional string integration_id = 3;
-	optional string group_id = 4;
-	optional int32 from = 5; // deprecated
-	optional int32 to = 6; // deprecated
-	optional string range = 8;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-	optional bool has_user = 9;
-	optional int32 from_hour = 10;
-	optional int32 to_hour = 11;
-}
-
-message CountByAgentsRequest {
-	optional string account_id = 2;
-	optional string integration_id = 3;
-	repeated string agent_ids = 4;
-	optional int32 from = 5; // deprecated
-	optional int32 to = 6; // deprecated
-	optional string range = 8;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-	optional bool has_user = 9;
-	optional int32 from_hour = 10;
-	optional int32 to_hour = 11;
-}
-
 message CountByTagsRequest {
 	optional string account_id = 2;
 	optional string integration_id = 3;
@@ -638,16 +584,6 @@ message CountByTagsRequest {
 	optional int32 to_hour = 11;
 }
 
-message CountByAgent {
-	optional string agent_id = 2;
-	repeated int64 data = 3;
-}
-
-message CountByGroup {
-	optional string group_id = 2;
-	repeated int64 data = 3;
-}
-
 message CountByTag {
 	optional string tag_id = 2;
 	repeated int64 data = 3;
@@ -655,10 +591,6 @@ message CountByTag {
 
 message CountByTagsResponse {
 	repeated CountByTag data = 2;
-}
-
-message CountByAgentsResponse {
-	repeated CountByAgent data = 2;
 }
 
 message AvgResponseTimeRequest {

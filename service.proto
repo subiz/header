@@ -159,9 +159,6 @@ service Perm {
 // conversation services
 
 service ConversationReporter {
-	rpc CountConversationsByAgent(conversation.CountByAgentRequest) returns (conversation.CountByAgent);
-	rpc CountConversationsByAgents(conversation.CountByAgentsRequest) returns (conversation.CountByAgentsResponse);
-	rpc CountConversationsByGroup(conversation.CountByGroupRequest) returns (conversation.CountByGroup);
 	rpc CountConversationsByTags(conversation.CountByTagsRequest) returns (conversation.CountByTagsResponse);
 	rpc GetAvgResponseTimes(conversation.AvgResponseTimeRequest) returns (conversation.AvgResponseTimeResponse);
 	rpc GetTotalConversation(conversation.AvgResponseTimeRequest) returns (conversation.TotalConversationResponse);
