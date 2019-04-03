@@ -5322,6 +5322,9 @@
         "desktop_notification": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "trace": {
+          "$ref": "#/definitions/userTrace"
         }
       }
     }

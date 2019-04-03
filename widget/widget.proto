@@ -60,6 +60,7 @@ message UserSetting {
 	optional bool send_transcript = 8;
 	optional Setting account_setting = 9;
 	optional bool desktop_notification = 10;
+	optional user.Trace trace = 11;
 }
 
 // global setting. eg: widget_4/4234098234

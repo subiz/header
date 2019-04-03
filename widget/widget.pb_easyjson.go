@@ -139,6 +139,16 @@ func easyjson3eb0a0baDecodeGithubComSubizHeaderWidget(in *jlexer.Lexer, out *Use
 				}
 				*out.DesktopNotification = bool(in.Bool())
 			}
+		case "trace":
+			if in.IsNull() {
+				in.Skip()
+				out.Trace = nil
+			} else {
+				if out.Trace == nil {
+					out.Trace = new(user.Trace)
+				}
+				(*out.Trace).UnmarshalEasyJSON(in)
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -252,6 +262,16 @@ func easyjson3eb0a0baEncodeGithubComSubizHeaderWidget(out *jwriter.Writer, in Us
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.DesktopNotification))
+	}
+	if in.Trace != nil {
+		const prefix string = ",\"trace\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Trace).MarshalEasyJSON(out)
 	}
 	out.RawByte('}')
 }
