@@ -3599,6 +3599,10 @@
         },
         "data": {
           "$ref": "#/definitions/paymentInvoiceItemData"
+        },
+        "total_price": {
+          "type": "number",
+          "format": "float"
         }
       }
     },

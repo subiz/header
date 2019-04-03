@@ -7362,6 +7362,16 @@ func easyjson3258bd9eDecodeGithubComSubizHeaderPayment39(in *jlexer.Lexer, out *
 				}
 				(*out.Data).UnmarshalEasyJSON(in)
 			}
+		case "total_price":
+			if in.IsNull() {
+				in.Skip()
+				out.TotalPrice = nil
+			} else {
+				if out.TotalPrice == nil {
+					out.TotalPrice = new(float32)
+				}
+				*out.TotalPrice = float32(in.Float32())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -7435,6 +7445,16 @@ func easyjson3258bd9eEncodeGithubComSubizHeaderPayment39(out *jwriter.Writer, in
 			out.RawString(prefix)
 		}
 		(*in.Data).MarshalEasyJSON(out)
+	}
+	if in.TotalPrice != nil {
+		const prefix string = ",\"total_price\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float32(float32(*in.TotalPrice))
 	}
 	out.RawByte('}')
 }

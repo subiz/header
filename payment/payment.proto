@@ -234,6 +234,7 @@ message InvoiceItem {
 		optional PlanInvoiceItem plan = 5;
 	}
 	optional Data data = 9;
+	optional float total_price = 10;  // = (* quantity price)
 }
 
 message BillingInfo {
