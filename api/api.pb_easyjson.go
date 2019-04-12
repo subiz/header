@@ -165,8 +165,6 @@ func easyjson3c29e0fcDecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 			continue
 		}
 		switch key {
-		case "event_id":
-			out.EventId = string(in.String())
 		case "state":
 			if in.IsNull() {
 				in.Skip()
@@ -176,8 +174,6 @@ func easyjson3c29e0fcDecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 			}
 		case "node":
 			out.Node = string(in.String())
-		case "reply_topic":
-			out.ReplyTopic = string(in.String())
 		case "credential":
 			if in.IsNull() {
 				in.Skip()
@@ -195,8 +191,6 @@ func easyjson3c29e0fcDecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 			} else {
 				out.Tracing = in.Bytes()
 			}
-		case "reply_key":
-			out.ReplyKey = string(in.String())
 		case "by_device":
 			if in.IsNull() {
 				in.Skip()
@@ -207,20 +201,20 @@ func easyjson3c29e0fcDecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 				}
 				easyjson3c29e0fcDecodeGithubComSubizHeaderCommon1(in, &*out.ByDevice)
 			}
-		case "topic":
-			out.Topic = string(in.String())
-		case "partition":
-			out.Partition = int32(in.Int32())
-		case "offset":
-			out.Offset = int64(in.Int64())
-		case "term":
-			out.Term = uint64(in.Uint64())
-		case "router_topic":
-			out.RouterTopic = string(in.String())
+		case "sub_topic":
+			out.SubTopic = string(in.String())
+		case "kafka_partition":
+			out.KafkaPartition = int32(in.Int32())
+		case "kafka_offset":
+			out.KafkaOffset = int64(in.Int64())
+		case "kafka_term":
+			out.KafkaTerm = uint64(in.Uint64())
 		case "idempotency_key":
 			out.IdempotencyKey = string(in.String())
 		case "env":
 			out.Env = string(in.String())
+		case "kafka_key":
+			out.KafkaKey = string(in.String())
 		default:
 			in.SkipRecursive()
 		}
@@ -235,16 +229,6 @@ func easyjson3c29e0fcEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.EventId != "" {
-		const prefix string = ",\"event_id\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.EventId))
-	}
 	if len(in.State) != 0 {
 		const prefix string = ",\"state\":"
 		if first {
@@ -264,16 +248,6 @@ func easyjson3c29e0fcEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 			out.RawString(prefix)
 		}
 		out.String(string(in.Node))
-	}
-	if in.ReplyTopic != "" {
-		const prefix string = ",\"reply_topic\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.ReplyTopic))
 	}
 	if in.Credential != nil {
 		const prefix string = ",\"credential\":"
@@ -295,16 +269,6 @@ func easyjson3c29e0fcEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 		}
 		out.Base64Bytes(in.Tracing)
 	}
-	if in.ReplyKey != "" {
-		const prefix string = ",\"reply_key\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.ReplyKey))
-	}
 	if in.ByDevice != nil {
 		const prefix string = ",\"by_device\":"
 		if first {
@@ -315,55 +279,45 @@ func easyjson3c29e0fcEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 		}
 		easyjson3c29e0fcEncodeGithubComSubizHeaderCommon1(out, *in.ByDevice)
 	}
-	if in.Topic != "" {
-		const prefix string = ",\"topic\":"
+	if in.SubTopic != "" {
+		const prefix string = ",\"sub_topic\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.Topic))
+		out.String(string(in.SubTopic))
 	}
-	if in.Partition != 0 {
-		const prefix string = ",\"partition\":"
+	if in.KafkaPartition != 0 {
+		const prefix string = ",\"kafka_partition\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int32(int32(in.Partition))
+		out.Int32(int32(in.KafkaPartition))
 	}
-	if in.Offset != 0 {
-		const prefix string = ",\"offset\":"
+	if in.KafkaOffset != 0 {
+		const prefix string = ",\"kafka_offset\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(in.Offset))
+		out.Int64(int64(in.KafkaOffset))
 	}
-	if in.Term != 0 {
-		const prefix string = ",\"term\":"
+	if in.KafkaTerm != 0 {
+		const prefix string = ",\"kafka_term\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.Uint64(uint64(in.Term))
-	}
-	if in.RouterTopic != "" {
-		const prefix string = ",\"router_topic\":"
-		if first {
-			first = false
-			out.RawString(prefix[1:])
-		} else {
-			out.RawString(prefix)
-		}
-		out.String(string(in.RouterTopic))
+		out.Uint64(uint64(in.KafkaTerm))
 	}
 	if in.IdempotencyKey != "" {
 		const prefix string = ",\"idempotency_key\":"
@@ -384,6 +338,16 @@ func easyjson3c29e0fcEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 			out.RawString(prefix)
 		}
 		out.String(string(in.Env))
+	}
+	if in.KafkaKey != "" {
+		const prefix string = ",\"kafka_key\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.KafkaKey))
 	}
 	out.RawByte('}')
 }

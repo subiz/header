@@ -886,56 +886,47 @@
     "commonContext": {
       "type": "object",
       "properties": {
-        "event_id": {
-          "type": "string"
-        },
         "state": {
           "type": "string",
-          "format": "byte"
+          "format": "byte",
+          "title": "string event_id = 1;"
         },
         "node": {
           "type": "string"
         },
-        "reply_topic": {
-          "type": "string"
-        },
         "credential": {
-          "$ref": "#/definitions/authCredential",
-          "title": "optional int32 reply_partition = 5;"
+          "$ref": "#/definitions/authCredential"
         },
         "tracing": {
           "type": "string",
           "format": "byte"
         },
-        "reply_key": {
-          "type": "string"
-        },
         "by_device": {
           "$ref": "#/definitions/commonDevice"
         },
-        "topic": {
+        "sub_topic": {
           "type": "string",
           "title": "for kafka"
         },
-        "partition": {
+        "kafka_partition": {
           "type": "integer",
           "format": "int32"
         },
-        "offset": {
+        "kafka_offset": {
           "type": "string",
           "format": "int64"
         },
-        "term": {
+        "kafka_term": {
           "type": "string",
           "format": "uint64"
-        },
-        "router_topic": {
-          "type": "string"
         },
         "idempotency_key": {
           "type": "string"
         },
         "env": {
+          "type": "string"
+        },
+        "kafka_key": {
           "type": "string"
         }
       }
