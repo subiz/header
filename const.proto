@@ -27,6 +27,10 @@ enum E {
 	UserSegmentationDeleteRequested = 11112;
 	UserSegmentationListRequested = 11113;
 	UserSegmentationReadRequested = 11114;
+	SegmentationRequested = 11115;
+	SegmentationAddToSegmemtRequested = 11116;
+	SegmentationRemoveFromSegmentRequested = 11117;
+	SegmentationToTopRequested = 11118;
 
 	UserAddToMyListRequested = 11120;
 	UserRemoveFromMyListRequested = 11121;
