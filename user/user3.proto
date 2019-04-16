@@ -211,6 +211,7 @@ message PickRequest {
 	string agent_id = 4;
 	string segmentation_id = 5;
 	int64 added = 7;
+	int64 updated = 8;
 }
 
 message CountSegmentationUserByAttributeRequest {
@@ -267,15 +268,4 @@ message LastView {
 	int64 created = 8;
 	string event_id = 9;
 	string title = 10;
-}
-
-message ListItem {
-	string item_id = 2;
-	int64 no = 3;
-	int64 offset = 4;
-}
-message List {
-	string account_id = 3;
-	string list_id = 4;
-	repeated ListItem items = 5;
 }
