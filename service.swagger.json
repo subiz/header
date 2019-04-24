@@ -886,10 +886,12 @@
     "commonContext": {
       "type": "object",
       "properties": {
+        "event_id": {
+          "type": "string"
+        },
         "state": {
           "type": "string",
-          "format": "byte",
-          "title": "string event_id = 1;"
+          "format": "byte"
         },
         "node": {
           "type": "string"
@@ -1018,7 +1020,7 @@
     "commonTrace": {
       "type": "object",
       "properties": {
-        "serviveName": {
+        "serviceName": {
           "type": "string"
         },
         "name": {

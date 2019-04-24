@@ -171,6 +171,8 @@ func easyjson19c08265DecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 			continue
 		}
 		switch key {
+		case "event_id":
+			out.EventId = string(in.String())
 		case "state":
 			if in.IsNull() {
 				in.Skip()
@@ -238,6 +240,16 @@ func easyjson19c08265EncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 	out.RawByte('{')
 	first := true
 	_ = first
+	if in.EventId != "" {
+		const prefix string = ",\"event_id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.EventId))
+	}
 	if len(in.State) != 0 {
 		const prefix string = ",\"state\":"
 		if first {
@@ -653,8 +665,8 @@ func easyjson19c08265DecodeGithubComSubizHeaderCommon3(in *jlexer.Lexer, out *co
 			continue
 		}
 		switch key {
-		case "serviveName":
-			out.ServiveName = string(in.String())
+		case "serviceName":
+			out.ServiceName = string(in.String())
 		case "name":
 			out.Name = string(in.String())
 		case "duration":
@@ -677,15 +689,15 @@ func easyjson19c08265EncodeGithubComSubizHeaderCommon3(out *jwriter.Writer, in c
 	out.RawByte('{')
 	first := true
 	_ = first
-	if in.ServiveName != "" {
-		const prefix string = ",\"serviveName\":"
+	if in.ServiceName != "" {
+		const prefix string = ",\"serviceName\":"
 		if first {
 			first = false
 			out.RawString(prefix[1:])
 		} else {
 			out.RawString(prefix)
 		}
-		out.String(string(in.ServiveName))
+		out.String(string(in.ServiceName))
 	}
 	if in.Name != "" {
 		const prefix string = ",\"name\":"

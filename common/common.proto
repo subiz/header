@@ -43,7 +43,7 @@ message ObjectPathRequest {
 }
 
 message Context {
-	// string event_id = 1;
+	string event_id = 1;
 	bytes state = 2;
 	string node = 3;
 
@@ -133,7 +133,7 @@ message Tracing {
 }
 
 message Trace {
-	string serviveName = 1;
+	string serviceName = 1;
 	string name = 2;
 	int64 duration = 3; // nanoseconds
 	int64 started = 4; // unix nano
