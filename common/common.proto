@@ -48,7 +48,7 @@ message Context {
 	string node = 3;
 
 	auth.Credential credential = 6;
-	bytes tracing = 7;
+	Tracing tracing = 7;
 
 	Device by_device = 10;
 
@@ -104,26 +104,38 @@ enum L {
 }
 
 enum Weekday {
-  Monday = 0;
-  Tuesday = 1;
-  Wednesday = 2;
-  Thursday = 3;
-  Friday = 4;
-  Saturday = 5;
-  Sunday = 6;
+	Monday = 0;
+	Tuesday = 1;
+	Wednesday = 2;
+	Thursday = 3;
+	Friday = 4;
+	Saturday = 5;
+	Sunday = 6;
 }
 
 enum Month {
-  January = 0;
-  February = 1;
-  March = 2;
-  April = 3;
-  May = 4;
-  June = 5;
-  July = 6;
-  August = 7;
-  September = 8;
-  October = 9;
-  November = 10;
-  December = 11;
+	January = 0;
+	February = 1;
+	March = 2;
+	April = 3;
+	May = 4;
+	June = 5;
+	July = 6;
+	August = 7;
+	September = 8;
+	October = 9;
+	November = 10;
+	December = 11;
+}
+
+message Tracing {
+	repeated Trace traces = 1;
+}
+
+message Trace {
+	string serviveName = 1;
+	string name = 2;
+	int64 duration = 3; // nanoseconds
+	int64 started = 4; // unix nano
+	int64 ended = 5; // unix nano
 }

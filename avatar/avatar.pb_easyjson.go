@@ -177,7 +177,10 @@ func easyjson8e21b7afDecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 				in.Skip()
 				out.Tracing = nil
 			} else {
-				out.Tracing = in.Bytes()
+				if out.Tracing == nil {
+					out.Tracing = new(common.Tracing)
+				}
+				easyjson8e21b7afDecodeGithubComSubizHeaderCommon1(in, &*out.Tracing)
 			}
 		case "by_device":
 			if in.IsNull() {
@@ -187,7 +190,7 @@ func easyjson8e21b7afDecodeGithubComSubizHeaderCommon(in *jlexer.Lexer, out *com
 				if out.ByDevice == nil {
 					out.ByDevice = new(common.Device)
 				}
-				easyjson8e21b7afDecodeGithubComSubizHeaderCommon1(in, &*out.ByDevice)
+				easyjson8e21b7afDecodeGithubComSubizHeaderCommon2(in, &*out.ByDevice)
 			}
 		case "sub_topic":
 			out.SubTopic = string(in.String())
@@ -247,7 +250,7 @@ func easyjson8e21b7afEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 		}
 		(*in.Credential).MarshalEasyJSON(out)
 	}
-	if len(in.Tracing) != 0 {
+	if in.Tracing != nil {
 		const prefix string = ",\"tracing\":"
 		if first {
 			first = false
@@ -255,7 +258,7 @@ func easyjson8e21b7afEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 		} else {
 			out.RawString(prefix)
 		}
-		out.Base64Bytes(in.Tracing)
+		easyjson8e21b7afEncodeGithubComSubizHeaderCommon1(out, *in.Tracing)
 	}
 	if in.ByDevice != nil {
 		const prefix string = ",\"by_device\":"
@@ -265,7 +268,7 @@ func easyjson8e21b7afEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson8e21b7afEncodeGithubComSubizHeaderCommon1(out, *in.ByDevice)
+		easyjson8e21b7afEncodeGithubComSubizHeaderCommon2(out, *in.ByDevice)
 	}
 	if in.SubTopic != "" {
 		const prefix string = ",\"sub_topic\":"
@@ -339,7 +342,7 @@ func easyjson8e21b7afEncodeGithubComSubizHeaderCommon(out *jwriter.Writer, in co
 	}
 	out.RawByte('}')
 }
-func easyjson8e21b7afDecodeGithubComSubizHeaderCommon1(in *jlexer.Lexer, out *common.Device) {
+func easyjson8e21b7afDecodeGithubComSubizHeaderCommon2(in *jlexer.Lexer, out *common.Device) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -392,9 +395,9 @@ func easyjson8e21b7afDecodeGithubComSubizHeaderCommon1(in *jlexer.Lexer, out *co
 					out.GaTrackingIds = (out.GaTrackingIds)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v7 string
-					v7 = string(in.String())
-					out.GaTrackingIds = append(out.GaTrackingIds, v7)
+					var v4 string
+					v4 = string(in.String())
+					out.GaTrackingIds = append(out.GaTrackingIds, v4)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -409,7 +412,7 @@ func easyjson8e21b7afDecodeGithubComSubizHeaderCommon1(in *jlexer.Lexer, out *co
 		in.Consumed()
 	}
 }
-func easyjson8e21b7afEncodeGithubComSubizHeaderCommon1(out *jwriter.Writer, in common.Device) {
+func easyjson8e21b7afEncodeGithubComSubizHeaderCommon2(out *jwriter.Writer, in common.Device) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -513,14 +516,198 @@ func easyjson8e21b7afEncodeGithubComSubizHeaderCommon1(out *jwriter.Writer, in c
 		}
 		{
 			out.RawByte('[')
-			for v8, v9 := range in.GaTrackingIds {
-				if v8 > 0 {
+			for v5, v6 := range in.GaTrackingIds {
+				if v5 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v9))
+				out.String(string(v6))
 			}
 			out.RawByte(']')
 		}
+	}
+	out.RawByte('}')
+}
+func easyjson8e21b7afDecodeGithubComSubizHeaderCommon1(in *jlexer.Lexer, out *common.Tracing) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "traces":
+			if in.IsNull() {
+				in.Skip()
+				out.Traces = nil
+			} else {
+				in.Delim('[')
+				if out.Traces == nil {
+					if !in.IsDelim(']') {
+						out.Traces = make([]*common.Trace, 0, 8)
+					} else {
+						out.Traces = []*common.Trace{}
+					}
+				} else {
+					out.Traces = (out.Traces)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v7 *common.Trace
+					if in.IsNull() {
+						in.Skip()
+						v7 = nil
+					} else {
+						if v7 == nil {
+							v7 = new(common.Trace)
+						}
+						easyjson8e21b7afDecodeGithubComSubizHeaderCommon3(in, &*v7)
+					}
+					out.Traces = append(out.Traces, v7)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson8e21b7afEncodeGithubComSubizHeaderCommon1(out *jwriter.Writer, in common.Tracing) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if len(in.Traces) != 0 {
+		const prefix string = ",\"traces\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v8, v9 := range in.Traces {
+				if v8 > 0 {
+					out.RawByte(',')
+				}
+				if v9 == nil {
+					out.RawString("null")
+				} else {
+					easyjson8e21b7afEncodeGithubComSubizHeaderCommon3(out, *v9)
+				}
+			}
+			out.RawByte(']')
+		}
+	}
+	out.RawByte('}')
+}
+func easyjson8e21b7afDecodeGithubComSubizHeaderCommon3(in *jlexer.Lexer, out *common.Trace) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeString()
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "serviveName":
+			out.ServiveName = string(in.String())
+		case "name":
+			out.Name = string(in.String())
+		case "duration":
+			out.Duration = int64(in.Int64())
+		case "started":
+			out.Started = int64(in.Int64())
+		case "ended":
+			out.Ended = int64(in.Int64())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson8e21b7afEncodeGithubComSubizHeaderCommon3(out *jwriter.Writer, in common.Trace) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.ServiveName != "" {
+		const prefix string = ",\"serviveName\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ServiveName))
+	}
+	if in.Name != "" {
+		const prefix string = ",\"name\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Name))
+	}
+	if in.Duration != 0 {
+		const prefix string = ",\"duration\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Duration))
+	}
+	if in.Started != 0 {
+		const prefix string = ",\"started\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Started))
+	}
+	if in.Ended != 0 {
+		const prefix string = ",\"ended\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.Ended))
 	}
 	out.RawByte('}')
 }

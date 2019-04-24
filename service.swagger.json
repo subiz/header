@@ -898,8 +898,7 @@
           "$ref": "#/definitions/authCredential"
         },
         "tracing": {
-          "type": "string",
-          "format": "byte"
+          "$ref": "#/definitions/commonTracing"
         },
         "by_device": {
           "$ref": "#/definitions/commonDevice"
@@ -1013,6 +1012,40 @@
       "properties": {
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "commonTrace": {
+      "type": "object",
+      "properties": {
+        "serviveName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "string",
+          "format": "int64"
+        },
+        "started": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ended": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "commonTracing": {
+      "type": "object",
+      "properties": {
+        "traces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonTrace"
+          }
         }
       }
     },
