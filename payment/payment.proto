@@ -127,6 +127,7 @@ message Subscription {
 	optional int32 v3_state = 43;
 
 	optional bool auto_charge = 44;
+	optional int64 ended = 45;
 }
 
 message Bill {
@@ -325,7 +326,7 @@ message PromotionCode {
 	repeated string for_account_ids = 27;
 	repeated string for_channels = 29;
 	optional bool is_deleted = 30;
-//repeated int32 for_number_of_agents = 31;
+	//repeated int32 for_number_of_agents = 31;
 	repeated uint32 for_number_of_agents = 32;
 	optional string id = 33;
 }
@@ -412,8 +413,8 @@ message LogPaidForAgentReferrer {
 }
 
 message LogPaidForAgentReferrers {
-    optional common.Context ctx = 1;
-		repeated LogPaidForAgentReferrer log_paid_for_agent_referrers = 2;
+	optional common.Context ctx = 1;
+	repeated LogPaidForAgentReferrer log_paid_for_agent_referrers = 2;
 }
 
 message ExchangeRate {
@@ -434,7 +435,7 @@ message Logs {
 	optional common.Context ctx = 1;
 	repeated Log logs = 5;
 	optional string anchor = 4;
-	}
+}
 
 message Log {
 	optional common.Context ctx = 1;

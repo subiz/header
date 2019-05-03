@@ -4394,6 +4394,10 @@
         "auto_charge": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "ended": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

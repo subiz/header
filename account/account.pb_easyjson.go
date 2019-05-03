@@ -7472,6 +7472,16 @@ func easyjsonC9b74c43DecodeGithubComSubizHeaderPayment(in *jlexer.Lexer, out *pa
 				}
 				*out.AutoCharge = bool(in.Bool())
 			}
+		case "ended":
+			if in.IsNull() {
+				in.Skip()
+				out.Ended = nil
+			} else {
+				if out.Ended == nil {
+					out.Ended = new(int64)
+				}
+				*out.Ended = int64(in.Int64())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -7711,6 +7721,16 @@ func easyjsonC9b74c43EncodeGithubComSubizHeaderPayment(out *jwriter.Writer, in p
 			out.RawString(prefix)
 		}
 		out.Bool(bool(*in.AutoCharge))
+	}
+	if in.Ended != nil {
+		const prefix string = ",\"ended\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(*in.Ended))
 	}
 	out.RawByte('}')
 }
