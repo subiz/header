@@ -5,8 +5,8 @@ package api;
 import "github.com/subiz/header/common/common.proto";
 
 message Request {
-  map<string, string> header = 2;
-  bytes body = 3;
+	map<string, string> header = 2;
+	bytes body = 3;
 	string method = 4;
 	string path = 5;
 }

@@ -2758,6 +2758,18 @@
         },
         "segmentation_id": {
           "type": "string"
+        },
+        "agent_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tag_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

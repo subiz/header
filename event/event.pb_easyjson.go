@@ -5270,6 +5270,52 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent13(in *jlexer.Lexer, out *Au
 			out.IntegrationId = string(in.String())
 		case "segmentation_id":
 			out.SegmentationId = string(in.String())
+		case "agent_ids":
+			if in.IsNull() {
+				in.Skip()
+				out.AgentIds = nil
+			} else {
+				in.Delim('[')
+				if out.AgentIds == nil {
+					if !in.IsDelim(']') {
+						out.AgentIds = make([]string, 0, 4)
+					} else {
+						out.AgentIds = []string{}
+					}
+				} else {
+					out.AgentIds = (out.AgentIds)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v41 string
+					v41 = string(in.String())
+					out.AgentIds = append(out.AgentIds, v41)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "tag_ids":
+			if in.IsNull() {
+				in.Skip()
+				out.TagIds = nil
+			} else {
+				in.Delim('[')
+				if out.TagIds == nil {
+					if !in.IsDelim(']') {
+						out.TagIds = make([]string, 0, 4)
+					} else {
+						out.TagIds = []string{}
+					}
+				} else {
+					out.TagIds = (out.TagIds)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v42 string
+					v42 = string(in.String())
+					out.TagIds = append(out.TagIds, v42)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -5364,14 +5410,14 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent13(out *jwriter.Writer, in A
 		}
 		{
 			out.RawByte('[')
-			for v41, v42 := range in.Events {
-				if v41 > 0 {
+			for v43, v44 := range in.Events {
+				if v43 > 0 {
 					out.RawByte(',')
 				}
-				if v42 == nil {
+				if v44 == nil {
 					out.RawString("null")
 				} else {
-					(*v42).MarshalEasyJSON(out)
+					(*v44).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -5406,6 +5452,44 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent13(out *jwriter.Writer, in A
 			out.RawString(prefix)
 		}
 		out.String(string(in.SegmentationId))
+	}
+	if len(in.AgentIds) != 0 {
+		const prefix string = ",\"agent_ids\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v45, v46 := range in.AgentIds {
+				if v45 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v46))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.TagIds) != 0 {
+		const prefix string = ",\"tag_ids\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v47, v48 := range in.TagIds {
+				if v47 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v48))
+			}
+			out.RawByte(']')
+		}
 	}
 	out.RawByte('}')
 }
@@ -5488,17 +5572,17 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent14(in *jlexer.Lexer, out *Au
 					out.Conditions = (out.Conditions)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v43 *user.Condition
+					var v49 *user.Condition
 					if in.IsNull() {
 						in.Skip()
-						v43 = nil
+						v49 = nil
 					} else {
-						if v43 == nil {
-							v43 = new(user.Condition)
+						if v49 == nil {
+							v49 = new(user.Condition)
 						}
-						easyjson524579e4DecodeGithubComSubizHeaderUser11(in, &*v43)
+						easyjson524579e4DecodeGithubComSubizHeaderUser11(in, &*v49)
 					}
-					out.Conditions = append(out.Conditions, v43)
+					out.Conditions = append(out.Conditions, v49)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5545,17 +5629,17 @@ func easyjson524579e4DecodeGithubComSubizHeaderEvent14(in *jlexer.Lexer, out *Au
 					out.Actions = (out.Actions)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v44 *AutomationAction
+					var v50 *AutomationAction
 					if in.IsNull() {
 						in.Skip()
-						v44 = nil
+						v50 = nil
 					} else {
-						if v44 == nil {
-							v44 = new(AutomationAction)
+						if v50 == nil {
+							v50 = new(AutomationAction)
 						}
-						(*v44).UnmarshalEasyJSON(in)
+						(*v50).UnmarshalEasyJSON(in)
 					}
-					out.Actions = append(out.Actions, v44)
+					out.Actions = append(out.Actions, v50)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -5646,14 +5730,14 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent14(out *jwriter.Writer, in A
 		}
 		{
 			out.RawByte('[')
-			for v45, v46 := range in.Conditions {
-				if v45 > 0 {
+			for v51, v52 := range in.Conditions {
+				if v51 > 0 {
 					out.RawByte(',')
 				}
-				if v46 == nil {
+				if v52 == nil {
 					out.RawString("null")
 				} else {
-					easyjson524579e4EncodeGithubComSubizHeaderUser11(out, *v46)
+					easyjson524579e4EncodeGithubComSubizHeaderUser11(out, *v52)
 				}
 			}
 			out.RawByte(']')
@@ -5759,14 +5843,14 @@ func easyjson524579e4EncodeGithubComSubizHeaderEvent14(out *jwriter.Writer, in A
 		}
 		{
 			out.RawByte('[')
-			for v47, v48 := range in.Actions {
-				if v47 > 0 {
+			for v53, v54 := range in.Actions {
+				if v53 > 0 {
 					out.RawByte(',')
 				}
-				if v48 == nil {
+				if v54 == nil {
 					out.RawString("null")
 				} else {
-					(*v48).MarshalEasyJSON(out)
+					(*v54).MarshalEasyJSON(out)
 				}
 			}
 			out.RawByte(']')
@@ -5913,17 +5997,17 @@ func easyjson524579e4DecodeGithubComSubizHeaderUser12(in *jlexer.Lexer, out *use
 					out.Conditions = (out.Conditions)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v49 *user.SCondition
+					var v55 *user.SCondition
 					if in.IsNull() {
 						in.Skip()
-						v49 = nil
+						v55 = nil
 					} else {
-						if v49 == nil {
-							v49 = new(user.SCondition)
+						if v55 == nil {
+							v55 = new(user.SCondition)
 						}
-						easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*v49)
+						easyjson524579e4DecodeGithubComSubizHeaderUser12(in, &*v55)
 					}
-					out.Conditions = append(out.Conditions, v49)
+					out.Conditions = append(out.Conditions, v55)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -6042,14 +6126,14 @@ func easyjson524579e4EncodeGithubComSubizHeaderUser12(out *jwriter.Writer, in us
 		}
 		{
 			out.RawByte('[')
-			for v50, v51 := range in.Conditions {
-				if v50 > 0 {
+			for v56, v57 := range in.Conditions {
+				if v56 > 0 {
 					out.RawByte(',')
 				}
-				if v51 == nil {
+				if v57 == nil {
 					out.RawString("null")
 				} else {
-					easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *v51)
+					easyjson524579e4EncodeGithubComSubizHeaderUser12(out, *v57)
 				}
 			}
 			out.RawByte(']')

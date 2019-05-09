@@ -39,11 +39,11 @@ message AttributeData {
 
 message User {
 	common.Context ctx = 1;
-  string id = 3;
-  string account_id = 4;
+	string id = 3;
+	string account_id = 4;
 	repeated Trace traces = 11;
 	//	repeated string alias = 12;
-  bool is_ban = 14;
+	bool is_ban = 14;
 
 	repeated AttributeData attributes = 18;
 

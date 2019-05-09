@@ -647,7 +647,7 @@ message Ticket {
 	optional string conversation_id = 3;
 	optional string id = 4;
 	optional string state = 5;
-	optional string priority = 6;
+	optional string priority = 6; // deprecated
 	optional int64 duedate = 7;
 	optional string subject = 8;
 	optional int64 created = 9;

@@ -288,9 +288,9 @@ message AutomationAction {
 		add_user_note = 6; // note
 		create_conversation = 7; // events, integration_id
 		send_message = 8; // event
-		assign_agent_to_conversation = 9; // prop agent ids
+		assign_agent_to_conversation = 9; // prop agent_ids
 		convert_conversation_to_ticket = 10; // no prop
-		tag_conversation = 11; // tag id
+		tag_conversation = 11; // tag_ids
 		send_webhook = 12; // not yet defined
 		open_widget_screen = 14; // not yet defined
 		add_user_to_segmentation = 15; // segmentation_id
@@ -302,12 +302,14 @@ message AutomationAction {
 	email.Email email = 5;
 	user.Note user_note = 6;
 	Event event = 7;
-	string agent_id = 8;
-	string tag_id = 9;
+	string agent_id = 8; // deprecated
+	string tag_id = 9; // deprecated
 	repeated Event events = 10;
 	conversation.Ticket ticket = 11;
 	string integration_id = 12;
 	string segmentation_id = 13;
+	repeated string agent_ids = 14;
+	repeated string tag_ids = 15;
 }
 
 message Automations {
