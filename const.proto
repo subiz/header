@@ -121,6 +121,8 @@ enum E {
 	UserTotalConvoUpdated = 111232;
 	UserTotalOpenTicketUpdated = 111233;
 
+	TicketUpdated = 111234;
+
 	AutomationCreditAggregated = 111235;
 	AutomationCreditCountAggregate = 111236;
 
