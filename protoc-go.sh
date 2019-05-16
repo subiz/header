@@ -19,13 +19,6 @@ unzip -q protobuf/$PROTOC_FILE -d $PROTOC_PATH
 PROTOC_GO_VERSION="ddf22928ea3c56eb4292a0adbbf5001b1e8e7d0d"
 PROTOC_GO_REPO="github.com/golang/protobuf/protoc-gen-go"
 
-if [ ! -f $GOPATH/bin/easyjson ]; then
-	echo -e "\033[0;34minstalling easyjson..."
-	go get -u github.com/mailru/easyjson/...
-
-	echo "done"
-fi
-
 if [ ! -f $GOPATH/bin/protoc-gen-go ]; then
 	echo -e "\033[0;34minstalling protoc-gen-go..."
 	go get -u $PROTOC_GO_REPO
@@ -84,31 +77,7 @@ done;
 wait
 LC_NUMERIC="en_US.UTF-8" printf "\e[32mDone \e[32m(%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
-# GENERATEING JSON
-[ "$1" = 'json' ] && rm -rf */*easyjson.go
 
-starttime=$(date +%s.%N)
-printf "\e[32mgenerating json... (this could take up to 20 sec)"
-for i in `ls -R`; do
-	if [[ $i == *":"* ]]; then
-		LAST_DIR=${i%?} # trim last char
-		continue
-	fi
-
-	if [[ $i == "vendor" ]] || [[ $i == "proto" ]] || [[ $LAST_DIR == ./node_modules* ]] || [[ $LAST_DIR == ./vendor* ]] || [[ $LAST_DIR == ./proto* ]]; then
-		continue
-	fi
-
-	if [[ $i == *".proto" ]]; then
-		if [[ $i == 'service.proto' ]]; then
-			continue
-		fi
-		if [[ $i == 'const.proto' ]]; then
-			continue
-		fi
-		[ "$1" = 'json' ] && easyjson -all $LAST_DIR/$(sed "s/.proto/.pb.go/g" <<< "$i")
-	fi
-done;
 LC_NUMERIC="en_US.UTF-8" printf "\e[32m\nDone (%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
 #./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
