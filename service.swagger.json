@@ -1407,26 +1407,6 @@
         }
       }
     },
-    "conversationCondition": {
-      "type": "object",
-      "properties": {
-        "join": {
-          "type": "string"
-        },
-        "key": {
-          "type": "string"
-        },
-        "operator": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
     "conversationContentTemplate": {
       "type": "object",
       "properties": {
@@ -2025,12 +2005,6 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
-        },
-        "conditions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/conversationCondition"
           }
         },
         "enabled": {

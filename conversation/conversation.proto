@@ -21,7 +21,6 @@ message Rule {
 	}
 	optional string strategy = 5;
 	repeated string assign_tos = 6;
-	repeated Condition conditions = 7;
 	optional bool enabled = 8;
 	optional int64 created = 9;
 	optional int64 modified = 12;
@@ -46,20 +45,6 @@ message AvailabilityCheckResult {
 	optional string payload = 5;
 	optional string integration_id = 6;
 	optional string account_id = 7;
-}
-
-message Condition {
-	enum JoinOperator {
-		none = 0;
-		and = 1;
-		or = 2;
-	}
-
-	optional string join = 1;
-	optional string key = 2; // unique
-	optional string operator = 3; // = # regex
-	optional string value = 4; // JSON
-	optional string type = 5; // text, bool, ...
 }
 
 message Route {
@@ -172,6 +157,7 @@ message StartRequest {
 	optional string chain_id = 27;
 	optional string state = 28; // pending
 	optional string automation_id = 29;
+	optional string message = 30;
 }
 
 message Conversations {
