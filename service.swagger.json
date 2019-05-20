@@ -1510,10 +1510,6 @@
           "type": "string",
           "format": "int64"
         },
-        "closed": {
-          "type": "string",
-          "format": "int64"
-        },
         "members": {
           "type": "array",
           "items": {
@@ -1574,6 +1570,9 @@
         },
         "assigned_to": {
           "$ref": "#/definitions/conversationRouteResult"
+        },
+        "first_message": {
+          "type": "string"
         }
       }
     },
@@ -1820,10 +1819,6 @@
         "avatar_url": {
           "type": "string"
         },
-        "left": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "conversation_id": {
           "type": "string"
         },
@@ -1834,6 +1829,9 @@
           }
         },
         "last_page_view_url": {
+          "type": "string"
+        },
+        "membership": {
           "type": "string"
         }
       }

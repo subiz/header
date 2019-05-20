@@ -97,10 +97,16 @@ message Member {
 	optional string id = 4;
 	optional string name = 10;
 	optional string avatar_url = 6;
-	optional bool left = 11;
+
 	optional string conversation_id = 13;
 	repeated Field fields = 14;
 	optional string last_page_view_url = 15;
+	optional string membership = 12;
+	enum State {
+		active = 0;
+		lefter = 1;
+		observer = 2;
+	};
 }
 
 enum State {
@@ -121,7 +127,6 @@ message Conversation {
 	optional string id = 2;
 	optional string account_id = 3;
 	optional int64 created = 4;
-	optional int64 closed = 6; // remove
 	repeated Member members = 7;
 	repeated Tag tags = 10;
 	optional int64 ended = 12;
@@ -140,6 +145,8 @@ message Conversation {
 	optional Ticket ticket = 27;
 	optional string ticket_id = 28;
 	optional RouteResult assigned_to = 30;
+
+	optional string first_message = 31;
 }
 
 message UserConversation { // used in database
