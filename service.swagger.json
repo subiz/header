@@ -1533,9 +1533,6 @@
           "type": "string",
           "format": "int64"
         },
-        "channel_type": {
-          "type": "string"
-        },
         "integration": {
           "$ref": "#/definitions/conversationIntegration"
         },
@@ -1556,12 +1553,6 @@
         "chain_id": {
           "type": "string"
         },
-        "left_members": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/conversationMember"
-          }
-        },
         "ticket": {
           "$ref": "#/definitions/conversationTicket"
         },
@@ -1572,6 +1563,9 @@
           "$ref": "#/definitions/conversationRouteResult"
         },
         "first_message": {
+          "type": "string"
+        },
+        "subject": {
           "type": "string"
         }
       }

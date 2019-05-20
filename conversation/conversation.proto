@@ -133,7 +133,6 @@ message Conversation {
 	optional string state = 11; // converation state
 	optional int64 accepted = 15; // time chat is accepted after being in unassigned list
 
-	optional string channel_type = 17;
 	optional Integration integration = 18;
 	optional int64 actived = 19;
 	optional string last_message_id = 21; // internal use only
@@ -141,12 +140,12 @@ message Conversation {
 	optional int64 response_sec = 22;
 
 	optional string chain_id = 24;
-	repeated Member left_members = 25;
 	optional Ticket ticket = 27;
 	optional string ticket_id = 28;
 	optional RouteResult assigned_to = 30;
 
 	optional string first_message = 31;
+	optional string subject = 32;
 }
 
 message UserConversation { // used in database
