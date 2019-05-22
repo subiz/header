@@ -113,6 +113,8 @@ enum E {
 	AutomationConversationTagFired = 111229;
 	AutomationSendEmailFired = 111431;
 	AutomationOpenWidgetScreenFired = 111432;
+	AutomationSendChatTranscriptEmailFired = 111434;
+	AutomationSendChatTranscriptEmailResolved = 111435;
 
 	// AutomationAgentNotificationFired = 54;
 	AutomationAddUserToSegmentationFired = 111231;

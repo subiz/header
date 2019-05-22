@@ -295,6 +295,7 @@ message AutomationAction {
 		open_widget_screen = 14; // not yet defined
 		add_user_to_segmentation = 15; // segmentation_id
 		remove_user_from_segmentation = 16; // segmentation_id
+		send_chat_transcript_email = 17; // prop email
 	}
 	string type = 2;
 
