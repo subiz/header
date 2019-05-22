@@ -22,7 +22,6 @@ import "github.com/subiz/header/noti5/noti5.proto";
 import "github.com/subiz/header/widget/widget.proto";
 import "github.com/subiz/header/account/account.proto";
 import "github.com/subiz/header/avatar/avatar.proto";
-import "github.com/subiz/header/webhook4/webhook4.proto";
 import "github.com/subiz/header/api/api.proto";
 
 // api service
@@ -437,7 +436,6 @@ service ServiceAvatarManager {
 }
 
 // webhook services
-
 service WebhookService {
-	rpc Read(common.Id) returns (webhook4.Webhook);
+	rpc Read(common.Id) returns (client.Webhook);
 }

@@ -65,3 +65,49 @@ message AuthorizedClient {
 	repeated string scopes = 5;
 	optional string kind = 6;
 }
+
+message Webhook {
+	optional common.Context ctx = 1;
+	optional string account_id = 12;
+	optional string client_id = 2;
+	optional string url = 3;
+	optional string secret = 4;
+
+	repeated string events = 6;
+	optional string state = 7;
+	enum State {
+		normal = 0;
+		backoff = 1;
+		inactive = 2;
+	}
+
+	optional int64 last_hook_at = 9;
+	optional int64 last_hook_id = 10;
+	optional int64 events_count = 13;
+	optional string last_hook_response = 14;
+	optional int32 last_hook_status = 15;
+	optional string last_hook_payload = 16;
+	optional int64 backoffs_count = 17;
+}
+
+
+message WebhookPayload {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string hub_id = 3;
+	optional bytes payload = 4; //json format
+	optional string event = 5;
+}
+
+message WebhookFire {
+	optional common.Context ctx = 1;
+	optional string client_id = 2;
+	optional bytes payload = 3;
+}
+
+message WebhookBackoff {
+	optional common.Context ctx = 1;
+	optional string worker_id = 2;
+	optional int32 parition = 3;
+	optional int32 num_back_off = 4;
+}

@@ -883,6 +883,61 @@
         }
       }
     },
+    "clientWebhook": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "last_hook_at": {
+          "type": "string",
+          "format": "int64"
+        },
+        "last_hook_id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "events_count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "last_hook_response": {
+          "type": "string"
+        },
+        "last_hook_status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "last_hook_payload": {
+          "type": "string"
+        },
+        "backoffs_count": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "commonContext": {
       "type": "object",
       "properties": {
@@ -5142,61 +5197,6 @@
           "items": {
             "$ref": "#/definitions/userVisitor"
           }
-        }
-      }
-    },
-    "webhook4Webhook": {
-      "type": "object",
-      "properties": {
-        "ctx": {
-          "$ref": "#/definitions/commonContext"
-        },
-        "account_id": {
-          "type": "string"
-        },
-        "client_id": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        },
-        "secret": {
-          "type": "string"
-        },
-        "events": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "state": {
-          "type": "string"
-        },
-        "last_hook_at": {
-          "type": "string",
-          "format": "int64"
-        },
-        "last_hook_id": {
-          "type": "string",
-          "format": "int64"
-        },
-        "events_count": {
-          "type": "string",
-          "format": "int64"
-        },
-        "last_hook_response": {
-          "type": "string"
-        },
-        "last_hook_status": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "last_hook_payload": {
-          "type": "string"
-        },
-        "backoffs_count": {
-          "type": "string",
-          "format": "int64"
         }
       }
     },
