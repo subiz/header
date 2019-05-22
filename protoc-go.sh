@@ -78,8 +78,6 @@ wait
 LC_NUMERIC="en_US.UTF-8" printf "\e[32mDone \e[32m(%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
 
 
-LC_NUMERIC="en_US.UTF-8" printf "\e[32m\nDone (%.1f sec)\e[m\n" $(echo "$(date +%s.%N) - $starttime" | bc)
-
 #./protoc --python_out=plugins:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i
 # ./protoc -I=$GOPATH/src --java_out=. $GOPATH/src/bitbucket.org/subiz/header/$LAST_DIR/$i
 
