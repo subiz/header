@@ -264,8 +264,8 @@ message Automation {
 
 	}
 
-	string action_data = 14;
-	string scope = 15;
+	string action_data = 14; // deprecated
+	string scope = 15; // deprecated
 	enum AutomationScope {
 		conversation = 0;
 		user = 3;
@@ -296,6 +296,7 @@ message AutomationAction {
 		add_user_to_segmentation = 15; // segmentation_id
 		remove_user_from_segmentation = 16; // segmentation_id
 		send_chat_transcript_email = 17; // prop email
+		update_conversation_state = 18; // prop conversation_state
 	}
 	string type = 2;
 
@@ -311,6 +312,9 @@ message AutomationAction {
 	string segmentation_id = 13;
 	repeated string agent_ids = 14;
 	repeated string tag_ids = 15;
+	string scope = 16;
+	string conversation_state = 17;
+	string id = 18; // to check whether an action is performed or not
 }
 
 message Automations {

@@ -2791,6 +2791,15 @@
           "items": {
             "type": "string"
           }
+        },
+        "scope": {
+          "type": "string"
+        },
+        "conversation_state": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
         }
       }
     },
