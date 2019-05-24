@@ -928,15 +928,11 @@
         "last_hook_payload": {
           "type": "string"
         },
-        "backoffs_count": {
-          "type": "string",
-          "format": "int64"
-        },
         "is_verified": {
           "type": "boolean",
           "format": "boolean"
         },
-        "modifed": {
+        "modified": {
           "type": "string",
           "format": "int64"
         },
@@ -944,9 +940,26 @@
           "type": "string",
           "format": "int64"
         },
+        "creator": {
+          "type": "string"
+        },
         "is_enabled": {
           "type": "boolean",
           "format": "boolean"
+        }
+      }
+    },
+    "clientWebhooks": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "webhooks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/clientWebhook"
+          }
         }
       }
     },

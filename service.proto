@@ -438,4 +438,8 @@ service ServiceAvatarManager {
 // webhook services
 service WebhookService {
 	rpc Read(common.Id) returns (client.Webhook);
+	rpc Delete(common.Id) returns (common.Empty);
+	rpc List(common.Id) returns (client.Webhooks);
+	rpc Update(client.Webhook) returns (client.Webhook);
+	rpc Create(client.Webhook) returns (client.Webhook);
 }

@@ -66,6 +66,11 @@ message AuthorizedClient {
 	optional string kind = 6;
 }
 
+message Webhooks {
+	optional common.Context ctx = 1;
+	repeated Webhook webhooks = 2;
+}
+
 message Webhook {
 	optional common.Context ctx = 1;
 	optional string account_id = 12;
@@ -86,12 +91,12 @@ message Webhook {
 	optional string last_hook_response = 14;
 	optional int32 last_hook_status = 15;
 	optional string last_hook_payload = 16;
-	optional int64 backoffs_count = 17;
 
 	optional bool is_verified = 18;
-	optional int64 modifed = 19;
+	optional int64 modified = 19;
 	optional int64 created = 20;
-	optional bool is_enabled = 21;
+	optional string creator = 21;
+	optional bool is_enabled = 22;
 }
 
 message WebhookPayload {
