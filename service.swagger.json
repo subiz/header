@@ -2763,6 +2763,9 @@
         "delay_sec": {
           "type": "integer",
           "format": "int64"
+        },
+        "action_id": {
+          "type": "string"
         }
       }
     },

@@ -276,6 +276,7 @@ message Automation {
 
 	repeated AutomationAction actions = 18;
 	uint32 delay_sec = 19;
+	string action_id = 20; // deprecated, prepare for migrate
 }
 
 message AutomationAction {
