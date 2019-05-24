@@ -227,6 +227,8 @@ enum E {
 
 	ClientUpserted = 104025;
 	ClientDeleted = 104026;
+	AutomationWebhookDeleted = 104027;
+	AutomationWebhookUpserted = 104029;
 
 	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
 	ClientRequested = 104030;
