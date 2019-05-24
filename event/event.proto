@@ -315,6 +315,9 @@ message AutomationAction {
 	string scope = 16;
 	string conversation_state = 17;
 	string id = 18; // to check whether an action is performed or not
+	string webhook_url = 19;
+	string webhook_verify_token = 20;
+	bool verified_webhook = 21;
 }
 
 message Automations {

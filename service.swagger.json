@@ -914,10 +914,6 @@
           "type": "string",
           "format": "int64"
         },
-        "last_hook_id": {
-          "type": "string",
-          "format": "int64"
-        },
         "events_count": {
           "type": "string",
           "format": "int64"
@@ -935,6 +931,22 @@
         "backoffs_count": {
           "type": "string",
           "format": "int64"
+        },
+        "is_verified": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "modifed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
@@ -2800,6 +2812,16 @@
         },
         "id": {
           "type": "string"
+        },
+        "webhook_url": {
+          "type": "string"
+        },
+        "webhook_verify_token": {
+          "type": "string"
+        },
+        "verified_webhook": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },
