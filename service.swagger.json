@@ -950,6 +950,9 @@
         "is_protected": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "challenge": {
+          "type": "string"
         }
       }
     },
