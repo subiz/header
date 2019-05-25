@@ -946,6 +946,10 @@
         "is_enabled": {
           "type": "boolean",
           "format": "boolean"
+        },
+        "is_protected": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

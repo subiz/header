@@ -97,6 +97,7 @@ message Webhook {
 	optional int64 created = 20;
 	optional string creator = 21;
 	optional bool is_enabled = 22;
+	optional bool is_protected = 23;
 }
 
 message WebhookPayload {
