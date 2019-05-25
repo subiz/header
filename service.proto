@@ -442,4 +442,5 @@ service WebhookService {
 	rpc List(common.Id) returns (client.Webhooks);
 	rpc Update(client.Webhook) returns (client.Webhook);
 	rpc Create(client.Webhook) returns (client.Webhook);
+	rpc Test(common.Id) returns (client.WebhookTestResult);
 }

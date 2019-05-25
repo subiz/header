@@ -956,6 +956,34 @@
         }
       }
     },
+    "clientWebhookTestResult": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "response_body": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "latency": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "clientWebhooks": {
       "type": "object",
       "properties": {

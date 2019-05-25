@@ -121,3 +121,13 @@ message WebhookBackoff {
 	optional int32 parition = 3;
 	optional int32 num_back_off = 4;
 }
+
+message WebhookTestResult {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string client_id = 3;
+	optional string response_body = 14;
+	optional int32 status = 15;
+	optional string payload = 16;
+	optional int64 latency = 17; // seconds
+}

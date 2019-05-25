@@ -116,6 +116,7 @@ enum E {
 	AutomationSendChatTranscriptEmailFired = 111434;
 	AutomationSendChatTranscriptEmailResolved = 111435;
 	AutomationUpdateConversationStateFired = 111436;
+	AutomationSendWebhookFired =  111437;
 
 	// AutomationAgentNotificationFired = 54;
 	AutomationAddUserToSegmentationFired = 111231;
