@@ -2829,15 +2829,11 @@
         "id": {
           "type": "string"
         },
-        "webhook_url": {
+        "webhook_id": {
           "type": "string"
         },
-        "webhook_verify_token": {
-          "type": "string"
-        },
-        "verified_webhook": {
-          "type": "boolean",
-          "format": "boolean"
+        "webhook_setting": {
+          "$ref": "#/definitions/eventAutomationWebhookSetting"
         }
       }
     },
@@ -2889,6 +2885,67 @@
         "month": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "eventAutomationWebhookSetting": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "agent": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "message": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "conversation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "postback": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "content": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "user": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "group": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "limit": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "user_attribute": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "note": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "ticket": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "automation": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "event": {
+          "type": "boolean",
+          "format": "boolean"
         }
       }
     },

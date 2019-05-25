@@ -316,9 +316,25 @@ message AutomationAction {
 	string scope = 16;
 	string conversation_state = 17;
 	string id = 18; // to check whether an action is performed or not
-	string webhook_url = 19;
-	string webhook_verify_token = 20;
-	bool verified_webhook = 21;
+	string webhook_id = 19;
+	AutomationWebhookSetting webhook_setting = 20;
+}
+
+message AutomationWebhookSetting {
+	bool account = 1;
+	bool agent = 2;
+	bool message = 3;
+	bool conversation = 4;
+	bool postback = 5;
+	bool content = 6;
+	bool user = 10;
+	bool group = 18;
+	bool limit = 19;
+	bool user_attribute = 20;
+	bool note = 23;
+	bool ticket = 24;
+	bool automation = 25;
+	bool event = 26;
 }
 
 message Automations {
