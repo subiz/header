@@ -928,10 +928,6 @@
         "last_hook_payload": {
           "type": "string"
         },
-        "is_verified": {
-          "type": "boolean",
-          "format": "boolean"
-        },
         "modified": {
           "type": "string",
           "format": "int64"
@@ -950,9 +946,6 @@
         "is_protected": {
           "type": "boolean",
           "format": "boolean"
-        },
-        "challenge": {
-          "type": "string"
         }
       }
     },
