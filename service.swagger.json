@@ -2923,6 +2923,33 @@
         }
       }
     },
+    "eventAutomationEvent": {
+      "type": "object",
+      "properties": {
+        "ctx": {
+          "$ref": "#/definitions/commonContext"
+        },
+        "account_id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "automation": {
+          "$ref": "#/definitions/eventAutomation"
+        },
+        "user": {
+          "$ref": "#/definitions/userUser",
+          "title": "user.Session session = 6;"
+        },
+        "event": {
+          "$ref": "#/definitions/eventEvent"
+        },
+        "action": {
+          "$ref": "#/definitions/eventAutomationAction"
+        }
+      }
+    },
     "eventAutomationWebhookSetting": {
       "type": "object",
       "properties": {
@@ -3128,6 +3155,9 @@
         },
         "message_received": {
           "$ref": "#/definitions/conversationReceived"
+        },
+        "automation_event": {
+          "$ref": "#/definitions/eventAutomationEvent"
         }
       }
     },

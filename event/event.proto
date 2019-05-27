@@ -74,6 +74,7 @@ message Event {
 		conversation.Seen message_seen = 27;
 		conversation.Ack message_ack = 28;
 		conversation.Received message_received = 29;
+		AutomationEvent automation_event = 30;
 	}
 	Data data = 20;
 }
@@ -120,6 +121,7 @@ enum EventType {
 	user_attribute_updated = 52;
 	user_attribute_deleted = 55;
 	automation_out_of_credit = 70;
+	automation_fired = 71;
 }
 
 enum WidgetType {
