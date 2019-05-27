@@ -81,9 +81,9 @@ message Webhook {
 	repeated string events = 6;
 	optional string state = 7;
 	enum State {
-		normal = 0;
-		backoff = 1;
-		inactive = 2;
+		active = 0;
+		backoff_sleep = 1;
+		dead = 2;
 	}
 
 	optional int64 last_hook_at = 9;
