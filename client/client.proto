@@ -107,17 +107,12 @@ message WebhookPayload {
 	optional string event = 5;
 }
 
-message WebhookFire {
-	optional common.Context ctx = 1;
-	optional string client_id = 2;
-	optional bytes payload = 3;
-}
-
 message WebhookBackoff {
 	optional common.Context ctx = 1;
-	optional string worker_id = 2;
-	optional int32 parition = 3;
-	optional int32 num_back_off = 4;
+	optional string account_id = 2;
+	optional string worker_id = 3;
+	optional int32 num_back_off = 5;
+	optional string backoff_id = 6; // to make sure there is one backoff per webhook
 }
 
 message WebhookTestResult {

@@ -275,6 +275,7 @@ enum E {
 	Webhook4Send = 109012;
 	Webhook4Callbacked = 109013;
 	Webhook4RequestResolved = 109014;
+	Webhook4RestartRequested = 109015;
 
 	PubsubSynced = 11000;
 	PubsubRequested = 11001;
