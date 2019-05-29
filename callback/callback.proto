@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-// schedule help publish a kafka event in future
 package callback;
 
 message Task {
@@ -10,6 +9,7 @@ message Task {
 	// node: new Date() * 1000000
 	int64 callback_sec = 3;
 
+	// kafka topic
 	string topic = 4;
 
 	// Data is value of kafka event in bytes
@@ -18,7 +18,8 @@ message Task {
 	// kafka key
 	string key = 6;
 
-	int32 parittion = 7; // -1, auto calculate using key
+	// kafka partition
+	int32 partition = 7; // -1, auto calculate using key
 
 	int64 called = 8; // internal use only
 }
