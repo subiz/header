@@ -112,9 +112,10 @@ message WebhookPayload {
 message WebhookBackoff {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	optional string worker_id = 3;
 	optional int32 num_back_off = 5;
 	optional string backoff_id = 6; // to make sure there is one backoff per webhook
+	optional string webhook_id = 7;
+	optional int32 partition = 8;
 }
 
 message WebhookTestResult {
