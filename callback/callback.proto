@@ -15,7 +15,10 @@ message Task {
 	// Data is value of kafka event in bytes
 	bytes data = 5;
 
+	// kafka key
 	string key = 6;
+
+	int32 parittion = 7; // -1, auto calculate using key
 
 	int64 called = 8; // internal use only
 }
