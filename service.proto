@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package header;
 
-option go_package = "github.com/subiz/header";
-
 import "common.proto";
 import "user3.proto";
 import "user.proto";

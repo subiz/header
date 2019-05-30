@@ -6,26 +6,28 @@ package header
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/subiz/header/account"
-	_ "github.com/subiz/header/api"
-	_ "github.com/subiz/header/auth"
-	_ "github.com/subiz/header/avatar"
-	_ "github.com/subiz/header/client"
-	_ "github.com/subiz/header/common"
-	_ "github.com/subiz/header/content"
-	_ "github.com/subiz/header/conversation"
-	_ "github.com/subiz/header/deal"
-	_ "github.com/subiz/header/event"
-	_ "github.com/subiz/header/file"
-	_ "github.com/subiz/header/kafpc"
-	_ "github.com/subiz/header/kv"
-	_ "github.com/subiz/header/noti5"
-	_ "github.com/subiz/header/notibox"
-	_ "github.com/subiz/header/payment"
-	_ "github.com/subiz/header/placeholder"
-	_ "github.com/subiz/header/pubsub"
-	_ "github.com/subiz/header/user"
-	_ "github.com/subiz/header/widget"
+	account "github.com/subiz/header/account"
+	api "github.com/subiz/header/api"
+	auth "github.com/subiz/header/auth"
+	avatar "github.com/subiz/header/avatar"
+	client "github.com/subiz/header/client"
+	common "github.com/subiz/header/common"
+	content "github.com/subiz/header/content"
+	conversation "github.com/subiz/header/conversation"
+	deal "github.com/subiz/header/deal"
+	event "github.com/subiz/header/event"
+	file "github.com/subiz/header/file"
+	kafpc "github.com/subiz/header/kafpc"
+	kv "github.com/subiz/header/kv"
+	noti5 "github.com/subiz/header/noti5"
+	notibox "github.com/subiz/header/notibox"
+	payment "github.com/subiz/header/payment"
+	placeholder "github.com/subiz/header/placeholder"
+	pubsub "github.com/subiz/header/pubsub"
+	user "github.com/subiz/header/user"
+	widget "github.com/subiz/header/widget"
+	context "golang.org/x/net/context"
+	grpc "google.golang.org/grpc"
 	math "math"
 )
 
@@ -43,241 +45,9975 @@ const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 func init() { proto.RegisterFile("service.proto", fileDescriptor_a0b84a42fa06f626) }
 
 var fileDescriptor_a0b84a42fa06f626 = []byte{
-	// 3776 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x5b, 0xcd, 0x73, 0x1b, 0xc7,
-	0x95, 0x5f, 0x52, 0x34, 0x3f, 0x1e, 0x40, 0x12, 0x68, 0x50, 0x22, 0x09, 0xc9, 0x96, 0xf5, 0x61,
-	0xc9, 0xfa, 0x20, 0x28, 0x43, 0x92, 0x25, 0x59, 0x96, 0x25, 0x90, 0xa2, 0x28, 0xad, 0x28, 0x19,
-	0x26, 0x40, 0x79, 0x77, 0xab, 0xb6, 0x5c, 0x83, 0x41, 0x13, 0x9c, 0xe5, 0x60, 0x06, 0x3b, 0x3d,
-	0x80, 0x04, 0xdf, 0x76, 0xab, 0x52, 0x39, 0x26, 0xa7, 0xdc, 0x72, 0x48, 0xb9, 0xf2, 0x17, 0x24,
-	0x95, 0x4a, 0xf9, 0x96, 0xaa, 0x1c, 0x72, 0xcb, 0x21, 0xe7, 0x5c, 0x52, 0xb9, 0xf9, 0x9e, 0x4b,
-	0x52, 0xa9, 0x54, 0x7f, 0xcd, 0x4c, 0xf7, 0xcc, 0x80, 0x18, 0xca, 0xc9, 0x0d, 0xfd, 0xde, 0xef,
-	0xbd, 0x7e, 0xfd, 0xba, 0xfb, 0xf5, 0x7b, 0x3d, 0x0d, 0x98, 0x27, 0xd8, 0x1b, 0x58, 0x26, 0xae,
-	0xf4, 0x3c, 0xd7, 0x77, 0xd1, 0xf4, 0x01, 0x36, 0xda, 0xd8, 0x2b, 0xe7, 0x4d, 0xb7, 0xdb, 0x75,
-	0x1d, 0x4e, 0x2d, 0xe7, 0xfa, 0x04, 0x7b, 0x37, 0x45, 0x03, 0x68, 0x43, 0xfe, 0x36, 0xfa, 0xfe,
-	0x81, 0xf8, 0x8d, 0x4c, 0xd7, 0x19, 0x60, 0x8f, 0x18, 0xbe, 0x15, 0x08, 0xe6, 0x4d, 0xdb, 0xc2,
-	0x8e, 0x2f, 0x5a, 0xf3, 0xa6, 0xeb, 0xf8, 0x61, 0x13, 0xda, 0xd8, 0xb0, 0x65, 0x0f, 0x78, 0x10,
-	0x61, 0xec, 0x5b, 0x36, 0x96, 0x8c, 0x43, 0x63, 0xbf, 0x67, 0x8a, 0xc6, 0xec, 0xe1, 0x40, 0x2a,
-	0xee, 0xf5, 0x5b, 0xa4, 0xdf, 0x12, 0xad, 0x62, 0xcf, 0x36, 0x4c, 0x7c, 0xe0, 0xda, 0xed, 0xc0,
-	0xb2, 0xf9, 0x9e, 0x31, 0xec, 0x46, 0xba, 0x76, 0x5c, 0xdf, 0x6a, 0xb9, 0x6f, 0xa4, 0x56, 0xda,
-	0xbc, 0x2d, 0x75, 0xbd, 0xb6, 0xda, 0x1d, 0x1c, 0x20, 0x0d, 0xd3, 0x74, 0xfb, 0x81, 0x60, 0xde,
-	0x18, 0x18, 0xbe, 0x21, 0xb5, 0xce, 0x19, 0x3d, 0x8b, 0xff, 0xac, 0xde, 0x80, 0xb9, 0x5a, 0xcf,
-	0x6a, 0x60, 0x6f, 0x80, 0x3d, 0x74, 0x01, 0xa6, 0x36, 0x0d, 0xdb, 0x46, 0xf9, 0x0a, 0x05, 0xec,
-	0xe2, 0xff, 0xed, 0x63, 0xe2, 0x97, 0xe7, 0x45, 0x8b, 0xf4, 0x5c, 0x87, 0xe0, 0xea, 0x16, 0xcc,
-	0xd5, 0x4c, 0xb3, 0xd1, 0x6f, 0xbd, 0xe8, 0x78, 0xe8, 0x2e, 0xcc, 0x35, 0xb0, 0xe1, 0x99, 0x07,
-	0x8d, 0x7e, 0x0b, 0xad, 0x56, 0x64, 0xa7, 0x01, 0x4d, 0xea, 0x28, 0x04, 0x2c, 0x2e, 0x4b, 0xaa,
-	0x7f, 0xcd, 0x01, 0xd4, 0x38, 0x8d, 0x2a, 0xba, 0x03, 0xb9, 0x4d, 0x0f, 0x1b, 0x3e, 0xde, 0xf6,
-	0xdc, 0x7e, 0x0f, 0x95, 0x42, 0x7c, 0x07, 0x3b, 0x3e, 0x23, 0x96, 0x93, 0x88, 0x54, 0x70, 0xaf,
-	0xd7, 0x3e, 0x86, 0xe0, 0x35, 0x98, 0xdd, 0xc6, 0xe2, 0x37, 0x54, 0xc4, 0x42, 0x79, 0xd6, 0x4e,
-	0x06, 0x3f, 0x86, 0x25, 0x31, 0x94, 0x5d, 0x4c, 0xb0, 0x5f, 0x37, 0x08, 0x79, 0xed, 0x7a, 0x6d,
-	0xf4, 0x6e, 0x00, 0x56, 0xe8, 0xa1, 0xeb, 0x84, 0xde, 0xad, 0x6e, 0xcf, 0x1f, 0xa2, 0x8f, 0x61,
-	0x81, 0xdb, 0x1a, 0xc8, 0x2f, 0x05, 0xf2, 0x2f, 0xf1, 0x6b, 0x49, 0x2d, 0x2f, 0xa8, 0x26, 0xa0,
-	0x35, 0x39, 0x46, 0xde, 0xd4, 0xd8, 0x31, 0xf8, 0x15, 0xc8, 0x3d, 0xc6, 0x36, 0x96, 0xf0, 0xe8,
-	0xe0, 0x74, 0xe8, 0x4d, 0x40, 0xc2, 0xd6, 0xcd, 0x03, 0xc3, 0xe9, 0xe0, 0xad, 0xae, 0x61, 0xd9,
-	0xb1, 0x0e, 0xb4, 0x61, 0xdc, 0x02, 0xb4, 0xe9, 0x3a, 0xfb, 0x96, 0xd7, 0x4d, 0x16, 0x6a, 0xba,
-	0x87, 0xd8, 0x89, 0x75, 0x75, 0x17, 0x0a, 0x35, 0xd3, 0xc4, 0x3d, 0xff, 0x99, 0x33, 0xb0, 0x7c,
-	0xb6, 0xbd, 0xc6, 0x1c, 0xfe, 0x3a, 0xcc, 0x6f, 0xe3, 0xa8, 0xd8, 0x51, 0x5d, 0xad, 0x41, 0x8e,
-	0xa1, 0xc7, 0xf4, 0xd7, 0x25, 0xb6, 0x12, 0x8e, 0x76, 0x56, 0x15, 0x16, 0xc4, 0xb8, 0xc5, 0xc2,
-	0x8d, 0x19, 0xa2, 0x2c, 0x73, 0x86, 0xb8, 0x0a, 0x40, 0x75, 0x8b, 0x56, 0x54, 0x7b, 0x1c, 0x7b,
-	0x13, 0xe6, 0xc5, 0x34, 0x0b, 0x42, 0x0c, 0x92, 0x20, 0xf4, 0x08, 0xe6, 0xf9, 0xc6, 0x91, 0x84,
-	0x70, 0x49, 0x2a, 0xf4, 0xc4, 0x9d, 0xc8, 0x04, 0xae, 0x00, 0xec, 0x58, 0x84, 0x8f, 0x9f, 0x28,
-	0x26, 0x2e, 0xaa, 0x0e, 0x20, 0x68, 0x1d, 0x60, 0xf3, 0x00, 0x9b, 0x87, 0x3b, 0x6e, 0xc7, 0x72,
-	0xd0, 0xc9, 0x80, 0xcd, 0xda, 0xb2, 0x87, 0x88, 0x06, 0x54, 0x81, 0x77, 0x46, 0x62, 0x75, 0x17,
-	0x7f, 0x28, 0x97, 0x6e, 0x7c, 0x5f, 0x6a, 0x8b, 0xb0, 0xc2, 0xad, 0x66, 0x38, 0xd5, 0xea, 0xa5,
-	0x84, 0x0d, 0x4c, 0xd0, 0xc7, 0xb0, 0x58, 0x6b, 0xb7, 0x19, 0xa5, 0xe9, 0x72, 0xed, 0x21, 0x90,
-	0xb5, 0x5f, 0xe0, 0x6e, 0x0b, 0x7b, 0x7a, 0x3f, 0xf7, 0xe9, 0xce, 0xef, 0xba, 0x03, 0xbe, 0x96,
-	0x9e, 0x78, 0x6e, 0x37, 0x83, 0xf0, 0x15, 0x98, 0xaa, 0x5b, 0x4e, 0x07, 0x95, 0x24, 0x99, 0xb6,
-	0xe4, 0xd8, 0xf3, 0x01, 0xd1, 0x75, 0x3a, 0x74, 0xcd, 0x8e, 0xda, 0x82, 0xba, 0xa3, 0xee, 0x43,
-	0xf1, 0x8b, 0x3e, 0xf6, 0x86, 0x1b, 0xc3, 0xcf, 0x5b, 0xff, 0x83, 0x4d, 0xbf, 0x6e, 0xf8, 0x07,
-	0x68, 0x55, 0x6a, 0x0c, 0x69, 0xb2, 0xb3, 0x5c, 0xe8, 0x20, 0x82, 0x2a, 0x90, 0x7f, 0xe6, 0xf8,
-	0xb8, 0xe3, 0x19, 0x3e, 0xde, 0x70, 0x8f, 0xde, 0x20, 0x75, 0x40, 0x8d, 0xa1, 0x63, 0xd6, 0xfb,
-	0x2d, 0xdb, 0x32, 0x9f, 0xba, 0xb6, 0xd5, 0x36, 0x86, 0x04, 0x9d, 0x0f, 0xc3, 0x7d, 0x8c, 0x29,
-	0xbb, 0x3d, 0x15, 0x60, 0x36, 0xfa, 0xc4, 0x72, 0x30, 0x21, 0x4f, 0xdd, 0xbe, 0x47, 0xaa, 0x7f,
-	0x98, 0x82, 0xdc, 0x66, 0xdf, 0xf3, 0xb0, 0x63, 0x0e, 0x69, 0xf8, 0xbf, 0x05, 0x0b, 0x74, 0x36,
-	0x05, 0xc9, 0xc2, 0x04, 0xa9, 0x9e, 0x8c, 0x44, 0xe5, 0x08, 0xe6, 0x3a, 0xe4, 0xb6, 0xb1, 0x14,
-	0x1a, 0x2a, 0x8b, 0xa0, 0xa8, 0xe3, 0x59, 0xf4, 0xe5, 0x3b, 0x22, 0xa0, 0xc4, 0x41, 0x29, 0x72,
-	0x7c, 0x5b, 0x66, 0x94, 0xbb, 0x06, 0x0b, 0x7c, 0x2d, 0x27, 0x1a, 0xa8, 0xad, 0x94, 0x67, 0x50,
-	0xa4, 0x0e, 0xd8, 0x7a, 0x63, 0xb2, 0x45, 0xb0, 0x6b, 0xf8, 0x98, 0xa0, 0x33, 0x81, 0xd2, 0x28,
-	0x3d, 0xee, 0x5b, 0x55, 0xea, 0x09, 0x2c, 0x6e, 0x63, 0x45, 0xd3, 0x11, 0x8a, 0x4e, 0x26, 0x72,
-	0xd1, 0x06, 0x20, 0xee, 0x2f, 0x85, 0x9a, 0x0c, 0x4e, 0xd3, 0x51, 0x03, 0xc4, 0x7d, 0x90, 0xc1,
-	0x9c, 0x63, 0xef, 0xa1, 0xea, 0x9f, 0xa6, 0x60, 0x66, 0x8f, 0x60, 0x8f, 0xae, 0xa8, 0xcf, 0x20,
-	0xc7, 0xb3, 0x10, 0x4a, 0x20, 0x68, 0xb9, 0xc2, 0xf2, 0x3d, 0xda, 0xe0, 0xe4, 0xd0, 0x8b, 0x31,
-	0x06, 0xe9, 0xdb, 0x3e, 0xfa, 0x18, 0x50, 0xdd, 0x32, 0x0f, 0x9b, 0x6e, 0x03, 0x77, 0x68, 0x06,
-	0xc6, 0x4f, 0x9e, 0x22, 0x47, 0x53, 0x4e, 0x8a, 0xb9, 0x9f, 0xc2, 0x29, 0x3e, 0x62, 0x1a, 0x2a,
-	0x14, 0xd9, 0x92, 0xe8, 0xc9, 0xe9, 0xa5, 0x4b, 0x5f, 0x04, 0xe0, 0x3e, 0xa7, 0xf6, 0x20, 0x08,
-	0x6d, 0x53, 0xa2, 0xea, 0x45, 0x00, 0xbe, 0x22, 0x47, 0xa2, 0xce, 0xc3, 0xec, 0x2e, 0x36, 0xda,
-	0x02, 0x13, 0xae, 0xbc, 0x08, 0x1e, 0xed, 0xc3, 0xfb, 0x9b, 0x74, 0x22, 0xa2, 0x86, 0x52, 0xc6,
-	0xc6, 0xb0, 0xe6, 0xfb, 0x9e, 0xd5, 0xea, 0xfb, 0x18, 0xad, 0x71, 0xfc, 0x51, 0x38, 0x39, 0xa2,
-	0x52, 0x04, 0x2e, 0x93, 0x46, 0xf4, 0x10, 0x80, 0x11, 0x9a, 0xae, 0x6f, 0xd8, 0x72, 0x32, 0x42,
-	0x8a, 0x94, 0x5d, 0x89, 0x33, 0x84, 0x82, 0x0c, 0x91, 0xf4, 0x12, 0xcc, 0xd2, 0x48, 0x6f, 0x5b,
-	0x06, 0x41, 0x39, 0xae, 0x90, 0x35, 0x74, 0x5f, 0xdf, 0x86, 0xc2, 0x0b, 0x77, 0xc0, 0x7c, 0x58,
-	0x33, 0x7d, 0x6b, 0x60, 0xf9, 0x43, 0x84, 0x38, 0xfe, 0x05, 0xf6, 0x3a, 0x29, 0xeb, 0xb1, 0xfa,
-	0xdd, 0x04, 0xc0, 0x2b, 0x8b, 0x58, 0xbe, 0xcb, 0xd6, 0xd9, 0x55, 0xc8, 0x53, 0x2f, 0xd7, 0x3d,
-	0x4c, 0xb0, 0x63, 0x62, 0x2d, 0x81, 0xe0, 0xab, 0x45, 0xf2, 0xae, 0x07, 0xf9, 0xdf, 0x38, 0xe8,
-	0x2b, 0x90, 0x13, 0x9a, 0x07, 0x16, 0x7e, 0x9d, 0x04, 0xdd, 0x31, 0x88, 0xff, 0x8a, 0xf2, 0xd6,
-	0x60, 0x91, 0x46, 0x8f, 0xa6, 0xdb, 0x13, 0x96, 0x91, 0x24, 0x78, 0xc0, 0xcb, 0xb0, 0xa5, 0x7e,
-	0x3c, 0x01, 0xa5, 0x5a, 0xdf, 0x77, 0xbb, 0x6c, 0xca, 0x37, 0x3d, 0xdc, 0xb6, 0x58, 0xbe, 0xfe,
-	0x09, 0x94, 0x68, 0x5e, 0xa3, 0x71, 0x94, 0x5e, 0x97, 0x2b, 0xbc, 0x1a, 0x8a, 0x81, 0x1e, 0x40,
-	0x89, 0x4e, 0x90, 0x4e, 0x4e, 0xc3, 0xeb, 0x13, 0xf0, 0xed, 0x04, 0xcc, 0xbc, 0x74, 0x7d, 0x4c,
-	0xcd, 0xb8, 0x01, 0x73, 0x74, 0xe0, 0xb4, 0x49, 0x90, 0xd8, 0xca, 0x01, 0x21, 0x3c, 0xfb, 0x18,
-	0x9d, 0x83, 0xce, 0xc1, 0x4c, 0xad, 0xdd, 0xa6, 0xbf, 0xe5, 0xc6, 0xa1, 0xbf, 0xcb, 0x91, 0xdf,
-	0xe1, 0xf6, 0x1a, 0x89, 0xba, 0x05, 0xc0, 0x37, 0x3a, 0x6b, 0x89, 0x25, 0x1d, 0x52, 0x52, 0x56,
-	0xcf, 0x6f, 0x26, 0x61, 0x3e, 0x1c, 0x20, 0x1d, 0xc2, 0x47, 0x7c, 0xee, 0x42, 0xa2, 0x3a, 0x77,
-	0x28, 0xe6, 0x15, 0x42, 0x53, 0x69, 0x91, 0x28, 0x06, 0x44, 0x54, 0x8c, 0xe1, 0xca, 0x71, 0x12,
-	0x5a, 0x83, 0x82, 0x28, 0x0d, 0x42, 0xda, 0x88, 0x53, 0x69, 0x1d, 0x16, 0xe8, 0x12, 0x4c, 0x01,
-	0x27, 0xe8, 0xbf, 0x0b, 0x05, 0x91, 0x75, 0x66, 0xb5, 0x2c, 0xc3, 0x9a, 0xfc, 0x6e, 0x12, 0xf2,
-	0x41, 0xd8, 0xa1, 0x2e, 0xdc, 0x82, 0x15, 0xe6, 0x42, 0x49, 0x7b, 0x8c, 0xf7, 0x2d, 0xc7, 0xe2,
-	0xbe, 0xd2, 0xf2, 0x88, 0xb2, 0x08, 0x08, 0x49, 0xd0, 0x2f, 0x60, 0x55, 0x18, 0x1f, 0xe7, 0xa2,
-	0xd5, 0x54, 0xc1, 0x72, 0x3a, 0x8b, 0xaa, 0x14, 0x33, 0xf5, 0xbd, 0xa9, 0xdc, 0x84, 0x55, 0x31,
-	0x85, 0x09, 0x4c, 0x65, 0x19, 0x52, 0xc0, 0xdb, 0x1f, 0xaa, 0xdf, 0x4e, 0xc2, 0x62, 0x34, 0xec,
-	0xf3, 0x6a, 0x5d, 0x14, 0x1d, 0x82, 0x21, 0xe3, 0x66, 0x14, 0x57, 0x4e, 0xa0, 0x51, 0x41, 0xee,
-	0x8f, 0xac, 0x82, 0xeb, 0x90, 0xa7, 0x53, 0x2c, 0x68, 0x44, 0xab, 0xd8, 0x63, 0x78, 0x82, 0xae,
-	0xc2, 0x3c, 0xf7, 0x82, 0xec, 0x69, 0xc4, 0x32, 0x5f, 0xe3, 0x91, 0x36, 0x09, 0x99, 0x64, 0x4b,
-	0x06, 0xe7, 0xfd, 0x6c, 0x02, 0xa6, 0xea, 0xd8, 0xeb, 0xa2, 0x0a, 0x4c, 0xf3, 0x81, 0xa3, 0xe5,
-	0x0a, 0xbb, 0x6d, 0x12, 0x07, 0x01, 0xf6, 0xba, 0x61, 0x98, 0x62, 0x0c, 0x59, 0x63, 0x8b, 0x92,
-	0xbf, 0xe1, 0x53, 0xa1, 0x95, 0xa8, 0x10, 0x23, 0x25, 0x4a, 0xdd, 0xe4, 0x47, 0x3e, 0xeb, 0xf1,
-	0x24, 0x67, 0xc8, 0x76, 0xa4, 0xfe, 0xa3, 0x64, 0x4a, 0xb2, 0x08, 0xb1, 0x5c, 0xa7, 0xfa, 0xcd,
-	0x14, 0x2c, 0x6d, 0x46, 0x2e, 0xbd, 0x76, 0x71, 0xcf, 0xf5, 0x7c, 0xec, 0xa1, 0xaf, 0x60, 0x85,
-	0x9d, 0xc4, 0x51, 0x26, 0xd9, 0x18, 0x36, 0x8d, 0x0e, 0x41, 0xef, 0x57, 0x94, 0x7b, 0x32, 0x86,
-	0xe3, 0x2c, 0xd9, 0xd1, 0xb9, 0x11, 0x08, 0x71, 0xa8, 0xb7, 0xf8, 0x21, 0x32, 0xe8, 0x48, 0x4a,
-	0xd3, 0xea, 0x62, 0x82, 0x2e, 0xaa, 0x92, 0x1a, 0x5f, 0xea, 0xff, 0xe0, 0x08, 0x94, 0xe8, 0x03,
-	0xc3, 0xd2, 0x36, 0xe6, 0xc9, 0x44, 0x74, 0x1c, 0x63, 0x76, 0x72, 0x59, 0x45, 0xc5, 0xd4, 0x1c,
-	0x27, 0x3f, 0xd9, 0x83, 0x12, 0x77, 0xb1, 0xe2, 0xd7, 0x44, 0x8f, 0x72, 0x9c, 0x54, 0x73, 0x46,
-	0x45, 0x48, 0xa6, 0xb0, 0xe0, 0xbf, 0x69, 0xa1, 0x4a, 0x29, 0xb5, 0x81, 0x61, 0xd9, 0x56, 0xcb,
-	0xb2, 0x2d, 0x9f, 0x16, 0x49, 0x97, 0xf5, 0x81, 0x06, 0xdc, 0x61, 0x06, 0xf5, 0x55, 0x1b, 0x0a,
-	0xac, 0x18, 0x94, 0xe9, 0xc9, 0x3f, 0x35, 0xf7, 0xa9, 0x7e, 0x33, 0x09, 0x33, 0xbb, 0x7d, 0x1b,
-	0xf3, 0xda, 0x50, 0x1c, 0xc7, 0x94, 0x80, 0x90, 0x66, 0x65, 0xdf, 0xc6, 0xe5, 0x04, 0x1a, 0x95,
-	0xe2, 0x21, 0x2a, 0x93, 0xd4, 0x65, 0x79, 0xa8, 0xb3, 0xd6, 0x88, 0x90, 0x71, 0x95, 0xef, 0xb4,
-	0x18, 0x2c, 0x49, 0xe9, 0x75, 0x9e, 0xa4, 0xd0, 0xdf, 0x7a, 0xe0, 0x52, 0xc1, 0x2e, 0x4d, 0xb7,
-	0x33, 0x44, 0x97, 0xdf, 0x4f, 0xc3, 0x62, 0x74, 0x11, 0x51, 0x6f, 0xdd, 0xa6, 0x75, 0x0f, 0x76,
-	0x5e, 0x60, 0x42, 0x8c, 0x0e, 0x8d, 0x36, 0x4a, 0x17, 0x82, 0x1c, 0x1f, 0xcf, 0x5d, 0x7a, 0xd2,
-	0x9b, 0xd8, 0x1a, 0xe0, 0xac, 0x92, 0xb7, 0x01, 0x6a, 0xe6, 0xa1, 0x94, 0x5a, 0x49, 0x94, 0xaa,
-	0x99, 0x87, 0xba, 0xd8, 0x73, 0x28, 0x36, 0x7c, 0x43, 0xdd, 0x04, 0xa8, 0xac, 0x4a, 0x33, 0x80,
-	0x1c, 0x7a, 0x59, 0xdf, 0x1f, 0x11, 0xb9, 0x7b, 0xb0, 0xb8, 0xe5, 0xb4, 0x15, 0x52, 0xd4, 0xcf,
-	0x47, 0x88, 0x6e, 0x63, 0xff, 0x58, 0xa2, 0xff, 0xc1, 0x6b, 0x76, 0x75, 0x1b, 0x5f, 0x52, 0x05,
-	0x62, 0x00, 0x39, 0x9c, 0xd3, 0xe9, 0x8a, 0x09, 0xfa, 0x04, 0x16, 0x9b, 0x46, 0x47, 0xe9, 0x4c,
-	0x73, 0x6c, 0xd3, 0xe8, 0xa4, 0x16, 0xa0, 0xc5, 0x3d, 0xc7, 0x3f, 0xae, 0xf4, 0x1d, 0x28, 0xfc,
-	0xbb, 0x6b, 0x39, 0x8a, 0xf0, 0x92, 0x3e, 0xa7, 0x49, 0x57, 0x5d, 0x77, 0xa0, 0xb0, 0x83, 0xf7,
-	0xfd, 0xec, 0x82, 0x17, 0x60, 0xba, 0x39, 0xec, 0xd1, 0x15, 0x3f, 0x62, 0xbb, 0x65, 0x08, 0xaf,
-	0x6f, 0x73, 0x33, 0x56, 0xfd, 0xf3, 0x24, 0xe4, 0x9a, 0xb8, 0xdb, 0xb3, 0x0d, 0x9e, 0x59, 0x66,
-	0xe8, 0xf7, 0x91, 0xbc, 0x5e, 0x92, 0xf2, 0xe8, 0x94, 0xe6, 0x74, 0x41, 0x2f, 0xa7, 0xd0, 0xa9,
-	0x06, 0x1e, 0xe8, 0x8e, 0xad, 0x21, 0xb8, 0x72, 0x0a, 0x28, 0x23, 0x7c, 0xfa, 0x11, 0xbb, 0x3d,
-	0x4b, 0x44, 0xa6, 0xe9, 0x7f, 0x02, 0xf3, 0xac, 0xce, 0x14, 0x6d, 0x82, 0xb4, 0x33, 0x83, 0xdf,
-	0xa0, 0x04, 0x66, 0x2e, 0x27, 0xab, 0x21, 0xd5, 0x9f, 0x4c, 0xc2, 0x74, 0xd3, 0xe8, 0xf0, 0xf2,
-	0x67, 0x4e, 0xb8, 0xcd, 0xe8, 0xa0, 0x62, 0x6c, 0x99, 0x96, 0xe3, 0x24, 0x2a, 0x22, 0xfc, 0x34,
-	0xb6, 0xc8, 0x25, 0x98, 0x13, 0x8e, 0x31, 0x3a, 0x47, 0x84, 0x75, 0x36, 0x40, 0x9a, 0xe2, 0x8c,
-	0x08, 0xeb, 0x8c, 0x7f, 0x19, 0xa6, 0xa9, 0xff, 0x34, 0x85, 0x09, 0x9d, 0x67, 0x88, 0xe8, 0xbf,
-	0x9b, 0x84, 0x05, 0x79, 0x35, 0x2b, 0x02, 0x3a, 0xbb, 0x12, 0xb7, 0xe4, 0x75, 0xed, 0x28, 0xe3,
-	0x3f, 0x81, 0x02, 0x35, 0x3e, 0x22, 0x4f, 0x46, 0xc5, 0x32, 0x05, 0x57, 0x83, 0xb9, 0xe0, 0x4a,
-	0x98, 0xed, 0x96, 0x64, 0x60, 0x39, 0x9d, 0x85, 0x5a, 0x50, 0x64, 0x1f, 0x07, 0x58, 0x86, 0x61,
-	0xf0, 0x0c, 0x43, 0x0f, 0x87, 0x51, 0x1e, 0x03, 0xa7, 0x66, 0x73, 0x31, 0x1c, 0xbb, 0x95, 0xcb,
-	0xe0, 0xca, 0x3f, 0x9e, 0x00, 0xd4, 0xb4, 0xcc, 0x43, 0xec, 0x2b, 0xb5, 0xe2, 0x7f, 0xc2, 0x7b,
-	0x6c, 0x86, 0x55, 0xce, 0x88, 0x8a, 0xf1, 0x43, 0x6d, 0x42, 0xd3, 0x05, 0x09, 0x9c, 0x15, 0x4b,
-	0x39, 0x0d, 0xa3, 0x27, 0x63, 0xa9, 0xc0, 0xf2, 0xb8, 0x40, 0xda, 0xa9, 0xd8, 0x0c, 0xff, 0xc2,
-	0x4e, 0xbf, 0x84, 0xb3, 0x62, 0x3b, 0xa5, 0x42, 0xb4, 0x09, 0xd5, 0xe1, 0x6f, 0x5f, 0x97, 0xfe,
-	0xff, 0x0c, 0xcc, 0x71, 0x7d, 0xfc, 0x3e, 0x2a, 0x1f, 0xf5, 0xbd, 0x7e, 0xf4, 0x70, 0x6a, 0x39,
-	0x91, 0x4a, 0x65, 0xa3, 0x2e, 0xcc, 0x24, 0xfb, 0x08, 0xf2, 0xd1, 0xa1, 0xa1, 0x73, 0xe9, 0xc3,
-	0x4e, 0x19, 0x72, 0x0d, 0xe6, 0x68, 0x18, 0xe1, 0xe2, 0xef, 0xa9, 0xe2, 0x01, 0x43, 0xca, 0x26,
-	0x1b, 0xf1, 0x04, 0xf2, 0x22, 0xf2, 0xf2, 0xf6, 0xd9, 0x24, 0x14, 0x4b, 0x41, 0x83, 0x1b, 0xff,
-	0x04, 0x00, 0x41, 0x0f, 0x79, 0xf4, 0x6b, 0xec, 0xd4, 0x62, 0xbb, 0xe0, 0xa2, 0x1e, 0xe8, 0xd9,
-	0x73, 0x8b, 0x1d, 0x3c, 0xc0, 0x76, 0xad, 0xe3, 0x61, 0xcc, 0xab, 0xf2, 0x7b, 0x2c, 0x24, 0x36,
-	0x76, 0x6a, 0x4a, 0xdc, 0xb9, 0x30, 0x86, 0x2c, 0xda, 0x93, 0xe7, 0x00, 0x95, 0x1e, 0x47, 0x62,
-	0x6c, 0xb5, 0xa2, 0x68, 0xfe, 0x5e, 0xd5, 0x06, 0xe7, 0x89, 0x3e, 0xd6, 0xe3, 0xe7, 0x2d, 0xbb,
-	0x90, 0xe3, 0xf7, 0xde, 0x7c, 0x0e, 0x93, 0xca, 0x41, 0x75, 0x2d, 0x9c, 0x1b, 0x81, 0x10, 0x35,
-	0xe1, 0x57, 0x80, 0x82, 0x02, 0xdb, 0xb5, 0x07, 0xa2, 0xbe, 0xbe, 0x90, 0x54, 0xfa, 0x4a, 0xb6,
-	0xd4, 0x7e, 0x71, 0x34, 0x48, 0x54, 0x85, 0x3f, 0x98, 0x84, 0xb9, 0x4d, 0xf6, 0x38, 0x86, 0x1f,
-	0x55, 0xd3, 0x7c, 0x0e, 0xd1, 0x42, 0x45, 0x3c, 0x99, 0xe1, 0xcc, 0xb2, 0xd6, 0xa6, 0x48, 0x71,
-	0x1d, 0x72, 0x14, 0xf2, 0x12, 0x4c, 0xd1, 0x42, 0xeb, 0x48, 0xdc, 0x03, 0x38, 0x19, 0x3d, 0xfc,
-	0x70, 0x9b, 0xd3, 0xd5, 0x13, 0x70, 0x45, 0x0a, 0xd5, 0xfa, 0xfe, 0x81, 0xeb, 0x59, 0x5f, 0x4b,
-	0x98, 0x14, 0xd7, 0xe9, 0x63, 0x8a, 0x57, 0x7f, 0x74, 0x02, 0x4e, 0x8a, 0x95, 0xb2, 0xc9, 0x5f,
-	0x07, 0xbd, 0x30, 0x1c, 0xa3, 0x83, 0x33, 0x65, 0x90, 0xec, 0xfb, 0x3f, 0xc1, 0xac, 0x26, 0xa2,
-	0x2a, 0x50, 0xa1, 0x22, 0x9f, 0x1a, 0x09, 0x4a, 0x39, 0x46, 0x09, 0xef, 0xb9, 0x24, 0x61, 0x64,
-	0x76, 0x03, 0xbc, 0xd6, 0x89, 0x01, 0xe3, 0x7a, 0x37, 0x60, 0x81, 0xc7, 0x14, 0x41, 0x20, 0xe8,
-	0xdd, 0x00, 0xa3, 0x30, 0xe4, 0x58, 0x8a, 0xba, 0x0a, 0x82, 0x1e, 0x41, 0x69, 0xc7, 0x75, 0x0f,
-	0xfb, 0x3d, 0x49, 0xd9, 0x18, 0xee, 0x79, 0x36, 0xcf, 0x6a, 0x19, 0x92, 0x73, 0x47, 0x68, 0xb8,
-	0x4b, 0x4b, 0x2c, 0xe7, 0x50, 0xb6, 0x9b, 0x2e, 0x95, 0x5f, 0x0a, 0xe5, 0x2d, 0x27, 0xe5, 0x4b,
-	0x5a, 0xf5, 0xe7, 0x93, 0x34, 0x6f, 0x32, 0x6c, 0x31, 0x2b, 0x68, 0x9d, 0xa7, 0xae, 0x75, 0xab,
-	0x87, 0x6d, 0xcb, 0x89, 0x7f, 0x60, 0x5e, 0xac, 0xb0, 0x77, 0x5c, 0x21, 0xff, 0x0a, 0x4b, 0x8f,
-	0x65, 0x5b, 0xbb, 0xad, 0x50, 0xb0, 0xe8, 0x86, 0x4c, 0xfd, 0x03, 0x8a, 0x86, 0x48, 0x92, 0x10,
-	0xb7, 0x21, 0xe3, 0x4a, 0x04, 0xa9, 0x7d, 0xa2, 0x45, 0xc7, 0x3f, 0x46, 0x7f, 0x35, 0x01, 0x73,
-	0xec, 0xdb, 0x3d, 0x39, 0xc0, 0x1e, 0x7a, 0x00, 0x73, 0x8d, 0x7e, 0x8b, 0x98, 0x9e, 0xd5, 0xc2,
-	0xa8, 0x24, 0x6e, 0xe9, 0x05, 0xa5, 0xc7, 0x72, 0x84, 0xd3, 0x09, 0xc4, 0xc8, 0x67, 0xbe, 0xdc,
-	0x9e, 0x43, 0xde, 0x42, 0x41, 0x06, 0xc3, 0xff, 0x36, 0x09, 0xb3, 0x5b, 0x03, 0x2c, 0x9f, 0x8f,
-	0x89, 0x13, 0x90, 0x51, 0x08, 0x5a, 0x11, 0x9d, 0xb0, 0x6f, 0xea, 0x8c, 0x14, 0x2e, 0x13, 0xce,
-	0x11, 0xc0, 0x6a, 0x74, 0xc0, 0xe2, 0x03, 0x52, 0x40, 0x48, 0x39, 0xb1, 0x6f, 0xa9, 0xa3, 0x1c,
-	0x53, 0x6a, 0x4d, 0xbe, 0x70, 0x63, 0x3d, 0xa3, 0x82, 0xb0, 0x63, 0x8f, 0x60, 0x8f, 0x51, 0xca,
-	0xf9, 0xa8, 0x65, 0xd4, 0x30, 0x1a, 0xf7, 0x9a, 0x6e, 0xcf, 0x32, 0x65, 0x17, 0x01, 0x21, 0xa5,
-	0x8b, 0x87, 0x41, 0x1e, 0x40, 0x41, 0xc1, 0x47, 0x6f, 0xf1, 0x69, 0xd0, 0x32, 0x89, 0xf6, 0xd1,
-	0x3b, 0xca, 0xc8, 0x9a, 0x5e, 0xff, 0x74, 0x12, 0x96, 0xa3, 0xc5, 0x3e, 0xb3, 0x7a, 0x97, 0x3d,
-	0xbb, 0xa4, 0x5b, 0xa7, 0x81, 0x9d, 0xb6, 0xbc, 0x13, 0x52, 0x06, 0xa6, 0x0d, 0xf3, 0x9a, 0xfc,
-	0x20, 0x30, 0x0e, 0xf8, 0x53, 0xfe, 0xe6, 0x47, 0x4c, 0xdd, 0xd9, 0xf8, 0x4d, 0xcb, 0xc8, 0xa9,
-	0xae, 0x69, 0x6b, 0xe4, 0x7c, 0x52, 0xed, 0x2a, 0xcc, 0x48, 0x51, 0x91, 0xc1, 0x3f, 0xbf, 0x9e,
-	0x80, 0x99, 0x27, 0x96, 0x2d, 0xbe, 0x52, 0xce, 0xd4, 0x3d, 0x4c, 0xac, 0x8e, 0x83, 0x0a, 0x15,
-	0xf6, 0x2a, 0x94, 0x72, 0x9e, 0xf2, 0x37, 0xaa, 0x25, 0x4e, 0x11, 0x00, 0x31, 0x11, 0x1f, 0x88,
-	0x53, 0xaf, 0x18, 0xc2, 0xc3, 0xe7, 0x55, 0x01, 0x09, 0x5d, 0x81, 0xd9, 0xbd, 0x9e, 0xed, 0x1a,
-	0x6d, 0x3c, 0x06, 0x74, 0x6c, 0xd3, 0xd7, 0xe1, 0x9d, 0xe7, 0xc6, 0x7e, 0xcf, 0x44, 0x97, 0xe0,
-	0x9d, 0x5d, 0xdc, 0xb3, 0x87, 0x68, 0xb1, 0xc2, 0xdf, 0xaf, 0xca, 0x7d, 0x5a, 0xce, 0x0b, 0x02,
-	0x8f, 0xb5, 0xff, 0x37, 0x01, 0x93, 0xcf, 0x5f, 0xa1, 0xd3, 0x70, 0xa2, 0x81, 0x7d, 0x34, 0x57,
-	0x39, 0x1c, 0x54, 0x5e, 0x19, 0x76, 0x1f, 0x97, 0xc3, 0x9f, 0x68, 0x15, 0x4e, 0x6c, 0x63, 0x1f,
-	0xcd, 0x50, 0xca, 0x73, 0x3c, 0x8c, 0xb2, 0x56, 0xe0, 0xc4, 0x53, 0x83, 0x84, 0xac, 0x59, 0xfa,
-	0x63, 0xc3, 0x75, 0xed, 0x4c, 0xe5, 0xc0, 0x04, 0xe4, 0x5f, 0xba, 0xbe, 0x75, 0x5b, 0x06, 0xfc,
-	0xdb, 0xb0, 0x4c, 0x5d, 0x48, 0x69, 0xfb, 0x96, 0xc9, 0xe6, 0xb8, 0x81, 0x7d, 0x5f, 0xbf, 0x68,
-	0x5a, 0xa8, 0xf0, 0x47, 0xb4, 0x92, 0x77, 0x5f, 0x7e, 0xb1, 0x4b, 0x12, 0xd4, 0xc0, 0xba, 0x70,
-	0xf5, 0xb7, 0x13, 0x50, 0x64, 0x46, 0xb0, 0xe7, 0x80, 0xd2, 0x92, 0xcb, 0xec, 0x41, 0x02, 0x23,
-	0xa1, 0xbc, 0x90, 0xe0, 0xef, 0x05, 0x63, 0xe7, 0x73, 0x8e, 0xbf, 0x35, 0x1b, 0x03, 0xbb, 0x0e,
-	0x05, 0x56, 0x18, 0x33, 0xe6, 0xd6, 0x1b, 0x8b, 0xf8, 0x64, 0xb4, 0x40, 0x06, 0x5f, 0xfe, 0x65,
-	0x12, 0x16, 0x5e, 0xf2, 0x97, 0xc6, 0x72, 0x0c, 0x55, 0x80, 0x20, 0xfa, 0x10, 0x74, 0xb2, 0x22,
-	0x1f, 0x22, 0x8f, 0x0a, 0x47, 0x55, 0x80, 0x06, 0xc6, 0x4e, 0x26, 0x99, 0x5b, 0x90, 0xdf, 0x73,
-	0xbc, 0xac, 0x3d, 0xdd, 0x0b, 0x9e, 0x01, 0x58, 0x04, 0x2d, 0x05, 0x22, 0xd1, 0x92, 0xe7, 0x54,
-	0x40, 0x8d, 0x4e, 0x2c, 0xc9, 0x9c, 0x9f, 0xc9, 0xa5, 0xd1, 0x72, 0xdf, 0xa0, 0x82, 0xa2, 0xb3,
-	0xe5, 0xbe, 0x29, 0xc7, 0x28, 0xe8, 0x1a, 0xff, 0xb6, 0x28, 0x9b, 0x6a, 0xd2, 0xa5, 0x81, 0xab,
-	0xbf, 0x9c, 0x80, 0xe5, 0x46, 0xbf, 0x65, 0x7d, 0x4d, 0xd3, 0x58, 0xcf, 0x31, 0xec, 0x3a, 0x7f,
-	0xfe, 0xcd, 0x3f, 0xb6, 0x88, 0x0f, 0x1a, 0x1b, 0x96, 0x6d, 0xa3, 0xf9, 0x8a, 0x7c, 0x19, 0x4e,
-	0x9b, 0x65, 0xb5, 0x89, 0x36, 0x00, 0x71, 0x4b, 0xb5, 0xa7, 0x5b, 0x12, 0xa4, 0x3d, 0xdd, 0x4a,
-	0x22, 0x67, 0x59, 0x2f, 0xbf, 0x28, 0x02, 0x44, 0x2c, 0xbd, 0x09, 0xb3, 0xf5, 0xbe, 0x67, 0x1e,
-	0x18, 0x24, 0xda, 0xa7, 0x92, 0x04, 0x14, 0x02, 0xf2, 0x33, 0x67, 0xe0, 0xd2, 0x05, 0x16, 0x98,
-	0x1c, 0xc5, 0xa5, 0x89, 0x27, 0x93, 0xd1, 0x2d, 0x76, 0x97, 0xaf, 0x90, 0xa2, 0xfe, 0x4e, 0x91,
-	0xda, 0x80, 0x42, 0xad, 0xdd, 0x96, 0xf6, 0x63, 0xff, 0xc0, 0x6d, 0xa3, 0x53, 0x01, 0x54, 0xa1,
-	0x97, 0x53, 0xe8, 0x68, 0x0b, 0x4a, 0xf2, 0x65, 0xf7, 0xdb, 0xa8, 0xb9, 0x01, 0x25, 0x91, 0xe4,
-	0x29, 0xe4, 0x11, 0x99, 0xde, 0x3d, 0x40, 0x2c, 0xad, 0x8d, 0xe2, 0x89, 0xf6, 0x0c, 0x27, 0xb1,
-	0x2f, 0xba, 0xf2, 0x4f, 0xd4, 0x8d, 0x21, 0x2a, 0x45, 0xf9, 0xe1, 0xfe, 0x52, 0xd6, 0xd3, 0x1a,
-	0xff, 0xfa, 0x2e, 0xe6, 0x8a, 0x68, 0x17, 0x9e, 0xda, 0x54, 0x12, 0xba, 0x51, 0xf8, 0x52, 0x95,
-	0x93, 0x1b, 0x9b, 0xee, 0x84, 0x05, 0x10, 0xec, 0xae, 0x2c, 0x42, 0x8f, 0x60, 0xe1, 0x89, 0x65,
-	0xfb, 0xd8, 0x0b, 0xfa, 0x3e, 0x1d, 0x60, 0x22, 0x16, 0x87, 0x15, 0x46, 0xcc, 0xd6, 0x3b, 0x90,
-	0x7f, 0xec, 0x19, 0xfb, 0x12, 0x39, 0xfe, 0x82, 0xfd, 0x0c, 0x8a, 0x8f, 0xad, 0xfd, 0xfd, 0x28,
-	0x8a, 0x66, 0x5c, 0x12, 0x26, 0x78, 0xe1, 0x67, 0x77, 0x5d, 0xfe, 0x21, 0xf7, 0xe9, 0xa6, 0xdb,
-	0xe5, 0x77, 0x27, 0x67, 0x14, 0xc3, 0x25, 0x39, 0x6e, 0x79, 0x20, 0x70, 0x03, 0xa0, 0xd6, 0x6e,
-	0x8b, 0x66, 0xc4, 0x5b, 0x82, 0x52, 0x8e, 0x51, 0xd0, 0x55, 0x1e, 0x26, 0xeb, 0xb6, 0x11, 0xbf,
-	0xe6, 0x5c, 0x08, 0x97, 0x01, 0x63, 0x5f, 0x87, 0xf9, 0xad, 0x37, 0x3d, 0xd7, 0x0b, 0x1c, 0xa3,
-	0x3e, 0x0c, 0x0f, 0x9c, 0xe4, 0x7b, 0x34, 0x48, 0xdc, 0x93, 0x4f, 0x08, 0x24, 0xbc, 0xe9, 0x3e,
-	0xf5, 0xbb, 0x76, 0xc2, 0x1c, 0xc6, 0x44, 0x1f, 0xc6, 0x9f, 0xab, 0x66, 0x0b, 0x54, 0x37, 0x61,
-	0xbe, 0xe9, 0x19, 0x0e, 0xd9, 0xc7, 0xde, 0x0b, 0xd7, 0xc1, 0xe3, 0xad, 0xe8, 0x4c, 0x61, 0x9f,
-	0xdd, 0x8a, 0xed, 0xb8, 0x1d, 0x5a, 0x57, 0x44, 0x27, 0x89, 0x92, 0xe2, 0xfa, 0x19, 0x70, 0x0b,
-	0x4a, 0xa2, 0x24, 0xf4, 0xdc, 0xae, 0xcb, 0x1e, 0xb3, 0xb9, 0x6d, 0x1c, 0x0d, 0x08, 0x51, 0x7a,
-	0x39, 0x85, 0x8e, 0xee, 0x43, 0x81, 0x16, 0xa1, 0x0a, 0x4d, 0xf7, 0x60, 0xaa, 0xf0, 0x23, 0x28,
-	0xec, 0x11, 0xcd, 0x80, 0x77, 0x93, 0xb1, 0x29, 0xe7, 0xea, 0x4b, 0x38, 0xf9, 0xca, 0xb0, 0xad,
-	0x76, 0x6c, 0x1c, 0x47, 0xa8, 0x49, 0xb3, 0xe8, 0x73, 0xfe, 0xc5, 0x54, 0x25, 0x9e, 0x53, 0x7c,
-	0x9a, 0xa8, 0x6f, 0x39, 0x59, 0x1f, 0x89, 0x04, 0x4c, 0x45, 0xe5, 0x88, 0x80, 0xb9, 0x29, 0xef,
-	0x35, 0x76, 0xf1, 0x3e, 0xf6, 0x3c, 0xc3, 0x46, 0xef, 0x85, 0xfe, 0x8c, 0x30, 0x70, 0x3b, 0xbe,
-	0xf5, 0x02, 0x11, 0xfe, 0xf0, 0x3c, 0x68, 0x26, 0x87, 0xc3, 0x80, 0x7d, 0x3f, 0x78, 0x9d, 0x19,
-	0x90, 0xb4, 0xcd, 0xb7, 0x1a, 0x13, 0x0a, 0x2a, 0xe2, 0xe0, 0xf5, 0x79, 0x20, 0x1b, 0xef, 0x21,
-	0xa9, 0xd3, 0x87, 0x50, 0x62, 0x17, 0x5a, 0xf2, 0xdf, 0x1f, 0x7c, 0x4c, 0x8a, 0xa9, 0x67, 0xa2,
-	0x4b, 0x56, 0x03, 0x12, 0xf4, 0x1c, 0x56, 0xa9, 0x02, 0xba, 0x5b, 0x36, 0x86, 0xa3, 0xd4, 0x9c,
-	0x8f, 0xaa, 0x49, 0x84, 0x13, 0xf4, 0x8c, 0xbf, 0xd0, 0xab, 0x1b, 0x56, 0xfb, 0x89, 0xeb, 0xb1,
-	0x87, 0x24, 0x82, 0xa9, 0xbe, 0x4d, 0x3e, 0x17, 0xd5, 0x95, 0x84, 0x26, 0x68, 0x1b, 0x96, 0x12,
-	0xd5, 0xbc, 0x7f, 0x94, 0xa8, 0x7e, 0x43, 0xf4, 0x12, 0x72, 0x75, 0xdb, 0x30, 0xf1, 0x53, 0xf6,
-	0x87, 0x3b, 0xf4, 0x10, 0x66, 0xc4, 0x0d, 0x27, 0x3d, 0x43, 0x22, 0xff, 0xc4, 0x13, 0xd4, 0xf0,
-	0xee, 0x3c, 0x81, 0xd9, 0x3e, 0xff, 0x6f, 0x55, 0x07, 0xa6, 0xeb, 0xec, 0xef, 0x7c, 0xe8, 0x46,
-	0xf4, 0x52, 0x61, 0xa9, 0x22, 0xfe, 0xe4, 0xa7, 0x9c, 0x27, 0xb1, 0x54, 0x59, 0xb9, 0x52, 0x18,
-	0x47, 0xa6, 0xfa, 0xf7, 0x09, 0x98, 0xff, 0x92, 0xfd, 0xe7, 0x4f, 0x26, 0xe9, 0x17, 0x44, 0xd5,
-	0xa8, 0x86, 0x6a, 0xf1, 0xbf, 0x40, 0x59, 0xc3, 0x5c, 0x0d, 0xae, 0x5e, 0x75, 0x56, 0x1c, 0x5b,
-	0x85, 0x45, 0xf9, 0x84, 0x3c, 0xa9, 0x76, 0x2a, 0x49, 0x7c, 0x14, 0xf0, 0x00, 0x8a, 0xe1, 0xe3,
-	0x74, 0x49, 0x4c, 0x42, 0x26, 0x8b, 0x67, 0x48, 0x3b, 0x1d, 0x58, 0x12, 0x23, 0xaf, 0xb1, 0x7f,
-	0x37, 0xca, 0x2b, 0xd7, 0xcb, 0xec, 0x8b, 0x0a, 0xa7, 0xe9, 0x7f, 0xe8, 0xe2, 0x7f, 0x83, 0x14,
-	0xbc, 0x35, 0xc8, 0xf3, 0x0b, 0x57, 0xd1, 0xd6, 0xf8, 0xba, 0xc3, 0x7f, 0x38, 0x09, 0x0b, 0x5f,
-	0xe2, 0xd6, 0x81, 0xeb, 0x1e, 0x8e, 0xf6, 0xb8, 0xb8, 0x25, 0x16, 0x58, 0x74, 0x01, 0xa6, 0x79,
-	0x90, 0x1a, 0x15, 0x97, 0x2e, 0xc2, 0x14, 0xdd, 0x21, 0xfa, 0xad, 0xac, 0xa2, 0x89, 0x28, 0x93,
-	0xa7, 0xf2, 0xe2, 0xdd, 0x5e, 0x0d, 0x6e, 0xe3, 0x8f, 0xc6, 0xae, 0xc1, 0x54, 0x13, 0x6b, 0xbd,
-	0xaf, 0x6a, 0xa0, 0x26, 0xff, 0xf7, 0x63, 0xdf, 0xf6, 0x37, 0x56, 0xff, 0x6b, 0xb9, 0x63, 0xf9,
-	0x07, 0xfd, 0x16, 0x85, 0xaf, 0x13, 0x5a, 0xb1, 0xac, 0xf3, 0xbf, 0xdc, 0xb6, 0xa6, 0xd9, 0xff,
-	0x4a, 0x6f, 0xfe, 0x23, 0x00, 0x00, 0xff, 0xff, 0x91, 0x5b, 0x0b, 0xc5, 0x92, 0x3b, 0x00, 0x00,
+	// 3753 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x5b, 0xcd, 0x73, 0x1b, 0x49,
+	0x15, 0xc7, 0x8e, 0xd7, 0x1f, 0x4f, 0xb2, 0x2d, 0xb5, 0x9c, 0xd8, 0x56, 0xb2, 0x9b, 0xcd, 0xc7,
+	0x26, 0x9b, 0x0f, 0x2b, 0x59, 0x25, 0xd9, 0x24, 0x9b, 0xcd, 0x26, 0xb2, 0xe3, 0x38, 0x21, 0x4e,
+	0x56, 0x6b, 0xc9, 0x59, 0x38, 0x50, 0x5b, 0xa3, 0x51, 0x5b, 0x1e, 0x3c, 0x9a, 0x11, 0xd3, 0x23,
+	0x25, 0xda, 0x1b, 0x54, 0x51, 0x1c, 0xe1, 0xc4, 0x8d, 0x03, 0xb5, 0xc5, 0x5f, 0x00, 0x45, 0x51,
+	0x7b, 0xa3, 0x8a, 0x03, 0x37, 0x0e, 0x9c, 0xb9, 0x50, 0xdc, 0xf6, 0xce, 0x05, 0x8a, 0xa2, 0xfa,
+	0x6b, 0x66, 0xba, 0x67, 0x46, 0xd6, 0x38, 0x0b, 0x37, 0xf5, 0x7b, 0xbf, 0xf7, 0xfa, 0xf5, 0xeb,
+	0xee, 0xd7, 0xef, 0xf5, 0xb4, 0x60, 0x9e, 0x60, 0x6f, 0x60, 0x99, 0xb8, 0xd2, 0xf3, 0x5c, 0xdf,
+	0x45, 0xd3, 0xfb, 0xd8, 0x68, 0x63, 0xaf, 0x9c, 0x37, 0xdd, 0x6e, 0xd7, 0x75, 0x38, 0xb5, 0x9c,
+	0xeb, 0x13, 0xec, 0xdd, 0x10, 0x0d, 0xa0, 0x0d, 0xf9, 0xdb, 0xe8, 0xfb, 0xfb, 0xe2, 0x37, 0x32,
+	0x5d, 0x67, 0x80, 0x3d, 0x62, 0xf8, 0x56, 0x20, 0x98, 0x37, 0x6d, 0x0b, 0x3b, 0xbe, 0x68, 0xcd,
+	0x9b, 0xae, 0xe3, 0x87, 0x4d, 0x68, 0x63, 0xc3, 0x96, 0x3d, 0xe0, 0x41, 0x84, 0xb1, 0x67, 0xd9,
+	0x58, 0x32, 0x0e, 0x8c, 0xbd, 0x9e, 0x29, 0x1a, 0xb3, 0x07, 0x03, 0xa9, 0xb8, 0xd7, 0x6f, 0x91,
+	0x7e, 0x4b, 0xb4, 0x8a, 0x3d, 0xdb, 0x30, 0xf1, 0xbe, 0x6b, 0xb7, 0x03, 0xcb, 0xe6, 0x7b, 0xc6,
+	0xb0, 0x1b, 0xe9, 0xda, 0x71, 0x7d, 0xab, 0xe5, 0xbe, 0x96, 0x5a, 0x69, 0xf3, 0x96, 0xd4, 0xf5,
+	0xca, 0x6a, 0x77, 0x70, 0x80, 0x34, 0x4c, 0xd3, 0xed, 0x07, 0x82, 0x79, 0x63, 0x60, 0xf8, 0x86,
+	0xd4, 0x3a, 0x67, 0xf4, 0x2c, 0xfe, 0xb3, 0x7a, 0x1d, 0xe6, 0x6a, 0x3d, 0xab, 0x81, 0xbd, 0x01,
+	0xf6, 0xd0, 0x39, 0x98, 0xda, 0x30, 0x6c, 0x1b, 0xe5, 0x2b, 0x14, 0xb0, 0x83, 0x7f, 0xd4, 0xc7,
+	0xc4, 0x2f, 0xcf, 0x8b, 0x16, 0xe9, 0xb9, 0x0e, 0xc1, 0xd5, 0x4d, 0x98, 0xab, 0x99, 0x66, 0xa3,
+	0xdf, 0x7a, 0xde, 0xf1, 0xd0, 0x1d, 0x98, 0x6b, 0x60, 0xc3, 0x33, 0xf7, 0x1b, 0xfd, 0x16, 0x5a,
+	0xad, 0xc8, 0x4e, 0x03, 0x9a, 0xd4, 0x51, 0x08, 0x58, 0x5c, 0x96, 0x54, 0xff, 0x95, 0x03, 0xa8,
+	0x71, 0x1a, 0x55, 0x74, 0x1b, 0x72, 0x1b, 0x1e, 0x36, 0x7c, 0xbc, 0xe5, 0xb9, 0xfd, 0x1e, 0x2a,
+	0x85, 0xf8, 0x0e, 0x76, 0x7c, 0x46, 0x2c, 0x27, 0x11, 0xa9, 0xe0, 0x6e, 0xaf, 0x7d, 0x04, 0xc1,
+	0x2b, 0x30, 0xbb, 0x85, 0xc5, 0x6f, 0xa8, 0x88, 0x85, 0xf2, 0xb4, 0x9d, 0x0c, 0x7e, 0x04, 0x4b,
+	0x62, 0x28, 0x3b, 0x98, 0x60, 0xbf, 0x6e, 0x10, 0xf2, 0xca, 0xf5, 0xda, 0xe8, 0xed, 0x00, 0xac,
+	0xd0, 0x43, 0xd7, 0x09, 0xbd, 0x9b, 0xdd, 0x9e, 0x3f, 0x44, 0x1f, 0xc2, 0x02, 0xb7, 0x35, 0x90,
+	0x5f, 0x0a, 0xe4, 0x5f, 0xe0, 0x57, 0x92, 0x5a, 0x5e, 0x50, 0x4d, 0x40, 0x6b, 0x72, 0x8c, 0xbc,
+	0xa9, 0xb1, 0x63, 0xf0, 0x4b, 0x90, 0x7b, 0x84, 0x6d, 0x2c, 0xe1, 0xd1, 0xc1, 0xe9, 0xd0, 0x1b,
+	0x80, 0x84, 0xad, 0x1b, 0xfb, 0x86, 0xd3, 0xc1, 0x9b, 0x5d, 0xc3, 0xb2, 0x63, 0x1d, 0x68, 0xc3,
+	0xb8, 0x09, 0x68, 0xc3, 0x75, 0xf6, 0x2c, 0xaf, 0x9b, 0x2c, 0xd4, 0x74, 0x0f, 0xb0, 0x13, 0xeb,
+	0xea, 0x0e, 0x14, 0x6a, 0xa6, 0x89, 0x7b, 0xfe, 0x53, 0x67, 0x60, 0xf9, 0x6c, 0x7b, 0x8d, 0x39,
+	0xfc, 0x6b, 0x30, 0xbf, 0x85, 0xa3, 0x62, 0x87, 0x75, 0xb5, 0x06, 0x39, 0x86, 0x1e, 0xd3, 0x5f,
+	0x17, 0xd8, 0x4a, 0x38, 0xdc, 0x59, 0x55, 0x58, 0x10, 0xe3, 0x16, 0x0b, 0x37, 0x66, 0x88, 0xb2,
+	0xcc, 0x19, 0xe2, 0x32, 0x00, 0xd5, 0x2d, 0x5a, 0x51, 0xed, 0x71, 0xec, 0x0d, 0x98, 0x17, 0xd3,
+	0x2c, 0x08, 0x31, 0x48, 0x82, 0xd0, 0x43, 0x98, 0xe7, 0x1b, 0x47, 0x12, 0xc2, 0x25, 0xa9, 0xd0,
+	0x13, 0x77, 0x22, 0x13, 0xb8, 0x04, 0xb0, 0x6d, 0x11, 0x3e, 0x7e, 0xa2, 0x98, 0xb8, 0xa8, 0x3a,
+	0x80, 0xa0, 0x6b, 0x00, 0x1b, 0xfb, 0xd8, 0x3c, 0xd8, 0x76, 0x3b, 0x96, 0x83, 0x8e, 0x07, 0x6c,
+	0xd6, 0x96, 0x3d, 0x44, 0x34, 0xa0, 0x0a, 0xbc, 0x35, 0x12, 0xab, 0xbb, 0xf8, 0x7d, 0xb9, 0x74,
+	0xe3, 0xfb, 0x52, 0x5b, 0x84, 0x15, 0x6e, 0x35, 0xc3, 0xa9, 0x56, 0x2f, 0x25, 0x6c, 0x60, 0x82,
+	0x3e, 0x84, 0xc5, 0x5a, 0xbb, 0xcd, 0x28, 0x4d, 0x97, 0x6b, 0x0f, 0x81, 0xac, 0xfd, 0x1c, 0x77,
+	0x5b, 0xd8, 0xd3, 0xfb, 0xb9, 0x47, 0x77, 0x7e, 0xd7, 0x1d, 0xf0, 0xb5, 0xf4, 0xd8, 0x73, 0xbb,
+	0x19, 0x84, 0x2f, 0xc1, 0x54, 0xdd, 0x72, 0x3a, 0xa8, 0x24, 0xc9, 0xb4, 0x25, 0xc7, 0x9e, 0x0f,
+	0x88, 0xae, 0xd3, 0xa1, 0x6b, 0x76, 0xd4, 0x16, 0xd4, 0x1d, 0x75, 0x0f, 0x8a, 0x9f, 0xf5, 0xb1,
+	0x37, 0x5c, 0x1f, 0x7e, 0xda, 0xfa, 0x21, 0x36, 0xfd, 0xba, 0xe1, 0xef, 0xa3, 0x55, 0xa9, 0x31,
+	0xa4, 0xc9, 0xce, 0x72, 0xa1, 0x83, 0x08, 0xaa, 0x40, 0xfe, 0xa9, 0xe3, 0xe3, 0x8e, 0x67, 0xf8,
+	0x78, 0xdd, 0x3d, 0x7c, 0x83, 0xd4, 0x01, 0x35, 0x86, 0x8e, 0x59, 0xef, 0xb7, 0x6c, 0xcb, 0x7c,
+	0xe2, 0xda, 0x56, 0xdb, 0x18, 0x12, 0x74, 0x36, 0x0c, 0xf7, 0x31, 0xa6, 0xec, 0xf6, 0x44, 0x80,
+	0x59, 0xef, 0x13, 0xcb, 0xc1, 0x84, 0x3c, 0x71, 0xfb, 0x1e, 0xa9, 0xfe, 0x75, 0x0a, 0x72, 0x1b,
+	0x7d, 0xcf, 0xc3, 0x8e, 0x39, 0xa4, 0xe1, 0xff, 0x26, 0x2c, 0xd0, 0xd9, 0x14, 0x24, 0x0b, 0x13,
+	0xa4, 0x7a, 0x32, 0x12, 0x95, 0x23, 0x98, 0xab, 0x90, 0xdb, 0xc2, 0x52, 0x68, 0xa8, 0x2c, 0x82,
+	0xa2, 0x8e, 0x67, 0xd1, 0x97, 0xef, 0x88, 0x80, 0x12, 0x07, 0xa5, 0xc8, 0xf1, 0x6d, 0x99, 0x51,
+	0xee, 0x0a, 0x2c, 0xf0, 0xb5, 0x9c, 0x68, 0xa0, 0xb6, 0x52, 0x9e, 0x42, 0x91, 0x3a, 0x60, 0xf3,
+	0xb5, 0xc9, 0x16, 0xc1, 0x8e, 0xe1, 0x63, 0x82, 0x4e, 0x05, 0x4a, 0xa3, 0xf4, 0xb8, 0x6f, 0x55,
+	0xa9, 0xc7, 0xb0, 0xb8, 0x85, 0x15, 0x4d, 0x87, 0x28, 0x3a, 0x9e, 0xc8, 0x45, 0xeb, 0x80, 0xb8,
+	0xbf, 0x14, 0x6a, 0x32, 0x38, 0x4d, 0x47, 0x0d, 0x10, 0xf7, 0x41, 0x06, 0x73, 0x8e, 0xbc, 0x87,
+	0xaa, 0x7f, 0x9f, 0x82, 0x99, 0x5d, 0x82, 0x3d, 0xba, 0xa2, 0x3e, 0x81, 0x1c, 0xcf, 0x42, 0x28,
+	0x81, 0xa0, 0xe5, 0x0a, 0xcb, 0xf7, 0x68, 0x83, 0x93, 0x43, 0x2f, 0xc6, 0x18, 0xa4, 0x6f, 0xfb,
+	0xe8, 0x43, 0x40, 0x75, 0xcb, 0x3c, 0x68, 0xba, 0x0d, 0xdc, 0xa1, 0x19, 0x18, 0x3f, 0x79, 0x8a,
+	0x1c, 0x4d, 0x39, 0x29, 0xe6, 0x7e, 0x0c, 0x27, 0xf8, 0x88, 0x69, 0xa8, 0x50, 0x64, 0x4b, 0xa2,
+	0x27, 0xa7, 0x97, 0x2e, 0x7d, 0x1e, 0x80, 0xfb, 0x9c, 0xda, 0x83, 0x20, 0xb4, 0x4d, 0x89, 0xaa,
+	0xe7, 0x01, 0xf8, 0x8a, 0x1c, 0x89, 0x3a, 0x0b, 0xb3, 0x3b, 0xd8, 0x68, 0x0b, 0x4c, 0xb8, 0xf2,
+	0x22, 0x78, 0xb4, 0x07, 0xef, 0x6e, 0xd0, 0x89, 0x88, 0x1a, 0x4a, 0x19, 0xeb, 0xc3, 0x9a, 0xef,
+	0x7b, 0x56, 0xab, 0xef, 0x63, 0xb4, 0xc6, 0xf1, 0x87, 0xe1, 0xe4, 0x88, 0x4a, 0x11, 0xb8, 0x4c,
+	0x1a, 0xd1, 0x03, 0x00, 0x46, 0x68, 0xba, 0xbe, 0x61, 0xcb, 0xc9, 0x08, 0x29, 0x52, 0x76, 0x25,
+	0xce, 0x10, 0x0a, 0x32, 0x44, 0xd2, 0x0b, 0x30, 0x4b, 0x23, 0xbd, 0x6d, 0x19, 0x04, 0xe5, 0xb8,
+	0x42, 0xd6, 0xd0, 0x7d, 0x7d, 0x0b, 0x0a, 0xcf, 0xdd, 0x01, 0xf3, 0x61, 0xcd, 0xf4, 0xad, 0x81,
+	0xe5, 0x0f, 0x11, 0xe2, 0xf8, 0xe7, 0xd8, 0xeb, 0xa4, 0xac, 0xc7, 0xea, 0x37, 0x13, 0x00, 0x2f,
+	0x2d, 0x62, 0xf9, 0x2e, 0x5b, 0x67, 0x97, 0x21, 0x4f, 0xbd, 0x5c, 0xf7, 0x30, 0xc1, 0x8e, 0x89,
+	0xb5, 0x04, 0x82, 0xaf, 0x16, 0xc9, 0xbb, 0x1a, 0xe4, 0x7f, 0xe3, 0xa0, 0x2f, 0x41, 0x4e, 0x68,
+	0x1e, 0x58, 0xf8, 0x55, 0x12, 0x74, 0xdb, 0x20, 0xfe, 0x4b, 0xca, 0x5b, 0x83, 0x45, 0x1a, 0x3d,
+	0x9a, 0x6e, 0x4f, 0x58, 0x46, 0x92, 0xe0, 0x01, 0x2f, 0xc3, 0x96, 0xfa, 0xc5, 0x04, 0x94, 0x6a,
+	0x7d, 0xdf, 0xed, 0xb2, 0x29, 0xdf, 0xf0, 0x70, 0xdb, 0x62, 0xf9, 0xfa, 0x47, 0x50, 0xa2, 0x79,
+	0x8d, 0xc6, 0x51, 0x7a, 0x5d, 0xae, 0xf0, 0x6a, 0x28, 0x06, 0xba, 0x0f, 0x25, 0x3a, 0x41, 0x3a,
+	0x39, 0x0d, 0xaf, 0x4f, 0xc0, 0xd7, 0x13, 0x30, 0xf3, 0xc2, 0xf5, 0x31, 0x35, 0xe3, 0x3a, 0xcc,
+	0xd1, 0x81, 0xd3, 0x26, 0x41, 0x62, 0x2b, 0x07, 0x84, 0xf0, 0xec, 0x63, 0x74, 0x0e, 0x3a, 0x03,
+	0x33, 0xb5, 0x76, 0x9b, 0xfe, 0x96, 0x1b, 0x87, 0xfe, 0x2e, 0x47, 0x7e, 0x87, 0xdb, 0x6b, 0x24,
+	0xea, 0x26, 0x00, 0xdf, 0xe8, 0xac, 0x25, 0x96, 0x74, 0x48, 0x49, 0x59, 0x3d, 0x7f, 0x9c, 0x84,
+	0xf9, 0x70, 0x80, 0x74, 0x08, 0x1f, 0xf0, 0xb9, 0x0b, 0x89, 0xea, 0xdc, 0xa1, 0x98, 0x57, 0x08,
+	0x4d, 0xa5, 0x45, 0xa2, 0x18, 0x10, 0x51, 0x31, 0x86, 0x2b, 0xc7, 0x49, 0x68, 0x0d, 0x0a, 0xa2,
+	0x34, 0x08, 0x69, 0x23, 0x4e, 0xa5, 0x6b, 0xb0, 0x40, 0x97, 0x60, 0x0a, 0x38, 0x41, 0xff, 0x1d,
+	0x28, 0x88, 0xac, 0x33, 0xab, 0x65, 0x19, 0xd6, 0xe4, 0x37, 0x93, 0x90, 0x0f, 0xc2, 0x0e, 0x75,
+	0xe1, 0x26, 0xac, 0x30, 0x17, 0x4a, 0xda, 0x23, 0xbc, 0x67, 0x39, 0x16, 0xf7, 0x95, 0x96, 0x47,
+	0x94, 0x45, 0x40, 0x48, 0x82, 0x7e, 0x06, 0xab, 0xc2, 0xf8, 0x38, 0x17, 0xad, 0xa6, 0x0a, 0x96,
+	0xd3, 0x59, 0x54, 0xa5, 0x98, 0xa9, 0x6f, 0x4d, 0xe5, 0x06, 0xac, 0x8a, 0x29, 0x4c, 0x60, 0x2a,
+	0xcb, 0x90, 0x02, 0xde, 0xfc, 0x50, 0xfd, 0x7a, 0x12, 0x16, 0xa3, 0x61, 0x9f, 0x57, 0xeb, 0xa2,
+	0xe8, 0x10, 0x0c, 0x19, 0x37, 0xa3, 0xb8, 0x72, 0x02, 0x8d, 0x0a, 0x72, 0x7f, 0x64, 0x15, 0xbc,
+	0x06, 0x79, 0x3a, 0xc5, 0x82, 0x46, 0xb4, 0x8a, 0x3d, 0x86, 0x27, 0xe8, 0x32, 0xcc, 0x73, 0x2f,
+	0xc8, 0x9e, 0x46, 0x2c, 0xf3, 0x35, 0x1e, 0x69, 0x93, 0x90, 0x49, 0xb6, 0x64, 0x70, 0xde, 0xaf,
+	0x27, 0x60, 0xaa, 0x8e, 0xbd, 0x2e, 0xaa, 0xc0, 0x34, 0x1f, 0x38, 0x5a, 0xae, 0xb0, 0xdb, 0x26,
+	0x71, 0x10, 0x60, 0xaf, 0x1b, 0x86, 0x29, 0xc6, 0x90, 0x35, 0xb6, 0x28, 0xf9, 0x1b, 0x3e, 0x15,
+	0x5a, 0x89, 0x0a, 0x31, 0x52, 0xa2, 0xd4, 0x0d, 0x7e, 0xe4, 0xb3, 0x1e, 0x8f, 0x73, 0x86, 0x6c,
+	0x47, 0xea, 0x3f, 0x4a, 0xa6, 0x24, 0x8b, 0x10, 0xcb, 0x75, 0xaa, 0x5f, 0x4d, 0xc1, 0xd2, 0x46,
+	0xe4, 0xd2, 0x6b, 0x07, 0xf7, 0x5c, 0xcf, 0xc7, 0x1e, 0xfa, 0x02, 0x56, 0xd8, 0x49, 0x1c, 0x65,
+	0x92, 0xf5, 0x61, 0xd3, 0xe8, 0x10, 0xf4, 0x6e, 0x45, 0xb9, 0x27, 0x63, 0x38, 0xce, 0x92, 0x1d,
+	0x9d, 0x19, 0x81, 0x10, 0x87, 0x7a, 0x8b, 0x1f, 0x22, 0x83, 0x8e, 0xa4, 0x34, 0xad, 0x2e, 0x26,
+	0xe8, 0xbc, 0x2a, 0xa9, 0xf1, 0xa5, 0xfe, 0xf7, 0x0e, 0x41, 0x89, 0x3e, 0x30, 0x2c, 0x6d, 0x61,
+	0x9e, 0x4c, 0x44, 0xc7, 0x31, 0x66, 0x27, 0x17, 0x55, 0x54, 0x4c, 0xcd, 0x51, 0xf2, 0x93, 0x5d,
+	0x28, 0x71, 0x17, 0x2b, 0x7e, 0x4d, 0xf4, 0x28, 0xc7, 0x49, 0x35, 0xa7, 0x54, 0x84, 0x64, 0x0a,
+	0x0b, 0x7e, 0x40, 0x0b, 0x55, 0x4a, 0xa9, 0x0d, 0x0c, 0xcb, 0xb6, 0x5a, 0x96, 0x6d, 0xf9, 0xb4,
+	0x48, 0xba, 0xa8, 0x0f, 0x34, 0xe0, 0x0e, 0x33, 0xa8, 0xaf, 0xda, 0x50, 0x60, 0xc5, 0xa0, 0x4c,
+	0x4f, 0xfe, 0xa7, 0xb9, 0x4f, 0xf5, 0xab, 0x49, 0x98, 0xd9, 0xe9, 0xdb, 0x98, 0xd7, 0x86, 0xe2,
+	0x38, 0xa6, 0x04, 0x84, 0x34, 0x2b, 0xfb, 0x36, 0x2e, 0x27, 0xd0, 0xa8, 0x14, 0x0f, 0x51, 0x99,
+	0xa4, 0x2e, 0xca, 0x43, 0x9d, 0xb5, 0x46, 0x84, 0x8c, 0xcb, 0x7c, 0xa7, 0xc5, 0x60, 0x49, 0x4a,
+	0xaf, 0xf2, 0x24, 0x85, 0xfe, 0xd6, 0x03, 0x97, 0x0a, 0x76, 0x69, 0xba, 0x9d, 0x21, 0xba, 0xfc,
+	0x65, 0x1a, 0x16, 0xa3, 0x8b, 0x88, 0x7a, 0xeb, 0x16, 0xad, 0x7b, 0xb0, 0xf3, 0x1c, 0x13, 0x62,
+	0x74, 0x68, 0xb4, 0x51, 0xba, 0x10, 0xe4, 0xf8, 0x78, 0xee, 0xd0, 0x93, 0xde, 0xc4, 0xd6, 0x00,
+	0x67, 0x95, 0xbc, 0x05, 0x50, 0x33, 0x0f, 0xa4, 0xd4, 0x4a, 0xa2, 0x54, 0xcd, 0x3c, 0xd0, 0xc5,
+	0x9e, 0x41, 0xb1, 0xe1, 0x1b, 0xea, 0x26, 0x40, 0x65, 0x55, 0x9a, 0x01, 0xe4, 0xd0, 0xcb, 0xfa,
+	0xfe, 0x88, 0xc8, 0xdd, 0x85, 0xc5, 0x4d, 0xa7, 0xad, 0x90, 0xa2, 0x7e, 0x3e, 0x44, 0x74, 0x0b,
+	0xfb, 0x47, 0x12, 0xfd, 0x1e, 0xaf, 0xd9, 0xd5, 0x6d, 0x7c, 0x41, 0x15, 0x88, 0x01, 0xe4, 0x70,
+	0x4e, 0xa6, 0x2b, 0x26, 0xe8, 0x23, 0x58, 0x6c, 0x1a, 0x1d, 0xa5, 0x33, 0xcd, 0xb1, 0x4d, 0xa3,
+	0x93, 0x5a, 0x80, 0x16, 0x77, 0x1d, 0xff, 0xa8, 0xd2, 0xb7, 0xa1, 0xf0, 0x5d, 0xd7, 0x72, 0x14,
+	0xe1, 0x25, 0x7d, 0x4e, 0x93, 0xae, 0xba, 0x6e, 0x43, 0x61, 0x1b, 0xef, 0xf9, 0xd9, 0x05, 0xcf,
+	0xc1, 0x74, 0x73, 0xd8, 0xa3, 0x2b, 0x7e, 0xc4, 0x76, 0xcb, 0x10, 0x5e, 0xdf, 0xe4, 0x66, 0xac,
+	0xfa, 0x8f, 0x49, 0xc8, 0x35, 0x71, 0xb7, 0x67, 0x1b, 0x3c, 0xb3, 0xcc, 0xd0, 0xef, 0x43, 0x79,
+	0xbd, 0x24, 0xe5, 0xd1, 0x09, 0xcd, 0xe9, 0x82, 0x5e, 0x4e, 0xa1, 0x53, 0x0d, 0x3c, 0xd0, 0x1d,
+	0x59, 0x43, 0x70, 0xe5, 0x14, 0x50, 0x46, 0xf8, 0xf4, 0x03, 0x76, 0x7b, 0x96, 0x88, 0x4c, 0xd3,
+	0xff, 0x18, 0xe6, 0x59, 0x9d, 0x29, 0xda, 0x04, 0x69, 0x67, 0x06, 0xbf, 0x41, 0x09, 0xcc, 0x5c,
+	0x4e, 0x56, 0x43, 0xaa, 0xbf, 0x9c, 0x84, 0xe9, 0xa6, 0xd1, 0xe1, 0xe5, 0xcf, 0x9c, 0x70, 0x9b,
+	0xd1, 0x41, 0xc5, 0xd8, 0x32, 0x2d, 0xc7, 0x49, 0x54, 0x44, 0xf8, 0x69, 0x6c, 0x91, 0x0b, 0x30,
+	0x27, 0x1c, 0x63, 0x74, 0x0e, 0x09, 0xeb, 0x6c, 0x80, 0x34, 0xc5, 0x19, 0x11, 0xd6, 0x19, 0xff,
+	0x22, 0x4c, 0x53, 0xff, 0x69, 0x0a, 0x13, 0x3a, 0xcf, 0x10, 0xd1, 0xff, 0x3c, 0x09, 0x0b, 0xf2,
+	0x6a, 0x56, 0x04, 0x74, 0x76, 0x25, 0x6e, 0xc9, 0xeb, 0xda, 0x51, 0xc6, 0x7f, 0x04, 0x05, 0x6a,
+	0x7c, 0x44, 0x9e, 0x8c, 0x8a, 0x65, 0x0a, 0xae, 0x06, 0x73, 0xc1, 0x95, 0x30, 0xdb, 0x2d, 0xc9,
+	0xc0, 0x72, 0x3a, 0x0b, 0xb5, 0xa0, 0xc8, 0x3e, 0x0e, 0xb0, 0x0c, 0xc3, 0xe0, 0x19, 0x86, 0x1e,
+	0x0e, 0xa3, 0x3c, 0x06, 0x4e, 0xcd, 0xe6, 0x62, 0x38, 0x76, 0x2b, 0x97, 0xc1, 0x95, 0x7f, 0x3b,
+	0x06, 0xa8, 0x69, 0x99, 0x07, 0xd8, 0x57, 0x6a, 0xc5, 0xef, 0xc3, 0x3b, 0x6c, 0x86, 0x55, 0xce,
+	0x88, 0x8a, 0xf1, 0x7d, 0x6d, 0x42, 0xd3, 0x05, 0x09, 0x9c, 0x16, 0x4b, 0x39, 0x0d, 0xa3, 0x27,
+	0x63, 0xa9, 0xc0, 0xf2, 0xb8, 0x40, 0xda, 0xa9, 0xd8, 0x0c, 0xff, 0xc7, 0x4e, 0x3f, 0x87, 0xd3,
+	0x62, 0x3b, 0xa5, 0x42, 0xb4, 0x09, 0xd5, 0xe1, 0x6f, 0x5e, 0x97, 0xfe, 0x64, 0x06, 0xe6, 0xb8,
+	0x3e, 0x7e, 0x1f, 0x95, 0x8f, 0xfa, 0x5e, 0x3f, 0x7a, 0x38, 0xb5, 0x9c, 0x48, 0xa5, 0xb2, 0x51,
+	0x17, 0x66, 0x92, 0x7d, 0x08, 0xf9, 0xe8, 0xd0, 0xd0, 0x99, 0xf4, 0x61, 0xa7, 0x0c, 0xb9, 0x06,
+	0x73, 0x34, 0x8c, 0x70, 0xf1, 0x77, 0x54, 0xf1, 0x80, 0x21, 0x65, 0x93, 0x8d, 0x78, 0x0c, 0x79,
+	0x11, 0x79, 0x79, 0xfb, 0x74, 0x12, 0x8a, 0xa5, 0xa0, 0xc1, 0x8d, 0x7f, 0x02, 0x80, 0xa0, 0x07,
+	0x3c, 0xfa, 0x35, 0xb6, 0x6b, 0xb1, 0x5d, 0x70, 0x5e, 0x0f, 0xf4, 0xec, 0xb9, 0xc5, 0x36, 0x1e,
+	0x60, 0xbb, 0xd6, 0xf1, 0x30, 0xe6, 0x55, 0xf9, 0x5d, 0x16, 0x12, 0x1b, 0xdb, 0x35, 0x25, 0xee,
+	0x9c, 0x1b, 0x43, 0x16, 0xed, 0xca, 0x73, 0x80, 0x4a, 0x8f, 0x23, 0x31, 0xb6, 0x5a, 0x51, 0x34,
+	0x7f, 0xab, 0x6a, 0x83, 0xf3, 0x44, 0x1f, 0xeb, 0xd1, 0xf3, 0x96, 0x1d, 0xc8, 0xf1, 0x7b, 0x6f,
+	0x3e, 0x87, 0x49, 0xe5, 0xa0, 0xba, 0x16, 0xce, 0x8c, 0x40, 0x88, 0x9a, 0xf0, 0x0b, 0x40, 0x41,
+	0x81, 0xed, 0xda, 0x03, 0x51, 0x5f, 0x9f, 0x4b, 0x2a, 0x7d, 0x25, 0x5b, 0x6a, 0x3f, 0x3f, 0x1a,
+	0x24, 0xaa, 0xc2, 0x9f, 0x4e, 0xc2, 0xdc, 0x06, 0x7b, 0x1c, 0xc3, 0x8f, 0xaa, 0x69, 0x3e, 0x87,
+	0x68, 0xa1, 0x22, 0x9e, 0xcc, 0x70, 0x66, 0x59, 0x6b, 0x53, 0xa4, 0xb8, 0x0e, 0x39, 0x0c, 0x79,
+	0x01, 0xa6, 0x68, 0xa1, 0x75, 0x28, 0xee, 0x3e, 0x1c, 0x8f, 0x1e, 0x7e, 0xb8, 0xcd, 0xe9, 0xea,
+	0x09, 0xb8, 0x22, 0x85, 0x6a, 0x7d, 0x7f, 0xdf, 0xf5, 0xac, 0x2f, 0x25, 0x4c, 0x8a, 0xeb, 0xf4,
+	0x31, 0xc5, 0xab, 0x3f, 0x3f, 0x06, 0xc7, 0xc5, 0x4a, 0xd9, 0xe0, 0xaf, 0x83, 0x9e, 0x1b, 0x8e,
+	0xd1, 0xc1, 0x99, 0x32, 0x48, 0xf6, 0xfd, 0x9f, 0x60, 0x56, 0x13, 0x51, 0x15, 0xa8, 0x50, 0x91,
+	0x4f, 0x8d, 0x04, 0xa5, 0x1c, 0xa3, 0x84, 0xf7, 0x5c, 0x92, 0x30, 0x32, 0xbb, 0x01, 0x5e, 0xeb,
+	0xc4, 0x80, 0x71, 0xbd, 0xeb, 0xb0, 0xc0, 0x63, 0x8a, 0x20, 0x10, 0xf4, 0x76, 0x80, 0x51, 0x18,
+	0x72, 0x2c, 0x45, 0x5d, 0x05, 0x41, 0x0f, 0xa1, 0xb4, 0xed, 0xba, 0x07, 0xfd, 0x9e, 0xa4, 0xac,
+	0x0f, 0x77, 0x3d, 0x9b, 0x67, 0xb5, 0x0c, 0xc9, 0xb9, 0x23, 0x34, 0xdc, 0xa1, 0x25, 0x96, 0x73,
+	0x20, 0xdb, 0x4d, 0x97, 0xca, 0x2f, 0x85, 0xf2, 0x96, 0x93, 0xf2, 0x25, 0xad, 0xfa, 0x9b, 0x49,
+	0x9a, 0x37, 0x19, 0xb6, 0x98, 0x15, 0x74, 0x8d, 0xa7, 0xae, 0x75, 0xab, 0x87, 0x6d, 0xcb, 0x89,
+	0x7f, 0x60, 0x5e, 0xac, 0xb0, 0x77, 0x5c, 0x21, 0xff, 0x12, 0x4b, 0x8f, 0x65, 0x5b, 0xbb, 0xad,
+	0x50, 0xb0, 0xe8, 0xba, 0x4c, 0xfd, 0x03, 0x8a, 0x86, 0x48, 0x92, 0x10, 0xb7, 0x21, 0xe3, 0x4a,
+	0x04, 0xa9, 0x7d, 0xa2, 0x45, 0x47, 0x3f, 0x46, 0x7f, 0x3f, 0x01, 0x73, 0xec, 0xdb, 0x3d, 0xd9,
+	0xc7, 0x1e, 0xba, 0x0f, 0x73, 0x8d, 0x7e, 0x8b, 0x98, 0x9e, 0xd5, 0xc2, 0xa8, 0x24, 0x6e, 0xe9,
+	0x05, 0xa5, 0xc7, 0x72, 0x84, 0x93, 0x09, 0xc4, 0xc8, 0x67, 0xbe, 0xdc, 0xae, 0x43, 0xde, 0x40,
+	0x41, 0x06, 0xc3, 0xff, 0x3d, 0x09, 0xb3, 0x9b, 0x03, 0x2c, 0x9f, 0x8f, 0x89, 0x13, 0x90, 0x51,
+	0x08, 0x5a, 0x11, 0x9d, 0xb0, 0x6f, 0xea, 0x8c, 0x14, 0x2e, 0x13, 0xce, 0x11, 0xc0, 0x6a, 0x74,
+	0xc0, 0xe2, 0x03, 0x52, 0x40, 0x48, 0x39, 0xb1, 0x6f, 0xaa, 0xa3, 0x1c, 0x53, 0x6a, 0x4d, 0xbe,
+	0x70, 0x63, 0x3d, 0xa3, 0x82, 0xb0, 0x63, 0x97, 0x60, 0x8f, 0x51, 0xca, 0xf9, 0xa8, 0x65, 0xd4,
+	0x30, 0x1a, 0xf7, 0x9a, 0x6e, 0xcf, 0x32, 0x65, 0x17, 0x01, 0x21, 0xa5, 0x8b, 0x07, 0x41, 0x1e,
+	0x40, 0x41, 0xc1, 0x47, 0x6f, 0xf1, 0x69, 0xd0, 0x32, 0x89, 0xf6, 0xd1, 0x3b, 0xca, 0xc8, 0x9a,
+	0x5e, 0xff, 0x6a, 0x12, 0x96, 0xa3, 0xc5, 0x3e, 0xb3, 0x7a, 0x87, 0x3d, 0xbb, 0xa4, 0x5b, 0xa7,
+	0x81, 0x9d, 0xb6, 0xbc, 0x13, 0x52, 0x06, 0xa6, 0x0d, 0xf3, 0x8a, 0xfc, 0x20, 0x30, 0x0e, 0xf8,
+	0x63, 0xfe, 0xe6, 0x47, 0x4c, 0xdd, 0xe9, 0xf8, 0x4d, 0xcb, 0xc8, 0xa9, 0xae, 0x69, 0x6b, 0xe4,
+	0x6c, 0x52, 0xed, 0x2a, 0xcc, 0x48, 0x51, 0x91, 0xc1, 0x3f, 0x7f, 0x98, 0x80, 0x99, 0xc7, 0x96,
+	0x2d, 0xbe, 0x52, 0xce, 0xd4, 0x3d, 0x4c, 0xac, 0x8e, 0x83, 0x0a, 0x15, 0xf6, 0x2a, 0x94, 0x72,
+	0x9e, 0xf0, 0x37, 0xaa, 0x25, 0x4e, 0x11, 0x00, 0x31, 0x11, 0xef, 0x89, 0x53, 0xaf, 0x18, 0xc2,
+	0xc3, 0xe7, 0x55, 0x01, 0x09, 0x5d, 0x82, 0xd9, 0xdd, 0x9e, 0xed, 0x1a, 0x6d, 0x3c, 0x06, 0x74,
+	0x6c, 0xd3, 0xaf, 0xc1, 0x5b, 0xcf, 0x8c, 0xbd, 0x9e, 0x89, 0x2e, 0xc0, 0x5b, 0x3b, 0xb8, 0x67,
+	0x0f, 0xd1, 0x62, 0x85, 0xbf, 0x5f, 0x95, 0xfb, 0xb4, 0x9c, 0x17, 0x04, 0x1e, 0x6b, 0x7f, 0x3c,
+	0x01, 0x93, 0xcf, 0x5e, 0xa2, 0x93, 0x70, 0xac, 0x81, 0x7d, 0x34, 0x57, 0x39, 0x18, 0x54, 0x5e,
+	0x1a, 0x76, 0x1f, 0x97, 0xc3, 0x9f, 0x68, 0x15, 0x8e, 0x6d, 0x61, 0x1f, 0xcd, 0x50, 0xca, 0x33,
+	0x3c, 0x8c, 0xb2, 0x56, 0xe0, 0xd8, 0x13, 0x83, 0x84, 0xac, 0x59, 0xfa, 0x63, 0xdd, 0x75, 0xed,
+	0x4c, 0xe5, 0xc0, 0x04, 0xe4, 0x5f, 0xb8, 0xbe, 0x75, 0x4b, 0x06, 0xfc, 0x5b, 0xb0, 0x4c, 0x5d,
+	0x48, 0x69, 0x7b, 0x96, 0xc9, 0xe6, 0xb8, 0x81, 0x7d, 0x5f, 0xbf, 0x68, 0x5a, 0xa8, 0xf0, 0x47,
+	0xb4, 0x92, 0x77, 0x4f, 0x7e, 0xb1, 0x4b, 0x12, 0xd4, 0xc0, 0xba, 0x70, 0xf5, 0x4f, 0x13, 0x50,
+	0x64, 0x46, 0xb0, 0xe7, 0x80, 0xd2, 0x92, 0x8b, 0xec, 0x41, 0x02, 0x23, 0xa1, 0xbc, 0x90, 0xe0,
+	0xef, 0x05, 0x63, 0xe7, 0x73, 0x8e, 0xbf, 0x35, 0x1b, 0x03, 0x7b, 0x0d, 0x0a, 0xac, 0x30, 0x66,
+	0xcc, 0xcd, 0xd7, 0x16, 0xf1, 0xc9, 0x68, 0x81, 0x0c, 0xbe, 0xfc, 0xe7, 0x24, 0x2c, 0xbc, 0xe0,
+	0x2f, 0x8d, 0xe5, 0x18, 0xaa, 0x00, 0x41, 0xf4, 0x21, 0xe8, 0x78, 0x45, 0x3e, 0x44, 0x1e, 0x15,
+	0x8e, 0xaa, 0x00, 0x0d, 0x8c, 0x9d, 0x4c, 0x32, 0x37, 0x21, 0xbf, 0xeb, 0x78, 0x59, 0x7b, 0xba,
+	0x1b, 0x3c, 0x03, 0xb0, 0x08, 0x5a, 0x0a, 0x44, 0xa2, 0x25, 0xcf, 0x89, 0x80, 0x1a, 0x9d, 0x58,
+	0x92, 0x39, 0x3f, 0x93, 0x4b, 0xa3, 0xe5, 0xbe, 0x46, 0x05, 0x45, 0x67, 0xcb, 0x7d, 0x5d, 0x8e,
+	0x51, 0xd0, 0x15, 0xfe, 0x6d, 0x51, 0x36, 0xd5, 0xa4, 0x4b, 0x03, 0x57, 0x7f, 0x37, 0x01, 0xcb,
+	0x8d, 0x7e, 0xcb, 0xfa, 0x92, 0xa6, 0xb1, 0x9e, 0x63, 0xd8, 0x75, 0xfe, 0xfc, 0x9b, 0x7f, 0x6c,
+	0x11, 0x1f, 0x34, 0xd6, 0x2d, 0xdb, 0x46, 0xf3, 0x15, 0xf9, 0x32, 0x9c, 0x36, 0xcb, 0x6a, 0x13,
+	0xad, 0x03, 0xe2, 0x96, 0x6a, 0x4f, 0xb7, 0x24, 0x48, 0x7b, 0xba, 0x95, 0x44, 0xce, 0xb2, 0x5e,
+	0x7e, 0x5b, 0x04, 0x88, 0x58, 0x7a, 0x03, 0x66, 0xeb, 0x7d, 0xcf, 0xdc, 0x37, 0x48, 0xb4, 0x4f,
+	0x25, 0x09, 0x28, 0x04, 0xe4, 0xa7, 0xce, 0xc0, 0xa5, 0x0b, 0x2c, 0x30, 0x39, 0x8a, 0x4b, 0x13,
+	0x4f, 0x26, 0xa3, 0x9b, 0xec, 0x2e, 0x5f, 0x21, 0x45, 0xfd, 0x9d, 0x22, 0xb5, 0x0e, 0x85, 0x5a,
+	0xbb, 0x2d, 0xed, 0xc7, 0xfe, 0xbe, 0xdb, 0x46, 0x27, 0x02, 0xa8, 0x42, 0x2f, 0xa7, 0xd0, 0xd1,
+	0x26, 0x94, 0xe4, 0xcb, 0xee, 0x37, 0x51, 0x73, 0x1d, 0x4a, 0x22, 0xc9, 0x53, 0xc8, 0x23, 0x32,
+	0xbd, 0xbb, 0x80, 0x58, 0x5a, 0x1b, 0xc5, 0x13, 0xed, 0x19, 0x4e, 0x62, 0x5f, 0x74, 0xe5, 0x1f,
+	0xab, 0x1b, 0x43, 0x54, 0x8a, 0xf2, 0xc3, 0xfd, 0xa5, 0xac, 0xa7, 0x35, 0xfe, 0xf5, 0x5d, 0xcc,
+	0x15, 0xd1, 0x2e, 0x3c, 0xb5, 0xa9, 0x24, 0x74, 0xa3, 0xf0, 0xa5, 0x2a, 0x27, 0x37, 0x36, 0xdd,
+	0x09, 0x0b, 0x20, 0xd8, 0x5d, 0x59, 0x84, 0x1e, 0xc2, 0xc2, 0x63, 0xcb, 0xf6, 0xb1, 0x17, 0xf4,
+	0x7d, 0x32, 0xc0, 0x44, 0x2c, 0x0e, 0x2b, 0x8c, 0x98, 0xad, 0xb7, 0x21, 0xff, 0xc8, 0x33, 0xf6,
+	0x24, 0x72, 0xfc, 0x05, 0xfb, 0x09, 0x14, 0x1f, 0x59, 0x7b, 0x7b, 0x51, 0x14, 0xcd, 0xb8, 0x24,
+	0x4c, 0xf0, 0xc2, 0xcf, 0xee, 0xba, 0xfc, 0x03, 0xee, 0xd3, 0x0d, 0xb7, 0xcb, 0xef, 0x4e, 0x4e,
+	0x29, 0x86, 0x4b, 0x72, 0xdc, 0xf2, 0x40, 0xe0, 0x3a, 0x40, 0xad, 0xdd, 0x16, 0xcd, 0x88, 0xb7,
+	0x04, 0xa5, 0x1c, 0xa3, 0xa0, 0xcb, 0x3c, 0x4c, 0xd6, 0x6d, 0x23, 0x7e, 0xcd, 0xb9, 0x10, 0x2e,
+	0x03, 0xc6, 0xbe, 0x0a, 0xf3, 0x9b, 0xaf, 0x7b, 0xae, 0x17, 0x38, 0x46, 0x7d, 0x18, 0x1e, 0x38,
+	0xc9, 0xf7, 0x68, 0x90, 0xb8, 0x2b, 0x9f, 0x10, 0x48, 0x78, 0xd3, 0x7d, 0xe2, 0x77, 0xed, 0x84,
+	0x39, 0x8c, 0x89, 0x3e, 0x88, 0x3f, 0x57, 0xcd, 0x16, 0xa8, 0x6e, 0xc0, 0x7c, 0xd3, 0x33, 0x1c,
+	0xb2, 0x87, 0xbd, 0xe7, 0xae, 0x83, 0xc7, 0x5b, 0xd1, 0x99, 0xc2, 0x3e, 0xbb, 0x15, 0xdb, 0x76,
+	0x3b, 0xb4, 0xae, 0x88, 0x4e, 0x12, 0x25, 0xc5, 0xf5, 0x33, 0xe0, 0x26, 0x94, 0x44, 0x49, 0xe8,
+	0xb9, 0x5d, 0x97, 0x3d, 0x66, 0x73, 0xdb, 0x38, 0x1a, 0x10, 0xa2, 0xf4, 0x72, 0x0a, 0x1d, 0xdd,
+	0x83, 0x02, 0x2d, 0x42, 0x15, 0x9a, 0xee, 0xc1, 0x54, 0xe1, 0x87, 0x50, 0xd8, 0x25, 0x9a, 0x01,
+	0x6f, 0x27, 0x63, 0x53, 0xce, 0xd5, 0x17, 0x70, 0xfc, 0xa5, 0x61, 0x5b, 0xed, 0xd8, 0x38, 0x0e,
+	0x51, 0x93, 0x66, 0xd1, 0xa7, 0xfc, 0x8b, 0xa9, 0x4a, 0x3c, 0xa3, 0xf8, 0x34, 0x51, 0xdf, 0x72,
+	0xb2, 0x3e, 0x12, 0x09, 0x98, 0x8a, 0xca, 0x11, 0x01, 0x73, 0x43, 0xde, 0x6b, 0xec, 0xe0, 0x3d,
+	0xec, 0x79, 0x86, 0x8d, 0xde, 0x09, 0xfd, 0x19, 0x61, 0xe0, 0x76, 0x7c, 0xeb, 0x05, 0x22, 0xfc,
+	0xe1, 0x79, 0xd0, 0x4c, 0x0e, 0x87, 0x01, 0xfb, 0x5e, 0xf0, 0x3a, 0x33, 0x20, 0x69, 0x9b, 0x6f,
+	0x35, 0x26, 0x14, 0x54, 0xc4, 0xc1, 0xeb, 0xf3, 0x40, 0x36, 0xde, 0x43, 0x52, 0xa7, 0x0f, 0xa0,
+	0xc4, 0x2e, 0xb4, 0xe4, 0xbf, 0x3f, 0xf8, 0x98, 0x14, 0x53, 0x4f, 0x45, 0x97, 0xac, 0x06, 0x24,
+	0xe8, 0x19, 0xac, 0x52, 0x05, 0x74, 0xb7, 0xac, 0x0f, 0x47, 0xa9, 0x39, 0x1b, 0x55, 0x93, 0x08,
+	0x27, 0xe8, 0x29, 0x7f, 0xa1, 0x57, 0x37, 0xac, 0xf6, 0x63, 0xd7, 0x63, 0x0f, 0x49, 0x04, 0x53,
+	0x7d, 0x9b, 0x7c, 0x26, 0xaa, 0x2b, 0x09, 0x4d, 0xd0, 0x16, 0x2c, 0x25, 0xaa, 0x79, 0xf7, 0x30,
+	0x51, 0xfd, 0x86, 0xe8, 0x05, 0xe4, 0xea, 0xb6, 0x61, 0xe2, 0x27, 0xec, 0x0f, 0x77, 0xe8, 0x01,
+	0xcc, 0x88, 0x1b, 0x4e, 0x7a, 0x86, 0x44, 0xfe, 0x89, 0x27, 0xa8, 0xe1, 0xdd, 0x79, 0x02, 0xb3,
+	0x7d, 0xf6, 0x3b, 0x55, 0x07, 0xa6, 0xeb, 0xec, 0xef, 0x7c, 0xe8, 0x7a, 0xf4, 0x52, 0x61, 0xa9,
+	0x22, 0xfe, 0xe4, 0xa7, 0x9c, 0x27, 0xb1, 0x54, 0x59, 0xb9, 0x52, 0x18, 0x47, 0xa6, 0xfa, 0x9f,
+	0x09, 0x98, 0xff, 0x9c, 0xfd, 0xe7, 0x4f, 0x26, 0xe9, 0xe7, 0x44, 0xd5, 0xa8, 0x86, 0x6a, 0xf1,
+	0xbf, 0x40, 0x59, 0xc3, 0x5c, 0x0e, 0xae, 0x5e, 0x75, 0x56, 0x1c, 0x5b, 0x85, 0x45, 0xf9, 0x84,
+	0x3c, 0xa9, 0x76, 0x2a, 0x49, 0x7c, 0x14, 0x70, 0x1f, 0x8a, 0xe1, 0xe3, 0x74, 0x49, 0x4c, 0x42,
+	0x26, 0x8b, 0x67, 0x48, 0x3b, 0x1d, 0x58, 0x12, 0x23, 0xaf, 0xb1, 0x7f, 0x37, 0xca, 0x2b, 0xd7,
+	0x8b, 0xec, 0x8b, 0x0a, 0xa7, 0xe9, 0x7f, 0xe8, 0xe2, 0x7f, 0x83, 0x14, 0xbc, 0x35, 0xc8, 0xf3,
+	0x0b, 0x57, 0xd1, 0xd6, 0xf8, 0xba, 0xc3, 0x7f, 0x36, 0x09, 0x0b, 0x9f, 0xe3, 0xd6, 0xbe, 0xeb,
+	0x1e, 0x8c, 0xf6, 0xb8, 0xb8, 0x25, 0x16, 0x58, 0x74, 0x0e, 0xa6, 0x79, 0x90, 0x1a, 0x15, 0x97,
+	0xce, 0xc3, 0x14, 0xdd, 0x21, 0xfa, 0xad, 0xac, 0xa2, 0x89, 0x28, 0x93, 0xa7, 0xf2, 0xe2, 0xdd,
+	0x5e, 0x0e, 0x6e, 0xe3, 0x0f, 0xc7, 0xae, 0xc1, 0x54, 0x13, 0x6b, 0xbd, 0xaf, 0x6a, 0xa0, 0x26,
+	0xff, 0xf7, 0x63, 0xdf, 0xf6, 0x5b, 0xd3, 0xec, 0xcf, 0xa3, 0x37, 0xfe, 0x1b, 0x00, 0x00, 0xff,
+	0xff, 0xae, 0xac, 0x94, 0x93, 0x77, 0x3b, 0x00, 0x00,
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConn
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion4
+
+// ApiServerClient is the client API for ApiServer service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ApiServerClient interface {
+	Call(ctx context.Context, in *api.Request, opts ...grpc.CallOption) (*api.Response, error)
+}
+
+type apiServerClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewApiServerClient(cc *grpc.ClientConn) ApiServerClient {
+	return &apiServerClient{cc}
+}
+
+func (c *apiServerClient) Call(ctx context.Context, in *api.Request, opts ...grpc.CallOption) (*api.Response, error) {
+	out := new(api.Response)
+	err := c.cc.Invoke(ctx, "/header.ApiServer/Call", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ApiServerServer is the server API for ApiServer service.
+type ApiServerServer interface {
+	Call(context.Context, *api.Request) (*api.Response, error)
+}
+
+func RegisterApiServerServer(s *grpc.Server, srv ApiServerServer) {
+	s.RegisterService(&_ApiServer_serviceDesc, srv)
+}
+
+func _ApiServer_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(api.Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServerServer).Call(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ApiServer/Call",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServerServer).Call(ctx, req.(*api.Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ApiServer_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ApiServer",
+	HandlerType: (*ApiServerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Call",
+			Handler:    _ApiServer_Call_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AccSubMgrClient is the client API for AccSubMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AccSubMgrClient interface {
+	SearchSub(ctx context.Context, in *account.SearchSubRequest, opts ...grpc.CallOption) (*account.AccSubs, error)
+}
+
+type accSubMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAccSubMgrClient(cc *grpc.ClientConn) AccSubMgrClient {
+	return &accSubMgrClient{cc}
+}
+
+func (c *accSubMgrClient) SearchSub(ctx context.Context, in *account.SearchSubRequest, opts ...grpc.CallOption) (*account.AccSubs, error) {
+	out := new(account.AccSubs)
+	err := c.cc.Invoke(ctx, "/header.AccSubMgr/SearchSub", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AccSubMgrServer is the server API for AccSubMgr service.
+type AccSubMgrServer interface {
+	SearchSub(context.Context, *account.SearchSubRequest) (*account.AccSubs, error)
+}
+
+func RegisterAccSubMgrServer(s *grpc.Server, srv AccSubMgrServer) {
+	s.RegisterService(&_AccSubMgr_serviceDesc, srv)
+}
+
+func _AccSubMgr_SearchSub_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.SearchSubRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccSubMgrServer).SearchSub(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccSubMgr/SearchSub",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccSubMgrServer).SearchSub(ctx, req.(*account.SearchSubRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AccSubMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AccSubMgr",
+	HandlerType: (*AccSubMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchSub",
+			Handler:    _AccSubMgr_SearchSub_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AccountMgrClient is the client API for AccountMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AccountMgrClient interface {
+	CreateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error)
+	UpdateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error)
+	GetGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroup, error)
+	RequestResetPassword(ctx context.Context, in *account.ResetPasswordRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UpdatePassword(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error)
+	UpdateAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error)
+	RequestChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error)
+	ConfirmChangeEmail(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error)
+	AcceptInvitation(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error)
+	GetInvitation(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error)
+	InviteAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	GetAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error)
+	ConfirmAccount(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Account, error)
+	GetAccount(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Account, error)
+	UpdateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error)
+	CreateAccount(ctx context.Context, in *account.CreateAccountRequest, opts ...grpc.CallOption) (*account.Account, error)
+	ListAgents(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agents, error)
+	CheckLogin(ctx context.Context, in *account.LoginRequest, opts ...grpc.CallOption) (*common.Id, error)
+	Login(ctx context.Context, in *account.LoginRequest, opts ...grpc.CallOption) (*account.Agent, error)
+	DeleteGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListGroups(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroups, error)
+	AddAgentToGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error)
+	RemoveAgentFromGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	ChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error)
+	IntegrateBot(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	SyncPublicHolidays(ctx context.Context, in *account.SyncPublicHolidaysRequest, opts ...grpc.CallOption) (*account.BusinessHours, error)
+}
+
+type accountMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAccountMgrClient(cc *grpc.ClientConn) AccountMgrClient {
+	return &accountMgrClient{cc}
+}
+
+func (c *accountMgrClient) CreateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error) {
+	out := new(account.AgentGroup)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/CreateGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error) {
+	out := new(account.AgentGroup)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdateGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroup, error) {
+	out := new(account.AgentGroup)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RequestResetPassword(ctx context.Context, in *account.ResetPasswordRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/RequestResetPassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdatePassword(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdatePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdateAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdateAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/DeleteAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RequestChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/RequestChangeEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ConfirmChangeEmail(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ConfirmChangeEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) AcceptInvitation(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/AcceptInvitation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetInvitation(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetInvitation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) InviteAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/InviteAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ConfirmAccount(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ConfirmAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetAccount(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) CreateAccount(ctx context.Context, in *account.CreateAccountRequest, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/CreateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ListAgents(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agents, error) {
+	out := new(account.Agents)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ListAgents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) CheckLogin(ctx context.Context, in *account.LoginRequest, opts ...grpc.CallOption) (*common.Id, error) {
+	out := new(common.Id)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/CheckLogin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) Login(ctx context.Context, in *account.LoginRequest, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) DeleteGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/DeleteGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ListGroups(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroups, error) {
+	out := new(account.AgentGroups)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ListGroups", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) AddAgentToGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/AddAgentToGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RemoveAgentFromGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/RemoveAgentFromGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ChangeEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error) {
+	out := new(common.Ids)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/QueryByObjectPath", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) IntegrateBot(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/IntegrateBot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) SyncPublicHolidays(ctx context.Context, in *account.SyncPublicHolidaysRequest, opts ...grpc.CallOption) (*account.BusinessHours, error) {
+	out := new(account.BusinessHours)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/SyncPublicHolidays", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AccountMgrServer is the server API for AccountMgr service.
+type AccountMgrServer interface {
+	CreateGroup(context.Context, *account.AgentGroup) (*account.AgentGroup, error)
+	UpdateGroup(context.Context, *account.AgentGroup) (*account.AgentGroup, error)
+	GetGroup(context.Context, *common.Id) (*account.AgentGroup, error)
+	RequestResetPassword(context.Context, *account.ResetPasswordRequest) (*common.Empty, error)
+	UpdatePassword(context.Context, *account.NewPassword) (*account.Agent, error)
+	UpdateAgent(context.Context, *account.Agent) (*account.Agent, error)
+	DeleteAgent(context.Context, *common.Id) (*account.Agent, error)
+	RequestChangeEmail(context.Context, *account.Agent) (*common.Empty, error)
+	ConfirmChangeEmail(context.Context, *account.Token) (*account.Agent, error)
+	AcceptInvitation(context.Context, *account.NewPassword) (*account.Agent, error)
+	GetInvitation(context.Context, *account.Token) (*account.Agent, error)
+	InviteAgent(context.Context, *account.Agent) (*account.Agent, error)
+	GetAgent(context.Context, *common.Id) (*account.Agent, error)
+	ConfirmAccount(context.Context, *account.Token) (*account.Account, error)
+	GetAccount(context.Context, *common.Id) (*account.Account, error)
+	UpdateAccount(context.Context, *account.Account) (*account.Account, error)
+	CreateAccount(context.Context, *account.CreateAccountRequest) (*account.Account, error)
+	ListAgents(context.Context, *common.Id) (*account.Agents, error)
+	CheckLogin(context.Context, *account.LoginRequest) (*common.Id, error)
+	Login(context.Context, *account.LoginRequest) (*account.Agent, error)
+	DeleteGroup(context.Context, *common.Id) (*common.Empty, error)
+	ListGroups(context.Context, *common.Id) (*account.AgentGroups, error)
+	AddAgentToGroup(context.Context, *account.GroupMember) (*common.Empty, error)
+	RemoveAgentFromGroup(context.Context, *account.GroupMember) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	ChangeEmail(context.Context, *account.Agent) (*account.Agent, error)
+	QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error)
+	IntegrateBot(context.Context, *account.Agent) (*account.Agent, error)
+	SyncPublicHolidays(context.Context, *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error)
+}
+
+func RegisterAccountMgrServer(s *grpc.Server, srv AccountMgrServer) {
+	s.RegisterService(&_AccountMgr_serviceDesc, srv)
+}
+
+func _AccountMgr_CreateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.AgentGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).CreateGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/CreateGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).CreateGroup(ctx, req.(*account.AgentGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.AgentGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdateGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdateGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdateGroup(ctx, req.(*account.AgentGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetGroup(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RequestResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ResetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RequestResetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/RequestResetPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RequestResetPassword(ctx, req.(*account.ResetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.NewPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdatePassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdatePassword(ctx, req.(*account.NewPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdateAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdateAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdateAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdateAgent(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_DeleteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).DeleteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/DeleteAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).DeleteAgent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RequestChangeEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RequestChangeEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/RequestChangeEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RequestChangeEmail(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ConfirmChangeEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ConfirmChangeEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ConfirmChangeEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ConfirmChangeEmail(ctx, req.(*account.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_AcceptInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.NewPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).AcceptInvitation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/AcceptInvitation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).AcceptInvitation(ctx, req.(*account.NewPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetInvitation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetInvitation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetInvitation(ctx, req.(*account.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_InviteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).InviteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/InviteAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).InviteAgent(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetAgent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ConfirmAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ConfirmAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ConfirmAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ConfirmAccount(ctx, req.(*account.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetAccount(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Account)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdateAccount(ctx, req.(*account.Account))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.CreateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/CreateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).CreateAccount(ctx, req.(*account.CreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ListAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListAgents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ListAgents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListAgents(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_CheckLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).CheckLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/CheckLogin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).CheckLogin(ctx, req.(*account.LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).Login(ctx, req.(*account.LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).DeleteGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/DeleteGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).DeleteGroup(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ListGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ListGroups",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListGroups(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_AddAgentToGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.GroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).AddAgentToGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/AddAgentToGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).AddAgentToGroup(ctx, req.(*account.GroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RemoveAgentFromGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.GroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RemoveAgentFromGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/RemoveAgentFromGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RemoveAgentFromGroup(ctx, req.(*account.GroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ChangeEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ChangeEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ChangeEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ChangeEmail(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_QueryByObjectPath_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.ObjectPathRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).QueryByObjectPath(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/QueryByObjectPath",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).QueryByObjectPath(ctx, req.(*common.ObjectPathRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_IntegrateBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).IntegrateBot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/IntegrateBot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).IntegrateBot(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_SyncPublicHolidays_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.SyncPublicHolidaysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).SyncPublicHolidays(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/SyncPublicHolidays",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).SyncPublicHolidays(ctx, req.(*account.SyncPublicHolidaysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AccountMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AccountMgr",
+	HandlerType: (*AccountMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateGroup",
+			Handler:    _AccountMgr_CreateGroup_Handler,
+		},
+		{
+			MethodName: "UpdateGroup",
+			Handler:    _AccountMgr_UpdateGroup_Handler,
+		},
+		{
+			MethodName: "GetGroup",
+			Handler:    _AccountMgr_GetGroup_Handler,
+		},
+		{
+			MethodName: "RequestResetPassword",
+			Handler:    _AccountMgr_RequestResetPassword_Handler,
+		},
+		{
+			MethodName: "UpdatePassword",
+			Handler:    _AccountMgr_UpdatePassword_Handler,
+		},
+		{
+			MethodName: "UpdateAgent",
+			Handler:    _AccountMgr_UpdateAgent_Handler,
+		},
+		{
+			MethodName: "DeleteAgent",
+			Handler:    _AccountMgr_DeleteAgent_Handler,
+		},
+		{
+			MethodName: "RequestChangeEmail",
+			Handler:    _AccountMgr_RequestChangeEmail_Handler,
+		},
+		{
+			MethodName: "ConfirmChangeEmail",
+			Handler:    _AccountMgr_ConfirmChangeEmail_Handler,
+		},
+		{
+			MethodName: "AcceptInvitation",
+			Handler:    _AccountMgr_AcceptInvitation_Handler,
+		},
+		{
+			MethodName: "GetInvitation",
+			Handler:    _AccountMgr_GetInvitation_Handler,
+		},
+		{
+			MethodName: "InviteAgent",
+			Handler:    _AccountMgr_InviteAgent_Handler,
+		},
+		{
+			MethodName: "GetAgent",
+			Handler:    _AccountMgr_GetAgent_Handler,
+		},
+		{
+			MethodName: "ConfirmAccount",
+			Handler:    _AccountMgr_ConfirmAccount_Handler,
+		},
+		{
+			MethodName: "GetAccount",
+			Handler:    _AccountMgr_GetAccount_Handler,
+		},
+		{
+			MethodName: "UpdateAccount",
+			Handler:    _AccountMgr_UpdateAccount_Handler,
+		},
+		{
+			MethodName: "CreateAccount",
+			Handler:    _AccountMgr_CreateAccount_Handler,
+		},
+		{
+			MethodName: "ListAgents",
+			Handler:    _AccountMgr_ListAgents_Handler,
+		},
+		{
+			MethodName: "CheckLogin",
+			Handler:    _AccountMgr_CheckLogin_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _AccountMgr_Login_Handler,
+		},
+		{
+			MethodName: "DeleteGroup",
+			Handler:    _AccountMgr_DeleteGroup_Handler,
+		},
+		{
+			MethodName: "ListGroups",
+			Handler:    _AccountMgr_ListGroups_Handler,
+		},
+		{
+			MethodName: "AddAgentToGroup",
+			Handler:    _AccountMgr_AddAgentToGroup_Handler,
+		},
+		{
+			MethodName: "RemoveAgentFromGroup",
+			Handler:    _AccountMgr_RemoveAgentFromGroup_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _AccountMgr_Ping_Handler,
+		},
+		{
+			MethodName: "ChangeEmail",
+			Handler:    _AccountMgr_ChangeEmail_Handler,
+		},
+		{
+			MethodName: "QueryByObjectPath",
+			Handler:    _AccountMgr_QueryByObjectPath_Handler,
+		},
+		{
+			MethodName: "IntegrateBot",
+			Handler:    _AccountMgr_IntegrateBot_Handler,
+		},
+		{
+			MethodName: "SyncPublicHolidays",
+			Handler:    _AccountMgr_SyncPublicHolidays_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// CurrencyMgrClient is the client API for CurrencyMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type CurrencyMgrClient interface {
+	ListCurrencies(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*account.Currencies, error)
+	GetCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Currency, error)
+	CreateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error)
+	UpdateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error)
+	DeleteCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListExchangeRates(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRates, error)
+	GetExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRate, error)
+	CreateExchangeRate(ctx context.Context, in *account.ExchangeRate, opts ...grpc.CallOption) (*account.ExchangeRate, error)
+	DeleteExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type currencyMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewCurrencyMgrClient(cc *grpc.ClientConn) CurrencyMgrClient {
+	return &currencyMgrClient{cc}
+}
+
+func (c *currencyMgrClient) ListCurrencies(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*account.Currencies, error) {
+	out := new(account.Currencies)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/ListCurrencies", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) GetCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Currency, error) {
+	out := new(account.Currency)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/GetCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) CreateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error) {
+	out := new(account.Currency)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/CreateCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) UpdateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error) {
+	out := new(account.Currency)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/UpdateCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) DeleteCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/DeleteCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) ListExchangeRates(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRates, error) {
+	out := new(account.ExchangeRates)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/ListExchangeRates", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) GetExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRate, error) {
+	out := new(account.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/GetExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) CreateExchangeRate(ctx context.Context, in *account.ExchangeRate, opts ...grpc.CallOption) (*account.ExchangeRate, error) {
+	out := new(account.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/CreateExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) DeleteExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/DeleteExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CurrencyMgrServer is the server API for CurrencyMgr service.
+type CurrencyMgrServer interface {
+	ListCurrencies(context.Context, *common.Empty) (*account.Currencies, error)
+	GetCurrency(context.Context, *common.Id) (*account.Currency, error)
+	CreateCurrency(context.Context, *account.Currency) (*account.Currency, error)
+	UpdateCurrency(context.Context, *account.Currency) (*account.Currency, error)
+	DeleteCurrency(context.Context, *common.Id) (*common.Empty, error)
+	ListExchangeRates(context.Context, *account.ExchangeRateRequest) (*account.ExchangeRates, error)
+	GetExchangeRate(context.Context, *account.ExchangeRateRequest) (*account.ExchangeRate, error)
+	CreateExchangeRate(context.Context, *account.ExchangeRate) (*account.ExchangeRate, error)
+	DeleteExchangeRate(context.Context, *account.ExchangeRateRequest) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterCurrencyMgrServer(s *grpc.Server, srv CurrencyMgrServer) {
+	s.RegisterService(&_CurrencyMgr_serviceDesc, srv)
+}
+
+func _CurrencyMgr_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).ListCurrencies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/ListCurrencies",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).ListCurrencies(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_GetCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).GetCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/GetCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).GetCurrency(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_CreateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Currency)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).CreateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/CreateCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).CreateCurrency(ctx, req.(*account.Currency))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_UpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Currency)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).UpdateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/UpdateCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).UpdateCurrency(ctx, req.(*account.Currency))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_DeleteCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).DeleteCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/DeleteCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).DeleteCurrency(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_ListExchangeRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).ListExchangeRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/ListExchangeRates",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).ListExchangeRates(ctx, req.(*account.ExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_GetExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).GetExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/GetExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).GetExchangeRate(ctx, req.(*account.ExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_CreateExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).CreateExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/CreateExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).CreateExchangeRate(ctx, req.(*account.ExchangeRate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_DeleteExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).DeleteExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/DeleteExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).DeleteExchangeRate(ctx, req.(*account.ExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _CurrencyMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.CurrencyMgr",
+	HandlerType: (*CurrencyMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListCurrencies",
+			Handler:    _CurrencyMgr_ListCurrencies_Handler,
+		},
+		{
+			MethodName: "GetCurrency",
+			Handler:    _CurrencyMgr_GetCurrency_Handler,
+		},
+		{
+			MethodName: "CreateCurrency",
+			Handler:    _CurrencyMgr_CreateCurrency_Handler,
+		},
+		{
+			MethodName: "UpdateCurrency",
+			Handler:    _CurrencyMgr_UpdateCurrency_Handler,
+		},
+		{
+			MethodName: "DeleteCurrency",
+			Handler:    _CurrencyMgr_DeleteCurrency_Handler,
+		},
+		{
+			MethodName: "ListExchangeRates",
+			Handler:    _CurrencyMgr_ListExchangeRates_Handler,
+		},
+		{
+			MethodName: "GetExchangeRate",
+			Handler:    _CurrencyMgr_GetExchangeRate_Handler,
+		},
+		{
+			MethodName: "CreateExchangeRate",
+			Handler:    _CurrencyMgr_CreateExchangeRate_Handler,
+		},
+		{
+			MethodName: "DeleteExchangeRate",
+			Handler:    _CurrencyMgr_DeleteExchangeRate_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _CurrencyMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// UserMgrClient is the client API for UserMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type UserMgrClient interface {
+	SearchUsers(ctx context.Context, in *user.UserSearchRequest, opts ...grpc.CallOption) (*user.UserSearchResult, error)
+	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
+	PickToSegmentation(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	DeleteFromSegmentation(ctx context.Context, in *user.UnpickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	CreateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error)
+	UpdateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error)
+	ReadUser(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.User, error)
+	CountSegmentationUserByAttribute(ctx context.Context, in *user.CountSegmentationUserByAttributeRequest, opts ...grpc.CallOption) (*user.CountResponse, error)
+	CountTotal(ctx context.Context, in *user.CountTotalRequest, opts ...grpc.CallOption) (*user.CountTotalResponse, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	AddAlias(ctx context.Context, in *user.Alias, opts ...grpc.CallOption) (*common.Empty, error)
+	MoveUserActivity(ctx context.Context, in *user.MergeRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type userMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewUserMgrClient(cc *grpc.ClientConn) UserMgrClient {
+	return &userMgrClient{cc}
+}
+
+func (c *userMgrClient) SearchUsers(ctx context.Context, in *user.UserSearchRequest, opts ...grpc.CallOption) (*user.UserSearchResult, error) {
+	out := new(user.UserSearchResult)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/SearchUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) PickToSegmentation(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/PickToSegmentation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) DeleteFromSegmentation(ctx context.Context, in *user.UnpickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/DeleteFromSegmentation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CreateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error) {
+	out := new(common.Id)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/CreateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) UpdateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error) {
+	out := new(common.Id)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) ReadUser(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.User, error) {
+	out := new(user.User)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/ReadUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CountSegmentationUserByAttribute(ctx context.Context, in *user.CountSegmentationUserByAttributeRequest, opts ...grpc.CallOption) (*user.CountResponse, error) {
+	out := new(user.CountResponse)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/CountSegmentationUserByAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CountTotal(ctx context.Context, in *user.CountTotalRequest, opts ...grpc.CallOption) (*user.CountTotalResponse, error) {
+	out := new(user.CountTotalResponse)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/CountTotal", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) AddAlias(ctx context.Context, in *user.Alias, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/AddAlias", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) MoveUserActivity(ctx context.Context, in *user.MergeRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/MoveUserActivity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UserMgrServer is the server API for UserMgr service.
+type UserMgrServer interface {
+	SearchUsers(context.Context, *user.UserSearchRequest) (*user.UserSearchResult, error)
+	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
+	PickToSegmentation(context.Context, *user.PickRequest) (*common.Empty, error)
+	DeleteFromSegmentation(context.Context, *user.UnpickRequest) (*common.Empty, error)
+	CreateUser(context.Context, *user.User) (*common.Id, error)
+	UpdateUser(context.Context, *user.User) (*common.Id, error)
+	ReadUser(context.Context, *common.Id) (*user.User, error)
+	CountSegmentationUserByAttribute(context.Context, *user.CountSegmentationUserByAttributeRequest) (*user.CountResponse, error)
+	CountTotal(context.Context, *user.CountTotalRequest) (*user.CountTotalResponse, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	AddAlias(context.Context, *user.Alias) (*common.Empty, error)
+	MoveUserActivity(context.Context, *user.MergeRequest) (*common.Empty, error)
+}
+
+func RegisterUserMgrServer(s *grpc.Server, srv UserMgrServer) {
+	s.RegisterService(&_UserMgr_serviceDesc, srv)
+}
+
+func _UserMgr_SearchUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.UserSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).SearchUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/SearchUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).SearchUsers(ctx, req.(*user.UserSearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_PickToSegmentation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.PickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).PickToSegmentation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/PickToSegmentation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).PickToSegmentation(ctx, req.(*user.PickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_DeleteFromSegmentation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.UnpickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).DeleteFromSegmentation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/DeleteFromSegmentation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).DeleteFromSegmentation(ctx, req.(*user.UnpickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CreateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/CreateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CreateUser(ctx, req.(*user.User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/UpdateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).UpdateUser(ctx, req.(*user.User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_ReadUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).ReadUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/ReadUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).ReadUser(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CountSegmentationUserByAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.CountSegmentationUserByAttributeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CountSegmentationUserByAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/CountSegmentationUserByAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CountSegmentationUserByAttribute(ctx, req.(*user.CountSegmentationUserByAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CountTotal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.CountTotalRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CountTotal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/CountTotal",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CountTotal(ctx, req.(*user.CountTotalRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_AddAlias_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Alias)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).AddAlias(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/AddAlias",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).AddAlias(ctx, req.(*user.Alias))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_MoveUserActivity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.MergeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).MoveUserActivity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/MoveUserActivity",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).MoveUserActivity(ctx, req.(*user.MergeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _UserMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.UserMgr",
+	HandlerType: (*UserMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchUsers",
+			Handler:    _UserMgr_SearchUsers_Handler,
+		},
+		{
+			MethodName: "PickToSegmentation",
+			Handler:    _UserMgr_PickToSegmentation_Handler,
+		},
+		{
+			MethodName: "DeleteFromSegmentation",
+			Handler:    _UserMgr_DeleteFromSegmentation_Handler,
+		},
+		{
+			MethodName: "CreateUser",
+			Handler:    _UserMgr_CreateUser_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _UserMgr_UpdateUser_Handler,
+		},
+		{
+			MethodName: "ReadUser",
+			Handler:    _UserMgr_ReadUser_Handler,
+		},
+		{
+			MethodName: "CountSegmentationUserByAttribute",
+			Handler:    _UserMgr_CountSegmentationUserByAttribute_Handler,
+		},
+		{
+			MethodName: "CountTotal",
+			Handler:    _UserMgr_CountTotal_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _UserMgr_Ping_Handler,
+		},
+		{
+			MethodName: "AddAlias",
+			Handler:    _UserMgr_AddAlias_Handler,
+		},
+		{
+			MethodName: "MoveUserActivity",
+			Handler:    _UserMgr_MoveUserActivity_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// VisitorMgrClient is the client API for VisitorMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type VisitorMgrClient interface {
+	ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+	UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+	ReadPreview(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.LastView, error)
+	ListTopVisitors(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Visitors, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type visitorMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewVisitorMgrClient(cc *grpc.ClientConn) VisitorMgrClient {
+	return &visitorMgrClient{cc}
+}
+
+func (c *visitorMgrClient) ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/ReadPresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitorMgrClient) UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/UpdatePresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitorMgrClient) ReadPreview(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.LastView, error) {
+	out := new(user.LastView)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/ReadPreview", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitorMgrClient) ListTopVisitors(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Visitors, error) {
+	out := new(user.Visitors)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/ListTopVisitors", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitorMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// VisitorMgrServer is the server API for VisitorMgr service.
+type VisitorMgrServer interface {
+	ReadPresence(context.Context, *common.Id) (*user.Presence, error)
+	UpdatePresence(context.Context, *common.Id) (*user.Presence, error)
+	ReadPreview(context.Context, *common.Id) (*user.LastView, error)
+	ListTopVisitors(context.Context, *common.Id) (*user.Visitors, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterVisitorMgrServer(s *grpc.Server, srv VisitorMgrServer) {
+	s.RegisterService(&_VisitorMgr_serviceDesc, srv)
+}
+
+func _VisitorMgr_ReadPresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).ReadPresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/ReadPresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).ReadPresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VisitorMgr_UpdatePresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).UpdatePresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/UpdatePresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).UpdatePresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VisitorMgr_ReadPreview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).ReadPreview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/ReadPreview",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).ReadPreview(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VisitorMgr_ListTopVisitors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).ListTopVisitors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/ListTopVisitors",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).ListTopVisitors(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VisitorMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _VisitorMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.VisitorMgr",
+	HandlerType: (*VisitorMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadPresence",
+			Handler:    _VisitorMgr_ReadPresence_Handler,
+		},
+		{
+			MethodName: "UpdatePresence",
+			Handler:    _VisitorMgr_UpdatePresence_Handler,
+		},
+		{
+			MethodName: "ReadPreview",
+			Handler:    _VisitorMgr_ReadPreview_Handler,
+		},
+		{
+			MethodName: "ListTopVisitors",
+			Handler:    _VisitorMgr_ListTopVisitors_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _VisitorMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AutomationCreditMgrClient is the client API for AutomationCreditMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AutomationCreditMgrClient interface {
+	GetAutomationCredit(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.AutomationCredit, error)
+	AddAutomationCredit(ctx context.Context, in *event.AutomationCredit, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type automationCreditMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAutomationCreditMgrClient(cc *grpc.ClientConn) AutomationCreditMgrClient {
+	return &automationCreditMgrClient{cc}
+}
+
+func (c *automationCreditMgrClient) GetAutomationCredit(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.AutomationCredit, error) {
+	out := new(event.AutomationCredit)
+	err := c.cc.Invoke(ctx, "/header.AutomationCreditMgr/GetAutomationCredit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationCreditMgrClient) AddAutomationCredit(ctx context.Context, in *event.AutomationCredit, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AutomationCreditMgr/AddAutomationCredit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AutomationCreditMgrServer is the server API for AutomationCreditMgr service.
+type AutomationCreditMgrServer interface {
+	GetAutomationCredit(context.Context, *common.Id) (*event.AutomationCredit, error)
+	AddAutomationCredit(context.Context, *event.AutomationCredit) (*common.Empty, error)
+}
+
+func RegisterAutomationCreditMgrServer(s *grpc.Server, srv AutomationCreditMgrServer) {
+	s.RegisterService(&_AutomationCreditMgr_serviceDesc, srv)
+}
+
+func _AutomationCreditMgr_GetAutomationCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationCreditMgrServer).GetAutomationCredit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationCreditMgr/GetAutomationCredit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationCreditMgrServer).GetAutomationCredit(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationCreditMgr_AddAutomationCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationCredit)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationCreditMgrServer).AddAutomationCredit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationCreditMgr/AddAutomationCredit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationCreditMgrServer).AddAutomationCredit(ctx, req.(*event.AutomationCredit))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AutomationCreditMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AutomationCreditMgr",
+	HandlerType: (*AutomationCreditMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAutomationCredit",
+			Handler:    _AutomationCreditMgr_GetAutomationCredit_Handler,
+		},
+		{
+			MethodName: "AddAutomationCredit",
+			Handler:    _AutomationCreditMgr_AddAutomationCredit_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// NoteMgrClient is the client API for NoteMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type NoteMgrClient interface {
+	ListNotes(ctx context.Context, in *user.ListNotesRequest, opts ...grpc.CallOption) (*user.Notes, error)
+	AddNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error)
+	UpdateNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error)
+	DeleteNote(ctx context.Context, in *user.DeleteNoteRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type noteMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewNoteMgrClient(cc *grpc.ClientConn) NoteMgrClient {
+	return &noteMgrClient{cc}
+}
+
+func (c *noteMgrClient) ListNotes(ctx context.Context, in *user.ListNotesRequest, opts ...grpc.CallOption) (*user.Notes, error) {
+	out := new(user.Notes)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/ListNotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) AddNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error) {
+	out := new(user.Note)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/AddNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) UpdateNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error) {
+	out := new(user.Note)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/UpdateNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) DeleteNote(ctx context.Context, in *user.DeleteNoteRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/DeleteNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NoteMgrServer is the server API for NoteMgr service.
+type NoteMgrServer interface {
+	ListNotes(context.Context, *user.ListNotesRequest) (*user.Notes, error)
+	AddNote(context.Context, *user.Note) (*user.Note, error)
+	UpdateNote(context.Context, *user.Note) (*user.Note, error)
+	DeleteNote(context.Context, *user.DeleteNoteRequest) (*common.Empty, error)
+}
+
+func RegisterNoteMgrServer(s *grpc.Server, srv NoteMgrServer) {
+	s.RegisterService(&_NoteMgr_serviceDesc, srv)
+}
+
+func _NoteMgr_ListNotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.ListNotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).ListNotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/ListNotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).ListNotes(ctx, req.(*user.ListNotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_AddNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Note)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).AddNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/AddNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).AddNote(ctx, req.(*user.Note))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_UpdateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Note)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).UpdateNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/UpdateNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).UpdateNote(ctx, req.(*user.Note))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_DeleteNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.DeleteNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).DeleteNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/DeleteNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).DeleteNote(ctx, req.(*user.DeleteNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _NoteMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.NoteMgr",
+	HandlerType: (*NoteMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListNotes",
+			Handler:    _NoteMgr_ListNotes_Handler,
+		},
+		{
+			MethodName: "AddNote",
+			Handler:    _NoteMgr_AddNote_Handler,
+		},
+		{
+			MethodName: "UpdateNote",
+			Handler:    _NoteMgr_UpdateNote_Handler,
+		},
+		{
+			MethodName: "DeleteNote",
+			Handler:    _NoteMgr_DeleteNote_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AutomationMgrClient is the client API for AutomationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AutomationMgrClient interface {
+	ListAutomations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automations, error)
+	UpdateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error)
+	DeleteAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ReadAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automation, error)
+	CreateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type automationMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAutomationMgrClient(cc *grpc.ClientConn) AutomationMgrClient {
+	return &automationMgrClient{cc}
+}
+
+func (c *automationMgrClient) ListAutomations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automations, error) {
+	out := new(event.Automations)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/ListAutomations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) UpdateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error) {
+	out := new(event.Automation)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/UpdateAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) DeleteAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/DeleteAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) ReadAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automation, error) {
+	out := new(event.Automation)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/ReadAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) CreateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error) {
+	out := new(event.Automation)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/CreateAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AutomationMgrServer is the server API for AutomationMgr service.
+type AutomationMgrServer interface {
+	ListAutomations(context.Context, *common.Id) (*event.Automations, error)
+	UpdateAutomation(context.Context, *event.Automation) (*event.Automation, error)
+	DeleteAutomation(context.Context, *common.Id) (*common.Empty, error)
+	ReadAutomation(context.Context, *common.Id) (*event.Automation, error)
+	CreateAutomation(context.Context, *event.Automation) (*event.Automation, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterAutomationMgrServer(s *grpc.Server, srv AutomationMgrServer) {
+	s.RegisterService(&_AutomationMgr_serviceDesc, srv)
+}
+
+func _AutomationMgr_ListAutomations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).ListAutomations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/ListAutomations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).ListAutomations(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_UpdateAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Automation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).UpdateAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/UpdateAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).UpdateAutomation(ctx, req.(*event.Automation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_DeleteAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).DeleteAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/DeleteAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).DeleteAutomation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_ReadAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).ReadAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/ReadAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).ReadAutomation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_CreateAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Automation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).CreateAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/CreateAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).CreateAutomation(ctx, req.(*event.Automation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AutomationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AutomationMgr",
+	HandlerType: (*AutomationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListAutomations",
+			Handler:    _AutomationMgr_ListAutomations_Handler,
+		},
+		{
+			MethodName: "UpdateAutomation",
+			Handler:    _AutomationMgr_UpdateAutomation_Handler,
+		},
+		{
+			MethodName: "DeleteAutomation",
+			Handler:    _AutomationMgr_DeleteAutomation_Handler,
+		},
+		{
+			MethodName: "ReadAutomation",
+			Handler:    _AutomationMgr_ReadAutomation_Handler,
+		},
+		{
+			MethodName: "CreateAutomation",
+			Handler:    _AutomationMgr_CreateAutomation_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _AutomationMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AttributeMgrClient is the client API for AttributeMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AttributeMgrClient interface {
+	ListAttributeDefinitions(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*user.AttributeDefinitions, error)
+	CreateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error)
+	UpdateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error)
+	DeleteAttributeDefinition(ctx context.Context, in *user.DeleteAttrRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type attributeMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAttributeMgrClient(cc *grpc.ClientConn) AttributeMgrClient {
+	return &attributeMgrClient{cc}
+}
+
+func (c *attributeMgrClient) ListAttributeDefinitions(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*user.AttributeDefinitions, error) {
+	out := new(user.AttributeDefinitions)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/ListAttributeDefinitions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributeMgrClient) CreateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error) {
+	out := new(user.AttributeDefinition)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/CreateAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributeMgrClient) UpdateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error) {
+	out := new(user.AttributeDefinition)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/UpdateAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributeMgrClient) DeleteAttributeDefinition(ctx context.Context, in *user.DeleteAttrRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/DeleteAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributeMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AttributeMgrServer is the server API for AttributeMgr service.
+type AttributeMgrServer interface {
+	ListAttributeDefinitions(context.Context, *common.Empty) (*user.AttributeDefinitions, error)
+	CreateAttributeDefinition(context.Context, *user.AttributeDefinition) (*user.AttributeDefinition, error)
+	UpdateAttributeDefinition(context.Context, *user.AttributeDefinition) (*user.AttributeDefinition, error)
+	DeleteAttributeDefinition(context.Context, *user.DeleteAttrRequest) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterAttributeMgrServer(s *grpc.Server, srv AttributeMgrServer) {
+	s.RegisterService(&_AttributeMgr_serviceDesc, srv)
+}
+
+func _AttributeMgr_ListAttributeDefinitions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).ListAttributeDefinitions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/ListAttributeDefinitions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).ListAttributeDefinitions(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributeMgr_CreateAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.AttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).CreateAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/CreateAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).CreateAttributeDefinition(ctx, req.(*user.AttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributeMgr_UpdateAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.AttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).UpdateAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/UpdateAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).UpdateAttributeDefinition(ctx, req.(*user.AttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributeMgr_DeleteAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.DeleteAttrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).DeleteAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/DeleteAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).DeleteAttributeDefinition(ctx, req.(*user.DeleteAttrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributeMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AttributeMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AttributeMgr",
+	HandlerType: (*AttributeMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListAttributeDefinitions",
+			Handler:    _AttributeMgr_ListAttributeDefinitions_Handler,
+		},
+		{
+			MethodName: "CreateAttributeDefinition",
+			Handler:    _AttributeMgr_CreateAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "UpdateAttributeDefinition",
+			Handler:    _AttributeMgr_UpdateAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "DeleteAttributeDefinition",
+			Handler:    _AttributeMgr_DeleteAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _AttributeMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// SegmentationMgrClient is the client API for SegmentationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type SegmentationMgrClient interface {
+	CreateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error)
+	UpdateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error)
+	ListSegments(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentations, error)
+	DeleteSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ReadSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentation, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type segmentationMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewSegmentationMgrClient(cc *grpc.ClientConn) SegmentationMgrClient {
+	return &segmentationMgrClient{cc}
+}
+
+func (c *segmentationMgrClient) CreateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error) {
+	out := new(user.Segmentation)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/CreateSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) UpdateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error) {
+	out := new(user.Segmentation)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/UpdateSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) ListSegments(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentations, error) {
+	out := new(user.Segmentations)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/ListSegments", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) DeleteSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/DeleteSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) ReadSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentation, error) {
+	out := new(user.Segmentation)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/ReadSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SegmentationMgrServer is the server API for SegmentationMgr service.
+type SegmentationMgrServer interface {
+	CreateSegment(context.Context, *user.Segmentation) (*user.Segmentation, error)
+	UpdateSegment(context.Context, *user.Segmentation) (*user.Segmentation, error)
+	ListSegments(context.Context, *common.Id) (*user.Segmentations, error)
+	DeleteSegment(context.Context, *common.Id) (*common.Empty, error)
+	ReadSegment(context.Context, *common.Id) (*user.Segmentation, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterSegmentationMgrServer(s *grpc.Server, srv SegmentationMgrServer) {
+	s.RegisterService(&_SegmentationMgr_serviceDesc, srv)
+}
+
+func _SegmentationMgr_CreateSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Segmentation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).CreateSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/CreateSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).CreateSegment(ctx, req.(*user.Segmentation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_UpdateSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Segmentation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).UpdateSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/UpdateSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).UpdateSegment(ctx, req.(*user.Segmentation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_ListSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).ListSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/ListSegments",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).ListSegments(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_DeleteSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).DeleteSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/DeleteSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).DeleteSegment(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_ReadSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).ReadSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/ReadSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).ReadSegment(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _SegmentationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.SegmentationMgr",
+	HandlerType: (*SegmentationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateSegment",
+			Handler:    _SegmentationMgr_CreateSegment_Handler,
+		},
+		{
+			MethodName: "UpdateSegment",
+			Handler:    _SegmentationMgr_UpdateSegment_Handler,
+		},
+		{
+			MethodName: "ListSegments",
+			Handler:    _SegmentationMgr_ListSegments_Handler,
+		},
+		{
+			MethodName: "DeleteSegment",
+			Handler:    _SegmentationMgr_DeleteSegment_Handler,
+		},
+		{
+			MethodName: "ReadSegment",
+			Handler:    _SegmentationMgr_ReadSegment_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _SegmentationMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PermClient is the client API for Perm service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PermClient interface {
+	Update(ctx context.Context, in *auth.UpdatePermRequest, opts ...grpc.CallOption) (*auth.Empty, error)
+	UpdateState(ctx context.Context, in *auth.UpdateStateRequest, opts ...grpc.CallOption) (*auth.Empty, error)
+	ReadPerm(ctx context.Context, in *auth.ReadPermRequest, opts ...grpc.CallOption) (*auth.Permission, error)
+}
+
+type permClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewPermClient(cc *grpc.ClientConn) PermClient {
+	return &permClient{cc}
+}
+
+func (c *permClient) Update(ctx context.Context, in *auth.UpdatePermRequest, opts ...grpc.CallOption) (*auth.Empty, error) {
+	out := new(auth.Empty)
+	err := c.cc.Invoke(ctx, "/header.Perm/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *permClient) UpdateState(ctx context.Context, in *auth.UpdateStateRequest, opts ...grpc.CallOption) (*auth.Empty, error) {
+	out := new(auth.Empty)
+	err := c.cc.Invoke(ctx, "/header.Perm/UpdateState", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *permClient) ReadPerm(ctx context.Context, in *auth.ReadPermRequest, opts ...grpc.CallOption) (*auth.Permission, error) {
+	out := new(auth.Permission)
+	err := c.cc.Invoke(ctx, "/header.Perm/ReadPerm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PermServer is the server API for Perm service.
+type PermServer interface {
+	Update(context.Context, *auth.UpdatePermRequest) (*auth.Empty, error)
+	UpdateState(context.Context, *auth.UpdateStateRequest) (*auth.Empty, error)
+	ReadPerm(context.Context, *auth.ReadPermRequest) (*auth.Permission, error)
+}
+
+func RegisterPermServer(s *grpc.Server, srv PermServer) {
+	s.RegisterService(&_Perm_serviceDesc, srv)
+}
+
+func _Perm_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(auth.UpdatePermRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Perm/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermServer).Update(ctx, req.(*auth.UpdatePermRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Perm_UpdateState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(auth.UpdateStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermServer).UpdateState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Perm/UpdateState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermServer).UpdateState(ctx, req.(*auth.UpdateStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Perm_ReadPerm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(auth.ReadPermRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermServer).ReadPerm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Perm/ReadPerm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermServer).ReadPerm(ctx, req.(*auth.ReadPermRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Perm_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Perm",
+	HandlerType: (*PermServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Update",
+			Handler:    _Perm_Update_Handler,
+		},
+		{
+			MethodName: "UpdateState",
+			Handler:    _Perm_UpdateState_Handler,
+		},
+		{
+			MethodName: "ReadPerm",
+			Handler:    _Perm_ReadPerm_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ConversationReporterClient is the client API for ConversationReporter service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ConversationReporterClient interface {
+	CountConversationsByTags(ctx context.Context, in *conversation.CountByTagsRequest, opts ...grpc.CallOption) (*conversation.CountByTagsResponse, error)
+	GetAvgResponseTimes(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResponseTimeResponse, error)
+	GetTotalConversation(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.TotalConversationResponse, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	ReportConversations(ctx context.Context, in *conversation.CountReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error)
+	ReportAvailibilities(ctx context.Context, in *conversation.AvailibilityReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error)
+}
+
+type conversationReporterClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewConversationReporterClient(cc *grpc.ClientConn) ConversationReporterClient {
+	return &conversationReporterClient{cc}
+}
+
+func (c *conversationReporterClient) CountConversationsByTags(ctx context.Context, in *conversation.CountByTagsRequest, opts ...grpc.CallOption) (*conversation.CountByTagsResponse, error) {
+	out := new(conversation.CountByTagsResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/CountConversationsByTags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) GetAvgResponseTimes(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResponseTimeResponse, error) {
+	out := new(conversation.AvgResponseTimeResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/GetAvgResponseTimes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) GetTotalConversation(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.TotalConversationResponse, error) {
+	out := new(conversation.TotalConversationResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/GetTotalConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) ReportConversations(ctx context.Context, in *conversation.CountReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error) {
+	out := new(conversation.ReportResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/ReportConversations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) ReportAvailibilities(ctx context.Context, in *conversation.AvailibilityReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error) {
+	out := new(conversation.ReportResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/ReportAvailibilities", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConversationReporterServer is the server API for ConversationReporter service.
+type ConversationReporterServer interface {
+	CountConversationsByTags(context.Context, *conversation.CountByTagsRequest) (*conversation.CountByTagsResponse, error)
+	GetAvgResponseTimes(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.AvgResponseTimeResponse, error)
+	GetTotalConversation(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.TotalConversationResponse, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	ReportConversations(context.Context, *conversation.CountReportRequest) (*conversation.ReportResponse, error)
+	ReportAvailibilities(context.Context, *conversation.AvailibilityReportRequest) (*conversation.ReportResponse, error)
+}
+
+func RegisterConversationReporterServer(s *grpc.Server, srv ConversationReporterServer) {
+	s.RegisterService(&_ConversationReporter_serviceDesc, srv)
+}
+
+func _ConversationReporter_CountConversationsByTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.CountByTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).CountConversationsByTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/CountConversationsByTags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).CountConversationsByTags(ctx, req.(*conversation.CountByTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_GetAvgResponseTimes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvgResponseTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).GetAvgResponseTimes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/GetAvgResponseTimes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).GetAvgResponseTimes(ctx, req.(*conversation.AvgResponseTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_GetTotalConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvgResponseTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).GetTotalConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/GetTotalConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).GetTotalConversation(ctx, req.(*conversation.AvgResponseTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_ReportConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.CountReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).ReportConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/ReportConversations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).ReportConversations(ctx, req.(*conversation.CountReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_ReportAvailibilities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvailibilityReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).ReportAvailibilities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/ReportAvailibilities",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).ReportAvailibilities(ctx, req.(*conversation.AvailibilityReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ConversationReporter_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ConversationReporter",
+	HandlerType: (*ConversationReporterServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CountConversationsByTags",
+			Handler:    _ConversationReporter_CountConversationsByTags_Handler,
+		},
+		{
+			MethodName: "GetAvgResponseTimes",
+			Handler:    _ConversationReporter_GetAvgResponseTimes_Handler,
+		},
+		{
+			MethodName: "GetTotalConversation",
+			Handler:    _ConversationReporter_GetTotalConversation_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _ConversationReporter_Ping_Handler,
+		},
+		{
+			MethodName: "ReportConversations",
+			Handler:    _ConversationReporter_ReportConversations_Handler,
+		},
+		{
+			MethodName: "ReportAvailibilities",
+			Handler:    _ConversationReporter_ReportAvailibilities_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AgentPresenceMgrClient is the client API for AgentPresenceMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AgentPresenceMgrClient interface {
+	ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+	UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+}
+
+type agentPresenceMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewAgentPresenceMgrClient(cc *grpc.ClientConn) AgentPresenceMgrClient {
+	return &agentPresenceMgrClient{cc}
+}
+
+func (c *agentPresenceMgrClient) ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.AgentPresenceMgr/ReadPresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentPresenceMgrClient) UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.AgentPresenceMgr/UpdatePresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AgentPresenceMgrServer is the server API for AgentPresenceMgr service.
+type AgentPresenceMgrServer interface {
+	ReadPresence(context.Context, *common.Id) (*user.Presence, error)
+	UpdatePresence(context.Context, *common.Id) (*user.Presence, error)
+}
+
+func RegisterAgentPresenceMgrServer(s *grpc.Server, srv AgentPresenceMgrServer) {
+	s.RegisterService(&_AgentPresenceMgr_serviceDesc, srv)
+}
+
+func _AgentPresenceMgr_ReadPresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentPresenceMgrServer).ReadPresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AgentPresenceMgr/ReadPresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentPresenceMgrServer).ReadPresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentPresenceMgr_UpdatePresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentPresenceMgrServer).UpdatePresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AgentPresenceMgr/UpdatePresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentPresenceMgrServer).UpdatePresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AgentPresenceMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AgentPresenceMgr",
+	HandlerType: (*AgentPresenceMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadPresence",
+			Handler:    _AgentPresenceMgr_ReadPresence_Handler,
+		},
+		{
+			MethodName: "UpdatePresence",
+			Handler:    _AgentPresenceMgr_UpdatePresence_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// RuleMgrClient is the client API for RuleMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type RuleMgrClient interface {
+	UpdateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error)
+	CreateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error)
+	DeleteRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ReadRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Rule, error)
+	ListRules(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Route, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type ruleMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewRuleMgrClient(cc *grpc.ClientConn) RuleMgrClient {
+	return &ruleMgrClient{cc}
+}
+
+func (c *ruleMgrClient) UpdateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error) {
+	out := new(conversation.Rule)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/UpdateRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) CreateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error) {
+	out := new(conversation.Rule)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/CreateRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) DeleteRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/DeleteRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) ReadRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Rule, error) {
+	out := new(conversation.Rule)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/ReadRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) ListRules(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Route, error) {
+	out := new(conversation.Route)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/ListRules", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RuleMgrServer is the server API for RuleMgr service.
+type RuleMgrServer interface {
+	UpdateRule(context.Context, *conversation.Rule) (*conversation.Rule, error)
+	CreateRule(context.Context, *conversation.Rule) (*conversation.Rule, error)
+	DeleteRule(context.Context, *common.Id) (*common.Empty, error)
+	ReadRule(context.Context, *common.Id) (*conversation.Rule, error)
+	ListRules(context.Context, *common.Id) (*conversation.Route, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterRuleMgrServer(s *grpc.Server, srv RuleMgrServer) {
+	s.RegisterService(&_RuleMgr_serviceDesc, srv)
+}
+
+func _RuleMgr_UpdateRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Rule)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).UpdateRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/UpdateRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).UpdateRule(ctx, req.(*conversation.Rule))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_CreateRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Rule)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).CreateRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/CreateRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).CreateRule(ctx, req.(*conversation.Rule))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_DeleteRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).DeleteRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/DeleteRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).DeleteRule(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_ReadRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).ReadRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/ReadRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).ReadRule(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_ListRules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).ListRules(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/ListRules",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).ListRules(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RuleMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.RuleMgr",
+	HandlerType: (*RuleMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpdateRule",
+			Handler:    _RuleMgr_UpdateRule_Handler,
+		},
+		{
+			MethodName: "CreateRule",
+			Handler:    _RuleMgr_CreateRule_Handler,
+		},
+		{
+			MethodName: "DeleteRule",
+			Handler:    _RuleMgr_DeleteRule_Handler,
+		},
+		{
+			MethodName: "ReadRule",
+			Handler:    _RuleMgr_ReadRule_Handler,
+		},
+		{
+			MethodName: "ListRules",
+			Handler:    _RuleMgr_ListRules_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _RuleMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ConversationMgrClient is the client API for ConversationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ConversationMgrClient interface {
+	SeenMessage(ctx context.Context, in *conversation.MessageId, opts ...grpc.CallOption) (*common.Empty, error)
+	ReceiveMessage(ctx context.Context, in *conversation.MessageId, opts ...grpc.CallOption) (*common.Empty, error)
+	AckMessage(ctx context.Context, in *conversation.MessageAck, opts ...grpc.CallOption) (*common.Empty, error)
+	// rpc UpdateConversationState(Conversation) returns (Conversation);
+	StartConversation(ctx context.Context, in *conversation.StartRequest, opts ...grpc.CallOption) (*conversation.Conversation, error)
+	EndConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error)
+	GetConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error)
+	ListConversations(ctx context.Context, in *conversation.ListConversationsRequest, opts ...grpc.CallOption) (*conversation.Conversations, error)
+	TagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UntagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	JoinConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error)
+	LeftConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error)
+	Typing(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error)
+}
+
+type conversationMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewConversationMgrClient(cc *grpc.ClientConn) ConversationMgrClient {
+	return &conversationMgrClient{cc}
+}
+
+func (c *conversationMgrClient) SeenMessage(ctx context.Context, in *conversation.MessageId, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/SeenMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ReceiveMessage(ctx context.Context, in *conversation.MessageId, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ReceiveMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) AckMessage(ctx context.Context, in *conversation.MessageAck, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/AckMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) StartConversation(ctx context.Context, in *conversation.StartRequest, opts ...grpc.CallOption) (*conversation.Conversation, error) {
+	out := new(conversation.Conversation)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/StartConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) EndConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error) {
+	out := new(conversation.Conversation)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/EndConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) GetConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error) {
+	out := new(conversation.Conversation)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/GetConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ListConversations(ctx context.Context, in *conversation.ListConversationsRequest, opts ...grpc.CallOption) (*conversation.Conversations, error) {
+	out := new(conversation.Conversations)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ListConversations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) TagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/TagConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) UntagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/UntagConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) JoinConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/JoinConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) LeftConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/LeftConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) Typing(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/Typing", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error) {
+	out := new(common.Ids)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/QueryByObjectPath", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConversationMgrServer is the server API for ConversationMgr service.
+type ConversationMgrServer interface {
+	SeenMessage(context.Context, *conversation.MessageId) (*common.Empty, error)
+	ReceiveMessage(context.Context, *conversation.MessageId) (*common.Empty, error)
+	AckMessage(context.Context, *conversation.MessageAck) (*common.Empty, error)
+	// rpc UpdateConversationState(Conversation) returns (Conversation);
+	StartConversation(context.Context, *conversation.StartRequest) (*conversation.Conversation, error)
+	EndConversation(context.Context, *common.Id) (*conversation.Conversation, error)
+	GetConversation(context.Context, *common.Id) (*conversation.Conversation, error)
+	ListConversations(context.Context, *conversation.ListConversationsRequest) (*conversation.Conversations, error)
+	TagConversation(context.Context, *conversation.TagRequest) (*common.Empty, error)
+	UntagConversation(context.Context, *conversation.TagRequest) (*common.Empty, error)
+	JoinConversation(context.Context, *conversation.Member) (*common.Empty, error)
+	LeftConversation(context.Context, *conversation.Member) (*common.Empty, error)
+	Typing(context.Context, *common.Id) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error)
+}
+
+func RegisterConversationMgrServer(s *grpc.Server, srv ConversationMgrServer) {
+	s.RegisterService(&_ConversationMgr_serviceDesc, srv)
+}
+
+func _ConversationMgr_SeenMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.MessageId)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).SeenMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/SeenMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).SeenMessage(ctx, req.(*conversation.MessageId))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ReceiveMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.MessageId)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ReceiveMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/ReceiveMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ReceiveMessage(ctx, req.(*conversation.MessageId))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_AckMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.MessageAck)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).AckMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/AckMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).AckMessage(ctx, req.(*conversation.MessageAck))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_StartConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.StartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).StartConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/StartConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).StartConversation(ctx, req.(*conversation.StartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_EndConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).EndConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/EndConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).EndConversation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_GetConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).GetConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/GetConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).GetConversation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ListConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ListConversationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ListConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/ListConversations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ListConversations(ctx, req.(*conversation.ListConversationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_TagConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).TagConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/TagConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).TagConversation(ctx, req.(*conversation.TagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_UntagConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).UntagConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/UntagConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).UntagConversation(ctx, req.(*conversation.TagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_JoinConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Member)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).JoinConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/JoinConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).JoinConversation(ctx, req.(*conversation.Member))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_LeftConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Member)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).LeftConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/LeftConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).LeftConversation(ctx, req.(*conversation.Member))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_Typing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).Typing(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/Typing",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).Typing(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_QueryByObjectPath_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.ObjectPathRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).QueryByObjectPath(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/QueryByObjectPath",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).QueryByObjectPath(ctx, req.(*common.ObjectPathRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ConversationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ConversationMgr",
+	HandlerType: (*ConversationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SeenMessage",
+			Handler:    _ConversationMgr_SeenMessage_Handler,
+		},
+		{
+			MethodName: "ReceiveMessage",
+			Handler:    _ConversationMgr_ReceiveMessage_Handler,
+		},
+		{
+			MethodName: "AckMessage",
+			Handler:    _ConversationMgr_AckMessage_Handler,
+		},
+		{
+			MethodName: "StartConversation",
+			Handler:    _ConversationMgr_StartConversation_Handler,
+		},
+		{
+			MethodName: "EndConversation",
+			Handler:    _ConversationMgr_EndConversation_Handler,
+		},
+		{
+			MethodName: "GetConversation",
+			Handler:    _ConversationMgr_GetConversation_Handler,
+		},
+		{
+			MethodName: "ListConversations",
+			Handler:    _ConversationMgr_ListConversations_Handler,
+		},
+		{
+			MethodName: "TagConversation",
+			Handler:    _ConversationMgr_TagConversation_Handler,
+		},
+		{
+			MethodName: "UntagConversation",
+			Handler:    _ConversationMgr_UntagConversation_Handler,
+		},
+		{
+			MethodName: "JoinConversation",
+			Handler:    _ConversationMgr_JoinConversation_Handler,
+		},
+		{
+			MethodName: "LeftConversation",
+			Handler:    _ConversationMgr_LeftConversation_Handler,
+		},
+		{
+			MethodName: "Typing",
+			Handler:    _ConversationMgr_Typing_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _ConversationMgr_Ping_Handler,
+		},
+		{
+			MethodName: "QueryByObjectPath",
+			Handler:    _ConversationMgr_QueryByObjectPath_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// TemplateMgrClient is the client API for TemplateMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type TemplateMgrClient interface {
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	CreateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error)
+	UpdateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error)
+	DeleteTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	GetTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Template, error)
+	ListTemplates(ctx context.Context, in *conversation.SearchTemplate, opts ...grpc.CallOption) (*conversation.Templates, error)
+}
+
+type templateMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewTemplateMgrClient(cc *grpc.ClientConn) TemplateMgrClient {
+	return &templateMgrClient{cc}
+}
+
+func (c *templateMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) CreateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error) {
+	out := new(conversation.Template)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/CreateTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) UpdateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error) {
+	out := new(conversation.Template)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/UpdateTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) DeleteTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/DeleteTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) GetTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Template, error) {
+	out := new(conversation.Template)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/GetTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) ListTemplates(ctx context.Context, in *conversation.SearchTemplate, opts ...grpc.CallOption) (*conversation.Templates, error) {
+	out := new(conversation.Templates)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/ListTemplates", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TemplateMgrServer is the server API for TemplateMgr service.
+type TemplateMgrServer interface {
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	CreateTemplate(context.Context, *conversation.Template) (*conversation.Template, error)
+	UpdateTemplate(context.Context, *conversation.Template) (*conversation.Template, error)
+	DeleteTemplate(context.Context, *common.Id) (*common.Empty, error)
+	GetTemplate(context.Context, *common.Id) (*conversation.Template, error)
+	ListTemplates(context.Context, *conversation.SearchTemplate) (*conversation.Templates, error)
+}
+
+func RegisterTemplateMgrServer(s *grpc.Server, srv TemplateMgrServer) {
+	s.RegisterService(&_TemplateMgr_serviceDesc, srv)
+}
+
+func _TemplateMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_CreateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Template)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).CreateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/CreateTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).CreateTemplate(ctx, req.(*conversation.Template))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_UpdateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Template)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).UpdateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/UpdateTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).UpdateTemplate(ctx, req.(*conversation.Template))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_DeleteTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).DeleteTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/DeleteTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).DeleteTemplate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_GetTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).GetTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/GetTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).GetTemplate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_ListTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.SearchTemplate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).ListTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/ListTemplates",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).ListTemplates(ctx, req.(*conversation.SearchTemplate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _TemplateMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TemplateMgr",
+	HandlerType: (*TemplateMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Ping",
+			Handler:    _TemplateMgr_Ping_Handler,
+		},
+		{
+			MethodName: "CreateTemplate",
+			Handler:    _TemplateMgr_CreateTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateTemplate",
+			Handler:    _TemplateMgr_UpdateTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteTemplate",
+			Handler:    _TemplateMgr_DeleteTemplate_Handler,
+		},
+		{
+			MethodName: "GetTemplate",
+			Handler:    _TemplateMgr_GetTemplate_Handler,
+		},
+		{
+			MethodName: "ListTemplates",
+			Handler:    _TemplateMgr_ListTemplates_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// TagMgrClient is the client API for TagMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type TagMgrClient interface {
+	CreateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error)
+	UpdateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error)
+	DeleteTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListTags(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tags, error)
+	GetTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tag, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type tagMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewTagMgrClient(cc *grpc.ClientConn) TagMgrClient {
+	return &tagMgrClient{cc}
+}
+
+func (c *tagMgrClient) CreateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error) {
+	out := new(conversation.Tag)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/CreateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) UpdateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error) {
+	out := new(conversation.Tag)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/UpdateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) DeleteTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/DeleteTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) ListTags(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tags, error) {
+	out := new(conversation.Tags)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/ListTags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) GetTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tag, error) {
+	out := new(conversation.Tag)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/GetTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TagMgrServer is the server API for TagMgr service.
+type TagMgrServer interface {
+	CreateTag(context.Context, *conversation.Tag) (*conversation.Tag, error)
+	UpdateTag(context.Context, *conversation.Tag) (*conversation.Tag, error)
+	DeleteTag(context.Context, *common.Id) (*common.Empty, error)
+	ListTags(context.Context, *common.Id) (*conversation.Tags, error)
+	GetTag(context.Context, *common.Id) (*conversation.Tag, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterTagMgrServer(s *grpc.Server, srv TagMgrServer) {
+	s.RegisterService(&_TagMgr_serviceDesc, srv)
+}
+
+func _TagMgr_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Tag)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).CreateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/CreateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).CreateTag(ctx, req.(*conversation.Tag))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Tag)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).UpdateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/UpdateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).UpdateTag(ctx, req.(*conversation.Tag))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).DeleteTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/DeleteTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).DeleteTag(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_ListTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).ListTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/ListTags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).ListTags(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).GetTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/GetTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).GetTag(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _TagMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TagMgr",
+	HandlerType: (*TagMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateTag",
+			Handler:    _TagMgr_CreateTag_Handler,
+		},
+		{
+			MethodName: "UpdateTag",
+			Handler:    _TagMgr_UpdateTag_Handler,
+		},
+		{
+			MethodName: "DeleteTag",
+			Handler:    _TagMgr_DeleteTag_Handler,
+		},
+		{
+			MethodName: "ListTags",
+			Handler:    _TagMgr_ListTags_Handler,
+		},
+		{
+			MethodName: "GetTag",
+			Handler:    _TagMgr_GetTag_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _TagMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// IntegrationMgrClient is the client API for IntegrationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type IntegrationMgrClient interface {
+	Deintegrate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListIntegrations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Integrations, error)
+	Integrate(ctx context.Context, in *conversation.Integration, opts ...grpc.CallOption) (*conversation.Integration, error)
+	CheckAvailability(ctx context.Context, in *conversation.AvailabilityCheckRequest, opts ...grpc.CallOption) (*conversation.AvailabilityCheckResult, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type integrationMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewIntegrationMgrClient(cc *grpc.ClientConn) IntegrationMgrClient {
+	return &integrationMgrClient{cc}
+}
+
+func (c *integrationMgrClient) Deintegrate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/Deintegrate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationMgrClient) ListIntegrations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Integrations, error) {
+	out := new(conversation.Integrations)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/ListIntegrations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationMgrClient) Integrate(ctx context.Context, in *conversation.Integration, opts ...grpc.CallOption) (*conversation.Integration, error) {
+	out := new(conversation.Integration)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/Integrate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationMgrClient) CheckAvailability(ctx context.Context, in *conversation.AvailabilityCheckRequest, opts ...grpc.CallOption) (*conversation.AvailabilityCheckResult, error) {
+	out := new(conversation.AvailabilityCheckResult)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/CheckAvailability", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// IntegrationMgrServer is the server API for IntegrationMgr service.
+type IntegrationMgrServer interface {
+	Deintegrate(context.Context, *common.Id) (*common.Empty, error)
+	ListIntegrations(context.Context, *common.Id) (*conversation.Integrations, error)
+	Integrate(context.Context, *conversation.Integration) (*conversation.Integration, error)
+	CheckAvailability(context.Context, *conversation.AvailabilityCheckRequest) (*conversation.AvailabilityCheckResult, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterIntegrationMgrServer(s *grpc.Server, srv IntegrationMgrServer) {
+	s.RegisterService(&_IntegrationMgr_serviceDesc, srv)
+}
+
+func _IntegrationMgr_Deintegrate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).Deintegrate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/Deintegrate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).Deintegrate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationMgr_ListIntegrations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).ListIntegrations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/ListIntegrations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).ListIntegrations(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationMgr_Integrate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Integration)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).Integrate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/Integrate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).Integrate(ctx, req.(*conversation.Integration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationMgr_CheckAvailability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvailabilityCheckRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).CheckAvailability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/CheckAvailability",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).CheckAvailability(ctx, req.(*conversation.AvailabilityCheckRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _IntegrationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.IntegrationMgr",
+	HandlerType: (*IntegrationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Deintegrate",
+			Handler:    _IntegrationMgr_Deintegrate_Handler,
+		},
+		{
+			MethodName: "ListIntegrations",
+			Handler:    _IntegrationMgr_ListIntegrations_Handler,
+		},
+		{
+			MethodName: "Integrate",
+			Handler:    _IntegrationMgr_Integrate_Handler,
+		},
+		{
+			MethodName: "CheckAvailability",
+			Handler:    _IntegrationMgr_CheckAvailability_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _IntegrationMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// TicketAttributeMgrClient is the client API for TicketAttributeMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type TicketAttributeMgrClient interface {
+	ListTicketAttributeDefinitions(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*conversation.TicketAttributeDefinitions, error)
+	CreateTicketAttributeDefinition(ctx context.Context, in *conversation.TicketAttributeDefinition, opts ...grpc.CallOption) (*conversation.TicketAttributeDefinition, error)
+	UpdateTicketAttributeDefinition(ctx context.Context, in *conversation.TicketAttributeDefinition, opts ...grpc.CallOption) (*conversation.TicketAttributeDefinition, error)
+	DeleteTicketAttributeDefinition(ctx context.Context, in *conversation.DeleteTicketAttrRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type ticketAttributeMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewTicketAttributeMgrClient(cc *grpc.ClientConn) TicketAttributeMgrClient {
+	return &ticketAttributeMgrClient{cc}
+}
+
+func (c *ticketAttributeMgrClient) ListTicketAttributeDefinitions(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*conversation.TicketAttributeDefinitions, error) {
+	out := new(conversation.TicketAttributeDefinitions)
+	err := c.cc.Invoke(ctx, "/header.TicketAttributeMgr/ListTicketAttributeDefinitions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketAttributeMgrClient) CreateTicketAttributeDefinition(ctx context.Context, in *conversation.TicketAttributeDefinition, opts ...grpc.CallOption) (*conversation.TicketAttributeDefinition, error) {
+	out := new(conversation.TicketAttributeDefinition)
+	err := c.cc.Invoke(ctx, "/header.TicketAttributeMgr/CreateTicketAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketAttributeMgrClient) UpdateTicketAttributeDefinition(ctx context.Context, in *conversation.TicketAttributeDefinition, opts ...grpc.CallOption) (*conversation.TicketAttributeDefinition, error) {
+	out := new(conversation.TicketAttributeDefinition)
+	err := c.cc.Invoke(ctx, "/header.TicketAttributeMgr/UpdateTicketAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketAttributeMgrClient) DeleteTicketAttributeDefinition(ctx context.Context, in *conversation.DeleteTicketAttrRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TicketAttributeMgr/DeleteTicketAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketAttributeMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.TicketAttributeMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TicketAttributeMgrServer is the server API for TicketAttributeMgr service.
+type TicketAttributeMgrServer interface {
+	ListTicketAttributeDefinitions(context.Context, *common.Empty) (*conversation.TicketAttributeDefinitions, error)
+	CreateTicketAttributeDefinition(context.Context, *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error)
+	UpdateTicketAttributeDefinition(context.Context, *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error)
+	DeleteTicketAttributeDefinition(context.Context, *conversation.DeleteTicketAttrRequest) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterTicketAttributeMgrServer(s *grpc.Server, srv TicketAttributeMgrServer) {
+	s.RegisterService(&_TicketAttributeMgr_serviceDesc, srv)
+}
+
+func _TicketAttributeMgr_ListTicketAttributeDefinitions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketAttributeMgrServer).ListTicketAttributeDefinitions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketAttributeMgr/ListTicketAttributeDefinitions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketAttributeMgrServer).ListTicketAttributeDefinitions(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketAttributeMgr_CreateTicketAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TicketAttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketAttributeMgrServer).CreateTicketAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketAttributeMgr/CreateTicketAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketAttributeMgrServer).CreateTicketAttributeDefinition(ctx, req.(*conversation.TicketAttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketAttributeMgr_UpdateTicketAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TicketAttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketAttributeMgrServer).UpdateTicketAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketAttributeMgr/UpdateTicketAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketAttributeMgrServer).UpdateTicketAttributeDefinition(ctx, req.(*conversation.TicketAttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketAttributeMgr_DeleteTicketAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.DeleteTicketAttrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketAttributeMgrServer).DeleteTicketAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketAttributeMgr/DeleteTicketAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketAttributeMgrServer).DeleteTicketAttributeDefinition(ctx, req.(*conversation.DeleteTicketAttrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketAttributeMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketAttributeMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketAttributeMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketAttributeMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _TicketAttributeMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TicketAttributeMgr",
+	HandlerType: (*TicketAttributeMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListTicketAttributeDefinitions",
+			Handler:    _TicketAttributeMgr_ListTicketAttributeDefinitions_Handler,
+		},
+		{
+			MethodName: "CreateTicketAttributeDefinition",
+			Handler:    _TicketAttributeMgr_CreateTicketAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "UpdateTicketAttributeDefinition",
+			Handler:    _TicketAttributeMgr_UpdateTicketAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "DeleteTicketAttributeDefinition",
+			Handler:    _TicketAttributeMgr_DeleteTicketAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _TicketAttributeMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// TicketMgrClient is the client API for TicketMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type TicketMgrClient interface {
+	CreateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error)
+	UpdateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error)
+	DeleteTicket(ctx context.Context, in *conversation.DeleteTicketRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	GetTicket(ctx context.Context, in *conversation.GetTicketRequest, opts ...grpc.CallOption) (*conversation.Ticket, error)
+	SearchTicket(ctx context.Context, in *conversation.TicketListRequest, opts ...grpc.CallOption) (*conversation.Tickets, error)
+	ListSLAs(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreements, error)
+	GetSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error)
+	CreateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error)
+	UpdateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error)
+	DeleteSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	CountTicket(ctx context.Context, in *conversation.CountTicketRequest, opts ...grpc.CallOption) (*conversation.CountTicketResponse, error)
+	GetAvgResolveTimes(ctx context.Context, in *conversation.AvgResolveTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResolveTimeResponse, error)
+}
+
+type ticketMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewTicketMgrClient(cc *grpc.ClientConn) TicketMgrClient {
+	return &ticketMgrClient{cc}
+}
+
+func (c *ticketMgrClient) CreateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error) {
+	out := new(conversation.Ticket)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/CreateTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) UpdateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error) {
+	out := new(conversation.Ticket)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/UpdateTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) DeleteTicket(ctx context.Context, in *conversation.DeleteTicketRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/DeleteTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) GetTicket(ctx context.Context, in *conversation.GetTicketRequest, opts ...grpc.CallOption) (*conversation.Ticket, error) {
+	out := new(conversation.Ticket)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) SearchTicket(ctx context.Context, in *conversation.TicketListRequest, opts ...grpc.CallOption) (*conversation.Tickets, error) {
+	out := new(conversation.Tickets)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/SearchTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) ListSLAs(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreements, error) {
+	out := new(conversation.ServiceLevelAgreements)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/ListSLAs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) GetSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error) {
+	out := new(conversation.ServiceLevelAgreement)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) CreateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error) {
+	out := new(conversation.ServiceLevelAgreement)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/CreateSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) UpdateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error) {
+	out := new(conversation.ServiceLevelAgreement)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/UpdateSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) DeleteSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/DeleteSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) CountTicket(ctx context.Context, in *conversation.CountTicketRequest, opts ...grpc.CallOption) (*conversation.CountTicketResponse, error) {
+	out := new(conversation.CountTicketResponse)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/CountTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) GetAvgResolveTimes(ctx context.Context, in *conversation.AvgResolveTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResolveTimeResponse, error) {
+	out := new(conversation.AvgResolveTimeResponse)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetAvgResolveTimes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TicketMgrServer is the server API for TicketMgr service.
+type TicketMgrServer interface {
+	CreateTicket(context.Context, *conversation.Ticket) (*conversation.Ticket, error)
+	UpdateTicket(context.Context, *conversation.Ticket) (*conversation.Ticket, error)
+	DeleteTicket(context.Context, *conversation.DeleteTicketRequest) (*common.Empty, error)
+	GetTicket(context.Context, *conversation.GetTicketRequest) (*conversation.Ticket, error)
+	SearchTicket(context.Context, *conversation.TicketListRequest) (*conversation.Tickets, error)
+	ListSLAs(context.Context, *common.Empty) (*conversation.ServiceLevelAgreements, error)
+	GetSLA(context.Context, *common.Id) (*conversation.ServiceLevelAgreement, error)
+	CreateSLA(context.Context, *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error)
+	UpdateSLA(context.Context, *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error)
+	DeleteSLA(context.Context, *common.Id) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	CountTicket(context.Context, *conversation.CountTicketRequest) (*conversation.CountTicketResponse, error)
+	GetAvgResolveTimes(context.Context, *conversation.AvgResolveTimeRequest) (*conversation.AvgResolveTimeResponse, error)
+}
+
+func RegisterTicketMgrServer(s *grpc.Server, srv TicketMgrServer) {
+	s.RegisterService(&_TicketMgr_serviceDesc, srv)
+}
+
+func _TicketMgr_CreateTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Ticket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).CreateTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/CreateTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).CreateTicket(ctx, req.(*conversation.Ticket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_UpdateTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Ticket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).UpdateTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/UpdateTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).UpdateTicket(ctx, req.(*conversation.Ticket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_DeleteTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.DeleteTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).DeleteTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/DeleteTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).DeleteTicket(ctx, req.(*conversation.DeleteTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_GetTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.GetTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).GetTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/GetTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).GetTicket(ctx, req.(*conversation.GetTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_SearchTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TicketListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).SearchTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/SearchTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).SearchTicket(ctx, req.(*conversation.TicketListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_ListSLAs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).ListSLAs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/ListSLAs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).ListSLAs(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_GetSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).GetSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/GetSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).GetSLA(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_CreateSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ServiceLevelAgreement)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).CreateSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/CreateSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).CreateSLA(ctx, req.(*conversation.ServiceLevelAgreement))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_UpdateSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ServiceLevelAgreement)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).UpdateSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/UpdateSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).UpdateSLA(ctx, req.(*conversation.ServiceLevelAgreement))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_DeleteSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).DeleteSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/DeleteSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).DeleteSLA(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_CountTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.CountTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).CountTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/CountTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).CountTicket(ctx, req.(*conversation.CountTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_GetAvgResolveTimes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvgResolveTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).GetAvgResolveTimes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/GetAvgResolveTimes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).GetAvgResolveTimes(ctx, req.(*conversation.AvgResolveTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _TicketMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TicketMgr",
+	HandlerType: (*TicketMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateTicket",
+			Handler:    _TicketMgr_CreateTicket_Handler,
+		},
+		{
+			MethodName: "UpdateTicket",
+			Handler:    _TicketMgr_UpdateTicket_Handler,
+		},
+		{
+			MethodName: "DeleteTicket",
+			Handler:    _TicketMgr_DeleteTicket_Handler,
+		},
+		{
+			MethodName: "GetTicket",
+			Handler:    _TicketMgr_GetTicket_Handler,
+		},
+		{
+			MethodName: "SearchTicket",
+			Handler:    _TicketMgr_SearchTicket_Handler,
+		},
+		{
+			MethodName: "ListSLAs",
+			Handler:    _TicketMgr_ListSLAs_Handler,
+		},
+		{
+			MethodName: "GetSLA",
+			Handler:    _TicketMgr_GetSLA_Handler,
+		},
+		{
+			MethodName: "CreateSLA",
+			Handler:    _TicketMgr_CreateSLA_Handler,
+		},
+		{
+			MethodName: "UpdateSLA",
+			Handler:    _TicketMgr_UpdateSLA_Handler,
+		},
+		{
+			MethodName: "DeleteSLA",
+			Handler:    _TicketMgr_DeleteSLA_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _TicketMgr_Ping_Handler,
+		},
+		{
+			MethodName: "CountTicket",
+			Handler:    _TicketMgr_CountTicket_Handler,
+		},
+		{
+			MethodName: "GetAvgResolveTimes",
+			Handler:    _TicketMgr_GetAvgResolveTimes_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ClientMgrClient is the client API for ClientMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ClientMgrClient interface {
+	Create(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error)
+	Update(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error)
+	Read(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error)
+	ListIntegratedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error)
+	ListAuthorizedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error)
+}
+
+type clientMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewClientMgrClient(cc *grpc.ClientConn) ClientMgrClient {
+	return &clientMgrClient{cc}
+}
+
+func (c *clientMgrClient) Create(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error) {
+	out := new(client.Client)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) Update(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error) {
+	out := new(client.Client)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) Read(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error) {
+	out := new(client.Client)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) ListIntegratedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error) {
+	out := new(client.AuthorizedClient)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/ListIntegratedClients", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) ListAuthorizedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error) {
+	out := new(client.AuthorizedClient)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/ListAuthorizedClients", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ClientMgrServer is the server API for ClientMgr service.
+type ClientMgrServer interface {
+	Create(context.Context, *client.Client) (*client.Client, error)
+	Update(context.Context, *client.Client) (*client.Client, error)
+	Read(context.Context, *client.Client) (*client.Client, error)
+	ListIntegratedClients(context.Context, *common.Id) (*client.AuthorizedClient, error)
+	ListAuthorizedClients(context.Context, *common.Id) (*client.AuthorizedClient, error)
+}
+
+func RegisterClientMgrServer(s *grpc.Server, srv ClientMgrServer) {
+	s.RegisterService(&_ClientMgr_serviceDesc, srv)
+}
+
+func _ClientMgr_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Client)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).Create(ctx, req.(*client.Client))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Client)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).Update(ctx, req.(*client.Client))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Client)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).Read(ctx, req.(*client.Client))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_ListIntegratedClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).ListIntegratedClients(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/ListIntegratedClients",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).ListIntegratedClients(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_ListAuthorizedClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).ListAuthorizedClients(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/ListAuthorizedClients",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).ListAuthorizedClients(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ClientMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ClientMgr",
+	HandlerType: (*ClientMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _ClientMgr_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _ClientMgr_Update_Handler,
+		},
+		{
+			MethodName: "Read",
+			Handler:    _ClientMgr_Read_Handler,
+		},
+		{
+			MethodName: "ListIntegratedClients",
+			Handler:    _ClientMgr_ListIntegratedClients_Handler,
+		},
+		{
+			MethodName: "ListAuthorizedClients",
+			Handler:    _ClientMgr_ListAuthorizedClients_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ServiceContentManagerClient is the client API for ServiceContentManager service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ServiceContentManagerClient interface {
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	UpsertContent(ctx context.Context, in *content.Content, opts ...grpc.CallOption) (*content.Content, error)
+	DeleteContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	GetContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*content.Content, error)
+	SearchContents(ctx context.Context, in *content.SearchContentRequest, opts ...grpc.CallOption) (*content.Contents, error)
+	LookupContentsByUrl(ctx context.Context, in *content.LookupRequest, opts ...grpc.CallOption) (*content.Contents, error)
+	LinkContentsToUrl(ctx context.Context, in *content.LinkRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type serviceContentManagerClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewServiceContentManagerClient(cc *grpc.ClientConn) ServiceContentManagerClient {
+	return &serviceContentManagerClient{cc}
+}
+
+func (c *serviceContentManagerClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) UpsertContent(ctx context.Context, in *content.Content, opts ...grpc.CallOption) (*content.Content, error) {
+	out := new(content.Content)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/UpsertContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) DeleteContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/DeleteContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) GetContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*content.Content, error) {
+	out := new(content.Content)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/GetContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) SearchContents(ctx context.Context, in *content.SearchContentRequest, opts ...grpc.CallOption) (*content.Contents, error) {
+	out := new(content.Contents)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/SearchContents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) LookupContentsByUrl(ctx context.Context, in *content.LookupRequest, opts ...grpc.CallOption) (*content.Contents, error) {
+	out := new(content.Contents)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/LookupContentsByUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) LinkContentsToUrl(ctx context.Context, in *content.LinkRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/LinkContentsToUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ServiceContentManagerServer is the server API for ServiceContentManager service.
+type ServiceContentManagerServer interface {
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	UpsertContent(context.Context, *content.Content) (*content.Content, error)
+	DeleteContent(context.Context, *common.Id) (*common.Empty, error)
+	GetContent(context.Context, *common.Id) (*content.Content, error)
+	SearchContents(context.Context, *content.SearchContentRequest) (*content.Contents, error)
+	LookupContentsByUrl(context.Context, *content.LookupRequest) (*content.Contents, error)
+	LinkContentsToUrl(context.Context, *content.LinkRequest) (*common.Empty, error)
+}
+
+func RegisterServiceContentManagerServer(s *grpc.Server, srv ServiceContentManagerServer) {
+	s.RegisterService(&_ServiceContentManager_serviceDesc, srv)
+}
+
+func _ServiceContentManager_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_UpsertContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.Content)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).UpsertContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/UpsertContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).UpsertContent(ctx, req.(*content.Content))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_DeleteContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).DeleteContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/DeleteContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).DeleteContent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_GetContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).GetContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/GetContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).GetContent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_SearchContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.SearchContentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).SearchContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/SearchContents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).SearchContents(ctx, req.(*content.SearchContentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_LookupContentsByUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.LookupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).LookupContentsByUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/LookupContentsByUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).LookupContentsByUrl(ctx, req.(*content.LookupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_LinkContentsToUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.LinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).LinkContentsToUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/LinkContentsToUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).LinkContentsToUrl(ctx, req.(*content.LinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ServiceContentManager_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ServiceContentManager",
+	HandlerType: (*ServiceContentManagerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Ping",
+			Handler:    _ServiceContentManager_Ping_Handler,
+		},
+		{
+			MethodName: "UpsertContent",
+			Handler:    _ServiceContentManager_UpsertContent_Handler,
+		},
+		{
+			MethodName: "DeleteContent",
+			Handler:    _ServiceContentManager_DeleteContent_Handler,
+		},
+		{
+			MethodName: "GetContent",
+			Handler:    _ServiceContentManager_GetContent_Handler,
+		},
+		{
+			MethodName: "SearchContents",
+			Handler:    _ServiceContentManager_SearchContents_Handler,
+		},
+		{
+			MethodName: "LookupContentsByUrl",
+			Handler:    _ServiceContentManager_LookupContentsByUrl_Handler,
+		},
+		{
+			MethodName: "LinkContentsToUrl",
+			Handler:    _ServiceContentManager_LinkContentsToUrl_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// DealServiceClient is the client API for DealService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type DealServiceClient interface {
+	ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*deal.Pipelines, error)
+	GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*deal.Pipeline, error)
+	CreatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error)
+	UpdatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error)
+	DeletePipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type dealServiceClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewDealServiceClient(cc *grpc.ClientConn) DealServiceClient {
+	return &dealServiceClient{cc}
+}
+
+func (c *dealServiceClient) ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*deal.Pipelines, error) {
+	out := new(deal.Pipelines)
+	err := c.cc.Invoke(ctx, "/header.DealService/ListPipelines", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*deal.Pipeline, error) {
+	out := new(deal.Pipeline)
+	err := c.cc.Invoke(ctx, "/header.DealService/GetPipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) CreatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error) {
+	out := new(deal.Pipeline)
+	err := c.cc.Invoke(ctx, "/header.DealService/CreatePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) UpdatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error) {
+	out := new(deal.Pipeline)
+	err := c.cc.Invoke(ctx, "/header.DealService/UpdatePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) DeletePipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.DealService/DeletePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.DealService/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DealServiceServer is the server API for DealService service.
+type DealServiceServer interface {
+	ListPipelines(context.Context, *common.Empty) (*deal.Pipelines, error)
+	GetPipeline(context.Context, *common.Id) (*deal.Pipeline, error)
+	CreatePipeline(context.Context, *deal.Pipeline) (*deal.Pipeline, error)
+	UpdatePipeline(context.Context, *deal.Pipeline) (*deal.Pipeline, error)
+	DeletePipeline(context.Context, *common.Id) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterDealServiceServer(s *grpc.Server, srv DealServiceServer) {
+	s.RegisterService(&_DealService_serviceDesc, srv)
+}
+
+func _DealService_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).ListPipelines(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/ListPipelines",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).ListPipelines(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_GetPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).GetPipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/GetPipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).GetPipeline(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_CreatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deal.Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).CreatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/CreatePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).CreatePipeline(ctx, req.(*deal.Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_UpdatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deal.Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).UpdatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/UpdatePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).UpdatePipeline(ctx, req.(*deal.Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_DeletePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).DeletePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/DeletePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).DeletePipeline(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _DealService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.DealService",
+	HandlerType: (*DealServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListPipelines",
+			Handler:    _DealService_ListPipelines_Handler,
+		},
+		{
+			MethodName: "GetPipeline",
+			Handler:    _DealService_GetPipeline_Handler,
+		},
+		{
+			MethodName: "CreatePipeline",
+			Handler:    _DealService_CreatePipeline_Handler,
+		},
+		{
+			MethodName: "UpdatePipeline",
+			Handler:    _DealService_UpdatePipeline_Handler,
+		},
+		{
+			MethodName: "DeletePipeline",
+			Handler:    _DealService_DeletePipeline_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _DealService_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PublisherClient is the client API for Publisher service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PublisherClient interface {
+	Subscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error)
+	Unsubscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type publisherClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewPublisherClient(cc *grpc.ClientConn) PublisherClient {
+	return &publisherClient{cc}
+}
+
+func (c *publisherClient) Subscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error) {
+	out := new(event.SubscriptionResponse)
+	err := c.cc.Invoke(ctx, "/header.Publisher/Subscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *publisherClient) Unsubscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error) {
+	out := new(event.SubscriptionResponse)
+	err := c.cc.Invoke(ctx, "/header.Publisher/Unsubscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *publisherClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.Publisher/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PublisherServer is the server API for Publisher service.
+type PublisherServer interface {
+	Subscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error)
+	Unsubscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterPublisherServer(s *grpc.Server, srv PublisherServer) {
+	s.RegisterService(&_Publisher_serviceDesc, srv)
+}
+
+func _Publisher_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublisherServer).Subscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Publisher/Subscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublisherServer).Subscribe(ctx, req.(*event.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Publisher_Unsubscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublisherServer).Unsubscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Publisher/Unsubscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublisherServer).Unsubscribe(ctx, req.(*event.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Publisher_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublisherServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Publisher/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublisherServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Publisher_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Publisher",
+	HandlerType: (*PublisherServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Subscribe",
+			Handler:    _Publisher_Subscribe_Handler,
+		},
+		{
+			MethodName: "Unsubscribe",
+			Handler:    _Publisher_Unsubscribe_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _Publisher_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// EventMgrClient is the client API for EventMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type EventMgrClient interface {
+	SearchEvents(ctx context.Context, in *event.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error)
+	Subscribe(ctx context.Context, in *user.SubscribeRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	Unsubscribe(ctx context.Context, in *user.SubscribeRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	CreateEvent(ctx context.Context, in *event.UserEvent, opts ...grpc.CallOption) (*event.Event, error)
+	ReadTopic(ctx context.Context, in *user.ReadTopicRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	SearchTopics(ctx context.Context, in *user.ListTopicsRequest, opts ...grpc.CallOption) (*user.ListTopicsResult, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type eventMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewEventMgrClient(cc *grpc.ClientConn) EventMgrClient {
+	return &eventMgrClient{cc}
+}
+
+func (c *eventMgrClient) SearchEvents(ctx context.Context, in *event.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error) {
+	out := new(event.Events)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/SearchEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventMgrClient) Subscribe(ctx context.Context, in *user.SubscribeRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/Subscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventMgrClient) Unsubscribe(ctx context.Context, in *user.SubscribeRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/Unsubscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventMgrClient) CreateEvent(ctx context.Context, in *event.UserEvent, opts ...grpc.CallOption) (*event.Event, error) {
+	out := new(event.Event)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/CreateEvent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventMgrClient) ReadTopic(ctx context.Context, in *user.ReadTopicRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/ReadTopic", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventMgrClient) SearchTopics(ctx context.Context, in *user.ListTopicsRequest, opts ...grpc.CallOption) (*user.ListTopicsResult, error) {
+	out := new(user.ListTopicsResult)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/SearchTopics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EventMgrServer is the server API for EventMgr service.
+type EventMgrServer interface {
+	SearchEvents(context.Context, *event.ListEventsRequest) (*event.Events, error)
+	Subscribe(context.Context, *user.SubscribeRequest) (*common.Empty, error)
+	Unsubscribe(context.Context, *user.SubscribeRequest) (*common.Empty, error)
+	CreateEvent(context.Context, *event.UserEvent) (*event.Event, error)
+	ReadTopic(context.Context, *user.ReadTopicRequest) (*common.Empty, error)
+	SearchTopics(context.Context, *user.ListTopicsRequest) (*user.ListTopicsResult, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterEventMgrServer(s *grpc.Server, srv EventMgrServer) {
+	s.RegisterService(&_EventMgr_serviceDesc, srv)
+}
+
+func _EventMgr_SearchEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.ListEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).SearchEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/SearchEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).SearchEvents(ctx, req.(*event.ListEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventMgr_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.SubscribeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).Subscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/Subscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).Subscribe(ctx, req.(*user.SubscribeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventMgr_Unsubscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.SubscribeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).Unsubscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/Unsubscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).Unsubscribe(ctx, req.(*user.SubscribeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventMgr_CreateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.UserEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).CreateEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/CreateEvent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).CreateEvent(ctx, req.(*event.UserEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventMgr_ReadTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.ReadTopicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).ReadTopic(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/ReadTopic",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).ReadTopic(ctx, req.(*user.ReadTopicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventMgr_SearchTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.ListTopicsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).SearchTopics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/SearchTopics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).SearchTopics(ctx, req.(*user.ListTopicsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _EventMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.EventMgr",
+	HandlerType: (*EventMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchEvents",
+			Handler:    _EventMgr_SearchEvents_Handler,
+		},
+		{
+			MethodName: "Subscribe",
+			Handler:    _EventMgr_Subscribe_Handler,
+		},
+		{
+			MethodName: "Unsubscribe",
+			Handler:    _EventMgr_Unsubscribe_Handler,
+		},
+		{
+			MethodName: "CreateEvent",
+			Handler:    _EventMgr_CreateEvent_Handler,
+		},
+		{
+			MethodName: "ReadTopic",
+			Handler:    _EventMgr_ReadTopic_Handler,
+		},
+		{
+			MethodName: "SearchTopics",
+			Handler:    _EventMgr_SearchTopics_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _EventMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ConversationEventReaderClient is the client API for ConversationEventReader service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ConversationEventReaderClient interface {
+	SendMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
+	UpdateMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
+	ListEvents(ctx context.Context, in *conversation.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error)
+	SearchEvents(ctx context.Context, in *conversation.SearchMessageRequest, opts ...grpc.CallOption) (*event.Events, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type conversationEventReaderClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewConversationEventReaderClient(cc *grpc.ClientConn) ConversationEventReaderClient {
+	return &conversationEventReaderClient{cc}
+}
+
+func (c *conversationEventReaderClient) SendMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
+	out := new(event.Event)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/SendMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationEventReaderClient) UpdateMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
+	out := new(event.Event)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/UpdateMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationEventReaderClient) ListEvents(ctx context.Context, in *conversation.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error) {
+	out := new(event.Events)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/ListEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationEventReaderClient) SearchEvents(ctx context.Context, in *conversation.SearchMessageRequest, opts ...grpc.CallOption) (*event.Events, error) {
+	out := new(event.Events)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/SearchEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationEventReaderClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConversationEventReaderServer is the server API for ConversationEventReader service.
+type ConversationEventReaderServer interface {
+	SendMessage(context.Context, *event.Event) (*event.Event, error)
+	UpdateMessage(context.Context, *event.Event) (*event.Event, error)
+	ListEvents(context.Context, *conversation.ListEventsRequest) (*event.Events, error)
+	SearchEvents(context.Context, *conversation.SearchMessageRequest) (*event.Events, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterConversationEventReaderServer(s *grpc.Server, srv ConversationEventReaderServer) {
+	s.RegisterService(&_ConversationEventReader_serviceDesc, srv)
+}
+
+func _ConversationEventReader_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).SendMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/SendMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).SendMessage(ctx, req.(*event.Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationEventReader_UpdateMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).UpdateMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/UpdateMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).UpdateMessage(ctx, req.(*event.Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationEventReader_ListEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ListEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).ListEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/ListEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).ListEvents(ctx, req.(*conversation.ListEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationEventReader_SearchEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.SearchMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).SearchEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/SearchEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).SearchEvents(ctx, req.(*conversation.SearchMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationEventReader_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ConversationEventReader_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ConversationEventReader",
+	HandlerType: (*ConversationEventReaderServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SendMessage",
+			Handler:    _ConversationEventReader_SendMessage_Handler,
+		},
+		{
+			MethodName: "UpdateMessage",
+			Handler:    _ConversationEventReader_UpdateMessage_Handler,
+		},
+		{
+			MethodName: "ListEvents",
+			Handler:    _ConversationEventReader_ListEvents_Handler,
+		},
+		{
+			MethodName: "SearchEvents",
+			Handler:    _ConversationEventReader_SearchEvents_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _ConversationEventReader_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// FileMgrClient is the client API for FileMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type FileMgrClient interface {
+	Presign(ctx context.Context, in *file.FileHeader, opts ...grpc.CallOption) (*file.PresignResult, error)
+	Read(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error)
+	Uploaded(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type fileMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewFileMgrClient(cc *grpc.ClientConn) FileMgrClient {
+	return &fileMgrClient{cc}
+}
+
+func (c *fileMgrClient) Presign(ctx context.Context, in *file.FileHeader, opts ...grpc.CallOption) (*file.PresignResult, error) {
+	out := new(file.PresignResult)
+	err := c.cc.Invoke(ctx, "/header.FileMgr/Presign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileMgrClient) Read(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error) {
+	out := new(file.File)
+	err := c.cc.Invoke(ctx, "/header.FileMgr/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileMgrClient) Uploaded(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error) {
+	out := new(file.File)
+	err := c.cc.Invoke(ctx, "/header.FileMgr/Uploaded", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.FileMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FileMgrServer is the server API for FileMgr service.
+type FileMgrServer interface {
+	Presign(context.Context, *file.FileHeader) (*file.PresignResult, error)
+	Read(context.Context, *file.FileRequest) (*file.File, error)
+	Uploaded(context.Context, *file.FileRequest) (*file.File, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterFileMgrServer(s *grpc.Server, srv FileMgrServer) {
+	s.RegisterService(&_FileMgr_serviceDesc, srv)
+}
+
+func _FileMgr_Presign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(file.FileHeader)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileMgrServer).Presign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.FileMgr/Presign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileMgrServer).Presign(ctx, req.(*file.FileHeader))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(file.FileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileMgrServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.FileMgr/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileMgrServer).Read(ctx, req.(*file.FileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileMgr_Uploaded_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(file.FileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileMgrServer).Uploaded(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.FileMgr/Uploaded",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileMgrServer).Uploaded(ctx, req.(*file.FileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.FileMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _FileMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.FileMgr",
+	HandlerType: (*FileMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Presign",
+			Handler:    _FileMgr_Presign_Handler,
+		},
+		{
+			MethodName: "Read",
+			Handler:    _FileMgr_Read_Handler,
+		},
+		{
+			MethodName: "Uploaded",
+			Handler:    _FileMgr_Uploaded_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _FileMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// KafpcClient is the client API for Kafpc service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type KafpcClient interface {
+	Reply(ctx context.Context, in *kafpc.Response, opts ...grpc.CallOption) (*kafpc.Empty, error)
+}
+
+type kafpcClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewKafpcClient(cc *grpc.ClientConn) KafpcClient {
+	return &kafpcClient{cc}
+}
+
+func (c *kafpcClient) Reply(ctx context.Context, in *kafpc.Response, opts ...grpc.CallOption) (*kafpc.Empty, error) {
+	out := new(kafpc.Empty)
+	err := c.cc.Invoke(ctx, "/header.Kafpc/Reply", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// KafpcServer is the server API for Kafpc service.
+type KafpcServer interface {
+	Reply(context.Context, *kafpc.Response) (*kafpc.Empty, error)
+}
+
+func RegisterKafpcServer(s *grpc.Server, srv KafpcServer) {
+	s.RegisterService(&_Kafpc_serviceDesc, srv)
+}
+
+func _Kafpc_Reply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(kafpc.Response)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KafpcServer).Reply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Kafpc/Reply",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KafpcServer).Reply(ctx, req.(*kafpc.Response))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Kafpc_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Kafpc",
+	HandlerType: (*KafpcServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Reply",
+			Handler:    _Kafpc_Reply_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// KVClient is the client API for KV service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type KVClient interface {
+	Set(ctx context.Context, in *kv.Value, opts ...grpc.CallOption) (*kv.Value, error)
+	Get(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Value, error)
+	Has(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Bool, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type kVClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewKVClient(cc *grpc.ClientConn) KVClient {
+	return &kVClient{cc}
+}
+
+func (c *kVClient) Set(ctx context.Context, in *kv.Value, opts ...grpc.CallOption) (*kv.Value, error) {
+	out := new(kv.Value)
+	err := c.cc.Invoke(ctx, "/header.KV/Set", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kVClient) Get(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Value, error) {
+	out := new(kv.Value)
+	err := c.cc.Invoke(ctx, "/header.KV/Get", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kVClient) Has(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Bool, error) {
+	out := new(kv.Bool)
+	err := c.cc.Invoke(ctx, "/header.KV/Has", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kVClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.KV/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// KVServer is the server API for KV service.
+type KVServer interface {
+	Set(context.Context, *kv.Value) (*kv.Value, error)
+	Get(context.Context, *kv.Key) (*kv.Value, error)
+	Has(context.Context, *kv.Key) (*kv.Bool, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterKVServer(s *grpc.Server, srv KVServer) {
+	s.RegisterService(&_KV_serviceDesc, srv)
+}
+
+func _KV_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(kv.Value)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KVServer).Set(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.KV/Set",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KVServer).Set(ctx, req.(*kv.Value))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KV_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(kv.Key)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KVServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.KV/Get",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KVServer).Get(ctx, req.(*kv.Key))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KV_Has_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(kv.Key)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KVServer).Has(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.KV/Has",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KVServer).Has(ctx, req.(*kv.Key))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KV_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KVServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.KV/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KVServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _KV_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.KV",
+	HandlerType: (*KVServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Set",
+			Handler:    _KV_Set_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _KV_Get_Handler,
+		},
+		{
+			MethodName: "Has",
+			Handler:    _KV_Has_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _KV_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// Noti5ServiceClient is the client API for Noti5Service service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type Noti5ServiceClient interface {
+	ReadNotificationSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*noti5.Setting, error)
+	UpdateNotificationSetting(ctx context.Context, in *noti5.Setting, opts ...grpc.CallOption) (*noti5.Setting, error)
+}
+
+type noti5ServiceClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewNoti5ServiceClient(cc *grpc.ClientConn) Noti5ServiceClient {
+	return &noti5ServiceClient{cc}
+}
+
+func (c *noti5ServiceClient) ReadNotificationSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*noti5.Setting, error) {
+	out := new(noti5.Setting)
+	err := c.cc.Invoke(ctx, "/header.Noti5Service/ReadNotificationSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noti5ServiceClient) UpdateNotificationSetting(ctx context.Context, in *noti5.Setting, opts ...grpc.CallOption) (*noti5.Setting, error) {
+	out := new(noti5.Setting)
+	err := c.cc.Invoke(ctx, "/header.Noti5Service/UpdateNotificationSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Noti5ServiceServer is the server API for Noti5Service service.
+type Noti5ServiceServer interface {
+	ReadNotificationSetting(context.Context, *common.Id) (*noti5.Setting, error)
+	UpdateNotificationSetting(context.Context, *noti5.Setting) (*noti5.Setting, error)
+}
+
+func RegisterNoti5ServiceServer(s *grpc.Server, srv Noti5ServiceServer) {
+	s.RegisterService(&_Noti5Service_serviceDesc, srv)
+}
+
+func _Noti5Service_ReadNotificationSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5ServiceServer).ReadNotificationSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5Service/ReadNotificationSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5ServiceServer).ReadNotificationSetting(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Noti5Service_UpdateNotificationSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Setting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5ServiceServer).UpdateNotificationSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5Service/UpdateNotificationSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5ServiceServer).UpdateNotificationSetting(ctx, req.(*noti5.Setting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Noti5Service_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Noti5Service",
+	HandlerType: (*Noti5ServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadNotificationSetting",
+			Handler:    _Noti5Service_ReadNotificationSetting_Handler,
+		},
+		{
+			MethodName: "UpdateNotificationSetting",
+			Handler:    _Noti5Service_UpdateNotificationSetting_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// Noti5TokenServiceClient is the client API for Noti5TokenService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type Noti5TokenServiceClient interface {
+	AddToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error)
+	RemoveToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error)
+	CheckTokenExists(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type noti5TokenServiceClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewNoti5TokenServiceClient(cc *grpc.ClientConn) Noti5TokenServiceClient {
+	return &noti5TokenServiceClient{cc}
+}
+
+func (c *noti5TokenServiceClient) AddToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Noti5TokenService/AddToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noti5TokenServiceClient) RemoveToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Noti5TokenService/RemoveToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noti5TokenServiceClient) CheckTokenExists(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Noti5TokenService/CheckTokenExists", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noti5TokenServiceClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.Noti5TokenService/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Noti5TokenServiceServer is the server API for Noti5TokenService service.
+type Noti5TokenServiceServer interface {
+	AddToken(context.Context, *noti5.Token) (*common.Empty, error)
+	RemoveToken(context.Context, *noti5.Token) (*common.Empty, error)
+	CheckTokenExists(context.Context, *noti5.Token) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterNoti5TokenServiceServer(s *grpc.Server, srv Noti5TokenServiceServer) {
+	s.RegisterService(&_Noti5TokenService_serviceDesc, srv)
+}
+
+func _Noti5TokenService_AddToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5TokenServiceServer).AddToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5TokenService/AddToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5TokenServiceServer).AddToken(ctx, req.(*noti5.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Noti5TokenService_RemoveToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5TokenServiceServer).RemoveToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5TokenService/RemoveToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5TokenServiceServer).RemoveToken(ctx, req.(*noti5.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Noti5TokenService_CheckTokenExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5TokenServiceServer).CheckTokenExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5TokenService/CheckTokenExists",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5TokenServiceServer).CheckTokenExists(ctx, req.(*noti5.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Noti5TokenService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5TokenServiceServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5TokenService/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5TokenServiceServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Noti5TokenService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Noti5TokenService",
+	HandlerType: (*Noti5TokenServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddToken",
+			Handler:    _Noti5TokenService_AddToken_Handler,
+		},
+		{
+			MethodName: "RemoveToken",
+			Handler:    _Noti5TokenService_RemoveToken_Handler,
+		},
+		{
+			MethodName: "CheckTokenExists",
+			Handler:    _Noti5TokenService_CheckTokenExists_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _Noti5TokenService_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// NotiboxServiceClient is the client API for NotiboxService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type NotiboxServiceClient interface {
+	// rpc Upsert(notibox.Notification) returns (notibox.Notification);
+	ReadTopics(ctx context.Context, in *notibox.TopicRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	SeenTopics(ctx context.Context, in *notibox.TopicRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UnreadTopics(ctx context.Context, in *notibox.TopicRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	ListNotis(ctx context.Context, in *notibox.ListRequest, opts ...grpc.CallOption) (*notibox.Notifications, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	UpdateNotibox(ctx context.Context, in *notibox.Notibox, opts ...grpc.CallOption) (*notibox.Notibox, error)
+	ReadNotibox(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*notibox.Notibox, error)
+}
+
+type notiboxServiceClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewNotiboxServiceClient(cc *grpc.ClientConn) NotiboxServiceClient {
+	return &notiboxServiceClient{cc}
+}
+
+func (c *notiboxServiceClient) ReadTopics(ctx context.Context, in *notibox.TopicRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/ReadTopics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) SeenTopics(ctx context.Context, in *notibox.TopicRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/SeenTopics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) UnreadTopics(ctx context.Context, in *notibox.TopicRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/UnreadTopics", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) ListNotis(ctx context.Context, in *notibox.ListRequest, opts ...grpc.CallOption) (*notibox.Notifications, error) {
+	out := new(notibox.Notifications)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/ListNotis", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) UpdateNotibox(ctx context.Context, in *notibox.Notibox, opts ...grpc.CallOption) (*notibox.Notibox, error) {
+	out := new(notibox.Notibox)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/UpdateNotibox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) ReadNotibox(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*notibox.Notibox, error) {
+	out := new(notibox.Notibox)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/ReadNotibox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NotiboxServiceServer is the server API for NotiboxService service.
+type NotiboxServiceServer interface {
+	// rpc Upsert(notibox.Notification) returns (notibox.Notification);
+	ReadTopics(context.Context, *notibox.TopicRequest) (*common.Empty, error)
+	SeenTopics(context.Context, *notibox.TopicRequest) (*common.Empty, error)
+	UnreadTopics(context.Context, *notibox.TopicRequest) (*common.Empty, error)
+	ListNotis(context.Context, *notibox.ListRequest) (*notibox.Notifications, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	UpdateNotibox(context.Context, *notibox.Notibox) (*notibox.Notibox, error)
+	ReadNotibox(context.Context, *common.Id) (*notibox.Notibox, error)
+}
+
+func RegisterNotiboxServiceServer(s *grpc.Server, srv NotiboxServiceServer) {
+	s.RegisterService(&_NotiboxService_serviceDesc, srv)
+}
+
+func _NotiboxService_ReadTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notibox.TopicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).ReadTopics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/ReadTopics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).ReadTopics(ctx, req.(*notibox.TopicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_SeenTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notibox.TopicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).SeenTopics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/SeenTopics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).SeenTopics(ctx, req.(*notibox.TopicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_UnreadTopics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notibox.TopicRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).UnreadTopics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/UnreadTopics",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).UnreadTopics(ctx, req.(*notibox.TopicRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_ListNotis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notibox.ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).ListNotis(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/ListNotis",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).ListNotis(ctx, req.(*notibox.ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_UpdateNotibox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notibox.Notibox)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).UpdateNotibox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/UpdateNotibox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).UpdateNotibox(ctx, req.(*notibox.Notibox))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_ReadNotibox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).ReadNotibox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/ReadNotibox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).ReadNotibox(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _NotiboxService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.NotiboxService",
+	HandlerType: (*NotiboxServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadTopics",
+			Handler:    _NotiboxService_ReadTopics_Handler,
+		},
+		{
+			MethodName: "SeenTopics",
+			Handler:    _NotiboxService_SeenTopics_Handler,
+		},
+		{
+			MethodName: "UnreadTopics",
+			Handler:    _NotiboxService_UnreadTopics_Handler,
+		},
+		{
+			MethodName: "ListNotis",
+			Handler:    _NotiboxService_ListNotis_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _NotiboxService_Ping_Handler,
+		},
+		{
+			MethodName: "UpdateNotibox",
+			Handler:    _NotiboxService_UpdateNotibox_Handler,
+		},
+		{
+			MethodName: "ReadNotibox",
+			Handler:    _NotiboxService_ReadNotibox_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// SubizInternalPaymentMgrClient is the client API for SubizInternalPaymentMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type SubizInternalPaymentMgrClient interface {
+	CreateBill(ctx context.Context, in *payment.Bill, opts ...grpc.CallOption) (*payment.Bill, error)
+	UpdateExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type subizInternalPaymentMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewSubizInternalPaymentMgrClient(cc *grpc.ClientConn) SubizInternalPaymentMgrClient {
+	return &subizInternalPaymentMgrClient{cc}
+}
+
+func (c *subizInternalPaymentMgrClient) CreateBill(ctx context.Context, in *payment.Bill, opts ...grpc.CallOption) (*payment.Bill, error) {
+	out := new(payment.Bill)
+	err := c.cc.Invoke(ctx, "/header.SubizInternalPaymentMgr/CreateBill", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subizInternalPaymentMgrClient) UpdateExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error) {
+	out := new(payment.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.SubizInternalPaymentMgr/UpdateExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subizInternalPaymentMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.SubizInternalPaymentMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SubizInternalPaymentMgrServer is the server API for SubizInternalPaymentMgr service.
+type SubizInternalPaymentMgrServer interface {
+	CreateBill(context.Context, *payment.Bill) (*payment.Bill, error)
+	UpdateExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterSubizInternalPaymentMgrServer(s *grpc.Server, srv SubizInternalPaymentMgrServer) {
+	s.RegisterService(&_SubizInternalPaymentMgr_serviceDesc, srv)
+}
+
+func _SubizInternalPaymentMgr_CreateBill_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Bill)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubizInternalPaymentMgrServer).CreateBill(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SubizInternalPaymentMgr/CreateBill",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubizInternalPaymentMgrServer).CreateBill(ctx, req.(*payment.Bill))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubizInternalPaymentMgr_UpdateExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ExchangeRate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubizInternalPaymentMgrServer).UpdateExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SubizInternalPaymentMgr/UpdateExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubizInternalPaymentMgrServer).UpdateExchangeRate(ctx, req.(*payment.ExchangeRate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubizInternalPaymentMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubizInternalPaymentMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SubizInternalPaymentMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubizInternalPaymentMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _SubizInternalPaymentMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.SubizInternalPaymentMgr",
+	HandlerType: (*SubizInternalPaymentMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateBill",
+			Handler:    _SubizInternalPaymentMgr_CreateBill_Handler,
+		},
+		{
+			MethodName: "UpdateExchangeRate",
+			Handler:    _SubizInternalPaymentMgr_UpdateExchangeRate_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _SubizInternalPaymentMgr_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PaymentMgrClient is the client API for PaymentMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PaymentMgrClient interface {
+	Purchase(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
+	UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
+	GetSubscription(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Subscription, error)
+	AddPaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error)
+	UpdatePaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error)
+	DeletePaymentMethod(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListPaymentMethods(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.PaymentMethods, error)
+	Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
+	ListInvoices(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Invoices, error)
+	CreateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
+	UpdateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
+	FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error)
+	DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
+	DiffSubscriptions(ctx context.Context, in *payment.DiffSubRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
+	ListComments(ctx context.Context, in *payment.ListCommentsRequest, opts ...grpc.CallOption) (*payment.Comments, error)
+	AddComment(ctx context.Context, in *payment.Comment, opts ...grpc.CallOption) (*payment.Comment, error)
+	ListPlans(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.Plans, error)
+	ExportInvoice(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.String, error)
+	ConvertInvoiceToHtml(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.String, error)
+	GetExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error)
+	TransferMoney(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	ListLogs(ctx context.Context, in *payment.ListLogsRequest, opts ...grpc.CallOption) (*payment.Logs, error)
+	CreatePromotionCode(ctx context.Context, in *payment.PromotionCode, opts ...grpc.CallOption) (*payment.PromotionCode, error)
+	GetPromotionCode(ctx context.Context, in *payment.String, opts ...grpc.CallOption) (*payment.PromotionCode, error)
+	UsePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	ValidatePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCode, error)
+	ListPromotionCode(ctx context.Context, in *payment.ListPromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCodes, error)
+	DeletePromotionCode(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	SearchReferral(ctx context.Context, in *payment.SearchReferredRequest, opts ...grpc.CallOption) (*payment.Referral, error)
+	GetReferral(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Referral, error)
+	ListTopReferral(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.ReferralResponse, error)
+	UpdateReferral(ctx context.Context, in *payment.Referral, opts ...grpc.CallOption) (*payment.Referral, error)
+	ListAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogAccountReferreds, error)
+	ListBillByAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogBillByAccountReferreds, error)
+	ListPaidForAgentReferrer(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogPaidForAgentReferrers, error)
+	PaidForAgentReferrer(ctx context.Context, in *payment.LogPaidForAgentReferrer, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type paymentMgrClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewPaymentMgrClient(cc *grpc.ClientConn) PaymentMgrClient {
+	return &paymentMgrClient{cc}
+}
+
+func (c *paymentMgrClient) Purchase(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/Purchase", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error) {
+	out := new(payment.Subscription)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdateSubscription", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetSubscription(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Subscription, error) {
+	out := new(payment.Subscription)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetSubscription", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) AddPaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error) {
+	out := new(payment.PaymentMethod)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/AddPaymentMethod", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdatePaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error) {
+	out := new(payment.PaymentMethod)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdatePaymentMethod", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DeletePaymentMethod(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DeletePaymentMethod", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPaymentMethods(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.PaymentMethods, error) {
+	out := new(payment.PaymentMethods)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPaymentMethods", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error) {
+	out := new(payment.Bill)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/Pay", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListInvoices(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Invoices, error) {
+	out := new(payment.Invoices)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListInvoices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) CreateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/CreateInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdateInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error) {
+	out := new(payment.Invoices)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/FilterInvoices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DraftInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DiffSubscriptions(ctx context.Context, in *payment.DiffSubRequest, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DiffSubscriptions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListComments(ctx context.Context, in *payment.ListCommentsRequest, opts ...grpc.CallOption) (*payment.Comments, error) {
+	out := new(payment.Comments)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListComments", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) AddComment(ctx context.Context, in *payment.Comment, opts ...grpc.CallOption) (*payment.Comment, error) {
+	out := new(payment.Comment)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/AddComment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPlans(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.Plans, error) {
+	out := new(payment.Plans)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPlans", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ExportInvoice(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.String, error) {
+	out := new(payment.String)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ExportInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ConvertInvoiceToHtml(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.String, error) {
+	out := new(payment.String)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ConvertInvoiceToHtml", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error) {
+	out := new(payment.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) TransferMoney(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error) {
+	out := new(payment.Bill)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/TransferMoney", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListLogs(ctx context.Context, in *payment.ListLogsRequest, opts ...grpc.CallOption) (*payment.Logs, error) {
+	out := new(payment.Logs)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListLogs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) CreatePromotionCode(ctx context.Context, in *payment.PromotionCode, opts ...grpc.CallOption) (*payment.PromotionCode, error) {
+	out := new(payment.PromotionCode)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/CreatePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetPromotionCode(ctx context.Context, in *payment.String, opts ...grpc.CallOption) (*payment.PromotionCode, error) {
+	out := new(payment.PromotionCode)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetPromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UsePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UsePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ValidatePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCode, error) {
+	out := new(payment.PromotionCode)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ValidatePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPromotionCode(ctx context.Context, in *payment.ListPromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCodes, error) {
+	out := new(payment.PromotionCodes)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DeletePromotionCode(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DeletePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) SearchReferral(ctx context.Context, in *payment.SearchReferredRequest, opts ...grpc.CallOption) (*payment.Referral, error) {
+	out := new(payment.Referral)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/SearchReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetReferral(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Referral, error) {
+	out := new(payment.Referral)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListTopReferral(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.ReferralResponse, error) {
+	out := new(payment.ReferralResponse)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListTopReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdateReferral(ctx context.Context, in *payment.Referral, opts ...grpc.CallOption) (*payment.Referral, error) {
+	out := new(payment.Referral)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdateReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogAccountReferreds, error) {
+	out := new(payment.LogAccountReferreds)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListAccountReferred", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListBillByAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogBillByAccountReferreds, error) {
+	out := new(payment.LogBillByAccountReferreds)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListBillByAccountReferred", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPaidForAgentReferrer(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogPaidForAgentReferrers, error) {
+	out := new(payment.LogPaidForAgentReferrers)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPaidForAgentReferrer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) PaidForAgentReferrer(ctx context.Context, in *payment.LogPaidForAgentReferrer, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/PaidForAgentReferrer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PaymentMgrServer is the server API for PaymentMgr service.
+type PaymentMgrServer interface {
+	Purchase(context.Context, *payment.Subscription) (*payment.Invoice, error)
+	UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error)
+	GetSubscription(context.Context, *common.Id) (*payment.Subscription, error)
+	AddPaymentMethod(context.Context, *payment.PaymentMethod) (*payment.PaymentMethod, error)
+	UpdatePaymentMethod(context.Context, *payment.PaymentMethod) (*payment.PaymentMethod, error)
+	DeletePaymentMethod(context.Context, *common.Id) (*common.Empty, error)
+	ListPaymentMethods(context.Context, *common.Id) (*payment.PaymentMethods, error)
+	Pay(context.Context, *payment.PayRequest) (*payment.Bill, error)
+	ListInvoices(context.Context, *common.Id) (*payment.Invoices, error)
+	CreateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
+	UpdateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
+	FilterInvoices(context.Context, *payment.ListInvoiceRequest) (*payment.Invoices, error)
+	DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error)
+	DiffSubscriptions(context.Context, *payment.DiffSubRequest) (*payment.Invoice, error)
+	ListComments(context.Context, *payment.ListCommentsRequest) (*payment.Comments, error)
+	AddComment(context.Context, *payment.Comment) (*payment.Comment, error)
+	ListPlans(context.Context, *common.Empty) (*payment.Plans, error)
+	ExportInvoice(context.Context, *common.Id) (*payment.String, error)
+	ConvertInvoiceToHtml(context.Context, *payment.Invoice) (*payment.String, error)
+	GetExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error)
+	TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	ListLogs(context.Context, *payment.ListLogsRequest) (*payment.Logs, error)
+	CreatePromotionCode(context.Context, *payment.PromotionCode) (*payment.PromotionCode, error)
+	GetPromotionCode(context.Context, *payment.String) (*payment.PromotionCode, error)
+	UsePromotionCode(context.Context, *payment.PromotionCodeRequest) (*common.Empty, error)
+	ValidatePromotionCode(context.Context, *payment.PromotionCodeRequest) (*payment.PromotionCode, error)
+	ListPromotionCode(context.Context, *payment.ListPromotionCodeRequest) (*payment.PromotionCodes, error)
+	DeletePromotionCode(context.Context, *common.Id) (*common.Empty, error)
+	SearchReferral(context.Context, *payment.SearchReferredRequest) (*payment.Referral, error)
+	GetReferral(context.Context, *common.Id) (*payment.Referral, error)
+	ListTopReferral(context.Context, *common.Empty) (*payment.ReferralResponse, error)
+	UpdateReferral(context.Context, *payment.Referral) (*payment.Referral, error)
+	ListAccountReferred(context.Context, *common.Id) (*payment.LogAccountReferreds, error)
+	ListBillByAccountReferred(context.Context, *common.Id) (*payment.LogBillByAccountReferreds, error)
+	ListPaidForAgentReferrer(context.Context, *common.Id) (*payment.LogPaidForAgentReferrers, error)
+	PaidForAgentReferrer(context.Context, *payment.LogPaidForAgentReferrer) (*common.Empty, error)
+}
+
+func RegisterPaymentMgrServer(s *grpc.Server, srv PaymentMgrServer) {
+	s.RegisterService(&_PaymentMgr_serviceDesc, srv)
+}
+
+func _PaymentMgr_Purchase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).Purchase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/Purchase",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).Purchase(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdateSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdateSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdateSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdateSubscription(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetSubscription(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_AddPaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PaymentMethod)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).AddPaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/AddPaymentMethod",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).AddPaymentMethod(ctx, req.(*payment.PaymentMethod))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PaymentMethod)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdatePaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdatePaymentMethod",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdatePaymentMethod(ctx, req.(*payment.PaymentMethod))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DeletePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DeletePaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DeletePaymentMethod",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DeletePaymentMethod(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPaymentMethods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPaymentMethods(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPaymentMethods",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPaymentMethods(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_Pay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).Pay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/Pay",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).Pay(ctx, req.(*payment.PayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListInvoices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListInvoices(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).CreateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/CreateInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).CreateInvoice(ctx, req.(*payment.Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdateInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdateInvoice(ctx, req.(*payment.Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_FilterInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).FilterInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/FilterInvoices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).FilterInvoices(ctx, req.(*payment.ListInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DraftInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DraftInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DraftInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DraftInvoice(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DiffSubscriptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.DiffSubRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DiffSubscriptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DiffSubscriptions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DiffSubscriptions(ctx, req.(*payment.DiffSubRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListCommentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListComments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListComments",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListComments(ctx, req.(*payment.ListCommentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_AddComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Comment)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).AddComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/AddComment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).AddComment(ctx, req.(*payment.Comment))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPlans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPlans",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPlans(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ExportInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ExportInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ExportInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ExportInvoice(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ConvertInvoiceToHtml_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ConvertInvoiceToHtml(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ConvertInvoiceToHtml",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ConvertInvoiceToHtml(ctx, req.(*payment.Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ExchangeRate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetExchangeRate(ctx, req.(*payment.ExchangeRate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_TransferMoney_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).TransferMoney(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/TransferMoney",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).TransferMoney(ctx, req.(*payment.PayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListLogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListLogs(ctx, req.(*payment.ListLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_CreatePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PromotionCode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).CreatePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/CreatePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).CreatePromotionCode(ctx, req.(*payment.PromotionCode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetPromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.String)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetPromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetPromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetPromotionCode(ctx, req.(*payment.String))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UsePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PromotionCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UsePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UsePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UsePromotionCode(ctx, req.(*payment.PromotionCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ValidatePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PromotionCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ValidatePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ValidatePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ValidatePromotionCode(ctx, req.(*payment.PromotionCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListPromotionCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPromotionCode(ctx, req.(*payment.ListPromotionCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DeletePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DeletePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DeletePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DeletePromotionCode(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_SearchReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.SearchReferredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).SearchReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/SearchReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).SearchReferral(ctx, req.(*payment.SearchReferredRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetReferral(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListTopReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListTopReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListTopReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListTopReferral(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdateReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Referral)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdateReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdateReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdateReferral(ctx, req.(*payment.Referral))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListAccountReferred_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListAccountReferred(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListAccountReferred",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListAccountReferred(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListBillByAccountReferred_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListBillByAccountReferred(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListBillByAccountReferred",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListBillByAccountReferred(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPaidForAgentReferrer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPaidForAgentReferrer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPaidForAgentReferrer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPaidForAgentReferrer(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_PaidForAgentReferrer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.LogPaidForAgentReferrer)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).PaidForAgentReferrer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/PaidForAgentReferrer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).PaidForAgentReferrer(ctx, req.(*payment.LogPaidForAgentReferrer))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _PaymentMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.PaymentMgr",
+	HandlerType: (*PaymentMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Purchase",
+			Handler:    _PaymentMgr_Purchase_Handler,
+		},
+		{
+			MethodName: "UpdateSubscription",
+			Handler:    _PaymentMgr_UpdateSubscription_Handler,
+		},
+		{
+			MethodName: "GetSubscription",
+			Handler:    _PaymentMgr_GetSubscription_Handler,
+		},
+		{
+			MethodName: "AddPaymentMethod",
+			Handler:    _PaymentMgr_AddPaymentMethod_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentMethod",
+			Handler:    _PaymentMgr_UpdatePaymentMethod_Handler,
+		},
+		{
+			MethodName: "DeletePaymentMethod",
+			Handler:    _PaymentMgr_DeletePaymentMethod_Handler,
+		},
+		{
+			MethodName: "ListPaymentMethods",
+			Handler:    _PaymentMgr_ListPaymentMethods_Handler,
+		},
+		{
+			MethodName: "Pay",
+			Handler:    _PaymentMgr_Pay_Handler,
+		},
+		{
+			MethodName: "ListInvoices",
+			Handler:    _PaymentMgr_ListInvoices_Handler,
+		},
+		{
+			MethodName: "CreateInvoice",
+			Handler:    _PaymentMgr_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "UpdateInvoice",
+			Handler:    _PaymentMgr_UpdateInvoice_Handler,
+		},
+		{
+			MethodName: "FilterInvoices",
+			Handler:    _PaymentMgr_FilterInvoices_Handler,
+		},
+		{
+			MethodName: "DraftInvoice",
+			Handler:    _PaymentMgr_DraftInvoice_Handler,
+		},
+		{
+			MethodName: "DiffSubscriptions",
+			Handler:    _PaymentMgr_DiffSubscriptions_Handler,
+		},
+		{
+			MethodName: "ListComments",
+			Handler:    _PaymentMgr_ListComments_Handler,
+		},
+		{
+			MethodName: "AddComment",
+			Handler:    _PaymentMgr_AddComment_Handler,
+		},
+		{
+			MethodName: "ListPlans",
+			Handler:    _PaymentMgr_ListPlans_Handler,
+		},
+		{
+			MethodName: "ExportInvoice",
+			Handler:    _PaymentMgr_ExportInvoice_Handler,
+		},
+		{
+			MethodName: "ConvertInvoiceToHtml",
+			Handler:    _PaymentMgr_ConvertInvoiceToHtml_Handler,
+		},
+		{
+			MethodName: "GetExchangeRate",
+			Handler:    _PaymentMgr_GetExchangeRate_Handler,
+		},
+		{
+			MethodName: "TransferMoney",
+			Handler:    _PaymentMgr_TransferMoney_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _PaymentMgr_Ping_Handler,
+		},
+		{
+			MethodName: "ListLogs",
+			Handler:    _PaymentMgr_ListLogs_Handler,
+		},
+		{
+			MethodName: "CreatePromotionCode",
+			Handler:    _PaymentMgr_CreatePromotionCode_Handler,
+		},
+		{
+			MethodName: "GetPromotionCode",
+			Handler:    _PaymentMgr_GetPromotionCode_Handler,
+		},
+		{
+			MethodName: "UsePromotionCode",
+			Handler:    _PaymentMgr_UsePromotionCode_Handler,
+		},
+		{
+			MethodName: "ValidatePromotionCode",
+			Handler:    _PaymentMgr_ValidatePromotionCode_Handler,
+		},
+		{
+			MethodName: "ListPromotionCode",
+			Handler:    _PaymentMgr_ListPromotionCode_Handler,
+		},
+		{
+			MethodName: "DeletePromotionCode",
+			Handler:    _PaymentMgr_DeletePromotionCode_Handler,
+		},
+		{
+			MethodName: "SearchReferral",
+			Handler:    _PaymentMgr_SearchReferral_Handler,
+		},
+		{
+			MethodName: "GetReferral",
+			Handler:    _PaymentMgr_GetReferral_Handler,
+		},
+		{
+			MethodName: "ListTopReferral",
+			Handler:    _PaymentMgr_ListTopReferral_Handler,
+		},
+		{
+			MethodName: "UpdateReferral",
+			Handler:    _PaymentMgr_UpdateReferral_Handler,
+		},
+		{
+			MethodName: "ListAccountReferred",
+			Handler:    _PaymentMgr_ListAccountReferred_Handler,
+		},
+		{
+			MethodName: "ListBillByAccountReferred",
+			Handler:    _PaymentMgr_ListBillByAccountReferred_Handler,
+		},
+		{
+			MethodName: "ListPaidForAgentReferrer",
+			Handler:    _PaymentMgr_ListPaidForAgentReferrer_Handler,
+		},
+		{
+			MethodName: "PaidForAgentReferrer",
+			Handler:    _PaymentMgr_PaidForAgentReferrer_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PlaceHolderClient is the client API for PlaceHolder service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PlaceHolderClient interface {
+	Resolve(ctx context.Context, in *placeholder.ResolveRequest, opts ...grpc.CallOption) (*placeholder.Resolved, error)
+}
+
+type placeHolderClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewPlaceHolderClient(cc *grpc.ClientConn) PlaceHolderClient {
+	return &placeHolderClient{cc}
+}
+
+func (c *placeHolderClient) Resolve(ctx context.Context, in *placeholder.ResolveRequest, opts ...grpc.CallOption) (*placeholder.Resolved, error) {
+	out := new(placeholder.Resolved)
+	err := c.cc.Invoke(ctx, "/header.PlaceHolder/Resolve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PlaceHolderServer is the server API for PlaceHolder service.
+type PlaceHolderServer interface {
+	Resolve(context.Context, *placeholder.ResolveRequest) (*placeholder.Resolved, error)
+}
+
+func RegisterPlaceHolderServer(s *grpc.Server, srv PlaceHolderServer) {
+	s.RegisterService(&_PlaceHolder_serviceDesc, srv)
+}
+
+func _PlaceHolder_Resolve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(placeholder.ResolveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlaceHolderServer).Resolve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PlaceHolder/Resolve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlaceHolderServer).Resolve(ctx, req.(*placeholder.ResolveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _PlaceHolder_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.PlaceHolder",
+	HandlerType: (*PlaceHolderServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Resolve",
+			Handler:    _PlaceHolder_Resolve_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PubsubClient is the client API for Pubsub service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PubsubClient interface {
+	Subscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error)
+	Unsubscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type pubsubClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewPubsubClient(cc *grpc.ClientConn) PubsubClient {
+	return &pubsubClient{cc}
+}
+
+func (c *pubsubClient) Subscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Pubsub/Subscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubsubClient) Unsubscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Pubsub/Unsubscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PubsubServer is the server API for Pubsub service.
+type PubsubServer interface {
+	Subscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
+	Unsubscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
+}
+
+func RegisterPubsubServer(s *grpc.Server, srv PubsubServer) {
+	s.RegisterService(&_Pubsub_serviceDesc, srv)
+}
+
+func _Pubsub_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(pubsub.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubsubServer).Subscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Pubsub/Subscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubsubServer).Subscribe(ctx, req.(*pubsub.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pubsub_Unsubscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(pubsub.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubsubServer).Unsubscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Pubsub/Unsubscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubsubServer).Unsubscribe(ctx, req.(*pubsub.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Pubsub_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Pubsub",
+	HandlerType: (*PubsubServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Subscribe",
+			Handler:    _Pubsub_Subscribe_Handler,
+		},
+		{
+			MethodName: "Unsubscribe",
+			Handler:    _Pubsub_Unsubscribe_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// WidgetServiceClient is the client API for WidgetService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type WidgetServiceClient interface {
+	Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Setting, error)
+	Update(ctx context.Context, in *widget.Setting, opts ...grpc.CallOption) (*widget.Setting, error)
+	ReadUserSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.UserSetting, error)
+	UpdateUserSetting(ctx context.Context, in *widget.UserSetting, opts ...grpc.CallOption) (*widget.UserSetting, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+}
+
+type widgetServiceClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewWidgetServiceClient(cc *grpc.ClientConn) WidgetServiceClient {
+	return &widgetServiceClient{cc}
+}
+
+func (c *widgetServiceClient) Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Setting, error) {
+	out := new(widget.Setting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) Update(ctx context.Context, in *widget.Setting, opts ...grpc.CallOption) (*widget.Setting, error) {
+	out := new(widget.Setting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ReadUserSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.UserSetting, error) {
+	out := new(widget.UserSetting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ReadUserSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) UpdateUserSetting(ctx context.Context, in *widget.UserSetting, opts ...grpc.CallOption) (*widget.UserSetting, error) {
+	out := new(widget.UserSetting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/UpdateUserSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// WidgetServiceServer is the server API for WidgetService service.
+type WidgetServiceServer interface {
+	Read(context.Context, *common.Id) (*widget.Setting, error)
+	Update(context.Context, *widget.Setting) (*widget.Setting, error)
+	ReadUserSetting(context.Context, *common.Id) (*widget.UserSetting, error)
+	UpdateUserSetting(context.Context, *widget.UserSetting) (*widget.UserSetting, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+}
+
+func RegisterWidgetServiceServer(s *grpc.Server, srv WidgetServiceServer) {
+	s.RegisterService(&_WidgetService_serviceDesc, srv)
+}
+
+func _WidgetService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).Read(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Setting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).Update(ctx, req.(*widget.Setting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ReadUserSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ReadUserSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ReadUserSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ReadUserSetting(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_UpdateUserSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.UserSetting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).UpdateUserSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/UpdateUserSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).UpdateUserSetting(ctx, req.(*widget.UserSetting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _WidgetService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.WidgetService",
+	HandlerType: (*WidgetServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Read",
+			Handler:    _WidgetService_Read_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _WidgetService_Update_Handler,
+		},
+		{
+			MethodName: "ReadUserSetting",
+			Handler:    _WidgetService_ReadUserSetting_Handler,
+		},
+		{
+			MethodName: "UpdateUserSetting",
+			Handler:    _WidgetService_UpdateUserSetting_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _WidgetService_Ping_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ServiceAvatarManagerClient is the client API for ServiceAvatarManager service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ServiceAvatarManagerClient interface {
+	GetAvatar(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*avatar.Avatar, error)
+	UpsertAvatar(ctx context.Context, in *avatar.Avatar, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type serviceAvatarManagerClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewServiceAvatarManagerClient(cc *grpc.ClientConn) ServiceAvatarManagerClient {
+	return &serviceAvatarManagerClient{cc}
+}
+
+func (c *serviceAvatarManagerClient) GetAvatar(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*avatar.Avatar, error) {
+	out := new(avatar.Avatar)
+	err := c.cc.Invoke(ctx, "/header.ServiceAvatarManager/GetAvatar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceAvatarManagerClient) UpsertAvatar(ctx context.Context, in *avatar.Avatar, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ServiceAvatarManager/UpsertAvatar", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ServiceAvatarManagerServer is the server API for ServiceAvatarManager service.
+type ServiceAvatarManagerServer interface {
+	GetAvatar(context.Context, *common.Id) (*avatar.Avatar, error)
+	UpsertAvatar(context.Context, *avatar.Avatar) (*common.Empty, error)
+}
+
+func RegisterServiceAvatarManagerServer(s *grpc.Server, srv ServiceAvatarManagerServer) {
+	s.RegisterService(&_ServiceAvatarManager_serviceDesc, srv)
+}
+
+func _ServiceAvatarManager_GetAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceAvatarManagerServer).GetAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceAvatarManager/GetAvatar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceAvatarManagerServer).GetAvatar(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceAvatarManager_UpsertAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(avatar.Avatar)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceAvatarManagerServer).UpsertAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceAvatarManager/UpsertAvatar",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceAvatarManagerServer).UpsertAvatar(ctx, req.(*avatar.Avatar))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ServiceAvatarManager_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ServiceAvatarManager",
+	HandlerType: (*ServiceAvatarManagerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAvatar",
+			Handler:    _ServiceAvatarManager_GetAvatar_Handler,
+		},
+		{
+			MethodName: "UpsertAvatar",
+			Handler:    _ServiceAvatarManager_UpsertAvatar_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// WebhookServiceClient is the client API for WebhookService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type WebhookServiceClient interface {
+	Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhook, error)
+	Delete(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	List(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhooks, error)
+	Update(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error)
+	Create(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error)
+	Test(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.WebhookTestResult, error)
+}
+
+type webhookServiceClient struct {
+	cc *grpc.ClientConn
+}
+
+func NewWebhookServiceClient(cc *grpc.ClientConn) WebhookServiceClient {
+	return &webhookServiceClient{cc}
+}
+
+func (c *webhookServiceClient) Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhook, error) {
+	out := new(client.Webhook)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Delete(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) List(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhooks, error) {
+	out := new(client.Webhooks)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/List", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Update(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error) {
+	out := new(client.Webhook)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Create(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error) {
+	out := new(client.Webhook)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Test(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.WebhookTestResult, error) {
+	out := new(client.WebhookTestResult)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Test", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// WebhookServiceServer is the server API for WebhookService service.
+type WebhookServiceServer interface {
+	Read(context.Context, *common.Id) (*client.Webhook, error)
+	Delete(context.Context, *common.Id) (*common.Empty, error)
+	List(context.Context, *common.Id) (*client.Webhooks, error)
+	Update(context.Context, *client.Webhook) (*client.Webhook, error)
+	Create(context.Context, *client.Webhook) (*client.Webhook, error)
+	Test(context.Context, *common.Id) (*client.WebhookTestResult, error)
+}
+
+func RegisterWebhookServiceServer(s *grpc.Server, srv WebhookServiceServer) {
+	s.RegisterService(&_WebhookService_serviceDesc, srv)
+}
+
+func _WebhookService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Read(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Delete(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/List",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).List(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Webhook)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Update(ctx, req.(*client.Webhook))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Webhook)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Create(ctx, req.(*client.Webhook))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Test_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Test(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Test",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Test(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _WebhookService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.WebhookService",
+	HandlerType: (*WebhookServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Read",
+			Handler:    _WebhookService_Read_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _WebhookService_Delete_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _WebhookService_List_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _WebhookService_Update_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _WebhookService_Create_Handler,
+		},
+		{
+			MethodName: "Test",
+			Handler:    _WebhookService_Test_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
 }

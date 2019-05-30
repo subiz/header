@@ -63,10 +63,8 @@ for i in `ls -R`; do
 
 	if [[ $i == *".proto" ]]; then
 		printf "\033[0;90m["%d"] compiling %s %s \033[0;31m\n" $TOTAL $LAST_DIR /$i
-		$PROTOC --go_out=.  --proto_path=./  $LAST_DIR/$i &
-		if [[ $i == 'service.proto' ]]; then
-			 $PROTOC -I$PROTOC_PATH/include -I. -I$GOPATH/src --swagger_out=logtostderr=true:. --proto_path=$GOPATH/src --proto_path=./ $LAST_DIR/$i &
-		fi
+		$PROTOC -I$PROTOC_PATH/include -I. --go_out=plugins:. --proto_path=./  $LAST_DIR/$i &
+		# --swagger_out=logtostderr=true:.
 
 		ALLPROTO="$ALLPROTO $LAST_DIR/$i"
 		let "TOTAL += 1"
