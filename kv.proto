@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package kv;
+
+option go_package = "github.com/subiz/header/kv";
+
+import "common.proto";
+
+message Key {
+	string partition = 2;
+	string key = 3;
+}
+
+message Value {
+	string partition = 2;
+	string key = 3;
+	bytes bytes = 4;
+	string value = 5;
+	int64 ttl = 6;
+}
+
+message Bool {
+	bool value = 2;
+}
+
+service KV {
+	rpc Set(Value) returns (Value);
+	rpc Get(Key) returns (Value);
+	rpc Has(Key) returns (Bool);
+	rpc Ping(common.PingRequest) returns (common.Pong);
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package kafpc;
+
+option go_package = "github.com/subiz/header/kafpc";
+
+message Request {
+	string id = 2;
+	string response_host = 3;
+	bytes body = 5;
+	string path = 6;
+	int64 created = 7;
+	bool forget = 8;
+}
+
+message Response {
+	string request_id = 3;
+	bytes body = 4;
+	int32 code = 5;
+	bytes error = 6;
+	string path = 7;
+	int64 created = 8;
+}
+
+message Empty {}

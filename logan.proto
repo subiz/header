@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package logan;
+
+import "common.proto";
+
+option go_package = "github.com/subiz/header/logan";
+
+message Debug {
+	bytes stack_trace = 5;
+	string hostname = 6;
+	KafkaInfo kafka = 23;
+}
+
+message KafkaInfo {
+	string topic = 2;
+	int32 partition = 3;
+	int64 offset = 4;
+}
+
+message Log {
+	common.Context ctx = 1;
+	string trace_id = 2;
+	int64 created = 8;
+	string level = 10;
+	repeated string tags = 4;
+	Debug debug = 22;
+	bytes message = 24;
+	string service_name = 25;
+}
+
+enum Level {
+	debug = 0;
+	info = 1;
+	notice = 2;
+	warning = 3;
+	error = 4;
+	critical = 5;
+	alert = 6;
+	emergency = 7;
+	panic = 8;
+	fatal = 9;
+}

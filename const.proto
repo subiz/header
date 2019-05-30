@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package header;
 
+option go_package = "github.com/subiz/header";
+
 enum E {
 	Sub = 0;
 	RawEventCreated = 3;  //

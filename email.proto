@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package email;
+
+import "common.proto";
+
+option go_package = "github.com/subiz/header/email";
+
+message Email {
+	common.Context ctx = 1;
+	string from = 3;
+	//string to = 4;
+	string subject = 5;
+	string body = 6;
+	map<string, string> header = 7;
+	repeated Attachment attachments = 8; // s3 links
+	repeated string to = 9;
+	repeated string cc = 10;
+	repeated string bcc = 11;
+}
+
+message Attachment {
+	string url = 2;
+	string name = 3;
+	string mimetype = 4;
+}

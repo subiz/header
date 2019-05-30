@@ -1,0 +1,97 @@
+syntax = "proto2";
+
+
+option go_package = "github.com/subiz/header/content";
+
+package content;
+
+import "common.proto";
+import "conversation.proto";
+
+message LookupRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string url = 3;
+}
+
+message LinkRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string url = 3;
+	repeated string ids = 4;
+}
+
+message SearchContentRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string id = 3;
+	optional string title = 4;
+	optional string url = 5;
+	optional string labels = 6;
+	optional string categories = 10;
+	optional string relates = 11;
+	optional string fieldkeys = 12;
+	optional string query = 13;
+	optional int32 limit = 14;
+	optional string anchor = 15;
+	optional string stringify = 16;
+	optional string fieldvalues = 17;
+	optional int64 created = 18;
+}
+
+message KeyValue {
+	optional string key = 3;
+	optional string value = 4;
+}
+
+message Content {
+	optional common.Context ctx = 1;
+	// optional string sbid = 2;
+	optional string id = 3; // user input id
+	optional string account_id = 4;
+
+	optional string description = 5;
+	optional string title = 6;
+	optional string url = 7;
+	repeated string labels = 8;
+	enum Availability {
+		in_stock = 1;
+		out_of_stock = 2;
+		preorder = 3;
+		discontinued = 4;
+	}
+	optional string availability = 9;
+
+	optional float price = 10;
+	optional string currency = 11;
+	optional float sale_price = 12;
+	repeated KeyValue fields = 13;
+	repeated string categories = 14;
+	repeated string relates = 15; //  TODO: delete
+	repeated conversation.Attachment attachments = 16; //TODO: delete
+	optional int64 created = 17;
+	optional int64 updated = 18;
+	repeated string attachment_urls = 20;
+	repeated string related_ids = 21; // releated content ids
+	optional string image_url = 22;
+}
+
+message Contents {
+	optional common.Context ctx = 1;
+	repeated Content contents = 2;
+	optional string anchor = 3;
+	optional int64 total = 4;
+}
+
+message ContentUrl {
+	optional string account_id = 2;
+	optional int32 par = 3;
+	optional string url = 4;
+	optional string err = 5;
+}
+
+message ContentsByUrlTable{
+	optional string account_id = 1;
+	optional string url = 2;
+	repeated string ids = 3;
+}

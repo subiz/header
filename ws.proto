@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package ws;
+
+option go_package = "github.com/subiz/header/ws";
+
+import "common.proto";
+
+message Subscribe {
+	//common.Context ctx = 1;
+	//optional string connection_id = 2;
+	repeated string events = 3;
+
+	// optional: only use this in widget; otherwise must provide credential through access token
+	//	string mask_id = 4;
+
+	string connection_id = 5;
+}
+
+message ListRequest {
+	common.Context ctx = 1;
+	string connection_id = 2;
+}
+
+message Payload {
+	int64 id = 3;
+	string message = 4;
+	string error = 5;
+}

@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "github.com/subiz/header/common";
+
+import "auth.proto";
+
+// A string
+message String {
+	string value = 2;
+}
+
+// An int64 value
+message Int64 {
+	int64 value = 2;
+}
+
+// A bool value
+message Bool {
+	bool value = 2;
+}
+
+message Empty {
+	Context ctx = 1;
+}
+
+message Id {
+	Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+}
+
+message Ids {
+	Context ctx = 1;
+	string account_id = 2;
+	repeated string ids = 3;
+}
+
+message ObjectPathRequest {
+  Context ctx = 1;
+	string id = 2;
+	string path = 3;
+	string account_id = 4;
+}
+
+message Context {
+	string event_id = 1;
+	bytes state = 2;
+	string node = 3;
+
+	auth.Credential credential = 6;
+	Tracing tracing = 7;
+
+	Device by_device = 10;
+
+	// for kafka
+	string sub_topic = 11;
+	int32 kafka_partition = 13;
+	int64 kafka_offset = 14;
+	uint64 kafka_term = 15;
+	string idempotency_key = 17;
+	string env = 18; // "test", "produnction"
+	string kafka_key = 19;
+}
+
+enum Env {
+	production = 0;
+	test = 1;
+	development = 2;
+	stagging = 3;
+}
+
+message Device {
+	string ip = 3;
+	string user_agent = 4; // code
+	string screen_resolution = 5;
+	string timezone = 6;
+	string language = 7;
+	string referrer = 8;
+	string type = 9;
+	string platform = 10;
+	enum DeviceType {
+		unknown = 0;
+		mobile = 1;
+		tablet = 2;
+		desktop = 3;
+	}
+	string source_referrer = 11; // referrer of referrer
+	repeated string ga_tracking_ids = 12;
+}
+
+message PingRequest {
+	string message = 2;
+}
+
+message Pong {
+	string message = 3;
+}
+
+enum L {
+	en = 0; // english
+	vn = 1; // vietnamese
+	cn = 3; // chinese
+	fr = 5; // french
+}
+
+enum Weekday {
+	Monday = 0;
+	Tuesday = 1;
+	Wednesday = 2;
+	Thursday = 3;
+	Friday = 4;
+	Saturday = 5;
+	Sunday = 6;
+}
+
+enum Month {
+	January = 0;
+	February = 1;
+	March = 2;
+	April = 3;
+	May = 4;
+	June = 5;
+	July = 6;
+	August = 7;
+	September = 8;
+	October = 9;
+	November = 10;
+	December = 11;
+}
+
+message Tracing {
+	repeated Trace traces = 1;
+}
+
+message Trace {
+	string serviceName = 1;
+	string name = 2;
+	int64 duration = 3; // nanoseconds
+	int64 started = 4; // unix nano
+	int64 ended = 5; // unix nano
+}

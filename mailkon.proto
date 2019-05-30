@@ -1,0 +1,82 @@
+syntax = "proto2";
+
+package mailkon;
+
+import "event.proto";
+
+option go_package = "github.com/subiz/header/mailkon";
+
+message Address {
+	optional string account_id = 1;
+	optional string address = 2;
+	optional int64 updated = 3;
+}
+
+message Domain {
+	optional string account_id = 1;
+	optional string domain = 2;
+	optional int64 updated = 3;
+	optional string dnstype = 4;
+	optional string data = 5;
+}
+
+message Message {
+	optional string message_id = 2;
+	optional string account_id = 3;
+	optional string conversation_id = 4;
+	optional string from_addr = 5;
+	optional string to_addr = 6;
+	optional string subject = 7;
+	optional string body = 8;
+	optional string header = 9;
+	repeated string attachments = 10;
+	optional int64 created = 11;
+}
+
+message User {
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string email_address = 4;
+	optional int64 seen = 5;
+}
+
+message SendgridEvent {
+	optional string event_id = 3;
+	optional string account_id = 4;
+	optional string conversation_id = 6;
+	optional string message_id = 7;
+	repeated string data = 8;
+	optional string full_message_id = 9;
+	optional string subject = 10;
+	optional event.Event event = 11;
+}
+
+message UserAvail {
+	optional string account_id = 3;
+	optional string email_address = 5;
+	optional bool availability = 6;
+	optional int64 updated = 7;
+}
+
+message HttpChunk {
+	optional string id = 3;
+	optional int32 chunk_id = 4;
+	optional bytes data = 5;
+	optional int32 chunk_size = 6;
+}
+
+message Job {
+	optional string topic = 2;
+	optional int32 partition  = 3;
+	optional int64 offset = 4;
+
+	optional string content_type = 5;
+	optional string type = 6;
+	optional string request_id = 7;
+}
+
+enum JobType {
+	sendgrid_inbound = 0;
+	sendgrid_event = 1;
+	subiz_event = 3;
+}

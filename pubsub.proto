@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package pubsub;
+
+option go_package = "github.com/subiz/header/pubsub";
+
+import "common.proto";
+
+message Subscription {
+	common.Context ctx = 1;
+	string user_id = 2;
+	string topic = 3;
+
+	//optional SubscribeScope scope = 5;
+	//optional string account_id = 6;
+	string sub_id = 7;
+
+	string target_topic = 10;
+	string target_key = 11;
+	int64 ttls = 12;
+	string router_topic = 13;
+	int32 target_partition = 14;
+
+	repeated string topics = 4;
+}
+
+message PublishMessage {
+	common.Context ctx = 1;
+	repeated string topics = 2;
+	bytes payload = 4;
+
+	// user_ids bloom filter: only those users can get message
+	bytes user_ids_filter = 5;
+	int32 filter_item_bit_size = 7; // 300
+	int32 filter_hash_count = 8; // 5
+
+	// negative user_ids bloom filter: those users wont get the message
+	bytes neg_user_ids_filter = 6;
+}

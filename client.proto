@@ -1,0 +1,130 @@
+syntax = "proto2";
+
+package client;
+
+option go_package = "github.com/subiz/header/client";
+
+import "common.proto";
+
+message Clients {
+	optional common.Context ctx = 1;
+	repeated Client clients = 2;
+}
+
+message Client {
+	optional common.Context ctx = 1;
+	optional string id = 3;
+	// secre used to authorize client with oauth2 server
+	optional string secret = 4;
+	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
+	optional string logo_url = 5;
+	optional string account_id = 6;
+	// IsVerified will be true if client is verified by the authority
+	optional bool is_verified = 8;
+	optional int64 verified = 9;
+	// List of URLs which client must register for oauth redirection
+	optional string redirect_uri = 10;
+	optional string type = 11;
+	enum Type {
+		app = 0;
+		connector = 1;
+		bot = 3;
+	}
+	optional string name = 12;
+	// Version number of the client.
+	optional string version = 14;
+	optional bool is_enabled = 15;
+	optional int64 created = 17;
+	optional int64 modified = 18;
+	optional string webhook_uri = 20;
+	repeated string events = 19; // subscribed event
+
+	// for connector only
+	optional string channel_type = 21;
+	enum ChannelType {
+		subiz = 0;
+		email = 1;
+		facebook = 2;
+		viber = 3;
+	}
+
+	optional string availability_uri = 22;
+	optional string ping_uri = 23;
+	optional bool is_internal = 24;
+	optional string unsubscribe_uri = 25;
+	repeated string scopes = 26;
+
+	optional string bot_default_job_title = 28;
+	optional string bot_default_fullname = 29;
+	optional bool bot_is_supervisor = 30;
+}
+
+message AuthorizedClient {
+	optional common.Context ctx = 1;
+	optional Client client  = 2;
+	optional string issue_account_id = 3;
+	optional string issuer = 4;
+	repeated string scopes = 5;
+	optional string kind = 6;
+}
+
+message Webhooks {
+	optional common.Context ctx = 1;
+	repeated Webhook webhooks = 2;
+}
+
+message Webhook {
+	optional common.Context ctx = 1;
+	optional string account_id = 12;
+	optional string client_id = 2;
+	optional string url = 3;
+	optional string secret = 4;
+
+	repeated string events = 6;
+	optional string state = 7;
+	enum State {
+		active = 0;
+		backoff_sleep = 1;
+		dead = 2;
+	}
+
+	optional int64 last_hook_at = 9;
+	optional int64 events_count = 13;
+	optional string last_hook_response = 14;
+	optional int32 last_hook_status = 15;
+	optional string last_hook_payload = 16;
+
+	optional int64 modified = 19;
+	optional int64 created = 20;
+	optional string creator = 21;
+	optional bool is_enabled = 22;
+	optional bool is_protected = 23;
+}
+
+message WebhookPayload {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string hub_id = 3;
+	optional bytes payload = 4; //json format
+	optional string event = 5;
+	optional string webhook_id = 6; // internal use only
+	optional int64 queue_offset = 8; // internal use only
+}
+
+message WebhookBackoff {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int32 num_back_off = 5;
+	optional string backoff_id = 6; // to make sure there is one backoff per webhook
+	optional string webhook_id = 7;
+}
+
+message WebhookTestResult {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string client_id = 3;
+	optional string response_body = 14;
+	optional int32 status = 15;
+	optional string payload = 16;
+	optional int64 latency = 17; // seconds
+}

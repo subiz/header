@@ -1,0 +1,273 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/subiz/header/user";
+
+import "common.proto";
+
+message TotalConvoUpdateRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	int32 total = 4;
+}
+
+message TotalOpenTicket {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	int32 total = 4;
+}
+
+message AttributeData {
+	string account_id = 2;
+	string user_id = 3;
+	string key = 4;
+
+	string state = 6;
+	int64 created = 7;
+	int64 modified = 8;
+
+	string text = 10;
+	double number = 11;
+	bool boolean = 12;
+	string datetime = 13;
+	repeated string list = 14;
+
+	string setter = 16;
+	string setter_type = 17;
+}
+
+message User {
+	common.Context ctx = 1;
+	string id = 3;
+	string account_id = 4;
+	repeated Trace traces = 11;
+	//	repeated string alias = 12;
+	bool is_ban = 14;
+
+	repeated AttributeData attributes = 18;
+
+	repeated string segments = 19;
+	string subiz_id = 25;
+
+	repeated string aliases = 30;
+
+	int32 par = 34;
+	//  int32 modified_hour = 35;
+	int64 modified = 36;
+	int32 modified_week = 37;
+}
+
+message Users {
+	repeated User users = 1;
+}
+
+enum AttributeDataState {
+	live = 0;
+	deleted = 1;
+}
+
+message MyUser {
+	common.Context ctx = 1;
+	string agent_id = 2;
+	User user = 3;
+	int32 unread = 4;
+	int64 updated = 5;
+	string account_id = 7;
+}
+
+message Alias {
+	common.Context ctx = 1;
+	string user_id = 3;
+	string account_id = 4;
+	string alias = 5;
+}
+
+message Campaign {
+	string name = 2;
+	string source = 3;
+	string medium = 4;
+	string term = 5;
+	string content = 6;
+}
+
+message CountTotalRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+}
+
+message CountTotalResponse {
+	double total_user = 2;
+}
+
+message CountResponse {
+	repeated int32 data = 3;
+}
+
+message MergeRequest {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string destination_user_id = 5;
+	string source_user_id = 4;
+}
+
+message CreateRequest {
+	string challenge_id = 3;
+	string answer = 4;
+}
+
+message Traces {
+	repeated Trace traces = 3;
+}
+
+message Trace {
+	string event_id = 3;
+	string ip = 4;
+	int32 location_id = 5; // remove
+
+	string city_name = 8;            // filled
+	string country_name = 9;         // filled
+	string continent_code = 10;      // filled
+	float latitude = 12;             // filled
+	float longitude = 13;            // filled
+	string postal_code = 14;         // filled
+
+	string timezone = 16;
+
+	string isp = 17;                 // filled
+	string continent_name = 18;      // filled
+	string country_code = 19;        // filled
+
+	string platform = 20;
+
+	string device_type = 21;         // filled
+	enum DeviceType {
+		unknown = 0;
+		mobile = 1;
+		tablet = 2;
+		desktop = 3;
+	}
+
+	string browser_name = 22;        // filled
+	string language = 23;
+	string user_agent = 24;
+	string screen_resolution = 25;
+
+	string ga_client_id = 26;
+	repeated string ga_tracking_ids = 27;
+	enum AdsNetwork {
+		google_adwords = 0;
+	}
+	string ads_network = 28;
+
+	repeated Campaign campaigns = 29;
+	int64 created = 30;
+	int64 tracked = 31;
+
+	string referrer = 32;
+	enum Source {
+		direct = 0;
+		referring = 1;
+		organic = 2;
+		social = 3;
+		advertising = 4;
+	}
+	string source = 33;
+}
+
+message UserSearchResult {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 total = 3;
+	repeated User users = 4;
+	string anchor = 5;
+	repeated int32 unreads = 6; // only used when search my users
+	map<string, int32> unread_counts = 7;
+}
+
+message UserSearchRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string segmentation_id = 3;
+	string query = 4; // TODO: delete
+	string condition = 10;
+	string anchor = 5;
+	int32 limit = 6;
+	string agent_id = 8; // search my user of agent
+	bool unread = 9; // search my user of agent
+}
+
+message UnpickRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string segmentation_id = 5;
+}
+
+message PickRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string agent_id = 4;
+	string segmentation_id = 5;
+	int64 added = 7;
+	int64 updated = 8;
+}
+
+message CountSegmentationUserByAttributeRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string attribute_key = 3;
+	string segmentation_id = 4;
+	int32 from = 5; // deprecated
+	int32 to = 6; // deprecated
+	string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+	}
+	int32 from_hour = 9;
+	int32 to_hour = 10;
+}
+
+message Visitor {
+	common.Context ctx = 1;
+	string account_id = 3;
+	User user = 4;
+	int64 pinged = 5;
+	string page_url = 6;
+	int64 page_viewed = 7;
+	string page_title = 8;
+}
+
+message Visitors {
+	common.Context ctx = 1;
+	repeated Visitor visitors = 2;
+}
+
+message Presences {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Presence presences = 4;
+}
+
+message Presence {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string user_id = 4;
+	int64 pinged = 5;
+	int64 pinged_minute = 6;
+}
+
+message LastView {
+	string account_id = 3;
+	string user_id = 4;
+	string url = 5;
+	string ua = 6;
+	string ip = 7;
+	int64 created = 8;
+	string event_id = 9;
+	string title = 10;
+}

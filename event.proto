@@ -1,0 +1,389 @@
+syntax = "proto3";
+
+package event;
+
+import "common.proto";
+import "account.proto";
+import "conversation.proto";
+import "content.proto";
+import "user3.proto";
+import "user.proto";
+import "notibox.proto";
+import "payment.proto";
+import "email.proto";
+
+option go_package = "github.com/subiz/header/event";
+
+message RawEventCreatedPayload {
+	common.Context ctx = 1;
+	repeated string subs = 3;
+	string target_topic = 4;
+	string payload = 5; //json format
+	string target_key = 6;
+	repeated string payloads = 7; // payload for each sub, payload must be empty
+	string topic = 9;
+	string router_topic = 10;
+	string sub = 11;
+}
+
+message Events {
+	common.Context ctx = 1;
+	repeated Event events = 4;
+	int64 total = 2;
+	string anchor = 3;
+}
+
+message By {
+	common.Device device = 2;
+	string id = 3;
+	string client_id = 4;
+	string type = 6; // agent, user, connector
+	string display_id = 7;
+}
+
+message Event {
+	reserved 10, 12, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 42, 13, 15;
+	common.Context ctx = 1;
+	string id = 3;
+	string account_id = 4;
+	int64 created = 8;
+	string type = 9; // eventtype
+	repeated string topics = 11;
+	By by = 50;
+	message Data {
+		account.Account account = 1;
+		account.Agent agent = 2;
+		conversation.Message message = 3;
+		conversation.Conversation conversation = 4;
+		conversation.Postback postback = 5;
+		content.Content content = 6;
+		user.Topic topic = 7;
+		user.Presence presence = 8;
+		user.User user = 10;
+		user.UnreadTopic unread_topic = 11;
+		user.MyUser my_user = 12;
+		notibox.Notification notification = 14;
+		account.AgentPerm agent_perm = 16;
+		account.GroupMember group_member = 17;
+		account.AgentGroup group = 18;
+		payment.Limit limit = 19;
+		user.AttributeData user_attribute = 20;
+		user.Alias alias = 22;
+		user.Note note = 23;
+		conversation.Ticket ticket = 24;
+		Automation automation = 25;
+		Event event = 26;
+		conversation.Seen message_seen = 27;
+		conversation.Ack message_ack = 28;
+		conversation.Received message_received = 29;
+		AutomationEvent automation_event = 30;
+	}
+	Data data = 20;
+}
+
+enum AccountType {
+	a = 0;
+	account_deleted = 60;
+	account_updated = 61;
+	group_created = 62;
+	group_deleted = 63;
+	group_updated = 64;
+	group_joined = 65;
+	group_left = 66;
+	invitation_accepted = 68;
+	agent_deleted = 69;
+	agent_updated = 70;
+	agent_permission_updated = 71;
+	limit_updated = 72;
+}
+
+enum UserType {
+	u = 0;
+	my_user_upserted = 46;
+	user_info_updated = 48;
+	alias_created = 49;
+	alias_deleted = 50;
+	user_added_to_my_list = 51;
+	user_created = 52;
+	note_created = 53;
+}
+
+enum EventType {
+	e = 0;
+	presence_updated = 38;
+	content_viewed = 39;
+	content_searched = 40;
+	content_addedtocart = 41;
+	content_checkedout = 42;
+	content_purchased = 43;
+	topic_read = 44;
+	subscribed_topic_updated = 45;
+	user_topic_updated = 50;
+	user_attribute_created = 51;
+	user_attribute_updated = 52;
+	user_attribute_deleted = 55;
+	automation_out_of_credit = 70;
+	automation_fired = 71;
+}
+
+enum WidgetType {
+	w = 0;
+}
+
+enum ConvoType {
+	c = 0;
+	// conversation_updated = 9;
+	message_sent = 10;
+	conversation_state_updated = 11;
+	//conversation_started = 1;
+	conversation_joined = 2;
+	//conversation_message = 3;
+	conversation_left = 4;
+	//conversation_closed = 5;
+	conversation_tagged = 6;
+	conversation_untagged = 7;
+	//conversation_waiting = 8;
+	channel_deintegrated = 20;
+	channel_integrated = 21;
+	message_seen = 30;
+	message_ack = 31;
+	message_received = 32;
+	conversation_typing = 33;
+	conversation_postbacked = 34;
+	conversation_unassigned = 35;
+	conversation_assigned = 36;
+	message_updated = 38;
+
+	conversation_pending = 81;
+	ticket_created = 82;
+	ticket_updated = 83;
+	ticket_deleted = 84;
+}
+
+enum NotiboxType {
+	n = 0;
+	notification_upserted = 52;
+}
+
+message Subscription { // raweventcreatedpayload
+	common.Context ctx = 1;
+	string topic = 3;
+	//optional string user_id = 4; // connectorid or userid
+
+	//optional SubscribeScope scope = 5;
+	//optional string account_id = 6;
+	string sub_id = 7;
+
+	//optional SubscriberType subscriber_type = 8;
+	//optional string subscriber_id = 9;
+	string target_topic = 10;
+	string target_key = 11;
+	int64 ttls = 12;
+	string router_topic = 13;
+	int32 target_partition = 14;
+}
+
+enum SubPrefix {
+	Webhook = 0;
+	Websocket = 1;
+}
+
+message ListEventsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string query = 4;
+	string anchor = 5;
+	int32 limit = 6;
+	string category = 9;
+}
+
+message UserEvent {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string user_id = 4;
+	Event event = 5;
+	user.User user = 6;
+}
+
+message SubscriptionResponse {
+	common.Context ctx = 1;
+	bool status = 2;
+}
+
+message AutomationEvent {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string user_id = 4;
+	Automation automation = 5;
+	// user.Session session = 6;
+	user.User user = 7;
+	Event event = 9;
+	AutomationAction action = 10;
+}
+
+message Automation {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string channel = 4; // deprecated
+	string name = 5;
+	string description = 6;
+	repeated user.Condition conditions = 7; // deprecated
+	user.SCondition condition = 8;
+
+	//repeated SegmentCondition query = 5; // suffix annotation
+	// a * b + (c + d) * e  ==>  + * a b * + c d e
+
+	int64 created = 9;
+	int64 modified = 10;
+
+	string state = 12;
+	enum State {
+		active = 0;
+		inactive = 1;
+	}
+
+	string action_type = 13; // deprecated
+	enum ActionType {
+		conversation_message = 0;
+		agent_notification = 1;
+		//user_notification = 2;
+		// automation_invite_message = 4;
+
+		block_user = 5;
+		merge_users = 7;
+		user_notification = 8;
+		user_webhook = 9;
+		user_note = 10;
+
+		conversation_message2 = 12;
+		conversation_webhook = 13;
+		add_agent_to_conversation = 14;
+		create_ticket = 15;
+		conversation_tag = 16;
+
+		// agent_notification = 17;
+		add_user_to_segmentation = 18;
+
+	}
+
+	string action_data = 14; // deprecated
+	string scope = 15; // deprecated
+	enum AutomationScope {
+		conversation = 0;
+		user = 3;
+	}
+
+	bool cross_channel = 16; // deprecated
+	string metadata = 17;
+
+	repeated AutomationAction actions = 18;
+	uint32 delay_sec = 19;
+	string action_id = 20; // deprecated, prepare for migrate
+}
+
+message AutomationAction {
+	enum ActionType {
+		update_user_attribute = 0; // type user
+		block_user = 1; // prop user
+		merge_users = 3; // not yet defined
+		notify_user = 4; // not yet defined
+		send_email = 5; // prop email
+		add_user_note = 6; // note
+		create_conversation = 7; // events, integration_id
+		send_message = 8; // event
+		assign_agent_to_conversation = 9; // prop agent_ids
+		convert_conversation_to_ticket = 10; // no prop
+		tag_conversation = 11; // tag_ids
+		send_webhook = 12; // not yet defined
+		open_widget_screen = 14; // not yet defined
+		add_user_to_segmentation = 15; // segmentation_id
+		remove_user_from_segmentation = 16; // segmentation_id
+		send_chat_transcript_email = 17; // prop email
+		update_conversation_state = 18; // prop conversation_state
+	}
+	string type = 2;
+
+	user.User user = 4;
+	email.Email email = 5;
+	user.Note user_note = 6;
+	Event event = 7;
+	string agent_id = 8; // deprecated
+	string tag_id = 9; // deprecated
+	repeated Event events = 10;
+	conversation.Ticket ticket = 11;
+	string integration_id = 12;
+	string segmentation_id = 13;
+	repeated string agent_ids = 14;
+	repeated string tag_ids = 15;
+	string scope = 16;
+	string conversation_state = 17;
+	string id = 18; // to check whether an action is performed or not
+	string webhook_id = 19;
+	AutomationWebhookSetting webhook_setting = 20;
+}
+
+message AutomationWebhookSetting {
+	bool account = 1;
+	bool agent = 2;
+	bool message = 3;
+	bool conversation = 4;
+	bool postback = 5;
+	bool content = 6;
+	bool user = 10;
+	bool group = 18;
+	bool limit = 19;
+	bool user_attribute = 20;
+	bool note = 23;
+	bool ticket = 24;
+	bool automation = 25;
+	bool event = 26;
+}
+
+message Automations {
+	common.Context ctx = 1;
+	repeated Automation automations = 2;
+}
+
+message AutomationCheck {
+	string account_id = 2;
+	string automation_id = 3;
+	string user_id = 4;
+	string event_id = 5;
+	string scope = 6;
+}
+
+message AutomationCreditsAggregate {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 webhook_fired = 3;
+	int64 message_fired = 4;
+	int64 email_fired = 5;
+	int64 min = 6;
+}
+
+message AutomationCredit {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	int64 webhook_fired = 3;
+	int64 message_fired = 4;
+	int64 email_fired = 5;
+
+	int64 webhook_addon = 8;
+	int64 message_addon = 9;
+	int64 email_addon = 10;
+
+	int64 webhook_credits = 14;
+	int64 message_credits = 15;
+	int64 email_credits = 16;
+
+	int64 month = 20;
+
+	enum Type {
+		email = 0;
+		webhook = 1;
+		message = 2;
+	}
+}

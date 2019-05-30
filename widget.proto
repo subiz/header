@@ -1,0 +1,74 @@
+syntax = "proto2";
+
+package widget;
+
+option go_package = "github.com/subiz/header/widget";
+
+import "account.proto";
+import "common.proto";
+import "user3.proto";
+
+message Theme {
+	optional string account_id = 2;
+	optional string custom_css = 8; // for setting only
+	optional string widget_position = 3;
+	enum ButtonPosition {
+		left = 0;
+		right = 1;
+	}
+	optional string window_mode = 5;
+	enum WindowMode {
+		mini = 0;
+		full = 1;
+	}
+}
+
+message Sound {
+	optional string account_id = 1;
+	optional bool enabled = 2;
+	optional string new_conversation = 3;
+	optional string file_create = 4;
+	optional string new_message = 5;
+	optional string message_send_failed = 6;
+}
+
+message Setting {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string widget_version = 3;
+	optional Sound sound = 4;
+	optional string language = 5;
+	optional Theme theme = 7;
+	optional int32 replytime = 9;
+	repeated account.Agent agents = 10;
+	repeated string agent_ids = 11; // subiz only
+	optional string language_url = 13; // read only
+	optional string custom_language_url = 14;
+
+	optional string css_url = 12;
+	optional string custom_css_url = 15;
+
+	optional string custom_language = 16; // write-only
+}
+
+message UserSetting {
+	optional common.Context ctx = 1;
+	optional account.Account account = 3;
+	optional string account_id = 2; // subiz use only
+	optional user.User user = 4;
+	optional string user_id = 7; // subiz use only
+	optional bool sound_enabled = 5;
+	optional string language = 6;
+	optional bool send_transcript = 8;
+	optional Setting account_setting = 9;
+	optional bool desktop_notification = 10;
+	optional user.Trace trace = 11;
+}
+
+// global setting. eg: widget_4/4234098234
+message Global { //used only inside subiz
+	optional common.Context ctx = 1;
+	optional string name = 2;
+	optional string data = 3;
+	optional string pk = 4;
+}

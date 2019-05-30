@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package avatar;
+
+option go_package = "github.com/subiz/header/avatar";
+
+import "common.proto";
+
+message Avatar {
+	common.Context ctx = 1;
+	string key = 2;
+	string avatar_url = 3;
+	bool auto_update = 4;
+}

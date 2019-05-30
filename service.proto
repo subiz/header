@@ -2,33 +2,34 @@ syntax = "proto3";
 
 package header;
 
-import "github.com/subiz/header/common/common.proto";
-import "github.com/subiz/header/user/user3.proto";
-import "github.com/subiz/header/user/user.proto";
-import "github.com/subiz/header/auth/auth.proto";
-import "github.com/subiz/header/conversation/conversation.proto";
-import "github.com/subiz/header/client/client.proto";
-import "github.com/subiz/header/content/content.proto";
-import "github.com/subiz/header/deal/deal.proto";
-import "github.com/subiz/header/event/event.proto";
-import "github.com/subiz/header/file/file.proto";
-import "github.com/subiz/header/kafpc/kafpc.proto";
-import "github.com/subiz/header/kv/kv.proto";
-import "github.com/subiz/header/pubsub/pubsub.proto";
-import "github.com/subiz/header/placeholder/placeholder.proto";
-import "github.com/subiz/header/payment/payment.proto";
-import "github.com/subiz/header/notibox/notibox.proto";
-import "github.com/subiz/header/noti5/noti5.proto";
-import "github.com/subiz/header/widget/widget.proto";
-import "github.com/subiz/header/account/account.proto";
-import "github.com/subiz/header/avatar/avatar.proto";
-import "github.com/subiz/header/api/api.proto";
+option go_package = "github.com/subiz/header";
+
+import "common.proto";
+import "user3.proto";
+import "user.proto";
+import "auth.proto";
+import "conversation.proto";
+import "client.proto";
+import "content.proto";
+import "deal.proto";
+import "event.proto";
+import "file.proto";
+import "kafpc.proto";
+import "kv.proto";
+import "pubsub.proto";
+import "placeholder.proto";
+import "payment.proto";
+import "notibox.proto";
+import "noti5.proto";
+import "widget.proto";
+import "account.proto";
+import "avatar.proto";
+import "api.proto";
 
 // api service
 service ApiServer {
 	rpc Call(api.Request) returns (api.Response);
 }
-
 
 // account services
 
