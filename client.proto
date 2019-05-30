@@ -108,7 +108,7 @@ message WebhookPayload {
 	optional bytes payload = 4; //json format
 	optional string event = 5;
 	optional string webhook_id = 6; // internal use only
-	optional int64 queue_offset = 8; // internal use only
+	optional string key = 9; // kafka key, internal use only
 }
 
 message WebhookBackoff {
