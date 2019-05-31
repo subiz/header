@@ -322,6 +322,7 @@ message AutomationAction {
 	string id = 18; // to check whether an action is performed or not
 	string webhook_id = 19;
 	AutomationWebhookSetting webhook_setting = 20;
+	uint32 delay_sec = 21;
 }
 
 message AutomationWebhookSetting {
