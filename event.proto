@@ -206,6 +206,14 @@ message SubscriptionResponse {
 	bool status = 2;
 }
 
+message AutomationCalledback {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string user_id = 4;
+	Event event = 9;
+	AutomationAction action = 10;
+}
+
 message AutomationEvent {
 	common.Context ctx = 1;
 	string account_id = 3;
