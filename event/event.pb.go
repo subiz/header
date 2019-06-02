@@ -1131,21 +1131,17 @@ func (m *Event_Data) GetAutomationEvent() *AutomationEvent {
 }
 
 type Subscription struct {
-	Ctx   *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	Topic string          `protobuf:"bytes,3,opt,name=topic,proto3" json:"topic,omitempty"`
-	// optional SubscribeScope scope = 5;
-	// optional string account_id = 6;
-	SubId string `protobuf:"bytes,7,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
-	// optional SubscriberType subscriber_type = 8;
-	// optional string subscriber_id = 9;
-	TargetTopic          string   `protobuf:"bytes,10,opt,name=target_topic,json=targetTopic,proto3" json:"target_topic,omitempty"`
-	TargetKey            string   `protobuf:"bytes,11,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
-	Ttls                 int64    `protobuf:"varint,12,opt,name=ttls,proto3" json:"ttls,omitempty"`
-	RouterTopic          string   `protobuf:"bytes,13,opt,name=router_topic,json=routerTopic,proto3" json:"router_topic,omitempty"`
-	TargetPartition      int32    `protobuf:"varint,14,opt,name=target_partition,json=targetPartition,proto3" json:"target_partition,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
+	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Topic                string          `protobuf:"bytes,3,opt,name=topic,proto3" json:"topic,omitempty"`
+	SubId                string          `protobuf:"bytes,7,opt,name=sub_id,json=subId,proto3" json:"sub_id,omitempty"`
+	TargetTopic          string          `protobuf:"bytes,10,opt,name=target_topic,json=targetTopic,proto3" json:"target_topic,omitempty"`
+	TargetKey            string          `protobuf:"bytes,11,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
+	Ttls                 int64           `protobuf:"varint,12,opt,name=ttls,proto3" json:"ttls,omitempty"`
+	RouterTopic          string          `protobuf:"bytes,13,opt,name=router_topic,json=routerTopic,proto3" json:"router_topic,omitempty"`
+	TargetPartition      int32           `protobuf:"varint,14,opt,name=target_partition,json=targetPartition,proto3" json:"target_partition,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
 }
 
 func (m *Subscription) Reset()         { *m = Subscription{} }
@@ -1435,11 +1431,10 @@ func (m *SubscriptionResponse) GetStatus() bool {
 }
 
 type AutomationEvent struct {
-	Ctx        *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId  string          `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	UserId     string          `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Automation *Automation     `protobuf:"bytes,5,opt,name=automation,proto3" json:"automation,omitempty"`
-	// user.Session session = 6;
+	Ctx                  *common.Context   `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId            string            `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	UserId               string            `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Automation           *Automation       `protobuf:"bytes,5,opt,name=automation,proto3" json:"automation,omitempty"`
 	User                 *user.User        `protobuf:"bytes,7,opt,name=user,proto3" json:"user,omitempty"`
 	Event                *Event            `protobuf:"bytes,9,opt,name=event,proto3" json:"event,omitempty"`
 	Action               *AutomationAction `protobuf:"bytes,10,opt,name=action,proto3" json:"action,omitempty"`

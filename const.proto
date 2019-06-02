@@ -63,6 +63,7 @@ enum E {
 
 	AutomationSynced = 111102;
 	AutomationFired = 111103;
+	AutomationCallbackFired = 111104;
 	UserRequested = 111100;
 
 	UserCreated = 11170;
