@@ -181,12 +181,11 @@ message Search {
 message ListConversationsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
-	optional string state = 4;
-	optional int32 limit = 5;
-	optional string anchor = 6;
+	optional string state = 4; // empty or unassigned
 	optional string member_id = 8;
 	optional string group_by = 9;
 	optional string integration_id = 10;
+	optional string user_id = 11;
 }
 
 message ListEventsRequest {
