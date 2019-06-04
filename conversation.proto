@@ -186,6 +186,8 @@ message ListConversationsRequest {
 	optional string group_by = 9;
 	optional string integration_id = 10;
 	optional string user_id = 11;
+	optional int32 limit = 5;
+	optional string anchor = 6;
 }
 
 message ListEventsRequest {
