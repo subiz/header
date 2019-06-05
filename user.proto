@@ -289,6 +289,7 @@ message SCondition {
 
 	optional int32 priority = 12;
 	optional bool event_existed = 13;
+	optional string function = 14; // used to transform value of left side before evaluate expression
 }
 
 message PublishSubscribed {
