@@ -294,7 +294,7 @@ message SCondition {
 		minute_of_day = 0;
 		hour_of_day = 1;
 		day_of_week = 2;
-		age_in_days = 3;
+		day_ago = 3;
 	}
 	optional string function = 14; // used to transform value of left side before evaluate expression
 }
