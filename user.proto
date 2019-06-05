@@ -289,6 +289,12 @@ message SCondition {
 
 	optional int32 priority = 12;
 	optional bool event_existed = 13;
+
+	enum Function {
+		minute_of_day = 0;
+		hour_of_day = 1;
+		day_of_week = 2;
+	}
 	optional string function = 14; // used to transform value of left side before evaluate expression
 }
 
