@@ -91,9 +91,10 @@ message Member {
 	optional string membership = 12;
 	enum State {
 		active = 0;
-		lefter = 1;
+		left = 1;
 		observer = 2;
 	};
+	optional Member invited_by = 16;
 }
 
 enum State {
