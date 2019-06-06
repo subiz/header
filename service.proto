@@ -5,7 +5,6 @@ package header;
 import "common.proto";
 import "user3.proto";
 import "user.proto";
-import "auth.proto";
 import "conversation.proto";
 import "client.proto";
 import "content.proto";
@@ -149,9 +148,9 @@ service SegmentationMgr {
 
 // auth services
 service Perm {
-	rpc Update(auth.UpdatePermRequest) returns (auth.Empty);
-	rpc UpdateState(auth.UpdateStateRequest) returns (auth.Empty);
-	rpc ReadPerm(auth.ReadPermRequest) returns (auth.Permission);
+	rpc Update(common.UpdatePermRequest) returns (common.Empty);
+	rpc UpdateState(common.UpdateStateRequest) returns (common.Empty);
+	rpc ReadPerm(common.ReadPermRequest) returns (common.Permission);
 }
 
 // conversation services

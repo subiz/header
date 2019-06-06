@@ -4,8 +4,6 @@ package common;
 
 option go_package = "github.com/subiz/header/common";
 
-import "auth.proto";
-
 // A string
 message String {
 	string value = 2;
@@ -49,7 +47,7 @@ message Context {
 	bytes state = 2;
 	string node = 3;
 
-	auth.Credential credential = 6;
+	Credential credential = 6;
 	Tracing tracing = 7;
 
 	Device by_device = 10;
@@ -140,4 +138,162 @@ message Trace {
 	int64 duration = 3; // nanoseconds
 	int64 started = 4; // unix nano
 	int64 ended = 5; // unix nano
+}
+
+message By {
+	Device device = 2;
+	string id = 3;
+	string client_id = 4;
+	string type = 6; // agent, user, connector
+	string display_id = 7;
+}
+
+message Credential {
+	string account_id = 1;
+	string issuer = 3;
+	Type type = 4; // should be agent, user or connector (not bot)
+	Permission perm = 6;
+	string client_id = 7;
+
+	// optional
+	string avatar_url = 15;
+	string name = 16;
+	string email = 17;
+}
+
+message Scope {
+	string id = 1;
+	string name = 2;
+	string logo_url = 3;
+	string title = 4;
+	string description = 5;
+	repeated string available_events = 7;
+	bool review_required = 8;
+	Permission permission = 9;
+}
+
+message Permission {
+	int32 account = 2;  //    ogu
+	int32 agent = 3;    // 0x0777
+	int32 agent_password = 4;
+	int32 permission = 6;
+	int32 agent_group = 7;
+	int32 segmentation = 10;
+	int32 client = 12;
+	int32 rule = 13;
+	int32 conversation = 14;
+	int32 integration = 15;
+	int32 canned_response = 16;
+	int32 tag = 17;
+	int32 whitelist_ip = 20;
+	int32 whitelist_user = 21;
+	int32 whitelist_domain = 22;
+	int32 widget = 23;
+	int32 subscription = 24;
+	int32 invoice = 25;
+	int32 payment_method = 26;
+	int32 bill = 27;
+	int32 payment_log = 28;
+	int32 payment_comment = 29;
+	int32 user = 30;
+	int32 automation = 31;
+	int32 ping = 32;
+	int32 attribute = 33;
+	int32 agent_notification = 34;
+	int32 conversation_export = 35;
+	int32 conversation_report = 36;
+	int32 content = 37;
+	int32 pipeline = 38;
+	int32 currency = 39;
+	int32 service_level_agreement = 40;
+ 	int32 message_template = 41;
+	int32 agent_presence = 42;
+ 	int32 agent_preference = 43;
+	int32 promotion_code = 44;
+	int32 referral = 45;
+}
+
+message GoogleCredential {
+	string id_token = 2;
+}
+
+message PasswordCredential {
+	string username = 1;
+	string password = 2;
+	GoogleCredential google = 3;
+}
+
+message AuthCookie {
+	string user_id = 1;
+	string account_id = 2;
+	int32 expired = 4;
+	int32 issued = 5;
+	string type = 3;
+}
+
+message OauthAccessToken {
+	string access_token = 1;
+	string token_type = 3;
+	int64 expires_in = 4;
+	string refresh_token = 5;
+	string scope = 6;
+	string state = 7;
+	string error = 8;
+	string error_description = 9;
+	string error_uri = 10;
+	string kind = 11; // should be agent, connector or bot
+}
+
+message AccessToken {
+	string issuer = 1;
+	// string issuer_type = 7;
+	string client_id = 2;
+	// string client_type = 3;
+	string account_id = 4;
+	// string client_account_id = 5;
+	// repeated string scopes = 6;
+	int32 expired = 8;
+	// Type issuer_type = 9;
+	Type kind = 10; // should be agent, connector or bot
+	Permission permission = 11;
+}
+
+enum Type {
+	unknown = 0;
+	user = 1;
+	agent = 2;
+	subiz = 3;
+	app = 4; // dashboard, accmgr
+	connector = 6; // fabikon, mailkon
+	bot = 7; // subot-reply
+}
+
+message User {
+	reserved 1, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
+	//	optioanl common.Context ctx = 1;
+	string id = 2;
+	string account_id = 3;
+	string email = 5;
+	string encrypted_password = 17;
+	bool is_active = 18;
+	int64 upserted = 19;
+	int32 v3_state = 20; // 0: not v3, 1: v3 but not convert, 2: converted v3
+}
+
+message UpdatePermRequest {
+	string account_id = 1;
+	string user_id = 2;
+	// Method method = 3;
+	Permission perm = 4;
+}
+
+message UpdateStateRequest {
+	string account_id = 1;
+	string user_id = 2;
+	bool is_active = 3;
+}
+
+message ReadPermRequest {
+	string account_id = 1;
+	string user_id = 2;
 }

@@ -4,7 +4,6 @@ package account;
 
 option go_package = "github.com/subiz/header/account";
 
-import "auth.proto";
 import "common.proto";
 import "payment.proto";
 
@@ -54,7 +53,7 @@ message Agent {
 	optional Account account = 28;
 	optional string country_code = 29;
 	optional int32 v3_state = 30 ; // 0: not v3, 1: v3 but not convert, 2: converted v3
-	optional auth.Permission perm = 31;
+	optional common.Permission perm = 31;
 	optional int64 last_login = 32;
 
 	optional string type = 33; // bot or agent (default is agent)
@@ -100,8 +99,7 @@ message AgentPerm {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string agent_id = 3;
-	// optional auth.Method method = 4;
-	optional auth.Permission perm = 5;
+	optional common.Permission perm = 5;
 }
 
 message Account {

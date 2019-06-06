@@ -94,7 +94,7 @@ message Member {
 		left = 1;
 		observer = 2;
 	};
-	optional Member invited_by = 16;
+	optional common.By invited_by = 16;
 }
 
 enum State {
