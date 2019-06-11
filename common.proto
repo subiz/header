@@ -144,8 +144,9 @@ message By {
 	Device device = 2;
 	string id = 3;
 	string client_id = 4;
-	string type = 6; // agent, user, connector
+	string type = 6; // agent, user, bot
 	string display_id = 7;
+	string display_type = 8; // agent, user, bot
 }
 
 message Credential {
