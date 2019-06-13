@@ -144,7 +144,7 @@ message By {
 	Device device = 2;
 	string id = 3;
 	string client_id = 4;
-	string type = 6; // agent, user, bot
+	string type = 6; // agent, user, bot, dummy
 	string display_id = 7;
 	string display_type = 8; // agent, user, bot
 }
@@ -267,6 +267,7 @@ enum Type {
 	app = 4; // dashboard, accmgr
 	connector = 6; // fabikon, mailkon
 	bot = 7; // subot-reply
+	dummy = 8; // agent that cannot handle action
 }
 
 message User {
