@@ -66,16 +66,6 @@ message MemberSeen {
 	optional string message_id = 3;
 }
 
-message MemberV3 {
-	optional common.Context ctx = 1;
-	optional string id = 4;
-	optional string conversation_id = 5;
-	optional string account_id = 6;
-	optional string name = 7;
-	optional string avatar_url = 8;
-	optional string type = 9; // agent || user
-}
-
 message Member {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -146,21 +136,16 @@ message UserConversation { // used in database
 
 message StartRequest {
 	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional string account_id = 3;
-	optional string channel_type = 4;
-	optional string from = 12;
-	repeated string to = 5;
 
+	optional string account_id = 3;
 	optional int64 created = 13;
 	optional string conversation_id = 14;
 
 	optional user.User user = 25;
 	optional string integration_id = 26;
 	optional string chain_id = 27;
-	optional string state = 28; // pending
-	optional string automation_id = 29;
 	optional string message = 30;
+	repeated Member members = 31;
 }
 
 message Conversations {
