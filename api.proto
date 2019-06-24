@@ -40,9 +40,17 @@ message WhitelistUrl {
 	string by = 6;
 }
 
+// deprecated
 message BlacklistDomain {
 	common.Context ctx = 1;
+	string account_id = 3;
+	string domain = 4;
+	int64 created = 5;
+	string by = 6;
+}
 
+message WhitelistDomain {
+	common.Context ctx = 1;
 	string account_id = 3;
 	string domain = 4;
 	int64 created = 5;
@@ -51,7 +59,6 @@ message BlacklistDomain {
 
 message BlacklistIP {
 	common.Context ctx = 1;
-
 	string account_id = 3;
 	string ip = 4;
 	int64 created = 5;
@@ -60,7 +67,6 @@ message BlacklistIP {
 
 message BannedUser {
 	common.Context ctx = 1;
-
 	string account_id = 3;
 	string user_id = 4;
 	int64 created = 5;
