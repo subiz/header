@@ -328,6 +328,7 @@ func (m *WhitelistUrl) GetBy() string {
 	return ""
 }
 
+// deprecated
 type BlacklistDomain struct {
 	Ctx                  *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId            string          `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
