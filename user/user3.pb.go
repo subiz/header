@@ -19,7 +19,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type AttributeDataState int32
 
@@ -424,7 +424,7 @@ type User struct {
 	Id        string          `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	AccountId string          `protobuf:"bytes,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Traces    []*Trace        `protobuf:"bytes,11,rep,name=traces,proto3" json:"traces,omitempty"`
-	// 	repeated string alias = 12;
+	//	repeated string alias = 12;
 	IsBan      bool             `protobuf:"varint,14,opt,name=is_ban,json=isBan,proto3" json:"is_ban,omitempty"`
 	Attributes []*AttributeData `protobuf:"bytes,18,rep,name=attributes,proto3" json:"attributes,omitempty"`
 	Segments   []string         `protobuf:"bytes,19,rep,name=segments,proto3" json:"segments,omitempty"`

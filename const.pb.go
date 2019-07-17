@@ -18,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type E int32
 
@@ -96,7 +96,7 @@ const (
 	E_UserSegmentUnpickRequested             E = 111212
 	E_UserAggregateSegmentAttrCount          E = 111214
 	E_UserAggregateUpdateInteracted          E = 111215
-	// UserAggregateSegmentCount = 216;
+	//UserAggregateSegmentCount = 216;
 	E_UserSegmentAggregated                     E = 111217
 	E_AutomationBlockUserFired                  E = 111218
 	E_AutomationUpdateUserAttributeFired        E = 111219
@@ -144,7 +144,7 @@ const (
 	E_ConversationDeleteRuleRequested           E = 10022
 	E_ConversationReadRuleRequested             E = 10023
 	E_ConversationListRuleRequested             E = 10024
-	// ConversationRequested = 50; // user request for new conversation
+	//ConversationRequested = 50; // user request for new conversation
 	E_ConversationUserRequestReply         E = 10051
 	E_ConversationLimitUpdated             E = 10052
 	E_ConversationRequestWaitTimeout       E = 10060
@@ -200,7 +200,7 @@ const (
 	E_ClientDeleted                        E = 104026
 	E_AutomationWebhookDeleted             E = 104027
 	E_AutomationWebhookUpserted            E = 104029
-	// ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
+	//ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
 	E_ClientRequested                        E = 104030
 	E_ClientSynced                           E = 104031
 	E_ClientAuthorized                       E = 104033
@@ -275,10 +275,10 @@ const (
 	E_AgentLeftGroup                         E = 11051
 	E_AgentJoinedGroup                       E = 11052
 	E_AgentGroupUpserted                     E = 11054
-	// AgentExpired = 5; // oe only, id
+	//AgentExpired = 5; // oe only, id
 	E_AgentUpserted E = 11056
-	// AgentCreated = 7; // agent
-	// AgentStateUpdated = 8; // could be deleted
+	//AgentCreated = 7; // agent
+	//AgentStateUpdated = 8; // could be deleted
 	E_AgentPermissionUpdated E = 11059
 	// out event only
 	E_AccountUpserted                         E = 110514
