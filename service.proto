@@ -196,6 +196,8 @@ service ConversationMgr {
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
+
+    rpc UpdateConversationInfo(conversation.Conversation) returns (conversation.Conversation);
 }
 
 service TemplateMgr {
