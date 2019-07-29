@@ -947,3 +947,64 @@ message ConversationMetadata {
 	map<string,int64> first_agent_replied = 11;
 	map<string,int64> agent_joined = 12;
 }
+
+message FilterUserRequest {
+	optional string account_id = 2;
+	repeated string conversation_tags = 3;
+	optional string conversation_state = 4;
+	optional string ticket_status = 5;
+	optional int64 limit = 6;
+	optional string anchor = 7;
+    message Condition {
+	    optional string operator = 1;
+	    optional string value = 2; // encoded json
+    }
+    optional string conversation_created = 8; // encoded json of Condition
+}
+
+message FilterUserResponse {
+	// optional int64 total = 2;
+	repeated string user_ids = 3;
+	optional string anchor = 4;
+}
+
+message SearchConversationRequest {
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string state = 4;
+	optional string ticket_status = 5;
+	optional int64 limit = 6;
+	optional string anchor = 7;
+	optional string connector_id = 8; // channel
+	optional string text = 9;
+}
+
+message SearchConversationResponse {
+	// optional int64 total = 2;
+	repeated string conversation_ids = 3;
+	optional string anchor = 4;
+}
+
+// conversation for index in elastic search
+message ESConversation {
+	optional string account_id = 2;
+	optional string user_id = 3;
+	repeated string tags = 4;
+	optional string state = 5;
+	optional string ticket_status = 6;
+	optional string id = 9;
+	optional int64 created = 10; // unix seconds
+}
+
+// conversation message for index in elastic search
+message ESConversationMessage {
+	optional string account_id = 2;
+	optional string user_id = 3;
+	optional string conversation_state = 5;
+	optional string ticket_status = 6;
+	optional string connector_id = 7;
+	optional string text = 8;
+	optional string conversation_id = 9;
+	optional int64 created = 10; // unix seconds
+	optional string id = 11; // event id
+}
