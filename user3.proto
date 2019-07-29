@@ -213,7 +213,7 @@ message UserSearchRequest {
 	string agent_id = 8; // search my user of agent
 	bool unread = 9; // search my user of agent
 
-	repeated UserSearchCondition filters = 10;
+	repeated UserSearchCondition filters = 11;
 }
 
 message UnpickRequest {
