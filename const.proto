@@ -80,7 +80,7 @@ enum E {
 
 	UserJob = 111199; // useraliasadded, useraliasdeleted,
 	UserResolvedJob = 111200;
-	UserResolvedJob2 = 111198;;
+	UserResolvedJob2 = 111198;
 
 	UserResolvedEventCreated = 111201;
 	UserAliasAdded = 111202;
@@ -114,12 +114,16 @@ enum E {
 	AutomationAddAgentToConversationFired = 111227;
 	AutomationCreateTicketFired = 111228;
 	AutomationConversationTagFired = 111229;
+
+	UserClearCache = 111230;
+
 	AutomationSendEmailFired = 111431;
 	AutomationOpenWidgetScreenFired = 111432;
 	AutomationSendChatTranscriptEmailFired = 111434;
 	AutomationSendChatTranscriptEmailResolved = 111435;
 	AutomationUpdateConversationStateFired = 111436;
 	AutomationSendWebhookFired =  111437;
+
 
 	// AutomationAgentNotificationFired = 54;
 	AutomationAddUserToSegmentationFired = 111231;
