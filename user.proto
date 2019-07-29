@@ -364,10 +364,11 @@ message Notes {
 message ListNotesRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-	// optional string user_id = 3;
+	optional string user_id = 3;
 	optional string target_id = 4;
 	optional int32 limit = 5;
 	optional string anchor = 6;
+	optional string keyword = 7;
 }
 
 message DeleteNoteRequest {

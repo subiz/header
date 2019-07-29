@@ -187,6 +187,21 @@ message UserSearchResult {
 	map<string, int32> unread_counts = 7;
 }
 
+// like scondition
+message UserSearchCondition {
+	string key = 4; // unique
+	string operator = 5; // = # regex
+	string value = 6; // JSON
+}
+
+message UserExportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string segmentation_id = 3;
+	string agent_id = 4; // send to this agent id
+	repeated UserSearchCondition filters = 10;
+}
+
 message UserSearchRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -197,6 +212,8 @@ message UserSearchRequest {
 	int32 limit = 6;
 	string agent_id = 8; // search my user of agent
 	bool unread = 9; // search my user of agent
+
+	repeated UserSearchCondition filters = 10;
 }
 
 message UnpickRequest {

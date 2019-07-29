@@ -59,7 +59,6 @@ service AccountMgr {
 	rpc ListGroups(common.Id) returns (account.AgentGroups);
 	rpc AddAgentToGroup(account.GroupMember) returns (common.Empty);
 	rpc RemoveAgentFromGroup(account.GroupMember) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ChangeEmail(account.Agent) returns (account.Agent);
 	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
 	rpc IntegrateBot(account.Agent) returns (account.Agent);
@@ -76,12 +75,12 @@ service CurrencyMgr {
 	rpc GetExchangeRate(account.ExchangeRateRequest) returns (account.ExchangeRate);
 	rpc CreateExchangeRate(account.ExchangeRate) returns (account.ExchangeRate);
 	rpc DeleteExchangeRate(account.ExchangeRateRequest) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // user services
 service UserMgr {
 	rpc SearchUsers (user.UserSearchRequest) returns (user.UserSearchResult);
+
 	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
 	rpc PickToSegmentation(user.PickRequest) returns (common.Empty);
 	rpc DeleteFromSegmentation(user.UnpickRequest) returns (common.Empty);
@@ -97,7 +96,9 @@ service UserMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
 	rpc AddAlias(user.Alias) returns (common.Empty);
-	rpc MoveUserActivity(user.MergeRequest) returns (common.Empty);
+	rpc MergeUsers(user.MergeRequest) returns (user.User);
+	rpc ReadAllTopics(common.Id) returns (common.Empty);
+	rpc ExportUsers (user.UserExportRequest) returns (common.Empty);
 }
 
 service VisitorMgr {
@@ -105,7 +106,6 @@ service VisitorMgr {
 	rpc UpdatePresence (common.Id) returns (user.Presence);
 	rpc ReadPreview (common.Id) returns (user.LastView);
 	rpc ListTopVisitors (common.Id) returns (user.Visitors);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service AutomationCreditMgr {
@@ -126,7 +126,6 @@ service AutomationMgr {
 	rpc DeleteAutomation(common.Id) returns (common.Empty);
 	rpc ReadAutomation(common.Id) returns (event.Automation);
 	rpc CreateAutomation(event.Automation) returns (event.Automation);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service AttributeMgr {
@@ -134,7 +133,6 @@ service AttributeMgr {
 	rpc CreateAttributeDefinition(user.AttributeDefinition) returns (user.AttributeDefinition);
 	rpc UpdateAttributeDefinition(user.AttributeDefinition) returns (user.AttributeDefinition);
 	rpc DeleteAttributeDefinition(user.DeleteAttrRequest) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service SegmentationMgr {
@@ -143,7 +141,6 @@ service SegmentationMgr {
 	rpc ListSegments (common.Id) returns (user.Segmentations);
 	rpc DeleteSegment (common.Id) returns (common.Empty);
 	rpc ReadSegment (common.Id) returns (user.Segmentation);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // auth services
@@ -159,7 +156,6 @@ service ConversationReporter {
 	rpc CountConversationsByTags(conversation.CountByTagsRequest) returns (conversation.CountByTagsResponse);
 	rpc GetAvgResponseTimes(conversation.AvgResponseTimeRequest) returns (conversation.AvgResponseTimeResponse);
 	rpc GetTotalConversation(conversation.AvgResponseTimeRequest) returns (conversation.TotalConversationResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ReportConversations(conversation.CountReportRequest) returns (conversation.ReportResponse);
 	rpc ReportAvailibilities(conversation.AvailibilityReportRequest) returns (conversation.ReportResponse);
 }
@@ -175,7 +171,6 @@ service RuleMgr {
 	rpc DeleteRule(common.Id) returns (common.Empty);
 	rpc ReadRule(common.Id) returns (conversation.Rule);
 	rpc ListRules(common.Id) returns (conversation.Route);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service ConversationMgr {
@@ -201,7 +196,6 @@ service ConversationMgr {
 }
 
 service TemplateMgr {
-	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc CreateTemplate(conversation.Template) returns (conversation.Template);
 	rpc UpdateTemplate(conversation.Template) returns (conversation.Template);
 	rpc DeleteTemplate(common.Id) returns (common.Empty);
@@ -215,7 +209,6 @@ service TagMgr {
 	rpc DeleteTag(common.Id) returns (common.Empty);
 	rpc ListTags(common.Id) returns (conversation.Tags);
 	rpc GetTag(common.Id) returns (conversation.Tag);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service IntegrationMgr {
@@ -223,7 +216,6 @@ service IntegrationMgr {
 	rpc ListIntegrations(common.Id) returns (conversation.Integrations);
 	rpc Integrate(conversation.Integration) returns (conversation.Integration);
 	rpc CheckAvailability(conversation.AvailabilityCheckRequest) returns (conversation.AvailabilityCheckResult);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service TicketAttributeMgr {
@@ -231,7 +223,6 @@ service TicketAttributeMgr {
 	rpc CreateTicketAttributeDefinition(conversation.TicketAttributeDefinition) returns (conversation.TicketAttributeDefinition);
 	rpc UpdateTicketAttributeDefinition(conversation.TicketAttributeDefinition) returns (conversation.TicketAttributeDefinition);
 	rpc DeleteTicketAttributeDefinition(conversation.DeleteTicketAttrRequest) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service TicketMgr {
@@ -245,7 +236,6 @@ service TicketMgr {
 	rpc CreateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
 	rpc UpdateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
 	rpc DeleteSLA(common.Id) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc CountTicket(conversation.CountTicketRequest) returns (conversation.CountTicketResponse);
 	rpc GetAvgResolveTimes(conversation.AvgResolveTimeRequest) returns (conversation.AvgResolveTimeResponse);
 }
@@ -263,7 +253,6 @@ service ClientMgr {
 // content services
 
 service ServiceContentManager {
-	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc UpsertContent(content.Content) returns (content.Content);
 	rpc DeleteContent(common.Id) returns (common.Empty);
 	rpc GetContent(common.Id) returns (content.Content);
@@ -279,14 +268,12 @@ service DealService {
   rpc CreatePipeline(deal.Pipeline) returns (deal.Pipeline);
   rpc UpdatePipeline(deal.Pipeline) returns (deal.Pipeline);
   rpc DeletePipeline(common.Id) returns (common.Empty);
-  rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // event services
 service Publisher {
 	rpc Subscribe(event.Subscription) returns (event.SubscriptionResponse);
 	rpc Unsubscribe(event.Subscription) returns (event.SubscriptionResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service EventMgr {
@@ -296,7 +283,6 @@ service EventMgr {
 	rpc CreateEvent (event.UserEvent) returns (event.Event);
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
 	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service ConversationEventReader {
@@ -304,7 +290,6 @@ service ConversationEventReader {
 	rpc UpdateMessage(event.Event) returns (event.Event);
 	rpc ListEvents(conversation.ListEventsRequest) returns (event.Events);
 	rpc SearchEvents(conversation.SearchMessageRequest) returns (event.Events);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // file services
@@ -313,7 +298,6 @@ service FileMgr {
 	rpc Presign(file.FileHeader) returns (file.PresignResult);
 	rpc Read(file.FileRequest) returns (file.File);
 	rpc Uploaded(file.FileRequest) returns (file.File);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // kafpc services
@@ -327,7 +311,6 @@ service KV {
 	rpc Set(kv.Value) returns (kv.Value);
 	rpc Get(kv.Key) returns (kv.Value);
 	rpc Has(kv.Key) returns (kv.Bool);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // noti5 services
@@ -341,7 +324,6 @@ service Noti5TokenService {
 	rpc AddToken(noti5.Token) returns (common.Empty);
 	rpc RemoveToken(noti5.Token) returns (common.Empty);
 	rpc CheckTokenExists(noti5.Token) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // notibox services
@@ -351,7 +333,6 @@ service NotiboxService {
 	rpc SeenTopics(notibox.TopicRequest) returns (common.Empty);
 	rpc UnreadTopics(notibox.TopicRequest) returns (common.Empty);
 	rpc ListNotis(notibox.ListRequest) returns (notibox.Notifications);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 
 	rpc UpdateNotibox(notibox.Notibox) returns (notibox.Notibox);
 	rpc ReadNotibox(common.Id) returns (notibox.Notibox);
@@ -362,7 +343,6 @@ service NotiboxService {
 service SubizInternalPaymentMgr {
 	rpc CreateBill(payment.Bill) returns (payment.Bill);
 	rpc UpdateExchangeRate(payment.ExchangeRate) returns (payment.ExchangeRate);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 service PaymentMgr {
@@ -387,7 +367,6 @@ service PaymentMgr {
 	rpc ConvertInvoiceToHtml(payment.Invoice) returns (payment.String);
 	rpc GetExchangeRate(payment.ExchangeRate) returns (payment.ExchangeRate);
 	rpc TransferMoney(payment.PayRequest) returns (payment.Bill);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc ListLogs(payment.ListLogsRequest) returns (payment.Logs);
 
 	rpc CreatePromotionCode(payment.PromotionCode) returns (payment.PromotionCode);
@@ -426,7 +405,6 @@ service WidgetService {
 	rpc Update(widget.Setting) returns (widget.Setting);
 	rpc ReadUserSetting(common.Id) returns (widget.UserSetting);
 	rpc UpdateUserSetting(widget.UserSetting) returns (widget.UserSetting);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 }
 
 // avatar services
