@@ -972,7 +972,7 @@ message SearchConversationRequest {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string state = 4;
-	optional string ticket_status = 5;
+	optional string ticket_state = 5;
 	optional int64 limit = 6;
 	optional string anchor = 7;
 	optional string connector_id = 8; // channel
@@ -989,7 +989,7 @@ message SearchConversationResponse {
 message ESConversation {
 	optional string account_id = 2;
 	optional string user_id = 3;
-	repeated string tags = 4;
+	repeated string tag_ids = 4;
 	optional string state = 5;
 	optional string ticket_status = 6;
 	optional string id = 9;
@@ -1001,7 +1001,7 @@ message ESConversationMessage {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string conversation_state = 5;
-	optional string ticket_status = 6;
+	optional string ticket_state = 6;
 	optional string connector_id = 7;
 	optional string text = 8;
 	optional string conversation_id = 9;
