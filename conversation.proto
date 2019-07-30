@@ -991,7 +991,7 @@ message ESConversation {
 	optional string user_id = 3;
 	repeated string tag_ids = 4;
 	optional string state = 5;
-	optional string ticket_status = 6;
+	optional string ticket_state = 6;
 	optional string id = 9;
 	optional int64 created = 10; // unix seconds
 }
