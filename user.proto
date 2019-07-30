@@ -72,6 +72,7 @@ message Topic {
 	optional string type = 5;
 	optional int64 updated = 8;
 	optional int32 unread = 9;
+	optional string user_id = 10;
 }
 
 message UnreadTopic {
