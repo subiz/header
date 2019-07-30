@@ -137,6 +137,11 @@ enum E {
 	AutomationCreditAggregated = 111235;
 	AutomationCreditCountAggregate = 111236;
 
+	UserJustPickToSegment = 111240;
+	UserJustAddNote = 111241;
+	UserJustAddTopic = 111242;
+	UserJustAddEvent = 111243;
+	UserJustAddTrace = 111244;
 
 	ConversationAssigned = 1000; // conversation is assigned to an agent
 	ConversationWaiting = 1002; // new conversation is added to unassigned list
