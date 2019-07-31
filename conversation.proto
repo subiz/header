@@ -952,7 +952,7 @@ message FilterUserRequest {
 	optional string account_id = 2;
 	repeated string conversation_tags = 3;
 	optional string conversation_state = 4;
-	optional string ticket_status = 5;
+	optional string ticket_state = 5;
 	optional int64 limit = 6;
 	optional string anchor = 7;
     message Condition {
