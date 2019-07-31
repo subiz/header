@@ -953,6 +953,11 @@ message ConversationMetadata {
 	map<string,int64> agent_joined = 12;
 }
 
+message FilterUserCondition {
+	optional string operator = 1; // eq | ne ...
+	optional string value = 2; // encoded json
+}
+
 message FilterUserRequest {
 	optional string account_id = 2;
 	repeated string conversation_tags = 3;
@@ -960,11 +965,7 @@ message FilterUserRequest {
 	optional string ticket_state = 5;
 	optional int64 limit = 6;
 	optional string anchor = 7;
-    message Condition {
-	    optional string operator = 1;
-	    optional string value = 2; // encoded json
-    }
-    optional string conversation_created = 8; // encoded json of Condition
+    optional string conversation_created = 8; // encoded json of FilterUserCondition
 }
 
 message FilterUserResponse {
