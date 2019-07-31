@@ -377,3 +377,24 @@ message DeleteNoteRequest {
 	optional string target_id = 3;
 	optional string id = 4;
 }
+
+message UserExportRequest {
+	common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string segmentation_id = 3;
+	optional string query = 4;
+	optional SCondition condition = 10;
+	optional string agent_id = 11; // send to this agent id
+}
+
+message UserSearchRequest {
+	common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string segmentation_id = 3;
+	optional string query = 4; // TODO: delete
+	optional string anchor = 5;
+	optional int32 limit = 6;
+	optional string agent_id = 8; // search my user of agent
+	optional bool unread = 9; // search my user of agent
+	optional SCondition condition = 10;
+}
