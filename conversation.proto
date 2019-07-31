@@ -20,6 +20,10 @@ message Rule {
 		most_recent = 4;
 		roundrobin_all_agents = 5;
 		roundrobin_agents = 6;
+
+		first_reply_agent = 7;
+		first_reply_agent_in_account = 8; // all agent
+		first_reply_agent_in_group = 9;
 	}
 	optional string strategy = 5;
 	repeated string assign_tos = 6;
@@ -30,6 +34,7 @@ message Rule {
 	optional string description = 11;
 	optional bool available_agents_only = 13;
 	optional user.SCondition condition = 14;
+	optional bool is_general = 15; // to killing unassigned state
 }
 
 message AvailabilityCheckRequest {
