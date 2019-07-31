@@ -96,7 +96,7 @@ service UserMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
 	rpc AddAlias(user.Alias) returns (common.Empty);
-	rpc MergeUsers(user.MergeRequest) returns (common.Empty;
+	rpc MergeUsers(user.MergeRequest) returns (common.Empty);
 	rpc ReadAllTopics(common.Id) returns (common.Empty);
 	rpc ExportUsers (user.UserExportRequest) returns (common.Empty);
 }

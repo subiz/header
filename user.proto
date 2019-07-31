@@ -379,7 +379,7 @@ message DeleteNoteRequest {
 }
 
 message UserExportRequest {
-	common.Context ctx = 1;
+	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string segmentation_id = 3;
 	optional string query = 4;
@@ -388,7 +388,7 @@ message UserExportRequest {
 }
 
 message UserSearchRequest {
-	common.Context ctx = 1;
+	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string segmentation_id = 3;
 	optional string query = 4; // TODO: delete
