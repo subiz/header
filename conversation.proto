@@ -960,7 +960,7 @@ message FilterUserCondition {
 
 message FilterUserRequest {
 	optional string account_id = 2;
-	repeated string conversation_tags = 3;
+	repeated string conversation_tag_ids = 3;
 	optional string conversation_state = 4;
 	optional string ticket_state = 5;
 	optional int64 limit = 6;

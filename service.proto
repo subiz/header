@@ -193,6 +193,9 @@ service ConversationMgr {
 	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
 
     rpc UpdateConversationInfo(conversation.Conversation) returns (conversation.Conversation);
+
+	rpc FilterUser(conversation.FilterUserRequest) returns (conversation.FilterUserResponse);
+	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
 }
 
 service TemplateMgr {
