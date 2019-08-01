@@ -14,7 +14,7 @@ message Rule {
 	optional string account_id = 3;
 	optional int32 priority = 4;
 	enum AssignStrategy {
-		all = 0;
+		all_agents = 0;
 		agentgroup = 2;
 		agents = 3;
 		most_recent = 4;
