@@ -14,16 +14,16 @@ message Rule {
 	optional string account_id = 3;
 	optional int32 priority = 4;
 	enum AssignStrategy {
-		all_agents = 0;
+		all = 0;
 		agentgroup = 2;
 		agents = 3;
 		most_recent = 4;
 		roundrobin_all_agents = 5;
 		roundrobin_agents = 6;
 
-		first_reply_agent = 7;
-		first_reply_agent_in_account = 8; // all agent
-		first_reply_agent_in_group = 9;
+		first_reply = 7; // list of agent
+		first_reply_of_all = 8; // all agent
+		first_reply_of_group = 9; // group
 	}
 	optional string strategy = 5;
 	repeated string assign_tos = 6;
@@ -34,7 +34,6 @@ message Rule {
 	optional string description = 11;
 	optional bool available_agents_only = 13;
 	optional user.SCondition condition = 14;
-	optional bool is_general = 15; // to killing unassigned state
 }
 
 message AvailabilityCheckRequest {
@@ -64,6 +63,7 @@ message RouteResult {
 	optional string strategy = 3;
 	repeated string agent_ids = 4;
 	optional string group_id = 5;
+	optional string state = 6;
 }
 
 message MemberSeen {
@@ -103,6 +103,8 @@ enum State {
 	open = 11; // ticket
 	resolved = 13; // ticket
 	closed = 14; // ticket
+
+	waiting_for_reply = 15; // waiting for reply
 }
 
 message Conversation {
