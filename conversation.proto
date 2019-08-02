@@ -967,7 +967,7 @@ message FilterUserRequest {
 	optional string ticket_state = 5;
 	optional int64 limit = 6;
 	optional string anchor = 7;
-    optional string conversation_created = 8; // encoded json of FilterUserCondition
+    optional FilterUserCondition conversation_created = 8;
 }
 
 message FilterUserResponse {
@@ -991,6 +991,7 @@ message SearchConversationResponse {
 	// optional int64 total = 2;
 	repeated string conversation_ids = 3;
 	optional string anchor = 4;
+	repeated ESConversationMessage result = 5; // for preview matched messages
 }
 
 // conversation for index in elastic search
