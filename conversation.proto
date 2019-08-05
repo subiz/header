@@ -993,7 +993,7 @@ message ConversationMetadata {
 	map<string,int64> agent_joined = 12;
 }
 
-message FilterUserCondition {
+message FilterCondition {
 	optional string operator = 1; // eq | ne ...
 	optional string value = 2; // encoded json
 }
@@ -1001,11 +1001,14 @@ message FilterUserCondition {
 message FilterUserRequest {
 	optional string account_id = 2;
 	repeated string conversation_tag_ids = 3;
-	optional string conversation_state = 4;
-	optional string ticket_state = 5;
+	optional string conversation_state = 4; // deprecated
+	optional string ticket_state = 5; // deprecated
 	optional int64 limit = 6;
 	optional string anchor = 7;
-    optional FilterUserCondition conversation_created = 8;
+    optional FilterCondition conversation_created = 8;
+	optional string segment_id = 9;
+	repeated string conversation_states = 10;
+	repeated string ticket_states = 11;
 }
 
 message FilterUserResponse {
@@ -1017,12 +1020,17 @@ message FilterUserResponse {
 message SearchConversationRequest {
 	optional string account_id = 2;
 	optional string user_id = 3;
-	optional string state = 4;
-	optional string ticket_state = 5;
+	optional string state = 4; // deprecated
+	optional string ticket_state = 5; // deprecated
 	optional int64 limit = 6;
 	optional string anchor = 7;
-	optional string connector_id = 8; // channel
+	optional string connector_id = 8; // deprecated
 	optional string text = 9;
+	repeated string tag_ids = 10;
+	optional FilterCondition message_created = 11;
+	repeated string states = 12;
+	repeated string ticket_states = 13;
+    repeated string connector_ids = 14; // channel
 }
 
 message SearchConversationResponse {
@@ -1041,6 +1049,7 @@ message ESConversation {
 	optional string ticket_state = 6;
 	optional string id = 9;
 	optional int64 created = 10; // unix seconds
+	repeated string segment_ids = 11;
 }
 
 // conversation message for index in elastic search
@@ -1054,4 +1063,5 @@ message ESConversationMessage {
 	optional string conversation_id = 9;
 	optional int64 created = 10; // unix seconds
 	optional string id = 11; // event id
+	repeated string conversation_tag_ids = 12;
 }
