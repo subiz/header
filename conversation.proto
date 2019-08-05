@@ -141,6 +141,21 @@ message UserConversation { // used in database
 	optional string last_seen_event = 5;
 }
 
+message RoutingLogsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string anchor = 3;
+	optional string from = 4;
+	optional int32 limit = 5;
+}
+
+message RoutingLogs {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string anchor = 3;
+	repeated RoutingLog routing_logs = 4;
+}
+
 message RoutingLog {
 	optional common.Context ctx = 1;
 
