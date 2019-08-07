@@ -1065,3 +1065,10 @@ message ESConversationMessage {
 	optional string id = 11; // event id
 	repeated string conversation_tag_ids = 12;
 }
+
+// for update user segment ids of a conversation in elastic search
+message UpdateUserSegmentRequest {
+	optional string account_id = 2;
+	optional string user_id = 3;
+	repeated string segment_ids = 4; // all segment ids
+}
