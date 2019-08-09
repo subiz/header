@@ -1068,7 +1068,9 @@ message ESConversationMessage {
 
 // for update user segment ids of a conversation in elastic search
 message UpdateUserSegmentRequest {
+	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string user_id = 3;
 	repeated string segment_ids = 4; // all segment ids
+	optional string conversation_id = 5;
 }
