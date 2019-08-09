@@ -357,4 +357,5 @@ enum E {
 	UserSegmentSynced = 2000000;
 	UserSegmentAdded = 2000001;
 	UserSegmentRemoved = 2000002;
+	UserSegmentUpdated = 2000003;
 }
