@@ -358,4 +358,6 @@ enum E {
 	UserSegmentAdded = 2000001;
 	UserSegmentRemoved = 2000002;
 	UserSegmentUpdated = 2000003;
+
+	ConversationUpdateUserSegmentRequested = 2001000;
 }
