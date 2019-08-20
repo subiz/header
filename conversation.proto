@@ -238,11 +238,13 @@ message ListConversationsByUserRequest {
 }
 
 message Reaction {
+	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string conversation_id = 3;
-	optional int64 created = 4;
-	optional string user_id = 5;
-	optional string type = 6; // like, love, haha, wow, sad, angry
+	optional string member_id = 5;
+	optional string event_id = 6;
+	optional string type = 7; // like, love, haha, wow, sad, angry
+	optional int64 created = 9;
 }
 
 message EsMessage {

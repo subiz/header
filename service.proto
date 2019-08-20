@@ -178,8 +178,8 @@ service ConversationMgr {
 	rpc ReceiveMessage(conversation.MessageId) returns (common.Empty);
 	rpc AckMessage(conversation.MessageAck) returns (common.Empty);
 
-	rpc React(conversation.Reaction) returns (common.Empty);
-	rpc Unreact(conversation.Reaction) returns (common.Empty);
+	rpc React(event.Event) returns (event.Event);
+	rpc RemoveReaction(event.Event) returns (event.Event);
 
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(conversation.StartRequest) returns (conversation.Conversation);
