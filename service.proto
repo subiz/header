@@ -178,6 +178,9 @@ service ConversationMgr {
 	rpc ReceiveMessage(conversation.MessageId) returns (common.Empty);
 	rpc AckMessage(conversation.MessageAck) returns (common.Empty);
 
+	rpc React(conversation.Reaction) returns (common.Empty);
+	rpc Unreact(conversation.Reaction) returns (common.Empty);
+
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(conversation.StartRequest) returns (conversation.Conversation);
 	rpc EndConversation(common.Id) returns (conversation.Conversation);
@@ -192,7 +195,7 @@ service ConversationMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
 
-    rpc UpdateConversationInfo(conversation.Conversation) returns (conversation.Conversation);
+	rpc UpdateConversationInfo(conversation.Conversation) returns (conversation.Conversation);
 
 	rpc FilterUser(conversation.FilterUserRequest) returns (conversation.FilterUserResponse);
 	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
