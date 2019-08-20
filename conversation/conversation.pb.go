@@ -20,7 +20,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type State int32
 
@@ -3437,7 +3437,7 @@ type Button struct {
 	Payload   *string `protobuf:"bytes,4,opt,name=payload" json:"payload,omitempty"`
 	ImageUrl  *string `protobuf:"bytes,5,opt,name=image_url,json=imageUrl" json:"image_url,omitempty"`
 	ContentId *string `protobuf:"bytes,10,opt,name=content_id,json=contentId" json:"content_id,omitempty"`
-	// 	optional RawEvent event = 12;
+	//	optional RawEvent event = 12;
 	Url                  *string  `protobuf:"bytes,14,opt,name=url" json:"url,omitempty"`
 	PhoneNumber          *string  `protobuf:"bytes,16,opt,name=phone_number,json=phoneNumber" json:"phone_number,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -3874,7 +3874,7 @@ type Attachment struct {
 	ThumbnailUrl *string `protobuf:"bytes,4,opt,name=thumbnail_url,json=thumbnailUrl" json:"thumbnail_url,omitempty"`
 	Name         *string `protobuf:"bytes,5,opt,name=name" json:"name,omitempty"`
 	Description  *string `protobuf:"bytes,6,opt,name=description" json:"description,omitempty"`
-	// optional string data = 7; // for custom data
+	//optional string data = 7; // for custom data
 	Length *int32 `protobuf:"varint,15,opt,name=length" json:"length,omitempty"`
 	Size   *int32 `protobuf:"varint,13,opt,name=size" json:"size,omitempty"`
 	// generic

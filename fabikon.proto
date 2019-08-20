@@ -23,6 +23,56 @@ message FbEntry {
 	optional string id = 3;
 	optional int64 time = 5;
 	repeated FbMessaging messaging = 6;
+	repeated FbChange changes = 7;
+}
+
+message FbChange {
+	optional string field = 2;
+	optional FbChangeValue value = 3;
+}
+
+message FbFrom {
+	optional string id = 1;
+	optional string from = 2;
+}
+
+message FbChangeValue {
+	optional int64 edited_time = 3;
+	optional FbFrom from = 4;
+	optional FbPagePost post = 5;
+	optional bool is_hidden = 6;
+	optional string link = 7;
+	optional string message = 8;
+	optional string photo = 9;
+	repeated string photos = 10;
+	optional string post_id = 11;
+	optional string story = 12;
+	optional string title = 13;
+	optional string video = 14;
+	optional string video_flag_reason = 15;
+	optional string action = 16;
+	optional string album_id = 17;
+	optional string comment_id = 18;
+	optional int64 created_time = 19;
+	optional string event_id = 20;
+	optional string item = 21;
+	optional string open_graph_story_id = 22;
+	optional string parent_id = 23;
+	optional string photo_id = 24;
+	optional string reaction_type = 25;
+	optional int32 published = 26;
+	optional string recipient_id = 27;
+	optional string share_id = 28;
+	optional string verb = 29;
+	optional string video_id = 30;
+}
+
+message FbPagePost {
+	optional string status_type = 2;
+	optional bool is_published = 3;
+	optional int64 updated_time = 4;
+	optional string permalink_url = 5;
+	optional string promotion_status = 6;
 }
 
 message FbMessaging {
