@@ -70,6 +70,7 @@ message Event {
 		conversation.Ack message_ack = 28;
 		conversation.Received message_received = 29;
 		AutomationEvent automation_event = 30;
+		conversation.Reaction reaction = 31;
 	}
 	Data data = 20;
 }
@@ -128,6 +129,10 @@ enum ConvoType {
 	// conversation_updated = 9;
 	message_sent = 10;
 	conversation_state_updated = 11;
+
+	message_reacted = 12;
+	message_reaction_removed = 13;
+
 	//conversation_started = 1;
 	conversation_joined = 2;
 	conversation_invited = 3;
@@ -152,6 +157,7 @@ enum ConvoType {
 	ticket_created = 82;
 	ticket_updated = 83;
 	ticket_deleted = 84;
+
 }
 
 enum NotiboxType {

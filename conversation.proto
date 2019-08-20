@@ -238,9 +238,11 @@ message ListConversationsByUserRequest {
 }
 
 message Reaction {
-	optional string name = 3;
-	optional int32 count = 4;
-	repeated string users = 5;
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional int64 created = 4;
+	optional string user_id = 5;
+	optional string type = 6; // like, love, haha, wow, sad, angry
 }
 
 message EsMessage {
