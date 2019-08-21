@@ -121,6 +121,7 @@ service NoteMgr {
 	rpc UpdateNote(user.Note) returns (user.Note);
 	rpc DeleteNote(user.DeleteNoteRequest) returns (common.Empty);
 	rpc GetNote(user.GetNoteRequest) returns (user.Note);
+	rpc SearchNote(user.SearchNoteRequest) returns (user.SearchNoteResponse);
 }
 
 service AutomationMgr {
