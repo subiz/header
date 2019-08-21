@@ -19,7 +19,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Setting struct {
 	AccountId            string    `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -85,7 +85,7 @@ func (m *Setting) GetUpdated() int64 {
 }
 
 type Action struct {
-	// string action_type = 1;
+	//string action_type = 1;
 	Event                *event.Event `protobuf:"bytes,2,opt,name=event,proto3" json:"event,omitempty"`
 	Delay                int32        `protobuf:"varint,3,opt,name=delay,proto3" json:"delay,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`

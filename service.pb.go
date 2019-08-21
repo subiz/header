@@ -4,6 +4,7 @@
 package header
 
 import (
+	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	account "github.com/subiz/header/account"
@@ -25,8 +26,9 @@ import (
 	pubsub "github.com/subiz/header/pubsub"
 	user "github.com/subiz/header/user"
 	widget "github.com/subiz/header/widget"
-	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	math "math"
 )
 
@@ -39,11 +41,12 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 func init() { proto.RegisterFile("service.proto", fileDescriptor_a0b84a42fa06f626) }
 
 var fileDescriptor_a0b84a42fa06f626 = []byte{
+<<<<<<< HEAD
 <<<<<<< HEAD
 	// 3820 bytes of a gzipped FileDescriptorProto
 =======
@@ -753,6 +756,248 @@ var fileDescriptor_a0b84a42fa06f626 = []byte{
 	0x6c, 0x2e, 0x02, 0x39, 0x00, 0x00,
 >>>>>>> [convo] use pong instead of reactions and computed
 >>>>>>> [convo] use pong instead of reactions and computed
+=======
+	// 3812 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x5b, 0xcd, 0x73, 0x1b, 0xc7,
+	0xb1, 0x7f, 0xa4, 0x64, 0x52, 0x68, 0x80, 0x24, 0x30, 0xa0, 0x44, 0x11, 0x92, 0xad, 0x4f, 0x4b,
+	0xd6, 0x07, 0x41, 0x79, 0x25, 0x59, 0x92, 0x65, 0x59, 0x02, 0x29, 0x8a, 0xd2, 0x13, 0x25, 0xc3,
+	0x04, 0x28, 0xbf, 0x77, 0x78, 0xe5, 0x5a, 0x2c, 0x86, 0xe0, 0x3e, 0x2e, 0x76, 0xf1, 0x76, 0x16,
+	0x90, 0xe0, 0xd3, 0xab, 0x54, 0xa5, 0x92, 0x54, 0x2a, 0x95, 0x9c, 0x52, 0x95, 0x43, 0xee, 0xb9,
+	0xe4, 0x90, 0xdc, 0x72, 0xf3, 0x3d, 0x97, 0xa4, 0x72, 0xc8, 0x3f, 0x90, 0xaa, 0x1c, 0x72, 0xcb,
+	0xc9, 0x95, 0x53, 0x6a, 0xbe, 0x76, 0x77, 0x66, 0x3f, 0x08, 0xca, 0x4e, 0x2e, 0x2c, 0x4e, 0xf7,
+	0xaf, 0x7b, 0x7a, 0x7a, 0x7a, 0x66, 0xba, 0x67, 0x07, 0x30, 0x47, 0xb0, 0x3f, 0xb2, 0x2d, 0x5c,
+	0x1f, 0xf8, 0x5e, 0xe0, 0xa1, 0x99, 0x3d, 0x6c, 0x76, 0xb1, 0x5f, 0x2b, 0x59, 0x5e, 0xbf, 0xef,
+	0xb9, 0x9c, 0x5a, 0x2b, 0x0e, 0x09, 0xf6, 0x6f, 0x8a, 0x06, 0xd0, 0x86, 0xf8, 0x1f, 0x59, 0x9e,
+	0x3b, 0xc2, 0x3e, 0x31, 0x03, 0x3b, 0x04, 0x97, 0x2c, 0xc7, 0xc6, 0x6e, 0x20, 0x5a, 0x73, 0x96,
+	0xe7, 0x06, 0x51, 0x13, 0xba, 0xd8, 0x74, 0xa4, 0x56, 0x3c, 0x8a, 0x31, 0x76, 0x6d, 0x07, 0x4b,
+	0xc6, 0xbe, 0xb9, 0x3b, 0xb0, 0x44, 0xe3, 0xd8, 0xfe, 0x48, 0x2a, 0x1e, 0x0c, 0x3b, 0x64, 0xd8,
+	0x11, 0xad, 0xca, 0xc0, 0x31, 0x2d, 0xbc, 0xe7, 0x39, 0xdd, 0xd0, 0x9a, 0xb9, 0x81, 0x39, 0xee,
+	0xc7, 0xba, 0x76, 0xbd, 0xc0, 0xee, 0x78, 0x6f, 0xa4, 0x56, 0xda, 0xbc, 0x2d, 0x75, 0xbd, 0xb6,
+	0xbb, 0x3d, 0x1c, 0x22, 0x4d, 0xcb, 0xf2, 0x86, 0xa1, 0x60, 0xc9, 0x1c, 0x99, 0x81, 0x29, 0xb5,
+	0x16, 0xcc, 0x81, 0xcd, 0xff, 0x35, 0x6e, 0x40, 0xa1, 0x31, 0xb0, 0x5b, 0xd8, 0x1f, 0x61, 0x1f,
+	0x5d, 0x80, 0xa3, 0xeb, 0xa6, 0xe3, 0xa0, 0x52, 0x9d, 0x02, 0xb6, 0xf1, 0xff, 0x0d, 0x31, 0x09,
+	0x6a, 0x73, 0xa2, 0x45, 0x06, 0x9e, 0x4b, 0xb0, 0xb1, 0x01, 0x85, 0x86, 0x65, 0xb5, 0x86, 0x9d,
+	0x17, 0x3d, 0x1f, 0xdd, 0x85, 0x42, 0x0b, 0x9b, 0xbe, 0xb5, 0xd7, 0x1a, 0x76, 0xd0, 0x72, 0x5d,
+	0x76, 0x1a, 0xd2, 0xa4, 0x8e, 0x72, 0xc8, 0xe2, 0xb2, 0xc4, 0xf8, 0x43, 0x11, 0xa0, 0xc1, 0x69,
+	0x54, 0xd1, 0x1d, 0x28, 0xae, 0xfb, 0xd8, 0x0c, 0xf0, 0xa6, 0xef, 0x0d, 0x07, 0xa8, 0x1a, 0xe1,
+	0x7b, 0xd8, 0x0d, 0x18, 0xb1, 0x96, 0x46, 0xa4, 0x82, 0x3b, 0x83, 0xee, 0x5b, 0x08, 0x5e, 0x83,
+	0x63, 0x9b, 0x58, 0xfc, 0x0f, 0x75, 0x11, 0x1c, 0xcf, 0xba, 0xe9, 0xe0, 0xc7, 0xb0, 0x28, 0x86,
+	0xb2, 0x8d, 0x09, 0x0e, 0x9a, 0x26, 0x21, 0xaf, 0x3d, 0xbf, 0x8b, 0xde, 0x0d, 0xc1, 0x0a, 0x3d,
+	0x72, 0x9d, 0xd0, 0xbb, 0xd1, 0x1f, 0x04, 0x63, 0xf4, 0x11, 0xcc, 0x73, 0x5b, 0x43, 0xf9, 0xc5,
+	0x50, 0xfe, 0x25, 0x7e, 0x2d, 0xa9, 0xb5, 0x79, 0xd5, 0x04, 0xb4, 0x22, 0xc7, 0xc8, 0x9b, 0x1a,
+	0x3b, 0x01, 0xbf, 0x02, 0xc5, 0xc7, 0xd8, 0xc1, 0x12, 0x1e, 0x1f, 0x9c, 0x0e, 0xbd, 0x09, 0x48,
+	0xd8, 0xba, 0xbe, 0x67, 0xba, 0x3d, 0xbc, 0xd1, 0x37, 0x6d, 0x27, 0xd1, 0x81, 0x36, 0x8c, 0x5b,
+	0x80, 0xd6, 0x3d, 0x77, 0xd7, 0xf6, 0xfb, 0xe9, 0x42, 0x6d, 0x6f, 0x1f, 0xbb, 0x89, 0xae, 0xee,
+	0x42, 0xb9, 0x61, 0x59, 0x78, 0x10, 0x3c, 0x73, 0x47, 0x76, 0xc0, 0x96, 0xd7, 0x84, 0xc3, 0x5f,
+	0x85, 0xb9, 0x4d, 0x1c, 0x17, 0x3b, 0xa8, 0xab, 0x15, 0x28, 0x32, 0xf4, 0x84, 0xfe, 0xba, 0xc4,
+	0x22, 0xe1, 0x60, 0x67, 0x19, 0x30, 0x2f, 0xc6, 0x2d, 0x02, 0x37, 0x61, 0x88, 0x12, 0xe6, 0x0c,
+	0x71, 0x15, 0x80, 0xea, 0x16, 0xad, 0xb8, 0xf6, 0x24, 0xf6, 0x26, 0xcc, 0x89, 0x69, 0x16, 0x84,
+	0x04, 0x24, 0x45, 0xe8, 0x11, 0xcc, 0xf1, 0x85, 0x23, 0x09, 0x51, 0x48, 0x2a, 0xf4, 0xd4, 0x95,
+	0xc8, 0x04, 0xae, 0x00, 0x6c, 0xd9, 0x84, 0x8f, 0x9f, 0x28, 0x26, 0x2e, 0xa8, 0x0e, 0x20, 0x68,
+	0x15, 0x60, 0x7d, 0x0f, 0x5b, 0xfb, 0x5b, 0x5e, 0xcf, 0x76, 0xd1, 0xf1, 0x90, 0xcd, 0xda, 0xb2,
+	0x87, 0x98, 0x06, 0x54, 0x87, 0x77, 0x72, 0xb1, 0xba, 0x8b, 0x3f, 0x90, 0xa1, 0x9b, 0x5c, 0x97,
+	0x5a, 0x10, 0xd6, 0xb9, 0xd5, 0x0c, 0xa7, 0x5a, 0xbd, 0x98, 0xb2, 0x80, 0x09, 0xfa, 0x08, 0x16,
+	0x1a, 0xdd, 0x2e, 0xa3, 0xb4, 0x3d, 0xae, 0x3d, 0x02, 0xb2, 0xf6, 0x0b, 0xdc, 0xef, 0x60, 0x5f,
+	0xef, 0xe7, 0x3e, 0x5d, 0xf9, 0x7d, 0x6f, 0xc4, 0x63, 0xe9, 0x89, 0xef, 0xf5, 0x0f, 0x21, 0xbc,
+	0x02, 0xc5, 0xbc, 0x75, 0xa5, 0x8f, 0xfe, 0x3e, 0x54, 0x3e, 0x1f, 0x62, 0x7f, 0xbc, 0x36, 0xfe,
+	0xac, 0xf3, 0xbf, 0xd8, 0x0a, 0x9a, 0x66, 0xb0, 0x87, 0x96, 0xa5, 0xca, 0x88, 0x26, 0xbd, 0x57,
+	0x8c, 0x46, 0x4d, 0x50, 0x1d, 0x4a, 0xcf, 0xdc, 0x00, 0xf7, 0x7c, 0x33, 0xc0, 0x6b, 0xde, 0xc1,
+	0x51, 0xdf, 0x04, 0xd4, 0x1a, 0xbb, 0x56, 0x73, 0xd8, 0x71, 0x6c, 0xeb, 0xa9, 0xe7, 0xd8, 0x5d,
+	0x73, 0x4c, 0xd0, 0xf9, 0x68, 0x0f, 0x4f, 0x30, 0x65, 0xb7, 0x27, 0x42, 0xcc, 0xda, 0x90, 0xd8,
+	0x2e, 0x26, 0xe4, 0xa9, 0x37, 0xf4, 0x89, 0xf1, 0xab, 0xa3, 0x50, 0x5c, 0x1f, 0xfa, 0x3e, 0x76,
+	0xad, 0x31, 0xdd, 0xd3, 0x6f, 0xc1, 0x3c, 0x9d, 0x22, 0x41, 0xb2, 0x31, 0x41, 0xaa, 0x7b, 0x62,
+	0x5b, 0x6d, 0x0c, 0x73, 0x1d, 0x8a, 0x9b, 0x58, 0x0a, 0x8d, 0x95, 0x99, 0xad, 0xe8, 0x78, 0xb6,
+	0xa5, 0xf2, 0x30, 0x0f, 0x29, 0x49, 0x50, 0x86, 0x1c, 0x5f, 0x6b, 0x87, 0x94, 0xbb, 0x06, 0xf3,
+	0x3c, 0x40, 0x53, 0x0d, 0xd4, 0xa6, 0xff, 0x19, 0x54, 0xa8, 0x03, 0x36, 0xde, 0x58, 0x2c, 0x08,
+	0xb6, 0xcd, 0x00, 0x13, 0x74, 0x3a, 0x54, 0x1a, 0xa7, 0x27, 0x7d, 0xab, 0x4a, 0x3d, 0x81, 0x85,
+	0x4d, 0xac, 0x68, 0x3a, 0x40, 0xd1, 0xf1, 0x54, 0x2e, 0x5a, 0x03, 0xc4, 0xfd, 0xa5, 0x50, 0xd3,
+	0xc1, 0x59, 0x3a, 0x1a, 0x80, 0xb8, 0x0f, 0x0e, 0x61, 0x8e, 0xea, 0x19, 0xe3, 0xff, 0x67, 0x60,
+	0x76, 0x87, 0x60, 0x9f, 0x86, 0xc9, 0xa7, 0x50, 0xe4, 0xf9, 0x02, 0x25, 0x10, 0xb4, 0x54, 0x67,
+	0xd9, 0x18, 0x6d, 0x70, 0x72, 0xe4, 0x9a, 0x04, 0x83, 0x0c, 0x9d, 0x00, 0x7d, 0x04, 0xa8, 0x69,
+	0x5b, 0xfb, 0x6d, 0xaf, 0x85, 0x7b, 0x34, 0x57, 0xe2, 0x67, 0x44, 0x85, 0xa3, 0x29, 0x27, 0xe3,
+	0x34, 0xfe, 0x04, 0x4e, 0xf0, 0x61, 0xd0, 0x45, 0xad, 0xc8, 0x56, 0x45, 0x4f, 0xee, 0x20, 0x5b,
+	0xfa, 0x22, 0x00, 0x77, 0x24, 0xb5, 0x07, 0x41, 0x64, 0x9b, 0xb2, 0xff, 0x5d, 0x04, 0xe0, 0x61,
+	0x96, 0x8b, 0x3a, 0x0f, 0xc7, 0xb6, 0xb1, 0xd9, 0x15, 0x98, 0x28, 0x9c, 0x62, 0x78, 0xb4, 0x0b,
+	0x67, 0xd7, 0xa9, 0x77, 0xe3, 0x86, 0x52, 0xc6, 0xda, 0xb8, 0x11, 0x04, 0xbe, 0xdd, 0x19, 0x06,
+	0x18, 0xad, 0x70, 0xfc, 0x41, 0x38, 0x39, 0xa2, 0x6a, 0x0c, 0x2e, 0xd3, 0x3b, 0xf4, 0x10, 0x80,
+	0x11, 0xda, 0x5e, 0x60, 0x3a, 0x72, 0x32, 0x22, 0x8a, 0x94, 0x3d, 0x99, 0x64, 0x08, 0x05, 0x57,
+	0xe0, 0x68, 0xd3, 0x76, 0x7b, 0xa8, 0x2a, 0x07, 0x42, 0x5b, 0x52, 0xac, 0x14, 0x12, 0x3d, 0xb7,
+	0x47, 0x0f, 0x5e, 0xba, 0x27, 0x3b, 0xb6, 0x49, 0x50, 0x91, 0x2b, 0x64, 0x0d, 0xdd, 0xd7, 0xab,
+	0x00, 0x2f, 0xb0, 0xdf, 0xc3, 0x3c, 0x40, 0x10, 0x47, 0x32, 0x4a, 0xc6, 0xe4, 0x5c, 0x85, 0x39,
+	0xea, 0xd0, 0x86, 0xe3, 0xb4, 0xbd, 0x81, 0x6d, 0x91, 0xbc, 0x45, 0x7a, 0x1b, 0x8a, 0x1b, 0x6f,
+	0x06, 0x9e, 0x1f, 0x24, 0xc2, 0x8f, 0x93, 0x33, 0xba, 0x78, 0x08, 0xc0, 0xa3, 0xf0, 0xa5, 0x17,
+	0x60, 0x29, 0x15, 0x51, 0x34, 0x3f, 0xc5, 0x19, 0x22, 0x8f, 0xfe, 0x7a, 0x0a, 0xe0, 0x95, 0x4d,
+	0xec, 0xc0, 0x63, 0xab, 0xe0, 0x2a, 0x94, 0xa8, 0xc9, 0x4d, 0x1f, 0x13, 0xec, 0x5a, 0x58, 0x4b,
+	0x44, 0x78, 0x2c, 0x4b, 0xde, 0xf5, 0x30, 0x8f, 0x9c, 0x04, 0x7d, 0x05, 0x8a, 0x42, 0xf3, 0xc8,
+	0xc6, 0xaf, 0xd3, 0xa0, 0x5b, 0x26, 0x09, 0x5e, 0x51, 0xde, 0x0a, 0x2c, 0xd0, 0x0d, 0xab, 0xed,
+	0x0d, 0x84, 0x65, 0x24, 0x0d, 0x2e, 0x79, 0xc6, 0xcf, 0xa6, 0xa0, 0xda, 0x18, 0x06, 0x5e, 0x9f,
+	0x45, 0xd9, 0xba, 0x8f, 0xbb, 0x36, 0x4b, 0xe6, 0x3f, 0x86, 0x2a, 0x4d, 0x7a, 0x34, 0x8e, 0xa2,
+	0x6a, 0xa9, 0xce, 0x4b, 0xa5, 0x04, 0xe8, 0x01, 0x54, 0x69, 0x4c, 0xe8, 0xe4, 0x2c, 0xbc, 0xbe,
+	0xb1, 0xfc, 0x75, 0x0a, 0x66, 0xa9, 0x9b, 0xa9, 0x19, 0x37, 0xa0, 0x40, 0x47, 0x43, 0x9b, 0x04,
+	0x89, 0xdd, 0x23, 0x24, 0x44, 0x67, 0x28, 0xa3, 0x73, 0xd0, 0x39, 0x98, 0x6d, 0x74, 0xbb, 0x6c,
+	0x46, 0x21, 0xa2, 0xd7, 0x62, 0xff, 0x47, 0x2b, 0x3a, 0x17, 0x75, 0x0b, 0x80, 0xef, 0x2d, 0xf1,
+	0xe8, 0x88, 0x28, 0x19, 0x31, 0x75, 0x0d, 0x66, 0x37, 0x31, 0x33, 0x0f, 0x2d, 0x72, 0x11, 0xd1,
+	0x8c, 0x52, 0xab, 0xb0, 0x0b, 0xe3, 0xe7, 0xd3, 0x30, 0x17, 0x79, 0x83, 0x8e, 0xf7, 0x43, 0x3e,
+	0x7b, 0x11, 0x51, 0x9d, 0x3d, 0x94, 0x70, 0x21, 0xa1, 0x49, 0xb9, 0x48, 0x39, 0x43, 0x22, 0xaa,
+	0x24, 0x70, 0xb5, 0x24, 0x09, 0xad, 0x40, 0x59, 0x14, 0x19, 0x11, 0x2d, 0x67, 0x95, 0xad, 0xc2,
+	0x3c, 0x5b, 0x91, 0xe9, 0xe0, 0x14, 0xfd, 0x77, 0xa1, 0x2c, 0xf2, 0xd7, 0x43, 0x5a, 0x66, 0x7c,
+	0x3d, 0x0d, 0xa5, 0x70, 0xaf, 0xa3, 0x7e, 0xd9, 0x80, 0x93, 0xcc, 0x2f, 0x92, 0xf6, 0x18, 0xef,
+	0xda, 0xae, 0xcd, 0x1d, 0xa0, 0x65, 0x24, 0x35, 0xb1, 0x0b, 0xa5, 0x41, 0x3f, 0x87, 0x65, 0x61,
+	0x51, 0x92, 0x8b, 0x96, 0x33, 0x05, 0x6b, 0xd9, 0x2c, 0xaa, 0x52, 0xb8, 0xff, 0x3b, 0x53, 0xb9,
+	0x0e, 0xcb, 0x62, 0x5e, 0x52, 0x98, 0x4a, 0x20, 0x52, 0x40, 0xc6, 0xf1, 0xfc, 0xd3, 0x69, 0x58,
+	0x88, 0x1f, 0x20, 0xbc, 0x42, 0x17, 0x85, 0x86, 0x60, 0xc8, 0x7d, 0x38, 0x8e, 0xab, 0xa5, 0xd0,
+	0xa8, 0x20, 0x1f, 0xe4, 0x61, 0x05, 0x57, 0xa1, 0x44, 0xe7, 0x4d, 0xd0, 0x88, 0x56, 0xa5, 0x27,
+	0xf0, 0x84, 0x6e, 0xfb, 0x7c, 0x68, 0xb2, 0xa7, 0x9c, 0x80, 0x5c, 0xe1, 0xbb, 0x62, 0x1a, 0x32,
+	0xc5, 0x16, 0xe3, 0xd7, 0x53, 0x70, 0xb4, 0x89, 0xfd, 0x3e, 0x32, 0x60, 0x86, 0x8f, 0x26, 0x4a,
+	0xcc, 0xc5, 0x5e, 0x8c, 0xfd, 0x7e, 0xc6, 0xba, 0xbe, 0x2b, 0xeb, 0xf7, 0x56, 0x40, 0x05, 0x6b,
+	0xaa, 0x20, 0x23, 0x66, 0x48, 0xde, 0xe1, 0x99, 0x01, 0xeb, 0x79, 0x49, 0xb2, 0x24, 0x45, 0xca,
+	0xa0, 0xf0, 0x50, 0xc5, 0x7e, 0xdf, 0x26, 0x84, 0xda, 0xfb, 0xcd, 0x11, 0x58, 0x5c, 0x8f, 0xdd,
+	0x64, 0x6d, 0x63, 0x7a, 0x96, 0x61, 0x1f, 0x7d, 0x09, 0x27, 0xd9, 0xa1, 0x1d, 0x67, 0x92, 0xb5,
+	0x71, 0xdb, 0xec, 0x11, 0x74, 0xb6, 0xae, 0x5c, 0x7e, 0x31, 0x1c, 0x67, 0xc9, 0xae, 0xce, 0xe5,
+	0x20, 0xc4, 0xf9, 0xdf, 0xe1, 0x9b, 0xff, 0xa8, 0x27, 0x29, 0x6d, 0xbb, 0x8f, 0x09, 0xba, 0xa8,
+	0x4a, 0x6a, 0x7c, 0xa9, 0xff, 0xfd, 0x03, 0x50, 0xa2, 0x0f, 0x0c, 0x8b, 0x9b, 0x98, 0xe7, 0x1d,
+	0xf1, 0x71, 0x4c, 0xd8, 0xc9, 0x65, 0x15, 0x95, 0x50, 0x13, 0x76, 0xb3, 0x03, 0x55, 0xee, 0x37,
+	0xc5, 0x59, 0xa9, 0x6e, 0xe2, 0x38, 0xd9, 0xc3, 0x69, 0x15, 0x21, 0x99, 0x42, 0xed, 0xff, 0xd0,
+	0x92, 0x92, 0x52, 0x1a, 0x23, 0xd3, 0x76, 0xec, 0x8e, 0xed, 0xd8, 0x01, 0xad, 0x7c, 0x2e, 0xeb,
+	0xd6, 0x87, 0xdc, 0xf1, 0x21, 0xd4, 0x1b, 0x0e, 0x94, 0x59, 0x85, 0x27, 0x13, 0x80, 0x7f, 0x69,
+	0x76, 0x61, 0x7c, 0x33, 0x05, 0xb3, 0xdb, 0x43, 0x07, 0xf3, 0x82, 0x4f, 0x9c, 0x8d, 0x94, 0x80,
+	0x90, 0x66, 0xe5, 0xd0, 0xc1, 0xb5, 0x14, 0x1a, 0x95, 0xe2, 0x1b, 0xcb, 0xa1, 0xa4, 0x2e, 0xcb,
+	0x13, 0x96, 0xb5, 0x72, 0x16, 0xfa, 0x55, 0xbe, 0x84, 0x12, 0xb0, 0x34, 0xa5, 0xd7, 0x79, 0xc6,
+	0x40, 0xff, 0xd7, 0xb7, 0x1b, 0x15, 0xec, 0x0d, 0x03, 0x6c, 0xfc, 0xa6, 0x00, 0x0b, 0xf1, 0xc8,
+	0xa0, 0x2e, 0xb8, 0x4d, 0x8b, 0x19, 0xec, 0xbe, 0xc0, 0x84, 0x98, 0x3d, 0xcc, 0xd6, 0x6c, 0x4c,
+	0x4e, 0x90, 0x93, 0x46, 0xde, 0xa5, 0xc7, 0xa3, 0x85, 0xed, 0x11, 0x3e, 0xac, 0xe4, 0x6d, 0x80,
+	0x86, 0xb5, 0x2f, 0xa5, 0x4e, 0xa6, 0x4a, 0x35, 0xac, 0x7d, 0x5d, 0xec, 0x0a, 0x14, 0x69, 0x0a,
+	0x2e, 0xe5, 0x4a, 0xe2, 0x18, 0xdd, 0xa0, 0x7f, 0x6b, 0x4a, 0x8b, 0x42, 0x37, 0x68, 0x62, 0x37,
+	0x01, 0xf4, 0x39, 0x54, 0x5a, 0x81, 0xa9, 0xae, 0x17, 0xb6, 0xdd, 0xc5, 0x6c, 0x62, 0x00, 0x19,
+	0xc9, 0x35, 0x7d, 0x29, 0xc5, 0xe4, 0xee, 0xc1, 0xc2, 0x86, 0xdb, 0x55, 0x48, 0xf1, 0x29, 0x39,
+	0x40, 0x74, 0x13, 0x07, 0x6f, 0x25, 0xfa, 0x5f, 0xbc, 0x66, 0x57, 0x57, 0xfc, 0x25, 0x55, 0x20,
+	0x01, 0x90, 0xc3, 0x39, 0x95, 0xad, 0x98, 0xa0, 0x8f, 0x61, 0xa1, 0x6d, 0xf6, 0x94, 0xce, 0xb4,
+	0xe9, 0x6a, 0x9b, 0xbd, 0xcc, 0x5a, 0xb5, 0xb2, 0xe3, 0x06, 0x6f, 0x2b, 0x7d, 0x07, 0xca, 0xff,
+	0xe9, 0xd9, 0xae, 0x22, 0xbc, 0xa8, 0x47, 0x4a, 0xda, 0xfd, 0xd5, 0x1d, 0x28, 0x6f, 0xe1, 0xdd,
+	0xe0, 0xf0, 0x82, 0x17, 0x60, 0xa6, 0x3d, 0x1e, 0xd0, 0x32, 0x30, 0x67, 0x65, 0x1e, 0xa2, 0x52,
+	0xfc, 0x56, 0x37, 0x63, 0x4d, 0x38, 0x21, 0xee, 0x7a, 0x62, 0x86, 0x3f, 0x73, 0x77, 0x3d, 0x94,
+	0x13, 0x08, 0xb9, 0x41, 0xf2, 0x19, 0xc0, 0x13, 0xdb, 0x09, 0xb0, 0xcf, 0x4a, 0xf3, 0x33, 0x2a,
+	0x32, 0xe2, 0x48, 0x6b, 0xce, 0x66, 0x03, 0xc4, 0x91, 0xd0, 0x03, 0xc4, 0x4b, 0x44, 0xa5, 0x1b,
+	0xed, 0x40, 0x48, 0x22, 0x64, 0x07, 0x1f, 0x1c, 0x0c, 0x14, 0x87, 0xc3, 0xef, 0xa6, 0xa1, 0xd8,
+	0xc6, 0xfd, 0x81, 0x63, 0xf2, 0xdc, 0xf8, 0x91, 0xbc, 0x3f, 0x93, 0x44, 0x74, 0x42, 0x8b, 0x2a,
+	0x41, 0xaf, 0x65, 0xd0, 0xa9, 0x06, 0xee, 0xdd, 0xb7, 0xd6, 0x10, 0xde, 0xa9, 0x85, 0x94, 0x9c,
+	0xa0, 0xf9, 0x90, 0x5d, 0x0f, 0xa6, 0x22, 0xb3, 0xf4, 0x3f, 0x81, 0x39, 0x56, 0xd5, 0x8a, 0x36,
+	0x41, 0xa7, 0xd3, 0xdc, 0x15, 0x9a, 0xb9, 0x94, 0xae, 0x86, 0x18, 0x7f, 0x9b, 0x82, 0x99, 0xb6,
+	0xd9, 0xe3, 0xa5, 0x56, 0x41, 0xb8, 0xcd, 0xec, 0xa1, 0x4a, 0x62, 0x1d, 0xd6, 0x92, 0x24, 0x2a,
+	0x22, 0xfc, 0x34, 0xb1, 0xc8, 0x25, 0x28, 0x08, 0xc7, 0x98, 0xbd, 0x03, 0x8e, 0x38, 0x36, 0x40,
+	0x9a, 0xc3, 0xe5, 0x1c, 0x71, 0x8c, 0x7f, 0x19, 0x66, 0xa8, 0xff, 0x34, 0x85, 0xc9, 0xce, 0x8d,
+	0x5f, 0x4e, 0xc3, 0xbc, 0xbc, 0x50, 0x16, 0x87, 0x1b, 0xbb, 0x9d, 0xb7, 0xe5, 0x25, 0x73, 0x9e,
+	0x45, 0x1f, 0x43, 0x99, 0x5a, 0x14, 0x93, 0x27, 0x79, 0x3b, 0xb0, 0x82, 0x6b, 0x40, 0x21, 0xbc,
+	0xc8, 0x66, 0x6b, 0x3c, 0x1d, 0x58, 0xcb, 0x66, 0xa1, 0x0e, 0x54, 0xd8, 0x77, 0x0a, 0x96, 0x42,
+	0x99, 0x3c, 0x85, 0xd2, 0x37, 0xf1, 0x38, 0x8f, 0x81, 0x33, 0x73, 0xd0, 0x04, 0x8e, 0x0c, 0x9d,
+	0xc0, 0xf8, 0xed, 0x11, 0x40, 0x6d, 0xdb, 0xda, 0xc7, 0x81, 0x52, 0x6c, 0xfe, 0x37, 0xbc, 0xc7,
+	0xe6, 0x42, 0xe5, 0xe4, 0x94, 0x9c, 0xda, 0xda, 0xcd, 0x11, 0x24, 0x70, 0x46, 0x04, 0x5d, 0x16,
+	0x46, 0xdf, 0x31, 0x32, 0x81, 0xb5, 0x49, 0x81, 0xb4, 0x53, 0x11, 0xb6, 0xff, 0xc6, 0x4e, 0xbf,
+	0x80, 0x33, 0x22, 0xf0, 0x33, 0x21, 0xda, 0x2c, 0xe9, 0xf0, 0x8c, 0xc2, 0xf6, 0xcf, 0x33, 0x50,
+	0xe0, 0x20, 0x7e, 0x4f, 0x55, 0x8a, 0x3b, 0x54, 0x3f, 0xda, 0x38, 0xb5, 0x96, 0x4a, 0xa5, 0xb2,
+	0x71, 0xbf, 0x1c, 0x4a, 0xf6, 0x11, 0x94, 0xe2, 0xf6, 0xa2, 0x73, 0xd9, 0x63, 0xc9, 0x38, 0xd1,
+	0x1b, 0x50, 0xa0, 0xab, 0x98, 0x8b, 0xbf, 0xa7, 0x8a, 0x87, 0x0c, 0x29, 0x9b, 0x6e, 0xc4, 0x13,
+	0x28, 0x89, 0x8d, 0x8f, 0xb7, 0xcf, 0xa4, 0xa1, 0x58, 0x36, 0x1c, 0x7e, 0x51, 0x48, 0x01, 0x10,
+	0xf4, 0x90, 0x6f, 0x3e, 0xad, 0xad, 0x46, 0x22, 0xb4, 0x2f, 0xea, 0xfb, 0x2c, 0x7b, 0x97, 0xb1,
+	0x85, 0x47, 0xd8, 0x69, 0xf4, 0x7c, 0x8c, 0x79, 0x59, 0x7f, 0x8f, 0xed, 0x48, 0xad, 0xad, 0x86,
+	0xb2, 0x43, 0x5c, 0x98, 0x40, 0x16, 0xed, 0xc8, 0x6d, 0x98, 0x4a, 0x4f, 0x22, 0x31, 0xb1, 0x5a,
+	0x51, 0x9a, 0x7f, 0xa7, 0x6a, 0xc3, 0xed, 0x5c, 0x1f, 0xab, 0x36, 0xb9, 0xdb, 0x50, 0xe4, 0xf7,
+	0xea, 0x7c, 0x62, 0xd2, 0xca, 0x4d, 0x75, 0x82, 0xcf, 0xe5, 0x20, 0x44, 0x82, 0xf1, 0x25, 0xa0,
+	0xb0, 0x2a, 0xf7, 0x9c, 0x91, 0x28, 0xca, 0x2f, 0xa4, 0xd5, 0xcb, 0x92, 0x2d, 0xb5, 0x5f, 0xcc,
+	0x07, 0x89, 0xc4, 0xe2, 0xfb, 0xd3, 0x50, 0x58, 0x67, 0xcf, 0x64, 0xf8, 0x49, 0x31, 0xc3, 0x27,
+	0x06, 0xcd, 0xd7, 0xc5, 0xe3, 0x19, 0xce, 0xac, 0x69, 0x6d, 0x8a, 0x14, 0xf7, 0x29, 0x07, 0x21,
+	0x2f, 0xc1, 0x51, 0x5a, 0xc8, 0x1d, 0x88, 0x7b, 0x00, 0xc7, 0xe3, 0x67, 0x0f, 0xee, 0x72, 0xba,
+	0x7a, 0x00, 0x9d, 0x94, 0x42, 0x8d, 0x61, 0xb0, 0xe7, 0xf9, 0xf6, 0x57, 0x12, 0x26, 0xc5, 0x75,
+	0xfa, 0x84, 0xe2, 0xc6, 0x5f, 0xa6, 0xe1, 0xb8, 0x98, 0xfe, 0x75, 0xfe, 0x4e, 0xe8, 0x85, 0xe9,
+	0x9a, 0x3d, 0xec, 0xf3, 0xcf, 0xfb, 0x04, 0xb3, 0xea, 0x88, 0xd2, 0x51, 0xb9, 0x2e, 0x5f, 0x12,
+	0x09, 0x4a, 0x2d, 0x41, 0x89, 0xae, 0xb4, 0x24, 0x21, 0x37, 0x0d, 0x00, 0x5e, 0xf5, 0x24, 0x80,
+	0x49, 0xbd, 0x6b, 0x30, 0x1f, 0x66, 0x89, 0x01, 0x1b, 0xde, 0xbb, 0x21, 0x46, 0x61, 0xc8, 0x28,
+	0xa8, 0xe8, 0x2a, 0x08, 0x7a, 0x04, 0xd5, 0x2d, 0xcf, 0xdb, 0x1f, 0x0e, 0x24, 0x65, 0x6d, 0xbc,
+	0xe3, 0x3b, 0x3c, 0xfd, 0x63, 0x48, 0xce, 0xcd, 0xd1, 0x70, 0x97, 0x16, 0x5b, 0xee, 0xbe, 0x6c,
+	0xb7, 0x3d, 0x2a, 0xbf, 0x18, 0xc9, 0xdb, 0x6e, 0xc6, 0xe7, 0x37, 0xe3, 0x1f, 0x53, 0x34, 0x17,
+	0x31, 0x1d, 0xe1, 0x6a, 0xb4, 0xca, 0x73, 0xbc, 0xa6, 0x3d, 0xc0, 0x8e, 0xed, 0x26, 0x3f, 0x35,
+	0x2f, 0xd4, 0xd9, 0x33, 0xad, 0x88, 0x7f, 0x85, 0xe5, 0x91, 0xb2, 0xad, 0x5d, 0x71, 0x28, 0x58,
+	0x74, 0x43, 0xe6, 0xc8, 0x21, 0x45, 0x43, 0xa4, 0x49, 0x88, 0x2b, 0x94, 0x49, 0x25, 0xc2, 0x1c,
+	0x38, 0xd5, 0x22, 0x6d, 0xf0, 0x3f, 0x9e, 0x82, 0x02, 0xfb, 0x34, 0x4f, 0xf6, 0xb0, 0x8f, 0x1e,
+	0x40, 0xa1, 0x35, 0xec, 0x10, 0xcb, 0xb7, 0x3b, 0x18, 0x55, 0x45, 0x3d, 0x2e, 0x28, 0x03, 0x76,
+	0xee, 0x9e, 0x4a, 0x21, 0xc6, 0x3e, 0xf8, 0x15, 0x77, 0x5c, 0xf2, 0xf6, 0x0a, 0x8c, 0x3f, 0x4e,
+	0xc3, 0x31, 0x56, 0xfe, 0xf3, 0x5b, 0x62, 0x71, 0xaa, 0x30, 0x0a, 0x41, 0x27, 0x85, 0x24, 0xfb,
+	0x0e, 0xce, 0x48, 0xd1, 0x84, 0xc6, 0x6e, 0x0e, 0x08, 0x32, 0xe2, 0xa3, 0x10, 0x1f, 0x6b, 0x42,
+	0x42, 0xc6, 0x29, 0x78, 0x4b, 0x35, 0x7d, 0x42, 0xa9, 0x15, 0xf9, 0xd4, 0x8c, 0xdf, 0x59, 0x94,
+	0x85, 0x1d, 0xec, 0x8b, 0x5f, 0xca, 0x9d, 0x86, 0x01, 0x05, 0xba, 0xed, 0xb0, 0x0f, 0x89, 0xb2,
+	0x8b, 0x90, 0x90, 0xf9, 0x71, 0x50, 0x9e, 0xad, 0xfc, 0xf3, 0xe3, 0x52, 0xf4, 0xf1, 0x89, 0x53,
+	0xb4, 0x6f, 0xda, 0x71, 0x06, 0x4b, 0x2e, 0xff, 0x3e, 0x05, 0x4b, 0xf1, 0xfa, 0x8d, 0x99, 0xb2,
+	0xcd, 0x1e, 0x32, 0xd2, 0xc8, 0x6d, 0x61, 0xb7, 0x3b, 0xc9, 0x7d, 0xcc, 0x35, 0x79, 0xf5, 0x3e,
+	0x09, 0xf8, 0x13, 0xfe, 0xa2, 0x46, 0xcc, 0xc7, 0x99, 0xe4, 0x95, 0x47, 0xee, 0xfc, 0x35, 0xb4,
+	0x89, 0x3f, 0x9f, 0x56, 0x63, 0x09, 0x33, 0xd2, 0x55, 0x18, 0x3f, 0x99, 0x82, 0xd9, 0x27, 0xb6,
+	0x23, 0xbe, 0xdd, 0xcd, 0x36, 0x7d, 0x4c, 0xec, 0x9e, 0x8b, 0xca, 0x75, 0xf6, 0x90, 0x92, 0x72,
+	0x9e, 0xf2, 0xa7, 0x9c, 0x55, 0x4e, 0x11, 0x00, 0xf1, 0x0c, 0xe0, 0x7d, 0x71, 0x3c, 0x54, 0x22,
+	0x78, 0xf4, 0xd9, 0x2c, 0x24, 0xa1, 0x2b, 0x70, 0x6c, 0x67, 0xe0, 0x78, 0x66, 0x17, 0x1f, 0x04,
+	0x35, 0x56, 0xe1, 0x9d, 0xe7, 0xe6, 0xee, 0xc0, 0x42, 0x97, 0xe0, 0x9d, 0x6d, 0x3c, 0x70, 0xc6,
+	0x68, 0xa1, 0xce, 0xdf, 0x71, 0xca, 0xd8, 0xaf, 0x95, 0x04, 0x81, 0xaf, 0xcb, 0x57, 0x30, 0xfd,
+	0xfc, 0x15, 0x3a, 0x05, 0x47, 0x5a, 0x38, 0x40, 0x85, 0xfa, 0xfe, 0xa8, 0xfe, 0xca, 0x74, 0x86,
+	0xb8, 0x16, 0xfd, 0x8b, 0x96, 0xe1, 0xc8, 0x26, 0x0e, 0xd0, 0x2c, 0xa5, 0x3c, 0xc7, 0xe3, 0x38,
+	0xeb, 0x24, 0x1c, 0x79, 0x6a, 0x92, 0x88, 0x75, 0x8c, 0xfe, 0xb3, 0xe6, 0x79, 0x8e, 0xf1, 0xbd,
+	0x29, 0x28, 0xbd, 0xf4, 0x02, 0xfb, 0xb6, 0xdc, 0xed, 0x6e, 0xc3, 0x12, 0x1d, 0x2b, 0xa5, 0xed,
+	0xda, 0x16, 0xf3, 0x70, 0x0b, 0x07, 0x81, 0x7e, 0xdf, 0x32, 0x5f, 0xe7, 0x0f, 0x44, 0x25, 0xef,
+	0xbe, 0xfc, 0xdc, 0x94, 0x26, 0xa8, 0x81, 0x75, 0x61, 0xe3, 0x17, 0x53, 0x50, 0x61, 0x46, 0xb0,
+	0xa7, 0x6e, 0xd2, 0x92, 0xcb, 0xec, 0x13, 0x3e, 0x23, 0xa1, 0x92, 0x90, 0xe0, 0x6f, 0xe1, 0x12,
+	0x87, 0x53, 0x91, 0xbf, 0xa3, 0x9a, 0x00, 0xbb, 0x0a, 0x65, 0x56, 0x69, 0x31, 0xe6, 0xc6, 0x1b,
+	0x9b, 0x04, 0x24, 0x57, 0xc0, 0xf8, 0xfd, 0x34, 0xcc, 0xbf, 0xe4, 0x4f, 0x63, 0xa5, 0x61, 0x06,
+	0x40, 0xb8, 0x4a, 0x09, 0x3a, 0x5e, 0x97, 0x2f, 0x67, 0xf3, 0x96, 0xad, 0x01, 0xd0, 0xc2, 0xd8,
+	0x3d, 0x94, 0xcc, 0x2d, 0x28, 0xed, 0xb8, 0xfe, 0x61, 0x7b, 0xba, 0x17, 0x7e, 0x9a, 0xb6, 0x09,
+	0x5a, 0x0c, 0x45, 0xe2, 0xe9, 0xf6, 0x89, 0x90, 0x1a, 0x9f, 0x2d, 0x12, 0xbd, 0x12, 0x14, 0x03,
+	0x46, 0x65, 0x05, 0xd8, 0xf1, 0xde, 0xd4, 0x12, 0x14, 0x74, 0x8d, 0x7f, 0xed, 0x92, 0x4d, 0x35,
+	0x37, 0xd0, 0xc0, 0xc6, 0x8f, 0xa6, 0x60, 0xa9, 0x35, 0xec, 0xd8, 0x5f, 0xd1, 0x14, 0xca, 0x77,
+	0x4d, 0xa7, 0xc9, 0x1f, 0x21, 0xf3, 0x0f, 0x09, 0xe2, 0xb2, 0x7e, 0xcd, 0x76, 0x1c, 0x34, 0x57,
+	0x97, 0xef, 0x93, 0x69, 0xb3, 0xa6, 0x36, 0xd1, 0x1a, 0x20, 0x6e, 0xa9, 0xf6, 0xd6, 0x48, 0x82,
+	0xb4, 0xb7, 0x46, 0x69, 0x64, 0xe3, 0x87, 0x15, 0x80, 0x58, 0xf7, 0x37, 0xe1, 0x58, 0x73, 0xe8,
+	0x5b, 0x7b, 0x26, 0x89, 0x2b, 0x52, 0xce, 0xaa, 0x72, 0x48, 0x7e, 0xe6, 0x8e, 0x3c, 0x1a, 0x0a,
+	0xa1, 0x1d, 0x71, 0x5c, 0x96, 0x78, 0x3a, 0x19, 0xdd, 0x62, 0x37, 0xca, 0x0a, 0x29, 0xee, 0xc4,
+	0x0c, 0xa9, 0x35, 0x28, 0x37, 0xba, 0x5d, 0x69, 0x3f, 0x0e, 0xf6, 0xbc, 0x2e, 0x3a, 0x11, 0x42,
+	0x15, 0x7a, 0x2d, 0x83, 0x8e, 0x36, 0xa0, 0x2a, 0x1f, 0x0d, 0x7f, 0x1b, 0x35, 0x37, 0xa0, 0x2a,
+	0x12, 0x0c, 0x85, 0x9c, 0x93, 0x4e, 0xde, 0x03, 0xc4, 0x52, 0xaa, 0x38, 0x9e, 0x68, 0x8f, 0x38,
+	0x52, 0xfb, 0xa2, 0xc9, 0xd5, 0x91, 0xa6, 0x39, 0x46, 0xd5, 0x38, 0x3f, 0x5a, 0x09, 0x4a, 0x90,
+	0xac, 0xf0, 0x8f, 0xbc, 0x62, 0xae, 0x88, 0x76, 0x2b, 0xa5, 0x4d, 0x25, 0x8b, 0x7e, 0x1e, 0x7f,
+	0x72, 0x72, 0x13, 0xd3, 0x9d, 0x12, 0x00, 0xe1, 0x92, 0x39, 0x8c, 0xd0, 0x23, 0x98, 0xe7, 0x17,
+	0xb5, 0x61, 0xdf, 0xa7, 0x42, 0x4c, 0xcc, 0xe2, 0x28, 0xbb, 0x4d, 0xd8, 0x7a, 0x07, 0x4a, 0x8f,
+	0x7d, 0x73, 0x57, 0x22, 0x27, 0x0f, 0xd8, 0x4f, 0xa1, 0xf2, 0xd8, 0xde, 0xdd, 0x8d, 0xa3, 0x68,
+	0x0e, 0x21, 0x61, 0x82, 0x17, 0xbd, 0xe8, 0xd5, 0xe5, 0x1f, 0x72, 0x9f, 0xae, 0x7b, 0x7d, 0x5e,
+	0x61, 0x9f, 0x56, 0x0c, 0x97, 0xe4, 0xa4, 0xe5, 0xa1, 0xc0, 0x0d, 0x80, 0x46, 0xb7, 0x2b, 0x9a,
+	0x31, 0x6f, 0x09, 0x4a, 0x2d, 0x41, 0x41, 0x57, 0xf9, 0x86, 0xd6, 0x74, 0xcc, 0xe4, 0x0d, 0xd7,
+	0x7c, 0x14, 0x06, 0x8c, 0x7d, 0x1d, 0xe6, 0xf8, 0xd3, 0x2a, 0x69, 0xaf, 0xfa, 0xe6, 0x38, 0x74,
+	0x52, 0xe0, 0xd3, 0x73, 0xe9, 0x9e, 0xfc, 0x90, 0x2d, 0xe1, 0x6d, 0xef, 0x69, 0xd0, 0x77, 0x52,
+	0xe6, 0x30, 0x21, 0xfa, 0x30, 0xf9, 0x68, 0xf2, 0x50, 0xbb, 0x0f, 0x0d, 0x9c, 0xb6, 0x6f, 0xba,
+	0x64, 0x17, 0xfb, 0x2f, 0x3c, 0x17, 0x4f, 0x16, 0xd1, 0x37, 0xf9, 0x85, 0xc8, 0x96, 0xd7, 0xa3,
+	0xe9, 0x6f, 0xdc, 0xf3, 0x94, 0x94, 0x14, 0x62, 0xc0, 0x0d, 0xa8, 0x8a, 0x1a, 0xc3, 0xf7, 0xfa,
+	0x1e, 0x7b, 0xdf, 0xe4, 0x75, 0x71, 0x7c, 0x95, 0xc7, 0xe9, 0xb5, 0x0c, 0x3a, 0xba, 0x0f, 0x65,
+	0x5a, 0xd5, 0x28, 0x34, 0xdd, 0x2d, 0x99, 0xc2, 0x8f, 0xa0, 0xbc, 0x43, 0x34, 0x03, 0xde, 0x4d,
+	0xc7, 0x66, 0x1c, 0x6b, 0x2f, 0xe1, 0xf8, 0x2b, 0xd3, 0xb1, 0xbb, 0x89, 0x71, 0x1c, 0xa0, 0x26,
+	0xcb, 0xa2, 0xcf, 0xf8, 0xc7, 0x38, 0x95, 0x78, 0x4e, 0xf1, 0x69, 0xaa, 0xbe, 0xa5, 0x74, 0x7d,
+	0x24, 0xb6, 0x0b, 0x2a, 0x2a, 0x73, 0x76, 0xc1, 0x75, 0x59, 0x28, 0x6f, 0xe3, 0x5d, 0xec, 0xfb,
+	0xa6, 0x83, 0xde, 0x8b, 0xfc, 0x19, 0x63, 0xe0, 0x6e, 0x72, 0x3d, 0x85, 0x22, 0xfc, 0x4d, 0x73,
+	0xd8, 0x4c, 0xdf, 0xe3, 0x42, 0xf6, 0xfd, 0xf0, 0x15, 0x5e, 0x48, 0xd2, 0x56, 0xd4, 0x72, 0x42,
+	0x28, 0x2c, 0xe7, 0xc2, 0x87, 0xcd, 0xa1, 0x6c, 0xb2, 0x87, 0xb4, 0x4e, 0x1f, 0x42, 0x95, 0x5d,
+	0x7b, 0xc8, 0x5f, 0x0b, 0xf0, 0x31, 0x29, 0xa6, 0x9e, 0x8e, 0x87, 0xac, 0x06, 0x24, 0xe8, 0x39,
+	0x2c, 0x53, 0x05, 0x74, 0x09, 0xac, 0x8d, 0xf3, 0xd4, 0x9c, 0x8f, 0xab, 0x49, 0x85, 0x13, 0xf4,
+	0x8c, 0x3f, 0xd9, 0x6a, 0x9a, 0x76, 0xf7, 0x89, 0xe7, 0xb3, 0xe7, 0x0c, 0x82, 0xa9, 0xbe, 0x90,
+	0x3d, 0x17, 0xd7, 0x95, 0x86, 0x26, 0x68, 0x13, 0x16, 0x53, 0xd5, 0x9c, 0x3d, 0x48, 0x54, 0x4f,
+	0x32, 0x5f, 0x42, 0xb1, 0xe9, 0x98, 0x16, 0x7e, 0xca, 0x7e, 0xa0, 0x85, 0x1e, 0xc2, 0xac, 0xb8,
+	0x07, 0xa3, 0x07, 0x43, 0xec, 0x97, 0x5b, 0x82, 0x1a, 0x5d, 0x9b, 0xa6, 0x30, 0xbb, 0xe7, 0xff,
+	0xc3, 0x70, 0x61, 0xa6, 0xc9, 0x7e, 0xfe, 0x85, 0x6e, 0xc4, 0x6b, 0xdf, 0xc5, 0xba, 0xf8, 0x51,
+	0x98, 0x72, 0x48, 0x24, 0x32, 0x55, 0xa5, 0xf2, 0x9d, 0x44, 0xc6, 0xf8, 0xd3, 0x14, 0xcc, 0x7d,
+	0xc1, 0x7e, 0x23, 0x26, 0x73, 0xe4, 0x0b, 0xa2, 0x64, 0x52, 0xf7, 0x5f, 0xf1, 0x3b, 0x32, 0x59,
+	0x17, 0x5c, 0x0d, 0x2f, 0xe8, 0x74, 0x56, 0x12, 0x6b, 0xc0, 0x82, 0x7c, 0xc8, 0x9c, 0x56, 0x8f,
+	0x54, 0x25, 0x3e, 0x0e, 0x78, 0x00, 0x95, 0xe8, 0x89, 0xb4, 0x24, 0xa6, 0x21, 0x53, 0xc5, 0x0d,
+	0x17, 0x16, 0xc5, 0x70, 0x1a, 0xec, 0x27, 0x6e, 0xf2, 0xb6, 0xed, 0x32, 0xbb, 0x21, 0xe7, 0x34,
+	0xfd, 0x57, 0x3d, 0xfc, 0xb7, 0x70, 0x82, 0xb7, 0x02, 0x25, 0x7e, 0x2d, 0x27, 0xda, 0x1a, 0x5f,
+	0xf7, 0xe2, 0x0f, 0xa6, 0x61, 0xfe, 0x0b, 0xdc, 0xd9, 0xf3, 0xbc, 0xfd, 0x7c, 0x37, 0x8a, 0x0b,
+	0x42, 0x81, 0x45, 0x17, 0x60, 0x86, 0xef, 0x3c, 0x79, 0x9b, 0xcd, 0x45, 0x38, 0x4a, 0xc3, 0x5e,
+	0xbf, 0xbb, 0x53, 0x34, 0x11, 0x65, 0x46, 0x54, 0x5e, 0xb2, 0xdb, 0xab, 0xe1, 0x45, 0xec, 0xc1,
+	0xd8, 0x15, 0x38, 0xda, 0xc6, 0x5a, 0xef, 0xcb, 0x1a, 0xa8, 0xcd, 0x7f, 0x02, 0x37, 0x74, 0x82,
+	0xce, 0x0c, 0xfb, 0x05, 0xe1, 0xcd, 0x7f, 0x06, 0x00, 0x00, 0xff, 0xff, 0x0f, 0x71, 0x9a, 0xf6,
+	0x70, 0x39, 0x00, 0x00,
+>>>>>>> rebuild
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -790,6 +1035,14 @@ func (c *apiServerClient) Call(ctx context.Context, in *api.Request, opts ...grp
 // ApiServerServer is the server API for ApiServer service.
 type ApiServerServer interface {
 	Call(context.Context, *api.Request) (*api.Response, error)
+}
+
+// UnimplementedApiServerServer can be embedded to have forward compatible implementations.
+type UnimplementedApiServerServer struct {
+}
+
+func (*UnimplementedApiServerServer) Call(ctx context.Context, req *api.Request) (*api.Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Call not implemented")
 }
 
 func RegisterApiServerServer(s *grpc.Server, srv ApiServerServer) {
@@ -854,6 +1107,14 @@ func (c *accSubMgrClient) SearchSub(ctx context.Context, in *account.SearchSubRe
 // AccSubMgrServer is the server API for AccSubMgr service.
 type AccSubMgrServer interface {
 	SearchSub(context.Context, *account.SearchSubRequest) (*account.AccSubs, error)
+}
+
+// UnimplementedAccSubMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAccSubMgrServer struct {
+}
+
+func (*UnimplementedAccSubMgrServer) SearchSub(ctx context.Context, req *account.SearchSubRequest) (*account.AccSubs, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchSub not implemented")
 }
 
 func RegisterAccSubMgrServer(s *grpc.Server, srv AccSubMgrServer) {
@@ -1215,6 +1476,95 @@ type AccountMgrServer interface {
 	QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error)
 	IntegrateBot(context.Context, *account.Agent) (*account.Agent, error)
 	SyncPublicHolidays(context.Context, *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error)
+}
+
+// UnimplementedAccountMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAccountMgrServer struct {
+}
+
+func (*UnimplementedAccountMgrServer) CreateGroup(ctx context.Context, req *account.AgentGroup) (*account.AgentGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdateGroup(ctx context.Context, req *account.AgentGroup) (*account.AgentGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetGroup(ctx context.Context, req *common.Id) (*account.AgentGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) RequestResetPassword(ctx context.Context, req *account.ResetPasswordRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestResetPassword not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdatePassword(ctx context.Context, req *account.NewPassword) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdateAgent(ctx context.Context, req *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) DeleteAgent(ctx context.Context, req *common.Id) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) RequestChangeEmail(ctx context.Context, req *account.Agent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestChangeEmail not implemented")
+}
+func (*UnimplementedAccountMgrServer) ConfirmChangeEmail(ctx context.Context, req *account.Token) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmChangeEmail not implemented")
+}
+func (*UnimplementedAccountMgrServer) AcceptInvitation(ctx context.Context, req *account.NewPassword) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptInvitation not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetInvitation(ctx context.Context, req *account.Token) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvitation not implemented")
+}
+func (*UnimplementedAccountMgrServer) InviteAgent(ctx context.Context, req *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InviteAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetAgent(ctx context.Context, req *common.Id) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) ConfirmAccount(ctx context.Context, req *account.Token) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetAccount(ctx context.Context, req *common.Id) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdateAccount(ctx context.Context, req *account.Account) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) CreateAccount(ctx context.Context, req *account.CreateAccountRequest) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) ListAgents(ctx context.Context, req *common.Id) (*account.Agents, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAgents not implemented")
+}
+func (*UnimplementedAccountMgrServer) CheckLogin(ctx context.Context, req *account.LoginRequest) (*common.Id, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckLogin not implemented")
+}
+func (*UnimplementedAccountMgrServer) Login(ctx context.Context, req *account.LoginRequest) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (*UnimplementedAccountMgrServer) DeleteGroup(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) ListGroups(ctx context.Context, req *common.Id) (*account.AgentGroups, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGroups not implemented")
+}
+func (*UnimplementedAccountMgrServer) AddAgentToGroup(ctx context.Context, req *account.GroupMember) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAgentToGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) RemoveAgentFromGroup(ctx context.Context, req *account.GroupMember) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveAgentFromGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) ChangeEmail(ctx context.Context, req *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeEmail not implemented")
+}
+func (*UnimplementedAccountMgrServer) QueryByObjectPath(ctx context.Context, req *common.ObjectPathRequest) (*common.Ids, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryByObjectPath not implemented")
+}
+func (*UnimplementedAccountMgrServer) IntegrateBot(ctx context.Context, req *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IntegrateBot not implemented")
+}
+func (*UnimplementedAccountMgrServer) SyncPublicHolidays(ctx context.Context, req *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncPublicHolidays not implemented")
 }
 
 func RegisterAccountMgrServer(s *grpc.Server, srv AccountMgrServer) {
@@ -1963,6 +2313,38 @@ type CurrencyMgrServer interface {
 	DeleteExchangeRate(context.Context, *account.ExchangeRateRequest) (*common.Empty, error)
 }
 
+// UnimplementedCurrencyMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedCurrencyMgrServer struct {
+}
+
+func (*UnimplementedCurrencyMgrServer) ListCurrencies(ctx context.Context, req *common.Empty) (*account.Currencies, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) GetCurrency(ctx context.Context, req *common.Id) (*account.Currency, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) CreateCurrency(ctx context.Context, req *account.Currency) (*account.Currency, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) UpdateCurrency(ctx context.Context, req *account.Currency) (*account.Currency, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) DeleteCurrency(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) ListExchangeRates(ctx context.Context, req *account.ExchangeRateRequest) (*account.ExchangeRates, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) GetExchangeRate(ctx context.Context, req *account.ExchangeRateRequest) (*account.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) CreateExchangeRate(ctx context.Context, req *account.ExchangeRate) (*account.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateExchangeRate not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) DeleteExchangeRate(ctx context.Context, req *account.ExchangeRateRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExchangeRate not implemented")
+}
+
 func RegisterCurrencyMgrServer(s *grpc.Server, srv CurrencyMgrServer) {
 	s.RegisterService(&_CurrencyMgr_serviceDesc, srv)
 }
@@ -2348,6 +2730,53 @@ type UserMgrServer interface {
 	SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error)
 }
 
+// UnimplementedUserMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedUserMgrServer struct {
+}
+
+func (*UnimplementedUserMgrServer) SearchUsers(ctx context.Context, req *user.UserSearchRequest) (*user.UserSearchResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchUsers not implemented")
+}
+func (*UnimplementedUserMgrServer) PickToSegmentation(ctx context.Context, req *user.PickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PickToSegmentation not implemented")
+}
+func (*UnimplementedUserMgrServer) DeleteFromSegmentation(ctx context.Context, req *user.UnpickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFromSegmentation not implemented")
+}
+func (*UnimplementedUserMgrServer) CreateUser(ctx context.Context, req *user.User) (*common.Id, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (*UnimplementedUserMgrServer) UpdateUser(ctx context.Context, req *user.User) (*common.Id, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (*UnimplementedUserMgrServer) ReadUser(ctx context.Context, req *common.Id) (*user.User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadUser not implemented")
+}
+func (*UnimplementedUserMgrServer) CountSegmentationUserByAttribute(ctx context.Context, req *user.CountSegmentationUserByAttributeRequest) (*user.CountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountSegmentationUserByAttribute not implemented")
+}
+func (*UnimplementedUserMgrServer) CountTotal(ctx context.Context, req *user.CountTotalRequest) (*user.CountTotalResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountTotal not implemented")
+}
+func (*UnimplementedUserMgrServer) Ping(ctx context.Context, req *common.PingRequest) (*common.Pong, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (*UnimplementedUserMgrServer) AddAlias(ctx context.Context, req *user.Alias) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAlias not implemented")
+}
+func (*UnimplementedUserMgrServer) MergeUsers(ctx context.Context, req *user.MergeRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MergeUsers not implemented")
+}
+func (*UnimplementedUserMgrServer) ReadAllTopics(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadAllTopics not implemented")
+}
+func (*UnimplementedUserMgrServer) ExportUsers(ctx context.Context, req *user.UserExportRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUsers not implemented")
+}
+func (*UnimplementedUserMgrServer) SearchNote(ctx context.Context, req *user.SearchNoteRequest) (*user.SearchNoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchNote not implemented")
+}
+
 func RegisterUserMgrServer(s *grpc.Server, srv UserMgrServer) {
 	s.RegisterService(&_UserMgr_serviceDesc, srv)
 }
@@ -2731,6 +3160,23 @@ type VisitorMgrServer interface {
 	ListTopVisitors(context.Context, *common.Id) (*user.Visitors, error)
 }
 
+// UnimplementedVisitorMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedVisitorMgrServer struct {
+}
+
+func (*UnimplementedVisitorMgrServer) ReadPresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPresence not implemented")
+}
+func (*UnimplementedVisitorMgrServer) UpdatePresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePresence not implemented")
+}
+func (*UnimplementedVisitorMgrServer) ReadPreview(ctx context.Context, req *common.Id) (*user.LastView, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPreview not implemented")
+}
+func (*UnimplementedVisitorMgrServer) ListTopVisitors(ctx context.Context, req *common.Id) (*user.Visitors, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTopVisitors not implemented")
+}
+
 func RegisterVisitorMgrServer(s *grpc.Server, srv VisitorMgrServer) {
 	s.RegisterService(&_VisitorMgr_serviceDesc, srv)
 }
@@ -2872,6 +3318,17 @@ type AutomationCreditMgrServer interface {
 	AddAutomationCredit(context.Context, *event.AutomationCredit) (*common.Empty, error)
 }
 
+// UnimplementedAutomationCreditMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAutomationCreditMgrServer struct {
+}
+
+func (*UnimplementedAutomationCreditMgrServer) GetAutomationCredit(ctx context.Context, req *common.Id) (*event.AutomationCredit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAutomationCredit not implemented")
+}
+func (*UnimplementedAutomationCreditMgrServer) AddAutomationCredit(ctx context.Context, req *event.AutomationCredit) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAutomationCredit not implemented")
+}
+
 func RegisterAutomationCreditMgrServer(s *grpc.Server, srv AutomationCreditMgrServer) {
 	s.RegisterService(&_AutomationCreditMgr_serviceDesc, srv)
 }
@@ -3011,6 +3468,26 @@ type NoteMgrServer interface {
 	DeleteNote(context.Context, *user.DeleteNoteRequest) (*common.Empty, error)
 	GetNote(context.Context, *user.GetNoteRequest) (*user.Note, error)
 	SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error)
+}
+
+// UnimplementedNoteMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedNoteMgrServer struct {
+}
+
+func (*UnimplementedNoteMgrServer) ListNotes(ctx context.Context, req *user.ListNotesRequest) (*user.Notes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListNotes not implemented")
+}
+func (*UnimplementedNoteMgrServer) AddNote(ctx context.Context, req *user.Note) (*user.Note, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNote not implemented")
+}
+func (*UnimplementedNoteMgrServer) UpdateNote(ctx context.Context, req *user.Note) (*user.Note, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNote not implemented")
+}
+func (*UnimplementedNoteMgrServer) DeleteNote(ctx context.Context, req *user.DeleteNoteRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteNote not implemented")
+}
+func (*UnimplementedNoteMgrServer) GetNote(ctx context.Context, req *user.GetNoteRequest) (*user.Note, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNote not implemented")
 }
 
 func RegisterNoteMgrServer(s *grpc.Server, srv NoteMgrServer) {
@@ -3231,6 +3708,26 @@ type AutomationMgrServer interface {
 	CreateAutomation(context.Context, *event.Automation) (*event.Automation, error)
 }
 
+// UnimplementedAutomationMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAutomationMgrServer struct {
+}
+
+func (*UnimplementedAutomationMgrServer) ListAutomations(ctx context.Context, req *common.Id) (*event.Automations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAutomations not implemented")
+}
+func (*UnimplementedAutomationMgrServer) UpdateAutomation(ctx context.Context, req *event.Automation) (*event.Automation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAutomation not implemented")
+}
+func (*UnimplementedAutomationMgrServer) DeleteAutomation(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAutomation not implemented")
+}
+func (*UnimplementedAutomationMgrServer) ReadAutomation(ctx context.Context, req *common.Id) (*event.Automation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadAutomation not implemented")
+}
+func (*UnimplementedAutomationMgrServer) CreateAutomation(ctx context.Context, req *event.Automation) (*event.Automation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAutomation not implemented")
+}
+
 func RegisterAutomationMgrServer(s *grpc.Server, srv AutomationMgrServer) {
 	s.RegisterService(&_AutomationMgr_serviceDesc, srv)
 }
@@ -3416,6 +3913,23 @@ type AttributeMgrServer interface {
 	DeleteAttributeDefinition(context.Context, *user.DeleteAttrRequest) (*common.Empty, error)
 }
 
+// UnimplementedAttributeMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAttributeMgrServer struct {
+}
+
+func (*UnimplementedAttributeMgrServer) ListAttributeDefinitions(ctx context.Context, req *common.Empty) (*user.AttributeDefinitions, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAttributeDefinitions not implemented")
+}
+func (*UnimplementedAttributeMgrServer) CreateAttributeDefinition(ctx context.Context, req *user.AttributeDefinition) (*user.AttributeDefinition, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAttributeDefinition not implemented")
+}
+func (*UnimplementedAttributeMgrServer) UpdateAttributeDefinition(ctx context.Context, req *user.AttributeDefinition) (*user.AttributeDefinition, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAttributeDefinition not implemented")
+}
+func (*UnimplementedAttributeMgrServer) DeleteAttributeDefinition(ctx context.Context, req *user.DeleteAttrRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAttributeDefinition not implemented")
+}
+
 func RegisterAttributeMgrServer(s *grpc.Server, srv AttributeMgrServer) {
 	s.RegisterService(&_AttributeMgr_serviceDesc, srv)
 }
@@ -3588,6 +4102,26 @@ type SegmentationMgrServer interface {
 	ListSegments(context.Context, *common.Id) (*user.Segmentations, error)
 	DeleteSegment(context.Context, *common.Id) (*common.Empty, error)
 	ReadSegment(context.Context, *common.Id) (*user.Segmentation, error)
+}
+
+// UnimplementedSegmentationMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedSegmentationMgrServer struct {
+}
+
+func (*UnimplementedSegmentationMgrServer) CreateSegment(ctx context.Context, req *user.Segmentation) (*user.Segmentation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSegment not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) UpdateSegment(ctx context.Context, req *user.Segmentation) (*user.Segmentation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSegment not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) ListSegments(ctx context.Context, req *common.Id) (*user.Segmentations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSegments not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) DeleteSegment(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSegment not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) ReadSegment(ctx context.Context, req *common.Id) (*user.Segmentation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadSegment not implemented")
 }
 
 func RegisterSegmentationMgrServer(s *grpc.Server, srv SegmentationMgrServer) {
@@ -3764,6 +4298,20 @@ type PermServer interface {
 	ReadPerm(context.Context, *common.ReadPermRequest) (*common.Permission, error)
 }
 
+// UnimplementedPermServer can be embedded to have forward compatible implementations.
+type UnimplementedPermServer struct {
+}
+
+func (*UnimplementedPermServer) Update(ctx context.Context, req *common.UpdatePermRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedPermServer) UpdateState(ctx context.Context, req *common.UpdateStateRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateState not implemented")
+}
+func (*UnimplementedPermServer) ReadPerm(ctx context.Context, req *common.ReadPermRequest) (*common.Permission, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPerm not implemented")
+}
+
 func RegisterPermServer(s *grpc.Server, srv PermServer) {
 	s.RegisterService(&_Perm_serviceDesc, srv)
 }
@@ -3914,6 +4462,26 @@ type ConversationReporterServer interface {
 	GetTotalConversation(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.TotalConversationResponse, error)
 	ReportConversations(context.Context, *conversation.CountReportRequest) (*conversation.ReportResponse, error)
 	ReportAvailibilities(context.Context, *conversation.AvailibilityReportRequest) (*conversation.ReportResponse, error)
+}
+
+// UnimplementedConversationReporterServer can be embedded to have forward compatible implementations.
+type UnimplementedConversationReporterServer struct {
+}
+
+func (*UnimplementedConversationReporterServer) CountConversationsByTags(ctx context.Context, req *conversation.CountByTagsRequest) (*conversation.CountByTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountConversationsByTags not implemented")
+}
+func (*UnimplementedConversationReporterServer) GetAvgResponseTimes(ctx context.Context, req *conversation.AvgResponseTimeRequest) (*conversation.AvgResponseTimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvgResponseTimes not implemented")
+}
+func (*UnimplementedConversationReporterServer) GetTotalConversation(ctx context.Context, req *conversation.AvgResponseTimeRequest) (*conversation.TotalConversationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTotalConversation not implemented")
+}
+func (*UnimplementedConversationReporterServer) ReportConversations(ctx context.Context, req *conversation.CountReportRequest) (*conversation.ReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportConversations not implemented")
+}
+func (*UnimplementedConversationReporterServer) ReportAvailibilities(ctx context.Context, req *conversation.AvailibilityReportRequest) (*conversation.ReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportAvailibilities not implemented")
 }
 
 func RegisterConversationReporterServer(s *grpc.Server, srv ConversationReporterServer) {
@@ -4079,6 +4647,17 @@ type AgentPresenceMgrServer interface {
 	UpdatePresence(context.Context, *common.Id) (*user.Presence, error)
 }
 
+// UnimplementedAgentPresenceMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAgentPresenceMgrServer struct {
+}
+
+func (*UnimplementedAgentPresenceMgrServer) ReadPresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPresence not implemented")
+}
+func (*UnimplementedAgentPresenceMgrServer) UpdatePresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePresence not implemented")
+}
+
 func RegisterAgentPresenceMgrServer(s *grpc.Server, srv AgentPresenceMgrServer) {
 	s.RegisterService(&_AgentPresenceMgr_serviceDesc, srv)
 }
@@ -4207,6 +4786,26 @@ type RuleMgrServer interface {
 	DeleteRule(context.Context, *common.Id) (*common.Empty, error)
 	ReadRule(context.Context, *common.Id) (*conversation.Rule, error)
 	ListRules(context.Context, *common.Id) (*conversation.Route, error)
+}
+
+// UnimplementedRuleMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedRuleMgrServer struct {
+}
+
+func (*UnimplementedRuleMgrServer) UpdateRule(ctx context.Context, req *conversation.Rule) (*conversation.Rule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) CreateRule(ctx context.Context, req *conversation.Rule) (*conversation.Rule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) DeleteRule(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) ReadRule(ctx context.Context, req *common.Id) (*conversation.Rule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) ListRules(ctx context.Context, req *common.Id) (*conversation.Route, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRules not implemented")
 }
 
 func RegisterRuleMgrServer(s *grpc.Server, srv RuleMgrServer) {
@@ -4339,13 +4938,8 @@ type ConversationMgrClient interface {
 	SeenMessage(ctx context.Context, in *conversation.MessageId, opts ...grpc.CallOption) (*common.Empty, error)
 	ReceiveMessage(ctx context.Context, in *conversation.MessageId, opts ...grpc.CallOption) (*common.Empty, error)
 	AckMessage(ctx context.Context, in *conversation.MessageAck, opts ...grpc.CallOption) (*common.Empty, error)
-<<<<<<< HEAD
-	React(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
-	RemoveReaction(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
-=======
 	PongMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
 	EditMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
->>>>>>> [convo] use pong instead of reactions and computed
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	StartConversation(ctx context.Context, in *conversation.StartRequest, opts ...grpc.CallOption) (*conversation.Conversation, error)
 	EndConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error)
@@ -4398,30 +4992,18 @@ func (c *conversationMgrClient) AckMessage(ctx context.Context, in *conversation
 	return out, nil
 }
 
-<<<<<<< HEAD
-func (c *conversationMgrClient) React(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
-	out := new(event.Event)
-	err := c.cc.Invoke(ctx, "/header.ConversationMgr/React", in, out, opts...)
-=======
 func (c *conversationMgrClient) PongMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
 	out := new(event.Event)
 	err := c.cc.Invoke(ctx, "/header.ConversationMgr/PongMessage", in, out, opts...)
->>>>>>> [convo] use pong instead of reactions and computed
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-<<<<<<< HEAD
-func (c *conversationMgrClient) RemoveReaction(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
-	out := new(event.Event)
-	err := c.cc.Invoke(ctx, "/header.ConversationMgr/RemoveReaction", in, out, opts...)
-=======
 func (c *conversationMgrClient) EditMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
 	out := new(event.Event)
 	err := c.cc.Invoke(ctx, "/header.ConversationMgr/EditMessage", in, out, opts...)
->>>>>>> [convo] use pong instead of reactions and computed
 	if err != nil {
 		return nil, err
 	}
@@ -4559,13 +5141,8 @@ type ConversationMgrServer interface {
 	SeenMessage(context.Context, *conversation.MessageId) (*common.Empty, error)
 	ReceiveMessage(context.Context, *conversation.MessageId) (*common.Empty, error)
 	AckMessage(context.Context, *conversation.MessageAck) (*common.Empty, error)
-<<<<<<< HEAD
-	React(context.Context, *event.Event) (*event.Event, error)
-	RemoveReaction(context.Context, *event.Event) (*event.Event, error)
-=======
 	PongMessage(context.Context, *event.Event) (*event.Event, error)
 	EditMessage(context.Context, *event.Event) (*event.Event, error)
->>>>>>> [convo] use pong instead of reactions and computed
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	StartConversation(context.Context, *conversation.StartRequest) (*conversation.Conversation, error)
 	EndConversation(context.Context, *common.Id) (*conversation.Conversation, error)
@@ -4583,8 +5160,6 @@ type ConversationMgrServer interface {
 	SearchConversation(context.Context, *conversation.SearchConversationRequest) (*conversation.SearchConversationResponse, error)
 }
 
-<<<<<<< HEAD
-=======
 // UnimplementedConversationMgrServer can be embedded to have forward compatible implementations.
 type UnimplementedConversationMgrServer struct {
 }
@@ -4647,7 +5222,6 @@ func (*UnimplementedConversationMgrServer) SearchConversation(ctx context.Contex
 	return nil, status.Errorf(codes.Unimplemented, "method SearchConversation not implemented")
 }
 
->>>>>>> [convo] use pong instead of reactions and computed
 func RegisterConversationMgrServer(s *grpc.Server, srv ConversationMgrServer) {
 	s.RegisterService(&_ConversationMgr_serviceDesc, srv)
 }
@@ -4706,11 +5280,7 @@ func _ConversationMgr_AckMessage_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-<<<<<<< HEAD
-func _ConversationMgr_React_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-=======
 func _ConversationMgr_PongMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
->>>>>>> [convo] use pong instead of reactions and computed
 	in := new(event.Event)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -4723,35 +5293,17 @@ func _ConversationMgr_PongMessage_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: "/header.ConversationMgr/PongMessage",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-<<<<<<< HEAD
-		return srv.(ConversationMgrServer).React(ctx, req.(*event.Event))
-=======
 		return srv.(ConversationMgrServer).PongMessage(ctx, req.(*event.Event))
->>>>>>> [convo] use pong instead of reactions and computed
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-<<<<<<< HEAD
-func _ConversationMgr_RemoveReaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-=======
 func _ConversationMgr_EditMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
->>>>>>> [convo] use pong instead of reactions and computed
 	in := new(event.Event)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-<<<<<<< HEAD
-		return srv.(ConversationMgrServer).RemoveReaction(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.ConversationMgr/RemoveReaction",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).RemoveReaction(ctx, req.(*event.Event))
-=======
 		return srv.(ConversationMgrServer).EditMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
@@ -4760,7 +5312,6 @@ func _ConversationMgr_EditMessage_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).EditMessage(ctx, req.(*event.Event))
->>>>>>> [convo] use pong instead of reactions and computed
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5038,13 +5589,8 @@ var _ConversationMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _ConversationMgr_PongMessage_Handler,
 		},
 		{
-<<<<<<< HEAD
-			MethodName: "RemoveReaction",
-			Handler:    _ConversationMgr_RemoveReaction_Handler,
-=======
 			MethodName: "EditMessage",
 			Handler:    _ConversationMgr_EditMessage_Handler,
->>>>>>> [convo] use pong instead of reactions and computed
 		},
 		{
 			MethodName: "StartConversation",
@@ -5178,6 +5724,26 @@ type TemplateMgrServer interface {
 	DeleteTemplate(context.Context, *common.Id) (*common.Empty, error)
 	GetTemplate(context.Context, *common.Id) (*conversation.Template, error)
 	ListTemplates(context.Context, *conversation.SearchTemplate) (*conversation.Templates, error)
+}
+
+// UnimplementedTemplateMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedTemplateMgrServer struct {
+}
+
+func (*UnimplementedTemplateMgrServer) CreateTemplate(ctx context.Context, req *conversation.Template) (*conversation.Template, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) UpdateTemplate(ctx context.Context, req *conversation.Template) (*conversation.Template, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) DeleteTemplate(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) GetTemplate(ctx context.Context, req *common.Id) (*conversation.Template, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) ListTemplates(ctx context.Context, req *conversation.SearchTemplate) (*conversation.Templates, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTemplates not implemented")
 }
 
 func RegisterTemplateMgrServer(s *grpc.Server, srv TemplateMgrServer) {
@@ -5376,6 +5942,26 @@ type TagMgrServer interface {
 	GetTag(context.Context, *common.Id) (*conversation.Tag, error)
 }
 
+// UnimplementedTagMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedTagMgrServer struct {
+}
+
+func (*UnimplementedTagMgrServer) CreateTag(ctx context.Context, req *conversation.Tag) (*conversation.Tag, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
+}
+func (*UnimplementedTagMgrServer) UpdateTag(ctx context.Context, req *conversation.Tag) (*conversation.Tag, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
+}
+func (*UnimplementedTagMgrServer) DeleteTag(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
+}
+func (*UnimplementedTagMgrServer) ListTags(ctx context.Context, req *common.Id) (*conversation.Tags, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTags not implemented")
+}
+func (*UnimplementedTagMgrServer) GetTag(ctx context.Context, req *common.Id) (*conversation.Tag, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTag not implemented")
+}
+
 func RegisterTagMgrServer(s *grpc.Server, srv TagMgrServer) {
 	s.RegisterService(&_TagMgr_serviceDesc, srv)
 }
@@ -5561,6 +6147,23 @@ type IntegrationMgrServer interface {
 	CheckAvailability(context.Context, *conversation.AvailabilityCheckRequest) (*conversation.AvailabilityCheckResult, error)
 }
 
+// UnimplementedIntegrationMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedIntegrationMgrServer struct {
+}
+
+func (*UnimplementedIntegrationMgrServer) Deintegrate(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Deintegrate not implemented")
+}
+func (*UnimplementedIntegrationMgrServer) ListIntegrations(ctx context.Context, req *common.Id) (*conversation.Integrations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrations not implemented")
+}
+func (*UnimplementedIntegrationMgrServer) Integrate(ctx context.Context, req *conversation.Integration) (*conversation.Integration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Integrate not implemented")
+}
+func (*UnimplementedIntegrationMgrServer) CheckAvailability(ctx context.Context, req *conversation.AvailabilityCheckRequest) (*conversation.AvailabilityCheckResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckAvailability not implemented")
+}
+
 func RegisterIntegrationMgrServer(s *grpc.Server, srv IntegrationMgrServer) {
 	s.RegisterService(&_IntegrationMgr_serviceDesc, srv)
 }
@@ -5722,6 +6325,23 @@ type TicketAttributeMgrServer interface {
 	CreateTicketAttributeDefinition(context.Context, *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error)
 	UpdateTicketAttributeDefinition(context.Context, *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error)
 	DeleteTicketAttributeDefinition(context.Context, *conversation.DeleteTicketAttrRequest) (*common.Empty, error)
+}
+
+// UnimplementedTicketAttributeMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedTicketAttributeMgrServer struct {
+}
+
+func (*UnimplementedTicketAttributeMgrServer) ListTicketAttributeDefinitions(ctx context.Context, req *common.Empty) (*conversation.TicketAttributeDefinitions, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTicketAttributeDefinitions not implemented")
+}
+func (*UnimplementedTicketAttributeMgrServer) CreateTicketAttributeDefinition(ctx context.Context, req *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTicketAttributeDefinition not implemented")
+}
+func (*UnimplementedTicketAttributeMgrServer) UpdateTicketAttributeDefinition(ctx context.Context, req *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicketAttributeDefinition not implemented")
+}
+func (*UnimplementedTicketAttributeMgrServer) DeleteTicketAttributeDefinition(ctx context.Context, req *conversation.DeleteTicketAttrRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicketAttributeDefinition not implemented")
 }
 
 func RegisterTicketAttributeMgrServer(s *grpc.Server, srv TicketAttributeMgrServer) {
@@ -5973,6 +6593,47 @@ type TicketMgrServer interface {
 	DeleteSLA(context.Context, *common.Id) (*common.Empty, error)
 	CountTicket(context.Context, *conversation.CountTicketRequest) (*conversation.CountTicketResponse, error)
 	GetAvgResolveTimes(context.Context, *conversation.AvgResolveTimeRequest) (*conversation.AvgResolveTimeResponse, error)
+}
+
+// UnimplementedTicketMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedTicketMgrServer struct {
+}
+
+func (*UnimplementedTicketMgrServer) CreateTicket(ctx context.Context, req *conversation.Ticket) (*conversation.Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) UpdateTicket(ctx context.Context, req *conversation.Ticket) (*conversation.Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) DeleteTicket(ctx context.Context, req *conversation.DeleteTicketRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) GetTicket(ctx context.Context, req *conversation.GetTicketRequest) (*conversation.Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) SearchTicket(ctx context.Context, req *conversation.TicketListRequest) (*conversation.Tickets, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) ListSLAs(ctx context.Context, req *common.Empty) (*conversation.ServiceLevelAgreements, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSLAs not implemented")
+}
+func (*UnimplementedTicketMgrServer) GetSLA(ctx context.Context, req *common.Id) (*conversation.ServiceLevelAgreement, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) CreateSLA(ctx context.Context, req *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) UpdateSLA(ctx context.Context, req *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) DeleteSLA(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) CountTicket(ctx context.Context, req *conversation.CountTicketRequest) (*conversation.CountTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) GetAvgResolveTimes(ctx context.Context, req *conversation.AvgResolveTimeRequest) (*conversation.AvgResolveTimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvgResolveTimes not implemented")
 }
 
 func RegisterTicketMgrServer(s *grpc.Server, srv TicketMgrServer) {
@@ -6325,6 +6986,26 @@ type ClientMgrServer interface {
 	ListAuthorizedClients(context.Context, *common.Id) (*client.AuthorizedClient, error)
 }
 
+// UnimplementedClientMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedClientMgrServer struct {
+}
+
+func (*UnimplementedClientMgrServer) Create(ctx context.Context, req *client.Client) (*client.Client, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedClientMgrServer) Update(ctx context.Context, req *client.Client) (*client.Client, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedClientMgrServer) Read(ctx context.Context, req *client.Client) (*client.Client, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedClientMgrServer) ListIntegratedClients(ctx context.Context, req *common.Id) (*client.AuthorizedClient, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIntegratedClients not implemented")
+}
+func (*UnimplementedClientMgrServer) ListAuthorizedClients(ctx context.Context, req *common.Id) (*client.AuthorizedClient, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAuthorizedClients not implemented")
+}
+
 func RegisterClientMgrServer(s *grpc.Server, srv ClientMgrServer) {
 	s.RegisterService(&_ClientMgr_serviceDesc, srv)
 }
@@ -6530,6 +7211,29 @@ type ServiceContentManagerServer interface {
 	SearchContents(context.Context, *content.SearchContentRequest) (*content.Contents, error)
 	LookupContentsByUrl(context.Context, *content.LookupRequest) (*content.Contents, error)
 	LinkContentsToUrl(context.Context, *content.LinkRequest) (*common.Empty, error)
+}
+
+// UnimplementedServiceContentManagerServer can be embedded to have forward compatible implementations.
+type UnimplementedServiceContentManagerServer struct {
+}
+
+func (*UnimplementedServiceContentManagerServer) UpsertContent(ctx context.Context, req *content.Content) (*content.Content, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertContent not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) DeleteContent(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteContent not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) GetContent(ctx context.Context, req *common.Id) (*content.Content, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetContent not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) SearchContents(ctx context.Context, req *content.SearchContentRequest) (*content.Contents, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchContents not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) LookupContentsByUrl(ctx context.Context, req *content.LookupRequest) (*content.Contents, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LookupContentsByUrl not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) LinkContentsToUrl(ctx context.Context, req *content.LinkRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LinkContentsToUrl not implemented")
 }
 
 func RegisterServiceContentManagerServer(s *grpc.Server, srv ServiceContentManagerServer) {
@@ -6750,6 +7454,26 @@ type DealServiceServer interface {
 	DeletePipeline(context.Context, *common.Id) (*common.Empty, error)
 }
 
+// UnimplementedDealServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedDealServiceServer struct {
+}
+
+func (*UnimplementedDealServiceServer) ListPipelines(ctx context.Context, req *common.Empty) (*deal.Pipelines, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPipelines not implemented")
+}
+func (*UnimplementedDealServiceServer) GetPipeline(ctx context.Context, req *common.Id) (*deal.Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPipeline not implemented")
+}
+func (*UnimplementedDealServiceServer) CreatePipeline(ctx context.Context, req *deal.Pipeline) (*deal.Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePipeline not implemented")
+}
+func (*UnimplementedDealServiceServer) UpdatePipeline(ctx context.Context, req *deal.Pipeline) (*deal.Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePipeline not implemented")
+}
+func (*UnimplementedDealServiceServer) DeletePipeline(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePipeline not implemented")
+}
+
 func RegisterDealServiceServer(s *grpc.Server, srv DealServiceServer) {
 	s.RegisterService(&_DealService_serviceDesc, srv)
 }
@@ -6913,6 +7637,17 @@ type PublisherServer interface {
 	Unsubscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error)
 }
 
+// UnimplementedPublisherServer can be embedded to have forward compatible implementations.
+type UnimplementedPublisherServer struct {
+}
+
+func (*UnimplementedPublisherServer) Subscribe(ctx context.Context, req *event.Subscription) (*event.SubscriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (*UnimplementedPublisherServer) Unsubscribe(ctx context.Context, req *event.Subscription) (*event.SubscriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
+}
+
 func RegisterPublisherServer(s *grpc.Server, srv PublisherServer) {
 	s.RegisterService(&_Publisher_serviceDesc, srv)
 }
@@ -7052,6 +7787,29 @@ type EventMgrServer interface {
 	CreateEvent(context.Context, *event.UserEvent) (*event.Event, error)
 	ReadTopic(context.Context, *user.ReadTopicRequest) (*common.Empty, error)
 	SearchTopics(context.Context, *user.ListTopicsRequest) (*user.ListTopicsResult, error)
+}
+
+// UnimplementedEventMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedEventMgrServer struct {
+}
+
+func (*UnimplementedEventMgrServer) SearchEvents(ctx context.Context, req *event.ListEventsRequest) (*event.Events, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchEvents not implemented")
+}
+func (*UnimplementedEventMgrServer) Subscribe(ctx context.Context, req *user.SubscribeRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (*UnimplementedEventMgrServer) Unsubscribe(ctx context.Context, req *user.SubscribeRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
+}
+func (*UnimplementedEventMgrServer) CreateEvent(ctx context.Context, req *event.UserEvent) (*event.Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateEvent not implemented")
+}
+func (*UnimplementedEventMgrServer) ReadTopic(ctx context.Context, req *user.ReadTopicRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadTopic not implemented")
+}
+func (*UnimplementedEventMgrServer) SearchTopics(ctx context.Context, req *user.ListTopicsRequest) (*user.ListTopicsResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTopics not implemented")
 }
 
 func RegisterEventMgrServer(s *grpc.Server, srv EventMgrServer) {
@@ -7261,6 +8019,23 @@ type ConversationEventReaderServer interface {
 	SearchEvents(context.Context, *conversation.SearchMessageRequest) (*event.Events, error)
 }
 
+// UnimplementedConversationEventReaderServer can be embedded to have forward compatible implementations.
+type UnimplementedConversationEventReaderServer struct {
+}
+
+func (*UnimplementedConversationEventReaderServer) SendMessage(ctx context.Context, req *event.Event) (*event.Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (*UnimplementedConversationEventReaderServer) UpdateMessage(ctx context.Context, req *event.Event) (*event.Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMessage not implemented")
+}
+func (*UnimplementedConversationEventReaderServer) ListEvents(ctx context.Context, req *conversation.ListEventsRequest) (*event.Events, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEvents not implemented")
+}
+func (*UnimplementedConversationEventReaderServer) SearchEvents(ctx context.Context, req *conversation.SearchMessageRequest) (*event.Events, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchEvents not implemented")
+}
+
 func RegisterConversationEventReaderServer(s *grpc.Server, srv ConversationEventReaderServer) {
 	s.RegisterService(&_ConversationEventReader_serviceDesc, srv)
 }
@@ -7413,6 +8188,20 @@ type FileMgrServer interface {
 	Uploaded(context.Context, *file.FileRequest) (*file.File, error)
 }
 
+// UnimplementedFileMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedFileMgrServer struct {
+}
+
+func (*UnimplementedFileMgrServer) Presign(ctx context.Context, req *file.FileHeader) (*file.PresignResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Presign not implemented")
+}
+func (*UnimplementedFileMgrServer) Read(ctx context.Context, req *file.FileRequest) (*file.File, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedFileMgrServer) Uploaded(ctx context.Context, req *file.FileRequest) (*file.File, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Uploaded not implemented")
+}
+
 func RegisterFileMgrServer(s *grpc.Server, srv FileMgrServer) {
 	s.RegisterService(&_FileMgr_serviceDesc, srv)
 }
@@ -7521,6 +8310,14 @@ type KafpcServer interface {
 	Reply(context.Context, *kafpc.Response) (*kafpc.Empty, error)
 }
 
+// UnimplementedKafpcServer can be embedded to have forward compatible implementations.
+type UnimplementedKafpcServer struct {
+}
+
+func (*UnimplementedKafpcServer) Reply(ctx context.Context, req *kafpc.Response) (*kafpc.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Reply not implemented")
+}
+
 func RegisterKafpcServer(s *grpc.Server, srv KafpcServer) {
 	s.RegisterService(&_Kafpc_serviceDesc, srv)
 }
@@ -7605,6 +8402,20 @@ type KVServer interface {
 	Set(context.Context, *kv.Value) (*kv.Value, error)
 	Get(context.Context, *kv.Key) (*kv.Value, error)
 	Has(context.Context, *kv.Key) (*kv.Bool, error)
+}
+
+// UnimplementedKVServer can be embedded to have forward compatible implementations.
+type UnimplementedKVServer struct {
+}
+
+func (*UnimplementedKVServer) Set(ctx context.Context, req *kv.Value) (*kv.Value, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Set not implemented")
+}
+func (*UnimplementedKVServer) Get(ctx context.Context, req *kv.Key) (*kv.Value, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (*UnimplementedKVServer) Has(ctx context.Context, req *kv.Key) (*kv.Bool, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Has not implemented")
 }
 
 func RegisterKVServer(s *grpc.Server, srv KVServer) {
@@ -7726,6 +8537,17 @@ type Noti5ServiceServer interface {
 	UpdateNotificationSetting(context.Context, *noti5.Setting) (*noti5.Setting, error)
 }
 
+// UnimplementedNoti5ServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedNoti5ServiceServer struct {
+}
+
+func (*UnimplementedNoti5ServiceServer) ReadNotificationSetting(ctx context.Context, req *common.Id) (*noti5.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadNotificationSetting not implemented")
+}
+func (*UnimplementedNoti5ServiceServer) UpdateNotificationSetting(ctx context.Context, req *noti5.Setting) (*noti5.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotificationSetting not implemented")
+}
+
 func RegisterNoti5ServiceServer(s *grpc.Server, srv Noti5ServiceServer) {
 	s.RegisterService(&_Noti5Service_serviceDesc, srv)
 }
@@ -7832,6 +8654,20 @@ type Noti5TokenServiceServer interface {
 	AddToken(context.Context, *noti5.Token) (*common.Empty, error)
 	RemoveToken(context.Context, *noti5.Token) (*common.Empty, error)
 	CheckTokenExists(context.Context, *noti5.Token) (*common.Empty, error)
+}
+
+// UnimplementedNoti5TokenServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedNoti5TokenServiceServer struct {
+}
+
+func (*UnimplementedNoti5TokenServiceServer) AddToken(ctx context.Context, req *noti5.Token) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddToken not implemented")
+}
+func (*UnimplementedNoti5TokenServiceServer) RemoveToken(ctx context.Context, req *noti5.Token) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveToken not implemented")
+}
+func (*UnimplementedNoti5TokenServiceServer) CheckTokenExists(ctx context.Context, req *noti5.Token) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckTokenExists not implemented")
 }
 
 func RegisterNoti5TokenServiceServer(s *grpc.Server, srv Noti5TokenServiceServer) {
@@ -7997,6 +8833,29 @@ type NotiboxServiceServer interface {
 	ListNotis(context.Context, *notibox.ListRequest) (*notibox.Notifications, error)
 	UpdateNotibox(context.Context, *notibox.Notibox) (*notibox.Notibox, error)
 	ReadNotibox(context.Context, *common.Id) (*notibox.Notibox, error)
+}
+
+// UnimplementedNotiboxServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedNotiboxServiceServer struct {
+}
+
+func (*UnimplementedNotiboxServiceServer) ReadTopics(ctx context.Context, req *notibox.TopicRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadTopics not implemented")
+}
+func (*UnimplementedNotiboxServiceServer) SeenTopics(ctx context.Context, req *notibox.TopicRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SeenTopics not implemented")
+}
+func (*UnimplementedNotiboxServiceServer) UnreadTopics(ctx context.Context, req *notibox.TopicRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnreadTopics not implemented")
+}
+func (*UnimplementedNotiboxServiceServer) ListNotis(ctx context.Context, req *notibox.ListRequest) (*notibox.Notifications, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListNotis not implemented")
+}
+func (*UnimplementedNotiboxServiceServer) UpdateNotibox(ctx context.Context, req *notibox.Notibox) (*notibox.Notibox, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotibox not implemented")
+}
+func (*UnimplementedNotiboxServiceServer) ReadNotibox(ctx context.Context, req *common.Id) (*notibox.Notibox, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadNotibox not implemented")
 }
 
 func RegisterNotiboxServiceServer(s *grpc.Server, srv NotiboxServiceServer) {
@@ -8182,6 +9041,17 @@ func (c *subizInternalPaymentMgrClient) UpdateExchangeRate(ctx context.Context, 
 type SubizInternalPaymentMgrServer interface {
 	CreateBill(context.Context, *payment.Bill) (*payment.Bill, error)
 	UpdateExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error)
+}
+
+// UnimplementedSubizInternalPaymentMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedSubizInternalPaymentMgrServer struct {
+}
+
+func (*UnimplementedSubizInternalPaymentMgrServer) CreateBill(ctx context.Context, req *payment.Bill) (*payment.Bill, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBill not implemented")
+}
+func (*UnimplementedSubizInternalPaymentMgrServer) UpdateExchangeRate(ctx context.Context, req *payment.ExchangeRate) (*payment.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateExchangeRate not implemented")
 }
 
 func RegisterSubizInternalPaymentMgrServer(s *grpc.Server, srv SubizInternalPaymentMgrServer) {
@@ -8653,6 +9523,119 @@ type PaymentMgrServer interface {
 	ListBillByAccountReferred(context.Context, *common.Id) (*payment.LogBillByAccountReferreds, error)
 	ListPaidForAgentReferrer(context.Context, *common.Id) (*payment.LogPaidForAgentReferrers, error)
 	PaidForAgentReferrer(context.Context, *payment.LogPaidForAgentReferrer) (*common.Empty, error)
+}
+
+// UnimplementedPaymentMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedPaymentMgrServer struct {
+}
+
+func (*UnimplementedPaymentMgrServer) Purchase(ctx context.Context, req *payment.Subscription) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Purchase not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdateSubscription(ctx context.Context, req *payment.Subscription) (*payment.Subscription, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubscription not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetSubscription(ctx context.Context, req *common.Id) (*payment.Subscription, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSubscription not implemented")
+}
+func (*UnimplementedPaymentMgrServer) AddPaymentMethod(ctx context.Context, req *payment.PaymentMethod) (*payment.PaymentMethod, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPaymentMethod not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdatePaymentMethod(ctx context.Context, req *payment.PaymentMethod) (*payment.PaymentMethod, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DeletePaymentMethod(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePaymentMethod not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPaymentMethods(ctx context.Context, req *common.Id) (*payment.PaymentMethods, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentMethods not implemented")
+}
+func (*UnimplementedPaymentMgrServer) Pay(ctx context.Context, req *payment.PayRequest) (*payment.Bill, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListInvoices(ctx context.Context, req *common.Id) (*payment.Invoices, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListInvoices not implemented")
+}
+func (*UnimplementedPaymentMgrServer) CreateInvoice(ctx context.Context, req *payment.Invoice) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdateInvoice(ctx context.Context, req *payment.Invoice) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) FilterInvoices(ctx context.Context, req *payment.ListInvoiceRequest) (*payment.Invoices, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FilterInvoices not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DraftInvoice(ctx context.Context, req *payment.Subscription) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DraftInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DiffSubscriptions(ctx context.Context, req *payment.DiffSubRequest) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DiffSubscriptions not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListComments(ctx context.Context, req *payment.ListCommentsRequest) (*payment.Comments, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListComments not implemented")
+}
+func (*UnimplementedPaymentMgrServer) AddComment(ctx context.Context, req *payment.Comment) (*payment.Comment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPlans(ctx context.Context, req *common.Empty) (*payment.Plans, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPlans not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ExportInvoice(ctx context.Context, req *common.Id) (*payment.String, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ConvertInvoiceToHtml(ctx context.Context, req *payment.Invoice) (*payment.String, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConvertInvoiceToHtml not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetExchangeRate(ctx context.Context, req *payment.ExchangeRate) (*payment.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
+}
+func (*UnimplementedPaymentMgrServer) TransferMoney(ctx context.Context, req *payment.PayRequest) (*payment.Bill, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferMoney not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListLogs(ctx context.Context, req *payment.ListLogsRequest) (*payment.Logs, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
+}
+func (*UnimplementedPaymentMgrServer) CreatePromotionCode(ctx context.Context, req *payment.PromotionCode) (*payment.PromotionCode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetPromotionCode(ctx context.Context, req *payment.String) (*payment.PromotionCode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UsePromotionCode(ctx context.Context, req *payment.PromotionCodeRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UsePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ValidatePromotionCode(ctx context.Context, req *payment.PromotionCodeRequest) (*payment.PromotionCode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidatePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPromotionCode(ctx context.Context, req *payment.ListPromotionCodeRequest) (*payment.PromotionCodes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DeletePromotionCode(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) SearchReferral(ctx context.Context, req *payment.SearchReferredRequest) (*payment.Referral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetReferral(ctx context.Context, req *common.Id) (*payment.Referral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListTopReferral(ctx context.Context, req *common.Empty) (*payment.ReferralResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTopReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdateReferral(ctx context.Context, req *payment.Referral) (*payment.Referral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListAccountReferred(ctx context.Context, req *common.Id) (*payment.LogAccountReferreds, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccountReferred not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListBillByAccountReferred(ctx context.Context, req *common.Id) (*payment.LogBillByAccountReferreds, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillByAccountReferred not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPaidForAgentReferrer(ctx context.Context, req *common.Id) (*payment.LogPaidForAgentReferrers, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPaidForAgentReferrer not implemented")
+}
+func (*UnimplementedPaymentMgrServer) PaidForAgentReferrer(ctx context.Context, req *payment.LogPaidForAgentReferrer) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PaidForAgentReferrer not implemented")
 }
 
 func RegisterPaymentMgrServer(s *grpc.Server, srv PaymentMgrServer) {
@@ -9489,6 +10472,14 @@ type PlaceHolderServer interface {
 	Resolve(context.Context, *placeholder.ResolveRequest) (*placeholder.Resolved, error)
 }
 
+// UnimplementedPlaceHolderServer can be embedded to have forward compatible implementations.
+type UnimplementedPlaceHolderServer struct {
+}
+
+func (*UnimplementedPlaceHolderServer) Resolve(ctx context.Context, req *placeholder.ResolveRequest) (*placeholder.Resolved, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Resolve not implemented")
+}
+
 func RegisterPlaceHolderServer(s *grpc.Server, srv PlaceHolderServer) {
 	s.RegisterService(&_PlaceHolder_serviceDesc, srv)
 }
@@ -9562,6 +10553,17 @@ func (c *pubsubClient) Unsubscribe(ctx context.Context, in *pubsub.Subscription,
 type PubsubServer interface {
 	Subscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
 	Unsubscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
+}
+
+// UnimplementedPubsubServer can be embedded to have forward compatible implementations.
+type UnimplementedPubsubServer struct {
+}
+
+func (*UnimplementedPubsubServer) Subscribe(ctx context.Context, req *pubsub.Subscription) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (*UnimplementedPubsubServer) Unsubscribe(ctx context.Context, req *pubsub.Subscription) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
 }
 
 func RegisterPubsubServer(s *grpc.Server, srv PubsubServer) {
@@ -9681,6 +10683,23 @@ type WidgetServiceServer interface {
 	Update(context.Context, *widget.Setting) (*widget.Setting, error)
 	ReadUserSetting(context.Context, *common.Id) (*widget.UserSetting, error)
 	UpdateUserSetting(context.Context, *widget.UserSetting) (*widget.UserSetting, error)
+}
+
+// UnimplementedWidgetServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedWidgetServiceServer struct {
+}
+
+func (*UnimplementedWidgetServiceServer) Read(ctx context.Context, req *common.Id) (*widget.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedWidgetServiceServer) Update(ctx context.Context, req *widget.Setting) (*widget.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ReadUserSetting(ctx context.Context, req *common.Id) (*widget.UserSetting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadUserSetting not implemented")
+}
+func (*UnimplementedWidgetServiceServer) UpdateUserSetting(ctx context.Context, req *widget.UserSetting) (*widget.UserSetting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserSetting not implemented")
 }
 
 func RegisterWidgetServiceServer(s *grpc.Server, srv WidgetServiceServer) {
@@ -9824,6 +10843,17 @@ type ServiceAvatarManagerServer interface {
 	UpsertAvatar(context.Context, *avatar.Avatar) (*common.Empty, error)
 }
 
+// UnimplementedServiceAvatarManagerServer can be embedded to have forward compatible implementations.
+type UnimplementedServiceAvatarManagerServer struct {
+}
+
+func (*UnimplementedServiceAvatarManagerServer) GetAvatar(ctx context.Context, req *common.Id) (*avatar.Avatar, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvatar not implemented")
+}
+func (*UnimplementedServiceAvatarManagerServer) UpsertAvatar(ctx context.Context, req *avatar.Avatar) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertAvatar not implemented")
+}
+
 func RegisterServiceAvatarManagerServer(s *grpc.Server, srv ServiceAvatarManagerServer) {
 	s.RegisterService(&_ServiceAvatarManager_serviceDesc, srv)
 }
@@ -9963,6 +10993,29 @@ type WebhookServiceServer interface {
 	Update(context.Context, *client.Webhook) (*client.Webhook, error)
 	Create(context.Context, *client.Webhook) (*client.Webhook, error)
 	Test(context.Context, *common.Id) (*client.WebhookTestResult, error)
+}
+
+// UnimplementedWebhookServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedWebhookServiceServer struct {
+}
+
+func (*UnimplementedWebhookServiceServer) Read(ctx context.Context, req *common.Id) (*client.Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Delete(ctx context.Context, req *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (*UnimplementedWebhookServiceServer) List(ctx context.Context, req *common.Id) (*client.Webhooks, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Update(ctx context.Context, req *client.Webhook) (*client.Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Create(ctx context.Context, req *client.Webhook) (*client.Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Test(ctx context.Context, req *common.Id) (*client.WebhookTestResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Test not implemented")
 }
 
 func RegisterWebhookServiceServer(s *grpc.Server, srv WebhookServiceServer) {

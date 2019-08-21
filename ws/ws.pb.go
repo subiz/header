@@ -19,11 +19,11 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Subscribe struct {
-	// common.Context ctx = 1;
-	// optional string connection_id = 2;
+	//common.Context ctx = 1;
+	//optional string connection_id = 2;
 	Events               []string `protobuf:"bytes,3,rep,name=events,proto3" json:"events,omitempty"`
 	ConnectionId         string   `protobuf:"bytes,5,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
