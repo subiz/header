@@ -99,6 +99,8 @@ service UserMgr {
 	rpc MergeUsers(user.MergeRequest) returns (common.Empty);
 	rpc ReadAllTopics(common.Id) returns (common.Empty);
 	rpc ExportUsers (user.UserExportRequest) returns (common.Empty);
+
+	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse);
 }
 
 service VisitorMgr {
@@ -118,6 +120,7 @@ service NoteMgr {
 	rpc AddNote(user.Note) returns (user.Note);
 	rpc UpdateNote(user.Note) returns (user.Note);
 	rpc DeleteNote(user.DeleteNoteRequest) returns (common.Empty);
+	rpc GetNote(user.GetNoteRequest) returns (user.Note);
 }
 
 service AutomationMgr {
