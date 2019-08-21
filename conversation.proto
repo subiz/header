@@ -237,16 +237,6 @@ message ListConversationsByUserRequest {
 	optional int32 limit = 5;
 }
 
-message Reaction {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string member_id = 5;
-	optional string event_id = 6;
-	optional string type = 7; // like, love, haha, wow, sad, angry
-	optional int64 created = 9;
-}
-
 message EsMessage {
 	optional string id = 2;
 	optional string account_id = 3;
@@ -265,11 +255,33 @@ message Message {
 	optional string text = 2;
 	optional string format = 3;
 	repeated Attachment attachments = 4;
-	repeated Reaction reactions = 7;
+
 	repeated Field fields =	10;
-	optional Computed computed = 12;
+
+	optional Computed computed = 12; // DELETE THIS
 	optional string integration_id = 15;
 	optional string chain_id = 16;
+
+	// used for reaction and delivery status, could be ignore
+	repeated MessagePong pongs = 17;
+
+	repeated Revision revisions = 18;
+}
+
+message MessagePong {
+	optional string member_id = 3;
+	optional string type = 4; // ack, seen, receive, delete, like, love, haha, wow, sad, angry, remove_like, remove_love, remove_wow, remove_haha, remove_sad, remove_angry
+
+	optional int64 created = 5;
+	optional string ack_error = 6; // used in ack
+}
+
+message Revision {
+	optional string text = 5;
+	optional string format = 6;
+	repeated Attachment attachments = 7;
+	repeated Field fields =	8;
+	optional int64 created = 9;
 }
 
 message Computed {
@@ -406,6 +418,8 @@ enum AttachmentType {
 	fallback = 11;
 	content_template = 12;
 	quick_replies = 13;
+
+	command = 14;
 }
 
 message Attachment {

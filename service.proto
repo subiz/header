@@ -178,12 +178,12 @@ service RuleMgr {
 }
 
 service ConversationMgr {
-	rpc SeenMessage(conversation.MessageId) returns (common.Empty);
-	rpc ReceiveMessage(conversation.MessageId) returns (common.Empty);
-	rpc AckMessage(conversation.MessageAck) returns (common.Empty);
+	rpc SeenMessage(conversation.MessageId) returns (common.Empty); // should be remove
+	rpc ReceiveMessage(conversation.MessageId) returns (common.Empty); // should be remove
+	rpc AckMessage(conversation.MessageAck) returns (common.Empty); // should be remove
 
-	rpc React(event.Event) returns (event.Event);
-	rpc RemoveReaction(event.Event) returns (event.Event);
+	rpc PongMessage(event.Event) returns (event.Event);
+	rpc EditMessage(event.Event) returns (event.Event);
 
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(conversation.StartRequest) returns (conversation.Conversation);
