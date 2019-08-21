@@ -268,9 +268,29 @@ message Message {
 	repeated Revision revisions = 18;
 }
 
+
 message MessagePong {
 	optional string member_id = 3;
-	optional string type = 4; // ack, seen, receive, delete, like, love, haha, wow, sad, angry, remove_like, remove_love, remove_wow, remove_haha, remove_sad, remove_angry
+
+	enum Type {
+		ack = 1;
+		seen = 2;
+		receive = 3;
+		delete = 4;
+		like = 5;
+		love = 6;
+		haha = 7;
+		wow = 8;
+		sad = 9;
+		angry = 10;
+		remove_like = 11;
+		remove_love = 12;
+		remove_wow = 13;
+		remove_haha = 14;
+		remove_sad = 15;
+		remove_angry = 16;
+	}
+	optional string type = 4;
 
 	optional int64 created = 5;
 	optional string ack_error = 6; // used in ack

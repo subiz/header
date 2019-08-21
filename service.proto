@@ -183,7 +183,6 @@ service ConversationMgr {
 	rpc AckMessage(conversation.MessageAck) returns (common.Empty); // should be remove
 
 	rpc PongMessage(event.Event) returns (event.Event);
-	rpc EditMessage(event.Event) returns (event.Event);
 
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(conversation.StartRequest) returns (conversation.Conversation);
