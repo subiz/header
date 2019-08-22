@@ -14,7 +14,7 @@ message Clients {
 message Client {
 	optional common.Context ctx = 1;
 	optional string id = 3;
-	// secre used to authorize client with oauth2 server
+	// secret used to authorize client with oauth2 server
 	optional string secret = 4;
 	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
 	optional string logo_url = 5;
@@ -44,8 +44,11 @@ message Client {
 	enum ChannelType {
 		subiz = 0;
 		email = 1;
-		facebook = 2;
+		facebook = 2; // ott
 		viber = 3;
+		facebook_comment = 4; // public, dont close
+		zalo = 5;
+		call = 6;
 	}
 
 	optional string availability_uri = 22;

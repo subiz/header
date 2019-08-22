@@ -29,7 +29,6 @@ service ApiServer {
 }
 
 // account services
-
 service AccSubMgr {
 	rpc SearchSub(account.SearchSubRequest) returns (account.AccSubs);
 }
@@ -155,7 +154,6 @@ service Perm {
 }
 
 // conversation services
-
 service ConversationReporter {
 	rpc CountConversationsByTags(conversation.CountByTagsRequest) returns (conversation.CountByTagsResponse);
 	rpc GetAvgResponseTimes(conversation.AvgResponseTimeRequest) returns (conversation.AvgResponseTimeResponse);
@@ -246,7 +244,6 @@ service TicketMgr {
 }
 
 // client services
-
 service ClientMgr {
 	rpc Create(client.Client) returns (client.Client);
 	rpc Update(client.Client) returns (client.Client);
@@ -256,7 +253,6 @@ service ClientMgr {
 }
 
 // content services
-
 service ServiceContentManager {
 	rpc UpsertContent(content.Content) returns (content.Content);
 	rpc DeleteContent(common.Id) returns (common.Empty);
@@ -298,7 +294,6 @@ service ConversationEventReader {
 }
 
 // file services
-
 service FileMgr {
 	rpc Presign(file.FileHeader) returns (file.PresignResult);
 	rpc Read(file.FileRequest) returns (file.File);
@@ -311,7 +306,6 @@ service Kafpc {
 }
 
 // kv services
-
 service KV {
 	rpc Set(kv.Value) returns (kv.Value);
 	rpc Get(kv.Key) returns (kv.Value);
@@ -319,7 +313,6 @@ service KV {
 }
 
 // noti5 services
-
 service Noti5Service {
 	rpc ReadNotificationSetting(common.Id) returns (noti5.Setting);
 	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
@@ -344,7 +337,6 @@ service NotiboxService {
 }
 
 // payment services
-
 service SubizInternalPaymentMgr {
 	rpc CreateBill(payment.Bill) returns (payment.Bill);
 	rpc UpdateExchangeRate(payment.ExchangeRate) returns (payment.ExchangeRate);
@@ -392,11 +384,9 @@ service PaymentMgr {
 }
 
 // placeholder services
-
 service PlaceHolder {
 	rpc Resolve(placeholder.ResolveRequest) returns (placeholder.Resolved) {}
 }
-
 
 // pubsub services
 service Pubsub {
