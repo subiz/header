@@ -189,6 +189,17 @@ message FbPageRet {
 	repeated FbPageEntry data = 2;
 }
 
+message FbProfilePicData  {
+	optional int64 height = 2;
+	optional int64 width = 3;
+	optional bool is_silhouette = 4;
+	optional string url = 5;
+}
+
+message FbProfilePic {
+	optional FbProfilePicData Data = 2;
+}
+
 message FacebookUser {
 	optional string first_name = 2;
 	optional string last_name = 4;
@@ -196,6 +207,7 @@ message FacebookUser {
 	optional string locale = 6;
 	optional float timezone = 7;
 	optional string gender = 8;
+	optional FbProfilePic picture = 9;
 }
 
 message Fb2SbEvent {
