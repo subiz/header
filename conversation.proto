@@ -288,6 +288,8 @@ message MessagePong {
 		remove_haha = 14;
 		remove_sad = 15;
 		remove_angry = 16;
+		hide = 17;
+		remove_hide = 18;
 	}
 	optional string type = 4;
 
