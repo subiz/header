@@ -1113,3 +1113,17 @@ message UpdateUserSegmentRequest {
 	repeated string segment_ids = 4; // all segment ids
 	optional string conversation_id = 5;
 }
+
+message ESTicket {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string id = 4;
+	optional string state = 5;
+	optional string priority = 6;
+	optional int64 duedate = 7;
+	optional int64 created = 9; // unix seconds
+	repeated string user_ids = 12;
+	repeated string agent_ids = 13;
+	repeated string tag_ids = 17;
+}

@@ -26,7 +26,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type AccountType int32
 
@@ -228,7 +228,7 @@ const (
 	ConvoType_conversation_left          ConvoType = 4
 	ConvoType_conversation_tagged        ConvoType = 6
 	ConvoType_conversation_untagged      ConvoType = 7
-	//conversation_waiting = 8;
+	// conversation_waiting = 8;
 	ConvoType_channel_deintegrated    ConvoType = 20
 	ConvoType_channel_integrated      ConvoType = 21
 	ConvoType_message_seen            ConvoType = 30

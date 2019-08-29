@@ -20,7 +20,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type AccessLog_Action int32
 
@@ -227,7 +227,7 @@ type AccessLog struct {
 	CountryCode   string `protobuf:"bytes,11,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
 	ContinentCode string `protobuf:"bytes,12,opt,name=continent_code,json=continentCode,proto3" json:"continent_code,omitempty"`
 	ContinentName string `protobuf:"bytes,13,opt,name=continent_name,json=continentName,proto3" json:"continent_name,omitempty"`
-	//optional string coutry_code = 14;
+	// optional string coutry_code = 14;
 	Latitude             float32  `protobuf:"fixed32,15,opt,name=latitude,proto3" json:"latitude,omitempty"`
 	Longitude            float32  `protobuf:"fixed32,16,opt,name=longitude,proto3" json:"longitude,omitempty"`
 	PostalCode           string   `protobuf:"bytes,17,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`

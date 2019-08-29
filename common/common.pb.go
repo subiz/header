@@ -18,7 +18,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Env int32
 
@@ -1984,7 +1984,7 @@ func (m *AccessToken) GetPermission() *Permission {
 }
 
 type User struct {
-	//	optioanl common.Context ctx = 1;
+	// 	optioanl common.Context ctx = 1;
 	Id                   string   `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	AccountId            string   `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Email                string   `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`

@@ -4,7 +4,6 @@
 package header
 
 import (
-	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	account "github.com/subiz/header/account"
@@ -26,9 +25,8 @@ import (
 	pubsub "github.com/subiz/header/pubsub"
 	user "github.com/subiz/header/user"
 	widget "github.com/subiz/header/widget"
+	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	math "math"
 )
 
@@ -41,7 +39,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 func init() { proto.RegisterFile("service.proto", fileDescriptor_a0b84a42fa06f626) }
 
@@ -322,14 +320,6 @@ type ApiServerServer interface {
 	Call(context.Context, *api.Request) (*api.Response, error)
 }
 
-// UnimplementedApiServerServer can be embedded to have forward compatible implementations.
-type UnimplementedApiServerServer struct {
-}
-
-func (*UnimplementedApiServerServer) Call(ctx context.Context, req *api.Request) (*api.Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Call not implemented")
-}
-
 func RegisterApiServerServer(s *grpc.Server, srv ApiServerServer) {
 	s.RegisterService(&_ApiServer_serviceDesc, srv)
 }
@@ -392,14 +382,6 @@ func (c *accSubMgrClient) SearchSub(ctx context.Context, in *account.SearchSubRe
 // AccSubMgrServer is the server API for AccSubMgr service.
 type AccSubMgrServer interface {
 	SearchSub(context.Context, *account.SearchSubRequest) (*account.AccSubs, error)
-}
-
-// UnimplementedAccSubMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedAccSubMgrServer struct {
-}
-
-func (*UnimplementedAccSubMgrServer) SearchSub(ctx context.Context, req *account.SearchSubRequest) (*account.AccSubs, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchSub not implemented")
 }
 
 func RegisterAccSubMgrServer(s *grpc.Server, srv AccSubMgrServer) {
@@ -761,95 +743,6 @@ type AccountMgrServer interface {
 	QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error)
 	IntegrateBot(context.Context, *account.Agent) (*account.Agent, error)
 	SyncPublicHolidays(context.Context, *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error)
-}
-
-// UnimplementedAccountMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedAccountMgrServer struct {
-}
-
-func (*UnimplementedAccountMgrServer) CreateGroup(ctx context.Context, req *account.AgentGroup) (*account.AgentGroup, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateGroup not implemented")
-}
-func (*UnimplementedAccountMgrServer) UpdateGroup(ctx context.Context, req *account.AgentGroup) (*account.AgentGroup, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateGroup not implemented")
-}
-func (*UnimplementedAccountMgrServer) GetGroup(ctx context.Context, req *common.Id) (*account.AgentGroup, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetGroup not implemented")
-}
-func (*UnimplementedAccountMgrServer) RequestResetPassword(ctx context.Context, req *account.ResetPasswordRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RequestResetPassword not implemented")
-}
-func (*UnimplementedAccountMgrServer) UpdatePassword(ctx context.Context, req *account.NewPassword) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
-}
-func (*UnimplementedAccountMgrServer) UpdateAgent(ctx context.Context, req *account.Agent) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgent not implemented")
-}
-func (*UnimplementedAccountMgrServer) DeleteAgent(ctx context.Context, req *common.Id) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAgent not implemented")
-}
-func (*UnimplementedAccountMgrServer) RequestChangeEmail(ctx context.Context, req *account.Agent) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RequestChangeEmail not implemented")
-}
-func (*UnimplementedAccountMgrServer) ConfirmChangeEmail(ctx context.Context, req *account.Token) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfirmChangeEmail not implemented")
-}
-func (*UnimplementedAccountMgrServer) AcceptInvitation(ctx context.Context, req *account.NewPassword) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AcceptInvitation not implemented")
-}
-func (*UnimplementedAccountMgrServer) GetInvitation(ctx context.Context, req *account.Token) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetInvitation not implemented")
-}
-func (*UnimplementedAccountMgrServer) InviteAgent(ctx context.Context, req *account.Agent) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method InviteAgent not implemented")
-}
-func (*UnimplementedAccountMgrServer) GetAgent(ctx context.Context, req *common.Id) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAgent not implemented")
-}
-func (*UnimplementedAccountMgrServer) ConfirmAccount(ctx context.Context, req *account.Token) (*account.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConfirmAccount not implemented")
-}
-func (*UnimplementedAccountMgrServer) GetAccount(ctx context.Context, req *common.Id) (*account.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
-}
-func (*UnimplementedAccountMgrServer) UpdateAccount(ctx context.Context, req *account.Account) (*account.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
-}
-func (*UnimplementedAccountMgrServer) CreateAccount(ctx context.Context, req *account.CreateAccountRequest) (*account.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
-}
-func (*UnimplementedAccountMgrServer) ListAgents(ctx context.Context, req *common.Id) (*account.Agents, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAgents not implemented")
-}
-func (*UnimplementedAccountMgrServer) CheckLogin(ctx context.Context, req *account.LoginRequest) (*common.Id, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckLogin not implemented")
-}
-func (*UnimplementedAccountMgrServer) Login(ctx context.Context, req *account.LoginRequest) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
-}
-func (*UnimplementedAccountMgrServer) DeleteGroup(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
-}
-func (*UnimplementedAccountMgrServer) ListGroups(ctx context.Context, req *common.Id) (*account.AgentGroups, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListGroups not implemented")
-}
-func (*UnimplementedAccountMgrServer) AddAgentToGroup(ctx context.Context, req *account.GroupMember) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddAgentToGroup not implemented")
-}
-func (*UnimplementedAccountMgrServer) RemoveAgentFromGroup(ctx context.Context, req *account.GroupMember) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveAgentFromGroup not implemented")
-}
-func (*UnimplementedAccountMgrServer) ChangeEmail(ctx context.Context, req *account.Agent) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ChangeEmail not implemented")
-}
-func (*UnimplementedAccountMgrServer) QueryByObjectPath(ctx context.Context, req *common.ObjectPathRequest) (*common.Ids, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryByObjectPath not implemented")
-}
-func (*UnimplementedAccountMgrServer) IntegrateBot(ctx context.Context, req *account.Agent) (*account.Agent, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method IntegrateBot not implemented")
-}
-func (*UnimplementedAccountMgrServer) SyncPublicHolidays(ctx context.Context, req *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SyncPublicHolidays not implemented")
 }
 
 func RegisterAccountMgrServer(s *grpc.Server, srv AccountMgrServer) {
@@ -1598,38 +1491,6 @@ type CurrencyMgrServer interface {
 	DeleteExchangeRate(context.Context, *account.ExchangeRateRequest) (*common.Empty, error)
 }
 
-// UnimplementedCurrencyMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedCurrencyMgrServer struct {
-}
-
-func (*UnimplementedCurrencyMgrServer) ListCurrencies(ctx context.Context, req *common.Empty) (*account.Currencies, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) GetCurrency(ctx context.Context, req *common.Id) (*account.Currency, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCurrency not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) CreateCurrency(ctx context.Context, req *account.Currency) (*account.Currency, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateCurrency not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) UpdateCurrency(ctx context.Context, req *account.Currency) (*account.Currency, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateCurrency not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) DeleteCurrency(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteCurrency not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) ListExchangeRates(ctx context.Context, req *account.ExchangeRateRequest) (*account.ExchangeRates, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) GetExchangeRate(ctx context.Context, req *account.ExchangeRateRequest) (*account.ExchangeRate, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) CreateExchangeRate(ctx context.Context, req *account.ExchangeRate) (*account.ExchangeRate, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateExchangeRate not implemented")
-}
-func (*UnimplementedCurrencyMgrServer) DeleteExchangeRate(ctx context.Context, req *account.ExchangeRateRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteExchangeRate not implemented")
-}
-
 func RegisterCurrencyMgrServer(s *grpc.Server, srv CurrencyMgrServer) {
 	s.RegisterService(&_CurrencyMgr_serviceDesc, srv)
 }
@@ -2015,53 +1876,6 @@ type UserMgrServer interface {
 	SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error)
 }
 
-// UnimplementedUserMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedUserMgrServer struct {
-}
-
-func (*UnimplementedUserMgrServer) SearchUsers(ctx context.Context, req *user.UserSearchRequest) (*user.UserSearchResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchUsers not implemented")
-}
-func (*UnimplementedUserMgrServer) PickToSegmentation(ctx context.Context, req *user.PickRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PickToSegmentation not implemented")
-}
-func (*UnimplementedUserMgrServer) DeleteFromSegmentation(ctx context.Context, req *user.UnpickRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteFromSegmentation not implemented")
-}
-func (*UnimplementedUserMgrServer) CreateUser(ctx context.Context, req *user.User) (*common.Id, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
-}
-func (*UnimplementedUserMgrServer) UpdateUser(ctx context.Context, req *user.User) (*common.Id, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
-}
-func (*UnimplementedUserMgrServer) ReadUser(ctx context.Context, req *common.Id) (*user.User, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadUser not implemented")
-}
-func (*UnimplementedUserMgrServer) CountSegmentationUserByAttribute(ctx context.Context, req *user.CountSegmentationUserByAttributeRequest) (*user.CountResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CountSegmentationUserByAttribute not implemented")
-}
-func (*UnimplementedUserMgrServer) CountTotal(ctx context.Context, req *user.CountTotalRequest) (*user.CountTotalResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CountTotal not implemented")
-}
-func (*UnimplementedUserMgrServer) Ping(ctx context.Context, req *common.PingRequest) (*common.Pong, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
-}
-func (*UnimplementedUserMgrServer) AddAlias(ctx context.Context, req *user.Alias) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddAlias not implemented")
-}
-func (*UnimplementedUserMgrServer) MergeUsers(ctx context.Context, req *user.MergeRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MergeUsers not implemented")
-}
-func (*UnimplementedUserMgrServer) ReadAllTopics(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadAllTopics not implemented")
-}
-func (*UnimplementedUserMgrServer) ExportUsers(ctx context.Context, req *user.UserExportRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExportUsers not implemented")
-}
-func (*UnimplementedUserMgrServer) SearchNote(ctx context.Context, req *user.SearchNoteRequest) (*user.SearchNoteResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchNote not implemented")
-}
-
 func RegisterUserMgrServer(s *grpc.Server, srv UserMgrServer) {
 	s.RegisterService(&_UserMgr_serviceDesc, srv)
 }
@@ -2445,23 +2259,6 @@ type VisitorMgrServer interface {
 	ListTopVisitors(context.Context, *common.Id) (*user.Visitors, error)
 }
 
-// UnimplementedVisitorMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedVisitorMgrServer struct {
-}
-
-func (*UnimplementedVisitorMgrServer) ReadPresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadPresence not implemented")
-}
-func (*UnimplementedVisitorMgrServer) UpdatePresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePresence not implemented")
-}
-func (*UnimplementedVisitorMgrServer) ReadPreview(ctx context.Context, req *common.Id) (*user.LastView, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadPreview not implemented")
-}
-func (*UnimplementedVisitorMgrServer) ListTopVisitors(ctx context.Context, req *common.Id) (*user.Visitors, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTopVisitors not implemented")
-}
-
 func RegisterVisitorMgrServer(s *grpc.Server, srv VisitorMgrServer) {
 	s.RegisterService(&_VisitorMgr_serviceDesc, srv)
 }
@@ -2603,17 +2400,6 @@ type AutomationCreditMgrServer interface {
 	AddAutomationCredit(context.Context, *event.AutomationCredit) (*common.Empty, error)
 }
 
-// UnimplementedAutomationCreditMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedAutomationCreditMgrServer struct {
-}
-
-func (*UnimplementedAutomationCreditMgrServer) GetAutomationCredit(ctx context.Context, req *common.Id) (*event.AutomationCredit, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAutomationCredit not implemented")
-}
-func (*UnimplementedAutomationCreditMgrServer) AddAutomationCredit(ctx context.Context, req *event.AutomationCredit) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddAutomationCredit not implemented")
-}
-
 func RegisterAutomationCreditMgrServer(s *grpc.Server, srv AutomationCreditMgrServer) {
 	s.RegisterService(&_AutomationCreditMgr_serviceDesc, srv)
 }
@@ -2753,29 +2539,6 @@ type NoteMgrServer interface {
 	DeleteNote(context.Context, *user.DeleteNoteRequest) (*common.Empty, error)
 	GetNote(context.Context, *user.GetNoteRequest) (*user.Note, error)
 	SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error)
-}
-
-// UnimplementedNoteMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedNoteMgrServer struct {
-}
-
-func (*UnimplementedNoteMgrServer) ListNotes(ctx context.Context, req *user.ListNotesRequest) (*user.Notes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListNotes not implemented")
-}
-func (*UnimplementedNoteMgrServer) AddNote(ctx context.Context, req *user.Note) (*user.Note, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddNote not implemented")
-}
-func (*UnimplementedNoteMgrServer) UpdateNote(ctx context.Context, req *user.Note) (*user.Note, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateNote not implemented")
-}
-func (*UnimplementedNoteMgrServer) DeleteNote(ctx context.Context, req *user.DeleteNoteRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteNote not implemented")
-}
-func (*UnimplementedNoteMgrServer) GetNote(ctx context.Context, req *user.GetNoteRequest) (*user.Note, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetNote not implemented")
-}
-func (*UnimplementedNoteMgrServer) SearchNote(ctx context.Context, req *user.SearchNoteRequest) (*user.SearchNoteResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchNote not implemented")
 }
 
 func RegisterNoteMgrServer(s *grpc.Server, srv NoteMgrServer) {
@@ -2996,26 +2759,6 @@ type AutomationMgrServer interface {
 	CreateAutomation(context.Context, *event.Automation) (*event.Automation, error)
 }
 
-// UnimplementedAutomationMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedAutomationMgrServer struct {
-}
-
-func (*UnimplementedAutomationMgrServer) ListAutomations(ctx context.Context, req *common.Id) (*event.Automations, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAutomations not implemented")
-}
-func (*UnimplementedAutomationMgrServer) UpdateAutomation(ctx context.Context, req *event.Automation) (*event.Automation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAutomation not implemented")
-}
-func (*UnimplementedAutomationMgrServer) DeleteAutomation(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAutomation not implemented")
-}
-func (*UnimplementedAutomationMgrServer) ReadAutomation(ctx context.Context, req *common.Id) (*event.Automation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadAutomation not implemented")
-}
-func (*UnimplementedAutomationMgrServer) CreateAutomation(ctx context.Context, req *event.Automation) (*event.Automation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAutomation not implemented")
-}
-
 func RegisterAutomationMgrServer(s *grpc.Server, srv AutomationMgrServer) {
 	s.RegisterService(&_AutomationMgr_serviceDesc, srv)
 }
@@ -3201,23 +2944,6 @@ type AttributeMgrServer interface {
 	DeleteAttributeDefinition(context.Context, *user.DeleteAttrRequest) (*common.Empty, error)
 }
 
-// UnimplementedAttributeMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedAttributeMgrServer struct {
-}
-
-func (*UnimplementedAttributeMgrServer) ListAttributeDefinitions(ctx context.Context, req *common.Empty) (*user.AttributeDefinitions, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAttributeDefinitions not implemented")
-}
-func (*UnimplementedAttributeMgrServer) CreateAttributeDefinition(ctx context.Context, req *user.AttributeDefinition) (*user.AttributeDefinition, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAttributeDefinition not implemented")
-}
-func (*UnimplementedAttributeMgrServer) UpdateAttributeDefinition(ctx context.Context, req *user.AttributeDefinition) (*user.AttributeDefinition, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAttributeDefinition not implemented")
-}
-func (*UnimplementedAttributeMgrServer) DeleteAttributeDefinition(ctx context.Context, req *user.DeleteAttrRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAttributeDefinition not implemented")
-}
-
 func RegisterAttributeMgrServer(s *grpc.Server, srv AttributeMgrServer) {
 	s.RegisterService(&_AttributeMgr_serviceDesc, srv)
 }
@@ -3390,26 +3116,6 @@ type SegmentationMgrServer interface {
 	ListSegments(context.Context, *common.Id) (*user.Segmentations, error)
 	DeleteSegment(context.Context, *common.Id) (*common.Empty, error)
 	ReadSegment(context.Context, *common.Id) (*user.Segmentation, error)
-}
-
-// UnimplementedSegmentationMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedSegmentationMgrServer struct {
-}
-
-func (*UnimplementedSegmentationMgrServer) CreateSegment(ctx context.Context, req *user.Segmentation) (*user.Segmentation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateSegment not implemented")
-}
-func (*UnimplementedSegmentationMgrServer) UpdateSegment(ctx context.Context, req *user.Segmentation) (*user.Segmentation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSegment not implemented")
-}
-func (*UnimplementedSegmentationMgrServer) ListSegments(ctx context.Context, req *common.Id) (*user.Segmentations, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSegments not implemented")
-}
-func (*UnimplementedSegmentationMgrServer) DeleteSegment(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteSegment not implemented")
-}
-func (*UnimplementedSegmentationMgrServer) ReadSegment(ctx context.Context, req *common.Id) (*user.Segmentation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadSegment not implemented")
 }
 
 func RegisterSegmentationMgrServer(s *grpc.Server, srv SegmentationMgrServer) {
@@ -3586,20 +3292,6 @@ type PermServer interface {
 	ReadPerm(context.Context, *common.ReadPermRequest) (*common.Permission, error)
 }
 
-// UnimplementedPermServer can be embedded to have forward compatible implementations.
-type UnimplementedPermServer struct {
-}
-
-func (*UnimplementedPermServer) Update(ctx context.Context, req *common.UpdatePermRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (*UnimplementedPermServer) UpdateState(ctx context.Context, req *common.UpdateStateRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateState not implemented")
-}
-func (*UnimplementedPermServer) ReadPerm(ctx context.Context, req *common.ReadPermRequest) (*common.Permission, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadPerm not implemented")
-}
-
 func RegisterPermServer(s *grpc.Server, srv PermServer) {
 	s.RegisterService(&_Perm_serviceDesc, srv)
 }
@@ -3750,26 +3442,6 @@ type ConversationReporterServer interface {
 	GetTotalConversation(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.TotalConversationResponse, error)
 	ReportConversations(context.Context, *conversation.CountReportRequest) (*conversation.ReportResponse, error)
 	ReportAvailibilities(context.Context, *conversation.AvailibilityReportRequest) (*conversation.ReportResponse, error)
-}
-
-// UnimplementedConversationReporterServer can be embedded to have forward compatible implementations.
-type UnimplementedConversationReporterServer struct {
-}
-
-func (*UnimplementedConversationReporterServer) CountConversationsByTags(ctx context.Context, req *conversation.CountByTagsRequest) (*conversation.CountByTagsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CountConversationsByTags not implemented")
-}
-func (*UnimplementedConversationReporterServer) GetAvgResponseTimes(ctx context.Context, req *conversation.AvgResponseTimeRequest) (*conversation.AvgResponseTimeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAvgResponseTimes not implemented")
-}
-func (*UnimplementedConversationReporterServer) GetTotalConversation(ctx context.Context, req *conversation.AvgResponseTimeRequest) (*conversation.TotalConversationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTotalConversation not implemented")
-}
-func (*UnimplementedConversationReporterServer) ReportConversations(ctx context.Context, req *conversation.CountReportRequest) (*conversation.ReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReportConversations not implemented")
-}
-func (*UnimplementedConversationReporterServer) ReportAvailibilities(ctx context.Context, req *conversation.AvailibilityReportRequest) (*conversation.ReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReportAvailibilities not implemented")
 }
 
 func RegisterConversationReporterServer(s *grpc.Server, srv ConversationReporterServer) {
@@ -3935,17 +3607,6 @@ type AgentPresenceMgrServer interface {
 	UpdatePresence(context.Context, *common.Id) (*user.Presence, error)
 }
 
-// UnimplementedAgentPresenceMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedAgentPresenceMgrServer struct {
-}
-
-func (*UnimplementedAgentPresenceMgrServer) ReadPresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadPresence not implemented")
-}
-func (*UnimplementedAgentPresenceMgrServer) UpdatePresence(ctx context.Context, req *common.Id) (*user.Presence, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePresence not implemented")
-}
-
 func RegisterAgentPresenceMgrServer(s *grpc.Server, srv AgentPresenceMgrServer) {
 	s.RegisterService(&_AgentPresenceMgr_serviceDesc, srv)
 }
@@ -4074,26 +3735,6 @@ type RuleMgrServer interface {
 	DeleteRule(context.Context, *common.Id) (*common.Empty, error)
 	ReadRule(context.Context, *common.Id) (*conversation.Rule, error)
 	ListRules(context.Context, *common.Id) (*conversation.Route, error)
-}
-
-// UnimplementedRuleMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedRuleMgrServer struct {
-}
-
-func (*UnimplementedRuleMgrServer) UpdateRule(ctx context.Context, req *conversation.Rule) (*conversation.Rule, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateRule not implemented")
-}
-func (*UnimplementedRuleMgrServer) CreateRule(ctx context.Context, req *conversation.Rule) (*conversation.Rule, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateRule not implemented")
-}
-func (*UnimplementedRuleMgrServer) DeleteRule(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteRule not implemented")
-}
-func (*UnimplementedRuleMgrServer) ReadRule(ctx context.Context, req *common.Id) (*conversation.Rule, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadRule not implemented")
-}
-func (*UnimplementedRuleMgrServer) ListRules(ctx context.Context, req *common.Id) (*conversation.Route, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListRules not implemented")
 }
 
 func RegisterRuleMgrServer(s *grpc.Server, srv RuleMgrServer) {
@@ -4402,56 +4043,6 @@ type ConversationMgrServer interface {
 	UpdateConversationInfo(context.Context, *conversation.Conversation) (*conversation.Conversation, error)
 	FilterUser(context.Context, *conversation.FilterUserRequest) (*conversation.FilterUserResponse, error)
 	SearchConversation(context.Context, *conversation.SearchConversationRequest) (*conversation.SearchConversationResponse, error)
-}
-
-// UnimplementedConversationMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedConversationMgrServer struct {
-}
-
-func (*UnimplementedConversationMgrServer) PongMessage(ctx context.Context, req *event.Event) (*event.Event, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PongMessage not implemented")
-}
-func (*UnimplementedConversationMgrServer) StartConversation(ctx context.Context, req *conversation.StartRequest) (*conversation.Conversation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartConversation not implemented")
-}
-func (*UnimplementedConversationMgrServer) EndConversation(ctx context.Context, req *common.Id) (*conversation.Conversation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EndConversation not implemented")
-}
-func (*UnimplementedConversationMgrServer) GetConversation(ctx context.Context, req *common.Id) (*conversation.Conversation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetConversation not implemented")
-}
-func (*UnimplementedConversationMgrServer) ListConversations(ctx context.Context, req *conversation.ListConversationsRequest) (*conversation.Conversations, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListConversations not implemented")
-}
-func (*UnimplementedConversationMgrServer) TagConversation(ctx context.Context, req *conversation.TagRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TagConversation not implemented")
-}
-func (*UnimplementedConversationMgrServer) UntagConversation(ctx context.Context, req *conversation.TagRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UntagConversation not implemented")
-}
-func (*UnimplementedConversationMgrServer) JoinConversation(ctx context.Context, req *conversation.Member) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JoinConversation not implemented")
-}
-func (*UnimplementedConversationMgrServer) LeftConversation(ctx context.Context, req *conversation.Member) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LeftConversation not implemented")
-}
-func (*UnimplementedConversationMgrServer) Typing(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Typing not implemented")
-}
-func (*UnimplementedConversationMgrServer) Ping(ctx context.Context, req *common.PingRequest) (*common.Pong, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
-}
-func (*UnimplementedConversationMgrServer) QueryByObjectPath(ctx context.Context, req *common.ObjectPathRequest) (*common.Ids, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QueryByObjectPath not implemented")
-}
-func (*UnimplementedConversationMgrServer) UpdateConversationInfo(ctx context.Context, req *conversation.Conversation) (*conversation.Conversation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateConversationInfo not implemented")
-}
-func (*UnimplementedConversationMgrServer) FilterUser(ctx context.Context, req *conversation.FilterUserRequest) (*conversation.FilterUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FilterUser not implemented")
-}
-func (*UnimplementedConversationMgrServer) SearchConversation(ctx context.Context, req *conversation.SearchConversationRequest) (*conversation.SearchConversationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchConversation not implemented")
 }
 
 func RegisterConversationMgrServer(s *grpc.Server, srv ConversationMgrServer) {
@@ -4870,26 +4461,6 @@ type TemplateMgrServer interface {
 	ListTemplates(context.Context, *conversation.SearchTemplate) (*conversation.Templates, error)
 }
 
-// UnimplementedTemplateMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedTemplateMgrServer struct {
-}
-
-func (*UnimplementedTemplateMgrServer) CreateTemplate(ctx context.Context, req *conversation.Template) (*conversation.Template, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateTemplate not implemented")
-}
-func (*UnimplementedTemplateMgrServer) UpdateTemplate(ctx context.Context, req *conversation.Template) (*conversation.Template, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTemplate not implemented")
-}
-func (*UnimplementedTemplateMgrServer) DeleteTemplate(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplate not implemented")
-}
-func (*UnimplementedTemplateMgrServer) GetTemplate(ctx context.Context, req *common.Id) (*conversation.Template, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTemplate not implemented")
-}
-func (*UnimplementedTemplateMgrServer) ListTemplates(ctx context.Context, req *conversation.SearchTemplate) (*conversation.Templates, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTemplates not implemented")
-}
-
 func RegisterTemplateMgrServer(s *grpc.Server, srv TemplateMgrServer) {
 	s.RegisterService(&_TemplateMgr_serviceDesc, srv)
 }
@@ -5086,26 +4657,6 @@ type TagMgrServer interface {
 	GetTag(context.Context, *common.Id) (*conversation.Tag, error)
 }
 
-// UnimplementedTagMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedTagMgrServer struct {
-}
-
-func (*UnimplementedTagMgrServer) CreateTag(ctx context.Context, req *conversation.Tag) (*conversation.Tag, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
-}
-func (*UnimplementedTagMgrServer) UpdateTag(ctx context.Context, req *conversation.Tag) (*conversation.Tag, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
-}
-func (*UnimplementedTagMgrServer) DeleteTag(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
-}
-func (*UnimplementedTagMgrServer) ListTags(ctx context.Context, req *common.Id) (*conversation.Tags, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTags not implemented")
-}
-func (*UnimplementedTagMgrServer) GetTag(ctx context.Context, req *common.Id) (*conversation.Tag, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTag not implemented")
-}
-
 func RegisterTagMgrServer(s *grpc.Server, srv TagMgrServer) {
 	s.RegisterService(&_TagMgr_serviceDesc, srv)
 }
@@ -5291,23 +4842,6 @@ type IntegrationMgrServer interface {
 	CheckAvailability(context.Context, *conversation.AvailabilityCheckRequest) (*conversation.AvailabilityCheckResult, error)
 }
 
-// UnimplementedIntegrationMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedIntegrationMgrServer struct {
-}
-
-func (*UnimplementedIntegrationMgrServer) Deintegrate(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Deintegrate not implemented")
-}
-func (*UnimplementedIntegrationMgrServer) ListIntegrations(ctx context.Context, req *common.Id) (*conversation.Integrations, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrations not implemented")
-}
-func (*UnimplementedIntegrationMgrServer) Integrate(ctx context.Context, req *conversation.Integration) (*conversation.Integration, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Integrate not implemented")
-}
-func (*UnimplementedIntegrationMgrServer) CheckAvailability(ctx context.Context, req *conversation.AvailabilityCheckRequest) (*conversation.AvailabilityCheckResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckAvailability not implemented")
-}
-
 func RegisterIntegrationMgrServer(s *grpc.Server, srv IntegrationMgrServer) {
 	s.RegisterService(&_IntegrationMgr_serviceDesc, srv)
 }
@@ -5469,23 +5003,6 @@ type TicketAttributeMgrServer interface {
 	CreateTicketAttributeDefinition(context.Context, *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error)
 	UpdateTicketAttributeDefinition(context.Context, *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error)
 	DeleteTicketAttributeDefinition(context.Context, *conversation.DeleteTicketAttrRequest) (*common.Empty, error)
-}
-
-// UnimplementedTicketAttributeMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedTicketAttributeMgrServer struct {
-}
-
-func (*UnimplementedTicketAttributeMgrServer) ListTicketAttributeDefinitions(ctx context.Context, req *common.Empty) (*conversation.TicketAttributeDefinitions, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTicketAttributeDefinitions not implemented")
-}
-func (*UnimplementedTicketAttributeMgrServer) CreateTicketAttributeDefinition(ctx context.Context, req *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateTicketAttributeDefinition not implemented")
-}
-func (*UnimplementedTicketAttributeMgrServer) UpdateTicketAttributeDefinition(ctx context.Context, req *conversation.TicketAttributeDefinition) (*conversation.TicketAttributeDefinition, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicketAttributeDefinition not implemented")
-}
-func (*UnimplementedTicketAttributeMgrServer) DeleteTicketAttributeDefinition(ctx context.Context, req *conversation.DeleteTicketAttrRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicketAttributeDefinition not implemented")
 }
 
 func RegisterTicketAttributeMgrServer(s *grpc.Server, srv TicketAttributeMgrServer) {
@@ -5737,47 +5254,6 @@ type TicketMgrServer interface {
 	DeleteSLA(context.Context, *common.Id) (*common.Empty, error)
 	CountTicket(context.Context, *conversation.CountTicketRequest) (*conversation.CountTicketResponse, error)
 	GetAvgResolveTimes(context.Context, *conversation.AvgResolveTimeRequest) (*conversation.AvgResolveTimeResponse, error)
-}
-
-// UnimplementedTicketMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedTicketMgrServer struct {
-}
-
-func (*UnimplementedTicketMgrServer) CreateTicket(ctx context.Context, req *conversation.Ticket) (*conversation.Ticket, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateTicket not implemented")
-}
-func (*UnimplementedTicketMgrServer) UpdateTicket(ctx context.Context, req *conversation.Ticket) (*conversation.Ticket, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicket not implemented")
-}
-func (*UnimplementedTicketMgrServer) DeleteTicket(ctx context.Context, req *conversation.DeleteTicketRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicket not implemented")
-}
-func (*UnimplementedTicketMgrServer) GetTicket(ctx context.Context, req *conversation.GetTicketRequest) (*conversation.Ticket, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
-}
-func (*UnimplementedTicketMgrServer) SearchTicket(ctx context.Context, req *conversation.TicketListRequest) (*conversation.Tickets, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchTicket not implemented")
-}
-func (*UnimplementedTicketMgrServer) ListSLAs(ctx context.Context, req *common.Empty) (*conversation.ServiceLevelAgreements, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSLAs not implemented")
-}
-func (*UnimplementedTicketMgrServer) GetSLA(ctx context.Context, req *common.Id) (*conversation.ServiceLevelAgreement, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSLA not implemented")
-}
-func (*UnimplementedTicketMgrServer) CreateSLA(ctx context.Context, req *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateSLA not implemented")
-}
-func (*UnimplementedTicketMgrServer) UpdateSLA(ctx context.Context, req *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSLA not implemented")
-}
-func (*UnimplementedTicketMgrServer) DeleteSLA(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteSLA not implemented")
-}
-func (*UnimplementedTicketMgrServer) CountTicket(ctx context.Context, req *conversation.CountTicketRequest) (*conversation.CountTicketResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CountTicket not implemented")
-}
-func (*UnimplementedTicketMgrServer) GetAvgResolveTimes(ctx context.Context, req *conversation.AvgResolveTimeRequest) (*conversation.AvgResolveTimeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAvgResolveTimes not implemented")
 }
 
 func RegisterTicketMgrServer(s *grpc.Server, srv TicketMgrServer) {
@@ -6130,26 +5606,6 @@ type ClientMgrServer interface {
 	ListAuthorizedClients(context.Context, *common.Id) (*client.AuthorizedClient, error)
 }
 
-// UnimplementedClientMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedClientMgrServer struct {
-}
-
-func (*UnimplementedClientMgrServer) Create(ctx context.Context, req *client.Client) (*client.Client, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
-func (*UnimplementedClientMgrServer) Update(ctx context.Context, req *client.Client) (*client.Client, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (*UnimplementedClientMgrServer) Read(ctx context.Context, req *client.Client) (*client.Client, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
-}
-func (*UnimplementedClientMgrServer) ListIntegratedClients(ctx context.Context, req *common.Id) (*client.AuthorizedClient, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListIntegratedClients not implemented")
-}
-func (*UnimplementedClientMgrServer) ListAuthorizedClients(ctx context.Context, req *common.Id) (*client.AuthorizedClient, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAuthorizedClients not implemented")
-}
-
 func RegisterClientMgrServer(s *grpc.Server, srv ClientMgrServer) {
 	s.RegisterService(&_ClientMgr_serviceDesc, srv)
 }
@@ -6355,29 +5811,6 @@ type ServiceContentManagerServer interface {
 	SearchContents(context.Context, *content.SearchContentRequest) (*content.Contents, error)
 	LookupContentsByUrl(context.Context, *content.LookupRequest) (*content.Contents, error)
 	LinkContentsToUrl(context.Context, *content.LinkRequest) (*common.Empty, error)
-}
-
-// UnimplementedServiceContentManagerServer can be embedded to have forward compatible implementations.
-type UnimplementedServiceContentManagerServer struct {
-}
-
-func (*UnimplementedServiceContentManagerServer) UpsertContent(ctx context.Context, req *content.Content) (*content.Content, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpsertContent not implemented")
-}
-func (*UnimplementedServiceContentManagerServer) DeleteContent(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteContent not implemented")
-}
-func (*UnimplementedServiceContentManagerServer) GetContent(ctx context.Context, req *common.Id) (*content.Content, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetContent not implemented")
-}
-func (*UnimplementedServiceContentManagerServer) SearchContents(ctx context.Context, req *content.SearchContentRequest) (*content.Contents, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchContents not implemented")
-}
-func (*UnimplementedServiceContentManagerServer) LookupContentsByUrl(ctx context.Context, req *content.LookupRequest) (*content.Contents, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LookupContentsByUrl not implemented")
-}
-func (*UnimplementedServiceContentManagerServer) LinkContentsToUrl(ctx context.Context, req *content.LinkRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LinkContentsToUrl not implemented")
 }
 
 func RegisterServiceContentManagerServer(s *grpc.Server, srv ServiceContentManagerServer) {
@@ -6598,26 +6031,6 @@ type DealServiceServer interface {
 	DeletePipeline(context.Context, *common.Id) (*common.Empty, error)
 }
 
-// UnimplementedDealServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedDealServiceServer struct {
-}
-
-func (*UnimplementedDealServiceServer) ListPipelines(ctx context.Context, req *common.Empty) (*deal.Pipelines, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPipelines not implemented")
-}
-func (*UnimplementedDealServiceServer) GetPipeline(ctx context.Context, req *common.Id) (*deal.Pipeline, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPipeline not implemented")
-}
-func (*UnimplementedDealServiceServer) CreatePipeline(ctx context.Context, req *deal.Pipeline) (*deal.Pipeline, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePipeline not implemented")
-}
-func (*UnimplementedDealServiceServer) UpdatePipeline(ctx context.Context, req *deal.Pipeline) (*deal.Pipeline, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePipeline not implemented")
-}
-func (*UnimplementedDealServiceServer) DeletePipeline(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePipeline not implemented")
-}
-
 func RegisterDealServiceServer(s *grpc.Server, srv DealServiceServer) {
 	s.RegisterService(&_DealService_serviceDesc, srv)
 }
@@ -6781,17 +6194,6 @@ type PublisherServer interface {
 	Unsubscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error)
 }
 
-// UnimplementedPublisherServer can be embedded to have forward compatible implementations.
-type UnimplementedPublisherServer struct {
-}
-
-func (*UnimplementedPublisherServer) Subscribe(ctx context.Context, req *event.Subscription) (*event.SubscriptionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
-}
-func (*UnimplementedPublisherServer) Unsubscribe(ctx context.Context, req *event.Subscription) (*event.SubscriptionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
-}
-
 func RegisterPublisherServer(s *grpc.Server, srv PublisherServer) {
 	s.RegisterService(&_Publisher_serviceDesc, srv)
 }
@@ -6931,29 +6333,6 @@ type EventMgrServer interface {
 	CreateEvent(context.Context, *event.UserEvent) (*event.Event, error)
 	ReadTopic(context.Context, *user.ReadTopicRequest) (*common.Empty, error)
 	SearchTopics(context.Context, *user.ListTopicsRequest) (*user.ListTopicsResult, error)
-}
-
-// UnimplementedEventMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedEventMgrServer struct {
-}
-
-func (*UnimplementedEventMgrServer) SearchEvents(ctx context.Context, req *event.ListEventsRequest) (*event.Events, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchEvents not implemented")
-}
-func (*UnimplementedEventMgrServer) Subscribe(ctx context.Context, req *user.SubscribeRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
-}
-func (*UnimplementedEventMgrServer) Unsubscribe(ctx context.Context, req *user.SubscribeRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
-}
-func (*UnimplementedEventMgrServer) CreateEvent(ctx context.Context, req *event.UserEvent) (*event.Event, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateEvent not implemented")
-}
-func (*UnimplementedEventMgrServer) ReadTopic(ctx context.Context, req *user.ReadTopicRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadTopic not implemented")
-}
-func (*UnimplementedEventMgrServer) SearchTopics(ctx context.Context, req *user.ListTopicsRequest) (*user.ListTopicsResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchTopics not implemented")
 }
 
 func RegisterEventMgrServer(s *grpc.Server, srv EventMgrServer) {
@@ -7163,23 +6542,6 @@ type ConversationEventReaderServer interface {
 	SearchEvents(context.Context, *conversation.SearchMessageRequest) (*event.Events, error)
 }
 
-// UnimplementedConversationEventReaderServer can be embedded to have forward compatible implementations.
-type UnimplementedConversationEventReaderServer struct {
-}
-
-func (*UnimplementedConversationEventReaderServer) SendMessage(ctx context.Context, req *event.Event) (*event.Event, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
-}
-func (*UnimplementedConversationEventReaderServer) UpdateMessage(ctx context.Context, req *event.Event) (*event.Event, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMessage not implemented")
-}
-func (*UnimplementedConversationEventReaderServer) ListEvents(ctx context.Context, req *conversation.ListEventsRequest) (*event.Events, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListEvents not implemented")
-}
-func (*UnimplementedConversationEventReaderServer) SearchEvents(ctx context.Context, req *conversation.SearchMessageRequest) (*event.Events, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchEvents not implemented")
-}
-
 func RegisterConversationEventReaderServer(s *grpc.Server, srv ConversationEventReaderServer) {
 	s.RegisterService(&_ConversationEventReader_serviceDesc, srv)
 }
@@ -7332,20 +6694,6 @@ type FileMgrServer interface {
 	Uploaded(context.Context, *file.FileRequest) (*file.File, error)
 }
 
-// UnimplementedFileMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedFileMgrServer struct {
-}
-
-func (*UnimplementedFileMgrServer) Presign(ctx context.Context, req *file.FileHeader) (*file.PresignResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Presign not implemented")
-}
-func (*UnimplementedFileMgrServer) Read(ctx context.Context, req *file.FileRequest) (*file.File, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
-}
-func (*UnimplementedFileMgrServer) Uploaded(ctx context.Context, req *file.FileRequest) (*file.File, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Uploaded not implemented")
-}
-
 func RegisterFileMgrServer(s *grpc.Server, srv FileMgrServer) {
 	s.RegisterService(&_FileMgr_serviceDesc, srv)
 }
@@ -7454,14 +6802,6 @@ type KafpcServer interface {
 	Reply(context.Context, *kafpc.Response) (*kafpc.Empty, error)
 }
 
-// UnimplementedKafpcServer can be embedded to have forward compatible implementations.
-type UnimplementedKafpcServer struct {
-}
-
-func (*UnimplementedKafpcServer) Reply(ctx context.Context, req *kafpc.Response) (*kafpc.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Reply not implemented")
-}
-
 func RegisterKafpcServer(s *grpc.Server, srv KafpcServer) {
 	s.RegisterService(&_Kafpc_serviceDesc, srv)
 }
@@ -7546,20 +6886,6 @@ type KVServer interface {
 	Set(context.Context, *kv.Value) (*kv.Value, error)
 	Get(context.Context, *kv.Key) (*kv.Value, error)
 	Has(context.Context, *kv.Key) (*kv.Bool, error)
-}
-
-// UnimplementedKVServer can be embedded to have forward compatible implementations.
-type UnimplementedKVServer struct {
-}
-
-func (*UnimplementedKVServer) Set(ctx context.Context, req *kv.Value) (*kv.Value, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Set not implemented")
-}
-func (*UnimplementedKVServer) Get(ctx context.Context, req *kv.Key) (*kv.Value, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
-}
-func (*UnimplementedKVServer) Has(ctx context.Context, req *kv.Key) (*kv.Bool, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Has not implemented")
 }
 
 func RegisterKVServer(s *grpc.Server, srv KVServer) {
@@ -7681,17 +7007,6 @@ type Noti5ServiceServer interface {
 	UpdateNotificationSetting(context.Context, *noti5.Setting) (*noti5.Setting, error)
 }
 
-// UnimplementedNoti5ServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedNoti5ServiceServer struct {
-}
-
-func (*UnimplementedNoti5ServiceServer) ReadNotificationSetting(ctx context.Context, req *common.Id) (*noti5.Setting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadNotificationSetting not implemented")
-}
-func (*UnimplementedNoti5ServiceServer) UpdateNotificationSetting(ctx context.Context, req *noti5.Setting) (*noti5.Setting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotificationSetting not implemented")
-}
-
 func RegisterNoti5ServiceServer(s *grpc.Server, srv Noti5ServiceServer) {
 	s.RegisterService(&_Noti5Service_serviceDesc, srv)
 }
@@ -7798,20 +7113,6 @@ type Noti5TokenServiceServer interface {
 	AddToken(context.Context, *noti5.Token) (*common.Empty, error)
 	RemoveToken(context.Context, *noti5.Token) (*common.Empty, error)
 	CheckTokenExists(context.Context, *noti5.Token) (*common.Empty, error)
-}
-
-// UnimplementedNoti5TokenServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedNoti5TokenServiceServer struct {
-}
-
-func (*UnimplementedNoti5TokenServiceServer) AddToken(ctx context.Context, req *noti5.Token) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddToken not implemented")
-}
-func (*UnimplementedNoti5TokenServiceServer) RemoveToken(ctx context.Context, req *noti5.Token) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveToken not implemented")
-}
-func (*UnimplementedNoti5TokenServiceServer) CheckTokenExists(ctx context.Context, req *noti5.Token) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckTokenExists not implemented")
 }
 
 func RegisterNoti5TokenServiceServer(s *grpc.Server, srv Noti5TokenServiceServer) {
@@ -7977,29 +7278,6 @@ type NotiboxServiceServer interface {
 	ListNotis(context.Context, *notibox.ListRequest) (*notibox.Notifications, error)
 	UpdateNotibox(context.Context, *notibox.Notibox) (*notibox.Notibox, error)
 	ReadNotibox(context.Context, *common.Id) (*notibox.Notibox, error)
-}
-
-// UnimplementedNotiboxServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedNotiboxServiceServer struct {
-}
-
-func (*UnimplementedNotiboxServiceServer) ReadTopics(ctx context.Context, req *notibox.TopicRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadTopics not implemented")
-}
-func (*UnimplementedNotiboxServiceServer) SeenTopics(ctx context.Context, req *notibox.TopicRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SeenTopics not implemented")
-}
-func (*UnimplementedNotiboxServiceServer) UnreadTopics(ctx context.Context, req *notibox.TopicRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnreadTopics not implemented")
-}
-func (*UnimplementedNotiboxServiceServer) ListNotis(ctx context.Context, req *notibox.ListRequest) (*notibox.Notifications, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListNotis not implemented")
-}
-func (*UnimplementedNotiboxServiceServer) UpdateNotibox(ctx context.Context, req *notibox.Notibox) (*notibox.Notibox, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotibox not implemented")
-}
-func (*UnimplementedNotiboxServiceServer) ReadNotibox(ctx context.Context, req *common.Id) (*notibox.Notibox, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadNotibox not implemented")
 }
 
 func RegisterNotiboxServiceServer(s *grpc.Server, srv NotiboxServiceServer) {
@@ -8185,17 +7463,6 @@ func (c *subizInternalPaymentMgrClient) UpdateExchangeRate(ctx context.Context, 
 type SubizInternalPaymentMgrServer interface {
 	CreateBill(context.Context, *payment.Bill) (*payment.Bill, error)
 	UpdateExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error)
-}
-
-// UnimplementedSubizInternalPaymentMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedSubizInternalPaymentMgrServer struct {
-}
-
-func (*UnimplementedSubizInternalPaymentMgrServer) CreateBill(ctx context.Context, req *payment.Bill) (*payment.Bill, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateBill not implemented")
-}
-func (*UnimplementedSubizInternalPaymentMgrServer) UpdateExchangeRate(ctx context.Context, req *payment.ExchangeRate) (*payment.ExchangeRate, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateExchangeRate not implemented")
 }
 
 func RegisterSubizInternalPaymentMgrServer(s *grpc.Server, srv SubizInternalPaymentMgrServer) {
@@ -8667,119 +7934,6 @@ type PaymentMgrServer interface {
 	ListBillByAccountReferred(context.Context, *common.Id) (*payment.LogBillByAccountReferreds, error)
 	ListPaidForAgentReferrer(context.Context, *common.Id) (*payment.LogPaidForAgentReferrers, error)
 	PaidForAgentReferrer(context.Context, *payment.LogPaidForAgentReferrer) (*common.Empty, error)
-}
-
-// UnimplementedPaymentMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedPaymentMgrServer struct {
-}
-
-func (*UnimplementedPaymentMgrServer) Purchase(ctx context.Context, req *payment.Subscription) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Purchase not implemented")
-}
-func (*UnimplementedPaymentMgrServer) UpdateSubscription(ctx context.Context, req *payment.Subscription) (*payment.Subscription, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubscription not implemented")
-}
-func (*UnimplementedPaymentMgrServer) GetSubscription(ctx context.Context, req *common.Id) (*payment.Subscription, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSubscription not implemented")
-}
-func (*UnimplementedPaymentMgrServer) AddPaymentMethod(ctx context.Context, req *payment.PaymentMethod) (*payment.PaymentMethod, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddPaymentMethod not implemented")
-}
-func (*UnimplementedPaymentMgrServer) UpdatePaymentMethod(ctx context.Context, req *payment.PaymentMethod) (*payment.PaymentMethod, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
-}
-func (*UnimplementedPaymentMgrServer) DeletePaymentMethod(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePaymentMethod not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListPaymentMethods(ctx context.Context, req *common.Id) (*payment.PaymentMethods, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentMethods not implemented")
-}
-func (*UnimplementedPaymentMgrServer) Pay(ctx context.Context, req *payment.PayRequest) (*payment.Bill, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListInvoices(ctx context.Context, req *common.Id) (*payment.Invoices, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListInvoices not implemented")
-}
-func (*UnimplementedPaymentMgrServer) CreateInvoice(ctx context.Context, req *payment.Invoice) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
-}
-func (*UnimplementedPaymentMgrServer) UpdateInvoice(ctx context.Context, req *payment.Invoice) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
-}
-func (*UnimplementedPaymentMgrServer) FilterInvoices(ctx context.Context, req *payment.ListInvoiceRequest) (*payment.Invoices, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FilterInvoices not implemented")
-}
-func (*UnimplementedPaymentMgrServer) DraftInvoice(ctx context.Context, req *payment.Subscription) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DraftInvoice not implemented")
-}
-func (*UnimplementedPaymentMgrServer) DiffSubscriptions(ctx context.Context, req *payment.DiffSubRequest) (*payment.Invoice, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DiffSubscriptions not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListComments(ctx context.Context, req *payment.ListCommentsRequest) (*payment.Comments, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListComments not implemented")
-}
-func (*UnimplementedPaymentMgrServer) AddComment(ctx context.Context, req *payment.Comment) (*payment.Comment, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListPlans(ctx context.Context, req *common.Empty) (*payment.Plans, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPlans not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ExportInvoice(ctx context.Context, req *common.Id) (*payment.String, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoice not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ConvertInvoiceToHtml(ctx context.Context, req *payment.Invoice) (*payment.String, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ConvertInvoiceToHtml not implemented")
-}
-func (*UnimplementedPaymentMgrServer) GetExchangeRate(ctx context.Context, req *payment.ExchangeRate) (*payment.ExchangeRate, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
-}
-func (*UnimplementedPaymentMgrServer) TransferMoney(ctx context.Context, req *payment.PayRequest) (*payment.Bill, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TransferMoney not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListLogs(ctx context.Context, req *payment.ListLogsRequest) (*payment.Logs, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
-}
-func (*UnimplementedPaymentMgrServer) CreatePromotionCode(ctx context.Context, req *payment.PromotionCode) (*payment.PromotionCode, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePromotionCode not implemented")
-}
-func (*UnimplementedPaymentMgrServer) GetPromotionCode(ctx context.Context, req *payment.String) (*payment.PromotionCode, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPromotionCode not implemented")
-}
-func (*UnimplementedPaymentMgrServer) UsePromotionCode(ctx context.Context, req *payment.PromotionCodeRequest) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UsePromotionCode not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ValidatePromotionCode(ctx context.Context, req *payment.PromotionCodeRequest) (*payment.PromotionCode, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ValidatePromotionCode not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListPromotionCode(ctx context.Context, req *payment.ListPromotionCodeRequest) (*payment.PromotionCodes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPromotionCode not implemented")
-}
-func (*UnimplementedPaymentMgrServer) DeletePromotionCode(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePromotionCode not implemented")
-}
-func (*UnimplementedPaymentMgrServer) SearchReferral(ctx context.Context, req *payment.SearchReferredRequest) (*payment.Referral, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchReferral not implemented")
-}
-func (*UnimplementedPaymentMgrServer) GetReferral(ctx context.Context, req *common.Id) (*payment.Referral, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReferral not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListTopReferral(ctx context.Context, req *common.Empty) (*payment.ReferralResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTopReferral not implemented")
-}
-func (*UnimplementedPaymentMgrServer) UpdateReferral(ctx context.Context, req *payment.Referral) (*payment.Referral, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateReferral not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListAccountReferred(ctx context.Context, req *common.Id) (*payment.LogAccountReferreds, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAccountReferred not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListBillByAccountReferred(ctx context.Context, req *common.Id) (*payment.LogBillByAccountReferreds, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListBillByAccountReferred not implemented")
-}
-func (*UnimplementedPaymentMgrServer) ListPaidForAgentReferrer(ctx context.Context, req *common.Id) (*payment.LogPaidForAgentReferrers, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPaidForAgentReferrer not implemented")
-}
-func (*UnimplementedPaymentMgrServer) PaidForAgentReferrer(ctx context.Context, req *payment.LogPaidForAgentReferrer) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PaidForAgentReferrer not implemented")
 }
 
 func RegisterPaymentMgrServer(s *grpc.Server, srv PaymentMgrServer) {
@@ -9616,14 +8770,6 @@ type PlaceHolderServer interface {
 	Resolve(context.Context, *placeholder.ResolveRequest) (*placeholder.Resolved, error)
 }
 
-// UnimplementedPlaceHolderServer can be embedded to have forward compatible implementations.
-type UnimplementedPlaceHolderServer struct {
-}
-
-func (*UnimplementedPlaceHolderServer) Resolve(ctx context.Context, req *placeholder.ResolveRequest) (*placeholder.Resolved, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Resolve not implemented")
-}
-
 func RegisterPlaceHolderServer(s *grpc.Server, srv PlaceHolderServer) {
 	s.RegisterService(&_PlaceHolder_serviceDesc, srv)
 }
@@ -9697,17 +8843,6 @@ func (c *pubsubClient) Unsubscribe(ctx context.Context, in *pubsub.Subscription,
 type PubsubServer interface {
 	Subscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
 	Unsubscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
-}
-
-// UnimplementedPubsubServer can be embedded to have forward compatible implementations.
-type UnimplementedPubsubServer struct {
-}
-
-func (*UnimplementedPubsubServer) Subscribe(ctx context.Context, req *pubsub.Subscription) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
-}
-func (*UnimplementedPubsubServer) Unsubscribe(ctx context.Context, req *pubsub.Subscription) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
 }
 
 func RegisterPubsubServer(s *grpc.Server, srv PubsubServer) {
@@ -9827,23 +8962,6 @@ type WidgetServiceServer interface {
 	Update(context.Context, *widget.Setting) (*widget.Setting, error)
 	ReadUserSetting(context.Context, *common.Id) (*widget.UserSetting, error)
 	UpdateUserSetting(context.Context, *widget.UserSetting) (*widget.UserSetting, error)
-}
-
-// UnimplementedWidgetServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedWidgetServiceServer struct {
-}
-
-func (*UnimplementedWidgetServiceServer) Read(ctx context.Context, req *common.Id) (*widget.Setting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
-}
-func (*UnimplementedWidgetServiceServer) Update(ctx context.Context, req *widget.Setting) (*widget.Setting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (*UnimplementedWidgetServiceServer) ReadUserSetting(ctx context.Context, req *common.Id) (*widget.UserSetting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadUserSetting not implemented")
-}
-func (*UnimplementedWidgetServiceServer) UpdateUserSetting(ctx context.Context, req *widget.UserSetting) (*widget.UserSetting, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserSetting not implemented")
 }
 
 func RegisterWidgetServiceServer(s *grpc.Server, srv WidgetServiceServer) {
@@ -9987,17 +9105,6 @@ type ServiceAvatarManagerServer interface {
 	UpsertAvatar(context.Context, *avatar.Avatar) (*common.Empty, error)
 }
 
-// UnimplementedServiceAvatarManagerServer can be embedded to have forward compatible implementations.
-type UnimplementedServiceAvatarManagerServer struct {
-}
-
-func (*UnimplementedServiceAvatarManagerServer) GetAvatar(ctx context.Context, req *common.Id) (*avatar.Avatar, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAvatar not implemented")
-}
-func (*UnimplementedServiceAvatarManagerServer) UpsertAvatar(ctx context.Context, req *avatar.Avatar) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpsertAvatar not implemented")
-}
-
 func RegisterServiceAvatarManagerServer(s *grpc.Server, srv ServiceAvatarManagerServer) {
 	s.RegisterService(&_ServiceAvatarManager_serviceDesc, srv)
 }
@@ -10137,29 +9244,6 @@ type WebhookServiceServer interface {
 	Update(context.Context, *client.Webhook) (*client.Webhook, error)
 	Create(context.Context, *client.Webhook) (*client.Webhook, error)
 	Test(context.Context, *common.Id) (*client.WebhookTestResult, error)
-}
-
-// UnimplementedWebhookServiceServer can be embedded to have forward compatible implementations.
-type UnimplementedWebhookServiceServer struct {
-}
-
-func (*UnimplementedWebhookServiceServer) Read(ctx context.Context, req *common.Id) (*client.Webhook, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
-}
-func (*UnimplementedWebhookServiceServer) Delete(ctx context.Context, req *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
-}
-func (*UnimplementedWebhookServiceServer) List(ctx context.Context, req *common.Id) (*client.Webhooks, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
-}
-func (*UnimplementedWebhookServiceServer) Update(ctx context.Context, req *client.Webhook) (*client.Webhook, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (*UnimplementedWebhookServiceServer) Create(ctx context.Context, req *client.Webhook) (*client.Webhook, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
-func (*UnimplementedWebhookServiceServer) Test(ctx context.Context, req *common.Id) (*client.WebhookTestResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Test not implemented")
 }
 
 func RegisterWebhookServiceServer(s *grpc.Server, srv WebhookServiceServer) {
