@@ -734,18 +734,23 @@ message TicketListRequest {
 	enum TicketListOrderBy {
 		created = 1;
 		duedate = 2;
-		updated = 3;
 	}
-	optional string order_by = 5; // created, duedate, updated
+	optional string order_by = 5; // created, duedate
 	optional string anchor = 6;
 	optional int32 limit = 7;
-	optional bool is_assigned = 8;
 }
 
 message Tickets {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	repeated Ticket tickets = 3;
+	optional string anchor = 4;
+}
+
+message ESTickets {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	repeated ESTicket tickets = 3;
 	optional string anchor = 4;
 }
 

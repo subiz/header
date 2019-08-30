@@ -233,7 +233,7 @@ service TicketMgr {
 	rpc UpdateTicket(conversation.Ticket) returns (conversation.Ticket);
 	rpc DeleteTicket(conversation.DeleteTicketRequest) returns (common.Empty);
 	rpc GetTicket(conversation.GetTicketRequest) returns (conversation.Ticket);
-	rpc SearchTicket(conversation.TicketListRequest) returns (conversation.Tickets);
+	rpc SearchTicket(conversation.TicketListRequest) returns (conversation.ESTickets);
 	rpc ListSLAs(common.Empty) returns (conversation.ServiceLevelAgreements);
 	rpc GetSLA(common.Id) returns (conversation.ServiceLevelAgreement);
 	rpc CreateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
