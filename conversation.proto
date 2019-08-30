@@ -726,18 +726,21 @@ message Ticket {
 	optional string created_by = 16;
 }
 
+enum TicketListOrderBy {
+	created = 1;
+	duedate = 2;
+}
+
 message TicketListRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string state = 3; // "", "open", "resolved"
 	optional string agent_id = 4;
-	enum TicketListOrderBy {
-		created = 1;
-		duedate = 2;
-	}
 	optional string order_by = 5; // created, duedate
 	optional string anchor = 6;
 	optional int32 limit = 7;
+	repeated string tag_ids = 8;
+	optional FilterCondition created = 9;
 }
 
 message Tickets {
