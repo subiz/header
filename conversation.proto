@@ -741,6 +741,7 @@ message TicketListRequest {
 	optional int32 limit = 7;
 	repeated string tag_ids = 8;
 	optional FilterCondition created = 9;
+	optional string priority = 10;
 }
 
 message Tickets {
