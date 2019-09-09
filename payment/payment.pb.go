@@ -19,7 +19,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Currency int32
 
@@ -2726,7 +2726,7 @@ type PromotionCode struct {
 	ForAccountIds  []string            `protobuf:"bytes,27,rep,name=for_account_ids,json=forAccountIds" json:"for_account_ids,omitempty"`
 	ForChannels    []string            `protobuf:"bytes,29,rep,name=for_channels,json=forChannels" json:"for_channels,omitempty"`
 	IsDeleted      *bool               `protobuf:"varint,30,opt,name=is_deleted,json=isDeleted" json:"is_deleted,omitempty"`
-	// repeated int32 for_number_of_agents = 31;
+	//repeated int32 for_number_of_agents = 31;
 	ForNumberOfAgents    []uint32 `protobuf:"varint,32,rep,name=for_number_of_agents,json=forNumberOfAgents" json:"for_number_of_agents,omitempty"`
 	Id                   *string  `protobuf:"bytes,33,opt,name=id" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`

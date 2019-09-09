@@ -193,6 +193,7 @@ enum E {
 	UserAutomationReadRequested = 11153;
 	AutomationAgentNotificationFired = 11154;
 	AutomationConversationMessageFired = 11155;
+	AutomationSendFacebookDirectMessageFired = 11156;
 	UserSessionUpdateRequested = 11165;
 	UserSessionCreateRequested = 11166;
 	UserSessionReadRequested = 11167;
