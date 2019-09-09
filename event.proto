@@ -296,6 +296,7 @@ message AutomationAction {
 		remove_user_from_segmentation = 16; // segmentation_id
 		send_chat_transcript_email = 17; // prop email
 		update_conversation_state = 18; // prop conversation_state
+		send_facebook_direct_message = 19; // prop event and facebook_page_id
 	}
 	string type = 2;
 
@@ -317,6 +318,7 @@ message AutomationAction {
 	string webhook_id = 19;
 	AutomationWebhookSetting webhook_setting = 20;
 	uint32 delay_sec = 21;
+	string facebook_page_id = 22;
 }
 
 message AutomationWebhookSetting {
