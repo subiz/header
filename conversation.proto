@@ -131,6 +131,8 @@ message Conversation {
 
 	optional string first_message = 31;
 	optional string subject = 32;
+
+	repeated Field fields = 33;
 }
 
 message UserConversation { // used in database
