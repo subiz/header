@@ -19,12 +19,12 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Email struct {
 	Ctx  *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	From string          `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
-	//string to = 4;
+	// string to = 4;
 	Subject              string            `protobuf:"bytes,5,opt,name=subject,proto3" json:"subject,omitempty"`
 	Body                 string            `protobuf:"bytes,6,opt,name=body,proto3" json:"body,omitempty"`
 	Header               map[string]string `protobuf:"bytes,7,rep,name=header,proto3" json:"header,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`

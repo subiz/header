@@ -20,7 +20,7 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type Agent_Gender int32
 
@@ -117,7 +117,7 @@ func (Agent_AgentState) EnumDescriptor() ([]byte, []int) {
 	return fileDescriptor_8e28828dcb8d24f0, []int{0, 1}
 }
 
-//optional string referrer_id = 11;
+// optional string referrer_id = 11;
 type Account_State int32
 
 const (
@@ -835,7 +835,7 @@ type Account struct {
 	Address   *string         `protobuf:"bytes,20,opt,name=address" json:"address,omitempty"`
 	Url       *string         `protobuf:"bytes,21,opt,name=url" json:"url,omitempty"`
 	Lang      *string         `protobuf:"bytes,23,opt,name=lang" json:"lang,omitempty"`
-	//optional string referer_from = 24;
+	// optional string referer_from = 24;
 	Timezone             *string        `protobuf:"bytes,26,opt,name=timezone" json:"timezone,omitempty"`
 	Limit                *payment.Limit `protobuf:"bytes,25,opt,name=limit" json:"limit,omitempty"`
 	Country              *string        `protobuf:"bytes,27,opt,name=country" json:"country,omitempty"`
