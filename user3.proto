@@ -261,3 +261,17 @@ message LastView {
 	string event_id = 9;
 	string title = 10;
 }
+
+message SubscribeTopic {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string topics = 4;
+}
+
+message SubscribeUser {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string user_ids = 4;
+}
