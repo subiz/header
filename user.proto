@@ -6,13 +6,6 @@ option go_package = "github.com/subiz/header/user";
 
 import "common.proto";
 
-message AddToMyRequest {
-	optional common.Context ctx = 1;
-	optional string user_id = 3;
-	repeated string agent_ids = 5;
-	optional string account_id = 2; // used within user service only
-}
-
 message MyAgents {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -63,41 +56,6 @@ message SessionTracking {
 	optional int64 started = 4;
 	optional int64 tracked = 6;
 	optional int32 total = 7; // number of session
-}
-
-message Topic {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string topic = 3;
-	optional string type = 5;
-	optional int64 updated = 8;
-	optional int32 unread = 9;
-	optional string user_id = 10;
-	optional string agent_id = 11;
-}
-
-message UnreadTopic {
-	optional common.Context ctx = 1;
-	optional string topic = 3;
-	optional string agent_id = 4;
-	optional string user_id = 5;
-	optional string type = 6;
-	optional int64 updated = 8;
-	optional int32 unread = 9;
-}
-
-message ReadTopicRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string topic = 3;
-	optional string user_id = 4;
-	optional string agent_id = 5;
-}
-
-message SubscribeRequest {
-	optional common.Context ctx = 1;
-	optional string agent_id = 3;
-	repeated string topics = 4;
 }
 
 message AggregateUpdateInteracted {
@@ -207,41 +165,11 @@ message IndexEvent {
 	optional string text = 10;
 }
 
-message ListTopicsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional string agent_id = 5;
-	optional string anchor = 4;
-	optional int32 limit = 7;
-	optional bool unread = 8;
-}
-
-message ListTopicsResult {
-	optional common.Context ctx = 1;
-	repeated Topic topics = 3;
-	optional string anchor = 5;
-}
-
-message ListNewsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional int64 start_time = 4;
-	optional string limit = 7;
-}
-
 message AddToMyList {
 	optional common.Context ctx = 1;
 	optional string agent_id = 2;
 	optional string user_id = 3;
 	optional string account_id = 5;
-}
-
-
-message DeleteAttrRequest {
-	optional common.Context ctx = 1;
-	optional string key = 2;
 }
 
 message SegmentIndex {

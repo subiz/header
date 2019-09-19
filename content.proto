@@ -1,6 +1,5 @@
 syntax = "proto2";
 
-
 option go_package = "github.com/subiz/header/content";
 
 package content;

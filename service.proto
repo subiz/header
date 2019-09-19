@@ -100,11 +100,6 @@ service UserMgr {
 	rpc ExportUsers (user.UserExportRequest) returns (common.Empty);
 
 	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse);
-
-	rpc SubscribeTopics(user.SubscribeTopic) returns (user.SubscribeTopic);
-	rpc UnsubscribeTopics(user.SubscribeTopic) returns (user.SubscribeTopic);
-	rpc ListUnreadSubscribedTopics(user.ListTopicsRequest) returns (user.ListTopicsResult);
-	rpc ListSubscribedTopics(user.ListTopicsRequest) returns (user.ListTopicsResult);
 }
 
 service VisitorMgr {
@@ -288,6 +283,7 @@ service EventMgr {
 	rpc Unsubscribe (user.SubscribeRequest) returns (common.Empty);
 	rpc CreateEvent (event.UserEvent) returns (event.Event);
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
+
 	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult);
 }
 
