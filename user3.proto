@@ -26,8 +26,8 @@ message AttributeData {
 	string key = 4;
 
 	string state = 6;
-	int64 created = 7;
-	int64 modified = 8;
+	// int64 created = 7;
+	// int64 modified = 8;
 
 	string text = 10;
 	double number = 11;
@@ -35,8 +35,19 @@ message AttributeData {
 	string datetime = 13;
 	repeated string list = 14;
 
-	string setter = 16;
-	string setter_type = 17;
+	//string setter = 16;
+	//string setter_type = 17;
+
+	// to update
+	enum Ops {
+		upsert = 0; // override
+		insert = 1; // only write if not existed
+		update = 4; // only write if existed
+		append = 6; // append to bottom
+		remove = 7; // not used yet
+		delete = 8; // not used yet
+	}
+	string action = 18;
 }
 
 message User {
