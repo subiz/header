@@ -321,6 +321,7 @@ message UserExportRequest {
 	optional SCondition condition = 10;
 	optional string agent_id = 11;
 	repeated string emails = 12; // send to this emails
+	repeated string attribute_keys = 13; // exported attributes
 }
 
 message UserSearchRequest {
