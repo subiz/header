@@ -361,6 +361,7 @@ enum E {
 	UserSegmentUpdated = 2000003;
 	UserEmailSynced = 2000004;
 	UserExportEmail = 2000005;
+	UserExport = 2000006;
 
 	ConversationUpdateUserSegmentRequested = 2001000;
 }
