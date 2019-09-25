@@ -319,7 +319,8 @@ message UserExportRequest {
 	optional string segmentation_id = 3;
 	optional string query = 4;
 	optional SCondition condition = 10;
-	optional string agent_id = 11; // send to this agent id
+	optional string agent_id = 11;
+	repeated string emails = 12; // send to this emails
 }
 
 message UserSearchRequest {
