@@ -322,6 +322,7 @@ message UserExportRequest {
 	optional string agent_id = 11;
 	repeated string emails = 12; // send to this emails
 	repeated string attribute_keys = 13; // exported attributes
+	optional string email_subject = 14;
 }
 
 message UserSearchRequest {
