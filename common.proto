@@ -58,8 +58,11 @@ message Context {
 	int64 kafka_offset = 14;
 	uint64 kafka_term = 15;
 	string idempotency_key = 17;
-	string env = 18; // "test", "produnction"
+	string env = 18; // "test", "production"
 	string kafka_key = 19;
+
+	// for email
+	string language_code = 20;
 }
 
 enum Env {

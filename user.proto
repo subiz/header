@@ -323,6 +323,7 @@ message UserExportRequest {
 	repeated string emails = 12; // send to this emails
 	repeated string attribute_keys = 13; // exported attributes
 	optional string email_subject = 14;
+	optional string language_code = 15;
 }
 
 message UserSearchRequest {
