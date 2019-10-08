@@ -196,6 +196,7 @@ service ConversationMgr {
 
 	rpc FilterUser(conversation.FilterUserRequest) returns (conversation.FilterUserResponse);
 	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
+	rpc ListConversations2(conversation.ConversationListRequest) returns (conversation.ConversationListResponse);
 }
 
 service TemplateMgr {
