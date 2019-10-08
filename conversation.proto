@@ -1103,7 +1103,7 @@ message ESConversation {
 	optional bool is_replied = 12;
 	optional int64 replied_at = 13; // unix seconds
 	repeated string assigned_agent_ids = 14;
-	repeated string assigned_group_id = 15;
+	optional string assigned_group_id = 15;
 	repeated string agent_ids = 16;
 	optional string connector_id = 17;
 	optional string channel_source = 18;
