@@ -185,8 +185,19 @@ message FbPageEntry {
 	optional string access_token = 6;
 }
 
+message FbCursors {
+	optional string before = 2;
+	optional string after = 3;
+}
+
+message FbPaging {
+	optional FbCursors cursors = 2;
+	optional string next = 3;
+}
+
 message FbPageRet {
 	repeated FbPageEntry data = 2;
+	optional string paging = 3;
 }
 
 message FbProfilePicData  {
