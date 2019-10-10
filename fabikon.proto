@@ -197,7 +197,7 @@ message FbPaging {
 
 message FbPageRet {
 	repeated FbPageEntry data = 2;
-	optional string paging = 3;
+	optional FbPaging paging = 3;
 }
 
 message FbProfilePicData  {
