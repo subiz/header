@@ -1171,3 +1171,26 @@ message ConversationListResponse {
 	optional int64 total = 4;
 	repeated string conversation_ids = 5;
 }
+
+// export users in conversations list page
+message UserExportRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string assigned_agent_id = 3;
+	optional string assigned_group_id = 4;
+	optional string user_id = 5;
+	optional bool is_replied = 6;
+	optional FilterCondition replied_at = 7;
+	repeated string tag_ids = 8;
+	optional FilterCondition created = 9;
+	repeated string connector_ids = 10;
+	optional string channel_source = 11;
+	optional string agent_id = 12;
+	optional string state = 13;
+	optional string anchor = 14;
+	optional int64 limit = 15;
+	repeated string emails = 16; // send to this emails
+	repeated string attribute_keys = 17; // exported attributes
+	optional string email_subject = 18;
+	optional string language_code = 19;
+}
