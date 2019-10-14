@@ -1187,8 +1187,6 @@ message UserExportRequest {
 	optional string channel_source = 11;
 	optional string agent_id = 12;
 	optional string state = 13;
-	optional string anchor = 14;
-	optional int64 limit = 15;
 	repeated string emails = 16; // send to this emails
 	repeated string attribute_keys = 17; // exported attributes
 	optional string email_subject = 18;
