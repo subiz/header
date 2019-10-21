@@ -125,7 +125,7 @@ enum WidgetType {
 
 enum ConvoType {
 	c = 0;
-	// conversation_updated = 9;
+	conversation_updated = 9;
 	message_sent = 10; // event.data.message
 	conversation_state_updated = 11; // event.data.conversation
 
