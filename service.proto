@@ -286,7 +286,7 @@ service EventMgr {
 	rpc CreateEvent (event.UserEvent) returns (event.Event);
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
 
-	rpc SearchTopics (user.ListTopicsRequest) returns (user.ListTopicsResult);
+	rpc SearchTopics (event.ListTopicsRequest) returns (event.ListTopicsResult);
 }
 
 service ConversationEventReader {

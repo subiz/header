@@ -50,10 +50,10 @@ message Event {
 		conversation.Conversation conversation = 4;
 		conversation.Postback postback = 5;
 		content.Content content = 6;
-		user.Topic topic = 7;
+		Topic topic = 7;
 		user.Presence presence = 8;
 		user.User user = 10;
-		user.UnreadTopic unread_topic = 11;
+		UnreadTopic unread_topic = 11;
 		user.MyUser my_user = 12;
 		notibox.Notification notification = 14;
 		account.AgentPerm agent_perm = 16;
@@ -383,4 +383,42 @@ message AutomationCredit {
 		webhook = 1;
 		message = 2;
 	}
+}
+
+message Topic {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string topic = 3;
+	string type = 5;
+	int64 updated = 8;
+	int32 unread = 9;
+	string user_id = 10;
+	string agent_id = 11;
+}
+
+message UnreadTopic {
+	common.Context ctx = 1;
+	string topic = 3;
+	string agent_id = 4;
+	string user_id = 5;
+	string type = 6;
+	int64 updated = 8;
+	int32 unread = 9;
+	Event by_event = 10;
+}
+
+message ListTopicsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string agent_id = 5;
+	string anchor = 4;
+	int32 limit = 7;
+	bool unread = 8;
+}
+
+message ListTopicsResult {
+	common.Context ctx = 1;
+	repeated Topic topics = 3;
+	string anchor = 5;
 }
