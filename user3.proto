@@ -280,6 +280,15 @@ message SubscribeTopic {
 	string topics = 4;
 }
 
+message MuteRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string user_id = 4;
+	string topic = 5;
+	bool mute = 6; // true, false
+}
+
 message SubscribeUser {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -313,4 +322,42 @@ message AddToMyRequest {
 message DeleteAttrRequest {
 	common.Context ctx = 1;
 	string key = 2;
+}
+
+enum AttributeType {
+	text = 0;
+	number = 1;
+	boolean = 2;
+	datetime = 3;
+	list = 4;
+}
+
+enum AttributeKind {
+	system = 0;
+	default = 1;
+	custom = 2;
+}
+
+message AttributeDefinition {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3;
+	string description = 4;
+	string type = 5;
+	repeated string list_items = 6;
+	string key = 7;
+	string kind = 8;
+	int64 updated = 9;
+}
+
+message AttributeDefinitions {
+	common.Context ctx = 1;
+	repeated AttributeDefinition attributes = 2;
+}
+
+message AddToMyList {
+	common.Context ctx = 1;
+	string agent_id = 2;
+	string user_id = 3;
+	string account_id = 5;
 }

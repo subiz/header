@@ -6,50 +6,6 @@ option go_package = "github.com/subiz/header/user";
 
 import "common.proto";
 
-message MyAgents {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	repeated string agent_ids = 5;
-	optional int64 updated = 6;
-}
-
-message UserCreateResult {
-	optional string id = 3;
-	optional string mask = 5;
-}
-
-enum AttributeType {
-	text = 0;
-	number = 1;
-	boolean = 2;
-	datetime = 3;
-	list = 4;
-}
-
-enum AttributeKind {
-	system = 0;
-	default = 1;
-	custom = 2;
-}
-
-message AttributeDefinition {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string name = 3;
-	optional string description = 4;
-	optional string type = 5;
-	repeated string list_items = 6;
-	optional string key = 7;
-	optional string kind = 8;
-	optional int64 updated = 9;
-}
-
-message AttributeDefinitions {
-	optional common.Context ctx = 1;
-	repeated AttributeDefinition attributes = 2;
-}
-
 message SessionTracking {
 	optional string account_id = 2;
 	optional string user_id = 3;
@@ -81,13 +37,6 @@ message SubizIDRequest {
 	optional common.Context ctx = 1;
 	optional string subiz_id = 2;
 	optional string account_id = 3;
-}
-
-message MaskResponse {
-	optional string subiz_id = 2;
-	optional string account_id = 3;
-	optional string user_id = 4;
-	optional string mask = 5;
 }
 
 message SubizIDResponse {
@@ -165,13 +114,6 @@ message IndexEvent {
 	optional string text = 10;
 }
 
-message AddToMyList {
-	optional common.Context ctx = 1;
-	optional string agent_id = 2;
-	optional string user_id = 3;
-	optional string account_id = 5;
-}
-
 message SegmentIndex {
 	optional string account_id = 2;
 	optional string segmentation_id = 3;
@@ -227,25 +169,6 @@ message SCondition {
 		day_ago = 3;
 	}
 	optional string function = 14; // used to transform value of left side before evaluate expression
-}
-
-message PublishSubscribed {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 4;
-	optional string topic = 5;
-	optional string event_id = 6;
-	optional string by = 8;
-}
-
-message PublishSubscribedReply {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	repeated string agent_ids = 3;
-	optional string user_id = 4;
-	optional string topic = 5;
-	optional string event_id = 6;
-	optional string by = 8;
 }
 
 message Note {
@@ -324,7 +247,7 @@ message UserExportRequest {
 	repeated string attribute_keys = 13; // export selected attributes only
 	optional string email_subject = 14;
 	optional string language_code = 15;
-    repeated string ids = 16; // export selected users only
+	repeated string ids = 16; // export selected users only
 }
 
 message UserSearchRequest {

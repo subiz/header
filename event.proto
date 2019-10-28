@@ -53,7 +53,7 @@ message Event {
 		Topic topic = 7;
 		user.Presence presence = 8;
 		user.User user = 10;
-		UnreadTopic unread_topic = 11;
+		UnreadTopic unread_topic = 11; // todo: remove
 		user.MyUser my_user = 12;
 		notibox.Notification notification = 14;
 		account.AgentPerm agent_perm = 16;
@@ -66,9 +66,6 @@ message Event {
 		conversation.Ticket ticket = 24;
 		Automation automation = 25;
 		Event event = 26;
-		conversation.Seen message_seen = 27;
-		conversation.Ack message_ack = 28;
-		conversation.Received message_received = 29;
 		AutomationEvent automation_event = 30;
 	}
 	Data data = 20;
@@ -389,14 +386,19 @@ message Topic {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string topic = 3;
+
 	string type = 5;
 	int64 updated = 8;
-	int32 unread = 9;
+	int32 unread = 9; // deprecated by is_read
 	string user_id = 10;
 	string agent_id = 11;
+
+	Event by_event = 14;
+	bool is_muted = 15;
+	bool is_read = 16;
 }
 
-message UnreadTopic {
+message UnreadTopic { // todo: delete this, unread is just topic_updated with is_read=false
 	common.Context ctx = 1;
 	string topic = 3;
 	string agent_id = 4;
