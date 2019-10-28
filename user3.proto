@@ -361,3 +361,8 @@ message AddToMyList {
 	string user_id = 3;
 	string account_id = 5;
 }
+
+message UserCreateResult {
+	string id = 3;
+	string mask = 5;
+}
