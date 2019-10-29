@@ -1158,13 +1158,13 @@ message ConversationListRequest {
 	optional FilterCondition created = 9;
 	repeated string connector_ids = 10;
 	optional string channel_source = 11;
-	optional string state = 13;
 	optional string anchor = 14;
 	optional int64 limit = 15;
 	repeated string agent_ids = 16; // any of
 	optional FilterCondition user_id = 17;
 	optional FilterCondition tag_ids = 18;
     repeated string connector_types = 19; // any of
+	optional FilterCondition state = 20;
 }
 
 message ConversationListResponse {
@@ -1185,7 +1185,6 @@ message UserExportRequest {
 	optional FilterCondition created = 9;
 	repeated string connector_ids = 10;
 	optional string channel_source = 11;
-	optional string state = 13;
 	repeated string emails = 16; // send to this emails
 	repeated string attribute_keys = 17; // exported attributes
 	optional string email_subject = 18;
@@ -1194,4 +1193,5 @@ message UserExportRequest {
 	optional FilterCondition user_id = 21;
 	optional FilterCondition tag_ids = 22;
     repeated string connector_types = 23; // any of
+	optional FilterCondition state = 24;
 }
