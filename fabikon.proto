@@ -156,21 +156,6 @@ message Conversation {
 	optional string sbuserid = 7;
 }
 
-message CurrentConvo {
-	optional string account_id = 2;
-	optional string convo_id = 3;
-	optional string page_id = 4;
-	optional string fbuser_id = 5;
-	optional string sbuser_id = 6;
-}
-
-message UserAvail {
-	optional string account_id = 3;
-	optional string fbuser_id = 5;
-	optional bool availability = 6;
-	optional int64 updated = 7;
-}
-
 message FbPagePicture {
 	optional FbPagePictureData data = 2;
 }
