@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package zalokon;
+
+option go_package = "github.com/subiz/header/zalokon";
+
+message OfficialAccount {
+	string oa_id = 2;
+	string description = 3;
+	string name = 4;
+	string avatar = 5;
+	string cover = 6;
+}
+
+message OfficalAccountResponse {
+	string error = 2;
+	string message = 3;
+	OfficialAccount data = 4;
+}
+
+message Info {
+	string address = 2;
+	string phone = 3;
+	string city = 4;
+	string district = 5;
+	string name = 6;
+	string ward = 7;
+}
+
+message AttachmentPayload {
+	string thumbnail = 2; // image, video, link, gif
+	string url = 3; // image, file, sticker, video, audio, link, gif
+	string size = 4; // file
+	string name = 5; // file
+	string checksum = 6; // file
+	string type = 7; // file: docx, pdf
+	string id = 9; // sticker
+	string description = 10; // video, link
+}
+
+message Attachment {
+	string type = 3; // image, gif, link, audio, video, sticker, location, file
+	AttachmentPayload payload = 4;
+}
+
+message Message {
+	string text = 3;
+	string msg_id = 4;
+	string msg_ids= 6;
+	repeated Attachment attachments = 7;
+}
+
+// user_send_text: Người dùng gửi tin nhắn văn bản
+// user_send_image: Người dùng gửi tin nhắn hình ảnh
+// user_send_link: Người dùng gửi tin nhắn liên kết
+// user_send_audio: Người dùng gửi tin nhắn âm thanh
+// user_send_video: Người dùng gửi tin nhắn video
+// user_send_sticker: Người dùng gửi tin nhắn sticker
+// user_send_location: Người dùng gửi vị trí
+// user_send_business_card: Người dùng gửi danh thiếp
+// user_send_file: Người dùng gửi file
+// oa_send_text: OA gửi tin nhắn văn bản
+// oa_send_image: OA gửi tin nhắn hình ảnh
+// oa_send_gif: OA gửi tin nhắn có ảnh gif
+// oa_send_list: OA gửi tin nhắn tương tác
+// oa_send_file: OA gửi tin nhắn đính kèm file
+// user_received_message: người dùng nhận tin nhắn từ Official Account
+// user_seen_message: người dùng xem tin nhắn từ Official Account
+message Webhook {
+	Sender sender = 2;
+	Sender recipient = 3;
+	string event_name = 4;
+	string app_id = 5;
+	string timestamp = 6;
+	string user_id_by_app = 8;
+	Info info = 9;
+	Message message = 10;
+}
+
+message Sender {
+	string id = 2;
+}
+
+message Conversation {
+	string account_id = 2;
+	string id = 3;
+	string oa_id = 4;
+	int64 created  = 5;
+	string zluserid = 6;
+	string sbuserid = 7;
+}
+
+message Zl2SbEvent {
+	string zlmid = 2;
+	string account_id = 3;
+	string conversation_id = 4;
+	string sbmid = 5;
+	string oa_id = 6;
+}
+
+message LongLivedAccessToken {
+	string access_token = 2;
+	string token_type = 3;
+	int32 expires_in = 5;
+}
+
+message SubscribeRet {
+	bool success = 2;
+}
+
+message SubscribeAppRequest {
+	repeated string subscribed_fields = 2;
+}
