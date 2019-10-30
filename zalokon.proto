@@ -10,6 +10,24 @@ message OfficialAccount {
 	string name = 4;
 	string avatar = 5;
 	string cover = 6;
+	string access_token = 7;
+	int64 authorized = 8;
+}
+
+message ZaloUser {
+	int32 user_gender = 2;
+	int64 user_id = 3;
+	int64 user_id_by_app = 4;
+	string avatar = 5;
+	string display_name = 6;
+	int32 birth_date = 7;
+	string shared_info = 8;
+}
+
+message ZaloUserResponse {
+	string error = 2;
+	string message = 3;
+	ZaloUser data = 4;
 }
 
 message OfficalAccountResponse {

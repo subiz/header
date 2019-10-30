@@ -441,8 +441,8 @@ enum AttachmentType {
 	fallback = 11;
 	content_template = 12;
 	quick_replies = 13;
-
 	command = 14;
+	link = 15;
 }
 
 message Attachment {
