@@ -1109,6 +1109,8 @@ message ESConversation {
 	optional string channel_source = 18;
 	optional int64 last_message_time = 19;
 	optional string connector_type = 20;
+	// optional int64 first_response_time = 21; // seconds
+	optional bool user_replied = 22;
 }
 
 // conversation message for index in elastic search
@@ -1165,6 +1167,7 @@ message ConversationListRequest {
 	optional FilterCondition tag_ids = 18;
     repeated string connector_types = 19; // any of
 	optional FilterCondition state = 20;
+	optional bool user_replied = 21;
 }
 
 message ConversationListResponse {
@@ -1194,4 +1197,5 @@ message UserExportRequest {
 	optional FilterCondition tag_ids = 22;
     repeated string connector_types = 23; // any of
 	optional FilterCondition state = 24;
+	optional bool user_replied = 25;
 }
