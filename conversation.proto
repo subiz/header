@@ -1095,13 +1095,13 @@ message ESConversation {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	repeated string tag_ids = 4;
-	optional string state = 5;
+ 	optional string state = 5;
 	optional string ticket_state = 6;
 	optional string id = 9;
 	optional int64 created = 10; // unix seconds
 	repeated string segment_ids = 11;
-	optional bool is_replied = 12;
-	optional int64 replied_at = 13; // unix seconds
+	optional bool is_replied = 12; // deprecated
+	optional int64 replied_at = 13; // deprecated
 	repeated string assigned_agent_ids = 14;
 	optional string assigned_group_id = 15;
 	repeated string agent_ids = 16;
@@ -1111,6 +1111,8 @@ message ESConversation {
 	optional string connector_type = 20;
 	// optional int64 first_response_time = 21; // seconds
 	optional bool user_replied = 22;
+	optional bool agent_replied = 23;
+	optional int64 agent_replied_at = 24; // unix seconds
 }
 
 // conversation message for index in elastic search
@@ -1155,8 +1157,8 @@ message ConversationListRequest {
 	optional string account_id = 2;
 	optional string assigned_agent_id = 3;
 	optional string assigned_group_id = 4;
-	optional bool is_replied = 6;
-	optional FilterCondition replied_at = 7;
+	optional bool agent_replied = 6;
+	optional FilterCondition agent_replied_at = 7;
 	optional FilterCondition created = 9;
 	repeated string connector_ids = 10;
 	optional string channel_source = 11;
@@ -1183,8 +1185,8 @@ message UserExportRequest {
 	optional string account_id = 2;
 	optional string assigned_agent_id = 3;
 	optional string assigned_group_id = 4;
-	optional bool is_replied = 6;
-	optional FilterCondition replied_at = 7;
+	optional bool agent_replied = 6;
+	optional FilterCondition agent_replied_at = 7;
 	optional FilterCondition created = 9;
 	repeated string connector_ids = 10;
 	optional string channel_source = 11;
