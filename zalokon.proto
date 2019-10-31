@@ -42,6 +42,7 @@ message ResponseData {
 	string message_id = 2;
 	string token = 3;
 	string attachment_id = 4;
+	string user_id = 5;
 }
 
 message Response {
@@ -111,6 +112,7 @@ message Request {
 
 message Sender {
 	string id = 2;
+	string user_id = 3;
 }
 
 message Conversation {
