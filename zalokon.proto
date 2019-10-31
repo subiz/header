@@ -5,7 +5,7 @@ package zalokon;
 option go_package = "github.com/subiz/header/zalokon";
 
 message OfficialAccount {
-	string oa_id = 2;
+	int64 oa_id = 2;
 	string description = 3;
 	string name = 4;
 	string avatar = 5;
@@ -103,7 +103,7 @@ message Request {
 	string event_name = 4;
 	string app_id = 5;
 	string timestamp = 6;
-	string user_id_by_app = 8;
+	int64 user_id_by_app = 8;
 	Info info = 9;
 	Message message = 10;
 }
@@ -115,9 +115,9 @@ message Sender {
 message Conversation {
 	string account_id = 2;
 	string id = 3;
-	string oa_id = 4;
+	int64 oa_id = 4;
 	int64 created  = 5;
-	string zluserid = 6;
+	int64 zluserid = 6;
 	string sbuserid = 7;
 }
 
@@ -126,7 +126,7 @@ message Zl2SbEvent {
 	string account_id = 3;
 	string conversation_id = 4;
 	string sbmid = 5;
-	string oa_id = 6;
+	int64 oa_id = 6;
 }
 
 message LongLivedAccessToken {
