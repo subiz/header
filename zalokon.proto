@@ -78,7 +78,7 @@ message Attachment {
 message Message {
 	string text = 3;
 	string msg_id = 4;
-	repeated string msg_ids= 6;
+	repeated string msg_ids = 6;
 	repeated Attachment attachments = 7;
 }
 
@@ -104,7 +104,7 @@ message Request {
 	string event_name = 4;
 	string app_id = 5;
 	string timestamp = 6;
-	int64 user_id_by_app = 8;
+	string user_id_by_app = 8;
 	Info info = 9;
 	Message message = 10;
 }
