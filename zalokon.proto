@@ -78,6 +78,8 @@ message TemplateElement {
 	string title = 4;
 	string subtitle = 5;
 	string image_url = 6;
+	int32 width = 7;
+	int32 height = 8;
 }
 
 message AttachmentPayload {
@@ -90,7 +92,8 @@ message AttachmentPayload {
 	string id = 9; // sticker
 	string description = 10; // video, link
 	string title = 11; // link
-	repeated TemplateElement elements = 12;
+	string template_type = 12; // template
+	repeated TemplateElement elements = 13;  // template
 }
 
 message Attachment {
