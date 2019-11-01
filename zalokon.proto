@@ -106,6 +106,7 @@ message Message {
 	string msg_id = 4;
 	repeated string msg_ids = 6;
 	repeated Attachment attachments = 7;
+	Attachment attachment = 8;
 }
 
 // user_send_text: Người dùng gửi tin nhắn văn bản
