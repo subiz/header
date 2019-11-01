@@ -24,7 +24,7 @@ message ZaloUser {
 	string display_name = 6;
 	int32 birth_date = 7;
 	Info shared_info = 8;
-	repeated string avatars = 9;
+	map<int32, string> avatars = 9;
 }
 
 message ZaloUserResponse {
