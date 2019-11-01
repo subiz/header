@@ -23,7 +23,7 @@ message ZaloUser {
 	string avatar = 5;
 	string display_name = 6;
 	int32 birth_date = 7;
-	string shared_info = 8;
+	Info shared_info = 8;
 }
 
 message ZaloUserResponse {
