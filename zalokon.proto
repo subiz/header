@@ -61,6 +61,25 @@ message Info {
 	string ward = 7;
 }
 
+message DefaultActionPayload {
+	string type = 2;
+	string url = 3;
+	// string payload = 4;
+}
+
+message DefaultAction {
+	string type = 2;
+	DefaultActionPayload payload = 3;
+}
+
+message TemplateElement {
+	string media_type = 2;
+	string attachment_id = 3;
+	string title = 4;
+	string subtitle = 5;
+	string image_url = 6;
+}
+
 message AttachmentPayload {
 	string thumbnail = 2; // image, video, link, gif
 	string url = 3; // image, file, sticker, video, audio, link, gif
@@ -70,6 +89,8 @@ message AttachmentPayload {
 	string type = 7; // file: docx, pdf
 	string id = 9; // sticker
 	string description = 10; // video, link
+	string title = 11; // link
+	repeated TemplateElement elements = 12;
 }
 
 message Attachment {
