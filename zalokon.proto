@@ -94,6 +94,7 @@ message AttachmentPayload {
 	string title = 11; // link
 	string template_type = 12; // template
 	repeated TemplateElement elements = 13;  // template
+	string token = 14; // upload file
 }
 
 message Attachment {
