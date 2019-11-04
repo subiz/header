@@ -1104,15 +1104,22 @@ message ESConversation {
 	optional int64 replied_at = 13; // deprecated
 	repeated string assigned_agent_ids = 14;
 	optional string assigned_group_id = 15;
-	repeated string agent_ids = 16;
+	repeated string agent_ids = 16; // deprecated
 	optional string connector_id = 17;
 	optional string channel_source = 18;
 	optional int64 last_message_time = 19;
 	optional string connector_type = 20;
-	// optional int64 first_response_time = 21; // seconds
 	optional bool user_replied = 22;
 	optional bool agent_replied = 23;
 	optional int64 agent_replied_at = 24; // unix seconds
+	optional bool replied_by_bots = 25;
+	optional bool replied_by_agents = 26;
+	message ResponseTime {
+		optional string agent_id = 1;
+		optional int64 seconds = 2;
+	}
+    repeated ResponseTime response_times = 27;
+	repeated string replied_agent_ids = 28;
 }
 
 // conversation message for index in elastic search
@@ -1170,6 +1177,10 @@ message ConversationListRequest {
     repeated string connector_types = 19; // any of
 	optional FilterCondition state = 20;
 	optional bool user_replied = 21;
+	optional bool replied_by_bots = 22;
+	optional bool replied_by_agents = 23;
+	optional FilterCondition response_time = 24;
+	optional string replied_agent_id = 25;
 }
 
 message ConversationListResponse {
@@ -1200,4 +1211,8 @@ message UserExportRequest {
     repeated string connector_types = 23; // any of
 	optional FilterCondition state = 24;
 	optional bool user_replied = 25;
+	optional bool replied_by_bots = 26;
+	optional bool replied_by_agents = 27;
+	optional FilterCondition response_time = 28;
+	optional string replied_agent_id = 29;
 }
