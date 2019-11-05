@@ -158,6 +158,7 @@ service ConversationReporter {
 	rpc GetAvgResponseTimes(conversation.AvgResponseTimeRequest) returns (conversation.AvgResponseTimeResponse);
 	rpc GetTotalConversation(conversation.AvgResponseTimeRequest) returns (conversation.TotalConversationResponse);
 	rpc ReportConversations(conversation.CountReportRequest) returns (conversation.ReportResponse);
+	rpc ReportConversations2(conversation.ReportConversationsRequest) returns (conversation.ReportResponse);
 	rpc ReportAvailibilities(conversation.AvailibilityReportRequest) returns (conversation.ReportResponse);
 }
 
