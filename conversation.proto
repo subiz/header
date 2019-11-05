@@ -1216,3 +1216,29 @@ message UserExportRequest {
 	optional FilterCondition response_time = 28;
 	optional string replied_agent_id = 29;
 }
+
+message ReportConversationsRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string assigned_agent_id = 3;
+	optional string assigned_group_id = 4;
+	optional bool agent_replied = 6;
+	optional FilterCondition agent_replied_at = 7;
+	optional FilterCondition created = 9;
+	repeated string connector_ids = 10;
+	optional string channel_source = 11;
+	repeated string agent_ids = 16; // any of
+	optional FilterCondition user_id = 17;
+	optional FilterCondition tag_ids = 18;
+    repeated string connector_types = 19; // any of
+	optional FilterCondition state = 20;
+	optional bool user_replied = 21;
+	optional bool replied_by_bots = 22;
+	optional bool replied_by_agents = 23;
+	optional FilterCondition response_time = 24;
+	optional string replied_agent_id = 25;
+	optional string range = 26;
+	optional string timezone = 27;
+	optional int64 from = 28; // unix seconds
+	optional int64 number_of_points = 29;
+}
