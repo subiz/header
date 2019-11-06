@@ -364,4 +364,7 @@ enum E {
 	UserExport = 2000006;
 
 	ConversationUpdateUserSegmentRequested = 2001000;
+
+	UserConversationSynced = 3000006;
+	MuteStateUpdated = 3000007;
 }
