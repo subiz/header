@@ -84,6 +84,9 @@ service UserMgr {
 	rpc PickToSegmentation(user.PickRequest) returns (common.Empty);
 	rpc DeleteFromSegmentation(user.UnpickRequest) returns (common.Empty);
 
+	rpc UnsubscribeUser(user.PickRequest) returns (common.Empty);
+	rpc SubscribeUser(user.PickRequest) returns (common.Empty);
+
 	rpc CreateUser (user.User) returns (common.Id);
 	rpc UpdateUser (user.User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (user.User);
