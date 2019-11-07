@@ -1237,8 +1237,7 @@ message ReportConversationsRequest {
 	optional bool replied_by_agents = 23;
 	optional FilterCondition response_time = 24;
 	optional string replied_agent_id = 25;
-	optional string range = 26;
-	optional string timezone = 27;
-	optional int64 from = 28; // unix seconds
+	optional string range = 26; // hour | day
 	optional int64 number_of_points = 29;
+	optional string from = 30; // rfc3339
 }
