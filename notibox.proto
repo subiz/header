@@ -16,9 +16,8 @@ message Notification {
 	string topic = 10;
 	string type = 5; // type
 	string data = 8; //json
-	int64 created = 6;
-	int64 read = 9;
-	bool seen = 12;
+	int64 created = 6; // ms
+	bool is_read = 9;
 }
 
 message Notibox {
@@ -26,16 +25,6 @@ message Notibox {
 	string account_id = 2;
 	string agent_id = 3;
 	int64 new_count = 5;
-	string start_anchor = 6;
-	bool trial_expired = 10;
-	bool system_maintainance_scheduled_1 = 11;
-	bool system_maintainance_scheduled_2 = 12;
-	bool system_maintainance_completed = 13;
-	bool conversation_unassigned = 14;
-	bool agent_permission_updated = 15;
-	bool account_created = 16;
-	bool trial_almost_expired = 17;
-	bool agent_activated = 18;
 }
 
 enum Type {
@@ -64,13 +53,6 @@ message ListRequest {
 	string anchor = 4;
 	int32 limit = 5;
 	bool seen = 6;
-}
-
-message TopicRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	repeated string topics = 4;
 }
 
 message Notifications {

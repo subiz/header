@@ -333,14 +333,9 @@ service Noti5TokenService {
 
 // notibox services
 service NotiboxService {
-	// rpc Upsert(notibox.Notification) returns (notibox.Notification);
-	rpc ReadTopics(notibox.TopicRequest) returns (common.Empty);
-	rpc SeenTopics(notibox.TopicRequest) returns (common.Empty);
-	rpc UnreadTopics(notibox.TopicRequest) returns (common.Empty);
+	rpc ReadAllNotis(common.Id) returns (common.Empty);
 	rpc ListNotis(notibox.ListRequest) returns (notibox.Notifications);
-
-	rpc UpdateNotibox(notibox.Notibox) returns (notibox.Notibox);
-	rpc ReadNotibox(common.Id) returns (notibox.Notibox);
+	rpc GetNotibox(common.Id) returns (notibox.Notibox);
 }
 
 // payment services
