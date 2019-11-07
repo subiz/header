@@ -67,6 +67,7 @@ message Event {
 		Automation automation = 25;
 		Event event = 26;
 		AutomationEvent automation_event = 30;
+		notibox.Notibox notibox = 32;
 	}
 	Data data = 20;
 }
@@ -114,10 +115,9 @@ enum EventType {
 	user_attribute_deleted = 55;
 	automation_out_of_credit = 70;
 	automation_fired = 71;
-}
 
-enum WidgetType {
-	w = 0;
+	notibox_notification_upserted = 73;
+	notibox_upserted = 74;
 }
 
 enum ConvoType {
@@ -151,10 +151,6 @@ enum ConvoType {
 	ticket_deleted = 84;
 }
 
-enum NotiboxType {
-	n = 0;
-	notification_upserted = 52;
-}
 
 message Subscription { // raweventcreatedpayload
 	common.Context ctx = 1;
