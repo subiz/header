@@ -9,6 +9,7 @@ import "content.proto";
 import "user3.proto";
 import "user.proto";
 import "notibox.proto";
+import "noti5.proto";
 import "payment.proto";
 import "email.proto";
 
@@ -68,6 +69,7 @@ message Event {
 		Event event = 26;
 		AutomationEvent automation_event = 30;
 		notibox.Notibox notibox = 32;
+		noti5.Setting notification_setting = 34;
 	}
 	Data data = 20;
 }
@@ -118,6 +120,8 @@ enum EventType {
 
 	notibox_notification_upserted = 73;
 	notibox_upserted = 74;
+
+	notification_setting_updated = 75;
 }
 
 enum ConvoType {

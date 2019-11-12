@@ -37,8 +37,8 @@ message Setting {
 }
 
 message DoNotDisturb {
-	optional string daily_from = 2;
-	optional string daily_to = 3;
+	optional int64 daily_from = 2; // min
+	optional int64 daily_to = 3; // min
 	optional bool enable_daily = 5; // enable daily
 
 	optional int64 until = 4; // ms
