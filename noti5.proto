@@ -33,12 +33,14 @@ message Setting {
 	optional Subscription mobile = 10;
 	optional Subscription email = 11;
 
-	optional DoNotDisturb do_not_disturb_schedule = 12;
+	optional DoNotDisturb do_not_disturb = 12;
 }
 
 message DoNotDisturb {
 	optional string daily_from = 2;
 	optional string daily_to = 3;
+	optional bool enable_daily = 5; // enable daily
+
 	optional int64 until = 4; // ms
 }
 
