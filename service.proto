@@ -205,6 +205,36 @@ service ConversationMgr {
 	rpc ExportUsers(conversation.UserExportRequest) returns (common.Empty);
 }
 
+service ConversationSyncMgr {
+	// sync client
+	rpc UpsertClient(client.Client) returns (common.Empty);
+	rpc DeleteClient(common.Id) returns (common.Empty);
+
+	// sync automation
+	rpc FireConvertTicket(event.AutomationEvent) returns (common.Empty);
+	rpc FireSendChatTranscriptEmail(event.AutomationEvent) returns (common.Empty);
+	rpc FireUpdateConversationState(event.AutomationEvent) returns (common.Empty);
+
+	// sync mute
+	rpc UpdateMute(user.MuteRequest) returns (common.Empty);
+
+	// sync account
+	rpc DeleteAgent(common.Id) returns (common.Empty);
+	rpc DeleteGroup(common.Id) returns (common.Empty);
+	rpc RemoveAgentFromGroup(account.GroupMember) returns (common.Empty);
+	rpc AddAgentToGroup(account.GroupMember) returns (common.Empty);
+	rpc UpsertAgent(account.Agent) returns (common.Empty);
+	rpc UpsertAccount(account.Account) returns (common.Empty);
+	rpc CreateAccount(account.Account) returns (common.Empty);
+
+	// sync user attribute definition
+	rpc UpsertAttrDefinition(user.AttributeDefinition) returns (common.Empty);
+	rpc DeleteAttrDefinition(user.AttributeDefinition) returns (common.Empty);
+
+	// sync user segment
+	rpc UpdateUserSegment(conversation.UpdateUserSegmentRequest) returns (common.Empty);
+}
+
 service TemplateMgr {
 	rpc CreateTemplate(conversation.Template) returns (conversation.Template);
 	rpc UpdateTemplate(conversation.Template) returns (conversation.Template);
@@ -381,7 +411,7 @@ service PaymentMgr {
 	rpc ListTopReferral(common.Empty) returns (payment.ReferralResponse);
 	rpc UpdateReferral(payment.Referral) returns (payment.Referral);
 	rpc ListAccountReferred(common.Id) returns (payment.LogAccountReferreds);
-  rpc ListBillByAccountReferred(common.Id) returns (payment.LogBillByAccountReferreds);
+	rpc ListBillByAccountReferred(common.Id) returns (payment.LogBillByAccountReferreds);
 	rpc ListPaidForAgentReferrer(common.Id) returns (payment.LogPaidForAgentReferrers);
 	rpc PaidForAgentReferrer(payment.LogPaidForAgentReferrer) returns (common.Empty);
 }
@@ -407,8 +437,8 @@ service WidgetService {
 
 // avatar services
 service ServiceAvatarManager {
- rpc GetAvatar(common.Id) returns (avatar.Avatar);
- rpc UpsertAvatar(avatar.Avatar) returns (common.Empty);
+	rpc GetAvatar(common.Id) returns (avatar.Avatar);
+	rpc UpsertAvatar(avatar.Avatar) returns (common.Empty);
 }
 
 // webhook services
