@@ -37,6 +37,8 @@ enum Type {
 	agent_activated = 7;
 	conversation_unassigned = 8;
 	agent_permission_updated = 9;
+	owner_changed = 10;
+	news = 11;
 }
 
 message AddNotificationRequest {
