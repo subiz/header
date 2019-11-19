@@ -80,3 +80,20 @@ message Global { //used only inside subiz
 	string data = 3;
 	string pk = 4;
 }
+
+
+message Config {
+	string key = 1;
+	enum Key {
+		order_attributes = 0;
+		user_state = 1;
+	}
+	string value = 2;
+}
+
+message AgentConfigs {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	repeated Config configs = 4;
+}
