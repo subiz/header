@@ -82,18 +82,14 @@ message Global { //used only inside subiz
 }
 
 message Config {
-	string key = 1;
-	string value = 2;
-	enum Key {
-		order_attributes_user = 0;
-		configs_filter_user = 1;
-	}
+	string order_attributes_user = 1;
+	string configs_filter_user = 2;
 }
 
 message AgentConfigs {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
-	repeated Config configs = 4;
+	Config configs = 4;
 	int64 created  = 5;
 }
