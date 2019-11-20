@@ -93,8 +93,7 @@ service UserMgr {
 	rpc ReadUser (common.Id) returns (user.User);
 	rpc MarkReadUser (common.Id) returns (common.Empty);
 
-	rpc CountSegmentationUserByAttribute(user.CountSegmentationUserByAttributeRequest)
-		returns (user.CountResponse);
+	rpc CountSegmentationUserByAttribute(user.CountSegmentationUserByAttributeRequest) returns (user.CountResponse);
 
 	rpc CountTotal(user.CountTotalRequest) returns (user.CountTotalResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
@@ -104,6 +103,50 @@ service UserMgr {
 	rpc ExportUsers (user.UserExportRequest) returns (common.Empty);
 
 	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse);
+}
+
+service UserSyncMgr {
+	// sync notify
+	rpc UpdateNoti5SubscribeStatus(noti5.SubscribeStatus) returns (common.Empty);
+
+	// sync limit
+	rpc UpdateLimit(payment.Limit) returns (common.Empty);
+
+	// sync v3
+	rpc UpsertUserV3(user.User) returns (common.Empty);
+
+	// sync account
+	rpc UpsertAgent(account.Agent) returns (common.Empty);
+	rpc UpdatePermission(account.AgentPerm) returns (common.Empty);
+	rpc DeleteAgent(common.Id) returns (common.Empty);
+	rpc UpsertAccount(account.Account) returns (common.Empty);
+	rpc DeleteAccount(common.Id) returns (common.Empty);
+
+	// sync segment
+	rpc RemoveFromTop(user.PickRequest) returns (common.Empty);
+	rpc AddToTop(user.PickRequest) returns (common.Empty);
+
+	// sync user
+	rpc UpdateUser(user.User) returns (common.Empty);
+	rpc CreateEvent(event.UserEvent) returns (common.Empty);
+	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
+	rpc SubscribeTopic(user.SubscribeRequest) returns (common.Empty);
+
+	// sync automation
+	rpc FireBlockUser(event.AutomationEvent) returns (common.Empty);
+	rpc FireUpdateUserAttribute(event.AutomationEvent) returns (common.Empty);
+	rpc FireAddUserToSegment(event.AutomationEvent) returns (common.Empty);
+	rpc FireRemoveUserFromSegment(event.AutomationEvent) returns (common.Empty);
+	rpc FireAddUserNote(event.AutomationEvent) returns (common.Empty);
+	rpc FireMergeUsers(event.AutomationEvent) returns (common.Empty);
+	rpc FireUserNotification(event.AutomationEvent) returns (common.Empty);
+
+	// sync conversation
+	rpc UpdateUserSegment(conversation.UpdateUserSegmentRequest) returns (common.Empty);
+
+	// sync user job
+	rpc CallbackAutomation(event.AutomationCalledback) returns (common.Empty);
+	rpc ExportUsers(user.UserExportRequest) returns (common.Empty);
 }
 
 service VisitorMgr {
