@@ -273,18 +273,6 @@ enum Type {
 	dummy = 8; // agent that cannot handle action
 }
 
-message User {
-	reserved 1, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16;
-	//	optioanl common.Context ctx = 1;
-	string id = 2;
-	string account_id = 3;
-	string email = 5;
-	string encrypted_password = 17;
-	bool is_active = 18;
-	int64 upserted = 19;
-	int32 v3_state = 20; // 0: not v3, 1: v3 but not convert, 2: converted v3
-}
-
 message UpdatePermRequest {
 	string account_id = 1;
 	string user_id = 2;
