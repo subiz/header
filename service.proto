@@ -131,6 +131,7 @@ service UserSyncMgr {
 	rpc CreateEvent(event.UserEvent) returns (common.Empty);
 	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
 	rpc SubscribeTopic(user.SubscribeRequest) returns (common.Empty);
+	rpc UnsubscribeTopic(user.SubscribeRequest) returns (common.Empty);
 
 	// sync automation
 	rpc FireBlockUser(event.AutomationEvent) returns (common.Empty);
