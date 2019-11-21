@@ -128,6 +128,7 @@ service UserSyncMgr {
 
 	// sync user
 	rpc UpdateUser(user.User) returns (common.Empty);
+	rpc PickToSegment(user.PickRequest) returns (common.Empty);
 	rpc CreateEvent(event.UserEvent) returns (common.Empty);
 	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
 	rpc SubscribeTopic(user.SubscribeRequest) returns (common.Empty);
