@@ -470,6 +470,7 @@ service PlaceHolder {
 service Pubsub {
 	rpc Subscribe(pubsub.Subscription) returns (common.Empty);
 	rpc Unsubscribe(pubsub.Subscription) returns (common.Empty);
+	rpc Publish(pubsub.PublishMessage) returns (common.Empty);
 }
 
 // widget services
