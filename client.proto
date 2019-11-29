@@ -31,6 +31,7 @@ message Client {
 		bot = 3;
 	}
 	optional string name = 12;
+	optional string display_name = 13;
 	// Version number of the client.
 	optional string version = 14;
 	optional bool is_enabled = 15;
