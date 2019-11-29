@@ -62,7 +62,7 @@ message Event {
 		account.AgentGroup group = 18;
 		payment.Limit limit = 19;
 		user.AttributeData user_attribute = 20;
-		user.Alias alias = 22;
+		user.Identification alias = 22;
 		user.Note note = 23;
 		conversation.Ticket ticket = 24;
 		Automation automation = 25;
@@ -70,6 +70,7 @@ message Event {
 		AutomationEvent automation_event = 30;
 		notibox.Notibox notibox = 32;
 		noti5.Setting notification_setting = 34;
+		user.Identification identification = 35;
 	}
 	Data data = 20;
 }

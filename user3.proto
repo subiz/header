@@ -55,7 +55,7 @@ message User {
 	string id = 3;
 	string account_id = 4;
 	repeated Trace traces = 11;
-	//	repeated string alias = 12;
+
 	bool is_ban = 14;
 
 	repeated AttributeData attributes = 18;
@@ -70,7 +70,7 @@ message User {
 	int64 modified = 36;
 	int32 modified_week = 37;
 
-	// repeated string aliases = 39;
+	repeated Identification identifications = 39;
 }
 
 message Users {
@@ -89,13 +89,6 @@ message MyUser {
 	int32 unread = 4;
 	int64 updated = 5;
 	string account_id = 7;
-}
-
-message Alias {
-	common.Context ctx = 1;
-	string user_id = 3;
-	string account_id = 4;
-	string alias = 5;
 }
 
 message Campaign {
@@ -369,15 +362,16 @@ message UserCreateResult {
 
 message Identification {
 	common.Context ctx = 1;
-	string account_id = 2;
-	string value = 3;
-	string channel = 4;
-	string integration_id = 5;
-	string source = 6;
+	string user_id = 3;
+	string account_id = 4;
+	string value = 5;
 
-	bool trusted = 8;
-	int64 created = 9;
+	string channel = 9;
+	string integration_id = 10;
+	string source = 11;
 
-	string user_id = 10;
-	repeated string user_ids = 11;
+	bool trusted = 12;
+	int64 created = 13;
+
+	repeated string user_ids = 14;
 }
