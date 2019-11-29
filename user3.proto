@@ -364,7 +364,8 @@ message Identification {
 	common.Context ctx = 1;
 	string user_id = 3;
 	string account_id = 4;
-	string value = 5;
+	string alias = 5;
+	string value = 6;
 
 	string channel = 9;
 	string integration_id = 10;
