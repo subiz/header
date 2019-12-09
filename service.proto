@@ -22,6 +22,7 @@ import "widget.proto";
 import "account.proto";
 import "avatar.proto";
 import "api.proto";
+import "search.proto";
 
 // api service
 service ApiServer {
@@ -79,7 +80,7 @@ service CurrencyMgr {
 
 // user services
 service UserMgr {
-	rpc SearchUsers (user.UserSearchRequest) returns (user.UserSearchResult);
+	rpc SearchUsers (user.UserSearchRequest) returns (user.UserSearchResult); // deprecated
 
 	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
 	rpc PickToSegmentation(user.PickRequest) returns (common.Empty);
@@ -100,9 +101,9 @@ service UserMgr {
 
 	rpc AddAlias(user.Identification) returns (common.Empty);
 	rpc MergeUsers(user.MergeRequest) returns (common.Empty);
-	rpc ExportUsers (user.UserExportRequest) returns (common.Empty);
+	rpc ExportUsers (user.UserExportRequest) returns (common.Empty); // deprecated
 
-	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse);
+	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
 }
 
 service UserSyncMgr {
@@ -169,7 +170,7 @@ service NoteMgr {
 	rpc UpdateNote(user.Note) returns (user.Note);
 	rpc DeleteNote(user.DeleteNoteRequest) returns (common.Empty);
 	rpc GetNote(user.GetNoteRequest) returns (user.Note);
-	rpc SearchNote(user.SearchNoteRequest) returns (user.SearchNoteResponse);
+	rpc SearchNote(user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
 }
 
 service AutomationMgr {
@@ -315,7 +316,7 @@ service TicketMgr {
 	rpc UpdateTicket(conversation.Ticket) returns (conversation.Ticket);
 	rpc DeleteTicket(conversation.DeleteTicketRequest) returns (common.Empty);
 	rpc GetTicket(conversation.GetTicketRequest) returns (conversation.Ticket);
-	rpc SearchTicket(conversation.TicketListRequest) returns (conversation.ESTickets);
+	rpc SearchTicket(conversation.TicketListRequest) returns (conversation.ESTickets); // deprecated
 	rpc ListSLAs(common.Empty) returns (conversation.ServiceLevelAgreements);
 	rpc GetSLA(common.Id) returns (conversation.ServiceLevelAgreement);
 	rpc CreateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
@@ -495,4 +496,13 @@ service WebhookService {
 	rpc Update(client.Webhook) returns (client.Webhook);
 	rpc Create(client.Webhook) returns (client.Webhook);
 	rpc Test(common.Id) returns (client.WebhookTestResult);
+}
+
+// search services
+service Search {
+	rpc SearchUsers(search.SearchUsersRequest) returns (search.SearchUsersResponse);
+	rpc ExportUsers(search.ExportUsersRequest) returns (common.Empty);
+	rpc SearchNotes(search.SearchNotesRequest) returns (search.SearchNotesResponse);
+	rpc SearchConversations(search.SearchConversationsRequest) returns (search.SearchConversationsResponse);
+	rpc SearchTickets(search.SearchTicketsRequest) returns (search.SearchTicketsResponse);
 }
