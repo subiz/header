@@ -8,7 +8,6 @@ import "account.proto";
 import "common.proto";
 import "user3.proto";
 
-
 message Theme {
 	optional string account_id = 2;
 	optional string custom_css = 8; // for setting only
@@ -55,7 +54,7 @@ message Global { //used only inside subiz
 	optional string pk = 4;
 }
 
-message HeaderTeam {
+message TeamHeader {
 	repeated string agent_ids = 1;
 }
 
@@ -64,7 +63,7 @@ message SocialLink {
 	optional string url = 2;
 }
 
-message HeaderSocial {
+message SocialHeader {
 	repeated SocialLink social_links = 1;
 }
 
@@ -94,22 +93,21 @@ message Setting {
 		social = 1;
 	}
 
-	repeated HeaderTeam team_members = 14;
-	repeated HeaderSocial socials = 15;
-
+	repeated TeamHeader teamheader = 14;
+	repeated SocialHeader socialheader = 15;
 	optional int32 height = 16;
 	optional int32 width = 17;
 	optional string primary_color = 18;
 	optional string secondary_color = 20;
 	optional string background = 21;
 	optional string text_color = 22;
-	optional Form offline = 23;
-	optional Form prechat = 24;
+	optional Form offline_form = 23;
+	optional Form prechat_form = 24;
 	optional ChatButton desktop_button = 25;
 	optional ChatButton mobile_button = 26;
 	optional Greeting greeting = 27;
 	optional string title = 28;
-	optional string introduce = 29;
+	optional string introduction = 29;
 }
 
 message Field {
@@ -146,5 +144,3 @@ message Greeting {
 	optional string text = 2;
 	optional string action_text = 3;
 }
-
-
