@@ -110,6 +110,7 @@ message Setting {
 	optional string introduction = 29;
 	optional Theme theme = 30; // deprecated
 	optional string custom_language_url = 31;
+	optional string language_url = 32;
 }
 
 message Field {
