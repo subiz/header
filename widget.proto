@@ -93,8 +93,8 @@ message Setting {
 		social = 1;
 	}
 
-	repeated TeamHeader teamheader = 14;
-	repeated SocialHeader socialheader = 15;
+	optional TeamHeader teamheader = 14;
+	optional SocialHeader socialheader = 15;
 	optional int32 height = 16;
 	optional int32 width = 17;
 	optional string primary_color = 18;
