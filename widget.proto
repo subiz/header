@@ -54,17 +54,23 @@ message Global { //used only inside subiz
 	optional string pk = 4;
 }
 
-message TeamHeader {
-	repeated string agent_ids = 1;
-}
-
 message SocialLink {
-	optional string type = 1;
+	optional string type = 1; // facebook, viber, subiz, email, ...
 	optional string url = 2;
 }
 
-message SocialHeader {
-	repeated SocialLink social_links = 1;
+message WidgetHeader {
+	optional string layout = 2;
+	enum HeaderLayout {
+		team = 0;
+		social = 1;
+	}
+
+	// for social layout only
+	repeated SocialLink links = 3;
+
+	// agents whose avatar will be display in the header
+	repeated string agent_ids = 4;
 }
 
 message Setting {
@@ -76,9 +82,15 @@ message Setting {
 	optional string custom_language = 6; // write-only
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
-	optional string css_url = 9; // deprecated
+	optional string css_url = 9;
 	optional string custom_css_url = 10; // deprecated
 	optional int32 replytime = 11; // deprecated
+
+	// all group names in the account, don't include members for privacy reason
+	repeated account.AgentGroup groups = 13;
+
+	// read-only, tell whether account is ready for chat or not
+	optional bool is_online = 14;
 
 	optional string window_mode = 12;
 	enum WindowMode {
@@ -86,15 +98,7 @@ message Setting {
 		full = 1;
 	}
 
-	optional string header_mode = 13;
-
-	enum HeaderMode {
-		team = 0;
-		social = 1;
-	}
-
-	optional TeamHeader teamheader = 14;
-	optional SocialHeader socialheader = 15;
+	optional WidgetHeader header = 15;
 	optional int32 height = 16;
 	optional int32 width = 17;
 	optional string primary_color = 18;
@@ -117,11 +121,14 @@ message Field {
 	optional string key = 1;
 	optional string label = 2;
 	optional bool is_required = 3;
+
+	// so front end dont have to download attribute definitions
+	optional string type = 5;
 }
 
 message Form {
 	repeated Field fields = 1;
-	optional bool group_required = 2; 
+	optional bool group_required = 2;
 	repeated string group_ids = 3;
 	optional string title = 4;
 	optional bool enable = 5;
@@ -143,7 +150,6 @@ message ChatButton {
 }
 
 message Greeting {
-	optional string title = 1;
-	optional string text = 2;
-	optional string action_text = 3;
+	optional string message = 2;
+	optional bool enabled = 4;
 }
