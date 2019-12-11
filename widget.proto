@@ -7,6 +7,8 @@ option go_package = "github.com/subiz/header/widget";
 import "account.proto";
 import "common.proto";
 import "user3.proto";
+import "conversation.proto";
+
 
 message Theme {
 	optional string account_id = 2;
@@ -32,25 +34,6 @@ message Sound {
 	optional string message_send_failed = 6;
 }
 
-message Setting {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string widget_version = 3;
-	optional Sound sound = 4;
-	optional string language = 5;
-	optional Theme theme = 7;
-	optional int32 replytime = 9;
-	repeated account.Agent agents = 10;
-	repeated string agent_ids = 11; // subiz only
-	optional string language_url = 13; // read only
-	optional string custom_language_url = 14;
-
-	optional string css_url = 12;
-	optional string custom_css_url = 15;
-
-	optional string custom_language = 16; // write-only
-}
-
 message UserSetting {
 	optional common.Context ctx = 1;
 	optional account.Account account = 3;
@@ -72,3 +55,87 @@ message Global { //used only inside subiz
 	optional string data = 3;
 	optional string pk = 4;
 }
+
+message Setting {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string widget_version = 3;
+	optional Sound sound = 4;
+	optional string language = 5;
+	optional string custom_language = 6; // write-only
+
+	optional string window_mode = 7;
+	enum WindowMode {
+		mini = 0;
+		full = 1;
+	}
+	optional int32 replytime = 8; // deprecated
+
+	optional string header_mode = 9;
+
+	enum HeaderMode {
+		show_logo = 0;
+		show_agents = 1;
+	}
+
+	repeated string agent_ids = 10; // subiz only
+	repeated account.Agent agents = 11;
+
+	optional string company_url = 12;
+	optional string company_logo_url = 13;
+	repeated string integration_ids = 14; // subiz only
+	repeated conversation.Integration integrations = 15;
+
+
+	optional string language_url = 16; // read only
+	optional string custom_language_url = 17;
+
+	optional int32 widget_height = 18;
+	optional int32 widget_widget = 19;
+	optional string primary_background = 20;
+	optional string text_color = 21;
+	optional WidgetForm widget_form = 22;
+	optional ChatButton button = 23;
+
+	optional string css_url = 24; // deprecated
+	optional string custom_css_url = 25; // deprecated
+}
+
+message FormConfig {
+	optional string key = 1;
+	optional string label = 2;
+	optional bool is_required = 3;
+	optional string type = 4;
+}
+
+message WidgetForm {
+	repeated FormConfig form_configs = 1;
+	optional bool complete_convo_after_form_completed = 2;
+}
+
+message ButtonConfig {
+	optional string background_image = 1;
+	optional int32 width = 2;
+	optional int32 height = 3;
+	optional string background_color = 4;
+	optional int32 margin_x = 5;
+	optional int32 margin_y = 6;
+	optional string position = 7;
+	enum ButtonPosition {
+		left = 0;
+		right = 1;
+	}
+}
+
+message Greeting {
+	optional string title = 1;
+	optional string text = 2;
+	optional string action_text = 3;
+}
+
+message ChatButton {
+	optional ButtonConfig desktop = 1;
+	optional ButtonConfig mobile = 2;
+	optional Greeting greeting = 3;
+}
+
