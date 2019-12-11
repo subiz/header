@@ -55,19 +55,17 @@ message Global { //used only inside subiz
 	optional string pk = 4;
 }
 
-message TeamMember {
-	optional string fullname = 1;
-	optional string avatar_url = 2;
+message HeaderTeam {
+	repeated string agent_ids = 1;
 }
 
-message Social {
-	optional string logo_url = 1;
-	optional string link = 2;
+message SocialLink {
+	optional string type = 1;
+	optional string url = 2;
 }
 
-message ColorConfig {
-	optional string color = 1;
-	optional string gradient = 2;
+message HeaderSocial {
+	repeated SocialLink social_links = 1;
 }
 
 message Setting {
@@ -96,21 +94,22 @@ message Setting {
 		social = 1;
 	}
 
-	repeated TeamMember team_members = 14;
-	repeated Social socials = 15;
+	repeated HeaderTeam team_members = 14;
+	repeated HeaderSocial socials = 15;
 
 	optional int32 height = 16;
 	optional int32 width = 17;
-	optional ColorConfig primary_color = 18;
-	optional ColorConfig secondary_color = 19;
-	optional string text_color = 20;
-	optional Form offline = 21;
-	optional Form prechat = 22;
-	optional ChatButton desktop_button = 23;
-	optional ChatButton mobile_button = 24;
-	optional Greeting greeting = 25;
-	optional string title = 26;
-	optional string introduce = 27;
+	optional string primary_color = 18;
+	optional string secondary_color = 20;
+	optional string background = 21;
+	optional string text_color = 22;
+	optional Form offline = 23;
+	optional Form prechat = 24;
+	optional ChatButton desktop_button = 25;
+	optional ChatButton mobile_button = 26;
+	optional Greeting greeting = 27;
+	optional string title = 28;
+	optional string introduce = 29;
 }
 
 message Field {
@@ -121,8 +120,8 @@ message Field {
 
 message Form {
 	repeated Field fields = 1;
-	optional bool required_group = 2; 
-	repeated string groupids = 3;
+	optional bool group_required = 2; 
+	repeated string group_ids = 3;
 	optional string title = 4;
 	optional bool enable = 5;
 	optional bool end_conversation_after_submit = 6;
