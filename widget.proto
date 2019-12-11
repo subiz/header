@@ -108,6 +108,8 @@ message Setting {
 	optional Greeting greeting = 27;
 	optional string title = 28;
 	optional string introduction = 29;
+	optional Theme theme = 30; // deprecated
+	optional string custom_language_url = 31;
 }
 
 message Field {
