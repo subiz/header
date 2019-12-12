@@ -364,6 +364,7 @@ enum E {
 	UserExport = 2000006;
 	NoteSynced = 2000007;
 	NoteUpdated = 2000008;
+	NoteDeleted = 2000009;
 
 	ConversationUpdateUserSegmentRequested = 2001000;
 	TicketSynced = 2001001;
