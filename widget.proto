@@ -86,8 +86,6 @@ message Setting {
 	optional string custom_css_url = 10; // deprecated
 	optional int32 replytime = 11; // deprecated
 
-	// all group names in the account, don't include members for privacy reason
-	repeated account.AgentGroup groups = 13;
 
 	// read-only, tell whether account is ready for chat or not
 	optional bool is_online = 14;
@@ -126,10 +124,15 @@ message Field {
 	optional string type = 5;
 }
 
+message Group {
+	optional string id = 1;
+	optional string name = 2;
+}
+
 message Form {
 	repeated Field fields = 1;
 	optional bool group_required = 2;
-	repeated string group_ids = 3;
+	repeated Group groups = 3;
 	optional string title = 4;
 	optional bool enable = 5;
 	optional bool end_conversation_after_submit = 6;
