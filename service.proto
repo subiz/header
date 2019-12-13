@@ -478,6 +478,7 @@ service Pubsub {
 service WidgetService {
 	rpc Read(common.Id) returns (widget.Setting);
 	rpc Update(widget.Setting) returns (widget.Setting);
+	rpc Compile(widget.Setting) returns (widget.Setting);
 	rpc ReadUserSetting(common.Id) returns (widget.UserSetting);
 	rpc UpdateUserSetting(widget.UserSetting) returns (widget.UserSetting);
 }
