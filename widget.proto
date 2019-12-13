@@ -82,24 +82,24 @@ message Setting {
 	optional string custom_language = 6; // write-only
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
-	optional string css_url = 9;
+	optional string css_url = 9; // old version
 	optional string custom_css_url = 10; // deprecated
 	optional int32 replytime = 11; // deprecated
-
-
+	optional string css = 12; // communication client to server
+	optional string style_url = 13;
 	// read-only, tell whether account is ready for chat or not
 	optional bool is_online = 14;
 
-	optional string window_mode = 12;
+	optional string window_mode = 15;
 	enum WindowMode {
 		mini = 0;
 		full = 1;
 	}
 
-	optional WidgetHeader header = 15;
-	optional int32 height = 16;
-	optional int32 width = 17;
-	optional string primary_color = 18;
+	optional WidgetHeader header = 16;
+	optional int32 height = 17;
+	optional int32 width = 18;
+	optional string primary_color = 19;
 	optional string secondary_color = 20;
 	optional string background = 21;
 	optional string text_color = 22;
