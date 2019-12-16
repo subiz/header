@@ -193,6 +193,7 @@ message StartRequest {
 	optional string chain_id = 27;
 	optional string message = 30;
 	repeated Member members = 31;
+	optional string group_id = 32;
 }
 
 message Conversations {
