@@ -142,10 +142,11 @@ message ChatButton {
 	optional string background_image_url = 1;
 	optional int32 width = 2;
 	optional int32 height = 3;
-	optional string background_color = 4;
+	optional string background = 4;
 	optional int32 margin_x = 5;
 	optional int32 margin_y = 6;
 	optional string position = 7;
+
 	enum ButtonPosition {
 		left = 0;
 		right = 1;
