@@ -156,4 +156,5 @@ message ChatButton {
 message Greeting {
 	optional string message = 2;
 	optional bool enabled = 4;
+	optional string agent_id = 5;
 }
