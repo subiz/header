@@ -133,9 +133,15 @@ message Form {
 	repeated Field fields = 1;
 	optional bool group_required = 2;
 	repeated Group groups = 3;
-	optional string title = 4;
-	optional bool enable = 5;
-	optional bool end_conversation_after_submit = 6;
+	optional string group_label = 4;
+	optional string title = 5;
+	optional bool enable = 6;
+	optional bool end_conversation_after_submit = 7;
+	optional string enable_when = 8;
+	enum When {
+		all_agents_offline = 0;
+		out_of_bussiness_hour = 1;
+	}
 }
 
 message ChatButton {
@@ -143,7 +149,7 @@ message ChatButton {
 	optional int32 width = 2;
 	optional int32 height = 3;
 	optional string background = 4;
-	optional int32 margin_x = 5;
+	optional int32 margin_x  = 5;
 	optional int32 margin_y = 6;
 	optional string position = 7;
 
@@ -151,6 +157,8 @@ message ChatButton {
 		left = 0;
 		right = 1;
 	}
+	optional bool default_style = 8;
+	optional string background_border_radius = 9;
 }
 
 message Greeting {
