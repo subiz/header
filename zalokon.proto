@@ -140,6 +140,8 @@ message Request {
 message Sender {
 	string id = 2;
 	string user_id = 3;
+	string message_id = 4;
+	string group_id = 5;
 }
 
 message Conversation {
