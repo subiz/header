@@ -122,6 +122,8 @@ message Field {
 
 	// so front end dont have to download attribute definitions
 	optional string type = 5;
+
+	repeated string list = 6; // available option for field
 }
 
 message Group {
@@ -131,9 +133,12 @@ message Group {
 
 message Form {
 	repeated Field fields = 1;
+
 	optional bool group_required = 2;
 	repeated Group groups = 3;
 	optional string group_label = 4;
+
+
 	optional string title = 5;
 	optional bool enable = 6;
 	optional bool end_conversation_after_submit = 7;
@@ -142,6 +147,9 @@ message Form {
 		all_agents_offline = 0;
 		out_of_bussiness_hour = 1;
 	}
+
+	optional bool question_required = 10;
+	optional string question_label = 11;
 }
 
 message ChatButton {
