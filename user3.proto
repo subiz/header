@@ -25,7 +25,6 @@ message AttributeData {
 	string user_id = 3;
 	string key = 4;
 
-	string state = 6;
 	// int64 created = 7;
 	// int64 modified = 8;
 
@@ -75,11 +74,6 @@ message User {
 
 message Users {
 	repeated User users = 1;
-}
-
-enum AttributeDataState {
-	live = 0;
-	deleted = 1;
 }
 
 message MyUser {
