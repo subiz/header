@@ -140,7 +140,7 @@ message Form {
 
 
 	optional string title = 5;
-	optional bool enable = 6;
+	optional bool enabled = 6;
 	optional bool end_conversation_after_submit = 7;
 	optional string enable_when = 8;
 	enum When {
