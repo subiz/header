@@ -18,6 +18,9 @@ message Campaign {
 
 
 	repeated Trigger triggers = 3;
+
+	string page_type = 2; // modal, slide_in, bar, panel
+	repeated Page pages = 4;
 }
 
 message Impression {
@@ -63,15 +66,24 @@ message GoalStatus {
 message Page {
 	string title = 4;
 	string description = 5;
-	string name = 6; // to jump to
-	Form form = 6;
+	// string name = 6; // to jump to
+	bool form_enabled = 3;
+	repeated Field fields = 5;
+
 	Button primary_button = 7;
 	Button secondary_button = 8;
 	Button background_click = 10;
 	Countdown countdown = 11;
+
 	Video video = 12;
 	repeated Image images = 13;
 
+	PageAppearance appearance = 14;
+}
+
+message Templates {
+
+	repeated Template templates = 3;
 }
 
 message PageAppearance {
@@ -89,11 +101,19 @@ message PageAppearance {
 	string max_width = 14;
 	string overflow = 16;
 	string padding = 17;
+
+	string css = 5;
 }
 
 message Field {
-	string key = 2;
+	optional string key = 1;
+	optional string label = 2;
+	optional bool is_required = 3;
 
+	// so front end dont have to download attribute definitions
+	optional string type = 5;
+
+	repeated string list = 6; // available option for field
 }
 
 message Submission  {
@@ -106,10 +126,10 @@ message Submission  {
 }
 
 message Button {
+	bool enabled = 4;
 	string action = 10; // redirect url, open url, close, open_widget
 	string redirect_url = 11;
 	string open_url = 12;
-
 }
 
 message Countdown {
@@ -125,9 +145,8 @@ message Image {
 	string right = 14;
 	string top = 16;
 	string flip = 17;
-
 }
 
 message Video {
-
+	bool enabled = 1;
 }
