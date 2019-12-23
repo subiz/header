@@ -1,0 +1,133 @@
+syntax = "proto3";
+
+package campaign;
+
+option go_package = "github.com/subiz/header/campaign";
+
+import "common.proto";
+import "event.proto";
+
+message Trigger {
+	common.Context ctx = 1;
+	string account_id = 2;
+}
+
+message Campaign {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+
+	repeated Trigger triggers = 3;
+}
+
+message Impression {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string id = 4;
+	string user_id = 5;
+
+	string url = 7;
+	Device device  = 8;
+	int64 created = 9;
+
+	string by_trigger = 10;
+}
+
+message Conversion {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string id = 4;
+	string user_id = 5;
+
+	string impression_id = 6;
+
+	Submission submission = 12;
+	int64 created = 10;
+}
+
+message GoalStatus {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string user_id = 5;
+
+	string impression_id = 6;
+
+	string status = 8; // reached || failed || nothing
+	int64 created = 10;
+}
+
+
+message Page {
+	string title = 4;
+	string description = 5;
+	string name = 6; // to jump to
+	Form form = 6;
+	Button primary_button = 7;
+	Button secondary_button = 8;
+	Button background_click = 10;
+	Countdown countdown = 11;
+	Video video = 12;
+	repeated Image images = 13;
+
+}
+
+message PageAppearance {
+	string background = 4;
+	string primary_button = 5;
+	string secondary_button = 6;
+	string input = 7;
+	string text = 8;
+	string primary_button_text = 9;
+	string secondary_button_text = 10;
+	string input_text = 11;
+
+	string background_image_url = 12;
+	string width = 13;
+	string max_width = 14;
+	string overflow = 16;
+	string padding = 17;
+}
+
+message Field {
+	string key = 2;
+
+}
+
+message Submission  {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string user_id = 5;
+
+	repeated Field fields = 5;
+}
+
+message Button {
+	string action = 10; // redirect url, open url, close, open_widget
+	string redirect_url = 11;
+	string open_url = 12;
+
+}
+
+message Countdown {
+
+}
+
+message Image {
+	string url = 4;
+	string width = 10;
+	string height = 11;
+	string opacity = 12;
+	string rotate = 13;
+	string right = 14;
+	string top = 16;
+	string flip = 17;
+
+}
+
+message Video {
+
+}
