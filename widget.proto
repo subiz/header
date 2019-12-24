@@ -179,10 +179,10 @@ message Greeting {
 ////////////// CAMPAIGN //////////////
 message Trigger {
 	optional string type = 3; // exit_intent, area_clicked, scrolling_percentage, inactivity_duration, after_pageview, after_js_event
-	optional string area_clicked_css_selector = 4;
-	optional float scrolling_percentage = 6;
-	optional int64 inactivity_sec = 8;
-	optional int64 after_pageview_sec = 9;
+	optional string area_clicked_css_selector = 4; // .user_name #user
+	optional float scrolling_percentage = 6; // 0.55
+	optional int64 inactivity_sec = 8; // 50s
+	optional int64 after_pageview_sec = 9; // 50s
 }
 
 message SchedulerCondition {
@@ -190,7 +190,7 @@ message SchedulerCondition {
 
 	optional int64 start_time = 4;
 	optional int64 end_time = 5;
-	repeated int32 days_of_week = 6;
+	repeated int32 days_of_week = 6; // 2, 3, 6 || 7 ,8
 
 	optional int64 start_minute_day = 7; // minute of day
 	optional int64 end_minute_day = 8; // minute of day
@@ -201,45 +201,29 @@ message SchedulerCondition {
 message Condition {
 	optional string key = 3; // has_visited_urls, has_not_visited_urls, browser, country_code, city, returning_visitor, page_view_count, os, device, referrer, source, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
 
-	repeated string sources = 4; // direct, google_ads, oragenic, ...
-	optional string page_view_count = 5; // <5 >6 =5
+	repeated string sources = 4; // direct, google_ads, organic, ...
 
 	repeated string has_visited_urls = 6; // on server regex
 	repeated string has_not_visited_urls = 7; // on server regex
-	optional int64 time_on_page = 8; // minumum time on page
 
 	// for rate limiting
 	// int64 frequency_times = 11; // number of time display the message
 	// int64 frequency_duration = 11; // per duration (1 message per hour || 10 messages per day)
 
 	repeated string browsers = 20; // all, chrome, firefox, edge, ie, safari, other
-	repeated string excluded_browsers = 21; // chrome, firefox, edge, ie, safari, other
-
-	optional string country_code = 22;
-
-	optional string city_code = 23;
 
 	optional bool returning_visitor = 24;
 	optional bool new_visitor = 25;
 
-	optional string os = 26;
-	optional string language = 27;
-
-	optional string utm_source = 28;
-	optional string utm_campaign = 29;
-	optional string utm_content = 30;
-	optional string utm_medium = 31;
-	optional string utm_term = 33;
-
 	optional string user_attribute_key = 34;
 
-	optional string operator = 40;
+	optional string operator = 40; // eq, ne, contains, notcontains
 	optional string value = 41;
 }
 
 message Segmentation {
 	repeated Condition conditions = 4;
-	optional string join = 5;
+	optional string join = 5; // and | or
 }
 
 message Campaign {
@@ -249,12 +233,16 @@ message Campaign {
 	repeated string url_expressions = 4;
 	repeated string exclude_url_expressions = 6;
 
-	optional bool desktop_only = 8;
-	optional bool mobile_only = 9;
+	enum DeviveType {
+		both = 0;
+		desktop = 1;
+		mobile = 2;
+	}
+	optional string target_device = 9; // desktop || mobile || both
 
 	repeated Trigger triggers = 10;
 
-	optional string segmentation_join = 11;
+	optional string segmentation_join = 11; // and | or
 	repeated Segmentation segmentations = 12;
 
 	optional string page_type = 13; // modal, slide_in, bar, panel, fullscreen
@@ -265,9 +253,11 @@ message Campaign {
 	optional string thumbnail_url = 17;
 	optional bool enabled = 19;
 
-	// stop action after show x
+	// stop showing pop up after showing x times
 	optional int64 impression_limit = 20;
 	repeated SchedulerCondition schedulers = 21;
+
+	optional string template = 22; // template1, template2
 }
 
 message Impression {
@@ -326,8 +316,6 @@ message Page {
 	repeated Image images = 13;
 
 	optional PageAppearance appearance = 14;
-
-	optional string template = 1; // template 1, template 2
 }
 
 message PageAppearance {
