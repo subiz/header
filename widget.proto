@@ -114,6 +114,7 @@ message Setting {
 	optional Theme theme = 30; // deprecated
 	optional string custom_language_url = 31;
 	optional string language_url = 32;
+	repeated Campaign campaigns = 33;
 }
 
 message Field {
@@ -297,6 +298,10 @@ message GoalStatus {
 	optional string user_id = 5;
 
 	optional string status = 8; // reached || failed || nothing
+	enum Status {
+		reached = 0;
+		failed = 1;
+	}
 	optional int64 created = 10;
 }
 
