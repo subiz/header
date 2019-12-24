@@ -44,6 +44,7 @@ message UserSetting {
 	optional Setting account_setting = 9;
 	optional bool desktop_notification = 10;
 	optional user.Trace trace = 11;
+	repeated Campaign campaigns = 13;
 }
 
 // global setting. eg: widget_4/4234098234
@@ -173,4 +174,212 @@ message Greeting {
 	optional string message = 2;
 	optional bool enabled = 4;
 	optional string agent_id = 5;
+}
+
+////////////// CAMPAIGN //////////////
+message Trigger {
+	optional string type = 3; // exit_intent, area_clicked, scrolling_percentage, inactivity_duration, after_pageview, after_js_event
+	optional string area_clicked_css_selector = 4;
+	optional float scrolling_percentage = 6;
+	optional int64 inactivity_sec = 8;
+	optional int64 after_pageview_sec = 9;
+}
+
+message SchedulerCondition {
+	optional string join = 3; // and || or
+
+	optional int64 start_time = 4;
+	optional int64 end_time = 5;
+	repeated int32 days_of_week = 6;
+
+	optional int64 start_minute_day = 7; // minute of day
+	optional int64 end_minute_day = 8; // minute of day
+
+	optional string timezone_offset = 9; // if empty, take current timezone
+}
+
+message Condition {
+	optional string key = 3; // has_visited_urls, has_not_visited_urls, browser, country_code, city, returning_visitor, page_view_count, os, device, referrer, source, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
+
+	repeated string sources = 4; // direct, google_ads, oragenic, ...
+	optional string page_view_count = 5; // <5 >6 =5
+
+	repeated string has_visited_urls = 6; // on server regex
+	repeated string has_not_visited_urls = 7; // on server regex
+	optional int64 time_on_page = 8; // minumum time on page
+
+	// for rate limiting
+	// int64 frequency_times = 11; // number of time display the message
+	// int64 frequency_duration = 11; // per duration (1 message per hour || 10 messages per day)
+
+	repeated string browsers = 20; // all, chrome, firefox, edge, ie, safari, other
+	repeated string excluded_browsers = 21; // chrome, firefox, edge, ie, safari, other
+
+	optional string country_code = 22;
+
+	optional string city_code = 23;
+
+	optional bool returning_visitor = 24;
+	optional bool new_visitor = 25;
+
+	optional string os = 26;
+	optional string language = 27;
+
+	optional string utm_source = 28;
+	optional string utm_campaign = 29;
+	optional string utm_content = 30;
+	optional string utm_medium = 31;
+	optional string utm_term = 33;
+
+	optional string user_attribute_key = 34;
+
+	optional string operator = 40;
+	optional string value = 41;
+}
+
+message Segmentation {
+	repeated Condition conditions = 4;
+	optional string join = 5;
+}
+
+message Campaign {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+
+	repeated string url_expressions = 4;
+	repeated string exclude_url_expressions = 6;
+
+	optional bool desktop_only = 8;
+	optional bool mobile_only = 9;
+
+	repeated Trigger triggers = 10;
+
+	optional string segmentation_join = 11;
+	repeated Segmentation segmentations = 12;
+
+	optional string page_type = 13; // modal, slide_in, bar, panel, fullscreen
+	repeated Page pages = 14;
+
+	optional int64 created = 15;
+	optional string name = 16;
+	optional string thumbnail_url = 17;
+	optional bool enabled = 19;
+
+	// stop action after show x
+	optional int64 impression_limit = 20;
+	repeated SchedulerCondition schedulers = 21;
+}
+
+message Impression {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string campaign_id = 3;
+	optional string id = 4;
+	optional string user_id = 5;
+
+	optional string url = 7;
+	optional common.Device device  = 8;
+	optional int64 created = 9;
+
+	optional string by_trigger = 10;
+}
+
+message Conversion {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string campaign_id = 3;
+	optional string id = 4;
+	optional string user_id = 5;
+
+	optional string url = 7;
+	optional common.Device device  = 8;
+
+	optional string by_trigger = 10;
+
+	optional Submission submission = 12;
+	optional int64 created = 13;
+}
+
+message GoalStatus {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string campaign_id = 3;
+	optional string user_id = 5;
+
+	optional string status = 8; // reached || failed || nothing
+	optional int64 created = 10;
+}
+
+message Page {
+	optional string title = 4;
+	optional string description = 5;
+	// string name = 6; // to jump to
+	optional bool form_enabled = 3;
+	repeated Field fields = 6;
+
+	optional Button primary_button = 7;
+	optional Button secondary_button = 8;
+	optional Button background_click = 10;
+	optional Countdown countdown = 11;
+
+	optional Video video = 12;
+	repeated Image images = 13;
+
+	optional PageAppearance appearance = 14;
+
+	optional string template = 1; // template 1, template 2
+}
+
+message PageAppearance {
+	optional string background = 4;
+	optional string primary_button = 5;
+	optional string secondary_button = 6;
+	optional string input = 7;
+	optional string text = 8;
+	optional string primary_button_text = 9;
+	optional string secondary_button_text = 10;
+	optional string input_text = 11;
+
+	optional string background_image_url = 12;
+	optional string width = 13;
+	optional string max_width = 14;
+	optional string overflow = 16;
+	optional string padding = 17;
+
+	optional string css = 20;
+}
+
+message Submission  {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string campaign_id = 3;
+	optional string user_id = 5;
+
+	repeated Field fields = 6;
+}
+
+message Button {
+	optional bool enabled = 4;
+	optional string action = 10; // redirect url, open url, close, open_widget
+	optional string redirect_url = 11;
+	optional string open_url = 12;
+}
+
+message Countdown {
+
+}
+
+message Image {
+	optional string url = 4;
+	optional string width = 10;
+	optional string height = 11;
+	optional string opacity = 12;
+	optional string rotate = 13;
+	optional string right = 14;
+	optional string top = 16;
+	optional string flip = 17;
+}
+
+message Video {
+	optional bool enabled = 1;
 }
