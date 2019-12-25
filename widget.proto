@@ -229,7 +229,8 @@ message Segmentation {
 
 message Campaign {
 	optional common.Context ctx = 1;
-	optional string account_id = 2;
+	optional string id = 2;
+	optional string account_id = 3;
 
 	repeated string url_expressions = 4;
 	repeated string exclude_url_expressions = 6;
