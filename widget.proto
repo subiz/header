@@ -259,7 +259,6 @@ message Campaign {
 	optional int64 impression_limit = 20;
 	repeated SchedulerCondition schedulers = 21;
 
-	optional string template = 22; // template1, template2
 }
 
 message Impression {
@@ -307,6 +306,7 @@ message GoalStatus {
 }
 
 message Page {
+	optional string template_id = 2;
 	optional string title = 4;
 	optional string description = 5;
 	// string name = 6; // to jump to
@@ -376,4 +376,11 @@ message Image {
 
 message Video {
 	optional bool enabled = 1;
+}
+
+message ImpressionCount {
+	optional string account_id = 3;
+	optional string campaign_id = 4;
+	optional int64 count = 5;
+	optional int32 hours = 6;
 }
