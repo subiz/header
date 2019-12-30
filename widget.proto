@@ -290,6 +290,8 @@ message Conversion {
 
 	optional Submission submission = 12;
 	optional int64 created = 13;
+
+	optional int64 week = 14; // internal use only
 }
 
 message UserCampaignStatus {
