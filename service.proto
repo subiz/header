@@ -483,6 +483,19 @@ service WidgetService {
 	rpc UpdateUserSetting(widget.UserSetting) returns (widget.UserSetting);
 }
 
+// widget services
+service CampaignService {
+	rpc ReadCampaign(common.Id) returns (widget.Campaign);
+	rpc ReadAccountCampaigns(common.Id) returns (widget.Campaign);
+
+	rpc SubmitImpression(widget.Impression) returns (widget.Impression);
+	rpc SubmitConversion(widget.Conversion) returns (widget.Conversion);
+	rpc SubmitGoalStatus(widget.GoalStatus) returns (widget.GoalStatus);
+
+	rpc ReportCampaign(widget.ReportCampaignRequest) returns (widget.ReportCampaignResponse);
+}
+
+
 // avatar services
 service ServiceAvatarManager {
 	rpc GetAvatar(common.Id) returns (avatar.Avatar);

@@ -187,8 +187,6 @@ message Trigger {
 }
 
 message SchedulerCondition {
-	optional string join = 3; // and || or
-
 	optional int64 start_time = 4;
 	optional int64 end_time = 5;
 	repeated int32 days_of_week = 6; // 2, 3, 6 || 7 ,8
@@ -227,6 +225,12 @@ message Segmentation {
 	optional string join = 5; // and | or
 }
 
+message CampaignsAccount {
+	repeated Campaign campaigns = 3;
+	repeated int32 impressions_count = 4;
+	repeated int32 conversions_count = 5;
+}
+
 message Campaign {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -242,7 +246,7 @@ message Campaign {
 	}
 	optional string target_device = 9; // desktop || mobile || both
 
-	repeated Trigger triggers = 10;
+	repeated Trigger triggers = 10; // any
 
 	optional string segmentation_join = 11; // and | or
 	repeated Segmentation segmentations = 12;
@@ -257,7 +261,7 @@ message Campaign {
 
 	// stop showing pop up after showing x times
 	optional int64 impression_limit = 20;
-	repeated SchedulerCondition schedulers = 21;
+	repeated SchedulerCondition schedulers = 21; // any
 
 }
 
@@ -381,6 +385,32 @@ message Video {
 message ImpressionCount {
 	optional string account_id = 3;
 	optional string campaign_id = 4;
-	optional int64 count = 5;
+	optional int32 count = 5;
 	optional int32 hour = 6;
+}
+
+message ConversionCount {
+	optional string account_id = 3;
+	optional string campaign_id = 4;
+	optional int32 count = 5;
+	optional int32 hour = 6;
+}
+
+message ReportCampaignRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 3;
+	optional string campaign_id = 4;
+	optional int32 from_hour = 5;
+	optional int32 to_hour = 6;
+	optional string range = 7;
+	enum Range {
+		hour = 0; // default
+		day = 1;
+	}
+}
+
+message ReportCampaignResponse {
+	optional common.Context ctx = 1;
+	repeated int32 impressions_count = 3;
+	repeated int32 conversions_count = 4;
 }
