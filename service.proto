@@ -481,19 +481,17 @@ service WidgetService {
 	rpc Compile(widget.Setting) returns (widget.Setting);
 	rpc ReadUserSetting(common.Id) returns (widget.UserSetting);
 	rpc UpdateUserSetting(widget.UserSetting) returns (widget.UserSetting);
-}
 
-// widget services
-service CampaignService {
 	rpc ReadCampaign(common.Id) returns (widget.Campaign);
 	rpc ReadAccountCampaigns(common.Id) returns (widget.Campaign);
 
 	rpc SubmitImpression(widget.Impression) returns (widget.Impression);
 	rpc SubmitConversion(widget.Conversion) returns (widget.Conversion);
-	rpc SubmitGoalStatus(widget.GoalStatus) returns (widget.GoalStatus);
+	rpc SubmitCampaignUserStatus(widget.CampaignUserStatus) returns (widget.CampaignUserStatus);
 
 	rpc ReportCampaign(widget.ReportCampaignRequest) returns (widget.ReportCampaignResponse);
 }
+
 
 
 // avatar services

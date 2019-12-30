@@ -114,7 +114,6 @@ message Setting {
 	optional Theme theme = 30; // deprecated
 	optional string custom_language_url = 31;
 	optional string language_url = 32;
-	repeated Campaign campaigns = 33;
 }
 
 message Field {
@@ -295,15 +294,15 @@ message Conversion {
 	optional int64 created = 13;
 }
 
-message GoalStatus {
+message CampaignUserStatus {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string campaign_id = 3;
 	optional string user_id = 5;
 
-	optional string status = 8; // reached || failed || nothing
+	optional string status = 8; // goal_reached || failed || nothing
 	enum Status {
-		reached = 0;
+		goal_reached = 0;
 		failed = 1;
 	}
 	optional int64 created = 10;
