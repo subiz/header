@@ -483,7 +483,9 @@ service WidgetService {
 	rpc UpdateUserSetting(widget.UserSetting) returns (widget.UserSetting);
 
 	rpc ReadCampaign(common.Id) returns (widget.Campaign);
-	rpc ReadAccountCampaigns(common.Id) returns (widget.Campaign);
+	rpc ReadCampaigns(common.Id) returns (widget.Campaign);
+	rpc CreateCampaign(widget.Campaign) returns (widget.Campaign);
+	rpc UpdateCampaign(widget.Campaign) returns (widget.Campaign);
 
 	rpc SubmitImpression(widget.Impression) returns (widget.Impression);
 	rpc SubmitConversion(widget.Conversion) returns (widget.Conversion);

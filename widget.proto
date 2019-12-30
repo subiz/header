@@ -311,6 +311,7 @@ message CampaignUserStatus {
 message Page {
 	optional string template_id = 2;
 	optional string title = 4;
+	optional string subtitle = 9;
 	optional string description = 5;
 	// string name = 6; // to jump to
 	optional bool form_enabled = 3;
