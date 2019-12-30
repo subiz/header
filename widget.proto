@@ -197,9 +197,15 @@ message SchedulerCondition {
 }
 
 message Condition {
-	optional string key = 3; // has_visited_urls, has_not_visited_urls, browser, country_code, city, returning_visitor, page_view_count, os, device, referrer, source, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
+	optional string key = 3; // has_visited_urls, has_not_visited_urls, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
 
 	repeated string sources = 4; // direct, google_ads, organic, ...
+
+	enum DeviveType {
+		both = 0;
+		desktop = 1;
+		mobile = 2;
+	}
 
 	repeated string has_visited_urls = 6; // on server regex
 	repeated string has_not_visited_urls = 7; // on server regex
@@ -217,6 +223,7 @@ message Condition {
 
 	optional string operator = 40; // eq, ne, contains, notcontains
 	optional string value = 41;
+
 }
 
 message Segmentation {
@@ -235,13 +242,6 @@ message Campaign {
 
 	repeated string url_expressions = 4;
 	repeated string exclude_url_expressions = 6;
-
-	enum DeviveType {
-		both = 0;
-		desktop = 1;
-		mobile = 2;
-	}
-	optional string target_device = 9; // desktop || mobile || both
 
 	repeated Trigger triggers = 10; // any
 
