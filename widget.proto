@@ -224,10 +224,8 @@ message Segmentation {
 	optional string join = 5; // and | or
 }
 
-message CampaignsAccount {
+message Campaigns {
 	repeated Campaign campaigns = 3;
-	repeated int32 impressions_count = 4;
-	repeated int32 conversions_count = 5;
 }
 
 message Campaign {
@@ -294,7 +292,7 @@ message Conversion {
 	optional int64 created = 13;
 }
 
-message CampaignUserStatus {
+message UserCampaignStatus {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string campaign_id = 3;
@@ -387,6 +385,7 @@ message ImpressionCount {
 	optional string campaign_id = 4;
 	optional int32 count = 5;
 	optional int32 hour = 6;
+	optional int32 month = 7;
 }
 
 message ConversionCount {
@@ -394,6 +393,7 @@ message ConversionCount {
 	optional string campaign_id = 4;
 	optional int32 count = 5;
 	optional int32 hour = 6;
+	optional int32 month = 7;
 }
 
 message ReportCampaignRequest {
