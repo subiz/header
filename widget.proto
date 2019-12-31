@@ -125,6 +125,11 @@ message Field {
 	optional string type = 5;
 
 	repeated string list = 6; // available option for field
+
+	optional string subtype = 8; // phone, email, rating
+	optional bool multiple_choice = 9;
+	optional bool multiline_text = 10;
+	optional string placeholder = 11;
 }
 
 message Group {
@@ -138,7 +143,6 @@ message Form {
 	optional bool group_required = 2;
 	repeated Group groups = 3;
 	optional string group_label = 4;
-
 
 	optional string title = 5;
 	optional bool enabled = 6;
@@ -188,7 +192,7 @@ message Trigger {
 message SchedulerCondition {
 	optional int64 start_time = 4;
 	optional int64 end_time = 5;
-	repeated int32 days_of_week = 6; // 2, 3, 6 || 7 ,8
+	repeated string days_of_week = 6; // 2, 3, 6 || 7 ,8
 
 	optional int64 start_minute_day = 7; // minute of day
 	optional int64 end_minute_day = 8; // minute of day
@@ -270,7 +274,7 @@ message Impression {
 	optional string user_id = 5;
 
 	optional string url = 7;
-	optional common.Device device  = 8;
+	optional common.Device device = 8;
 	optional int64 created = 9;
 
 	optional string by_trigger = 10;
@@ -297,7 +301,7 @@ message Conversion {
 	optional string user_id = 5;
 
 	optional string url = 7;
-	optional common.Device device  = 8;
+	optional common.Device device = 8;
 
 	optional string by_trigger = 10;
 
@@ -369,11 +373,18 @@ message Submission  {
 	repeated Field fields = 6;
 }
 
+message ButtonAction {
+	optional string action = 3; // open_url, close, open_widget, submit, next
+
+	optional string url = 5; // url to open
+	optional bool new_tab = 6; // open new url on new tab
+}
+
 message Button {
-	optional bool enabled = 4;
-	optional string action = 10; // redirect url, open url, close, open_widget
-	optional string redirect_url = 11;
-	optional string open_url = 12;
+	optional bool enabled = 2;
+	repeated ButtonAction actions = 3;
+	optional string text = 6;
+	optional bool goal_reached = 7; // goal will be reached if use click this button
 }
 
 message Countdown {
