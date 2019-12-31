@@ -285,7 +285,7 @@ message ConversionRequest {
 }
 message Conversions {
 	optional common.Context ctx = 1;
-	optional Conversion conversions = 2;
+	repeated Conversion conversions = 2;
 	optional string anchor = 4;
 }
 

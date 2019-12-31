@@ -492,6 +492,8 @@ service WidgetService {
 	rpc SubmitUserCampaignStatus(widget.UserCampaignStatus) returns (widget.UserCampaignStatus);
 
 	rpc ReportCampaign(widget.ReportCampaignRequest) returns (widget.ReportCampaignResponse);
+	rpc ListConversions(widget.ConversionRequest) returns (widget.Conversions);
+	rpc ExportConversions(widget.ConversionRequest) returns (widget.Conversions);
 }
 
 
