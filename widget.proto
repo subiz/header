@@ -225,9 +225,8 @@ message Condition {
 
 	optional string user_attribute_key = 34;
 
-	optional string operator = 40; // eq, ne, contains, notcontains
+	optional string operator = 40; // eq, ne, contains, notContains, in, gt, gte, lt, lte, inRange, notInRange
 	optional string value = 41;
-
 }
 
 message Segmentation {
