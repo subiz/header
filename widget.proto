@@ -192,7 +192,7 @@ message Trigger {
 message SchedulerCondition {
 	optional int64 start_time = 4;
 	optional int64 end_time = 5;
-	repeated string days_of_week = 6; // 2, 3, 6 || 7 ,8
+	repeated string days_of_week = 6; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 
 	optional int64 start_minute_day = 7; // minute of day
 	optional int64 end_minute_day = 8; // minute of day
