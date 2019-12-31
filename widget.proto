@@ -276,6 +276,19 @@ message Impression {
 	optional string by_trigger = 10;
 }
 
+message ConversionRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string campaign_id = 3;
+	optional string anchor = 4;
+	optional int32 limit =5;
+}
+message Conversions {
+	optional common.Context ctx = 1;
+	optional Conversion conversions = 2;
+	optional string anchor = 4;
+}
+
 message Conversion {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
