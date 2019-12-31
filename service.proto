@@ -493,7 +493,7 @@ service WidgetService {
 
 	rpc ReportCampaign(widget.ReportCampaignRequest) returns (widget.ReportCampaignResponse);
 	rpc ListConversions(widget.ConversionRequest) returns (widget.Conversions);
-	rpc ExportConversions(widget.ConversionRequest) returns (widget.Conversions);
+	rpc ExportConversions(widget.ExportConversionsRequest) returns (common.Empty);
 }
 
 
