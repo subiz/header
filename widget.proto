@@ -437,4 +437,5 @@ message ExportConversionsRequest {
 	repeated string ids = 4;
 	optional string email_subject = 5;
 	optional string account_id = 6;
+	optional string campaign_id = 7;
 }
