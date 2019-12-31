@@ -441,12 +441,6 @@ message ReportCampaignResponse {
 	repeated int32 conversions_count = 4;
 }
 
-message ExportConversionsRequest {
-	optional common.Context ctx = 1;
-	repeated string emails = 2;
-	optional string language_code = 3;
-	repeated string ids = 4;
-	optional string email_subject = 5;
-	optional string account_id = 6;
-	optional string campaign_id = 7;
+message ConversionsExported {
+	optional string url = 6;
 }
