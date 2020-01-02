@@ -330,8 +330,8 @@ message Page {
 	optional string subtitle = 9;
 	optional string description = 5;
 	// string name = 6; // to jump to
-	optional bool form_enabled = 3;
-	repeated Field fields = 6;
+
+	optional Form form = 5;
 
 	optional Button primary_button = 7;
 	optional Button secondary_button = 8;
