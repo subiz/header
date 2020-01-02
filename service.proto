@@ -494,6 +494,7 @@ service WidgetService {
 	rpc ReportCampaign(widget.ReportCampaignRequest) returns (widget.ReportCampaignResponse);
 	rpc ListConversions(widget.ConversionRequest) returns (widget.Conversions);
 	rpc ExportConversions(widget.ConversionRequest) returns (widget.ConversionsExported);
+	rpc SearchCityNames(widget.SearchCityRequest) returns (user.Traces);
 }
 
 

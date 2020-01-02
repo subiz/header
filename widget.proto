@@ -331,7 +331,7 @@ message Page {
 	optional string description = 5;
 	// string name = 6; // to jump to
 
-	optional Form form = 5;
+	optional Form form = 6;
 
 	optional Button primary_button = 7;
 	optional Button secondary_button = 8;
@@ -442,4 +442,10 @@ message ReportCampaignResponse {
 
 message ConversionsExported {
 	optional string url = 6;
+}
+
+message SearchCityRequest {
+	optional common.Context ctx = 1;
+	optional string name = 2;
+	optional int64 limit = 4;
 }
