@@ -130,6 +130,8 @@ message Field {
 	optional bool multiple_choice = 9;
 	optional bool multiline_text = 10;
 	optional string placeholder = 11;
+
+	optional bool is_user_attribute = 12;
 }
 
 message Group {
@@ -373,7 +375,7 @@ message Submission  {
 }
 
 message ButtonAction {
-	optional string action = 3; // open_url, close, open_widget, submit, next
+	optional string action = 3; // open_url, close, open_widget, submit, next, goal_reach
 
 	optional string url = 5; // url to open
 	optional bool new_tab = 6; // open new url on new tab
@@ -383,11 +385,11 @@ message Button {
 	optional bool enabled = 2;
 	repeated ButtonAction actions = 3;
 	optional string text = 6;
-	optional bool goal_reached = 7; // goal will be reached if use click this button
 }
 
 message Countdown {
-
+	optional bool enabled = 3;
+	optional int64 end_time = 4; // unix sec
 }
 
 message Image {
@@ -403,6 +405,7 @@ message Image {
 
 message Video {
 	optional bool enabled = 1;
+	optional string url = 2;
 }
 
 message ImpressionCount {
