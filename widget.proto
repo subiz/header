@@ -390,6 +390,7 @@ message Button {
 message Countdown {
 	optional bool enabled = 3;
 	optional int64 end_time = 4; // unix sec
+	optional string daily_end_time = 5; // 8:40:30 reset every day
 }
 
 message Image {
