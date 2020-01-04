@@ -486,6 +486,7 @@ service WidgetService {
 	rpc ListCampaigns(common.Id) returns (widget.Campaigns);
 	rpc CreateCampaign(widget.Campaign) returns (widget.Campaign);
 	rpc UpdateCampaign(widget.Campaign) returns (widget.Campaign);
+	rpc DeleteCampaign(widget.Campaign) returns (common.Empty);
 
 	rpc SubmitImpression(widget.Impression) returns (widget.Impression);
 	rpc SubmitConversion(widget.Conversion) returns (widget.Conversion);
