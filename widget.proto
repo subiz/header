@@ -261,18 +261,19 @@ message Campaign {
 	optional string segmentation_join = 11; // and | or
 	repeated Segmentation segmentations = 12;
 
-	optional string page_type = 13; // modal, slide_in, bar, panel, fullscreen
-	repeated Page pages = 14;
+	optional string template_id = 14;
+	optional string page_type = 15; // modal, slide_in, bar, panel, fullscreen
+	repeated Page pages = 17;
 
-	optional int64 created = 15;
-	optional string name = 16;
-	optional string thumbnail_url = 17;
-	optional bool enabled = 19;
+	optional int64 created = 18;
+	optional string name = 19;
+	optional string thumbnail_url = 20;
+	optional bool enabled = 21;
 
 	// stop showing pop up after showing x times
-	optional int64 impression_limit = 20;
-	repeated SchedulerCondition schedulers = 21; // any
-	optional Notification notification = 22;
+	optional int64 impression_limit = 23;
+	repeated SchedulerCondition schedulers = 24; // any
+	optional Notification notification = 25;
 }
 
 message Impression {
@@ -335,7 +336,6 @@ message UserCampaignStatus {
 }
 
 message Page {
-	optional string template_id = 2;
 	optional string title = 4;
 	optional string subtitle = 9;
 	optional string description = 5;
