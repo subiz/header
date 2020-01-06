@@ -7,7 +7,6 @@ option go_package = "github.com/subiz/header/widget";
 import "account.proto";
 import "common.proto";
 import "user3.proto";
-import "email.proto";
 
 message Theme {
 	optional string account_id = 2;
@@ -244,8 +243,13 @@ message Campaigns {
 }
 
 message Notification {
-	optional email.Email email = 1;
+	// optional email.Email email = 1;
 	optional bool enabled = 2;
+	optional string sender_id = 4;
+	optional string from = 5;
+	repeated string to = 7;
+	optional string subject = 9;
+	optional string body = 10;
 }
 
 message Campaign {
