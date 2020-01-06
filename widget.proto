@@ -7,6 +7,7 @@ option go_package = "github.com/subiz/header/widget";
 import "account.proto";
 import "common.proto";
 import "user3.proto";
+import "email.proto";
 
 message Theme {
 	optional string account_id = 2;
@@ -242,6 +243,11 @@ message Campaigns {
 	repeated Campaign campaigns = 3;
 }
 
+message Notification {
+	optional email.Email email = 1;
+	optional bool enabled = 2;
+}
+
 message Campaign {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -266,7 +272,7 @@ message Campaign {
 	// stop showing pop up after showing x times
 	optional int64 impression_limit = 20;
 	repeated SchedulerCondition schedulers = 21; // any
-
+	optional Notification notification = 22;
 }
 
 message Impression {
