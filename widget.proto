@@ -132,6 +132,8 @@ message Field {
 	optional string placeholder = 11;
 
 	optional bool is_user_attribute = 12;
+
+	optional string value = 13;
 }
 
 message Group {
