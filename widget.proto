@@ -476,8 +476,8 @@ message ConversionsExported {
 	optional string url = 6;
 }
 
-message SearchCityRequest {
+message SearchLocationsRequest {
 	optional common.Context ctx = 1;
-	optional string name = 2;
+	optional string query = 2;
 	optional int64 limit = 4;
 }
