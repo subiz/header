@@ -292,8 +292,9 @@ message Campaign {
 
 	// stop showing pop up after showing x times
 	optional int64 impression_limit = 23;
-	repeated SchedulerCondition schedulers = 24; // any
-	optional Notification notification = 25;
+	repeated SchedulerCondition schedulers = 24;
+	optional string scheduler_join = 25;
+	optional Notification notification = 26;
 }
 
 message Impression {
