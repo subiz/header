@@ -17,6 +17,7 @@ message Email {
 	repeated string to = 9;
 	repeated string cc = 10;
 	repeated string bcc = 11;
+	string encoding = 12;
 }
 
 message Attachment {
