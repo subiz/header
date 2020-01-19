@@ -239,7 +239,7 @@ message Condition {
 
 	optional string user_attribute_key = 34;
 
-	optional string operator = 40; // eq, ne, contains, notContains, in, gt, gte, lt, lte, inRange, notInRange
+	optional string operator = 40; // eq, ne, con, notCon, in, gt, gte, lt, lte, inRange, notInRange, begin, end
 	optional string value = 41;
 }
 
@@ -345,7 +345,6 @@ message Conversion {
 
 	optional int64 week = 14; // internal use only
 	optional string impression_token = 15; // for request submit only
-
 }
 
 message UserCampaignStatus {
@@ -366,7 +365,6 @@ message Page {
 	optional string title = 4;
 	optional string subtitle = 9;
 	optional string description = 5;
-	// string name = 6; // to jump to
 
 	optional Form form = 6;
 
@@ -376,28 +374,27 @@ message Page {
 	optional Countdown countdown = 11;
 
 	optional Video video = 12;
-	repeated Image images = 13;
 
-	optional PageAppearance appearance = 14;
+	// page appearance
+	optional string color = 16;
+	optional string background = 17;
+	optional string input_color = 18;
+	optional string input_background = 19;
+
+	optional string desktop_background_image = 22;
+	optional string mobile_background_image = 23;
+
+	optional Sizing desktop_sizing = 24;
+	optional Sizing mobile_sizing = 25;
 }
 
-message PageAppearance {
-	optional string background = 4;
-	optional string primary_button = 5;
-	optional string secondary_button = 6;
-	optional string input = 7;
-	optional string text = 8;
-	optional string primary_button_text = 9;
-	optional string secondary_button_text = 10;
-	optional string input_text = 11;
-
-	optional string background_image_url = 12;
-	optional string width = 13;
-	optional string max_width = 14;
-	optional string overflow = 16;
-	optional string padding = 17;
-
-	optional string css = 20;
+message Sizing {
+	optional string width = 2;
+	optional string min_heigh = 3;
+	optional string padding_left = 4;
+	optional string padding_right = 5;
+	optional string padding_top = 6;
+	optional string padding_bottom = 7;
 }
 
 message Submission  {
@@ -420,6 +417,9 @@ message Button {
 	optional bool enabled = 2;
 	repeated ButtonAction actions = 3;
 	optional string text = 6;
+
+	optional string background = 7;
+	optional string color = 8;
 }
 
 message Countdown {
@@ -428,20 +428,16 @@ message Countdown {
 	optional string daily_end_time = 5; // 8:40:30 reset every day
 }
 
-message Image {
-	optional string url = 4;
-	optional string width = 10;
-	optional string height = 11;
-	optional string opacity = 12;
-	optional string rotate = 13;
-	optional string right = 14;
-	optional string top = 16;
-	optional string flip = 17;
-}
-
 message Video {
 	optional bool enabled = 1;
 	optional string url = 2;
+
+	// optional string width = 4; // alway full
+	optional string max_height = 5;
+	optional string padding_left = 7;
+	optional string padding_right = 8;
+	optional string padding_top = 9;
+	optional string padding_bottom = 10;
 }
 
 message ImpressionCount {
