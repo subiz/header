@@ -8,30 +8,6 @@ import "account.proto";
 import "common.proto";
 import "user3.proto";
 
-message Theme {
-	optional string account_id = 2;
-	optional string custom_css = 8; // for setting only
-	optional string widget_position = 3;
-	enum ButtonPosition {
-		left = 0;
-		right = 1;
-	}
-	optional string window_mode = 5;
-	enum WindowMode {
-		mini = 0;
-		full = 1;
-	}
-}
-
-message Sound {
-	optional string account_id = 1;
-	optional bool enabled = 2;
-	optional string new_conversation = 3;
-	optional string file_create = 4;
-	optional string new_message = 5;
-	optional string message_send_failed = 6;
-}
-
 message UserSetting {
 	optional common.Context ctx = 1;
 	optional account.Account account = 3;
@@ -45,14 +21,6 @@ message UserSetting {
 	optional bool desktop_notification = 10;
 	optional user.Trace trace = 11;
 	repeated Campaign campaigns = 13;
-}
-
-// global setting. eg: widget_4/4234098234
-message Global { //used only inside subiz
-	optional common.Context ctx = 1;
-	optional string name = 2;
-	optional string data = 3;
-	optional string pk = 4;
 }
 
 message SocialLink {
@@ -78,7 +46,6 @@ message Setting {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string widget_version = 3;
-	optional Sound sound = 4;
 	optional string language = 5;
 	optional string custom_language = 6; // write-only
 	repeated account.Agent agents = 7;
@@ -111,7 +78,6 @@ message Setting {
 	optional Greeting greeting = 27;
 	optional string title = 28;
 	optional string introduction = 29;
-	optional Theme theme = 30; // deprecated
 	optional string custom_language_url = 31;
 	optional string language_url = 32;
 }
