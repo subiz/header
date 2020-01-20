@@ -341,22 +341,20 @@ message Page {
 
 	optional Video video = 12;
 
-	// page appearance
+	optional Appearance desktop_appearance = 24;
+	optional Appearance mobile_appearance = 25;
+}
+
+message Appearance {
 	optional string color = 16;
 	optional string background = 17;
 	optional string input_color = 18;
 	optional string input_background = 19;
+	optional string background_image = 23;
 
-	optional string desktop_background_image = 22;
-	optional string mobile_background_image = 23;
-
-	optional Sizing desktop_sizing = 24;
-	optional Sizing mobile_sizing = 25;
-}
-
-message Sizing {
+	// sizing
 	optional string width = 2;
-	optional string min_heigh = 3;
+	optional string min_height = 3;
 	optional string padding_left = 4;
 	optional string padding_right = 5;
 	optional string padding_top = 6;
