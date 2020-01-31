@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package realtime;
+
+option go_package = "github.com/subiz/header/realtime";
+
+import "common.proto";
+import "event.proto";
+
+message Subscription {
+	common.Context ctx = 1;
+	string connection_id = 2;
+	repeated string events = 3;
+}
+
+message PollResult {
+	repeated event.Event events = 4;
+	string error = 5;
+	string token = 6;
+}
+
+message Meta {
+	enum Type {
+		tombstone = 0; // mark that connection is dead
+	}
+	string type = 2;
+	int64 created = 3;
+	int64 expired = 4; // unix_sec
+
+	string connection_id = 10;
+}
