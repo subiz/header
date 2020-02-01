@@ -9,7 +9,7 @@ import "event.proto";
 
 message Subscription {
 	common.Context ctx = 1;
-	string connection_id = 2;
+	string intial_token = 2;
 	repeated string events = 3;
 }
 
