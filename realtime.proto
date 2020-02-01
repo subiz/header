@@ -9,13 +9,13 @@ import "event.proto";
 
 message Subscription {
 	common.Context ctx = 1;
-	string intial_token = 2;
+	string initial_token = 2;
 	repeated string events = 3;
 }
 
 message PollResult {
 	repeated event.Event events = 4;
-	string token = 6;
+	string sequential_token = 6;
 }
 
 message Meta {
