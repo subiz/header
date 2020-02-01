@@ -93,6 +93,10 @@ enum E {
 	WsRequested = 10701;
 	WsSend = 10710;
 
+	RealtimeRequested = 10720;
+	RealtimeMessage = 10721;
+	RealtimeMeta = 10722;
+
 	WidgetUserSettingReadRequested = 10800;
 	WidgetUserSettingUpdateRequested = 10801;
 	WidgetSettingReadRequested = 10802;

@@ -15,11 +15,11 @@ message Subscription {
 
 message PollResult {
 	repeated event.Event events = 4;
-	string error = 5;
 	string token = 6;
 }
 
 message Meta {
+	common.Context ctx = 1;
 	enum Type {
 		tombstone = 0; // mark that connection is dead
 	}
@@ -28,4 +28,11 @@ message Meta {
 	int64 expired = 4; // unix_sec
 
 	string connection_id = 10;
+}
+
+message Token {
+	string connection_id = 4;
+	int64 last_offset = 5;
+	int64 created = 6;
+	int64 expired = 7;
 }
