@@ -25,6 +25,8 @@ message RawEventCreatedPayload {
 	string topic = 9;
 	string router_topic = 10;
 	string sub = 11;
+	int64 created = 12; // in ms
+	bytes data = 13; // payload in bytes format
 }
 
 message Events {
