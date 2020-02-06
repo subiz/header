@@ -66,6 +66,7 @@ message RouteResult {
 	optional string state = 6;
 }
 
+
 message MemberSeen {
 	optional string member_id = 2;
 	optional string message_id = 3;
@@ -90,6 +91,9 @@ message Member {
 		observer = 2;
 	};
 	optional common.By invited_by = 16;
+
+	optional int64 rated = 17; // rated time ms
+	optional int32 rating = 18; // 1-poor 2 3-average 4 5-great
 }
 
 enum State {
@@ -133,6 +137,9 @@ message Conversation {
 	optional string subject = 32;
 
 	repeated Field fields = 33;
+
+	optional int64 rated = 35; // rated time ms
+	optional int32 rating = 36; // 1-poor 2 3-average 4 5-great
 }
 
 message UserConversation { // used in database

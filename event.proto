@@ -152,10 +152,14 @@ enum ConvoType {
 	conversation_assigned = 36;
 	message_updated = 38; // event.data.message.revisions.0
 
+	conversation_rating_requested = 40;
+	conversation_rated = 41;
+
 	conversation_pending = 81;
 	ticket_created = 82;
 	ticket_updated = 83;
 	ticket_deleted = 84;
+
 }
 
 
