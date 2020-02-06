@@ -91,9 +91,6 @@ message Member {
 		observer = 2;
 	};
 	optional common.By invited_by = 16;
-
-	optional int64 rated = 17; // rated time ms
-	optional int32 rating = 18; // 1-poor 2 3-average 4 5-great
 }
 
 enum State {
@@ -138,8 +135,13 @@ message Conversation {
 
 	repeated Field fields = 33;
 
+	repeated Rating ratings = 35;
+}
+
+message Rating {
 	optional int64 rated = 35; // rated time ms
 	optional int32 rating = 36; // 1-poor 2 3-average 4 5-great
+	optional string rated_by = 37; // must be user
 }
 
 message UserConversation { // used in database
