@@ -80,6 +80,7 @@ message Setting {
 	optional string introduction = 29;
 	optional string custom_language_url = 31;
 	optional string language_url = 32;
+	optional bool auto_request_rating = 33;
 }
 
 message Field {
