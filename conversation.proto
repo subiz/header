@@ -142,6 +142,7 @@ message Rating {
 	optional int32 rating = 36; // 1-poor 2 3-average 4 5-great
 	optional string rated_by = 37; // must be user
 	optional bool no_rating = 38; // use dont want to rate
+	optional string comment = 39;
 }
 
 message UserConversation { // used in database
