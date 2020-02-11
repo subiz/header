@@ -347,19 +347,29 @@ message Page {
 }
 
 message Appearance {
-	optional string color = 16;
-	optional string background = 17;
-	optional string input_color = 18;
-	optional string input_background = 19;
-	optional string background_image = 23;
+	optional string title_color = 2;
+	optional string description_color = 3;
 
-	// sizing
-	optional string width = 2;
-	optional string min_height = 3;
-	optional string padding_left = 4;
-	optional string padding_right = 5;
-	optional string padding_top = 6;
-	optional string padding_bottom = 7;
+	optional string background = 4; // color or gradient
+	optional string background_image = 5;
+
+	optional string primary_button_background = 7;
+	optional string primary_button_color = 8;
+
+	optional string secondary_button_background = 9;
+	optional string secondary_button_color = 10;
+
+	// not supported yet
+	optional string input_color = 11;
+	optional string input_background = 12;
+
+	// sizing, not supported yet
+	optional string width = 20;
+	optional string min_height = 21;
+	optional string padding_left = 22;
+	optional string padding_right = 23;
+	optional string padding_top = 24;
+	optional string padding_bottom = 25;
 }
 
 message Submission  {
@@ -382,9 +392,6 @@ message Button {
 	optional bool enabled = 2;
 	repeated ButtonAction actions = 3;
 	optional string text = 6;
-
-	optional string background = 7;
-	optional string color = 8;
 }
 
 message Countdown {
