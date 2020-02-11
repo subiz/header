@@ -460,3 +460,7 @@ message UpdatedImage {
 	optional int64 height = 11;
 	optional int64 created = 12;
 }
+message UpdatedImages {
+	optional common.Context ctx = 1;
+	repeated UpdatedImage updated_images = 2;
+}
