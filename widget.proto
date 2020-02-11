@@ -450,7 +450,7 @@ message SearchLocationsRequest {
 	optional int64 limit = 4;
 }
 
-message UpdatedImage {
+message UploadedImage {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string url = 3;
@@ -460,7 +460,7 @@ message UpdatedImage {
 	optional int64 height = 11;
 	optional int64 created = 12;
 }
-message UpdatedImages {
+message UploadedImages {
 	optional common.Context ctx = 1;
-	repeated UpdatedImage updated_images = 2;
+	repeated UploadedImage uploaded_images = 2;
 }
