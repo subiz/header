@@ -496,11 +496,9 @@ service WidgetService {
 	rpc ListConversions(widget.ConversionRequest) returns (widget.Conversions);
 	rpc ExportConversions(widget.ConversionRequest) returns (widget.ConversionsExported);
 	rpc SearchLocations(widget.SearchLocationsRequest) returns (user.Traces);
-	rpc CreateUploadedImage(widget.UploadedImage) returns (widget.UploadedImage);
+	rpc UploadImage(widget.UploadedImage) returns (widget.UploadedImage);
 	rpc ListUploadedImage(common.Id) returns (widget.UploadedImages);
 }
-
-
 
 // avatar services
 service ServiceAvatarManager {

@@ -461,8 +461,7 @@ message UploadedImage {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string url = 3;
-	optional string thumbnail_256_url = 4;
-	optional string thumbnail_64_url = 5;
+	optional string thumbnail_url = 4;
 	optional int64 width = 10;
 	optional int64 height = 11;
 	optional int64 created = 12;
@@ -470,5 +469,5 @@ message UploadedImage {
 
 message UploadedImages {
 	optional common.Context ctx = 1;
-	repeated UploadedImage uploaded_images = 2;
+	repeated UploadedImage images = 2;
 }
