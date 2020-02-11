@@ -452,9 +452,10 @@ message SearchLocationsRequest {
 
 message UpdatedImage {
 	optional common.Context ctx = 1;
-	optional string url = 2;
-	optional string thumb_256_url = 3;
-	optional string thumb_64_url = 4;
+	optional string account_id = 2;
+	optional string url = 3;
+	optional string thumb_256_url = 4;
+	optional string thumb_64_url = 5;
 	optional int64 width = 10;
 	optional int64 height = 11;
 	optional int64 created = 12;
