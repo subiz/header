@@ -215,6 +215,7 @@ service ConversationReporter {
 
 service AgentPresenceMgr {
 	rpc ReadPresence (common.Id) returns (user.Presence);
+	rpc ListPresences (common.Id) returns (user.Presences);
 	rpc UpdatePresence (common.Id) returns (user.Presence);
 }
 
@@ -228,7 +229,6 @@ service RuleMgr {
 
 service ConversationMgr {
 	rpc PongMessage(event.Event) returns (event.Event);
-
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(conversation.StartRequest) returns (conversation.Conversation);
 	rpc EndConversation(common.Id) returns (conversation.Conversation);
