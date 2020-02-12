@@ -459,7 +459,6 @@ message SearchLocationsRequest {
 
 message UploadedImage {
 	optional common.Context ctx = 1;
-	optional string id = 2;
 	optional string account_id = 3;
 	optional string url = 4;
 	optional string thumbnail_url = 5;
