@@ -215,7 +215,6 @@ service ConversationReporter {
 
 service AgentPresenceMgr {
 	rpc ReadPresence (common.Id) returns (user.Presence);
-	rpc ListPresences (common.Id) returns (user.Presences);
 	rpc UpdatePresence (common.Id) returns (user.Presence);
 }
 

@@ -60,6 +60,7 @@ message Agent {
 	optional string client_id = 34; // ID of bot
 
 	optional bool is_supervisor = 35;
+	optional int64 last_ping = 36;
 }
 
 message Invitation {
