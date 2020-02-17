@@ -363,6 +363,8 @@ message Appearance {
 	optional string input_color = 11;
 	optional string input_background = 12;
 
+	optional string overlay = 13;
+
 	// sizing, not supported yet
 	optional string width = 20;
 	optional string min_height = 21;
