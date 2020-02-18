@@ -342,6 +342,7 @@ message Page {
 
 	optional Video video = 12;
 
+	optional string animation = 20;
 	optional Appearance desktop_appearance = 24;
 	optional Appearance mobile_appearance = 25;
 }
