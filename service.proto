@@ -497,6 +497,7 @@ service WidgetService {
 	rpc SearchLocations(widget.SearchLocationsRequest) returns (user.Traces);
 	rpc UploadImage(widget.UploadedImage) returns (widget.UploadedImage);
 	rpc ListUploadedImage(common.Id) returns (widget.UploadedImages);
+	rpc DeleteUploadedImage(widget.UploadedImage) returns (common.Empty);
 }
 
 // avatar services
