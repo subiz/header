@@ -104,6 +104,8 @@ service UserMgr {
 	rpc ExportUsers (user.UserExportRequest) returns (common.Empty); // deprecated
 
 	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
+
+	rpc MatchUsers(common.Ids) returns (user.Users);
 }
 
 service UserSyncMgr {
@@ -233,6 +235,7 @@ service ConversationMgr {
 	rpc EndConversation(common.Id) returns (conversation.Conversation);
 	rpc GetConversation(common.Id) returns (conversation.Conversation);
 	rpc ListConversations(conversation.ListConversationsRequest) returns (conversation.Conversations);
+	rpc MatchConversations(common.Ids) returns (conversation.Conversations);
 	rpc TagConversation(conversation.TagRequest) returns (common.Empty);
 	rpc UntagConversation(conversation.TagRequest) returns (common.Empty);
 

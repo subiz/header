@@ -33,6 +33,7 @@ message Ids {
 	Context ctx = 1;
 	string account_id = 2;
 	repeated string ids = 3;
+	repeated string signartures = 4; // crc32
 }
 
 message ObjectPathRequest {
@@ -210,9 +211,9 @@ message Permission {
 	int32 pipeline = 38;
 	int32 currency = 39;
 	int32 service_level_agreement = 40;
- 	int32 message_template = 41;
+	int32 message_template = 41;
 	int32 agent_presence = 42;
- 	int32 agent_preference = 43;
+	int32 agent_preference = 43;
 	int32 promotion_code = 44;
 	int32 referral = 45;
 }
@@ -289,4 +290,14 @@ message UpdateStateRequest {
 message ReadPermRequest {
 	string account_id = 1;
 	string user_id = 2;
+}
+
+message Error {
+	string description = 2;
+	string debug = 3;
+	int32 class = 4;
+	string stack = 5;
+	int64 created = 6;
+	string code = 7;
+	string root = 8; 
 }

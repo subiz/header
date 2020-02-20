@@ -211,6 +211,7 @@ message Conversations {
 	repeated Conversation conversations = 3;
 	optional string anchor = 4;
 	repeated string user_ids = 5;
+	repeated common.Error errors = 6;
 }
 
 message Search {
