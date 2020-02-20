@@ -33,7 +33,7 @@ message Ids {
 	Context ctx = 1;
 	string account_id = 2;
 	repeated string ids = 3;
-	repeated string signartures = 4; // crc32
+	repeated string signatures = 4; // crc32 IEEEE
 }
 
 message ObjectPathRequest {
@@ -299,5 +299,5 @@ message Error {
 	string stack = 5;
 	int64 created = 6;
 	string code = 7;
-	string root = 8; 
+	string root = 8;
 }
