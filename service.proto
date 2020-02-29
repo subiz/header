@@ -370,6 +370,7 @@ service EventMgr {
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
 
 	rpc SearchTopics (event.ListTopicsRequest) returns (event.ListTopicsResult);
+	rpc ListTopics (event.ListTopicsRequest) returns (event.ListTopicsResult);
 }
 
 service ConversationEventReader {
