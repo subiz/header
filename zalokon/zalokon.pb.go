@@ -1432,7 +1432,9 @@ func init() {
 	proto.RegisterType((*SubscribeAppRequest)(nil), "zalokon.SubscribeAppRequest")
 }
 
-func init() { proto.RegisterFile("zalokon.proto", fileDescriptor_76968621cce8364a) }
+func init() {
+	proto.RegisterFile("zalokon.proto", fileDescriptor_76968621cce8364a)
+}
 
 var fileDescriptor_76968621cce8364a = []byte{
 	// 1362 bytes of a gzipped FileDescriptorProto

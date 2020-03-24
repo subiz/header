@@ -194,7 +194,9 @@ func init() {
 	proto.RegisterType((*Attachment)(nil), "email.Attachment")
 }
 
-func init() { proto.RegisterFile("email.proto", fileDescriptor_6175298cb4ed6faa) }
+func init() {
+	proto.RegisterFile("email.proto", fileDescriptor_6175298cb4ed6faa)
+}
 
 var fileDescriptor_6175298cb4ed6faa = []byte{
 	// 327 bytes of a gzipped FileDescriptorProto

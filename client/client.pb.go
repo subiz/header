@@ -1054,7 +1054,9 @@ func init() {
 	proto.RegisterType((*WebhookTestResult)(nil), "client.WebhookTestResult")
 }
 
-func init() { proto.RegisterFile("client.proto", fileDescriptor_014de31d7ac8c57c) }
+func init() {
+	proto.RegisterFile("client.proto", fileDescriptor_014de31d7ac8c57c)
+}
 
 var fileDescriptor_014de31d7ac8c57c = []byte{
 	// 1173 bytes of a gzipped FileDescriptorProto

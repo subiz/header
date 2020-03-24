@@ -2191,7 +2191,9 @@ func init() {
 	proto.RegisterType((*FbResponse)(nil), "fabikon.FbResponse")
 }
 
-func init() { proto.RegisterFile("fabikon.proto", fileDescriptor_8b403c2b2f94ae3b) }
+func init() {
+	proto.RegisterFile("fabikon.proto", fileDescriptor_8b403c2b2f94ae3b)
+}
 
 var fileDescriptor_8b403c2b2f94ae3b = []byte{
 	// 1997 bytes of a gzipped FileDescriptorProto

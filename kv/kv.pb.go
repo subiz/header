@@ -183,7 +183,9 @@ func init() {
 	proto.RegisterType((*Bool)(nil), "kv.Bool")
 }
 
-func init() { proto.RegisterFile("kv.proto", fileDescriptor_2216fe83c9c12408) }
+func init() {
+	proto.RegisterFile("kv.proto", fileDescriptor_2216fe83c9c12408)
+}
 
 var fileDescriptor_2216fe83c9c12408 = []byte{
 	// 184 bytes of a gzipped FileDescriptorProto

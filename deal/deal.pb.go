@@ -324,7 +324,9 @@ func init() {
 	proto.RegisterType((*Pipelines)(nil), "deal.Pipelines")
 }
 
-func init() { proto.RegisterFile("deal.proto", fileDescriptor_26fe74684e4960c8) }
+func init() {
+	proto.RegisterFile("deal.proto", fileDescriptor_26fe74684e4960c8)
+}
 
 var fileDescriptor_26fe74684e4960c8 = []byte{
 	// 417 bytes of a gzipped FileDescriptorProto

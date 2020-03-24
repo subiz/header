@@ -288,7 +288,9 @@ func init() {
 	proto.RegisterType((*Token)(nil), "realtime.Token")
 }
 
-func init() { proto.RegisterFile("realtime.proto", fileDescriptor_dcbdca058206953b) }
+func init() {
+	proto.RegisterFile("realtime.proto", fileDescriptor_dcbdca058206953b)
+}
 
 var fileDescriptor_dcbdca058206953b = []byte{
 	// 364 bytes of a gzipped FileDescriptorProto

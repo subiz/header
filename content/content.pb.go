@@ -769,7 +769,9 @@ func init() {
 	proto.RegisterType((*ContentsByUrlTable)(nil), "content.ContentsByUrlTable")
 }
 
-func init() { proto.RegisterFile("content.proto", fileDescriptor_61cc9617ce0cf609) }
+func init() {
+	proto.RegisterFile("content.proto", fileDescriptor_61cc9617ce0cf609)
+}
 
 var fileDescriptor_61cc9617ce0cf609 = []byte{
 	// 770 bytes of a gzipped FileDescriptorProto

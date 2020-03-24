@@ -488,7 +488,9 @@ func init() {
 	proto.RegisterType((*UserAvail)(nil), "mailkon.UserAvail")
 }
 
-func init() { proto.RegisterFile("mailkon.proto", fileDescriptor_eee8b1e66980e0b7) }
+func init() {
+	proto.RegisterFile("mailkon.proto", fileDescriptor_eee8b1e66980e0b7)
+}
 
 var fileDescriptor_eee8b1e66980e0b7 = []byte{
 	// 520 bytes of a gzipped FileDescriptorProto

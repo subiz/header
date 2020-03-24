@@ -117,7 +117,9 @@ func init() {
 	proto.RegisterType((*Task)(nil), "callback.Task")
 }
 
-func init() { proto.RegisterFile("callback.proto", fileDescriptor_6cf7fe261a3a1c45) }
+func init() {
+	proto.RegisterFile("callback.proto", fileDescriptor_6cf7fe261a3a1c45)
+}
 
 var fileDescriptor_6cf7fe261a3a1c45 = []byte{
 	// 203 bytes of a gzipped FileDescriptorProto

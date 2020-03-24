@@ -426,7 +426,9 @@ func init() {
 	proto.RegisterType((*MidnightCallback)(nil), "endchat_bot.MidnightCallback")
 }
 
-func init() { proto.RegisterFile("endchat_bot.proto", fileDescriptor_b405950ab0fad1c7) }
+func init() {
+	proto.RegisterFile("endchat_bot.proto", fileDescriptor_b405950ab0fad1c7)
+}
 
 var fileDescriptor_b405950ab0fad1c7 = []byte{
 	// 581 bytes of a gzipped FileDescriptorProto

@@ -9872,7 +9872,9 @@ func init() {
 	proto.RegisterType((*ReportConversationsRequest)(nil), "conversation.ReportConversationsRequest")
 }
 
-func init() { proto.RegisterFile("conversation.proto", fileDescriptor_d6ae46d001825652) }
+func init() {
+	proto.RegisterFile("conversation.proto", fileDescriptor_d6ae46d001825652)
+}
 
 var fileDescriptor_d6ae46d001825652 = []byte{
 	// 7216 bytes of a gzipped FileDescriptorProto

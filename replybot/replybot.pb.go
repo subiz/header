@@ -193,7 +193,9 @@ func init() {
 	proto.RegisterType((*ExecutedConversation)(nil), "replybot.ExecutedConversation")
 }
 
-func init() { proto.RegisterFile("replybot.proto", fileDescriptor_9b7911b2e9299dcd) }
+func init() {
+	proto.RegisterFile("replybot.proto", fileDescriptor_9b7911b2e9299dcd)
+}
 
 var fileDescriptor_9b7911b2e9299dcd = []byte{
 	// 266 bytes of a gzipped FileDescriptorProto

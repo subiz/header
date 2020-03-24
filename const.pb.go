@@ -1006,7 +1006,9 @@ func init() {
 	proto.RegisterEnum("header.E", E_name, E_value)
 }
 
-func init() { proto.RegisterFile("const.proto", fileDescriptor_5adb9555099c2688) }
+func init() {
+	proto.RegisterFile("const.proto", fileDescriptor_5adb9555099c2688)
+}
 
 var fileDescriptor_5adb9555099c2688 = []byte{
 	// 3393 bytes of a gzipped FileDescriptorProto

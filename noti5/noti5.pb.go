@@ -641,7 +641,9 @@ func init() {
 	proto.RegisterType((*SubscribeStatus)(nil), "noti5.SubscribeStatus")
 }
 
-func init() { proto.RegisterFile("noti5.proto", fileDescriptor_3a29df08143386a8) }
+func init() {
+	proto.RegisterFile("noti5.proto", fileDescriptor_3a29df08143386a8)
+}
 
 var fileDescriptor_3a29df08143386a8 = []byte{
 	// 736 bytes of a gzipped FileDescriptorProto

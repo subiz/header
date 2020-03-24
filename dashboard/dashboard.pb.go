@@ -702,7 +702,9 @@ func init() {
 	proto.RegisterType((*AgentConfigs)(nil), "dashboard.AgentConfigs")
 }
 
-func init() { proto.RegisterFile("dashboard.proto", fileDescriptor_9b97678da3a35dfb) }
+func init() {
+	proto.RegisterFile("dashboard.proto", fileDescriptor_9b97678da3a35dfb)
+}
 
 var fileDescriptor_9b97678da3a35dfb = []byte{
 	// 929 bytes of a gzipped FileDescriptorProto

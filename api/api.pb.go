@@ -828,7 +828,9 @@ func init() {
 	proto.RegisterType((*Apikey)(nil), "api.Apikey")
 }
 
-func init() { proto.RegisterFile("api.proto", fileDescriptor_00212fb1f9d3bf1c) }
+func init() {
+	proto.RegisterFile("api.proto", fileDescriptor_00212fb1f9d3bf1c)
+}
 
 var fileDescriptor_00212fb1f9d3bf1c = []byte{
 	// 664 bytes of a gzipped FileDescriptorProto

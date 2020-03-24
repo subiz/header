@@ -3222,7 +3222,9 @@ func init() {
 	proto.RegisterType((*LogAgentLoggedIn)(nil), "account.LogAgentLoggedIn")
 }
 
-func init() { proto.RegisterFile("account.proto", fileDescriptor_8e28828dcb8d24f0) }
+func init() {
+	proto.RegisterFile("account.proto", fileDescriptor_8e28828dcb8d24f0)
+}
 
 var fileDescriptor_8e28828dcb8d24f0 = []byte{
 	// 2498 bytes of a gzipped FileDescriptorProto

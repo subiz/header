@@ -3594,7 +3594,9 @@ func init() {
 	proto.RegisterType((*UploadedImages)(nil), "widget.UploadedImages")
 }
 
-func init() { proto.RegisterFile("widget.proto", fileDescriptor_95b5c33b51e24547) }
+func init() {
+	proto.RegisterFile("widget.proto", fileDescriptor_95b5c33b51e24547)
+}
 
 var fileDescriptor_95b5c33b51e24547 = []byte{
 	// 3608 bytes of a gzipped FileDescriptorProto
