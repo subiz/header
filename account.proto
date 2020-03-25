@@ -61,6 +61,7 @@ message Agent {
 
 	optional bool is_supervisor = 35;
 	optional int64 last_ping = 36;
+	optional int64 last_token_requested = 37;
 }
 
 message Invitation {
@@ -117,11 +118,9 @@ message Account {
 
 	//optional string referrer_id = 11;
 	enum State {
-		pending = 0; // waiting for email confirmation
 		activated = 1;  // normal account
-		locked = 2;  // subiz lock down account
-		deleted = 3;
-		inactive = 4; // no login in last 90 days
+		deleted = 3; // haven't refreshed token in the last 90 days
+		inactive = 4; // haven't refreshed token in the last 60 days
 	}
 	optional string city = 14;
 	optional int32 zip_code = 16;
@@ -141,6 +140,8 @@ message Account {
 	optional string date_format = 29;
 	optional BusinessHours business_hours = 30;
 	optional string referrer_from = 31;
+
+	optional int64 last_token_requested = 32;
 }
 
 message GroupMember {
