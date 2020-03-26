@@ -98,10 +98,6 @@ message Plan {
 		standard = 2;
 		advanced = 3;
 	}
-	optional uint32 level = 14;
-	optional bool can_buy_agent = 15;
-	optional bool can_buy = 16;
-	optional bool has_start_time = 17;
 }
 
 message Subscription {
@@ -118,8 +114,6 @@ message Subscription {
 	optional uint32 next_billing_cycle_month = 16;
 	optional string plan = 17;
 
-	repeated Addon addons = 21;
-
 	optional float credit = 27;
 	repeated Note notes = 28;
 	optional string referral_by = 29; // account_id
@@ -130,6 +124,9 @@ message Subscription {
 
 	optional bool auto_charge = 44;
 	optional int64 ended = 45;
+
+	// holds the time in which subscript upgrade for the first time
+	optional int64 first_upgraded = 46;
 }
 
 message Bill {
@@ -237,7 +234,7 @@ message InvoiceItem {
 		optional PlanInvoiceItem plan = 5;
 	}
 	optional Data data = 9;
-	optional float total_price = 10;  // = (* quantity price)
+	optional float total_price = 10;	// = (* quantity price)
 }
 
 message BillingInfo {
@@ -346,21 +343,21 @@ message LogPromotionCodeUsed {
 
 message Referral {
 	optional common.Context ctx = 1;
-  optional string agent_id = 2;
+	optional string agent_id = 2;
 	optional string account_id = 3;
 	enum Status {
 		active = 0; // duoc phep refer nguoi khac
 		inactive = 1;
-  }
+	}
 	optional string status = 5;
 	optional float earning = 6;
 	optional float commission_rate = 7;
 	optional int64 created = 9;
 
 	optional string bank_name = 11;
-  optional string bank_account_number = 12;
-  optional string bank_branch = 14;
-  optional string bank_fullname = 15;
+	optional string bank_account_number = 12;
+	optional string bank_branch = 14;
+	optional string bank_fullname = 15;
 	optional string referrer_id = 16;
 	optional float minimum_payment = 17;
 	optional int32 number_of_refer = 18;
@@ -374,44 +371,43 @@ message AgentByReferId {
 }
 
 message LogAccountReferred {
-  optional string referrer_id = 1;
+	optional string referrer_id = 1;
 	optional string account_id = 2;
 	optional int64 created = 3;
-  optional string referrer_account_id = 4;
+	optional string referrer_account_id = 4;
 	optional string referrer_agent_id = 5;
 }
 
 message LogAccountReferreds{
-  optional common.Context ctx = 1;
+	optional common.Context ctx = 1;
 	repeated LogAccountReferred log_account_referreds = 2;
 }
 
 message LogBillByAccountReferred {
 	optional string referrer_id = 1;
 	optional string account_id = 2;
-  optional float commission_rate = 3;
+	optional float commission_rate = 3;
 	optional float amount = 4;
 	optional int64 created = 5;
 	optional string bill_id = 6;
 	optional int32 year = 7;
-  optional string referrer_account_id = 8;
+	optional string referrer_account_id = 8;
 	optional string referrer_agent_id = 9;
 }
 
 message LogBillByAccountReferreds {
-  optional common.Context ctx = 1;
+	optional common.Context ctx = 1;
 	repeated LogBillByAccountReferred log_bill_by_account_referreds = 2;
 }
 
 message LogPaidForAgentReferrer {
-  optional common.Context ctx = 1;
-  optional string referrer_id = 2;
+	optional common.Context ctx = 1;
+	optional string referrer_id = 2;
 	optional float amount = 3;
 	optional int64 created = 5;
-  optional string referrer_account_id = 6;
+	optional string referrer_account_id = 6;
 	optional string referrer_agent_id = 7;
 	optional string transaction_id = 8;
-
 }
 
 message LogPaidForAgentReferrers {
@@ -472,41 +468,6 @@ message Log {
 	optional int32 month = 7;
 }
 
-message Addon {
-	enum Type {
-		credit = 0;
-		agent = 1;
-	}
-	optional string type = 2;
-	optional string name = 3;
-	optional float price = 4;
-	optional Currency currency = 5;
-
-	enum ChargeType {
-		one_time = 0;
-		recurring = 1;
-	}
-	optional string charge_type = 6;
-	optional int32 period = 7;
-
-	enum PeriodUnit {
-		day = 0;
-		week = 1;
-		month = 2;
-		year = 3;
-	}
-	optional string period_unit = 8;
-	optional int32 quantity = 9;
-	optional int64 created = 10;
-}
-
-message PaymentRenewCycleRequested {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional Subscription sub = 3;
-	optional string cycle_id = 4;
-}
-
 message SearchInvoiceRequest {
 	optional common.Context ctx = 1;
 	optional string query = 4;
@@ -529,8 +490,8 @@ message LogAccountReferredByTime{
 	optional int64 created = 5;
 }
 
-message NumberOfReferByAgent{
-  optional string agent_id = 1;
+message NumberOfReferByAgent {
+	optional string agent_id = 1;
 	optional string account_id = 2;
 	optional float earning = 3;
 	optional int32 number_of_refer = 4;
@@ -539,18 +500,18 @@ message NumberOfReferByAgent{
 	optional string status = 7;
 }
 
-message ReferralResponse{
+message ReferralResponse {
 	optional common.Context ctx = 1;
 	repeated NumberOfReferByAgent top_referrals = 2;
 }
 
-message SearchReferredRequest{
+message SearchReferredRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string agent_id = 3;
 }
 
-message PromotionCodes{
+message PromotionCodes {
 	optional common.Context ctx = 1;
 	repeated PromotionCode promotion_codes = 2;
 	optional string anchor = 3;
@@ -563,13 +524,14 @@ message PromotionCodeRequest {
 	optional string account_id = 3;
 }
 
-message ListPromotionCodeRequest{
-  optional common.Context ctx = 1;
+message ListPromotionCodeRequest {
+	optional common.Context ctx = 1;
 	optional string anchor = 2;
 	optional int32 limit = 4;
 }
 
 message String {
+	optional common.Context ctx = 1;
 	optional string str = 2;
 }
 
@@ -580,16 +542,6 @@ message PayRequest {
 	optional string description = 7;
 	optional Contact CustomerInfo = 9;
 	optional float amount = 10;
-}
-
-message ESubscription { // subscription with error
-	optional Subscription sub = 2;
-	optional string err = 3;
-}
-
-message EInvoice { // invoice with error
-	optional Invoice inv = 3;
-	optional string err = 4;
 }
 
 message InvoiceCreatedEmail {
