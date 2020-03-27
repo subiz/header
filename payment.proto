@@ -107,7 +107,6 @@ message Subscription {
 	optional string promotion_code = 4;
 	optional string name = 7;
 	optional int64 started = 5;
-	optional int64 due_date = 6; // read-only
 	optional bool auto_renew = 9;
 
 	optional uint32 billing_cycle_month = 15;
