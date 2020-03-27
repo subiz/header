@@ -28,11 +28,6 @@ service ApiServer {
 	rpc Call(api.Request) returns (api.Response);
 }
 
-// account services
-service AccSubMgr {
-	rpc SearchSub(account.SearchSubRequest) returns (account.AccSubs);
-}
-
 service AccountMgr {
 	rpc CreateGroup(account.AgentGroup) returns (account.AgentGroup);
 	rpc UpdateGroup(account.AgentGroup) returns (account.AgentGroup);
@@ -421,6 +416,7 @@ service SubizInternalPaymentMgr {
 }
 
 service PaymentMgr {
+	rpc SearchSub(account.SearchSubRequest) returns (account.AccSubs);
 	rpc Purchase(payment.Subscription) returns (payment.Invoice);
 	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription);
 	rpc GetSubscription(common.Id) returns (payment.Subscription);

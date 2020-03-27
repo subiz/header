@@ -218,6 +218,7 @@ message PlanInvoiceItem {
 	optional float save_percentage = 9;
 	optional int64 started = 8;
 	optional int32 day_left = 4;
+	optional uint32 old_agent_count = 10;
 }
 
 message InvoiceItem {
