@@ -125,8 +125,7 @@ message Subscription {
 	optional bool auto_charge = 44;
 	optional int64 ended = 45;
 
-	// holds the time in which subscript upgrade for the first time
-	optional int64 first_upgraded = 46;
+	optional bool trusted = 46;
 }
 
 message Bill {
