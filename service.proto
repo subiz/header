@@ -47,6 +47,7 @@ service AccountMgr {
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(account.CreateAccountRequest) returns (account.Account);
 	rpc ListAgents(common.Id) returns (account.Agents);
+	rpc CountAccount(account.CountRequest) returns (account.Count);
 
 	// todo: remove this, we should redirect all login request to oauth server
 	rpc Login(account.LoginRequest) returns (account.Agent);

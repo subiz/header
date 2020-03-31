@@ -403,3 +403,13 @@ message LogAgentLoggedIn {
 	optional string agent_id = 3;
 	optional int64 created = 4;
 }
+
+message CountRequest {
+	optional common.Context ctx = 1;
+}
+
+message Count {
+	optional common.Context ctx = 1;
+	optional int64 onActive = 2;
+	optional int64 onInactive = 3;
+}
