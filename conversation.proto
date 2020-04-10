@@ -1260,3 +1260,18 @@ message ReportConversationsRequest {
 	optional int64 number_of_points = 29;
 	optional string from = 30; // rfc3339
 }
+
+message MuteRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	optional string conversation_id = 4;
+	optional bool mute = 6; // true, false
+}
+
+message SubscribeRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	repeated string topics = 4;
+}

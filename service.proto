@@ -132,7 +132,7 @@ service UserSyncMgr {
 	rpc CreateEvent(event.UserEvent) returns (common.Empty);
 	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
 	rpc SubscribeTopic(user.SubscribeRequest) returns (common.Empty);
-	rpc UnsubscribeTopic(user.SubscribeRequest) returns (common.Empty);
+	rpc UnsubscribeTopic(user.SubscribeRequest) returns (common.Empty); // remove
 
 	// sync automation
 	rpc FireBlockUser(event.AutomationEvent) returns (common.Empty);
@@ -248,6 +248,9 @@ service ConversationMgr {
 	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
 	rpc ListConversations2(conversation.ConversationListRequest) returns (conversation.ConversationListResponse);
 	rpc ExportUsers(conversation.UserExportRequest) returns (common.Empty);
+
+	rpc UpdateMuteConversation(conversation.MuteRequest) returns (common.Empty);
+	rpc UnsubscribeConversation(conversation.SubscribeRequest) returns (common.Empty); // remove
 }
 
 service ConversationSyncMgr {
@@ -362,7 +365,7 @@ service Publisher {
 service EventMgr {
 	rpc SearchEvents (event.ListEventsRequest) returns (event.Events);
 	rpc Subscribe (user.SubscribeRequest) returns (common.Empty);
-	rpc UpdateMute (user.MuteRequest) returns (common.Empty);
+	rpc UpdateMute (user.MuteRequest) returns (common.Empty); // remove
 	rpc CreateEvent (event.UserEvent) returns (event.Event);
 	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
 
