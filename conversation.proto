@@ -66,7 +66,6 @@ message RouteResult {
 	optional string state = 6;
 }
 
-
 message MemberSeen {
 	optional string member_id = 2;
 	optional string message_id = 3;
@@ -117,7 +116,6 @@ message Conversation {
 	repeated Tag tags = 10;
 	optional int64 ended = 12;
 	optional string state = 11; // converation state
-	optional int64 accepted = 15; // time chat is accepted after being in unassigned list
 
 	optional Integration integration = 18;
 	optional int64 actived = 19;
@@ -135,6 +133,8 @@ message Conversation {
 
 	repeated Field fields = 33;
 	repeated Rating ratings = 35;
+
+	optional string source = 36; // indicate where does the conversation happended (url)
 }
 
 message Rating {
