@@ -136,7 +136,7 @@ message Conversation {
 
 	optional string source = 36; // indicate where does the conversation happended (url)
 
-	optional string is_read = 39; // used when list only
+	optional bool is_read = 39; // used when list only
 }
 
 message Rating {
@@ -1273,9 +1273,19 @@ message MuteRequest {
 	optional bool mute = 6; // true, false
 }
 
+message ReadConversationRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string agent_id = 3;
+	optional string conversation_id = 4;
+	optional bool all_conversations = 5;
+
+	optional bool is_read = 6; // true, false
+}
+
 message SubscribeRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string agent_id = 3;
-	repeated string topics = 4;
+	repeated string conversations = 4;
 }
