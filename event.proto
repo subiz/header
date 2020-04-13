@@ -156,9 +156,14 @@ enum ConvoType {
 	conversation_rated = 41; // event.data.conversation
 
 	conversation_pending = 81;
+
 	ticket_created = 82;
 	ticket_updated = 83;
 	ticket_deleted = 84;
+
+	my_conversation_mute_updated = 85; // conversation
+	my_conversation_read_updated = 86; // conversation
+	my_conversation_unsubscribed = 87; // conversation
 }
 
 

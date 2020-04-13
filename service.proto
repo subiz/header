@@ -249,9 +249,9 @@ service ConversationMgr {
 	rpc ListConversations2(conversation.ConversationListRequest) returns (conversation.ConversationListResponse);
 	rpc ExportUsers(conversation.UserExportRequest) returns (common.Empty);
 
-	rpc UpdateMuteConversation(conversation.MuteRequest) returns (common.Empty);
-	rpc UnsubscribeConversation(conversation.SubscribeRequest) returns (common.Empty);
-	rpc MarkReadConversation (conversation.ReadConversationRequest) returns (common.Empty);
+	rpc UpdateMuteConversation(conversation.Conversation) returns (common.Empty);
+	rpc UnsubscribeConversation(conversation.Conversation) returns (common.Empty);
+	rpc MarkReadConversation (conversation.Conversation) returns (common.Empty);
 }
 
 service ConversationSyncMgr {
