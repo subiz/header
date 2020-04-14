@@ -34,6 +34,8 @@ message Ids {
 	string account_id = 2;
 	repeated string ids = 3;
 	repeated string signatures = 4; // crc32 IEEEE
+
+	repeated int64 last_modified = 5;
 }
 
 message ObjectPathRequest {

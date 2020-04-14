@@ -89,7 +89,6 @@ service UserMgr {
 	rpc CreateUser (user.User) returns (common.Id);
 	rpc UpdateUser (user.User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (user.User);
-	rpc MarkReadUser (common.Id) returns (common.Empty);
 
 	rpc CountSegmentationUserByAttribute(user.CountSegmentationUserByAttributeRequest) returns (user.CountResponse);
 

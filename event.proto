@@ -166,7 +166,6 @@ enum ConvoType {
 	my_conversation_unsubscribed = 87; // conversation
 }
 
-
 message Subscription { // raweventcreatedpayload
 	common.Context ctx = 1;
 	string topic = 3;
