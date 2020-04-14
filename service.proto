@@ -111,9 +111,6 @@ service UserSyncMgr {
 	// sync limit
 	rpc UpdateLimit(payment.Limit) returns (common.Empty);
 
-	// sync v3
-	rpc UpsertUserV3(user.User) returns (common.Empty);
-
 	// sync account
 	rpc UpsertAgent(account.Agent) returns (common.Empty);
 	rpc UpdatePermission(account.AgentPerm) returns (common.Empty);
