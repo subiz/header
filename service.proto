@@ -260,9 +260,6 @@ service ConversationSyncMgr {
 	rpc FireSendChatTranscriptEmail(event.AutomationEvent) returns (common.Empty);
 	rpc FireUpdateConversationState(event.AutomationEvent) returns (common.Empty);
 
-	// sync mute
-	rpc UpdateMute(user.MuteRequest) returns (common.Empty);
-
 	// sync account
 	rpc DeleteAgent(common.Id) returns (common.Empty);
 	rpc DeleteGroup(common.Id) returns (common.Empty);
@@ -362,12 +359,10 @@ service Publisher {
 service EventMgr {
 	rpc SearchEvents (event.ListEventsRequest) returns (event.Events);
 	rpc Subscribe (user.SubscribeRequest) returns (common.Empty);
-	rpc UpdateMute (user.MuteRequest) returns (common.Empty); // remove
+
 	rpc CreateEvent (event.UserEvent) returns (event.Event);
-	rpc ReadTopic (user.ReadTopicRequest) returns (common.Empty);
 
 	rpc SearchTopics (event.ListTopicsRequest) returns (event.ListTopicsResult);
-	rpc ListTopics (event.ListTopicsRequest) returns (event.ListTopicsResult);
 }
 
 service ConversationEventReader {
