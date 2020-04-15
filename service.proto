@@ -127,8 +127,6 @@ service UserSyncMgr {
 	rpc PickToSegment(user.PickRequest) returns (common.Empty);
 	rpc CreateEvent(event.UserEvent) returns (common.Empty);
 	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
-	rpc SubscribeTopic(user.SubscribeRequest) returns (common.Empty);
-	rpc UnsubscribeTopic(user.SubscribeRequest) returns (common.Empty); // remove
 
 	// sync automation
 	rpc FireBlockUser(event.AutomationEvent) returns (common.Empty);
@@ -358,11 +356,7 @@ service Publisher {
 
 service EventMgr {
 	rpc SearchEvents (event.ListEventsRequest) returns (event.Events);
-	rpc Subscribe (user.SubscribeRequest) returns (common.Empty);
-
 	rpc CreateEvent (event.UserEvent) returns (event.Event);
-
-	rpc SearchTopics (event.ListTopicsRequest) returns (event.ListTopicsResult);
 }
 
 service ConversationEventReader {
