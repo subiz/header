@@ -298,13 +298,6 @@ service IntegrationMgr {
 	rpc CheckAvailability(conversation.AvailabilityCheckRequest) returns (conversation.AvailabilityCheckResult);
 }
 
-service TicketAttributeMgr {
-	rpc ListTicketAttributeDefinitions(common.Empty) returns (conversation.TicketAttributeDefinitions);
-	rpc CreateTicketAttributeDefinition(conversation.TicketAttributeDefinition) returns (conversation.TicketAttributeDefinition);
-	rpc UpdateTicketAttributeDefinition(conversation.TicketAttributeDefinition) returns (conversation.TicketAttributeDefinition);
-	rpc DeleteTicketAttributeDefinition(conversation.DeleteTicketAttrRequest) returns (common.Empty);
-}
-
 service TicketMgr {
 	rpc CreateTicket(conversation.Ticket) returns (conversation.Ticket);
 	rpc UpdateTicket(conversation.Ticket) returns (conversation.Ticket);

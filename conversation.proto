@@ -125,7 +125,7 @@ message Conversation {
 
 	optional string chain_id = 24;
 	optional Ticket ticket = 27;
-	optional string ticket_id = 28;
+	optional string ticket_id = 28; // remove
 	optional RouteResult assigned_to = 30;
 
 	optional string first_message = 31;
@@ -740,18 +740,18 @@ message Ticket {
 	optional string conversation_id = 3;
 	optional string id = 4;
 	optional string state = 5;
-	optional string priority = 6; // deprecated
+	optional string priority = 6;
 	optional int64 duedate = 7;
 	optional string subject = 8;
 	optional int64 created = 9;
-	repeated TicketAttributeData attributes = 10;
-
+	repeated TicketAttributeData attributes = 10; // remove
 	optional int64 updated = 11;
 	repeated string user_ids = 12;
 	repeated string agent_ids = 13;
 	optional bool is_assigned = 14;
 	optional string updated_by = 15;
 	optional string created_by = 16;
+	optional string note = 19;
 }
 
 enum TicketListOrderBy {
@@ -791,42 +791,6 @@ enum TicketPriority {
 	medium = 1;
 	high = 2;
 	urgent = 3;
-}
-
-enum TicketAttributeType {
-	text = 0;
-	number = 1;
-	boolean = 2;
-	datetime = 3;
-	list = 4;
-}
-
-enum TicketAttributeKind {
-	system = 0;
-	default = 1;
-	custom = 2;
-}
-
-message TicketAttributeDefinition {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string name = 3;
-	optional string description = 4;
-	optional string type = 5;
-	repeated string list_items = 6;
-	optional string key = 7;
-	optional string kind = 8;
-	optional int64 updated = 9;
-}
-
-message TicketAttributeDefinitions {
-	optional common.Context ctx = 1;
-	repeated TicketAttributeDefinition attributes = 2;
-}
-
-enum TicketAttributeDataState {
-	live = 0;
-	deleted = 1;
 }
 
 message TicketAttributeData {
