@@ -13,19 +13,17 @@ for i in `ls -R`; do
 		continue
 	fi
 
+	# ignore some dirs
 	if [[ $i == "vendor" ]] || [[ $i == "proto" ]] || [[ $LAST_DIR == ./node_modules* ]] || [[ $LAST_DIR == ./vendor* ]] || [[ $LAST_DIR == ./proto* ]]; then
 		continue
 	fi
 
 	if [[ $i == *".proto" ]]; then
 		printf "\033[0;90m["%d"] compiling %s %s \033[0;31m\n" $TOTAL $LAST_DIR /$i
-		$PROTOC -I/tmp/include -I. --go_out=plugins:. --proto_path=./  $LAST_DIR/$i &
-		# --swagger_out=logtostderr=true:.
+		$PROTOC -I/tmp/include -I. --go_out=plugins=grpc:. --proto_path=./  $LAST_DIR/$i &
 
 		ALLPROTO="$ALLPROTO $LAST_DIR/$i"
 		let "TOTAL += 1"
-		# else
-		# echo -e "\033[0;37mignore" $i "\033[0;30m"
 	fi
 done;
 wait

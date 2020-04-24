@@ -7,6 +7,7 @@
 package header
 
 import (
+	context "context"
 	proto "github.com/golang/protobuf/proto"
 	account "github.com/subiz/header/account"
 	api "github.com/subiz/header/api"
@@ -26,6 +27,9 @@ import (
 	search "github.com/subiz/header/search"
 	user "github.com/subiz/header/user"
 	widget "github.com/subiz/header/widget"
+	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1986,4 +1990,12032 @@ func file_service_proto_init() {
 	file_service_proto_rawDesc = nil
 	file_service_proto_goTypes = nil
 	file_service_proto_depIdxs = nil
+}
+
+// Reference imports to suppress errors if they are not otherwise used.
+var _ context.Context
+var _ grpc.ClientConnInterface
+
+// This is a compile-time assertion to ensure that this generated file
+// is compatible with the grpc package it is being compiled against.
+const _ = grpc.SupportPackageIsVersion6
+
+// ApiServerClient is the client API for ApiServer service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ApiServerClient interface {
+	Call(ctx context.Context, in *api.Request, opts ...grpc.CallOption) (*api.Response, error)
+}
+
+type apiServerClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewApiServerClient(cc grpc.ClientConnInterface) ApiServerClient {
+	return &apiServerClient{cc}
+}
+
+func (c *apiServerClient) Call(ctx context.Context, in *api.Request, opts ...grpc.CallOption) (*api.Response, error) {
+	out := new(api.Response)
+	err := c.cc.Invoke(ctx, "/header.ApiServer/Call", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ApiServerServer is the server API for ApiServer service.
+type ApiServerServer interface {
+	Call(context.Context, *api.Request) (*api.Response, error)
+}
+
+// UnimplementedApiServerServer can be embedded to have forward compatible implementations.
+type UnimplementedApiServerServer struct {
+}
+
+func (*UnimplementedApiServerServer) Call(context.Context, *api.Request) (*api.Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Call not implemented")
+}
+
+func RegisterApiServerServer(s *grpc.Server, srv ApiServerServer) {
+	s.RegisterService(&_ApiServer_serviceDesc, srv)
+}
+
+func _ApiServer_Call_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(api.Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServerServer).Call(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ApiServer/Call",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServerServer).Call(ctx, req.(*api.Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ApiServer_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ApiServer",
+	HandlerType: (*ApiServerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Call",
+			Handler:    _ApiServer_Call_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AccountMgrClient is the client API for AccountMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AccountMgrClient interface {
+	CreateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error)
+	UpdateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error)
+	GetGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroup, error)
+	RequestResetPassword(ctx context.Context, in *account.ResetPasswordRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UpdatePassword(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error)
+	UpdateAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error)
+	RequestChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error)
+	ConfirmChangeEmail(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error)
+	AcceptInvitation(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error)
+	GetInvitation(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error)
+	InviteAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	GetAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error)
+	ConfirmAccount(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Account, error)
+	GetAccount(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Account, error)
+	UpdateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error)
+	CreateAccount(ctx context.Context, in *account.CreateAccountRequest, opts ...grpc.CallOption) (*account.Account, error)
+	ListAgents(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agents, error)
+	CountAccount(ctx context.Context, in *account.CountRequest, opts ...grpc.CallOption) (*account.Count, error)
+	// todo: remove this, we should redirect all login request to oauth server
+	Login(ctx context.Context, in *account.LoginRequest, opts ...grpc.CallOption) (*account.Agent, error)
+	DeleteGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListGroups(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroups, error)
+	AddAgentToGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error)
+	RemoveAgentFromGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error)
+	ChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error)
+	IntegrateBot(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
+	SyncPublicHolidays(ctx context.Context, in *account.SyncPublicHolidaysRequest, opts ...grpc.CallOption) (*account.BusinessHours, error)
+	TransferOwner(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type accountMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAccountMgrClient(cc grpc.ClientConnInterface) AccountMgrClient {
+	return &accountMgrClient{cc}
+}
+
+func (c *accountMgrClient) CreateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error) {
+	out := new(account.AgentGroup)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/CreateGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdateGroup(ctx context.Context, in *account.AgentGroup, opts ...grpc.CallOption) (*account.AgentGroup, error) {
+	out := new(account.AgentGroup)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdateGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroup, error) {
+	out := new(account.AgentGroup)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RequestResetPassword(ctx context.Context, in *account.ResetPasswordRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/RequestResetPassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdatePassword(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdatePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdateAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdateAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/DeleteAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RequestChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/RequestChangeEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ConfirmChangeEmail(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ConfirmChangeEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) AcceptInvitation(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/AcceptInvitation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetInvitation(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetInvitation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) InviteAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/InviteAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ConfirmAccount(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ConfirmAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) GetAccount(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/GetAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) UpdateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) CreateAccount(ctx context.Context, in *account.CreateAccountRequest, opts ...grpc.CallOption) (*account.Account, error) {
+	out := new(account.Account)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/CreateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ListAgents(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Agents, error) {
+	out := new(account.Agents)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ListAgents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) CountAccount(ctx context.Context, in *account.CountRequest, opts ...grpc.CallOption) (*account.Count, error) {
+	out := new(account.Count)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/CountAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) Login(ctx context.Context, in *account.LoginRequest, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) DeleteGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/DeleteGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ListGroups(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.AgentGroups, error) {
+	out := new(account.AgentGroups)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ListGroups", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) AddAgentToGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/AddAgentToGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RemoveAgentFromGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/RemoveAgentFromGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) ChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ChangeEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error) {
+	out := new(common.Ids)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/QueryByObjectPath", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) IntegrateBot(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error) {
+	out := new(account.Agent)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/IntegrateBot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) SyncPublicHolidays(ctx context.Context, in *account.SyncPublicHolidaysRequest, opts ...grpc.CallOption) (*account.BusinessHours, error) {
+	out := new(account.BusinessHours)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/SyncPublicHolidays", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) TransferOwner(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/TransferOwner", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AccountMgrServer is the server API for AccountMgr service.
+type AccountMgrServer interface {
+	CreateGroup(context.Context, *account.AgentGroup) (*account.AgentGroup, error)
+	UpdateGroup(context.Context, *account.AgentGroup) (*account.AgentGroup, error)
+	GetGroup(context.Context, *common.Id) (*account.AgentGroup, error)
+	RequestResetPassword(context.Context, *account.ResetPasswordRequest) (*common.Empty, error)
+	UpdatePassword(context.Context, *account.NewPassword) (*account.Agent, error)
+	UpdateAgent(context.Context, *account.Agent) (*account.Agent, error)
+	DeleteAgent(context.Context, *common.Id) (*account.Agent, error)
+	RequestChangeEmail(context.Context, *account.Agent) (*common.Empty, error)
+	ConfirmChangeEmail(context.Context, *account.Token) (*account.Agent, error)
+	AcceptInvitation(context.Context, *account.NewPassword) (*account.Agent, error)
+	GetInvitation(context.Context, *account.Token) (*account.Agent, error)
+	InviteAgent(context.Context, *account.Agent) (*account.Agent, error)
+	GetAgent(context.Context, *common.Id) (*account.Agent, error)
+	ConfirmAccount(context.Context, *account.Token) (*account.Account, error)
+	GetAccount(context.Context, *common.Id) (*account.Account, error)
+	UpdateAccount(context.Context, *account.Account) (*account.Account, error)
+	CreateAccount(context.Context, *account.CreateAccountRequest) (*account.Account, error)
+	ListAgents(context.Context, *common.Id) (*account.Agents, error)
+	CountAccount(context.Context, *account.CountRequest) (*account.Count, error)
+	// todo: remove this, we should redirect all login request to oauth server
+	Login(context.Context, *account.LoginRequest) (*account.Agent, error)
+	DeleteGroup(context.Context, *common.Id) (*common.Empty, error)
+	ListGroups(context.Context, *common.Id) (*account.AgentGroups, error)
+	AddAgentToGroup(context.Context, *account.GroupMember) (*common.Empty, error)
+	RemoveAgentFromGroup(context.Context, *account.GroupMember) (*common.Empty, error)
+	ChangeEmail(context.Context, *account.Agent) (*account.Agent, error)
+	QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error)
+	IntegrateBot(context.Context, *account.Agent) (*account.Agent, error)
+	SyncPublicHolidays(context.Context, *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error)
+	TransferOwner(context.Context, *common.Id) (*common.Empty, error)
+}
+
+// UnimplementedAccountMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAccountMgrServer struct {
+}
+
+func (*UnimplementedAccountMgrServer) CreateGroup(context.Context, *account.AgentGroup) (*account.AgentGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdateGroup(context.Context, *account.AgentGroup) (*account.AgentGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetGroup(context.Context, *common.Id) (*account.AgentGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) RequestResetPassword(context.Context, *account.ResetPasswordRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestResetPassword not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdatePassword(context.Context, *account.NewPassword) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdateAgent(context.Context, *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) DeleteAgent(context.Context, *common.Id) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) RequestChangeEmail(context.Context, *account.Agent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RequestChangeEmail not implemented")
+}
+func (*UnimplementedAccountMgrServer) ConfirmChangeEmail(context.Context, *account.Token) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmChangeEmail not implemented")
+}
+func (*UnimplementedAccountMgrServer) AcceptInvitation(context.Context, *account.NewPassword) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptInvitation not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetInvitation(context.Context, *account.Token) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvitation not implemented")
+}
+func (*UnimplementedAccountMgrServer) InviteAgent(context.Context, *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InviteAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetAgent(context.Context, *common.Id) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAgent not implemented")
+}
+func (*UnimplementedAccountMgrServer) ConfirmAccount(context.Context, *account.Token) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfirmAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) GetAccount(context.Context, *common.Id) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) UpdateAccount(context.Context, *account.Account) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) CreateAccount(context.Context, *account.CreateAccountRequest) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) ListAgents(context.Context, *common.Id) (*account.Agents, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAgents not implemented")
+}
+func (*UnimplementedAccountMgrServer) CountAccount(context.Context, *account.CountRequest) (*account.Count, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountAccount not implemented")
+}
+func (*UnimplementedAccountMgrServer) Login(context.Context, *account.LoginRequest) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (*UnimplementedAccountMgrServer) DeleteGroup(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) ListGroups(context.Context, *common.Id) (*account.AgentGroups, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListGroups not implemented")
+}
+func (*UnimplementedAccountMgrServer) AddAgentToGroup(context.Context, *account.GroupMember) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAgentToGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) RemoveAgentFromGroup(context.Context, *account.GroupMember) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveAgentFromGroup not implemented")
+}
+func (*UnimplementedAccountMgrServer) ChangeEmail(context.Context, *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangeEmail not implemented")
+}
+func (*UnimplementedAccountMgrServer) QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryByObjectPath not implemented")
+}
+func (*UnimplementedAccountMgrServer) IntegrateBot(context.Context, *account.Agent) (*account.Agent, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IntegrateBot not implemented")
+}
+func (*UnimplementedAccountMgrServer) SyncPublicHolidays(context.Context, *account.SyncPublicHolidaysRequest) (*account.BusinessHours, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncPublicHolidays not implemented")
+}
+func (*UnimplementedAccountMgrServer) TransferOwner(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferOwner not implemented")
+}
+
+func RegisterAccountMgrServer(s *grpc.Server, srv AccountMgrServer) {
+	s.RegisterService(&_AccountMgr_serviceDesc, srv)
+}
+
+func _AccountMgr_CreateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.AgentGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).CreateGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/CreateGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).CreateGroup(ctx, req.(*account.AgentGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdateGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.AgentGroup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdateGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdateGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdateGroup(ctx, req.(*account.AgentGroup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetGroup(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RequestResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ResetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RequestResetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/RequestResetPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RequestResetPassword(ctx, req.(*account.ResetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.NewPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdatePassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdatePassword(ctx, req.(*account.NewPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdateAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdateAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdateAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdateAgent(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_DeleteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).DeleteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/DeleteAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).DeleteAgent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RequestChangeEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RequestChangeEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/RequestChangeEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RequestChangeEmail(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ConfirmChangeEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ConfirmChangeEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ConfirmChangeEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ConfirmChangeEmail(ctx, req.(*account.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_AcceptInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.NewPassword)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).AcceptInvitation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/AcceptInvitation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).AcceptInvitation(ctx, req.(*account.NewPassword))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetInvitation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetInvitation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetInvitation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetInvitation(ctx, req.(*account.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_InviteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).InviteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/InviteAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).InviteAgent(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetAgent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ConfirmAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ConfirmAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ConfirmAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ConfirmAccount(ctx, req.(*account.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).GetAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/GetAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).GetAccount(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Account)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).UpdateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/UpdateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).UpdateAccount(ctx, req.(*account.Account))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.CreateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/CreateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).CreateAccount(ctx, req.(*account.CreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ListAgents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListAgents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ListAgents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListAgents(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_CountAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.CountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).CountAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/CountAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).CountAccount(ctx, req.(*account.CountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).Login(ctx, req.(*account.LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).DeleteGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/DeleteGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).DeleteGroup(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ListGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ListGroups",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListGroups(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_AddAgentToGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.GroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).AddAgentToGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/AddAgentToGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).AddAgentToGroup(ctx, req.(*account.GroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RemoveAgentFromGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.GroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RemoveAgentFromGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/RemoveAgentFromGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RemoveAgentFromGroup(ctx, req.(*account.GroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_ChangeEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ChangeEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/ChangeEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ChangeEmail(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_QueryByObjectPath_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.ObjectPathRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).QueryByObjectPath(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/QueryByObjectPath",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).QueryByObjectPath(ctx, req.(*common.ObjectPathRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_IntegrateBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).IntegrateBot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/IntegrateBot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).IntegrateBot(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_SyncPublicHolidays_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.SyncPublicHolidaysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).SyncPublicHolidays(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/SyncPublicHolidays",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).SyncPublicHolidays(ctx, req.(*account.SyncPublicHolidaysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_TransferOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).TransferOwner(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AccountMgr/TransferOwner",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).TransferOwner(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AccountMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AccountMgr",
+	HandlerType: (*AccountMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateGroup",
+			Handler:    _AccountMgr_CreateGroup_Handler,
+		},
+		{
+			MethodName: "UpdateGroup",
+			Handler:    _AccountMgr_UpdateGroup_Handler,
+		},
+		{
+			MethodName: "GetGroup",
+			Handler:    _AccountMgr_GetGroup_Handler,
+		},
+		{
+			MethodName: "RequestResetPassword",
+			Handler:    _AccountMgr_RequestResetPassword_Handler,
+		},
+		{
+			MethodName: "UpdatePassword",
+			Handler:    _AccountMgr_UpdatePassword_Handler,
+		},
+		{
+			MethodName: "UpdateAgent",
+			Handler:    _AccountMgr_UpdateAgent_Handler,
+		},
+		{
+			MethodName: "DeleteAgent",
+			Handler:    _AccountMgr_DeleteAgent_Handler,
+		},
+		{
+			MethodName: "RequestChangeEmail",
+			Handler:    _AccountMgr_RequestChangeEmail_Handler,
+		},
+		{
+			MethodName: "ConfirmChangeEmail",
+			Handler:    _AccountMgr_ConfirmChangeEmail_Handler,
+		},
+		{
+			MethodName: "AcceptInvitation",
+			Handler:    _AccountMgr_AcceptInvitation_Handler,
+		},
+		{
+			MethodName: "GetInvitation",
+			Handler:    _AccountMgr_GetInvitation_Handler,
+		},
+		{
+			MethodName: "InviteAgent",
+			Handler:    _AccountMgr_InviteAgent_Handler,
+		},
+		{
+			MethodName: "GetAgent",
+			Handler:    _AccountMgr_GetAgent_Handler,
+		},
+		{
+			MethodName: "ConfirmAccount",
+			Handler:    _AccountMgr_ConfirmAccount_Handler,
+		},
+		{
+			MethodName: "GetAccount",
+			Handler:    _AccountMgr_GetAccount_Handler,
+		},
+		{
+			MethodName: "UpdateAccount",
+			Handler:    _AccountMgr_UpdateAccount_Handler,
+		},
+		{
+			MethodName: "CreateAccount",
+			Handler:    _AccountMgr_CreateAccount_Handler,
+		},
+		{
+			MethodName: "ListAgents",
+			Handler:    _AccountMgr_ListAgents_Handler,
+		},
+		{
+			MethodName: "CountAccount",
+			Handler:    _AccountMgr_CountAccount_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _AccountMgr_Login_Handler,
+		},
+		{
+			MethodName: "DeleteGroup",
+			Handler:    _AccountMgr_DeleteGroup_Handler,
+		},
+		{
+			MethodName: "ListGroups",
+			Handler:    _AccountMgr_ListGroups_Handler,
+		},
+		{
+			MethodName: "AddAgentToGroup",
+			Handler:    _AccountMgr_AddAgentToGroup_Handler,
+		},
+		{
+			MethodName: "RemoveAgentFromGroup",
+			Handler:    _AccountMgr_RemoveAgentFromGroup_Handler,
+		},
+		{
+			MethodName: "ChangeEmail",
+			Handler:    _AccountMgr_ChangeEmail_Handler,
+		},
+		{
+			MethodName: "QueryByObjectPath",
+			Handler:    _AccountMgr_QueryByObjectPath_Handler,
+		},
+		{
+			MethodName: "IntegrateBot",
+			Handler:    _AccountMgr_IntegrateBot_Handler,
+		},
+		{
+			MethodName: "SyncPublicHolidays",
+			Handler:    _AccountMgr_SyncPublicHolidays_Handler,
+		},
+		{
+			MethodName: "TransferOwner",
+			Handler:    _AccountMgr_TransferOwner_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// CurrencyMgrClient is the client API for CurrencyMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type CurrencyMgrClient interface {
+	ListCurrencies(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*account.Currencies, error)
+	GetCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Currency, error)
+	CreateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error)
+	UpdateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error)
+	DeleteCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListExchangeRates(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRates, error)
+	GetExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRate, error)
+	CreateExchangeRate(ctx context.Context, in *account.ExchangeRate, opts ...grpc.CallOption) (*account.ExchangeRate, error)
+	DeleteExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type currencyMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCurrencyMgrClient(cc grpc.ClientConnInterface) CurrencyMgrClient {
+	return &currencyMgrClient{cc}
+}
+
+func (c *currencyMgrClient) ListCurrencies(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*account.Currencies, error) {
+	out := new(account.Currencies)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/ListCurrencies", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) GetCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*account.Currency, error) {
+	out := new(account.Currency)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/GetCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) CreateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error) {
+	out := new(account.Currency)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/CreateCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) UpdateCurrency(ctx context.Context, in *account.Currency, opts ...grpc.CallOption) (*account.Currency, error) {
+	out := new(account.Currency)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/UpdateCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) DeleteCurrency(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/DeleteCurrency", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) ListExchangeRates(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRates, error) {
+	out := new(account.ExchangeRates)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/ListExchangeRates", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) GetExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*account.ExchangeRate, error) {
+	out := new(account.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/GetExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) CreateExchangeRate(ctx context.Context, in *account.ExchangeRate, opts ...grpc.CallOption) (*account.ExchangeRate, error) {
+	out := new(account.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/CreateExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *currencyMgrClient) DeleteExchangeRate(ctx context.Context, in *account.ExchangeRateRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.CurrencyMgr/DeleteExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CurrencyMgrServer is the server API for CurrencyMgr service.
+type CurrencyMgrServer interface {
+	ListCurrencies(context.Context, *common.Empty) (*account.Currencies, error)
+	GetCurrency(context.Context, *common.Id) (*account.Currency, error)
+	CreateCurrency(context.Context, *account.Currency) (*account.Currency, error)
+	UpdateCurrency(context.Context, *account.Currency) (*account.Currency, error)
+	DeleteCurrency(context.Context, *common.Id) (*common.Empty, error)
+	ListExchangeRates(context.Context, *account.ExchangeRateRequest) (*account.ExchangeRates, error)
+	GetExchangeRate(context.Context, *account.ExchangeRateRequest) (*account.ExchangeRate, error)
+	CreateExchangeRate(context.Context, *account.ExchangeRate) (*account.ExchangeRate, error)
+	DeleteExchangeRate(context.Context, *account.ExchangeRateRequest) (*common.Empty, error)
+}
+
+// UnimplementedCurrencyMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedCurrencyMgrServer struct {
+}
+
+func (*UnimplementedCurrencyMgrServer) ListCurrencies(context.Context, *common.Empty) (*account.Currencies, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCurrencies not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) GetCurrency(context.Context, *common.Id) (*account.Currency, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) CreateCurrency(context.Context, *account.Currency) (*account.Currency, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) UpdateCurrency(context.Context, *account.Currency) (*account.Currency, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) DeleteCurrency(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCurrency not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) ListExchangeRates(context.Context, *account.ExchangeRateRequest) (*account.ExchangeRates, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) GetExchangeRate(context.Context, *account.ExchangeRateRequest) (*account.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) CreateExchangeRate(context.Context, *account.ExchangeRate) (*account.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateExchangeRate not implemented")
+}
+func (*UnimplementedCurrencyMgrServer) DeleteExchangeRate(context.Context, *account.ExchangeRateRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExchangeRate not implemented")
+}
+
+func RegisterCurrencyMgrServer(s *grpc.Server, srv CurrencyMgrServer) {
+	s.RegisterService(&_CurrencyMgr_serviceDesc, srv)
+}
+
+func _CurrencyMgr_ListCurrencies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).ListCurrencies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/ListCurrencies",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).ListCurrencies(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_GetCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).GetCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/GetCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).GetCurrency(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_CreateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Currency)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).CreateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/CreateCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).CreateCurrency(ctx, req.(*account.Currency))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_UpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Currency)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).UpdateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/UpdateCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).UpdateCurrency(ctx, req.(*account.Currency))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_DeleteCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).DeleteCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/DeleteCurrency",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).DeleteCurrency(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_ListExchangeRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).ListExchangeRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/ListExchangeRates",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).ListExchangeRates(ctx, req.(*account.ExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_GetExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).GetExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/GetExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).GetExchangeRate(ctx, req.(*account.ExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_CreateExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).CreateExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/CreateExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).CreateExchangeRate(ctx, req.(*account.ExchangeRate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CurrencyMgr_DeleteExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.ExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CurrencyMgrServer).DeleteExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.CurrencyMgr/DeleteExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CurrencyMgrServer).DeleteExchangeRate(ctx, req.(*account.ExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _CurrencyMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.CurrencyMgr",
+	HandlerType: (*CurrencyMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListCurrencies",
+			Handler:    _CurrencyMgr_ListCurrencies_Handler,
+		},
+		{
+			MethodName: "GetCurrency",
+			Handler:    _CurrencyMgr_GetCurrency_Handler,
+		},
+		{
+			MethodName: "CreateCurrency",
+			Handler:    _CurrencyMgr_CreateCurrency_Handler,
+		},
+		{
+			MethodName: "UpdateCurrency",
+			Handler:    _CurrencyMgr_UpdateCurrency_Handler,
+		},
+		{
+			MethodName: "DeleteCurrency",
+			Handler:    _CurrencyMgr_DeleteCurrency_Handler,
+		},
+		{
+			MethodName: "ListExchangeRates",
+			Handler:    _CurrencyMgr_ListExchangeRates_Handler,
+		},
+		{
+			MethodName: "GetExchangeRate",
+			Handler:    _CurrencyMgr_GetExchangeRate_Handler,
+		},
+		{
+			MethodName: "CreateExchangeRate",
+			Handler:    _CurrencyMgr_CreateExchangeRate_Handler,
+		},
+		{
+			MethodName: "DeleteExchangeRate",
+			Handler:    _CurrencyMgr_DeleteExchangeRate_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// UserMgrClient is the client API for UserMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type UserMgrClient interface {
+	SearchUsers(ctx context.Context, in *user.UserSearchRequest, opts ...grpc.CallOption) (*user.UserSearchResult, error)
+	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
+	PickToSegmentation(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	DeleteFromSegmentation(ctx context.Context, in *user.UnpickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UnsubscribeUser(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	SubscribeUser(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	CreateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error)
+	UpdateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error)
+	ReadUser(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.User, error)
+	CountSegmentationUserByAttribute(ctx context.Context, in *user.CountSegmentationUserByAttributeRequest, opts ...grpc.CallOption) (*user.CountResponse, error)
+	CountTotal(ctx context.Context, in *user.CountTotalRequest, opts ...grpc.CallOption) (*user.CountTotalResponse, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	AddAlias(ctx context.Context, in *user.Identification, opts ...grpc.CallOption) (*common.Empty, error)
+	MergeUsers(ctx context.Context, in *user.MergeRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	ExportUsers(ctx context.Context, in *user.UserExportRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	SearchNote(ctx context.Context, in *user.SearchNoteRequest, opts ...grpc.CallOption) (*user.SearchNoteResponse, error)
+	MatchUsers(ctx context.Context, in *common.Ids, opts ...grpc.CallOption) (*user.Users, error)
+}
+
+type userMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUserMgrClient(cc grpc.ClientConnInterface) UserMgrClient {
+	return &userMgrClient{cc}
+}
+
+func (c *userMgrClient) SearchUsers(ctx context.Context, in *user.UserSearchRequest, opts ...grpc.CallOption) (*user.UserSearchResult, error) {
+	out := new(user.UserSearchResult)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/SearchUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) PickToSegmentation(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/PickToSegmentation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) DeleteFromSegmentation(ctx context.Context, in *user.UnpickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/DeleteFromSegmentation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) UnsubscribeUser(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/UnsubscribeUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) SubscribeUser(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/SubscribeUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CreateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error) {
+	out := new(common.Id)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/CreateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) UpdateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Id, error) {
+	out := new(common.Id)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) ReadUser(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.User, error) {
+	out := new(user.User)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/ReadUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CountSegmentationUserByAttribute(ctx context.Context, in *user.CountSegmentationUserByAttributeRequest, opts ...grpc.CallOption) (*user.CountResponse, error) {
+	out := new(user.CountResponse)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/CountSegmentationUserByAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) CountTotal(ctx context.Context, in *user.CountTotalRequest, opts ...grpc.CallOption) (*user.CountTotalResponse, error) {
+	out := new(user.CountTotalResponse)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/CountTotal", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) AddAlias(ctx context.Context, in *user.Identification, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/AddAlias", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) MergeUsers(ctx context.Context, in *user.MergeRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/MergeUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) ExportUsers(ctx context.Context, in *user.UserExportRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/ExportUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) SearchNote(ctx context.Context, in *user.SearchNoteRequest, opts ...grpc.CallOption) (*user.SearchNoteResponse, error) {
+	out := new(user.SearchNoteResponse)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/SearchNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userMgrClient) MatchUsers(ctx context.Context, in *common.Ids, opts ...grpc.CallOption) (*user.Users, error) {
+	out := new(user.Users)
+	err := c.cc.Invoke(ctx, "/header.UserMgr/MatchUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UserMgrServer is the server API for UserMgr service.
+type UserMgrServer interface {
+	SearchUsers(context.Context, *user.UserSearchRequest) (*user.UserSearchResult, error)
+	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
+	PickToSegmentation(context.Context, *user.PickRequest) (*common.Empty, error)
+	DeleteFromSegmentation(context.Context, *user.UnpickRequest) (*common.Empty, error)
+	UnsubscribeUser(context.Context, *user.PickRequest) (*common.Empty, error)
+	SubscribeUser(context.Context, *user.PickRequest) (*common.Empty, error)
+	CreateUser(context.Context, *user.User) (*common.Id, error)
+	UpdateUser(context.Context, *user.User) (*common.Id, error)
+	ReadUser(context.Context, *common.Id) (*user.User, error)
+	CountSegmentationUserByAttribute(context.Context, *user.CountSegmentationUserByAttributeRequest) (*user.CountResponse, error)
+	CountTotal(context.Context, *user.CountTotalRequest) (*user.CountTotalResponse, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	AddAlias(context.Context, *user.Identification) (*common.Empty, error)
+	MergeUsers(context.Context, *user.MergeRequest) (*common.Empty, error)
+	ExportUsers(context.Context, *user.UserExportRequest) (*common.Empty, error)
+	SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error)
+	MatchUsers(context.Context, *common.Ids) (*user.Users, error)
+}
+
+// UnimplementedUserMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedUserMgrServer struct {
+}
+
+func (*UnimplementedUserMgrServer) SearchUsers(context.Context, *user.UserSearchRequest) (*user.UserSearchResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchUsers not implemented")
+}
+func (*UnimplementedUserMgrServer) PickToSegmentation(context.Context, *user.PickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PickToSegmentation not implemented")
+}
+func (*UnimplementedUserMgrServer) DeleteFromSegmentation(context.Context, *user.UnpickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFromSegmentation not implemented")
+}
+func (*UnimplementedUserMgrServer) UnsubscribeUser(context.Context, *user.PickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnsubscribeUser not implemented")
+}
+func (*UnimplementedUserMgrServer) SubscribeUser(context.Context, *user.PickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubscribeUser not implemented")
+}
+func (*UnimplementedUserMgrServer) CreateUser(context.Context, *user.User) (*common.Id, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (*UnimplementedUserMgrServer) UpdateUser(context.Context, *user.User) (*common.Id, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (*UnimplementedUserMgrServer) ReadUser(context.Context, *common.Id) (*user.User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadUser not implemented")
+}
+func (*UnimplementedUserMgrServer) CountSegmentationUserByAttribute(context.Context, *user.CountSegmentationUserByAttributeRequest) (*user.CountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountSegmentationUserByAttribute not implemented")
+}
+func (*UnimplementedUserMgrServer) CountTotal(context.Context, *user.CountTotalRequest) (*user.CountTotalResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountTotal not implemented")
+}
+func (*UnimplementedUserMgrServer) Ping(context.Context, *common.PingRequest) (*common.Pong, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (*UnimplementedUserMgrServer) AddAlias(context.Context, *user.Identification) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAlias not implemented")
+}
+func (*UnimplementedUserMgrServer) MergeUsers(context.Context, *user.MergeRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MergeUsers not implemented")
+}
+func (*UnimplementedUserMgrServer) ExportUsers(context.Context, *user.UserExportRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUsers not implemented")
+}
+func (*UnimplementedUserMgrServer) SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchNote not implemented")
+}
+func (*UnimplementedUserMgrServer) MatchUsers(context.Context, *common.Ids) (*user.Users, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchUsers not implemented")
+}
+
+func RegisterUserMgrServer(s *grpc.Server, srv UserMgrServer) {
+	s.RegisterService(&_UserMgr_serviceDesc, srv)
+}
+
+func _UserMgr_SearchUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.UserSearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).SearchUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/SearchUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).SearchUsers(ctx, req.(*user.UserSearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_PickToSegmentation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.PickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).PickToSegmentation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/PickToSegmentation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).PickToSegmentation(ctx, req.(*user.PickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_DeleteFromSegmentation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.UnpickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).DeleteFromSegmentation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/DeleteFromSegmentation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).DeleteFromSegmentation(ctx, req.(*user.UnpickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_UnsubscribeUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.PickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).UnsubscribeUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/UnsubscribeUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).UnsubscribeUser(ctx, req.(*user.PickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_SubscribeUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.PickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).SubscribeUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/SubscribeUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).SubscribeUser(ctx, req.(*user.PickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CreateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/CreateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CreateUser(ctx, req.(*user.User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/UpdateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).UpdateUser(ctx, req.(*user.User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_ReadUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).ReadUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/ReadUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).ReadUser(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CountSegmentationUserByAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.CountSegmentationUserByAttributeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CountSegmentationUserByAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/CountSegmentationUserByAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CountSegmentationUserByAttribute(ctx, req.(*user.CountSegmentationUserByAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_CountTotal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.CountTotalRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).CountTotal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/CountTotal",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).CountTotal(ctx, req.(*user.CountTotalRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_AddAlias_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Identification)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).AddAlias(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/AddAlias",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).AddAlias(ctx, req.(*user.Identification))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_MergeUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.MergeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).MergeUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/MergeUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).MergeUsers(ctx, req.(*user.MergeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.UserExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/ExportUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).ExportUsers(ctx, req.(*user.UserExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_SearchNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.SearchNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).SearchNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/SearchNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).SearchNote(ctx, req.(*user.SearchNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserMgr_MatchUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).MatchUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserMgr/MatchUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).MatchUsers(ctx, req.(*common.Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _UserMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.UserMgr",
+	HandlerType: (*UserMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchUsers",
+			Handler:    _UserMgr_SearchUsers_Handler,
+		},
+		{
+			MethodName: "PickToSegmentation",
+			Handler:    _UserMgr_PickToSegmentation_Handler,
+		},
+		{
+			MethodName: "DeleteFromSegmentation",
+			Handler:    _UserMgr_DeleteFromSegmentation_Handler,
+		},
+		{
+			MethodName: "UnsubscribeUser",
+			Handler:    _UserMgr_UnsubscribeUser_Handler,
+		},
+		{
+			MethodName: "SubscribeUser",
+			Handler:    _UserMgr_SubscribeUser_Handler,
+		},
+		{
+			MethodName: "CreateUser",
+			Handler:    _UserMgr_CreateUser_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _UserMgr_UpdateUser_Handler,
+		},
+		{
+			MethodName: "ReadUser",
+			Handler:    _UserMgr_ReadUser_Handler,
+		},
+		{
+			MethodName: "CountSegmentationUserByAttribute",
+			Handler:    _UserMgr_CountSegmentationUserByAttribute_Handler,
+		},
+		{
+			MethodName: "CountTotal",
+			Handler:    _UserMgr_CountTotal_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _UserMgr_Ping_Handler,
+		},
+		{
+			MethodName: "AddAlias",
+			Handler:    _UserMgr_AddAlias_Handler,
+		},
+		{
+			MethodName: "MergeUsers",
+			Handler:    _UserMgr_MergeUsers_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _UserMgr_ExportUsers_Handler,
+		},
+		{
+			MethodName: "SearchNote",
+			Handler:    _UserMgr_SearchNote_Handler,
+		},
+		{
+			MethodName: "MatchUsers",
+			Handler:    _UserMgr_MatchUsers_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// UserSyncMgrClient is the client API for UserSyncMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type UserSyncMgrClient interface {
+	// sync notify
+	UpdateNoti5SubscribeStatus(ctx context.Context, in *noti5.SubscribeStatus, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync limit
+	UpdateLimit(ctx context.Context, in *payment.Limit, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync account
+	UpsertAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error)
+	UpdatePermission(ctx context.Context, in *account.AgentPerm, opts ...grpc.CallOption) (*common.Empty, error)
+	DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	UpsertAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*common.Empty, error)
+	DeleteAccount(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync segment
+	RemoveFromTop(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	AddToTop(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync user
+	UpdateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Empty, error)
+	PickToSegment(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	CreateEvent(ctx context.Context, in *event.UserEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	AddToMyList(ctx context.Context, in *user.AddToMyRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync automation
+	FireBlockUser(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireUpdateUserAttribute(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireAddUserToSegment(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireRemoveUserFromSegment(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireAddUserNote(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireMergeUsers(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireUserNotification(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync conversation
+	UpdateUserSegment(ctx context.Context, in *conversation.UpdateUserSegmentRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync user job
+	CallbackAutomation(ctx context.Context, in *event.AutomationCalledback, opts ...grpc.CallOption) (*common.Empty, error)
+	ExportUsers(ctx context.Context, in *user.UserExportRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type userSyncMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUserSyncMgrClient(cc grpc.ClientConnInterface) UserSyncMgrClient {
+	return &userSyncMgrClient{cc}
+}
+
+func (c *userSyncMgrClient) UpdateNoti5SubscribeStatus(ctx context.Context, in *noti5.SubscribeStatus, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/UpdateNoti5SubscribeStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) UpdateLimit(ctx context.Context, in *payment.Limit, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/UpdateLimit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) UpsertAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/UpsertAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) UpdatePermission(ctx context.Context, in *account.AgentPerm, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/UpdatePermission", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/DeleteAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) UpsertAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/UpsertAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) DeleteAccount(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/DeleteAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) RemoveFromTop(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/RemoveFromTop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) AddToTop(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/AddToTop", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) UpdateUser(ctx context.Context, in *user.User, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) PickToSegment(ctx context.Context, in *user.PickRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/PickToSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) CreateEvent(ctx context.Context, in *event.UserEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/CreateEvent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) AddToMyList(ctx context.Context, in *user.AddToMyRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/AddToMyList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) FireBlockUser(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/FireBlockUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) FireUpdateUserAttribute(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/FireUpdateUserAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) FireAddUserToSegment(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/FireAddUserToSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) FireRemoveUserFromSegment(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/FireRemoveUserFromSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) FireAddUserNote(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/FireAddUserNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) FireMergeUsers(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/FireMergeUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) FireUserNotification(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/FireUserNotification", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) UpdateUserSegment(ctx context.Context, in *conversation.UpdateUserSegmentRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/UpdateUserSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) CallbackAutomation(ctx context.Context, in *event.AutomationCalledback, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/CallbackAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userSyncMgrClient) ExportUsers(ctx context.Context, in *user.UserExportRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.UserSyncMgr/ExportUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UserSyncMgrServer is the server API for UserSyncMgr service.
+type UserSyncMgrServer interface {
+	// sync notify
+	UpdateNoti5SubscribeStatus(context.Context, *noti5.SubscribeStatus) (*common.Empty, error)
+	// sync limit
+	UpdateLimit(context.Context, *payment.Limit) (*common.Empty, error)
+	// sync account
+	UpsertAgent(context.Context, *account.Agent) (*common.Empty, error)
+	UpdatePermission(context.Context, *account.AgentPerm) (*common.Empty, error)
+	DeleteAgent(context.Context, *common.Id) (*common.Empty, error)
+	UpsertAccount(context.Context, *account.Account) (*common.Empty, error)
+	DeleteAccount(context.Context, *common.Id) (*common.Empty, error)
+	// sync segment
+	RemoveFromTop(context.Context, *user.PickRequest) (*common.Empty, error)
+	AddToTop(context.Context, *user.PickRequest) (*common.Empty, error)
+	// sync user
+	UpdateUser(context.Context, *user.User) (*common.Empty, error)
+	PickToSegment(context.Context, *user.PickRequest) (*common.Empty, error)
+	CreateEvent(context.Context, *event.UserEvent) (*common.Empty, error)
+	AddToMyList(context.Context, *user.AddToMyRequest) (*common.Empty, error)
+	// sync automation
+	FireBlockUser(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireUpdateUserAttribute(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireAddUserToSegment(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireRemoveUserFromSegment(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireAddUserNote(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireMergeUsers(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireUserNotification(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	// sync conversation
+	UpdateUserSegment(context.Context, *conversation.UpdateUserSegmentRequest) (*common.Empty, error)
+	// sync user job
+	CallbackAutomation(context.Context, *event.AutomationCalledback) (*common.Empty, error)
+	ExportUsers(context.Context, *user.UserExportRequest) (*common.Empty, error)
+}
+
+// UnimplementedUserSyncMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedUserSyncMgrServer struct {
+}
+
+func (*UnimplementedUserSyncMgrServer) UpdateNoti5SubscribeStatus(context.Context, *noti5.SubscribeStatus) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNoti5SubscribeStatus not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) UpdateLimit(context.Context, *payment.Limit) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLimit not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) UpsertAgent(context.Context, *account.Agent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertAgent not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) UpdatePermission(context.Context, *account.AgentPerm) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePermission not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) DeleteAgent(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAgent not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) UpsertAccount(context.Context, *account.Account) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertAccount not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) DeleteAccount(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) RemoveFromTop(context.Context, *user.PickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveFromTop not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) AddToTop(context.Context, *user.PickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddToTop not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) UpdateUser(context.Context, *user.User) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) PickToSegment(context.Context, *user.PickRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PickToSegment not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) CreateEvent(context.Context, *event.UserEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateEvent not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) AddToMyList(context.Context, *user.AddToMyRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddToMyList not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) FireBlockUser(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireBlockUser not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) FireUpdateUserAttribute(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireUpdateUserAttribute not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) FireAddUserToSegment(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireAddUserToSegment not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) FireRemoveUserFromSegment(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireRemoveUserFromSegment not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) FireAddUserNote(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireAddUserNote not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) FireMergeUsers(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireMergeUsers not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) FireUserNotification(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireUserNotification not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) UpdateUserSegment(context.Context, *conversation.UpdateUserSegmentRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserSegment not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) CallbackAutomation(context.Context, *event.AutomationCalledback) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CallbackAutomation not implemented")
+}
+func (*UnimplementedUserSyncMgrServer) ExportUsers(context.Context, *user.UserExportRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUsers not implemented")
+}
+
+func RegisterUserSyncMgrServer(s *grpc.Server, srv UserSyncMgrServer) {
+	s.RegisterService(&_UserSyncMgr_serviceDesc, srv)
+}
+
+func _UserSyncMgr_UpdateNoti5SubscribeStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.SubscribeStatus)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).UpdateNoti5SubscribeStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/UpdateNoti5SubscribeStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).UpdateNoti5SubscribeStatus(ctx, req.(*noti5.SubscribeStatus))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_UpdateLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Limit)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).UpdateLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/UpdateLimit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).UpdateLimit(ctx, req.(*payment.Limit))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_UpsertAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).UpsertAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/UpsertAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).UpsertAgent(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_UpdatePermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.AgentPerm)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).UpdatePermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/UpdatePermission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).UpdatePermission(ctx, req.(*account.AgentPerm))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_DeleteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).DeleteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/DeleteAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).DeleteAgent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_UpsertAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Account)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).UpsertAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/UpsertAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).UpsertAccount(ctx, req.(*account.Account))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).DeleteAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/DeleteAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).DeleteAccount(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_RemoveFromTop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.PickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).RemoveFromTop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/RemoveFromTop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).RemoveFromTop(ctx, req.(*user.PickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_AddToTop_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.PickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).AddToTop(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/AddToTop",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).AddToTop(ctx, req.(*user.PickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/UpdateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).UpdateUser(ctx, req.(*user.User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_PickToSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.PickRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).PickToSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/PickToSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).PickToSegment(ctx, req.(*user.PickRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_CreateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.UserEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).CreateEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/CreateEvent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).CreateEvent(ctx, req.(*event.UserEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_AddToMyList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.AddToMyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).AddToMyList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/AddToMyList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).AddToMyList(ctx, req.(*user.AddToMyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_FireBlockUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).FireBlockUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/FireBlockUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).FireBlockUser(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_FireUpdateUserAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).FireUpdateUserAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/FireUpdateUserAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).FireUpdateUserAttribute(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_FireAddUserToSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).FireAddUserToSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/FireAddUserToSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).FireAddUserToSegment(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_FireRemoveUserFromSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).FireRemoveUserFromSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/FireRemoveUserFromSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).FireRemoveUserFromSegment(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_FireAddUserNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).FireAddUserNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/FireAddUserNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).FireAddUserNote(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_FireMergeUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).FireMergeUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/FireMergeUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).FireMergeUsers(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_FireUserNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).FireUserNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/FireUserNotification",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).FireUserNotification(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_UpdateUserSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.UpdateUserSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).UpdateUserSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/UpdateUserSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).UpdateUserSegment(ctx, req.(*conversation.UpdateUserSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_CallbackAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationCalledback)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).CallbackAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/CallbackAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).CallbackAutomation(ctx, req.(*event.AutomationCalledback))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserSyncMgr_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.UserExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSyncMgrServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.UserSyncMgr/ExportUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSyncMgrServer).ExportUsers(ctx, req.(*user.UserExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _UserSyncMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.UserSyncMgr",
+	HandlerType: (*UserSyncMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpdateNoti5SubscribeStatus",
+			Handler:    _UserSyncMgr_UpdateNoti5SubscribeStatus_Handler,
+		},
+		{
+			MethodName: "UpdateLimit",
+			Handler:    _UserSyncMgr_UpdateLimit_Handler,
+		},
+		{
+			MethodName: "UpsertAgent",
+			Handler:    _UserSyncMgr_UpsertAgent_Handler,
+		},
+		{
+			MethodName: "UpdatePermission",
+			Handler:    _UserSyncMgr_UpdatePermission_Handler,
+		},
+		{
+			MethodName: "DeleteAgent",
+			Handler:    _UserSyncMgr_DeleteAgent_Handler,
+		},
+		{
+			MethodName: "UpsertAccount",
+			Handler:    _UserSyncMgr_UpsertAccount_Handler,
+		},
+		{
+			MethodName: "DeleteAccount",
+			Handler:    _UserSyncMgr_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "RemoveFromTop",
+			Handler:    _UserSyncMgr_RemoveFromTop_Handler,
+		},
+		{
+			MethodName: "AddToTop",
+			Handler:    _UserSyncMgr_AddToTop_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _UserSyncMgr_UpdateUser_Handler,
+		},
+		{
+			MethodName: "PickToSegment",
+			Handler:    _UserSyncMgr_PickToSegment_Handler,
+		},
+		{
+			MethodName: "CreateEvent",
+			Handler:    _UserSyncMgr_CreateEvent_Handler,
+		},
+		{
+			MethodName: "AddToMyList",
+			Handler:    _UserSyncMgr_AddToMyList_Handler,
+		},
+		{
+			MethodName: "FireBlockUser",
+			Handler:    _UserSyncMgr_FireBlockUser_Handler,
+		},
+		{
+			MethodName: "FireUpdateUserAttribute",
+			Handler:    _UserSyncMgr_FireUpdateUserAttribute_Handler,
+		},
+		{
+			MethodName: "FireAddUserToSegment",
+			Handler:    _UserSyncMgr_FireAddUserToSegment_Handler,
+		},
+		{
+			MethodName: "FireRemoveUserFromSegment",
+			Handler:    _UserSyncMgr_FireRemoveUserFromSegment_Handler,
+		},
+		{
+			MethodName: "FireAddUserNote",
+			Handler:    _UserSyncMgr_FireAddUserNote_Handler,
+		},
+		{
+			MethodName: "FireMergeUsers",
+			Handler:    _UserSyncMgr_FireMergeUsers_Handler,
+		},
+		{
+			MethodName: "FireUserNotification",
+			Handler:    _UserSyncMgr_FireUserNotification_Handler,
+		},
+		{
+			MethodName: "UpdateUserSegment",
+			Handler:    _UserSyncMgr_UpdateUserSegment_Handler,
+		},
+		{
+			MethodName: "CallbackAutomation",
+			Handler:    _UserSyncMgr_CallbackAutomation_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _UserSyncMgr_ExportUsers_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// VisitorMgrClient is the client API for VisitorMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type VisitorMgrClient interface {
+	ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+	UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+	ReadPreview(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.LastView, error)
+	ListTopVisitors(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Visitors, error)
+}
+
+type visitorMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewVisitorMgrClient(cc grpc.ClientConnInterface) VisitorMgrClient {
+	return &visitorMgrClient{cc}
+}
+
+func (c *visitorMgrClient) ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/ReadPresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitorMgrClient) UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/UpdatePresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitorMgrClient) ReadPreview(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.LastView, error) {
+	out := new(user.LastView)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/ReadPreview", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *visitorMgrClient) ListTopVisitors(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Visitors, error) {
+	out := new(user.Visitors)
+	err := c.cc.Invoke(ctx, "/header.VisitorMgr/ListTopVisitors", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// VisitorMgrServer is the server API for VisitorMgr service.
+type VisitorMgrServer interface {
+	ReadPresence(context.Context, *common.Id) (*user.Presence, error)
+	UpdatePresence(context.Context, *common.Id) (*user.Presence, error)
+	ReadPreview(context.Context, *common.Id) (*user.LastView, error)
+	ListTopVisitors(context.Context, *common.Id) (*user.Visitors, error)
+}
+
+// UnimplementedVisitorMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedVisitorMgrServer struct {
+}
+
+func (*UnimplementedVisitorMgrServer) ReadPresence(context.Context, *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPresence not implemented")
+}
+func (*UnimplementedVisitorMgrServer) UpdatePresence(context.Context, *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePresence not implemented")
+}
+func (*UnimplementedVisitorMgrServer) ReadPreview(context.Context, *common.Id) (*user.LastView, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPreview not implemented")
+}
+func (*UnimplementedVisitorMgrServer) ListTopVisitors(context.Context, *common.Id) (*user.Visitors, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTopVisitors not implemented")
+}
+
+func RegisterVisitorMgrServer(s *grpc.Server, srv VisitorMgrServer) {
+	s.RegisterService(&_VisitorMgr_serviceDesc, srv)
+}
+
+func _VisitorMgr_ReadPresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).ReadPresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/ReadPresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).ReadPresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VisitorMgr_UpdatePresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).UpdatePresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/UpdatePresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).UpdatePresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VisitorMgr_ReadPreview_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).ReadPreview(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/ReadPreview",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).ReadPreview(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VisitorMgr_ListTopVisitors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VisitorMgrServer).ListTopVisitors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.VisitorMgr/ListTopVisitors",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VisitorMgrServer).ListTopVisitors(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _VisitorMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.VisitorMgr",
+	HandlerType: (*VisitorMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadPresence",
+			Handler:    _VisitorMgr_ReadPresence_Handler,
+		},
+		{
+			MethodName: "UpdatePresence",
+			Handler:    _VisitorMgr_UpdatePresence_Handler,
+		},
+		{
+			MethodName: "ReadPreview",
+			Handler:    _VisitorMgr_ReadPreview_Handler,
+		},
+		{
+			MethodName: "ListTopVisitors",
+			Handler:    _VisitorMgr_ListTopVisitors_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AutomationCreditMgrClient is the client API for AutomationCreditMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AutomationCreditMgrClient interface {
+	GetAutomationCredit(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.AutomationCredit, error)
+	AddAutomationCredit(ctx context.Context, in *event.AutomationCredit, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type automationCreditMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAutomationCreditMgrClient(cc grpc.ClientConnInterface) AutomationCreditMgrClient {
+	return &automationCreditMgrClient{cc}
+}
+
+func (c *automationCreditMgrClient) GetAutomationCredit(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.AutomationCredit, error) {
+	out := new(event.AutomationCredit)
+	err := c.cc.Invoke(ctx, "/header.AutomationCreditMgr/GetAutomationCredit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationCreditMgrClient) AddAutomationCredit(ctx context.Context, in *event.AutomationCredit, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AutomationCreditMgr/AddAutomationCredit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AutomationCreditMgrServer is the server API for AutomationCreditMgr service.
+type AutomationCreditMgrServer interface {
+	GetAutomationCredit(context.Context, *common.Id) (*event.AutomationCredit, error)
+	AddAutomationCredit(context.Context, *event.AutomationCredit) (*common.Empty, error)
+}
+
+// UnimplementedAutomationCreditMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAutomationCreditMgrServer struct {
+}
+
+func (*UnimplementedAutomationCreditMgrServer) GetAutomationCredit(context.Context, *common.Id) (*event.AutomationCredit, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAutomationCredit not implemented")
+}
+func (*UnimplementedAutomationCreditMgrServer) AddAutomationCredit(context.Context, *event.AutomationCredit) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAutomationCredit not implemented")
+}
+
+func RegisterAutomationCreditMgrServer(s *grpc.Server, srv AutomationCreditMgrServer) {
+	s.RegisterService(&_AutomationCreditMgr_serviceDesc, srv)
+}
+
+func _AutomationCreditMgr_GetAutomationCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationCreditMgrServer).GetAutomationCredit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationCreditMgr/GetAutomationCredit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationCreditMgrServer).GetAutomationCredit(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationCreditMgr_AddAutomationCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationCredit)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationCreditMgrServer).AddAutomationCredit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationCreditMgr/AddAutomationCredit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationCreditMgrServer).AddAutomationCredit(ctx, req.(*event.AutomationCredit))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AutomationCreditMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AutomationCreditMgr",
+	HandlerType: (*AutomationCreditMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAutomationCredit",
+			Handler:    _AutomationCreditMgr_GetAutomationCredit_Handler,
+		},
+		{
+			MethodName: "AddAutomationCredit",
+			Handler:    _AutomationCreditMgr_AddAutomationCredit_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// NoteMgrClient is the client API for NoteMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type NoteMgrClient interface {
+	ListNotes(ctx context.Context, in *user.ListNotesRequest, opts ...grpc.CallOption) (*user.Notes, error)
+	AddNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error)
+	UpdateNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error)
+	DeleteNote(ctx context.Context, in *user.DeleteNoteRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	GetNote(ctx context.Context, in *user.GetNoteRequest, opts ...grpc.CallOption) (*user.Note, error)
+	SearchNote(ctx context.Context, in *user.SearchNoteRequest, opts ...grpc.CallOption) (*user.SearchNoteResponse, error)
+}
+
+type noteMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNoteMgrClient(cc grpc.ClientConnInterface) NoteMgrClient {
+	return &noteMgrClient{cc}
+}
+
+func (c *noteMgrClient) ListNotes(ctx context.Context, in *user.ListNotesRequest, opts ...grpc.CallOption) (*user.Notes, error) {
+	out := new(user.Notes)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/ListNotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) AddNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error) {
+	out := new(user.Note)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/AddNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) UpdateNote(ctx context.Context, in *user.Note, opts ...grpc.CallOption) (*user.Note, error) {
+	out := new(user.Note)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/UpdateNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) DeleteNote(ctx context.Context, in *user.DeleteNoteRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/DeleteNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) GetNote(ctx context.Context, in *user.GetNoteRequest, opts ...grpc.CallOption) (*user.Note, error) {
+	out := new(user.Note)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/GetNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noteMgrClient) SearchNote(ctx context.Context, in *user.SearchNoteRequest, opts ...grpc.CallOption) (*user.SearchNoteResponse, error) {
+	out := new(user.SearchNoteResponse)
+	err := c.cc.Invoke(ctx, "/header.NoteMgr/SearchNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NoteMgrServer is the server API for NoteMgr service.
+type NoteMgrServer interface {
+	ListNotes(context.Context, *user.ListNotesRequest) (*user.Notes, error)
+	AddNote(context.Context, *user.Note) (*user.Note, error)
+	UpdateNote(context.Context, *user.Note) (*user.Note, error)
+	DeleteNote(context.Context, *user.DeleteNoteRequest) (*common.Empty, error)
+	GetNote(context.Context, *user.GetNoteRequest) (*user.Note, error)
+	SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error)
+}
+
+// UnimplementedNoteMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedNoteMgrServer struct {
+}
+
+func (*UnimplementedNoteMgrServer) ListNotes(context.Context, *user.ListNotesRequest) (*user.Notes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListNotes not implemented")
+}
+func (*UnimplementedNoteMgrServer) AddNote(context.Context, *user.Note) (*user.Note, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddNote not implemented")
+}
+func (*UnimplementedNoteMgrServer) UpdateNote(context.Context, *user.Note) (*user.Note, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNote not implemented")
+}
+func (*UnimplementedNoteMgrServer) DeleteNote(context.Context, *user.DeleteNoteRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteNote not implemented")
+}
+func (*UnimplementedNoteMgrServer) GetNote(context.Context, *user.GetNoteRequest) (*user.Note, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNote not implemented")
+}
+func (*UnimplementedNoteMgrServer) SearchNote(context.Context, *user.SearchNoteRequest) (*user.SearchNoteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchNote not implemented")
+}
+
+func RegisterNoteMgrServer(s *grpc.Server, srv NoteMgrServer) {
+	s.RegisterService(&_NoteMgr_serviceDesc, srv)
+}
+
+func _NoteMgr_ListNotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.ListNotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).ListNotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/ListNotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).ListNotes(ctx, req.(*user.ListNotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_AddNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Note)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).AddNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/AddNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).AddNote(ctx, req.(*user.Note))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_UpdateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Note)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).UpdateNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/UpdateNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).UpdateNote(ctx, req.(*user.Note))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_DeleteNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.DeleteNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).DeleteNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/DeleteNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).DeleteNote(ctx, req.(*user.DeleteNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_GetNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.GetNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).GetNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/GetNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).GetNote(ctx, req.(*user.GetNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NoteMgr_SearchNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.SearchNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NoteMgrServer).SearchNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NoteMgr/SearchNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NoteMgrServer).SearchNote(ctx, req.(*user.SearchNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _NoteMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.NoteMgr",
+	HandlerType: (*NoteMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListNotes",
+			Handler:    _NoteMgr_ListNotes_Handler,
+		},
+		{
+			MethodName: "AddNote",
+			Handler:    _NoteMgr_AddNote_Handler,
+		},
+		{
+			MethodName: "UpdateNote",
+			Handler:    _NoteMgr_UpdateNote_Handler,
+		},
+		{
+			MethodName: "DeleteNote",
+			Handler:    _NoteMgr_DeleteNote_Handler,
+		},
+		{
+			MethodName: "GetNote",
+			Handler:    _NoteMgr_GetNote_Handler,
+		},
+		{
+			MethodName: "SearchNote",
+			Handler:    _NoteMgr_SearchNote_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AutomationMgrClient is the client API for AutomationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AutomationMgrClient interface {
+	ListAutomations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automations, error)
+	UpdateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error)
+	DeleteAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ReadAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automation, error)
+	CreateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error)
+}
+
+type automationMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAutomationMgrClient(cc grpc.ClientConnInterface) AutomationMgrClient {
+	return &automationMgrClient{cc}
+}
+
+func (c *automationMgrClient) ListAutomations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automations, error) {
+	out := new(event.Automations)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/ListAutomations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) UpdateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error) {
+	out := new(event.Automation)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/UpdateAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) DeleteAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/DeleteAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) ReadAutomation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*event.Automation, error) {
+	out := new(event.Automation)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/ReadAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *automationMgrClient) CreateAutomation(ctx context.Context, in *event.Automation, opts ...grpc.CallOption) (*event.Automation, error) {
+	out := new(event.Automation)
+	err := c.cc.Invoke(ctx, "/header.AutomationMgr/CreateAutomation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AutomationMgrServer is the server API for AutomationMgr service.
+type AutomationMgrServer interface {
+	ListAutomations(context.Context, *common.Id) (*event.Automations, error)
+	UpdateAutomation(context.Context, *event.Automation) (*event.Automation, error)
+	DeleteAutomation(context.Context, *common.Id) (*common.Empty, error)
+	ReadAutomation(context.Context, *common.Id) (*event.Automation, error)
+	CreateAutomation(context.Context, *event.Automation) (*event.Automation, error)
+}
+
+// UnimplementedAutomationMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAutomationMgrServer struct {
+}
+
+func (*UnimplementedAutomationMgrServer) ListAutomations(context.Context, *common.Id) (*event.Automations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAutomations not implemented")
+}
+func (*UnimplementedAutomationMgrServer) UpdateAutomation(context.Context, *event.Automation) (*event.Automation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAutomation not implemented")
+}
+func (*UnimplementedAutomationMgrServer) DeleteAutomation(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAutomation not implemented")
+}
+func (*UnimplementedAutomationMgrServer) ReadAutomation(context.Context, *common.Id) (*event.Automation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadAutomation not implemented")
+}
+func (*UnimplementedAutomationMgrServer) CreateAutomation(context.Context, *event.Automation) (*event.Automation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAutomation not implemented")
+}
+
+func RegisterAutomationMgrServer(s *grpc.Server, srv AutomationMgrServer) {
+	s.RegisterService(&_AutomationMgr_serviceDesc, srv)
+}
+
+func _AutomationMgr_ListAutomations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).ListAutomations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/ListAutomations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).ListAutomations(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_UpdateAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Automation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).UpdateAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/UpdateAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).UpdateAutomation(ctx, req.(*event.Automation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_DeleteAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).DeleteAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/DeleteAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).DeleteAutomation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_ReadAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).ReadAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/ReadAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).ReadAutomation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AutomationMgr_CreateAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Automation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AutomationMgrServer).CreateAutomation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AutomationMgr/CreateAutomation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AutomationMgrServer).CreateAutomation(ctx, req.(*event.Automation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AutomationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AutomationMgr",
+	HandlerType: (*AutomationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListAutomations",
+			Handler:    _AutomationMgr_ListAutomations_Handler,
+		},
+		{
+			MethodName: "UpdateAutomation",
+			Handler:    _AutomationMgr_UpdateAutomation_Handler,
+		},
+		{
+			MethodName: "DeleteAutomation",
+			Handler:    _AutomationMgr_DeleteAutomation_Handler,
+		},
+		{
+			MethodName: "ReadAutomation",
+			Handler:    _AutomationMgr_ReadAutomation_Handler,
+		},
+		{
+			MethodName: "CreateAutomation",
+			Handler:    _AutomationMgr_CreateAutomation_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AttributeMgrClient is the client API for AttributeMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AttributeMgrClient interface {
+	ListAttributeDefinitions(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*user.AttributeDefinitions, error)
+	CreateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error)
+	UpdateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error)
+	DeleteAttributeDefinition(ctx context.Context, in *user.DeleteAttrRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type attributeMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAttributeMgrClient(cc grpc.ClientConnInterface) AttributeMgrClient {
+	return &attributeMgrClient{cc}
+}
+
+func (c *attributeMgrClient) ListAttributeDefinitions(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*user.AttributeDefinitions, error) {
+	out := new(user.AttributeDefinitions)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/ListAttributeDefinitions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributeMgrClient) CreateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error) {
+	out := new(user.AttributeDefinition)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/CreateAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributeMgrClient) UpdateAttributeDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*user.AttributeDefinition, error) {
+	out := new(user.AttributeDefinition)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/UpdateAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *attributeMgrClient) DeleteAttributeDefinition(ctx context.Context, in *user.DeleteAttrRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.AttributeMgr/DeleteAttributeDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AttributeMgrServer is the server API for AttributeMgr service.
+type AttributeMgrServer interface {
+	ListAttributeDefinitions(context.Context, *common.Empty) (*user.AttributeDefinitions, error)
+	CreateAttributeDefinition(context.Context, *user.AttributeDefinition) (*user.AttributeDefinition, error)
+	UpdateAttributeDefinition(context.Context, *user.AttributeDefinition) (*user.AttributeDefinition, error)
+	DeleteAttributeDefinition(context.Context, *user.DeleteAttrRequest) (*common.Empty, error)
+}
+
+// UnimplementedAttributeMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAttributeMgrServer struct {
+}
+
+func (*UnimplementedAttributeMgrServer) ListAttributeDefinitions(context.Context, *common.Empty) (*user.AttributeDefinitions, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAttributeDefinitions not implemented")
+}
+func (*UnimplementedAttributeMgrServer) CreateAttributeDefinition(context.Context, *user.AttributeDefinition) (*user.AttributeDefinition, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAttributeDefinition not implemented")
+}
+func (*UnimplementedAttributeMgrServer) UpdateAttributeDefinition(context.Context, *user.AttributeDefinition) (*user.AttributeDefinition, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAttributeDefinition not implemented")
+}
+func (*UnimplementedAttributeMgrServer) DeleteAttributeDefinition(context.Context, *user.DeleteAttrRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAttributeDefinition not implemented")
+}
+
+func RegisterAttributeMgrServer(s *grpc.Server, srv AttributeMgrServer) {
+	s.RegisterService(&_AttributeMgr_serviceDesc, srv)
+}
+
+func _AttributeMgr_ListAttributeDefinitions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).ListAttributeDefinitions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/ListAttributeDefinitions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).ListAttributeDefinitions(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributeMgr_CreateAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.AttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).CreateAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/CreateAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).CreateAttributeDefinition(ctx, req.(*user.AttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributeMgr_UpdateAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.AttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).UpdateAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/UpdateAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).UpdateAttributeDefinition(ctx, req.(*user.AttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AttributeMgr_DeleteAttributeDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.DeleteAttrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AttributeMgrServer).DeleteAttributeDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AttributeMgr/DeleteAttributeDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AttributeMgrServer).DeleteAttributeDefinition(ctx, req.(*user.DeleteAttrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AttributeMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AttributeMgr",
+	HandlerType: (*AttributeMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListAttributeDefinitions",
+			Handler:    _AttributeMgr_ListAttributeDefinitions_Handler,
+		},
+		{
+			MethodName: "CreateAttributeDefinition",
+			Handler:    _AttributeMgr_CreateAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "UpdateAttributeDefinition",
+			Handler:    _AttributeMgr_UpdateAttributeDefinition_Handler,
+		},
+		{
+			MethodName: "DeleteAttributeDefinition",
+			Handler:    _AttributeMgr_DeleteAttributeDefinition_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// SegmentationMgrClient is the client API for SegmentationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type SegmentationMgrClient interface {
+	CreateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error)
+	UpdateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error)
+	ListSegments(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentations, error)
+	DeleteSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ReadSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentation, error)
+}
+
+type segmentationMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSegmentationMgrClient(cc grpc.ClientConnInterface) SegmentationMgrClient {
+	return &segmentationMgrClient{cc}
+}
+
+func (c *segmentationMgrClient) CreateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error) {
+	out := new(user.Segmentation)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/CreateSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) UpdateSegment(ctx context.Context, in *user.Segmentation, opts ...grpc.CallOption) (*user.Segmentation, error) {
+	out := new(user.Segmentation)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/UpdateSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) ListSegments(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentations, error) {
+	out := new(user.Segmentations)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/ListSegments", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) DeleteSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/DeleteSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *segmentationMgrClient) ReadSegment(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Segmentation, error) {
+	out := new(user.Segmentation)
+	err := c.cc.Invoke(ctx, "/header.SegmentationMgr/ReadSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SegmentationMgrServer is the server API for SegmentationMgr service.
+type SegmentationMgrServer interface {
+	CreateSegment(context.Context, *user.Segmentation) (*user.Segmentation, error)
+	UpdateSegment(context.Context, *user.Segmentation) (*user.Segmentation, error)
+	ListSegments(context.Context, *common.Id) (*user.Segmentations, error)
+	DeleteSegment(context.Context, *common.Id) (*common.Empty, error)
+	ReadSegment(context.Context, *common.Id) (*user.Segmentation, error)
+}
+
+// UnimplementedSegmentationMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedSegmentationMgrServer struct {
+}
+
+func (*UnimplementedSegmentationMgrServer) CreateSegment(context.Context, *user.Segmentation) (*user.Segmentation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSegment not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) UpdateSegment(context.Context, *user.Segmentation) (*user.Segmentation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSegment not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) ListSegments(context.Context, *common.Id) (*user.Segmentations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSegments not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) DeleteSegment(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSegment not implemented")
+}
+func (*UnimplementedSegmentationMgrServer) ReadSegment(context.Context, *common.Id) (*user.Segmentation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadSegment not implemented")
+}
+
+func RegisterSegmentationMgrServer(s *grpc.Server, srv SegmentationMgrServer) {
+	s.RegisterService(&_SegmentationMgr_serviceDesc, srv)
+}
+
+func _SegmentationMgr_CreateSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Segmentation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).CreateSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/CreateSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).CreateSegment(ctx, req.(*user.Segmentation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_UpdateSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.Segmentation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).UpdateSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/UpdateSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).UpdateSegment(ctx, req.(*user.Segmentation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_ListSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).ListSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/ListSegments",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).ListSegments(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_DeleteSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).DeleteSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/DeleteSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).DeleteSegment(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SegmentationMgr_ReadSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SegmentationMgrServer).ReadSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SegmentationMgr/ReadSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SegmentationMgrServer).ReadSegment(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _SegmentationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.SegmentationMgr",
+	HandlerType: (*SegmentationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateSegment",
+			Handler:    _SegmentationMgr_CreateSegment_Handler,
+		},
+		{
+			MethodName: "UpdateSegment",
+			Handler:    _SegmentationMgr_UpdateSegment_Handler,
+		},
+		{
+			MethodName: "ListSegments",
+			Handler:    _SegmentationMgr_ListSegments_Handler,
+		},
+		{
+			MethodName: "DeleteSegment",
+			Handler:    _SegmentationMgr_DeleteSegment_Handler,
+		},
+		{
+			MethodName: "ReadSegment",
+			Handler:    _SegmentationMgr_ReadSegment_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PermClient is the client API for Perm service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PermClient interface {
+	Update(ctx context.Context, in *common.UpdatePermRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UpdateState(ctx context.Context, in *common.UpdateStateRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	ReadPerm(ctx context.Context, in *common.ReadPermRequest, opts ...grpc.CallOption) (*common.Permission, error)
+}
+
+type permClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPermClient(cc grpc.ClientConnInterface) PermClient {
+	return &permClient{cc}
+}
+
+func (c *permClient) Update(ctx context.Context, in *common.UpdatePermRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Perm/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *permClient) UpdateState(ctx context.Context, in *common.UpdateStateRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Perm/UpdateState", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *permClient) ReadPerm(ctx context.Context, in *common.ReadPermRequest, opts ...grpc.CallOption) (*common.Permission, error) {
+	out := new(common.Permission)
+	err := c.cc.Invoke(ctx, "/header.Perm/ReadPerm", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PermServer is the server API for Perm service.
+type PermServer interface {
+	Update(context.Context, *common.UpdatePermRequest) (*common.Empty, error)
+	UpdateState(context.Context, *common.UpdateStateRequest) (*common.Empty, error)
+	ReadPerm(context.Context, *common.ReadPermRequest) (*common.Permission, error)
+}
+
+// UnimplementedPermServer can be embedded to have forward compatible implementations.
+type UnimplementedPermServer struct {
+}
+
+func (*UnimplementedPermServer) Update(context.Context, *common.UpdatePermRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedPermServer) UpdateState(context.Context, *common.UpdateStateRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateState not implemented")
+}
+func (*UnimplementedPermServer) ReadPerm(context.Context, *common.ReadPermRequest) (*common.Permission, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPerm not implemented")
+}
+
+func RegisterPermServer(s *grpc.Server, srv PermServer) {
+	s.RegisterService(&_Perm_serviceDesc, srv)
+}
+
+func _Perm_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.UpdatePermRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Perm/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermServer).Update(ctx, req.(*common.UpdatePermRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Perm_UpdateState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.UpdateStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermServer).UpdateState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Perm/UpdateState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermServer).UpdateState(ctx, req.(*common.UpdateStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Perm_ReadPerm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.ReadPermRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PermServer).ReadPerm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Perm/ReadPerm",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PermServer).ReadPerm(ctx, req.(*common.ReadPermRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Perm_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Perm",
+	HandlerType: (*PermServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Update",
+			Handler:    _Perm_Update_Handler,
+		},
+		{
+			MethodName: "UpdateState",
+			Handler:    _Perm_UpdateState_Handler,
+		},
+		{
+			MethodName: "ReadPerm",
+			Handler:    _Perm_ReadPerm_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ConversationReporterClient is the client API for ConversationReporter service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ConversationReporterClient interface {
+	CountConversationsByTags(ctx context.Context, in *conversation.CountByTagsRequest, opts ...grpc.CallOption) (*conversation.CountByTagsResponse, error)
+	GetAvgResponseTimes(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResponseTimeResponse, error)
+	GetTotalConversation(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.TotalConversationResponse, error)
+	ReportConversations(ctx context.Context, in *conversation.CountReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error)
+	ReportConversations2(ctx context.Context, in *conversation.ReportConversationsRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error)
+	ReportAvailibilities(ctx context.Context, in *conversation.AvailibilityReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error)
+}
+
+type conversationReporterClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewConversationReporterClient(cc grpc.ClientConnInterface) ConversationReporterClient {
+	return &conversationReporterClient{cc}
+}
+
+func (c *conversationReporterClient) CountConversationsByTags(ctx context.Context, in *conversation.CountByTagsRequest, opts ...grpc.CallOption) (*conversation.CountByTagsResponse, error) {
+	out := new(conversation.CountByTagsResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/CountConversationsByTags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) GetAvgResponseTimes(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResponseTimeResponse, error) {
+	out := new(conversation.AvgResponseTimeResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/GetAvgResponseTimes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) GetTotalConversation(ctx context.Context, in *conversation.AvgResponseTimeRequest, opts ...grpc.CallOption) (*conversation.TotalConversationResponse, error) {
+	out := new(conversation.TotalConversationResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/GetTotalConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) ReportConversations(ctx context.Context, in *conversation.CountReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error) {
+	out := new(conversation.ReportResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/ReportConversations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) ReportConversations2(ctx context.Context, in *conversation.ReportConversationsRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error) {
+	out := new(conversation.ReportResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/ReportConversations2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationReporterClient) ReportAvailibilities(ctx context.Context, in *conversation.AvailibilityReportRequest, opts ...grpc.CallOption) (*conversation.ReportResponse, error) {
+	out := new(conversation.ReportResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationReporter/ReportAvailibilities", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConversationReporterServer is the server API for ConversationReporter service.
+type ConversationReporterServer interface {
+	CountConversationsByTags(context.Context, *conversation.CountByTagsRequest) (*conversation.CountByTagsResponse, error)
+	GetAvgResponseTimes(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.AvgResponseTimeResponse, error)
+	GetTotalConversation(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.TotalConversationResponse, error)
+	ReportConversations(context.Context, *conversation.CountReportRequest) (*conversation.ReportResponse, error)
+	ReportConversations2(context.Context, *conversation.ReportConversationsRequest) (*conversation.ReportResponse, error)
+	ReportAvailibilities(context.Context, *conversation.AvailibilityReportRequest) (*conversation.ReportResponse, error)
+}
+
+// UnimplementedConversationReporterServer can be embedded to have forward compatible implementations.
+type UnimplementedConversationReporterServer struct {
+}
+
+func (*UnimplementedConversationReporterServer) CountConversationsByTags(context.Context, *conversation.CountByTagsRequest) (*conversation.CountByTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountConversationsByTags not implemented")
+}
+func (*UnimplementedConversationReporterServer) GetAvgResponseTimes(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.AvgResponseTimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvgResponseTimes not implemented")
+}
+func (*UnimplementedConversationReporterServer) GetTotalConversation(context.Context, *conversation.AvgResponseTimeRequest) (*conversation.TotalConversationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTotalConversation not implemented")
+}
+func (*UnimplementedConversationReporterServer) ReportConversations(context.Context, *conversation.CountReportRequest) (*conversation.ReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportConversations not implemented")
+}
+func (*UnimplementedConversationReporterServer) ReportConversations2(context.Context, *conversation.ReportConversationsRequest) (*conversation.ReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportConversations2 not implemented")
+}
+func (*UnimplementedConversationReporterServer) ReportAvailibilities(context.Context, *conversation.AvailibilityReportRequest) (*conversation.ReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportAvailibilities not implemented")
+}
+
+func RegisterConversationReporterServer(s *grpc.Server, srv ConversationReporterServer) {
+	s.RegisterService(&_ConversationReporter_serviceDesc, srv)
+}
+
+func _ConversationReporter_CountConversationsByTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.CountByTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).CountConversationsByTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/CountConversationsByTags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).CountConversationsByTags(ctx, req.(*conversation.CountByTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_GetAvgResponseTimes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvgResponseTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).GetAvgResponseTimes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/GetAvgResponseTimes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).GetAvgResponseTimes(ctx, req.(*conversation.AvgResponseTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_GetTotalConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvgResponseTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).GetTotalConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/GetTotalConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).GetTotalConversation(ctx, req.(*conversation.AvgResponseTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_ReportConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.CountReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).ReportConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/ReportConversations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).ReportConversations(ctx, req.(*conversation.CountReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_ReportConversations2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ReportConversationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).ReportConversations2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/ReportConversations2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).ReportConversations2(ctx, req.(*conversation.ReportConversationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationReporter_ReportAvailibilities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvailibilityReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationReporterServer).ReportAvailibilities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationReporter/ReportAvailibilities",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationReporterServer).ReportAvailibilities(ctx, req.(*conversation.AvailibilityReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ConversationReporter_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ConversationReporter",
+	HandlerType: (*ConversationReporterServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CountConversationsByTags",
+			Handler:    _ConversationReporter_CountConversationsByTags_Handler,
+		},
+		{
+			MethodName: "GetAvgResponseTimes",
+			Handler:    _ConversationReporter_GetAvgResponseTimes_Handler,
+		},
+		{
+			MethodName: "GetTotalConversation",
+			Handler:    _ConversationReporter_GetTotalConversation_Handler,
+		},
+		{
+			MethodName: "ReportConversations",
+			Handler:    _ConversationReporter_ReportConversations_Handler,
+		},
+		{
+			MethodName: "ReportConversations2",
+			Handler:    _ConversationReporter_ReportConversations2_Handler,
+		},
+		{
+			MethodName: "ReportAvailibilities",
+			Handler:    _ConversationReporter_ReportAvailibilities_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// AgentPresenceMgrClient is the client API for AgentPresenceMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type AgentPresenceMgrClient interface {
+	ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+	UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error)
+}
+
+type agentPresenceMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAgentPresenceMgrClient(cc grpc.ClientConnInterface) AgentPresenceMgrClient {
+	return &agentPresenceMgrClient{cc}
+}
+
+func (c *agentPresenceMgrClient) ReadPresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.AgentPresenceMgr/ReadPresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentPresenceMgrClient) UpdatePresence(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*user.Presence, error) {
+	out := new(user.Presence)
+	err := c.cc.Invoke(ctx, "/header.AgentPresenceMgr/UpdatePresence", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AgentPresenceMgrServer is the server API for AgentPresenceMgr service.
+type AgentPresenceMgrServer interface {
+	ReadPresence(context.Context, *common.Id) (*user.Presence, error)
+	UpdatePresence(context.Context, *common.Id) (*user.Presence, error)
+}
+
+// UnimplementedAgentPresenceMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedAgentPresenceMgrServer struct {
+}
+
+func (*UnimplementedAgentPresenceMgrServer) ReadPresence(context.Context, *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPresence not implemented")
+}
+func (*UnimplementedAgentPresenceMgrServer) UpdatePresence(context.Context, *common.Id) (*user.Presence, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePresence not implemented")
+}
+
+func RegisterAgentPresenceMgrServer(s *grpc.Server, srv AgentPresenceMgrServer) {
+	s.RegisterService(&_AgentPresenceMgr_serviceDesc, srv)
+}
+
+func _AgentPresenceMgr_ReadPresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentPresenceMgrServer).ReadPresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AgentPresenceMgr/ReadPresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentPresenceMgrServer).ReadPresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentPresenceMgr_UpdatePresence_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentPresenceMgrServer).UpdatePresence(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.AgentPresenceMgr/UpdatePresence",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentPresenceMgrServer).UpdatePresence(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _AgentPresenceMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.AgentPresenceMgr",
+	HandlerType: (*AgentPresenceMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadPresence",
+			Handler:    _AgentPresenceMgr_ReadPresence_Handler,
+		},
+		{
+			MethodName: "UpdatePresence",
+			Handler:    _AgentPresenceMgr_UpdatePresence_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// RuleMgrClient is the client API for RuleMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type RuleMgrClient interface {
+	UpdateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error)
+	CreateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error)
+	DeleteRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ReadRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Rule, error)
+	ListRules(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Route, error)
+}
+
+type ruleMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRuleMgrClient(cc grpc.ClientConnInterface) RuleMgrClient {
+	return &ruleMgrClient{cc}
+}
+
+func (c *ruleMgrClient) UpdateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error) {
+	out := new(conversation.Rule)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/UpdateRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) CreateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error) {
+	out := new(conversation.Rule)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/CreateRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) DeleteRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/DeleteRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) ReadRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Rule, error) {
+	out := new(conversation.Rule)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/ReadRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ruleMgrClient) ListRules(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Route, error) {
+	out := new(conversation.Route)
+	err := c.cc.Invoke(ctx, "/header.RuleMgr/ListRules", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RuleMgrServer is the server API for RuleMgr service.
+type RuleMgrServer interface {
+	UpdateRule(context.Context, *conversation.Rule) (*conversation.Rule, error)
+	CreateRule(context.Context, *conversation.Rule) (*conversation.Rule, error)
+	DeleteRule(context.Context, *common.Id) (*common.Empty, error)
+	ReadRule(context.Context, *common.Id) (*conversation.Rule, error)
+	ListRules(context.Context, *common.Id) (*conversation.Route, error)
+}
+
+// UnimplementedRuleMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedRuleMgrServer struct {
+}
+
+func (*UnimplementedRuleMgrServer) UpdateRule(context.Context, *conversation.Rule) (*conversation.Rule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) CreateRule(context.Context, *conversation.Rule) (*conversation.Rule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) DeleteRule(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) ReadRule(context.Context, *common.Id) (*conversation.Rule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadRule not implemented")
+}
+func (*UnimplementedRuleMgrServer) ListRules(context.Context, *common.Id) (*conversation.Route, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRules not implemented")
+}
+
+func RegisterRuleMgrServer(s *grpc.Server, srv RuleMgrServer) {
+	s.RegisterService(&_RuleMgr_serviceDesc, srv)
+}
+
+func _RuleMgr_UpdateRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Rule)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).UpdateRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/UpdateRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).UpdateRule(ctx, req.(*conversation.Rule))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_CreateRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Rule)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).CreateRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/CreateRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).CreateRule(ctx, req.(*conversation.Rule))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_DeleteRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).DeleteRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/DeleteRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).DeleteRule(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_ReadRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).ReadRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/ReadRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).ReadRule(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _RuleMgr_ListRules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RuleMgrServer).ListRules(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.RuleMgr/ListRules",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RuleMgrServer).ListRules(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _RuleMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.RuleMgr",
+	HandlerType: (*RuleMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpdateRule",
+			Handler:    _RuleMgr_UpdateRule_Handler,
+		},
+		{
+			MethodName: "CreateRule",
+			Handler:    _RuleMgr_CreateRule_Handler,
+		},
+		{
+			MethodName: "DeleteRule",
+			Handler:    _RuleMgr_DeleteRule_Handler,
+		},
+		{
+			MethodName: "ReadRule",
+			Handler:    _RuleMgr_ReadRule_Handler,
+		},
+		{
+			MethodName: "ListRules",
+			Handler:    _RuleMgr_ListRules_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ConversationMgrClient is the client API for ConversationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ConversationMgrClient interface {
+	PongMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
+	// rpc UpdateConversationState(Conversation) returns (Conversation);
+	StartConversation(ctx context.Context, in *conversation.StartRequest, opts ...grpc.CallOption) (*conversation.Conversation, error)
+	EndConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error)
+	GetConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error)
+	ListConversations(ctx context.Context, in *conversation.ListConversationsRequest, opts ...grpc.CallOption) (*conversation.Conversations, error)
+	MatchConversations(ctx context.Context, in *common.Ids, opts ...grpc.CallOption) (*conversation.Conversations, error)
+	TagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UntagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	JoinConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error)
+	LeftConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error)
+	Typing(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error)
+	QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error)
+	UpdateConversationInfo(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*conversation.Conversation, error)
+	FilterUser(ctx context.Context, in *conversation.FilterUserRequest, opts ...grpc.CallOption) (*conversation.FilterUserResponse, error)
+	SearchConversation(ctx context.Context, in *conversation.SearchConversationRequest, opts ...grpc.CallOption) (*conversation.SearchConversationResponse, error)
+	ListConversations2(ctx context.Context, in *conversation.ConversationListRequest, opts ...grpc.CallOption) (*conversation.ConversationListResponse, error)
+	ExportUsers(ctx context.Context, in *conversation.UserExportRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	UpdateMuteConversation(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*common.Empty, error)
+	UnsubscribeConversation(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*common.Empty, error)
+	MarkReadConversation(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type conversationMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewConversationMgrClient(cc grpc.ClientConnInterface) ConversationMgrClient {
+	return &conversationMgrClient{cc}
+}
+
+func (c *conversationMgrClient) PongMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
+	out := new(event.Event)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/PongMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) StartConversation(ctx context.Context, in *conversation.StartRequest, opts ...grpc.CallOption) (*conversation.Conversation, error) {
+	out := new(conversation.Conversation)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/StartConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) EndConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error) {
+	out := new(conversation.Conversation)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/EndConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) GetConversation(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Conversation, error) {
+	out := new(conversation.Conversation)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/GetConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ListConversations(ctx context.Context, in *conversation.ListConversationsRequest, opts ...grpc.CallOption) (*conversation.Conversations, error) {
+	out := new(conversation.Conversations)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ListConversations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) MatchConversations(ctx context.Context, in *common.Ids, opts ...grpc.CallOption) (*conversation.Conversations, error) {
+	out := new(conversation.Conversations)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/MatchConversations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) TagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/TagConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) UntagConversation(ctx context.Context, in *conversation.TagRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/UntagConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) JoinConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/JoinConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) LeftConversation(ctx context.Context, in *conversation.Member, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/LeftConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) Typing(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/Typing", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) Ping(ctx context.Context, in *common.PingRequest, opts ...grpc.CallOption) (*common.Pong, error) {
+	out := new(common.Pong)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/Ping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) QueryByObjectPath(ctx context.Context, in *common.ObjectPathRequest, opts ...grpc.CallOption) (*common.Ids, error) {
+	out := new(common.Ids)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/QueryByObjectPath", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) UpdateConversationInfo(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*conversation.Conversation, error) {
+	out := new(conversation.Conversation)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/UpdateConversationInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) FilterUser(ctx context.Context, in *conversation.FilterUserRequest, opts ...grpc.CallOption) (*conversation.FilterUserResponse, error) {
+	out := new(conversation.FilterUserResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/FilterUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) SearchConversation(ctx context.Context, in *conversation.SearchConversationRequest, opts ...grpc.CallOption) (*conversation.SearchConversationResponse, error) {
+	out := new(conversation.SearchConversationResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/SearchConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ListConversations2(ctx context.Context, in *conversation.ConversationListRequest, opts ...grpc.CallOption) (*conversation.ConversationListResponse, error) {
+	out := new(conversation.ConversationListResponse)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ListConversations2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ExportUsers(ctx context.Context, in *conversation.UserExportRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ExportUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) UpdateMuteConversation(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/UpdateMuteConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) UnsubscribeConversation(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/UnsubscribeConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) MarkReadConversation(ctx context.Context, in *conversation.Conversation, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/MarkReadConversation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConversationMgrServer is the server API for ConversationMgr service.
+type ConversationMgrServer interface {
+	PongMessage(context.Context, *event.Event) (*event.Event, error)
+	// rpc UpdateConversationState(Conversation) returns (Conversation);
+	StartConversation(context.Context, *conversation.StartRequest) (*conversation.Conversation, error)
+	EndConversation(context.Context, *common.Id) (*conversation.Conversation, error)
+	GetConversation(context.Context, *common.Id) (*conversation.Conversation, error)
+	ListConversations(context.Context, *conversation.ListConversationsRequest) (*conversation.Conversations, error)
+	MatchConversations(context.Context, *common.Ids) (*conversation.Conversations, error)
+	TagConversation(context.Context, *conversation.TagRequest) (*common.Empty, error)
+	UntagConversation(context.Context, *conversation.TagRequest) (*common.Empty, error)
+	JoinConversation(context.Context, *conversation.Member) (*common.Empty, error)
+	LeftConversation(context.Context, *conversation.Member) (*common.Empty, error)
+	Typing(context.Context, *common.Id) (*common.Empty, error)
+	Ping(context.Context, *common.PingRequest) (*common.Pong, error)
+	QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error)
+	UpdateConversationInfo(context.Context, *conversation.Conversation) (*conversation.Conversation, error)
+	FilterUser(context.Context, *conversation.FilterUserRequest) (*conversation.FilterUserResponse, error)
+	SearchConversation(context.Context, *conversation.SearchConversationRequest) (*conversation.SearchConversationResponse, error)
+	ListConversations2(context.Context, *conversation.ConversationListRequest) (*conversation.ConversationListResponse, error)
+	ExportUsers(context.Context, *conversation.UserExportRequest) (*common.Empty, error)
+	UpdateMuteConversation(context.Context, *conversation.Conversation) (*common.Empty, error)
+	UnsubscribeConversation(context.Context, *conversation.Conversation) (*common.Empty, error)
+	MarkReadConversation(context.Context, *conversation.Conversation) (*common.Empty, error)
+}
+
+// UnimplementedConversationMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedConversationMgrServer struct {
+}
+
+func (*UnimplementedConversationMgrServer) PongMessage(context.Context, *event.Event) (*event.Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PongMessage not implemented")
+}
+func (*UnimplementedConversationMgrServer) StartConversation(context.Context, *conversation.StartRequest) (*conversation.Conversation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) EndConversation(context.Context, *common.Id) (*conversation.Conversation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EndConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) GetConversation(context.Context, *common.Id) (*conversation.Conversation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) ListConversations(context.Context, *conversation.ListConversationsRequest) (*conversation.Conversations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConversations not implemented")
+}
+func (*UnimplementedConversationMgrServer) MatchConversations(context.Context, *common.Ids) (*conversation.Conversations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchConversations not implemented")
+}
+func (*UnimplementedConversationMgrServer) TagConversation(context.Context, *conversation.TagRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TagConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) UntagConversation(context.Context, *conversation.TagRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UntagConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) JoinConversation(context.Context, *conversation.Member) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) LeftConversation(context.Context, *conversation.Member) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LeftConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) Typing(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Typing not implemented")
+}
+func (*UnimplementedConversationMgrServer) Ping(context.Context, *common.PingRequest) (*common.Pong, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (*UnimplementedConversationMgrServer) QueryByObjectPath(context.Context, *common.ObjectPathRequest) (*common.Ids, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryByObjectPath not implemented")
+}
+func (*UnimplementedConversationMgrServer) UpdateConversationInfo(context.Context, *conversation.Conversation) (*conversation.Conversation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateConversationInfo not implemented")
+}
+func (*UnimplementedConversationMgrServer) FilterUser(context.Context, *conversation.FilterUserRequest) (*conversation.FilterUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FilterUser not implemented")
+}
+func (*UnimplementedConversationMgrServer) SearchConversation(context.Context, *conversation.SearchConversationRequest) (*conversation.SearchConversationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) ListConversations2(context.Context, *conversation.ConversationListRequest) (*conversation.ConversationListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConversations2 not implemented")
+}
+func (*UnimplementedConversationMgrServer) ExportUsers(context.Context, *conversation.UserExportRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUsers not implemented")
+}
+func (*UnimplementedConversationMgrServer) UpdateMuteConversation(context.Context, *conversation.Conversation) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMuteConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) UnsubscribeConversation(context.Context, *conversation.Conversation) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnsubscribeConversation not implemented")
+}
+func (*UnimplementedConversationMgrServer) MarkReadConversation(context.Context, *conversation.Conversation) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarkReadConversation not implemented")
+}
+
+func RegisterConversationMgrServer(s *grpc.Server, srv ConversationMgrServer) {
+	s.RegisterService(&_ConversationMgr_serviceDesc, srv)
+}
+
+func _ConversationMgr_PongMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).PongMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/PongMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).PongMessage(ctx, req.(*event.Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_StartConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.StartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).StartConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/StartConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).StartConversation(ctx, req.(*conversation.StartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_EndConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).EndConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/EndConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).EndConversation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_GetConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).GetConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/GetConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).GetConversation(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ListConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ListConversationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ListConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/ListConversations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ListConversations(ctx, req.(*conversation.ListConversationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_MatchConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).MatchConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/MatchConversations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).MatchConversations(ctx, req.(*common.Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_TagConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).TagConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/TagConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).TagConversation(ctx, req.(*conversation.TagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_UntagConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).UntagConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/UntagConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).UntagConversation(ctx, req.(*conversation.TagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_JoinConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Member)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).JoinConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/JoinConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).JoinConversation(ctx, req.(*conversation.Member))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_LeftConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Member)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).LeftConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/LeftConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).LeftConversation(ctx, req.(*conversation.Member))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_Typing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).Typing(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/Typing",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).Typing(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.PingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).Ping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/Ping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).Ping(ctx, req.(*common.PingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_QueryByObjectPath_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.ObjectPathRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).QueryByObjectPath(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/QueryByObjectPath",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).QueryByObjectPath(ctx, req.(*common.ObjectPathRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_UpdateConversationInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Conversation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).UpdateConversationInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/UpdateConversationInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).UpdateConversationInfo(ctx, req.(*conversation.Conversation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_FilterUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.FilterUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).FilterUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/FilterUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).FilterUser(ctx, req.(*conversation.FilterUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_SearchConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.SearchConversationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).SearchConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/SearchConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).SearchConversation(ctx, req.(*conversation.SearchConversationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ListConversations2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ConversationListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ListConversations2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/ListConversations2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ListConversations2(ctx, req.(*conversation.ConversationListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.UserExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/ExportUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ExportUsers(ctx, req.(*conversation.UserExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_UpdateMuteConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Conversation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).UpdateMuteConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/UpdateMuteConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).UpdateMuteConversation(ctx, req.(*conversation.Conversation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_UnsubscribeConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Conversation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).UnsubscribeConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/UnsubscribeConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).UnsubscribeConversation(ctx, req.(*conversation.Conversation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_MarkReadConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Conversation)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).MarkReadConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/MarkReadConversation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).MarkReadConversation(ctx, req.(*conversation.Conversation))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ConversationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ConversationMgr",
+	HandlerType: (*ConversationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PongMessage",
+			Handler:    _ConversationMgr_PongMessage_Handler,
+		},
+		{
+			MethodName: "StartConversation",
+			Handler:    _ConversationMgr_StartConversation_Handler,
+		},
+		{
+			MethodName: "EndConversation",
+			Handler:    _ConversationMgr_EndConversation_Handler,
+		},
+		{
+			MethodName: "GetConversation",
+			Handler:    _ConversationMgr_GetConversation_Handler,
+		},
+		{
+			MethodName: "ListConversations",
+			Handler:    _ConversationMgr_ListConversations_Handler,
+		},
+		{
+			MethodName: "MatchConversations",
+			Handler:    _ConversationMgr_MatchConversations_Handler,
+		},
+		{
+			MethodName: "TagConversation",
+			Handler:    _ConversationMgr_TagConversation_Handler,
+		},
+		{
+			MethodName: "UntagConversation",
+			Handler:    _ConversationMgr_UntagConversation_Handler,
+		},
+		{
+			MethodName: "JoinConversation",
+			Handler:    _ConversationMgr_JoinConversation_Handler,
+		},
+		{
+			MethodName: "LeftConversation",
+			Handler:    _ConversationMgr_LeftConversation_Handler,
+		},
+		{
+			MethodName: "Typing",
+			Handler:    _ConversationMgr_Typing_Handler,
+		},
+		{
+			MethodName: "Ping",
+			Handler:    _ConversationMgr_Ping_Handler,
+		},
+		{
+			MethodName: "QueryByObjectPath",
+			Handler:    _ConversationMgr_QueryByObjectPath_Handler,
+		},
+		{
+			MethodName: "UpdateConversationInfo",
+			Handler:    _ConversationMgr_UpdateConversationInfo_Handler,
+		},
+		{
+			MethodName: "FilterUser",
+			Handler:    _ConversationMgr_FilterUser_Handler,
+		},
+		{
+			MethodName: "SearchConversation",
+			Handler:    _ConversationMgr_SearchConversation_Handler,
+		},
+		{
+			MethodName: "ListConversations2",
+			Handler:    _ConversationMgr_ListConversations2_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _ConversationMgr_ExportUsers_Handler,
+		},
+		{
+			MethodName: "UpdateMuteConversation",
+			Handler:    _ConversationMgr_UpdateMuteConversation_Handler,
+		},
+		{
+			MethodName: "UnsubscribeConversation",
+			Handler:    _ConversationMgr_UnsubscribeConversation_Handler,
+		},
+		{
+			MethodName: "MarkReadConversation",
+			Handler:    _ConversationMgr_MarkReadConversation_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ConversationSyncMgrClient is the client API for ConversationSyncMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ConversationSyncMgrClient interface {
+	// sync client
+	UpsertClient(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*common.Empty, error)
+	DeleteClient(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync automation
+	FireConvertTicket(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireSendChatTranscriptEmail(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	FireUpdateConversationState(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync account
+	DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	DeleteGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	RemoveAgentFromGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error)
+	AddAgentToGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error)
+	UpsertAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error)
+	UpsertAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*common.Empty, error)
+	CreateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync user attribute definition
+	UpsertAttrDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*common.Empty, error)
+	DeleteAttrDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*common.Empty, error)
+	// sync user segment
+	UpdateUserSegment(ctx context.Context, in *conversation.UpdateUserSegmentRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type conversationSyncMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewConversationSyncMgrClient(cc grpc.ClientConnInterface) ConversationSyncMgrClient {
+	return &conversationSyncMgrClient{cc}
+}
+
+func (c *conversationSyncMgrClient) UpsertClient(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/UpsertClient", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) DeleteClient(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/DeleteClient", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) FireConvertTicket(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/FireConvertTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) FireSendChatTranscriptEmail(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/FireSendChatTranscriptEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) FireUpdateConversationState(ctx context.Context, in *event.AutomationEvent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/FireUpdateConversationState", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) DeleteAgent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/DeleteAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) DeleteGroup(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/DeleteGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) RemoveAgentFromGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/RemoveAgentFromGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) AddAgentToGroup(ctx context.Context, in *account.GroupMember, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/AddAgentToGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) UpsertAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/UpsertAgent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) UpsertAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/UpsertAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) CreateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/CreateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) UpsertAttrDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/UpsertAttrDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) DeleteAttrDefinition(ctx context.Context, in *user.AttributeDefinition, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/DeleteAttrDefinition", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationSyncMgrClient) UpdateUserSegment(ctx context.Context, in *conversation.UpdateUserSegmentRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ConversationSyncMgr/UpdateUserSegment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConversationSyncMgrServer is the server API for ConversationSyncMgr service.
+type ConversationSyncMgrServer interface {
+	// sync client
+	UpsertClient(context.Context, *client.Client) (*common.Empty, error)
+	DeleteClient(context.Context, *common.Id) (*common.Empty, error)
+	// sync automation
+	FireConvertTicket(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireSendChatTranscriptEmail(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	FireUpdateConversationState(context.Context, *event.AutomationEvent) (*common.Empty, error)
+	// sync account
+	DeleteAgent(context.Context, *common.Id) (*common.Empty, error)
+	DeleteGroup(context.Context, *common.Id) (*common.Empty, error)
+	RemoveAgentFromGroup(context.Context, *account.GroupMember) (*common.Empty, error)
+	AddAgentToGroup(context.Context, *account.GroupMember) (*common.Empty, error)
+	UpsertAgent(context.Context, *account.Agent) (*common.Empty, error)
+	UpsertAccount(context.Context, *account.Account) (*common.Empty, error)
+	CreateAccount(context.Context, *account.Account) (*common.Empty, error)
+	// sync user attribute definition
+	UpsertAttrDefinition(context.Context, *user.AttributeDefinition) (*common.Empty, error)
+	DeleteAttrDefinition(context.Context, *user.AttributeDefinition) (*common.Empty, error)
+	// sync user segment
+	UpdateUserSegment(context.Context, *conversation.UpdateUserSegmentRequest) (*common.Empty, error)
+}
+
+// UnimplementedConversationSyncMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedConversationSyncMgrServer struct {
+}
+
+func (*UnimplementedConversationSyncMgrServer) UpsertClient(context.Context, *client.Client) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertClient not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) DeleteClient(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteClient not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) FireConvertTicket(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireConvertTicket not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) FireSendChatTranscriptEmail(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireSendChatTranscriptEmail not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) FireUpdateConversationState(context.Context, *event.AutomationEvent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FireUpdateConversationState not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) DeleteAgent(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAgent not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) DeleteGroup(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroup not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) RemoveAgentFromGroup(context.Context, *account.GroupMember) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveAgentFromGroup not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) AddAgentToGroup(context.Context, *account.GroupMember) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddAgentToGroup not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) UpsertAgent(context.Context, *account.Agent) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertAgent not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) UpsertAccount(context.Context, *account.Account) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertAccount not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) CreateAccount(context.Context, *account.Account) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) UpsertAttrDefinition(context.Context, *user.AttributeDefinition) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertAttrDefinition not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) DeleteAttrDefinition(context.Context, *user.AttributeDefinition) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAttrDefinition not implemented")
+}
+func (*UnimplementedConversationSyncMgrServer) UpdateUserSegment(context.Context, *conversation.UpdateUserSegmentRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserSegment not implemented")
+}
+
+func RegisterConversationSyncMgrServer(s *grpc.Server, srv ConversationSyncMgrServer) {
+	s.RegisterService(&_ConversationSyncMgr_serviceDesc, srv)
+}
+
+func _ConversationSyncMgr_UpsertClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Client)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).UpsertClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/UpsertClient",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).UpsertClient(ctx, req.(*client.Client))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_DeleteClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).DeleteClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/DeleteClient",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).DeleteClient(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_FireConvertTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).FireConvertTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/FireConvertTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).FireConvertTicket(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_FireSendChatTranscriptEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).FireSendChatTranscriptEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/FireSendChatTranscriptEmail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).FireSendChatTranscriptEmail(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_FireUpdateConversationState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.AutomationEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).FireUpdateConversationState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/FireUpdateConversationState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).FireUpdateConversationState(ctx, req.(*event.AutomationEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_DeleteAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).DeleteAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/DeleteAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).DeleteAgent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_DeleteGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).DeleteGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/DeleteGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).DeleteGroup(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_RemoveAgentFromGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.GroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).RemoveAgentFromGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/RemoveAgentFromGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).RemoveAgentFromGroup(ctx, req.(*account.GroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_AddAgentToGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.GroupMember)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).AddAgentToGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/AddAgentToGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).AddAgentToGroup(ctx, req.(*account.GroupMember))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_UpsertAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Agent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).UpsertAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/UpsertAgent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).UpsertAgent(ctx, req.(*account.Agent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_UpsertAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Account)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).UpsertAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/UpsertAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).UpsertAccount(ctx, req.(*account.Account))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.Account)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/CreateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).CreateAccount(ctx, req.(*account.Account))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_UpsertAttrDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.AttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).UpsertAttrDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/UpsertAttrDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).UpsertAttrDefinition(ctx, req.(*user.AttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_DeleteAttrDefinition_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(user.AttributeDefinition)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).DeleteAttrDefinition(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/DeleteAttrDefinition",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).DeleteAttrDefinition(ctx, req.(*user.AttributeDefinition))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationSyncMgr_UpdateUserSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.UpdateUserSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationSyncMgrServer).UpdateUserSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationSyncMgr/UpdateUserSegment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationSyncMgrServer).UpdateUserSegment(ctx, req.(*conversation.UpdateUserSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ConversationSyncMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ConversationSyncMgr",
+	HandlerType: (*ConversationSyncMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpsertClient",
+			Handler:    _ConversationSyncMgr_UpsertClient_Handler,
+		},
+		{
+			MethodName: "DeleteClient",
+			Handler:    _ConversationSyncMgr_DeleteClient_Handler,
+		},
+		{
+			MethodName: "FireConvertTicket",
+			Handler:    _ConversationSyncMgr_FireConvertTicket_Handler,
+		},
+		{
+			MethodName: "FireSendChatTranscriptEmail",
+			Handler:    _ConversationSyncMgr_FireSendChatTranscriptEmail_Handler,
+		},
+		{
+			MethodName: "FireUpdateConversationState",
+			Handler:    _ConversationSyncMgr_FireUpdateConversationState_Handler,
+		},
+		{
+			MethodName: "DeleteAgent",
+			Handler:    _ConversationSyncMgr_DeleteAgent_Handler,
+		},
+		{
+			MethodName: "DeleteGroup",
+			Handler:    _ConversationSyncMgr_DeleteGroup_Handler,
+		},
+		{
+			MethodName: "RemoveAgentFromGroup",
+			Handler:    _ConversationSyncMgr_RemoveAgentFromGroup_Handler,
+		},
+		{
+			MethodName: "AddAgentToGroup",
+			Handler:    _ConversationSyncMgr_AddAgentToGroup_Handler,
+		},
+		{
+			MethodName: "UpsertAgent",
+			Handler:    _ConversationSyncMgr_UpsertAgent_Handler,
+		},
+		{
+			MethodName: "UpsertAccount",
+			Handler:    _ConversationSyncMgr_UpsertAccount_Handler,
+		},
+		{
+			MethodName: "CreateAccount",
+			Handler:    _ConversationSyncMgr_CreateAccount_Handler,
+		},
+		{
+			MethodName: "UpsertAttrDefinition",
+			Handler:    _ConversationSyncMgr_UpsertAttrDefinition_Handler,
+		},
+		{
+			MethodName: "DeleteAttrDefinition",
+			Handler:    _ConversationSyncMgr_DeleteAttrDefinition_Handler,
+		},
+		{
+			MethodName: "UpdateUserSegment",
+			Handler:    _ConversationSyncMgr_UpdateUserSegment_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// TemplateMgrClient is the client API for TemplateMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type TemplateMgrClient interface {
+	CreateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error)
+	UpdateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error)
+	DeleteTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	GetTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Template, error)
+	ListTemplates(ctx context.Context, in *conversation.SearchTemplate, opts ...grpc.CallOption) (*conversation.Templates, error)
+}
+
+type templateMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTemplateMgrClient(cc grpc.ClientConnInterface) TemplateMgrClient {
+	return &templateMgrClient{cc}
+}
+
+func (c *templateMgrClient) CreateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error) {
+	out := new(conversation.Template)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/CreateTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) UpdateTemplate(ctx context.Context, in *conversation.Template, opts ...grpc.CallOption) (*conversation.Template, error) {
+	out := new(conversation.Template)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/UpdateTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) DeleteTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/DeleteTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) GetTemplate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Template, error) {
+	out := new(conversation.Template)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/GetTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *templateMgrClient) ListTemplates(ctx context.Context, in *conversation.SearchTemplate, opts ...grpc.CallOption) (*conversation.Templates, error) {
+	out := new(conversation.Templates)
+	err := c.cc.Invoke(ctx, "/header.TemplateMgr/ListTemplates", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TemplateMgrServer is the server API for TemplateMgr service.
+type TemplateMgrServer interface {
+	CreateTemplate(context.Context, *conversation.Template) (*conversation.Template, error)
+	UpdateTemplate(context.Context, *conversation.Template) (*conversation.Template, error)
+	DeleteTemplate(context.Context, *common.Id) (*common.Empty, error)
+	GetTemplate(context.Context, *common.Id) (*conversation.Template, error)
+	ListTemplates(context.Context, *conversation.SearchTemplate) (*conversation.Templates, error)
+}
+
+// UnimplementedTemplateMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedTemplateMgrServer struct {
+}
+
+func (*UnimplementedTemplateMgrServer) CreateTemplate(context.Context, *conversation.Template) (*conversation.Template, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) UpdateTemplate(context.Context, *conversation.Template) (*conversation.Template, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) DeleteTemplate(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) GetTemplate(context.Context, *common.Id) (*conversation.Template, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTemplate not implemented")
+}
+func (*UnimplementedTemplateMgrServer) ListTemplates(context.Context, *conversation.SearchTemplate) (*conversation.Templates, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTemplates not implemented")
+}
+
+func RegisterTemplateMgrServer(s *grpc.Server, srv TemplateMgrServer) {
+	s.RegisterService(&_TemplateMgr_serviceDesc, srv)
+}
+
+func _TemplateMgr_CreateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Template)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).CreateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/CreateTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).CreateTemplate(ctx, req.(*conversation.Template))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_UpdateTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Template)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).UpdateTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/UpdateTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).UpdateTemplate(ctx, req.(*conversation.Template))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_DeleteTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).DeleteTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/DeleteTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).DeleteTemplate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_GetTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).GetTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/GetTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).GetTemplate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TemplateMgr_ListTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.SearchTemplate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TemplateMgrServer).ListTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TemplateMgr/ListTemplates",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TemplateMgrServer).ListTemplates(ctx, req.(*conversation.SearchTemplate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _TemplateMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TemplateMgr",
+	HandlerType: (*TemplateMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateTemplate",
+			Handler:    _TemplateMgr_CreateTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateTemplate",
+			Handler:    _TemplateMgr_UpdateTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteTemplate",
+			Handler:    _TemplateMgr_DeleteTemplate_Handler,
+		},
+		{
+			MethodName: "GetTemplate",
+			Handler:    _TemplateMgr_GetTemplate_Handler,
+		},
+		{
+			MethodName: "ListTemplates",
+			Handler:    _TemplateMgr_ListTemplates_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// TagMgrClient is the client API for TagMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type TagMgrClient interface {
+	CreateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error)
+	UpdateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error)
+	DeleteTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListTags(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tags, error)
+	GetTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tag, error)
+}
+
+type tagMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTagMgrClient(cc grpc.ClientConnInterface) TagMgrClient {
+	return &tagMgrClient{cc}
+}
+
+func (c *tagMgrClient) CreateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error) {
+	out := new(conversation.Tag)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/CreateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) UpdateTag(ctx context.Context, in *conversation.Tag, opts ...grpc.CallOption) (*conversation.Tag, error) {
+	out := new(conversation.Tag)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/UpdateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) DeleteTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/DeleteTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) ListTags(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tags, error) {
+	out := new(conversation.Tags)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/ListTags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tagMgrClient) GetTag(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Tag, error) {
+	out := new(conversation.Tag)
+	err := c.cc.Invoke(ctx, "/header.TagMgr/GetTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TagMgrServer is the server API for TagMgr service.
+type TagMgrServer interface {
+	CreateTag(context.Context, *conversation.Tag) (*conversation.Tag, error)
+	UpdateTag(context.Context, *conversation.Tag) (*conversation.Tag, error)
+	DeleteTag(context.Context, *common.Id) (*common.Empty, error)
+	ListTags(context.Context, *common.Id) (*conversation.Tags, error)
+	GetTag(context.Context, *common.Id) (*conversation.Tag, error)
+}
+
+// UnimplementedTagMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedTagMgrServer struct {
+}
+
+func (*UnimplementedTagMgrServer) CreateTag(context.Context, *conversation.Tag) (*conversation.Tag, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTag not implemented")
+}
+func (*UnimplementedTagMgrServer) UpdateTag(context.Context, *conversation.Tag) (*conversation.Tag, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTag not implemented")
+}
+func (*UnimplementedTagMgrServer) DeleteTag(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTag not implemented")
+}
+func (*UnimplementedTagMgrServer) ListTags(context.Context, *common.Id) (*conversation.Tags, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTags not implemented")
+}
+func (*UnimplementedTagMgrServer) GetTag(context.Context, *common.Id) (*conversation.Tag, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTag not implemented")
+}
+
+func RegisterTagMgrServer(s *grpc.Server, srv TagMgrServer) {
+	s.RegisterService(&_TagMgr_serviceDesc, srv)
+}
+
+func _TagMgr_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Tag)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).CreateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/CreateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).CreateTag(ctx, req.(*conversation.Tag))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Tag)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).UpdateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/UpdateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).UpdateTag(ctx, req.(*conversation.Tag))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).DeleteTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/DeleteTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).DeleteTag(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_ListTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).ListTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/ListTags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).ListTags(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TagMgr_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TagMgrServer).GetTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TagMgr/GetTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TagMgrServer).GetTag(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _TagMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TagMgr",
+	HandlerType: (*TagMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateTag",
+			Handler:    _TagMgr_CreateTag_Handler,
+		},
+		{
+			MethodName: "UpdateTag",
+			Handler:    _TagMgr_UpdateTag_Handler,
+		},
+		{
+			MethodName: "DeleteTag",
+			Handler:    _TagMgr_DeleteTag_Handler,
+		},
+		{
+			MethodName: "ListTags",
+			Handler:    _TagMgr_ListTags_Handler,
+		},
+		{
+			MethodName: "GetTag",
+			Handler:    _TagMgr_GetTag_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// IntegrationMgrClient is the client API for IntegrationMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type IntegrationMgrClient interface {
+	Deintegrate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListIntegrations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Integrations, error)
+	Integrate(ctx context.Context, in *conversation.Integration, opts ...grpc.CallOption) (*conversation.Integration, error)
+	CheckAvailability(ctx context.Context, in *conversation.AvailabilityCheckRequest, opts ...grpc.CallOption) (*conversation.AvailabilityCheckResult, error)
+}
+
+type integrationMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewIntegrationMgrClient(cc grpc.ClientConnInterface) IntegrationMgrClient {
+	return &integrationMgrClient{cc}
+}
+
+func (c *integrationMgrClient) Deintegrate(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/Deintegrate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationMgrClient) ListIntegrations(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.Integrations, error) {
+	out := new(conversation.Integrations)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/ListIntegrations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationMgrClient) Integrate(ctx context.Context, in *conversation.Integration, opts ...grpc.CallOption) (*conversation.Integration, error) {
+	out := new(conversation.Integration)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/Integrate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integrationMgrClient) CheckAvailability(ctx context.Context, in *conversation.AvailabilityCheckRequest, opts ...grpc.CallOption) (*conversation.AvailabilityCheckResult, error) {
+	out := new(conversation.AvailabilityCheckResult)
+	err := c.cc.Invoke(ctx, "/header.IntegrationMgr/CheckAvailability", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// IntegrationMgrServer is the server API for IntegrationMgr service.
+type IntegrationMgrServer interface {
+	Deintegrate(context.Context, *common.Id) (*common.Empty, error)
+	ListIntegrations(context.Context, *common.Id) (*conversation.Integrations, error)
+	Integrate(context.Context, *conversation.Integration) (*conversation.Integration, error)
+	CheckAvailability(context.Context, *conversation.AvailabilityCheckRequest) (*conversation.AvailabilityCheckResult, error)
+}
+
+// UnimplementedIntegrationMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedIntegrationMgrServer struct {
+}
+
+func (*UnimplementedIntegrationMgrServer) Deintegrate(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Deintegrate not implemented")
+}
+func (*UnimplementedIntegrationMgrServer) ListIntegrations(context.Context, *common.Id) (*conversation.Integrations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIntegrations not implemented")
+}
+func (*UnimplementedIntegrationMgrServer) Integrate(context.Context, *conversation.Integration) (*conversation.Integration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Integrate not implemented")
+}
+func (*UnimplementedIntegrationMgrServer) CheckAvailability(context.Context, *conversation.AvailabilityCheckRequest) (*conversation.AvailabilityCheckResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckAvailability not implemented")
+}
+
+func RegisterIntegrationMgrServer(s *grpc.Server, srv IntegrationMgrServer) {
+	s.RegisterService(&_IntegrationMgr_serviceDesc, srv)
+}
+
+func _IntegrationMgr_Deintegrate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).Deintegrate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/Deintegrate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).Deintegrate(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationMgr_ListIntegrations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).ListIntegrations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/ListIntegrations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).ListIntegrations(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationMgr_Integrate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Integration)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).Integrate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/Integrate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).Integrate(ctx, req.(*conversation.Integration))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IntegrationMgr_CheckAvailability_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvailabilityCheckRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IntegrationMgrServer).CheckAvailability(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.IntegrationMgr/CheckAvailability",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IntegrationMgrServer).CheckAvailability(ctx, req.(*conversation.AvailabilityCheckRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _IntegrationMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.IntegrationMgr",
+	HandlerType: (*IntegrationMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Deintegrate",
+			Handler:    _IntegrationMgr_Deintegrate_Handler,
+		},
+		{
+			MethodName: "ListIntegrations",
+			Handler:    _IntegrationMgr_ListIntegrations_Handler,
+		},
+		{
+			MethodName: "Integrate",
+			Handler:    _IntegrationMgr_Integrate_Handler,
+		},
+		{
+			MethodName: "CheckAvailability",
+			Handler:    _IntegrationMgr_CheckAvailability_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// TicketMgrClient is the client API for TicketMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type TicketMgrClient interface {
+	CreateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error)
+	UpdateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error)
+	DeleteTicket(ctx context.Context, in *conversation.DeleteTicketRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	GetTicket(ctx context.Context, in *conversation.GetTicketRequest, opts ...grpc.CallOption) (*conversation.Ticket, error)
+	SearchTicket(ctx context.Context, in *conversation.TicketListRequest, opts ...grpc.CallOption) (*conversation.ESTickets, error)
+	ListSLAs(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreements, error)
+	GetSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error)
+	CreateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error)
+	UpdateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error)
+	DeleteSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	CountTicket(ctx context.Context, in *conversation.CountTicketRequest, opts ...grpc.CallOption) (*conversation.CountTicketResponse, error)
+	GetAvgResolveTimes(ctx context.Context, in *conversation.AvgResolveTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResolveTimeResponse, error)
+}
+
+type ticketMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewTicketMgrClient(cc grpc.ClientConnInterface) TicketMgrClient {
+	return &ticketMgrClient{cc}
+}
+
+func (c *ticketMgrClient) CreateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error) {
+	out := new(conversation.Ticket)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/CreateTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) UpdateTicket(ctx context.Context, in *conversation.Ticket, opts ...grpc.CallOption) (*conversation.Ticket, error) {
+	out := new(conversation.Ticket)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/UpdateTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) DeleteTicket(ctx context.Context, in *conversation.DeleteTicketRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/DeleteTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) GetTicket(ctx context.Context, in *conversation.GetTicketRequest, opts ...grpc.CallOption) (*conversation.Ticket, error) {
+	out := new(conversation.Ticket)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) SearchTicket(ctx context.Context, in *conversation.TicketListRequest, opts ...grpc.CallOption) (*conversation.ESTickets, error) {
+	out := new(conversation.ESTickets)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/SearchTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) ListSLAs(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreements, error) {
+	out := new(conversation.ServiceLevelAgreements)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/ListSLAs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) GetSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error) {
+	out := new(conversation.ServiceLevelAgreement)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) CreateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error) {
+	out := new(conversation.ServiceLevelAgreement)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/CreateSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) UpdateSLA(ctx context.Context, in *conversation.ServiceLevelAgreement, opts ...grpc.CallOption) (*conversation.ServiceLevelAgreement, error) {
+	out := new(conversation.ServiceLevelAgreement)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/UpdateSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) DeleteSLA(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/DeleteSLA", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) CountTicket(ctx context.Context, in *conversation.CountTicketRequest, opts ...grpc.CallOption) (*conversation.CountTicketResponse, error) {
+	out := new(conversation.CountTicketResponse)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/CountTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) GetAvgResolveTimes(ctx context.Context, in *conversation.AvgResolveTimeRequest, opts ...grpc.CallOption) (*conversation.AvgResolveTimeResponse, error) {
+	out := new(conversation.AvgResolveTimeResponse)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetAvgResolveTimes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// TicketMgrServer is the server API for TicketMgr service.
+type TicketMgrServer interface {
+	CreateTicket(context.Context, *conversation.Ticket) (*conversation.Ticket, error)
+	UpdateTicket(context.Context, *conversation.Ticket) (*conversation.Ticket, error)
+	DeleteTicket(context.Context, *conversation.DeleteTicketRequest) (*common.Empty, error)
+	GetTicket(context.Context, *conversation.GetTicketRequest) (*conversation.Ticket, error)
+	SearchTicket(context.Context, *conversation.TicketListRequest) (*conversation.ESTickets, error)
+	ListSLAs(context.Context, *common.Empty) (*conversation.ServiceLevelAgreements, error)
+	GetSLA(context.Context, *common.Id) (*conversation.ServiceLevelAgreement, error)
+	CreateSLA(context.Context, *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error)
+	UpdateSLA(context.Context, *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error)
+	DeleteSLA(context.Context, *common.Id) (*common.Empty, error)
+	CountTicket(context.Context, *conversation.CountTicketRequest) (*conversation.CountTicketResponse, error)
+	GetAvgResolveTimes(context.Context, *conversation.AvgResolveTimeRequest) (*conversation.AvgResolveTimeResponse, error)
+}
+
+// UnimplementedTicketMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedTicketMgrServer struct {
+}
+
+func (*UnimplementedTicketMgrServer) CreateTicket(context.Context, *conversation.Ticket) (*conversation.Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) UpdateTicket(context.Context, *conversation.Ticket) (*conversation.Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) DeleteTicket(context.Context, *conversation.DeleteTicketRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) GetTicket(context.Context, *conversation.GetTicketRequest) (*conversation.Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) SearchTicket(context.Context, *conversation.TicketListRequest) (*conversation.ESTickets, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) ListSLAs(context.Context, *common.Empty) (*conversation.ServiceLevelAgreements, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSLAs not implemented")
+}
+func (*UnimplementedTicketMgrServer) GetSLA(context.Context, *common.Id) (*conversation.ServiceLevelAgreement, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) CreateSLA(context.Context, *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) UpdateSLA(context.Context, *conversation.ServiceLevelAgreement) (*conversation.ServiceLevelAgreement, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) DeleteSLA(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSLA not implemented")
+}
+func (*UnimplementedTicketMgrServer) CountTicket(context.Context, *conversation.CountTicketRequest) (*conversation.CountTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountTicket not implemented")
+}
+func (*UnimplementedTicketMgrServer) GetAvgResolveTimes(context.Context, *conversation.AvgResolveTimeRequest) (*conversation.AvgResolveTimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvgResolveTimes not implemented")
+}
+
+func RegisterTicketMgrServer(s *grpc.Server, srv TicketMgrServer) {
+	s.RegisterService(&_TicketMgr_serviceDesc, srv)
+}
+
+func _TicketMgr_CreateTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Ticket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).CreateTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/CreateTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).CreateTicket(ctx, req.(*conversation.Ticket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_UpdateTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.Ticket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).UpdateTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/UpdateTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).UpdateTicket(ctx, req.(*conversation.Ticket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_DeleteTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.DeleteTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).DeleteTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/DeleteTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).DeleteTicket(ctx, req.(*conversation.DeleteTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_GetTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.GetTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).GetTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/GetTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).GetTicket(ctx, req.(*conversation.GetTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_SearchTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.TicketListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).SearchTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/SearchTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).SearchTicket(ctx, req.(*conversation.TicketListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_ListSLAs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).ListSLAs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/ListSLAs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).ListSLAs(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_GetSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).GetSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/GetSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).GetSLA(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_CreateSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ServiceLevelAgreement)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).CreateSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/CreateSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).CreateSLA(ctx, req.(*conversation.ServiceLevelAgreement))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_UpdateSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ServiceLevelAgreement)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).UpdateSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/UpdateSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).UpdateSLA(ctx, req.(*conversation.ServiceLevelAgreement))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_DeleteSLA_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).DeleteSLA(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/DeleteSLA",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).DeleteSLA(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_CountTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.CountTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).CountTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/CountTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).CountTicket(ctx, req.(*conversation.CountTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_GetAvgResolveTimes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AvgResolveTimeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).GetAvgResolveTimes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/GetAvgResolveTimes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).GetAvgResolveTimes(ctx, req.(*conversation.AvgResolveTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _TicketMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.TicketMgr",
+	HandlerType: (*TicketMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateTicket",
+			Handler:    _TicketMgr_CreateTicket_Handler,
+		},
+		{
+			MethodName: "UpdateTicket",
+			Handler:    _TicketMgr_UpdateTicket_Handler,
+		},
+		{
+			MethodName: "DeleteTicket",
+			Handler:    _TicketMgr_DeleteTicket_Handler,
+		},
+		{
+			MethodName: "GetTicket",
+			Handler:    _TicketMgr_GetTicket_Handler,
+		},
+		{
+			MethodName: "SearchTicket",
+			Handler:    _TicketMgr_SearchTicket_Handler,
+		},
+		{
+			MethodName: "ListSLAs",
+			Handler:    _TicketMgr_ListSLAs_Handler,
+		},
+		{
+			MethodName: "GetSLA",
+			Handler:    _TicketMgr_GetSLA_Handler,
+		},
+		{
+			MethodName: "CreateSLA",
+			Handler:    _TicketMgr_CreateSLA_Handler,
+		},
+		{
+			MethodName: "UpdateSLA",
+			Handler:    _TicketMgr_UpdateSLA_Handler,
+		},
+		{
+			MethodName: "DeleteSLA",
+			Handler:    _TicketMgr_DeleteSLA_Handler,
+		},
+		{
+			MethodName: "CountTicket",
+			Handler:    _TicketMgr_CountTicket_Handler,
+		},
+		{
+			MethodName: "GetAvgResolveTimes",
+			Handler:    _TicketMgr_GetAvgResolveTimes_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ClientMgrClient is the client API for ClientMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ClientMgrClient interface {
+	Create(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error)
+	Update(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error)
+	Read(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error)
+	ListIntegratedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error)
+	ListAuthorizedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error)
+}
+
+type clientMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewClientMgrClient(cc grpc.ClientConnInterface) ClientMgrClient {
+	return &clientMgrClient{cc}
+}
+
+func (c *clientMgrClient) Create(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error) {
+	out := new(client.Client)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) Update(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error) {
+	out := new(client.Client)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) Read(ctx context.Context, in *client.Client, opts ...grpc.CallOption) (*client.Client, error) {
+	out := new(client.Client)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) ListIntegratedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error) {
+	out := new(client.AuthorizedClient)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/ListIntegratedClients", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *clientMgrClient) ListAuthorizedClients(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.AuthorizedClient, error) {
+	out := new(client.AuthorizedClient)
+	err := c.cc.Invoke(ctx, "/header.ClientMgr/ListAuthorizedClients", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ClientMgrServer is the server API for ClientMgr service.
+type ClientMgrServer interface {
+	Create(context.Context, *client.Client) (*client.Client, error)
+	Update(context.Context, *client.Client) (*client.Client, error)
+	Read(context.Context, *client.Client) (*client.Client, error)
+	ListIntegratedClients(context.Context, *common.Id) (*client.AuthorizedClient, error)
+	ListAuthorizedClients(context.Context, *common.Id) (*client.AuthorizedClient, error)
+}
+
+// UnimplementedClientMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedClientMgrServer struct {
+}
+
+func (*UnimplementedClientMgrServer) Create(context.Context, *client.Client) (*client.Client, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedClientMgrServer) Update(context.Context, *client.Client) (*client.Client, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedClientMgrServer) Read(context.Context, *client.Client) (*client.Client, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedClientMgrServer) ListIntegratedClients(context.Context, *common.Id) (*client.AuthorizedClient, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIntegratedClients not implemented")
+}
+func (*UnimplementedClientMgrServer) ListAuthorizedClients(context.Context, *common.Id) (*client.AuthorizedClient, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAuthorizedClients not implemented")
+}
+
+func RegisterClientMgrServer(s *grpc.Server, srv ClientMgrServer) {
+	s.RegisterService(&_ClientMgr_serviceDesc, srv)
+}
+
+func _ClientMgr_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Client)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).Create(ctx, req.(*client.Client))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Client)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).Update(ctx, req.(*client.Client))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Client)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).Read(ctx, req.(*client.Client))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_ListIntegratedClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).ListIntegratedClients(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/ListIntegratedClients",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).ListIntegratedClients(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ClientMgr_ListAuthorizedClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ClientMgrServer).ListAuthorizedClients(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ClientMgr/ListAuthorizedClients",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ClientMgrServer).ListAuthorizedClients(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ClientMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ClientMgr",
+	HandlerType: (*ClientMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Create",
+			Handler:    _ClientMgr_Create_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _ClientMgr_Update_Handler,
+		},
+		{
+			MethodName: "Read",
+			Handler:    _ClientMgr_Read_Handler,
+		},
+		{
+			MethodName: "ListIntegratedClients",
+			Handler:    _ClientMgr_ListIntegratedClients_Handler,
+		},
+		{
+			MethodName: "ListAuthorizedClients",
+			Handler:    _ClientMgr_ListAuthorizedClients_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ServiceContentManagerClient is the client API for ServiceContentManager service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ServiceContentManagerClient interface {
+	UpsertContent(ctx context.Context, in *content.Content, opts ...grpc.CallOption) (*content.Content, error)
+	DeleteContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	GetContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*content.Content, error)
+	SearchContents(ctx context.Context, in *content.SearchContentRequest, opts ...grpc.CallOption) (*content.Contents, error)
+	LookupContentsByUrl(ctx context.Context, in *content.LookupRequest, opts ...grpc.CallOption) (*content.Contents, error)
+	LinkContentsToUrl(ctx context.Context, in *content.LinkRequest, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type serviceContentManagerClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewServiceContentManagerClient(cc grpc.ClientConnInterface) ServiceContentManagerClient {
+	return &serviceContentManagerClient{cc}
+}
+
+func (c *serviceContentManagerClient) UpsertContent(ctx context.Context, in *content.Content, opts ...grpc.CallOption) (*content.Content, error) {
+	out := new(content.Content)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/UpsertContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) DeleteContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/DeleteContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) GetContent(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*content.Content, error) {
+	out := new(content.Content)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/GetContent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) SearchContents(ctx context.Context, in *content.SearchContentRequest, opts ...grpc.CallOption) (*content.Contents, error) {
+	out := new(content.Contents)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/SearchContents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) LookupContentsByUrl(ctx context.Context, in *content.LookupRequest, opts ...grpc.CallOption) (*content.Contents, error) {
+	out := new(content.Contents)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/LookupContentsByUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *serviceContentManagerClient) LinkContentsToUrl(ctx context.Context, in *content.LinkRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.ServiceContentManager/LinkContentsToUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ServiceContentManagerServer is the server API for ServiceContentManager service.
+type ServiceContentManagerServer interface {
+	UpsertContent(context.Context, *content.Content) (*content.Content, error)
+	DeleteContent(context.Context, *common.Id) (*common.Empty, error)
+	GetContent(context.Context, *common.Id) (*content.Content, error)
+	SearchContents(context.Context, *content.SearchContentRequest) (*content.Contents, error)
+	LookupContentsByUrl(context.Context, *content.LookupRequest) (*content.Contents, error)
+	LinkContentsToUrl(context.Context, *content.LinkRequest) (*common.Empty, error)
+}
+
+// UnimplementedServiceContentManagerServer can be embedded to have forward compatible implementations.
+type UnimplementedServiceContentManagerServer struct {
+}
+
+func (*UnimplementedServiceContentManagerServer) UpsertContent(context.Context, *content.Content) (*content.Content, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertContent not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) DeleteContent(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteContent not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) GetContent(context.Context, *common.Id) (*content.Content, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetContent not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) SearchContents(context.Context, *content.SearchContentRequest) (*content.Contents, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchContents not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) LookupContentsByUrl(context.Context, *content.LookupRequest) (*content.Contents, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LookupContentsByUrl not implemented")
+}
+func (*UnimplementedServiceContentManagerServer) LinkContentsToUrl(context.Context, *content.LinkRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LinkContentsToUrl not implemented")
+}
+
+func RegisterServiceContentManagerServer(s *grpc.Server, srv ServiceContentManagerServer) {
+	s.RegisterService(&_ServiceContentManager_serviceDesc, srv)
+}
+
+func _ServiceContentManager_UpsertContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.Content)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).UpsertContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/UpsertContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).UpsertContent(ctx, req.(*content.Content))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_DeleteContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).DeleteContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/DeleteContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).DeleteContent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_GetContent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).GetContent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/GetContent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).GetContent(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_SearchContents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.SearchContentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).SearchContents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/SearchContents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).SearchContents(ctx, req.(*content.SearchContentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_LookupContentsByUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.LookupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).LookupContentsByUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/LookupContentsByUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).LookupContentsByUrl(ctx, req.(*content.LookupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ServiceContentManager_LinkContentsToUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(content.LinkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceContentManagerServer).LinkContentsToUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ServiceContentManager/LinkContentsToUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceContentManagerServer).LinkContentsToUrl(ctx, req.(*content.LinkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ServiceContentManager_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ServiceContentManager",
+	HandlerType: (*ServiceContentManagerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpsertContent",
+			Handler:    _ServiceContentManager_UpsertContent_Handler,
+		},
+		{
+			MethodName: "DeleteContent",
+			Handler:    _ServiceContentManager_DeleteContent_Handler,
+		},
+		{
+			MethodName: "GetContent",
+			Handler:    _ServiceContentManager_GetContent_Handler,
+		},
+		{
+			MethodName: "SearchContents",
+			Handler:    _ServiceContentManager_SearchContents_Handler,
+		},
+		{
+			MethodName: "LookupContentsByUrl",
+			Handler:    _ServiceContentManager_LookupContentsByUrl_Handler,
+		},
+		{
+			MethodName: "LinkContentsToUrl",
+			Handler:    _ServiceContentManager_LinkContentsToUrl_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// DealServiceClient is the client API for DealService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type DealServiceClient interface {
+	ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*deal.Pipelines, error)
+	GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*deal.Pipeline, error)
+	CreatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error)
+	UpdatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error)
+	DeletePipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type dealServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewDealServiceClient(cc grpc.ClientConnInterface) DealServiceClient {
+	return &dealServiceClient{cc}
+}
+
+func (c *dealServiceClient) ListPipelines(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*deal.Pipelines, error) {
+	out := new(deal.Pipelines)
+	err := c.cc.Invoke(ctx, "/header.DealService/ListPipelines", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) GetPipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*deal.Pipeline, error) {
+	out := new(deal.Pipeline)
+	err := c.cc.Invoke(ctx, "/header.DealService/GetPipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) CreatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error) {
+	out := new(deal.Pipeline)
+	err := c.cc.Invoke(ctx, "/header.DealService/CreatePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) UpdatePipeline(ctx context.Context, in *deal.Pipeline, opts ...grpc.CallOption) (*deal.Pipeline, error) {
+	out := new(deal.Pipeline)
+	err := c.cc.Invoke(ctx, "/header.DealService/UpdatePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dealServiceClient) DeletePipeline(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.DealService/DeletePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// DealServiceServer is the server API for DealService service.
+type DealServiceServer interface {
+	ListPipelines(context.Context, *common.Empty) (*deal.Pipelines, error)
+	GetPipeline(context.Context, *common.Id) (*deal.Pipeline, error)
+	CreatePipeline(context.Context, *deal.Pipeline) (*deal.Pipeline, error)
+	UpdatePipeline(context.Context, *deal.Pipeline) (*deal.Pipeline, error)
+	DeletePipeline(context.Context, *common.Id) (*common.Empty, error)
+}
+
+// UnimplementedDealServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedDealServiceServer struct {
+}
+
+func (*UnimplementedDealServiceServer) ListPipelines(context.Context, *common.Empty) (*deal.Pipelines, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPipelines not implemented")
+}
+func (*UnimplementedDealServiceServer) GetPipeline(context.Context, *common.Id) (*deal.Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPipeline not implemented")
+}
+func (*UnimplementedDealServiceServer) CreatePipeline(context.Context, *deal.Pipeline) (*deal.Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePipeline not implemented")
+}
+func (*UnimplementedDealServiceServer) UpdatePipeline(context.Context, *deal.Pipeline) (*deal.Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePipeline not implemented")
+}
+func (*UnimplementedDealServiceServer) DeletePipeline(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePipeline not implemented")
+}
+
+func RegisterDealServiceServer(s *grpc.Server, srv DealServiceServer) {
+	s.RegisterService(&_DealService_serviceDesc, srv)
+}
+
+func _DealService_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).ListPipelines(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/ListPipelines",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).ListPipelines(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_GetPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).GetPipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/GetPipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).GetPipeline(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_CreatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deal.Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).CreatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/CreatePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).CreatePipeline(ctx, req.(*deal.Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_UpdatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(deal.Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).UpdatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/UpdatePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).UpdatePipeline(ctx, req.(*deal.Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DealService_DeletePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DealServiceServer).DeletePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.DealService/DeletePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DealServiceServer).DeletePipeline(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _DealService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.DealService",
+	HandlerType: (*DealServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListPipelines",
+			Handler:    _DealService_ListPipelines_Handler,
+		},
+		{
+			MethodName: "GetPipeline",
+			Handler:    _DealService_GetPipeline_Handler,
+		},
+		{
+			MethodName: "CreatePipeline",
+			Handler:    _DealService_CreatePipeline_Handler,
+		},
+		{
+			MethodName: "UpdatePipeline",
+			Handler:    _DealService_UpdatePipeline_Handler,
+		},
+		{
+			MethodName: "DeletePipeline",
+			Handler:    _DealService_DeletePipeline_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PublisherClient is the client API for Publisher service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PublisherClient interface {
+	Subscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error)
+	Unsubscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error)
+}
+
+type publisherClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPublisherClient(cc grpc.ClientConnInterface) PublisherClient {
+	return &publisherClient{cc}
+}
+
+func (c *publisherClient) Subscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error) {
+	out := new(event.SubscriptionResponse)
+	err := c.cc.Invoke(ctx, "/header.Publisher/Subscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *publisherClient) Unsubscribe(ctx context.Context, in *event.Subscription, opts ...grpc.CallOption) (*event.SubscriptionResponse, error) {
+	out := new(event.SubscriptionResponse)
+	err := c.cc.Invoke(ctx, "/header.Publisher/Unsubscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PublisherServer is the server API for Publisher service.
+type PublisherServer interface {
+	Subscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error)
+	Unsubscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error)
+}
+
+// UnimplementedPublisherServer can be embedded to have forward compatible implementations.
+type UnimplementedPublisherServer struct {
+}
+
+func (*UnimplementedPublisherServer) Subscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (*UnimplementedPublisherServer) Unsubscribe(context.Context, *event.Subscription) (*event.SubscriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
+}
+
+func RegisterPublisherServer(s *grpc.Server, srv PublisherServer) {
+	s.RegisterService(&_Publisher_serviceDesc, srv)
+}
+
+func _Publisher_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublisherServer).Subscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Publisher/Subscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublisherServer).Subscribe(ctx, req.(*event.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Publisher_Unsubscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PublisherServer).Unsubscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Publisher/Unsubscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PublisherServer).Unsubscribe(ctx, req.(*event.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Publisher_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Publisher",
+	HandlerType: (*PublisherServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Subscribe",
+			Handler:    _Publisher_Subscribe_Handler,
+		},
+		{
+			MethodName: "Unsubscribe",
+			Handler:    _Publisher_Unsubscribe_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// EventMgrClient is the client API for EventMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type EventMgrClient interface {
+	SearchEvents(ctx context.Context, in *event.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error)
+	CreateEvent(ctx context.Context, in *event.UserEvent, opts ...grpc.CallOption) (*event.Event, error)
+}
+
+type eventMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewEventMgrClient(cc grpc.ClientConnInterface) EventMgrClient {
+	return &eventMgrClient{cc}
+}
+
+func (c *eventMgrClient) SearchEvents(ctx context.Context, in *event.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error) {
+	out := new(event.Events)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/SearchEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventMgrClient) CreateEvent(ctx context.Context, in *event.UserEvent, opts ...grpc.CallOption) (*event.Event, error) {
+	out := new(event.Event)
+	err := c.cc.Invoke(ctx, "/header.EventMgr/CreateEvent", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EventMgrServer is the server API for EventMgr service.
+type EventMgrServer interface {
+	SearchEvents(context.Context, *event.ListEventsRequest) (*event.Events, error)
+	CreateEvent(context.Context, *event.UserEvent) (*event.Event, error)
+}
+
+// UnimplementedEventMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedEventMgrServer struct {
+}
+
+func (*UnimplementedEventMgrServer) SearchEvents(context.Context, *event.ListEventsRequest) (*event.Events, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchEvents not implemented")
+}
+func (*UnimplementedEventMgrServer) CreateEvent(context.Context, *event.UserEvent) (*event.Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateEvent not implemented")
+}
+
+func RegisterEventMgrServer(s *grpc.Server, srv EventMgrServer) {
+	s.RegisterService(&_EventMgr_serviceDesc, srv)
+}
+
+func _EventMgr_SearchEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.ListEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).SearchEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/SearchEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).SearchEvents(ctx, req.(*event.ListEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventMgr_CreateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.UserEvent)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventMgrServer).CreateEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.EventMgr/CreateEvent",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventMgrServer).CreateEvent(ctx, req.(*event.UserEvent))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _EventMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.EventMgr",
+	HandlerType: (*EventMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchEvents",
+			Handler:    _EventMgr_SearchEvents_Handler,
+		},
+		{
+			MethodName: "CreateEvent",
+			Handler:    _EventMgr_CreateEvent_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// ConversationEventReaderClient is the client API for ConversationEventReader service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type ConversationEventReaderClient interface {
+	SendMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
+	UpdateMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error)
+	ListEvents(ctx context.Context, in *conversation.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error)
+	SearchEvents(ctx context.Context, in *conversation.SearchMessageRequest, opts ...grpc.CallOption) (*event.Events, error)
+}
+
+type conversationEventReaderClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewConversationEventReaderClient(cc grpc.ClientConnInterface) ConversationEventReaderClient {
+	return &conversationEventReaderClient{cc}
+}
+
+func (c *conversationEventReaderClient) SendMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
+	out := new(event.Event)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/SendMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationEventReaderClient) UpdateMessage(ctx context.Context, in *event.Event, opts ...grpc.CallOption) (*event.Event, error) {
+	out := new(event.Event)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/UpdateMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationEventReaderClient) ListEvents(ctx context.Context, in *conversation.ListEventsRequest, opts ...grpc.CallOption) (*event.Events, error) {
+	out := new(event.Events)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/ListEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationEventReaderClient) SearchEvents(ctx context.Context, in *conversation.SearchMessageRequest, opts ...grpc.CallOption) (*event.Events, error) {
+	out := new(event.Events)
+	err := c.cc.Invoke(ctx, "/header.ConversationEventReader/SearchEvents", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ConversationEventReaderServer is the server API for ConversationEventReader service.
+type ConversationEventReaderServer interface {
+	SendMessage(context.Context, *event.Event) (*event.Event, error)
+	UpdateMessage(context.Context, *event.Event) (*event.Event, error)
+	ListEvents(context.Context, *conversation.ListEventsRequest) (*event.Events, error)
+	SearchEvents(context.Context, *conversation.SearchMessageRequest) (*event.Events, error)
+}
+
+// UnimplementedConversationEventReaderServer can be embedded to have forward compatible implementations.
+type UnimplementedConversationEventReaderServer struct {
+}
+
+func (*UnimplementedConversationEventReaderServer) SendMessage(context.Context, *event.Event) (*event.Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendMessage not implemented")
+}
+func (*UnimplementedConversationEventReaderServer) UpdateMessage(context.Context, *event.Event) (*event.Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMessage not implemented")
+}
+func (*UnimplementedConversationEventReaderServer) ListEvents(context.Context, *conversation.ListEventsRequest) (*event.Events, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEvents not implemented")
+}
+func (*UnimplementedConversationEventReaderServer) SearchEvents(context.Context, *conversation.SearchMessageRequest) (*event.Events, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchEvents not implemented")
+}
+
+func RegisterConversationEventReaderServer(s *grpc.Server, srv ConversationEventReaderServer) {
+	s.RegisterService(&_ConversationEventReader_serviceDesc, srv)
+}
+
+func _ConversationEventReader_SendMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).SendMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/SendMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).SendMessage(ctx, req.(*event.Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationEventReader_UpdateMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(event.Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).UpdateMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/UpdateMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).UpdateMessage(ctx, req.(*event.Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationEventReader_ListEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.ListEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).ListEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/ListEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).ListEvents(ctx, req.(*conversation.ListEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationEventReader_SearchEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.SearchMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationEventReaderServer).SearchEvents(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationEventReader/SearchEvents",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationEventReaderServer).SearchEvents(ctx, req.(*conversation.SearchMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _ConversationEventReader_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.ConversationEventReader",
+	HandlerType: (*ConversationEventReaderServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SendMessage",
+			Handler:    _ConversationEventReader_SendMessage_Handler,
+		},
+		{
+			MethodName: "UpdateMessage",
+			Handler:    _ConversationEventReader_UpdateMessage_Handler,
+		},
+		{
+			MethodName: "ListEvents",
+			Handler:    _ConversationEventReader_ListEvents_Handler,
+		},
+		{
+			MethodName: "SearchEvents",
+			Handler:    _ConversationEventReader_SearchEvents_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// FileMgrClient is the client API for FileMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type FileMgrClient interface {
+	Presign(ctx context.Context, in *file.FileHeader, opts ...grpc.CallOption) (*file.PresignResult, error)
+	Read(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error)
+	Uploaded(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error)
+}
+
+type fileMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewFileMgrClient(cc grpc.ClientConnInterface) FileMgrClient {
+	return &fileMgrClient{cc}
+}
+
+func (c *fileMgrClient) Presign(ctx context.Context, in *file.FileHeader, opts ...grpc.CallOption) (*file.PresignResult, error) {
+	out := new(file.PresignResult)
+	err := c.cc.Invoke(ctx, "/header.FileMgr/Presign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileMgrClient) Read(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error) {
+	out := new(file.File)
+	err := c.cc.Invoke(ctx, "/header.FileMgr/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileMgrClient) Uploaded(ctx context.Context, in *file.FileRequest, opts ...grpc.CallOption) (*file.File, error) {
+	out := new(file.File)
+	err := c.cc.Invoke(ctx, "/header.FileMgr/Uploaded", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FileMgrServer is the server API for FileMgr service.
+type FileMgrServer interface {
+	Presign(context.Context, *file.FileHeader) (*file.PresignResult, error)
+	Read(context.Context, *file.FileRequest) (*file.File, error)
+	Uploaded(context.Context, *file.FileRequest) (*file.File, error)
+}
+
+// UnimplementedFileMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedFileMgrServer struct {
+}
+
+func (*UnimplementedFileMgrServer) Presign(context.Context, *file.FileHeader) (*file.PresignResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Presign not implemented")
+}
+func (*UnimplementedFileMgrServer) Read(context.Context, *file.FileRequest) (*file.File, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedFileMgrServer) Uploaded(context.Context, *file.FileRequest) (*file.File, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Uploaded not implemented")
+}
+
+func RegisterFileMgrServer(s *grpc.Server, srv FileMgrServer) {
+	s.RegisterService(&_FileMgr_serviceDesc, srv)
+}
+
+func _FileMgr_Presign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(file.FileHeader)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileMgrServer).Presign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.FileMgr/Presign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileMgrServer).Presign(ctx, req.(*file.FileHeader))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileMgr_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(file.FileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileMgrServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.FileMgr/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileMgrServer).Read(ctx, req.(*file.FileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileMgr_Uploaded_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(file.FileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileMgrServer).Uploaded(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.FileMgr/Uploaded",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileMgrServer).Uploaded(ctx, req.(*file.FileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _FileMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.FileMgr",
+	HandlerType: (*FileMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Presign",
+			Handler:    _FileMgr_Presign_Handler,
+		},
+		{
+			MethodName: "Read",
+			Handler:    _FileMgr_Read_Handler,
+		},
+		{
+			MethodName: "Uploaded",
+			Handler:    _FileMgr_Uploaded_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// KVClient is the client API for KV service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type KVClient interface {
+	Set(ctx context.Context, in *kv.Value, opts ...grpc.CallOption) (*kv.Value, error)
+	Get(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Value, error)
+	Has(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Bool, error)
+}
+
+type kVClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewKVClient(cc grpc.ClientConnInterface) KVClient {
+	return &kVClient{cc}
+}
+
+func (c *kVClient) Set(ctx context.Context, in *kv.Value, opts ...grpc.CallOption) (*kv.Value, error) {
+	out := new(kv.Value)
+	err := c.cc.Invoke(ctx, "/header.KV/Set", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kVClient) Get(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Value, error) {
+	out := new(kv.Value)
+	err := c.cc.Invoke(ctx, "/header.KV/Get", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *kVClient) Has(ctx context.Context, in *kv.Key, opts ...grpc.CallOption) (*kv.Bool, error) {
+	out := new(kv.Bool)
+	err := c.cc.Invoke(ctx, "/header.KV/Has", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// KVServer is the server API for KV service.
+type KVServer interface {
+	Set(context.Context, *kv.Value) (*kv.Value, error)
+	Get(context.Context, *kv.Key) (*kv.Value, error)
+	Has(context.Context, *kv.Key) (*kv.Bool, error)
+}
+
+// UnimplementedKVServer can be embedded to have forward compatible implementations.
+type UnimplementedKVServer struct {
+}
+
+func (*UnimplementedKVServer) Set(context.Context, *kv.Value) (*kv.Value, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Set not implemented")
+}
+func (*UnimplementedKVServer) Get(context.Context, *kv.Key) (*kv.Value, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (*UnimplementedKVServer) Has(context.Context, *kv.Key) (*kv.Bool, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Has not implemented")
+}
+
+func RegisterKVServer(s *grpc.Server, srv KVServer) {
+	s.RegisterService(&_KV_serviceDesc, srv)
+}
+
+func _KV_Set_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(kv.Value)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KVServer).Set(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.KV/Set",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KVServer).Set(ctx, req.(*kv.Value))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KV_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(kv.Key)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KVServer).Get(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.KV/Get",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KVServer).Get(ctx, req.(*kv.Key))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KV_Has_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(kv.Key)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KVServer).Has(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.KV/Has",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KVServer).Has(ctx, req.(*kv.Key))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _KV_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.KV",
+	HandlerType: (*KVServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Set",
+			Handler:    _KV_Set_Handler,
+		},
+		{
+			MethodName: "Get",
+			Handler:    _KV_Get_Handler,
+		},
+		{
+			MethodName: "Has",
+			Handler:    _KV_Has_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// Noti5ServiceClient is the client API for Noti5Service service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type Noti5ServiceClient interface {
+	ReadNotificationSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*noti5.Setting, error)
+	UpdateNotificationSetting(ctx context.Context, in *noti5.Setting, opts ...grpc.CallOption) (*noti5.Setting, error)
+}
+
+type noti5ServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNoti5ServiceClient(cc grpc.ClientConnInterface) Noti5ServiceClient {
+	return &noti5ServiceClient{cc}
+}
+
+func (c *noti5ServiceClient) ReadNotificationSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*noti5.Setting, error) {
+	out := new(noti5.Setting)
+	err := c.cc.Invoke(ctx, "/header.Noti5Service/ReadNotificationSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noti5ServiceClient) UpdateNotificationSetting(ctx context.Context, in *noti5.Setting, opts ...grpc.CallOption) (*noti5.Setting, error) {
+	out := new(noti5.Setting)
+	err := c.cc.Invoke(ctx, "/header.Noti5Service/UpdateNotificationSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Noti5ServiceServer is the server API for Noti5Service service.
+type Noti5ServiceServer interface {
+	ReadNotificationSetting(context.Context, *common.Id) (*noti5.Setting, error)
+	UpdateNotificationSetting(context.Context, *noti5.Setting) (*noti5.Setting, error)
+}
+
+// UnimplementedNoti5ServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedNoti5ServiceServer struct {
+}
+
+func (*UnimplementedNoti5ServiceServer) ReadNotificationSetting(context.Context, *common.Id) (*noti5.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadNotificationSetting not implemented")
+}
+func (*UnimplementedNoti5ServiceServer) UpdateNotificationSetting(context.Context, *noti5.Setting) (*noti5.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotificationSetting not implemented")
+}
+
+func RegisterNoti5ServiceServer(s *grpc.Server, srv Noti5ServiceServer) {
+	s.RegisterService(&_Noti5Service_serviceDesc, srv)
+}
+
+func _Noti5Service_ReadNotificationSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5ServiceServer).ReadNotificationSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5Service/ReadNotificationSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5ServiceServer).ReadNotificationSetting(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Noti5Service_UpdateNotificationSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Setting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5ServiceServer).UpdateNotificationSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5Service/UpdateNotificationSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5ServiceServer).UpdateNotificationSetting(ctx, req.(*noti5.Setting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Noti5Service_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Noti5Service",
+	HandlerType: (*Noti5ServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadNotificationSetting",
+			Handler:    _Noti5Service_ReadNotificationSetting_Handler,
+		},
+		{
+			MethodName: "UpdateNotificationSetting",
+			Handler:    _Noti5Service_UpdateNotificationSetting_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// Noti5TokenServiceClient is the client API for Noti5TokenService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type Noti5TokenServiceClient interface {
+	AddToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error)
+	RemoveToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error)
+	CheckTokenExists(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type noti5TokenServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNoti5TokenServiceClient(cc grpc.ClientConnInterface) Noti5TokenServiceClient {
+	return &noti5TokenServiceClient{cc}
+}
+
+func (c *noti5TokenServiceClient) AddToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Noti5TokenService/AddToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noti5TokenServiceClient) RemoveToken(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Noti5TokenService/RemoveToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *noti5TokenServiceClient) CheckTokenExists(ctx context.Context, in *noti5.Token, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Noti5TokenService/CheckTokenExists", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Noti5TokenServiceServer is the server API for Noti5TokenService service.
+type Noti5TokenServiceServer interface {
+	AddToken(context.Context, *noti5.Token) (*common.Empty, error)
+	RemoveToken(context.Context, *noti5.Token) (*common.Empty, error)
+	CheckTokenExists(context.Context, *noti5.Token) (*common.Empty, error)
+}
+
+// UnimplementedNoti5TokenServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedNoti5TokenServiceServer struct {
+}
+
+func (*UnimplementedNoti5TokenServiceServer) AddToken(context.Context, *noti5.Token) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddToken not implemented")
+}
+func (*UnimplementedNoti5TokenServiceServer) RemoveToken(context.Context, *noti5.Token) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveToken not implemented")
+}
+func (*UnimplementedNoti5TokenServiceServer) CheckTokenExists(context.Context, *noti5.Token) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckTokenExists not implemented")
+}
+
+func RegisterNoti5TokenServiceServer(s *grpc.Server, srv Noti5TokenServiceServer) {
+	s.RegisterService(&_Noti5TokenService_serviceDesc, srv)
+}
+
+func _Noti5TokenService_AddToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5TokenServiceServer).AddToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5TokenService/AddToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5TokenServiceServer).AddToken(ctx, req.(*noti5.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Noti5TokenService_RemoveToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5TokenServiceServer).RemoveToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5TokenService/RemoveToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5TokenServiceServer).RemoveToken(ctx, req.(*noti5.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Noti5TokenService_CheckTokenExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(noti5.Token)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(Noti5TokenServiceServer).CheckTokenExists(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Noti5TokenService/CheckTokenExists",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(Noti5TokenServiceServer).CheckTokenExists(ctx, req.(*noti5.Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Noti5TokenService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Noti5TokenService",
+	HandlerType: (*Noti5TokenServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AddToken",
+			Handler:    _Noti5TokenService_AddToken_Handler,
+		},
+		{
+			MethodName: "RemoveToken",
+			Handler:    _Noti5TokenService_RemoveToken_Handler,
+		},
+		{
+			MethodName: "CheckTokenExists",
+			Handler:    _Noti5TokenService_CheckTokenExists_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// NotiboxServiceClient is the client API for NotiboxService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type NotiboxServiceClient interface {
+	ReadAllNotis(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListNotis(ctx context.Context, in *notibox.ListRequest, opts ...grpc.CallOption) (*notibox.Notifications, error)
+	GetNotibox(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*notibox.Notibox, error)
+}
+
+type notiboxServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNotiboxServiceClient(cc grpc.ClientConnInterface) NotiboxServiceClient {
+	return &notiboxServiceClient{cc}
+}
+
+func (c *notiboxServiceClient) ReadAllNotis(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/ReadAllNotis", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) ListNotis(ctx context.Context, in *notibox.ListRequest, opts ...grpc.CallOption) (*notibox.Notifications, error) {
+	out := new(notibox.Notifications)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/ListNotis", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *notiboxServiceClient) GetNotibox(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*notibox.Notibox, error) {
+	out := new(notibox.Notibox)
+	err := c.cc.Invoke(ctx, "/header.NotiboxService/GetNotibox", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NotiboxServiceServer is the server API for NotiboxService service.
+type NotiboxServiceServer interface {
+	ReadAllNotis(context.Context, *common.Id) (*common.Empty, error)
+	ListNotis(context.Context, *notibox.ListRequest) (*notibox.Notifications, error)
+	GetNotibox(context.Context, *common.Id) (*notibox.Notibox, error)
+}
+
+// UnimplementedNotiboxServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedNotiboxServiceServer struct {
+}
+
+func (*UnimplementedNotiboxServiceServer) ReadAllNotis(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadAllNotis not implemented")
+}
+func (*UnimplementedNotiboxServiceServer) ListNotis(context.Context, *notibox.ListRequest) (*notibox.Notifications, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListNotis not implemented")
+}
+func (*UnimplementedNotiboxServiceServer) GetNotibox(context.Context, *common.Id) (*notibox.Notibox, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNotibox not implemented")
+}
+
+func RegisterNotiboxServiceServer(s *grpc.Server, srv NotiboxServiceServer) {
+	s.RegisterService(&_NotiboxService_serviceDesc, srv)
+}
+
+func _NotiboxService_ReadAllNotis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).ReadAllNotis(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/ReadAllNotis",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).ReadAllNotis(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_ListNotis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(notibox.ListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).ListNotis(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/ListNotis",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).ListNotis(ctx, req.(*notibox.ListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _NotiboxService_GetNotibox_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NotiboxServiceServer).GetNotibox(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.NotiboxService/GetNotibox",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NotiboxServiceServer).GetNotibox(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _NotiboxService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.NotiboxService",
+	HandlerType: (*NotiboxServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ReadAllNotis",
+			Handler:    _NotiboxService_ReadAllNotis_Handler,
+		},
+		{
+			MethodName: "ListNotis",
+			Handler:    _NotiboxService_ListNotis_Handler,
+		},
+		{
+			MethodName: "GetNotibox",
+			Handler:    _NotiboxService_GetNotibox_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// SubizInternalPaymentMgrClient is the client API for SubizInternalPaymentMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type SubizInternalPaymentMgrClient interface {
+	CreateBill(ctx context.Context, in *payment.Bill, opts ...grpc.CallOption) (*payment.Bill, error)
+	UpdateExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error)
+}
+
+type subizInternalPaymentMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSubizInternalPaymentMgrClient(cc grpc.ClientConnInterface) SubizInternalPaymentMgrClient {
+	return &subizInternalPaymentMgrClient{cc}
+}
+
+func (c *subizInternalPaymentMgrClient) CreateBill(ctx context.Context, in *payment.Bill, opts ...grpc.CallOption) (*payment.Bill, error) {
+	out := new(payment.Bill)
+	err := c.cc.Invoke(ctx, "/header.SubizInternalPaymentMgr/CreateBill", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *subizInternalPaymentMgrClient) UpdateExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error) {
+	out := new(payment.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.SubizInternalPaymentMgr/UpdateExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SubizInternalPaymentMgrServer is the server API for SubizInternalPaymentMgr service.
+type SubizInternalPaymentMgrServer interface {
+	CreateBill(context.Context, *payment.Bill) (*payment.Bill, error)
+	UpdateExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error)
+}
+
+// UnimplementedSubizInternalPaymentMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedSubizInternalPaymentMgrServer struct {
+}
+
+func (*UnimplementedSubizInternalPaymentMgrServer) CreateBill(context.Context, *payment.Bill) (*payment.Bill, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBill not implemented")
+}
+func (*UnimplementedSubizInternalPaymentMgrServer) UpdateExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateExchangeRate not implemented")
+}
+
+func RegisterSubizInternalPaymentMgrServer(s *grpc.Server, srv SubizInternalPaymentMgrServer) {
+	s.RegisterService(&_SubizInternalPaymentMgr_serviceDesc, srv)
+}
+
+func _SubizInternalPaymentMgr_CreateBill_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Bill)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubizInternalPaymentMgrServer).CreateBill(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SubizInternalPaymentMgr/CreateBill",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubizInternalPaymentMgrServer).CreateBill(ctx, req.(*payment.Bill))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SubizInternalPaymentMgr_UpdateExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ExchangeRate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SubizInternalPaymentMgrServer).UpdateExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.SubizInternalPaymentMgr/UpdateExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SubizInternalPaymentMgrServer).UpdateExchangeRate(ctx, req.(*payment.ExchangeRate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _SubizInternalPaymentMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.SubizInternalPaymentMgr",
+	HandlerType: (*SubizInternalPaymentMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateBill",
+			Handler:    _SubizInternalPaymentMgr_CreateBill_Handler,
+		},
+		{
+			MethodName: "UpdateExchangeRate",
+			Handler:    _SubizInternalPaymentMgr_UpdateExchangeRate_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PaymentMgrClient is the client API for PaymentMgr service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PaymentMgrClient interface {
+	SearchSub(ctx context.Context, in *account.SearchSubRequest, opts ...grpc.CallOption) (*account.AccSubs, error)
+	Purchase(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
+	UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error)
+	GetSubscription(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Subscription, error)
+	AddPaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error)
+	UpdatePaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error)
+	DeletePaymentMethod(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	ListPaymentMethods(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.PaymentMethods, error)
+	Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
+	ListInvoices(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Invoices, error)
+	CreateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
+	UpdateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error)
+	FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error)
+	DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error)
+	DiffSubscriptions(ctx context.Context, in *payment.DiffSubRequest, opts ...grpc.CallOption) (*payment.Invoice, error)
+	ListComments(ctx context.Context, in *payment.ListCommentsRequest, opts ...grpc.CallOption) (*payment.Comments, error)
+	AddComment(ctx context.Context, in *payment.Comment, opts ...grpc.CallOption) (*payment.Comment, error)
+	ListPlans(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.Plans, error)
+	ExportInvoice(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.String, error)
+	ConvertInvoiceToHtml(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.String, error)
+	GetExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error)
+	TransferMoney(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
+	ListLogs(ctx context.Context, in *payment.ListLogsRequest, opts ...grpc.CallOption) (*payment.Logs, error)
+	CreatePromotionCode(ctx context.Context, in *payment.PromotionCode, opts ...grpc.CallOption) (*payment.PromotionCode, error)
+	GetPromotionCode(ctx context.Context, in *payment.String, opts ...grpc.CallOption) (*payment.PromotionCode, error)
+	UsePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	ValidatePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCode, error)
+	ListPromotionCode(ctx context.Context, in *payment.ListPromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCodes, error)
+	DeletePromotionCode(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	SearchReferral(ctx context.Context, in *payment.SearchReferredRequest, opts ...grpc.CallOption) (*payment.Referral, error)
+	GetReferral(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Referral, error)
+	ListTopReferral(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.ReferralResponse, error)
+	UpdateReferral(ctx context.Context, in *payment.Referral, opts ...grpc.CallOption) (*payment.Referral, error)
+	ListAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogAccountReferreds, error)
+	ListBillByAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogBillByAccountReferreds, error)
+	ListPaidForAgentReferrer(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogPaidForAgentReferrers, error)
+	PaidForAgentReferrer(ctx context.Context, in *payment.LogPaidForAgentReferrer, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type paymentMgrClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPaymentMgrClient(cc grpc.ClientConnInterface) PaymentMgrClient {
+	return &paymentMgrClient{cc}
+}
+
+func (c *paymentMgrClient) SearchSub(ctx context.Context, in *account.SearchSubRequest, opts ...grpc.CallOption) (*account.AccSubs, error) {
+	out := new(account.AccSubs)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/SearchSub", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) Purchase(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/Purchase", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdateSubscription(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Subscription, error) {
+	out := new(payment.Subscription)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdateSubscription", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetSubscription(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Subscription, error) {
+	out := new(payment.Subscription)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetSubscription", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) AddPaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error) {
+	out := new(payment.PaymentMethod)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/AddPaymentMethod", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdatePaymentMethod(ctx context.Context, in *payment.PaymentMethod, opts ...grpc.CallOption) (*payment.PaymentMethod, error) {
+	out := new(payment.PaymentMethod)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdatePaymentMethod", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DeletePaymentMethod(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DeletePaymentMethod", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPaymentMethods(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.PaymentMethods, error) {
+	out := new(payment.PaymentMethods)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPaymentMethods", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) Pay(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error) {
+	out := new(payment.Bill)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/Pay", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListInvoices(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Invoices, error) {
+	out := new(payment.Invoices)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListInvoices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) CreateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/CreateInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdateInvoice(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdateInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) FilterInvoices(ctx context.Context, in *payment.ListInvoiceRequest, opts ...grpc.CallOption) (*payment.Invoices, error) {
+	out := new(payment.Invoices)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/FilterInvoices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DraftInvoice(ctx context.Context, in *payment.Subscription, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DraftInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DiffSubscriptions(ctx context.Context, in *payment.DiffSubRequest, opts ...grpc.CallOption) (*payment.Invoice, error) {
+	out := new(payment.Invoice)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DiffSubscriptions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListComments(ctx context.Context, in *payment.ListCommentsRequest, opts ...grpc.CallOption) (*payment.Comments, error) {
+	out := new(payment.Comments)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListComments", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) AddComment(ctx context.Context, in *payment.Comment, opts ...grpc.CallOption) (*payment.Comment, error) {
+	out := new(payment.Comment)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/AddComment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPlans(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.Plans, error) {
+	out := new(payment.Plans)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPlans", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ExportInvoice(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.String, error) {
+	out := new(payment.String)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ExportInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ConvertInvoiceToHtml(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.String, error) {
+	out := new(payment.String)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ConvertInvoiceToHtml", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetExchangeRate(ctx context.Context, in *payment.ExchangeRate, opts ...grpc.CallOption) (*payment.ExchangeRate, error) {
+	out := new(payment.ExchangeRate)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetExchangeRate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) TransferMoney(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error) {
+	out := new(payment.Bill)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/TransferMoney", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListLogs(ctx context.Context, in *payment.ListLogsRequest, opts ...grpc.CallOption) (*payment.Logs, error) {
+	out := new(payment.Logs)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListLogs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) CreatePromotionCode(ctx context.Context, in *payment.PromotionCode, opts ...grpc.CallOption) (*payment.PromotionCode, error) {
+	out := new(payment.PromotionCode)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/CreatePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetPromotionCode(ctx context.Context, in *payment.String, opts ...grpc.CallOption) (*payment.PromotionCode, error) {
+	out := new(payment.PromotionCode)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetPromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UsePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UsePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ValidatePromotionCode(ctx context.Context, in *payment.PromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCode, error) {
+	out := new(payment.PromotionCode)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ValidatePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPromotionCode(ctx context.Context, in *payment.ListPromotionCodeRequest, opts ...grpc.CallOption) (*payment.PromotionCodes, error) {
+	out := new(payment.PromotionCodes)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) DeletePromotionCode(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/DeletePromotionCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) SearchReferral(ctx context.Context, in *payment.SearchReferredRequest, opts ...grpc.CallOption) (*payment.Referral, error) {
+	out := new(payment.Referral)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/SearchReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) GetReferral(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.Referral, error) {
+	out := new(payment.Referral)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/GetReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListTopReferral(ctx context.Context, in *common.Empty, opts ...grpc.CallOption) (*payment.ReferralResponse, error) {
+	out := new(payment.ReferralResponse)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListTopReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) UpdateReferral(ctx context.Context, in *payment.Referral, opts ...grpc.CallOption) (*payment.Referral, error) {
+	out := new(payment.Referral)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/UpdateReferral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogAccountReferreds, error) {
+	out := new(payment.LogAccountReferreds)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListAccountReferred", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListBillByAccountReferred(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogBillByAccountReferreds, error) {
+	out := new(payment.LogBillByAccountReferreds)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListBillByAccountReferred", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) ListPaidForAgentReferrer(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*payment.LogPaidForAgentReferrers, error) {
+	out := new(payment.LogPaidForAgentReferrers)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/ListPaidForAgentReferrer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *paymentMgrClient) PaidForAgentReferrer(ctx context.Context, in *payment.LogPaidForAgentReferrer, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.PaymentMgr/PaidForAgentReferrer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PaymentMgrServer is the server API for PaymentMgr service.
+type PaymentMgrServer interface {
+	SearchSub(context.Context, *account.SearchSubRequest) (*account.AccSubs, error)
+	Purchase(context.Context, *payment.Subscription) (*payment.Invoice, error)
+	UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error)
+	GetSubscription(context.Context, *common.Id) (*payment.Subscription, error)
+	AddPaymentMethod(context.Context, *payment.PaymentMethod) (*payment.PaymentMethod, error)
+	UpdatePaymentMethod(context.Context, *payment.PaymentMethod) (*payment.PaymentMethod, error)
+	DeletePaymentMethod(context.Context, *common.Id) (*common.Empty, error)
+	ListPaymentMethods(context.Context, *common.Id) (*payment.PaymentMethods, error)
+	Pay(context.Context, *payment.PayRequest) (*payment.Bill, error)
+	ListInvoices(context.Context, *common.Id) (*payment.Invoices, error)
+	CreateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
+	UpdateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error)
+	FilterInvoices(context.Context, *payment.ListInvoiceRequest) (*payment.Invoices, error)
+	DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error)
+	DiffSubscriptions(context.Context, *payment.DiffSubRequest) (*payment.Invoice, error)
+	ListComments(context.Context, *payment.ListCommentsRequest) (*payment.Comments, error)
+	AddComment(context.Context, *payment.Comment) (*payment.Comment, error)
+	ListPlans(context.Context, *common.Empty) (*payment.Plans, error)
+	ExportInvoice(context.Context, *common.Id) (*payment.String, error)
+	ConvertInvoiceToHtml(context.Context, *payment.Invoice) (*payment.String, error)
+	GetExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error)
+	TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error)
+	ListLogs(context.Context, *payment.ListLogsRequest) (*payment.Logs, error)
+	CreatePromotionCode(context.Context, *payment.PromotionCode) (*payment.PromotionCode, error)
+	GetPromotionCode(context.Context, *payment.String) (*payment.PromotionCode, error)
+	UsePromotionCode(context.Context, *payment.PromotionCodeRequest) (*common.Empty, error)
+	ValidatePromotionCode(context.Context, *payment.PromotionCodeRequest) (*payment.PromotionCode, error)
+	ListPromotionCode(context.Context, *payment.ListPromotionCodeRequest) (*payment.PromotionCodes, error)
+	DeletePromotionCode(context.Context, *common.Id) (*common.Empty, error)
+	SearchReferral(context.Context, *payment.SearchReferredRequest) (*payment.Referral, error)
+	GetReferral(context.Context, *common.Id) (*payment.Referral, error)
+	ListTopReferral(context.Context, *common.Empty) (*payment.ReferralResponse, error)
+	UpdateReferral(context.Context, *payment.Referral) (*payment.Referral, error)
+	ListAccountReferred(context.Context, *common.Id) (*payment.LogAccountReferreds, error)
+	ListBillByAccountReferred(context.Context, *common.Id) (*payment.LogBillByAccountReferreds, error)
+	ListPaidForAgentReferrer(context.Context, *common.Id) (*payment.LogPaidForAgentReferrers, error)
+	PaidForAgentReferrer(context.Context, *payment.LogPaidForAgentReferrer) (*common.Empty, error)
+}
+
+// UnimplementedPaymentMgrServer can be embedded to have forward compatible implementations.
+type UnimplementedPaymentMgrServer struct {
+}
+
+func (*UnimplementedPaymentMgrServer) SearchSub(context.Context, *account.SearchSubRequest) (*account.AccSubs, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchSub not implemented")
+}
+func (*UnimplementedPaymentMgrServer) Purchase(context.Context, *payment.Subscription) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Purchase not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdateSubscription(context.Context, *payment.Subscription) (*payment.Subscription, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSubscription not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetSubscription(context.Context, *common.Id) (*payment.Subscription, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSubscription not implemented")
+}
+func (*UnimplementedPaymentMgrServer) AddPaymentMethod(context.Context, *payment.PaymentMethod) (*payment.PaymentMethod, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddPaymentMethod not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdatePaymentMethod(context.Context, *payment.PaymentMethod) (*payment.PaymentMethod, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePaymentMethod not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DeletePaymentMethod(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePaymentMethod not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPaymentMethods(context.Context, *common.Id) (*payment.PaymentMethods, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentMethods not implemented")
+}
+func (*UnimplementedPaymentMgrServer) Pay(context.Context, *payment.PayRequest) (*payment.Bill, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListInvoices(context.Context, *common.Id) (*payment.Invoices, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListInvoices not implemented")
+}
+func (*UnimplementedPaymentMgrServer) CreateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdateInvoice(context.Context, *payment.Invoice) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) FilterInvoices(context.Context, *payment.ListInvoiceRequest) (*payment.Invoices, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FilterInvoices not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DraftInvoice(context.Context, *payment.Subscription) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DraftInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DiffSubscriptions(context.Context, *payment.DiffSubRequest) (*payment.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DiffSubscriptions not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListComments(context.Context, *payment.ListCommentsRequest) (*payment.Comments, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListComments not implemented")
+}
+func (*UnimplementedPaymentMgrServer) AddComment(context.Context, *payment.Comment) (*payment.Comment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddComment not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPlans(context.Context, *common.Empty) (*payment.Plans, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPlans not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ExportInvoice(context.Context, *common.Id) (*payment.String, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoice not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ConvertInvoiceToHtml(context.Context, *payment.Invoice) (*payment.String, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConvertInvoiceToHtml not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetExchangeRate(context.Context, *payment.ExchangeRate) (*payment.ExchangeRate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExchangeRate not implemented")
+}
+func (*UnimplementedPaymentMgrServer) TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferMoney not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListLogs(context.Context, *payment.ListLogsRequest) (*payment.Logs, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLogs not implemented")
+}
+func (*UnimplementedPaymentMgrServer) CreatePromotionCode(context.Context, *payment.PromotionCode) (*payment.PromotionCode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetPromotionCode(context.Context, *payment.String) (*payment.PromotionCode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UsePromotionCode(context.Context, *payment.PromotionCodeRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UsePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ValidatePromotionCode(context.Context, *payment.PromotionCodeRequest) (*payment.PromotionCode, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidatePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPromotionCode(context.Context, *payment.ListPromotionCodeRequest) (*payment.PromotionCodes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) DeletePromotionCode(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePromotionCode not implemented")
+}
+func (*UnimplementedPaymentMgrServer) SearchReferral(context.Context, *payment.SearchReferredRequest) (*payment.Referral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) GetReferral(context.Context, *common.Id) (*payment.Referral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListTopReferral(context.Context, *common.Empty) (*payment.ReferralResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTopReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) UpdateReferral(context.Context, *payment.Referral) (*payment.Referral, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateReferral not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListAccountReferred(context.Context, *common.Id) (*payment.LogAccountReferreds, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccountReferred not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListBillByAccountReferred(context.Context, *common.Id) (*payment.LogBillByAccountReferreds, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillByAccountReferred not implemented")
+}
+func (*UnimplementedPaymentMgrServer) ListPaidForAgentReferrer(context.Context, *common.Id) (*payment.LogPaidForAgentReferrers, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPaidForAgentReferrer not implemented")
+}
+func (*UnimplementedPaymentMgrServer) PaidForAgentReferrer(context.Context, *payment.LogPaidForAgentReferrer) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PaidForAgentReferrer not implemented")
+}
+
+func RegisterPaymentMgrServer(s *grpc.Server, srv PaymentMgrServer) {
+	s.RegisterService(&_PaymentMgr_serviceDesc, srv)
+}
+
+func _PaymentMgr_SearchSub_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(account.SearchSubRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).SearchSub(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/SearchSub",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).SearchSub(ctx, req.(*account.SearchSubRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_Purchase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).Purchase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/Purchase",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).Purchase(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdateSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdateSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdateSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdateSubscription(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetSubscription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetSubscription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetSubscription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetSubscription(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_AddPaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PaymentMethod)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).AddPaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/AddPaymentMethod",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).AddPaymentMethod(ctx, req.(*payment.PaymentMethod))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdatePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PaymentMethod)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdatePaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdatePaymentMethod",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdatePaymentMethod(ctx, req.(*payment.PaymentMethod))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DeletePaymentMethod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DeletePaymentMethod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DeletePaymentMethod",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DeletePaymentMethod(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPaymentMethods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPaymentMethods(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPaymentMethods",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPaymentMethods(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_Pay_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).Pay(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/Pay",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).Pay(ctx, req.(*payment.PayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListInvoices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListInvoices(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).CreateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/CreateInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).CreateInvoice(ctx, req.(*payment.Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdateInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdateInvoice(ctx, req.(*payment.Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_FilterInvoices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).FilterInvoices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/FilterInvoices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).FilterInvoices(ctx, req.(*payment.ListInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DraftInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DraftInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DraftInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DraftInvoice(ctx, req.(*payment.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DiffSubscriptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.DiffSubRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DiffSubscriptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DiffSubscriptions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DiffSubscriptions(ctx, req.(*payment.DiffSubRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListCommentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListComments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListComments",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListComments(ctx, req.(*payment.ListCommentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_AddComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Comment)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).AddComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/AddComment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).AddComment(ctx, req.(*payment.Comment))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPlans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPlans",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPlans(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ExportInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ExportInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ExportInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ExportInvoice(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ConvertInvoiceToHtml_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Invoice)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ConvertInvoiceToHtml(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ConvertInvoiceToHtml",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ConvertInvoiceToHtml(ctx, req.(*payment.Invoice))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ExchangeRate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetExchangeRate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetExchangeRate(ctx, req.(*payment.ExchangeRate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_TransferMoney_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).TransferMoney(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/TransferMoney",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).TransferMoney(ctx, req.(*payment.PayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListLogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListLogs(ctx, req.(*payment.ListLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_CreatePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PromotionCode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).CreatePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/CreatePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).CreatePromotionCode(ctx, req.(*payment.PromotionCode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetPromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.String)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetPromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetPromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetPromotionCode(ctx, req.(*payment.String))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UsePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PromotionCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UsePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UsePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UsePromotionCode(ctx, req.(*payment.PromotionCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ValidatePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.PromotionCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ValidatePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ValidatePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ValidatePromotionCode(ctx, req.(*payment.PromotionCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.ListPromotionCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPromotionCode(ctx, req.(*payment.ListPromotionCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_DeletePromotionCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).DeletePromotionCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/DeletePromotionCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).DeletePromotionCode(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_SearchReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.SearchReferredRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).SearchReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/SearchReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).SearchReferral(ctx, req.(*payment.SearchReferredRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_GetReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).GetReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/GetReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).GetReferral(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListTopReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListTopReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListTopReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListTopReferral(ctx, req.(*common.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_UpdateReferral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.Referral)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).UpdateReferral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/UpdateReferral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).UpdateReferral(ctx, req.(*payment.Referral))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListAccountReferred_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListAccountReferred(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListAccountReferred",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListAccountReferred(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListBillByAccountReferred_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListBillByAccountReferred(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListBillByAccountReferred",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListBillByAccountReferred(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_ListPaidForAgentReferrer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).ListPaidForAgentReferrer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/ListPaidForAgentReferrer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).ListPaidForAgentReferrer(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PaymentMgr_PaidForAgentReferrer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(payment.LogPaidForAgentReferrer)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PaymentMgrServer).PaidForAgentReferrer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PaymentMgr/PaidForAgentReferrer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PaymentMgrServer).PaidForAgentReferrer(ctx, req.(*payment.LogPaidForAgentReferrer))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _PaymentMgr_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.PaymentMgr",
+	HandlerType: (*PaymentMgrServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchSub",
+			Handler:    _PaymentMgr_SearchSub_Handler,
+		},
+		{
+			MethodName: "Purchase",
+			Handler:    _PaymentMgr_Purchase_Handler,
+		},
+		{
+			MethodName: "UpdateSubscription",
+			Handler:    _PaymentMgr_UpdateSubscription_Handler,
+		},
+		{
+			MethodName: "GetSubscription",
+			Handler:    _PaymentMgr_GetSubscription_Handler,
+		},
+		{
+			MethodName: "AddPaymentMethod",
+			Handler:    _PaymentMgr_AddPaymentMethod_Handler,
+		},
+		{
+			MethodName: "UpdatePaymentMethod",
+			Handler:    _PaymentMgr_UpdatePaymentMethod_Handler,
+		},
+		{
+			MethodName: "DeletePaymentMethod",
+			Handler:    _PaymentMgr_DeletePaymentMethod_Handler,
+		},
+		{
+			MethodName: "ListPaymentMethods",
+			Handler:    _PaymentMgr_ListPaymentMethods_Handler,
+		},
+		{
+			MethodName: "Pay",
+			Handler:    _PaymentMgr_Pay_Handler,
+		},
+		{
+			MethodName: "ListInvoices",
+			Handler:    _PaymentMgr_ListInvoices_Handler,
+		},
+		{
+			MethodName: "CreateInvoice",
+			Handler:    _PaymentMgr_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "UpdateInvoice",
+			Handler:    _PaymentMgr_UpdateInvoice_Handler,
+		},
+		{
+			MethodName: "FilterInvoices",
+			Handler:    _PaymentMgr_FilterInvoices_Handler,
+		},
+		{
+			MethodName: "DraftInvoice",
+			Handler:    _PaymentMgr_DraftInvoice_Handler,
+		},
+		{
+			MethodName: "DiffSubscriptions",
+			Handler:    _PaymentMgr_DiffSubscriptions_Handler,
+		},
+		{
+			MethodName: "ListComments",
+			Handler:    _PaymentMgr_ListComments_Handler,
+		},
+		{
+			MethodName: "AddComment",
+			Handler:    _PaymentMgr_AddComment_Handler,
+		},
+		{
+			MethodName: "ListPlans",
+			Handler:    _PaymentMgr_ListPlans_Handler,
+		},
+		{
+			MethodName: "ExportInvoice",
+			Handler:    _PaymentMgr_ExportInvoice_Handler,
+		},
+		{
+			MethodName: "ConvertInvoiceToHtml",
+			Handler:    _PaymentMgr_ConvertInvoiceToHtml_Handler,
+		},
+		{
+			MethodName: "GetExchangeRate",
+			Handler:    _PaymentMgr_GetExchangeRate_Handler,
+		},
+		{
+			MethodName: "TransferMoney",
+			Handler:    _PaymentMgr_TransferMoney_Handler,
+		},
+		{
+			MethodName: "ListLogs",
+			Handler:    _PaymentMgr_ListLogs_Handler,
+		},
+		{
+			MethodName: "CreatePromotionCode",
+			Handler:    _PaymentMgr_CreatePromotionCode_Handler,
+		},
+		{
+			MethodName: "GetPromotionCode",
+			Handler:    _PaymentMgr_GetPromotionCode_Handler,
+		},
+		{
+			MethodName: "UsePromotionCode",
+			Handler:    _PaymentMgr_UsePromotionCode_Handler,
+		},
+		{
+			MethodName: "ValidatePromotionCode",
+			Handler:    _PaymentMgr_ValidatePromotionCode_Handler,
+		},
+		{
+			MethodName: "ListPromotionCode",
+			Handler:    _PaymentMgr_ListPromotionCode_Handler,
+		},
+		{
+			MethodName: "DeletePromotionCode",
+			Handler:    _PaymentMgr_DeletePromotionCode_Handler,
+		},
+		{
+			MethodName: "SearchReferral",
+			Handler:    _PaymentMgr_SearchReferral_Handler,
+		},
+		{
+			MethodName: "GetReferral",
+			Handler:    _PaymentMgr_GetReferral_Handler,
+		},
+		{
+			MethodName: "ListTopReferral",
+			Handler:    _PaymentMgr_ListTopReferral_Handler,
+		},
+		{
+			MethodName: "UpdateReferral",
+			Handler:    _PaymentMgr_UpdateReferral_Handler,
+		},
+		{
+			MethodName: "ListAccountReferred",
+			Handler:    _PaymentMgr_ListAccountReferred_Handler,
+		},
+		{
+			MethodName: "ListBillByAccountReferred",
+			Handler:    _PaymentMgr_ListBillByAccountReferred_Handler,
+		},
+		{
+			MethodName: "ListPaidForAgentReferrer",
+			Handler:    _PaymentMgr_ListPaidForAgentReferrer_Handler,
+		},
+		{
+			MethodName: "PaidForAgentReferrer",
+			Handler:    _PaymentMgr_PaidForAgentReferrer_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PlaceHolderClient is the client API for PlaceHolder service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PlaceHolderClient interface {
+	Resolve(ctx context.Context, in *placeholder.ResolveRequest, opts ...grpc.CallOption) (*placeholder.Resolved, error)
+}
+
+type placeHolderClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPlaceHolderClient(cc grpc.ClientConnInterface) PlaceHolderClient {
+	return &placeHolderClient{cc}
+}
+
+func (c *placeHolderClient) Resolve(ctx context.Context, in *placeholder.ResolveRequest, opts ...grpc.CallOption) (*placeholder.Resolved, error) {
+	out := new(placeholder.Resolved)
+	err := c.cc.Invoke(ctx, "/header.PlaceHolder/Resolve", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PlaceHolderServer is the server API for PlaceHolder service.
+type PlaceHolderServer interface {
+	Resolve(context.Context, *placeholder.ResolveRequest) (*placeholder.Resolved, error)
+}
+
+// UnimplementedPlaceHolderServer can be embedded to have forward compatible implementations.
+type UnimplementedPlaceHolderServer struct {
+}
+
+func (*UnimplementedPlaceHolderServer) Resolve(context.Context, *placeholder.ResolveRequest) (*placeholder.Resolved, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Resolve not implemented")
+}
+
+func RegisterPlaceHolderServer(s *grpc.Server, srv PlaceHolderServer) {
+	s.RegisterService(&_PlaceHolder_serviceDesc, srv)
+}
+
+func _PlaceHolder_Resolve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(placeholder.ResolveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlaceHolderServer).Resolve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.PlaceHolder/Resolve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlaceHolderServer).Resolve(ctx, req.(*placeholder.ResolveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _PlaceHolder_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.PlaceHolder",
+	HandlerType: (*PlaceHolderServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Resolve",
+			Handler:    _PlaceHolder_Resolve_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// PubsubClient is the client API for Pubsub service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type PubsubClient interface {
+	Subscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error)
+	Unsubscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error)
+	Publish(ctx context.Context, in *pubsub.PublishMessage, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type pubsubClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPubsubClient(cc grpc.ClientConnInterface) PubsubClient {
+	return &pubsubClient{cc}
+}
+
+func (c *pubsubClient) Subscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Pubsub/Subscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubsubClient) Unsubscribe(ctx context.Context, in *pubsub.Subscription, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Pubsub/Unsubscribe", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubsubClient) Publish(ctx context.Context, in *pubsub.PublishMessage, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Pubsub/Publish", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PubsubServer is the server API for Pubsub service.
+type PubsubServer interface {
+	Subscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
+	Unsubscribe(context.Context, *pubsub.Subscription) (*common.Empty, error)
+	Publish(context.Context, *pubsub.PublishMessage) (*common.Empty, error)
+}
+
+// UnimplementedPubsubServer can be embedded to have forward compatible implementations.
+type UnimplementedPubsubServer struct {
+}
+
+func (*UnimplementedPubsubServer) Subscribe(context.Context, *pubsub.Subscription) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (*UnimplementedPubsubServer) Unsubscribe(context.Context, *pubsub.Subscription) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
+}
+func (*UnimplementedPubsubServer) Publish(context.Context, *pubsub.PublishMessage) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Publish not implemented")
+}
+
+func RegisterPubsubServer(s *grpc.Server, srv PubsubServer) {
+	s.RegisterService(&_Pubsub_serviceDesc, srv)
+}
+
+func _Pubsub_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(pubsub.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubsubServer).Subscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Pubsub/Subscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubsubServer).Subscribe(ctx, req.(*pubsub.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pubsub_Unsubscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(pubsub.Subscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubsubServer).Unsubscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Pubsub/Unsubscribe",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubsubServer).Unsubscribe(ctx, req.(*pubsub.Subscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Pubsub_Publish_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(pubsub.PublishMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubsubServer).Publish(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Pubsub/Publish",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubsubServer).Publish(ctx, req.(*pubsub.PublishMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Pubsub_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Pubsub",
+	HandlerType: (*PubsubServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Subscribe",
+			Handler:    _Pubsub_Subscribe_Handler,
+		},
+		{
+			MethodName: "Unsubscribe",
+			Handler:    _Pubsub_Unsubscribe_Handler,
+		},
+		{
+			MethodName: "Publish",
+			Handler:    _Pubsub_Publish_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// WidgetServiceClient is the client API for WidgetService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type WidgetServiceClient interface {
+	Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Setting, error)
+	Update(ctx context.Context, in *widget.Setting, opts ...grpc.CallOption) (*widget.Setting, error)
+	Compile(ctx context.Context, in *widget.Setting, opts ...grpc.CallOption) (*widget.Setting, error)
+	ReadUserSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.UserSetting, error)
+	UpdateUserSetting(ctx context.Context, in *widget.UserSetting, opts ...grpc.CallOption) (*widget.UserSetting, error)
+	ReadCampaign(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Campaign, error)
+	ListCampaigns(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Campaigns, error)
+	CreateCampaign(ctx context.Context, in *widget.Campaign, opts ...grpc.CallOption) (*widget.Campaign, error)
+	UpdateCampaign(ctx context.Context, in *widget.Campaign, opts ...grpc.CallOption) (*widget.Campaign, error)
+	DeleteCampaign(ctx context.Context, in *widget.Campaign, opts ...grpc.CallOption) (*common.Empty, error)
+	SubmitImpression(ctx context.Context, in *widget.Impression, opts ...grpc.CallOption) (*widget.Impression, error)
+	SubmitConversion(ctx context.Context, in *widget.Conversion, opts ...grpc.CallOption) (*widget.Conversion, error)
+	SubmitUserCampaignStatus(ctx context.Context, in *widget.UserCampaignStatus, opts ...grpc.CallOption) (*widget.UserCampaignStatus, error)
+	ReportCampaign(ctx context.Context, in *widget.ReportCampaignRequest, opts ...grpc.CallOption) (*widget.ReportCampaignResponse, error)
+	ListConversions(ctx context.Context, in *widget.ConversionRequest, opts ...grpc.CallOption) (*widget.Conversions, error)
+	ExportConversions(ctx context.Context, in *widget.ConversionRequest, opts ...grpc.CallOption) (*widget.ConversionsExported, error)
+	SearchLocations(ctx context.Context, in *widget.SearchLocationsRequest, opts ...grpc.CallOption) (*user.Traces, error)
+	UploadImage(ctx context.Context, in *widget.UploadedImage, opts ...grpc.CallOption) (*widget.UploadedImage, error)
+	ListUploadedImage(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.UploadedImages, error)
+	DeleteUploadedImage(ctx context.Context, in *widget.UploadedImage, opts ...grpc.CallOption) (*common.Empty, error)
+}
+
+type widgetServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewWidgetServiceClient(cc grpc.ClientConnInterface) WidgetServiceClient {
+	return &widgetServiceClient{cc}
+}
+
+func (c *widgetServiceClient) Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Setting, error) {
+	out := new(widget.Setting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) Update(ctx context.Context, in *widget.Setting, opts ...grpc.CallOption) (*widget.Setting, error) {
+	out := new(widget.Setting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) Compile(ctx context.Context, in *widget.Setting, opts ...grpc.CallOption) (*widget.Setting, error) {
+	out := new(widget.Setting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/Compile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ReadUserSetting(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.UserSetting, error) {
+	out := new(widget.UserSetting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ReadUserSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) UpdateUserSetting(ctx context.Context, in *widget.UserSetting, opts ...grpc.CallOption) (*widget.UserSetting, error) {
+	out := new(widget.UserSetting)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/UpdateUserSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ReadCampaign(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Campaign, error) {
+	out := new(widget.Campaign)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ReadCampaign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ListCampaigns(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.Campaigns, error) {
+	out := new(widget.Campaigns)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ListCampaigns", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) CreateCampaign(ctx context.Context, in *widget.Campaign, opts ...grpc.CallOption) (*widget.Campaign, error) {
+	out := new(widget.Campaign)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/CreateCampaign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) UpdateCampaign(ctx context.Context, in *widget.Campaign, opts ...grpc.CallOption) (*widget.Campaign, error) {
+	out := new(widget.Campaign)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/UpdateCampaign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) DeleteCampaign(ctx context.Context, in *widget.Campaign, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/DeleteCampaign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) SubmitImpression(ctx context.Context, in *widget.Impression, opts ...grpc.CallOption) (*widget.Impression, error) {
+	out := new(widget.Impression)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/SubmitImpression", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) SubmitConversion(ctx context.Context, in *widget.Conversion, opts ...grpc.CallOption) (*widget.Conversion, error) {
+	out := new(widget.Conversion)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/SubmitConversion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) SubmitUserCampaignStatus(ctx context.Context, in *widget.UserCampaignStatus, opts ...grpc.CallOption) (*widget.UserCampaignStatus, error) {
+	out := new(widget.UserCampaignStatus)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/SubmitUserCampaignStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ReportCampaign(ctx context.Context, in *widget.ReportCampaignRequest, opts ...grpc.CallOption) (*widget.ReportCampaignResponse, error) {
+	out := new(widget.ReportCampaignResponse)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ReportCampaign", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ListConversions(ctx context.Context, in *widget.ConversionRequest, opts ...grpc.CallOption) (*widget.Conversions, error) {
+	out := new(widget.Conversions)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ListConversions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ExportConversions(ctx context.Context, in *widget.ConversionRequest, opts ...grpc.CallOption) (*widget.ConversionsExported, error) {
+	out := new(widget.ConversionsExported)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ExportConversions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) SearchLocations(ctx context.Context, in *widget.SearchLocationsRequest, opts ...grpc.CallOption) (*user.Traces, error) {
+	out := new(user.Traces)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/SearchLocations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) UploadImage(ctx context.Context, in *widget.UploadedImage, opts ...grpc.CallOption) (*widget.UploadedImage, error) {
+	out := new(widget.UploadedImage)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/UploadImage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) ListUploadedImage(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*widget.UploadedImages, error) {
+	out := new(widget.UploadedImages)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/ListUploadedImage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *widgetServiceClient) DeleteUploadedImage(ctx context.Context, in *widget.UploadedImage, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.WidgetService/DeleteUploadedImage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// WidgetServiceServer is the server API for WidgetService service.
+type WidgetServiceServer interface {
+	Read(context.Context, *common.Id) (*widget.Setting, error)
+	Update(context.Context, *widget.Setting) (*widget.Setting, error)
+	Compile(context.Context, *widget.Setting) (*widget.Setting, error)
+	ReadUserSetting(context.Context, *common.Id) (*widget.UserSetting, error)
+	UpdateUserSetting(context.Context, *widget.UserSetting) (*widget.UserSetting, error)
+	ReadCampaign(context.Context, *common.Id) (*widget.Campaign, error)
+	ListCampaigns(context.Context, *common.Id) (*widget.Campaigns, error)
+	CreateCampaign(context.Context, *widget.Campaign) (*widget.Campaign, error)
+	UpdateCampaign(context.Context, *widget.Campaign) (*widget.Campaign, error)
+	DeleteCampaign(context.Context, *widget.Campaign) (*common.Empty, error)
+	SubmitImpression(context.Context, *widget.Impression) (*widget.Impression, error)
+	SubmitConversion(context.Context, *widget.Conversion) (*widget.Conversion, error)
+	SubmitUserCampaignStatus(context.Context, *widget.UserCampaignStatus) (*widget.UserCampaignStatus, error)
+	ReportCampaign(context.Context, *widget.ReportCampaignRequest) (*widget.ReportCampaignResponse, error)
+	ListConversions(context.Context, *widget.ConversionRequest) (*widget.Conversions, error)
+	ExportConversions(context.Context, *widget.ConversionRequest) (*widget.ConversionsExported, error)
+	SearchLocations(context.Context, *widget.SearchLocationsRequest) (*user.Traces, error)
+	UploadImage(context.Context, *widget.UploadedImage) (*widget.UploadedImage, error)
+	ListUploadedImage(context.Context, *common.Id) (*widget.UploadedImages, error)
+	DeleteUploadedImage(context.Context, *widget.UploadedImage) (*common.Empty, error)
+}
+
+// UnimplementedWidgetServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedWidgetServiceServer struct {
+}
+
+func (*UnimplementedWidgetServiceServer) Read(context.Context, *common.Id) (*widget.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedWidgetServiceServer) Update(context.Context, *widget.Setting) (*widget.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedWidgetServiceServer) Compile(context.Context, *widget.Setting) (*widget.Setting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Compile not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ReadUserSetting(context.Context, *common.Id) (*widget.UserSetting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadUserSetting not implemented")
+}
+func (*UnimplementedWidgetServiceServer) UpdateUserSetting(context.Context, *widget.UserSetting) (*widget.UserSetting, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserSetting not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ReadCampaign(context.Context, *common.Id) (*widget.Campaign, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadCampaign not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ListCampaigns(context.Context, *common.Id) (*widget.Campaigns, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCampaigns not implemented")
+}
+func (*UnimplementedWidgetServiceServer) CreateCampaign(context.Context, *widget.Campaign) (*widget.Campaign, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCampaign not implemented")
+}
+func (*UnimplementedWidgetServiceServer) UpdateCampaign(context.Context, *widget.Campaign) (*widget.Campaign, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCampaign not implemented")
+}
+func (*UnimplementedWidgetServiceServer) DeleteCampaign(context.Context, *widget.Campaign) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCampaign not implemented")
+}
+func (*UnimplementedWidgetServiceServer) SubmitImpression(context.Context, *widget.Impression) (*widget.Impression, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitImpression not implemented")
+}
+func (*UnimplementedWidgetServiceServer) SubmitConversion(context.Context, *widget.Conversion) (*widget.Conversion, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitConversion not implemented")
+}
+func (*UnimplementedWidgetServiceServer) SubmitUserCampaignStatus(context.Context, *widget.UserCampaignStatus) (*widget.UserCampaignStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitUserCampaignStatus not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ReportCampaign(context.Context, *widget.ReportCampaignRequest) (*widget.ReportCampaignResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportCampaign not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ListConversions(context.Context, *widget.ConversionRequest) (*widget.Conversions, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConversions not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ExportConversions(context.Context, *widget.ConversionRequest) (*widget.ConversionsExported, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportConversions not implemented")
+}
+func (*UnimplementedWidgetServiceServer) SearchLocations(context.Context, *widget.SearchLocationsRequest) (*user.Traces, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchLocations not implemented")
+}
+func (*UnimplementedWidgetServiceServer) UploadImage(context.Context, *widget.UploadedImage) (*widget.UploadedImage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadImage not implemented")
+}
+func (*UnimplementedWidgetServiceServer) ListUploadedImage(context.Context, *common.Id) (*widget.UploadedImages, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUploadedImage not implemented")
+}
+func (*UnimplementedWidgetServiceServer) DeleteUploadedImage(context.Context, *widget.UploadedImage) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUploadedImage not implemented")
+}
+
+func RegisterWidgetServiceServer(s *grpc.Server, srv WidgetServiceServer) {
+	s.RegisterService(&_WidgetService_serviceDesc, srv)
+}
+
+func _WidgetService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).Read(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Setting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).Update(ctx, req.(*widget.Setting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_Compile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Setting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).Compile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/Compile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).Compile(ctx, req.(*widget.Setting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ReadUserSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ReadUserSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ReadUserSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ReadUserSetting(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_UpdateUserSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.UserSetting)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).UpdateUserSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/UpdateUserSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).UpdateUserSetting(ctx, req.(*widget.UserSetting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ReadCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ReadCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ReadCampaign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ReadCampaign(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ListCampaigns_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ListCampaigns(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ListCampaigns",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ListCampaigns(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_CreateCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Campaign)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).CreateCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/CreateCampaign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).CreateCampaign(ctx, req.(*widget.Campaign))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_UpdateCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Campaign)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).UpdateCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/UpdateCampaign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).UpdateCampaign(ctx, req.(*widget.Campaign))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_DeleteCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Campaign)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).DeleteCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/DeleteCampaign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).DeleteCampaign(ctx, req.(*widget.Campaign))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_SubmitImpression_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Impression)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).SubmitImpression(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/SubmitImpression",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).SubmitImpression(ctx, req.(*widget.Impression))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_SubmitConversion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.Conversion)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).SubmitConversion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/SubmitConversion",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).SubmitConversion(ctx, req.(*widget.Conversion))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_SubmitUserCampaignStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.UserCampaignStatus)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).SubmitUserCampaignStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/SubmitUserCampaignStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).SubmitUserCampaignStatus(ctx, req.(*widget.UserCampaignStatus))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ReportCampaign_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.ReportCampaignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ReportCampaign(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ReportCampaign",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ReportCampaign(ctx, req.(*widget.ReportCampaignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ListConversions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.ConversionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ListConversions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ListConversions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ListConversions(ctx, req.(*widget.ConversionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ExportConversions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.ConversionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ExportConversions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ExportConversions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ExportConversions(ctx, req.(*widget.ConversionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_SearchLocations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.SearchLocationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).SearchLocations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/SearchLocations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).SearchLocations(ctx, req.(*widget.SearchLocationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_UploadImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.UploadedImage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).UploadImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/UploadImage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).UploadImage(ctx, req.(*widget.UploadedImage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_ListUploadedImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).ListUploadedImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/ListUploadedImage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).ListUploadedImage(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WidgetService_DeleteUploadedImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(widget.UploadedImage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WidgetServiceServer).DeleteUploadedImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WidgetService/DeleteUploadedImage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WidgetServiceServer).DeleteUploadedImage(ctx, req.(*widget.UploadedImage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _WidgetService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.WidgetService",
+	HandlerType: (*WidgetServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Read",
+			Handler:    _WidgetService_Read_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _WidgetService_Update_Handler,
+		},
+		{
+			MethodName: "Compile",
+			Handler:    _WidgetService_Compile_Handler,
+		},
+		{
+			MethodName: "ReadUserSetting",
+			Handler:    _WidgetService_ReadUserSetting_Handler,
+		},
+		{
+			MethodName: "UpdateUserSetting",
+			Handler:    _WidgetService_UpdateUserSetting_Handler,
+		},
+		{
+			MethodName: "ReadCampaign",
+			Handler:    _WidgetService_ReadCampaign_Handler,
+		},
+		{
+			MethodName: "ListCampaigns",
+			Handler:    _WidgetService_ListCampaigns_Handler,
+		},
+		{
+			MethodName: "CreateCampaign",
+			Handler:    _WidgetService_CreateCampaign_Handler,
+		},
+		{
+			MethodName: "UpdateCampaign",
+			Handler:    _WidgetService_UpdateCampaign_Handler,
+		},
+		{
+			MethodName: "DeleteCampaign",
+			Handler:    _WidgetService_DeleteCampaign_Handler,
+		},
+		{
+			MethodName: "SubmitImpression",
+			Handler:    _WidgetService_SubmitImpression_Handler,
+		},
+		{
+			MethodName: "SubmitConversion",
+			Handler:    _WidgetService_SubmitConversion_Handler,
+		},
+		{
+			MethodName: "SubmitUserCampaignStatus",
+			Handler:    _WidgetService_SubmitUserCampaignStatus_Handler,
+		},
+		{
+			MethodName: "ReportCampaign",
+			Handler:    _WidgetService_ReportCampaign_Handler,
+		},
+		{
+			MethodName: "ListConversions",
+			Handler:    _WidgetService_ListConversions_Handler,
+		},
+		{
+			MethodName: "ExportConversions",
+			Handler:    _WidgetService_ExportConversions_Handler,
+		},
+		{
+			MethodName: "SearchLocations",
+			Handler:    _WidgetService_SearchLocations_Handler,
+		},
+		{
+			MethodName: "UploadImage",
+			Handler:    _WidgetService_UploadImage_Handler,
+		},
+		{
+			MethodName: "ListUploadedImage",
+			Handler:    _WidgetService_ListUploadedImage_Handler,
+		},
+		{
+			MethodName: "DeleteUploadedImage",
+			Handler:    _WidgetService_DeleteUploadedImage_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// WebhookServiceClient is the client API for WebhookService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type WebhookServiceClient interface {
+	Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhook, error)
+	Delete(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	List(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhooks, error)
+	Update(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error)
+	Create(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error)
+	Test(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.WebhookTestResult, error)
+}
+
+type webhookServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewWebhookServiceClient(cc grpc.ClientConnInterface) WebhookServiceClient {
+	return &webhookServiceClient{cc}
+}
+
+func (c *webhookServiceClient) Read(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhook, error) {
+	out := new(client.Webhook)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Read", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Delete(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) List(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.Webhooks, error) {
+	out := new(client.Webhooks)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/List", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Update(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error) {
+	out := new(client.Webhook)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Update", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Create(ctx context.Context, in *client.Webhook, opts ...grpc.CallOption) (*client.Webhook, error) {
+	out := new(client.Webhook)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Create", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *webhookServiceClient) Test(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*client.WebhookTestResult, error) {
+	out := new(client.WebhookTestResult)
+	err := c.cc.Invoke(ctx, "/header.WebhookService/Test", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// WebhookServiceServer is the server API for WebhookService service.
+type WebhookServiceServer interface {
+	Read(context.Context, *common.Id) (*client.Webhook, error)
+	Delete(context.Context, *common.Id) (*common.Empty, error)
+	List(context.Context, *common.Id) (*client.Webhooks, error)
+	Update(context.Context, *client.Webhook) (*client.Webhook, error)
+	Create(context.Context, *client.Webhook) (*client.Webhook, error)
+	Test(context.Context, *common.Id) (*client.WebhookTestResult, error)
+}
+
+// UnimplementedWebhookServiceServer can be embedded to have forward compatible implementations.
+type UnimplementedWebhookServiceServer struct {
+}
+
+func (*UnimplementedWebhookServiceServer) Read(context.Context, *common.Id) (*client.Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Delete(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (*UnimplementedWebhookServiceServer) List(context.Context, *common.Id) (*client.Webhooks, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Update(context.Context, *client.Webhook) (*client.Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Create(context.Context, *client.Webhook) (*client.Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedWebhookServiceServer) Test(context.Context, *common.Id) (*client.WebhookTestResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Test not implemented")
+}
+
+func RegisterWebhookServiceServer(s *grpc.Server, srv WebhookServiceServer) {
+	s.RegisterService(&_WebhookService_serviceDesc, srv)
+}
+
+func _WebhookService_Read_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Read(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Read",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Read(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Delete(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/List",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).List(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Webhook)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Update(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Update",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Update(ctx, req.(*client.Webhook))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(client.Webhook)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Create(ctx, req.(*client.Webhook))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WebhookService_Test_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WebhookServiceServer).Test(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.WebhookService/Test",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WebhookServiceServer).Test(ctx, req.(*common.Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _WebhookService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.WebhookService",
+	HandlerType: (*WebhookServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Read",
+			Handler:    _WebhookService_Read_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _WebhookService_Delete_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _WebhookService_List_Handler,
+		},
+		{
+			MethodName: "Update",
+			Handler:    _WebhookService_Update_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _WebhookService_Create_Handler,
+		},
+		{
+			MethodName: "Test",
+			Handler:    _WebhookService_Test_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+// SearchClient is the client API for Search service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type SearchClient interface {
+	SearchUsers(ctx context.Context, in *search.SearchUsersRequest, opts ...grpc.CallOption) (*search.SearchUsersResponse, error)
+	ExportUsers(ctx context.Context, in *search.ExportUsersRequest, opts ...grpc.CallOption) (*common.Empty, error)
+	SearchNotes(ctx context.Context, in *search.SearchNotesRequest, opts ...grpc.CallOption) (*search.SearchNotesResponse, error)
+	SearchConversations(ctx context.Context, in *search.SearchConversationsRequest, opts ...grpc.CallOption) (*search.SearchConversationsResponse, error)
+	SearchTickets(ctx context.Context, in *search.SearchTicketsRequest, opts ...grpc.CallOption) (*search.SearchTicketsResponse, error)
+}
+
+type searchClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewSearchClient(cc grpc.ClientConnInterface) SearchClient {
+	return &searchClient{cc}
+}
+
+func (c *searchClient) SearchUsers(ctx context.Context, in *search.SearchUsersRequest, opts ...grpc.CallOption) (*search.SearchUsersResponse, error) {
+	out := new(search.SearchUsersResponse)
+	err := c.cc.Invoke(ctx, "/header.Search/SearchUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *searchClient) ExportUsers(ctx context.Context, in *search.ExportUsersRequest, opts ...grpc.CallOption) (*common.Empty, error) {
+	out := new(common.Empty)
+	err := c.cc.Invoke(ctx, "/header.Search/ExportUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *searchClient) SearchNotes(ctx context.Context, in *search.SearchNotesRequest, opts ...grpc.CallOption) (*search.SearchNotesResponse, error) {
+	out := new(search.SearchNotesResponse)
+	err := c.cc.Invoke(ctx, "/header.Search/SearchNotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *searchClient) SearchConversations(ctx context.Context, in *search.SearchConversationsRequest, opts ...grpc.CallOption) (*search.SearchConversationsResponse, error) {
+	out := new(search.SearchConversationsResponse)
+	err := c.cc.Invoke(ctx, "/header.Search/SearchConversations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *searchClient) SearchTickets(ctx context.Context, in *search.SearchTicketsRequest, opts ...grpc.CallOption) (*search.SearchTicketsResponse, error) {
+	out := new(search.SearchTicketsResponse)
+	err := c.cc.Invoke(ctx, "/header.Search/SearchTickets", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SearchServer is the server API for Search service.
+type SearchServer interface {
+	SearchUsers(context.Context, *search.SearchUsersRequest) (*search.SearchUsersResponse, error)
+	ExportUsers(context.Context, *search.ExportUsersRequest) (*common.Empty, error)
+	SearchNotes(context.Context, *search.SearchNotesRequest) (*search.SearchNotesResponse, error)
+	SearchConversations(context.Context, *search.SearchConversationsRequest) (*search.SearchConversationsResponse, error)
+	SearchTickets(context.Context, *search.SearchTicketsRequest) (*search.SearchTicketsResponse, error)
+}
+
+// UnimplementedSearchServer can be embedded to have forward compatible implementations.
+type UnimplementedSearchServer struct {
+}
+
+func (*UnimplementedSearchServer) SearchUsers(context.Context, *search.SearchUsersRequest) (*search.SearchUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchUsers not implemented")
+}
+func (*UnimplementedSearchServer) ExportUsers(context.Context, *search.ExportUsersRequest) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportUsers not implemented")
+}
+func (*UnimplementedSearchServer) SearchNotes(context.Context, *search.SearchNotesRequest) (*search.SearchNotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchNotes not implemented")
+}
+func (*UnimplementedSearchServer) SearchConversations(context.Context, *search.SearchConversationsRequest) (*search.SearchConversationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchConversations not implemented")
+}
+func (*UnimplementedSearchServer) SearchTickets(context.Context, *search.SearchTicketsRequest) (*search.SearchTicketsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTickets not implemented")
+}
+
+func RegisterSearchServer(s *grpc.Server, srv SearchServer) {
+	s.RegisterService(&_Search_serviceDesc, srv)
+}
+
+func _Search_SearchUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(search.SearchUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchServer).SearchUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Search/SearchUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchServer).SearchUsers(ctx, req.(*search.SearchUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Search_ExportUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(search.ExportUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchServer).ExportUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Search/ExportUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchServer).ExportUsers(ctx, req.(*search.ExportUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Search_SearchNotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(search.SearchNotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchServer).SearchNotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Search/SearchNotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchServer).SearchNotes(ctx, req.(*search.SearchNotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Search_SearchConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(search.SearchConversationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchServer).SearchConversations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Search/SearchConversations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchServer).SearchConversations(ctx, req.(*search.SearchConversationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Search_SearchTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(search.SearchTicketsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchServer).SearchTickets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Search/SearchTickets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchServer).SearchTickets(ctx, req.(*search.SearchTicketsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Search_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Search",
+	HandlerType: (*SearchServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SearchUsers",
+			Handler:    _Search_SearchUsers_Handler,
+		},
+		{
+			MethodName: "ExportUsers",
+			Handler:    _Search_ExportUsers_Handler,
+		},
+		{
+			MethodName: "SearchNotes",
+			Handler:    _Search_SearchNotes_Handler,
+		},
+		{
+			MethodName: "SearchConversations",
+			Handler:    _Search_SearchConversations_Handler,
+		},
+		{
+			MethodName: "SearchTickets",
+			Handler:    _Search_SearchTickets_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
 }

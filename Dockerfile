@@ -10,7 +10,7 @@ RUN unzip protoc.zip
 
 # install protoc gengo
 RUN GO111MODULE=on go get -u github.com/golang/protobuf/protoc-gen-go@v1.4.0
-RUN protoc-gen-go
+RUN GO111MODULE=on go get google.golang.org/grpc@v1.28.1
 
 ENV PROTOC=/tmp/bin/protoc
 
