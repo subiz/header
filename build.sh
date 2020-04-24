@@ -1,2 +1,1 @@
-bash ./protoc-go.sh $1 $2
-node index.js
+docker run -it --rm -v `pwd`:/src subiz/protobuild:1
