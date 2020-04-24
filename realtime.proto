@@ -11,6 +11,8 @@ message Subscription {
 	common.Context ctx = 1;
 	string initial_token = 2;
 	repeated string events = 3;
+
+	string redirect_url = 5; // notify client about the wrong host
 }
 
 message PollResult {
@@ -38,4 +40,6 @@ message Token {
 
 	int64 last_polled = 8;
 	int64 package_size = 9;
+
+	string redirect_url = 10; // notify client about the wrong host
 }
