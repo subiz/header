@@ -21,7 +21,6 @@ import "notibox.proto";
 import "noti5.proto";
 import "widget.proto";
 import "account.proto";
-import "avatar.proto";
 import "api.proto";
 import "search.proto";
 
@@ -479,12 +478,6 @@ service WidgetService {
 	rpc UploadImage(widget.UploadedImage) returns (widget.UploadedImage);
 	rpc ListUploadedImage(common.Id) returns (widget.UploadedImages);
 	rpc DeleteUploadedImage(widget.UploadedImage) returns (common.Empty);
-}
-
-// avatar services
-service ServiceAvatarManager {
-	rpc GetAvatar(common.Id) returns (avatar.Avatar);
-	rpc UpsertAvatar(avatar.Avatar) returns (common.Empty);
 }
 
 // webhook services
