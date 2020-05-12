@@ -248,6 +248,9 @@ message Presence {
 	string user_id = 4;
 	int64 pinged = 5;
 	int64 pinged_minute = 6;
+
+	string ip = 7;
+	string ua = 8;
 }
 
 message LastView {
