@@ -37,14 +37,13 @@ message Events {
 }
 
 message Event {
-	reserved 10, 12, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 42, 13, 15;
 	common.Context ctx = 1;
-	string user_id = 2;
+	string user_id = 2; // TODO: remove
 	string id = 3;
-	string account_id = 4;
+	string account_id = 4; // TODO: remove
 	int64 created = 8;
 	string type = 9; // eventtype
-	repeated string topics = 11;
+	repeated string topics = 11; // TODO: remove
 	common.By by = 50;
 	message Data {
 		account.Account account = 1;
@@ -63,7 +62,6 @@ message Event {
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
 		payment.Limit limit = 19;
-		user.AttributeData user_attribute = 20;
 		user.Identification alias = 22;
 		user.Note note = 23;
 		conversation.Ticket ticket = 24;
@@ -73,97 +71,106 @@ message Event {
 		notibox.Notibox notibox = 32;
 		noti5.Setting notification_setting = 34;
 		user.Identification identification = 35;
+		conversation.Rule rule = 36;
+		user.AttributeDefinition user_attribute = 37;
+		conversation.Tag tag = 38;
 	}
 	Data data = 20;
 }
 
-enum AccountType {
+enum RealtimeType {
 	a = 0;
-	account_deleted = 60;
-	account_updated = 61;
-	group_created = 62;
-	group_deleted = 63;
-	group_updated = 64;
-	group_joined = 65;
-	group_left = 66;
-	invitation_accepted = 68;
-	agent_deleted = 69;
-	agent_updated = 70;
-	agent_permission_updated = 71;
-	limit_updated = 72;
-}
+	account_deleted = 10;
+	account_updated = 11;
 
-enum UserType {
-	u = 0;
-	my_user_upserted = 46;
-	user_info_updated = 48;
-	alias_created = 49;
-	alias_deleted = 50;
-	user_added_to_my_list = 51;
-	user_created = 52;
-	note_created = 53;
-}
+	group_deleted = 12;
+	group_updated = 13;
 
-enum EventType {
-	e = 0;
-	presence_updated = 38;
-	content_viewed = 39;
-	content_searched = 40;
-	content_addedtocart = 41;
-	content_checkedout = 42;
-	content_purchased = 43;
-	topic_read = 44;
-	subscribed_topic_updated = 45;
-	user_topic_updated = 50;
-	user_attribute_created = 51;
-	user_attribute_updated = 52;
-	user_attribute_deleted = 55;
-	automation_out_of_credit = 70;
-	automation_fired = 71;
+	invitation_accepted = 14;
+	agent_deleted = 15;
+	agent_updated = 16;
 
-	notibox_notification_upserted = 73;
-	notibox_upserted = 74;
+	agent_permission_updated = 17;
+	limit_updated = 18;
+	my_user_upserted = 19;
+	user_info_updated = 20;
+	user_added_to_my_list = 21;
+	user_created = 22;
+	note_created = 23;
+	presence_updated = 24;
+	content_viewed = 25;
+	content_searched = 26;
+	content_addedtocart = 27;
+	content_checkedout = 28;
+	content_purchased = 29;
+	topic_read = 30;
+	subscribed_topic_updated = 31;
+	user_topic_updated = 32;
+	user_attribute_updated = 33;
+	user_attribute_deleted = 34;
 
-	notification_setting_updated = 75;
-}
+	automation_out_of_credit = 35;
+	automation_fired = 36;
 
-enum ConvoType {
-	c = 0;
-	conversation_updated = 9;
-	message_sent = 10; // event.data.message
-	conversation_state_updated = 11; // event.data.conversation
+	notibox_notification_upserted = 37;
+	notibox_upserted = 38;
 
-	message_pong = 16; // event.data.message.pongs.0
+	notification_setting_updated = 39;
 
-	conversation_joined = 2; // event.data.conversation.memebers.0
-	conversation_invited = 3;
-	conversation_left = 4;
-	conversation_tagged = 6;
-	conversation_untagged = 7;
+	conversation_updated = 40;
+	message_sent = 41; // event.data.message
+	conversation_state_updated = 42; // event.data.conversation
+
+	message_pong = 43; // event.data.message.pongs.0
+
+	conversation_joined = 44; // event.data.conversation.memebers.0
+	conversation_invited = 45;
+	conversation_left =46 ;
+	conversation_tagged = 47;
+	conversation_untagged = 48;
 	//conversation_waiting = 8;
-	channel_deintegrated = 20;
-	channel_integrated = 21;
-	message_seen = 30; // event.data.message.computed.seen
-	message_ack = 31; //  event.data.message.computed.ack
-	message_received = 32;  //  event.data.message.computed.received
-	conversation_typing = 33;
-	conversation_postbacked = 34;
-	conversation_unassigned = 35;
-	conversation_assigned = 36;
-	message_updated = 38; // event.data.message.revisions.0
+	channel_deintegrated = 49;
+	channel_integrated = 50;
 
-	conversation_rating_requested = 40; // event.data.conversation
-	conversation_rated = 41; // event.data.conversation
+	message_seen = 51; // event.data.message.computed.seen
+	message_ack = 52; //  event.data.message.computed.ack
+	message_received = 53;  //  event.data.message.computed.received
+	conversation_typing = 54;
+	conversation_postbacked = 55;
+	conversation_unassigned = 56;
+	conversation_assigned = 57;
+	message_updated = 58; // event.data.message.revisions.0
 
-	conversation_pending = 81;
+	conversation_rating_requested = 60; // event.data.conversation
+	conversation_rated = 61; // event.data.conversation
 
-	ticket_created = 82;
-	ticket_updated = 83;
-	ticket_deleted = 84;
+	conversation_pending = 62;
 
-	my_conversation_mute_updated = 85; // conversation
-	my_conversation_read_updated = 86; // conversation
-	my_conversation_unsubscribed = 87; // conversation
+	ticket_created = 63;
+	ticket_updated = 64;
+	ticket_deleted = 65;
+
+	my_conversation_mute_updated = 66; // conversation
+	my_conversation_read_updated = 67; // conversation
+	my_conversation_unsubscribed = 68; // conversation
+
+	tag_updated = 70;
+	tag_deleted = 71;
+
+	message_template_updated = 72;
+	message_template_deleted = 73;
+
+	zalo_page_updated = 74;
+	zalo_page_deleted = 75;
+
+	messenger_page_updated = 76;
+	messenger_page_deleted = 77;
+
+	facebook_page_updated = 78;
+	facebook_page_deleted = 79;
+
+	incomming_email_updated = 80;
+  incomming_email_deleted = 81;
 }
 
 message Subscription { // raweventcreatedpayload
