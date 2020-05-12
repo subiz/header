@@ -53,7 +53,7 @@ message Event {
 		conversation.Postback postback = 5;
 		content.Content content = 6;
 		Topic topic = 7;
-		user.Presence presence = 8;
+		account.Presence presence = 8;
 		user.User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
 		user.MyUser my_user = 12;

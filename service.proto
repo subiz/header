@@ -147,8 +147,8 @@ service UserSyncMgr {
 }
 
 service VisitorMgr {
-	rpc ReadPresence (common.Id) returns (user.Presence);
-	rpc UpdatePresence (common.Id) returns (user.Presence);
+	rpc ReadPresence (common.Id) returns (account.Presence);
+	rpc UpdatePresence (common.Id) returns (account.Presence);
 	rpc ReadPreview (common.Id) returns (user.LastView);
 	rpc ListTopVisitors (common.Id) returns (user.Visitors);
 }
@@ -208,8 +208,8 @@ service ConversationReporter {
 }
 
 service AgentPresenceMgr {
-	rpc ReadPresence (common.Id) returns (user.Presence);
-	rpc UpdatePresence (common.Id) returns (user.Presence);
+	rpc ReadPresence (common.Id) returns (account.Presence);
+	rpc UpdatePresence (common.Id) returns (account.Presence);
 }
 
 service RuleMgr {

@@ -236,23 +236,6 @@ message Visitors {
 	repeated Visitor visitors = 2;
 }
 
-message Presences {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated Presence presences = 4;
-}
-
-message Presence {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string user_id = 4;
-	int64 pinged = 5;
-	int64 pinged_minute = 6;
-
-	string ip = 7;
-	string ua = 8;
-}
-
 message LastView {
 	string account_id = 3;
 	string user_id = 4;
