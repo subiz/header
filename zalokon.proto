@@ -19,12 +19,13 @@ message OfficialAccount {
 message ZaloUser {
 	int32 user_gender = 2;
 	string user_id = 3;
-	int64 user_id_by_app = 4;
+	//int64 user_id_by_app = 4;
 	string avatar = 5;
 	string display_name = 6;
 	int32 birth_date = 7;
 	Info shared_info = 8;
 	map<int32, string> avatars = 9;
+	string user_id_by_app = 10;
 }
 
 message ZaloUserResponse {
