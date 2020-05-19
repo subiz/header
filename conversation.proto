@@ -64,6 +64,7 @@ message RouteResult {
 	repeated string agent_ids = 4;
 	optional string group_id = 5;
 	optional string state = 6;
+	optional int64 assigned = 7; // ms
 }
 
 message MemberSeen {
