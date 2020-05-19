@@ -141,6 +141,8 @@ message Conversation {
 	optional string agent_id = 40;
 	optional bool mute = 41; // true, false
 	optional bool read = 42; // true, false
+
+	optional int64 updated = 43;
 }
 
 message Rating {
