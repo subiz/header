@@ -6,6 +6,11 @@ option go_package = "github.com/subiz/header/user";
 
 import "common.proto";
 
+message Hello {
+	string id = 1;
+	string say = 2;
+}
+
 message TotalConvoUpdateRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
