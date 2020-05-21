@@ -483,7 +483,7 @@ message UserFact {
 	Page viewing = 6;
 	Source source = 7;
 	Location location = 8;
-	int64 viewcount = 9;
+	int64 view_count = 9;
 	int64 duration = 10;
 	UserAction last_action = 11;
 }

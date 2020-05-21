@@ -106,7 +106,6 @@ service UserMgr {
 }
 
 service LiveMgr {
-	rpc Connect(user.Params) returns (common.Empty);
 	rpc Session(user.UserFact) returns (common.Empty);
 	rpc Log(user.UserAction) returns (common.Empty);
 	rpc GetReport(user.Params) returns (user.UserReport);
