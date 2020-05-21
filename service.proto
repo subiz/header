@@ -105,6 +105,15 @@ service UserMgr {
 	rpc MatchUsers(common.Ids) returns (user.Users);
 }
 
+service LiveMgr {
+	rpc Connect(user.Params) returns (common.Empty);
+	rpc Session(user.UserFact) returns (common.Empty);
+	rpc Log(user.UserAction) returns (common.Empty);
+	rpc GetReport(user.Params) returns (user.UserReport);
+	rpc GetUsers(user.UserFactParams) returns (user.UserFactData);
+	rpc GetRecentActions(user.UserActionParams) returns (user.UserActionData);
+}
+
 service UserSyncMgr {
 	// sync notify
 	rpc UpdateNoti5SubscribeStatus(noti5.SubscribeStatus) returns (common.Empty);

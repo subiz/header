@@ -74,6 +74,11 @@ message Event {
 		conversation.Rule rule = 36;
 		user.AttributeDefinition user_attribute = 37;
 		conversation.Tag tag = 38;
+		repeated user.UserMetric total_usr = 39;
+		repeated user.SourceMetric top_src = 40;
+		repeated user.LocationMetric top_loc = 41;
+		repeated user.PageMetric top_pag = 42;
+		repeated user.UserAction user_actions = 43;
 	}
 	Data data = 20;
 }
@@ -170,7 +175,15 @@ enum RealtimeType {
 	facebook_page_deleted = 79;
 
 	incomming_email_updated = 80;
-  incomming_email_deleted = 81;
+	incomming_email_deleted = 81;
+
+	live_act_user_num = 82;
+	live_top_source = 83;
+	live_top_location = 84;
+	live_top_page = 85;
+
+	user_select_product = 86;
+	user_like_content = 87;
 }
 
 message Subscription { // raweventcreatedpayload
