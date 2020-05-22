@@ -6,11 +6,6 @@ option go_package = "github.com/subiz/header/user";
 
 import "common.proto";
 
-message Hello {
-	string id = 1;
-	string say = 2;
-}
-
 message TotalConvoUpdateRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -58,7 +53,7 @@ message User {
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
-	repeated Trace traces = 11;
+	repeated Trace traces = 11; // TODO: remove
 
 	bool is_ban = 14;
 
@@ -124,10 +119,12 @@ message CreateRequest {
 	string answer = 4;
 }
 
+// TODO: remove
 message Traces {
 	repeated Trace traces = 3;
 }
 
+// TODO: replace this with user session
 message Trace {
 	string event_id = 3;
 	string ip = 4;
