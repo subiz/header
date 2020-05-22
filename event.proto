@@ -75,11 +75,7 @@ message Event {
 		conversation.Rule rule = 36;
 		user.AttributeDefinition user_attribute = 37;
 		conversation.Tag tag = 38;
-		user.UserMetric total_usr = 39;
-		repeated user.SourceMetric top_src = 40;
-		repeated user.LocationMetric top_loc = 41;
-		repeated user.PageMetric top_pag = 42;
-		repeated user.UserAction user_actions = 43;
+		user.UserMetric total_user = 39;
 	}
 	Data data = 20;
 }

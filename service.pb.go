@@ -258,7 +258,7 @@ var file_service_proto_rawDesc = []byte{
 	0x6e, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x0b, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65,
 	0x72, 0x73, 0x32, 0x80, 0x02, 0x0a, 0x07, 0x4c, 0x69, 0x76, 0x65, 0x4d, 0x67, 0x72, 0x12, 0x28,
 	0x0a, 0x07, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x2e, 0x75, 0x73, 0x65, 0x72,
-	0x2e, 0x55, 0x73, 0x65, 0x72, 0x46, 0x61, 0x63, 0x74, 0x1a, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
+	0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x1a, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
 	0x6f, 0x6e, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x26, 0x0a, 0x03, 0x4c, 0x6f, 0x67, 0x12,
 	0x10, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x41, 0x63, 0x74, 0x69, 0x6f,
 	0x6e, 0x1a, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79,
@@ -266,8 +266,8 @@ var file_service_proto_rawDesc = []byte{
 	0x75, 0x73, 0x65, 0x72, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x10, 0x2e, 0x75, 0x73,
 	0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x12, 0x34, 0x0a,
 	0x08, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x14, 0x2e, 0x75, 0x73, 0x65, 0x72,
-	0x2e, 0x55, 0x73, 0x65, 0x72, 0x46, 0x61, 0x63, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a,
-	0x12, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x46, 0x61, 0x63, 0x74, 0x44,
+	0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a,
+	0x12, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x44,
 	0x61, 0x74, 0x61, 0x12, 0x40, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x52, 0x65, 0x63, 0x65, 0x6e, 0x74,
 	0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x16, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55,
 	0x73, 0x65, 0x72, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a,
@@ -1213,10 +1213,10 @@ var file_service_proto_goTypes = []interface{}{
 	(*user.UserExportRequest)(nil),                       // 27: user.UserExportRequest
 	(*user.SearchNoteRequest)(nil),                       // 28: user.SearchNoteRequest
 	(*common.Ids)(nil),                                   // 29: common.Ids
-	(*user.UserFact)(nil),                                // 30: user.UserFact
+	(*user.UserInfo)(nil),                                // 30: user.UserInfo
 	(*user.UserAction)(nil),                              // 31: user.UserAction
 	(*user.Params)(nil),                                  // 32: user.Params
-	(*user.UserFactParams)(nil),                          // 33: user.UserFactParams
+	(*user.UserInfoParams)(nil),                          // 33: user.UserInfoParams
 	(*user.UserActionParams)(nil),                        // 34: user.UserActionParams
 	(*noti5.SubscribeStatus)(nil),                        // 35: noti5.SubscribeStatus
 	(*payment.Limit)(nil),                                // 36: payment.Limit
@@ -1335,7 +1335,7 @@ var file_service_proto_goTypes = []interface{}{
 	(*user.SearchNoteResponse)(nil),                      // 149: user.SearchNoteResponse
 	(*user.Users)(nil),                                   // 150: user.Users
 	(*user.UserReport)(nil),                              // 151: user.UserReport
-	(*user.UserFactData)(nil),                            // 152: user.UserFactData
+	(*user.UserInfoData)(nil),                            // 152: user.UserInfoData
 	(*user.UserActionData)(nil),                          // 153: user.UserActionData
 	(*account.Presence)(nil),                             // 154: account.Presence
 	(*user.LastView)(nil),                                // 155: user.LastView
@@ -1453,10 +1453,10 @@ var file_service_proto_depIdxs = []int32{
 	27,  // 52: header.UserMgr.ExportUsers:input_type -> user.UserExportRequest
 	28,  // 53: header.UserMgr.SearchNote:input_type -> user.SearchNoteRequest
 	29,  // 54: header.UserMgr.MatchUsers:input_type -> common.Ids
-	30,  // 55: header.LiveMgr.Session:input_type -> user.UserFact
+	30,  // 55: header.LiveMgr.Session:input_type -> user.UserInfo
 	31,  // 56: header.LiveMgr.Log:input_type -> user.UserAction
 	32,  // 57: header.LiveMgr.GetReport:input_type -> user.Params
-	33,  // 58: header.LiveMgr.GetUsers:input_type -> user.UserFactParams
+	33,  // 58: header.LiveMgr.GetUsers:input_type -> user.UserInfoParams
 	34,  // 59: header.LiveMgr.GetRecentActions:input_type -> user.UserActionParams
 	35,  // 60: header.UserSyncMgr.UpdateNoti5SubscribeStatus:input_type -> noti5.SubscribeStatus
 	36,  // 61: header.UserSyncMgr.UpdateLimit:input_type -> payment.Limit
@@ -1755,7 +1755,7 @@ var file_service_proto_depIdxs = []int32{
 	14,  // 354: header.LiveMgr.Session:output_type -> common.Empty
 	14,  // 355: header.LiveMgr.Log:output_type -> common.Empty
 	151, // 356: header.LiveMgr.GetReport:output_type -> user.UserReport
-	152, // 357: header.LiveMgr.GetUsers:output_type -> user.UserFactData
+	152, // 357: header.LiveMgr.GetUsers:output_type -> user.UserInfoData
 	153, // 358: header.LiveMgr.GetRecentActions:output_type -> user.UserActionData
 	14,  // 359: header.UserSyncMgr.UpdateNoti5SubscribeStatus:output_type -> common.Empty
 	14,  // 360: header.UserSyncMgr.UpdateLimit:output_type -> common.Empty
@@ -4167,10 +4167,10 @@ var _UserMgr_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type LiveMgrClient interface {
-	Session(ctx context.Context, in *user.UserFact, opts ...grpc.CallOption) (*common.Empty, error)
+	Session(ctx context.Context, in *user.UserInfo, opts ...grpc.CallOption) (*common.Empty, error)
 	Log(ctx context.Context, in *user.UserAction, opts ...grpc.CallOption) (*common.Empty, error)
 	GetReport(ctx context.Context, in *user.Params, opts ...grpc.CallOption) (*user.UserReport, error)
-	GetUsers(ctx context.Context, in *user.UserFactParams, opts ...grpc.CallOption) (*user.UserFactData, error)
+	GetUsers(ctx context.Context, in *user.UserInfoParams, opts ...grpc.CallOption) (*user.UserInfoData, error)
 	GetRecentActions(ctx context.Context, in *user.UserActionParams, opts ...grpc.CallOption) (*user.UserActionData, error)
 }
 
@@ -4182,7 +4182,7 @@ func NewLiveMgrClient(cc grpc.ClientConnInterface) LiveMgrClient {
 	return &liveMgrClient{cc}
 }
 
-func (c *liveMgrClient) Session(ctx context.Context, in *user.UserFact, opts ...grpc.CallOption) (*common.Empty, error) {
+func (c *liveMgrClient) Session(ctx context.Context, in *user.UserInfo, opts ...grpc.CallOption) (*common.Empty, error) {
 	out := new(common.Empty)
 	err := c.cc.Invoke(ctx, "/header.LiveMgr/Session", in, out, opts...)
 	if err != nil {
@@ -4209,8 +4209,8 @@ func (c *liveMgrClient) GetReport(ctx context.Context, in *user.Params, opts ...
 	return out, nil
 }
 
-func (c *liveMgrClient) GetUsers(ctx context.Context, in *user.UserFactParams, opts ...grpc.CallOption) (*user.UserFactData, error) {
-	out := new(user.UserFactData)
+func (c *liveMgrClient) GetUsers(ctx context.Context, in *user.UserInfoParams, opts ...grpc.CallOption) (*user.UserInfoData, error) {
+	out := new(user.UserInfoData)
 	err := c.cc.Invoke(ctx, "/header.LiveMgr/GetUsers", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -4229,10 +4229,10 @@ func (c *liveMgrClient) GetRecentActions(ctx context.Context, in *user.UserActio
 
 // LiveMgrServer is the server API for LiveMgr service.
 type LiveMgrServer interface {
-	Session(context.Context, *user.UserFact) (*common.Empty, error)
+	Session(context.Context, *user.UserInfo) (*common.Empty, error)
 	Log(context.Context, *user.UserAction) (*common.Empty, error)
 	GetReport(context.Context, *user.Params) (*user.UserReport, error)
-	GetUsers(context.Context, *user.UserFactParams) (*user.UserFactData, error)
+	GetUsers(context.Context, *user.UserInfoParams) (*user.UserInfoData, error)
 	GetRecentActions(context.Context, *user.UserActionParams) (*user.UserActionData, error)
 }
 
@@ -4240,7 +4240,7 @@ type LiveMgrServer interface {
 type UnimplementedLiveMgrServer struct {
 }
 
-func (*UnimplementedLiveMgrServer) Session(context.Context, *user.UserFact) (*common.Empty, error) {
+func (*UnimplementedLiveMgrServer) Session(context.Context, *user.UserInfo) (*common.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Session not implemented")
 }
 func (*UnimplementedLiveMgrServer) Log(context.Context, *user.UserAction) (*common.Empty, error) {
@@ -4249,7 +4249,7 @@ func (*UnimplementedLiveMgrServer) Log(context.Context, *user.UserAction) (*comm
 func (*UnimplementedLiveMgrServer) GetReport(context.Context, *user.Params) (*user.UserReport, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReport not implemented")
 }
-func (*UnimplementedLiveMgrServer) GetUsers(context.Context, *user.UserFactParams) (*user.UserFactData, error) {
+func (*UnimplementedLiveMgrServer) GetUsers(context.Context, *user.UserInfoParams) (*user.UserInfoData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
 }
 func (*UnimplementedLiveMgrServer) GetRecentActions(context.Context, *user.UserActionParams) (*user.UserActionData, error) {
@@ -4261,7 +4261,7 @@ func RegisterLiveMgrServer(s *grpc.Server, srv LiveMgrServer) {
 }
 
 func _LiveMgr_Session_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(user.UserFact)
+	in := new(user.UserInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -4273,7 +4273,7 @@ func _LiveMgr_Session_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/header.LiveMgr/Session",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LiveMgrServer).Session(ctx, req.(*user.UserFact))
+		return srv.(LiveMgrServer).Session(ctx, req.(*user.UserInfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4315,7 +4315,7 @@ func _LiveMgr_GetReport_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _LiveMgr_GetUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(user.UserFactParams)
+	in := new(user.UserInfoParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -4327,7 +4327,7 @@ func _LiveMgr_GetUsers_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/header.LiveMgr/GetUsers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LiveMgrServer).GetUsers(ctx, req.(*user.UserFactParams))
+		return srv.(LiveMgrServer).GetUsers(ctx, req.(*user.UserInfoParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }

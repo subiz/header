@@ -419,115 +419,113 @@ message GetNoteRequest {
 
 // TODO move params to common
 message IntParams {
-	int64 eq = 1;
-	int64 neq = 2;
-	int64 gt = 3;
-	int64 gte = 4;
-	int64 lt = 5;
-	int64 lte = 6;
+	int64 eq = 2;
+	int64 neq = 3;
+	int64 gt = 4;
+	int64 gte = 5;
+	int64 lt = 6;
+	int64 lte = 7;
 }
 
 message IdParams {
-	string id = 1;
-	repeated string ids = 2;
+	string id = 2;
+	repeated string ids = 3;
 }
 
 message Params {
-	repeated string args = 1;
+	repeated string args = 2;
 }
 
 message Source {
-	string id = 1;
-	string name = 2;
+	string id = 2;
+	string name = 3;
 }
 
 message Location {
-	string id = 1;
-	string province = 2;
+	string id = 2;
+	string province = 3;
 }
 
 message Page {
-	string id = 1;
-	string name = 2;
-	string url = 3;
+	string id = 2;
+	string name = 3;
+	string url = 4;
 }
 
 message UserAction {
-	string id = 1;
-	string user_id = 2;
-	int64 created = 3;
-	string type = 4;
-	Source source = 5;
-	Location location = 6;
-	Page page = 7;
-	string content = 8;
+	string id = 2;
+	string user_id = 3;
+	int64 created = 4;
+	string type = 5;
+	Source source = 6; // from user session
+	Location location = 7; // from user session
+	Page page = 8; // from event
+	string content = 9;
 }
 
 message UserActionParams {
-	string type = 1;
+	string type = 2;
 }
 
 message UserActionData {
-	repeated UserAction data = 1;
+	repeated UserAction data = 2;
 }
 
-message UserFact {
-	string id = 1;
-	int64 updated = 2;
-	string name = 3;
-	string email = 4;
-	string phone = 5;
-	Page viewing = 6;
-	Source source = 7;
-	Location location = 8;
-	int64 view_count = 9;
-	int64 duration = 10;
-	UserAction last_action = 11;
+message UserInfo {
+	string id = 2;
+	int64 updated = 3;
+	User user = 4;
+	Page viewing = 5;
+	Source source = 6;
+	Location location = 7;
+	int64 view_count = 8;
+	int64 duration = 9;
+	int64 latest_event_created = 10;
 }
 
-message UserFactParams {
-	int32 lh = 1;
-	int32 per_page = 2;
-	int32 page = 3;
-	string order_by = 4;
-	IdParams src_id = 5;
-	IdParams loc_id = 6;
-	IdParams pag_id = 7;
-	IntParams view_count = 8;
-	IntParams duration = 9;
+message UserInfoParams {
+	int32 list_hash = 2;
+	int32 limit = 3;
+	int32 offset = 4;
+	string order_by = 5;
+	IdParams source_id = 6;
+	IdParams location_id = 7;
+	IdParams page_id = 8;
+	IntParams view_count = 9;
+	IntParams duration = 10;
 }
 
-message UserFactData {
-	repeated UserFact data = 1;
+message UserInfoData {
+	repeated UserInfo data = 2;
 }
 
 message UserMetric {
-	string account_id = 1;
-	int64 act_user_num = 2;
+	string account_id = 2;
+	int64 active_user_num = 3;
 }
 
 message SourceMetric {
-	string account_id = 1;
-	Source source = 2;
-	int64 act_user_num = 3;
+	string account_id = 2;
+	Source source = 3;
+	int64 active_user_num = 4;
 }
 
 message LocationMetric {
-	string account_id = 1;
-	Location location = 2;
-	int64 act_user_num = 3;
+	string account_id = 2;
+	Location location = 3;
+	int64 active_user_num = 4;
 }
 
 message PageMetric {
-	string account_id = 1;
-	Page page = 2;
-	int64 act_user_num = 3;
+	string account_id = 2;
+	Page page = 3;
+	int64 active_user_num = 4;
 }
 
 message UserReport {
-	string account_id = 1;
-	UserMetric total_usr = 2;
-	repeated SourceMetric top_src = 3;
-	repeated LocationMetric top_loc = 4;
-	repeated PageMetric top_pag = 5;
+	string account_id = 2;
+	UserMetric total_user = 3;
+	repeated SourceMetric top_source = 4;
+	repeated LocationMetric top_location = 5;
+	repeated PageMetric top_page = 6;
 }
