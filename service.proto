@@ -106,11 +106,9 @@ service UserMgr {
 }
 
 service LiveMgr {
-	rpc Session(user.UserInfo) returns (common.Empty);
-	rpc Log(user.UserAction) returns (common.Empty);
-	rpc GetReport(user.Params) returns (user.UserReport);
+	rpc GetReport(user.UserReportParams) returns (user.UserReport);
 	rpc GetUsers(user.UserInfoParams) returns (user.UserInfoData);
-	rpc GetRecentActions(user.UserActionParams) returns (user.UserActionData);
+	rpc GetRecentEvents(event.EventParams) returns (event.Events);
 }
 
 service UserSyncMgr {

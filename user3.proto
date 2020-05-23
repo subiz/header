@@ -529,3 +529,16 @@ message UserReport {
 	repeated LocationMetric top_location = 5;
 	repeated PageMetric top_page = 6;
 }
+
+message UserReportParams {
+	enum MetricType {
+		ALL = 0;
+		TOTAL_USER = 1;
+		TOP_SOURCE = 2;
+		TOP_LOCATION = 3;
+		TOP_PAGE = 4;
+	}
+
+	MetricType metric_type = 2;
+	repeated MetricType metric_types = 3;
+}

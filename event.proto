@@ -80,6 +80,10 @@ message Event {
 	Data data = 20;
 }
 
+message EventParams {
+	string type = 2;
+}
+
 enum RealtimeType {
 	a = 0;
 	account_deleted = 10;

@@ -437,6 +437,61 @@ func (NoteLink_Type) EnumDescriptor() ([]byte, []int) {
 	return file_user3_proto_rawDescGZIP(), []int{34, 0}
 }
 
+type UserReportParams_MetricType int32
+
+const (
+	UserReportParams_ALL          UserReportParams_MetricType = 0
+	UserReportParams_TOTAL_USER   UserReportParams_MetricType = 1
+	UserReportParams_TOP_SOURCE   UserReportParams_MetricType = 2
+	UserReportParams_TOP_LOCATION UserReportParams_MetricType = 3
+	UserReportParams_TOP_PAGE     UserReportParams_MetricType = 4
+)
+
+// Enum value maps for UserReportParams_MetricType.
+var (
+	UserReportParams_MetricType_name = map[int32]string{
+		0: "ALL",
+		1: "TOTAL_USER",
+		2: "TOP_SOURCE",
+		3: "TOP_LOCATION",
+		4: "TOP_PAGE",
+	}
+	UserReportParams_MetricType_value = map[string]int32{
+		"ALL":          0,
+		"TOTAL_USER":   1,
+		"TOP_SOURCE":   2,
+		"TOP_LOCATION": 3,
+		"TOP_PAGE":     4,
+	}
+)
+
+func (x UserReportParams_MetricType) Enum() *UserReportParams_MetricType {
+	p := new(UserReportParams_MetricType)
+	*p = x
+	return p
+}
+
+func (x UserReportParams_MetricType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (UserReportParams_MetricType) Descriptor() protoreflect.EnumDescriptor {
+	return file_user3_proto_enumTypes[8].Descriptor()
+}
+
+func (UserReportParams_MetricType) Type() protoreflect.EnumType {
+	return &file_user3_proto_enumTypes[8]
+}
+
+func (x UserReportParams_MetricType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use UserReportParams_MetricType.Descriptor instead.
+func (UserReportParams_MetricType) EnumDescriptor() ([]byte, []int) {
+	return file_user3_proto_rawDescGZIP(), []int{56, 0}
+}
+
 type TotalConvoUpdateRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4809,6 +4864,61 @@ func (x *UserReport) GetTopPage() []*PageMetric {
 	return nil
 }
 
+type UserReportParams struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	MetricType  UserReportParams_MetricType   `protobuf:"varint,2,opt,name=metric_type,json=metricType,proto3,enum=user.UserReportParams_MetricType" json:"metric_type,omitempty"`
+	MetricTypes []UserReportParams_MetricType `protobuf:"varint,3,rep,packed,name=metric_types,json=metricTypes,proto3,enum=user.UserReportParams_MetricType" json:"metric_types,omitempty"`
+}
+
+func (x *UserReportParams) Reset() {
+	*x = UserReportParams{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user3_proto_msgTypes[56]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserReportParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserReportParams) ProtoMessage() {}
+
+func (x *UserReportParams) ProtoReflect() protoreflect.Message {
+	mi := &file_user3_proto_msgTypes[56]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserReportParams.ProtoReflect.Descriptor instead.
+func (*UserReportParams) Descriptor() ([]byte, []int) {
+	return file_user3_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *UserReportParams) GetMetricType() UserReportParams_MetricType {
+	if x != nil {
+		return x.MetricType
+	}
+	return UserReportParams_ALL
+}
+
+func (x *UserReportParams) GetMetricTypes() []UserReportParams_MetricType {
+	if x != nil {
+		return x.MetricTypes
+	}
+	return nil
+}
+
 var File_user3_proto protoreflect.FileDescriptor
 
 var file_user3_proto_rawDesc = []byte{
@@ -5401,17 +5511,33 @@ var file_user3_proto_rawDesc = []byte{
 	0x70, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x2b, 0x0a, 0x08, 0x74, 0x6f, 0x70,
 	0x5f, 0x70, 0x61, 0x67, 0x65, 0x18, 0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x75, 0x73,
 	0x65, 0x72, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x52, 0x07, 0x74,
-	0x6f, 0x70, 0x50, 0x61, 0x67, 0x65, 0x2a, 0x4a, 0x0a, 0x0d, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62,
-	0x75, 0x74, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x08, 0x0a, 0x04, 0x74, 0x65, 0x78, 0x74, 0x10,
-	0x00, 0x12, 0x0a, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x10, 0x01, 0x12, 0x0b, 0x0a,
-	0x07, 0x62, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x64, 0x61,
-	0x74, 0x65, 0x74, 0x69, 0x6d, 0x65, 0x10, 0x03, 0x12, 0x08, 0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74,
-	0x10, 0x04, 0x2a, 0x34, 0x0a, 0x0d, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x4b,
-	0x69, 0x6e, 0x64, 0x12, 0x0a, 0x0a, 0x06, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x10, 0x00, 0x12,
-	0x0b, 0x0a, 0x07, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06,
-	0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x10, 0x02, 0x42, 0x1e, 0x5a, 0x1c, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x70, 0x50, 0x61, 0x67, 0x65, 0x22, 0xf3, 0x01, 0x0a, 0x10, 0x55, 0x73, 0x65, 0x72, 0x52,
+	0x65, 0x70, 0x6f, 0x72, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x42, 0x0a, 0x0b, 0x6d,
+	0x65, 0x74, 0x72, 0x69, 0x63, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x21, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f,
+	0x72, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x54,
+	0x79, 0x70, 0x65, 0x52, 0x0a, 0x6d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x54, 0x79, 0x70, 0x65, 0x12,
+	0x44, 0x0a, 0x0c, 0x6d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x18,
+	0x03, 0x20, 0x03, 0x28, 0x0e, 0x32, 0x21, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e, 0x4d, 0x65,
+	0x74, 0x72, 0x69, 0x63, 0x54, 0x79, 0x70, 0x65, 0x52, 0x0b, 0x6d, 0x65, 0x74, 0x72, 0x69, 0x63,
+	0x54, 0x79, 0x70, 0x65, 0x73, 0x22, 0x55, 0x0a, 0x0a, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x54,
+	0x79, 0x70, 0x65, 0x12, 0x07, 0x0a, 0x03, 0x41, 0x4c, 0x4c, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a,
+	0x54, 0x4f, 0x54, 0x41, 0x4c, 0x5f, 0x55, 0x53, 0x45, 0x52, 0x10, 0x01, 0x12, 0x0e, 0x0a, 0x0a,
+	0x54, 0x4f, 0x50, 0x5f, 0x53, 0x4f, 0x55, 0x52, 0x43, 0x45, 0x10, 0x02, 0x12, 0x10, 0x0a, 0x0c,
+	0x54, 0x4f, 0x50, 0x5f, 0x4c, 0x4f, 0x43, 0x41, 0x54, 0x49, 0x4f, 0x4e, 0x10, 0x03, 0x12, 0x0c,
+	0x0a, 0x08, 0x54, 0x4f, 0x50, 0x5f, 0x50, 0x41, 0x47, 0x45, 0x10, 0x04, 0x2a, 0x4a, 0x0a, 0x0d,
+	0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x08, 0x0a,
+	0x04, 0x74, 0x65, 0x78, 0x74, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65,
+	0x72, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x62, 0x6f, 0x6f, 0x6c, 0x65, 0x61, 0x6e, 0x10, 0x02,
+	0x12, 0x0c, 0x0a, 0x08, 0x64, 0x61, 0x74, 0x65, 0x74, 0x69, 0x6d, 0x65, 0x10, 0x03, 0x12, 0x08,
+	0x0a, 0x04, 0x6c, 0x69, 0x73, 0x74, 0x10, 0x04, 0x2a, 0x34, 0x0a, 0x0d, 0x41, 0x74, 0x74, 0x72,
+	0x69, 0x62, 0x75, 0x74, 0x65, 0x4b, 0x69, 0x6e, 0x64, 0x12, 0x0a, 0x0a, 0x06, 0x73, 0x79, 0x73,
+	0x74, 0x65, 0x6d, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
+	0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x10, 0x02, 0x42, 0x1e,
+	0x5a, 0x1c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62,
+	0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -5426,8 +5552,8 @@ func file_user3_proto_rawDescGZIP() []byte {
 	return file_user3_proto_rawDescData
 }
 
-var file_user3_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_user3_proto_msgTypes = make([]protoimpl.MessageInfo, 57)
+var file_user3_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
+var file_user3_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
 var file_user3_proto_goTypes = []interface{}{
 	(AttributeType)(0),     // 0: user.AttributeType
 	(AttributeKind)(0),     // 1: user.AttributeKind
@@ -5437,135 +5563,139 @@ var file_user3_proto_goTypes = []interface{}{
 	(Trace_Source)(0),      // 5: user.Trace.Source
 	(CountSegmentationUserByAttributeRequest_Range)(0), // 6: user.CountSegmentationUserByAttributeRequest.Range
 	(NoteLink_Type)(0),                              // 7: user.NoteLink.Type
-	(*TotalConvoUpdateRequest)(nil),                 // 8: user.TotalConvoUpdateRequest
-	(*TotalOpenTicket)(nil),                         // 9: user.TotalOpenTicket
-	(*AttributeData)(nil),                           // 10: user.AttributeData
-	(*User)(nil),                                    // 11: user.User
-	(*Users)(nil),                                   // 12: user.Users
-	(*MyUser)(nil),                                  // 13: user.MyUser
-	(*Campaign)(nil),                                // 14: user.Campaign
-	(*CountTotalRequest)(nil),                       // 15: user.CountTotalRequest
-	(*CountTotalResponse)(nil),                      // 16: user.CountTotalResponse
-	(*CountResponse)(nil),                           // 17: user.CountResponse
-	(*MergeRequest)(nil),                            // 18: user.MergeRequest
-	(*CreateRequest)(nil),                           // 19: user.CreateRequest
-	(*Traces)(nil),                                  // 20: user.Traces
-	(*Trace)(nil),                                   // 21: user.Trace
-	(*UserSearchResult)(nil),                        // 22: user.UserSearchResult
-	(*UnpickRequest)(nil),                           // 23: user.UnpickRequest
-	(*PickRequest)(nil),                             // 24: user.PickRequest
-	(*CountSegmentationUserByAttributeRequest)(nil), // 25: user.CountSegmentationUserByAttributeRequest
-	(*Visitor)(nil),                                 // 26: user.Visitor
-	(*Visitors)(nil),                                // 27: user.Visitors
-	(*LastView)(nil),                                // 28: user.LastView
-	(*SubscribeTopic)(nil),                          // 29: user.SubscribeTopic
-	(*MuteRequest)(nil),                             // 30: user.MuteRequest
-	(*SubscribeUser)(nil),                           // 31: user.SubscribeUser
-	(*ReadTopicRequest)(nil),                        // 32: user.ReadTopicRequest
-	(*SubscribeRequest)(nil),                        // 33: user.SubscribeRequest
-	(*AddToMyRequest)(nil),                          // 34: user.AddToMyRequest
-	(*DeleteAttrRequest)(nil),                       // 35: user.DeleteAttrRequest
-	(*AttributeDefinition)(nil),                     // 36: user.AttributeDefinition
-	(*AttributeDefinitions)(nil),                    // 37: user.AttributeDefinitions
-	(*AddToMyList)(nil),                             // 38: user.AddToMyList
-	(*UserCreateResult)(nil),                        // 39: user.UserCreateResult
-	(*Identification)(nil),                          // 40: user.Identification
-	(*Note)(nil),                                    // 41: user.Note
-	(*NoteLink)(nil),                                // 42: user.NoteLink
-	(*Notes)(nil),                                   // 43: user.Notes
-	(*ListNotesRequest)(nil),                        // 44: user.ListNotesRequest
-	(*DeleteNoteRequest)(nil),                       // 45: user.DeleteNoteRequest
-	(*GetNoteRequest)(nil),                          // 46: user.GetNoteRequest
-	(*IntParams)(nil),                               // 47: user.IntParams
-	(*IdParams)(nil),                                // 48: user.IdParams
-	(*Params)(nil),                                  // 49: user.Params
-	(*Source)(nil),                                  // 50: user.Source
-	(*Location)(nil),                                // 51: user.Location
-	(*Page)(nil),                                    // 52: user.Page
-	(*UserAction)(nil),                              // 53: user.UserAction
-	(*UserActionParams)(nil),                        // 54: user.UserActionParams
-	(*UserActionData)(nil),                          // 55: user.UserActionData
-	(*UserInfo)(nil),                                // 56: user.UserInfo
-	(*UserInfoParams)(nil),                          // 57: user.UserInfoParams
-	(*UserInfoData)(nil),                            // 58: user.UserInfoData
-	(*UserMetric)(nil),                              // 59: user.UserMetric
-	(*SourceMetric)(nil),                            // 60: user.SourceMetric
-	(*LocationMetric)(nil),                          // 61: user.LocationMetric
-	(*PageMetric)(nil),                              // 62: user.PageMetric
-	(*UserReport)(nil),                              // 63: user.UserReport
-	nil,                                             // 64: user.UserSearchResult.UnreadCountsEntry
-	(*common.Context)(nil),                          // 65: common.Context
-	(*common.Error)(nil),                            // 66: common.Error
+	(UserReportParams_MetricType)(0),                // 8: user.UserReportParams.MetricType
+	(*TotalConvoUpdateRequest)(nil),                 // 9: user.TotalConvoUpdateRequest
+	(*TotalOpenTicket)(nil),                         // 10: user.TotalOpenTicket
+	(*AttributeData)(nil),                           // 11: user.AttributeData
+	(*User)(nil),                                    // 12: user.User
+	(*Users)(nil),                                   // 13: user.Users
+	(*MyUser)(nil),                                  // 14: user.MyUser
+	(*Campaign)(nil),                                // 15: user.Campaign
+	(*CountTotalRequest)(nil),                       // 16: user.CountTotalRequest
+	(*CountTotalResponse)(nil),                      // 17: user.CountTotalResponse
+	(*CountResponse)(nil),                           // 18: user.CountResponse
+	(*MergeRequest)(nil),                            // 19: user.MergeRequest
+	(*CreateRequest)(nil),                           // 20: user.CreateRequest
+	(*Traces)(nil),                                  // 21: user.Traces
+	(*Trace)(nil),                                   // 22: user.Trace
+	(*UserSearchResult)(nil),                        // 23: user.UserSearchResult
+	(*UnpickRequest)(nil),                           // 24: user.UnpickRequest
+	(*PickRequest)(nil),                             // 25: user.PickRequest
+	(*CountSegmentationUserByAttributeRequest)(nil), // 26: user.CountSegmentationUserByAttributeRequest
+	(*Visitor)(nil),                                 // 27: user.Visitor
+	(*Visitors)(nil),                                // 28: user.Visitors
+	(*LastView)(nil),                                // 29: user.LastView
+	(*SubscribeTopic)(nil),                          // 30: user.SubscribeTopic
+	(*MuteRequest)(nil),                             // 31: user.MuteRequest
+	(*SubscribeUser)(nil),                           // 32: user.SubscribeUser
+	(*ReadTopicRequest)(nil),                        // 33: user.ReadTopicRequest
+	(*SubscribeRequest)(nil),                        // 34: user.SubscribeRequest
+	(*AddToMyRequest)(nil),                          // 35: user.AddToMyRequest
+	(*DeleteAttrRequest)(nil),                       // 36: user.DeleteAttrRequest
+	(*AttributeDefinition)(nil),                     // 37: user.AttributeDefinition
+	(*AttributeDefinitions)(nil),                    // 38: user.AttributeDefinitions
+	(*AddToMyList)(nil),                             // 39: user.AddToMyList
+	(*UserCreateResult)(nil),                        // 40: user.UserCreateResult
+	(*Identification)(nil),                          // 41: user.Identification
+	(*Note)(nil),                                    // 42: user.Note
+	(*NoteLink)(nil),                                // 43: user.NoteLink
+	(*Notes)(nil),                                   // 44: user.Notes
+	(*ListNotesRequest)(nil),                        // 45: user.ListNotesRequest
+	(*DeleteNoteRequest)(nil),                       // 46: user.DeleteNoteRequest
+	(*GetNoteRequest)(nil),                          // 47: user.GetNoteRequest
+	(*IntParams)(nil),                               // 48: user.IntParams
+	(*IdParams)(nil),                                // 49: user.IdParams
+	(*Params)(nil),                                  // 50: user.Params
+	(*Source)(nil),                                  // 51: user.Source
+	(*Location)(nil),                                // 52: user.Location
+	(*Page)(nil),                                    // 53: user.Page
+	(*UserAction)(nil),                              // 54: user.UserAction
+	(*UserActionParams)(nil),                        // 55: user.UserActionParams
+	(*UserActionData)(nil),                          // 56: user.UserActionData
+	(*UserInfo)(nil),                                // 57: user.UserInfo
+	(*UserInfoParams)(nil),                          // 58: user.UserInfoParams
+	(*UserInfoData)(nil),                            // 59: user.UserInfoData
+	(*UserMetric)(nil),                              // 60: user.UserMetric
+	(*SourceMetric)(nil),                            // 61: user.SourceMetric
+	(*LocationMetric)(nil),                          // 62: user.LocationMetric
+	(*PageMetric)(nil),                              // 63: user.PageMetric
+	(*UserReport)(nil),                              // 64: user.UserReport
+	(*UserReportParams)(nil),                        // 65: user.UserReportParams
+	nil,                                             // 66: user.UserSearchResult.UnreadCountsEntry
+	(*common.Context)(nil),                          // 67: common.Context
+	(*common.Error)(nil),                            // 68: common.Error
 }
 var file_user3_proto_depIdxs = []int32{
-	65, // 0: user.TotalConvoUpdateRequest.ctx:type_name -> common.Context
-	65, // 1: user.TotalOpenTicket.ctx:type_name -> common.Context
-	65, // 2: user.User.ctx:type_name -> common.Context
-	21, // 3: user.User.traces:type_name -> user.Trace
-	10, // 4: user.User.attributes:type_name -> user.AttributeData
-	40, // 5: user.User.identifications:type_name -> user.Identification
-	11, // 6: user.Users.users:type_name -> user.User
-	66, // 7: user.Users.errors:type_name -> common.Error
-	65, // 8: user.MyUser.ctx:type_name -> common.Context
-	11, // 9: user.MyUser.user:type_name -> user.User
-	65, // 10: user.CountTotalRequest.ctx:type_name -> common.Context
-	65, // 11: user.MergeRequest.ctx:type_name -> common.Context
-	21, // 12: user.Traces.traces:type_name -> user.Trace
-	14, // 13: user.Trace.campaigns:type_name -> user.Campaign
-	65, // 14: user.UserSearchResult.ctx:type_name -> common.Context
-	11, // 15: user.UserSearchResult.users:type_name -> user.User
-	64, // 16: user.UserSearchResult.unread_counts:type_name -> user.UserSearchResult.UnreadCountsEntry
-	65, // 17: user.UnpickRequest.ctx:type_name -> common.Context
-	65, // 18: user.PickRequest.ctx:type_name -> common.Context
-	65, // 19: user.CountSegmentationUserByAttributeRequest.ctx:type_name -> common.Context
-	65, // 20: user.Visitor.ctx:type_name -> common.Context
-	11, // 21: user.Visitor.user:type_name -> user.User
-	65, // 22: user.Visitors.ctx:type_name -> common.Context
-	26, // 23: user.Visitors.visitors:type_name -> user.Visitor
-	65, // 24: user.SubscribeTopic.ctx:type_name -> common.Context
-	65, // 25: user.MuteRequest.ctx:type_name -> common.Context
-	65, // 26: user.SubscribeUser.ctx:type_name -> common.Context
-	65, // 27: user.ReadTopicRequest.ctx:type_name -> common.Context
-	65, // 28: user.SubscribeRequest.ctx:type_name -> common.Context
-	65, // 29: user.AddToMyRequest.ctx:type_name -> common.Context
-	65, // 30: user.DeleteAttrRequest.ctx:type_name -> common.Context
-	65, // 31: user.AttributeDefinition.ctx:type_name -> common.Context
-	65, // 32: user.AttributeDefinitions.ctx:type_name -> common.Context
-	36, // 33: user.AttributeDefinitions.attributes:type_name -> user.AttributeDefinition
-	65, // 34: user.AddToMyList.ctx:type_name -> common.Context
-	65, // 35: user.Identification.ctx:type_name -> common.Context
-	65, // 36: user.Note.ctx:type_name -> common.Context
-	42, // 37: user.Note.links:type_name -> user.NoteLink
-	65, // 38: user.Notes.ctx:type_name -> common.Context
-	41, // 39: user.Notes.notes:type_name -> user.Note
-	65, // 40: user.ListNotesRequest.ctx:type_name -> common.Context
-	42, // 41: user.ListNotesRequest.links:type_name -> user.NoteLink
-	50, // 42: user.UserAction.source:type_name -> user.Source
-	51, // 43: user.UserAction.location:type_name -> user.Location
-	52, // 44: user.UserAction.page:type_name -> user.Page
-	53, // 45: user.UserActionData.data:type_name -> user.UserAction
-	11, // 46: user.UserInfo.user:type_name -> user.User
-	52, // 47: user.UserInfo.viewing:type_name -> user.Page
-	50, // 48: user.UserInfo.source:type_name -> user.Source
-	51, // 49: user.UserInfo.location:type_name -> user.Location
-	48, // 50: user.UserInfoParams.source_id:type_name -> user.IdParams
-	48, // 51: user.UserInfoParams.location_id:type_name -> user.IdParams
-	48, // 52: user.UserInfoParams.page_id:type_name -> user.IdParams
-	47, // 53: user.UserInfoParams.view_count:type_name -> user.IntParams
-	47, // 54: user.UserInfoParams.duration:type_name -> user.IntParams
-	56, // 55: user.UserInfoData.data:type_name -> user.UserInfo
-	50, // 56: user.SourceMetric.source:type_name -> user.Source
-	51, // 57: user.LocationMetric.location:type_name -> user.Location
-	52, // 58: user.PageMetric.page:type_name -> user.Page
-	59, // 59: user.UserReport.total_user:type_name -> user.UserMetric
-	60, // 60: user.UserReport.top_source:type_name -> user.SourceMetric
-	61, // 61: user.UserReport.top_location:type_name -> user.LocationMetric
-	62, // 62: user.UserReport.top_page:type_name -> user.PageMetric
-	63, // [63:63] is the sub-list for method output_type
-	63, // [63:63] is the sub-list for method input_type
-	63, // [63:63] is the sub-list for extension type_name
-	63, // [63:63] is the sub-list for extension extendee
-	0,  // [0:63] is the sub-list for field type_name
+	67, // 0: user.TotalConvoUpdateRequest.ctx:type_name -> common.Context
+	67, // 1: user.TotalOpenTicket.ctx:type_name -> common.Context
+	67, // 2: user.User.ctx:type_name -> common.Context
+	22, // 3: user.User.traces:type_name -> user.Trace
+	11, // 4: user.User.attributes:type_name -> user.AttributeData
+	41, // 5: user.User.identifications:type_name -> user.Identification
+	12, // 6: user.Users.users:type_name -> user.User
+	68, // 7: user.Users.errors:type_name -> common.Error
+	67, // 8: user.MyUser.ctx:type_name -> common.Context
+	12, // 9: user.MyUser.user:type_name -> user.User
+	67, // 10: user.CountTotalRequest.ctx:type_name -> common.Context
+	67, // 11: user.MergeRequest.ctx:type_name -> common.Context
+	22, // 12: user.Traces.traces:type_name -> user.Trace
+	15, // 13: user.Trace.campaigns:type_name -> user.Campaign
+	67, // 14: user.UserSearchResult.ctx:type_name -> common.Context
+	12, // 15: user.UserSearchResult.users:type_name -> user.User
+	66, // 16: user.UserSearchResult.unread_counts:type_name -> user.UserSearchResult.UnreadCountsEntry
+	67, // 17: user.UnpickRequest.ctx:type_name -> common.Context
+	67, // 18: user.PickRequest.ctx:type_name -> common.Context
+	67, // 19: user.CountSegmentationUserByAttributeRequest.ctx:type_name -> common.Context
+	67, // 20: user.Visitor.ctx:type_name -> common.Context
+	12, // 21: user.Visitor.user:type_name -> user.User
+	67, // 22: user.Visitors.ctx:type_name -> common.Context
+	27, // 23: user.Visitors.visitors:type_name -> user.Visitor
+	67, // 24: user.SubscribeTopic.ctx:type_name -> common.Context
+	67, // 25: user.MuteRequest.ctx:type_name -> common.Context
+	67, // 26: user.SubscribeUser.ctx:type_name -> common.Context
+	67, // 27: user.ReadTopicRequest.ctx:type_name -> common.Context
+	67, // 28: user.SubscribeRequest.ctx:type_name -> common.Context
+	67, // 29: user.AddToMyRequest.ctx:type_name -> common.Context
+	67, // 30: user.DeleteAttrRequest.ctx:type_name -> common.Context
+	67, // 31: user.AttributeDefinition.ctx:type_name -> common.Context
+	67, // 32: user.AttributeDefinitions.ctx:type_name -> common.Context
+	37, // 33: user.AttributeDefinitions.attributes:type_name -> user.AttributeDefinition
+	67, // 34: user.AddToMyList.ctx:type_name -> common.Context
+	67, // 35: user.Identification.ctx:type_name -> common.Context
+	67, // 36: user.Note.ctx:type_name -> common.Context
+	43, // 37: user.Note.links:type_name -> user.NoteLink
+	67, // 38: user.Notes.ctx:type_name -> common.Context
+	42, // 39: user.Notes.notes:type_name -> user.Note
+	67, // 40: user.ListNotesRequest.ctx:type_name -> common.Context
+	43, // 41: user.ListNotesRequest.links:type_name -> user.NoteLink
+	51, // 42: user.UserAction.source:type_name -> user.Source
+	52, // 43: user.UserAction.location:type_name -> user.Location
+	53, // 44: user.UserAction.page:type_name -> user.Page
+	54, // 45: user.UserActionData.data:type_name -> user.UserAction
+	12, // 46: user.UserInfo.user:type_name -> user.User
+	53, // 47: user.UserInfo.viewing:type_name -> user.Page
+	51, // 48: user.UserInfo.source:type_name -> user.Source
+	52, // 49: user.UserInfo.location:type_name -> user.Location
+	49, // 50: user.UserInfoParams.source_id:type_name -> user.IdParams
+	49, // 51: user.UserInfoParams.location_id:type_name -> user.IdParams
+	49, // 52: user.UserInfoParams.page_id:type_name -> user.IdParams
+	48, // 53: user.UserInfoParams.view_count:type_name -> user.IntParams
+	48, // 54: user.UserInfoParams.duration:type_name -> user.IntParams
+	57, // 55: user.UserInfoData.data:type_name -> user.UserInfo
+	51, // 56: user.SourceMetric.source:type_name -> user.Source
+	52, // 57: user.LocationMetric.location:type_name -> user.Location
+	53, // 58: user.PageMetric.page:type_name -> user.Page
+	60, // 59: user.UserReport.total_user:type_name -> user.UserMetric
+	61, // 60: user.UserReport.top_source:type_name -> user.SourceMetric
+	62, // 61: user.UserReport.top_location:type_name -> user.LocationMetric
+	63, // 62: user.UserReport.top_page:type_name -> user.PageMetric
+	8,  // 63: user.UserReportParams.metric_type:type_name -> user.UserReportParams.MetricType
+	8,  // 64: user.UserReportParams.metric_types:type_name -> user.UserReportParams.MetricType
+	65, // [65:65] is the sub-list for method output_type
+	65, // [65:65] is the sub-list for method input_type
+	65, // [65:65] is the sub-list for extension type_name
+	65, // [65:65] is the sub-list for extension extendee
+	0,  // [0:65] is the sub-list for field type_name
 }
 
 func init() { file_user3_proto_init() }
@@ -6246,14 +6376,26 @@ func file_user3_proto_init() {
 				return nil
 			}
 		}
+		file_user3_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserReportParams); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_user3_proto_rawDesc,
-			NumEnums:      8,
-			NumMessages:   57,
+			NumEnums:      9,
+			NumMessages:   58,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
