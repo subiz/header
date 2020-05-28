@@ -501,6 +501,8 @@ message UserSession {
 	}
 	string ads_network = 28;
 
+	repeated GaCampaign campaigns = 29;
+
 	string referrer = 32;
 	enum Source {
 		direct = 0;
@@ -510,4 +512,12 @@ message UserSession {
 		advertising = 4;
 	}
 	string source = 33;
+}
+
+message GaCampaign {
+	string name = 2;
+	string source = 3;
+	string medium = 4;
+	string term = 5;
+	string content = 6;
 }
