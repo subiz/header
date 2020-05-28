@@ -6,22 +6,6 @@ option go_package = "github.com/subiz/header/user";
 
 import "common.proto";
 
-message SessionTracking {
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional int64 started = 4;
-	optional int64 tracked = 6;
-	optional int32 total = 7; // number of session
-}
-
-message AggregateUpdateInteracted {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional int64 interacted = 5;
-	optional int64 created = 6;
-}
-
 message AggregateSegmentAttrCount {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -31,19 +15,6 @@ message AggregateSegmentAttrCount {
 	optional string segmentation_id = 7;
 	optional string attribute = 8;
 	optional int64 hour = 9;
-}
-
-message SubizIDRequest {
-	optional common.Context ctx = 1;
-	optional string subiz_id = 2;
-	optional string account_id = 3;
-}
-
-message SubizIDResponse {
-	optional common.Context ctx = 1;
-	optional string subiz_id = 2;
-	optional string account_id = 3;
-	optional string user_id = 4;
 }
 
 message Segmentations {

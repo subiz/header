@@ -57,7 +57,7 @@ message Event {
 		account.Presence presence = 8;
 		user.User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
-		user.MyUser my_user = 12;
+		// user.MyUser my_user = 12;
 		notibox.Notification notification = 14;
 		account.AgentPerm agent_perm = 16;
 		account.GroupMember group_member = 17;
@@ -466,18 +466,18 @@ message UserSession {
 	Event latest_event = 6;
 
 	string ip = 7;
-	string city_name = 8;            // filled
-	string country_name = 9;         // filled
-	string continent_code = 10;      // filled
-	float latitude = 12;             // filled
-	float longitude = 13;            // filled
-	string postal_code = 14;         // filled
+	string city_name = 8;            // derived from ip
+	string country_name = 9;         // derived from ip
+	string continent_code = 10;      // derived from ip
+	float latitude = 12;             // derived from ip
+	float longitude = 13;            // derived from ip
+	string postal_code = 14;         // derived from ip
 
 	string timezone = 16;
 
-	string isp = 17;                 // filled
-	string continent_name = 18;      // filled
-	string country_code = 19;        // filled
+	string isp = 17;                 // derived from ip
+	string continent_name = 18;      // derived from ip
+	string country_code = 19;        // derived from ip
 
 	string platform = 20;
 
@@ -512,6 +512,9 @@ message UserSession {
 		advertising = 4;
 	}
 	string source = 33;
+
+	Event latest_content_view = 34; // read only, do not persist
+	int64 total_content_views = 35; // read only, do not persist
 }
 
 message GaCampaign {
@@ -520,4 +523,15 @@ message GaCampaign {
 	string medium = 4;
 	string term = 5;
 	string content = 6;
+}
+
+message ActiveUsers {
+	repeated ActiveUser active_users = 2;
+	string signature = 3;
+}
+
+message ActiveUser {
+	user.User user = 2;
+	UserSession session = 3;
+	float lead_score = 4;
 }

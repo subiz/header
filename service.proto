@@ -80,7 +80,6 @@ service CurrencyMgr {
 service UserMgr {
 	rpc SearchUsers (user.UserSearchRequest) returns (user.UserSearchResult); // deprecated
 
-	// rpc SubizID (SubizIDRequest) returns (SubizIDResponse);
 	rpc PickToSegmentation(user.PickRequest) returns (common.Empty);
 	rpc DeleteFromSegmentation(user.UnpickRequest) returns (common.Empty);
 
@@ -106,9 +105,13 @@ service UserMgr {
 }
 
 service LiveMgr {
-	rpc GetReport(user.UserReportParams) returns (user.UserReport);
-	rpc GetUsers(user.UserInfoParams) returns (user.UserInfoData);
-	rpc GetRecentEvents(event.EventParams) returns (event.Events);
+	rpc FilterActiveUsers(user.UserInfoParams) returns (event.ActiveUsers);
+
+	rpc TopEvents(event.EventParams) returns (event.Events);
+	rpc TopLocations(common.Id) returns (user.LocationMetric);
+	rpc TopPages(common.Id) returns (user.PageMetric);
+	rpc TopSources(common.Id) returns (user.SourceMetric);
+	rpc CountActiveUsers(common.Id) returns (user.UserMetric);
 }
 
 service UserSyncMgr {
@@ -153,9 +156,6 @@ service UserSyncMgr {
 }
 
 service VisitorMgr {
-	rpc ReadPresence (common.Id) returns (account.Presence);
-	rpc UpdatePresence (common.Id) returns (account.Presence);
-	rpc ReadPreview (common.Id) returns (user.LastView);
 	rpc ListTopVisitors (common.Id) returns (user.Visitors);
 }
 
