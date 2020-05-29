@@ -478,13 +478,11 @@ message UserInfoParams {
 	string order_by = 5;
 
 	IdParams source = 6;
+	IdParams page_id = 8;
+	IdParams location_id = 7;
 
-	IdParams page_url = 8;
 	IntParams view_count = 9;
 	IntParams duration = 10;
-
-	IdParams city_name = 11;
-	IdParams country_code = 12;
 }
 
 message UserInfoData {
