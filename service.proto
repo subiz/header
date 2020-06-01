@@ -11,7 +11,6 @@ import "conversation.proto";
 import "client.proto";
 import "content.proto";
 import "deal.proto";
-import "event.proto";
 import "file.proto";
 import "kv.proto";
 import "pubsub.proto";
@@ -105,9 +104,9 @@ service UserMgr {
 }
 
 service LiveMgr {
-	rpc FilterActiveUsers(user.UserInfoParams) returns (event.ActiveUsers);
+	rpc FilterActiveUsers(user.UserInfoParams) returns (user.Users);
 
-	rpc TopEvents(event.EventParams) returns (event.Events);
+	rpc TopEvents(user.EventParams) returns (user.Events);
 	rpc TopLocations(common.Id) returns (user.LocationMetric);
 	rpc TopPages(common.Id) returns (user.PageMetric);
 	rpc TopSources(common.Id) returns (user.SourceMetric);
@@ -135,23 +134,23 @@ service UserSyncMgr {
 	// sync user
 	rpc UpdateUser(user.User) returns (common.Empty);
 	rpc PickToSegment(user.PickRequest) returns (common.Empty);
-	rpc CreateEvent(event.UserEvent) returns (common.Empty);
+	rpc CreateEvent(user.UserEvent) returns (common.Empty);
 	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
 
 	// sync automation
-	rpc FireBlockUser(event.AutomationEvent) returns (common.Empty);
-	rpc FireUpdateUserAttribute(event.AutomationEvent) returns (common.Empty);
-	rpc FireAddUserToSegment(event.AutomationEvent) returns (common.Empty);
-	rpc FireRemoveUserFromSegment(event.AutomationEvent) returns (common.Empty);
-	rpc FireAddUserNote(event.AutomationEvent) returns (common.Empty);
-	rpc FireMergeUsers(event.AutomationEvent) returns (common.Empty);
-	rpc FireUserNotification(event.AutomationEvent) returns (common.Empty);
+	rpc FireBlockUser(user.AutomationEvent) returns (common.Empty);
+	rpc FireUpdateUserAttribute(user.AutomationEvent) returns (common.Empty);
+	rpc FireAddUserToSegment(user.AutomationEvent) returns (common.Empty);
+	rpc FireRemoveUserFromSegment(user.AutomationEvent) returns (common.Empty);
+	rpc FireAddUserNote(user.AutomationEvent) returns (common.Empty);
+	rpc FireMergeUsers(user.AutomationEvent) returns (common.Empty);
+	rpc FireUserNotification(user.AutomationEvent) returns (common.Empty);
 
 	// sync conversation
 	rpc UpdateUserSegment(conversation.UpdateUserSegmentRequest) returns (common.Empty);
 
 	// sync user job
-	rpc CallbackAutomation(event.AutomationCalledback) returns (common.Empty);
+	rpc CallbackAutomation(user.AutomationCalledback) returns (common.Empty);
 	rpc ExportUsers(user.UserExportRequest) returns (common.Empty);
 }
 
@@ -160,8 +159,8 @@ service VisitorMgr {
 }
 
 service AutomationCreditMgr {
-	rpc GetAutomationCredit(common.Id) returns (event.AutomationCredit);
-	rpc AddAutomationCredit(event.AutomationCredit) returns (common.Empty);
+	rpc GetAutomationCredit(common.Id) returns (user.AutomationCredit);
+	rpc AddAutomationCredit(user.AutomationCredit) returns (common.Empty);
 }
 
 service NoteMgr {
@@ -174,11 +173,11 @@ service NoteMgr {
 }
 
 service AutomationMgr {
-	rpc ListAutomations(common.Id) returns (event.Automations);
-	rpc UpdateAutomation(event.Automation) returns (event.Automation);
+	rpc ListAutomations(common.Id) returns (user.Automations);
+	rpc UpdateAutomation(user.Automation) returns (user.Automation);
 	rpc DeleteAutomation(common.Id) returns (common.Empty);
-	rpc ReadAutomation(common.Id) returns (event.Automation);
-	rpc CreateAutomation(event.Automation) returns (event.Automation);
+	rpc ReadAutomation(common.Id) returns (user.Automation);
+	rpc CreateAutomation(user.Automation) returns (user.Automation);
 }
 
 service AttributeMgr {
@@ -227,7 +226,7 @@ service RuleMgr {
 }
 
 service ConversationMgr {
-	rpc PongMessage(event.Event) returns (event.Event);
+	rpc PongMessage(user.Event) returns (user.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(conversation.StartRequest) returns (conversation.Conversation);
 	rpc EndConversation(common.Id) returns (conversation.Conversation);
@@ -261,9 +260,9 @@ service ConversationSyncMgr {
 	rpc DeleteClient(common.Id) returns (common.Empty);
 
 	// sync automation
-	rpc FireConvertTicket(event.AutomationEvent) returns (common.Empty);
-	rpc FireSendChatTranscriptEmail(event.AutomationEvent) returns (common.Empty);
-	rpc FireUpdateConversationState(event.AutomationEvent) returns (common.Empty);
+	rpc FireConvertTicket(user.AutomationEvent) returns (common.Empty);
+	rpc FireSendChatTranscriptEmail(user.AutomationEvent) returns (common.Empty);
+	rpc FireUpdateConversationState(user.AutomationEvent) returns (common.Empty);
 
 	// sync account
 	rpc DeleteAgent(common.Id) returns (common.Empty);
@@ -302,7 +301,7 @@ service IntegrationMgr {
 	rpc Deintegrate(common.Id) returns (common.Empty);
 	rpc ListIntegrations(common.Id) returns (conversation.Integrations);
 	rpc Integrate(conversation.Integration) returns (conversation.Integration);
-	rpc CheckAvailability(conversation.AvailabilityCheckRequest) returns (conversation.AvailabilityCheckResult);
+	rpc CheckAvailability(user.AvailabilityCheckRequest) returns (user.AvailabilityCheckResult);
 }
 
 service TicketMgr {
@@ -350,20 +349,20 @@ service DealService {
 
 // event services
 service Publisher {
-	rpc Subscribe(event.Subscription) returns (event.SubscriptionResponse);
-	rpc Unsubscribe(event.Subscription) returns (event.SubscriptionResponse);
+	rpc Subscribe(user.Subscription) returns (user.SubscriptionResponse);
+	rpc Unsubscribe(user.Subscription) returns (user.SubscriptionResponse);
 }
 
 service EventMgr {
-	rpc SearchEvents (event.ListEventsRequest) returns (event.Events);
-	rpc CreateEvent (event.UserEvent) returns (event.Event);
+	rpc SearchEvents (user.ListEventsRequest) returns (user.Events);
+	rpc CreateEvent (user.UserEvent) returns (user.Event);
 }
 
 service ConversationEventReader {
-	rpc SendMessage(event.Event) returns (event.Event);
-	rpc UpdateMessage(event.Event) returns (event.Event);
-	rpc ListEvents(conversation.ListEventsRequest) returns (event.Events);
-	rpc SearchEvents(conversation.SearchMessageRequest) returns (event.Events);
+	rpc SendMessage(user.Event) returns (user.Event);
+	rpc UpdateMessage(user.Event) returns (user.Event);
+	rpc ListEvents(conversation.ListEventsRequest) returns (user.Events);
+	rpc SearchEvents(conversation.SearchMessageRequest) returns (user.Events);
 }
 
 // file services

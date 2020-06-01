@@ -5,7 +5,7 @@ package realtime;
 option go_package = "github.com/subiz/header/realtime";
 
 import "common.proto";
-import "event.proto";
+import "user3.proto";
 
 message Subscription {
 	common.Context ctx = 1;
@@ -16,7 +16,7 @@ message Subscription {
 }
 
 message PollResult {
-	repeated event.Event events = 4;
+	repeated user.Event events = 4;
 	string sequential_token = 6;
 
 	string host = 7; // notify client about the wrong host

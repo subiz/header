@@ -5,8 +5,6 @@ package conversation;
 option go_package = "github.com/subiz/header/conversation";
 
 import "common.proto";
-import "user3.proto";
-import "user.proto";
 
 message Rule {
 	optional common.Context ctx = 1;
@@ -33,24 +31,7 @@ message Rule {
 	optional string name = 10;
 	optional string description = 11;
 	optional bool available_agents_only = 13;
-	optional user.SCondition condition = 14;
-}
-
-message AvailabilityCheckRequest {
-	optional common.Context ctx = 1;
-	optional string integration_id = 3;
-	optional user.User user = 4;
-	optional string account_id = 5;
-	optional string user_id = 6;
-}
-
-message AvailabilityCheckResult {
-	optional common.Context ctx = 1;
-	optional bool availability = 2;
-	optional string reason = 3;
-	optional string payload = 5;
-	optional string integration_id = 6;
-	optional string account_id = 7;
+	optional SCondition condition = 14;
 }
 
 message Route {
@@ -168,7 +149,6 @@ message StartRequest {
 	optional int64 created = 13;
 	optional string conversation_id = 14;
 
-	optional user.User user = 25;
 	optional string integration_id = 26;
 	optional string chain_id = 27;
 	optional string message = 30;
@@ -1195,4 +1175,43 @@ message ReportConversationsRequest {
 	optional string range = 26; // hour | day
 	optional int64 number_of_points = 29;
 	optional string from = 30; // rfc3339
+}
+
+// can be
+// {id, join, event_time, conditions} (grouped event condition)
+// {id, join, conditions} (grouped condition)
+// {id, key, operator, value} (user condition || simple event condition)
+message SCondition {
+	optional string id = 3;
+
+	optional string key = 4; // unique
+	optional string operator = 5; // = # regex
+	optional string value = 6; // JSON
+
+	enum EventTime {
+		none = 0; // not an event
+		current = 1;
+		latest = 2;
+		past = 3; // exists
+	}
+
+	enum JoinOperator {
+		and = 0;
+		or = 1;
+	}
+	optional string join = 7;
+	optional string event_type_time = 8; //
+	optional string event_type = 10;
+	repeated SCondition conditions = 9;
+
+	optional int32 priority = 12;
+	optional bool event_existed = 13;
+
+	enum Function {
+		minute_of_day = 0;
+		hour_of_day = 1;
+		day_of_week = 2;
+		day_ago = 3;
+	}
+	optional string function = 14; // used to transform value of left side before evaluate expression
 }
