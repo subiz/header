@@ -63,8 +63,6 @@ message User {
 	string account_id = 4;
 	repeated Trace traces = 11; // TODO: remove
 
-	bool is_ban = 14;
-
 	repeated AttributeData attributes = 18;
 
 	repeated string segments = 19;
@@ -73,11 +71,9 @@ message User {
 	repeated string aliases = 30;
 
 	int32 par = 34;
-	//  int32 modified_hour = 35;
-	int64 modified = 36;
-	int32 modified_week = 37;
 
 	repeated Identification identifications = 39;
+	UserSession session = 40;
 }
 
 message Users {
