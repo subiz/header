@@ -7769,16 +7769,16 @@ type StartRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx            *common.Context      `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId      string               `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Created        int64                `protobuf:"varint,13,opt,name=created,proto3" json:"created,omitempty"`
-	ConversationId string               `protobuf:"bytes,14,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
-	User           *User                `protobuf:"bytes,25,opt,name=user,proto3" json:"user,omitempty"`
-	IntegrationId  string               `protobuf:"bytes,26,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"`
-	ChainId        string               `protobuf:"bytes,27,opt,name=chain_id,json=chainId,proto3" json:"chain_id,omitempty"`
-	Message        string               `protobuf:"bytes,30,opt,name=message,proto3" json:"message,omitempty"`
-	Members        *conversation.Member `protobuf:"bytes,31,opt,name=members,proto3" json:"members,omitempty"`
-	GroupId        string               `protobuf:"bytes,32,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
+	Ctx            *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId      string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Created        int64                  `protobuf:"varint,13,opt,name=created,proto3" json:"created,omitempty"`
+	ConversationId string                 `protobuf:"bytes,14,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"`
+	User           *User                  `protobuf:"bytes,25,opt,name=user,proto3" json:"user,omitempty"`
+	IntegrationId  string                 `protobuf:"bytes,26,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"`
+	ChainId        string                 `protobuf:"bytes,27,opt,name=chain_id,json=chainId,proto3" json:"chain_id,omitempty"`
+	Message        string                 `protobuf:"bytes,30,opt,name=message,proto3" json:"message,omitempty"`
+	Members        []*conversation.Member `protobuf:"bytes,31,rep,name=members,proto3" json:"members,omitempty"`
+	GroupId        string                 `protobuf:"bytes,32,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
 }
 
 func (x *StartRequest) Reset() {
@@ -7869,7 +7869,7 @@ func (x *StartRequest) GetMessage() string {
 	return ""
 }
 
-func (x *StartRequest) GetMembers() *conversation.Member {
+func (x *StartRequest) GetMembers() []*conversation.Member {
 	if x != nil {
 		return x.Members
 	}
@@ -9346,7 +9346,7 @@ var file_user3_proto_rawDesc = []byte{
 	0x18, 0x1b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64, 0x12,
 	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x1e, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x2e, 0x0a, 0x07, 0x6d, 0x65, 0x6d,
-	0x62, 0x65, 0x72, 0x73, 0x18, 0x1f, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6e,
+	0x62, 0x65, 0x72, 0x73, 0x18, 0x1f, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6e,
 	0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72,
 	0x52, 0x07, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x12, 0x19, 0x0a, 0x08, 0x67, 0x72, 0x6f,
 	0x75, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x20, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67, 0x72, 0x6f,

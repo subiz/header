@@ -955,6 +955,6 @@ message StartRequest {
 	string integration_id = 26;
 	string chain_id = 27;
 	string message = 30;
-	conversation.Member members = 31;
+	repeated conversation.Member members = 31;
 	string group_id = 32;
 }
