@@ -228,7 +228,7 @@ service RuleMgr {
 service ConversationMgr {
 	rpc PongMessage(user.Event) returns (user.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
-	rpc StartConversation(conversation.StartRequest) returns (conversation.Conversation);
+	rpc StartConversation(user.StartRequest) returns (conversation.Conversation);
 	rpc EndConversation(common.Id) returns (conversation.Conversation);
 	rpc GetConversation(common.Id) returns (conversation.Conversation);
 	rpc ListConversations(conversation.ListConversationsRequest) returns (conversation.Conversations);

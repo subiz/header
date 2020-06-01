@@ -943,3 +943,18 @@ message AvailabilityCheckResult {
 	string integration_id = 6;
 	string account_id = 7;
 }
+
+message StartRequest {
+	common.Context ctx = 1;
+
+	string account_id = 3;
+	int64 created = 13;
+	string conversation_id = 14;
+
+	User user = 25;
+	string integration_id = 26;
+	string chain_id = 27;
+	string message = 30;
+	conversation.Member members = 31;
+	string group_id = 32;
+}

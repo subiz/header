@@ -142,20 +142,6 @@ message UserConversation { // used in database
 	optional string last_seen_event = 5;
 }
 
-message StartRequest {
-	optional common.Context ctx = 1;
-
-	optional string account_id = 3;
-	optional int64 created = 13;
-	optional string conversation_id = 14;
-
-	optional string integration_id = 26;
-	optional string chain_id = 27;
-	optional string message = 30;
-	repeated Member members = 31;
-	optional string group_id = 32;
-}
-
 message Conversations {
 	optional common.Context ctx = 1;
 	repeated Conversation conversations = 3;
