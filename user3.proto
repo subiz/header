@@ -525,6 +525,18 @@ message UserReport {
 	repeated PageMetric top_page = 6;
 }
 
+message SourceMetrics {
+	repeated SourceMetric source_metrics = 2;
+}
+
+message LocationMetrics {
+	repeated LocationMetric location_metrics = 2;
+}
+
+message PageMetrics {
+	repeated PageMetric page_metrics = 2;
+}
+
 ///////////////////////
 message RawEventCreatedPayload {
 	common.Context ctx = 1;

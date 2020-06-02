@@ -107,9 +107,9 @@ service LiveMgr {
 	rpc FilterActiveUsers(user.UserInfoParams) returns (user.Users);
 
 	rpc TopEvents(user.EventParams) returns (user.Events);
-	rpc TopLocations(common.Id) returns (user.LocationMetric);
-	rpc TopPages(common.Id) returns (user.PageMetric);
-	rpc TopSources(common.Id) returns (user.SourceMetric);
+	rpc TopLocations(common.Id) returns (user.LocationMetrics);
+	rpc TopPages(common.Id) returns (user.PageMetrics);
+	rpc TopSources(common.Id) returns (user.SourceMetrics);
 	rpc CountActiveUsers(common.Id) returns (user.UserMetric);
 }
 
