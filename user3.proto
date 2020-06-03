@@ -423,6 +423,11 @@ message IntParams {
 	int64 lte = 7;
 }
 
+message StringParams {
+	string eq = 2;
+	repeated string in = 3;
+}
+
 message IdParams {
 	string id = 2;
 	repeated string ids = 3;
@@ -489,6 +494,10 @@ message UserInfoParams {
 
 	IntParams view_count = 9;
 	IntParams duration = 10;
+
+	// location params
+	StringParams country_code = 11;
+	StringParams continent_code = 12;
 }
 
 message UserInfoData {
