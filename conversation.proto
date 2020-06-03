@@ -171,6 +171,8 @@ message ListConversationsRequest {
 	optional string anchor = 6;
 
 	optional string agent_id = 12; // list conversations of agent
+
+	repeated string user_ids = 13; // for live, only return id and state
 }
 
 message ListEventsRequest {
