@@ -469,10 +469,11 @@ message UserInfo {
 	Page viewing = 5;
 	string source = 6;
 	Location location = 7;
-	int64 view_count = 8;
+	int64 view_count = 8; // deprecated
 	int64 duration = 9;
 	int64 latest_event_created = 10;
 	string user_session_id = 11;
+	repeated Page view_pages = 12;
 }
 
 message UserInfoParams {
