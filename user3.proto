@@ -504,27 +504,38 @@ message UserInfoData {
 	repeated UserInfo data = 2;
 }
 
+enum HaveBeen {
+	unknown = 0;
+	increase = 1;
+	decrease = 2;
+	immutable = 3;
+}
+
 message UserMetric {
 	string account_id = 2;
 	int64 active_user_num = 3;
+	string have_been = 5;
 }
 
 message SourceMetric {
 	string account_id = 2;
 	string source = 3; // direct, referring, organic,social, advertising
 	int64 active_user_num = 4;
+	string have_been = 5;
 }
 
 message LocationMetric {
 	string account_id = 2;
 	Location location = 3;
 	int64 active_user_num = 4;
+	string have_been = 5;
 }
 
 message PageMetric {
 	string account_id = 2;
 	Page page = 3;
 	int64 active_user_num = 4;
+	string have_been = 5;
 }
 
 message UserReport {
