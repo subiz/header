@@ -80,6 +80,8 @@ message Users {
 	repeated User users = 1;
 	repeated common.Error errors = 2;
 	string signature = 3;
+	int64 hit = 4;
+	int64 total = 5;
 }
 
 message Campaign {
