@@ -459,6 +459,7 @@ message Locations {
 
 message LocationParams {
 	string query = 2;
+	int64 limit = 3;
 }
 
 message Page {
