@@ -104,6 +104,7 @@ service UserMgr {
 }
 
 service LiveMgr {
+	rpc SearchLocations(user.LocationParams) returns (user.Locations);
 	rpc FilterActiveUsers(user.UserInfoParams) returns (user.Users);
 
 	rpc TopEvents(user.EventParams) returns (user.Events);

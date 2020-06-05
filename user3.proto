@@ -452,6 +452,15 @@ message Location {
 	string postal_code = 11;         // filled
 }
 
+message Locations {
+	repeated Location locations = 2;
+	repeated common.Error errors = 3;
+}
+
+message LocationParams {
+	string query = 2;
+}
+
 message Page {
 	string id = 2;
 	string name = 3;
