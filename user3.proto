@@ -492,6 +492,7 @@ message UserInfo {
 	int64 latest_event_created = 10;
 	string user_session_id = 11;
 	repeated Page view_pages = 12;
+	int64 time_on_site = 13;
 }
 
 message UserInfoParams {
@@ -512,6 +513,7 @@ message UserInfoParams {
 	StringParams country_code = 11;
 	StringParams continent_code = 12;
 	StringParams url = 13;
+	IntParams time_on_site = 14;
 }
 
 message UserInfoData {
@@ -972,6 +974,7 @@ message UserSession {
 	int64 total_content_views = 35; // read only, do not persist
 
 	float lead_score = 36;
+	int64 time_on_site = 37;
 }
 
 message AvailabilityCheckRequest {
