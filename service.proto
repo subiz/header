@@ -251,7 +251,7 @@ service ConversationMgr {
 	rpc ExportUsers(conversation.UserExportRequest) returns (common.Empty);
 
 	rpc UpdateMuteConversation(conversation.Conversation) returns (common.Empty);
-	rpc UnsubscribeConversation(conversation.Conversation) returns (common.Empty);
+	rpc UnwatchConversation(conversation.Conversation) returns (common.Empty);
 	rpc MarkReadConversation (conversation.Conversation) returns (common.Empty);
 }
 

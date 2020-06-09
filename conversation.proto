@@ -122,6 +122,7 @@ message Conversation {
 	optional string agent_id = 40;
 	optional bool mute = 41; // true, false
 	optional bool read = 42; // true, false
+	optional bool watch = 44; // true
 
 	optional int64 updated = 43;
 }
