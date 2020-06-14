@@ -434,5 +434,5 @@ message Presence {
 	optional string ip = 7;
 	optional string ua = 8;
 
-	optional string is_focused = 9; // tell where the user is actually seeing the page
+	optional bool is_focused = 9; // tell where the user is actually seeing the page
 }
