@@ -1010,6 +1010,11 @@ message StartRequest {
 	string group_id = 32;
 }
 
+message PresencesRequest {
+	common.Context ctx = 1;
+	repeated string user_ids = 2;
+}
+
 message PresencesResponse {
 	repeated string online_user_ids = 2;
 	repeated string focused_user_ids = 3;
