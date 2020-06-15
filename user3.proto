@@ -493,6 +493,7 @@ message UserInfo {
 	string user_session_id = 11;
 	repeated Page view_pages = 12;
 	int64 time_on_site = 13;
+	bool is_focused = 14;
 }
 
 message UserInfoParams {
@@ -1007,4 +1008,9 @@ message StartRequest {
 	string message = 30;
 	repeated conversation.Member members = 31;
 	string group_id = 32;
+}
+
+message PresencesResponse {
+	repeated string online_user_ids = 2;
+	repeated string focused_user_ids = 3;
 }
