@@ -479,4 +479,6 @@ enum RealtimeType {
 
 	user_select_product = 86;
 	user_like_content = 87;
+
+	agent_notification_created = 88;
 }

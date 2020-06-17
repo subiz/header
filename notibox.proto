@@ -18,6 +18,8 @@ message Notification {
 	string data = 8; //json
 	int64 created = 6; // ms
 	bool is_read = 9;
+
+	bool is_instant = 12; // just display and disappear, no persit
 }
 
 message Notibox {
@@ -39,6 +41,10 @@ enum Type {
 	agent_permission_updated = 9;
 	owner_changed = 10;
 	news = 11;
+
+	user_created = 12; // Một user mới có event khởi tạo session. Data: { user: {id: '43'}, total: 12}
+	user_returned = 13; // Một user cũ có event event khởi tạo session mới. { user: {id: '43'}, total: 12}
+	campaign_user_converted = 14; // Khi có event conversion của campaign { user: {id: '43'}, campaign: {},  total: 12}
 }
 
 message AddNotificationRequest {

@@ -18,6 +18,11 @@ message DashboardAgent {
 	string language_url = 9;
 	int64 tour_guide_getting_started_web_showed = 10;
 	int64 tour_guide_channel_installing_web_showed = 11;
+
+	int64 instant_mute_until = 20;
+	bool instant_notification_user_created = 21;
+	bool instant_notification_user_returned = 22;
+	bool instant_notification_campaign_user_converted = 23;
 }
 
 message DashboardAccount {
