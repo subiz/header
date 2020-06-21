@@ -9,6 +9,10 @@ option go_package = "github.com/subiz/header/noti5";
 message Subscription {
 	optional bool new_message = 3;
 	optional bool unassigned_conversation = 4;
+	optional bool user_created = 6;
+	optional bool user_returned = 7;
+	optional bool campaign_user_converted = 8;
+
 	optional int32 delay = 10;
 }
 
@@ -24,6 +28,7 @@ message Setting {
 	optional Subscription email = 11;
 
 	optional DoNotDisturb do_not_disturb = 12;
+	optional int64 instant_mute_until = 14;
 }
 
 message DoNotDisturb {
