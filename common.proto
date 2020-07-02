@@ -68,13 +68,6 @@ message Context {
 	string language_code = 20;
 }
 
-enum Env {
-	production = 0;
-	test = 1;
-	development = 2;
-	stagging = 3;
-}
-
 message Device {
 	string ip = 3;
 	string user_agent = 4; // code
@@ -302,4 +295,20 @@ message Error {
 	int64 created = 6;
 	string code = 7;
 	string root = 8;
+}
+
+message NumberParams {
+	float eq = 2;
+	float neq = 3;
+	float gt = 4;
+	float gte = 5;
+	float lt = 6;
+	float lte = 7;
+	repeated float in = 8;
+}
+
+message StringParams {
+	string eq = 2;
+	repeated string in = 3;
+	string contain = 4;
 }

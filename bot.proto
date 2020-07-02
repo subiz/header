@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package bot;
+
+option go_package = "github.com/subiz/header/bot";
+
+import "common.proto";
+
+message Bot {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	string channel_id = 5;
+
+	string category = 6; // hello, operator, reply
+
+	string status = 7; // active, inactive, deleted
+
+	Action action = 9;
+
+	int64 created = 10;
+	int64 updated = 11;
+}
+
+message Action {
+	string account_id = 2;
+	string bot_id = 3;
+	string id = 4;
+	string name = 5;
+
+	repeated Action nexts = 8; // pointed to the next action or used for branching to multiple actions
+
+	string type = 9; // send_message, send_email, tag, convert_to_ticket, condition, sleep, send_webhook
+	ActionCondition condition = 10;
+
+	ActionSendMessage send_message = 11;
+	ActionSendMessage send_email = 12;
+	ActionSleep sleep = 13;
+}
+
+message ActionSendMessage {
+	string message = 7;
+
+	repeated string attachments = 10;
+	repeated string quick_replies = 11;
+}
+
+message ActionSleep {
+	int64 duration = 4;
+}
+
+message ActionCondition {
+	enum Group {
+		single = 0;
+		all = 1;
+		any = 2;
+	}
+	string group = 2;
+	repeated ActionCondition conditions = 3; // only availabe if group is all or any
+
+	// only avaiable if group is single
+	string key = 5; // unique, path to properties, for example data.conversation.text, global.agent.avaliablitiy...
+	string type = 6; // string, number, boolean
+
+	common.NumberParams number = 7;
+	common.StringParams string = 8;
+
+	enum Function {
+		minute_of_day = 0;
+		hour_of_day = 1;
+		day_of_week = 2;
+		day_ago = 3;
+	}
+	string function = 19; // used to transform value of left side before evaluate expression
+	string name  = 20; // front end used only
+}

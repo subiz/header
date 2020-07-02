@@ -13,6 +13,7 @@ import "notibox.proto";
 import "noti5.proto";
 import "payment.proto";
 import "email.proto";
+import "bot.proto";
 
 message TotalConvoUpdateRequest {
 	common.Context ctx = 1;
@@ -637,6 +638,8 @@ message Event {
 		user.AttributeDefinition user_attribute = 37;
 		conversation.Tag tag = 38;
 		user.UserMetric total_user = 39;
+		bot.Bot bot = 40;
+
 	}
 	Data data = 20;
 }

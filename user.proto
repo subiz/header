@@ -74,17 +74,6 @@ enum ConditionType {
 	event = 1;
 }
 
-message IndexEvent {
-	optional string id = 3;
-	optional string account_id = 4;
-	optional string user_id = 5;
-	optional int64 created = 6;
-	optional string category = 7; // eventtype
-	repeated string topics = 8;
-	optional string object = 9;
-	optional string text = 10;
-}
-
 message SegmentIndex {
 	optional string account_id = 2;
 	optional string segmentation_id = 3;
