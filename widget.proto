@@ -161,6 +161,7 @@ message Trigger {
 	optional float scrolling_percentage = 6; // 0.55
 	optional int64 inactivity_sec = 8; // 50s
 	optional int64 after_pageview_sec = 9; // 50s
+	optional bool disabled = 10;
 }
 
 message SchedulerCondition {
@@ -222,6 +223,8 @@ message Segmentation {
 	repeated Condition has_not_visited_url_conditions = 11; // url (or only)
 
 	optional string join = 5; // and | or
+
+	optional bool disabled = 12;
 }
 
 message Campaigns {
@@ -236,6 +239,9 @@ message Notification {
 	repeated string to = 7;
 	optional string subject = 9;
 	optional string body = 10;
+
+	repeated string agents = 12;
+	optional bool all_agents = 13;
 }
 
 message Campaign {
@@ -265,6 +271,8 @@ message Campaign {
 	repeated SchedulerCondition schedulers = 24;
 	optional string scheduler_join = 25;
 	optional Notification notification = 26;
+
+	optional int64 updated = 27;
 }
 
 message Impression {
