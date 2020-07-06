@@ -7,6 +7,7 @@ option go_package = "github.com/subiz/header/widget";
 import "account.proto";
 import "common.proto";
 import "user3.proto";
+import "conversation.proto";
 
 message UserSetting {
 	optional common.Context ctx = 1;
@@ -242,6 +243,8 @@ message Notification {
 
 	repeated string agents = 12;
 	optional bool all_agents = 13;
+
+	optional conversation.Message user_email = 14;
 }
 
 message Campaign {
