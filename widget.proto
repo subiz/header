@@ -276,6 +276,9 @@ message Campaign {
 	optional Notification notification = 26;
 
 	optional int64 updated = 27;
+
+	optional int64 num_impression = 30;
+	optional int64 num_conversion = 31;
 }
 
 message Impression {
