@@ -301,8 +301,12 @@ message ConversionRequest {
 	optional string account_id = 2;
 	optional string campaign_id = 3;
 	optional string anchor = 4;
-	optional int32 limit =5;
+	optional int32 limit = 5;
+
+	optional int32 from_hour = 7;
+	optional int32 to_hour = 8;
 }
+
 message Conversions {
 	optional common.Context ctx = 1;
 	repeated Conversion conversions = 2;
