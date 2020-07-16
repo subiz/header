@@ -44,3 +44,12 @@ message Token {
 	int64 last_polled = 8;
 	int64 package_size = 9;
 }
+
+message PublishMessage {
+	common.Context ctx = 1;
+
+	repeated string topics = 2;
+	bytes payload = 4;
+
+	string account_id = 5;
+}

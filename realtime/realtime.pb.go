@@ -378,6 +378,77 @@ func (x *Token) GetPackageSize() int64 {
 	return 0
 }
 
+type PublishMessage struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Topics    []string        `protobuf:"bytes,2,rep,name=topics,proto3" json:"topics,omitempty"`
+	Payload   []byte          `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
+	AccountId string          `protobuf:"bytes,5,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+}
+
+func (x *PublishMessage) Reset() {
+	*x = PublishMessage{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_realtime_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PublishMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PublishMessage) ProtoMessage() {}
+
+func (x *PublishMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_realtime_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PublishMessage.ProtoReflect.Descriptor instead.
+func (*PublishMessage) Descriptor() ([]byte, []int) {
+	return file_realtime_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *PublishMessage) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *PublishMessage) GetTopics() []string {
+	if x != nil {
+		return x.Topics
+	}
+	return nil
+}
+
+func (x *PublishMessage) GetPayload() []byte {
+	if x != nil {
+		return x.Payload
+	}
+	return nil
+}
+
+func (x *PublishMessage) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
 var File_realtime_proto protoreflect.FileDescriptor
 
 var file_realtime_proto_rawDesc = []byte{
@@ -425,9 +496,18 @@ var file_realtime_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x6c, 0x61, 0x73, 0x74, 0x50, 0x6f, 0x6c, 0x6c, 0x65, 0x64,
 	0x12, 0x21, 0x0a, 0x0c, 0x70, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a, 0x65,
 	0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x70, 0x61, 0x63, 0x6b, 0x61, 0x67, 0x65, 0x53,
-	0x69, 0x7a, 0x65, 0x42, 0x22, 0x5a, 0x20, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x72,
-	0x65, 0x61, 0x6c, 0x74, 0x69, 0x6d, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x7a, 0x65, 0x22, 0x84, 0x01, 0x0a, 0x0e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x73, 0x68, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e,
+	0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x16, 0x0a, 0x06, 0x74, 0x6f, 0x70,
+	0x69, 0x63, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x74, 0x6f, 0x70, 0x69, 0x63,
+	0x73, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x0c, 0x52, 0x07, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x42, 0x22, 0x5a, 0x20, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68,
+	0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x72, 0x65, 0x61, 0x6c, 0x74, 0x69, 0x6d, 0x65, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -443,25 +523,27 @@ func file_realtime_proto_rawDescGZIP() []byte {
 }
 
 var file_realtime_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_realtime_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_realtime_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_realtime_proto_goTypes = []interface{}{
 	(Meta_Type)(0),         // 0: realtime.Meta.Type
 	(*Subscription)(nil),   // 1: realtime.Subscription
 	(*PollResult)(nil),     // 2: realtime.PollResult
 	(*Meta)(nil),           // 3: realtime.Meta
 	(*Token)(nil),          // 4: realtime.Token
-	(*common.Context)(nil), // 5: common.Context
-	(*user.Event)(nil),     // 6: user.Event
+	(*PublishMessage)(nil), // 5: realtime.PublishMessage
+	(*common.Context)(nil), // 6: common.Context
+	(*user.Event)(nil),     // 7: user.Event
 }
 var file_realtime_proto_depIdxs = []int32{
-	5, // 0: realtime.Subscription.ctx:type_name -> common.Context
-	6, // 1: realtime.PollResult.events:type_name -> user.Event
-	5, // 2: realtime.Meta.ctx:type_name -> common.Context
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6, // 0: realtime.Subscription.ctx:type_name -> common.Context
+	7, // 1: realtime.PollResult.events:type_name -> user.Event
+	6, // 2: realtime.Meta.ctx:type_name -> common.Context
+	6, // 3: realtime.PublishMessage.ctx:type_name -> common.Context
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_realtime_proto_init() }
@@ -518,6 +600,18 @@ func file_realtime_proto_init() {
 				return nil
 			}
 		}
+		file_realtime_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PublishMessage); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -525,7 +619,7 @@ func file_realtime_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_realtime_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

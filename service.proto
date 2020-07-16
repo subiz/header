@@ -13,7 +13,7 @@ import "content.proto";
 import "deal.proto";
 import "file.proto";
 import "kv.proto";
-import "pubsub.proto";
+import "realtime.proto";
 import "placeholder.proto";
 import "payment.proto";
 import "notibox.proto";
@@ -385,6 +385,8 @@ service KV {
 service Noti5Service {
 	rpc ReadNotificationSetting(common.Id) returns (noti5.Setting);
 	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
+
+	rpc Noti(noti5.PushNoti) returns (common.Empty);
 }
 
 service Noti5TokenService {
@@ -455,9 +457,7 @@ service PlaceHolder {
 
 // pubsub services
 service Pubsub {
-	rpc Subscribe(pubsub.Subscription) returns (common.Empty);
-	rpc Unsubscribe(pubsub.Subscription) returns (common.Empty);
-	rpc Publish(pubsub.PublishMessage) returns (common.Empty);
+	rpc Publish(realtime.PublishMessage) returns (common.Empty);
 }
 
 // widget services
