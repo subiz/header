@@ -391,6 +391,20 @@ message Appearance {
 	optional string padding_right = 23;
 	optional string padding_top = 24;
 	optional string padding_bottom = 25;
+
+	optional string title_font_family = 30;
+	optional string title_font_size = 31;
+	optional string title_font_style = 32;
+	optional string title_font_weight = 33;
+	optional string title_text_transform = 34;
+
+	optional string description_font_family = 35;
+	optional string description_font_size = 36;
+	optional string description_font_style = 37;
+	optional string description_font_weight = 38;
+	optional string description_text_transform = 39;
+
+	optional string input_label_color = 40;
 }
 
 message Submission  {
