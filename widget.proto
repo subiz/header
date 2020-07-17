@@ -405,6 +405,7 @@ message Appearance {
 	optional string description_text_transform = 39;
 
 	optional string input_label_color = 40;
+	optional string input_border_color = 41;
 }
 
 message Submission  {
