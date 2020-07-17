@@ -59,6 +59,8 @@ message PushNoti {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional string user_id = 4; // to user
+
+
 	optional string platform = 5;
 	optional string title = 6;
 	optional string body = 7;
@@ -67,8 +69,10 @@ message PushNoti {
 	optional string sender_type = 10;
 	optional string icon_url = 11;
 	optional string last_page_view_url = 12;
-	optional string type = 13;
+	optional string type = 13; // type of event message_sent ...
 	optional bytes payload = 14;
+
+	repeated common.By tos = 15;
 }
 
 message Message {
