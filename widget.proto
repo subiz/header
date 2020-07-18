@@ -226,6 +226,8 @@ message Segmentation {
 	optional string join = 5; // and | or
 
 	optional bool disabled = 12;
+	repeated Condition exclude_location_conditions = 13; // city, country_code (or only)
+
 }
 
 message Campaigns {
