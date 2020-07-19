@@ -481,7 +481,6 @@ service WidgetService {
 	rpc ReportCampaign(widget.ReportCampaignRequest) returns (widget.ReportCampaignResponse);
 	rpc ListConversions(widget.ConversionRequest) returns (widget.Conversions);
 	rpc ExportConversions(widget.ConversionRequest) returns (widget.ConversionsExported);
-	rpc SearchLocations(widget.SearchLocationsRequest) returns (user.Traces);
 	rpc UploadImage(widget.UploadedImage) returns (widget.UploadedImage);
 	rpc ListUploadedImage(common.Id) returns (widget.UploadedImages);
 	rpc DeleteUploadedImage(widget.UploadedImage) returns (common.Empty);

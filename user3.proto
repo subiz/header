@@ -62,7 +62,6 @@ message User {
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
-	repeated Trace traces = 11; // TODO: remove
 
 	repeated AttributeData attributes = 18;
 
@@ -116,67 +115,6 @@ message MergeRequest {
 message CreateRequest {
 	string challenge_id = 3;
 	string answer = 4;
-}
-
-// TODO: remove
-message Traces {
-	repeated Trace traces = 3;
-}
-
-// TODO: replace this with user session
-message Trace {
-	string event_id = 3;
-	string ip = 4;
-	int32 location_id = 5; // remove
-
-	string city_name = 8;            // filled
-	string country_name = 9;         // filled
-	string continent_code = 10;      // filled
-	float latitude = 12;             // filled
-	float longitude = 13;            // filled
-	string postal_code = 14;         // filled
-
-	string timezone = 16;
-
-	string isp = 17;                 // filled
-	string continent_name = 18;      // filled
-	string country_code = 19;        // filled
-
-	string platform = 20;
-
-	string device_type = 21;         // filled
-	enum DeviceType {
-		unknown = 0;
-		mobile = 1;
-		tablet = 2;
-		desktop = 3;
-	}
-
-	string browser_name = 22;        // filled
-	string language = 23;
-	string user_agent = 24;
-	string screen_resolution = 25;
-
-	string ga_client_id = 26;
-	repeated string ga_tracking_ids = 27;
-	enum AdsNetwork {
-		google_adwords = 0;
-	}
-	string ads_network = 28;
-
-	repeated Campaign campaigns = 29;
-	int64 created = 30;
-	int64 tracked = 31;
-
-	string referrer = 32;
-	enum Source {
-		direct = 0;
-		referring = 1;
-		organic = 2;
-		social = 3;
-		advertising = 4;
-	}
-	string source = 33;
 }
 
 message UserSearchResult {
