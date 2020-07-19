@@ -22,6 +22,7 @@ message UserSetting {
 	optional bool desktop_notification = 10;
 	optional user.Trace trace = 11;
 	repeated Campaign campaigns = 13;
+	optional user.Location geoip = 14;
 }
 
 message SocialLink {
