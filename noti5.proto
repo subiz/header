@@ -23,9 +23,10 @@ message Setting {
 
 	optional int64 updated = 8;
 
-	optional Subscription web = 9;
+	optional Subscription web = 9; // desktop
 	optional Subscription mobile = 10;
 	optional Subscription email = 11;
+	optional Subscription instant = 15; // web
 
 	optional DoNotDisturb do_not_disturb = 12;
 	optional int64 instant_mute_until = 14;
@@ -59,7 +60,6 @@ message PushNoti {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional string user_id = 4; // to user
-
 
 	optional string platform = 5;
 	optional string title = 6;
