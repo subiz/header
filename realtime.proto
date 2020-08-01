@@ -43,6 +43,9 @@ message Token {
 
 	int64 last_polled = 8;
 	int64 package_size = 9;
+
+	string group_id = 10;
+	string group_par = 11;
 }
 
 message PublishMessage {
