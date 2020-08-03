@@ -79,12 +79,6 @@ service CurrencyMgr {
 service UserMgr {
 	rpc SearchUsers (user.UserSearchRequest) returns (user.UserSearchResult); // deprecated
 
-	rpc PickToSegmentation(user.PickRequest) returns (common.Empty);
-	rpc DeleteFromSegmentation(user.UnpickRequest) returns (common.Empty);
-
-	rpc UnsubscribeUser(user.PickRequest) returns (common.Empty);
-	rpc SubscribeUser(user.PickRequest) returns (common.Empty);
-
 	rpc CreateUser (user.User) returns (common.Id);
 	rpc UpdateUser (user.User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (user.User);
@@ -129,21 +123,14 @@ service UserSyncMgr {
 	rpc UpsertAccount(account.Account) returns (common.Empty);
 	rpc DeleteAccount(common.Id) returns (common.Empty);
 
-	// sync segment
-	rpc RemoveFromTop(user.PickRequest) returns (common.Empty);
-	rpc AddToTop(user.PickRequest) returns (common.Empty);
-
 	// sync user
 	rpc UpdateUser(user.User) returns (common.Empty);
-	rpc PickToSegment(user.PickRequest) returns (common.Empty);
 	rpc CreateEvent(user.UserEvent) returns (common.Empty);
 	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
 
 	// sync automation
 	rpc FireBlockUser(user.AutomationEvent) returns (common.Empty);
 	rpc FireUpdateUserAttribute(user.AutomationEvent) returns (common.Empty);
-	rpc FireAddUserToSegment(user.AutomationEvent) returns (common.Empty);
-	rpc FireRemoveUserFromSegment(user.AutomationEvent) returns (common.Empty);
 	rpc FireAddUserNote(user.AutomationEvent) returns (common.Empty);
 	rpc FireMergeUsers(user.AutomationEvent) returns (common.Empty);
 	rpc FireUserNotification(user.AutomationEvent) returns (common.Empty);
@@ -465,7 +452,6 @@ service Pubsub {
 service WidgetService {
 	rpc Read(common.Id) returns (widget.Setting);
 	rpc Update(widget.Setting) returns (widget.Setting);
-	rpc Compile(widget.Setting) returns (widget.Setting);
 	rpc ReadUserSetting(common.Id) returns (widget.UserSetting);
 	rpc UpdateUserSetting(widget.UserSetting) returns (widget.UserSetting);
 
