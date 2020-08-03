@@ -501,6 +501,7 @@ message Template {
 	optional int64 created = 12;
 	optional int64 modified = 13;
 	optional string creator = 14;
+	optional int64 latest_picked = 15;
 }
 
 message SearchTemplate {
@@ -508,6 +509,7 @@ message SearchTemplate {
 	optional string anchor = 2;
 	optional int32 limit = 3;
 	optional string account_id = 5;
+	optional string order_by = 6; // latest_picked
 }
 
 message Templates {
