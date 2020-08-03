@@ -289,6 +289,7 @@ service TemplateMgr {
 	rpc DeleteTemplate(common.Id) returns (common.Empty);
 	rpc GetTemplate(common.Id) returns (conversation.Template);
 	rpc ListTemplates(conversation.SearchTemplate) returns (conversation.Templates);
+	rpc PickTemplate(common.Id) returns (common.Empty);
 }
 
 service TagMgr {
