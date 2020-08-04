@@ -21,7 +21,7 @@ message SearchUsersRequest {
 }
 
 message SearchUsersResponse {
-    int64 total = 2;
+	int64 total = 2;
 	string anchor = 3;
 	repeated user.User users = 4;
 }
@@ -35,7 +35,7 @@ message SearchConversationsRequest {
 }
 
 message SearchConversationsResponse {
-    int64 total = 2;
+	int64 total = 2;
 	string anchor = 3;
 	repeated conversation.Conversation conversations = 4;
 }
@@ -49,7 +49,7 @@ message SearchNotesRequest {
 }
 
 message SearchNotesResponse {
-    int64 total = 2;
+	int64 total = 2;
 	string anchor = 3;
 	repeated user.Note notes = 4;
 }
@@ -64,7 +64,7 @@ message SearchTicketsRequest {
 }
 
 message SearchTicketsResponse {
-    int64 total = 2;
+	int64 total = 2;
 	string anchor = 3;
 	repeated conversation.Ticket tickets = 4;
 }

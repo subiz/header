@@ -14,7 +14,6 @@ import "deal.proto";
 import "file.proto";
 import "kv.proto";
 import "realtime.proto";
-import "placeholder.proto";
 import "payment.proto";
 import "notibox.proto";
 import "noti5.proto";
@@ -110,23 +109,9 @@ service LiveMgr {
 }
 
 service UserSyncMgr {
-	// sync notify
-	rpc UpdateNoti5SubscribeStatus(noti5.SubscribeStatus) returns (common.Empty);
-
-	// sync limit
-	rpc UpdateLimit(payment.Limit) returns (common.Empty);
-
-	// sync account
-	rpc UpsertAgent(account.Agent) returns (common.Empty);
-	rpc UpdatePermission(account.AgentPerm) returns (common.Empty);
-	rpc DeleteAgent(common.Id) returns (common.Empty);
-	rpc UpsertAccount(account.Account) returns (common.Empty);
-	rpc DeleteAccount(common.Id) returns (common.Empty);
-
 	// sync user
 	rpc UpdateUser(user.User) returns (common.Empty);
 	rpc CreateEvent(user.UserEvent) returns (common.Empty);
-	rpc AddToMyList(user.AddToMyRequest) returns (common.Empty);
 
 	// sync automation
 	rpc FireBlockUser(user.AutomationEvent) returns (common.Empty);
@@ -135,16 +120,9 @@ service UserSyncMgr {
 	rpc FireMergeUsers(user.AutomationEvent) returns (common.Empty);
 	rpc FireUserNotification(user.AutomationEvent) returns (common.Empty);
 
-	// sync conversation
-	rpc UpdateUserSegment(conversation.UpdateUserSegmentRequest) returns (common.Empty);
-
 	// sync user job
 	rpc CallbackAutomation(user.AutomationCalledback) returns (common.Empty);
 	rpc ExportUsers(user.UserExportRequest) returns (common.Empty);
-}
-
-service VisitorMgr {
-	rpc ListTopVisitors (common.Id) returns (user.Visitors);
 }
 
 service AutomationCreditMgr {
@@ -244,30 +222,10 @@ service ConversationMgr {
 }
 
 service ConversationSyncMgr {
-	// sync client
-	rpc UpsertClient(client.Client) returns (common.Empty);
-	rpc DeleteClient(common.Id) returns (common.Empty);
-
 	// sync automation
 	rpc FireConvertTicket(user.AutomationEvent) returns (common.Empty);
 	rpc FireSendChatTranscriptEmail(user.AutomationEvent) returns (common.Empty);
 	rpc FireUpdateConversationState(user.AutomationEvent) returns (common.Empty);
-
-	// sync account
-	rpc DeleteAgent(common.Id) returns (common.Empty);
-	rpc DeleteGroup(common.Id) returns (common.Empty);
-	rpc RemoveAgentFromGroup(account.GroupMember) returns (common.Empty);
-	rpc AddAgentToGroup(account.GroupMember) returns (common.Empty);
-	rpc UpsertAgent(account.Agent) returns (common.Empty);
-	rpc UpsertAccount(account.Account) returns (common.Empty);
-	rpc CreateAccount(account.Account) returns (common.Empty);
-
-	// sync user attribute definition
-	rpc UpsertAttrDefinition(user.AttributeDefinition) returns (common.Empty);
-	rpc DeleteAttrDefinition(user.AttributeDefinition) returns (common.Empty);
-
-	// sync user segment
-	rpc UpdateUserSegment(conversation.UpdateUserSegmentRequest) returns (common.Empty);
 }
 
 service TemplateMgr {
@@ -337,12 +295,6 @@ service DealService {
   rpc DeletePipeline(common.Id) returns (common.Empty);
 }
 
-// event services
-service Publisher {
-	rpc Subscribe(user.Subscription) returns (user.SubscriptionResponse);
-	rpc Unsubscribe(user.Subscription) returns (user.SubscriptionResponse);
-}
-
 service EventMgr {
 	rpc SearchEvents (user.ListEventsRequest) returns (user.Events);
 	rpc CreateEvent (user.UserEvent) returns (user.Event);
@@ -375,9 +327,7 @@ service Noti5Service {
 	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
 
 	rpc Noti(noti5.PushNoti) returns (common.Empty);
-}
 
-service Noti5TokenService {
 	rpc AddToken(noti5.Token) returns (common.Empty);
 	rpc RemoveToken(noti5.Token) returns (common.Empty);
 	rpc CheckTokenExists(noti5.Token) returns (common.Empty);
@@ -436,11 +386,6 @@ service PaymentMgr {
 	rpc ListBillByAccountReferred(common.Id) returns (payment.LogBillByAccountReferreds);
 	rpc ListPaidForAgentReferrer(common.Id) returns (payment.LogPaidForAgentReferrers);
 	rpc PaidForAgentReferrer(payment.LogPaidForAgentReferrer) returns (common.Empty);
-}
-
-// placeholder services
-service PlaceHolder {
-	rpc Resolve(placeholder.ResolveRequest) returns (placeholder.Resolved) {}
 }
 
 // pubsub services
