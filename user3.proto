@@ -29,31 +29,32 @@ message TotalOpenTicket {
 	int32 total = 4;
 }
 
-message AttributeData {
+message Attribute {
 	string account_id = 2;
 	string user_id = 3;
 	string key = 4;
 
-	// int64 created = 7;
-	// int64 modified = 8;
+	int64 modified = 8;
 
+	string value = 9;
 	string text = 10;
 	double number = 11;
 	bool boolean = 12;
 	string datetime = 13;
-	repeated string list = 14;
+	repeated string list = 14; // remove
 
-	//string setter = 16;
-	//string setter_type = 17;
+	string type = 16;
+	string by = 17;
 
 	// to update
 	enum Ops {
-		upsert = 0; // override
-		insert = 1; // only write if not existed
-		update = 4; // only write if existed
-		append = 6; // append to bottom
-		remove = 7; // not used yet
-		delete = 8; // not used yet
+		clear = 0;
+		upsert = 1; // update + insert, remove all other value
+		update = 2; // only write if existed, remove all other value
+		insert = 3; // only write if not existed, remove all other value
+
+		delete = 4; // delete specific elemnt match the value
+		append = 5; // add a new value (for array)
 	}
 	string action = 18;
 }
@@ -63,16 +64,16 @@ message User {
 	string id = 3;
 	string account_id = 4;
 
-	repeated AttributeData attributes = 18;
+	repeated Attribute attributes = 18;
 
-	repeated string segments = 19;
-	string subiz_id = 25;
+	// repeated string segments = 19;
+	// string subiz_id = 25;
 
-	repeated string aliases = 30;
+	// repeated string aliases = 30;
 
 	int32 par = 34;
 
-	repeated Identification identifications = 39;
+	// repeated Identification identifications = 39;
 	UserSession session = 40;
 }
 
@@ -237,42 +238,36 @@ message DeleteAttrRequest {
 	string key = 2;
 }
 
-enum AttributeType {
-	text = 0;
-	number = 1;
-	boolean = 2;
-	datetime = 3;
-	list = 4;
-}
-
-enum AttributeKind {
-	system = 0;
-	default = 1;
-	custom = 2;
-}
-
 message AttributeDefinition {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string name = 3;
 	string description = 4;
 	string type = 5;
+	enum AttributeType {
+		text = 0;
+		number = 1;
+		boolean = 2;
+		datetime = 3;
+		list = 4; // remove
+	}
+
 	repeated string list_items = 6;
 	string key = 7;
 	string kind = 8;
 	int64 updated = 9;
+	string validator = 10; // email, name
+
+	enum AttributeKind {
+		system = 0; // only system read and write
+		default = 1; // created but agent can write, but not remove
+		custom = 2;
+	}
 }
 
 message AttributeDefinitions {
 	common.Context ctx = 1;
 	repeated AttributeDefinition attributes = 2;
-}
-
-message AddToMyList {
-	common.Context ctx = 1;
-	string agent_id = 2;
-	string user_id = 3;
-	string account_id = 5;
 }
 
 message UserCreateResult {
@@ -563,7 +558,7 @@ message Event {
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
 		payment.Limit limit = 19;
-		user.Identification alias = 22;
+		// user.Identification alias = 22;
 		user.Note note = 23;
 		conversation.Ticket ticket = 24;
 		Automation automation = 25;
