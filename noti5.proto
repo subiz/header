@@ -73,16 +73,3 @@ message PushNoti {
 
 	repeated common.By tos = 15;
 }
-
-message Message {
-	optional string fcm_token = 2;
-	optional string title = 3;
-	optional string body = 4;
-}
-
-message SubscribeStatus {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	optional bool	status = 4;
-}

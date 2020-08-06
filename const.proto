@@ -31,7 +31,6 @@ enum E {
 	ConversationWaiting = 1002; // new conversation is added to unassigned list
 	ConversationStartRequested = 1003; // conversation started from an agent // conversationstart
 	ConversationAccepted = 1004; // conversation from unassigned list is accepted by an agent
-	ConversationDropped = 1005; // conversation dropped from unassigned list
 	ConversationEventCreated = 1006;
 	ConversationJoinRequested = 1007;
 	ConversationMessageRequested = 1008; // message
@@ -45,25 +44,10 @@ enum E {
 	UserTopicSearchRequested = 1116; // listtopicsrequest -> listtopicsresult
 	UserEventSearchRequested = 1117; // listeventsrequest -> rawevents
 
-	ConversationCloseRequested = 10010; // id
-	ConversationTagRequested = 10011;
-	ConversationUntagRequested = 10012;
-	ConversationReadRequested = 10013;
-	ConversationListRequested = 10014;
-	ConversationAcceptRequested = 10015;
-	ConversationUpdateRuleRequested = 10020; // rule
-	ConversationCreateRuleRequested = 10021; // rule
-	ConversationDeleteRuleRequested = 10022; // id
-	ConversationReadRuleRequested = 10023; // id
-	ConversationListRuleRequested = 10024; // id accountid, return top N rule
 	ConversationUserRequestReply = 10051; // user
 	ConversationLimitUpdated = 10052;
 	ConversationRequestWaitTimeout = 10060;
 	ConversationListEventsRequested = 10061;
-
-	ChannelDeintegrateRequested = 10065;     // id -> empty
-	ChannelIntegrateRequested = 10066;  // integration -> integration
-	ChannelIntegrationListRequested = 10067; // id -> integrations
 
 	ConnectorUpsertRequested = 10068;
 	ConnectorListRequested = 10069;

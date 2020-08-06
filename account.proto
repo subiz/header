@@ -200,13 +200,6 @@ message Token {
 	optional string account_id = 4;
 }
 
-message AccountV3 {
-	optional common.Context ctx = 1;
-	optional Account account = 2;
-	optional Agent owner = 3;
-	optional payment.Subscription subscription = 4;
-}
-
 message ConfirmEmail {
 	optional common.Context ctx = 1;
 	optional string to = 2;

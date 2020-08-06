@@ -46,10 +46,7 @@ service AccountMgr {
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(account.CreateAccountRequest) returns (account.Account);
 	rpc ListAgents(common.Id) returns (account.Agents);
-	rpc CountAccount(account.CountRequest) returns (account.Count);
-
-	// todo: remove this, we should redirect all login request to oauth server
-	rpc Login(account.LoginRequest) returns (account.Agent);
+	rpc CountAccount(account.CountRequest ) returns (account.Count);
 
 	rpc DeleteGroup(common.Id) returns (common.Empty);
 	rpc ListGroups(common.Id) returns (account.AgentGroups);
@@ -82,13 +79,9 @@ service UserMgr {
 	rpc UpdateUser (user.User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (user.User);
 
-	rpc CountSegmentationUserByAttribute(user.CountSegmentationUserByAttributeRequest) returns (user.CountResponse);
-
 	rpc CountTotal(user.CountTotalRequest) returns (user.CountTotalResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
-	rpc AddAlias(user.Identification) returns (common.Empty);
-	rpc MergeUsers(user.MergeRequest) returns (common.Empty);
 	rpc ExportUsers (user.UserExportRequest) returns (common.Empty); // deprecated
 
 	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
@@ -110,15 +103,12 @@ service LiveMgr {
 
 service UserSyncMgr {
 	// sync user
-	rpc UpdateUser(user.User) returns (common.Empty);
 	rpc CreateEvent(user.UserEvent) returns (common.Empty);
 
 	// sync automation
 	rpc FireBlockUser(user.AutomationEvent) returns (common.Empty);
 	rpc FireUpdateUserAttribute(user.AutomationEvent) returns (common.Empty);
 	rpc FireAddUserNote(user.AutomationEvent) returns (common.Empty);
-	rpc FireMergeUsers(user.AutomationEvent) returns (common.Empty);
-	rpc FireUserNotification(user.AutomationEvent) returns (common.Empty);
 
 	// sync user job
 	rpc CallbackAutomation(user.AutomationCalledback) returns (common.Empty);

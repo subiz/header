@@ -15,20 +15,6 @@ import "payment.proto";
 import "email.proto";
 import "bot.proto";
 
-message TotalConvoUpdateRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	int32 total = 4;
-}
-
-message TotalOpenTicket {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	int32 total = 4;
-}
-
 message Attribute {
 	string account_id = 2;
 	string user_id = 3;
@@ -106,13 +92,6 @@ message CountResponse {
 	repeated int32 data = 3;
 }
 
-message MergeRequest {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string destination_user_id = 5;
-	string source_user_id = 4;
-}
-
 message CreateRequest {
 	string challenge_id = 3;
 	string answer = 4;
@@ -128,54 +107,6 @@ message UserSearchResult {
 	map<string, int32> unread_counts = 7;
 }
 
-message UnpickRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	string segmentation_id = 5;
-}
-
-message PickRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	string agent_id = 4;
-	string segmentation_id = 5;
-	int64 added = 7;
-	int64 updated = 8;
-}
-
-message CountSegmentationUserByAttributeRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string attribute_key = 3;
-	string segmentation_id = 4;
-	int32 from = 5; // deprecated
-	int32 to = 6; // deprecated
-	string range = 8;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-	int32 from_hour = 9;
-	int32 to_hour = 10;
-}
-
-message Visitor {
-	common.Context ctx = 1;
-	string account_id = 3;
-	User user = 4;
-	int64 pinged = 5;
-	string page_url = 6;
-	int64 page_viewed = 7;
-	string page_title = 8;
-}
-
-message Visitors {
-	common.Context ctx = 1;
-	repeated Visitor visitors = 2;
-}
-
 message LastView {
 	string account_id = 3;
 	string user_id = 4;
@@ -187,13 +118,6 @@ message LastView {
 	string title = 10;
 }
 
-message SubscribeTopic {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string topics = 4;
-}
-
 message MuteRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -203,13 +127,6 @@ message MuteRequest {
 	bool mute = 6; // true, false
 }
 
-message SubscribeUser {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string user_ids = 4;
-}
-
 message ReadTopicRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -217,20 +134,6 @@ message ReadTopicRequest {
 	string user_id = 4;
 	string agent_id = 5;
 	int64 read = 6; // read time in milisecond
-}
-
-message SubscribeRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	repeated string topics = 4;
-}
-
-message AddToMyRequest {
-	common.Context ctx = 1;
-	string user_id = 3;
-	repeated string agent_ids = 5;
-	string account_id = 2; // used within user service only
 }
 
 message DeleteAttrRequest {
@@ -510,20 +413,6 @@ message PageMetrics {
 }
 
 ///////////////////////
-message RawEventCreatedPayload {
-	common.Context ctx = 1;
-	repeated string subs = 3;
-	string target_topic = 4;
-	string payload = 5; //json format
-	string target_key = 6;
-	repeated string payloads = 7; // payload for each sub, payload must be empty
-	string topic = 9;
-	string router_topic = 10;
-	string sub = 11;
-	int64 created = 12; // in ms
-	bytes data = 13; // payload in bytes format
-}
-
 message Events {
 	common.Context ctx = 1;
 	repeated Event events = 4;
@@ -581,24 +470,6 @@ message EventParams {
 	string type = 2;
 }
 
-message Subscription { // raweventcreatedpayload
-	common.Context ctx = 1;
-	string topic = 3;
-
-	string sub_id = 7;
-
-	string target_topic = 10;
-	string target_key = 11;
-	int64 ttls = 12;
-	string router_topic = 13;
-	int32 target_partition = 14;
-}
-
-enum SubPrefix {
-	Webhook = 0;
-	Websocket = 1;
-}
-
 message ListEventsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -615,11 +486,6 @@ message UserEvent {
 	string user_id = 4;
 	Event event = 5;
 	user.User user = 6;
-}
-
-message SubscriptionResponse {
-	common.Context ctx = 1;
-	bool status = 2;
 }
 
 message AutomationCalledback {
@@ -648,7 +514,6 @@ message Automation {
 	string channel = 4; // deprecated
 	string name = 5;
 	string description = 6;
-	repeated user.Condition conditions = 7; // deprecated
 	user.SCondition condition = 8;
 
 	int64 created = 9;
@@ -834,21 +699,6 @@ message UnreadTopic { // todo: delete this, unread is just topic_updated with is
 	Event by_event = 10;
 }
 
-message ListTopicsRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	string agent_id = 5;
-	string anchor = 4;
-	int32 limit = 7;
-	bool unread = 8;
-}
-
-message ListTopicsResult {
-	common.Context ctx = 1;
-	repeated Topic topics = 3;
-	string anchor = 5;
-}
 
 message UserSession {
 	common.Context ctx = 1;

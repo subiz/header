@@ -6,17 +6,6 @@ option go_package = "github.com/subiz/header/user";
 
 import "common.proto";
 
-message AggregateSegmentAttrCount {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 min = 3;
-	optional int64 count = 5;
-	optional int64 created = 6;
-	optional string segmentation_id = 7;
-	optional string attribute = 8;
-	optional int64 hour = 9;
-}
-
 message Segmentations {
 	optional common.Context ctx = 1;
 	repeated Segmentation segmentations = 3;
@@ -48,48 +37,6 @@ message Segmentation {
 		account = 1;
 	}
 	optional bool is_system = 22;
-}
-
-message Condition {
-	enum JoinOperator {
-		none = 0;
-		and = 1;
-		or = 2;
-	}
-	optional string join = 1;
-	optional string key = 2; // unique
-	optional string operator = 3; // = # regex
-	optional string value = 4; // JSON
-	optional string id = 6;
-}
-
-enum JoinOperator {
-	none = 0;
-	and = 1;
-	or = 2;
-}
-
-enum ConditionType {
-	attribute = 0;
-	event = 1;
-}
-
-message SegmentIndex {
-	optional string account_id = 2;
-	optional string segmentation_id = 3;
-	optional int32 year = 4;
-	optional int32 day = 5;
-	optional int32 hour = 6;
-}
-
-message SegmentUser {
-	optional string account_id = 2;
-	optional string segmentation_id = 3;
-	optional int32 day = 4;
-	optional int32 hour = 5;
-	optional string user_id = 6;
-	optional int64 activated = 7;
-	optional string picked_by = 8; // agent id or system
 }
 
 // can be

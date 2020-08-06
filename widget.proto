@@ -21,7 +21,6 @@ message UserSetting {
 	optional Setting account_setting = 9;
 	optional bool desktop_notification = 10;
 	repeated Campaign campaigns = 13;
-	optional user.Location geoip = 14;
 }
 
 message SocialLink {

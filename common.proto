@@ -47,11 +47,9 @@ message ObjectPathRequest {
 
 message Context {
 	string event_id = 1;
-	bytes state = 2;
 	string node = 3;
 
 	Credential credential = 6;
-	Tracing tracing = 7;
 
 	Device by_device = 10;
 
@@ -125,18 +123,6 @@ enum Month {
 	October = 9;
 	November = 10;
 	December = 11;
-}
-
-message Tracing {
-	repeated Trace traces = 1;
-}
-
-message Trace {
-	string serviceName = 1;
-	string name = 2;
-	int64 duration = 3; // nanoseconds
-	int64 started = 4; // unix nano
-	int64 ended = 5; // unix nano
 }
 
 message By {
