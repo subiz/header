@@ -381,6 +381,8 @@ message GenericElementTemplate {
 	optional string subtitle = 4;
 	optional Button default_action = 5;
 	repeated Button buttons = 6;
+
+	optional string id = 7; // fb product id
 }
 
 enum AttachmentType {

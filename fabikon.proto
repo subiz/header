@@ -121,6 +121,7 @@ message GenericElement {
 	optional string image_url = 4;
 	optional string subtitle = 5;
 	optional FbAction default_action = 6;
+	optional string id = 7; // fb product id
 }
 
 message FbPayload {
@@ -238,4 +239,12 @@ message Error {
 
 message FbResponse {
 	optional Error error = 2;
+}
+
+message FbProductItem {
+	optional string id = 3;
+	optional string image_url = 4;
+	optional string name = 5;
+	optional string price = 6;
+	optional string url = 7;
 }
