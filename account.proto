@@ -225,6 +225,15 @@ message WarnInactiveEmail {
 	optional int64 inactive_date = 10; // in ms
 }
 
+message InvoiceEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 3;
+	optional int64 created = 6; // sec
+	repeated string invoice_ids = 8;
+	repeated string invoice_urls = 9;
+	optional int32 overdue_days = 10;
+}
+
 message ChangeEmailEmail {
 	optional common.Context ctx = 1;
 	optional string to = 2;

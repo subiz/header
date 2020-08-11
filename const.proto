@@ -282,6 +282,7 @@ enum E {
 	AccountDeactivated = 110564;
 	AgentLoggedIn = 110565;
 	AccountWarnInactive = 110566;
+	UnpaidInvoiceEmail = 110567;
 
 	UserRequested = 111100;
 	UserSynced = 111101;
