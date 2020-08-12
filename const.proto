@@ -283,6 +283,10 @@ enum E {
 	AgentLoggedIn = 110565;
 	AccountWarnInactive = 110566;
 	UnpaidInvoiceEmail = 110567;
+	SubscriptionUpgradedEmail = 110568;
+	BillCreatedEmail = 110569;
+	DowngradedToFreeEmail = 110570;
+	TrialEndingEmail = 110571;
 
 	UserRequested = 111100;
 	UserSynced = 111101;

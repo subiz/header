@@ -227,11 +227,38 @@ message WarnInactiveEmail {
 
 message InvoiceEmail {
 	optional common.Context ctx = 1;
-	optional string account_id = 3;
+	optional string account_id = 2;
 	optional int64 created = 6; // sec
 	repeated string invoice_ids = 8;
 	repeated string invoice_urls = 9;
 	optional int32 overdue_days = 10;
+}
+
+message SubscriptionUpgradedEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 created = 6; // sec
+}
+
+message BillCreatedEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 created = 6; // sec
+	repeated string invoice_ids = 8;
+	repeated string invoice_urls = 9;
+}
+
+message TrialEndingEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 created = 6; // sec
+	optional int64 ended = 7;
+}
+
+message DowngradedToFreeEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 created = 6; // sec
 }
 
 message ChangeEmailEmail {
