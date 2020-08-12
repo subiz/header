@@ -46,14 +46,13 @@ service AccountMgr {
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(account.CreateAccountRequest) returns (account.Account);
 	rpc ListAgents(common.Id) returns (account.Agents);
-	rpc CountAccount(account.CountRequest ) returns (account.Count);
+	rpc CountAccount(account.CountRequest) returns (account.Count);
 
 	rpc DeleteGroup(common.Id) returns (common.Empty);
 	rpc ListGroups(common.Id) returns (account.AgentGroups);
 	rpc AddAgentToGroup(account.GroupMember) returns (common.Empty);
 	rpc RemoveAgentFromGroup(account.GroupMember) returns (common.Empty);
 	rpc ChangeEmail(account.Agent) returns (account.Agent);
-	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
 	rpc IntegrateBot(account.Agent) returns (account.Agent);
 	rpc SyncPublicHolidays(account.SyncPublicHolidaysRequest) returns (account.BusinessHours);
 	rpc TransferOwner(common.Id) returns (account.Agent);
@@ -197,8 +196,6 @@ service ConversationMgr {
 	rpc LeftConversation(conversation.Member) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc QueryByObjectPath(common.ObjectPathRequest) returns (common.Ids);
-
 	rpc UpdateConversationInfo(conversation.Conversation) returns (conversation.Conversation);
 
 	rpc FilterUser(conversation.FilterUserRequest) returns (conversation.FilterUserResponse);
