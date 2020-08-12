@@ -231,7 +231,7 @@ message InvoiceEmail {
 	optional int64 created = 6; // sec
 	repeated string invoice_ids = 8;
 	repeated string invoice_urls = 9;
-	optional int32 overdue_days = 10;
+	repeated int32 overdue_days = 10;
 }
 
 message SubscriptionUpgradedEmail {
