@@ -215,7 +215,6 @@ message Message {
 
 	repeated Field fields =	10;
 
-	optional Computed computed = 12; // DELETE THIS
 	optional string integration_id = 15;
 	optional string chain_id = 16;
 
@@ -247,6 +246,7 @@ message MessagePong {
 		remove_angry = 16;
 		hide = 17;
 		remove_hide = 18;
+		open = 19;
 	}
 	optional string type = 4;
 
@@ -260,37 +260,6 @@ message Revision {
 	repeated Attachment attachments = 7;
 	repeated Field fields =	8;
 	optional int64 created = 9;
-}
-
-message Computed {
-	repeated Seen seen = 4;
-	repeated Ack ack = 5;
-	repeated Received received = 6;
-}
-
-message Seen {
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string event_id = 10;
-	optional string member_id = 6;
-	optional int64 at = 4;
-}
-
-message Ack {
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string event_id = 10;
-	optional string member_id = 5;
-	optional string error = 6;
-	optional int64 at = 4;
-}
-
-message Received {
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string event_id = 10;
-	optional string member_id = 4;
-	optional int64 at = 5;
 }
 
 message Field {
@@ -531,20 +500,6 @@ message Postback {
 	optional Button button = 3;
 }
 
-message UseConnector {
-	optional string account_id = 2;
-	optional string connector_id = 3;
-
-	enum State {
-		disabled = 0;
-		activated = 1;
-	}
-	optional string state = 8;
-
-	optional string updated = 9;
-	optional string by = 10;
-}
-
 message Integrations {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -577,21 +532,6 @@ message SearchMessageRequest {
 	optional string query = 5;
 	optional string anchor = 6;
 	optional int32 limit = 7;
-}
-
-message MessageId {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string message_id = 4;
-}
-
-message MessageAck {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string message_id = 4;
-	optional string error = 5;
 }
 
 message TagRequest {
@@ -647,31 +587,6 @@ message Chain {
 	optional string account_id = 2;
 	optional string id = 3;
 	optional string conversation_id = 4;
-}
-
-enum Path {
-	ConversationSendMessageToConvo = 0;
-	ConversationSendMessageToChain = 1;
-	ConversationEndChain = 2;
-	ConversationEndConvo = 3;
-	ConversationStartConvo = 4;
-	ConversationStartInChain = 5;
-	ConversationAcceptConvo = 6;
-	ConversationAcceptChain = 7;
-	ConversationJoinConvo = 8;
-	ConversationJoinChain = 9;
-	ConversationLeaveConvo = 10;
-	ConversationLeaveChain = 11;
-	ConversationTagConvo = 13;
-	ConversationTagChain = 14;
-	ConversationJustSendConvo = 15;
-	ConversationJustSendChain = 16;
-	ConversationUpdateStateConvo = 17;
-	ConversationUpdateStateChain = 18;
-	ConversationCreateTicket = 19;
-	ConversationUpdateTicket = 20;
-	ConversationSendWebhook = 21;
-	ConversationDeleteTicket = 22;
 }
 
 message Ticket {
