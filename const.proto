@@ -7,26 +7,7 @@ option go_package = "github.com/subiz/header";
 // field number of each group is 1000 apart, start from 2 millions
 
 enum E {
-	// out event only
 	Sub = 0;
-	RawEventCreated = 3;  //
-	Subscribe = 4; // subscription
-	// AgentExpired = 5; // oe only, id
-	Unsubscribe = 5; // subscription
-	SubscribeReply = 6;
-	// AgentCreated = 7; // agent
-	UnsubscribeReply = 7;
-	// AgentStateUpdated = 8; // could be deleted
-	EventSync = 8;
-	EventCreated = 9;
-	// ConnectorAuthorized = 13; // conversation send to auth to send ClientAuthorized
-	UserReadTopicRequested = 41; // ReadTopicRequest -> 111Empty
-	// ConversationRequested = 50; // user request for new conversation
-	Send_ = 50;
-	ApiReply = 52;
-	// AutomationAgentNotificationFired = 54;
-	// UserAggregateSegmentCount = 216;
-
 	ConversationAssigned = 1000; // conversation is assigned to an agent
 	ConversationWaiting = 1002; // new conversation is added to unassigned list
 	ConversationStartRequested = 1003; // conversation started from an agent // conversationstart
@@ -49,15 +30,6 @@ enum E {
 	ConversationRequestWaitTimeout = 10060;
 	ConversationListEventsRequested = 10061;
 
-	ConnectorUpsertRequested = 10068;
-	ConnectorListRequested = 10069;
-
-	TagCreateRequested = 10085; // tag
-	TagUpdateRequested = 10086; // tag
-	TagReadRequested = 10087; // id
-	TagDeleteRequested = 10088; // id
-	TagListRequested = 10089; // search
-
 	ConversationMessageAckRequested = 10090;
 	ConversationMessageReceiveRequested = 10091;
 	ConversationMessageSeeRequested = 10092;
@@ -73,24 +45,6 @@ enum E {
 	ContentViewed = 10503;
 	Email_SendRequest =10600;
 
-	WsSynced = 10700;
-	WsRequested = 10701;
-	WsSend = 10710;
-
-	RealtimeRequested = 10720;
-	RealtimeMessage = 10721;
-	RealtimeMeta = 10722;
-
-	WidgetUserSettingReadRequested = 10800;
-	WidgetUserSettingUpdateRequested = 10801;
-	WidgetSettingReadRequested = 10802;
-	WidgetSettingUpdateRequested = 10803;
-	WidgetSettingCssVersionUpdated = 10804;
-	WidgetSettingLanguageUpdated = 10805;
-	WidgetSettingCssVersionUpdateRequested = 10806;
-	WidgetSettingLanguageUpdateRequested = 10807;
-	WidgetRequested = 10808;
-
 	Webhook4WebhookReadRequested = 10903;
 	Webhook4WebhookUpserted = 10904;
 	Webhook4WebhookVerifyRequested = 10905;
@@ -98,11 +52,6 @@ enum E {
 	Webhook4ClearBackoffRequested = 10907;
 	Webhook4PurgeQueueRequested = 10908;
 	Webhook4ShardSend = 10909;
-
-	PubsubSynced = 11000;
-	PubsubRequested = 11001;
-	PubsubPublish = 11002;
-	PubsubWorkerJob = 11007;
 
 	NotiboxRequested = 11010;
 	NotiUpsertRequested = 11011;
@@ -155,11 +104,6 @@ enum E {
 	UserAddToMyListRequested = 11120;
 	UserRemoveFromMyListRequested = 11121;
 
-	Noti5Sync = 11122;
-	Noti5SubscribeStatusUpdated = 11123;
-	Noti5PushRequested = 11128;
-	Noti5Requested = 11129;
-
 	UserEventTopicSubscribeRequested = 11135;
 	UserEventTopicUnsubscribeRequested = 11136;
 
@@ -192,20 +136,6 @@ enum E {
 	UserAttributeUpdated = 11173;
 	UserAttributeDeleted = 11174;
 	UserAttributeSynced = 11175;
-
-	ConversationRequested = 100100;
-	ConversationSynced = 100101;
-	ConversationV3Synced = 100102;
-	ConversationWorkerJob = 100103;
-	TemplateCreateRequested = 100104;
-	TemplateUpdateRequested = 100105;
-	TemplateDeleteRequested = 100106;
-	TemplateReadRequested = 100107;
-	TemplateListRequested = 100108;
-	ConversationAgentPresenceUpdated = 100109;
-	ConversationReportAggregated = 100110;
-	ConversationReportCallback = 100111;
-	ConversationReportCallbackNonReplied = 100118;
 
 	BlacklistDomainCreated = 103012;
 	BannedUserCreated = 103013;
@@ -333,12 +263,6 @@ enum E {
 	TicketUpdated = 111234;
 	AutomationCreditAggregated = 111235;
 	AutomationCreditCountAggregate = 111236;
-
-	UserJustAddNote = 111241;
-	UserJustAddTopic = 111242;
-	UserJustAddEvent = 111243;
-	UserJustAddTrace = 111244;
-	UserMerge = 111245;
 
 	AutomationSendEmailFired = 111431;
 	AutomationOpenWidgetScreenFired = 111432;
