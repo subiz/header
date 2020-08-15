@@ -291,3 +291,27 @@ message StringParams {
 	repeated string in = 3;
 	string contain = 4;
 }
+
+message Log {
+	Context ctx = 1;
+	string trace_id = 2;
+	int64 created = 8;
+	string level = 10;
+	repeated string tags = 4;
+	bytes message = 24;
+	string service_name = 25;
+}
+
+// Log level
+enum Level {
+	debug = 0;
+	info = 1;
+	notice = 2;
+	warning = 3;
+	error = 4;
+	critical = 5;
+	alert = 6;
+	emergency = 7;
+	panic = 8;
+	fatal = 9;
+}
