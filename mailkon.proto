@@ -57,3 +57,23 @@ message UserAvail {
 	optional bool availability = 6;
 	optional int64 updated = 7;
 }
+
+message SendgridTrackingEvent {
+	optional string email = 3;
+	optional int64 timestamp = 4;
+	optional string smtp_id = 5;
+	optional string event = 6;
+	optional string category = 7;
+	optional string sg_event_id = 8;
+	optional string sg_message_id = 9;
+	optional string reason = 10;
+	optional string status = 11;
+	optional string response = 12;
+	optional string attempt = 13;
+	optional string type = 14;
+
+	optional string ip = 16;
+	optional string useragent = 17;
+	optional string url = 18;
+	optional int64 asm_group_id = 19;
+}
