@@ -230,7 +230,7 @@ message MessagePong {
 	enum Type {
 		ack = 1;
 		seen = 2;
-		receive = 3;
+		receive = 3; // deliverd to client machine
 		delete = 4;
 		like = 5;
 		love = 6;
@@ -246,12 +246,13 @@ message MessagePong {
 		remove_angry = 16;
 		hide = 17;
 		remove_hide = 18;
-		open = 19;
+		open = 19; // email opened
 	}
 	optional string type = 4;
 
 	optional int64 created = 5;
 	optional string ack_error = 6; // used in ack
+	optional int64 count =  7;
 }
 
 message Revision {
