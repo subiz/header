@@ -753,7 +753,7 @@ message UserSession {
 
 	repeated Campaign campaigns = 29;
 
-	SourceTrace source_traces = 39;
+	repeated SourceTrace source_traces = 39;
 	string referrer = 32;
 	string destination_referrer = 38;
 	enum Source {
