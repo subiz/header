@@ -700,6 +700,12 @@ message UnreadTopic { // todo: delete this, unread is just topic_updated with is
 }
 
 
+message SourceTrace {
+	common.Context ctx = 1;
+	string referrer = 2;
+	string source_referrer = 3;
+}
+
 message UserSession {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -747,7 +753,9 @@ message UserSession {
 
 	repeated Campaign campaigns = 29;
 
+	SourceTrace source_traces = 39;
 	string referrer = 32;
+	string destination_referrer = 38;
 	enum Source {
 		direct = 0;
 		referring = 1;
