@@ -4948,14 +4948,12 @@ type InvoiceCreatedEmail struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx         *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	To          *string         `protobuf:"bytes,2,opt,name=to" json:"to,omitempty"`
-	AccountId   *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	BillingName *string         `protobuf:"bytes,4,opt,name=billing_name,json=billingName" json:"billing_name,omitempty"`
-	InvoiceId   *string         `protobuf:"bytes,5,opt,name=invoice_id,json=invoiceId" json:"invoice_id,omitempty"`
-	Created     *int64          `protobuf:"varint,6,opt,name=created" json:"created,omitempty"`
-	Lang        *common.L       `protobuf:"varint,8,opt,name=lang,enum=common.L" json:"lang,omitempty"`
-	From        *string         `protobuf:"bytes,10,opt,name=from" json:"from,omitempty"`
+	Ctx            *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId      *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	InvoiceId      *string         `protobuf:"bytes,5,opt,name=invoice_id,json=invoiceId" json:"invoice_id,omitempty"`
+	Created        *int64          `protobuf:"varint,6,opt,name=created" json:"created,omitempty"`
+	InvoiceCreated *string         `protobuf:"bytes,8,opt,name=invoice_created,json=invoiceCreated" json:"invoice_created,omitempty"`
+	InvoiceLink    *string         `protobuf:"bytes,9,opt,name=invoice_link,json=invoiceLink" json:"invoice_link,omitempty"`
 }
 
 func (x *InvoiceCreatedEmail) Reset() {
@@ -4997,23 +4995,9 @@ func (x *InvoiceCreatedEmail) GetCtx() *common.Context {
 	return nil
 }
 
-func (x *InvoiceCreatedEmail) GetTo() string {
-	if x != nil && x.To != nil {
-		return *x.To
-	}
-	return ""
-}
-
 func (x *InvoiceCreatedEmail) GetAccountId() string {
 	if x != nil && x.AccountId != nil {
 		return *x.AccountId
-	}
-	return ""
-}
-
-func (x *InvoiceCreatedEmail) GetBillingName() string {
-	if x != nil && x.BillingName != nil {
-		return *x.BillingName
 	}
 	return ""
 }
@@ -5032,16 +5016,253 @@ func (x *InvoiceCreatedEmail) GetCreated() int64 {
 	return 0
 }
 
-func (x *InvoiceCreatedEmail) GetLang() common.L {
-	if x != nil && x.Lang != nil {
-		return *x.Lang
+func (x *InvoiceCreatedEmail) GetInvoiceCreated() string {
+	if x != nil && x.InvoiceCreated != nil {
+		return *x.InvoiceCreated
 	}
-	return common.L_en
+	return ""
 }
 
-func (x *InvoiceCreatedEmail) GetFrom() string {
-	if x != nil && x.From != nil {
-		return *x.From
+func (x *InvoiceCreatedEmail) GetInvoiceLink() string {
+	if x != nil && x.InvoiceLink != nil {
+		return *x.InvoiceLink
+	}
+	return ""
+}
+
+type TrialEndingEmail struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId *string         `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Ended     *int64          `protobuf:"varint,3,opt,name=ended" json:"ended,omitempty"`
+	Created   *int64          `protobuf:"varint,6,opt,name=created" json:"created,omitempty"`
+}
+
+func (x *TrialEndingEmail) Reset() {
+	*x = TrialEndingEmail{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_payment_proto_msgTypes[53]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TrialEndingEmail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrialEndingEmail) ProtoMessage() {}
+
+func (x *TrialEndingEmail) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_proto_msgTypes[53]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrialEndingEmail.ProtoReflect.Descriptor instead.
+func (*TrialEndingEmail) Descriptor() ([]byte, []int) {
+	return file_payment_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *TrialEndingEmail) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *TrialEndingEmail) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *TrialEndingEmail) GetEnded() int64 {
+	if x != nil && x.Ended != nil {
+		return *x.Ended
+	}
+	return 0
+}
+
+func (x *TrialEndingEmail) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+type UpdatePlanEmail struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId *string         `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	OldPlan   *string         `protobuf:"bytes,4,opt,name=old_plan,json=oldPlan" json:"old_plan,omitempty"`
+	NewPlan   *string         `protobuf:"bytes,5,opt,name=new_plan,json=newPlan" json:"new_plan,omitempty"`
+	Created   *int64          `protobuf:"varint,6,opt,name=created" json:"created,omitempty"`
+}
+
+func (x *UpdatePlanEmail) Reset() {
+	*x = UpdatePlanEmail{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_payment_proto_msgTypes[54]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdatePlanEmail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlanEmail) ProtoMessage() {}
+
+func (x *UpdatePlanEmail) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_proto_msgTypes[54]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlanEmail.ProtoReflect.Descriptor instead.
+func (*UpdatePlanEmail) Descriptor() ([]byte, []int) {
+	return file_payment_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *UpdatePlanEmail) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *UpdatePlanEmail) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *UpdatePlanEmail) GetOldPlan() string {
+	if x != nil && x.OldPlan != nil {
+		return *x.OldPlan
+	}
+	return ""
+}
+
+func (x *UpdatePlanEmail) GetNewPlan() string {
+	if x != nil && x.NewPlan != nil {
+		return *x.NewPlan
+	}
+	return ""
+}
+
+func (x *UpdatePlanEmail) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+type PaidInvoiceEmail struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx            *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId      *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	InvoiceId      *string         `protobuf:"bytes,5,opt,name=invoice_id,json=invoiceId" json:"invoice_id,omitempty"`
+	Created        *int64          `protobuf:"varint,6,opt,name=created" json:"created,omitempty"`
+	InvoiceCreated *string         `protobuf:"bytes,8,opt,name=invoice_created,json=invoiceCreated" json:"invoice_created,omitempty"`
+	InvoiceLink    *string         `protobuf:"bytes,9,opt,name=invoice_link,json=invoiceLink" json:"invoice_link,omitempty"`
+}
+
+func (x *PaidInvoiceEmail) Reset() {
+	*x = PaidInvoiceEmail{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_payment_proto_msgTypes[55]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PaidInvoiceEmail) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PaidInvoiceEmail) ProtoMessage() {}
+
+func (x *PaidInvoiceEmail) ProtoReflect() protoreflect.Message {
+	mi := &file_payment_proto_msgTypes[55]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PaidInvoiceEmail.ProtoReflect.Descriptor instead.
+func (*PaidInvoiceEmail) Descriptor() ([]byte, []int) {
+	return file_payment_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *PaidInvoiceEmail) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *PaidInvoiceEmail) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *PaidInvoiceEmail) GetInvoiceId() string {
+	if x != nil && x.InvoiceId != nil {
+		return *x.InvoiceId
+	}
+	return ""
+}
+
+func (x *PaidInvoiceEmail) GetCreated() int64 {
+	if x != nil && x.Created != nil {
+		return *x.Created
+	}
+	return 0
+}
+
+func (x *PaidInvoiceEmail) GetInvoiceCreated() string {
+	if x != nil && x.InvoiceCreated != nil {
+		return *x.InvoiceCreated
+	}
+	return ""
+}
+
+func (x *PaidInvoiceEmail) GetInvoiceLink() string {
+	if x != nil && x.InvoiceLink != nil {
+		return *x.InvoiceLink
 	}
 	return ""
 }
@@ -5059,7 +5280,7 @@ type InvoiceItem_Data struct {
 func (x *InvoiceItem_Data) Reset() {
 	*x = InvoiceItem_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_payment_proto_msgTypes[53]
+		mi := &file_payment_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5072,7 +5293,7 @@ func (x *InvoiceItem_Data) String() string {
 func (*InvoiceItem_Data) ProtoMessage() {}
 
 func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[53]
+	mi := &file_payment_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5123,7 +5344,7 @@ type PromotionCode_Data struct {
 func (x *PromotionCode_Data) Reset() {
 	*x = PromotionCode_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_payment_proto_msgTypes[54]
+		mi := &file_payment_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5136,7 +5357,7 @@ func (x *PromotionCode_Data) String() string {
 func (*PromotionCode_Data) ProtoMessage() {}
 
 func (x *PromotionCode_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[54]
+	mi := &file_payment_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5903,27 +6124,58 @@ var file_payment_proto_rawDesc = []byte{
 	0x28, 0x0b, 0x32, 0x10, 0x2e, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x6f, 0x6e,
 	0x74, 0x61, 0x63, 0x74, 0x52, 0x0c, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x6e,
 	0x66, 0x6f, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0a, 0x20, 0x01,
-	0x28, 0x02, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0xf6, 0x01, 0x0a, 0x13, 0x49,
+	0x28, 0x02, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0xdc, 0x01, 0x0a, 0x13, 0x49,
 	0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x45, 0x6d, 0x61,
 	0x69, 0x6c, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74,
-	0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x0e, 0x0a, 0x02, 0x74, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x02, 0x74, 0x6f, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
 	0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x5f,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x62, 0x69, 0x6c, 0x6c,
-	0x69, 0x6e, 0x67, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x69, 0x6e, 0x76, 0x6f, 0x69,
-	0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x69, 0x6e, 0x76,
-	0x6f, 0x69, 0x63, 0x65, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x6e, 0x74, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x5f,
+	0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63,
+	0x65, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x27, 0x0a,
+	0x0f, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
+	0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63,
+	0x65, 0x5f, 0x6c, 0x69, 0x6e, 0x6b, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x6e,
+	0x76, 0x6f, 0x69, 0x63, 0x65, 0x4c, 0x69, 0x6e, 0x6b, 0x22, 0x84, 0x01, 0x0a, 0x10, 0x54, 0x72,
+	0x69, 0x61, 0x6c, 0x45, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x21,
+	0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f,
+	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74,
+	0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64,
+	0x12, 0x14, 0x0a, 0x05, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x05, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
 	0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
-	0x12, 0x1d, 0x0a, 0x04, 0x6c, 0x61, 0x6e, 0x67, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x09,
-	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x4c, 0x52, 0x04, 0x6c, 0x61, 0x6e, 0x67, 0x12,
-	0x12, 0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x66,
-	0x72, 0x6f, 0x6d, 0x2a, 0x25, 0x0a, 0x08, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12,
-	0x07, 0x0a, 0x03, 0x75, 0x73, 0x64, 0x10, 0x00, 0x12, 0x07, 0x0a, 0x03, 0x76, 0x6e, 0x64, 0x10,
-	0x01, 0x12, 0x07, 0x0a, 0x03, 0x62, 0x72, 0x6c, 0x10, 0x02, 0x42, 0x21, 0x5a, 0x1f, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68,
-	0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74,
+	0x22, 0xa3, 0x01, 0x0a, 0x0f, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x6e, 0x45,
+	0x6d, 0x61, 0x69, 0x6c, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65,
+	0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x6c, 0x64, 0x5f, 0x70, 0x6c,
+	0x61, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6f, 0x6c, 0x64, 0x50, 0x6c, 0x61,
+	0x6e, 0x12, 0x19, 0x0a, 0x08, 0x6e, 0x65, 0x77, 0x5f, 0x70, 0x6c, 0x61, 0x6e, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x6e, 0x65, 0x77, 0x50, 0x6c, 0x61, 0x6e, 0x12, 0x18, 0x0a, 0x07,
+	0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x22, 0xd9, 0x01, 0x0a, 0x10, 0x50, 0x61, 0x69, 0x64, 0x49,
+	0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x21, 0x0a, 0x03, 0x63,
+	0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
+	0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d,
+	0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07,
+	0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x27, 0x0a, 0x0f, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63,
+	0x65, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0e, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12,
+	0x21, 0x0a, 0x0c, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x5f, 0x6c, 0x69, 0x6e, 0x6b, 0x18,
+	0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x4c, 0x69,
+	0x6e, 0x6b, 0x2a, 0x25, 0x0a, 0x08, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x07,
+	0x0a, 0x03, 0x75, 0x73, 0x64, 0x10, 0x00, 0x12, 0x07, 0x0a, 0x03, 0x76, 0x6e, 0x64, 0x10, 0x01,
+	0x12, 0x07, 0x0a, 0x03, 0x62, 0x72, 0x6c, 0x10, 0x02, 0x42, 0x21, 0x5a, 0x1f, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65,
+	0x61, 0x64, 0x65, 0x72, 0x2f, 0x70, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74,
 }
 
 var (
@@ -5939,7 +6191,7 @@ func file_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
-var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
+var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
 var file_payment_proto_goTypes = []interface{}{
 	(Currency)(0),                     // 0: payment.Currency
 	(PaymentMethod_Type)(0),           // 1: payment.PaymentMethod.Type
@@ -6003,83 +6255,87 @@ var file_payment_proto_goTypes = []interface{}{
 	(*String)(nil),                    // 59: payment.String
 	(*PayRequest)(nil),                // 60: payment.PayRequest
 	(*InvoiceCreatedEmail)(nil),       // 61: payment.InvoiceCreatedEmail
-	(*InvoiceItem_Data)(nil),          // 62: payment.InvoiceItem.Data
-	(*PromotionCode_Data)(nil),        // 63: payment.PromotionCode.Data
-	(*common.Context)(nil),            // 64: common.Context
-	(common.L)(0),                     // 65: common.L
+	(*TrialEndingEmail)(nil),          // 62: payment.TrialEndingEmail
+	(*UpdatePlanEmail)(nil),           // 63: payment.UpdatePlanEmail
+	(*PaidInvoiceEmail)(nil),          // 64: payment.PaidInvoiceEmail
+	(*InvoiceItem_Data)(nil),          // 65: payment.InvoiceItem.Data
+	(*PromotionCode_Data)(nil),        // 66: payment.PromotionCode.Data
+	(*common.Context)(nil),            // 67: common.Context
 }
 var file_payment_proto_depIdxs = []int32{
-	64, // 0: payment.ListCommentsRequest.ctx:type_name -> common.Context
-	64, // 1: payment.Comments.ctx:type_name -> common.Context
+	67, // 0: payment.ListCommentsRequest.ctx:type_name -> common.Context
+	67, // 1: payment.Comments.ctx:type_name -> common.Context
 	11, // 2: payment.Comments.comments:type_name -> payment.Comment
-	64, // 3: payment.Comment.ctx:type_name -> common.Context
+	67, // 3: payment.Comment.ctx:type_name -> common.Context
 	14, // 4: payment.PaymentMethods.payment_methods:type_name -> payment.PaymentMethod
-	64, // 5: payment.PaymentMethod.ctx:type_name -> common.Context
+	67, // 5: payment.PaymentMethod.ctx:type_name -> common.Context
 	12, // 6: payment.PaymentMethod.stripe:type_name -> payment.Stripe
-	64, // 7: payment.Limit.ctx:type_name -> common.Context
+	67, // 7: payment.Limit.ctx:type_name -> common.Context
 	17, // 8: payment.Plans.plans:type_name -> payment.Plan
 	15, // 9: payment.Plan.limit:type_name -> payment.Limit
-	64, // 10: payment.Subscription.ctx:type_name -> common.Context
+	67, // 10: payment.Subscription.ctx:type_name -> common.Context
 	20, // 11: payment.Subscription.notes:type_name -> payment.Note
 	30, // 12: payment.Subscription.customer:type_name -> payment.Customer
 	15, // 13: payment.Subscription.limit:type_name -> payment.Limit
-	64, // 14: payment.Bill.ctx:type_name -> common.Context
+	67, // 14: payment.Bill.ctx:type_name -> common.Context
 	29, // 15: payment.Bill.customer_info:type_name -> payment.Contact
-	64, // 16: payment.Note.ctx:type_name -> common.Context
+	67, // 16: payment.Note.ctx:type_name -> common.Context
 	23, // 17: payment.Invoices.invoices:type_name -> payment.Invoice
-	64, // 18: payment.ListInvoiceRequest.ctx:type_name -> common.Context
-	64, // 19: payment.Invoice.ctx:type_name -> common.Context
+	67, // 18: payment.ListInvoiceRequest.ctx:type_name -> common.Context
+	67, // 19: payment.Invoice.ctx:type_name -> common.Context
 	28, // 20: payment.Invoice.billing_info:type_name -> payment.BillingInfo
 	27, // 21: payment.Invoice.items:type_name -> payment.InvoiceItem
 	20, // 22: payment.Invoice.notes:type_name -> payment.Note
 	18, // 23: payment.Invoice.current_sub:type_name -> payment.Subscription
 	17, // 24: payment.Invoice.current_plan:type_name -> payment.Plan
-	62, // 25: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
-	64, // 26: payment.Contact.ctx:type_name -> common.Context
+	65, // 25: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
+	67, // 26: payment.Contact.ctx:type_name -> common.Context
 	29, // 27: payment.Customer.contacts:type_name -> payment.Contact
 	28, // 28: payment.Customer.billing_info:type_name -> payment.BillingInfo
-	64, // 29: payment.PromotionCode.ctx:type_name -> common.Context
-	63, // 30: payment.PromotionCode.data:type_name -> payment.PromotionCode.Data
-	64, // 31: payment.Referral.ctx:type_name -> common.Context
-	64, // 32: payment.LogAccountReferreds.ctx:type_name -> common.Context
+	67, // 29: payment.PromotionCode.ctx:type_name -> common.Context
+	66, // 30: payment.PromotionCode.data:type_name -> payment.PromotionCode.Data
+	67, // 31: payment.Referral.ctx:type_name -> common.Context
+	67, // 32: payment.LogAccountReferreds.ctx:type_name -> common.Context
 	40, // 33: payment.LogAccountReferreds.log_account_referreds:type_name -> payment.LogAccountReferred
-	64, // 34: payment.LogBillByAccountReferreds.ctx:type_name -> common.Context
+	67, // 34: payment.LogBillByAccountReferreds.ctx:type_name -> common.Context
 	42, // 35: payment.LogBillByAccountReferreds.log_bill_by_account_referreds:type_name -> payment.LogBillByAccountReferred
-	64, // 36: payment.LogPaidForAgentReferrer.ctx:type_name -> common.Context
-	64, // 37: payment.LogPaidForAgentReferrers.ctx:type_name -> common.Context
+	67, // 36: payment.LogPaidForAgentReferrer.ctx:type_name -> common.Context
+	67, // 37: payment.LogPaidForAgentReferrers.ctx:type_name -> common.Context
 	44, // 38: payment.LogPaidForAgentReferrers.log_paid_for_agent_referrers:type_name -> payment.LogPaidForAgentReferrer
-	64, // 39: payment.ListLogsRequest.ctx:type_name -> common.Context
-	64, // 40: payment.Logs.ctx:type_name -> common.Context
+	67, // 39: payment.ListLogsRequest.ctx:type_name -> common.Context
+	67, // 40: payment.Logs.ctx:type_name -> common.Context
 	49, // 41: payment.Logs.logs:type_name -> payment.Log
-	64, // 42: payment.Log.ctx:type_name -> common.Context
-	64, // 43: payment.SearchInvoiceRequest.ctx:type_name -> common.Context
-	64, // 44: payment.DiffSubRequest.ctx:type_name -> common.Context
+	67, // 42: payment.Log.ctx:type_name -> common.Context
+	67, // 43: payment.SearchInvoiceRequest.ctx:type_name -> common.Context
+	67, // 44: payment.DiffSubRequest.ctx:type_name -> common.Context
 	18, // 45: payment.DiffSubRequest.dst:type_name -> payment.Subscription
 	18, // 46: payment.DiffSubRequest.src:type_name -> payment.Subscription
-	64, // 47: payment.ReferralResponse.ctx:type_name -> common.Context
+	67, // 47: payment.ReferralResponse.ctx:type_name -> common.Context
 	53, // 48: payment.ReferralResponse.top_referrals:type_name -> payment.NumberOfReferByAgent
-	64, // 49: payment.SearchReferredRequest.ctx:type_name -> common.Context
-	64, // 50: payment.PromotionCodes.ctx:type_name -> common.Context
+	67, // 49: payment.SearchReferredRequest.ctx:type_name -> common.Context
+	67, // 50: payment.PromotionCodes.ctx:type_name -> common.Context
 	35, // 51: payment.PromotionCodes.promotion_codes:type_name -> payment.PromotionCode
-	64, // 52: payment.PromotionCodeRequest.ctx:type_name -> common.Context
-	64, // 53: payment.ListPromotionCodeRequest.ctx:type_name -> common.Context
-	64, // 54: payment.String.ctx:type_name -> common.Context
-	64, // 55: payment.PayRequest.ctx:type_name -> common.Context
+	67, // 52: payment.PromotionCodeRequest.ctx:type_name -> common.Context
+	67, // 53: payment.ListPromotionCodeRequest.ctx:type_name -> common.Context
+	67, // 54: payment.String.ctx:type_name -> common.Context
+	67, // 55: payment.PayRequest.ctx:type_name -> common.Context
 	29, // 56: payment.PayRequest.CustomerInfo:type_name -> payment.Contact
-	64, // 57: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
-	65, // 58: payment.InvoiceCreatedEmail.lang:type_name -> common.L
-	25, // 59: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
-	24, // 60: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
-	26, // 61: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
-	31, // 62: payment.PromotionCode.Data.fixed_amount:type_name -> payment.FixedAmountPromotionCode
-	32, // 63: payment.PromotionCode.Data.percent:type_name -> payment.PercentPromotionCode
-	33, // 64: payment.PromotionCode.Data.credit:type_name -> payment.CreditCode
-	34, // 65: payment.PromotionCode.Data.referral:type_name -> payment.ReferralCreditCode
-	66, // [66:66] is the sub-list for method output_type
-	66, // [66:66] is the sub-list for method input_type
-	66, // [66:66] is the sub-list for extension type_name
-	66, // [66:66] is the sub-list for extension extendee
-	0,  // [0:66] is the sub-list for field type_name
+	67, // 57: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	67, // 58: payment.TrialEndingEmail.ctx:type_name -> common.Context
+	67, // 59: payment.UpdatePlanEmail.ctx:type_name -> common.Context
+	67, // 60: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
+	25, // 61: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
+	24, // 62: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
+	26, // 63: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
+	31, // 64: payment.PromotionCode.Data.fixed_amount:type_name -> payment.FixedAmountPromotionCode
+	32, // 65: payment.PromotionCode.Data.percent:type_name -> payment.PercentPromotionCode
+	33, // 66: payment.PromotionCode.Data.credit:type_name -> payment.CreditCode
+	34, // 67: payment.PromotionCode.Data.referral:type_name -> payment.ReferralCreditCode
+	68, // [68:68] is the sub-list for method output_type
+	68, // [68:68] is the sub-list for method input_type
+	68, // [68:68] is the sub-list for extension type_name
+	68, // [68:68] is the sub-list for extension extendee
+	0,  // [0:68] is the sub-list for field type_name
 }
 
 func init() { file_payment_proto_init() }
@@ -6725,7 +6981,7 @@ func file_payment_proto_init() {
 			}
 		}
 		file_payment_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InvoiceItem_Data); i {
+			switch v := v.(*TrialEndingEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6737,6 +6993,42 @@ func file_payment_proto_init() {
 			}
 		}
 		file_payment_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePlanEmail); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_payment_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PaidInvoiceEmail); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_payment_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*InvoiceItem_Data); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_payment_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PromotionCode_Data); i {
 			case 0:
 				return &v.state
@@ -6755,7 +7047,7 @@ func file_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_payment_proto_rawDesc,
 			NumEnums:      9,
-			NumMessages:   55,
+			NumMessages:   58,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

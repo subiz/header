@@ -61,8 +61,6 @@ enum E {
 	NotiDecreaseNewRequested = 11016;
 	NotiNewReadRequested = 11017;
 
-	PlaceholderSynced = 11020;
-	ResolveRequested = 11021;
 	FilePresignRequested = 11030;
 	FileCreated = 11033;
 	FileInfoRequested = 11034;
@@ -71,8 +69,6 @@ enum E {
 	LimitUpdated = 11041;
 	PaymentRequested = 11044;
 	PaymentRenewCycle = 11045;
-	InvoiceCreatedEmailSend = 11046;
-	PaymentV3Synced = 11048;
 
 	AgentGroupDeleted = 11050; // id
 	AgentLeftGroup = 11051; // groupmember
@@ -216,7 +212,14 @@ enum E {
 	SubscriptionUpgradedEmail = 110568;
 	BillCreatedEmail = 110569;
 	DowngradedToFreeEmail = 110570;
-	TrialEndingEmail = 110571;
+	UnpaidInvoice9DaysEmail = 110572;
+	AccountCreatedEmail = 110573;
+	UpdatePlanEmail = 110574;
+	TrialEnding7Email = 110575;
+	TrialEnding3Email = 110576;
+	TrialEnding1Email = 110577;
+	InvoicePaidEmail = 110578;
+	AccountAgentJoinedEmail = 110579;
 
 	UserRequested = 111100;
 	UserSynced = 111101;

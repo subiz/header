@@ -545,11 +545,33 @@ message PayRequest {
 
 message InvoiceCreatedEmail {
 	optional common.Context ctx = 1;
-	optional string to = 2;
 	optional string account_id = 3;
-	optional string billing_name = 4;
 	optional string invoice_id = 5;
 	optional int64 created = 6;
-	optional common.L lang = 8;
-	optional string from = 10;
+	optional string invoice_created = 8;
+	optional string invoice_link = 9;
+}
+
+message TrialEndingEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional int64 ended = 3;
+	optional int64 created = 6;
+}
+
+message UpdatePlanEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string old_plan = 4;
+	optional string new_plan = 5;
+	optional int64 created = 6;
+}
+
+message PaidInvoiceEmail {
+	optional common.Context ctx = 1;
+	optional string account_id = 3;
+	optional string invoice_id = 5;
+	optional int64 created = 6;
+	optional string invoice_created = 8;
+	optional string invoice_link = 9;
 }
