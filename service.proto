@@ -143,14 +143,6 @@ service AttributeMgr {
 	rpc DeleteAttributeDefinition(user.DeleteAttrRequest) returns (common.Empty);
 }
 
-service SegmentationMgr {
-	rpc CreateSegment (user.Segmentation) returns (user.Segmentation);
-	rpc UpdateSegment (user.Segmentation) returns (user.Segmentation);
-	rpc ListSegments (common.Id) returns (user.Segmentations);
-	rpc DeleteSegment (common.Id) returns (common.Empty);
-	rpc ReadSegment (common.Id) returns (user.Segmentation);
-}
-
 // auth services
 service Perm {
 	rpc Update(common.UpdatePermRequest) returns (common.Empty);

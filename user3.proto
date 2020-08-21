@@ -22,7 +22,7 @@ message Attribute {
 
 	int64 modified = 8;
 
-	string value = 9;
+	string value = 9; // json encode
 	string text = 10;
 	double number = 11;
 	bool boolean = 12;
@@ -51,14 +51,6 @@ message User {
 	string account_id = 4;
 
 	repeated Attribute attributes = 18;
-
-	// repeated string segments = 19;
-	// string subiz_id = 25;
-
-	// repeated string aliases = 30;
-
-	int32 par = 34;
-
 	// repeated Identification identifications = 39;
 	UserSession session = 40;
 }
@@ -107,17 +99,6 @@ message UserSearchResult {
 	map<string, int32> unread_counts = 7;
 }
 
-message LastView {
-	string account_id = 3;
-	string user_id = 4;
-	string url = 5;
-	string ua = 6;
-	string ip = 7;
-	int64 created = 8;
-	string event_id = 9;
-	string title = 10;
-}
-
 message MuteRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -125,15 +106,6 @@ message MuteRequest {
 	string user_id = 4;
 	string topic = 5;
 	bool mute = 6; // true, false
-}
-
-message ReadTopicRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string topic = 3;
-	string user_id = 4;
-	string agent_id = 5;
-	int64 read = 6; // read time in milisecond
 }
 
 message DeleteAttrRequest {
@@ -306,16 +278,6 @@ message Page {
 	string url = 4;
 }
 
-message UserAction {
-	string id = 2;
-	string user_id = 3;
-	int64 created = 4;
-	string type = 5;
-	string source = 6; // from user session
-	Location location = 7; // from user session
-	Page page = 8; // from event
-	string content = 9;
-}
 
 message UserInfo {
 	string id = 2;
