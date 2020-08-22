@@ -51,13 +51,12 @@ message UserAttributeCondition {
 message TimmingCondition {
 	optional bool in_business_hour = 3; // if this is true, ignore all other timming conditions
 
-
 	repeated string days_of_week = 2; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	repeated int32 minute_of_days = 4; // pair [0-4] [6-9]
 }
 
 message ChannelCondition {
-	optional string channel_type = 2; // default: subiz
+	optional string channel_type = 2; // default: all channel
 
 	// for fb comment
 	// for messenger
@@ -80,10 +79,9 @@ message ChannelCondition {
 }
 
 message LocationCondition {
-	optional string  city_code = 3; // must equal
+	optional string city_code = 3; // must equal
 	optional string country_code = 4; // must equal
 }
-
 
 message Route {
 	optional common.Context ctx = 1;
@@ -97,11 +95,6 @@ message RouteResult {
 	optional string group_id = 5;
 	optional string state = 6;
 	optional int64 assigned = 7; // ms
-}
-
-message MemberSeen {
-	optional string member_id = 2;
-	optional string message_id = 3;
 }
 
 message Member {
@@ -184,14 +177,6 @@ message Rating {
 	optional string rated_by = 37; // must be user
 	optional bool no_rating = 38; // use dont want to rate
 	optional string comment = 39;
-}
-
-message UserConversation { // used in database
-	optional string account_id = 6;
-	optional string state = 11;
-	optional string user_id = 2;
-	optional string convo_id = 4;
-	optional string last_seen_event = 5;
 }
 
 message Conversations {

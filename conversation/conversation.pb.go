@@ -581,7 +581,7 @@ func (x *Member_State) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use Member_State.Descriptor instead.
 func (Member_State) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{8, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{7, 0}
 }
 
 type MessagePong_Type int32
@@ -688,7 +688,7 @@ func (x *MessagePong_Type) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use MessagePong_Type.Descriptor instead.
 func (MessagePong_Type) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{19, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{17, 0}
 }
 
 type Button_ButtonType int32
@@ -756,7 +756,7 @@ func (x *Button_ButtonType) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use Button_ButtonType.Descriptor instead.
 func (Button_ButtonType) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{22, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{20, 0}
 }
 
 type AskInfomation_InputType int32
@@ -836,7 +836,7 @@ func (x *AskInfomation_InputType) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use AskInfomation_InputType.Descriptor instead.
 func (AskInfomation_InputType) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{24, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{22, 0}
 }
 
 type ContentTemplate_Availability int32
@@ -898,7 +898,7 @@ func (x *ContentTemplate_Availability) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use ContentTemplate_Availability.Descriptor instead.
 func (ContentTemplate_Availability) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{25, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{23, 0}
 }
 
 type FormField_InputType int32
@@ -963,7 +963,7 @@ func (x *FormField_InputType) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use FormField_InputType.Descriptor instead.
 func (FormField_InputType) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{31, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{29, 0}
 }
 
 type Integration_State int32
@@ -1019,7 +1019,7 @@ func (x *Integration_State) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use Integration_State.Descriptor instead.
 func (Integration_State) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{40, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{38, 0}
 }
 
 type CountByTagsRequest_Range int32
@@ -1075,7 +1075,7 @@ func (x *CountByTagsRequest_Range) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use CountByTagsRequest_Range.Descriptor instead.
 func (CountByTagsRequest_Range) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{43, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{41, 0}
 }
 
 type ServiceLevelAgreementTarget_OperationalHours int32
@@ -1128,7 +1128,7 @@ func (x *ServiceLevelAgreementTarget_OperationalHours) UnmarshalJSON(b []byte) e
 
 // Deprecated: Use ServiceLevelAgreementTarget_OperationalHours.Descriptor instead.
 func (ServiceLevelAgreementTarget_OperationalHours) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{55, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{53, 0}
 }
 
 type ServiceLevelAgreement_AssignStrategy int32
@@ -1187,7 +1187,7 @@ func (x *ServiceLevelAgreement_AssignStrategy) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use ServiceLevelAgreement_AssignStrategy.Descriptor instead.
 func (ServiceLevelAgreement_AssignStrategy) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{56, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{54, 0}
 }
 
 type CountTicketRequest_Range int32
@@ -1243,7 +1243,7 @@ func (x *CountTicketRequest_Range) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use CountTicketRequest_Range.Descriptor instead.
 func (CountTicketRequest_Range) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{62, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{60, 0}
 }
 
 type AvgResolveTimeRequest_Range int32
@@ -1299,7 +1299,7 @@ func (x *AvgResolveTimeRequest_Range) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use AvgResolveTimeRequest_Range.Descriptor instead.
 func (AvgResolveTimeRequest_Range) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{64, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{62, 0}
 }
 
 type AvailibilityReportRequest_Range int32
@@ -1358,7 +1358,7 @@ func (x *AvailibilityReportRequest_Range) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use AvailibilityReportRequest_Range.Descriptor instead.
 func (AvailibilityReportRequest_Range) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{66, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{64, 0}
 }
 
 type CountReportRequest_Range int32
@@ -1414,7 +1414,7 @@ func (x *CountReportRequest_Range) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use CountReportRequest_Range.Descriptor instead.
 func (CountReportRequest_Range) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{67, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{65, 0}
 }
 
 type SCondition_EventTime int32
@@ -1476,7 +1476,7 @@ func (x *SCondition_EventTime) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use SCondition_EventTime.Descriptor instead.
 func (SCondition_EventTime) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{84, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{82, 0}
 }
 
 type SCondition_JoinOperator int32
@@ -1532,7 +1532,7 @@ func (x *SCondition_JoinOperator) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use SCondition_JoinOperator.Descriptor instead.
 func (SCondition_JoinOperator) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{84, 1}
+	return file_conversation_proto_rawDescGZIP(), []int{82, 1}
 }
 
 type SCondition_Function int32
@@ -1594,7 +1594,7 @@ func (x *SCondition_Function) UnmarshalJSON(b []byte) error {
 
 // Deprecated: Use SCondition_Function.Descriptor instead.
 func (SCondition_Function) EnumDescriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{84, 2}
+	return file_conversation_proto_rawDescGZIP(), []int{82, 2}
 }
 
 type Rule struct {
@@ -1920,7 +1920,7 @@ type ChannelCondition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ChannelType *string `protobuf:"bytes,2,opt,name=channel_type,json=channelType" json:"channel_type,omitempty"` // default: subiz
+	ChannelType *string `protobuf:"bytes,2,opt,name=channel_type,json=channelType" json:"channel_type,omitempty"` // default: all channel
 	// for fb comment
 	// for messenger
 	// for zalo
@@ -2244,61 +2244,6 @@ func (x *RouteResult) GetAssigned() int64 {
 	return 0
 }
 
-type MemberSeen struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	MemberId  *string `protobuf:"bytes,2,opt,name=member_id,json=memberId" json:"member_id,omitempty"`
-	MessageId *string `protobuf:"bytes,3,opt,name=message_id,json=messageId" json:"message_id,omitempty"`
-}
-
-func (x *MemberSeen) Reset() {
-	*x = MemberSeen{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *MemberSeen) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MemberSeen) ProtoMessage() {}
-
-func (x *MemberSeen) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MemberSeen.ProtoReflect.Descriptor instead.
-func (*MemberSeen) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *MemberSeen) GetMemberId() string {
-	if x != nil && x.MemberId != nil {
-		return *x.MemberId
-	}
-	return ""
-}
-
-func (x *MemberSeen) GetMessageId() string {
-	if x != nil && x.MessageId != nil {
-		return *x.MessageId
-	}
-	return ""
-}
-
 type Member struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2321,7 +2266,7 @@ type Member struct {
 func (x *Member) Reset() {
 	*x = Member{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[8]
+		mi := &file_conversation_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2334,7 +2279,7 @@ func (x *Member) String() string {
 func (*Member) ProtoMessage() {}
 
 func (x *Member) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[8]
+	mi := &file_conversation_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2347,7 +2292,7 @@ func (x *Member) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Member.ProtoReflect.Descriptor instead.
 func (*Member) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{8}
+	return file_conversation_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Member) GetCtx() *common.Context {
@@ -2472,7 +2417,7 @@ type Conversation struct {
 func (x *Conversation) Reset() {
 	*x = Conversation{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[9]
+		mi := &file_conversation_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2485,7 +2430,7 @@ func (x *Conversation) String() string {
 func (*Conversation) ProtoMessage() {}
 
 func (x *Conversation) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[9]
+	mi := &file_conversation_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2498,7 +2443,7 @@ func (x *Conversation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Conversation.ProtoReflect.Descriptor instead.
 func (*Conversation) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{9}
+	return file_conversation_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Conversation) GetCtx() *common.Context {
@@ -2705,7 +2650,7 @@ type Rating struct {
 func (x *Rating) Reset() {
 	*x = Rating{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[10]
+		mi := &file_conversation_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2718,7 +2663,7 @@ func (x *Rating) String() string {
 func (*Rating) ProtoMessage() {}
 
 func (x *Rating) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[10]
+	mi := &file_conversation_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2731,7 +2676,7 @@ func (x *Rating) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Rating.ProtoReflect.Descriptor instead.
 func (*Rating) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{10}
+	return file_conversation_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Rating) GetRated() int64 {
@@ -2769,85 +2714,6 @@ func (x *Rating) GetComment() string {
 	return ""
 }
 
-type UserConversation struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	AccountId     *string `protobuf:"bytes,6,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	State         *string `protobuf:"bytes,11,opt,name=state" json:"state,omitempty"`
-	UserId        *string `protobuf:"bytes,2,opt,name=user_id,json=userId" json:"user_id,omitempty"`
-	ConvoId       *string `protobuf:"bytes,4,opt,name=convo_id,json=convoId" json:"convo_id,omitempty"`
-	LastSeenEvent *string `protobuf:"bytes,5,opt,name=last_seen_event,json=lastSeenEvent" json:"last_seen_event,omitempty"`
-}
-
-func (x *UserConversation) Reset() {
-	*x = UserConversation{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[11]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UserConversation) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserConversation) ProtoMessage() {}
-
-func (x *UserConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[11]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserConversation.ProtoReflect.Descriptor instead.
-func (*UserConversation) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *UserConversation) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
-	}
-	return ""
-}
-
-func (x *UserConversation) GetState() string {
-	if x != nil && x.State != nil {
-		return *x.State
-	}
-	return ""
-}
-
-func (x *UserConversation) GetUserId() string {
-	if x != nil && x.UserId != nil {
-		return *x.UserId
-	}
-	return ""
-}
-
-func (x *UserConversation) GetConvoId() string {
-	if x != nil && x.ConvoId != nil {
-		return *x.ConvoId
-	}
-	return ""
-}
-
-func (x *UserConversation) GetLastSeenEvent() string {
-	if x != nil && x.LastSeenEvent != nil {
-		return *x.LastSeenEvent
-	}
-	return ""
-}
-
 type Conversations struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2863,7 +2729,7 @@ type Conversations struct {
 func (x *Conversations) Reset() {
 	*x = Conversations{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[12]
+		mi := &file_conversation_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2876,7 +2742,7 @@ func (x *Conversations) String() string {
 func (*Conversations) ProtoMessage() {}
 
 func (x *Conversations) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[12]
+	mi := &file_conversation_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2889,7 +2755,7 @@ func (x *Conversations) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Conversations.ProtoReflect.Descriptor instead.
 func (*Conversations) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{12}
+	return file_conversation_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Conversations) GetCtx() *common.Context {
@@ -2943,7 +2809,7 @@ type Search struct {
 func (x *Search) Reset() {
 	*x = Search{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[13]
+		mi := &file_conversation_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2956,7 +2822,7 @@ func (x *Search) String() string {
 func (*Search) ProtoMessage() {}
 
 func (x *Search) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[13]
+	mi := &file_conversation_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2969,7 +2835,7 @@ func (x *Search) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Search.ProtoReflect.Descriptor instead.
 func (*Search) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{13}
+	return file_conversation_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *Search) GetCtx() *common.Context {
@@ -3036,7 +2902,7 @@ type ListConversationsRequest struct {
 func (x *ListConversationsRequest) Reset() {
 	*x = ListConversationsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[14]
+		mi := &file_conversation_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3049,7 +2915,7 @@ func (x *ListConversationsRequest) String() string {
 func (*ListConversationsRequest) ProtoMessage() {}
 
 func (x *ListConversationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[14]
+	mi := &file_conversation_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3062,7 +2928,7 @@ func (x *ListConversationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListConversationsRequest.ProtoReflect.Descriptor instead.
 func (*ListConversationsRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{14}
+	return file_conversation_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListConversationsRequest) GetCtx() *common.Context {
@@ -3150,7 +3016,7 @@ type ListEventsRequest struct {
 func (x *ListEventsRequest) Reset() {
 	*x = ListEventsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[15]
+		mi := &file_conversation_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3163,7 +3029,7 @@ func (x *ListEventsRequest) String() string {
 func (*ListEventsRequest) ProtoMessage() {}
 
 func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[15]
+	mi := &file_conversation_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3176,7 +3042,7 @@ func (x *ListEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListEventsRequest.ProtoReflect.Descriptor instead.
 func (*ListEventsRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{15}
+	return file_conversation_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListEventsRequest) GetCtx() *common.Context {
@@ -3229,7 +3095,7 @@ type ListConversationsByUserRequest struct {
 func (x *ListConversationsByUserRequest) Reset() {
 	*x = ListConversationsByUserRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[16]
+		mi := &file_conversation_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3242,7 +3108,7 @@ func (x *ListConversationsByUserRequest) String() string {
 func (*ListConversationsByUserRequest) ProtoMessage() {}
 
 func (x *ListConversationsByUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[16]
+	mi := &file_conversation_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3255,7 +3121,7 @@ func (x *ListConversationsByUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListConversationsByUserRequest.ProtoReflect.Descriptor instead.
 func (*ListConversationsByUserRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{16}
+	return file_conversation_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListConversationsByUserRequest) GetAccountId() string {
@@ -3310,7 +3176,7 @@ type EsMessage struct {
 func (x *EsMessage) Reset() {
 	*x = EsMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[17]
+		mi := &file_conversation_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3323,7 +3189,7 @@ func (x *EsMessage) String() string {
 func (*EsMessage) ProtoMessage() {}
 
 func (x *EsMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[17]
+	mi := &file_conversation_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3336,7 +3202,7 @@ func (x *EsMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EsMessage.ProtoReflect.Descriptor instead.
 func (*EsMessage) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{17}
+	return file_conversation_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *EsMessage) GetId() string {
@@ -3411,7 +3277,7 @@ type Message struct {
 func (x *Message) Reset() {
 	*x = Message{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[18]
+		mi := &file_conversation_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3424,7 +3290,7 @@ func (x *Message) String() string {
 func (*Message) ProtoMessage() {}
 
 func (x *Message) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[18]
+	mi := &file_conversation_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3437,7 +3303,7 @@ func (x *Message) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Message.ProtoReflect.Descriptor instead.
 func (*Message) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{18}
+	return file_conversation_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Message) GetCtx() *common.Context {
@@ -3539,7 +3405,7 @@ type MessagePong struct {
 func (x *MessagePong) Reset() {
 	*x = MessagePong{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[19]
+		mi := &file_conversation_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3552,7 +3418,7 @@ func (x *MessagePong) String() string {
 func (*MessagePong) ProtoMessage() {}
 
 func (x *MessagePong) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[19]
+	mi := &file_conversation_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3565,7 +3431,7 @@ func (x *MessagePong) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MessagePong.ProtoReflect.Descriptor instead.
 func (*MessagePong) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{19}
+	return file_conversation_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *MessagePong) GetMemberId() string {
@@ -3618,7 +3484,7 @@ type Revision struct {
 func (x *Revision) Reset() {
 	*x = Revision{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[20]
+		mi := &file_conversation_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3631,7 +3497,7 @@ func (x *Revision) String() string {
 func (*Revision) ProtoMessage() {}
 
 func (x *Revision) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[20]
+	mi := &file_conversation_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3644,7 +3510,7 @@ func (x *Revision) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Revision.ProtoReflect.Descriptor instead.
 func (*Revision) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{20}
+	return file_conversation_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *Revision) GetText() string {
@@ -3694,7 +3560,7 @@ type Field struct {
 func (x *Field) Reset() {
 	*x = Field{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[21]
+		mi := &file_conversation_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3707,7 +3573,7 @@ func (x *Field) String() string {
 func (*Field) ProtoMessage() {}
 
 func (x *Field) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[21]
+	mi := &file_conversation_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3720,7 +3586,7 @@ func (x *Field) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Field.ProtoReflect.Descriptor instead.
 func (*Field) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{21}
+	return file_conversation_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *Field) GetValue() string {
@@ -3757,7 +3623,7 @@ type Button struct {
 func (x *Button) Reset() {
 	*x = Button{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[22]
+		mi := &file_conversation_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3770,7 +3636,7 @@ func (x *Button) String() string {
 func (*Button) ProtoMessage() {}
 
 func (x *Button) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[22]
+	mi := &file_conversation_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3783,7 +3649,7 @@ func (x *Button) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Button.ProtoReflect.Descriptor instead.
 func (*Button) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{22}
+	return file_conversation_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *Button) GetType() string {
@@ -3854,7 +3720,7 @@ type AskInfomationAnswer struct {
 func (x *AskInfomationAnswer) Reset() {
 	*x = AskInfomationAnswer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[23]
+		mi := &file_conversation_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3867,7 +3733,7 @@ func (x *AskInfomationAnswer) String() string {
 func (*AskInfomationAnswer) ProtoMessage() {}
 
 func (x *AskInfomationAnswer) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[23]
+	mi := &file_conversation_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3880,7 +3746,7 @@ func (x *AskInfomationAnswer) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AskInfomationAnswer.ProtoReflect.Descriptor instead.
 func (*AskInfomationAnswer) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{23}
+	return file_conversation_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *AskInfomationAnswer) GetMessageId() string {
@@ -3912,7 +3778,7 @@ type AskInfomation struct {
 func (x *AskInfomation) Reset() {
 	*x = AskInfomation{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[24]
+		mi := &file_conversation_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3925,7 +3791,7 @@ func (x *AskInfomation) String() string {
 func (*AskInfomation) ProtoMessage() {}
 
 func (x *AskInfomation) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[24]
+	mi := &file_conversation_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3938,7 +3804,7 @@ func (x *AskInfomation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AskInfomation.ProtoReflect.Descriptor instead.
 func (*AskInfomation) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{24}
+	return file_conversation_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *AskInfomation) GetQuestion() string {
@@ -4001,7 +3867,7 @@ type ContentTemplate struct {
 func (x *ContentTemplate) Reset() {
 	*x = ContentTemplate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[25]
+		mi := &file_conversation_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4014,7 +3880,7 @@ func (x *ContentTemplate) String() string {
 func (*ContentTemplate) ProtoMessage() {}
 
 func (x *ContentTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[25]
+	mi := &file_conversation_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4027,7 +3893,7 @@ func (x *ContentTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContentTemplate.ProtoReflect.Descriptor instead.
 func (*ContentTemplate) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{25}
+	return file_conversation_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ContentTemplate) GetImageUrl() string {
@@ -4151,7 +4017,7 @@ type GenericElementTemplate struct {
 func (x *GenericElementTemplate) Reset() {
 	*x = GenericElementTemplate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[26]
+		mi := &file_conversation_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4164,7 +4030,7 @@ func (x *GenericElementTemplate) String() string {
 func (*GenericElementTemplate) ProtoMessage() {}
 
 func (x *GenericElementTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[26]
+	mi := &file_conversation_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4177,7 +4043,7 @@ func (x *GenericElementTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenericElementTemplate.ProtoReflect.Descriptor instead.
 func (*GenericElementTemplate) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{26}
+	return file_conversation_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GenericElementTemplate) GetTitle() string {
@@ -4256,7 +4122,7 @@ type Attachment struct {
 func (x *Attachment) Reset() {
 	*x = Attachment{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[27]
+		mi := &file_conversation_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4269,7 +4135,7 @@ func (x *Attachment) String() string {
 func (*Attachment) ProtoMessage() {}
 
 func (x *Attachment) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[27]
+	mi := &file_conversation_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4282,7 +4148,7 @@ func (x *Attachment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Attachment.ProtoReflect.Descriptor instead.
 func (*Attachment) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{27}
+	return file_conversation_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *Attachment) GetType() string {
@@ -4432,7 +4298,7 @@ type QuickReply struct {
 func (x *QuickReply) Reset() {
 	*x = QuickReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[28]
+		mi := &file_conversation_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4445,7 +4311,7 @@ func (x *QuickReply) String() string {
 func (*QuickReply) ProtoMessage() {}
 
 func (x *QuickReply) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[28]
+	mi := &file_conversation_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4458,7 +4324,7 @@ func (x *QuickReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuickReply.ProtoReflect.Descriptor instead.
 func (*QuickReply) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{28}
+	return file_conversation_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *QuickReply) GetContentType() string {
@@ -4503,7 +4369,7 @@ type Form struct {
 func (x *Form) Reset() {
 	*x = Form{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[29]
+		mi := &file_conversation_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4516,7 +4382,7 @@ func (x *Form) String() string {
 func (*Form) ProtoMessage() {}
 
 func (x *Form) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[29]
+	mi := &file_conversation_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4529,7 +4395,7 @@ func (x *Form) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Form.ProtoReflect.Descriptor instead.
 func (*Form) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{29}
+	return file_conversation_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *Form) GetTitle() string {
@@ -4573,7 +4439,7 @@ type FormSubmit struct {
 func (x *FormSubmit) Reset() {
 	*x = FormSubmit{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[30]
+		mi := &file_conversation_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4586,7 +4452,7 @@ func (x *FormSubmit) String() string {
 func (*FormSubmit) ProtoMessage() {}
 
 func (x *FormSubmit) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[30]
+	mi := &file_conversation_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4599,7 +4465,7 @@ func (x *FormSubmit) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FormSubmit.ProtoReflect.Descriptor instead.
 func (*FormSubmit) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{30}
+	return file_conversation_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *FormSubmit) GetFormMessageId() string {
@@ -4641,7 +4507,7 @@ type FormField struct {
 func (x *FormField) Reset() {
 	*x = FormField{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[31]
+		mi := &file_conversation_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4654,7 +4520,7 @@ func (x *FormField) String() string {
 func (*FormField) ProtoMessage() {}
 
 func (x *FormField) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[31]
+	mi := &file_conversation_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4667,7 +4533,7 @@ func (x *FormField) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FormField.ProtoReflect.Descriptor instead.
 func (*FormField) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{31}
+	return file_conversation_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *FormField) GetInputType() string {
@@ -4744,7 +4610,7 @@ type Tag struct {
 func (x *Tag) Reset() {
 	*x = Tag{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[32]
+		mi := &file_conversation_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4757,7 +4623,7 @@ func (x *Tag) String() string {
 func (*Tag) ProtoMessage() {}
 
 func (x *Tag) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[32]
+	mi := &file_conversation_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4770,7 +4636,7 @@ func (x *Tag) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tag.ProtoReflect.Descriptor instead.
 func (*Tag) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{32}
+	return file_conversation_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *Tag) GetCtx() *common.Context {
@@ -4842,7 +4708,7 @@ type TemplateData struct {
 func (x *TemplateData) Reset() {
 	*x = TemplateData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[33]
+		mi := &file_conversation_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4855,7 +4721,7 @@ func (x *TemplateData) String() string {
 func (*TemplateData) ProtoMessage() {}
 
 func (x *TemplateData) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[33]
+	mi := &file_conversation_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4868,7 +4734,7 @@ func (x *TemplateData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TemplateData.ProtoReflect.Descriptor instead.
 func (*TemplateData) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{33}
+	return file_conversation_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *TemplateData) GetType() string {
@@ -4914,7 +4780,7 @@ type Template struct {
 func (x *Template) Reset() {
 	*x = Template{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[34]
+		mi := &file_conversation_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4927,7 +4793,7 @@ func (x *Template) String() string {
 func (*Template) ProtoMessage() {}
 
 func (x *Template) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[34]
+	mi := &file_conversation_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4940,7 +4806,7 @@ func (x *Template) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Template.ProtoReflect.Descriptor instead.
 func (*Template) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{34}
+	return file_conversation_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *Template) GetCtx() *common.Context {
@@ -5042,7 +4908,7 @@ type SearchTemplate struct {
 func (x *SearchTemplate) Reset() {
 	*x = SearchTemplate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[35]
+		mi := &file_conversation_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5055,7 +4921,7 @@ func (x *SearchTemplate) String() string {
 func (*SearchTemplate) ProtoMessage() {}
 
 func (x *SearchTemplate) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[35]
+	mi := &file_conversation_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5068,7 +4934,7 @@ func (x *SearchTemplate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchTemplate.ProtoReflect.Descriptor instead.
 func (*SearchTemplate) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{35}
+	return file_conversation_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *SearchTemplate) GetCtx() *common.Context {
@@ -5120,7 +4986,7 @@ type Templates struct {
 func (x *Templates) Reset() {
 	*x = Templates{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[36]
+		mi := &file_conversation_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5133,7 +4999,7 @@ func (x *Templates) String() string {
 func (*Templates) ProtoMessage() {}
 
 func (x *Templates) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[36]
+	mi := &file_conversation_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5146,7 +5012,7 @@ func (x *Templates) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Templates.ProtoReflect.Descriptor instead.
 func (*Templates) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{36}
+	return file_conversation_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *Templates) GetCtx() *common.Context {
@@ -5189,7 +5055,7 @@ type Tags struct {
 func (x *Tags) Reset() {
 	*x = Tags{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[37]
+		mi := &file_conversation_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5202,7 +5068,7 @@ func (x *Tags) String() string {
 func (*Tags) ProtoMessage() {}
 
 func (x *Tags) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[37]
+	mi := &file_conversation_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5215,7 +5081,7 @@ func (x *Tags) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tags.ProtoReflect.Descriptor instead.
 func (*Tags) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{37}
+	return file_conversation_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *Tags) GetCtx() *common.Context {
@@ -5244,7 +5110,7 @@ type Postback struct {
 func (x *Postback) Reset() {
 	*x = Postback{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[38]
+		mi := &file_conversation_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5257,7 +5123,7 @@ func (x *Postback) String() string {
 func (*Postback) ProtoMessage() {}
 
 func (x *Postback) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[38]
+	mi := &file_conversation_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5270,7 +5136,7 @@ func (x *Postback) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Postback.ProtoReflect.Descriptor instead.
 func (*Postback) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{38}
+	return file_conversation_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *Postback) GetMessage() *Message {
@@ -5300,7 +5166,7 @@ type Integrations struct {
 func (x *Integrations) Reset() {
 	*x = Integrations{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[39]
+		mi := &file_conversation_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5313,7 +5179,7 @@ func (x *Integrations) String() string {
 func (*Integrations) ProtoMessage() {}
 
 func (x *Integrations) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[39]
+	mi := &file_conversation_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5326,7 +5192,7 @@ func (x *Integrations) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Integrations.ProtoReflect.Descriptor instead.
 func (*Integrations) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{39}
+	return file_conversation_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *Integrations) GetCtx() *common.Context {
@@ -5370,7 +5236,7 @@ type Integration struct {
 func (x *Integration) Reset() {
 	*x = Integration{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[40]
+		mi := &file_conversation_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5383,7 +5249,7 @@ func (x *Integration) String() string {
 func (*Integration) ProtoMessage() {}
 
 func (x *Integration) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[40]
+	mi := &file_conversation_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5396,7 +5262,7 @@ func (x *Integration) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Integration.ProtoReflect.Descriptor instead.
 func (*Integration) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{40}
+	return file_conversation_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *Integration) GetCtx() *common.Context {
@@ -5486,7 +5352,7 @@ type SearchMessageRequest struct {
 func (x *SearchMessageRequest) Reset() {
 	*x = SearchMessageRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[41]
+		mi := &file_conversation_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5499,7 +5365,7 @@ func (x *SearchMessageRequest) String() string {
 func (*SearchMessageRequest) ProtoMessage() {}
 
 func (x *SearchMessageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[41]
+	mi := &file_conversation_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5512,7 +5378,7 @@ func (x *SearchMessageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchMessageRequest.ProtoReflect.Descriptor instead.
 func (*SearchMessageRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{41}
+	return file_conversation_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *SearchMessageRequest) GetCtx() *common.Context {
@@ -5578,7 +5444,7 @@ type TagRequest struct {
 func (x *TagRequest) Reset() {
 	*x = TagRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[42]
+		mi := &file_conversation_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5591,7 +5457,7 @@ func (x *TagRequest) String() string {
 func (*TagRequest) ProtoMessage() {}
 
 func (x *TagRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[42]
+	mi := &file_conversation_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5604,7 +5470,7 @@ func (x *TagRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TagRequest.ProtoReflect.Descriptor instead.
 func (*TagRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{42}
+	return file_conversation_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *TagRequest) GetCtx() *common.Context {
@@ -5654,7 +5520,7 @@ type CountByTagsRequest struct {
 func (x *CountByTagsRequest) Reset() {
 	*x = CountByTagsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[43]
+		mi := &file_conversation_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5667,7 +5533,7 @@ func (x *CountByTagsRequest) String() string {
 func (*CountByTagsRequest) ProtoMessage() {}
 
 func (x *CountByTagsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[43]
+	mi := &file_conversation_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5680,7 +5546,7 @@ func (x *CountByTagsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountByTagsRequest.ProtoReflect.Descriptor instead.
 func (*CountByTagsRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{43}
+	return file_conversation_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *CountByTagsRequest) GetAccountId() string {
@@ -5758,7 +5624,7 @@ type CountByTag struct {
 func (x *CountByTag) Reset() {
 	*x = CountByTag{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[44]
+		mi := &file_conversation_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5771,7 +5637,7 @@ func (x *CountByTag) String() string {
 func (*CountByTag) ProtoMessage() {}
 
 func (x *CountByTag) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[44]
+	mi := &file_conversation_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5784,7 +5650,7 @@ func (x *CountByTag) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountByTag.ProtoReflect.Descriptor instead.
 func (*CountByTag) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{44}
+	return file_conversation_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *CountByTag) GetTagId() string {
@@ -5812,7 +5678,7 @@ type CountByTagsResponse struct {
 func (x *CountByTagsResponse) Reset() {
 	*x = CountByTagsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[45]
+		mi := &file_conversation_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5825,7 +5691,7 @@ func (x *CountByTagsResponse) String() string {
 func (*CountByTagsResponse) ProtoMessage() {}
 
 func (x *CountByTagsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[45]
+	mi := &file_conversation_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5838,7 +5704,7 @@ func (x *CountByTagsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountByTagsResponse.ProtoReflect.Descriptor instead.
 func (*CountByTagsResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{45}
+	return file_conversation_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *CountByTagsResponse) GetData() []*CountByTag {
@@ -5864,7 +5730,7 @@ type AvgResponseTimeRequest struct {
 func (x *AvgResponseTimeRequest) Reset() {
 	*x = AvgResponseTimeRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[46]
+		mi := &file_conversation_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5877,7 +5743,7 @@ func (x *AvgResponseTimeRequest) String() string {
 func (*AvgResponseTimeRequest) ProtoMessage() {}
 
 func (x *AvgResponseTimeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[46]
+	mi := &file_conversation_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5890,7 +5756,7 @@ func (x *AvgResponseTimeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvgResponseTimeRequest.ProtoReflect.Descriptor instead.
 func (*AvgResponseTimeRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{46}
+	return file_conversation_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *AvgResponseTimeRequest) GetAccountId() string {
@@ -5946,7 +5812,7 @@ type AvgResponseTimeResponse struct {
 func (x *AvgResponseTimeResponse) Reset() {
 	*x = AvgResponseTimeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[47]
+		mi := &file_conversation_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5959,7 +5825,7 @@ func (x *AvgResponseTimeResponse) String() string {
 func (*AvgResponseTimeResponse) ProtoMessage() {}
 
 func (x *AvgResponseTimeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[47]
+	mi := &file_conversation_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5972,7 +5838,7 @@ func (x *AvgResponseTimeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvgResponseTimeResponse.ProtoReflect.Descriptor instead.
 func (*AvgResponseTimeResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{47}
+	return file_conversation_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *AvgResponseTimeResponse) GetAvgResponseSec() float64 {
@@ -5993,7 +5859,7 @@ type TotalConversationResponse struct {
 func (x *TotalConversationResponse) Reset() {
 	*x = TotalConversationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[48]
+		mi := &file_conversation_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6006,7 +5872,7 @@ func (x *TotalConversationResponse) String() string {
 func (*TotalConversationResponse) ProtoMessage() {}
 
 func (x *TotalConversationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[48]
+	mi := &file_conversation_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6019,7 +5885,7 @@ func (x *TotalConversationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TotalConversationResponse.ProtoReflect.Descriptor instead.
 func (*TotalConversationResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{48}
+	return file_conversation_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *TotalConversationResponse) GetTotalConversation() int64 {
@@ -6042,7 +5908,7 @@ type Chain struct {
 func (x *Chain) Reset() {
 	*x = Chain{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[49]
+		mi := &file_conversation_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6055,7 +5921,7 @@ func (x *Chain) String() string {
 func (*Chain) ProtoMessage() {}
 
 func (x *Chain) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[49]
+	mi := &file_conversation_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6068,7 +5934,7 @@ func (x *Chain) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Chain.ProtoReflect.Descriptor instead.
 func (*Chain) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{49}
+	return file_conversation_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *Chain) GetAccountId() string {
@@ -6119,7 +5985,7 @@ type Ticket struct {
 func (x *Ticket) Reset() {
 	*x = Ticket{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[50]
+		mi := &file_conversation_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6132,7 +5998,7 @@ func (x *Ticket) String() string {
 func (*Ticket) ProtoMessage() {}
 
 func (x *Ticket) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[50]
+	mi := &file_conversation_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6145,7 +6011,7 @@ func (x *Ticket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Ticket.ProtoReflect.Descriptor instead.
 func (*Ticket) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{50}
+	return file_conversation_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *Ticket) GetCtx() *common.Context {
@@ -6287,7 +6153,7 @@ type TicketListRequest struct {
 func (x *TicketListRequest) Reset() {
 	*x = TicketListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[51]
+		mi := &file_conversation_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6300,7 +6166,7 @@ func (x *TicketListRequest) String() string {
 func (*TicketListRequest) ProtoMessage() {}
 
 func (x *TicketListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[51]
+	mi := &file_conversation_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6313,7 +6179,7 @@ func (x *TicketListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketListRequest.ProtoReflect.Descriptor instead.
 func (*TicketListRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{51}
+	return file_conversation_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *TicketListRequest) GetCtx() *common.Context {
@@ -6400,7 +6266,7 @@ type Tickets struct {
 func (x *Tickets) Reset() {
 	*x = Tickets{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[52]
+		mi := &file_conversation_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6413,7 +6279,7 @@ func (x *Tickets) String() string {
 func (*Tickets) ProtoMessage() {}
 
 func (x *Tickets) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[52]
+	mi := &file_conversation_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6426,7 +6292,7 @@ func (x *Tickets) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tickets.ProtoReflect.Descriptor instead.
 func (*Tickets) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{52}
+	return file_conversation_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *Tickets) GetCtx() *common.Context {
@@ -6471,7 +6337,7 @@ type ESTickets struct {
 func (x *ESTickets) Reset() {
 	*x = ESTickets{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[53]
+		mi := &file_conversation_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6484,7 +6350,7 @@ func (x *ESTickets) String() string {
 func (*ESTickets) ProtoMessage() {}
 
 func (x *ESTickets) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[53]
+	mi := &file_conversation_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6497,7 +6363,7 @@ func (x *ESTickets) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ESTickets.ProtoReflect.Descriptor instead.
 func (*ESTickets) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{53}
+	return file_conversation_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *ESTickets) GetCtx() *common.Context {
@@ -6552,7 +6418,7 @@ type TicketAttributeData struct {
 func (x *TicketAttributeData) Reset() {
 	*x = TicketAttributeData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[54]
+		mi := &file_conversation_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6565,7 +6431,7 @@ func (x *TicketAttributeData) String() string {
 func (*TicketAttributeData) ProtoMessage() {}
 
 func (x *TicketAttributeData) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[54]
+	mi := &file_conversation_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6578,7 +6444,7 @@ func (x *TicketAttributeData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TicketAttributeData.ProtoReflect.Descriptor instead.
 func (*TicketAttributeData) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{54}
+	return file_conversation_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *TicketAttributeData) GetCtx() *common.Context {
@@ -6693,7 +6559,7 @@ type ServiceLevelAgreementTarget struct {
 func (x *ServiceLevelAgreementTarget) Reset() {
 	*x = ServiceLevelAgreementTarget{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[55]
+		mi := &file_conversation_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6706,7 +6572,7 @@ func (x *ServiceLevelAgreementTarget) String() string {
 func (*ServiceLevelAgreementTarget) ProtoMessage() {}
 
 func (x *ServiceLevelAgreementTarget) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[55]
+	mi := &file_conversation_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6719,7 +6585,7 @@ func (x *ServiceLevelAgreementTarget) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceLevelAgreementTarget.ProtoReflect.Descriptor instead.
 func (*ServiceLevelAgreementTarget) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{55}
+	return file_conversation_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *ServiceLevelAgreementTarget) GetPriority() string {
@@ -6772,7 +6638,7 @@ type ServiceLevelAgreement struct {
 func (x *ServiceLevelAgreement) Reset() {
 	*x = ServiceLevelAgreement{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[56]
+		mi := &file_conversation_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6785,7 +6651,7 @@ func (x *ServiceLevelAgreement) String() string {
 func (*ServiceLevelAgreement) ProtoMessage() {}
 
 func (x *ServiceLevelAgreement) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[56]
+	mi := &file_conversation_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6798,7 +6664,7 @@ func (x *ServiceLevelAgreement) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceLevelAgreement.ProtoReflect.Descriptor instead.
 func (*ServiceLevelAgreement) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{56}
+	return file_conversation_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *ServiceLevelAgreement) GetCtx() *common.Context {
@@ -6897,7 +6763,7 @@ type ServiceLevelAgreements struct {
 func (x *ServiceLevelAgreements) Reset() {
 	*x = ServiceLevelAgreements{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[57]
+		mi := &file_conversation_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6910,7 +6776,7 @@ func (x *ServiceLevelAgreements) String() string {
 func (*ServiceLevelAgreements) ProtoMessage() {}
 
 func (x *ServiceLevelAgreements) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[57]
+	mi := &file_conversation_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6923,7 +6789,7 @@ func (x *ServiceLevelAgreements) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ServiceLevelAgreements.ProtoReflect.Descriptor instead.
 func (*ServiceLevelAgreements) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{57}
+	return file_conversation_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *ServiceLevelAgreements) GetCtx() *common.Context {
@@ -6952,7 +6818,7 @@ type DeleteTicketAttrRequest struct {
 func (x *DeleteTicketAttrRequest) Reset() {
 	*x = DeleteTicketAttrRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[58]
+		mi := &file_conversation_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6965,7 +6831,7 @@ func (x *DeleteTicketAttrRequest) String() string {
 func (*DeleteTicketAttrRequest) ProtoMessage() {}
 
 func (x *DeleteTicketAttrRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[58]
+	mi := &file_conversation_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6978,7 +6844,7 @@ func (x *DeleteTicketAttrRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTicketAttrRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTicketAttrRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{58}
+	return file_conversation_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *DeleteTicketAttrRequest) GetCtx() *common.Context {
@@ -7009,7 +6875,7 @@ type GetTicketRequest struct {
 func (x *GetTicketRequest) Reset() {
 	*x = GetTicketRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[59]
+		mi := &file_conversation_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7022,7 +6888,7 @@ func (x *GetTicketRequest) String() string {
 func (*GetTicketRequest) ProtoMessage() {}
 
 func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[59]
+	mi := &file_conversation_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7035,7 +6901,7 @@ func (x *GetTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTicketRequest.ProtoReflect.Descriptor instead.
 func (*GetTicketRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{59}
+	return file_conversation_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *GetTicketRequest) GetCtx() *common.Context {
@@ -7080,7 +6946,7 @@ type DeleteTicketRequest struct {
 func (x *DeleteTicketRequest) Reset() {
 	*x = DeleteTicketRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[60]
+		mi := &file_conversation_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7093,7 +6959,7 @@ func (x *DeleteTicketRequest) String() string {
 func (*DeleteTicketRequest) ProtoMessage() {}
 
 func (x *DeleteTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[60]
+	mi := &file_conversation_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7106,7 +6972,7 @@ func (x *DeleteTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTicketRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTicketRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{60}
+	return file_conversation_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *DeleteTicketRequest) GetCtx() *common.Context {
@@ -7164,7 +7030,7 @@ type ReportTicket struct {
 func (x *ReportTicket) Reset() {
 	*x = ReportTicket{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[61]
+		mi := &file_conversation_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7177,7 +7043,7 @@ func (x *ReportTicket) String() string {
 func (*ReportTicket) ProtoMessage() {}
 
 func (x *ReportTicket) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[61]
+	mi := &file_conversation_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7190,7 +7056,7 @@ func (x *ReportTicket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportTicket.ProtoReflect.Descriptor instead.
 func (*ReportTicket) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{61}
+	return file_conversation_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *ReportTicket) GetId() string {
@@ -7337,7 +7203,7 @@ type CountTicketRequest struct {
 func (x *CountTicketRequest) Reset() {
 	*x = CountTicketRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[62]
+		mi := &file_conversation_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7350,7 +7216,7 @@ func (x *CountTicketRequest) String() string {
 func (*CountTicketRequest) ProtoMessage() {}
 
 func (x *CountTicketRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[62]
+	mi := &file_conversation_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7363,7 +7229,7 @@ func (x *CountTicketRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountTicketRequest.ProtoReflect.Descriptor instead.
 func (*CountTicketRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{62}
+	return file_conversation_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *CountTicketRequest) GetAccountId() string {
@@ -7482,7 +7348,7 @@ type CountTicketResponse struct {
 func (x *CountTicketResponse) Reset() {
 	*x = CountTicketResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[63]
+		mi := &file_conversation_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7495,7 +7361,7 @@ func (x *CountTicketResponse) String() string {
 func (*CountTicketResponse) ProtoMessage() {}
 
 func (x *CountTicketResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[63]
+	mi := &file_conversation_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7508,7 +7374,7 @@ func (x *CountTicketResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountTicketResponse.ProtoReflect.Descriptor instead.
 func (*CountTicketResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{63}
+	return file_conversation_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *CountTicketResponse) GetData() []int64 {
@@ -7537,7 +7403,7 @@ type AvgResolveTimeRequest struct {
 func (x *AvgResolveTimeRequest) Reset() {
 	*x = AvgResolveTimeRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[64]
+		mi := &file_conversation_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7550,7 +7416,7 @@ func (x *AvgResolveTimeRequest) String() string {
 func (*AvgResolveTimeRequest) ProtoMessage() {}
 
 func (x *AvgResolveTimeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[64]
+	mi := &file_conversation_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7563,7 +7429,7 @@ func (x *AvgResolveTimeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvgResolveTimeRequest.ProtoReflect.Descriptor instead.
 func (*AvgResolveTimeRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{64}
+	return file_conversation_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *AvgResolveTimeRequest) GetAccountId() string {
@@ -7640,7 +7506,7 @@ type AvgResolveTimeResponse struct {
 func (x *AvgResolveTimeResponse) Reset() {
 	*x = AvgResolveTimeResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[65]
+		mi := &file_conversation_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7653,7 +7519,7 @@ func (x *AvgResolveTimeResponse) String() string {
 func (*AvgResolveTimeResponse) ProtoMessage() {}
 
 func (x *AvgResolveTimeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[65]
+	mi := &file_conversation_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7666,7 +7532,7 @@ func (x *AvgResolveTimeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvgResolveTimeResponse.ProtoReflect.Descriptor instead.
 func (*AvgResolveTimeResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{65}
+	return file_conversation_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *AvgResolveTimeResponse) GetAvgResolveSec() float64 {
@@ -7692,7 +7558,7 @@ type AvailibilityReportRequest struct {
 func (x *AvailibilityReportRequest) Reset() {
 	*x = AvailibilityReportRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[66]
+		mi := &file_conversation_proto_msgTypes[64]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7705,7 +7571,7 @@ func (x *AvailibilityReportRequest) String() string {
 func (*AvailibilityReportRequest) ProtoMessage() {}
 
 func (x *AvailibilityReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[66]
+	mi := &file_conversation_proto_msgTypes[64]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7718,7 +7584,7 @@ func (x *AvailibilityReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AvailibilityReportRequest.ProtoReflect.Descriptor instead.
 func (*AvailibilityReportRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{66}
+	return file_conversation_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *AvailibilityReportRequest) GetCtx() *common.Context {
@@ -7783,7 +7649,7 @@ type CountReportRequest struct {
 func (x *CountReportRequest) Reset() {
 	*x = CountReportRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[67]
+		mi := &file_conversation_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7796,7 +7662,7 @@ func (x *CountReportRequest) String() string {
 func (*CountReportRequest) ProtoMessage() {}
 
 func (x *CountReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[67]
+	mi := &file_conversation_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7809,7 +7675,7 @@ func (x *CountReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountReportRequest.ProtoReflect.Descriptor instead.
 func (*CountReportRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{67}
+	return file_conversation_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *CountReportRequest) GetCtx() *common.Context {
@@ -7896,7 +7762,7 @@ type ReportResponse struct {
 func (x *ReportResponse) Reset() {
 	*x = ReportResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[68]
+		mi := &file_conversation_proto_msgTypes[66]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7909,7 +7775,7 @@ func (x *ReportResponse) String() string {
 func (*ReportResponse) ProtoMessage() {}
 
 func (x *ReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[68]
+	mi := &file_conversation_proto_msgTypes[66]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7922,7 +7788,7 @@ func (x *ReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportResponse.ProtoReflect.Descriptor instead.
 func (*ReportResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{68}
+	return file_conversation_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *ReportResponse) GetCtx() *common.Context {
@@ -7968,7 +7834,7 @@ type ConversationAgg struct {
 func (x *ConversationAgg) Reset() {
 	*x = ConversationAgg{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[69]
+		mi := &file_conversation_proto_msgTypes[67]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7981,7 +7847,7 @@ func (x *ConversationAgg) String() string {
 func (*ConversationAgg) ProtoMessage() {}
 
 func (x *ConversationAgg) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[69]
+	mi := &file_conversation_proto_msgTypes[67]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7994,7 +7860,7 @@ func (x *ConversationAgg) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationAgg.ProtoReflect.Descriptor instead.
 func (*ConversationAgg) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{69}
+	return file_conversation_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *ConversationAgg) GetCtx() *common.Context {
@@ -8051,7 +7917,7 @@ type ConversationMetadata struct {
 func (x *ConversationMetadata) Reset() {
 	*x = ConversationMetadata{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[70]
+		mi := &file_conversation_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8064,7 +7930,7 @@ func (x *ConversationMetadata) String() string {
 func (*ConversationMetadata) ProtoMessage() {}
 
 func (x *ConversationMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[70]
+	mi := &file_conversation_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8077,7 +7943,7 @@ func (x *ConversationMetadata) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationMetadata.ProtoReflect.Descriptor instead.
 func (*ConversationMetadata) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{70}
+	return file_conversation_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *ConversationMetadata) GetAccountId() string {
@@ -8148,7 +8014,7 @@ type FilterCondition struct {
 func (x *FilterCondition) Reset() {
 	*x = FilterCondition{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[71]
+		mi := &file_conversation_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8161,7 +8027,7 @@ func (x *FilterCondition) String() string {
 func (*FilterCondition) ProtoMessage() {}
 
 func (x *FilterCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[71]
+	mi := &file_conversation_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8174,7 +8040,7 @@ func (x *FilterCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterCondition.ProtoReflect.Descriptor instead.
 func (*FilterCondition) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{71}
+	return file_conversation_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *FilterCondition) GetOperator() string {
@@ -8211,7 +8077,7 @@ type FilterUserRequest struct {
 func (x *FilterUserRequest) Reset() {
 	*x = FilterUserRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[72]
+		mi := &file_conversation_proto_msgTypes[70]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8224,7 +8090,7 @@ func (x *FilterUserRequest) String() string {
 func (*FilterUserRequest) ProtoMessage() {}
 
 func (x *FilterUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[72]
+	mi := &file_conversation_proto_msgTypes[70]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8237,7 +8103,7 @@ func (x *FilterUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterUserRequest.ProtoReflect.Descriptor instead.
 func (*FilterUserRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{72}
+	return file_conversation_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *FilterUserRequest) GetAccountId() string {
@@ -8323,7 +8189,7 @@ type FilterUserResponse struct {
 func (x *FilterUserResponse) Reset() {
 	*x = FilterUserResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[73]
+		mi := &file_conversation_proto_msgTypes[71]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8336,7 +8202,7 @@ func (x *FilterUserResponse) String() string {
 func (*FilterUserResponse) ProtoMessage() {}
 
 func (x *FilterUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[73]
+	mi := &file_conversation_proto_msgTypes[71]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8349,7 +8215,7 @@ func (x *FilterUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FilterUserResponse.ProtoReflect.Descriptor instead.
 func (*FilterUserResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{73}
+	return file_conversation_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *FilterUserResponse) GetUserIds() []string {
@@ -8389,7 +8255,7 @@ type SearchConversationRequest struct {
 func (x *SearchConversationRequest) Reset() {
 	*x = SearchConversationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[74]
+		mi := &file_conversation_proto_msgTypes[72]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8402,7 +8268,7 @@ func (x *SearchConversationRequest) String() string {
 func (*SearchConversationRequest) ProtoMessage() {}
 
 func (x *SearchConversationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[74]
+	mi := &file_conversation_proto_msgTypes[72]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8415,7 +8281,7 @@ func (x *SearchConversationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchConversationRequest.ProtoReflect.Descriptor instead.
 func (*SearchConversationRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{74}
+	return file_conversation_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *SearchConversationRequest) GetAccountId() string {
@@ -8523,7 +8389,7 @@ type SearchConversationResponse struct {
 func (x *SearchConversationResponse) Reset() {
 	*x = SearchConversationResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[75]
+		mi := &file_conversation_proto_msgTypes[73]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8536,7 +8402,7 @@ func (x *SearchConversationResponse) String() string {
 func (*SearchConversationResponse) ProtoMessage() {}
 
 func (x *SearchConversationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[75]
+	mi := &file_conversation_proto_msgTypes[73]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8549,7 +8415,7 @@ func (x *SearchConversationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchConversationResponse.ProtoReflect.Descriptor instead.
 func (*SearchConversationResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{75}
+	return file_conversation_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *SearchConversationResponse) GetConversationIds() []string {
@@ -8608,7 +8474,7 @@ type ESConversation struct {
 func (x *ESConversation) Reset() {
 	*x = ESConversation{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[76]
+		mi := &file_conversation_proto_msgTypes[74]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8621,7 +8487,7 @@ func (x *ESConversation) String() string {
 func (*ESConversation) ProtoMessage() {}
 
 func (x *ESConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[76]
+	mi := &file_conversation_proto_msgTypes[74]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8634,7 +8500,7 @@ func (x *ESConversation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ESConversation.ProtoReflect.Descriptor instead.
 func (*ESConversation) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{76}
+	return file_conversation_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *ESConversation) GetAccountId() string {
@@ -8826,7 +8692,7 @@ type ESConversationMessage struct {
 func (x *ESConversationMessage) Reset() {
 	*x = ESConversationMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[77]
+		mi := &file_conversation_proto_msgTypes[75]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8839,7 +8705,7 @@ func (x *ESConversationMessage) String() string {
 func (*ESConversationMessage) ProtoMessage() {}
 
 func (x *ESConversationMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[77]
+	mi := &file_conversation_proto_msgTypes[75]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8852,7 +8718,7 @@ func (x *ESConversationMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ESConversationMessage.ProtoReflect.Descriptor instead.
 func (*ESConversationMessage) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{77}
+	return file_conversation_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *ESConversationMessage) GetAccountId() string {
@@ -8941,7 +8807,7 @@ type UpdateUserSegmentRequest struct {
 func (x *UpdateUserSegmentRequest) Reset() {
 	*x = UpdateUserSegmentRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[78]
+		mi := &file_conversation_proto_msgTypes[76]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8954,7 +8820,7 @@ func (x *UpdateUserSegmentRequest) String() string {
 func (*UpdateUserSegmentRequest) ProtoMessage() {}
 
 func (x *UpdateUserSegmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[78]
+	mi := &file_conversation_proto_msgTypes[76]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8967,7 +8833,7 @@ func (x *UpdateUserSegmentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserSegmentRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserSegmentRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{78}
+	return file_conversation_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *UpdateUserSegmentRequest) GetCtx() *common.Context {
@@ -9026,7 +8892,7 @@ type ESTicket struct {
 func (x *ESTicket) Reset() {
 	*x = ESTicket{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[79]
+		mi := &file_conversation_proto_msgTypes[77]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9039,7 +8905,7 @@ func (x *ESTicket) String() string {
 func (*ESTicket) ProtoMessage() {}
 
 func (x *ESTicket) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[79]
+	mi := &file_conversation_proto_msgTypes[77]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9052,7 +8918,7 @@ func (x *ESTicket) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ESTicket.ProtoReflect.Descriptor instead.
 func (*ESTicket) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{79}
+	return file_conversation_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *ESTicket) GetCtx() *common.Context {
@@ -9163,7 +9029,7 @@ type ConversationListRequest struct {
 func (x *ConversationListRequest) Reset() {
 	*x = ConversationListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[80]
+		mi := &file_conversation_proto_msgTypes[78]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9176,7 +9042,7 @@ func (x *ConversationListRequest) String() string {
 func (*ConversationListRequest) ProtoMessage() {}
 
 func (x *ConversationListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[80]
+	mi := &file_conversation_proto_msgTypes[78]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9189,7 +9055,7 @@ func (x *ConversationListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationListRequest.ProtoReflect.Descriptor instead.
 func (*ConversationListRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{80}
+	return file_conversation_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *ConversationListRequest) GetCtx() *common.Context {
@@ -9353,7 +9219,7 @@ type ConversationListResponse struct {
 func (x *ConversationListResponse) Reset() {
 	*x = ConversationListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[81]
+		mi := &file_conversation_proto_msgTypes[79]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9366,7 +9232,7 @@ func (x *ConversationListResponse) String() string {
 func (*ConversationListResponse) ProtoMessage() {}
 
 func (x *ConversationListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[81]
+	mi := &file_conversation_proto_msgTypes[79]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9379,7 +9245,7 @@ func (x *ConversationListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConversationListResponse.ProtoReflect.Descriptor instead.
 func (*ConversationListResponse) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{81}
+	return file_conversation_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *ConversationListResponse) GetAnchor() string {
@@ -9444,7 +9310,7 @@ type UserExportRequest struct {
 func (x *UserExportRequest) Reset() {
 	*x = UserExportRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[82]
+		mi := &file_conversation_proto_msgTypes[80]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9457,7 +9323,7 @@ func (x *UserExportRequest) String() string {
 func (*UserExportRequest) ProtoMessage() {}
 
 func (x *UserExportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[82]
+	mi := &file_conversation_proto_msgTypes[80]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9470,7 +9336,7 @@ func (x *UserExportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserExportRequest.ProtoReflect.Descriptor instead.
 func (*UserExportRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{82}
+	return file_conversation_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *UserExportRequest) GetCtx() *common.Context {
@@ -9666,7 +9532,7 @@ type ReportConversationsRequest struct {
 func (x *ReportConversationsRequest) Reset() {
 	*x = ReportConversationsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[83]
+		mi := &file_conversation_proto_msgTypes[81]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9679,7 +9545,7 @@ func (x *ReportConversationsRequest) String() string {
 func (*ReportConversationsRequest) ProtoMessage() {}
 
 func (x *ReportConversationsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[83]
+	mi := &file_conversation_proto_msgTypes[81]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9692,7 +9558,7 @@ func (x *ReportConversationsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReportConversationsRequest.ProtoReflect.Descriptor instead.
 func (*ReportConversationsRequest) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{83}
+	return file_conversation_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *ReportConversationsRequest) GetCtx() *common.Context {
@@ -9874,7 +9740,7 @@ type SCondition struct {
 func (x *SCondition) Reset() {
 	*x = SCondition{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[84]
+		mi := &file_conversation_proto_msgTypes[82]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9887,7 +9753,7 @@ func (x *SCondition) String() string {
 func (*SCondition) ProtoMessage() {}
 
 func (x *SCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[84]
+	mi := &file_conversation_proto_msgTypes[82]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9900,7 +9766,7 @@ func (x *SCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SCondition.ProtoReflect.Descriptor instead.
 func (*SCondition) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{84}
+	return file_conversation_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *SCondition) GetId() string {
@@ -9992,7 +9858,7 @@ type ESConversation_ResponseTime struct {
 func (x *ESConversation_ResponseTime) Reset() {
 	*x = ESConversation_ResponseTime{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[87]
+		mi := &file_conversation_proto_msgTypes[85]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -10005,7 +9871,7 @@ func (x *ESConversation_ResponseTime) String() string {
 func (*ESConversation_ResponseTime) ProtoMessage() {}
 
 func (x *ESConversation_ResponseTime) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[87]
+	mi := &file_conversation_proto_msgTypes[85]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10018,7 +9884,7 @@ func (x *ESConversation_ResponseTime) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ESConversation_ResponseTime.ProtoReflect.Descriptor instead.
 func (*ESConversation_ResponseTime) Descriptor() ([]byte, []int) {
-	return file_conversation_proto_rawDescGZIP(), []int{76, 0}
+	return file_conversation_proto_rawDescGZIP(), []int{74, 0}
 }
 
 func (x *ESConversation_ResponseTime) GetAgentId() string {
@@ -10167,116 +10033,101 @@ var file_conversation_proto_rawDesc = []byte{
 	0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e,
 	0x65, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e,
-	0x65, 0x64, 0x22, 0x48, 0x0a, 0x0a, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x53, 0x65, 0x65, 0x6e,
-	0x12, 0x1b, 0x0a, 0x09, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1d, 0x0a,
-	0x0a, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64, 0x22, 0xb7, 0x03, 0x0a,
-	0x06, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f,
-	0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63,
-	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70,
-	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x19, 0x0a,
-	0x08, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x5f, 0x69, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x07, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x04,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
-	0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a,
-	0x61, 0x76, 0x61, 0x74, 0x61, 0x72, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x09, 0x61, 0x76, 0x61, 0x74, 0x61, 0x72, 0x55, 0x72, 0x6c, 0x12, 0x27, 0x0a, 0x0f, 0x63,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x0d,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x06, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x18, 0x0e,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52, 0x06, 0x66, 0x69, 0x65, 0x6c, 0x64,
-	0x73, 0x12, 0x2b, 0x0a, 0x12, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x76,
-	0x69, 0x65, 0x77, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x6c,
-	0x61, 0x73, 0x74, 0x50, 0x61, 0x67, 0x65, 0x56, 0x69, 0x65, 0x77, 0x55, 0x72, 0x6c, 0x12, 0x1e,
-	0x0a, 0x0a, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x18, 0x0c, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0a, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68, 0x69, 0x70, 0x12, 0x29,
-	0x0a, 0x0a, 0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x18, 0x10, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x42, 0x79, 0x52, 0x09,
-	0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x42, 0x79, 0x22, 0x2b, 0x0a, 0x05, 0x53, 0x74, 0x61,
-	0x74, 0x65, 0x12, 0x0a, 0x0a, 0x06, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x10, 0x00, 0x12, 0x08,
-	0x0a, 0x04, 0x6c, 0x65, 0x66, 0x74, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x6f, 0x62, 0x73, 0x65,
-	0x72, 0x76, 0x65, 0x72, 0x10, 0x02, 0x22, 0xa2, 0x07, 0x0a, 0x0c, 0x43, 0x6f, 0x6e, 0x76, 0x65,
-	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f,
-	0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63,
-	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x64, 0x12, 0x2e, 0x0a, 0x07, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x18, 0x07,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x07, 0x6d, 0x65, 0x6d, 0x62,
-	0x65, 0x72, 0x73, 0x12, 0x25, 0x0a, 0x04, 0x74, 0x61, 0x67, 0x73, 0x18, 0x0a, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x11, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x54, 0x61, 0x67, 0x52, 0x04, 0x74, 0x61, 0x67, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6e,
-	0x64, 0x65, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x65, 0x6e, 0x64, 0x65, 0x64,
-	0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x3b, 0x0a, 0x0b, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x12, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f,
-	0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x49, 0x6e, 0x74, 0x65, 0x67,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0b, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x64, 0x18, 0x13,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x64, 0x12, 0x26, 0x0a,
-	0x0f, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x69, 0x64,
-	0x18, 0x15, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x49, 0x64, 0x12, 0x38, 0x0a, 0x0c, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x14, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x63, 0x6f,
-	0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x52, 0x0b, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
-	0x21, 0x0a, 0x0c, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x5f, 0x73, 0x65, 0x63, 0x18,
-	0x16, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x53,
-	0x65, 0x63, 0x12, 0x19, 0x0a, 0x08, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x18,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x49, 0x64, 0x12, 0x2c, 0x0a,
-	0x06, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x18, 0x1b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e,
-	0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x54, 0x69, 0x63,
-	0x6b, 0x65, 0x74, 0x52, 0x06, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x74,
-	0x69, 0x63, 0x6b, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x1c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
-	0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x49, 0x64, 0x12, 0x3a, 0x0a, 0x0b, 0x61, 0x73, 0x73, 0x69,
-	0x67, 0x6e, 0x65, 0x64, 0x5f, 0x74, 0x6f, 0x18, 0x1e, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e,
-	0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x6f, 0x75,
-	0x74, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x0a, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e,
-	0x65, 0x64, 0x54, 0x6f, 0x12, 0x23, 0x0a, 0x0d, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x1f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x66, 0x69, 0x72,
-	0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x62,
-	0x6a, 0x65, 0x63, 0x74, 0x18, 0x20, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x75, 0x62, 0x6a,
-	0x65, 0x63, 0x74, 0x12, 0x2b, 0x0a, 0x06, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x18, 0x21, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x2e, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52, 0x06, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73,
-	0x12, 0x2e, 0x0a, 0x07, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x23, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x12, 0x16, 0x0a, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x18, 0x24, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x67, 0x65, 0x6e,
-	0x74, 0x5f, 0x69, 0x64, 0x18, 0x28, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x67, 0x65, 0x6e,
-	0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x75, 0x74, 0x65, 0x18, 0x29, 0x20, 0x01, 0x28,
-	0x08, 0x52, 0x04, 0x6d, 0x75, 0x74, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x65, 0x61, 0x64, 0x18,
-	0x2a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x72, 0x65, 0x61, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x77,
-	0x61, 0x74, 0x63, 0x68, 0x18, 0x2c, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x77, 0x61, 0x74, 0x63,
-	0x68, 0x12, 0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x2b, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x22, 0x88, 0x01, 0x0a, 0x06,
-	0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x14, 0x0a, 0x05, 0x72, 0x61, 0x74, 0x65, 0x64, 0x18,
-	0x23, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x72, 0x61, 0x74, 0x65, 0x64, 0x12, 0x16, 0x0a, 0x06,
-	0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x24, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x72, 0x61,
-	0x74, 0x69, 0x6e, 0x67, 0x12, 0x19, 0x0a, 0x08, 0x72, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x62, 0x79,
-	0x18, 0x25, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72, 0x61, 0x74, 0x65, 0x64, 0x42, 0x79, 0x12,
-	0x1b, 0x0a, 0x09, 0x6e, 0x6f, 0x5f, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x26, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x08, 0x6e, 0x6f, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x18, 0x0a, 0x07,
-	0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x27, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63,
-	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0xa3, 0x01, 0x0a, 0x10, 0x55, 0x73, 0x65, 0x72, 0x43,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1d, 0x0a, 0x0a, 0x61,
-	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74,
-	0x61, 0x74, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65,
-	0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x63, 0x6f, 0x6e,
-	0x76, 0x6f, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e,
-	0x76, 0x6f, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0f, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x73, 0x65, 0x65,
-	0x6e, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6c,
-	0x61, 0x73, 0x74, 0x53, 0x65, 0x65, 0x6e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x22, 0xce, 0x01, 0x0a,
+	0x65, 0x64, 0x22, 0xb7, 0x03, 0x0a, 0x06, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x21, 0x0a,
+	0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78,
+	0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12,
+	0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74,
+	0x79, 0x70, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x5f, 0x69, 0x64, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x49, 0x64, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12,
+	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x76, 0x61, 0x74, 0x61, 0x72, 0x5f, 0x75, 0x72, 0x6c,
+	0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x76, 0x61, 0x74, 0x61, 0x72, 0x55, 0x72,
+	0x6c, 0x12, 0x27, 0x0a, 0x0f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x69, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x76,
+	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x06, 0x66, 0x69,
+	0x65, 0x6c, 0x64, 0x73, 0x18, 0x0e, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x63, 0x6f, 0x6e,
+	0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52,
+	0x06, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x12, 0x2b, 0x0a, 0x12, 0x6c, 0x61, 0x73, 0x74, 0x5f,
+	0x70, 0x61, 0x67, 0x65, 0x5f, 0x76, 0x69, 0x65, 0x77, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x0f, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0f, 0x6c, 0x61, 0x73, 0x74, 0x50, 0x61, 0x67, 0x65, 0x56, 0x69, 0x65,
+	0x77, 0x55, 0x72, 0x6c, 0x12, 0x1e, 0x0a, 0x0a, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x68,
+	0x69, 0x70, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72,
+	0x73, 0x68, 0x69, 0x70, 0x12, 0x29, 0x0a, 0x0a, 0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x5f,
+	0x62, 0x79, 0x18, 0x10, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
+	0x6e, 0x2e, 0x42, 0x79, 0x52, 0x09, 0x69, 0x6e, 0x76, 0x69, 0x74, 0x65, 0x64, 0x42, 0x79, 0x22,
+	0x2b, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x0a, 0x0a, 0x06, 0x61, 0x63, 0x74, 0x69,
+	0x76, 0x65, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x6c, 0x65, 0x66, 0x74, 0x10, 0x01, 0x12, 0x0c,
+	0x0a, 0x08, 0x6f, 0x62, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x10, 0x02, 0x22, 0xa2, 0x07, 0x0a,
+	0x0c, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x0a,
+	0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
+	0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12,
+	0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x2e, 0x0a, 0x07, 0x6d, 0x65, 0x6d,
+	0x62, 0x65, 0x72, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6e,
+	0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72,
+	0x52, 0x07, 0x6d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x12, 0x25, 0x0a, 0x04, 0x74, 0x61, 0x67,
+	0x73, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72,
+	0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x54, 0x61, 0x67, 0x52, 0x04, 0x74, 0x61, 0x67, 0x73,
+	0x12, 0x14, 0x0a, 0x05, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x05, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x18,
+	0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x3b, 0x0a, 0x0b,
+	0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x12, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x2e, 0x49, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0b, 0x69, 0x6e,
+	0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x63, 0x74,
+	0x69, 0x76, 0x65, 0x64, 0x18, 0x13, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x61, 0x63, 0x74, 0x69,
+	0x76, 0x65, 0x64, 0x12, 0x26, 0x0a, 0x0f, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x15, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6c, 0x61,
+	0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x49, 0x64, 0x12, 0x38, 0x0a, 0x0c, 0x6c,
+	0x61, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x14, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x15, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x0b, 0x6c, 0x61, 0x73, 0x74, 0x4d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x5f, 0x73, 0x65, 0x63, 0x18, 0x16, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x72, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x53, 0x65, 0x63, 0x12, 0x19, 0x0a, 0x08, 0x63, 0x68, 0x61, 0x69,
+	0x6e, 0x5f, 0x69, 0x64, 0x18, 0x18, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x68, 0x61, 0x69,
+	0x6e, 0x49, 0x64, 0x12, 0x2c, 0x0a, 0x06, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x18, 0x1b, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x52, 0x06, 0x74, 0x69, 0x63, 0x6b, 0x65,
+	0x74, 0x12, 0x1b, 0x0a, 0x09, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x1c,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x49, 0x64, 0x12, 0x3a,
+	0x0a, 0x0b, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x5f, 0x74, 0x6f, 0x18, 0x1e, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x2e, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x0a,
+	0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x54, 0x6f, 0x12, 0x23, 0x0a, 0x0d, 0x66, 0x69,
+	0x72, 0x73, 0x74, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x1f, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0c, 0x66, 0x69, 0x72, 0x73, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x20, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x2b, 0x0a, 0x06, 0x66, 0x69, 0x65,
+	0x6c, 0x64, 0x73, 0x18, 0x21, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x63, 0x6f, 0x6e, 0x76,
+	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52, 0x06,
+	0x66, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x12, 0x2e, 0x0a, 0x07, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x18, 0x23, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72,
+	0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x07, 0x72,
+	0x61, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65,
+	0x18, 0x24, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x19,
+	0x0a, 0x08, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x28, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x75, 0x74,
+	0x65, 0x18, 0x29, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x6d, 0x75, 0x74, 0x65, 0x12, 0x12, 0x0a,
+	0x04, 0x72, 0x65, 0x61, 0x64, 0x18, 0x2a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x72, 0x65, 0x61,
+	0x64, 0x12, 0x14, 0x0a, 0x05, 0x77, 0x61, 0x74, 0x63, 0x68, 0x18, 0x2c, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x05, 0x77, 0x61, 0x74, 0x63, 0x68, 0x12, 0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x64, 0x18, 0x2b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x64, 0x22, 0x88, 0x01, 0x0a, 0x06, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x14, 0x0a, 0x05,
+	0x72, 0x61, 0x74, 0x65, 0x64, 0x18, 0x23, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x72, 0x61, 0x74,
+	0x65, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x24, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x06, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x19, 0x0a, 0x08, 0x72, 0x61,
+	0x74, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x18, 0x25, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x72, 0x61,
+	0x74, 0x65, 0x64, 0x42, 0x79, 0x12, 0x1b, 0x0a, 0x09, 0x6e, 0x6f, 0x5f, 0x72, 0x61, 0x74, 0x69,
+	0x6e, 0x67, 0x18, 0x26, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x6e, 0x6f, 0x52, 0x61, 0x74, 0x69,
+	0x6e, 0x67, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x27, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x22, 0xce, 0x01, 0x0a,
 	0x0d, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x21,
 	0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f,
 	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74,
@@ -11665,7 +11516,7 @@ func file_conversation_proto_rawDescGZIP() []byte {
 }
 
 var file_conversation_proto_enumTypes = make([]protoimpl.EnumInfo, 23)
-var file_conversation_proto_msgTypes = make([]protoimpl.MessageInfo, 88)
+var file_conversation_proto_msgTypes = make([]protoimpl.MessageInfo, 86)
 var file_conversation_proto_goTypes = []interface{}{
 	(State)(0),                                        // 0: conversation.State
 	(AttachmentType)(0),                               // 1: conversation.AttachmentType
@@ -11697,207 +11548,205 @@ var file_conversation_proto_goTypes = []interface{}{
 	(*LocationCondition)(nil),                         // 27: conversation.LocationCondition
 	(*Route)(nil),                                     // 28: conversation.Route
 	(*RouteResult)(nil),                               // 29: conversation.RouteResult
-	(*MemberSeen)(nil),                                // 30: conversation.MemberSeen
-	(*Member)(nil),                                    // 31: conversation.Member
-	(*Conversation)(nil),                              // 32: conversation.Conversation
-	(*Rating)(nil),                                    // 33: conversation.Rating
-	(*UserConversation)(nil),                          // 34: conversation.UserConversation
-	(*Conversations)(nil),                             // 35: conversation.Conversations
-	(*Search)(nil),                                    // 36: conversation.Search
-	(*ListConversationsRequest)(nil),                  // 37: conversation.ListConversationsRequest
-	(*ListEventsRequest)(nil),                         // 38: conversation.ListEventsRequest
-	(*ListConversationsByUserRequest)(nil),            // 39: conversation.ListConversationsByUserRequest
-	(*EsMessage)(nil),                                 // 40: conversation.EsMessage
-	(*Message)(nil),                                   // 41: conversation.Message
-	(*MessagePong)(nil),                               // 42: conversation.MessagePong
-	(*Revision)(nil),                                  // 43: conversation.Revision
-	(*Field)(nil),                                     // 44: conversation.Field
-	(*Button)(nil),                                    // 45: conversation.Button
-	(*AskInfomationAnswer)(nil),                       // 46: conversation.AskInfomationAnswer
-	(*AskInfomation)(nil),                             // 47: conversation.AskInfomation
-	(*ContentTemplate)(nil),                           // 48: conversation.ContentTemplate
-	(*GenericElementTemplate)(nil),                    // 49: conversation.GenericElementTemplate
-	(*Attachment)(nil),                                // 50: conversation.Attachment
-	(*QuickReply)(nil),                                // 51: conversation.QuickReply
-	(*Form)(nil),                                      // 52: conversation.Form
-	(*FormSubmit)(nil),                                // 53: conversation.FormSubmit
-	(*FormField)(nil),                                 // 54: conversation.FormField
-	(*Tag)(nil),                                       // 55: conversation.Tag
-	(*TemplateData)(nil),                              // 56: conversation.TemplateData
-	(*Template)(nil),                                  // 57: conversation.Template
-	(*SearchTemplate)(nil),                            // 58: conversation.SearchTemplate
-	(*Templates)(nil),                                 // 59: conversation.Templates
-	(*Tags)(nil),                                      // 60: conversation.Tags
-	(*Postback)(nil),                                  // 61: conversation.Postback
-	(*Integrations)(nil),                              // 62: conversation.Integrations
-	(*Integration)(nil),                               // 63: conversation.Integration
-	(*SearchMessageRequest)(nil),                      // 64: conversation.SearchMessageRequest
-	(*TagRequest)(nil),                                // 65: conversation.TagRequest
-	(*CountByTagsRequest)(nil),                        // 66: conversation.CountByTagsRequest
-	(*CountByTag)(nil),                                // 67: conversation.CountByTag
-	(*CountByTagsResponse)(nil),                       // 68: conversation.CountByTagsResponse
-	(*AvgResponseTimeRequest)(nil),                    // 69: conversation.AvgResponseTimeRequest
-	(*AvgResponseTimeResponse)(nil),                   // 70: conversation.AvgResponseTimeResponse
-	(*TotalConversationResponse)(nil),                 // 71: conversation.TotalConversationResponse
-	(*Chain)(nil),                                     // 72: conversation.Chain
-	(*Ticket)(nil),                                    // 73: conversation.Ticket
-	(*TicketListRequest)(nil),                         // 74: conversation.TicketListRequest
-	(*Tickets)(nil),                                   // 75: conversation.Tickets
-	(*ESTickets)(nil),                                 // 76: conversation.ESTickets
-	(*TicketAttributeData)(nil),                       // 77: conversation.TicketAttributeData
-	(*ServiceLevelAgreementTarget)(nil),               // 78: conversation.ServiceLevelAgreementTarget
-	(*ServiceLevelAgreement)(nil),                     // 79: conversation.ServiceLevelAgreement
-	(*ServiceLevelAgreements)(nil),                    // 80: conversation.ServiceLevelAgreements
-	(*DeleteTicketAttrRequest)(nil),                   // 81: conversation.DeleteTicketAttrRequest
-	(*GetTicketRequest)(nil),                          // 82: conversation.GetTicketRequest
-	(*DeleteTicketRequest)(nil),                       // 83: conversation.DeleteTicketRequest
-	(*ReportTicket)(nil),                              // 84: conversation.ReportTicket
-	(*CountTicketRequest)(nil),                        // 85: conversation.CountTicketRequest
-	(*CountTicketResponse)(nil),                       // 86: conversation.CountTicketResponse
-	(*AvgResolveTimeRequest)(nil),                     // 87: conversation.AvgResolveTimeRequest
-	(*AvgResolveTimeResponse)(nil),                    // 88: conversation.AvgResolveTimeResponse
-	(*AvailibilityReportRequest)(nil),                 // 89: conversation.AvailibilityReportRequest
-	(*CountReportRequest)(nil),                        // 90: conversation.CountReportRequest
-	(*ReportResponse)(nil),                            // 91: conversation.ReportResponse
-	(*ConversationAgg)(nil),                           // 92: conversation.ConversationAgg
-	(*ConversationMetadata)(nil),                      // 93: conversation.ConversationMetadata
-	(*FilterCondition)(nil),                           // 94: conversation.FilterCondition
-	(*FilterUserRequest)(nil),                         // 95: conversation.FilterUserRequest
-	(*FilterUserResponse)(nil),                        // 96: conversation.FilterUserResponse
-	(*SearchConversationRequest)(nil),                 // 97: conversation.SearchConversationRequest
-	(*SearchConversationResponse)(nil),                // 98: conversation.SearchConversationResponse
-	(*ESConversation)(nil),                            // 99: conversation.ESConversation
-	(*ESConversationMessage)(nil),                     // 100: conversation.ESConversationMessage
-	(*UpdateUserSegmentRequest)(nil),                  // 101: conversation.UpdateUserSegmentRequest
-	(*ESTicket)(nil),                                  // 102: conversation.ESTicket
-	(*ConversationListRequest)(nil),                   // 103: conversation.ConversationListRequest
-	(*ConversationListResponse)(nil),                  // 104: conversation.ConversationListResponse
-	(*UserExportRequest)(nil),                         // 105: conversation.UserExportRequest
-	(*ReportConversationsRequest)(nil),                // 106: conversation.ReportConversationsRequest
-	(*SCondition)(nil),                                // 107: conversation.SCondition
-	nil,                                               // 108: conversation.ConversationMetadata.FirstAgentRepliedEntry
-	nil,                                               // 109: conversation.ConversationMetadata.AgentJoinedEntry
-	(*ESConversation_ResponseTime)(nil),               // 110: conversation.ESConversation.ResponseTime
-	(*common.Context)(nil),                            // 111: common.Context
-	(*common.By)(nil),                                 // 112: common.By
-	(*common.Error)(nil),                              // 113: common.Error
+	(*Member)(nil),                                    // 30: conversation.Member
+	(*Conversation)(nil),                              // 31: conversation.Conversation
+	(*Rating)(nil),                                    // 32: conversation.Rating
+	(*Conversations)(nil),                             // 33: conversation.Conversations
+	(*Search)(nil),                                    // 34: conversation.Search
+	(*ListConversationsRequest)(nil),                  // 35: conversation.ListConversationsRequest
+	(*ListEventsRequest)(nil),                         // 36: conversation.ListEventsRequest
+	(*ListConversationsByUserRequest)(nil),            // 37: conversation.ListConversationsByUserRequest
+	(*EsMessage)(nil),                                 // 38: conversation.EsMessage
+	(*Message)(nil),                                   // 39: conversation.Message
+	(*MessagePong)(nil),                               // 40: conversation.MessagePong
+	(*Revision)(nil),                                  // 41: conversation.Revision
+	(*Field)(nil),                                     // 42: conversation.Field
+	(*Button)(nil),                                    // 43: conversation.Button
+	(*AskInfomationAnswer)(nil),                       // 44: conversation.AskInfomationAnswer
+	(*AskInfomation)(nil),                             // 45: conversation.AskInfomation
+	(*ContentTemplate)(nil),                           // 46: conversation.ContentTemplate
+	(*GenericElementTemplate)(nil),                    // 47: conversation.GenericElementTemplate
+	(*Attachment)(nil),                                // 48: conversation.Attachment
+	(*QuickReply)(nil),                                // 49: conversation.QuickReply
+	(*Form)(nil),                                      // 50: conversation.Form
+	(*FormSubmit)(nil),                                // 51: conversation.FormSubmit
+	(*FormField)(nil),                                 // 52: conversation.FormField
+	(*Tag)(nil),                                       // 53: conversation.Tag
+	(*TemplateData)(nil),                              // 54: conversation.TemplateData
+	(*Template)(nil),                                  // 55: conversation.Template
+	(*SearchTemplate)(nil),                            // 56: conversation.SearchTemplate
+	(*Templates)(nil),                                 // 57: conversation.Templates
+	(*Tags)(nil),                                      // 58: conversation.Tags
+	(*Postback)(nil),                                  // 59: conversation.Postback
+	(*Integrations)(nil),                              // 60: conversation.Integrations
+	(*Integration)(nil),                               // 61: conversation.Integration
+	(*SearchMessageRequest)(nil),                      // 62: conversation.SearchMessageRequest
+	(*TagRequest)(nil),                                // 63: conversation.TagRequest
+	(*CountByTagsRequest)(nil),                        // 64: conversation.CountByTagsRequest
+	(*CountByTag)(nil),                                // 65: conversation.CountByTag
+	(*CountByTagsResponse)(nil),                       // 66: conversation.CountByTagsResponse
+	(*AvgResponseTimeRequest)(nil),                    // 67: conversation.AvgResponseTimeRequest
+	(*AvgResponseTimeResponse)(nil),                   // 68: conversation.AvgResponseTimeResponse
+	(*TotalConversationResponse)(nil),                 // 69: conversation.TotalConversationResponse
+	(*Chain)(nil),                                     // 70: conversation.Chain
+	(*Ticket)(nil),                                    // 71: conversation.Ticket
+	(*TicketListRequest)(nil),                         // 72: conversation.TicketListRequest
+	(*Tickets)(nil),                                   // 73: conversation.Tickets
+	(*ESTickets)(nil),                                 // 74: conversation.ESTickets
+	(*TicketAttributeData)(nil),                       // 75: conversation.TicketAttributeData
+	(*ServiceLevelAgreementTarget)(nil),               // 76: conversation.ServiceLevelAgreementTarget
+	(*ServiceLevelAgreement)(nil),                     // 77: conversation.ServiceLevelAgreement
+	(*ServiceLevelAgreements)(nil),                    // 78: conversation.ServiceLevelAgreements
+	(*DeleteTicketAttrRequest)(nil),                   // 79: conversation.DeleteTicketAttrRequest
+	(*GetTicketRequest)(nil),                          // 80: conversation.GetTicketRequest
+	(*DeleteTicketRequest)(nil),                       // 81: conversation.DeleteTicketRequest
+	(*ReportTicket)(nil),                              // 82: conversation.ReportTicket
+	(*CountTicketRequest)(nil),                        // 83: conversation.CountTicketRequest
+	(*CountTicketResponse)(nil),                       // 84: conversation.CountTicketResponse
+	(*AvgResolveTimeRequest)(nil),                     // 85: conversation.AvgResolveTimeRequest
+	(*AvgResolveTimeResponse)(nil),                    // 86: conversation.AvgResolveTimeResponse
+	(*AvailibilityReportRequest)(nil),                 // 87: conversation.AvailibilityReportRequest
+	(*CountReportRequest)(nil),                        // 88: conversation.CountReportRequest
+	(*ReportResponse)(nil),                            // 89: conversation.ReportResponse
+	(*ConversationAgg)(nil),                           // 90: conversation.ConversationAgg
+	(*ConversationMetadata)(nil),                      // 91: conversation.ConversationMetadata
+	(*FilterCondition)(nil),                           // 92: conversation.FilterCondition
+	(*FilterUserRequest)(nil),                         // 93: conversation.FilterUserRequest
+	(*FilterUserResponse)(nil),                        // 94: conversation.FilterUserResponse
+	(*SearchConversationRequest)(nil),                 // 95: conversation.SearchConversationRequest
+	(*SearchConversationResponse)(nil),                // 96: conversation.SearchConversationResponse
+	(*ESConversation)(nil),                            // 97: conversation.ESConversation
+	(*ESConversationMessage)(nil),                     // 98: conversation.ESConversationMessage
+	(*UpdateUserSegmentRequest)(nil),                  // 99: conversation.UpdateUserSegmentRequest
+	(*ESTicket)(nil),                                  // 100: conversation.ESTicket
+	(*ConversationListRequest)(nil),                   // 101: conversation.ConversationListRequest
+	(*ConversationListResponse)(nil),                  // 102: conversation.ConversationListResponse
+	(*UserExportRequest)(nil),                         // 103: conversation.UserExportRequest
+	(*ReportConversationsRequest)(nil),                // 104: conversation.ReportConversationsRequest
+	(*SCondition)(nil),                                // 105: conversation.SCondition
+	nil,                                               // 106: conversation.ConversationMetadata.FirstAgentRepliedEntry
+	nil,                                               // 107: conversation.ConversationMetadata.AgentJoinedEntry
+	(*ESConversation_ResponseTime)(nil),               // 108: conversation.ESConversation.ResponseTime
+	(*common.Context)(nil),                            // 109: common.Context
+	(*common.By)(nil),                                 // 110: common.By
+	(*common.Error)(nil),                              // 111: common.Error
 }
 var file_conversation_proto_depIdxs = []int32{
-	111, // 0: conversation.Rule.ctx:type_name -> common.Context
-	107, // 1: conversation.Rule.condition:type_name -> conversation.SCondition
+	109, // 0: conversation.Rule.ctx:type_name -> common.Context
+	105, // 1: conversation.Rule.condition:type_name -> conversation.SCondition
 	26,  // 2: conversation.Rule.channel_condition:type_name -> conversation.ChannelCondition
 	25,  // 3: conversation.Rule.timming_condition:type_name -> conversation.TimmingCondition
 	24,  // 4: conversation.Rule.user_conditions:type_name -> conversation.UserAttributeCondition
 	27,  // 5: conversation.ChannelCondition.location_conditions:type_name -> conversation.LocationCondition
-	111, // 6: conversation.Route.ctx:type_name -> common.Context
+	109, // 6: conversation.Route.ctx:type_name -> common.Context
 	23,  // 7: conversation.Route.rules:type_name -> conversation.Rule
-	111, // 8: conversation.Member.ctx:type_name -> common.Context
-	44,  // 9: conversation.Member.fields:type_name -> conversation.Field
-	112, // 10: conversation.Member.invited_by:type_name -> common.By
-	111, // 11: conversation.Conversation.ctx:type_name -> common.Context
-	31,  // 12: conversation.Conversation.members:type_name -> conversation.Member
-	55,  // 13: conversation.Conversation.tags:type_name -> conversation.Tag
-	63,  // 14: conversation.Conversation.integration:type_name -> conversation.Integration
-	41,  // 15: conversation.Conversation.last_message:type_name -> conversation.Message
-	73,  // 16: conversation.Conversation.ticket:type_name -> conversation.Ticket
+	109, // 8: conversation.Member.ctx:type_name -> common.Context
+	42,  // 9: conversation.Member.fields:type_name -> conversation.Field
+	110, // 10: conversation.Member.invited_by:type_name -> common.By
+	109, // 11: conversation.Conversation.ctx:type_name -> common.Context
+	30,  // 12: conversation.Conversation.members:type_name -> conversation.Member
+	53,  // 13: conversation.Conversation.tags:type_name -> conversation.Tag
+	61,  // 14: conversation.Conversation.integration:type_name -> conversation.Integration
+	39,  // 15: conversation.Conversation.last_message:type_name -> conversation.Message
+	71,  // 16: conversation.Conversation.ticket:type_name -> conversation.Ticket
 	29,  // 17: conversation.Conversation.assigned_to:type_name -> conversation.RouteResult
-	44,  // 18: conversation.Conversation.fields:type_name -> conversation.Field
-	33,  // 19: conversation.Conversation.ratings:type_name -> conversation.Rating
-	111, // 20: conversation.Conversations.ctx:type_name -> common.Context
-	32,  // 21: conversation.Conversations.conversations:type_name -> conversation.Conversation
-	113, // 22: conversation.Conversations.errors:type_name -> common.Error
-	111, // 23: conversation.Search.ctx:type_name -> common.Context
-	111, // 24: conversation.ListConversationsRequest.ctx:type_name -> common.Context
-	111, // 25: conversation.ListEventsRequest.ctx:type_name -> common.Context
-	111, // 26: conversation.Message.ctx:type_name -> common.Context
-	50,  // 27: conversation.Message.attachments:type_name -> conversation.Attachment
-	44,  // 28: conversation.Message.fields:type_name -> conversation.Field
-	42,  // 29: conversation.Message.pongs:type_name -> conversation.MessagePong
-	43,  // 30: conversation.Message.revisions:type_name -> conversation.Revision
-	50,  // 31: conversation.Revision.attachments:type_name -> conversation.Attachment
-	44,  // 32: conversation.Revision.fields:type_name -> conversation.Field
-	45,  // 33: conversation.ContentTemplate.default_action:type_name -> conversation.Button
-	45,  // 34: conversation.ContentTemplate.buttons:type_name -> conversation.Button
-	45,  // 35: conversation.GenericElementTemplate.default_action:type_name -> conversation.Button
-	45,  // 36: conversation.GenericElementTemplate.buttons:type_name -> conversation.Button
-	49,  // 37: conversation.Attachment.elements:type_name -> conversation.GenericElementTemplate
-	45,  // 38: conversation.Attachment.buttons:type_name -> conversation.Button
-	47,  // 39: conversation.Attachment.ask_info:type_name -> conversation.AskInfomation
-	46,  // 40: conversation.Attachment.ask_info_answer:type_name -> conversation.AskInfomationAnswer
-	52,  // 41: conversation.Attachment.form:type_name -> conversation.Form
-	53,  // 42: conversation.Attachment.form_submit:type_name -> conversation.FormSubmit
-	48,  // 43: conversation.Attachment.contents:type_name -> conversation.ContentTemplate
-	51,  // 44: conversation.Attachment.quick_replies:type_name -> conversation.QuickReply
-	54,  // 45: conversation.Form.fields:type_name -> conversation.FormField
-	54,  // 46: conversation.FormSubmit.fields:type_name -> conversation.FormField
-	111, // 47: conversation.Tag.ctx:type_name -> common.Context
-	111, // 48: conversation.Template.ctx:type_name -> common.Context
-	41,  // 49: conversation.Template.message:type_name -> conversation.Message
-	56,  // 50: conversation.Template.data:type_name -> conversation.TemplateData
-	111, // 51: conversation.SearchTemplate.ctx:type_name -> common.Context
-	111, // 52: conversation.Templates.ctx:type_name -> common.Context
-	57,  // 53: conversation.Templates.templates:type_name -> conversation.Template
-	111, // 54: conversation.Tags.ctx:type_name -> common.Context
-	55,  // 55: conversation.Tags.tags:type_name -> conversation.Tag
-	41,  // 56: conversation.Postback.message:type_name -> conversation.Message
-	45,  // 57: conversation.Postback.button:type_name -> conversation.Button
-	111, // 58: conversation.Integrations.ctx:type_name -> common.Context
-	63,  // 59: conversation.Integrations.integrations:type_name -> conversation.Integration
-	111, // 60: conversation.Integration.ctx:type_name -> common.Context
-	111, // 61: conversation.SearchMessageRequest.ctx:type_name -> common.Context
-	111, // 62: conversation.TagRequest.ctx:type_name -> common.Context
-	67,  // 63: conversation.CountByTagsResponse.data:type_name -> conversation.CountByTag
-	111, // 64: conversation.Ticket.ctx:type_name -> common.Context
-	77,  // 65: conversation.Ticket.attributes:type_name -> conversation.TicketAttributeData
-	111, // 66: conversation.TicketListRequest.ctx:type_name -> common.Context
-	94,  // 67: conversation.TicketListRequest.created:type_name -> conversation.FilterCondition
-	111, // 68: conversation.Tickets.ctx:type_name -> common.Context
-	73,  // 69: conversation.Tickets.tickets:type_name -> conversation.Ticket
-	111, // 70: conversation.ESTickets.ctx:type_name -> common.Context
-	102, // 71: conversation.ESTickets.tickets:type_name -> conversation.ESTicket
-	111, // 72: conversation.TicketAttributeData.ctx:type_name -> common.Context
-	111, // 73: conversation.ServiceLevelAgreement.ctx:type_name -> common.Context
-	78,  // 74: conversation.ServiceLevelAgreement.targets:type_name -> conversation.ServiceLevelAgreementTarget
-	111, // 75: conversation.ServiceLevelAgreements.ctx:type_name -> common.Context
-	79,  // 76: conversation.ServiceLevelAgreements.service_level_agreements:type_name -> conversation.ServiceLevelAgreement
-	111, // 77: conversation.DeleteTicketAttrRequest.ctx:type_name -> common.Context
-	111, // 78: conversation.GetTicketRequest.ctx:type_name -> common.Context
-	111, // 79: conversation.DeleteTicketRequest.ctx:type_name -> common.Context
-	111, // 80: conversation.AvailibilityReportRequest.ctx:type_name -> common.Context
-	111, // 81: conversation.CountReportRequest.ctx:type_name -> common.Context
-	111, // 82: conversation.ReportResponse.ctx:type_name -> common.Context
-	111, // 83: conversation.ConversationAgg.ctx:type_name -> common.Context
-	108, // 84: conversation.ConversationMetadata.first_agent_replied:type_name -> conversation.ConversationMetadata.FirstAgentRepliedEntry
-	109, // 85: conversation.ConversationMetadata.agent_joined:type_name -> conversation.ConversationMetadata.AgentJoinedEntry
-	94,  // 86: conversation.FilterUserRequest.conversation_created:type_name -> conversation.FilterCondition
-	94,  // 87: conversation.SearchConversationRequest.message_created:type_name -> conversation.FilterCondition
-	100, // 88: conversation.SearchConversationResponse.result:type_name -> conversation.ESConversationMessage
-	110, // 89: conversation.ESConversation.response_times:type_name -> conversation.ESConversation.ResponseTime
-	111, // 90: conversation.UpdateUserSegmentRequest.ctx:type_name -> common.Context
-	111, // 91: conversation.ESTicket.ctx:type_name -> common.Context
-	111, // 92: conversation.ConversationListRequest.ctx:type_name -> common.Context
-	94,  // 93: conversation.ConversationListRequest.agent_replied_at:type_name -> conversation.FilterCondition
-	94,  // 94: conversation.ConversationListRequest.created:type_name -> conversation.FilterCondition
-	94,  // 95: conversation.ConversationListRequest.user_id:type_name -> conversation.FilterCondition
-	94,  // 96: conversation.ConversationListRequest.tag_ids:type_name -> conversation.FilterCondition
-	94,  // 97: conversation.ConversationListRequest.state:type_name -> conversation.FilterCondition
-	94,  // 98: conversation.ConversationListRequest.response_time:type_name -> conversation.FilterCondition
-	99,  // 99: conversation.ConversationListResponse.result:type_name -> conversation.ESConversation
-	111, // 100: conversation.UserExportRequest.ctx:type_name -> common.Context
-	94,  // 101: conversation.UserExportRequest.agent_replied_at:type_name -> conversation.FilterCondition
-	94,  // 102: conversation.UserExportRequest.created:type_name -> conversation.FilterCondition
-	94,  // 103: conversation.UserExportRequest.user_id:type_name -> conversation.FilterCondition
-	94,  // 104: conversation.UserExportRequest.tag_ids:type_name -> conversation.FilterCondition
-	94,  // 105: conversation.UserExportRequest.state:type_name -> conversation.FilterCondition
-	94,  // 106: conversation.UserExportRequest.response_time:type_name -> conversation.FilterCondition
-	111, // 107: conversation.ReportConversationsRequest.ctx:type_name -> common.Context
-	94,  // 108: conversation.ReportConversationsRequest.agent_replied_at:type_name -> conversation.FilterCondition
-	94,  // 109: conversation.ReportConversationsRequest.created:type_name -> conversation.FilterCondition
-	94,  // 110: conversation.ReportConversationsRequest.user_id:type_name -> conversation.FilterCondition
-	94,  // 111: conversation.ReportConversationsRequest.tag_ids:type_name -> conversation.FilterCondition
-	94,  // 112: conversation.ReportConversationsRequest.state:type_name -> conversation.FilterCondition
-	94,  // 113: conversation.ReportConversationsRequest.response_time:type_name -> conversation.FilterCondition
-	107, // 114: conversation.SCondition.conditions:type_name -> conversation.SCondition
+	42,  // 18: conversation.Conversation.fields:type_name -> conversation.Field
+	32,  // 19: conversation.Conversation.ratings:type_name -> conversation.Rating
+	109, // 20: conversation.Conversations.ctx:type_name -> common.Context
+	31,  // 21: conversation.Conversations.conversations:type_name -> conversation.Conversation
+	111, // 22: conversation.Conversations.errors:type_name -> common.Error
+	109, // 23: conversation.Search.ctx:type_name -> common.Context
+	109, // 24: conversation.ListConversationsRequest.ctx:type_name -> common.Context
+	109, // 25: conversation.ListEventsRequest.ctx:type_name -> common.Context
+	109, // 26: conversation.Message.ctx:type_name -> common.Context
+	48,  // 27: conversation.Message.attachments:type_name -> conversation.Attachment
+	42,  // 28: conversation.Message.fields:type_name -> conversation.Field
+	40,  // 29: conversation.Message.pongs:type_name -> conversation.MessagePong
+	41,  // 30: conversation.Message.revisions:type_name -> conversation.Revision
+	48,  // 31: conversation.Revision.attachments:type_name -> conversation.Attachment
+	42,  // 32: conversation.Revision.fields:type_name -> conversation.Field
+	43,  // 33: conversation.ContentTemplate.default_action:type_name -> conversation.Button
+	43,  // 34: conversation.ContentTemplate.buttons:type_name -> conversation.Button
+	43,  // 35: conversation.GenericElementTemplate.default_action:type_name -> conversation.Button
+	43,  // 36: conversation.GenericElementTemplate.buttons:type_name -> conversation.Button
+	47,  // 37: conversation.Attachment.elements:type_name -> conversation.GenericElementTemplate
+	43,  // 38: conversation.Attachment.buttons:type_name -> conversation.Button
+	45,  // 39: conversation.Attachment.ask_info:type_name -> conversation.AskInfomation
+	44,  // 40: conversation.Attachment.ask_info_answer:type_name -> conversation.AskInfomationAnswer
+	50,  // 41: conversation.Attachment.form:type_name -> conversation.Form
+	51,  // 42: conversation.Attachment.form_submit:type_name -> conversation.FormSubmit
+	46,  // 43: conversation.Attachment.contents:type_name -> conversation.ContentTemplate
+	49,  // 44: conversation.Attachment.quick_replies:type_name -> conversation.QuickReply
+	52,  // 45: conversation.Form.fields:type_name -> conversation.FormField
+	52,  // 46: conversation.FormSubmit.fields:type_name -> conversation.FormField
+	109, // 47: conversation.Tag.ctx:type_name -> common.Context
+	109, // 48: conversation.Template.ctx:type_name -> common.Context
+	39,  // 49: conversation.Template.message:type_name -> conversation.Message
+	54,  // 50: conversation.Template.data:type_name -> conversation.TemplateData
+	109, // 51: conversation.SearchTemplate.ctx:type_name -> common.Context
+	109, // 52: conversation.Templates.ctx:type_name -> common.Context
+	55,  // 53: conversation.Templates.templates:type_name -> conversation.Template
+	109, // 54: conversation.Tags.ctx:type_name -> common.Context
+	53,  // 55: conversation.Tags.tags:type_name -> conversation.Tag
+	39,  // 56: conversation.Postback.message:type_name -> conversation.Message
+	43,  // 57: conversation.Postback.button:type_name -> conversation.Button
+	109, // 58: conversation.Integrations.ctx:type_name -> common.Context
+	61,  // 59: conversation.Integrations.integrations:type_name -> conversation.Integration
+	109, // 60: conversation.Integration.ctx:type_name -> common.Context
+	109, // 61: conversation.SearchMessageRequest.ctx:type_name -> common.Context
+	109, // 62: conversation.TagRequest.ctx:type_name -> common.Context
+	65,  // 63: conversation.CountByTagsResponse.data:type_name -> conversation.CountByTag
+	109, // 64: conversation.Ticket.ctx:type_name -> common.Context
+	75,  // 65: conversation.Ticket.attributes:type_name -> conversation.TicketAttributeData
+	109, // 66: conversation.TicketListRequest.ctx:type_name -> common.Context
+	92,  // 67: conversation.TicketListRequest.created:type_name -> conversation.FilterCondition
+	109, // 68: conversation.Tickets.ctx:type_name -> common.Context
+	71,  // 69: conversation.Tickets.tickets:type_name -> conversation.Ticket
+	109, // 70: conversation.ESTickets.ctx:type_name -> common.Context
+	100, // 71: conversation.ESTickets.tickets:type_name -> conversation.ESTicket
+	109, // 72: conversation.TicketAttributeData.ctx:type_name -> common.Context
+	109, // 73: conversation.ServiceLevelAgreement.ctx:type_name -> common.Context
+	76,  // 74: conversation.ServiceLevelAgreement.targets:type_name -> conversation.ServiceLevelAgreementTarget
+	109, // 75: conversation.ServiceLevelAgreements.ctx:type_name -> common.Context
+	77,  // 76: conversation.ServiceLevelAgreements.service_level_agreements:type_name -> conversation.ServiceLevelAgreement
+	109, // 77: conversation.DeleteTicketAttrRequest.ctx:type_name -> common.Context
+	109, // 78: conversation.GetTicketRequest.ctx:type_name -> common.Context
+	109, // 79: conversation.DeleteTicketRequest.ctx:type_name -> common.Context
+	109, // 80: conversation.AvailibilityReportRequest.ctx:type_name -> common.Context
+	109, // 81: conversation.CountReportRequest.ctx:type_name -> common.Context
+	109, // 82: conversation.ReportResponse.ctx:type_name -> common.Context
+	109, // 83: conversation.ConversationAgg.ctx:type_name -> common.Context
+	106, // 84: conversation.ConversationMetadata.first_agent_replied:type_name -> conversation.ConversationMetadata.FirstAgentRepliedEntry
+	107, // 85: conversation.ConversationMetadata.agent_joined:type_name -> conversation.ConversationMetadata.AgentJoinedEntry
+	92,  // 86: conversation.FilterUserRequest.conversation_created:type_name -> conversation.FilterCondition
+	92,  // 87: conversation.SearchConversationRequest.message_created:type_name -> conversation.FilterCondition
+	98,  // 88: conversation.SearchConversationResponse.result:type_name -> conversation.ESConversationMessage
+	108, // 89: conversation.ESConversation.response_times:type_name -> conversation.ESConversation.ResponseTime
+	109, // 90: conversation.UpdateUserSegmentRequest.ctx:type_name -> common.Context
+	109, // 91: conversation.ESTicket.ctx:type_name -> common.Context
+	109, // 92: conversation.ConversationListRequest.ctx:type_name -> common.Context
+	92,  // 93: conversation.ConversationListRequest.agent_replied_at:type_name -> conversation.FilterCondition
+	92,  // 94: conversation.ConversationListRequest.created:type_name -> conversation.FilterCondition
+	92,  // 95: conversation.ConversationListRequest.user_id:type_name -> conversation.FilterCondition
+	92,  // 96: conversation.ConversationListRequest.tag_ids:type_name -> conversation.FilterCondition
+	92,  // 97: conversation.ConversationListRequest.state:type_name -> conversation.FilterCondition
+	92,  // 98: conversation.ConversationListRequest.response_time:type_name -> conversation.FilterCondition
+	97,  // 99: conversation.ConversationListResponse.result:type_name -> conversation.ESConversation
+	109, // 100: conversation.UserExportRequest.ctx:type_name -> common.Context
+	92,  // 101: conversation.UserExportRequest.agent_replied_at:type_name -> conversation.FilterCondition
+	92,  // 102: conversation.UserExportRequest.created:type_name -> conversation.FilterCondition
+	92,  // 103: conversation.UserExportRequest.user_id:type_name -> conversation.FilterCondition
+	92,  // 104: conversation.UserExportRequest.tag_ids:type_name -> conversation.FilterCondition
+	92,  // 105: conversation.UserExportRequest.state:type_name -> conversation.FilterCondition
+	92,  // 106: conversation.UserExportRequest.response_time:type_name -> conversation.FilterCondition
+	109, // 107: conversation.ReportConversationsRequest.ctx:type_name -> common.Context
+	92,  // 108: conversation.ReportConversationsRequest.agent_replied_at:type_name -> conversation.FilterCondition
+	92,  // 109: conversation.ReportConversationsRequest.created:type_name -> conversation.FilterCondition
+	92,  // 110: conversation.ReportConversationsRequest.user_id:type_name -> conversation.FilterCondition
+	92,  // 111: conversation.ReportConversationsRequest.tag_ids:type_name -> conversation.FilterCondition
+	92,  // 112: conversation.ReportConversationsRequest.state:type_name -> conversation.FilterCondition
+	92,  // 113: conversation.ReportConversationsRequest.response_time:type_name -> conversation.FilterCondition
+	105, // 114: conversation.SCondition.conditions:type_name -> conversation.SCondition
 	115, // [115:115] is the sub-list for method output_type
 	115, // [115:115] is the sub-list for method input_type
 	115, // [115:115] is the sub-list for extension type_name
@@ -11996,18 +11845,6 @@ func file_conversation_proto_init() {
 			}
 		}
 		file_conversation_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MemberSeen); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_conversation_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Member); i {
 			case 0:
 				return &v.state
@@ -12019,7 +11856,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Conversation); i {
 			case 0:
 				return &v.state
@@ -12031,7 +11868,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Rating); i {
 			case 0:
 				return &v.state
@@ -12043,19 +11880,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserConversation); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_conversation_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Conversations); i {
 			case 0:
 				return &v.state
@@ -12067,7 +11892,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Search); i {
 			case 0:
 				return &v.state
@@ -12079,7 +11904,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListConversationsRequest); i {
 			case 0:
 				return &v.state
@@ -12091,7 +11916,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListEventsRequest); i {
 			case 0:
 				return &v.state
@@ -12103,7 +11928,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListConversationsByUserRequest); i {
 			case 0:
 				return &v.state
@@ -12115,7 +11940,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*EsMessage); i {
 			case 0:
 				return &v.state
@@ -12127,7 +11952,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Message); i {
 			case 0:
 				return &v.state
@@ -12139,7 +11964,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MessagePong); i {
 			case 0:
 				return &v.state
@@ -12151,7 +11976,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Revision); i {
 			case 0:
 				return &v.state
@@ -12163,7 +11988,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Field); i {
 			case 0:
 				return &v.state
@@ -12175,7 +12000,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Button); i {
 			case 0:
 				return &v.state
@@ -12187,7 +12012,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AskInfomationAnswer); i {
 			case 0:
 				return &v.state
@@ -12199,7 +12024,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AskInfomation); i {
 			case 0:
 				return &v.state
@@ -12211,7 +12036,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ContentTemplate); i {
 			case 0:
 				return &v.state
@@ -12223,7 +12048,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GenericElementTemplate); i {
 			case 0:
 				return &v.state
@@ -12235,7 +12060,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Attachment); i {
 			case 0:
 				return &v.state
@@ -12247,7 +12072,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QuickReply); i {
 			case 0:
 				return &v.state
@@ -12259,7 +12084,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Form); i {
 			case 0:
 				return &v.state
@@ -12271,7 +12096,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FormSubmit); i {
 			case 0:
 				return &v.state
@@ -12283,7 +12108,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FormField); i {
 			case 0:
 				return &v.state
@@ -12295,7 +12120,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Tag); i {
 			case 0:
 				return &v.state
@@ -12307,7 +12132,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TemplateData); i {
 			case 0:
 				return &v.state
@@ -12319,7 +12144,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Template); i {
 			case 0:
 				return &v.state
@@ -12331,7 +12156,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchTemplate); i {
 			case 0:
 				return &v.state
@@ -12343,7 +12168,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Templates); i {
 			case 0:
 				return &v.state
@@ -12355,7 +12180,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Tags); i {
 			case 0:
 				return &v.state
@@ -12367,7 +12192,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Postback); i {
 			case 0:
 				return &v.state
@@ -12379,7 +12204,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Integrations); i {
 			case 0:
 				return &v.state
@@ -12391,7 +12216,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Integration); i {
 			case 0:
 				return &v.state
@@ -12403,7 +12228,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchMessageRequest); i {
 			case 0:
 				return &v.state
@@ -12415,7 +12240,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TagRequest); i {
 			case 0:
 				return &v.state
@@ -12427,7 +12252,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountByTagsRequest); i {
 			case 0:
 				return &v.state
@@ -12439,7 +12264,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountByTag); i {
 			case 0:
 				return &v.state
@@ -12451,7 +12276,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountByTagsResponse); i {
 			case 0:
 				return &v.state
@@ -12463,7 +12288,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AvgResponseTimeRequest); i {
 			case 0:
 				return &v.state
@@ -12475,7 +12300,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AvgResponseTimeResponse); i {
 			case 0:
 				return &v.state
@@ -12487,7 +12312,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TotalConversationResponse); i {
 			case 0:
 				return &v.state
@@ -12499,7 +12324,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Chain); i {
 			case 0:
 				return &v.state
@@ -12511,7 +12336,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Ticket); i {
 			case 0:
 				return &v.state
@@ -12523,7 +12348,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TicketListRequest); i {
 			case 0:
 				return &v.state
@@ -12535,7 +12360,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Tickets); i {
 			case 0:
 				return &v.state
@@ -12547,7 +12372,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ESTickets); i {
 			case 0:
 				return &v.state
@@ -12559,7 +12384,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TicketAttributeData); i {
 			case 0:
 				return &v.state
@@ -12571,7 +12396,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ServiceLevelAgreementTarget); i {
 			case 0:
 				return &v.state
@@ -12583,7 +12408,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ServiceLevelAgreement); i {
 			case 0:
 				return &v.state
@@ -12595,7 +12420,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ServiceLevelAgreements); i {
 			case 0:
 				return &v.state
@@ -12607,7 +12432,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteTicketAttrRequest); i {
 			case 0:
 				return &v.state
@@ -12619,7 +12444,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetTicketRequest); i {
 			case 0:
 				return &v.state
@@ -12631,7 +12456,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteTicketRequest); i {
 			case 0:
 				return &v.state
@@ -12643,7 +12468,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReportTicket); i {
 			case 0:
 				return &v.state
@@ -12655,7 +12480,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountTicketRequest); i {
 			case 0:
 				return &v.state
@@ -12667,7 +12492,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountTicketResponse); i {
 			case 0:
 				return &v.state
@@ -12679,7 +12504,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AvgResolveTimeRequest); i {
 			case 0:
 				return &v.state
@@ -12691,7 +12516,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AvgResolveTimeResponse); i {
 			case 0:
 				return &v.state
@@ -12703,7 +12528,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AvailibilityReportRequest); i {
 			case 0:
 				return &v.state
@@ -12715,7 +12540,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountReportRequest); i {
 			case 0:
 				return &v.state
@@ -12727,7 +12552,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReportResponse); i {
 			case 0:
 				return &v.state
@@ -12739,7 +12564,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ConversationAgg); i {
 			case 0:
 				return &v.state
@@ -12751,7 +12576,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ConversationMetadata); i {
 			case 0:
 				return &v.state
@@ -12763,7 +12588,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FilterCondition); i {
 			case 0:
 				return &v.state
@@ -12775,7 +12600,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FilterUserRequest); i {
 			case 0:
 				return &v.state
@@ -12787,7 +12612,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FilterUserResponse); i {
 			case 0:
 				return &v.state
@@ -12799,7 +12624,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchConversationRequest); i {
 			case 0:
 				return &v.state
@@ -12811,7 +12636,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SearchConversationResponse); i {
 			case 0:
 				return &v.state
@@ -12823,7 +12648,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ESConversation); i {
 			case 0:
 				return &v.state
@@ -12835,7 +12660,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ESConversationMessage); i {
 			case 0:
 				return &v.state
@@ -12847,7 +12672,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateUserSegmentRequest); i {
 			case 0:
 				return &v.state
@@ -12859,7 +12684,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ESTicket); i {
 			case 0:
 				return &v.state
@@ -12871,7 +12696,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[80].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ConversationListRequest); i {
 			case 0:
 				return &v.state
@@ -12883,7 +12708,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[81].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ConversationListResponse); i {
 			case 0:
 				return &v.state
@@ -12895,7 +12720,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[82].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[80].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserExportRequest); i {
 			case 0:
 				return &v.state
@@ -12907,7 +12732,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[83].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[81].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ReportConversationsRequest); i {
 			case 0:
 				return &v.state
@@ -12919,7 +12744,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[84].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[82].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SCondition); i {
 			case 0:
 				return &v.state
@@ -12931,7 +12756,7 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[87].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[85].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ESConversation_ResponseTime); i {
 			case 0:
 				return &v.state
@@ -12950,7 +12775,7 @@ func file_conversation_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_conversation_proto_rawDesc,
 			NumEnums:      23,
-			NumMessages:   88,
+			NumMessages:   86,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
