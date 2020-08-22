@@ -16,8 +16,6 @@ import "email.proto";
 import "bot.proto";
 
 message Attribute {
-	string account_id = 2;
-	string user_id = 3;
 	string key = 4;
 
 	int64 modified = 8;
@@ -34,13 +32,13 @@ message Attribute {
 
 	// to update
 	enum Ops {
-		clear = 0;
-		upsert = 1; // update + insert, remove all other value
-		update = 2; // only write if existed, remove all other value
+		upsert = 0; // DEFAULT: update + insert, remove all other value
+		replace = 2; // only write if existed, remove all other value
 		insert = 3; // only write if not existed, remove all other value
 
 		delete = 4; // delete specific elemnt match the value
-		append = 5; // add a new value (for array)
+
+		push = 5; // add a new value (for array) // unique
 	}
 	string action = 18;
 }

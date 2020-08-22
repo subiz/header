@@ -30,9 +30,60 @@ message Rule {
 	optional int64 modified = 12;
 	optional string name = 10;
 	optional string description = 11;
-	optional bool available_agents_only = 13;
+	optional bool available_agents_only = 13; // strategy
 	optional SCondition condition = 14;
+
+	// new condition
+	optional ChannelCondition channel_condition = 15;
+	optional TimmingCondition timming_condition = 16;
+	optional bool user_has_replied_before = 18; // new
+	repeated UserAttributeCondition user_conditions = 19;
+	optional string user_condition_join = 20; // and, or
+	optional bool when_offline = 21; // only run when there is no online agent
 }
+
+message UserAttributeCondition {
+	optional string key = 2;
+	optional string opeartor = 3;
+	optional string value = 4;
+}
+
+message TimmingCondition {
+	optional bool in_business_hour = 3; // if this is true, ignore all other timming conditions
+
+
+	repeated string days_of_week = 2; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	repeated int32 minute_of_days = 4; // pair [0-4] [6-9]
+}
+
+message ChannelCondition {
+	optional string channel_type = 2; // default: subiz
+
+	// for fb comment
+	// for messenger
+	// for zalo
+	repeated string integration_id = 3; // optional for subiz and email
+
+
+	// for subiz only
+	repeated LocationCondition location_conditions = 4; // or
+	repeated string page_urls = 5;
+	repeated string page_titles  = 6;
+	repeated string device_types = 7; // desktop, mobile, tablet
+	repeated string browser_languages = 8; // vi, en
+
+	// for email only
+	repeated string email_tos = 10; // contains
+	repeated string email_froms = 11; // contains
+	repeated string email_subjects = 12;  // contains
+	repeated string email_bodies = 13;  // contains
+}
+
+message LocationCondition {
+	optional string  city_code = 3; // must equal
+	optional string country_code = 4; // must equal
+}
+
 
 message Route {
 	optional common.Context ctx = 1;
