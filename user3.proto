@@ -773,3 +773,21 @@ message PresencesResponse {
 	repeated string online_user_ids = 2;
 	repeated string focused_user_ids = 3;
 }
+
+message LeadSearchRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string query = 4;
+	string anchor = 5;
+	int32 limit = 6;
+	user.SCondition condition = 10;
+}
+
+message LeadSearchResult {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 total = 3;
+	repeated User users = 4;
+	string anchor = 5;
+}

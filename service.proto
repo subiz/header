@@ -73,6 +73,7 @@ service CurrencyMgr {
 // user services
 service UserMgr {
 	rpc SearchUsers (user.UserSearchRequest) returns (user.UserSearchResult); // deprecated
+	rpc SearchLeads (user.LeadSearchRequest) returns (user.LeadSearchResult);
 
 	rpc CreateUser (user.User) returns (common.Id);
 	rpc UpdateUser (user.User) returns (common.Id);
