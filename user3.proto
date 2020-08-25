@@ -268,6 +268,7 @@ message Locations {
 message LocationParams {
 	string query = 2;
 	int64 limit = 3;
+	string account_id = 4;
 }
 
 message Page {
@@ -294,6 +295,7 @@ message UserInfo {
 }
 
 message UserInfoParams {
+	string account_id = 15;
 	string signature = 2;
 
 	int32 limit = 3;
@@ -428,6 +430,7 @@ message Event {
 
 message EventParams {
 	string type = 2;
+	string account_id = 3;
 }
 
 message ListEventsRequest {
@@ -767,6 +770,7 @@ message StartRequest {
 message PresencesRequest {
 	common.Context ctx = 1;
 	repeated string user_ids = 2;
+	string account_id = 3;
 }
 
 message PresencesResponse {
