@@ -795,3 +795,26 @@ message LeadSearchResult {
 	repeated User users = 4;
 	string anchor = 5;
 }
+
+message UserReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string first_interact = 3;
+	string channel = 4;
+	string channel_source = 5;
+
+	string agent = 6; // by agent
+
+	string range = 8; // hour, day, month by account timezone
+	int64 start = 9; // unix hour, unix day or unix month
+	int64 points = 10; // < 60
+}
+
+message UserReportResult {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated int64 milestones = 3;
+	repeated int64 data = 4;
+}

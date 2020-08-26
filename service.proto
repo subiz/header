@@ -79,6 +79,7 @@ service UserMgr {
 	rpc UpdateUser (user.User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (user.User);
 
+	rpc ReportUsers (user.UserReportRequest) returns (user.UserReportResult);
 	rpc CountTotal(user.CountTotalRequest) returns (user.CountTotalResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
