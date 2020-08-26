@@ -807,7 +807,7 @@ message UserReportRequest {
 	string agent = 6; // by agent
 
 	string range = 8; // hour, day, month by account timezone
-	int64 start = 9; // unix hour, unix day or unix month
+	int64 start_hour = 9; // unix hour
 	int64 points = 10; // < 60
 }
 
@@ -816,5 +816,8 @@ message UserReportResult {
 	string account_id = 2;
 
 	repeated int64 milestones = 3;
-	repeated int64 data = 4;
+
+	repeated int64 user_counts = 4;
+	repeated int64 lead_counts = 5;
+	repeated int64 quanlified_counts = 6;
 }
