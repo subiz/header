@@ -138,12 +138,18 @@ message Account {
 	optional payment.Limit limit = 25;
 	optional string country = 27;
 
-	optional int32 v3_state = 28; // 0: not v3, 1: v3 but not convert, 2: converted v3
 	optional string date_format = 29;
 	optional BusinessHours business_hours = 30;
 	optional string referrer_from = 31;
 
 	optional int64 last_token_requested = 32;
+
+	optional LeadSetting lead_setting = 33;
+}
+
+message LeadSetting {
+	optional bool allow_add_lead_manually = 2;
+	optional string assign_conversation_as_lead = 3; // assigned [default], joined, none
 }
 
 message GroupMember {
