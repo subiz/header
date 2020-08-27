@@ -125,17 +125,25 @@ message AttributeDefinition {
 		list = 4; // remove
 	}
 
+	// repeated string options = 6;
 	repeated string list_items = 6;
-	string key = 7;
-	string kind = 8;
-	int64 updated = 9;
-	string validator = 10; // email, name
 
+	string key = 7;
+
+	string kind = 8;
 	enum AttributeKind {
 		system = 0; // only system read and write
 		default = 1; // created but agent can write, but not remove
 		custom = 2;
 	}
+
+	int64 updated = 9;
+	string validator = 10; // email, name, decimal
+
+	// common.I18nText name = 12;
+	common.I18nText place_holder = 13;
+
+	bool allow_multiples = 14;
 }
 
 message AttributeDefinitions {

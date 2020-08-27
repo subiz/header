@@ -86,13 +86,6 @@ message Pong {
 	string message = 3;
 }
 
-enum L {
-	en = 0; // english
-	vn = 1; // vietnamese
-	cn = 3; // chinese
-	fr = 5; // french
-}
-
 enum Weekday {
 	Monday = 0;
 	Tuesday = 1;
@@ -314,4 +307,11 @@ enum Level {
 	emergency = 7;
 	panic = 8;
 	fatal = 9;
+}
+
+message I18nText {
+	string vi = 2; // vietnamese
+	string en = 3; // english
+	string fr = 4; // french
+	string cn = 5; // chinese
 }
