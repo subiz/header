@@ -6580,12 +6580,17 @@ type UserReportResult struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx              *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId        string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Milestones       []int64         `protobuf:"varint,3,rep,packed,name=milestones,proto3" json:"milestones,omitempty"`
-	UserCounts       []int64         `protobuf:"varint,4,rep,packed,name=user_counts,json=userCounts,proto3" json:"user_counts,omitempty"`
-	LeadCounts       []int64         `protobuf:"varint,5,rep,packed,name=lead_counts,json=leadCounts,proto3" json:"lead_counts,omitempty"`
-	QuanlifiedCounts []int64         `protobuf:"varint,6,rep,packed,name=quanlified_counts,json=quanlifiedCounts,proto3" json:"quanlified_counts,omitempty"`
+	Ctx                      *common.Context    `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId                string             `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Milestones               []int64            `protobuf:"varint,3,rep,packed,name=milestones,proto3" json:"milestones,omitempty"`
+	UserCounts               []int64            `protobuf:"varint,4,rep,packed,name=user_counts,json=userCounts,proto3" json:"user_counts,omitempty"`
+	LeadCounts               []int64            `protobuf:"varint,5,rep,packed,name=lead_counts,json=leadCounts,proto3" json:"lead_counts,omitempty"`
+	QuanlifiedLeadCounts     []int64            `protobuf:"varint,6,rep,packed,name=quanlified_lead_counts,json=quanlifiedLeadCounts,proto3" json:"quanlified_lead_counts,omitempty"`
+	Channels                 []*UserReportTable `protobuf:"bytes,8,rep,name=channels,proto3" json:"channels,omitempty"`
+	FirstInteracts           []*UserReportTable `protobuf:"bytes,9,rep,name=first_interacts,json=firstInteracts,proto3" json:"first_interacts,omitempty"`
+	PrevUserCounts           []int64            `protobuf:"varint,10,rep,packed,name=prev_user_counts,json=prevUserCounts,proto3" json:"prev_user_counts,omitempty"`
+	PrevLeadCounts           []int64            `protobuf:"varint,11,rep,packed,name=prev_lead_counts,json=prevLeadCounts,proto3" json:"prev_lead_counts,omitempty"`
+	PrevQuanlifiedLeadCounts []int64            `protobuf:"varint,12,rep,packed,name=prev_quanlified_lead_counts,json=prevQuanlifiedLeadCounts,proto3" json:"prev_quanlified_lead_counts,omitempty"`
 }
 
 func (x *UserReportResult) Reset() {
@@ -6655,11 +6660,141 @@ func (x *UserReportResult) GetLeadCounts() []int64 {
 	return nil
 }
 
-func (x *UserReportResult) GetQuanlifiedCounts() []int64 {
+func (x *UserReportResult) GetQuanlifiedLeadCounts() []int64 {
 	if x != nil {
-		return x.QuanlifiedCounts
+		return x.QuanlifiedLeadCounts
 	}
 	return nil
+}
+
+func (x *UserReportResult) GetChannels() []*UserReportTable {
+	if x != nil {
+		return x.Channels
+	}
+	return nil
+}
+
+func (x *UserReportResult) GetFirstInteracts() []*UserReportTable {
+	if x != nil {
+		return x.FirstInteracts
+	}
+	return nil
+}
+
+func (x *UserReportResult) GetPrevUserCounts() []int64 {
+	if x != nil {
+		return x.PrevUserCounts
+	}
+	return nil
+}
+
+func (x *UserReportResult) GetPrevLeadCounts() []int64 {
+	if x != nil {
+		return x.PrevLeadCounts
+	}
+	return nil
+}
+
+func (x *UserReportResult) GetPrevQuanlifiedLeadCounts() []int64 {
+	if x != nil {
+		return x.PrevQuanlifiedLeadCounts
+	}
+	return nil
+}
+
+type UserReportTable struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name                    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	UserCount               int64  `protobuf:"varint,4,opt,name=user_count,json=userCount,proto3" json:"user_count,omitempty"`
+	PrevUserCount           int64  `protobuf:"varint,5,opt,name=prev_user_count,json=prevUserCount,proto3" json:"prev_user_count,omitempty"`
+	LeadCount               int64  `protobuf:"varint,6,opt,name=lead_count,json=leadCount,proto3" json:"lead_count,omitempty"`
+	PrevLeadCount           int64  `protobuf:"varint,7,opt,name=prev_lead_count,json=prevLeadCount,proto3" json:"prev_lead_count,omitempty"`
+	QuanlifiedLeadCount     int64  `protobuf:"varint,8,opt,name=quanlified_lead_count,json=quanlifiedLeadCount,proto3" json:"quanlified_lead_count,omitempty"`
+	PrevQuanlifiedLeadCount int64  `protobuf:"varint,9,opt,name=prev_quanlified_lead_count,json=prevQuanlifiedLeadCount,proto3" json:"prev_quanlified_lead_count,omitempty"`
+}
+
+func (x *UserReportTable) Reset() {
+	*x = UserReportTable{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user3_proto_msgTypes[67]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserReportTable) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserReportTable) ProtoMessage() {}
+
+func (x *UserReportTable) ProtoReflect() protoreflect.Message {
+	mi := &file_user3_proto_msgTypes[67]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserReportTable.ProtoReflect.Descriptor instead.
+func (*UserReportTable) Descriptor() ([]byte, []int) {
+	return file_user3_proto_rawDescGZIP(), []int{67}
+}
+
+func (x *UserReportTable) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UserReportTable) GetUserCount() int64 {
+	if x != nil {
+		return x.UserCount
+	}
+	return 0
+}
+
+func (x *UserReportTable) GetPrevUserCount() int64 {
+	if x != nil {
+		return x.PrevUserCount
+	}
+	return 0
+}
+
+func (x *UserReportTable) GetLeadCount() int64 {
+	if x != nil {
+		return x.LeadCount
+	}
+	return 0
+}
+
+func (x *UserReportTable) GetPrevLeadCount() int64 {
+	if x != nil {
+		return x.PrevLeadCount
+	}
+	return 0
+}
+
+func (x *UserReportTable) GetQuanlifiedLeadCount() int64 {
+	if x != nil {
+		return x.QuanlifiedLeadCount
+	}
+	return 0
+}
+
+func (x *UserReportTable) GetPrevQuanlifiedLeadCount() int64 {
+	if x != nil {
+		return x.PrevQuanlifiedLeadCount
+	}
+	return 0
 }
 
 type Event_Data struct {
@@ -6702,7 +6837,7 @@ type Event_Data struct {
 func (x *Event_Data) Reset() {
 	*x = Event_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_user3_proto_msgTypes[68]
+		mi := &file_user3_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -6715,7 +6850,7 @@ func (x *Event_Data) String() string {
 func (*Event_Data) ProtoMessage() {}
 
 func (x *Event_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_user3_proto_msgTypes[68]
+	mi := &file_user3_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7967,7 +8102,7 @@ var file_user3_proto_rawDesc = []byte{
 	0x72, 0x61, 0x6e, 0x67, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x68,
 	0x6f, 0x75, 0x72, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x73, 0x74, 0x61, 0x72, 0x74,
 	0x48, 0x6f, 0x75, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x18, 0x0a,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x22, 0xe3, 0x01, 0x0a,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x73, 0x22, 0xf2, 0x03, 0x0a,
 	0x10, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73, 0x75, 0x6c,
 	0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f,
 	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52,
@@ -7979,16 +8114,52 @@ var file_user3_proto_rawDesc = []byte{
 	0x74, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x03, 0x52, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x43, 0x6f,
 	0x75, 0x6e, 0x74, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75,
 	0x6e, 0x74, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x03, 0x52, 0x0a, 0x6c, 0x65, 0x61, 0x64, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x2b, 0x0a, 0x11, 0x71, 0x75, 0x61, 0x6e, 0x6c, 0x69, 0x66,
-	0x69, 0x65, 0x64, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x03,
-	0x52, 0x10, 0x71, 0x75, 0x61, 0x6e, 0x6c, 0x69, 0x66, 0x69, 0x65, 0x64, 0x43, 0x6f, 0x75, 0x6e,
-	0x74, 0x73, 0x2a, 0x42, 0x0a, 0x08, 0x48, 0x61, 0x76, 0x65, 0x42, 0x65, 0x65, 0x6e, 0x12, 0x0b,
-	0x0a, 0x07, 0x75, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x69,
-	0x6e, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x64, 0x65, 0x63,
-	0x72, 0x65, 0x61, 0x73, 0x65, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x69, 0x6d, 0x6d, 0x75, 0x74,
-	0x61, 0x62, 0x6c, 0x65, 0x10, 0x03, 0x42, 0x1e, 0x5a, 0x1c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x34, 0x0a, 0x16, 0x71, 0x75, 0x61, 0x6e, 0x6c, 0x69, 0x66,
+	0x69, 0x65, 0x64, 0x5f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18,
+	0x06, 0x20, 0x03, 0x28, 0x03, 0x52, 0x14, 0x71, 0x75, 0x61, 0x6e, 0x6c, 0x69, 0x66, 0x69, 0x65,
+	0x64, 0x4c, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x31, 0x0a, 0x08, 0x63,
+	0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e,
+	0x75, 0x73, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x54,
+	0x61, 0x62, 0x6c, 0x65, 0x52, 0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x12, 0x3e,
+	0x0a, 0x0f, 0x66, 0x69, 0x72, 0x73, 0x74, 0x5f, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x61, 0x63, 0x74,
+	0x73, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x52, 0x0e,
+	0x66, 0x69, 0x72, 0x73, 0x74, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x61, 0x63, 0x74, 0x73, 0x12, 0x28,
+	0x0a, 0x10, 0x70, 0x72, 0x65, 0x76, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x73, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x03, 0x52, 0x0e, 0x70, 0x72, 0x65, 0x76, 0x55, 0x73,
+	0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x28, 0x0a, 0x10, 0x70, 0x72, 0x65, 0x76,
+	0x5f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x0b, 0x20, 0x03,
+	0x28, 0x03, 0x52, 0x0e, 0x70, 0x72, 0x65, 0x76, 0x4c, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x75, 0x6e,
+	0x74, 0x73, 0x12, 0x3d, 0x0a, 0x1b, 0x70, 0x72, 0x65, 0x76, 0x5f, 0x71, 0x75, 0x61, 0x6e, 0x6c,
+	0x69, 0x66, 0x69, 0x65, 0x64, 0x5f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x73, 0x18, 0x0c, 0x20, 0x03, 0x28, 0x03, 0x52, 0x18, 0x70, 0x72, 0x65, 0x76, 0x51, 0x75, 0x61,
+	0x6e, 0x6c, 0x69, 0x66, 0x69, 0x65, 0x64, 0x4c, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x75, 0x6e, 0x74,
+	0x73, 0x22, 0xa4, 0x02, 0x0a, 0x0f, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74,
+	0x54, 0x61, 0x62, 0x6c, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x73, 0x65,
+	0x72, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x75,
+	0x73, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x26, 0x0a, 0x0f, 0x70, 0x72, 0x65, 0x76,
+	0x5f, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x0d, 0x70, 0x72, 0x65, 0x76, 0x55, 0x73, 0x65, 0x72, 0x43, 0x6f, 0x75, 0x6e, 0x74,
+	0x12, 0x1d, 0x0a, 0x0a, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x6c, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12,
+	0x26, 0x0a, 0x0f, 0x70, 0x72, 0x65, 0x76, 0x5f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x70, 0x72, 0x65, 0x76, 0x4c, 0x65,
+	0x61, 0x64, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x32, 0x0a, 0x15, 0x71, 0x75, 0x61, 0x6e, 0x6c,
+	0x69, 0x66, 0x69, 0x65, 0x64, 0x5f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x13, 0x71, 0x75, 0x61, 0x6e, 0x6c, 0x69, 0x66, 0x69,
+	0x65, 0x64, 0x4c, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x3b, 0x0a, 0x1a, 0x70,
+	0x72, 0x65, 0x76, 0x5f, 0x71, 0x75, 0x61, 0x6e, 0x6c, 0x69, 0x66, 0x69, 0x65, 0x64, 0x5f, 0x6c,
+	0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x17, 0x70, 0x72, 0x65, 0x76, 0x51, 0x75, 0x61, 0x6e, 0x6c, 0x69, 0x66, 0x69, 0x65, 0x64, 0x4c,
+	0x65, 0x61, 0x64, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x2a, 0x42, 0x0a, 0x08, 0x48, 0x61, 0x76, 0x65,
+	0x42, 0x65, 0x65, 0x6e, 0x12, 0x0b, 0x0a, 0x07, 0x75, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x10,
+	0x00, 0x12, 0x0c, 0x0a, 0x08, 0x69, 0x6e, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x10, 0x01, 0x12,
+	0x0c, 0x0a, 0x08, 0x64, 0x65, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x10, 0x02, 0x12, 0x0d, 0x0a,
+	0x09, 0x69, 0x6d, 0x6d, 0x75, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x10, 0x03, 0x42, 0x1e, 0x5a, 0x1c,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a,
+	0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -8004,7 +8175,7 @@ func file_user3_proto_rawDescGZIP() []byte {
 }
 
 var file_user3_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
-var file_user3_proto_msgTypes = make([]protoimpl.MessageInfo, 69)
+var file_user3_proto_msgTypes = make([]protoimpl.MessageInfo, 70)
 var file_user3_proto_goTypes = []interface{}{
 	(HaveBeen)(0),                          // 0: user.HaveBeen
 	(Attribute_Ops)(0),                     // 1: user.Attribute.Ops
@@ -8086,59 +8257,60 @@ var file_user3_proto_goTypes = []interface{}{
 	(*LeadSearchResult)(nil),               // 77: user.LeadSearchResult
 	(*UserReportRequest)(nil),              // 78: user.UserReportRequest
 	(*UserReportResult)(nil),               // 79: user.UserReportResult
-	nil,                                    // 80: user.UserSearchResult.UnreadCountsEntry
-	(*Event_Data)(nil),                     // 81: user.Event.Data
-	(*common.Context)(nil),                 // 82: common.Context
-	(*common.Error)(nil),                   // 83: common.Error
-	(*common.I18NText)(nil),                // 84: common.I18nText
-	(*common.By)(nil),                      // 85: common.By
-	(*SCondition)(nil),                     // 86: user.SCondition
-	(*email.Email)(nil),                    // 87: email.Email
-	(*conversation.Ticket)(nil),            // 88: conversation.Ticket
-	(*conversation.Member)(nil),            // 89: conversation.Member
-	(*account.Account)(nil),                // 90: account.Account
-	(*account.Agent)(nil),                  // 91: account.Agent
-	(*conversation.Message)(nil),           // 92: conversation.Message
-	(*conversation.Conversation)(nil),      // 93: conversation.Conversation
-	(*conversation.Postback)(nil),          // 94: conversation.Postback
-	(*content.Content)(nil),                // 95: content.Content
-	(*account.Presence)(nil),               // 96: account.Presence
-	(*notibox.Notification)(nil),           // 97: notibox.Notification
-	(*account.AgentPerm)(nil),              // 98: account.AgentPerm
-	(*account.GroupMember)(nil),            // 99: account.GroupMember
-	(*account.AgentGroup)(nil),             // 100: account.AgentGroup
-	(*payment.Limit)(nil),                  // 101: payment.Limit
-	(*notibox.Notibox)(nil),                // 102: notibox.Notibox
-	(*noti5.Setting)(nil),                  // 103: noti5.Setting
-	(*conversation.Rule)(nil),              // 104: conversation.Rule
-	(*conversation.Tag)(nil),               // 105: conversation.Tag
-	(*bot.Bot)(nil),                        // 106: bot.Bot
+	(*UserReportTable)(nil),                // 80: user.UserReportTable
+	nil,                                    // 81: user.UserSearchResult.UnreadCountsEntry
+	(*Event_Data)(nil),                     // 82: user.Event.Data
+	(*common.Context)(nil),                 // 83: common.Context
+	(*common.Error)(nil),                   // 84: common.Error
+	(*common.I18NText)(nil),                // 85: common.I18nText
+	(*common.By)(nil),                      // 86: common.By
+	(*SCondition)(nil),                     // 87: user.SCondition
+	(*email.Email)(nil),                    // 88: email.Email
+	(*conversation.Ticket)(nil),            // 89: conversation.Ticket
+	(*conversation.Member)(nil),            // 90: conversation.Member
+	(*account.Account)(nil),                // 91: account.Account
+	(*account.Agent)(nil),                  // 92: account.Agent
+	(*conversation.Message)(nil),           // 93: conversation.Message
+	(*conversation.Conversation)(nil),      // 94: conversation.Conversation
+	(*conversation.Postback)(nil),          // 95: conversation.Postback
+	(*content.Content)(nil),                // 96: content.Content
+	(*account.Presence)(nil),               // 97: account.Presence
+	(*notibox.Notification)(nil),           // 98: notibox.Notification
+	(*account.AgentPerm)(nil),              // 99: account.AgentPerm
+	(*account.GroupMember)(nil),            // 100: account.GroupMember
+	(*account.AgentGroup)(nil),             // 101: account.AgentGroup
+	(*payment.Limit)(nil),                  // 102: payment.Limit
+	(*notibox.Notibox)(nil),                // 103: notibox.Notibox
+	(*noti5.Setting)(nil),                  // 104: noti5.Setting
+	(*conversation.Rule)(nil),              // 105: conversation.Rule
+	(*conversation.Tag)(nil),               // 106: conversation.Tag
+	(*bot.Bot)(nil),                        // 107: bot.Bot
 }
 var file_user3_proto_depIdxs = []int32{
-	82,  // 0: user.User.ctx:type_name -> common.Context
+	83,  // 0: user.User.ctx:type_name -> common.Context
 	13,  // 1: user.User.attributes:type_name -> user.Attribute
 	70,  // 2: user.User.session:type_name -> user.UserSession
 	14,  // 3: user.Users.users:type_name -> user.User
-	83,  // 4: user.Users.errors:type_name -> common.Error
-	82,  // 5: user.CountTotalRequest.ctx:type_name -> common.Context
-	82,  // 6: user.UserSearchResult.ctx:type_name -> common.Context
+	84,  // 4: user.Users.errors:type_name -> common.Error
+	83,  // 5: user.CountTotalRequest.ctx:type_name -> common.Context
+	83,  // 6: user.UserSearchResult.ctx:type_name -> common.Context
 	14,  // 7: user.UserSearchResult.users:type_name -> user.User
-	80,  // 8: user.UserSearchResult.unread_counts:type_name -> user.UserSearchResult.UnreadCountsEntry
-	82,  // 9: user.MuteRequest.ctx:type_name -> common.Context
-	82,  // 10: user.DeleteAttrRequest.ctx:type_name -> common.Context
-	82,  // 11: user.AttributeDefinition.ctx:type_name -> common.Context
-	84,  // 12: user.AttributeDefinition.place_holder:type_name -> common.I18nText
-	82,  // 13: user.AttributeDefinitions.ctx:type_name -> common.Context
+	81,  // 8: user.UserSearchResult.unread_counts:type_name -> user.UserSearchResult.UnreadCountsEntry
+	83,  // 9: user.MuteRequest.ctx:type_name -> common.Context
+	83,  // 10: user.DeleteAttrRequest.ctx:type_name -> common.Context
+	83,  // 11: user.AttributeDefinition.ctx:type_name -> common.Context
+	85,  // 12: user.AttributeDefinition.place_holder:type_name -> common.I18nText
+	83,  // 13: user.AttributeDefinitions.ctx:type_name -> common.Context
 	24,  // 14: user.AttributeDefinitions.attributes:type_name -> user.AttributeDefinition
-	82,  // 15: user.Identification.ctx:type_name -> common.Context
-	82,  // 16: user.Note.ctx:type_name -> common.Context
+	83,  // 15: user.Identification.ctx:type_name -> common.Context
+	83,  // 16: user.Note.ctx:type_name -> common.Context
 	29,  // 17: user.Note.links:type_name -> user.NoteLink
-	82,  // 18: user.Notes.ctx:type_name -> common.Context
+	83,  // 18: user.Notes.ctx:type_name -> common.Context
 	28,  // 19: user.Notes.notes:type_name -> user.Note
-	82,  // 20: user.ListNotesRequest.ctx:type_name -> common.Context
+	83,  // 20: user.ListNotesRequest.ctx:type_name -> common.Context
 	29,  // 21: user.ListNotesRequest.links:type_name -> user.NoteLink
 	38,  // 22: user.Locations.locations:type_name -> user.Location
-	83,  // 23: user.Locations.errors:type_name -> common.Error
+	84,  // 23: user.Locations.errors:type_name -> common.Error
 	14,  // 24: user.UserInfo.user:type_name -> user.User
 	41,  // 25: user.UserInfo.viewing:type_name -> user.Page
 	38,  // 26: user.UserInfo.location:type_name -> user.Location
@@ -8162,94 +8334,96 @@ var file_user3_proto_depIdxs = []int32{
 	46,  // 44: user.SourceMetrics.source_metrics:type_name -> user.SourceMetric
 	47,  // 45: user.LocationMetrics.location_metrics:type_name -> user.LocationMetric
 	48,  // 46: user.PageMetrics.page_metrics:type_name -> user.PageMetric
-	82,  // 47: user.Events.ctx:type_name -> common.Context
+	83,  // 47: user.Events.ctx:type_name -> common.Context
 	54,  // 48: user.Events.events:type_name -> user.Event
-	82,  // 49: user.Event.ctx:type_name -> common.Context
-	85,  // 50: user.Event.by:type_name -> common.By
-	81,  // 51: user.Event.data:type_name -> user.Event.Data
-	82,  // 52: user.ListEventsRequest.ctx:type_name -> common.Context
-	82,  // 53: user.UserEvent.ctx:type_name -> common.Context
+	83,  // 49: user.Event.ctx:type_name -> common.Context
+	86,  // 50: user.Event.by:type_name -> common.By
+	82,  // 51: user.Event.data:type_name -> user.Event.Data
+	83,  // 52: user.ListEventsRequest.ctx:type_name -> common.Context
+	83,  // 53: user.UserEvent.ctx:type_name -> common.Context
 	54,  // 54: user.UserEvent.event:type_name -> user.Event
 	14,  // 55: user.UserEvent.user:type_name -> user.User
-	82,  // 56: user.AutomationCalledback.ctx:type_name -> common.Context
+	83,  // 56: user.AutomationCalledback.ctx:type_name -> common.Context
 	54,  // 57: user.AutomationCalledback.event:type_name -> user.Event
 	61,  // 58: user.AutomationCalledback.action:type_name -> user.AutomationAction
-	82,  // 59: user.AutomationEvent.ctx:type_name -> common.Context
+	83,  // 59: user.AutomationEvent.ctx:type_name -> common.Context
 	60,  // 60: user.AutomationEvent.automation:type_name -> user.Automation
 	14,  // 61: user.AutomationEvent.user:type_name -> user.User
 	54,  // 62: user.AutomationEvent.event:type_name -> user.Event
 	61,  // 63: user.AutomationEvent.action:type_name -> user.AutomationAction
-	82,  // 64: user.Automation.ctx:type_name -> common.Context
-	86,  // 65: user.Automation.condition:type_name -> user.SCondition
+	83,  // 64: user.Automation.ctx:type_name -> common.Context
+	87,  // 65: user.Automation.condition:type_name -> user.SCondition
 	61,  // 66: user.Automation.actions:type_name -> user.AutomationAction
 	14,  // 67: user.AutomationAction.user:type_name -> user.User
-	87,  // 68: user.AutomationAction.email:type_name -> email.Email
+	88,  // 68: user.AutomationAction.email:type_name -> email.Email
 	28,  // 69: user.AutomationAction.user_note:type_name -> user.Note
 	54,  // 70: user.AutomationAction.event:type_name -> user.Event
 	54,  // 71: user.AutomationAction.events:type_name -> user.Event
-	88,  // 72: user.AutomationAction.ticket:type_name -> conversation.Ticket
+	89,  // 72: user.AutomationAction.ticket:type_name -> conversation.Ticket
 	62,  // 73: user.AutomationAction.webhook_setting:type_name -> user.AutomationWebhookSetting
-	82,  // 74: user.Automations.ctx:type_name -> common.Context
+	83,  // 74: user.Automations.ctx:type_name -> common.Context
 	60,  // 75: user.Automations.automations:type_name -> user.Automation
-	82,  // 76: user.AutomationCreditsAggregate.ctx:type_name -> common.Context
-	82,  // 77: user.AutomationCredit.ctx:type_name -> common.Context
-	82,  // 78: user.Topic.ctx:type_name -> common.Context
+	83,  // 76: user.AutomationCreditsAggregate.ctx:type_name -> common.Context
+	83,  // 77: user.AutomationCredit.ctx:type_name -> common.Context
+	83,  // 78: user.Topic.ctx:type_name -> common.Context
 	54,  // 79: user.Topic.by_event:type_name -> user.Event
-	82,  // 80: user.UnreadTopic.ctx:type_name -> common.Context
+	83,  // 80: user.UnreadTopic.ctx:type_name -> common.Context
 	54,  // 81: user.UnreadTopic.by_event:type_name -> user.Event
-	82,  // 82: user.SourceTrace.ctx:type_name -> common.Context
-	82,  // 83: user.UserSession.ctx:type_name -> common.Context
+	83,  // 82: user.SourceTrace.ctx:type_name -> common.Context
+	83,  // 83: user.UserSession.ctx:type_name -> common.Context
 	54,  // 84: user.UserSession.start_event:type_name -> user.Event
 	54,  // 85: user.UserSession.latest_event:type_name -> user.Event
 	16,  // 86: user.UserSession.campaigns:type_name -> user.Campaign
 	69,  // 87: user.UserSession.source_traces:type_name -> user.SourceTrace
 	54,  // 88: user.UserSession.latest_content_view:type_name -> user.Event
-	82,  // 89: user.AvailabilityCheckRequest.ctx:type_name -> common.Context
+	83,  // 89: user.AvailabilityCheckRequest.ctx:type_name -> common.Context
 	14,  // 90: user.AvailabilityCheckRequest.user:type_name -> user.User
-	82,  // 91: user.AvailabilityCheckResult.ctx:type_name -> common.Context
-	82,  // 92: user.StartRequest.ctx:type_name -> common.Context
+	83,  // 91: user.AvailabilityCheckResult.ctx:type_name -> common.Context
+	83,  // 92: user.StartRequest.ctx:type_name -> common.Context
 	14,  // 93: user.StartRequest.user:type_name -> user.User
-	89,  // 94: user.StartRequest.members:type_name -> conversation.Member
-	82,  // 95: user.PresencesRequest.ctx:type_name -> common.Context
-	82,  // 96: user.LeadSearchRequest.ctx:type_name -> common.Context
-	86,  // 97: user.LeadSearchRequest.condition:type_name -> user.SCondition
-	82,  // 98: user.LeadSearchResult.ctx:type_name -> common.Context
+	90,  // 94: user.StartRequest.members:type_name -> conversation.Member
+	83,  // 95: user.PresencesRequest.ctx:type_name -> common.Context
+	83,  // 96: user.LeadSearchRequest.ctx:type_name -> common.Context
+	87,  // 97: user.LeadSearchRequest.condition:type_name -> user.SCondition
+	83,  // 98: user.LeadSearchResult.ctx:type_name -> common.Context
 	14,  // 99: user.LeadSearchResult.users:type_name -> user.User
-	82,  // 100: user.UserReportRequest.ctx:type_name -> common.Context
-	82,  // 101: user.UserReportResult.ctx:type_name -> common.Context
-	90,  // 102: user.Event.Data.account:type_name -> account.Account
-	91,  // 103: user.Event.Data.agent:type_name -> account.Agent
-	92,  // 104: user.Event.Data.message:type_name -> conversation.Message
-	93,  // 105: user.Event.Data.conversation:type_name -> conversation.Conversation
-	94,  // 106: user.Event.Data.postback:type_name -> conversation.Postback
-	95,  // 107: user.Event.Data.content:type_name -> content.Content
-	67,  // 108: user.Event.Data.topic:type_name -> user.Topic
-	96,  // 109: user.Event.Data.presence:type_name -> account.Presence
-	14,  // 110: user.Event.Data.user:type_name -> user.User
-	68,  // 111: user.Event.Data.unread_topic:type_name -> user.UnreadTopic
-	97,  // 112: user.Event.Data.notification:type_name -> notibox.Notification
-	98,  // 113: user.Event.Data.agent_perm:type_name -> account.AgentPerm
-	99,  // 114: user.Event.Data.group_member:type_name -> account.GroupMember
-	100, // 115: user.Event.Data.group:type_name -> account.AgentGroup
-	101, // 116: user.Event.Data.limit:type_name -> payment.Limit
-	28,  // 117: user.Event.Data.note:type_name -> user.Note
-	88,  // 118: user.Event.Data.ticket:type_name -> conversation.Ticket
-	60,  // 119: user.Event.Data.automation:type_name -> user.Automation
-	54,  // 120: user.Event.Data.event:type_name -> user.Event
-	59,  // 121: user.Event.Data.automation_event:type_name -> user.AutomationEvent
-	102, // 122: user.Event.Data.notibox:type_name -> notibox.Notibox
-	103, // 123: user.Event.Data.notification_setting:type_name -> noti5.Setting
-	27,  // 124: user.Event.Data.identification:type_name -> user.Identification
-	104, // 125: user.Event.Data.rule:type_name -> conversation.Rule
-	24,  // 126: user.Event.Data.user_attribute:type_name -> user.AttributeDefinition
-	105, // 127: user.Event.Data.tag:type_name -> conversation.Tag
-	45,  // 128: user.Event.Data.total_user:type_name -> user.UserMetric
-	106, // 129: user.Event.Data.bot:type_name -> bot.Bot
-	130, // [130:130] is the sub-list for method output_type
-	130, // [130:130] is the sub-list for method input_type
-	130, // [130:130] is the sub-list for extension type_name
-	130, // [130:130] is the sub-list for extension extendee
-	0,   // [0:130] is the sub-list for field type_name
+	83,  // 100: user.UserReportRequest.ctx:type_name -> common.Context
+	83,  // 101: user.UserReportResult.ctx:type_name -> common.Context
+	80,  // 102: user.UserReportResult.channels:type_name -> user.UserReportTable
+	80,  // 103: user.UserReportResult.first_interacts:type_name -> user.UserReportTable
+	91,  // 104: user.Event.Data.account:type_name -> account.Account
+	92,  // 105: user.Event.Data.agent:type_name -> account.Agent
+	93,  // 106: user.Event.Data.message:type_name -> conversation.Message
+	94,  // 107: user.Event.Data.conversation:type_name -> conversation.Conversation
+	95,  // 108: user.Event.Data.postback:type_name -> conversation.Postback
+	96,  // 109: user.Event.Data.content:type_name -> content.Content
+	67,  // 110: user.Event.Data.topic:type_name -> user.Topic
+	97,  // 111: user.Event.Data.presence:type_name -> account.Presence
+	14,  // 112: user.Event.Data.user:type_name -> user.User
+	68,  // 113: user.Event.Data.unread_topic:type_name -> user.UnreadTopic
+	98,  // 114: user.Event.Data.notification:type_name -> notibox.Notification
+	99,  // 115: user.Event.Data.agent_perm:type_name -> account.AgentPerm
+	100, // 116: user.Event.Data.group_member:type_name -> account.GroupMember
+	101, // 117: user.Event.Data.group:type_name -> account.AgentGroup
+	102, // 118: user.Event.Data.limit:type_name -> payment.Limit
+	28,  // 119: user.Event.Data.note:type_name -> user.Note
+	89,  // 120: user.Event.Data.ticket:type_name -> conversation.Ticket
+	60,  // 121: user.Event.Data.automation:type_name -> user.Automation
+	54,  // 122: user.Event.Data.event:type_name -> user.Event
+	59,  // 123: user.Event.Data.automation_event:type_name -> user.AutomationEvent
+	103, // 124: user.Event.Data.notibox:type_name -> notibox.Notibox
+	104, // 125: user.Event.Data.notification_setting:type_name -> noti5.Setting
+	27,  // 126: user.Event.Data.identification:type_name -> user.Identification
+	105, // 127: user.Event.Data.rule:type_name -> conversation.Rule
+	24,  // 128: user.Event.Data.user_attribute:type_name -> user.AttributeDefinition
+	106, // 129: user.Event.Data.tag:type_name -> conversation.Tag
+	45,  // 130: user.Event.Data.total_user:type_name -> user.UserMetric
+	107, // 131: user.Event.Data.bot:type_name -> bot.Bot
+	132, // [132:132] is the sub-list for method output_type
+	132, // [132:132] is the sub-list for method input_type
+	132, // [132:132] is the sub-list for extension type_name
+	132, // [132:132] is the sub-list for extension extendee
+	0,   // [0:132] is the sub-list for field type_name
 }
 
 func init() { file_user3_proto_init() }
@@ -9063,7 +9237,19 @@ func file_user3_proto_init() {
 				return nil
 			}
 		}
-		file_user3_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
+		file_user3_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserReportTable); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_user3_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Event_Data); i {
 			case 0:
 				return &v.state
@@ -9082,7 +9268,7 @@ func file_user3_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_user3_proto_rawDesc,
 			NumEnums:      13,
-			NumMessages:   69,
+			NumMessages:   70,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

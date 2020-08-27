@@ -827,5 +827,24 @@ message UserReportResult {
 
 	repeated int64 user_counts = 4;
 	repeated int64 lead_counts = 5;
-	repeated int64 quanlified_counts = 6;
+	repeated int64 quanlified_lead_counts = 6;
+
+	repeated UserReportTable channels = 8;
+	repeated UserReportTable first_interacts = 9;
+
+	repeated int64 prev_user_counts = 10;
+	repeated int64 prev_lead_counts = 11;
+ 	repeated int64 prev_quanlified_lead_counts = 12;
+}
+
+message UserReportTable {
+	string name = 2;
+	int64 user_count = 4;
+	int64 prev_user_count = 5;
+
+	int64 lead_count = 6;
+	int64 prev_lead_count = 7;
+
+	int64 quanlified_lead_count = 8;
+	int64 prev_quanlified_lead_count = 9;
 }
