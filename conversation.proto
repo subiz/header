@@ -63,7 +63,7 @@ message ChannelCondition {
 	repeated string integration_ids = 3; // optional for subiz and email
 
 	// for subiz only
-	repeated LocationCondition location_conditions = 4; // or
+	repeated LocationCondition locations = 4; // or
 	repeated string page_urls = 5;
 	repeated string device_types = 7; // desktop, mobile, tablet
 
@@ -74,7 +74,7 @@ message ChannelCondition {
 }
 
 message LocationCondition {
-	optional string city_code = 3; // must equal
+	optional string city_name = 3; // must equal
 	optional string country_code = 4; // must equal
 }
 
