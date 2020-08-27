@@ -49,8 +49,7 @@ message UserAttributeCondition {
 }
 
 message TimmingCondition {
-	optional bool in_business_hour = 3; // if this is true, ignore all other timming conditions
-
+	optional string business_hour = 3; // [in, not_in] if this is true, ignore all other timming conditions
 	repeated string days_of_week = 2; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	repeated int32 minute_of_days = 4; // pair [0-4] [6-9]
 }
@@ -61,21 +60,17 @@ message ChannelCondition {
 	// for fb comment
 	// for messenger
 	// for zalo
-	repeated string integration_id = 3; // optional for subiz and email
-
+	repeated string integration_ids = 3; // optional for subiz and email
 
 	// for subiz only
 	repeated LocationCondition location_conditions = 4; // or
 	repeated string page_urls = 5;
-	repeated string page_titles  = 6;
 	repeated string device_types = 7; // desktop, mobile, tablet
-	repeated string browser_languages = 8; // vi, en
 
 	// for email only
 	repeated string email_tos = 10; // contains
 	repeated string email_froms = 11; // contains
 	repeated string email_subjects = 12;  // contains
-	repeated string email_bodies = 13;  // contains
 }
 
 message LocationCondition {

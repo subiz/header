@@ -148,7 +148,6 @@ message Account {
 }
 
 message LeadSetting {
-	optional bool allow_add_lead_manually = 2;
 	optional string assign_conversation_as_lead = 3; // assigned [default], joined, none
 }
 
