@@ -817,6 +817,9 @@ message UserReportRequest {
 	string range = 8; // hour, day, month by account timezone
 	int64 start_hour = 9; // unix hour
 	int64 points = 10; // < 60
+
+	repeated string first_interacts = 12;
+	repeated string channel_sources = 13;
 }
 
 message UserReportResult {
@@ -824,6 +827,7 @@ message UserReportResult {
 	string account_id = 2;
 
 	repeated int64 milestones = 3;
+	repeated int64 prev_milestones = 13;
 
 	repeated int64 user_counts = 4;
 	repeated int64 lead_counts = 5;
