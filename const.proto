@@ -221,6 +221,7 @@ enum E {
 	TrialEnding1Email = 110577;
 	InvoicePaidEmail = 110578;
 	AccountAgentJoinedEmail = 110579;
+	AgentPresenceUpdated = 110580;
 
 	UserRequested = 111100;
 	UserSynced = 111101;
