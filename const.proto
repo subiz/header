@@ -294,6 +294,7 @@ enum E {
 
 	UserConversationSynced = 3000006;
 	MuteStateUpdated = 3000007;
+	BqreportSynced = 3000008;
 }
 
 enum RealtimeType {
