@@ -16,6 +16,7 @@ enum E {
 	ConversationJoinRequested = 1007;
 	ConversationMessageRequested = 1008; // message
 	ConversationLeaveRequested = 1009; // conversation
+	ConversationEnded = 1010;
 
 	UserReadRequested = 1110; // Id
 	UserUpdateRequested = 1112; // User
