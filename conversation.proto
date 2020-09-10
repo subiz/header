@@ -38,8 +38,9 @@ message Rule {
 	optional TimmingCondition timming_condition = 16;
 	optional bool user_has_replied_before = 18; // new
 	repeated UserAttributeCondition user_conditions = 19;
-	optional string user_condition_join = 20; // and, or
 	optional bool when_offline = 21; // only run when there is no online agent
+
+	optional int64 v = 22; // version
 }
 
 message UserAttributeCondition {
