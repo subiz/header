@@ -55,7 +55,7 @@ message TimmingCondition {
 }
 
 message ChannelCondition {
-	optional string channel_type = 2; // default: all channel
+	repeated string channels = 2; // default: all channel
 
 	// for fb comment
 	// for messenger
@@ -64,6 +64,7 @@ message ChannelCondition {
 
 	// for subiz only
 	repeated LocationCondition locations = 4; // or
+	repeated LocationCondition not_in_locations = 13; // or
 	repeated string page_urls = 5;
 	repeated string device_types = 7; // desktop, mobile, tablet
 
