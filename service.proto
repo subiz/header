@@ -21,6 +21,7 @@ import "widget.proto";
 import "account.proto";
 import "api.proto";
 import "search.proto";
+import "bqreport.proto";
 
 // api service
 service ApiServer {
@@ -416,4 +417,14 @@ service Search {
 	rpc SearchNotes(search.SearchNotesRequest) returns (search.SearchNotesResponse);
 	rpc SearchConversations(search.SearchConversationsRequest) returns (search.SearchConversationsResponse);
 	rpc SearchTickets(search.SearchTicketsRequest) returns (search.SearchTicketsResponse);
+}
+
+// bqreport services
+service Bqreport {
+	rpc AggregateConversations(bqreport.ConversationFilter) returns (bqreport.ConversationReport);
+	rpc AggregateConversationRates(bqreport.DimensionFilter) returns (bqreport.ConversationRateReport);
+	rpc AggregateConversationTags(bqreport.DimensionFilter) returns (bqreport.ConversationTagReport);
+	rpc AggregateConversationAgents(bqreport.ConversationAgentFilter) returns (bqreport.ConversationAgentReport);
+	rpc AggregateMessageOfAgents(bqreport.DimensionFilter) returns (bqreport.MessageOfAgentReport);
+	rpc AggregateAgentAvailabilities(bqreport.DimensionFilter) returns (bqreport.AgentAvailabilityReport);
 }

@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package bqreport;
+
+option go_package = "github.com/subiz/header/bqreport";
+
+import "common.proto";
+
+message DateDim {
+    int32 year = 2;
+    int32 month = 3;
+    int32 day = 4;
+}
+
+message DateRange {
+    DateDim from = 2;
+    DateDim to = 3;
+}
+
+message DimensionFilter {
+    common.StringParams channel = 2;
+    common.StringParams channel_source = 3;
+    common.StringParams agent_id = 4;
+    common.StringParams tag = 5;
+    common.NumberParams rate = 6;
+    DateRange created_date = 7;
+    common.NumberParams hour = 8;
+    common.NumberParams minute = 9;
+}
+
+message ConversationFilter {
+    common.StringParams channel = 2;
+    common.StringParams channel_source = 3;
+    DateRange created_date = 4;
+}
+
+message ConversationMetric {
+    common.Context ctx = 1;
+    DateDim date_dim = 2;
+    int64 hour_dim = 3;
+    float first_reply_time_avg = 4;
+    int64 has_user_count = 5;
+}
+
+message ConversationReport {
+    common.Context ctx = 1;
+    repeated ConversationMetric data = 2;
+}
+
+message ConversationRateMetric {
+    common.Context ctx = 1;
+    DateDim date_dim = 2;
+    int64 count = 3;
+}
+
+message ConversationRateReport {
+    common.Context ctx = 1;
+    repeated ConversationRateMetric data = 2;
+}
+
+message ConversationTagMetric {
+    common.Context ctx = 1;
+    DateDim date_dim = 2;
+    int64 count = 3;
+}
+
+message ConversationTagReport {
+    common.Context ctx = 1;
+    repeated ConversationTagMetric data = 2;
+}
+
+message ConversationAgentFilter {
+    common.StringParams agent_id = 2;
+    DateRange created_date = 3;
+}
+
+message ConversationAgentMetric {
+    common.Context ctx = 1;
+    DateDim date_dim = 2;
+    int64 count = 3;
+    int64 is_reply_by_agent_count = 4;
+    int64 is_great_rate_count = 5;
+    int64 is_reply_count = 6;
+    float first_reply_time_by_agent_avg = 7;
+    int64 message_by_agent_count = 8;
+}
+
+message ConversationAgentReport {
+    common.Context ctx = 1;
+    repeated ConversationAgentMetric data = 2;
+}
+
+message MessageOfAgentMetric {
+    common.Context ctx = 1;
+    DateDim date_dim = 2;
+    int64 count = 3;
+}
+
+message MessageOfAgentReport {
+    common.Context ctx = 1;
+    repeated MessageOfAgentMetric data = 2;
+}
+
+message AgentAvailabilityMetric {
+    common.Context ctx = 1;
+    DateDim date_dim = 2;
+    int64 count = 3;
+}
+
+message AgentAvailabilityReport {
+    common.Context ctx = 1;
+    repeated AgentAvailabilityMetric data = 2;
+}
