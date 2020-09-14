@@ -23,6 +23,35 @@ message Bot {
 	int64 updated = 11;
 }
 
+message Bots {
+	common.Context ctx = 1;
+	repeated Bot bots = 2;
+}
+
+enum BotCategory {
+	users = 0;
+	systems = 1;
+	conversations = 2;
+}
+
+enum ActionType {
+	nil = 0;
+	condition = 1;
+	sleep = 2;
+	send_message = 3;
+	jump = 4;
+	send_email = 5;
+	tag = 6;
+	convert_to_ticket = 7;
+	send_webhook = 8;
+	like_comment = 9;
+	hide_comment = 10;
+	end_chat = 11;
+	question = 12;
+	update_user = 13;
+	assign_agent = 14;
+}
+
 message Action {
 	string account_id = 2;
 	string bot_id = 3;
