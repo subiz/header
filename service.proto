@@ -380,7 +380,6 @@ service WidgetService {
 	rpc Read(common.Id) returns (widget.Setting);
 	rpc Update(widget.Setting) returns (widget.Setting);
 	rpc ReadUserSetting(common.Id) returns (widget.UserSetting);
-	rpc UpdateUserSetting(widget.UserSetting) returns (widget.UserSetting);
 
 	rpc ReadCampaign(common.Id) returns (widget.Campaign);
 	rpc ListCampaigns(common.Id) returns (widget.Campaigns);
