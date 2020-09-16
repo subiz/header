@@ -97,15 +97,6 @@ message UserSearchResult {
 	map<string, int32> unread_counts = 7;
 }
 
-message MuteRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string user_id = 4;
-	string topic = 5;
-	bool mute = 6; // true, false
-}
-
 message DeleteAttrRequest {
 	common.Context ctx = 1;
 	string key = 2;
@@ -284,7 +275,6 @@ message Page {
 	string name = 3;
 	string url = 4;
 }
-
 
 message UserInfo {
 	string id = 2;
