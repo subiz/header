@@ -784,6 +784,13 @@ message LeadSearchRequest {
 	string anchor = 5;
 	int32 limit = 6;
 	user.SCondition condition = 10;
+	repeated UserAttributeCondition conditions = 11;
+}
+
+message UserAttributeCondition {
+	string key = 2;
+	string operator = 3;
+	string value = 4;
 }
 
 message LeadSearchResult {
