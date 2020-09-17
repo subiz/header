@@ -5,7 +5,7 @@ package zalokon;
 option go_package = "github.com/subiz/header/zalokon";
 
 message OfficialAccount {
-	int64 oa_id = 2;
+	string oa_id = 2;
 	string description = 3;
 	string name = 4;
 	string avatar = 5;
