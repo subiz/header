@@ -66,7 +66,11 @@ message Action {
 	ActionSendMessage send_message = 11;
 	ActionSendMessage send_email = 12;
 	ActionSleep sleep = 13;
-	int64 first_seen = 14;
+	ActionJump jump = 15;
+}
+
+message ActionJump {
+	string action_id = 2;
 }
 
 message ActionSendMessage {
