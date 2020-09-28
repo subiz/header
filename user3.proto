@@ -786,6 +786,7 @@ message LeadSearchRequest {
 	user.SCondition condition = 10;
 	repeated UserAttributeCondition conditions = 11;
 	int64 unix_hour = 12;
+	repeated string fields = 13;
 }
 
 message UserAttributeCondition {
