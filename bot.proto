@@ -5,6 +5,7 @@ package bot;
 option go_package = "github.com/subiz/header/bot";
 
 import "common.proto";
+import "conversation.proto";
 
 message Bot {
 	common.Context ctx = 1;
@@ -50,6 +51,10 @@ enum ActionType {
 	question = 12;
 	update_user = 13;
 	assign_agent = 14;
+	send_http = 15;
+	switch_language = 16;
+	untag = 17;
+
 }
 
 message Action {
@@ -66,18 +71,37 @@ message Action {
 	ActionSendMessage send_message = 11;
 	ActionSendMessage send_email = 12;
 	ActionSleep sleep = 13;
+
 	ActionJump jump = 15;
+	ActionSendHttp send_http = 17;
+	ActionSwitchLanguage switch_language = 16;
 }
 
 message ActionJump {
 	string action_id = 2;
 }
 
-message ActionSendMessage {
-	string message = 7;
+message ActionSwitchLanguage {
 
-	repeated string attachments = 10;
-	repeated string quick_replies = 11;
+}
+
+message ActionSendHttp {
+	string url  = 2;
+	string payload = 3;
+	string method = 4;
+	repeated string header
+}
+
+message ActionSendHttp {
+	string key = 2;
+	string value = 3;
+}
+
+message ActionSendMessage {
+	repeated conversation.Message messages = 3;
+	bool allow_open_response = 4;
+	string save_to_attribute = 5;
+	validation
 }
 
 message ActionSleep {

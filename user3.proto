@@ -787,6 +787,8 @@ message LeadSearchRequest {
 	repeated UserAttributeCondition conditions = 11;
 	int64 unix_hour = 12;
 	repeated string fields = 13;
+
+	string order_by_field = 7; // -fullname
 }
 
 message UserAttributeCondition {
@@ -834,6 +836,7 @@ message UserReportResult {
 
 	repeated UserReportTable channels = 8;
 	repeated UserReportTable first_interacts = 9;
+	repeated UserReportTable channel_sources = 14;
 
 	repeated int64 prev_user_counts = 10;
 	repeated int64 prev_lead_counts = 11;

@@ -243,6 +243,8 @@ message Message {
 	optional string conversation_id = 14;
 	optional string id = 11;
 	optional string text = 2;
+	optional common.I18nText i18n_text = 19;
+
 	optional string format = 3;
 	repeated Attachment attachments = 4;
 

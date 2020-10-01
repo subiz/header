@@ -310,8 +310,9 @@ enum Level {
 }
 
 message I18nText {
+	string en = 1; // english
 	string vi = 2; // vietnamese
-	string en = 3; // english
 	string fr = 4; // french
 	string cn = 5; // chinese
+	string jp = 6; // japanese
 }
