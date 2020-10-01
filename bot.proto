@@ -55,6 +55,12 @@ enum ActionType {
 	switch_language = 16;
 	untag = 17;
 
+	ask_question = 18;
+}
+
+message NextAction {
+	Condition condition = 2;
+	Action action = 3; // pointed to the next action or used for branching to multiple actions
 }
 
 message Action {
@@ -63,18 +69,20 @@ message Action {
 	string id = 4;
 	string name = 5;
 
-	repeated Action nexts = 8; // pointed to the next action or used for branching to multiple actions
-
+	// first action require trigger
+	repeated NextAction nexts = 8;
 	string type = 9; // send_message, send_email, tag, convert_to_ticket, condition, sleep, send_webhook
-	ActionCondition condition = 10;
 
 	ActionSendMessage send_message = 11;
 	ActionSendMessage send_email = 12;
-	ActionSleep sleep = 13;
+	ActionSleep sleep = 13; // deprecated
 
 	ActionJump jump = 15;
-	ActionSendHttp send_http = 17;
 	ActionSwitchLanguage switch_language = 16;
+	ActionSendHttp send_http = 17;
+	ActionAskQuestion ask_question = 18;
+
+	int64 delay_sec = 20;
 }
 
 message ActionJump {
@@ -89,33 +97,43 @@ message ActionSendHttp {
 	string url  = 2;
 	string payload = 3;
 	string method = 4;
-	repeated string header
+	repeated ActionSendHttpHeader header = 5;
 }
 
-message ActionSendHttp {
+message ActionSendHttpHeader {
 	string key = 2;
 	string value = 3;
 }
 
-message ActionSendMessage {
+message ActionAskQuestion {
 	repeated conversation.Message messages = 3;
 	bool allow_open_response = 4;
 	string save_to_attribute = 5;
-	validation
+	string validation = 6; // none, email, phone, date, link, number, regex
+	string validation_regex = 7;
+	int32 retry_on_invalid = 10;
+	bool skip_if_attribute_already_existed = 11;
+	common.I18nText validation_error_message = 12;
+	int64 typing_duration = 13; // typing before send, no longer than 5 sec
+}
+
+message ActionSendMessage {
+	repeated conversation.Message messages = 3;
+	int64 typing_duration = 4; // sec, typing before send, no longer than 5 sec
 }
 
 message ActionSleep {
 	int64 duration = 4;
 }
 
-message ActionCondition {
+message Condition {
 	enum Group {
 		single = 0;
 		all = 1;
 		any = 2;
 	}
 	string group = 2;
-	repeated ActionCondition conditions = 3; // only availabe if group is all or any
+	repeated Condition conditions = 3; // only availabe if group is all or any
 
 	// only avaiable if group is single
 	string key = 5; // unique, path to properties, for example data.conversation.text, global.agent.avaliablitiy...
