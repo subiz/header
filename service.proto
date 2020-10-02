@@ -22,6 +22,7 @@ import "account.proto";
 import "api.proto";
 import "search.proto";
 import "bqreport.proto";
+import "bot.proto";
 
 // api service
 service ApiServer {
@@ -427,4 +428,14 @@ service Bqreport {
 	rpc AggregateConversationAgents(bqreport.ConversationAgentFilter) returns (bqreport.ConversationAgentReport);
 	rpc AggregateMessageOfAgents(bqreport.DimensionFilter) returns (bqreport.MessageOfAgentReport);
 	rpc AggregateAgentAvailabilities(bqreport.DimensionFilter) returns (bqreport.AgentAvailabilityReport);
+}
+
+// bizbot services
+service Bizbot {
+	rpc ListBots(common.Id) returns (bot.Bots);
+	rpc GetBot(common.Id) returns (bot.Bot);
+	rpc CreateBot(bot.Bot) returns (bot.Bot);
+	rpc UpdateBot(bot.Bot) returns (bot.Bot);
+	rpc DeleteBot(common.Id) returns (common.Empty);
+	rpc OnEvent(user.Event) returns (common.Empty);
 }
