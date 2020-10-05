@@ -1161,3 +1161,20 @@ message SCondition {
 	}
 	optional string function = 14; // used to transform value of left side before evaluate expression
 }
+
+message EndchatConnectorSetting {
+	optional string connector_id = 3;
+	optional bool at_midnight = 4;
+	optional int64 after_agent_message = 6;
+	optional int64 after_any_message = 7;
+  optional int64 after_user_message = 8;
+  optional int64 age = 10;
+	optional bool enabled = 11;
+}
+
+message EndchatSetting {
+	optional string account_id = 2;
+	repeated EndchatConnectorSetting connector_settings = 3;
+	optional EndchatConnectorSetting global_setting = 4;
+	optional int64 updated = 5;
+}

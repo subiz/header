@@ -203,6 +203,9 @@ service ConversationMgr {
 	rpc UpdateMuteConversation(conversation.Conversation) returns (common.Empty);
 	rpc UnwatchConversation(conversation.Conversation) returns (common.Empty);
 	rpc MarkReadConversation (conversation.Conversation) returns (common.Empty);
+
+	rpc UpdateEndchatSetting(conversation.EndchatSetting) returns (conversation.EndchatSetting);
+	rpc GetEndchatSetting(common.Id) returns (conversation.EndchatSetting);
 }
 
 service ConversationSyncMgr {
