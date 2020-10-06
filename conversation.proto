@@ -1165,11 +1165,9 @@ message SCondition {
 message EndchatConnectorSetting {
 	optional string connector_id = 3;
 	optional bool at_midnight = 4;
-	optional int64 after_agent_message = 6;
-	optional int64 after_any_message = 7;
-  optional int64 after_user_message = 8;
-  optional int64 age = 10;
+	optional int64 after_inactivity_mins = 6;
 	optional bool enabled = 11;
+	optional bool custom = 12;
 }
 
 message EndchatSetting {
