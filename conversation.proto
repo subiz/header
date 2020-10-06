@@ -1176,3 +1176,21 @@ message EndchatSetting {
 	optional EndchatConnectorSetting global_setting = 4;
 	optional int64 updated = 5;
 }
+
+
+message OldConnectorSetting {
+	optional string connector_id = 3;
+	optional bool at_midnight = 4;
+	optional int64 after_agent_message = 6;
+	optional int64 after_any_message = 7;
+	optional int64 after_user_message = 8;
+	optional int64 age = 10;
+	optional bool enabled = 11;
+}
+
+message OldECSetting {
+	optional string account_id = 2;
+	repeated OldConnectorSetting connector_settings = 3;
+	optional OldConnectorSetting global_setting = 4;
+	optional int64 updated = 5;
+}
