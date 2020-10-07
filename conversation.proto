@@ -31,7 +31,7 @@ message Rule {
 	optional string name = 10;
 	optional string description = 11;
 	optional bool available_agents_only = 13; // strategy
-	optional SCondition condition = 14;
+	// optional SCondition condition = 14;
 
 	// new condition
 	optional ChannelCondition channel_condition = 15;
@@ -1123,45 +1123,6 @@ message ReportConversationsRequest {
 	optional string from = 30; // rfc3339
 }
 
-// can be
-// {id, join, event_time, conditions} (grouped event condition)
-// {id, join, conditions} (grouped condition)
-// {id, key, operator, value} (user condition || simple event condition)
-message SCondition {
-	optional string id = 3;
-
-	optional string key = 4; // unique
-	optional string operator = 5; // = # regex
-	optional string value = 6; // JSON
-
-	enum EventTime {
-		none = 0; // not an event
-		current = 1;
-		latest = 2;
-		past = 3; // exists
-	}
-
-	enum JoinOperator {
-		and = 0;
-		or = 1;
-	}
-	optional string join = 7;
-	optional string event_type_time = 8; //
-	optional string event_type = 10;
-	repeated SCondition conditions = 9;
-
-	optional int32 priority = 12;
-	optional bool event_existed = 13;
-
-	enum Function {
-		minute_of_day = 0;
-		hour_of_day = 1;
-		day_of_week = 2;
-		day_ago = 3;
-	}
-	optional string function = 14; // used to transform value of left side before evaluate expression
-}
-
 message EndchatConnectorSetting {
 	optional string connector_id = 3;
 	optional bool at_midnight = 4;
@@ -1174,23 +1135,5 @@ message EndchatSetting {
 	optional string account_id = 2;
 	repeated EndchatConnectorSetting connector_settings = 3;
 	optional EndchatConnectorSetting global_setting = 4;
-	optional int64 updated = 5;
-}
-
-
-message OldConnectorSetting {
-	optional string connector_id = 3;
-	optional bool at_midnight = 4;
-	optional int64 after_agent_message = 6;
-	optional int64 after_any_message = 7;
-	optional int64 after_user_message = 8;
-	optional int64 age = 10;
-	optional bool enabled = 11;
-}
-
-message OldECSetting {
-	optional string account_id = 2;
-	repeated OldConnectorSetting connector_settings = 3;
-	optional OldConnectorSetting global_setting = 4;
 	optional int64 updated = 5;
 }
