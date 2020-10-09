@@ -7,12 +7,71 @@ option go_package = "github.com/subiz/header/bot";
 import "common.proto";
 import "conversation.proto";
 
+message Trigger {
+	string type = 3; // exit_intent, area_clicked, scrolling_percentage, inactivity_duration, after_pageview, after_js_event
+	string area_clicked_css_selector = 4; // .user_name #user
+	float scrolling_percentage = 6; // 0.55
+	int64 inactivity_sec = 8; // 50s
+	int64 after_pageview_sec = 9; // 50s
+	bool disabled = 10;
+}
+
+message Segmentation {
+	repeated SegmentationCondition conditions = 4;
+	repeated SegmentationCondition source_conditions = 6; // source, source_referer (or only)
+	repeated SegmentationCondition location_conditions = 7; // city, country_code (or only)
+
+	repeated SegmentationCondition url_conditions = 8; // url, url_term, url_medium, ... (or only)
+	repeated SegmentationCondition exclude_url_conditions = 9; // url (or only)
+
+	repeated SegmentationCondition has_visited_url_conditions = 10; // url (or only)
+	repeated SegmentationCondition has_not_visited_url_conditions = 11; // url (or only)
+
+	bool disabled = 12;
+	repeated SegmentationCondition exclude_location_conditions = 13; // city, country_code (or only)
+}
+
+message SegmentationCondition {
+	string key = 3; // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
+
+	enum Source {
+		direct = 0;
+		google_ads = 1;
+		organic = 2;
+	}
+
+	enum DeviveType {
+		desktop = 0;
+		mobile = 1;
+		tablet = 2;
+	}
+
+	enum Browser {
+		all = 0;
+		chrome = 1;
+		firefox = 2;
+		edge = 3;
+		ie = 4;
+		safari = 5;
+		other = 6;
+	}
+
+	// for rate limiting
+	// int64 frequency_times = 11; // number of time display the message
+	// int64 frequency_duration = 11; // per duration (1 message per hour || 10 messages per day)
+
+
+	string user_attribute_key = 34;
+
+	string operator = 40; // eq, ne, con, notCon, in, gt, gte, lt, lte, inRange, notInRange, begin, end
+	string value = 41;
+}
+
 message Bot {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
 	string name = 4;
-	string channel_id = 5;
 
 	string category = 6; // hello, operator, reply
 
@@ -21,7 +80,25 @@ message Bot {
 	Action action = 9;
 
 	int64 created = 10;
-	int64 updated = 11;
+	string created_by = 11;
+
+	int64 updated = 12;
+	string updated_by = 13;
+
+	Trigger web_trigger = 14;
+	bool auto_join = 15; // start bot on new conversation
+
+	repeated Segmentation web_condition = 16;
+
+	repeated string channels = 17; // default: all channel
+	// for fb comment
+	// for messenger
+	// for zalo
+	repeated string integration_ids = 18; // optional for subiz and email
+	conversation.TimmingCondition timming_condition = 19;
+	conversation.UserAttributeCondition user_conditions = 20;
+	bool when_offline = 21; // only run when there is no online agent
+	int64 max_executions = 22;
 }
 
 message Bots {
@@ -50,7 +127,7 @@ enum ActionType {
 	end_chat = 11;
 	question = 12;
 	update_user = 13;
-	assign_agent = 14;
+	assign = 14;
 	send_http = 15;
 	switch_language = 16;
 	untag = 17;
@@ -81,8 +158,15 @@ message Action {
 	ActionSwitchLanguage switch_language = 16;
 	ActionSendHttp send_http = 17;
 	ActionAskQuestion ask_question = 18;
+	ActionAssign assign = 19;
 
 	int64 delay_sec = 20;
+}
+
+message ActionAssign {
+	string strategy = 5;
+	repeated string assign_tos = 6;
+	bool available_agents_only = 13; // strategy
 }
 
 message ActionJump {
