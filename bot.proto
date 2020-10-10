@@ -8,7 +8,7 @@ import "common.proto";
 import "conversation.proto";
 
 message Trigger {
-	string type = 3; // exit_intent, area_clicked, scrolling_percentage, inactivity_duration, after_pageview, after_js_event
+	string type = 3; // conversation_start, exit_intent (web only), area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
 	string area_clicked_css_selector = 4; // .user_name #user
 	float scrolling_percentage = 6; // 0.55
 	int64 inactivity_sec = 8; // 50s
@@ -85,8 +85,7 @@ message Bot {
 	int64 updated = 12;
 	string updated_by = 13;
 
-	Trigger web_trigger = 14;
-	bool auto_join = 15; // start bot on new conversation
+	repeated Trigger triggers = 14;
 
 	repeated Segmentation web_condition = 16;
 
@@ -98,7 +97,6 @@ message Bot {
 	conversation.TimmingCondition timming_condition = 19;
 	conversation.UserAttributeCondition user_conditions = 20;
 	bool when_offline = 21; // only run when there is no online agent
-	int64 max_executions = 22;
 }
 
 message Bots {
@@ -131,8 +129,8 @@ enum ActionType {
 	send_http = 15;
 	switch_language = 16;
 	untag = 17;
-
 	ask_question = 18;
+	goal = 19;
 }
 
 message NextAction {
