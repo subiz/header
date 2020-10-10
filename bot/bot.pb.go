@@ -176,119 +176,119 @@ func (ActionType) EnumDescriptor() ([]byte, []int) {
 	return file_bot_proto_rawDescGZIP(), []int{1}
 }
 
-type SegmentationCondition_Source int32
+type BotCondition_Source int32
 
 const (
-	SegmentationCondition_direct     SegmentationCondition_Source = 0
-	SegmentationCondition_google_ads SegmentationCondition_Source = 1
-	SegmentationCondition_organic    SegmentationCondition_Source = 2
+	BotCondition_direct     BotCondition_Source = 0
+	BotCondition_google_ads BotCondition_Source = 1
+	BotCondition_organic    BotCondition_Source = 2
 )
 
-// Enum value maps for SegmentationCondition_Source.
+// Enum value maps for BotCondition_Source.
 var (
-	SegmentationCondition_Source_name = map[int32]string{
+	BotCondition_Source_name = map[int32]string{
 		0: "direct",
 		1: "google_ads",
 		2: "organic",
 	}
-	SegmentationCondition_Source_value = map[string]int32{
+	BotCondition_Source_value = map[string]int32{
 		"direct":     0,
 		"google_ads": 1,
 		"organic":    2,
 	}
 )
 
-func (x SegmentationCondition_Source) Enum() *SegmentationCondition_Source {
-	p := new(SegmentationCondition_Source)
+func (x BotCondition_Source) Enum() *BotCondition_Source {
+	p := new(BotCondition_Source)
 	*p = x
 	return p
 }
 
-func (x SegmentationCondition_Source) String() string {
+func (x BotCondition_Source) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (SegmentationCondition_Source) Descriptor() protoreflect.EnumDescriptor {
+func (BotCondition_Source) Descriptor() protoreflect.EnumDescriptor {
 	return file_bot_proto_enumTypes[2].Descriptor()
 }
 
-func (SegmentationCondition_Source) Type() protoreflect.EnumType {
+func (BotCondition_Source) Type() protoreflect.EnumType {
 	return &file_bot_proto_enumTypes[2]
 }
 
-func (x SegmentationCondition_Source) Number() protoreflect.EnumNumber {
+func (x BotCondition_Source) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use SegmentationCondition_Source.Descriptor instead.
-func (SegmentationCondition_Source) EnumDescriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{2, 0}
+// Deprecated: Use BotCondition_Source.Descriptor instead.
+func (BotCondition_Source) EnumDescriptor() ([]byte, []int) {
+	return file_bot_proto_rawDescGZIP(), []int{1, 0}
 }
 
-type SegmentationCondition_DeviveType int32
+type BotCondition_DeviveType int32
 
 const (
-	SegmentationCondition_desktop SegmentationCondition_DeviveType = 0
-	SegmentationCondition_mobile  SegmentationCondition_DeviveType = 1
-	SegmentationCondition_tablet  SegmentationCondition_DeviveType = 2
+	BotCondition_desktop BotCondition_DeviveType = 0
+	BotCondition_mobile  BotCondition_DeviveType = 1
+	BotCondition_tablet  BotCondition_DeviveType = 2
 )
 
-// Enum value maps for SegmentationCondition_DeviveType.
+// Enum value maps for BotCondition_DeviveType.
 var (
-	SegmentationCondition_DeviveType_name = map[int32]string{
+	BotCondition_DeviveType_name = map[int32]string{
 		0: "desktop",
 		1: "mobile",
 		2: "tablet",
 	}
-	SegmentationCondition_DeviveType_value = map[string]int32{
+	BotCondition_DeviveType_value = map[string]int32{
 		"desktop": 0,
 		"mobile":  1,
 		"tablet":  2,
 	}
 )
 
-func (x SegmentationCondition_DeviveType) Enum() *SegmentationCondition_DeviveType {
-	p := new(SegmentationCondition_DeviveType)
+func (x BotCondition_DeviveType) Enum() *BotCondition_DeviveType {
+	p := new(BotCondition_DeviveType)
 	*p = x
 	return p
 }
 
-func (x SegmentationCondition_DeviveType) String() string {
+func (x BotCondition_DeviveType) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (SegmentationCondition_DeviveType) Descriptor() protoreflect.EnumDescriptor {
+func (BotCondition_DeviveType) Descriptor() protoreflect.EnumDescriptor {
 	return file_bot_proto_enumTypes[3].Descriptor()
 }
 
-func (SegmentationCondition_DeviveType) Type() protoreflect.EnumType {
+func (BotCondition_DeviveType) Type() protoreflect.EnumType {
 	return &file_bot_proto_enumTypes[3]
 }
 
-func (x SegmentationCondition_DeviveType) Number() protoreflect.EnumNumber {
+func (x BotCondition_DeviveType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use SegmentationCondition_DeviveType.Descriptor instead.
-func (SegmentationCondition_DeviveType) EnumDescriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{2, 1}
+// Deprecated: Use BotCondition_DeviveType.Descriptor instead.
+func (BotCondition_DeviveType) EnumDescriptor() ([]byte, []int) {
+	return file_bot_proto_rawDescGZIP(), []int{1, 1}
 }
 
-type SegmentationCondition_Browser int32
+type BotCondition_Browser int32
 
 const (
-	SegmentationCondition_all     SegmentationCondition_Browser = 0
-	SegmentationCondition_chrome  SegmentationCondition_Browser = 1
-	SegmentationCondition_firefox SegmentationCondition_Browser = 2
-	SegmentationCondition_edge    SegmentationCondition_Browser = 3
-	SegmentationCondition_ie      SegmentationCondition_Browser = 4
-	SegmentationCondition_safari  SegmentationCondition_Browser = 5
-	SegmentationCondition_other   SegmentationCondition_Browser = 6
+	BotCondition_all     BotCondition_Browser = 0
+	BotCondition_chrome  BotCondition_Browser = 1
+	BotCondition_firefox BotCondition_Browser = 2
+	BotCondition_edge    BotCondition_Browser = 3
+	BotCondition_ie      BotCondition_Browser = 4
+	BotCondition_safari  BotCondition_Browser = 5
+	BotCondition_other   BotCondition_Browser = 6
 )
 
-// Enum value maps for SegmentationCondition_Browser.
+// Enum value maps for BotCondition_Browser.
 var (
-	SegmentationCondition_Browser_name = map[int32]string{
+	BotCondition_Browser_name = map[int32]string{
 		0: "all",
 		1: "chrome",
 		2: "firefox",
@@ -297,7 +297,7 @@ var (
 		5: "safari",
 		6: "other",
 	}
-	SegmentationCondition_Browser_value = map[string]int32{
+	BotCondition_Browser_value = map[string]int32{
 		"all":     0,
 		"chrome":  1,
 		"firefox": 2,
@@ -308,31 +308,31 @@ var (
 	}
 )
 
-func (x SegmentationCondition_Browser) Enum() *SegmentationCondition_Browser {
-	p := new(SegmentationCondition_Browser)
+func (x BotCondition_Browser) Enum() *BotCondition_Browser {
+	p := new(BotCondition_Browser)
 	*p = x
 	return p
 }
 
-func (x SegmentationCondition_Browser) String() string {
+func (x BotCondition_Browser) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (SegmentationCondition_Browser) Descriptor() protoreflect.EnumDescriptor {
+func (BotCondition_Browser) Descriptor() protoreflect.EnumDescriptor {
 	return file_bot_proto_enumTypes[4].Descriptor()
 }
 
-func (SegmentationCondition_Browser) Type() protoreflect.EnumType {
+func (BotCondition_Browser) Type() protoreflect.EnumType {
 	return &file_bot_proto_enumTypes[4]
 }
 
-func (x SegmentationCondition_Browser) Number() protoreflect.EnumNumber {
+func (x BotCondition_Browser) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use SegmentationCondition_Browser.Descriptor instead.
-func (SegmentationCondition_Browser) EnumDescriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{2, 2}
+// Deprecated: Use BotCondition_Browser.Descriptor instead.
+func (BotCondition_Browser) EnumDescriptor() ([]byte, []int) {
+	return file_bot_proto_rawDescGZIP(), []int{1, 2}
 }
 
 type Condition_Group int32
@@ -381,7 +381,7 @@ func (x Condition_Group) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Condition_Group.Descriptor instead.
 func (Condition_Group) EnumDescriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{15, 0}
+	return file_bot_proto_rawDescGZIP(), []int{16, 0}
 }
 
 type Condition_Function int32
@@ -433,7 +433,7 @@ func (x Condition_Function) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use Condition_Function.Descriptor instead.
 func (Condition_Function) EnumDescriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{15, 1}
+	return file_bot_proto_rawDescGZIP(), []int{16, 1}
 }
 
 type Trigger struct {
@@ -523,24 +523,36 @@ func (x *Trigger) GetDisabled() bool {
 	return false
 }
 
-type Segmentation struct {
+type BotCondition struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Conditions                 []*SegmentationCondition `protobuf:"bytes,4,rep,name=conditions,proto3" json:"conditions,omitempty"`
-	SourceConditions           []*SegmentationCondition `protobuf:"bytes,6,rep,name=source_conditions,json=sourceConditions,proto3" json:"source_conditions,omitempty"`                                      // source, source_referer (or only)
-	LocationConditions         []*SegmentationCondition `protobuf:"bytes,7,rep,name=location_conditions,json=locationConditions,proto3" json:"location_conditions,omitempty"`                                // city, country_code (or only)
-	UrlConditions              []*SegmentationCondition `protobuf:"bytes,8,rep,name=url_conditions,json=urlConditions,proto3" json:"url_conditions,omitempty"`                                               // url, url_term, url_medium, ... (or only)
-	ExcludeUrlConditions       []*SegmentationCondition `protobuf:"bytes,9,rep,name=exclude_url_conditions,json=excludeUrlConditions,proto3" json:"exclude_url_conditions,omitempty"`                        // url (or only)
-	HasVisitedUrlConditions    []*SegmentationCondition `protobuf:"bytes,10,rep,name=has_visited_url_conditions,json=hasVisitedUrlConditions,proto3" json:"has_visited_url_conditions,omitempty"`            // url (or only)
-	HasNotVisitedUrlConditions []*SegmentationCondition `protobuf:"bytes,11,rep,name=has_not_visited_url_conditions,json=hasNotVisitedUrlConditions,proto3" json:"has_not_visited_url_conditions,omitempty"` // url (or only)
-	Disabled                   bool                     `protobuf:"varint,12,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	ExcludeLocationConditions  []*SegmentationCondition `protobuf:"bytes,13,rep,name=exclude_location_conditions,json=excludeLocationConditions,proto3" json:"exclude_location_conditions,omitempty"` // city, country_code (or only)
+	Key               string               `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"` // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute, timming, integrationid, offline
+	Sources           []string             `protobuf:"bytes,2,rep,name=sources,proto3" json:"sources,omitempty"`
+	DeviceTypes       []string             `protobuf:"bytes,3,rep,name=device_types,json=deviceTypes,proto3" json:"device_types,omitempty"`
+	Browsers          []string             `protobuf:"bytes,4,rep,name=browsers,proto3" json:"browsers,omitempty"`
+	Referers          []string             `protobuf:"bytes,6,rep,name=referers,proto3" json:"referers,omitempty"`
+	ExcludeReferers   []string             `protobuf:"bytes,9,rep,name=exclude_referers,json=excludeReferers,proto3" json:"exclude_referers,omitempty"`
+	Urls              []string             `protobuf:"bytes,10,rep,name=urls,proto3" json:"urls,omitempty"`                                                        // url, url_term, url_medium, ... (or only)
+	ExcludeUrls       []string             `protobuf:"bytes,11,rep,name=exclude_urls,json=excludeUrls,proto3" json:"exclude_urls,omitempty"`                       // url (or only)
+	HasVisitedUrl     []string             `protobuf:"bytes,12,rep,name=has_visited_url,json=hasVisitedUrl,proto3" json:"has_visited_url,omitempty"`               // url (or only)
+	HasNotVisitedUrls []string             `protobuf:"bytes,13,rep,name=has_not_visited_urls,json=hasNotVisitedUrls,proto3" json:"has_not_visited_urls,omitempty"` // url (or only)
+	Locations         []*LocationCondition `protobuf:"bytes,14,rep,name=locations,proto3" json:"locations,omitempty"`                                              // or
+	ExcludeLocations  []*LocationCondition `protobuf:"bytes,15,rep,name=exclude_locations,json=excludeLocations,proto3" json:"exclude_locations,omitempty"`        // or
+	// timming
+	BusinessHour string   `protobuf:"bytes,20,opt,name=business_hour,json=businessHour,proto3" json:"business_hour,omitempty"`           // [in, notIn] if this is true, ignore all other timming conditions
+	DaysOfWeek   []string `protobuf:"bytes,21,rep,name=days_of_week,json=daysOfWeek,proto3" json:"days_of_week,omitempty"`               // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	MinuteOfDays []int32  `protobuf:"varint,22,rep,packed,name=minute_of_days,json=minuteOfDays,proto3" json:"minute_of_days,omitempty"` // pair [0-4] [6-9]
+	// user
+	User           *UserAttributeCondition `protobuf:"bytes,23,opt,name=user,proto3" json:"user,omitempty"`
+	IntegrationIds []string                `protobuf:"bytes,24,rep,name=integration_ids,json=integrationIds,proto3" json:"integration_ids,omitempty"` // optional for subiz and email
+	// offline
+	Offline bool `protobuf:"varint,25,opt,name=offline,proto3" json:"offline,omitempty"` // only run when there is no online agent
 }
 
-func (x *Segmentation) Reset() {
-	*x = Segmentation{}
+func (x *BotCondition) Reset() {
+	*x = BotCondition{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_bot_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -548,13 +560,13 @@ func (x *Segmentation) Reset() {
 	}
 }
 
-func (x *Segmentation) String() string {
+func (x *BotCondition) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Segmentation) ProtoMessage() {}
+func (*BotCondition) ProtoMessage() {}
 
-func (x *Segmentation) ProtoReflect() protoreflect.Message {
+func (x *BotCondition) ProtoReflect() protoreflect.Message {
 	mi := &file_bot_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -566,87 +578,149 @@ func (x *Segmentation) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Segmentation.ProtoReflect.Descriptor instead.
-func (*Segmentation) Descriptor() ([]byte, []int) {
+// Deprecated: Use BotCondition.ProtoReflect.Descriptor instead.
+func (*BotCondition) Descriptor() ([]byte, []int) {
 	return file_bot_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *Segmentation) GetConditions() []*SegmentationCondition {
+func (x *BotCondition) GetKey() string {
 	if x != nil {
-		return x.Conditions
+		return x.Key
+	}
+	return ""
+}
+
+func (x *BotCondition) GetSources() []string {
+	if x != nil {
+		return x.Sources
 	}
 	return nil
 }
 
-func (x *Segmentation) GetSourceConditions() []*SegmentationCondition {
+func (x *BotCondition) GetDeviceTypes() []string {
 	if x != nil {
-		return x.SourceConditions
+		return x.DeviceTypes
 	}
 	return nil
 }
 
-func (x *Segmentation) GetLocationConditions() []*SegmentationCondition {
+func (x *BotCondition) GetBrowsers() []string {
 	if x != nil {
-		return x.LocationConditions
+		return x.Browsers
 	}
 	return nil
 }
 
-func (x *Segmentation) GetUrlConditions() []*SegmentationCondition {
+func (x *BotCondition) GetReferers() []string {
 	if x != nil {
-		return x.UrlConditions
+		return x.Referers
 	}
 	return nil
 }
 
-func (x *Segmentation) GetExcludeUrlConditions() []*SegmentationCondition {
+func (x *BotCondition) GetExcludeReferers() []string {
 	if x != nil {
-		return x.ExcludeUrlConditions
+		return x.ExcludeReferers
 	}
 	return nil
 }
 
-func (x *Segmentation) GetHasVisitedUrlConditions() []*SegmentationCondition {
+func (x *BotCondition) GetUrls() []string {
 	if x != nil {
-		return x.HasVisitedUrlConditions
+		return x.Urls
 	}
 	return nil
 }
 
-func (x *Segmentation) GetHasNotVisitedUrlConditions() []*SegmentationCondition {
+func (x *BotCondition) GetExcludeUrls() []string {
 	if x != nil {
-		return x.HasNotVisitedUrlConditions
+		return x.ExcludeUrls
 	}
 	return nil
 }
 
-func (x *Segmentation) GetDisabled() bool {
+func (x *BotCondition) GetHasVisitedUrl() []string {
 	if x != nil {
-		return x.Disabled
+		return x.HasVisitedUrl
+	}
+	return nil
+}
+
+func (x *BotCondition) GetHasNotVisitedUrls() []string {
+	if x != nil {
+		return x.HasNotVisitedUrls
+	}
+	return nil
+}
+
+func (x *BotCondition) GetLocations() []*LocationCondition {
+	if x != nil {
+		return x.Locations
+	}
+	return nil
+}
+
+func (x *BotCondition) GetExcludeLocations() []*LocationCondition {
+	if x != nil {
+		return x.ExcludeLocations
+	}
+	return nil
+}
+
+func (x *BotCondition) GetBusinessHour() string {
+	if x != nil {
+		return x.BusinessHour
+	}
+	return ""
+}
+
+func (x *BotCondition) GetDaysOfWeek() []string {
+	if x != nil {
+		return x.DaysOfWeek
+	}
+	return nil
+}
+
+func (x *BotCondition) GetMinuteOfDays() []int32 {
+	if x != nil {
+		return x.MinuteOfDays
+	}
+	return nil
+}
+
+func (x *BotCondition) GetUser() *UserAttributeCondition {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
+func (x *BotCondition) GetIntegrationIds() []string {
+	if x != nil {
+		return x.IntegrationIds
+	}
+	return nil
+}
+
+func (x *BotCondition) GetOffline() bool {
+	if x != nil {
+		return x.Offline
 	}
 	return false
 }
 
-func (x *Segmentation) GetExcludeLocationConditions() []*SegmentationCondition {
-	if x != nil {
-		return x.ExcludeLocationConditions
-	}
-	return nil
-}
-
-type SegmentationCondition struct {
+type UserAttributeCondition struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Key              string `protobuf:"bytes,3,opt,name=key,proto3" json:"key,omitempty"` // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
-	UserAttributeKey string `protobuf:"bytes,34,opt,name=user_attribute_key,json=userAttributeKey,proto3" json:"user_attribute_key,omitempty"`
-	Operator         string `protobuf:"bytes,40,opt,name=operator,proto3" json:"operator,omitempty"` // eq, ne, con, notCon, in, gt, gte, lt, lte, inRange, notInRange, begin, end
-	Value            string `protobuf:"bytes,41,opt,name=value,proto3" json:"value,omitempty"`
+	Key      string `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+	Operator string `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"`
+	Value    string `protobuf:"bytes,4,opt,name=value,proto3" json:"value,omitempty"`
 }
 
-func (x *SegmentationCondition) Reset() {
-	*x = SegmentationCondition{}
+func (x *UserAttributeCondition) Reset() {
+	*x = UserAttributeCondition{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_bot_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -654,13 +728,13 @@ func (x *SegmentationCondition) Reset() {
 	}
 }
 
-func (x *SegmentationCondition) String() string {
+func (x *UserAttributeCondition) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SegmentationCondition) ProtoMessage() {}
+func (*UserAttributeCondition) ProtoMessage() {}
 
-func (x *SegmentationCondition) ProtoReflect() protoreflect.Message {
+func (x *UserAttributeCondition) ProtoReflect() protoreflect.Message {
 	mi := &file_bot_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -672,35 +746,83 @@ func (x *SegmentationCondition) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SegmentationCondition.ProtoReflect.Descriptor instead.
-func (*SegmentationCondition) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserAttributeCondition.ProtoReflect.Descriptor instead.
+func (*UserAttributeCondition) Descriptor() ([]byte, []int) {
 	return file_bot_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SegmentationCondition) GetKey() string {
+func (x *UserAttributeCondition) GetKey() string {
 	if x != nil {
 		return x.Key
 	}
 	return ""
 }
 
-func (x *SegmentationCondition) GetUserAttributeKey() string {
-	if x != nil {
-		return x.UserAttributeKey
-	}
-	return ""
-}
-
-func (x *SegmentationCondition) GetOperator() string {
+func (x *UserAttributeCondition) GetOperator() string {
 	if x != nil {
 		return x.Operator
 	}
 	return ""
 }
 
-func (x *SegmentationCondition) GetValue() string {
+func (x *UserAttributeCondition) GetValue() string {
 	if x != nil {
 		return x.Value
+	}
+	return ""
+}
+
+type LocationCondition struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CityName    string `protobuf:"bytes,3,opt,name=city_name,json=cityName,proto3" json:"city_name,omitempty"`          // must equal
+	CountryCode string `protobuf:"bytes,4,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"` // must equal
+}
+
+func (x *LocationCondition) Reset() {
+	*x = LocationCondition{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_bot_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LocationCondition) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LocationCondition) ProtoMessage() {}
+
+func (x *LocationCondition) ProtoReflect() protoreflect.Message {
+	mi := &file_bot_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LocationCondition.ProtoReflect.Descriptor instead.
+func (*LocationCondition) Descriptor() ([]byte, []int) {
+	return file_bot_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *LocationCondition) GetCityName() string {
+	if x != nil {
+		return x.CityName
+	}
+	return ""
+}
+
+func (x *LocationCondition) GetCountryCode() string {
+	if x != nil {
+		return x.CountryCode
 	}
 	return ""
 }
@@ -710,33 +832,26 @@ type Bot struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx          *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId    string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id           string          `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Name         string          `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Category     string          `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"` // hello, operator, reply
-	Status       string          `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`     // active, inactive, deleted
-	Action       *Action         `protobuf:"bytes,9,opt,name=action,proto3" json:"action,omitempty"`
-	Created      int64           `protobuf:"varint,10,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy    string          `protobuf:"bytes,11,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated      int64           `protobuf:"varint,12,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy    string          `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Triggers     []*Trigger      `protobuf:"bytes,14,rep,name=triggers,proto3" json:"triggers,omitempty"`
-	WebCondition []*Segmentation `protobuf:"bytes,16,rep,name=web_condition,json=webCondition,proto3" json:"web_condition,omitempty"`
-	Channels     []string        `protobuf:"bytes,17,rep,name=channels,proto3" json:"channels,omitempty"` // default: all channel
-	// for fb comment
-	// for messenger
-	// for zalo
-	IntegrationIds   []string                             `protobuf:"bytes,18,rep,name=integration_ids,json=integrationIds,proto3" json:"integration_ids,omitempty"` // optional for subiz and email
-	TimmingCondition *conversation.TimmingCondition       `protobuf:"bytes,19,opt,name=timming_condition,json=timmingCondition,proto3" json:"timming_condition,omitempty"`
-	UserConditions   *conversation.UserAttributeCondition `protobuf:"bytes,20,opt,name=user_conditions,json=userConditions,proto3" json:"user_conditions,omitempty"`
-	WhenOffline      bool                                 `protobuf:"varint,21,opt,name=when_offline,json=whenOffline,proto3" json:"when_offline,omitempty"` // only run when there is no online agent
+	Ctx        *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId  string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id         string          `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string          `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Category   string          `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"` // hello, operator, reply
+	Status     string          `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`     // active, inactive, deleted
+	Action     *Action         `protobuf:"bytes,9,opt,name=action,proto3" json:"action,omitempty"`     // point to root action
+	Created    int64           `protobuf:"varint,10,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy  string          `protobuf:"bytes,11,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated    int64           `protobuf:"varint,12,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy  string          `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Triggers   []*Trigger      `protobuf:"bytes,14,rep,name=triggers,proto3" json:"triggers,omitempty"`
+	Conditions []*BotCondition `protobuf:"bytes,16,rep,name=conditions,proto3" json:"conditions,omitempty"`
+	Channels   []string        `protobuf:"bytes,17,rep,name=channels,proto3" json:"channels,omitempty"` // default: all channel
 }
 
 func (x *Bot) Reset() {
 	*x = Bot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[3]
+		mi := &file_bot_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -749,7 +864,7 @@ func (x *Bot) String() string {
 func (*Bot) ProtoMessage() {}
 
 func (x *Bot) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[3]
+	mi := &file_bot_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -762,7 +877,7 @@ func (x *Bot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bot.ProtoReflect.Descriptor instead.
 func (*Bot) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{3}
+	return file_bot_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Bot) GetCtx() *common.Context {
@@ -849,9 +964,9 @@ func (x *Bot) GetTriggers() []*Trigger {
 	return nil
 }
 
-func (x *Bot) GetWebCondition() []*Segmentation {
+func (x *Bot) GetConditions() []*BotCondition {
 	if x != nil {
-		return x.WebCondition
+		return x.Conditions
 	}
 	return nil
 }
@@ -861,34 +976,6 @@ func (x *Bot) GetChannels() []string {
 		return x.Channels
 	}
 	return nil
-}
-
-func (x *Bot) GetIntegrationIds() []string {
-	if x != nil {
-		return x.IntegrationIds
-	}
-	return nil
-}
-
-func (x *Bot) GetTimmingCondition() *conversation.TimmingCondition {
-	if x != nil {
-		return x.TimmingCondition
-	}
-	return nil
-}
-
-func (x *Bot) GetUserConditions() *conversation.UserAttributeCondition {
-	if x != nil {
-		return x.UserConditions
-	}
-	return nil
-}
-
-func (x *Bot) GetWhenOffline() bool {
-	if x != nil {
-		return x.WhenOffline
-	}
-	return false
 }
 
 type Bots struct {
@@ -903,7 +990,7 @@ type Bots struct {
 func (x *Bots) Reset() {
 	*x = Bots{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[4]
+		mi := &file_bot_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -916,7 +1003,7 @@ func (x *Bots) String() string {
 func (*Bots) ProtoMessage() {}
 
 func (x *Bots) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[4]
+	mi := &file_bot_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -929,7 +1016,7 @@ func (x *Bots) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bots.ProtoReflect.Descriptor instead.
 func (*Bots) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{4}
+	return file_bot_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Bots) GetCtx() *common.Context {
@@ -958,7 +1045,7 @@ type NextAction struct {
 func (x *NextAction) Reset() {
 	*x = NextAction{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[5]
+		mi := &file_bot_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -971,7 +1058,7 @@ func (x *NextAction) String() string {
 func (*NextAction) ProtoMessage() {}
 
 func (x *NextAction) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[5]
+	mi := &file_bot_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -984,7 +1071,7 @@ func (x *NextAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NextAction.ProtoReflect.Descriptor instead.
 func (*NextAction) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{5}
+	return file_bot_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *NextAction) GetCondition() *Condition {
@@ -1027,7 +1114,7 @@ type Action struct {
 func (x *Action) Reset() {
 	*x = Action{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[6]
+		mi := &file_bot_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1040,7 +1127,7 @@ func (x *Action) String() string {
 func (*Action) ProtoMessage() {}
 
 func (x *Action) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[6]
+	mi := &file_bot_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1053,7 +1140,7 @@ func (x *Action) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Action.ProtoReflect.Descriptor instead.
 func (*Action) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{6}
+	return file_bot_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Action) GetAccountId() string {
@@ -1174,7 +1261,7 @@ type ActionAssign struct {
 func (x *ActionAssign) Reset() {
 	*x = ActionAssign{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[7]
+		mi := &file_bot_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1187,7 +1274,7 @@ func (x *ActionAssign) String() string {
 func (*ActionAssign) ProtoMessage() {}
 
 func (x *ActionAssign) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[7]
+	mi := &file_bot_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1200,7 +1287,7 @@ func (x *ActionAssign) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionAssign.ProtoReflect.Descriptor instead.
 func (*ActionAssign) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{7}
+	return file_bot_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ActionAssign) GetStrategy() string {
@@ -1235,7 +1322,7 @@ type ActionJump struct {
 func (x *ActionJump) Reset() {
 	*x = ActionJump{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[8]
+		mi := &file_bot_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1248,7 +1335,7 @@ func (x *ActionJump) String() string {
 func (*ActionJump) ProtoMessage() {}
 
 func (x *ActionJump) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[8]
+	mi := &file_bot_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1261,7 +1348,7 @@ func (x *ActionJump) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionJump.ProtoReflect.Descriptor instead.
 func (*ActionJump) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{8}
+	return file_bot_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ActionJump) GetActionId() string {
@@ -1280,7 +1367,7 @@ type ActionSwitchLanguage struct {
 func (x *ActionSwitchLanguage) Reset() {
 	*x = ActionSwitchLanguage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[9]
+		mi := &file_bot_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1293,7 +1380,7 @@ func (x *ActionSwitchLanguage) String() string {
 func (*ActionSwitchLanguage) ProtoMessage() {}
 
 func (x *ActionSwitchLanguage) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[9]
+	mi := &file_bot_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1306,7 +1393,7 @@ func (x *ActionSwitchLanguage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSwitchLanguage.ProtoReflect.Descriptor instead.
 func (*ActionSwitchLanguage) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{9}
+	return file_bot_proto_rawDescGZIP(), []int{10}
 }
 
 type ActionSendHttp struct {
@@ -1323,7 +1410,7 @@ type ActionSendHttp struct {
 func (x *ActionSendHttp) Reset() {
 	*x = ActionSendHttp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[10]
+		mi := &file_bot_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1336,7 +1423,7 @@ func (x *ActionSendHttp) String() string {
 func (*ActionSendHttp) ProtoMessage() {}
 
 func (x *ActionSendHttp) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[10]
+	mi := &file_bot_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1349,7 +1436,7 @@ func (x *ActionSendHttp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSendHttp.ProtoReflect.Descriptor instead.
 func (*ActionSendHttp) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{10}
+	return file_bot_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ActionSendHttp) GetUrl() string {
@@ -1392,7 +1479,7 @@ type ActionSendHttpHeader struct {
 func (x *ActionSendHttpHeader) Reset() {
 	*x = ActionSendHttpHeader{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[11]
+		mi := &file_bot_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1405,7 +1492,7 @@ func (x *ActionSendHttpHeader) String() string {
 func (*ActionSendHttpHeader) ProtoMessage() {}
 
 func (x *ActionSendHttpHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[11]
+	mi := &file_bot_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1418,7 +1505,7 @@ func (x *ActionSendHttpHeader) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSendHttpHeader.ProtoReflect.Descriptor instead.
 func (*ActionSendHttpHeader) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{11}
+	return file_bot_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ActionSendHttpHeader) GetKey() string {
@@ -1454,7 +1541,7 @@ type ActionAskQuestion struct {
 func (x *ActionAskQuestion) Reset() {
 	*x = ActionAskQuestion{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[12]
+		mi := &file_bot_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1467,7 +1554,7 @@ func (x *ActionAskQuestion) String() string {
 func (*ActionAskQuestion) ProtoMessage() {}
 
 func (x *ActionAskQuestion) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[12]
+	mi := &file_bot_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1480,7 +1567,7 @@ func (x *ActionAskQuestion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionAskQuestion.ProtoReflect.Descriptor instead.
 func (*ActionAskQuestion) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{12}
+	return file_bot_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ActionAskQuestion) GetMessages() []*conversation.Message {
@@ -1558,7 +1645,7 @@ type ActionSendMessage struct {
 func (x *ActionSendMessage) Reset() {
 	*x = ActionSendMessage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[13]
+		mi := &file_bot_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1571,7 +1658,7 @@ func (x *ActionSendMessage) String() string {
 func (*ActionSendMessage) ProtoMessage() {}
 
 func (x *ActionSendMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[13]
+	mi := &file_bot_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1584,7 +1671,7 @@ func (x *ActionSendMessage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSendMessage.ProtoReflect.Descriptor instead.
 func (*ActionSendMessage) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{13}
+	return file_bot_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ActionSendMessage) GetMessages() []*conversation.Message {
@@ -1612,7 +1699,7 @@ type ActionSleep struct {
 func (x *ActionSleep) Reset() {
 	*x = ActionSleep{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[14]
+		mi := &file_bot_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1625,7 +1712,7 @@ func (x *ActionSleep) String() string {
 func (*ActionSleep) ProtoMessage() {}
 
 func (x *ActionSleep) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[14]
+	mi := &file_bot_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1638,7 +1725,7 @@ func (x *ActionSleep) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionSleep.ProtoReflect.Descriptor instead.
 func (*ActionSleep) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{14}
+	return file_bot_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ActionSleep) GetDuration() int64 {
@@ -1667,7 +1754,7 @@ type Condition struct {
 func (x *Condition) Reset() {
 	*x = Condition{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_bot_proto_msgTypes[15]
+		mi := &file_bot_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1680,7 +1767,7 @@ func (x *Condition) String() string {
 func (*Condition) ProtoMessage() {}
 
 func (x *Condition) ProtoReflect() protoreflect.Message {
-	mi := &file_bot_proto_msgTypes[15]
+	mi := &file_bot_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1693,7 +1780,7 @@ func (x *Condition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Condition.ProtoReflect.Descriptor instead.
 func (*Condition) Descriptor() ([]byte, []int) {
-	return file_bot_proto_rawDescGZIP(), []int{15}
+	return file_bot_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Condition) GetGroup() string {
@@ -1774,112 +1861,100 @@ var file_bot_proto_rawDesc = []byte{
 	0x01, 0x28, 0x03, 0x52, 0x10, 0x61, 0x66, 0x74, 0x65, 0x72, 0x50, 0x61, 0x67, 0x65, 0x76, 0x69,
 	0x65, 0x77, 0x53, 0x65, 0x63, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65,
 	0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65,
-	0x64, 0x22, 0xa6, 0x05, 0x0a, 0x0c, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x12, 0x3a, 0x0a, 0x0a, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x53, 0x65, 0x67,
-	0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69,
-	0x6f, 0x6e, 0x52, 0x0a, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x47,
-	0x0a, 0x11, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62, 0x6f, 0x74, 0x2e,
-	0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64,
-	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x10, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x43, 0x6f, 0x6e,
-	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x4b, 0x0a, 0x13, 0x6c, 0x6f, 0x63, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x5f, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x07,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65,
-	0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e,
-	0x52, 0x12, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x41, 0x0a, 0x0e, 0x75, 0x72, 0x6c, 0x5f, 0x63, 0x6f, 0x6e, 0x64,
-	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x08, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62,
-	0x6f, 0x74, 0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43,
-	0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0d, 0x75, 0x72, 0x6c, 0x43, 0x6f, 0x6e,
-	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x50, 0x0a, 0x16, 0x65, 0x78, 0x63, 0x6c, 0x75,
-	0x64, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x5f, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e,
-	0x73, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x53, 0x65,
-	0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74,
-	0x69, 0x6f, 0x6e, 0x52, 0x14, 0x65, 0x78, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x55, 0x72, 0x6c, 0x43,
-	0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x57, 0x0a, 0x1a, 0x68, 0x61, 0x73,
-	0x5f, 0x76, 0x69, 0x73, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x75, 0x72, 0x6c, 0x5f, 0x63, 0x6f, 0x6e,
-	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e,
-	0x62, 0x6f, 0x74, 0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x17, 0x68, 0x61, 0x73, 0x56, 0x69,
-	0x73, 0x69, 0x74, 0x65, 0x64, 0x55, 0x72, 0x6c, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x12, 0x5e, 0x0a, 0x1e, 0x68, 0x61, 0x73, 0x5f, 0x6e, 0x6f, 0x74, 0x5f, 0x76, 0x69,
-	0x73, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x75, 0x72, 0x6c, 0x5f, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74,
-	0x69, 0x6f, 0x6e, 0x73, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62, 0x6f, 0x74,
-	0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e,
-	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x1a, 0x68, 0x61, 0x73, 0x4e, 0x6f, 0x74, 0x56, 0x69,
-	0x73, 0x69, 0x74, 0x65, 0x64, 0x55, 0x72, 0x6c, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x0c,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x5a,
-	0x0a, 0x1b, 0x65, 0x78, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x5f, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x0d, 0x20,
-	0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e,
-	0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52,
-	0x19, 0x65, 0x78, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0xc5, 0x02, 0x0a, 0x15, 0x53,
-	0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69,
-	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x2c, 0x0a, 0x12, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x61,
-	0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x22, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x10, 0x75, 0x73, 0x65, 0x72, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74,
-	0x65, 0x4b, 0x65, 0x79, 0x12, 0x1a, 0x0a, 0x08, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72,
-	0x18, 0x28, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72,
-	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x29, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x31, 0x0a, 0x06, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65,
-	0x12, 0x0a, 0x0a, 0x06, 0x64, 0x69, 0x72, 0x65, 0x63, 0x74, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x5f, 0x61, 0x64, 0x73, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07,
-	0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x63, 0x10, 0x02, 0x22, 0x31, 0x0a, 0x0a, 0x44, 0x65, 0x76,
-	0x69, 0x76, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0b, 0x0a, 0x07, 0x64, 0x65, 0x73, 0x6b, 0x74,
-	0x6f, 0x70, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x10, 0x01,
-	0x12, 0x0a, 0x0a, 0x06, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x74, 0x10, 0x02, 0x22, 0x54, 0x0a, 0x07,
-	0x42, 0x72, 0x6f, 0x77, 0x73, 0x65, 0x72, 0x12, 0x07, 0x0a, 0x03, 0x61, 0x6c, 0x6c, 0x10, 0x00,
-	0x12, 0x0a, 0x0a, 0x06, 0x63, 0x68, 0x72, 0x6f, 0x6d, 0x65, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07,
-	0x66, 0x69, 0x72, 0x65, 0x66, 0x6f, 0x78, 0x10, 0x02, 0x12, 0x08, 0x0a, 0x04, 0x65, 0x64, 0x67,
-	0x65, 0x10, 0x03, 0x12, 0x06, 0x0a, 0x02, 0x69, 0x65, 0x10, 0x04, 0x12, 0x0a, 0x0a, 0x06, 0x73,
-	0x61, 0x66, 0x61, 0x72, 0x69, 0x10, 0x05, 0x12, 0x09, 0x0a, 0x05, 0x6f, 0x74, 0x68, 0x65, 0x72,
-	0x10, 0x06, 0x22, 0x9c, 0x05, 0x0a, 0x03, 0x42, 0x6f, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74,
-	0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
-	0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a,
-	0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02,
-	0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
-	0x12, 0x1a, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x06, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x16, 0x0a, 0x06,
-	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x12, 0x23, 0x0a, 0x06, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x09,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x52, 0x06, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x62,
-	0x79, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
-	0x42, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x0c, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a,
-	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x42, 0x79, 0x12, 0x28, 0x0a, 0x08, 0x74,
-	0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x73, 0x18, 0x0e, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e,
-	0x62, 0x6f, 0x74, 0x2e, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x52, 0x08, 0x74, 0x72, 0x69,
-	0x67, 0x67, 0x65, 0x72, 0x73, 0x12, 0x36, 0x0a, 0x0d, 0x77, 0x65, 0x62, 0x5f, 0x63, 0x6f, 0x6e,
-	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x10, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x62,
-	0x6f, 0x74, 0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
-	0x0c, 0x77, 0x65, 0x62, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a,
-	0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x18, 0x11, 0x20, 0x03, 0x28, 0x09, 0x52,
-	0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x12, 0x27, 0x0a, 0x0f, 0x69, 0x6e, 0x74,
-	0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x12, 0x20, 0x03,
-	0x28, 0x09, 0x52, 0x0e, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49,
-	0x64, 0x73, 0x12, 0x4b, 0x0a, 0x11, 0x74, 0x69, 0x6d, 0x6d, 0x69, 0x6e, 0x67, 0x5f, 0x63, 0x6f,
-	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x13, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e,
-	0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x54, 0x69, 0x6d,
-	0x6d, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x10, 0x74,
-	0x69, 0x6d, 0x6d, 0x69, 0x6e, 0x67, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12,
-	0x4d, 0x0a, 0x0f, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x18, 0x14, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65,
-	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x41, 0x74, 0x74, 0x72,
-	0x69, 0x62, 0x75, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0e,
-	0x75, 0x73, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x21,
-	0x0a, 0x0c, 0x77, 0x68, 0x65, 0x6e, 0x5f, 0x6f, 0x66, 0x66, 0x6c, 0x69, 0x6e, 0x65, 0x18, 0x15,
-	0x20, 0x01, 0x28, 0x08, 0x52, 0x0b, 0x77, 0x68, 0x65, 0x6e, 0x4f, 0x66, 0x66, 0x6c, 0x69, 0x6e,
-	0x65, 0x22, 0x47, 0x0a, 0x04, 0x42, 0x6f, 0x74, 0x73, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78,
+	0x64, 0x22, 0xe8, 0x06, 0x0a, 0x0c, 0x42, 0x6f, 0x74, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x03, 0x6b, 0x65, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x18,
+	0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x73, 0x12, 0x21,
+	0x0a, 0x0c, 0x64, 0x65, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x73, 0x18, 0x03,
+	0x20, 0x03, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x76, 0x69, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65,
+	0x73, 0x12, 0x1a, 0x0a, 0x08, 0x62, 0x72, 0x6f, 0x77, 0x73, 0x65, 0x72, 0x73, 0x18, 0x04, 0x20,
+	0x03, 0x28, 0x09, 0x52, 0x08, 0x62, 0x72, 0x6f, 0x77, 0x73, 0x65, 0x72, 0x73, 0x12, 0x1a, 0x0a,
+	0x08, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x72, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x09, 0x52,
+	0x08, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x72, 0x73, 0x12, 0x29, 0x0a, 0x10, 0x65, 0x78, 0x63,
+	0x6c, 0x75, 0x64, 0x65, 0x5f, 0x72, 0x65, 0x66, 0x65, 0x72, 0x65, 0x72, 0x73, 0x18, 0x09, 0x20,
+	0x03, 0x28, 0x09, 0x52, 0x0f, 0x65, 0x78, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x52, 0x65, 0x66, 0x65,
+	0x72, 0x65, 0x72, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x75, 0x72, 0x6c, 0x73, 0x18, 0x0a, 0x20, 0x03,
+	0x28, 0x09, 0x52, 0x04, 0x75, 0x72, 0x6c, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x65, 0x78, 0x63, 0x6c,
+	0x75, 0x64, 0x65, 0x5f, 0x75, 0x72, 0x6c, 0x73, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b,
+	0x65, 0x78, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x55, 0x72, 0x6c, 0x73, 0x12, 0x26, 0x0a, 0x0f, 0x68,
+	0x61, 0x73, 0x5f, 0x76, 0x69, 0x73, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x0c,
+	0x20, 0x03, 0x28, 0x09, 0x52, 0x0d, 0x68, 0x61, 0x73, 0x56, 0x69, 0x73, 0x69, 0x74, 0x65, 0x64,
+	0x55, 0x72, 0x6c, 0x12, 0x2f, 0x0a, 0x14, 0x68, 0x61, 0x73, 0x5f, 0x6e, 0x6f, 0x74, 0x5f, 0x76,
+	0x69, 0x73, 0x69, 0x74, 0x65, 0x64, 0x5f, 0x75, 0x72, 0x6c, 0x73, 0x18, 0x0d, 0x20, 0x03, 0x28,
+	0x09, 0x52, 0x11, 0x68, 0x61, 0x73, 0x4e, 0x6f, 0x74, 0x56, 0x69, 0x73, 0x69, 0x74, 0x65, 0x64,
+	0x55, 0x72, 0x6c, 0x73, 0x12, 0x34, 0x0a, 0x09, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x18, 0x0e, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x4c, 0x6f,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x09, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x43, 0x0a, 0x11, 0x65, 0x78,
+	0x63, 0x6c, 0x75, 0x64, 0x65, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18,
+	0x0f, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x4c, 0x6f, 0x63, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x10, 0x65,
+	0x78, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12,
+	0x23, 0x0a, 0x0d, 0x62, 0x75, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x68, 0x6f, 0x75, 0x72,
+	0x18, 0x14, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x62, 0x75, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73,
+	0x48, 0x6f, 0x75, 0x72, 0x12, 0x20, 0x0a, 0x0c, 0x64, 0x61, 0x79, 0x73, 0x5f, 0x6f, 0x66, 0x5f,
+	0x77, 0x65, 0x65, 0x6b, 0x18, 0x15, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0a, 0x64, 0x61, 0x79, 0x73,
+	0x4f, 0x66, 0x57, 0x65, 0x65, 0x6b, 0x12, 0x24, 0x0a, 0x0e, 0x6d, 0x69, 0x6e, 0x75, 0x74, 0x65,
+	0x5f, 0x6f, 0x66, 0x5f, 0x64, 0x61, 0x79, 0x73, 0x18, 0x16, 0x20, 0x03, 0x28, 0x05, 0x52, 0x0c,
+	0x6d, 0x69, 0x6e, 0x75, 0x74, 0x65, 0x4f, 0x66, 0x44, 0x61, 0x79, 0x73, 0x12, 0x2f, 0x0a, 0x04,
+	0x75, 0x73, 0x65, 0x72, 0x18, 0x17, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x62, 0x6f, 0x74,
+	0x2e, 0x55, 0x73, 0x65, 0x72, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x43, 0x6f,
+	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x04, 0x75, 0x73, 0x65, 0x72, 0x12, 0x27, 0x0a,
+	0x0f, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x73,
+	0x18, 0x18, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0e, 0x69, 0x6e, 0x74, 0x65, 0x67, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x49, 0x64, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x6f, 0x66, 0x66, 0x6c, 0x69, 0x6e,
+	0x65, 0x18, 0x19, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x6f, 0x66, 0x66, 0x6c, 0x69, 0x6e, 0x65,
+	0x22, 0x31, 0x0a, 0x06, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x0a, 0x0a, 0x06, 0x64, 0x69,
+	0x72, 0x65, 0x63, 0x74, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x5f, 0x61, 0x64, 0x73, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69,
+	0x63, 0x10, 0x02, 0x22, 0x31, 0x0a, 0x0a, 0x44, 0x65, 0x76, 0x69, 0x76, 0x65, 0x54, 0x79, 0x70,
+	0x65, 0x12, 0x0b, 0x0a, 0x07, 0x64, 0x65, 0x73, 0x6b, 0x74, 0x6f, 0x70, 0x10, 0x00, 0x12, 0x0a,
+	0x0a, 0x06, 0x6d, 0x6f, 0x62, 0x69, 0x6c, 0x65, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x74, 0x61,
+	0x62, 0x6c, 0x65, 0x74, 0x10, 0x02, 0x22, 0x54, 0x0a, 0x07, 0x42, 0x72, 0x6f, 0x77, 0x73, 0x65,
+	0x72, 0x12, 0x07, 0x0a, 0x03, 0x61, 0x6c, 0x6c, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x63, 0x68,
+	0x72, 0x6f, 0x6d, 0x65, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x66, 0x69, 0x72, 0x65, 0x66, 0x6f,
+	0x78, 0x10, 0x02, 0x12, 0x08, 0x0a, 0x04, 0x65, 0x64, 0x67, 0x65, 0x10, 0x03, 0x12, 0x06, 0x0a,
+	0x02, 0x69, 0x65, 0x10, 0x04, 0x12, 0x0a, 0x0a, 0x06, 0x73, 0x61, 0x66, 0x61, 0x72, 0x69, 0x10,
+	0x05, 0x12, 0x09, 0x0a, 0x05, 0x6f, 0x74, 0x68, 0x65, 0x72, 0x10, 0x06, 0x22, 0x5c, 0x0a, 0x16,
+	0x55, 0x73, 0x65, 0x72, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x43, 0x6f, 0x6e,
+	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x1a, 0x0a, 0x08, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x6f, 0x72, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x53, 0x0a, 0x11, 0x4c, 0x6f,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12,
+	0x1b, 0x0a, 0x09, 0x63, 0x69, 0x74, 0x79, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x63, 0x69, 0x74, 0x79, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x21, 0x0a, 0x0c,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72, 0x79, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0b, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72, 0x79, 0x43, 0x6f, 0x64, 0x65, 0x22,
+	0xaf, 0x03, 0x0a, 0x03, 0x42, 0x6f, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f,
+	0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
+	0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a,
+	0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x08, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x12, 0x23, 0x0a, 0x06, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x09, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0b, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x06,
+	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
+	0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x18, 0x0b,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x42, 0x79, 0x12,
+	0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x75, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x75,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x42, 0x79, 0x12, 0x28, 0x0a, 0x08, 0x74, 0x72, 0x69, 0x67,
+	0x67, 0x65, 0x72, 0x73, 0x18, 0x0e, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x62, 0x6f, 0x74,
+	0x2e, 0x54, 0x72, 0x69, 0x67, 0x67, 0x65, 0x72, 0x52, 0x08, 0x74, 0x72, 0x69, 0x67, 0x67, 0x65,
+	0x72, 0x73, 0x12, 0x31, 0x0a, 0x0a, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x18, 0x10, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x62, 0x6f, 0x74, 0x2e, 0x42, 0x6f, 0x74,
+	0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x63, 0x6f, 0x6e, 0x64, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c,
+	0x73, 0x18, 0x11, 0x20, 0x03, 0x28, 0x09, 0x52, 0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c,
+	0x73, 0x22, 0x47, 0x0a, 0x04, 0x42, 0x6f, 0x74, 0x73, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
 	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1c, 0x0a, 0x04,
 	0x62, 0x6f, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x08, 0x2e, 0x62, 0x6f, 0x74,
@@ -2056,79 +2131,71 @@ func file_bot_proto_rawDescGZIP() []byte {
 }
 
 var file_bot_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-var file_bot_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_bot_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_bot_proto_goTypes = []interface{}{
-	(BotCategory)(0),                            // 0: bot.BotCategory
-	(ActionType)(0),                             // 1: bot.ActionType
-	(SegmentationCondition_Source)(0),           // 2: bot.SegmentationCondition.Source
-	(SegmentationCondition_DeviveType)(0),       // 3: bot.SegmentationCondition.DeviveType
-	(SegmentationCondition_Browser)(0),          // 4: bot.SegmentationCondition.Browser
-	(Condition_Group)(0),                        // 5: bot.Condition.Group
-	(Condition_Function)(0),                     // 6: bot.Condition.Function
-	(*Trigger)(nil),                             // 7: bot.Trigger
-	(*Segmentation)(nil),                        // 8: bot.Segmentation
-	(*SegmentationCondition)(nil),               // 9: bot.SegmentationCondition
-	(*Bot)(nil),                                 // 10: bot.Bot
-	(*Bots)(nil),                                // 11: bot.Bots
-	(*NextAction)(nil),                          // 12: bot.NextAction
-	(*Action)(nil),                              // 13: bot.Action
-	(*ActionAssign)(nil),                        // 14: bot.ActionAssign
-	(*ActionJump)(nil),                          // 15: bot.ActionJump
-	(*ActionSwitchLanguage)(nil),                // 16: bot.ActionSwitchLanguage
-	(*ActionSendHttp)(nil),                      // 17: bot.ActionSendHttp
-	(*ActionSendHttpHeader)(nil),                // 18: bot.ActionSendHttpHeader
-	(*ActionAskQuestion)(nil),                   // 19: bot.ActionAskQuestion
-	(*ActionSendMessage)(nil),                   // 20: bot.ActionSendMessage
-	(*ActionSleep)(nil),                         // 21: bot.ActionSleep
-	(*Condition)(nil),                           // 22: bot.Condition
-	(*common.Context)(nil),                      // 23: common.Context
-	(*conversation.TimmingCondition)(nil),       // 24: conversation.TimmingCondition
-	(*conversation.UserAttributeCondition)(nil), // 25: conversation.UserAttributeCondition
-	(*conversation.Message)(nil),                // 26: conversation.Message
-	(*common.I18NText)(nil),                     // 27: common.I18nText
-	(*common.NumberParams)(nil),                 // 28: common.NumberParams
-	(*common.StringParams)(nil),                 // 29: common.StringParams
+	(BotCategory)(0),               // 0: bot.BotCategory
+	(ActionType)(0),                // 1: bot.ActionType
+	(BotCondition_Source)(0),       // 2: bot.BotCondition.Source
+	(BotCondition_DeviveType)(0),   // 3: bot.BotCondition.DeviveType
+	(BotCondition_Browser)(0),      // 4: bot.BotCondition.Browser
+	(Condition_Group)(0),           // 5: bot.Condition.Group
+	(Condition_Function)(0),        // 6: bot.Condition.Function
+	(*Trigger)(nil),                // 7: bot.Trigger
+	(*BotCondition)(nil),           // 8: bot.BotCondition
+	(*UserAttributeCondition)(nil), // 9: bot.UserAttributeCondition
+	(*LocationCondition)(nil),      // 10: bot.LocationCondition
+	(*Bot)(nil),                    // 11: bot.Bot
+	(*Bots)(nil),                   // 12: bot.Bots
+	(*NextAction)(nil),             // 13: bot.NextAction
+	(*Action)(nil),                 // 14: bot.Action
+	(*ActionAssign)(nil),           // 15: bot.ActionAssign
+	(*ActionJump)(nil),             // 16: bot.ActionJump
+	(*ActionSwitchLanguage)(nil),   // 17: bot.ActionSwitchLanguage
+	(*ActionSendHttp)(nil),         // 18: bot.ActionSendHttp
+	(*ActionSendHttpHeader)(nil),   // 19: bot.ActionSendHttpHeader
+	(*ActionAskQuestion)(nil),      // 20: bot.ActionAskQuestion
+	(*ActionSendMessage)(nil),      // 21: bot.ActionSendMessage
+	(*ActionSleep)(nil),            // 22: bot.ActionSleep
+	(*Condition)(nil),              // 23: bot.Condition
+	(*common.Context)(nil),         // 24: common.Context
+	(*conversation.Message)(nil),   // 25: conversation.Message
+	(*common.I18NText)(nil),        // 26: common.I18nText
+	(*common.NumberParams)(nil),    // 27: common.NumberParams
+	(*common.StringParams)(nil),    // 28: common.StringParams
 }
 var file_bot_proto_depIdxs = []int32{
-	9,  // 0: bot.Segmentation.conditions:type_name -> bot.SegmentationCondition
-	9,  // 1: bot.Segmentation.source_conditions:type_name -> bot.SegmentationCondition
-	9,  // 2: bot.Segmentation.location_conditions:type_name -> bot.SegmentationCondition
-	9,  // 3: bot.Segmentation.url_conditions:type_name -> bot.SegmentationCondition
-	9,  // 4: bot.Segmentation.exclude_url_conditions:type_name -> bot.SegmentationCondition
-	9,  // 5: bot.Segmentation.has_visited_url_conditions:type_name -> bot.SegmentationCondition
-	9,  // 6: bot.Segmentation.has_not_visited_url_conditions:type_name -> bot.SegmentationCondition
-	9,  // 7: bot.Segmentation.exclude_location_conditions:type_name -> bot.SegmentationCondition
-	23, // 8: bot.Bot.ctx:type_name -> common.Context
-	13, // 9: bot.Bot.action:type_name -> bot.Action
-	7,  // 10: bot.Bot.triggers:type_name -> bot.Trigger
-	8,  // 11: bot.Bot.web_condition:type_name -> bot.Segmentation
-	24, // 12: bot.Bot.timming_condition:type_name -> conversation.TimmingCondition
-	25, // 13: bot.Bot.user_conditions:type_name -> conversation.UserAttributeCondition
-	23, // 14: bot.Bots.ctx:type_name -> common.Context
-	10, // 15: bot.Bots.bots:type_name -> bot.Bot
-	22, // 16: bot.NextAction.condition:type_name -> bot.Condition
-	13, // 17: bot.NextAction.action:type_name -> bot.Action
-	12, // 18: bot.Action.nexts:type_name -> bot.NextAction
-	20, // 19: bot.Action.send_message:type_name -> bot.ActionSendMessage
-	20, // 20: bot.Action.send_email:type_name -> bot.ActionSendMessage
-	21, // 21: bot.Action.sleep:type_name -> bot.ActionSleep
-	15, // 22: bot.Action.jump:type_name -> bot.ActionJump
-	16, // 23: bot.Action.switch_language:type_name -> bot.ActionSwitchLanguage
-	17, // 24: bot.Action.send_http:type_name -> bot.ActionSendHttp
-	19, // 25: bot.Action.ask_question:type_name -> bot.ActionAskQuestion
-	14, // 26: bot.Action.assign:type_name -> bot.ActionAssign
-	18, // 27: bot.ActionSendHttp.header:type_name -> bot.ActionSendHttpHeader
-	26, // 28: bot.ActionAskQuestion.messages:type_name -> conversation.Message
-	27, // 29: bot.ActionAskQuestion.validation_error_message:type_name -> common.I18nText
-	26, // 30: bot.ActionSendMessage.messages:type_name -> conversation.Message
-	22, // 31: bot.Condition.conditions:type_name -> bot.Condition
-	28, // 32: bot.Condition.number:type_name -> common.NumberParams
-	29, // 33: bot.Condition.string:type_name -> common.StringParams
-	34, // [34:34] is the sub-list for method output_type
-	34, // [34:34] is the sub-list for method input_type
-	34, // [34:34] is the sub-list for extension type_name
-	34, // [34:34] is the sub-list for extension extendee
-	0,  // [0:34] is the sub-list for field type_name
+	10, // 0: bot.BotCondition.locations:type_name -> bot.LocationCondition
+	10, // 1: bot.BotCondition.exclude_locations:type_name -> bot.LocationCondition
+	9,  // 2: bot.BotCondition.user:type_name -> bot.UserAttributeCondition
+	24, // 3: bot.Bot.ctx:type_name -> common.Context
+	14, // 4: bot.Bot.action:type_name -> bot.Action
+	7,  // 5: bot.Bot.triggers:type_name -> bot.Trigger
+	8,  // 6: bot.Bot.conditions:type_name -> bot.BotCondition
+	24, // 7: bot.Bots.ctx:type_name -> common.Context
+	11, // 8: bot.Bots.bots:type_name -> bot.Bot
+	23, // 9: bot.NextAction.condition:type_name -> bot.Condition
+	14, // 10: bot.NextAction.action:type_name -> bot.Action
+	13, // 11: bot.Action.nexts:type_name -> bot.NextAction
+	21, // 12: bot.Action.send_message:type_name -> bot.ActionSendMessage
+	21, // 13: bot.Action.send_email:type_name -> bot.ActionSendMessage
+	22, // 14: bot.Action.sleep:type_name -> bot.ActionSleep
+	16, // 15: bot.Action.jump:type_name -> bot.ActionJump
+	17, // 16: bot.Action.switch_language:type_name -> bot.ActionSwitchLanguage
+	18, // 17: bot.Action.send_http:type_name -> bot.ActionSendHttp
+	20, // 18: bot.Action.ask_question:type_name -> bot.ActionAskQuestion
+	15, // 19: bot.Action.assign:type_name -> bot.ActionAssign
+	19, // 20: bot.ActionSendHttp.header:type_name -> bot.ActionSendHttpHeader
+	25, // 21: bot.ActionAskQuestion.messages:type_name -> conversation.Message
+	26, // 22: bot.ActionAskQuestion.validation_error_message:type_name -> common.I18nText
+	25, // 23: bot.ActionSendMessage.messages:type_name -> conversation.Message
+	23, // 24: bot.Condition.conditions:type_name -> bot.Condition
+	27, // 25: bot.Condition.number:type_name -> common.NumberParams
+	28, // 26: bot.Condition.string:type_name -> common.StringParams
+	27, // [27:27] is the sub-list for method output_type
+	27, // [27:27] is the sub-list for method input_type
+	27, // [27:27] is the sub-list for extension type_name
+	27, // [27:27] is the sub-list for extension extendee
+	0,  // [0:27] is the sub-list for field type_name
 }
 
 func init() { file_bot_proto_init() }
@@ -2150,7 +2217,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Segmentation); i {
+			switch v := v.(*BotCondition); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2162,7 +2229,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SegmentationCondition); i {
+			switch v := v.(*UserAttributeCondition); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2174,7 +2241,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Bot); i {
+			switch v := v.(*LocationCondition); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2186,7 +2253,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Bots); i {
+			switch v := v.(*Bot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2198,7 +2265,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NextAction); i {
+			switch v := v.(*Bots); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2210,7 +2277,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Action); i {
+			switch v := v.(*NextAction); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2222,7 +2289,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionAssign); i {
+			switch v := v.(*Action); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2234,7 +2301,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionJump); i {
+			switch v := v.(*ActionAssign); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2246,7 +2313,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionSwitchLanguage); i {
+			switch v := v.(*ActionJump); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2258,7 +2325,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionSendHttp); i {
+			switch v := v.(*ActionSwitchLanguage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2270,7 +2337,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionSendHttpHeader); i {
+			switch v := v.(*ActionSendHttp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2282,7 +2349,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionAskQuestion); i {
+			switch v := v.(*ActionSendHttpHeader); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2294,7 +2361,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionSendMessage); i {
+			switch v := v.(*ActionAskQuestion); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2306,7 +2373,7 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ActionSleep); i {
+			switch v := v.(*ActionSendMessage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2318,6 +2385,18 @@ func file_bot_proto_init() {
 			}
 		}
 		file_bot_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ActionSleep); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_bot_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Condition); i {
 			case 0:
 				return &v.state
@@ -2336,7 +2415,7 @@ func file_bot_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_bot_proto_rawDesc,
 			NumEnums:      7,
-			NumMessages:   16,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

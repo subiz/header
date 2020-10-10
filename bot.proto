@@ -16,35 +16,22 @@ message Trigger {
 	bool disabled = 10;
 }
 
-message Segmentation {
-	repeated SegmentationCondition conditions = 4;
-	repeated SegmentationCondition source_conditions = 6; // source, source_referer (or only)
-	repeated SegmentationCondition location_conditions = 7; // city, country_code (or only)
-
-	repeated SegmentationCondition url_conditions = 8; // url, url_term, url_medium, ... (or only)
-	repeated SegmentationCondition exclude_url_conditions = 9; // url (or only)
-
-	repeated SegmentationCondition has_visited_url_conditions = 10; // url (or only)
-	repeated SegmentationCondition has_not_visited_url_conditions = 11; // url (or only)
-
-	bool disabled = 12;
-	repeated SegmentationCondition exclude_location_conditions = 13; // city, country_code (or only)
-}
-
-message SegmentationCondition {
-	string key = 3; // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
+message BotCondition {
+	string key = 1; // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute, timming, integrationid, offline
 
 	enum Source {
 		direct = 0;
 		google_ads = 1;
 		organic = 2;
 	}
+	repeated string sources = 2;
 
 	enum DeviveType {
 		desktop = 0;
 		mobile = 1;
 		tablet = 2;
 	}
+	repeated string device_types = 3;
 
 	enum Browser {
 		all = 0;
@@ -55,16 +42,43 @@ message SegmentationCondition {
 		safari = 5;
 		other = 6;
 	}
+	repeated string browsers = 4;
 
-	// for rate limiting
-	// int64 frequency_times = 11; // number of time display the message
-	// int64 frequency_duration = 11; // per duration (1 message per hour || 10 messages per day)
+	repeated string referers = 6;
+	repeated string exclude_referers = 9;
 
+	repeated string urls = 10; // url, url_term, url_medium, ... (or only)
+	repeated string exclude_urls = 11; // url (or only)
 
-	string user_attribute_key = 34;
+	repeated string has_visited_url = 12; // url (or only)
+	repeated string has_not_visited_urls = 13; // url (or only)
 
-	string operator = 40; // eq, ne, con, notCon, in, gt, gte, lt, lte, inRange, notInRange, begin, end
-	string value = 41;
+	repeated LocationCondition locations = 14; // or
+	repeated LocationCondition exclude_locations = 15; // or
+
+	// timming
+	string business_hour = 20; // [in, notIn] if this is true, ignore all other timming conditions
+	repeated string days_of_week = 21; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	repeated int32 minute_of_days = 22; // pair [0-4] [6-9]
+
+	// user
+	UserAttributeCondition user = 23;
+
+	repeated string integration_ids = 24; // optional for subiz and email
+
+	// offline
+	bool offline = 25; // only run when there is no online agent
+}
+
+message UserAttributeCondition {
+	string key = 2;
+	string operator = 3;
+	string value = 4;
+}
+
+message LocationCondition {
+	string city_name = 3; // must equal
+	string country_code = 4; // must equal
 }
 
 message Bot {
@@ -77,7 +91,7 @@ message Bot {
 
 	string status = 7; // active, inactive, deleted
 
-	Action action = 9;
+	Action action = 9; // point to root action
 
 	int64 created = 10;
 	string created_by = 11;
@@ -86,17 +100,8 @@ message Bot {
 	string updated_by = 13;
 
 	repeated Trigger triggers = 14;
-
-	repeated Segmentation web_condition = 16;
-
+	repeated BotCondition conditions = 16;
 	repeated string channels = 17; // default: all channel
-	// for fb comment
-	// for messenger
-	// for zalo
-	repeated string integration_ids = 18; // optional for subiz and email
-	conversation.TimmingCondition timming_condition = 19;
-	conversation.UserAttributeCondition user_conditions = 20;
-	bool when_offline = 21; // only run when there is no online agent
 }
 
 message Bots {
