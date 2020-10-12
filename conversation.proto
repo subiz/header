@@ -257,6 +257,7 @@ message Message {
 	repeated MessagePong pongs = 17;
 
 	repeated Revision revisions = 18;
+	optional string quill_delta = 20;
 }
 
 message MessagePong {
