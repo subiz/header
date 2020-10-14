@@ -282,7 +282,13 @@ message NumberParams {
 message StringParams {
 	string eq = 2;
 	repeated string in = 3;
+
 	string contain = 4;
+	repeated string contains = 5;
+
+	string regex = 6;
+
+	bool case_sensitive = 10;
 }
 
 message Log {
