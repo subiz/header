@@ -528,7 +528,7 @@ type BotCondition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Key               string               `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"` // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute, timming, integrationid, offline
+	Key               string               `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"` // url, browser, location, returning_visitor, device_type, referrer, source, user_attribute, timming, integrationid, offline
 	Sources           []string             `protobuf:"bytes,2,rep,name=sources,proto3" json:"sources,omitempty"`
 	DeviceTypes       []string             `protobuf:"bytes,3,rep,name=device_types,json=deviceTypes,proto3" json:"device_types,omitempty"`
 	Browsers          []string             `protobuf:"bytes,4,rep,name=browsers,proto3" json:"browsers,omitempty"`

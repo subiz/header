@@ -863,3 +863,8 @@ message DoActionRequest {
 message DoActionResponse {
 	repeated bot.Action nexts = 2;
 }
+
+message StartBotRequest {
+	bot.Bot bot = 2;
+	Event event = 3;
+}
