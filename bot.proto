@@ -17,7 +17,7 @@ message Trigger {
 }
 
 message BotCondition {
-	string key = 1; // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute, timming, integrationid, offline
+	string key = 1; // url, browser, location, returning_visitor, device_type, referrer, source, user_attribute, timming, integrationid, offline
 
 	enum Source {
 		direct = 0;
