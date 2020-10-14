@@ -854,3 +854,12 @@ message UserReportTable {
 	int64 quanlified_lead_count = 8;
 	int64 prev_quanlified_lead_count = 9;
 }
+
+message DoActionRequest {
+	bot.Action action = 2;
+	repeated Event events = 3;
+}
+
+message DoActionResponse {
+	repeated bot.Action nexts = 2;
+}

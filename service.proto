@@ -441,4 +441,6 @@ service Bizbot {
 	rpc UpdateBot(bot.Bot) returns (bot.Bot);
 	rpc DeleteBot(common.Id) returns (common.Empty);
 	rpc OnEvent(user.Event) returns (common.Empty);
+	rpc StartBot(bot.Bot) returns (common.Empty);
+	rpc DoAction(user.DoActionRequest) returns (user.DoActionResponse);
 }
