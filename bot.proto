@@ -85,11 +85,12 @@ message Bot {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string name = 4;
+	string fullname = 4;
+	string avatar_url = 5;
 
 	string category = 6; // hello, operator, reply
 
-	string status = 7; // active, inactive, deleted
+	string state = 7; // active, inactive, deleted
 
 	Action action = 9; // point to root action
 
@@ -125,8 +126,6 @@ enum ActionType {
 	tag = 6;
 	convert_to_ticket = 7;
 	send_webhook = 8;
-	like_comment = 9;
-	hide_comment = 10;
 	end_chat = 11;
 	question = 12;
 	update_user = 13;
@@ -135,7 +134,6 @@ enum ActionType {
 	switch_language = 16;
 	untag = 17;
 	ask_question = 18;
-	goal = 19;
 }
 
 message NextAction {
