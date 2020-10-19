@@ -22,6 +22,8 @@ message Rule {
 		first_reply = 7; // list of agent
 		first_reply_of_all = 8; // all agent
 		first_reply_of_group = 9; // group
+
+		bot = 10;
 	}
 	optional string strategy = 5;
 	repeated string assign_tos = 6;
@@ -92,6 +94,8 @@ message RouteResult {
 	optional string group_id = 5;
 	optional string state = 6;
 	optional int64 assigned = 7; // ms
+
+	optional string bot_id = 8; // strategy == bot
 }
 
 message Member {
