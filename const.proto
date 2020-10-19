@@ -295,6 +295,10 @@ enum E {
 	UserConversationSynced = 3000006;
 	MuteStateUpdated = 3000007;
 	BqreportSynced = 3000008;
+
+	BotSynced = 4000001;
+	StartBot = 4000002;
+	TeminateBot = 4000003;
 }
 
 enum RealtimeType {

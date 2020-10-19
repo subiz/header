@@ -16,6 +16,16 @@ message Trigger {
 	bool disabled = 10;
 }
 
+message BotRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string bot_id = 3;
+	string conversation_id = 4;
+	string user_id = 5;
+	string event_id = 6;
+	string type = 7; // start, terminate
+}
+
 message BotCondition {
 	string key = 1; // url, browser, location, returning_visitor, device_type, referrer, source, user_attribute, timming, integration_id, offline
 

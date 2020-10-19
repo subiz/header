@@ -171,7 +171,7 @@ const (
 	Type_subiz     Type = 3
 	Type_app       Type = 4 // dashboard, accmgr
 	Type_connector Type = 6 // fabikon, mailkon
-	Type_bot       Type = 7 // subot-reply
+	Type_bot       Type = 7 // subiz bot
 	Type_dummy     Type = 8 // agent that cannot handle action
 )
 
@@ -1126,7 +1126,7 @@ type Credential struct {
 
 	AccountId string      `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Issuer    string      `protobuf:"bytes,3,opt,name=issuer,proto3" json:"issuer,omitempty"`
-	Type      Type        `protobuf:"varint,4,opt,name=type,proto3,enum=common.Type" json:"type,omitempty"` // should be agent, user or connector (not bot)
+	Type      Type        `protobuf:"varint,4,opt,name=type,proto3,enum=common.Type" json:"type,omitempty"` // should be agent, user or connector
 	Perm      *Permission `protobuf:"bytes,6,opt,name=perm,proto3" json:"perm,omitempty"`
 	ClientId  string      `protobuf:"bytes,7,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 	// optional
