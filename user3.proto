@@ -867,6 +867,7 @@ message DoActionResponse {
 message StartBotRequest {
 	bot.Bot bot = 2;
 	Event event = 3;
+	string mode = 4;
 }
 
 message BotEventCreated {
