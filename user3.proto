@@ -868,6 +868,8 @@ message StartBotRequest {
 	bot.Bot bot = 2;
 	Event event = 3;
 	string mode = 4;
+	string object_type = 5;
+	string object_id = 6;
 }
 
 message BotEventCreated {
