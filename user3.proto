@@ -879,3 +879,9 @@ message BotEventCreated {
 	Event event = 6;
 	int64 created = 8; // in millisecond
 }
+
+message OnEventRequest {
+	string object_type = 2;
+	string object_id = 3;
+	Event event = 4;
+}

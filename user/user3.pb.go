@@ -7089,6 +7089,69 @@ func (x *BotEventCreated) GetCreated() int64 {
 	return 0
 }
 
+type OnEventRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ObjectType string `protobuf:"bytes,2,opt,name=object_type,json=objectType,proto3" json:"object_type,omitempty"`
+	ObjectId   string `protobuf:"bytes,3,opt,name=object_id,json=objectId,proto3" json:"object_id,omitempty"`
+	Event      *Event `protobuf:"bytes,4,opt,name=event,proto3" json:"event,omitempty"`
+}
+
+func (x *OnEventRequest) Reset() {
+	*x = OnEventRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_user3_proto_msgTypes[72]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OnEventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OnEventRequest) ProtoMessage() {}
+
+func (x *OnEventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user3_proto_msgTypes[72]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OnEventRequest.ProtoReflect.Descriptor instead.
+func (*OnEventRequest) Descriptor() ([]byte, []int) {
+	return file_user3_proto_rawDescGZIP(), []int{72}
+}
+
+func (x *OnEventRequest) GetObjectType() string {
+	if x != nil {
+		return x.ObjectType
+	}
+	return ""
+}
+
+func (x *OnEventRequest) GetObjectId() string {
+	if x != nil {
+		return x.ObjectId
+	}
+	return ""
+}
+
+func (x *OnEventRequest) GetEvent() *Event {
+	if x != nil {
+		return x.Event
+	}
+	return nil
+}
+
 type Event_Data struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -7129,7 +7192,7 @@ type Event_Data struct {
 func (x *Event_Data) Reset() {
 	*x = Event_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_user3_proto_msgTypes[73]
+		mi := &file_user3_proto_msgTypes[74]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -7142,7 +7205,7 @@ func (x *Event_Data) String() string {
 func (*Event_Data) ProtoMessage() {}
 
 func (x *Event_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_user3_proto_msgTypes[73]
+	mi := &file_user3_proto_msgTypes[74]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8489,14 +8552,21 @@ var file_user3_proto_rawDesc = []byte{
 	0x21, 0x0a, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0b,
 	0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x05, 0x65, 0x76, 0x65,
 	0x6e, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x08, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x2a, 0x42, 0x0a, 0x08,
-	0x48, 0x61, 0x76, 0x65, 0x42, 0x65, 0x65, 0x6e, 0x12, 0x0b, 0x0a, 0x07, 0x75, 0x6e, 0x6b, 0x6e,
-	0x6f, 0x77, 0x6e, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x69, 0x6e, 0x63, 0x72, 0x65, 0x61, 0x73,
-	0x65, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x64, 0x65, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x10,
-	0x02, 0x12, 0x0d, 0x0a, 0x09, 0x69, 0x6d, 0x6d, 0x75, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x10, 0x03,
-	0x42, 0x1e, 0x5a, 0x1c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73,
-	0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x75, 0x73, 0x65, 0x72,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x22, 0x71, 0x0a, 0x0e,
+	0x4f, 0x6e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1f,
+	0x0a, 0x0b, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0a, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12,
+	0x1b, 0x0a, 0x09, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x05,
+	0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x75, 0x73,
+	0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x05, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x2a,
+	0x42, 0x0a, 0x08, 0x48, 0x61, 0x76, 0x65, 0x42, 0x65, 0x65, 0x6e, 0x12, 0x0b, 0x0a, 0x07, 0x75,
+	0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x69, 0x6e, 0x63, 0x72,
+	0x65, 0x61, 0x73, 0x65, 0x10, 0x01, 0x12, 0x0c, 0x0a, 0x08, 0x64, 0x65, 0x63, 0x72, 0x65, 0x61,
+	0x73, 0x65, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x69, 0x6d, 0x6d, 0x75, 0x74, 0x61, 0x62, 0x6c,
+	0x65, 0x10, 0x03, 0x42, 0x1e, 0x5a, 0x1c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x75,
+	0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -8512,7 +8582,7 @@ func file_user3_proto_rawDescGZIP() []byte {
 }
 
 var file_user3_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
-var file_user3_proto_msgTypes = make([]protoimpl.MessageInfo, 74)
+var file_user3_proto_msgTypes = make([]protoimpl.MessageInfo, 75)
 var file_user3_proto_goTypes = []interface{}{
 	(HaveBeen)(0),                          // 0: user.HaveBeen
 	(Attribute_Ops)(0),                     // 1: user.Attribute.Ops
@@ -8599,59 +8669,60 @@ var file_user3_proto_goTypes = []interface{}{
 	(*DoActionResponse)(nil),               // 82: user.DoActionResponse
 	(*StartBotRequest)(nil),                // 83: user.StartBotRequest
 	(*BotEventCreated)(nil),                // 84: user.BotEventCreated
-	nil,                                    // 85: user.UserSearchResult.UnreadCountsEntry
-	(*Event_Data)(nil),                     // 86: user.Event.Data
-	(*common.Context)(nil),                 // 87: common.Context
-	(*common.Error)(nil),                   // 88: common.Error
-	(*common.I18NText)(nil),                // 89: common.I18nText
-	(*common.By)(nil),                      // 90: common.By
-	(*SCondition)(nil),                     // 91: user.SCondition
-	(*email.Email)(nil),                    // 92: email.Email
-	(*conversation.Ticket)(nil),            // 93: conversation.Ticket
-	(*conversation.Member)(nil),            // 94: conversation.Member
-	(*bot.Action)(nil),                     // 95: bot.Action
-	(*bot.Bot)(nil),                        // 96: bot.Bot
-	(*account.Account)(nil),                // 97: account.Account
-	(*account.Agent)(nil),                  // 98: account.Agent
-	(*conversation.Message)(nil),           // 99: conversation.Message
-	(*conversation.Conversation)(nil),      // 100: conversation.Conversation
-	(*conversation.Postback)(nil),          // 101: conversation.Postback
-	(*content.Content)(nil),                // 102: content.Content
-	(*account.Presence)(nil),               // 103: account.Presence
-	(*notibox.Notification)(nil),           // 104: notibox.Notification
-	(*account.AgentPerm)(nil),              // 105: account.AgentPerm
-	(*account.GroupMember)(nil),            // 106: account.GroupMember
-	(*account.AgentGroup)(nil),             // 107: account.AgentGroup
-	(*payment.Limit)(nil),                  // 108: payment.Limit
-	(*notibox.Notibox)(nil),                // 109: notibox.Notibox
-	(*noti5.Setting)(nil),                  // 110: noti5.Setting
-	(*conversation.Rule)(nil),              // 111: conversation.Rule
-	(*conversation.Tag)(nil),               // 112: conversation.Tag
+	(*OnEventRequest)(nil),                 // 85: user.OnEventRequest
+	nil,                                    // 86: user.UserSearchResult.UnreadCountsEntry
+	(*Event_Data)(nil),                     // 87: user.Event.Data
+	(*common.Context)(nil),                 // 88: common.Context
+	(*common.Error)(nil),                   // 89: common.Error
+	(*common.I18NText)(nil),                // 90: common.I18nText
+	(*common.By)(nil),                      // 91: common.By
+	(*SCondition)(nil),                     // 92: user.SCondition
+	(*email.Email)(nil),                    // 93: email.Email
+	(*conversation.Ticket)(nil),            // 94: conversation.Ticket
+	(*conversation.Member)(nil),            // 95: conversation.Member
+	(*bot.Action)(nil),                     // 96: bot.Action
+	(*bot.Bot)(nil),                        // 97: bot.Bot
+	(*account.Account)(nil),                // 98: account.Account
+	(*account.Agent)(nil),                  // 99: account.Agent
+	(*conversation.Message)(nil),           // 100: conversation.Message
+	(*conversation.Conversation)(nil),      // 101: conversation.Conversation
+	(*conversation.Postback)(nil),          // 102: conversation.Postback
+	(*content.Content)(nil),                // 103: content.Content
+	(*account.Presence)(nil),               // 104: account.Presence
+	(*notibox.Notification)(nil),           // 105: notibox.Notification
+	(*account.AgentPerm)(nil),              // 106: account.AgentPerm
+	(*account.GroupMember)(nil),            // 107: account.GroupMember
+	(*account.AgentGroup)(nil),             // 108: account.AgentGroup
+	(*payment.Limit)(nil),                  // 109: payment.Limit
+	(*notibox.Notibox)(nil),                // 110: notibox.Notibox
+	(*noti5.Setting)(nil),                  // 111: noti5.Setting
+	(*conversation.Rule)(nil),              // 112: conversation.Rule
+	(*conversation.Tag)(nil),               // 113: conversation.Tag
 }
 var file_user3_proto_depIdxs = []int32{
-	87,  // 0: user.User.ctx:type_name -> common.Context
+	88,  // 0: user.User.ctx:type_name -> common.Context
 	13,  // 1: user.User.attributes:type_name -> user.Attribute
 	69,  // 2: user.User.session:type_name -> user.UserSession
 	14,  // 3: user.Users.users:type_name -> user.User
-	88,  // 4: user.Users.errors:type_name -> common.Error
-	87,  // 5: user.CountTotalRequest.ctx:type_name -> common.Context
-	87,  // 6: user.UserSearchResult.ctx:type_name -> common.Context
+	89,  // 4: user.Users.errors:type_name -> common.Error
+	88,  // 5: user.CountTotalRequest.ctx:type_name -> common.Context
+	88,  // 6: user.UserSearchResult.ctx:type_name -> common.Context
 	14,  // 7: user.UserSearchResult.users:type_name -> user.User
-	85,  // 8: user.UserSearchResult.unread_counts:type_name -> user.UserSearchResult.UnreadCountsEntry
-	87,  // 9: user.DeleteAttrRequest.ctx:type_name -> common.Context
-	87,  // 10: user.AttributeDefinition.ctx:type_name -> common.Context
-	89,  // 11: user.AttributeDefinition.place_holder:type_name -> common.I18nText
-	87,  // 12: user.AttributeDefinitions.ctx:type_name -> common.Context
+	86,  // 8: user.UserSearchResult.unread_counts:type_name -> user.UserSearchResult.UnreadCountsEntry
+	88,  // 9: user.DeleteAttrRequest.ctx:type_name -> common.Context
+	88,  // 10: user.AttributeDefinition.ctx:type_name -> common.Context
+	90,  // 11: user.AttributeDefinition.place_holder:type_name -> common.I18nText
+	88,  // 12: user.AttributeDefinitions.ctx:type_name -> common.Context
 	23,  // 13: user.AttributeDefinitions.attributes:type_name -> user.AttributeDefinition
-	87,  // 14: user.Identification.ctx:type_name -> common.Context
-	87,  // 15: user.Note.ctx:type_name -> common.Context
+	88,  // 14: user.Identification.ctx:type_name -> common.Context
+	88,  // 15: user.Note.ctx:type_name -> common.Context
 	28,  // 16: user.Note.links:type_name -> user.NoteLink
-	87,  // 17: user.Notes.ctx:type_name -> common.Context
+	88,  // 17: user.Notes.ctx:type_name -> common.Context
 	27,  // 18: user.Notes.notes:type_name -> user.Note
-	87,  // 19: user.ListNotesRequest.ctx:type_name -> common.Context
+	88,  // 19: user.ListNotesRequest.ctx:type_name -> common.Context
 	28,  // 20: user.ListNotesRequest.links:type_name -> user.NoteLink
 	37,  // 21: user.Locations.locations:type_name -> user.Location
-	88,  // 22: user.Locations.errors:type_name -> common.Error
+	89,  // 22: user.Locations.errors:type_name -> common.Error
 	14,  // 23: user.UserInfo.user:type_name -> user.User
 	40,  // 24: user.UserInfo.viewing:type_name -> user.Page
 	37,  // 25: user.UserInfo.location:type_name -> user.Location
@@ -8675,105 +8746,106 @@ var file_user3_proto_depIdxs = []int32{
 	45,  // 43: user.SourceMetrics.source_metrics:type_name -> user.SourceMetric
 	46,  // 44: user.LocationMetrics.location_metrics:type_name -> user.LocationMetric
 	47,  // 45: user.PageMetrics.page_metrics:type_name -> user.PageMetric
-	87,  // 46: user.Events.ctx:type_name -> common.Context
+	88,  // 46: user.Events.ctx:type_name -> common.Context
 	53,  // 47: user.Events.events:type_name -> user.Event
-	87,  // 48: user.Event.ctx:type_name -> common.Context
-	90,  // 49: user.Event.by:type_name -> common.By
-	86,  // 50: user.Event.data:type_name -> user.Event.Data
-	87,  // 51: user.ListEventsRequest.ctx:type_name -> common.Context
-	87,  // 52: user.UserEvent.ctx:type_name -> common.Context
+	88,  // 48: user.Event.ctx:type_name -> common.Context
+	91,  // 49: user.Event.by:type_name -> common.By
+	87,  // 50: user.Event.data:type_name -> user.Event.Data
+	88,  // 51: user.ListEventsRequest.ctx:type_name -> common.Context
+	88,  // 52: user.UserEvent.ctx:type_name -> common.Context
 	53,  // 53: user.UserEvent.event:type_name -> user.Event
 	14,  // 54: user.UserEvent.user:type_name -> user.User
-	87,  // 55: user.AutomationCalledback.ctx:type_name -> common.Context
+	88,  // 55: user.AutomationCalledback.ctx:type_name -> common.Context
 	53,  // 56: user.AutomationCalledback.event:type_name -> user.Event
 	60,  // 57: user.AutomationCalledback.action:type_name -> user.AutomationAction
-	87,  // 58: user.AutomationEvent.ctx:type_name -> common.Context
+	88,  // 58: user.AutomationEvent.ctx:type_name -> common.Context
 	59,  // 59: user.AutomationEvent.automation:type_name -> user.Automation
 	14,  // 60: user.AutomationEvent.user:type_name -> user.User
 	53,  // 61: user.AutomationEvent.event:type_name -> user.Event
 	60,  // 62: user.AutomationEvent.action:type_name -> user.AutomationAction
-	87,  // 63: user.Automation.ctx:type_name -> common.Context
-	91,  // 64: user.Automation.condition:type_name -> user.SCondition
+	88,  // 63: user.Automation.ctx:type_name -> common.Context
+	92,  // 64: user.Automation.condition:type_name -> user.SCondition
 	60,  // 65: user.Automation.actions:type_name -> user.AutomationAction
 	14,  // 66: user.AutomationAction.user:type_name -> user.User
-	92,  // 67: user.AutomationAction.email:type_name -> email.Email
+	93,  // 67: user.AutomationAction.email:type_name -> email.Email
 	27,  // 68: user.AutomationAction.user_note:type_name -> user.Note
 	53,  // 69: user.AutomationAction.event:type_name -> user.Event
 	53,  // 70: user.AutomationAction.events:type_name -> user.Event
-	93,  // 71: user.AutomationAction.ticket:type_name -> conversation.Ticket
+	94,  // 71: user.AutomationAction.ticket:type_name -> conversation.Ticket
 	61,  // 72: user.AutomationAction.webhook_setting:type_name -> user.AutomationWebhookSetting
-	87,  // 73: user.Automations.ctx:type_name -> common.Context
+	88,  // 73: user.Automations.ctx:type_name -> common.Context
 	59,  // 74: user.Automations.automations:type_name -> user.Automation
-	87,  // 75: user.AutomationCreditsAggregate.ctx:type_name -> common.Context
-	87,  // 76: user.AutomationCredit.ctx:type_name -> common.Context
-	87,  // 77: user.Topic.ctx:type_name -> common.Context
+	88,  // 75: user.AutomationCreditsAggregate.ctx:type_name -> common.Context
+	88,  // 76: user.AutomationCredit.ctx:type_name -> common.Context
+	88,  // 77: user.Topic.ctx:type_name -> common.Context
 	53,  // 78: user.Topic.by_event:type_name -> user.Event
-	87,  // 79: user.UnreadTopic.ctx:type_name -> common.Context
+	88,  // 79: user.UnreadTopic.ctx:type_name -> common.Context
 	53,  // 80: user.UnreadTopic.by_event:type_name -> user.Event
-	87,  // 81: user.SourceTrace.ctx:type_name -> common.Context
-	87,  // 82: user.UserSession.ctx:type_name -> common.Context
+	88,  // 81: user.SourceTrace.ctx:type_name -> common.Context
+	88,  // 82: user.UserSession.ctx:type_name -> common.Context
 	53,  // 83: user.UserSession.start_event:type_name -> user.Event
 	53,  // 84: user.UserSession.latest_event:type_name -> user.Event
 	16,  // 85: user.UserSession.campaigns:type_name -> user.Campaign
 	68,  // 86: user.UserSession.source_traces:type_name -> user.SourceTrace
 	53,  // 87: user.UserSession.latest_content_view:type_name -> user.Event
-	87,  // 88: user.AvailabilityCheckRequest.ctx:type_name -> common.Context
+	88,  // 88: user.AvailabilityCheckRequest.ctx:type_name -> common.Context
 	14,  // 89: user.AvailabilityCheckRequest.user:type_name -> user.User
-	87,  // 90: user.AvailabilityCheckResult.ctx:type_name -> common.Context
-	87,  // 91: user.StartRequest.ctx:type_name -> common.Context
+	88,  // 90: user.AvailabilityCheckResult.ctx:type_name -> common.Context
+	88,  // 91: user.StartRequest.ctx:type_name -> common.Context
 	14,  // 92: user.StartRequest.user:type_name -> user.User
-	94,  // 93: user.StartRequest.members:type_name -> conversation.Member
-	87,  // 94: user.PresencesRequest.ctx:type_name -> common.Context
-	87,  // 95: user.LeadSearchRequest.ctx:type_name -> common.Context
-	91,  // 96: user.LeadSearchRequest.condition:type_name -> user.SCondition
+	95,  // 93: user.StartRequest.members:type_name -> conversation.Member
+	88,  // 94: user.PresencesRequest.ctx:type_name -> common.Context
+	88,  // 95: user.LeadSearchRequest.ctx:type_name -> common.Context
+	92,  // 96: user.LeadSearchRequest.condition:type_name -> user.SCondition
 	76,  // 97: user.LeadSearchRequest.conditions:type_name -> user.UserAttributeCondition
-	87,  // 98: user.LeadSearchResult.ctx:type_name -> common.Context
+	88,  // 98: user.LeadSearchResult.ctx:type_name -> common.Context
 	14,  // 99: user.LeadSearchResult.users:type_name -> user.User
-	87,  // 100: user.UserReportRequest.ctx:type_name -> common.Context
-	87,  // 101: user.UserReportResult.ctx:type_name -> common.Context
+	88,  // 100: user.UserReportRequest.ctx:type_name -> common.Context
+	88,  // 101: user.UserReportResult.ctx:type_name -> common.Context
 	80,  // 102: user.UserReportResult.channels:type_name -> user.UserReportTable
 	80,  // 103: user.UserReportResult.first_interacts:type_name -> user.UserReportTable
 	80,  // 104: user.UserReportResult.channel_sources:type_name -> user.UserReportTable
-	95,  // 105: user.DoActionRequest.action:type_name -> bot.Action
+	96,  // 105: user.DoActionRequest.action:type_name -> bot.Action
 	53,  // 106: user.DoActionRequest.events:type_name -> user.Event
-	95,  // 107: user.DoActionResponse.nexts:type_name -> bot.Action
-	96,  // 108: user.StartBotRequest.bot:type_name -> bot.Bot
+	96,  // 107: user.DoActionResponse.nexts:type_name -> bot.Action
+	97,  // 108: user.StartBotRequest.bot:type_name -> bot.Bot
 	53,  // 109: user.StartBotRequest.event:type_name -> user.Event
-	87,  // 110: user.BotEventCreated.ctx:type_name -> common.Context
+	88,  // 110: user.BotEventCreated.ctx:type_name -> common.Context
 	53,  // 111: user.BotEventCreated.event:type_name -> user.Event
-	97,  // 112: user.Event.Data.account:type_name -> account.Account
-	98,  // 113: user.Event.Data.agent:type_name -> account.Agent
-	99,  // 114: user.Event.Data.message:type_name -> conversation.Message
-	100, // 115: user.Event.Data.conversation:type_name -> conversation.Conversation
-	101, // 116: user.Event.Data.postback:type_name -> conversation.Postback
-	102, // 117: user.Event.Data.content:type_name -> content.Content
-	66,  // 118: user.Event.Data.topic:type_name -> user.Topic
-	103, // 119: user.Event.Data.presence:type_name -> account.Presence
-	14,  // 120: user.Event.Data.user:type_name -> user.User
-	67,  // 121: user.Event.Data.unread_topic:type_name -> user.UnreadTopic
-	104, // 122: user.Event.Data.notification:type_name -> notibox.Notification
-	105, // 123: user.Event.Data.agent_perm:type_name -> account.AgentPerm
-	106, // 124: user.Event.Data.group_member:type_name -> account.GroupMember
-	107, // 125: user.Event.Data.group:type_name -> account.AgentGroup
-	108, // 126: user.Event.Data.limit:type_name -> payment.Limit
-	27,  // 127: user.Event.Data.note:type_name -> user.Note
-	93,  // 128: user.Event.Data.ticket:type_name -> conversation.Ticket
-	59,  // 129: user.Event.Data.automation:type_name -> user.Automation
-	53,  // 130: user.Event.Data.event:type_name -> user.Event
-	58,  // 131: user.Event.Data.automation_event:type_name -> user.AutomationEvent
-	109, // 132: user.Event.Data.notibox:type_name -> notibox.Notibox
-	110, // 133: user.Event.Data.notification_setting:type_name -> noti5.Setting
-	26,  // 134: user.Event.Data.identification:type_name -> user.Identification
-	111, // 135: user.Event.Data.rule:type_name -> conversation.Rule
-	23,  // 136: user.Event.Data.user_attribute:type_name -> user.AttributeDefinition
-	112, // 137: user.Event.Data.tag:type_name -> conversation.Tag
-	44,  // 138: user.Event.Data.total_user:type_name -> user.UserMetric
-	96,  // 139: user.Event.Data.bot:type_name -> bot.Bot
-	140, // [140:140] is the sub-list for method output_type
-	140, // [140:140] is the sub-list for method input_type
-	140, // [140:140] is the sub-list for extension type_name
-	140, // [140:140] is the sub-list for extension extendee
-	0,   // [0:140] is the sub-list for field type_name
+	53,  // 112: user.OnEventRequest.event:type_name -> user.Event
+	98,  // 113: user.Event.Data.account:type_name -> account.Account
+	99,  // 114: user.Event.Data.agent:type_name -> account.Agent
+	100, // 115: user.Event.Data.message:type_name -> conversation.Message
+	101, // 116: user.Event.Data.conversation:type_name -> conversation.Conversation
+	102, // 117: user.Event.Data.postback:type_name -> conversation.Postback
+	103, // 118: user.Event.Data.content:type_name -> content.Content
+	66,  // 119: user.Event.Data.topic:type_name -> user.Topic
+	104, // 120: user.Event.Data.presence:type_name -> account.Presence
+	14,  // 121: user.Event.Data.user:type_name -> user.User
+	67,  // 122: user.Event.Data.unread_topic:type_name -> user.UnreadTopic
+	105, // 123: user.Event.Data.notification:type_name -> notibox.Notification
+	106, // 124: user.Event.Data.agent_perm:type_name -> account.AgentPerm
+	107, // 125: user.Event.Data.group_member:type_name -> account.GroupMember
+	108, // 126: user.Event.Data.group:type_name -> account.AgentGroup
+	109, // 127: user.Event.Data.limit:type_name -> payment.Limit
+	27,  // 128: user.Event.Data.note:type_name -> user.Note
+	94,  // 129: user.Event.Data.ticket:type_name -> conversation.Ticket
+	59,  // 130: user.Event.Data.automation:type_name -> user.Automation
+	53,  // 131: user.Event.Data.event:type_name -> user.Event
+	58,  // 132: user.Event.Data.automation_event:type_name -> user.AutomationEvent
+	110, // 133: user.Event.Data.notibox:type_name -> notibox.Notibox
+	111, // 134: user.Event.Data.notification_setting:type_name -> noti5.Setting
+	26,  // 135: user.Event.Data.identification:type_name -> user.Identification
+	112, // 136: user.Event.Data.rule:type_name -> conversation.Rule
+	23,  // 137: user.Event.Data.user_attribute:type_name -> user.AttributeDefinition
+	113, // 138: user.Event.Data.tag:type_name -> conversation.Tag
+	44,  // 139: user.Event.Data.total_user:type_name -> user.UserMetric
+	97,  // 140: user.Event.Data.bot:type_name -> bot.Bot
+	141, // [141:141] is the sub-list for method output_type
+	141, // [141:141] is the sub-list for method input_type
+	141, // [141:141] is the sub-list for extension type_name
+	141, // [141:141] is the sub-list for extension extendee
+	0,   // [0:141] is the sub-list for field type_name
 }
 
 func init() { file_user3_proto_init() }
@@ -9647,7 +9719,19 @@ func file_user3_proto_init() {
 				return nil
 			}
 		}
-		file_user3_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
+		file_user3_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OnEventRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_user3_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Event_Data); i {
 			case 0:
 				return &v.state
@@ -9666,7 +9750,7 @@ func file_user3_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_user3_proto_rawDesc,
 			NumEnums:      13,
-			NumMessages:   74,
+			NumMessages:   75,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
