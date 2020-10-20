@@ -24,6 +24,7 @@ message BotRequest {
 	string user_id = 5;
 	string event_id = 6;
 	string type = 7; // start, terminate
+	int64 created = 8; // in millisecond
 }
 
 message BotCondition {

@@ -868,3 +868,14 @@ message StartBotRequest {
 	bot.Bot bot = 2;
 	Event event = 3;
 }
+
+message BotEventCreated {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string bot_id = 3;
+	string conversation_id = 4;
+	string user_id = 5; // optional
+
+	Event event = 6;
+	int64 created = 8; // in millisecond
+}
