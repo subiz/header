@@ -134,16 +134,14 @@ enum ActionType {
 	send_message = 3;
 	jump = 4;
 	send_email = 5;
-	tag = 6;
 	convert_to_ticket = 7;
 	send_webhook = 8;
-	end_chat = 11;
+	update_conversation = 11;
 	question = 12;
 	update_user = 13;
 	assign = 14;
 	send_http = 15;
 	switch_language = 16;
-	untag = 17;
 	ask_question = 18;
 }
 
@@ -173,6 +171,15 @@ message Action {
 	ActionAssign assign = 19;
 
 	int64 delay_sec = 20;
+	ActionUpdateConversation update_conversation = 21;
+	bytes internal_state = 30;
+}
+
+
+message ActionUpdateConversation {
+	repeated string tag_ids = 2;
+	repeated string untag_ids = 3;
+	bool end_conversation = 4;
 }
 
 message ActionAssign {
@@ -183,14 +190,14 @@ message ActionAssign {
 
 message ActionJump {
 	string action_id = 2;
+	bool to_first_action = 3;
 }
 
 message ActionSwitchLanguage {
-
 }
 
 message ActionSendHttp {
-	string url  = 2;
+	string url = 2;
 	string payload = 3;
 	string method = 4;
 	repeated ActionSendHttpHeader header = 5;
