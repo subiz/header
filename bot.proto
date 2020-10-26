@@ -254,3 +254,32 @@ message Condition {
 	string function = 19; // used to transform value of left side before evaluate expression
 	string name  = 20; // front end used only
 }
+
+message Metric {
+	int64 date_dim = 2;
+	string object_type = 3; // all if empty
+	int64 count = 4;
+	repeated string object_ids = 5;
+}
+
+message ReportBotRequest {
+	string account_id = 2;
+	string bot_id = 3;
+	int64 day_from = 4;
+	int64 day_to = 5;
+}
+
+message ReportBotResponse {
+	repeated Metric metrics = 2;
+}
+
+message ListObjectsRequest {
+	string account_id = 2;
+	string bot_id = 3;
+	int64 day_from = 4;
+	int64 day_to = 5;
+}
+
+message ListObjectsResponse {
+	repeated Metric metrics = 2;
+}

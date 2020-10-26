@@ -443,4 +443,6 @@ service Bizbot {
 	rpc OnEvent(user.OnEventRequest) returns (common.Empty);
 	rpc StartBot(user.StartBotRequest) returns (common.Empty);
 	rpc DoAction(user.DoActionRequest) returns (user.DoActionResponse);
+	rpc ReportBot(bot.ReportBotRequest) returns (bot.ReportBotResponse);
+	rpc ListObjects(bot.ListObjectsRequest) returns (bot.ListObjectsResponse);
 }
