@@ -259,7 +259,6 @@ message Metric {
 	int64 date_dim = 2;
 	string object_type = 3; // all if empty
 	int64 count = 4;
-	repeated string object_ids = 5;
 }
 
 message ReportBotRequest {
@@ -273,6 +272,11 @@ message ReportBotResponse {
 	repeated Metric metrics = 2;
 }
 
+message ListObjectId {
+	string object_type = 2;
+	repeated string object_ids = 5;
+}
+
 message ListObjectsRequest {
 	string account_id = 2;
 	string bot_id = 3;
@@ -281,5 +285,5 @@ message ListObjectsRequest {
 }
 
 message ListObjectsResponse {
-	repeated Metric metrics = 2;
+	repeated ListObjectId list = 2;
 }
