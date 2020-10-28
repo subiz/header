@@ -883,4 +883,5 @@ message RunRequest {
 	// payload
 	int64 created = 10;
 	Event event = 11;
+	string bot_trigger_type = 12;
 }
