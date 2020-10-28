@@ -440,9 +440,10 @@ service Bizbot {
 	rpc CreateBot(bot.Bot) returns (bot.Bot);
 	rpc UpdateBot(bot.Bot) returns (bot.Bot);
 	rpc DeleteBot(common.Id) returns (common.Empty);
-	rpc OnEvent(user.OnEventRequest) returns (common.Empty);
-	rpc StartBot(user.StartBotRequest) returns (common.Empty);
-	rpc DoAction(user.DoActionRequest) returns (user.DoActionResponse);
+	rpc OnEvent(user.RunRequest) returns (common.Empty);
+	rpc StartBot(user.RunRequest) returns (common.Empty);
+	rpc StopBot(user.RunRequest) returns (common.Empty);
+	rpc DoAction(user.RunRequest) returns (bot.Actions);
 	rpc ReportBot(bot.ReportBotRequest) returns (bot.ReportBotResponse);
 	rpc ListObjects(bot.ListObjectsRequest) returns (bot.ListObjectsResponse);
 }

@@ -855,23 +855,6 @@ message UserReportTable {
 	int64 prev_quanlified_lead_count = 9;
 }
 
-message DoActionRequest {
-	bot.Action action = 2;
-	repeated Event events = 3;
-}
-
-message DoActionResponse {
-	repeated bot.Action nexts = 2;
-}
-
-message StartBotRequest {
-	bot.Bot bot = 2;
-	Event event = 3;
-	string mode = 4;
-	string object_type = 5;
-	string object_id = 6;
-}
-
 message BotEventCreated {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -883,8 +866,21 @@ message BotEventCreated {
 	int64 created = 8; // in millisecond
 }
 
-message OnEventRequest {
-	string object_type = 2;
-	string object_id = 3;
-	Event event = 4;
+message RunRequest {
+	common.Context ctx = 1;
+	// require
+	string account_id = 2;
+	string bot_id = 3;
+	string object_type = 4;
+	string object_id = 5;
+
+	// optional
+	string mode = 6;
+	bot.Bot bot = 7;
+	string action_id = 8;
+	bot.Action action = 9;
+
+	// payload
+	int64 created = 10;
+	Event event = 11;
 }

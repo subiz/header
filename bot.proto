@@ -255,6 +255,11 @@ message Condition {
 	string name  = 20; // front end used only
 }
 
+message Actions {
+	common.Context ctx = 1;
+	repeated bot.Action actions = 2;
+}
+
 message Metric {
 	int64 date_dim = 2;
 	string object_type = 3; // all if empty
