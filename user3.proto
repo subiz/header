@@ -763,6 +763,8 @@ message StartRequest {
 	string message = 30;
 	repeated conversation.Member members = 31;
 	string group_id = 32;
+
+	string state = 33; // default is pending, should be active if dont want routing
 }
 
 message PresencesRequest {
@@ -874,7 +876,8 @@ message RunRequest {
 	string object_type = 4; // conversations
 	string object_id = 5; // conversation_id
 
-	repeated common.KV object_context = 14;
+	// user_id is inside this
+	repeated common.KV object_contexts = 14;
 
 	// optional
 	string mode = 6;
@@ -886,7 +889,6 @@ message RunRequest {
 	int64 created = 10;
 	Event event = 11;
 	string bot_trigger_type = 12;
-	string user_id = 13; // remove?
 }
 
 message RunResponse {
