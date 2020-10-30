@@ -871,8 +871,10 @@ message RunRequest {
 	// require
 	string account_id = 2;
 	string bot_id = 3;
-	string object_type = 4;
-	string object_id = 5;
+	string object_type = 4; // conversations
+	string object_id = 5; // conversation_id
+
+	repeated common.KV object_context = 14;
 
 	// optional
 	string mode = 6;
@@ -884,4 +886,5 @@ message RunRequest {
 	int64 created = 10;
 	Event event = 11;
 	string bot_trigger_type = 12;
+	string user_id = 13; // remove?
 }

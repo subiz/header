@@ -59,6 +59,11 @@ message Context {
 	string language_code = 20;
 }
 
+message KV {
+	string value = 3;
+	string key = 2;
+}
+
 message Device {
 	string ip = 3;
 	string user_agent = 4; // code

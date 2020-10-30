@@ -108,7 +108,7 @@ message Member {
 	optional string avatar_url = 6;
 
 	optional string conversation_id = 13;
-	repeated Field fields = 14;
+	repeated common.KV fields = 14;
 	optional string last_page_view_url = 15;
 	optional string membership = 12;
 	enum State {
@@ -158,7 +158,7 @@ message Conversation {
 	optional string first_message = 31;
 	optional string subject = 32;
 
-	repeated Field fields = 33;
+	repeated common.KV fields = 33;
 	repeated Rating ratings = 35;
 
 	optional string source = 36; // indicate where does the conversation happended (url)
@@ -252,7 +252,7 @@ message Message {
 	optional string format = 3;
 	repeated Attachment attachments = 4;
 
-	repeated Field fields =	10;
+	repeated common.KV fields =	10;
 
 	optional string integration_id = 15;
 	optional string chain_id = 16;
@@ -299,13 +299,8 @@ message Revision {
 	optional string text = 5;
 	optional string format = 6;
 	repeated Attachment attachments = 7;
-	repeated Field fields =	8;
+	repeated common.KV fields =	8;
 	optional int64 created = 9;
-}
-
-message Field {
-	optional string value = 3;
-	optional string key = 2;
 }
 
 message Button {
