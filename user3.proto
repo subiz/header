@@ -421,7 +421,7 @@ message Event {
 		conversation.Tag tag = 38;
 		user.UserMetric total_user = 39;
 		bot.Bot bot = 40;
-
+		RunResponse bot_run_response = 41;
 	}
 	Data data = 20;
 }
@@ -887,4 +887,17 @@ message RunRequest {
 	Event event = 11;
 	string bot_trigger_type = 12;
 	string user_id = 13; // remove?
+}
+
+message RunResponse {
+	string account_id = 2;
+	string bot_id = 3;
+	string object_type = 4;
+	string object_id = 5;
+
+	string exec_bot_id = 8;
+	string exec_bot_state = 9;
+
+	string action_id = 16;
+	string action_state = 17;
 }

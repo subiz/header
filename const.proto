@@ -408,7 +408,8 @@ enum RealtimeType {
 
 	bot_deleted = 89;
 	bot_updated = 90;
-	bot_debugging = 91;
+	bot_debug_end = 91;
+	bot_debug_begin_action = 92;
 
 	user_campaign_converted = 95;
 	user_returned = 96;
