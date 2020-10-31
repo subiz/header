@@ -101,6 +101,10 @@ message FbSender {
 
 message FbRecipient {
 	optional string id = 2;
+
+	// https://developers.facebook.com/docs/messenger-platform/discovery/private-replies
+	optional string post_id = 3;
+	optional string comment_id = 4;
 }
 
 message FbAction {
