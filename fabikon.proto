@@ -97,6 +97,7 @@ message FbMessage {
 
 message FbSender {
 	optional string id = 2;
+	optional string user_ref = 3;
 }
 
 message FbRecipient {
@@ -105,6 +106,8 @@ message FbRecipient {
 	// https://developers.facebook.com/docs/messenger-platform/discovery/private-replies
 	optional string post_id = 3;
 	optional string comment_id = 4;
+
+	optional string user_ref = 5;
 }
 
 message FbAction {
