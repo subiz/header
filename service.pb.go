@@ -404,28 +404,28 @@ var file_service_proto_rawDesc = []byte{
 	0x74, 0x2e, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x2f, 0x0a, 0x0e, 0x55, 0x70,
 	0x64, 0x61, 0x74, 0x65, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x0a, 0x2e, 0x63,
 	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a, 0x11, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x32, 0xbe, 0x02, 0x0a, 0x07,
-	0x52, 0x75, 0x6c, 0x65, 0x4d, 0x67, 0x72, 0x12, 0x44, 0x0a, 0x0a, 0x41, 0x73, 0x73, 0x69, 0x67,
-	0x6e, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x1b, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x41, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x19, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x2e, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x34, 0x0a,
-	0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x12, 0x2e, 0x63, 0x6f,
+	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x32, 0xf8, 0x01, 0x0a, 0x07,
+	0x52, 0x75, 0x6c, 0x65, 0x4d, 0x67, 0x72, 0x12, 0x34, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x12, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x1a, 0x12, 0x2e, 0x63, 0x6f, 0x6e, 0x76,
+	0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x34, 0x0a,
+	0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x12, 0x2e, 0x63, 0x6f,
 	0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x1a,
 	0x12, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52,
-	0x75, 0x6c, 0x65, 0x12, 0x34, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x52, 0x75, 0x6c,
-	0x65, 0x12, 0x12, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x2e, 0x52, 0x75, 0x6c, 0x65, 0x1a, 0x12, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x27, 0x0a, 0x0a, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
-	0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x12, 0x2a, 0x0a, 0x08, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x0a,
-	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a, 0x12, 0x2e, 0x63, 0x6f, 0x6e,
-	0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x2c,
-	0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x0a, 0x2e, 0x63, 0x6f,
-	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a, 0x13, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72,
-	0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x32, 0xd8, 0x0b, 0x0a,
-	0x0f, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x67, 0x72,
+	0x75, 0x6c, 0x65, 0x12, 0x27, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x75, 0x6c,
+	0x65, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e,
+	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2a, 0x0a, 0x08,
+	0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
+	0x6e, 0x2e, 0x49, 0x64, 0x1a, 0x12, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x2c, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74,
+	0x52, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49,
+	0x64, 0x1a, 0x13, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x2e, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x32, 0x9e, 0x0c, 0x0a, 0x0f, 0x43, 0x6f, 0x6e, 0x76, 0x65,
+	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x67, 0x72, 0x12, 0x44, 0x0a, 0x0a, 0x41, 0x73,
+	0x73, 0x69, 0x67, 0x6e, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x1b, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65,
+	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x41, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74,
 	0x12, 0x27, 0x0a, 0x0b, 0x50, 0x6f, 0x6e, 0x67, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
 	0x0b, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x1a, 0x0b, 0x2e, 0x75,
 	0x73, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x43, 0x0a, 0x11, 0x53, 0x74, 0x61,
@@ -1137,8 +1137,8 @@ var file_service_proto_goTypes = []interface{}{
 	(*conversation.CountReportRequest)(nil),         // 45: conversation.CountReportRequest
 	(*conversation.ReportConversationsRequest)(nil), // 46: conversation.ReportConversationsRequest
 	(*conversation.AvailibilityReportRequest)(nil),  // 47: conversation.AvailibilityReportRequest
-	(*conversation.AssignRequest)(nil),              // 48: conversation.AssignRequest
-	(*conversation.Rule)(nil),                       // 49: conversation.Rule
+	(*conversation.Rule)(nil),                       // 48: conversation.Rule
+	(*conversation.AssignRequest)(nil),              // 49: conversation.AssignRequest
 	(*user.Event)(nil),                              // 50: user.Event
 	(*user.StartRequest)(nil),                       // 51: user.StartRequest
 	(*conversation.ListConversationsRequest)(nil),   // 52: conversation.ListConversationsRequest
@@ -1250,8 +1250,8 @@ var file_service_proto_goTypes = []interface{}{
 	(*conversation.TotalConversationResponse)(nil),  // 158: conversation.TotalConversationResponse
 	(*conversation.ReportResponse)(nil),             // 159: conversation.ReportResponse
 	(*account.Presence)(nil),                        // 160: account.Presence
-	(*conversation.RouteResult)(nil),                // 161: conversation.RouteResult
-	(*conversation.Route)(nil),                      // 162: conversation.Route
+	(*conversation.Route)(nil),                      // 161: conversation.Route
+	(*conversation.RouteResult)(nil),                // 162: conversation.RouteResult
 	(*conversation.Conversations)(nil),              // 163: conversation.Conversations
 	(*conversation.FilterUserResponse)(nil),         // 164: conversation.FilterUserResponse
 	(*conversation.SearchConversationResponse)(nil), // 165: conversation.SearchConversationResponse
@@ -1398,12 +1398,12 @@ var file_service_proto_depIdxs = []int32{
 	47,  // 88: header.ConversationReporter.ReportAvailibilities:input_type -> conversation.AvailibilityReportRequest
 	2,   // 89: header.AgentPresenceMgr.ReadPresence:input_type -> common.Id
 	2,   // 90: header.AgentPresenceMgr.UpdatePresence:input_type -> common.Id
-	48,  // 91: header.RuleMgr.AssignRule:input_type -> conversation.AssignRequest
-	49,  // 92: header.RuleMgr.UpdateRule:input_type -> conversation.Rule
-	49,  // 93: header.RuleMgr.CreateRule:input_type -> conversation.Rule
-	2,   // 94: header.RuleMgr.DeleteRule:input_type -> common.Id
-	2,   // 95: header.RuleMgr.ReadRule:input_type -> common.Id
-	2,   // 96: header.RuleMgr.ListRules:input_type -> common.Id
+	48,  // 91: header.RuleMgr.UpdateRule:input_type -> conversation.Rule
+	48,  // 92: header.RuleMgr.CreateRule:input_type -> conversation.Rule
+	2,   // 93: header.RuleMgr.DeleteRule:input_type -> common.Id
+	2,   // 94: header.RuleMgr.ReadRule:input_type -> common.Id
+	2,   // 95: header.RuleMgr.ListRules:input_type -> common.Id
+	49,  // 96: header.ConversationMgr.AssignRule:input_type -> conversation.AssignRequest
 	50,  // 97: header.ConversationMgr.PongMessage:input_type -> user.Event
 	51,  // 98: header.ConversationMgr.StartConversation:input_type -> user.StartRequest
 	2,   // 99: header.ConversationMgr.EndConversation:input_type -> common.Id
@@ -1669,12 +1669,12 @@ var file_service_proto_depIdxs = []int32{
 	159, // 359: header.ConversationReporter.ReportAvailibilities:output_type -> conversation.ReportResponse
 	160, // 360: header.AgentPresenceMgr.ReadPresence:output_type -> account.Presence
 	160, // 361: header.AgentPresenceMgr.UpdatePresence:output_type -> account.Presence
-	161, // 362: header.RuleMgr.AssignRule:output_type -> conversation.RouteResult
-	49,  // 363: header.RuleMgr.UpdateRule:output_type -> conversation.Rule
-	49,  // 364: header.RuleMgr.CreateRule:output_type -> conversation.Rule
-	12,  // 365: header.RuleMgr.DeleteRule:output_type -> common.Empty
-	49,  // 366: header.RuleMgr.ReadRule:output_type -> conversation.Rule
-	162, // 367: header.RuleMgr.ListRules:output_type -> conversation.Route
+	48,  // 362: header.RuleMgr.UpdateRule:output_type -> conversation.Rule
+	48,  // 363: header.RuleMgr.CreateRule:output_type -> conversation.Rule
+	12,  // 364: header.RuleMgr.DeleteRule:output_type -> common.Empty
+	48,  // 365: header.RuleMgr.ReadRule:output_type -> conversation.Rule
+	161, // 366: header.RuleMgr.ListRules:output_type -> conversation.Route
+	162, // 367: header.ConversationMgr.AssignRule:output_type -> conversation.RouteResult
 	50,  // 368: header.ConversationMgr.PongMessage:output_type -> user.Event
 	55,  // 369: header.ConversationMgr.StartConversation:output_type -> conversation.Conversation
 	55,  // 370: header.ConversationMgr.EndConversation:output_type -> conversation.Conversation
@@ -5642,7 +5642,6 @@ var _AgentPresenceMgr_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type RuleMgrClient interface {
-	AssignRule(ctx context.Context, in *conversation.AssignRequest, opts ...grpc.CallOption) (*conversation.RouteResult, error)
 	UpdateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error)
 	CreateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error)
 	DeleteRule(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
@@ -5656,15 +5655,6 @@ type ruleMgrClient struct {
 
 func NewRuleMgrClient(cc grpc.ClientConnInterface) RuleMgrClient {
 	return &ruleMgrClient{cc}
-}
-
-func (c *ruleMgrClient) AssignRule(ctx context.Context, in *conversation.AssignRequest, opts ...grpc.CallOption) (*conversation.RouteResult, error) {
-	out := new(conversation.RouteResult)
-	err := c.cc.Invoke(ctx, "/header.RuleMgr/AssignRule", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *ruleMgrClient) UpdateRule(ctx context.Context, in *conversation.Rule, opts ...grpc.CallOption) (*conversation.Rule, error) {
@@ -5714,7 +5704,6 @@ func (c *ruleMgrClient) ListRules(ctx context.Context, in *common.Id, opts ...gr
 
 // RuleMgrServer is the server API for RuleMgr service.
 type RuleMgrServer interface {
-	AssignRule(context.Context, *conversation.AssignRequest) (*conversation.RouteResult, error)
 	UpdateRule(context.Context, *conversation.Rule) (*conversation.Rule, error)
 	CreateRule(context.Context, *conversation.Rule) (*conversation.Rule, error)
 	DeleteRule(context.Context, *common.Id) (*common.Empty, error)
@@ -5726,9 +5715,6 @@ type RuleMgrServer interface {
 type UnimplementedRuleMgrServer struct {
 }
 
-func (*UnimplementedRuleMgrServer) AssignRule(context.Context, *conversation.AssignRequest) (*conversation.RouteResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AssignRule not implemented")
-}
 func (*UnimplementedRuleMgrServer) UpdateRule(context.Context, *conversation.Rule) (*conversation.Rule, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRule not implemented")
 }
@@ -5747,24 +5733,6 @@ func (*UnimplementedRuleMgrServer) ListRules(context.Context, *common.Id) (*conv
 
 func RegisterRuleMgrServer(s *grpc.Server, srv RuleMgrServer) {
 	s.RegisterService(&_RuleMgr_serviceDesc, srv)
-}
-
-func _RuleMgr_AssignRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(conversation.AssignRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(RuleMgrServer).AssignRule(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.RuleMgr/AssignRule",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RuleMgrServer).AssignRule(ctx, req.(*conversation.AssignRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _RuleMgr_UpdateRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -5862,10 +5830,6 @@ var _RuleMgr_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*RuleMgrServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AssignRule",
-			Handler:    _RuleMgr_AssignRule_Handler,
-		},
-		{
 			MethodName: "UpdateRule",
 			Handler:    _RuleMgr_UpdateRule_Handler,
 		},
@@ -5894,6 +5858,7 @@ var _RuleMgr_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ConversationMgrClient interface {
+	AssignRule(ctx context.Context, in *conversation.AssignRequest, opts ...grpc.CallOption) (*conversation.RouteResult, error)
 	PongMessage(ctx context.Context, in *user.Event, opts ...grpc.CallOption) (*user.Event, error)
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	StartConversation(ctx context.Context, in *user.StartRequest, opts ...grpc.CallOption) (*conversation.Conversation, error)
@@ -5925,6 +5890,15 @@ type conversationMgrClient struct {
 
 func NewConversationMgrClient(cc grpc.ClientConnInterface) ConversationMgrClient {
 	return &conversationMgrClient{cc}
+}
+
+func (c *conversationMgrClient) AssignRule(ctx context.Context, in *conversation.AssignRequest, opts ...grpc.CallOption) (*conversation.RouteResult, error) {
+	out := new(conversation.RouteResult)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/AssignRule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *conversationMgrClient) PongMessage(ctx context.Context, in *user.Event, opts ...grpc.CallOption) (*user.Event, error) {
@@ -6127,6 +6101,7 @@ func (c *conversationMgrClient) GetEndchatSetting(ctx context.Context, in *commo
 
 // ConversationMgrServer is the server API for ConversationMgr service.
 type ConversationMgrServer interface {
+	AssignRule(context.Context, *conversation.AssignRequest) (*conversation.RouteResult, error)
 	PongMessage(context.Context, *user.Event) (*user.Event, error)
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	StartConversation(context.Context, *user.StartRequest) (*conversation.Conversation, error)
@@ -6156,6 +6131,9 @@ type ConversationMgrServer interface {
 type UnimplementedConversationMgrServer struct {
 }
 
+func (*UnimplementedConversationMgrServer) AssignRule(context.Context, *conversation.AssignRequest) (*conversation.RouteResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AssignRule not implemented")
+}
 func (*UnimplementedConversationMgrServer) PongMessage(context.Context, *user.Event) (*user.Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PongMessage not implemented")
 }
@@ -6225,6 +6203,24 @@ func (*UnimplementedConversationMgrServer) GetEndchatSetting(context.Context, *c
 
 func RegisterConversationMgrServer(s *grpc.Server, srv ConversationMgrServer) {
 	s.RegisterService(&_ConversationMgr_serviceDesc, srv)
+}
+
+func _ConversationMgr_AssignRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(conversation.AssignRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).AssignRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.ConversationMgr/AssignRule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).AssignRule(ctx, req.(*conversation.AssignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _ConversationMgr_PongMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -6627,6 +6623,10 @@ var _ConversationMgr_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "header.ConversationMgr",
 	HandlerType: (*ConversationMgrServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "AssignRule",
+			Handler:    _ConversationMgr_AssignRule_Handler,
+		},
 		{
 			MethodName: "PongMessage",
 			Handler:    _ConversationMgr_PongMessage_Handler,

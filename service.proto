@@ -171,7 +171,6 @@ service AgentPresenceMgr {
 }
 
 service RuleMgr {
-	rpc AssignRule(conversation.AssignRequest) returns (conversation.RouteResult);
 	rpc UpdateRule(conversation.Rule) returns (conversation.Rule);
 	rpc CreateRule(conversation.Rule) returns (conversation.Rule);
 	rpc DeleteRule(common.Id) returns (common.Empty);
@@ -180,6 +179,7 @@ service RuleMgr {
 }
 
 service ConversationMgr {
+	rpc AssignRule(conversation.AssignRequest) returns (conversation.RouteResult);
 	rpc PongMessage(user.Event) returns (user.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(user.StartRequest) returns (conversation.Conversation);
