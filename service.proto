@@ -171,6 +171,7 @@ service AgentPresenceMgr {
 }
 
 service RuleMgr {
+	rpc AssignRule(conversation.AssignRequest) returns (conversation.RouteResult);
 	rpc UpdateRule(conversation.Rule) returns (conversation.Rule);
 	rpc CreateRule(conversation.Rule) returns (conversation.Rule);
 	rpc DeleteRule(common.Id) returns (common.Empty);

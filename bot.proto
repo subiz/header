@@ -168,7 +168,7 @@ message Action {
 	ActionSwitchLanguage switch_language = 16;
 	ActionSendHttp send_http = 17;
 	ActionAskQuestion ask_question = 18;
-	ActionAssign assign = 19;
+	conversation.AssignRequest assign = 19;
 
 	int64 delay_sec = 20;
 	ActionUpdateConversation update_conversation = 21;
@@ -180,12 +180,6 @@ message ActionUpdateConversation {
 	repeated string tag_ids = 2;
 	repeated string untag_ids = 3;
 	bool end_conversation = 4;
-}
-
-message ActionAssign {
-	string strategy = 5;
-	repeated string assign_tos = 6;
-	bool available_agents_only = 13; // strategy
 }
 
 message ActionJump {

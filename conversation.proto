@@ -1137,3 +1137,15 @@ message EndchatSetting {
 	optional EndchatConnectorSetting global_setting = 4;
 	optional int64 updated = 5;
 }
+
+message AssignRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string conversation_id = 3;
+	optional string user_id = 4;
+	optional bool use_rule = 5;
+
+	optional string strategy = 6;
+	repeated string assign_tos = 7;
+	optional bool available_agents_only = 8; // strategy
+}

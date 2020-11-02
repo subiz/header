@@ -9633,6 +9633,109 @@ func (x *EndchatSetting) GetUpdated() int64 {
 	return 0
 }
 
+type AssignRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx                 *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId           *string         `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	ConversationId      *string         `protobuf:"bytes,3,opt,name=conversation_id,json=conversationId" json:"conversation_id,omitempty"`
+	UserId              *string         `protobuf:"bytes,4,opt,name=user_id,json=userId" json:"user_id,omitempty"`
+	UseRule             *bool           `protobuf:"varint,5,opt,name=use_rule,json=useRule" json:"use_rule,omitempty"`
+	Strategy            *string         `protobuf:"bytes,6,opt,name=strategy" json:"strategy,omitempty"`
+	AssignTos           []string        `protobuf:"bytes,7,rep,name=assign_tos,json=assignTos" json:"assign_tos,omitempty"`
+	AvailableAgentsOnly *bool           `protobuf:"varint,8,opt,name=available_agents_only,json=availableAgentsOnly" json:"available_agents_only,omitempty"` // strategy
+}
+
+func (x *AssignRequest) Reset() {
+	*x = AssignRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_conversation_proto_msgTypes[83]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AssignRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AssignRequest) ProtoMessage() {}
+
+func (x *AssignRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_conversation_proto_msgTypes[83]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AssignRequest.ProtoReflect.Descriptor instead.
+func (*AssignRequest) Descriptor() ([]byte, []int) {
+	return file_conversation_proto_rawDescGZIP(), []int{83}
+}
+
+func (x *AssignRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *AssignRequest) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *AssignRequest) GetConversationId() string {
+	if x != nil && x.ConversationId != nil {
+		return *x.ConversationId
+	}
+	return ""
+}
+
+func (x *AssignRequest) GetUserId() string {
+	if x != nil && x.UserId != nil {
+		return *x.UserId
+	}
+	return ""
+}
+
+func (x *AssignRequest) GetUseRule() bool {
+	if x != nil && x.UseRule != nil {
+		return *x.UseRule
+	}
+	return false
+}
+
+func (x *AssignRequest) GetStrategy() string {
+	if x != nil && x.Strategy != nil {
+		return *x.Strategy
+	}
+	return ""
+}
+
+func (x *AssignRequest) GetAssignTos() []string {
+	if x != nil {
+		return x.AssignTos
+	}
+	return nil
+}
+
+func (x *AssignRequest) GetAvailableAgentsOnly() bool {
+	if x != nil && x.AvailableAgentsOnly != nil {
+		return *x.AvailableAgentsOnly
+	}
+	return false
+}
+
 type ESConversation_ResponseTime struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -9645,7 +9748,7 @@ type ESConversation_ResponseTime struct {
 func (x *ESConversation_ResponseTime) Reset() {
 	*x = ESConversation_ResponseTime{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_conversation_proto_msgTypes[85]
+		mi := &file_conversation_proto_msgTypes[86]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -9658,7 +9761,7 @@ func (x *ESConversation_ResponseTime) String() string {
 func (*ESConversation_ResponseTime) ProtoMessage() {}
 
 func (x *ESConversation_ResponseTime) ProtoReflect() protoreflect.Message {
-	mi := &file_conversation_proto_msgTypes[85]
+	mi := &file_conversation_proto_msgTypes[86]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11173,7 +11276,25 @@ var file_conversation_proto_rawDesc = []byte{
 	0x6e, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x0d, 0x67,
 	0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x18, 0x0a, 0x07,
 	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x75,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x2a, 0x89, 0x01, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x22, 0x9d, 0x02, 0x0a, 0x0d, 0x41, 0x73, 0x73, 0x69, 0x67,
+	0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43,
+	0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x27, 0x0a, 0x0f, 0x63, 0x6f,
+	0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08,
+	0x75, 0x73, 0x65, 0x5f, 0x72, 0x75, 0x6c, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07,
+	0x75, 0x73, 0x65, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x73, 0x74, 0x72, 0x61, 0x74,
+	0x65, 0x67, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x74, 0x72, 0x61, 0x74,
+	0x65, 0x67, 0x79, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x74, 0x6f,
+	0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x54,
+	0x6f, 0x73, 0x12, 0x32, 0x0a, 0x15, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x5f,
+	0x61, 0x67, 0x65, 0x6e, 0x74, 0x73, 0x5f, 0x6f, 0x6e, 0x6c, 0x79, 0x18, 0x08, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x13, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x6c, 0x65, 0x41, 0x67, 0x65, 0x6e,
+	0x74, 0x73, 0x4f, 0x6e, 0x6c, 0x79, 0x2a, 0x89, 0x01, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65,
 	0x12, 0x08, 0x0a, 0x04, 0x6e, 0x6f, 0x6e, 0x65, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x75, 0x6e,
 	0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x10, 0x02, 0x12, 0x0a, 0x0a, 0x06, 0x61, 0x63,
 	0x74, 0x69, 0x76, 0x65, 0x10, 0x06, 0x12, 0x09, 0x0a, 0x05, 0x65, 0x6e, 0x64, 0x65, 0x64, 0x10,
@@ -11290,7 +11411,7 @@ func file_conversation_proto_rawDescGZIP() []byte {
 }
 
 var file_conversation_proto_enumTypes = make([]protoimpl.EnumInfo, 20)
-var file_conversation_proto_msgTypes = make([]protoimpl.MessageInfo, 86)
+var file_conversation_proto_msgTypes = make([]protoimpl.MessageInfo, 87)
 var file_conversation_proto_goTypes = []interface{}{
 	(State)(0),                                        // 0: conversation.State
 	(AttachmentType)(0),                               // 1: conversation.AttachmentType
@@ -11395,50 +11516,51 @@ var file_conversation_proto_goTypes = []interface{}{
 	(*ReportConversationsRequest)(nil),                // 100: conversation.ReportConversationsRequest
 	(*EndchatConnectorSetting)(nil),                   // 101: conversation.EndchatConnectorSetting
 	(*EndchatSetting)(nil),                            // 102: conversation.EndchatSetting
-	nil,                                               // 103: conversation.ConversationMetadata.FirstAgentRepliedEntry
-	nil,                                               // 104: conversation.ConversationMetadata.AgentJoinedEntry
-	(*ESConversation_ResponseTime)(nil),               // 105: conversation.ESConversation.ResponseTime
-	(*common.Context)(nil),                            // 106: common.Context
-	(*common.KV)(nil),                                 // 107: common.KV
-	(*common.By)(nil),                                 // 108: common.By
-	(*common.Error)(nil),                              // 109: common.Error
-	(*common.I18NText)(nil),                           // 110: common.I18nText
+	(*AssignRequest)(nil),                             // 103: conversation.AssignRequest
+	nil,                                               // 104: conversation.ConversationMetadata.FirstAgentRepliedEntry
+	nil,                                               // 105: conversation.ConversationMetadata.AgentJoinedEntry
+	(*ESConversation_ResponseTime)(nil),               // 106: conversation.ESConversation.ResponseTime
+	(*common.Context)(nil),                            // 107: common.Context
+	(*common.KV)(nil),                                 // 108: common.KV
+	(*common.By)(nil),                                 // 109: common.By
+	(*common.Error)(nil),                              // 110: common.Error
+	(*common.I18NText)(nil),                           // 111: common.I18nText
 }
 var file_conversation_proto_depIdxs = []int32{
-	106, // 0: conversation.Rule.ctx:type_name -> common.Context
+	107, // 0: conversation.Rule.ctx:type_name -> common.Context
 	23,  // 1: conversation.Rule.channel_condition:type_name -> conversation.ChannelCondition
 	22,  // 2: conversation.Rule.timming_condition:type_name -> conversation.TimmingCondition
 	21,  // 3: conversation.Rule.user_conditions:type_name -> conversation.UserAttributeCondition
 	24,  // 4: conversation.ChannelCondition.locations:type_name -> conversation.LocationCondition
 	24,  // 5: conversation.ChannelCondition.not_in_locations:type_name -> conversation.LocationCondition
-	106, // 6: conversation.Route.ctx:type_name -> common.Context
+	107, // 6: conversation.Route.ctx:type_name -> common.Context
 	20,  // 7: conversation.Route.rules:type_name -> conversation.Rule
-	106, // 8: conversation.Member.ctx:type_name -> common.Context
-	107, // 9: conversation.Member.fields:type_name -> common.KV
-	108, // 10: conversation.Member.invited_by:type_name -> common.By
-	106, // 11: conversation.Conversation.ctx:type_name -> common.Context
+	107, // 8: conversation.Member.ctx:type_name -> common.Context
+	108, // 9: conversation.Member.fields:type_name -> common.KV
+	109, // 10: conversation.Member.invited_by:type_name -> common.By
+	107, // 11: conversation.Conversation.ctx:type_name -> common.Context
 	27,  // 12: conversation.Conversation.members:type_name -> conversation.Member
 	49,  // 13: conversation.Conversation.tags:type_name -> conversation.Tag
 	57,  // 14: conversation.Conversation.integration:type_name -> conversation.Integration
 	36,  // 15: conversation.Conversation.last_message:type_name -> conversation.Message
 	67,  // 16: conversation.Conversation.ticket:type_name -> conversation.Ticket
 	26,  // 17: conversation.Conversation.assigned_to:type_name -> conversation.RouteResult
-	107, // 18: conversation.Conversation.fields:type_name -> common.KV
+	108, // 18: conversation.Conversation.fields:type_name -> common.KV
 	29,  // 19: conversation.Conversation.ratings:type_name -> conversation.Rating
-	106, // 20: conversation.Conversations.ctx:type_name -> common.Context
+	107, // 20: conversation.Conversations.ctx:type_name -> common.Context
 	28,  // 21: conversation.Conversations.conversations:type_name -> conversation.Conversation
-	109, // 22: conversation.Conversations.errors:type_name -> common.Error
-	106, // 23: conversation.Search.ctx:type_name -> common.Context
-	106, // 24: conversation.ListConversationsRequest.ctx:type_name -> common.Context
-	106, // 25: conversation.ListEventsRequest.ctx:type_name -> common.Context
-	106, // 26: conversation.Message.ctx:type_name -> common.Context
-	110, // 27: conversation.Message.i18n_text:type_name -> common.I18nText
+	110, // 22: conversation.Conversations.errors:type_name -> common.Error
+	107, // 23: conversation.Search.ctx:type_name -> common.Context
+	107, // 24: conversation.ListConversationsRequest.ctx:type_name -> common.Context
+	107, // 25: conversation.ListEventsRequest.ctx:type_name -> common.Context
+	107, // 26: conversation.Message.ctx:type_name -> common.Context
+	111, // 27: conversation.Message.i18n_text:type_name -> common.I18nText
 	44,  // 28: conversation.Message.attachments:type_name -> conversation.Attachment
-	107, // 29: conversation.Message.fields:type_name -> common.KV
+	108, // 29: conversation.Message.fields:type_name -> common.KV
 	37,  // 30: conversation.Message.pongs:type_name -> conversation.MessagePong
 	38,  // 31: conversation.Message.revisions:type_name -> conversation.Revision
 	44,  // 32: conversation.Revision.attachments:type_name -> conversation.Attachment
-	107, // 33: conversation.Revision.fields:type_name -> common.KV
+	108, // 33: conversation.Revision.fields:type_name -> common.KV
 	39,  // 34: conversation.ContentTemplate.default_action:type_name -> conversation.Button
 	39,  // 35: conversation.ContentTemplate.buttons:type_name -> conversation.Button
 	39,  // 36: conversation.GenericElementTemplate.default_action:type_name -> conversation.Button
@@ -11453,52 +11575,52 @@ var file_conversation_proto_depIdxs = []int32{
 	45,  // 45: conversation.Attachment.quick_replies:type_name -> conversation.QuickReply
 	48,  // 46: conversation.Form.fields:type_name -> conversation.FormField
 	48,  // 47: conversation.FormSubmit.fields:type_name -> conversation.FormField
-	106, // 48: conversation.Tag.ctx:type_name -> common.Context
-	106, // 49: conversation.Template.ctx:type_name -> common.Context
+	107, // 48: conversation.Tag.ctx:type_name -> common.Context
+	107, // 49: conversation.Template.ctx:type_name -> common.Context
 	36,  // 50: conversation.Template.message:type_name -> conversation.Message
 	50,  // 51: conversation.Template.data:type_name -> conversation.TemplateData
-	106, // 52: conversation.SearchTemplate.ctx:type_name -> common.Context
-	106, // 53: conversation.Templates.ctx:type_name -> common.Context
+	107, // 52: conversation.SearchTemplate.ctx:type_name -> common.Context
+	107, // 53: conversation.Templates.ctx:type_name -> common.Context
 	51,  // 54: conversation.Templates.templates:type_name -> conversation.Template
-	106, // 55: conversation.Tags.ctx:type_name -> common.Context
+	107, // 55: conversation.Tags.ctx:type_name -> common.Context
 	49,  // 56: conversation.Tags.tags:type_name -> conversation.Tag
 	36,  // 57: conversation.Postback.message:type_name -> conversation.Message
 	39,  // 58: conversation.Postback.button:type_name -> conversation.Button
-	106, // 59: conversation.Integrations.ctx:type_name -> common.Context
+	107, // 59: conversation.Integrations.ctx:type_name -> common.Context
 	57,  // 60: conversation.Integrations.integrations:type_name -> conversation.Integration
-	106, // 61: conversation.Integration.ctx:type_name -> common.Context
-	106, // 62: conversation.SearchMessageRequest.ctx:type_name -> common.Context
-	106, // 63: conversation.TagRequest.ctx:type_name -> common.Context
+	107, // 61: conversation.Integration.ctx:type_name -> common.Context
+	107, // 62: conversation.SearchMessageRequest.ctx:type_name -> common.Context
+	107, // 63: conversation.TagRequest.ctx:type_name -> common.Context
 	61,  // 64: conversation.CountByTagsResponse.data:type_name -> conversation.CountByTag
-	106, // 65: conversation.Ticket.ctx:type_name -> common.Context
+	107, // 65: conversation.Ticket.ctx:type_name -> common.Context
 	71,  // 66: conversation.Ticket.attributes:type_name -> conversation.TicketAttributeData
-	106, // 67: conversation.TicketListRequest.ctx:type_name -> common.Context
+	107, // 67: conversation.TicketListRequest.ctx:type_name -> common.Context
 	88,  // 68: conversation.TicketListRequest.created:type_name -> conversation.FilterCondition
-	106, // 69: conversation.Tickets.ctx:type_name -> common.Context
+	107, // 69: conversation.Tickets.ctx:type_name -> common.Context
 	67,  // 70: conversation.Tickets.tickets:type_name -> conversation.Ticket
-	106, // 71: conversation.ESTickets.ctx:type_name -> common.Context
+	107, // 71: conversation.ESTickets.ctx:type_name -> common.Context
 	96,  // 72: conversation.ESTickets.tickets:type_name -> conversation.ESTicket
-	106, // 73: conversation.TicketAttributeData.ctx:type_name -> common.Context
-	106, // 74: conversation.ServiceLevelAgreement.ctx:type_name -> common.Context
+	107, // 73: conversation.TicketAttributeData.ctx:type_name -> common.Context
+	107, // 74: conversation.ServiceLevelAgreement.ctx:type_name -> common.Context
 	72,  // 75: conversation.ServiceLevelAgreement.targets:type_name -> conversation.ServiceLevelAgreementTarget
-	106, // 76: conversation.ServiceLevelAgreements.ctx:type_name -> common.Context
+	107, // 76: conversation.ServiceLevelAgreements.ctx:type_name -> common.Context
 	73,  // 77: conversation.ServiceLevelAgreements.service_level_agreements:type_name -> conversation.ServiceLevelAgreement
-	106, // 78: conversation.DeleteTicketAttrRequest.ctx:type_name -> common.Context
-	106, // 79: conversation.GetTicketRequest.ctx:type_name -> common.Context
-	106, // 80: conversation.DeleteTicketRequest.ctx:type_name -> common.Context
-	106, // 81: conversation.AvailibilityReportRequest.ctx:type_name -> common.Context
-	106, // 82: conversation.CountReportRequest.ctx:type_name -> common.Context
-	106, // 83: conversation.ReportResponse.ctx:type_name -> common.Context
-	106, // 84: conversation.ConversationAgg.ctx:type_name -> common.Context
-	103, // 85: conversation.ConversationMetadata.first_agent_replied:type_name -> conversation.ConversationMetadata.FirstAgentRepliedEntry
-	104, // 86: conversation.ConversationMetadata.agent_joined:type_name -> conversation.ConversationMetadata.AgentJoinedEntry
+	107, // 78: conversation.DeleteTicketAttrRequest.ctx:type_name -> common.Context
+	107, // 79: conversation.GetTicketRequest.ctx:type_name -> common.Context
+	107, // 80: conversation.DeleteTicketRequest.ctx:type_name -> common.Context
+	107, // 81: conversation.AvailibilityReportRequest.ctx:type_name -> common.Context
+	107, // 82: conversation.CountReportRequest.ctx:type_name -> common.Context
+	107, // 83: conversation.ReportResponse.ctx:type_name -> common.Context
+	107, // 84: conversation.ConversationAgg.ctx:type_name -> common.Context
+	104, // 85: conversation.ConversationMetadata.first_agent_replied:type_name -> conversation.ConversationMetadata.FirstAgentRepliedEntry
+	105, // 86: conversation.ConversationMetadata.agent_joined:type_name -> conversation.ConversationMetadata.AgentJoinedEntry
 	88,  // 87: conversation.FilterUserRequest.conversation_created:type_name -> conversation.FilterCondition
 	88,  // 88: conversation.SearchConversationRequest.message_created:type_name -> conversation.FilterCondition
 	94,  // 89: conversation.SearchConversationResponse.result:type_name -> conversation.ESConversationMessage
-	105, // 90: conversation.ESConversation.response_times:type_name -> conversation.ESConversation.ResponseTime
-	106, // 91: conversation.UpdateUserSegmentRequest.ctx:type_name -> common.Context
-	106, // 92: conversation.ESTicket.ctx:type_name -> common.Context
-	106, // 93: conversation.ConversationListRequest.ctx:type_name -> common.Context
+	106, // 90: conversation.ESConversation.response_times:type_name -> conversation.ESConversation.ResponseTime
+	107, // 91: conversation.UpdateUserSegmentRequest.ctx:type_name -> common.Context
+	107, // 92: conversation.ESTicket.ctx:type_name -> common.Context
+	107, // 93: conversation.ConversationListRequest.ctx:type_name -> common.Context
 	88,  // 94: conversation.ConversationListRequest.agent_replied_at:type_name -> conversation.FilterCondition
 	88,  // 95: conversation.ConversationListRequest.created:type_name -> conversation.FilterCondition
 	88,  // 96: conversation.ConversationListRequest.user_id:type_name -> conversation.FilterCondition
@@ -11506,14 +11628,14 @@ var file_conversation_proto_depIdxs = []int32{
 	88,  // 98: conversation.ConversationListRequest.state:type_name -> conversation.FilterCondition
 	88,  // 99: conversation.ConversationListRequest.response_time:type_name -> conversation.FilterCondition
 	93,  // 100: conversation.ConversationListResponse.result:type_name -> conversation.ESConversation
-	106, // 101: conversation.UserExportRequest.ctx:type_name -> common.Context
+	107, // 101: conversation.UserExportRequest.ctx:type_name -> common.Context
 	88,  // 102: conversation.UserExportRequest.agent_replied_at:type_name -> conversation.FilterCondition
 	88,  // 103: conversation.UserExportRequest.created:type_name -> conversation.FilterCondition
 	88,  // 104: conversation.UserExportRequest.user_id:type_name -> conversation.FilterCondition
 	88,  // 105: conversation.UserExportRequest.tag_ids:type_name -> conversation.FilterCondition
 	88,  // 106: conversation.UserExportRequest.state:type_name -> conversation.FilterCondition
 	88,  // 107: conversation.UserExportRequest.response_time:type_name -> conversation.FilterCondition
-	106, // 108: conversation.ReportConversationsRequest.ctx:type_name -> common.Context
+	107, // 108: conversation.ReportConversationsRequest.ctx:type_name -> common.Context
 	88,  // 109: conversation.ReportConversationsRequest.agent_replied_at:type_name -> conversation.FilterCondition
 	88,  // 110: conversation.ReportConversationsRequest.created:type_name -> conversation.FilterCondition
 	88,  // 111: conversation.ReportConversationsRequest.user_id:type_name -> conversation.FilterCondition
@@ -11522,11 +11644,12 @@ var file_conversation_proto_depIdxs = []int32{
 	88,  // 114: conversation.ReportConversationsRequest.response_time:type_name -> conversation.FilterCondition
 	101, // 115: conversation.EndchatSetting.connector_settings:type_name -> conversation.EndchatConnectorSetting
 	101, // 116: conversation.EndchatSetting.global_setting:type_name -> conversation.EndchatConnectorSetting
-	117, // [117:117] is the sub-list for method output_type
-	117, // [117:117] is the sub-list for method input_type
-	117, // [117:117] is the sub-list for extension type_name
-	117, // [117:117] is the sub-list for extension extendee
-	0,   // [0:117] is the sub-list for field type_name
+	107, // 117: conversation.AssignRequest.ctx:type_name -> common.Context
+	118, // [118:118] is the sub-list for method output_type
+	118, // [118:118] is the sub-list for method input_type
+	118, // [118:118] is the sub-list for extension type_name
+	118, // [118:118] is the sub-list for extension extendee
+	0,   // [0:118] is the sub-list for field type_name
 }
 
 func init() { file_conversation_proto_init() }
@@ -12531,7 +12654,19 @@ func file_conversation_proto_init() {
 				return nil
 			}
 		}
-		file_conversation_proto_msgTypes[85].Exporter = func(v interface{}, i int) interface{} {
+		file_conversation_proto_msgTypes[83].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AssignRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_conversation_proto_msgTypes[86].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ESConversation_ResponseTime); i {
 			case 0:
 				return &v.state
@@ -12550,7 +12685,7 @@ func file_conversation_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_conversation_proto_rawDesc,
 			NumEnums:      20,
-			NumMessages:   86,
+			NumMessages:   87,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
