@@ -255,10 +255,12 @@ message Actions {
 }
 
 message Metric {
+	repeated Metric submetrics = 5;
 	int64 date_dim = 2;
 	string object_type = 3; // all if empty
 	int64 count = 4;
-	repeated Metric submetrics = 5;
+	int64 object_count = 6;
+	int64 lead_count = 7;
 }
 
 message ReportBotRequest {
