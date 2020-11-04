@@ -8,6 +8,7 @@ import "account.proto";
 import "common.proto";
 import "user3.proto";
 import "conversation.proto";
+import "bot.proto";
 
 message UserSetting {
 	optional common.Context ctx = 1;
@@ -21,6 +22,7 @@ message UserSetting {
 	optional Setting account_setting = 9;
 	optional bool desktop_notification = 10;
 	repeated Campaign campaigns = 13;
+	repeated bot.Bot bots = 14; // remove action
 }
 
 message SocialLink {
@@ -50,13 +52,14 @@ message Setting {
 	optional string custom_language = 6; // write-only
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
-	optional string css_url = 9; // old version
-	optional string custom_css_url = 10; // deprecated
+	// optional string css_url = 9; // old version
+	// optional string custom_css_url = 10; // deprecated
 	optional int32 replytime = 11; // deprecated
-	optional string css = 12; // communication client to server
-	optional string style_url = 13;
+	// koptional string css = 12; // communication client to server
+	// optional string style_url = 13;
 	// read-only, tell whether account is ready for chat or not
 	optional bool is_online = 14;
+	optional bool is_in_business_hour = 34;
 
 	optional string window_mode = 15;
 	enum WindowMode {

@@ -8,7 +8,7 @@ import "common.proto";
 import "conversation.proto";
 
 message Trigger {
-	string type = 3; // conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
+	string type = 3; // conversation_assigned, conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
 	string area_clicked_css_selector = 4; // .user_name #user
 	float scrolling_percentage = 6; // 0.55
 	int64 inactivity_sec = 8; // 50s
@@ -28,7 +28,7 @@ message BotRequest {
 }
 
 message BotCondition {
-	string key = 1; // url, browser, location, returning_visitor, device_type, referrer, source, user_attribute, timming, integration_id, offline
+	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline
 
 	enum Source {
 		direct = 0;
@@ -55,8 +55,8 @@ message BotCondition {
 	}
 	repeated string browsers = 4;
 
-	repeated string referers = 6;
-	repeated string exclude_referers = 9;
+	repeated string referers = 6; // referer
+	repeated string exclude_referers = 9; // referrer
 
 	repeated string urls = 10; // url, url_term, url_medium, ... (or only)
 	repeated string exclude_urls = 11; // url (or only)
@@ -70,10 +70,10 @@ message BotCondition {
 	// timming
 	string business_hour = 20; // [in, notIn] if this is true, ignore all other timming conditions
 	repeated string days_of_week = 21; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-	repeated int32 minute_of_days = 22; // pair [0-4] [6-9]
+	repeated int32 minutes_of_day = 22; // pair [0-4] [6-9]
 
 	// user
-	repeated UserAttributeCondition users = 23;
+	UserAttributeCondition user = 23; // user_attribute
 
 	repeated string integration_ids = 24; // optional for subiz and email
 
@@ -114,6 +114,8 @@ message Bot {
 	repeated Trigger triggers = 14;
 	repeated BotCondition conditions = 16;
 	repeated string channels = 17; // default: all channel
+
+	string bot_state = 18; // active, inactive
 }
 
 message Bots {
