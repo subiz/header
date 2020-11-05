@@ -112,6 +112,9 @@ message Bot {
 	string updated_by = 13;
 
 	repeated Trigger triggers = 14;
+
+	Frequently initiative_frequency = 15;
+
 	repeated BotCondition conditions = 16;
 	repeated string channels = 17; // default: all channel
 
@@ -290,4 +293,10 @@ message ListObjectsRequest {
 
 message ListObjectsResponse {
 	repeated ListObjectId list = 2;
+}
+
+message Frequently {
+	bool once_per_user = 2;
+	bool once_per_session = 3;
+	int64 interval_sec = 4; // dont do twice between those seconds
 }
