@@ -97,6 +97,7 @@ message Bot {
 	string account_id = 2;
 	string id = 3;
 	string fullname = 4;
+	string description = 19;
 	string avatar_url = 5;
 
 	string category = 6; // hello, operator, reply

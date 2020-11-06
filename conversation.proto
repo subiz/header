@@ -439,6 +439,7 @@ message Attachment {
 	repeated ContentTemplate contents = 22;
 
 	repeated QuickReply quick_replies = 23;
+	optional bool lock_input = 24; // lock input while has quick replies
 }
 
 message QuickReply {

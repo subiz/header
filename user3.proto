@@ -499,7 +499,6 @@ message Automation {
 		user_webhook = 9;
 		user_note = 10;
 
-		conversation_message2 = 12;
 		conversation_webhook = 13;
 		add_agent_to_conversation = 14;
 		create_ticket = 15;
