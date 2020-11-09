@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package dashboard;
 
-import "common.proto";
 import "account.proto";
 
 option go_package = "github.com/subiz/header/dashboard";
@@ -71,25 +70,4 @@ message SessionCookie {
 	bool remember_me = 8;
 	string account_id = 9;
 	string agent_id = 10;
-}
-
-// global setting. eg: dashboard_4/4234098234
-message Global { //used only inside subiz
-	common.Context ctx = 1;
-	string name = 2;
-	string data = 3;
-	string pk = 4;
-}
-
-message Config {
-	string order_attributes_user = 1;
-	string configs_filter_user = 2;
-}
-
-message AgentConfigs {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	Config configs = 4;
-	int64 created  = 5;
 }

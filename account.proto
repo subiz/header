@@ -7,6 +7,13 @@ option go_package = "github.com/subiz/header/account";
 import "common.proto";
 import "payment.proto";
 
+message DashboardAgent {
+	optional int64 tour_guide_web_showed = 6;
+	optional int64 tour_guide_getting_started_web_showed = 10;
+	optional int64 tour_guide_channel_installing_web_showed = 11;
+	optional int64 bot_build_showed = 12;
+}
+
 message Agent {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -64,6 +71,8 @@ message Agent {
 
 	optional int64 last_token_requested = 37;
 	optional Presence last_seen = 38;
+
+	optional DashboardAgent dashboard_setting = 40;
 }
 
 message Invitation {
