@@ -120,6 +120,8 @@ message Bot {
 	repeated string channels = 17; // default: all channel
 
 	string bot_state = 18; // active, inactive
+
+	int64 last_executed = 20; // ms
 }
 
 message Bots {
@@ -244,6 +246,7 @@ message Condition {
 
 	common.NumberParams number = 7;
 	common.StringParams string = 8;
+	common.BooleanParams boolean = 9;
 
 	enum Function {
 		minute_of_day = 0;
