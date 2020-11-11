@@ -253,8 +253,10 @@ message Condition {
 		hour_of_day = 1;
 		day_of_week = 2;
 		day_ago = 3;
+		valid = 5;
 	}
-	string function = 19; // used to transform value of left side before evaluate expression
+
+	string transform_function = 19; // used to transform value of left side before evaluate expression
 	string name  = 20; // front end used only
 }
 
