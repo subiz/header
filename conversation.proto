@@ -1149,4 +1149,6 @@ message AssignRequest {
 	optional string strategy = 6;
 	repeated string assign_tos = 7;
 	optional bool available_agents_only = 8; // strategy
+
+	optional int64 agent_reply_timeout = 9; // ms
 }

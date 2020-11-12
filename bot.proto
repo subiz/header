@@ -183,7 +183,6 @@ message Action {
 	bytes internal_state = 30;
 }
 
-
 message ActionUpdateConversation {
 	repeated string tag_ids = 2;
 	repeated string untag_ids = 3;
@@ -211,15 +210,20 @@ message ActionSendHttpHeader {
 }
 
 message ActionAskQuestion {
+	bool wait_for_user_response = 2;
+
 	repeated conversation.Message messages = 3;
 	bool allow_open_response = 4;
+
 	string save_to_attribute = 5;
+
 	string validation = 6; // none, email, phone, date, link, number, regex
 	string validation_regex = 7;
-	int32 retry_on_invalid = 10;
+
 	bool skip_if_attribute_already_existed = 11;
-	common.I18nText validation_error_message = 12;
 	int64 typing_duration = 13; // typing before send, no longer than 5 sec
+
+	bool be_gentle = 14;
 }
 
 message ActionSendMessage {
