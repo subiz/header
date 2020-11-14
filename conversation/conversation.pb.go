@@ -9654,7 +9654,7 @@ type AssignRequest struct {
 	Strategy            *string         `protobuf:"bytes,6,opt,name=strategy" json:"strategy,omitempty"`
 	AssignTos           []string        `protobuf:"bytes,7,rep,name=assign_tos,json=assignTos" json:"assign_tos,omitempty"`
 	AvailableAgentsOnly *bool           `protobuf:"varint,8,opt,name=available_agents_only,json=availableAgentsOnly" json:"available_agents_only,omitempty"` // strategy
-	AgentReplyTimeout   *int64          `protobuf:"varint,9,opt,name=agent_reply_timeout,json=agentReplyTimeout" json:"agent_reply_timeout,omitempty"`       // ms
+	AgentReplyTimeout   *int64          `protobuf:"varint,9,opt,name=agent_reply_timeout,json=agentReplyTimeout" json:"agent_reply_timeout,omitempty"`       // sec
 }
 
 func (x *AssignRequest) Reset() {

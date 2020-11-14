@@ -100,9 +100,9 @@ message Bot {
 	string job_title = 19;
 	string avatar_url = 5;
 
-	string category = 6; // hello, operator, reply
+	string category = 6;
 
-	string state = 7; // active, inactive, deleted
+	string state = 7; // like agent state: active, inactive, deleted
 
 	Action action = 9; // point to root action
 
@@ -122,6 +122,7 @@ message Bot {
 	string bot_state = 18; // active, inactive
 
 	int64 last_executed = 20; // ms
+	string bot_type = 21; // hello, lead, operator
 }
 
 message Bots {
@@ -245,7 +246,7 @@ message Condition {
 	repeated Condition conditions = 3; // only availabe if group is all or any
 
 	// only avaiable if group is single
-	string key = 5; // unique, path to properties, for example data.conversation.text, global.agent.avaliablitiy...
+	string key = 5; // unique, path to properties, for example: last_response, agent_reply, data.conversation.text, global.agent.avaliablitiy...
 	string type = 6; // string, number, boolean
 
 	common.NumberParams number = 7;
