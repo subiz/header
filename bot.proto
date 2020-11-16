@@ -225,6 +225,9 @@ message ActionAskQuestion {
 	int64 typing_duration = 13; // typing before send, no longer than 5 sec
 
 	bool be_gentle = 14;
+
+	conversation.Message resume_message = 15;
+	int64 resume_interval = 16; // sec
 }
 
 message ActionSendMessage {
