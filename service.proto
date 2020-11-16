@@ -438,6 +438,7 @@ service Bqreport {
 service Bizbot {
 	rpc ListBots(common.Id) returns (bot.Bots);
 	rpc GetBot(common.Id) returns (bot.Bot);
+	rpc UpdateBotRunState(bot.Bot) returns (bot.Bot);
 	rpc CreateBot(bot.Bot) returns (bot.Bot);
 	rpc UpdateBot(bot.Bot) returns (bot.Bot);
 	rpc DeleteBot(common.Id) returns (common.Empty);
