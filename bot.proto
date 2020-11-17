@@ -152,6 +152,7 @@ enum ActionType {
 	send_http = 15;
 	switch_language = 16;
 	ask_question = 18;
+	end_bot = 19;
 }
 
 message NextAction {
@@ -228,6 +229,7 @@ message ActionAskQuestion {
 
 	conversation.Message resume_message = 15;
 	int64 resume_interval = 16; // sec
+	bool use_resume_message = 17;
 }
 
 message ActionSendMessage {
