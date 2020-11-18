@@ -123,6 +123,7 @@ message Bot {
 
 	int64 last_executed = 20; // ms
 	string bot_type = 21; // hello, lead, operator
+	string action_hash = 22; // hex of sha1
 }
 
 message Bots {
