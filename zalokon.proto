@@ -96,6 +96,13 @@ message AttachmentPayload {
 	string template_type = 12; // template
 	repeated TemplateElement elements = 13;  // template
 	string token = 14; // upload file
+	repeated Button buttons = 15;
+}
+
+message Button {
+	string title = 2;
+	string type = 3;
+	// string payload = 4; // no static structure, based on type field
 }
 
 message Attachment {

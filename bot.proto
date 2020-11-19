@@ -202,9 +202,10 @@ message ActionSwitchLanguage {
 
 message ActionSendHttp {
 	string url = 2;
-	string payload = 3;
+	// string payload = 3;
 	string method = 4;
 	repeated ActionSendHttpHeader header = 5;
+	string quill_delta = 6;
 }
 
 message ActionSendHttpHeader {
