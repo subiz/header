@@ -93,6 +93,14 @@ message FbMessage {
 	optional bool is_echo = 7;
 	optional int64 app_id = 8;
 	optional string metadata = 9;
+	repeated QuickReply quick_replies = 10;
+}
+
+message QuickReply {
+	optional string content_type = 2; // text
+	optional string title = 3;
+	optional string payload = 4;
+	optional string image_url = 5;
 }
 
 message FbSender {
@@ -116,7 +124,7 @@ message FbAction {
 }
 
 message FbAttachment {
-	optional string type = 2;
+	optional string type = 2; // template
 	optional FbPayload payload = 3;
 	optional string title = 4;
 	optional string URL = 5;
@@ -137,6 +145,14 @@ message FbPayload {
 	optional string template_type = 4;
 	optional bool sharable = 5;
 	repeated GenericElement elements = 6;
+	optional string text = 7; // for call btn
+	repeated Button buttons = 8;
+}
+
+message Button {
+	optional string type = 2;
+	optional string title = 3;
+	optional string payload = 4;
 }
 
 message FbRead {
