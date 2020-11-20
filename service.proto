@@ -448,4 +448,6 @@ service Bizbot {
 	rpc DoAction(user.RunRequest) returns (bot.Actions);
 	rpc ReportBot(bot.ReportBotRequest) returns (bot.ReportBotResponse);
 	rpc ListObjects(bot.ListObjectsRequest) returns (bot.ListObjectsResponse);
+	rpc CreateBotRevision(bot.Bot) returns (bot.Bot);
+	rpc ListBotRevisions(common.Id) returns (bot.Bots);
 }
