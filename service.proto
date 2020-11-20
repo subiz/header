@@ -445,6 +445,7 @@ service Bizbot {
 	rpc OnEvent(user.RunRequest) returns (common.Empty);
 	rpc StartBot(user.RunRequest) returns (common.Empty);
 	rpc StopBot(user.RunRequest) returns (common.Empty);
+	rpc TryAction(user.RunRequest) returns (common.Empty);
 	rpc DoAction(user.RunRequest) returns (bot.Actions);
 	rpc ReportBot(bot.ReportBotRequest) returns (bot.ReportBotResponse);
 	rpc ListObjects(bot.ListObjectsRequest) returns (bot.ListObjectsResponse);
