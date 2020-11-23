@@ -12,7 +12,6 @@ import "client.proto";
 import "content.proto";
 import "deal.proto";
 import "file.proto";
-import "kv.proto";
 import "realtime.proto";
 import "payment.proto";
 import "notibox.proto";
@@ -300,13 +299,6 @@ service FileMgr {
 	rpc Presign(file.FileHeader) returns (file.PresignResult);
 	rpc Read(file.FileRequest) returns (file.File);
 	rpc Uploaded(file.FileRequest) returns (file.File);
-}
-
-// kv services
-service KV {
-	rpc Set(kv.Value) returns (kv.Value);
-	rpc Get(kv.Key) returns (kv.Value);
-	rpc Has(kv.Key) returns (kv.Bool);
 }
 
 // noti5 services
