@@ -10,7 +10,6 @@ import "user.proto";
 import "conversation.proto";
 import "client.proto";
 import "content.proto";
-import "deal.proto";
 import "file.proto";
 import "realtime.proto";
 import "payment.proto";
@@ -271,15 +270,6 @@ service ServiceContentManager {
 	rpc SearchContents(content.SearchContentRequest) returns (content.Contents);
 	rpc LookupContentsByUrl(content.LookupRequest) returns (content.Contents);
 	rpc LinkContentsToUrl(content.LinkRequest) returns (common.Empty);
-}
-
-// deal services
-service DealService {
-  rpc ListPipelines(common.Empty) returns (deal.Pipelines);
-  rpc GetPipeline(common.Id) returns (deal.Pipeline);
-  rpc CreatePipeline(deal.Pipeline) returns (deal.Pipeline);
-  rpc UpdatePipeline(deal.Pipeline) returns (deal.Pipeline);
-  rpc DeletePipeline(common.Id) returns (common.Empty);
 }
 
 service EventMgr {
