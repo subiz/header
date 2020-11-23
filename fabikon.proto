@@ -82,6 +82,7 @@ message FbMessaging {
 	optional FbMessage message = 5;
 	optional FbDelivery delivery = 6;
 	optional string message_type = 7;
+	optional string sender_action = 8; // typing_on, typing_off, mark_seen
 }
 
 message FbMessage {
