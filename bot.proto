@@ -126,6 +126,7 @@ message Bot {
 	string action_hash = 22; // hex of sha1
 
 	string version = 23;
+	string template_data = 24;
 }
 
 message Bots {

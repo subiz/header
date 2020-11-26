@@ -6487,8 +6487,8 @@ type UserReportRequest struct {
 	FirstInteract  string          `protobuf:"bytes,3,opt,name=first_interact,json=firstInteract,proto3" json:"first_interact,omitempty"`
 	Channel        string          `protobuf:"bytes,4,opt,name=channel,proto3" json:"channel,omitempty"`
 	ChannelSource  string          `protobuf:"bytes,5,opt,name=channel_source,json=channelSource,proto3" json:"channel_source,omitempty"`
-	Agent          string          `protobuf:"bytes,6,opt,name=agent,proto3" json:"agent,omitempty"`                           // by agent
-	Range          string          `protobuf:"bytes,8,opt,name=range,proto3" json:"range,omitempty"`                           // hour, day, month by account timezone
+	Agent          string          `protobuf:"bytes,6,opt,name=agent,proto3" json:"agent,omitempty"`                           // by agent id
+	Range          string          `protobuf:"bytes,8,opt,name=range,proto3" json:"range,omitempty"`                           // hour, day, week, month by account timezone
 	StartHour      int64           `protobuf:"varint,9,opt,name=start_hour,json=startHour,proto3" json:"start_hour,omitempty"` // unix hour
 	Points         int64           `protobuf:"varint,10,opt,name=points,proto3" json:"points,omitempty"`                       // < 60
 	FirstInteracts []string        `protobuf:"bytes,12,rep,name=first_interacts,json=firstInteracts,proto3" json:"first_interacts,omitempty"`

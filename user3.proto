@@ -814,9 +814,9 @@ message UserReportRequest {
 	string channel = 4;
 	string channel_source = 5;
 
-	string agent = 6; // by agent
+	string agent = 6; // by agent id
 
-	string range = 8; // hour, day, month by account timezone
+	string range = 8; // hour, day, week, month by account timezone
 	int64 start_hour = 9; // unix hour
 	int64 points = 10; // < 60
 
