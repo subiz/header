@@ -60,7 +60,7 @@ message Users {
 	int64 total = 5;
 }
 
-message Campaign {
+message SessionCampaign {
 	string name = 2;
 	string source = 3;
 	string medium = 4;
@@ -709,7 +709,7 @@ message UserSession {
 	}
 	string ads_network = 28;
 
-	repeated Campaign campaigns = 29;
+	repeated SessionCampaign campaigns = 29;
 
 	repeated SourceTrace source_traces = 39;
 	string referrer = 32;
@@ -1123,7 +1123,7 @@ message Revision {
 	int64 created = 9;
 }
 
-message Button {
+message MessageButton {
 	enum ButtonType {
 		unknown = 0;
 		url_button = 2;
@@ -1196,8 +1196,8 @@ message ContentTemplate {
 	repeated string attachment_urls = 20;
 	repeated string related_ids = 21; // releated content ids
 
-	Button default_action = 22;
-	repeated Button buttons = 23;
+	MessageButton default_action = 22;
+	repeated MessageButton buttons = 23;
 	string id = 24;
 }
 
@@ -1205,8 +1205,8 @@ message GenericElementTemplate {
 	string title = 2;
 	string image_url = 3;
 	string subtitle = 4;
-	Button default_action = 5;
-	repeated Button buttons = 6;
+	MessageButton default_action = 5;
+	repeated MessageButton buttons = 6;
 
 	string id = 7; // fb product id
 }
@@ -1249,13 +1249,13 @@ message Attachment {
 	string color = 10;
 	string pretext = 11;
 
-	repeated Button buttons = 16;
+	repeated MessageButton buttons = 16;
 	AskInfomation ask_info = 17;
 	AskInfomationAnswer ask_info_answer = 18;
 	//repeated string inputtype = 17;
 
-	Form form = 20;
-	FormSubmit form_submit = 21;
+	MessageForm form = 20;
+	MessageFormSubmit form_submit = 21;
 
 	// content template
 	repeated ContentTemplate contents = 22;
@@ -1271,20 +1271,20 @@ message QuickReply {
 	string image_url = 5;
 }
 
-message Form {
+message MessageForm {
 	string title = 2;
 	string state = 3;
-	repeated FormField fields = 4;
+	repeated MessageFormField fields = 4;
 	string submit_url = 5;
 }
 
-message FormSubmit {
+message MessageFormSubmit {
 	string form_message_id = 2;
-	repeated FormField fields = 3;
+	repeated MessageFormField fields = 3;
 	string state = 4;
 }
 
-message FormField {
+message MessageFormField {
 	enum InputType {
 		text = 0;
 		datetime = 1;
@@ -1356,7 +1356,7 @@ message Tags {
 
 message Postback {
 	Message message = 2;
-	Button button = 3;
+	MessageButton button = 3;
 }
 
 message Integrations {
@@ -1846,4 +1846,509 @@ message ExportUsersRequest {
 	string language_code = 6;
 	user.SCondition condition = 8;
 	repeated string ids = 9; // export selected users only, ignore condition
+}
+
+// widget
+message WidgetUserSetting {
+	common.Context ctx = 1;
+	account.Account account = 3;
+	string account_id = 2; // subiz use only
+	User user = 4;
+	string user_id = 7; // subiz use only
+	bool sound_enabled = 5;
+	string language = 6;
+	bool send_transcript = 8;
+	WidgetSetting account_setting = 9;
+	bool desktop_notification = 10;
+	repeated Campaign campaigns = 13;
+	repeated Bot bots = 14; // remove action
+}
+
+message SocialLink {
+	string type = 1; // facebook, viber, subiz, email, ...
+	string url = 2;
+}
+
+message WidgetHeader {
+	string layout = 2;
+	enum HeaderLayout {
+		team = 0;
+		social = 1;
+	}
+
+	// for social layout only
+	repeated SocialLink links = 3;
+
+	// agents whose avatar will be display in the header
+	repeated string agent_ids = 4;
+}
+
+message WidgetSetting {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string widget_version = 3;
+	string language = 5;
+	string custom_language = 6; // write-only
+	repeated account.Agent agents = 7;
+	repeated string agent_ids = 8; // subiz only
+	//   string css_url = 9; // old version
+	//   string custom_css_url = 10; // deprecated
+	int32 replytime = 11; // deprecated
+	// k  string css = 12; // communication client to server
+	//   string style_url = 13;
+	// read-only, tell whether account is ready for chat or not
+	bool is_online = 14;
+	bool is_in_business_hour = 34;
+
+	string window_mode = 15;
+	enum WindowMode {
+		mini = 0;
+		full = 1;
+	}
+
+	WidgetHeader header = 16;
+	int32 height = 17;
+	int32 width = 18;
+	string primary_color = 19;
+	string secondary_color = 20;
+	string background = 21;
+	string text_color = 22;
+	WidgetForm offline_form = 23;
+	WidgetForm prechat_form = 24;
+	WidgetChatButton desktop_button = 25;
+	WidgetChatButton mobile_button = 26;
+	WidgetGreeting greeting = 27;
+	string title = 28;
+	string introduction = 29;
+	string custom_language_url = 31;
+	string language_url = 32;
+	bool auto_request_rating = 33;
+}
+
+message WidgetField {
+	string key = 1;
+	string label = 2;
+	bool is_required = 3;
+
+	// so front end dont have to download attribute definitions
+	string type = 5;
+
+	repeated string list = 6; // available option for field
+
+	string subtype = 8; // phone, email, rating
+	bool multiple_choice = 9;
+	bool multiline_text = 10;
+	string placeholder = 11;
+
+	bool is_user_attribute = 12;
+
+	string value = 13;
+}
+
+message WidgetGroup {
+	string id = 1;
+	string name = 2;
+}
+
+message WidgetForm {
+	repeated WidgetField fields = 1;
+
+	bool group_required = 2;
+	repeated WidgetGroup groups = 3;
+	string group_label = 4;
+
+	string title = 5;
+	bool enabled = 6;
+	bool end_conversation_after_submit = 7;
+	string enable_when = 8;
+	enum When {
+		all_agents_offline = 0;
+		out_of_bussiness_hour = 1;
+	}
+
+	bool question_required = 10;
+	string question_label = 11;
+}
+
+message WidgetChatButton {
+	string background_image_url = 1;
+	string background_mask_url = 11;
+
+	int32 width = 2;
+	int32 height = 3;
+	string background = 4;
+	int32 margin_x  = 5;
+	int32 margin_y = 6;
+	string position = 7;
+
+	enum ButtonPosition {
+		left = 0;
+		right = 1;
+	}
+	bool default_style = 8;
+	string background_border_radius = 9;
+	bool hidden = 10;
+}
+
+message WidgetGreeting {
+	string message = 2;
+	bool enabled = 4;
+	string agent_id = 5;
+}
+
+////////////// CAMPAIGN //////////////
+message CampaignTrigger {
+	string type = 3; // exit_intent, area_clicked, scrolling_percentage, inactivity_duration, after_pageview, after_js_event
+	string area_clicked_css_selector = 4; // .user_name #user
+	float scrolling_percentage = 6; // 0.55
+	int64 inactivity_sec = 8; // 50s
+	int64 after_pageview_sec = 9; // 50s
+	bool disabled = 10;
+}
+
+message CampaignSchedulerCondition {
+	int64 start_time = 4;
+	int64 end_time = 5;
+	repeated string days_of_week = 6; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+
+	int64 start_minute_day = 7; // minute of day
+	int64 end_minute_day = 8; // minute of day
+
+	string timezone_offset = 9; // if empty, take current timezone
+}
+
+message CampaignCondition {
+	string key = 3; // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
+
+	enum Source {
+		direct = 0;
+		google_ads = 1;
+		organic = 2;
+	}
+
+	enum DeviveType {
+		desktop = 0;
+		mobile = 1;
+		tablet = 2;
+	}
+
+	enum Browser {
+		all = 0;
+		chrome = 1;
+		firefox = 2;
+		edge = 3;
+		ie = 4;
+		safari = 5;
+		other = 6;
+	}
+
+	// for rate limiting
+	// int64 frequency_times = 11; // number of time display the message
+	// int64 frequency_duration = 11; // per duration (1 message per hour || 10 messages per day)
+
+
+	string user_attribute_key = 34;
+
+	string operator = 40; // eq, ne, con, notCon, in, gt, gte, lt, lte, inRange, notInRange, begin, end
+	string value = 41;
+}
+
+message CampaignSegmentation {
+	repeated CampaignCondition conditions = 4;
+	repeated CampaignCondition source_conditions = 6; // source, source_referer (or only)
+	repeated CampaignCondition location_conditions = 7; // city, country_code (or only)
+
+	repeated CampaignCondition url_conditions = 8; // url, url_term, url_medium, ... (or only)
+	repeated CampaignCondition exclude_url_conditions = 9; // url (or only)
+
+	repeated CampaignCondition has_visited_url_conditions = 10; // url (or only)
+	repeated CampaignCondition has_not_visited_url_conditions = 11; // url (or only)
+
+	string join = 5; // and | or
+
+	bool disabled = 12;
+	repeated CampaignCondition exclude_location_conditions = 13; // city, country_code (or only)
+
+}
+
+message Campaigns {
+	repeated Campaign campaigns = 3;
+}
+
+message CampaignNotification {
+	//   email.Email email = 1;
+	bool enabled = 2;
+	string sender_id = 4;
+	string from = 5;
+	repeated string to = 7;
+	string subject = 9;
+	string body = 10;
+
+	repeated string agents = 12;
+	bool all_agents = 13;
+
+  Message user_email = 14;
+}
+
+message Campaign {
+	common.Context ctx = 1;
+	string id = 2;
+	string account_id = 3;
+
+	repeated string url_expressions = 4;
+	repeated string exclude_url_expressions = 6;
+
+	repeated CampaignTrigger triggers = 10; // any
+
+	string segmentation_join = 11; // and | or
+	repeated CampaignSegmentation segmentations = 12;
+
+	string template_id = 14;
+	string page_type = 15; // modal, slide_in, bar, panel, fullscreen
+	repeated CampaignPage pages = 17;
+
+	int64 created = 18;
+	string name = 19;
+	string thumbnail_url = 20;
+	bool enabled = 21;
+
+	// stop showing pop up after showing x times
+	int64 impression_limit = 23;
+	repeated CampaignSchedulerCondition schedulers = 24;
+	string scheduler_join = 25;
+	CampaignNotification notification = 26;
+
+	int64 updated = 27;
+
+	int64 num_impression = 30;
+	int64 num_conversion = 31;
+
+	Frequently impression_frequency = 32;
+}
+
+message Impression {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string id = 4;
+	string user_id = 5;
+
+	string url = 7;
+	common.Device device = 8;
+	int64 created = 9;
+
+	string by_trigger = 10;
+	string impression_token = 11;  // for request submit only
+}
+
+message ConversionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string anchor = 4;
+	int32 limit = 5;
+
+	int32 from_hour = 7;
+	int32 to_hour = 8;
+}
+
+message Conversions {
+	common.Context ctx = 1;
+	repeated Conversion conversions = 2;
+	string anchor = 4;
+}
+
+message Conversion {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string impression_id = 4;
+	string user_id = 5;
+
+	string url = 7;
+	common.Device device = 8;
+
+	string by_trigger = 10;
+
+	CampaignSubmission submission = 12;
+	int64 created = 13;
+
+	int64 week = 14; // internal use only
+	string impression_token = 15; // for request submit only
+}
+
+message UserCampaignStatus {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string user_id = 5;
+
+	string status = 8; // goal_reached || failed || nothing
+	enum Status {
+		goal_reached = 0;
+		failed = 1;
+	}
+	int64 created = 10;
+}
+
+message CampaignPage {
+	string title = 4;
+	string subtitle = 9;
+	string description = 5;
+
+	WidgetForm form = 6;
+
+	CampaignButton primary_button = 7;
+	CampaignButton secondary_button = 8;
+	CampaignButton background_click = 10;
+	CampaignCountdown countdown = 11;
+
+	CampaignVideo video = 12;
+
+	string animation = 20;
+	CampaignAppearance desktop_appearance = 24;
+	CampaignAppearance mobile_appearance = 25;
+}
+
+message CampaignAppearance {
+	string title_color = 2;
+	string description_color = 3;
+
+	string background = 4; // color or gradient
+	string background_image = 5;
+
+	string primary_button_background = 7;
+	string primary_button_color = 8;
+
+	string secondary_button_background = 9;
+	string secondary_button_color = 10;
+
+	// not supported yet
+	string input_color = 11;
+	string input_background = 12;
+
+	string overlay = 13;
+
+	// sizing, not supported yet
+	string width = 20;
+	string min_height = 21;
+	string padding_left = 22;
+	string padding_right = 23;
+	string padding_top = 24;
+	string padding_bottom = 25;
+
+	string title_font_family = 30;
+	string title_font_size = 31;
+	string title_font_style = 32;
+	string title_font_weight = 33;
+	string title_text_transform = 34;
+
+	string description_font_family = 35;
+	string description_font_size = 36;
+	string description_font_style = 37;
+	string description_font_weight = 38;
+	string description_text_transform = 39;
+
+	string input_label_color = 40;
+	string input_border_color = 41;
+}
+
+message CampaignSubmission  {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string user_id = 5;
+
+	repeated WidgetField fields = 6;
+}
+
+message CampaignButtonAction {
+	string action = 3; // open_url, close, open_widget, submit, next, goal_reach
+
+	string url = 5; // url to open
+	bool new_tab = 6; // open new url on new tab
+}
+
+message CampaignButton {
+	bool enabled = 2;
+	repeated CampaignButtonAction actions = 3;
+	string text = 6;
+}
+
+message CampaignCountdown {
+	bool enabled = 3;
+	int64 end_time = 4; // unix sec
+	string daily_end_time = 5; // 8:40:30 reset every day
+}
+
+message CampaignVideo {
+	bool enabled = 1;
+	string url = 2;
+
+	//   string width = 4; // alway full
+	string max_height = 5;
+	string padding_left = 7;
+	string padding_right = 8;
+	string padding_top = 9;
+	string padding_bottom = 10;
+}
+
+message ImpressionCount {
+	string account_id = 3;
+	string campaign_id = 4;
+	int32 count = 5;
+	int32 hour = 6;
+	int32 month = 7;
+}
+
+message ConversionCount {
+	string account_id = 3;
+	string campaign_id = 4;
+	int32 count = 5;
+	int32 hour = 6;
+	int32 month = 7;
+}
+
+message ReportCampaignRequest {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string campaign_id = 4;
+	int32 from_hour = 5;
+	int32 to_hour = 6;
+	string range = 7;
+	enum Range {
+		hour = 0; // default
+		day = 1;
+	}
+}
+
+message ReportCampaignResponse {
+	common.Context ctx = 1;
+	repeated int32 impressions_count = 3;
+	repeated int32 conversions_count = 4;
+}
+
+message ConversionsExported {
+	string url = 6;
+}
+
+message SearchLocationsRequest {
+	common.Context ctx = 1;
+	string query = 2;
+	int64 limit = 4;
+}
+
+message UploadedImage {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string url = 4;
+	string thumbnail_url = 5;
+	int64 width = 10;
+	int64 height = 11;
+  int64 created = 12;
+}
+
+message UploadedImages {
+	common.Context ctx = 1;
+	repeated UploadedImage images = 2;
 }

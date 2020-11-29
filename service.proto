@@ -13,7 +13,6 @@ import "file.proto";
 import "payment.proto";
 import "notibox.proto";
 import "noti5.proto";
-import "widget.proto";
 import "account.proto";
 import "api.proto";
 import "bqreport.proto";
@@ -361,26 +360,26 @@ service Pubsub {
 
 // widget services
 service WidgetService {
-	rpc Read(common.Id) returns (widget.Setting);
-	rpc Update(widget.Setting) returns (widget.Setting);
-	rpc ReadUserSetting(common.Id) returns (widget.UserSetting);
+	rpc Read(common.Id) returns (header.WidgetSetting);
+	rpc Update(header.WidgetSetting) returns (header.WidgetSetting);
+	rpc ReadUserSetting(common.Id) returns (header.WidgetUserSetting);
 
-	rpc ReadCampaign(common.Id) returns (widget.Campaign);
-	rpc ListCampaigns(common.Id) returns (widget.Campaigns);
-	rpc CreateCampaign(widget.Campaign) returns (widget.Campaign);
-	rpc UpdateCampaign(widget.Campaign) returns (widget.Campaign);
-	rpc DeleteCampaign(widget.Campaign) returns (common.Empty);
+	rpc ReadCampaign(common.Id) returns (header.Campaign);
+	rpc ListCampaigns(common.Id) returns (header.Campaigns);
+	rpc CreateCampaign(header.Campaign) returns (header.Campaign);
+	rpc UpdateCampaign(header.Campaign) returns (header.Campaign);
+	rpc DeleteCampaign(header.Campaign) returns (common.Empty);
 
-	rpc SubmitImpression(widget.Impression) returns (widget.Impression);
-	rpc SubmitConversion(widget.Conversion) returns (widget.Conversion);
-	rpc SubmitUserCampaignStatus(widget.UserCampaignStatus) returns (widget.UserCampaignStatus);
+	rpc SubmitImpression(header.Impression) returns (header.Impression);
+	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
+	rpc SubmitUserCampaignStatus(header.UserCampaignStatus) returns (header.UserCampaignStatus);
 
-	rpc ReportCampaign(widget.ReportCampaignRequest) returns (widget.ReportCampaignResponse);
-	rpc ListConversions(widget.ConversionRequest) returns (widget.Conversions);
-	rpc ExportConversions(widget.ConversionRequest) returns (widget.ConversionsExported);
-	rpc UploadImage(widget.UploadedImage) returns (widget.UploadedImage);
-	rpc ListUploadedImage(common.Id) returns (widget.UploadedImages);
-	rpc DeleteUploadedImage(widget.UploadedImage) returns (common.Empty);
+	rpc ReportCampaign(header.ReportCampaignRequest) returns (header.ReportCampaignResponse);
+	rpc ListConversions(header.ConversionRequest) returns (header.Conversions);
+	rpc ExportConversions(header.ConversionRequest) returns (header.ConversionsExported);
+	rpc UploadImage(header.UploadedImage) returns (header.UploadedImage);
+	rpc ListUploadedImage(common.Id) returns (header.UploadedImages);
+	rpc DeleteUploadedImage(header.UploadedImage) returns (common.Empty);
 }
 
 // webhook services
