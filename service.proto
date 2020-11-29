@@ -178,7 +178,7 @@ service ConversationMgr {
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
 	rpc EndConversation(common.Id) returns (header.Conversation);
 	rpc GetConversation(common.Id) returns (header.Conversation);
-	rpc ListConversations(conversation.ListConversationsRequest) returns (header.Conversations);
+	rpc ListConversations(header.ListConversationsRequest) returns (header.Conversations);
 	rpc MatchConversations(common.Ids) returns (header.Conversations);
 	rpc TagConversation(header.TagRequest) returns (common.Empty);
 	rpc UntagConversation(header.TagRequest) returns (common.Empty);
@@ -267,14 +267,14 @@ service ServiceContentManager {
 }
 
 service EventMgr {
-	rpc SearchEvents (header.ListEventsRequest) returns (header.Events);
+	rpc SearchEvents (header.ListUserEventsRequest) returns (header.Events);
 	rpc CreateEvent (header.UserEvent) returns (header.Event);
 }
 
 service ConversationEventReader {
 	rpc SendMessage(header.Event) returns (header.Event);
 	rpc UpdateMessage(header.Event) returns (header.Event);
-	rpc ListEvents(header.ListEventsRequest) returns (header.Events);
+	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
 	rpc SearchEvents(header.SearchMessageRequest) returns (header.Events);
 }
 

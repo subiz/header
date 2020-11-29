@@ -429,7 +429,7 @@ message EventParams {
 	string account_id = 3;
 }
 
-message ListEventsRequest {
+message ListUserEventsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string user_id = 3;
@@ -1006,6 +1006,53 @@ message Member {
 	common.By invited_by = 16;
 }
 
+message ListConversationsRequest {
+	common.Context ctx = 1;
+	string account_id = 3;
+	//   string state = 4; // empty or unassigned
+	string member_id = 8; // ignore
+	//   string group_by = 9;
+	string integration_id = 10;
+	string user_id = 11;
+	int32 limit = 5;
+	string anchor = 6;
+
+	string agent_id = 12; // list conversations of agent
+
+	repeated string user_ids = 13; // for live, only return id and state
+
+	string state = 14;
+}
+
+message ListConversationEventsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string start_id = 4;
+	int32 limit = 6;
+}
+
+message Chain {
+	string account_id = 2;
+	string id = 3;
+	string conversation_id = 4;
+}
+
+enum ConvoState {
+	none = 0; // convo
+	unassigned = 2; // convo
+	active = 6; // convo
+	ended = 8; // convo
+	pending = 9; // ticket and convo
+
+	all = 10; // ticket
+	open = 11; // ticket
+	resolved = 13; // ticket
+	closed = 14; // ticket
+
+	waiting_for_reply = 15; // waiting for reply
+}
+
 message Conversation {
 	common.Context ctx = 1;
 	string id = 2;
@@ -1212,7 +1259,7 @@ message GenericElementTemplate {
 }
 
 enum AttachmentType {
-	none = 0;
+	nothing = 0;
 	file = 2;
 	generic = 3;
 	preview = 4;

@@ -6,21 +6,6 @@ option go_package = "github.com/subiz/header/conversation";
 
 import "common.proto";
 
-enum State {
-	none = 0; // convo
-	unassigned = 2; // convo
-	active = 6; // convo
-	ended = 8; // convo
-	pending = 9; // ticket and convo
-
-	all = 10; // ticket
-	open = 11; // ticket
-	resolved = 13; // ticket
-	closed = 14; // ticket
-
-	waiting_for_reply = 15; // waiting for reply
-}
-
 message Search {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
@@ -28,32 +13,6 @@ message Search {
 	optional int32 limit = 5;
 	optional string before_id = 6;
 	optional string after_id = 7;
-}
-
-message ListConversationsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	// optional string state = 4; // empty or unassigned
-	optional string member_id = 8; // ignore
-	// optional string group_by = 9;
-	optional string integration_id = 10;
-	optional string user_id = 11;
-	optional int32 limit = 5;
-	optional string anchor = 6;
-
-	optional string agent_id = 12; // list conversations of agent
-
-	repeated string user_ids = 13; // for live, only return id and state
-
-	optional string state = 14;
-}
-
-message ListEventsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string start_id = 4;
-	optional int32 limit = 6;
 }
 
 message ListConversationsByUserRequest {
@@ -114,12 +73,6 @@ message AvgResponseTimeResponse {
 
 message TotalConversationResponse {
 	optional int64 total_conversation = 2;
-}
-
-message Chain {
-	optional string account_id = 2;
-	optional string id = 3;
-	optional string conversation_id = 4;
 }
 
 message Ticket {
@@ -335,44 +288,6 @@ message AvailibilityReportRequest {
 		month = 2;
 	}
 	optional int32 number_of_points = 13;
-}
-
-// Report metrics
-enum Metric {
-	created_conversations = 0; // all conversation
-	created_conversations_by_agent = 2;
-	created_conversations_by_group = 3;
-	created_conversations_by_tag = 4;
-
-	agent_replied_conversations = 6;
-	agent_replied_conversations_by_agents = 7;
-	agent_replied_conversations_by_bots = 8;
-	agent_replied_conversations_by_agent = 9;
-	agent_replied_conversations_by_group = 10;
-	agent_replied_conversations_by_tag = 11;
-
-	user_replied_conversations = 12;
-	user_replied_conversations_by_agent = 13;
-	user_replied_conversations_by_group = 14;
-	user_replied_conversations_by_tag = 15;
-
-	agent_repling_conversations = 16;
-	agent_repling_conversations_by_agents = 17;
-	agent_repling_conversations_by_bots = 18;
-	agent_repling_conversations_by_agent = 19;
-	agent_repling_conversations_by_group = 20;
-
-	no_agent_replied_in_1min_conversations = 32;
-	agent_non_replied_in_1min_conversations = 34;
-
-	no_agent_replied_in_5min_conversations = 35;
-	agent_non_replied_in_5min_conversations = 37;
-
-	no_agent_replied_in_15min_conversations = 38;
-	agent_non_replied_in_15min_conversations = 40;
-
-	no_agent_replied_in_24hour_conversations = 41;
-	agent_non_replied_in_24hour_conversations = 43;
 }
 
 message CountReportRequest {
