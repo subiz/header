@@ -7,7 +7,6 @@ option go_package = "github.com/subiz/header";
 import "common.proto";
 import "user.proto";
 import "conversation.proto";
-import "client.proto";
 import "content.proto";
 import "file.proto";
 import "payment.proto";
@@ -250,11 +249,11 @@ service TicketMgr {
 
 // client services
 service ClientMgr {
-	rpc Create(client.Client) returns (client.Client);
-	rpc Update(client.Client) returns (client.Client);
-	rpc Read(client.Client) returns (client.Client);
-	rpc ListIntegratedClients(common.Id) returns (client.AuthorizedClient); // account id
-	rpc ListAuthorizedClients(common.Id) returns (client.AuthorizedClient); // agent id
+	rpc Create(header.Client) returns (header.Client);
+	rpc Update(header.Client) returns (header.Client);
+	rpc Read(header.Client) returns (header.Client);
+	rpc ListIntegratedClients(common.Id) returns (header.AuthorizedClient); // account id
+	rpc ListAuthorizedClients(common.Id) returns (header.AuthorizedClient); // agent id
 }
 
 // content services
@@ -384,12 +383,12 @@ service WidgetService {
 
 // webhook services
 service WebhookService {
-	rpc Read(common.Id) returns (client.Webhook);
+	rpc Read(common.Id) returns (header.Webhook);
 	rpc Delete(common.Id) returns (common.Empty);
-	rpc List(common.Id) returns (client.Webhooks);
-	rpc Update(client.Webhook) returns (client.Webhook);
-	rpc Create(client.Webhook) returns (client.Webhook);
-	rpc Test(common.Id) returns (client.WebhookTestResult);
+	rpc List(common.Id) returns (header.Webhooks);
+	rpc Update(header.Webhook) returns (header.Webhook);
+	rpc Create(header.Webhook) returns (header.Webhook);
+	rpc Test(common.Id) returns (header.WebhookTestResult);
 }
 
 // search services

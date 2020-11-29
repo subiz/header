@@ -2352,3 +2352,136 @@ message UploadedImages {
 	common.Context ctx = 1;
 	repeated UploadedImage images = 2;
 }
+
+
+message Clients {
+	common.Context ctx = 1;
+	repeated Client clients = 2;
+}
+
+message Client {
+	common.Context ctx = 1;
+	string id = 3;
+	// secret used to authorize client with oauth2 server
+	string secret = 4;
+	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
+	string logo_url = 5;
+	string account_id = 6;
+	// IsVerified will be true if client is verified by the authority
+	bool is_verified = 8;
+	int64 verified = 9;
+	// List of URLs which client must register for oauth redirection
+	string redirect_uri = 10;
+	string type = 11;
+	enum Type {
+		app = 0;
+		connector = 1;
+		bot = 3;
+	}
+	string name = 12;
+	string display_name = 13;
+	// Version number of the client.
+	string version = 14;
+	bool is_enabled = 15;
+	int64 created = 17;
+	int64 modified = 18;
+	string webhook_uri = 20;
+	repeated string events = 19; // subscribed event
+
+	// for connector only
+	string channel_type = 21;
+	enum ChannelType {
+		subiz = 0;
+		email = 1;
+		facebook = 2; // ott
+		viber = 3;
+		facebook_comment = 4; // public, dont close
+		zalo = 5;
+		call = 6;
+	}
+
+	string availability_uri = 22;
+	string ping_uri = 23;
+	bool is_internal = 24;
+	string unsubscribe_uri = 25;
+	repeated string scopes = 26;
+
+	string bot_default_job_title = 28;
+	string bot_default_fullname = 29;
+	bool bot_is_supervisor = 30;
+}
+
+message AuthorizedClient {
+	common.Context ctx = 1;
+	Client client  = 2;
+	string issue_account_id = 3;
+	string issuer = 4;
+	repeated string scopes = 5;
+	string kind = 6;
+}
+
+message Webhooks {
+	common.Context ctx = 1;
+	repeated Webhook webhooks = 2;
+}
+
+message Webhook {
+	common.Context ctx = 1;
+	string account_id = 12;
+	string client_id = 2;
+	string url = 3;
+	string secret = 4;
+
+	repeated string events = 6;
+	string state = 7;
+	enum State {
+		active = 0;
+		backoff_sleep = 1;
+		dead = 2;
+	}
+
+	int64 last_hook_at = 9;
+	int64 events_count = 13;
+	string last_hook_response = 14;
+	int32 last_hook_status = 15;
+	string last_hook_payload = 16;
+
+	int64 modified = 19;
+	int64 created = 20;
+	string creator = 21;
+	bool is_enabled = 22;
+	bool is_protected = 23;
+}
+
+message WebhookPayload {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string hub_id = 3;
+	bytes payload = 4; //json format
+	string event = 5;
+	string webhook_id = 6; // internal use only
+	string key = 9; // kafka key, internal use only
+	bool is_direct = 10;
+}
+
+message WebhookIncomming {
+	common.Context ctx = 1;
+	string webhook_id = 6;
+}
+
+message WebhookBackoff {
+	common.Context ctx = 1;
+	int32 num_back_off = 5;
+	string backoff_id = 6; // to make sure there is one backoff per webhook
+	string webhook_id = 7;
+}
+
+message WebhookTestResult {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string client_id = 3;
+	string response_body = 14;
+	int32 status = 15;
+	string payload = 16;
+	int64 latency = 17; // seconds
+}
