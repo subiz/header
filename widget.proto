@@ -6,15 +6,13 @@ option go_package = "github.com/subiz/header/widget";
 
 import "account.proto";
 import "common.proto";
-import "user3.proto";
-import "conversation.proto";
-import "bot.proto";
+import "header.proto";
 
 message UserSetting {
 	optional common.Context ctx = 1;
 	optional account.Account account = 3;
 	optional string account_id = 2; // subiz use only
-	optional user.User user = 4;
+	optional header.User user = 4;
 	optional string user_id = 7; // subiz use only
 	optional bool sound_enabled = 5;
 	optional string language = 6;
@@ -22,7 +20,7 @@ message UserSetting {
 	optional Setting account_setting = 9;
 	optional bool desktop_notification = 10;
 	repeated Campaign campaigns = 13;
-	repeated bot.Bot bots = 14; // remove action
+	repeated header.Bot bots = 14; // remove action
 }
 
 message SocialLink {
@@ -248,7 +246,7 @@ message Notification {
 	repeated string agents = 12;
 	optional bool all_agents = 13;
 
-	optional conversation.Message user_email = 14;
+	optional header.Message user_email = 14;
 }
 
 message Campaign {
@@ -284,7 +282,7 @@ message Campaign {
 	optional int64 num_impression = 30;
 	optional int64 num_conversion = 31;
 
-	optional bot.Frequently impression_frequency = 32;
+	optional header.Frequently impression_frequency = 32;
 }
 
 message Impression {

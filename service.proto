@@ -5,22 +5,19 @@ package header;
 option go_package = "github.com/subiz/header";
 
 import "common.proto";
-import "user3.proto";
 import "user.proto";
 import "conversation.proto";
 import "client.proto";
 import "content.proto";
 import "file.proto";
-import "realtime.proto";
 import "payment.proto";
 import "notibox.proto";
 import "noti5.proto";
 import "widget.proto";
 import "account.proto";
 import "api.proto";
-import "search.proto";
 import "bqreport.proto";
-import "bot.proto";
+import "header.proto";
 
 // api service
 service ApiServer {
@@ -72,78 +69,78 @@ service CurrencyMgr {
 
 // user services
 service UserMgr {
-	rpc SearchUsers (user.UserSearchRequest) returns (user.UserSearchResult); // deprecated
-	rpc SearchLeads (user.LeadSearchRequest) returns (user.LeadSearchResult);
-	rpc ListLeads (user.LeadSearchRequest) returns (user.LeadSearchResult);
+	rpc SearchUsers (user.UserSearchRequest) returns (header.UserSearchResult); // deprecated
+	rpc SearchLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
+	rpc ListLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 
-	rpc CreateUser (user.User) returns (common.Id);
-	rpc UpdateUser (user.User) returns (common.Id);
-	rpc ReadUser (common.Id) returns (user.User);
+	rpc CreateUser (header.User) returns (common.Id);
+	rpc UpdateUser (header.User) returns (common.Id);
+	rpc ReadUser (common.Id) returns (header.User);
 
-	rpc ReportUsers (user.UserReportRequest) returns (user.UserReportResult);
-	rpc CountTotal(user.CountTotalRequest) returns (user.CountTotalResponse);
+	rpc ReportUsers (header.UserReportRequest) returns (header.UserReportResult);
+	rpc CountTotal(header.CountTotalRequest) returns (header.CountTotalResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
 	rpc ExportUsers (user.UserExportRequest) returns (common.Empty); // deprecated
 
 	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
 
-	rpc MatchUsers(common.Ids) returns (user.Users);
+	rpc MatchUsers(common.Ids) returns (header.Users);
 }
 
 service LiveMgr {
-	rpc SearchLocations(user.LocationParams) returns (user.Locations);
-	rpc FilterActiveUsers(user.UserInfoParams) returns (user.Users);
+	rpc SearchLocations(header.LocationParams) returns (header.Locations);
+	rpc FilterActiveUsers(header.UserInfoParams) returns (header.Users);
 
-	rpc TopEvents(user.EventParams) returns (user.Events);
-	rpc TopLocations(common.Id) returns (user.LocationMetrics);
-	rpc TopPages(common.Id) returns (user.PageMetrics);
-	rpc TopSources(common.Id) returns (user.SourceMetrics);
-	rpc CountActiveUsers(common.Id) returns (user.UserMetric);
-	rpc Presences(user.PresencesRequest) returns (user.PresencesResponse);
+	rpc TopEvents(header.EventParams) returns (header.Events);
+	rpc TopLocations(common.Id) returns (header.LocationMetrics);
+	rpc TopPages(common.Id) returns (header.PageMetrics);
+	rpc TopSources(common.Id) returns (header.SourceMetrics);
+	rpc CountActiveUsers(common.Id) returns (header.UserMetric);
+	rpc Presences(header.PresencesRequest) returns (header.PresencesResponse);
 }
 
 service UserSyncMgr {
 	// sync user
-	rpc CreateEvent(user.UserEvent) returns (common.Empty);
+	rpc CreateEvent(header.UserEvent) returns (common.Empty);
 
 	// sync automation
-	rpc FireBlockUser(user.AutomationEvent) returns (common.Empty);
-	rpc FireUpdateUserAttribute(user.AutomationEvent) returns (common.Empty);
-	rpc FireAddUserNote(user.AutomationEvent) returns (common.Empty);
+	rpc FireBlockUser(header.AutomationEvent) returns (common.Empty);
+	rpc FireUpdateUserAttribute(header.AutomationEvent) returns (common.Empty);
+	rpc FireAddUserNote(header.AutomationEvent) returns (common.Empty);
 
 	// sync user job
-	rpc CallbackAutomation(user.AutomationCalledback) returns (common.Empty);
+	rpc CallbackAutomation(header.AutomationCalledback) returns (common.Empty);
 	rpc ExportUsers(user.UserExportRequest) returns (common.Empty);
 }
 
 service AutomationCreditMgr {
-	rpc GetAutomationCredit(common.Id) returns (user.AutomationCredit);
-	rpc AddAutomationCredit(user.AutomationCredit) returns (common.Empty);
+	rpc GetAutomationCredit(common.Id) returns (header.AutomationCredit);
+	rpc AddAutomationCredit(header.AutomationCredit) returns (common.Empty);
 }
 
 service NoteMgr {
-	rpc ListNotes(user.ListNotesRequest) returns (user.Notes);
-	rpc AddNote(user.Note) returns (user.Note);
-	rpc UpdateNote(user.Note) returns (user.Note);
-	rpc DeleteNote(user.DeleteNoteRequest) returns (common.Empty);
-	rpc GetNote(user.GetNoteRequest) returns (user.Note);
+	rpc ListNotes(header.ListNotesRequest) returns (header.Notes);
+	rpc AddNote(header.Note) returns (header.Note);
+	rpc UpdateNote(header.Note) returns (header.Note);
+	rpc DeleteNote(header.DeleteNoteRequest) returns (common.Empty);
+	rpc GetNote(header.GetNoteRequest) returns (header.Note);
 	rpc SearchNote(user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
 }
 
 service AutomationMgr {
-	rpc ListAutomations(common.Id) returns (user.Automations);
-	rpc UpdateAutomation(user.Automation) returns (user.Automation);
+	rpc ListAutomations(common.Id) returns (header.Automations);
+	rpc UpdateAutomation(header.Automation) returns (header.Automation);
 	rpc DeleteAutomation(common.Id) returns (common.Empty);
-	rpc ReadAutomation(common.Id) returns (user.Automation);
-	rpc CreateAutomation(user.Automation) returns (user.Automation);
+	rpc ReadAutomation(common.Id) returns (header.Automation);
+	rpc CreateAutomation(header.Automation) returns (header.Automation);
 }
 
 service AttributeMgr {
-	rpc ListAttributeDefinitions(common.Empty) returns (user.AttributeDefinitions);
-	rpc CreateAttributeDefinition(user.AttributeDefinition) returns (user.AttributeDefinition);
-	rpc UpdateAttributeDefinition(user.AttributeDefinition) returns (user.AttributeDefinition);
-	rpc DeleteAttributeDefinition(user.DeleteAttrRequest) returns (common.Empty);
+	rpc ListAttributeDefinitions(common.Empty) returns (header.AttributeDefinitions);
+	rpc CreateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
+	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
+	rpc DeleteAttributeDefinition(header.DeleteAttrRequest) returns (common.Empty);
 }
 
 // auth services
@@ -169,73 +166,73 @@ service AgentPresenceMgr {
 }
 
 service RuleMgr {
-	rpc UpdateRule(conversation.Rule) returns (conversation.Rule);
-	rpc CreateRule(conversation.Rule) returns (conversation.Rule);
+	rpc UpdateRule(header.Rule) returns (header.Rule);
+	rpc CreateRule(header.Rule) returns (header.Rule);
 	rpc DeleteRule(common.Id) returns (common.Empty);
-	rpc ReadRule(common.Id) returns (conversation.Rule);
-	rpc ListRules(common.Id) returns (conversation.Route);
+	rpc ReadRule(common.Id) returns (header.Rule);
+	rpc ListRules(common.Id) returns (header.Route);
 }
 
 service ConversationMgr {
-	rpc AssignRule(conversation.AssignRequest) returns (conversation.RouteResult);
-	rpc PongMessage(user.Event) returns (user.Event);
+	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
+	rpc PongMessage(header.Event) returns (header.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
-	rpc StartConversation(user.StartRequest) returns (conversation.Conversation);
-	rpc EndConversation(common.Id) returns (conversation.Conversation);
-	rpc GetConversation(common.Id) returns (conversation.Conversation);
-	rpc ListConversations(conversation.ListConversationsRequest) returns (conversation.Conversations);
-	rpc MatchConversations(common.Ids) returns (conversation.Conversations);
-	rpc TagConversation(conversation.TagRequest) returns (common.Empty);
-	rpc UntagConversation(conversation.TagRequest) returns (common.Empty);
+	rpc StartConversation(header.StartRequest) returns (header.Conversation);
+	rpc EndConversation(common.Id) returns (header.Conversation);
+	rpc GetConversation(common.Id) returns (header.Conversation);
+	rpc ListConversations(conversation.ListConversationsRequest) returns (header.Conversations);
+	rpc MatchConversations(common.Ids) returns (header.Conversations);
+	rpc TagConversation(header.TagRequest) returns (common.Empty);
+	rpc UntagConversation(header.TagRequest) returns (common.Empty);
 
-	rpc JoinConversation(conversation.Member) returns (common.Empty);
-	rpc LeftConversation(conversation.Member) returns (common.Empty);
+	rpc JoinConversation(header.Member) returns (common.Empty);
+	rpc LeftConversation(header.Member) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
-	rpc UpdateConversationInfo(conversation.Conversation) returns (conversation.Conversation);
+	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc FilterUser(conversation.FilterUserRequest) returns (conversation.FilterUserResponse);
 	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
 	rpc ListConversations2(conversation.ConversationListRequest) returns (conversation.ConversationListResponse);
-	rpc ExportUsers(conversation.UserExportRequest) returns (common.Empty);
+	rpc ExportUsers(user.UserExportRequest) returns (common.Empty);
 
-	rpc UpdateMuteConversation(conversation.Conversation) returns (common.Empty);
-	rpc UnwatchConversation(conversation.Conversation) returns (common.Empty);
-	rpc MarkReadConversation (conversation.Conversation) returns (common.Empty);
+	rpc UpdateMuteConversation(header.Conversation) returns (common.Empty);
+	rpc UnwatchConversation(header.Conversation) returns (common.Empty);
+	rpc MarkReadConversation (header.Conversation) returns (common.Empty);
 
-	rpc UpdateEndchatSetting(conversation.EndchatSetting) returns (conversation.EndchatSetting);
-	rpc GetEndchatSetting(common.Id) returns (conversation.EndchatSetting);
+	rpc UpdateEndchatSetting(header.EndchatSetting) returns (header.EndchatSetting);
+	rpc GetEndchatSetting(common.Id) returns (header.EndchatSetting);
 }
 
 service ConversationSyncMgr {
 	// sync automation
-	rpc FireConvertTicket(user.AutomationEvent) returns (common.Empty);
-	rpc FireSendChatTranscriptEmail(user.AutomationEvent) returns (common.Empty);
-	rpc FireUpdateConversationState(user.AutomationEvent) returns (common.Empty);
+	rpc FireConvertTicket(header.AutomationEvent) returns (common.Empty);
+	rpc FireSendChatTranscriptEmail(header.AutomationEvent) returns (common.Empty);
+	rpc FireUpdateConversationState(header.AutomationEvent) returns (common.Empty);
 }
 
 service TemplateMgr {
-	rpc CreateTemplate(conversation.Template) returns (conversation.Template);
-	rpc UpdateTemplate(conversation.Template) returns (conversation.Template);
+	rpc CreateTemplate(header.Template) returns (header.Template);
+	rpc UpdateTemplate(header.Template) returns (header.Template);
 	rpc DeleteTemplate(common.Id) returns (common.Empty);
-	rpc GetTemplate(common.Id) returns (conversation.Template);
-	rpc ListTemplates(conversation.SearchTemplate) returns (conversation.Templates);
+	rpc GetTemplate(common.Id) returns (header.Template);
+	rpc ListTemplates(header.SearchTemplate) returns (header.Templates);
 	rpc PickTemplate(common.Id) returns (common.Empty);
 }
 
 service TagMgr {
-	rpc CreateTag(conversation.Tag) returns (conversation.Tag);
-	rpc UpdateTag(conversation.Tag) returns (conversation.Tag);
+	rpc CreateTag(header.Tag) returns (header.Tag);
+	rpc UpdateTag(header.Tag) returns (header.Tag);
 	rpc DeleteTag(common.Id) returns (common.Empty);
-	rpc ListTags(common.Id) returns (conversation.Tags);
-	rpc GetTag(common.Id) returns (conversation.Tag);
+	rpc ListTags(common.Id) returns (header.Tags);
+	rpc GetTag(common.Id) returns (header.Tag);
 }
 
 service IntegrationMgr {
 	rpc Deintegrate(common.Id) returns (common.Empty);
-	rpc ListIntegrations(common.Id) returns (conversation.Integrations);
-	rpc Integrate(conversation.Integration) returns (conversation.Integration);
-	rpc CheckAvailability(user.AvailabilityCheckRequest) returns (user.AvailabilityCheckResult);
+	rpc ListIntegrations(common.Id) returns (header.Integrations);
+	rpc Integrate(header.Integration) returns (header.Integration);
+	rpc CheckAvailability(header.AvailabilityCheckRequest) returns (header.AvailabilityCheckResult);
 }
 
 service TicketMgr {
@@ -243,7 +240,6 @@ service TicketMgr {
 	rpc UpdateTicket(conversation.Ticket) returns (conversation.Ticket);
 	rpc DeleteTicket(conversation.DeleteTicketRequest) returns (common.Empty);
 	rpc GetTicket(conversation.GetTicketRequest) returns (conversation.Ticket);
-	rpc SearchTicket(conversation.TicketListRequest) returns (conversation.ESTickets); // deprecated
 	rpc ListSLAs(common.Empty) returns (conversation.ServiceLevelAgreements);
 	rpc GetSLA(common.Id) returns (conversation.ServiceLevelAgreement);
 	rpc CreateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
@@ -273,15 +269,15 @@ service ServiceContentManager {
 }
 
 service EventMgr {
-	rpc SearchEvents (user.ListEventsRequest) returns (user.Events);
-	rpc CreateEvent (user.UserEvent) returns (user.Event);
+	rpc SearchEvents (header.ListEventsRequest) returns (header.Events);
+	rpc CreateEvent (header.UserEvent) returns (header.Event);
 }
 
 service ConversationEventReader {
-	rpc SendMessage(user.Event) returns (user.Event);
-	rpc UpdateMessage(user.Event) returns (user.Event);
-	rpc ListEvents(conversation.ListEventsRequest) returns (user.Events);
-	rpc SearchEvents(conversation.SearchMessageRequest) returns (user.Events);
+	rpc SendMessage(header.Event) returns (header.Event);
+	rpc UpdateMessage(header.Event) returns (header.Event);
+	rpc ListEvents(header.ListEventsRequest) returns (header.Events);
+	rpc SearchEvents(header.SearchMessageRequest) returns (header.Events);
 }
 
 // file services
@@ -360,7 +356,7 @@ service PaymentMgr {
 
 // pubsub services
 service Pubsub {
-	rpc Publish(realtime.PublishMessage) returns (common.Empty);
+	rpc Publish(header.PublishMessage) returns (common.Empty);
 }
 
 // widget services
@@ -399,11 +395,9 @@ service WebhookService {
 
 // search services
 service Search {
-	rpc SearchUsers(search.SearchUsersRequest) returns (search.SearchUsersResponse);
-	rpc ExportUsers(search.ExportUsersRequest) returns (common.Empty);
-	rpc SearchNotes(search.SearchNotesRequest) returns (search.SearchNotesResponse);
-	rpc SearchConversations(search.SearchConversationsRequest) returns (search.SearchConversationsResponse);
-	rpc SearchTickets(search.SearchTicketsRequest) returns (search.SearchTicketsResponse);
+	rpc SearchUsers(header.SearchUsersRequest) returns (header.SearchUsersResponse);
+	rpc ExportUsers(header.ExportUsersRequest) returns (common.Empty);
+	rpc SearchNotes(header.SearchNotesRequest) returns (header.SearchNotesResponse);
 }
 
 // bqreport services
@@ -418,19 +412,19 @@ service Bqreport {
 
 // bizbot services
 service Bizbot {
-	rpc ListBots(common.Id) returns (bot.Bots);
-	rpc GetBot(common.Id) returns (bot.Bot);
-	rpc UpdateBotRunState(bot.Bot) returns (bot.Bot);
-	rpc CreateBot(bot.Bot) returns (bot.Bot);
-	rpc UpdateBot(bot.Bot) returns (bot.Bot);
+	rpc ListBots(common.Id) returns (header.Bots);
+	rpc GetBot(common.Id) returns (header.Bot);
+	rpc UpdateBotRunState(header.Bot) returns (header.Bot);
+	rpc CreateBot(header.Bot) returns (header.Bot);
+	rpc UpdateBot(header.Bot) returns (header.Bot);
 	rpc DeleteBot(common.Id) returns (common.Empty);
-	rpc OnEvent(user.RunRequest) returns (common.Empty);
-	rpc StartBot(user.RunRequest) returns (common.Empty);
-	rpc StopBot(user.RunRequest) returns (common.Empty);
-	rpc TryAction(user.RunRequest) returns (common.Empty);
-	rpc DoAction(user.RunRequest) returns (bot.Actions);
-	rpc ReportBot(bot.ReportBotRequest) returns (bot.ReportBotResponse);
-	rpc ListObjects(bot.ListObjectsRequest) returns (bot.ListObjectsResponse);
-	rpc CreateBotRevision(bot.Bot) returns (bot.Bot);
-	rpc ListBotRevisions(common.Id) returns (bot.Bots);
+	rpc OnEvent(header.RunRequest) returns (common.Empty);
+	rpc StartBot(header.RunRequest) returns (common.Empty);
+	rpc StopBot(header.RunRequest) returns (common.Empty);
+	rpc TryAction(header.RunRequest) returns (common.Empty);
+	rpc DoAction(header.RunRequest) returns (header.Actions);
+	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
+	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
+	rpc CreateBotRevision(header.Bot) returns (header.Bot);
+	rpc ListBotRevisions(common.Id) returns (header.Bots);
 }

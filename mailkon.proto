@@ -2,7 +2,7 @@ syntax = "proto2";
 
 package mailkon;
 
-import "user3.proto";
+import "header.proto";
 
 option go_package = "github.com/subiz/header/mailkon";
 
@@ -48,7 +48,7 @@ message SendgridEvent {
 	repeated string data = 8;
 	optional string full_message_id = 9;
 	optional string subject = 10;
-	optional user.Event event = 11;
+	optional header.Event event = 11;
 }
 
 message UserAvail {
