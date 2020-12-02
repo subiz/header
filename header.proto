@@ -758,7 +758,7 @@ message StartRequest {
 	string integration_id = 26;
 	string chain_id = 27;
 	string message = 30;
-	repeated Member members = 31;
+	repeated ConversationMember members = 31;
 	string group_id = 32;
 
 	string state = 33; // default is pending, should be active if dont want routing
@@ -985,10 +985,11 @@ message RouteResult {
 	string bot_id = 8; // strategy == bot
 }
 
-message Member {
+message ConversationMember {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string type = 3; // type
+
 	string subiz_id = 8;
 	string id = 4;
 	string name = 10;
@@ -1001,9 +1002,13 @@ message Member {
 	enum State {
 		active = 0;
 		left = 1;
-		observer = 2;
+		observer = 2; // assigned
 	};
 	common.By invited_by = 16;
+
+	int64 left_at = 17;
+	int64 joined_at = 18; // ms
+	int64 first_message_at = 19; // ms
 }
 
 message ListConversationsRequest {
@@ -1058,7 +1063,7 @@ message Conversation {
 	string id = 2;
 	string account_id = 3;
 	int64 created = 4;
-	repeated Member members = 7;
+	repeated ConversationMember members = 7;
 	repeated Tag tags = 10;
 	int64 ended = 12;
 	string state = 11; // converation state
@@ -1067,6 +1072,10 @@ message Conversation {
 	int64 actived = 19;
 	string last_message_id = 21; // internal use only
 	Message last_message = 20;
+
+	Event last_message_sent = 23;
+	string initial_by = 25; // agent_id || popup || user || bot
+
 	int64 response_sec = 22;
 
 	string chain_id = 24;
@@ -1089,6 +1098,7 @@ message Conversation {
 	bool watch = 44; // true
 
 	int64 updated = 43;
+
 }
 
 message Rating {

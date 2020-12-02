@@ -299,7 +299,6 @@ enum E {
 	BotSynced = 4000001;
 	StartBot = 4000002;
 	TeminateBot = 4000003;
-	BotEventCreated = 4000004;
 }
 
 enum RealtimeType {

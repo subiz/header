@@ -183,8 +183,8 @@ service ConversationMgr {
 	rpc TagConversation(header.TagRequest) returns (common.Empty);
 	rpc UntagConversation(header.TagRequest) returns (common.Empty);
 
-	rpc JoinConversation(header.Member) returns (common.Empty);
-	rpc LeftConversation(header.Member) returns (common.Empty);
+	rpc JoinConversation(header.ConversationMember) returns (common.Empty);
+	rpc LeftConversation(header.ConversationMember) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
