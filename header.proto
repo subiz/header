@@ -12,7 +12,6 @@ import "content.proto";
 import "notibox.proto";
 import "noti5.proto";
 import "payment.proto";
-import "email.proto";
 
 message Attribute {
 	string key = 4;
@@ -546,7 +545,7 @@ message AutomationAction {
 	string type = 2;
 
 	User user = 4;
-	email.Email email = 5;
+	Email email = 5;
 	Note user_note = 6;
 	Event event = 7;
 	string agent_id = 8; // deprecated
@@ -2541,4 +2540,73 @@ message WebhookTestResult {
 	int32 status = 15;
 	string payload = 16;
 	int64 latency = 17; // seconds
+}
+
+message Email {
+	common.Context ctx = 1;
+	string from = 3;
+	//string to = 4;
+	string subject = 5;
+	string body = 6;
+	map<string, string> header = 7;
+	repeated EmailAttachment attachments = 8; // s3 links
+	repeated string to = 9;
+	repeated string cc = 10;
+	repeated string bcc = 11;
+	string encoding = 12;
+}
+
+message EmailAttachment {
+	string url = 2;
+	string name = 3;
+	string mimetype = 4;
+}
+
+message FileHeader {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3;
+	string type = 4;
+	int64 size = 5;
+	string md5 = 6;
+	string description = 7;
+}
+
+message PresignResult {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string url = 4;
+	string id = 6;
+	string signed_url = 5;
+}
+
+message FileRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+}
+
+message File {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3;
+	string type = 4;
+	int64 size = 5;
+	string md5 = 6;
+	string description = 10;
+	int64 created = 7;
+	string url = 8;
+	string creator = 9;
+	string id = 11;
+}
+
+message FileMeta {
+	string account_id = 2;
+	string id = 3;
+	int64 uploaded = 4;
+	string name = 5;
+	int64 size = 6;
+	string full_url = 7;
+	string mime_type = 8;
+	int64 downloaded = 10;
 }

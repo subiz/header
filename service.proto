@@ -8,7 +8,6 @@ import "common.proto";
 import "user.proto";
 import "conversation.proto";
 import "content.proto";
-import "file.proto";
 import "payment.proto";
 import "notibox.proto";
 import "noti5.proto";
@@ -281,9 +280,9 @@ service ConversationEventReader {
 
 // file services
 service FileMgr {
-	rpc Presign(file.FileHeader) returns (file.PresignResult);
-	rpc Read(file.FileRequest) returns (file.File);
-	rpc Uploaded(file.FileRequest) returns (file.File);
+	rpc Presign(header.FileHeader) returns (header.PresignResult);
+	rpc Read(header.FileRequest) returns (header.File);
+	rpc Uploaded(header.FileRequest) returns (header.File);
 }
 
 // noti5 services
