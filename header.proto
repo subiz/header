@@ -1104,7 +1104,7 @@ message Conversation {
 message Rating {
 	int64 rated = 35; // rated time ms
 	int32 rating = 36; // 1-poor 2 3-average 4 5-great
-	string rated_by = 37; // must be user
+	string rated_by = 37; // must be an user id
 	bool no_rating = 38; // use dont want to rate
 	string comment = 39;
 }
