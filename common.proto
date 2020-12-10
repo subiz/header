@@ -39,9 +39,6 @@ message Ids {
 }
 
 message Context {
-	string event_id = 1;
-	string node = 3;
-
 	Credential credential = 6;
 
 	Device by_device = 10;
@@ -131,11 +128,6 @@ message Credential {
 	Type type = 4; // should be agent, user or connector
 	Permission perm = 6;
 	string client_id = 7;
-
-	// optional
-	string avatar_url = 15;
-	string name = 16;
-	string email = 17;
 }
 
 message Scope {
