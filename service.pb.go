@@ -1049,22 +1049,22 @@ var file_service_proto_rawDesc = []byte{
 	0x74, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d,
 	0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
 	0x42, 0x6f, 0x74, 0x73, 0x32, 0xac, 0x02, 0x0a, 0x08, 0x53, 0x65, 0x6e, 0x64, 0x62, 0x61, 0x63,
-	0x6b, 0x12, 0x31, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x48, 0x6f,
+	0x6b, 0x12, 0x31, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f,
 	0x6f, 0x6b, 0x12, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62, 0x68,
 	0x6f, 0x6f, 0x6b, 0x1a, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62,
-	0x68, 0x6f, 0x6f, 0x6b, 0x12, 0x34, 0x0a, 0x0b, 0x50, 0x69, 0x6e, 0x67, 0x57, 0x65, 0x62, 0x48,
+	0x68, 0x6f, 0x6f, 0x6b, 0x12, 0x34, 0x0a, 0x0b, 0x50, 0x69, 0x6e, 0x67, 0x57, 0x65, 0x62, 0x68,
 	0x6f, 0x6f, 0x6b, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a,
 	0x19, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b,
 	0x54, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x2a, 0x0a, 0x0d, 0x44, 0x65,
-	0x6c, 0x65, 0x74, 0x65, 0x57, 0x65, 0x62, 0x48, 0x6f, 0x6f, 0x6b, 0x12, 0x0a, 0x2e, 0x63, 0x6f,
+	0x6c, 0x65, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x12, 0x0a, 0x2e, 0x63, 0x6f,
 	0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
 	0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2c, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x57, 0x65,
 	0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x73, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
 	0x49, 0x64, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62, 0x68,
-	0x6f, 0x6f, 0x6b, 0x73, 0x12, 0x2a, 0x0a, 0x0b, 0x52, 0x65, 0x61, 0x64, 0x57, 0x65, 0x62, 0x48,
+	0x6f, 0x6f, 0x6b, 0x73, 0x12, 0x2a, 0x0a, 0x0b, 0x52, 0x65, 0x61, 0x64, 0x57, 0x65, 0x62, 0x68,
 	0x6f, 0x6f, 0x6b, 0x12, 0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x49, 0x64, 0x1a,
 	0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b,
-	0x12, 0x31, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x48, 0x6f, 0x6f,
+	0x12, 0x31, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f,
 	0x6b, 0x12, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62, 0x68, 0x6f,
 	0x6f, 0x6b, 0x1a, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62, 0x68,
 	0x6f, 0x6f, 0x6b, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
@@ -1547,12 +1547,12 @@ var file_service_proto_depIdxs = []int32{
 	125, // 262: header.Bizbot.ListObjects:input_type -> header.ListObjectsRequest
 	122, // 263: header.Bizbot.CreateBotRevision:input_type -> header.Bot
 	2,   // 264: header.Bizbot.ListBotRevisions:input_type -> common.Id
-	115, // 265: header.Sendback.CreateWebHook:input_type -> header.Webhook
-	2,   // 266: header.Sendback.PingWebHook:input_type -> common.Id
-	2,   // 267: header.Sendback.DeleteWebHook:input_type -> common.Id
+	115, // 265: header.Sendback.CreateWebhook:input_type -> header.Webhook
+	2,   // 266: header.Sendback.PingWebhook:input_type -> common.Id
+	2,   // 267: header.Sendback.DeleteWebhook:input_type -> common.Id
 	2,   // 268: header.Sendback.ListWebhooks:input_type -> common.Id
-	2,   // 269: header.Sendback.ReadWebHook:input_type -> common.Id
-	115, // 270: header.Sendback.UpdateWebHook:input_type -> header.Webhook
+	2,   // 269: header.Sendback.ReadWebhook:input_type -> common.Id
+	115, // 270: header.Sendback.UpdateWebhook:input_type -> header.Webhook
 	126, // 271: header.ApiServer.Call:output_type -> api.Response
 	1,   // 272: header.AccountMgr.CreateGroup:output_type -> account.AgentGroup
 	1,   // 273: header.AccountMgr.UpdateGroup:output_type -> account.AgentGroup
@@ -1818,12 +1818,12 @@ var file_service_proto_depIdxs = []int32{
 	206, // 533: header.Bizbot.ListObjects:output_type -> header.ListObjectsResponse
 	122, // 534: header.Bizbot.CreateBotRevision:output_type -> header.Bot
 	203, // 535: header.Bizbot.ListBotRevisions:output_type -> header.Bots
-	115, // 536: header.Sendback.CreateWebHook:output_type -> header.Webhook
-	194, // 537: header.Sendback.PingWebHook:output_type -> header.WebhookTestResult
-	12,  // 538: header.Sendback.DeleteWebHook:output_type -> common.Empty
+	115, // 536: header.Sendback.CreateWebhook:output_type -> header.Webhook
+	194, // 537: header.Sendback.PingWebhook:output_type -> header.WebhookTestResult
+	12,  // 538: header.Sendback.DeleteWebhook:output_type -> common.Empty
 	193, // 539: header.Sendback.ListWebhooks:output_type -> header.Webhooks
-	115, // 540: header.Sendback.ReadWebHook:output_type -> header.Webhook
-	115, // 541: header.Sendback.UpdateWebHook:output_type -> header.Webhook
+	115, // 540: header.Sendback.ReadWebhook:output_type -> header.Webhook
+	115, // 541: header.Sendback.UpdateWebhook:output_type -> header.Webhook
 	271, // [271:542] is the sub-list for method output_type
 	0,   // [0:271] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
@@ -12678,12 +12678,12 @@ var _Bizbot_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type SendbackClient interface {
-	CreateWebHook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error)
-	PingWebHook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*WebhookTestResult, error)
-	DeleteWebHook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
+	CreateWebhook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error)
+	PingWebhook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*WebhookTestResult, error)
+	DeleteWebhook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error)
 	ListWebhooks(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Webhooks, error)
-	ReadWebHook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Webhook, error)
-	UpdateWebHook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error)
+	ReadWebhook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Webhook, error)
+	UpdateWebhook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error)
 }
 
 type sendbackClient struct {
@@ -12694,27 +12694,27 @@ func NewSendbackClient(cc grpc.ClientConnInterface) SendbackClient {
 	return &sendbackClient{cc}
 }
 
-func (c *sendbackClient) CreateWebHook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error) {
+func (c *sendbackClient) CreateWebhook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error) {
 	out := new(Webhook)
-	err := c.cc.Invoke(ctx, "/header.Sendback/CreateWebHook", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Sendback/CreateWebhook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sendbackClient) PingWebHook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*WebhookTestResult, error) {
+func (c *sendbackClient) PingWebhook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*WebhookTestResult, error) {
 	out := new(WebhookTestResult)
-	err := c.cc.Invoke(ctx, "/header.Sendback/PingWebHook", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Sendback/PingWebhook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sendbackClient) DeleteWebHook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
+func (c *sendbackClient) DeleteWebhook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*common.Empty, error) {
 	out := new(common.Empty)
-	err := c.cc.Invoke(ctx, "/header.Sendback/DeleteWebHook", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Sendback/DeleteWebhook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12730,18 +12730,18 @@ func (c *sendbackClient) ListWebhooks(ctx context.Context, in *common.Id, opts .
 	return out, nil
 }
 
-func (c *sendbackClient) ReadWebHook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Webhook, error) {
+func (c *sendbackClient) ReadWebhook(ctx context.Context, in *common.Id, opts ...grpc.CallOption) (*Webhook, error) {
 	out := new(Webhook)
-	err := c.cc.Invoke(ctx, "/header.Sendback/ReadWebHook", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Sendback/ReadWebhook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *sendbackClient) UpdateWebHook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error) {
+func (c *sendbackClient) UpdateWebhook(ctx context.Context, in *Webhook, opts ...grpc.CallOption) (*Webhook, error) {
 	out := new(Webhook)
-	err := c.cc.Invoke(ctx, "/header.Sendback/UpdateWebHook", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Sendback/UpdateWebhook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12750,91 +12750,91 @@ func (c *sendbackClient) UpdateWebHook(ctx context.Context, in *Webhook, opts ..
 
 // SendbackServer is the server API for Sendback service.
 type SendbackServer interface {
-	CreateWebHook(context.Context, *Webhook) (*Webhook, error)
-	PingWebHook(context.Context, *common.Id) (*WebhookTestResult, error)
-	DeleteWebHook(context.Context, *common.Id) (*common.Empty, error)
+	CreateWebhook(context.Context, *Webhook) (*Webhook, error)
+	PingWebhook(context.Context, *common.Id) (*WebhookTestResult, error)
+	DeleteWebhook(context.Context, *common.Id) (*common.Empty, error)
 	ListWebhooks(context.Context, *common.Id) (*Webhooks, error)
-	ReadWebHook(context.Context, *common.Id) (*Webhook, error)
-	UpdateWebHook(context.Context, *Webhook) (*Webhook, error)
+	ReadWebhook(context.Context, *common.Id) (*Webhook, error)
+	UpdateWebhook(context.Context, *Webhook) (*Webhook, error)
 }
 
 // UnimplementedSendbackServer can be embedded to have forward compatible implementations.
 type UnimplementedSendbackServer struct {
 }
 
-func (*UnimplementedSendbackServer) CreateWebHook(context.Context, *Webhook) (*Webhook, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateWebHook not implemented")
+func (*UnimplementedSendbackServer) CreateWebhook(context.Context, *Webhook) (*Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWebhook not implemented")
 }
-func (*UnimplementedSendbackServer) PingWebHook(context.Context, *common.Id) (*WebhookTestResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PingWebHook not implemented")
+func (*UnimplementedSendbackServer) PingWebhook(context.Context, *common.Id) (*WebhookTestResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PingWebhook not implemented")
 }
-func (*UnimplementedSendbackServer) DeleteWebHook(context.Context, *common.Id) (*common.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteWebHook not implemented")
+func (*UnimplementedSendbackServer) DeleteWebhook(context.Context, *common.Id) (*common.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWebhook not implemented")
 }
 func (*UnimplementedSendbackServer) ListWebhooks(context.Context, *common.Id) (*Webhooks, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWebhooks not implemented")
 }
-func (*UnimplementedSendbackServer) ReadWebHook(context.Context, *common.Id) (*Webhook, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadWebHook not implemented")
+func (*UnimplementedSendbackServer) ReadWebhook(context.Context, *common.Id) (*Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadWebhook not implemented")
 }
-func (*UnimplementedSendbackServer) UpdateWebHook(context.Context, *Webhook) (*Webhook, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateWebHook not implemented")
+func (*UnimplementedSendbackServer) UpdateWebhook(context.Context, *Webhook) (*Webhook, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWebhook not implemented")
 }
 
 func RegisterSendbackServer(s *grpc.Server, srv SendbackServer) {
 	s.RegisterService(&_Sendback_serviceDesc, srv)
 }
 
-func _Sendback_CreateWebHook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Sendback_CreateWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Webhook)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SendbackServer).CreateWebHook(ctx, in)
+		return srv.(SendbackServer).CreateWebhook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Sendback/CreateWebHook",
+		FullMethod: "/header.Sendback/CreateWebhook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SendbackServer).CreateWebHook(ctx, req.(*Webhook))
+		return srv.(SendbackServer).CreateWebhook(ctx, req.(*Webhook))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sendback_PingWebHook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Sendback_PingWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(common.Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SendbackServer).PingWebHook(ctx, in)
+		return srv.(SendbackServer).PingWebhook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Sendback/PingWebHook",
+		FullMethod: "/header.Sendback/PingWebhook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SendbackServer).PingWebHook(ctx, req.(*common.Id))
+		return srv.(SendbackServer).PingWebhook(ctx, req.(*common.Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sendback_DeleteWebHook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Sendback_DeleteWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(common.Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SendbackServer).DeleteWebHook(ctx, in)
+		return srv.(SendbackServer).DeleteWebhook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Sendback/DeleteWebHook",
+		FullMethod: "/header.Sendback/DeleteWebhook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SendbackServer).DeleteWebHook(ctx, req.(*common.Id))
+		return srv.(SendbackServer).DeleteWebhook(ctx, req.(*common.Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -12857,38 +12857,38 @@ func _Sendback_ListWebhooks_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sendback_ReadWebHook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Sendback_ReadWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(common.Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SendbackServer).ReadWebHook(ctx, in)
+		return srv.(SendbackServer).ReadWebhook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Sendback/ReadWebHook",
+		FullMethod: "/header.Sendback/ReadWebhook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SendbackServer).ReadWebHook(ctx, req.(*common.Id))
+		return srv.(SendbackServer).ReadWebhook(ctx, req.(*common.Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Sendback_UpdateWebHook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Sendback_UpdateWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Webhook)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SendbackServer).UpdateWebHook(ctx, in)
+		return srv.(SendbackServer).UpdateWebhook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Sendback/UpdateWebHook",
+		FullMethod: "/header.Sendback/UpdateWebhook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SendbackServer).UpdateWebHook(ctx, req.(*Webhook))
+		return srv.(SendbackServer).UpdateWebhook(ctx, req.(*Webhook))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -12898,28 +12898,28 @@ var _Sendback_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*SendbackServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateWebHook",
-			Handler:    _Sendback_CreateWebHook_Handler,
+			MethodName: "CreateWebhook",
+			Handler:    _Sendback_CreateWebhook_Handler,
 		},
 		{
-			MethodName: "PingWebHook",
-			Handler:    _Sendback_PingWebHook_Handler,
+			MethodName: "PingWebhook",
+			Handler:    _Sendback_PingWebhook_Handler,
 		},
 		{
-			MethodName: "DeleteWebHook",
-			Handler:    _Sendback_DeleteWebHook_Handler,
+			MethodName: "DeleteWebhook",
+			Handler:    _Sendback_DeleteWebhook_Handler,
 		},
 		{
 			MethodName: "ListWebhooks",
 			Handler:    _Sendback_ListWebhooks_Handler,
 		},
 		{
-			MethodName: "ReadWebHook",
-			Handler:    _Sendback_ReadWebHook_Handler,
+			MethodName: "ReadWebhook",
+			Handler:    _Sendback_ReadWebhook_Handler,
 		},
 		{
-			MethodName: "UpdateWebHook",
-			Handler:    _Sendback_UpdateWebHook_Handler,
+			MethodName: "UpdateWebhook",
+			Handler:    _Sendback_UpdateWebhook_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

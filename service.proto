@@ -429,10 +429,10 @@ service Bizbot {
 
 // sendback services
 service Sendback {
-	rpc CreateWebHook(header.Webhook) returns (header.Webhook);
-	rpc PingWebHook(common.Id) returns (header.WebhookTestResult);
-	rpc DeleteWebHook(common.Id) returns (common.Empty);
+	rpc CreateWebhook(header.Webhook) returns (header.Webhook);
+	rpc PingWebhook(common.Id) returns (header.WebhookTestResult);
+	rpc DeleteWebhook(common.Id) returns (common.Empty);
 	rpc ListWebhooks(common.Id) returns (header.Webhooks);
-	rpc ReadWebHook(common.Id) returns (header.Webhook);
-	rpc UpdateWebHook(header.Webhook) returns (header.Webhook);
+	rpc ReadWebhook(common.Id) returns (header.Webhook);
+	rpc UpdateWebhook(header.Webhook) returns (header.Webhook);
 }
