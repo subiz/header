@@ -426,3 +426,13 @@ service Bizbot {
 	rpc CreateBotRevision(header.Bot) returns (header.Bot);
 	rpc ListBotRevisions(common.Id) returns (header.Bots);
 }
+
+// sendback services
+service Sendback {
+	rpc CreateWebHook(header.Webhook) returns (header.Webhook);
+	rpc PingWebHook(common.Id) returns (header.WebhookTestResult);
+	rpc DeleteWebHook(common.Id) returns (common.Empty);
+	rpc ListWebhooks(common.Id) returns (header.Webhooks);
+	rpc ReadWebHook(common.Id) returns (header.Webhook);
+	rpc UpdateWebHook(header.Webhook) returns (header.Webhook);
+}
