@@ -1009,6 +1009,8 @@ message ConversationMember {
 	int64 left_at = 17;
 	int64 joined_at = 18; // ms
 	int64 first_message_at = 19; // ms
+
+	bool is_draft_bot = 20;
 }
 
 message ListConversationsRequest {
