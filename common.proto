@@ -4,21 +4,6 @@ package common;
 
 option go_package = "github.com/subiz/header/common";
 
-// A string
-message String {
-	string value = 2;
-}
-
-// An int64 value
-message Int64 {
-	int64 value = 2;
-}
-
-// A bool value
-message Bool {
-	bool value = 2;
-}
-
 message Empty {
 	Context ctx = 1;
 }
@@ -49,7 +34,6 @@ message Context {
 	int64 kafka_offset = 14;
 	uint64 kafka_term = 15;
 	string idempotency_key = 17;
-	string env = 18; // "test", "production"
 	string kafka_key = 19;
 
 	// for email
@@ -99,18 +83,19 @@ enum Weekday {
 }
 
 enum Month {
-	January = 0;
-	February = 1;
-	March = 2;
-	April = 3;
-	May = 4;
-	June = 5;
-	July = 6;
-	August = 7;
-	September = 8;
-	October = 9;
-	November = 10;
-	December = 11;
+	Nonuary = 0;
+	January = 1;
+	February = 2;
+	March = 3;
+	April = 4;
+	May = 5;
+	June = 6;
+	July = 7;
+	August = 8;
+	September = 9;
+	October = 10;
+	November = 11;
+	December = 12;
 }
 
 message By {

@@ -183,10 +183,8 @@ service ConversationMgr {
 	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
-	rpc FilterUser(conversation.FilterUserRequest) returns (conversation.FilterUserResponse);
 	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
 	rpc ListConversations2(conversation.ConversationListRequest) returns (conversation.ConversationListResponse);
-	rpc ExportUsers(conversation.UserExportRequest) returns (common.Empty);
 
 	rpc UpdateMuteConversation(header.Conversation) returns (common.Empty);
 	rpc UnwatchConversation(header.Conversation) returns (common.Empty);

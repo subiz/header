@@ -15,14 +15,6 @@ message Search {
 	optional string after_id = 7;
 }
 
-message ListConversationsByUserRequest {
-	optional string account_id = 1;
-	optional string channel_id = 2; // if null -> all channel
-	optional string user_id = 3; // must be visitor id
-	optional string start_id = 4;
-	optional int32 limit = 5;
-}
-
 message EsMessage {
 	optional string id = 2;
 	optional string account_id = 3;
@@ -321,25 +313,6 @@ message FilterCondition {
 	optional string value = 2; // encoded json
 }
 
-message FilterUserRequest {
-	optional string account_id = 2;
-	repeated string conversation_tag_ids = 3;
-	optional string conversation_state = 4; // deprecated
-	optional string ticket_state = 5; // deprecated
-	optional int64 limit = 6;
-	optional string anchor = 7;
-	optional FilterCondition conversation_created = 8;
-	optional string segment_id = 9;
-	repeated string conversation_states = 10;
-	repeated string ticket_states = 11;
-}
-
-message FilterUserResponse {
-	// optional int64 total = 2;
-	repeated string user_ids = 3;
-	optional string anchor = 4;
-}
-
 message SearchConversationRequest {
 	optional string account_id = 2;
 	optional string user_id = 3;
@@ -409,15 +382,6 @@ message ESConversationMessage {
 	repeated string conversation_tag_ids = 12;
 }
 
-// for update user segment ids of a conversation in elastic search
-message UpdateUserSegmentRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string user_id = 3;
-	repeated string segment_ids = 4; // all segment ids
-	optional string conversation_id = 5;
-}
-
 message ESTicket {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -461,33 +425,6 @@ message ConversationListResponse {
 	repeated ESConversation result = 3;
 	optional int64 total = 4;
 	repeated string conversation_ids = 5;
-}
-
-// export users in conversations list page
-message UserExportRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string assigned_agent_id = 3;
-	optional string assigned_group_id = 4;
-	optional bool agent_replied = 6;
-	optional FilterCondition agent_replied_at = 7;
-	optional FilterCondition created = 9;
-	repeated string connector_ids = 10;
-	optional string channel_source = 11;
-	repeated string emails = 16; // send to this emails
-	repeated string attribute_keys = 17; // exported attributes
-	optional string email_subject = 18;
-	optional string language_code = 19;
-	repeated string agent_ids = 20; // any of
-	optional FilterCondition user_id = 21;
-	optional FilterCondition tag_ids = 22;
-	repeated string connector_types = 23; // any of
-	optional FilterCondition state = 24;
-	optional bool user_replied = 25;
-	optional bool replied_by_bots = 26;
-	optional bool replied_by_agents = 27;
-	optional FilterCondition response_time = 28;
-	optional string replied_agent_id = 29;
 }
 
 message ReportConversationsRequest {
