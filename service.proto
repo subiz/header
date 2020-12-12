@@ -95,19 +95,6 @@ service LiveMgr {
 	rpc Presences(header.PresencesRequest) returns (header.PresencesResponse);
 }
 
-service UserSyncMgr {
-	// sync user
-	rpc CreateEvent(header.UserEvent) returns (common.Empty);
-
-	// sync automation
-	rpc FireBlockUser(header.AutomationEvent) returns (common.Empty);
-	rpc FireUpdateUserAttribute(header.AutomationEvent) returns (common.Empty);
-	rpc FireAddUserNote(header.AutomationEvent) returns (common.Empty);
-
-	// sync user job
-	rpc CallbackAutomation(header.AutomationCalledback) returns (common.Empty);
-}
-
 service NoteMgr {
 	rpc ListNotes(header.ListNotesRequest) returns (header.Notes);
 	rpc AddNote(header.Note) returns (header.Note);

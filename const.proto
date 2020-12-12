@@ -133,7 +133,6 @@ enum E {
 	UserSynced = 111101;
 	AutomationSynced = 111102;
 	AutomationFired = 111103;
-	AutomationCallbackFired = 111104;
 
 	AutomationBlockUserFired = 111218;
 	AutomationUpdateUserAttributeFired = 111219;
@@ -160,8 +159,6 @@ enum E {
 	NotiboxSynced = 1101101;
 
 	UserEmailSynced = 2000004;
-	UserExportEmail = 2000005;
-	UserExport = 2000006;
 	NoteSynced = 2000007;
 	NoteUpdated = 2000008;
 	NoteDeleted = 2000009;

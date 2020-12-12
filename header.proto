@@ -447,15 +447,6 @@ message UserEvent {
 	User user = 6;
 }
 
-message AutomationCalledback {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string user_id = 4;
-	string automation_id = 5;
-	Event event = 9;
-	AutomationAction action = 10;
-}
-
 message AutomationEvent {
 	common.Context ctx = 1;
 	string account_id = 3;
