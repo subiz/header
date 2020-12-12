@@ -78,8 +78,6 @@ service UserMgr {
 	rpc CountTotal(header.CountTotalRequest) returns (header.CountTotalResponse);
 	rpc Ping(common.PingRequest) returns (common.Pong);
 
-	rpc ExportUsers (user.UserExportRequest) returns (common.Empty); // deprecated
-
 	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
 
 	rpc MatchUsers(common.Ids) returns (header.Users);
@@ -108,7 +106,6 @@ service UserSyncMgr {
 
 	// sync user job
 	rpc CallbackAutomation(header.AutomationCalledback) returns (common.Empty);
-	rpc ExportUsers(user.UserExportRequest) returns (common.Empty);
 }
 
 service NoteMgr {
@@ -387,7 +384,6 @@ service WebhookService {
 // search services
 service Search {
 	rpc SearchUsers(header.SearchUsersRequest) returns (header.SearchUsersResponse);
-	rpc ExportUsers(header.ExportUsersRequest) returns (common.Empty);
 	rpc SearchNotes(header.SearchNotesRequest) returns (header.SearchNotesResponse);
 }
 
