@@ -4,47 +4,13 @@ package header;
 
 option go_package = "github.com/subiz/header";
 
-// field number of each group is 1000 apart, start from 2 millions
-
 enum E {
 	Sub = 0;
-	ConversationAssigned = 1000; // conversation is assigned to an agent
-	ConversationWaiting = 1002; // new conversation is added to unassigned list
-	ConversationStartRequested = 1003; // conversation started from an agent // conversationstart
-	ConversationAccepted = 1004; // conversation from unassigned list is accepted by an agent
-	ConversationEventCreated = 1006;
-	ConversationJoinRequested = 1007;
-	ConversationMessageRequested = 1008; // message
-	ConversationLeaveRequested = 1009; // conversation
-	ConversationEnded = 1010;
 
-	UserReadRequested = 1110; // Id
-	UserUpdateRequested = 1112; // User
-	UserCreateRequested = 1113; // User
-	UserSearchRequested = 1114; // Ids
-	UserEventCreateRequested = 1115; // rawevent -> raw event
-	UserTopicSearchRequested = 1116; // listtopicsrequest -> listtopicsresult
-	UserEventSearchRequested = 1117; // listeventsrequest -> rawevents
-
-	ConversationUserRequestReply = 10051; // user
-	ConversationLimitUpdated = 10052;
-	ConversationRequestWaitTimeout = 10060;
-	ConversationListEventsRequested = 10061;
-
-	ConversationMessageAckRequested = 10090;
-	ConversationMessageReceiveRequested = 10091;
-	ConversationMessageSeeRequested = 10092;
-	ChannelIntegrationAvailabilityCheck = 10093;
-	ConversationMessageSearchRequest = 10094;
-	TagCreated = 10095;
-	ConversationUpserted = 10097; // conversation
-	ConversationMessageSent = 10099; // message
 	SchedulerRequested = 10201; // scheduleritem
 	SchedulerCancelled = 10202; // Id
 	ApiWhiteListSynced = 10300;
-	ContentRequested = 10502;
-	ContentViewed = 10503;
-	Email_SendRequest =10600;
+	Email_SendRequest = 10600;
 
 	Webhook4WebhookReadRequested = 10903;
 	Webhook4WebhookUpserted = 10904;
@@ -54,59 +20,9 @@ enum E {
 	Webhook4PurgeQueueRequested = 10908;
 	Webhook4ShardSend = 10909;
 
-	NotiboxRequested = 11010;
-	NotiUpsertRequested = 11011;
-	NotiReadRequested = 11012;
-	NotiUnreadRequested = 11014;
-	NotiListRequested = 11015;
-	NotiDecreaseNewRequested = 11016;
-	NotiNewReadRequested = 11017;
-
-	FilePresignRequested = 11030;
-	FileCreated = 11033;
-	FileInfoRequested = 11034;
-	FileUploaded = 11036;
-	PaymentSynced = 11040;
-	LimitUpdated = 11041;
-	PaymentRequested = 11044;
-	PaymentRenewCycle = 11045;
-
-	AgentGroupDeleted = 11050; // id
-	AgentLeftGroup = 11051; // groupmember
-	AgentJoinedGroup = 11052; // groupmember
-	AgentGroupUpserted = 11054; // agentgroup
-	AgentUpserted = 11056; // agent
-	AgentPermissionUpdated = 11059; // AgentPerm
-
-	MaikonRequested = 11060;
-	MailkonSynced = 11061;
-	MailkonJob = 11062;
-	MailkonCreateAccountRequested = 11063;
-
 	LogLogRequested = 11100;
 	LogRequested = 11101;
 	LogSynced = 11102;
-
-	UserSegmentationCreateRequested = 11110;
-	UserSegmentationUpdateRequested = 11111;
-	UserSegmentationDeleteRequested = 11112;
-	UserSegmentationListRequested = 11113;
-	UserSegmentationReadRequested = 11114;
-
-	SegmentationRequested = 11115;
-	SegmentationAddToSegmemtRequested = 11116;
-	SegmentationRemoveFromSegmentRequested = 11117;
-	SegmentationToTopRequested = 11118;
-
-	UserAddToMyListRequested = 11120;
-	UserRemoveFromMyListRequested = 11121;
-
-	UserEventTopicSubscribeRequested = 11135;
-	UserEventTopicUnsubscribeRequested = 11136;
-
-	DashboardLanguageUpdateRequested = 11137;
-	DashboardLanguageUpdated = 11138;
-	DashboardVersionUpdated = 11139; // reload js and css
 
 	EndChatBotMidnightCalledback=11140;
 	EndChatBotEndCalledback=11141;
@@ -126,7 +42,6 @@ enum E {
 	UserSessionUpdateRequested = 11165;
 	UserSessionCreateRequested = 11166;
 	UserSessionReadRequested = 11167;
-	SegmentationLoop = 11168;
 	UserCreated = 11170;
 	UserAttributeAdded = 11171;
 	UserUpdated = 11172;
@@ -157,15 +72,6 @@ enum E {
 	ClientDeauthorized = 104034;
 	BotAuthorizeRequest = 104035;
 
-	WidgetSettingUpserted = 108010;
-	WidgetSynced = 108011;
-	WidgetV3Synced = 108013;
-
-	Webhook4WebhookFire = 109011;
-	Webhook4Send = 109012;
-	Webhook4Callbacked = 109013;
-	Webhook4RequestResolved = 109014;
-	Webhook4RestartRequested = 109015;
 	AccountRequested = 110016;
 	AccountSynced = 110017;
 	AccountV3Synced = 110018;
@@ -228,26 +134,6 @@ enum E {
 	AutomationSynced = 111102;
 	AutomationFired = 111103;
 	AutomationCallbackFired = 111104;
-	UserUpserted = 111105;
-	UserV3Synced = 111106;
-	UserResolvedJob2 = 111198;
-	UserJob = 111199; // useraliasadded, useraliasdeleted,
-	UserResolvedJob = 111200;
-	UserResolvedEventCreated = 111201;
-	UserAliasAdded = 111202;
-	UserAliasDeleted = 111203;
-	UserEventCreated = 111204;
-	UserContentViewed = 111205;
-	UserMessageSent = 111206;
-	UserAggregated = 111207;
-	UserTopicJob = 111208;
-	UserEventTopicPublished = 111209;
-	UserNotifyMyUserRequested = 111210;
-	UserSegmentPickRequested = 111211;
-	UserSegmentUnpickRequested = 111212;
-	UserAggregateSegmentAttrCount = 111214;
-	UserAggregateUpdateInteracted = 111215;
-	UserSegmentAggregated = 111217;
 
 	AutomationBlockUserFired = 111218;
 	AutomationUpdateUserAttributeFired = 111219;
@@ -261,27 +147,18 @@ enum E {
 	AutomationAddAgentToConversationFired = 111227;
 	AutomationCreateTicketFired = 111228;
 	AutomationConversationTagFired = 111229;
-	UserClearCache = 111230;
-	AutomationAddUserToSegmentationFired = 111231;
 	UserTotalConvoUpdated = 111232;
 	UserTotalOpenTicketUpdated = 111233;
 	TicketUpdated = 111234;
-	AutomationCreditAggregated = 111235;
-	AutomationCreditCountAggregate = 111236;
 
 	AutomationSendEmailFired = 111431;
 	AutomationOpenWidgetScreenFired = 111432;
-	AutomationRemoveUserFromSegmentationFired = 111433;
 	AutomationSendChatTranscriptEmailFired = 111434;
 	AutomationSendChatTranscriptEmailResolved = 111435;
 	AutomationUpdateConversationStateFired = 111436;
 	AutomationSendWebhookFired =  111437;
 	NotiboxSynced = 1101101;
 
-	UserSegmentSynced = 2000000;
-	UserSegmentAdded = 2000001;
-	UserSegmentRemoved = 2000002;
-	UserSegmentUpdated = 2000003;
 	UserEmailSynced = 2000004;
 	UserExportEmail = 2000005;
 	UserExport = 2000006;
@@ -289,7 +166,6 @@ enum E {
 	NoteUpdated = 2000008;
 	NoteDeleted = 2000009;
 
-	ConversationUpdateUserSegmentRequested = 2001000;
 	TicketSynced = 2001001;
 
 	UserConversationSynced = 3000006;

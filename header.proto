@@ -2595,7 +2595,7 @@ enum RealtimeType {
 	limit_updated = 18;
 	my_user_upserted = 19;
 	user_info_updated = 20;
-	user_added_to_my_list = 21;
+
 	user_created = 22;
 	note_created = 23;
 	presence_updated = 24;
@@ -2610,7 +2610,6 @@ enum RealtimeType {
 	user_attribute_updated = 33;
 	user_attribute_deleted = 34;
 
-	automation_out_of_credit = 35;
 	automation_fired = 36;
 
 	notibox_notification_upserted = 37;
@@ -2629,9 +2628,8 @@ enum RealtimeType {
 	conversation_left =46 ;
 	conversation_tagged = 47;
 	conversation_untagged = 48;
-	//conversation_waiting = 8;
-	channel_deintegrated = 49;
-	channel_integrated = 50;
+
+	integration_updated = 49;
 
 	message_seen = 51; // event.data.message.computed.seen
 	message_ack = 52; //  event.data.message.computed.ack
@@ -2644,8 +2642,6 @@ enum RealtimeType {
 
 	conversation_rating_requested = 60; // event.data.conversation
 	conversation_rated = 61; // event.data.conversation
-
-	conversation_pending = 62;
 
 	ticket_created = 63;
 	ticket_updated = 64;
@@ -2660,18 +2656,6 @@ enum RealtimeType {
 
 	message_template_updated = 72;
 	message_template_deleted = 73;
-
-	zalo_page_updated = 74;
-	zalo_page_deleted = 75;
-
-	messenger_page_updated = 76;
-	messenger_page_deleted = 77;
-
-	facebook_page_updated = 78;
-	facebook_page_deleted = 79;
-
-	incomming_email_updated = 80;
-	incomming_email_deleted = 81;
 
 	live_act_user_num = 82;
 	live_top_source = 83;
