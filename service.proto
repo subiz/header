@@ -111,11 +111,6 @@ service UserSyncMgr {
 	rpc ExportUsers(user.UserExportRequest) returns (common.Empty);
 }
 
-service AutomationCreditMgr {
-	rpc GetAutomationCredit(common.Id) returns (header.AutomationCredit);
-	rpc AddAutomationCredit(header.AutomationCredit) returns (common.Empty);
-}
-
 service NoteMgr {
 	rpc ListNotes(header.ListNotesRequest) returns (header.Notes);
 	rpc AddNote(header.Note) returns (header.Note);

@@ -492,7 +492,6 @@ message Automation {
 		// automation_invite_message = 4;
 
 		block_user = 5;
-		merge_users = 7;
 		user_notification = 8;
 		user_webhook = 9;
 		user_note = 10;
@@ -501,10 +500,6 @@ message Automation {
 		add_agent_to_conversation = 14;
 		create_ticket = 15;
 		conversation_tag = 16;
-
-		// agent_notification = 17;
-		add_user_to_segmentation = 18;
-
 	}
 
 	string action_data = 14; // deprecated
@@ -605,31 +600,6 @@ message AutomationCreditsAggregate {
 	int64 min = 6;
 }
 
-message AutomationCredit {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	int64 webhook_fired = 3;
-	int64 message_fired = 4;
-	int64 email_fired = 5;
-
-	int64 webhook_addon = 8;
-	int64 message_addon = 9;
-	int64 email_addon = 10;
-
-	int64 webhook_credits = 14;
-	int64 message_credits = 15;
-	int64 email_credits = 16;
-
-	int64 month = 20;
-
-	enum Type {
-		email = 0;
-		webhook = 1;
-		message = 2;
-	}
-}
-
 message Topic {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -656,7 +626,6 @@ message UnreadTopic { // todo: delete this, unread is just topic_updated with is
 	int32 unread = 9;
 	Event by_event = 10;
 }
-
 
 message SourceTrace {
 	common.Context ctx = 1;
@@ -1009,8 +978,6 @@ message ConversationMember {
 	int64 left_at = 17;
 	int64 joined_at = 18; // ms
 	int64 first_message_at = 19; // ms
-
-	bool is_draft_bot = 20;
 }
 
 message ListConversationsRequest {
@@ -1100,7 +1067,6 @@ message Conversation {
 	bool watch = 44; // true
 
 	int64 updated = 43;
-
 }
 
 message Rating {
@@ -1138,7 +1104,6 @@ message Message {
 	// used for reaction and delivery status, could be ignore
 	repeated MessagePong pongs = 17;
 
-	repeated Revision revisions = 18;
 	string quill_delta = 20;
 }
 
@@ -1172,14 +1137,6 @@ message MessagePong {
 	int64 created = 5;
 	string ack_error = 6; // used in ack
 	int64 count =  7;
-}
-
-message Revision {
-	string text = 5;
-	string format = 6;
-	repeated Attachment attachments = 7;
-	repeated common.KV fields =	8;
-	int64 created = 9;
 }
 
 message MessageButton {

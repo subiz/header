@@ -12,6 +12,8 @@ message FacebookPage {
 	optional string name = 5;
 	optional string access_token = 6;
 	optional int64 updated = 7;
+
+	optional string state = 8; // activated || deleted || failed
 }
 
 message FbWebhookEvent {
