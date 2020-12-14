@@ -2504,6 +2504,7 @@ message Delivery {
 	int32 status_code = 12;
 	int64 begin_at = 13;
 	int64 end_at = 14;
+	repeated string errs = 15;
 }
 
 message RecentIndexDeliveryRequest {
