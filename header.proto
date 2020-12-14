@@ -2378,7 +2378,7 @@ enum ChannelType {
 	email = 1;
 	facebook = 2; // ott
 	viber = 3;
-	facebook_comment = 4; // public, dont close
+	facebook_comment = 4; // public, dont close conversation
 	zalo = 5;
 	call = 6;
 }
@@ -2474,6 +2474,14 @@ message Webhook {
 	bool is_disabled = 33;
 	int64 last_delivery_at = 34;
 	int64 last_success_delivery_at = 35;
+
+	enum EventGroup {
+		account = 0;
+		user = 1;
+		conversation = 2;
+		all = 3;
+	}
+	repeated string event_groups = 36;
 }
 
 message Deliveries {

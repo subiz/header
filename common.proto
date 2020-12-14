@@ -115,17 +115,6 @@ message Credential {
 	string client_id = 7;
 }
 
-message Scope {
-	string id = 1;
-	string name = 2;
-	string logo_url = 3;
-	string title = 4;
-	string description = 5;
-	repeated string available_events = 7;
-	bool review_required = 8;
-	Permission permission = 9;
-}
-
 message Permission {
 	int32 account = 2;  //    ogu
 	int32 agent = 3;    // 0x0777
