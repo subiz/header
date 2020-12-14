@@ -2443,7 +2443,7 @@ message Webhooks {
 message Webhook {
 	common.Context ctx = 1;
 	string account_id = 12;
-	string client_id = 2;
+	string id = 2;
 	string url = 3;
 	string secret = 4;
 
@@ -2455,17 +2455,25 @@ message Webhook {
 		dead = 2;
 	}
 
-	int64 last_hook_at = 9;
-	int64 events_count = 13;
-	string last_hook_response = 14;
-	int32 last_hook_status = 15;
-	string last_hook_payload = 16;
+	int64 last_hook_at = 9; // deprecated
+	int64 events_count = 13; // deprecated
+	string last_hook_response = 14; // deprecated
+	int32 last_hook_status = 15; // deprecated
+	string last_hook_payload = 16; // deprecated
 
-	int64 modified = 19;
+	int64 modified = 19; // update when url or secret updated
 	int64 created = 20;
 	string creator = 21;
-	bool is_enabled = 22;
-	bool is_protected = 23;
+	bool is_enabled = 22; // deprecated
+	bool is_protected = 23; // deprecated
+
+	string avatar_url =  27; // favicon for the domain
+
+	int64 total_deliveries_in_last_7_days = 30;
+	int64 total_failed_deliveries_in_last_7_days = 31;
+	bool is_disabled = 33;
+	int64 last_delivery_at = 34;
+	int64 last_success_delivery_at = 35;
 }
 
 message Deliveries {
@@ -2476,12 +2484,12 @@ message Deliveries {
 message Delivery {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string client_id = 3;
+	string webhook_id = 3;
 	int32 id = 4;
 	string url = 5;
 	string method = 6;
 	repeated common.KV resquest_headers = 7;
-	string request_payload = 8; 
+	string request_payload = 8;
 	repeated common.KV response_headers = 9;
 	string response_body = 10;
 	string status = 11;

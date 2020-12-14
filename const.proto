@@ -156,17 +156,13 @@ enum E {
 	AutomationSendChatTranscriptEmailResolved = 111435;
 	AutomationUpdateConversationStateFired = 111436;
 	AutomationSendWebhookFired =  111437;
-	NotiboxSynced = 1101101;
 
-	UserEmailSynced = 2000004;
 	NoteSynced = 2000007;
 	NoteUpdated = 2000008;
 	NoteDeleted = 2000009;
 
 	TicketSynced = 2001001;
 
-	UserConversationSynced = 3000006;
-	MuteStateUpdated = 3000007;
 	BqreportSynced = 3000008;
 
 	BotSynced = 4000001;
