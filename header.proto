@@ -1558,6 +1558,8 @@ message Bot {
 
 	string version = 23;
 	string template_data = 24;
+	int64 count_lead_in_last_7_days = 25;
+	int64 count_conv_in_last_7_days = 26;
 }
 
 message Bots {
