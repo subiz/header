@@ -8,34 +8,15 @@ enum E {
 	Sub = 0;
 
 	SchedulerRequested = 10201; // scheduleritem
-	SchedulerCancelled = 10202; // Id
-	ApiWhiteListSynced = 10300;
 	Email_SendRequest = 10600;
 
-	Webhook4WebhookReadRequested = 10903;
-	Webhook4WebhookUpserted = 10904;
-	Webhook4WebhookVerifyRequested = 10905;
 	Webhook4Requested = 10906; //eventpb.RawEventCreatedPayload
-	Webhook4ClearBackoffRequested = 10907;
-	Webhook4PurgeQueueRequested = 10908;
 	Webhook4ShardSend = 10909;
 
 	LogLogRequested = 11100;
 	LogRequested = 11101;
 	LogSynced = 11102;
 
-	EndChatBotMidnightCalledback=11140;
-	EndChatBotEndCalledback=11141;
-	UserSubizId = 11142;
-	EndChatBotCallbacked = 11143;
-
-	UserPresenceReadRequested = 11144;
-	UserPreviewingReadRequested = 11146;
-	UserListTopRequested = 11147;
-	UserAutomationUpsertRequested = 11150;
-	UserAutomationDeleteRequested = 11151;
-	UserAutomationListRequested = 11152;
-	UserAutomationReadRequested = 11153;
 	AutomationAgentNotificationFired = 11154;
 	AutomationConversationMessageFired = 11155;
 	AutomationSendFacebookDirectMessageFired = 11156;
@@ -64,8 +45,6 @@ enum E {
 	ClientListRequested = 104024;
 	ClientUpserted = 104025;
 	ClientDeleted = 104026;
-	AutomationWebhookDeleted = 104027;
-	AutomationWebhookUpserted = 104029;
 	ClientRequested = 104030;
 	ClientSynced = 104031;
 	ClientAuthorized = 104033;
@@ -107,10 +86,6 @@ enum E {
 	AccountCreated = 110545; // account
 	AccountActivated = 110546; // account
 	AccountInfoUpdated = 110547;
-	AgentActivated = 110550;
-	AgentDeactivated = 110551;
-	AgentInfoUpdated = 110559;
-	AccountV3Created = 110560;
 	AccountPaymentV3Synced = 110563;
 	AccountDeactivated = 110564;
 	AgentLoggedIn = 110565;
@@ -138,7 +113,6 @@ enum E {
 	AutomationUpdateUserAttributeFired = 111219;
 	AutomationMergeUsersFired = 111220;
 	AutomationUserNotificationFired = 111221;
-	AutomationUserWebhookFired = 111222;
 	AutomationUserNoteFired = 111223;
 	AutomationCreateConversationFired = 111224;
 	AutomationConversationMessage2Fired = 111225;
@@ -155,11 +129,6 @@ enum E {
 	AutomationSendChatTranscriptEmailFired = 111434;
 	AutomationSendChatTranscriptEmailResolved = 111435;
 	AutomationUpdateConversationStateFired = 111436;
-	AutomationSendWebhookFired =  111437;
-
-	NoteSynced = 2000007;
-	NoteUpdated = 2000008;
-	NoteDeleted = 2000009;
 
 	TicketSynced = 2001001;
 

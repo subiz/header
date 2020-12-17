@@ -19,32 +19,10 @@ message Response {
 	int32 code = 4;
 }
 
-message BatchOp {
-	common.Context ctx = 1;
-	string method = 2;
-	string url    = 3;
-	string body = 4;
-}
-
-message BatchRequest {
-	common.Context ctx = 1;
-	repeated string paths = 2;
-	repeated BatchOp ops = 3;
-}
-
 message WhitelistUrl {
 	common.Context ctx = 1;
 	string account_id = 3;
 	string url = 4;
-	int64 created = 5;
-	string by = 6;
-}
-
-// deprecated
-message BlacklistDomain {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string domain = 4;
 	int64 created = 5;
 	string by = 6;
 }
