@@ -582,15 +582,6 @@ message AutomationCheck {
 	string scope = 6;
 }
 
-message AutomationCreditsAggregate {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 webhook_fired = 3;
-	int64 message_fired = 4;
-	int64 email_fired = 5;
-	int64 min = 6;
-}
-
 message Topic {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -2543,18 +2534,6 @@ message WebhookPayload {
 	string webhook_id = 6; // internal use only
 	string key = 9; // kafka key, internal use only
 	bool is_direct = 10;
-}
-
-message WebhookIncomming {
-	common.Context ctx = 1;
-	string webhook_id = 6;
-}
-
-message WebhookBackoff {
-	common.Context ctx = 1;
-	int32 num_back_off = 5;
-	string backoff_id = 6; // to make sure there is one backoff per webhook
-	string webhook_id = 7;
 }
 
 message WebhookTestResult {

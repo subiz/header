@@ -402,4 +402,6 @@ service Sendback {
 	rpc ReadWebhook(common.Id) returns (header.Webhook);
 	rpc UpdateWebhook(header.Webhook) returns (header.Webhook);
 	rpc ListRecentIndexDeliveries(header.RecentIndexDeliveryRequest) returns (header.Deliveries);
+
+	rpc SendWebhookEvent(header.Event) returns (common.Empty);
 }
