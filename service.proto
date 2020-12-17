@@ -358,16 +358,6 @@ service WidgetService {
 	rpc DeleteUploadedImage(header.UploadedImage) returns (common.Empty);
 }
 
-// webhook services
-service WebhookService {
-	rpc Read(common.Id) returns (header.Webhook);
-	rpc Delete(common.Id) returns (common.Empty);
-	rpc List(common.Id) returns (header.Webhooks);
-	rpc Update(header.Webhook) returns (header.Webhook);
-	rpc Create(header.Webhook) returns (header.Webhook);
-	rpc Test(common.Id) returns (header.WebhookTestResult);
-}
-
 // search services
 service Search {
 	rpc SearchUsers(header.SearchUsersRequest) returns (header.SearchUsersResponse);
@@ -401,8 +391,6 @@ service Bizbot {
 	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
 	rpc CreateBotRevision(header.Bot) returns (header.Bot);
 	rpc ListBotRevisions(common.Id) returns (header.Bots);
-
-	rpc BotStat(common.Id) returns (header.BotStat)
 }
 
 // sendback services
