@@ -86,6 +86,19 @@ message FbMessaging {
 	optional string message_type = 7;
 	optional string sender_action = 8; // typing_on, typing_off, mark_seen
 	optional FbRead read = 9;
+	optional FbPostback postback = 10;
+	optional FbReferral referral = 11;
+}
+
+message FbPostback {
+	optional string payload = 2;
+	optional FbReferral referral = 3;
+}
+
+message FbReferral {
+	optional string ref = 2;
+	optional string source = 3; // SHORTLINK
+	optional string type = 4; // OPEN_THREAD
 }
 
 message FbMessage {

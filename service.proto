@@ -401,6 +401,8 @@ service Bizbot {
 	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
 	rpc CreateBotRevision(header.Bot) returns (header.Bot);
 	rpc ListBotRevisions(common.Id) returns (header.Bots);
+
+	rpc BotStat(common.Id) returns (header.BotStat)
 }
 
 // sendback services
