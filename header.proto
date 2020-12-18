@@ -1604,10 +1604,8 @@ message Action {
 
 	// first action require trigger
 	repeated NextAction nexts = 8;
-	string type = 9; // send_message, send_email, tag, convert_to_ticket, condition, sleep, send_webhook
+	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook
 
-	ActionSendMessage send_message = 11;
-	ActionSendMessage send_email = 12;
 	ActionSleep sleep = 13; // deprecated
 
 	ActionJump jump = 15;
@@ -1671,18 +1669,12 @@ message ActionAskQuestion {
 	string validation_regex = 7;
 
 	bool skip_if_attribute_already_existed = 11;
-	int64 typing_duration = 13; // typing before send, no longer than 5 sec
-
-	bool be_gentle = 14;
 
 	Message resume_message = 15;
 	int64 resume_interval = 16; // sec
 	bool use_resume_message = 17;
-}
 
-message ActionSendMessage {
-	repeated Message messages = 3;
-	int64 typing_duration = 4; // sec, typing before send, no longer than 5 sec
+	int32 retry = 18; // -1 retry forever
 }
 
 message ActionSleep {
