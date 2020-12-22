@@ -334,6 +334,11 @@ service Pubsub {
 	rpc Publish(header.PublishMessage) returns (common.Empty);
 }
 
+// pubsub services
+service Realtime {
+	rpc ShardSend(header.PublishMessage) returns (common.Empty);
+}
+
 // widget services
 service WidgetService {
 	rpc Read(common.Id) returns (header.WidgetSetting);
