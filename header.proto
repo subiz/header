@@ -1126,7 +1126,7 @@ message MessageButton {
 		unknown = 0;
 		url_button = 2;
 		postback_button = 3;
-		event_button = 4;
+		message_button = 4;
 		call_button = 5;
 		widget_ask_desktop_notify_button = 6;
 		widget_ask_contact_info_button = 7;
@@ -1140,11 +1140,12 @@ message MessageButton {
 	string payload = 4;
 	string image_url = 5;
 	string content_id = 10;
-
 	//	optional RawEvent event = 12;
 	string url = 14;
 
 	string phone_number = 16;
+	Message message = 17;
+	string webview_size = 18; // fb
 }
 
 message AskInfomationAnswer {
@@ -1455,7 +1456,7 @@ message BotRequest {
 }
 
 message BotCondition {
-	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline
+	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline, user_is_a_contact
 
 	enum Source {
 		direct = 0;
@@ -1509,6 +1510,8 @@ message BotCondition {
 	bool offline = 25; // only run when there is no online agent
 
 	bool returning_visitor = 26;
+
+	bool user_is_a_contact = 27; // has a way to re-connnect to user (email or phone)
 }
 
 message UserAttributeCondition {
@@ -1674,7 +1677,9 @@ message ActionAskQuestion {
 	int64 resume_interval = 16; // sec
 	bool use_resume_message = 17;
 
-	int32 retry = 18; // -1 retry forever
+	// retry forever
+
+	int32 retry = 18; // != 1 => 0 retry, 1 retry forever
 }
 
 message ActionSleep {
