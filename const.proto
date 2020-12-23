@@ -7,55 +7,11 @@ option go_package = "github.com/subiz/header";
 enum E {
 	Sub = 0;
 
-	SchedulerRequested = 10201; // scheduleritem
 	Email_SendRequest = 10600;
-
-	Webhook4Requested = 10906; //eventpb.RawEventCreatedPayload
-	Webhook4ShardSend = 10909;
 
 	LogLogRequested = 11100;
 	LogRequested = 11101;
 	LogSynced = 11102;
-
-	AutomationAgentNotificationFired = 11154;
-	AutomationConversationMessageFired = 11155;
-	AutomationSendFacebookDirectMessageFired = 11156;
-	UserSessionUpdateRequested = 11165;
-	UserSessionCreateRequested = 11166;
-	UserSessionReadRequested = 11167;
-	UserCreated = 11170;
-	UserAttributeAdded = 11171;
-	UserUpdated = 11172;
-	UserAttributeUpdated = 11173;
-	UserAttributeDeleted = 11174;
-	UserAttributeSynced = 11175;
-
-	BlacklistDomainCreated = 103012;
-	BannedUserCreated = 103013;
-	BlacklistIpCreated = 103014;
-	WhitelistUrlCreated = 103015;
-	BlacklistDomainDeleted = 103016;
-	BannedUserDeleted = 103017;
-	BlacklistIpDeleted = 103018;
-	WhitelistUrlDeleted = 103019;
-	ClientCreateRequested = 104020;
-	ClientUpdateRequested = 104021;
-	ClientDeleteRequested = 104022;
-	ClientReadRequested = 104023;
-	ClientListRequested = 104024;
-	ClientUpserted = 104025;
-	ClientDeleted = 104026;
-	ClientRequested = 104030;
-	ClientSynced = 104031;
-	ClientAuthorized = 104033;
-	ClientDeauthorized = 104034;
-	BotAuthorizeRequest = 104035;
-
-	AccountRequested = 110016;
-	AccountSynced = 110017;
-	AccountV3Synced = 110018;
-
-	FileRequested = 110310;
 
 	InvoiceUpdated = 110410;
 	PaymentMethodUpdated = 110411;
@@ -65,20 +21,6 @@ enum E {
 	PromotionCodeUpdated = 110415;
 
 	PaymentWorkerJob = 110440;
-
-	AgentRejected = 110510; // id
-	AgentAccepted = 110511; // id
-	AgentInvited = 110513; // invitation
-	AccountUpserted = 110514; // account
-	AgentDeleted = 110515; //id
-	AccountPlanUpdated = 110516; // account
-	AccountStateUpdated = 110517; // AccountStateUpdateRequest
-	AccountConfirmRequest = 110519; // token
-	HandleExpiredInvitation = 110520;
-	AccountConfirmRequested = 110521; // confirmemail
-	AccountInviteEmail = 110522;
-	AccountDeleted = 110524;
-	AccountConfirmSuccessEmailRequested = 110525;
 
 	AccountResetPasswordEmail = 110533;
 	AccountPasswordChangedEmailRequested = 110534;

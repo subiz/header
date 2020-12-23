@@ -41,8 +41,8 @@ message Context {
 }
 
 message KV {
-	string value = 3;
 	string key = 2;
+	string value = 3;
 }
 
 message Device {
