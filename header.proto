@@ -2601,7 +2601,15 @@ message BotTerminated {
 	string conversation_id = 4;
 
 	bool success = 5;
-	int64 code = 6;
+	string code = 6;
+	enum TerminatedCode {
+		complete = 0;
+		start = 1;
+		error = 3;
+		force = 4;
+		expire = 5;
+		self = 6;
+	}
 }
 
 enum RealtimeType {
