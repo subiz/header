@@ -176,6 +176,7 @@ service ConversationMgr {
 
 	rpc UpdateEndchatSetting(header.EndchatSetting) returns (header.EndchatSetting);
 	rpc GetEndchatSetting(common.Id) returns (header.EndchatSetting);
+	rpc TerminateBot(header.BotTerminated) returns (header.Event);
 }
 
 service ConversationSyncMgr {
