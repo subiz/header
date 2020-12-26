@@ -2439,7 +2439,7 @@ message Webhook {
 	string id = 2;
 	string url = 3;
 	string secret = 4;
-	repeated WebhookSecret secrets = 5; // keep old secret so endpoint could do gradual update
+	WebhookSecret old_secret = 5; // keep old secret so endpoint could do gradual update
 
 	repeated string events = 6;
 	string state = 7;
