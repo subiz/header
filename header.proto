@@ -2444,12 +2444,19 @@ message Webhooks {
 	repeated Webhook webhooks = 2;
 }
 
+message WebhookSecret {
+	string secret = 3;
+	int64 expired = 5;
+	int64 created = 6;
+}
+
 message Webhook {
 	common.Context ctx = 1;
 	string account_id = 12;
 	string id = 2;
 	string url = 3;
 	string secret = 4;
+	repeated WebhookSecret secrets = 5; // keep old secret so endpoint could do gradual update
 
 	repeated string events = 6;
 	string state = 7;
@@ -2473,6 +2480,8 @@ message Webhook {
 	int64 last_delivery_at = 34;
 	int64 last_success_delivery_at = 35;
 	int64 next_retry_at = 36;
+
+	string api_version = 37;
 }
 
 message WebhookDeliveries {
