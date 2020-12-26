@@ -17,8 +17,7 @@ message Attribute {
 	string key = 4;
 
 	int64 modified = 8;
-
-	string value = 9; // json encode
+	// string value = 9; // json encode
 	string text = 10;
 	double number = 11;
 	bool boolean = 12;
@@ -421,6 +420,7 @@ message Event {
 		RunResponse bot_run_response = 41;
 		Integration integration = 42;
 		BotTerminated bot_terminated = 43;
+		Webhook webhook = 44;
 	}
 	Data data = 20;
 }
