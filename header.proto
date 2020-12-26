@@ -682,23 +682,6 @@ message UserSession {
 	int64 time_on_site = 37;
 }
 
-message AvailabilityCheckRequest {
-	common.Context ctx = 1;
-	string integration_id = 3;
-	User user = 4;
-	string account_id = 5;
-	string user_id = 6;
-}
-
-message AvailabilityCheckResult {
-	common.Context ctx = 1;
-	bool availability = 2;
-	string reason = 3;
-	string payload = 5;
-	string integration_id = 6;
-	string account_id = 7;
-}
-
 message StartRequest {
 	common.Context ctx = 1;
 

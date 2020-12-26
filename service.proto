@@ -207,7 +207,6 @@ service IntegrationMgr {
 	rpc Deintegrate(common.Id) returns (common.Empty);
 	rpc ListIntegrations(common.Id) returns (header.Integrations);
 	rpc Integrate(header.Integration) returns (header.Integration);
-	rpc CheckAvailability(header.AvailabilityCheckRequest) returns (header.AvailabilityCheckResult);
 }
 
 service TicketMgr {

@@ -51,26 +51,9 @@ enum E {
 	AutomationSynced = 111102;
 	AutomationFired = 111103;
 
-	AutomationBlockUserFired = 111218;
-	AutomationUpdateUserAttributeFired = 111219;
-	AutomationMergeUsersFired = 111220;
-	AutomationUserNotificationFired = 111221;
-	AutomationUserNoteFired = 111223;
-	AutomationCreateConversationFired = 111224;
-	AutomationConversationMessage2Fired = 111225;
-	AutomationConversationWebhookFired = 111226;
-	AutomationAddAgentToConversationFired = 111227;
-	AutomationCreateTicketFired = 111228;
-	AutomationConversationTagFired = 111229;
 	UserTotalConvoUpdated = 111232;
 	UserTotalOpenTicketUpdated = 111233;
 	TicketUpdated = 111234;
-
-	AutomationSendEmailFired = 111431;
-	AutomationOpenWidgetScreenFired = 111432;
-	AutomationSendChatTranscriptEmailFired = 111434;
-	AutomationSendChatTranscriptEmailResolved = 111435;
-	AutomationUpdateConversationStateFired = 111436;
 
 	TicketSynced = 2001001;
 
