@@ -1110,7 +1110,6 @@ message MessageButton {
 		unknown = 0;
 		url_button = 2;
 		postback_button = 3;
-		message_button = 4;
 		call_button = 5;
 		widget_ask_desktop_notify_button = 6;
 		widget_ask_contact_info_button = 7;
@@ -1128,7 +1127,6 @@ message MessageButton {
 	string url = 14;
 
 	string phone_number = 16;
-	Message message = 17;
 	string webview_size = 18; // fb
 }
 
@@ -1249,7 +1247,7 @@ message Attachment {
 
 message QuickReply {
 	string content_type = 2; // should be 'text'
-	string title  = 3;
+	string title = 3;
 	string payload = 4;
 	string image_url = 5;
 }
