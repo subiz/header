@@ -1249,7 +1249,7 @@ message Attachment {
 
 message QuickReply {
 	string content_type = 2; // should be 'text'
-	string title = 3;
+	string title  = 3;
 	string payload = 4;
 	string image_url = 5;
 }
@@ -1338,8 +1338,19 @@ message Tags {
 }
 
 message Postback {
-	Message message = 2;
-	MessageButton button = 3;
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+
+	string type = 4;
+
+	PostbackBotJump bot_jump = 5;
+}
+
+message PostbackBotJump {
+	string bot_id = 3;
+	string action_id = 4;
+	string from_action = 5;
 }
 
 message Integrations {
@@ -1896,7 +1907,7 @@ message WidgetSetting {
 	//   string css_url = 9; // old version
 	//   string custom_css_url = 10; // deprecated
 	int32 replytime = 11; // deprecated
-	// k  string css = 12; // communication client to server
+	//   string css = 12; // communication client to server
 	//   string style_url = 13;
 	// read-only, tell whether account is ready for chat or not
 	bool is_online = 14;
