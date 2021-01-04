@@ -12,14 +12,8 @@ import "payment.proto";
 import "notibox.proto";
 import "noti5.proto";
 import "account.proto";
-import "api.proto";
 import "bqreport.proto";
 import "header.proto";
-
-// api service
-service ApiServer {
-	rpc Call(api.Request) returns (api.Response);
-}
 
 service AccountMgr {
 	rpc CreateGroup(account.AgentGroup) returns (account.AgentGroup);
