@@ -21089,6 +21089,537 @@ func (x *BotTerminated) GetCode() string {
 	return ""
 }
 
+type WhitelistUrl struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Url       string          `protobuf:"bytes,4,opt,name=url,proto3" json:"url,omitempty"`
+	Created   int64           `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	By        string          `protobuf:"bytes,6,opt,name=by,proto3" json:"by,omitempty"`
+}
+
+func (x *WhitelistUrl) Reset() {
+	*x = WhitelistUrl{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_header_proto_msgTypes[197]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *WhitelistUrl) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WhitelistUrl) ProtoMessage() {}
+
+func (x *WhitelistUrl) ProtoReflect() protoreflect.Message {
+	mi := &file_header_proto_msgTypes[197]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WhitelistUrl.ProtoReflect.Descriptor instead.
+func (*WhitelistUrl) Descriptor() ([]byte, []int) {
+	return file_header_proto_rawDescGZIP(), []int{197}
+}
+
+func (x *WhitelistUrl) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *WhitelistUrl) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *WhitelistUrl) GetUrl() string {
+	if x != nil {
+		return x.Url
+	}
+	return ""
+}
+
+func (x *WhitelistUrl) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *WhitelistUrl) GetBy() string {
+	if x != nil {
+		return x.By
+	}
+	return ""
+}
+
+type WhitelistDomain struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Domain    string          `protobuf:"bytes,4,opt,name=domain,proto3" json:"domain,omitempty"`
+	Created   int64           `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	By        string          `protobuf:"bytes,6,opt,name=by,proto3" json:"by,omitempty"`
+}
+
+func (x *WhitelistDomain) Reset() {
+	*x = WhitelistDomain{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_header_proto_msgTypes[198]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *WhitelistDomain) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WhitelistDomain) ProtoMessage() {}
+
+func (x *WhitelistDomain) ProtoReflect() protoreflect.Message {
+	mi := &file_header_proto_msgTypes[198]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WhitelistDomain.ProtoReflect.Descriptor instead.
+func (*WhitelistDomain) Descriptor() ([]byte, []int) {
+	return file_header_proto_rawDescGZIP(), []int{198}
+}
+
+func (x *WhitelistDomain) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *WhitelistDomain) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *WhitelistDomain) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *WhitelistDomain) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *WhitelistDomain) GetBy() string {
+	if x != nil {
+		return x.By
+	}
+	return ""
+}
+
+type BlacklistIP struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Ip        string          `protobuf:"bytes,4,opt,name=ip,proto3" json:"ip,omitempty"`
+	Created   int64           `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	By        string          `protobuf:"bytes,6,opt,name=by,proto3" json:"by,omitempty"`
+}
+
+func (x *BlacklistIP) Reset() {
+	*x = BlacklistIP{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_header_proto_msgTypes[199]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlacklistIP) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlacklistIP) ProtoMessage() {}
+
+func (x *BlacklistIP) ProtoReflect() protoreflect.Message {
+	mi := &file_header_proto_msgTypes[199]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlacklistIP.ProtoReflect.Descriptor instead.
+func (*BlacklistIP) Descriptor() ([]byte, []int) {
+	return file_header_proto_rawDescGZIP(), []int{199}
+}
+
+func (x *BlacklistIP) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *BlacklistIP) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *BlacklistIP) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+func (x *BlacklistIP) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *BlacklistIP) GetBy() string {
+	if x != nil {
+		return x.By
+	}
+	return ""
+}
+
+type BannedUser struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	UserId    string          `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Created   int64           `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
+	By        string          `protobuf:"bytes,6,opt,name=by,proto3" json:"by,omitempty"`
+}
+
+func (x *BannedUser) Reset() {
+	*x = BannedUser{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_header_proto_msgTypes[200]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BannedUser) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BannedUser) ProtoMessage() {}
+
+func (x *BannedUser) ProtoReflect() protoreflect.Message {
+	mi := &file_header_proto_msgTypes[200]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BannedUser.ProtoReflect.Descriptor instead.
+func (*BannedUser) Descriptor() ([]byte, []int) {
+	return file_header_proto_rawDescGZIP(), []int{200}
+}
+
+func (x *BannedUser) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *BannedUser) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *BannedUser) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *BannedUser) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+func (x *BannedUser) GetBy() string {
+	if x != nil {
+		return x.By
+	}
+	return ""
+}
+
+type ScryptChallenge struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,9,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id        string          `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"` // very long string
+	N         int32           `protobuf:"varint,3,opt,name=N,proto3" json:"N,omitempty"`
+	P         int32           `protobuf:"varint,4,opt,name=P,proto3" json:"P,omitempty"`
+	R         int32           `protobuf:"varint,5,opt,name=r,proto3" json:"r,omitempty"`
+	Salt      string          `protobuf:"bytes,6,opt,name=salt,proto3" json:"salt,omitempty"`
+	Hash      string          `protobuf:"bytes,8,opt,name=hash,proto3" json:"hash,omitempty"` // 32 bit hex
+	Domain    int32           `protobuf:"varint,14,opt,name=domain,proto3" json:"domain,omitempty"`
+	Dklen     int32           `protobuf:"varint,15,opt,name=dklen,proto3" json:"dklen,omitempty"`
+	// only for subiz use
+	Answer  string `protobuf:"bytes,10,opt,name=answer,proto3" json:"answer,omitempty"`
+	Created int64  `protobuf:"varint,11,opt,name=created,proto3" json:"created,omitempty"`
+}
+
+func (x *ScryptChallenge) Reset() {
+	*x = ScryptChallenge{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_header_proto_msgTypes[201]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ScryptChallenge) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScryptChallenge) ProtoMessage() {}
+
+func (x *ScryptChallenge) ProtoReflect() protoreflect.Message {
+	mi := &file_header_proto_msgTypes[201]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScryptChallenge.ProtoReflect.Descriptor instead.
+func (*ScryptChallenge) Descriptor() ([]byte, []int) {
+	return file_header_proto_rawDescGZIP(), []int{201}
+}
+
+func (x *ScryptChallenge) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *ScryptChallenge) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *ScryptChallenge) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *ScryptChallenge) GetN() int32 {
+	if x != nil {
+		return x.N
+	}
+	return 0
+}
+
+func (x *ScryptChallenge) GetP() int32 {
+	if x != nil {
+		return x.P
+	}
+	return 0
+}
+
+func (x *ScryptChallenge) GetR() int32 {
+	if x != nil {
+		return x.R
+	}
+	return 0
+}
+
+func (x *ScryptChallenge) GetSalt() string {
+	if x != nil {
+		return x.Salt
+	}
+	return ""
+}
+
+func (x *ScryptChallenge) GetHash() string {
+	if x != nil {
+		return x.Hash
+	}
+	return ""
+}
+
+func (x *ScryptChallenge) GetDomain() int32 {
+	if x != nil {
+		return x.Domain
+	}
+	return 0
+}
+
+func (x *ScryptChallenge) GetDklen() int32 {
+	if x != nil {
+		return x.Dklen
+	}
+	return 0
+}
+
+func (x *ScryptChallenge) GetAnswer() string {
+	if x != nil {
+		return x.Answer
+	}
+	return ""
+}
+
+func (x *ScryptChallenge) GetCreated() int64 {
+	if x != nil {
+		return x.Created
+	}
+	return 0
+}
+
+type Apikey struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Secret     string `protobuf:"bytes,3,opt,name=secret,proto3" json:"secret,omitempty"`
+	AccountId  string `protobuf:"bytes,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	ClientId   string `protobuf:"bytes,5,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	ClientType string `protobuf:"bytes,6,opt,name=client_type,json=clientType,proto3" json:"client_type,omitempty"`
+	IsInternal bool   `protobuf:"varint,7,opt,name=is_internal,json=isInternal,proto3" json:"is_internal,omitempty"`
+}
+
+func (x *Apikey) Reset() {
+	*x = Apikey{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_header_proto_msgTypes[202]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Apikey) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Apikey) ProtoMessage() {}
+
+func (x *Apikey) ProtoReflect() protoreflect.Message {
+	mi := &file_header_proto_msgTypes[202]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Apikey.ProtoReflect.Descriptor instead.
+func (*Apikey) Descriptor() ([]byte, []int) {
+	return file_header_proto_rawDescGZIP(), []int{202}
+}
+
+func (x *Apikey) GetSecret() string {
+	if x != nil {
+		return x.Secret
+	}
+	return ""
+}
+
+func (x *Apikey) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *Apikey) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *Apikey) GetClientType() string {
+	if x != nil {
+		return x.ClientType
+	}
+	return ""
+}
+
+func (x *Apikey) GetIsInternal() bool {
+	if x != nil {
+		return x.IsInternal
+	}
+	return false
+}
+
 type Event_Data struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -21132,7 +21663,7 @@ type Event_Data struct {
 func (x *Event_Data) Reset() {
 	*x = Event_Data{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_header_proto_msgTypes[198]
+		mi := &file_header_proto_msgTypes[204]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -21145,7 +21676,7 @@ func (x *Event_Data) String() string {
 func (*Event_Data) ProtoMessage() {}
 
 func (x *Event_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_header_proto_msgTypes[198]
+	mi := &file_header_proto_msgTypes[204]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -24672,7 +25203,71 @@ var file_header_proto_rawDesc = []byte{
 	0x09, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x72, 0x74, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x65, 0x72,
 	0x72, 0x6f, 0x72, 0x10, 0x03, 0x12, 0x09, 0x0a, 0x05, 0x66, 0x6f, 0x72, 0x63, 0x65, 0x10, 0x04,
 	0x12, 0x0a, 0x0a, 0x06, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x10, 0x05, 0x12, 0x08, 0x0a, 0x04,
-	0x73, 0x65, 0x6c, 0x66, 0x10, 0x06, 0x2a, 0x42, 0x0a, 0x08, 0x48, 0x61, 0x76, 0x65, 0x42, 0x65,
+	0x73, 0x65, 0x6c, 0x66, 0x10, 0x06, 0x22, 0x8c, 0x01, 0x0a, 0x0c, 0x57, 0x68, 0x69, 0x74, 0x65,
+	0x6c, 0x69, 0x73, 0x74, 0x55, 0x72, 0x6c, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f,
+	0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x6c,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x18, 0x0a, 0x07, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x62, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x02, 0x62, 0x79, 0x22, 0x95, 0x01, 0x0a, 0x0f, 0x57, 0x68, 0x69, 0x74, 0x65, 0x6c,
+	0x69, 0x73, 0x74, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
+	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x64,
+	0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x64, 0x6f, 0x6d,
+	0x61, 0x69, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x0e, 0x0a,
+	0x02, 0x62, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x62, 0x79, 0x22, 0x89, 0x01,
+	0x0a, 0x0b, 0x42, 0x6c, 0x61, 0x63, 0x6b, 0x6c, 0x69, 0x73, 0x74, 0x49, 0x50, 0x12, 0x21, 0x0a,
+	0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d,
+	0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78,
+	0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x70, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x12,
+	0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x62, 0x79, 0x18,
+	0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x62, 0x79, 0x22, 0x91, 0x01, 0x0a, 0x0a, 0x42, 0x61,
+	0x6e, 0x6e, 0x65, 0x64, 0x55, 0x73, 0x65, 0x72, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43,
+	0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73,
+	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x0e, 0x0a,
+	0x02, 0x62, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x62, 0x79, 0x22, 0x95, 0x02,
+	0x0a, 0x0f, 0x53, 0x63, 0x72, 0x79, 0x70, 0x74, 0x43, 0x68, 0x61, 0x6c, 0x6c, 0x65, 0x6e, 0x67,
+	0x65, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f,
+	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52,
+	0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
+	0x69, 0x64, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x02, 0x69, 0x64, 0x12, 0x0c, 0x0a, 0x01, 0x4e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01,
+	0x4e, 0x12, 0x0c, 0x0a, 0x01, 0x50, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x50, 0x12,
+	0x0c, 0x0a, 0x01, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x52, 0x01, 0x72, 0x12, 0x12, 0x0a,
+	0x04, 0x73, 0x61, 0x6c, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x73, 0x61, 0x6c,
+	0x74, 0x12, 0x12, 0x0a, 0x04, 0x68, 0x61, 0x73, 0x68, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x68, 0x61, 0x73, 0x68, 0x12, 0x16, 0x0a, 0x06, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x18,
+	0x0e, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x64, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x12, 0x14, 0x0a,
+	0x05, 0x64, 0x6b, 0x6c, 0x65, 0x6e, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x64, 0x6b,
+	0x6c, 0x65, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x18, 0x0a, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x64, 0x22, 0x9e, 0x01, 0x0a, 0x06, 0x41, 0x70, 0x69, 0x6b, 0x65, 0x79,
+	0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x74,
+	0x79, 0x70, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x69, 0x6e, 0x74, 0x65,
+	0x72, 0x6e, 0x61, 0x6c, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x49, 0x6e,
+	0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2a, 0x42, 0x0a, 0x08, 0x48, 0x61, 0x76, 0x65, 0x42, 0x65,
 	0x65, 0x6e, 0x12, 0x0b, 0x0a, 0x07, 0x75, 0x6e, 0x6b, 0x6e, 0x6f, 0x77, 0x6e, 0x10, 0x00, 0x12,
 	0x0c, 0x0a, 0x08, 0x69, 0x6e, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x10, 0x01, 0x12, 0x0c, 0x0a,
 	0x08, 0x64, 0x65, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x69,
@@ -24859,7 +25454,7 @@ func file_header_proto_rawDescGZIP() []byte {
 }
 
 var file_header_proto_enumTypes = make([]protoimpl.EnumInfo, 44)
-var file_header_proto_msgTypes = make([]protoimpl.MessageInfo, 200)
+var file_header_proto_msgTypes = make([]protoimpl.MessageInfo, 206)
 var file_header_proto_goTypes = []interface{}{
 	(HaveBeen)(0),                          // 0: header.HaveBeen
 	(ConvoState)(0),                        // 1: header.ConvoState
@@ -25102,56 +25697,62 @@ var file_header_proto_goTypes = []interface{}{
 	(*File)(nil),                           // 238: header.File
 	(*FileMeta)(nil),                       // 239: header.FileMeta
 	(*BotTerminated)(nil),                  // 240: header.BotTerminated
-	nil,                                    // 241: header.UserSearchResult.UnreadCountsEntry
-	(*Event_Data)(nil),                     // 242: header.Event.Data
-	nil,                                    // 243: header.Email.HeaderEntry
-	(*common.Context)(nil),                 // 244: common.Context
-	(*common.Error)(nil),                   // 245: common.Error
-	(*common.I18NText)(nil),                // 246: common.I18nText
-	(*common.By)(nil),                      // 247: common.By
-	(*user.SCondition)(nil),                // 248: user.SCondition
-	(*conversation.Ticket)(nil),            // 249: conversation.Ticket
-	(*common.KV)(nil),                      // 250: common.KV
-	(*common.NumberParams)(nil),            // 251: common.NumberParams
-	(*common.StringParams)(nil),            // 252: common.StringParams
-	(*common.BooleanParams)(nil),           // 253: common.BooleanParams
-	(*account.Account)(nil),                // 254: account.Account
-	(*account.Agent)(nil),                  // 255: account.Agent
-	(*common.Device)(nil),                  // 256: common.Device
-	(*content.Content)(nil),                // 257: content.Content
-	(*account.Presence)(nil),               // 258: account.Presence
-	(*notibox.Notification)(nil),           // 259: notibox.Notification
-	(*account.AgentPerm)(nil),              // 260: account.AgentPerm
-	(*account.GroupMember)(nil),            // 261: account.GroupMember
-	(*account.AgentGroup)(nil),             // 262: account.AgentGroup
-	(*payment.Limit)(nil),                  // 263: payment.Limit
-	(*notibox.Notibox)(nil),                // 264: notibox.Notibox
-	(*noti5.Setting)(nil),                  // 265: noti5.Setting
+	(*WhitelistUrl)(nil),                   // 241: header.WhitelistUrl
+	(*WhitelistDomain)(nil),                // 242: header.WhitelistDomain
+	(*BlacklistIP)(nil),                    // 243: header.BlacklistIP
+	(*BannedUser)(nil),                     // 244: header.BannedUser
+	(*ScryptChallenge)(nil),                // 245: header.ScryptChallenge
+	(*Apikey)(nil),                         // 246: header.Apikey
+	nil,                                    // 247: header.UserSearchResult.UnreadCountsEntry
+	(*Event_Data)(nil),                     // 248: header.Event.Data
+	nil,                                    // 249: header.Email.HeaderEntry
+	(*common.Context)(nil),                 // 250: common.Context
+	(*common.Error)(nil),                   // 251: common.Error
+	(*common.I18NText)(nil),                // 252: common.I18nText
+	(*common.By)(nil),                      // 253: common.By
+	(*user.SCondition)(nil),                // 254: user.SCondition
+	(*conversation.Ticket)(nil),            // 255: conversation.Ticket
+	(*common.KV)(nil),                      // 256: common.KV
+	(*common.NumberParams)(nil),            // 257: common.NumberParams
+	(*common.StringParams)(nil),            // 258: common.StringParams
+	(*common.BooleanParams)(nil),           // 259: common.BooleanParams
+	(*account.Account)(nil),                // 260: account.Account
+	(*account.Agent)(nil),                  // 261: account.Agent
+	(*common.Device)(nil),                  // 262: common.Device
+	(*content.Content)(nil),                // 263: content.Content
+	(*account.Presence)(nil),               // 264: account.Presence
+	(*notibox.Notification)(nil),           // 265: notibox.Notification
+	(*account.AgentPerm)(nil),              // 266: account.AgentPerm
+	(*account.GroupMember)(nil),            // 267: account.GroupMember
+	(*account.AgentGroup)(nil),             // 268: account.AgentGroup
+	(*payment.Limit)(nil),                  // 269: payment.Limit
+	(*notibox.Notibox)(nil),                // 270: notibox.Notibox
+	(*noti5.Setting)(nil),                  // 271: noti5.Setting
 }
 var file_header_proto_depIdxs = []int32{
-	244, // 0: header.User.ctx:type_name -> common.Context
+	250, // 0: header.User.ctx:type_name -> common.Context
 	44,  // 1: header.User.attributes:type_name -> header.Attribute
 	97,  // 2: header.User.session:type_name -> header.UserSession
 	45,  // 3: header.Users.users:type_name -> header.User
-	245, // 4: header.Users.errors:type_name -> common.Error
-	244, // 5: header.CountTotalRequest.ctx:type_name -> common.Context
-	244, // 6: header.UserSearchResult.ctx:type_name -> common.Context
+	251, // 4: header.Users.errors:type_name -> common.Error
+	250, // 5: header.CountTotalRequest.ctx:type_name -> common.Context
+	250, // 6: header.UserSearchResult.ctx:type_name -> common.Context
 	45,  // 7: header.UserSearchResult.users:type_name -> header.User
-	241, // 8: header.UserSearchResult.unread_counts:type_name -> header.UserSearchResult.UnreadCountsEntry
-	244, // 9: header.DeleteAttrRequest.ctx:type_name -> common.Context
-	244, // 10: header.AttributeDefinition.ctx:type_name -> common.Context
-	246, // 11: header.AttributeDefinition.place_holder:type_name -> common.I18nText
-	244, // 12: header.AttributeDefinitions.ctx:type_name -> common.Context
+	247, // 8: header.UserSearchResult.unread_counts:type_name -> header.UserSearchResult.UnreadCountsEntry
+	250, // 9: header.DeleteAttrRequest.ctx:type_name -> common.Context
+	250, // 10: header.AttributeDefinition.ctx:type_name -> common.Context
+	252, // 11: header.AttributeDefinition.place_holder:type_name -> common.I18nText
+	250, // 12: header.AttributeDefinitions.ctx:type_name -> common.Context
 	54,  // 13: header.AttributeDefinitions.attributes:type_name -> header.AttributeDefinition
-	244, // 14: header.Identification.ctx:type_name -> common.Context
-	244, // 15: header.Note.ctx:type_name -> common.Context
+	250, // 14: header.Identification.ctx:type_name -> common.Context
+	250, // 15: header.Note.ctx:type_name -> common.Context
 	59,  // 16: header.Note.links:type_name -> header.NoteLink
-	244, // 17: header.Notes.ctx:type_name -> common.Context
+	250, // 17: header.Notes.ctx:type_name -> common.Context
 	58,  // 18: header.Notes.notes:type_name -> header.Note
-	244, // 19: header.ListNotesRequest.ctx:type_name -> common.Context
+	250, // 19: header.ListNotesRequest.ctx:type_name -> common.Context
 	59,  // 20: header.ListNotesRequest.links:type_name -> header.NoteLink
 	68,  // 21: header.Locations.locations:type_name -> header.Location
-	245, // 22: header.Locations.errors:type_name -> common.Error
+	251, // 22: header.Locations.errors:type_name -> common.Error
 	45,  // 23: header.UserInfo.user:type_name -> header.User
 	71,  // 24: header.UserInfo.viewing:type_name -> header.Page
 	68,  // 25: header.UserInfo.location:type_name -> header.Location
@@ -25175,94 +25776,94 @@ var file_header_proto_depIdxs = []int32{
 	76,  // 43: header.SourceMetrics.source_metrics:type_name -> header.SourceMetric
 	77,  // 44: header.LocationMetrics.location_metrics:type_name -> header.LocationMetric
 	78,  // 45: header.PageMetrics.page_metrics:type_name -> header.PageMetric
-	244, // 46: header.Events.ctx:type_name -> common.Context
+	250, // 46: header.Events.ctx:type_name -> common.Context
 	84,  // 47: header.Events.events:type_name -> header.Event
-	244, // 48: header.Event.ctx:type_name -> common.Context
-	247, // 49: header.Event.by:type_name -> common.By
-	242, // 50: header.Event.data:type_name -> header.Event.Data
-	244, // 51: header.ListUserEventsRequest.ctx:type_name -> common.Context
-	244, // 52: header.UserEvent.ctx:type_name -> common.Context
+	250, // 48: header.Event.ctx:type_name -> common.Context
+	253, // 49: header.Event.by:type_name -> common.By
+	248, // 50: header.Event.data:type_name -> header.Event.Data
+	250, // 51: header.ListUserEventsRequest.ctx:type_name -> common.Context
+	250, // 52: header.UserEvent.ctx:type_name -> common.Context
 	84,  // 53: header.UserEvent.event:type_name -> header.Event
 	45,  // 54: header.UserEvent.user:type_name -> header.User
-	244, // 55: header.AutomationEvent.ctx:type_name -> common.Context
+	250, // 55: header.AutomationEvent.ctx:type_name -> common.Context
 	89,  // 56: header.AutomationEvent.automation:type_name -> header.Automation
 	45,  // 57: header.AutomationEvent.user:type_name -> header.User
 	84,  // 58: header.AutomationEvent.event:type_name -> header.Event
 	90,  // 59: header.AutomationEvent.action:type_name -> header.AutomationAction
-	244, // 60: header.Automation.ctx:type_name -> common.Context
-	248, // 61: header.Automation.condition:type_name -> user.SCondition
+	250, // 60: header.Automation.ctx:type_name -> common.Context
+	254, // 61: header.Automation.condition:type_name -> user.SCondition
 	90,  // 62: header.Automation.actions:type_name -> header.AutomationAction
 	45,  // 63: header.AutomationAction.user:type_name -> header.User
 	233, // 64: header.AutomationAction.email:type_name -> header.Email
 	58,  // 65: header.AutomationAction.user_note:type_name -> header.Note
 	84,  // 66: header.AutomationAction.event:type_name -> header.Event
 	84,  // 67: header.AutomationAction.events:type_name -> header.Event
-	249, // 68: header.AutomationAction.ticket:type_name -> conversation.Ticket
+	255, // 68: header.AutomationAction.ticket:type_name -> conversation.Ticket
 	91,  // 69: header.AutomationAction.webhook_setting:type_name -> header.AutomationWebhookSetting
-	244, // 70: header.Automations.ctx:type_name -> common.Context
+	250, // 70: header.Automations.ctx:type_name -> common.Context
 	89,  // 71: header.Automations.automations:type_name -> header.Automation
-	244, // 72: header.Topic.ctx:type_name -> common.Context
+	250, // 72: header.Topic.ctx:type_name -> common.Context
 	84,  // 73: header.Topic.by_event:type_name -> header.Event
-	244, // 74: header.UnreadTopic.ctx:type_name -> common.Context
+	250, // 74: header.UnreadTopic.ctx:type_name -> common.Context
 	84,  // 75: header.UnreadTopic.by_event:type_name -> header.Event
-	244, // 76: header.SourceTrace.ctx:type_name -> common.Context
-	244, // 77: header.UserSession.ctx:type_name -> common.Context
+	250, // 76: header.SourceTrace.ctx:type_name -> common.Context
+	250, // 77: header.UserSession.ctx:type_name -> common.Context
 	84,  // 78: header.UserSession.start_event:type_name -> header.Event
 	84,  // 79: header.UserSession.latest_event:type_name -> header.Event
 	47,  // 80: header.UserSession.campaigns:type_name -> header.SessionCampaign
 	96,  // 81: header.UserSession.source_traces:type_name -> header.SourceTrace
 	84,  // 82: header.UserSession.latest_content_view:type_name -> header.Event
-	244, // 83: header.StartRequest.ctx:type_name -> common.Context
+	250, // 83: header.StartRequest.ctx:type_name -> common.Context
 	45,  // 84: header.StartRequest.user:type_name -> header.User
 	115, // 85: header.StartRequest.members:type_name -> header.ConversationMember
-	244, // 86: header.PresencesRequest.ctx:type_name -> common.Context
-	244, // 87: header.LeadSearchRequest.ctx:type_name -> common.Context
-	248, // 88: header.LeadSearchRequest.condition:type_name -> user.SCondition
+	250, // 86: header.PresencesRequest.ctx:type_name -> common.Context
+	250, // 87: header.LeadSearchRequest.ctx:type_name -> common.Context
+	254, // 88: header.LeadSearchRequest.condition:type_name -> user.SCondition
 	152, // 89: header.LeadSearchRequest.conditions:type_name -> header.UserAttributeCondition
-	244, // 90: header.LeadSearchResult.ctx:type_name -> common.Context
+	250, // 90: header.LeadSearchResult.ctx:type_name -> common.Context
 	45,  // 91: header.LeadSearchResult.users:type_name -> header.User
-	244, // 92: header.UserReportRequest.ctx:type_name -> common.Context
-	244, // 93: header.UserReportResult.ctx:type_name -> common.Context
+	250, // 92: header.UserReportRequest.ctx:type_name -> common.Context
+	250, // 93: header.UserReportResult.ctx:type_name -> common.Context
 	105, // 94: header.UserReportResult.channels:type_name -> header.UserReportTable
 	105, // 95: header.UserReportResult.first_interacts:type_name -> header.UserReportTable
 	105, // 96: header.UserReportResult.channel_sources:type_name -> header.UserReportTable
-	244, // 97: header.BotEventCreated.ctx:type_name -> common.Context
+	250, // 97: header.BotEventCreated.ctx:type_name -> common.Context
 	84,  // 98: header.BotEventCreated.event:type_name -> header.Event
-	244, // 99: header.RunRequest.ctx:type_name -> common.Context
-	250, // 100: header.RunRequest.object_contexts:type_name -> common.KV
+	250, // 99: header.RunRequest.ctx:type_name -> common.Context
+	256, // 100: header.RunRequest.object_contexts:type_name -> common.KV
 	153, // 101: header.RunRequest.bot:type_name -> header.Bot
 	156, // 102: header.RunRequest.action:type_name -> header.Action
 	84,  // 103: header.RunRequest.event:type_name -> header.Event
-	244, // 104: header.Rule.ctx:type_name -> common.Context
+	250, // 104: header.Rule.ctx:type_name -> common.Context
 	111, // 105: header.Rule.channel_condition:type_name -> header.ChannelCondition
 	110, // 106: header.Rule.timming_condition:type_name -> header.TimmingCondition
 	152, // 107: header.Rule.user_conditions:type_name -> header.UserAttributeCondition
 	112, // 108: header.ChannelCondition.locations:type_name -> header.LocationCondition
 	112, // 109: header.ChannelCondition.not_in_locations:type_name -> header.LocationCondition
-	244, // 110: header.Route.ctx:type_name -> common.Context
+	250, // 110: header.Route.ctx:type_name -> common.Context
 	109, // 111: header.Route.rules:type_name -> header.Rule
-	244, // 112: header.ConversationMember.ctx:type_name -> common.Context
-	250, // 113: header.ConversationMember.fields:type_name -> common.KV
-	247, // 114: header.ConversationMember.invited_by:type_name -> common.By
-	244, // 115: header.ListConversationsRequest.ctx:type_name -> common.Context
-	244, // 116: header.ListConversationEventsRequest.ctx:type_name -> common.Context
-	244, // 117: header.Conversation.ctx:type_name -> common.Context
+	250, // 112: header.ConversationMember.ctx:type_name -> common.Context
+	256, // 113: header.ConversationMember.fields:type_name -> common.KV
+	253, // 114: header.ConversationMember.invited_by:type_name -> common.By
+	250, // 115: header.ListConversationsRequest.ctx:type_name -> common.Context
+	250, // 116: header.ListConversationEventsRequest.ctx:type_name -> common.Context
+	250, // 117: header.Conversation.ctx:type_name -> common.Context
 	115, // 118: header.Conversation.members:type_name -> header.ConversationMember
 	134, // 119: header.Conversation.tags:type_name -> header.Tag
 	143, // 120: header.Conversation.integration:type_name -> header.Integration
 	122, // 121: header.Conversation.last_message:type_name -> header.Message
 	84,  // 122: header.Conversation.last_message_sent:type_name -> header.Event
-	249, // 123: header.Conversation.ticket:type_name -> conversation.Ticket
+	255, // 123: header.Conversation.ticket:type_name -> conversation.Ticket
 	114, // 124: header.Conversation.assigned_to:type_name -> header.RouteResult
-	250, // 125: header.Conversation.fields:type_name -> common.KV
+	256, // 125: header.Conversation.fields:type_name -> common.KV
 	120, // 126: header.Conversation.ratings:type_name -> header.Rating
-	244, // 127: header.Conversations.ctx:type_name -> common.Context
+	250, // 127: header.Conversations.ctx:type_name -> common.Context
 	119, // 128: header.Conversations.conversations:type_name -> header.Conversation
-	245, // 129: header.Conversations.errors:type_name -> common.Error
-	244, // 130: header.Message.ctx:type_name -> common.Context
-	246, // 131: header.Message.i18n_text:type_name -> common.I18nText
+	251, // 129: header.Conversations.errors:type_name -> common.Error
+	250, // 130: header.Message.ctx:type_name -> common.Context
+	252, // 131: header.Message.i18n_text:type_name -> common.I18nText
 	129, // 132: header.Message.attachments:type_name -> header.Attachment
-	250, // 133: header.Message.fields:type_name -> common.KV
+	256, // 133: header.Message.fields:type_name -> common.KV
 	123, // 134: header.Message.pongs:type_name -> header.MessagePong
 	124, // 135: header.ContentTemplate.default_action:type_name -> header.MessageButton
 	124, // 136: header.ContentTemplate.buttons:type_name -> header.MessageButton
@@ -25278,35 +25879,35 @@ var file_header_proto_depIdxs = []int32{
 	130, // 146: header.Attachment.quick_replies:type_name -> header.QuickReply
 	133, // 147: header.MessageForm.fields:type_name -> header.MessageFormField
 	133, // 148: header.MessageFormSubmit.fields:type_name -> header.MessageFormField
-	244, // 149: header.Tag.ctx:type_name -> common.Context
-	244, // 150: header.Template.ctx:type_name -> common.Context
+	250, // 149: header.Tag.ctx:type_name -> common.Context
+	250, // 150: header.Template.ctx:type_name -> common.Context
 	122, // 151: header.Template.message:type_name -> header.Message
 	135, // 152: header.Template.data:type_name -> header.TemplateData
-	244, // 153: header.SearchTemplate.ctx:type_name -> common.Context
-	244, // 154: header.Templates.ctx:type_name -> common.Context
+	250, // 153: header.SearchTemplate.ctx:type_name -> common.Context
+	250, // 154: header.Templates.ctx:type_name -> common.Context
 	136, // 155: header.Templates.templates:type_name -> header.Template
-	244, // 156: header.Tags.ctx:type_name -> common.Context
+	250, // 156: header.Tags.ctx:type_name -> common.Context
 	134, // 157: header.Tags.tags:type_name -> header.Tag
-	244, // 158: header.Postback.ctx:type_name -> common.Context
+	250, // 158: header.Postback.ctx:type_name -> common.Context
 	141, // 159: header.Postback.bot_jump:type_name -> header.PostbackBotJump
-	244, // 160: header.Integrations.ctx:type_name -> common.Context
+	250, // 160: header.Integrations.ctx:type_name -> common.Context
 	143, // 161: header.Integrations.integrations:type_name -> header.Integration
-	244, // 162: header.Integration.ctx:type_name -> common.Context
-	244, // 163: header.SearchMessageRequest.ctx:type_name -> common.Context
-	244, // 164: header.TagRequest.ctx:type_name -> common.Context
-	244, // 165: header.AssignRequest.ctx:type_name -> common.Context
+	250, // 162: header.Integration.ctx:type_name -> common.Context
+	250, // 163: header.SearchMessageRequest.ctx:type_name -> common.Context
+	250, // 164: header.TagRequest.ctx:type_name -> common.Context
+	250, // 165: header.AssignRequest.ctx:type_name -> common.Context
 	147, // 166: header.EndchatSetting.connector_settings:type_name -> header.EndchatConnectorSetting
 	147, // 167: header.EndchatSetting.global_setting:type_name -> header.EndchatConnectorSetting
-	244, // 168: header.BotRequest.ctx:type_name -> common.Context
+	250, // 168: header.BotRequest.ctx:type_name -> common.Context
 	112, // 169: header.BotCondition.locations:type_name -> header.LocationCondition
 	112, // 170: header.BotCondition.exclude_locations:type_name -> header.LocationCondition
 	152, // 171: header.BotCondition.user:type_name -> header.UserAttributeCondition
-	244, // 172: header.Bot.ctx:type_name -> common.Context
+	250, // 172: header.Bot.ctx:type_name -> common.Context
 	156, // 173: header.Bot.action:type_name -> header.Action
 	149, // 174: header.Bot.triggers:type_name -> header.Trigger
 	173, // 175: header.Bot.initiative_frequency:type_name -> header.Frequently
 	151, // 176: header.Bot.conditions:type_name -> header.BotCondition
-	244, // 177: header.Bots.ctx:type_name -> common.Context
+	250, // 177: header.Bots.ctx:type_name -> common.Context
 	153, // 178: header.Bots.bots:type_name -> header.Bot
 	165, // 179: header.NextAction.condition:type_name -> header.Condition
 	156, // 180: header.NextAction.action:type_name -> header.Action
@@ -25322,42 +25923,42 @@ var file_header_proto_depIdxs = []int32{
 	158, // 190: header.Action.send_facebook_private_reply:type_name -> header.ActionSendFacebookPrivateReply
 	122, // 191: header.ActionReplyFacebookComment.message:type_name -> header.Message
 	122, // 192: header.ActionSendFacebookPrivateReply.message:type_name -> header.Message
-	250, // 193: header.ActionSendHttp.header:type_name -> common.KV
+	256, // 193: header.ActionSendHttp.header:type_name -> common.KV
 	122, // 194: header.ActionAskQuestion.messages:type_name -> header.Message
 	122, // 195: header.ActionAskQuestion.resume_message:type_name -> header.Message
 	165, // 196: header.Condition.conditions:type_name -> header.Condition
-	251, // 197: header.Condition.number:type_name -> common.NumberParams
-	252, // 198: header.Condition.string:type_name -> common.StringParams
-	253, // 199: header.Condition.boolean:type_name -> common.BooleanParams
-	244, // 200: header.Actions.ctx:type_name -> common.Context
+	257, // 197: header.Condition.number:type_name -> common.NumberParams
+	258, // 198: header.Condition.string:type_name -> common.StringParams
+	259, // 199: header.Condition.boolean:type_name -> common.BooleanParams
+	250, // 200: header.Actions.ctx:type_name -> common.Context
 	156, // 201: header.Actions.actions:type_name -> header.Action
 	167, // 202: header.Metric.submetrics:type_name -> header.Metric
 	167, // 203: header.ReportBotResponse.metrics:type_name -> header.Metric
 	170, // 204: header.ListObjectsResponse.list:type_name -> header.ListObjectId
-	244, // 205: header.RealtimeSubscription.ctx:type_name -> common.Context
+	250, // 205: header.RealtimeSubscription.ctx:type_name -> common.Context
 	84,  // 206: header.PollResult.events:type_name -> header.Event
-	244, // 207: header.RealtimeMeta.ctx:type_name -> common.Context
-	244, // 208: header.PublishMessage.ctx:type_name -> common.Context
-	244, // 209: header.SearchUsersRequest.ctx:type_name -> common.Context
-	248, // 210: header.SearchUsersRequest.condition:type_name -> user.SCondition
+	250, // 207: header.RealtimeMeta.ctx:type_name -> common.Context
+	250, // 208: header.PublishMessage.ctx:type_name -> common.Context
+	250, // 209: header.SearchUsersRequest.ctx:type_name -> common.Context
+	254, // 210: header.SearchUsersRequest.condition:type_name -> user.SCondition
 	45,  // 211: header.SearchUsersResponse.users:type_name -> header.User
-	244, // 212: header.SearchNotesRequest.ctx:type_name -> common.Context
-	248, // 213: header.SearchNotesRequest.condition:type_name -> user.SCondition
+	250, // 212: header.SearchNotesRequest.ctx:type_name -> common.Context
+	254, // 213: header.SearchNotesRequest.condition:type_name -> user.SCondition
 	58,  // 214: header.SearchNotesResponse.notes:type_name -> header.Note
-	244, // 215: header.SearchTicketsRequest.ctx:type_name -> common.Context
-	248, // 216: header.SearchTicketsRequest.condition:type_name -> user.SCondition
-	249, // 217: header.SearchTicketsResponse.tickets:type_name -> conversation.Ticket
-	244, // 218: header.ExportUsersRequest.ctx:type_name -> common.Context
-	248, // 219: header.ExportUsersRequest.condition:type_name -> user.SCondition
-	244, // 220: header.WidgetUserSetting.ctx:type_name -> common.Context
-	254, // 221: header.WidgetUserSetting.account:type_name -> account.Account
+	250, // 215: header.SearchTicketsRequest.ctx:type_name -> common.Context
+	254, // 216: header.SearchTicketsRequest.condition:type_name -> user.SCondition
+	255, // 217: header.SearchTicketsResponse.tickets:type_name -> conversation.Ticket
+	250, // 218: header.ExportUsersRequest.ctx:type_name -> common.Context
+	254, // 219: header.ExportUsersRequest.condition:type_name -> user.SCondition
+	250, // 220: header.WidgetUserSetting.ctx:type_name -> common.Context
+	260, // 221: header.WidgetUserSetting.account:type_name -> account.Account
 	45,  // 222: header.WidgetUserSetting.user:type_name -> header.User
 	189, // 223: header.WidgetUserSetting.account_setting:type_name -> header.WidgetSetting
 	201, // 224: header.WidgetUserSetting.campaigns:type_name -> header.Campaign
 	153, // 225: header.WidgetUserSetting.bots:type_name -> header.Bot
 	187, // 226: header.WidgetHeader.links:type_name -> header.SocialLink
-	244, // 227: header.WidgetSetting.ctx:type_name -> common.Context
-	255, // 228: header.WidgetSetting.agents:type_name -> account.Agent
+	250, // 227: header.WidgetSetting.ctx:type_name -> common.Context
+	261, // 228: header.WidgetSetting.agents:type_name -> account.Agent
 	188, // 229: header.WidgetSetting.header:type_name -> header.WidgetHeader
 	192, // 230: header.WidgetSetting.offline_form:type_name -> header.WidgetForm
 	192, // 231: header.WidgetSetting.prechat_form:type_name -> header.WidgetForm
@@ -25376,22 +25977,22 @@ var file_header_proto_depIdxs = []int32{
 	197, // 244: header.CampaignSegmentation.exclude_location_conditions:type_name -> header.CampaignCondition
 	201, // 245: header.Campaigns.campaigns:type_name -> header.Campaign
 	122, // 246: header.CampaignNotification.user_email:type_name -> header.Message
-	244, // 247: header.Campaign.ctx:type_name -> common.Context
+	250, // 247: header.Campaign.ctx:type_name -> common.Context
 	195, // 248: header.Campaign.triggers:type_name -> header.CampaignTrigger
 	198, // 249: header.Campaign.segmentations:type_name -> header.CampaignSegmentation
 	207, // 250: header.Campaign.pages:type_name -> header.CampaignPage
 	196, // 251: header.Campaign.schedulers:type_name -> header.CampaignSchedulerCondition
 	200, // 252: header.Campaign.notification:type_name -> header.CampaignNotification
 	173, // 253: header.Campaign.impression_frequency:type_name -> header.Frequently
-	244, // 254: header.Impression.ctx:type_name -> common.Context
-	256, // 255: header.Impression.device:type_name -> common.Device
-	244, // 256: header.ConversionRequest.ctx:type_name -> common.Context
-	244, // 257: header.Conversions.ctx:type_name -> common.Context
+	250, // 254: header.Impression.ctx:type_name -> common.Context
+	262, // 255: header.Impression.device:type_name -> common.Device
+	250, // 256: header.ConversionRequest.ctx:type_name -> common.Context
+	250, // 257: header.Conversions.ctx:type_name -> common.Context
 	205, // 258: header.Conversions.conversions:type_name -> header.Conversion
-	244, // 259: header.Conversion.ctx:type_name -> common.Context
-	256, // 260: header.Conversion.device:type_name -> common.Device
+	250, // 259: header.Conversion.ctx:type_name -> common.Context
+	262, // 260: header.Conversion.device:type_name -> common.Device
 	209, // 261: header.Conversion.submission:type_name -> header.CampaignSubmission
-	244, // 262: header.UserCampaignStatus.ctx:type_name -> common.Context
+	250, // 262: header.UserCampaignStatus.ctx:type_name -> common.Context
 	192, // 263: header.CampaignPage.form:type_name -> header.WidgetForm
 	211, // 264: header.CampaignPage.primary_button:type_name -> header.CampaignButton
 	211, // 265: header.CampaignPage.secondary_button:type_name -> header.CampaignButton
@@ -25400,76 +26001,81 @@ var file_header_proto_depIdxs = []int32{
 	213, // 268: header.CampaignPage.video:type_name -> header.CampaignVideo
 	208, // 269: header.CampaignPage.desktop_appearance:type_name -> header.CampaignAppearance
 	208, // 270: header.CampaignPage.mobile_appearance:type_name -> header.CampaignAppearance
-	244, // 271: header.CampaignSubmission.ctx:type_name -> common.Context
+	250, // 271: header.CampaignSubmission.ctx:type_name -> common.Context
 	190, // 272: header.CampaignSubmission.fields:type_name -> header.WidgetField
 	210, // 273: header.CampaignButton.actions:type_name -> header.CampaignButtonAction
-	244, // 274: header.ReportCampaignRequest.ctx:type_name -> common.Context
-	244, // 275: header.ReportCampaignResponse.ctx:type_name -> common.Context
-	244, // 276: header.SearchLocationsRequest.ctx:type_name -> common.Context
-	244, // 277: header.UploadedImage.ctx:type_name -> common.Context
-	244, // 278: header.UploadedImages.ctx:type_name -> common.Context
+	250, // 274: header.ReportCampaignRequest.ctx:type_name -> common.Context
+	250, // 275: header.ReportCampaignResponse.ctx:type_name -> common.Context
+	250, // 276: header.SearchLocationsRequest.ctx:type_name -> common.Context
+	250, // 277: header.UploadedImage.ctx:type_name -> common.Context
+	250, // 278: header.UploadedImages.ctx:type_name -> common.Context
 	220, // 279: header.UploadedImages.images:type_name -> header.UploadedImage
-	244, // 280: header.Clients.ctx:type_name -> common.Context
+	250, // 280: header.Clients.ctx:type_name -> common.Context
 	223, // 281: header.Clients.clients:type_name -> header.Client
-	244, // 282: header.Client.ctx:type_name -> common.Context
-	244, // 283: header.AuthorizedClient.ctx:type_name -> common.Context
+	250, // 282: header.Client.ctx:type_name -> common.Context
+	250, // 283: header.AuthorizedClient.ctx:type_name -> common.Context
 	223, // 284: header.AuthorizedClient.client:type_name -> header.Client
-	244, // 285: header.Webhooks.ctx:type_name -> common.Context
+	250, // 285: header.Webhooks.ctx:type_name -> common.Context
 	227, // 286: header.Webhooks.webhooks:type_name -> header.Webhook
-	244, // 287: header.Webhook.ctx:type_name -> common.Context
+	250, // 287: header.Webhook.ctx:type_name -> common.Context
 	226, // 288: header.Webhook.old_secret:type_name -> header.WebhookSecret
-	244, // 289: header.WebhookDeliveries.ctx:type_name -> common.Context
+	250, // 289: header.WebhookDeliveries.ctx:type_name -> common.Context
 	229, // 290: header.WebhookDeliveries.deliveries:type_name -> header.WebhookDelivery
-	244, // 291: header.WebhookDelivery.ctx:type_name -> common.Context
-	250, // 292: header.WebhookDelivery.resquest_headers:type_name -> common.KV
-	250, // 293: header.WebhookDelivery.response_headers:type_name -> common.KV
-	244, // 294: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
-	244, // 295: header.WebhookPayload.ctx:type_name -> common.Context
-	244, // 296: header.WebhookTestResult.ctx:type_name -> common.Context
-	244, // 297: header.Email.ctx:type_name -> common.Context
-	243, // 298: header.Email.header:type_name -> header.Email.HeaderEntry
+	250, // 291: header.WebhookDelivery.ctx:type_name -> common.Context
+	256, // 292: header.WebhookDelivery.resquest_headers:type_name -> common.KV
+	256, // 293: header.WebhookDelivery.response_headers:type_name -> common.KV
+	250, // 294: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
+	250, // 295: header.WebhookPayload.ctx:type_name -> common.Context
+	250, // 296: header.WebhookTestResult.ctx:type_name -> common.Context
+	250, // 297: header.Email.ctx:type_name -> common.Context
+	249, // 298: header.Email.header:type_name -> header.Email.HeaderEntry
 	234, // 299: header.Email.attachments:type_name -> header.EmailAttachment
-	244, // 300: header.FileHeader.ctx:type_name -> common.Context
-	244, // 301: header.PresignResult.ctx:type_name -> common.Context
-	244, // 302: header.FileRequest.ctx:type_name -> common.Context
-	244, // 303: header.File.ctx:type_name -> common.Context
-	244, // 304: header.BotTerminated.ctx:type_name -> common.Context
-	254, // 305: header.Event.Data.account:type_name -> account.Account
-	255, // 306: header.Event.Data.agent:type_name -> account.Agent
-	122, // 307: header.Event.Data.message:type_name -> header.Message
-	119, // 308: header.Event.Data.conversation:type_name -> header.Conversation
-	140, // 309: header.Event.Data.postback:type_name -> header.Postback
-	257, // 310: header.Event.Data.content:type_name -> content.Content
-	94,  // 311: header.Event.Data.topic:type_name -> header.Topic
-	258, // 312: header.Event.Data.presence:type_name -> account.Presence
-	45,  // 313: header.Event.Data.user:type_name -> header.User
-	95,  // 314: header.Event.Data.unread_topic:type_name -> header.UnreadTopic
-	259, // 315: header.Event.Data.notification:type_name -> notibox.Notification
-	260, // 316: header.Event.Data.agent_perm:type_name -> account.AgentPerm
-	261, // 317: header.Event.Data.group_member:type_name -> account.GroupMember
-	262, // 318: header.Event.Data.group:type_name -> account.AgentGroup
-	263, // 319: header.Event.Data.limit:type_name -> payment.Limit
-	58,  // 320: header.Event.Data.note:type_name -> header.Note
-	249, // 321: header.Event.Data.ticket:type_name -> conversation.Ticket
-	89,  // 322: header.Event.Data.automation:type_name -> header.Automation
-	84,  // 323: header.Event.Data.event:type_name -> header.Event
-	88,  // 324: header.Event.Data.automation_event:type_name -> header.AutomationEvent
-	264, // 325: header.Event.Data.notibox:type_name -> notibox.Notibox
-	265, // 326: header.Event.Data.notification_setting:type_name -> noti5.Setting
-	109, // 327: header.Event.Data.rule:type_name -> header.Rule
-	54,  // 328: header.Event.Data.user_attribute:type_name -> header.AttributeDefinition
-	134, // 329: header.Event.Data.tag:type_name -> header.Tag
-	75,  // 330: header.Event.Data.total_user:type_name -> header.UserMetric
-	153, // 331: header.Event.Data.bot:type_name -> header.Bot
-	108, // 332: header.Event.Data.bot_run_response:type_name -> header.RunResponse
-	143, // 333: header.Event.Data.integration:type_name -> header.Integration
-	240, // 334: header.Event.Data.bot_terminated:type_name -> header.BotTerminated
-	227, // 335: header.Event.Data.webhook:type_name -> header.Webhook
-	336, // [336:336] is the sub-list for method output_type
-	336, // [336:336] is the sub-list for method input_type
-	336, // [336:336] is the sub-list for extension type_name
-	336, // [336:336] is the sub-list for extension extendee
-	0,   // [0:336] is the sub-list for field type_name
+	250, // 300: header.FileHeader.ctx:type_name -> common.Context
+	250, // 301: header.PresignResult.ctx:type_name -> common.Context
+	250, // 302: header.FileRequest.ctx:type_name -> common.Context
+	250, // 303: header.File.ctx:type_name -> common.Context
+	250, // 304: header.BotTerminated.ctx:type_name -> common.Context
+	250, // 305: header.WhitelistUrl.ctx:type_name -> common.Context
+	250, // 306: header.WhitelistDomain.ctx:type_name -> common.Context
+	250, // 307: header.BlacklistIP.ctx:type_name -> common.Context
+	250, // 308: header.BannedUser.ctx:type_name -> common.Context
+	250, // 309: header.ScryptChallenge.ctx:type_name -> common.Context
+	260, // 310: header.Event.Data.account:type_name -> account.Account
+	261, // 311: header.Event.Data.agent:type_name -> account.Agent
+	122, // 312: header.Event.Data.message:type_name -> header.Message
+	119, // 313: header.Event.Data.conversation:type_name -> header.Conversation
+	140, // 314: header.Event.Data.postback:type_name -> header.Postback
+	263, // 315: header.Event.Data.content:type_name -> content.Content
+	94,  // 316: header.Event.Data.topic:type_name -> header.Topic
+	264, // 317: header.Event.Data.presence:type_name -> account.Presence
+	45,  // 318: header.Event.Data.user:type_name -> header.User
+	95,  // 319: header.Event.Data.unread_topic:type_name -> header.UnreadTopic
+	265, // 320: header.Event.Data.notification:type_name -> notibox.Notification
+	266, // 321: header.Event.Data.agent_perm:type_name -> account.AgentPerm
+	267, // 322: header.Event.Data.group_member:type_name -> account.GroupMember
+	268, // 323: header.Event.Data.group:type_name -> account.AgentGroup
+	269, // 324: header.Event.Data.limit:type_name -> payment.Limit
+	58,  // 325: header.Event.Data.note:type_name -> header.Note
+	255, // 326: header.Event.Data.ticket:type_name -> conversation.Ticket
+	89,  // 327: header.Event.Data.automation:type_name -> header.Automation
+	84,  // 328: header.Event.Data.event:type_name -> header.Event
+	88,  // 329: header.Event.Data.automation_event:type_name -> header.AutomationEvent
+	270, // 330: header.Event.Data.notibox:type_name -> notibox.Notibox
+	271, // 331: header.Event.Data.notification_setting:type_name -> noti5.Setting
+	109, // 332: header.Event.Data.rule:type_name -> header.Rule
+	54,  // 333: header.Event.Data.user_attribute:type_name -> header.AttributeDefinition
+	134, // 334: header.Event.Data.tag:type_name -> header.Tag
+	75,  // 335: header.Event.Data.total_user:type_name -> header.UserMetric
+	153, // 336: header.Event.Data.bot:type_name -> header.Bot
+	108, // 337: header.Event.Data.bot_run_response:type_name -> header.RunResponse
+	143, // 338: header.Event.Data.integration:type_name -> header.Integration
+	240, // 339: header.Event.Data.bot_terminated:type_name -> header.BotTerminated
+	227, // 340: header.Event.Data.webhook:type_name -> header.Webhook
+	341, // [341:341] is the sub-list for method output_type
+	341, // [341:341] is the sub-list for method input_type
+	341, // [341:341] is the sub-list for extension type_name
+	341, // [341:341] is the sub-list for extension extendee
+	0,   // [0:341] is the sub-list for field type_name
 }
 
 func init() { file_header_proto_init() }
@@ -27842,7 +28448,79 @@ func file_header_proto_init() {
 				return nil
 			}
 		}
+		file_header_proto_msgTypes[197].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*WhitelistUrl); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_header_proto_msgTypes[198].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*WhitelistDomain); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_header_proto_msgTypes[199].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlacklistIP); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_header_proto_msgTypes[200].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BannedUser); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_header_proto_msgTypes[201].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ScryptChallenge); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_header_proto_msgTypes[202].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Apikey); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_header_proto_msgTypes[204].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Event_Data); i {
 			case 0:
 				return &v.state
@@ -27861,7 +28539,7 @@ func file_header_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_header_proto_rawDesc,
 			NumEnums:      44,
-			NumMessages:   200,
+			NumMessages:   206,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

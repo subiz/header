@@ -2613,6 +2613,62 @@ message BotTerminated {
 	}
 }
 
+message WhitelistUrl {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string url = 4;
+	int64 created = 5;
+	string by = 6;
+}
+
+message WhitelistDomain {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string domain = 4;
+	int64 created = 5;
+	string by = 6;
+}
+
+message BlacklistIP {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string ip = 4;
+	int64 created = 5;
+	string by = 6;
+}
+
+message BannedUser {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string user_id = 4;
+	int64 created = 5;
+	string by = 6;
+}
+
+message ScryptChallenge {
+	common.Context ctx = 1;
+	string account_id = 9;
+	string id = 2; // very long string
+	int32 N = 3;
+	int32 P = 4;
+	int32 r = 5;
+	string salt = 6;
+	string hash = 8; // 32 bit hex
+	int32 domain = 14;
+	int32 dklen = 15;
+	// only for subiz use
+	string answer = 10;
+	int64 created = 11;
+}
+
+message Apikey {
+	string secret = 3;
+	string account_id = 4;
+	string client_id = 5;
+	string client_type = 6;
+	bool is_internal = 7;
+}
+
 enum RealtimeType {
 	a = 0;
 	account_deleted = 10;
