@@ -64,6 +64,8 @@ service UserMgr {
 	rpc SearchLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 	rpc ListLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 
+	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
+
 	rpc CreateUser (header.User) returns (common.Id);
 	rpc UpdateUser (header.User) returns (common.Id);
 	rpc ReadUser (common.Id) returns (header.User);

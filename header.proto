@@ -25,7 +25,7 @@ message Attribute {
 	repeated string list = 14; // remove
 
 	string type = 16;
-	string by = 17;
+	string by = 17; // required
 
 	// to update
 	enum Ops {
@@ -40,14 +40,22 @@ message Attribute {
 	string action = 18;
 }
 
+message UserAlias {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string alias = 4;
+}
+
 message User {
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
 
 	repeated Attribute attributes = 18;
-	// repeated Identification identifications = 39;
 	UserSession session = 40;
+
+	repeated string aliases = 5;
 }
 
 message Users {
@@ -142,23 +150,6 @@ message AttributeDefinitions {
 message UserCreateResult {
 	string id = 3;
 	string mask = 5;
-}
-
-message Identification {
-	common.Context ctx = 1;
-	string user_id = 3;
-	string account_id = 4;
-	string alias = 5;
-	string value = 6;
-
-	string channel = 9;
-	string integration_id = 10;
-	string source = 11;
-
-	bool trusted = 12;
-	int64 created = 13;
-
-	repeated string user_ids = 14;
 }
 
 message Note {
@@ -398,13 +389,11 @@ message Event {
 		account.Presence presence = 8;
 		User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
-		// user.MyUser my_user = 12;
 		notibox.Notification notification = 14;
 		account.AgentPerm agent_perm = 16;
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
 		payment.Limit limit = 19;
-		// user.Identification alias = 22;
 		Note note = 23;
 		conversation.Ticket ticket = 24;
 		Automation automation = 25;
@@ -421,6 +410,7 @@ message Event {
 		Integration integration = 42;
 		BotTerminated bot_terminated = 43;
 		Webhook webhook = 44;
+		UserAlias user_alias = 45;
 	}
 	Data data = 20;
 }
@@ -513,8 +503,6 @@ message AutomationAction {
 	enum ActionType {
 		update_user_attribute = 0; // type user
 		block_user = 1; // prop user
-		merge_users = 3; // not yet defined
-		notify_user = 4; // not yet defined
 		send_email = 5; // prop email
 		add_user_note = 6; // note
 		create_conversation = 7; // events, integration_id
@@ -2671,7 +2659,6 @@ message Apikey {
 
 enum RealtimeType {
 	a = 0;
-	account_deleted = 10;
 	account_updated = 11;
 
 	group_deleted = 12;
@@ -2699,8 +2686,6 @@ enum RealtimeType {
 	user_topic_updated = 32;
 	user_attribute_updated = 33;
 	user_attribute_deleted = 34;
-
-	automation_fired = 36;
 
 	notibox_notification_upserted = 37;
 	notibox_upserted = 38;
@@ -2764,4 +2749,5 @@ enum RealtimeType {
 	user_first_visited = 97;
 
 	bot_terminated = 98;
+	user_alias_created = 99;
 }
