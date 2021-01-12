@@ -1085,6 +1085,8 @@ message MessagePong {
 		hide = 17;
 		remove_hide = 18;
 		open = 19; // email opened
+
+		postback = 20;
 	}
 	string type = 4;
 
@@ -1327,10 +1329,11 @@ message Postback {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string conversation_id = 3;
+	string event_id = 4;
+	string payload = 5;
 
-	string type = 4;
-
-	PostbackBotJump bot_jump = 5;
+	string type = 10;
+	PostbackBotJump bot_jump = 11;
 }
 
 message PostbackBotJump {
@@ -1756,18 +1759,6 @@ message PollResult {
 	string host = 7; // notify client about the wrong host
 }
 
-message RealtimeMeta {
-	common.Context ctx = 1;
-	enum Type {
-		tombstone = 0; // mark that connection is dead
-	}
-	string type = 2;
-	int64 created = 3;
-	int64 expired = 4; // unix_sec
-
-	string connection_id = 10;
-}
-
 message RealtimeToken {
 	string account_id = 2;
 	string connection_id = 4;
@@ -1777,9 +1768,6 @@ message RealtimeToken {
 
 	int64 last_polled = 8;
 	int64 package_size = 9;
-
-	string group_id = 10;
-	string group_par = 11;
 }
 
 message PublishMessage {
@@ -1790,7 +1778,6 @@ message PublishMessage {
 
 	string account_id = 5;
 }
-
 
 // SEARCH
 message SearchUsersRequest {
@@ -1819,32 +1806,6 @@ message SearchNotesResponse {
 	int64 total = 2;
 	string anchor = 3;
 	repeated Note notes = 4;
-}
-
-message SearchTicketsRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string order_by = 3; // created, duedate
-	string anchor = 4;
-	int64 limit = 5;
-	user.SCondition condition = 6;
-}
-
-message SearchTicketsResponse {
-	int64 total = 2;
-	string anchor = 3;
-	repeated conversation.Ticket tickets = 4;
-}
-
-message ExportUsersRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated string emails = 3; // send to this emails
-	repeated string attribute_keys = 4; // exported attributes
-	string email_subject = 5;
-	string language_code = 6;
-	user.SCondition condition = 8;
-	repeated string ids = 9; // export selected users only, ignore condition
 }
 
 // widget
@@ -2697,6 +2658,7 @@ enum RealtimeType {
 	conversation_state_updated = 42; // event.data.conversation
 
 	message_pong = 43; // event.data.message.pongs.0
+	message_postback = 50; // event.data.postback
 
 	conversation_joined = 44; // event.data.conversation.memebers.0
 	conversation_invited = 45;
@@ -2707,7 +2669,6 @@ enum RealtimeType {
 	integration_updated = 49;
 
 	conversation_typing = 54;
-	conversation_postbacked = 55;
 	conversation_unassigned = 56;
 	conversation_assigned = 57;
 	message_updated = 58; // event.data.message.revisions.0
