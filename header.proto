@@ -1311,12 +1311,10 @@ message Postback {
 	string conversation_id = 3;
 	string event_id = 4;
 	string payload = 5;
-
-	string type = 10;
-	PostbackBotJump bot_jump = 11;
 }
 
 message PostbackBotJump {
+	string type = 2;
 	string bot_id = 3;
 	string action_id = 4;
 	string from_action = 5;
@@ -1381,7 +1379,9 @@ message AssignRequest {
 	repeated string assign_tos = 7;
 	bool available_agents_only = 8; // strategy
 
+	// for bot only
 	int64 agent_reply_timeout = 9; // sec
+	string branch_on_no_reply = 10; // action id
 }
 
 message EndchatConnectorSetting {
@@ -1548,7 +1548,8 @@ enum BotActionType {
 }
 
 message NextBotAction {
-	Condition condition = 2;
+	Condition condition = 2; // should remove?
+
 	BotAction action = 3; // pointed to the next action or used for branching to multiple actions
 }
 
@@ -1568,7 +1569,7 @@ message BotAction {
 	ActionSwitchLanguage switch_language = 16;
 	ActionSendHttp send_http = 17;
 	ActionAskQuestion ask_question = 18;
-	AssignRequest assign = 19;
+  AssignRequest assign = 19;
 
 	int64 delay_sec = 20;
 	ActionUpdateConversation update_conversation = 21;
@@ -1618,6 +1619,7 @@ message ActionAskQuestion {
 
 	string validation = 6; // none, email, phone, date, link, number, regex
 	string validation_regex = 7;
+	string branch_on_invalidate_reply = 8; // action id
 
 	bool skip_if_attribute_already_existed = 11;
 
@@ -1628,6 +1630,9 @@ message ActionAskQuestion {
 	// retry forever
 
 	int32 retry = 18; // != 1 => 0 retry, 1 retry forever
+
+	int64 timeout = 19; // sec
+	string branch_on_no_reply = 20;
 }
 
 message ActionSleep {
