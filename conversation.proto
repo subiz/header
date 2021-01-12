@@ -67,26 +67,6 @@ message TotalConversationResponse {
 	optional int64 total_conversation = 2;
 }
 
-message Ticket {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string id = 4;
-	optional string state = 5;
-	optional string priority = 6;
-	optional int64 duedate = 7;
-	optional string subject = 8;
-	optional int64 created = 9;
-	repeated TicketAttributeData attributes = 10; // remove
-	optional int64 updated = 11;
-	repeated string user_ids = 12;
-	repeated string agent_ids = 13;
-	optional bool is_assigned = 14;
-	optional string updated_by = 15;
-	optional string created_by = 16;
-	optional string note = 19;
-}
-
 enum TicketListOrderBy {
 	created = 1;
 	duedate = 2;
@@ -105,45 +85,11 @@ message TicketListRequest {
 	optional string priority = 10;
 }
 
-message Tickets {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	repeated Ticket tickets = 3;
-	optional string anchor = 4;
-}
-
-message ESTickets {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	repeated ESTicket tickets = 3;
-	optional string anchor = 4;
-}
-
 enum TicketPriority {
 	low = 0;
 	medium = 1;
 	high = 2;
 	urgent = 3;
-}
-
-message TicketAttributeData {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string ticket_id = 3;
-	optional string key = 4;
-
-	optional string state = 6;
-	optional int64 created = 7;
-	optional int64 modified = 8;
-
-	optional string text = 10;
-	optional double number = 11;
-	optional bool boolean = 12;
-	optional string datetime = 13;
-	repeated string list = 14;
-
-	optional string setter = 16;
-	optional string setter_type = 17;
 }
 
 message ServiceLevelAgreementTarget {

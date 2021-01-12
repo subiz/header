@@ -64,14 +64,7 @@ message Device {
 	repeated string ga_tracking_ids = 12;
 }
 
-message PingRequest {
-	string message = 2;
-}
-
-message Pong {
-	string message = 3;
-}
-
+/*
 enum Weekday {
 	Monday = 0;
 	Tuesday = 1;
@@ -97,6 +90,7 @@ enum Month {
 	November = 11;
 	December = 12;
 }
+*/
 
 message By {
 	Device device = 2;
@@ -219,12 +213,6 @@ message UpdatePermRequest {
 	Permission perm = 4;
 }
 
-message UpdateStateRequest {
-	string account_id = 1;
-	string user_id = 2;
-	bool is_active = 3;
-}
-
 message ReadPermRequest {
 	string account_id = 1;
 	string user_id = 2;
@@ -264,30 +252,6 @@ message StringParams {
 
 message BooleanParams {
 	bool is = 2;
-}
-
-message Log {
-	Context ctx = 1;
-	string trace_id = 2;
-	int64 created = 8;
-	string level = 10;
-	repeated string tags = 4;
-	bytes message = 24;
-	string service_name = 25;
-}
-
-// Log level
-enum Level {
-	debug = 0;
-	info = 1;
-	notice = 2;
-	warning = 3;
-	error = 4;
-	critical = 5;
-	alert = 6;
-	emergency = 7;
-	panic = 8;
-	fatal = 9;
 }
 
 message I18nText {

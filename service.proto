@@ -5,9 +5,7 @@ package header;
 option go_package = "github.com/subiz/header";
 
 import "common.proto";
-import "user.proto";
 import "conversation.proto";
-import "content.proto";
 import "payment.proto";
 import "notibox.proto";
 import "noti5.proto";
@@ -44,6 +42,9 @@ service AccountMgr {
 	rpc IntegrateBot(account.Agent) returns (account.Agent);
 	rpc SyncPublicHolidays(account.SyncPublicHolidaysRequest) returns (account.BusinessHours);
 	rpc TransferOwner(common.Id) returns (account.Agent);
+
+	rpc UpdatePerm(common.UpdatePermRequest) returns (common.Empty);
+	rpc ReadPerm(common.ReadPermRequest) returns (common.Permission);
 }
 
 service CurrencyMgr {
@@ -60,7 +61,7 @@ service CurrencyMgr {
 
 // user services
 service UserMgr {
-	rpc SearchUsers (user.UserSearchRequest) returns (header.UserSearchResult); // deprecated
+	rpc SearchUsers (header.UserSearchRequest) returns (header.UserSearchResult); // deprecated
 	rpc SearchLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 	rpc ListLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 
@@ -71,10 +72,7 @@ service UserMgr {
 	rpc ReadUser (common.Id) returns (header.User);
 
 	rpc ReportUsers (header.UserReportRequest) returns (header.UserReportResult);
-	rpc CountTotal(header.CountTotalRequest) returns (header.CountTotalResponse);
-	rpc Ping(common.PingRequest) returns (common.Pong);
-
-	rpc SearchNote (user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
+	rpc SearchNote (header.SearchNoteRequest) returns (header.SearchNoteResponse); // deprecated
 
 	rpc MatchUsers(common.Ids) returns (header.Users);
 }
@@ -97,7 +95,7 @@ service NoteMgr {
 	rpc UpdateNote(header.Note) returns (header.Note);
 	rpc DeleteNote(header.DeleteNoteRequest) returns (common.Empty);
 	rpc GetNote(header.GetNoteRequest) returns (header.Note);
-	rpc SearchNote(user.SearchNoteRequest) returns (user.SearchNoteResponse); // deprecated
+	rpc SearchNote(header.SearchNoteRequest) returns (SearchNoteResponse); // deprecated
 }
 
 service AutomationMgr {
@@ -113,13 +111,6 @@ service AttributeMgr {
 	rpc CreateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 	rpc DeleteAttributeDefinition(header.DeleteAttrRequest) returns (common.Empty);
-}
-
-// auth services
-service Perm {
-	rpc Update(common.UpdatePermRequest) returns (common.Empty);
-	rpc UpdateState(common.UpdateStateRequest) returns (common.Empty);
-	rpc ReadPerm(common.ReadPermRequest) returns (common.Permission);
 }
 
 // conversation services
@@ -161,7 +152,6 @@ service ConversationMgr {
 	rpc JoinConversation(header.ConversationMember) returns (common.Empty);
 	rpc LeftConversation(header.ConversationMember) returns (common.Empty);
 	rpc Typing(common.Id) returns (common.Empty);
-	rpc Ping(common.PingRequest) returns (common.Pong);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
@@ -207,11 +197,10 @@ service IntegrationMgr {
 }
 
 service TicketMgr {
-	rpc CreateTicket(conversation.Ticket) returns (conversation.Ticket);
-	rpc UpdateTicket(conversation.Ticket) returns (conversation.Ticket);
+	rpc CreateTicket(Ticket) returns (Ticket);
+	rpc UpdateTicket(Ticket) returns (Ticket);
 	rpc DeleteTicket(conversation.DeleteTicketRequest) returns (common.Empty);
-	rpc GetTicket(conversation.GetTicketRequest) returns (conversation.Ticket);
-	rpc SearchTicket(conversation.TicketListRequest) returns (conversation.ESTickets);
+	rpc GetTicket(conversation.GetTicketRequest) returns (Ticket);
 	rpc ListSLAs(common.Empty) returns (conversation.ServiceLevelAgreements);
 	rpc GetSLA(common.Id) returns (conversation.ServiceLevelAgreement);
 	rpc CreateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
@@ -228,16 +217,6 @@ service ClientMgr {
 	rpc Read(header.Client) returns (header.Client);
 	rpc ListIntegratedClients(common.Id) returns (header.AuthorizedClient); // account id
 	rpc ListAuthorizedClients(common.Id) returns (header.AuthorizedClient); // agent id
-}
-
-// content services
-service ServiceContentManager {
-	rpc UpsertContent(content.Content) returns (content.Content);
-	rpc DeleteContent(common.Id) returns (common.Empty);
-	rpc GetContent(common.Id) returns (content.Content);
-	rpc SearchContents(content.SearchContentRequest) returns (content.Contents);
-	rpc LookupContentsByUrl(content.LookupRequest) returns (content.Contents);
-	rpc LinkContentsToUrl(content.LinkRequest) returns (common.Empty);
 }
 
 service EventMgr {
@@ -359,12 +338,6 @@ service WidgetService {
 	rpc DeleteUploadedImage(header.UploadedImage) returns (common.Empty);
 }
 
-// search services
-service Search {
-	rpc SearchUsers(header.SearchUsersRequest) returns (header.SearchUsersResponse);
-	rpc SearchNotes(header.SearchNotesRequest) returns (header.SearchNotesResponse);
-}
-
 // bqreport services
 service Bqreport {
 	rpc AggregateConversations(bqreport.ConversationFilter) returns (bqreport.ConversationReport);
@@ -383,11 +356,10 @@ service Bizbot {
 	rpc CreateBot(header.Bot) returns (header.Bot);
 	rpc UpdateBot(header.Bot) returns (header.Bot);
 	rpc DeleteBot(common.Id) returns (common.Empty);
-	rpc OnEvent(header.RunRequest) returns (common.Empty);
-	rpc StartBot(header.RunRequest) returns (common.Empty);
-	rpc StopBot(header.RunRequest) returns (common.Empty);
-	rpc TryAction(header.RunRequest) returns (common.Empty);
-	rpc DoAction(header.RunRequest) returns (header.Actions);
+	rpc OnEvent(header.BotRunRequest) returns (common.Empty);
+	rpc StartBot(header.BotRunRequest) returns (common.Empty);
+	rpc StopBot(header.BotRunRequest) returns (common.Empty);
+	rpc TryAction(header.BotRunRequest) returns (common.Empty);
 	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
 	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
 	rpc CreateBotRevision(header.Bot) returns (header.Bot);

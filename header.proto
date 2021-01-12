@@ -6,12 +6,8 @@ option go_package = "github.com/subiz/header";
 
 import "common.proto";
 import "account.proto";
-import "user.proto";
-import "conversation.proto";
-import "content.proto";
 import "notibox.proto";
 import "noti5.proto";
-import "payment.proto";
 
 message Attribute {
 	string key = 4;
@@ -51,11 +47,9 @@ message User {
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
-
+	repeated string aliases = 5;
 	repeated Attribute attributes = 18;
 	UserSession session = 40;
-
-	repeated string aliases = 5;
 }
 
 message Users {
@@ -74,19 +68,7 @@ message SessionCampaign {
 	string content = 6;
 }
 
-message CountTotalRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-}
-
-message CountTotalResponse {
-	double total_user = 2;
-}
-
-message CountResponse {
-	repeated int32 data = 3;
-}
-
+// create user request
 message CreateRequest {
 	string challenge_id = 3;
 	string answer = 4;
@@ -384,7 +366,7 @@ message Event {
 		Message message = 3;
 		Conversation conversation = 4;
 		Postback postback = 5;
-		content.Content content = 6;
+		Product product = 6;
 		Topic topic = 7;
 		account.Presence presence = 8;
 		User user = 10;
@@ -393,9 +375,8 @@ message Event {
 		account.AgentPerm agent_perm = 16;
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
-		payment.Limit limit = 19;
 		Note note = 23;
-		conversation.Ticket ticket = 24;
+		Ticket ticket = 24;
 		Automation automation = 25;
 		Event event = 26;
 		AutomationEvent automation_event = 30;
@@ -406,7 +387,7 @@ message Event {
 		Tag tag = 38;
 		UserMetric total_user = 39;
 		Bot bot = 40;
-		RunResponse bot_run_response = 41;
+		BotRunResponse bot_run_response = 41;
 		Integration integration = 42;
 		BotTerminated bot_terminated = 43;
 		Webhook webhook = 44;
@@ -455,7 +436,7 @@ message Automation {
 	string channel = 4; // deprecated
 	string name = 5;
 	string description = 6;
-	user.SCondition condition = 8;
+	SCondition condition = 8;
 
 	int64 created = 9;
 	int64 modified = 10;
@@ -527,7 +508,7 @@ message AutomationAction {
 	string agent_id = 8; // deprecated
 	string tag_id = 9; // deprecated
 	repeated Event events = 10;
-	conversation.Ticket ticket = 11;
+	Ticket ticket = 11;
 	string integration_id = 12;
 	string segmentation_id = 13;
 	repeated string agent_ids = 14;
@@ -547,7 +528,6 @@ message AutomationWebhookSetting {
 	bool message = 3;
 	bool conversation = 4;
 	bool postback = 5;
-	bool content = 6;
 	bool user = 10;
 	bool group = 18;
 	bool limit = 19;
@@ -705,7 +685,7 @@ message LeadSearchRequest {
 	string query = 4;
 	string anchor = 5;
 	int32 limit = 6;
-	user.SCondition condition = 10;
+	SCondition condition = 10;
 	repeated UserAttributeCondition conditions = 11;
 	int64 unix_hour = 12;
 	repeated string fields = 13;
@@ -782,7 +762,7 @@ message BotEventCreated {
 	int64 created = 8; // in millisecond
 }
 
-message RunRequest {
+message BotRunRequest {
 	common.Context ctx = 1;
 	// require
 	string account_id = 2;
@@ -797,7 +777,7 @@ message RunRequest {
 	string mode = 6;
 	Bot bot = 7;
 	string action_id = 8;
-	Action action = 9;
+	BotAction action = 9;
 
 	// internal use only
 	string bot_run_type = 15;
@@ -809,7 +789,7 @@ message RunRequest {
 	string bot_trigger_type = 12;
 }
 
-message RunResponse {
+message BotRunResponse {
 	string account_id = 2;
 	string bot_id = 3;
 	string object_type = 4;
@@ -1002,7 +982,7 @@ message Conversation {
 	int64 response_sec = 22;
 
 	string chain_id = 24;
-	conversation.Ticket ticket = 27;
+	Ticket ticket = 27;
 	string ticket_id = 28; // remove
 	RouteResult assigned_to = 30;
 
@@ -1428,17 +1408,6 @@ message Trigger {
 	bool disabled = 10;
 }
 
-message BotRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string bot_id = 3;
-	string conversation_id = 4;
-	string user_id = 5;
-	string event_id = 6;
-	string type = 7; // start, terminate
-	int64 created = 8; // in millisecond
-}
-
 message BotCondition {
 	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline, user_is_a_contact
 
@@ -1516,7 +1485,7 @@ message Bot {
 
 	string state = 7; // like agent state: active, inactive, deleted
 
-	Action action = 9; // point to root action
+	BotAction action = 9; // point to root action
 
 	int64 created = 10;
 	string created_by = 11;
@@ -1554,7 +1523,7 @@ enum BotCategory {
 	conversations = 2;
 }
 
-enum ActionType {
+enum BotActionType {
 	nil = 0;
 	condition = 1;
 	sleep = 2;
@@ -1578,19 +1547,19 @@ enum ActionType {
 	send_facebook_private_reply = 23;
 }
 
-message NextAction {
+message NextBotAction {
 	Condition condition = 2;
-	Action action = 3; // pointed to the next action or used for branching to multiple actions
+	BotAction action = 3; // pointed to the next action or used for branching to multiple actions
 }
 
-message Action {
+message BotAction {
 	string account_id = 2;
 	string bot_id = 3;
 	string id = 4;
 	string name = 5;
 
 	// first action require trigger
-	repeated NextAction nexts = 8;
+	repeated NextBotAction nexts = 8;
 	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook
 
 	ActionSleep sleep = 13; // deprecated
@@ -1694,11 +1663,6 @@ message Condition {
 	string name  = 20; // front end used only
 }
 
-message Actions {
-	common.Context ctx = 1;
-	repeated Action actions = 2;
-}
-
 message Metric {
 	repeated Metric submetrics = 5;
 	int64 date_dim = 2;
@@ -1741,7 +1705,6 @@ message Frequently {
 	int64 interval_sec = 4; // dont do twice between those seconds
 }
 
-
 ////////////////////
 
 message RealtimeSubscription {
@@ -1777,35 +1740,6 @@ message PublishMessage {
 	bytes payload = 4;
 
 	string account_id = 5;
-}
-
-// SEARCH
-message SearchUsersRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 limit = 3;
-	string anchor = 4;
-	user.SCondition condition = 7;
-}
-
-message SearchUsersResponse {
-	int64 total = 2;
-	string anchor = 3;
-	repeated User users = 4;
-}
-
-message SearchNotesRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 limit = 7;
-	string anchor = 8;
-	user.SCondition condition = 9;
-}
-
-message SearchNotesResponse {
-	int64 total = 2;
-	string anchor = 3;
-	repeated Note notes = 4;
 }
 
 // widget
@@ -2618,6 +2552,172 @@ message Apikey {
 	bool is_internal = 7;
 }
 
+message Ticket {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string id = 4;
+	string state = 5;
+	string priority = 6;
+	int64 duedate = 7;
+	string subject = 8;
+	int64 created = 9;
+	repeated TicketAttributeData attributes = 10; // remove
+	int64 updated = 11;
+	repeated string user_ids = 12;
+	repeated string agent_ids = 13;
+	bool is_assigned = 14;
+	string updated_by = 15;
+	string created_by = 16;
+	string note = 19;
+}
+
+message TicketAttributeData {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ticket_id = 3;
+	string key = 4;
+
+	string state = 6;
+	int64 created = 7;
+	int64 modified = 8;
+
+	string text = 10;
+	double number = 11;
+	bool boolean = 12;
+	string datetime = 13;
+	repeated string list = 14;
+
+	string setter = 16;
+	string setter_type = 17;
+}
+
+message Tickets {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Ticket tickets = 3;
+	string anchor = 4;
+}
+
+message Product { // switch to product?
+	common.Context ctx = 1;
+	// optional string sbid = 2;
+	string id = 3; // user input id
+	string account_id = 4;
+
+	string description = 5;
+	string title = 6;
+	string url = 7;
+	repeated string labels = 8;
+	enum Availability {
+		in_stock = 0;
+		out_of_stock = 2;
+		preorder = 3;
+		discontinued = 4;
+	}
+	string availability = 9;
+
+	float price = 10;
+	string currency = 11;
+	float sale_price = 12;
+	repeated common.KV fields = 13;
+	repeated string categories = 14;
+	repeated string relates = 15; //  TODO: delete
+	int64 created = 17;
+	int64 updated = 18;
+	repeated string attachment_urls = 20;
+	repeated string related_ids = 21; // releated content ids
+	string image_url = 22;
+}
+
+message Products {
+	common.Context ctx = 1;
+	repeated Product contents = 2;
+	string anchor = 3;
+	int64 total = 4;
+}
+
+// can be
+// {id, join, event_time, conditions} (grouped event condition)
+// {id, join, conditions} (grouped condition)
+// {id, key, operator, value} (user condition || simple event condition)
+message SCondition {
+	string id = 3;
+
+	string key = 4; // unique
+	string operator = 5; // = # regex
+	string value = 6; // JSON
+
+	enum EventTime {
+		none = 0; // not an event
+		current = 1;
+		latest = 2;
+		past = 3; // exists
+	}
+
+	enum JoinOperator {
+		and = 0;
+		or = 1;
+	}
+	string join = 7;
+	string event_type_time = 8; //
+	string event_type = 10;
+	repeated SCondition conditions = 9;
+
+	int32 priority = 12;
+	bool event_existed = 13;
+
+	enum Function {
+		minute_of_day = 0;
+		hour_of_day = 1;
+		day_of_week = 2;
+		day_ago = 3;
+	}
+	string function = 14; // used to transform value of left side before evaluate expression
+}
+
+message UserSearchRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string segmentation_id = 3;
+	string query = 4;
+	string anchor = 5;
+	int32 limit = 6;
+	string agent_id = 8; // search my user of agent
+	bool unread = 9; // search my user of agent
+	SCondition condition = 10;
+}
+
+message ESNote {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string creator_id = 5;
+	string text = 6;
+	int64 created = 7;
+	string target_id = 9;
+	string target_type = 10;
+	string format = 13;
+}
+
+message SearchNoteRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string keyword = 4;
+	int64 from_sec = 5; // unix seconds
+	int64 to_sec = 6; // unix seconds
+	int64 limit = 7;
+	string anchor = 8;
+}
+
+message SearchNoteResponse {
+	int64 total = 2;
+	repeated ESNote result = 3;
+	string anchor = 4;
+}
+
+
 enum RealtimeType {
 	a = 0;
 	account_updated = 11;
@@ -2630,7 +2730,6 @@ enum RealtimeType {
 	agent_updated = 16;
 
 	agent_permission_updated = 17;
-	limit_updated = 18;
 	my_user_upserted = 19;
 	user_info_updated = 20;
 
@@ -2711,4 +2810,41 @@ enum RealtimeType {
 
 	bot_terminated = 98;
 	user_alias_created = 99;
+}
+
+enum E {
+	Sub = 0;
+
+	Email_SendRequest = 10600;
+
+	PaymentWorkerJob = 110440;
+
+	AccountResetPasswordEmail = 110533;
+	AccountPasswordChangedEmailRequested = 110534;
+	AccountConfirmChangeEmailEmailRequested = 110535;
+
+	AccountWarnInactive = 110566;
+	UnpaidInvoiceEmail = 110567;
+	SubscriptionUpgradedEmail = 110568;
+	BillCreatedEmail = 110569;
+	DowngradedToFreeEmail = 110570;
+	UnpaidInvoice9DaysEmail = 110572;
+	AccountCreatedEmail = 110573;
+	UpdatePlanEmail = 110574;
+	TrialEnding7Email = 110575;
+	TrialEnding3Email = 110576;
+	TrialEnding1Email = 110577;
+	InvoicePaidEmail = 110578;
+	AccountAgentJoinedEmail = 110579;
+
+	UserRequested = 111100;
+	UserSynced = 111101;
+	AutomationSynced = 111102;
+	AutomationFired = 111103;
+
+	UserTotalConvoUpdated = 111232;
+	BqreportSynced = 3000008;
+	BotSynced = 4000001;
+	StartBot = 4000002;
+	TeminateBot = 4000003;
 }
