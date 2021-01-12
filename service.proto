@@ -148,6 +148,7 @@ service RuleMgr {
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
+	rpc Postback(header.Event) returns (header.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
 	rpc EndConversation(common.Id) returns (header.Conversation);
