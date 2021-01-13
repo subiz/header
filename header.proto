@@ -1311,6 +1311,7 @@ message Postback {
 	string conversation_id = 3;
 	string event_id = 4;
 	string payload = 5;
+	string chain_id = 6;
 }
 
 message PostbackBotJump {

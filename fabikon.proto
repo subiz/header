@@ -91,8 +91,10 @@ message FbMessaging {
 }
 
 message FbPostback {
+
 	optional string payload = 2;
 	optional FbReferral referral = 3;
+	optional string title = 4;
 }
 
 message FbReferral {
