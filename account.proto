@@ -183,12 +183,6 @@ message CreateAccountRequest {
 	optional string ga_client_id = 13;
 }
 
-message LoginRequest {
-	optional common.Context ctx = 1;
-	optional string email = 2;
-	optional string password = 3;
-}
-
 message Agents {
 	optional common.Context ctx = 1;
 	repeated Agent Agents = 2;

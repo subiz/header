@@ -7,7 +7,6 @@ option go_package = "github.com/subiz/header";
 import "common.proto";
 import "conversation.proto";
 import "payment.proto";
-import "notibox.proto";
 import "noti5.proto";
 import "account.proto";
 import "bqreport.proto";
@@ -248,13 +247,6 @@ service Noti5Service {
 	rpc AddToken(noti5.Token) returns (common.Empty);
 	rpc RemoveToken(noti5.Token) returns (common.Empty);
 	rpc CheckTokenExists(noti5.Token) returns (common.Empty);
-}
-
-// notibox services
-service NotiboxService {
-	rpc ReadAllNotis(common.Id) returns (common.Empty);
-	rpc ListNotis(notibox.ListRequest) returns (notibox.Notifications);
-	rpc GetNotibox(common.Id) returns (notibox.Notibox);
 }
 
 // payment services

@@ -1561,12 +1561,13 @@ message BotAction {
 
 	// first action require trigger
 	repeated NextBotAction nexts = 8;
+	repeated BotAction children = 10;
+
 	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook
 
 	ActionSleep sleep = 13; // deprecated
 
 	ActionJump jump = 15;
-	ActionSwitchLanguage switch_language = 16;
 	ActionSendHttp send_http = 17;
 	ActionAskQuestion ask_question = 18;
   AssignRequest assign = 19;
