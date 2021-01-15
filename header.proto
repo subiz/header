@@ -365,7 +365,6 @@ message Event {
 		account.Agent agent = 2;
 		Message message = 3;
 		Conversation conversation = 4;
-		Postback postback = 5;
 		Product product = 6;
 		Topic topic = 7;
 		account.Presence presence = 8;
@@ -527,7 +526,6 @@ message AutomationWebhookSetting {
 	bool agent = 2;
 	bool message = 3;
 	bool conversation = 4;
-	bool postback = 5;
 	bool user = 10;
 	bool group = 18;
 	bool limit = 19;
@@ -1066,7 +1064,6 @@ message MessagePong {
 		remove_hide = 18;
 		open = 19; // email opened
 
-		postback = 20;
 	}
 	string type = 4;
 
@@ -1178,6 +1175,7 @@ enum AttachmentType {
 	quick_replies = 13;
 	command = 14; // request_user_info
 	link = 15;
+	postback = 16;
 }
 
 message Attachment {
@@ -1213,6 +1211,8 @@ message Attachment {
 
 	repeated QuickReply quick_replies = 23;
 	bool lock_input = 24; // lock input while has quick replies
+
+	Postback postback = 25;
 }
 
 message QuickReply {
@@ -1313,6 +1313,7 @@ message Postback {
 	string payload = 5;
 	string chain_id = 6;
 	string integration_id = 7;
+	string title = 8;
 }
 
 message PostbackBotJump {
@@ -2766,7 +2767,7 @@ enum RealtimeType {
 	conversation_state_updated = 42; // event.data.conversation
 
 	message_pong = 43; // event.data.message.pongs.0
-	message_postback = 50; // event.data.postback
+	// message_postback = 50; // event.data.postback
 
 	conversation_joined = 44; // event.data.conversation.memebers.0
 	conversation_invited = 45;
