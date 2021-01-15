@@ -1306,13 +1306,8 @@ message Tags {
 }
 
 message Postback {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string conversation_id = 3;
 	string event_id = 4;
 	string payload = 5;
-	string chain_id = 6;
-	string integration_id = 7;
 	string title = 8;
 }
 
