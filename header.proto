@@ -1320,6 +1320,7 @@ message PostbackBotJump {
 	string bot_id = 3;
 	string action_id = 4;
 	string from_action = 5;
+	string title = 6;
 }
 
 message Integrations {
@@ -1572,7 +1573,7 @@ message BotAction {
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
 	ActionAskQuestion ask_question = 18;
-  AssignRequest assign = 19;
+	AssignRequest assign = 19;
 
 	int64 delay_sec = 20;
 	ActionUpdateConversation update_conversation = 21;
@@ -1634,7 +1635,7 @@ message ActionAskQuestion {
 
 	int32 retry = 18; // != 1 => 0 retry, 1 retry forever
 
-	int64 timeout = 19; // sec
+	int64 user_reply_timeout = 19; // sec
 	string branch_on_no_reply = 20;
 }
 
