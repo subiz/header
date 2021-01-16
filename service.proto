@@ -44,18 +44,8 @@ service AccountMgr {
 
 	rpc UpdatePerm(common.UpdatePermRequest) returns (common.Empty);
 	rpc ReadPerm(common.ReadPermRequest) returns (common.Permission);
-}
-
-service CurrencyMgr {
-	rpc ListCurrencies(common.Empty) returns (account.Currencies);
-	rpc GetCurrency(common.Id) returns (account.Currency);
-	rpc CreateCurrency(account.Currency) returns (account.Currency);
-	rpc UpdateCurrency(account.Currency) returns (account.Currency);
-	rpc DeleteCurrency(common.Id) returns (common.Empty);
-	rpc ListExchangeRates(account.ExchangeRateRequest) returns (account.ExchangeRates);
 	rpc GetExchangeRate(account.ExchangeRateRequest) returns (account.ExchangeRate);
-	rpc CreateExchangeRate(account.ExchangeRate) returns (account.ExchangeRate);
-	rpc DeleteExchangeRate(account.ExchangeRateRequest) returns (common.Empty);
+
 }
 
 // user services
@@ -138,7 +128,6 @@ service RuleMgr {
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
-	rpc Postback(header.Event) returns (header.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
 	rpc EndConversation(common.Id) returns (header.Conversation);
@@ -252,7 +241,6 @@ service Noti5Service {
 // payment services
 service SubizInternalPaymentMgr {
 	rpc CreateBill(payment.Bill) returns (payment.Bill);
-	rpc UpdateExchangeRate(payment.ExchangeRate) returns (payment.ExchangeRate);
 }
 
 service PaymentMgr {
