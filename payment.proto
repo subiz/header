@@ -410,13 +410,6 @@ message LogPaidForAgentReferrers {
 	repeated LogPaidForAgentReferrer log_paid_for_agent_referrers = 2;
 }
 
-message ExchangeRate {
-	optional string from_currency = 2;
-	optional string to_currency = 3;
-	optional float exchange_rate = 4;
-	optional int64 exchange_time = 5; // nanosec
-}
-
 message ListLogsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;

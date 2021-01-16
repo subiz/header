@@ -2722,6 +2722,12 @@ message SearchNoteResponse {
 	string anchor = 4;
 }
 
+message ExchangeRate {
+	string from_currency = 2;
+	string to_currency = 3;
+	float exchange_rate = 4;
+	int64 exchange_time = 5; // nanosec
+}
 
 enum RealtimeType {
 	a = 0;

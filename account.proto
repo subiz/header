@@ -328,56 +328,6 @@ message AccountConfirmSuccessEmail {
 	optional int64 to_time = 11;
 }
 
-message SearchAgentsRequest {
-	optional common.Context ctx = 1;
-	optional string email = 2;
-}
-
-message ExchangeRate {
-	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional string currency_id = 3;
-	optional float rate = 4;
-	optional string effective_date = 5;
-	optional int64 created = 10;
-}
-
-message ExchangeRates {
-	optional common.Context ctx = 1;
-	repeated ExchangeRate exchange_rates = 2;
-}
-
-message Currency {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string id = 3;
-	optional bool is_base = 4;
-	optional string name = 5;
-	optional string code = 6;
-	optional string symbol = 7;
-	optional int32 decimal_place = 8;
-
-	enum Format {
-		DOT_COMMA = 0;     // 12.345.678,01
-		COMMA_DOT = 1;     // 12,345,678.01
-		SPACE_COMMA = 2;   // 12 345 678,01
-	}
-	optional string format = 9;
-	optional int64 created = 10;
-	optional int64 updated = 11;
-}
-
-message Currencies {
-	optional common.Context ctx = 1;
-	repeated Currency currencies = 2;
-}
-
-message ExchangeRateRequest {
-	optional common.Context ctx = 1;
-	optional string currency_id = 2;
-	optional string id = 3;
-}
-
 message BusinessHours {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;

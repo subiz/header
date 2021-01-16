@@ -44,8 +44,6 @@ service AccountMgr {
 
 	rpc UpdatePerm(common.UpdatePermRequest) returns (common.Empty);
 	rpc ReadPerm(common.ReadPermRequest) returns (common.Permission);
-	rpc GetExchangeRate(account.ExchangeRateRequest) returns (account.ExchangeRate);
-
 }
 
 // user services
@@ -263,7 +261,7 @@ service PaymentMgr {
 	rpc ListPlans(common.Empty) returns (payment.Plans);
 	rpc ExportInvoice(common.Id) returns (payment.String);
 	rpc ConvertInvoiceToHtml(payment.Invoice) returns (payment.String);
-	rpc GetExchangeRate(payment.ExchangeRate) returns (payment.ExchangeRate);
+	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc TransferMoney(payment.PayRequest) returns (payment.Bill);
 	rpc ListLogs(payment.ListLogsRequest) returns (payment.Logs);
 
