@@ -1619,7 +1619,7 @@ message ActionAskQuestion {
 
 	string validation = 6; // none, email, phone, date, link, number, regex
 	string validation_regex = 7;
-	string branch_on_invalidate_reply = 8; // action id
+	string branch_on_invalidate_reply = 8; // TODO: remove, dont use
 
 	bool skip_if_attribute_already_existed = 11;
 
@@ -1629,10 +1629,13 @@ message ActionAskQuestion {
 
 	// retry forever
 
-	int32 retry = 18; // != 1 => 0 retry, 1 retry forever
+	int32 retry = 18; // TODO: remove != 1 => 0 retry, 1 retry forever
 
-	int64 user_reply_timeout = 19; // sec
-	string branch_on_no_reply = 20;
+	// if user doesn't reply in this amount of time => failed
+	// only active if value > 0
+	int64 user_reply_timeout = 19;
+
+	string branch_on_failed = 20; // empty => retry forever
 }
 
 message ActionSleep {
