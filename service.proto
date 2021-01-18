@@ -154,7 +154,6 @@ service ConversationMgr {
 
 service ConversationSyncMgr {
 	// sync automation
-	rpc FireConvertTicket(header.AutomationEvent) returns (common.Empty);
 	rpc FireSendChatTranscriptEmail(header.AutomationEvent) returns (common.Empty);
 	rpc FireUpdateConversationState(header.AutomationEvent) returns (common.Empty);
 }
@@ -180,20 +179,6 @@ service IntegrationMgr {
 	rpc Deintegrate(common.Id) returns (common.Empty);
 	rpc ListIntegrations(common.Id) returns (header.Integrations);
 	rpc Integrate(header.Integration) returns (header.Integration);
-}
-
-service TicketMgr {
-	rpc CreateTicket(Ticket) returns (Ticket);
-	rpc UpdateTicket(Ticket) returns (Ticket);
-	rpc DeleteTicket(conversation.DeleteTicketRequest) returns (common.Empty);
-	rpc GetTicket(conversation.GetTicketRequest) returns (Ticket);
-	rpc ListSLAs(common.Empty) returns (conversation.ServiceLevelAgreements);
-	rpc GetSLA(common.Id) returns (conversation.ServiceLevelAgreement);
-	rpc CreateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
-	rpc UpdateSLA(conversation.ServiceLevelAgreement) returns (conversation.ServiceLevelAgreement);
-	rpc DeleteSLA(common.Id) returns (common.Empty);
-	rpc CountTicket(conversation.CountTicketRequest) returns (conversation.CountTicketResponse);
-	rpc GetAvgResolveTimes(conversation.AvgResolveTimeRequest) returns (conversation.AvgResolveTimeResponse);
 }
 
 // client services
