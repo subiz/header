@@ -152,12 +152,6 @@ service ConversationMgr {
 	rpc TerminateBot(header.BotTerminated) returns (header.Event);
 }
 
-service ConversationSyncMgr {
-	// sync automation
-	rpc FireSendChatTranscriptEmail(header.AutomationEvent) returns (common.Empty);
-	rpc FireUpdateConversationState(header.AutomationEvent) returns (common.Empty);
-}
-
 service TemplateMgr {
 	rpc CreateTemplate(header.Template) returns (header.Template);
 	rpc UpdateTemplate(header.Template) returns (header.Template);
