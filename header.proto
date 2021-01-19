@@ -1395,7 +1395,11 @@ message EndchatSetting {
 	string account_id = 2;
 	repeated EndchatConnectorSetting connector_settings = 3;
 	EndchatConnectorSetting global_setting = 4;
+
 	int64 updated = 5;
+
+	bool send_transcript = 7;
+	repeated string send_transcript_tos = 8;
 }
 
 message Trigger {
