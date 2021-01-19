@@ -449,18 +449,12 @@ message Automation {
 	string action_type = 13; // deprecated
 	enum ActionType {
 		conversation_message = 0;
-		agent_notification = 1;
-		//user_notification = 2;
-		// automation_invite_message = 4;
 
 		block_user = 5;
 		user_notification = 8;
-		user_webhook = 9;
 		user_note = 10;
 
-		conversation_webhook = 13;
 		add_agent_to_conversation = 14;
-		create_ticket = 15;
 		conversation_tag = 16;
 	}
 
@@ -493,8 +487,6 @@ message AutomationAction {
 		send_webhook = 12; // not yet defined
 		open_widget_screen = 14; // not yet defined
 		add_user_to_segmentation = 15; // segmentation_id
-		remove_user_from_segmentation = 16; // segmentation_id
-		send_chat_transcript_email = 17; // prop email
 		update_conversation_state = 18; // prop conversation_state
 		send_facebook_direct_message = 19; // prop event and facebook_page_id
 	}
@@ -2854,11 +2846,6 @@ enum E {
 	TrialEnding1Email = 110577;
 	InvoicePaidEmail = 110578;
 	AccountAgentJoinedEmail = 110579;
-
-	UserRequested = 111100;
-	UserSynced = 111101;
-	AutomationSynced = 111102;
-	AutomationFired = 111103;
 
 	UserTotalConvoUpdated = 111232;
 	BqreportSynced = 3000008;

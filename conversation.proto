@@ -127,7 +127,6 @@ message SearchConversationRequest {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string state = 4; // deprecated
-	optional string ticket_state = 5; // deprecated
 	optional int64 limit = 6;
 	optional string anchor = 7;
 	optional string connector_id = 8; // deprecated
@@ -135,7 +134,6 @@ message SearchConversationRequest {
 	repeated string tag_ids = 10;
 	optional FilterCondition message_created = 11;
 	repeated string states = 12;
-	repeated string ticket_states = 13;
 	repeated string connector_ids = 14; // channel
 }
 
@@ -152,7 +150,6 @@ message ESConversation {
 	optional string user_id = 3;
 	repeated string tag_ids = 4;
  	optional string state = 5;
-	optional string ticket_state = 6;
 	optional string id = 9;
 	optional int64 created = 10; // unix seconds
 	repeated string segment_ids = 11;
@@ -183,27 +180,12 @@ message ESConversationMessage {
 	optional string account_id = 2;
 	optional string user_id = 3;
 	optional string conversation_state = 5;
-	optional string ticket_state = 6;
 	optional string connector_id = 7;
 	optional string text = 8;
 	optional string conversation_id = 9;
 	optional int64 created = 10; // unix seconds
 	optional string id = 11; // event id
 	repeated string conversation_tag_ids = 12;
-}
-
-message ESTicket {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string conversation_id = 3;
-	optional string id = 4;
-	optional string state = 5;
-	optional string priority = 6;
-	optional int64 duedate = 7;
-	optional int64 created = 9; // unix seconds
-	repeated string user_ids = 12;
-	repeated string agent_ids = 13;
-	repeated string tag_ids = 17;
 }
 
 message ConversationListRequest {
