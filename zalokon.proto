@@ -113,6 +113,9 @@ message Attachment {
 message Message {
 	string text = 3;
 	string msg_id = 4;
+	string payload = 5;
+	string title = 9;
+
 	repeated string msg_ids = 6;
 	repeated Attachment attachments = 7;
 	Attachment attachment = 8;
@@ -143,6 +146,7 @@ message Request {
 	string user_id_by_app = 8;
 	Info info = 9;
 	Message message = 10;
+	string reorder_id = 11;
 }
 
 message Sender {
