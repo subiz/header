@@ -126,17 +126,20 @@ service RuleMgr {
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
+	rpc SeenConversation(header.ConversationMember) returns (header.Conversation);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
 	rpc EndConversation(common.Id) returns (header.Conversation);
 	rpc GetConversation(common.Id) returns (header.Conversation);
 	rpc ListConversations(header.ListConversationsRequest) returns (header.Conversations);
 	rpc MatchConversations(common.Ids) returns (header.Conversations);
+
 	rpc TagConversation(header.TagRequest) returns (common.Empty);
 	rpc UntagConversation(header.TagRequest) returns (common.Empty);
 
 	rpc JoinConversation(header.ConversationMember) returns (common.Empty);
 	rpc LeftConversation(header.ConversationMember) returns (common.Empty);
+
 	rpc Typing(common.Id) returns (common.Empty);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 

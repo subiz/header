@@ -883,13 +883,10 @@ message ConversationMember {
 	string account_id = 2;
 	string type = 3; // type
 
-	string subiz_id = 8;
 	string id = 4;
-	string name = 10;
-	string avatar_url = 6;
 
 	string conversation_id = 13;
-	repeated common.KV fields = 14;
+
 	string last_page_view_url = 15;
 	string membership = 12;
 	enum State {
@@ -902,6 +899,7 @@ message ConversationMember {
 	int64 left_at = 17;
 	int64 joined_at = 18; // ms
 	int64 first_message_at = 19; // ms
+	int64 seen_at = 20;
 }
 
 message ListConversationsRequest {
@@ -1081,7 +1079,7 @@ message MessageButton {
 	string title = 3;
 	string payload = 4;
 	string image_url = 5;
-	string content_id = 10;
+	string product_id = 10;
 	//	optional RawEvent event = 12;
 	string url = 14;
 
@@ -1737,11 +1735,9 @@ message WidgetUserSetting {
 	string account_id = 2; // subiz use only
 	User user = 4;
 	string user_id = 7; // subiz use only
-	bool sound_enabled = 5;
 	string language = 6;
 	bool send_transcript = 8;
 	WidgetSetting account_setting = 9;
-	bool desktop_notification = 10;
 	repeated Campaign campaigns = 13;
 	repeated Bot bots = 14; // remove action
 }
