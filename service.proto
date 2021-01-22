@@ -271,6 +271,11 @@ service Realtime {
 	rpc ShardSend(header.PublishMessage) returns (common.Empty);
 }
 
+service FabikonService {
+	rpc ReadFbFanpageSetting(common.Id) returns (header.FbFanpageSetting);
+	rpc UpdateFbFanpageSetting(header.FbFanpageSetting) returns (header.FbFanpageSetting);
+}
+
 // widget services
 service WidgetService {
 	rpc Read(common.Id) returns (header.WidgetSetting);

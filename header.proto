@@ -2728,6 +2728,43 @@ message ExchangeRate {
 	int64 exchange_time = 5; // nanosec
 }
 
+message FbComment {
+	string comment = 2;
+	string image_url = 3;
+}
+
+message FbFanpageSetting {
+	string account_id = 2;
+
+	FbCommentSetting general_comment_setting = 3;
+	FbCommentSetting specific_post_comment_setting = 4;
+	FbCommentSetting specific_comment_setting = 5;
+
+	int64 updated = 6;
+}
+
+message FbCommentSetting {
+	bool enabled = 1;
+	bool auto_like = 2;
+	enum HideComment {
+		dont_hide = 0;
+		all_comments = 1;
+		comments_contain_phone_numbers = 2;
+	}
+
+	int64 auto_hide = 3;
+
+	bool auto_reply = 4;
+	repeated FbComment comments = 5;
+
+	bool auto_inbox = 6;
+	Message message = 7;
+
+	repeated string keywords = 10; // comment
+	repeated string post_ids = 11; // post
+	repeated string hashtags = 12; // post (contain #)
+}
+
 enum RealtimeType {
 	a = 0;
 	account_updated = 11;
