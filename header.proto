@@ -2694,6 +2694,7 @@ message FbComment {
 }
 
 message FbFanpageSetting {
+	common.Context ctx = 1;
 	string account_id = 2;
 	string fanpage_id = 3;
 
@@ -2702,6 +2703,11 @@ message FbFanpageSetting {
 	FbCommentSetting specific_comment_setting = 7;
 
 	int64 updated = 9;
+}
+
+message FbFanpageSettings {
+	common.Context ctx = 1;
+	repeated FbFanpageSetting settings = 2;
 }
 
 message FbCommentSetting {

@@ -277,6 +277,7 @@ service Realtime {
 service FabikonService {
 	rpc ReadFbFanpageSetting(common.Id) returns (header.FbFanpageSetting);
 	rpc UpdateFbFanpageSetting(header.FbFanpageSetting) returns (header.FbFanpageSetting);
+	rpc ListFbFanpageSettings(common.Id) returns (header.FbFanpageSettings);
 }
 
 // widget services
