@@ -241,12 +241,15 @@ message FbProfilePic {
 
 message FacebookUser {
 	optional string first_name = 2;
+	optional string middle_name = 3;
 	optional string last_name = 4;
 	optional string profile_pic = 5;
 	optional string locale = 6;
 	optional float timezone = 7;
 	optional string gender = 8;
 	optional FbProfilePic picture = 9;
+	optional string email = 10;
+	optional string name = 11;
 }
 
 message Fb2SbEvent {
