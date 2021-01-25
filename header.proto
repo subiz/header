@@ -2737,20 +2737,60 @@ message FacebookPosts {
 	repeated FacebookPost posts = 2;
 }
 
+message FacebookPostAttachmentMediaImage {
+	string src = 2;
+}
+
+message FacebookPostAttachmentMedia {
+	FacebookPostAttachmentMediaImage image = 2;
+	string source = 3;
+}
+
+message FacebookPostAttachment {
+	FacebookPostAttachmentMedia media = 2;
+	string type = 3;
+	string url = 4;
+	string description = 5;
+	string title = 6;
+}
+
+message FacebookPostAttachemnts {
+	repeated FacebookPostAttachment data = 2;
+}
+
+message FacebookPostFrom {
+	string id = 2;
+}
+
+message FbFacebookPosts {
+	repeated FacebookPost data = 2;
+	FacebookPaging paging = 3;
+}
+
+message FacebookPagingCursor {
+	string after = 2;
+	string before = 3;
+}
+message FacebookPaging {
+	FacebookPagingCursor cursors = 2;
+}
+
 message FacebookPost {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
-	string message = 4;
-	string created_time = 5;
+	string page_id = 3;
+	string id = 4;
+	FacebookPostFrom from = 5;
+	string message = 6;
+	string created_time = 7;
 
-
-	bool is_hidden = 7;
-	bool is_published = 8;
-	string permalink_url = 9;
-	string status_type = 10;
-	string full_picture = 11;
-	string story = 12;
+	bool is_hidden = 8;
+	bool is_published = 9;
+	string permalink_url = 10;
+	string status_type = 11;
+	string full_picture = 12;
+	string story = 13;
+	FacebookPostAttachemnts attachments = 14;
 }
 
 enum RealtimeType {
