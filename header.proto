@@ -2732,6 +2732,27 @@ message FbCommentSetting {
 	repeated string hashtags = 12; // post (contain #)
 }
 
+message FacebookPosts {
+	common.Context ctx = 1;
+	repeated FacebookPost posts = 2;
+}
+
+message FacebookPost {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string message = 4;
+	string created_time = 5;
+
+
+	bool is_hidden = 7;
+	bool is_published = 8;
+	string permalink_url = 9;
+	string status_type = 10;
+	string full_picture = 11;
+	string story = 12;
+}
+
 enum RealtimeType {
 	a = 0;
 	account_updated = 11;
