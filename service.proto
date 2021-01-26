@@ -44,6 +44,10 @@ service AccountMgr {
 
 	rpc UpdatePerm(common.UpdatePermRequest) returns (common.Empty);
 	rpc ReadPerm(common.ReadPermRequest) returns (common.Permission);
+
+	rpc CheckLoginSession(LoginSession) returns (LoginSession);
+	rpc ListLoginSessions(common.Id) returns (LoginSessions);
+	rpc LogoutSession(common.Id) returns (common.Empty);
 }
 
 // user services
@@ -176,15 +180,6 @@ service IntegrationMgr {
 	rpc Deintegrate(common.Id) returns (common.Empty);
 	rpc ListIntegrations(common.Id) returns (header.Integrations);
 	rpc Integrate(header.Integration) returns (header.Integration);
-}
-
-// client services
-service ClientMgr {
-	rpc Create(header.Client) returns (header.Client);
-	rpc Update(header.Client) returns (header.Client);
-	rpc Read(header.Client) returns (header.Client);
-	rpc ListIntegratedClients(common.Id) returns (header.AuthorizedClient); // account id
-	rpc ListAuthorizedClients(common.Id) returns (header.AuthorizedClient); // agent id
 }
 
 service EventMgr {

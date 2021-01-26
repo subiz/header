@@ -30,11 +30,6 @@ message Context {
 
 	// for kafka
 	string sub_topic = 11;
-	int32 kafka_partition = 13;
-	int64 kafka_offset = 14;
-	uint64 kafka_term = 15;
-	string idempotency_key = 17;
-	string kafka_key = 19;
 
 	// for email
 	string language_code = 20;
@@ -63,34 +58,6 @@ message Device {
 	string source_referrer = 11; // referrer of referrer
 	repeated string ga_tracking_ids = 12;
 }
-
-/*
-enum Weekday {
-	Monday = 0;
-	Tuesday = 1;
-	Wednesday = 2;
-	Thursday = 3;
-	Friday = 4;
-	Saturday = 5;
-	Sunday = 6;
-}
-
-enum Month {
-	Nonuary = 0;
-	January = 1;
-	February = 2;
-	March = 3;
-	April = 4;
-	May = 5;
-	June = 6;
-	July = 7;
-	August = 8;
-	September = 9;
-	October = 10;
-	November = 11;
-	December = 12;
-}
-*/
 
 message By {
 	Device device = 2;
@@ -150,16 +117,6 @@ message Permission {
 	int32 referral = 45;
 }
 
-message GoogleCredential {
-	string id_token = 2;
-}
-
-message PasswordCredential {
-	string username = 1;
-	string password = 2;
-	GoogleCredential google = 3;
-}
-
 message AuthCookie {
 	string user_id = 1;
 	string account_id = 2;
@@ -168,19 +125,7 @@ message AuthCookie {
 	string type = 3;
 }
 
-message OauthAccessToken {
-	string access_token = 1;
-	string token_type = 3;
-	int64 expires_in = 4;
-	string refresh_token = 5;
-	string scope = 6;
-	string state = 7;
-	string error = 8;
-	string error_description = 9;
-	string error_uri = 10;
-	string kind = 11; // should be agent, connector or bot
-}
-
+// TODO: remove
 message AccessToken {
 	string issuer = 1;
 	// string issuer_type = 7;
