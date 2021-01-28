@@ -2688,7 +2688,6 @@ message FbFanpageSetting {
 
 	FbCommentSetting general_comment_setting = 5;
 	FbCommentSetting specific_post_comment_setting = 6;
-	FbCommentSetting specific_comment_setting = 7;
 
 	int64 updated = 9;
 }
@@ -2701,12 +2700,12 @@ message FbFanpageSettings {
 message FbCommentSetting {
 	bool enabled = 1;
 	bool auto_like = 2;
+
 	enum HideComment {
 		dont_hide = 0;
 		all_comments = 1;
-		comments_contain_phone_numbers = 2;
+		comments_contain_phone_email_or_address = 2;
 	}
-
 	int64 auto_hide = 3;
 
 	bool auto_reply = 4;
@@ -2714,6 +2713,12 @@ message FbCommentSetting {
 
 	bool auto_inbox = 6;
 	Message message = 7;
+
+	bool custom_inbox_for_comments_contain_phone_email_or_address = 14;
+	Message message_for_comments_contain_phone_email_or_address = 15;
+
+	bool custom_inbox_for_comments_contain_keyword = 16;
+	Message message_for_comments_contain_keyword = 17;
 
 	repeated string keywords = 10; // comment
 	repeated string post_ids = 11; // post
