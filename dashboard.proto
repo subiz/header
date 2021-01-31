@@ -2,64 +2,7 @@ syntax = "proto3";
 
 package dashboard;
 
-import "account.proto";
-
 option go_package = "github.com/subiz/header/dashboard";
-
-message DashboardAgent {
-	string account_id = 2;
-	string id = 3;
-	account.Account account = 4;
-	account.Agent agent = 5;
-	int64 tour_guide_web_showed = 6;
-	string refresh_token = 7;
-	string access_token = 8;
-	string language_url = 9;
-	int64 tour_guide_getting_started_web_showed = 10;
-	int64 tour_guide_channel_installing_web_showed = 11;
-}
-
-message DashboardAccount {
-	string id = 2;
-	account.Account account = 3;
-}
-
-message AccessLog {
-	string id = 2;
-	string account_id = 3;
-	string agent_id = 4;
-
-	string ac_token = 5;
-	string rf_token = 6;
-	string ip = 7;
-	int32 location_id = 8;
-
-	string city_name = 9;
-	string country_name = 10;
-	string country_code = 11;
-	string continent_code = 12;
-	string continent_name = 13;
-
-	//optional string coutry_code = 14;
-	float latitude = 15;
-	float longitude = 16;
-	string postal_code = 17;
-	string timezone = 18;
-
-	string isp = 19;
-	string user_agent = 20;
-
-	int64 created = 22;
-	int32 day = 23;
-	enum Action {
-		login_success = 0;
-		refresh_token_success = 1;
-		logout = 2;
-		login_failed = 3;
-		refresh_token_failed = 4;
-	}
-	string action = 24;
-}
 
 message SessionCookie {
 	string refresh_token = 3;
