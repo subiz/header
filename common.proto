@@ -31,8 +31,8 @@ message Context {
 	// for kafka
 	string sub_topic = 11;
 
-	// for email
-	string language_code = 20;
+	// list of used fields in the object
+	string fields = 21;
 }
 
 message KV {
@@ -74,6 +74,7 @@ message Credential {
 	Type type = 4; // should be agent, user or connector
 	Permission perm = 6;
 	string client_id = 7;
+	repeated string scopes = 8;
 }
 
 message Permission {
