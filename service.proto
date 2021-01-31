@@ -9,7 +9,6 @@ import "conversation.proto";
 import "payment.proto";
 import "noti5.proto";
 import "account.proto";
-import "bqreport.proto";
 import "header.proto";
 
 service AccountMgr {
@@ -299,16 +298,6 @@ service WidgetService {
 	rpc UploadImage(header.UploadedImage) returns (header.UploadedImage);
 	rpc ListUploadedImage(common.Id) returns (header.UploadedImages);
 	rpc DeleteUploadedImage(header.UploadedImage) returns (common.Empty);
-}
-
-// bqreport services
-service Bqreport {
-	rpc AggregateConversations(bqreport.ConversationFilter) returns (bqreport.ConversationReport);
-	rpc AggregateConversationRates(bqreport.DimensionFilter) returns (bqreport.ConversationRateReport);
-	rpc AggregateConversationTags(bqreport.DimensionFilter) returns (bqreport.ConversationTagReport);
-	rpc AggregateConversationAgents(bqreport.ConversationAgentFilter) returns (bqreport.ConversationAgentReport);
-	rpc AggregateMessageOfAgents(bqreport.DimensionFilter) returns (bqreport.MessageOfAgentReport);
-	rpc AggregateAgentAvailabilities(bqreport.DimensionFilter) returns (bqreport.AgentAvailabilityReport);
 }
 
 // bizbot services

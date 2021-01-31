@@ -174,32 +174,6 @@ message Error {
 	string root = 8;
 }
 
-message NumberParams {
-	float eq = 2;
-	float neq = 3;
-	float gt = 4;
-	float gte = 5;
-	float lt = 6;
-	float lte = 7;
-	repeated float in = 8;
-}
-
-message StringParams {
-	string eq = 2;
-	repeated string in = 3;
-
-	string contain = 4;
-	repeated string contains = 5;
-
-	string regex = 6;
-
-	bool case_sensitive = 10;
-}
-
-message BooleanParams {
-	bool is = 2;
-}
-
 message I18nText {
 	string en = 1; // english
 	string vi = 2; // vietnamese

@@ -1519,8 +1519,6 @@ enum BotActionType {
 }
 
 message NextBotAction {
-	Condition condition = 2; // should remove?
-
 	BotAction action = 3; // pointed to the next action or used for branching to multiple actions
 }
 
@@ -1601,35 +1599,6 @@ message ActionAskQuestion {
 
 message ActionSleep {
 	int64 duration = 4;
-}
-
-message Condition {
-	enum Group {
-		single = 0;
-		all = 1;
-		any = 2;
-	}
-	string group = 2;
-	repeated Condition conditions = 3; // only availabe if group is all or any
-
-	// only avaiable if group is single
-	string key = 5; // unique, path to properties, for example: last_response, agent_reply, data.conversation.text, global.agent.avaliablitiy...
-	string type = 6; // string, number, boolean
-
-	common.NumberParams number = 7;
-	common.StringParams string = 8;
-	common.BooleanParams boolean = 9;
-
-	enum Function {
-		minute_of_day = 0;
-		hour_of_day = 1;
-		day_of_week = 2;
-		day_ago = 3;
-		valid = 5;
-	}
-
-	string transform_function = 19; // used to transform value of left side before evaluate expression
-	string name  = 20; // front end used only
 }
 
 message Metric {
