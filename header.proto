@@ -371,7 +371,6 @@ message Event {
 		User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
 		notibox.Notification notification = 14;
-		account.AgentPerm agent_perm = 16;
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
 		Note note = 23;

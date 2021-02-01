@@ -46,7 +46,7 @@ service AccountMgr {
 
 	rpc CheckLoginSession(LoginSession) returns (LoginSession);
 	rpc ListLoginSessions(common.Id) returns (LoginSessions);
-	rpc LogoutSession(common.Id) returns (common.Empty);
+	rpc LogoutSession(LoginSession) returns (common.Empty); // can use id or access-token
 }
 
 // user services
