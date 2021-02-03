@@ -4,25 +4,6 @@ package common;
 
 option go_package = "github.com/subiz/header/common";
 
-message Empty {
-	Context ctx = 1;
-}
-
-message Id {
-	Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-}
-
-message Ids {
-	Context ctx = 1;
-	string account_id = 2;
-	repeated string ids = 3;
-	repeated string signatures = 4; // crc32 IEEEE
-
-	repeated int64 last_modifieds = 5; // ms
-}
-
 message Context {
 	Credential credential = 6;
 
@@ -33,11 +14,6 @@ message Context {
 
 	// list of used fields in the object
 	string fields = 21;
-}
-
-message KV {
-	string key = 2;
-	string value = 3;
 }
 
 message Device {
@@ -127,26 +103,4 @@ enum Type {
 	connector = 6; // fabikon, mailkon
 	bot = 7; // subiz bot
 	dummy = 8; // agent that cannot handle action
-}
-
-message UpdatePermRequest {
-	string account_id = 1;
-	string user_id = 2;
-	// Method method = 3;
-	Permission perm = 4;
-}
-
-message ReadPermRequest {
-	string account_id = 1;
-	string user_id = 2;
-}
-
-message Error {
-	string description = 2;
-	string debug = 3;
-	int32 class = 4;
-	string stack = 5;
-	int64 created = 6;
-	string code = 7;
-	string root = 8;
 }

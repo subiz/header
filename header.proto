@@ -9,6 +9,40 @@ import "account.proto";
 import "notibox.proto";
 import "noti5.proto";
 
+message Error {
+	string description = 2;
+	string debug = 3;
+	int32 class = 4;
+	string stack = 5;
+	int64 created = 6;
+	string code = 7;
+	string root = 8;
+}
+
+message Empty {
+	common.Context ctx = 1;
+}
+
+message Id {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+}
+
+message Ids {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated string ids = 3;
+	repeated string signatures = 4; // crc32 IEEEE
+
+	repeated int64 last_modifieds = 5; // ms
+}
+
+message KV {
+	string key = 2;
+	string value = 3;
+}
+
 message Attribute {
 	string key = 4;
 
@@ -54,7 +88,7 @@ message User {
 
 message Users {
 	repeated User users = 1;
-	repeated common.Error errors = 2;
+	repeated Error errors = 2;
 	string signature = 3;
 	int64 hit = 4;
 	int64 total = 5;
@@ -228,7 +262,7 @@ message Location {
 
 message Locations {
 	repeated Location locations = 2;
-	repeated common.Error errors = 3;
+	repeated Error errors = 3;
 }
 
 message LocationParams {
@@ -740,7 +774,7 @@ message BotRunRequest {
 	string object_id = 5; // conversation_id
 
 	// user_id is inside this
-	repeated common.KV object_contexts = 14;
+	repeated KV object_contexts = 14;
 
 	// optional
 	string mode = 6;
@@ -956,7 +990,7 @@ message Conversation {
 	string first_message = 31;
 	string subject = 32;
 
-	repeated common.KV fields = 33;
+	repeated KV fields = 33;
 	repeated Rating ratings = 35;
 
 	string source = 36; // indicate where does the conversation happended (url)
@@ -983,7 +1017,7 @@ message Conversations {
 	repeated Conversation conversations = 3;
 	string anchor = 4;
 	repeated string user_ids = 5;
-	repeated common.Error errors = 6;
+	repeated Error errors = 6;
 }
 
 message Message {
@@ -996,7 +1030,7 @@ message Message {
 	string format = 3;
 	repeated Attachment attachments = 4;
 
-	repeated common.KV fields =	10;
+	repeated KV fields =	10;
 
 	string integration_id = 15;
 	string chain_id = 16;
@@ -1558,7 +1592,7 @@ message ActionSendHttp {
 	string url = 2;
 	// string payload = 3;
 	string method = 4;
-	repeated common.KV header = 5;
+	repeated KV header = 5;
 	string quill_delta = 6;
 }
 
@@ -2440,9 +2474,9 @@ message WebhookDelivery {
 	int32 id = 4;
 	string url = 5;
 	// string method = 6; no need this field since the method is alway POST
-	repeated common.KV resquest_headers = 7;
+	repeated KV resquest_headers = 7;
 	string request_payload = 8;
-	repeated common.KV response_headers = 9;
+	repeated KV response_headers = 9;
 	string response_body = 10;
 	string status = 11;
 	int32 status_code = 12;
@@ -2682,7 +2716,7 @@ message Product {
 	float price = 10;
 	string currency = 11;
 	float sale_price = 12;
-	repeated common.KV fields = 13;
+	repeated KV fields = 13;
 	repeated string categories = 14;
 	repeated string relates = 15; //  TODO: delete
 	int64 created = 17;
