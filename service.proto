@@ -45,6 +45,8 @@ service AccountMgr {
 	rpc CheckLoginSession(LoginSession) returns (LoginSession);
 	rpc ListLoginSessions(common.Id) returns (LoginSessions);
 	rpc LogoutSession(LoginSession) returns (common.Empty); // can use id or access-token
+
+	rpc UpdatePresence (common.Id) returns (account.Presence);
 }
 
 // user services
@@ -109,9 +111,6 @@ service ConversationReporter {
 	rpc ReportConversations(conversation.CountReportRequest) returns (conversation.ReportResponse);
 	rpc ReportConversations2(conversation.ReportConversationsRequest) returns (conversation.ReportResponse);
 	rpc ReportAvailibilities(conversation.AvailibilityReportRequest) returns (conversation.ReportResponse);
-}
-
-service AgentPresenceMgr {
 }
 
 service RuleMgr {
