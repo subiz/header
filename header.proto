@@ -6,7 +6,6 @@ option go_package = "github.com/subiz/header";
 
 import "common.proto";
 import "account.proto";
-import "notibox.proto";
 import "noti5.proto";
 
 message Error {
@@ -401,7 +400,7 @@ message Event {
 		account.Presence presence = 8;
 		User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
-		notibox.Notification notification = 14;
+		// notibox.Notification notification = 14;
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
 		Note note = 23;
@@ -409,7 +408,7 @@ message Event {
 		Automation automation = 25;
 		Event event = 26;
 		AutomationEvent automation_event = 30;
-		notibox.Notibox notibox = 32;
+		// notibox.Notibox notibox = 32;
 		noti5.Setting notification_setting = 34;
 		Rule rule = 36;
 		AttributeDefinition user_attribute = 37;
