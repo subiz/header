@@ -42,6 +42,19 @@ message KV {
 	string value = 3;
 }
 
+message Notification {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string topic = 10;
+	string type = 5; // type
+	string data = 8; //json
+	int64 created = 6; // ms
+	bool is_read = 9;
+
+	bool is_instant = 12; // just display and disappear, no persit
+}
+
 message Attribute {
 	string key = 4;
 
@@ -400,7 +413,7 @@ message Event {
 		account.Presence presence = 8;
 		User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
-		// notibox.Notification notification = 14;
+		Notification notification = 14;
 		account.GroupMember group_member = 17;
 		account.AgentGroup group = 18;
 		Note note = 23;
