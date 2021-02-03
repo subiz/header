@@ -41,8 +41,6 @@ service AccountMgr {
 	rpc CheckLoginSession(LoginSession) returns (LoginSession);
 	rpc ListLoginSessions(Id) returns (LoginSessions);
 	rpc LogoutSession(LoginSession) returns (Empty); // can use id or access-token
-
-	rpc UpdatePresence (Id) returns (account.Presence);
 }
 
 // user services
@@ -147,6 +145,8 @@ service ConversationMgr {
 	rpc UpdateEndchatSetting(header.EndchatSetting) returns (header.EndchatSetting);
 	rpc GetEndchatSetting(Id) returns (header.EndchatSetting);
 	rpc TerminateBot(header.BotTerminated) returns (header.Event);
+
+	rpc UpdatePresence (Id) returns (account.Presence);
 }
 
 service TemplateMgr {
