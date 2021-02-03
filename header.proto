@@ -118,9 +118,6 @@ message AttributeDefinition {
 	int64 updated = 9;
 	string validator = 10; // email, name, decimal
 
-	// common.I18nText name = 12;
-	common.I18nText place_holder = 13;
-
 	bool allow_multiples = 14;
 }
 
@@ -995,7 +992,6 @@ message Message {
 	string conversation_id = 14;
 	string id = 11;
 	string text = 2;
-	common.I18nText i18n_text = 19;
 
 	string format = 3;
 	repeated Attachment attachments = 4;
@@ -1469,7 +1465,6 @@ message Bot {
 	string updated_by = 13;
 
 	repeated Trigger triggers = 14;
-
 	Frequently initiative_frequency = 15;
 
 	repeated BotCondition conditions = 16;
@@ -1919,6 +1914,141 @@ message CampaignNotification {
   Message user_email = 14;
 }
 
+
+message WebPlugin {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string site = 4;
+	string name = 5;
+	// popup, header_bar, notification_box, call_button, map_button, ...
+	string type = 6;
+
+	int64 created = 10;
+	string created_by = 11;
+
+	int64 updated = 12;
+	string updated_by = 13;
+
+	string thumbnail_url = 14;
+
+	bool enabled = 15;
+
+	int64 last_impression = 16;
+	int64 last_conversion = 17;
+	int64 last_clicked = 18;
+
+	repeated Trigger triggers = 19;
+	Frequently initiative_frequency = 20;
+	int64 impression_limit = 21;
+
+	repeated BotCondition conditions = 22;
+	string scheduler_join = 23;
+
+	CampaignNotification notification = 24;
+
+	repeated CampaignSchedulerCondition schedulers = 25;
+
+	message Plugin {
+		PopupWebPlugin popup = 1;
+		HeaderBarWebPlugin header_bar = 2;
+		HotlineButtonWebPlugin hotline_button = 3;
+	}
+	Plugin plugin = 26;
+
+	int64 num_impression_in_last_7_days = 27;
+	int64 num_conversion_in_last_7_days = 28;
+	int64 num_clicked_in_last_7_days = 29;
+	bool is_deleted = 30;
+}
+
+message Hotline {
+	string number = 2;
+	string name = 3;
+	string image_url = 4;
+}
+
+message HotlineButtonWebPlugin {
+	string position = 2; // top-left, top-right, bottom-left, bottom-right
+
+	string animation = 3;
+
+	repeated Hotline hotlines  = 4;
+
+	string recall_title = 5;
+	string thank_message = 6;
+
+	string background = 7;
+	string color = 8;
+}
+
+message FormComponent {
+	repeated WidgetField fields = 1;
+	string title = 5;
+	bool enabled = 6;
+}
+
+message TextComponent {
+	string html = 3;
+	string quill_delta = 4;
+}
+
+message ImageComponent {
+	bool enabled = 1;
+	string url = 2;
+
+	//   string width = 4; // alway full
+	string max_height = 5;
+	string padding_left = 7;
+	string padding_right = 8;
+	string padding_top = 9;
+	string padding_bottom = 10;
+}
+
+message CountdownComponent {
+	bool enabled = 2;
+	string expire_time_type = 3; // fixed_time, visit_time, repeat_daily, repeat_weekly
+	int64 fixed_time = 4;
+	int64 visit_time = 5; // minute (example 60)
+	int64 repeat_daily = 6;
+	int64 repeate_weekly_min = 7;
+	string repeate_weekly_weekday = 8; // monday, wednesday
+
+	string text_color = 9;
+	string background = 10;
+
+	string template =  11; // style: 1, 2, 3
+	string timezone = 12; // +07:00 or empty => user timeone
+}
+
+message WebPluginComponent {
+	string type = 2; // text, count_down, form, button
+	TextComponent text = 3;
+	CountdownComponent count_down = 4;
+	FormComponent form = 5;
+	ButtonComponent button = 6;
+	ImageComponent image = 7;
+}
+
+message HeaderBarWebPlugin {
+	repeated WebPluginComponent components = 1;
+
+	string background = 3;
+	string min_height = 4;
+	string font_size = 5;
+	int64 opacity = 6;
+	string position = 7; // top_fixed, top_scroll, bottom
+}
+
+message PopupWebPlugin {
+	string template_id = 2;
+	string page_type = 3;
+
+	repeated CampaignPage pages = 17;
+}
+
+// should rename to popup
 message Campaign {
 	common.Context ctx = 1;
 	string id = 2;
@@ -2027,10 +2157,10 @@ message CampaignPage {
 
 	WidgetForm form = 6;
 
-	CampaignButton primary_button = 7;
-	CampaignButton secondary_button = 8;
-	CampaignButton background_click = 10;
-	CampaignCountdown countdown = 11;
+  ButtonComponent primary_button = 7;
+	ButtonComponent secondary_button = 8;
+  ButtonComponent background_click = 10;
+	CountdownComponent countdown = 11;
 
 	CampaignVideo video = 12;
 
@@ -2098,16 +2228,19 @@ message CampaignButtonAction {
 	bool new_tab = 6; // open new url on new tab
 }
 
-message CampaignButton {
+message ButtonComponent {
 	bool enabled = 2;
 	repeated CampaignButtonAction actions = 3;
 	string text = 6;
-}
 
-message CampaignCountdown {
-	bool enabled = 3;
-	int64 end_time = 4; // unix sec
-	string daily_end_time = 5; // 8:40:30 reset every day
+	// style
+	string color = 10;
+	string background = 11;
+	string font_family = 30;
+	string font_size = 31;
+	string font_style = 32;
+	string font_weight = 33;
+	string text_transform = 34;
 }
 
 message CampaignVideo {

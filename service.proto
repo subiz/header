@@ -30,7 +30,6 @@ service AccountMgr {
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(account.CreateAccountRequest) returns (account.Account);
 	rpc ListAgents(common.Id) returns (account.Agents);
-	rpc CountAccount(account.CountRequest) returns (account.Count);
 
 	rpc DeleteGroup(common.Id) returns (common.Empty);
 	rpc ListGroups(common.Id) returns (account.AgentGroups);

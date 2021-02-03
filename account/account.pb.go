@@ -3220,116 +3220,6 @@ func (x *LogAgentLoggedIn) GetCreated() int64 {
 	return 0
 }
 
-type CountRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Ctx *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-}
-
-func (x *CountRequest) Reset() {
-	*x = CountRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[31]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *CountRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CountRequest) ProtoMessage() {}
-
-func (x *CountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[31]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CountRequest.ProtoReflect.Descriptor instead.
-func (*CountRequest) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{31}
-}
-
-func (x *CountRequest) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-type Count struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Ctx        *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	OnActive   *int64          `protobuf:"varint,2,opt,name=onActive" json:"onActive,omitempty"`
-	OnInactive *int64          `protobuf:"varint,3,opt,name=onInactive" json:"onInactive,omitempty"`
-}
-
-func (x *Count) Reset() {
-	*x = Count{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[32]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Count) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Count) ProtoMessage() {}
-
-func (x *Count) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[32]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Count.ProtoReflect.Descriptor instead.
-func (*Count) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{32}
-}
-
-func (x *Count) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *Count) GetOnActive() int64 {
-	if x != nil && x.OnActive != nil {
-		return *x.OnActive
-	}
-	return 0
-}
-
-func (x *Count) GetOnInactive() int64 {
-	if x != nil && x.OnInactive != nil {
-		return *x.OnInactive
-	}
-	return 0
-}
-
 type Presences struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3343,7 +3233,7 @@ type Presences struct {
 func (x *Presences) Reset() {
 	*x = Presences{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[33]
+		mi := &file_account_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3356,7 +3246,7 @@ func (x *Presences) String() string {
 func (*Presences) ProtoMessage() {}
 
 func (x *Presences) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[33]
+	mi := &file_account_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3369,7 +3259,7 @@ func (x *Presences) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Presences.ProtoReflect.Descriptor instead.
 func (*Presences) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{33}
+	return file_account_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *Presences) GetCtx() *common.Context {
@@ -3411,7 +3301,7 @@ type Presence struct {
 func (x *Presence) Reset() {
 	*x = Presence{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[34]
+		mi := &file_account_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3424,7 +3314,7 @@ func (x *Presence) String() string {
 func (*Presence) ProtoMessage() {}
 
 func (x *Presence) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[34]
+	mi := &file_account_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3437,7 +3327,7 @@ func (x *Presence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Presence.ProtoReflect.Descriptor instead.
 func (*Presence) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{34}
+	return file_account_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *Presence) GetCtx() *common.Context {
@@ -3509,7 +3399,7 @@ type BusinessHours_WorkingDay struct {
 func (x *BusinessHours_WorkingDay) Reset() {
 	*x = BusinessHours_WorkingDay{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[35]
+		mi := &file_account_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3522,7 +3412,7 @@ func (x *BusinessHours_WorkingDay) String() string {
 func (*BusinessHours_WorkingDay) ProtoMessage() {}
 
 func (x *BusinessHours_WorkingDay) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[35]
+	mi := &file_account_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3576,7 +3466,7 @@ type BusinessHours_Holiday struct {
 func (x *BusinessHours_Holiday) Reset() {
 	*x = BusinessHours_Holiday{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[36]
+		mi := &file_account_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3589,7 +3479,7 @@ func (x *BusinessHours_Holiday) String() string {
 func (*BusinessHours_Holiday) ProtoMessage() {}
 
 func (x *BusinessHours_Holiday) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[36]
+	mi := &file_account_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4155,41 +4045,32 @@ var file_account_proto_rawDesc = []byte{
 	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x5f,
 	0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x49,
 	0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x22, 0x31, 0x0a, 0x0c, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63,
-	0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
-	0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x22, 0x66,
-	0x0a, 0x05, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f,
-	0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1a, 0x0a, 0x08, 0x6f, 0x6e,
-	0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x6f, 0x6e,
-	0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x6f, 0x6e, 0x49, 0x6e, 0x61, 0x63,
-	0x74, 0x69, 0x76, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x6f, 0x6e, 0x49, 0x6e,
-	0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x22, 0x7e, 0x0a, 0x09, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e,
-	0x63, 0x65, 0x73, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78,
-	0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f,
-	0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x2f, 0x0a, 0x09, 0x70, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63,
-	0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x52, 0x09, 0x70, 0x72, 0x65,
-	0x73, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x22, 0xe1, 0x01, 0x0a, 0x08, 0x50, 0x72, 0x65, 0x73, 0x65,
-	0x6e, 0x63, 0x65, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78,
-	0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f,
-	0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x16,
-	0x0a, 0x06, 0x70, 0x69, 0x6e, 0x67, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06,
-	0x70, 0x69, 0x6e, 0x67, 0x65, 0x64, 0x12, 0x23, 0x0a, 0x0d, 0x70, 0x69, 0x6e, 0x67, 0x65, 0x64,
-	0x5f, 0x6d, 0x69, 0x6e, 0x75, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x70,
-	0x69, 0x6e, 0x67, 0x65, 0x64, 0x4d, 0x69, 0x6e, 0x75, 0x74, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x70, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x12, 0x0e, 0x0a, 0x02, 0x75,
-	0x61, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x75, 0x61, 0x12, 0x1d, 0x0a, 0x0a, 0x69,
-	0x73, 0x5f, 0x66, 0x6f, 0x63, 0x75, 0x73, 0x65, 0x64, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52,
-	0x09, 0x69, 0x73, 0x46, 0x6f, 0x63, 0x75, 0x73, 0x65, 0x64, 0x42, 0x21, 0x5a, 0x1f, 0x67, 0x69,
-	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68,
-	0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x28, 0x03, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x22, 0x7e, 0x0a, 0x09, 0x50,
+	0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43,
+	0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x2f, 0x0a, 0x09, 0x70, 0x72,
+	0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65,
+	0x52, 0x09, 0x70, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x73, 0x22, 0xe1, 0x01, 0x0a, 0x08,
+	0x50, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43,
+	0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x73,
+	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x69, 0x6e, 0x67, 0x65, 0x64, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x06, 0x70, 0x69, 0x6e, 0x67, 0x65, 0x64, 0x12, 0x23, 0x0a, 0x0d, 0x70,
+	0x69, 0x6e, 0x67, 0x65, 0x64, 0x5f, 0x6d, 0x69, 0x6e, 0x75, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x0c, 0x70, 0x69, 0x6e, 0x67, 0x65, 0x64, 0x4d, 0x69, 0x6e, 0x75, 0x74, 0x65,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x70, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70,
+	0x12, 0x0e, 0x0a, 0x02, 0x75, 0x61, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x75, 0x61,
+	0x12, 0x1d, 0x0a, 0x0a, 0x69, 0x73, 0x5f, 0x66, 0x6f, 0x63, 0x75, 0x73, 0x65, 0x64, 0x18, 0x09,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x69, 0x73, 0x46, 0x6f, 0x63, 0x75, 0x73, 0x65, 0x64, 0x42,
+	0x21, 0x5a, 0x1f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75,
+	0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74,
 }
 
 var (
@@ -4205,7 +4086,7 @@ func file_account_proto_rawDescGZIP() []byte {
 }
 
 var file_account_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
+var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_account_proto_goTypes = []interface{}{
 	(Agent_Gender)(0),                  // 0: account.Agent.Gender
 	(Agent_AgentState)(0),              // 1: account.Agent.AgentState
@@ -4241,71 +4122,67 @@ var file_account_proto_goTypes = []interface{}{
 	(*AccSubs)(nil),                    // 31: account.AccSubs
 	(*SearchSubRequest)(nil),           // 32: account.SearchSubRequest
 	(*LogAgentLoggedIn)(nil),           // 33: account.LogAgentLoggedIn
-	(*CountRequest)(nil),               // 34: account.CountRequest
-	(*Count)(nil),                      // 35: account.Count
-	(*Presences)(nil),                  // 36: account.Presences
-	(*Presence)(nil),                   // 37: account.Presence
-	(*BusinessHours_WorkingDay)(nil),   // 38: account.BusinessHours.WorkingDay
-	(*BusinessHours_Holiday)(nil),      // 39: account.BusinessHours.Holiday
-	(*common.Context)(nil),             // 40: common.Context
-	(*common.Permission)(nil),          // 41: common.Permission
-	(*payment.Limit)(nil),              // 42: payment.Limit
-	(*payment.Subscription)(nil),       // 43: payment.Subscription
+	(*Presences)(nil),                  // 34: account.Presences
+	(*Presence)(nil),                   // 35: account.Presence
+	(*BusinessHours_WorkingDay)(nil),   // 36: account.BusinessHours.WorkingDay
+	(*BusinessHours_Holiday)(nil),      // 37: account.BusinessHours.Holiday
+	(*common.Context)(nil),             // 38: common.Context
+	(*common.Permission)(nil),          // 39: common.Permission
+	(*payment.Limit)(nil),              // 40: payment.Limit
+	(*payment.Subscription)(nil),       // 41: payment.Subscription
 }
 var file_account_proto_depIdxs = []int32{
-	40, // 0: account.Agent.ctx:type_name -> common.Context
+	38, // 0: account.Agent.ctx:type_name -> common.Context
 	8,  // 1: account.Agent.account:type_name -> account.Account
-	41, // 2: account.Agent.perm:type_name -> common.Permission
-	37, // 3: account.Agent.last_seen:type_name -> account.Presence
+	39, // 2: account.Agent.perm:type_name -> common.Permission
+	35, // 3: account.Agent.last_seen:type_name -> account.Presence
 	3,  // 4: account.Agent.dashboard_setting:type_name -> account.DashboardAgent
-	40, // 5: account.Invitation.ctx:type_name -> common.Context
-	40, // 6: account.AgentGroup.ctx:type_name -> common.Context
+	38, // 5: account.Invitation.ctx:type_name -> common.Context
+	38, // 6: account.AgentGroup.ctx:type_name -> common.Context
 	4,  // 7: account.AgentGroup.members:type_name -> account.Agent
-	40, // 8: account.ResetPasswordRequest.ctx:type_name -> common.Context
-	40, // 9: account.Account.ctx:type_name -> common.Context
-	42, // 10: account.Account.limit:type_name -> payment.Limit
+	38, // 8: account.ResetPasswordRequest.ctx:type_name -> common.Context
+	38, // 9: account.Account.ctx:type_name -> common.Context
+	40, // 10: account.Account.limit:type_name -> payment.Limit
 	28, // 11: account.Account.business_hours:type_name -> account.BusinessHours
 	9,  // 12: account.Account.lead_setting:type_name -> account.LeadSetting
-	40, // 13: account.GroupMember.ctx:type_name -> common.Context
-	40, // 14: account.CreateAccountRequest.ctx:type_name -> common.Context
-	40, // 15: account.Agents.ctx:type_name -> common.Context
+	38, // 13: account.GroupMember.ctx:type_name -> common.Context
+	38, // 14: account.CreateAccountRequest.ctx:type_name -> common.Context
+	38, // 15: account.Agents.ctx:type_name -> common.Context
 	4,  // 16: account.Agents.Agents:type_name -> account.Agent
-	40, // 17: account.NewPassword.ctx:type_name -> common.Context
-	40, // 18: account.AgentGroups.ctx:type_name -> common.Context
+	38, // 17: account.NewPassword.ctx:type_name -> common.Context
+	38, // 18: account.AgentGroups.ctx:type_name -> common.Context
 	6,  // 19: account.AgentGroups.Groups:type_name -> account.AgentGroup
-	40, // 20: account.Token.ctx:type_name -> common.Context
-	40, // 21: account.ConfirmEmail.ctx:type_name -> common.Context
-	40, // 22: account.WarnInactiveEmail.ctx:type_name -> common.Context
-	40, // 23: account.InvoiceEmail.ctx:type_name -> common.Context
-	40, // 24: account.SubscriptionUpgradedEmail.ctx:type_name -> common.Context
-	40, // 25: account.BillCreatedEmail.ctx:type_name -> common.Context
-	40, // 26: account.TrialEndingEmail.ctx:type_name -> common.Context
-	40, // 27: account.DowngradedToFreeEmail.ctx:type_name -> common.Context
-	40, // 28: account.ChangeEmailEmail.ctx:type_name -> common.Context
-	40, // 29: account.InviteEmail.ctx:type_name -> common.Context
-	40, // 30: account.ResetPasswordEmail.ctx:type_name -> common.Context
-	40, // 31: account.PasswordChangedEmail.ctx:type_name -> common.Context
-	40, // 32: account.AccountConfirmSuccessEmail.ctx:type_name -> common.Context
-	40, // 33: account.BusinessHours.ctx:type_name -> common.Context
-	38, // 34: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
-	39, // 35: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
-	40, // 36: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
+	38, // 20: account.Token.ctx:type_name -> common.Context
+	38, // 21: account.ConfirmEmail.ctx:type_name -> common.Context
+	38, // 22: account.WarnInactiveEmail.ctx:type_name -> common.Context
+	38, // 23: account.InvoiceEmail.ctx:type_name -> common.Context
+	38, // 24: account.SubscriptionUpgradedEmail.ctx:type_name -> common.Context
+	38, // 25: account.BillCreatedEmail.ctx:type_name -> common.Context
+	38, // 26: account.TrialEndingEmail.ctx:type_name -> common.Context
+	38, // 27: account.DowngradedToFreeEmail.ctx:type_name -> common.Context
+	38, // 28: account.ChangeEmailEmail.ctx:type_name -> common.Context
+	38, // 29: account.InviteEmail.ctx:type_name -> common.Context
+	38, // 30: account.ResetPasswordEmail.ctx:type_name -> common.Context
+	38, // 31: account.PasswordChangedEmail.ctx:type_name -> common.Context
+	38, // 32: account.AccountConfirmSuccessEmail.ctx:type_name -> common.Context
+	38, // 33: account.BusinessHours.ctx:type_name -> common.Context
+	36, // 34: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
+	37, // 35: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
+	38, // 36: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
 	8,  // 37: account.AccSub.account:type_name -> account.Account
-	43, // 38: account.AccSub.subscription:type_name -> payment.Subscription
+	41, // 38: account.AccSub.subscription:type_name -> payment.Subscription
 	4,  // 39: account.AccSub.agents:type_name -> account.Agent
 	30, // 40: account.AccSubs.accsub:type_name -> account.AccSub
-	40, // 41: account.SearchSubRequest.ctx:type_name -> common.Context
-	40, // 42: account.LogAgentLoggedIn.ctx:type_name -> common.Context
-	40, // 43: account.CountRequest.ctx:type_name -> common.Context
-	40, // 44: account.Count.ctx:type_name -> common.Context
-	40, // 45: account.Presences.ctx:type_name -> common.Context
-	37, // 46: account.Presences.presences:type_name -> account.Presence
-	40, // 47: account.Presence.ctx:type_name -> common.Context
-	48, // [48:48] is the sub-list for method output_type
-	48, // [48:48] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	38, // 41: account.SearchSubRequest.ctx:type_name -> common.Context
+	38, // 42: account.LogAgentLoggedIn.ctx:type_name -> common.Context
+	38, // 43: account.Presences.ctx:type_name -> common.Context
+	35, // 44: account.Presences.presences:type_name -> account.Presence
+	38, // 45: account.Presence.ctx:type_name -> common.Context
+	46, // [46:46] is the sub-list for method output_type
+	46, // [46:46] is the sub-list for method input_type
+	46, // [46:46] is the sub-list for extension type_name
+	46, // [46:46] is the sub-list for extension extendee
+	0,  // [0:46] is the sub-list for field type_name
 }
 
 func init() { file_account_proto_init() }
@@ -4687,30 +4564,6 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CountRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_account_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Count); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_account_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Presences); i {
 			case 0:
 				return &v.state
@@ -4722,7 +4575,7 @@ func file_account_proto_init() {
 				return nil
 			}
 		}
-		file_account_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+		file_account_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Presence); i {
 			case 0:
 				return &v.state
@@ -4734,7 +4587,7 @@ func file_account_proto_init() {
 				return nil
 			}
 		}
-		file_account_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+		file_account_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BusinessHours_WorkingDay); i {
 			case 0:
 				return &v.state
@@ -4746,7 +4599,7 @@ func file_account_proto_init() {
 				return nil
 			}
 		}
-		file_account_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+		file_account_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BusinessHours_Holiday); i {
 			case 0:
 				return &v.state
@@ -4765,7 +4618,7 @@ func file_account_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_account_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   37,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -149,6 +149,7 @@ message Account {
 	optional int64 last_token_requested = 32;
 
 	optional LeadSetting lead_setting = 33;
+
 }
 
 message LeadSetting {
@@ -381,16 +382,6 @@ message LogAgentLoggedIn {
 	optional string account_id = 2;
 	optional string agent_id = 3;
 	optional int64 created = 4;
-}
-
-message CountRequest {
-	optional common.Context ctx = 1;
-}
-
-message Count {
-	optional common.Context ctx = 1;
-	optional int64 onActive = 2;
-	optional int64 onInactive = 3;
 }
 
 message Presences {

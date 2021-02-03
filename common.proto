@@ -118,29 +118,6 @@ message Permission {
 	int32 referral = 45;
 }
 
-message AuthCookie {
-	string user_id = 1;
-	string account_id = 2;
-	int32 expired = 4;
-	int32 issued = 5;
-	string type = 3;
-}
-
-// TODO: remove
-message AccessToken {
-	string issuer = 1;
-	// string issuer_type = 7;
-	string client_id = 2;
-	// string client_type = 3;
-	string account_id = 4;
-	// string client_account_id = 5;
-	// repeated string scopes = 6;
-	int32 expired = 8;
-	// Type issuer_type = 9;
-	Type kind = 10; // should be agent, connector or bot
-	Permission permission = 11;
-}
-
 enum Type {
 	unknown = 0;
 	user = 1;
@@ -172,12 +149,4 @@ message Error {
 	int64 created = 6;
 	string code = 7;
 	string root = 8;
-}
-
-message I18nText {
-	string en = 1; // english
-	string vi = 2; // vietnamese
-	string fr = 4; // french
-	string cn = 5; // chinese
-	string jp = 6; // japanese
 }
