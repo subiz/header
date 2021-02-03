@@ -1686,6 +1686,7 @@ message WidgetUserSetting {
 	WidgetSetting account_setting = 9;
 	repeated Campaign campaigns = 13;
 	repeated Bot bots = 14; // remove action
+	repeated WebPlugins plugins = 15;
 }
 
 message SocialLink {
@@ -1914,6 +1915,11 @@ message CampaignNotification {
   Message user_email = 14;
 }
 
+message WebPlugins {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated WebPlugin plugins = 3;
+}
 
 message WebPlugin {
 	common.Context ctx = 1;
@@ -2098,6 +2104,8 @@ message Impression {
 
 	string by_trigger = 10;
 	string impression_token = 11;  // for request submit only
+
+	string web_plugin_id = 12;
 }
 
 message ConversionRequest {
@@ -2134,6 +2142,8 @@ message Conversion {
 
 	int64 week = 14; // internal use only
 	string impression_token = 15; // for request submit only
+
+	string web_plugin_id = 16;
 }
 
 message UserCampaignStatus {

@@ -36,7 +36,6 @@ service AccountMgr {
 	rpc AddAgentToGroup(account.GroupMember) returns (common.Empty);
 	rpc RemoveAgentFromGroup(account.GroupMember) returns (common.Empty);
 	rpc ChangeEmail(account.Agent) returns (account.Agent);
-	rpc IntegrateBot(account.Agent) returns (account.Agent);
 	rpc SyncPublicHolidays(account.SyncPublicHolidaysRequest) returns (account.BusinessHours);
 	rpc TransferOwner(common.Id) returns (account.Agent);
 
@@ -113,8 +112,6 @@ service ConversationReporter {
 }
 
 service AgentPresenceMgr {
-	rpc ReadPresence (common.Id) returns (account.Presence);
-	rpc UpdatePresence (common.Id) returns (account.Presence);
 }
 
 service RuleMgr {
@@ -273,6 +270,23 @@ service FabikonService {
 	rpc ListFbFanpageSettings(common.Id) returns (header.FbFanpageSettings);
 
 	rpc ListFbPosts(common.Id) returns (header.FacebookPosts);
+}
+
+service WebPluginService {
+	rpc ReadWebPlugin(common.Id) returns (header.WebPlugin);
+	rpc UpdateWebPlugin(header.WebPlugin) returns (header.WebPlugin);
+	rpc ListWebPlugins(common.Id) returns (header.WebPlugins);
+	rpc DeleteWebPlugin(common.Id) returns (common.Empty);
+
+	rpc SubmitImpression(header.Impression) returns (header.Impression);
+	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
+	rpc SubmitClick(header.Conversion) returns (header.Conversion);
+
+	rpc SubmitUserCampaignStatus(header.UserCampaignStatus) returns (header.UserCampaignStatus);
+
+	rpc ReportCampaign(header.ReportCampaignRequest) returns (header.ReportCampaignResponse);
+	rpc ListConversions(header.ConversionRequest) returns (header.Conversions);
+	rpc ExportConversions(header.ConversionRequest) returns (header.ConversionsExported);
 }
 
 // widget services
