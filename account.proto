@@ -77,20 +77,6 @@ message Agent {
 	repeated string scopes = 41;
 }
 
-message Invitation {
-	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional string account_id = 3;
-	optional string from_id = 4;
-	optional string email = 5;
-	optional string agent_id = 6;
-	optional int64 sent = 7;
-	optional int64 replied = 8;
-	optional string agent_fullname = 9;
-	optional string agent_job_title = 10;
-	optional string token = 11;
-}
-
 message AgentGroup {
 	optional common.Context ctx = 1;
 	optional string id = 2;
@@ -127,6 +113,7 @@ message Account {
 		activated = 1;  // normal account
 		deleted = 3; // haven't refreshed token in the last 90 days
 		inactive = 4; // haven't refreshed token in the last 60 days
+		banned = 5;
 	}
 	optional string city = 14;
 	optional int32 zip_code = 16;
@@ -146,10 +133,9 @@ message Account {
 	optional BusinessHours business_hours = 30;
 	optional string referrer_from = 31;
 
-	optional int64 last_token_requested = 32;
+	optional int64 last_token_requested = 32;  // todo: remove
 
 	optional LeadSetting lead_setting = 33;
-
 }
 
 message LeadSetting {
@@ -204,18 +190,6 @@ message Token {
 	optional string account_id = 4;
 }
 
-message ConfirmEmail {
-	optional common.Context ctx = 1;
-	optional string to = 2;
-	optional string account_id = 3;
-	optional string owner_id = 4;
-	optional string token = 5;
-	optional int64 expired_in = 6;
-	optional string account_name = 7;
-	optional string owner_name = 9;
-	optional string from = 10;
-}
-
 message WarnInactiveEmail {
 	optional common.Context ctx = 1;
 	optional string from = 8;
@@ -263,20 +237,6 @@ message DowngradedToFreeEmail {
 	optional int64 created = 6; // sec
 }
 
-message ChangeEmailEmail {
-	optional common.Context ctx = 1;
-	optional string to = 2;
-	optional string account_id = 3;
-	optional int64 expired_in = 5;
-	optional string token = 6;
-
-	optional string fullname = 9;
-	optional string sender_name = 10;
-	optional string account_name = 11;
-	optional string account_logo_url = 12;
-	optional string from = 14;
-}
-
 message InviteEmail {
 	optional common.Context ctx = 1;
 	optional string to = 2;
@@ -302,26 +262,6 @@ message ResetPasswordEmail {
 	optional string account_id = 6;
 	optional string agent_id = 7;
 	optional string agent_name = 8;
-}
-
-message PasswordChangedEmail {
-	optional common.Context ctx = 1;
-	optional string to = 2;
-	optional string account_id = 3;
-	optional string agent_id = 4;
-	optional string agent_name = 5;
-	optional string from = 9;
-}
-
-message AccountConfirmSuccessEmail {
-	optional common.Context ctx = 1;
-	optional string to = 2;
-	optional string account_id = 3;
-	optional string agent_id = 4;
-	optional string agent_name = 5;
-	optional string from = 9;
-	optional int64 from_time = 10;
-	optional int64 to_time = 11;
 }
 
 message BusinessHours {
@@ -375,13 +315,6 @@ message SearchSubRequest {
 	optional string plan = 7;
 	// optional uint32 billing_cycle_month = 8;
 	optional string order_by = 10;
-}
-
-message LogAgentLoggedIn {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string agent_id = 3;
-	optional int64 created = 4;
 }
 
 message Presences {
