@@ -108,3 +108,95 @@ func GetTextAttr(u *User, key string) string {
 	}
 	return ""
 }
+
+var Scopes = makeScopeMap()
+
+func makeScopeMap() map[string]string {
+	// scope => permission
+	var m = map[string]string{}
+	m["agent"] = "conversation:rw agent_group:r rule:r integration:r message_template:rw other_message_template:r tag:r whitelist:wr widget:r subscription:r invoice:r user:rw attribute:r facebook:r bot:r agent:r conversation_setting:r web_plugin:r file:wr"
+	m["view_other_convos"] = "other_conversation:r"
+	m["export_user"] = "user:e" // export
+
+	m["account_setting"] = m["agent"] + " agent:w agent_group:w rule:w integration:w other_message_template:rw tag:w widget:w attribute:w facebook:w bot:w conversation_setting:w web_plugin:wr"
+	m["account_manage"] = "agent_group:wr agent:w subscription:rw payment_method:rw"
+	m["owner"] = m["account_manage"] + " " + m["account_setting"]
+	m["all"] = m["owner"]
+	m["subiz"] = m["payment:w"]
+
+	return m
+}
+
+func prettyPerm(perm string) string {
+	perms := strings.FieldsFunc(perm, func(r rune) bool {
+		return r == ' ' || r == ';' || r == ',' || r == '\n' || r == '\t'
+	})
+	permM := make(map[string]string)
+	for _, p := range perms {
+		p = strings.TrimSpace(p)
+
+		psplit := strings.Split(p, ":")
+		if len(psplit) != 2 {
+			continue
+		}
+		permM[psplit[0]] += psplit[1]
+	}
+
+	out := ""
+	for k, v := range permM {
+		ppp := ""
+		if strings.Contains(v, "w") {
+			ppp += "w"
+		}
+		if strings.Contains(v, "r") {
+			ppp += "r"
+		}
+		if strings.Contains(v, "e") {
+			ppp += "e"
+		}
+		if strings.Contains(v, "p") {
+			ppp += "p"
+		}
+		if ppp != "" {
+			out += strings.TrimSpace(k) + ":" + ppp + " "
+		}
+	}
+	return strings.TrimSpace(out)
+}
+
+// []string{"all", "agent"}, "conversation:r tag:wr" => true
+// []string{"agent"}, "tag:wr" => false
+func CheckAccess(scopes []string, perm string) bool {
+	// make availabe perm map by joining all permision in scopes
+	availableperm := make(map[string]string) // {"conversation" => "cr", "user" => "u"}
+	joinperm := ""
+	for _, scope := range scopes {
+		joinperm += " " + Scopes[strings.TrimSpace(scope)]
+	}
+
+	joinperm = prettyPerm(joinperm)
+	joinpermsplit := strings.Split(joinperm, " ")
+	for _, joinpermitem := range joinpermsplit {
+		joinpermitemsplit := strings.Split(joinpermitem, ":")
+		if len(joinpermitemsplit) != 2 {
+			continue
+		}
+		availableperm[joinpermitemsplit[0]] = joinpermitemsplit[1]
+	}
+
+	perm = prettyPerm(perm)
+	perms := strings.Split(perm, " ")
+	for _, p := range perms {
+		ps := strings.Split(p, ":") // conversation:rw
+		if len(ps) != 2 {
+			continue
+		}
+
+		for _, p := range ps[1] {
+			if !strings.Contains(availableperm[ps[0]], string(p)) {
+				return false
+			}
+		}
+	}
+	return true
+}
