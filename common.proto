@@ -48,50 +48,9 @@ message Credential {
 	string account_id = 1;
 	string issuer = 3;
 	Type type = 4; // should be agent, user or connector
-	Permission perm = 6;
+	// Permission perm = 6;
 	string client_id = 7;
 	repeated string scopes = 8;
-}
-
-message Permission {
-	int32 account = 2;  //    ogu
-	int32 agent = 3;    // 0x0777
-	int32 agent_password = 4;
-	int32 permission = 6;
-	int32 agent_group = 7;
-	int32 segmentation = 10;
-	int32 client = 12;
-	int32 rule = 13;
-	int32 conversation = 14;
-	int32 integration = 15;
-	int32 canned_response = 16;
-	int32 tag = 17;
-	int32 whitelist_ip = 20;
-	int32 whitelist_user = 21;
-	int32 whitelist_domain = 22;
-	int32 widget = 23;
-	int32 subscription = 24;
-	int32 invoice = 25;
-	int32 payment_method = 26;
-	int32 bill = 27;
-	int32 payment_log = 28;
-	int32 payment_comment = 29;
-	int32 user = 30;
-	int32 automation = 31;
-	int32 ping = 32;
-	int32 attribute = 33;
-	int32 agent_notification = 34;
-	int32 conversation_export = 35;
-	int32 conversation_report = 36;
-	int32 content = 37;
-	int32 pipeline = 38;
-	int32 currency = 39;
-	int32 service_level_agreement = 40;
-	int32 message_template = 41;
-	int32 agent_presence = 42;
-	int32 agent_preference = 43;
-	int32 promotion_code = 44;
-	int32 referral = 45;
 }
 
 enum Type {

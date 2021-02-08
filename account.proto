@@ -60,7 +60,7 @@ message Agent {
 	optional Account account = 28;
 	optional string country_code = 29;
 
-	optional common.Permission perm = 31;
+	// optional common.Permission perm = 31;
 
 	optional int64 last_login = 32;
 
