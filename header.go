@@ -122,7 +122,7 @@ func makeScopeMap() map[string]string {
 	m["account_manage"] = "account:w agent_group:wr agent:w subscription:rw payment_method:rw"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
 	m["all"] = m["owner"]
-	m["subiz"] = m["payment:w"]
+	m["subiz"] = "payment:w"
 
 	return m
 }
