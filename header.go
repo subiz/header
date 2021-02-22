@@ -121,8 +121,8 @@ func makeScopeMap() map[string]string {
 	m["account_setting"] = m["agent"] + " account:w agent:w agent_group:w rule:w integration:w other_message_template:rw tag:w widget:w attribute:w facebook:w bot:w conversation_setting:w web_plugin:wr webhook:wr"
 	m["account_manage"] = "account:w agent_group:wr agent:w subscription:rw payment_method:rw"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
-	m["subiz"] = "payment:w"
-	m["all"] = m["owner"] + " " + m["subiz"]
+	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:w"
+	m["all"] = m["subiz"]
 	return m
 }
 
@@ -165,7 +165,7 @@ func prettyPerm(perm string) string {
 
 // []string{"all", "agent"}, "conversation:r tag:wr" => true
 // []string{"agent"}, "tag:wr" => false
-func CheckAccess(scopes []string, perm string) bool {
+func checkAccess(scopes []string, perm string) bool {
 	// make availabe perm map by joining all permision in scopes
 	availableperm := make(map[string]string) // {"conversation" => "cr", "user" => "u"}
 	joinperm := ""
@@ -198,4 +198,10 @@ func CheckAccess(scopes []string, perm string) bool {
 		}
 	}
 	return true
+}
+
+// []string{"all", "agent"}, "conversation:r tag:wr" => true
+// []string{"agent"}, "tag:wr" => false
+func CheckAccess(realScopes, authorizedScopes []string, perm string) bool {
+	return checkAccess(realScopes, perm) && checkAccess(authorizedScopes, perm)
 }
