@@ -203,6 +203,7 @@ message Note {
 	string text = 6;
 	int64 created = 7;
 	int64 updated = 8;
+	string target_id = 9; // user_id
 }
 
 message Notes {
@@ -218,12 +219,6 @@ message ListNotesRequest {
 }
 
 message DeleteNoteRequest {
-	string account_id = 2;
-	string target_id = 3;
-	string id = 4;
-}
-
-message GetNoteRequest {
 	string account_id = 2;
 	string target_id = 3;
 	string id = 4;
@@ -320,10 +315,6 @@ message UserInfoParams {
 	StringParams continent_code = 12;
 	StringParams url = 13;
 	IntParams time_on_site = 14;
-}
-
-message UserInfoData {
-	repeated UserInfo data = 2;
 }
 
 enum HaveBeen {
