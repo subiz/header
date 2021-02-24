@@ -140,13 +140,6 @@ message CreateRequest {
 	string answer = 4;
 }
 
-message UserSearchResult {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 total = 3;
-	repeated User users = 4;
-}
-
 message DeleteAttrRequest {
 	common.Context ctx = 1;
 	string key = 2;
@@ -2744,10 +2737,11 @@ message SCondition {
 	string function = 14; // used to transform value of left side before evaluate expression
 }
 
-message UserSearchRequest {
+message SearchRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string query = 4;
+
 	string agent_id = 8; // search my user of agent
 	repeated string labels = 9; // or
 	repeated string agents = 10; // or
