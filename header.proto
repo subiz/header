@@ -2742,6 +2742,7 @@ message SearchRequest {
 	string account_id = 2;
 	string query = 4;
 
+	int32 limit = 5;
 	string agent_id = 8; // search my user of agent
 	repeated string labels = 9; // or
 	repeated string agents = 10; // or

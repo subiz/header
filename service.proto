@@ -46,7 +46,6 @@ service AccountMgr {
 // user services
 service UserMgr {
 	rpc SearchUsers (header.SearchRequest) returns (header.Users);
-	rpc SuggestUserSearch(header.SearchRequest) returns (header.Ids);
 
 	rpc SearchLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 
@@ -136,7 +135,6 @@ service ConversationMgr {
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc SearchConvos (header.SearchRequest) returns (header.Conversations);
-	rpc SuggestConvoSearch(header.SearchRequest) returns (header.Ids);
 
 	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
 	rpc ListConversations2(conversation.ConversationListRequest) returns (conversation.ConversationListResponse);
