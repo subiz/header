@@ -96,6 +96,26 @@ message User {
 	repeated string aliases = 5;
 	repeated Attribute attributes = 18;
 	UserSession session = 40;
+	repeated string lead_owners = 41;
+	repeated UserLabel labels = 42;
+}
+
+message UserLabel {
+	string label_id = 2;
+	string by = 3;
+	int64 at = 5; // ms
+}
+
+message Label {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string title = 4;
+	string description = 7;
+	string creator = 8;
+	int64 created = 9; // ms
+	string color = 10;
 }
 
 message Users {
@@ -125,9 +145,6 @@ message UserSearchResult {
 	string account_id = 2;
 	int64 total = 3;
 	repeated User users = 4;
-	string anchor = 5;
-	repeated int32 unreads = 6; // only used when search my users
-	map<string, int32> unread_counts = 7;
 }
 
 message DeleteAttrRequest {
@@ -2787,42 +2804,10 @@ message SCondition {
 message UserSearchRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string segmentation_id = 3;
 	string query = 4;
-	string anchor = 5;
-	int32 limit = 6;
 	string agent_id = 8; // search my user of agent
-	bool unread = 9; // search my user of agent
-	SCondition condition = 10;
-}
-
-message ESNote {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string creator_id = 5;
-	string text = 6;
-	int64 created = 7;
-	string target_id = 9;
-	string target_type = 10;
-	string format = 13;
-}
-
-message SearchNoteRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string keyword = 4;
-	int64 from_sec = 5; // unix seconds
-	int64 to_sec = 6; // unix seconds
-	int64 limit = 7;
-	string anchor = 8;
-}
-
-message SearchNoteResponse {
-	int64 total = 2;
-	repeated ESNote result = 3;
-	string anchor = 4;
+	repeated string labels = 9; // or
+	repeated string agents = 10; // or
 }
 
 message ExchangeRate {

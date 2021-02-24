@@ -45,8 +45,9 @@ service AccountMgr {
 
 // user services
 service UserMgr {
-	rpc SearchUsers (header.UserSearchRequest) returns (header.UserSearchResult); // deprecated
+	rpc SearchUsers (header.UserSearchRequest) returns (header.UserSearchResult);
 	rpc SearchLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
+
 	rpc ListLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 
 	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
@@ -56,7 +57,6 @@ service UserMgr {
 	rpc ReadUser (Id) returns (header.User);
 
 	rpc ReportUsers (header.UserReportRequest) returns (header.UserReportResult);
-	rpc SearchNote (header.SearchNoteRequest) returns (header.SearchNoteResponse); // deprecated
 
 	rpc MatchUsers(Ids) returns (header.Users);
 }
@@ -78,8 +78,6 @@ service NoteMgr {
 	rpc AddNote(header.Note) returns (header.Note);
 	rpc UpdateNote(header.Note) returns (header.Note);
 	rpc DeleteNote(header.DeleteNoteRequest) returns (Empty);
-	rpc GetNote(header.GetNoteRequest) returns (header.Note);
-	rpc SearchNote(header.SearchNoteRequest) returns (SearchNoteResponse); // deprecated
 }
 
 service AutomationMgr {
