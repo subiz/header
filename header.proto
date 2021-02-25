@@ -994,6 +994,8 @@ message Conversation {
 	bool watch = 44; // true
 
 	int64 updated = 43;
+
+	Event matched_event = 45; // for search only
 }
 
 message Rating {
