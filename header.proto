@@ -412,6 +412,7 @@ message Event {
 		BotTerminated bot_terminated = 43;
 		Webhook webhook = 44;
 		UserAlias user_alias = 45;
+		CampaignConversion conversion = 46;
 	}
 	Data data = 20;
 }
@@ -2864,6 +2865,13 @@ message FacebookPost {
 	string full_picture = 12;
 	string story = 13;
 	FacebookPostAttachemnts attachments = 14;
+}
+
+message CampaignConversion {
+	common.Context ctx = 1;
+	string account_id = 2;
+	User user = 3;
+	string campaign_id = 4;
 }
 
 enum RealtimeType {
