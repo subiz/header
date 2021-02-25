@@ -412,7 +412,7 @@ message Event {
 		BotTerminated bot_terminated = 43;
 		Webhook webhook = 44;
 		UserAlias user_alias = 45;
-		CampaignConversion conversion = 46;
+	  Conversion conversion = 47;
 	}
 	Data data = 20;
 }
@@ -2170,6 +2170,8 @@ message Conversion {
 	string impression_token = 15; // for request submit only
 
 	string web_plugin_id = 16;
+
+	User user = 17; // for webhook only
 }
 
 message UserCampaignStatus {
@@ -2865,13 +2867,6 @@ message FacebookPost {
 	string full_picture = 12;
 	string story = 13;
 	FacebookPostAttachemnts attachments = 14;
-}
-
-message CampaignConversion {
-	common.Context ctx = 1;
-	string account_id = 2;
-	User user = 3;
-	string campaign_id = 4;
 }
 
 enum RealtimeType {
