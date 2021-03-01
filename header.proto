@@ -2483,8 +2483,14 @@ message WebhookDelivery {
 
 message RecentIndexDeliveryRequest {
 	common.Context ctx = 1;
-	string client_id = 2;
+	string webhook_id = 2;
 	int32 limit = 3;
+}
+
+message DeliveryRequest {
+	common.Context ctx = 1;
+	string webhook_id = 2;
+	int32 id = 3;
 }
 
 message WebhookPayload {
