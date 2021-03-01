@@ -291,10 +291,10 @@ service WidgetService {
 	rpc Update(header.WidgetSetting) returns (header.WidgetSetting);
 	rpc ReadUserSetting(Id) returns (header.WidgetUserSetting);
 
-	rpc ReadCampaign(Id) returns (header.Campaign);
-	rpc ListCampaigns(Id) returns (header.Campaigns);
-	rpc CreateCampaign(header.Campaign) returns (header.Campaign);
-	rpc UpdateCampaign(header.Campaign) returns (header.Campaign);
+	rpc ReadCampaign(Id) returns (header.Campaign); // remove
+	rpc ListCampaigns(Id) returns (header.Campaigns); // remove
+	rpc CreateCampaign(header.Campaign) returns (header.Campaign); // remove
+	rpc UpdateCampaign(header.Campaign) returns (header.Campaign); // remove
 	rpc DeleteCampaign(header.Campaign) returns (Empty);
 
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
@@ -304,9 +304,17 @@ service WidgetService {
 	rpc ReportCampaign(header.ReportCampaignRequest) returns (header.ReportCampaignResponse);
 	rpc ListConversions(header.ConversionRequest) returns (header.Conversions);
 	rpc ExportConversions(header.ConversionRequest) returns (header.ConversionsExported);
+
 	rpc UploadImage(header.UploadedImage) returns (header.UploadedImage);
 	rpc ListUploadedImage(Id) returns (header.UploadedImages);
 	rpc DeleteUploadedImage(header.UploadedImage) returns (Empty);
+
+	rpc ListWebPlugins(Id) returns (WebPlugins);
+	rpc UpdateWebPlugin(WebPlugin) returns (WebPlugin);
+	rpc CreateWebPlugin(WebPlugin) returns (WebPlugin);
+	rpc DeleteWebPlugin(Id) returns (Empty);
+
+	rpc ReportWebPlugin(header.ReportCampaignRequest) returns (header.ReportCampaignResponse);
 }
 
 // bizbot services

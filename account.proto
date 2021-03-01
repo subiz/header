@@ -135,6 +135,7 @@ message Account {
 	optional int64 last_token_requested = 32;  // todo: remove
 
 	optional LeadSetting lead_setting = 33;
+	repeated string web_domains = 34;
 }
 
 message LeadSetting {

@@ -6,16 +6,6 @@ option go_package = "github.com/subiz/header/conversation";
 
 import "common.proto";
 
-message EsMessage {
-	optional string id = 2;
-	optional string account_id = 3;
-	optional string conversation_id = 4;
-	repeated string member_ids = 5;
-	optional string text = 6;
-	repeated string attachments = 7;
-	repeated string fields = 8;
-}
-
 message CountByTagsRequest {
 	optional string account_id = 2;
 	optional string integration_id = 3;
@@ -56,26 +46,6 @@ message AvgResponseTimeResponse {
 
 message TotalConversationResponse {
 	optional int64 total_conversation = 2;
-}
-
-message AvgResolveTimeRequest {
-	optional string account_id = 2;
-	optional string integration_id = 3;
-	optional string priority = 4;
-	optional string agent_id = 5;
-	optional string tag_id = 6;
-	optional string group_id = 7;
-	optional int32 from_hour = 9;
-	optional int32 to_hour = 10;
-	optional string range = 11;
-	enum Range {
-		hour = 0;
-		day = 1;
-	}
-}
-
-message AvgResolveTimeResponse {
-	optional double avg_resolve_sec = 2;
 }
 
 message AvailibilityReportRequest {
