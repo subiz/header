@@ -337,6 +337,7 @@ service Sendback {
 	rpc UpdateWebhook(header.Webhook) returns (header.Webhook);
 	rpc UpdateWebhookSecret(Id) returns (header.Webhook);
 	rpc ListRecentIndexDeliveries(header.RecentIndexDeliveryRequest) returns (header.WebhookDeliveries);
+	rpc GetDelivery(Id) returns (header.WebhookDelivery);
 
 	rpc SendWebhookEvent(header.Event) returns (Empty);
 }
