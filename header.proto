@@ -2555,6 +2555,8 @@ message WebhookDelivery {
 	int64 begin_at = 13;
 	int64 end_at = 14;
 	repeated string errs = 15;
+	int32 request_payload_len = 16; // derived
+	int32 response_body_len = 17; // derived
 }
 
 message RecentIndexDeliveryRequest {
