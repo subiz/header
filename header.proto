@@ -2037,10 +2037,12 @@ message WebPlugin {
 	string account_id = 2;
 	string id = 3;
 
-	string site = 4; // domain
+	repeated string site = 4; // domain
 	string name = 5;
 	// chatbox, popup, header_bar, notification_box, call_button, map_button, ...
 	string type = 6;
+
+	string status = 7; // active, inactive
 
 	int64 created = 10;
 	string created_by = 11;
@@ -2051,25 +2053,21 @@ message WebPlugin {
 	bool enabled = 15;
 
 	int64 last_impression = 16;
-	int64 last_conversion = 17;
-	int64 last_clicked = 18;
 
 	repeated Trigger triggers = 19;
 	Frequently initiative_frequency = 20;
 	int64 impression_limit = 21;
-
 	repeated BotCondition conditions = 22;
 
-	repeated CampaignSchedulerCondition schedulers = 25;
+	int64 total_impression = 27;
+	int64 total_goal_reached = 28;
+	int64 total_lead = 29;
 
-	int64 num_impression_in_last_7_days = 27;
-	int64 num_conversion_in_last_7_days = 28;
-	int64 num_clicked_in_last_7_days = 29;
 	bool is_deleted = 30;
 
-	PopupWebPlugin popup = 40;
-	HeaderBarWebPlugin header_bar = 41;
-	HotlineButtonWebPlugin hotline_button = 42;
+	Popup popup = 40;
+	HeaderBar header_bar = 41;
+	// HotlineButtonWebPlugin hotline_button = 42;
 	Chatbox chatbox = 43;
 }
 
@@ -2141,7 +2139,7 @@ message WebPluginComponent {
 	ImageComponent image = 7;
 }
 
-message HeaderBarWebPlugin {
+message HeaderBar {
 	repeated WebPluginComponent components = 1;
 
 	string background = 3;
@@ -2151,7 +2149,7 @@ message HeaderBarWebPlugin {
 	string position = 7; // top_fixed, top_scroll, bottom
 }
 
-message PopupWebPlugin {
+message Popup {
 	string template_id = 2;
 	string page_type = 3;
 
@@ -2195,6 +2193,7 @@ message Campaign {
 	Frequently impression_frequency = 32;
 }
 
+// impression = view
 message Impression {
 	common.Context ctx = 1;
 	string account_id = 2;
