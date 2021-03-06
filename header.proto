@@ -1801,7 +1801,7 @@ message Chatbox {
 message WidgetUserSetting {
 	common.Context ctx = 1;
 	account.Account account = 3;
-	repeated account.Agent agents = 5; // TODO: add this
+	repeated account.Agent agents = 5;
 	string account_id = 2; // subiz use only
 	User user = 4;
 	string user_id = 7; // subiz use only
@@ -1810,7 +1810,7 @@ message WidgetUserSetting {
 	WidgetSetting account_setting = 9;
 	repeated Campaign campaigns = 13;
 	repeated Bot bots = 14; // remove action
-	repeated WebPlugins plugins = 15;
+	repeated WebPlugin plugins = 15;
 }
 
 message SocialLink {
