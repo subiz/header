@@ -1789,6 +1789,7 @@ message Chatbox {
 message WidgetUserSetting {
 	common.Context ctx = 1;
 	account.Account account = 3;
+	repeated account.Agent agents = 5; // TODO: add this
 	string account_id = 2; // subiz use only
 	User user = 4;
 	string user_id = 7; // subiz use only
@@ -2037,12 +2038,10 @@ message WebPlugin {
 	string account_id = 2;
 	string id = 3;
 
-	repeated string site = 4; // domain
+	repeated string domains = 4;
 	string name = 5;
 	// chatbox, popup, header_bar, notification_box, call_button, map_button, ...
 	string type = 6;
-
-	string status = 7; // active, inactive
 
 	int64 created = 10;
 	string created_by = 11;
