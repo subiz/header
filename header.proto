@@ -364,6 +364,18 @@ message PageMetrics {
 	repeated PageMetric page_metrics = 2;
 }
 
+message ConcurrentUser {
+	int64 unix_day = 2;
+	int64 sum = 3;
+	int64 num = 4;
+	int64 highest = 5;
+}
+
+message ReportCCU {
+	string account_id = 2;
+	repeated ConcurrentUser ccus = 3;
+}
+
 ///////////////////////
 message Events {
 	common.Context ctx = 1;
