@@ -508,22 +508,6 @@ message Automation {
 }
 
 message AutomationAction {
-	enum ActionType {
-		update_user_attribute = 0; // type user
-		block_user = 1; // prop user
-		send_email = 5; // prop email
-		add_user_note = 6; // note
-		create_conversation = 7; // events, integration_id
-		send_message = 8; // event
-		assign_agent_to_conversation = 9; // prop agent_ids
-		convert_conversation_to_ticket = 10; // no prop
-		tag_conversation = 11; // tag_ids
-		send_webhook = 12; // not yet defined
-		open_widget_screen = 14; // not yet defined
-		add_user_to_segmentation = 15; // segmentation_id
-		update_conversation_state = 18; // prop conversation_state
-		send_facebook_direct_message = 19; // prop event and facebook_page_id
-	}
 	string type = 2;
 
 	User user = 4;
@@ -1811,6 +1795,9 @@ message WidgetUserSetting {
 	repeated Campaign campaigns = 13;
 	repeated Bot bots = 14; // remove action
 	repeated WebPlugin plugins = 15;
+
+	bool is_online = 20;
+	bool is_in_business_hour = 21;
 }
 
 message SocialLink {
@@ -2052,7 +2039,7 @@ message WebPlugin {
 
 	repeated string domains = 4;
 	string name = 5;
-	// chatbox, popup, header_bar, notification_box, call_button, map_button, ...
+	// chatbox, popup, fullscreen, bar, notification_box, call_button, map_button, ...
 	string type = 6;
 
 	int64 created = 10;
@@ -2064,6 +2051,7 @@ message WebPlugin {
 	bool enabled = 15;
 
 	int64 last_impression = 16;
+	int64 last_conversion = 17;
 
 	repeated Trigger triggers = 19;
 	Frequently initiative_frequency = 20;
@@ -2076,10 +2064,11 @@ message WebPlugin {
 
 	bool is_deleted = 30;
 
-	Popup popup = 40;
-	HeaderBar header_bar = 41;
-	// HotlineButtonWebPlugin hotline_button = 42;
-	Chatbox chatbox = 43;
+	Chatbox chatbox = 40;
+	Popup popup = 41;
+	Popup panel = 42;
+	Popup fullscreen = 44;
+	Popup bar = 45;
 }
 
 message Hotline {
@@ -2109,20 +2098,40 @@ message FormComponent {
 }
 
 message TextComponent {
-	string html = 3;
 	string quill_delta = 4;
+	string text_align = 5;
+}
+
+message LineComponent {
+	string width = 2;
+	string stroke_width = 3;
+	string background = 4;
 }
 
 message ImageComponent {
-	bool enabled = 1;
 	string url = 2;
+	string position = 3; // left, left-padding, right, right-padding, top, top-padding, bottom, bottom-padding, background
+
+	string fit = 4; // cover, contain
+	string width = 5;
+	string height = 6;
+	string left = 7;
+	string right = 8;
+	string top = 9;
+	string bottom = 10;
+
+	string opacity = 11;
+
+	string rotate = 12;
+
+	// filter
+	string blur = 13;
+	float grayscale = 14;
+
+	string overlay = 15; // background
+	string overlay_opacity = 16;
 
 	//   string width = 4; // alway full
-	string max_height = 5;
-	string padding_left = 7;
-	string padding_right = 8;
-	string padding_top = 9;
-	string padding_bottom = 10;
 }
 
 message CountdownComponent {
@@ -2141,16 +2150,43 @@ message CountdownComponent {
 	string timezone = 12; // +07:00 or empty => user timeone
 }
 
-message WebPluginComponent {
-	string type = 2; // text, count_down, form, button
-	TextComponent text = 3;
-	CountdownComponent count_down = 4;
-	FormComponent form = 5;
-	ButtonComponent button = 6;
-	ImageComponent image = 7;
+message WebPluginFormField {
+	string key = 1;
+	string label = 2;
+	bool is_required = 3;
+
+	// so front end dont have to download attribute definitions
+	string type = 5;
+
+	repeated string list = 6; // available option for field
+
+	string subtype = 8; // phone, email, rating
+	bool multiple_choice = 9;
+	bool multiline_text = 10;
+	string placeholder = 11;
+
+	bool is_user_attribute = 12;
+
+	string value = 13;
 }
 
-message HeaderBar {
+message WebPluginForm {
+	// general stype
+	repeated WebPluginFormField fields = 1;
+}
+
+message WebPluginComponent {
+	string type = 2; // text, count_down, form, button
+
+	TextComponent text = 3;
+	repeated ButtonComponent buttons = 4;
+	CountdownComponent count_down = 5;
+	WebPluginForm form = 6;
+	LinkComponent link = 7;
+	ImageComponent image = 8;
+}
+
+message PluginBar {
 	repeated WebPluginComponent components = 1;
 
 	string background = 3;
@@ -2161,10 +2197,34 @@ message HeaderBar {
 }
 
 message Popup {
-	string template_id = 2;
-	string page_type = 3;
+	string mobile_position = 2; // middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
+	string desktop_position = 3;
 
-	repeated CampaignPage pages = 17;
+	string open_animation = 4;
+	repeated PopupPage pages = 17;
+}
+
+message LinkComponent {
+	string quill_delta = 2;
+	string url = 3;
+}
+
+message PopupPage {
+	string template = 2;
+
+	string title_delta = 4; // html
+	string subtitle_delta = 9;
+	string description_delta = 5;
+
+	repeated WebPluginComponent components = 3;
+
+	string close_animation = 20;
+	CampaignAppearance desktop_appearance = 24;
+	CampaignAppearance mobile_appearance = 25;
+
+	string background = 14; // color or gradient
+	string background_image = 15;
+
 }
 
 // should rename to popup
