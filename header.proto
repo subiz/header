@@ -2069,19 +2069,20 @@ message WebPlugin {
 	Popup panel = 42;
 	Popup fullscreen = 44;
 	Popup bar = 45;
+	HotlinePlugin hotline = 46;
+	// notification
 }
 
-message Hotline {
-	string number = 2;
-	string name = 3;
-	string image_url = 4;
-}
-
-message HotlineButtonWebPlugin {
+message HotlinePlugin {
 	string position = 2; // top-left, top-right, bottom-left, bottom-right
 
 	string animation = 3;
 
+	message Hotline {
+		string number = 2;
+		string name = 3;
+		string image_url = 4;
+	}
 	repeated Hotline hotlines  = 4;
 
 	string recall_title = 5;
@@ -2091,51 +2092,18 @@ message HotlineButtonWebPlugin {
 	string color = 8;
 }
 
-message FormComponent {
-	repeated WidgetField fields = 1;
-	string title = 5;
-	bool enabled = 6;
-}
-
 message TextComponent {
-	string quill_delta = 4;
-	string text_align = 5;
+	string html = 2; // do not edit, generated from quill_delta
+	string quill_delta = 3;
 }
 
-message LineComponent {
-	string width = 2;
-	string stroke_width = 3;
-	string background = 4;
-}
+message LineComponent {}
 
 message ImageComponent {
 	string url = 2;
-	string position = 3; // left, left-padding, right, right-padding, top, top-padding, bottom, bottom-padding, background
-
-	string fit = 4; // cover, contain
-	string width = 5;
-	string height = 6;
-	string left = 7;
-	string right = 8;
-	string top = 9;
-	string bottom = 10;
-
-	string opacity = 11;
-
-	string rotate = 12;
-
-	// filter
-	string blur = 13;
-	float grayscale = 14;
-
-	string overlay = 15; // background
-	string overlay_opacity = 16;
-
-	//   string width = 4; // alway full
 }
 
 message CountdownComponent {
-	bool enabled = 2;
 	string expire_time_type = 3; // fixed_time, visit_time, repeat_daily, repeat_weekly
 	int64 fixed_time = 4;
 	int64 visit_time = 5; // minute (example 60)
@@ -2143,8 +2111,7 @@ message CountdownComponent {
 	int64 repeate_weekly_min = 7;
 	string repeate_weekly_weekday = 8; // monday, wednesday
 
-	string text_color = 9;
-	string background = 10;
+	string skin = 10;
 
 	string template =  11; // style: 1, 2, 3
 	string timezone = 12; // +07:00 or empty => user timeone
@@ -2156,16 +2123,19 @@ message WebPluginFormField {
 	bool is_required = 3;
 
 	// so front end dont have to download attribute definitions
+	// text, phone, email, rating, multiple-choice, single-choice, dropdown, checkbox
 	string type = 5;
 
-	repeated string list = 6; // available option for field
+	string validate = 8; // phone, email, rating
 
-	string subtype = 8; // phone, email, rating
-	bool multiple_choice = 9;
-	bool multiline_text = 10;
+	bool randomize_option = 9;
+	message WebPluginFormFieldOption {
+		string label = 2;
+		string value = 3;
+	}
+	repeated WebPluginFormFieldOption options = 10;
+
 	string placeholder = 11;
-
-	bool is_user_attribute = 12;
 
 	string value = 13;
 }
@@ -2176,24 +2146,18 @@ message WebPluginForm {
 }
 
 message WebPluginComponent {
-	string type = 2; // text, count_down, form, button
+	string type = 2; // text, image, count_down, form, buttons, line
 
-	TextComponent text = 3;
-	repeated ButtonComponent buttons = 4;
-	CountdownComponent count_down = 5;
-	WebPluginForm form = 6;
-	LinkComponent link = 7;
-	ImageComponent image = 8;
-}
+	Style style = 3;
+	Style mobile_style = 4;
 
-message PluginBar {
-	repeated WebPluginComponent components = 1;
-
-	string background = 3;
-	string min_height = 4;
-	string font_size = 5;
-	int64 opacity = 6;
-	string position = 7; // top_fixed, top_scroll, bottom
+	TextComponent text = 5;
+	repeated ButtonComponent buttons = 6;
+	CountdownComponent count_down = 7;
+	WebPluginForm form = 8;
+	LinkComponent link = 9;
+	ImageComponent image = 10;
+	LineComponent line = 11;
 }
 
 message Popup {
@@ -2201,7 +2165,12 @@ message Popup {
 	string desktop_position = 3;
 
 	string open_animation = 4;
-	repeated PopupPage pages = 17;
+	string close_animation = 5;
+
+	bool overlay = 8;
+
+	string theme = 9; // plain, light, paper, bold
+	repeated PopupPage pages = 10;
 }
 
 message LinkComponent {
@@ -2209,22 +2178,68 @@ message LinkComponent {
 	string url = 3;
 }
 
+message Style {
+	Style hover = 1;
+
+	string border_radius = 2;
+
+	string font_family = 3; // default font family
+	string color = 4;
+	string background = 5; // color or gradient
+
+	string text_align = 6;
+
+	string width = 10;
+	string max_width = 11;
+
+	string height = 12;
+	string max_height = 13;
+
+	string padding_left = 14;
+	string padding_right = 15;
+	string padding_top = 16;
+	string padding_bottom = 17;
+
+	string margin_left = 18;
+	string margin_right = 19;
+	string margin_top = 20;
+	string margin_bottom = 21;
+
+	string position = 25 ; //absolute, relative
+
+	string object_fit = 26; // cover, contain
+
+	string left = 30;
+	string right = 31;
+	string top = 32;
+	string bottom = 33;
+
+	string opacity = 34;
+
+	string rotate = 35;
+
+	// filter
+	string blur = 46; //px
+	string grayscale = 37; // %
+
+	string overlay = 38; // background
+	string overlay_opacity = 39;
+}
+
 message PopupPage {
-	string template = 2;
+	string desktop_layout = 2; // side-by-side , xya
+	string mobile_layout = 3; // side-by-side , xya
 
-	string title_delta = 4; // html
-	string subtitle_delta = 9;
-	string description_delta = 5;
+	repeated WebPluginComponent components = 5;
+	Style style = 6;
+	Style mobile_style = 7;
 
-	repeated WebPluginComponent components = 3;
+	Style primary_button = 10;
+	Style secondary_button = 11;
 
-	string close_animation = 20;
-	CampaignAppearance desktop_appearance = 24;
-	CampaignAppearance mobile_appearance = 25;
-
-	string background = 14; // color or gradient
-	string background_image = 15;
-
+	string primary_color = 12; // title
+	string text_color = 13; // description
+	string font_family = 14;
 }
 
 // should rename to popup
@@ -2346,9 +2361,6 @@ message CampaignPage {
   ButtonComponent primary_button = 7;
 	ButtonComponent secondary_button = 8;
   ButtonComponent background_click = 10;
-	CountdownComponent countdown = 11;
-
-	CampaignVideo video = 12;
 
 	string animation = 20;
 	CampaignAppearance desktop_appearance = 24;
@@ -2419,7 +2431,6 @@ message ButtonComponent {
 	repeated CampaignButtonAction actions = 3;
 	string text = 6;
 
-	// style
 	string color = 10;
 	string background = 11;
 	string font_family = 30;
@@ -2427,18 +2438,8 @@ message ButtonComponent {
 	string font_style = 32;
 	string font_weight = 33;
 	string text_transform = 34;
-}
 
-message CampaignVideo {
-	bool enabled = 1;
-	string url = 2;
-
-	//   string width = 4; // alway full
-	string max_height = 5;
-	string padding_left = 7;
-	string padding_right = 8;
-	string padding_top = 9;
-	string padding_bottom = 10;
+	string type = 5; // primary, secondary
 }
 
 message ImpressionCount {
