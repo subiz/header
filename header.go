@@ -119,7 +119,7 @@ func makeScopeMap() map[string]string {
 	m["export_user"] = "user:e" // export
 
 	m["account_setting"] = m["agent"] + " account:w agent:w agent_group:w rule:w integration:w other_message_template:rw tag:w widget:w attribute:w facebook:w bot:w conversation_setting:w web_plugin:wr webhook:wr"
-	m["account_manage"] = "account:w agent_group:wr agent:w subscription:rw payment_method:rw"
+	m["account_manage"] = m["account_setting"] + "account:w agent_group:wr agent:w subscription:rw payment_method:rw"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
 	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:w"
 	m["all"] = m["subiz"]
