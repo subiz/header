@@ -349,3 +349,11 @@ service Sendback {
 
 	rpc SendWebhookEvent(header.Event) returns (Empty);
 }
+
+// notibox services
+service Notibox {
+	rpc Send(header.Notification) returns (Empty);
+	rpc MarkRead(Id) returns (Empty);
+	rpc ListRecentCompactedNotis(header.RecentCompactedNotiRequest) returns (header.CompactedNotis);
+	rpc GetCompactedNoti(header.CompactedNotiRequest) returns (header.CompactedNoti);
+}
