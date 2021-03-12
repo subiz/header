@@ -53,6 +53,7 @@ message Notification {
 	bool is_read = 9;
 
 	bool is_instant = 12; // just display and disappear, no persit
+	string compacting_key = 13;
 }
 
 message CompactedNoti {
