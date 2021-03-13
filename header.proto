@@ -2093,9 +2093,6 @@ message WebPlugin {
 
 	Chatbox chatbox = 40;
 	Popup popup = 41;
-	Popup panel = 42;
-	Popup fullscreen = 44;
-	Popup bar = 45;
 	HotlinePlugin hotline = 46;
 	// notification
 }
@@ -2146,8 +2143,9 @@ message CountdownComponent {
 
 message WebPluginFormField {
 	string key = 1;
-	string label = 2;
-	bool is_required = 3;
+	string label_quill_delta = 2;
+	string label = 3;
+	bool is_required = 4;
 
 	// so front end dont have to download attribute definitions
 	// text, phone, email, rating, multiple-choice, single-choice, dropdown, checkbox
@@ -2188,21 +2186,36 @@ message WebPluginComponent {
 }
 
 message Popup {
-	string mobile_position = 2; // middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
-	string desktop_position = 3;
+	// string position = 2; // fullscreen, center, middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
+	// string mobile_position = 3;
 
 	string open_animation = 4;
 	string close_animation = 5;
 
-	bool overlay = 8;
+	bool show_close_button = 6;
+	bool overlay = 7;
 
-	string theme = 9; // plain, light, paper, bold
-	repeated PopupPage pages = 10;
+	string primary_color = 8; // title
+	string text_color = 9; // description
+	string font_family = 10;
+	string font_size = 11;
+	string background = 12;
+
+	Style primary_button = 14;
+	Style secondary_button = 15;
+
+	string theme = 17; // plain, light, paper, bold
+
+	Style container = 18;
+	Style mobile_container = 19;
+
+	repeated PopupPage pages = 20;
 }
 
 message LinkComponent {
 	string quill_delta = 2;
-	string url = 3;
+	string text = 3;
+	string url = 4;
 }
 
 message Style {
@@ -2251,22 +2264,33 @@ message Style {
 
 	string overlay = 38; // background
 	string overlay_opacity = 39;
+
+	string flex = 40;
+	string flex_direction = 41;
+	string flex_shrink = 42;
+	string align_items = 43;
+	string justify_content = 44;
+
+	string transform = 48;
+	string z_index = 60;
+
+	string border_bottom = 61;
+	string border_left = 62;
+	string border_top = 63;
+	string border_right = 64;
+	string border = 65;
+
+	string box_shadow = 66;
+	string overflow = 67;
 }
 
 message PopupPage {
-	string desktop_layout = 2; // side-by-side , xya
+	string layout = 2; // side-by-side , row
 	string mobile_layout = 3; // side-by-side , xya
 
-	repeated WebPluginComponent components = 5;
-	Style style = 6;
-	Style mobile_style = 7;
-
-	Style primary_button = 10;
-	Style secondary_button = 11;
-
-	string primary_color = 12; // title
-	string text_color = 13; // description
-	string font_family = 14;
+	repeated WebPluginComponent components = 10;
+	Style style = 11; // body
+	Style mobile_style = 12;
 }
 
 // should rename to popup
