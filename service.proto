@@ -354,6 +354,6 @@ service Sendback {
 service Notibox {
 	rpc Send(header.Notification) returns (Empty);
 	rpc MarkRead(Id) returns (Empty);
-	rpc ListRecentCompactedNotis(header.RecentCompactedNotiRequest) returns (header.CompactedNotis);
+	rpc ListRecentCompactedNoties(header.RecentCompactedNotiRequest) returns (header.CompactedNoties);
 	rpc GetCompactedNoti(header.CompactedNotiRequest) returns (header.CompactedNoti);
 }

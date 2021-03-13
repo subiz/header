@@ -59,19 +59,17 @@ message Notification {
 message CompactedNoti {
 	common.Context ctx = 1;
 	string account_id = 2;
-	int64 unix_day = 3;
-	string notification_key = 4;
+	string compacting_key = 4;
 	int64 created = 5;
-	repeated int32 notification_ids = 6;
 	repeated Notification notifications = 7;
 }
 
 message CompactedNotiRequest {
 	common.Context ctx = 1;
-	int32 id = 2;
+	string compacting_key = 3;
 }
 
-message CompactedNotis {
+message CompactedNoties {
 	common.Context ctx = 1;
 	repeated CompactedNoti notifications = 2;
 	bool is_read = 8;
@@ -451,7 +449,8 @@ message Event {
 		BotTerminated bot_terminated = 43;
 		Webhook webhook = 44;
 		UserAlias user_alias = 45;
-	  Conversion conversion = 47;
+		Conversion conversion = 47;
+		CompactedNoties compacted_noties = 51;
 	}
 	Data data = 20;
 }
