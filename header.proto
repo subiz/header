@@ -73,6 +73,7 @@ message CompactedNoties {
 	common.Context ctx = 1;
 	repeated CompactedNoti notifications = 2;
 	bool is_read = 8;
+	int64 read_created = 9;
 }
 
 message RecentCompactedNotiRequest {
