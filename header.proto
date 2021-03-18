@@ -1768,6 +1768,7 @@ message Chatbox {
 	string secondary_color = 20;
 	string background = 21;
 	string text_color = 22;
+
 	WidgetForm offline_form = 23;
 	WidgetForm prechat_form = 24;
 
@@ -1786,8 +1787,6 @@ message Chatbox {
 			left = 0;
 			right = 1;
 		}
-		bool default_style = 8;
-		string background_border_radius = 9;
 		bool hidden = 10;
 	}
 	Button desktop_button = 25;
@@ -2066,7 +2065,7 @@ message WebPlugin {
 
 	repeated string domains = 4;
 	string name = 5;
-	// chatbox, popup, fullscreen, bar, notification_box, call_button, map_button, ...
+	// chatbox, popup, contact, notification
 	string type = 6;
 
 	int64 created = 10;
@@ -2093,15 +2092,57 @@ message WebPlugin {
 
 	Chatbox chatbox = 40;
 	Popup popup = 41;
-	HotlinePlugin hotline = 46;
-	// notification
+	ContactComponent contact = 46;
+	NotificationComponent notification = 47;
 }
 
-message HotlinePlugin {
-	string position = 2; // top-left, top-right, bottom-left, bottom-right
+message TextComponent {
+	string html = 2; // do not edit, generated from quill_delta
+	string quill_delta = 3;
+}
 
-	string animation = 3;
+message LineComponent {}
 
+message ImageComponent {
+	string url = 2;
+}
+
+message NotificationComponent {
+	string skin = 2; // classic, flat, moderm
+	string image_url = 3;
+	string title = 4;
+	string message = 5;
+	string url = 6;
+
+	string time_to_display = 8; // sec
+}
+
+message ContactComponent {
+	message ContactButton {
+		string type = 2;
+		ZaloContactComponent zalo = 4;
+		FacebookContactComponent facebook = 5;
+		CallContactComponent call = 6;
+		ChatContactComponent chat = 7;
+		MapContactComponent map = 8;
+	}
+
+	string theme = 2; // flat, material, long-shadow, fluent, mac
+	string layout = 3; // standard, footer, mini
+	string position = 4;
+	string size = 5; // sm, md, lg
+	repeated ContactButton buttons = 6;
+}
+
+message FacebookContactComponent {
+	string facebook_url = 2;
+}
+
+message ZaloContactComponent {
+	string url = 2;
+}
+
+message CallContactComponent {
 	message Hotline {
 		string number = 2;
 		string name = 3;
@@ -2116,28 +2157,29 @@ message HotlinePlugin {
 	string color = 8;
 }
 
-message TextComponent {
-	string html = 2; // do not edit, generated from quill_delta
-	string quill_delta = 3;
-}
+message ChatContactComponent {}
 
-message LineComponent {}
-
-message ImageComponent {
-	string url = 2;
+message MapContactComponent {
+	string title = 2;
+	message Location {
+		string name = 2;
+		float latitude = 3;             // filled
+		float longitude = 4;            // filled
+		string phone_number = 5;
+	}
+	repeated Location locations = 4;
 }
 
 message CountdownComponent {
 	string expire_time_type = 3; // fixed_time, visit_time, repeat_daily, repeat_weekly
 	int64 fixed_time = 4;
 	int64 visit_time = 5; // minute (example 60)
-	int64 repeat_daily = 6;
-	int64 repeate_weekly_min = 7;
-	string repeate_weekly_weekday = 8; // monday, wednesday
+	int64 repeat_daily = 6; // unix min
+	int64 repeat_weekly_min = 7;
+	string repeat_weekly_weekday = 8; // monday, wednesday
 
-	string skin = 10;
+	string skin = 10; // 1, 2, 3
 
-	string template =  11; // style: 1, 2, 3
 	string timezone = 12; // +07:00 or empty => user timeone
 }
 
@@ -2178,7 +2220,7 @@ message WebPluginComponent {
 
 	TextComponent text = 5;
 	repeated ButtonComponent buttons = 6;
-	CountdownComponent count_down = 7;
+	CountdownComponent countdown = 7;
 	WebPluginForm form = 8;
 	LinkComponent link = 9;
 	ImageComponent image = 10;
