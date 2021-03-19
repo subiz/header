@@ -1793,7 +1793,7 @@ message Chatbox {
 	Button mobile_button = 26;
 
 	message Greeting {
-		I18nText message = 2;
+		string message = 2;
 		bool enabled = 4;
 		string agent_id = 5; // specific
 		repeated string random_agents = 6;

@@ -172,6 +172,12 @@ message Button {
 	optional string type = 2;
 	optional string title = 3;
 	optional string payload = 4;
+
+	optional string url = 5;
+	optional string webview_height_ratio = 6; // <compact|tall|full>
+	optional bool messenger_extensions = 7; // <true|false>
+	optional string fallback_url = 8; //<URL_TO_FALLBACK_TO>"
+	optional string webview_share_button = 9;
 }
 
 message FbRead {
