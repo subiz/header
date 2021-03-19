@@ -26,6 +26,8 @@ message Id {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
+
+	string query = 4;
 }
 
 message Ids {
