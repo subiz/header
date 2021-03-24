@@ -2214,14 +2214,24 @@ message WebPluginForm {
 	repeated WebPluginFormField fields = 1;
 }
 
+message ButtonsComponent {
+	bool primary_enabled = 2;
+	repeated CampaignButtonAction primary_actions = 3;
+	string primary_text = 4;
+
+	bool secondary_enabled = 8;
+	repeated CampaignButtonAction secondary_actions = 9;
+	string secondary_text = 10;
+}
+
 message WebPluginComponent {
-	string type = 2; // text, image, count_down, form, buttons, line
+	string type = 2; // text, image, countdown, form, buttons, line
 
 	Style style = 3;
 	Style mobile_style = 4;
 
 	TextComponent text = 5;
-	repeated ButtonComponent buttons = 6;
+	ButtonsComponent buttons = 6;
 	CountdownComponent countdown = 7;
 	WebPluginForm form = 8;
 	LinkComponent link = 9;
@@ -2230,11 +2240,10 @@ message WebPluginComponent {
 }
 
 message Popup {
-	// string position = 2; // fullscreen, center, middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
-	// string mobile_position = 3;
+	string position = 2; // top       fullscreen, center, middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
+	string type = 3; // bar, popup, ...
 
-	string open_animation = 4;
-	string close_animation = 5;
+	bool animation = 5;
 
 	bool show_close_button = 6;
 	bool overlay = 7;
