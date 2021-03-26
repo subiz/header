@@ -2180,7 +2180,8 @@ message CountdownComponent {
 	int64 repeat_weekly_min = 7;
 	string repeat_weekly_weekday = 8; // monday, wednesday
 
-	string skin = 10; // 1, 2, 3
+	string skin = 10; // flip, electric
+	string size = 11; // sm md lg
 
 	string timezone = 12; // +07:00 or empty => user timeone
 }
@@ -2256,6 +2257,7 @@ message Popup {
 
 	Style primary_button = 14;
 	Style secondary_button = 15;
+	Style countdown = 16;
 
 	string theme = 17; // plain, light, paper, bold
 
@@ -2281,6 +2283,10 @@ message Style {
 	string background = 5; // color or gradient
 
 	string text_align = 6;
+	string text_transform = 7;
+
+	string font_style = 8;
+	string font_weight = 9;
 
 	string width = 10;
 	string max_width = 11;
