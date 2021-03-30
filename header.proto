@@ -2108,6 +2108,8 @@ message LineComponent {}
 
 message ImageComponent {
 	string url = 2;
+	bool out_of_the_box = 3;
+	bool sticky = 4; // for background image
 }
 
 message NotificationComponent {
@@ -2243,7 +2245,7 @@ message WebPluginComponent {
 
 message Popup {
 	string position = 2; // top       fullscreen, center, middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
-	string type = 3; // bar, popup, ...
+	string type = 3; // bar, modal
 
 	bool animation = 5;
 
@@ -2255,15 +2257,14 @@ message Popup {
 	string font_family = 10;
 	string font_size = 11;
 	string background = 12;
+	string spacer = 13;
 
-	Style primary_button = 14;
+ 	Style primary_button = 14;
 	Style secondary_button = 15;
 	Style countdown = 16;
 
 	string theme = 17; // plain, light, paper, bold
-
-	Style container = 18;
-	Style mobile_container = 19;
+	string container_background = 18;
 
 	repeated PopupPage pages = 20;
 }
@@ -2345,9 +2346,6 @@ message Style {
 }
 
 message PopupPage {
-	string layout = 2; // side-by-side , row
-	string mobile_layout = 3; // side-by-side , xya
-
 	repeated WebPluginComponent components = 10;
 	Style style = 11; // body
 	Style mobile_style = 12;
