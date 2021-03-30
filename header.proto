@@ -1498,6 +1498,21 @@ message UserAttributeCondition {
 	string value = 4;
 }
 
+message Sites {
+	common.Context ctx = 1;
+	string account_id = 2; // web, messenger, zalo
+	repeated Site sites = 3;
+}
+
+message Site {
+	common.Context ctx = 1;
+	string account_id = 2; // web, messenger, zalo
+	string id = 3; // web:abc.com, web:xyz.com, facebook:423084234234, zalo:3903002404
+
+	bool user_verified = 4;
+	string image_url = 5;
+}
+
 message Bot {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -1534,6 +1549,8 @@ message Bot {
 	string template_data = 24;
 	int64 count_lead_in_last_7_days = 25;
 	int64 count_conv_in_last_7_days = 26;
+
+	repeated Site sites = 27;
 }
 
 message Bots {
@@ -2066,7 +2083,8 @@ message WebPlugin {
 	string account_id = 2;
 	string id = 3;
 
-	repeated string domains = 4;
+	repeated Site sites = 4;
+
 	string name = 5;
 	// chatbox, popup, contact, notification
 	string type = 6;
@@ -2097,6 +2115,7 @@ message WebPlugin {
 	Popup popup = 41;
 	ContactComponent contact = 46;
 	NotificationComponent notification = 47;
+
 }
 
 message TextComponent {
