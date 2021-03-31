@@ -2423,6 +2423,7 @@ message Impression {
 	string impression_token = 11;  // for request submit only
 
 	string web_plugin_id = 12;
+	string session_id = 13;
 }
 
 message ConversionRequest {
@@ -2463,6 +2464,7 @@ message Conversion {
 	string web_plugin_id = 16;
 
 	User user = 17; // for webhook only
+	string session_id = 18;
 }
 
 message UserCampaignStatus {
