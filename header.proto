@@ -1511,6 +1511,12 @@ message Site {
 
 	bool user_verified = 4;
 	string image_url = 5;
+
+	int64 created = 6;
+	string creator = 7;
+	string creator_type = 8; // agent, user
+
+	string title = 9;
 }
 
 message Bot {
@@ -1550,7 +1556,7 @@ message Bot {
 	int64 count_lead_in_last_7_days = 25;
 	int64 count_conv_in_last_7_days = 26;
 
-	repeated Site sites = 27;
+	repeated string sites = 27;
 }
 
 message Bots {
@@ -2083,7 +2089,7 @@ message WebPlugin {
 	string account_id = 2;
 	string id = 3;
 
-	repeated Site sites = 4;
+	repeated string sites = 4;
 
 	string name = 5;
 	// chatbox, popup, contact, notification
