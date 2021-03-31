@@ -2607,6 +2607,34 @@ message ReportCampaignResponse {
 	repeated int32 conversions_count = 4;
 }
 
+message WebPluginMetric {
+	int64 unix_day = 2; // default dim
+	string dimid = 3; // optional
+	int64 impression = 6;
+	int64 conversion = 7;
+}
+
+message ReportWebPluginRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string web_plugin_id = 3;
+	int64 unix_day_from = 6;
+	int64 unix_day_to = 7;
+	string dimname = 8; // blank dimname is all
+	enum Dimname { 
+		hour = 0;
+		domain = 1;
+		device = 2;
+		location = 3;
+	}
+}
+
+message ReportWebPluginResponse {
+	common.Context ctx = 1;
+	string dimname = 2;
+	repeated WebPluginMetric metrics = 3;
+}
+
 message ConversionsExported {
 	string url = 6;
 }

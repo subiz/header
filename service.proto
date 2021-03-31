@@ -314,7 +314,7 @@ service WidgetService {
 	rpc CreateWebPlugin(WebPlugin) returns (WebPlugin);
 	rpc DeleteWebPlugin(Id) returns (Empty);
 
-	rpc ReportWebPlugin(header.ReportCampaignRequest) returns (header.ReportCampaignResponse);
+	rpc ReportWebPlugin(header.ReportWebPluginRequest) returns (header.ReportWebPluginResponse);
 }
 
 // bizbot services
