@@ -2641,6 +2641,16 @@ message ReportWebPluginResponse {
 	repeated WebPluginMetric metrics = 3;
 }
 
+message WebPluginConversionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string web_plugin_id = 3;
+	int64 unix_day_from = 5;
+	int64 unix_day_to = 6;
+	string anchor = 8;
+	int32 limit = 9;
+}
+
 message ConversionsExported {
 	string url = 6;
 }
