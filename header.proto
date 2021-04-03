@@ -1504,6 +1504,51 @@ message Sites {
 	repeated Site sites = 3;
 }
 
+message SiteCheckDataPoint {
+	string account_id = 2;
+	string check_id = 3;
+
+	string location = 4;
+
+	int64 status_code = 5;
+	int64 total_duration = 6; // ms
+	int64 connect_time = 7;
+
+	int64 status = 10; // success, fail
+	string failed_code = 11;
+	int64 created = 12;
+
+	string server_ip = 13;
+}
+
+message SiteCheck {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string url = 4;
+	string state = 5;// active, paused
+
+	string status = 6; // current status: success, failed
+
+	string http_request_method = 7;
+	string http_request_body = 8;
+	repeated KV http_headers = 9;
+	int64 check_interval = 10; // sec
+
+	string must_contain = 12;
+
+	int64 created = 15;
+	string created_by = 16;
+
+	int64 updated = 17;
+	string updated_by = 18;
+
+	int64 apdex_t = 19; // ms
+
+	int64 timeout = 20; // max 60000 (60s), default 30000
+}
+
 message Site {
 	common.Context ctx = 1;
 	string account_id = 2; // web, messenger, zalo
@@ -1512,9 +1557,8 @@ message Site {
 	bool user_verified = 4;
 	string image_url = 5;
 
+	bool agent_confirmed = 6;
 	int64 created = 6;
-	string creator = 7;
-	string creator_type = 8; // agent, user
 
 	string title = 9;
 }
@@ -2627,7 +2671,7 @@ message ReportWebPluginRequest {
 	int64 unix_day_from = 6;
 	int64 unix_day_to = 7;
 	string dimname = 8; // blank dimname is all
-	enum Dimname { 
+	enum Dimname {
 		hour = 0;
 		domain = 1;
 		device = 2;
