@@ -2653,6 +2653,7 @@ message WebPluginConversionRequest {
 
 message ConversionsExported {
 	string url = 6;
+	string anchor = 7;
 }
 
 message SearchLocationsRequest {
