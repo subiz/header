@@ -454,7 +454,7 @@ message Event {
 		UserAlias user_alias = 45;
 		Conversion conversion = 47;
 		CompactedNoties compacted_noties = 51;
-		string domain = 52;
+		Site site = 52;
 	}
 	Data data = 20;
 }
@@ -3333,7 +3333,9 @@ enum RealtimeType {
 
 	bot_terminated = 98;
 	user_alias_created = 99;
-	domain_created = 100;
+
+	site_user_verified = 100;
+	site_updated = 101;
 }
 
 enum E {
