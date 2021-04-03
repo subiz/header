@@ -136,6 +136,19 @@ message Account {
 
 	optional LeadSetting lead_setting = 33;
 	repeated string web_domains = 34;
+
+	optional Feature feature = 35;
+	optional Feature force_feature = 35; // only edit by subiz
+}
+
+message Feature {
+	optional bool web_ping = 3;
+	optional bool web_audit = 4;
+	optional bool facebook = 5;
+	optional bool zalo = 6;
+	optional bool email = 7;
+	optional bool web_plugin = 8;
+	optional bool bot = 9;
 }
 
 message LeadSetting {
