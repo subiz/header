@@ -138,7 +138,7 @@ message Account {
 	repeated string web_domains = 34;
 
 	optional Feature feature = 35;
-	optional Feature force_feature = 35; // only edit by subiz
+	optional Feature force_feature = 36; // only edit by subiz
 }
 
 message Feature {
