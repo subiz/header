@@ -3384,13 +3384,57 @@ message SessionCookie {
 
 message Webpage {
 	common.Context ctx = 1;
-	string account_id = 12;
-	string id = 2;
-	string url = 3;
-	string avatar_url =  27; // favicon for the domain
+	string account_id = 2;
+	string id = 3;
+	string url = 4;
+	int64 modified = 5; // update when url|method|headers|payload updated
+	int64 created = 6;
+	string creator = 7;
+	bool is_disabled = 8;
+	int64 last_check_at = 9;
+	string method = 10;
+	repeated KV headers = 11;
+	string payload = 12;
 }
 
 message Webpages {
 	common.Context ctx = 1;
 	repeated Webpage webpages = 2;
+}
+
+message WebpageCheck {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string webpage_id = 3;
+	int32 id = 4;
+	string url = 5;
+	string method = 6;
+	repeated KV request_headers = 7;
+	string request_payload = 8;
+	repeated KV response_headers = 9;
+	string response_body = 10;
+	string status = 11;
+	int32 status_code = 12;
+	int64 begin_at = 13;
+	int64 end_at = 14;
+	repeated string errs = 15;
+	int32 request_payload_len = 16; // derived
+	int32 response_body_len = 17; // derived
+}
+
+message RecentWebpageCheckRequest {
+	common.Context ctx = 1;
+	string webpage_id = 2;
+	int32 limit = 3;
+}
+
+message WebpageChecks {
+	common.Context ctx = 1;
+	repeated WebpageCheck checks = 2;
+}
+
+message WebpageCheckRequest {
+	common.Context ctx = 1;
+	string webpage_id = 2;
+	int32 id = 3;
 }

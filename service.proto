@@ -365,4 +365,8 @@ service Watchhttp {
 	rpc CreateWebpage(header.Webpage) returns (header.Webpage);
 	rpc DeleteWebpage(Id) returns (Empty);
 	rpc ListWebpages(Id) returns (header.Webpages);
+	rpc UpdateWebpage(header.Webpage) returns (header.Webpage);
+	rpc ReadWebpage(Id) returns (header.Webpage);
+	rpc ListRecentWebpageChecks(header.RecentWebpageCheckRequest) returns (header.WebpageChecks);
+	rpc ReadWebpageCheck(header.WebpageCheckRequest) returns (header.WebpageCheck);
 }
