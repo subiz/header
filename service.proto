@@ -359,3 +359,10 @@ service Notibox {
 	rpc ListRecentCompactedNoties(header.RecentCompactedNotiRequest) returns (header.CompactedNoties);
 	rpc GetCompactedNoti(header.CompactedNotiRequest) returns (header.CompactedNoti);
 }
+
+// watchhttp services
+service Watchhttp {
+	rpc CreateWebpage(header.Webpage) returns (header.Webpage);
+	rpc DeleteWebpage(Id) returns (Empty);
+	rpc ListWebpages(Id) returns (header.Webpages);
+}

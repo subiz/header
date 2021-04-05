@@ -3381,3 +3381,16 @@ message SessionCookie {
 	string account_id = 9;
 	string agent_id = 10;
 }
+
+message Webpage {
+	common.Context ctx = 1;
+	string account_id = 12;
+	string id = 2;
+	string url = 3;
+	string avatar_url =  27; // favicon for the domain
+}
+
+message Webpages {
+	common.Context ctx = 1;
+	repeated Webpage webpages = 2;
+}
