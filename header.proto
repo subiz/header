@@ -3395,6 +3395,13 @@ message Webpage {
 	string method = 10;
 	repeated KV headers = 11;
 	string payload = 12;
+	string state = 13;
+	enum State {
+		up = 0;
+		degraded = 1;
+		down = 2;
+	}
+	string must_contain = 14;
 }
 
 message Webpages {
@@ -3420,6 +3427,7 @@ message WebpageCheck {
 	repeated string errs = 15;
 	int32 request_payload_len = 16; // derived
 	int32 response_body_len = 17; // derived
+	string must_contain = 18;
 }
 
 message RecentWebpageCheckRequest {
