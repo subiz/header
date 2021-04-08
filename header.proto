@@ -2313,7 +2313,7 @@ message WebPluginComponent {
 }
 
 message Popup {
-	string position = 2; // top       fullscreen, center, middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
+	string position = 2; // top, bottom       fullscreen, center, middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
 	string type = 3; // bar, modal
 
 	bool animation = 5;
@@ -2714,6 +2714,9 @@ message UploadedImage {
 	int64 width = 10;
 	int64 height = 11;
   int64 created = 12;
+
+	string author = 13; // for upspash photos
+	string author_url = 14;
 }
 
 message UploadedImages {

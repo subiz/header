@@ -317,6 +317,8 @@ service WidgetService {
 	rpc ReportWebPlugin(header.ReportWebPluginRequest) returns (header.ReportWebPluginResponse);
 	rpc ListWebPluginConversions(header.WebPluginConversionRequest) returns (header.Conversions);
 	rpc ExportWebPluginConversions(header.WebPluginConversionRequest) returns (header.ConversionsExported);
+
+	rpc SearchImages(Id) returns (header.UploadedImages);
 }
 
 // bizbot services
