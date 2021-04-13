@@ -3467,11 +3467,12 @@ message WebpageReportRequest {
 	string webpage_id = 3;
 	int64 day  = 4;
 	string unit = 5; // day, month
-	repeated int64 milestones = 6;
+	int64 from_day = 6;
+	int64 to_day = 7;
 }
 
 message WebpageReportDataPoint {
-	int64 milestone = 2;
+	int64 day = 2;
 	int64 total_uptime_sec = 3;
 	int64 total_downtime_sec = 4;
 	// float avg_response_time = 5; // sec
