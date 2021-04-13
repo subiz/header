@@ -2177,8 +2177,6 @@ message LineComponent {}
 
 message ImageComponent {
 	string url = 2;
-	bool out_of_the_box = 3;
-	bool sticky = 4; // for background image
 }
 
 message NotificationComponent {
@@ -2412,6 +2410,8 @@ message Style {
 
 	string box_shadow = 66;
 	string overflow = 67;
+	string overflow_x = 68;
+	string overflow_y = 69;
 }
 
 message PopupPage {
@@ -2713,7 +2713,7 @@ message UploadedImage {
 	string thumbnail_url = 5;
 	int64 width = 10;
 	int64 height = 11;
-  int64 created = 12;
+	int64 created = 12;
 
 	string author = 13; // for upspash photos
 	string author_url = 14;
@@ -3405,6 +3405,8 @@ message Webpage {
 		down = 2;
 	}
 	string must_contain = 14;
+
+
 }
 
 message Webpages {
@@ -3448,4 +3450,25 @@ message WebpageCheckRequest {
 	common.Context ctx = 1;
 	string webpage_id = 2;
 	int32 id = 3;
+}
+
+message WebpageReportDataSet {
+	repeated WebpageReportDataPoint points = 2;
+}
+
+message WebpageReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string webpage_id = 3;
+	string unit = 5; // day, month
+	repeated int64 milestones = 6;
+}
+
+message WebpageReportDataPoint {
+	int64 milestone = 2;
+	int64 data = 3;
+	int64 total_downtime_sec = 4;
+	float avg_response_time = 5; // sec
+	int64 num_check = 6;
+	int64 num_downtime = 7;
 }
