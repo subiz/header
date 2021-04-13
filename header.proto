@@ -3403,10 +3403,15 @@ message Webpage {
 		up = 0;
 		degraded = 1;
 		down = 2;
+		missing = 3;
 	}
 	string must_contain = 14;
+	string name = 15;
 
+	int64 num_downtime_in_last_week = 16;
+	int64 total_downtime_sec_in_last_week = 17;
 
+	WebpageReportDataPoint today = 18;
 }
 
 message Webpages {
@@ -3425,7 +3430,7 @@ message WebpageCheck {
 	string request_payload = 8;
 	repeated KV response_headers = 9;
 	string response_body = 10;
-	string status = 11;
+	string status = 11; // missing
 	int32 status_code = 12;
 	int64 begin_at = 13;
 	int64 end_at = 14;
@@ -3460,15 +3465,17 @@ message WebpageReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string webpage_id = 3;
+	int64 day  = 4;
 	string unit = 5; // day, month
 	repeated int64 milestones = 6;
 }
 
 message WebpageReportDataPoint {
 	int64 milestone = 2;
-	int64 data = 3;
+	int64 total_uptime_sec = 3;
 	int64 total_downtime_sec = 4;
-	float avg_response_time = 5; // sec
-	int64 num_check = 6;
+	// float avg_response_time = 5; // sec
+	// int64 num_check = 6;
 	int64 num_downtime = 7;
+	// int64 total_missing_sec = 8;
 }

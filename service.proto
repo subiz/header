@@ -371,5 +371,6 @@ service Watchhttp {
 	rpc ReadWebpage(Id) returns (header.Webpage);
 	rpc ListRecentWebpageChecks(header.RecentWebpageCheckRequest) returns (header.WebpageChecks);
 	rpc ReadWebpageCheck(header.WebpageCheckRequest) returns (header.WebpageCheck);
-	rpc ReportWebpage(header.WebpageReportRequest) returns (header.WebpageReportDataSet);
+	rpc ReportWebpageChecks(header.WebpageReportRequest) returns (header.WebpageReportDataSet);
+	rpc SummaryWebpageChecks(header.WebpageReportRequest) returns (header.WebpageReportDataSet);
 }
