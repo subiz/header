@@ -1747,10 +1747,14 @@ message ListObjectsRequest {
 	string bot_id = 3;
 	int64 day_from = 4;
 	int64 day_to = 5;
+	string anchor = 6;
+	int32 limit = 7;
 }
 
 message ListObjectsResponse {
 	repeated ListObjectId list = 2;
+	string anchor = 3;
+	repeated string object_ids = 4; // obj type is conversation 
 }
 
 message Frequently {
