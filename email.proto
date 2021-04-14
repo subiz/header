@@ -41,20 +41,19 @@ message SiteWeeklyReportEmail {
 	string account_id = 4;
 	string agent_id = 5;
 
-
 	int64 from_day = 6;
 	int64 to_day = 7;
 
-
-	int64 number_of_downtime = 8;
-	int64 total_downtime = 9;
 	repeated SiteWeeklyReport sites = 10;
-		int64 created = 11; // in ms
+	int64 created = 11; // in ms
 }
 
 message SiteWeeklyReport {
 	string site = 3;
 	string site_id = 4;
 
-	string status = 5; // up down missing
+	int64 number_of_downtime = 8;
+	int64 total_downtime = 9;
+
+	repeated string statuses = 5; // up down missing
 }
