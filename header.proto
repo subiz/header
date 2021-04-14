@@ -1754,7 +1754,7 @@ message ListObjectsRequest {
 message ListObjectsResponse {
 	repeated ListObjectId list = 2;
 	string anchor = 3;
-	repeated string object_ids = 4; // obj type is conversation 
+	repeated string conversation_ids = 4;
 }
 
 message Frequently {
