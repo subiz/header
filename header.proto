@@ -455,6 +455,7 @@ message Event {
 		Conversion conversion = 47;
 		CompactedNoties compacted_noties = 51;
 		Site site = 52;
+	  WebpageCheck webpage_check = 53;
 	}
 	Data data = 20;
 }
@@ -3339,6 +3340,9 @@ enum RealtimeType {
 
 	site_user_verified = 100;
 	site_updated = 101;
+
+	site_up = 102;
+	site_down = 103;
 }
 
 enum E {
@@ -3412,6 +3416,7 @@ message Webpage {
 	int64 total_downtime_sec_in_last_week = 17;
 
 	WebpageReportDataPoint today = 18;
+	repeated string subscribers = 19; // agent id
 }
 
 message Webpages {

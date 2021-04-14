@@ -139,16 +139,21 @@ message Account {
 
 	optional Feature feature = 35;
 	optional Feature force_feature = 36; // only edit by subiz
+	optional WebpageMonitorSetting webpage_monitor_setting = 37;
 }
 
 message Feature {
-	optional bool web_ping = 3;
-	optional bool web_audit = 4;
+	optional bool webpage_monitor = 3;
+	optional bool webpage_audit = 4;
 	optional bool facebook = 5;
 	optional bool zalo = 6;
 	optional bool email = 7;
 	optional bool web_plugin = 8;
 	optional bool bot = 9;
+}
+
+message WebpageMonitorSetting {
+	optional bool weekly_report = 2;
 }
 
 message LeadSetting {
