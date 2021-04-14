@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package header;
+
+option go_package = "github.com/subiz/header";
+
+import "common.proto";
+
+message SiteUpEmail {
+	common.Context ctx = 1;
+	string from = 2;
+	string to = 3;
+	string account_id = 4;
+	string agent_id = 5;
+	int64 last_downtime = 6;
+	string site = 7;
+	string site_id = 8;
+	string resolved_ip = 9;
+	int64 created = 10; // in ms
+}
+
+message SiteDownEmail {
+	common.Context ctx = 1;
+	string from = 2;
+	string to = 3;
+	string account_id = 4;
+	string agent_id = 5;
+	// int64 last_downtime = 6;
+	string site = 7;
+	string site_id = 8;
+	string resolved_ip = 9;
+	int64 created = 10; // in ms
+	string status_code = 11;
+	string reason = 12;
+}
+
+message SiteWeeklyReportEmail {
+	common.Context ctx = 1;
+	string from = 2;
+	string to = 3;
+	string account_id = 4;
+	string agent_id = 5;
+
+
+	int64 from_day = 6;
+	int64 to_day = 7;
+
+
+	int64 number_of_downtime = 8;
+	int64 total_downtime = 9;
+	repeated SiteWeeklyReport sites = 10;
+		int64 created = 11; // in ms
+}
+
+message SiteWeeklyReport {
+	string site = 3;
+	string site_id = 4;
+
+	string status = 5; // up down missing
+}
