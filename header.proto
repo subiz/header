@@ -3439,7 +3439,7 @@ message WebpageCheck {
 	string request_payload = 8;
 	repeated KV response_headers = 9;
 	string response_body = 10;
-	string status = 11; // missing
+	string status = 11;
 	int32 status_code = 12;
 	int64 begin_at = 13;
 	int64 end_at = 14;
@@ -3447,6 +3447,7 @@ message WebpageCheck {
 	int32 request_payload_len = 16; // derived
 	int32 response_body_len = 17; // derived
 	string must_contain = 18;
+	string state = 19; // up down missing
 }
 
 message RecentWebpageCheckRequest {
