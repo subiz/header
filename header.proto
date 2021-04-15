@@ -3448,6 +3448,7 @@ message WebpageCheck {
 	int32 response_body_len = 17; // derived
 	string must_contain = 18;
 	string state = 19; // up down missing
+	string resolved_ip = 20;
 }
 
 message RecentWebpageCheckRequest {
