@@ -2445,6 +2445,7 @@ message ConversionRequest {
 
 	int32 from_hour = 7;
 	int32 to_hour = 8;
+	string web_plugin_id = 9;
 }
 
 message Conversions {
@@ -2489,6 +2490,7 @@ message UserCampaignStatus {
 		failed = 1;
 	}
 	int64 created = 10;
+	string web_plugin_id = 11;
 }
 
 message CampaignPage {

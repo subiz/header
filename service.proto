@@ -295,13 +295,13 @@ service WidgetService {
 	rpc ListCampaigns(Id) returns (header.Campaigns); // remove
 	rpc CreateCampaign(header.Campaign) returns (header.Campaign); // remove
 	rpc UpdateCampaign(header.Campaign) returns (header.Campaign); // remove
-	rpc DeleteCampaign(header.Campaign) returns (Empty);
+	rpc DeleteCampaign(header.Campaign) returns (Empty); // remove
 
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
 	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
-	rpc SubmitUserCampaignStatus(header.UserCampaignStatus) returns (header.UserCampaignStatus);
+	rpc SubmitUserCampaignStatus(header.UserCampaignStatus) returns (header.UserCampaignStatus); // replace
 
-	rpc ReportCampaign(header.ReportCampaignRequest) returns (header.ReportCampaignResponse);
+	rpc ReportCampaign(header.ReportCampaignRequest) returns (header.ReportCampaignResponse); // remove
 	rpc ListConversions(header.ConversionRequest) returns (header.Conversions);
 	rpc ExportConversions(header.ConversionRequest) returns (header.ConversionsExported);
 
