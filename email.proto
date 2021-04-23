@@ -12,7 +12,7 @@ message SiteUpEmail {
 	string to = 3;
 	string account_id = 4;
 	string agent_id = 5;
-	int64 last_downtime = 6;
+	int64 last_downtime = 6; // sec
 	string site = 7;
 	string site_id = 8;
 	string resolved_ip = 9;

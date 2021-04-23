@@ -1989,15 +1989,6 @@ message WidgetGreeting {
 }
 
 ////////////// CAMPAIGN //////////////
-message CampaignTrigger {
-	string type = 3; // exit_intent, area_clicked, scrolling_percentage, inactivity_duration, after_pageview, after_js_event
-	string area_clicked_css_selector = 4; // .user_name #user
-	float scrolling_percentage = 6; // 0.55
-	int64 inactivity_sec = 8; // 50s
-	int64 after_pageview_sec = 9; // 50s
-	bool disabled = 10;
-}
-
 message CampaignSchedulerCondition {
 	int64 start_time = 4;
 	int64 end_time = 5;
@@ -2126,6 +2117,7 @@ message WebPlugin {
 	ContactComponent contact = 46;
 	NotificationComponent notification = 47;
 
+	CampaignNotification conversion_notification = 26;
 }
 
 message TextComponent {
@@ -2256,7 +2248,7 @@ message ButtonsComponent {
 }
 
 message WebPluginComponent {
-	string type = 2; // text, image, countdown, form, buttons, line
+	string type = 2; // text, image, countdown, form, buttons, line, social_buttons, follow_facebook
 
 	Style style = 3;
 	Style mobile_style = 4;
@@ -2268,6 +2260,18 @@ message WebPluginComponent {
 	LinkComponent link = 9;
 	ImageComponent image = 10;
 	LineComponent line = 11;
+	SocialButtonsComponent social_buttons = 12;
+	FollowFacebookComponent follow_facebook = 13;
+}
+
+message FollowFacebookComponent {
+	string url = 3;
+}
+
+message SocialButtonsComponent {
+	string facebook = 3;
+	string zalo = 4;
+	string twitter = 5;
 }
 
 message Popup {
@@ -2372,6 +2376,10 @@ message Style {
 	string overflow = 67;
 	string overflow_x = 68;
 	string overflow_y = 69;
+
+	string white_space = 70;
+	string user_select = 71;
+	string pointer_events = 72;
 }
 
 message PopupPage {
@@ -2389,7 +2397,7 @@ message Campaign {
 	repeated string url_expressions = 4;
 	repeated string exclude_url_expressions = 6;
 
-	repeated CampaignTrigger triggers = 10; // any
+	repeated Trigger triggers = 10; // any
 
 	string segmentation_join = 11; // and | or
 	repeated CampaignSegmentation segmentations = 12;
@@ -2527,14 +2535,6 @@ message CampaignAppearance {
 	string input_background = 12;
 
 	string overlay = 13;
-
-	// sizing, not supported yet
-	string width = 20;
-	string min_height = 21;
-	string padding_left = 22;
-	string padding_right = 23;
-	string padding_top = 24;
-	string padding_bottom = 25;
 
 	string title_font_family = 30;
 	string title_font_size = 31;

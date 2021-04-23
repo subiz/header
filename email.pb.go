@@ -36,7 +36,7 @@ type SiteUpEmail struct {
 	To           string          `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`
 	AccountId    string          `protobuf:"bytes,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	AgentId      string          `protobuf:"bytes,5,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	LastDowntime int64           `protobuf:"varint,6,opt,name=last_downtime,json=lastDowntime,proto3" json:"last_downtime,omitempty"`
+	LastDowntime int64           `protobuf:"varint,6,opt,name=last_downtime,json=lastDowntime,proto3" json:"last_downtime,omitempty"` // sec
 	Site         string          `protobuf:"bytes,7,opt,name=site,proto3" json:"site,omitempty"`
 	SiteId       string          `protobuf:"bytes,8,opt,name=site_id,json=siteId,proto3" json:"site_id,omitempty"`
 	ResolvedIp   string          `protobuf:"bytes,9,opt,name=resolved_ip,json=resolvedIp,proto3" json:"resolved_ip,omitempty"`
