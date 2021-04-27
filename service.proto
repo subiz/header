@@ -268,27 +268,6 @@ service FabikonService {
 	rpc ListFbPosts(Id) returns (header.FacebookPosts);
 }
 
-service WebPluginService {
-	rpc ReadWebPlugin(Id) returns (header.WebPlugin);
-	rpc UpdateWebPlugin(header.WebPlugin) returns (header.WebPlugin);
-	rpc ListWebPlugins(Id) returns (header.WebPlugins);
-	rpc DeleteWebPlugin(Id) returns (Empty);
-
-	rpc UpdateWebPluginTemplate(header.WebPlugin) returns (header.WebPlugin);
-	rpc ListWebPluginTemplates(Id) returns (header.WebPlugins);
-	rpc DeleteWebPluginTemplate(Id) returns (Empty);
-
-	rpc SubmitImpression(header.Impression) returns (header.Impression);
-	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
-	rpc SubmitClick(header.Conversion) returns (header.Conversion);
-
-	rpc SubmitUserCampaignStatus(header.UserCampaignStatus) returns (header.UserCampaignStatus);
-
-	rpc ReportCampaign(header.ReportCampaignRequest) returns (header.ReportCampaignResponse);
-	rpc ListConversions(header.ConversionRequest) returns (header.Conversions);
-	rpc ExportConversions(header.ConversionRequest) returns (header.ConversionsExported);
-}
-
 // widget services
 service WidgetService {
 	rpc Read(Id) returns (header.WidgetSetting);
@@ -317,6 +296,10 @@ service WidgetService {
 	rpc UpdateWebPlugin(WebPlugin) returns (WebPlugin);
 	rpc CreateWebPlugin(WebPlugin) returns (WebPlugin);
 	rpc DeleteWebPlugin(Id) returns (Empty);
+
+	rpc UpdateWebPluginTemplate(header.WebPlugin) returns (header.WebPlugin);
+	rpc ListWebPluginTemplates(Id) returns (header.WebPlugins);
+	rpc DeleteWebPluginTemplate(Id) returns (Empty);
 
 	rpc ReportWebPlugin(header.ReportWebPluginRequest) returns (header.ReportWebPluginResponse);
 
