@@ -274,6 +274,10 @@ service WebPluginService {
 	rpc ListWebPlugins(Id) returns (header.WebPlugins);
 	rpc DeleteWebPlugin(Id) returns (Empty);
 
+	rpc UpdateWebPluginTemplate(header.WebPlugin) returns (header.WebPlugin);
+	rpc ListWebPluginTemplates(Id) returns (header.WebPlugins);
+	rpc DeleteWebPluginTemplate(Id) returns (Empty);
+
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
 	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
 	rpc SubmitClick(header.Conversion) returns (header.Conversion);

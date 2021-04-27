@@ -2118,6 +2118,11 @@ message WebPlugin {
 	NotificationComponent notification = 47;
 
 	CampaignNotification conversion_notification = 26;
+
+	repeated string template_categories = 50;
+	repeated string template_tags = 51;
+	string template_title = 52;
+	string template_description = 53;
 }
 
 message TextComponent {
@@ -2364,6 +2369,7 @@ message Style {
 	string justify_content = 44;
 
 	string transform = 48;
+	string font_size = 49;
 	string z_index = 60;
 
 	string border_bottom = 61;
