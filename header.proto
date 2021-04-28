@@ -2123,6 +2123,8 @@ message WebPlugin {
 	repeated string template_tags = 51;
 	string template_title = 52;
 	string template_description = 53;
+
+	string thumbnail_url = 54;
 }
 
 message TextComponent {
