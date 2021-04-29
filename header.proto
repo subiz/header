@@ -2115,7 +2115,7 @@ message WebPlugin {
 	Chatbox chatbox = 40;
 	Popup popup = 41;
 	ContactComponent contact = 46;
-	NotificationComponent notification = 47;
+	Notif notification = 47;
 
 	CampaignNotification conversion_notification = 26;
 
@@ -2138,23 +2138,36 @@ message ImageComponent {
 	string url = 2;
 }
 
-message NotificationComponent {
+
+message NotifData {
+	string type = 2; // person, location
+	string avatar_url = 3;
+	string fullname = 4;
+	string country = 5;
+	string gender = 6;
+	int32 age = 7;
+}
+
+message Notif {
 	// string skin = 2;
 	Style style = 2;
 	repeated string avatar_databases = 3; // female, male office, location, random
-	string title = 4; // markdown
-	Style title_style = 5;
+	// server returns only for client
+	repeated NotifData dataset = 4;
 
-	string message = 6; // markdown
-	Style message_style = 7;
+	string title = 7; // markdown
+	Style title_style = 8;
 
-	string url = 8;
+	string message = 9; // markdown
+	Style message_style = 10;
 
-	string background_url = 9;
-	Style background_style = 10;
+	string url = 11;
 
-	string position = 11;
-	string time_to_display = 12; // sec
+	string background_url = 12;
+	Style background_style = 13;
+
+	string position = 14;
+	string time_to_display = 15; // sec
 }
 
 message ContactComponent {
