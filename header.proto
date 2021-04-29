@@ -2084,7 +2084,7 @@ message WebPlugin {
 	string account_id = 2;
 	string id = 3;
 
-	repeated string sites = 4;
+	// repeated string sites = 4;
 
 	string name = 5;
 	// chatbox, popup, contact, notification
@@ -2139,13 +2139,22 @@ message ImageComponent {
 }
 
 message NotificationComponent {
-	string skin = 2; // classic, flat, moderm
-	string image_url = 3;
-	string title = 4;
-	string message = 5;
-	string url = 6;
+	// string skin = 2;
+	Style style = 2;
+	repeated string avatar_databases = 3; // female, male office, location, random
+	string title = 4; // markdown
+	Style title_style = 5;
 
-	string time_to_display = 8; // sec
+	string message = 6; // markdown
+	Style message_style = 7;
+
+	string url = 8;
+
+	string background_url = 9;
+	Style background_style = 10;
+
+	string position = 11;
+	string time_to_display = 12; // sec
 }
 
 message ContactComponent {
