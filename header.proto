@@ -2138,36 +2138,48 @@ message ImageComponent {
 	string url = 2;
 }
 
+message NotifProfiles {
+	common.Context ctx = 1;
+	repeated NotifProfile profiles = 2;
+}
 
-message NotifData {
+message NotifProfile {
+	common.Context ctx = 1;
 	string type = 2; // person, location
 	string avatar_url = 3;
 	string fullname = 4;
 	string country = 5;
 	string gender = 6;
 	int32 age = 7;
+	repeated string tags = 8;
 }
 
 message Notif {
-	// string skin = 2;
-	Style style = 2;
-	repeated string avatar_databases = 3; // female, male office, location, random
+	repeated string profile_tags = 4; // female, male office, location, random
+	repeated string custom_avatar_urls = 5;
 	// server returns only for client
-	repeated NotifData dataset = 4;
+	repeated NotifProfile profiles = 6;
 
-	string title = 7; // markdown
-	Style title_style = 8;
+	string title_quill_delta = 9; // markdown
+	Style title_style = 10;
 
-	string message = 9; // markdown
-	Style message_style = 10;
+	repeated string message_quill_deltas = 11; // markdown
 
-	string url = 11;
+	Style message_style = 12;
 
-	string background_url = 12;
-	Style background_style = 13;
+	string url = 13;
+	bool new_tab = 14;
 
-	string position = 14;
-	string time_to_display = 15; // sec
+	string background_url = 15;
+	Style background_style = 16;
+
+	Style subtext_style = 17;
+
+	string avatar_style = 18;
+
+	string position = 19;
+	string mobile_position = 20;
+	int64 interval_sec = 21; // sec
 }
 
 message ContactComponent {

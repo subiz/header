@@ -304,6 +304,7 @@ service WidgetService {
 	rpc ReportWebPlugin(header.ReportWebPluginRequest) returns (header.ReportWebPluginResponse);
 
 	rpc SearchImages(Id) returns (header.UploadedImages);
+	rpc ListNotifProfiles(Id) returns (header.NotifProfiles);
 }
 
 // bizbot services
