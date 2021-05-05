@@ -1779,64 +1779,6 @@ message I18nText {
 	string de = 21; // German
 }
 
-message Chatbox {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string widget_version = 3;
-	string language = 5;
-
-	string window_mode = 15;
-	enum WindowMode {
-		mini = 0;
-		full = 1;
-	}
-
-	WidgetHeader header = 16;
-	int32 height = 17;
-	int32 width = 18;
-	string primary_color = 19;
-	string secondary_color = 20;
-	string background = 21;
-	string text_color = 22;
-
-	WidgetForm offline_form = 23;
-	WidgetForm prechat_form = 24;
-
-	message Button {
-		string background_image_url = 1;
-		string background_mask_url = 11;
-
-		int32 width = 2;
-		int32 height = 3;
-		string background = 4;
-		int32 margin_x  = 5;
-		int32 margin_y = 6;
-		string position = 7;
-
-		enum ButtonPosition {
-			left = 0;
-			right = 1;
-		}
-		bool hidden = 10;
-	}
-	Button desktop_button = 25;
-	Button mobile_button = 26;
-
-	message Greeting {
-		string message = 2;
-		bool enabled = 4;
-		string agent_id = 5; // specific
-		repeated string random_agents = 6;
-		I18nText primary_button = 7;
-		I18nText secondary_button = 8;
-	}
-	Greeting greeting = 27;
-
-	string title = 28;
-	string introduction = 29;
-	bool auto_request_rating = 33;
-}
-
 // widget
 message WidgetUserSetting {
 	common.Context ctx = 1;
@@ -2112,7 +2054,7 @@ message WebPlugin {
 
 	bool is_deleted = 30;
 
-	Chatbox chatbox = 40;
+	WidgetSetting chatbox = 40;
 	Popup popup = 41;
 	ContactComponent contact = 46;
 	Notif notification = 47;
