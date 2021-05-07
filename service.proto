@@ -360,3 +360,9 @@ service Watchhttp {
 	rpc ReportWebpageChecks(header.WebpageReportRequest) returns (header.WebpageReportDataSet);
 	rpc SummaryWebpageChecks(header.WebpageReportRequest) returns (header.WebpageChecks);
 }
+
+// holap services
+service Holap {
+	rpc UpdateConversation(header.Conversation) returns (Empty);
+	rpc OnConversationEvent(header.Event) returns (Empty);
+}
