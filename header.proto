@@ -2222,11 +2222,11 @@ message WebPluginForm {
 
 message ButtonsComponent {
 	bool primary_enabled = 2;
-	repeated CampaignButtonAction primary_actions = 3;
+	repeated PopupButtonAction primary_actions = 3;
 	string primary_text = 4;
 
 	bool secondary_enabled = 8;
-	repeated CampaignButtonAction secondary_actions = 9;
+	repeated PopupButtonAction secondary_actions = 9;
 	string secondary_text = 10;
 }
 
@@ -2323,6 +2323,8 @@ message Style {
 	string position = 25 ; //absolute, relative
 
 	string object_fit = 26; // cover, contain
+	string line_height = 27;
+	string background_position = 28;
 
 	string left = 30;
 	string right = 31;
@@ -2545,7 +2547,7 @@ message CampaignSubmission  {
 	repeated WidgetField fields = 6;
 }
 
-message CampaignButtonAction {
+message PopupButtonAction {
 	string action = 3; // open_url, close, open_widget, submit, next, goal_reach
 
 	string url = 5; // url to open
@@ -2554,7 +2556,7 @@ message CampaignButtonAction {
 
 message ButtonComponent {
 	bool enabled = 2;
-	repeated CampaignButtonAction actions = 3;
+	repeated PopupButtonAction actions = 3;
 	string text = 6;
 
 	string color = 10;
