@@ -2094,6 +2094,8 @@ message NotifProfile {
 	string gender = 6;
 	int32 age = 7;
 	repeated string tags = 8;
+	string email =  9;
+	string phone = 10;
 }
 
 message Notif {
@@ -2116,8 +2118,7 @@ message Notif {
 	Style background_style = 16;
 
 	Style subtext_style = 17;
-
-	string avatar_style = 18;
+	Style avatar_style = 18;
 
 	string position = 19;
 	string mobile_position = 20;
