@@ -294,6 +294,7 @@ service WidgetService {
 
 	rpc ListWebPlugins(Id) returns (WebPlugins);
 	rpc UpdateWebPlugin(WebPlugin) returns (WebPlugin);
+	rpc UpdateWebPluginEnabled(WebPlugin) returns (WebPlugin);
 	rpc CreateWebPlugin(WebPlugin) returns (WebPlugin);
 	rpc DeleteWebPlugin(Id) returns (Empty);
 
