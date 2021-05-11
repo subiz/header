@@ -2096,6 +2096,7 @@ message NotifProfile {
 	repeated string tags = 8;
 	string email =  9;
 	string phone = 10;
+	string address = 11;
 }
 
 message Notif {
@@ -3433,4 +3434,8 @@ message WebpageReportDataPoint {
 	// int64 num_check = 6;
 	int64 num_downtime = 7;
 	// int64 total_missing_sec = 8;
+}
+
+message Urls {
+	repeated string urls = 2;
 }

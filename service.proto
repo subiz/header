@@ -306,6 +306,7 @@ service WidgetService {
 
 	rpc SearchImages(Id) returns (header.UploadedImages);
 	rpc ListNotifProfiles(Id) returns (header.NotifProfiles);
+	rpc ListNotifBackgrounds(Id) returns (header.Urls);
 }
 
 // bizbot services
