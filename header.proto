@@ -3351,20 +3351,21 @@ message Webpage {
 	string state = 13;
 	enum State {
 		up = 0;
-		degraded = 1;
 		down = 2;
 		missing = 3;
 	}
 	string must_contain = 14;
-	string name = 15;
+	// string name = 15;
 
-	int64 num_downtime_in_last_week = 16;
-	int64 total_downtime_sec_in_last_week = 17;
-
-	WebpageReportDataPoint today = 18;
 	repeated string subscribers = 19; // agent id
 
+	repeated WebpageReportDataPoint reports = 18; // report of last 14 days
+
 	int64 check_interval = 20;
+
+	string title = 22;
+	string favicon = 24;
+	int64 last_fetch = 25;
 }
 
 message Webpages {
