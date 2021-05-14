@@ -2374,6 +2374,7 @@ message PopupPage {
 	repeated WebPluginComponent components = 10;
 	Style style = 11; // body
 	Style mobile_style = 12;
+	ButtonComponent background_click = 9;
 }
 
 // should rename to popup
