@@ -2128,6 +2128,7 @@ message Notif {
 
 message ContactComponent {
 	message ContactButton {
+		bool enabled = 1;
 		string type = 2;
 		ZaloContactComponent zalo = 4;
 		FacebookContactComponent facebook = 5;
@@ -2136,19 +2137,22 @@ message ContactComponent {
 		MapContactComponent map = 8;
 	}
 
-	string theme = 2; // flat, material, long-shadow, fluent, mac
-	string layout = 3; // standard, footer, mini
-	string position = 4;
-	string size = 5; // sm, md, lg
-	repeated ContactButton buttons = 6;
+	string theme = 3; // flat, material, long-shadow, fluent, mac
+	string layout = 4; // standard, footer, mini
+	string position = 5;
+	string size = 6; // sm, md, lg
+	repeated ContactButton buttons = 7;
 }
 
 message FacebookContactComponent {
 	string facebook_url = 2;
+	string page_id =4;
+	string title = 3;
 }
 
 message ZaloContactComponent {
-	string url = 2;
+	string zalo_oa_id = 2;
+	string title = 3;
 }
 
 message CallContactComponent {
@@ -2275,10 +2279,6 @@ message Popup {
 	string background = 12;
 	string spacer = 13;
 
- 	Style primary_button = 14;
-	Style secondary_button = 15;
-	Style countdown = 16;
-
 	string theme = 17; // plain, light, paper, bold
 	string container_background = 18;
 
@@ -2375,6 +2375,9 @@ message PopupPage {
 	Style style = 11; // body
 	Style mobile_style = 12;
 	ButtonComponent background_click = 9;
+
+	string layout = 3; // row, column
+	string mobile_layout = 4;
 }
 
 // should rename to popup
