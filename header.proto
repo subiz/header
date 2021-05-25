@@ -1514,9 +1514,12 @@ message Site {
 	string image_url = 5;
 
 	bool agent_confirmed = 6;
+
 	int64 created = 7;
 
 	string title = 9;
+	int64 last_user_verified = 10;
+	string last_user_verify_uri = 11;
 }
 
 message Bot {
@@ -2272,11 +2275,9 @@ message Popup {
 	bool show_close_button = 6;
 	bool overlay = 7;
 
-	string primary_color = 8; // title
 	string text_color = 9; // description
 	string font_family = 10;
 	string font_size = 11;
-	string background = 12;
 	string spacer = 13;
 
 	string theme = 17; // plain, light, paper, bold
