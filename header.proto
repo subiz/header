@@ -2278,10 +2278,10 @@ message Popup {
 	string text_color = 9; // description
 	string font_family = 10;
 	string font_size = 11;
+	string backgorund = 12;
 	string spacer = 13;
 
 	string theme = 17; // plain, light, paper, bold
-	string container_background = 18;
 
 	repeated PopupPage pages = 20;
 }
