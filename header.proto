@@ -3476,6 +3476,7 @@ message Changelog {
 	string id = 3;
 	string version = 4; // auto
 	string content = 5;
+	string created_by = 6;
 }
 
 message ListChangelogsRequest {
