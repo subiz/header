@@ -140,6 +140,8 @@ message Account {
 	optional Feature feature = 35;
 	optional Feature force_feature = 36; // only edit by subiz
 	optional WebpageMonitorSetting webpage_monitor_setting = 37;
+
+	repeated string supported_locales = 40;
 }
 
 message Feature {

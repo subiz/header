@@ -1759,8 +1759,8 @@ message PublishMessage {
 }
 
 message I18nText {
-	string en = 1;  // English
-	string vi = 2;  // Vietnamese
+	string en_us = 1;  // English
+	string vi_vn = 2;  // Vietnamese
   string cn = 3;  // Chinese
 	string es = 4;  // Spanish
 	string hi = 5;  // Hindi
@@ -1815,7 +1815,6 @@ message WidgetHeader {
 
 	// for social layout only
 	repeated SocialLink links = 3;
-
 	// agents whose avatar will be display in the header
 	repeated string agent_ids = 4;
 }
@@ -1860,6 +1859,9 @@ message WidgetSetting {
 	string custom_language_url = 31;
 	string language_url = 32;
 	bool auto_request_rating = 33;
+
+	I18nText caption = 35;
+	I18nText tagline = 36;
 }
 
 message WidgetField {
@@ -1880,6 +1882,9 @@ message WidgetField {
 	bool is_user_attribute = 12;
 
 	string value = 13;
+
+	I18nText i18n_label = 14; // label i18n
+	I18nText i18n_placeholder = 15;
 }
 
 message WidgetGroup {
@@ -1905,6 +1910,10 @@ message WidgetForm {
 
 	bool question_required = 10;
 	string question_label = 11;
+
+	I18nText i18n_group_label = 12;
+	I18nText i18n_title = 13;
+	I18nText i18n_question_label = 14;
 }
 
 message WidgetChatButton {
@@ -1931,6 +1940,8 @@ message WidgetGreeting {
 	string message = 2;
 	bool enabled = 4;
 	string agent_id = 5;
+
+	I18nText greeting = 6;
 }
 
 ////////////// CAMPAIGN //////////////
@@ -2028,8 +2039,6 @@ message WebPlugin {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-
-	// repeated string sites = 4;
 
 	string name = 5;
 	// chatbox, popup, contact, notification
@@ -3444,4 +3453,20 @@ message WebpageReportDataPoint {
 
 message Urls {
 	repeated string urls = 2;
+}
+
+message Lang {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string locale = 3; // vi_VN
+	repeated KV messages = 4;
+}
+
+message LangMessage {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string locale = 4;
+	string key = 5;
+	string message = 6;
 }
