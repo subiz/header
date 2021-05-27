@@ -44,6 +44,8 @@ service AccountMgr {
 
 	rpc GetLanguage(Id) returns (Lang);
 	rpc UpdateLanguage(LangMessage) returns (LangMessage);
+	rpc CreateChangelog(header.Changelog) returns (header.Changelog);
+	rpc ListChangelogs(header.ListChangelogsRequest) returns (header.ListChangelogsResponse);
 }
 
 // user services

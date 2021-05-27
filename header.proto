@@ -3470,3 +3470,21 @@ message LangMessage {
 	string key = 5;
 	string message = 6;
 }
+
+message Changelog {
+	string account_id = 2;
+	string id = 3;
+	string version = 4; // auto
+	string content = 5;
+}
+
+message ListChangelogsRequest {
+	string account_id = 2;
+	string anchor = 3;
+	int32 limit = 4;
+}
+
+message ListChangelogsResponse {
+	string anchor = 2;
+	repeated Changelog changelogs = 3;
+}
