@@ -788,7 +788,7 @@ type Account struct {
 	Feature               *Feature               `protobuf:"bytes,35,opt,name=feature" json:"feature,omitempty"`
 	ForceFeature          *Feature               `protobuf:"bytes,36,opt,name=force_feature,json=forceFeature" json:"force_feature,omitempty"` // only edit by subiz
 	WebpageMonitorSetting *WebpageMonitorSetting `protobuf:"bytes,37,opt,name=webpage_monitor_setting,json=webpageMonitorSetting" json:"webpage_monitor_setting,omitempty"`
-	SupportedLocales      []string               `protobuf:"bytes,40,rep,name=supported_locales,json=supportedLocales" json:"supported_locales,omitempty"`
+	SupportedLocales      []string               `protobuf:"bytes,40,rep,name=supported_locales,json=supportedLocales" json:"supported_locales,omitempty"` // default vi-VN and en-US
 }
 
 func (x *Account) Reset() {
