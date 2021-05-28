@@ -3464,18 +3464,18 @@ message Urls {
 message LangMessage {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string key = 3;
-	string message = 4;
-	string last_message = 5;
-	string author = 6;
-	int64 updated = 7;
-	bool is_editable = 8;
+	string locale = 3;
+	string key = 4;
+	string message = 5;
+	string last_message = 6;
+	string author = 7;
+	int64 updated = 8;
+	bool is_editable = 9;
 }
 
 message Lang {
 	common.Context ctx = 1;
 	string account_id = 2;
-
 	string locale = 3; // vi_VN
 	repeated LangMessage messages = 4;
 }
