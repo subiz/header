@@ -455,7 +455,8 @@ message Event {
 		Conversion conversion = 47;
 		CompactedNoties compacted_noties = 51;
 		Site site = 52;
-	  WebpageCheck webpage_check = 53;
+		WebpageCheck webpage_check = 53;
+		LangMessage language_message = 54;
 	}
 	Data data = 20;
 }
@@ -937,9 +938,9 @@ message ConversationMember {
 message ListConversationsRequest {
 	common.Context ctx = 1;
 	string account_id = 3;
-	//   string state = 4; // empty or unassigned
+	//	 string state = 4; // empty or unassigned
 	string member_id = 8; // ignore
-	//   string group_by = 9;
+	//  string group_by = 9;
 	string integration_id = 10;
 	string user_id = 11;
 	int32 limit = 5;
@@ -1092,7 +1093,7 @@ message MessagePong {
 
 	int64 created = 5;
 	string ack_error = 6; // used in ack
-	int64 count =  7;
+	int64 count = 7;
 }
 
 message MessageButton {
@@ -1209,7 +1210,7 @@ message Attachment {
 	string thumbnail_url = 4;
 	string name = 5;
 	string description = 6;
-	//  string data = 7; // for custom data
+	//string data = 7; // for custom data
 	int32 length = 15;
 	int32 size = 13; // byte
 
@@ -1759,9 +1760,9 @@ message PublishMessage {
 }
 
 message I18nText {
-	string en_us = 1;  // English
-	string vi_vn = 2;  // Vietnamese
-  string cn = 3;  // Chinese
+	string en_US = 1;  // English
+	string vi_VN = 2;  // Vietnamese
+	string cn = 3;  // Chinese
 	string es = 4;  // Spanish
 	string hi = 5;  // Hindi
 	string fr = 6;  // French
@@ -1780,6 +1781,7 @@ message I18nText {
 	string ko = 19; // Korean
 	string ur = 20; // Urdu
 	string de = 21; // German
+	string custom = 250;
 }
 
 // widget
@@ -1827,11 +1829,11 @@ message WidgetSetting {
 	string custom_language = 6; // write-only
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
-	//   string css_url = 9; // old version
-	//   string custom_css_url = 10; // deprecated
+	//  string css_url = 9; // old version
+	//  string custom_css_url = 10; // deprecated
 	int32 replytime = 11; // deprecated
-	//   string css = 12; // communication client to server
-	//   string style_url = 13;
+	//  string css = 12; // communication client to server
+	//  string style_url = 13;
 	// read-only, tell whether account is ready for chat or not
 	bool is_online = 14;
 	bool is_in_business_hour = 34;
@@ -1923,7 +1925,7 @@ message WidgetChatButton {
 	int32 width = 2;
 	int32 height = 3;
 	string background = 4;
-	int32 margin_x  = 5;
+	int32 margin_x = 5;
 	int32 margin_y = 6;
 	string position = 7;
 
@@ -2015,7 +2017,7 @@ message Campaigns {
 }
 
 message CampaignNotification {
-	//   email.Email email = 1;
+	//  email.Email email = 1;
 	bool enabled = 2;
 	string sender_id = 4;
 	string from = 5;
@@ -2026,7 +2028,7 @@ message CampaignNotification {
 	repeated string agents = 12;
 	bool all_agents = 13;
 
-  Message user_email = 14;
+	Message user_email = 14;
 }
 
 message WebPlugins {
@@ -2108,7 +2110,7 @@ message NotifProfile {
 	string gender = 6;
 	int32 age = 7;
 	repeated string tags = 8;
-	string email =  9;
+	string email = 9;
 	string phone = 10;
 	string address = 11;
 }
@@ -2175,7 +2177,7 @@ message CallContactComponent {
 		string name = 3;
 		string image_url = 4;
 	}
-	repeated Hotline hotlines  = 4;
+	repeated Hotline hotlines = 4;
 
 	string recall_title = 5;
 	string thank_message = 6;
@@ -2512,9 +2514,9 @@ message CampaignPage {
 
 	WidgetForm form = 6;
 
-  ButtonComponent primary_button = 7;
+	ButtonComponent primary_button = 7;
 	ButtonComponent secondary_button = 8;
-  ButtonComponent background_click = 10;
+	ButtonComponent background_click = 10;
 
 	string animation = 20;
 	CampaignAppearance desktop_appearance = 24;
@@ -2556,7 +2558,7 @@ message CampaignAppearance {
 	string input_border_color = 41;
 }
 
-message CampaignSubmission  {
+message CampaignSubmission {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string campaign_id = 3;
@@ -2778,7 +2780,7 @@ message Webhook {
 	bool is_enabled = 22; // deprecated
 	bool is_protected = 23; // deprecated
 
-	string avatar_url =  27; // favicon for the domain
+	string avatar_url = 27; // favicon for the domain
 
 	int64 total_deliveries_in_last_7_days = 30;
 	int64 total_failed_deliveries_in_last_7_days = 31;
@@ -3028,7 +3030,7 @@ message Product {
 	float sale_price = 12;
 	repeated KV fields = 13;
 	repeated string categories = 14;
-	repeated string relates = 15; //  TODO: delete
+	repeated string relates = 15; // TODO: delete
 	int64 created = 17;
 	int64 updated = 18;
 	repeated string attachment_urls = 20;
@@ -3305,6 +3307,8 @@ enum RealtimeType {
 
 	site_up = 102;
 	site_down = 103;
+
+	language_updated = 104;
 }
 
 enum E {
@@ -3437,7 +3441,7 @@ message WebpageReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string webpage_id = 3;
-	int64 day  = 4;
+	int64 day = 4;
 	string unit = 5; // day, month
 	int64 from_day = 6;
 	int64 to_day = 7;
@@ -3458,6 +3462,8 @@ message Urls {
 }
 
 message LangMessage {
+	common.Context ctx = 1;
+	string account_id = 2;
 	string key = 3;
 	string message = 4;
 	string last_message = 5;
