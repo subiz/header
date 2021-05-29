@@ -1561,6 +1561,9 @@ message Bot {
 	int64 count_conv_in_last_7_days = 26;
 
 	repeated string sites = 27;
+
+	string locale = 28; // can be auto
+	repeated string locales = 29;
 }
 
 message Bots {
@@ -2068,7 +2071,8 @@ message WebPlugin {
 
 	bool is_deleted = 30;
 
-	string locale = 31;
+	string locale = 31; // can be auto
+	repeated string locales = 32;
 
 	WidgetSetting chatbox = 40;
 	Popup popup = 41;
@@ -3471,6 +3475,7 @@ message LangMessage {
 	string author = 7;
 	int64 updated = 8;
 	bool is_editable = 9;
+	bool from_default = 10;
 }
 
 message Lang {
