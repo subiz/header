@@ -1049,6 +1049,7 @@ message Message {
 	string id = 11;
 	string text = 2;
 
+
 	string format = 3;
 	repeated Attachment attachments = 4;
 
@@ -1060,7 +1061,8 @@ message Message {
 	// used for reaction and delivery status, could be ignore
 	repeated MessagePong pongs = 17;
 
-	string quill_delta = 20;
+	string quill_delta = 20; // deprecated
+	I18nString i18n_quil_delta = 21;
 }
 
 message MessagePong {
@@ -1762,7 +1764,7 @@ message PublishMessage {
 	string account_id = 5;
 }
 
-message I18nText {
+message I18nString {
 	string en_US = 1;  // English
 	string vi_VN = 2;  // Vietnamese
 	string cn = 3;  // Chinese
@@ -1865,8 +1867,8 @@ message WidgetSetting {
 	string language_url = 32;
 	bool auto_request_rating = 33;
 
-	I18nText caption = 35;
-	I18nText tagline = 36;
+	I18nString caption = 35;
+	I18nString tagline = 36;
 }
 
 message WidgetField {
@@ -1888,8 +1890,8 @@ message WidgetField {
 
 	string value = 13;
 
-	I18nText i18n_label = 14; // label i18n
-	I18nText i18n_placeholder = 15;
+	I18nString i18n_label = 14; // label i18n
+	I18nString i18n_placeholder = 15;
 }
 
 message WidgetGroup {
@@ -1916,9 +1918,9 @@ message WidgetForm {
 	bool question_required = 10;
 	string question_label = 11;
 
-	I18nText i18n_group_label = 12;
-	I18nText i18n_title = 13;
-	I18nText i18n_question_label = 14;
+	I18nString i18n_group_label = 12;
+	I18nString i18n_title = 13;
+	I18nString i18n_question_label = 14;
 }
 
 message WidgetChatButton {
@@ -1946,7 +1948,7 @@ message WidgetGreeting {
 	bool enabled = 4;
 	string agent_id = 5;
 
-	I18nText greeting = 6;
+	I18nString greeting = 6;
 }
 
 ////////////// CAMPAIGN //////////////
@@ -2092,6 +2094,8 @@ message WebPlugin {
 message TextComponent {
 	string html = 2; // do not edit, generated from quill_delta
 	string quill_delta = 3;
+
+	I18nString i18n_quill_delta = 4;
 }
 
 message LineComponent {}
@@ -2126,9 +2130,12 @@ message Notif {
 	repeated NotifProfile profiles = 6;
 
 	string title_quill_delta = 9; // markdown
+	I18nString i18n_title_quill_delta = 22;
+
 	Style title_style = 10;
 
 	repeated string message_quill_deltas = 11; // markdown
+	repeated I18nString i18n_message_quill_delta = 23;
 
 	Style message_style = 12;
 
@@ -2221,6 +2228,8 @@ message WebPluginFormField {
 	string key = 1;
 	string label_quill_delta = 2;
 	string label = 3;
+	I18nString i18n_label = 14;
+
 	bool is_required = 4;
 
 	// so front end dont have to download attribute definitions
@@ -2232,11 +2241,13 @@ message WebPluginFormField {
 	bool randomize_option = 9;
 	message WebPluginFormFieldOption {
 		string label = 2;
+		I18nString i18n_label = 4;
 		string value = 3;
 	}
 	repeated WebPluginFormFieldOption options = 10;
 
 	string placeholder = 11;
+	I18nString i18n_placeholder = 15;
 
 	string value = 13;
 }
@@ -2250,10 +2261,12 @@ message ButtonsComponent {
 	bool primary_enabled = 2;
 	repeated PopupButtonAction primary_actions = 3;
 	string primary_text = 4;
+	I18nString i18n_primary_text = 5;
 
 	bool secondary_enabled = 8;
 	repeated PopupButtonAction secondary_actions = 9;
 	string secondary_text = 10;
+	I18nString i18n_secondary_text = 11;
 }
 
 message WebPluginComponent {
@@ -2295,7 +2308,7 @@ message Popup {
 	string text_color = 9; // description
 	string font_family = 10;
 	string font_size = 11;
-	string backgorund = 12;
+	string background = 12;
 	string spacer = 13;
 
 	string theme = 17; // plain, light, paper, bold
@@ -3474,7 +3487,7 @@ message LangMessage {
 	string last_message = 6;
 	string author = 7;
 	int64 updated = 8;
-	bool is_editable = 9;
+	bool is_draft = 9;
 	bool from_default = 10;
 }
 
