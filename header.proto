@@ -3244,6 +3244,7 @@ enum RealtimeType {
 	agent_permission_updated = 17;
 	my_user_upserted = 19;
 	user_info_updated = 20;
+	agent_presence_updated = 21;
 
 	user_created = 22;
 	note_created = 23;
