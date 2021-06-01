@@ -3489,7 +3489,7 @@ message LangMessage {
 	string last_message = 6;
 	string author = 7;
 	int64 updated = 8;
-	bool is_draft = 9;
+	string public_state = 9; // public, private, draft
 	bool from_default = 10;
 }
 
