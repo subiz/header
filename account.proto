@@ -141,6 +141,7 @@ message Account {
 	optional Feature force_feature = 36; // only edit by subiz
 	optional WebpageMonitorSetting webpage_monitor_setting = 37;
 
+	optional string locale = 39; // primary locale
 	repeated string supported_locales = 40; // default vi-VN and en-US
 }
 
