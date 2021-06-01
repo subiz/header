@@ -155,7 +155,8 @@ message GenericElement {
 	optional string image_url = 4;
 	optional string subtitle = 5;
 	optional FbAction default_action = 6;
-	optional string id = 7; // fb product id
+	optional string id = 7; // fbproduct id
+	repeated Button buttons = 8;
 }
 
 message FbPayload {
@@ -169,7 +170,7 @@ message FbPayload {
 }
 
 message Button {
-	optional string type = 2;
+	optional string type = 2; // web_url, postback
 	optional string title = 3;
 	optional string payload = 4;
 
