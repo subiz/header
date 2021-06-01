@@ -810,6 +810,7 @@ message BotRunRequest {
 	int64 created = 10;
 	Event event = 11;
 	string bot_trigger_type = 12;
+	string lang = 17;
 }
 
 message BotRunResponse {
