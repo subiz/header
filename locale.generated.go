@@ -2,788 +2,917 @@
 package header
 
 // GetI18n returns the value by its locale
-func GetI18n(str I18NString, locale, fallback string) string {
-
+func GetI18n(str *I18NString, locale, fallback string) string {
 	if locale == "af-NA" {
-		if str.Af_NA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Af_NA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Af_NA
 	}
+
 	if locale == "af-ZA" {
-		if str.Af_ZA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Af_ZA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Af_ZA
 	}
+
 	if locale == "ar-AR" {
-		if str.Ar_AR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ar_AR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ar_AR
 	}
+
 	if locale == "ar-MA" {
-		if str.Ar_MA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ar_MA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ar_MA
 	}
+
 	if locale == "ar-SA" {
-		if str.Ar_SA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ar_SA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ar_SA
 	}
+
 	if locale == "ay-BO" {
-		if str.Ay_BO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ay_BO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ay_BO
 	}
+
 	if locale == "az-AZ" {
-		if str.Az_AZ == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Az_AZ == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Az_AZ
 	}
+
 	if locale == "be-BY" {
-		if str.Be_BY == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Be_BY == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Be_BY
 	}
+
 	if locale == "bg-BG" {
-		if str.Bg_BG == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Bg_BG == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Bg_BG
 	}
+
 	if locale == "bn-IN" {
-		if str.Bn_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Bn_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Bn_IN
 	}
+
 	if locale == "bn-BD" {
-		if str.Bn_BD == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Bn_BD == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Bn_BD
 	}
+
 	if locale == "bs-BA" {
-		if str.Bs_BA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Bs_BA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Bs_BA
 	}
+
 	if locale == "ca-ES" {
-		if str.Ca_ES == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ca_ES == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ca_ES
 	}
+
 	if locale == "ck-US" {
-		if str.Ck_US == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ck_US == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ck_US
 	}
+
 	if locale == "cs-CZ" {
-		if str.Cs_CZ == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Cs_CZ == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Cs_CZ
 	}
+
 	if locale == "cy-GB" {
-		if str.Cy_GB == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Cy_GB == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Cy_GB
 	}
+
 	if locale == "da-DK" {
-		if str.Da_DK == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Da_DK == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Da_DK
 	}
+
 	if locale == "de-AT" {
-		if str.De_AT == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.De_AT == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.De_AT
 	}
+
 	if locale == "de-DE" {
-		if str.De_DE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.De_DE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.De_DE
 	}
+
 	if locale == "de-CH" {
-		if str.De_CH == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.De_CH == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.De_CH
 	}
+
 	if locale == "el-GR" {
-		if str.El_GR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.El_GR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.El_GR
 	}
+
 	if locale == "en-GB" {
-		if str.En_GB == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_GB == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_GB
 	}
+
 	if locale == "en-AU" {
-		if str.En_AU == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_AU == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_AU
 	}
+
 	if locale == "en-CA" {
-		if str.En_CA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_CA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_CA
 	}
+
 	if locale == "en-IE" {
-		if str.En_IE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_IE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_IE
 	}
+
 	if locale == "en-IN" {
-		if str.En_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_IN
 	}
+
 	if locale == "en-PI" {
-		if str.En_PI == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_PI == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_PI
 	}
+
 	if locale == "en-UD" {
-		if str.En_UD == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_UD == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_UD
 	}
+
 	if locale == "en-US" {
-		if str.En_US == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_US == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_US
 	}
+
 	if locale == "en-ZA" {
-		if str.En_ZA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.En_ZA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.En_ZA
 	}
+
 	if locale == "eo-EO" {
-		if str.Eo_EO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Eo_EO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Eo_EO
 	}
+
 	if locale == "es-AR" {
-		if str.Es_AR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_AR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_AR
 	}
+
 	if locale == "es-419" {
-		if str.Es_419 == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_419 == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_419
 	}
+
 	if locale == "es-CL" {
-		if str.Es_CL == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_CL == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_CL
 	}
+
 	if locale == "es-CO" {
-		if str.Es_CO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_CO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_CO
 	}
+
 	if locale == "es-EC" {
-		if str.Es_EC == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_EC == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_EC
 	}
+
 	if locale == "es-ES" {
-		if str.Es_ES == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_ES == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_ES
 	}
+
 	if locale == "es-LA" {
-		if str.Es_LA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_LA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_LA
 	}
+
 	if locale == "es-NI" {
-		if str.Es_NI == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_NI == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_NI
 	}
+
 	if locale == "es-MX" {
-		if str.Es_MX == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_MX == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_MX
 	}
+
 	if locale == "es-US" {
-		if str.Es_US == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_US == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_US
 	}
+
 	if locale == "es-VE" {
-		if str.Es_VE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Es_VE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Es_VE
 	}
+
 	if locale == "et-EE" {
-		if str.Et_EE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Et_EE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Et_EE
 	}
+
 	if locale == "eu-ES" {
-		if str.Eu_ES == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Eu_ES == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Eu_ES
 	}
+
 	if locale == "fa-IR" {
-		if str.Fa_IR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fa_IR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fa_IR
 	}
+
 	if locale == "fb-LT" {
-		if str.Fb_LT == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fb_LT == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fb_LT
 	}
+
 	if locale == "fi-FI" {
-		if str.Fi_FI == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fi_FI == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fi_FI
 	}
+
 	if locale == "fo-FO" {
-		if str.Fo_FO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fo_FO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fo_FO
 	}
+
 	if locale == "fr-CA" {
-		if str.Fr_CA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fr_CA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fr_CA
 	}
+
 	if locale == "fr-FR" {
-		if str.Fr_FR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fr_FR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fr_FR
 	}
+
 	if locale == "fr-BE" {
-		if str.Fr_BE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fr_BE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fr_BE
 	}
+
 	if locale == "fr-CH" {
-		if str.Fr_CH == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fr_CH == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fr_CH
 	}
+
 	if locale == "fy-NL" {
-		if str.Fy_NL == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Fy_NL == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Fy_NL
 	}
+
 	if locale == "ga-IE" {
-		if str.Ga_IE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ga_IE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ga_IE
 	}
+
 	if locale == "gl-ES" {
-		if str.Gl_ES == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Gl_ES == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Gl_ES
 	}
+
 	if locale == "gn-PY" {
-		if str.Gn_PY == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Gn_PY == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Gn_PY
 	}
+
 	if locale == "gu-IN" {
-		if str.Gu_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Gu_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Gu_IN
 	}
+
 	if locale == "gx-GR" {
-		if str.Gx_GR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Gx_GR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Gx_GR
 	}
+
 	if locale == "he-IL" {
-		if str.He_IL == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.He_IL == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.He_IL
 	}
+
 	if locale == "hi-IN" {
-		if str.Hi_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Hi_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Hi_IN
 	}
+
 	if locale == "hr-HR" {
-		if str.Hr_HR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Hr_HR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Hr_HR
 	}
+
 	if locale == "hu-HU" {
-		if str.Hu_HU == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Hu_HU == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Hu_HU
 	}
+
 	if locale == "hy-AM" {
-		if str.Hy_AM == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Hy_AM == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Hy_AM
 	}
+
 	if locale == "id-ID" {
-		if str.Id_ID == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Id_ID == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Id_ID
 	}
+
 	if locale == "is-IS" {
-		if str.Is_IS == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Is_IS == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Is_IS
 	}
+
 	if locale == "it-IT" {
-		if str.It_IT == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.It_IT == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.It_IT
 	}
+
 	if locale == "ja-JP" {
-		if str.Ja_JP == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ja_JP == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ja_JP
 	}
+
 	if locale == "jv-ID" {
-		if str.Jv_ID == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Jv_ID == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Jv_ID
 	}
+
 	if locale == "ka-GE" {
-		if str.Ka_GE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ka_GE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ka_GE
 	}
+
 	if locale == "kk-KZ" {
-		if str.Kk_KZ == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Kk_KZ == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Kk_KZ
 	}
+
 	if locale == "km-KH" {
-		if str.Km_KH == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Km_KH == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Km_KH
 	}
+
 	if locale == "kn-IN" {
-		if str.Kn_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Kn_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Kn_IN
 	}
+
 	if locale == "ko-KR" {
-		if str.Ko_KR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ko_KR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ko_KR
 	}
+
 	if locale == "ku-TR" {
-		if str.Ku_TR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ku_TR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ku_TR
 	}
+
 	if locale == "la-VA" {
-		if str.La_VA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.La_VA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.La_VA
 	}
+
 	if locale == "li-NL" {
-		if str.Li_NL == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Li_NL == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Li_NL
 	}
+
 	if locale == "lt-LT" {
-		if str.Lt_LT == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Lt_LT == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Lt_LT
 	}
+
 	if locale == "lv-LV" {
-		if str.Lv_LV == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Lv_LV == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Lv_LV
 	}
+
 	if locale == "mg-MG" {
-		if str.Mg_MG == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Mg_MG == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Mg_MG
 	}
+
 	if locale == "mk-MK" {
-		if str.Mk_MK == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Mk_MK == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Mk_MK
 	}
+
 	if locale == "ml-IN" {
-		if str.Ml_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ml_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ml_IN
 	}
+
 	if locale == "mn-MN" {
-		if str.Mn_MN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Mn_MN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Mn_MN
 	}
+
 	if locale == "mr-IN" {
-		if str.Mr_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Mr_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Mr_IN
 	}
+
 	if locale == "ms-MY" {
-		if str.Ms_MY == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ms_MY == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ms_MY
 	}
+
 	if locale == "mt-MT" {
-		if str.Mt_MT == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Mt_MT == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Mt_MT
 	}
+
 	if locale == "nb-NO" {
-		if str.Nb_NO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Nb_NO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Nb_NO
 	}
+
 	if locale == "ne-NP" {
-		if str.Ne_NP == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ne_NP == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ne_NP
 	}
+
 	if locale == "nl-BE" {
-		if str.Nl_BE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Nl_BE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Nl_BE
 	}
+
 	if locale == "nl-NL" {
-		if str.Nl_NL == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Nl_NL == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Nl_NL
 	}
+
 	if locale == "nn-NO" {
-		if str.Nn_NO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Nn_NO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Nn_NO
 	}
+
 	if locale == "or-IN" {
-		if str.Or_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Or_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Or_IN
 	}
+
 	if locale == "pa-IN" {
-		if str.Pa_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Pa_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Pa_IN
 	}
+
 	if locale == "pl-PL" {
-		if str.Pl_PL == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Pl_PL == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Pl_PL
 	}
+
 	if locale == "ps-AF" {
-		if str.Ps_AF == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ps_AF == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ps_AF
 	}
+
 	if locale == "pt-BR" {
-		if str.Pt_BR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Pt_BR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Pt_BR
 	}
+
 	if locale == "pt-PT" {
-		if str.Pt_PT == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Pt_PT == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Pt_PT
 	}
+
 	if locale == "qu-PE" {
-		if str.Qu_PE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Qu_PE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Qu_PE
 	}
+
 	if locale == "rm-CH" {
-		if str.Rm_CH == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Rm_CH == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Rm_CH
 	}
+
 	if locale == "ro-RO" {
-		if str.Ro_RO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ro_RO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ro_RO
 	}
+
 	if locale == "ru-RU" {
-		if str.Ru_RU == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ru_RU == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ru_RU
 	}
+
 	if locale == "sa-IN" {
-		if str.Sa_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Sa_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Sa_IN
 	}
+
 	if locale == "se-NO" {
-		if str.Se_NO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Se_NO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Se_NO
 	}
+
 	if locale == "si-LK" {
-		if str.Si_LK == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Si_LK == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Si_LK
 	}
+
 	if locale == "sk-SK" {
-		if str.Sk_SK == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Sk_SK == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Sk_SK
 	}
+
 	if locale == "sl-SI" {
-		if str.Sl_SI == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Sl_SI == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Sl_SI
 	}
+
 	if locale == "so-SO" {
-		if str.So_SO == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.So_SO == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.So_SO
 	}
+
 	if locale == "sq-AL" {
-		if str.Sq_AL == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Sq_AL == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Sq_AL
 	}
+
 	if locale == "sr-RS" {
-		if str.Sr_RS == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Sr_RS == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Sr_RS
 	}
+
 	if locale == "sv-SE" {
-		if str.Sv_SE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Sv_SE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Sv_SE
 	}
+
 	if locale == "sw-KE" {
-		if str.Sw_KE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Sw_KE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Sw_KE
 	}
+
 	if locale == "ta-IN" {
-		if str.Ta_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ta_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ta_IN
 	}
+
 	if locale == "te-IN" {
-		if str.Te_IN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Te_IN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Te_IN
 	}
+
 	if locale == "tg-TJ" {
-		if str.Tg_TJ == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Tg_TJ == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Tg_TJ
 	}
+
 	if locale == "th-TH" {
-		if str.Th_TH == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Th_TH == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Th_TH
 	}
+
 	if locale == "tl-PH" {
-		if str.Tl_PH == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Tl_PH == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Tl_PH
 	}
+
 	if locale == "tr-TR" {
-		if str.Tr_TR == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Tr_TR == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Tr_TR
 	}
+
 	if locale == "tt-RU" {
-		if str.Tt_RU == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Tt_RU == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Tt_RU
 	}
+
 	if locale == "uk-UA" {
-		if str.Uk_UA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Uk_UA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Uk_UA
 	}
+
 	if locale == "ur-PK" {
-		if str.Ur_PK == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Ur_PK == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Ur_PK
 	}
+
 	if locale == "uz-UZ" {
-		if str.Uz_UZ == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Uz_UZ == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Uz_UZ
 	}
+
 	if locale == "vi-VN" {
-		if str.Vi_VN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Vi_VN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Vi_VN
 	}
+
 	if locale == "xh-ZA" {
-		if str.Xh_ZA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Xh_ZA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Xh_ZA
 	}
+
 	if locale == "yi-DE" {
-		if str.Yi_DE == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Yi_DE == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Yi_DE
 	}
+
 	if locale == "zh-Hans" {
-		if str.Zh_Hans == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Zh_Hans == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Zh_Hans
 	}
+
 	if locale == "zh-Hant" {
-		if str.Zh_Hant == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Zh_Hant == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Zh_Hant
 	}
+
 	if locale == "zh-CN" {
-		if str.Zh_CN == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Zh_CN == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Zh_CN
 	}
+
 	if locale == "zh-HK" {
-		if str.Zh_HK == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Zh_HK == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Zh_HK
 	}
+
 	if locale == "zh-SG" {
-		if str.Zh_SG == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Zh_SG == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Zh_SG
 	}
+
 	if locale == "zh-TW" {
-		if str.Zh_TW == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Zh_TW == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Zh_TW
 	}
+
 	if locale == "zu-ZA" {
-		if str.Zu_ZA == "" && fallback != locale && fallback == "" {
- 			return GetI18n(str, fallback, fallback)
+		if str.Zu_ZA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
 		}
 		return str.Zu_ZA
 	}
+
 	return ""
 }
 

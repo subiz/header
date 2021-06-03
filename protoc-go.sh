@@ -1,6 +1,9 @@
 #!/bin/bash -e
 
 TOTAL=1
+echo -e "\033[0;34mgenerating using js"
+node ./lang.js
+
 echo -e "\033[0;34mcompiling proto files"
 $PROTOC --version
 
