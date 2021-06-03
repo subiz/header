@@ -7,6 +7,7 @@ option go_package = "github.com/subiz/header";
 import "common.proto";
 import "account.proto";
 import "noti5.proto";
+import "i18nstring.proto";
 
 message Error {
 	string description = 2;
@@ -1765,30 +1766,7 @@ message PublishMessage {
 	string account_id = 5;
 }
 
-message I18nString {
-	string en_US = 1;  // English
-	string vi_VN = 2;  // Vietnamese
-	string cn = 3;  // Chinese
-	string es = 4;  // Spanish
-	string hi = 5;  // Hindi
-	string fr = 6;  // French
-	string ru = 7;  // Russian
-	string br = 8;  // Brazil
-	string jp = 9;  // Japanese
-	string sw = 10; // Swahili
-	string mr = 11; // Marathi
-	string tr = 12; // Turkish
-	string ta = 13; // Tamil
-	string te = 14; // Telugu
-	string ar = 15; // Arabic
-	string bn = 16; // Bengali
-	string pt = 17; // Portuguese
-	string id = 18; // Indonesian
-	string ko = 19; // Korean
-	string ur = 20; // Urdu
-	string de = 21; // German
-	string custom = 250;
-}
+
 
 // widget
 message WidgetUserSetting {
@@ -2094,8 +2072,8 @@ message WebPlugin {
 
 message TextComponent {
 	string html = 2; // do not edit, generated from quill_delta
+	I18nString i18n_html = 5; // do not edit, generated from quill_delta
 	string quill_delta = 3;
-
 	I18nString i18n_quill_delta = 4;
 }
 
@@ -2136,7 +2114,7 @@ message Notif {
 	Style title_style = 10;
 
 	repeated string message_quill_deltas = 11; // markdown
-	repeated I18nString i18n_message_quill_delta = 23;
+	repeated I18nString i18n_message_quill_deltas = 23;
 
 	Style message_style = 12;
 
