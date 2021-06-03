@@ -4,15 +4,6 @@ package header;
 
 option go_package = "github.com/subiz/header";
 
-/*
-	var langmap = require('langmap')
-	var i = 10
-	var s = lo.map(langmap, (_ , k) => k).filter(k => k.indexOf('-') >= 0).map(k => {
-  i++
-  return "string " + k.replace('-', '_') + " = " + i + "; // " + langmap[k].englishName
-	}).join("\n")
-	console.log(s)
-*/
 message I18nString {
 	string af_NA = 11; // Afrikaans (Namibia)
 	string af_ZA = 12; // Afrikaans (South Africa)

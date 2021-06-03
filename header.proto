@@ -7,7 +7,7 @@ option go_package = "github.com/subiz/header";
 import "common.proto";
 import "account.proto";
 import "noti5.proto";
-import "i18nstring.proto";
+import "locale.generated.proto"; // run node lang.js to generate this file
 
 message Error {
 	string description = 2;
@@ -1064,7 +1064,7 @@ message Message {
 	repeated MessagePong pongs = 17;
 
 	string quill_delta = 20; // deprecated
-	I18nString i18n_quil_delta = 21;
+	I18nString i18n_quill_delta = 21;
 }
 
 message MessagePong {
@@ -1123,6 +1123,8 @@ message MessageButton {
 
 	string phone_number = 16;
 	string webview_size = 18; // fb
+
+	I18nString i18n_title = 19;
 }
 
 message AskInfomationAnswer {
@@ -1185,6 +1187,9 @@ message GenericElementTemplate {
 	repeated MessageButton buttons = 6;
 
 	string id = 7; // fb product id
+
+	I18nString i18n_title = 8;
+	I18nString i18n_subtitle = 9;
 }
 
 enum AttachmentType {
@@ -1248,6 +1253,7 @@ message QuickReply {
 	string title = 3;
 	string payload = 4;
 	string image_url = 5;
+	I18nString i18n_title = 6;
 }
 
 message MessageForm {
@@ -1809,8 +1815,8 @@ message WidgetSetting {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string widget_version = 3;
-	string language = 5;
-	string custom_language = 6; // write-only
+	string language = 5; // remove
+	string custom_language = 6; // write-only remove
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
 	//  string css_url = 9; // old version
@@ -1842,8 +1848,8 @@ message WidgetSetting {
 	WidgetGreeting greeting = 27;
 	string title = 28;
 	string introduction = 29;
-	string custom_language_url = 31;
-	string language_url = 32;
+	string custom_language_url = 31; // remove
+	string language_url = 32; // remove
 	bool auto_request_rating = 33;
 
 	I18nString caption = 35;
