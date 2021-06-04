@@ -1351,6 +1351,7 @@ message PostbackBotJump {
 	string action_id = 4;
 	string from_action = 5;
 	string title = 6;
+	I18nString i18n_title = 7;
 }
 
 message Integrations {
