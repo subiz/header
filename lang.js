@@ -21,6 +21,9 @@ package header
 
 // GetI18n returns the value by its locale
 func GetI18n(str *I18NString, locale, fallback string) string {
+	if str == nil {
+		return ""
+	}
 `
 
 let proto = `syntax = "proto3";
