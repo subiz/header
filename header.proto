@@ -689,6 +689,8 @@ message StartRequest {
 	string group_id = 32;
 
 	string state = 33; // default is pending, should be active if dont want routing
+
+	string locale = 34;
 }
 
 message PresencesRequest {
@@ -1026,6 +1028,8 @@ message Conversation {
 	int64 updated = 43;
 
 	Event matched_event = 45; // for search only
+
+	string locale = 46;
 }
 
 message Rating {
