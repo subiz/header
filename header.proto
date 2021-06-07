@@ -3480,6 +3480,7 @@ message LangMessage {
 	int64 updated = 8;
 	string public_state = 9; // public, private, draft
 	bool from_default = 10;
+	string category = 11;
 }
 
 message Lang {
