@@ -372,4 +372,5 @@ service Watchhttp {
 service Holap {
 	rpc UpdateConversation(header.Conversation) returns (Empty);
 	rpc OnConversationEvent(header.Event) returns (Empty);
+	rpc FreeAccount(header.AccountImage) returns (Empty);
 }

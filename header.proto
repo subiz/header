@@ -3518,3 +3518,8 @@ message ListChangelogsResponse {
 	string anchor = 2;
 	repeated Changelog changelogs = 3;
 }
+
+message AccountImage {
+	account.Account img = 2;
+	account.Agent owner = 3;
+}
