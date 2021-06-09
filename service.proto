@@ -53,11 +53,8 @@ service UserMgr {
 	rpc SearchUsers (header.SearchRequest) returns (header.Users);
 
 	rpc SearchLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
-
 	rpc ListLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
-
 	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
-
 	rpc CreateUser (header.User) returns (Id);
 	rpc UpdateUser (header.User) returns (Id);
 	rpc ReadUser (Id) returns (header.User);
@@ -278,12 +275,6 @@ service WidgetService {
 	rpc Read(Id) returns (header.WidgetSetting);
 	rpc Update(header.WidgetSetting) returns (header.WidgetSetting);
 	rpc ReadUserSetting(Id) returns (header.WidgetUserSetting);
-
-	rpc ReadCampaign(Id) returns (header.Campaign); // remove
-	rpc ListCampaigns(Id) returns (header.Campaigns); // remove
-	rpc CreateCampaign(header.Campaign) returns (header.Campaign); // remove
-	rpc UpdateCampaign(header.Campaign) returns (header.Campaign); // remove
-	rpc DeleteCampaign(header.Campaign) returns (Empty); // remove
 
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
 	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
