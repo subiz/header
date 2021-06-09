@@ -1790,7 +1790,7 @@ message WidgetUserSetting {
 	string language = 6;
 	bool send_transcript = 8;
 	WidgetSetting account_setting = 9;
-	repeated Campaign campaigns = 13;
+	// repeated Campaign campaigns = 13;
 	repeated Bot bots = 14; // remove action
 	repeated WebPlugin plugins = 15;
 
