@@ -938,6 +938,7 @@ message ConversationMember {
 	int64 first_message_at = 19; // ms
 	int64 seen_at = 20;
 	int64 received_at = 21;
+	int64 last_sent = 23; // timestamp
 }
 
 message ListConversationsRequest {
@@ -1003,6 +1004,7 @@ message Conversation {
 	Message last_message = 20;
 
 	Event last_message_sent = 23;
+	Event last_event = 26;
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -1055,7 +1057,6 @@ message Message {
 	string conversation_id = 14;
 	string id = 11;
 	string text = 2;
-
 
 	string format = 3;
 	repeated Attachment attachments = 4;
