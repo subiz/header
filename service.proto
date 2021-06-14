@@ -367,4 +367,6 @@ service Holap {
 	rpc FreeAccount(header.AccountImage) returns (Empty);
 	rpc ReportUser(header.UserMetricsRequest) returns (header.UserMetrics);
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
+	rpc ListUserIds(header.UserMetricsRequest) returns (header.Ids);
+	rpc ListConversationIds(header.ConversationMetricsRequest) returns (header.Ids);
 }
