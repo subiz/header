@@ -347,9 +347,65 @@ enum HaveBeen {
 }
 
 message UserMetric {
+	int64 active_user_num = 3; // live
+	string have_been = 5; // live
+
 	string account_id = 2;
-	int64 active_user_num = 3;
-	string have_been = 5;
+	int64 created_hour = 6;
+	string source = 7;
+	string channel = 8;
+	string channel_source = 9;
+	string first_interact = 10;
+
+	int64 user_count = 65;
+	int64 lead_count = 66;
+}
+
+message UserMetrics {
+	repeated UserMetric metrics = 2;
+}
+
+message UserMetricsRequest {
+	string account_id = 2;
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	repeated string sources = 5;
+	repeated string channels = 6;
+	repeated string channel_sources = 7;
+	repeated string first_interacts = 8;
+}
+
+message ConversationMetric {
+	string account_id = 2;
+	int64 created_hour = 3;
+	string channel = 4;
+	string channel_source = 5;
+	repeated string tags = 6;
+	repeated int32 ratings = 7;
+	int32 last_rating = 8;
+	int64 first_replied_count = 9;
+	int64 first_replied_duration = 10;
+	repeated string agent_ids = 11; // assigned
+	repeated string agent_sent_ids = 12;
+
+	int64 conversation_count = 65;
+	int64 user_sent_count = 66;
+	int64 not_reply_count = 67;
+}
+
+message ConversationMetrics {
+	repeated ConversationMetric metrics = 2;
+}
+
+message ConversationMetricsRequest {
+	string account_id = 2;
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	repeated string channels = 5;
+	repeated string channel_sources = 6;
+	repeated string tags = 7;
+	repeated int32 ratings = 8;
+	repeated string agent_ids = 9;
 }
 
 message SourceMetric {

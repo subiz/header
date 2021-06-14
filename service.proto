@@ -365,4 +365,6 @@ service Holap {
 	rpc UpdateConversation(header.Conversation) returns (Empty);
 	rpc OnConversationEvent(header.Event) returns (Empty);
 	rpc FreeAccount(header.AccountImage) returns (Empty);
+	rpc ReportUser(header.UserMetricsRequest) returns (header.UserMetrics);
+	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 }
