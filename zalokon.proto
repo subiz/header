@@ -14,6 +14,9 @@ message OfficialAccount {
 	int64 authorized = 8;
 	string account_id = 9;
 	string str_oa_id = 10;
+	int64 last_zalo_hook = 11;
+
+	string state = 12; // activated || deleted || failed
 }
 
 message ZaloUser {
