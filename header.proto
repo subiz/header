@@ -377,6 +377,8 @@ message UserMetricsRequest {
 	repeated string first_interacts = 8;
 	int32 tz = 9;
 	string dim = 10;
+	string anchor = 11;
+	int32 limit = 12;
 }
 
 message ConversationMetric {
@@ -413,6 +415,8 @@ message ConversationMetricsRequest {
 	repeated string agent_ids = 9;
 	int32 tz = 10;
 	string dim = 11;
+	string anchor = 12;
+	int32 limit = 13;
 }
 
 message SourceMetric {
