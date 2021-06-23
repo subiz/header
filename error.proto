@@ -1,0 +1,368 @@
+syntax = "proto3";
+
+package header;
+
+option go_package = "github.com/subiz/header";
+
+message Error {
+	string description = 2;
+	string debug = 3;
+	int32 class = 4;
+	string stack = 5;
+	int64 created = 6;
+	string code = 7;
+	string root = 8;
+	string request_id = 9;
+}
+
+enum E {
+	Sub = 0;
+	Email_SendRequest = 10600;
+	PaymentWorkerJob = 110440;
+	AccountResetPasswordEmail = 110533;
+	AccountPasswordChangedEmailRequested = 110534;
+	AccountConfirmChangeEmailEmailRequested = 110535;
+
+	AccountWarnInactive = 110566;
+	UnpaidInvoiceEmail = 110567;
+	SubscriptionUpgradedEmail = 110568;
+	BillCreatedEmail = 110569;
+	DowngradedToFreeEmail = 110570;
+	UnpaidInvoice9DaysEmail = 110572;
+	AccountCreatedEmail = 110573;
+	UpdatePlanEmail = 110574;
+	TrialEnding7Email = 110575;
+	TrialEnding3Email = 110576;
+	TrialEnding1Email = 110577;
+	InvoicePaidEmail = 110578;
+	AccountAgentJoinedEmail = 110579;
+
+	UserTotalConvoUpdated = 111232;
+	BqreportSynced = 3000008;
+	BotSynced = 4000001;
+	StartBot = 4000002;
+	TeminateBot = 4000003;
+
+	undefined = 1; // unknown error
+	internal_error = 2; // typical server error
+	missing_account_id = 3;
+	invalid_proto = 4;  // protobuf message is broken
+	database_error = 5;
+	resource_not_found = 6;
+	access_deny = 7;
+	invalid_json = 8; // json payload is broken
+
+	account_not_found  = 9;
+	invalid_credential  = 10;
+	http_call_error  = 11;
+	agent_group_not_found  = 12;
+	agent_not_found      = 15;
+	facebook_page_not_found = 16;
+	invalid_refresh_token = 17;
+	wrong_password = 18;
+	agent_is_not_active  = 19;
+	invalid_token = 20;
+	invalid_message_size = 21;
+	invalid_payload_size = 22;
+
+	facebook_call_failed = 23;
+	invalid_facebook_access_token  = 24;
+
+	subiz_call_failed = 25;
+	user_is_banned = 26;
+
+	wrong_signature = 27;
+	data_corrupted = 28;
+
+	/*
+	account_fullname_is_empty Code = iota
+	password_is_empty         Code = iota
+	password_too_weak         Code = iota
+	email_is_empty            Code = iota
+	email_is_invalid          Code = iota
+	email_is_used             Code = iota
+	content_type_is_not_json  Code = iota
+	missing_url               Code = iota
+
+	empty_alias Code = iota
+
+	token_expired                         Code = iota
+	change_own_state                      Code = iota
+	owner_state_cannot_be_changed         Code = iota
+	pending_agent_state_cannot_be_changed Code = iota
+	deleted_agent_state_cannot_be_changed Code = iota
+	invalid_form_web_type                 Code = iota
+	invalid_form_mobile_type              Code = iota
+	invalid_form_email_type               Code = iota
+	invalid_datetime                      Code = iota
+
+	query_parsing_error      Code = iota
+	form_parsing_error       Code = iota
+	invalid_http_method      Code = iota
+	connection_id_is_invalid Code = iota
+
+	agent_id_is_invalid Code = iota
+
+	invalid_filestore_credential  Code = iota
+	filestore_error               Code = iota
+	filestore_write_error         Code = iota
+	filestore_read_error          Code = iota
+	filestore_acl_error           Code = iota
+	redis_client_is_uninitialized Code = iota
+	cannot_connect_to_redis       Code = iota
+	redis_error                   Code = iota
+
+	invalid_mask               Code = iota
+	form_is_invalid            Code = iota
+	invalid_apikey             Code = iota
+	invalid_password           Code = iota
+	whitelist_domain_not_found Code = iota
+	blacklist_ip_not_found     Code = iota
+	blocked_user_not_found     Code = iota
+	user_id_is_invalid         Code = iota
+	account_id_is_invalid      Code = iota
+	ip_is_blocked              Code = iota
+	answer_is_wrong            Code = iota
+	url_is_not_whitelisted     Code = iota
+	user_is_banned             Code = iota
+	domain_is_not_whitelisted  Code = iota
+
+	attribute_name_is_empty        Code = iota
+	attribute_type_is_empty        Code = iota
+	attribute_key_is_empty         Code = iota
+	attribyte_type_is_unsupported  Code = iota
+	attribute_list_is_empty        Code = iota
+	attribute_key_is_invalid       Code = iota
+	too_many_attribute             Code = iota
+	attribute_key_not_found        Code = iota
+	attribute_list_item_is_invalid Code = iota
+	attribute_datetime_is_invalid  Code = iota
+	attribute_boolean_is_invalid   Code = iota
+	attribute_number_is_invalid    Code = iota
+	attribute_text_is_invalid      Code = iota
+
+	text_too_long Code = iota
+
+	automation_not_found                Code = iota
+	segmentation_not_found              Code = iota
+	segmentation_id_is_invalid          Code = iota
+	event_id_is_invalid                 Code = iota
+	note_target_id_is_invalid           Code = iota
+	note_id_is_invalid                  Code = iota
+	unknown_segmentation_condition_type Code = iota
+
+	kv_key_not_found                           Code = iota
+	subscription_not_found                     Code = iota
+	payment_method_not_found                   Code = iota
+	missing_primary_payment_method             Code = iota
+	payment_method_state_is_failed             Code = iota
+	primary_payment_method_is_not_credit_card  Code = iota
+	missing_payment_method_id                  Code = iota
+	plan_not_found                             Code = iota
+	invalid_plan_cannot_buy                    Code = iota
+	missing_next_billing_cycle_month           Code = iota
+	trial_package_cannot_buy                   Code = iota
+	missing_billing_cycle_month                Code = iota
+	primary_payment_method_must_be_credit_card Code = iota
+	bank_transfer_payment_method_not_found     Code = iota
+	invoice_not_found                          Code = iota
+	invoice_template_error                     Code = iota
+	execute_invoice_template_error             Code = iota
+	missing_stripe_token                       Code = iota
+	missing_stripe_info                        Code = iota
+	stripe_call_error                          Code = iota
+	missing_stripe_customer_id                 Code = iota
+	invalid_invoice_id                         Code = iota
+	invalid_payment_log_id                     Code = iota
+	invalid_bill_id                            Code = iota
+	unable_to_load_permission                  Code = iota
+	auto_charge_is_not_enabled                 Code = iota
+	stripe_customer_is_not_valid               Code = iota
+	invoice_duedate_empty                      Code = iota
+
+	s3_call_error                   Code = iota
+	pdf_generate_error              Code = iota
+	subscription_started_is_invalid Code = iota
+	subscription_is_nil             Code = iota
+
+	ticket_list_anchor_is_invalid  Code = iota
+	elastic_search_error           Code = iota
+	conversation_not_found         Code = iota
+	chain_is_active                Code = iota
+	invalid_conversation_no_user   Code = iota
+	invalid_accepter_must_be_agent Code = iota
+	conversation_ended             Code = iota
+
+	user_is_the_last_one_in_conversation           Code = iota
+	inviter_is_not_agent                           Code = iota
+	event_must_be_message_event                    Code = iota
+	conversation_id_missing                        Code = iota
+	missing_conversation_id                        Code = iota
+	ticket_id_missing                              Code = iota
+	ticket_id_is_invalid                           Code = iota
+	conversation_id_is_invalid                     Code = iota
+	conversation_already_had_a_ticket              Code = iota
+	ticket_not_found                               Code = iota
+	webhook_not_found                              Code = iota
+	webhook_is_disabled                            Code = iota
+	invalid_conversation_state                     Code = iota
+	event_is_invalid                               Code = iota
+	limit_is_negative                              Code = iota
+	invalid_integration                            Code = iota
+	message_not_found                              Code = iota
+	missing_pong                                   Code = iota
+	invalid_pong_type                              Code = iota
+	invalid_message_type                           Code = iota
+	missing_message_id                             Code = iota
+	user_is_not_in_the_conversation                Code = iota
+	duplicated_message_received_error              Code = iota
+	message_id_is_invalid                          Code = iota
+	integration_id_is_invalid                      Code = iota
+	integration_state_is_invalid                   Code = iota
+	integration_not_found                          Code = iota
+	undefined_router_condition_key                 Code = iota
+	conversation_closed                            Code = iota
+	user_has_already_in_conversation               Code = iota
+	remover_is_not_agent                           Code = iota
+	caller_is_not_leaver                           Code = iota
+	leaver_is_the_last_one_in_conversation         Code = iota
+	empty_message                                  Code = iota
+	too_large_message                              Code = iota
+	unknown_message_format                         Code = iota
+	too_many_attachments                           Code = iota
+	too_many_fields                                Code = iota
+	too_large_attachment                           Code = iota
+	too_long_field                                 Code = iota
+	conversation_closer_is_not_in_the_conversation Code = iota
+	invalid_channel_id                             Code = iota
+	conversation_tag_not_found                     Code = iota
+
+	client_not_found             Code = iota
+	missing_redirect_url         Code = iota
+	missing_client_name          Code = iota
+	corrupted_user_data          Code = iota
+	auth_token_expired           Code = iota
+	hash_bcrypt_error            Code = iota
+	invalid_cipher_size          Code = iota
+	invalid_google_auth_response Code = iota
+	challenge_not_found          Code = iota
+	inactive_agent               Code = iota
+	date_format_is_invalid       Code = iota
+	pipeline_not_found           Code = iota
+	pipeline_is_invalid          Code = iota
+	stage_is_invalid             Code = iota
+	currency_not_found           Code = iota
+	currency_is_invalid          Code = iota
+	exchange_rate_not_found      Code = iota
+	exchange_rate_is_invalid     Code = iota
+	working_day_is_invalid       Code = iota
+	holiday_is_invalid           Code = iota
+
+	service_level_agreement_not_found  Code = iota
+	service_level_agreement_is_invalid Code = iota
+
+	content_id_missing Code = iota
+
+	fcm_token_not_found Code = iota
+
+	grpc_agent_call_error        Code = iota
+	grpc_account_call_error      Code = iota
+	grpc_user_call_error         Code = iota
+	grpc_conversation_call_error Code = iota
+	grpc_content_call_error      Code = iota
+
+	template_message_key_not_found  Code = iota
+	template_message_not_is_creator Code = iota
+
+	promotion_subcription_not_is_trial        Code = iota
+	promotion_not_found                       Code = iota
+	promotion_code_not_found                  Code = iota
+	promotion_only_use_for_credit             Code = iota
+	promotion_only_use_for_discount           Code = iota
+	promotion_used_by_account                 Code = iota
+	promotion_max_number_of_uses              Code = iota
+	promotion_is_deleted                      Code = iota
+	promotion_account_invalid                 Code = iota
+	promotion_plan_invalid                    Code = iota
+	promotion_number_of_agent_invalid         Code = iota
+	promotion_referral_program_agent_inactive Code = iota
+	promotion_add_log_bill_error              Code = iota
+	promotion_add_log_account_invited_error   Code = iota
+	promotion_referral_program_not_found      Code = iota
+	referrer_code_invalid                     Code = iota
+	transaction_exists                        Code = iota
+	amount_invalid                            Code = iota
+	transaction_is_missing                    Code = iota
+
+	invalid_partition_version                  Code = iota
+	invalid_partition_cluster                  Code = iota
+	invalid_partition_term                     Code = iota
+	partition_rebalance_timeout                Code = iota
+	error_from_partition_peer                  Code = iota
+	partition_node_have_not_joined_the_cluster Code = iota
+	wrong_partition_host                       Code = iota
+	duplicated_partition_term                  Code = iota
+	worker_denied                              Code = iota
+
+	file_key_is_missing     Code = iota
+	file_size_is_missing    Code = iota
+	file_size_invalid       Code = iota
+	file_not_found          Code = iota
+	file_key_secret_invalid Code = iota
+	file_type_invalid       Code = iota
+
+	file_error     Code = iota
+	tempfile_error Code = iota
+	invalid_css    Code = iota
+
+	send_to_abandon_chan    Code = iota
+	send_to_channel_timeout Code = iota
+
+	too_many_subs_for_a_topic Code = iota
+	too_many_topics_for_a_sub Code = iota
+
+	endpoint_not_found Code = iota
+	invalid_url        Code = iota
+
+
+	zalo_call_error Code = iota
+
+	invalid_oauth_scope    Code = iota
+	setting_bot_exists     Code = iota
+	setting_bot_not_found  Code = iota
+	unconverted_v3_account Code = iota
+
+	invalid_event_type Code = iota
+
+	server_error Code = iota
+
+	user_not_login Code = iota
+
+	invalid_report_range  Code = iota
+	invalid_report_metric Code = iota
+
+	subiz_call_error Code = iota
+
+	endchat_bot_setting_after_agent_message_too_low  Code = iota
+	endchat_bot_setting_after_agent_message_too_high Code = iota
+	endchat_bot_setting_after_user_message_too_low   Code = iota
+	endchat_bot_setting_after_user_message_too_high  Code = iota
+	endchat_bot_setting_after_any_message_too_low    Code = iota
+	endchat_bot_setting_after_any_message_too_high   Code = iota
+	endchat_bot_setting_age_too_low                  Code = iota
+	endchat_bot_setting_age_too_high                 Code = iota
+
+	webhook_verification_error Code = iota
+	wrong_verification_key     Code = iota
+	unreachable_webhook        Code = iota
+	webhook_timeout            Code = iota
+
+	goal_status_invalid   Code = iota
+	not_found_campaign_id Code = iota
+
+	invalid_poll_token               Code = iota
+	expired_poll_token               Code = iota
+	dead_poll_connection             Code = iota
+	free_account_cannot_invite_agent Code = iota
+	*/
+}

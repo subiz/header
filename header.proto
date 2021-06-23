@@ -7,17 +7,8 @@ option go_package = "github.com/subiz/header";
 import "common.proto";
 import "account.proto";
 import "noti5.proto";
+import "error.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
-
-message Error {
-	string description = 2;
-	string debug = 3;
-	int32 class = 4;
-	string stack = 5;
-	int64 created = 6;
-	string code = 7;
-	string root = 8;
-}
 
 message Empty {
 	common.Context ctx = 1;
@@ -3388,38 +3379,6 @@ enum RealtimeType {
 	language_updated = 104;
 }
 
-enum E {
-	Sub = 0;
-
-	Email_SendRequest = 10600;
-
-	PaymentWorkerJob = 110440;
-
-	AccountResetPasswordEmail = 110533;
-	AccountPasswordChangedEmailRequested = 110534;
-	AccountConfirmChangeEmailEmailRequested = 110535;
-
-	AccountWarnInactive = 110566;
-	UnpaidInvoiceEmail = 110567;
-	SubscriptionUpgradedEmail = 110568;
-	BillCreatedEmail = 110569;
-	DowngradedToFreeEmail = 110570;
-	UnpaidInvoice9DaysEmail = 110572;
-	AccountCreatedEmail = 110573;
-	UpdatePlanEmail = 110574;
-	TrialEnding7Email = 110575;
-	TrialEnding3Email = 110576;
-	TrialEnding1Email = 110577;
-	InvoicePaidEmail = 110578;
-	AccountAgentJoinedEmail = 110579;
-
-	UserTotalConvoUpdated = 111232;
-	BqreportSynced = 3000008;
-	BotSynced = 4000001;
-	StartBot = 4000002;
-	TeminateBot = 4000003;
-}
-
 // TODO: remove after remove old dashboard
 message SessionCookie {
 	string refresh_token = 3;
@@ -3575,6 +3534,7 @@ message Changelog {
 	string content = 5;
 	string created_by = 6;
 	int64 created = 7;
+	string updated = 8;
 }
 
 message ListChangelogsRequest {
