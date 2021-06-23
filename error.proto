@@ -9,7 +9,7 @@ message Error {
 	string debug = 3;
 	int32 class = 4;
 	string stack = 5;
-	int64 created = 6;
+	int64 created = 6; // ms
 	string code = 7;
 	string root = 8;
 	string request_id = 9;

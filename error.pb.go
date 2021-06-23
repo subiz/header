@@ -219,7 +219,7 @@ type Error struct {
 	Debug       string `protobuf:"bytes,3,opt,name=debug,proto3" json:"debug,omitempty"`
 	Class       int32  `protobuf:"varint,4,opt,name=class,proto3" json:"class,omitempty"`
 	Stack       string `protobuf:"bytes,5,opt,name=stack,proto3" json:"stack,omitempty"`
-	Created     int64  `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"`
+	Created     int64  `protobuf:"varint,6,opt,name=created,proto3" json:"created,omitempty"` // ms
 	Code        string `protobuf:"bytes,7,opt,name=code,proto3" json:"code,omitempty"`
 	Root        string `protobuf:"bytes,8,opt,name=root,proto3" json:"root,omitempty"`
 	RequestId   string `protobuf:"bytes,9,opt,name=request_id,json=requestId,proto3" json:"request_id,omitempty"`

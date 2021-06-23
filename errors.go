@@ -22,26 +22,34 @@ import (
 	"time"
 )
 
-// Wrap converts a random error to an `*errors.Error`, information of the
+// wrapErr converts an unknown error to an `*Error`, information of the
 // old error stored in Root field.
-func FromErr(err error, class int, v ...interface{}) error {
-	if err == nil {
-		return nil
+// this function dont create a new error if the root error is already *Error
+//   instead it attach class and code to the root (but only when those
+//   properties of the root error is not defined.
+//   Otherwise, this function create a brand new *Error.
+func wrapErr(root error, class int, code E, v ...interface{}) *Error {
+	if root == nil {
+		// no root
+		return newError(class, code, v)
 	}
 
-	mye, ok := err.(*Error)
+	mye, ok := root.(*Error)
 	if !ok {
-		e := newError(class, E_undefined, append(v, err.Error()))
-		e.Root = err.Error()
+		e := newError(class, code, append(v, root.Error()))
+		e.Root = root.Error()
 		return e
 	}
 
 	if mye == nil {
-		return nil
+		// no root
+		return newError(class, code, v)
 	}
 
+	// if root existed, dont try to create a new error
+
 	if mye.Code == "" {
-		mye.Code = E_undefined.String()
+		mye.Code = code.String()
 	}
 
 	if class != 0 && mye.Class == 0 {
@@ -49,7 +57,7 @@ func FromErr(err error, class int, v ...interface{}) error {
 	}
 
 	if len(v) > 0 {
-		e := newError(class, E_undefined, v)
+		e := newError(class, code, v)
 		mye.Description += "\n" + e.Description
 	}
 	return mye
@@ -62,7 +70,7 @@ func Errorf(format string, v ...interface{}) *Error {
 	return &Error{
 		Description: desc,
 		Class:       int32(500),
-		Created:     time.Now().UnixNano(),
+		Created:     time.Now().UnixNano() / 1e6,
 		Code:        E_undefined.String(),
 	}
 }
@@ -88,27 +96,27 @@ func newError(class int, code E, v ...interface{}) *Error {
 	e.Description = message
 	e.Class = int32(class)
 	e.Stack = getStack(1)
-	e.Created = time.Now().UnixNano()
+	e.Created = time.Now().UnixNano() / 1e6
 	e.Code = code.String()
 	return e
 }
 
-func E400(code E, v ...interface{}) *Error {
-	return newError(400, code, v...)
+func E400(err error, code E, v ...interface{}) *Error {
+	return wrapErr(err, 400, code, v...)
 }
 
-func E500(code E, v ...interface{}) *Error {
-	return newError(500, code, v...)
+func E500(err error, code E, v ...interface{}) *Error {
+	return wrapErr(err, 500, code, v...)
 }
 
 // FromString unmarshal an error string to *Error
 func FromString(err string) *Error {
 	if !strings.HasPrefix(err, "#ERR ") {
-		return E500(E_undefined, err)
+		return E500(nil, E_undefined, err)
 	}
 	e := &Error{}
 	if er := json.Unmarshal([]byte(err[len("#ERR "):]), e); er != nil {
-		return E500(E_invalid_json, "%s, %s", er, err)
+		return E500(er, E_invalid_json, "%s, %s", er, err)
 	}
 	return e
 }
