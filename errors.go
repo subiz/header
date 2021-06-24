@@ -158,8 +158,6 @@ func getStack(skip int) string {
 		if !strings.HasPrefix(file, "/vendor") {
 			file = trimOutPrefix(file, "/git.subiz.net/")
 			file = trimOutPrefix(file, "/github.com/")
-			file = trimOutPrefix(file, "/gitlab.com/")
-			file = trimOutPrefix(file, "/bitbucket.org/")
 			file = trimOutPrefix(file, "/gopkg.in/")
 		}
 
