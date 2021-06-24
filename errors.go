@@ -36,7 +36,19 @@ func wrapErr(root error, class int, code E, v ...interface{}) *Error {
 
 	mye, ok := root.(*Error)
 	if !ok {
-		e := newError(class, code, append(v, root.Error()))
+		// casting to err failed
+		// dont give up yet, fallback to json
+		errstr := root.Error()
+		if strings.HasPrefix(errstr, "#ERR ") {
+			roote := &Error{}
+			if er := json.Unmarshal([]byte(errstr[len("#ERR "):]), roote); er == nil {
+				if roote.Code != "" && roote.Class != 0 { // valid err
+					return roote
+				}
+			}
+		}
+
+		e := newError(class, code, append(v, errstr))
 		e.Root = root.Error()
 		return e
 	}
@@ -47,7 +59,6 @@ func wrapErr(root error, class int, code E, v ...interface{}) *Error {
 	}
 
 	// if root existed, dont try to create a new error
-
 	if mye.Code == "" {
 		mye.Code = code.String()
 	}

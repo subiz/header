@@ -91,4 +91,10 @@ enum E {
 	invalid_agent_id = 41;
 	invalid_note_target_id = 42;
 
+	invalid_event_id = 43;
+	invalid_content_type = 44;
+	parse_query_failed = 45;
+	domain_is_not_whitelisted = 46;
+	invalid_domain = 47;
+	ip_is_blocked = 48;
 }
