@@ -81,4 +81,14 @@ enum E {
 
 	user_not_found = 33;
 	automation_not_found = 34;
+	invalid_attribute_value = 35;
+	invalid_attribute_key = 36;
+	invalid_attribute_name = 37;
+	invalid_attribute_type = 38;
+
+	too_many_attribute = 39;
+	attribute_not_found=40;
+	invalid_agent_id = 41;
+	invalid_note_target_id = 42;
+
 }
