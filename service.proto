@@ -362,6 +362,8 @@ service Watchhttp {
 
 // holap services
 service Holap {
+	rpc AppendAgentSet(account.Agent) returns (Empty);
+	rpc AppendTagSet(header.Tag) returns (Empty);
 	rpc UpdateUser(header.User) returns (Empty);
 	rpc UpdateConversation(header.Conversation) returns (Empty);
 	rpc OnConversationEvent(header.Event) returns (Empty);
