@@ -97,4 +97,48 @@ enum E {
 	domain_is_not_whitelisted = 46;
 	invalid_domain = 47;
 	ip_is_blocked = 48;
+
+	invalid_transaction_id = 49;
+	invalid_amount = 50;
+	inactive_promotion_referral_program = 51;
+
+	plan_not_found = 52;
+	invoice_not_found = 53;
+	invalid_stripe_info = 54;
+	subscription_not_found = 55;
+	invalid_plan = 56;
+
+	promotion_not_found = 57;
+	invalid_promotion = 58;
+
+	invalid_email = 59;
+	email_taken = 60;
+	invalid_date_format = 61;
+	prohibited_action = 62;
+
+	invalid_working_day = 63;
+	invalid_holiday = 64;
+
+	// password_too_weak = 65;
+	invalid_fullname = 66;
+	invalid_password = 67;
+	invalid_token_type = 68;
+	invalid_invoice_template = 69;
+	invoice_template_compile_failed = 70;
+
+	invalid_google_auth_response = 71;
+	pdf_generate_failed = 72;
+
+	invalid_stripe_customer_id = 73;
+	invalid_stripe_token = 74;
+	stripe_call_failed = 75;
+	invalid_bill_id = 76;
+	invalid_invoice_id = 77;
+	invalid_id = 78;
+	payment_method_not_found = 79;
+	invalid_invoice_duedate = 80;
+	filestore_error = 81;
+	invalid_country = 82;
+	invalid_referrer_code = 83;
+	invalid_oauth_scope = 84;
 }
