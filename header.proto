@@ -401,9 +401,10 @@ message ConversationMetricsRequest {
 	int64 created_hour_to = 4;
 	repeated string channels = 5;
 	repeated string channel_sources = 6;
-	repeated string tags = 7;
 	repeated int32 ratings = 8;
-	repeated string agent_ids = 9;
+	repeated string tags = 7; // and
+	repeated string agent_ids = 9; // and
+	repeated string agent_sent_ids = 14; // and
 	int32 tz = 10;
 	string dim = 11;
 	string anchor = 12;
