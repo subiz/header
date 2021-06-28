@@ -63,6 +63,22 @@ service UserMgr {
 	rpc ReportUsers (header.UserReportRequest) returns (header.UserReportResult);
 
 	rpc MatchUsers(Ids) returns (header.Users);
+
+	rpc UpsertView(header.UserView) returns (header.UserView);
+	rpc DeleteView(Id) returns (Empty);
+	rpc GetView(Id) returns (header.UserView);
+	rpc ListViews(Id) returns (header.UserViews);
+	rpc ListUserInViews(header.UserViewCondition) returns (header.Users);
+
+	rpc UpsertLabel(header.Label) returns (header.Label);
+	rpc DeleteLabel(Id) returns (Empty);
+	rpc ListLabels(Id) returns (header.Label);
+	rpc GetLabel(Id) returns (header.Label);
+}
+
+service UserPersist {
+	rpc UpdateUser(header.User) returns (Empty);
+	rpc FilterUsers(header.UserViewCondition) returns (header.Users);
 }
 
 service LiveMgr {

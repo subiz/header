@@ -119,10 +119,14 @@ message User {
 	UserSession session = 40;
 	repeated string lead_owners = 41;
 	repeated UserLabel labels = 42;
+
+	bool is_lead = 43;
+	string lead_stage = 44;
 }
 
 message UserLabel {
-	string label_id = 2;
+	string label = 2;
+
 	string by = 3;
 	int64 at = 5; // ms
 }
@@ -130,13 +134,20 @@ message UserLabel {
 message Label {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
+	string id = 3; // user generated // key
 
 	string title = 4;
 	string description = 7;
 	string creator = 8;
 	int64 created = 9; // ms
+
 	string color = 10;
+
+	string updator = 12;
+	int64 updated = 11;
+
+	int64 deleted = 13;
+	int64 deletor = 14;
 }
 
 message Users {
@@ -145,6 +156,8 @@ message Users {
 	string signature = 3;
 	int64 hit = 4;
 	int64 total = 5;
+
+	string anchor = 6;
 }
 
 message SessionCampaign {
@@ -1837,8 +1850,6 @@ message PublishMessage {
 
 	string account_id = 5;
 }
-
-
 
 // widget
 message WidgetUserSetting {
@@ -3553,4 +3564,66 @@ message AccountImage {
 	account.Account img = 2;
 	account.Agent owner = 3;
 	string header_version = 4;
+}
+
+message GetUserFilter {
+	common.Context ctx = 1;
+	repeated string ids = 3;
+	string keyword = 4;
+
+	int64 limit = 5;
+	string anchor = 6;
+	string order_by = 7;
+
+	int64 total = 8;
+}
+
+message UserViews {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated UserView views = 4;
+}
+
+message UserView {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	UserViewCondition condition = 4;
+
+	string created_by = 5;
+	int64 created = 6;
+	string updated_by = 7;
+	int64 updated = 8;
+
+	bool is_public = 9;
+	string name = 10;
+
+	int64 total = 11;
+}
+
+message UserViewCondition {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string anchor = 3;
+
+	string key = 4; // unique
+	string operator = 5; // JSON {regex: 32}
+	string value = 6; // JSON
+
+	enum JoinOperator {
+		and = 0;
+		or = 1;
+	}
+	string join = 7;
+	repeated UserViewCondition conditions = 9;
+
+	enum Function {
+		minute_of_day = 0;
+		hour_of_day = 1;
+		day_of_week = 2;
+		day_ago = 3;
+	}
+	string function = 14; // used to transform value of left side before evaluate expression
+
+	string order_by = 15; // key.username asc
 }
