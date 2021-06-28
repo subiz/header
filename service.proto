@@ -72,7 +72,7 @@ service UserMgr {
 
 	rpc UpsertLabel(header.Label) returns (header.Label);
 	rpc DeleteLabel(Id) returns (Empty);
-	rpc ListLabels(Id) returns (header.Label);
+	rpc ListLabels(Id) returns (header.Labels);
 	rpc GetLabel(Id) returns (header.Label);
 }
 

@@ -141,4 +141,13 @@ enum E {
 	invalid_country = 82;
 	invalid_referrer_code = 83;
 	invalid_oauth_scope = 84;
+
+	invalid_label_id = 85;
+	invalid_label_name = 86;
+	invalid_label_color = 87;
+	invalid_label_description = 88;
+
+	invalid_user_view_name = 89;
+
+	limit_reached = 90;
 }

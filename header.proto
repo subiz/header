@@ -146,8 +146,13 @@ message Label {
 	string updator = 12;
 	int64 updated = 11;
 
-	int64 deleted = 13;
-	int64 deletor = 14;
+	bool disabled = 15;
+}
+
+message Labels {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Label labels = 3;
 }
 
 message Users {
@@ -3627,7 +3632,7 @@ message UserViewCondition {
 	string account_id = 2;
 	string anchor = 3;
 
-	string key = 4; // unique
+	string key = 4; // id, keyword, lead_owner attr.fullname
 	string operator = 5; // JSON {regex: 32}
 	string value = 6; // JSON
 
@@ -3646,5 +3651,5 @@ message UserViewCondition {
 	}
 	string function = 14; // used to transform value of left side before evaluate expression
 
-	string order_by = 15; // key.username asc
+	string order_by = 15; // attr.username asc
 }
