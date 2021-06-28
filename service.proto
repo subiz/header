@@ -388,4 +388,5 @@ service Holap {
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 	rpc ListUserIds(header.UserMetricsRequest) returns (header.Ids);
 	rpc ListConversationIds(header.ConversationMetricsRequest) returns (header.Ids);
+	rpc ReportAgent(header.AgentMetricsRequest) returns (header.AgentMetrics);
 }

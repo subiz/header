@@ -424,6 +424,27 @@ message ConversationMetricsRequest {
 	int32 limit = 13;
 }
 
+message AgentMetric {
+	string account_id = 2;
+	int64 created_hour = 3;
+	string agent_id = 4;
+	string date = 5; // derived
+	int64 message_sent_count = 65;
+}
+
+message AgentMetrics {
+	repeated AgentMetric metrics = 2;
+}
+
+message AgentMetricsRequest {
+	string account_id = 2;
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	repeated string agent_ids = 5;
+	int32 tz = 10;
+	string dim = 11;
+}
+
 message SourceMetric {
 	string account_id = 2;
 	string source = 3; // direct, referring, organic,social, advertising
