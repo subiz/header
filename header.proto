@@ -403,6 +403,8 @@ message ConversationMetric {
 	repeated string agent_ids = 11; // assigned
 	repeated string agent_sent_ids = 12;
 	string date = 13; // derived
+	int64 tag_bits = 14; // only system
+	string tag_strings = 15; // only system
 
 	int64 conversation_count = 65;
 	int64 user_sent_count = 66;
