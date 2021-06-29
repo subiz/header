@@ -6,6 +6,7 @@ option go_package = "github.com/subiz/header";
 
 import "common.proto";
 import "account.proto";
+import "type.proto";
 import "noti5.proto";
 import "error.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
@@ -115,13 +116,14 @@ message User {
 	string id = 3;
 	string account_id = 4;
 	repeated string aliases = 5;
+	repeated UserNote notes = 6;
 	repeated Attribute attributes = 18;
 	UserSession session = 40;
 	repeated string lead_owners = 41;
 	repeated UserLabel labels = 42;
-
 	bool is_lead = 43;
 	string lead_stage = 44;
+	int64 lead_at = 45;
 }
 
 message UserLabel {
@@ -138,12 +140,12 @@ message Label {
 
 	string title = 4;
 	string description = 7;
-	string creator = 8;
+	string created_by = 8;
 	int64 created = 9; // ms
 
 	string color = 10;
 
-	string updator = 12;
+	string updated_by = 12;
 	int64 updated = 11;
 
 	bool disabled = 15;
@@ -242,6 +244,20 @@ message Notes {
 	common.Context ctx = 1;
 	repeated Note notes = 3;
 	string anchor = 4;
+}
+
+message UserNote {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string user_id = 4;
+
+	string creator_id = 5;
+	string text = 6;
+	int64 created = 7;
+	int64 updated = 8;
+	string created_by = 9;
+	string updated_by = 10;
 }
 
 message ListNotesRequest {
@@ -3633,26 +3649,17 @@ message UserView {
 message UserViewCondition {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string anchor = 3;
 
 	string key = 4; // id, keyword, lead_owner attr.fullname
-	string operator = 5; // JSON {regex: 32}
-	string value = 6; // JSON
+	string type = 5;
+	TextCondition text_condition = 6;
+	IntCondition int_condition = 7;
+	BoolCondition bool_condition = 8;
+	FloatCondition float_condition = 9;
 
-	enum JoinOperator {
-		and = 0;
-		or = 1;
-	}
-	string join = 7;
-	repeated UserViewCondition conditions = 9;
-
-	enum Function {
-		minute_of_day = 0;
-		hour_of_day = 1;
-		day_of_week = 2;
-		day_ago = 3;
-	}
-	string function = 14; // used to transform value of left side before evaluate expression
+	repeated UserViewCondition all = 12; // preferred
+	repeated UserViewCondition one = 13;
 
 	string order_by = 15; // attr.username asc
+	string anchor = 16;
 }
