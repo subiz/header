@@ -395,7 +395,6 @@ message ConversationMetric {
 	int64 created_hour = 3;
 	string channel = 4;
 	string channel_source = 5;
-	repeated string tags = 6;
 	repeated int32 ratings = 7;
 	int32 last_rating = 8;
 	int64 first_replied_count = 9;
@@ -405,6 +404,8 @@ message ConversationMetric {
 	string date = 13; // derived
 	int64 tag_bits = 14; // only system
 	string tag_strings = 15; // only system
+	repeated string tags = 6;
+	string tag = 16; // derived
 
 	int64 conversation_count = 65;
 	int64 user_sent_count = 66;
