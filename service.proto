@@ -75,10 +75,10 @@ service UserMgr {
 	rpc ListLabels(Id) returns (header.Labels);
 	rpc GetLabel(Id) returns (header.Label);
 
-	rpc AddLeadOwner(UserRequest) returns (header.User);
-	rpc RemoveLeadOwner(UserRequest) returns (header.User);
-	rpc AddUserLabel(UserRequest) returns (header.User);
-	rpc RemoveUserLabel(header.Id) returns (header.User);
+	rpc AddLeadOwner(UserRequest) returns (Empty);
+	rpc RemoveLeadOwner(UserRequest) returns (Empty);
+	rpc AddUserLabel(UserRequest) returns (Empty);
+	rpc RemoveUserLabel(UserRequest) returns (Empty);
 }
 
 service UserPersist {
