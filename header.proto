@@ -1157,6 +1157,7 @@ message Conversation {
 
 	string locale = 46;
 	repeated string agent_sent_ids = 47;
+	int64 first_replied_duration = 48;
 }
 
 message Rating {
