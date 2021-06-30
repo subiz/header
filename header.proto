@@ -442,6 +442,7 @@ message ConversationMetricsRequest {
 	repeated string tags = 7; // and
 	repeated string agent_ids = 9; // and
 	repeated string agent_sent_ids = 14; // and
+	int64 first_replied_duration_gt = 15;
 	int32 tz = 10;
 	string dim = 11;
 	string anchor = 12;
@@ -1150,6 +1151,7 @@ message Conversation {
 	Event matched_event = 45; // for search only
 
 	string locale = 46;
+	repeated string agent_sent_ids = 47;
 }
 
 message Rating {
