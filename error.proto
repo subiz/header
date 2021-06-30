@@ -150,4 +150,5 @@ enum E {
 	invalid_user_view_name = 89;
 
 	limit_reached = 90;
+	invalid_time_range = 91;
 }
