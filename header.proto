@@ -127,7 +127,7 @@ message User {
 }
 
 message UserLabel {
-	string label = 2;
+	string label = 2; // id
 
 	string by = 3;
 	int64 at = 5; // ms
@@ -228,6 +228,7 @@ message UserCreateResult {
 	string mask = 5;
 }
 
+// remove
 message Note {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -240,6 +241,7 @@ message Note {
 	string target_id = 9; // user_id
 }
 
+// remove
 message Notes {
 	common.Context ctx = 1;
 	repeated Note notes = 3;
@@ -252,12 +254,18 @@ message UserNote {
 	string id = 3;
 	string user_id = 4;
 
-	string creator_id = 5;
 	string text = 6;
 	int64 created = 7;
 	int64 updated = 8;
 	string created_by = 9;
 	string updated_by = 10;
+}
+
+message UserRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string object_id = 4;
 }
 
 message ListNotesRequest {
@@ -3363,6 +3371,7 @@ enum RealtimeType {
 
 	user_created = 22;
 	note_created = 23;
+
 	presence_updated = 24;
 	content_viewed = 25;
 	content_searched = 26;
@@ -3442,6 +3451,15 @@ enum RealtimeType {
 	site_down = 103;
 
 	language_updated = 104;
+
+	user_note_updated = 105;
+	user_note_deleted = 106;
+
+	user_lead_owner_updated = 107;
+	user_lead_owner_deleted = 108;
+
+	user_label_updated = 109;
+	user_label_deleted = 110;
 }
 
 // TODO: remove after remove old dashboard
