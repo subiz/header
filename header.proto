@@ -807,8 +807,13 @@ message StartRequest {
 	string group_id = 32;
 
 	string state = 33; // default is pending, should be active if dont want routing
-
 	string locale = 34;
+
+	// starter may be user, but because of bot or automation,
+	// if user manually click on start conversation button initial_by is user id
+	// if bot automatically created conversation by widget (using user cred),
+	// initial_by is bot id
+	string initial_by = 35;
 }
 
 message PresencesRequest {
