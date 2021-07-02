@@ -381,6 +381,13 @@ enum HaveBeen {
 	immutable = 3;
 }
 
+enum PK {
+	id = 0;
+	account_id = 1;
+	domain = 2;
+	facebook_page_id = 3;
+};
+
 message UserMetric {
 	int64 active_user_num = 3; // live
 	string have_been = 5; // live
