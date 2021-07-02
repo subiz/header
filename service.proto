@@ -394,4 +394,5 @@ service Holap {
 	rpc ListUserIds(header.UserMetricsRequest) returns (header.Ids);
 	rpc ListConversationIds(header.ConversationMetricsRequest) returns (header.Conversations);
 	rpc ReportAgent(header.AgentMetricsRequest) returns (header.AgentMetrics);
+	rpc ListChannelTouchpoints(header.Ids) returns (header.Ids);
 }

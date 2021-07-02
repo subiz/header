@@ -31,6 +31,7 @@ message Ids {
 
 	repeated int64 last_modifieds = 5; // ms
 	string anchor = 6;
+	int32 limit = 7;
 }
 
 message KV {
@@ -1164,8 +1165,10 @@ message Conversation {
 	Event matched_event = 45; // for search only
 
 	string locale = 46;
-	repeated string agent_sent_ids = 47;
-	int64 first_replied_duration = 48;
+	repeated string agent_sent_ids = 47; // holap derived
+	int64 first_replied_duration = 48; // holap derived
+	string channel = 49; // holap derived
+	string channel_touchpoint = 50; // holap derived
 }
 
 message Rating {
