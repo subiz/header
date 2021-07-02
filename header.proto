@@ -386,6 +386,7 @@ enum PK {
 	account_id = 1;
 	domain = 2;
 	facebook_page_id = 3;
+	zalo_oa_id = 4;
 };
 
 message UserMetric {
