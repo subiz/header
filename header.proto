@@ -400,6 +400,7 @@ message UserMetric {
 	string channel_touchpoint = 9;
 	string first_interact = 10;
 	string date = 11; // derived
+	int64 seen_hour = 12;
 
 	int64 user_count = 65;
 	int64 lead_count = 66;
@@ -413,10 +414,13 @@ message UserMetricsRequest {
 	string account_id = 2;
 	int64 created_hour_from = 3;
 	int64 created_hour_to = 4;
+	int64 seen_hour_from = 13;
+	int64 seen_hour_to = 14;
 	repeated string sources = 5;
 	repeated string channels = 6;
 	repeated string channel_touchpoints = 7;
 	repeated string first_interacts = 8;
+	repeated string session_sources = 15;
 	int32 tz = 9;
 	string dim = 10;
 	string anchor = 11;
@@ -439,6 +443,7 @@ message ConversationMetric {
 	string tag_strings = 15; // only system
 	repeated string tags = 6;
 	string tag = 16; // derived
+	int64 latest_sent_hour = 17;
 
 	int64 conversation_count = 65;
 	int64 user_sent_count = 66;
@@ -453,6 +458,8 @@ message ConversationMetricsRequest {
 	string account_id = 2;
 	int64 created_hour_from = 3;
 	int64 created_hour_to = 4;
+	int64 latest_sent_hour_from = 16;
+	int64 latest_sent_hour_to = 17;
 	repeated string channels = 5;
 	repeated string channel_touchpoints = 6;
 	repeated int32 ratings = 8;
