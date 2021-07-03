@@ -831,6 +831,8 @@ message StartRequest {
 	// if bot automatically created conversation by widget (using user cred),
 	// initial_by is bot id
 	string initial_by = 35;
+
+	string source = 36;
 }
 
 message PresencesRequest {
