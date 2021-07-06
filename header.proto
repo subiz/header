@@ -479,6 +479,12 @@ message AgentMetric {
 	string agent_id = 4;
 	string date = 5; // derived
 	int64 message_sent_count = 65;
+	int64 conversation_count = 66;
+	int64 first_replied_count = 67;
+	int64 first_replied_duration = 68;
+	int64 great_rating_count = 69;
+	int64 not_reply_count = 70;
+	int64 conversation_sent_count = 71;
 }
 
 message AgentMetrics {
