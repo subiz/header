@@ -600,6 +600,7 @@ message Event {
 		Site site = 52;
 		WebpageCheck webpage_check = 53;
 		LangMessage language_message = 54;
+		Label label = 55;
 	}
 	Data data = 20;
 }
