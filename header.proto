@@ -421,6 +421,7 @@ message UserMetricsRequest {
 	repeated string channel_touchpoints = 7;
 	repeated string first_interacts = 8;
 	repeated string session_sources = 15;
+	repeated string not_channels = 16;
 	int32 tz = 9;
 	string dim = 10;
 	string anchor = 11;
@@ -467,6 +468,7 @@ message ConversationMetricsRequest {
 	repeated string agent_ids = 9; // and
 	repeated string agent_sent_ids = 14; // and
 	int64 first_replied_duration_gt = 15;
+	repeated string not_channels = 18;
 	int32 tz = 10;
 	string dim = 11;
 	string anchor = 12;
@@ -476,6 +478,7 @@ message ConversationMetricsRequest {
 message AgentMetric {
 	string account_id = 2;
 	int64 created_hour = 3;
+	string channel = 6;
 	string agent_id = 4;
 	string date = 5; // derived
 	int64 message_sent_count = 65;
@@ -496,6 +499,8 @@ message AgentMetricsRequest {
 	int64 created_hour_from = 3;
 	int64 created_hour_to = 4;
 	repeated string agent_ids = 5;
+	repeated string channels = 6;
+	repeated string not_channels = 7;
 	int32 tz = 10;
 	string dim = 11;
 }
