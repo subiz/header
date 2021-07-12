@@ -298,6 +298,8 @@ service WidgetService {
 	rpc Update(header.WidgetSetting) returns (header.WidgetSetting);
 	rpc ReadUserSetting(Id) returns (header.WidgetUserSetting);
 
+	rpc ReadAccountSetting(Id) returns (header.AccountWeb);
+
 	rpc SubmitImpression(header.Impression) returns (header.Impression);
 	rpc SubmitConversion(header.Conversion) returns (header.Conversion);
 	rpc SubmitUserCampaignStatus(header.UserCampaignStatus) returns (header.UserCampaignStatus); // replace

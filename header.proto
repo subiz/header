@@ -1975,6 +1975,19 @@ message WidgetUserSetting {
 	int64 last_modified = 22;
 }
 
+message AccountWeb {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	account.Account account = 3;
+	repeated account.Agent agents = 5;
+
+	// repeated Campaign campaigns = 13;
+	repeated Bot bots = 14;
+	repeated WebPlugin plugins = 15;
+	int64 last_modified = 22;
+}
+
 message SocialLink {
 	string type = 1; // facebook, viber, subiz, email, ...
 	string url = 2;
