@@ -2010,8 +2010,6 @@ message WidgetSetting {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string widget_version = 3;
-	string language = 5; // remove
-	string custom_language = 6; // write-only remove
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
 	//  string css_url = 9; // old version
@@ -2043,12 +2041,12 @@ message WidgetSetting {
 	WidgetGreeting greeting = 27;
 	string title = 28;
 	string introduction = 29;
-	string custom_language_url = 31; // remove
-	string language_url = 32; // remove
 	bool auto_request_rating = 33;
 
 	I18nString caption = 35;
 	I18nString tagline = 36;
+
+	int64 z_index = 37;
 }
 
 message WidgetField {
