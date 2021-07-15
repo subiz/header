@@ -76,6 +76,7 @@ message CompactedNoties {
 message RecentCompactedNotiRequest {
 	common.Context ctx = 1;
 	int32 limit = 2;
+	string anchor = 3;
 }
 
 message Attribute {
