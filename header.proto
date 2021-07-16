@@ -56,14 +56,18 @@ message Notification {
 message CompactedNoti {
 	common.Context ctx = 1;
 	string account_id = 2;
+	string agent_id = 3;
 	string compacting_key = 4;
 	int64 created = 5;
 	repeated Notification notifications = 7;
+	bool is_read = 8;
 }
 
 message CompactedNotiRequest {
 	common.Context ctx = 1;
-	string compacting_key = 3;
+	string account_id = 2;
+	string agent_id = 3;
+	string compacting_key = 4;
 }
 
 message CompactedNoties {
@@ -76,8 +80,10 @@ message CompactedNoties {
 
 message RecentCompactedNotiRequest {
 	common.Context ctx = 1;
-	int32 limit = 2;
-	string anchor = 3;
+	string account_id = 2;
+	string agent_id = 3;
+	int32 limit = 4;
+	string anchor = 5;
 }
 
 message Attribute {
