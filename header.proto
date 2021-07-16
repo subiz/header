@@ -50,14 +50,13 @@ message Notification {
 	bool is_read = 9;
 
 	bool is_instant = 12; // just display and disappear, no persit
-	string compacting_key = 13;
 }
 
 message CompactedNoti {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
-	string compacting_key = 4;
+	string id = 4;
 	int64 created = 5;
 	repeated Notification notifications = 7;
 	bool is_read = 8;
@@ -67,7 +66,7 @@ message CompactedNotiRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
-	string compacting_key = 4;
+	string id = 4;
 }
 
 message CompactedNoties {

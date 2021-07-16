@@ -366,8 +366,8 @@ service Sendback {
 service Notibox {
 	rpc Send(header.Notification) returns (Empty);
 	rpc MarkRead(Id) returns (Empty);
+	rpc MarkReadCompactedNoti(header.CompactedNotiRequest) returns (Empty);
 	rpc ListRecentCompactedNoties(header.RecentCompactedNotiRequest) returns (header.CompactedNoties);
-	rpc GetCompactedNoti(header.CompactedNotiRequest) returns (header.CompactedNoti);
 }
 
 // watchhttp services
