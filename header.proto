@@ -3495,6 +3495,8 @@ enum RealtimeType {
 	user_like_content = 87;
 
 	agent_notification_created = 88;
+	agent_notification_read = 114;
+	agent_notibox_read = 115;
 
 	bot_deleted = 89;
 	bot_updated = 90;
