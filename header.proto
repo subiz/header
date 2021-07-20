@@ -431,6 +431,8 @@ message UserMetricsRequest {
 	repeated string first_interacts = 8;
 	repeated string session_sources = 15;
 	repeated string not_channels = 16;
+	account.BusinessHours business_hours = 17;
+	account.BusinessHours not_business_hours = 18;
 	int32 tz = 9;
 	string dim = 10;
 	string anchor = 11;
@@ -478,6 +480,8 @@ message ConversationMetricsRequest {
 	repeated string agent_sent_ids = 14; // and
 	int64 first_replied_duration_gt = 15;
 	repeated string not_channels = 18;
+	account.BusinessHours business_hours = 19;
+	account.BusinessHours not_business_hours = 20;
 	int32 tz = 10;
 	string dim = 11;
 	string anchor = 12;
@@ -510,6 +514,8 @@ message AgentMetricsRequest {
 	repeated string agent_ids = 5;
 	repeated string channels = 6;
 	repeated string not_channels = 7;
+	account.BusinessHours business_hours = 8;
+	account.BusinessHours not_business_hours = 9;
 	int32 tz = 10;
 	string dim = 11;
 }
