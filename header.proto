@@ -1712,6 +1712,7 @@ message Site {
 
 	bool user_verified = 4;
 	string image_url = 5;
+	string image_hash = 12; // MD5 sum of image (internal)
 
 	bool agent_confirmed = 6;
 
