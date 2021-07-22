@@ -1985,7 +1985,6 @@ message WidgetUserSetting {
 	string language = 6;
 	bool send_transcript = 8;
 	WidgetSetting account_setting = 9;
-	// repeated Campaign campaigns = 13;
 	repeated Bot bots = 14;
 	repeated WebPlugin plugins = 15;
 
@@ -2002,7 +2001,6 @@ message AccountWeb {
 	account.Account account = 3;
 	repeated account.Agent agents = 5;
 
-	// repeated Campaign campaigns = 13;
 	repeated Bot bots = 14;
 	repeated WebPlugin plugins = 15;
 	int64 last_modified = 22;
@@ -2150,75 +2148,6 @@ message WidgetGreeting {
 }
 
 ////////////// CAMPAIGN //////////////
-message CampaignSchedulerCondition {
-	int64 start_time = 4;
-	int64 end_time = 5;
-	repeated string days_of_week = 6; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-
-	int64 start_minute_day = 7; // minute of day
-	int64 end_minute_day = 8; // minute of day
-
-	string timezone_offset = 9; // if empty, take current timezone
-}
-
-message CampaignCondition {
-	string key = 3; // url, browser, country_code, city, returning_visitor, page_view_count, os, device, device_type, referrer, source, source_referer, /*ip_ranges*/, language, utm_campaign, utm_content, utm_medium, utm_source, utm_term, time_on_page, user_attribute
-
-	enum Source {
-		direct = 0;
-		google_ads = 1;
-		organic = 2;
-	}
-
-	enum DeviveType {
-		desktop = 0;
-		mobile = 1;
-		tablet = 2;
-	}
-
-	enum Browser {
-		all = 0;
-		chrome = 1;
-		firefox = 2;
-		edge = 3;
-		ie = 4;
-		safari = 5;
-		other = 6;
-	}
-
-	// for rate limiting
-	// int64 frequency_times = 11; // number of time display the message
-	// int64 frequency_duration = 11; // per duration (1 message per hour || 10 messages per day)
-
-
-	string user_attribute_key = 34;
-
-	string operator = 40; // eq, ne, con, notCon, in, gt, gte, lt, lte, inRange, notInRange, begin, end
-	string value = 41;
-}
-
-message CampaignSegmentation {
-	repeated CampaignCondition conditions = 4;
-	repeated CampaignCondition source_conditions = 6; // source, source_referer (or only)
-	repeated CampaignCondition location_conditions = 7; // city, country_code (or only)
-
-	repeated CampaignCondition url_conditions = 8; // url, url_term, url_medium, ... (or only)
-	repeated CampaignCondition exclude_url_conditions = 9; // url (or only)
-
-	repeated CampaignCondition has_visited_url_conditions = 10; // url (or only)
-	repeated CampaignCondition has_not_visited_url_conditions = 11; // url (or only)
-
-	string join = 5; // and | or
-
-	bool disabled = 12;
-	repeated CampaignCondition exclude_location_conditions = 13; // city, country_code (or only)
-
-}
-
-message Campaigns {
-	repeated Campaign campaigns = 3;
-}
-
 message CampaignNotification {
 	//  email.Email email = 1;
 	bool enabled = 2;
@@ -2609,43 +2538,6 @@ message PopupPage {
 	string mobile_layout = 4;
 }
 
-// should rename to popup
-message Campaign {
-	common.Context ctx = 1;
-	string id = 2;
-	string account_id = 3;
-
-	repeated string url_expressions = 4;
-	repeated string exclude_url_expressions = 6;
-
-	repeated Trigger triggers = 10; // any
-
-	string segmentation_join = 11; // and | or
-	repeated CampaignSegmentation segmentations = 12;
-
-	string template_id = 14;
-	string page_type = 15; // modal, slide_in, bar, panel, fullscreen
-	repeated CampaignPage pages = 17;
-
-	int64 created = 18;
-	string name = 19;
-	string thumbnail_url = 20;
-	bool enabled = 21;
-
-	// stop showing pop up after showing x times
-	int64 impression_limit = 23;
-	repeated CampaignSchedulerCondition schedulers = 24;
-	string scheduler_join = 25;
-	CampaignNotification notification = 26;
-
-	int64 updated = 27;
-
-	int64 num_impression = 30;
-	int64 num_conversion = 31;
-
-	Frequently impression_frequency = 32;
-}
-
 // impression = view
 message Impression {
 	common.Context ctx = 1;
@@ -2720,57 +2612,6 @@ message UserCampaignStatus {
 	}
 	int64 created = 10;
 	string web_plugin_id = 11;
-}
-
-message CampaignPage {
-	string title = 4;
-	string subtitle = 9;
-	string description = 5;
-
-	WidgetForm form = 6;
-
-	ButtonComponent primary_button = 7;
-	ButtonComponent secondary_button = 8;
-	ButtonComponent background_click = 10;
-
-	string animation = 20;
-	CampaignAppearance desktop_appearance = 24;
-	CampaignAppearance mobile_appearance = 25;
-}
-
-message CampaignAppearance {
-	string title_color = 2;
-	string description_color = 3;
-
-	string background = 4; // color or gradient
-	string background_image = 5;
-
-	string primary_button_background = 7;
-	string primary_button_color = 8;
-
-	string secondary_button_background = 9;
-	string secondary_button_color = 10;
-
-	// not supported yet
-	string input_color = 11;
-	string input_background = 12;
-
-	string overlay = 13;
-
-	string title_font_family = 30;
-	string title_font_size = 31;
-	string title_font_style = 32;
-	string title_font_weight = 33;
-	string title_text_transform = 34;
-
-	string description_font_family = 35;
-	string description_font_size = 36;
-	string description_font_style = 37;
-	string description_font_weight = 38;
-	string description_text_transform = 39;
-
-	string input_label_color = 40;
-	string input_border_color = 41;
 }
 
 message CampaignSubmission {
