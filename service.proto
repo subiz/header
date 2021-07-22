@@ -4,7 +4,6 @@ package header;
 
 option go_package = "github.com/subiz/header";
 
-import "conversation.proto";
 import "payment.proto";
 import "noti5.proto";
 import "account.proto";
@@ -122,12 +121,7 @@ service AttributeMgr {
 
 // conversation services
 service ConversationReporter {
-	rpc CountConversationsByTags(conversation.CountByTagsRequest) returns (conversation.CountByTagsResponse);
-	rpc GetAvgResponseTimes(conversation.AvgResponseTimeRequest) returns (conversation.AvgResponseTimeResponse);
-	rpc GetTotalConversation(conversation.AvgResponseTimeRequest) returns (conversation.TotalConversationResponse);
-	rpc ReportConversations(conversation.CountReportRequest) returns (conversation.ReportResponse);
-	rpc ReportConversations2(conversation.ReportConversationsRequest) returns (conversation.ReportResponse);
-	rpc ReportAvailibilities(conversation.AvailibilityReportRequest) returns (conversation.ReportResponse);
+	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
 }
 
 service RuleMgr {
@@ -159,9 +153,6 @@ service ConversationMgr {
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc SearchConvos (header.SearchRequest) returns (header.Conversations);
-
-	rpc SearchConversation(conversation.SearchConversationRequest) returns (conversation.SearchConversationResponse);
-	rpc ListConversations2(conversation.ConversationListRequest) returns (conversation.ConversationListResponse);
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);

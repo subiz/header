@@ -868,6 +868,7 @@ message StartRequest {
 	string initial_by = 35;
 
 	string source = 36;
+	bool is_internal = 37;
 }
 
 message PresencesRequest {
@@ -1214,6 +1215,9 @@ message Conversation {
 	int64 first_replied_duration = 48; // holap derived
 	string channel = 49; // holap derived
 	string channel_touchpoint = 50; // holap derived
+
+	bool is_internal = 51;
+	bool is_direct = 52;
 }
 
 message Rating {
@@ -3767,4 +3771,26 @@ message UserViewCondition {
 
 	string order_by = 15; // attr.username asc
 	string anchor = 16;
+}
+
+message ReportResponse {
+	common.Context ctx = 1;
+	string from = 3;
+	string range = 4;
+	repeated int64 data = 5;
+}
+
+message AvailibilityReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string from = 5; // try date --rfc-3339=seconds date in rfc 333
+	// seconds standard. E.g: 2019-03-07T10:42:01+07:00
+	string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+		month = 2;
+	}
+	int32 number_of_points = 13;
 }
