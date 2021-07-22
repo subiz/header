@@ -3536,6 +3536,8 @@ enum RealtimeType {
 
 	label_updated = 112;
 	label_deleted = 113;
+
+	contact_info_updated = 116;
 }
 
 // TODO: remove after remove old dashboard
