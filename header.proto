@@ -1108,6 +1108,7 @@ message ConversationMember {
 		active = 0;
 		left = 1;
 		observer = 2; // assigned
+		viewer = 3;
 	};
 	common.By invited_by = 16;
 
@@ -1117,6 +1118,10 @@ message ConversationMember {
 	int64 seen_at = 20;
 	int64 received_at = 21;
 	int64 last_sent = 23; // timestamp
+
+	int64 private_message_seen_at = 24;
+	int64 private_message_received_at = 25;
+	int64 last_private_message_sent_at = 26;
 }
 
 message ListConversationsRequest {
@@ -1135,6 +1140,8 @@ message ListConversationsRequest {
 	repeated string user_ids = 13; // for live, only return id and state
 
 	string state = 14;
+
+	bool is_internal = 15; // for agent only
 }
 
 message ListConversationEventsRequest {
@@ -1143,6 +1150,7 @@ message ListConversationEventsRequest {
 	string conversation_id = 3;
 	string start_id = 4;
 	int32 limit = 6;
+	bool is_private = 7;
 }
 
 message Chain {
@@ -1188,8 +1196,6 @@ message Conversation {
 	int64 response_sec = 22;
 
 	string chain_id = 24;
-	// Ticket ticket = 27;
-	string ticket_id = 28; // remove
 	RouteResult assigned_to = 30;
 
 	string first_message = 31;
@@ -1218,6 +1224,8 @@ message Conversation {
 
 	bool is_internal = 51;
 	bool is_direct = 52;
+
+	Event last_private_message_sent = 53;
 }
 
 message Rating {
@@ -1257,6 +1265,8 @@ message Message {
 
 	string quill_delta = 20; // deprecated
 	I18nString i18n_quill_delta = 21;
+
+	bool is_private = 22; // difference timeline
 }
 
 message MessagePong {
@@ -1965,7 +1975,6 @@ message PublishMessage {
 
 	string account_id = 5;
 }
-
 
 message WidgetUser {
 	common.Context ctx = 1;
@@ -3383,6 +3392,8 @@ enum RealtimeType {
 	label_deleted = 113;
 
 	contact_info_updated = 116;
+
+	internal_conversation_updated = 117;
 }
 
 // TODO: remove after remove old dashboard
