@@ -135,7 +135,6 @@ service RuleMgr {
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
-	rpc SeenConversation(header.ConversationMember) returns (header.Conversation);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
 	rpc EndConversation(Id) returns (header.Conversation);
@@ -197,7 +196,6 @@ service ConversationEventReader {
 	rpc SendMessage(header.Event) returns (header.Event);
 	rpc UpdateMessage(header.Event) returns (header.Event);
 	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
-	rpc SearchEvents(header.SearchMessageRequest) returns (header.Events);
 }
 
 // file services
