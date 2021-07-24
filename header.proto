@@ -1226,6 +1226,7 @@ message Conversation {
 	bool is_direct = 52;
 
 	Event last_private_message_sent = 53;
+	int64 num_private_messages = 54;
 }
 
 message Rating {
