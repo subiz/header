@@ -1101,7 +1101,6 @@ message ConversationMember {
 	string id = 4;
 
 	string conversation_id = 13;
-
 	string last_page_view_url = 15;
 	string membership = 12;
 	enum State {
@@ -1122,6 +1121,8 @@ message ConversationMember {
 	int64 private_message_seen_at = 24;
 	int64 private_message_received_at = 25;
 	int64 last_private_message_sent_at = 26;
+
+	bool is_muted = 27;
 }
 
 message ListConversationsRequest {
@@ -1222,8 +1223,7 @@ message Conversation {
 	string channel = 49; // holap derived
 	string channel_touchpoint = 50; // holap derived
 
-	bool is_internal = 51;
-	bool is_direct = 52;
+	bool is_private = 51;
 
 	Event last_private_message_sent = 53;
 	int64 num_private_messages = 54;
