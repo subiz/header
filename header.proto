@@ -868,7 +868,9 @@ message StartRequest {
 	string initial_by = 35;
 
 	string source = 36;
-	bool is_internal = 37;
+	bool is_private = 37;
+
+	string subject = 38;
 }
 
 message PresencesRequest {
@@ -1142,7 +1144,7 @@ message ListConversationsRequest {
 
 	string state = 14;
 
-	bool is_internal = 15; // for agent only
+	bool is_private = 15; // for agent only
 }
 
 message ListConversationEventsRequest {
@@ -1226,7 +1228,6 @@ message Conversation {
 	bool is_private = 51;
 
 	Event last_private_message_sent = 53;
-	int64 num_private_messages = 54;
 }
 
 message Rating {
