@@ -1148,6 +1148,8 @@ message ListConversationEventsRequest {
 	string conversation_id = 3;
 	string start_id = 4;
 	int32 limit = 6;
+
+	string message_type = 15; // 'empty', file, image, link, pinned
 	bool is_private = 7;
 }
 
@@ -3154,6 +3156,10 @@ message SearchRequest {
 	string agent_id = 8; // search my user of agent
 	repeated string labels = 9; // or
 	repeated string agents = 10; // or
+
+	bool is_private = 11; // search in private convo only
+	bool only_header =  13;
+	string conversation_id = 14; // filter by conversation
 }
 
 message ExchangeRate {

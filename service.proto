@@ -153,6 +153,9 @@ service ConversationMgr {
 
 	rpc SearchConvos (header.SearchRequest) returns (header.Conversations);
 
+	rpc SearchInternalConvos (header.SearchRequest) returns (header.Conversations);
+	rpc SearchInternalMessages (header.SearchRequest) returns (header.Events);
+
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
 	rpc MarkReadConversation (header.Conversation) returns (Empty);
@@ -195,6 +198,8 @@ service EventMgr {
 service ConversationEventReader {
 	rpc SendMessage(header.Event) returns (header.Event);
 	rpc UpdateMessage(header.Event) returns (header.Event);
+	rpc PinMessage(header.Event) returns (header.Empty);
+	rpc UnpinMessage(header.Event) returns (header.Empty);
 	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
 }
 
