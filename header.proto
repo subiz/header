@@ -2702,6 +2702,7 @@ message ReportWebPluginRequest {
 		hour = 0; // default
 		day = 1;
 	}
+	int32 tz = 8;
 }
 
 message ReportWebPluginResponse {
