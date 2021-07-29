@@ -3160,6 +3160,8 @@ message SearchRequest {
 	bool is_private = 11; // search in private convo only
 	bool only_header =  13;
 	string conversation_id = 14; // filter by conversation
+
+	string anchor = 15;
 }
 
 message ExchangeRate {
@@ -3396,6 +3398,8 @@ enum RealtimeType {
 	contact_info_updated = 116;
 
 	internal_conversation_updated = 117;
+	message_pinned = 118; // event.data.message
+	message_unpinned = 119; // event.data.message
 }
 
 // TODO: remove after remove old dashboard
