@@ -153,9 +153,6 @@ service ConversationMgr {
 
 	rpc SearchConvos (header.SearchRequest) returns (header.Conversations);
 
-	rpc SearchInternalConvos (header.SearchRequest) returns (header.Conversations);
-	rpc SearchInternalMessages (header.SearchRequest) returns (header.Events);
-
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
 	rpc MarkReadConversation (header.Conversation) returns (Empty);
@@ -215,7 +212,7 @@ service Noti5Service {
 	rpc ReadNotificationSetting(Id) returns (noti5.Setting);
 	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
 
-	rpc Noti(noti5.PushNoti) returns (Empty);
+	rpc Noti(header.PushNoti) returns (Empty);
 
 	rpc AddToken(noti5.Token) returns (Empty);
 	rpc RemoveToken(noti5.Token) returns (Empty);

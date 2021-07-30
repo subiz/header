@@ -3652,3 +3652,22 @@ message AvailibilityReportRequest {
 	}
 	int32 number_of_points = 13;
 }
+
+message PushNoti {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string user_id = 4; // to user
+
+	string platform = 5;
+	string title = 6;
+	string body = 7;
+	string conversation_id = 8;
+	string sender_id = 9;
+	string sender_type = 10;
+	string icon_url = 11;
+	string last_page_view_url = 12;
+	string type = 13; // type of event message_sent ...
+	string is_private = 14; // conversation is private
+
+	repeated common.By tos = 15;
+}
