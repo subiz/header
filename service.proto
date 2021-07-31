@@ -154,6 +154,7 @@ service ConversationMgr {
 	rpc SearchConvos (header.SearchRequest) returns (header.Conversations);
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
+	rpc UpdateConversationMember(header.ConversationMember) returns (Empty);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
 	rpc MarkReadConversation (header.Conversation) returns (Empty);
 

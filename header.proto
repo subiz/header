@@ -1120,6 +1120,7 @@ message ConversationMember {
 	int64 last_sent = 23; // timestamp
 
 	bool is_muted = 27;
+	bool off_notification = 28;
 }
 
 message ListConversationsRequest {
@@ -1263,6 +1264,8 @@ message Message {
 	I18nString i18n_quill_delta = 21;
 
 	bool is_private = 22; // difference timeline
+
+	repeated string memtions = 23;
 }
 
 message MessagePong {
@@ -1444,6 +1447,7 @@ message Attachment {
 	bool lock_input = 24; // lock input while has quick replies
 
 	Postback postback = 25;
+	Event quote = 26;
 }
 
 message QuickReply {
