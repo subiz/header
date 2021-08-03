@@ -1266,8 +1266,10 @@ message Message {
 	I18nString i18n_quill_delta = 21;
 
 	bool is_private = 22; // difference timeline
-	bool is_pinned = 24;
 	repeated string memtions = 23;
+	// bool is_pinned = 24;
+	int64 pinned = 25;
+	string pinned_by = 26;
 }
 
 message MessagePong {
