@@ -1592,16 +1592,6 @@ message Integration {
 	int64 last_failed = 14;
 }
 
-message SearchMessageRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string conversation_id = 3;
-	string user_ids = 4;
-	string query = 5;
-	string anchor = 6;
-	int32 limit = 7;
-}
-
 message TagRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -3171,6 +3161,8 @@ message SearchRequest {
 	string conversation_id = 14; // filter by conversation
 
 	string anchor = 15;
+
+	repeated string exclude_conversations = 16;
 }
 
 message ExchangeRate {
