@@ -588,6 +588,7 @@ message Event {
 	string id = 3;
 	string account_id = 4; // TODO: remove
 	int64 created = 8;
+	int64 updated = 10;
 	string type = 9; // eventtype
 	repeated string topics = 11; // TODO: remove
 	string session_id = 12;
