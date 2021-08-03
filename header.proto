@@ -1223,6 +1223,8 @@ message Conversation {
 	string channel = 49; // holap derived
 	string channel_touchpoint = 50; // holap derived
 	bool is_private = 51;
+
+	string avatar_url = 52;
 }
 
 message Rating {
@@ -1264,7 +1266,7 @@ message Message {
 	I18nString i18n_quill_delta = 21;
 
 	bool is_private = 22; // difference timeline
-
+	bool is_pinned = 24;
 	repeated string memtions = 23;
 }
 
