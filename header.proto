@@ -1252,7 +1252,7 @@ message Message {
 	string id = 11;
 	string text = 2;
 
-	string format = 3;
+	string format = 3; // plaintext, html, markdown, delta
 	repeated Attachment attachments = 4;
 
 	repeated KV fields =	10;
@@ -1264,10 +1264,10 @@ message Message {
 	repeated MessagePong pongs = 17;
 
 	string quill_delta = 20; // deprecated
-	I18nString i18n_quill_delta = 21;
+	I18nString i18n_quill_delta = 21; // for template
 
-	bool is_private = 22; // difference timeline
-	repeated string memtions = 23;
+	bool is_private = 22;
+
 	// bool is_pinned = 24;
 	int64 pinned = 25;
 	string pinned_by = 26;

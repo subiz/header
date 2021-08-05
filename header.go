@@ -7,6 +7,64 @@ import (
 	"time"
 )
 
+func DeltaToPlainText(delta string) string {
+	del := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(delta), &del); err != nil {
+		return ""
+	}
+
+	if del["ops"] == nil {
+		return ""
+	}
+
+	deltas, ok := del["ops"].([]interface{})
+	if !ok {
+		return ""
+	}
+
+	output := ""
+	for _, itemi := range deltas {
+		item, ok := itemi.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		if item["insert"] == nil {
+			continue
+		}
+
+		// is text
+		if str, ok := item["insert"].(string); ok {
+			output += str
+			continue
+		}
+
+		obj, ok := item["insert"].(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		// is emoji
+		if obj["emoji"] != nil {
+			code, _ := obj["emoji"].(string)
+			output += ":" + code + ":"
+			continue
+		}
+
+		// is mention
+		if obj["mention"] != nil {
+			mention, ok := obj["mention"].(map[string]interface{})
+			if !ok {
+				continue
+			}
+			fullname, _ := mention["fullname"].(string)
+			output += "@" + fullname
+			continue
+		}
+	}
+	return output
+}
+
 func GetAttr(u *User, key string, typ string) interface{} {
 	key = strings.ToLower(strings.TrimSpace(key))
 	for _, a := range u.GetAttributes() {
