@@ -10,6 +10,7 @@ import "type.proto";
 import "noti5.proto";
 import "error.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
+import "order.proto";
 
 message Empty {
 	common.Context ctx = 1;
@@ -3067,44 +3068,6 @@ message ScryptChallenge {
 	// only for subiz use
 	string answer = 10;
 	int64 created = 11;
-}
-
-message Product {
-	common.Context ctx = 1;
-	// optional string sbid = 2;
-	string id = 3; // user input id
-	string account_id = 4;
-
-	string description = 5;
-	string title = 6;
-	string url = 7;
-	repeated string labels = 8;
-	enum Availability {
-		in_stock = 0;
-		out_of_stock = 2;
-		preorder = 3;
-		discontinued = 4;
-	}
-	string availability = 9;
-
-	float price = 10;
-	string currency = 11;
-	float sale_price = 12;
-	repeated KV fields = 13;
-	repeated string categories = 14;
-	repeated string relates = 15; // TODO: delete
-	int64 created = 17;
-	int64 updated = 18;
-	repeated string attachment_urls = 20;
-	repeated string related_ids = 21; // releated content ids
-	string image_url = 22;
-}
-
-message Products {
-	common.Context ctx = 1;
-	repeated Product contents = 2;
-	string anchor = 3;
-	int64 total = 4;
 }
 
 // can be

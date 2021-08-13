@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package header;
+
+option go_package = "github.com/subiz/header";
+import "common.proto";
+
+message ProductImage {
+	string id = 2;
+	string created_at = 3;
+	int64 width = 4;
+	int64 height = 5;
+	string src = 6;
+	string alt = 7;
+}
+
+message ProductVideo {
+	string id = 2;
+	string created_at = 3;
+	int64 width = 4;
+	int64 height = 5;
+	string src = 6;
+	string alt = 7;
+	int64 length = 8;
+}
+
+message ProductPrice {
+	string feed_id = 4;
+	double price = 5;
+	string currency = 6;
+	int64 from_count = 7;
+	int64 to_count = 8;
+}
+
+message ProductVariant {
+	string id = 3;
+	// Product product = 4;
+	string product_id = 5;;
+	string title = 6;
+	string url = 7;
+
+	string sku = 8;
+	string barcode = 9;
+
+	repeated ProductPrice prices = 10;
+
+	// color
+	// size
+	// custom
+	// KV
+	int64 created = 11;
+	int64 created_by = 12;
+
+	int64 updated = 13;
+	int64 updated_by = 14;
+
+	repeated ProductImage images = 18;
+	repeated ProductVideo videos = 19;
+	int64 stock = 21;
+}
+
+message Products {
+	common.Context ctx = 1;
+	repeated Product products = 2;
+	string anchor = 3;
+	int64 total = 4;
+}
+
+message Product {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // subiz generated
+
+	string handle = 4; // iphone-6-plus
+	string vendor = 5; // brand name
+	string product_type = 6;
+	string description = 7;
+	string name = 8; // apple Ipone 6 plus
+	string url = 9;
+
+	// repeated KV metadata = 13;
+	repeated string categories = 14;
+	// repeated Product related_products = 21; // releated content ids
+
+	int64 created = 17;
+	int64 updated = 18;
+	int64 created_by = 19;
+	int64 updated_by = 20;
+
+	repeated string tags = 23;
+
+	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
+	string mpn = 24;
+
+	repeated ProductVariant variants = 27;
+
+
+	string note = 28;
+
+
+	// shipping
+	bool requires_shipping = 30;
+
+	int64 day_to_ship = 33;
+	double dimension_width = 34;
+	double dimension_height = 35;
+	double dimension_length = 36;
+
+	double weight = 31;
+	string weight_unit = 32;
+	double grams = 37;
+
+	string is_new = 40;
+
+	bool taxable = 41;
+}
+
+
+message GoogleSheetProductFeed {
+}
+
+message WebsiteJSONLdProductFeed {
+}
+
+message ShopeeProductFeed {
+	string access_token = 4;
+}
+
+message ProductFeed {
+	string id = 3;
+	string type = 4; // google sheet, shopee, website json ld
+
+	// google sheet
+	ShopeeProductFeed shopee = 5;
+	WebsiteJSONLdProductFeed website_json_ld = 6;
+	GoogleSheetProductFeed google_sheet = 7;
+}
