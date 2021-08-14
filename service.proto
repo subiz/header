@@ -394,7 +394,7 @@ service Holap {
 
 // proder services
 service Proder {
-	rpc ListProducts(Id) returns (header.Products);
+	rpc ListProducts(Ids) returns (header.Products);
 	rpc ReadProduct(Id) returns (header.Product);
 	rpc CreateProduct(header.Product) returns (header.Product);
 	rpc UpdateProduct(header.Product) returns (header.Product);
