@@ -8,6 +8,7 @@ import "payment.proto";
 import "noti5.proto";
 import "account.proto";
 import "header.proto";
+import "order.proto";
 
 service AccountMgr {
 	rpc CreateGroup(account.AgentGroup) returns (account.AgentGroup);
@@ -389,4 +390,13 @@ service Holap {
 	rpc ListConversationIds(header.ConversationMetricsRequest) returns (header.Conversations);
 	rpc ReportAgent(header.AgentMetricsRequest) returns (header.AgentMetrics);
 	rpc ListChannelTouchpoints(header.Ids) returns (header.Ids);
+}
+
+// proder services
+service Proder {
+	rpc ListProducts(Id) returns (header.Products);
+	rpc ReadProduct(Id) returns (header.Product);
+	rpc CreateProduct(header.Product) returns (header.Product);
+	rpc UpdateProduct(header.Product) returns (header.Product);
+	rpc DeleteProduct(Id) returns (Empty);
 }
