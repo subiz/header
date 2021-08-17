@@ -75,7 +75,7 @@ message Product {
 	string vendor = 9; // brand name
 	string product_type = 8;
 	string description = 5;
-	string name = 6; // apple Ipone 6 plus
+	string title = 6; // apple Ipone 6 plus
 	string url = 7;
 
 	// repeated KV metadata = 13;
