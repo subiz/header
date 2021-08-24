@@ -399,6 +399,24 @@ enum PK {
 	zalo_oa_id = 4;
 };
 
+message UserEventMetric {
+	string account_id = 2;
+	string user_id = 3;
+	int64 created_hour = 4;
+	string date = 5; // derived
+
+	int64 event_count = 20;
+}
+
+message UserEventMetricRequest {
+	string account_id = 2;
+	string user_id = 3;
+	int64 created_hour_from = 4;
+	int64 created_hour_to = 5;
+	int32 tz = 6;
+	string dim = 7;
+}
+
 message UserMetric {
 	int64 active_user_num = 3; // live
 	string have_been = 5; // live
