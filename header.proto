@@ -408,7 +408,11 @@ message UserEventMetric {
 	int64 event_count = 20;
 }
 
-message UserEventMetricRequest {
+message UserEventMetrics {
+	repeated UserEventMetric metrics = 2;
+}
+
+message UserEventMetricsRequest {
 	string account_id = 2;
 	string user_id = 3;
 	int64 created_hour_from = 4;

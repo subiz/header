@@ -61,7 +61,7 @@ service UserMgr {
 	rpc ReadUser (Id) returns (header.User);
 
 	rpc ReportUsers (header.UserReportRequest) returns (header.UserReportResult);
-	rpc ReportUserEvents(header.UserEventMetricRequest) returns (header.UserEventMetric);
+	rpc ReportUserEvents(header.UserEventMetricsRequest) returns (header.UserEventMetrics);
 
 	rpc MatchUsers(Ids) returns (header.Users);
 
