@@ -8,7 +8,6 @@ import "common.proto";
 import "account.proto";
 import "type.proto";
 import "noti5.proto";
-import "error.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
 import "order.proto";
 
@@ -3664,4 +3663,153 @@ message PushNoti {
 	string is_private = 14; // conversation is private
 
 	repeated common.By tos = 15;
+}
+
+message Error {
+	string description = 2;
+	string debug = 3;
+	int32 class = 4;
+	string stack = 5;
+	int64 created = 6; // ms
+	string code = 7;
+	string root = 8;
+	string request_id = 9;
+}
+
+enum E {
+	Sub = 0;
+	Email_SendRequest = 10600;
+	PaymentWorkerJob = 110440;
+	AccountResetPasswordEmail = 110533;
+	AccountPasswordChangedEmailRequested = 110534;
+	AccountConfirmChangeEmailEmailRequested = 110535;
+
+	AccountWarnInactive = 110566;
+	UnpaidInvoiceEmail = 110567;
+	SubscriptionUpgradedEmail = 110568;
+	BillCreatedEmail = 110569;
+	DowngradedToFreeEmail = 110570;
+	UnpaidInvoice9DaysEmail = 110572;
+	AccountCreatedEmail = 110573;
+	UpdatePlanEmail = 110574;
+	TrialEnding7Email = 110575;
+	TrialEnding3Email = 110576;
+	TrialEnding1Email = 110577;
+	InvoicePaidEmail = 110578;
+	AccountAgentJoinedEmail = 110579;
+
+	UserTotalConvoUpdated = 111232;
+	BqreportSynced = 3000008;
+	BotSynced = 4000001;
+	StartBot = 4000002;
+	TeminateBot = 4000003;
+
+	undefined = 1; // unknown error
+	internal_error = 2; // typical server error
+	missing_account_id = 3;
+	invalid_proto = 4;  // protobuf message is broken
+	database_error = 5;
+	resource_not_found = 6;
+	access_deny = 7;
+	invalid_json = 8; // json payload is broken
+
+	account_not_found  = 9;
+	invalid_credential  = 10;
+	http_call_error  = 11;
+	agent_group_not_found  = 12;
+	agent_not_found      = 15;
+	facebook_page_not_found = 16;
+	invalid_refresh_token = 17;
+	wrong_password = 18;
+	agent_is_not_active  = 19;
+	invalid_token = 20;
+	invalid_message_size = 21;
+	invalid_payload_size = 22;
+
+	facebook_call_failed = 23;
+	invalid_facebook_access_token  = 24;
+
+	subiz_call_failed = 25;
+	user_is_banned = 26;
+
+	wrong_signature = 27;
+	data_corrupted = 28;
+
+	invalid_account_id = 29;
+	invalid_target_id = 30;
+	invalid_note_id = 31;
+	invalid_user_id = 32;
+
+	user_not_found = 33;
+	automation_not_found = 34;
+	invalid_attribute_value = 35;
+	invalid_attribute_key = 36;
+	invalid_attribute_name = 37;
+	invalid_attribute_type = 38;
+
+	too_many_attribute = 39;
+	attribute_not_found=40;
+	invalid_agent_id = 41;
+	invalid_note_target_id = 42;
+
+	invalid_event_id = 43;
+	invalid_content_type = 44;
+	parse_query_failed = 45;
+	domain_is_not_whitelisted = 46;
+	invalid_domain = 47;
+	ip_is_blocked = 48;
+
+	invalid_transaction_id = 49;
+	invalid_amount = 50;
+	inactive_promotion_referral_program = 51;
+
+	plan_not_found = 52;
+	invoice_not_found = 53;
+	invalid_stripe_info = 54;
+	subscription_not_found = 55;
+	invalid_plan = 56;
+
+	promotion_not_found = 57;
+	invalid_promotion = 58;
+
+	invalid_email = 59;
+	email_taken = 60;
+	invalid_date_format = 61;
+	prohibited_action = 62;
+
+	invalid_working_day = 63;
+	invalid_holiday = 64;
+
+	// password_too_weak = 65;
+	invalid_fullname = 66;
+	invalid_password = 67;
+	invalid_token_type = 68;
+	invalid_invoice_template = 69;
+	invoice_template_compile_failed = 70;
+
+	invalid_google_auth_response = 71;
+	pdf_generate_failed = 72;
+
+	invalid_stripe_customer_id = 73;
+	invalid_stripe_token = 74;
+	stripe_call_failed = 75;
+	invalid_bill_id = 76;
+	invalid_invoice_id = 77;
+	invalid_id = 78;
+	payment_method_not_found = 79;
+	invalid_invoice_duedate = 80;
+	filestore_error = 81;
+	invalid_country = 82;
+	invalid_referrer_code = 83;
+	invalid_oauth_scope = 84;
+
+	invalid_label_id = 85;
+	invalid_label_name = 86;
+	invalid_label_color = 87;
+	invalid_label_description = 88;
+
+	invalid_user_view_name = 89;
+
+	limit_reached = 90;
+	invalid_time_range = 91;
 }
