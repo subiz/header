@@ -2092,6 +2092,8 @@ message WidgetSetting {
 	I18nString tagline = 36;
 
 	int64 z_index = 37;
+
+	bool hide_subiz_logo = 38;
 }
 
 message WidgetField {
@@ -3605,10 +3607,11 @@ message UserViewCondition {
 
 	string key = 4; // id, keyword, lead_owner attr.fullname
 	string type = 5;
-	TextCondition text_condition = 6;
-	IntCondition int_condition = 7;
-	BoolCondition bool_condition = 8;
-	FloatCondition float_condition = 9;
+
+	TextCondition text = 6;
+	BoolCondition boolean = 8;
+	FloatCondition number = 9;
+	DateCondition datetime = 10;
 
 	repeated UserViewCondition all = 12; // preferred
 	repeated UserViewCondition one = 13;
