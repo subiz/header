@@ -652,6 +652,7 @@ message Event {
 		WebpageCheck webpage_check = 53;
 		LangMessage language_message = 54;
 		Label label = 55;
+		UserView user_view = 56;
 	}
 	Data data = 20;
 }
@@ -3388,6 +3389,9 @@ enum RealtimeType {
 	internal_conversation_updated = 117;
 	message_pinned = 118; // event.data.message
 	message_unpinned = 119; // event.data.message
+
+	userview_updated = 120;
+	userview_deleted = 121;
 }
 
 // TODO: remove after remove old dashboard
@@ -3599,6 +3603,9 @@ message UserView {
 	string name = 10;
 
 	int64 total = 11;
+	int64 last_calculated = 12;
+
+	repeated string pinneds = 13; // list of agents that pinned this view
 }
 
 message UserViewCondition {

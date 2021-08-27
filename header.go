@@ -172,7 +172,7 @@ var Scopes = makeScopeMap()
 func makeScopeMap() map[string]string {
 	// scope => permission
 	var m = map[string]string{}
-	m["agent"] = "account:r conversation:rw agent_group:r rule:r integration:r message_template:rw other_message_template:r tag:r whitelist:wr widget:r subscription:r invoice:r user:rw attribute:r facebook:r bot:r agent:r conversation_setting:r web_plugin:r file:wr webpage:r lang:r user_view:rw user_label:r"
+	m["agent"] = "account:r conversation:rw agent_group:r rule:r integration:r message_template:rw other_message_template:r tag:r whitelist:wr widget:r subscription:r invoice:r user:rw attribute:r facebook:r bot:r agent:r conversation_setting:r web_plugin:r file:wr webpage:r lang:r user_label:r user_view:rw"
 	m["view_other_convos"] = "other_conversation:r"
 	m["export_user"] = "user:e" // export
 
