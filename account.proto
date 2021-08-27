@@ -12,6 +12,7 @@ message DashboardAgent {
 	optional int64 tour_guide_getting_started_web_showed = 10;
 	optional int64 tour_guide_channel_installing_web_showed = 11;
 	optional int64 bot_build_showed = 12;
+	repeated string pinned_user_views = 13; // list of agents that pinned this view
 }
 
 message Agent {

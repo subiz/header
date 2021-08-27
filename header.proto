@@ -3390,8 +3390,8 @@ enum RealtimeType {
 	message_pinned = 118; // event.data.message
 	message_unpinned = 119; // event.data.message
 
-	userview_updated = 120;
-	userview_deleted = 121;
+	user_view_updated = 120;
+	user_view_deleted = 121;
 }
 
 // TODO: remove after remove old dashboard
@@ -3604,8 +3604,6 @@ message UserView {
 
 	int64 total = 11;
 	int64 last_calculated = 12;
-
-	repeated string pinneds = 13; // list of agents that pinned this view
 }
 
 message UserViewCondition {

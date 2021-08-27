@@ -65,7 +65,8 @@ service UserMgr {
 
 	rpc MatchUsers(Ids) returns (header.Users);
 
-	rpc UpsertView(header.UserView) returns (header.UserView);
+	rpc UpdateView(header.UserView) returns (header.UserView);
+	rpc CreateView(header.UserView) returns (header.UserView);
 	rpc DeleteView(Id) returns (Empty);
 	rpc GetView(Id) returns (header.UserView);
 	rpc ListViews(Id) returns (header.UserViews);
