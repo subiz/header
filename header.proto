@@ -134,6 +134,8 @@ message User {
 	bool is_lead = 43;
 	string lead_stage = 44;
 	int64 lead_at = 45;
+
+	repeated string chat_withs = 46;
 }
 
 message UserLabel {
@@ -174,8 +176,7 @@ message Users {
 	int64 hit = 4;
 	int64 total = 5;
 
-	string start_offset = 6;
-	string end_offset = 7;
+	int32 end_offset = 7;
 }
 
 message SessionCampaign {

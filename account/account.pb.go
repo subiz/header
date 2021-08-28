@@ -223,7 +223,7 @@ type DashboardAgent struct {
 	BotBuildShowed                      *int64   `protobuf:"varint,12,opt,name=bot_build_showed,json=botBuildShowed" json:"bot_build_showed,omitempty"`
 	PinnedUserViews                     []string `protobuf:"bytes,13,rep,name=pinned_user_views,json=pinnedUserViews" json:"pinned_user_views,omitempty"` // list of agents that pinned this view
 	UserViewDisplayFields               []string `protobuf:"bytes,14,rep,name=user_view_display_fields,json=userViewDisplayFields" json:"user_view_display_fields,omitempty"`
-	UserViewOrderBy                     []string `protobuf:"bytes,15,rep,name=user_view_order_by,json=userViewOrderBy" json:"user_view_order_by,omitempty"` // +user.fullname, -user.email
+	UserViewOrderBy                     []string `protobuf:"bytes,15,rep,name=user_view_order_by,json=userViewOrderBy" json:"user_view_order_by,omitempty"` // +attr:fullname, -attr:email
 }
 
 func (x *DashboardAgent) Reset() {
