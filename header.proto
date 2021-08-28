@@ -174,8 +174,8 @@ message Users {
 	int64 hit = 4;
 	int64 total = 5;
 
-	string next_cursor = 6;
-	string prev_cursor = 7;
+	string start_offset = 6;
+	string end_offset = 7;
 }
 
 message SessionCampaign {
@@ -3605,8 +3605,10 @@ message UserView {
 	int64 total = 11;
 	int64 last_calculated = 12;
 
-	string order_by = 15; // attr.username asc
-	string cursor = 16;
+
+	int32 offset = 20;
+	int32 limit = 21;
+	string order_by = 22; // attr.username asc
 }
 
 message UserViewCondition {

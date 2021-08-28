@@ -83,9 +83,8 @@ service UserMgr {
 }
 
 service UserPersist {
-	rpc ListUserInViews(header.UserView) returns (header.Users);
+	rpc ListUsersInView(header.UserView) returns (header.Users);
 	rpc UpdateUser(header.User) returns (Empty);
-	rpc FilterUsers(header.UserViewCondition) returns (header.Users);
 }
 
 service LiveMgr {
