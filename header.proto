@@ -174,7 +174,8 @@ message Users {
 	int64 hit = 4;
 	int64 total = 5;
 
-	string anchor = 6;
+	string next_cursor = 6;
+	string prev_cursor = 7;
 }
 
 message SessionCampaign {
@@ -3603,6 +3604,9 @@ message UserView {
 
 	int64 total = 11;
 	int64 last_calculated = 12;
+
+	string order_by = 15; // attr.username asc
+	string cursor = 16;
 }
 
 message UserViewCondition {
@@ -3619,9 +3623,6 @@ message UserViewCondition {
 
 	repeated UserViewCondition all = 12; // preferred
 	repeated UserViewCondition one = 13;
-
-	string order_by = 15; // attr.username asc
-	string anchor = 16;
 }
 
 message ReportResponse {

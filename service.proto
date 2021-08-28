@@ -70,7 +70,6 @@ service UserMgr {
 	rpc DeleteView(Id) returns (Empty);
 	rpc GetView(Id) returns (header.UserView);
 	rpc ListViews(Id) returns (header.UserViews);
-	rpc ListUserInViews(header.UserViewCondition) returns (header.Users);
 
 	rpc UpsertLabel(header.Label) returns (header.Label);
 	rpc DeleteLabel(Id) returns (Empty);
@@ -84,6 +83,7 @@ service UserMgr {
 }
 
 service UserPersist {
+	rpc ListUserInViews(header.UserView) returns (header.Users);
 	rpc UpdateUser(header.User) returns (Empty);
 	rpc FilterUsers(header.UserViewCondition) returns (header.Users);
 }
