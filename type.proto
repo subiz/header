@@ -32,8 +32,8 @@ message TextCondition {
 
 	repeated string contain_all = 18;
 
-	string case_sensitive = 30;
-	string accent_sensitive = 31;
+	bool case_sensitive = 30;
+	bool accent_sensitive = 31;
 }
 
 message BoolCondition {
@@ -48,25 +48,22 @@ message FloatCondition {
   double gte = 6;
 	double lt = 7;
 	double lte = 8;
-	repeated double in = 9;
-	double eq = 10;
-	double neq = 11;
-	repeated double not_in = 12;
+	repeated double eq = 10;
+	repeated double neq = 11;
 	repeated double in_range = 13;
 	repeated double not_in_range = 14;
 }
 
-message DateCondition {
-	string op = 2; // in_business_hour, non_business_hour, relative, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
+message DatetimeCondition {
+	string op = 2; // in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
 	// repeated FloatTransform transforms = 3;
 	// repeated int64 hour_of_day
-	// bool in_business_hour = 9;
-	// bool non_business_hour = 10;
+
 	repeated string days_of_week = 10; // monday
 	int64 after = 11;
 	int64 before = 12;
 	repeated int64 between = 13;
-	repeated int64 outsite = 14;
+	repeated int64 outside = 14;
 
 	// relative, minute
 	int64 last = 17; // 1440 => last 24h sec

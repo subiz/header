@@ -3615,7 +3615,7 @@ message UserViewCondition {
 	TextCondition text = 6;
 	BoolCondition boolean = 8;
 	FloatCondition number = 9;
-	DateCondition datetime = 10;
+	DatetimeCondition datetime = 10;
 
 	repeated UserViewCondition all = 12; // preferred
 	repeated UserViewCondition one = 13;
