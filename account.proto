@@ -24,8 +24,8 @@ message Agent {
 
 	optional string fullname = 4;
 	optional string email = 5;
-	repeated string emails = 6;
-	repeated string phones = 7;
+	// repeated string emails = 6;
+	// repeated string phones = 7;
 	optional string phone = 8;
 	optional bool is_owner = 10;
 	optional string job_title = 11;
@@ -59,11 +59,8 @@ message Agent {
 	optional int64 seen = 24;
 	optional int64 modified = 25;
 
-	// optional auth.Method method = 27;
 	optional Account account = 28;
 	optional string country_code = 29;
-
-	// optional common.Permission perm = 31;
 
 	optional int64 last_login = 32;
 
@@ -163,7 +160,7 @@ message WebpageMonitorSetting {
 }
 
 message LeadSetting {
-	optional string assign_conversation_as_lead = 3; // assigned [default], joined, none
+	optional string assign_conversation_as_lead = 3; // assigned [default], joined
 }
 
 message GroupMember {

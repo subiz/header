@@ -312,29 +312,28 @@ type Agent struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx               *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Id                *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
-	AccountId         *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"` // subiz only
-	Fullname          *string         `protobuf:"bytes,4,opt,name=fullname" json:"fullname,omitempty"`
-	Email             *string         `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`
-	Emails            []string        `protobuf:"bytes,6,rep,name=emails" json:"emails,omitempty"`
-	Phones            []string        `protobuf:"bytes,7,rep,name=phones" json:"phones,omitempty"`
-	Phone             *string         `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"`
-	IsOwner           *bool           `protobuf:"varint,10,opt,name=is_owner,json=isOwner" json:"is_owner,omitempty"`
-	JobTitle          *string         `protobuf:"bytes,11,opt,name=job_title,json=jobTitle" json:"job_title,omitempty"`
-	Gender            *string         `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`
-	AvatarUrl         *string         `protobuf:"bytes,13,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
-	Lang              *string         `protobuf:"bytes,14,opt,name=lang" json:"lang,omitempty"`
-	Location          *string         `protobuf:"bytes,15,opt,name=location" json:"location,omitempty"`
-	Timezone          *string         `protobuf:"bytes,16,opt,name=timezone" json:"timezone,omitempty"`
-	EncryptedPassword *string         `protobuf:"bytes,17,opt,name=encrypted_password,json=encryptedPassword" json:"encrypted_password,omitempty"`
-	Joined            *int64          `protobuf:"varint,20,opt,name=joined" json:"joined,omitempty"`
-	InvitedBy         *string         `protobuf:"bytes,21,opt,name=invited_by,json=invitedBy" json:"invited_by,omitempty"`
-	State             *string         `protobuf:"bytes,22,opt,name=state" json:"state,omitempty"` //Agent state
-	PasswordChanged   *int64          `protobuf:"varint,23,opt,name=password_changed,json=passwordChanged" json:"password_changed,omitempty"`
-	Seen              *int64          `protobuf:"varint,24,opt,name=seen" json:"seen,omitempty"`
-	Modified          *int64          `protobuf:"varint,25,opt,name=modified" json:"modified,omitempty"`
-	// optional auth.Method method = 27;
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Id        *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
+	AccountId *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"` // subiz only
+	Fullname  *string         `protobuf:"bytes,4,opt,name=fullname" json:"fullname,omitempty"`
+	Email     *string         `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`
+	// repeated string emails = 6;
+	// repeated string phones = 7;
+	Phone              *string         `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"`
+	IsOwner            *bool           `protobuf:"varint,10,opt,name=is_owner,json=isOwner" json:"is_owner,omitempty"`
+	JobTitle           *string         `protobuf:"bytes,11,opt,name=job_title,json=jobTitle" json:"job_title,omitempty"`
+	Gender             *string         `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`
+	AvatarUrl          *string         `protobuf:"bytes,13,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
+	Lang               *string         `protobuf:"bytes,14,opt,name=lang" json:"lang,omitempty"`
+	Location           *string         `protobuf:"bytes,15,opt,name=location" json:"location,omitempty"`
+	Timezone           *string         `protobuf:"bytes,16,opt,name=timezone" json:"timezone,omitempty"`
+	EncryptedPassword  *string         `protobuf:"bytes,17,opt,name=encrypted_password,json=encryptedPassword" json:"encrypted_password,omitempty"`
+	Joined             *int64          `protobuf:"varint,20,opt,name=joined" json:"joined,omitempty"`
+	InvitedBy          *string         `protobuf:"bytes,21,opt,name=invited_by,json=invitedBy" json:"invited_by,omitempty"`
+	State              *string         `protobuf:"bytes,22,opt,name=state" json:"state,omitempty"` //Agent state
+	PasswordChanged    *int64          `protobuf:"varint,23,opt,name=password_changed,json=passwordChanged" json:"password_changed,omitempty"`
+	Seen               *int64          `protobuf:"varint,24,opt,name=seen" json:"seen,omitempty"`
+	Modified           *int64          `protobuf:"varint,25,opt,name=modified" json:"modified,omitempty"`
 	Account            *Account        `protobuf:"bytes,28,opt,name=account" json:"account,omitempty"`
 	CountryCode        *string         `protobuf:"bytes,29,opt,name=country_code,json=countryCode" json:"country_code,omitempty"`
 	LastLogin          *int64          `protobuf:"varint,32,opt,name=last_login,json=lastLogin" json:"last_login,omitempty"`
@@ -413,20 +412,6 @@ func (x *Agent) GetEmail() string {
 		return *x.Email
 	}
 	return ""
-}
-
-func (x *Agent) GetEmails() []string {
-	if x != nil {
-		return x.Emails
-	}
-	return nil
-}
-
-func (x *Agent) GetPhones() []string {
-	if x != nil {
-		return x.Phones
-	}
-	return nil
 }
 
 func (x *Agent) GetPhone() string {
@@ -1221,7 +1206,7 @@ type LeadSetting struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AssignConversationAsLead *string `protobuf:"bytes,3,opt,name=assign_conversation_as_lead,json=assignConversationAsLead" json:"assign_conversation_as_lead,omitempty"` // assigned [default], joined, none
+	AssignConversationAsLead *string `protobuf:"bytes,3,opt,name=assign_conversation_as_lead,json=assignConversationAsLead" json:"assign_conversation_as_lead,omitempty"` // assigned [default], joined
 }
 
 func (x *LeadSetting) Reset() {
@@ -3155,7 +3140,7 @@ var file_account_proto_rawDesc = []byte{
 	0x64, 0x73, 0x12, 0x2b, 0x0a, 0x12, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x76, 0x69, 0x65, 0x77, 0x5f,
 	0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x62, 0x79, 0x18, 0x0f, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0f,
 	0x75, 0x73, 0x65, 0x72, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x42, 0x79, 0x22,
-	0x8c, 0x09, 0x0a, 0x05, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78,
+	0xdc, 0x08, 0x0a, 0x05, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
 	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x0e, 0x0a, 0x02,
 	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1d, 0x0a, 0x0a,
@@ -3163,10 +3148,7 @@ var file_account_proto_rawDesc = []byte{
 	0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x66,
 	0x75, 0x6c, 0x6c, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66,
 	0x75, 0x6c, 0x6c, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x16, 0x0a,
-	0x06, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x65,
-	0x6d, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x73, 0x18,
-	0x07, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x73, 0x12, 0x14, 0x0a,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x14, 0x0a,
 	0x05, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x68,
 	0x6f, 0x6e, 0x65, 0x12, 0x19, 0x0a, 0x08, 0x69, 0x73, 0x5f, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x18,
 	0x0a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x73, 0x4f, 0x77, 0x6e, 0x65, 0x72, 0x12, 0x1b,

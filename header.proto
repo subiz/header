@@ -19,7 +19,6 @@ message Id {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-
 	string query = 4;
 }
 
@@ -134,8 +133,6 @@ message User {
 	bool is_lead = 43;
 	string lead_stage = 44;
 	int64 lead_at = 45;
-
-	repeated string chat_withs = 46;
 }
 
 message UserLabel {
@@ -3589,6 +3586,9 @@ message UserViews {
 	repeated UserView views = 4;
 }
 
+message UserViewStatistic {
+}
+
 message UserView {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -3604,6 +3604,7 @@ message UserView {
 	string name = 10;
 
 	int64 total = 11;
+	// status tic
 	int64 last_calculated = 12;
 
 
