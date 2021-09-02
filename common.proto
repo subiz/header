@@ -13,7 +13,7 @@ message Context {
 	string sub_topic = 11;
 
 	// list of used fields in the object
-	string fields = 21;
+	repeated string fields = 21;
 }
 
 message Device {
