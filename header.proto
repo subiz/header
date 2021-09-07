@@ -3088,6 +3088,7 @@ message LoginSession {
 	string state = 18; // ended, created, updated
 
 	string type = 19; // session, apikey, admin
+	string client_version = 20;
 }
 
 message ScryptChallenge {
