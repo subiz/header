@@ -656,7 +656,7 @@ message Event {
 		LangMessage language_message = 54;
 		Label label = 55;
 		UserView user_view = 56;
-		LoginSession login_sesion = 57;
+		LoginSession login_session = 57;
 	}
 	Data data = 20;
 }
