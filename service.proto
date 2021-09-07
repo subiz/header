@@ -40,7 +40,7 @@ service AccountMgr {
 
 	rpc CheckLoginSession(LoginSession) returns (LoginSession);
 	rpc ListLoginSessions(Id) returns (LoginSessions);
-	rpc LogoutSession(LoginSession) returns (Empty); // can use id or access-token
+	rpc LogoutSession(Id) returns (Empty); // can use id or access-token
 
 	rpc GetLanguage(Id) returns (Lang);
 	rpc UpdateLanguage(LangMessage) returns (LangMessage);
