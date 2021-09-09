@@ -57,6 +57,10 @@ message ProductVariant {
 	repeated ProductImage images = 18;
 	repeated ProductVideo videos = 19;
 	int64 stock = 21;
+
+	string option1 = 22; // product.options[0].values[i]
+	string option2 = 23; // product.options[1].values[j]
+	string option3 = 24; // product.options[2].values[k]
 }
 
 message Products {
@@ -92,6 +96,8 @@ message Product {
 	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
 	string mpn = 24;
 
+	repeated ProductImage images = 25;
+	repeated ProductOption options = 26;
 	repeated ProductVariant variants = 27;
 
 
@@ -134,4 +140,9 @@ message ProductFeed {
 	ShopeeProductFeed shopee = 5;
 	WebsiteJSONLdProductFeed website_json_ld = 6;
 	GoogleSheetProductFeed google_sheet = 7;
+}
+
+message ProductOption {
+	string name = 2;
+	repeated string values = 4;
 }
