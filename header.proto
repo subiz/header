@@ -913,29 +913,6 @@ message PresencesResponse {
 	repeated string focused_user_ids = 3;
 }
 
-message LeadSearchRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	string query = 4;
-	string anchor = 5;
-	int32 limit = 6;
-	SCondition condition = 10;
-	repeated UserAttributeCondition conditions = 11;
-	int64 unix_hour = 12;
-	repeated string fields = 13;
-
-	string order_by_field = 7; // -fullname
-}
-
-message LeadSearchResult {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 total = 3;
-	repeated User users = 4;
-	string anchor = 5;
-}
-
 message UserReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;

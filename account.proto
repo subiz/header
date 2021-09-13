@@ -34,8 +34,6 @@ message Agent {
 		unset = 0;
 		male = 1;
 		female = 2;
-		bisexual = 3;
-		asexual = 4;
 	}
 
 	optional string gender = 12;

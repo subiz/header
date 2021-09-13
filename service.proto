@@ -50,17 +50,15 @@ service AccountMgr {
 
 // user services
 service UserMgr {
-	rpc SearchUsers (header.SearchRequest) returns (header.Users);
+	rpc SearchUsers(header.SearchRequest) returns (header.Users);
 
-	rpc SearchLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
-	rpc ListLeads (header.LeadSearchRequest) returns (header.LeadSearchResult);
 	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
-	rpc CreateUser (header.User) returns (Id);
+	rpc CreateUser(header.User) returns (Id);
 	rpc CreateSbzUserByAgent (header.Id) returns (Id);
-	rpc UpdateUser (header.User) returns (Id);
-	rpc ReadUser (Id) returns (header.User);
+	rpc UpdateUser(header.User) returns (Id);
+	rpc ReadUser(Id) returns (header.User);
 
-	rpc ReportUsers (header.UserReportRequest) returns (header.UserReportResult);
+	rpc ReportUsers(header.UserReportRequest) returns (header.UserReportResult);
 	rpc ReportUserEvents(header.UserEventMetricsRequest) returns (header.UserEventMetrics);
 
 	rpc MatchUsers(Ids) returns (header.Users);
@@ -85,6 +83,7 @@ service UserMgr {
 service UserPersist {
 	rpc ListUsersInView(header.UserView) returns (header.Users);
 	rpc UpdateUser(header.User) returns (Empty);
+	rpc ResyncUsers(header.Id) returns (Empty);
 }
 
 service LiveMgr {
@@ -153,7 +152,7 @@ service ConversationMgr {
 	rpc Typing(Id) returns (Empty);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
-	rpc SearchConvos (header.SearchRequest) returns (header.Conversations);
+	rpc SearchConvos(header.SearchRequest) returns (header.Conversations);
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UpdateConversationMember(header.ConversationMember) returns (Empty);
@@ -191,8 +190,8 @@ service IntegrationMgr {
 }
 
 service EventMgr {
-	rpc SearchEvents (header.ListUserEventsRequest) returns (header.Events);
-	rpc CreateEvent (header.UserEvent) returns (header.Event);
+	rpc SearchEvents(header.ListUserEventsRequest) returns (header.Events);
+	rpc CreateEvent(header.UserEvent) returns (header.Event);
 }
 
 service ConversationEventReader {
@@ -208,6 +207,7 @@ service FileMgr {
 	rpc Presign(header.FileHeader) returns (header.PresignResult);
 	rpc Read(header.FileRequest) returns (header.File);
 	rpc Uploaded(header.FileRequest) returns (header.File);
+	rpc DownloadFileUrl(header.Id) returns (header.File);
 }
 
 // noti5 services
