@@ -401,4 +401,5 @@ service Proder {
 	rpc CreateProduct(header.Product) returns (header.Product);
 	rpc UpdateProduct(header.Product) returns (header.Product);
 	rpc DeleteProduct(Id) returns (Empty);
+	rpc SearchProducts(header.SearchProductsRequest) returns (header.Products);
 }

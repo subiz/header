@@ -1073,6 +1073,61 @@ func (x *ProductOption) GetValues() []string {
 	return nil
 }
 
+type SearchProductsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Query  string `protobuf:"bytes,3,opt,name=query,proto3" json:"query,omitempty"`
+	Limmit int32  `protobuf:"varint,4,opt,name=limmit,proto3" json:"limmit,omitempty"`
+}
+
+func (x *SearchProductsRequest) Reset() {
+	*x = SearchProductsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_order_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductsRequest) ProtoMessage() {}
+
+func (x *SearchProductsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_order_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductsRequest.ProtoReflect.Descriptor instead.
+func (*SearchProductsRequest) Descriptor() ([]byte, []int) {
+	return file_order_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *SearchProductsRequest) GetQuery() string {
+	if x != nil {
+		return x.Query
+	}
+	return ""
+}
+
+func (x *SearchProductsRequest) GetLimmit() int32 {
+	if x != nil {
+		return x.Limmit
+	}
+	return 0
+}
+
 var File_order_proto protoreflect.FileDescriptor
 
 var file_order_proto_rawDesc = []byte{
@@ -1231,9 +1286,14 @@ var file_order_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12,
 	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
 	0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x18, 0x04, 0x20,
-	0x03, 0x28, 0x09, 0x52, 0x06, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x42, 0x19, 0x5a, 0x17, 0x67,
-	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f,
-	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x03, 0x28, 0x09, 0x52, 0x06, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x73, 0x22, 0x45, 0x0a, 0x15, 0x53,
+	0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x69,
+	0x6d, 0x6d, 0x69, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x6c, 0x69, 0x6d, 0x6d,
+	0x69, 0x74, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1248,7 +1308,7 @@ func file_order_proto_rawDescGZIP() []byte {
 	return file_order_proto_rawDescData
 }
 
-var file_order_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_order_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_order_proto_goTypes = []interface{}{
 	(*ProductImage)(nil),             // 0: header.ProductImage
 	(*ProductVideo)(nil),             // 1: header.ProductVideo
@@ -1261,15 +1321,16 @@ var file_order_proto_goTypes = []interface{}{
 	(*ShopeeProductFeed)(nil),        // 8: header.ShopeeProductFeed
 	(*ProductFeed)(nil),              // 9: header.ProductFeed
 	(*ProductOption)(nil),            // 10: header.ProductOption
-	(*common.Context)(nil),           // 11: common.Context
+	(*SearchProductsRequest)(nil),    // 11: header.SearchProductsRequest
+	(*common.Context)(nil),           // 12: common.Context
 }
 var file_order_proto_depIdxs = []int32{
 	2,  // 0: header.ProductVariant.prices:type_name -> header.ProductPrice
 	0,  // 1: header.ProductVariant.images:type_name -> header.ProductImage
 	1,  // 2: header.ProductVariant.videos:type_name -> header.ProductVideo
-	11, // 3: header.Products.ctx:type_name -> common.Context
+	12, // 3: header.Products.ctx:type_name -> common.Context
 	5,  // 4: header.Products.products:type_name -> header.Product
-	11, // 5: header.Product.ctx:type_name -> common.Context
+	12, // 5: header.Product.ctx:type_name -> common.Context
 	0,  // 6: header.Product.images:type_name -> header.ProductImage
 	10, // 7: header.Product.options:type_name -> header.ProductOption
 	3,  // 8: header.Product.variants:type_name -> header.ProductVariant
@@ -1421,6 +1482,18 @@ func file_order_proto_init() {
 				return nil
 			}
 		}
+		file_order_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchProductsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1428,7 +1501,7 @@ func file_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_order_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

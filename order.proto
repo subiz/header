@@ -146,3 +146,8 @@ message ProductOption {
 	string name = 2;
 	repeated string values = 4;
 }
+
+message SearchProductsRequest {
+	string query = 3;
+	int32 limmit = 4;
+}
