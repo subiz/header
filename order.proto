@@ -149,5 +149,5 @@ message ProductOption {
 
 message SearchProductsRequest {
 	string query = 3;
-	int32 limmit = 4;
+	int32 limit = 4;
 }
