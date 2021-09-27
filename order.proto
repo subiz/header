@@ -39,7 +39,7 @@ message PriceRule {
 message ProductVariant {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3; // subiz generated
+	string id = 3; // generated
 
 	string product_id = 4; // iphone-6-plus
 	string handle = 5; // iphone-6-plus-128G
@@ -102,6 +102,8 @@ message ProductVariant {
 
 	repeated PriceRule price_rules = 53;
 	int64 stock = 54;
+
+	string source_id = 55;
 }
 
 message ProductVariants {
