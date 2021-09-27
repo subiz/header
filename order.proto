@@ -3,28 +3,32 @@ syntax = "proto3";
 package header;
 
 option go_package = "github.com/subiz/header";
+
 import "common.proto";
+import "locale.generated.proto"; // run node lang.js to generate this file
 
-message ProductImage {
-	string id = 2;
-	string created_at = 3;
-	int64 width = 4;
-	int64 height = 5;
-	string src = 6;
-	string alt = 7;
+message ProductCollections {
+	common.Context ctx = 1;
+	repeated ProductCollection product_collections = 2;
 }
 
-message ProductVideo {
-	string id = 2;
-	string created_at = 3;
-	int64 width = 4;
-	int64 height = 5;
-	string src = 6;
-	string alt = 7;
-	int64 length = 8;
+message ProductCollection {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // use
+	string name = 4;
+	string visiblity = 5; // public || unpublished
+	string code = 6;
+	repeated string item_ids = 7;  // variant ids
+
+	int64 created = 11;
+	int64 created_by = 12;
+
+	int64 updated = 13;
+	int64 updated_by = 14;
 }
 
-message ProductPrice {
+message PriceRule {
 	string feed_id = 4;
 	double price = 5;
 	string currency = 6;
@@ -33,96 +37,82 @@ message ProductPrice {
 }
 
 message ProductVariant {
-	string id = 3;
-	// Product product = 4;
-	string product_id = 5;;
-	string title = 6;
-	string url = 7;
-
-	string sku = 8;
-	string barcode = 9;
-
-	repeated ProductPrice prices = 10;
-
-	// color
-	// size
-	// custom
-	// KV
-	int64 created = 11;
-	int64 created_by = 12;
-
-	int64 updated = 13;
-	int64 updated_by = 14;
-
-	repeated ProductImage images = 18;
-	repeated ProductVideo videos = 19;
-	int64 stock = 21;
-
-	string option1 = 22; // product.options[0].values[i]
-	string option2 = 23; // product.options[1].values[j]
-	string option3 = 24; // product.options[2].values[k]
-}
-
-message Products {
 	common.Context ctx = 1;
-	repeated Product products = 2;
-	string anchor = 3;
-	int64 total = 4;
-}
-
-message Product {
-	common.Context ctx = 1;
-	string account_id = 4;
+	string account_id = 2;
 	string id = 3; // subiz generated
 
-	string handle = 2; // iphone-6-plus
-	string vendor = 9; // brand name
-	string product_type = 8;
-	string description = 5;
-	string title = 6; // apple Ipone 6 plus
-	string url = 7;
+	string product_id = 4; // iphone-6-plus
+	string handle = 5; // iphone-6-plus-128G
+	string brand = 6; // brand name: apple, luis vuiton
+
+	header.I18nString title = 7; // apple Iphone 6 plus
+	header.I18nString description = 8;
+	header.I18nString short_description = 9;
+
+	repeated string variants = 10; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
+	repeated string other_variant_ids = 12; // server generated: list of other variant with the same product_group_id
+
+	string link = 15;
+	string mobile_link = 17;
+	// app_link = 11; // mobile deep link
 
 	// repeated KV metadata = 13;
-	repeated string categories = 14;
+	// accessory.watch
+	string categories = 14;
 	// repeated Product related_products = 21; // releated content ids
 
-	int64 created = 17;
-	int64 updated = 18;
-	int64 created_by = 19;
-	int64 updated_by = 20;
+	int64 created = 20;
+	int64 updated = 21;
+	int64 created_by = 22;
+	int64 updated_by = 23;
 
-	repeated string tags = 23;
+	repeated string tags = 25;
 
 	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
-	string mpn = 24;
+	string mpn = 26;
 
-	repeated ProductImage images = 25;
-	repeated ProductOption options = 26;
-	repeated ProductVariant variants = 27;
+	repeated string images = 27;
+	repeated string videos = 28;
+	// repeated ProductOption options = 29;
 
-
-	string note = 28;
-
+	string note = 31;
 
 	// shipping
-	bool requires_shipping = 30;
+	bool requires_shipping = 32;
 
 	int64 day_to_ship = 33;
 	double dimension_width = 34;
 	double dimension_height = 35;
 	double dimension_length = 36;
 
-	double weight = 31;
-	string weight_unit = 32;
-	double grams = 37;
-
-	string is_new = 40;
+	double weight = 37;
+	string weight_unit = 38;
+	double grams = 39;
 
 	bool taxable = 41;
+
+	string condition = 42; // new, refurbished, used
+	string visibility = 43; // published, staging, hidden, deleted
+
+	string sku = 46;
+	string barcode = 47;
+
+	double price = 51;
+	double sale_price = 52;
+
+	repeated PriceRule price_rules = 53;
+	int64 stock = 54;
 }
 
+message ProductVariants {
+	common.Context ctx = 1;
+	repeated ProductVariant product_variants = 2;
+	string cursor = 3;
+	int64 total = 4;
+}
 
 message GoogleSheetProductFeed {
+	string url = 2;
 }
 
 message WebsiteJSONLdProductFeed {
@@ -132,7 +122,15 @@ message ShopeeProductFeed {
 	string access_token = 4;
 }
 
+message ProductFeeds {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated ProductFeed product_feeds = 4;
+}
+
 message ProductFeed {
+	common.Context ctx = 1;
+	string account_id = 2;
 	string id = 3;
 	string type = 4; // google sheet, shopee, website json ld
 
@@ -140,14 +138,41 @@ message ProductFeed {
 	ShopeeProductFeed shopee = 5;
 	WebsiteJSONLdProductFeed website_json_ld = 6;
 	GoogleSheetProductFeed google_sheet = 7;
+
+	int64 created = 20;
+	int64 created_by = 21;
+
+	int64 updated = 22;
+	int64 updated_by = 23;
+
+	int64 last_fetched = 24;
+	int64 last_fetch_duration = 25;
+	string last_fetch_error = 26;
+	string last_fetch_status = 27; // success, failed
+
+	int64 last_sucess_fetched = 30;
 }
 
-message ProductOption {
-	string name = 2;
-	repeated string values = 4;
-}
+// message ProductOption {
+//string name = 2;
+//	repeated string values = 4;
+//}
 
-message SearchProductsRequest {
+message SearchProductVariantsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
 	string query = 3;
-	int32 limit = 4;
+	int32 limit = 4; // 200
+
+	int64 price_gte = 5;
+	int64 price_lte = 6;
+
+	// ['colors:red,blue', 'size:xxl']
+	// returns all variants which color is (red OR blue) AND size is xxl
+	repeated string variants = 7;
+
+	string availability = 8; // instock, out_of_stock
+	string category = 10;
+
+	string visibility = 11; // published or hidden
 }

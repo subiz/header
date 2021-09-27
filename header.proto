@@ -624,7 +624,7 @@ message Event {
 		account.Agent agent = 2;
 		Message message = 3;
 		Conversation conversation = 4;
-		Product product = 6;
+		ProductVariant product_variant = 6;
 		Topic topic = 7;
 		account.Presence presence = 8;
 		User user = 10;
@@ -657,6 +657,8 @@ message Event {
 		Label label = 55;
 		UserView user_view = 56;
 		LoginSession login_session = 57;
+		ProductFeed product_feed = 58;
+		ProductCollection product_collection = 59;
 	}
 	Data data = 20;
 }
@@ -3334,9 +3336,6 @@ enum RealtimeType {
 	live_top_location = 84;
 	live_top_page = 85;
 
-	user_select_product = 86;
-	user_like_content = 87;
-
 	agent_notification_created = 88;
 	agent_notification_read = 114;
 	agent_notibox_read = 115;
@@ -3383,6 +3382,15 @@ enum RealtimeType {
 	user_view_deleted = 121;
 
 	login_session_updated = 122;
+
+	product_variant_updated = 130;
+	product_variant_deleted = 131;
+
+	product_feed_updated = 132;
+	product_feed_deleted = 133;
+
+	product_collection_updated = 134;
+	product_collection_deleted = 135;
 }
 
 // TODO: remove after remove old dashboard
@@ -3652,6 +3660,7 @@ message FileUrlDownloadRequest {
 	int64 max_size = 4;
 	string type_prefix = 5;
 	int64 timeout = 6; // ms
+	string user_agent = 7; // control client user-agent while download
 }
 
 message PushNoti {

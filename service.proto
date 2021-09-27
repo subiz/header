@@ -205,7 +205,6 @@ service ConversationEventReader {
 // file services
 service FileMgr {
 	rpc Presign(header.FileHeader) returns (header.PresignResult);
-	rpc Read(header.FileRequest) returns (header.File);
 	rpc Uploaded(header.FileRequest) returns (header.File);
 	rpc DownloadFileUrl(header.FileUrlDownloadRequest) returns (header.File);
 }
@@ -396,10 +395,21 @@ service Holap {
 
 // proder services
 service Proder {
-	rpc ListProducts(Ids) returns (header.Products);
-	rpc ReadProduct(Id) returns (header.Product);
-	rpc CreateProduct(header.Product) returns (header.Product);
-	rpc UpdateProduct(header.Product) returns (header.Product);
-	rpc DeleteProduct(Id) returns (Empty);
-	rpc SearchProducts(header.SearchProductsRequest) returns (header.Products);
+	rpc ListProductVariants(Ids) returns (header.ProductVariants);
+	rpc ReadProductVariant(Id) returns (header.ProductVariant);
+	rpc CreateProductVariant(header.ProductVariant) returns (header.ProductVariant);
+	rpc UpdateProductVariant(header.ProductVariant) returns (header.ProductVariant);
+	rpc DeleteProductVariant(Id) returns (Empty);
+
+	rpc SearchProductVariants(header.SearchProductVariantsRequest) returns (header.ProductVariants);
+
+	rpc ListProductCollections(Id) returns (header.ProductCollections);
+	rpc CreateProductCollection(ProductCollection) returns (ProductCollection);
+	rpc UpdateProductCollection(ProductCollection) returns (ProductCollection);
+	rpc DeleteProductCollection(Id) returns (Empty);
+
+	rpc ListProductFeeds(Id) returns (header.ProductFeeds);
+	rpc CreateProductFeeds(header.ProductFeed) returns (header.ProductFeed);
+	rpc UpdateProductFeeds(header.ProductFeed) returns (header.ProductFeed);
+	rpc DeleteProductFeeds(Id) returns (Empty);
 }
