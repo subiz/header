@@ -624,7 +624,7 @@ message Event {
 		account.Agent agent = 2;
 		Message message = 3;
 		Conversation conversation = 4;
-		ProductVariant product_variant = 6;
+		ProductVariant product = 6;
 		Topic topic = 7;
 		account.Presence presence = 8;
 		User user = 10;

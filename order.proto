@@ -41,25 +41,30 @@ message ProductVariant {
 	string account_id = 2;
 	string id = 3; // generated
 
-	string product_id = 4; // iphone-6-plus
-	string handle = 5; // iphone-6-plus-128G
-	string brand = 6; // brand name: apple, luis vuiton
+	string product_id = 5; // iphone-6-plus
+	string title = 6;
+	string url = 7;
 
-	header.I18nString title = 7; // apple Iphone 6 plus
-	header.I18nString description = 8;
-	header.I18nString short_description = 9;
+	string handle = 8; // iphone-6-plus-128G
 
-	repeated string variants = 10; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
-	repeated string other_variant_ids = 12; // server generated: list of other variant with the same product_group_id
+	header.I18nString title_quill_delta = 10; // apple Iphone 6 plus
+	header.I18nString description_quill_delta = 11;
+	string description = 12;
+	header.I18nString short_description_quill_delta = 9;
+	string short_description = 13;
 
-	string link = 15;
-	string mobile_link = 17;
+	repeated string variants = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
+	repeated string other_variant_ids = 15; // server generated: list of other variant with the same product_group_id
+
+	string mobile_url = 17;
 	// app_link = 11; // mobile deep link
 
 	// repeated KV metadata = 13;
 	// accessory.watch
-	string categories = 14;
+	string categories = 16;
 	// repeated Product related_products = 21; // releated content ids
+
+	string brand = 18; // brand name: apple, luis vuiton
 
 	int64 created = 20;
 	int64 updated = 21;
