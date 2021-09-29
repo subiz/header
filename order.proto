@@ -10,6 +10,8 @@ import "locale.generated.proto"; // run node lang.js to generate this file
 message ProductCollections {
 	common.Context ctx = 1;
 	repeated ProductCollection product_collections = 2;
+	string anchor = 3;
+	int64 total = 4;
 }
 
 message ProductCollection {
@@ -157,6 +159,8 @@ message ProductFeeds {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated ProductFeed product_feeds = 4;
+	string anchor = 5;
+	int64 total = 6;
 }
 
 message ProductFeed {

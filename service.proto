@@ -402,13 +402,13 @@ service Proder {
 
 	rpc SearchProducts(header.SearchProductsRequest) returns (header.Products);
 
-	rpc ListProductCollections(Id) returns (header.ProductCollections);
+	rpc ListProductCollections(Ids) returns (header.ProductCollections);
 	rpc CreateProductCollection(ProductCollection) returns (ProductCollection);
 	rpc UpdateProductCollection(ProductCollection) returns (ProductCollection);
 	rpc DeleteProductCollection(Id) returns (Empty);
 
-	rpc ListProductFeeds(Id) returns (header.ProductFeeds);
-	rpc CreateProductFeeds(header.ProductFeed) returns (header.ProductFeed);
-	rpc UpdateProductFeeds(header.ProductFeed) returns (header.ProductFeed);
-	rpc DeleteProductFeeds(Id) returns (Empty);
+	rpc ListProductFeeds(Ids) returns (header.ProductFeeds);
+	rpc CreateProductFeed(header.ProductFeed) returns (header.ProductFeed);
+	rpc UpdateProductFeed(header.ProductFeed) returns (header.ProductFeed);
+	rpc DeleteProductFeed(Id) returns (Empty);
 }
