@@ -65,9 +65,11 @@ message InventoryProduct {
 message Product {
 	common.Context ctx = 1;
 	string account_id = 2;
+
+	repeated Product other_variants = 4; // [2] [3]
+
 	string id = 3; // generated
 
-	string product_group_id = 5; // iphone-6-plus
 	string title = 6;
 	string url = 7;
 
@@ -80,7 +82,6 @@ message Product {
 	string short_description = 13;
 
 	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
-	repeated string other_product_ids = 15; // server generated: list of other product with the same product_group_id
 
 	string mobile_url = 17;
 	// app_link = 11; // mobile deep link
