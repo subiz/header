@@ -19,7 +19,7 @@ message ProductCollection {
 	string name = 4;
 	string visiblity = 5; // public || unpublished
 	string code = 6;
-	repeated string item_ids = 7;  // variant ids
+	repeated string item_ids = 7;  // product ids
 
 	int64 created = 11;
 	int64 created_by = 12;
@@ -36,12 +36,35 @@ message PriceRule {
 	int64 to_count = 8;
 }
 
-message ProductVariant {
+message InventoryProduct {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3; // generated
 
-	string product_id = 5; // iphone-6-plus
+	Product ref_product = 4;
+
+	string serial_number = 8;
+	string barcode = 9;
+	string order_id = 10;
+
+	string location = 11; // sold, wearhouse49, store424
+
+	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
+
+	int64 created = 20;
+	int64 updated = 21;
+	int64 created_by = 22;
+	int64 updated_by = 23;
+
+	int64 sold_price = 25;
+}
+
+message Product {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // generated
+
+	string product_group_id = 5; // iphone-6-plus
 	string title = 6;
 	string url = 7;
 
@@ -53,8 +76,8 @@ message ProductVariant {
 	header.I18nString short_description_quill_delta = 9;
 	string short_description = 13;
 
-	repeated string variants = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
-	repeated string other_variant_ids = 15; // server generated: list of other variant with the same product_group_id
+	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
+	repeated string other_product_ids = 15; // server generated: list of other product with the same product_group_id
 
 	string mobile_url = 17;
 	// app_link = 11; // mobile deep link
@@ -111,9 +134,9 @@ message ProductVariant {
 	string source_id = 55;
 }
 
-message ProductVariants {
+message Products {
 	common.Context ctx = 1;
-	repeated ProductVariant product_variants = 2;
+	repeated Product products = 2;
 	string cursor = 3;
 	int64 total = 4;
 }
@@ -165,7 +188,7 @@ message ProductFeed {
 //	repeated string values = 4;
 //}
 
-message SearchProductVariantsRequest {
+message SearchProductsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string query = 3;
@@ -174,12 +197,17 @@ message SearchProductVariantsRequest {
 	int64 price_gte = 5;
 	int64 price_lte = 6;
 
-	// ['colors:red,blue', 'size:xxl']
+	// [{key: 'colors', value:'red,blue', {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
-	repeated string variants = 7;
+	repeated KV props = 7;
 
 	string availability = 8; // instock, out_of_stock
 	string category = 10;
 
 	string visibility = 11; // published or hidden
+}
+
+message KV {
+	string key = 2;
+	string value = 3;
 }
