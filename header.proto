@@ -200,14 +200,22 @@ message AttributeDefinition {
 	string account_id = 2;
 	string name = 3;
 	string description = 4;
+
+	I18nString label = 16; // for template
+
 	string type = 5;
 	enum AttributeType {
 		text = 0;
 		number = 1;
 		boolean = 2;
 		datetime = 3;
-		list = 4; // remove
 	}
+
+	bool multiple_line = 17;
+	string select = 18; // radio, checkbox, dropdown
+
+	repeated float number_items = 19; // for select
+	repeated float text_items = 20; // for select
 
 	// repeated string options = 6;
 	repeated string list_items = 6;
