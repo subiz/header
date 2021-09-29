@@ -57,6 +57,7 @@ message InventoryProduct {
 	int64 updated_by = 23;
 
 	int64 sold_price = 25;
+	int64 expiry_date = 26;
 }
 
 message Product {
