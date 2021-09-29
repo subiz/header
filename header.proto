@@ -85,12 +85,15 @@ message Attribute {
 	string key = 4;
 
 	int64 modified = 8;
-	// string value = 9; // json encode
+
+	string value = 9; // json encode primary value
 	string text = 10;
 	double number = 11;
 	bool boolean = 12;
 	string datetime = 13;
 	repeated string list = 14; // remove
+
+	repeated string other_values = 20;
 
 	string type = 16;
 	string by = 17; // required
@@ -195,6 +198,12 @@ message DeleteAttrRequest {
 	string key = 2;
 }
 
+message AttributeDefinitionListItem {
+	// value
+	string value = 4;
+	I18nString label = 7;
+}
+
 message AttributeDefinition {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -213,9 +222,8 @@ message AttributeDefinition {
 
 	bool multiple_line = 17;
 	string select = 18; // radio, checkbox, dropdown
-
-	repeated float number_items = 19; // for select
-	repeated float text_items = 20; // for select
+	repeated AttributeDefinitionListItem items = 19; // for select
+	string default_value = 20;
 
 	// repeated string options = 6;
 	repeated string list_items = 6;

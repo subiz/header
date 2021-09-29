@@ -78,7 +78,7 @@ func GetAttr(u *User, key string, typ string) interface{} {
 			return a.GetNumber()
 		case AttributeDefinition_boolean.String():
 			return a.GetBoolean()
-		case AttributeDefinition_list.String():
+		case "list":
 			return a.GetList()
 		case AttributeDefinition_datetime.String():
 			t, err := time.Parse(time.RFC3339Nano, a.GetDatetime())
@@ -115,7 +115,7 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 	case AttributeDefinition_boolean.String():
 		v, _ := val.(bool)
 		a.Boolean = v
-	case AttributeDefinition_list.String():
+	case "list":
 		ss, _ := val.([]string)
 		a.List = ss
 	case AttributeDefinition_datetime.String():
