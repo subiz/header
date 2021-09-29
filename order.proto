@@ -22,10 +22,10 @@ message ProductCollection {
 	repeated string item_ids = 7;  // product ids
 
 	int64 created = 11;
-	int64 created_by = 12;
+	string created_by = 12;
 
 	int64 updated = 13;
-	int64 updated_by = 14;
+	string updated_by = 14;
 }
 
 message PriceRule {
@@ -53,8 +53,8 @@ message InventoryProduct {
 
 	int64 created = 20;
 	int64 updated = 21;
-	int64 created_by = 22;
-	int64 updated_by = 23;
+	string created_by = 22;
+	string updated_by = 23;
 
 	int64 sold_price = 25;
 	int64 expiry_date = 26;
@@ -92,8 +92,8 @@ message Product {
 
 	int64 created = 20;
 	int64 updated = 21;
-	int64 created_by = 22;
-	int64 updated_by = 23;
+	string created_by = 22;
+	string updated_by = 23;
 
 	repeated string tags = 25;
 
@@ -171,10 +171,10 @@ message ProductFeed {
 	GoogleSheetProductFeed google_sheet = 7;
 
 	int64 created = 20;
-	int64 created_by = 21;
+	string created_by = 21;
 
 	int64 updated = 22;
-	int64 updated_by = 23;
+	string updated_by = 23;
 
 	int64 last_fetched = 24;
 	int64 last_fetch_duration = 25;
