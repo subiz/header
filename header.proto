@@ -156,6 +156,7 @@ message Label {
 	int64 updated = 11;
 
 	bool disabled = 15;
+	int64 deleted = 16;
 }
 
 message Labels {
