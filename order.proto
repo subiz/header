@@ -70,6 +70,7 @@ message Product {
 
 	string id = 3; // generated
 
+	string product_group_id = 5; // iphone-6-plus
 	string title = 6;
 	string url = 7;
 
