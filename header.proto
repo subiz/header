@@ -124,13 +124,16 @@ message User {
 	string account_id = 4;
 	repeated string aliases = 5;
 	repeated UserNote notes = 6;
+
 	repeated Attribute attributes = 18;
+
 	UserSession session = 40;
 	repeated string lead_owners = 41;
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
 	string lead_stage = 44;
 	int64 lead_at = 45;
+	map<string, Attribute> attrs = 46;
 }
 
 message UserLabel {
