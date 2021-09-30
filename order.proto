@@ -69,8 +69,10 @@ message Product {
 	repeated Product other_variants = 4; // [2] [3]
 
 	string id = 3; // generated
-
 	string product_group_id = 5; // iphone-6-plus
+	string left_product_id = 56; // only server
+	string right_product_id = 57; // only server
+
 	string title = 6;
 	string url = 7;
 
