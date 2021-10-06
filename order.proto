@@ -107,8 +107,10 @@ message Product {
 	string mpn = 26;
 
 	repeated string images = 27;
-	repeated string videos = 28;
-	// repeated ProductOption options = 29;
+	repeated string additional_images = 28;
+
+	repeated string videos = 29;
+	repeated string additional_videos = 30;
 
 	string note = 31;
 
