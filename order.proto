@@ -91,7 +91,7 @@ message Product {
 
 	// repeated KV metadata = 13;
 	// accessory.watch
-	string categories = 16;
+	string category = 16;
 	// repeated Product related_products = 21; // releated content ids
 
 	string brand = 18; // brand name: apple, luis vuiton
@@ -100,8 +100,6 @@ message Product {
 	int64 updated = 21;
 	string created_by = 22;
 	string updated_by = 23;
-
-	repeated string tags = 25;
 
 	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
 	string mpn = 26;
