@@ -109,7 +109,6 @@ service AutomationMgr {
 	rpc UpdateAutomation(header.Automation) returns (header.Automation);
 	rpc DeleteAutomation(Id) returns (Empty);
 	rpc ReadAutomation(Id) returns (header.Automation);
-	rpc CreateAutomation(header.Automation) returns (header.Automation);
 }
 
 service AttributeMgr {
@@ -411,4 +410,6 @@ service Proder {
 	rpc CreateProductFeed(header.ProductFeed) returns (header.ProductFeed);
 	rpc UpdateProductFeed(header.ProductFeed) returns (header.ProductFeed);
 	rpc DeleteProductFeed(Id) returns (Empty);
+
+	rpc MatchProducts(Ids) returns (header.Products);
 }

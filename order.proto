@@ -78,10 +78,9 @@ message Product {
 
 	string handle = 8; // iphone-6-plus-128G
 
-	header.I18nString title_quill_delta = 10; // apple Iphone 6 plus
+	header.I18nString name = 10; // apple Iphone 6 plus
 	header.I18nString description_quill_delta = 11;
 	string description = 12;
-	header.I18nString short_description_quill_delta = 9;
 	string short_description = 13;
 
 	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
@@ -123,7 +122,7 @@ message Product {
 	double weight = 37;
 	string weight_unit = 38;
 	double grams = 39;
-
+	bool allow_preorder = 40;
 	bool taxable = 41;
 
 	string condition = 42; // new, refurbished, used
@@ -136,7 +135,7 @@ message Product {
 	double sale_price = 52;
 
 	repeated PriceRule price_rules = 53;
-	int64 stock = 54;
+	int64 stock = 54; // -1, dont manage warehouse
 
 	string source_id = 55;
 }
