@@ -393,11 +393,13 @@ service Holap {
 
 // proder services
 service Proder {
-	rpc ListProducts(ProductsRequest) returns (header.Products);
+	rpc ListProducts(Ids) returns (header.Products);
 	rpc ReadProduct(header.Product) returns (header.Product);
 	rpc CreateProduct(header.Product) returns (header.Product);
 	rpc UpdateProduct(header.Product) returns (header.Product);
 	rpc DeleteProduct(Id) returns (Empty);
+	rpc SearchProducts(ProductsRequest) returns (header.Products);
+	rpc ListProductIds(Ids) returns (Ids);
 
 	rpc ListProductCollections(Ids) returns (header.ProductCollections);
 	rpc CreateProductCollection(ProductCollection) returns (ProductCollection);
@@ -408,6 +410,4 @@ service Proder {
 	rpc CreateProductFeed(header.ProductFeed) returns (header.ProductFeed);
 	rpc UpdateProductFeed(header.ProductFeed) returns (header.ProductFeed);
 	rpc DeleteProductFeed(Id) returns (Empty);
-
-	rpc MatchProducts(Ids) returns (header.Products);
 }

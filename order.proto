@@ -73,7 +73,7 @@ message Product {
 	string left_product_id = 56; // only server
 	string right_product_id = 57; // only server
 
-	string title = 6;
+	string title = 6; // deprecated
 	string url = 7;
 
 	string handle = 8; // iphone-6-plus-128G
@@ -214,6 +214,7 @@ message ProductsRequest {
 	string category = 10;
 
 	string visibility = 11; // published or hidden
+	repeated string ids = 12;
 }
 
 message KV {
