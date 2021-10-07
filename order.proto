@@ -196,20 +196,21 @@ message ProductFeed {
 //	repeated string values = 4;
 //}
 
-message SearchProductsRequest {
+message ProductsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string query = 3;
 	int32 limit = 4; // 200
+	string anchor = 5;
 
-	int64 price_gte = 5;
-	int64 price_lte = 6;
+	int64 price_gte = 6;
+	int64 price_lte = 7;
 
 	// [{key: 'colors', value:'red,blue', {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
-	repeated KV props = 7;
+	repeated KV props = 8;
 
-	string availability = 8; // instock, out_of_stock
+	string availability = 9; // instock, out_of_stock
 	string category = 10;
 
 	string visibility = 11; // published or hidden
