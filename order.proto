@@ -215,6 +215,7 @@ message ProductsRequest {
 
 	string visibility = 11; // published or hidden
 	repeated string ids = 12;
+	repeated int64 last_modifieds = 14; // ms
 }
 
 message KV {
