@@ -3065,6 +3065,9 @@ message LoginSession {
 
 	string type = 19; // session, apikey, admin
 	string client_version = 20;
+
+	int64 ttls = 21; // seconds, apikey only
+	string note = 23;
 }
 
 message ScryptChallenge {
