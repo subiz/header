@@ -143,7 +143,7 @@ message Product {
 message Products {
 	common.Context ctx = 1;
 	repeated Product products = 2;
-	string cursor = 3;
+	string anchor = 3;
 	int64 total = 4;
 }
 
@@ -203,8 +203,8 @@ message ProductsRequest {
 	int32 limit = 4; // 200
 	string anchor = 5;
 
-	int64 price_gte = 6;
-	int64 price_lte = 7;
+	int64 sale_price_gte = 6;
+	int64 sale_price_lte = 7;
 
 	// [{key: 'colors', value:'red,blue', {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
