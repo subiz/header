@@ -223,3 +223,11 @@ message KV {
 	string key = 2;
 	string value = 3;
 }
+
+message ProductCategories {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated string categories = 4;
+	string anchor = 5;
+	int64 total = 6;
+}

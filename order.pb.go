@@ -1534,6 +1534,85 @@ func (x *KV) GetValue() string {
 	return ""
 }
 
+type ProductCategories struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx        *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId  string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Categories []string        `protobuf:"bytes,4,rep,name=categories,proto3" json:"categories,omitempty"`
+	Anchor     string          `protobuf:"bytes,5,opt,name=anchor,proto3" json:"anchor,omitempty"`
+	Total      int64           `protobuf:"varint,6,opt,name=total,proto3" json:"total,omitempty"`
+}
+
+func (x *ProductCategories) Reset() {
+	*x = ProductCategories{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_order_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ProductCategories) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProductCategories) ProtoMessage() {}
+
+func (x *ProductCategories) ProtoReflect() protoreflect.Message {
+	mi := &file_order_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProductCategories.ProtoReflect.Descriptor instead.
+func (*ProductCategories) Descriptor() ([]byte, []int) {
+	return file_order_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *ProductCategories) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *ProductCategories) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *ProductCategories) GetCategories() []string {
+	if x != nil {
+		return x.Categories
+	}
+	return nil
+}
+
+func (x *ProductCategories) GetAnchor() string {
+	if x != nil {
+		return x.Anchor
+	}
+	return ""
+}
+
+func (x *ProductCategories) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
 var File_order_proto protoreflect.FileDescriptor
 
 var file_order_proto_rawDesc = []byte{
@@ -1807,9 +1886,19 @@ var file_order_proto_rawDesc = []byte{
 	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x73, 0x22, 0x2c, 0x0a, 0x02, 0x4b, 0x56, 0x12, 0x10,
 	0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79,
 	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0xa3, 0x01, 0x0a, 0x11, 0x50, 0x72, 0x6f, 0x64, 0x75,
+	0x63, 0x74, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x12, 0x21, 0x0a, 0x03,
+	0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12,
+	0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1e,
+	0x0a, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03,
+	0x28, 0x09, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x12, 0x16,
+	0x0a, 0x06, 0x61, 0x6e, 0x63, 0x68, 0x6f, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x61, 0x6e, 0x63, 0x68, 0x6f, 0x72, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18,
+	0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x42, 0x19, 0x5a, 0x17,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a,
+	0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1824,7 +1913,7 @@ func file_order_proto_rawDescGZIP() []byte {
 	return file_order_proto_rawDescData
 }
 
-var file_order_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_order_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_order_proto_goTypes = []interface{}{
 	(*ProductCollections)(nil),       // 0: header.ProductCollections
 	(*ProductCollection)(nil),        // 1: header.ProductCollection
@@ -1839,37 +1928,39 @@ var file_order_proto_goTypes = []interface{}{
 	(*ProductFeed)(nil),              // 10: header.ProductFeed
 	(*ProductsRequest)(nil),          // 11: header.ProductsRequest
 	(*KV)(nil),                       // 12: header.KV
-	(*common.Context)(nil),           // 13: common.Context
-	(*I18NString)(nil),               // 14: header.I18nString
+	(*ProductCategories)(nil),        // 13: header.ProductCategories
+	(*common.Context)(nil),           // 14: common.Context
+	(*I18NString)(nil),               // 15: header.I18nString
 }
 var file_order_proto_depIdxs = []int32{
-	13, // 0: header.ProductCollections.ctx:type_name -> common.Context
+	14, // 0: header.ProductCollections.ctx:type_name -> common.Context
 	1,  // 1: header.ProductCollections.product_collections:type_name -> header.ProductCollection
-	13, // 2: header.ProductCollection.ctx:type_name -> common.Context
-	13, // 3: header.InventoryProduct.ctx:type_name -> common.Context
+	14, // 2: header.ProductCollection.ctx:type_name -> common.Context
+	14, // 3: header.InventoryProduct.ctx:type_name -> common.Context
 	4,  // 4: header.InventoryProduct.ref_product:type_name -> header.Product
 	12, // 5: header.InventoryProduct.props:type_name -> header.KV
-	13, // 6: header.Product.ctx:type_name -> common.Context
+	14, // 6: header.Product.ctx:type_name -> common.Context
 	4,  // 7: header.Product.other_variants:type_name -> header.Product
-	14, // 8: header.Product.name:type_name -> header.I18nString
-	14, // 9: header.Product.description_quill_delta:type_name -> header.I18nString
+	15, // 8: header.Product.name:type_name -> header.I18nString
+	15, // 9: header.Product.description_quill_delta:type_name -> header.I18nString
 	12, // 10: header.Product.props:type_name -> header.KV
 	2,  // 11: header.Product.price_rules:type_name -> header.PriceRule
-	13, // 12: header.Products.ctx:type_name -> common.Context
+	14, // 12: header.Products.ctx:type_name -> common.Context
 	4,  // 13: header.Products.products:type_name -> header.Product
-	13, // 14: header.ProductFeeds.ctx:type_name -> common.Context
+	14, // 14: header.ProductFeeds.ctx:type_name -> common.Context
 	10, // 15: header.ProductFeeds.product_feeds:type_name -> header.ProductFeed
-	13, // 16: header.ProductFeed.ctx:type_name -> common.Context
+	14, // 16: header.ProductFeed.ctx:type_name -> common.Context
 	8,  // 17: header.ProductFeed.shopee:type_name -> header.ShopeeProductFeed
 	7,  // 18: header.ProductFeed.website_json_ld:type_name -> header.WebsiteJSONLdProductFeed
 	6,  // 19: header.ProductFeed.google_sheet:type_name -> header.GoogleSheetProductFeed
-	13, // 20: header.ProductsRequest.ctx:type_name -> common.Context
+	14, // 20: header.ProductsRequest.ctx:type_name -> common.Context
 	12, // 21: header.ProductsRequest.props:type_name -> header.KV
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	14, // 22: header.ProductCategories.ctx:type_name -> common.Context
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_order_proto_init() }
@@ -2035,6 +2126,18 @@ func file_order_proto_init() {
 				return nil
 			}
 		}
+		file_order_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProductCategories); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2042,7 +2145,7 @@ func file_order_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_order_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

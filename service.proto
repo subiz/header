@@ -412,4 +412,6 @@ service Proder {
 	rpc CreateProductFeed(header.ProductFeed) returns (header.ProductFeed);
 	rpc UpdateProductFeed(header.ProductFeed) returns (header.ProductFeed);
 	rpc DeleteProductFeed(Id) returns (Empty);
+
+	rpc ListProductCategories(Ids) returns (header.ProductCategories);
 }
