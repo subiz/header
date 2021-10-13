@@ -414,4 +414,5 @@ service Proder {
 	rpc DeleteProductFeed(Id) returns (Empty);
 
 	rpc ListProductCategories(Ids) returns (header.ProductCategories);
+	rpc ListProductProps(Ids) returns (header.ProductProps);
 }

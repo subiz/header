@@ -222,6 +222,9 @@ message ProductsRequest {
 message KV {
 	string key = 2;
 	string value = 3;
+	int64 key_id = 4;
+	int64 value_id = 5;
+	repeated KV kvs = 6;
 }
 
 message ProductCategories {
@@ -230,4 +233,11 @@ message ProductCategories {
 	repeated string categories = 4;
 	string anchor = 5;
 	int64 total = 6;
+}
+
+message ProductProps {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated KV props = 3;
+	string anchor = 5;
 }
