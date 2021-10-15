@@ -1617,6 +1617,8 @@ message AssignRequest {
 	// for bot only
 	int64 agent_reply_timeout = 9; // sec
 	string branch_on_no_reply = 10; // action id
+	string bot_id = 11;
+	string action_id = 12;
 }
 
 message EndchatConnectorSetting {
