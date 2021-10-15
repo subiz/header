@@ -80,8 +80,8 @@ message Product {
 
 	header.I18nString name = 10; // apple Iphone 6 plus
 	header.I18nString description_quill_delta = 11;
-	string description = 12;
-	string short_description = 13;
+	header.I18nString description = 12; // server generated
+	header.I18nString short_description = 13;
 
 	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
 

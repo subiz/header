@@ -83,7 +83,6 @@ message RecentCompactedNotiRequest {
 
 message Attribute {
 	string key = 4;
-
 	int64 modified = 8;
 
 	string value = 9; // json encode primary value
@@ -204,17 +203,17 @@ message DeleteAttrRequest {
 
 message AttributeDefinitionListItem {
 	// value
-	string value = 4;
+	string value = 4; // cannot be changed
 	I18nString label = 7;
 }
 
 message AttributeDefinition {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string name = 3;
+	string name = 3; // will be removed
 	string description = 4;
 
-	I18nString label = 16; // for template
+	I18nString label = 16; //
 
 	string type = 5;
 	enum AttributeType {
@@ -242,6 +241,7 @@ message AttributeDefinition {
 	}
 
 	int64 updated = 9;
+	string updated_by = 11;
 	string validator = 10; // email, name, decimal
 
 	bool allow_multiples = 14;
