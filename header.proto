@@ -91,7 +91,7 @@ message Attribute {
 	bool boolean = 12;
 	string datetime = 13;
 	repeated string list = 14; // remove
-
+	repeated Attribute revisions = 15;
 	repeated string other_values = 20;
 
 	string type = 16;
@@ -130,9 +130,8 @@ message User {
 	repeated string lead_owners = 41;
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
-	string lead_stage = 44;
-	int64 lead_at = 45;
 	map<string, Attribute> attrs = 46;
+	string type = 47; // empty = user, lead, customer
 }
 
 message UserLabel {
@@ -245,6 +244,7 @@ message AttributeDefinition {
 	string validator = 10; // email, name, decimal
 
 	bool allow_multiples = 14;
+	bool allow_user_edit = 15;
 }
 
 message AttributeDefinitions {
