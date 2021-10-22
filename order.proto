@@ -231,6 +231,7 @@ message ProductCategories {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated string categories = 4;
+	repeated int64 product_numbers = 7;
 	string anchor = 5;
 	int64 total = 6;
 }
