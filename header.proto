@@ -1419,6 +1419,7 @@ enum AttachmentType {
 	command = 14; // request_user_info
 	link = 15;
 	postback = 16;
+	product_preview = 17;
 }
 
 message Attachment {
@@ -1457,6 +1458,10 @@ message Attachment {
 
 	Postback postback = 25;
 	Event quote = 26;
+
+	string product_id = 27; // product_preview
+	string price = 28; // product_preview
+	string availability = 29; // product_preview
 }
 
 message QuickReply {
@@ -3318,7 +3323,7 @@ enum RealtimeType {
 	conversation_typing = 54;
 	conversation_unassigned = 56;
 	conversation_assigned = 57;
-	message_updated = 58; // event.data.message.revisions.0
+	message_updated = 58; // event.data.message
 
 	conversation_rating_requested = 60; // event.data.conversation
 	conversation_rated = 61; // event.data.conversation
