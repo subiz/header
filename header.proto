@@ -1420,6 +1420,7 @@ enum AttachmentType {
 	link = 15;
 	postback = 16;
 	product_preview = 17;
+	product = 18;
 }
 
 message Attachment {
@@ -1427,7 +1428,7 @@ message Attachment {
 	// file
 	string mimetype = 2;
 	string url = 3;
-	string thumbnail_url = 4;
+ 	string thumbnail_url = 4;
 	string name = 5;
 	string description = 6;
 	//string data = 7; // for custom data
@@ -3839,4 +3840,8 @@ enum E {
 
 	empty_file = 92;
 	invalid_file = 93;
+	endchat_bot_setting_after_any_message_too_low = 94;
+	endchat_bot_setting_after_any_message_too_high = 95;
+	template_message_key_not_found = 96;
+	template_message_not_is_creator = 97;
 }
