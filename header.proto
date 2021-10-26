@@ -1460,9 +1460,7 @@ message Attachment {
 	Postback postback = 25;
 	Event quote = 26;
 
-	string product_id = 27; // product_preview
-	string price = 28; // product_preview
-	string availability = 29; // product_preview
+	Product product = 30;
 }
 
 message QuickReply {
@@ -3844,4 +3842,7 @@ enum E {
 	endchat_bot_setting_after_any_message_too_high = 95;
 	template_message_key_not_found = 96;
 	template_message_not_is_creator = 97;
+
+	product_failed = 98;
+	product_not_found = 99;
 }
