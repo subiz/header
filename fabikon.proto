@@ -114,6 +114,7 @@ message FbMessage {
 	optional int64 app_id = 8;
 	optional string metadata = 9;
 	repeated QuickReply quick_replies = 10;
+	optional QuickReply quick_reply = 11; // response from fb
 }
 
 message QuickReply {

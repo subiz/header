@@ -242,11 +242,6 @@ message ProductFeed {
 	int64 last_sucess_fetched = 30;
 }
 
-// message ProductOption {
-//string name = 2;
-//	repeated string values = 4;
-//}
-
 message ProductsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
