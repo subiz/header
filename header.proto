@@ -1421,6 +1421,7 @@ enum AttachmentType {
 	postback = 16;
 	product_preview = 17;
 	product = 18;
+	quick_reply = 19;
 }
 
 message Attachment {
@@ -1461,6 +1462,8 @@ message Attachment {
 	Event quote = 26;
 
 	Product product = 30;
+
+	QuickReply quick_reply = 31;
 }
 
 message QuickReply {
