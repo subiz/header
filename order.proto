@@ -177,17 +177,18 @@ message Product {
 	string barcode = 47;
 
 	double price = 51;
-	double sale_price = 52;
+	double sale_price = 52; // deprecated
 
 	repeated PriceRule price_rules = 53;
 	int64 stock = 54; // -1, dont manage warehouse
 
 	string source_id = 55;
+	Product product_group = 58;
 }
 
 message ProductOption {
 	string key = 3;
-	header.I18nString name = 4;
+	string name = 4;
 	repeated string values = 5;
 }
 
