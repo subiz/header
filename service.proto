@@ -398,7 +398,6 @@ service Proder {
 	rpc ReadProduct(header.Product) returns (header.Product);
 	rpc CreateProduct(header.Product) returns (header.Product);
 	rpc UpdateProduct(header.Product) returns (header.Product);
-	rpc UpdateProductGroup(header.Product) returns (header.Product);
 	rpc DeleteProduct(Id) returns (Empty);
 	rpc ListProducts(ProductsRequest) returns (header.Products);
 	rpc ListProductIds(Ids) returns (Ids);

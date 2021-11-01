@@ -117,28 +117,31 @@ message Product {
 	string right_product_id = 57; // only server
 
 	string title = 6; // deprecated
-	string url = 7;
 
-	string handle = 8; // iphone-6-plus-128G
+	string url = 7; // (shared)
 
-	header.I18nString name = 10; // apple Iphone 6 plus
-	header.I18nString description_quill_delta = 11;
-	header.I18nString description = 12; // server generated
-	header.I18nString short_description = 13;
+	string handle = 8; // (shared) iphone-6-plus-128G
+	header.I18nString name = 10; // (shared) apple Iphone 6 plus
+
+	header.I18nString description_quill_delta = 11; // (shared)
+	header.I18nString description = 12; // (shared) server generated
+	header.I18nString short_description = 13; // (shared)
 
 	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
+	map<string,string> prop = 15; // future replacement for props
 
-	string mobile_url = 17;
+	string mobile_url = 17; // (shared)
+
 	// app_link = 11; // mobile deep link
 
 	// repeated KV metadata = 13;
 	// accessory.watch
-	string category = 16;
+	string category = 16; // (shared)
 	// repeated Product related_products = 21; // releated content ids
 
-	string brand = 18; // brand name: apple, luis vuiton
+	string brand = 18; // (shared) brand name: apple, luis vuiton
 
-	repeated ProductOption options = 19;
+	repeated ProductOption options = 19; // (shared)
 
 	int64 created = 20;
 	int64 updated = 21;
@@ -146,15 +149,15 @@ message Product {
 	string updated_by = 23;
 
 	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
-	string mpn = 26;
+	string mpn = 26; // (shared)
 
-	repeated string images = 27;
-	repeated string additional_images = 28;
+	repeated string images = 27; // (shared)
+	repeated string additional_images = 28; // (shared)
 
-	repeated string videos = 29;
-	repeated string additional_videos = 30;
+	repeated string videos = 29; // (shared)
+	repeated string additional_videos = 30; // (shared)
 
-	string note = 31;
+	string note = 31; // (shared)
 
 	// shipping
 	bool requires_shipping = 32;
@@ -170,20 +173,19 @@ message Product {
 	bool allow_preorder = 40;
 	bool taxable = 41;
 
-	string condition = 42; // new, refurbished, used
-	string visibility = 43; // published, staging, hidden, deleted
+	string condition = 42; // (shared) new, refurbished, used
+	string visibility = 43; // (shared) published, staging, hidden, deleted
 
 	string sku = 46;
 	string barcode = 47;
 
 	double price = 51;
-	double sale_price = 52; // deprecated
+	double sale_price = 52; // (deprecated)
 
-	repeated PriceRule price_rules = 53;
-	int64 stock = 54; // -1, dont manage warehouse
+	repeated PriceRule price_rules = 53; // (shared)
+	int64 stock = 54; //
 
 	string source_id = 55;
-	Product product_group = 58;
 }
 
 message ProductOption {
