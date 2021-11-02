@@ -131,7 +131,11 @@ message User {
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
 	map<string, Attribute> attrs = 46;
+
 	string type = 47; // empty = user, lead, customer
+
+	string created = 50;
+	repeated ShippingAddress shipping_addresses = 51;
 }
 
 message UserLabel {
@@ -3400,6 +3404,10 @@ enum RealtimeType {
 
 	product_collection_updated = 134;
 	product_collection_deleted = 135;
+
+	order_created = 136;
+	order_updated = 137;
+	order_deleted = 138;
 }
 
 // TODO: remove after remove old dashboard
@@ -3848,4 +3856,6 @@ enum E {
 
 	product_failed = 98;
 	product_not_found = 99;
+
+	order_not_found = 100;
 }

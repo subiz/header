@@ -70,7 +70,61 @@ message OrderItem {
 	string image_url = 7;
 	int32 quantity = 10;
 	Product product = 11;
-	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
+	KV prop = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
+	string note = 15;
+	float price = 16;
+}
+
+message ShippingAddress {
+	string fullname = 3;
+	string email = 4;
+	string phone = 5;
+
+	string street = 6;
+	string ward = 7;
+	string district = 8;
+	string region = 9; // city
+	string country = 10;
+
+	string full_address = 11;
+
+	int64 created = 12;
+	string created_by = 13;
+
+	int64 updated = 14;
+	string updated_by = 15;
+}
+
+message ShippingInfo {
+	ShippingAddress address = 5;
+	int64 shipping_dealine = 6; // unix ms
+	string description = 7;
+}
+
+message PaymentInfo {
+	string method = 4; // cod
+	string description = 5; //  "Thanh toán tiền mặt khi nhận hàng"
+}
+
+message Orders {
+	common.Context ctx = 1;
+
+	repeated Order orders = 4;
+	string anchor = 5;
+	int64 total = 6;
+}
+
+message OrdersRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string user_id = 3; // list order by user
+	string status = 4; // list order by status
+
+	int64 created_from = 5;
+	int64 created_to = 6;
+
+	bool include_deleted = 7;
 }
 
 message Order {
@@ -78,21 +132,20 @@ message Order {
 	string account_id = 2;
 	string id = 3;
 	string user_id = 4;
-	string note = 5;
-	int64 due_date = 6;
 
-	enum State {
-		draft = 0;
-		open = 1;
-		overdue = 2;
-		paid = 3;
-		void = 4;
-		queueing = 5;
-	}
-	string state = 10;
+	ShippingInfo shipping = 5;
+	PaymentInfo payment = 6;
+
+	string note = 7;
+	int64 due_date = 8;
+
+	string status = 10; // draft, waiting_payment, canceled, completed (see OrderStatusCode)
 
 	int64 created = 11;
 	string created_by = 12;
+
+	int64 updated = 18;
+	string updated_by = 19;
 
 	repeated OrderItem items = 13;
 
@@ -100,9 +153,51 @@ message Order {
 	float tax_percent = 15;
 	float tax = 16;
 	float total = 17;
-	int64 updated = 18;
-	string updated_by = 19;
 	float payment_made = 24;
+
+	repeated OrderStatus status_history = 25;
+
+	string cancellation_note = 26;
+	string cancellation_code = 27; // typing_error, user_rejected
+}
+
+enum OrderStatusCode {
+	draft = 0;
+	queueing = 1;	// Chờ in
+	canceled = 2; // Đã hủy
+	complete = 3; // Đơn hàng đã hoàn thành
+	successful_delivery = 4;	//	Giao hàng thành công
+	processing = 5; 	//	đơn hàng đang được xử lý
+	waiting_payment = 6;	//	(open) đơn hàng đợi thanh toán
+	// closed = 7;	//	đơn hàng đã đóng
+	packaging	 = 8;// đơn hàng đang được đóng gói
+	picking = 9;	//	shipper đang lấy hàng
+	shipping = 10; //	shipper đang vận chuyển
+	paid = 11;	// đã thanh toán
+	delivered = 12; //	giao hàng thành công
+	holded = 13;
+	ready_to_ship = 14;	// đơn hàng sẵn sàng được giao
+	payment_review	= 15;
+	returned = 16;
+	finished_packing = 17; // đơn hàng đã đóng gói xong
+
+	overdue = 18;
+	void = 19;
+
+	deleted = 20;
+}
+
+enum CancelCode {
+	no_cancel = 0; // or empty string
+	typing_error = 1;
+	user_rejected = 2;
+}
+
+message OrderStatus {
+	int64 created = 5;
+	string by = 6;
+	string status = 7;
+	string note = 8;
 }
 
 message Product {
