@@ -48,6 +48,12 @@ service AccountMgr {
 	rpc UpdateLanguage(LangMessage) returns (LangMessage);
 	rpc CreateChangelog(header.Changelog) returns (header.Changelog);
 	rpc ListChangelogs(header.ListChangelogsRequest) returns (header.ListChangelogsResponse);
+
+	rpc GetShopSetting(header.Id) returns (header.ShopSetting);
+	rpc UpdateShopSetting(header.Id) returns (header.ShopSetting);
+
+	rpc UpdateCurrency(header.Currency) returns (header.Currency);
+	rpc ReadCurrency(header.Id) returns (header.Currency);
 }
 
 // user services

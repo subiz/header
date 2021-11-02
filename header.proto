@@ -631,10 +631,10 @@ message Event {
 	common.Context ctx = 1;
 	string user_id = 2; // TODO: remove
 	string id = 3;
-	string account_id = 4; // TODO: remove
+	string account_id = 4;
 	int64 created = 8;
 	int64 updated = 10;
-	string type = 9; // eventtype
+	string type = 9;
 	repeated string topics = 11; // TODO: remove
 	string session_id = 12;
 	common.By by = 50;
@@ -649,8 +649,7 @@ message Event {
 		User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
 		Notification notification = 14;
-		account.GroupMember group_member = 17;
-		account.AgentGroup group = 18;
+		account.AgentGroup agent_group = 18;
 		Note note = 23;
 		// Ticket ticket = 24;
 		Automation automation = 25;
@@ -679,6 +678,8 @@ message Event {
 		ProductFeed product_feed = 58;
 		ProductCollection product_collection = 59;
 		Order order = 60;
+		Currency currency = 61;
+		ShopSetting shop_setting = 62;
 	}
 	Data data = 20;
 }
@@ -1367,33 +1368,6 @@ message AskInfomation {
 	}
 }
 
-message ContentTemplate {
-	string image_url = 2;
-	string description = 5;
-	string title = 6;
-	string url = 7;
-	repeated string labels = 8;
-	enum Availability {
-		in_stock = 0;
-		out_of_stock = 1;
-		preorder = 2;
-		discontinued = 3;
-	}
-	string availability = 9;
-
-	float price = 10;
-	string currency = 11;
-	float sale_price = 12;
-
-	repeated string categories = 14;
-	repeated string attachment_urls = 20;
-	repeated string related_ids = 21; // releated content ids
-
-	MessageButton default_action = 22;
-	repeated MessageButton buttons = 23;
-	string id = 24;
-}
-
 message GenericElementTemplate {
 	string title = 2;
 	string image_url = 3;
@@ -1419,7 +1393,7 @@ enum AttachmentType {
 	form = 9;
 	form_submit = 10;
 	fallback = 11;
-	content_template = 12;
+	// content_template = 12;
 	quick_replies = 13;
 	command = 14; // request_user_info
 	link = 15;
@@ -1456,9 +1430,6 @@ message Attachment {
 
 	MessageForm form = 20;
 	MessageFormSubmit form_submit = 21;
-
-	// content template
-	repeated ContentTemplate contents = 22;
 
 	repeated QuickReply quick_replies = 23;
 	bool lock_input = 24; // lock input while has quick replies
@@ -3409,6 +3380,10 @@ enum RealtimeType {
 	order_created = 136;
 	order_updated = 137;
 	order_deleted = 138;
+
+	currency_updated = 139;
+
+	shop_setting_updated = 140;
 }
 
 // TODO: remove after remove old dashboard
@@ -3698,6 +3673,35 @@ message PushNoti {
 	string is_private = 14; // conversation is private
 
 	repeated common.By tos = 15;
+}
+
+message ShopSetting {
+	common.Context ctx = 1;
+	string account_id = 2;
+	float tax_percentage = 4;
+	repeated Currency supported_currencies = 6;
+	int64 updated = 8;
+	string udpated_by = 9;
+}
+
+message Currency {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string code = 4;
+	string symbol = 5;
+	bool auto_sync = 6;
+	float rate = 7;
+	bool enabled = 8;
+	int64 updated = 9;
+	string updated_by = 10;
+	repeated CurrencyLogEntry logs = 11;
+}
+
+message CurrencyLogEntry {
+	int64 updated = 3;
+	float rate = 4;
+	string updated_by = 5;
 }
 
 message Error {

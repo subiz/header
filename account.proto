@@ -143,36 +143,7 @@ message Account {
 
 	optional string locale = 39; // primary locale
 	repeated string supported_locales = 40; // default vi-VN and en-US
-
-
-	optional ShopSetting shop_setting = 42;
-}
-
-message ShopSetting {
-	optional float tax_percentage = 4;
-
-	optional string base_currency = 5; // VND or USD cannot change
-	repeated Currency supported_currencies = 6;
-}
-
-message Currency {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string id = 3;
-	optional string code = 4;
-	optional string symbol = 5;
-	optional bool auto_sync = 6;
-	optional float rate = 7;
-	optional bool enabled = 8;
-	optional int64 updated = 9;
-	optional string updated_by = 10;
-	repeated CurrencyLogEntry logs = 11;
-}
-
-message CurrencyLogEntry {
-	optional int64 updated = 3;
-	optional float rate = 4;
-	optional string by = 5;
+	optional string currency = 41; // VND or USD cannot change
 }
 
 message Feature {
