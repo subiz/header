@@ -20,7 +20,7 @@ RUN unzip protoc.zip
 
 # install protoc gengo
 RUN go get -u github.com/golang/protobuf/protoc-gen-go
-RUN go get google.golang.org/grpc
+# RUN go get -v google.golang.org/grpc
 
 ENV PROTOC=/tmp/bin/protoc
 
