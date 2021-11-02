@@ -32,7 +32,7 @@ message ProductCollection {
 
 message PriceRule {
 	string feed_id = 4;
-	double price = 5;
+	float price = 5;
 	string currency = 6;
 	int64 from_count = 7;
 	int64 to_count = 8;
@@ -73,6 +73,12 @@ message OrderItem {
 	KV prop = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
 	string note = 15;
 	float price = 16;
+	int64 derived_price = 19;
+
+	float discount_amount = 20;
+	int64 derived_discount_amount = 21;
+
+	float discount_percentage = 22;
 }
 
 message ShippingAddress {
@@ -93,12 +99,20 @@ message ShippingAddress {
 
 	int64 updated = 14;
 	string updated_by = 15;
+
+	// use input
+	string instruction = 16;
 }
 
 message ShippingInfo {
 	ShippingAddress address = 5;
 	int64 shipping_dealine = 6; // unix ms
-	string description = 7;
+	string instruction = 7;
+
+	float fee = 10;
+	int64 derived_fee = 11;
+
+	bool tax_included = 15;
 }
 
 message PaymentInfo {
@@ -139,26 +153,36 @@ message Order {
 	string note = 7;
 	int64 due_date = 8;
 
-	string status = 10; // draft, waiting_payment, canceled, completed (see OrderStatusCode)
+	// draft, waiting_payment, canceled, completed (see OrderStatusCode)
+	string status = 10;
 
-	int64 created = 11;
-	string created_by = 12;
+	string payment_status = 11;
+
+	int64 created = 12;
+	string created_by = 13;
 
 	int64 updated = 18;
 	string updated_by = 19;
 
-	repeated OrderItem items = 13;
+	repeated OrderItem items = 20;
 
-	float subtotal = 14;
-	float tax_percent = 15;
-	float tax = 16;
-	float total = 17;
-	float payment_made = 24;
+	float subtotal = 21;
+	int64 derived_subtotal = 22;
+	float tax_percentage = 23;
+	float total = 24;
+	int64 derived_total = 25;
 
-	repeated OrderStatus status_history = 25;
+	float payment_made = 26;
+	int64 derived_payment_made = 27;
 
-	string cancellation_note = 26;
-	string cancellation_code = 27; // typing_error, user_rejected
+	repeated OrderHistoryEntry history = 28;
+
+	string cancellation_note = 29;
+	string cancellation_code = 30; // typing_error, user_rejected
+
+	string currency = 31;
+	float deposit = 32;
+	int64 derived_deposit = 33;
 }
 
 enum OrderStatusCode {
@@ -187,17 +211,41 @@ enum OrderStatusCode {
 	deleted = 20;
 }
 
+message Bill {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string user_id = 5;
+	string order_id = 6;
+
+	string by = 7;
+	float amount = 8;
+	string derived_amount = 9;
+
+	int64 created = 10;
+	string description = 11;
+
+	string picture_url = 12;
+}
+
 enum CancelCode {
 	no_cancel = 0; // or empty string
 	typing_error = 1;
 	user_rejected = 2;
 }
 
-message OrderStatus {
+enum OrderStatusEventType {
+	payment_made = 0;
+}
+
+message OrderHistoryEntry {
 	int64 created = 5;
-	string by = 6;
-	string status = 7;
+	string by = 6; // system
+	string type = 7;
 	string note = 8;
+
+	Bill bill = 9;
 }
 
 message Product {
@@ -222,8 +270,7 @@ message Product {
 	header.I18nString description = 12; // (shared) server generated
 	header.I18nString short_description = 13; // (shared)
 
-	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
-	map<string,string> prop = 15; // future replacement for props
+	repeated KV props = 14; // future replacement for props
 
 	string mobile_url = 17; // (shared)
 
@@ -252,6 +299,7 @@ message Product {
 	repeated string videos = 29; // (shared)
 	repeated string additional_videos = 30; // (shared)
 
+	string image = 60;
 	string note = 31; // (shared)
 
 	// shipping
@@ -266,7 +314,8 @@ message Product {
 	string weight_unit = 38;
 	double grams = 39;
 	bool allow_preorder = 40;
-	bool taxable = 41;
+	bool taxable = 41; // (shared)
+	float tax_percentage = 58; // (shared)
 
 	string condition = 42; // (shared) new, refurbished, used
 	string visibility = 43; // (shared) published, staging, hidden, deleted
@@ -274,8 +323,10 @@ message Product {
 	string sku = 46;
 	string barcode = 47;
 
-	double price = 51;
-	double sale_price = 52; // (deprecated)
+	float price = 51;
+	int64 derived_price = 59;
+
+	float sale_price = 52; // (deprecated)
 
 	repeated PriceRule price_rules = 53; // (shared)
 	int64 stock = 54; //

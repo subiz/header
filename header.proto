@@ -678,6 +678,7 @@ message Event {
 		LoginSession login_session = 57;
 		ProductFeed product_feed = 58;
 		ProductCollection product_collection = 59;
+		Order order = 60;
 	}
 	Data data = 20;
 }

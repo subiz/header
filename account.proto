@@ -145,6 +145,11 @@ message Account {
 	repeated string supported_locales = 40; // default vi-VN and en-US
 
 	optional string currency = 41; // VND or USD cannot change
+	optional ShopSetting shop_setting = 42;
+}
+
+message ShopSetting {
+	optional float tax_percentage = 4;
 }
 
 message Feature {
