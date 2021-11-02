@@ -796,7 +796,6 @@ type Account struct {
 	WebpageMonitorSetting *WebpageMonitorSetting `protobuf:"bytes,37,opt,name=webpage_monitor_setting,json=webpageMonitorSetting" json:"webpage_monitor_setting,omitempty"`
 	Locale                *string                `protobuf:"bytes,39,opt,name=locale" json:"locale,omitempty"`                                             // primary locale
 	SupportedLocales      []string               `protobuf:"bytes,40,rep,name=supported_locales,json=supportedLocales" json:"supported_locales,omitempty"` // default vi-VN and en-US
-	Currency              *string                `protobuf:"bytes,41,opt,name=currency" json:"currency,omitempty"`                                         // VND or USD cannot change
 	ShopSetting           *ShopSetting           `protobuf:"bytes,42,opt,name=shop_setting,json=shopSetting" json:"shop_setting,omitempty"`
 }
 
@@ -1063,13 +1062,6 @@ func (x *Account) GetSupportedLocales() []string {
 	return nil
 }
 
-func (x *Account) GetCurrency() string {
-	if x != nil && x.Currency != nil {
-		return *x.Currency
-	}
-	return ""
-}
-
 func (x *Account) GetShopSetting() *ShopSetting {
 	if x != nil {
 		return x.ShopSetting
@@ -1082,7 +1074,9 @@ type ShopSetting struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TaxPercentage *float32 `protobuf:"fixed32,4,opt,name=tax_percentage,json=taxPercentage" json:"tax_percentage,omitempty"`
+	TaxPercentage       *float32    `protobuf:"fixed32,4,opt,name=tax_percentage,json=taxPercentage" json:"tax_percentage,omitempty"`
+	BaseCurrency        *string     `protobuf:"bytes,5,opt,name=base_currency,json=baseCurrency" json:"base_currency,omitempty"` // VND or USD cannot change
+	SupportedCurrencies []*Currency `protobuf:"bytes,6,rep,name=supported_currencies,json=supportedCurrencies" json:"supported_currencies,omitempty"`
 }
 
 func (x *ShopSetting) Reset() {
@@ -1124,6 +1118,210 @@ func (x *ShopSetting) GetTaxPercentage() float32 {
 	return 0
 }
 
+func (x *ShopSetting) GetBaseCurrency() string {
+	if x != nil && x.BaseCurrency != nil {
+		return *x.BaseCurrency
+	}
+	return ""
+}
+
+func (x *ShopSetting) GetSupportedCurrencies() []*Currency {
+	if x != nil {
+		return x.SupportedCurrencies
+	}
+	return nil
+}
+
+type Currency struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context     `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	AccountId *string             `protobuf:"bytes,2,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Id        *string             `protobuf:"bytes,3,opt,name=id" json:"id,omitempty"`
+	Code      *string             `protobuf:"bytes,4,opt,name=code" json:"code,omitempty"`
+	Symbol    *string             `protobuf:"bytes,5,opt,name=symbol" json:"symbol,omitempty"`
+	AutoSync  *bool               `protobuf:"varint,6,opt,name=auto_sync,json=autoSync" json:"auto_sync,omitempty"`
+	Rate      *float32            `protobuf:"fixed32,7,opt,name=rate" json:"rate,omitempty"`
+	Enabled   *bool               `protobuf:"varint,8,opt,name=enabled" json:"enabled,omitempty"`
+	Updated   *int64              `protobuf:"varint,9,opt,name=updated" json:"updated,omitempty"`
+	UpdatedBy *string             `protobuf:"bytes,10,opt,name=updated_by,json=updatedBy" json:"updated_by,omitempty"`
+	Logs      []*CurrencyLogEntry `protobuf:"bytes,11,rep,name=logs" json:"logs,omitempty"`
+}
+
+func (x *Currency) Reset() {
+	*x = Currency{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_account_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Currency) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Currency) ProtoMessage() {}
+
+func (x *Currency) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Currency.ProtoReflect.Descriptor instead.
+func (*Currency) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *Currency) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *Currency) GetAccountId() string {
+	if x != nil && x.AccountId != nil {
+		return *x.AccountId
+	}
+	return ""
+}
+
+func (x *Currency) GetId() string {
+	if x != nil && x.Id != nil {
+		return *x.Id
+	}
+	return ""
+}
+
+func (x *Currency) GetCode() string {
+	if x != nil && x.Code != nil {
+		return *x.Code
+	}
+	return ""
+}
+
+func (x *Currency) GetSymbol() string {
+	if x != nil && x.Symbol != nil {
+		return *x.Symbol
+	}
+	return ""
+}
+
+func (x *Currency) GetAutoSync() bool {
+	if x != nil && x.AutoSync != nil {
+		return *x.AutoSync
+	}
+	return false
+}
+
+func (x *Currency) GetRate() float32 {
+	if x != nil && x.Rate != nil {
+		return *x.Rate
+	}
+	return 0
+}
+
+func (x *Currency) GetEnabled() bool {
+	if x != nil && x.Enabled != nil {
+		return *x.Enabled
+	}
+	return false
+}
+
+func (x *Currency) GetUpdated() int64 {
+	if x != nil && x.Updated != nil {
+		return *x.Updated
+	}
+	return 0
+}
+
+func (x *Currency) GetUpdatedBy() string {
+	if x != nil && x.UpdatedBy != nil {
+		return *x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *Currency) GetLogs() []*CurrencyLogEntry {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+type CurrencyLogEntry struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Updated *int64   `protobuf:"varint,3,opt,name=updated" json:"updated,omitempty"`
+	Rate    *float32 `protobuf:"fixed32,4,opt,name=rate" json:"rate,omitempty"`
+	By      *string  `protobuf:"bytes,5,opt,name=by" json:"by,omitempty"`
+}
+
+func (x *CurrencyLogEntry) Reset() {
+	*x = CurrencyLogEntry{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_account_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CurrencyLogEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CurrencyLogEntry) ProtoMessage() {}
+
+func (x *CurrencyLogEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CurrencyLogEntry.ProtoReflect.Descriptor instead.
+func (*CurrencyLogEntry) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CurrencyLogEntry) GetUpdated() int64 {
+	if x != nil && x.Updated != nil {
+		return *x.Updated
+	}
+	return 0
+}
+
+func (x *CurrencyLogEntry) GetRate() float32 {
+	if x != nil && x.Rate != nil {
+		return *x.Rate
+	}
+	return 0
+}
+
+func (x *CurrencyLogEntry) GetBy() string {
+	if x != nil && x.By != nil {
+		return *x.By
+	}
+	return ""
+}
+
 type Feature struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1142,7 +1340,7 @@ type Feature struct {
 func (x *Feature) Reset() {
 	*x = Feature{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[6]
+		mi := &file_account_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1155,7 +1353,7 @@ func (x *Feature) String() string {
 func (*Feature) ProtoMessage() {}
 
 func (x *Feature) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[6]
+	mi := &file_account_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1168,7 +1366,7 @@ func (x *Feature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Feature.ProtoReflect.Descriptor instead.
 func (*Feature) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{6}
+	return file_account_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Feature) GetWebpageMonitor() bool {
@@ -1238,7 +1436,7 @@ type WebpageMonitorSetting struct {
 func (x *WebpageMonitorSetting) Reset() {
 	*x = WebpageMonitorSetting{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[7]
+		mi := &file_account_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1251,7 +1449,7 @@ func (x *WebpageMonitorSetting) String() string {
 func (*WebpageMonitorSetting) ProtoMessage() {}
 
 func (x *WebpageMonitorSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[7]
+	mi := &file_account_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1264,7 +1462,7 @@ func (x *WebpageMonitorSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WebpageMonitorSetting.ProtoReflect.Descriptor instead.
 func (*WebpageMonitorSetting) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{7}
+	return file_account_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *WebpageMonitorSetting) GetWeeklyReport() bool {
@@ -1285,7 +1483,7 @@ type LeadSetting struct {
 func (x *LeadSetting) Reset() {
 	*x = LeadSetting{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[8]
+		mi := &file_account_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1298,7 +1496,7 @@ func (x *LeadSetting) String() string {
 func (*LeadSetting) ProtoMessage() {}
 
 func (x *LeadSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[8]
+	mi := &file_account_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1311,7 +1509,7 @@ func (x *LeadSetting) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LeadSetting.ProtoReflect.Descriptor instead.
 func (*LeadSetting) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{8}
+	return file_account_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *LeadSetting) GetAssignConversationAsLead() string {
@@ -1335,7 +1533,7 @@ type GroupMember struct {
 func (x *GroupMember) Reset() {
 	*x = GroupMember{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[9]
+		mi := &file_account_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1348,7 +1546,7 @@ func (x *GroupMember) String() string {
 func (*GroupMember) ProtoMessage() {}
 
 func (x *GroupMember) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[9]
+	mi := &file_account_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +1559,7 @@ func (x *GroupMember) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupMember.ProtoReflect.Descriptor instead.
 func (*GroupMember) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{9}
+	return file_account_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GroupMember) GetCtx() *common.Context {
@@ -1415,7 +1613,7 @@ type CreateAccountRequest struct {
 func (x *CreateAccountRequest) Reset() {
 	*x = CreateAccountRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[10]
+		mi := &file_account_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1428,7 +1626,7 @@ func (x *CreateAccountRequest) String() string {
 func (*CreateAccountRequest) ProtoMessage() {}
 
 func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[10]
+	mi := &file_account_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1441,7 +1639,7 @@ func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAccountRequest.ProtoReflect.Descriptor instead.
 func (*CreateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{10}
+	return file_account_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CreateAccountRequest) GetCtx() *common.Context {
@@ -1547,7 +1745,7 @@ type Agents struct {
 func (x *Agents) Reset() {
 	*x = Agents{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[11]
+		mi := &file_account_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1560,7 +1758,7 @@ func (x *Agents) String() string {
 func (*Agents) ProtoMessage() {}
 
 func (x *Agents) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[11]
+	mi := &file_account_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1573,7 +1771,7 @@ func (x *Agents) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Agents.ProtoReflect.Descriptor instead.
 func (*Agents) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{11}
+	return file_account_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *Agents) GetCtx() *common.Context {
@@ -1605,7 +1803,7 @@ type NewPassword struct {
 func (x *NewPassword) Reset() {
 	*x = NewPassword{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[12]
+		mi := &file_account_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1618,7 +1816,7 @@ func (x *NewPassword) String() string {
 func (*NewPassword) ProtoMessage() {}
 
 func (x *NewPassword) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[12]
+	mi := &file_account_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1631,7 +1829,7 @@ func (x *NewPassword) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewPassword.ProtoReflect.Descriptor instead.
 func (*NewPassword) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{12}
+	return file_account_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *NewPassword) GetCtx() *common.Context {
@@ -1681,7 +1879,7 @@ type AgentGroups struct {
 func (x *AgentGroups) Reset() {
 	*x = AgentGroups{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[13]
+		mi := &file_account_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1694,7 +1892,7 @@ func (x *AgentGroups) String() string {
 func (*AgentGroups) ProtoMessage() {}
 
 func (x *AgentGroups) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[13]
+	mi := &file_account_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1707,7 +1905,7 @@ func (x *AgentGroups) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentGroups.ProtoReflect.Descriptor instead.
 func (*AgentGroups) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{13}
+	return file_account_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *AgentGroups) GetCtx() *common.Context {
@@ -1738,7 +1936,7 @@ type Token struct {
 func (x *Token) Reset() {
 	*x = Token{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[14]
+		mi := &file_account_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1751,7 +1949,7 @@ func (x *Token) String() string {
 func (*Token) ProtoMessage() {}
 
 func (x *Token) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[14]
+	mi := &file_account_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1764,7 +1962,7 @@ func (x *Token) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Token.ProtoReflect.Descriptor instead.
 func (*Token) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{14}
+	return file_account_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *Token) GetCtx() *common.Context {
@@ -1813,7 +2011,7 @@ type WarnInactiveEmail struct {
 func (x *WarnInactiveEmail) Reset() {
 	*x = WarnInactiveEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[15]
+		mi := &file_account_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1826,7 +2024,7 @@ func (x *WarnInactiveEmail) String() string {
 func (*WarnInactiveEmail) ProtoMessage() {}
 
 func (x *WarnInactiveEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[15]
+	mi := &file_account_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1839,7 +2037,7 @@ func (x *WarnInactiveEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WarnInactiveEmail.ProtoReflect.Descriptor instead.
 func (*WarnInactiveEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{15}
+	return file_account_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *WarnInactiveEmail) GetCtx() *common.Context {
@@ -1914,7 +2112,7 @@ type InvoiceEmail struct {
 func (x *InvoiceEmail) Reset() {
 	*x = InvoiceEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[16]
+		mi := &file_account_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1927,7 +2125,7 @@ func (x *InvoiceEmail) String() string {
 func (*InvoiceEmail) ProtoMessage() {}
 
 func (x *InvoiceEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[16]
+	mi := &file_account_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1940,7 +2138,7 @@ func (x *InvoiceEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceEmail.ProtoReflect.Descriptor instead.
 func (*InvoiceEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{16}
+	return file_account_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *InvoiceEmail) GetCtx() *common.Context {
@@ -1998,7 +2196,7 @@ type SubscriptionUpgradedEmail struct {
 func (x *SubscriptionUpgradedEmail) Reset() {
 	*x = SubscriptionUpgradedEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[17]
+		mi := &file_account_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2011,7 +2209,7 @@ func (x *SubscriptionUpgradedEmail) String() string {
 func (*SubscriptionUpgradedEmail) ProtoMessage() {}
 
 func (x *SubscriptionUpgradedEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[17]
+	mi := &file_account_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2024,7 +2222,7 @@ func (x *SubscriptionUpgradedEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SubscriptionUpgradedEmail.ProtoReflect.Descriptor instead.
 func (*SubscriptionUpgradedEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{17}
+	return file_account_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SubscriptionUpgradedEmail) GetCtx() *common.Context {
@@ -2063,7 +2261,7 @@ type BillCreatedEmail struct {
 func (x *BillCreatedEmail) Reset() {
 	*x = BillCreatedEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[18]
+		mi := &file_account_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2076,7 +2274,7 @@ func (x *BillCreatedEmail) String() string {
 func (*BillCreatedEmail) ProtoMessage() {}
 
 func (x *BillCreatedEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[18]
+	mi := &file_account_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2089,7 +2287,7 @@ func (x *BillCreatedEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BillCreatedEmail.ProtoReflect.Descriptor instead.
 func (*BillCreatedEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{18}
+	return file_account_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *BillCreatedEmail) GetCtx() *common.Context {
@@ -2141,7 +2339,7 @@ type TrialEndingEmail struct {
 func (x *TrialEndingEmail) Reset() {
 	*x = TrialEndingEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[19]
+		mi := &file_account_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2154,7 +2352,7 @@ func (x *TrialEndingEmail) String() string {
 func (*TrialEndingEmail) ProtoMessage() {}
 
 func (x *TrialEndingEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[19]
+	mi := &file_account_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2167,7 +2365,7 @@ func (x *TrialEndingEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrialEndingEmail.ProtoReflect.Descriptor instead.
 func (*TrialEndingEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{19}
+	return file_account_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *TrialEndingEmail) GetCtx() *common.Context {
@@ -2211,7 +2409,7 @@ type DowngradedToFreeEmail struct {
 func (x *DowngradedToFreeEmail) Reset() {
 	*x = DowngradedToFreeEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[20]
+		mi := &file_account_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2224,7 +2422,7 @@ func (x *DowngradedToFreeEmail) String() string {
 func (*DowngradedToFreeEmail) ProtoMessage() {}
 
 func (x *DowngradedToFreeEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[20]
+	mi := &file_account_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2237,7 +2435,7 @@ func (x *DowngradedToFreeEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DowngradedToFreeEmail.ProtoReflect.Descriptor instead.
 func (*DowngradedToFreeEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{20}
+	return file_account_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DowngradedToFreeEmail) GetCtx() *common.Context {
@@ -2282,7 +2480,7 @@ type InviteEmail struct {
 func (x *InviteEmail) Reset() {
 	*x = InviteEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[21]
+		mi := &file_account_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2295,7 +2493,7 @@ func (x *InviteEmail) String() string {
 func (*InviteEmail) ProtoMessage() {}
 
 func (x *InviteEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[21]
+	mi := &file_account_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2308,7 +2506,7 @@ func (x *InviteEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InviteEmail.ProtoReflect.Descriptor instead.
 func (*InviteEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{21}
+	return file_account_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *InviteEmail) GetCtx() *common.Context {
@@ -2407,7 +2605,7 @@ type ResetPasswordEmail struct {
 func (x *ResetPasswordEmail) Reset() {
 	*x = ResetPasswordEmail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[22]
+		mi := &file_account_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2420,7 +2618,7 @@ func (x *ResetPasswordEmail) String() string {
 func (*ResetPasswordEmail) ProtoMessage() {}
 
 func (x *ResetPasswordEmail) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[22]
+	mi := &file_account_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2433,7 +2631,7 @@ func (x *ResetPasswordEmail) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResetPasswordEmail.ProtoReflect.Descriptor instead.
 func (*ResetPasswordEmail) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{22}
+	return file_account_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *ResetPasswordEmail) GetCtx() *common.Context {
@@ -2507,7 +2705,7 @@ type BusinessHours struct {
 func (x *BusinessHours) Reset() {
 	*x = BusinessHours{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[23]
+		mi := &file_account_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2520,7 +2718,7 @@ func (x *BusinessHours) String() string {
 func (*BusinessHours) ProtoMessage() {}
 
 func (x *BusinessHours) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[23]
+	mi := &file_account_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2533,7 +2731,7 @@ func (x *BusinessHours) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessHours.ProtoReflect.Descriptor instead.
 func (*BusinessHours) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{23}
+	return file_account_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *BusinessHours) GetCtx() *common.Context {
@@ -2584,7 +2782,7 @@ type SyncPublicHolidaysRequest struct {
 func (x *SyncPublicHolidaysRequest) Reset() {
 	*x = SyncPublicHolidaysRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[24]
+		mi := &file_account_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2597,7 +2795,7 @@ func (x *SyncPublicHolidaysRequest) String() string {
 func (*SyncPublicHolidaysRequest) ProtoMessage() {}
 
 func (x *SyncPublicHolidaysRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[24]
+	mi := &file_account_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2610,7 +2808,7 @@ func (x *SyncPublicHolidaysRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SyncPublicHolidaysRequest.ProtoReflect.Descriptor instead.
 func (*SyncPublicHolidaysRequest) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{24}
+	return file_account_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *SyncPublicHolidaysRequest) GetCtx() *common.Context {
@@ -2649,7 +2847,7 @@ type AccSub struct {
 func (x *AccSub) Reset() {
 	*x = AccSub{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[25]
+		mi := &file_account_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2662,7 +2860,7 @@ func (x *AccSub) String() string {
 func (*AccSub) ProtoMessage() {}
 
 func (x *AccSub) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[25]
+	mi := &file_account_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2675,7 +2873,7 @@ func (x *AccSub) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccSub.ProtoReflect.Descriptor instead.
 func (*AccSub) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{25}
+	return file_account_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *AccSub) GetId() string {
@@ -2725,7 +2923,7 @@ type AccSubs struct {
 func (x *AccSubs) Reset() {
 	*x = AccSubs{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[26]
+		mi := &file_account_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2738,7 +2936,7 @@ func (x *AccSubs) String() string {
 func (*AccSubs) ProtoMessage() {}
 
 func (x *AccSubs) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[26]
+	mi := &file_account_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2751,7 +2949,7 @@ func (x *AccSubs) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccSubs.ProtoReflect.Descriptor instead.
 func (*AccSubs) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{26}
+	return file_account_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *AccSubs) GetAccsub() []*AccSub {
@@ -2785,7 +2983,7 @@ type SearchSubRequest struct {
 func (x *SearchSubRequest) Reset() {
 	*x = SearchSubRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[27]
+		mi := &file_account_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2798,7 +2996,7 @@ func (x *SearchSubRequest) String() string {
 func (*SearchSubRequest) ProtoMessage() {}
 
 func (x *SearchSubRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[27]
+	mi := &file_account_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2811,7 +3009,7 @@ func (x *SearchSubRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchSubRequest.ProtoReflect.Descriptor instead.
 func (*SearchSubRequest) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{27}
+	return file_account_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *SearchSubRequest) GetCtx() *common.Context {
@@ -2869,7 +3067,7 @@ type Presences struct {
 func (x *Presences) Reset() {
 	*x = Presences{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[28]
+		mi := &file_account_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2882,7 +3080,7 @@ func (x *Presences) String() string {
 func (*Presences) ProtoMessage() {}
 
 func (x *Presences) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[28]
+	mi := &file_account_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2895,7 +3093,7 @@ func (x *Presences) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Presences.ProtoReflect.Descriptor instead.
 func (*Presences) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{28}
+	return file_account_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *Presences) GetCtx() *common.Context {
@@ -2937,7 +3135,7 @@ type Presence struct {
 func (x *Presence) Reset() {
 	*x = Presence{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[29]
+		mi := &file_account_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2950,7 +3148,7 @@ func (x *Presence) String() string {
 func (*Presence) ProtoMessage() {}
 
 func (x *Presence) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[29]
+	mi := &file_account_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2963,7 +3161,7 @@ func (x *Presence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Presence.ProtoReflect.Descriptor instead.
 func (*Presence) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{29}
+	return file_account_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *Presence) GetCtx() *common.Context {
@@ -3035,7 +3233,7 @@ type BusinessHours_WorkingDay struct {
 func (x *BusinessHours_WorkingDay) Reset() {
 	*x = BusinessHours_WorkingDay{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[30]
+		mi := &file_account_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3048,7 +3246,7 @@ func (x *BusinessHours_WorkingDay) String() string {
 func (*BusinessHours_WorkingDay) ProtoMessage() {}
 
 func (x *BusinessHours_WorkingDay) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[30]
+	mi := &file_account_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3061,7 +3259,7 @@ func (x *BusinessHours_WorkingDay) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessHours_WorkingDay.ProtoReflect.Descriptor instead.
 func (*BusinessHours_WorkingDay) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{23, 0}
+	return file_account_proto_rawDescGZIP(), []int{25, 0}
 }
 
 func (x *BusinessHours_WorkingDay) GetWeekday() string {
@@ -3102,7 +3300,7 @@ type BusinessHours_Holiday struct {
 func (x *BusinessHours_Holiday) Reset() {
 	*x = BusinessHours_Holiday{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_account_proto_msgTypes[31]
+		mi := &file_account_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3115,7 +3313,7 @@ func (x *BusinessHours_Holiday) String() string {
 func (*BusinessHours_Holiday) ProtoMessage() {}
 
 func (x *BusinessHours_Holiday) ProtoReflect() protoreflect.Message {
-	mi := &file_account_proto_msgTypes[31]
+	mi := &file_account_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3128,7 +3326,7 @@ func (x *BusinessHours_Holiday) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BusinessHours_Holiday.ProtoReflect.Descriptor instead.
 func (*BusinessHours_Holiday) Descriptor() ([]byte, []int) {
-	return file_account_proto_rawDescGZIP(), []int{23, 1}
+	return file_account_proto_rawDescGZIP(), []int{25, 1}
 }
 
 func (x *BusinessHours_Holiday) GetYear() int32 {
@@ -3303,7 +3501,7 @@ var file_account_proto_rawDesc = []byte{
 	0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e,
 	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03,
 	0x63, 0x74, 0x78, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x22, 0xdb, 0x09, 0x0a, 0x07, 0x41, 0x63,
+	0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x22, 0xbf, 0x09, 0x0a, 0x07, 0x41, 0x63,
 	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74,
 	0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02,
@@ -3372,19 +3570,49 @@ var file_account_proto_rawDesc = []byte{
 	0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x65, 0x12, 0x2b, 0x0a, 0x11, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72,
 	0x74, 0x65, 0x64, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x65, 0x73, 0x18, 0x28, 0x20, 0x03, 0x28,
 	0x09, 0x52, 0x10, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x4c, 0x6f, 0x63, 0x61,
-	0x6c, 0x65, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x18,
-	0x29, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12,
-	0x37, 0x0a, 0x0c, 0x73, 0x68, 0x6f, 0x70, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x18,
-	0x2a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e,
-	0x53, 0x68, 0x6f, 0x70, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x0b, 0x73, 0x68, 0x6f,
-	0x70, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x3d, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74,
-	0x65, 0x12, 0x0d, 0x0a, 0x09, 0x61, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x65, 0x64, 0x10, 0x01,
-	0x12, 0x0b, 0x0a, 0x07, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x10, 0x03, 0x12, 0x0c, 0x0a,
-	0x08, 0x69, 0x6e, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x10, 0x04, 0x12, 0x0a, 0x0a, 0x06, 0x62,
-	0x61, 0x6e, 0x6e, 0x65, 0x64, 0x10, 0x05, 0x22, 0x34, 0x0a, 0x0b, 0x53, 0x68, 0x6f, 0x70, 0x53,
-	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x25, 0x0a, 0x0e, 0x74, 0x61, 0x78, 0x5f, 0x70, 0x65,
-	0x72, 0x63, 0x65, 0x6e, 0x74, 0x61, 0x67, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0d,
-	0x74, 0x61, 0x78, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x61, 0x67, 0x65, 0x22, 0xe2, 0x01,
+	0x6c, 0x65, 0x73, 0x12, 0x37, 0x0a, 0x0c, 0x73, 0x68, 0x6f, 0x70, 0x5f, 0x73, 0x65, 0x74, 0x74,
+	0x69, 0x6e, 0x67, 0x18, 0x2a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x61, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x2e, 0x53, 0x68, 0x6f, 0x70, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52,
+	0x0b, 0x73, 0x68, 0x6f, 0x70, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x3d, 0x0a, 0x05,
+	0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x0d, 0x0a, 0x09, 0x61, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74,
+	0x65, 0x64, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x64, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x10,
+	0x03, 0x12, 0x0c, 0x0a, 0x08, 0x69, 0x6e, 0x61, 0x63, 0x74, 0x69, 0x76, 0x65, 0x10, 0x04, 0x12,
+	0x0a, 0x0a, 0x06, 0x62, 0x61, 0x6e, 0x6e, 0x65, 0x64, 0x10, 0x05, 0x22, 0x9f, 0x01, 0x0a, 0x0b,
+	0x53, 0x68, 0x6f, 0x70, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x25, 0x0a, 0x0e, 0x74,
+	0x61, 0x78, 0x5f, 0x70, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x61, 0x67, 0x65, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x02, 0x52, 0x0d, 0x74, 0x61, 0x78, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x61,
+	0x67, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x62, 0x61, 0x73, 0x65, 0x5f, 0x63, 0x75, 0x72, 0x72, 0x65,
+	0x6e, 0x63, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x62, 0x61, 0x73, 0x65, 0x43,
+	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x44, 0x0a, 0x14, 0x73, 0x75, 0x70, 0x70, 0x6f,
+	0x72, 0x74, 0x65, 0x64, 0x5f, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x69, 0x65, 0x73, 0x18,
+	0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e,
+	0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x52, 0x13, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72,
+	0x74, 0x65, 0x64, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x69, 0x65, 0x73, 0x22, 0xbb, 0x02,
+	0x0a, 0x08, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74,
+	0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
+	0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a,
+	0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
+	0x63, 0x6f, 0x64, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65,
+	0x12, 0x16, 0x0a, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x75, 0x74, 0x6f,
+	0x5f, 0x73, 0x79, 0x6e, 0x63, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x61, 0x75, 0x74,
+	0x6f, 0x53, 0x79, 0x6e, 0x63, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x61, 0x74, 0x65, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x02, 0x52, 0x04, 0x72, 0x61, 0x74, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61,
+	0x62, 0x6c, 0x65, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62,
+	0x6c, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x09,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x18, 0x0a, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x42, 0x79, 0x12, 0x2d, 0x0a, 0x04,
+	0x6c, 0x6f, 0x67, 0x73, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x4c, 0x6f, 0x67,
+	0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x6c, 0x6f, 0x67, 0x73, 0x22, 0x50, 0x0a, 0x10, 0x43,
+	0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x4c, 0x6f, 0x67, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12,
+	0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x72, 0x61, 0x74,
+	0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52, 0x04, 0x72, 0x61, 0x74, 0x65, 0x12, 0x0e, 0x0a,
+	0x02, 0x62, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x62, 0x79, 0x22, 0xe2, 0x01,
 	0x0a, 0x07, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x12, 0x27, 0x0a, 0x0f, 0x77, 0x65, 0x62,
 	0x70, 0x61, 0x67, 0x65, 0x5f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x08, 0x52, 0x0e, 0x77, 0x65, 0x62, 0x70, 0x61, 0x67, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74,
@@ -3678,7 +3906,7 @@ func file_account_proto_rawDescGZIP() []byte {
 }
 
 var file_account_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
+var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_account_proto_goTypes = []interface{}{
 	(Agent_Gender)(0),                 // 0: account.Agent.Gender
 	(Agent_AgentState)(0),             // 1: account.Agent.AgentState
@@ -3689,85 +3917,90 @@ var file_account_proto_goTypes = []interface{}{
 	(*ResetPasswordRequest)(nil),      // 6: account.ResetPasswordRequest
 	(*Account)(nil),                   // 7: account.Account
 	(*ShopSetting)(nil),               // 8: account.ShopSetting
-	(*Feature)(nil),                   // 9: account.Feature
-	(*WebpageMonitorSetting)(nil),     // 10: account.WebpageMonitorSetting
-	(*LeadSetting)(nil),               // 11: account.LeadSetting
-	(*GroupMember)(nil),               // 12: account.GroupMember
-	(*CreateAccountRequest)(nil),      // 13: account.CreateAccountRequest
-	(*Agents)(nil),                    // 14: account.Agents
-	(*NewPassword)(nil),               // 15: account.NewPassword
-	(*AgentGroups)(nil),               // 16: account.AgentGroups
-	(*Token)(nil),                     // 17: account.Token
-	(*WarnInactiveEmail)(nil),         // 18: account.WarnInactiveEmail
-	(*InvoiceEmail)(nil),              // 19: account.InvoiceEmail
-	(*SubscriptionUpgradedEmail)(nil), // 20: account.SubscriptionUpgradedEmail
-	(*BillCreatedEmail)(nil),          // 21: account.BillCreatedEmail
-	(*TrialEndingEmail)(nil),          // 22: account.TrialEndingEmail
-	(*DowngradedToFreeEmail)(nil),     // 23: account.DowngradedToFreeEmail
-	(*InviteEmail)(nil),               // 24: account.InviteEmail
-	(*ResetPasswordEmail)(nil),        // 25: account.ResetPasswordEmail
-	(*BusinessHours)(nil),             // 26: account.BusinessHours
-	(*SyncPublicHolidaysRequest)(nil), // 27: account.SyncPublicHolidaysRequest
-	(*AccSub)(nil),                    // 28: account.AccSub
-	(*AccSubs)(nil),                   // 29: account.AccSubs
-	(*SearchSubRequest)(nil),          // 30: account.SearchSubRequest
-	(*Presences)(nil),                 // 31: account.Presences
-	(*Presence)(nil),                  // 32: account.Presence
-	(*BusinessHours_WorkingDay)(nil),  // 33: account.BusinessHours.WorkingDay
-	(*BusinessHours_Holiday)(nil),     // 34: account.BusinessHours.Holiday
-	(*common.Context)(nil),            // 35: common.Context
-	(*payment.Limit)(nil),             // 36: payment.Limit
-	(*payment.Subscription)(nil),      // 37: payment.Subscription
+	(*Currency)(nil),                  // 9: account.Currency
+	(*CurrencyLogEntry)(nil),          // 10: account.CurrencyLogEntry
+	(*Feature)(nil),                   // 11: account.Feature
+	(*WebpageMonitorSetting)(nil),     // 12: account.WebpageMonitorSetting
+	(*LeadSetting)(nil),               // 13: account.LeadSetting
+	(*GroupMember)(nil),               // 14: account.GroupMember
+	(*CreateAccountRequest)(nil),      // 15: account.CreateAccountRequest
+	(*Agents)(nil),                    // 16: account.Agents
+	(*NewPassword)(nil),               // 17: account.NewPassword
+	(*AgentGroups)(nil),               // 18: account.AgentGroups
+	(*Token)(nil),                     // 19: account.Token
+	(*WarnInactiveEmail)(nil),         // 20: account.WarnInactiveEmail
+	(*InvoiceEmail)(nil),              // 21: account.InvoiceEmail
+	(*SubscriptionUpgradedEmail)(nil), // 22: account.SubscriptionUpgradedEmail
+	(*BillCreatedEmail)(nil),          // 23: account.BillCreatedEmail
+	(*TrialEndingEmail)(nil),          // 24: account.TrialEndingEmail
+	(*DowngradedToFreeEmail)(nil),     // 25: account.DowngradedToFreeEmail
+	(*InviteEmail)(nil),               // 26: account.InviteEmail
+	(*ResetPasswordEmail)(nil),        // 27: account.ResetPasswordEmail
+	(*BusinessHours)(nil),             // 28: account.BusinessHours
+	(*SyncPublicHolidaysRequest)(nil), // 29: account.SyncPublicHolidaysRequest
+	(*AccSub)(nil),                    // 30: account.AccSub
+	(*AccSubs)(nil),                   // 31: account.AccSubs
+	(*SearchSubRequest)(nil),          // 32: account.SearchSubRequest
+	(*Presences)(nil),                 // 33: account.Presences
+	(*Presence)(nil),                  // 34: account.Presence
+	(*BusinessHours_WorkingDay)(nil),  // 35: account.BusinessHours.WorkingDay
+	(*BusinessHours_Holiday)(nil),     // 36: account.BusinessHours.Holiday
+	(*common.Context)(nil),            // 37: common.Context
+	(*payment.Limit)(nil),             // 38: payment.Limit
+	(*payment.Subscription)(nil),      // 39: payment.Subscription
 }
 var file_account_proto_depIdxs = []int32{
-	35, // 0: account.Agent.ctx:type_name -> common.Context
+	37, // 0: account.Agent.ctx:type_name -> common.Context
 	7,  // 1: account.Agent.account:type_name -> account.Account
-	32, // 2: account.Agent.last_seen:type_name -> account.Presence
+	34, // 2: account.Agent.last_seen:type_name -> account.Presence
 	3,  // 3: account.Agent.dashboard_setting:type_name -> account.DashboardAgent
-	35, // 4: account.AgentGroup.ctx:type_name -> common.Context
+	37, // 4: account.AgentGroup.ctx:type_name -> common.Context
 	4,  // 5: account.AgentGroup.members:type_name -> account.Agent
-	35, // 6: account.ResetPasswordRequest.ctx:type_name -> common.Context
-	35, // 7: account.Account.ctx:type_name -> common.Context
-	36, // 8: account.Account.limit:type_name -> payment.Limit
-	26, // 9: account.Account.business_hours:type_name -> account.BusinessHours
-	11, // 10: account.Account.lead_setting:type_name -> account.LeadSetting
-	9,  // 11: account.Account.feature:type_name -> account.Feature
-	9,  // 12: account.Account.force_feature:type_name -> account.Feature
-	10, // 13: account.Account.webpage_monitor_setting:type_name -> account.WebpageMonitorSetting
+	37, // 6: account.ResetPasswordRequest.ctx:type_name -> common.Context
+	37, // 7: account.Account.ctx:type_name -> common.Context
+	38, // 8: account.Account.limit:type_name -> payment.Limit
+	28, // 9: account.Account.business_hours:type_name -> account.BusinessHours
+	13, // 10: account.Account.lead_setting:type_name -> account.LeadSetting
+	11, // 11: account.Account.feature:type_name -> account.Feature
+	11, // 12: account.Account.force_feature:type_name -> account.Feature
+	12, // 13: account.Account.webpage_monitor_setting:type_name -> account.WebpageMonitorSetting
 	8,  // 14: account.Account.shop_setting:type_name -> account.ShopSetting
-	35, // 15: account.GroupMember.ctx:type_name -> common.Context
-	35, // 16: account.CreateAccountRequest.ctx:type_name -> common.Context
-	35, // 17: account.Agents.ctx:type_name -> common.Context
-	4,  // 18: account.Agents.Agents:type_name -> account.Agent
-	35, // 19: account.NewPassword.ctx:type_name -> common.Context
-	35, // 20: account.AgentGroups.ctx:type_name -> common.Context
-	5,  // 21: account.AgentGroups.Groups:type_name -> account.AgentGroup
-	35, // 22: account.Token.ctx:type_name -> common.Context
-	35, // 23: account.WarnInactiveEmail.ctx:type_name -> common.Context
-	35, // 24: account.InvoiceEmail.ctx:type_name -> common.Context
-	35, // 25: account.SubscriptionUpgradedEmail.ctx:type_name -> common.Context
-	35, // 26: account.BillCreatedEmail.ctx:type_name -> common.Context
-	35, // 27: account.TrialEndingEmail.ctx:type_name -> common.Context
-	35, // 28: account.DowngradedToFreeEmail.ctx:type_name -> common.Context
-	35, // 29: account.InviteEmail.ctx:type_name -> common.Context
-	35, // 30: account.ResetPasswordEmail.ctx:type_name -> common.Context
-	35, // 31: account.BusinessHours.ctx:type_name -> common.Context
-	33, // 32: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
-	34, // 33: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
-	35, // 34: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
-	7,  // 35: account.AccSub.account:type_name -> account.Account
-	37, // 36: account.AccSub.subscription:type_name -> payment.Subscription
-	4,  // 37: account.AccSub.agents:type_name -> account.Agent
-	28, // 38: account.AccSubs.accsub:type_name -> account.AccSub
-	35, // 39: account.SearchSubRequest.ctx:type_name -> common.Context
-	35, // 40: account.Presences.ctx:type_name -> common.Context
-	32, // 41: account.Presences.presences:type_name -> account.Presence
-	35, // 42: account.Presence.ctx:type_name -> common.Context
-	43, // [43:43] is the sub-list for method output_type
-	43, // [43:43] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	9,  // 15: account.ShopSetting.supported_currencies:type_name -> account.Currency
+	37, // 16: account.Currency.ctx:type_name -> common.Context
+	10, // 17: account.Currency.logs:type_name -> account.CurrencyLogEntry
+	37, // 18: account.GroupMember.ctx:type_name -> common.Context
+	37, // 19: account.CreateAccountRequest.ctx:type_name -> common.Context
+	37, // 20: account.Agents.ctx:type_name -> common.Context
+	4,  // 21: account.Agents.Agents:type_name -> account.Agent
+	37, // 22: account.NewPassword.ctx:type_name -> common.Context
+	37, // 23: account.AgentGroups.ctx:type_name -> common.Context
+	5,  // 24: account.AgentGroups.Groups:type_name -> account.AgentGroup
+	37, // 25: account.Token.ctx:type_name -> common.Context
+	37, // 26: account.WarnInactiveEmail.ctx:type_name -> common.Context
+	37, // 27: account.InvoiceEmail.ctx:type_name -> common.Context
+	37, // 28: account.SubscriptionUpgradedEmail.ctx:type_name -> common.Context
+	37, // 29: account.BillCreatedEmail.ctx:type_name -> common.Context
+	37, // 30: account.TrialEndingEmail.ctx:type_name -> common.Context
+	37, // 31: account.DowngradedToFreeEmail.ctx:type_name -> common.Context
+	37, // 32: account.InviteEmail.ctx:type_name -> common.Context
+	37, // 33: account.ResetPasswordEmail.ctx:type_name -> common.Context
+	37, // 34: account.BusinessHours.ctx:type_name -> common.Context
+	35, // 35: account.BusinessHours.working_days:type_name -> account.BusinessHours.WorkingDay
+	36, // 36: account.BusinessHours.holidays:type_name -> account.BusinessHours.Holiday
+	37, // 37: account.SyncPublicHolidaysRequest.ctx:type_name -> common.Context
+	7,  // 38: account.AccSub.account:type_name -> account.Account
+	39, // 39: account.AccSub.subscription:type_name -> payment.Subscription
+	4,  // 40: account.AccSub.agents:type_name -> account.Agent
+	30, // 41: account.AccSubs.accsub:type_name -> account.AccSub
+	37, // 42: account.SearchSubRequest.ctx:type_name -> common.Context
+	37, // 43: account.Presences.ctx:type_name -> common.Context
+	34, // 44: account.Presences.presences:type_name -> account.Presence
+	37, // 45: account.Presence.ctx:type_name -> common.Context
+	46, // [46:46] is the sub-list for method output_type
+	46, // [46:46] is the sub-list for method input_type
+	46, // [46:46] is the sub-list for extension type_name
+	46, // [46:46] is the sub-list for extension extendee
+	0,  // [0:46] is the sub-list for field type_name
 }
 
 func init() { file_account_proto_init() }
@@ -3849,7 +4082,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Feature); i {
+			switch v := v.(*Currency); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3861,7 +4094,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WebpageMonitorSetting); i {
+			switch v := v.(*CurrencyLogEntry); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3873,7 +4106,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*LeadSetting); i {
+			switch v := v.(*Feature); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3885,7 +4118,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GroupMember); i {
+			switch v := v.(*WebpageMonitorSetting); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3897,7 +4130,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateAccountRequest); i {
+			switch v := v.(*LeadSetting); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3909,7 +4142,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Agents); i {
+			switch v := v.(*GroupMember); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3921,7 +4154,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewPassword); i {
+			switch v := v.(*CreateAccountRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3933,7 +4166,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AgentGroups); i {
+			switch v := v.(*Agents); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3945,7 +4178,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Token); i {
+			switch v := v.(*NewPassword); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3957,7 +4190,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*WarnInactiveEmail); i {
+			switch v := v.(*AgentGroups); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3969,7 +4202,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InvoiceEmail); i {
+			switch v := v.(*Token); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3981,7 +4214,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SubscriptionUpgradedEmail); i {
+			switch v := v.(*WarnInactiveEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3993,7 +4226,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BillCreatedEmail); i {
+			switch v := v.(*InvoiceEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4005,7 +4238,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TrialEndingEmail); i {
+			switch v := v.(*SubscriptionUpgradedEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4017,7 +4250,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DowngradedToFreeEmail); i {
+			switch v := v.(*BillCreatedEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4029,7 +4262,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*InviteEmail); i {
+			switch v := v.(*TrialEndingEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4041,7 +4274,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResetPasswordEmail); i {
+			switch v := v.(*DowngradedToFreeEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4053,7 +4286,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BusinessHours); i {
+			switch v := v.(*InviteEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4065,7 +4298,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SyncPublicHolidaysRequest); i {
+			switch v := v.(*ResetPasswordEmail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4077,7 +4310,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AccSub); i {
+			switch v := v.(*BusinessHours); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4089,7 +4322,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AccSubs); i {
+			switch v := v.(*SyncPublicHolidaysRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4101,7 +4334,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SearchSubRequest); i {
+			switch v := v.(*AccSub); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4113,7 +4346,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Presences); i {
+			switch v := v.(*AccSubs); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4125,7 +4358,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Presence); i {
+			switch v := v.(*SearchSubRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4137,7 +4370,7 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BusinessHours_WorkingDay); i {
+			switch v := v.(*Presences); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4149,6 +4382,30 @@ func file_account_proto_init() {
 			}
 		}
 		file_account_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Presence); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_account_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BusinessHours_WorkingDay); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_account_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BusinessHours_Holiday); i {
 			case 0:
 				return &v.state
@@ -4167,7 +4424,7 @@ func file_account_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_account_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   32,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
