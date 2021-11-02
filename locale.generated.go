@@ -1579,3 +1579,1457 @@ func GetAllI18ns(str *I18NString) []string {
 
 	return out
 }
+func toFP(f float32) int64 {
+	return int64(float64(f) * 1000000)
+}
+
+// CalcFPV turns price concurrency code to fixed point arithmetic value
+// (https://en.wikipedia.org/wiki/Fixed-point_arithmetic)
+// must convert to base concurrency first
+func CalcFPV(price *Price, code string) int64 {
+	cur := strings.TrimSpace(strings.ToUpper(code))
+	if cur != "" {
+
+		if cur == "AFN" {
+			return toFP(price.GetAFN())
+		}
+
+		if cur == "EUR" {
+			return toFP(price.GetEUR())
+		}
+
+		if cur == "ALL" {
+			return toFP(price.GetALL())
+		}
+
+		if cur == "DZD" {
+			return toFP(price.GetDZD())
+		}
+
+		if cur == "USD" {
+			return toFP(price.GetUSD())
+		}
+
+		if cur == "AOA" {
+			return toFP(price.GetAOA())
+		}
+
+		if cur == "XCD" {
+			return toFP(price.GetXCD())
+		}
+
+		if cur == "ARS" {
+			return toFP(price.GetARS())
+		}
+
+		if cur == "AMD" {
+			return toFP(price.GetAMD())
+		}
+
+		if cur == "AWG" {
+			return toFP(price.GetAWG())
+		}
+
+		if cur == "AUD" {
+			return toFP(price.GetAUD())
+		}
+
+		if cur == "AZN" {
+			return toFP(price.GetAZN())
+		}
+
+		if cur == "BSD" {
+			return toFP(price.GetBSD())
+		}
+
+		if cur == "BHD" {
+			return toFP(price.GetBHD())
+		}
+
+		if cur == "BDT" {
+			return toFP(price.GetBDT())
+		}
+
+		if cur == "BBD" {
+			return toFP(price.GetBBD())
+		}
+
+		if cur == "BYN" {
+			return toFP(price.GetBYN())
+		}
+
+		if cur == "BZD" {
+			return toFP(price.GetBZD())
+		}
+
+		if cur == "XOF" {
+			return toFP(price.GetXOF())
+		}
+
+		if cur == "BMD" {
+			return toFP(price.GetBMD())
+		}
+
+		if cur == "INR" {
+			return toFP(price.GetINR())
+		}
+
+		if cur == "BTN" {
+			return toFP(price.GetBTN())
+		}
+
+		if cur == "BOB" {
+			return toFP(price.GetBOB())
+		}
+
+		if cur == "BOV" {
+			return toFP(price.GetBOV())
+		}
+
+		if cur == "BAM" {
+			return toFP(price.GetBAM())
+		}
+
+		if cur == "BWP" {
+			return toFP(price.GetBWP())
+		}
+
+		if cur == "NOK" {
+			return toFP(price.GetNOK())
+		}
+
+		if cur == "BRL" {
+			return toFP(price.GetBRL())
+		}
+
+		if cur == "BND" {
+			return toFP(price.GetBND())
+		}
+
+		if cur == "BGN" {
+			return toFP(price.GetBGN())
+		}
+
+		if cur == "BIF" {
+			return toFP(price.GetBIF())
+		}
+
+		if cur == "CVE" {
+			return toFP(price.GetCVE())
+		}
+
+		if cur == "KHR" {
+			return toFP(price.GetKHR())
+		}
+
+		if cur == "XAF" {
+			return toFP(price.GetXAF())
+		}
+
+		if cur == "CAD" {
+			return toFP(price.GetCAD())
+		}
+
+		if cur == "KYD" {
+			return toFP(price.GetKYD())
+		}
+
+		if cur == "CLP" {
+			return toFP(price.GetCLP())
+		}
+
+		if cur == "CLF" {
+			return toFP(price.GetCLF())
+		}
+
+		if cur == "CNY" {
+			return toFP(price.GetCNY())
+		}
+
+		if cur == "COP" {
+			return toFP(price.GetCOP())
+		}
+
+		if cur == "COU" {
+			return toFP(price.GetCOU())
+		}
+
+		if cur == "KMF" {
+			return toFP(price.GetKMF())
+		}
+
+		if cur == "CDF" {
+			return toFP(price.GetCDF())
+		}
+
+		if cur == "NZD" {
+			return toFP(price.GetNZD())
+		}
+
+		if cur == "CRC" {
+			return toFP(price.GetCRC())
+		}
+
+		if cur == "HRK" {
+			return toFP(price.GetHRK())
+		}
+
+		if cur == "CUP" {
+			return toFP(price.GetCUP())
+		}
+
+		if cur == "CUC" {
+			return toFP(price.GetCUC())
+		}
+
+		if cur == "ANG" {
+			return toFP(price.GetANG())
+		}
+
+		if cur == "CZK" {
+			return toFP(price.GetCZK())
+		}
+
+		if cur == "DKK" {
+			return toFP(price.GetDKK())
+		}
+
+		if cur == "DJF" {
+			return toFP(price.GetDJF())
+		}
+
+		if cur == "DOP" {
+			return toFP(price.GetDOP())
+		}
+
+		if cur == "EGP" {
+			return toFP(price.GetEGP())
+		}
+
+		if cur == "SVC" {
+			return toFP(price.GetSVC())
+		}
+
+		if cur == "ERN" {
+			return toFP(price.GetERN())
+		}
+
+		if cur == "SZL" {
+			return toFP(price.GetSZL())
+		}
+
+		if cur == "ETB" {
+			return toFP(price.GetETB())
+		}
+
+		if cur == "FKP" {
+			return toFP(price.GetFKP())
+		}
+
+		if cur == "FJD" {
+			return toFP(price.GetFJD())
+		}
+
+		if cur == "XPF" {
+			return toFP(price.GetXPF())
+		}
+
+		if cur == "GMD" {
+			return toFP(price.GetGMD())
+		}
+
+		if cur == "GEL" {
+			return toFP(price.GetGEL())
+		}
+
+		if cur == "GHS" {
+			return toFP(price.GetGHS())
+		}
+
+		if cur == "GIP" {
+			return toFP(price.GetGIP())
+		}
+
+		if cur == "GTQ" {
+			return toFP(price.GetGTQ())
+		}
+
+		if cur == "GBP" {
+			return toFP(price.GetGBP())
+		}
+
+		if cur == "GNF" {
+			return toFP(price.GetGNF())
+		}
+
+		if cur == "GYD" {
+			return toFP(price.GetGYD())
+		}
+
+		if cur == "HTG" {
+			return toFP(price.GetHTG())
+		}
+
+		if cur == "HNL" {
+			return toFP(price.GetHNL())
+		}
+
+		if cur == "HKD" {
+			return toFP(price.GetHKD())
+		}
+
+		if cur == "HUF" {
+			return toFP(price.GetHUF())
+		}
+
+		if cur == "ISK" {
+			return toFP(price.GetISK())
+		}
+
+		if cur == "IDR" {
+			return toFP(price.GetIDR())
+		}
+
+		if cur == "XDR" {
+			return toFP(price.GetXDR())
+		}
+
+		if cur == "IRR" {
+			return toFP(price.GetIRR())
+		}
+
+		if cur == "IQD" {
+			return toFP(price.GetIQD())
+		}
+
+		if cur == "ILS" {
+			return toFP(price.GetILS())
+		}
+
+		if cur == "JMD" {
+			return toFP(price.GetJMD())
+		}
+
+		if cur == "JPY" {
+			return toFP(price.GetJPY())
+		}
+
+		if cur == "JOD" {
+			return toFP(price.GetJOD())
+		}
+
+		if cur == "KZT" {
+			return toFP(price.GetKZT())
+		}
+
+		if cur == "KES" {
+			return toFP(price.GetKES())
+		}
+
+		if cur == "KPW" {
+			return toFP(price.GetKPW())
+		}
+
+		if cur == "KRW" {
+			return toFP(price.GetKRW())
+		}
+
+		if cur == "KWD" {
+			return toFP(price.GetKWD())
+		}
+
+		if cur == "KGS" {
+			return toFP(price.GetKGS())
+		}
+
+		if cur == "LAK" {
+			return toFP(price.GetLAK())
+		}
+
+		if cur == "LBP" {
+			return toFP(price.GetLBP())
+		}
+
+		if cur == "LSL" {
+			return toFP(price.GetLSL())
+		}
+
+		if cur == "ZAR" {
+			return toFP(price.GetZAR())
+		}
+
+		if cur == "LRD" {
+			return toFP(price.GetLRD())
+		}
+
+		if cur == "LYD" {
+			return toFP(price.GetLYD())
+		}
+
+		if cur == "CHF" {
+			return toFP(price.GetCHF())
+		}
+
+		if cur == "MOP" {
+			return toFP(price.GetMOP())
+		}
+
+		if cur == "MKD" {
+			return toFP(price.GetMKD())
+		}
+
+		if cur == "MGA" {
+			return toFP(price.GetMGA())
+		}
+
+		if cur == "MWK" {
+			return toFP(price.GetMWK())
+		}
+
+		if cur == "MYR" {
+			return toFP(price.GetMYR())
+		}
+
+		if cur == "MVR" {
+			return toFP(price.GetMVR())
+		}
+
+		if cur == "MRU" {
+			return toFP(price.GetMRU())
+		}
+
+		if cur == "MUR" {
+			return toFP(price.GetMUR())
+		}
+
+		if cur == "XUA" {
+			return toFP(price.GetXUA())
+		}
+
+		if cur == "MXN" {
+			return toFP(price.GetMXN())
+		}
+
+		if cur == "MXV" {
+			return toFP(price.GetMXV())
+		}
+
+		if cur == "MDL" {
+			return toFP(price.GetMDL())
+		}
+
+		if cur == "MNT" {
+			return toFP(price.GetMNT())
+		}
+
+		if cur == "MAD" {
+			return toFP(price.GetMAD())
+		}
+
+		if cur == "MZN" {
+			return toFP(price.GetMZN())
+		}
+
+		if cur == "MMK" {
+			return toFP(price.GetMMK())
+		}
+
+		if cur == "NAD" {
+			return toFP(price.GetNAD())
+		}
+
+		if cur == "NPR" {
+			return toFP(price.GetNPR())
+		}
+
+		if cur == "NIO" {
+			return toFP(price.GetNIO())
+		}
+
+		if cur == "NGN" {
+			return toFP(price.GetNGN())
+		}
+
+		if cur == "OMR" {
+			return toFP(price.GetOMR())
+		}
+
+		if cur == "PKR" {
+			return toFP(price.GetPKR())
+		}
+
+		if cur == "PAB" {
+			return toFP(price.GetPAB())
+		}
+
+		if cur == "PGK" {
+			return toFP(price.GetPGK())
+		}
+
+		if cur == "PYG" {
+			return toFP(price.GetPYG())
+		}
+
+		if cur == "PEN" {
+			return toFP(price.GetPEN())
+		}
+
+		if cur == "PHP" {
+			return toFP(price.GetPHP())
+		}
+
+		if cur == "PLN" {
+			return toFP(price.GetPLN())
+		}
+
+		if cur == "QAR" {
+			return toFP(price.GetQAR())
+		}
+
+		if cur == "RON" {
+			return toFP(price.GetRON())
+		}
+
+		if cur == "RUB" {
+			return toFP(price.GetRUB())
+		}
+
+		if cur == "RWF" {
+			return toFP(price.GetRWF())
+		}
+
+		if cur == "SHP" {
+			return toFP(price.GetSHP())
+		}
+
+		if cur == "WST" {
+			return toFP(price.GetWST())
+		}
+
+		if cur == "STN" {
+			return toFP(price.GetSTN())
+		}
+
+		if cur == "SAR" {
+			return toFP(price.GetSAR())
+		}
+
+		if cur == "RSD" {
+			return toFP(price.GetRSD())
+		}
+
+		if cur == "SCR" {
+			return toFP(price.GetSCR())
+		}
+
+		if cur == "SLL" {
+			return toFP(price.GetSLL())
+		}
+
+		if cur == "SGD" {
+			return toFP(price.GetSGD())
+		}
+
+		if cur == "XSU" {
+			return toFP(price.GetXSU())
+		}
+
+		if cur == "SBD" {
+			return toFP(price.GetSBD())
+		}
+
+		if cur == "SOS" {
+			return toFP(price.GetSOS())
+		}
+
+		if cur == "SSP" {
+			return toFP(price.GetSSP())
+		}
+
+		if cur == "LKR" {
+			return toFP(price.GetLKR())
+		}
+
+		if cur == "SDG" {
+			return toFP(price.GetSDG())
+		}
+
+		if cur == "SRD" {
+			return toFP(price.GetSRD())
+		}
+
+		if cur == "SEK" {
+			return toFP(price.GetSEK())
+		}
+
+		if cur == "CHE" {
+			return toFP(price.GetCHE())
+		}
+
+		if cur == "CHW" {
+			return toFP(price.GetCHW())
+		}
+
+		if cur == "SYP" {
+			return toFP(price.GetSYP())
+		}
+
+		if cur == "TWD" {
+			return toFP(price.GetTWD())
+		}
+
+		if cur == "TJS" {
+			return toFP(price.GetTJS())
+		}
+
+		if cur == "TZS" {
+			return toFP(price.GetTZS())
+		}
+
+		if cur == "THB" {
+			return toFP(price.GetTHB())
+		}
+
+		if cur == "TOP" {
+			return toFP(price.GetTOP())
+		}
+
+		if cur == "TTD" {
+			return toFP(price.GetTTD())
+		}
+
+		if cur == "TND" {
+			return toFP(price.GetTND())
+		}
+
+		if cur == "TRY" {
+			return toFP(price.GetTRY())
+		}
+
+		if cur == "TMT" {
+			return toFP(price.GetTMT())
+		}
+
+		if cur == "UGX" {
+			return toFP(price.GetUGX())
+		}
+
+		if cur == "UAH" {
+			return toFP(price.GetUAH())
+		}
+
+		if cur == "AED" {
+			return toFP(price.GetAED())
+		}
+
+		if cur == "USN" {
+			return toFP(price.GetUSN())
+		}
+
+		if cur == "UYU" {
+			return toFP(price.GetUYU())
+		}
+
+		if cur == "UYI" {
+			return toFP(price.GetUYI())
+		}
+
+		if cur == "UYW" {
+			return toFP(price.GetUYW())
+		}
+
+		if cur == "UZS" {
+			return toFP(price.GetUZS())
+		}
+
+		if cur == "VUV" {
+			return toFP(price.GetVUV())
+		}
+
+		if cur == "VES" {
+			return toFP(price.GetVES())
+		}
+
+		if cur == "VED" {
+			return toFP(price.GetVED())
+		}
+
+		if cur == "VND" {
+			return toFP(price.GetVND())
+		}
+
+		if cur == "YER" {
+			return toFP(price.GetYER())
+		}
+
+		if cur == "ZMW" {
+			return toFP(price.GetZMW())
+		}
+
+		if cur == "ZWL" {
+			return toFP(price.GetZWL())
+		}
+
+		if cur == "XBA" {
+			return toFP(price.GetXBA())
+		}
+
+		if cur == "XBB" {
+			return toFP(price.GetXBB())
+		}
+
+		if cur == "XBC" {
+			return toFP(price.GetXBC())
+		}
+
+		if cur == "XBD" {
+			return toFP(price.GetXBD())
+		}
+
+		if cur == "XTS" {
+			return toFP(price.GetXTS())
+		}
+
+		if cur == "XXX" {
+			return toFP(price.GetXXX())
+		}
+
+		if cur == "XAU" {
+			return toFP(price.GetXAU())
+		}
+
+		if cur == "XPD" {
+			return toFP(price.GetXPD())
+		}
+
+		if cur == "XPT" {
+			return toFP(price.GetXPT())
+		}
+
+		if cur == "XAG" {
+			return toFP(price.GetXAG())
+		}	}
+
+	// unknow currency codd => fallback to the first non-zero
+
+	if price.GetAFN() != 0 {
+		return toFP(price.GetAFN())
+	}
+
+	if price.GetEUR() != 0 {
+		return toFP(price.GetEUR())
+	}
+
+	if price.GetALL() != 0 {
+		return toFP(price.GetALL())
+	}
+
+	if price.GetDZD() != 0 {
+		return toFP(price.GetDZD())
+	}
+
+	if price.GetUSD() != 0 {
+		return toFP(price.GetUSD())
+	}
+
+	if price.GetAOA() != 0 {
+		return toFP(price.GetAOA())
+	}
+
+	if price.GetXCD() != 0 {
+		return toFP(price.GetXCD())
+	}
+
+	if price.GetARS() != 0 {
+		return toFP(price.GetARS())
+	}
+
+	if price.GetAMD() != 0 {
+		return toFP(price.GetAMD())
+	}
+
+	if price.GetAWG() != 0 {
+		return toFP(price.GetAWG())
+	}
+
+	if price.GetAUD() != 0 {
+		return toFP(price.GetAUD())
+	}
+
+	if price.GetAZN() != 0 {
+		return toFP(price.GetAZN())
+	}
+
+	if price.GetBSD() != 0 {
+		return toFP(price.GetBSD())
+	}
+
+	if price.GetBHD() != 0 {
+		return toFP(price.GetBHD())
+	}
+
+	if price.GetBDT() != 0 {
+		return toFP(price.GetBDT())
+	}
+
+	if price.GetBBD() != 0 {
+		return toFP(price.GetBBD())
+	}
+
+	if price.GetBYN() != 0 {
+		return toFP(price.GetBYN())
+	}
+
+	if price.GetBZD() != 0 {
+		return toFP(price.GetBZD())
+	}
+
+	if price.GetXOF() != 0 {
+		return toFP(price.GetXOF())
+	}
+
+	if price.GetBMD() != 0 {
+		return toFP(price.GetBMD())
+	}
+
+	if price.GetINR() != 0 {
+		return toFP(price.GetINR())
+	}
+
+	if price.GetBTN() != 0 {
+		return toFP(price.GetBTN())
+	}
+
+	if price.GetBOB() != 0 {
+		return toFP(price.GetBOB())
+	}
+
+	if price.GetBOV() != 0 {
+		return toFP(price.GetBOV())
+	}
+
+	if price.GetBAM() != 0 {
+		return toFP(price.GetBAM())
+	}
+
+	if price.GetBWP() != 0 {
+		return toFP(price.GetBWP())
+	}
+
+	if price.GetNOK() != 0 {
+		return toFP(price.GetNOK())
+	}
+
+	if price.GetBRL() != 0 {
+		return toFP(price.GetBRL())
+	}
+
+	if price.GetBND() != 0 {
+		return toFP(price.GetBND())
+	}
+
+	if price.GetBGN() != 0 {
+		return toFP(price.GetBGN())
+	}
+
+	if price.GetBIF() != 0 {
+		return toFP(price.GetBIF())
+	}
+
+	if price.GetCVE() != 0 {
+		return toFP(price.GetCVE())
+	}
+
+	if price.GetKHR() != 0 {
+		return toFP(price.GetKHR())
+	}
+
+	if price.GetXAF() != 0 {
+		return toFP(price.GetXAF())
+	}
+
+	if price.GetCAD() != 0 {
+		return toFP(price.GetCAD())
+	}
+
+	if price.GetKYD() != 0 {
+		return toFP(price.GetKYD())
+	}
+
+	if price.GetCLP() != 0 {
+		return toFP(price.GetCLP())
+	}
+
+	if price.GetCLF() != 0 {
+		return toFP(price.GetCLF())
+	}
+
+	if price.GetCNY() != 0 {
+		return toFP(price.GetCNY())
+	}
+
+	if price.GetCOP() != 0 {
+		return toFP(price.GetCOP())
+	}
+
+	if price.GetCOU() != 0 {
+		return toFP(price.GetCOU())
+	}
+
+	if price.GetKMF() != 0 {
+		return toFP(price.GetKMF())
+	}
+
+	if price.GetCDF() != 0 {
+		return toFP(price.GetCDF())
+	}
+
+	if price.GetNZD() != 0 {
+		return toFP(price.GetNZD())
+	}
+
+	if price.GetCRC() != 0 {
+		return toFP(price.GetCRC())
+	}
+
+	if price.GetHRK() != 0 {
+		return toFP(price.GetHRK())
+	}
+
+	if price.GetCUP() != 0 {
+		return toFP(price.GetCUP())
+	}
+
+	if price.GetCUC() != 0 {
+		return toFP(price.GetCUC())
+	}
+
+	if price.GetANG() != 0 {
+		return toFP(price.GetANG())
+	}
+
+	if price.GetCZK() != 0 {
+		return toFP(price.GetCZK())
+	}
+
+	if price.GetDKK() != 0 {
+		return toFP(price.GetDKK())
+	}
+
+	if price.GetDJF() != 0 {
+		return toFP(price.GetDJF())
+	}
+
+	if price.GetDOP() != 0 {
+		return toFP(price.GetDOP())
+	}
+
+	if price.GetEGP() != 0 {
+		return toFP(price.GetEGP())
+	}
+
+	if price.GetSVC() != 0 {
+		return toFP(price.GetSVC())
+	}
+
+	if price.GetERN() != 0 {
+		return toFP(price.GetERN())
+	}
+
+	if price.GetSZL() != 0 {
+		return toFP(price.GetSZL())
+	}
+
+	if price.GetETB() != 0 {
+		return toFP(price.GetETB())
+	}
+
+	if price.GetFKP() != 0 {
+		return toFP(price.GetFKP())
+	}
+
+	if price.GetFJD() != 0 {
+		return toFP(price.GetFJD())
+	}
+
+	if price.GetXPF() != 0 {
+		return toFP(price.GetXPF())
+	}
+
+	if price.GetGMD() != 0 {
+		return toFP(price.GetGMD())
+	}
+
+	if price.GetGEL() != 0 {
+		return toFP(price.GetGEL())
+	}
+
+	if price.GetGHS() != 0 {
+		return toFP(price.GetGHS())
+	}
+
+	if price.GetGIP() != 0 {
+		return toFP(price.GetGIP())
+	}
+
+	if price.GetGTQ() != 0 {
+		return toFP(price.GetGTQ())
+	}
+
+	if price.GetGBP() != 0 {
+		return toFP(price.GetGBP())
+	}
+
+	if price.GetGNF() != 0 {
+		return toFP(price.GetGNF())
+	}
+
+	if price.GetGYD() != 0 {
+		return toFP(price.GetGYD())
+	}
+
+	if price.GetHTG() != 0 {
+		return toFP(price.GetHTG())
+	}
+
+	if price.GetHNL() != 0 {
+		return toFP(price.GetHNL())
+	}
+
+	if price.GetHKD() != 0 {
+		return toFP(price.GetHKD())
+	}
+
+	if price.GetHUF() != 0 {
+		return toFP(price.GetHUF())
+	}
+
+	if price.GetISK() != 0 {
+		return toFP(price.GetISK())
+	}
+
+	if price.GetIDR() != 0 {
+		return toFP(price.GetIDR())
+	}
+
+	if price.GetXDR() != 0 {
+		return toFP(price.GetXDR())
+	}
+
+	if price.GetIRR() != 0 {
+		return toFP(price.GetIRR())
+	}
+
+	if price.GetIQD() != 0 {
+		return toFP(price.GetIQD())
+	}
+
+	if price.GetILS() != 0 {
+		return toFP(price.GetILS())
+	}
+
+	if price.GetJMD() != 0 {
+		return toFP(price.GetJMD())
+	}
+
+	if price.GetJPY() != 0 {
+		return toFP(price.GetJPY())
+	}
+
+	if price.GetJOD() != 0 {
+		return toFP(price.GetJOD())
+	}
+
+	if price.GetKZT() != 0 {
+		return toFP(price.GetKZT())
+	}
+
+	if price.GetKES() != 0 {
+		return toFP(price.GetKES())
+	}
+
+	if price.GetKPW() != 0 {
+		return toFP(price.GetKPW())
+	}
+
+	if price.GetKRW() != 0 {
+		return toFP(price.GetKRW())
+	}
+
+	if price.GetKWD() != 0 {
+		return toFP(price.GetKWD())
+	}
+
+	if price.GetKGS() != 0 {
+		return toFP(price.GetKGS())
+	}
+
+	if price.GetLAK() != 0 {
+		return toFP(price.GetLAK())
+	}
+
+	if price.GetLBP() != 0 {
+		return toFP(price.GetLBP())
+	}
+
+	if price.GetLSL() != 0 {
+		return toFP(price.GetLSL())
+	}
+
+	if price.GetZAR() != 0 {
+		return toFP(price.GetZAR())
+	}
+
+	if price.GetLRD() != 0 {
+		return toFP(price.GetLRD())
+	}
+
+	if price.GetLYD() != 0 {
+		return toFP(price.GetLYD())
+	}
+
+	if price.GetCHF() != 0 {
+		return toFP(price.GetCHF())
+	}
+
+	if price.GetMOP() != 0 {
+		return toFP(price.GetMOP())
+	}
+
+	if price.GetMKD() != 0 {
+		return toFP(price.GetMKD())
+	}
+
+	if price.GetMGA() != 0 {
+		return toFP(price.GetMGA())
+	}
+
+	if price.GetMWK() != 0 {
+		return toFP(price.GetMWK())
+	}
+
+	if price.GetMYR() != 0 {
+		return toFP(price.GetMYR())
+	}
+
+	if price.GetMVR() != 0 {
+		return toFP(price.GetMVR())
+	}
+
+	if price.GetMRU() != 0 {
+		return toFP(price.GetMRU())
+	}
+
+	if price.GetMUR() != 0 {
+		return toFP(price.GetMUR())
+	}
+
+	if price.GetXUA() != 0 {
+		return toFP(price.GetXUA())
+	}
+
+	if price.GetMXN() != 0 {
+		return toFP(price.GetMXN())
+	}
+
+	if price.GetMXV() != 0 {
+		return toFP(price.GetMXV())
+	}
+
+	if price.GetMDL() != 0 {
+		return toFP(price.GetMDL())
+	}
+
+	if price.GetMNT() != 0 {
+		return toFP(price.GetMNT())
+	}
+
+	if price.GetMAD() != 0 {
+		return toFP(price.GetMAD())
+	}
+
+	if price.GetMZN() != 0 {
+		return toFP(price.GetMZN())
+	}
+
+	if price.GetMMK() != 0 {
+		return toFP(price.GetMMK())
+	}
+
+	if price.GetNAD() != 0 {
+		return toFP(price.GetNAD())
+	}
+
+	if price.GetNPR() != 0 {
+		return toFP(price.GetNPR())
+	}
+
+	if price.GetNIO() != 0 {
+		return toFP(price.GetNIO())
+	}
+
+	if price.GetNGN() != 0 {
+		return toFP(price.GetNGN())
+	}
+
+	if price.GetOMR() != 0 {
+		return toFP(price.GetOMR())
+	}
+
+	if price.GetPKR() != 0 {
+		return toFP(price.GetPKR())
+	}
+
+	if price.GetPAB() != 0 {
+		return toFP(price.GetPAB())
+	}
+
+	if price.GetPGK() != 0 {
+		return toFP(price.GetPGK())
+	}
+
+	if price.GetPYG() != 0 {
+		return toFP(price.GetPYG())
+	}
+
+	if price.GetPEN() != 0 {
+		return toFP(price.GetPEN())
+	}
+
+	if price.GetPHP() != 0 {
+		return toFP(price.GetPHP())
+	}
+
+	if price.GetPLN() != 0 {
+		return toFP(price.GetPLN())
+	}
+
+	if price.GetQAR() != 0 {
+		return toFP(price.GetQAR())
+	}
+
+	if price.GetRON() != 0 {
+		return toFP(price.GetRON())
+	}
+
+	if price.GetRUB() != 0 {
+		return toFP(price.GetRUB())
+	}
+
+	if price.GetRWF() != 0 {
+		return toFP(price.GetRWF())
+	}
+
+	if price.GetSHP() != 0 {
+		return toFP(price.GetSHP())
+	}
+
+	if price.GetWST() != 0 {
+		return toFP(price.GetWST())
+	}
+
+	if price.GetSTN() != 0 {
+		return toFP(price.GetSTN())
+	}
+
+	if price.GetSAR() != 0 {
+		return toFP(price.GetSAR())
+	}
+
+	if price.GetRSD() != 0 {
+		return toFP(price.GetRSD())
+	}
+
+	if price.GetSCR() != 0 {
+		return toFP(price.GetSCR())
+	}
+
+	if price.GetSLL() != 0 {
+		return toFP(price.GetSLL())
+	}
+
+	if price.GetSGD() != 0 {
+		return toFP(price.GetSGD())
+	}
+
+	if price.GetXSU() != 0 {
+		return toFP(price.GetXSU())
+	}
+
+	if price.GetSBD() != 0 {
+		return toFP(price.GetSBD())
+	}
+
+	if price.GetSOS() != 0 {
+		return toFP(price.GetSOS())
+	}
+
+	if price.GetSSP() != 0 {
+		return toFP(price.GetSSP())
+	}
+
+	if price.GetLKR() != 0 {
+		return toFP(price.GetLKR())
+	}
+
+	if price.GetSDG() != 0 {
+		return toFP(price.GetSDG())
+	}
+
+	if price.GetSRD() != 0 {
+		return toFP(price.GetSRD())
+	}
+
+	if price.GetSEK() != 0 {
+		return toFP(price.GetSEK())
+	}
+
+	if price.GetCHE() != 0 {
+		return toFP(price.GetCHE())
+	}
+
+	if price.GetCHW() != 0 {
+		return toFP(price.GetCHW())
+	}
+
+	if price.GetSYP() != 0 {
+		return toFP(price.GetSYP())
+	}
+
+	if price.GetTWD() != 0 {
+		return toFP(price.GetTWD())
+	}
+
+	if price.GetTJS() != 0 {
+		return toFP(price.GetTJS())
+	}
+
+	if price.GetTZS() != 0 {
+		return toFP(price.GetTZS())
+	}
+
+	if price.GetTHB() != 0 {
+		return toFP(price.GetTHB())
+	}
+
+	if price.GetTOP() != 0 {
+		return toFP(price.GetTOP())
+	}
+
+	if price.GetTTD() != 0 {
+		return toFP(price.GetTTD())
+	}
+
+	if price.GetTND() != 0 {
+		return toFP(price.GetTND())
+	}
+
+	if price.GetTRY() != 0 {
+		return toFP(price.GetTRY())
+	}
+
+	if price.GetTMT() != 0 {
+		return toFP(price.GetTMT())
+	}
+
+	if price.GetUGX() != 0 {
+		return toFP(price.GetUGX())
+	}
+
+	if price.GetUAH() != 0 {
+		return toFP(price.GetUAH())
+	}
+
+	if price.GetAED() != 0 {
+		return toFP(price.GetAED())
+	}
+
+	if price.GetUSN() != 0 {
+		return toFP(price.GetUSN())
+	}
+
+	if price.GetUYU() != 0 {
+		return toFP(price.GetUYU())
+	}
+
+	if price.GetUYI() != 0 {
+		return toFP(price.GetUYI())
+	}
+
+	if price.GetUYW() != 0 {
+		return toFP(price.GetUYW())
+	}
+
+	if price.GetUZS() != 0 {
+		return toFP(price.GetUZS())
+	}
+
+	if price.GetVUV() != 0 {
+		return toFP(price.GetVUV())
+	}
+
+	if price.GetVES() != 0 {
+		return toFP(price.GetVES())
+	}
+
+	if price.GetVED() != 0 {
+		return toFP(price.GetVED())
+	}
+
+	if price.GetVND() != 0 {
+		return toFP(price.GetVND())
+	}
+
+	if price.GetYER() != 0 {
+		return toFP(price.GetYER())
+	}
+
+	if price.GetZMW() != 0 {
+		return toFP(price.GetZMW())
+	}
+
+	if price.GetZWL() != 0 {
+		return toFP(price.GetZWL())
+	}
+
+	if price.GetXBA() != 0 {
+		return toFP(price.GetXBA())
+	}
+
+	if price.GetXBB() != 0 {
+		return toFP(price.GetXBB())
+	}
+
+	if price.GetXBC() != 0 {
+		return toFP(price.GetXBC())
+	}
+
+	if price.GetXBD() != 0 {
+		return toFP(price.GetXBD())
+	}
+
+	if price.GetXTS() != 0 {
+		return toFP(price.GetXTS())
+	}
+
+	if price.GetXXX() != 0 {
+		return toFP(price.GetXXX())
+	}
+
+	if price.GetXAU() != 0 {
+		return toFP(price.GetXAU())
+	}
+
+	if price.GetXPD() != 0 {
+		return toFP(price.GetXPD())
+	}
+
+	if price.GetXPT() != 0 {
+		return toFP(price.GetXPT())
+	}
+
+	if price.GetXAG() != 0 {
+		return toFP(price.GetXAG())
+	}
+	return 0
+}
