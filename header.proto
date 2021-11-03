@@ -3681,16 +3681,20 @@ message ShopSetting {
 	float tax_percentage = 4;
 	repeated Currency supported_currencies = 6;
 	int64 updated = 8;
-	string udpated_by = 9;
+	string updated_by = 9;
 }
 
 message Currency {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
+	// 	string id = 3;
 	string code = 4;
 	string symbol = 5;
 	bool auto_sync = 6;
+
+	// one code equal how much base
+	// code is VND, base is USD, rate should be 0.000045
+	// otherwise, if code is USD, base is VND, rate should be 22000
 	float rate = 7;
 	bool enabled = 8;
 	int64 updated = 9;
@@ -3699,9 +3703,10 @@ message Currency {
 }
 
 message CurrencyLogEntry {
-	int64 updated = 3;
-	float rate = 4;
-	string updated_by = 5;
+	string id = 3;
+	int64 updated = 4;
+	float rate = 5;
+	string updated_by = 6;
 }
 
 message Error {

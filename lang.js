@@ -195,8 +195,13 @@ function toGoLocale(locale) {
   return capitalizeFirstLetter(locale.replace("-", "_"));
 }
 
-let localem = `
+let curm = `
+var AllCurrency = map[string]bool{
+` + allCurrencyCodes.map(code => `	"`+code+`": true,`).join('\n') + `
+}
+`
 
+let localem = `
 var LocaleM = map[string]bool{
 `;
 
@@ -257,7 +262,7 @@ var s = lo
 localem += "}\n";
 gocode +=
   `	return ""
-}` + localem;
+}` + localem + curm;
 gocodeallstring += `	return out
 }`;
 
