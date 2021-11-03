@@ -3818,4 +3818,9 @@ enum E {
 	order_not_found = 100;
 	invalid_base_currency = 101;
 	invalid_currency = 102;
+
+	invalid_url = 103;
+	invalid_poll_token = 104;
+	dead_poll_connection = 105;
+	connection_not_found = 106;
 }
