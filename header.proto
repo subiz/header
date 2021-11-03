@@ -789,14 +789,6 @@ message Automations {
 	repeated Automation automations = 2;
 }
 
-message AutomationCheck {
-	string account_id = 2;
-	string automation_id = 3;
-	string user_id = 4;
-	string event_id = 5;
-	string scope = 6;
-}
-
 message Topic {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -934,49 +926,6 @@ message PresencesRequest {
 message PresencesResponse {
 	repeated string online_user_ids = 2;
 	repeated string focused_user_ids = 3;
-}
-
-message UserReportResult {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	repeated int64 milestones = 3;
-	repeated int64 prev_milestones = 13;
-
-	repeated int64 user_counts = 4;
-	repeated int64 lead_counts = 5;
-	repeated int64 quanlified_lead_counts = 6;
-
-	repeated UserReportTable channels = 8;
-	repeated UserReportTable first_interacts = 9;
-	repeated UserReportTable channel_sources = 14;
-
-	repeated int64 prev_user_counts = 10;
-	repeated int64 prev_lead_counts = 11;
- 	repeated int64 prev_quanlified_lead_counts = 12;
-}
-
-message UserReportTable {
-	string name = 2;
-	int64 user_count = 4;
-	int64 prev_user_count = 5;
-
-	int64 lead_count = 6;
-	int64 prev_lead_count = 7;
-
-	int64 quanlified_lead_count = 8;
-	int64 prev_quanlified_lead_count = 9;
-}
-
-message BotEventCreated {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string bot_id = 3;
-	string conversation_id = 4;
-	string user_id = 5; // optional
-
-	Event event = 6;
-	int64 created = 8; // in millisecond
 }
 
 message BotRunRequest {
@@ -1924,7 +1873,6 @@ message Frequently {
 }
 
 ////////////////////
-
 message RealtimeSubscription {
 	common.Context ctx = 1;
 	string initial_token = 2;

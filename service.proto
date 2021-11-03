@@ -52,6 +52,9 @@ service AccountMgr {
 	rpc GetShopSetting(header.Id) returns (header.ShopSetting);
 	rpc UpdateShopSetting(header.ShopSetting) returns (header.ShopSetting);
 	rpc ReadCurrency(header.Id) returns (header.Currency);
+
+	// internal
+	rpc AutoSyncCurrency(header.Id) returns (header.Empty);
 }
 
 // user services

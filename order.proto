@@ -174,7 +174,7 @@ message Order {
 	string cancellation_note = 29;
 	string cancellation_code = 30; // typing_error, user_rejected
 
-	string currency = 31;
+	string currency = 31; // empty => default
 	Price deposit = 32;
 
 	Price discount_amount = 34;
@@ -320,8 +320,6 @@ message Product {
 
 	Price price = 51;
 
-	float sale_price = 52; // (deprecated)
-
 	repeated PriceRule price_rules = 53; // (shared)
 	int64 stock = 54; //
 
@@ -392,8 +390,8 @@ message ProductsRequest {
 	int32 limit = 4; // 200
 	string anchor = 5;
 
-	int64 sale_price_gte = 6;
-	int64 sale_price_lte = 7;
+	int64 price_gte = 6;
+	int64 price_lte = 7;
 
 	// [{key: 'colors', value:'red,blue', {key:'size', value:'xxl'}]
 	// returns all variants which color is (red OR blue) AND size is xxl
