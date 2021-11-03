@@ -3251,8 +3251,8 @@ enum RealtimeType {
 	a = 0;
 	account_updated = 11;
 
-	group_deleted = 12;
-	group_updated = 13;
+	agent_group_deleted = 12;
+	agent_group_updated = 13;
 
 	invitation_accepted = 14;
 	agent_deleted = 15;
@@ -3863,4 +3863,6 @@ enum E {
 	product_not_found = 99;
 
 	order_not_found = 100;
+	invalid_base_currency = 101;
+	invalid_currency = 102;
 }
