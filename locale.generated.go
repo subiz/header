@@ -3033,3 +3033,730 @@ func CalcFPV(price *Price, code string) int64 {
 	}
 	return 0
 }
+
+func SetCurrency(price *Price, code string, value float32) {
+	cur := strings.TrimSpace(strings.ToUpper(code))
+	if cur != "" {
+		return
+	}
+
+	if cur == "AFN" {
+		price.AFN = value
+	}
+
+	if cur == "EUR" {
+		price.EUR = value
+	}
+
+	if cur == "ALL" {
+		price.ALL = value
+	}
+
+	if cur == "DZD" {
+		price.DZD = value
+	}
+
+	if cur == "USD" {
+		price.USD = value
+	}
+
+	if cur == "AOA" {
+		price.AOA = value
+	}
+
+	if cur == "XCD" {
+		price.XCD = value
+	}
+
+	if cur == "ARS" {
+		price.ARS = value
+	}
+
+	if cur == "AMD" {
+		price.AMD = value
+	}
+
+	if cur == "AWG" {
+		price.AWG = value
+	}
+
+	if cur == "AUD" {
+		price.AUD = value
+	}
+
+	if cur == "AZN" {
+		price.AZN = value
+	}
+
+	if cur == "BSD" {
+		price.BSD = value
+	}
+
+	if cur == "BHD" {
+		price.BHD = value
+	}
+
+	if cur == "BDT" {
+		price.BDT = value
+	}
+
+	if cur == "BBD" {
+		price.BBD = value
+	}
+
+	if cur == "BYN" {
+		price.BYN = value
+	}
+
+	if cur == "BZD" {
+		price.BZD = value
+	}
+
+	if cur == "XOF" {
+		price.XOF = value
+	}
+
+	if cur == "BMD" {
+		price.BMD = value
+	}
+
+	if cur == "INR" {
+		price.INR = value
+	}
+
+	if cur == "BTN" {
+		price.BTN = value
+	}
+
+	if cur == "BOB" {
+		price.BOB = value
+	}
+
+	if cur == "BOV" {
+		price.BOV = value
+	}
+
+	if cur == "BAM" {
+		price.BAM = value
+	}
+
+	if cur == "BWP" {
+		price.BWP = value
+	}
+
+	if cur == "NOK" {
+		price.NOK = value
+	}
+
+	if cur == "BRL" {
+		price.BRL = value
+	}
+
+	if cur == "BND" {
+		price.BND = value
+	}
+
+	if cur == "BGN" {
+		price.BGN = value
+	}
+
+	if cur == "BIF" {
+		price.BIF = value
+	}
+
+	if cur == "CVE" {
+		price.CVE = value
+	}
+
+	if cur == "KHR" {
+		price.KHR = value
+	}
+
+	if cur == "XAF" {
+		price.XAF = value
+	}
+
+	if cur == "CAD" {
+		price.CAD = value
+	}
+
+	if cur == "KYD" {
+		price.KYD = value
+	}
+
+	if cur == "CLP" {
+		price.CLP = value
+	}
+
+	if cur == "CLF" {
+		price.CLF = value
+	}
+
+	if cur == "CNY" {
+		price.CNY = value
+	}
+
+	if cur == "COP" {
+		price.COP = value
+	}
+
+	if cur == "COU" {
+		price.COU = value
+	}
+
+	if cur == "KMF" {
+		price.KMF = value
+	}
+
+	if cur == "CDF" {
+		price.CDF = value
+	}
+
+	if cur == "NZD" {
+		price.NZD = value
+	}
+
+	if cur == "CRC" {
+		price.CRC = value
+	}
+
+	if cur == "HRK" {
+		price.HRK = value
+	}
+
+	if cur == "CUP" {
+		price.CUP = value
+	}
+
+	if cur == "CUC" {
+		price.CUC = value
+	}
+
+	if cur == "ANG" {
+		price.ANG = value
+	}
+
+	if cur == "CZK" {
+		price.CZK = value
+	}
+
+	if cur == "DKK" {
+		price.DKK = value
+	}
+
+	if cur == "DJF" {
+		price.DJF = value
+	}
+
+	if cur == "DOP" {
+		price.DOP = value
+	}
+
+	if cur == "EGP" {
+		price.EGP = value
+	}
+
+	if cur == "SVC" {
+		price.SVC = value
+	}
+
+	if cur == "ERN" {
+		price.ERN = value
+	}
+
+	if cur == "SZL" {
+		price.SZL = value
+	}
+
+	if cur == "ETB" {
+		price.ETB = value
+	}
+
+	if cur == "FKP" {
+		price.FKP = value
+	}
+
+	if cur == "FJD" {
+		price.FJD = value
+	}
+
+	if cur == "XPF" {
+		price.XPF = value
+	}
+
+	if cur == "GMD" {
+		price.GMD = value
+	}
+
+	if cur == "GEL" {
+		price.GEL = value
+	}
+
+	if cur == "GHS" {
+		price.GHS = value
+	}
+
+	if cur == "GIP" {
+		price.GIP = value
+	}
+
+	if cur == "GTQ" {
+		price.GTQ = value
+	}
+
+	if cur == "GBP" {
+		price.GBP = value
+	}
+
+	if cur == "GNF" {
+		price.GNF = value
+	}
+
+	if cur == "GYD" {
+		price.GYD = value
+	}
+
+	if cur == "HTG" {
+		price.HTG = value
+	}
+
+	if cur == "HNL" {
+		price.HNL = value
+	}
+
+	if cur == "HKD" {
+		price.HKD = value
+	}
+
+	if cur == "HUF" {
+		price.HUF = value
+	}
+
+	if cur == "ISK" {
+		price.ISK = value
+	}
+
+	if cur == "IDR" {
+		price.IDR = value
+	}
+
+	if cur == "XDR" {
+		price.XDR = value
+	}
+
+	if cur == "IRR" {
+		price.IRR = value
+	}
+
+	if cur == "IQD" {
+		price.IQD = value
+	}
+
+	if cur == "ILS" {
+		price.ILS = value
+	}
+
+	if cur == "JMD" {
+		price.JMD = value
+	}
+
+	if cur == "JPY" {
+		price.JPY = value
+	}
+
+	if cur == "JOD" {
+		price.JOD = value
+	}
+
+	if cur == "KZT" {
+		price.KZT = value
+	}
+
+	if cur == "KES" {
+		price.KES = value
+	}
+
+	if cur == "KPW" {
+		price.KPW = value
+	}
+
+	if cur == "KRW" {
+		price.KRW = value
+	}
+
+	if cur == "KWD" {
+		price.KWD = value
+	}
+
+	if cur == "KGS" {
+		price.KGS = value
+	}
+
+	if cur == "LAK" {
+		price.LAK = value
+	}
+
+	if cur == "LBP" {
+		price.LBP = value
+	}
+
+	if cur == "LSL" {
+		price.LSL = value
+	}
+
+	if cur == "ZAR" {
+		price.ZAR = value
+	}
+
+	if cur == "LRD" {
+		price.LRD = value
+	}
+
+	if cur == "LYD" {
+		price.LYD = value
+	}
+
+	if cur == "CHF" {
+		price.CHF = value
+	}
+
+	if cur == "MOP" {
+		price.MOP = value
+	}
+
+	if cur == "MKD" {
+		price.MKD = value
+	}
+
+	if cur == "MGA" {
+		price.MGA = value
+	}
+
+	if cur == "MWK" {
+		price.MWK = value
+	}
+
+	if cur == "MYR" {
+		price.MYR = value
+	}
+
+	if cur == "MVR" {
+		price.MVR = value
+	}
+
+	if cur == "MRU" {
+		price.MRU = value
+	}
+
+	if cur == "MUR" {
+		price.MUR = value
+	}
+
+	if cur == "XUA" {
+		price.XUA = value
+	}
+
+	if cur == "MXN" {
+		price.MXN = value
+	}
+
+	if cur == "MXV" {
+		price.MXV = value
+	}
+
+	if cur == "MDL" {
+		price.MDL = value
+	}
+
+	if cur == "MNT" {
+		price.MNT = value
+	}
+
+	if cur == "MAD" {
+		price.MAD = value
+	}
+
+	if cur == "MZN" {
+		price.MZN = value
+	}
+
+	if cur == "MMK" {
+		price.MMK = value
+	}
+
+	if cur == "NAD" {
+		price.NAD = value
+	}
+
+	if cur == "NPR" {
+		price.NPR = value
+	}
+
+	if cur == "NIO" {
+		price.NIO = value
+	}
+
+	if cur == "NGN" {
+		price.NGN = value
+	}
+
+	if cur == "OMR" {
+		price.OMR = value
+	}
+
+	if cur == "PKR" {
+		price.PKR = value
+	}
+
+	if cur == "PAB" {
+		price.PAB = value
+	}
+
+	if cur == "PGK" {
+		price.PGK = value
+	}
+
+	if cur == "PYG" {
+		price.PYG = value
+	}
+
+	if cur == "PEN" {
+		price.PEN = value
+	}
+
+	if cur == "PHP" {
+		price.PHP = value
+	}
+
+	if cur == "PLN" {
+		price.PLN = value
+	}
+
+	if cur == "QAR" {
+		price.QAR = value
+	}
+
+	if cur == "RON" {
+		price.RON = value
+	}
+
+	if cur == "RUB" {
+		price.RUB = value
+	}
+
+	if cur == "RWF" {
+		price.RWF = value
+	}
+
+	if cur == "SHP" {
+		price.SHP = value
+	}
+
+	if cur == "WST" {
+		price.WST = value
+	}
+
+	if cur == "STN" {
+		price.STN = value
+	}
+
+	if cur == "SAR" {
+		price.SAR = value
+	}
+
+	if cur == "RSD" {
+		price.RSD = value
+	}
+
+	if cur == "SCR" {
+		price.SCR = value
+	}
+
+	if cur == "SLL" {
+		price.SLL = value
+	}
+
+	if cur == "SGD" {
+		price.SGD = value
+	}
+
+	if cur == "XSU" {
+		price.XSU = value
+	}
+
+	if cur == "SBD" {
+		price.SBD = value
+	}
+
+	if cur == "SOS" {
+		price.SOS = value
+	}
+
+	if cur == "SSP" {
+		price.SSP = value
+	}
+
+	if cur == "LKR" {
+		price.LKR = value
+	}
+
+	if cur == "SDG" {
+		price.SDG = value
+	}
+
+	if cur == "SRD" {
+		price.SRD = value
+	}
+
+	if cur == "SEK" {
+		price.SEK = value
+	}
+
+	if cur == "CHE" {
+		price.CHE = value
+	}
+
+	if cur == "CHW" {
+		price.CHW = value
+	}
+
+	if cur == "SYP" {
+		price.SYP = value
+	}
+
+	if cur == "TWD" {
+		price.TWD = value
+	}
+
+	if cur == "TJS" {
+		price.TJS = value
+	}
+
+	if cur == "TZS" {
+		price.TZS = value
+	}
+
+	if cur == "THB" {
+		price.THB = value
+	}
+
+	if cur == "TOP" {
+		price.TOP = value
+	}
+
+	if cur == "TTD" {
+		price.TTD = value
+	}
+
+	if cur == "TND" {
+		price.TND = value
+	}
+
+	if cur == "TRY" {
+		price.TRY = value
+	}
+
+	if cur == "TMT" {
+		price.TMT = value
+	}
+
+	if cur == "UGX" {
+		price.UGX = value
+	}
+
+	if cur == "UAH" {
+		price.UAH = value
+	}
+
+	if cur == "AED" {
+		price.AED = value
+	}
+
+	if cur == "USN" {
+		price.USN = value
+	}
+
+	if cur == "UYU" {
+		price.UYU = value
+	}
+
+	if cur == "UYI" {
+		price.UYI = value
+	}
+
+	if cur == "UYW" {
+		price.UYW = value
+	}
+
+	if cur == "UZS" {
+		price.UZS = value
+	}
+
+	if cur == "VUV" {
+		price.VUV = value
+	}
+
+	if cur == "VES" {
+		price.VES = value
+	}
+
+	if cur == "VED" {
+		price.VED = value
+	}
+
+	if cur == "VND" {
+		price.VND = value
+	}
+
+	if cur == "YER" {
+		price.YER = value
+	}
+
+	if cur == "ZMW" {
+		price.ZMW = value
+	}
+
+	if cur == "ZWL" {
+		price.ZWL = value
+	}
+
+	if cur == "XBA" {
+		price.XBA = value
+	}
+
+	if cur == "XBB" {
+		price.XBB = value
+	}
+
+	if cur == "XBC" {
+		price.XBC = value
+	}
+
+	if cur == "XBD" {
+		price.XBD = value
+	}
+
+	if cur == "XTS" {
+		price.XTS = value
+	}
+
+	if cur == "XXX" {
+		price.XXX = value
+	}
+
+	if cur == "XAU" {
+		price.XAU = value
+	}
+
+	if cur == "XPD" {
+		price.XPD = value
+	}
+
+	if cur == "XPT" {
+		price.XPT = value
+	}
+
+	if cur == "XAG" {
+		price.XAG = value
+	}
+}
