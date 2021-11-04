@@ -3635,7 +3635,7 @@ message ShopSetting {
 message Currency {
 	common.Context ctx = 1;
 	string account_id = 2;
-	// 	string id = 3;
+	string name = 3;
 	string code = 4;
 	string symbol = 5;
 	bool auto_sync = 6;
@@ -3648,6 +3648,7 @@ message Currency {
 	int64 updated = 9;
 	string updated_by = 10;
 	repeated CurrencyLogEntry logs = 11;
+	string format = 12;
 }
 
 message CurrencyLogEntry {

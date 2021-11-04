@@ -32,10 +32,13 @@ message ProductCollection {
 
 message PriceRule {
 	string feed_id = 4;
-	Price price = 5;
-	string currency = 6;
-	int64 from_count = 7;
-	int64 to_count = 8;
+	float price = 5;
+	int64 fpv_price = 6;
+	Price locale_price = 7;
+
+	string currency = 8;
+	int64 from_count = 9;
+	int64 to_count = 10;
 }
 
 message InventoryProduct {
@@ -58,8 +61,12 @@ message InventoryProduct {
 	string created_by = 22;
 	string updated_by = 23;
 
-	Price sold_price = 25;
-	int64 expiry_date = 26;
+	string sold_currency = 24;
+	float sold_price = 25;
+	int64 fpv_sold_price = 26;
+	Price locale_sold_price = 27;
+
+	int64 expiry_date = 30;
 }
 
 message OrderItem {
@@ -72,11 +79,16 @@ message OrderItem {
 	Product product = 11;
 	KV prop = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
 	string note = 15;
-	Price price = 16;
 
-  Price discount_amount = 20;
+	float price = 16;
+	int64 fpv_price = 17;
+	Price locale_price = 18;
 
-	float discount_percentage = 22;
+  float discount_amount = 20;
+	int64 fpv_discount_amount = 21;
+	Price locale_discount_amount = 22;
+
+	float discount_percentage = 23;
 }
 
 message ShippingAddress {
@@ -107,7 +119,10 @@ message ShippingInfo {
 	int64 shipping_dealine = 6; // unix ms
 	string instruction = 7;
 
-	Price fee = 10;
+	float fee = 10;
+	float fpv_fee = 11;
+	Price locale_fee = 12;
+
 	bool tax_included = 15;
 }
 
@@ -162,23 +177,36 @@ message Order {
 
 	repeated OrderItem items = 20;
 
-	Price subtotal = 21;
+	float subtotal = 21;
+	int64 fpv_subtotal = 22;
+	Price locale_subtotal = 23;
 
-	float tax_percentage = 23;
-	Price total = 24;
+	float tax_percentage = 24;
 
-	Price payment_made = 26;
+	float total = 25;
+	int64 fpv_total = 26;
+	Price locale_total = 27;
 
-	repeated OrderHistoryEntry history = 28;
+	float payment_made = 30;
+	int64 fpv_payment_made = 31;
+	Price locale_payment_made = 32;
 
-	string cancellation_note = 29;
-	string cancellation_code = 30; // typing_error, user_rejected
+	repeated OrderHistoryEntry history = 33;
 
-	string currency = 31; // empty => default
-	Price deposit = 32;
+	string cancellation_note = 34;
+	string cancellation_code = 35; // typing_error, user_rejected
 
-	Price discount_amount = 34;
-	float discount_percentage = 37;
+	string currency = 36; // empty => base currency
+
+	float deposit = 37;
+	int64 fpv_deposit = 38;
+	Price locale_deposit = 39;
+
+	float discount_amount = 40;
+	int64 fpv_discount_amount = 41;
+	Price locale_discount_amount = 42;
+
+	float discount_percentage = 43;
 }
 
 enum OrderStatusCode {
@@ -216,12 +244,14 @@ message Bill {
 	string order_id = 6;
 
 	string by = 7;
-	Price amount = 8;
+	float amount = 8;
+	int64 fpv_amount = 9;
+	Price locale_amount = 10;
 
-	int64 created = 10;
-	string description = 11;
+	int64 created = 20;
+	string description = 21;
 
-	string picture_url = 12;
+	string picture_url = 22;
 }
 
 enum CancelCode {
@@ -288,42 +318,44 @@ message Product {
 	// google: Manufacturer part number (MPN) is a series of numbers and letters that the manufacturer assigned to this product, in 70 characters or less.
 	string mpn = 26; // (shared)
 
-	repeated string images = 27; // (shared)
-	repeated string additional_images = 28; // (shared)
+	string image = 30;
+	repeated string profile_images = 31; // (shared)
+	repeated string additional_images = 32; // (shared)
 
-	repeated string videos = 29; // (shared)
-	repeated string additional_videos = 30; // (shared)
+	repeated string videos = 33; // (shared)
+	repeated string additional_videos = 34; // (shared)
 
-	string image = 60;
-	string note = 31; // (shared)
+	string note = 35; // (shared)
 
 	// shipping
-	bool requires_shipping = 32;
+	bool requires_shipping = 36;
 
-	int64 day_to_ship = 33;
-	float dimension_width = 34;
-	float dimension_height = 35;
-	float dimension_length = 36;
+	int64 day_to_ship = 37;
+	float dimension_width = 38;
+	float dimension_height = 39;
+	float dimension_length = 40;
 
-	float weight = 37;
-	string weight_unit = 38;
-	float grams = 39;
-	bool allow_preorder = 40;
-	bool taxable = 41; // (shared)
-	float tax_percentage = 58; // (shared)
+	float weight = 41;
+	string weight_unit = 42;
+	float grams = 43;
+	bool allow_preorder = 44;
+	bool taxable = 45; // (shared)
+	float tax_percentage = 46; // (shared)
 
-	string condition = 42; // (shared) new, refurbished, used
-	string visibility = 43; // (shared) published, staging, hidden, deleted
+	string condition = 47; // (shared) new, refurbished, used
+	string visibility = 48; // (shared) published, staging, hidden, deleted
 
-	string sku = 46;
-	string barcode = 47;
+	string sku = 49;
+	string barcode = 50;
 
-	Price price = 51;
+	float price = 51;
+	int64 fpv_price = 52;
+	Price locale_price = 53;
 
-	repeated PriceRule price_rules = 53; // (shared)
-	int64 stock = 54; //
+	repeated PriceRule price_rules = 54; // (shared)
+	int64 stock = 60; //
 
-	string source_id = 55;
+	string source_id = 61;
 }
 
 message ProductOption {
