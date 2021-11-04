@@ -319,7 +319,7 @@ message Product {
 	string mpn = 26; // (shared)
 
 	string image = 30;
-	repeated string profile_images = 31; // (shared)
+	repeated string images = 31; // (shared)
 	repeated string additional_images = 32; // (shared)
 
 	repeated string videos = 33; // (shared)
