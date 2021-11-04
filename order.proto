@@ -146,8 +146,8 @@ message OrdersRequest {
 	string user_id = 3; // list order by user
 	string status = 4; // list order by status
 
-	int64 created_from = 5;
-	int64 created_to = 6;
+	int64 created_hour_from = 5;
+	int64 created_hour_to = 6;
 
 	bool include_deleted = 7;
 
