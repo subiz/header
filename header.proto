@@ -3641,6 +3641,8 @@ message POS {
 	string name = 4;
 	string description = 5;
 
+	string address = 6;
+
 	int64 created = 11;
 	string created_by = 12;
 
