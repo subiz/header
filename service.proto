@@ -56,7 +56,7 @@ service AccountMgr {
 	// internal
 	rpc AutoSyncCurrency(header.Id) returns (header.Empty);
 
-	rpc ListPOSs(Ids) returns (header.POSes);
+	rpc ListPOSes(Id) returns (header.POSes);
 	rpc CreatePOS(header.POS) returns (header.POS);
 	rpc UpdatePOS(header.POS) returns (header.POS);
 	rpc DeletePOS(Id) returns (Empty);

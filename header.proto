@@ -3846,4 +3846,7 @@ enum E {
 	invalid_poll_token = 104;
 	dead_poll_connection = 105;
 	connection_not_found = 106;
+
+	pos_not_found = 107;
+	too_many_pos = 108;
 }

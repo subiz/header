@@ -163,8 +163,8 @@ var file_service_proto_rawDesc = []byte{
 	0x79, 0x12, 0x2d, 0x0a, 0x10, 0x41, 0x75, 0x74, 0x6f, 0x53, 0x79, 0x6e, 0x63, 0x43, 0x75, 0x72,
 	0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49,
 	0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79,
-	0x12, 0x26, 0x0a, 0x08, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x4f, 0x53, 0x73, 0x12, 0x0b, 0x2e, 0x68,
-	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x12, 0x26, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x4f, 0x53, 0x65, 0x73, 0x12, 0x0a, 0x2e,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
 	0x65, 0x72, 0x2e, 0x50, 0x4f, 0x53, 0x65, 0x73, 0x12, 0x25, 0x0a, 0x09, 0x43, 0x72, 0x65, 0x61,
 	0x74, 0x65, 0x50, 0x4f, 0x53, 0x12, 0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50,
 	0x4f, 0x53, 0x1a, 0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x4f, 0x53, 0x12,
@@ -1067,12 +1067,12 @@ var file_service_proto_goTypes = []interface{}{
 	(*Changelog)(nil),                         // 12: header.Changelog
 	(*ListChangelogsRequest)(nil),             // 13: header.ListChangelogsRequest
 	(*ShopSetting)(nil),                       // 14: header.ShopSetting
-	(*Ids)(nil),                               // 15: header.Ids
-	(*POS)(nil),                               // 16: header.POS
-	(*SearchRequest)(nil),                     // 17: header.SearchRequest
-	(*UserAlias)(nil),                         // 18: header.UserAlias
-	(*User)(nil),                              // 19: header.User
-	(*UserEventMetricsRequest)(nil),           // 20: header.UserEventMetricsRequest
+	(*POS)(nil),                               // 15: header.POS
+	(*SearchRequest)(nil),                     // 16: header.SearchRequest
+	(*UserAlias)(nil),                         // 17: header.UserAlias
+	(*User)(nil),                              // 18: header.User
+	(*UserEventMetricsRequest)(nil),           // 19: header.UserEventMetricsRequest
+	(*Ids)(nil),                               // 20: header.Ids
 	(*UserView)(nil),                          // 21: header.UserView
 	(*Label)(nil),                             // 22: header.Label
 	(*UserRequest)(nil),                       // 23: header.UserRequest
@@ -1282,18 +1282,18 @@ var file_service_proto_depIdxs = []int32{
 	14,  // 35: header.AccountMgr.UpdateShopSetting:input_type -> header.ShopSetting
 	1,   // 36: header.AccountMgr.ReadCurrency:input_type -> header.Id
 	1,   // 37: header.AccountMgr.AutoSyncCurrency:input_type -> header.Id
-	15,  // 38: header.AccountMgr.ListPOSs:input_type -> header.Ids
-	16,  // 39: header.AccountMgr.CreatePOS:input_type -> header.POS
-	16,  // 40: header.AccountMgr.UpdatePOS:input_type -> header.POS
+	1,   // 38: header.AccountMgr.ListPOSes:input_type -> header.Id
+	15,  // 39: header.AccountMgr.CreatePOS:input_type -> header.POS
+	15,  // 40: header.AccountMgr.UpdatePOS:input_type -> header.POS
 	1,   // 41: header.AccountMgr.DeletePOS:input_type -> header.Id
-	17,  // 42: header.UserMgr.SearchUsers:input_type -> header.SearchRequest
-	18,  // 43: header.UserMgr.MergeUser:input_type -> header.UserAlias
-	19,  // 44: header.UserMgr.CreateUser:input_type -> header.User
+	16,  // 42: header.UserMgr.SearchUsers:input_type -> header.SearchRequest
+	17,  // 43: header.UserMgr.MergeUser:input_type -> header.UserAlias
+	18,  // 44: header.UserMgr.CreateUser:input_type -> header.User
 	1,   // 45: header.UserMgr.CreateSbzUserByAgent:input_type -> header.Id
-	19,  // 46: header.UserMgr.UpdateUser:input_type -> header.User
+	18,  // 46: header.UserMgr.UpdateUser:input_type -> header.User
 	1,   // 47: header.UserMgr.ReadUser:input_type -> header.Id
-	20,  // 48: header.UserMgr.ReportUserEvents:input_type -> header.UserEventMetricsRequest
-	15,  // 49: header.UserMgr.MatchUsers:input_type -> header.Ids
+	19,  // 48: header.UserMgr.ReportUserEvents:input_type -> header.UserEventMetricsRequest
+	20,  // 49: header.UserMgr.MatchUsers:input_type -> header.Ids
 	21,  // 50: header.UserMgr.UpdateView:input_type -> header.UserView
 	21,  // 51: header.UserMgr.CreateView:input_type -> header.UserView
 	1,   // 52: header.UserMgr.DeleteView:input_type -> header.Id
@@ -1308,7 +1308,7 @@ var file_service_proto_depIdxs = []int32{
 	23,  // 61: header.UserMgr.AddUserLabel:input_type -> header.UserRequest
 	23,  // 62: header.UserMgr.RemoveUserLabel:input_type -> header.UserRequest
 	21,  // 63: header.UserPersist.ListUsersInView:input_type -> header.UserView
-	19,  // 64: header.UserPersist.UpdateUser:input_type -> header.User
+	18,  // 64: header.UserPersist.UpdateUser:input_type -> header.User
 	1,   // 65: header.UserPersist.ResyncUsers:input_type -> header.Id
 	24,  // 66: header.LiveMgr.SearchLocations:input_type -> header.LocationParams
 	25,  // 67: header.LiveMgr.FilterActiveUsers:input_type -> header.UserInfoParams
@@ -1342,14 +1342,14 @@ var file_service_proto_depIdxs = []int32{
 	1,   // 95: header.ConversationMgr.EndConversation:input_type -> header.Id
 	1,   // 96: header.ConversationMgr.GetConversation:input_type -> header.Id
 	40,  // 97: header.ConversationMgr.ListConversations:input_type -> header.ListConversationsRequest
-	15,  // 98: header.ConversationMgr.MatchConversations:input_type -> header.Ids
+	20,  // 98: header.ConversationMgr.MatchConversations:input_type -> header.Ids
 	41,  // 99: header.ConversationMgr.TagConversation:input_type -> header.TagRequest
 	41,  // 100: header.ConversationMgr.UntagConversation:input_type -> header.TagRequest
 	42,  // 101: header.ConversationMgr.JoinConversation:input_type -> header.ConversationMember
 	42,  // 102: header.ConversationMgr.LeftConversation:input_type -> header.ConversationMember
 	1,   // 103: header.ConversationMgr.Typing:input_type -> header.Id
 	43,  // 104: header.ConversationMgr.UpdateConversationInfo:input_type -> header.Conversation
-	17,  // 105: header.ConversationMgr.SearchConvos:input_type -> header.SearchRequest
+	16,  // 105: header.ConversationMgr.SearchConvos:input_type -> header.SearchRequest
 	43,  // 106: header.ConversationMgr.UpdateMuteConversation:input_type -> header.Conversation
 	42,  // 107: header.ConversationMgr.UpdateConversationMember:input_type -> header.ConversationMember
 	43,  // 108: header.ConversationMgr.UnwatchConversation:input_type -> header.Conversation
@@ -1495,7 +1495,7 @@ var file_service_proto_depIdxs = []int32{
 	102, // 248: header.Watchhttp.SummaryWebpageChecks:input_type -> header.WebpageReportRequest
 	4,   // 249: header.Holap.AppendAgentSet:input_type -> account.Agent
 	48,  // 250: header.Holap.AppendTagSet:input_type -> header.Tag
-	19,  // 251: header.Holap.UpdateUser:input_type -> header.User
+	18,  // 251: header.Holap.UpdateUser:input_type -> header.User
 	43,  // 252: header.Holap.UpdateConversation:input_type -> header.Conversation
 	38,  // 253: header.Holap.OnConversationEvent:input_type -> header.Event
 	103, // 254: header.Holap.FreeAccount:input_type -> header.AccountImage
@@ -1504,25 +1504,25 @@ var file_service_proto_depIdxs = []int32{
 	104, // 257: header.Holap.ListUserIds:input_type -> header.UserMetricsRequest
 	105, // 258: header.Holap.ListConversationIds:input_type -> header.ConversationMetricsRequest
 	106, // 259: header.Holap.ReportAgent:input_type -> header.AgentMetricsRequest
-	15,  // 260: header.Holap.ListChannelTouchpoints:input_type -> header.Ids
-	20,  // 261: header.Holap.ReportUserEvent:input_type -> header.UserEventMetricsRequest
+	20,  // 260: header.Holap.ListChannelTouchpoints:input_type -> header.Ids
+	19,  // 261: header.Holap.ReportUserEvent:input_type -> header.UserEventMetricsRequest
 	107, // 262: header.Proder.ReadProduct:input_type -> header.Product
 	107, // 263: header.Proder.CreateProduct:input_type -> header.Product
 	107, // 264: header.Proder.UpdateProduct:input_type -> header.Product
 	1,   // 265: header.Proder.DeleteProduct:input_type -> header.Id
 	108, // 266: header.Proder.ListProducts:input_type -> header.ProductsRequest
-	15,  // 267: header.Proder.ListProductIds:input_type -> header.Ids
+	20,  // 267: header.Proder.ListProductIds:input_type -> header.Ids
 	108, // 268: header.Proder.ListGroupedProducts:input_type -> header.ProductsRequest
-	15,  // 269: header.Proder.ListProductCollections:input_type -> header.Ids
+	20,  // 269: header.Proder.ListProductCollections:input_type -> header.Ids
 	109, // 270: header.Proder.CreateProductCollection:input_type -> header.ProductCollection
 	109, // 271: header.Proder.UpdateProductCollection:input_type -> header.ProductCollection
 	1,   // 272: header.Proder.DeleteProductCollection:input_type -> header.Id
-	15,  // 273: header.Proder.ListProductFeeds:input_type -> header.Ids
+	20,  // 273: header.Proder.ListProductFeeds:input_type -> header.Ids
 	110, // 274: header.Proder.CreateProductFeed:input_type -> header.ProductFeed
 	110, // 275: header.Proder.UpdateProductFeed:input_type -> header.ProductFeed
 	1,   // 276: header.Proder.DeleteProductFeed:input_type -> header.Id
-	15,  // 277: header.Proder.ListProductCategories:input_type -> header.Ids
-	15,  // 278: header.Proder.ListProductProps:input_type -> header.Ids
+	20,  // 277: header.Proder.ListProductCategories:input_type -> header.Ids
+	20,  // 278: header.Proder.ListProductProps:input_type -> header.Ids
 	1,   // 279: header.Proder.ReadOrder:input_type -> header.Id
 	111, // 280: header.Proder.CreateOrder:input_type -> header.Order
 	111, // 281: header.Proder.UpdateOrder:input_type -> header.Order
@@ -1568,16 +1568,16 @@ var file_service_proto_depIdxs = []int32{
 	14,  // 321: header.AccountMgr.UpdateShopSetting:output_type -> header.ShopSetting
 	120, // 322: header.AccountMgr.ReadCurrency:output_type -> header.Currency
 	32,  // 323: header.AccountMgr.AutoSyncCurrency:output_type -> header.Empty
-	121, // 324: header.AccountMgr.ListPOSs:output_type -> header.POSes
-	16,  // 325: header.AccountMgr.CreatePOS:output_type -> header.POS
-	16,  // 326: header.AccountMgr.UpdatePOS:output_type -> header.POS
+	121, // 324: header.AccountMgr.ListPOSes:output_type -> header.POSes
+	15,  // 325: header.AccountMgr.CreatePOS:output_type -> header.POS
+	15,  // 326: header.AccountMgr.UpdatePOS:output_type -> header.POS
 	32,  // 327: header.AccountMgr.DeletePOS:output_type -> header.Empty
 	122, // 328: header.UserMgr.SearchUsers:output_type -> header.Users
-	18,  // 329: header.UserMgr.MergeUser:output_type -> header.UserAlias
+	17,  // 329: header.UserMgr.MergeUser:output_type -> header.UserAlias
 	1,   // 330: header.UserMgr.CreateUser:output_type -> header.Id
 	1,   // 331: header.UserMgr.CreateSbzUserByAgent:output_type -> header.Id
 	1,   // 332: header.UserMgr.UpdateUser:output_type -> header.Id
-	19,  // 333: header.UserMgr.ReadUser:output_type -> header.User
+	18,  // 333: header.UserMgr.ReadUser:output_type -> header.User
 	123, // 334: header.UserMgr.ReportUserEvents:output_type -> header.UserEventMetrics
 	122, // 335: header.UserMgr.MatchUsers:output_type -> header.Users
 	21,  // 336: header.UserMgr.UpdateView:output_type -> header.UserView
@@ -1787,17 +1787,17 @@ var file_service_proto_depIdxs = []int32{
 	32,  // 540: header.Holap.FreeAccount:output_type -> header.Empty
 	181, // 541: header.Holap.ReportUser:output_type -> header.UserMetrics
 	182, // 542: header.Holap.ReportConversation:output_type -> header.ConversationMetrics
-	15,  // 543: header.Holap.ListUserIds:output_type -> header.Ids
+	20,  // 543: header.Holap.ListUserIds:output_type -> header.Ids
 	139, // 544: header.Holap.ListConversationIds:output_type -> header.Conversations
 	183, // 545: header.Holap.ReportAgent:output_type -> header.AgentMetrics
-	15,  // 546: header.Holap.ListChannelTouchpoints:output_type -> header.Ids
+	20,  // 546: header.Holap.ListChannelTouchpoints:output_type -> header.Ids
 	123, // 547: header.Holap.ReportUserEvent:output_type -> header.UserEventMetrics
 	107, // 548: header.Proder.ReadProduct:output_type -> header.Product
 	107, // 549: header.Proder.CreateProduct:output_type -> header.Product
 	107, // 550: header.Proder.UpdateProduct:output_type -> header.Product
 	32,  // 551: header.Proder.DeleteProduct:output_type -> header.Empty
 	184, // 552: header.Proder.ListProducts:output_type -> header.Products
-	15,  // 553: header.Proder.ListProductIds:output_type -> header.Ids
+	20,  // 553: header.Proder.ListProductIds:output_type -> header.Ids
 	184, // 554: header.Proder.ListGroupedProducts:output_type -> header.Products
 	185, // 555: header.Proder.ListProductCollections:output_type -> header.ProductCollections
 	109, // 556: header.Proder.CreateProductCollection:output_type -> header.ProductCollection
@@ -1900,7 +1900,7 @@ type AccountMgrClient interface {
 	ReadCurrency(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Currency, error)
 	// internal
 	AutoSyncCurrency(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ListPOSs(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*POSes, error)
+	ListPOSes(ctx context.Context, in *Id, opts ...grpc.CallOption) (*POSes, error)
 	CreatePOS(ctx context.Context, in *POS, opts ...grpc.CallOption) (*POS, error)
 	UpdatePOS(ctx context.Context, in *POS, opts ...grpc.CallOption) (*POS, error)
 	DeletePOS(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -2256,9 +2256,9 @@ func (c *accountMgrClient) AutoSyncCurrency(ctx context.Context, in *Id, opts ..
 	return out, nil
 }
 
-func (c *accountMgrClient) ListPOSs(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*POSes, error) {
+func (c *accountMgrClient) ListPOSes(ctx context.Context, in *Id, opts ...grpc.CallOption) (*POSes, error) {
 	out := new(POSes)
-	err := c.cc.Invoke(ctx, "/header.AccountMgr/ListPOSs", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/ListPOSes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2333,7 +2333,7 @@ type AccountMgrServer interface {
 	ReadCurrency(context.Context, *Id) (*Currency, error)
 	// internal
 	AutoSyncCurrency(context.Context, *Id) (*Empty, error)
-	ListPOSs(context.Context, *Ids) (*POSes, error)
+	ListPOSes(context.Context, *Id) (*POSes, error)
 	CreatePOS(context.Context, *POS) (*POS, error)
 	UpdatePOS(context.Context, *POS) (*POS, error)
 	DeletePOS(context.Context, *Id) (*Empty, error)
@@ -2457,8 +2457,8 @@ func (*UnimplementedAccountMgrServer) ReadCurrency(context.Context, *Id) (*Curre
 func (*UnimplementedAccountMgrServer) AutoSyncCurrency(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AutoSyncCurrency not implemented")
 }
-func (*UnimplementedAccountMgrServer) ListPOSs(context.Context, *Ids) (*POSes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPOSs not implemented")
+func (*UnimplementedAccountMgrServer) ListPOSes(context.Context, *Id) (*POSes, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPOSes not implemented")
 }
 func (*UnimplementedAccountMgrServer) CreatePOS(context.Context, *POS) (*POS, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePOS not implemented")
@@ -3158,20 +3158,20 @@ func _AccountMgr_AutoSyncCurrency_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_ListPOSs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ids)
+func _AccountMgr_ListPOSes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountMgrServer).ListPOSs(ctx, in)
+		return srv.(AccountMgrServer).ListPOSes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.AccountMgr/ListPOSs",
+		FullMethod: "/header.AccountMgr/ListPOSes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).ListPOSs(ctx, req.(*Ids))
+		return srv.(AccountMgrServer).ListPOSes(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3387,8 +3387,8 @@ var _AccountMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _AccountMgr_AutoSyncCurrency_Handler,
 		},
 		{
-			MethodName: "ListPOSs",
-			Handler:    _AccountMgr_ListPOSs_Handler,
+			MethodName: "ListPOSes",
+			Handler:    _AccountMgr_ListPOSes_Handler,
 		},
 		{
 			MethodName: "CreatePOS",
