@@ -77,6 +77,8 @@ message OrderItem {
 	string image_url = 7;
 	int32 quantity = 10;
 	Product product = 11;
+	string pos_id = 12;
+
 	KV prop = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
 	string note = 15;
 
@@ -210,6 +212,7 @@ message Order {
 	Price locale_discount_amount = 42;
 
 	float discount_percentage = 43;
+	string pos_id = 44;
 }
 
 enum OrderStatusCode {
@@ -359,6 +362,20 @@ message Product {
 	int64 stock = 60; //
 
 	string source_id = 61;
+
+	bool has_inventory = 62;
+	repeated ProductInventory inventories = 63;
+}
+
+message ProductInventory {
+	string pos_id = 4;
+	string barcode = 5;
+
+	float price = 6;
+	int64 fpv_price = 7;
+	Price locale_price = 8;
+
+	int64 stock = 9; //
 }
 
 message ProductOption {

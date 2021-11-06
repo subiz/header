@@ -3630,6 +3630,28 @@ message ShopSetting {
 	repeated Currency supported_currencies = 6;
 	int64 updated = 8;
 	string updated_by = 9;
+
+	repeated POS poses = 10;
+}
+
+message POS {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	string description = 5;
+
+	int64 created = 11;
+	string created_by = 12;
+
+	int64 updated = 13;
+	string updated_by = 14;
+}
+
+message POSes {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated POS poses = 3;
 }
 
 message Currency {
