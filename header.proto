@@ -3632,6 +3632,7 @@ message ShopSetting {
 	string updated_by = 9;
 
 	repeated POS poses = 10;
+	repeated Tax taxes = 11;
 }
 
 message POS {
@@ -3851,4 +3852,7 @@ enum E {
 
 	pos_not_found = 107;
 	too_many_pos = 108;
+
+	tax_not_found = 109;
+	too_many_tax = 110;
 }
