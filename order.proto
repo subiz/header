@@ -120,6 +120,8 @@ message ShippingAddress {
 	string instruction = 18;
 	float lng = 19;
 	float lat = 20;
+
+	bool is_default = 21;
 }
 
 message ShippingInfo {
@@ -498,12 +500,11 @@ message ProductProps {
 	string anchor = 5;
 }
 
-
 message Tax {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 4;
-	string name = 5;
+	header.I18nString name = 5;
 	int64 percentage = 6; // x100 e.g: 20% => 20
 
 	// group, tax, compound

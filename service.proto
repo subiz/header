@@ -65,6 +65,7 @@ service AccountMgr {
 	rpc CreateTax(header.Tax) returns (header.Tax);
 	rpc UpdateTax(header.Tax) returns (header.Tax);
 	rpc DeleteTax(Id) returns (Empty);
+	rpc MakeDefaultTax(Id) returns (Empty);
 }
 
 // user services
