@@ -76,7 +76,7 @@ message OrderItem {
 	string description = 6;
 	string image_url = 7;
 	int32 quantity = 10;
-	Product product = 11;
+	Product product = 11; // copy
 	string pos_id = 12;
 
 	KV prop = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
@@ -91,6 +91,8 @@ message OrderItem {
 	Price locale_discount_amount = 22;
 
 	float discount_percentage = 23;
+
+	Tax tax = 24; // copy
 }
 
 message ShippingAddress {
@@ -194,8 +196,6 @@ message Order {
 	float subtotal = 21;
 	int64 fpv_subtotal = 22;
 	Price locale_subtotal = 23;
-
-	Tax tax = 24;
 
 	float total = 25;
 	int64 fpv_total = 26;
