@@ -3331,6 +3331,7 @@ enum RealtimeType {
 	currency_updated = 139;
 
 	shop_setting_updated = 140;
+	order_event_created = 141;
 }
 
 // TODO: remove after remove old dashboard
@@ -3765,6 +3766,7 @@ message OrderItem {
 	float discount_percentage = 23;
 
 	string pos_id = 24;
+	Tax tax = 25; // (shared)
 }
 
 message ShippingAddress {
@@ -3806,6 +3808,7 @@ message ShippingInfo {
 	float fpv_fee = 11;
 	Price locale_fee = 12;
 
+	string note = 13;
 	Tax tax = 16;
 }
 
@@ -3959,15 +3962,22 @@ enum CancelCode {
 
 enum OrderStatusEventType {
 	payment_made = 0;
+	status_updated = 1;
+	commented = 2;
 }
 
 message OrderHistoryEntry {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string order_id = 3;
+	string id = 4;
+
 	int64 created = 5;
 	string by = 6; // system
 	string type = 7;
-	string note = 8;
 
 	Bill bill = 9;
+	Message message = 10;
 }
 
 message Product {

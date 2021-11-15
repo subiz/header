@@ -441,6 +441,7 @@ service Proder {
 
 	rpc MakePayment(header.Bill) returns (header.Bill);
 	rpc DeleteOrderHistoryEntry(header.Id) returns (header.Empty);
+	rpc CreateOrderEvent(header.OrderHistoryEntry) returns (header.OrderHistoryEntry);
 
 	rpc ListUserOrders(header.Id) returns (header.Order);
 }
