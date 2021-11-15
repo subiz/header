@@ -8,7 +8,6 @@ import "payment.proto";
 import "noti5.proto";
 import "account.proto";
 import "header.proto";
-import "order.proto";
 
 service AccountMgr {
 	rpc CreateGroup(account.AgentGroup) returns (account.AgentGroup);
@@ -442,4 +441,6 @@ service Proder {
 
 	rpc MakePayment(header.Bill) returns (header.Bill);
 	rpc DeleteOrderHistoryEntry(header.Id) returns (header.Empty);
+
+	rpc ListUserOrders(header.Id) returns (header.Order);
 }
