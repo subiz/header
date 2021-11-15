@@ -17,6 +17,7 @@ message DashboardAgent {
 	repeated string user_view_order_by = 15; // +attr:fullname, -attr:email
 	repeated string order_display_fields = 16;
 	repeated string order_display_order_by = 17;
+	optional string default_pos = 18;
 }
 
 message Agent {

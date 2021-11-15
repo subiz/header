@@ -3839,6 +3839,9 @@ message OrdersRequest {
 
 	int32 limit = 8;
 	string anchor = 9;
+
+	repeated string ids = 10;
+	repeated int64 modifieds = 11;
 }
 
 message Order {
