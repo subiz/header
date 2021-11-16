@@ -3763,7 +3763,7 @@ message OrderItem {
 	int64 fpv_discount_amount = 21;
 	Price locale_discount_amount = 22;
 
-	float discount_percentage = 23;
+	int64 discount_percentage = 23;  // 1234 => 12.34% = 0.1234
 
 	string pos_id = 24;
 	Tax tax = 25; // (shared)
@@ -3899,7 +3899,10 @@ message Order {
 	int64 fpv_discount_amount = 41;
 	Price locale_discount_amount = 42;
 
-	float discount_percentage = 43;
+	int64 discount_percentage = 43; // 1234 => 12.34% = 0.1234
+	string discount_type = 51; // amount || percentage
+	bool discount_tax_included = 52;
+
 	string pos_id = 44;
 
 	string channel = 45; // messenger, zalo
@@ -3909,6 +3912,13 @@ message Order {
 
 	string sale_person = 48;
 	User user = 50;
+
+	string adjustment_description = 54;
+	float adjustment = 55;
+	int64 fpv_adjustment = 56;
+	Price locale_adjustment = 57;
+
+	map<string, string> custom_field = 58;
 }
 
 enum OrderStatusCode {
@@ -4192,7 +4202,7 @@ message Tax {
 	string account_id = 2;
 	string id = 4;
 	header.I18nString name = 5;
-	int64 percentage = 6; // x100 e.g: 20% => 20
+	int64 percentage = 6; // x10000 e.g: 20% => 2000
 
 	// group, tax, compound
 	string type = 7;
