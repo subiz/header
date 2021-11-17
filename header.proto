@@ -3629,8 +3629,9 @@ message PushNoti {
 message ShopSetting {
 	common.Context ctx = 1;
 	string account_id = 2;
-	float tax_percentage = 4;
-	repeated Currency supported_currencies = 6;
+
+	repeated Currency other_currencies = 6;
+
 	int64 updated = 8;
 	string updated_by = 9;
 
@@ -3654,6 +3655,10 @@ message POS {
 	string updated_by = 14;
 
 	int64 deleted = 15;
+
+	string district = 16;
+	string region = 17; // city
+	string country = 18;
 }
 
 message POSes {

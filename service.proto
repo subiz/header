@@ -99,9 +99,9 @@ service UserMgr {
 
 	rpc CreateShippingAddress(ShippingAddress) returns (ShippingAddress);
 	rpc UpdateShippingAddress(ShippingAddress) returns (ShippingAddress);
-	rpc RemoveShippingAddress(Id) returns (Empty);
+	rpc RemoveShippingAddress(ShippingAddress) returns (Empty);
 	rpc ListShippingAddress(Id) returns (User);
-	rpc MakeDefaultShippingAddress(Id) returns (Empty);
+	rpc MakeDefaultShippingAddress(ShippingAddress) returns (Empty);
 }
 
 service UserPersist {
