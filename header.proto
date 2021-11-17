@@ -3649,6 +3649,8 @@ message POS {
 
 	int64 updated = 13;
 	string updated_by = 14;
+
+	int64 deleted = 15;
 }
 
 message POSes {
@@ -3766,7 +3768,10 @@ message OrderItem {
 	int64 discount_percentage = 23;  // 1234 => 12.34% = 0.1234
 
 	string pos_id = 24;
-	Tax tax = 25; // (shared)
+	Tax tax = 25;
+
+	string discount_type = 26;
+	bool discount_before_tax = 27;
 }
 
 message ShippingAddress {
@@ -3901,7 +3906,7 @@ message Order {
 
 	int64 discount_percentage = 43; // 1234 => 12.34% = 0.1234
 	string discount_type = 51; // amount || percentage
-	bool discount_tax_included = 52;
+	bool discount_before_tax = 52;
 
 	string pos_id = 44;
 
