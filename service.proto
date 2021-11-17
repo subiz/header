@@ -96,6 +96,12 @@ service UserMgr {
 	rpc RemoveLeadOwner(UserRequest) returns (Empty);
 	rpc AddUserLabel(UserRequest) returns (Empty);
 	rpc RemoveUserLabel(UserRequest) returns (Empty);
+
+	rpc CreateShippingAddress(ShippingAddress) returns (ShippingAddress);
+	rpc UpdateShippingAddress(ShippingAddress) returns (ShippingAddress);
+	rpc RemoveShippingAddress(Id) returns (Empty);
+	rpc ListShippingAddress(Id) returns (User);
+	rpc MakeDefaultShippingAddress(Id) returns (Empty);
 }
 
 service UserPersist {

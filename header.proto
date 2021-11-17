@@ -679,6 +679,7 @@ message Event {
 		Order order = 60;
 		Currency currency = 61;
 		ShopSetting shop_setting = 62;
+		ShippingAddress shipping_address = 63;
 	}
 	Data data = 20;
 }
@@ -3332,6 +3333,8 @@ enum RealtimeType {
 
 	shop_setting_updated = 140;
 	order_event_created = 141;
+
+	shipping_address_updated = 142;
 }
 
 // TODO: remove after remove old dashboard
@@ -4400,4 +4403,7 @@ enum E {
 
 	tax_not_found = 109;
 	too_many_tax = 110;
+
+	too_many_shipping_address = 111;
+	shipping_address_not_found = 112;
 }
