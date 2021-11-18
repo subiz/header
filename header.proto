@@ -3885,17 +3885,17 @@ message Order {
 
 	repeated OrderItem items = 20;
 
-	float subtotal = 21;
-	int64 fpv_subtotal = 22;
-	Price locale_subtotal = 23;
+	float subtotal = 21; // computed, override value
+	int64 fpv_subtotal = 22; // computed, override value
+	Price locale_subtotal = 23; // computed, override value
 
-	float total = 25;
-	int64 fpv_total = 26;
-	Price locale_total = 27;
+	float total = 25; // computed, override value
+	int64 fpv_total = 26; // computed, override value
+	Price locale_total = 27; // computed, override value
 
-	float payment_made = 30;
-	int64 fpv_payment_made = 31;
-	Price locale_payment_made = 32;
+	float payment_made = 30; // computed, override value
+	int64 fpv_payment_made = 31; // computed, override value
+	Price locale_payment_made = 32; // computed, override value
 
 	repeated OrderHistoryEntry history = 33;
 
@@ -3924,7 +3924,7 @@ message Order {
 	repeated string releated_conversations = 47;
 
 	string sale_person = 48;
-	User user = 50;
+	User user = 50; // keep session and attribute
 
 	string adjustment_description = 54;
 	float adjustment = 55;
@@ -3932,10 +3932,14 @@ message Order {
 	Price locale_adjustment = 57;
 
 	map<string, string> custom_field = 58;
+
+	bool is_draft = 59;
+
+	repeated Bill bills = 62;
 }
 
 enum OrderStatusCode {
-	draft = 0;
+	draft = 0; // dont use, use order.is_draft
 	queueing = 1;	// Chờ in
 	canceled = 2; // Đã hủy
 	complete = 3; // Đơn hàng đã hoàn thành
