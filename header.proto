@@ -3856,6 +3856,7 @@ message OrdersRequest {
 	repeated string ids = 10;
 	repeated int64 modifieds = 11;
 	string query = 12;
+	bool is_draft = 13;
 }
 
 message Order {
