@@ -3830,9 +3830,17 @@ message PaymentInfo {
 	string description = 5; //  "Thanh toán tiền mặt khi nhận hàng"
 }
 
+message OrderMetric {
+	string account_id = 2;
+	string status = 3;
+
+	int64 order_count = 65;
+}
+
 message Orders {
 	common.Context ctx = 1;
 
+	repeated OrderMetric metrics = 3;
 	repeated Order orders = 4;
 	string anchor = 5;
 	int64 total = 6;
@@ -3857,6 +3865,9 @@ message OrdersRequest {
 	repeated int64 modifieds = 11;
 	string query = 12;
 	bool is_draft = 13;
+	string payment_status = 14;
+	repeated string pos_ids = 15;
+	repeated string agent_ids = 16; // created by
 }
 
 message Order {
