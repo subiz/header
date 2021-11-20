@@ -680,6 +680,7 @@ message Event {
 		Currency currency = 61;
 		ShopSetting shop_setting = 62;
 		ShippingAddress shipping_address = 63;
+		OrderHistoryEntry order_history_entry = 64;
 	}
 	Data data = 20;
 }
@@ -3335,6 +3336,8 @@ enum RealtimeType {
 	order_event_created = 141;
 
 	shipping_address_updated = 142;
+
+	order_history_updated = 143;
 }
 
 // TODO: remove after remove old dashboard
@@ -3882,6 +3885,7 @@ message Order {
 
 	string note = 7;
 	int64 due_date = 8;
+	string due_date_term = 9; // net30 net7
 
 	// confirmed, processing, processed, shipping, fullfilled
 	//  (see OrderStatusCode)
@@ -3985,14 +3989,16 @@ message Bill {
 	string id = 3;
 
 	string user_id = 5;
-	string order_id = 6;
+	string by = 6;
+	int64 created = 7;
 
-	string by = 7;
-	float amount = 8;
-	int64 fpv_amount = 9;
-	Price locale_amount = 10;
+	string method = 8; // manually
+	string order_id = 10;
 
-	int64 created = 20;
+	float amount = 12;
+	int64 fpv_amount = 13;
+	Price locale_amount = 14;
+
 	string description = 21;
 
 	string picture_url = 22;
@@ -4006,8 +4012,14 @@ enum CancelCode {
 
 enum OrderStatusEventType {
 	payment_made = 0;
-	status_updated = 1;
-	commented = 2;
+	payment_deleted = 1;
+	status_updated = 2;
+
+	comment_added = 3;
+	comment_deleted = 4;
+	comment_updated = 5;
+
+	content_updated = 6;
 }
 
 message OrderHistoryEntry {
@@ -4021,7 +4033,14 @@ message OrderHistoryEntry {
 	string type = 7;
 
 	Bill bill = 9;
-	Message message = 10;
+	Message comment = 10;
+	OrderStatusUpdate status = 11;
+	Order content = 12;
+}
+
+message OrderStatusUpdate {
+	string from_status = 3;
+	string to_status = 4;
 }
 
 message Product {
