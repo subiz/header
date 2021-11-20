@@ -451,5 +451,5 @@ service Proder {
 
 	rpc AddOrderComment(header.OrderHistoryEntry) returns (header.OrderHistoryEntry);
 	rpc EditOrderComment(header.OrderHistoryEntry) returns (header.OrderHistoryEntry);
-	rpc DeleteOrderComment(header.Message) returns (header.Empty);
+	rpc DeleteOrderComment(header.Id) returns (header.Empty);
 }

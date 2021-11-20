@@ -3887,11 +3887,11 @@ message Order {
 	int64 due_date = 8;
 	string due_date_term = 9; // net30 net7
 
-	// confirmed, processing, processed, shipping, fullfilled
+	// new, confirmed, processing, shipping, fullfilled, canceled, hold
 	//  (see OrderStatusCode)
 	string status = 10;
 
-	// unpaid, paid
+	// unpaid, paid, // computed using total and payment_made
 	string payment_status = 11;
 
 	int64 created = 12;
@@ -3951,8 +3951,6 @@ message Order {
 	map<string, string> custom_field = 58;
 
 	bool is_draft = 59;
-
-	repeated Bill bills = 62;
 }
 
 enum OrderStatusCode {
