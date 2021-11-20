@@ -3833,6 +3833,7 @@ message PaymentInfo {
 message OrderMetric {
 	string account_id = 2;
 	string status = 3;
+	string payment_status = 4;
 
 	int64 order_count = 65;
 }
