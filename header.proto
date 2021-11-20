@@ -680,7 +680,9 @@ message Event {
 		Currency currency = 61;
 		ShopSetting shop_setting = 62;
 		ShippingAddress shipping_address = 63;
-		OrderHistoryEntry order_history_entry = 64;
+		OrderStatusUpdated order_status = 65;
+		Bill bill = 66;
+		Order order_from = 67;
 	}
 	Data data = 20;
 }
@@ -1208,6 +1210,7 @@ message Conversations {
 message Message {
 	common.Context ctx = 1;
 	string account_id = 5;
+	string order_id = 6;
 	string conversation_id = 14;
 	string id = 11;
 	string text = 2;
@@ -3337,7 +3340,15 @@ enum RealtimeType {
 
 	shipping_address_updated = 142;
 
-	order_history_updated = 143;
+	order_payment_made = 145; // data.bill
+	order_payment_deleted = 146; // data.bill
+	order_status_updated = 147; // data.order_status
+
+	order_comment_added = 149; // data.message
+	order_comment_deleted = 150; // data.message
+	order_comment_updated = 151; // data.message
+
+	order_event_updated = 152; // data.event
 }
 
 // TODO: remove after remove old dashboard
@@ -3696,8 +3707,6 @@ message CurrencyLogEntry {
 	string updated_by = 6;
 }
 
-
-
 message ProductCollections {
 	common.Context ctx = 1;
 	repeated ProductCollection product_collections = 2;
@@ -3914,7 +3923,7 @@ message Order {
 	int64 fpv_payment_made = 31; // computed, override value
 	Price locale_payment_made = 32; // computed, override value
 
-	repeated OrderHistoryEntry history = 33;
+	repeated Event events = 33;
 
 	string cancellation_note = 34;
 	string cancellation_code = 35; // typing_error, user_rejected
@@ -3985,13 +3994,13 @@ message Bill {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
+	string order_id = 4;
 
 	string user_id = 5;
 	string by = 6;
 	int64 created = 7;
 
 	string method = 8; // manually
-	string order_id = 10;
 
 	float amount = 12;
 	int64 fpv_amount = 13;
@@ -4008,37 +4017,13 @@ enum CancelCode {
 	user_rejected = 2;
 }
 
-enum OrderStatusEventType {
-	payment_made = 0;
-	payment_deleted = 1;
-	status_updated = 2;
-
-	comment_added = 3;
-	comment_deleted = 4;
-	comment_updated = 5;
-
-	content_updated = 6;
-}
-
-message OrderHistoryEntry {
+message OrderStatusUpdated {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string order_id = 3;
-	string id = 4;
 
-	int64 created = 5;
-	string by = 6; // system
-	string type = 7;
-
-	Bill bill = 9;
-	Message comment = 10;
-	OrderStatusUpdate status = 11;
-	Order content = 12;
-}
-
-message OrderStatusUpdate {
-	string from_status = 3;
-	string to_status = 4;
+	string order_id = 5;
+	string status_from = 6;
+	string status_to = 7;
 }
 
 message Product {

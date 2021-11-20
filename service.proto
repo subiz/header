@@ -446,10 +446,11 @@ service Proder {
 	rpc ListOrders(header.OrdersRequest) returns (header.Orders);
 	rpc CountOrders(header.OrdersRequest) returns (header.Orders);
 
-	rpc MakeOrderPayment(header.Bill) returns (header.Bill);
-	rpc DeleteOrderPayment(header.Id) returns (header.Bill);
-
-	rpc AddOrderComment(header.OrderHistoryEntry) returns (header.OrderHistoryEntry);
-	rpc EditOrderComment(header.OrderHistoryEntry) returns (header.OrderHistoryEntry);
+	// fire order_updated, order_event_updated
+	rpc MakeOrderPayment(header.Bill) returns (header.Event);
+	rpc DeleteOrderPayment(header.Id) returns (header.Empty);
+	rpc AddOrderComment(header.Event) returns (header.Event);
+	rpc EditOrderComment(header.Event) returns (header.Event);
 	rpc DeleteOrderComment(header.Id) returns (header.Empty);
+	rpc ListOrderEvents(header.Id) returns (header.Events);
 }
