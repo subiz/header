@@ -3881,7 +3881,7 @@ message OrdersRequest {
 	bool is_draft = 13;
 	string payment_status = 14;
 	repeated string pos_ids = 15;
-	repeated string agent_ids = 16; // created by
+	repeated string salesperson = 16; // agent ids
 }
 
 message Order {
@@ -3949,7 +3949,7 @@ message Order {
 
 	repeated string releated_conversations = 47;
 
-	string sale_person = 48;
+	string salesperson = 48;
 	User user = 50; // keep session and attribute
 
 	string adjustment_description = 54;
@@ -3963,7 +3963,7 @@ message Order {
 }
 
 enum OrderStatusCode {
-	draft = 0; // dont use, use order.is_draft
+	new = 0; // user created
 	queueing = 1;	// Chờ in
 	canceled = 2; // Đã hủy
 	complete = 3; // Đơn hàng đã hoàn thành
@@ -3988,6 +3988,7 @@ enum OrderStatusCode {
 	deleted = 20;
 	fullfilled = 21;
 	hold = 23;
+	confirmed = 24;
 }
 
 message Bill {
@@ -4108,7 +4109,7 @@ message Product {
 
 	string source_id = 61;
 
-	bool has_inventory = 62;
+	bool has_inventory = 62; // share
 	repeated ProductInventory inventories = 63;
 
 	Tax tax = 64; // (shared)

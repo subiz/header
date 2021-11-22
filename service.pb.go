@@ -1082,7 +1082,7 @@ var file_service_proto_rawDesc = []byte{
 	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x2f, 0x0a, 0x12,
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x50, 0x61, 0x79, 0x6d, 0x65,
 	0x6e, 0x74, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d,
-	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2f, 0x0a,
+	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x2f, 0x0a,
 	0x0f, 0x41, 0x64, 0x64, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74,
 	0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x1a,
 	0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x30,
@@ -1091,8 +1091,8 @@ var file_service_proto_rawDesc = []byte{
 	0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74,
 	0x12, 0x2f, 0x0a, 0x12, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x43,
 	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
-	0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74,
-	0x79, 0x12, 0x2d, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x45, 0x76,
+	0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e,
+	0x74, 0x12, 0x2d, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x45, 0x76,
 	0x65, 0x6e, 0x74, 0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64,
 	0x1a, 0x0e, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73,
 	0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73,
@@ -1893,10 +1893,10 @@ var file_service_proto_depIdxs = []int32{
 	192, // 594: header.Proder.ListOrders:output_type -> header.Orders
 	192, // 595: header.Proder.CountOrders:output_type -> header.Orders
 	40,  // 596: header.Proder.MakeOrderPayment:output_type -> header.Event
-	34,  // 597: header.Proder.DeleteOrderPayment:output_type -> header.Empty
+	40,  // 597: header.Proder.DeleteOrderPayment:output_type -> header.Event
 	40,  // 598: header.Proder.AddOrderComment:output_type -> header.Event
 	40,  // 599: header.Proder.EditOrderComment:output_type -> header.Event
-	34,  // 600: header.Proder.DeleteOrderComment:output_type -> header.Empty
+	40,  // 600: header.Proder.DeleteOrderComment:output_type -> header.Event
 	130, // 601: header.Proder.ListOrderEvents:output_type -> header.Events
 	301, // [301:602] is the sub-list for method output_type
 	0,   // [0:301] is the sub-list for method input_type
@@ -12771,10 +12771,10 @@ type ProderClient interface {
 	CountOrders(ctx context.Context, in *OrdersRequest, opts ...grpc.CallOption) (*Orders, error)
 	// fire order_updated, order_event_updated
 	MakeOrderPayment(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Event, error)
-	DeleteOrderPayment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	DeleteOrderPayment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Event, error)
 	AddOrderComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	EditOrderComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
-	DeleteOrderComment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	DeleteOrderComment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Event, error)
 	ListOrderEvents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Events, error)
 }
 
@@ -13002,8 +13002,8 @@ func (c *proderClient) MakeOrderPayment(ctx context.Context, in *Bill, opts ...g
 	return out, nil
 }
 
-func (c *proderClient) DeleteOrderPayment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *proderClient) DeleteOrderPayment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Event, error) {
+	out := new(Event)
 	err := c.cc.Invoke(ctx, "/header.Proder/DeleteOrderPayment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -13029,8 +13029,8 @@ func (c *proderClient) EditOrderComment(ctx context.Context, in *Event, opts ...
 	return out, nil
 }
 
-func (c *proderClient) DeleteOrderComment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
+func (c *proderClient) DeleteOrderComment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Event, error) {
+	out := new(Event)
 	err := c.cc.Invoke(ctx, "/header.Proder/DeleteOrderComment", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -13074,10 +13074,10 @@ type ProderServer interface {
 	CountOrders(context.Context, *OrdersRequest) (*Orders, error)
 	// fire order_updated, order_event_updated
 	MakeOrderPayment(context.Context, *Bill) (*Event, error)
-	DeleteOrderPayment(context.Context, *Id) (*Empty, error)
+	DeleteOrderPayment(context.Context, *Id) (*Event, error)
 	AddOrderComment(context.Context, *Event) (*Event, error)
 	EditOrderComment(context.Context, *Event) (*Event, error)
-	DeleteOrderComment(context.Context, *Id) (*Empty, error)
+	DeleteOrderComment(context.Context, *Id) (*Event, error)
 	ListOrderEvents(context.Context, *Id) (*Events, error)
 }
 
@@ -13157,7 +13157,7 @@ func (*UnimplementedProderServer) CountOrders(context.Context, *OrdersRequest) (
 func (*UnimplementedProderServer) MakeOrderPayment(context.Context, *Bill) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakeOrderPayment not implemented")
 }
-func (*UnimplementedProderServer) DeleteOrderPayment(context.Context, *Id) (*Empty, error) {
+func (*UnimplementedProderServer) DeleteOrderPayment(context.Context, *Id) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrderPayment not implemented")
 }
 func (*UnimplementedProderServer) AddOrderComment(context.Context, *Event) (*Event, error) {
@@ -13166,7 +13166,7 @@ func (*UnimplementedProderServer) AddOrderComment(context.Context, *Event) (*Eve
 func (*UnimplementedProderServer) EditOrderComment(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EditOrderComment not implemented")
 }
-func (*UnimplementedProderServer) DeleteOrderComment(context.Context, *Id) (*Empty, error) {
+func (*UnimplementedProderServer) DeleteOrderComment(context.Context, *Id) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrderComment not implemented")
 }
 func (*UnimplementedProderServer) ListOrderEvents(context.Context, *Id) (*Events, error) {
