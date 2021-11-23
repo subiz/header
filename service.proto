@@ -448,9 +448,9 @@ service Proder {
 
 	// fire order_updated, order_event_updated
 	rpc MakeOrderPayment(header.Bill) returns (header.Event);
-	rpc DeleteOrderPayment(header.Id) returns (header.Event);
+	rpc DeleteOrderPayment(header.Key) returns (header.Event);
 	rpc AddOrderComment(header.Event) returns (header.Event);
 	rpc EditOrderComment(header.Event) returns (header.Event);
-	rpc DeleteOrderComment(header.Id) returns (header.Event);
+	rpc DeleteOrderComment(header.Key) returns (header.Event);
 	rpc ListOrderEvents(header.Id) returns (header.Events);
 }

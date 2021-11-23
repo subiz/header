@@ -420,6 +420,14 @@ enum PK {
 	zalo_oa_id = 4;
 };
 
+message Key {
+	string account_id = 2;
+	string order_id = 3;
+	string product_id = 4;
+	string bill_id = 5;
+	string order_comment_id = 6;
+}
+
 message UserEventMetric {
 	string account_id = 2;
 	string user_id = 3;
