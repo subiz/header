@@ -3873,6 +3873,7 @@ message OrdersRequest {
 
 	int32 limit = 8;
 	string anchor = 9;
+	int32 offset = 18;
 	string dim = 17;
 
 	repeated string ids = 10;
@@ -4189,6 +4190,7 @@ message ProductsRequest {
 	string query = 3;
 	int32 limit = 4; // 200
 	string anchor = 5;
+	int32 offset = 16;
 
 	int64 price_gte = 6;
 	int64 price_lte = 7;
