@@ -206,7 +206,8 @@ message DeleteAttrRequest {
 message AttributeDefinitionListItem {
 	// value
 	string value = 4; // cannot be changed
-	I18nString label = 7;
+	I18nString i18n_label = 7;
+	string label = 8;
 }
 
 message AttributeDefinition {
@@ -3663,7 +3664,8 @@ message ShopSetting {
 	repeated POS poses = 10;
 	repeated Tax taxes = 11;
 
-	header.I18nString term_and_condition = 13;
+	string term_and_condition = 12;
+	I18nString i18n_term_and_condition = 13;
 }
 
 message POS {
@@ -3751,7 +3753,6 @@ message PriceRule {
 	string feed_id = 4;
 	float price = 5;
 	int64 fpv_price = 6;
-	Price locale_price = 7;
 
 	string currency = 8;
 	int64 from_count = 9;
@@ -3781,7 +3782,6 @@ message InventoryProduct {
 	string sold_currency = 24;
 	float sold_price = 25;
 	int64 fpv_sold_price = 26;
-	Price locale_sold_price = 27;
 
 	int64 expiry_date = 30;
 }
@@ -3796,11 +3796,9 @@ message OrderItem {
 
 	float total = 16;
 	int64 fpv_total = 17;
-	Price locale_total = 18;
 
   float discount_amount = 20;
 	int64 fpv_discount_amount = 21;
-	Price locale_discount_amount = 22;
 
 	int64 discount_percentage = 23;  // 1234 => 12.34% = 0.1234
 
@@ -3812,7 +3810,6 @@ message OrderItem {
 
 	float total_tax = 30; // computed, override value
 	int64 fpv_total_tax = 31; // computed, override value
-	Price locale_total_tax = 32; // computed, override value
 }
 
 message ShippingAddress {
@@ -3857,7 +3854,6 @@ message ShippingInfo {
 
 	float fee = 10;
 	float fpv_fee = 11;
-	Price locale_fee = 12;
 
 	string note = 13;
 	Tax tax = 16;
@@ -3946,15 +3942,12 @@ message Order {
 
 	float subtotal = 21; // computed, override value
 	int64 fpv_subtotal = 22; // computed, override value
-	Price locale_subtotal = 23; // computed, override value
 
 	float total = 25; // computed, override value
 	int64 fpv_total = 26; // computed, override value
-	Price locale_total = 27; // computed, override value
 
 	float payment_made = 30; // computed, override value
 	int64 fpv_payment_made = 31; // computed, override value
-	Price locale_payment_made = 32; // computed, override value
 
 	repeated Event events = 33;
 
@@ -3967,11 +3960,9 @@ message Order {
 
 	float deposit = 37;
 	int64 fpv_deposit = 38;
-	Price locale_deposit = 39;
 
 	float discount_amount = 40;
 	int64 fpv_discount_amount = 41;
-	Price locale_discount_amount = 42;
 
 	int64 discount_percentage = 43; // 1234 => 12.34% = 0.1234
 	string discount_type = 51; // amount || percentage
@@ -3990,7 +3981,6 @@ message Order {
 	string adjustment_description = 54;
 	float adjustment = 55;
 	int64 fpv_adjustment = 56;
-	Price locale_adjustment = 57;
 
 	map<string, string> custom_field = 58;
 
@@ -4000,7 +3990,6 @@ message Order {
 
 	float total_tax = 65; // computed, override value
 	int64 fpv_total_tax = 66; // computed, override value
-	Price locale_total_tax = 67; // computed, override value
 }
 
 enum OrderStatusCode {
@@ -4046,7 +4035,6 @@ message Bill {
 
 	float amount = 12;
 	int64 fpv_amount = 13;
-	Price locale_amount = 14;
 
 	string description = 21;
 
@@ -4082,16 +4070,19 @@ message Product {
 	string left_product_id = 56; // only server
 	string right_product_id = 57; // only server
 
-	string title = 6; // deprecated
+	string title = 6; // deprecated // should be use for name
 
 	string url = 7; // (shared)
 
 	string handle = 8; // (shared) iphone-6-plus-128G
-	header.I18nString name = 10; // (shared) apple Iphone 6 plus
+	string name = 9;
+	I18nString i18n_name = 10; // (shared) apple Iphone 6 plus
 
-	header.I18nString description_quill_delta = 11; // (shared)
-	header.I18nString description = 12; // (shared) server generated
-	header.I18nString short_description = 13; // (shared)
+	string description = 11; // (shared)
+	I18nString i18n_description = 12; // (shared) server generated
+
+	I18nString i18n_long_description_quill_delta = 13; // (shared)
+	string long_description = 15; // (shared)
 
 	repeated KV props = 14; // future replacement for props
 
@@ -4146,7 +4137,6 @@ message Product {
 
 	float price = 51;
 	int64 fpv_price = 52; // (readonly from client)
-	Price locale_price = 53;
 
 	repeated PriceRule price_rules = 54; // (shared)
 	int64 stock = 60; //
@@ -4157,6 +4147,8 @@ message Product {
 	repeated ProductInventory inventories = 63;
 
 	Tax tax = 64; // (shared)
+
+	string currency = 65;
 }
 
 message ProductInventory {
@@ -4165,9 +4157,9 @@ message ProductInventory {
 
 	float price = 6;
 	int64 fpv_price = 7;
-	Price locale_price = 8;
 
 	int64 stock = 9; //
+	string currency = 10;
 }
 
 message ProductOption {
@@ -4279,7 +4271,8 @@ message Tax {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 4;
-	header.I18nString name = 5;
+	string name = 3;
+	I18nString i18n_name = 5;
 	int64 percentage = 6; // x10000 e.g: 20% => 2000
 
 	// group, tax, compound
