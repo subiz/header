@@ -1080,6 +1080,7 @@ message ConversationMember {
 		active = 0;
 		left = 1;
 		observer = 2; // assigned
+		terminated = 3 ; // bot only
 	};
 	common.By invited_by = 16;
 
@@ -1362,6 +1363,7 @@ enum AttachmentType {
 	product_preview = 17;
 	product = 18;
 	quick_reply = 19;
+	order = 20;
 }
 
 message Attachment {
@@ -1401,6 +1403,7 @@ message Attachment {
 	Product product = 30;
 
 	QuickReply quick_reply = 31;
+	Order order = 32;
 }
 
 message QuickReply {
@@ -3936,6 +3939,8 @@ message Order {
 
 	string cancellation_note = 34;
 	string cancellation_code = 35; // typing_error, user_rejected
+	int64 cancelled_at = 60;
+	string cancelled_by = 61;
 
 	string currency = 36; // empty => base currency
 
@@ -4023,8 +4028,11 @@ message Bill {
 
 enum CancelCode {
 	no_cancel = 0; // or empty string
-	typing_error = 1;
-	user_rejected = 2;
+	wrong_order_info = 1;
+	customer_rejected = 2;
+	failed_delivery = 3;
+	out_of_stock = 4;
+	other = 100;
 }
 
 message OrderStatusUpdated {
