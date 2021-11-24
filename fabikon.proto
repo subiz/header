@@ -197,6 +197,13 @@ message FbPayload {
 	optional Address address = 10;
 	optional Summary summary = 11;
 	repeated Adjustment adjustments = 12;
+
+	optional string recipient_name = 13;
+	optional string order_number = 14;
+	optional string currency = 15;
+	optional string payment_method = 16;
+	optional string order_url = 17;
+	optional string timestamp = 18;
 }
 
 message Button {

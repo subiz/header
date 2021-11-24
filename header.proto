@@ -3683,7 +3683,11 @@ message POS {
 
 	string district = 16;
 	string region = 17; // city
-	string country = 18;
+	string country_code = 18;
+
+	string state = 22;
+	string postal_code = 23;
+	string city = 24;
 }
 
 message POSes {
@@ -3818,7 +3822,7 @@ message ShippingAddress {
 	string ward = 9;
 	string district = 10;
 	string region = 11; // city
-	string country = 12;
+	string country_code = 12;
 
 	string full_address = 13;
 
@@ -3834,6 +3838,11 @@ message ShippingAddress {
 	float lat = 20;
 
 	bool is_default = 21;
+
+	// for U.S
+	string state = 22;
+	string postal_code = 23;
+	string city = 24;
 }
 
 message ShippingInfo {
