@@ -3879,6 +3879,10 @@ message OrdersRequest {
 
 	int64 created_hour_from = 5;
 	int64 created_hour_to = 6;
+	int64 due_date_hour_from = 20;
+	int64 due_date_hour_to = 21;
+	int64 invoice_date_hour_from = 22;
+	int64 invoice_date_hour_to = 23;
 
 	bool include_deleted = 7;
 
@@ -3886,6 +3890,7 @@ message OrdersRequest {
 	string anchor = 9;
 	int32 offset = 18;
 	string dim = 17;
+	string order_by = 19;
 
 	repeated string ids = 10;
 	repeated int64 modifieds = 11;
@@ -3905,6 +3910,7 @@ message Order {
 	PaymentInfo payment = 6;
 
 	string note = 7;
+	int64 invoice_date = 62;
 	int64 due_date = 8;
 	string due_date_term = 9; // net30 net7
 
