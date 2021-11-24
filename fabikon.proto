@@ -151,6 +151,27 @@ message FbAttachment {
 	optional string URL = 5;
 }
 
+message Summary {
+	optional float subtotal = 2;
+	optional float shipping_cost = 3;
+	optional float total_tax = 4;
+	optional float total_cost = 5;
+}
+
+message Adjustment {
+	optional string name = 2;
+	optional float amount = 3;
+}
+
+message Address {
+	optional string street_1 = 2;
+	optional string street_2 = 3;
+	optional string city = 4;
+	optional string postal_code = 5;
+	optional string state = 6;
+	optional string country = 7;
+}
+
 message GenericElement {
 	optional string title = 2;
 	optional string item_url = 3;
@@ -159,6 +180,9 @@ message GenericElement {
 	optional FbAction default_action = 6;
 	optional string id = 7; // fbproduct id
 	repeated Button buttons = 8;
+	optional int64 quantity = 9;
+	optional string currency = 10;
+	optional float price = 11;
 }
 
 message FbPayload {
@@ -169,6 +193,10 @@ message FbPayload {
 	repeated GenericElement elements = 6;
 	optional string text = 7; // for call btn
 	repeated Button buttons = 8;
+
+	optional Address address = 10;
+	optional Summary summary = 11;
+	repeated Adjustment adjustments = 12;
 }
 
 message Button {
