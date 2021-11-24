@@ -3662,6 +3662,8 @@ message ShopSetting {
 
 	repeated POS poses = 10;
 	repeated Tax taxes = 11;
+
+	header.I18nString term_and_condition = 13;
 }
 
 message POS {
@@ -3807,6 +3809,10 @@ message OrderItem {
 
 	string discount_type = 26;
 	bool discount_before_tax = 27;
+
+	float total_tax = 30; // computed, override value
+	int64 fpv_total_tax = 31; // computed, override value
+	Price locale_total_tax = 32; // computed, override value
 }
 
 message ShippingAddress {
@@ -3989,6 +3995,12 @@ message Order {
 	map<string, string> custom_field = 58;
 
 	bool is_draft = 59;
+
+	string term_and_condition = 63;
+
+	float total_tax = 65; // computed, override value
+	int64 fpv_total_tax = 66; // computed, override value
+	Price locale_total_tax = 67; // computed, override value
 }
 
 enum OrderStatusCode {
