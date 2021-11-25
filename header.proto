@@ -3876,6 +3876,8 @@ message PaymentMethod {
 	}
 	string state = 7; // active, inactive, deleted
 
+	bool is_default = 8;
+
 	string failed_message = 10;
 	int64 charged = 11;
 
@@ -4501,4 +4503,6 @@ enum E {
 
 	too_many_shipping_address = 111;
 	shipping_address_not_found = 112;
+
+	too_many_payment_method = 115;
 }
