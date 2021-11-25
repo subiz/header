@@ -30495,7 +30495,7 @@ type PaymentMethod struct {
 	Ctx           *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id            string          `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Method        string          `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`           // cash, cod ,credit_card, debit_card, momo
+	Method        string          `protobuf:"bytes,4,opt,name=method,proto3" json:"method,omitempty"`           // cash, cod ,credit_card, debit_card, momo, bank_transfer
 	Description   string          `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"` //  "Thanh toán tiền mặt khi nhận hàng"
 	Type          *string         `protobuf:"bytes,6,opt,name=type,proto3,oneof" json:"type,omitempty"`
 	State         string          `protobuf:"bytes,7,opt,name=state,proto3" json:"state,omitempty"` // active, inactive, deleted

@@ -3866,7 +3866,7 @@ message PaymentMethod {
 	string account_id = 2;
 	string id = 3;
 
-	string method = 4; // cash, cod ,credit_card, debit_card, momo
+	string method = 4; // cash, cod ,credit_card, debit_card, momo, bank_transfer
 	string description = 5; //  "Thanh toán tiền mặt khi nhận hàng"
 
 	optional string type = 6;
