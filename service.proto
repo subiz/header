@@ -458,5 +458,5 @@ service Proder {
 	rpc AddOrderComment(header.Event) returns (header.Event);
 	rpc EditOrderComment(header.Event) returns (header.Event);
 	rpc DeleteOrderComment(header.Key) returns (header.Event);
-	rpc ListOrderEvents(header.Id) returns (header.Events);
+	rpc ListOrderEvents(header.Id) returns (header.OrderHistoryEntries);
 }

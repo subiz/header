@@ -4093,6 +4093,19 @@ message OrderStatusUpdated {
 	string status_to = 7;
 }
 
+message OrderHistoryEntry {
+	Event event = 2; // 1 core
+	Event ref_comment = 3;
+}
+
+message OrderHistoryEntries {
+	common.Context ctx = 1;
+	repeated OrderHistoryEntry entries = 4;
+	int64 total = 2;
+	string anchor = 3;
+	int64 last_modified = 5;
+}
+
 message Product {
 	common.Context ctx = 1;
 	string account_id = 2;
