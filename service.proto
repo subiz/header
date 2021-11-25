@@ -65,6 +65,12 @@ service AccountMgr {
 	rpc UpdateTax(header.Tax) returns (header.Tax);
 	rpc DeleteTax(Id) returns (Empty);
 	rpc MakeDefaultTax(Id) returns (Empty);
+
+	rpc ListPaymentMethods(Id) returns (header.PaymentMethods);
+	rpc CreatePaymentMethod(header.PaymentMethod) returns (header.PaymentMethod);
+	rpc UpdatePaymentMethod(header.PaymentMethod) returns (header.PaymentMethod);
+	rpc DeletePaymentMethod(Id) returns (Empty);
+	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
 }
 
 // user services

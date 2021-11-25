@@ -3664,8 +3664,10 @@ message ShopSetting {
 	repeated POS poses = 10;
 	repeated Tax taxes = 11;
 
-	string term_and_condition = 12;
-	I18nString i18n_term_and_condition = 13;
+	repeated PaymentMethod payment_methods = 12;
+
+	string term_and_condition = 15;
+	I18nString i18n_term_and_condition = 16;
 }
 
 message POS {
@@ -3859,9 +3861,39 @@ message ShippingInfo {
 	Tax tax = 16;
 }
 
-message PaymentInfo {
-	string method = 4; // cod
+message PaymentMethod {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string method = 4; // cash, cod ,credit_card, debit_card, momo
 	string description = 5; //  "Thanh toán tiền mặt khi nhận hàng"
+
+	optional string type = 6;
+	enum State {
+		active = 0;
+		failed = 1;
+	}
+	string state = 7; // active, inactive, deleted
+
+	string failed_message = 10;
+	int64 charged = 11;
+
+	int64 created = 12;
+	int64 updated = 13;
+	string created_by = 14;
+	string updated_by = 15;
+
+	string bank_number = 20;
+	string bank_owner = 22;
+	string bank_branch = 23;
+	string bank_name = 24;
+}
+
+message PaymentMethods {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated PaymentMethod payment_methods = 3;
 }
 
 message OrderMetric {
@@ -3918,7 +3950,7 @@ message Order {
 	string id = 3;
 
 	ShippingInfo shipping = 5;
-	PaymentInfo payment = 6;
+	PaymentMethod payment = 6;
 
 	string note = 7;
 	int64 invoice_date = 62;
