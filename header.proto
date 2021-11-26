@@ -693,6 +693,7 @@ message Event {
 		Bill bill = 66;
 		Order order_from = 67;
 		Event current = 68;
+		OrderHistoryEntry order_history_entry = 69;
 	}
 	Data data = 20;
 }
@@ -3361,7 +3362,7 @@ enum RealtimeType {
 	order_comment_deleted = 150; // data.message
 	order_comment_updated = 151; // data.message
 
-	order_event_updated = 152; // data.event
+	order_history_updated = 152;
 }
 
 // TODO: remove after remove old dashboard
@@ -4101,6 +4102,7 @@ message OrderStatusUpdated {
 message OrderHistoryEntry {
 	Event event = 2; // 1 core
 	Event ref_comment = 3;
+	string order_id = 4;
 }
 
 message OrderHistoryEntries {
