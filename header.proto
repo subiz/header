@@ -692,6 +692,7 @@ message Event {
 		OrderStatusUpdated order_status = 65;
 		Bill bill = 66;
 		Order order_from = 67;
+		Event current = 68;
 	}
 	Data data = 20;
 }
@@ -3983,7 +3984,7 @@ message Order {
 	float payment_made = 30; // computed, override value
 	int64 fpv_payment_made = 31; // computed, override value
 
-	repeated Event events = 33;
+	// repeated Event events = 33;
 
 	string cancellation_note = 34;
 	string cancellation_code = 35; // typing_error, user_rejected
@@ -4024,6 +4025,10 @@ message Order {
 
 	float total_tax = 65; // computed, override value
 	int64 fpv_total_tax = 66; // computed, override value
+
+	// account currency /order currency  (E.g: order currency: VND, acc currency: USD, => currency_rate = 1/20k = 0.00005)
+	float currency_rate = 67;
+	int64 paid_at = 68; // complete paid
 }
 
 enum OrderStatusCode {
