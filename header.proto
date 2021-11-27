@@ -3904,8 +3904,47 @@ message OrderMetric {
 	string account_id = 2;
 	string status = 3;
 	string payment_status = 4;
+	string payment_method = 5;
+	int64 invoice_hour = 6;
+	string invoice_date = 7; // derived
+	int64 paid_hour = 8;
+	string paid_date = 9; // derived
+	int64 fpv_total = 10;
+	int64 fpv_payment_made = 11;
+	string pos_id = 12;
+	string channel = 13;
+	string channel_touchpoint = 14;
+	string salesperson = 15;
+	int64 product_id_bits = 16; // only system
+	string product_id_strings = 17; // only system
+	repeated string product_ids = 18;
+	string product_id = 19; // derived
 
 	int64 order_count = 65;
+	int64 paid_count = 66;
+	int64 confirmed_count = 67;
+}
+
+message OrderMetricsRequest {
+	string dim = 2;
+	int32 tz = 3;
+	string account_id = 10;
+	int64 invoice_hour_from = 11;
+	int64 invoice_hour_to = 12;
+	int64 paid_hour_from = 13;
+	int64 paid_hour_to = 14;
+	repeated string channels = 15;
+	repeated string not_channels = 16;
+	repeated string channel_touchpoints = 17;
+	repeated string product_ids = 18; // and
+	repeated string salesperson = 19; // and, agent ids
+	repeated string pos_ids = 20;
+	string status = 21;
+	string payment_status = 22;
+}
+
+message DeleteDraftOrdersRequest {
+	int64 point_to = 3; // exclude
 }
 
 message Orders {

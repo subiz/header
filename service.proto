@@ -420,6 +420,8 @@ service Holap {
 	rpc ReportAgent(header.AgentMetricsRequest) returns (header.AgentMetrics);
 	rpc ListChannelTouchpoints(header.Ids) returns (header.Ids);
 	rpc ReportUserEvent(header.UserEventMetricsRequest) returns (header.UserEventMetrics);
+	rpc UpdateOrder(header.Order) returns (Empty);
+	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders);
 }
 
 // proder services
@@ -451,6 +453,7 @@ service Proder {
 	rpc DeleteOrder(header.Id) returns (header.Empty); // soft delete, mark as deleted
 	rpc ListOrders(header.OrdersRequest) returns (header.Orders);
 	rpc CountOrders(header.OrdersRequest) returns (header.Orders);
+	rpc DeleteDraftOrders(header.DeleteDraftOrdersRequest) returns (header.Empty);
 
 	// fire order_updated, order_event_updated
 	rpc MakeOrderPayment(header.Bill) returns (header.Event);
