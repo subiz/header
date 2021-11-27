@@ -3856,11 +3856,15 @@ message ShippingInfo {
 	ShippingAddress address = 5;
 	int64 shipping_dealine = 6; // unix ms
 
+	// before tax
 	float fee = 10;
-	float fpv_fee = 11;
+	int64 fpv_fee = 11;
 
 	string note = 13;
 	Tax tax = 16;
+
+	float total_tax = 17; // computed, override value
+	int64 fpv_total_tax = 18; // computed, override value
 }
 
 message PaymentMethod {
@@ -3991,6 +3995,8 @@ message Order {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
+
+	string order_number = 4;
 
 	ShippingInfo shipping = 5;
 	PaymentMethod payment = 6;
