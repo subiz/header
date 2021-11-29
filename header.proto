@@ -3928,7 +3928,8 @@ message OrderMetric {
 
 	int64 order_count = 65;
 	int64 paid_count = 66;
-	int64 confirmed_count = 67;
+	int64 fpv_total_sum = 67;
+	int64 fpv_payment_made_sum = 68;
 }
 
 message OrderMetricsRequest {
@@ -4010,7 +4011,7 @@ message Order {
 	int64 due_date = 8;
 	string due_date_term = 9; // net30 net7
 
-	// new, confirmed, processing, shipping, fullfilled, canceled, hold
+	// new, confirmed, processing, shipping, fulfilled, canceled, hold
 	//  (see OrderStatusCode)
 	string status = 10;
 
@@ -4105,7 +4106,7 @@ enum OrderStatusCode {
 	void = 19;
 
 	deleted = 20;
-	fullfilled = 21;
+	fulfilled = 21;
 	hold = 23;
 	confirmed = 24;
 }
