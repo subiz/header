@@ -3906,8 +3906,8 @@ message PaymentMethods {
 
 message OrderMetric {
 	string account_id = 2;
-	string status = 3;
-	string payment_status = 4;
+	string status = 3; // only list orders
+	string payment_status = 4; // only list orders
 	string payment_method = 5;
 	int64 invoice_hour = 6;
 	string invoice_date = 7; // derived
@@ -3944,8 +3944,6 @@ message OrderMetricsRequest {
 	repeated string product_ids = 18; // and
 	repeated string salesperson = 19; // and, agent ids
 	repeated string pos_ids = 20;
-	string status = 21;
-	string payment_status = 22;
 	account.BusinessHours business_hours = 23;
 	account.BusinessHours not_business_hours = 24;
 	int64 created_hour_from = 25;
