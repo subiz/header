@@ -3924,6 +3924,7 @@ message OrderMetric {
 	repeated string product_ids = 18;
 	string product_id = 19; // derived
 	int64 created_hour = 20;
+	string created_date = 21; // derived
 
 	int64 order_count = 65;
 	int64 paid_count = 66;
