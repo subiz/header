@@ -3923,6 +3923,7 @@ message OrderMetric {
 	string product_id_strings = 17; // only system
 	repeated string product_ids = 18;
 	string product_id = 19; // derived
+	int64 created_hour = 20;
 
 	int64 order_count = 65;
 	int64 paid_count = 66;
@@ -3945,6 +3946,10 @@ message OrderMetricsRequest {
 	repeated string pos_ids = 20;
 	string status = 21;
 	string payment_status = 22;
+	account.BusinessHours business_hours = 23;
+	account.BusinessHours not_business_hours = 24;
+	int64 created_hour_from = 25;
+	int64 created_hour_to = 26;
 }
 
 message DeleteDraftOrdersRequest {
