@@ -71,6 +71,8 @@ service AccountMgr {
 	rpc UpdatePaymentMethod(header.PaymentMethod) returns (header.PaymentMethod);
 	rpc DeletePaymentMethod(Id) returns (Empty);
 	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
+
+	rpc DownloadOrder(header.DownloadOrderRequest) returns (header.File);
 }
 
 // user services

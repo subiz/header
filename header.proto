@@ -3654,6 +3654,17 @@ message PushNoti {
 	repeated common.By tos = 15;
 }
 
+message InvoiceTemplate {
+	string primary_color = 3;
+	string primary_background = 4;
+	string font_family = 5;
+
+	string term_and_condition = 15;
+	string tagline = 16;
+
+	string ps = 17;
+}
+
 message ShopSetting {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -3667,9 +3678,7 @@ message ShopSetting {
 	repeated Tax taxes = 11;
 
 	repeated PaymentMethod payment_methods = 12;
-
-	string term_and_condition = 15;
-	I18nString i18n_term_and_condition = 16;
+	InvoiceTemplate invoice_template = 13;
 }
 
 message POS {
@@ -3996,18 +4005,25 @@ message OrdersRequest {
 	repeated string salesperson = 16; // agent ids
 }
 
+message DownloadOrderRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	Order order = 3;
+	InvoiceTemplate template = 4;
+}
+
 message Order {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
 
-	string order_number = 4;
+	string number = 4;
 
 	ShippingInfo shipping = 5;
 	PaymentMethod payment = 6;
 
 	string note = 7;
-	int64 invoice_date = 62;
+	int64 issue_date = 62;
 	int64 due_date = 8;
 	string due_date_term = 9; // net30 net7
 
