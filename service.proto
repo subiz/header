@@ -367,8 +367,6 @@ service Bizbot {
 	rpc TryAction(header.BotRunRequest) returns (Empty);
 	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
 	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
-	rpc CreateBotRevision(header.Bot) returns (header.Bot);
-	rpc ListBotRevisions(Id) returns (header.Bots);
 }
 
 // sendback services
