@@ -2897,6 +2897,8 @@ message FileHeader {
 	int64 size = 5;
 	string md5 = 6;
 	string description = 7;
+
+	string content_disposition = 8; // inline || attachment
 }
 
 message PresignResult {
@@ -2925,6 +2927,7 @@ message File {
 	string url = 8;
 	string creator = 9;
 	string id = 11;
+	string content_disposition = 12; // inline (for printing) || attachment (download)
 }
 
 message FileMeta {
@@ -4024,6 +4027,7 @@ message DownloadOrderRequest {
 	Order order = 3;
 	InvoiceTemplate template = 4;
 	string locale = 5;
+	string content_disposition = 6; // inline (for printing) || attachment (download)
 }
 
 message Order {
