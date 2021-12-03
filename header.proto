@@ -962,6 +962,7 @@ message BotRunRequest {
 	// internal use only
 	string bot_run_type = 15;
 	string action_run_type = 16;
+	int32 index = 18;
 
 	// payload
 	int64 created = 10;
