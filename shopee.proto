@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+package shopee;
+
+option go_package = "github.com/subiz/header/shopee";
+
+message TokenResponse {
+	string request_id = 4;
+	string error = 5;
+	string message = 6;
+
+	int64 expire_in  = 7;
+	string access_token = 8;
+	string refresh_token = 9;
+}
+
+message ShopeeResponse {
+	string request_id = 4;
+	string error = 5;
+	string message = 6;
+}
+
+message ShopeeListProductResponseResponse {
+	int64 total_count = 4;
+	string has_next_page = 5;
+	string next_offset = 6;
+	repeated ProductItem item = 7;
+	repeated ProductItem item_list = 8;
+	repeated TierVariation tier_variation = 9;
+	repeated Model model = 10;
+}
+
+message Brand {
+	int64 brand_id = 2;
+	string original_brand_name = 3;
+}
+
+message ProductAttributeValue {
+	int64 value_id = 4;
+	string original_value_name = 5;
+	string value_unit = 6;
+}
+
+message ProductAttribute {
+	int64 attribute_id = 2;
+	string original_attribute_name = 3;
+	bool is_mandatory = 4;
+	repeated ProductAttributeValue attribute_value_list = 5;
+}
+
+message Price {
+	string currency = 2;
+	float original_price = 3;
+	float current_price = 4;
+	float inflated_price_of_current_price = 5;
+	float inflated_price_of_original_price = 6;
+}
+
+message Stock {
+	int64 stock_type = 3;
+	int64 current_stock = 4;
+	int64 normal_stock = 5;
+	int64 resered_stock = 6;
+}
+
+message ProductImage {
+	repeated string image_url_list = 2;
+	repeated string image_id_list = 3;
+}
+
+message Dimension {
+	int64 package_length = 2;
+	int64 package_width = 3;
+	int64 package_height = 4;
+}
+
+message Logistic {
+	int64 logistic_id = 2;
+	string logistic_name = 3;
+	bool enabled = 4;
+	bool is_free = 5;
+	int64 estimated_shipping_fee = 6;
+}
+
+message PreOrder {
+	bool is_pre_order = 4;
+	int64 days_to_ship = 5;
+}
+
+message ProductItem {
+	int64 item_id = 3;
+	int64 category_id = 4;
+	string item_name = 5;
+	string description = 6;
+	string item_sku = 7;
+	int64 create_time = 8;
+	int64 update_time = 9;
+	float weight = 10;
+	string condition = 11; // NEW
+	string item_status = 12; // NORMAL UNLISTED
+	bool has_model = 13;
+	int64 promotion_id = 14;
+	Brand brand = 15;
+	int64 item_dangerous = 16;
+	repeated ProductAttribute attribute_list = 17;
+	repeated Price price_info = 18;
+	repeated Stock stock_info = 19;
+	ProductImage image = 20;
+	Dimension dimension = 21;
+	Logistic logistic_info = 22;
+	PreOrder pre_order = 23;
+}
+
+
+message TierVariationOptionImage {
+	string image_id = 4;
+	string image_url = 5;
+}
+
+message TierVariationOption {
+	string option = 3;
+	TierVariationOptionImage image = 4;
+}
+
+message TierVariation {
+	string name = 3;
+	repeated TierVariationOption option_list = 4;
+}
+
+message ShopeeListProductResponse {
+	string request_id = 4;
+	string error = 5;
+	string message = 6;
+	string warning = 7;
+
+	ShopeeListProductResponseResponse response = 8;
+}
+
+message Model {
+	int64 model_id = 2;
+	int64 promotion_id = 3;
+	repeated int64 tier_index = 4;
+	repeated Stock stock_info = 5;
+	repeated Price price_info = 6;
+	string model_sku = 7;
+	PreOrder pre_order = 8;
+}

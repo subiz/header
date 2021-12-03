@@ -3696,6 +3696,8 @@ message ShopSetting {
 	InvoiceTemplate invoice_template = 13;
 
 	string due_date_term = 14;
+
+	repeated ShopeeShop shopee_shops = 15; // read only
 }
 
 message POS {
@@ -4442,4 +4444,58 @@ message Error {
 	string code = 7;
 	string root = 8;
 	string request_id = 9;
+}
+
+
+message ShopeeShop {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string shop_logo = 4;
+	string description = 5;
+	string shop_name = 6;
+
+	string region = 7; // VN
+	int64 num_unlisted_products = 8;
+	int64 num_normal_products = 9;
+
+	int64 last_success_called = 11;
+	int64 last_called = 12;
+
+	int64 authorized = 13;
+	string authorized_by = 14;
+
+	string status = 15; // normal, failed
+
+	int64 last_profile_synced = 17; // last sync profile
+}
+
+message AuthorizeShopeeRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string code = 3;
+	int64 shop_id = 4;
+	string main_account_id = 5;
+}
+
+message ShopeeSyncProductRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string shop_id = 3;
+	int64 offset = 4;
+	int64 page_size = 5;
+	string status = 6;
+
+	string mode = 8; // override, append only
+}
+
+message ShopeeSyncProductResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string shop_id = 3;
+	string error_code = 4;
+	bool has_next_page = 6;
+	int64 next_offset = 7;
+	int64 total = 8;
+	int64 num_success = 9;
 }
