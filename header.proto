@@ -4452,6 +4452,7 @@ message Error {
 message ShopeeShop {
 	common.Context ctx = 1;
 	string account_id = 2;
+	int64 shop_id = 3;
 
 	string shop_logo = 4;
 	string description = 5;
@@ -4467,7 +4468,7 @@ message ShopeeShop {
 	int64 authorized = 13;
 	string authorized_by = 14;
 
-	string status = 15; // normal, failed
+	string status = 15; // normal, failed, deleted
 
 	int64 last_profile_synced = 17; // last sync profile
 }

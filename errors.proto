@@ -194,4 +194,5 @@ enum E {
 	unknown_message_format = 136;
 	invalid_field_size = 137;
 	shopee_call_error = 138;
+	unauthorized_shopee_shop = 139;
 }
