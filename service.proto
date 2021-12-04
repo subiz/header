@@ -463,8 +463,8 @@ service Proder {
 
 	rpc DownloadOrder(header.DownloadOrderRequest) returns (header.File);
 	rpc GetShopeeAuthUrl(header.Id) returns (header.Id);
-	rpc AuthorizeShopeeShop(header.AuthorizeShopeeRequest) returns (header.Id);
+	rpc AuthorizeShopeeShop(header.AuthorizeShopeeRequest) returns (header.ShopeeShop);
 	rpc DeauthorizeShopeeShop(header.Id) returns (header.Empty);
-	rpc SyncShopeeShop(header.Id) returns (header.ShopeeShop); // sync with shopee
+
 	rpc SyncShopeeProducts(header.ShopeeSyncProductRequest) returns (header.ShopeeSyncProductResponse);
 }

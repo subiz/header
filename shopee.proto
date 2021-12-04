@@ -4,26 +4,10 @@ package shopee;
 
 option go_package = "github.com/subiz/header/shopee";
 
-message TokenResponse {
-	string request_id = 4;
-	string error = 5;
-	string message = 6;
-
-	int64 expire_in  = 7;
-	string access_token = 8;
-	string refresh_token = 9;
-}
-
 message ShopeeResponse {
-	string request_id = 4;
-	string error = 5;
-	string message = 6;
-}
-
-message ShopeeListProductResponseResponse {
 	int64 total_count = 4;
-	string has_next_page = 5;
-	string next_offset = 6;
+	bool has_next_page = 5;
+	int64 next_offset = 6;
 	repeated ProductItem item = 7;
 	repeated ProductItem item_list = 8;
 	repeated TierVariation tier_variation = 9;
@@ -127,13 +111,20 @@ message TierVariation {
 	repeated TierVariationOption option_list = 4;
 }
 
-message ShopeeListProductResponse {
+message Response {
 	string request_id = 4;
 	string error = 5;
 	string message = 6;
 	string warning = 7;
 
-	ShopeeListProductResponseResponse response = 8;
+  ShopeeResponse response = 8;
+
+	int64 expire_in = 9;
+	string access_token = 10;
+	string refresh_token = 11;
+	int64 partner_id  = 12;
+	int64 shop_id = 13;
+	int64 merchant_id = 14;
 }
 
 message Model {
