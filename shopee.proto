@@ -79,7 +79,7 @@ message ProductItem {
 	string item_sku = 7;
 	int64 create_time = 8;
 	int64 update_time = 9;
-	float weight = 10;
+	string weight = 10;
 	string condition = 11; // NEW
 	string item_status = 12; // NORMAL UNLISTED
 	bool has_model = 13;
@@ -91,7 +91,7 @@ message ProductItem {
 	repeated Stock stock_info = 19;
 	ProductImage image = 20;
 	Dimension dimension = 21;
-	Logistic logistic_info = 22;
+	repeated Logistic logistic_info = 22;
 	PreOrder pre_order = 23;
 }
 
