@@ -4260,13 +4260,13 @@ message Product {
 	// shipping
 	bool requires_shipping = 36;
 
-	int64 day_to_ship = 37;
+	int64 days_to_ship = 37;
 	float dimension_width = 38;
 	float dimension_height = 39;
 	float dimension_length = 40;
 
 	float weight = 41;
-	string weight_unit = 42;
+	string weight_unit = 42; // g, kg
 	float grams = 43;
 	bool allow_preorder = 44;
 
@@ -4307,6 +4307,8 @@ message ProductOption {
 	string key = 3;
 	string name = 4;
 	repeated string values = 5;
+	bool is_mandatory = 6;
+
 }
 
 message Products {
