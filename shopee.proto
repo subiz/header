@@ -12,6 +12,10 @@ message ShopeeResponse {
 	repeated ProductItem item_list = 8;
 	repeated TierVariation tier_variation = 9;
 	repeated Model model = 10;
+
+	string shop_logo = 12;
+	string description = 13;
+	string shop_name = 14;
 }
 
 message Brand {
@@ -125,6 +129,10 @@ message Response {
 	int64 partner_id  = 12;
 	int64 shop_id = 13;
 	int64 merchant_id = 14;
+
+	string shop_name = 16;
+	string region = 17;
+	string status = 18;
 }
 
 message Model {

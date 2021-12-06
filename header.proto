@@ -4448,7 +4448,6 @@ message Error {
 	string request_id = 9;
 }
 
-
 message ShopeeShop {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -4484,7 +4483,7 @@ message AuthorizeShopeeRequest {
 message ShopeeSyncProductRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string shop_id = 3;
+	int64 shop_id = 3;
 	int64 offset = 4;
 	int64 page_size = 5;
 	string status = 6;
@@ -4495,7 +4494,7 @@ message ShopeeSyncProductRequest {
 message ShopeeSyncProductResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string shop_id = 3;
+	int64 shop_id = 3;
 	string error_code = 4;
 	bool has_next_page = 6;
 	int64 next_offset = 7;
