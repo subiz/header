@@ -3956,6 +3956,7 @@ message OrderMetric {
 
 	int64 order_count = 65;
 	int64 paid_count = 66;
+	int64 returning_count = 69;
 	int64 fpv_total_sum = 67;
 	int64 fpv_payment_made_sum = 68;
 }
