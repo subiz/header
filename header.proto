@@ -2027,6 +2027,7 @@ message WidgetSetting {
 	int64 z_index = 37;
 
 	bool hide_subiz_logo = 38;
+	bool hide_close_button = 39;
 }
 
 message WidgetField {
