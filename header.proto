@@ -1760,6 +1760,9 @@ enum BotActionType {
 	switch_language = 16;
 	ask_question = 18;
 	end_bot = 19;
+	add_user_label = 20;
+	cancel_order = 21;
+	view_order = 22;
 }
 
 message NextBotAction {
@@ -1843,6 +1846,14 @@ message ActionAskQuestion {
 
 message ActionSleep {
 	int64 duration = 4;
+}
+
+message ActionUpdateUser {
+	map<string, Attribute> attrs = 2;
+}
+
+message ActionAddUserLabel {
+	repeated string label_ids = 2;
 }
 
 message Metric {
