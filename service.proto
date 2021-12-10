@@ -448,6 +448,7 @@ service Proder {
 	rpc ReadOrder(header.Id) returns (header.Order);
 	rpc CreateOrder(header.Order) returns (header.Order);
 	rpc UpdateOrder(header.Order) returns (header.Order);
+	rpc UpdateOrderStatus(header.Order) returns (header.Order);
 	rpc DeleteOrder(header.Id) returns (header.Empty); // soft delete, mark as deleted
 	rpc ListOrders(header.OrdersRequest) returns (header.Orders);
 	rpc CountOrders(header.OrdersRequest) returns (header.Orders);
