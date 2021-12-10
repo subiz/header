@@ -1791,6 +1791,8 @@ message BotAction {
 	int64 delay_sec = 20;
 	ActionUpdateConversation update_conversation = 21;
 	bytes internal_state = 30;
+	ActionUpdateUser update_user = 31;
+	ActionAddUserLabel add_user_label = 32;
 }
 
 message ActionUpdateConversation {
