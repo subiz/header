@@ -1851,7 +1851,8 @@ message ActionSleep {
 }
 
 message ActionUpdateUser {
-	map<string, Attribute> attrs = 2;
+	Attribute attr = 3;
+	repeated Attribute attrs = 4;
 }
 
 message ActionAddUserLabel {
