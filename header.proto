@@ -1912,10 +1912,7 @@ message BotrunMetric {
     string account_id = 4;
     string bot_id = 5;
     int64 created_hour = 6;
-    int64 created_date = 7; // derived
-
-    int64 date_dim = 8; // deprecated
-    int64 object_count = 9; // deprecated
+    string date = 7; // derived
 }
 
 message BotrunMetricsRequest {
@@ -1925,9 +1922,6 @@ message BotrunMetricsRequest {
     string bot_id = 5;
     int64 created_hour_from = 6;
 	int64 created_hour_to = 7;
-
-    int64 day_from = 8; // deprecated
-	int64 day_to = 9; // deprecated
 }
 
 message BotrunMetrics {
@@ -1940,7 +1934,7 @@ message ActionrunMetric {
 	string bot_id = 4;
 	string action_id = 5;
 	int64 created_hour = 6;
-    int64 created_date = 7; // derived
+    string date = 7; // derived
 }
 
 message ActionrunMetricsRequest {
