@@ -1509,31 +1509,19 @@ message Postback {
 	string title = 8;
 }
 
-message PostbackOrderConfirmation {
-	string type = 2;
-	string bot_id = 3;
-	string action_id = 4; // only use when status = cancelled
-	string from_action = 5;
-
-	string status = 13; // confirmed || cancelled
-}
-
-message PostbackAddToCard {
-	string type = 2;
-	string bot_id = 3;
+message BotPostback {
+	string type = 2; // bot_jump || add_to_card || order_confirmation
+	string bot_id = 3; // required
 	string action_id = 4;
-	string from_action = 5;
+	string from_action = 5; // required
+	string title = 6; // for bot_jump
+	I18nString i18n_title = 7; // for bot_jump
 
+	// for add_to_card only
 	string product_id = 10;
-}
 
-message PostbackBotJump {
-	string type = 2;
-	string bot_id = 3;
-	string action_id = 4;
-	string from_action = 5;
-	string title = 6;
-	I18nString i18n_title = 7;
+	// for order_confirmation
+	string status = 13; // confirmed || cancelled
 }
 
 message Integrations {
