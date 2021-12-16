@@ -1906,6 +1906,56 @@ message ReportBotResponse {
 	repeated Metric metrics = 2;
 }
 
+message BotrunMetric {
+    int64 lead_count = 2;
+    int64 botrun_count = 3;
+    string account_id = 4;
+    string bot_id = 5;
+    int64 created_hour = 6;
+    int64 created_date = 7; // derived
+
+    int64 date_dim = 8; // deprecated
+    int64 object_count = 9; // deprecated
+}
+
+message BotrunMetricsRequest {
+    string dim = 2;
+	int32 tz = 3;
+	string account_id = 4;
+    string bot_id = 5;
+    int64 created_hour_from = 6;
+	int64 created_hour_to = 7;
+
+    int64 day_from = 8; // deprecated
+	int64 day_to = 9; // deprecated
+}
+
+message BotrunMetrics {
+    repeated BotrunMetric metrics = 2;
+}
+
+message ActionrunMetric {
+	int64 actionrun_count = 2;
+	string account_id = 3;
+	string bot_id = 4;
+	string action_id = 5;
+	int64 created_hour = 6;
+    int64 created_date = 7; // derived
+}
+
+message ActionrunMetricsRequest {
+	string dim = 2;
+	int32 tz = 3;
+	string account_id = 4;
+    string bot_id = 5;
+    int64 created_hour_from = 6;
+	int64 created_hour_to = 7;
+}
+
+message ActionrunMetrics {
+	repeated ActionrunMetric metrics = 2;
+}
+
 message ListObjectId {
 	string object_type = 2;
 	repeated string object_ids = 5;
