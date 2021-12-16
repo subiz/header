@@ -660,7 +660,7 @@ message Event {
 		account.AgentGroup agent_group = 18;
 		Note note = 23;
 		// Ticket ticket = 24;
-		Automation automation = 25;
+		// Automation automation = 25;
 		Event event = 26;
 		AutomationEvent automation_event = 30;
 		// notibox.Notibox notibox = 32;
@@ -694,6 +694,7 @@ message Event {
 		Order order_from = 67;
 		Event current = 68;
 		OrderHistoryEntry order_history_entry = 69;
+		UserOrderConfirmation user_order_confirmation = 70;
 	}
 	Data data = 20;
 }
@@ -1201,6 +1202,7 @@ message Conversation {
 	bool is_private = 51;
 
 	string avatar_url = 52;
+	int64 last_modified = 53;
 }
 
 message Rating {
@@ -1299,7 +1301,7 @@ message MessageButton {
 	string title = 3;
 	string payload = 4;
 	string image_url = 5;
-	string product_id = 10;
+	string product_id = 10; // if used in type = url => product url
 	//	optional RawEvent event = 12;
 	string url = 14;
 
@@ -1507,6 +1509,24 @@ message Postback {
 	string title = 8;
 }
 
+message PostbackOrderConfirmation {
+	string type = 2;
+	string bot_id = 3;
+	string action_id = 4; // only use when status = cancelled
+	string from_action = 5;
+
+	string status = 13; // confirmed || cancelled
+}
+
+message PostbackAddToCard {
+	string type = 2;
+	string bot_id = 3;
+	string action_id = 4;
+	string from_action = 5;
+
+	string product_id = 10;
+}
+
 message PostbackBotJump {
 	string type = 2;
 	string bot_id = 3;
@@ -1568,6 +1588,7 @@ message AssignRequest {
 	// for bot only
 	int64 agent_reply_timeout = 9; // sec
 	string branch_on_no_reply = 10; // action id
+
 	string bot_id = 11;
 	string action_id = 12;
 }
@@ -1777,11 +1798,8 @@ message BotAction {
 
 	// first action require trigger
 	repeated NextBotAction nexts = 8;
-	repeated BotAction children = 10;
 
 	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook
-
-	ActionSleep sleep = 13; // deprecated
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -1792,7 +1810,20 @@ message BotAction {
 	ActionUpdateConversation update_conversation = 21;
 	bytes internal_state = 30;
 	ActionUpdateUser update_user = 31;
-	ActionAddUserLabel add_user_label = 32;
+	ActionUpdateUserLabels update_user_labels = 32;
+	ActionConfirmOrder confirm_order = 34;
+}
+
+message ActionConfirmOrder {
+	bool wait_for_user_response = 2;
+	repeated Message messages = 3;
+
+	Message resume_message = 4; // send the message if user doesn't give any expected input
+
+	string branch_on_cancellation = 8; // user click on cancel or X button
+
+	bool require_shipping_address = 10;
+	bool require_payment_method = 11;
 }
 
 message ActionUpdateConversation {
@@ -1814,7 +1845,7 @@ message ActionSendHttp {
 	// string payload = 3;
 	string method = 4;
 	repeated KV header = 5;
-	string quill_delta = 6;
+	string quill_delta = 6; // body
 }
 
 message ActionAskQuestion {
@@ -1827,7 +1858,6 @@ message ActionAskQuestion {
 
 	string validation = 6; // none, email, phone, date, link, number, regex
 	string validation_regex = 7;
-	string branch_on_invalidate_reply = 8; // TODO: remove, dont use
 
 	bool skip_if_attribute_already_existed = 11;
 
@@ -1846,17 +1876,14 @@ message ActionAskQuestion {
 	string branch_on_failed = 20; // empty => retry forever
 }
 
-message ActionSleep {
-	int64 duration = 4;
-}
-
 message ActionUpdateUser {
 	Attribute attr = 3;
 	repeated Attribute attrs = 4;
 }
 
-message ActionAddUserLabel {
-	repeated string label_ids = 2;
+message ActionUpdateUserLabels {
+	repeated string labels = 2;
+	repeated string remove_labels = 3;
 }
 
 message Metric {
@@ -3382,6 +3409,18 @@ enum RealtimeType {
 	order_comment_updated = 151; // data.message
 
 	order_history_updated = 152;
+	user_order_confirmed = 153;
+}
+
+message UserOrderConfirmation {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string user_id = 4;
+	Order order = 5;
+	string status = 6; // confirmed || cancelled
+
+	string conversation_id = 7;
 }
 
 // TODO: remove after remove old dashboard
@@ -3560,25 +3599,10 @@ message AccountImage {
 	string header_version = 4;
 }
 
-message GetUserFilter {
-	common.Context ctx = 1;
-	repeated string ids = 3;
-	string keyword = 4;
-
-	int64 limit = 5;
-	string anchor = 6;
-	string order_by = 7;
-
-	int64 total = 8;
-}
-
 message UserViews {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated UserView views = 4;
-}
-
-message UserViewStatistic {
 }
 
 message UserView {
@@ -3598,7 +3622,6 @@ message UserView {
 	int64 total = 11;
 	// status tic
 	int64 last_calculated = 12;
-
 
 	int32 offset = 20;
 	int32 limit = 21;
