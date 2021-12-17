@@ -1806,7 +1806,7 @@ message ActionConfirmOrder {
 	bool wait_for_user_response = 2;
 	repeated Message messages = 3;
 
-	Message resume_message = 4; // send the message if user doesn't give any expected input
+	repeated Message invalid_messages = 4; // send random message if user doesn't give any expected input
 
 	string branch_on_cancellation = 8; // user click on cancel or X button
 
