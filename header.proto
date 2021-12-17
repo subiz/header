@@ -1772,6 +1772,7 @@ enum BotActionType {
 	add_user_label = 20;
 	cancel_order = 21;
 	view_order = 22;
+	confirm_order = 23;
 }
 
 message NextBotAction {
