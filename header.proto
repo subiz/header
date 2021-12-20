@@ -1769,7 +1769,7 @@ enum BotActionType {
 	switch_language = 16;
 	ask_question = 18;
 	end_bot = 19;
-	add_user_label = 20;
+	update_user_labels = 20;
 	cancel_order = 21;
 	view_order = 22;
 	confirm_order = 23;
