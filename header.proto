@@ -1510,7 +1510,7 @@ message Postback {
 }
 
 message BotPostback {
-	string type = 2; // bot_jump || add_to_card || order_confirmation
+	string type = 2; // bot_jump || add_to_cart || order_confirmation
 	string bot_id = 3; // required
 	string action_id = 4;
 	string from_action = 5; // required
@@ -1810,9 +1810,6 @@ message ActionConfirmOrder {
 	repeated Message invalid_messages = 4; // send random message if user doesn't give any expected input
 
 	string branch_on_cancellation = 8; // user click on cancel or X button
-
-	bool require_shipping_address = 10;
-	bool require_payment_method = 11;
 }
 
 message ActionUpdateConversation {
@@ -3760,18 +3757,17 @@ message ShopSetting {
 	int64 updated = 8;
 	string updated_by = 9;
 
-	repeated POS poses = 10;
+	repeated ShopAddress addresses = 10;
 	repeated Tax taxes = 11;
 
 	repeated PaymentMethod payment_methods = 12;
 	InvoiceTemplate invoice_template = 13;
-
 	string due_date_term = 14;
-
 	repeated ShopeeShop shopee_shops = 15; // read only
+	repeated IntegratedShipping shippings = 16;
 }
 
-message POS {
+message ShopAddress {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
@@ -3795,12 +3791,19 @@ message POS {
 	string state = 22;
 	string postal_code = 23;
 	string city = 24;
+
+	bool is_warehouse = 25;
+	bool is_point_of_sale = 26;
+
+	string from_shipping_provider = 28; // ghtk, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
+	string from_shipping_shop_id = 29;
+	int64 last_integrated = 30;
 }
 
-message POSes {
+message ShopAddresses {
 	common.Context ctx = 1;
 	string account_id = 2;
-	repeated POS poses = 3;
+	repeated ShopAddress addresses = 3;
 }
 
 message Currency {
@@ -3964,6 +3967,63 @@ message ShippingInfo {
 
 	float total_tax = 17; // computed, override value
 	int64 fpv_total_tax = 18; // computed, override value
+
+	int64 weight = 19; // gram
+	int64 length = 20; // cm
+	int64 width = 21; // cm
+	int64 height = 22; // cm
+
+	// id of shop from shipping provider
+	// since agent can using multiple shipping shop account
+	string shipping_shop_id = 24;
+
+	string transport = 25; // road, fly
+
+	string shipping_provider = 26;
+	string bill_of_landing_no = 27; // ma van don
+
+	bool insurance = 29;
+	float insurance_fee = 30;
+	int64 fpv_insurance_fee = 31;
+
+	string deliver_option = 32; // xfast (ghtk), instant (grab express)
+
+	string package_name = 33;
+	string package_description = 34;
+
+	// how much money should shipper collect from the receiver
+	// not always equal to fee
+	float pick_amount = 40;
+	int64 fpv_pick_amount = 41;
+
+
+	// could be -1, 1, 2, -3
+	// see https://docs.giaohangtietkiem.vn/?shell#tr-ng-th-i-n-h-ng35
+	string status_code = 43;
+}
+
+message IntegratedShipping {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string codename = 3; // ghtk, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
+	string shipping_shop_id = 4;
+
+	string name = 5;
+	string phone = 6;
+	string email = 7;
+	string password = 8;
+	string api_token = 9;
+
+	string access_token = 10;
+	string refresh_token = 11;
+
+	int64 last_used = 12;
+	int64 first_integrated = 13;
+	int64 integrated = 14;
+
+	int64 last_error = 15;
+	string connect_status = 16; // connected || disconnected
 }
 
 message PaymentMethod {
@@ -4190,6 +4250,8 @@ message Order {
 	float currency_rate = 67;
 	int64 paid_at = 68; // complete paid
 	string first_paid_order_id = 69;
+
+	string user_confirmation = 70; // confirmed || rejected
 }
 
 enum OrderStatusCode {
@@ -4381,7 +4443,6 @@ message ProductOption {
 	string name = 4;
 	repeated string values = 5;
 	bool is_mandatory = 6;
-
 }
 
 message Products {
