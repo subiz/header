@@ -72,6 +72,7 @@ service AccountMgr {
 	rpc DeletePaymentMethod(Id) returns (Empty);
 	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
 
+	rpc ListIntegratedShippingProviders(Ids) returns (IntegratedShippings);
 	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);
 	rpc DeintegrateShippingProvider(header.IntegratedShipping) returns (Empty);
 	rpc UpdateIntegratedShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);

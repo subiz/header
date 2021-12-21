@@ -4026,6 +4026,13 @@ message IntegratedShipping {
 	string connect_status = 16; // connected || disconnected
 }
 
+message IntegratedShippings {
+	common.Context ctx = 1;
+	repeated IntegratedShipping integrated_shippings = 2;
+	string anchor = 3;
+	int64 total = 4;
+}
+
 message PaymentMethod {
 	common.Context ctx = 1;
 	string account_id = 2;
