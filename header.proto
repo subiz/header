@@ -3787,10 +3787,13 @@ message ShopAddress {
 	string district = 16;
 	string region = 17; // city
 	string country_code = 18;
+	string country = 19;
 
+	string street = 20;
+	string ward = 21;
 	string state = 22;
 	string postal_code = 23;
-	string city = 24;
+	string city = 24; // city, province
 
 	bool is_warehouse = 25;
 	bool is_point_of_sale = 26;
@@ -3962,6 +3965,8 @@ message Address {
 	string postal_code = 23;
 	string city = 24;
 
+	string country = 25;
+	string province = 26;
 }
 
 message ShippingInfo {
