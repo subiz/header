@@ -10,7 +10,7 @@ import "account.proto";
 import "header.proto";
 
 service Map {
-	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponse);
+	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);
 	rpc LookupAddress(Id) returns (Address);
 
 	rpc ListDistricts(Id) returns (Addresses);

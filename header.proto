@@ -4684,9 +4684,19 @@ message AddressAutocompleteRequest {
 
 	string keyword = 3;
 	string language = 4;
+	repeated string countries = 5;
+}
+
+message AddressAutocompleteResponses {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated AddressAutocompleteResponse responses = 4;
 }
 
 message AddressAutocompleteResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+
 	string description = 4;
 	string place_id = 5;
 	string reference = 6;
