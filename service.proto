@@ -58,7 +58,7 @@ service AccountMgr {
 	rpc ListShopAddresses(Id) returns (header.ShopAddresses);
 	rpc CreateShopAddress(header.ShopAddress) returns (header.ShopAddress);
 	rpc UpdateShopAddress(header.ShopAddress) returns (header.ShopAddress);
-	rpc DeleteAddress(Id) returns (Empty);
+	rpc DeleteShopAddress(Id) returns (Empty);
 
 	rpc ListTaxes(Id) returns (header.Taxes);
 	rpc CreateTax(header.Tax) returns (header.Tax);
@@ -73,7 +73,7 @@ service AccountMgr {
 	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
 
 	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);
-	rpc DeintegrateShippingProvider(Id) returns (Empty);
+	rpc DeintegrateShippingProvider(header.IntegratedShipping) returns (Empty);
 	rpc UpdateIntegratedShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);
 }
 
