@@ -3795,9 +3795,12 @@ message ShopAddress {
 	bool is_warehouse = 25;
 	bool is_point_of_sale = 26;
 
-	string from_shipping_provider = 28; // ghtk, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
+	string from_shipping_provider = 28; // ghtk, ghn, ahamove, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
 	string from_shipping_shop_id = 29;
 	int64 last_integrated = 30;
+
+	float lng = 31;
+	float lat = 32;
 }
 
 message ShopAddresses {
@@ -3956,7 +3959,10 @@ message ShippingAddress {
 
 message ShippingInfo {
 	ShippingAddress address = 5;
+	ShopAddress pickup_address = 8;
+
 	int64 shipping_dealine = 6; // unix ms
+	int64 pickup_dealine = 7; // unix ms 0 => ASAP
 
 	// before tax
 	float fee = 10;
@@ -4006,7 +4012,7 @@ message IntegratedShipping {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string codename = 3; // ghtk, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
+	string codename = 3; // ghtk, ghn, ahamove, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
 	string shipping_shop_id = 4;
 
 	string name = 5;
