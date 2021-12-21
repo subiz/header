@@ -4015,10 +4015,26 @@ message ShippingInfo {
 	string status_code = 43;
 }
 
+enum ShippingProvider {
+	nilship = 0;
+	ghtk = 1;
+	viettelpost = 2;
+	shipchung = 3;
+	ninjavan = 4;
+	grabexpress = 5;
+	ahamove = 6;
+	hcmpost = 7;
+	vnpost = 8;
+	jntexpress = 9;
+	supership = 10;
+	heyu = 11;
+}
+
 message IntegratedShipping {
 	common.Context ctx = 1;
 	string account_id = 2;
 
+	string id = 18;
 	string codename = 3; // ghtk, ghn, ahamove, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
 	string shipping_shop_id = 4;
 
@@ -4034,6 +4050,7 @@ message IntegratedShipping {
 	int64 last_used = 12;
 	int64 first_integrated = 13;
 	int64 integrated = 14;
+	string integrated_by = 17;
 
 	int64 last_error = 15;
 	string connect_status = 16; // connected || disconnected

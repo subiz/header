@@ -11,7 +11,7 @@ import "header.proto";
 
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponse);
-	rpc LookupAddresss(Id) returns (Address);
+	rpc LookupAddress(Id) returns (Address);
 
 	rpc ListDistricts(Id) returns (Addresses);
 	rpc ListProvinces(Id) returns (Addresses); // also city
