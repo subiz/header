@@ -9,6 +9,16 @@ import "noti5.proto";
 import "account.proto";
 import "header.proto";
 
+service Map {
+	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponse);
+	rpc LookupAddresss(Id) returns (Address);
+
+	rpc ListDistricts(Id) returns (Addresses);
+	rpc ListProvinces(Id) returns (Addresses); // also city
+	rpc ListWards(Id) returns (Addresses); // phuong/xa
+	rpc ListStreets(Id) returns (Addresses);
+}
+
 service AccountMgr {
 	rpc CreateGroup(account.AgentGroup) returns (account.AgentGroup);
 	rpc UpdateGroup(account.AgentGroup) returns (account.AgentGroup);
@@ -108,11 +118,11 @@ service UserMgr {
 	rpc AddUserLabel(UserRequest) returns (Empty);
 	rpc RemoveUserLabel(UserRequest) returns (Empty);
 
-	rpc CreateShippingAddress(ShippingAddress) returns (ShippingAddress);
-	rpc UpdateShippingAddress(ShippingAddress) returns (ShippingAddress);
-	rpc RemoveShippingAddress(ShippingAddress) returns (Empty);
+	rpc CreateShippingAddress(Address) returns (Address);
+	rpc UpdateShippingAddress(Address) returns (Address);
+	rpc RemoveShippingAddress(Address) returns (Empty);
 	rpc ListShippingAddress(Id) returns (User);
-	rpc MakeDefaultShippingAddress(ShippingAddress) returns (Empty);
+	rpc MakeDefaultShippingAddress(Address) returns (Empty);
 }
 
 service UserPersist {

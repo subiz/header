@@ -134,7 +134,7 @@ message User {
 	string type = 47; // empty = user, lead, customer
 
 	string created = 50;
-	repeated ShippingAddress shipping_addresses = 51;
+	repeated Address shipping_addresses = 51;
 }
 
 message UserLabel {
@@ -688,7 +688,7 @@ message Event {
 		Order order = 60;
 		Currency currency = 61;
 		ShopSetting shop_setting = 62;
-		ShippingAddress shipping_address = 63;
+		Address shipping_address = 63;
 		OrderStatusUpdated order_status = 65;
 		Bill bill = 66;
 		Order order_from = 67;
@@ -3809,6 +3809,12 @@ message ShopAddresses {
 	repeated ShopAddress addresses = 3;
 }
 
+message Addresses {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Address addresses = 3;
+}
+
 message Currency {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -3921,7 +3927,7 @@ message OrderItem {
 	int64 fpv_total_tax = 31; // computed, override value
 }
 
-message ShippingAddress {
+message Address {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string user_id = 3;
@@ -3955,10 +3961,11 @@ message ShippingAddress {
 	string state = 22;
 	string postal_code = 23;
 	string city = 24;
+
 }
 
 message ShippingInfo {
-	ShippingAddress address = 5;
+	Address address = 5;
 	ShopAddress pickup_address = 8;
 
 	int64 shipping_dealine = 6; // unix ms
@@ -4647,4 +4654,24 @@ message ShopeeSyncProductResponse {
 	int64 next_offset = 7;
 	int64 total = 8;
 	int64 num_success = 9;
+}
+
+message AddressAutocompleteRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string keyword = 3;
+	string language = 4;
+}
+
+message AddressAutocompleteResponse {
+	string description = 4;
+	string place_id = 5;
+	string reference = 6;
+	repeated Substring matched_substrings = 7;
+}
+
+message Substring {
+	int32 offset = 3;
+	int32 length = 4;
 }
