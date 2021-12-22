@@ -4707,3 +4707,22 @@ message Substring {
 	int32 offset = 3;
 	int32 length = 4;
 }
+
+message RateLimitSyncRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string key = 3;
+
+	int64 num_requests = 4;
+	int64 timestamp = 5; // unix sec
+}
+
+message RateLimitSyncResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string config_key = 3; // google_map_autocomplete, api_call_per_ip
+	string key = 4; //
+
+	int64 usage = 5;
+	int64 capacity = 6;
+}

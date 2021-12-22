@@ -9,6 +9,10 @@ import "noti5.proto";
 import "account.proto";
 import "header.proto";
 
+service RateLimit {
+	rpc SyncRateLimit(RateLimitSyncRequest) returns (RateLimitSyncResponse);
+}
+
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);
 	rpc LookupAddress(Id) returns (Address);
