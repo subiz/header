@@ -180,7 +180,7 @@ func getStack(skip int) string {
 		sb.WriteString(file)
 		sb.WriteString(":")
 		sb.WriteString(strconv.Itoa(line))
-		sb.WriteString("    ")
+		sb.WriteString("  ")
 	}
 	return sb.String()
 }
@@ -189,6 +189,10 @@ func getStack(skip int) string {
 // affect error context
 func isIgnorePath(path string) bool {
 	if strings.HasPrefix(path, "/vendor/google.golang.org/") {
+		return true
+	}
+
+	if strings.HasPrefix(path, "/vendor/github.com/gin-gonic") {
 		return true
 	}
 
