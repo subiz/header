@@ -4711,18 +4711,25 @@ message Substring {
 message RateLimitSyncRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string key = 3;
 
-	int64 num_requests = 4;
-	int64 timestamp = 5; // unix sec
+	repeated RateLimitEntity new_entities = 4;
 }
 
 message RateLimitSyncResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string config_key = 3; // google_map_autocomplete, api_call_per_ip
-	string key = 4; //
+	repeated RateLimitEntity entities = 4;
+}
 
-	int64 usage = 5;
-	int64 capacity = 6;
+message RateLimitEntity {
+	string configkey = 2;
+	int64 window_sec = 3;
+	int64 capacity = 5;
+  repeated RateLimitWindow windows = 6;
+}
+
+message RateLimitWindow {
+	string key = 3;
+	int64 timestamp = 4;
+	string usage = 5;
 }
