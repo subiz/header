@@ -4711,7 +4711,6 @@ message Substring {
 message RateLimitSyncRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-
 	repeated RateLimitEntity new_entities = 4;
 }
 

@@ -149,7 +149,7 @@ func getStack(skip int) string {
 	stack := make([]uintptr, 10)
 	var sb strings.Builder
 	// skip one system stack, the this current stack line
-	length := runtime.Callers(2+skip, stack[:])
+	length := runtime.Callers(4+skip, stack[:])
 	for i := 0; i < length; i++ {
 		pc := stack[i]
 		// pc - 1 because the program counters we use are usually return addresses,
@@ -157,11 +157,16 @@ func getStack(skip int) string {
 		f := runtime.FuncForPC(pc)
 		file, line := f.FileLine(pc - 1)
 		// dont report system path
+
+		file = trimToPrefix(file, "/vendor/")
+
 		if isSystemPath(file) {
 			continue
 		}
 
-		file = trimToPrefix(file, "/vendor/")
+		if isIgnorePath(file) {
+			continue
+		}
 
 		// trim out common provider since most of go projects are hosted
 		// in single host, there is no need to include them in the call stack
@@ -175,16 +180,27 @@ func getStack(skip int) string {
 		sb.WriteString(file)
 		sb.WriteString(":")
 		sb.WriteString(strconv.Itoa(line))
-		sb.WriteString("\n")
+		sb.WriteString("    ")
 	}
 	return sb.String()
 }
 
-// isSystemPath tells whether a file is in system golang packages
-func isSystemPath(path string) bool {
-	if strings.Contains(path, "/github.com/subiz/errors/") {
+// isIgnorePath indicates whether a path is just noise, that excluding the path does not
+// affect error context
+func isIgnorePath(path string) bool {
+	if strings.HasPrefix(path, "/vendor/google.golang.org/") {
 		return true
 	}
+
+	if strings.HasSuffix(path, ".pb.go") {
+		return true
+	}
+	return false
+}
+
+// isSystemPath tells whether a file is in system golang packages
+func isSystemPath(path string) bool {
+
 	return strings.HasPrefix(path, "/usr/local/go/src")
 }
 
