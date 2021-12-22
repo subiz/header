@@ -4731,5 +4731,5 @@ message RateLimitEntity {
 message RateLimitWindow {
 	string key = 3;
 	int64 timestamp = 4;
-	string usage = 5;
+	int64 usage = 5;
 }
