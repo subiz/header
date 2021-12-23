@@ -3804,6 +3804,8 @@ message ShopAddress {
 
 	float lng = 31;
 	float lat = 32;
+
+	string province = 33;
 }
 
 message ShopAddresses {
