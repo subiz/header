@@ -3975,10 +3975,9 @@ message ShippingInfo {
 	Address address = 5;
 	ShopAddress pickup_address = 8;
 
-	int64 shipping_dealine = 6; // unix ms
-	int64 pickup_dealine = 7; // unix ms 0 => ASAP
+	int64 deliver_date = 6; // unix ms
+	int64 pickup_date = 7; // unix ms 0 => ASAP
 
-	// before tax
 	float fee = 10;
 	int64 fpv_fee = 11;
 
@@ -3997,35 +3996,32 @@ message ShippingInfo {
 	// since agent can using multiple shipping shop account
 	string shipping_shop_id = 24;
 
-	string transport = 25; // road, fly
+	string transport = 25; // road, fly, truck
 
-	string shipping_provider = 26;
+	string shipping_provider = 26; // direct, private, ghtk
 	string bill_of_landing_no = 27; // ma van don
 
 	bool insurance = 29;
 	float insurance_fee = 30;
 	int64 fpv_insurance_fee = 31;
 
-	string deliver_option = 32; // xfast (ghtk), instant (grab express)
-
-	string package_name = 33;
-	string package_description = 34;
+	string shipping_code = 32; // van don
 
 	// how much money should shipper collect from the receiver
 	// not always equal to fee
 	float pick_amount = 40;
 	int64 fpv_pick_amount = 41;
 
-
 	// could be -1, 1, 2, -3
 	// see https://docs.giaohangtietkiem.vn/?shell#tr-ng-th-i-n-h-ng35
 	string status_code = 43;
+	repeated KV custom_data = 45;
 }
 
 enum ShippingProvider {
-	nilship = 0;
-	ghtk = 1;
-	viettelpost = 2;
+	direct = 0;
+	private = 1;
+	ghtk = 2;
 	shipchung = 3;
 	ninjavan = 4;
 	grabexpress = 5;
@@ -4035,6 +4031,8 @@ enum ShippingProvider {
 	jntexpress = 9;
 	supership = 10;
 	heyu = 11;
+	viettelpost = 12;
+	ghn = 13;
 }
 
 message IntegratedShipping {
@@ -4296,6 +4294,9 @@ message Order {
 	string first_paid_order_id = 69;
 
 	string user_confirmation = 70; // confirmed || rejected
+
+	float total_discount = 71;
+	int64 fpv_total_discount = 72;
 }
 
 enum OrderStatusCode {
