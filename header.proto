@@ -4016,7 +4016,24 @@ message ShippingInfo {
 	// could be -1, 1, 2, -3
 	// see https://docs.giaohangtietkiem.vn/?shell#tr-ng-th-i-n-h-ng35
 	string status_code = 43;
-	repeated KV custom_data = 45;
+	ShippingData data = 45;
+}
+
+
+message ShippingData {
+	GHTKShippingData ghtk = 3;
+}
+
+message GHTKShippingData {
+	int64 deliver_work_shift = 10;
+	int64 pick_work_shift  = 11;
+	string label_id = 13;
+	string expired = 14;
+	int64 value = 15; // gia tri dong bao hiem
+	string pick_option = 16;
+	string deliver_option = 17;
+	string pick_session = 18;
+	repeated string tags = 19;
 }
 
 enum ShippingProvider {
