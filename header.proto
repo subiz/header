@@ -3999,13 +3999,14 @@ message ShippingInfo {
 	string transport = 25; // road, fly, truck
 
 	string shipping_provider = 26; // direct, private, ghtk
-	string bill_of_landing_no = 27; // ma van don
+	// string bill_of_landing_no = 27; // ma van don
 
 	bool insurance = 29;
 	float insurance_fee = 30;
 	int64 fpv_insurance_fee = 31;
 
 	string shipping_code = 32; // van don
+	// string tracking_link = 35;
 
 	// how much money should shipper collect from the receiver
 	// not always equal to fee
@@ -4215,7 +4216,7 @@ message Order {
 	string number = 4;
 
 	ShippingInfo shipping = 5;
-	PaymentMethod payment = 6;
+	PaymentMethod payment_method = 6;
 
 	string note = 7;
 	int64 issue_date = 62;

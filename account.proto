@@ -18,6 +18,7 @@ message DashboardAgent {
 	repeated string order_display_fields = 16;
 	repeated string order_display_order_by = 17;
 	optional string default_pos = 18;
+	optional string default_shipping_provider = 19;
 }
 
 message Agent {
