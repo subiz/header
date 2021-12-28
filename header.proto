@@ -3971,6 +3971,20 @@ message Address {
 	string province = 26;
 }
 
+
+message GHTKOrder {
+	string partner_id = 2; // is id
+	string label_id = 3; // is label
+	int32 status_id = 4;
+	string action_time = 5;
+	string reason_code = 6;
+	string reason = 7;
+	float weight = 8;
+	int64 fee = 9;
+	int64 pick_money = 10;
+	int32 return_part_package = 11;
+}
+
 message ShippingInfo {
 	Address address = 5;
 	ShopAddress pickup_address = 8;
