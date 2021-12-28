@@ -489,4 +489,6 @@ service Proder {
 	rpc DeauthorizeShopeeShop(header.Id) returns (header.Empty);
 
 	rpc SyncShopeeProducts(header.ShopeeSyncProductRequest) returns (header.ShopeeSyncProductResponse);
+
+	rpc ShippingFee(header.ShippingInfo) returns (header.ShippingInfo);
 }
