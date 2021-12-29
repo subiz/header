@@ -492,4 +492,6 @@ service Proder {
 
 	rpc ShippingFee(header.ShippingInfo) returns (header.ShippingInfo);
 	rpc GHTKShippingStatus(header.GHTKOrder) returns (Empty);
+	rpc ShipOrder(header.Id) returns (header.Order);
+	rpc CancelShippingOrder(header.Id) returns (header.Order);
 }
