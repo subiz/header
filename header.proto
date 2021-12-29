@@ -2023,6 +2023,9 @@ message WidgetUserSetting {
 	bool is_in_business_hour = 21; // remove
 
 	int64 last_modified = 22;
+
+	repeated ShopAddress addresses = 23;
+	repeated PaymentMethod payment_methods = 24;
 }
 
 message AccountWeb {
@@ -3806,6 +3809,9 @@ message ShopAddress {
 	float lat = 32;
 
 	string province = 33;
+
+	string contact_phone = 34;
+	string contact_name = 35;
 }
 
 message ShopAddresses {
