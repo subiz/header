@@ -3981,16 +3981,65 @@ message Address {
 
 
 message GHTKOrder {
-	string partner_id = 2; // is id
-	string label_id = 3; // is label
-	int32 status_id = 4;
-	string action_time = 5;
-	string reason_code = 6;
-	string reason = 7;
-	float weight = 8;
-	int64 fee = 9;
-	int64 pick_money = 10;
-	int32 return_part_package = 11;
+	string id = 2;
+	string partner_id = 3; // is id
+	string label = 4;
+	string label_id = 5; // is label
+
+	int32 status_id = 6;
+	int32 status = 7;
+	string status_text = 8;
+	string created = 9;
+	string modified = 10;
+	string expired = 11;
+	string action_time = 12;
+	string reason_code = 13;
+	string reason = 14;
+
+	float weight = 15;
+	int32 area = 16; // goi cuoc tinh fee
+	int64 fee = 17;
+	int64 value = 18; // gia tri dong bao hiem
+	int64 pick_money = 19;
+	int32 is_freeship = 20;
+	int64 insurance = 21;
+	int64 insurance_fee = 22;
+	int64 ship_money = 23;
+
+	int32 return_part_package = 24;
+	string transport = 25;
+	string pick_option = 26;
+	string deliver_option = 27;
+	string pick_session = 28;
+	string estimated_pick_time = 29;
+	string estimated_deliver_time = 30;
+	string deliver_date = 31;
+	int64 deliver_work_shift = 32;
+	int64 pick_work_shift  = 33;
+	int32 storage_day = 34;
+
+	string pick_name = 35;
+	string pick_tel = 36;
+	string pick_address = 37;
+	string pick_province = 38;
+	string pick_district = 39;
+	string pick_ward = 40;
+	string pick_date = 41;
+
+	string name = 42;
+	string customer_fullname = 43; // is name
+	string tel = 44;
+	string customer_tel = 45; // is tell
+	string address = 46;
+	string province = 47;
+	string district = 48;
+	string ward = 49;
+	string street = 50;
+	string hamlet = 51;
+
+	string note = 52;
+	string message = 53;
+	repeated int32 tags = 54;
 }
 
 message ShippingInfo {
