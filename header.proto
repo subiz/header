@@ -2038,6 +2038,8 @@ message AccountWeb {
 	repeated Bot bots = 14;
 	repeated WebPlugin plugins = 15;
 	int64 last_modified = 22;
+
+	repeated PaymentMethod payment_methods = 24;
 }
 
 message SocialLink {
