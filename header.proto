@@ -3954,6 +3954,7 @@ message Address {
 	string district = 10;
 	string region = 11; // city
 	string country_code = 12;
+	string address = 27;
 
 	string full_address = 13;
 
