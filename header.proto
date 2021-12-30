@@ -3770,6 +3770,7 @@ message ShopSetting {
 	string due_date_term = 14;
 	repeated ShopeeShop shopee_shops = 15; // read only
 	repeated IntegratedShipping shippings = 16;
+	repeated ShippingPolicy shipping_policies = 17;
 }
 
 message ShopAddress {
@@ -4053,6 +4054,9 @@ message ShippingInfo {
 	float fee = 10;
 	int64 fpv_fee = 11;
 
+	float nominal_fee = 9;
+	int64 fpv_nominal_fee = 12;
+
 	string note = 13;
 	Tax tax = 16;
 
@@ -4123,6 +4127,50 @@ enum ShippingProvider {
 	heyu = 11;
 	viettelpost = 12;
 	ghn = 13;
+}
+
+
+message ShippingDistrictAdjustmentPrice {
+	string district_id = 3;
+	float adjustment_price = 4; // 0 => no ajustment
+	int64 fpv_adjustment_price = 5; // (readonly from client)
+}
+
+message ShippingPolicy {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+
+	repeated string product_ids = 5;
+	repeated string product_collections = 6;
+	repeated string exclude_product_ids = 7;
+
+	string country_code = 8; // alway vn
+	string province = 9;
+
+	bool use_weight = 10;
+	int64 weight_gt = 11; // gram
+	int64 weight_lt = 12; // gram
+
+	map<string, ShippingDistrictAdjustmentPrice> district_adjustment = 13;
+
+	bool use_order_total = 16;
+	float order_total_lt = 17;
+	int64 fpv_order_total_lt = 18; // (readonly from client)
+
+	float order_total_gt = 19;
+	int64 fpv_order_total_gt = 20; // (readonly from client)
+
+	float price = 21; // 0 => freeship
+	int64 fpv_price = 22; // (readonly from client)
+
+	bool disabled = 23;
+
+	int64 created = 24;
+	int64 updated = 26;
+	string created_by = 27;
+	string updated_by = 28;
 }
 
 message IntegratedShipping {
