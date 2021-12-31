@@ -176,7 +176,7 @@ enum E {
 	tempfile_error = 118;
 	invalid_goal_status = 119;
 
-  user_is_not_in_the_conversation = 120;
+	user_is_not_in_the_conversation = 120;
 	invalid_integration = 121;
 	invalid_message_type = 122;
 	missing_pong = 123;
@@ -197,4 +197,5 @@ enum E {
 	unauthorized_shopee_shop = 139;
 	invalid_ratelimit_config = 140;
 	too_many_requests = 141;
+	order_readonly = 142;
 }
