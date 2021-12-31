@@ -4130,13 +4130,6 @@ enum ShippingProvider {
 	ghn = 13;
 }
 
-
-message ShippingDistrictAdjustmentPrice {
-	string district_id = 3;
-	float adjustment_price = 4; // 0 => no ajustment
-	int64 fpv_adjustment_price = 5; // (readonly from client)
-}
-
 message ShippingPolicy {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -4149,12 +4142,11 @@ message ShippingPolicy {
 
 	string country_code = 8; // alway vn
 	string province = 9;
+	repeated string districts = 13;
 
 	bool use_weight = 10;
 	int64 weight_gt = 11; // gram
 	int64 weight_lt = 12; // gram
-
-	map<string, ShippingDistrictAdjustmentPrice> district_adjustment = 13;
 
 	bool use_order_total = 16;
 	float order_total_lt = 17;
