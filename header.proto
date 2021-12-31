@@ -4093,6 +4093,7 @@ message ShippingInfo {
 	// see https://docs.giaohangtietkiem.vn/?shell#tr-ng-th-i-n-h-ng35
 	string status_code = 43;
 	ShippingData data = 45;
+	string integrated_shipping_id = 46;
 }
 
 
