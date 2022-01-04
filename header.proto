@@ -4131,6 +4131,12 @@ enum ShippingProvider {
 	ghn = 13;
 }
 
+message ShippingPolicies {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated ShippingPolicy shipping_policies = 5;
+}
+
 message ShippingPolicy {
 	common.Context ctx = 1;
 	string account_id = 2;
