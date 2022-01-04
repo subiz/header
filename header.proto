@@ -3979,8 +3979,9 @@ message Address {
 
 	string country = 25;
 	string province = 26;
-}
 
+	float score = 29;
+}
 
 message GHTKOrder {
 	string id = 2;

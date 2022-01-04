@@ -16,6 +16,7 @@ service RateLimit {
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);
 	rpc LookupAddress(Id) returns (Address);
+	rpc PredictAddress(AddressAutocompleteRequest) returns (Addresses);
 
 	rpc ListDistricts(Id) returns (Addresses);
 	rpc ListProvinces(Id) returns (Addresses); // also city
