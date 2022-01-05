@@ -3815,6 +3815,11 @@ message ShopAddress {
 
 	string contact_phone = 34;
 	string contact_name = 35;
+
+	string province_id = 36;
+	string district_id = 37;
+	string ward_id = 38;
+	string street_id = 39;
 }
 
 message ShopAddresses {
@@ -3981,6 +3986,11 @@ message Address {
 	string province = 26;
 
 	float score = 29;
+
+	string province_id = 30;
+	string district_id = 31;
+	string ward_id = 32;
+	string street_id = 33;
 }
 
 message GHTKOrder {
