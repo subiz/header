@@ -22,6 +22,8 @@ service Map {
 	rpc ListProvinces(Id) returns (Addresses); // also city
 	rpc ListWards(Id) returns (Addresses); // phuong/xa
 	rpc ListStreets(Id) returns (Addresses);
+	rpc ListAddresses(Ids) returns (Addresses);
+	rpc ReadAddress(Id) returns (Address);
 }
 
 service AccountMgr {

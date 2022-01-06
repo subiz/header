@@ -3931,7 +3931,7 @@ message OrderItem {
 	float total = 16;
 	int64 fpv_total = 17;
 
-  float discount_amount = 20;
+	float discount_amount = 20;
 	int64 fpv_discount_amount = 21;
 
 	int64 discount_percentage = 23;  // 1234 => 12.34% = 0.1234
@@ -3944,6 +3944,16 @@ message OrderItem {
 
 	float total_tax = 30; // computed, override value
 	int64 fpv_total_tax = 31; // computed, override value
+}
+
+message GHNAddress {
+	int32 ProvinceId = 2;
+	string ProvinceName = 3;
+	int32 DistrictID = 4;
+	string DistrictName = 5;
+	int32 Code = 6;
+	string WardName = 7;
+	string WardCode = 8;
 }
 
 message Address {
@@ -3991,6 +4001,10 @@ message Address {
 	string district_id = 31;
 	string ward_id = 32;
 	string street_id = 33;
+
+	string name = 34;
+	GHNAddress ghn = 35;
+	Address ghtk = 36;
 }
 
 message GHTKOrder {
@@ -4106,7 +4120,6 @@ message ShippingInfo {
 	ShippingData data = 45;
 	string integrated_shipping_id = 46;
 }
-
 
 message ShippingData {
 	GHTKShippingData ghtk = 3;
