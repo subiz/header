@@ -3820,6 +3820,9 @@ message ShopAddress {
 	string district_id = 37;
 	string ward_id = 38;
 	string street_id = 39;
+
+	GHNAddress ghn = 40;
+	Address ghtk = 41;
 }
 
 message ShopAddresses {
