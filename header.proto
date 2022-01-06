@@ -4110,6 +4110,15 @@ message ShippingInfo {
 
 message ShippingData {
 	GHTKShippingData ghtk = 3;
+	GHNShippingData ghn = 4;
+}
+
+message GHNShippingData {
+	int32 service_type_id = 2;
+	int32 payment_type_id = 3;
+	string required_note = 4;
+	int64 insurance_value = 5;
+	string coupon = 6;
 }
 
 message GHTKShippingData {
