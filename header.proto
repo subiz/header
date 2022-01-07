@@ -3950,11 +3950,11 @@ message OrderItem {
 }
 
 message GHNAddress {
-	int32 ProvinceID = 2;
+	int64 ProvinceID = 2;
 	string ProvinceName = 3;
-	int32 DistrictID = 4;
+	int64 DistrictID = 4;
 	string DistrictName = 5;
-	int32 Code = 6;
+	int64 Code = 6;
 	string WardName = 7;
 	string WardCode = 8;
 }
