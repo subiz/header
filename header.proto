@@ -4010,6 +4010,68 @@ message Address {
 	Address ghtk = 36;
 }
 
+message GHNOrder {
+	string client_order_code = 2;
+	int64 shop_id = 3;
+	string order_code = 4;
+
+	int32 service_type_id = 5;
+	int32 service_id = 6;
+	int32 payment_type_id = 7;
+	string required_note = 8;
+
+	string to_name = 9;
+	string to_phone = 10;
+	string to_address = 11;
+	string to_ward_code = 12;
+	int64 to_district_id = 13;
+	int64 pick_station_id = 14;
+
+	repeated GHNOrderItem items = 15;
+	int64 weight = 16;
+	int64 length = 17;
+	int64 width = 18;
+	int64 height = 19;
+	int64 cod_amount = 20;
+	int64 insurance_value = 21;
+	string coupon = 22;
+
+	string return_phone = 23;
+	string return_address = 24;
+	int64 return_district_id = 25;
+	string return_ward_code = 26;
+
+	string content = 27;
+	string note = 28;
+
+	string total_fee = 29;
+	string expected_delivery_time = 30;
+}
+
+// webhook
+message GHNOrder2 {
+	int64 ShopID = 2;
+	string ClientOrderCode = 3;
+	string OrderCode = 4; 
+	int64 TotalFee = 5;
+	string Time = 6;
+	string Status = 7;
+	string ShipperName = 8;
+	string ShipperPhone = 9;
+}
+
+message GHNOrderItem {
+	int64 weight = 2;
+	int32 quantity = 3;
+	string name = 4;
+
+	string code = 5;
+	int64 price = 6;
+	int64 length = 7;
+	int64 width = 8;
+	int64 height = 9;
+}
+
 message GHTKOrder {
 	string id = 2;
 	string partner_id = 3; // is id

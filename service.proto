@@ -499,8 +499,9 @@ service Proder {
 
 	rpc SyncShopeeProducts(header.ShopeeSyncProductRequest) returns (header.ShopeeSyncProductResponse);
 
-	rpc ShippingFee(header.ShippingInfo) returns (header.ShippingInfo);
 	rpc GHTKShippingStatus(header.GHTKOrder) returns (Empty);
+	rpc GHNShippingStatus(header.GHNOrder2) returns (Empty);
+	rpc ShippingFee(header.ShippingInfo) returns (header.ShippingInfo);
 	rpc ShipOrder(header.Id) returns (header.Order);
 	rpc CancelShippingOrder(header.Id) returns (header.Order);
 }
