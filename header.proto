@@ -4046,6 +4046,7 @@ message GHNOrder {
 
 	string total_fee = 29;
 	string expected_delivery_time = 30;
+	string status = 31;
 }
 
 // webhook
