@@ -4025,7 +4025,13 @@ message GHNOrder {
 	string to_address = 11;
 	string to_ward_code = 12;
 	int64 to_district_id = 13;
+
 	int64 pick_station_id = 14;
+	string from_name = 33;
+	string from_phone = 34;
+	string from_address = 35;
+	string from_ward_code = 36;
+	int64 from_district_id = 37;
 
 	repeated GHNOrderItem items = 15;
 	int64 weight = 16;
