@@ -4045,6 +4045,7 @@ message GHNOrder {
 	string note = 28;
 
 	string total_fee = 29;
+	int64 total = 32; // fee
 	string expected_delivery_time = 30;
 	string status = 31;
 }
