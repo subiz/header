@@ -2024,7 +2024,7 @@ message WidgetUserSetting {
 
 	int64 last_modified = 22;
 
-	repeated ShopAddress addresses = 23;
+	repeated Address addresses = 23;
 	repeated PaymentMethod payment_methods = 24;
 }
 
@@ -3762,7 +3762,7 @@ message ShopSetting {
 	int64 updated = 8;
 	string updated_by = 9;
 
-	repeated ShopAddress addresses = 10;
+	repeated Address addresses = 18;
 	repeated Tax taxes = 11;
 
 	repeated PaymentMethod payment_methods = 12;
@@ -3771,64 +3771,6 @@ message ShopSetting {
 	repeated ShopeeShop shopee_shops = 15; // read only
 	repeated IntegratedShipping shippings = 16;
 	repeated ShippingPolicy shipping_policies = 17;
-}
-
-message ShopAddress {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string name = 4;
-	string description = 5;
-
-	string address = 6;
-
-	int64 created = 11;
-	string created_by = 12;
-
-	int64 updated = 13;
-	string updated_by = 14;
-
-	int64 deleted = 15;
-
-	string district = 16;
-	string region = 17; // city
-	string country_code = 18;
-	string country = 19;
-
-	string street = 20;
-	string ward = 21;
-	string state = 22;
-	string postal_code = 23;
-	string city = 24; // city, province
-
-	bool is_warehouse = 25;
-	bool is_point_of_sale = 26;
-
-	string from_shipping_provider = 28; // ghtk, ghn, ahamove, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
-	string from_shipping_shop_id = 29;
-	int64 last_integrated = 30;
-
-	float lng = 31;
-	float lat = 32;
-
-	string province = 33;
-
-	string contact_phone = 34;
-	string contact_name = 35;
-
-	string province_id = 36;
-	string district_id = 37;
-	string ward_id = 38;
-	string street_id = 39;
-
-	GHNAddress ghn = 40;
-	Address ghtk = 41;
-}
-
-message ShopAddresses {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated ShopAddress addresses = 3;
 }
 
 message Addresses {
@@ -3975,7 +3917,7 @@ message Address {
 	string country_code = 12;
 	string address = 27;
 
-	string full_address = 13;
+	string full_address = 13; // read only
 
 	int64 created = 14;
 	string created_by = 15;
@@ -4005,9 +3947,17 @@ message Address {
 	string ward_id = 32;
 	string street_id = 33;
 
-	string name = 34;
 	GHNAddress ghn = 35;
 	Address ghtk = 36;
+
+	string description = 40;
+	int64 deleted = 41;
+	bool is_warehouse = 42;
+	bool is_point_of_sale = 43;
+
+	string from_shipping_provider = 44; // ghtk, ghn, ahamove, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
+	string from_shipping_shop_id = 45;
+	int64 last_integrated = 46;
 }
 
 message GHNOrder {
@@ -4060,7 +4010,7 @@ message GHNOrder {
 message GHNOrder2 {
 	int64 ShopID = 2;
 	string ClientOrderCode = 3;
-	string OrderCode = 4; 
+	string OrderCode = 4;
 	int64 TotalFee = 5;
 	string Time = 6;
 	string Status = 7;
@@ -4144,7 +4094,7 @@ message GHTKOrder {
 
 message ShippingInfo {
 	Address address = 5;
-	ShopAddress pickup_address = 8;
+	Address pickup_address = 4;
 
 	int64 deliver_date = 6; // unix ms
 	int64 pickup_date = 7; // unix ms 0 => ASAP

@@ -198,4 +198,7 @@ enum E {
 	invalid_ratelimit_config = 140;
 	too_many_requests = 141;
 	order_readonly = 142;
+
+	shipping_policy_not_found = 143;
+	too_many_shipping_policy = 144;
 }

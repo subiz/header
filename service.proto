@@ -72,9 +72,9 @@ service AccountMgr {
 	// internal
 	rpc AutoSyncCurrency(header.Id) returns (header.Empty);
 
-	rpc ListShopAddresses(Id) returns (header.ShopAddresses);
-	rpc CreateShopAddress(header.ShopAddress) returns (header.ShopAddress);
-	rpc UpdateShopAddress(header.ShopAddress) returns (header.ShopAddress);
+	rpc ListShopAddresses(Id) returns (header.Addresses);
+	rpc CreateShopAddress(header.Address) returns (header.Address);
+	rpc UpdateShopAddress(header.Address) returns (header.Address);
 	rpc DeleteShopAddress(Id) returns (Empty);
 
 	rpc ListTaxes(Id) returns (header.Taxes);
