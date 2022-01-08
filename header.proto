@@ -3958,6 +3958,8 @@ message Address {
 	string from_shipping_provider = 44; // ghtk, ghn, ahamove, viettelpost, shipchung, ninjavan, grabexpress, ahamove, hcmpost, vnpost, jntexpress, supership, heyu
 	string from_shipping_shop_id = 45;
 	int64 last_integrated = 46;
+
+	string title = 47; // for shop address
 }
 
 message GHNOrder {
