@@ -3960,6 +3960,7 @@ message Address {
 	int64 last_integrated = 46;
 
 	string title = 47; // for shop address
+	string name = 48; // addrdb
 }
 
 message GHNOrder {
