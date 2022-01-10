@@ -937,25 +937,25 @@ var file_service_proto_rawDesc = []byte{
 	0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x31, 0x0a, 0x09, 0x54, 0x72, 0x79,
 	0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x15, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
 	0x42, 0x6f, 0x74, 0x52, 0x75, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e,
-	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x40, 0x0a, 0x09,
-	0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x6f, 0x74, 0x12, 0x18, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x6f, 0x74, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x70,
-	0x6f, 0x72, 0x74, 0x42, 0x6f, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x46,
-	0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x12, 0x1a, 0x2e,
-	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63,
-	0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x41, 0x0a, 0x0a,
+	0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x6f, 0x74, 0x32, 0x12, 0x1c, 0x2e, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x2e, 0x42, 0x6f, 0x74, 0x72, 0x75, 0x6e, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63,
+	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x15, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
+	0x72, 0x2e, 0x42, 0x6f, 0x74, 0x72, 0x75, 0x6e, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x12,
+	0x49, 0x0a, 0x0c, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12,
+	0x1f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x72,
+	0x75, 0x6e, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x18, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e,
+	0x72, 0x75, 0x6e, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x12, 0x46, 0x0a, 0x0b, 0x4c, 0x69,
+	0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x12, 0x1a, 0x2e, 0x68, 0x65, 0x61, 0x64,
 	0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x41, 0x0a, 0x0a, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74,
-	0x42, 0x6f, 0x74, 0x32, 0x12, 0x1c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x42, 0x6f,
-	0x74, 0x72, 0x75, 0x6e, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x15, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x42, 0x6f, 0x74, 0x72,
-	0x75, 0x6e, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73, 0x12, 0x49, 0x0a, 0x0c, 0x52, 0x65, 0x70,
-	0x6f, 0x72, 0x74, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1f, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x72, 0x75, 0x6e, 0x4d, 0x65, 0x74, 0x72,
-	0x69, 0x63, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2e, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x72, 0x75, 0x6e, 0x4d, 0x65, 0x74,
-	0x72, 0x69, 0x63, 0x73, 0x32, 0xaf, 0x04, 0x0a, 0x08, 0x53, 0x65, 0x6e, 0x64, 0x62, 0x61, 0x63,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x4f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x40, 0x0a, 0x09, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x6f, 0x74, 0x12,
+	0x18, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x42,
+	0x6f, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x65, 0x72, 0x2e, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x6f, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x32, 0xaf, 0x04, 0x0a, 0x08, 0x53, 0x65, 0x6e, 0x64, 0x62, 0x61, 0x63,
 	0x6b, 0x12, 0x31, 0x0a, 0x0d, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f,
 	0x6f, 0x6b, 0x12, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62, 0x68,
 	0x6f, 0x6f, 0x6b, 0x1a, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x57, 0x65, 0x62,
@@ -1344,10 +1344,10 @@ var file_service_proto_goTypes = []interface{}{
 	(*ReportWebPluginRequest)(nil),            // 94: header.ReportWebPluginRequest
 	(*Bot)(nil),                               // 95: header.Bot
 	(*BotRunRequest)(nil),                     // 96: header.BotRunRequest
-	(*ReportBotRequest)(nil),                  // 97: header.ReportBotRequest
-	(*ListObjectsRequest)(nil),                // 98: header.ListObjectsRequest
-	(*BotrunMetricsRequest)(nil),              // 99: header.BotrunMetricsRequest
-	(*ActionrunMetricsRequest)(nil),           // 100: header.ActionrunMetricsRequest
+	(*BotrunMetricsRequest)(nil),              // 97: header.BotrunMetricsRequest
+	(*ActionrunMetricsRequest)(nil),           // 98: header.ActionrunMetricsRequest
+	(*ListObjectsRequest)(nil),                // 99: header.ListObjectsRequest
+	(*ReportBotRequest)(nil),                  // 100: header.ReportBotRequest
 	(*Webhook)(nil),                           // 101: header.Webhook
 	(*RecentIndexDeliveryRequest)(nil),        // 102: header.RecentIndexDeliveryRequest
 	(*DeliveryRequest)(nil),                   // 103: header.DeliveryRequest
@@ -1440,10 +1440,10 @@ var file_service_proto_goTypes = []interface{}{
 	(*NotifProfiles)(nil),                     // 190: header.NotifProfiles
 	(*Urls)(nil),                              // 191: header.Urls
 	(*Bots)(nil),                              // 192: header.Bots
-	(*ReportBotResponse)(nil),                 // 193: header.ReportBotResponse
-	(*ListObjectsResponse)(nil),               // 194: header.ListObjectsResponse
-	(*BotrunMetrics)(nil),                     // 195: header.BotrunMetrics
-	(*ActionrunMetrics)(nil),                  // 196: header.ActionrunMetrics
+	(*BotrunMetrics)(nil),                     // 193: header.BotrunMetrics
+	(*ActionrunMetrics)(nil),                  // 194: header.ActionrunMetrics
+	(*ListObjectsResponse)(nil),               // 195: header.ListObjectsResponse
+	(*ReportBotResponse)(nil),                 // 196: header.ReportBotResponse
 	(*WebhookTestResult)(nil),                 // 197: header.WebhookTestResult
 	(*Webhooks)(nil),                          // 198: header.Webhooks
 	(*WebhookDeliveries)(nil),                 // 199: header.WebhookDeliveries
@@ -1722,10 +1722,10 @@ var file_service_proto_depIdxs = []int32{
 	96,  // 252: header.Bizbot.StartBot:input_type -> header.BotRunRequest
 	96,  // 253: header.Bizbot.StopBot:input_type -> header.BotRunRequest
 	96,  // 254: header.Bizbot.TryAction:input_type -> header.BotRunRequest
-	97,  // 255: header.Bizbot.ReportBot:input_type -> header.ReportBotRequest
-	98,  // 256: header.Bizbot.ListObjects:input_type -> header.ListObjectsRequest
-	99,  // 257: header.Bizbot.ReportBot2:input_type -> header.BotrunMetricsRequest
-	100, // 258: header.Bizbot.ReportAction:input_type -> header.ActionrunMetricsRequest
+	97,  // 255: header.Bizbot.ReportBot2:input_type -> header.BotrunMetricsRequest
+	98,  // 256: header.Bizbot.ReportAction:input_type -> header.ActionrunMetricsRequest
+	99,  // 257: header.Bizbot.ListObjects:input_type -> header.ListObjectsRequest
+	100, // 258: header.Bizbot.ReportBot:input_type -> header.ReportBotRequest
 	101, // 259: header.Sendback.CreateWebhook:input_type -> header.Webhook
 	2,   // 260: header.Sendback.PingWebhook:input_type -> header.Id
 	2,   // 261: header.Sendback.DeleteWebhook:input_type -> header.Id
@@ -2060,10 +2060,10 @@ var file_service_proto_depIdxs = []int32{
 	38,  // 590: header.Bizbot.StartBot:output_type -> header.Empty
 	38,  // 591: header.Bizbot.StopBot:output_type -> header.Empty
 	38,  // 592: header.Bizbot.TryAction:output_type -> header.Empty
-	193, // 593: header.Bizbot.ReportBot:output_type -> header.ReportBotResponse
-	194, // 594: header.Bizbot.ListObjects:output_type -> header.ListObjectsResponse
-	195, // 595: header.Bizbot.ReportBot2:output_type -> header.BotrunMetrics
-	196, // 596: header.Bizbot.ReportAction:output_type -> header.ActionrunMetrics
+	193, // 593: header.Bizbot.ReportBot2:output_type -> header.BotrunMetrics
+	194, // 594: header.Bizbot.ReportAction:output_type -> header.ActionrunMetrics
+	195, // 595: header.Bizbot.ListObjects:output_type -> header.ListObjectsResponse
+	196, // 596: header.Bizbot.ReportBot:output_type -> header.ReportBotResponse
 	101, // 597: header.Sendback.CreateWebhook:output_type -> header.Webhook
 	197, // 598: header.Sendback.PingWebhook:output_type -> header.WebhookTestResult
 	38,  // 599: header.Sendback.DeleteWebhook:output_type -> header.Empty
@@ -11921,10 +11921,10 @@ type BizbotClient interface {
 	StartBot(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error)
 	StopBot(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error)
 	TryAction(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error)
-	ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error)
-	ListObjects(ctx context.Context, in *ListObjectsRequest, opts ...grpc.CallOption) (*ListObjectsResponse, error)
 	ReportBot2(ctx context.Context, in *BotrunMetricsRequest, opts ...grpc.CallOption) (*BotrunMetrics, error)
 	ReportAction(ctx context.Context, in *ActionrunMetricsRequest, opts ...grpc.CallOption) (*ActionrunMetrics, error)
+	ListObjects(ctx context.Context, in *ListObjectsRequest, opts ...grpc.CallOption) (*ListObjectsResponse, error)
+	ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error)
 }
 
 type bizbotClient struct {
@@ -12025,24 +12025,6 @@ func (c *bizbotClient) TryAction(ctx context.Context, in *BotRunRequest, opts ..
 	return out, nil
 }
 
-func (c *bizbotClient) ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error) {
-	out := new(ReportBotResponse)
-	err := c.cc.Invoke(ctx, "/header.Bizbot/ReportBot", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *bizbotClient) ListObjects(ctx context.Context, in *ListObjectsRequest, opts ...grpc.CallOption) (*ListObjectsResponse, error) {
-	out := new(ListObjectsResponse)
-	err := c.cc.Invoke(ctx, "/header.Bizbot/ListObjects", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *bizbotClient) ReportBot2(ctx context.Context, in *BotrunMetricsRequest, opts ...grpc.CallOption) (*BotrunMetrics, error) {
 	out := new(BotrunMetrics)
 	err := c.cc.Invoke(ctx, "/header.Bizbot/ReportBot2", in, out, opts...)
@@ -12061,6 +12043,24 @@ func (c *bizbotClient) ReportAction(ctx context.Context, in *ActionrunMetricsReq
 	return out, nil
 }
 
+func (c *bizbotClient) ListObjects(ctx context.Context, in *ListObjectsRequest, opts ...grpc.CallOption) (*ListObjectsResponse, error) {
+	out := new(ListObjectsResponse)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ListObjects", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bizbotClient) ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error) {
+	out := new(ReportBotResponse)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ReportBot", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BizbotServer is the server API for Bizbot service.
 type BizbotServer interface {
 	ListBots(context.Context, *Id) (*Bots, error)
@@ -12073,10 +12073,10 @@ type BizbotServer interface {
 	StartBot(context.Context, *BotRunRequest) (*Empty, error)
 	StopBot(context.Context, *BotRunRequest) (*Empty, error)
 	TryAction(context.Context, *BotRunRequest) (*Empty, error)
-	ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error)
-	ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error)
 	ReportBot2(context.Context, *BotrunMetricsRequest) (*BotrunMetrics, error)
 	ReportAction(context.Context, *ActionrunMetricsRequest) (*ActionrunMetrics, error)
+	ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error)
+	ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error)
 }
 
 // UnimplementedBizbotServer can be embedded to have forward compatible implementations.
@@ -12113,17 +12113,17 @@ func (*UnimplementedBizbotServer) StopBot(context.Context, *BotRunRequest) (*Emp
 func (*UnimplementedBizbotServer) TryAction(context.Context, *BotRunRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryAction not implemented")
 }
-func (*UnimplementedBizbotServer) ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReportBot not implemented")
-}
-func (*UnimplementedBizbotServer) ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListObjects not implemented")
-}
 func (*UnimplementedBizbotServer) ReportBot2(context.Context, *BotrunMetricsRequest) (*BotrunMetrics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportBot2 not implemented")
 }
 func (*UnimplementedBizbotServer) ReportAction(context.Context, *ActionrunMetricsRequest) (*ActionrunMetrics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportAction not implemented")
+}
+func (*UnimplementedBizbotServer) ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListObjects not implemented")
+}
+func (*UnimplementedBizbotServer) ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportBot not implemented")
 }
 
 func RegisterBizbotServer(s *grpc.Server, srv BizbotServer) {
@@ -12310,42 +12310,6 @@ func _Bizbot_TryAction_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Bizbot_ReportBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReportBotRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BizbotServer).ReportBot(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Bizbot/ReportBot",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BizbotServer).ReportBot(ctx, req.(*ReportBotRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Bizbot_ListObjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListObjectsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BizbotServer).ListObjects(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Bizbot/ListObjects",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BizbotServer).ListObjects(ctx, req.(*ListObjectsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Bizbot_ReportBot2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BotrunMetricsRequest)
 	if err := dec(in); err != nil {
@@ -12378,6 +12342,42 @@ func _Bizbot_ReportAction_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BizbotServer).ReportAction(ctx, req.(*ActionrunMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Bizbot_ListObjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListObjectsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BizbotServer).ListObjects(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Bizbot/ListObjects",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BizbotServer).ListObjects(ctx, req.(*ListObjectsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Bizbot_ReportBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportBotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BizbotServer).ReportBot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Bizbot/ReportBot",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BizbotServer).ReportBot(ctx, req.(*ReportBotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -12427,20 +12427,20 @@ var _Bizbot_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Bizbot_TryAction_Handler,
 		},
 		{
-			MethodName: "ReportBot",
-			Handler:    _Bizbot_ReportBot_Handler,
-		},
-		{
-			MethodName: "ListObjects",
-			Handler:    _Bizbot_ListObjects_Handler,
-		},
-		{
 			MethodName: "ReportBot2",
 			Handler:    _Bizbot_ReportBot2_Handler,
 		},
 		{
 			MethodName: "ReportAction",
 			Handler:    _Bizbot_ReportAction_Handler,
+		},
+		{
+			MethodName: "ListObjects",
+			Handler:    _Bizbot_ListObjects_Handler,
+		},
+		{
+			MethodName: "ReportBot",
+			Handler:    _Bizbot_ReportBot_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

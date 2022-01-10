@@ -1936,22 +1936,19 @@ message ActionrunMetrics {
 	repeated ActionrunMetric metrics = 2;
 }
 
-message ListObjectId {
-	string object_type = 2;
-	repeated string object_ids = 5;
-}
-
 message ListObjectsRequest {
 	string account_id = 2;
 	string bot_id = 3;
-	int64 day_from = 4;
-	int64 day_to = 5;
+	int64 created_hour_from = 8;
+	int64 created_hour_to = 9;
 	string anchor = 6;
 	int32 limit = 7;
+
+	int64 day_from = 4;
+	int64 day_to = 5;
 }
 
 message ListObjectsResponse {
-	repeated ListObjectId list = 2;
 	string anchor = 3;
 	repeated string conversation_ids = 4;
 }

@@ -391,10 +391,11 @@ service Bizbot {
 	rpc StartBot(header.BotRunRequest) returns (Empty);
 	rpc StopBot(header.BotRunRequest) returns (Empty);
 	rpc TryAction(header.BotRunRequest) returns (Empty);
-	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
-	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
 	rpc ReportBot2(header.BotrunMetricsRequest) returns (header.BotrunMetrics);
 	rpc ReportAction(header.ActionrunMetricsRequest) returns (header.ActionrunMetrics);
+
+	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
+	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
 }
 
 // sendback services
