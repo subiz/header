@@ -4142,6 +4142,7 @@ message ShippingInfo {
 	string status_code = 43;
 	ShippingData data = 45;
 	string integrated_shipping_id = 46;
+	string status = 47;
 }
 
 message ShippingData {
