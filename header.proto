@@ -4519,6 +4519,9 @@ enum OrderStatusCode {
 	fulfilled = 21;
 	hold = 23;
 	confirmed = 24;
+	delivery_success = 25;
+	delivery_failure = 26;
+	delivery_received = 27;
 }
 
 message Bill {
