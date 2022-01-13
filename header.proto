@@ -4144,6 +4144,9 @@ message ShippingInfo {
 	string integrated_shipping_id = 46;
 	string status = 47;
 	int32 index_incre = 48; // only server
+
+	int64 cancelled_at = 49;
+	string cancelled_by = 50;
 }
 
 message ShippingData {
