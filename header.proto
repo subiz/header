@@ -4260,6 +4260,9 @@ message IntegratedShipping {
 
 	int64 last_error = 15;
 	string connect_status = 16; // connected || disconnected
+	string ghn_client_id = 19;
+	string ghn_shop_id = 20;
+	Address address = 21;
 }
 
 message IntegratedShippings {

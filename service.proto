@@ -95,13 +95,11 @@ service AccountMgr {
 	rpc DeletePaymentMethod(Id) returns (Empty);
 	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
 
-	rpc ListIntegratedShippingProviders(Ids) returns (IntegratedShippings);
-	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);
+	rpc ListIntegratedShippingProviders(Ids) returns (header.IntegratedShippings);
 	rpc DeintegrateShippingProvider(header.IntegratedShipping) returns (Empty);
-	rpc UpdateIntegratedShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);
-	rpc ListGhnShopAddresses(Id) returns (header.Addresses);
-	rpc CreateAffiliateOTP(GHNAssignShop) returns (header.Address);
-	rpc UseAffiliateOTP(GHNAssignShop) returns (header.Address);
+	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (header.IntegratedShipping);
+	rpc SendGHNAffiliateOTP(header.GHNAssignShop) returns (header.IntegratedShipping);
+	rpc EnterGHNAffiliateOTP(header.GHNAssignShop) returns (header.IntegratedShipping);
 }
 
 // user services
