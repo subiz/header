@@ -99,6 +99,9 @@ service AccountMgr {
 	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);
 	rpc DeintegrateShippingProvider(header.IntegratedShipping) returns (Empty);
 	rpc UpdateIntegratedShippingProvider(header.IntegratedShipping) returns (IntegratedShipping);
+	rpc ListGhnShopAddresses(Id) returns (header.Addresses);
+	rpc CreateAffiliateOTP(GHNAssignShop) returns (header.Address);
+	rpc UseAffiliateOTP(GHNAssignShop) returns (header.Address);
 }
 
 // user services
