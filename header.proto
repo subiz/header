@@ -3960,12 +3960,6 @@ message Address {
 	string name = 48; // addrdb
 }
 
-message GHNAssignShop {
-	string phone = 2;
-	string otp = 3;
-	int32 shop_id = 4;
-}
-
 message GHNOrder {
 	string client_order_code = 2;
 	int64 shop_id = 3;
@@ -4262,6 +4256,7 @@ message IntegratedShipping {
 	string connect_status = 16; // connected || disconnected
 	string ghn_client_id = 19;
 	string ghn_shop_id = 20;
+	string ghn_otp = 22;
 	Address address = 21;
 }
 
