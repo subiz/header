@@ -4477,7 +4477,7 @@ message Order {
 	string channel = 45; // messenger, zalo
 	string channel_touchpoint = 46;
 
-	repeated string releated_conversations = 47;
+	repeated string related_conversations = 47;
 
 	string salesperson = 48;
 	User user = 50; // keep session and attribute
