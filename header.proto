@@ -4310,6 +4310,7 @@ message OrderMetric {
 	string account_id = 2;
 	string status = 3; // only list orders
 	string payment_status = 4; // only list orders
+	string shipping_status = 22; // only list orders
 	string payment_method = 5;
 	int64 invoice_hour = 6;
 	string invoice_date = 7; // derived
