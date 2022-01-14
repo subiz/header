@@ -264,3 +264,186 @@ func checkAccess(scopes []string, perm string) bool {
 func CheckAccess(realScopes, authorizedScopes []string, perm string) bool {
 	return checkAccess(realScopes, perm) && checkAccess(authorizedScopes, perm)
 }
+
+
+func CalcTotalOrder(order *Order) {
+	subtotal := float32(0)
+	// compute subtotal first, since it doesn't depend on tax or gloal discount
+	for _, item := range order.Items {
+		if item.Product == nil {
+			continue
+		}
+		price := item.Product.Price * float32(item.Quantity)
+
+		// some products that are discounted before tax
+		// the discount amount is calculated in product price for
+		// simpler calucation in future
+		if item.DiscountType == "percentage" {
+			if item.DiscountBeforeTax && item.DiscountPercentage > 0 {
+				price = price * (1 - float32(item.DiscountPercentage)/10000)
+			}
+		} else if item.DiscountType == "amount" {
+			if item.DiscountBeforeTax && item.DiscountAmount > 0 {
+				price = price - item.DiscountAmount
+				if price < 0 {
+					price = 0
+				}
+			}
+		}
+
+		item.Total = price
+		item.FpvTotal = int64(price * order.CurrencyRate * 1000000)
+
+		subtotal += price
+	}
+
+	computedDiscount := float32(0)
+	// add specific item discount after tax to computed_discount
+	for _, item := range order.Items {
+		if item.DiscountType == "" || item.Product == nil {
+			continue
+		}
+		price := item.Product.Price * float32(item.Quantity)
+
+		tax := item.Product.Tax
+		taxprice := float32(0)
+		if tax.GetId() != "" {
+			taxprice = price * (float32(tax.Percentage) / 100000)
+		}
+
+		if item.DiscountType == "percentage" && !item.DiscountBeforeTax && item.DiscountPercentage > 0 {
+			computedDiscount += (price + taxprice) * float32(item.DiscountPercentage) / 10000
+		} else if item.DiscountType == "amount" {
+			itemdiscount := item.DiscountAmount
+			if item.DiscountBeforeTax && itemdiscount > 0 {
+				// CAUTION: easey to miss condition
+				if itemdiscount > price+taxprice {
+					itemdiscount = price + taxprice
+					computedDiscount += itemdiscount
+				}
+			}
+		}
+	}
+
+	// TAX
+	taxM := map[string]*taxitem{}
+	for i, item := range order.Items {
+		if item.Product == nil {
+			continue
+		}
+
+		tax := item.Product.Tax
+		if tax.GetId() == "" {
+			continue
+		}
+
+		price := item.Product.Price * float32(item.Quantity)
+		if item.DiscountType != "" {
+			if item.DiscountType == "percentage" {
+				if item.DiscountBeforeTax && item.DiscountPercentage > 0 {
+					price = price * (1 - float32(item.DiscountPercentage)/10000)
+				}
+			} else if item.DiscountType == "amount" {
+				computedDiscount := item.DiscountAmount
+				if item.DiscountBeforeTax && computedDiscount > 0 {
+					price = price - computedDiscount
+					if price < 0 {
+						price = 0
+					}
+				}
+			}
+		}
+		taxprice := price * float32(tax.Percentage) / 10000
+		taxM[strconv.Itoa(i)] = &taxitem{tax: tax, taxprice: taxprice}
+	}
+
+	// have discount before tax
+	if order.DiscountBeforeTax {
+		if order.DiscountType == "percentage" && order.DiscountPercentage > 0 {
+			for _, t := range taxM {
+				t.taxprice = t.taxprice * (1 - float32(order.DiscountPercentage)/10000)
+			}
+			computedDiscount += subtotal * float32(order.DiscountPercentage) / 10000
+		} else if order.DiscountType == "amount" {
+			discount := order.DiscountAmount
+			if subtotal > 0 {
+				for _, t := range taxM {
+					// CAUTION: easy to miss
+					if discount > subtotal {
+						discount = subtotal
+					}
+
+					t.taxprice = t.taxprice * (1 - discount/subtotal)
+				}
+			}
+			computedDiscount += discount
+		}
+	} else {
+		if order.DiscountType == "percentage" && order.DiscountPercentage > 0 {
+			taxprice := float32(0)
+			for _, t := range taxM {
+				taxprice += t.taxprice
+			}
+			computedDiscount += (subtotal + taxprice) * float32(order.DiscountPercentage) / 10000
+
+		} else if order.DiscountType == "amount" {
+			computedDiscount += order.DiscountAmount
+		}
+	}
+
+	// SHIP
+	shippingfee := order.GetShipping().GetNominalFee()
+	if shippingfee > 0 {
+		if order.Shipping.Tax.GetId() != "" {
+			tax := order.Shipping.Tax
+			taxprice := (shippingfee * (float32(tax.Percentage) / 10000))
+			taxM["ship"] = &taxitem{tax: tax, taxprice: taxprice}
+
+			order.Shipping.TotalTax = taxprice
+			order.Shipping.FpvTotalTax = int64(taxprice * order.CurrencyRate * 1000000)
+		}
+		order.Shipping.FpvNominalFee = int64(order.Shipping.NominalFee * order.CurrencyRate * 1000000)
+	}
+
+	totaltax := float32(0)
+	for _, t := range taxM {
+		totaltax += t.taxprice
+	}
+
+	total := subtotal + totaltax - computedDiscount + shippingfee
+
+	total += order.Adjustment
+	if total < 0 {
+		total = 0
+	}
+
+	// calculate total and fpv(s) ...
+	order.Subtotal = subtotal
+	order.FpvSubtotal = int64(subtotal * order.CurrencyRate * 1000000)
+
+	order.Total = total
+	order.FpvTotal = int64(total * order.CurrencyRate * 1000000)
+
+	order.FpvDiscountAmount = int64(order.DiscountAmount * order.CurrencyRate * 1000000)
+
+	order.FpvAdjustment = int64(order.Adjustment * order.CurrencyRate * 1000000)
+
+	order.TotalTax = totaltax
+	order.FpvTotalTax = int64(totaltax * order.CurrencyRate * 1000000)
+	for i, item := range order.Items {
+		if item.Product == nil {
+			continue
+		}
+
+		t := taxM[strconv.Itoa(i)]
+		if t != nil {
+			item.TotalTax = t.taxprice
+			item.FpvTotalTax = int64(t.taxprice * order.CurrencyRate * 1000000)
+		}
+	}
+}
+
+type taxitem struct {
+	tax      *Tax
+	taxprice float32
+}
