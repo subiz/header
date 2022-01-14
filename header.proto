@@ -4397,6 +4397,10 @@ message OrdersRequest {
 	string payment_status = 14;
 	repeated string pos_ids = 15;
 	repeated string salesperson = 16; // agent ids
+	repeated string statuses = 24;
+	repeated string not_statuses = 25;
+	repeated string shipping_statuses = 26;
+	repeated string not_shipping_statuses = 27;
 }
 
 message DownloadOrderRequest {
