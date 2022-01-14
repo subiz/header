@@ -82,6 +82,7 @@ service AccountMgr {
 	rpc UpdateTax(header.Tax) returns (header.Tax);
 	rpc DeleteTax(Id) returns (Empty);
 
+	rpc CheckShippingPolicy(header.Order) returns (header.ShippingPolicies);
 	rpc ListShippingPolicies(Id) returns (header.ShippingPolicies);
 	rpc CreateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
 	rpc UpdateShippingPolicy(header.ShippingPolicy) returns (header.ShippingPolicy);
