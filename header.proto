@@ -4008,6 +4008,8 @@ message GHNOrder {
 
 // webhook
 message GHNOrder2 {
+	string account_id = 10; // only subiz
+
 	int64 ShopID = 2;
 	string ClientOrderCode = 3;
 	string OrderCode = 4;
@@ -4031,6 +4033,8 @@ message GHNOrderItem {
 }
 
 message GHTKOrder {
+	string account_id = 55; // only subiz
+
 	string id = 2;
 	string partner_id = 3; // is id
 	string label = 4;
