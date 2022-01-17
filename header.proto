@@ -3969,6 +3969,7 @@ message GHNOrder {
 	int32 service_id = 6;
 	int32 payment_type_id = 7;
 	string required_note = 8;
+	repeated int32 pick_shift = 38;
 
 	string to_name = 9;
 	string to_phone = 10;
@@ -4050,6 +4051,8 @@ message GHTKOrder {
 	string reason_code = 13;
 	string reason = 14;
 
+	string weight_option = 59;
+	float total_weight = 60;
 	float weight = 15;
 	int32 area = 16; // goi cuoc tinh fee
 	int64 fee = 17;
@@ -4072,17 +4075,21 @@ message GHTKOrder {
 	int64 pick_work_shift  = 33;
 	int32 storage_day = 34;
 
+	string pick_address_id = 61;
 	string pick_name = 35;
 	string pick_tel = 36;
+	string pick_email = 57;
 	string pick_address = 37;
 	string pick_province = 38;
 	string pick_district = 39;
 	string pick_ward = 40;
+	string pick_street = 56;
 	string pick_date = 41;
 
 	string name = 42;
 	string customer_fullname = 43; // is name
 	string tel = 44;
+	string email = 58;
 	string customer_tel = 45; // is tell
 	string address = 46;
 	string province = 47;
