@@ -3870,19 +3870,19 @@ message OrderItem {
 
 	string note = 15;
 
+	//  equal quantity*product.price - discount
 	float total = 16;
 	int64 fpv_total = 17;
 
+	// discount before tax
 	float discount_amount = 20;
 	int64 fpv_discount_amount = 21;
-
 	int64 discount_percentage = 23;  // 1234 => 12.34% = 0.1234
 
 	string pos_id = 24;
 	Tax tax = 25;
 
-	string discount_type = 26;
-	bool discount_before_tax = 27;
+	string discount_type = 26; // percentage || amount
 
 	float total_tax = 30; // computed, override value
 	int64 fpv_total_tax = 31; // computed, override value
@@ -4480,12 +4480,12 @@ message Order {
 	float deposit = 37;
 	int64 fpv_deposit = 38;
 
+	// discount: discount after tax
+	// to discount before tax, use discount in item
 	float discount_amount = 40;
 	int64 fpv_discount_amount = 41;
-
 	int64 discount_percentage = 43; // 1234 => 12.34% = 0.1234
 	string discount_type = 51; // amount || percentage
-	bool discount_before_tax = 52;
 
 	string pos_id = 44;
 
