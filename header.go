@@ -265,7 +265,6 @@ func CheckAccess(realScopes, authorizedScopes []string, perm string) bool {
 	return checkAccess(realScopes, perm) && checkAccess(authorizedScopes, perm)
 }
 
-
 func CalcTotalOrder(order *Order) {
 	subtotal := float32(0)
 	// compute subtotal first, since it doesn't depend on tax or gloal discount
@@ -279,11 +278,11 @@ func CalcTotalOrder(order *Order) {
 		// the discount amount is calculated in product price for
 		// simpler calucation in future
 		if item.DiscountType == "percentage" {
-			if item.DiscountBeforeTax && item.DiscountPercentage > 0 {
+			if item.DiscountPercentage > 0 {
 				price = price * (1 - float32(item.DiscountPercentage)/10000)
 			}
 		} else if item.DiscountType == "amount" {
-			if item.DiscountBeforeTax && item.DiscountAmount > 0 {
+			if item.DiscountAmount > 0 {
 				price = price - item.DiscountAmount
 				if price < 0 {
 					price = 0
@@ -295,34 +294,6 @@ func CalcTotalOrder(order *Order) {
 		item.FpvTotal = int64(price * order.CurrencyRate * 1000000)
 
 		subtotal += price
-	}
-
-	computedDiscount := float32(0)
-	// add specific item discount after tax to computed_discount
-	for _, item := range order.Items {
-		if item.DiscountType == "" || item.Product == nil {
-			continue
-		}
-		price := item.Product.Price * float32(item.Quantity)
-
-		tax := item.Product.Tax
-		taxprice := float32(0)
-		if tax.GetId() != "" {
-			taxprice = price * (float32(tax.Percentage) / 100000)
-		}
-
-		if item.DiscountType == "percentage" && !item.DiscountBeforeTax && item.DiscountPercentage > 0 {
-			computedDiscount += (price + taxprice) * float32(item.DiscountPercentage) / 10000
-		} else if item.DiscountType == "amount" {
-			itemdiscount := item.DiscountAmount
-			if item.DiscountBeforeTax && itemdiscount > 0 {
-				// CAUTION: easey to miss condition
-				if itemdiscount > price+taxprice {
-					itemdiscount = price + taxprice
-					computedDiscount += itemdiscount
-				}
-			}
-		}
 	}
 
 	// TAX
@@ -337,58 +308,25 @@ func CalcTotalOrder(order *Order) {
 			continue
 		}
 
-		price := item.Product.Price * float32(item.Quantity)
-		if item.DiscountType != "" {
-			if item.DiscountType == "percentage" {
-				if item.DiscountBeforeTax && item.DiscountPercentage > 0 {
-					price = price * (1 - float32(item.DiscountPercentage)/10000)
-				}
-			} else if item.DiscountType == "amount" {
-				computedDiscount := item.DiscountAmount
-				if item.DiscountBeforeTax && computedDiscount > 0 {
-					price = price - computedDiscount
-					if price < 0 {
-						price = 0
-					}
-				}
-			}
-		}
-		taxprice := price * float32(tax.Percentage) / 10000
+		taxprice := item.Total * float32(tax.Percentage) / 10000
 		taxM[strconv.Itoa(i)] = &taxitem{tax: tax, taxprice: taxprice}
 	}
 
-	// have discount before tax
-	if order.DiscountBeforeTax {
-		if order.DiscountType == "percentage" && order.DiscountPercentage > 0 {
-			for _, t := range taxM {
-				t.taxprice = t.taxprice * (1 - float32(order.DiscountPercentage)/10000)
-			}
-			computedDiscount += subtotal * float32(order.DiscountPercentage) / 10000
-		} else if order.DiscountType == "amount" {
-			discount := order.DiscountAmount
-			if subtotal > 0 {
-				for _, t := range taxM {
-					// CAUTION: easy to miss
-					if discount > subtotal {
-						discount = subtotal
-					}
+	computedDiscount := float32(0)
 
-					t.taxprice = t.taxprice * (1 - discount/subtotal)
-				}
-			}
-			computedDiscount += discount
-		}
-	} else {
-		if order.DiscountType == "percentage" && order.DiscountPercentage > 0 {
-			taxprice := float32(0)
-			for _, t := range taxM {
-				taxprice += t.taxprice
-			}
-			computedDiscount += (subtotal + taxprice) * float32(order.DiscountPercentage) / 10000
+	totaltax := float32(0)
+	for _, t := range taxM {
+		totaltax += t.taxprice
+	}
 
-		} else if order.DiscountType == "amount" {
-			computedDiscount += order.DiscountAmount
-		}
+	// have discount after tax
+	if order.DiscountType == "percentage" && order.DiscountPercentage > 0 {
+		computedDiscount = (subtotal + totaltax) * float32(order.DiscountPercentage) / 10000
+	} else if order.DiscountType == "amount" {
+		computedDiscount = order.DiscountAmount
+	}
+	if computedDiscount > (subtotal + totaltax) {
+		computedDiscount = subtotal + totaltax
 	}
 
 	// SHIP
@@ -405,13 +343,12 @@ func CalcTotalOrder(order *Order) {
 		order.Shipping.FpvNominalFee = int64(order.Shipping.NominalFee * order.CurrencyRate * 1000000)
 	}
 
-	totaltax := float32(0)
+	totaltax = float32(0)
 	for _, t := range taxM {
 		totaltax += t.taxprice
 	}
 
 	total := subtotal + totaltax - computedDiscount + shippingfee
-
 	total += order.Adjustment
 	if total < 0 {
 		total = 0

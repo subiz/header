@@ -30228,22 +30228,23 @@ type OrderItem struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OrderId            string   `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	Id                 string   `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
-	Quantity           int32    `protobuf:"varint,10,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	Product            *Product `protobuf:"bytes,11,opt,name=product,proto3" json:"product,omitempty"` // copy
-	Note               string   `protobuf:"bytes,15,opt,name=note,proto3" json:"note,omitempty"`
-	Total              float32  `protobuf:"fixed32,16,opt,name=total,proto3" json:"total,omitempty"`
-	FpvTotal           int64    `protobuf:"varint,17,opt,name=fpv_total,json=fpvTotal,proto3" json:"fpv_total,omitempty"`
-	DiscountAmount     float32  `protobuf:"fixed32,20,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
-	FpvDiscountAmount  int64    `protobuf:"varint,21,opt,name=fpv_discount_amount,json=fpvDiscountAmount,proto3" json:"fpv_discount_amount,omitempty"`
-	DiscountPercentage int64    `protobuf:"varint,23,opt,name=discount_percentage,json=discountPercentage,proto3" json:"discount_percentage,omitempty"` // 1234 => 12.34% = 0.1234
-	PosId              string   `protobuf:"bytes,24,opt,name=pos_id,json=posId,proto3" json:"pos_id,omitempty"`
-	Tax                *Tax     `protobuf:"bytes,25,opt,name=tax,proto3" json:"tax,omitempty"`
-	DiscountType       string   `protobuf:"bytes,26,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"`
-	DiscountBeforeTax  bool     `protobuf:"varint,27,opt,name=discount_before_tax,json=discountBeforeTax,proto3" json:"discount_before_tax,omitempty"`
-	TotalTax           float32  `protobuf:"fixed32,30,opt,name=total_tax,json=totalTax,proto3" json:"total_tax,omitempty"`           // computed, override value
-	FpvTotalTax        int64    `protobuf:"varint,31,opt,name=fpv_total_tax,json=fpvTotalTax,proto3" json:"fpv_total_tax,omitempty"` // computed, override value
+	OrderId  string   `protobuf:"bytes,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Id       string   `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	Quantity int32    `protobuf:"varint,10,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Product  *Product `protobuf:"bytes,11,opt,name=product,proto3" json:"product,omitempty"` // copy
+	Note     string   `protobuf:"bytes,15,opt,name=note,proto3" json:"note,omitempty"`
+	//  equal quantity*product.price - discount
+	Total    float32 `protobuf:"fixed32,16,opt,name=total,proto3" json:"total,omitempty"`
+	FpvTotal int64   `protobuf:"varint,17,opt,name=fpv_total,json=fpvTotal,proto3" json:"fpv_total,omitempty"`
+	// discount before tax
+	DiscountAmount     float32 `protobuf:"fixed32,20,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
+	FpvDiscountAmount  int64   `protobuf:"varint,21,opt,name=fpv_discount_amount,json=fpvDiscountAmount,proto3" json:"fpv_discount_amount,omitempty"`
+	DiscountPercentage int64   `protobuf:"varint,23,opt,name=discount_percentage,json=discountPercentage,proto3" json:"discount_percentage,omitempty"` // 1234 => 12.34% = 0.1234
+	PosId              string  `protobuf:"bytes,24,opt,name=pos_id,json=posId,proto3" json:"pos_id,omitempty"`
+	Tax                *Tax    `protobuf:"bytes,25,opt,name=tax,proto3" json:"tax,omitempty"`
+	DiscountType       string  `protobuf:"bytes,26,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"` // percentage || amount
+	TotalTax           float32 `protobuf:"fixed32,30,opt,name=total_tax,json=totalTax,proto3" json:"total_tax,omitempty"`           // computed, override value
+	FpvTotalTax        int64   `protobuf:"varint,31,opt,name=fpv_total_tax,json=fpvTotalTax,proto3" json:"fpv_total_tax,omitempty"` // computed, override value
 }
 
 func (x *OrderItem) Reset() {
@@ -30367,13 +30368,6 @@ func (x *OrderItem) GetDiscountType() string {
 		return x.DiscountType
 	}
 	return ""
-}
-
-func (x *OrderItem) GetDiscountBeforeTax() bool {
-	if x != nil {
-		return x.DiscountBeforeTax
-	}
-	return false
 }
 
 func (x *OrderItem) GetTotalTax() float32 {
@@ -34245,30 +34239,31 @@ type Order struct {
 	Status         string `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
 	ShippingStatus string `protobuf:"bytes,73,opt,name=shipping_status,json=shippingStatus,proto3" json:"shipping_status,omitempty"`
 	// unpaid, paid, // computed using total and payment_made
-	PaymentStatus         string            `protobuf:"bytes,11,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
-	Created               int64             `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy             string            `protobuf:"bytes,13,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated               int64             `protobuf:"varint,18,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy             string            `protobuf:"bytes,19,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Items                 []*OrderItem      `protobuf:"bytes,20,rep,name=items,proto3" json:"items,omitempty"`
-	Subtotal              float32           `protobuf:"fixed32,21,opt,name=subtotal,proto3" json:"subtotal,omitempty"`                                    // computed, override value
-	FpvSubtotal           int64             `protobuf:"varint,22,opt,name=fpv_subtotal,json=fpvSubtotal,proto3" json:"fpv_subtotal,omitempty"`            // computed, override value
-	Total                 float32           `protobuf:"fixed32,25,opt,name=total,proto3" json:"total,omitempty"`                                          // computed, override value
-	FpvTotal              int64             `protobuf:"varint,26,opt,name=fpv_total,json=fpvTotal,proto3" json:"fpv_total,omitempty"`                     // computed, override value
-	PaymentMade           float32           `protobuf:"fixed32,30,opt,name=payment_made,json=paymentMade,proto3" json:"payment_made,omitempty"`           // computed, override value
-	FpvPaymentMade        int64             `protobuf:"varint,31,opt,name=fpv_payment_made,json=fpvPaymentMade,proto3" json:"fpv_payment_made,omitempty"` // computed, override value
-	CancellationNote      string            `protobuf:"bytes,34,opt,name=cancellation_note,json=cancellationNote,proto3" json:"cancellation_note,omitempty"`
-	CancellationCode      string            `protobuf:"bytes,35,opt,name=cancellation_code,json=cancellationCode,proto3" json:"cancellation_code,omitempty"` // typing_error, user_rejected
-	CancelledAt           int64             `protobuf:"varint,60,opt,name=cancelled_at,json=cancelledAt,proto3" json:"cancelled_at,omitempty"`
-	CancelledBy           string            `protobuf:"bytes,61,opt,name=cancelled_by,json=cancelledBy,proto3" json:"cancelled_by,omitempty"`
-	Currency              string            `protobuf:"bytes,36,opt,name=currency,proto3" json:"currency,omitempty"` // empty => base currency
-	Deposit               float32           `protobuf:"fixed32,37,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	FpvDeposit            int64             `protobuf:"varint,38,opt,name=fpv_deposit,json=fpvDeposit,proto3" json:"fpv_deposit,omitempty"`
+	PaymentStatus    string       `protobuf:"bytes,11,opt,name=payment_status,json=paymentStatus,proto3" json:"payment_status,omitempty"`
+	Created          int64        `protobuf:"varint,12,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy        string       `protobuf:"bytes,13,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated          int64        `protobuf:"varint,18,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy        string       `protobuf:"bytes,19,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Items            []*OrderItem `protobuf:"bytes,20,rep,name=items,proto3" json:"items,omitempty"`
+	Subtotal         float32      `protobuf:"fixed32,21,opt,name=subtotal,proto3" json:"subtotal,omitempty"`                                    // computed, override value
+	FpvSubtotal      int64        `protobuf:"varint,22,opt,name=fpv_subtotal,json=fpvSubtotal,proto3" json:"fpv_subtotal,omitempty"`            // computed, override value
+	Total            float32      `protobuf:"fixed32,25,opt,name=total,proto3" json:"total,omitempty"`                                          // computed, override value
+	FpvTotal         int64        `protobuf:"varint,26,opt,name=fpv_total,json=fpvTotal,proto3" json:"fpv_total,omitempty"`                     // computed, override value
+	PaymentMade      float32      `protobuf:"fixed32,30,opt,name=payment_made,json=paymentMade,proto3" json:"payment_made,omitempty"`           // computed, override value
+	FpvPaymentMade   int64        `protobuf:"varint,31,opt,name=fpv_payment_made,json=fpvPaymentMade,proto3" json:"fpv_payment_made,omitempty"` // computed, override value
+	CancellationNote string       `protobuf:"bytes,34,opt,name=cancellation_note,json=cancellationNote,proto3" json:"cancellation_note,omitempty"`
+	CancellationCode string       `protobuf:"bytes,35,opt,name=cancellation_code,json=cancellationCode,proto3" json:"cancellation_code,omitempty"` // typing_error, user_rejected
+	CancelledAt      int64        `protobuf:"varint,60,opt,name=cancelled_at,json=cancelledAt,proto3" json:"cancelled_at,omitempty"`
+	CancelledBy      string       `protobuf:"bytes,61,opt,name=cancelled_by,json=cancelledBy,proto3" json:"cancelled_by,omitempty"`
+	Currency         string       `protobuf:"bytes,36,opt,name=currency,proto3" json:"currency,omitempty"` // empty => base currency
+	Deposit          float32      `protobuf:"fixed32,37,opt,name=deposit,proto3" json:"deposit,omitempty"`
+	FpvDeposit       int64        `protobuf:"varint,38,opt,name=fpv_deposit,json=fpvDeposit,proto3" json:"fpv_deposit,omitempty"`
+	// discount: discount after tax
+	// to discount before tax, use discount in item
 	DiscountAmount        float32           `protobuf:"fixed32,40,opt,name=discount_amount,json=discountAmount,proto3" json:"discount_amount,omitempty"`
 	FpvDiscountAmount     int64             `protobuf:"varint,41,opt,name=fpv_discount_amount,json=fpvDiscountAmount,proto3" json:"fpv_discount_amount,omitempty"`
 	DiscountPercentage    int64             `protobuf:"varint,43,opt,name=discount_percentage,json=discountPercentage,proto3" json:"discount_percentage,omitempty"` // 1234 => 12.34% = 0.1234
 	DiscountType          string            `protobuf:"bytes,51,opt,name=discount_type,json=discountType,proto3" json:"discount_type,omitempty"`                    // amount || percentage
-	DiscountBeforeTax     bool              `protobuf:"varint,52,opt,name=discount_before_tax,json=discountBeforeTax,proto3" json:"discount_before_tax,omitempty"`
 	PosId                 string            `protobuf:"bytes,44,opt,name=pos_id,json=posId,proto3" json:"pos_id,omitempty"`
 	Channel               string            `protobuf:"bytes,45,opt,name=channel,proto3" json:"channel,omitempty"` // messenger, zalo
 	ChannelTouchpoint     string            `protobuf:"bytes,46,opt,name=channel_touchpoint,json=channelTouchpoint,proto3" json:"channel_touchpoint,omitempty"`
@@ -34567,13 +34562,6 @@ func (x *Order) GetDiscountType() string {
 		return x.DiscountType
 	}
 	return ""
-}
-
-func (x *Order) GetDiscountBeforeTax() bool {
-	if x != nil {
-		return x.DiscountBeforeTax
-	}
-	return false
 }
 
 func (x *Order) GetPosId() string {
@@ -43370,7 +43358,7 @@ var file_header_proto_rawDesc = []byte{
 	0x28, 0x03, 0x52, 0x0c, 0x66, 0x70, 0x76, 0x53, 0x6f, 0x6c, 0x64, 0x50, 0x72, 0x69, 0x63, 0x65,
 	0x12, 0x1f, 0x0a, 0x0b, 0x65, 0x78, 0x70, 0x69, 0x72, 0x79, 0x5f, 0x64, 0x61, 0x74, 0x65, 0x18,
 	0x1e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x65, 0x78, 0x70, 0x69, 0x72, 0x79, 0x44, 0x61, 0x74,
-	0x65, 0x22, 0x9a, 0x04, 0x0a, 0x09, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x74, 0x65, 0x6d, 0x12,
+	0x65, 0x22, 0xea, 0x03, 0x0a, 0x09, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x74, 0x65, 0x6d, 0x12,
 	0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
 	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x71, 0x75,
@@ -43396,10 +43384,7 @@ var file_header_proto_rawDesc = []byte{
 	0x18, 0x19, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
 	0x54, 0x61, 0x78, 0x52, 0x03, 0x74, 0x61, 0x78, 0x12, 0x23, 0x0a, 0x0d, 0x64, 0x69, 0x73, 0x63,
 	0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x1a, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0c, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x2e, 0x0a,
-	0x13, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x62, 0x65, 0x66, 0x6f, 0x72, 0x65,
-	0x5f, 0x74, 0x61, 0x78, 0x18, 0x1b, 0x20, 0x01, 0x28, 0x08, 0x52, 0x11, 0x64, 0x69, 0x73, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x42, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x54, 0x61, 0x78, 0x12, 0x1b, 0x0a,
+	0x0c, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1b, 0x0a,
 	0x09, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x74, 0x61, 0x78, 0x18, 0x1e, 0x20, 0x01, 0x28, 0x02,
 	0x52, 0x08, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x54, 0x61, 0x78, 0x12, 0x22, 0x0a, 0x0d, 0x66, 0x70,
 	0x76, 0x5f, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x74, 0x61, 0x78, 0x18, 0x1f, 0x20, 0x01, 0x28,
@@ -44184,7 +44169,7 @@ var file_header_proto_rawDesc = []byte{
 	0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x65, 0x12, 0x2f, 0x0a, 0x13, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
 	0x74, 0x5f, 0x64, 0x69, 0x73, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x06, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x12, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x44, 0x69, 0x73, 0x70,
-	0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xbe, 0x10, 0x0a, 0x05, 0x4f, 0x72, 0x64, 0x65,
+	0x6f, 0x73, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x8e, 0x10, 0x0a, 0x05, 0x4f, 0x72, 0x64, 0x65,
 	0x72, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f,
 	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52,
 	0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
@@ -44260,10 +44245,7 @@ var file_header_proto_rawDesc = []byte{
 	0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x61, 0x67, 0x65,
 	0x12, 0x23, 0x0a, 0x0d, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x74, 0x79, 0x70,
 	0x65, 0x18, 0x33, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x2e, 0x0a, 0x13, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x5f, 0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x5f, 0x74, 0x61, 0x78, 0x18, 0x34, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x11, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x65, 0x66, 0x6f,
-	0x72, 0x65, 0x54, 0x61, 0x78, 0x12, 0x15, 0x0a, 0x06, 0x70, 0x6f, 0x73, 0x5f, 0x69, 0x64, 0x18,
+	0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x15, 0x0a, 0x06, 0x70, 0x6f, 0x73, 0x5f, 0x69, 0x64, 0x18,
 	0x2c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x6f, 0x73, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07,
 	0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x18, 0x2d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63,
 	0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x12, 0x2d, 0x0a, 0x12, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65,
