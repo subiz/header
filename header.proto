@@ -4161,6 +4161,9 @@ message ShippingInfo {
 	string fee_payer = 51; // shop, user
 	bool no_auto_create_bill_on_delivered = 52;
 	string bill_id = 53;
+
+	int64 submitted_at = 54;
+	string submitted_by = 55;
 }
 
 message ShippingData {
