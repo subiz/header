@@ -4267,12 +4267,12 @@ message IntegratedShipping {
 	string access_token = 10;
 	string refresh_token = 11;
 
-	int64 last_used = 12;
 	int64 first_integrated = 13;
 	int64 integrated = 14;
 	string integrated_by = 17;
 
-	int64 last_error = 15;
+	int64 last_used = 12;
+	int64 first_error = 15;
 	string connect_status = 16; // connected || disconnected
 	string ghn_client_id = 19;
 	string ghn_shop_id = 20;
