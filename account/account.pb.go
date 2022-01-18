@@ -1114,14 +1114,14 @@ type Feature struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	WebpageMonitor *bool `protobuf:"varint,3,opt,name=webpage_monitor,json=webpageMonitor" json:"webpage_monitor,omitempty"`
-	WebpageAudit   *bool `protobuf:"varint,4,opt,name=webpage_audit,json=webpageAudit" json:"webpage_audit,omitempty"`
-	Facebook       *bool `protobuf:"varint,5,opt,name=facebook" json:"facebook,omitempty"`
-	Zalo           *bool `protobuf:"varint,6,opt,name=zalo" json:"zalo,omitempty"`
-	Email          *bool `protobuf:"varint,7,opt,name=email" json:"email,omitempty"`
-	WebPlugin      *bool `protobuf:"varint,8,opt,name=web_plugin,json=webPlugin" json:"web_plugin,omitempty"`
-	Bot            *bool `protobuf:"varint,9,opt,name=bot" json:"bot,omitempty"`
-	Shop           *bool `protobuf:"varint,10,opt,name=shop" json:"shop,omitempty"`
+	WebpageMonitor *bool   `protobuf:"varint,3,opt,name=webpage_monitor,json=webpageMonitor" json:"webpage_monitor,omitempty"`
+	WebpageAudit   *bool   `protobuf:"varint,4,opt,name=webpage_audit,json=webpageAudit" json:"webpage_audit,omitempty"`
+	Facebook       *bool   `protobuf:"varint,5,opt,name=facebook" json:"facebook,omitempty"`
+	Zalo           *bool   `protobuf:"varint,6,opt,name=zalo" json:"zalo,omitempty"`
+	Email          *bool   `protobuf:"varint,7,opt,name=email" json:"email,omitempty"`
+	WebPlugin      *bool   `protobuf:"varint,8,opt,name=web_plugin,json=webPlugin" json:"web_plugin,omitempty"`
+	Bot            *bool   `protobuf:"varint,9,opt,name=bot" json:"bot,omitempty"`
+	Shop           *string `protobuf:"bytes,10,opt,name=shop" json:"shop,omitempty"` //   pending || active
 }
 
 func (x *Feature) Reset() {
@@ -1205,11 +1205,11 @@ func (x *Feature) GetBot() bool {
 	return false
 }
 
-func (x *Feature) GetShop() bool {
+func (x *Feature) GetShop() string {
 	if x != nil && x.Shop != nil {
 		return *x.Shop
 	}
-	return false
+	return ""
 }
 
 type WebpageMonitorSetting struct {
@@ -3391,7 +3391,7 @@ var file_account_proto_rawDesc = []byte{
 	0x65, 0x62, 0x5f, 0x70, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52,
 	0x09, 0x77, 0x65, 0x62, 0x50, 0x6c, 0x75, 0x67, 0x69, 0x6e, 0x12, 0x10, 0x0a, 0x03, 0x62, 0x6f,
 	0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x03, 0x62, 0x6f, 0x74, 0x12, 0x12, 0x0a, 0x04,
-	0x73, 0x68, 0x6f, 0x70, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x73, 0x68, 0x6f, 0x70,
+	0x73, 0x68, 0x6f, 0x70, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x73, 0x68, 0x6f, 0x70,
 	0x22, 0x3c, 0x0a, 0x15, 0x57, 0x65, 0x62, 0x70, 0x61, 0x67, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74,
 	0x6f, 0x72, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x23, 0x0a, 0x0d, 0x77, 0x65, 0x65,
 	0x6b, 0x6c, 0x79, 0x5f, 0x72, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08,

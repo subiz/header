@@ -4164,6 +4164,8 @@ message ShippingInfo {
 
 	int64 submitted_at = 54;
 	string submitted_by = 55;
+
+	bool pickup_at_shop = 56;
 }
 
 message ShippingData {

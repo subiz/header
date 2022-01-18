@@ -159,7 +159,7 @@ message Feature {
 	optional bool email = 7;
 	optional bool web_plugin = 8;
 	optional bool bot = 9;
-	optional bool shop = 10;
+	optional string shop = 10; //   pending || active
 }
 
 message WebpageMonitorSetting {
