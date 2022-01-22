@@ -138,6 +138,8 @@ service UserMgr {
 	rpc RemoveShippingAddress(Address) returns (Empty);
 	rpc ListShippingAddress(Id) returns (User);
 	rpc MakeDefaultShippingAddress(Address) returns (Empty);
+
+	rpc ListLeads(header.UserView) returns (header.Users);
 }
 
 service UserPersist {

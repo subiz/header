@@ -4524,6 +4524,9 @@ message Order {
 
 	float total_discount = 71;
 	int64 fpv_total_discount = 72;
+
+	repeated string owners = 75;
+	int64 rotten_days = 76;
 }
 
 enum OrderStatusCode {
@@ -4581,10 +4584,14 @@ message Bill {
 
 enum CancelCode {
 	no_cancel = 0; // or empty string
-	wrong_order_info = 1;
+	price_too_high = 1;
 	customer_rejected = 2;
 	failed_delivery = 3;
 	out_of_stock = 4;
+	customer_wouldnt_response = 5;
+	went_with_another_option = 7;
+	went_with_a_competitor = 8;
+	bad_timming = 9;
 	other = 100;
 }
 
