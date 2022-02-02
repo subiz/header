@@ -142,12 +142,6 @@ service UserMgr {
 	rpc ListLeads(header.UserView) returns (header.Users);
 }
 
-service UserPersist {
-	rpc ListUsersInView(header.UserView) returns (header.Users);
-	rpc UpdateUser(header.User) returns (Empty);
-	rpc ResyncUsers(header.Id) returns (Empty);
-}
-
 service LiveMgr {
 	rpc SearchLocations(header.LocationParams) returns (header.Locations);
 	rpc FilterActiveUsers(header.UserInfoParams) returns (header.Users);
