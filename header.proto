@@ -4973,3 +4973,55 @@ message RateLimitWindow {
 	int64 timestamp = 4;
 	int64 usage = 5;
 }
+
+message User2 {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	int64 created = 4;
+	int64 modified = 5;
+	int64 updated = 6;
+
+	string first_channel_touchpoint = 7;
+	string latest_channelTouchpoint = 8;
+	string latest_channel = 9;
+	string ga_client_id = 10;
+	int64 interacted = 11;
+	int64 seen = 12;
+	string fullname = 13;
+	string phone = 14;
+	string email = 15;
+	string latest_session_id = 16;
+	repeated string lead_owners = 17;
+	string first_interact = 18;
+
+	string trace_country_name = 19;
+	string channel_source = 20;
+	string latest_campaign_name = 21;
+	string trace_country_code = 22;
+	string latest_session_source = 23;
+	string first_session_referer = 24;
+	string latest_session_referer = 25;
+	string trace_city_name = 26;
+
+	int64 last_message_sent = 27;
+
+	float total_sessions = 28;
+
+	string latest_session_tracking_link = 29;
+	string first_session_tracking_link = 30;
+
+	repeated Attribute attributes = 31;
+
+	bool is_lead = 32;
+}
+
+message User2s {
+	repeated User2 users = 1;
+	repeated Error errors = 2;
+	string signature = 3;
+	int64 hit = 4;
+	int64 total = 5;
+
+	int32 end_offset = 7;
+}
