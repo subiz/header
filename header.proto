@@ -5014,7 +5014,8 @@ message User2 {
 	repeated Attribute attributes = 31;
 
 	bool is_lead = 32;
-	repeated string labels = 33;
+	repeated UserLabel labels = 33;
+	UserSession session = 34;
 }
 
 message User2s {
