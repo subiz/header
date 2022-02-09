@@ -511,4 +511,19 @@ service Proder {
 	rpc DeletePipeline(Id) returns (Empty);
 	rpc ListPipelines(header.Id) returns (header.Pipelines);
 	rpc MakeDefaultPipeline(Id) returns (Empty);
+
+	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
+}
+
+service Taskmgr {
+	rpc ReadTask(header.Id) returns (header.Task);
+	rpc CreateTask(header.Task) returns (header.Task);
+	rpc UpdateTask(header.Task) returns (header.Task);
+	rpc DeleteTask(Id) returns (Empty);
+	rpc ListTasks(header.TasksRequest) returns (header.Tasks);
+
+	rpc AddTaskComment(header.Event) returns (header.Event);
+	rpc EditTaskComment(header.Event) returns (header.Event);
+	rpc DeleteTaskComment(header.Key) returns (header.Event);
+	rpc ListTaskComments(header.Id) returns (header.Events);
 }

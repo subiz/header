@@ -159,6 +159,10 @@ enum RealtimeType {
 	pipeline_created = 155;
 	pipeline_updated = 156;
 	pipeline_deleted = 157;
+
+	task_created = 160;
+	task_updated = 161;
+	task_deleted = 162;
 }
 
 message TextTransform {

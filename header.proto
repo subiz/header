@@ -424,6 +424,7 @@ message Key {
 	string product_id = 4;
 	string bill_id = 5;
 	string order_comment_id = 6;
+	string task_id = 7;
 }
 
 message UserEventMetric {
@@ -693,6 +694,8 @@ message Event {
 		OrderHistoryEntry order_history_entry = 69;
 		UserOrderConfirmation user_order_confirmation = 70;
 		Pipeline pipeline = 71;
+		OrderPipelineUpdated order_pipeline_updated = 72;
+
 	}
 	Data data = 20;
 }
@@ -4267,6 +4270,9 @@ message OrdersRequest {
 	repeated string not_statuses = 25;
 	repeated string shipping_statuses = 26;
 	repeated string not_shipping_statuses = 27;
+
+	string pipeline = 30;
+	string pipeline_stage = 31;
 }
 
 message DownloadOrderRequest {
@@ -4440,6 +4446,18 @@ enum CancelCode {
 	went_with_a_competitor = 8;
 	bad_timming = 9;
 	other = 100;
+}
+
+message OrderPipelineUpdated {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string order_id = 5;
+	string pipeline_from = 6;
+	string pipeline_stage_from = 7;
+
+	string pipeline_to = 8;
+	string pipeline_stage_to = 9;
 }
 
 message OrderStatusUpdated {
@@ -4893,6 +4911,8 @@ message PipelineStage {
 	int64 probability = 10; // * 100 100 => won 0 => lost
 
 	int64 rotten_days = 11;
+
+	PipelineAutomation automation = 12;
 }
 
 message Pipelines {
@@ -4915,4 +4935,105 @@ message Pipeline {
 	int64 updated = 8;
 	int64 updated_by = 9;
 	bool is_default = 10;
+}
+
+// execute this automation when order enter pipeline stage
+message PipelineAutomation {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string pipeline = 4;
+	string pipeline_stage = 5;
+
+	string state = 7; // like agent state: active, inactive, deleted
+	BotAction action = 9; // point to root action
+
+	int64 created = 10;
+	string created_by = 11;
+
+	int64 updated = 12;
+	string updated_by = 13;
+
+	int64 last_executed = 20; // ms
+	string bot_type = 21; // hello, lead, operator
+	string action_hash = 22; // hex of sha1
+
+	string version = 23;
+	string template_data = 24;
+	int64 count_lead_in_last_7_days = 25;
+	int64 count_conv_in_last_7_days = 26;
+
+	string locale = 28; // can be auto
+	repeated string locales = 29;
+}
+
+message TasksRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated string associated_tickets = 4;
+	repeated string associated_users = 5;
+	repeated string associated_orders = 7;
+	repeated string associated_conversations = 9;
+
+	int64 created_from = 10;
+	int64 created_to = 11;
+
+	int64 duedate_from = 12;
+	int64 duedate_to = 13;
+
+	string assigned_to = 14;
+
+	int64 limit = 20;
+	string anchor = 21;
+}
+
+message Tasks {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Task tasks = 3;
+	string anchor = 4;
+	int64 total = 5;
+}
+
+message Task {
+	common.Context ctx = 1;
+
+	string account_id = 2;
+	string id = 3;
+	string process_id = 4;
+
+	string created_by = 5; // task automation xyz
+	int64 created = 6;
+
+	string created_type = 7; // agent, automation
+	string created_pipeline = 8;
+	string created_pipeline_stage = 9;
+
+	string updated_by = 10;
+	int64 updated = 11;
+
+	int64 due_date = 12;
+	int64 reminder = 13; // 86400: 1 day before
+
+	string type = 14; // todo, email, call
+	string priority = 15; // low, high, urgent
+
+	string assigned_to = 16; // empty == unassigned
+
+	string title = 17;
+	string description = 18;
+	string description_quill_delta = 19; // for template
+	int64 pinned = 20; // always list first
+	string status = 21; // open, close, rejected
+
+	int64 closed = 22; // just store closed timestamp, so when needed, we have the data to calculate task duration
+
+	repeated string associated_tickets = 23;
+	repeated string associated_users = 24;
+	repeated string associated_orders = 25;
+	repeated string associated_conversations = 26;
+
+	repeated string followers = 27; // agents that follow the task, get notified
+
+	// extra data
 }
