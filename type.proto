@@ -4,6 +4,163 @@ package header;
 
 option go_package = "github.com/subiz/header";
 
+enum RealtimeType {
+	a = 0;
+	account_updated = 11;
+
+	agent_group_deleted = 12;
+	agent_group_updated = 13;
+
+	invitation_accepted = 14;
+	agent_deleted = 15;
+	agent_updated = 16;
+
+	agent_permission_updated = 17;
+	my_user_upserted = 19;
+	user_info_updated = 20;
+	agent_presence_updated = 21;
+
+	user_created = 22;
+	note_created = 23;
+
+	presence_updated = 24;
+	content_viewed = 25;
+	content_searched = 26;
+	content_addedtocart = 27;
+	content_checkedout = 28;
+	content_purchased = 29;
+	topic_read = 30;
+	subscribed_topic_updated = 31;
+	user_topic_updated = 32;
+	user_attribute_updated = 33;
+	user_attribute_deleted = 34;
+
+	notibox_notification_upserted = 37;
+	notibox_upserted = 38;
+
+	notification_setting_updated = 39;
+
+	conversation_updated = 40;
+	message_sent = 41; // event.data.message
+	conversation_state_updated = 42; // event.data.conversation
+
+	message_pong = 43; // event.data.message.pongs.0
+	// message_postback = 50; // event.data.postback
+
+	conversation_joined = 44; // event.data.conversation.memebers.0
+	conversation_invited = 45;
+	conversation_left =46 ;
+	conversation_tagged = 47;
+	conversation_untagged = 48;
+
+	integration_updated = 49;
+
+	conversation_typing = 54;
+	conversation_unassigned = 56;
+	conversation_assigned = 57;
+	message_updated = 58; // event.data.message
+
+	conversation_rating_requested = 60; // event.data.conversation
+	conversation_rated = 61; // event.data.conversation
+
+	my_conversation_mute_updated = 66; // conversation
+	my_conversation_read_updated = 67; // conversation
+	my_conversation_unsubscribed = 68; // conversation
+
+	tag_updated = 70;
+	tag_deleted = 71;
+
+	message_template_updated = 72;
+	message_template_deleted = 73;
+
+	live_act_user_num = 82;
+	live_top_source = 83;
+	live_top_location = 84;
+	live_top_page = 85;
+
+	agent_notification_created = 88;
+	agent_notification_read = 114;
+	agent_notibox_read = 115;
+
+	bot_deleted = 89;
+	bot_updated = 90;
+	bot_debug_end = 91;
+	bot_debug_begin_action = 92;
+
+	user_campaign_converted = 95;
+	user_returned = 96;
+	user_first_visited = 97;
+
+	bot_terminated = 98;
+	user_alias_created = 99;
+
+	site_user_verified = 100;
+	site_updated = 101;
+
+	site_up = 102;
+	site_down = 103;
+
+	language_updated = 104;
+
+	user_note_updated = 105;
+	user_note_deleted = 106;
+
+	user_lead_owner_updated = 107;
+	user_lead_owner_deleted = 108;
+
+	user_label_updated = 109;
+	user_label_deleted = 110;
+
+	label_updated = 112;
+	label_deleted = 113;
+
+	contact_info_updated = 116;
+
+	internal_conversation_updated = 117;
+	message_pinned = 118; // event.data.message
+	message_unpinned = 119; // event.data.message
+
+	user_view_updated = 120;
+	user_view_deleted = 121;
+
+	login_session_updated = 122;
+
+	product_updated = 130;
+	product_deleted = 131;
+
+	product_feed_updated = 132;
+	product_feed_deleted = 133;
+
+	product_collection_updated = 134;
+	product_collection_deleted = 135;
+
+	order_created = 136;
+	order_updated = 137;
+	order_deleted = 138;
+
+	currency_updated = 139;
+
+	shop_setting_updated = 140;
+	order_event_created = 141;
+
+	shipping_address_updated = 142;
+
+	order_payment_made = 145; // data.bill
+	order_payment_deleted = 146; // data.bill
+	order_status_updated = 147; // data.order_status
+
+	order_comment_added = 149; // data.message
+	order_comment_deleted = 150; // data.message
+	order_comment_updated = 151; // data.message
+
+	order_history_updated = 152;
+	user_order_confirmed = 153;
+
+	pipeline_created = 155;
+	pipeline_updated = 156;
+	pipeline_deleted = 157;
+}
+
 message TextTransform {
 	string name = 2; // trim, lower_case, upper_case
 }
