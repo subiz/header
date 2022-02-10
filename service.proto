@@ -504,18 +504,9 @@ service Proder {
 	rpc ShipOrder(header.Id) returns (header.Order);
 	rpc CancelShippingOrder(header.Id) returns (header.Order);
 	rpc PrintShippingOrders(header.Ids) returns (header.File);
-
-	rpc ReadPipeline(header.Id) returns (header.Pipeline);
-	rpc CreatePipeline(header.Pipeline) returns (header.Pipeline);
-	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
-	rpc DeletePipeline(Id) returns (Empty);
-	rpc ListPipelines(header.Id) returns (header.Pipelines);
-	rpc MakeDefaultPipeline(Id) returns (Empty);
-
-	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
 }
 
-service Taskmgr {
+service Apiece {
 	rpc ReadTask(header.Id) returns (header.Task);
 	rpc CreateTask(header.Task) returns (header.Task);
 	rpc UpdateTask(header.Task) returns (header.Task);
@@ -526,4 +517,13 @@ service Taskmgr {
 	rpc EditTaskComment(header.Event) returns (header.Event);
 	rpc DeleteTaskComment(header.Key) returns (header.Event);
 	rpc ListTaskComments(header.Id) returns (header.Events);
+
+	rpc ReadPipeline(header.Id) returns (header.Pipeline);
+	rpc CreatePipeline(header.Pipeline) returns (header.Pipeline);
+	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
+	rpc DeletePipeline(Id) returns (Empty);
+	rpc ListPipelines(header.Id) returns (header.Pipelines);
+	rpc MakeDefaultPipeline(Id) returns (Empty);
+
+	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
 }

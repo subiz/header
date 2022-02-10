@@ -1099,7 +1099,7 @@ var file_service_proto_rawDesc = []byte{
 	0x65, 0x70, 0x6f, 0x72, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x1b, 0x2e, 0x68, 0x65, 0x61,
 	0x64, 0x65, 0x72, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x73,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0e, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
-	0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x32, 0x8c, 0x15, 0x0a, 0x06, 0x50, 0x72, 0x6f, 0x64,
+	0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x32, 0xa9, 0x12, 0x0a, 0x06, 0x50, 0x72, 0x6f, 0x64,
 	0x65, 0x72, 0x12, 0x2f, 0x0a, 0x0b, 0x52, 0x65, 0x61, 0x64, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
 	0x74, 0x12, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75,
 	0x63, 0x74, 0x1a, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x72, 0x6f, 0x64,
@@ -1246,57 +1246,57 @@ var file_service_proto_rawDesc = []byte{
 	0x72, 0x12, 0x30, 0x0a, 0x13, 0x50, 0x72, 0x69, 0x6e, 0x74, 0x53, 0x68, 0x69, 0x70, 0x70, 0x69,
 	0x6e, 0x67, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x12, 0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
 	0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x46,
-	0x69, 0x6c, 0x65, 0x12, 0x2c, 0x0a, 0x0c, 0x52, 0x65, 0x61, 0x64, 0x50, 0x69, 0x70, 0x65, 0x6c,
-	0x69, 0x6e, 0x65, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a,
-	0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e,
-	0x65, 0x12, 0x34, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x69, 0x70, 0x65, 0x6c,
-	0x69, 0x6e, 0x65, 0x12, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x69, 0x70,
-	0x65, 0x6c, 0x69, 0x6e, 0x65, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50,
-	0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x34, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x1a, 0x10, 0x2e, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x2b, 0x0a,
-	0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12,
-	0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2e, 0x0a, 0x0d, 0x4c, 0x69,
-	0x73, 0x74, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x11, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
-	0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x73, 0x12, 0x30, 0x0a, 0x13, 0x4d, 0x61,
-	0x6b, 0x65, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e,
+	0x69, 0x6c, 0x65, 0x32, 0x82, 0x06, 0x0a, 0x06, 0x41, 0x70, 0x69, 0x65, 0x63, 0x65, 0x12, 0x24,
+	0x0a, 0x08, 0x52, 0x65, 0x61, 0x64, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
+	0x54, 0x61, 0x73, 0x6b, 0x12, 0x28, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x61,
+	0x73, 0x6b, 0x12, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b,
+	0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x28,
+	0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0c, 0x2e, 0x68,
+	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x27, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
+	0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74,
+	0x79, 0x12, 0x30, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x61, 0x73, 0x6b, 0x73, 0x12, 0x14,
+	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61,
+	0x73, 0x6b, 0x73, 0x12, 0x2e, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x54, 0x61, 0x73, 0x6b, 0x43, 0x6f,
+	0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76,
+	0x65, 0x6e, 0x74, 0x12, 0x2f, 0x0a, 0x0f, 0x45, 0x64, 0x69, 0x74, 0x54, 0x61, 0x73, 0x6b, 0x43,
+	0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x12, 0x2f, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x61,
+	0x73, 0x6b, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x65, 0x72, 0x2e, 0x4b, 0x65, 0x79, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
+	0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x2e, 0x0a, 0x10, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x61, 0x73,
+	0x6b, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0e, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x2c, 0x0a, 0x0c, 0x52, 0x65, 0x61, 0x64, 0x50, 0x69, 0x70,
+	0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49,
+	0x64, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c,
+	0x69, 0x6e, 0x65, 0x12, 0x34, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x69, 0x70,
+	0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50,
+	0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
+	0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x34, 0x0a, 0x0e, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12, 0x10, 0x2e, 0x68, 0x65,
+	0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x1a, 0x10, 0x2e,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x12,
+	0x2b, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e,
 	0x65, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e,
-	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x38, 0x0a, 0x18,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x50, 0x69, 0x70, 0x65, 0x6c,
-	0x69, 0x6e, 0x65, 0x53, 0x74, 0x61, 0x67, 0x65, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
-	0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x32, 0xa0, 0x03, 0x0a, 0x07, 0x54, 0x61, 0x73, 0x6b, 0x6d,
-	0x67, 0x72, 0x12, 0x24, 0x0a, 0x08, 0x52, 0x65, 0x61, 0x64, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0a,
-	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x28, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61,
-	0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
-	0x54, 0x61, 0x73, 0x6b, 0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61,
-	0x73, 0x6b, 0x12, 0x28, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b,
-	0x12, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x1a, 0x0c,
-	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x27, 0x0a, 0x0a,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
-	0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x30, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x61, 0x73,
-	0x6b, 0x73, 0x12, 0x14, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b,
-	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2e, 0x54, 0x61, 0x73, 0x6b, 0x73, 0x12, 0x2e, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x54, 0x61,
-	0x73, 0x6b, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x2f, 0x0a, 0x0f, 0x45, 0x64, 0x69, 0x74, 0x54,
-	0x61, 0x73, 0x6b, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x2f, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x54, 0x61, 0x73, 0x6b, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x0b, 0x2e,
-	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x4b, 0x65, 0x79, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x2e, 0x0a, 0x10, 0x4c, 0x69, 0x73,
-	0x74, 0x54, 0x61, 0x73, 0x6b, 0x43, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x73, 0x12, 0x0a, 0x2e,
-	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0e, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2e, 0x0a, 0x0d,
+	0x4c, 0x69, 0x73, 0x74, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x73, 0x12, 0x0a, 0x2e,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x11, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x65, 0x72, 0x2e, 0x50, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x73, 0x12, 0x30, 0x0a, 0x13,
+	0x4d, 0x61, 0x6b, 0x65, 0x44, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x50, 0x69, 0x70, 0x65, 0x6c,
+	0x69, 0x6e, 0x65, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a,
+	0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x38,
+	0x0a, 0x18, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x50, 0x69, 0x70,
+	0x65, 0x6c, 0x69, 0x6e, 0x65, 0x53, 0x74, 0x61, 0x67, 0x65, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_service_proto_goTypes = []interface{}{
@@ -1431,9 +1431,9 @@ var file_service_proto_goTypes = []interface{}{
 	(*GHTKOrder)(nil),                         // 128: header.GHTKOrder
 	(*GHNOrder2)(nil),                         // 129: header.GHNOrder2
 	(*ShippingInfo)(nil),                      // 130: header.ShippingInfo
-	(*Pipeline)(nil),                          // 131: header.Pipeline
-	(*Task)(nil),                              // 132: header.Task
-	(*TasksRequest)(nil),                      // 133: header.TasksRequest
+	(*Task)(nil),                              // 131: header.Task
+	(*TasksRequest)(nil),                      // 132: header.TasksRequest
+	(*Pipeline)(nil),                          // 133: header.Pipeline
 	(*RateLimitSyncResponse)(nil),             // 134: header.RateLimitSyncResponse
 	(*AddressAutocompleteResponses)(nil),      // 135: header.AddressAutocompleteResponses
 	(*Addresses)(nil),                         // 136: header.Addresses
@@ -1521,8 +1521,8 @@ var file_service_proto_goTypes = []interface{}{
 	(*OrderHistoryEntries)(nil),               // 218: header.OrderHistoryEntries
 	(*ShopeeShop)(nil),                        // 219: header.ShopeeShop
 	(*ShopeeSyncProductResponse)(nil),         // 220: header.ShopeeSyncProductResponse
-	(*Pipelines)(nil),                         // 221: header.Pipelines
-	(*Tasks)(nil),                             // 222: header.Tasks
+	(*Tasks)(nil),                             // 221: header.Tasks
+	(*Pipelines)(nil),                         // 222: header.Pipelines
 }
 var file_service_proto_depIdxs = []int32{
 	0,   // 0: header.RateLimit.SyncRateLimit:input_type -> header.RateLimitSyncRequest
@@ -1864,22 +1864,22 @@ var file_service_proto_depIdxs = []int32{
 	2,   // 336: header.Proder.ShipOrder:input_type -> header.Id
 	2,   // 337: header.Proder.CancelShippingOrder:input_type -> header.Id
 	3,   // 338: header.Proder.PrintShippingOrders:input_type -> header.Ids
-	2,   // 339: header.Proder.ReadPipeline:input_type -> header.Id
-	131, // 340: header.Proder.CreatePipeline:input_type -> header.Pipeline
-	131, // 341: header.Proder.UpdatePipeline:input_type -> header.Pipeline
-	2,   // 342: header.Proder.DeletePipeline:input_type -> header.Id
-	2,   // 343: header.Proder.ListPipelines:input_type -> header.Id
-	2,   // 344: header.Proder.MakeDefaultPipeline:input_type -> header.Id
-	20,  // 345: header.Proder.UpdateOrderPipelineStage:input_type -> header.Order
-	2,   // 346: header.Taskmgr.ReadTask:input_type -> header.Id
-	132, // 347: header.Taskmgr.CreateTask:input_type -> header.Task
-	132, // 348: header.Taskmgr.UpdateTask:input_type -> header.Task
-	2,   // 349: header.Taskmgr.DeleteTask:input_type -> header.Id
-	133, // 350: header.Taskmgr.ListTasks:input_type -> header.TasksRequest
-	45,  // 351: header.Taskmgr.AddTaskComment:input_type -> header.Event
-	45,  // 352: header.Taskmgr.EditTaskComment:input_type -> header.Event
-	124, // 353: header.Taskmgr.DeleteTaskComment:input_type -> header.Key
-	2,   // 354: header.Taskmgr.ListTaskComments:input_type -> header.Id
+	2,   // 339: header.Apiece.ReadTask:input_type -> header.Id
+	131, // 340: header.Apiece.CreateTask:input_type -> header.Task
+	131, // 341: header.Apiece.UpdateTask:input_type -> header.Task
+	2,   // 342: header.Apiece.DeleteTask:input_type -> header.Id
+	132, // 343: header.Apiece.ListTasks:input_type -> header.TasksRequest
+	45,  // 344: header.Apiece.AddTaskComment:input_type -> header.Event
+	45,  // 345: header.Apiece.EditTaskComment:input_type -> header.Event
+	124, // 346: header.Apiece.DeleteTaskComment:input_type -> header.Key
+	2,   // 347: header.Apiece.ListTaskComments:input_type -> header.Id
+	2,   // 348: header.Apiece.ReadPipeline:input_type -> header.Id
+	133, // 349: header.Apiece.CreatePipeline:input_type -> header.Pipeline
+	133, // 350: header.Apiece.UpdatePipeline:input_type -> header.Pipeline
+	2,   // 351: header.Apiece.DeletePipeline:input_type -> header.Id
+	2,   // 352: header.Apiece.ListPipelines:input_type -> header.Id
+	2,   // 353: header.Apiece.MakeDefaultPipeline:input_type -> header.Id
+	20,  // 354: header.Apiece.UpdateOrderPipelineStage:input_type -> header.Order
 	134, // 355: header.RateLimit.SyncRateLimit:output_type -> header.RateLimitSyncResponse
 	135, // 356: header.Map.Predict:output_type -> header.AddressAutocompleteResponses
 	18,  // 357: header.Map.LookupAddress:output_type -> header.Address
@@ -2219,22 +2219,22 @@ var file_service_proto_depIdxs = []int32{
 	20,  // 691: header.Proder.ShipOrder:output_type -> header.Order
 	20,  // 692: header.Proder.CancelShippingOrder:output_type -> header.Order
 	171, // 693: header.Proder.PrintShippingOrders:output_type -> header.File
-	131, // 694: header.Proder.ReadPipeline:output_type -> header.Pipeline
-	131, // 695: header.Proder.CreatePipeline:output_type -> header.Pipeline
-	131, // 696: header.Proder.UpdatePipeline:output_type -> header.Pipeline
-	39,  // 697: header.Proder.DeletePipeline:output_type -> header.Empty
-	221, // 698: header.Proder.ListPipelines:output_type -> header.Pipelines
-	39,  // 699: header.Proder.MakeDefaultPipeline:output_type -> header.Empty
-	39,  // 700: header.Proder.UpdateOrderPipelineStage:output_type -> header.Empty
-	132, // 701: header.Taskmgr.ReadTask:output_type -> header.Task
-	132, // 702: header.Taskmgr.CreateTask:output_type -> header.Task
-	132, // 703: header.Taskmgr.UpdateTask:output_type -> header.Task
-	39,  // 704: header.Taskmgr.DeleteTask:output_type -> header.Empty
-	222, // 705: header.Taskmgr.ListTasks:output_type -> header.Tasks
-	45,  // 706: header.Taskmgr.AddTaskComment:output_type -> header.Event
-	45,  // 707: header.Taskmgr.EditTaskComment:output_type -> header.Event
-	45,  // 708: header.Taskmgr.DeleteTaskComment:output_type -> header.Event
-	153, // 709: header.Taskmgr.ListTaskComments:output_type -> header.Events
+	131, // 694: header.Apiece.ReadTask:output_type -> header.Task
+	131, // 695: header.Apiece.CreateTask:output_type -> header.Task
+	131, // 696: header.Apiece.UpdateTask:output_type -> header.Task
+	39,  // 697: header.Apiece.DeleteTask:output_type -> header.Empty
+	221, // 698: header.Apiece.ListTasks:output_type -> header.Tasks
+	45,  // 699: header.Apiece.AddTaskComment:output_type -> header.Event
+	45,  // 700: header.Apiece.EditTaskComment:output_type -> header.Event
+	45,  // 701: header.Apiece.DeleteTaskComment:output_type -> header.Event
+	153, // 702: header.Apiece.ListTaskComments:output_type -> header.Events
+	133, // 703: header.Apiece.ReadPipeline:output_type -> header.Pipeline
+	133, // 704: header.Apiece.CreatePipeline:output_type -> header.Pipeline
+	133, // 705: header.Apiece.UpdatePipeline:output_type -> header.Pipeline
+	39,  // 706: header.Apiece.DeletePipeline:output_type -> header.Empty
+	222, // 707: header.Apiece.ListPipelines:output_type -> header.Pipelines
+	39,  // 708: header.Apiece.MakeDefaultPipeline:output_type -> header.Empty
+	39,  // 709: header.Apiece.UpdateOrderPipelineStage:output_type -> header.Empty
 	355, // [355:710] is the sub-list for method output_type
 	0,   // [0:355] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
@@ -14062,13 +14062,6 @@ type ProderClient interface {
 	ShipOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
 	CancelShippingOrder(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Order, error)
 	PrintShippingOrders(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*File, error)
-	ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error)
-	CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
-	UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
-	DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ListPipelines(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipelines, error)
-	MakeDefaultPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	UpdateOrderPipelineStage(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type proderClient struct {
@@ -14457,69 +14450,6 @@ func (c *proderClient) PrintShippingOrders(ctx context.Context, in *Ids, opts ..
 	return out, nil
 }
 
-func (c *proderClient) ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error) {
-	out := new(Pipeline)
-	err := c.cc.Invoke(ctx, "/header.Proder/ReadPipeline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error) {
-	out := new(Pipeline)
-	err := c.cc.Invoke(ctx, "/header.Proder/CreatePipeline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error) {
-	out := new(Pipeline)
-	err := c.cc.Invoke(ctx, "/header.Proder/UpdatePipeline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.Proder/DeletePipeline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) ListPipelines(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipelines, error) {
-	out := new(Pipelines)
-	err := c.cc.Invoke(ctx, "/header.Proder/ListPipelines", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) MakeDefaultPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.Proder/MakeDefaultPipeline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) UpdateOrderPipelineStage(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.Proder/UpdateOrderPipelineStage", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ProderServer is the server API for Proder service.
 type ProderServer interface {
 	ReadProduct(context.Context, *Product) (*Product, error)
@@ -14565,13 +14495,6 @@ type ProderServer interface {
 	ShipOrder(context.Context, *Id) (*Order, error)
 	CancelShippingOrder(context.Context, *Id) (*Order, error)
 	PrintShippingOrders(context.Context, *Ids) (*File, error)
-	ReadPipeline(context.Context, *Id) (*Pipeline, error)
-	CreatePipeline(context.Context, *Pipeline) (*Pipeline, error)
-	UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error)
-	DeletePipeline(context.Context, *Id) (*Empty, error)
-	ListPipelines(context.Context, *Id) (*Pipelines, error)
-	MakeDefaultPipeline(context.Context, *Id) (*Empty, error)
-	UpdateOrderPipelineStage(context.Context, *Order) (*Empty, error)
 }
 
 // UnimplementedProderServer can be embedded to have forward compatible implementations.
@@ -14703,27 +14626,6 @@ func (*UnimplementedProderServer) CancelShippingOrder(context.Context, *Id) (*Or
 }
 func (*UnimplementedProderServer) PrintShippingOrders(context.Context, *Ids) (*File, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PrintShippingOrders not implemented")
-}
-func (*UnimplementedProderServer) ReadPipeline(context.Context, *Id) (*Pipeline, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadPipeline not implemented")
-}
-func (*UnimplementedProderServer) CreatePipeline(context.Context, *Pipeline) (*Pipeline, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreatePipeline not implemented")
-}
-func (*UnimplementedProderServer) UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePipeline not implemented")
-}
-func (*UnimplementedProderServer) DeletePipeline(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeletePipeline not implemented")
-}
-func (*UnimplementedProderServer) ListPipelines(context.Context, *Id) (*Pipelines, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPipelines not implemented")
-}
-func (*UnimplementedProderServer) MakeDefaultPipeline(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MakeDefaultPipeline not implemented")
-}
-func (*UnimplementedProderServer) UpdateOrderPipelineStage(context.Context, *Order) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderPipelineStage not implemented")
 }
 
 func RegisterProderServer(s *grpc.Server, srv ProderServer) {
@@ -15486,132 +15388,6 @@ func _Proder_PrintShippingOrders_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Proder_ReadPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).ReadPipeline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Proder/ReadPipeline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).ReadPipeline(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_CreatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Pipeline)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).CreatePipeline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Proder/CreatePipeline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).CreatePipeline(ctx, req.(*Pipeline))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_UpdatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Pipeline)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).UpdatePipeline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Proder/UpdatePipeline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).UpdatePipeline(ctx, req.(*Pipeline))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_DeletePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).DeletePipeline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Proder/DeletePipeline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).DeletePipeline(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).ListPipelines(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Proder/ListPipelines",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).ListPipelines(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_MakeDefaultPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).MakeDefaultPipeline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Proder/MakeDefaultPipeline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).MakeDefaultPipeline(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_UpdateOrderPipelineStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Order)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).UpdateOrderPipelineStage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/header.Proder/UpdateOrderPipelineStage",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).UpdateOrderPipelineStage(ctx, req.(*Order))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 var _Proder_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "header.Proder",
 	HandlerType: (*ProderServer)(nil),
@@ -15784,43 +15560,15 @@ var _Proder_serviceDesc = grpc.ServiceDesc{
 			MethodName: "PrintShippingOrders",
 			Handler:    _Proder_PrintShippingOrders_Handler,
 		},
-		{
-			MethodName: "ReadPipeline",
-			Handler:    _Proder_ReadPipeline_Handler,
-		},
-		{
-			MethodName: "CreatePipeline",
-			Handler:    _Proder_CreatePipeline_Handler,
-		},
-		{
-			MethodName: "UpdatePipeline",
-			Handler:    _Proder_UpdatePipeline_Handler,
-		},
-		{
-			MethodName: "DeletePipeline",
-			Handler:    _Proder_DeletePipeline_Handler,
-		},
-		{
-			MethodName: "ListPipelines",
-			Handler:    _Proder_ListPipelines_Handler,
-		},
-		{
-			MethodName: "MakeDefaultPipeline",
-			Handler:    _Proder_MakeDefaultPipeline_Handler,
-		},
-		{
-			MethodName: "UpdateOrderPipelineStage",
-			Handler:    _Proder_UpdateOrderPipelineStage_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service.proto",
 }
 
-// TaskmgrClient is the client API for Taskmgr service.
+// ApieceClient is the client API for Apiece service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type TaskmgrClient interface {
+type ApieceClient interface {
 	ReadTask(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Task, error)
 	CreateTask(ctx context.Context, in *Task, opts ...grpc.CallOption) (*Task, error)
 	UpdateTask(ctx context.Context, in *Task, opts ...grpc.CallOption) (*Task, error)
@@ -15830,99 +15578,169 @@ type TaskmgrClient interface {
 	EditTaskComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	DeleteTaskComment(ctx context.Context, in *Key, opts ...grpc.CallOption) (*Event, error)
 	ListTaskComments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Events, error)
+	ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error)
+	CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
+	UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error)
+	DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	ListPipelines(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipelines, error)
+	MakeDefaultPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	UpdateOrderPipelineStage(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Empty, error)
 }
 
-type taskmgrClient struct {
+type apieceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTaskmgrClient(cc grpc.ClientConnInterface) TaskmgrClient {
-	return &taskmgrClient{cc}
+func NewApieceClient(cc grpc.ClientConnInterface) ApieceClient {
+	return &apieceClient{cc}
 }
 
-func (c *taskmgrClient) ReadTask(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Task, error) {
+func (c *apieceClient) ReadTask(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Task, error) {
 	out := new(Task)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/ReadTask", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/ReadTask", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) CreateTask(ctx context.Context, in *Task, opts ...grpc.CallOption) (*Task, error) {
+func (c *apieceClient) CreateTask(ctx context.Context, in *Task, opts ...grpc.CallOption) (*Task, error) {
 	out := new(Task)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/CreateTask", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/CreateTask", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) UpdateTask(ctx context.Context, in *Task, opts ...grpc.CallOption) (*Task, error) {
+func (c *apieceClient) UpdateTask(ctx context.Context, in *Task, opts ...grpc.CallOption) (*Task, error) {
 	out := new(Task)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/UpdateTask", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/UpdateTask", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) DeleteTask(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *apieceClient) DeleteTask(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/DeleteTask", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/DeleteTask", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) ListTasks(ctx context.Context, in *TasksRequest, opts ...grpc.CallOption) (*Tasks, error) {
+func (c *apieceClient) ListTasks(ctx context.Context, in *TasksRequest, opts ...grpc.CallOption) (*Tasks, error) {
 	out := new(Tasks)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/ListTasks", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/ListTasks", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) AddTaskComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
+func (c *apieceClient) AddTaskComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
 	out := new(Event)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/AddTaskComment", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/AddTaskComment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) EditTaskComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
+func (c *apieceClient) EditTaskComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
 	out := new(Event)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/EditTaskComment", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/EditTaskComment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) DeleteTaskComment(ctx context.Context, in *Key, opts ...grpc.CallOption) (*Event, error) {
+func (c *apieceClient) DeleteTaskComment(ctx context.Context, in *Key, opts ...grpc.CallOption) (*Event, error) {
 	out := new(Event)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/DeleteTaskComment", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/DeleteTaskComment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *taskmgrClient) ListTaskComments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Events, error) {
+func (c *apieceClient) ListTaskComments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Events, error) {
 	out := new(Events)
-	err := c.cc.Invoke(ctx, "/header.Taskmgr/ListTaskComments", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Apiece/ListTaskComments", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TaskmgrServer is the server API for Taskmgr service.
-type TaskmgrServer interface {
+func (c *apieceClient) ReadPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipeline, error) {
+	out := new(Pipeline)
+	err := c.cc.Invoke(ctx, "/header.Apiece/ReadPipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apieceClient) CreatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error) {
+	out := new(Pipeline)
+	err := c.cc.Invoke(ctx, "/header.Apiece/CreatePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apieceClient) UpdatePipeline(ctx context.Context, in *Pipeline, opts ...grpc.CallOption) (*Pipeline, error) {
+	out := new(Pipeline)
+	err := c.cc.Invoke(ctx, "/header.Apiece/UpdatePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apieceClient) DeletePipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/header.Apiece/DeletePipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apieceClient) ListPipelines(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Pipelines, error) {
+	out := new(Pipelines)
+	err := c.cc.Invoke(ctx, "/header.Apiece/ListPipelines", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apieceClient) MakeDefaultPipeline(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/header.Apiece/MakeDefaultPipeline", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apieceClient) UpdateOrderPipelineStage(ctx context.Context, in *Order, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/header.Apiece/UpdateOrderPipelineStage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ApieceServer is the server API for Apiece service.
+type ApieceServer interface {
 	ReadTask(context.Context, *Id) (*Task, error)
 	CreateTask(context.Context, *Task) (*Task, error)
 	UpdateTask(context.Context, *Task) (*Task, error)
@@ -15932,245 +15750,427 @@ type TaskmgrServer interface {
 	EditTaskComment(context.Context, *Event) (*Event, error)
 	DeleteTaskComment(context.Context, *Key) (*Event, error)
 	ListTaskComments(context.Context, *Id) (*Events, error)
+	ReadPipeline(context.Context, *Id) (*Pipeline, error)
+	CreatePipeline(context.Context, *Pipeline) (*Pipeline, error)
+	UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error)
+	DeletePipeline(context.Context, *Id) (*Empty, error)
+	ListPipelines(context.Context, *Id) (*Pipelines, error)
+	MakeDefaultPipeline(context.Context, *Id) (*Empty, error)
+	UpdateOrderPipelineStage(context.Context, *Order) (*Empty, error)
 }
 
-// UnimplementedTaskmgrServer can be embedded to have forward compatible implementations.
-type UnimplementedTaskmgrServer struct {
+// UnimplementedApieceServer can be embedded to have forward compatible implementations.
+type UnimplementedApieceServer struct {
 }
 
-func (*UnimplementedTaskmgrServer) ReadTask(context.Context, *Id) (*Task, error) {
+func (*UnimplementedApieceServer) ReadTask(context.Context, *Id) (*Task, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadTask not implemented")
 }
-func (*UnimplementedTaskmgrServer) CreateTask(context.Context, *Task) (*Task, error) {
+func (*UnimplementedApieceServer) CreateTask(context.Context, *Task) (*Task, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTask not implemented")
 }
-func (*UnimplementedTaskmgrServer) UpdateTask(context.Context, *Task) (*Task, error) {
+func (*UnimplementedApieceServer) UpdateTask(context.Context, *Task) (*Task, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTask not implemented")
 }
-func (*UnimplementedTaskmgrServer) DeleteTask(context.Context, *Id) (*Empty, error) {
+func (*UnimplementedApieceServer) DeleteTask(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTask not implemented")
 }
-func (*UnimplementedTaskmgrServer) ListTasks(context.Context, *TasksRequest) (*Tasks, error) {
+func (*UnimplementedApieceServer) ListTasks(context.Context, *TasksRequest) (*Tasks, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTasks not implemented")
 }
-func (*UnimplementedTaskmgrServer) AddTaskComment(context.Context, *Event) (*Event, error) {
+func (*UnimplementedApieceServer) AddTaskComment(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddTaskComment not implemented")
 }
-func (*UnimplementedTaskmgrServer) EditTaskComment(context.Context, *Event) (*Event, error) {
+func (*UnimplementedApieceServer) EditTaskComment(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EditTaskComment not implemented")
 }
-func (*UnimplementedTaskmgrServer) DeleteTaskComment(context.Context, *Key) (*Event, error) {
+func (*UnimplementedApieceServer) DeleteTaskComment(context.Context, *Key) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTaskComment not implemented")
 }
-func (*UnimplementedTaskmgrServer) ListTaskComments(context.Context, *Id) (*Events, error) {
+func (*UnimplementedApieceServer) ListTaskComments(context.Context, *Id) (*Events, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTaskComments not implemented")
 }
-
-func RegisterTaskmgrServer(s *grpc.Server, srv TaskmgrServer) {
-	s.RegisterService(&_Taskmgr_serviceDesc, srv)
+func (*UnimplementedApieceServer) ReadPipeline(context.Context, *Id) (*Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPipeline not implemented")
+}
+func (*UnimplementedApieceServer) CreatePipeline(context.Context, *Pipeline) (*Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePipeline not implemented")
+}
+func (*UnimplementedApieceServer) UpdatePipeline(context.Context, *Pipeline) (*Pipeline, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePipeline not implemented")
+}
+func (*UnimplementedApieceServer) DeletePipeline(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePipeline not implemented")
+}
+func (*UnimplementedApieceServer) ListPipelines(context.Context, *Id) (*Pipelines, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPipelines not implemented")
+}
+func (*UnimplementedApieceServer) MakeDefaultPipeline(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MakeDefaultPipeline not implemented")
+}
+func (*UnimplementedApieceServer) UpdateOrderPipelineStage(context.Context, *Order) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrderPipelineStage not implemented")
 }
 
-func _Taskmgr_ReadTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func RegisterApieceServer(s *grpc.Server, srv ApieceServer) {
+	s.RegisterService(&_Apiece_serviceDesc, srv)
+}
+
+func _Apiece_ReadTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).ReadTask(ctx, in)
+		return srv.(ApieceServer).ReadTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/ReadTask",
+		FullMethod: "/header.Apiece/ReadTask",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).ReadTask(ctx, req.(*Id))
+		return srv.(ApieceServer).ReadTask(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_CreateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_CreateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Task)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).CreateTask(ctx, in)
+		return srv.(ApieceServer).CreateTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/CreateTask",
+		FullMethod: "/header.Apiece/CreateTask",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).CreateTask(ctx, req.(*Task))
+		return srv.(ApieceServer).CreateTask(ctx, req.(*Task))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_UpdateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_UpdateTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Task)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).UpdateTask(ctx, in)
+		return srv.(ApieceServer).UpdateTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/UpdateTask",
+		FullMethod: "/header.Apiece/UpdateTask",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).UpdateTask(ctx, req.(*Task))
+		return srv.(ApieceServer).UpdateTask(ctx, req.(*Task))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_DeleteTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_DeleteTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).DeleteTask(ctx, in)
+		return srv.(ApieceServer).DeleteTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/DeleteTask",
+		FullMethod: "/header.Apiece/DeleteTask",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).DeleteTask(ctx, req.(*Id))
+		return srv.(ApieceServer).DeleteTask(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_ListTasks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_ListTasks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TasksRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).ListTasks(ctx, in)
+		return srv.(ApieceServer).ListTasks(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/ListTasks",
+		FullMethod: "/header.Apiece/ListTasks",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).ListTasks(ctx, req.(*TasksRequest))
+		return srv.(ApieceServer).ListTasks(ctx, req.(*TasksRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_AddTaskComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_AddTaskComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Event)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).AddTaskComment(ctx, in)
+		return srv.(ApieceServer).AddTaskComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/AddTaskComment",
+		FullMethod: "/header.Apiece/AddTaskComment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).AddTaskComment(ctx, req.(*Event))
+		return srv.(ApieceServer).AddTaskComment(ctx, req.(*Event))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_EditTaskComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_EditTaskComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Event)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).EditTaskComment(ctx, in)
+		return srv.(ApieceServer).EditTaskComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/EditTaskComment",
+		FullMethod: "/header.Apiece/EditTaskComment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).EditTaskComment(ctx, req.(*Event))
+		return srv.(ApieceServer).EditTaskComment(ctx, req.(*Event))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_DeleteTaskComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_DeleteTaskComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Key)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).DeleteTaskComment(ctx, in)
+		return srv.(ApieceServer).DeleteTaskComment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/DeleteTaskComment",
+		FullMethod: "/header.Apiece/DeleteTaskComment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).DeleteTaskComment(ctx, req.(*Key))
+		return srv.(ApieceServer).DeleteTaskComment(ctx, req.(*Key))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Taskmgr_ListTaskComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Apiece_ListTaskComments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TaskmgrServer).ListTaskComments(ctx, in)
+		return srv.(ApieceServer).ListTaskComments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Taskmgr/ListTaskComments",
+		FullMethod: "/header.Apiece/ListTaskComments",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TaskmgrServer).ListTaskComments(ctx, req.(*Id))
+		return srv.(ApieceServer).ListTaskComments(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _Taskmgr_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "header.Taskmgr",
-	HandlerType: (*TaskmgrServer)(nil),
+func _Apiece_ReadPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApieceServer).ReadPipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Apiece/ReadPipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApieceServer).ReadPipeline(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Apiece_CreatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApieceServer).CreatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Apiece/CreatePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApieceServer).CreatePipeline(ctx, req.(*Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Apiece_UpdatePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Pipeline)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApieceServer).UpdatePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Apiece/UpdatePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApieceServer).UpdatePipeline(ctx, req.(*Pipeline))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Apiece_DeletePipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApieceServer).DeletePipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Apiece/DeletePipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApieceServer).DeletePipeline(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Apiece_ListPipelines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApieceServer).ListPipelines(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Apiece/ListPipelines",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApieceServer).ListPipelines(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Apiece_MakeDefaultPipeline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApieceServer).MakeDefaultPipeline(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Apiece/MakeDefaultPipeline",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApieceServer).MakeDefaultPipeline(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Apiece_UpdateOrderPipelineStage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Order)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApieceServer).UpdateOrderPipelineStage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.Apiece/UpdateOrderPipelineStage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApieceServer).UpdateOrderPipelineStage(ctx, req.(*Order))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _Apiece_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Apiece",
+	HandlerType: (*ApieceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ReadTask",
-			Handler:    _Taskmgr_ReadTask_Handler,
+			Handler:    _Apiece_ReadTask_Handler,
 		},
 		{
 			MethodName: "CreateTask",
-			Handler:    _Taskmgr_CreateTask_Handler,
+			Handler:    _Apiece_CreateTask_Handler,
 		},
 		{
 			MethodName: "UpdateTask",
-			Handler:    _Taskmgr_UpdateTask_Handler,
+			Handler:    _Apiece_UpdateTask_Handler,
 		},
 		{
 			MethodName: "DeleteTask",
-			Handler:    _Taskmgr_DeleteTask_Handler,
+			Handler:    _Apiece_DeleteTask_Handler,
 		},
 		{
 			MethodName: "ListTasks",
-			Handler:    _Taskmgr_ListTasks_Handler,
+			Handler:    _Apiece_ListTasks_Handler,
 		},
 		{
 			MethodName: "AddTaskComment",
-			Handler:    _Taskmgr_AddTaskComment_Handler,
+			Handler:    _Apiece_AddTaskComment_Handler,
 		},
 		{
 			MethodName: "EditTaskComment",
-			Handler:    _Taskmgr_EditTaskComment_Handler,
+			Handler:    _Apiece_EditTaskComment_Handler,
 		},
 		{
 			MethodName: "DeleteTaskComment",
-			Handler:    _Taskmgr_DeleteTaskComment_Handler,
+			Handler:    _Apiece_DeleteTaskComment_Handler,
 		},
 		{
 			MethodName: "ListTaskComments",
-			Handler:    _Taskmgr_ListTaskComments_Handler,
+			Handler:    _Apiece_ListTaskComments_Handler,
+		},
+		{
+			MethodName: "ReadPipeline",
+			Handler:    _Apiece_ReadPipeline_Handler,
+		},
+		{
+			MethodName: "CreatePipeline",
+			Handler:    _Apiece_CreatePipeline_Handler,
+		},
+		{
+			MethodName: "UpdatePipeline",
+			Handler:    _Apiece_UpdatePipeline_Handler,
+		},
+		{
+			MethodName: "DeletePipeline",
+			Handler:    _Apiece_DeletePipeline_Handler,
+		},
+		{
+			MethodName: "ListPipelines",
+			Handler:    _Apiece_ListPipelines_Handler,
+		},
+		{
+			MethodName: "MakeDefaultPipeline",
+			Handler:    _Apiece_MakeDefaultPipeline_Handler,
+		},
+		{
+			MethodName: "UpdateOrderPipelineStage",
+			Handler:    _Apiece_UpdateOrderPipelineStage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
