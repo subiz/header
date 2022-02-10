@@ -1230,6 +1230,7 @@ message Message {
 	string account_id = 5;
 	string order_id = 6;
 	string conversation_id = 14;
+	string task_id = 27;
 	string id = 11;
 	string text = 2;
 
