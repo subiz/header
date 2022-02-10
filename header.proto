@@ -697,6 +697,7 @@ message Event {
 		Pipeline pipeline = 71;
 		OrderPipelineUpdated order_pipeline_updated = 72;
 		Task task = 73;
+		TaskHistoryEntry task_history_entry = 74;
 	}
 	Data data = 20;
 }
