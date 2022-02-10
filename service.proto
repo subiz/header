@@ -516,7 +516,7 @@ service Apiece {
 	rpc AddTaskComment(header.Event) returns (header.Event);
 	rpc EditTaskComment(header.Event) returns (header.Event);
 	rpc DeleteTaskComment(header.Key) returns (header.Event);
-	rpc ListTaskComments(header.Id) returns (header.Events);
+	rpc ListTaskComments(header.Id) returns (header.TaskHistoryEntries);
 
 	rpc ReadPipeline(header.Id) returns (header.Pipeline);
 	rpc CreatePipeline(header.Pipeline) returns (header.Pipeline);

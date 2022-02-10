@@ -425,6 +425,7 @@ message Key {
 	string bill_id = 5;
 	string order_comment_id = 6;
 	string task_id = 7;
+	string task_comment_id = 8;
 }
 
 message UserEventMetric {
@@ -5024,4 +5025,18 @@ message Task {
 	// extra data
 	// ...
 	Event data_email = 40;
+}
+
+message TaskHistoryEntry {
+	Event event = 2; // 1 core
+	Event ref_comment = 3;
+	string task_id = 4;
+}
+
+message TaskHistoryEntries {
+	common.Context ctx = 1;
+	repeated TaskHistoryEntry entries = 4;
+	int64 total = 2;
+	string anchor = 3;
+	int64 last_modified = 5;
 }

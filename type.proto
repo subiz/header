@@ -163,6 +163,10 @@ enum RealtimeType {
 	task_created = 160;
 	task_updated = 161;
 	task_deleted = 162;
+
+	task_comment_added = 163; // data.message
+	task_comment_deleted = 164; // data.message
+	task_comment_updated = 165; // data.message
 }
 
 message TextTransform {
