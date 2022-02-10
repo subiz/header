@@ -695,7 +695,7 @@ message Event {
 		UserOrderConfirmation user_order_confirmation = 70;
 		Pipeline pipeline = 71;
 		OrderPipelineUpdated order_pipeline_updated = 72;
-
+		Task task = 73;
 	}
 	Data data = 20;
 }
