@@ -522,7 +522,7 @@ service Apiece {
 	rpc CreatePipeline(header.Pipeline) returns (header.Pipeline);
 	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
 	rpc DeletePipeline(Id) returns (Empty);
-	rpc ListPipelines(header.Id) returns (header.Pipelines);
+	rpc ListPipelines(Ids) returns (header.Pipelines);
 	rpc MakeDefaultPipeline(Id) returns (Empty);
 
 	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
