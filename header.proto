@@ -1782,7 +1782,7 @@ message NextBotAction {
 
 message BotAction {
 	string account_id = 2;
-	string bot_id = 3;
+	string bot_id = 3; // could be pipeline automation id
 	string id = 4;
 	string name = 5;
 
@@ -4235,6 +4235,8 @@ message Orders {
 	repeated Order orders = 4;
 	string anchor = 5;
 	int64 total = 6;
+
+	int64 fpv_total_value = 7; // sum of all order total (money)
 }
 
 message OrdersRequest {
@@ -4944,7 +4946,7 @@ message PipelineAutomation {
 	string pipeline = 4;
 	string pipeline_stage = 5;
 
-	string state = 7; // like agent state: active, inactive, deleted
+	string state = 7; // empty = active, inactive
 	BotAction action = 9; // point to root action
 
 	int64 created = 10;
@@ -4954,7 +4956,7 @@ message PipelineAutomation {
 	string updated_by = 13;
 
 	int64 last_executed = 20; // ms
-	string bot_type = 21; // hello, lead, operator
+	// string bot_type = 21; // hello, lead, operator
 	string action_hash = 22; // hex of sha1
 
 	string version = 23;
@@ -4983,6 +4985,8 @@ message TasksRequest {
 
 	string assigned_to = 14;
 
+	int64 priority = 15;
+
 	int64 limit = 20;
 	string anchor = 21;
 }
@@ -5000,14 +5004,15 @@ message Task {
 
 	string account_id = 2;
 	string id = 3;
-	string process_id = 4;
 
-	string created_by = 5; // task automation xyz
+	string created_by = 5; // agent id or pipeline stage id
 	int64 created = 6;
 
-	string created_type = 7; // agent, automation
-	string created_pipeline = 8;
-	string created_pipeline_stage = 9;
+	string created_by_type = 7; // agent, automation
+	string created_by_pipeline = 8;
+	string created_by_pipeline_stage = 9;
+
+	string created_by_pipeline_automation_action = 10;
 
 	string updated_by = 10;
 	int64 updated = 11;
@@ -5016,7 +5021,7 @@ message Task {
 	int64 reminder = 13; // 86400: 1 day before
 
 	string type = 14; // todo, email, call
-	string priority = 15; // low, high, urgent
+	int64 priority = 15; // dont use string, so its easier for backend to sort by this field. 0=low, 1=normal, 2=high, 3=urgent
 
 	string assigned_to = 16; // empty == unassigned
 
@@ -5033,7 +5038,8 @@ message Task {
 	repeated string associated_orders = 25;
 	repeated string associated_conversations = 26;
 
-	repeated string followers = 27; // agents that follow the task, get notified
+	repeated string watchers = 27; // (from JIRA) agents that follow the task, get notified
 
 	// extra data
+	// ...
 }
