@@ -1728,7 +1728,7 @@ message Bot {
 	string bot_state = 18; // active, inactive
 
 	int64 last_executed = 20; // ms
-	string bot_type = 21; // hello, lead, operator
+	string bot_type = 21; // hello, lead, operator, pipeline_automation
 	string action_hash = 22; // hex of sha1
 
 	string version = 23;
@@ -1740,6 +1740,9 @@ message Bot {
 
 	string locale = 28; // can be auto
 	repeated string locales = 29;
+
+	string pipeline = 30;
+	string pipeline_stage = 31; // for pipeline_stage
 }
 
 message Bots {
@@ -1789,7 +1792,7 @@ message BotAction {
 	// first action require trigger
 	repeated NextBotAction nexts = 8;
 
-	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook
+	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -1802,6 +1805,11 @@ message BotAction {
 	ActionUpdateUser update_user = 31;
 	ActionUpdateUserLabels update_user_labels = 32;
 	ActionConfirmOrder confirm_order = 34;
+	ActionCreateTask create_task = 35;
+}
+
+message ActionCreateTask {
+	Task task = 2;
 }
 
 message ActionConfirmOrder {
@@ -4914,7 +4922,7 @@ message PipelineStage {
 
 	int64 rotten_days = 11;
 
-	PipelineAutomation automation = 12;
+	string automation_id = 13; // bot_id
 }
 
 message Pipelines {
@@ -4937,35 +4945,6 @@ message Pipeline {
 	int64 updated = 8;
 	int64 updated_by = 9;
 	bool is_default = 10;
-}
-
-// execute this automation when order enter pipeline stage
-message PipelineAutomation {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string pipeline = 4;
-	string pipeline_stage = 5;
-
-	string state = 7; // empty = active, inactive
-	BotAction action = 9; // point to root action
-
-	int64 created = 10;
-	string created_by = 11;
-
-	int64 updated = 12;
-	string updated_by = 13;
-
-	int64 last_executed = 20; // ms
-	// string bot_type = 21; // hello, lead, operator
-	string action_hash = 22; // hex of sha1
-
-	string version = 23;
-	string template_data = 24;
-	int64 count_lead_in_last_7_days = 25;
-	int64 count_conv_in_last_7_days = 26;
-
-	string locale = 28; // can be auto
-	repeated string locales = 29;
 }
 
 message TasksRequest {
@@ -5011,35 +4990,36 @@ message Task {
 	string created_by_type = 7; // agent, automation
 	string created_by_pipeline = 8;
 	string created_by_pipeline_stage = 9;
-
 	string created_by_pipeline_automation_action = 10;
 
-	string updated_by = 10;
-	int64 updated = 11;
+	string updated_by = 11;
+	int64 updated = 12;
 
-	int64 due_date = 12;
-	int64 reminder = 13; // 86400: 1 day before
+	int64 due_date = 13;
+	int64 reminder = 14; // 86400: 1 day before
 
-	string type = 14; // todo, email, call
-	int64 priority = 15; // dont use string, so its easier for backend to sort by this field. 0=low, 1=normal, 2=high, 3=urgent
+	string type = 15; // todo, email, call
+	int64 priority = 16; // dont use string, so its easier for backend to sort by this field. 0=low, 1=normal, 2=high, 3=urgent
 
-	string assigned_to = 16; // empty == unassigned
+	string assigned_to = 17; // empty == unassigned
 
-	string title = 17;
-	string description = 18;
-	string description_quill_delta = 19; // for template
-	int64 pinned = 20; // always list first
-	string status = 21; // open, close, rejected
+	string title = 18;
+	string title_quill_delta = 19;
+	string description = 20;
+	string description_quill_delta = 21; // for template
+	int64 pinned = 22; // always list first
+	string status = 23; // open, close, rejected
 
-	int64 closed = 22; // just store closed timestamp, so when needed, we have the data to calculate task duration
+	int64 closed = 24; // just store closed timestamp, so when needed, we have the data to calculate task duration
 
-	repeated string associated_tickets = 23;
-	repeated string associated_users = 24;
-	repeated string associated_orders = 25;
-	repeated string associated_conversations = 26;
+	repeated string associated_tickets = 25;
+	repeated string associated_users = 26;
+	repeated string associated_orders = 27;
+	repeated string associated_conversations = 28;
 
-	repeated string watchers = 27; // (from JIRA) agents that follow the task, get notified
+	repeated string watchers = 30; // (from JIRA) agents that follow the task, get notified
 
 	// extra data
 	// ...
+	Event data_email = 40;
 }
