@@ -504,6 +504,8 @@ service Proder {
 	rpc ShipOrder(header.Id) returns (header.Order);
 	rpc CancelShippingOrder(header.Id) returns (header.Order);
 	rpc PrintShippingOrders(header.Ids) returns (header.File);
+
+	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
 }
 
 service Apiece {
@@ -524,6 +526,4 @@ service Apiece {
 	rpc DeletePipeline(Id) returns (Empty);
 	rpc ListPipelines(Ids) returns (header.Pipelines);
 	rpc MakeDefaultPipeline(Id) returns (Empty);
-
-	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
 }
