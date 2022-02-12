@@ -1757,6 +1757,7 @@ enum BotCategory {
 	users = 0;
 	systems = 1;
 	conversations = 2;
+	orders = 3;
 }
 
 enum BotActionType {
