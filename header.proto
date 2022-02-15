@@ -231,7 +231,7 @@ message AttributeDefinition {
 	string default_value = 20;
 
 	// repeated string options = 6;
-	repeated string list_items = 6;
+	repeated string list_items = 6; // remove
 
 	string key = 7;
 

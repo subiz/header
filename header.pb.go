@@ -4374,7 +4374,7 @@ type AttributeDefinition struct {
 	Items        []*AttributeDefinitionListItem `protobuf:"bytes,19,rep,name=items,proto3" json:"items,omitempty"`   // for select
 	DefaultValue string                         `protobuf:"bytes,20,opt,name=default_value,json=defaultValue,proto3" json:"default_value,omitempty"`
 	// repeated string options = 6;
-	ListItems      []string `protobuf:"bytes,6,rep,name=list_items,json=listItems,proto3" json:"list_items,omitempty"`
+	ListItems      []string `protobuf:"bytes,6,rep,name=list_items,json=listItems,proto3" json:"list_items,omitempty"` // remove
 	Key            string   `protobuf:"bytes,7,opt,name=key,proto3" json:"key,omitempty"`
 	Kind           string   `protobuf:"bytes,8,opt,name=kind,proto3" json:"kind,omitempty"` // will be removed
 	Updated        int64    `protobuf:"varint,9,opt,name=updated,proto3" json:"updated,omitempty"`
