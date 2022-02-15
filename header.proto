@@ -18,7 +18,7 @@ message Id {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string query = 4;
+	string query = 4; // (bot category: orders)
 }
 
 message Ids {
@@ -210,10 +210,12 @@ message AttributeDefinitionListItem {
 message AttributeDefinition {
 	common.Context ctx = 1;
 	string account_id = 2;
+
 	string name = 3; // will be removed
 	string description = 4;
 
-	I18nString label = 16; //
+	I18nString i18n_label = 16; //
+	string label = 21;
 
 	string type = 5;
 	enum AttributeType {
@@ -233,7 +235,7 @@ message AttributeDefinition {
 
 	string key = 7;
 
-	string kind = 8;
+	string kind = 8; // will be removed
 	enum AttributeKind {
 		system = 0; // only system read and write
 		default = 1; // created but agent can write, but not remove
@@ -246,6 +248,14 @@ message AttributeDefinition {
 
 	bool allow_multiples = 14;
 	bool allow_user_edit = 15;
+
+	bool is_system = 22;
+	bool is_readonly = 23;
+
+	int64 created = 24;
+	string created_by = 25;
+
+	int64 archived = 26;
 }
 
 message AttributeDefinitions {
@@ -1710,7 +1720,7 @@ message Bot {
 	string job_title = 19;
 	string avatar_url = 5;
 
-	string category = 6;
+	string category = 6; // see BotCategory: users, orders
 
 	string state = 7; // like agent state: active, inactive, deleted
 

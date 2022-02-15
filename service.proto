@@ -172,7 +172,6 @@ service AttributeMgr {
 	rpc ListAttributeDefinitions(Empty) returns (header.AttributeDefinitions);
 	rpc CreateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
-	rpc DeleteAttributeDefinition(header.DeleteAttrRequest) returns (Empty);
 }
 
 // conversation services
