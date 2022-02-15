@@ -4970,8 +4970,9 @@ message TasksRequest {
 	string assigned_to = 14;
 	int64 priority = 15;
 
-	int64 limit = 20;
+	int32 limit = 20;
 	string anchor = 21;
+	int32 offset = 22;
 }
 
 message Tasks {
