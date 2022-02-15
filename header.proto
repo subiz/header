@@ -4962,14 +4962,12 @@ message TasksRequest {
 	repeated string associated_orders = 7;
 	repeated string associated_conversations = 9;
 
-	int64 created_from = 10;
-	int64 created_to = 11;
-
-	int64 duedate_from = 12;
-	int64 duedate_to = 13;
+	int64 created_hour_from = 10;
+	int64 created_hour_to = 11;
+	int64 due_date_hour_from = 12;
+	int64 due_date_hour_to = 13;
 
 	string assigned_to = 14;
-
 	int64 priority = 15;
 
 	int64 limit = 20;
