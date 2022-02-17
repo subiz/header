@@ -4924,11 +4924,9 @@ message CompactedAttribute {
 }
 
 message PipelineStage {
-	string account_id = 2;
-	string id = 3;
-	string pipeline_id = 4;
+	string id = 3; // gen by client
 	int64 created = 5;
-	int64 created_by = 6;
+	string created_by = 6;
 	string label = 7;
 	string description = 8;
 	bool is_closed = 9;
@@ -4937,6 +4935,9 @@ message PipelineStage {
 	int64 rotten_days = 11;
 
 	string automation_id = 13; // bot_id
+
+	int64 updated = 14;
+	string updated_by = 15;
 }
 
 message Pipelines {
@@ -4960,7 +4961,6 @@ message Pipeline {
 
 	int64 updated = 8;
 	string updated_by = 9;
-	bool is_default = 10;
 }
 
 message TasksRequest {
