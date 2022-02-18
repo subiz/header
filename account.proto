@@ -19,6 +19,7 @@ message DashboardAgent {
 	repeated string order_display_order_by = 17;
 	optional string default_pos = 18;
 	optional string default_shipping_provider = 19;
+	optional string order_filter = 20; // json
 }
 
 message Agent {
