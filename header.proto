@@ -4400,10 +4400,26 @@ message Order {
 	float total_discount = 71;
 	int64 fpv_total_discount = 72;
 
-	repeated string agent_ids = 75;
+	// repeated string agent_ids = 75;
 
 	string pipeline = 80;
 	string pipeline_stage = 81;
+
+	repeated OrderAssignedAgent assigned_agents = 75;
+}
+
+message OrderAssignedAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string order_id = 3;
+	string type = 4; // agent || bot?
+	string id = 5;
+
+	int64 assigned = 6;
+	string assigned_by = 7;
+
+	string pipeline = 10;
+	string pipeline_stage = 11;
 }
 
 enum OrderStatusCode {
