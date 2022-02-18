@@ -4400,7 +4400,7 @@ message Order {
 	float total_discount = 71;
 	int64 fpv_total_discount = 72;
 
-	repeated string owners = 75;
+	repeated string agent_ids = 75;
 
 	string pipeline = 80;
 	string pipeline_stage = 81;
