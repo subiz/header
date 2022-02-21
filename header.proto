@@ -4297,6 +4297,7 @@ message OrdersRequest {
 
 	string pipeline = 30;
 	string pipeline_stage = 31;
+	string assigned_agent_id = 32;
 }
 
 message DownloadOrderRequest {
