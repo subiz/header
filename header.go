@@ -110,7 +110,7 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 		a.Text = v
 	case AttributeDefinition_number.String():
 		vb, _ := json.Marshal(val)
-		v, _ := strconv.ParseFloat(string(vb), 10)
+		v, _ := strconv.ParseFloat(string(vb), 64)
 		a.Number = v
 	case AttributeDefinition_boolean.String():
 		v, _ := val.(bool)

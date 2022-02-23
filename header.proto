@@ -1066,6 +1066,9 @@ message ChannelCondition {
 message LocationCondition {
 	string city_name = 3; // must equal
 	string country_code = 4; // must equal
+
+	string province = 5;
+	repeated string districts = 6;
 }
 
 message Route {
@@ -1624,7 +1627,7 @@ message Trigger {
 }
 
 message BotCondition {
-	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline, user_is_a_contact
+	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline, user_is_a_contact, order
 
 	enum Source {
 		direct = 0;
@@ -1633,7 +1636,6 @@ message BotCondition {
 	}
 
 	repeated string sources = 2;
-
 	enum DeviveType {
 		desktop = 0;
 		mobile = 1;
@@ -1680,6 +1682,26 @@ message BotCondition {
 	bool returning_visitor = 26;
 
 	bool user_is_a_contact = 27; // has a way to re-connnect to user (email or phone)
+
+	OrderCondition order = 28; // order
+}
+
+message OrderCondition {
+	string key = 2; // product, order_total, pos, shipping
+
+	repeated string product_ids = 3;
+	repeated string exclude_product_ids = 4;
+
+	repeated string pos_ids = 5;
+	repeated string exclude_pos_ids = 6;
+
+	repeated string currencies = 7;
+	repeated string exclude_currencies = 8;
+
+	FloatCondition total = 9;
+
+	repeated LocationCondition shipping = 10;
+	repeated LocationCondition exclude_shipping = 11;
 }
 
 message UserAttributeCondition {
@@ -4402,11 +4424,22 @@ message Order {
 	int64 fpv_total_discount = 72;
 
 	// repeated string agent_ids = 75;
+	repeated OrderAssignedAgent assigned_agents = 75;
 
 	string pipeline = 80;
 	string pipeline_stage = 81;
+	int64 assigned = 82;
+	repeated OrderPipelineStage stages = 83;
+}
 
-	repeated OrderAssignedAgent assigned_agents = 75;
+message OrderPipelineStage {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string order_id = 3;
+	string pipeline = 4;
+	string stage = 5;
+	int64 assigned = 6;
+	repeated Task actions = 7;
 }
 
 message OrderAssignedAgent {
@@ -4419,32 +4452,20 @@ message OrderAssignedAgent {
 	int64 assigned = 6;
 	string assigned_by = 7;
 
+	// pipeline stage of order when agent is assigned
 	string pipeline = 10;
 	string pipeline_stage = 11;
+
+	int64 seen = 12;
 }
 
 enum OrderStatusCode {
-	new = 0; // user created
-	queueing = 1;	// Chờ in
-	canceled = 2; // Đã hủy
+	draft = 0;
+	canceled = 2; // lost Đã hủy
 	complete = 3; // Đơn hàng đã hoàn thành
 	successful_delivery = 4;	//	Giao hàng thành công
-	processing = 5; 	//	đơn hàng đang được xử lý
-	waiting_payment = 6;	//	(open) đơn hàng đợi thanh toán
-	// closed = 7;	//	đơn hàng đã đóng
-	packaging	 = 8;// đơn hàng đang được đóng gói
-	picking = 9;	//	shipper đang lấy hàng
 	shipping = 10; //	shipper đang vận chuyển
-	paid = 11;	// đã thanh toán
 	delivered = 12; //	giao hàng thành công
-	holded = 13;
-	ready_to_ship = 14;	// đơn hàng sẵn sàng được giao
-	payment_review	= 15;
-	returned = 16;
-	finished_packing = 17; // đơn hàng đã đóng gói xong
-
-	overdue = 18;
-	void = 19;
 
 	deleted = 20;
 	fulfilled = 21;
@@ -4950,11 +4971,36 @@ message PipelineStage {
 	int64 probability = 10; // * 100 100 => won 0 => lost
 
 	int64 rotten_days = 11;
-
 	string automation_id = 13; // bot_id
-
 	int64 updated = 14;
 	string updated_by = 15;
+
+	// auto-assign to agent
+	repeated PipelineRule routes = 17;
+}
+
+message PipelineRule {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	int32 priority = 4;
+
+	enum AssignType {
+		all_agents = 0; // round robin all agent in account
+		agentgroup = 2; // round robin all agnet in group
+		agents = 3; // round robin list of agent
+	}
+	string assign_type = 5;
+	repeated string assign_tos = 6;
+
+	bool enabled = 8;
+
+	int64 updated = 9;
+	string updated_by = 10;
+
+	// and
+	repeated BotCondition conditions = 11;
 }
 
 message Pipelines {
