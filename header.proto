@@ -4440,6 +4440,8 @@ message OrderPipelineStage {
 	string stage = 5;
 	int64 assigned = 6;
 	repeated Task actions = 7;
+	int64 duration = 8; // sec // calculated using log
+	string agent_id = 9;
 }
 
 message OrderAssignedAgent {
@@ -4977,6 +4979,7 @@ message PipelineStage {
 
 	// auto-assign to agent
 	repeated PipelineRule routes = 17;
+	repeated Task tasks = 18;
 }
 
 message PipelineRule {

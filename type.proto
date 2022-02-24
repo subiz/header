@@ -168,6 +168,8 @@ enum RealtimeType {
 	task_comment_deleted = 164; // data.message
 	task_comment_updated = 165; // data.message
 	task_history_updated = 166;
+
+	order_pipeline_stage_updated = 168; // data.order
 }
 
 message TextTransform {
