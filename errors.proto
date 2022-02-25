@@ -201,4 +201,6 @@ enum E {
 
 	shipping_policy_not_found = 143;
 	too_many_shipping_policy = 144;
+
+	pipeline_stage_not_found = 145;
 }

@@ -23,124 +23,125 @@ const (
 type RealtimeType int32
 
 const (
-	RealtimeType_a                             RealtimeType = 0
-	RealtimeType_account_updated               RealtimeType = 11
-	RealtimeType_agent_group_deleted           RealtimeType = 12
-	RealtimeType_agent_group_updated           RealtimeType = 13
-	RealtimeType_invitation_accepted           RealtimeType = 14
-	RealtimeType_agent_deleted                 RealtimeType = 15
-	RealtimeType_agent_updated                 RealtimeType = 16
-	RealtimeType_agent_permission_updated      RealtimeType = 17
-	RealtimeType_my_user_upserted              RealtimeType = 19
-	RealtimeType_user_info_updated             RealtimeType = 20
-	RealtimeType_agent_presence_updated        RealtimeType = 21
-	RealtimeType_user_created                  RealtimeType = 22
-	RealtimeType_note_created                  RealtimeType = 23
-	RealtimeType_presence_updated              RealtimeType = 24
-	RealtimeType_content_viewed                RealtimeType = 25
-	RealtimeType_content_searched              RealtimeType = 26
-	RealtimeType_content_addedtocart           RealtimeType = 27
-	RealtimeType_content_checkedout            RealtimeType = 28
-	RealtimeType_content_purchased             RealtimeType = 29
-	RealtimeType_topic_read                    RealtimeType = 30
-	RealtimeType_subscribed_topic_updated      RealtimeType = 31
-	RealtimeType_user_topic_updated            RealtimeType = 32
-	RealtimeType_user_attribute_updated        RealtimeType = 33
-	RealtimeType_user_attribute_deleted        RealtimeType = 34
-	RealtimeType_notibox_notification_upserted RealtimeType = 37
-	RealtimeType_notibox_upserted              RealtimeType = 38
-	RealtimeType_notification_setting_updated  RealtimeType = 39
-	RealtimeType_conversation_updated          RealtimeType = 40
-	RealtimeType_message_sent                  RealtimeType = 41 // event.data.message
-	RealtimeType_conversation_state_updated    RealtimeType = 42 // event.data.conversation
-	RealtimeType_message_pong                  RealtimeType = 43 // event.data.message.pongs.0
-	RealtimeType_conversation_joined           RealtimeType = 44 // event.data.conversation.memebers.0
-	RealtimeType_conversation_invited          RealtimeType = 45
-	RealtimeType_conversation_left             RealtimeType = 46
-	RealtimeType_conversation_tagged           RealtimeType = 47
-	RealtimeType_conversation_untagged         RealtimeType = 48
-	RealtimeType_integration_updated           RealtimeType = 49
-	RealtimeType_conversation_typing           RealtimeType = 54
-	RealtimeType_conversation_unassigned       RealtimeType = 56
-	RealtimeType_conversation_assigned         RealtimeType = 57
-	RealtimeType_message_updated               RealtimeType = 58 // event.data.message
-	RealtimeType_conversation_rating_requested RealtimeType = 60 // event.data.conversation
-	RealtimeType_conversation_rated            RealtimeType = 61 // event.data.conversation
-	RealtimeType_my_conversation_mute_updated  RealtimeType = 66 // conversation
-	RealtimeType_my_conversation_read_updated  RealtimeType = 67 // conversation
-	RealtimeType_my_conversation_unsubscribed  RealtimeType = 68 // conversation
-	RealtimeType_tag_updated                   RealtimeType = 70
-	RealtimeType_tag_deleted                   RealtimeType = 71
-	RealtimeType_message_template_updated      RealtimeType = 72
-	RealtimeType_message_template_deleted      RealtimeType = 73
-	RealtimeType_live_act_user_num             RealtimeType = 82
-	RealtimeType_live_top_source               RealtimeType = 83
-	RealtimeType_live_top_location             RealtimeType = 84
-	RealtimeType_live_top_page                 RealtimeType = 85
-	RealtimeType_agent_notification_created    RealtimeType = 88
-	RealtimeType_agent_notification_read       RealtimeType = 114
-	RealtimeType_agent_notibox_read            RealtimeType = 115
-	RealtimeType_bot_deleted                   RealtimeType = 89
-	RealtimeType_bot_updated                   RealtimeType = 90
-	RealtimeType_bot_debug_end                 RealtimeType = 91
-	RealtimeType_bot_debug_begin_action        RealtimeType = 92
-	RealtimeType_user_campaign_converted       RealtimeType = 95
-	RealtimeType_user_returned                 RealtimeType = 96
-	RealtimeType_user_first_visited            RealtimeType = 97
-	RealtimeType_bot_terminated                RealtimeType = 98
-	RealtimeType_user_alias_created            RealtimeType = 99
-	RealtimeType_site_user_verified            RealtimeType = 100
-	RealtimeType_site_updated                  RealtimeType = 101
-	RealtimeType_site_up                       RealtimeType = 102
-	RealtimeType_site_down                     RealtimeType = 103
-	RealtimeType_language_updated              RealtimeType = 104
-	RealtimeType_user_note_updated             RealtimeType = 105
-	RealtimeType_user_note_deleted             RealtimeType = 106
-	RealtimeType_user_lead_owner_updated       RealtimeType = 107
-	RealtimeType_user_lead_owner_deleted       RealtimeType = 108
-	RealtimeType_user_label_updated            RealtimeType = 109
-	RealtimeType_user_label_deleted            RealtimeType = 110
-	RealtimeType_label_updated                 RealtimeType = 112
-	RealtimeType_label_deleted                 RealtimeType = 113
-	RealtimeType_contact_info_updated          RealtimeType = 116
-	RealtimeType_internal_conversation_updated RealtimeType = 117
-	RealtimeType_message_pinned                RealtimeType = 118 // event.data.message
-	RealtimeType_message_unpinned              RealtimeType = 119 // event.data.message
-	RealtimeType_user_view_updated             RealtimeType = 120
-	RealtimeType_user_view_deleted             RealtimeType = 121
-	RealtimeType_login_session_updated         RealtimeType = 122
-	RealtimeType_product_updated               RealtimeType = 130
-	RealtimeType_product_deleted               RealtimeType = 131
-	RealtimeType_product_feed_updated          RealtimeType = 132
-	RealtimeType_product_feed_deleted          RealtimeType = 133
-	RealtimeType_product_collection_updated    RealtimeType = 134
-	RealtimeType_product_collection_deleted    RealtimeType = 135
-	RealtimeType_order_created                 RealtimeType = 136
-	RealtimeType_order_updated                 RealtimeType = 137
-	RealtimeType_order_deleted                 RealtimeType = 138
-	RealtimeType_currency_updated              RealtimeType = 139
-	RealtimeType_shop_setting_updated          RealtimeType = 140
-	RealtimeType_order_event_created           RealtimeType = 141
-	RealtimeType_shipping_address_updated      RealtimeType = 142
-	RealtimeType_order_payment_made            RealtimeType = 145 // data.bill
-	RealtimeType_order_payment_deleted         RealtimeType = 146 // data.bill
-	RealtimeType_order_status_updated          RealtimeType = 147 // data.order_status
-	RealtimeType_order_comment_added           RealtimeType = 149 // data.message
-	RealtimeType_order_comment_deleted         RealtimeType = 150 // data.message
-	RealtimeType_order_comment_updated         RealtimeType = 151 // data.message
-	RealtimeType_order_history_updated         RealtimeType = 152
-	RealtimeType_user_order_confirmed          RealtimeType = 153
-	RealtimeType_pipeline_created              RealtimeType = 155
-	RealtimeType_pipeline_updated              RealtimeType = 156
-	RealtimeType_pipeline_deleted              RealtimeType = 157
-	RealtimeType_task_created                  RealtimeType = 160
-	RealtimeType_task_updated                  RealtimeType = 161
-	RealtimeType_task_deleted                  RealtimeType = 162
-	RealtimeType_task_comment_added            RealtimeType = 163 // data.message
-	RealtimeType_task_comment_deleted          RealtimeType = 164 // data.message
-	RealtimeType_task_comment_updated          RealtimeType = 165 // data.message
-	RealtimeType_task_history_updated          RealtimeType = 166
-	RealtimeType_order_pipeline_stage_updated  RealtimeType = 168 // data.order
+	RealtimeType_a                                  RealtimeType = 0
+	RealtimeType_account_updated                    RealtimeType = 11
+	RealtimeType_agent_group_deleted                RealtimeType = 12
+	RealtimeType_agent_group_updated                RealtimeType = 13
+	RealtimeType_invitation_accepted                RealtimeType = 14
+	RealtimeType_agent_deleted                      RealtimeType = 15
+	RealtimeType_agent_updated                      RealtimeType = 16
+	RealtimeType_agent_permission_updated           RealtimeType = 17
+	RealtimeType_my_user_upserted                   RealtimeType = 19
+	RealtimeType_user_info_updated                  RealtimeType = 20
+	RealtimeType_agent_presence_updated             RealtimeType = 21
+	RealtimeType_user_created                       RealtimeType = 22
+	RealtimeType_note_created                       RealtimeType = 23
+	RealtimeType_presence_updated                   RealtimeType = 24
+	RealtimeType_content_viewed                     RealtimeType = 25
+	RealtimeType_content_searched                   RealtimeType = 26
+	RealtimeType_content_addedtocart                RealtimeType = 27
+	RealtimeType_content_checkedout                 RealtimeType = 28
+	RealtimeType_content_purchased                  RealtimeType = 29
+	RealtimeType_topic_read                         RealtimeType = 30
+	RealtimeType_subscribed_topic_updated           RealtimeType = 31
+	RealtimeType_user_topic_updated                 RealtimeType = 32
+	RealtimeType_user_attribute_updated             RealtimeType = 33
+	RealtimeType_user_attribute_deleted             RealtimeType = 34
+	RealtimeType_notibox_notification_upserted      RealtimeType = 37
+	RealtimeType_notibox_upserted                   RealtimeType = 38
+	RealtimeType_notification_setting_updated       RealtimeType = 39
+	RealtimeType_conversation_updated               RealtimeType = 40
+	RealtimeType_message_sent                       RealtimeType = 41 // event.data.message
+	RealtimeType_conversation_state_updated         RealtimeType = 42 // event.data.conversation
+	RealtimeType_message_pong                       RealtimeType = 43 // event.data.message.pongs.0
+	RealtimeType_conversation_joined                RealtimeType = 44 // event.data.conversation.memebers.0
+	RealtimeType_conversation_invited               RealtimeType = 45
+	RealtimeType_conversation_left                  RealtimeType = 46
+	RealtimeType_conversation_tagged                RealtimeType = 47
+	RealtimeType_conversation_untagged              RealtimeType = 48
+	RealtimeType_integration_updated                RealtimeType = 49
+	RealtimeType_conversation_typing                RealtimeType = 54
+	RealtimeType_conversation_unassigned            RealtimeType = 56
+	RealtimeType_conversation_assigned              RealtimeType = 57
+	RealtimeType_message_updated                    RealtimeType = 58 // event.data.message
+	RealtimeType_conversation_rating_requested      RealtimeType = 60 // event.data.conversation
+	RealtimeType_conversation_rated                 RealtimeType = 61 // event.data.conversation
+	RealtimeType_my_conversation_mute_updated       RealtimeType = 66 // conversation
+	RealtimeType_my_conversation_read_updated       RealtimeType = 67 // conversation
+	RealtimeType_my_conversation_unsubscribed       RealtimeType = 68 // conversation
+	RealtimeType_tag_updated                        RealtimeType = 70
+	RealtimeType_tag_deleted                        RealtimeType = 71
+	RealtimeType_message_template_updated           RealtimeType = 72
+	RealtimeType_message_template_deleted           RealtimeType = 73
+	RealtimeType_live_act_user_num                  RealtimeType = 82
+	RealtimeType_live_top_source                    RealtimeType = 83
+	RealtimeType_live_top_location                  RealtimeType = 84
+	RealtimeType_live_top_page                      RealtimeType = 85
+	RealtimeType_agent_notification_created         RealtimeType = 88
+	RealtimeType_agent_notification_read            RealtimeType = 114
+	RealtimeType_agent_notibox_read                 RealtimeType = 115
+	RealtimeType_bot_deleted                        RealtimeType = 89
+	RealtimeType_bot_updated                        RealtimeType = 90
+	RealtimeType_bot_debug_end                      RealtimeType = 91
+	RealtimeType_bot_debug_begin_action             RealtimeType = 92
+	RealtimeType_user_campaign_converted            RealtimeType = 95
+	RealtimeType_user_returned                      RealtimeType = 96
+	RealtimeType_user_first_visited                 RealtimeType = 97
+	RealtimeType_bot_terminated                     RealtimeType = 98
+	RealtimeType_user_alias_created                 RealtimeType = 99
+	RealtimeType_site_user_verified                 RealtimeType = 100
+	RealtimeType_site_updated                       RealtimeType = 101
+	RealtimeType_site_up                            RealtimeType = 102
+	RealtimeType_site_down                          RealtimeType = 103
+	RealtimeType_language_updated                   RealtimeType = 104
+	RealtimeType_user_note_updated                  RealtimeType = 105
+	RealtimeType_user_note_deleted                  RealtimeType = 106
+	RealtimeType_user_lead_owner_updated            RealtimeType = 107
+	RealtimeType_user_lead_owner_deleted            RealtimeType = 108
+	RealtimeType_user_label_updated                 RealtimeType = 109
+	RealtimeType_user_label_deleted                 RealtimeType = 110
+	RealtimeType_label_updated                      RealtimeType = 112
+	RealtimeType_label_deleted                      RealtimeType = 113
+	RealtimeType_contact_info_updated               RealtimeType = 116
+	RealtimeType_internal_conversation_updated      RealtimeType = 117
+	RealtimeType_message_pinned                     RealtimeType = 118 // event.data.message
+	RealtimeType_message_unpinned                   RealtimeType = 119 // event.data.message
+	RealtimeType_user_view_updated                  RealtimeType = 120
+	RealtimeType_user_view_deleted                  RealtimeType = 121
+	RealtimeType_login_session_updated              RealtimeType = 122
+	RealtimeType_product_updated                    RealtimeType = 130
+	RealtimeType_product_deleted                    RealtimeType = 131
+	RealtimeType_product_feed_updated               RealtimeType = 132
+	RealtimeType_product_feed_deleted               RealtimeType = 133
+	RealtimeType_product_collection_updated         RealtimeType = 134
+	RealtimeType_product_collection_deleted         RealtimeType = 135
+	RealtimeType_order_created                      RealtimeType = 136
+	RealtimeType_order_updated                      RealtimeType = 137
+	RealtimeType_order_deleted                      RealtimeType = 138
+	RealtimeType_currency_updated                   RealtimeType = 139
+	RealtimeType_shop_setting_updated               RealtimeType = 140
+	RealtimeType_order_event_created                RealtimeType = 141
+	RealtimeType_shipping_address_updated           RealtimeType = 142
+	RealtimeType_order_payment_made                 RealtimeType = 145 // data.bill
+	RealtimeType_order_payment_deleted              RealtimeType = 146 // data.bill
+	RealtimeType_order_status_updated               RealtimeType = 147 // data.order_status
+	RealtimeType_order_comment_added                RealtimeType = 149 // data.message
+	RealtimeType_order_comment_deleted              RealtimeType = 150 // data.message
+	RealtimeType_order_comment_updated              RealtimeType = 151 // data.message
+	RealtimeType_order_history_updated              RealtimeType = 152
+	RealtimeType_user_order_confirmed               RealtimeType = 153
+	RealtimeType_pipeline_created                   RealtimeType = 155
+	RealtimeType_pipeline_updated                   RealtimeType = 156
+	RealtimeType_pipeline_deleted                   RealtimeType = 157
+	RealtimeType_task_created                       RealtimeType = 160
+	RealtimeType_task_updated                       RealtimeType = 161
+	RealtimeType_task_deleted                       RealtimeType = 162
+	RealtimeType_task_comment_added                 RealtimeType = 163 // data.message
+	RealtimeType_task_comment_deleted               RealtimeType = 164 // data.message
+	RealtimeType_task_comment_updated               RealtimeType = 165 // data.message
+	RealtimeType_task_history_updated               RealtimeType = 166
+	RealtimeType_order_pipeline_stage_updated       RealtimeType = 168 // data.order
+	RealtimeType_order_pipeline_stage_agent_updated RealtimeType = 169 // data.order
 )
 
 // Enum value maps for RealtimeType.
@@ -264,126 +265,128 @@ var (
 		165: "task_comment_updated",
 		166: "task_history_updated",
 		168: "order_pipeline_stage_updated",
+		169: "order_pipeline_stage_agent_updated",
 	}
 	RealtimeType_value = map[string]int32{
-		"a":                             0,
-		"account_updated":               11,
-		"agent_group_deleted":           12,
-		"agent_group_updated":           13,
-		"invitation_accepted":           14,
-		"agent_deleted":                 15,
-		"agent_updated":                 16,
-		"agent_permission_updated":      17,
-		"my_user_upserted":              19,
-		"user_info_updated":             20,
-		"agent_presence_updated":        21,
-		"user_created":                  22,
-		"note_created":                  23,
-		"presence_updated":              24,
-		"content_viewed":                25,
-		"content_searched":              26,
-		"content_addedtocart":           27,
-		"content_checkedout":            28,
-		"content_purchased":             29,
-		"topic_read":                    30,
-		"subscribed_topic_updated":      31,
-		"user_topic_updated":            32,
-		"user_attribute_updated":        33,
-		"user_attribute_deleted":        34,
-		"notibox_notification_upserted": 37,
-		"notibox_upserted":              38,
-		"notification_setting_updated":  39,
-		"conversation_updated":          40,
-		"message_sent":                  41,
-		"conversation_state_updated":    42,
-		"message_pong":                  43,
-		"conversation_joined":           44,
-		"conversation_invited":          45,
-		"conversation_left":             46,
-		"conversation_tagged":           47,
-		"conversation_untagged":         48,
-		"integration_updated":           49,
-		"conversation_typing":           54,
-		"conversation_unassigned":       56,
-		"conversation_assigned":         57,
-		"message_updated":               58,
-		"conversation_rating_requested": 60,
-		"conversation_rated":            61,
-		"my_conversation_mute_updated":  66,
-		"my_conversation_read_updated":  67,
-		"my_conversation_unsubscribed":  68,
-		"tag_updated":                   70,
-		"tag_deleted":                   71,
-		"message_template_updated":      72,
-		"message_template_deleted":      73,
-		"live_act_user_num":             82,
-		"live_top_source":               83,
-		"live_top_location":             84,
-		"live_top_page":                 85,
-		"agent_notification_created":    88,
-		"agent_notification_read":       114,
-		"agent_notibox_read":            115,
-		"bot_deleted":                   89,
-		"bot_updated":                   90,
-		"bot_debug_end":                 91,
-		"bot_debug_begin_action":        92,
-		"user_campaign_converted":       95,
-		"user_returned":                 96,
-		"user_first_visited":            97,
-		"bot_terminated":                98,
-		"user_alias_created":            99,
-		"site_user_verified":            100,
-		"site_updated":                  101,
-		"site_up":                       102,
-		"site_down":                     103,
-		"language_updated":              104,
-		"user_note_updated":             105,
-		"user_note_deleted":             106,
-		"user_lead_owner_updated":       107,
-		"user_lead_owner_deleted":       108,
-		"user_label_updated":            109,
-		"user_label_deleted":            110,
-		"label_updated":                 112,
-		"label_deleted":                 113,
-		"contact_info_updated":          116,
-		"internal_conversation_updated": 117,
-		"message_pinned":                118,
-		"message_unpinned":              119,
-		"user_view_updated":             120,
-		"user_view_deleted":             121,
-		"login_session_updated":         122,
-		"product_updated":               130,
-		"product_deleted":               131,
-		"product_feed_updated":          132,
-		"product_feed_deleted":          133,
-		"product_collection_updated":    134,
-		"product_collection_deleted":    135,
-		"order_created":                 136,
-		"order_updated":                 137,
-		"order_deleted":                 138,
-		"currency_updated":              139,
-		"shop_setting_updated":          140,
-		"order_event_created":           141,
-		"shipping_address_updated":      142,
-		"order_payment_made":            145,
-		"order_payment_deleted":         146,
-		"order_status_updated":          147,
-		"order_comment_added":           149,
-		"order_comment_deleted":         150,
-		"order_comment_updated":         151,
-		"order_history_updated":         152,
-		"user_order_confirmed":          153,
-		"pipeline_created":              155,
-		"pipeline_updated":              156,
-		"pipeline_deleted":              157,
-		"task_created":                  160,
-		"task_updated":                  161,
-		"task_deleted":                  162,
-		"task_comment_added":            163,
-		"task_comment_deleted":          164,
-		"task_comment_updated":          165,
-		"task_history_updated":          166,
-		"order_pipeline_stage_updated":  168,
+		"a":                                  0,
+		"account_updated":                    11,
+		"agent_group_deleted":                12,
+		"agent_group_updated":                13,
+		"invitation_accepted":                14,
+		"agent_deleted":                      15,
+		"agent_updated":                      16,
+		"agent_permission_updated":           17,
+		"my_user_upserted":                   19,
+		"user_info_updated":                  20,
+		"agent_presence_updated":             21,
+		"user_created":                       22,
+		"note_created":                       23,
+		"presence_updated":                   24,
+		"content_viewed":                     25,
+		"content_searched":                   26,
+		"content_addedtocart":                27,
+		"content_checkedout":                 28,
+		"content_purchased":                  29,
+		"topic_read":                         30,
+		"subscribed_topic_updated":           31,
+		"user_topic_updated":                 32,
+		"user_attribute_updated":             33,
+		"user_attribute_deleted":             34,
+		"notibox_notification_upserted":      37,
+		"notibox_upserted":                   38,
+		"notification_setting_updated":       39,
+		"conversation_updated":               40,
+		"message_sent":                       41,
+		"conversation_state_updated":         42,
+		"message_pong":                       43,
+		"conversation_joined":                44,
+		"conversation_invited":               45,
+		"conversation_left":                  46,
+		"conversation_tagged":                47,
+		"conversation_untagged":              48,
+		"integration_updated":                49,
+		"conversation_typing":                54,
+		"conversation_unassigned":            56,
+		"conversation_assigned":              57,
+		"message_updated":                    58,
+		"conversation_rating_requested":      60,
+		"conversation_rated":                 61,
+		"my_conversation_mute_updated":       66,
+		"my_conversation_read_updated":       67,
+		"my_conversation_unsubscribed":       68,
+		"tag_updated":                        70,
+		"tag_deleted":                        71,
+		"message_template_updated":           72,
+		"message_template_deleted":           73,
+		"live_act_user_num":                  82,
+		"live_top_source":                    83,
+		"live_top_location":                  84,
+		"live_top_page":                      85,
+		"agent_notification_created":         88,
+		"agent_notification_read":            114,
+		"agent_notibox_read":                 115,
+		"bot_deleted":                        89,
+		"bot_updated":                        90,
+		"bot_debug_end":                      91,
+		"bot_debug_begin_action":             92,
+		"user_campaign_converted":            95,
+		"user_returned":                      96,
+		"user_first_visited":                 97,
+		"bot_terminated":                     98,
+		"user_alias_created":                 99,
+		"site_user_verified":                 100,
+		"site_updated":                       101,
+		"site_up":                            102,
+		"site_down":                          103,
+		"language_updated":                   104,
+		"user_note_updated":                  105,
+		"user_note_deleted":                  106,
+		"user_lead_owner_updated":            107,
+		"user_lead_owner_deleted":            108,
+		"user_label_updated":                 109,
+		"user_label_deleted":                 110,
+		"label_updated":                      112,
+		"label_deleted":                      113,
+		"contact_info_updated":               116,
+		"internal_conversation_updated":      117,
+		"message_pinned":                     118,
+		"message_unpinned":                   119,
+		"user_view_updated":                  120,
+		"user_view_deleted":                  121,
+		"login_session_updated":              122,
+		"product_updated":                    130,
+		"product_deleted":                    131,
+		"product_feed_updated":               132,
+		"product_feed_deleted":               133,
+		"product_collection_updated":         134,
+		"product_collection_deleted":         135,
+		"order_created":                      136,
+		"order_updated":                      137,
+		"order_deleted":                      138,
+		"currency_updated":                   139,
+		"shop_setting_updated":               140,
+		"order_event_created":                141,
+		"shipping_address_updated":           142,
+		"order_payment_made":                 145,
+		"order_payment_deleted":              146,
+		"order_status_updated":               147,
+		"order_comment_added":                149,
+		"order_comment_deleted":              150,
+		"order_comment_updated":              151,
+		"order_history_updated":              152,
+		"user_order_confirmed":               153,
+		"pipeline_created":                   155,
+		"pipeline_updated":                   156,
+		"pipeline_deleted":                   157,
+		"task_created":                       160,
+		"task_updated":                       161,
+		"task_deleted":                       162,
+		"task_comment_added":                 163,
+		"task_comment_deleted":               164,
+		"task_comment_updated":               165,
+		"task_history_updated":               166,
+		"order_pipeline_stage_updated":       168,
+		"order_pipeline_stage_agent_updated": 169,
 	}
 )
 
@@ -1026,7 +1029,7 @@ var file_type_proto_rawDesc = []byte{
 	0x52, 0x07, 0x6f, 0x75, 0x74, 0x73, 0x69, 0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6c, 0x61, 0x73,
 	0x74, 0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x6c, 0x61, 0x73, 0x74, 0x12, 0x1d, 0x0a,
 	0x0a, 0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x5f, 0x61, 0x67, 0x6f, 0x18, 0x12, 0x20, 0x01, 0x28,
-	0x03, 0x52, 0x09, 0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x41, 0x67, 0x6f, 0x2a, 0xca, 0x16, 0x0a,
+	0x03, 0x52, 0x09, 0x62, 0x65, 0x66, 0x6f, 0x72, 0x65, 0x41, 0x67, 0x6f, 0x2a, 0xf3, 0x16, 0x0a,
 	0x0c, 0x52, 0x65, 0x61, 0x6c, 0x74, 0x69, 0x6d, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x05, 0x0a,
 	0x01, 0x61, 0x10, 0x00, 0x12, 0x13, 0x0a, 0x0f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
 	0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x10, 0x0b, 0x12, 0x17, 0x0a, 0x13, 0x61, 0x67, 0x65,
@@ -1207,9 +1210,12 @@ var file_type_proto_rawDesc = []byte{
 	0x61, 0x73, 0x6b, 0x5f, 0x68, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79, 0x5f, 0x75, 0x70, 0x64, 0x61,
 	0x74, 0x65, 0x64, 0x10, 0xa6, 0x01, 0x12, 0x21, 0x0a, 0x1c, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f,
 	0x70, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x5f, 0x73, 0x74, 0x61, 0x67, 0x65, 0x5f, 0x75,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x10, 0xa8, 0x01, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x10, 0xa8, 0x01, 0x12, 0x27, 0x0a, 0x22, 0x6f, 0x72, 0x64,
+	0x65, 0x72, 0x5f, 0x70, 0x69, 0x70, 0x65, 0x6c, 0x69, 0x6e, 0x65, 0x5f, 0x73, 0x74, 0x61, 0x67,
+	0x65, 0x5f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x5f, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x10,
+	0xa9, 0x01, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (

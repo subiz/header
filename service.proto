@@ -415,7 +415,11 @@ service Notibox {
 	rpc Send(header.Notification) returns (Empty);
 	rpc MarkRead(Id) returns (Empty);
 	rpc MarkReadCompactedNoti(header.CompactedNotiRequest) returns (Empty);
-	rpc ListRecentCompactedNoties(header.RecentCompactedNotiRequest) returns (header.CompactedNoties);
+	rpc ListRecentCompactedNoties(header.ListNotiRequest) returns (header.CompactedNoties);
+
+	rpc SendOrderNoti(header.Notification) returns (Empty);
+	rpc ListOrderNoties(header.ListNotiRequest) returns (header.Notifications);
+	rpc MarkReadOrderNoti(Id) returns (Empty);
 }
 
 // watchhttp services

@@ -20,6 +20,7 @@ message DashboardAgent {
 	optional string default_pos = 18;
 	optional string default_shipping_provider = 19;
 	optional string order_filter = 20; // json
+	optional int64 conversation_seen = 21;
 }
 
 message Agent {

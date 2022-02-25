@@ -32,6 +32,14 @@ message Ids {
 	int32 limit = 7;
 }
 
+message Notifications {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Notification notifications = 4;
+	int64 severity = 5; // 0: not important, 1 important;
+	string next_anchor = 6;
+}
+
 message Notification {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -43,6 +51,7 @@ message Notification {
 	bool is_read = 9;
 
 	bool is_instant = 12; // just display and disappear, no persit
+	int64 severity = 13; // 0: not important, 1 important;
 }
 
 message CompactedNoti {
@@ -72,12 +81,13 @@ message CompactedNoties {
 	int64 read_created = 9;
 }
 
-message RecentCompactedNotiRequest {
+message ListNotiRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
 	int32 limit = 4;
 	string anchor = 5;
+	string type = 6;
 }
 
 message Attribute {

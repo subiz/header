@@ -170,6 +170,7 @@ enum RealtimeType {
 	task_history_updated = 166;
 
 	order_pipeline_stage_updated = 168; // data.order
+	order_pipeline_stage_agent_updated = 169; // data.order
 }
 
 message TextTransform {
