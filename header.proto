@@ -4440,7 +4440,7 @@ message OrderPipelineStage {
 	string pipeline = 4;
 	string stage = 5;
 	int64 assigned = 6;
-	repeated Task actions = 7;
+	repeated Task tasks = 7;
 	int64 duration = 8; // sec // calculated using log
 	string agent_id = 9;
 }
