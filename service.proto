@@ -508,7 +508,7 @@ service Proder {
 	rpc CancelShippingOrder(header.Id) returns (header.Order);
 	rpc PrintShippingOrders(header.Ids) returns (header.File);
 
-	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
+	rpc UpdateOrderPipelineStage(header.OrderPipelineStage) returns (header.Order); // trigger stage automation
 	// used to update tasks and agent id
 	rpc UpdateOrderPipelineStageDetail(header.OrderPipelineStage) returns (header.OrderPipelineStage);
 
