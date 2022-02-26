@@ -417,9 +417,9 @@ service Notibox {
 	rpc MarkReadCompactedNoti(header.CompactedNotiRequest) returns (Empty);
 	rpc ListRecentCompactedNoties(header.ListNotiRequest) returns (header.CompactedNoties);
 
-	rpc SendOrderNoti(header.Notification) returns (Empty);
-	rpc ListOrderNoties(header.ListNotiRequest) returns (header.Notifications);
-	rpc MarkReadOrderNoti(Id) returns (Empty);
+	rpc SendNoti(header.Notification) returns (Empty);
+	rpc ListNoties(header.ListNotiRequest) returns (header.Notifications);
+	rpc MarkReadNoti(Id) returns (Empty);
 }
 
 // watchhttp services
@@ -511,6 +511,10 @@ service Proder {
 	rpc UpdateOrderPipelineStage(header.Order) returns (Empty); // trigger stage automation
 	// used to update tasks and agent id
 	rpc UpdateOrderPipelineStageDetail(header.OrderPipelineStage) returns (header.OrderPipelineStage);
+
+	rpc SeenOrder(header.Id) returns (Empty);
+	rpc FollowOrder(header.Id) returns (Empty);
+	rpc UnfollowOrder(header.Id) returns (Empty);
 }
 
 service Apiece {
