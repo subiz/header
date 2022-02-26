@@ -203,4 +203,11 @@ enum E {
 	too_many_shipping_policy = 144;
 
 	pipeline_stage_not_found = 145;
+	invalid_order_status = 146;
+
+	marker_not_found = 147;
+	invalid_product_category = 148;
+	invalid_product_visibility = 149;
+	invalid_product_id = 150;
+	shortcut_not_found = 151;
 }

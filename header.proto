@@ -52,6 +52,7 @@ message Notification {
 
 	bool is_instant = 12; // just display and disappear, no persit
 	int64 severity = 13; // 0: not important, 1 important;
+	string category = 14; // user, order
 }
 
 message CompactedNoti {
@@ -87,7 +88,7 @@ message ListNotiRequest {
 	string agent_id = 3;
 	int32 limit = 4;
 	string anchor = 5;
-	string type = 6;
+	string category = 6;
 }
 
 message Attribute {
