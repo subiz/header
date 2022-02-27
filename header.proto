@@ -38,6 +38,8 @@ message Notifications {
 	repeated Notification notifications = 4;
 	int64 severity = 5; // 0: not important, 1 important;
 	string next_anchor = 6;
+	int64 last_seen = 7;
+	int64 unread = 8;
 }
 
 message Notification {
@@ -4970,7 +4972,7 @@ message PipelineStage {
 	string created_by = 6;
 	string label = 7;
 	string description = 8;
-	bool is_closed = 9;
+	bool is_closed = 9; // order auto confirmed when move to this stage
 	int64 probability = 10; // * 100 100 => won 0 => lost
 
 	int64 rotten_days = 11;
