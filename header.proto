@@ -3096,14 +3096,6 @@ message BotTerminated {
 	}
 }
 
-message WhitelistDomain {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string domain = 4;
-	int64 created = 5;
-	string by = 6;
-}
-
 message BlacklistIP {
 	common.Context ctx = 1;
 	string account_id = 3;
