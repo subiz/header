@@ -680,7 +680,7 @@ message Event {
 		User user = 10;
 		UnreadTopic unread_topic = 11; // todo: remove
 		Notification notification = 14;
-		account.AgentGroup agent_group = 18;
+		AgentGroup agent_group = 18;
 		Note note = 23;
 		// Ticket ticket = 24;
 		// Automation automation = 25;
@@ -1492,6 +1492,8 @@ message Tag {
 	int64 modified = 6;
 	string creator_id = 7;
 	string color = 8;
+
+	int64 last_used = 9;
 }
 
 message TemplateData {
@@ -5121,4 +5123,24 @@ message TaskHistoryEntries {
 	int64 total = 2;
 	string anchor = 3;
 	int64 last_modified = 5;
+}
+
+message AgentGroups {
+	common.Context ctx = 1;
+	repeated AgentGroup Groups = 2;
+}
+
+message AgentGroup {
+	common.Context ctx = 1;
+	string id = 2;
+	string account_id = 3;
+	string name = 4;
+
+	// members is list of 10 agents in group
+	account.Agent members = 7;
+	int64 created = 6;
+	int64 modified = 8;
+
+	string created_by = 9;
+	repeated string agent_ids = 10;
 }

@@ -83,18 +83,6 @@ message Agent {
 	optional string internal_name = 42;
 }
 
-message AgentGroup {
-	optional common.Context ctx = 1;
-	optional string id = 2;
-	optional string account_id = 3;
-	optional string name = 4;
-	optional string logo_url = 5;
-
-	// members is list of 10 agents in group
-	repeated Agent members = 7;
-	optional int64 created = 6;
-	optional int64 modified = 8;
-}
 
 message ResetPasswordRequest {
 	optional common.Context ctx = 1;
@@ -206,11 +194,6 @@ message NewPassword {
 	optional string new_password = 3;
 	optional string old_password = 5;
 	optional string email = 8;
-}
-
-message AgentGroups {
-	optional common.Context ctx = 1;
-	repeated AgentGroup Groups = 2;
 }
 
 message Token {

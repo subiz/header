@@ -27,9 +27,9 @@ service Map {
 }
 
 service AccountMgr {
-	rpc CreateGroup(account.AgentGroup) returns (account.AgentGroup);
-	rpc UpdateGroup(account.AgentGroup) returns (account.AgentGroup);
-	rpc GetGroup(Id) returns (account.AgentGroup);
+	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
+	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
+	rpc GetGroup(Id) returns (header.AgentGroup);
 	rpc RequestResetPassword(account.ResetPasswordRequest) returns (Empty);
 	rpc UpdatePassword(account.NewPassword) returns (account.Agent);
 	rpc UpdateAgent(account.Agent) returns (account.Agent);
@@ -47,9 +47,11 @@ service AccountMgr {
 	rpc ListAgents(Id) returns (account.Agents);
 
 	rpc DeleteGroup(Id) returns (Empty);
-	rpc ListGroups(Id) returns (account.AgentGroups);
-	rpc AddAgentToGroup(account.GroupMember) returns (Empty);
-	rpc RemoveAgentFromGroup(account.GroupMember) returns (Empty);
+	rpc ListGroups(Id) returns (header.AgentGroups);
+
+	rpc AddAgentToGroup(account.GroupMember) returns (Empty); // deprecated
+	rpc RemoveAgentFromGroup(account.GroupMember) returns (Empty); // deprecated
+
 	rpc ChangeEmail(account.Agent) returns (account.Agent);
 	rpc SyncPublicHolidays(account.SyncPublicHolidaysRequest) returns (account.BusinessHours);
 	rpc TransferOwner(Id) returns (account.Agent);
