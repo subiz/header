@@ -5129,7 +5129,7 @@ message AgentGroup {
 	string name = 4;
 
 	// members is list of 10 agents in group
-	account.Agent members = 7;
+	repeated account.Agent members = 7;
 	int64 created = 6;
 	int64 modified = 8;
 
