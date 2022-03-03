@@ -512,7 +512,6 @@ service Proder {
 
 	rpc UpdateOrderPipelineStage(header.OrderPipelineStage) returns (header.Order); // trigger stage automation
 	// used to update tasks and agent id
-	rpc UpdateOrderPipelineStageDetail(header.OrderPipelineStage) returns (header.OrderPipelineStage);
 
 	rpc SeenOrder(header.Id) returns (Empty);
 	rpc FollowOrder(header.Id) returns (Empty);

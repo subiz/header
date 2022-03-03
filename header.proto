@@ -1169,14 +1169,14 @@ message Chain {
 }
 
 enum ConvoState {
-	none = 0; // convo
-	unassigned = 2; // convo
+	// none = 0; // convo
+	unassigned = 0; // convo
 	active = 6; // convo
 	ended = 8; // convo
 	pending = 9; // ticket and convo
 
 	all = 10; // ticket
-	open = 11; // ticket
+	// open = 11;  ticket
 	resolved = 13; // ticket
 	// closed = 14; // ticket
 
@@ -4109,6 +4109,8 @@ enum ShippingProvider {
 	heyu = 11;
 	viettelpost = 12;
 	ghn = 13;
+
+	none = 20; // not require ship
 }
 
 message ShippingPolicies {
@@ -4428,17 +4430,19 @@ message Order {
 	string first_paid_order_id = 69;
 
 	string user_confirmation = 70; // confirmed || rejected
+	int64 user_confirmed = 84; // ms
 
 	float total_discount = 71;
 	int64 fpv_total_discount = 72;
 
-	repeated OrderAgent agents = 75;
+	repeated OrderAgent agents = 75; // read only from client
 
 	string pipeline = 80;
 	string pipeline_stage = 81;
 	int64 assigned = 82;
 	repeated OrderPipelineStage stages = 83;
 }
+
 
 message OrderPipelineStage {
 	common.Context ctx = 1;
@@ -4452,6 +4456,8 @@ message OrderPipelineStage {
 
 	string agent_id = 9;
 	string assigned_by = 10;
+
+	int64 updated = 11;
 }
 
 message OrderAgent {
@@ -4466,10 +4472,9 @@ message OrderAgent {
 }
 
 enum OrderStatusCode {
-	draft = 0;
-	new = 1;  // Đơn mới
-	canceled = 2; // Đơn hàng đã chốt thua
-	closed = 3; // Đơn hàng đã chốt thắng
+	open = 0;  // Đơn mới
+	canceled = 1; // Đơn hàng đã chốt thua
+	closed = 2; // Đơn hàng đã chốt thắng
 
 	delivery_success = 25;
 	delivery_failure = 26;
@@ -4965,7 +4970,7 @@ message PipelineStage {
 	string id = 3; // gen by client
 	int64 created = 5;
 	string created_by = 6;
-	string label = 7;
+	string name = 7;
 	string description = 8;
 	bool is_closed = 9; // order auto confirmed when move to this stage
 	int64 probability = 10; // * 100 100 => won 0 => lost
