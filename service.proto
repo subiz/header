@@ -13,6 +13,11 @@ service RateLimit {
 	rpc SyncRateLimit(RateLimitSyncRequest) returns (RateLimitSyncResponse);
 }
 
+service Search {
+	rpc Index(header.DocIndexRequest) returns (header.Empty);
+	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
+}
+
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);
 	rpc LookupAddress(Id) returns (Address);
