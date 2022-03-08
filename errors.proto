@@ -6,8 +6,6 @@ option go_package = "github.com/subiz/header";
 
 enum E {
 	Sub = 0;
-	Email_SendRequest = 10600;
-	PaymentWorkerJob = 110440;
 	AccountResetPasswordEmail = 110533;
 	AccountPasswordChangedEmailRequested = 110534;
 	AccountConfirmChangeEmailEmailRequested = 110535;
@@ -26,8 +24,6 @@ enum E {
 	InvoicePaidEmail = 110578;
 	AccountAgentJoinedEmail = 110579;
 
-	UserTotalConvoUpdated = 111232;
-	BqreportSynced = 3000008;
 	BotSynced = 4000001;
 	StartBot = 4000002;
 	TeminateBot = 4000003;
@@ -210,4 +206,6 @@ enum E {
 	invalid_product_visibility = 149;
 	invalid_product_id = 150;
 	shortcut_not_found = 151;
+	file_system_error = 152;
+	cannot_connect = 153;
 }

@@ -16,6 +16,7 @@ service RateLimit {
 service Search {
 	rpc Index(header.DocIndexRequest) returns (header.Empty);
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
+	rpc AddOwner(header.DocIndexRequest) returns (header.Empty);
 }
 
 service Map {

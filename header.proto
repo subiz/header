@@ -5153,6 +5153,9 @@ message DocIndexRequest {
 	string content = 6;
 
 	bool is_name = 7; // hint for better name search
+	int64 day = 8; // unix day for doc, used to order more recent document
+
+	repeated string owners = 9;
 }
 
 message DocSearchRequest {
@@ -5165,8 +5168,9 @@ message DocSearchRequest {
 
 	int64 limit = 7;
 
-	repeated string include_parts = 8; // only include this parts
-	repeated bool doc_distinct = 9; // distinct document
+	repeated string include_parts = 8; // only include those parts
+	bool doc_distinct = 9; // distinct document
+	repeated string include_owners = 10;
 }
 
 message DocHit {
