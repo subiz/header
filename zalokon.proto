@@ -17,6 +17,12 @@ message OfficialAccount {
 	int64 last_zalo_hook = 11;
 
 	string state = 12; // activated || deleted || failed
+	int32 version = 13;
+	int64 last_refresh_token_at = 14;
+	string refresh_token = 15;
+	int64 last_called = 17;
+	int64 last_refresh_token_error_at = 18;
+	int64 access_token_expired_at = 19;
 }
 
 message ZaloUser {
@@ -159,33 +165,10 @@ message Sender {
 	string group_id = 5;
 }
 
-message Conversation {
-	string account_id = 2;
-	string id = 3;
-	int64 oa_id = 4;
-	int64 created  = 5;
-	int64 zluserid = 6;
-	string sbuserid = 7;
-}
-
 message Zl2SbEvent {
 	string zlmid = 2;
 	string account_id = 3;
 	string conversation_id = 4;
 	string sbmid = 5;
 	int64 oa_id = 6;
-}
-
-message LongLivedAccessToken {
-	string access_token = 2;
-	string token_type = 3;
-	int32 expires_in = 5;
-}
-
-message SubscribeRet {
-	bool success = 2;
-}
-
-message SubscribeAppRequest {
-	repeated string subscribed_fields = 2;
 }

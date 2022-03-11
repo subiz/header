@@ -208,4 +208,5 @@ enum E {
 	shortcut_not_found = 151;
 	file_system_error = 152;
 	cannot_connect = 153;
+	zalo_call_error = 154;
 }

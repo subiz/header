@@ -5184,3 +5184,16 @@ message DocSearchResponse {
 	repeated DocHit hits = 4;
 	string anchor = 5;
 }
+
+message AccessToken {
+	string access_token = 2;
+	string token_type = 3;
+	int32 expires_in = 5;
+	string refresh_token = 6;
+}
+
+message ZaloCodeChallenge {
+	common.Context ctx = 1;
+	string state = 5; // verifier, zalo sucks
+	string code_challenge = 6;
+}
