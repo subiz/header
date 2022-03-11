@@ -181,6 +181,7 @@ func makeScopeMap() map[string]string {
 	m["account_manage"] = m["account_setting"] + "account:w agent_group:wr agent:w subscription:rw payment_method:rw"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
 	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:w"
+	m["crm"] = m["account:r webhook:wr user:rw"]
 	m["all"] = m["subiz"]
 	return m
 }
