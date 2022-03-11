@@ -41,6 +41,16 @@ message ZaloUserResponse {
 	int32 error = 2;
 	string message = 3;
 	ZaloUser data = 4;
+
+	string ref_doc = 5;
+	string error_reason = 6;
+	string error_name = 7;
+
+	// oauth
+	string access_token = 8;
+	string token_type = 9;
+	string expires_in = 10;
+	string refresh_token = 11;
 }
 
 message OfficalAccountResponse {
