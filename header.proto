@@ -5153,6 +5153,7 @@ message DocIndexRequest {
 	string content = 6;
 
 	bool is_name = 7; // hint for better name search
+	bool is_id = 10; // hint for not indexing using tokenize
 	int64 day = 8; // unix day for doc, used to order more recent document
 
 	repeated string owners = 9;
@@ -5176,6 +5177,14 @@ message DocSearchRequest {
 message DocHit {
 	string document_id = 3;
 	string part = 4;
+
+	string avatar_url = 5;
+	string name = 6;
+
+	int64 updated = 7;
+	string description = 8;
+
+	string integration_id = 9; // for convo
 }
 
 message DocSearchResponse {

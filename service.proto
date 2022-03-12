@@ -113,7 +113,7 @@ service AccountMgr {
 
 // user services
 service UserMgr {
-	rpc SearchUsers(header.SearchRequest) returns (header.Users);
+	rpc SearchUsers(header.SearchRequest) returns (header.Users); // deprecated
 
 	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
 	rpc CreateUser(header.User) returns (Id);
@@ -214,7 +214,7 @@ service ConversationMgr {
 	rpc Typing(Id) returns (Empty);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
-	rpc SearchConvos(header.SearchRequest) returns (header.Conversations);
+	rpc SearchConvos(header.SearchRequest) returns (header.Conversations); // deprecated
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UpdateConversationMember(header.ConversationMember) returns (Empty);
