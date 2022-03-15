@@ -25,18 +25,10 @@ enum RealtimeType {
 
 	presence_updated = 24;
 	content_viewed = 25;
-	content_searched = 26;
-	content_addedtocart = 27;
-	content_checkedout = 28;
-	content_purchased = 29;
 	topic_read = 30;
 	subscribed_topic_updated = 31;
-	user_topic_updated = 32;
 	user_attribute_updated = 33;
 	user_attribute_deleted = 34;
-
-	notibox_notification_upserted = 37;
-	notibox_upserted = 38;
 
 	notification_setting_updated = 39;
 

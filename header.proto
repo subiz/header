@@ -190,11 +190,6 @@ message Users {
 	int32 end_offset = 7;
 }
 
-message UserMap {
-	map<string, User> m = 1;
-	int64 total = 2;
-}
-
 message SessionCampaign {
 	string name = 2;
 	string source = 3;
