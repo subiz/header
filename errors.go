@@ -112,6 +112,10 @@ func newError(class int, code E, v ...interface{}) *Error {
 	return e
 }
 
+func E422(err error, code E, v ...interface{}) *Error {
+	return wrapErr(err, 422, code, v...)
+}
+
 func E400(err error, code E, v ...interface{}) *Error {
 	return wrapErr(err, 400, code, v...)
 }
