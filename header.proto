@@ -5188,6 +5188,7 @@ message DocHit {
 
 	string phone = 10;
 	string email = 11;
+	string user_id = 12; // for convo
 }
 
 message DocSearchResponse {
