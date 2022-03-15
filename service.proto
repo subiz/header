@@ -471,6 +471,7 @@ service Proder {
 	rpc ListProducts(ProductsRequest) returns (header.Products);
 	rpc ListProductIds(Ids) returns (Ids);
 	rpc ListGroupedProducts(ProductsRequest) returns (header.Products);
+	rpc ImportProducts(header.Products) returns (header.Products);
 
 	rpc ListProductCollections(Ids) returns (header.ProductCollections);
 	rpc CreateProductCollection(ProductCollection) returns (ProductCollection);
