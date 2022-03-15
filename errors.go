@@ -227,3 +227,11 @@ func trimOutPrefix(str, prefix string) string {
 	}
 	return str[i+len(prefix):]
 }
+
+func GetErrCode(err error) string {
+	myerr, ok := err.(*Error)
+	if !ok {
+		return E_undefined.String()
+	}
+	return myerr.Code
+}

@@ -41,6 +41,7 @@ enum E {
 	invalid_credential  = 10;
 	http_call_error  = 11;
 	agent_group_not_found  = 12;
+	invalid_conversation_id = 13;
 	agent_not_found      = 15;
 	facebook_page_not_found = 16;
 	invalid_refresh_token = 17;
@@ -165,6 +166,8 @@ enum E {
 	too_many_shipping_address = 111;
 	shipping_address_not_found = 112;
 
+	message_not_found = 113;
+
 	too_many_payment_method = 115;
 
 	invalid_css = 116;
@@ -185,6 +188,7 @@ enum E {
 	leaver_is_the_last_one_in_conversation = 130;
 	invalid_conversation_state = 131;
 	caller_is_not_leaver = 132;
+	conversation_not_found = 133;
 	too_many_fields = 134;
 	too_many_attachments = 135;
 	unknown_message_format = 136;

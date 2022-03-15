@@ -4415,7 +4415,7 @@ message Order {
 	float adjustment = 55;
 	int64 fpv_adjustment = 56;
 
-	map<string, string> custom_field = 58;
+	map<string, string> fields = 58;
 
 	bool is_draft = 59;
 
@@ -5185,6 +5185,9 @@ message DocHit {
 	string description = 8;
 
 	string integration_id = 9; // for convo
+
+	string phone = 10;
+	string email = 11;
 }
 
 message DocSearchResponse {
