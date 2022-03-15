@@ -1540,14 +1540,14 @@ message Postback {
 }
 
 message BotPostback {
-	string type = 2; // bot_jump || add_to_cart || order_confirmation
+	string type = 2; // bot_jump || add_to_cart || order_confirmation || place_order
 	string bot_id = 3; // required
 	string action_id = 4;
 	string from_action = 5; // required
 	string title = 6; // for bot_jump
 	I18nString i18n_title = 7; // for bot_jump
 
-	// for add_to_card only
+	// for add_to_card and place_order only
 	string product_id = 10;
 
 	// for order_confirmation
@@ -4637,6 +4637,8 @@ message Product {
 	Tax tax = 64; // (shared)
 
 	string currency = 65;
+
+	repeated MessageButton buttons = 66; // for message attachment
 }
 
 message ProductInventory {
