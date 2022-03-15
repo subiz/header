@@ -213,4 +213,11 @@ enum E {
 	file_system_error = 152;
 	cannot_connect = 153;
 	zalo_call_error = 154;
+
+	invalid_integration_state = 155;
+
+	message_too_large = 156;
+	invalid_message_id = 157;
+	attachment_too_large = 158;
+	field_too_long = 159;
 }
