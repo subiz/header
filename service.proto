@@ -468,6 +468,7 @@ service Proder {
 	rpc CreateProduct(header.Product) returns (header.Product);
 	rpc UpdateProduct(header.Product) returns (header.Product);
 	rpc DeleteProduct(Id) returns (Empty);
+	rpc RestoreProduct(Id) returns (header.Product);
 	rpc ListProducts(ProductsRequest) returns (header.Products);
 	rpc ListProductIds(Ids) returns (Ids);
 	rpc ListGroupedProducts(ProductsRequest) returns (header.Products);
@@ -491,6 +492,7 @@ service Proder {
 	rpc UpdateOrder(header.Order) returns (header.Order);
 
 	rpc DeleteOrder(header.Id) returns (header.Empty); // soft delete, mark as deleted
+	rpc RestoreOrder(header.Id) returns (header.Order);
 	rpc ListOrders(header.OrdersRequest) returns (header.Orders);
 	rpc CountOrders(header.OrdersRequest) returns (header.Orders);
 	rpc DeleteDraftOrders(header.DeleteDraftOrdersRequest) returns (header.Empty);
