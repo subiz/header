@@ -22,6 +22,7 @@ message DashboardAgent {
 	optional string order_filter = 20; // json
 	optional int64 conversation_seen = 21;
 	optional string price_function = 22;
+	repeated string user_info_fields = 23;
 }
 
 message Agent {
