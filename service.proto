@@ -187,14 +187,6 @@ service ConversationReporter {
 	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
 }
 
-service RuleMgr {
-	rpc UpdateRule(header.Rule) returns (header.Rule);
-	rpc CreateRule(header.Rule) returns (header.Rule);
-	rpc DeleteRule(Id) returns (Empty);
-	rpc ReadRule(Id) returns (header.Rule);
-	rpc ListRules(Id) returns (header.Route);
-}
-
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
@@ -226,6 +218,22 @@ service ConversationMgr {
 	rpc TerminateBot(header.BotTerminated) returns (header.Event);
 
 	rpc UpdatePresence (Id) returns (account.Presence);
+
+	rpc SendMessage(header.Event) returns (header.Event);
+	rpc UpdateMessage(header.Event) returns (header.Event);
+	rpc PinMessage(header.Event) returns (header.Empty);
+	rpc UnpinMessage(header.Event) returns (header.Empty);
+	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
+
+	rpc Deintegrate(Id) returns (Empty);
+	rpc ListIntegrations(Id) returns (header.Integrations);
+	rpc Integrate(header.Integration) returns (header.Integration);
+
+	rpc UpdateRule(header.Rule) returns (header.Rule);
+	rpc CreateRule(header.Rule) returns (header.Rule);
+	rpc DeleteRule(Id) returns (Empty);
+	rpc ReadRule(Id) returns (header.Rule);
+	rpc ListRules(Id) returns (header.Route);
 }
 
 service TemplateMgr {
@@ -245,23 +253,9 @@ service TagMgr {
 	rpc GetTag(Id) returns (header.Tag);
 }
 
-service IntegrationMgr {
-	rpc Deintegrate(Id) returns (Empty);
-	rpc ListIntegrations(Id) returns (header.Integrations);
-	rpc Integrate(header.Integration) returns (header.Integration);
-}
-
 service EventMgr {
 	rpc SearchEvents(header.ListUserEventsRequest) returns (header.Events);
 	rpc CreateEvent(header.UserEvent) returns (header.Event);
-}
-
-service ConversationEventReader {
-	rpc SendMessage(header.Event) returns (header.Event);
-	rpc UpdateMessage(header.Event) returns (header.Event);
-	rpc PinMessage(header.Event) returns (header.Empty);
-	rpc UnpinMessage(header.Event) returns (header.Empty);
-	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
 }
 
 // file services
