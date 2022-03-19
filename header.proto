@@ -236,6 +236,9 @@ message AttributeDefinition {
 
 	bool multiple_line = 17;
 	string select = 18; // radio, checkbox, dropdown
+	bool is_image = 28;
+
+	bool is_date_only = 29;
 	repeated AttributeDefinitionListItem items = 19; // for select
 	string default_value = 20;
 
@@ -255,7 +258,7 @@ message AttributeDefinition {
 	string updated_by = 11;
 	string validator = 10; // email, name, decimal
 
-	bool allow_multiples = 14;
+	// bool allow_multiples = 14; //
 	bool allow_user_edit = 15;
 
 	bool is_system = 22;
