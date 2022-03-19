@@ -345,6 +345,7 @@ service FabikonService {
 	rpc ListFbFanpageSettings(Id) returns (header.FbFanpageSettings);
 
 	rpc ListFbPosts(Id) returns (header.FacebookPosts);
+	rpc SendEventToFacebook(header.Events) returns (header.Empty);
 }
 
 // widget services
