@@ -1576,8 +1576,7 @@ message Integration {
 
 	string state = 8;
 	enum State {
-		disabled = 0;
-		activated = 1; // activeated and insync
+		activated = 0; // activeated and insync
 		failed = 2;
 		deleted = 3;
 	}
@@ -1586,6 +1585,9 @@ message Integration {
 	int64 created = 11;
 	string integrated_by = 13;
 	int64 last_failed = 14;
+	bool disabled = 15;
+	string sending_status = 17; // ok, failed
+	string receiving_status = 18; // ok, failed
 }
 
 message TagRequest {
