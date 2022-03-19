@@ -15,6 +15,7 @@ message FacebookPage {
 	optional int64 last_facebook_hook = 9;
 
 	optional string state = 8; // activated || deleted || failed
+	optional int64 last_messenger_inbox = 10; // ms
 }
 
 message FbWebhookEvent {
@@ -336,4 +337,66 @@ message FbProductItem {
 	optional string name = 5;
 	optional string price = 6;
 	optional string url = 7;
+}
+
+message FbConversations {
+	optional Error error = 1;
+	repeated FbConversation data = 3;
+	optional FbPaging paging = 4;
+}
+
+message FbConversation {
+	optional string id = 2;
+	optional string link = 3;
+
+	optional string snippet = 4;
+	optional string updated_time = 5;
+	optional int64 message_count = 6;
+
+	optional FbProfiles participants = 7;
+	optional FbProfiles senders = 8;
+
+	optional bool can_reply  = 9;
+	optional bool is_subscribed = 10;
+}
+
+message FbProfiles {
+	optional Error error = 1;
+	repeated FbProfile data = 2;
+	optional FbPaging paging = 4;
+}
+
+message FbProfile {
+	optional string name = 3;
+	optional string email = 4;
+	optional string id = 5;
+}
+
+message FbConversationMessageAttachemnts {
+	optional Error error = 1;
+	repeated FbConversationMessageAttachment data = 2;
+	optional FbPaging paging = 4;
+}
+
+message FbConversationMessageAttachment {
+	optional string id = 3;
+	optional string mime_type = 4;
+	optional string name = 5;
+	optional string size = 6;
+	optional string file_url = 7;
+}
+
+message FbConversationMessages {
+	optional Error error = 1;
+	repeated FbConversationMessage data = 2;
+	optional FbPaging paging = 4;
+}
+
+message FbConversationMessage {
+	optional string created_time = 2;
+	optional FbProfile from = 3;
+	optional string id = 4;
+	optional string message = 5;
+	optional FbProfile to = 6;
+	optional FbConversationMessageAttachemnts attachments = 7;
 }
