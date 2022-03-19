@@ -46,6 +46,7 @@ enum RealtimeType {
 	conversation_untagged = 48;
 
 	integration_updated = 49;
+	integration_deleted = 50;
 
 	conversation_typing = 54;
 	conversation_unassigned = 56;

@@ -228,6 +228,7 @@ service ConversationMgr {
 	rpc Deintegrate(Id) returns (Empty);
 	rpc ListIntegrations(Id) returns (header.Integrations);
 	rpc Integrate(header.Integration) returns (header.Integration);
+	rpc GetIntegration(Id) returns (header.Integration);
 
 	rpc UpdateRule(header.Rule) returns (header.Rule);
 	rpc CreateRule(header.Rule) returns (header.Rule);
