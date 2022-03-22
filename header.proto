@@ -4482,6 +4482,8 @@ enum OrderStatusCode {
 	delivery_failure = 26;
 	delivery_received = 27;
 	delivery_shipping = 28;
+	buyer_pickup = 29;
+	not_required = 30;
 }
 
 message Bill {
