@@ -220,4 +220,6 @@ enum E {
 	invalid_message_id = 157;
 	attachment_too_large = 158;
 	field_too_long = 159;
+
+	request_timeout = 160;
 }

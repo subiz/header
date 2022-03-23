@@ -1750,6 +1750,9 @@ message Site {
 	string title = 9;
 	int64 last_user_verified = 10;
 	string last_user_verify_uri = 11;
+
+	string mobile_screenshoot_url = 13;
+	string desktop_screenshoot_url = 14;
 }
 
 message Bot {
