@@ -3673,6 +3673,8 @@ message ShopSetting {
 	repeated ShopeeShop shopee_shops = 15; // read only
 	repeated IntegratedShipping shippings = 16;
 	repeated ShippingPolicy shipping_policies = 17;
+
+	repeated CancellationCode cancellation_codes = 19;
 }
 
 message Addresses {
@@ -4509,17 +4511,38 @@ message Bill {
 	string picture_url = 22;
 }
 
-enum CancelCode {
-	no_cancel = 0; // or empty string
-	price_too_high = 1;
-	customer_rejected = 2;
-	failed_delivery = 3;
-	out_of_stock = 4;
-	customer_wouldnt_response = 5;
-	went_with_another_option = 7;
-	went_with_a_competitor = 8;
-	bad_timming = 9;
-	other = 100;
+message CancellationCodes {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated CancellationCode cancellation_codes = 5;
+}
+
+message CancellationCode {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// no_cancel = 0; // or empty string
+	// price_too_high = 1;
+	// customer_rejected = 2;
+	// failed_delivery = 3;
+	// out_of_stock = 4;
+	// customer_wouldnt_response = 5;
+	// went_with_another_option = 7;
+	// went_with_a_competitor = 8;
+	// bad_timming = 9;
+	// other = 100;
+	string code = 3;
+	string label = 4;
+
+	int64 created = 5;
+	string created_by = 6;
+
+	int64 updated = 7;
+	string updated_by = 8;
+
+	int64 archived = 9;
+
+	int64 last_used = 10;
 }
 
 message OrderPipelineUpdated {
