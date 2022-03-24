@@ -4998,6 +4998,7 @@ message CompactedAttribute {
 	string value = 2; // text or datetime or bool or number json encoded list
 	int64 modified = 3;
 	string by = 5; // required
+	repeated string other_values = 6;
 }
 
 message PipelineStage {
