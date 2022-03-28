@@ -535,6 +535,7 @@ message ConversationMetric {
 	int64 conversation_count = 65;
 	int64 user_sent_count = 66;
 	int64 not_reply_count = 67;
+	int64 send_duration_sum = 68;
 }
 
 message ConversationMetrics {
@@ -554,6 +555,7 @@ message ConversationMetricsRequest {
 	repeated string agent_ids = 9; // and
 	repeated string agent_sent_ids = 14; // and
 	int64 first_replied_duration_gt = 15;
+	int64 send_duration_sum_gt = 21;
 	repeated string not_channels = 18;
 	account.BusinessHours business_hours = 19;
 	account.BusinessHours not_business_hours = 20;
