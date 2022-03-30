@@ -386,7 +386,7 @@ message FbConversationMessageAttachment {
 	optional string id = 3;
 	optional string mime_type = 4;
 	optional string name = 5;
-	optional string size = 6;
+	optional int64 size = 6;
 	optional string file_url = 7;
 }
 
