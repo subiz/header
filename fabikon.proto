@@ -93,16 +93,24 @@ message FbMessaging {
 }
 
 message FbPostback {
-
 	optional string payload = 2;
 	optional FbReferral referral = 3;
 	optional string title = 4;
+	optional string mid = 5;
+}
+
+message AdsContextData {
+	optional string photo_url = 5;
+	optional string post_id = 6;
+	optional string ad_title = 7;
 }
 
 message FbReferral {
 	optional string ref = 2;
-	optional string source = 3; // SHORTLINK
+	optional string source = 3; // SHORTLINK, ADS
 	optional string type = 4; // OPEN_THREAD
+	optional AdsContextData ads_context_data = 5;
+	optional string ad_id = 6;
 }
 
 message FbMessage {
