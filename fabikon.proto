@@ -339,6 +339,11 @@ message FbProductItem {
 	optional string url = 7;
 }
 
+message FbPage {
+	optional string id = 3; // pageid
+	repeated FbConversations conversations = 4;
+}
+
 message FbConversations {
 	optional Error error = 1;
 	repeated FbConversation data = 3;
@@ -349,7 +354,6 @@ message FbConversation {
 	optional string id = 2;
 	optional string link = 3;
 
-	optional string snippet = 4;
 	optional string updated_time = 5;
 	optional int64 message_count = 6;
 

@@ -97,6 +97,7 @@ message ListNotiRequest {
 message Attribute {
 	string key = 4;
 	int64 modified = 8;
+	string modified_by = 5;
 
 	string value = 9; // json encode primary value
 	string text = 10;
@@ -123,6 +124,8 @@ message Attribute {
 	string action = 18;
 }
 
+// alias => user
+// user => aliases
 message UserAlias {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -135,8 +138,6 @@ message User {
 	string id = 3;
 	string account_id = 4;
 	repeated string aliases = 5;
-	repeated UserNote notes = 6;
-
 	repeated Attribute attributes = 18;
 
 	UserSession session = 40;
@@ -144,8 +145,8 @@ message User {
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
 	string type = 47; // empty = user, lead, customer
-	string created = 50;
-	repeated Address shipping_addresses = 51;
+	// string created = 50;
+	// repeated Address shipping_addresses = 51;
 }
 
 message UserLabel {
@@ -4482,9 +4483,6 @@ enum OrderStatusCode {
 	open = 0;  // Đơn mới
 	canceled = 1; // Đơn hàng đã chốt thua
 	closed = 2; // Đơn hàng đã chốt thắng
-
-	// no_shipping_required = 10; // not require ship
-	// buyer_pickup = 11; // customer go to store to get the
 
 	delivery_success = 25;
 	delivery_failure = 26;
