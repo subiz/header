@@ -388,6 +388,18 @@ message FbConversationMessageAttachment {
 	optional string name = 5;
 	optional int64 size = 6;
 	optional string file_url = 7;
+	optional FbImageData image_data = 8;
+}
+
+message FbImageData {
+	optional int64 width = 2;
+	optional int64 height = 3;
+	optional int64 max_width = 4;
+	optional int64 max_height = 5;
+	optional string url = 6;
+	optional string preview_url = 7;
+	optional int64 image_type = 8;
+	optional bool render_as_sticker = 9;
 }
 
 message FbConversationMessages {
