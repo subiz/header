@@ -341,7 +341,7 @@ message FbProductItem {
 
 message FbPage {
 	optional string id = 3; // pageid
-	repeated FbConversations conversations = 4;
+	optional FbConversations conversations = 4;
 }
 
 message FbConversations {
