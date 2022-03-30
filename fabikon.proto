@@ -370,6 +370,10 @@ message FbProfiles {
 	optional FbPaging paging = 4;
 }
 
+message FbProfileData {
+	repeated FbProfile data = 3;
+}
+
 message FbProfile {
 	optional string name = 3;
 	optional string email = 4;
@@ -413,6 +417,6 @@ message FbConversationMessage {
 	optional FbProfile from = 3;
 	optional string id = 4;
 	optional string message = 5;
-	repeated FbProfile to = 6;
+	optional FbProfileData to = 6;
 	optional FbConversationMessageAttachemnts attachments = 7;
 }
