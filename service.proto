@@ -207,6 +207,7 @@ service ConversationMgr {
 	rpc JoinConversation(header.ConversationMember) returns (Empty);
 	rpc LeftConversation(header.ConversationMember) returns (Empty);
 
+	rpc ViewingConversation(Id) returns (Empty);
 	rpc Typing(Id) returns (Empty);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 

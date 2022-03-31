@@ -52,6 +52,7 @@ enum RealtimeType {
 	conversation_unassigned = 56;
 	conversation_assigned = 57;
 	message_updated = 58; // event.data.message
+	conversation_viewing = 59;
 
 	conversation_rating_requested = 60; // event.data.conversation
 	conversation_rated = 61; // event.data.conversation
