@@ -3043,6 +3043,12 @@ message FileHeader {
 	string description = 7;
 
 	string content_disposition = 8; // inline || attachment
+
+	// metadata
+	int64 uploaded = 20;
+	string full_url = 21;
+	string mime_type = 22;
+	int64 downloaded = 23;
 }
 
 message PresignResult {
@@ -3072,17 +3078,6 @@ message File {
 	string creator = 9;
 	string id = 11;
 	string content_disposition = 12; // inline (for printing) || attachment (download)
-}
-
-message FileMeta {
-	string account_id = 2;
-	string id = 3;
-	int64 uploaded = 4;
-	string name = 5;
-	int64 size = 6;
-	string full_url = 7;
-	string mime_type = 8;
-	int64 downloaded = 10;
 }
 
 message BotTerminated {

@@ -207,7 +207,6 @@ service ConversationMgr {
 	rpc JoinConversation(header.ConversationMember) returns (Empty);
 	rpc LeftConversation(header.ConversationMember) returns (Empty);
 
-	rpc ViewingConversation(Id) returns (Empty);
 	rpc Typing(Id) returns (Empty);
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
@@ -332,11 +331,6 @@ service PaymentMgr {
 // pubsub services
 service Pubsub {
 	rpc Publish(header.PublishMessage) returns (Empty);
-}
-
-// pubsub services
-service Realtime {
-	rpc ShardSend(header.PublishMessage) returns (Empty);
 }
 
 service FabikonService {
