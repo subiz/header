@@ -1509,7 +1509,7 @@ message Template {
 	string id = 2;
 	string account_id = 3;
 	repeated string keys = 6;
-	string channel_type = 17;
+	string channel_type = 17; // remove
 	Message message = 8;
 	repeated TemplateData data = 18;
 	bool is_public = 11;
@@ -2865,6 +2865,7 @@ enum ChannelType {
 	facebook_comment = 4; // public, dont close conversation
 	zalo = 5;
 	call = 6;
+	instagram = 7;
 }
 
 message Client {
@@ -3251,6 +3252,7 @@ message FbFanpageSetting {
 	FbCommentSetting specific_post_comment_setting = 6;
 
 	int64 updated = 9;
+	string platform = 10; // default facebook. Could be instagram
 }
 
 message FbFanpageSettings {

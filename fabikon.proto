@@ -19,7 +19,7 @@ message FacebookPage {
 }
 
 message FbWebhookEvent {
-	optional string object = 2;
+	optional string object = 2; // instagram
 	repeated FbEntry entry = 3;
 }
 
@@ -28,6 +28,7 @@ message FbEntry {
 	optional int64 time = 5;
 	repeated FbMessaging messaging = 6;
 	repeated FbChange changes = 7;
+	repeated FbMessaging standby = 8;
 }
 
 message FbChange {
@@ -124,6 +125,8 @@ message FbMessage {
 	optional string metadata = 9;
 	repeated QuickReply quick_replies = 10;
 	optional QuickReply quick_reply = 11; // response from fb
+	optional string is_supported = 12;
+	optional string is_deleted = 13;
 }
 
 message QuickReply {
