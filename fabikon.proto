@@ -19,7 +19,7 @@ message FacebookPage {
 
 	optional string linked_page_id = 11; // instagram <-> facebook
 	optional bool is_instagram = 12;
-	optional string instagram_username = 13;
+	optional InstagramUser instagram_account = 13;
 }
 
 message FbWebhookEvent {
@@ -266,11 +266,13 @@ message FbPagePicture {
 message FbPagePictureData {
 	optional string url = 2;
 }
+
 message FbPageEntry {
 	optional string name = 2;
 	optional FbPagePicture picture = 3;
 	optional string id = 5;
 	optional string access_token = 6;
+	optional InstagramUser instagram_business_account = 7;
 }
 
 message FbCursors {
@@ -310,6 +312,18 @@ message FacebookUser {
 	optional FbProfilePic picture = 9;
 	optional string email = 10;
 	optional string name = 11;
+}
+
+message InstagramUser {
+	optional string id = 4;
+	optional string username = 5;
+	optional string profile_picture_url = 6;
+	optional string name = 7;
+	optional int64 ig_id = 8;
+	optional int64 followers_count = 9;
+	optional int64 follows_count = 10;
+	optional int64 media_count = 11;
+	optional string website = 12;
 }
 
 message Fb2SbEvent {
