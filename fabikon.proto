@@ -16,6 +16,10 @@ message FacebookPage {
 
 	optional string state = 8; // activated || deleted || failed
 	optional int64 last_messenger_inbox = 10; // ms
+
+	optional string linked_page_id = 11; // instagram <-> facebook
+	optional bool is_instagram = 12;
+	optional string instagram_username = 13;
 }
 
 message FbWebhookEvent {
