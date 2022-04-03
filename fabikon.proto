@@ -312,6 +312,8 @@ message FacebookUser {
 	optional FbProfilePic picture = 9;
 	optional string email = 10;
 	optional string name = 11;
+
+
 }
 
 message InstagramUser {
@@ -324,6 +326,11 @@ message InstagramUser {
 	optional int64 follows_count = 10;
 	optional int64 media_count = 11;
 	optional string website = 12;
+
+	optional bool is_verified_user = 13;
+	optional bool is_user_follow_business = 14;
+	optional bool is_business_follow_user = 15;
+	optional string profile_pic = 16;
 }
 
 message Fb2SbEvent {
