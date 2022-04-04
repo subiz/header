@@ -456,77 +456,6 @@ func (x *SendgridEvent) GetEvent() *header.Event {
 	return nil
 }
 
-type UserAvail struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	AccountId    *string `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	EmailAddress *string `protobuf:"bytes,5,opt,name=email_address,json=emailAddress" json:"email_address,omitempty"`
-	Availability *bool   `protobuf:"varint,6,opt,name=availability" json:"availability,omitempty"`
-	Updated      *int64  `protobuf:"varint,7,opt,name=updated" json:"updated,omitempty"`
-}
-
-func (x *UserAvail) Reset() {
-	*x = UserAvail{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_mailkon_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *UserAvail) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UserAvail) ProtoMessage() {}
-
-func (x *UserAvail) ProtoReflect() protoreflect.Message {
-	mi := &file_mailkon_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UserAvail.ProtoReflect.Descriptor instead.
-func (*UserAvail) Descriptor() ([]byte, []int) {
-	return file_mailkon_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UserAvail) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
-	}
-	return ""
-}
-
-func (x *UserAvail) GetEmailAddress() string {
-	if x != nil && x.EmailAddress != nil {
-		return *x.EmailAddress
-	}
-	return ""
-}
-
-func (x *UserAvail) GetAvailability() bool {
-	if x != nil && x.Availability != nil {
-		return *x.Availability
-	}
-	return false
-}
-
-func (x *UserAvail) GetUpdated() int64 {
-	if x != nil && x.Updated != nil {
-		return *x.Updated
-	}
-	return 0
-}
-
 type SendgridTrackingEvent struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -553,7 +482,7 @@ type SendgridTrackingEvent struct {
 func (x *SendgridTrackingEvent) Reset() {
 	*x = SendgridTrackingEvent{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mailkon_proto_msgTypes[6]
+		mi := &file_mailkon_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -566,7 +495,7 @@ func (x *SendgridTrackingEvent) String() string {
 func (*SendgridTrackingEvent) ProtoMessage() {}
 
 func (x *SendgridTrackingEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_mailkon_proto_msgTypes[6]
+	mi := &file_mailkon_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -579,7 +508,7 @@ func (x *SendgridTrackingEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendgridTrackingEvent.ProtoReflect.Descriptor instead.
 func (*SendgridTrackingEvent) Descriptor() ([]byte, []int) {
-	return file_mailkon_proto_rawDescGZIP(), []int{6}
+	return file_mailkon_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SendgridTrackingEvent) GetEmail() string {
@@ -757,16 +686,7 @@ var file_mailkon_proto_rawDesc = []byte{
 	0x01, 0x28, 0x09, 0x52, 0x07, 0x73, 0x75, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x23, 0x0a, 0x05,
 	0x65, 0x76, 0x65, 0x6e, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e, 0x68, 0x65,
 	0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x52, 0x05, 0x65, 0x76, 0x65, 0x6e,
-	0x74, 0x22, 0x8d, 0x01, 0x0a, 0x09, 0x55, 0x73, 0x65, 0x72, 0x41, 0x76, 0x61, 0x69, 0x6c, 0x12,
-	0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x23,
-	0x0a, 0x0d, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x5f, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18,
-	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x41, 0x64, 0x64, 0x72,
-	0x65, 0x73, 0x73, 0x12, 0x22, 0x0a, 0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c, 0x61, 0x62, 0x69, 0x6c,
-	0x69, 0x74, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0c, 0x61, 0x76, 0x61, 0x69, 0x6c,
-	0x61, 0x62, 0x69, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74,
-	0x65, 0x64, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x64, 0x22, 0xb6, 0x03, 0x0a, 0x15, 0x53, 0x65, 0x6e, 0x64, 0x67, 0x72, 0x69, 0x64, 0x54, 0x72,
+	0x74, 0x22, 0xb6, 0x03, 0x0a, 0x15, 0x53, 0x65, 0x6e, 0x64, 0x67, 0x72, 0x69, 0x64, 0x54, 0x72,
 	0x61, 0x63, 0x6b, 0x69, 0x6e, 0x67, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x65,
 	0x6d, 0x61, 0x69, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69,
 	0x6c, 0x12, 0x1c, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x04,
@@ -810,19 +730,18 @@ func file_mailkon_proto_rawDescGZIP() []byte {
 	return file_mailkon_proto_rawDescData
 }
 
-var file_mailkon_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_mailkon_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_mailkon_proto_goTypes = []interface{}{
 	(*Address)(nil),               // 0: mailkon.Address
 	(*Domain)(nil),                // 1: mailkon.Domain
 	(*Message)(nil),               // 2: mailkon.Message
 	(*User)(nil),                  // 3: mailkon.User
 	(*SendgridEvent)(nil),         // 4: mailkon.SendgridEvent
-	(*UserAvail)(nil),             // 5: mailkon.UserAvail
-	(*SendgridTrackingEvent)(nil), // 6: mailkon.SendgridTrackingEvent
-	(*header.Event)(nil),          // 7: header.Event
+	(*SendgridTrackingEvent)(nil), // 5: mailkon.SendgridTrackingEvent
+	(*header.Event)(nil),          // 6: header.Event
 }
 var file_mailkon_proto_depIdxs = []int32{
-	7, // 0: mailkon.SendgridEvent.event:type_name -> header.Event
+	6, // 0: mailkon.SendgridEvent.event:type_name -> header.Event
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -897,18 +816,6 @@ func file_mailkon_proto_init() {
 			}
 		}
 		file_mailkon_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UserAvail); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_mailkon_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SendgridTrackingEvent); i {
 			case 0:
 				return &v.state
@@ -927,7 +834,7 @@ func file_mailkon_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mailkon_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

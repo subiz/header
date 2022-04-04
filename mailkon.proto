@@ -51,13 +51,6 @@ message SendgridEvent {
 	optional header.Event event = 11;
 }
 
-message UserAvail {
-	optional string account_id = 3;
-	optional string email_address = 5;
-	optional bool availability = 6;
-	optional int64 updated = 7;
-}
-
 message SendgridTrackingEvent {
 	optional string email = 3;
 	optional int64 timestamp = 4;

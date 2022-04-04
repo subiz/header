@@ -1151,6 +1151,7 @@ message ListConversationsRequest {
 	string state = 14;
 
 	bool is_private = 15; // for agent only
+	bool id_only = 16; // internal usage
 }
 
 message ListConversationEventsRequest {
