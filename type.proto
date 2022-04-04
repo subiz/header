@@ -61,6 +61,8 @@ enum RealtimeType {
 	my_conversation_read_updated = 67; // conversation
 	my_conversation_unsubscribed = 68; // conversation
 
+	my_conversation_list_updated = 65; // conversation // actived = -1 => removed
+
 	tag_updated = 70;
 	tag_deleted = 71;
 
