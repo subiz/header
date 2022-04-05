@@ -145,8 +145,13 @@ message User {
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
 	string type = 47; // empty = user, lead, customer
-	// string created = 50;
-	// repeated Address shipping_addresses = 51;
+}
+
+message ShippingAddresses {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	repeated Address shipping_addresses = 4;
 }
 
 message UserLabel {

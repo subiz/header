@@ -148,7 +148,7 @@ service UserMgr {
 	rpc CreateShippingAddress(Address) returns (Address);
 	rpc UpdateShippingAddress(Address) returns (Address);
 	rpc RemoveShippingAddress(Address) returns (Empty);
-	rpc ListShippingAddress(Id) returns (User);
+	rpc ListShippingAddress(Id) returns (ShippingAddresses);
 	rpc MakeDefaultShippingAddress(Address) returns (Empty);
 
 	rpc ListLeads(header.UserView) returns (header.Users);
@@ -192,6 +192,7 @@ service ConversationReporter {
 }
 
 service ConversationMgr {
+
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
