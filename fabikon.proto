@@ -23,7 +23,7 @@ message FacebookPage {
 }
 
 message FbWebhookEvent {
-	optional string object = 2; // instagram
+	optional string object = 2; // instagram, page
 	repeated FbEntry entry = 3;
 }
 
@@ -36,7 +36,7 @@ message FbEntry {
 }
 
 message FbChange {
-	optional string field = 2;
+	optional string field = 2; // feed
 	optional FbChangeValue value = 3;
 }
 
@@ -72,7 +72,7 @@ message FbChangeValue {
 	optional int32 published = 26;
 	optional string recipient_id = 27;
 	optional string share_id = 28;
-	optional string verb = 29;
+	optional string verb = 29; // remove
 	optional string video_id = 30;
 }
 
@@ -82,6 +82,7 @@ message FbPagePost {
 	optional string updated_time = 4;
 	optional string permalink_url = 5;
 	optional string promotion_status = 6;
+	optional string id = 7;
 }
 
 message FbMessaging {
@@ -312,8 +313,6 @@ message FacebookUser {
 	optional FbProfilePic picture = 9;
 	optional string email = 10;
 	optional string name = 11;
-
-
 }
 
 message InstagramUser {

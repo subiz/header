@@ -172,6 +172,10 @@ enum RealtimeType {
 	notification_created = 171; // data.notification
 	notification_updated = 172; // data.notification
 	notification_seen = 173; // data.notification
+
+	conversation_modal_created = 180;
+	conversation_modal_updated = 181;
+	conversation_modal_deleted = 182;
 }
 
 message TextTransform {

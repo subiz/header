@@ -85,7 +85,6 @@ message Agent {
 	optional string internal_name = 42;
 }
 
-
 message ResetPasswordRequest {
 	optional common.Context ctx = 1;
 	optional string email = 2;

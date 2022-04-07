@@ -730,6 +730,7 @@ message Event {
 		Task task = 73;
 		TaskHistoryEntry task_history_entry = 74;
 		OrderPipelineStage order_pipeline_stage = 75;
+		ConversationModal conversation_modal = 76;
 	}
 	Data data = 20;
 }
@@ -5246,4 +5247,43 @@ message ZaloCodeChallenge {
 	common.Context ctx = 1;
 	string state = 5; // verifier, zalo sucks
 	string code_challenge = 6;
+}
+
+message ConversationModal {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string key = 4;
+	string description = 5;
+	string url = 6;
+	string size = 7; // sm, md, lg
+	string secret = 10;
+	string created = 11;
+	string created_by = 12;
+	string updated = 13;
+	string updated_by = 14;
+	int64 disabled = 15;
+}
+
+message ConversationModals {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated ConversationModal conversation_modals = 3;
+}
+
+message ConversationModalPickRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string agent_id = 4;
+	string conversation_modal_id = 6;
+}
+
+message ConversationModalPicked {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_modal_id = 3;
+	string url = 5;
+	string size = 6;
 }

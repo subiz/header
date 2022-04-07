@@ -222,4 +222,7 @@ enum E {
 	field_too_long = 159;
 
 	request_timeout = 160;
+
+	invalid_conversation_modal_secret = 170;
+	conversation_modal_not_found = 171;
 }

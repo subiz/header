@@ -192,7 +192,6 @@ service ConversationReporter {
 }
 
 service ConversationMgr {
-
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
 	// rpc UpdateConversationState(Conversation) returns (Conversation);
@@ -249,6 +248,13 @@ service TemplateMgr {
 	rpc GetTemplate(Id) returns (header.Template);
 	rpc ListTemplates(header.SearchTemplate) returns (header.Templates);
 	rpc PickTemplate(Id) returns (Empty);
+
+	rpc CreateModal(header.ConversationModal) returns (header.ConversationModal);
+	rpc UpdateModal(header.ConversationModal) returns (header.ConversationModal);
+	rpc DeleteModal(Id) returns (Empty);
+	rpc GetModal(Id) returns (header.ConversationModal);
+	rpc ListModals(header.Id) returns (header.ConversationModals);
+	rpc PickModal(ConversationModalPickRequest) returns (ConversationModalPicked);
 }
 
 service TagMgr {
