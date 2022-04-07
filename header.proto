@@ -5259,9 +5259,10 @@ message ConversationModal {
 	string url = 6;
 	string size = 7; // sm, md, lg
 	string secret = 10;
-	string created = 11;
+
+	int64 created = 11;
 	string created_by = 12;
-	string updated = 13;
+	int64 updated = 13;
 	string updated_by = 14;
 	int64 disabled = 15;
 }
