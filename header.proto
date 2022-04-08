@@ -5265,6 +5265,12 @@ message ConversationModal {
 	int64 updated = 13;
 	string updated_by = 14;
 	int64 disabled = 15;
+
+	int64 last_used = 16;
+	string last_used_by = 17;
+
+	string preview_picture_url = 18;
+	int64 preview_picture_at = 19;
 }
 
 message ConversationModals {

@@ -23,6 +23,8 @@ message DashboardAgent {
 	optional int64 conversation_seen = 21;
 	optional string price_function = 22;
 	repeated string user_info_fields = 23;
+
+	optional int64 order_feature_requested = 24; // 0, -1
 }
 
 message Agent {
