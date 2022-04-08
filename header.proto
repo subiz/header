@@ -5285,6 +5285,7 @@ message ConversationModalPickRequest {
 	string conversation_id = 3;
 	string agent_id = 4;
 	string conversation_modal_id = 6;
+	string text = 7;
 }
 
 message ConversationModalPicked {
@@ -5293,4 +5294,5 @@ message ConversationModalPicked {
 	string conversation_modal_id = 3;
 	string url = 5;
 	string size = 6;
+	string view_id = 7;
 }
