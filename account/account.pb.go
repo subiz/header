@@ -226,7 +226,7 @@ type DashboardAgent struct {
 	ConversationSeen                    *int64   `protobuf:"varint,21,opt,name=conversation_seen,json=conversationSeen" json:"conversation_seen,omitempty"`
 	PriceFunction                       *string  `protobuf:"bytes,22,opt,name=price_function,json=priceFunction" json:"price_function,omitempty"`
 	UserInfoFields                      []string `protobuf:"bytes,23,rep,name=user_info_fields,json=userInfoFields" json:"user_info_fields,omitempty"`
-	OrderFeatureRequested               *int64   `protobuf:"varint,24,opt,name=order_feature_requested,json=orderFeatureRequested" json:"order_feature_requested,omitempty"` // 0, -1
+	OrderFeatureRequested               *int64   `protobuf:"varint,24,opt,name=order_feature_requested,json=orderFeatureRequested" json:"order_feature_requested,omitempty"` // 0, -1: allow to use, xyz: requestd
 }
 
 func (x *DashboardAgent) Reset() {

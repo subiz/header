@@ -1038,6 +1038,10 @@ message Rule {
 		first_reply_of_all = 8; // all agent
 		first_reply_of_group = 9; // group
 
+		least_workload = 11;
+		least_workload_agents = 12;
+		least_workload_of_group = 13;
+
 		bot = 10;
 	}
 	string strategy = 5;
