@@ -346,6 +346,7 @@ service FabikonService {
 	rpc ListFbFanpageSettings(Id) returns (header.FbFanpageSettings);
 
 	rpc ListFbPosts(Id) returns (header.FacebookPosts);
+	rpc GetFbPost(FacebookPost) returns (FacebookPost);
 	rpc SendEventToFacebook(header.Events) returns (header.Empty); // messenger, facebook_comment, instagram
 }
 
