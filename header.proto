@@ -1042,6 +1042,10 @@ message Rule {
 		least_workload_agents = 12;
 		least_workload_of_group = 13;
 
+		least_open = 14;
+		least_open_agents = 15;
+		least_open_of_group = 16;
+
 		bot = 10;
 	}
 	string strategy = 5;
