@@ -731,6 +731,7 @@ message Event {
 		TaskHistoryEntry task_history_entry = 74;
 		OrderPipelineStage order_pipeline_stage = 75;
 		ConversationModal conversation_modal = 76;
+		ConversationAutomation conversation_automation = 77;
 	}
 	Data data = 20;
 }
@@ -1684,6 +1685,8 @@ message ConversationAutomation {
 	bool after_last_sent_by_type = 13; // agent, user
 
 	repeated BotAction actions = 14;
+
+	int64 last_run_at = 20;
 }
 
 message Trigger {
@@ -1696,7 +1699,10 @@ message Trigger {
 }
 
 message BotCondition {
-	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline, user_is_a_contact, order, conversation_tags
+	// url, browser, location, returning_visitor, device_type, referer, source, user_attribute,
+	// timming, integration_id, offline, user_is_a_contact, order, conversation_tags
+	// agent_online, conversation_member_online
+	string key = 1;
 
 	enum Source {
 		direct = 0;
@@ -1756,6 +1762,9 @@ message BotCondition {
 
 	repeated string conversation_tags = 29;
 	repeated string exclude_conversation_tags = 30;
+
+	bool has_agent_online = 31;
+	bool has_conversation_member_online = 32;
 }
 
 message OrderCondition {

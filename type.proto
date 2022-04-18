@@ -176,6 +176,10 @@ enum RealtimeType {
 	conversation_modal_created = 180;
 	conversation_modal_updated = 181;
 	conversation_modal_deleted = 182;
+
+	conversation_automation_created = 185;
+	conversation_automation_updated = 186;
+	conversation_automation_deleted = 187;
 }
 
 message TextTransform {

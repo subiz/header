@@ -227,4 +227,6 @@ enum E {
 	conversation_modal_not_found = 171;
 	invalid_conversation_modal_url = 172;
 	invalid_conversation_modal_key = 173;
+
+	conversation_automation_not_found = 174;
 }

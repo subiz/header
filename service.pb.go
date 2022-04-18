@@ -599,21 +599,21 @@ var file_service_proto_rawDesc = []byte{
 	0x52, 0x75, 0x6c, 0x65, 0x12, 0x26, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x75, 0x6c, 0x65,
 	0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e,
 	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x12, 0x4a, 0x0a, 0x1b,
-	0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x74, 0x61, 0x69, 0x6f, 0x6e,
+	0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
 	0x41, 0x75, 0x74, 0x6f, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65,
 	0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x1f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
 	0x2e, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x75, 0x74,
 	0x6f, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x52, 0x0a, 0x1c, 0x55, 0x70, 0x64, 0x61,
-	0x74, 0x65, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x74, 0x61, 0x69, 0x6f, 0x6e, 0x41, 0x75,
+	0x74, 0x65, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x75,
 	0x74, 0x6f, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
 	0x72, 0x2e, 0x41, 0x75, 0x74, 0x6f, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x1e, 0x2e, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
 	0x6f, 0x6e, 0x41, 0x75, 0x74, 0x6f, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x39, 0x0a, 0x1c,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x74, 0x61, 0x69,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
 	0x6f, 0x6e, 0x41, 0x75, 0x74, 0x6f, 0x6d, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0a, 0x2e, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
 	0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x48, 0x0a, 0x1a, 0x52, 0x65, 0x61, 0x64, 0x43,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x74, 0x61, 0x69, 0x6f, 0x6e, 0x41, 0x75, 0x74, 0x6f, 0x6d,
+	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x75, 0x74, 0x6f, 0x6d,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49,
 	0x64, 0x1a, 0x1e, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x6e, 0x76, 0x65,
 	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x75, 0x74, 0x6f, 0x6d, 0x61, 0x74, 0x69, 0x6f,
@@ -1781,10 +1781,10 @@ var file_service_proto_depIdxs = []int32{
 	4,   // 158: header.ConversationMgr.DeleteRule:input_type -> header.Id
 	4,   // 159: header.ConversationMgr.ReadRule:input_type -> header.Id
 	4,   // 160: header.ConversationMgr.ListRules:input_type -> header.Id
-	4,   // 161: header.ConversationMgr.ListConverstaionAutomations:input_type -> header.Id
-	41,  // 162: header.ConversationMgr.UpdateConverstaionAutomation:input_type -> header.Automation
-	4,   // 163: header.ConversationMgr.DeleteConverstaionAutomation:input_type -> header.Id
-	4,   // 164: header.ConversationMgr.ReadConverstaionAutomation:input_type -> header.Id
+	4,   // 161: header.ConversationMgr.ListConversationAutomations:input_type -> header.Id
+	41,  // 162: header.ConversationMgr.UpdateConversationAutomation:input_type -> header.Automation
+	4,   // 163: header.ConversationMgr.DeleteConversationAutomation:input_type -> header.Id
+	4,   // 164: header.ConversationMgr.ReadConversationAutomation:input_type -> header.Id
 	57,  // 165: header.TemplateMgr.CreateTemplate:input_type -> header.Template
 	57,  // 166: header.TemplateMgr.UpdateTemplate:input_type -> header.Template
 	4,   // 167: header.TemplateMgr.DeleteTemplate:input_type -> header.Id
@@ -2159,10 +2159,10 @@ var file_service_proto_depIdxs = []int32{
 	42,  // 536: header.ConversationMgr.DeleteRule:output_type -> header.Empty
 	56,  // 537: header.ConversationMgr.ReadRule:output_type -> header.Rule
 	176, // 538: header.ConversationMgr.ListRules:output_type -> header.Route
-	177, // 539: header.ConversationMgr.ListConverstaionAutomations:output_type -> header.ConversationAutomations
-	178, // 540: header.ConversationMgr.UpdateConverstaionAutomation:output_type -> header.ConversationAutomation
-	42,  // 541: header.ConversationMgr.DeleteConverstaionAutomation:output_type -> header.Empty
-	178, // 542: header.ConversationMgr.ReadConverstaionAutomation:output_type -> header.ConversationAutomation
+	177, // 539: header.ConversationMgr.ListConversationAutomations:output_type -> header.ConversationAutomations
+	178, // 540: header.ConversationMgr.UpdateConversationAutomation:output_type -> header.ConversationAutomation
+	42,  // 541: header.ConversationMgr.DeleteConversationAutomation:output_type -> header.Empty
+	178, // 542: header.ConversationMgr.ReadConversationAutomation:output_type -> header.ConversationAutomation
 	57,  // 543: header.TemplateMgr.CreateTemplate:output_type -> header.Template
 	57,  // 544: header.TemplateMgr.UpdateTemplate:output_type -> header.Template
 	42,  // 545: header.TemplateMgr.DeleteTemplate:output_type -> header.Empty
@@ -7319,10 +7319,10 @@ type ConversationMgrClient interface {
 	DeleteRule(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ReadRule(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Rule, error)
 	ListRules(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Route, error)
-	ListConverstaionAutomations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomations, error)
-	UpdateConverstaionAutomation(ctx context.Context, in *Automation, opts ...grpc.CallOption) (*ConversationAutomation, error)
-	DeleteConverstaionAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
-	ReadConverstaionAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomation, error)
+	ListConversationAutomations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomations, error)
+	UpdateConversationAutomation(ctx context.Context, in *Automation, opts ...grpc.CallOption) (*ConversationAutomation, error)
+	DeleteConversationAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	ReadConversationAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomation, error)
 }
 
 type conversationMgrClient struct {
@@ -7657,36 +7657,36 @@ func (c *conversationMgrClient) ListRules(ctx context.Context, in *Id, opts ...g
 	return out, nil
 }
 
-func (c *conversationMgrClient) ListConverstaionAutomations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomations, error) {
+func (c *conversationMgrClient) ListConversationAutomations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomations, error) {
 	out := new(ConversationAutomations)
-	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ListConverstaionAutomations", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ListConversationAutomations", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *conversationMgrClient) UpdateConverstaionAutomation(ctx context.Context, in *Automation, opts ...grpc.CallOption) (*ConversationAutomation, error) {
+func (c *conversationMgrClient) UpdateConversationAutomation(ctx context.Context, in *Automation, opts ...grpc.CallOption) (*ConversationAutomation, error) {
 	out := new(ConversationAutomation)
-	err := c.cc.Invoke(ctx, "/header.ConversationMgr/UpdateConverstaionAutomation", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/UpdateConversationAutomation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *conversationMgrClient) DeleteConverstaionAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *conversationMgrClient) DeleteConversationAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.ConversationMgr/DeleteConverstaionAutomation", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/DeleteConversationAutomation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *conversationMgrClient) ReadConverstaionAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomation, error) {
+func (c *conversationMgrClient) ReadConversationAutomation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ConversationAutomation, error) {
 	out := new(ConversationAutomation)
-	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ReadConverstaionAutomation", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.ConversationMgr/ReadConversationAutomation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -7732,10 +7732,10 @@ type ConversationMgrServer interface {
 	DeleteRule(context.Context, *Id) (*Empty, error)
 	ReadRule(context.Context, *Id) (*Rule, error)
 	ListRules(context.Context, *Id) (*Route, error)
-	ListConverstaionAutomations(context.Context, *Id) (*ConversationAutomations, error)
-	UpdateConverstaionAutomation(context.Context, *Automation) (*ConversationAutomation, error)
-	DeleteConverstaionAutomation(context.Context, *Id) (*Empty, error)
-	ReadConverstaionAutomation(context.Context, *Id) (*ConversationAutomation, error)
+	ListConversationAutomations(context.Context, *Id) (*ConversationAutomations, error)
+	UpdateConversationAutomation(context.Context, *Automation) (*ConversationAutomation, error)
+	DeleteConversationAutomation(context.Context, *Id) (*Empty, error)
+	ReadConversationAutomation(context.Context, *Id) (*ConversationAutomation, error)
 }
 
 // UnimplementedConversationMgrServer can be embedded to have forward compatible implementations.
@@ -7850,17 +7850,17 @@ func (*UnimplementedConversationMgrServer) ReadRule(context.Context, *Id) (*Rule
 func (*UnimplementedConversationMgrServer) ListRules(context.Context, *Id) (*Route, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListRules not implemented")
 }
-func (*UnimplementedConversationMgrServer) ListConverstaionAutomations(context.Context, *Id) (*ConversationAutomations, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListConverstaionAutomations not implemented")
+func (*UnimplementedConversationMgrServer) ListConversationAutomations(context.Context, *Id) (*ConversationAutomations, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConversationAutomations not implemented")
 }
-func (*UnimplementedConversationMgrServer) UpdateConverstaionAutomation(context.Context, *Automation) (*ConversationAutomation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateConverstaionAutomation not implemented")
+func (*UnimplementedConversationMgrServer) UpdateConversationAutomation(context.Context, *Automation) (*ConversationAutomation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateConversationAutomation not implemented")
 }
-func (*UnimplementedConversationMgrServer) DeleteConverstaionAutomation(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteConverstaionAutomation not implemented")
+func (*UnimplementedConversationMgrServer) DeleteConversationAutomation(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteConversationAutomation not implemented")
 }
-func (*UnimplementedConversationMgrServer) ReadConverstaionAutomation(context.Context, *Id) (*ConversationAutomation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadConverstaionAutomation not implemented")
+func (*UnimplementedConversationMgrServer) ReadConversationAutomation(context.Context, *Id) (*ConversationAutomation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadConversationAutomation not implemented")
 }
 
 func RegisterConversationMgrServer(s *grpc.Server, srv ConversationMgrServer) {
@@ -8515,74 +8515,74 @@ func _ConversationMgr_ListRules_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ConversationMgr_ListConverstaionAutomations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConversationMgr_ListConversationAutomations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationMgrServer).ListConverstaionAutomations(ctx, in)
+		return srv.(ConversationMgrServer).ListConversationAutomations(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.ConversationMgr/ListConverstaionAutomations",
+		FullMethod: "/header.ConversationMgr/ListConversationAutomations",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).ListConverstaionAutomations(ctx, req.(*Id))
+		return srv.(ConversationMgrServer).ListConversationAutomations(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ConversationMgr_UpdateConverstaionAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConversationMgr_UpdateConversationAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Automation)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationMgrServer).UpdateConverstaionAutomation(ctx, in)
+		return srv.(ConversationMgrServer).UpdateConversationAutomation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.ConversationMgr/UpdateConverstaionAutomation",
+		FullMethod: "/header.ConversationMgr/UpdateConversationAutomation",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).UpdateConverstaionAutomation(ctx, req.(*Automation))
+		return srv.(ConversationMgrServer).UpdateConversationAutomation(ctx, req.(*Automation))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ConversationMgr_DeleteConverstaionAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConversationMgr_DeleteConversationAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationMgrServer).DeleteConverstaionAutomation(ctx, in)
+		return srv.(ConversationMgrServer).DeleteConversationAutomation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.ConversationMgr/DeleteConverstaionAutomation",
+		FullMethod: "/header.ConversationMgr/DeleteConversationAutomation",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).DeleteConverstaionAutomation(ctx, req.(*Id))
+		return srv.(ConversationMgrServer).DeleteConversationAutomation(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ConversationMgr_ReadConverstaionAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ConversationMgr_ReadConversationAutomation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationMgrServer).ReadConverstaionAutomation(ctx, in)
+		return srv.(ConversationMgrServer).ReadConversationAutomation(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.ConversationMgr/ReadConverstaionAutomation",
+		FullMethod: "/header.ConversationMgr/ReadConversationAutomation",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).ReadConverstaionAutomation(ctx, req.(*Id))
+		return srv.(ConversationMgrServer).ReadConversationAutomation(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8736,20 +8736,20 @@ var _ConversationMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _ConversationMgr_ListRules_Handler,
 		},
 		{
-			MethodName: "ListConverstaionAutomations",
-			Handler:    _ConversationMgr_ListConverstaionAutomations_Handler,
+			MethodName: "ListConversationAutomations",
+			Handler:    _ConversationMgr_ListConversationAutomations_Handler,
 		},
 		{
-			MethodName: "UpdateConverstaionAutomation",
-			Handler:    _ConversationMgr_UpdateConverstaionAutomation_Handler,
+			MethodName: "UpdateConversationAutomation",
+			Handler:    _ConversationMgr_UpdateConversationAutomation_Handler,
 		},
 		{
-			MethodName: "DeleteConverstaionAutomation",
-			Handler:    _ConversationMgr_DeleteConverstaionAutomation_Handler,
+			MethodName: "DeleteConversationAutomation",
+			Handler:    _ConversationMgr_DeleteConversationAutomation_Handler,
 		},
 		{
-			MethodName: "ReadConverstaionAutomation",
-			Handler:    _ConversationMgr_ReadConverstaionAutomation_Handler,
+			MethodName: "ReadConversationAutomation",
+			Handler:    _ConversationMgr_ReadConversationAutomation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

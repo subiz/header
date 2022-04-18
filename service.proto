@@ -241,10 +241,10 @@ service ConversationMgr {
 	rpc ReadRule(Id) returns (header.Rule);
 	rpc ListRules(Id) returns (header.Route);
 
-	rpc ListConverstaionAutomations(Id) returns (header.ConversationAutomations);
-	rpc UpdateConverstaionAutomation(header.Automation) returns (header.ConversationAutomation);
-	rpc DeleteConverstaionAutomation(Id) returns (Empty);
-	rpc ReadConverstaionAutomation(Id) returns (header.ConversationAutomation);
+	rpc ListConversationAutomations(Id) returns (header.ConversationAutomations);
+	rpc UpdateConversationAutomation(header.Automation) returns (header.ConversationAutomation);
+	rpc DeleteConversationAutomation(Id) returns (Empty);
+	rpc ReadConversationAutomation(Id) returns (header.ConversationAutomation);
 }
 
 service TemplateMgr {
