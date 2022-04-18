@@ -1658,7 +1658,7 @@ message EndchatSetting {
 message ConversationAutomations {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string conversation_automations = 3;
+	repeated ConversationAutomation conversation_automations = 3;
 }
 
 message ConversationAutomation {

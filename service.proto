@@ -242,7 +242,7 @@ service ConversationMgr {
 	rpc ListRules(Id) returns (header.Route);
 
 	rpc ListConversationAutomations(Id) returns (header.ConversationAutomations);
-	rpc UpdateConversationAutomation(header.Automation) returns (header.ConversationAutomation);
+	rpc UpdateConversationAutomation(header.ConversationAutomation) returns (header.ConversationAutomation);
 	rpc DeleteConversationAutomation(Id) returns (Empty);
 	rpc ReadConversationAutomation(Id) returns (header.ConversationAutomation);
 }
