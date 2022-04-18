@@ -207,7 +207,7 @@ service ConversationMgr {
 	rpc JoinConversation(header.ConversationMember) returns (Empty);
 	rpc LeftConversation(header.ConversationMember) returns (Empty);
 
-	rpc Typing(Id) returns (Empty);
+	rpc Typing(Id) returns (Empty); // deprecated
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc SearchConvos(header.SearchRequest) returns (header.Conversations); // deprecated
@@ -219,6 +219,7 @@ service ConversationMgr {
 
 	rpc UpdateEndchatSetting(header.EndchatSetting) returns (header.EndchatSetting);
 	rpc GetEndchatSetting(Id) returns (header.EndchatSetting);
+
 	rpc TerminateBot(header.BotTerminated) returns (header.Event);
 
 	rpc UpdatePresence (Id) returns (account.Presence);
@@ -239,6 +240,11 @@ service ConversationMgr {
 	rpc DeleteRule(Id) returns (Empty);
 	rpc ReadRule(Id) returns (header.Rule);
 	rpc ListRules(Id) returns (header.Route);
+
+	rpc ListConverstaionAutomations(Id) returns (header.ConversationAutomations);
+	rpc UpdateConverstaionAutomation(header.Automation) returns (header.ConversationAutomation);
+	rpc DeleteConverstaionAutomation(Id) returns (Empty);
+	rpc ReadConverstaionAutomation(Id) returns (header.ConversationAutomation);
 }
 
 service TemplateMgr {

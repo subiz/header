@@ -1643,6 +1643,7 @@ message EndchatConnectorSetting {
 }
 
 message EndchatSetting {
+	common.Context ctx = 1;
 	string account_id = 2;
 	repeated EndchatConnectorSetting connector_settings = 3;
 	EndchatConnectorSetting global_setting = 4;
@@ -1651,6 +1652,38 @@ message EndchatSetting {
 
 	bool send_transcript = 7;
 	repeated string send_transcript_tos = 8;
+}
+
+message ConversationAutomations {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_automations = 3;
+}
+
+message ConversationAutomation {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string type = 4; // endchat
+	string name = 5;
+	repeated string channel_types = 3;
+
+	string updated_by = 6;
+	int64 updated = 7;
+
+	string created_by = 8;
+	int64 created = 9; // ms
+
+	int64 disabled = 10;
+
+	repeated BotCondition conditions = 11;
+	// AwayMessageAutomation away_message = 11;
+	// AwayMessageAutomation away_message = 11;
+
+	// trigger
+	int64 after_last_sent_ms = 12;
+	bool after_last_sent_by_type = 13; // agent, user
+
+	repeated BotAction actions = 14;
 }
 
 message Trigger {
@@ -1663,7 +1696,7 @@ message Trigger {
 }
 
 message BotCondition {
-	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline, user_is_a_contact, order
+	string key = 1; // url, browser, location, returning_visitor, device_type, referer, source, user_attribute, timming, integration_id, offline, user_is_a_contact, order, conversation_tags
 
 	enum Source {
 		direct = 0;
@@ -1720,6 +1753,9 @@ message BotCondition {
 	bool user_is_a_contact = 27; // has a way to re-connnect to user (email or phone)
 
 	OrderCondition order = 28; // order
+
+	repeated string conversation_tags = 29;
+	repeated string exclude_conversation_tags = 30;
 }
 
 message OrderCondition {
@@ -1881,6 +1917,7 @@ message BotAction {
 	ActionUpdateUserLabels update_user_labels = 32;
 	ActionConfirmOrder confirm_order = 34;
 	ActionCreateTask create_task = 35;
+	ActionSendChatTranscript send_chat_transcript = 36;
 }
 
 message ActionCreateTask {
@@ -1894,6 +1931,11 @@ message ActionConfirmOrder {
 	repeated Message invalid_messages = 4; // send random message if user doesn't give any expected input
 
 	string branch_on_cancellation = 8; // user click on cancel or X button
+}
+
+message ActionSendChatTranscript {
+	bool send_transcript = 3;
+	repeated string send_transcript_tos = 4;
 }
 
 message ActionUpdateConversation {
