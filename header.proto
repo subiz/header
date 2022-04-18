@@ -1664,27 +1664,28 @@ message ConversationAutomations {
 message ConversationAutomation {
 	common.Context ctx = 1;
 	string account_id = 2;
+	string id = 3;
 	string type = 4; // endchat
 	string name = 5;
-	repeated string channel_types = 3;
+	repeated string channel_types = 6;
 
-	string updated_by = 6;
-	int64 updated = 7;
+	string updated_by = 7;
+	int64 updated = 8;
 
-	string created_by = 8;
-	int64 created = 9; // ms
+	string created_by = 9;
+	int64 created = 10; // ms
 
-	int64 disabled = 10;
+	int64 disabled = 11;
 
-	repeated BotCondition conditions = 11;
+	repeated BotCondition conditions = 12;
 	// AwayMessageAutomation away_message = 11;
 	// AwayMessageAutomation away_message = 11;
 
 	// trigger
-	int64 after_last_sent_ms = 12;
-	bool after_last_sent_by_type = 13; // agent, user
+	int64 after_last_sent_ms = 13;
+	bool after_last_sent_by_type = 14; // agent, user
 
-	repeated BotAction actions = 14;
+	repeated BotAction actions = 15;
 
 	int64 last_run_at = 20;
 }
