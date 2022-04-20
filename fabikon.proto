@@ -343,6 +343,7 @@ message Fb2SbEvent {
 	optional string conversation_id = 4;
 	optional string sbmid = 5;
 	optional string page_id = 6;
+	optional string attachment_index = 7; // subiz
 }
 
 message LongLivedAccessToken {

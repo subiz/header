@@ -1283,7 +1283,7 @@ message Message {
 	string format = 3; // plaintext, html, markdown, delta
 	repeated Attachment attachments = 4;
 
-	repeated KV fields =	10;
+	repeated KV fields = 10;
 
 	string integration_id = 15;
 	string chain_id = 16;
@@ -1420,6 +1420,7 @@ enum AttachmentType {
 	product = 18;
 	quick_reply = 19;
 	order = 20;
+	quote = 22;
 }
 
 message Attachment {
