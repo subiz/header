@@ -1920,7 +1920,7 @@ message BotAction {
 	ActionAskQuestion ask_question = 18;
 	AssignRequest assign = 19;
 
-	int64 delay_sec = 20;
+	int64 delay_sec = 20; // max 20sec
 	ActionUpdateConversation update_conversation = 21;
 	bytes internal_state = 30;
 	ActionUpdateUser update_user = 31;

@@ -15552,7 +15552,7 @@ type BotAction struct {
 	SendHttp           *ActionSendHttp           `protobuf:"bytes,17,opt,name=send_http,json=sendHttp,proto3" json:"send_http,omitempty"`
 	AskQuestion        *ActionAskQuestion        `protobuf:"bytes,18,opt,name=ask_question,json=askQuestion,proto3" json:"ask_question,omitempty"`
 	Assign             *AssignRequest            `protobuf:"bytes,19,opt,name=assign,proto3" json:"assign,omitempty"`
-	DelaySec           int64                     `protobuf:"varint,20,opt,name=delay_sec,json=delaySec,proto3" json:"delay_sec,omitempty"`
+	DelaySec           int64                     `protobuf:"varint,20,opt,name=delay_sec,json=delaySec,proto3" json:"delay_sec,omitempty"` // max 20sec
 	UpdateConversation *ActionUpdateConversation `protobuf:"bytes,21,opt,name=update_conversation,json=updateConversation,proto3" json:"update_conversation,omitempty"`
 	InternalState      []byte                    `protobuf:"bytes,30,opt,name=internal_state,json=internalState,proto3" json:"internal_state,omitempty"`
 	UpdateUser         *ActionUpdateUser         `protobuf:"bytes,31,opt,name=update_user,json=updateUser,proto3" json:"update_user,omitempty"`

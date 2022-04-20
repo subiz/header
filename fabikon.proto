@@ -132,6 +132,11 @@ message FbMessage {
 	optional QuickReply quick_reply = 11; // response from fb
 	optional string is_supported = 12;
 	optional string is_deleted = 13;
+	optional ReplyTo reply_to = 14;
+}
+
+message ReplyTo {
+	optional string mid = 4;
 }
 
 message QuickReply {
