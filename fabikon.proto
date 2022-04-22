@@ -96,6 +96,7 @@ message FbMessaging {
 	optional FbRead read = 9;
 	optional FbPostback postback = 10;
 	optional FbReferral referral = 11;
+	optional string tag = 12; // HUMAN_AGENT
 }
 
 message FbPostback {
