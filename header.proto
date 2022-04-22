@@ -1066,6 +1066,8 @@ message Rule {
 	repeated UserAttributeCondition user_conditions = 19;
 	bool when_offline = 21; // only run when there is no online agent
 
+	repeated string fallback_agents = 23;
+
 	int64 v = 22; // version
 }
 
@@ -1325,7 +1327,7 @@ message MessagePong {
 		hide = 17;
 		remove_hide = 18;
 		open = 19; // email opened
-
+		unseen = 20;
 	}
 	string type = 4;
 
