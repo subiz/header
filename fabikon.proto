@@ -227,6 +227,19 @@ message FbPayload {
 	optional string payment_method = 16;
 	optional string order_url = 17;
 	optional string timestamp = 18;
+	optional FbProducts product = 19;
+}
+
+message FbProducts {
+	repeated FbProduct elements = 3;
+}
+
+message FbProduct {
+	optional string id = 3;
+	optional string retailer_id = 4;
+	optional string image_url = 5;
+	optional string title = 6;
+	optional string subtitle = 7;
 }
 
 message Button {
