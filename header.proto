@@ -4771,7 +4771,9 @@ message GoogleSheetProductFeed {
 	string url = 2;
 }
 
-message WebsiteJSONLdProductFeed {
+message WebsiteProductFeed {
+	string format = 2; // json-ld, rdfa, microdata
+	string website_url = 3;
 }
 
 message ShopeeProductFeed {
@@ -4782,8 +4784,6 @@ message ProductFeeds {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated ProductFeed product_feeds = 4;
-	string anchor = 5;
-	int64 total = 6;
 }
 
 message ProductFeed {
@@ -4794,7 +4794,7 @@ message ProductFeed {
 
 	// google sheet
 	ShopeeProductFeed shopee = 5;
-	WebsiteJSONLdProductFeed website_json_ld = 6;
+	WebsiteProductFeed website = 6;
 	GoogleSheetProductFeed google_sheet = 7;
 
 	int64 created = 20;
@@ -4809,6 +4809,8 @@ message ProductFeed {
 	string last_fetch_status = 27; // success, failed
 
 	int64 last_sucess_fetched = 30;
+
+	int64 disabled = 31;
 }
 
 message ProductsRequest {
