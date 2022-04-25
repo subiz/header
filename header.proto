@@ -1801,6 +1801,17 @@ message Sites {
 	repeated Site sites = 3;
 }
 
+message VisitProductSiteRequest {
+	common.Context ctx = 1;
+	string account_id = 2; // web, messenger, zalo
+	string url = 3;
+
+	string format = 4; // jsonld, rdfa, microdata
+	bool dry_run = 5;
+
+	int64 created = 6;
+}
+
 message Site {
 	common.Context ctx = 1;
 	string account_id = 2; // web, messenger, zalo
@@ -4738,7 +4749,6 @@ message Product {
 	Tax tax = 64; // (shared)
 
 	string currency = 65;
-
 	repeated MessageButton buttons = 66; // for message attachment
 }
 
@@ -4772,7 +4782,7 @@ message GoogleSheetProductFeed {
 }
 
 message WebsiteProductFeed {
-	string format = 2; // json-ld, rdfa, microdata
+	string format = 2; // jsonld, rdfa, microdata
 	string website_url = 3;
 }
 

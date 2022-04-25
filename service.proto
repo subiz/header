@@ -535,7 +535,7 @@ service Proder {
 	rpc FollowOrder(header.Id) returns (Empty);
 	rpc UnfollowOrder(header.Id) returns (Empty);
 
-	rpc VisitProductSite(header.Site) returns (Empty);
+	rpc VisitProductSite(header.VisitProductSiteRequest) returns (header.Products);
 }
 
 service Apiece {
