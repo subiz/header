@@ -1284,7 +1284,6 @@ message Message {
 
 	string format = 3; // plaintext, html, markdown, delta
 	repeated Attachment attachments = 4;
-
 	repeated KV fields = 10;
 
 	string integration_id = 15;
