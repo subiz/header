@@ -3411,6 +3411,20 @@ message FacebookPaging {
 	FacebookPagingCursor cursors = 2;
 }
 
+message InstagramMedia {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string page_id = 3;
+	string id = 4;
+	string caption = 5;
+	string media_type = 6;
+	string media_url = 7;
+
+	string permalink = 10;
+	string timestamp = 11;
+	string username = 12;
+}
+
 message FacebookPost {
 	common.Context ctx = 1;
 	string account_id = 2;
