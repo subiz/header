@@ -1609,6 +1609,9 @@ message Integration {
 	bool disabled = 15;
 	string sending_status = 17; // ok, failed
 	string receiving_status = 18; // ok, failed
+
+	string username = 19;
+	string linked_page_id = 20;
 }
 
 message TagRequest {
