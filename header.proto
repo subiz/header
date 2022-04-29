@@ -2946,6 +2946,7 @@ enum ChannelType {
 	zalo = 5;
 	call = 6;
 	instagram = 7;
+	instagram_comment = 8;
 }
 
 message Client {

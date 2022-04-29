@@ -107,6 +107,14 @@ message FbMessaging {
 	optional FbPostback postback = 10;
 	optional FbReferral referral = 11;
 	optional string tag = 12; // HUMAN_AGENT
+	optional IgReaction reaction = 13;
+}
+
+message IgReaction {
+	optional string mid = 5;
+	optional string action = 6;
+	optional string reaction = 7;
+	optional string emoji = 8;
 }
 
 message FbPostback {
