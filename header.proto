@@ -1148,6 +1148,8 @@ message ConversationMember {
 
 	bool is_muted = 27;
 	bool off_notification = 28;
+
+	int64 hidden = 29; // ms
 }
 
 message ListConversationsRequest {
@@ -1240,6 +1242,8 @@ message Conversation {
 	bool mute = 41; // true, false
 	bool read = 42; // true, false
 	bool watch = 44; // true
+
+	int64 hidden = 39;
 
 	int64 updated = 43;
 
