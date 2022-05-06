@@ -215,6 +215,8 @@ service ConversationMgr {
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UpdateConversationMember(header.ConversationMember) returns (Empty);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
+	rpc UnhiddenConversation(header.Conversation) returns (Empty);
+
 	rpc MarkReadConversation (header.Conversation) returns (Empty);
 
 	rpc UpdateEndchatSetting(header.EndchatSetting) returns (header.EndchatSetting);
