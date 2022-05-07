@@ -1292,6 +1292,7 @@ message Message {
 
 	string integration_id = 15;
 	string chain_id = 16;
+	string user_id = 19; // new standard, removing chain
 
 	// used for reaction and delivery status, could be ignore
 	repeated MessagePong pongs = 17;
@@ -1304,6 +1305,9 @@ message Message {
 	// bool is_pinned = 24;
 	int64 pinned = 25;
 	string pinned_by = 26;
+
+	string comment_id = 28; // for fb or instagram
+	string idempotency_key = 29;
 }
 
 message MessagePong {
