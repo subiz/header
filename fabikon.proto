@@ -156,6 +156,12 @@ message FbMessage {
 
 message ReplyTo {
 	optional string mid = 4;
+	optional FbReplyStory story = 5;
+}
+
+message FbReplyStory {
+	optional string url = 5;
+	optional string id = 6;
 }
 
 message QuickReply {
