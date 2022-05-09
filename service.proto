@@ -152,6 +152,9 @@ service UserMgr {
 	rpc MakeDefaultShippingAddress(Address) returns (Empty);
 
 	rpc ListLeads(header.UserView) returns (header.Users);
+
+	rpc ListUserTouchPoints(header.UserTouchpoint) returns (header.UserTouchpoints);
+	rpc UpsertUserTouchpoint(header.UserTouchpoint) returns (header.UserTouchpoint);
 }
 
 service LiveMgr {

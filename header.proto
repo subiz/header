@@ -158,7 +158,7 @@ message UserTouchpoint {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3; // psid, igsid, zalo id
-	string user_id = 4; // link to primary id
+	string user_id = 4; // link to subiz primary id
 
 	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment
 	string fullname = 6;
@@ -172,6 +172,14 @@ message UserTouchpoint {
 	string username = 22; // instagram
 	string source = 23; // page id, zaloa id
 	string linked_page_id = 24; // instagram
+
+	string status = 25; // '', 'deleted'
+}
+
+message UserTouchpoints {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated UserTouchpoint user_touchpoints = 3;
 }
 
 message ShippingAddresses {
@@ -703,7 +711,7 @@ message Event {
 	repeated string topics = 11; // TODO: remove
 	string session_id = 12;
 	common.By by = 50;
-	UserTouchpoint touchpoint = 51;
+	UserTouchpoint user_touchpoint = 51;
 	message Data {
 		account.Account account = 1;
 		account.Agent agent = 2;
@@ -996,7 +1004,7 @@ message StartRequest {
 
 	string subject = 38;
 
-	UserTouchpoint touchpoint = 39;
+	UserTouchpoint user_touchpoint = 39;
 }
 
 message PresencesRequest {
