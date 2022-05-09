@@ -1297,6 +1297,8 @@ message Conversation {
 
 	string avatar_url = 52;
 	int64 last_modified = 53;
+
+	bool is_returned = 54;
 }
 
 message Rating {
