@@ -153,9 +153,9 @@ service UserMgr {
 
 	rpc ListLeads(header.UserView) returns (header.Users);
 
-	rpc ListContactProfiles(common.ContactProfile) returns (common.ContactProfiles);
-	rpc GetUserByContactProfile(common.ContactProfile) returns (header.User);
-	rpc UpsertContactProfiles(common.ContactProfile) returns (common.ContactProfile);
+	rpc ListUserContactProfiles(Id) returns (common.ContactProfiles);
+	rpc GetOrCreateUserByContactProfile(common.ContactProfile) returns (header.User);
+	rpc UpsertContactProfile(common.ContactProfile) returns (common.ContactProfile);
 }
 
 service LiveMgr {
