@@ -42,6 +42,35 @@ message By {
 	string type = 6; // agent, user, bot, dummy
 	string display_id = 7;
 	string display_type = 8; // agent, user, bot
+
+	ContactProfile profile = 9;
+}
+
+message ContactProfiles {
+	Context ctx = 1;
+	string account_id = 2;
+	repeated ContactProfiles contact_profiles = 3;
+}
+
+message ContactProfile {
+	Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // psid, igsid, zalo id
+	string user_id = 4; // link to subiz primary id
+
+	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment
+
+	string fullname = 6;
+	string avatar_url = 7;
+
+	string status = 25; // '', 'deleted'
+
+	string username = 22; // instagram
+	string source = 23; // page id, zaloa id
+
+	// repeated KV fields = 8;
+	int64 touched = 20;
+	int64 created = 21;
 }
 
 message Credential {

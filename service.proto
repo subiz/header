@@ -3,7 +3,7 @@ syntax = "proto3";
 package header;
 
 option go_package = "github.com/subiz/header";
-
+import "common.proto";
 import "payment.proto";
 import "noti5.proto";
 import "account.proto";
@@ -153,8 +153,8 @@ service UserMgr {
 
 	rpc ListLeads(header.UserView) returns (header.Users);
 
-	rpc ListUserTouchPoints(header.UserTouchpoint) returns (header.UserTouchpoints);
-	rpc UpsertUserTouchpoint(header.UserTouchpoint) returns (header.UserTouchpoint);
+	rpc ListContactProfiles(common.ContactProfile) returns (common.ContactProfiles);
+	rpc UpsertUserTouchpoint(common.ContactProfile) returns (common.ContactProfile);
 }
 
 service LiveMgr {

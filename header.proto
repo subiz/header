@@ -145,7 +145,7 @@ message User {
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
 	string type = 47; // empty = user, lead, customer
-	repeated UserTouchpoint touchpoints = 48;
+	repeated common.ContactProfile contact_profiles = 48;
 	// string primary_id = 49;
 	// repeated string associated_uses = 50;
 }
@@ -154,32 +154,16 @@ message User {
 // contact point => chain => conversation
 // ((accid, user_id), channel.source.touchpoint_id, touchpoint_id, channel, source)
 // (accid, channel, source, touchpoint_id, user_idhu)
-message UserTouchpoint {
+message Touchpoint {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3; // psid, igsid, zalo id
-	string user_id = 4; // link to subiz primary id
+	string id = 3; // psid, igsid, zalo id or comment id
 
 	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment
-	string fullname = 6;
-	string avatar_url = 7;
-
 	repeated KV fields = 8;
 
-	int64 touched = 20;
-	int64 created = 21;
-
-	string username = 22; // instagram
-	string source = 23; // page id, zaloa id
 	string linked_page_id = 24; // instagram
-
-	string status = 25; // '', 'deleted'
-}
-
-message UserTouchpoints {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated UserTouchpoint user_touchpoints = 3;
+	string source = 23; // page id, zaloa id
 }
 
 message ShippingAddresses {
@@ -711,7 +695,7 @@ message Event {
 	repeated string topics = 11; // TODO: remove
 	string session_id = 12;
 	common.By by = 50;
-	UserTouchpoint user_touchpoint = 51;
+	Touchpoint touchpoint = 51;
 	message Data {
 		account.Account account = 1;
 		account.Agent agent = 2;
@@ -1004,7 +988,7 @@ message StartRequest {
 
 	string subject = 38;
 
-	UserTouchpoint user_touchpoint = 39;
+	Touchpoint touchpoint = 39;
 }
 
 message PresencesRequest {
@@ -1188,7 +1172,7 @@ message ConversationMember {
 	bool off_notification = 28;
 
 	int64 hidden = 29; // ms
-	UserTouchpoint user_touchpoint = 30;
+	common.ContactProfile profile = 30;
 }
 
 message ListConversationsRequest {
