@@ -1237,6 +1237,7 @@ message Conversation {
 	repeated Tag tags = 10;
 	int64 ended = 12;
 	string state = 11; // converation state
+	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
 	Integration integration = 18;
 	int64 actived = 19;
