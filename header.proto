@@ -752,6 +752,7 @@ message Event {
 		OrderPipelineStage order_pipeline_stage = 75;
 		ConversationModal conversation_modal = 76;
 		ConversationAutomation conversation_automation = 77;
+		common.ContactProfile contact_profile = 78;
 	}
 	Data data = 20;
 }

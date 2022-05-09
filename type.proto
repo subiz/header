@@ -180,6 +180,9 @@ enum RealtimeType {
 	conversation_automation_created = 185;
 	conversation_automation_updated = 186;
 	conversation_automation_deleted = 187;
+
+	contact_profile_created = 190;
+	contact_profile_updated = 191;
 }
 
 message TextTransform {

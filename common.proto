@@ -49,7 +49,7 @@ message By {
 message ContactProfiles {
 	Context ctx = 1;
 	string account_id = 2;
-	repeated ContactProfiles contact_profiles = 3;
+	repeated ContactProfile contact_profiles = 3;
 }
 
 message ContactProfile {
