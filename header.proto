@@ -703,6 +703,7 @@ message Event {
 	repeated string topics = 11; // TODO: remove
 	string session_id = 12;
 	common.By by = 50;
+	UserTouchpoint touchpoint = 51;
 	message Data {
 		account.Account account = 1;
 		account.Agent agent = 2;
@@ -994,6 +995,8 @@ message StartRequest {
 	bool is_private = 37;
 
 	string subject = 38;
+
+	UserTouchpoint touchpoint = 39;
 }
 
 message PresencesRequest {
@@ -1338,7 +1341,6 @@ message Message {
 	string idempotency_key = 29;
 
 	InstagramStory story = 30; // for instagram
-	UserTouchpoint user_touchpoint = 31; // do not persist
 }
 
 message InstagramStory {
@@ -1628,6 +1630,7 @@ message Integrations {
 	repeated Integration integrations = 3;
 }
 
+// rename to touchpoint
 message Integration {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -1656,6 +1659,8 @@ message Integration {
 
 	string username = 19;
 	string linked_page_id = 20;
+
+	bool chaining = 21; // use chain instead of conversation
 }
 
 message TagRequest {
