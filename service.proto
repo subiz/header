@@ -439,7 +439,7 @@ service Sendback {
 
 // notibox services
 service Notibox {
-	rpc Send(header.Notification) returns (Empty);
+	// deprecated
 	rpc MarkRead(Id) returns (Empty);
 	rpc MarkReadCompactedNoti(header.CompactedNotiRequest) returns (Empty);
 	rpc ListRecentCompactedNoties(header.ListNotiRequest) returns (header.CompactedNoties);

@@ -58,33 +58,6 @@ message Notification {
 	int64 checkpoint = 15;
 }
 
-message CompactedNoti {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string id = 4;
-	int64 created = 5;
-	repeated Notification notifications = 7;
-	bool is_read = 8;
-}
-
-message CompactedNotiRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string id = 4;
-}
-
-message CompactedNoties {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	repeated CompactedNoti notifications = 4;
-	string anchor = 5;
-	bool is_read = 8;
-	int64 read_created = 9;
-}
-
 message ListNotiRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -164,6 +137,7 @@ message Touchpoint {
 
 	string linked_page_id = 24; // instagram
 	string source = 23; // page id, zaloa id
+	string post_id = 25; // for facebook or instagram
 }
 
 message ShippingAddresses {
@@ -227,11 +201,6 @@ message SessionCampaign {
 message CreateRequest {
 	string challenge_id = 3;
 	string answer = 4;
-}
-
-message DeleteAttrRequest {
-	common.Context ctx = 1;
-	string key = 2;
 }
 
 message AttributeDefinitionListItem {
@@ -726,7 +695,7 @@ message Event {
 		Webhook webhook = 44;
 		UserAlias user_alias = 45;
 		Conversion conversion = 47;
-		CompactedNoties compacted_noties = 51;
+		// CompactedNoties compacted_noties = 51;
 		Site site = 52;
 		WebpageCheck webpage_check = 53;
 		LangMessage language_message = 54;
@@ -5454,4 +5423,32 @@ message EmailBlock {
 	string id = 3;
 	int64 created = 4;
 	string created_by = 5;
+}
+
+/////////////////////// DEPRECATED //////////////////////////////////
+message CompactedNoti {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string id = 4;
+	int64 created = 5;
+	repeated Notification notifications = 7;
+	bool is_read = 8;
+}
+
+message CompactedNotiRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string id = 4;
+}
+
+message CompactedNoties {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	repeated CompactedNoti notifications = 4;
+	string anchor = 5;
+	bool is_read = 8;
+	int64 read_created = 9;
 }
