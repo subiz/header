@@ -113,6 +113,10 @@ service AccountMgr {
 	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (header.IntegratedShipping);
 	rpc SendGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
 	rpc EnterGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
+
+	rpc ListEmailBlocks(Ids) returns (header.EmailBlocks);
+	rpc CreateEmailBlock(header.EmailBlock) returns (header.EmailBlock);
+	rpc DeleteEmailBlock(header.EmailBlock) returns (Empty);
 }
 
 // user services
