@@ -116,7 +116,7 @@ service AccountMgr {
 
 	rpc ListEmailBlocks(Ids) returns (header.EmailBlocks);
 	rpc CreateEmailBlock(header.EmailBlock) returns (header.EmailBlock);
-	rpc DeleteEmailBlock(header.EmailBlock) returns (Empty);
+	rpc DeleteEmailBlock(Id) returns (Empty);
 }
 
 // user services

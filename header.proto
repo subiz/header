@@ -5451,7 +5451,7 @@ message EmailBlocks {
 message EmailBlock {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string match = 3;
+	string id = 3;
 	int64 created = 4;
 	string created_by = 5;
 }
