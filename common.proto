@@ -66,11 +66,19 @@ message ContactProfile {
 	string status = 25; // '', 'deleted'
 
 	string username = 22; // instagram
-	string source = 23; // page id, zaloa id
 
-	// repeated KV fields = 8;
-	int64 touched = 20;
+	int64 last_seen = 20;
+	// page id, zaloa id
+	// for channel subiz, its always web
+	string source = 23;
+
 	int64 created = 21;
+
+	int64 last_message_sent = 10;
+	int64 last_agent_message_sent = 11;
+	int64 last_agent_message_sent_by = 12;
+
+	string source_url = 30; // website_url for channel subiz
 }
 
 message Credential {

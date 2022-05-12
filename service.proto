@@ -125,6 +125,7 @@ service UserMgr {
 
 	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
 	rpc CreateUser(header.User) returns (Id);
+	rpc CreateUserFromWeb(header.User) returns (Id);
 	rpc CreateSbzUserByAgent (header.Id) returns (Id);
 	rpc UpdateUser(header.User) returns (Id);
 	rpc ReadUser(Id) returns (header.User);
