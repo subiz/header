@@ -226,8 +226,6 @@ service ConversationMgr {
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
 	rpc UnhiddenConversation(header.Conversation) returns (Empty);
 
-	rpc MarkReadConversation (header.Conversation) returns (Empty);
-
 	rpc UpdateEndchatSetting(header.EndchatSetting) returns (header.EndchatSetting);
 	rpc GetEndchatSetting(Id) returns (header.EndchatSetting);
 

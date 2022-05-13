@@ -57,10 +57,6 @@ enum RealtimeType {
 	conversation_rating_requested = 60; // event.data.conversation
 	conversation_rated = 61; // event.data.conversation
 
-	my_conversation_mute_updated = 66; // conversation
-	my_conversation_read_updated = 67; // conversation
-	my_conversation_unsubscribed = 68; // conversation
-
 	my_conversation_list_updated = 65; // conversation // actived = -1 => removed
 
 	tag_updated = 70;
