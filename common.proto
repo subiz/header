@@ -79,6 +79,13 @@ message ContactProfile {
 	int64 last_agent_message_sent_by = 12;
 
 	string source_url = 30; // website_url for channel subiz
+
+	string phone = 31; // zalo
+	string address = 32; // zalo
+	string city = 33;
+	string district = 34;
+	string ward = 35;
+	string gender = 36;
 }
 
 message Credential {
