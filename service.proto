@@ -365,6 +365,10 @@ service FabikonService {
 	rpc SendEventToFacebook(header.Events) returns (header.Empty); // messenger, facebook_comment, instagram
 }
 
+service ZalokonService {
+	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
+}
+
 // widget services
 service WidgetService {
 	rpc Read(Id) returns (header.WidgetSetting);
@@ -439,8 +443,6 @@ service Sendback {
 // notibox services
 service Notibox {
 	// deprecated
-	rpc MarkRead(Id) returns (Empty);
-	rpc MarkReadCompactedNoti(header.CompactedNotiRequest) returns (Empty);
 	rpc ListRecentCompactedNoties(header.ListNotiRequest) returns (header.CompactedNoties);
 
 	rpc SendNoti(header.Notification) returns (Empty);
