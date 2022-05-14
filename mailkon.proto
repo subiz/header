@@ -49,6 +49,7 @@ message SendgridEvent {
 	optional string full_message_id = 9;
 	optional string subject = 10;
 	optional header.Event event = 11;
+	optional string root_message_id = 12;
 }
 
 message SendgridTrackingEvent {
