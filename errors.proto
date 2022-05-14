@@ -229,4 +229,6 @@ enum E {
 	invalid_conversation_modal_key = 173;
 
 	conversation_automation_not_found = 174;
+
+	sendgrid_error = 176;
 }

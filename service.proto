@@ -370,6 +370,13 @@ service ZalokonService {
 	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
 }
 
+service MailkonService {
+	rpc SendEvent(header.Events) returns (header.Empty); // mailkon
+	rpc ListBlockedEmails(Id) returns (Empty);
+	rpc BlockEmail(Id) returns (Empty);
+	rpc UnblockEmail(Id) returns (Empty);
+}
+
 // widget services
 service WidgetService {
 	rpc Read(Id) returns (header.WidgetSetting);

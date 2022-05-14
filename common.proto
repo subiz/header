@@ -86,6 +86,10 @@ message ContactProfile {
 	string district = 34;
 	string ward = 35;
 	string gender = 36;
+
+	string timezone = 37;
+	string locale = 38;
+	string email = 39;
 }
 
 message Credential {
