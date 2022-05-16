@@ -3,7 +3,6 @@ syntax = "proto3";
 package header;
 
 option go_package = "github.com/subiz/header";
-import "common.proto";
 import "payment.proto";
 import "noti5.proto";
 import "account.proto";
@@ -158,10 +157,10 @@ service UserMgr {
 
 	rpc ListLeads(header.UserView) returns (header.Users);
 
-	rpc GetContactProfile(common.ContactProfile) returns (common.ContactProfile);
-	rpc ListUserContactProfiles(Id) returns (common.ContactProfiles);
-	rpc GetOrCreateUserByContactProfile(common.ContactProfile) returns (header.User);
-	rpc UpsertContactProfile(common.ContactProfile) returns (common.ContactProfile);
+	rpc GetContactProfile(ContactProfile) returns (ContactProfile);
+	rpc ListUserContactProfiles(Id) returns (ContactProfiles);
+	rpc GetOrCreateUserByContactProfile(ContactProfile) returns (header.User);
+	rpc UpsertContactProfile(ContactProfile) returns (ContactProfile);
 }
 
 service LiveMgr {

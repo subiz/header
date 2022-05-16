@@ -43,53 +43,10 @@ message By {
 	string display_id = 7;
 	string display_type = 8; // agent, user, bot
 
-	ContactProfile profile = 9;
-}
-
-message ContactProfiles {
-	Context ctx = 1;
-	string account_id = 2;
-	repeated ContactProfile contact_profiles = 3;
-}
-
-message ContactProfile {
-	Context ctx = 1;
-	string account_id = 2;
-	string id = 3; // psid, igsid, zalo id
-	string user_id = 4; // link to subiz primary id
-
-	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment
-
-	string fullname = 6;
-	string avatar_url = 7;
-
-	string status = 25; // '', 'deleted'
-
-	string username = 22; // instagram
-
-	int64 last_seen = 20;
-	// page id, zaloa id
-	// for channel subiz, its always web
-	string source = 23;
-
-	int64 created = 21;
-
-	int64 last_message_sent = 10;
-	int64 last_agent_message_sent = 11;
-	int64 last_agent_message_sent_by = 12;
-
-	string source_url = 30; // website_url for channel subiz
-
-	string phone = 31; // zalo
-	string address = 32; // zalo
-	string city = 33;
-	string district = 34;
-	string ward = 35;
-	string gender = 36;
-
-	string timezone = 37;
-	string locale = 38;
-	string email = 39;
+	// ContactProfile profile = 9;
+	string profile_id = 10; // only used if type = user
+	string channel = 11;
+	string channel_source = 12;
 }
 
 message Credential {
