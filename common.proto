@@ -33,6 +33,8 @@ message Device {
 	}
 	string source_referrer = 11; // referrer of referrer
 	repeated string ga_tracking_ids = 12;
+	string page_url = 13;
+	string page_title = 14;
 }
 
 message By {

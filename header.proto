@@ -928,6 +928,8 @@ message UserSession {
 
 	float lead_score = 36;
 	int64 time_on_site = 37;
+	string latest_page_url = 40;
+	string latest_page_title = 41;
 }
 
 message StartRequest {
