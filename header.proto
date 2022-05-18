@@ -19,6 +19,10 @@ message Id {
 	string account_id = 2;
 	string id = 3;
 	string query = 4; // (bot category: orders)
+
+	string channel = 5;
+	string channel_source = 6;
+	string profile_id = 7;
 }
 
 message Ids {
@@ -119,8 +123,12 @@ message User {
 	bool is_lead = 43;
 	string type = 47; // empty = user, lead, customer
 	repeated ContactProfile contact_profiles = 48;
-	// string primary_id = 49;
-	// repeated string associated_uses = 50;
+	string primary_id = 49;
+	repeated string secondary_ids = 50;
+
+	string profile_id = 52;
+	string channel_source = 53;
+	string channel = 54;
 }
 
 // lookup contact point to user_id

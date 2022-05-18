@@ -161,6 +161,8 @@ service UserMgr {
 	rpc ListUserContactProfiles(Id) returns (ContactProfiles);
 	rpc GetOrCreateUserByContactProfile(ContactProfile) returns (header.User);
 	rpc UpsertContactProfile(ContactProfile) returns (ContactProfile);
+
+	rpc ListSecondaryUsers(Id) returns (Users);
 }
 
 service LiveMgr {
