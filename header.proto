@@ -122,7 +122,7 @@ message User {
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
 	string type = 47; // empty = user, lead, customer
-	repeated ContactProfile contact_profiles = 48;
+	// repeated ContactProfile contact_profiles = 48;
 	string primary_id = 49;
 	repeated string secondary_ids = 50;
 
@@ -5112,6 +5112,13 @@ message CompactedUser {
 	bool is_lead = 32;
 	repeated UserLabel labels = 33;
 	UserSession session = 34;
+
+	string primary_id = 49;
+	repeated string secondary_ids = 50;
+
+	string profile_id = 52;
+	string profile_channel_source = 53;
+	string profile_channel = 54;
 }
 
 message CompactedUsers {
