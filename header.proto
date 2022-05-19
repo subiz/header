@@ -729,7 +729,7 @@ message Event {
 		OrderPipelineStage order_pipeline_stage = 75;
 		ConversationModal conversation_modal = 76;
 		ConversationAutomation conversation_automation = 77;
-		ContactProfile contact_profile = 78;
+		// ContactProfile contact_profile = 78;
 	}
 	Data data = 20;
 }
@@ -4942,7 +4942,7 @@ message RateLimitEntity {
 	string configkey = 2;
 	int64 window_sec = 3;
 	int64 capacity = 5;
-  repeated RateLimitWindow windows = 6;
+	repeated RateLimitWindow windows = 6;
 }
 
 message RateLimitWindow {
@@ -5324,52 +5324,6 @@ message EmailBlock {
 	string id = 3;
 	int64 created = 4;
 	string created_by = 5;
-}
-
-message ContactProfiles {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated ContactProfile contact_profiles = 3;
-}
-
-message ContactProfile {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3; // psid, igsid, zalo id
-	string user_id = 4; // link to subiz primary id
-
-	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, zalo, email
-
-	string fullname = 6;
-	string avatar_url = 7;
-
-	string status = 25; // '', 'deleted'
-
-	string username = 22; // instagram
-
-	int64 last_seen = 20;
-	// page id, zaloa id
-	// for channel subiz, its always web
-	string source = 23;
-
-	int64 created = 21;
-
-	int64 last_message_sent = 10;
-	int64 last_agent_message_sent = 11;
-	int64 last_agent_message_sent_by = 12;
-
-	string source_url = 30; // website_url for channel subiz
-
-	string phone = 31; // zalo
-	string address = 32; // zalo
-	string city = 33;
-	string district = 34;
-	string ward = 35;
-	string gender = 36;
-
-	string timezone = 37;
-	string locale = 38;
-	string email = 39;
 }
 
 /////////////////////// DEPRECATED //////////////////////////////////
