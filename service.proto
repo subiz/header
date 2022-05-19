@@ -185,13 +185,6 @@ service NoteMgr {
 	rpc DeleteNote(header.DeleteNoteRequest) returns (Empty);
 }
 
-service AutomationMgr {
-	rpc ListAutomations(Id) returns (header.Automations);
-	rpc UpdateAutomation(header.Automation) returns (header.Automation);
-	rpc DeleteAutomation(Id) returns (Empty);
-	rpc ReadAutomation(Id) returns (header.Automation);
-}
-
 service AttributeMgr {
 	rpc ListAttributeDefinitions(Empty) returns (header.AttributeDefinitions);
 	rpc CreateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
