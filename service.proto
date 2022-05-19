@@ -159,6 +159,7 @@ service UserMgr {
 
 	rpc ListLeads(header.UserView) returns (header.Users);
 	rpc ListSecondaryUsers(Id) returns (Users);
+	rpc RecommendRelatedUsers(Id) returns (Users);
 }
 
 service LiveMgr {
