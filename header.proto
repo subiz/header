@@ -1992,25 +1992,25 @@ message ReportBotResponse {
 }
 
 message BotrunMetric {
-    int64 lead_count = 2;
-    int64 botrun_count = 3;
-    string account_id = 4;
-    string bot_id = 5;
-    int64 created_hour = 6;
-    string date = 7; // derived
+	int64 lead_count = 2;
+	int64 botrun_count = 3;
+	string account_id = 4;
+	string bot_id = 5;
+	int64 created_hour = 6;
+	string date = 7; // derived
 }
 
 message BotrunMetricsRequest {
-    string dim = 2;
+	string dim = 2;
 	int32 tz = 3;
 	string account_id = 4;
-    string bot_id = 5;
-    int64 created_hour_from = 6;
+	string bot_id = 5;
+	int64 created_hour_from = 6;
 	int64 created_hour_to = 7;
 }
 
 message BotrunMetrics {
-    repeated BotrunMetric metrics = 2;
+	repeated BotrunMetric metrics = 2;
 }
 
 message ActionrunMetric {
@@ -2019,15 +2019,15 @@ message ActionrunMetric {
 	string bot_id = 4;
 	string action_id = 5;
 	int64 created_hour = 6;
-    string date = 7; // derived
+	string date = 7; // derived
 }
 
 message ActionrunMetricsRequest {
 	string dim = 2;
 	int32 tz = 3;
 	string account_id = 4;
-    string bot_id = 5;
-    int64 created_hour_from = 6;
+	string bot_id = 5;
+	int64 created_hour_from = 6;
 	int64 created_hour_to = 7;
 }
 
