@@ -350,4 +350,6 @@ message Presence {
 	optional string ua = 8;
 
 	optional bool is_focused = 9; // tell where the user is actually seeing the page
+
+	optional string last_seen_convo_id = 10;
 }
