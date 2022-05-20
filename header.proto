@@ -1070,12 +1070,6 @@ message ConversationMember {
 	bool off_notification = 28;
 
 	int64 hidden = 29; // ms
-	// common.ContactProfile profile = 31;
-
-	string channel = 32;
-	string channel_source = 33;
-	string profile_id = 34;
-
 }
 
 message ListConversationsRequest {
@@ -1239,7 +1233,7 @@ message Message {
 	string idempotency_key = 29;
 
 	InstagramStory story = 30; // for instagram
-	string tos = 31; // to user_id
+	repeated string tos = 31; // to user_id
 }
 
 message InstagramStory {
