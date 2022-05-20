@@ -116,7 +116,9 @@ service AccountMgr {
 	rpc ListEmailBlocks(Ids) returns (header.EmailBlocks);
 	rpc CreateEmailBlock(header.EmailBlock) returns (header.EmailBlock);
 	rpc DeleteEmailBlock(Id) returns (Empty);
-	rpc UpdateAgentPresence (Id) returns (account.Presence);
+
+	rpc UpdateAgentPresence (account.Presence) returns (account.Presence);
+	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
 }
 
 // user services
@@ -188,11 +190,6 @@ service AttributeMgr {
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 }
 
-// conversation services
-service ConversationReporter {
-	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
-}
-
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
@@ -223,6 +220,7 @@ service ConversationMgr {
 	rpc GetEndchatSetting(Id) returns (header.EndchatSetting);
 
 	rpc TerminateBot(header.BotTerminated) returns (header.Event);
+
 	rpc SendMessage(header.Event) returns (header.Event);
 	rpc UpdateMessage(header.Event) returns (header.Event);
 	rpc PinMessage(header.Event) returns (header.Empty);
