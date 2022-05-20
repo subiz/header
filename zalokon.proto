@@ -108,7 +108,7 @@ message AttachmentPayload {
 	string size = 4; // file
 	string name = 5; // file
 	string checksum = 6; // file
-	string type = 7; // file: docx, pdf
+	string type = 7; // file: image, sticker, docx, pdf
 	string id = 9; // sticker
 	string description = 10; // video, link
 	string title = 11; // link
@@ -138,6 +138,7 @@ message Message {
 	repeated string msg_ids = 6;
 	repeated Attachment attachments = 7;
 	Attachment attachment = 8;
+	string conversation_id = 10;
 }
 
 // user_send_text: Người dùng gửi tin nhắn văn bản

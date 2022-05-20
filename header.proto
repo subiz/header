@@ -1239,6 +1239,7 @@ message Message {
 	string idempotency_key = 29;
 
 	InstagramStory story = 30; // for instagram
+	string tos = 31; // to user_id
 }
 
 message InstagramStory {
