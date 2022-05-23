@@ -124,7 +124,6 @@ service AccountMgr {
 // user services
 service UserMgr {
 	rpc SearchUsers(header.SearchRequest) returns (header.Users); // deprecated
-
 	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
 	rpc CreateUser(header.User) returns (Id);
 	rpc CreateUserFromWeb(header.User) returns (Id);
@@ -133,9 +132,7 @@ service UserMgr {
 
 	rpc ReadUser(Id) returns (header.User);
 	rpc ReadOrCreateUserByContactProfile(Id) returns (header.User);
-
 	rpc ReportUserEvents(header.UserEventMetricsRequest) returns (header.UserEventMetrics);
-
 	rpc MatchUsers(Ids) returns (header.Users);
 
 	rpc UpdateView(header.UserView) returns (header.UserView);
@@ -163,6 +160,8 @@ service UserMgr {
 	rpc ListLeads(header.UserView) returns (header.Users);
 	rpc ListSecondaryUsers(Id) returns (Users);
 	rpc RecommendRelatedUsers(Id) returns (Users);
+
+	rpc LinkProductUrl(header.Product) returns (header.Product);
 }
 
 service LiveMgr {
