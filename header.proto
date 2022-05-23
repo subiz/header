@@ -989,6 +989,8 @@ message Rule {
 	repeated string fallback_agents = 23;
 
 	int64 v = 22; // version
+
+	repeated string supervisors = 24; // add tags when rule is matched
 }
 
 message TimmingCondition {
