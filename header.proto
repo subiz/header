@@ -1134,17 +1134,18 @@ message Conversation {
 	int64 created = 4;
 	repeated ConversationMember members = 7;
 	repeated Tag tags = 10;
-	int64 ended = 12;
+	// int64 ended = 12;
 	string state = 11; // converation state
 	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
 	Integration integration = 18;
 	int64 actived = 19;
-	string last_message_id = 21; // internal use only
-	Message last_message = 20;
 
-	Event last_message_sent = 23;
-	Event last_event = 26;
+	Message last_message = 20; // remove after update mobile app
+
+	Event last_internal_message_sent = 27;
+	Event last_message_sent = 23;          // no internal
+	Event last_event = 26;                 // no internal
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -1182,7 +1183,7 @@ message Conversation {
 	string avatar_url = 52;
 	int64 last_modified = 53;
 
-	bool is_returned = 54;
+	bool is_returned = 54; // for report new vs. old
 }
 
 message Rating {
@@ -1236,6 +1237,8 @@ message Message {
 
 	InstagramStory story = 30; // for instagram
 	repeated string tos = 31; // to user_id
+
+	bool is_internal = 32;
 }
 
 message InstagramStory {
