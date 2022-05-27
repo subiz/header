@@ -1619,27 +1619,35 @@ message ConversationAutomation {
 	string id = 3;
 	string type = 4; // endchat
 	string name = 5;
-	repeated string channel_types = 6;
+	string description = 6;
+	repeated string channel_types = 7;
 
-	string updated_by = 7;
-	int64 updated = 8;
+	repeated string exclude_tags = 11; // dont run on those tag
+	repeated string exclude_fields = 12;
 
-	string created_by = 9;
-	int64 created = 10; // ms
+	repeated string fields = 13;
+	repeated string tags = 14; // only run on
 
-	int64 disabled = 11;
+	bool repeate = 15; // allow to run multiple time
 
-	repeated BotCondition conditions = 12;
+	repeated BotCondition conditions = 16;
 	// AwayMessageAutomation away_message = 11;
 	// AwayMessageAutomation away_message = 11;
 
 	// trigger
-	int64 after_last_sent_ms = 13;
-	bool after_last_sent_by_type = 14; // agent, user
+	int64 after_last_sent_ms = 17;
+	repeated string after_last_sent_by_type = 18; // agent, user
 
-	repeated BotAction actions = 15;
+	repeated BotAction actions = 19;
 
-	int64 last_run_at = 20;
+	string updated_by = 20;
+	int64 updated = 21;
+
+	string created_by = 22;
+	int64 created = 23; // ms
+	int64 disabled = 24;
+
+	int64 last_run_at = 26;
 }
 
 message Trigger {
@@ -1876,7 +1884,7 @@ message BotAction {
 	// first action require trigger
 	repeated NextBotAction nexts = 8;
 
-	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state
+	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state, send_message
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -1915,6 +1923,8 @@ message ActionUpdateConversation {
 	repeated string tag_ids = 2;
 	repeated string untag_ids = 3;
 	bool end_conversation = 4;
+
+	repeated KV fields = 5;
 }
 
 message ActionJump {

@@ -73,4 +73,5 @@ enum Type {
 	connector = 6; // fabikon, mailkon
 	bot = 7; // subiz bot
 	dummy = 8; // agent that cannot handle action
+	workflow = 9;
 }
