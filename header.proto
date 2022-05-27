@@ -1072,6 +1072,7 @@ message ConversationMember {
 	bool off_notification = 28;
 
 	int64 hidden = 29; // ms
+	int64 last_mentioned = 30; // ms
 }
 
 message ListConversationsRequest {
@@ -1621,6 +1622,7 @@ message ConversationAutomation {
 	string name = 5;
 	string description = 6;
 	repeated string channel_types = 7;
+	string avatar_url = 9;
 
 	repeated string exclude_tags = 11; // dont run on those tag
 	repeated string exclude_fields = 12;
@@ -1628,7 +1630,7 @@ message ConversationAutomation {
 	repeated string fields = 13;
 	repeated string tags = 14; // only run on
 
-	bool repeate = 15; // allow to run multiple time
+	bool repeat = 15; // allow to run multiple time
 
 	repeated BotCondition conditions = 16;
 	// AwayMessageAutomation away_message = 11;
