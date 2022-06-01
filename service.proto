@@ -124,7 +124,8 @@ service AccountMgr {
 // user services
 service UserMgr {
 	rpc SearchUsers(header.SearchRequest) returns (header.Users); // deprecated
-	rpc MergeUser(header.UserAlias) returns (header.UserAlias);
+	rpc MergeUser2(header.Users) returns (header.User);
+
 	rpc CreateUser(header.User) returns (Id);
 	rpc CreateUserFromWeb(header.User) returns (Id);
 	rpc CreateSbzUserByAgent (header.Id) returns (Id);

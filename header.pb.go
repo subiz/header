@@ -7728,7 +7728,7 @@ type Event struct {
 	unknownFields protoimpl.UnknownFields
 
 	Ctx        *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	UserId     string          `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // TODO: remove
+	UserId     string          `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Id         string          `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	AccountId  string          `protobuf:"bytes,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Created    int64           `protobuf:"varint,8,opt,name=created,proto3" json:"created,omitempty"`
@@ -10911,7 +10911,7 @@ type Message struct {
 	UserId         string          `protobuf:"bytes,19,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // new standard, removing chain
 	// used for reaction and delivery status, could be ignore
 	Pongs          []*MessagePong `protobuf:"bytes,17,rep,name=pongs,proto3" json:"pongs,omitempty"`
-	QuillDelta     string         `protobuf:"bytes,20,opt,name=quill_delta,json=quillDelta,proto3" json:"quill_delta,omitempty"`               // deprecated
+	QuillDelta     string         `protobuf:"bytes,20,opt,name=quill_delta,json=quillDelta,proto3" json:"quill_delta,omitempty"`
 	I18NQuillDelta *I18NString    `protobuf:"bytes,21,opt,name=i18n_quill_delta,json=i18nQuillDelta,proto3" json:"i18n_quill_delta,omitempty"` // for template
 	IsPrivate      bool           `protobuf:"varint,22,opt,name=is_private,json=isPrivate,proto3" json:"is_private,omitempty"`
 	// bool is_pinned = 24;
