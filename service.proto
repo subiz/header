@@ -123,7 +123,6 @@ service AccountMgr {
 
 // user services
 service UserMgr {
-	rpc SearchUsers(header.SearchRequest) returns (header.Users); // deprecated
 	rpc MergeUser2(header.Users) returns (header.User);
 
 	rpc CreateUser(header.User) returns (Id);
@@ -437,9 +436,6 @@ service Sendback {
 
 // notibox services
 service Notibox {
-	// deprecated
-	rpc ListRecentCompactedNoties(header.ListNotiRequest) returns (header.CompactedNoties);
-
 	rpc SendNoti(header.Notification) returns (Empty);
 	rpc ListNoties(header.ListNotiRequest) returns (header.Notifications);
 	rpc MarkReadNoti(Id) returns (Empty);

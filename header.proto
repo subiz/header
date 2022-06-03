@@ -390,22 +390,6 @@ message Page {
 	string url = 4;
 }
 
-message UserInfo {
-	string id = 2;
-	int64 updated = 3;
-	User user = 4;
-	Page viewing = 5;
-	string source = 6;
-	Location location = 7;
-	int64 view_count = 8; // deprecated
-	int64 duration = 9;
-	int64 latest_event_created = 10;
-	string user_session_id = 11;
-	repeated Page view_pages = 12;
-	int64 time_on_site = 13;
-	bool is_focused = 14;
-}
-
 message UserInfoParams {
 	string account_id = 15;
 	string signature = 2;
@@ -538,7 +522,6 @@ message ConversationMetric {
 	int64 user_sent_count = 66;
 	int64 not_reply_count = 67;
 	int64 send_duration_sum = 68;
-	int64 returned_count = 69;
 }
 
 message ConversationMetrics {
@@ -5337,32 +5320,4 @@ message EmailBlock {
 	string id = 3;
 	int64 created = 4;
 	string created_by = 5;
-}
-
-/////////////////////// DEPRECATED //////////////////////////////////
-message CompactedNoti {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string id = 4;
-	int64 created = 5;
-	repeated Notification notifications = 7;
-	bool is_read = 8;
-}
-
-message CompactedNotiRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string id = 4;
-}
-
-message CompactedNoties {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	repeated CompactedNoti notifications = 4;
-	string anchor = 5;
-	bool is_read = 8;
-	int64 read_created = 9;
 }
