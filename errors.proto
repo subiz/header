@@ -231,4 +231,6 @@ enum E {
 	conversation_automation_not_found = 174;
 
 	sendgrid_error = 176;
+
+	too_many_events = 177;
 }

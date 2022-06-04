@@ -218,7 +218,7 @@ type Device struct {
 	unknownFields protoimpl.UnknownFields
 
 	Ip               string   `protobuf:"bytes,3,opt,name=ip,proto3" json:"ip,omitempty"`
-	UserAgent        string   `protobuf:"bytes,4,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"` // code
+	UserAgent        string   `protobuf:"bytes,4,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"` // remove
 	ScreenResolution string   `protobuf:"bytes,5,opt,name=screen_resolution,json=screenResolution,proto3" json:"screen_resolution,omitempty"`
 	Timezone         string   `protobuf:"bytes,6,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	Language         string   `protobuf:"bytes,7,opt,name=language,proto3" json:"language,omitempty"`

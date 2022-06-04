@@ -729,8 +729,10 @@ message ListUserEventsRequest {
 	string user_id = 3;
 	string query = 4;
 	string anchor = 5;
-	int32 limit = 6;
+	int32 limit = 6; // hour
+
 	string category = 9;
+	int32 limit_hour = 10;
 }
 
 message UserEvent {
@@ -5320,4 +5322,9 @@ message EmailBlock {
 	string id = 3;
 	int64 created = 4;
 	string created_by = 5;
+}
+
+message HourEventMeta {
+	int64 count = 5;
+
 }

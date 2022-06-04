@@ -162,6 +162,9 @@ service UserMgr {
 	rpc RecommendRelatedUsers(Id) returns (Users);
 
 	rpc LinkProductUrl(header.Product) returns (header.Product);
+
+	rpc ListUserEvents(header.ListUserEventsRequest) returns (header.Events);
+	rpc CreateUserEvent(header.Event) returns (header.Event);
 }
 
 service LiveMgr {

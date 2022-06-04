@@ -18,7 +18,7 @@ message Context {
 
 message Device {
 	string ip = 3;
-	string user_agent = 4; // code
+	string user_agent = 4; // remove
 	string screen_resolution = 5;
 	string timezone = 6;
 	string language = 7;
