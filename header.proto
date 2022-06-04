@@ -636,7 +636,6 @@ message ReportCCU {
 	repeated ConcurrentUser ccus = 3;
 }
 
-///////////////////////
 message Events {
 	common.Context ctx = 1;
 	repeated Event events = 4;
@@ -713,7 +712,6 @@ message Event {
 		OrderPipelineStage order_pipeline_stage = 75;
 		ConversationModal conversation_modal = 76;
 		ConversationAutomation conversation_automation = 77;
-		// ContactProfile contact_profile = 78;
 	}
 	Data data = 20;
 }
@@ -4679,6 +4677,9 @@ message Product {
 
 	string currency = 65;
 	repeated MessageButton buttons = 66; // for message attachment
+
+
+	int64 view_duration_sec = 67; // for event content_view only
 }
 
 message ProductInventory {
