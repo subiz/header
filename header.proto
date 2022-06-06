@@ -522,6 +522,7 @@ message ConversationMetric {
 	int64 user_sent_count = 66;
 	int64 not_reply_count = 67;
 	int64 send_duration_sum = 68;
+	int64 returned_count = 69;
 }
 
 message ConversationMetrics {
