@@ -152,6 +152,12 @@ message FbMessage {
 	optional string is_supported = 12;
 	optional bool is_deleted = 13;
 	optional ReplyTo reply_to = 14;
+
+	optional FbMessageRef referral = 15;
+}
+
+message FbMessageRef {
+	optional FbProduct product = 2;
 }
 
 message ReplyTo {
@@ -192,7 +198,7 @@ message FbAction {
 }
 
 message FbAttachment {
-	optional string type = 2; // template
+	optional string type = 2; // template, fallback
 	optional FbPayload payload = 3;
 	optional string title = 4;
 	optional string URL = 5;
@@ -252,6 +258,9 @@ message FbPayload {
 	optional string order_url = 17;
 	optional string timestamp = 18;
 	optional FbProducts product = 19;
+
+	optional string title = 20;
+	optional string sticker_id = 21;
 }
 
 message FbProducts {
