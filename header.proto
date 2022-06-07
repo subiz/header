@@ -1079,6 +1079,10 @@ message ListConversationsRequest {
 
 	bool is_private = 15; // for agent only
 	bool id_only = 16; // internal usage
+
+	string touchpoint_channel = 17;
+	string touchpoint_source = 18;
+	string touchpoint_id = 19;
 }
 
 message ListConversationEventsRequest {
