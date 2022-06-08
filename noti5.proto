@@ -14,6 +14,7 @@ message Subscription {
 	optional bool user_opened_email = 9;
 	optional int32 delay = 10;
 	optional bool private_message = 11;
+	optional string zalo_oa_followed = 12;
 }
 
 message Setting {
