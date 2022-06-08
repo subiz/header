@@ -4782,6 +4782,9 @@ message ProductsRequest {
 	repeated string product_collection_ids = 15;
 
 	bool include_deleted = 17;
+
+	string sku = 18;
+	string url = 19;
 }
 
 message KV {
