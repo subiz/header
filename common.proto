@@ -18,34 +18,36 @@ message Context {
 
 message Device {
 	string ip = 3;
-	string user_agent = 4; // remove
+	string user_agent = 4; // hash
 	string screen_resolution = 5;
-	string timezone = 6;
+	string timezone = 6; // hash
 	string language = 7;
-	string referrer = 8;
-	string type = 9;
-	string platform = 10;
+	string referrer = 8; //hash
+	string type = 9; // 0 - 1 - 2 -3
 	enum DeviceType {
 		unknown = 0;
 		mobile = 1;
 		tablet = 2;
 		desktop = 3;
 	}
+
+	string platform = 10;
 	string source_referrer = 11; // referrer of referrer
 	repeated string ga_tracking_ids = 12;
 	string page_url = 13;
 	string page_title = 14;
+	string referrer_of_referrer = 15;
 }
 
 message By {
 	Device device = 2;
+
 	string id = 3;
 	string client_id = 4;
 	string type = 6; // agent, user, bot, dummy
 	string display_id = 7;
 	string display_type = 8; // agent, user, bot
 
-	// ContactProfile profile = 9;
 	string profile_id = 10; // only used if type = user
 	string channel = 11;
 	string channel_source = 12;
