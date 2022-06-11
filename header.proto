@@ -5338,5 +5338,5 @@ message FacebookPageRegister {
 	optional string access_token = 6;
 	repeated string page_ids = 7;
 	optional bool is_instagram = 12;
-	optional bool receive_comment = 13;
+	repeated string receive_comments = 13; // page id that receive comment
 }
