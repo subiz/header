@@ -1522,6 +1522,7 @@ message Integration {
 
 	string connector_type = 12; // see client.Client_ChannelType
 	int64 integrated = 6;
+	int64 last_integrated = 7;
 	// int64 updated = 7;
 
 	string state = 8;
