@@ -36,7 +36,33 @@ message Device {
 	repeated string ga_tracking_ids = 12;
 	string page_url = 13;
 	string page_title = 14;
-	string referrer_of_referrer = 15;
+
+	string city_name = 18;            // derived from ip
+	string country_name = 19;         // derived from ip
+	string continent_code = 20;      // derived from ip
+	float latitude = 22;             // derived from ip
+	float longitude = 23;            // derived from ip
+	string postal_code = 24;         // derived from ip
+
+	string isp = 27;                 // derived from ip
+	string continent_name = 28;      // derived from ip
+	string country_code = 29;        // derived from ip
+
+	string browser_name = 32;        // filled
+
+	enum AdsNetwork {
+		google_adwords = 0;
+	}
+	string ads_network = 33;
+
+	enum Source {
+		direct = 0;
+		referring = 1;
+		organic = 2;
+		social = 3;
+		advertising = 4;
+	}
+	string source = 34;
 }
 
 message By {

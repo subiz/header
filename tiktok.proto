@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package tiktokon;
+
+option go_package = "github.com/subiz/header/tiktokon";
+
+message BusinessAccount {
+	string ba_id = 2;
+	string description = 3;
+	string name = 4;
+	string avatar = 5;
+	string cover = 6;
+	string access_token = 7;
+	int64 authorized = 8;
+	string account_id = 9;
+	string str_oa_id = 10;
+	int64 last_tiktok_hook = 11;
+
+	string state = 12; // activated || deleted || failed
+	int32 version = 13;
+	int64 last_refresh_token_at = 14;
+	string refresh_token = 15;
+	int64 last_called = 17;
+	int64 last_refresh_token_error_at = 18;
+	int64 access_token_expired_at = 19;
+}
+
+message AccessTokenResponse {
+	int64 code = 3;
+	string message = 4;
+	string request_id = 5;
+
+	AccessTokenResponseData data = 6;
+}
+
+message AccessTokenResponseData {
+	string access_token = 2;
+	repeated int64 advertiser_ids = 3;
+	repeated int64 scope = 4;
+}

@@ -7,6 +7,7 @@ import "payment.proto";
 import "noti5.proto";
 import "account.proto";
 import "header.proto";
+import "common.proto";
 
 service RateLimit {
 	rpc SyncRateLimit(RateLimitSyncRequest) returns (RateLimitSyncResponse);
@@ -165,6 +166,8 @@ service UserMgr {
 
 	rpc ListUserEvents(header.ListUserEventsRequest) returns (header.Events);
 	rpc CreateUserEvent(header.Event) returns (header.Event);
+
+	rpc FillDevice(common.Device) returns (common.Device);
 }
 
 service LiveMgr {
