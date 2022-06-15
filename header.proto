@@ -129,6 +129,8 @@ message User {
 	string profile_id = 52;
 	string channel_source = 53;
 	string channel = 54;
+
+	Event lastest_content_view = 55; // readonly
 }
 
 // lookup contact point to user_id
