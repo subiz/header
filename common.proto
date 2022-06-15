@@ -37,6 +37,8 @@ message Device {
 	string page_url = 13;
 	string page_title = 14;
 
+	string ga_client_id = 15;
+
 	string city_name = 18;            // derived from ip
 	string country_name = 19;         // derived from ip
 	string continent_code = 20;      // derived from ip
@@ -63,6 +65,8 @@ message Device {
 		advertising = 4;
 	}
 	string source = 34;
+
+	repeated SessionCampaign campaigns = 35;
 }
 
 message By {
@@ -102,4 +106,12 @@ enum Type {
 	bot = 7; // subiz bot
 	dummy = 8; // agent that cannot handle action
 	workflow = 9;
+}
+
+message SessionCampaign {
+	string name = 2;
+	string source = 3;
+	string medium = 4;
+	string term = 5;
+	string content = 6;
 }
