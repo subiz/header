@@ -260,7 +260,7 @@ message FbPayload {
 	optional FbProducts product = 19;
 
 	optional string title = 20;
-	optional string sticker_id = 21;
+	// optional string sticker_id = 21; must be int64
 }
 
 message FbProducts {
