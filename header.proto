@@ -110,6 +110,120 @@ message UserAlias {
 	string alias = 4;
 }
 
+message PhoneDevices {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated PhoneDevice phone_devices = 3;
+}
+
+message PhoneDevice {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // 5003 10013 auto-increment
+	string password = 4; // auto-generated
+
+	string host = 5; // host or ip of the phone, auto-fill
+	int64 port = 6;
+
+	// phone calls to (from) this device will be considered being dialed to (by) those agents
+	repeated string bind_to_agents = 7;
+
+	// device type, could be: hard_phone, soft_phone
+	// Hard phones are physical devices, wirely connected to the LAN network
+	// Soft phones are simulation devices (software), running like an web app or desktop app
+	string type = 8;
+
+	string name = 9;
+	string description = 10;
+
+	string status = 11; // unknown, not_inuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
+	string last_status_updated = 12;
+
+	string driver = 13; // subiz stringee
+
+	int64 disabled = 14;
+
+	int64 updated = 30;
+	string updated_by = 31;
+
+	int64 created = 32;
+	string created_by = 33;
+
+}
+
+message ExtensionSlot {
+	int64 delay = 6;
+	int64 ring_duration_sec = 7;
+
+	string type = 8; // agent, number,
+	string id = 9; // could be dynamic variable like "last_agent"
+}
+
+message CallSettings {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated CallSetting call_settings = 3;
+}
+
+// Decide how incomming calls should be handled.
+// Each account can only have one global call-setting but can have
+// many scoped call-settings. Each call-setting should responsible
+// for one or more phone numbers
+message CallSetting {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// 84364824444, 84364825555, 84364826666, ...
+	// this field should be ignored for global setting
+	// if the number of the incomming call does not match this number, fallback
+	// to global setting to handle the call
+	string number = 3;
+
+	// who can dial from this phone number
+	repeated ExtensionSlot shared_withs = 4;
+
+	// SECTION 1: holiday and business hour setting
+	// this section decides what to do with incomming call after business hour
+	// or in holiday
+	int64 business_hour_enabled = 10;
+
+	// SECTION 2: Phone menu (IVR) setting
+	// design an automate menu to handle incomming call
+	// this is optional, account can choose to disabled it.
+	int64 menu_enabled = 11;
+	string menu_message = 12; // the audio plays while waiting for user to press keys
+	repeated PhoneExtensionSetting options = 13;
+	PhoneExtensionSetting menu_fallback = 14; // do this when no option is selected
+
+	// TODO: last time, this number contacted agent A, this time, same number is calling
+	// we should assign to agent A.
+	// this requirement is quite complex and should be handle here in the future
+	// repeated BotCondition condition
+	// routing action
+
+	// SECTION 3: (required)
+	// ring one or more agents (or device) to handle the call
+	PhoneExtensionSetting ring_members = 20;
+
+	int64 updated = 30;
+	string updated_by = 31;
+}
+
+message PhoneExtensionSetting {
+	string key = 3; // 0, 1, 2, 3 ..., *
+
+	string action_type = 5; // fallthrough, repeat, forward, queue, voicemail, hangup, audio
+	string queue_type = 6; // simultaneous, longest_idle, round_robin, fixed_order (circular)
+	repeated ExtensionSlot slots = 7;
+
+	int64 ring_duration_sec =  8;
+	bool record_call = 9;
+
+	string forward_to = 10;
+	string audio_message = 11;
+}
+
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -142,7 +256,7 @@ message Touchpoint {
 	string account_id = 2;
 	string id = 3; // psid, igsid, zalo id or comment id
 
-	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment
+	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, call, sms
 	repeated KV fields = 8;
 
 	string linked_page_id = 24; // instagram
@@ -715,6 +829,8 @@ message Event {
 		OrderPipelineStage order_pipeline_stage = 75;
 		ConversationModal conversation_modal = 76;
 		ConversationAutomation conversation_automation = 77;
+		PhoneDevice phone_device = 78;
+		CallSetting call_setting = 79;
 	}
 	Data data = 20;
 }
@@ -1120,7 +1236,7 @@ message Conversation {
 	int64 created = 4;
 	repeated ConversationMember members = 7;
 	repeated Tag tags = 10;
-	// int64 ended = 12;
+	int64 ended = 12; // for call only
 	string state = 11; // converation state
 	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
@@ -1170,6 +1286,14 @@ message Conversation {
 	int64 last_modified = 53;
 
 	bool is_returned = 54; // for report new vs. old
+
+	// call only
+
+	int64 answer_time = 55;
+	string to_number = 56;
+	string from_number = 57;
+	bool is_missed = 58;
+	string direction = 59; // incomming, outgoing
 }
 
 message Rating {
@@ -1519,10 +1643,10 @@ message Integration {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string connector_id = 3;
-	string logo_url = 4;
+	string logo_url = 4; // emoji for phone
 	string name = 5;
 
-	string connector_type = 12; // see client.Client_ChannelType
+	string connector_type = 12; // see facebook, phone
 	int64 integrated = 6;
 	int64 last_integrated = 7;
 	// int64 updated = 7;
@@ -1546,6 +1670,7 @@ message Integration {
 	string linked_page_id = 20;
 
 	bool chaining = 21; // use chain instead of conversation
+	string call_center_driver = 43; // empty => subiz, stringee
 }
 
 message TagRequest {
@@ -5335,7 +5460,6 @@ message EmailBlock {
 
 message HourEventMeta {
 	int64 count = 5;
-
 }
 
 message FacebookPageRegister {

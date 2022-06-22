@@ -179,6 +179,9 @@ enum RealtimeType {
 
 	user_event_created = 190;
 	user_event_updated = 191;
+
+	phone_device_updated = 192;
+	call_setting_updated = 193;
 }
 
 message TextTransform {

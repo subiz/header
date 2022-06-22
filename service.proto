@@ -247,6 +247,16 @@ service ConversationMgr {
 	rpc UpdateConversationAutomation(header.ConversationAutomation) returns (header.ConversationAutomation);
 	rpc DeleteConversationAutomation(Id) returns (Empty);
 	rpc ReadConversationAutomation(Id) returns (header.ConversationAutomation);
+
+	rpc ListPhoneDevices(header.Id) returns (header.PhoneDevices);
+	rpc CreatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
+	rpc UpdatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
+	rpc DeletePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
+
+	// CRUD outgoing number should be in integration
+
+	rpc ListCallSettings(header.Id) returns (header.CallSettings);
+	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
 }
 
 service TemplateMgr {
