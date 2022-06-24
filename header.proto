@@ -831,6 +831,7 @@ message Event {
 		ConversationAutomation conversation_automation = 77;
 		PhoneDevice phone_device = 78;
 		CallSetting call_setting = 79;
+		CallStatus call_status = 90;
 	}
 	Data data = 20;
 }
@@ -1288,12 +1289,15 @@ message Conversation {
 	bool is_returned = 54; // for report new vs. old
 
 	// call only
-
 	int64 answer_time = 55;
 	string to_number = 56;
 	string from_number = 57;
-	bool is_missed = 58;
+	string call_status = 58; // MISSED
 	string direction = 59; // incomming, outgoing
+
+	string recording_url = 60;
+	bool enable_recording = 61;
+	string call_center_driver = 62;
 }
 
 message Rating {
@@ -5464,9 +5468,36 @@ message HourEventMeta {
 
 message FacebookPageRegister {
 	common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string access_token = 6;
-	repeated string page_ids = 7;
-	optional bool is_instagram = 12;
+	string account_id = 2;
+	string access_token = 6;
+	string page_ids = 7;
+	bool is_instagram = 12;
 	repeated string receive_comments = 13; // page id that receive comment
+}
+
+
+message CallRoutingRequest {
+	common.Context ctx = 1;
+	string from_number = 5;
+	string to_number = 6;
+	string direction = 7;
+	string device_id = 8; // require when direction = outgoing
+}
+
+message CallRoutingResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string action = 3;
+
+	string conversation_id = 4;
+	int64 timeout_sec = 5;
+	repeated string devices = 6;
+	bool recording = 7;
+	string music = 8;
+}
+
+message CallStatus {
+	string status = 2;  // answer, hang_up, dial_timeout, ringing
+	repeated string phone_devices = 8;
+	int64 timeout_sec = 9;
 }

@@ -257,6 +257,9 @@ service ConversationMgr {
 
 	rpc ListCallSettings(header.Id) returns (header.CallSettings);
 	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
+
+	rpc IncommingCall(header.CallRoutingRequest) returns (header.CallRoutingResponse);
+	rpc TimeoutCall(header.CallRoutingRequest) returns (header.CallRoutingResponse);
 }
 
 service TemplateMgr {

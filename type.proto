@@ -182,6 +182,8 @@ enum RealtimeType {
 
 	phone_device_updated = 192;
 	call_setting_updated = 193;
+
+	call_status_updated = 200; // answer, hang_up, dial_timeout, ringing
 }
 
 message TextTransform {
