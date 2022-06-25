@@ -251,15 +251,17 @@ service ConversationMgr {
 	rpc ListPhoneDevices(header.Id) returns (header.PhoneDevices);
 	rpc CreatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
 	rpc UpdatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
-	rpc DeletePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
-
-	// CRUD outgoing number should be in integration
+	rpc DeletePhoneDevice(header.Id) returns (Empty);
 
 	rpc ListCallSettings(header.Id) returns (header.CallSettings);
 	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
 
 	rpc IncommingCall(header.CallRoutingRequest) returns (header.CallRoutingResponse);
 	rpc TimeoutCall(header.CallRoutingRequest) returns (header.CallRoutingResponse);
+
+	rpc BlockNumber(BlockedNumber) returns (BlockedNumber);
+	rpc ListBlockedNumbers(Id) returns (BlockedNumbers);
+	rpc UnblockNumber(BlockedNumber) returns (Empty);
 }
 
 service TemplateMgr {

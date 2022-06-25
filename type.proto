@@ -181,9 +181,13 @@ enum RealtimeType {
 	user_event_updated = 191;
 
 	phone_device_updated = 192;
-	call_setting_updated = 193;
+	phone_device_deleted = 193;
+	call_setting_updated = 194;
 
-	call_status_updated = 200; // answer, hang_up, dial_timeout, ringing
+	call_status_updated = 200; // answer, hang_up, dial_timeout, ringing, forward
+
+	block_number_updated = 201;
+	block_number_deleted = 202;
 }
 
 message TextTransform {

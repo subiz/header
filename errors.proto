@@ -233,4 +233,13 @@ enum E {
 	sendgrid_error = 176;
 
 	too_many_events = 177;
+
+	too_many_number = 178;
+	too_many_phone_device = 179;
+	phone_device_not_found = 180;
+	sip_server_error = 181;
+
+	invalid_phone_device_state = 182;
+
+	invalid_call_state = 190;
 }
