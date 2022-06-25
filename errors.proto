@@ -37,7 +37,7 @@ enum E {
 	access_deny = 7;
 	invalid_json = 8; // json payload is broken
 
-	account_not_found  = 9;
+	account_not_found = 9;
 	invalid_credential  = 10;
 	http_call_error  = 11;
 	agent_group_not_found  = 12;

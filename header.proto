@@ -138,7 +138,7 @@ message PhoneDevice {
 	string description = 10;
 
 	string status = 11; // unknown, not_inuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
-	string last_status_updated = 12;
+	int64 last_status_updated = 12;
 
 	string driver = 13; // subiz stringee
 
@@ -184,23 +184,28 @@ message CallSetting {
 	// who can dial from this phone number
 	repeated ExtensionSlot shared_withs = 4;
 
-
 	string greeting_message = 5; // audio url
 	string missed_message = 6; // audio url
+
+	// forward call
+	string forward_to = 7;
 
 	// SECTION 1: holiday and business hour setting
 	// this section decides what to do with incomming call after business hour
 	// or in holiday
-	int64 business_hour_enabled = 10;
-	PhoneExtensionSetting business_hour_setting = 14; // do this when no option is selected
+	bool enable_business_hour = 9;
+	PhoneRoutingAction business_hour_setting = 10; // do this when no option is selected
 
 	// SECTION 2: Phone menu (IVR) setting
 	// design an automate menu to handle incomming call
 	// this is optional, account can choose to disabled it.
-	int64 menu_enabled = 11;
+	bool enable_menu = 11;
 	string menu_message = 12; // the audio plays while waiting for user to press keys
-	repeated PhoneExtensionSetting options = 13;
-	PhoneExtensionSetting menu_fallback = 15; // do this when no option is selected
+	int64 menu_timeout_sec = 14; // sec
+	repeated PhoneRoutingAction options = 13;
+	string invalid_option_message = 16; // url when typing into empty option
+
+	PhoneRoutingAction menu_fallback = 15; // do this when no option is selected
 
 	// TODO: last time, this number contacted agent A, this time, same number is calling
 	// we should assign to agent A.
@@ -210,25 +215,28 @@ message CallSetting {
 
 	// SECTION 3: (required)
 	// ring one or more agents (or device) to handle the call
-	PhoneExtensionSetting ring_members = 20;
+	CallQueue queue = 20;
 
 	int64 updated = 30;
 	string updated_by = 31;
 }
 
-message PhoneExtensionSetting {
+message PhoneRoutingAction {
 	string key = 3; // 0, 1, 2, 3 ..., *
 
 	string action = 5; // fallthrough, repeat, forward, queue, hangup, play_audio
-	string queue_type = 6; // longest_idle, round_robin, fixed_order (circular)
-	repeated ExtensionSlot slots = 7;
-
-	int64 ring_duration_sec =  8;
-	bool enable_recording = 9;
-
+	CallQueue queue = 9;
 	string forward_to = 10;
 	string audio_message = 11;
+}
 
+message CallQueue {
+	string type = 6; // longest_idle, round_robin, fixed_order (circular)
+	int64 ring_duration_sec = 8; // auto 30s
+
+	repeated ExtensionSlot slots = 7;
+
+	bool enable_recording = 9;
 	string missed_message = 13;
 }
 
@@ -1246,7 +1254,7 @@ message Conversation {
 	repeated ConversationMember members = 7;
 	repeated Tag tags = 10;
 	int64 ended = 12; // for call only
-	string state = 11; // converation state
+	string state = 11; // converation state: pending, dialing, active, (routing||unassigned), congestion, ended
 	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
 	Integration integration = 18;
@@ -1296,19 +1304,35 @@ message Conversation {
 
 	bool is_returned = 54; // for report new vs. old
 
+	CallInfo call = 55;
+}
+
+message CallInfo {
+	string account_id = 2;
+	string conversation_id = 3;
+
+	int64 started = 5;
 	// call only
-	int64 answer_time = 55;
-	string to_number = 56;
-	string from_number = 57;
-	string call_status = 58; // MISSED
-	string direction = 59; // incomming, outgoing
-	string initial_by_phone_device = 60;
+	// time start to anster
+	int64 answered = 6;
+	int64 ended = 7;
 
-	string recording_url = 61;
-	bool enable_recording = 62;
-	string call_center_driver = 63;
+	string to_number = 8;
+	string from_number = 9;
+	string direction = 10; // inbound, outbound
 
-	int64 call_duration = 64; // ms
+	string initial_by_phone_device = 11;
+	bool is_missed = 12;
+
+	string recording_url = 13;
+	bool enable_recording = 14;
+	string call_center_driver = 15;
+
+	int64 duration = 16; // ms
+	string hangup_code = 17;
+	string call_status = 18; // waiting_for_key
+
+
 }
 
 message Rating {
@@ -5492,6 +5516,7 @@ message CallRoutingRequest {
 	string to_number = 6;
 	string direction = 7;
 	string device_id = 8; // require when direction = outgoing
+	bool is_timeout = 10;
 }
 
 message CallRoutingResponse {
@@ -5504,14 +5529,18 @@ message CallRoutingResponse {
 	repeated string devices = 6;
 	bool recording = 7;
 	string audio_message = 8; // url
+
+	string debug_message = 9;
 }
 
 message CallStatus {
-	string status = 2;  // answer, hang_up, dial_timeout, ringing
+	string status = 2;  // answer, hangup, dial_timeout
 	repeated string phone_devices = 8;
 	int64 timeout_sec = 9;
 	string from_extension = 10;
 	string to_extension = 11;
+
+	string hangup_code = 12;
 }
 
 message BlockedNumbers {
@@ -5532,5 +5561,5 @@ message BlockedNumber {
 
 	string by = 6; // agent id that blocked the number
 
-	string blocked = 7; // the day that blocked
+	int64 blocked = 7; // the day that blocked
 }

@@ -257,7 +257,6 @@ service ConversationMgr {
 	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
 
 	rpc IncommingCall(header.CallRoutingRequest) returns (header.CallRoutingResponse);
-	rpc TimeoutCall(header.CallRoutingRequest) returns (header.CallRoutingResponse);
 
 	rpc BlockNumber(BlockedNumber) returns (BlockedNumber);
 	rpc ListBlockedNumbers(Id) returns (BlockedNumbers);
