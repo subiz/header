@@ -126,25 +126,25 @@ message PhoneDevice {
 	string host = 5; // host or ip of the phone, auto-fill
 	int64 port = 6;
 
-	// phone calls to (from) this device will be considered being dialed to (by) those agents
-	repeated string bind_to_agents = 7;
+	// phone calls to (from) this device will be considered being dialed to owner and (by) those agents
+	repeated string bind_to_agents = 10;
 
 	// device type, could be: hard_phone, soft_phone
 	// Hard phones are physical devices, wirely connected to the LAN network
 	// Soft phones are simulation devices (software), running like an web app or desktop app
-	string type = 8;
+	string type = 11;
 
-	string name = 9;
-	string description = 10;
+	string name = 12;
+	string description = 13;
 
-	string status = 11; // unknown, not_inuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
-	int64 last_status_updated = 12;
+	string status = 14; // unknown, not_inuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
+	int64 last_status_updated = 15;
 
-	string driver = 13; // subiz stringee
+	string driver = 16; // subiz stringee
 
-	int64 disabled = 14;
+	int64 disabled = 17;
 
-	int64 extension = 15; // auto-increasement 5001, 5002, 5003
+	int64 extension = 18; // auto-increasement 5001, 5002, 5003
 
 	int64 updated = 30;
 	string updated_by = 31;
@@ -157,7 +157,7 @@ message ExtensionSlot {
 	int64 delay = 6; // 5s, 10s, 15s, 20, 25, 30, 35, 40, 45, 50, 55, 60
 	int64 timeout_sec = 7;
 
-	string type = 8; // agent, number,
+	string type = 8; // agent, phone_device
 	string id = 9; // could be dynamic variable like "last_agent"
 }
 
@@ -224,7 +224,7 @@ message CallSetting {
 message PhoneRoutingAction {
 	string key = 3; // 0, 1, 2, 3 ..., *
 
-	string action = 5; // fallthrough, repeat, forward, queue, hangup, play_audio
+	string action = 5; // fallthrough, repeat, forward, queue, hangup
 	CallQueue queue = 9;
 	string forward_to = 10;
 	string audio_message = 11;
@@ -232,7 +232,7 @@ message PhoneRoutingAction {
 
 message CallQueue {
 	string type = 6; // longest_idle, round_robin, fixed_order (circular)
-	int64 ring_duration_sec = 8; // auto 30s
+	int64 ring_sec = 8; // auto 30s
 
 	repeated ExtensionSlot slots = 7;
 
@@ -1001,6 +1001,12 @@ message StartRequest {
 	string subject = 38;
 
 	Touchpoint touchpoint = 39;
+
+	// call
+	string from_number = 5;
+	string to_number = 6;
+	string direction = 7;
+	string device_id = 8; // require when direction = outgoing
 }
 
 message PresencesRequest {
@@ -1331,8 +1337,7 @@ message CallInfo {
 	int64 duration = 16; // ms
 	string hangup_code = 17;
 	string call_status = 18; // waiting_for_key
-
-
+	string process_id = 19; // check outdated
 }
 
 message Rating {
@@ -5510,27 +5515,39 @@ message FacebookPageRegister {
 	repeated string receive_comments = 13; // page id that receive comment
 }
 
-message CallRoutingRequest {
-	common.Context ctx = 1;
-	string from_number = 5;
-	string to_number = 6;
-	string direction = 7;
-	string device_id = 8; // require when direction = outgoing
-	bool is_timeout = 10;
-}
-
-message CallRoutingResponse {
+message CallDriverRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string action = 3;
-
+	string action = 3; // dial, hangup, wait-for-key, call, get-call-status, register-device, get-device-status, unregister-device
 	string conversation_id = 4;
-	int64 timeout_sec = 5;
-	repeated string devices = 6;
-	bool recording = 7;
-	string audio_message = 8; // url
 
-	string debug_message = 9;
+	string request_id = 5;
+
+	repeated string devices = 6;
+	repeated int64 delay_secs = 7;
+	repeated int64 ring_secs = 8;
+
+	int64 timeout_sec = 9;
+
+	bool recording = 10;
+
+	string audio_message = 11; // url
+	string debug_message = 12;
+	string missed_message = 13; // url
+
+	// make outgoing call
+	string call_device = 15;
+	string to_number = 16;
+	string from_number = 17;
+}
+
+message CallDriverResponse {
+	string request_id = 6;
+	bool is_timeout = 5;
+
+	string device = 7; // for dial action
+	string key = 8; // for wait_for_key action
+	string status = 9; // for get-call-status and get-device-status
 }
 
 message CallStatus {

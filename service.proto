@@ -256,8 +256,6 @@ service ConversationMgr {
 	rpc ListCallSettings(header.Id) returns (header.CallSettings);
 	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
 
-	rpc IncommingCall(header.CallRoutingRequest) returns (header.CallRoutingResponse);
-
 	rpc BlockNumber(BlockedNumber) returns (BlockedNumber);
 	rpc ListBlockedNumbers(Id) returns (BlockedNumbers);
 	rpc UnblockNumber(BlockedNumber) returns (Empty);
