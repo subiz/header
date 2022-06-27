@@ -217,6 +217,8 @@ message CallSetting {
 	// ring one or more agents (or device) to handle the call
 	CallQueue queue = 20;
 
+	repeated string supervisors = 21; // add tags when rule is matched
+
 	int64 updated = 30;
 	string updated_by = 31;
 }
@@ -1231,7 +1233,7 @@ message ListConversationEventsRequest {
 	bool is_private = 7;
 }
 
-message Chain {
+ message Chain {
 	string account_id = 2;
 	string id = 3;
 	string conversation_id = 4;
@@ -1250,6 +1252,8 @@ enum ConvoState {
 	// closed = 14; // ticket
 
 	waiting_for_reply = 15; // waiting for reply
+	dialing = 16;
+	congestion = 17;
 }
 
 message Conversation {
@@ -1332,11 +1336,11 @@ message CallInfo {
 
 	string recording_url = 13;
 	bool enable_recording = 14;
-	string call_center_driver = 15;
+	string driver = 15;
 
 	int64 duration = 16; // ms
 	string hangup_code = 17;
-	string call_status = 18; // waiting_for_key
+	// string call_status = 18; // waiting_for_key
 	string process_id = 19; // check outdated
 }
 
@@ -1698,6 +1702,7 @@ message Integration {
 	string state = 8;
 	enum State {
 		activated = 0; // activeated and insync
+		pending = 1;
 		failed = 2;
 		deleted = 3;
 	}
@@ -5548,6 +5553,8 @@ message CallDriverResponse {
 	string device = 7; // for dial action
 	string key = 8; // for wait_for_key action
 	string status = 9; // for get-call-status and get-device-status
+
+	int64 duration_sec = 10; // for get-call-status
 }
 
 message CallStatus {
