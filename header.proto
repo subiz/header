@@ -849,7 +849,7 @@ message Event {
 		ConversationAutomation conversation_automation = 77;
 		PhoneDevice phone_device = 78;
 		CallSetting call_setting = 79;
-		CallStatus call_status = 90;
+		BlockedNumber blocked_number = 91;
 	}
 	Data data = 20;
 }
@@ -1231,7 +1231,7 @@ message ListConversationEventsRequest {
 	bool is_private = 7;
 }
 
- message Chain {
+message Chain {
 	string account_id = 2;
 	string id = 3;
 	string conversation_id = 4;
@@ -5521,7 +5521,7 @@ message FacebookPageRegister {
 message CallDriverRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string action = 3; // dial, hangup, wait-for-key, call, get-call-status, register-device, get-device-status, unregister-device
+	string action = 3; // dial, hangup, wait-for-key, call, get-call-status, register-device, unregister-device
 	string conversation_id = 4;
 
 	string request_id = 5;
@@ -5542,6 +5542,8 @@ message CallDriverRequest {
 	string call_device = 15;
 	string to_number = 16;
 	string from_number = 17;
+
+	PhoneDevice phone_device = 18; // register-device || unregister-device
 }
 
 message CallDriverResponse {
@@ -5550,19 +5552,8 @@ message CallDriverResponse {
 
 	string device = 7; // for dial action
 	string key = 8; // for wait_for_key action
-	string status = 9; // for get-call-status and get-device-status
 
-	int64 duration_sec = 10; // for get-call-status
-}
-
-message CallStatus {
-	string status = 2;  // answer, hangup, dial_timeout
-	repeated string phone_devices = 8;
-	int64 timeout_sec = 9;
-	string from_extension = 10;
-	string to_extension = 11;
-
-	string hangup_code = 12;
+	CallInfo call = 11; // for get-call-status
 }
 
 message BlockedNumbers {
