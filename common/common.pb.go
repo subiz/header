@@ -28,7 +28,7 @@ const (
 	Type_agent     Type = 2
 	Type_subiz     Type = 3
 	Type_app       Type = 4 // dashboard, accmgr
-	Type_connector Type = 6 // fabikon, mailkon
+	Type_connector Type = 6 // fabikon, mailkon, subiz-driver, stringee-driver
 	Type_bot       Type = 7 // subiz bot
 	Type_dummy     Type = 8 // agent that cannot handle action
 	Type_workflow  Type = 9

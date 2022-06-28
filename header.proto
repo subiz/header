@@ -1005,8 +1005,6 @@ message StartRequest {
 	Touchpoint touchpoint = 39;
 
 	// call
-	string from_number = 5;
-	string to_number = 6;
 	string direction = 7;
 	string device_id = 8; // require when direction = outgoing
 }
@@ -1327,8 +1325,8 @@ message CallInfo {
 	int64 answered = 6;
 	int64 ended = 7;
 
-	string to_number = 8;
-	string from_number = 9;
+	string to_number = 8; // derived from touchpoint
+	string from_number = 9; // derived from touchpoint
 	string direction = 10; // inbound, outbound
 
 	string initial_by_phone_device = 11;
@@ -1336,9 +1334,9 @@ message CallInfo {
 
 	string recording_url = 13;
 	bool enable_recording = 14;
-	string driver = 15;
+	string driver = 15; // derived from integration.call_center_driver
 
-	int64 duration = 16; // ms
+	int64 duration_sec = 16; // ms
 	string hangup_code = 17;
 	// string call_status = 18; // waiting_for_key
 	string process_id = 19; // check outdated
@@ -1694,7 +1692,7 @@ message Integration {
 	string logo_url = 4; // emoji for phone
 	string name = 5;
 
-	string connector_type = 12; // see facebook, phone
+	string connector_type = 12; // see facebook, call
 	int64 integrated = 6;
 	int64 last_integrated = 7;
 	// int64 updated = 7;

@@ -102,7 +102,7 @@ enum Type {
 	agent = 2;
 	subiz = 3;
 	app = 4; // dashboard, accmgr
-	connector = 6; // fabikon, mailkon
+	connector = 6; // fabikon, mailkon, subiz-driver, stringee-driver
 	bot = 7; // subiz bot
 	dummy = 8; // agent that cannot handle action
 	workflow = 9;

@@ -244,4 +244,7 @@ enum E {
 	invalid_call_state = 190;
 	number_is_blocked = 191;
 	number_is_not_active = 192;
+
+	number_is_registered = 193;
+	number_is_not_bounded = 194;
 }
