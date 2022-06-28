@@ -5515,7 +5515,7 @@ message FacebookPageRegister {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string access_token = 6;
-	string page_ids = 7;
+	repeated string page_ids = 7;
 	bool is_instagram = 12;
 	repeated string receive_comments = 13; // page id that receive comment
 }
