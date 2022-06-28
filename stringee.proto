@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package stringee;
+
+option go_package = "github.com/subiz/header/stringee";
+
+message Event {
+	int64 project_id = 2;
+	string type = 3;
+	string call_id = 4;
+	string request_from_user_id = 5;
+	string account_sid = 6;
+	int64 timestamp_ms = 7;
+	Caller from = 8;
+	Caller to = 9;
+	string call_status = 10;
+	string clientCustomData = 11;
+	string callCreatedReason = 12;
+	string endCallCause = 13;
+	string endedBy = 14;
+	string callType = 15;
+	int64 duration = 16;
+	int64 answerDuration = 17;
+	string agent_status = 18;
+	string toNumber = 19;
+	int64 start_time = 20;
+}
+
+message Caller {
+	string type = 2;
+	string number = 3;
+	string alias = 4;
+	bool is_online = 5;
+}
+
+message SCCORequest {
+	string callId = 8;
+	string uuid = 9;
+	string from = 2;
+	string to = 3;
+	bool fromInternal = 5;
+	int64 projectId = 7;
+	string custom = 4;
+	string userId = 6;
+}
+
+message SCCO {
+	repeated Action actions = 2;
+}
+
+message Action {
+	string action = 2;
+	
+	// connect:
+	Caller from = 3;
+	Caller to = 4;
+	string customData = 5;
+	bool continueOnFail = 6;
+	string onFailEventUrl = 7;
+	int64 timeout = 8;
+	int64 maxConnectTime = 9;
+	bool peerToPeerCall = 10;
+
+	// record:
+	string eventUrl = 11;
+	string format = 12; // mp3, wav
+
+	// recordMessage: eventUrl, format, timeout &
+	string endOnKey = 14;
+	string beepStart = 15; // true
+
+	// talk:
+	string text = 16;
+	string voice = 17; // female, male
+	int32 speed = 18; // -3..3
+	bool bargeIn = 19;
+	int32 loop = 20;
+	int64 silenceTime = 21;
+	bool answerCall = 22;
+	bool continueWhilePlay = 23;
+
+	// play: bargeIn, loop, silenceTime, answerCall, continueWhilePlay &
+	string fileName = 24;
+
+	// stream: fileName, bargeIn, loop, silenceTime, answerCall, continueWhilePlay
+
+	// input: eventUrl, timeout &
+	bool submitOnHash = 25;
+	string customField = 26;
+	int32 maxDigits = 27;
+}
+
+message InputEvent {
+	string call_id = 2;
+	string time = 3; // TODO int64
+	string dtmf = 4; // numbers input by user
+	string customField = 5;
+	bool timeout = 6;
+}
