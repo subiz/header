@@ -187,8 +187,8 @@ enum RealtimeType {
 
 	call_status_updated = 200; // answer, hang_up, dial_timeout, ringing, forward
 
-	block_number_updated = 201;
-	block_number_deleted = 202;
+	blocked_number_updated = 201;
+	blocked_number_deleted = 202;
 }
 
 message TextTransform {

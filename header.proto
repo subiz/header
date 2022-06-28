@@ -1340,6 +1340,12 @@ message CallInfo {
 	string hangup_code = 17;
 	// string call_status = 18; // waiting_for_key
 	string process_id = 19; // check outdated
+
+
+	// derived from convo.state, do not use this, use convo.state instead
+	// this field only for driver to return call status
+	// accepts: active, ended, dialing
+	string status = 20;
 }
 
 message Rating {
@@ -5521,7 +5527,7 @@ message FacebookPageRegister {
 message CallDriverRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string action = 3; // dial, hangup, wait-for-key, call, get-call-status, register-device, unregister-device
+	string action = 3; // dial, hangup, wait-for-key, call, call-status, register-device, unregister-device
 	string conversation_id = 4;
 
 	string request_id = 5;
