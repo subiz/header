@@ -1341,11 +1341,11 @@ message CallInfo {
 	// string call_status = 18; // waiting_for_key
 	string process_id = 19; // check outdated
 
-
 	// derived from convo.state, do not use this, use convo.state instead
 	// this field only for driver to return call status
 	// accepts: active, ended, dialing
 	string status = 20;
+	string answered_device = 21;
 }
 
 message Rating {
@@ -5555,6 +5555,7 @@ message CallDriverRequest {
 message CallDriverResponse {
 	string request_id = 6;
 	bool is_timeout = 5;
+	bool is_disconnected = 9;
 
 	string device = 7; // for dial action
 	string key = 8; // for wait_for_key action
