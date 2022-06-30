@@ -5563,8 +5563,8 @@ message CallDriverResponse {
 	bool is_timeout = 5;
 	bool is_disconnected = 9;
 
-	string device = 7; // for dial action
-	string key = 8; // for wait_for_key action
+	// string device = 7; // for dial action
+	// string key = 8; // for wait_for_key action
 
 	CallInfo call = 11; // for get-call-status
 }

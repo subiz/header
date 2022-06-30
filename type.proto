@@ -186,8 +186,9 @@ enum RealtimeType {
 	call_setting_updated = 194;
 
 	// call_status_updated = 200; // answer, hang_up, dial_timeout, ringing, forward
-	call_answered = 195;
-	call_hangup = 196;
+	call_answered = 195; // call_info
+	call_wait_key_timeout = 196; // conversation
+	//call_hangup = 196; => state update
 
 	blocked_number_updated = 201;
 	blocked_number_deleted = 202;
