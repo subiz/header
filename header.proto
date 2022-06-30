@@ -851,6 +851,7 @@ message Event {
 		CallSetting call_setting = 79;
 		BlockedNumber blocked_number = 91;
 		CallInfo call_info = 92;
+		CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
 	}
 
 	Data data = 20;
