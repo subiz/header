@@ -850,7 +850,9 @@ message Event {
 		PhoneDevice phone_device = 78;
 		CallSetting call_setting = 79;
 		BlockedNumber blocked_number = 91;
+		CallInfo call_info = 92;
 	}
+
 	Data data = 20;
 }
 
@@ -1313,6 +1315,9 @@ message Conversation {
 	bool is_returned = 54; // for report new vs. old
 
 	CallInfo call = 55;
+
+	// only use to communicate with call driver
+	CallDriverRequest call_request = 56;
 }
 
 message CallInfo {
@@ -5538,10 +5543,10 @@ message CallDriverRequest {
 
 	int64 timeout_sec = 9;
 
-	bool recording = 10;
+	bool enable_recording = 10;
 
 	string audio_message = 11; // url
-	string debug_message = 12;
+	// string debug_message = 12;
 	string missed_message = 13; // url
 
 	// make outgoing call
