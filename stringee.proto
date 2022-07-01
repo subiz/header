@@ -97,3 +97,19 @@ message InputEvent {
 	string customField = 5;
 	bool timeout = 6;
 }
+
+message Project {
+	string id = 2;
+	string name = 3;
+	string answer_url = 4;
+	string callback_url = 5;
+	string api_key_sid = 6;
+	string api_key = 7;
+	string access_token = 8;
+	string account_id = 9;
+	int64 last_called = 10;
+	int64 first_called_failure = 12;
+	int64 last_called_success = 11;
+	int64 last_hook = 13;
+	int64 last_refresh_token_at = 14;
+}
