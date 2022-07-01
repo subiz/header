@@ -2,6 +2,7 @@ package header
 
 import (
 	"encoding/json"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -391,4 +392,62 @@ func CalcTotalOrder(order *Order) {
 type taxitem struct {
 	tax      *Tax
 	taxprice float32
+}
+
+// like js Object.assign(dst, src)
+// dst and src must be same struct point
+func AssignObject(dst, src interface{}, fields []string) {
+	if dst == nil || src == nil {
+		return
+	}
+	var srcValueOf reflect.Value
+	var srcTypeOf reflect.Type
+	if reflect.TypeOf(src).Kind() == reflect.Ptr {
+		srcValueOf, srcTypeOf = reflect.ValueOf(src).Elem(), reflect.TypeOf(src).Elem()
+	} else {
+		srcValueOf, srcTypeOf = reflect.ValueOf(src), reflect.TypeOf(src)
+	}
+
+	var dstValueOf reflect.Value
+	var dstTypeOf reflect.Type
+	if reflect.TypeOf(dst).Kind() == reflect.Ptr {
+		dstValueOf, dstTypeOf = reflect.ValueOf(dst).Elem(), reflect.TypeOf(dst).Elem()
+	} else {
+		dstValueOf, dstTypeOf = reflect.ValueOf(dst), reflect.TypeOf(dst)
+	}
+
+	if reflect.ValueOf(dst).IsNil() || reflect.ValueOf(src).IsNil() {
+		return
+	}
+	if dstTypeOf != srcTypeOf {
+		return
+	}
+
+	for i := 0; i < srcValueOf.NumField(); i++ {
+		tf := srcTypeOf.Field(i)
+		jsonname := strings.Split(tf.Tag.Get("json"), ",")[0]
+		if jsonname == "-" {
+			continue
+		}
+
+		// skip if not field that user interested in
+		canskip := false
+		if len(fields) > 0 {
+			canskip = true
+			for _, field := range fields {
+				if field == jsonname {
+					canskip = false
+					break
+				}
+			}
+		}
+		if canskip {
+			continue
+		}
+
+		if !dstValueOf.Field(i).CanSet() {
+			continue
+		}
+		dstValueOf.Field(i).Set(srcValueOf.Field(i))
+	}
 }

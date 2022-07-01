@@ -155,7 +155,7 @@ message PhoneDevice {
 
 message ExtensionSlot {
 	int64 delay = 6; // 5s, 10s, 15s, 20, 25, 30, 35, 40, 45, 50, 55, 60
-	int64 timeout_sec = 7;
+	int64 timeout_sec = 7; // default 30
 
 	string type = 8; // agent, phone_device
 	string id = 9; // could be dynamic variable like "last_agent"
@@ -230,6 +230,7 @@ message PhoneRoutingAction {
 	CallQueue queue = 9;
 	string forward_to = 10;
 	string audio_message = 11;
+	string missed_message = 12;
 }
 
 message CallQueue {
@@ -5560,7 +5561,6 @@ message CallDriverRequest {
 
 message CallDriverResponse {
 	string request_id = 6;
-	bool is_timeout = 5;
 	bool is_disconnected = 9;
 
 	// string device = 7; // for dial action
