@@ -251,4 +251,6 @@ enum E {
 	too_many_greeting_audio = 195;
 	file_too_large = 196;
 	unsupported_file_type = 197;
+
+	invalid_sip_provider = 198; // fpt, itel
 }

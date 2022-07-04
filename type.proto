@@ -192,6 +192,8 @@ enum RealtimeType {
 
 	blocked_number_updated = 201;
 	blocked_number_deleted = 202;
+
+	greeting_audio_updated = 203;
 }
 
 message TextTransform {
