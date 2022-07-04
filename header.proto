@@ -5580,6 +5580,7 @@ message CallDriverRequest {
 	string call_device = 15;
 	string to_number = 16;
 	string from_number = 17;
+	string sip_provider = 19;
 
 	PhoneDevice phone_device = 18; // register-device || unregister-device
 }
