@@ -16,6 +16,7 @@ message Event {
 	int64 project_id = 2;
 	string type = 3;
 	string call_id = 4;
+	string id = 21; // auto
 	string request_from_user_id = 5;
 	string account_sid = 6;
 	int64 timestamp_ms = 7;
