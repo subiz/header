@@ -9,6 +9,7 @@ message Call {
 	string id = 3;
 	string account_id = 4;
 	string conversation_id = 5;
+	SCCORequest request = 6;
 }
 
 message Event {
