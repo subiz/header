@@ -262,6 +262,9 @@ service ConversationMgr {
 
 	rpc ListGreetingAudio(Id) returns (GreetingAudios);
 	rpc CreateGreetingAudio(GreetingAudio) returns (GreetingAudio);
+
+	// try to make an outbound call from subiz
+	rpc OriginateCall(StartRequest) returns (Conversation);
 }
 
 service TemplateMgr {
