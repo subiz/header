@@ -247,4 +247,8 @@ enum E {
 
 	number_is_registered = 193;
 	number_is_not_bounded = 194;
+
+	too_many_greeting_audio = 195;
+	file_too_large = 196;
+	unsupported_file_type = 197;
 }

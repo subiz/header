@@ -259,6 +259,9 @@ service ConversationMgr {
 	rpc BlockNumber(BlockedNumber) returns (BlockedNumber);
 	rpc ListBlockedNumbers(Id) returns (BlockedNumbers);
 	rpc UnblockNumber(BlockedNumber) returns (Empty);
+
+	rpc ListGreetingAudio(Id) returns (GreetingAudios);
+	rpc CreateGreetingAudio(GreetingAudio) returns (GreetingAudio);
 }
 
 service TemplateMgr {

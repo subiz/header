@@ -1733,6 +1733,7 @@ message Integration {
 
 	bool chaining = 21; // use chain instead of conversation
 	string call_center_driver = 43; // empty => subiz, stringee
+	string sip_provider = 44; // itel, fpt, vnpt; for call only
 }
 
 message TagRequest {
@@ -3047,6 +3048,28 @@ message SearchLocationsRequest {
 	common.Context ctx = 1;
 	string query = 2;
 	int64 limit = 4;
+}
+
+message GreetingAudios {
+	common.Context ctx = 1;
+	string account_id = 3;
+	repeated GreetingAudio greeting_audios = 4;
+}
+
+message GreetingAudio {
+	common.Context ctx = 1;
+	string account_id = 3;
+
+	string id = 4;
+	string name = 5;
+	string type = 6; // sound, robot
+	string url = 7;
+
+	int64 length = 8; // sec
+	int64 size = 9; // byte
+
+	int64 created = 10;
+	string created_by = 11;
 }
 
 message UploadedImage {
