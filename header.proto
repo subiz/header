@@ -5623,7 +5623,7 @@ message TextToSpeech {
 message TTSVoiceSelection {
 	string text = 2; // derived
 	string language_code = 3;
-	string ssml_gender = 4;
+	int32 ssml_gender = 4;
 	string name = 5;
 	string file_mp3_url = 6;
 }
