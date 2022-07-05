@@ -5614,3 +5614,16 @@ message BlockedNumber {
 
 	int64 blocked = 7; // the day that blocked
 }
+
+message TextToSpeech {
+	string text = 2;
+	repeated TTSVoiceSelection speeches = 3;
+}
+
+message TTSVoiceSelection {
+	string text = 2; // derived
+	string language_code = 3;
+	string ssml_gender = 4;
+	string name = 5;
+	string file_mp3_url = 6;
+}
