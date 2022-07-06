@@ -153,6 +153,9 @@ message Feature {
 	optional bool web_plugin = 8;
 	optional bool bot = 9;
 	optional string shop = 10; //   pending || active
+
+	optional int64 total_file_size = 11; // bytes
+	optional int64 total_call_log_size =  12; // bytes
 }
 
 message WebpageMonitorSetting {

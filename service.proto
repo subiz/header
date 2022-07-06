@@ -252,6 +252,7 @@ service ConversationMgr {
 	rpc CreatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
 	rpc UpdatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
 	rpc DeletePhoneDevice(header.Id) returns (Empty);
+	rpc ReadPhoneDevice(header.Id) returns (header.PhoneDevice);
 
 	rpc ListCallSettings(header.Id) returns (header.CallSettings);
 	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
