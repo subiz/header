@@ -122,3 +122,18 @@ message Project {
 	int64 last_hook = 13;
 	int64 last_refresh_token_at = 14;
 }
+
+message CalloutRequest {
+	Caller from = 2;
+	Caller to = 3;
+	string answer_url = 4;
+	repeated Action actions = 5;
+}
+
+message FitCalloutRequest {
+	string agentUserId = 2; // user-id
+	string toAgentFromNumberDisplay = 3; // call-out-from-842473082686
+	string toAgentFromNumberDisplayAlias = 4; // call-out-from-842473082686-alias
+	string toCustomerFromNumber = 5; // stringee-number
+	string customerNumber = 6; // customer-number
+}
