@@ -3301,7 +3301,7 @@ message File {
 	string id = 11;
 	string content_disposition = 12; // inline (for printing) || attachment (download)
 	int64 last_access_at = 13;
-	string scope = 14;
+	string bucket = 14;
 }
 
 message BotTerminated {
