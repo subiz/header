@@ -155,14 +155,6 @@ message PhoneDevice {
 	string default_outbound_number = 34;
 }
 
-message ExtensionSlot {
-	int64 delay = 6; // 5s, 10s, 15s, 20, 25, 30, 35, 40, 45, 50, 55, 60
-	int64 timeout_sec = 7; // default 30
-
-	string type = 8; // agent, phone_device
-	string id = 9; // could be dynamic variable like "last_agent"
-}
-
 message CallSettings {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -183,8 +175,11 @@ message CallSetting {
 	// to global setting to handle the call
 	string number = 3;
 
-	// who can dial from this phone number
-	repeated ExtensionSlot shared_withs = 4;
+	GreetingAudio greeting_message = 4;
+	GreetingAudio missed_message = 5;
+
+	// only agent in group can make outgoing calls
+	bool restricted_outging_call = 6;
 
 	// forward call
 	string forward_to = 7;
@@ -193,50 +188,35 @@ message CallSetting {
 	// this section decides what to do with incomming call after business hour
 	// or in holiday
 	bool enable_business_hour = 9;
-	PhoneRoutingAction business_hour_setting = 10; // do this when no option is selected
+	GreetingAudio business_hour_message = 10; // do this when no option is selected
 
 	// SECTION 2: Phone menu (IVR) setting
 	// design an automate menu to handle incomming call
 	// this is optional, account can choose to disabled it.
 	bool enable_menu = 11;
-	string menu_message = 12; // the audio plays while waiting for user to press keys
+	GreetingAudio menu_message = 12; // the audio plays while waiting for user to press keys
 	int64 menu_timeout_sec = 14; // sec
-	repeated PhoneRoutingAction options = 13;
-	string invalid_option_message = 16; // url when typing into empty option
+	repeated CallRoutingAction options = 13;
+	GreetingAudio invalid_option_message = 16; // url when typing into empty option
 
-	PhoneRoutingAction menu_fallback = 15; // do this when no option is selected
-
-	// TODO: last time, this number contacted agent A, this time, same number is calling
-	// we should assign to agent A.
-	// this requirement is quite complex and should be handle here in the future
-	// repeated BotCondition condition
-	// routing action
-
+	CallRoutingAction menu_fallback = 15; // do this when no option is selected
 	// SECTION 3: (required)
 	// ring one or more agents (or device) to handle the call
-	PhoneRoutingAction queue = 22; // must be queue
+	string default_group_id = 21;
 
-	repeated string supervisors = 21; // add tags when rule is matched
+	bool enable_recording = 22;
 
 	int64 updated = 30;
 	string updated_by = 31;
 }
 
-message PhoneRoutingAction {
+message CallRoutingAction {
 	string key = 3; // 0, 1, 2, 3 ..., *
 
-	string action = 5; // fallthrough, repeat, forward, queue, hangup
-	// CallQueue queue = 9;
+	string action = 5; // fallthrough, repeat, forward, ring, hangup
 	string forward_to = 10;
-	string audio_message = 11;
-	string missed_message = 12;
 
-	string queue_type = 6; // longest_idle, round_robin, fixed_order (circular)
-	int64 ring_sec = 8; // auto 30s
-
-	repeated ExtensionSlot slots = 7;
-
-	bool enable_recording = 9;
+	string ring_group = 9;
 }
 
 message User {
@@ -1194,6 +1174,10 @@ message ConversationMember {
 
 	int64 hidden = 29; // ms
 	int64 last_mentioned = 30; // ms
+
+	string profile_id = 31; // only used if type = user
+	string channel = 32;
+	string channel_source = 33;
 }
 
 message ListConversationsRequest {
@@ -3065,6 +3049,9 @@ message GreetingAudio {
 
 	int64 created = 10;
 	string created_by = 11;
+
+	repeated int64 graph = 12;
+	string text = 13; // could be text or ssml, for indexing purpose only
 }
 
 message UploadedImage {
@@ -5407,6 +5394,13 @@ message AgentGroup {
 
 	string created_by = 9;
 	repeated string agent_ids = 10;
+
+	bool ring_most_recent_agent_first = 12;
+	bool ring_most_idle_first = 13;
+	bool ring_randomly = 14;
+
+	repeated string receive_incomming_calls = 15; // agent that must handle incomming calls
+	repeated string call_supervisors = 16; // add tags when rule is matched
 }
 
 message DocIndexRequest {
@@ -5623,6 +5617,8 @@ message TTSVoiceSelection {
 	int32 ssml_gender = 4;
 	string name = 5;
 	string file_mp3_url = 6;
+
+	string background_music = 7; // calm, fresh, soothing, optimistic, happy, inspire
 }
 
 message BusinessHour {
