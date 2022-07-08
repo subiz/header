@@ -1556,6 +1556,8 @@ message Attachment {
 
 	QuickReply quick_reply = 31;
 	Order order = 32;
+
+	File file = 34;
 }
 
 message QuickReply {
@@ -3304,6 +3306,8 @@ message File {
 	int64 duration = 16; // sec
 	int64 width = 17;
 	int64 height = 18;
+
+	string thumbnail_url = 19;
 }
 
 message BotTerminated {
