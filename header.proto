@@ -217,6 +217,8 @@ message CallRoutingAction {
 	string forward_to = 10;
 
 	string ring_group = 9;
+
+	GreetingAudio audio_message = 11;
 }
 
 message User {
