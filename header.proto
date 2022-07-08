@@ -3042,16 +3042,12 @@ message GreetingAudio {
 	string id = 4;
 	string name = 5;
 	string type = 6; // sound, robot
-	string url = 7;
-
-	int64 length = 8; // sec
-	int64 size = 9; // byte
 
 	int64 created = 10;
 	string created_by = 11;
-
-	repeated int64 graph = 12;
 	string text = 13; // could be text or ssml, for indexing purpose only
+
+	File file = 14;
 }
 
 message UploadedImage {
@@ -3302,6 +3298,12 @@ message File {
 	string content_disposition = 12; // inline (for printing) || attachment (download)
 	int64 last_access_at = 13;
 	string bucket = 14;
+
+	repeated float audio_waveform = 15;
+
+	int64 duration = 16; // sec
+	int64 width = 17;
+	int64 height = 18;
 }
 
 message BotTerminated {
