@@ -5395,8 +5395,6 @@ message AgentGroup {
 	string account_id = 3;
 	string name = 4;
 
-	// members is list of 10 agents in group
-	repeated account.Agent members = 7;
 	int64 created = 6;
 	int64 modified = 8;
 
@@ -5408,7 +5406,11 @@ message AgentGroup {
 	bool ring_randomly = 14;
 
 	repeated string receive_incomming_calls = 15; // agent that must handle incomming calls
-	repeated string call_supervisors = 16; // add tags when rule is matched
+
+	int64 updated = 16;
+	string updated_by = 17;
+
+	string logo = 18;
 }
 
 message DocIndexRequest {

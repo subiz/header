@@ -55,9 +55,6 @@ service AccountMgr {
 	rpc DeleteGroup(Id) returns (Empty);
 	rpc ListGroups(Id) returns (header.AgentGroups);
 
-	rpc AddAgentToGroup(account.GroupMember) returns (Empty); // deprecated
-	rpc RemoveAgentFromGroup(account.GroupMember) returns (Empty); // deprecated
-
 	rpc ChangeEmail(account.Agent) returns (account.Agent);
 	rpc SyncPublicHolidays(account.SyncPublicHolidaysRequest) returns (account.BusinessHours);
 	rpc TransferOwner(Id) returns (account.Agent);
