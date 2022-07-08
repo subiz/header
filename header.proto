@@ -1322,7 +1322,8 @@ message CallInfo {
 	string initial_by_phone_device = 11;
 	bool is_missed = 12;
 
-	string recording_url = 13;
+	// string recording_url = 13;
+
 	bool enable_recording = 14;
 	string driver = 15; // derived from integration.call_center_driver
 
@@ -1336,6 +1337,8 @@ message CallInfo {
 	// accepts: active, ended, dialing
 	string status = 20;
 	string answered_device = 21;
+
+	File recorded_audio = 22;
 }
 
 message Rating {
@@ -3303,13 +3306,18 @@ message File {
 	int64 last_access_at = 13;
 	string bucket = 14;
 
+	// for audio file only
 	repeated float audio_waveform = 15;
 
+	// for video and audio
 	int64 duration = 16; // sec
+
+	// for image file
 	int64 width = 17;
 	int64 height = 18;
-
 	string thumbnail_url = 19;
+	int64 thumbnail_width = 20;
+	int64 thumnail_height = 21;
 }
 
 message BotTerminated {
