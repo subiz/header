@@ -3274,6 +3274,8 @@ message FileHeader {
 	string full_url = 21;
 	string mime_type = 22;
 	int64 downloaded = 23;
+
+	string bucket = 24;
 }
 
 message PresignResult {
@@ -3317,7 +3319,7 @@ message File {
 	int64 height = 18;
 	string thumbnail_url = 19;
 	int64 thumbnail_width = 20;
-	int64 thumnail_height = 21;
+	int64 thumbnail_height = 21;
 }
 
 message BotTerminated {
