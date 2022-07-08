@@ -5410,7 +5410,7 @@ message AgentGroup {
 	int64 updated = 16;
 	string updated_by = 17;
 
-	string logo = 18;
+	string logo_url = 18;
 }
 
 message DocIndexRequest {
