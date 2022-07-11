@@ -3277,6 +3277,7 @@ message FileHeader {
 	int64 downloaded = 23;
 
 	string bucket = 24;
+	int64 ttl = 25;
 }
 
 message PresignResult {
@@ -3321,6 +3322,9 @@ message File {
 	string thumbnail_url = 19;
 	int64 thumbnail_width = 20;
 	int64 thumbnail_height = 21;
+
+	int64 ttl = 22; // created + 3 months
+	int64 deleted = 23;
 }
 
 message BotTerminated {
