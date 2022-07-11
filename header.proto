@@ -1170,6 +1170,7 @@ message ConversationMember {
 	int64 seen_at = 20;
 	int64 received_at = 21;
 	int64 last_sent = 23; // timestamp
+	int64 call_answered = 24;
 
 	bool is_muted = 27;
 	bool off_notification = 28;
@@ -5412,8 +5413,8 @@ message AgentGroup {
 	repeated string agent_ids = 10;
 
 	bool ring_most_recent_agent_first = 12;
-	bool ring_most_idle_first = 13;
-	bool ring_randomly = 14;
+
+	string ring_order = 14; // ordered, randomly, most_idle_first
 
 	repeated string receive_incomming_calls = 15; // agent that must handle incomming calls
 
