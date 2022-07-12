@@ -5641,7 +5641,8 @@ message TTSVoiceSelection {
 	string language_code = 3;
 	int32 ssml_gender = 4;
 	string name = 5;
-	string file_mp3_url = 6;
+	File file = 8;
+	string file_mp3_url = 6; // derived
 
 	string background_music = 7; // calm, fresh, soothing, optimistic, happy, inspire
 }
