@@ -137,7 +137,7 @@ message PhoneDevice {
 	string name = 12;
 	string description = 13;
 
-	string status = 14; // unknown, not_inuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
+	string status = 14; // unknown, notinuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold
 	int64 last_status_updated = 15;
 
 	string driver = 16; // subiz stringee
@@ -1747,6 +1747,8 @@ message AssignRequest {
 
 	string bot_id = 11;
 	string action_id = 12;
+
+	repeated string fallback_agents = 13;
 }
 
 message EndchatConnectorSetting {
@@ -5581,6 +5583,7 @@ message CallDriverRequest {
 	string request_id = 5;
 
 	repeated string devices = 6;
+
 	repeated int64 delay_secs = 7;
 	repeated int64 ring_secs = 8;
 
