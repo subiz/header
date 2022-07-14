@@ -1323,8 +1323,6 @@ message CallInfo {
 	string initial_by_phone_device = 11;
 	bool is_missed = 12;
 
-	// string recording_url = 13;
-
 	bool enable_recording = 14;
 	string driver = 15; // derived from integration.call_center_driver
 

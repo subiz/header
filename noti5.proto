@@ -15,6 +15,7 @@ message Subscription {
 	optional int32 delay = 10;
 	optional bool private_message = 11;
 	optional string zalo_oa_followed = 12;
+	optional string lead_created = 13;
 }
 
 message Setting {
