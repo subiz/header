@@ -82,15 +82,15 @@ type Subscription struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	NewMessage            *bool   `protobuf:"varint,3,opt,name=new_message,json=newMessage" json:"new_message,omitempty"`
-	UserCreated           *bool   `protobuf:"varint,6,opt,name=user_created,json=userCreated" json:"user_created,omitempty"`
-	UserReturned          *bool   `protobuf:"varint,7,opt,name=user_returned,json=userReturned" json:"user_returned,omitempty"`
-	CampaignUserConverted *bool   `protobuf:"varint,8,opt,name=campaign_user_converted,json=campaignUserConverted" json:"campaign_user_converted,omitempty"`
-	UserOpenedEmail       *bool   `protobuf:"varint,9,opt,name=user_opened_email,json=userOpenedEmail" json:"user_opened_email,omitempty"`
-	Delay                 *int32  `protobuf:"varint,10,opt,name=delay" json:"delay,omitempty"`
-	PrivateMessage        *bool   `protobuf:"varint,11,opt,name=private_message,json=privateMessage" json:"private_message,omitempty"`
-	ZaloOaFollowed        *string `protobuf:"bytes,12,opt,name=zalo_oa_followed,json=zaloOaFollowed" json:"zalo_oa_followed,omitempty"`
-	LeadCreated           *string `protobuf:"bytes,13,opt,name=lead_created,json=leadCreated" json:"lead_created,omitempty"`
+	NewMessage            *bool  `protobuf:"varint,3,opt,name=new_message,json=newMessage" json:"new_message,omitempty"`
+	UserCreated           *bool  `protobuf:"varint,6,opt,name=user_created,json=userCreated" json:"user_created,omitempty"`
+	UserReturned          *bool  `protobuf:"varint,7,opt,name=user_returned,json=userReturned" json:"user_returned,omitempty"`
+	CampaignUserConverted *bool  `protobuf:"varint,8,opt,name=campaign_user_converted,json=campaignUserConverted" json:"campaign_user_converted,omitempty"`
+	UserOpenedEmail       *bool  `protobuf:"varint,9,opt,name=user_opened_email,json=userOpenedEmail" json:"user_opened_email,omitempty"`
+	Delay                 *int32 `protobuf:"varint,10,opt,name=delay" json:"delay,omitempty"`
+	PrivateMessage        *bool  `protobuf:"varint,11,opt,name=private_message,json=privateMessage" json:"private_message,omitempty"`
+	ZaloOaFollowed        *bool  `protobuf:"varint,12,opt,name=zalo_oa_followed,json=zaloOaFollowed" json:"zalo_oa_followed,omitempty"`
+	LeadCreated           *bool  `protobuf:"varint,13,opt,name=lead_created,json=leadCreated" json:"lead_created,omitempty"`
 }
 
 func (x *Subscription) Reset() {
@@ -174,18 +174,18 @@ func (x *Subscription) GetPrivateMessage() bool {
 	return false
 }
 
-func (x *Subscription) GetZaloOaFollowed() string {
+func (x *Subscription) GetZaloOaFollowed() bool {
 	if x != nil && x.ZaloOaFollowed != nil {
 		return *x.ZaloOaFollowed
 	}
-	return ""
+	return false
 }
 
-func (x *Subscription) GetLeadCreated() string {
+func (x *Subscription) GetLeadCreated() bool {
 	if x != nil && x.LeadCreated != nil {
 		return *x.LeadCreated
 	}
-	return ""
+	return false
 }
 
 type Setting struct {
@@ -513,9 +513,9 @@ var file_noti5_proto_rawDesc = []byte{
 	0x65, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x08, 0x52,
 	0x0e, 0x70, 0x72, 0x69, 0x76, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
 	0x28, 0x0a, 0x10, 0x7a, 0x61, 0x6c, 0x6f, 0x5f, 0x6f, 0x61, 0x5f, 0x66, 0x6f, 0x6c, 0x6c, 0x6f,
-	0x77, 0x65, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x7a, 0x61, 0x6c, 0x6f, 0x4f,
+	0x77, 0x65, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0e, 0x7a, 0x61, 0x6c, 0x6f, 0x4f,
 	0x61, 0x46, 0x6f, 0x6c, 0x6c, 0x6f, 0x77, 0x65, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x6c, 0x65, 0x61,
-	0x64, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x64, 0x5f, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x08, 0x52,
 	0x0b, 0x6c, 0x65, 0x61, 0x64, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x22, 0x97, 0x03, 0x0a,
 	0x07, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43,
