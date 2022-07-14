@@ -213,10 +213,11 @@ message CallSetting {
 message CallRoutingAction {
 	string key = 3; // 0, 1, 2, 3 ..., *
 
-	string action = 5; // fallthrough, repeat, forward, ring, hangup
+	string action = 5; // fallthrough, repeat, forward, ring_group, ring_agent, hangup
 	string forward_to = 10;
 
 	string ring_group = 9;
+	string ring_agent = 12;
 
 	GreetingAudio audio_message = 11;
 }
