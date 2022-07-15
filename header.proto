@@ -243,6 +243,7 @@ message User {
 	string channel = 54;
 
 	Event latest_content_view = 55; // readonly
+	Event start_content_view = 56; // readonly
 }
 
 // lookup contact point to user_id
