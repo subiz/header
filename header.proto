@@ -992,6 +992,7 @@ message StartRequest {
 	// call
 	string direction = 7;
 	string device_id = 8; // require when direction = outgoing
+	bool enable_recording = 9;
 }
 
 message PresencesRequest {

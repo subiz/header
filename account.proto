@@ -24,7 +24,9 @@ message DashboardAgent {
 	optional string price_function = 22;
 	repeated string user_info_fields = 23;
 
-	optional int64 order_feature_requested = 24; // 0, -1: allow to use, xyz: requestd
+	optional int64 order_feature_requested = 24; // 0, -1: allow to use, xyz: requested
+	optional string last_call_device = 25;
+	optional string last_call_number = 26;
 }
 
 message Agent {
