@@ -195,6 +195,8 @@ enum RealtimeType {
 
 	greeting_audio_updated = 203;
 	lead_created = 204;
+
+	call_rang = 205; // call_info
 }
 
 message TextTransform {

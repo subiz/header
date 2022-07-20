@@ -1341,6 +1341,8 @@ message CallInfo {
 	string answered_device = 21;
 
 	File recorded_audio = 22;
+
+	string rang_device = 23;
 }
 
 message Rating {
@@ -5429,6 +5431,8 @@ message AgentGroup {
 	string updated_by = 17;
 
 	string logo_url = 18;
+
+	repeated string supervisors = 19;
 }
 
 message DocIndexRequest {
