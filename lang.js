@@ -219,7 +219,7 @@ import "strings"
 // GetI18n returns the value by its locale
 func GetI18n(str *I18NString, locale, fallback string) string {
 	if str == nil {
-		return ""
+		return fallback
 	}
 `;
 
@@ -261,7 +261,7 @@ var s = lo
 
 localem += "}\n";
 gocode +=
-  `	return ""
+  `	return fallback
 }` + localem + curm;
 gocodeallstring += `	return out
 }`;
