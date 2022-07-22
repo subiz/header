@@ -121,6 +121,7 @@ message Project {
 	int64 last_called_success = 11;
 	int64 last_hook = 13;
 	int64 last_refresh_token_at = 14;
+	string hook_secret = 15;
 }
 
 message CalloutRequest {
