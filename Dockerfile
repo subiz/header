@@ -14,9 +14,8 @@ RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
 RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
-# install protobuf v3.11.2
+# install protobuf v21.3
 RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v21.3/protoc-21.3-linux-x86_64.zip -O protoc.zip
-# RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v3.17.2/protoc-3.17.2-linux-x86_64.zip -O protoc.zip
 RUN unzip protoc.zip
 
 # install protoc gengo

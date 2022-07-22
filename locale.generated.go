@@ -6,7 +6,7 @@ import "strings"
 // GetI18n returns the value by its locale
 func GetI18n(str *I18NString, locale, fallback string) string {
 	if str == nil {
-		return ""
+		return fallback
 	}
 	if locale == "af-NA" {
 		if str.Af_NA == "" && fallback != locale && fallback != "" {
@@ -918,7 +918,7 @@ func GetI18n(str *I18NString, locale, fallback string) string {
 		return str.Zu_ZA
 	}
 
-	return ""
+	return fallback
 }
 var LocaleM = map[string]bool{
 	"af-NA": true,
