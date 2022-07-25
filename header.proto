@@ -5609,6 +5609,7 @@ message CallDriverRequest {
 	PhoneDevice phone_device = 18; // register-device || unregister-device
 
 	string caller_display_name = 20;
+	bool is_internal_call = 21;
 }
 
 message CallDriverResponse {

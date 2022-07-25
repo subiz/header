@@ -54,16 +54,6 @@ attribute?
 }
 ```
 
-
-Dial(Technology/Reosurce&Technology/Resource2, timeout, option, url)
-
-
-// simultaneously with timeout
-Dial(PJSIP/SOFTPHONE_B&PJSIP/SOFTPHONE_A, 10)
-DIALSTATUS
-
-
-
 ### Lead source
 
 Bot
