@@ -27,6 +27,8 @@ message DashboardAgent {
 	optional int64 order_feature_requested = 24; // 0, -1: allow to use, xyz: requested
 	optional string last_call_device = 25;
 	optional string last_call_number = 26;
+
+	optional int64 mute_call_until = 27; // ms
 }
 
 message Agent {
