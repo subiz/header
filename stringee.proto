@@ -37,6 +37,12 @@ message Event {
 	string agent_status = 18;
 	string toNumber = 19;
 	int64 start_time = 20;
+
+	// record.eventUrl: project_id, call_id, type, toNumber, start_time
+	string recording_url = 25;
+	bool recordMessage = 22;
+	string fromNumber = 23;
+	int64 end_time = 24;
 }
 
 message Caller {
