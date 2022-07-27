@@ -727,6 +727,8 @@ message CallMetricsRequest {
 	repeated string phones = 6;
 	string direction = 7;
 	repeated string tags = 8;
+	account.BusinessHours business_hours = 11;
+	account.BusinessHours not_business_hours = 12;
 	int32 tz = 9;
 	string dim = 10;
 }
