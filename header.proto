@@ -699,6 +699,37 @@ message AgentMetricsRequest {
 	string dim = 11;
 }
 
+message CallMetric {
+	string account_id = 2;
+	int64 created_hour = 3;
+	string date = 4; // derived
+	string direction = 5;
+	string phone = 6;
+	string agent_id = 7;
+	int64 tag_bits = 8; // only system
+	string tag_strings = 9; // only system
+	repeated string tags = 10;
+	string tag = 11; // derived
+	int64 call_count = 12;
+	int64 missed_call_count = 13;
+}
+
+message CallMetrics {
+	repeated CallMetric metrics = 2;
+}
+
+message CallMetricsRequest {
+	string account_id = 2;
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	repeated string agent_ids = 5;
+	repeated string phones = 6;
+	string direction = 7;
+	repeated string tags = 8;
+	int32 tz = 9;
+	string dim = 10;
+}
+
 message SourceMetric {
 	string account_id = 2;
 	string source = 3; // direct, referring, organic,social, advertising
