@@ -712,6 +712,7 @@ message CallMetric {
 	string tag = 11; // derived
 	int64 call_count = 12;
 	int64 missed_call_count = 13;
+	int64 call_duration_sum = 14;
 }
 
 message CallMetrics {
