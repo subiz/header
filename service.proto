@@ -495,6 +495,7 @@ service Holap {
 	rpc UpdateOrder(header.Order) returns (Empty);
 	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders);
 	rpc ReportCall(header.CallMetricsRequest) returns (header.CallMetrics);
+	rpc ListCallIds(header.CallMetricsRequest) returns (header.Conversations);
 }
 
 // proder services
