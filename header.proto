@@ -206,6 +206,8 @@ message CallSetting {
 
 	bool enable_recording = 22;
 
+	repeated string miss_call_handlers = 23; // agent ids
+
 	int64 updated = 30;
 	string updated_by = 31;
 }
