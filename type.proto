@@ -197,6 +197,8 @@ enum RealtimeType {
 	lead_created = 204;
 
 	call_rang = 205; // call_info
+
+	message_referral = 206; // message
 }
 
 message TextTransform {

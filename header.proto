@@ -1440,6 +1440,25 @@ message Message {
 	repeated string tos = 31; // to user_id
 
 	bool is_internal = 32;
+
+	MessageReferral referral = 33; // facebook
+}
+
+message MessageReferral {
+	string ref = 2;
+	string source = 3; // SHORTLINK, ADS
+	string type = 4; // OPEN_THREAD
+	AdsContextData ads_context_data = 5;
+	string ad_id = 6;
+	string referer_uri = 7;
+}
+
+message AdsContextData {
+	string photo_url = 5;
+	string post_id = 6;
+	string ad_title = 7;
+	string video_url = 8;
+	string product_id = 9;
 }
 
 message InstagramStory {
