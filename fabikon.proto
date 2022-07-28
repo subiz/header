@@ -128,6 +128,8 @@ message AdsContextData {
 	optional string photo_url = 5;
 	optional string post_id = 6;
 	optional string ad_title = 7;
+	optional string video_url = 8;
+	optional string product_id = 9;
 }
 
 message FbReferral {
@@ -136,6 +138,7 @@ message FbReferral {
 	optional string type = 4; // OPEN_THREAD
 	optional AdsContextData ads_context_data = 5;
 	optional string ad_id = 6;
+	optional string referer_uri = 7;
 }
 
 message FbMessage {
