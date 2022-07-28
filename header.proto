@@ -246,6 +246,7 @@ message User {
 
 	Event latest_content_view = 55; // readonly
 	Event start_content_view = 56; // readonly
+	Event first_content_view = 57; // readonly
 }
 
 // lookup contact point to user_id
