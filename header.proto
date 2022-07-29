@@ -736,7 +736,6 @@ message CallMetricsRequest {
 	string dim = 10;
 
 	int64 call_duration_sum_gt = 15;
-	bool is_missed = 16;
 	string anchor = 13;
 	int32 limit = 14;
 }
