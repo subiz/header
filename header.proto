@@ -1340,7 +1340,7 @@ message Conversation {
 	bool is_private = 51;
 
 	string avatar_url = 52;
-	int64 last_modified = 53;
+	// int64 last_modified = 53;
 
 	bool is_returned = 54; // for report new vs. old
 
@@ -1781,7 +1781,7 @@ message Integration {
 	string username = 19;
 	string linked_page_id = 20;
 
-	bool chaining = 21; // use chain instead of conversation
+	// bool chaining = 21; // use chain instead of conversation
 	string call_center_driver = 43; // empty => subiz, stringee
 	string sip_provider = 44; // itel, fpt, vnpt; for call only
 }

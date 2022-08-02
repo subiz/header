@@ -6,12 +6,9 @@ option go_package = "github.com/subiz/header/common";
 
 message Context {
 	Credential credential = 6;
-
 	Device by_device = 10;
-
 	// for kafka
 	string sub_topic = 11;
-
 	// list of used fields in the object
 	repeated string fields = 21;
 }
