@@ -253,4 +253,7 @@ enum E {
 	unsupported_file_type = 197;
 
 	invalid_sip_provider = 198; // fpt, itel
+
+	too_many_agent = 199;
+	duplicated_extension = 200;
 }

@@ -149,6 +149,8 @@ service UserMgr {
 	rpc AddUserLabel(UserRequest) returns (Empty);
 	rpc RemoveUserLabel(UserRequest) returns (Empty);
 
+	rpc AddLeadConversionBy(UserRequest) returns (Empty);
+
 	rpc CreateShippingAddress(Address) returns (Address);
 	rpc UpdateShippingAddress(Address) returns (Address);
 	rpc RemoveShippingAddress(Address) returns (Empty);

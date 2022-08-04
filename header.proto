@@ -247,6 +247,8 @@ message User {
 	Event latest_content_view = 55; // readonly
 	Event start_content_view = 56; // readonly
 	Event first_content_view = 57; // readonly
+
+	repeated string lead_conversion_bys = 58; // for quick search
 }
 
 // lookup contact point to user_id
@@ -439,6 +441,10 @@ message UserRequest {
 	string account_id = 2;
 	string user_id = 3;
 	string object_id = 4;
+
+	string channel = 5;
+	string channel_source = 6;
+	string profile_id = 7;
 }
 
 message ListNotesRequest {
@@ -1784,6 +1790,9 @@ message Integration {
 	// bool chaining = 21; // use chain instead of conversation
 	string call_center_driver = 43; // empty => subiz, stringee
 	string sip_provider = 44; // itel, fpt, vnpt; for call only
+
+	int64 last_outbound_called = 45;
+	int64 last_inbound_called = 46;
 }
 
 message TagRequest {
@@ -5287,6 +5296,8 @@ message CompactedUser {
 	string profile_id = 52;
 	string profile_channel_source = 53;
 	string profile_channel = 54;
+
+	repeated string lead_conversion_bys = 58; // for quick search
 }
 
 message CompactedUsers {
