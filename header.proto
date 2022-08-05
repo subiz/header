@@ -497,6 +497,8 @@ message Location {
 	float latitude = 9;             // filled
 	float longitude = 10;            // filled
 	string postal_code = 11;         // filled
+
+	string ip = 12;
 }
 
 message Locations {
@@ -2369,6 +2371,7 @@ message WidgetUserSetting {
 
 	repeated Address addresses = 23;
 	repeated PaymentMethod payment_methods = 24;
+	Location location = 25;
 }
 
 message AccountWeb {
@@ -2383,6 +2386,7 @@ message AccountWeb {
 	int64 last_modified = 22;
 
 	repeated PaymentMethod payment_methods = 24;
+	Location location = 25;
 }
 
 message SocialLink {
