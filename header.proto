@@ -210,6 +210,8 @@ message CallSetting {
 
 	int64 updated = 30;
 	string updated_by = 31;
+
+	bool allow_direct_extension_calling = 32;
 }
 
 message CallRoutingAction {
@@ -1386,9 +1388,7 @@ message CallInfo {
 	// accepts: active, ended, dialing
 	string status = 20;
 	string answered_device = 21;
-
 	File recorded_audio = 22;
-
 	string rang_device = 23;
 }
 
@@ -5681,6 +5681,8 @@ message CallDriverRequest {
 
 	string caller_display_name = 20;
 	bool is_internal_call = 21;
+
+	int64 direct_extension_duration_sec = 22;
 }
 
 message CallDriverResponse {
