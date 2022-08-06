@@ -1361,7 +1361,7 @@ message Conversation {
 
 	string traffic_source = 60;  // direct, referring, organic, social, advertising
 	string traffic_ads_network = 61; // google_adwords
-	SessionCampaign traffic_campaign = 62;
+	common.SessionCampaign traffic_utm = 62;
 	string traffic_referrer = 63;
 }
 
