@@ -19,7 +19,7 @@ message Device {
 	string screen_resolution = 5;
 	string timezone = 6; // hash
 	string language = 7;
-	string referrer = 8; //hash
+	string referrer = 8; // hash, referer of api.subiz.com.vn (the current page that user is viewing)
 	string type = 9; // 0 - 1 - 2 -3
 	enum DeviceType {
 		unknown = 0;
@@ -29,7 +29,12 @@ message Device {
 	}
 
 	string platform = 10;
-	string source_referrer = 11; // referrer of referrer
+
+	// referrer of referrer
+	// for example: user go to google.com then click a link to company.com, a request
+	// will be sent to api.subiz.com.vn
+	// referer will be 'company.com' and source_referer will be 'google.com'
+	string source_referrer = 11;
 	repeated string ga_tracking_ids = 12;
 	string page_url = 13;
 	string page_title = 14;
@@ -49,21 +54,11 @@ message Device {
 
 	string browser_name = 32;        // filled
 
-	enum AdsNetwork {
-		google_adwords = 0;
-	}
-	string ads_network = 33;
-
-	enum Source {
-		direct = 0;
-		referring = 1;
-		organic = 2;
-		social = 3;
-		advertising = 4;
-	}
-	string source = 34;
+	string ads_network = 33; // google_adwords
+	string source = 34;  // direct, referring, organic, social, advertising
 
 	repeated SessionCampaign campaigns = 35;
+	SessionCampaign utm = 36;
 }
 
 message By {

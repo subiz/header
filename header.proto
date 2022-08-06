@@ -247,8 +247,8 @@ message User {
 	string channel = 54;
 
 	Event latest_content_view = 55; // readonly
-	Event start_content_view = 56; // readonly
-	Event first_content_view = 57; // readonly
+	Event start_content_view = 56; // readonly latest content view that change the source
+	Event first_content_view = 57; // readonly first content view
 
 	repeated string lead_conversion_bys = 58; // for quick search
 }
@@ -820,7 +820,7 @@ message Event {
 	int64 updated = 10;
 	string type = 9;
 	repeated string topics = 11; // TODO: remove
-	string session_id = 12;
+	string session_id = 12; // TODO: remove
 	common.By by = 50;
 	Touchpoint touchpoint = 52;
 	message Data {
@@ -1358,6 +1358,11 @@ message Conversation {
 
 	// only use to communicate with call driver
 	CallDriverRequest call_request = 56;
+
+	string traffic_source = 60;  // direct, referring, organic, social, advertising
+	string traffic_ads_network = 61; // google_adwords
+	SessionCampaign traffic_campaign = 62;
+	string traffic_referrer = 63;
 }
 
 message CallInfo {
@@ -2940,7 +2945,6 @@ message Impression {
 	string impression_token = 11;  // for request submit only
 
 	string web_plugin_id = 12;
-	string session_id = 13;
 }
 
 message ConversionRequest {
@@ -2982,7 +2986,6 @@ message Conversion {
 	string web_plugin_id = 16;
 
 	User user = 17; // for webhook only
-	string session_id = 18;
 }
 
 message UserCampaignStatus {
@@ -3657,18 +3660,6 @@ message UserOrderConfirmation {
 	string status = 6; // confirmed || cancelled
 
 	string conversation_id = 7;
-}
-
-// TODO: remove after remove old dashboard
-message SessionCookie {
-	string refresh_token = 3;
-	int64 expired_at = 4;
-	int64 issued_at = 5;
-	string type = 6;
-	string email = 7;
-	bool remember_me = 8;
-	string account_id = 9;
-	string agent_id = 10;
 }
 
 message Webpage {
@@ -4723,7 +4714,7 @@ message Order {
 	repeated string related_conversations = 47;
 
 	string salesperson = 48;
-	User user = 50; // keep session and attribute
+	User user = 50;
 
 	string adjustment_description = 54;
 	float adjustment = 55;
@@ -4977,7 +4968,6 @@ message Product {
 
 	string currency = 65;
 	repeated MessageButton buttons = 66; // for message attachment
-
 
 	int64 view_duration_sec = 67; // for event content_view only
 }
@@ -5301,6 +5291,9 @@ message CompactedUser {
 	string profile_channel_source = 53;
 	string profile_channel = 54;
 
+	Event latest_content_view = 55; // readonly
+	Event start_content_view = 56; // readonly latest content view that change the source
+	Event first_content_view = 57; // readonly first content view
 	repeated string lead_conversion_bys = 58; // for quick search
 }
 
