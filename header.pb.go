@@ -3192,7 +3192,7 @@ type PhoneDevice struct {
 	// device type, could be: hard_phone, soft_phone
 	// Hard phones are physical devices, wirely connected to the LAN network
 	// Soft phones are simulation devices (software), running like an web app or desktop app
-	Type                  string `protobuf:"bytes,11,opt,name=type,proto3" json:"type,omitempty"`
+	Type                  string `protobuf:"bytes,11,opt,name=type,proto3" json:"type,omitempty"` // webphone, appphone
 	Name                  string `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
 	Description           string `protobuf:"bytes,13,opt,name=description,proto3" json:"description,omitempty"`
 	Status                string `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"` // unknown, notinuse, inuse, busy, invalid, unavailable, ringing, ringinuse, onhold

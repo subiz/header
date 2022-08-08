@@ -132,7 +132,7 @@ message PhoneDevice {
 	// device type, could be: hard_phone, soft_phone
 	// Hard phones are physical devices, wirely connected to the LAN network
 	// Soft phones are simulation devices (software), running like an web app or desktop app
-	string type = 11;
+	string type = 11; // webphone, appphone
 
 	string name = 12;
 	string description = 13;

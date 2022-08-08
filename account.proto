@@ -29,6 +29,8 @@ message DashboardAgent {
 	optional string last_call_number = 26;
 
 	optional int64 mute_call_until = 27; // ms
+	optional int64 webphone_disabled = 28;
+	optional int64 appphone_disabled = 29;
 }
 
 message Agent {
