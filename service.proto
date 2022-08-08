@@ -252,10 +252,6 @@ service ConversationMgr {
 	rpc UpdatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
 	rpc DeletePhoneDevice(header.Id) returns (Empty);
 	rpc ReadPhoneDevice(header.Id) returns (header.PhoneDevice);
-	rpc RingPhoneDevice(header.Id) returns (header.PhoneDevice);
-
-	rpc RefreshPhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
-	rpc ListMyPhoneDevices(header.Id) returns (header.PhoneDevices);
 
 	rpc TestNumber(header.Id) returns (header.Integration);
 
