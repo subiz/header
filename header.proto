@@ -1044,6 +1044,7 @@ message StartRequest {
 	string direction = 7;
 	string device_id = 8; // require when direction = outgoing
 	bool enable_recording = 9;
+	string sip_provider = 40;
 }
 
 message PresencesRequest {

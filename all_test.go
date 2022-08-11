@@ -18,7 +18,6 @@ func TestAssignObject(t *testing.T) {
 		t.Error("should be eq")
 	}
 
-
 	AssignObject(dst, nil, []string{"name"})
 	src = nil
 	AssignObject(dst, src, []string{"name"})
@@ -73,4 +72,9 @@ func TestAllLang(t *testing.T) {
 
 	a := GetAllI18ns(str)
 	fmt.Println(a)
+}
+
+func TestPerm(t *testing.T) {
+	fmt.Println("D", checkAccess([]string{"all"}, "phone_device:w"))
+	fmt.Println("A", checkAccess([]string{"view_others", "agent", "account_setting"}, "phone_device:w"))
 }
