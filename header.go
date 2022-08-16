@@ -451,3 +451,38 @@ func AssignObject(dst, src interface{}, fields []string) {
 		dstValueOf.Field(i).Set(srcValueOf.Field(i))
 	}
 }
+
+// NormPhone converts an user input phone number to
+// standalized phone number
+// (84)35 9423 423 => 0359423423
+//
+// A good phone number only contain numbers
+//   if the number starts with 84 => replace to 0 since we mostly serve
+//   Vietnamese customers
+
+func NormPhone(phone string) string {
+	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
+		return r == ',' || r == ';'
+	})
+
+	phones := []string{}
+	for _, phone := range phonesplit {
+		arr := make([]rune, 0)
+		for _, r := range phone {
+			if r >= '0' && r <= '9' {
+				arr = append(arr, r)
+			}
+		}
+		number := string(arr)
+		if number != "" {
+			phones = append(phones, number)
+		}
+	}
+	// remove 84
+	for i, phone := range phones {
+		if strings.HasPrefix(phone, "84") {
+			phones[i] = "0" + phone[2:]
+		}
+	}
+	return strings.Join(phones, ",")
+}

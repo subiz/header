@@ -9,6 +9,27 @@ import (
 	"testing"
 )
 
+func TestNormPhone(t *testing.T) {
+	testcases := []struct {
+		in  string
+		out string
+	}{
+		{"(84)35 9423 423", "0359423423"},
+		{"(+84)35.9423 423", "0359423423"},
+		{"(84)35 9423 423,+843630985", "0359423423,03630985"},
+		{",,,", ""},
+		{",,123123123,", "123123123"},
+		{",,,", ""},
+		{",;84123123123,", "0123123123"},
+	}
+
+	for i, tc := range testcases {
+		if tc.out != NormPhone(tc.in) {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, NormPhone(tc.in))
+		}
+	}
+}
+
 func TestAssignObject(t *testing.T) {
 	dst := &PhoneDevice{Id: "1", Name: "dst", Created: 1}
 	src := &PhoneDevice{Id: "2", Name: "src", Created: 2}
