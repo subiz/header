@@ -70,7 +70,7 @@ message Agent {
 
 	optional string state = 22; //Agent state
 	optional int64 password_changed = 23;
-	optional int64 seen = 24;
+	// optional int64 seen = 24;
 	optional int64 modified = 25;
 
 	optional Account account = 28;

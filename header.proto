@@ -251,6 +251,7 @@ message User {
 	Event first_content_view = 57; // readonly first content view
 
 	repeated string lead_conversion_bys = 58; // for quick search
+	repeated User secondaries = 59; // read-only
 }
 
 // lookup contact point to user_id

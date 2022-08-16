@@ -121,7 +121,7 @@ service AccountMgr {
 
 // user services
 service UserMgr {
-	rpc MergeUser2(header.Users) returns (header.User);
+	rpc MergeUser(header.Users) returns (header.User);
 
 	rpc CreateUser(header.User) returns (Id);
 	rpc CreateUserFromWeb(header.User) returns (Id);
