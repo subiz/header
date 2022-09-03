@@ -197,7 +197,7 @@ service AttributeMgr {
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
-	// rpc UpdateConversationState(Conversation) returns (Conversation);
+
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
 	rpc EndConversation(Id) returns (header.Conversation);
 	rpc GetConversation(Id) returns (header.Conversation);
@@ -267,6 +267,10 @@ service ConversationMgr {
 
 	// try to make an outbound call from subiz
 	rpc OriginateCall(StartRequest) returns (Conversation);
+
+	// for driver
+	rpc PingAppPhone(header.AppPhonePingRequest) returns (Empty);
+	rpc ReplyRingRequest(header.AppPhonePingRequest) returns (Empty); // accept or decline
 }
 
 service TemplateMgr {
