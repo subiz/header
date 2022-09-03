@@ -269,8 +269,8 @@ service ConversationMgr {
 	rpc OriginateCall(StartRequest) returns (Conversation);
 
 	// for driver
-	rpc PingAppPhone(header.AppPhonePingRequest) returns (Empty);
-	rpc ReplyRingRequest(header.AppPhonePingRequest) returns (Empty); // accept or decline
+	rpc PingAppPhone(Id) returns (Empty);
+	rpc ReplyRingRequest(Id) returns (Empty); // accept or decline
 }
 
 service TemplateMgr {

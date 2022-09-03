@@ -3933,6 +3933,8 @@ message PushNoti {
 	string is_private = 14; // conversation is private
 
 	repeated common.By tos = 15;
+
+	string request_id = 17;
 }
 
 message InvoiceTemplate {
@@ -5756,12 +5758,4 @@ message BusinessHours {
 	repeated BusinessHour extra_hours = 6;
 
 	repeated BusinessHour holidays = 7;
-}
-
-message AppPhonePingRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string request_id = 3;
-	string conversation_id = 4;
-	string phone_device_id = 5;
 }
