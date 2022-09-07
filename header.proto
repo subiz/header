@@ -154,7 +154,7 @@ message PhoneDevice {
 
 	string default_outbound_number = 34;
 
-	string device_id = 35;
+	string device_id = 35; //
 	string device_build_id = 36;
 	string device_os = 37;
 	string device_name = 38;
@@ -1231,6 +1231,7 @@ message ConversationMember {
 	int64 received_at = 21;
 	int64 last_sent = 23; // timestamp
 	int64 call_answered = 24;
+	int64 call_rang = 25;
 
 	bool is_muted = 27;
 	bool off_notification = 28;
@@ -1402,7 +1403,10 @@ message CallInfo {
 	string status = 20;
 	string answered_device = 21;
 	File recorded_audio = 22;
-	string rang_device = 23;
+
+	string device_id = 23;
+	string member_id = 24; // rang agent or answer agent
+	string member_type = 25; // agent, user
 }
 
 message Rating {
@@ -2352,13 +2356,6 @@ message PublishMessage {
 	bytes payload = 4;
 
 	string account_id = 5;
-}
-
-message WidgetUser {
-	common.Context ctx = 1;
-	User user = 4;
-	bool is_online = 20;
-	bool is_in_business_hour = 21;
 }
 
 // widget
