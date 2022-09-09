@@ -5522,6 +5522,7 @@ message DocIndexRequest {
 	bool is_name = 7; // hint for better name search
 	bool is_id = 10; // hint for not indexing using tokenize
 	int64 day = 8; // unix day for doc, used to order more recent document
+	bool is_phone = 11;
 
 	repeated string owners = 9;
 }
