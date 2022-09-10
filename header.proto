@@ -5767,11 +5767,14 @@ message RecentCallRecords {
 }
 
 message RecentCallRecord {
+	string avatar_url = 3;
+	string name = 4;
 	string user_id = 5;
-	string number = 6;
+	string to_number = 6;
 	string from_number = 7;
 	int64 created = 8;
 	int64 grouped = 9;
-	string status = 10;
 	string conversation_id = 11;
+	string direction = 12;
+	bool is_missed = 13;
 }
