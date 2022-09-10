@@ -5690,6 +5690,7 @@ message CallDriverRequest {
 	bool is_internal_call = 21;
 
 	int64 direct_extension_duration_sec = 22;
+	bool is_missed = 23; // tell driver to mark this call as missed (e.g: out of business hour)
 }
 
 message CallDriverResponse {
