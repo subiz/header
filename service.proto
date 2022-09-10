@@ -271,6 +271,8 @@ service ConversationMgr {
 	// for driver
 	rpc PingAppPhone(Id) returns (Empty);
 	rpc ReplyRingRequest(Id) returns (Empty); // accept or decline
+
+	rpc ListMyRecentCalls(Id) returns (RecentCallRecords);
 }
 
 service TemplateMgr {

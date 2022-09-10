@@ -890,6 +890,7 @@ message Event {
 		CallInfo call_info = 92;
 		CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
 		GreetingAudio greeting_audio = 94;
+		RecentCallRecord recent_call_record = 95;
 	}
 
 	Data data = 20;
@@ -5756,4 +5757,21 @@ message BusinessHours {
 	repeated BusinessHour extra_hours = 6;
 
 	repeated BusinessHour holidays = 7;
+}
+
+message RecentCallRecords {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	repeated RecentCallRecord records = 4;
+}
+
+message RecentCallRecord {
+	string user_id = 5;
+	string number = 6;
+	string from_number = 7;
+	int64 created = 8;
+	int64 grouped = 9;
+	string status = 10;
+	string conversation_id = 11;
 }
