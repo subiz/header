@@ -1892,6 +1892,7 @@ message ConversationAutomation {
 	// trigger
 	int64 after_last_sent_ms = 17;
 	repeated string after_last_sent_by_type = 18; // agent, user
+	bool before_conversation_ended = 27;
 
 	repeated BotAction actions = 19;
 
