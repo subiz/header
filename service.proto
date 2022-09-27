@@ -269,7 +269,7 @@ service ConversationMgr {
 	rpc OriginateCall(StartRequest) returns (Conversation);
 
 	// for driver
-	rpc PingAppPhone(Id) returns (Empty);
+	rpc PingAppPhone(CallDriverRequest) returns (Empty);
 	rpc ReplyRingRequest(Id) returns (Empty); // accept or decline
 
 	rpc ListMyRecentCalls(Id) returns (RecentCallRecords);

@@ -3924,7 +3924,7 @@ message PushNoti {
 	string title = 6;
 	string body = 7;
 	string conversation_id = 8;
-	string sender_id = 9;
+	string sender_id = 9; // caller id
 	string sender_type = 10;
 	string icon_url = 11;
 	string last_page_view_url = 12;
@@ -3935,6 +3935,10 @@ message PushNoti {
 
 	string request_id = 17;
 	bool is_voip = 18;
+
+	string caller_number = 19;
+	string caller_name = 20;
+	string caller_avatar_url = 21;
 }
 
 message InvoiceTemplate {
