@@ -200,7 +200,7 @@ enum RealtimeType {
 
 	message_referral = 206; // message
 
-	my_recent_calls_updated = 207; // agent
+	recent_call_updated = 207; // agent
 }
 
 message TextTransform {

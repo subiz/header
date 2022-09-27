@@ -3934,6 +3934,7 @@ message PushNoti {
 	repeated common.By tos = 15;
 
 	string request_id = 17;
+	bool is_voip = 18;
 }
 
 message InvoiceTemplate {
@@ -5779,4 +5780,5 @@ message RecentCallRecord {
 	string conversation_id = 11;
 	string direction = 12;
 	bool is_missed = 13;
+	bool is_internal = 14;
 }
