@@ -3920,7 +3920,7 @@ message PushNoti {
 	string user_id = 4; // to user
 	string device_id = 16; // to device id
 
-	string platform = 5;
+	string platform = 5; // mobile, desktop, ios_voip
 	string title = 6;
 	string body = 7;
 	string conversation_id = 8;
@@ -3932,13 +3932,11 @@ message PushNoti {
 	string is_private = 14; // conversation is private
 
 	repeated common.By tos = 15;
-
 	string request_id = 17;
-	bool is_voip = 18;
-
 	string caller_number = 19;
 	string caller_name = 20;
 	string caller_avatar_url = 21;
+	int64 created = 22;
 }
 
 message InvoiceTemplate {

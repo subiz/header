@@ -270,7 +270,7 @@ service ConversationMgr {
 
 	// for driver
 	rpc PingAppPhone(CallDriverRequest) returns (Empty);
-	rpc ReplyRingRequest(Id) returns (Empty); // accept or decline
+	rpc ReplyRingRequest(CallDriverRequest) returns (Empty); // accept or decline
 
 	rpc ListMyRecentCalls(Id) returns (RecentCallRecords);
 }

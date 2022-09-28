@@ -49,12 +49,12 @@ message Token {
 	optional string user_type = 4;
 	optional string fcm_token = 5;
 	optional string device_id = 6;
-	optional string platform = 7; // desktop, mobile
+	optional string platform = 7; // desktop, mobile, ios_voip
 	enum Platform {
 		desktop = 0;
 		mobile = 1;
+		ios_voip = 2;
 	}
 	optional int64 created = 8;
 	repeated string topics = 9;
-	optional bool is_voip = 10;
 }
