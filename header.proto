@@ -2265,6 +2265,7 @@ message BotrunMetric {
 	string bot_id = 5;
 	int64 created_hour = 6;
 	string date = 7; // derived
+	int64 user_sent_count = 8;
 }
 
 message BotrunMetricsRequest {
