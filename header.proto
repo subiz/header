@@ -2360,6 +2360,7 @@ message PublishMessage {
 	bytes payload = 4;
 
 	string account_id = 5;
+	bool not_urgent = 6;
 }
 
 // widget
