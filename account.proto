@@ -364,6 +364,7 @@ message Presence {
 	optional bool is_focused = 9; // tell where the user is actually seeing the page
 
 	optional string last_seen_convo_id = 10;
+	optional string browser_tab_id = 11; // unique id for each tab
 	optional string viewing_product_id = 12; // presence_update user with product linked
 	optional string viewing_product_source_id = 13;  // presence_update user with product linked
 	optional string viewing_product_sku = 14;  // presence_update user with product linked
