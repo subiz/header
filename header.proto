@@ -891,10 +891,12 @@ message Event {
 		CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
 		GreetingAudio greeting_audio = 94;
 		RecentCallRecord recent_call_record = 95;
+		string ice_candidate = 96;
 	}
 
 	Data data = 20;
 }
+
 
 message EventParams {
 	string type = 2;
@@ -1205,6 +1207,7 @@ message RouteResult {
 	int64 assigned = 7; // ms
 
 	string bot_id = 8; // strategy == bot
+	string debug = 9;
 }
 
 message ConversationMember {
@@ -1243,6 +1246,7 @@ message ConversationMember {
 	string profile_id = 31; // only used if type = user
 	string channel = 32;
 	string channel_source = 33;
+	string invite_reason = 34;
 }
 
 message ListConversationsRequest {

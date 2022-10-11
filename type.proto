@@ -201,6 +201,14 @@ enum RealtimeType {
 	message_referral = 206; // message
 
 	recent_call_updated = 207; // agent
+
+
+	webrtc_candidate_added = 210;
+	call_started = 211;
+	call_ended = 212;
+	call_joined = 213;
+	call_left = 214;
+	call_ringing = 215;
 }
 
 message TextTransform {

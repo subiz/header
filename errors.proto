@@ -256,4 +256,6 @@ enum E {
 
 	too_many_agent = 199;
 	duplicated_extension = 200;
+
+	apple_login_error = 201;
 }
