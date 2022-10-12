@@ -1027,7 +1027,6 @@ message StartRequest {
 
 	User user = 25;
 	string integration_id = 26;
-	string chain_id = 27;
 	string message = 30;
 	repeated ConversationMember members = 31;
 	string group_id = 32;
@@ -1285,12 +1284,6 @@ message ListConversationEventsRequest {
 	bool is_private = 7;
 }
 
-message Chain {
-	string account_id = 2;
-	string id = 3;
-	string conversation_id = 4;
-}
-
 enum ConvoState {
 	// none = 0; // convo
 	unassigned = 0; // convo
@@ -1331,7 +1324,6 @@ message Conversation {
 
 	int64 response_sec = 22;
 
-	string chain_id = 24;
 	RouteResult assigned_to = 30;
 
 	string first_message = 31;
@@ -1445,7 +1437,6 @@ message Message {
 	repeated KV fields = 10;
 
 	string integration_id = 15;
-	string chain_id = 16;
 	string user_id = 19; // new standard, removing chain
 
 	// used for reaction and delivery status, could be ignore
@@ -1809,7 +1800,6 @@ message Integration {
 	string username = 19;
 	string linked_page_id = 20;
 
-	// bool chaining = 21; // use chain instead of conversation
 	string call_center_driver = 43; // empty => subiz, stringee
 	string sip_provider = 44; // itel, fpt, vnpt; for call only
 

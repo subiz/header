@@ -181,7 +181,6 @@ enum E {
 	missing_pong = 123;
 	invalid_pong_type = 124;
 	invalid_event_type = 125;
-	invalid_chain = 126;
 	remover_is_not_agent = 127;
 	user_is_the_last_one_in_conversation = 128;
 	conversation_ended = 129;
