@@ -257,4 +257,8 @@ enum E {
 	duplicated_extension = 200;
 
 	apple_login_error = 201;
+	wrong_shard = 202;
+
+	webrtc_failed = 203;
+	out_of_port = 204;
 }

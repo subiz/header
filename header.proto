@@ -2313,8 +2313,6 @@ message RealtimeToken {
 	string account_id = 2;
 	string connection_id = 4;
 	int64 last_offset = 5;
-	int64 created = 6;
-	int64 expired = 7;
 
 	int64 last_polled = 8;
 	int64 package_size = 9;
