@@ -202,9 +202,8 @@ enum RealtimeType {
 
 	recent_call_updated = 207; // agent
 
-
 	webrtc_candidate_added = 210;
-	call_started = 211;
+	call_invited = 211;
 	call_ended = 212;
 	call_joined = 213;
 	call_left = 214;

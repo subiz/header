@@ -824,7 +824,7 @@ message Event {
 	int64 created = 8;
 	int64 updated = 10;
 	string type = 9;
-	repeated string topics = 11; // TODO: remove
+	// repeated string topics = 11; // TODO: remove
 	string session_id = 12; // TODO: remove
 	common.By by = 50;
 	Touchpoint touchpoint = 52;
@@ -834,10 +834,10 @@ message Event {
 		Message message = 3;
 		Conversation conversation = 4;
 		Product product = 6;
-		Topic topic = 7;
+		// Topic topic = 7; // remove
 		account.Presence presence = 8;
 		User user = 10;
-		UnreadTopic unread_topic = 11; // todo: remove
+		// UnreadTopic unread_topic = 11; // todo: remove
 		Notification notification = 14;
 		AgentGroup agent_group = 18;
 		Note note = 23;
@@ -923,33 +923,6 @@ message UserEvent {
 	User user = 6;
 }
 
-message Topic {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string topic = 3;
-
-	string type = 5;
-	int64 updated = 8;
-	int32 unread = 9; // deprecated by is_read
-	string user_id = 10;
-	string agent_id = 11;
-
-	Event by_event = 14;
-	bool is_muted = 15;
-	bool is_read = 16;
-}
-
-message UnreadTopic { // todo: delete this, unread is just topic_updated with is_read=false
-	common.Context ctx = 1;
-	string topic = 3;
-	string agent_id = 4;
-	string user_id = 5;
-	string type = 6;
-	int64 updated = 8;
-	int32 unread = 9;
-	Event by_event = 10;
-}
-
 // deprecating
 message UserSession {
 	common.Context ctx = 1;
@@ -1026,7 +999,7 @@ message StartRequest {
 	string conversation_id = 14;
 
 	User user = 25;
-	string integration_id = 26;
+	string integration_id = 26; // deprecated, use touchpoint
 	string message = 30;
 	repeated ConversationMember members = 31;
 	string group_id = 32;
@@ -1254,7 +1227,7 @@ message ListConversationsRequest {
 	//	 string state = 4; // empty or unassigned
 	string member_id = 8; // ignore
 	//  string group_by = 9;
-	string integration_id = 10;
+	string integration_id = 10; // deprecated
 	string user_id = 11;
 	int32 limit = 5;
 	string anchor = 6;
@@ -1312,7 +1285,7 @@ message Conversation {
 	string state = 11; // converation state: pending, dialing, active, (routing||unassigned), congestion, ended
 	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
-	Integration integration = 18;
+	Integration integration = 18; // removing
 	int64 actived = 19;
 
 	Message last_message = 20; // remove after update mobile app
@@ -1436,7 +1409,7 @@ message Message {
 	repeated Attachment attachments = 4;
 	repeated KV fields = 10;
 
-	string integration_id = 15;
+	string integration_id = 15; // deprecated, use event touchpoint
 	string user_id = 19; // new standard, removing chain
 
 	// used for reaction and delivery status, could be ignore
