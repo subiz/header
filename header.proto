@@ -125,14 +125,12 @@ message PhoneDevice {
 
 	string host = 5; // host or ip of the phone, auto-fill
 	int64 port = 6;
+	string public_host = 39; // public ip
 
 	// phone calls to (from) this device will be considered being dialed to owner and (by) those agents
 	repeated string bind_to_agents = 10;
 
-	// device type, could be: hard_phone, soft_phone
-	// Hard phones are physical devices, wirely connected to the LAN network
-	// Soft phones are simulation devices (software), running like an web app or desktop app
-	string type = 11; // webphone, appphone
+	string type = 11; // webphone, appphone, webcall
 
 	string name = 12;
 	string description = 13;
@@ -5640,6 +5638,7 @@ message CallDriverRequest {
 	string request_id = 5;
 
 	repeated string devices = 6;
+	repeated string agents = 24;
 
 	repeated int64 delay_secs = 7;
 	repeated int64 ring_secs = 8;

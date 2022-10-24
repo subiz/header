@@ -261,4 +261,10 @@ enum E {
 
 	webrtc_failed = 203;
 	out_of_port = 204;
+
+	call_not_found = 205;
+	bad_webrtc_track = 206;
+	invalid_webrtc_negotiation = 207;
+	bad_webrtc_connection = 208;
+
 }
