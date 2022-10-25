@@ -57,4 +57,5 @@ message Token {
 	}
 	optional int64 created = 8;
 	repeated string topics = 9;
+	optional string access_token = 10;
 }
