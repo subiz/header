@@ -1620,6 +1620,7 @@ message Attachment {
 	Order order = 32;
 
 	File file = 34;
+	string content_id = 35;
 }
 
 message QuickReply {
