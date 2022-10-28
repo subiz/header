@@ -1026,6 +1026,8 @@ message StartRequest {
 	string by_agent_id = 41; // required when device-id = webcall
 	bool enable_recording = 9;
 	string sip_provider = 40;
+
+	string call_id = 42;
 }
 
 message PresencesRequest {
@@ -1358,6 +1360,7 @@ message CallInfo {
 	string direction = 10; // inbound, outbound
 
 	string initial_by_phone_device = 11;
+	string initial_by_agent = 13; // used when use webcall
 	bool is_missed = 12;
 
 	bool enable_recording = 14;
@@ -1378,6 +1381,8 @@ message CallInfo {
 	string device_id = 23;
 	string member_id = 24; // rang agent or answer agent
 	string member_type = 25; // agent, user
+
+	string call_id = 26;
 }
 
 message Rating {
