@@ -158,6 +158,9 @@ message PhoneDevice {
 	string device_name = 38;
 
 	int64 last_connected = 40;
+
+	string private_host = 42;
+	string user_agent = 43;
 }
 
 message CallSettings {
