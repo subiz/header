@@ -562,6 +562,7 @@ service Proder {
 	rpc GHNShippingStatus(header.GHNOrder2) returns (Empty);
 	rpc ShippingFee(header.ShippingInfo) returns (header.ShippingInfo);
 	rpc ShipOrder(header.Id) returns (header.Order);
+	rpc UpdateShippingCode(header.Order) returns (header.Order);
 	rpc CancelShippingOrder(header.Id) returns (header.Order);
 	rpc PrintShippingOrders(header.Ids) returns (header.File);
 
