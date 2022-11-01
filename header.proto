@@ -890,7 +890,7 @@ message Event {
 		PhoneDevice phone_device = 78;
 		CallSetting call_setting = 79;
 		BlockedNumber blocked_number = 91;
-		CallInfo call_info = 92;
+		CallInfo call_info = 92; // call-transfered
 		CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
 		GreetingAudio greeting_audio = 94;
 		RecentCallRecord recent_call_record = 95;
@@ -1029,7 +1029,6 @@ message StartRequest {
 	string by_agent_id = 41; // required when device-id = webcall
 	bool enable_recording = 9;
 	string sip_provider = 40;
-	string transfer_from_agent = 43;
 	string call_id = 42;
 }
 
@@ -1386,8 +1385,6 @@ message CallInfo {
 	string member_type = 25; // agent, user
 
 	string call_id = 26;
-
-	string transfer_from_agent = 27;
 }
 
 message Rating {
@@ -5641,6 +5638,14 @@ message FacebookPageRegister {
 	repeated string page_ids = 7;
 	bool is_instagram = 12;
 	repeated string receive_comments = 13; // page id that receive comment
+}
+
+message CallTransferRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string conversation_id = 4;
+	string to_number = 5;
 }
 
 message CallDriverRequest {
