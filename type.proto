@@ -209,7 +209,7 @@ enum RealtimeType {
 	call_left = 214;
 	call_ringing = 215;
 
-	call_transfered = 216;
+	call_transferred = 216;
 }
 
 message TextTransform {
