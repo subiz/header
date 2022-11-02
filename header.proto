@@ -5647,6 +5647,8 @@ message CallTransferRequest {
 	string conversation_id = 4;
 	string to_number = 5;
 	string from_number = 6;
+
+	bool is_internal = 7;
 }
 
 message CallDriverRequest {
