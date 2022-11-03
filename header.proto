@@ -1794,6 +1794,7 @@ message TagRequest {
 	string account_id = 2;
 	string conversation_id = 3;
 	string id = 4;
+	string order_id = 5;
 }
 
 message AssignRequest {
@@ -4624,6 +4625,7 @@ message OrdersRequest {
 	repeated string not_statuses = 25;
 	repeated string shipping_statuses = 26;
 	repeated string not_shipping_statuses = 27;
+	repeated string tags = 33; // and
 
 	string pipeline = 30;
 	string pipeline_stage = 31;
@@ -4738,6 +4740,9 @@ message Order {
 	string pipeline_stage = 81;
 	int64 assigned = 82;
 	repeated OrderPipelineStage stages = 83;
+	repeated Tag tags = 85;
+	int64 tag_bits = 86; // only system
+	string tag_strings = 87; // only system
 }
 
 message OrderPipelineStage {

@@ -148,6 +148,9 @@ enum RealtimeType {
 	order_history_updated = 152;
 	user_order_confirmed = 153;
 
+	order_tagged = 217;
+	order_untagged = 218;
+
 	pipeline_created = 155;
 	pipeline_updated = 156;
 	pipeline_deleted = 157;
