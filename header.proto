@@ -4653,7 +4653,7 @@ message Order {
 	ShippingInfo shipping = 5;
 	PaymentMethod payment_method = 6;
 
-	string note = 7;
+	string note = 7; // public note
 	int64 issue_date = 62;
 	int64 due_date = 8;
 	string due_date_term = 9; // net30 net7
@@ -4745,6 +4745,8 @@ message Order {
 	repeated Tag tags = 85;
 	int64 tag_bits = 86; // only system
 	string tag_strings = 87; // only system
+
+	string private_note = 88;
 }
 
 message OrderPipelineStage {
