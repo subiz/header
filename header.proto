@@ -1030,6 +1030,7 @@ message StartRequest {
 	bool enable_recording = 9;
 	string sip_provider = 40;
 	string call_id = 42;
+	string call_diversion = 43;
 }
 
 message PresencesRequest {
@@ -1385,6 +1386,7 @@ message CallInfo {
 	string member_type = 25; // agent, user
 
 	string call_id = 26;
+	string diversion_number = 27;
 }
 
 message Rating {
