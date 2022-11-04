@@ -1387,6 +1387,8 @@ message CallInfo {
 
 	string call_id = 26;
 	string diversion_number = 27;
+
+	string transfer_to = 28;
 }
 
 message Rating {
@@ -5647,17 +5649,6 @@ message FacebookPageRegister {
 	repeated string page_ids = 7;
 	bool is_instagram = 12;
 	repeated string receive_comments = 13; // page id that receive comment
-}
-
-message CallTransferRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	string conversation_id = 4;
-	string to_number = 5;
-	string from_number = 6;
-
-	bool is_internal = 7;
 }
 
 message CallDriverRequest {

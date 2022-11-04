@@ -273,8 +273,6 @@ service ConversationMgr {
 	rpc ReplyRingRequest(CallDriverRequest) returns (Empty); // accept or decline
 
 	rpc ListMyRecentCalls(Id) returns (RecentCallRecords);
-
-	rpc TransferCall(CallTransferRequest) returns (CallDriverRequest);
 }
 
 service TemplateMgr {
