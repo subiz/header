@@ -213,6 +213,8 @@ enum RealtimeType {
 	call_ringing = 215;
 
 	call_transferred = 216;
+
+	agent_on_call_status_changed = 220;
 }
 
 message TextTransform {

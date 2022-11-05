@@ -33,6 +33,8 @@ message DashboardAgent {
 	optional int64 appphone_disabled = 29;
 
 	optional int64 call_promote_shown = 30;
+
+	optional string on_call = 31;
 }
 
 message Agent {

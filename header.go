@@ -395,7 +395,8 @@ type taxitem struct {
 }
 
 // like js Object.assign(dst, src)
-// dst and src must be same struct point
+// dst and src must be same struct pointer
+// AssignObject(ag1, ag2, ["fullname", "email"])
 func AssignObject(dst, src interface{}, fields []string) {
 	if dst == nil || src == nil {
 		return
