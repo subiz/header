@@ -1632,6 +1632,8 @@ message Attachment {
 
 	File file = 34;
 	string content_id = 35;
+
+	// 	string template_type = 36; // for zalo: request_user_info
 }
 
 message QuickReply {
@@ -5682,7 +5684,6 @@ message CallDriverRequest {
 	PhoneDevice phone_device = 18; // register-device || unregister-device
 
 	string caller_display_name = 20;
-	bool is_internal_call = 21;
 
 	int64 direct_extension_duration_sec = 22;
 	bool is_missed = 23; // tell driver to mark this call as missed (e.g: out of business hour)
@@ -5774,4 +5775,11 @@ message RecentCallRecord {
 	string direction = 12;
 	bool is_missed = 13;
 	bool is_internal = 14;
+}
+
+message ZaloUserInfoRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string oa_id = 3;
+	string user_id = 4;
 }

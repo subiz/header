@@ -922,7 +922,7 @@ type AttachmentPayload struct {
 	Id           string             `protobuf:"bytes,9,opt,name=id,proto3" json:"id,omitempty"`                                          // sticker
 	Description  string             `protobuf:"bytes,10,opt,name=description,proto3" json:"description,omitempty"`                       // video, link
 	Title        string             `protobuf:"bytes,11,opt,name=title,proto3" json:"title,omitempty"`                                   // link
-	TemplateType string             `protobuf:"bytes,12,opt,name=template_type,json=templateType,proto3" json:"template_type,omitempty"` // template
+	TemplateType string             `protobuf:"bytes,12,opt,name=template_type,json=templateType,proto3" json:"template_type,omitempty"` // template, request_user_info
 	Elements     []*TemplateElement `protobuf:"bytes,13,rep,name=elements,proto3" json:"elements,omitempty"`                             // template
 	Token        string             `protobuf:"bytes,14,opt,name=token,proto3" json:"token,omitempty"`                                   // upload file
 	Buttons      []*Button          `protobuf:"bytes,15,rep,name=buttons,proto3" json:"buttons,omitempty"`
@@ -1111,7 +1111,7 @@ type Attachment struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type    string             `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // image, gif, link, audio, video, sticker, location, file
+	Type    string             `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"` // image, gif, link, audio, video, sticker, location, file, template
 	Payload *AttachmentPayload `protobuf:"bytes,4,opt,name=payload,proto3" json:"payload,omitempty"`
 }
 

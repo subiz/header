@@ -112,7 +112,7 @@ message AttachmentPayload {
 	string id = 9; // sticker
 	string description = 10; // video, link
 	string title = 11; // link
-	string template_type = 12; // template
+	string template_type = 12; // template, request_user_info
 	repeated TemplateElement elements = 13;  // template
 	string token = 14; // upload file
 	repeated Button buttons = 15;
@@ -125,7 +125,7 @@ message Button {
 }
 
 message Attachment {
-	string type = 3; // image, gif, link, audio, video, sticker, location, file
+	string type = 3; // image, gif, link, audio, video, sticker, location, file, template
 	AttachmentPayload payload = 4;
 }
 

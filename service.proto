@@ -389,6 +389,7 @@ service FabikonService {
 service ZalokonService {
 	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
 	rpc ListZnsTemplates(Id) returns (zalokon.ZnsTemplates);
+	rpc RequestZaloUserInfo(header.ZaloUserInfoRequest) returns (header.Empty);
 	rpc SendZns(zalokon.ZnsRequest) returns (header.Empty);
 }
 
