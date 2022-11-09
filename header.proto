@@ -1686,6 +1686,8 @@ message Tag {
 	string color = 8;
 
 	int64 last_used = 9;
+
+	string type = 10;
 }
 
 message TemplateData {
