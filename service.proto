@@ -8,6 +8,7 @@ import "noti5.proto";
 import "account.proto";
 import "header.proto";
 import "common.proto";
+import "zalokon.proto";
 
 service RateLimit {
 	rpc SyncRateLimit(RateLimitSyncRequest) returns (RateLimitSyncResponse);
@@ -387,6 +388,8 @@ service FabikonService {
 
 service ZalokonService {
 	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
+	rpc ListZnsTemplates(Id) returns (zalokon.ZnsTemplates);
+	rpc SendZns(zalokon.ZnsRequest) returns (header.Empty);
 }
 
 service MailkonService {

@@ -1771,6 +1771,124 @@ func (x *ZnsTemplate) GetCreatedTime() int64 {
 	return 0
 }
 
+type ZnsTemplates struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Templates []*ZnsTemplate `protobuf:"bytes,2,rep,name=templates,proto3" json:"templates,omitempty"`
+}
+
+func (x *ZnsTemplates) Reset() {
+	*x = ZnsTemplates{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zalokon_proto_msgTypes[19]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ZnsTemplates) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ZnsTemplates) ProtoMessage() {}
+
+func (x *ZnsTemplates) ProtoReflect() protoreflect.Message {
+	mi := &file_zalokon_proto_msgTypes[19]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ZnsTemplates.ProtoReflect.Descriptor instead.
+func (*ZnsTemplates) Descriptor() ([]byte, []int) {
+	return file_zalokon_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *ZnsTemplates) GetTemplates() []*ZnsTemplate {
+	if x != nil {
+		return x.Templates
+	}
+	return nil
+}
+
+type ZnsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Phone        string            `protobuf:"bytes,2,opt,name=phone,proto3" json:"phone,omitempty"`
+	TemplateId   string            `protobuf:"bytes,3,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	TrackingId   string            `protobuf:"bytes,4,opt,name=tracking_id,json=trackingId,proto3" json:"tracking_id,omitempty"`
+	TemplateData map[string]string `protobuf:"bytes,5,rep,name=template_data,json=templateData,proto3" json:"template_data,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+}
+
+func (x *ZnsRequest) Reset() {
+	*x = ZnsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_zalokon_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ZnsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ZnsRequest) ProtoMessage() {}
+
+func (x *ZnsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_zalokon_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ZnsRequest.ProtoReflect.Descriptor instead.
+func (*ZnsRequest) Descriptor() ([]byte, []int) {
+	return file_zalokon_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ZnsRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *ZnsRequest) GetTemplateId() string {
+	if x != nil {
+		return x.TemplateId
+	}
+	return ""
+}
+
+func (x *ZnsRequest) GetTrackingId() string {
+	if x != nil {
+		return x.TrackingId
+	}
+	return ""
+}
+
+func (x *ZnsRequest) GetTemplateData() map[string]string {
+	if x != nil {
+		return x.TemplateData
+	}
+	return nil
+}
+
 var File_zalokon_proto protoreflect.FileDescriptor
 
 var file_zalokon_proto_rawDesc = []byte{
@@ -2040,10 +2158,29 @@ var file_zalokon_proto_rawDesc = []byte{
 	0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x52, 0x65, 0x6d, 0x61, 0x69, 0x6e, 0x69, 0x6e, 0x67, 0x51,
 	0x75, 0x6f, 0x74, 0x61, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x54,
 	0x69, 0x6d, 0x65, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x63, 0x72, 0x65, 0x61, 0x74,
-	0x65, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x42, 0x21, 0x5a, 0x1f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2f, 0x7a, 0x61, 0x6c, 0x6f, 0x6b, 0x6f, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x65, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x42, 0x0a, 0x0c, 0x5a, 0x6e, 0x73, 0x54, 0x65, 0x6d,
+	0x70, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x12, 0x32, 0x0a, 0x09, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61,
+	0x74, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x7a, 0x61, 0x6c, 0x6f,
+	0x6b, 0x6f, 0x6e, 0x2e, 0x5a, 0x6e, 0x73, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x52,
+	0x09, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x22, 0xf1, 0x01, 0x0a, 0x0a, 0x5a,
+	0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x68, 0x6f,
+	0x6e, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x12,
+	0x1f, 0x0a, 0x0b, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x49, 0x64,
+	0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x72, 0x61, 0x63, 0x6b, 0x69, 0x6e, 0x67, 0x5f, 0x69, 0x64, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x74, 0x72, 0x61, 0x63, 0x6b, 0x69, 0x6e, 0x67, 0x49,
+	0x64, 0x12, 0x4a, 0x0a, 0x0d, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x5f, 0x64, 0x61,
+	0x74, 0x61, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x7a, 0x61, 0x6c, 0x6f, 0x6b,
+	0x6f, 0x6e, 0x2e, 0x5a, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x54, 0x65,
+	0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52,
+	0x0c, 0x74, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61, 0x1a, 0x3f, 0x0a,
+	0x11, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61, 0x45, 0x6e, 0x74,
+	0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0x21,
+	0x5a, 0x1f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62,
+	0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x7a, 0x61, 0x6c, 0x6f, 0x6b, 0x6f,
+	0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2058,7 +2195,7 @@ func file_zalokon_proto_rawDescGZIP() []byte {
 	return file_zalokon_proto_rawDescData
 }
 
-var file_zalokon_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_zalokon_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_zalokon_proto_goTypes = []interface{}{
 	(*OfficialAccount)(nil),        // 0: zalokon.OfficialAccount
 	(*ZaloUser)(nil),               // 1: zalokon.ZaloUser
@@ -2079,11 +2216,14 @@ var file_zalokon_proto_goTypes = []interface{}{
 	(*Zl2SbEvent)(nil),             // 16: zalokon.Zl2SbEvent
 	(*ParamDefinition)(nil),        // 17: zalokon.ParamDefinition
 	(*ZnsTemplate)(nil),            // 18: zalokon.ZnsTemplate
-	nil,                            // 19: zalokon.ZaloUser.AvatarsEntry
+	(*ZnsTemplates)(nil),           // 19: zalokon.ZnsTemplates
+	(*ZnsRequest)(nil),             // 20: zalokon.ZnsRequest
+	nil,                            // 21: zalokon.ZaloUser.AvatarsEntry
+	nil,                            // 22: zalokon.ZnsRequest.TemplateDataEntry
 }
 var file_zalokon_proto_depIdxs = []int32{
 	6,  // 0: zalokon.ZaloUser.shared_info:type_name -> zalokon.Info
-	19, // 1: zalokon.ZaloUser.avatars:type_name -> zalokon.ZaloUser.AvatarsEntry
+	21, // 1: zalokon.ZaloUser.avatars:type_name -> zalokon.ZaloUser.AvatarsEntry
 	1,  // 2: zalokon.ZaloUserResponse.data:type_name -> zalokon.ZaloUser
 	0,  // 3: zalokon.OfficalAccountResponse.data:type_name -> zalokon.OfficialAccount
 	4,  // 4: zalokon.Response.data:type_name -> zalokon.ResponseData
@@ -2098,11 +2238,13 @@ var file_zalokon_proto_depIdxs = []int32{
 	6,  // 13: zalokon.Request.info:type_name -> zalokon.Info
 	13, // 14: zalokon.Request.message:type_name -> zalokon.Message
 	17, // 15: zalokon.ZnsTemplate.listParams:type_name -> zalokon.ParamDefinition
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	18, // 16: zalokon.ZnsTemplates.templates:type_name -> zalokon.ZnsTemplate
+	22, // 17: zalokon.ZnsRequest.template_data:type_name -> zalokon.ZnsRequest.TemplateDataEntry
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_zalokon_proto_init() }
@@ -2339,6 +2481,30 @@ func file_zalokon_proto_init() {
 				return nil
 			}
 		}
+		file_zalokon_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ZnsTemplates); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_zalokon_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ZnsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2346,7 +2512,7 @@ func file_zalokon_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_zalokon_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

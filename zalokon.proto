@@ -208,3 +208,14 @@ message ZnsTemplate {
 	string templateRemainingQuota = 13;
 	int64 createdTime = 14;
 }
+
+message ZnsTemplates {
+	repeated ZnsTemplate templates = 2;
+}
+
+message ZnsRequest {
+	string phone = 2;
+	string template_id = 3;
+	string tracking_id = 4;
+	map<string, string> template_data = 5;
+}
