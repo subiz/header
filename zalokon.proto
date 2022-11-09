@@ -183,3 +183,28 @@ message Zl2SbEvent {
 	string sbmid = 5;
 	int64 oa_id = 6;
 }
+
+message ParamDefinition {
+	string name = 2;
+	bool require = 3;
+	string type = 4;
+	int32 maxLength = 5;
+	int32 minLength = 6;
+	bool acceptNull = 7;
+}
+
+message ZnsTemplate {
+	int64 templateId = 2;
+	string templateName = 3;
+	string status = 4;
+	repeated ParamDefinition listParams = 5;
+	int64 timeout = 6;
+	string previewUrl = 7;
+	string templateQuality = 8;
+	string templateTag = 9;
+	string price = 10;
+	bool applyTemplateQuota = 11;
+	string templateDailyQuota = 12;
+	string templateRemainingQuota = 13;
+	int64 createdTime = 14;
+}
