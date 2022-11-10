@@ -250,9 +250,9 @@ message User {
 	string primary_id = 49;
 	repeated string secondary_ids = 50;
 
-	string profile_id = 52;
-	string channel_source = 53;
-	string channel = 54;
+	string profile_id = 52; // user-id
+	string channel_source = 53; // pvcombank require verification
+	string channel = 54; // account => require verification, acc logo
 
 	Event latest_content_view = 55; // readonly
 	Event start_content_view = 56; // readonly latest content view that change the source
@@ -5784,4 +5784,15 @@ message ZaloUserInfoRequest {
 	string account_id = 2;
 	string oa_id = 3;
 	string user_id = 4;
+}
+
+message ZnsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string oaid = 3; // only subiz
+
+	string phone = 4;
+	string template_id = 5;
+	string tracking_id = 6;
+	map<string, string> template_data = 7;
 }
