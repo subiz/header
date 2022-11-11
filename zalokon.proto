@@ -167,6 +167,13 @@ message Request {
 	Info info = 9;
 	Message message = 10;
 	string reorder_id = 11;
+	ZlFollower follower = 12;
+	string source = 13;
+	string oa_id = 14;
+}
+
+message ZlFollower {
+	string id = 3;
 }
 
 message Sender {
