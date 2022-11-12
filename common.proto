@@ -86,6 +86,10 @@ message Credential {
 	// for x-signed-key
 	repeated string signed_objects = 9;
 	string signed_type = 10;
+
+	// for user-access token
+	string user_key = 11;
+	string agent_access_token_id = 12;
 }
 
 enum Type {

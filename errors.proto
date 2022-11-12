@@ -167,6 +167,7 @@ enum E {
 	shipping_address_not_found = 112;
 
 	message_not_found = 113;
+	expired_access_token = 114;
 
 	too_many_payment_method = 115;
 
