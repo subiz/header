@@ -379,13 +379,7 @@ message AttributeDefinition {
 
 	string key = 7;
 
-	string kind = 8; // will be removed
-	enum AttributeKind {
-		system = 0; // only system read and write
-		default = 1; // created but agent can write, but not remove
-		custom = 2;
-	}
-
+	// string kind = 8; // will be removed
 	int64 updated = 9;
 	string updated_by = 11;
 	string validator = 10; // email, name, decimal
@@ -1294,11 +1288,11 @@ message Conversation {
 	Integration integration = 18; // removing
 	int64 actived = 19;
 
-	Message last_message = 20; // remove after update mobile app
+	// Message last_message = 20; // remove after update mobile app
 
 	Event last_internal_message_sent = 27;
 	Event last_message_sent = 23;          // no internal
-	Event last_event = 26;                 // no internal
+	Event last_event = 26;                 // no internal // remove
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -5132,13 +5126,16 @@ message Taxes {
 
 message Error {
 	string description = 2;
-	string debug = 3;
-	int32 class = 4;
-	string stack = 5;
-	int64 created = 6; // ms
+	string debug = 3; // remove
+	int32 class = 4; // remove
+	string stack = 5; // remove
+	// int64 created = 6; // remove
 	string code = 7;
-	string root = 8;
-	string request_id = 9;
+	string root = 8; // remove
+	string trace_id = 9; // remove
+
+	bool temporary = 11;
+	string number = 12; // crc32 hash of stack SBZ-4930543478
 }
 
 message ShopeeShop {

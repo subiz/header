@@ -88,7 +88,7 @@ message Credential {
 	string signed_type = 10;
 
 	// for user-access token
-	string user_key = 11;
+	string profile_id = 11;
 	string agent_access_token_id = 12;
 }
 

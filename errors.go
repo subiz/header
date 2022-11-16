@@ -19,7 +19,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"time"
 )
 
 // wrapErr converts an unknown error to an `*Error`, information of the
@@ -78,12 +77,7 @@ func wrapErr(root error, class int, code E, v ...interface{}) *Error {
 // This method does not include stacktrace into returned object
 func Errorf(format string, v ...interface{}) *Error {
 	desc := fmt.Sprintf(format, v...)
-	return &Error{
-		Description: desc,
-		Class:       int32(500),
-		Created:     time.Now().UnixNano() / 1e6,
-		Code:        E_undefined.String(),
-	}
+	return &Error{Description: desc, Class: int32(500), Code: E_undefined.String()}
 }
 
 // New returns an error with the supplied message.
@@ -107,7 +101,6 @@ func newError(class int, code E, v ...interface{}) *Error {
 	e.Description = message
 	e.Class = int32(class)
 	e.Stack = getStack(1)
-	e.Created = time.Now().UnixNano() / 1e6
 	e.Code = code.String()
 	return e
 }
@@ -184,7 +177,7 @@ func getStack(skip int) string {
 		sb.WriteString(file)
 		sb.WriteString(":")
 		sb.WriteString(strconv.Itoa(line))
-		sb.WriteString("  ")
+		sb.WriteString(",")
 	}
 	return sb.String()
 }
