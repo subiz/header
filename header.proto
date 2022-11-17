@@ -3842,6 +3842,26 @@ message UserView {
 	string order_by = 22; // attr.username asc
 }
 
+message SuggestLeadFieldRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	UserViewCondition condition = 4;
+
+	string key = 5; // id, keyword, lead_owner attr.fullname
+}
+
+message SuggestLeadFieldResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated string texts = 10;
+	repeated double numbers = 11;
+	repeated bool booleans = 12;
+	repeated string datetimes = 13;
+	repeated int64 points = 14;
+}
+
 message UserViewCondition {
 	common.Context ctx = 1;
 	string account_id = 2;
