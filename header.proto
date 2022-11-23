@@ -5420,8 +5420,9 @@ message TasksRequest {
 	int64 due_date_hour_from = 12;
 	int64 due_date_hour_to = 13;
 
-	string assigned_to = 14;
+	string assignee = 14;
 	int64 priority = 15;
+	string status = 16;
 
 	int32 limit = 20;
 	string anchor = 21;
@@ -5453,22 +5454,24 @@ message Task {
 	string updated_by = 11;
 	int64 updated = 12;
 
-	int64 due_date = 13;
+	int64 due_at = 13;
 	int64 reminder = 14; // 86400: 1 day before
 
-	string type = 15; // todo, email, call
+	string type = 15; // empty=todo, email, call
 	int64 priority = 16; // dont use string, so its easier for backend to sort by this field. 0=low, 1=normal, 2=high, 3=urgent
 
-	string assigned_to = 17; // empty == unassigned
+	string assignee = 17; // empty == unassigned
 
 	string title = 18;
 	string title_quill_delta = 19;
-	string description = 20;
-	string description_quill_delta = 21; // for template
-	int64 pinned = 22; // always list first
-	string status = 23; // open, close, rejected
+	string note = 20;
+	string note_quill_delta = 21; // for template
 
-	int64 closed = 24; // just store closed timestamp, so when needed, we have the data to calculate task duration
+	int64 pinned = 22; // always list first - readonly - personal for each agent
+
+	string status = 23; // open - done - deleted
+
+	int64 done_at = 24; // just store closed timestamp, so when needed, we have the data to calculate task duration
 
 	repeated string associated_tickets = 25;
 	repeated string associated_users = 26;
@@ -5480,6 +5483,8 @@ message Task {
 	// extra data
 	// ...
 	Event data_email = 40;
+
+	repeated File files = 41; // read-only
 }
 
 message TaskHistoryEntry {
@@ -5806,7 +5811,7 @@ message ZaloUserInfoRequest {
 message ZnsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string oaid = 3; // only subiz
+	string oaid = 3;
 
 	string phone = 4;
 	string template_id = 5;
