@@ -5427,6 +5427,9 @@ message TasksRequest {
 	int32 limit = 20;
 	string anchor = 21;
 	int32 offset = 22;
+
+	repeated string ids = 23;
+	repeated int64 last_modifieds = 24; // ms
 }
 
 message Tasks {
