@@ -241,7 +241,7 @@ message User {
 	repeated string aliases = 5;
 	repeated Attribute attributes = 18;
 
-	UserSession session = 40; // deprecating
+	// UserSession session = 40; // deprecating
 	repeated string lead_owners = 41;
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
