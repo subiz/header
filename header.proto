@@ -325,6 +325,7 @@ message Users {
 	int64 total = 5;
 
 	int32 end_offset = 7;
+	repeated string sorted_values = 8;
 }
 
 message SessionCampaign {
