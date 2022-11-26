@@ -370,4 +370,5 @@ message Presence {
 	optional string viewing_product_id = 12; // presence_update user with product linked
 	optional string viewing_product_source_id = 13;  // presence_update user with product linked
 	optional string viewing_product_sku = 14;  // presence_update user with product linked
+	optional string viewing_product_title = 15;
 }
