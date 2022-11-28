@@ -4578,6 +4578,8 @@ message OrderMetric {
 	int64 closed_fpv_total_sum = 73; // derived
 	int64 open_count = 74;
 	int64 open_fpv_total_sum = 75; // derived
+	int64 unconfirmed_count = 76;
+	int64 unconfirmed_fpv_total_sum = 77; // derived
 }
 
 message OrderMetricsRequest {
