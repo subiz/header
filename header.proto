@@ -4798,9 +4798,10 @@ message OrderAgent {
 }
 
 enum OrderStatusCode {
-	open = 0;  // Đơn mới
-	canceled = 1; // Đơn hàng đã chốt thua
-	closed = 2; // Đơn hàng đã chốt thắng
+	open = 0;  // đơn mới
+	canceled = 1; // đơn hàng đã chốt thua
+	closed = 2; // đơn hàng đã chốt thắng
+	unconfirmed = 3; // unagreement between a company and a customer
 
 	delivery_success = 25;
 	delivery_failure = 26;
