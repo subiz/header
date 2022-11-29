@@ -4176,6 +4176,14 @@ message Address {
 	string name = 48; // addrdb
 }
 
+message GHNShippingData {
+	int32 service_type_id = 2;
+	int32 payment_type_id = 3;
+	string required_note = 4;
+	int64 insurance_value = 5;
+	string coupon = 6;
+}
+
 message GHNOrder {
 	string client_order_code = 2;
 	int64 shop_id = 3;
@@ -4247,6 +4255,18 @@ message GHNOrderItem {
 	int64 length = 7;
 	int64 width = 8;
 	int64 height = 9;
+}
+
+message GHTKShippingData {
+	int64 deliver_work_shift = 10;
+	int64 pick_work_shift  = 11;
+	string label_id = 13;
+	string expired = 14;
+	int64 value = 15; // gia tri dong bao hiem
+	string pick_option = 16;
+	string deliver_option = 17;
+	string pick_session = 18;
+	repeated string tags = 19;
 }
 
 message GHTKOrder {
@@ -4386,27 +4406,9 @@ message ShippingInfo {
 
 message ShippingData {
 	GHTKShippingData ghtk = 3;
+	GHTKOrder ghtk_order = 5;
 	GHNShippingData ghn = 4;
-}
-
-message GHNShippingData {
-	int32 service_type_id = 2;
-	int32 payment_type_id = 3;
-	string required_note = 4;
-	int64 insurance_value = 5;
-	string coupon = 6;
-}
-
-message GHTKShippingData {
-	int64 deliver_work_shift = 10;
-	int64 pick_work_shift  = 11;
-	string label_id = 13;
-	string expired = 14;
-	int64 value = 15; // gia tri dong bao hiem
-	string pick_option = 16;
-	string deliver_option = 17;
-	string pick_session = 18;
-	repeated string tags = 19;
+	GHNOrder ghn_order = 6;
 }
 
 enum ShippingProvider {
