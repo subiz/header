@@ -4728,7 +4728,7 @@ message Order {
 	string pos_id = 44;
 
 	string channel = 45; // messenger, zalo
-	string channel_touchpoint = 46;
+	string channel_touchpoint = 46; // page id
 
 	repeated string related_conversations = 47;
 
@@ -5361,6 +5361,8 @@ message PipelineStage {
 	// auto-assign to agent
 	repeated PipelineRule routes = 17;
 	repeated Task tasks = 18;
+
+	int64 auto_confirm_order = 19; // temporary
 }
 
 message PipelineRule {
