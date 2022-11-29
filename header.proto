@@ -4407,8 +4407,12 @@ message ShippingInfo {
 message ShippingData {
 	GHTKShippingData ghtk = 3;
 	GHTKOrder ghtk_order = 5;
+	int64 ghtk_order_created = 7;
+	int64 ghtk_order_updated = 8;
 	GHNShippingData ghn = 4;
 	GHNOrder ghn_order = 6;
+	int64 ghn_order_created = 9;
+	int64 ghn_order_updated = 10;
 }
 
 enum ShippingProvider {
