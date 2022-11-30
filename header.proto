@@ -2467,6 +2467,7 @@ message WidgetField {
 
 	I18nString i18n_label = 14; // label i18n
 	I18nString i18n_placeholder = 15;
+	AttributeDefinition def = 16;
 }
 
 message WidgetGroup {
@@ -5535,7 +5536,7 @@ message AgentGroup {
 
 	bool ring_most_recent_agent_first = 12;
 
-	string ring_order = 14; // ordered, randomly, most_idle_first
+	string ring_order = 14; // ordered, randomly, most_idle_first, round-robin
 
 	repeated string receive_incomming_calls = 15; // agent that must handle incomming calls
 
