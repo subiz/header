@@ -1123,6 +1123,8 @@ message Rule {
 	TimmingCondition timming_condition = 16;
 	bool user_has_replied_before = 18; // new
 	repeated UserAttributeCondition user_conditions = 19;
+	repeated string lead_owners = 20;
+
 	bool when_offline = 21; // only run when there is no online agent
 
 	repeated string fallback_agents = 23;
@@ -1130,6 +1132,36 @@ message Rule {
 	int64 v = 22; // version
 
 	repeated string supervisors = 24; // add tags when rule is matched
+
+	RingingStrategy ringing_strategy = 25;
+}
+
+message RingingStrategy {
+	GreetingAudio greeting_message = 4;
+	GreetingAudio missed_message = 5;
+
+	// forward call
+	string forward_to = 6;
+
+	bool enable_menu = 7;
+	GreetingAudio menu_message = 8; // the audio plays while waiting for user to press keys
+	int64 menu_timeout_sec = 9; // sec
+	repeated CallRoutingAction options = 10;
+	GreetingAudio invalid_option_message = 11; // url when typing into empty option
+
+	CallRoutingAction menu_fallback = 12; // do this when no option is selected
+	bool ring_most_recent_agent_first = 13;
+
+	string ring_order = 14; // hangup, ordered, randomly, most_idle_first, round-robin
+	repeated string receive_incomming_calls = 15; // agent that must handle incomming calls
+
+	string missed_call_handle_strategy = 16; // empty, round-robin, first-ring, last-ring, last-contact
+	string missed_call_handle_expire_sec = 17; // 1 days
+	repeated string missed_call_handle_agents = 18;
+	repeated string missed_call_supervisors = 19;
+
+	bool enable_recording = 30;
+	bool allow_direct_extension_calling = 31;
 }
 
 message TimmingCondition {
@@ -1150,12 +1182,16 @@ message ChannelCondition {
 	repeated LocationCondition locations = 4; // or
 	repeated LocationCondition not_in_locations = 13; // or
 	repeated string page_urls = 5;
+	repeated string not_page_urls = 6;
 	repeated string device_types = 7; // desktop, mobile, tablet
 
 	// for email only
 	repeated string email_tos = 10; // contains
 	repeated string email_froms = 11; // contains
 	repeated string email_subjects = 12;  // contains
+
+	repeated string from_number_prefixes = 15;
+	repeated string not_from_number_prefixes = 16;
 }
 
 message LocationCondition {
@@ -5462,7 +5498,7 @@ message Task {
 	string created_by = 5; // agent id or pipeline stage id
 	int64 created = 6;
 
-	string created_by_type = 7; // agent, automation
+	string created_by_type = 7; // agent, automation, rule
 	string created_by_pipeline = 8;
 	string created_by_pipeline_stage = 9;
 	string created_by_pipeline_automation_action = 10;
@@ -5473,7 +5509,7 @@ message Task {
 	int64 due_at = 13;
 	int64 reminder = 14; // 86400: 1 day before
 
-	string type = 15; // empty=todo, email, call
+	string type = 15; // empty=todo, email, call, missed-callq
 	int64 priority = 16; // dont use string, so its easier for backend to sort by this field. 0=low, 1=normal, 2=high, 3=urgent
 
 	string assignee = 17; // empty == unassigned
