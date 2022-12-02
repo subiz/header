@@ -4592,8 +4592,8 @@ message OrderMetric {
 	string payment_status = 4; // only list orders
 	string shipping_status = 22; // only list orders
 	string payment_method = 5;
-	int64 invoice_hour = 6;
-	string invoice_date = 7; // derived
+	int64 issue_hour = 6;
+	string issue_date = 7; // derived
 	int64 paid_hour = 8;
 	string paid_date = 9; // derived
 	int64 fpv_total = 10;
@@ -4629,8 +4629,8 @@ message OrderMetricsRequest {
 	string dim = 2;
 	int32 tz = 3;
 	string account_id = 10;
-	int64 invoice_hour_from = 11;
-	int64 invoice_hour_to = 12;
+	int64 issue_hour_from = 11;
+	int64 issue_hour_to = 12;
 	int64 paid_hour_from = 13;
 	int64 paid_hour_to = 14;
 	repeated string channels = 15;
@@ -4671,8 +4671,8 @@ message OrdersRequest {
 	int64 created_hour_to = 6;
 	int64 due_date_hour_from = 20;
 	int64 due_date_hour_to = 21;
-	int64 invoice_date_hour_from = 22;
-	int64 invoice_date_hour_to = 23;
+	int64 issue_hour_from = 22;
+	int64 issue_hour_to = 23;
 
 	bool include_deleted = 7;
 
