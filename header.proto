@@ -1133,7 +1133,7 @@ message Rule {
 
 	repeated string supervisors = 24; // add tags when rule is matched
 
-	RingingStrategy ringing_strategy = 25;
+	RingingStrategy call = 25;
 }
 
 message RingingStrategy {
