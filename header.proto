@@ -259,6 +259,9 @@ message User {
 	Event first_content_view = 57; // readonly first content view
 
 	repeated string lead_conversion_bys = 58; // for quick search
+
+	int64 created = 59;
+	int64 updated = 60;
 }
 
 // lookup contact point to user_id
@@ -895,7 +898,6 @@ message Event {
 	Data data = 20;
 }
 
-
 message EventParams {
 	string type = 2;
 	string account_id = 3;
@@ -911,14 +913,6 @@ message ListUserEventsRequest {
 
 	string category = 9;
 	int32 limit_hour = 10;
-}
-
-message UserEvent {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string user_id = 4;
-	Event event = 5;
-	User user = 6;
 }
 
 // deprecating

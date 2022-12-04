@@ -301,12 +301,6 @@ service TagMgr {
 	rpc GetTag(Id) returns (header.Tag);
 }
 
-// deprecated
-service EventMgr {
-	rpc SearchEvents(header.ListUserEventsRequest) returns (header.Events);
-	rpc CreateEvent(header.UserEvent) returns (header.Event);
-}
-
 // file services
 service FileMgr {
 	rpc Presign(header.FileHeader) returns (header.PresignResult);
