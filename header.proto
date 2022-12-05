@@ -195,18 +195,20 @@ message CallSetting {
 	// SECTION 1: holiday and business hour setting
 	// this section decides what to do with incomming call after business hour
 	// or in holiday
+	// deprecated
 	bool enable_business_hour = 9;
+	// deprecated
 	GreetingAudio business_hour_message = 10; // do this when no option is selected
 
 	// SECTION 2: Phone menu (IVR) setting
 	// design an automate menu to handle incomming call
 	// this is optional, account can choose to disabled it.
+	// deprecated
 	bool enable_menu = 11;
 	GreetingAudio menu_message = 12; // the audio plays while waiting for user to press keys
 	int64 menu_timeout_sec = 14; // sec
 	repeated CallRoutingAction options = 13;
 	GreetingAudio invalid_option_message = 16; // url when typing into empty option
-
 	CallRoutingAction menu_fallback = 15; // do this when no option is selected
 	// SECTION 3: (required)
 	// ring one or more agents (or device) to handle the call
@@ -1134,18 +1136,7 @@ message Rule {
 	int64 v = 22; // version
 
 	repeated string supervisors = 24; // add tags when rule is matched
-
 	RingingSetting call = 25;
-}
-
-message CallMenu {
-	GreetingAudio menu_message = 4; // the audio plays while waiting for user to press key
-	GreetingAudio invalid_option_message = 5; // url when typing into empty option
-
-	int64 menu_timeout_sec = 6; // sec
-	repeated CallRoutingAction options = 7;
-
-	CallRoutingAction fallback = 8; // do this when no option is selected
 }
 
 message RingingSetting {
@@ -1155,13 +1146,16 @@ message RingingSetting {
 	// forward call
 	string forward_to = 6;
 
-	CallMenu menu = 7;
-
 	bool ring_most_recent_agent_first = 10;
 	string missed_call_handle_strategy = 11; // empty, round-robin, first-ring, last-ring, last-contact
 	string missed_call_handle_expire_sec = 12; // 1 days
 	repeated string missed_call_handle_agents = 13;
 	repeated string missed_call_supervisors = 14;
+
+	GreetingAudio menu_message = 16; // the audio plays while waiting for user to press key
+	GreetingAudio invalid_option_message = 17; // url when typing into empty option
+	repeated Rule menu_options = 18;
+  Rule menu_fallback = 19;
 
 	int64 agent_ring_timeout_sec = 20; // -1 forever, 0 auto, ... n sec
 }
@@ -5742,7 +5736,7 @@ message CallDriverRequest {
 	repeated string devices = 6;
 	repeated string agents = 24;
 
-	repeated int64 delay_secs = 7;
+	// repeated int64 delay_secs = 7;
 	repeated int64 ring_secs = 8;
 
 	int64 timeout_sec = 9;
