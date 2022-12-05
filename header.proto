@@ -1128,6 +1128,7 @@ message Rule {
 	bool user_has_replied_before = 18; // new
 	repeated UserAttributeCondition user_conditions = 19;
 	repeated string lead_owners = 20;
+	string call_menu_key = 28;
 
 	bool when_offline = 21; // only run when there is no online agent
 
@@ -1135,7 +1136,7 @@ message Rule {
 
 	int64 v = 22; // version
 
-	repeated string supervisors = 24; // add tags when rule is matched
+	repeated string supervisors = 24;
 	RingingSetting call = 25;
 }
 
@@ -1152,6 +1153,7 @@ message RingingSetting {
 	repeated string missed_call_handle_agents = 13;
 	repeated string missed_call_supervisors = 14;
 
+	int64 menu_timeout_sec = 15; // sec
 	GreetingAudio menu_message = 16; // the audio plays while waiting for user to press key
 	GreetingAudio invalid_option_message = 17; // url when typing into empty option
 	repeated Rule menu_options = 18;
