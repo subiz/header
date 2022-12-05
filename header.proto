@@ -1083,7 +1083,7 @@ message Rule {
 	enum AssignStrategy {
 		all_agents = 0;
 		agentgroup = 2;
-		agents = 3;
+		agents = 3; // == ordered
 		most_recent = 4;
 		roundrobin_all_agents = 5;
 		roundrobin_agents = 6;
@@ -1101,7 +1101,15 @@ message Rule {
 		least_open_of_group = 16;
 
 		bot = 10;
+
+		hangup = 20;
+		random_agents = 21;
+		most_idle_agents = 22;
+
+		call_menu = 26; // call
+		forward_to = 27; // call
 	}
+
 	string strategy = 5;
 	repeated string assign_tos = 6;
 	bool enabled = 8;
@@ -1127,35 +1135,35 @@ message Rule {
 
 	repeated string supervisors = 24; // add tags when rule is matched
 
-	RingingStrategy call = 25;
+	RingingSetting call = 25;
 }
 
-message RingingStrategy {
+message CallMenu {
+	GreetingAudio menu_message = 4; // the audio plays while waiting for user to press key
+	GreetingAudio invalid_option_message = 5; // url when typing into empty option
+
+	int64 menu_timeout_sec = 6; // sec
+	repeated CallRoutingAction options = 7;
+
+	CallRoutingAction fallback = 8; // do this when no option is selected
+}
+
+message RingingSetting {
 	GreetingAudio greeting_message = 4;
 	GreetingAudio missed_message = 5;
 
 	// forward call
 	string forward_to = 6;
 
-	bool enable_menu = 7;
-	GreetingAudio menu_message = 8; // the audio plays while waiting for user to press keys
-	int64 menu_timeout_sec = 9; // sec
-	repeated CallRoutingAction options = 10;
-	GreetingAudio invalid_option_message = 11; // url when typing into empty option
+	CallMenu menu = 7;
 
-	CallRoutingAction menu_fallback = 12; // do this when no option is selected
-	bool ring_most_recent_agent_first = 13;
+	bool ring_most_recent_agent_first = 10;
+	string missed_call_handle_strategy = 11; // empty, round-robin, first-ring, last-ring, last-contact
+	string missed_call_handle_expire_sec = 12; // 1 days
+	repeated string missed_call_handle_agents = 13;
+	repeated string missed_call_supervisors = 14;
 
-	string ring_order = 14; // hangup, ordered, randomly, most_idle_first, round-robin
-	repeated string receive_incomming_calls = 15; // agent that must handle incomming calls
-
-	string missed_call_handle_strategy = 16; // empty, round-robin, first-ring, last-ring, last-contact
-	string missed_call_handle_expire_sec = 17; // 1 days
-	repeated string missed_call_handle_agents = 18;
-	repeated string missed_call_supervisors = 19;
-
-	bool enable_recording = 30;
-	bool allow_direct_extension_calling = 31;
+	int64 agent_ring_timeout_sec = 20; // -1 forever, 0 auto, ... n sec
 }
 
 message TimmingCondition {
