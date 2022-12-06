@@ -4264,6 +4264,12 @@ message GHNOrder {
 	int64 total = 32; // fee
 	string expected_delivery_time = 30;
 	string status = 31;
+	GHNOrderFee fee = 39;
+}
+
+message GHNOrderFee {
+	int64 insurance = 2;
+	int64 main_service = 3;
 }
 
 // webhook
@@ -4278,6 +4284,12 @@ message GHNOrder2 {
 	string Status = 7;
 	string ShipperName = 8;
 	string ShipperPhone = 9;
+	GHNOrder2Fee Fee = 11;
+}
+
+message GHNOrder2Fee {
+	int64 Insurance = 2;
+	int64 MainService = 3;
 }
 
 message GHNOrderItem {
