@@ -5592,6 +5592,7 @@ message AgentGroup {
 	string logo_url = 18;
 
 	repeated string supervisors = 19;
+	int64 agent_ring_timeout_sec = 20; // -1 forever, 0 auto, ... n sec
 }
 
 message DocIndexRequest {

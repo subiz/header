@@ -117,6 +117,9 @@ enum RealtimeType {
 
 	login_session_updated = 122;
 
+	rule_updated = 123;
+	rule_deleted = 124;
+
 	product_updated = 130;
 	product_deleted = 131;
 
