@@ -5709,9 +5709,7 @@ message CallDriverRequest {
 	string account_id = 2;
 	string action = 3; // dial, hangup, wait-for-key, call, call-status, register-device, unregister-device
 	string conversation_id = 4;
-
 	string request_id = 5;
-
 	repeated string devices = 6;
 	repeated string agents = 24;
 
@@ -5735,6 +5733,8 @@ message CallDriverRequest {
 	PhoneDevice phone_device = 18; // register-device || unregister-device
 
 	string caller_display_name = 20;
+	bool is_internal_call = 21;
+	string to_sip_provider = 25;
 
 	int64 direct_extension_duration_sec = 22;
 	bool is_missed = 23; // tell driver to mark this call as missed (e.g: out of business hour)
