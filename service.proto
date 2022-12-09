@@ -275,6 +275,10 @@ service ConversationMgr {
 	rpc ReplyRingRequest(CallDriverRequest) returns (Empty); // accept or decline
 
 	rpc ListMyRecentCalls(Id) returns (RecentCallRecords);
+
+	// sync, called from fabikon
+	rpc SaveMessage(header.Event) returns (header.Event);
+	rpc SaveConversation(header.Conversation) returns (header.Conversation);
 }
 
 service TemplateMgr {
@@ -471,6 +475,7 @@ service Notibox {
 	rpc SendNoti(header.Notification) returns (Empty);
 	rpc ListNoties(header.ListNotiRequest) returns (header.Notifications);
 	rpc MarkReadNoti(Id) returns (Empty);
+	rpc MarkReadNotiTopic(Id) returns (Empty);
 }
 
 // watchhttp services

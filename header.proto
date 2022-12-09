@@ -40,7 +40,7 @@ message Notifications {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated Notification notifications = 4;
-	int64 severity = 5; // 0: not important, 1 important;
+	// int64 severity = 5; // 0: not important, 1 important;
 	string next_anchor = 6;
 	int64 last_seen = 7;
 	int64 unread = 8;
@@ -57,7 +57,7 @@ message Notification {
 	bool is_read = 9;
 
 	bool is_instant = 12; // just display and disappear, no persit
-	int64 severity = 13; // 0: not important, 1 important;
+	// int64 severity = 13; // 0: not important, 1 important;
 	string category = 14; // user, order
 	int64 checkpoint = 15;
 }
