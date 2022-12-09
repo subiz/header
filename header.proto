@@ -5455,6 +5455,8 @@ message TasksRequest {
 	repeated int64 last_modifieds = 24; // ms
 
 	string supervisor = 25; // task.supervisor = supervisor && task.assignee != supervisor
+	repeated string assignees = 26;
+	repeated string not_assignees = 27;
 }
 
 message Tasks {
