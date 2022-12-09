@@ -582,6 +582,7 @@ service Apiece {
 	rpc UpdateTask(header.Task) returns (header.Task);
 	rpc DeleteTask(Id) returns (Empty);
 	rpc ListTasks(header.TasksRequest) returns (header.Tasks);
+	rpc SeenTask(header.Id) returns (Empty);
 
 	rpc AddTaskComment(header.Event) returns (header.Event);
 	rpc EditTaskComment(header.Event) returns (header.Event);

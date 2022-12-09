@@ -5453,6 +5453,8 @@ message TasksRequest {
 
 	repeated string ids = 23;
 	repeated int64 last_modifieds = 24; // ms
+
+	string supervisor = 25; // task.supervisor = supervisor && task.assignee != supervisor
 }
 
 message Tasks {
@@ -5511,6 +5513,15 @@ message Task {
 	Event data_email = 40;
 
 	repeated File files = 41; // read-only
+
+	// A supervisor MUST do something when the task got expired.
+	// Most of the time supervisor is the task creator. But when the creator is bot,
+	// pipeline or something automated, supervisor should be a human rather
+	// than its creator.
+	string supervisor = 42;
+
+	Event lastest_comment = 43; // read-only
+	int64 last_seen = 45; // personal for each agent
 }
 
 message TaskHistoryEntry {
