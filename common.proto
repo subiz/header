@@ -69,10 +69,6 @@ message By {
 	string type = 6; // agent, user, bot, dummy
 	string display_id = 7;
 	string display_type = 8; // agent, user, bot
-
-	string profile_id = 10; // only used if type = user
-	string channel = 11;
-	string channel_source = 12;
 }
 
 message Credential {
