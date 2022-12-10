@@ -791,7 +791,6 @@ message Event {
 	int64 created = 8;
 	int64 updated = 10;
 	string type = 9;
-	// repeated string topics = 11; // TODO: remove
 	string session_id = 12; // TODO: remove
 	common.By by = 50;
 	Touchpoint touchpoint = 52;
@@ -801,10 +800,8 @@ message Event {
 		Message message = 3;
 		Conversation conversation = 4;
 		Product product = 6;
-		// Topic topic = 7; // remove
 		account.Presence presence = 8;
 		User user = 10;
-		// UnreadTopic unread_topic = 11; // todo: remove
 		Notification notification = 14;
 		AgentGroup agent_group = 18;
 		Note note = 23;
@@ -825,7 +822,6 @@ message Event {
 		Webhook webhook = 44;
 		UserAlias user_alias = 45;
 		Conversion conversion = 47;
-		// CompactedNoties compacted_noties = 51;
 		Site site = 52;
 		WebpageCheck webpage_check = 53;
 		LangMessage language_message = 54;
@@ -1321,8 +1317,6 @@ message Conversation {
 	bool is_private = 51;
 
 	string avatar_url = 52;
-	// int64 last_modified = 53;
-
 	bool is_returned = 54; // for report new vs. old
 
 	CallInfo call = 55;
@@ -1409,7 +1403,6 @@ message Message {
 	repeated Attachment attachments = 4;
 	repeated KV fields = 10;
 
-	string integration_id = 15; // deprecated, use event touchpoint
 	string user_id = 19; // new standard, removing chain
 
 	// used for reaction and delivery status, could be ignore
@@ -1675,7 +1668,7 @@ message Tag {
 
 	int64 last_used = 9;
 
-	string type = 10;
+	string type = 10; // empty ||  order
 }
 
 message TemplateData {
