@@ -278,7 +278,6 @@ service ConversationMgr {
 
 	// sync, called from fabikon
 	rpc SaveMessage(header.Event) returns (header.Event);
-	rpc SaveConversation(header.Conversation) returns (header.Conversation);
 }
 
 service TemplateMgr {

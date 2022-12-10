@@ -52,7 +52,7 @@ message Notification {
 	string agent_id = 3;
 	string topic = 10;
 	string type = 5; // type
-	string data = 8; //json
+	string data = 8; // json
 	int64 created = 6; // ms
 	bool is_read = 9;
 
@@ -1185,9 +1185,7 @@ message ConversationMember {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string type = 3; // type
-
 	string id = 4;
-
 	string conversation_id = 13;
 	string last_page_view_url = 15;
 	string membership = 12;
@@ -1214,9 +1212,6 @@ message ConversationMember {
 	int64 hidden = 29; // ms
 	int64 last_mentioned = 30; // ms
 
-	string profile_id = 31; // only used if type = user
-	string channel = 32;
-	string channel_source = 33;
 	string invite_reason = 34;
 }
 
@@ -1280,7 +1275,7 @@ message Conversation {
 	int64 created = 4;
 	repeated ConversationMember members = 7;
 	repeated Tag tags = 10;
-	int64 ended = 12; // for call only
+	int64 ended = 12;
 	string state = 11; // converation state: pending, dialing, active, (routing||unassigned), congestion, ended
 	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
@@ -1298,7 +1293,7 @@ message Conversation {
 
 	RouteResult assigned_to = 30;
 
-	string first_message = 31;
+	// string first_message = 31;
 	string subject = 32;
 
 	repeated KV fields = 33;
