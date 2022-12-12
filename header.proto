@@ -5511,7 +5511,6 @@ message Task {
 	// than its creator.
 	string supervisor = 42;
 
-	string latest_comment_id = 44;
 	Event latest_comment = 43; // read-only
 	int64 last_seen = 45; // personal for each agent
 }
