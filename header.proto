@@ -5458,6 +5458,22 @@ message Tasks {
 	int64 total = 5;
 }
 
+message ImportLeadRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated User users = 4;
+	string primary_attribute_key = 5;
+	string on_duplicate = 6; //  empty == error , override, keep_both, skip
+}
+
+message ImportLeadResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 num_success = 3;
+	repeated int64 error_users = 5;
+	repeated int64 error_codes = 6;
+}
+
 message Task {
 	common.Context ctx = 1;
 

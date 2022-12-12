@@ -169,6 +169,8 @@ service UserMgr {
 	rpc ListUserEvents(header.ListUserEventsRequest) returns (header.Events);
 	rpc CreateUserEvent(header.Event) returns (header.Event);
 	rpc FillDevice(common.Device) returns (common.Device);
+
+	rpc ImportLead(header.ImportLeadRequest) returns (header.ImportLeadResponse);
 }
 
 service LiveMgr {
