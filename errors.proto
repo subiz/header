@@ -267,4 +267,5 @@ enum E {
 	bad_webrtc_track = 206;
 	invalid_webrtc_negotiation = 207;
 	bad_webrtc_connection = 208;
+	user_duplicated = 209;
 }
