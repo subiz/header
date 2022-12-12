@@ -698,6 +698,7 @@ message CallMetric {
 	int64 call_count = 12;
 	int64 call_duration_sum = 14;
 	int64 missed_call_count = 13; // inbound
+	int64 missed_outbound_call_count = 15;
 }
 
 message CallMetrics {
