@@ -5439,6 +5439,7 @@ message TasksRequest {
 	int32 limit = 20;
 	string anchor = 21;
 	int32 offset = 22;
+	string order_by = 30;
 
 	repeated string ids = 23;
 	repeated int64 last_modifieds = 24; // ms
