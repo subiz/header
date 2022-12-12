@@ -5446,6 +5446,8 @@ message TasksRequest {
 	string supervisor = 25; // task.supervisor = supervisor && task.assignee != supervisor
 	repeated string assignees = 26;
 	repeated string not_assignees = 27;
+	bool is_pinned = 28;
+	string watcher = 29;
 }
 
 message Tasks {
