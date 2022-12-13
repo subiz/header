@@ -5533,6 +5533,7 @@ message Task {
 
 	Event latest_comment = 43; // read-only
 	int64 last_seen = 45; // personal for each agent
+	int64 actived = 46;
 }
 
 message TaskHistoryEntry {
