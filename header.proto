@@ -5687,6 +5687,8 @@ message ConversationModalPickRequest {
 	string agent_id = 4;
 	string conversation_modal_id = 6;
 	string text = 7;
+	string user_id = 8;
+	Touchpoint touchpoint = 9;
 }
 
 message ConversationModalPicked {
