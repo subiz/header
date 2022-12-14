@@ -5536,6 +5536,14 @@ message Task {
 	Event latest_comment = 43; // read-only
 	int64 last_seen = 45; // personal for each agent
 	int64 actived = 46;
+
+	repeated TaskMember members = 47; // read only
+}
+
+message TaskMember {
+	string agent_id = 3;
+	int64 last_seen = 5;
+	int64 pinned = 6;
 }
 
 message TaskHistoryEntry {

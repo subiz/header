@@ -268,4 +268,13 @@ enum E {
 	invalid_webrtc_negotiation = 207;
 	bad_webrtc_connection = 208;
 	user_duplicated = 209;
+
+	invalid_task_title = 210;
+	invalid_task_note = 211;
+	invalid_task_status = 213;
+	invalid_task_assignee = 214;
+	invalid_task_supervisor = 215;
+	invalid_task_watchers = 216;
+
+	not_implemented = 218;
 }
