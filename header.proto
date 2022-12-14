@@ -5450,6 +5450,8 @@ message TasksRequest {
 	repeated string not_assignees = 27;
 	string is_pinned = 28; // yes/no
 	string watcher = 29;
+
+	bool shorten = 31; // only return pinned, watchers, title, assignee, supervisor, actived, duedate and title
 }
 
 message Tasks {
