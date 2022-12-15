@@ -5493,7 +5493,7 @@ message Task {
 	string created_by_pipeline_automation_action = 10;
 
 	string updated_by = 11;
-	int64 updated = 12;
+	int64 updated = 12; // info updated
 
 	int64 due_at = 13;
 	int64 reminder = 14; // 86400: 1 day before
@@ -5537,6 +5537,11 @@ message Task {
 	int64 actived = 46;
 
 	repeated TaskMember members = 47; // read only
+
+	// last_modifed the last updated time of the record
+	// changing members, watcher dont update task.updated but
+	// does change task.last_modified
+	int64 last_modified = 48;
 }
 
 message TaskMember {
