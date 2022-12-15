@@ -68,7 +68,7 @@ message ListNotiRequest {
 	string agent_id = 3;
 	int32 limit = 4;
 	string anchor = 5;
-	string category = 6;
+	string category = 6; // comma separated
 }
 
 message Attribute {
@@ -5534,7 +5534,6 @@ message Task {
 	string supervisor = 42;
 
 	Event latest_comment = 43; // read-only
-	int64 last_seen = 45; // personal for each agent
 	int64 actived = 46;
 
 	repeated TaskMember members = 47; // read only
@@ -5544,6 +5543,8 @@ message TaskMember {
 	string agent_id = 3;
 	int64 last_seen = 5;
 	int64 pinned = 6;
+	int64 muted = 7;
+	int64 last_commented = 8;
 }
 
 message TaskHistoryEntry {
