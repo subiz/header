@@ -5499,6 +5499,7 @@ message Task {
 	string created_by_pipeline = 8;
 	string created_by_pipeline_stage = 9;
 	string created_by_pipeline_automation_action = 10;
+	string created_by_rule_id = 60;
 
 	string updated_by = 11;
 	int64 updated = 12; // info updated
