@@ -3937,6 +3937,7 @@ message PushNoti {
 	int64 created = 22;
 
 	string subtitle = 23;
+	string task_id = 24;
 }
 
 message InvoiceTemplate {

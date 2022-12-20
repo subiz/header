@@ -16,6 +16,7 @@ message Subscription {
 	optional bool private_message = 11;
 	optional bool zalo_oa_followed = 12;
 	optional bool lead_created = 13;
+	optional int64 task_updated = 14;
 }
 
 message Setting {
