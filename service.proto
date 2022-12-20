@@ -439,7 +439,7 @@ service WidgetService {
 
 // bizbot services
 service Bizbot {
-	rpc ListBots(Id) returns (header.Bots);
+	rpc ListBots(Ids) returns (header.Bots);
 	rpc GetBot(Id) returns (header.Bot);
 	rpc UpdateBotRunState(header.Bot) returns (header.Bot);
 	rpc CreateBot(header.Bot) returns (header.Bot);
