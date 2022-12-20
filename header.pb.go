@@ -9968,8 +9968,8 @@ type RingingSetting struct {
 	// forward call
 	ForwardTo                 string         `protobuf:"bytes,6,opt,name=forward_to,json=forwardTo,proto3" json:"forward_to,omitempty"`
 	RingMostRecentAgentFirst  bool           `protobuf:"varint,10,opt,name=ring_most_recent_agent_first,json=ringMostRecentAgentFirst,proto3" json:"ring_most_recent_agent_first,omitempty"`
-	MissedCallHandleStrategy  string         `protobuf:"bytes,11,opt,name=missed_call_handle_strategy,json=missedCallHandleStrategy,proto3" json:"missed_call_handle_strategy,omitempty"`      // empty, round-robin, first-ring, last-ring, last-contact
-	MissedCallHandleExpireSec string         `protobuf:"bytes,12,opt,name=missed_call_handle_expire_sec,json=missedCallHandleExpireSec,proto3" json:"missed_call_handle_expire_sec,omitempty"` // 1 days
+	MissedCallHandleStrategy  string         `protobuf:"bytes,11,opt,name=missed_call_handle_strategy,json=missedCallHandleStrategy,proto3" json:"missed_call_handle_strategy,omitempty"`       // empty, round-robin, first-ring, last-ring, last-contact
+	MissedCallHandleExpireSec int64          `protobuf:"varint,12,opt,name=missed_call_handle_expire_sec,json=missedCallHandleExpireSec,proto3" json:"missed_call_handle_expire_sec,omitempty"` // 1 days
 	MissedCallHandleAgents    []string       `protobuf:"bytes,13,rep,name=missed_call_handle_agents,json=missedCallHandleAgents,proto3" json:"missed_call_handle_agents,omitempty"`
 	MissedCallSupervisors     []string       `protobuf:"bytes,14,rep,name=missed_call_supervisors,json=missedCallSupervisors,proto3" json:"missed_call_supervisors,omitempty"`
 	MenuTimeoutSec            int64          `protobuf:"varint,15,opt,name=menu_timeout_sec,json=menuTimeoutSec,proto3" json:"menu_timeout_sec,omitempty"`                  // sec
@@ -10047,11 +10047,11 @@ func (x *RingingSetting) GetMissedCallHandleStrategy() string {
 	return ""
 }
 
-func (x *RingingSetting) GetMissedCallHandleExpireSec() string {
+func (x *RingingSetting) GetMissedCallHandleExpireSec() int64 {
 	if x != nil {
 		return x.MissedCallHandleExpireSec
 	}
-	return ""
+	return 0
 }
 
 func (x *RingingSetting) GetMissedCallHandleAgents() []string {
@@ -47082,7 +47082,7 @@ var file_header_proto_rawDesc = []byte{
 	0x61, 0x6c, 0x6c, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x53, 0x74, 0x72, 0x61, 0x74, 0x65, 0x67,
 	0x79, 0x12, 0x40, 0x0a, 0x1d, 0x6d, 0x69, 0x73, 0x73, 0x65, 0x64, 0x5f, 0x63, 0x61, 0x6c, 0x6c,
 	0x5f, 0x68, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x5f, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x5f, 0x73,
-	0x65, 0x63, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x19, 0x6d, 0x69, 0x73, 0x73, 0x65, 0x64,
+	0x65, 0x63, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x19, 0x6d, 0x69, 0x73, 0x73, 0x65, 0x64,
 	0x43, 0x61, 0x6c, 0x6c, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x45, 0x78, 0x70, 0x69, 0x72, 0x65,
 	0x53, 0x65, 0x63, 0x12, 0x39, 0x0a, 0x19, 0x6d, 0x69, 0x73, 0x73, 0x65, 0x64, 0x5f, 0x63, 0x61,
 	0x6c, 0x6c, 0x5f, 0x68, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x5f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x73,

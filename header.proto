@@ -1109,7 +1109,7 @@ message RingingSetting {
 
 	bool ring_most_recent_agent_first = 10;
 	string missed_call_handle_strategy = 11; // empty, round-robin, first-ring, last-ring, last-contact
-	string missed_call_handle_expire_sec = 12; // 1 days
+	int64 missed_call_handle_expire_sec = 12; // 1 days
 	repeated string missed_call_handle_agents = 13;
 	repeated string missed_call_supervisors = 14;
 
