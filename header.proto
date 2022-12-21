@@ -2134,7 +2134,17 @@ message BotAction {
 }
 
 message ActionCreateTask {
-	Task task = 2;
+	// Task task = 2;
+	// string strategy = 3; // random_agents
+	repeated string assignees = 4; // random_agents
+	repeated string watchers = 5; // supervisor
+
+	int64 due_at = 6;
+	int64 due_after = 8;
+
+	string title_quill_delta = 9;
+	string note_quill_delta = 10;
+	int64 priority = 11; // task.priority
 }
 
 message ActionConfirmOrder {
