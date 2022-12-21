@@ -5511,6 +5511,8 @@ message Task {
 	string created_by_pipeline_stage = 9;
 	string created_by_pipeline_automation_action = 10;
 	string created_by_rule_id = 60;
+	string created_by_bot_id = 61;
+	string created_by_action_id = 62;
 
 	string updated_by = 11;
 	int64 updated = 12; // info updated
