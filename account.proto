@@ -35,6 +35,7 @@ message DashboardAgent {
 	optional int64 call_promote_shown = 30;
 
 	optional string on_call = 31;
+	optional int64 last_close_task_notification = 32;
 }
 
 message Agent {
