@@ -2101,6 +2101,7 @@ enum BotActionType {
 	cancel_order = 21;
 	view_order = 22;
 	confirm_order = 23;
+	create_task = 24;
 }
 
 message NextBotAction {
