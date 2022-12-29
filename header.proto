@@ -197,6 +197,8 @@ message CallSetting {
 	int64 updated = 30;
 	string updated_by = 31;
 	bool allow_direct_extension_calling = 32;
+
+	int64 limit_call_time_sec = 33;
 }
 
 message User {
@@ -5808,6 +5810,8 @@ message CallDriverRequest {
 
 	int64 direct_extension_duration_sec = 22;
 	bool is_missed = 23; // tell driver to mark this call as missed (e.g: out of business hour)
+
+	int64 limit_call_time_sec = 26;
 }
 
 message CallDriverResponse {
