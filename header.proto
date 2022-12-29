@@ -5576,6 +5576,7 @@ message TaskMember {
 	int64 pinned = 6;
 	int64 muted = 7;
 	int64 last_commented = 8;
+	int64 reminder_closed = 9;
 }
 
 message TaskHistoryEntry {

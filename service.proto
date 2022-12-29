@@ -589,6 +589,7 @@ service Apiece {
 	rpc DeleteTask(Id) returns (Empty);
 	rpc ListTasks(header.TasksRequest) returns (header.Tasks);
 	rpc SeenTask(header.Id) returns (Empty);
+	rpc CloseTaskReminder(header.Id) returns (Empty);
 
 	rpc MuteTask(header.Id) returns (Empty);
 	rpc UnmuteTask(header.Id) returns (Empty);
