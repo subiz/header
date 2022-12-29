@@ -1092,8 +1092,10 @@ message Rule {
 
 	bool when_offline = 21; // only run when there is no online agent
 
-	string has_agent_replied = 26; // "" -> no use, none, all, agents
-	repeated string last_replied_agents = 27; // empty =
+	string has_agent_replied = 26; // "" -> no use, none, all, agents      | dont use
+	repeated string last_replied_agents = 27; // empty =                   | dont use
+
+	bool prefer_most_recent_agent = 29;
 
 	repeated string fallback_agents = 23;
 
