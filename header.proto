@@ -5572,6 +5572,7 @@ message Task {
 	// changing members, watcher dont update task.updated but
 	// does change task.last_modified
 	int64 last_modified = 48;
+	string number = 49;
 }
 
 message TaskMember {
