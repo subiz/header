@@ -209,10 +209,10 @@ message User {
 	repeated Attribute attributes = 18;
 
 	// UserSession session = 40; // deprecating
-	repeated string lead_owners = 41;
+	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
 	bool is_lead = 43;
-	string type = 47; // empty = user, lead, customer
+	// string type = 47; // empty = user, lead, customer remove
 	// repeated ContactProfile contact_profiles = 48;
 	string primary_id = 49;
 	repeated string secondary_ids = 50;
@@ -229,6 +229,16 @@ message User {
 
 	int64 created = 59;
 	int64 updated = 60;
+
+	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
+}
+
+message UserLifecycleStage {
+	string stage = 5; // id
+	int64 duration = 6; // ms
+	string by = 7;
+	string by_type = 8; // agent, bot
+	int64 became_at = 9;
 }
 
 // lookup contact point to user_id
@@ -350,16 +360,14 @@ message AttributeDefinition {
 
 	string key = 7;
 
-	// string kind = 8; // will be removed
 	int64 updated = 9;
 	string updated_by = 11;
 	string validator = 10; // email, name, decimal
 
-	// bool allow_multiples = 14; //
 	bool allow_user_edit = 15;
 
 	bool is_system = 22;
-	bool is_readonly = 23;
+	bool is_readonly = 23; // agent and user cannot update
 
 	int64 created = 24;
 	string created_by = 25;

@@ -218,6 +218,8 @@ enum RealtimeType {
 	call_transferred = 216;
 
 	agent_on_call_status_changed = 220;
+
+	user_lifecycle_stage_changed = 221;
 }
 
 message TextTransform {
