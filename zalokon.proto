@@ -54,6 +54,7 @@ message ResponseData {
 	string token = 3;
 	string attachment_id = 4;
 	string user_id = 5;
+	ResponseQuota quota = 6;
 }
 
 message Response {
@@ -220,4 +221,10 @@ message ZnsTemplate {
 
 message ZnsTemplates {
 	repeated ZnsTemplate templates = 2;
+}
+
+message ResponseQuota {
+	int64 total = 8;
+	int64 remain = 9;
+	string type = 10;
 }
