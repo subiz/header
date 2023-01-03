@@ -5365,6 +5365,10 @@ message CompactedUser {
 	Event start_content_view = 56; // readonly latest content view that change the source
 	Event first_content_view = 57; // readonly first content view
 	repeated string lead_conversion_bys = 58; // for quick search
+	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
+	string lifecycle_stage = 62;
+	string lead_status = 63;
+	string owner = 64;
 }
 
 message CompactedUsers {
