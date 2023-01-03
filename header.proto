@@ -73,7 +73,7 @@ message ListNotiRequest {
 message Attribute {
 	string key = 4;
 	int64 modified = 8;
-	string modified_by = 5;
+	// string modified_by = 5;
 
 	string value = 9; // json encode primary value
 	string text = 10;
@@ -84,7 +84,7 @@ message Attribute {
 	repeated Attribute revisions = 15;
 	repeated string other_values = 20;
 
-	string type = 16;
+	string type = 16; // read-only
 	string by = 17; // required
 
 	// to update

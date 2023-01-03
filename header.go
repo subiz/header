@@ -518,3 +518,62 @@ func Phone(phone string) string {
 	}
 	return phones[0]
 }
+
+func ContainString(ss []string, s string) bool {
+	for _, i := range ss {
+		if s == i {
+			return true
+		}
+	}
+	return false
+}
+
+func firstN(s string, n int) string {
+	if len(s) > n {
+		return s[:n]
+	}
+	return s
+}
+
+func GetUserDisplayName(u *User) string {
+	countryName := ""
+	cityName := ""
+	fullname := ""
+	email := ""
+
+	for _, attr := range u.GetAttributes() {
+		if attr.GetKey() == "trace_country_name" {
+			countryName = attr.GetText()
+		}
+		if attr.GetKey() == "trace_city_name" {
+			cityName = attr.GetText()
+		}
+		if attr.GetKey() == "fullname" {
+			fullname = attr.GetText()
+		}
+		if attr.GetKey() == "emails" {
+			email = attr.GetText()
+		}
+	}
+
+	if fullname != "" && email != "" {
+		return fullname + " (" + email + ")"
+	}
+	if fullname != "" {
+		return fullname
+	}
+	if email != "" {
+		return email
+	}
+	if cityName != "" {
+		return countryName + " (" + cityName + ") #" + last4Chars(u.GetId())
+	}
+	return countryName + " #" + last4Chars(u.GetId())
+}
+
+func last4Chars(s string) string {
+	if len(s) < 4 {
+		return s
+	}
+	return s[len(s)-4:]
+}

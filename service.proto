@@ -128,6 +128,7 @@ service UserMgr {
 	rpc CreateUser(header.User) returns (Id);
 	rpc CreateUserFromWeb(header.User) returns (Id);
 	rpc UpdateUser(header.User) returns (Id);
+	rpc UpdateUser2(header.User) returns (header.User);
 
 	rpc ReadUser(Id) returns (header.User);
 	rpc ReadOrCreateUserByContactProfile(Id) returns (header.User);
