@@ -80,7 +80,7 @@ message Attribute {
 	double number = 11;
 	bool boolean = 12;
 	string datetime = 13;
-	repeated string list = 14; // remove
+	repeated string list = 14; // remove [a,b,c]
 	repeated Attribute revisions = 15;
 	repeated string other_values = 20;
 
@@ -238,7 +238,7 @@ message UserLifecycleStage {
 	int64 duration = 6; // ms
 	string by = 7;
 	string by_type = 8; // agent, bot
-	int64 became_at = 9;
+	int64 start_at = 9;
 }
 
 // lookup contact point to user_id

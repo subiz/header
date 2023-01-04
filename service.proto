@@ -134,6 +134,8 @@ service UserMgr {
 	rpc ReadOrCreateUserByContactProfile(Id) returns (header.User);
 	rpc ReportUserEvents(header.UserEventMetricsRequest) returns (header.UserEventMetrics);
 	rpc MatchUsers(Ids) returns (header.Users);
+	rpc BanUser(Id) returns (header.User);
+	rpc UnbanUser(Id) returns (header.User);
 
 	rpc UpdateView(header.UserView) returns (header.UserView);
 	rpc CreateView(header.UserView) returns (header.UserView);
