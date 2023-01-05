@@ -136,6 +136,71 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 	u.Attributes = append(u.Attributes, a)
 }
 
+func UpdateAttr(u *User, key string, typ string, val interface{}, action string) {
+	key = strings.ToLower(strings.TrimSpace(key))
+	if u == nil || val == nil || key == "" {
+		return
+	}
+	a := &Attribute{}
+	a.Key = key
+	foundIndex := -1
+	for index, uAttr := range u.Attributes {
+		if uAttr == nil {
+			continue
+		}
+		if !SameKey(uAttr.Key, key) {
+			continue
+		}
+		foundIndex = index
+		break
+	}
+
+	attrs := u.Attributes
+	if foundIndex >= 0 {
+		attrs = append(attrs[:foundIndex], attrs[foundIndex+1:]...)
+	}
+
+	switch typ {
+	case AttributeDefinition_text.String(), "string", "str", "":
+		v, _ := val.(string)
+		a.Text = v
+	case AttributeDefinition_number.String(), "int", "float":
+		vb, _ := json.Marshal(val)
+		v, _ := strconv.ParseFloat(string(vb), 64)
+		a.Number = v
+	case AttributeDefinition_boolean.String(), "bool":
+		v, _ := val.(bool)
+		a.Boolean = v
+	case "list":
+		ss, _ := val.([]string)
+		a.List = ss
+	case AttributeDefinition_datetime.String(), "date", "time":
+		var d time.Time
+		switch t := val.(type) {
+		case uint:
+			d = time.Unix(int64(t)/1000, 0)
+		case int:
+			d = time.Unix(int64(t)/1000, 0)
+		case int64:
+			d = time.Unix(int64(t)/1000, 0)
+		case int32:
+			d = time.Unix(int64(t)/1000, 0)
+		case uint64:
+			d = time.Unix(int64(t)/1000, 0)
+		case uint32:
+			d = time.Unix(int64(t)/1000, 0)
+		case time.Time:
+			d = t
+		}
+		a.Datetime = d.Format(time.RFC3339)
+	default:
+		return // undefined type
+	}
+	a.Action = action
+	attrs = append(attrs, a)
+	u.Attributes = attrs
+}
+
 func SetTextAttr(u *User, key string, val string) {
 	key = strings.ToLower(strings.TrimSpace(key))
 	if u == nil || key == "" {

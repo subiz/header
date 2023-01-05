@@ -99,3 +99,12 @@ func TestPerm(t *testing.T) {
 	fmt.Println("D", checkAccess([]string{"all"}, "phone_device:w"))
 	fmt.Println("A", checkAccess([]string{"view_others", "agent", "account_setting"}, "phone_device:w"))
 }
+
+func TestUpdateUser(t *testing.T) {
+	user := &User{}
+	UpdateAttr(user, "fullname", "string", "thanh", "upsert")
+	UpdateAttr(user, "fullname", "string", "dao", "upsert")
+	UpdateAttr(user, "fullname", "stringd", "thanh", "upsert") // invalid
+	b, _ := json.Marshal(user)
+	fmt.Println(string(b))
+}
