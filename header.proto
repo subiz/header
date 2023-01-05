@@ -211,7 +211,7 @@ message User {
 	// UserSession session = 40; // deprecating
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
-	bool is_lead = 43;
+	// bool is_lead = 43;
 	// string type = 47; // empty = user, lead, customer remove
 	// repeated ContactProfile contact_profiles = 48;
 	string primary_id = 49;
@@ -5350,7 +5350,7 @@ message CompactedUser {
 
 	repeated CompactedAttribute attributes = 31;
 
-	bool is_lead = 32;
+	// bool is_lead = 32;
 	repeated UserLabel labels = 33;
 	UserSession session = 34;
 
