@@ -3370,6 +3370,12 @@ message FileHeader {
 
 	string bucket = 24;
 	int64 ttl = 25;
+
+	// for image file
+	int64 width = 26;
+	int64 height = 27;
+	int64 avatar_size = 28;
+	int64 avatar_offset = 29;
 }
 
 message PresignResult {
@@ -3384,10 +3390,6 @@ message FileRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-
-	// for image file
-	int64 avatar_size = 4;
-	int64 avatar_offset = 5;
 }
 
 message File {
