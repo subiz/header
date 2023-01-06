@@ -3384,6 +3384,10 @@ message FileRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
+
+	// for image file
+	int64 avatar_size = 4;
+	int64 avatar_offset = 5;
 }
 
 message File {
@@ -3414,6 +3418,9 @@ message File {
 	string thumbnail_url = 19;
 	int64 thumbnail_width = 20;
 	int64 thumbnail_height = 21;
+	int64 avatar_size = 24;
+	int64 avatar_offset = 25;
+	string avatar_url = 26;
 
 	int64 ttl = 22; // created + 3 months
 	int64 deleted = 23;
