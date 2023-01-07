@@ -81,7 +81,7 @@ message Attribute {
 	bool boolean = 12;
 	string datetime = 13;
 	repeated string list = 14; // remove [a,b,c]
-	repeated Attribute revisions = 15;
+	// repeated Attribute revisions = 15;
 	repeated string other_values = 20;
 
 	string type = 16; // read-only

@@ -642,3 +642,34 @@ func last4Chars(s string) string {
 	}
 	return s[len(s)-4:]
 }
+
+func Unique(slice []string) []string {
+	if len(slice) == 0 || len(slice) == 1 {
+		return slice
+	}
+
+	if len(slice) == 2 {
+		if slice[0] == slice[1] {
+			return slice[:1]
+		}
+	}
+
+	keys := make(map[string]bool)
+	list := []string{}
+	hasDupplicated := false
+	for _, entry := range slice {
+		_, has := keys[entry]
+		if !has {
+			keys[entry] = true
+			list = append(list, entry)
+		} else {
+			hasDupplicated = true
+		}
+	}
+
+	// dont try to change the original slice
+	if !hasDupplicated {
+		return slice
+	}
+	return list
+}
