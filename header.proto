@@ -5564,6 +5564,7 @@ message Task {
 	string status = 23; // open - done - deleted
 
 	int64 done_at = 24; // just store closed timestamp, so when needed, we have the data to calculate task duration
+	string done_by = 50;
 
 	repeated string associated_tickets = 25;
 	repeated string associated_users = 26;
