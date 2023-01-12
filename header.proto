@@ -28,7 +28,7 @@ message Ids {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated string ids = 3;
-	repeated string signatures = 4; // crc32 IEEEE
+	// repeated string signatures = 4; // can remove
 
 	repeated int64 last_modifieds = 5; // ms
 	string anchor = 6;
@@ -864,10 +864,17 @@ message Event {
 		CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
 		GreetingAudio greeting_audio = 94;
 		RecentCallRecord recent_call_record = 95;
-		string ice_candidate = 96;
+		string ice_candidate = 96; // remove
+		WebRTCMessage webrtc_message = 97;
 	}
-
 	Data data = 20;
+}
+
+message WebRTCMessage {
+	string negotiation_id = 2;
+	string offer = 3;
+	string answer = 4;
+	string ice_candidate = 5;
 }
 
 message EventParams {

@@ -275,12 +275,7 @@ service ConversationMgr {
 	// try to make an outbound call from subiz
 	rpc OriginateCall(StartRequest) returns (Conversation);
 
-	// for driver
-	rpc PingAppPhone(CallDriverRequest) returns (Empty);
-	rpc ReplyRingRequest(CallDriverRequest) returns (Empty); // accept or decline
-
 	rpc ListMyRecentCalls(Id) returns (RecentCallRecords);
-
 	// sync, called from fabikon
 	rpc SaveMessage(header.Event) returns (header.Event);
 }
