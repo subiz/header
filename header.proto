@@ -213,8 +213,7 @@ message User {
 	repeated UserLabel labels = 42;
 	// bool is_lead = 43;
 	// string type = 47; // empty = user, lead, customer remove
-	// repeated ContactProfile contact_profiles = 48;
-	string primary_id = 49;
+	string primary_id = 49; // rename to customer_id
 	repeated string secondary_ids = 50;
 
 	string profile_id = 52; // user-id
@@ -231,6 +230,7 @@ message User {
 	int64 updated = 60;
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
+	repeated User linked_users = 62;
 }
 
 message UserLifecycleStage {
