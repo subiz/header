@@ -230,7 +230,25 @@ message User {
 	int64 updated = 60;
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
-	repeated User linked_users = 62;
+	repeated LinkedUser linked_users = 62;
+}
+
+message LinkedUser {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string customer_id = 3;
+
+	string id = 4;
+	string profile_id = 5; // user-id
+	string channel_source = 6; // pvcombank require verification
+	string channel = 7; // account => require verification, acc logo
+
+	string linked_by = 10;
+	string linked_by_type = 11;
+	string linked_by_extra_id = 12;
+	int64 linked_at = 13;
+
+	User user = 20;
 }
 
 message UserLifecycleStage {
@@ -866,6 +884,7 @@ message Event {
 		RecentCallRecord recent_call_record = 95;
 		string ice_candidate = 96; // remove
 		WebRTCMessage webrtc_message = 97;
+		LinkedUser linked_user = 98;
 	}
 	Data data = 20;
 }
