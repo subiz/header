@@ -28,37 +28,28 @@ enum E {
 	StartBot = 4000002;
 	TeminateBot = 4000003;
 
-	undefined = 1; // unknown error
-	internal_error = 2; // typical server error
+	// 1000 -> 4000: user error
 	missing_account_id = 3;
-	invalid_proto = 4;  // protobuf message is broken
-	database_error = 5;
 	resource_not_found = 6;
 	access_deny = 7;
-	invalid_json = 8; // json payload is broken
 
 	account_not_found = 9;
 	invalid_credential  = 10;
 	http_call_error  = 11;
 	agent_group_not_found  = 12;
 	invalid_conversation_id = 13;
-	agent_not_found      = 15;
+	agent_not_found = 15;
 	facebook_page_not_found = 16;
 	invalid_refresh_token = 17;
 	wrong_password = 18;
-	agent_is_not_active  = 19;
+	agent_is_not_active = 19;
 	invalid_token = 20;
 	invalid_message_size = 21;
 	invalid_payload_size = 22;
 
-	facebook_call_failed = 23;
-	invalid_facebook_access_token  = 24;
-
-	subiz_call_failed = 25;
 	user_is_banned = 26;
 
 	wrong_signature = 27;
-	data_corrupted = 28;
 
 	invalid_account_id = 29;
 	invalid_target_id = 30;
@@ -66,14 +57,14 @@ enum E {
 	invalid_user_id = 32;
 
 	user_not_found = 33;
-	automation_not_found = 34;
+	// automation_not_found = 34;
 	invalid_attribute_value = 35;
 	invalid_attribute_key = 36;
 	invalid_attribute_name = 37;
 	invalid_attribute_type = 38;
 
 	too_many_attribute = 39;
-	attribute_not_found=40;
+	attribute_not_found = 40;
 	invalid_agent_id = 41;
 	invalid_note_target_id = 42;
 
@@ -111,9 +102,6 @@ enum E {
 	invalid_token_type = 68;
 	invalid_invoice_template = 69;
 	invoice_template_compile_failed = 70;
-
-	invalid_google_auth_response = 71;
-	pdf_generate_failed = 72;
 
 	invalid_stripe_customer_id = 73;
 	invalid_stripe_token = 74;
@@ -276,5 +264,16 @@ enum E {
 	invalid_task_supervisor = 215;
 	invalid_task_watchers = 216;
 
-	not_implemented = 218;
+	// SERVER ERROR
+	undefined = 5001; // unknown error
+	not_implemented = 5002;
+	database_error = 5003;
+	invalid_json = 5008; // json payload is broken
+	invalid_proto = 5004;  // protobuf message is broken
+	facebook_call_failed = 5023;
+	invalid_facebook_access_token  = 5024;
+	subiz_call_failed = 5025;
+	data_corrupted = 5028;
+	invalid_google_auth_response = 5071;
+	pdf_generate_failed = 5072;
 }

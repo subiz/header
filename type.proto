@@ -223,6 +223,8 @@ enum RealtimeType {
 
 	user_linked = 222;
 	user_unlinked = 223;
+
+	event_type_updated = 225;
 }
 
 message TextTransform {

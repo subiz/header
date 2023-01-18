@@ -205,7 +205,7 @@ message User {
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
-	repeated string aliases = 5;
+	// repeated string aliases = 5;
 	repeated Attribute attributes = 18;
 
 	// UserSession session = 40; // deprecating
@@ -230,7 +230,7 @@ message User {
 	int64 updated = 60;
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
-	repeated LinkedUser linked_users = 62;
+	// repeated LinkedUser linked_users = 62;
 }
 
 message LinkedUser {
@@ -885,6 +885,7 @@ message Event {
 		string ice_candidate = 96; // remove
 		WebRTCMessage webrtc_message = 97;
 		LinkedUser linked_user = 98;
+		EventType event_type = 99;
 	}
 	Data data = 20;
 }
@@ -904,13 +905,24 @@ message EventParams {
 message ListUserEventsRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string user_id = 3;
+	string user_id = 3; // could be empty, but type must set
 	string query = 4;
 	string anchor = 5;
 	int32 limit = 6; // hour
 
 	string category = 9;
 	int32 limit_hour = 10;
+
+	string type = 12;
+}
+
+message ListEventTypeRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 from_hour = 3;
+	int64 to_hour = 4;
+	string category = 5;
+	string keyword = 6;
 }
 
 // deprecating
@@ -1468,6 +1480,11 @@ message Message {
 	bool is_internal = 32;
 
 	MessageReferral referral = 33; // facebook
+
+	string zns_phone = 40; // zns-only
+	string zns_template_id = 41; // zns-only
+	string zns_tracking_id = 42; // zns-only
+	map<string, string> zns_template_data = 43; // zns-only
 }
 
 message MessageReferral {
@@ -5227,16 +5244,18 @@ message Taxes {
 
 message Error {
 	string description = 2;
-	string debug = 3; // remove
+	// string debug = 3; // remove
 	int32 class = 4; // remove
 	string stack = 5; // remove
 	// int64 created = 6; // remove
-	string code = 7;
-	string root = 8; // remove
+	string code = 7; // should be general database_error, SBZ-INVALIDINPUT
+	// string root = 8; // remove
 	string trace_id = 9; // remove
 
 	bool temporary = 11;
-	string number = 12; // crc32 hash of stack SBZ-4930543478
+	string number = 12; // crc32 hash of stack #4930543478
+
+	int32 http_code = 13; // should be derived from code
 }
 
 message ShopeeShop {
@@ -5967,4 +5986,58 @@ message ZnsRequest {
 	string template_id = 5;
 	string tracking_id = 6;
 	map<string, string> template_data = 7;
+}
+
+message SendOmniChannelMessageRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// user
+	string id = 3;
+	string channel = 5;
+	string channel_source = 6;
+	string profile_id = 7;
+
+	Event messages = 8;
+}
+
+message EventType {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string id = 3; // m_error_3242, content_viewed
+	string title = 6;
+	string description = 8;
+	string category = 9; // error
+
+	int64 first_seen = 11;
+	int64 last_seen = 12;
+
+	string first_event_id = 13;
+	Event first_event = 14;
+
+	string last_event_id = 15;
+	Event last_event = 16;
+
+	string first_user_id = 17;
+	User first_user = 18;
+
+	string last_user_id = 19;
+	User last_user = 20;
+
+	int64 total_events = 23;
+	repeated int64 in_range_total_events = 24;
+	repeated int64 in_range_total_users = 25;
+
+	repeated int64 last_24h_total_events = 26;
+	repeated int64 last_30d_total_events = 27;
+
+	string status = 30; // open, acknowledged, resolved
+	int64 archived = 31;
+}
+
+message EventTypes {
+	common.Context ctx = 1;
+	string account_id = 2;
+	EventType event_types = 3;
 }

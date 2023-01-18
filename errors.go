@@ -48,7 +48,6 @@ func wrapErr(root error, class int, code E, v ...interface{}) *Error {
 		}
 
 		e := newError(class, code, append(v, errstr))
-		e.Root = root.Error()
 		return e
 	}
 
