@@ -1,0 +1,22 @@
+{
+  "access_deny": {
+    "http": 400,
+    "vi_VN": "Bạn không co đủ quyền để thực hiện thao tác này, vui lòng liên hệ quản trị viên cấp cao hơn",
+    "en_US": "You don't have the privilengt required to perform this action, please contact your manager"
+  },
+	"wrong_password": {
+		"http": 400,
+    "vi_VN": "Sai mật khẩu",
+    "en_US": "Wrong password"
+	},
+  "internal_error": {
+    "http": 500,
+    "vi_VN": "Subiz không thể kết nối với cơ sở dữ liệu, vui lòng thử lại sau",
+    "en_US": "Subiz cannot connect to the database right now. Please try again later"
+  },
+  "database_error": {
+    "http": 500,
+    "vi_VN": "Subiz không thể kết nối với cơ sở dữ liệu, vui lòng thử lại sau",
+    "en_US": "Subiz cannot connect to the database right now. Please try again later"
+  }
+}

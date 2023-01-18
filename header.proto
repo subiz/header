@@ -822,72 +822,75 @@ message Event {
 	string session_id = 12; // TODO: remove
 	common.By by = 50;
 	Touchpoint touchpoint = 52;
-	message Data {
-		account.Account account = 1;
-		account.Agent agent = 2;
-		Message message = 3;
-		Conversation conversation = 4;
-		Product product = 6;
-		account.Presence presence = 8;
-		User user = 10;
-		Notification notification = 14;
-		AgentGroup agent_group = 18;
-		Note note = 23;
-		// Ticket ticket = 24;
-		// Automation automation = 25;
-		Event event = 26;
-		// AutomationEvent automation_event = 30;
-		// notibox.Notibox notibox = 32;
-		noti5.Setting notification_setting = 34;
-		Rule rule = 36;
-		AttributeDefinition user_attribute = 37;
-		Tag tag = 38;
-		UserMetric total_user = 39;
-		Bot bot = 40;
-		BotRunResponse bot_run_response = 41;
-		Integration integration = 42;
-		BotTerminated bot_terminated = 43;
-		Webhook webhook = 44;
-		UserAlias user_alias = 45;
-		Conversion conversion = 47;
-		Site site = 52;
-		WebpageCheck webpage_check = 53;
-		LangMessage language_message = 54;
-		Label label = 55;
-		UserView user_view = 56;
-		LoginSession login_session = 57;
-		ProductFeed product_feed = 58;
-		ProductCollection product_collection = 59;
-		Order order = 60;
-		Currency currency = 61;
-		ShopSetting shop_setting = 62;
-		Address shipping_address = 63;
-		OrderStatusUpdated order_status = 65;
-		Bill bill = 66;
-		Order order_from = 67;
-		Event current = 68;
-		OrderHistoryEntry order_history_entry = 69;
-		UserOrderConfirmation user_order_confirmation = 70;
-		Pipeline pipeline = 71;
-		OrderPipelineUpdated order_pipeline_updated = 72;
-		Task task = 73;
-		TaskHistoryEntry task_history_entry = 74;
-		OrderPipelineStage order_pipeline_stage = 75;
-		ConversationModal conversation_modal = 76;
-		ConversationAutomation conversation_automation = 77;
-		PhoneDevice phone_device = 78;
-		CallSetting call_setting = 79;
-		BlockedNumber blocked_number = 91;
-		CallInfo call_info = 92; // call-transfered
-		CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
-		GreetingAudio greeting_audio = 94;
-		RecentCallRecord recent_call_record = 95;
-		string ice_candidate = 96; // remove
-		WebRTCMessage webrtc_message = 97;
-		LinkedUser linked_user = 98;
-		EventType event_type = 99;
-	}
 	Data data = 20;
+}
+
+message Data {
+	common.Context ctx = 1;
+	account.Agent agent = 2;
+	Message message = 3;
+	Conversation conversation = 4;
+	Product product = 6;
+	account.Presence presence = 8;
+	User user = 10;
+	Notification notification = 14;
+	AgentGroup agent_group = 18;
+	Note note = 23;
+	// Ticket ticket = 24;
+	// Automation automation = 25;
+	Event event = 26;
+	// AutomationEvent automation_event = 30;
+	// notibox.Notibox notibox = 32;
+	noti5.Setting notification_setting = 34;
+	Rule rule = 36;
+	AttributeDefinition user_attribute = 37;
+	Tag tag = 38;
+	UserMetric total_user = 39;
+	Bot bot = 40;
+	BotRunResponse bot_run_response = 41;
+	Integration integration = 42;
+	BotTerminated bot_terminated = 43;
+	Webhook webhook = 44;
+	UserAlias user_alias = 45;
+	Conversion conversion = 47;
+	Site site = 52;
+	WebpageCheck webpage_check = 53;
+	LangMessage language_message = 54;
+	Label label = 55;
+	UserView user_view = 56;
+	LoginSession login_session = 57;
+	ProductFeed product_feed = 58;
+	ProductCollection product_collection = 59;
+	Order order = 60;
+	Currency currency = 61;
+	ShopSetting shop_setting = 62;
+	Address shipping_address = 63;
+	OrderStatusUpdated order_status = 65;
+	Bill bill = 66;
+	Order order_from = 67;
+	Event current = 68;
+	OrderHistoryEntry order_history_entry = 69;
+	UserOrderConfirmation user_order_confirmation = 70;
+	Pipeline pipeline = 71;
+	OrderPipelineUpdated order_pipeline_updated = 72;
+	Task task = 73;
+	TaskHistoryEntry task_history_entry = 74;
+	OrderPipelineStage order_pipeline_stage = 75;
+	ConversationModal conversation_modal = 76;
+	ConversationAutomation conversation_automation = 77;
+	PhoneDevice phone_device = 78;
+	CallSetting call_setting = 79;
+	BlockedNumber blocked_number = 91;
+	CallInfo call_info = 92; // call-transfered
+	CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
+	GreetingAudio greeting_audio = 94;
+	RecentCallRecord recent_call_record = 95;
+	string ice_candidate = 96; // remove
+	WebRTCMessage webrtc_message = 97;
+	LinkedUser linked_user = 98;
+	EventType event_type = 99;
+	Error error = 100;
+	account.Account account = 101;
 }
 
 message WebRTCMessage {
@@ -5243,19 +5246,32 @@ message Taxes {
 }
 
 message Error {
-	string description = 2;
+	string description = 2; // remove, prefer i18n message
 	// string debug = 3; // remove
 	int32 class = 4; // remove
-	string stack = 5; // remove
+	string stack = 5;
 	// int64 created = 6; // remove
-	string code = 7; // should be general database_error, SBZ-INVALIDINPUT
+	string code = 7; // should be general sbz324-database-error, sbz4334-access-deny
 	// string root = 8; // remove
 	string trace_id = 9; // remove
 
-	bool temporary = 11;
-	string number = 12; // crc32 hash of stack #4930543478
+	string number = 12; // unique, crc32 hash of stack #4930543478 for grouping error
 
 	int32 http_code = 13; // should be derived from code
+	I18nString message = 14;
+	message KV {
+		bool is_hidden = 3;
+		string text = 4;
+		int64 int = 5;
+		float float = 6;
+		bool bool = 7;
+		repeated string texts = 8;
+		repeated int64 ints = 9;
+		repeated float floats = 10;
+		repeated bool bools = 11;
+	}
+
+	map<string, KV> fields = 15;
 }
 
 message ShopeeShop {
