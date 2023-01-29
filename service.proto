@@ -135,6 +135,8 @@ service UserMgr {
 	rpc BanUser(Id) returns (header.User);
 	rpc UnbanUser(Id) returns (header.User);
 
+	rpc LookupByPhone(Id) returns (header.Users);
+
 	rpc UpdateView(header.UserView) returns (header.UserView);
 	rpc CreateView(header.UserView) returns (header.UserView);
 	rpc DeleteView(Id) returns (Empty);
