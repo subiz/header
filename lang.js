@@ -268,6 +268,7 @@ gocodeallstring += `	return out
 
 proto += `
 	string custom = 250;
+  string key = 251;
 }`;
 
 let curencySource =

@@ -137,6 +137,7 @@ message I18nString {
 	string zh_TW = 139; // Chinese Traditional (Taiwan)
 	string zu_ZA = 140; // Zulu
 	string custom = 250;
+  string key = 251;
 }
 message Price {
 	string currency = 2;

@@ -5247,31 +5247,23 @@ message Taxes {
 
 message Error {
 	string description = 2; // remove, prefer i18n message
-	// string debug = 3; // remove
-	int32 class = 4; // remove
+	int32 class = 4; // http-code, should be derived from code
 	string stack = 5;
-	// int64 created = 6; // remove
 	string code = 7; // should be general sbz324-database-error, sbz4334-access-deny
-	// string root = 8; // remove
-	string trace_id = 9; // remove
-
+	string sub_code = 8;
 	string number = 12; // unique, crc32 hash of stack #4930543478 for grouping error
+	map<string, ErrorKV> fields = 15;
+}
 
-	int32 http_code = 13; // should be derived from code
-	I18nString message = 14;
-	message KV {
-		bool is_hidden = 3;
-		string text = 4;
-		int64 int = 5;
-		float float = 6;
-		bool bool = 7;
-		repeated string texts = 8;
-		repeated int64 ints = 9;
-		repeated float floats = 10;
-		repeated bool bools = 11;
-	}
-
-	map<string, KV> fields = 15;
+message ErrorKV {
+	string text = 4;
+	int64 int = 5;
+	float float = 6;
+	bool bool = 7;
+	repeated string texts = 8;
+	repeated int64 ints = 9;
+	repeated float floats = 10;
+	repeated bool bools = 11;
 }
 
 message ShopeeShop {
