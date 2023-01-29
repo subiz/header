@@ -6006,7 +6006,7 @@ message SendOmniChannelMessageRequest {
 	string channel_source = 6;
 	string profile_id = 7;
 
-	Event messages = 8;
+	repeated Event messages = 8;
 }
 
 message EventType {
