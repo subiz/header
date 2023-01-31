@@ -212,7 +212,7 @@ message User {
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
 	// bool is_lead = 43;
-	// string type = 47; // empty = user, lead, customer remove
+	string type = 47; // empty = visitor, lead, customer, deleted
 	string primary_id = 49; // rename to customer_id
 	repeated string secondary_ids = 50;
 
@@ -5251,19 +5251,8 @@ message Error {
 	string stack = 5;
 	string code = 7; // should be general sbz324-database-error, sbz4334-access-deny
 	string sub_code = 8;
-	string number = 12; // unique, crc32 hash of stack #4930543478 for grouping error
-	map<string, ErrorKV> fields = 15;
-}
-
-message ErrorKV {
-	string text = 4;
-	int64 int = 5;
-	float float = 6;
-	bool bool = 7;
-	repeated string texts = 8;
-	repeated int64 ints = 9;
-	repeated float floats = 10;
-	repeated bool bools = 11;
+	string number = 12; // unique, or hash of stack #4930543478 for grouping error
+	map<string, string> fields = 15;
 }
 
 message ShopeeShop {
