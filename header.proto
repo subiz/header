@@ -637,6 +637,9 @@ message ConversationMetric {
 	int64 first_replied_count = 9;
 	int64 first_replied_duration = 10;
 	repeated string agent_ids = 11; // assigned
+	string agent_id = 18; // derived
+	int64 agent_id_bits = 19; // only system
+	string agent_id_strings = 20; // only system
 	repeated string agent_sent_ids = 12;
 	string date = 13; // derived
 	int64 tag_bits = 14; // only system
