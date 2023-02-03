@@ -140,6 +140,7 @@ message Message {
 	repeated Attachment attachments = 7;
 	Attachment attachment = 8;
 	string conversation_id = 10;
+	string quote_msg_id = 12;
 }
 
 // user_send_text: Người dùng gửi tin nhắn văn bản
