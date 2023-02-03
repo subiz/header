@@ -100,15 +100,6 @@ message Attribute {
 	string action = 18;
 }
 
-// alias => user
-// user => aliases
-message UserAlias {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	string alias = 4;
-}
-
 message PhoneDevices {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -856,7 +847,7 @@ message Data {
 	Integration integration = 42;
 	BotTerminated bot_terminated = 43;
 	Webhook webhook = 44;
-	UserAlias user_alias = 45;
+	// UserAlias user_alias = 45;
 	Conversion conversion = 47;
 	Site site = 52;
 	WebpageCheck webpage_check = 53;
@@ -6043,6 +6034,15 @@ message SegmentCondition {
 	repeated SegmentCondition one = 13;
 }
 
+message ListUserRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	SegmentCondition condition = 4;
+	string order_by = 5;
+	int64 offset = 6;
+	int64 limit = 10;
+}
+
 message Segment {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6061,6 +6061,9 @@ message Segment {
 	int64 updated = 22;
 	int64 updated_by = 23;
 	int64 archived = 24;
+
+	bool is_public = 26;
+	bool is_system = 27;
 }
 
 message Segments {
