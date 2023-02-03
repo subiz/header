@@ -26,7 +26,7 @@ const (
 	Type_unknown   Type = 0
 	Type_user      Type = 1
 	Type_agent     Type = 2
-	Type_subiz     Type = 3
+	Type_subiz     Type = 3 // system, internal service
 	Type_app       Type = 4 // dashboard, accmgr
 	Type_connector Type = 6 // fabikon, mailkon, subiz-driver, stringee-driver
 	Type_bot       Type = 7 // subiz bot

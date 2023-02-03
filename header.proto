@@ -231,6 +231,8 @@ message User {
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
 	// repeated LinkedUser linked_users = 62;
+
+	repeated string segments = 66;
 }
 
 message LinkedUser {
@@ -6020,3 +6022,58 @@ message EventTypes {
 	string account_id = 2;
 	EventType event_types = 3;
 }
+
+message SegmentCondition {
+	common.Context ctx = 1;
+	// attr:234234
+	// event:4349843
+
+	// has been performanced	string operator = 3;
+	// at least x time withing last y days
+	string operator = 3;
+
+	string key = 4; // id, keyword, lead_owner attr.fullname
+	string type = 5;
+	TextCondition text = 6;
+	BoolCondition boolean = 8;
+	FloatCondition number = 9;
+	DatetimeCondition datetime = 10;
+
+	repeated SegmentCondition all = 12; // preferred
+	repeated SegmentCondition one = 13;
+}
+
+message Segment {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	string description = 5;
+
+	SegmentCondition condition = 6;
+
+	string type = 7; // manual vs auto
+	float fetching_progress = 8; // 0 -> 100%
+
+	int64 total = 19;
+	int64 created = 20;
+	int64 created_by = 21;
+	int64 updated = 22;
+	int64 updated_by = 23;
+	int64 archived = 24;
+}
+
+message Segments {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated Segment segments = 3;
+}
+
+message SegmentUser {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string segment_id = 4;
+}
+
+// account_id, segment_id, month, user_id

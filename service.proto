@@ -143,6 +143,15 @@ service UserMgr {
 	rpc GetView(Id) returns (header.UserView);
 	rpc ListViews(Id) returns (header.UserViews);
 
+	rpc UpdateSegment(header.Segment) returns (header.Segment);
+	rpc CreateSegment(header.Segment) returns (header.Segment);
+	rpc DeleteSegment(Id) returns (Empty);
+	rpc GetSegment(Id) returns (header.Segment);
+	rpc ListSegments(Id) returns (header.Segments);
+	rpc ListUsers(header.SegmentCondition) returns (header.Users);
+	rpc AddToSegment(SegmentUser) returns (Empty);
+	rpc RemoveFromSegment(SegmentUser) returns (Empty);
+
 	rpc UpsertLabel(header.Label) returns (header.Label);
 	rpc DeleteLabel(Id) returns (Empty);
 	rpc ListLabels(Id) returns (header.Labels);
