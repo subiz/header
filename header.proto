@@ -223,7 +223,8 @@ message User {
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
 	// repeated LinkedUser linked_users = 62;
 
-	repeated string segments = 66;
+	repeated SegmentUser segments = 66;
+	repeated User secondaries = 67;
 }
 
 message LinkedUser {
@@ -6006,34 +6007,16 @@ message EventTypes {
 	EventType event_types = 3;
 }
 
-message SegmentCondition {
-	common.Context ctx = 1;
-	// attr:234234
-	// event:4349843
-
-	// has been performanced	string operator = 3;
-	// at least x time withing last y days
-	string operator = 3;
-
-	string key = 4; // id, keyword, lead_owner attr.fullname
-	string type = 5;
-	TextCondition text = 6;
-	BoolCondition boolean = 8;
-	FloatCondition number = 9;
-	DatetimeCondition datetime = 10;
-
-	repeated SegmentCondition all = 12; // preferred
-	repeated SegmentCondition one = 13;
-}
-
 message ListUserRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string segment_id = 3;
-	SegmentCondition condition = 4;
+	UserViewCondition condition = 4; // attr.username asc
 	string order_by = 5;
 	int64 offset = 6;
 	int64 limit = 10;
+
+	string start_id = 11;
 }
 
 message Segment {
@@ -6043,7 +6026,7 @@ message Segment {
 	string name = 4;
 	string description = 5;
 
-	SegmentCondition condition = 6;
+	UserViewCondition condition = 6;
 
 	string type = 7; // manual vs auto
 	float fetching_progress = 8; // 0 -> 100%
@@ -6070,6 +6053,8 @@ message SegmentUser {
 	string account_id = 2;
 	string user_id = 3;
 	string segment_id = 4;
+	int64 created = 5;
+	string by = 8;
 }
 
 message MarketingCampaign {
