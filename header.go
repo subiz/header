@@ -66,6 +66,24 @@ func DeltaToPlainText(delta string) string {
 	return output
 }
 
+func GetTimeAttr(u *User, key string) (time.Time, bool) {
+	key = strings.ToLower(strings.TrimSpace(key))
+	has := false
+	for _, a := range u.GetAttributes() {
+		if !SameKey(key, a.GetKey()) {
+			continue
+		}
+
+		has = true
+		t, err := time.Parse(time.RFC3339, a.GetDatetime())
+		if err == nil {
+			return t, has
+		}
+	}
+
+	return time.Unix(0, 0), has
+}
+
 func GetAttr(u *User, key string, typ string) interface{} {
 	key = strings.ToLower(strings.TrimSpace(key))
 	for _, a := range u.GetAttributes() {

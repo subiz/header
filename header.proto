@@ -392,12 +392,6 @@ message AttributeDefinitions {
 	repeated AttributeDefinition attributes = 2;
 }
 
-message UserCreateResult {
-	string id = 3;
-	string mask = 5;
-}
-
-// remove
 message Note {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -410,7 +404,6 @@ message Note {
 	string target_id = 9; // user_id
 }
 
-// remove
 message Notes {
 	common.Context ctx = 1;
 	repeated Note notes = 3;
@@ -5388,7 +5381,6 @@ message CompactedUser {
 	string lifecycle_stage = 62;
 	string lead_status = 63;
 	string owner = 64;
-
 }
 
 message CompactedUsers {
@@ -6000,7 +5992,7 @@ message EventType {
 	repeated int64 num_events_last_24h = 27;
 	repeated int64 num_events_last_30d = 28;
 
-	string status = 30; // open, acknowledged, resolved
+	string status = 30; // open, acknowledged, resolved, muted
 	string status_updated_by = 31;
 
 	int64 archived = 32;
@@ -6037,6 +6029,7 @@ message SegmentCondition {
 message ListUserRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
+	string segment_id = 3;
 	SegmentCondition condition = 4;
 	string order_by = 5;
 	int64 offset = 6;
@@ -6077,6 +6070,41 @@ message SegmentUser {
 	string account_id = 2;
 	string user_id = 3;
 	string segment_id = 4;
+}
+
+message MarketingCampaign {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string name = 3;
+	string description = 4;
+
+	int64 created = 7;
+	string created_by = 8;
+
+	int64 updated = 9;
+	string updated_by = 10;
+
+
+	string segment_id = 11;
+	string unsubscribed_group = 12;
+
+	int64 progress = 13;
+	Touchpoint touchpoints = 14;
+	repeated Message messages = 15;
+	MarketingCampaignSchedule schedule = 16;
+
+	// TOUCHPOINT  SENT   RECEIVED   SEEN/OPEN   CLICK    GOAL
+	// Zalo        2031   1932       403         20       1%
+	// Messegner   1023   1932       403         20       1%
+	// ZNS         4424   1932       403         20       1%
+	// Email         43   1932       403         20       1%
+	// ------------------------------------------------------
+	// Total       8544   434        434         43       2%
+}
+
+message MarketingCampaignSchedule {
+
 }
 
 // account_id, segment_id, month, user_id
