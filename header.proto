@@ -221,28 +221,8 @@ message User {
 	int64 updated = 60;
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
-	// repeated LinkedUser linked_users = 62;
-
-	repeated SegmentUser segments = 66;
+	repeated UserSegment segments = 66;
 	repeated User secondaries = 67;
-}
-
-message LinkedUser {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string customer_id = 3;
-
-	string id = 4;
-	string profile_id = 5; // user-id
-	string channel_source = 6; // pvcombank require verification
-	string channel = 7; // account => require verification, acc logo
-
-	string linked_by = 10;
-	string linked_by_type = 11;
-	string linked_by_extra_id = 12;
-	int64 linked_at = 13;
-
-	User user = 20;
 }
 
 message UserLifecycleStage {
@@ -877,10 +857,11 @@ message Data {
 	RecentCallRecord recent_call_record = 95;
 	string ice_candidate = 96; // remove
 	WebRTCMessage webrtc_message = 97;
-	LinkedUser linked_user = 98;
+	// LinkedUser linked_user = 98;
 	EventType event_type = 99;
 	Error error = 100;
 	account.Account account = 101;
+	Segment segment = 102;
 }
 
 message WebRTCMessage {
@@ -6017,13 +5998,14 @@ message EventTypes {
 message ListUserRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string segment_id = 3;
+	// string segment_id = 3; // inside condition
 	UserViewCondition condition = 4; // attr.username asc
 	string order_by = 5;
 	int64 offset = 6;
 	int64 limit = 10;
 
 	string start_id = 11;
+	repeated string fields = 12;
 }
 
 message Segment {
@@ -6055,7 +6037,7 @@ message Segments {
 	repeated Segment segments = 3;
 }
 
-message SegmentUser {
+message UserSegment {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string user_id = 3;

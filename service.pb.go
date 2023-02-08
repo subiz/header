@@ -391,11 +391,11 @@ var file_service_proto_rawDesc = []byte{
 	0x4c, 0x69, 0x73, 0x74, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
 	0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x32,
 	0x0a, 0x0c, 0x41, 0x64, 0x64, 0x54, 0x6f, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x13,
-	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x55,
-	0x73, 0x65, 0x72, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70,
+	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x67, 0x6d,
+	0x65, 0x6e, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70,
 	0x74, 0x79, 0x12, 0x37, 0x0a, 0x11, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x46, 0x72, 0x6f, 0x6d,
 	0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x13, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
-	0x2e, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x55, 0x73, 0x65, 0x72, 0x1a, 0x0d, 0x2e, 0x68,
+	0x2e, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65, 0x67, 0x6d, 0x65, 0x6e, 0x74, 0x1a, 0x0d, 0x2e, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2b, 0x0a, 0x0b, 0x55,
 	0x70, 0x73, 0x65, 0x72, 0x74, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61,
 	0x64, 0x65, 0x72, 0x2e, 0x4c, 0x61, 0x62, 0x65, 0x6c, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
@@ -1586,7 +1586,7 @@ var file_service_proto_goTypes = []interface{}{
 	(*UserView)(nil),                          // 31: header.UserView
 	(*Segment)(nil),                           // 32: header.Segment
 	(*ListUserRequest)(nil),                   // 33: header.ListUserRequest
-	(*SegmentUser)(nil),                       // 34: header.SegmentUser
+	(*UserSegment)(nil),                       // 34: header.UserSegment
 	(*Label)(nil),                             // 35: header.Label
 	(*UserRequest)(nil),                       // 36: header.UserRequest
 	(*SuggestLeadFieldRequest)(nil),           // 37: header.SuggestLeadFieldRequest
@@ -1918,8 +1918,8 @@ var file_service_proto_depIdxs = []int32{
 	4,   // 100: header.UserMgr.GetSegment:input_type -> header.Id
 	4,   // 101: header.UserMgr.ListSegments:input_type -> header.Id
 	33,  // 102: header.UserMgr.ListUsers:input_type -> header.ListUserRequest
-	34,  // 103: header.UserMgr.AddToSegment:input_type -> header.SegmentUser
-	34,  // 104: header.UserMgr.RemoveFromSegment:input_type -> header.SegmentUser
+	34,  // 103: header.UserMgr.AddToSegment:input_type -> header.UserSegment
+	34,  // 104: header.UserMgr.RemoveFromSegment:input_type -> header.UserSegment
 	35,  // 105: header.UserMgr.UpsertLabel:input_type -> header.Label
 	4,   // 106: header.UserMgr.DeleteLabel:input_type -> header.Id
 	4,   // 107: header.UserMgr.ListLabels:input_type -> header.Id
@@ -5801,8 +5801,8 @@ type UserMgrClient interface {
 	GetSegment(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Segment, error)
 	ListSegments(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Segments, error)
 	ListUsers(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*Users, error)
-	AddToSegment(ctx context.Context, in *SegmentUser, opts ...grpc.CallOption) (*Empty, error)
-	RemoveFromSegment(ctx context.Context, in *SegmentUser, opts ...grpc.CallOption) (*Empty, error)
+	AddToSegment(ctx context.Context, in *UserSegment, opts ...grpc.CallOption) (*Empty, error)
+	RemoveFromSegment(ctx context.Context, in *UserSegment, opts ...grpc.CallOption) (*Empty, error)
 	UpsertLabel(ctx context.Context, in *Label, opts ...grpc.CallOption) (*Label, error)
 	DeleteLabel(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListLabels(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Labels, error)
@@ -6037,7 +6037,7 @@ func (c *userMgrClient) ListUsers(ctx context.Context, in *ListUserRequest, opts
 	return out, nil
 }
 
-func (c *userMgrClient) AddToSegment(ctx context.Context, in *SegmentUser, opts ...grpc.CallOption) (*Empty, error) {
+func (c *userMgrClient) AddToSegment(ctx context.Context, in *UserSegment, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/header.UserMgr/AddToSegment", in, out, opts...)
 	if err != nil {
@@ -6046,7 +6046,7 @@ func (c *userMgrClient) AddToSegment(ctx context.Context, in *SegmentUser, opts 
 	return out, nil
 }
 
-func (c *userMgrClient) RemoveFromSegment(ctx context.Context, in *SegmentUser, opts ...grpc.CallOption) (*Empty, error) {
+func (c *userMgrClient) RemoveFromSegment(ctx context.Context, in *UserSegment, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, "/header.UserMgr/RemoveFromSegment", in, out, opts...)
 	if err != nil {
@@ -6313,8 +6313,8 @@ type UserMgrServer interface {
 	GetSegment(context.Context, *Id) (*Segment, error)
 	ListSegments(context.Context, *Id) (*Segments, error)
 	ListUsers(context.Context, *ListUserRequest) (*Users, error)
-	AddToSegment(context.Context, *SegmentUser) (*Empty, error)
-	RemoveFromSegment(context.Context, *SegmentUser) (*Empty, error)
+	AddToSegment(context.Context, *UserSegment) (*Empty, error)
+	RemoveFromSegment(context.Context, *UserSegment) (*Empty, error)
 	UpsertLabel(context.Context, *Label) (*Label, error)
 	DeleteLabel(context.Context, *Id) (*Empty, error)
 	ListLabels(context.Context, *Id) (*Labels, error)
@@ -6413,10 +6413,10 @@ func (*UnimplementedUserMgrServer) ListSegments(context.Context, *Id) (*Segments
 func (*UnimplementedUserMgrServer) ListUsers(context.Context, *ListUserRequest) (*Users, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
-func (*UnimplementedUserMgrServer) AddToSegment(context.Context, *SegmentUser) (*Empty, error) {
+func (*UnimplementedUserMgrServer) AddToSegment(context.Context, *UserSegment) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddToSegment not implemented")
 }
-func (*UnimplementedUserMgrServer) RemoveFromSegment(context.Context, *SegmentUser) (*Empty, error) {
+func (*UnimplementedUserMgrServer) RemoveFromSegment(context.Context, *UserSegment) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RemoveFromSegment not implemented")
 }
 func (*UnimplementedUserMgrServer) UpsertLabel(context.Context, *Label) (*Label, error) {
@@ -6899,7 +6899,7 @@ func _UserMgr_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _UserMgr_AddToSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SegmentUser)
+	in := new(UserSegment)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -6911,13 +6911,13 @@ func _UserMgr_AddToSegment_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/header.UserMgr/AddToSegment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).AddToSegment(ctx, req.(*SegmentUser))
+		return srv.(UserMgrServer).AddToSegment(ctx, req.(*UserSegment))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _UserMgr_RemoveFromSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SegmentUser)
+	in := new(UserSegment)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -6929,7 +6929,7 @@ func _UserMgr_RemoveFromSegment_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/header.UserMgr/RemoveFromSegment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserMgrServer).RemoveFromSegment(ctx, req.(*SegmentUser))
+		return srv.(UserMgrServer).RemoveFromSegment(ctx, req.(*UserSegment))
 	}
 	return interceptor(ctx, in, info, handler)
 }
