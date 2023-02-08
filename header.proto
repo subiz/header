@@ -6022,9 +6022,9 @@ message Segment {
 
 	int64 total = 19;
 	int64 created = 20;
-	int64 created_by = 21;
+	string created_by = 21;
 	int64 updated = 22;
-	int64 updated_by = 23;
+	string updated_by = 23;
 	int64 archived = 24;
 
 	bool is_public = 26;
@@ -6035,6 +6035,12 @@ message Segments {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated Segment segments = 3;
+}
+
+message SegmentUsers {
+	common.Context ctx = 1;
+	string segment_id = 4;
+	string user_ids = 5;
 }
 
 message UserSegment {
@@ -6060,8 +6066,8 @@ message MarketingCampaign {
 	string updated_by = 10;
 
 
-	string segment_id = 11;
-	string unsubscribed_group = 12;
+	repeated string segments = 11;
+	repeated string unsubscribed_segments = 12;
 
 	int64 progress = 13;
 	Touchpoint touchpoints = 14;

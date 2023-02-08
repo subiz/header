@@ -178,13 +178,6 @@ message LeadSetting {
 	optional string assign_conversation_as_lead = 3; // assigned [default], joined
 }
 
-message GroupMember {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string group_id = 3;
-	optional string agent_id = 4;
-}
-
 message CreateAccountRequest {
 	optional common.Context ctx = 1;
 	optional string fullname = 2;
