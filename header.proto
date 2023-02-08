@@ -3915,6 +3915,13 @@ message SuggestLeadFieldResponse {
 	repeated int64 points = 14;
 }
 
+message UserQueryBody {
+	common.Context ctx = 1;
+	UserViewCondition condition = 3;
+	account.Account account = 4;
+	map<string, AttributeDefinition> def = 5;
+}
+
 message UserViewCondition {
 	common.Context ctx = 1;
 	string account_id = 2;
