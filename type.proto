@@ -262,6 +262,16 @@ message TextCondition {
 	bool accent_sensitive = 31;
 }
 
+message EventCondition {
+	string type = 2; // attribute_updated, form_submitted, page_viewed
+	string ui_type = 4; // form, page, purchase, email
+
+	// created
+	bool inverse = 5; // have not been performanced
+	int32 at_least = 6; // have been performanced at_least [___] times
+	DatetimeCondition created = 7;
+}
+
 message BoolCondition {
 	string op = 2; // has_value, true, false
 }
@@ -281,7 +291,10 @@ message FloatCondition {
 }
 
 message DatetimeCondition {
-	string op = 2; // in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
+	// relative: in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
+	// absolute: before, after, between, outside
+	string op = 2;
+
 	// repeated FloatTransform transforms = 3;
 	// repeated int64 hour_of_day
 

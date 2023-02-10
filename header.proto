@@ -3906,14 +3906,16 @@ message UserQueryBody {
 message UserViewCondition {
 	common.Context ctx = 1;
 	string account_id = 2;
+	string id = 3;
 
-	string key = 4; // id, keyword, lead_owner attr.fullname
+	string key = 4; // event, id, keyword, lead_owner attr:fullname
 	string type = 5;
 
 	TextCondition text = 6;
 	BoolCondition boolean = 8;
 	FloatCondition number = 9;
 	DatetimeCondition datetime = 10;
+	EventCondition event = 11;
 
 	repeated UserViewCondition all = 12; // preferred
 	repeated UserViewCondition one = 13;

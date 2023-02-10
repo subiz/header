@@ -108,3 +108,60 @@ func TestUpdateUser(t *testing.T) {
 	b, _ := json.Marshal(user)
 	fmt.Println(string(b))
 }
+
+func TestUserViewCondition(t *testing.T) {
+	// submit ít nhất 2 form dang-ky trong vòng 5 ngày (trường company-size trong form phải > 20 người)
+	// không chạy với cus id là 243
+	// với những khách trong khoảng 23/4/2022 12:00 UTC+7 tới 21/4/2023 12:00 UTC+7
+	// không xem trang google.com (tieu de Google) ít nhất 2 lần trong 2 ngày gần đây
+	condition := &UserViewCondition{
+		All: []*UserViewCondition{{
+			Id:  "1",
+			Key: "event:form_submitted",
+			Event: &EventCondition{
+				UiType:  "form_submitted",
+				Inverse: false,
+				AtLeast: 2,
+				Created: &DatetimeCondition{
+					Last: 432000, // 5 days
+				},
+			},
+			All: []*UserViewCondition{{
+				Key:  "data.form.name",
+				Text: &TextCondition{Eq: []string{"dang-ky"}},
+			}, {
+				Key:    "data.form.fields#(key=\"company-size\"]).first",
+				Number: &FloatCondition{Gt: 20},
+			}},
+		}, {
+			Id:   "2",
+			Key:  "attr:cus_id",
+			Text: &TextCondition{Neq: []string{"243"}},
+		}, {
+			Id:       "3",
+			Key:      "attr:created",
+			Datetime: &DatetimeCondition{Between: []int64{429423, 43434}},
+		}, {
+			Id:  "4",
+			Key: "event:content_viewed",
+			Event: &EventCondition{
+				UiType:  "page",
+				Inverse: true, // khong xem trang
+				AtLeast: 2,
+				Created: &DatetimeCondition{
+					Last: 172800, // 2 days in secs
+				},
+			},
+			All: []*UserViewCondition{{
+				Key:  "data.product.title",
+				Text: &TextCondition{Eq: []string{"Google"}},
+			}, {
+				Key:  "data.product.url",
+				Text: &TextCondition{Contain: []string{"google.com"}, CaseSensitive: false},
+			}},
+		}},
+	}
+
+	b, _ := json.Marshal(condition)
+	fmt.Println("OUT", string(b))
+}
