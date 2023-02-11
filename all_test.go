@@ -114,6 +114,7 @@ func TestUserViewCondition(t *testing.T) {
 	// không chạy với cus id là 243
 	// với những khách trong khoảng 23/4/2022 12:00 UTC+7 tới 21/4/2023 12:00 UTC+7
 	// không xem trang google.com (tieu de Google) ít nhất 2 lần trong 2 ngày gần đây
+	// co conversation tag la xyz, ghy
 	condition := &UserViewCondition{
 		All: []*UserViewCondition{{
 			Id:  "1",
@@ -159,6 +160,22 @@ func TestUserViewCondition(t *testing.T) {
 				Key:  "data.product.url",
 				Text: &TextCondition{Contain: []string{"google.com"}, CaseSensitive: false},
 			}},
+		}, {
+			Id:  "5",
+			Key: "conversation_tag",
+			Text: &TextCondition{
+				Contain: []string{"234234", "3222234"},
+			},
+		}, {
+			Id:  "6",
+			Key: "order",
+			Text: &TextCondition{
+				Contain: []string{"234234", "3222234"},
+			},
+		}, {
+			Id:   "7",
+			Key:  "segment",
+			Text: &TextCondition{Neq: []string{"243"}},
 		}},
 	}
 

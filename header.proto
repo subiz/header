@@ -203,7 +203,7 @@ message User {
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
 	// bool is_lead = 43;
-	string type = 47; // empty = visitor, lead, customer, deleted
+	// string type = 47; // empty = visitor, lead, customer, deleted
 	string primary_id = 49; // rename to customer_id
 	repeated string secondary_ids = 50;
 
@@ -221,8 +221,16 @@ message User {
 	int64 updated = 60;
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
-	repeated UserSegment segments = 66;
-	repeated User secondaries = 67;
+	repeated UserSegment segments = 66; // read-only
+	repeated User secondaries = 67; // read-only
+	repeated UserConversationTag conversation_tags = 68; // read-only
+}
+
+message UserConversationTag {
+	string conversation_id = 3;
+	string tag = 4;
+	int64 created = 5;
+	int64 count = 6;
 }
 
 message UserLifecycleStage {
@@ -292,12 +300,14 @@ message Labels {
 message Users {
 	repeated User users = 1;
 	repeated Error errors = 2;
-	string signature = 3;
+	// string signature = 3;
 	int64 hit = 4;
 	int64 total = 5;
 
 	int32 end_offset = 7;
 	repeated string sorted_values = 8;
+
+	string anchor = 9;
 }
 
 message SessionCampaign {
@@ -3908,7 +3918,7 @@ message UserViewCondition {
 	string account_id = 2;
 	string id = 3;
 
-	string key = 4; // event, id, keyword, lead_owner attr:fullname
+	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	string type = 5;
 
 	TextCondition text = 6;
@@ -6006,7 +6016,7 @@ message ListUserRequest {
 	int64 offset = 6;
 	int64 limit = 10;
 
-	string start_id = 11;
+	string anchor = 11;
 	repeated string fields = 12;
 }
 
@@ -6066,7 +6076,6 @@ message MarketingCampaign {
 
 	int64 updated = 9;
 	string updated_by = 10;
-
 
 	repeated string segments = 11;
 	repeated string unsubscribed_segments = 12;
