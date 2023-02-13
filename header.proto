@@ -300,7 +300,7 @@ message Labels {
 message Users {
 	repeated User users = 1;
 	repeated Error errors = 2;
-	// string signature = 3;
+	string signature = 3;
 	int64 hit = 4;
 	int64 total = 5;
 
