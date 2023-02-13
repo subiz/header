@@ -3919,7 +3919,7 @@ message UserCountBody {
 	common.Context ctx = 1;
 	account.Account account = 4;
 	map<string, AttributeDefinition> def = 5;
-	UserViewCondition conditions = 6;
+	repeated UserViewCondition conditions = 6;
 	repeated string ignore_uids = 7;
 }
 
