@@ -3884,6 +3884,7 @@ message UserView {
 	int32 offset = 20;
 	int32 limit = 21;
 	string order_by = 22; // attr.username asc
+	string anchor = 23;
 }
 
 message SuggestLeadFieldRequest {
