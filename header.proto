@@ -971,7 +971,7 @@ message UserSession {
 	Event latest_content_view = 34; // read only, do not persist
 	int64 total_content_views = 35; // read only, do not persist
 
-	float lead_score = 36;
+	// float lead_score = 36;
 	int64 time_on_site = 37;
 	string latest_page_url = 40;
 	string latest_page_title = 41;
@@ -3912,6 +3912,15 @@ message UserQueryBody {
 	UserViewCondition condition = 3;
 	account.Account account = 4;
 	map<string, AttributeDefinition> def = 5;
+	repeated string ignore_uids = 7;
+}
+
+message UserCountBody {
+	common.Context ctx = 1;
+	account.Account account = 4;
+	map<string, AttributeDefinition> def = 5;
+	UserViewCondition conditions = 6;
+	repeated string ignore_uids = 7;
 }
 
 message UserViewCondition {
@@ -6031,7 +6040,7 @@ message Segment {
 	UserViewCondition condition = 6;
 
 	string type = 7; // manual vs auto
-	float fetching_progress = 8; // 0 -> 100%
+	int64 fetching_progress = 8; // 0 -> 100%
 
 	int64 total = 19;
 	int64 created = 20;
