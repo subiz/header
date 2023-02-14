@@ -5414,6 +5414,7 @@ message CompactedAttribute {
 }
 
 message PipelineStage {
+	string pipeline = 20;
 	string id = 3; // gen by client
 	int64 created = 5;
 	string created_by = 6;

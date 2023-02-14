@@ -616,6 +616,7 @@ service Apiece {
 	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
 	rpc DeletePipeline(Id) returns (Empty);
 	rpc ListPipelines(Ids) returns (header.Pipelines);
+	rpc DeletePipelineStage(header.PipelineStage) returns (Empty);
 }
 
 service Speex {
