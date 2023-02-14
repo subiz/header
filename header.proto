@@ -3885,6 +3885,8 @@ message UserView {
 	int32 limit = 21;
 	string order_by = 22; // attr.username asc
 	string anchor = 23;
+
+	repeated string segments = 24;
 }
 
 message SuggestLeadFieldRequest {
@@ -5663,7 +5665,7 @@ message AgentGroup {
 
 	string logo_url = 18;
 
-	repeated string supervisors = 19;
+	repeated string supervisors = 19; // manager
 	int64 agent_ring_timeout_sec = 20; // -1 forever, 0 auto, ... n sec
 }
 
@@ -6048,10 +6050,12 @@ message Segment {
 	string created_by = 21;
 	int64 updated = 22;
 	string updated_by = 23;
-	int64 archived = 24;
+	int64 disabled = 24;
 
-	bool is_public = 26;
 	bool is_system = 27;
+
+	repeated string members = 29; // view only, add own member
+	repeated string managers = 30; // edit segment query, remove member
 }
 
 message Segments {
