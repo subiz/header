@@ -5482,6 +5482,7 @@ message Pipeline {
 
 	int64 updated = 8;
 	string updated_by = 9;
+	int64 preselected = 10;
 }
 
 message TasksRequest {
