@@ -1469,6 +1469,9 @@ message Message {
 	string zns_template_id = 41; // zns-only
 	string zns_tracking_id = 42; // zns-only
 	map<string, string> zns_template_data = 43; // zns-only
+
+	map<string, string> zns_template_default_data = 44; // zns-only
+	map<string, string> zns_template_data_field = 45; // zns-only
 }
 
 message MessageReferral {
@@ -5317,10 +5320,10 @@ message AddressAutocompleteResponse {
 	string description = 4;
 	string place_id = 5;
 	string reference = 6;
-	repeated Substring matched_substrings = 7;
+	repeated SubstringIndex matched_substrings = 7;
 }
 
-message Substring {
+message SubstringIndex {
 	int32 offset = 3;
 	int32 length = 4;
 }
@@ -6045,6 +6048,7 @@ message Segment {
 
 	string type = 7; // manual vs auto
 	int64 fetching_progress = 8; // 0 -> 100%
+	int64 last_fetched = 9;
 
 	int64 total = 19;
 	int64 created = 20;
@@ -6098,8 +6102,10 @@ message MarketingCampaign {
 
 	int64 progress = 13;
 	Touchpoint touchpoints = 14;
-	repeated Message messages = 15;
+	repeated MarketingMessage messages = 15;
 	MarketingCampaignSchedule schedule = 16;
+
+	bool auto_clean = 17; // clear data after the campaign is cancelled or completed
 
 	// TOUCHPOINT  SENT   RECEIVED   SEEN/OPEN   CLICK    GOAL
 	// Zalo        2031   1932       403         20       1%
@@ -6114,4 +6120,11 @@ message MarketingCampaignSchedule {
 
 }
 
-// account_id, segment_id, month, user_id
+message MarketingMessage {
+	bool timming_condition_enabled = 3;
+	TimmingCondition timming_condition = 4;
+
+	bool channel_condition_enabled = 5;
+	ChannelCondition channel_condition = 6;
+	repeated Message messages = 8;
+}
