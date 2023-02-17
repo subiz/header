@@ -223,11 +223,11 @@ message User {
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
 	repeated UserSegment segments = 66; // read-only
 	repeated User secondaries = 67; // read-only
-	repeated UserConversationTag conversation_tags = 68; // read-only
+	map<string, UserConversationTag> conversation_tags = 68; // read-only
 }
 
 message UserConversationTag {
-	string conversation_id = 3;
+	repeated string conversation_ids = 3;
 	string tag = 4;
 	int64 created = 5;
 	int64 count = 6;
