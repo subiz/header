@@ -2213,6 +2213,7 @@ message ActionUpdateConversation {
 	bool end_conversation = 4;
 
 	repeated KV fields = 5;
+	repeated string remove_fields = 6;
 }
 
 message ActionJump {
