@@ -2230,6 +2230,7 @@ message ActionSendHttp {
 	string method = 4;
 	repeated KV header = 5;
 	string quill_delta = 6; // body
+	bool response_as_messages = 7;
 }
 
 message ActionAskQuestion {
