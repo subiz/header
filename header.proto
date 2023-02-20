@@ -6129,3 +6129,7 @@ message MarketingMessage {
 	ChannelCondition channel_condition = 6;
 	repeated Message messages = 8;
 }
+
+message Messages {
+	repeated Message messages = 2;
+}
