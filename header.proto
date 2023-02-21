@@ -35,6 +35,10 @@ message Ids {
 	int32 limit = 7;
 }
 
+message Messages {
+	repeated Message messages = 2;
+}
+
 message Notifications {
 	common.Context ctx = 1;
 	string account_id = 2;

@@ -623,3 +623,11 @@ service Apiece {
 service Speex {
 	rpc TextToSpeech(header.TTSVoiceSelection) returns (header.TTSVoiceSelection);
 }
+
+service Campion {
+	rpc ListCampaigns(Ids) returns (header.Campaigns);
+	rpc ReadCampaign(Id) returns (header.Campaign);
+	rpc CreateCampaign(header.Campaign) returns (header.Campaign);
+	rpc UpdateCampaign(header.Campaign) returns (header.Campaign);
+	rpc DeleteCampaign(Id) returns (Empty);
+}
