@@ -228,6 +228,9 @@ enum RealtimeType {
 
 	segment_updated = 226;
 	segment_deleted = 227;
+
+	campaign_updated = 229;
+	campaign_deleted = 230;
 }
 
 message TextTransform {

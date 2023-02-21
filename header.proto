@@ -872,6 +872,7 @@ message Data {
 	Error error = 100;
 	account.Account account = 101;
 	Segment segment = 102;
+	Campaign campaign = 103;
 }
 
 message WebRTCMessage {
@@ -6086,12 +6087,22 @@ message UserSegment {
 	string by = 8;
 }
 
-message MarketingCampaign {
+message Campaigns {
+	common.Context ctx = 1;
+	string account_id = 2;
+	Campaign campaigns = 3;
+}
+
+message Campaign {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string name = 3;
-	string description = 4;
+	string id = 3;
+
+	string name = 4;
+	string description = 5;
+
+	string type = 6; // telesale, broadcast, triggered, journey
 
 	int64 created = 7;
 	string created_by = 8;
@@ -6102,24 +6113,28 @@ message MarketingCampaign {
 	repeated string segments = 11;
 	repeated string unsubscribed_segments = 12;
 
-	int64 progress = 13;
-	Touchpoint touchpoints = 14;
+	int64 progress = 13; // 1025 => 10.25%
+	// telesale: unit is number of phone numbers dialed
+	// broadcast: unit is number of users tried
+	// triggered: number of message
+	// journey: ?
+
 	repeated MarketingMessage messages = 15;
-	MarketingCampaignSchedule schedule = 16;
 
-	bool auto_clean = 17; // clear data after the campaign is cancelled or completed
+	string state = 18; // draft, active, finished, paused
 
-	// TOUCHPOINT  SENT   RECEIVED   SEEN/OPEN   CLICK    GOAL
-	// Zalo        2031   1932       403         20       1%
-	// Messegner   1023   1932       403         20       1%
-	// ZNS         4424   1932       403         20       1%
-	// Email         43   1932       403         20       1%
-	// ------------------------------------------------------
-	// Total       8544   434        434         43       2%
+	bool auto_clean = 17; // clear data after the campaign is finished or deleted
+
+	int64 audient_count = 19; // number of user in segments, read-only
+	int64 impression_count = 20;
+	int64 goal_reached = 21;
+
+	int64 sent_message_budget = 22;
+	int64 sent_message_budget_spent = 23; // set by campaign
 }
 
-message MarketingCampaignSchedule {
-
+message MarketingGoal {
+	string type = 4; // delivered, open, reply
 }
 
 message MarketingMessage {
@@ -6128,9 +6143,7 @@ message MarketingMessage {
 
 	bool channel_condition_enabled = 5;
 	ChannelCondition channel_condition = 6;
+	int64 sent_message_budget = 7; // set by agent
+	int64 sent_message_budget_spent = 9; // set by campaign
 	repeated Message messages = 8;
-}
-
-message Messages {
-	repeated Message messages = 2;
 }
