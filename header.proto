@@ -225,10 +225,9 @@ message User {
 	int64 updated = 60;
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
-	// repeated UserSegment segments = 66; // read-only
+	repeated UserSegment segments = 66; // read-only
 	repeated User secondaries = 67; // read-only
 	map<string, UserConversationTag> conversation_tags = 68; // read-only
-	repeated UserSegment segments = 69; // read-only
 	repeated UserAds ads = 70;
 }
 
@@ -6059,7 +6058,7 @@ message ListUserRequest {
 message Segment {
 	common.Context ctx = 1;
 	string account_id = 2;
-	int64 id = 3;
+	string id = 3;
 	string name = 4;
 	string description = 5;
 
@@ -6090,7 +6089,7 @@ message Segments {
 
 message SegmentUsers {
 	common.Context ctx = 1;
-	int64 segment_id = 4;
+	string segment_id = 4;
 	string user_ids = 5;
 }
 
@@ -6098,7 +6097,7 @@ message UserSegment {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string user_id = 3;
-	int64 segment_id = 4;
+	string segment_id = 4;
 	int64 created = 5;
 	string by = 8;
 }
@@ -6128,8 +6127,8 @@ message Campaign {
 	int64 updated = 9;
 	string updated_by = 10;
 
-	repeated int64 segments = 11;
-	repeated int64 unsubscribed_segments = 12;
+	repeated string segments = 11;
+	repeated string unsubscribed_segments = 12;
 
 	int64 progress = 13; // 1025 => 10.25%
 	// telesale: unit is number of phone numbers dialed
