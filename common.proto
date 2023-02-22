@@ -106,4 +106,5 @@ message SessionCampaign {
 	string medium = 4;
 	string term = 5;
 	string content = 6;
+	string id = 7;
 }

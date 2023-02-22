@@ -139,6 +139,7 @@ message FbReferral {
 	optional AdsContextData ads_context_data = 5;
 	optional string ad_id = 6;
 	optional string referer_uri = 7;
+	optional bool is_guest_user = 8;
 }
 
 message FbMessage {

@@ -233,14 +233,18 @@ message User {
 
 message UserAds {
 	string provider = 3; // facebook, google
+
+	// facebook
 	string ad_id = 9; // utm_id
 	string ref = 10;
 	string source = 11; // utm_source: SHORTLINK, ADS
 	string type = 12; // OPEN_THREAD
-	string created = 13;
+	int64 created = 13;
 	AdsContextData ads_context_data = 14;
 	string referer_uri = 15;
+	bool is_guest_user = 4;
 
+	// google
 	string name = 16; // utm_campaign" may_sale, covid, gucci,
 	string medium = 17; // utm_medium: display, article, cpc, cpa, cpe, email, sms
 	string term = 18;
@@ -1497,6 +1501,7 @@ message MessageReferral {
 	AdsContextData ads_context_data = 5;
 	string ad_id = 6;
 	string referer_uri = 7;
+	bool is_guest_user = 8;
 }
 
 message AdsContextData {
