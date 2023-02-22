@@ -340,12 +340,6 @@ message SessionCampaign {
 	string content = 6;
 }
 
-// create user request
-message CreateRequest {
-	string challenge_id = 3;
-	string answer = 4;
-}
-
 message AttributeDefinitionListItem {
 	// value
 	string value = 4; // cannot be changed

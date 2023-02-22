@@ -151,8 +151,8 @@ service UserMgr {
 	rpc GetSegment(Id) returns (header.Segment);
 	rpc ListSegments(Id) returns (header.Segments);
 	rpc ListUsers(header.ListUserRequest) returns (header.Users);
-	rpc AddToSegment(header.UserSegment) returns (Empty);
-	rpc RemoveFromSegment(header.UserSegment) returns (Empty);
+	rpc AddToSegment(header.SegmentUsers) returns (Empty);
+	rpc RemoveFromSegment(header.SegmentUsers) returns (Empty);
 
 	rpc UpsertLabel(header.Label) returns (header.Label);
 	rpc DeleteLabel(Id) returns (Empty);
