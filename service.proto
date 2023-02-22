@@ -118,6 +118,8 @@ service AccountMgr {
 
 	rpc UpdateAgentPresence (account.Presence) returns (account.Presence);
 	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
+
+	rpc NewID(header.Id) returns (header.Id);
 }
 
 // user services
