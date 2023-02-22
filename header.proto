@@ -6094,7 +6094,9 @@ message UserSegment {
 message Campaigns {
 	common.Context ctx = 1;
 	string account_id = 2;
-	Campaign campaigns = 3;
+	repeated Campaign campaigns = 3;
+	string anchor = 4;
+	int64 total = 5;
 }
 
 message Campaign {
