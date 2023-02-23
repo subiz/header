@@ -6161,6 +6161,8 @@ message MarketingGoal {
 }
 
 message MarketingMessage {
+	string id = 10;
+
 	bool timming_condition_enabled = 3;
 	TimmingCondition timming_condition = 4;
 
