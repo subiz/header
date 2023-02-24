@@ -228,7 +228,7 @@ message User {
 	repeated UserSegment segments = 66; // read-only
 	repeated User secondaries = 67; // read-only
 	map<string, UserConversationTag> conversation_tags = 68; // read-only
-	repeated UserAds ads = 70;
+	repeated UserAds ads = 70; // read-only
 }
 
 message UserAds {
@@ -5264,6 +5264,7 @@ message Error {
 	string code = 7; // should be general sbz324-database-error, sbz4334-access-deny
 	string sub_code = 8;
 	string number = 12; // unique, or hash of stack #4930543478 for grouping error
+	// int64 level = 13; // 0:ERROR, FATAL,	ERROR, WARN,
 	map<string, string> fields = 15;
 }
 
@@ -6005,6 +6006,9 @@ message EventType {
 	string account_id = 2;
 
 	string id = 3; // m_error_3242, content_viewed
+
+	string hashed_id = 4; // read only
+
 	string title = 6;
 	string description = 8;
 	string category = 9; // error
@@ -6039,6 +6043,9 @@ message EventType {
 	int64 archived = 32;
 
 	int64 priority = 33;
+
+	string reporter = 34;
+	string assignee = 35;
 }
 
 message EventTypes {
