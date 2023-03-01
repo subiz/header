@@ -3912,7 +3912,8 @@ message UserView {
 	string order_by = 22; // attr.username asc
 	string anchor = 23;
 
-	repeated int64 segments = 24;
+	string segment = 24;
+	bool is_system = 25;
 }
 
 message SuggestLeadFieldRequest {
