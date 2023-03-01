@@ -6079,6 +6079,7 @@ message Segment {
 	string type = 7; // manual vs auto
 	int64 fetching_progress = 8; // 0 -> 100%
 	int64 last_fetched = 9;
+	string fetch_session_id = 10;
 
 	int64 total = 19;
 	int64 created = 20;
