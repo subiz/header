@@ -6066,6 +6066,8 @@ message ListUserRequest {
 
 	string anchor = 11;
 	repeated string fields = 12;
+
+	int64 partition = 13;
 }
 
 message Segment {
