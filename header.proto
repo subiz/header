@@ -3904,16 +3904,16 @@ message UserView {
 	string name = 10;
 
 	int64 total = 11;
-	// status tic
-	int64 last_calculated = 12;
 
 	int32 offset = 20;
 	int32 limit = 21;
 	string order_by = 22; // attr.username asc
 	string anchor = 23;
 
-	string segment = 24;
 	bool is_system = 25;
+
+	repeated string display_fields = 26;
+	repeated string viewers = 27;
 }
 
 message SuggestLeadFieldRequest {
@@ -6095,6 +6095,9 @@ message Segment {
 
 	repeated string members = 29; // view only, add own member
 	repeated string managers = 30; // edit segment query, remove member
+
+	string source_type = 31; // campaign, popup, bot
+	string source_id = 32;
 }
 
 message Segments {
