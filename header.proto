@@ -2168,6 +2168,7 @@ enum BotActionType {
 	view_order = 22;
 	confirm_order = 23;
 	create_task = 24;
+	update_user_segments = 25;
 }
 
 message NextBotAction {
@@ -2198,6 +2199,7 @@ message BotAction {
 	ActionConfirmOrder confirm_order = 34;
 	ActionCreateTask create_task = 35;
 	ActionSendChatTranscript send_chat_transcript = 36;
+	ActionUpdateUserSegments update_user_segments = 37;
 }
 
 message ActionCreateTask {
@@ -2290,6 +2292,11 @@ message ActionUpdateUser {
 message ActionUpdateUserLabels {
 	repeated string labels = 2;
 	repeated string remove_labels = 3;
+}
+
+message ActionUpdateUserSegments {
+	repeated string segments = 2;
+	repeated string remove_segments = 3;
 }
 
 message Metric {
@@ -2614,6 +2621,7 @@ message CampaignNotification {
 
 	repeated string agents = 12;
 	bool all_agents = 13;
+	bool roundrobin_agent = 15;
 
 	Message user_email = 14;
 }
