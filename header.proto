@@ -3950,6 +3950,7 @@ message UserQueryBody {
 	account.Account account = 4;
 	map<string, AttributeDefinition> def = 5;
 	repeated string ignore_uids = 7;
+	repeated UserViewCondition conditions = 8;
 }
 
 message UserCountBody {
@@ -6146,6 +6147,7 @@ message Campaign {
 
 	string name = 4;
 	string description = 5;
+	string objective = 14;
 
 	string type = 6; // telesale, broadcast, triggered, journey
 
