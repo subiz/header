@@ -229,6 +229,8 @@ message User {
 	repeated User secondaries = 67; // read-only
 	map<string, UserConversationTag> conversation_tags = 68; // read-only
 	repeated UserAds ads = 70; // read-only
+
+	string first_web_domain = 71; // holap only
 }
 
 message UserAds {
