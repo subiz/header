@@ -5572,8 +5572,9 @@ message ImportLeadRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated User users = 4;
-	string primary_attribute_key = 5;
+	string primary_attribute_key = 5; // remove
 	string on_duplicate = 6; //  empty == error, override, keep_both, skip
+	string add_to_segment = 7;
 }
 
 message ImportLeadResponse {
