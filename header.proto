@@ -1759,6 +1759,7 @@ message Template {
 	int64 modified = 13;
 	string creator = 14;
 	int64 latest_picked = 15;
+	string name = 16;
 }
 
 message SearchTemplate {
@@ -6180,6 +6181,9 @@ message Campaign {
 
 	int64 sent_message_budget = 22;
 	int64 sent_message_budget_spent = 23; // set by campaign
+
+	string locale = 28; // can be auto
+	repeated string locales = 29;
 }
 
 message MarketingGoal {
@@ -6197,4 +6201,6 @@ message MarketingMessage {
 	int64 sent_message_budget = 7; // set by agent
 	int64 sent_message_budget_spent = 9; // set by campaign
 	repeated Message messages = 8;
+
+	string channel = 11;
 }
