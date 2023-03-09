@@ -635,4 +635,5 @@ service Campion {
 	rpc CreateCampaign(header.Campaign) returns (header.Campaign);
 	rpc UpdateCampaign(header.Campaign) returns (header.Campaign);
 	rpc DeleteCampaign(Id) returns (Empty);
+	rpc OnEvent(header.Event) returns (Empty);
 }
