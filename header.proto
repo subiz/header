@@ -231,6 +231,9 @@ message User {
 	repeated UserAds ads = 70; // read-only
 
 	string first_web_domain = 71; // holap only
+
+	int64 deleted = 72;
+	string deleted_by = 73;
 }
 
 message UserAds {
