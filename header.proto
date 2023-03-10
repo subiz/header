@@ -3983,6 +3983,8 @@ message UserViewCondition {
 
 	repeated UserViewCondition all = 12; // preferred
 	repeated UserViewCondition one = 13;
+
+	bool deleted = 14;
 }
 
 message ReportResponse {

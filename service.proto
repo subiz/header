@@ -133,7 +133,7 @@ service UserMgr {
 	rpc UpdateUser(header.User) returns (Id);
 	rpc UpdateUser2(header.User) returns (header.User);
 
-	rpc RemoveUser(header.User) returns (header.Empty);
+	rpc RemoveUser(header.Id) returns (header.Empty);
 	rpc RestoreUser(header.Id) returns (header.Empty);
 
 	rpc ReadUser(Id) returns (header.User);
