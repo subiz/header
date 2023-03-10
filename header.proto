@@ -6175,7 +6175,7 @@ message Campaign {
 	// triggered: number of message
 	// journey: ?
 
-	repeated MarketingMessage messages = 15;
+	repeated MarketingMessage messages = 15; // one success sent
 
 	string state = 18; // draft, active, finished, paused
 
@@ -6190,6 +6190,9 @@ message Campaign {
 
 	string locale = 28; // can be auto
 	repeated string locales = 29;
+
+	bool timming_condition_enabled = 30;
+	TimmingCondition timming_condition = 31;
 }
 
 message MarketingGoal {
