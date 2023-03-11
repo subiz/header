@@ -2478,6 +2478,7 @@ message WidgetHeader {
 	enum HeaderLayout {
 		team = 0;
 		social = 1;
+		classic = 2;
 	}
 
 	// for social layout only
@@ -5279,11 +5280,13 @@ message Error {
 	string description = 2; // remove, prefer i18n message
 	int32 class = 4; // http-code, should be derived from code
 	string stack = 5;
-	string code = 7; // should be general sbz324-database-error, sbz4334-access-deny
+	string code = 7; // should be general database_error, access_deny
 	string sub_code = 8;
-	string number = 12; // unique, or hash of stack #4930543478 for grouping error
+	int64 number = 12; // unique, or hash of stack 4930543478 for grouping error
 	// int64 level = 13; // 0:ERROR, FATAL,	ERROR, WARN,
 	map<string, string> fields = 15;
+	map<string, string> _hidden = 16;
+	I18nString message = 17;
 }
 
 message ShopeeShop {
@@ -5393,71 +5396,6 @@ message RateLimitWindow {
 	string key = 3;
 	int64 timestamp = 4;
 	int64 usage = 5;
-}
-
-message CompactedUser {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	int64 created = 4;
-	int64 modified = 5;
-	int64 updated = 6;
-
-	// string first_channel_touchpoint = 7;
-	// string latest_channelTouchpoint = 8;
-	string latest_channel = 9;
-	int64 interacted = 11;
-	int64 seen = 12;
-	CompactedAttribute fullname = 13;
-	CompactedAttribute phone = 14;
-	CompactedAttribute email = 15;
-	string latest_session_id = 16;
-	repeated string lead_owners = 17;
-	string first_interact = 18;
-
-	int64 last_message_sent = 27;
-	int64 total_sessions = 28;
-
-	repeated CompactedAttribute attributes = 31;
-
-	// bool is_lead = 32;
-	repeated UserLabel labels = 33;
-	UserSession session = 34;
-
-	string primary_id = 49;
-	repeated string secondary_ids = 50;
-
-	string profile_id = 52;
-	string profile_channel_source = 53;
-	string profile_channel = 54;
-
-	Event latest_content_view = 55; // readonly
-	Event start_content_view = 56; // readonly latest content view that change the source
-	Event first_content_view = 57; // readonly first content view
-	repeated string lead_conversion_bys = 58; // for quick search
-	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
-	string lifecycle_stage = 62;
-	string lead_status = 63;
-	string owner = 64;
-}
-
-message CompactedUsers {
-	repeated CompactedUser users = 1;
-	repeated Error errors = 2;
-	string signature = 3;
-	int64 hit = 4;
-	int64 total = 5;
-
-	int32 end_offset = 7;
-}
-
-// memory efficient attribute
-message CompactedAttribute {
-	string key = 1;
-	string value = 2; // text or datetime or bool or number json encoded list
-	int64 modified = 3;
-	string by = 5; // required
-	repeated string other_values = 6;
 }
 
 message PipelineStage {
