@@ -5279,10 +5279,10 @@ message Taxes {
 message Error {
 	string description = 2; // remove, prefer i18n message
 	int32 class = 4; // http-code, should be derived from code
-	string stack = 5;
+	string stack = 5; // remove
 	string code = 7; // should be general database_error, access_deny
-	string sub_code = 8;
-	int64 number = 12; // unique, or hash of stack 4930543478 for grouping error
+	// string sub_code = 8;
+	string number = 12; // unique, or hash of stack 4930543478 for grouping error
 	// int64 level = 13; // 0:ERROR, FATAL,	ERROR, WARN,
 	map<string, string> fields = 15;
 	map<string, string> _hidden = 16;
@@ -5964,7 +5964,7 @@ message EventType {
 
 	string id = 3; // m_error_3242, content_viewed
 
-	string hashed_id = 4; // read only
+	// string hashed_id = 4; // read only
 
 	string title = 6;
 	string description = 8;
