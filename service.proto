@@ -334,7 +334,7 @@ service FileMgr {
 	rpc Presign(header.FileHeader) returns (header.PresignResult);
 	rpc Uploaded(header.FileRequest) returns (header.File);
 	rpc DownloadFileUrl(header.FileUrlDownloadRequest) returns (header.File);
-	rpc FileAvatar(Id) returns (header.File);
+	rpc FileAvatar(header.File) returns (header.File);
 }
 
 // noti5 services
