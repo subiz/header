@@ -234,6 +234,8 @@ message User {
 
 	int64 deleted = 72;
 	string deleted_by = 73;
+
+	repeated UserCampaign campaigns = 74;
 }
 
 message UserAds {
@@ -6024,6 +6026,7 @@ message ListUserRequest {
 	repeated string fields = 12;
 
 	int64 partition = 13;
+	repeated string ignore_ids = 14;
 }
 
 message Segment {
@@ -6084,6 +6087,15 @@ message Campaigns {
 	repeated Campaign campaigns = 3;
 	string anchor = 4;
 	int64 total = 5;
+}
+
+message UserCampaign {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string campaign_id = 4;
+	int64 created = 5;
+	string status = 6;
 }
 
 message Campaign {
