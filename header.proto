@@ -6027,6 +6027,9 @@ message ListUserRequest {
 
 	int64 partition = 13;
 	repeated string ignore_ids = 14;
+
+	repeated string segments = 15;
+	repeated string exclude_segments = 16;
 }
 
 message Segment {
