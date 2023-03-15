@@ -269,6 +269,8 @@ enum E {
 	cannot_manually_add_user_to_nonmanual_segment = 243;
 	cannot_edit_system_segment = 244;
 
+	running_campaign = 245;
+
 	// SERVER ERROR
 	undefined = 5001; // unknown error
 	not_implemented = 5002;
