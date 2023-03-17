@@ -6166,3 +6166,17 @@ message MarketingMessage {
 
 	string channel = 11;
 }
+
+message CampaignSendMessage {
+	string account_id = 2;
+	string campaign_id = 3;
+	int64 index_incre = 4;
+	string message_id = 5;
+	Touchpoint touchpoint = 6;
+	string user_id = 7;
+	string primary_user_id = 8;
+	int64 piece_index_incre = 9; // only system
+	string conversation_id = 10;
+	repeated string event_ids = 11;
+	string send_error = 12;
+}
