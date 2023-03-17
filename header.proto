@@ -1852,10 +1852,15 @@ message Integration {
 	int64 last_outbound_called = 45;
 	int64 last_inbound_called = 46;
 
-	// for domain
-	string email_identify_type = 47; // domain or address
-	string email_domain = 48;
-	string email_verifiy_status = 49;
+	// for email
+	string email_identity_type = 47; // DOMAIN | EMAIL_ADDRESS
+
+	string email_identity = 48; // email address or domain
+
+	// https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_DkimAttributes.html#SES-Type-DkimAttributes-Status
+	// PENDING | SUCCESS | FAILED | TEMPORARY_FAILURE | NOT_STARTED
+	string email_verification_status = 49;
+
 	int64 email_last_verified = 50;
 }
 
