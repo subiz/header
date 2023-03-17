@@ -6179,4 +6179,5 @@ message CampaignSendMessage {
 	string conversation_id = 10;
 	repeated string event_ids = 11;
 	string send_error = 12;
+	int64 created = 13;
 }
