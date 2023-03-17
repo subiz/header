@@ -6181,3 +6181,19 @@ message CampaignSendMessage {
 	string send_error = 12;
 	int64 created = 13;
 }
+
+message CampaignSendMessages {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	repeated CampaignSendMessage send_messages = 4;
+	string anchor = 5;
+}
+
+message CampaignSendMessagesRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string anchor = 4;
+	int32 limit = 5;
+}
