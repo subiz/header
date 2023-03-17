@@ -1851,6 +1851,12 @@ message Integration {
 
 	int64 last_outbound_called = 45;
 	int64 last_inbound_called = 46;
+
+	// for domain
+	string email_identify_type = 47; // domain or address
+	string email_domain = 48;
+	string email_verifiy_status = 49;
+	int64 email_last_verified = 50;
 }
 
 message TagRequest {

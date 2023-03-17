@@ -422,6 +422,8 @@ service MailkonService {
 	rpc ListBlockedEmails(Id) returns (Empty);
 	rpc BlockEmail(Id) returns (Empty);
 	rpc UnblockEmail(Id) returns (Empty);
+
+	rpc UpsertEmailDomain(header.Integration) returns (header.Integration);
 }
 
 // widget services
