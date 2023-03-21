@@ -6216,6 +6216,7 @@ message CampaignMetric {
 	string channel = 5;
 
 	int64 sent_count = 20;
+	int64 readonly_count = 24;
 	int64 success_sent_count = 21;
 	int64 user_seen_count = 22;
 	int64 user_receive_count = 23;
