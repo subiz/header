@@ -6208,3 +6208,19 @@ message CampaignSendMessagesRequest {
 	string anchor = 4;
 	int32 limit = 5;
 }
+
+message CampaignMetric {
+	string account_id = 2;
+	string campaign_id = 3;
+	int64 deliver_at = 4;
+	string channel = 5;
+
+	int64 sent_count = 20;
+	int64 success_sent_count = 21;
+	int64 user_seen_count = 22;
+	int64 user_receive_count = 23;
+}
+
+message CampaignMetrics {
+	repeated CampaignMetric metrics = 2;
+}
