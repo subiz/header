@@ -1862,8 +1862,8 @@ message Integration {
 	string email_verification_status = 49;
 
 	int64 email_last_verified = 50;
-	string dkim_host = 51;
-	string dkim_data = 52;
+	string email_dkim_host = 51;
+	string email_dkim_data = 52;
 }
 
 message TagRequest {

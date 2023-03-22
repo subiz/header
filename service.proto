@@ -423,8 +423,8 @@ service MailkonService {
 	// rpc BlockEmail(Id) returns (Empty);
 	// rpc UnblockEmail(Id) returns (Empty);
 
-	rpc UpsertEmailDomain(header.Integration) returns (header.Integration);
-	rpc SendVerifyEmail(header.Id) returns (header.Empty); // send SES email to user
+	rpc CreateEmailIdentity(header.Integration) returns (header.Integration);
+	// rpc SendVerifyEmail(header.Integration) returns (Empty); // send SES email to user
 }
 
 // widget services
