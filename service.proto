@@ -424,7 +424,7 @@ service MailkonService {
 	// rpc UnblockEmail(Id) returns (Empty);
 
 	rpc CreateEmailIdentity(header.Integration) returns (header.Integration);
-	// rpc SendVerifyEmail(header.Integration) returns (Empty); // send SES email to user
+	rpc DeleteEmailIdentity(header.Integration) returns (Empty); // send SES email to user
 }
 
 // widget services

@@ -1858,7 +1858,7 @@ message Integration {
 	string email_identity = 48; // email address or domain
 
 	// https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_DkimAttributes.html#SES-Type-DkimAttributes-Status
-	// PENDING | SUCCESS | FAILED | TEMPORARY_FAILURE | NOT_STARTED
+	// PENDING | SUCCESS | FAILED | TEMPORARY_FAILURE | NOT_STARTED | TAKEN
 	string email_verification_status = 49;
 
 	int64 email_last_verified = 50;
@@ -1870,6 +1870,8 @@ message Integration {
 	string email_sender_city = 55;
 	string email_sender_country = 56;
 	string email_sender_zip = 57;
+
+	string email_sender_nickname = 58;
 }
 
 message TagRequest {
