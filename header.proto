@@ -1864,6 +1864,12 @@ message Integration {
 	int64 email_last_verified = 50;
 	string email_dkim_host = 51;
 	string email_dkim_data = 52;
+
+	string email_sender_name = 53;
+	string email_sender_address = 54;
+	string email_sender_city = 55;
+	string email_sender_country = 56;
+	string email_sender_zip = 57;
 }
 
 message TagRequest {
