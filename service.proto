@@ -425,6 +425,9 @@ service MailkonService {
 
 	rpc CreateEmailIdentity(header.Integration) returns (header.Integration);
 	rpc DeleteEmailIdentity(header.Integration) returns (Empty); // send SES email to user
+
+	rpc ResendSenderVerificationEmail(header.Integration) returns (Empty);
+	rpc VerifySenderDomain(header.Integration) returns (header.VerificationResult);
 }
 
 // widget services

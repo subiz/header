@@ -6236,3 +6236,19 @@ message CampaignMetric {
 message CampaignMetrics {
 	repeated CampaignMetric metrics = 2;
 }
+
+message VerificationResult {
+	bool mx_record = 3;
+	string mx_record_value = 4;
+
+	bool txt_record = 5;
+	string txt_record_value = 6;
+
+	bool txt_acc_record = 7;
+	string txt_acc_record_value = 8;
+
+	bool txt_domain_key_record = 9;
+	string txt_domain_key_record_value = 10;
+
+	bool verified = 12;
+}
