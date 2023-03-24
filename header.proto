@@ -3691,6 +3691,7 @@ message FacebookPostAttachment {
 	string url = 4;
 	string description = 5;
 	string title = 6;
+	FacebookPostAttachemnts subattachments = 7;
 }
 
 message FacebookPostAttachemnts {
