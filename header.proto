@@ -1467,7 +1467,7 @@ message Message {
 	repeated Attachment attachments = 4;
 	repeated KV fields = 10;
 
-	string integration_id = 15; // deprecated, use event touchpoint
+	// string integration_id = 15; // deprecated, use event touchpoint
 	string user_id = 19; // new standard, removing chain
 
 	// used for reaction and delivery status, could be ignore
@@ -6264,7 +6264,26 @@ message CompileDeltaRequest {
 
 message CompileDeltaResponse {
 	// string
+}
 
+message SenderAddress {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string address = 3;
+	string fullname = 4;
+	bool verified = 5;
+	int64 last_used = 6;
 
+	repeated string agents = 8; // all => all
 
+	string created_by = 9;
+	int64 created = 10;
+
+	string signature = 11;
+}
+
+message SenderAddresses {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated SenderAddress sender_addresses = 3;
 }
