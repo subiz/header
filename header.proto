@@ -899,6 +899,8 @@ message Data {
 	account.Account account = 101;
 	Segment segment = 102;
 	Campaign campaign = 103;
+
+	BusinessEmailAddresses business_email_address = 104;
 }
 
 message WebRTCMessage {
@@ -6271,18 +6273,22 @@ message BusinessEmailAddress {
 	string account_id = 2;
 	string address = 3;
 	string fullname = 4;
-	bool verified = 5;
-	int64 last_used = 6;
+	string verification_status = 5;
+	int64 last_inbound = 6;
+	int64 last_outbound = 7;
 
 	repeated string agents = 8; // all => all
 
 	string created_by = 9;
 	int64 created = 10;
 
-	string signature = 11;
+	string updated_by = 11;
+	int64 updated = 12;
 
-	int64 incomming_disabled =  12;
-	int64 outgoing_disabled =  13;
+	string email_signature = 13;
+
+	int64 inbound_disabled = 14;
+	int64 outbound_disabled = 15;
 }
 
 message BusinessEmailAddresses {

@@ -432,7 +432,7 @@ service MailkonService {
 	rpc ResendSenderVerificationEmail(header.Integration) returns (Empty);
 	rpc VerifySenderDomain(header.Integration) returns (header.VerificationResult);
 
-	rpc ListBusinessEmailAdresses(header.Id) returns (header.BusinessEmailAddresses);
+	rpc ListBusinessEmailAddresses(header.Id) returns (header.BusinessEmailAddresses);
 	rpc UpsertBusinessEmailAddress(header.BusinessEmailAddress) returns (header.BusinessEmailAddress);
 	rpc DeleteBusinessEmailAddress(header.Id) returns (header.Empty);
 }
