@@ -432,9 +432,9 @@ service MailkonService {
 	rpc ResendSenderVerificationEmail(header.Integration) returns (Empty);
 	rpc VerifySenderDomain(header.Integration) returns (header.VerificationResult);
 
-	rpc ListSenderAddresses(header.Id) returns (header.SenderAddresses);
-	rpc UpsertSenderAddress(header.SenderAddress) returns (header.SenderAddress);
-	rpc DeleteSenderAddress(header.Id) returns (header.Empty);
+	rpc ListBusinessEmailAdresses(header.Id) returns (header.BusinessEmailAddresses);
+	rpc UpsertBusinessEmailAddress(header.BusinessEmailAddress) returns (header.BusinessEmailAddress);
+	rpc DeleteBusinessEmailAddress(header.Id) returns (header.Empty);
 }
 
 // widget services

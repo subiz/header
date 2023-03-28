@@ -6266,7 +6266,7 @@ message CompileDeltaResponse {
 	// string
 }
 
-message SenderAddress {
+message BusinessEmailAddress {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string address = 3;
@@ -6280,10 +6280,13 @@ message SenderAddress {
 	int64 created = 10;
 
 	string signature = 11;
+
+	int64 incomming_disabled =  12;
+	int64 outgoing_disabled =  13;
 }
 
-message SenderAddresses {
+message BusinessEmailAddresses {
 	common.Context ctx = 1;
 	string account_id = 2;
-	repeated SenderAddress sender_addresses = 3;
+	repeated BusinessEmailAddress business_email_addresses = 3;
 }
