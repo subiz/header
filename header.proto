@@ -6252,3 +6252,19 @@ message VerificationResult {
 
 	bool verified = 12;
 }
+
+message CompileDeltaRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string quill_delta = 3;
+	I18nString i18n_quill_delta = 4; // for template
+	string format = 5; // html, plaintext, markdown
+}
+
+message CompileDeltaResponse {
+	// string
+
+
+
+}

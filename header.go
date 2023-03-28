@@ -541,8 +541,9 @@ func AssignObject(dst, src interface{}, fields []string) {
 // (84)35 9423 423 => 0359423423
 //
 // A good phone number only contain numbers
-//   if the number starts with 84 => replace to 0 since we mostly serve
-//   Vietnamese customers
+//
+//	if the number starts with 84 => replace to 0 since we mostly serve
+//	Vietnamese customers
 func NormPhone(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
 		return r == ',' || r == ';'
@@ -568,6 +569,33 @@ func NormPhone(phone string) string {
 		}
 	}
 	return strings.Join(phones, ",")
+}
+
+// NormPhone converts an user input phone number to
+// standalized phone number
+// (84)35 9423 423 => 0359423423
+//
+// A good phone number only contain numbers
+//
+//	if the number starts with 84 => replace to 0 since we mostly serve
+//	Vietnamese customers
+func NormEmail(email string) string {
+	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
+		return r == ',' || r == ';'
+	})
+
+	emails := []string{}
+	for _, email := range emailsplit {
+		email = strings.ToLower(strings.TrimSpace(email))
+		if email == "" {
+			continue
+		}
+		if len(email) > 320 {
+			email = Substring(email, 0, 320)
+		}
+		emails = append(emails, email)
+	}
+	return strings.Join(emails, ",")
 }
 
 func Phone(phone string) string {
