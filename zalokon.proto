@@ -141,6 +141,9 @@ message Message {
 	Attachment attachment = 8;
 	string conversation_id = 10;
 	string quote_msg_id = 12;
+
+	string delivery_time = 13;
+	string tracking_id = 14;
 }
 
 // user_send_text: Người dùng gửi tin nhắn văn bản
