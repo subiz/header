@@ -418,6 +418,7 @@ service ZalokonService {
 	rpc ListZnsTemplates(Id) returns (zalokon.ZnsTemplates);
 	rpc RequestZaloUserInfo(header.ZaloUserInfoRequest) returns (header.Empty);
 	rpc SendZns(header.ZnsRequest) returns (header.Empty);
+	rpc SendZNS(header.ZnsRequest) returns (header.Event);
 }
 
 service MailkonService {
