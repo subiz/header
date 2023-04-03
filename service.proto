@@ -659,3 +659,10 @@ service Campion {
 	rpc ListCampaignSendMessages(header.CampaignSendMessagesRequest) returns (header.CampaignSendMessages);
 	rpc ReportCampaign(Id) returns (header.CampaignMetrics);
 }
+
+service Hodor {
+	rpc ReadSu(Id) returns (header.Su);
+	rpc ChangeSuLimit(header.SuLimitChangeRequest) returns (header.Su);
+	rpc RequestSu(header.SuUsedLog) returns (header.SuUsedLog);
+	rpc CountSu(header.SuUsedLog) returns (header.SuUsedLog);
+}
