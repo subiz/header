@@ -908,6 +908,8 @@ message WebRTCMessage {
 	string offer = 3;
 	string answer = 4;
 	string ice_candidate = 5;
+	string connection_id = 6;
+	string device_id = 7;
 }
 
 message EventParams {
