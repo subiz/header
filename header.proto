@@ -321,6 +321,12 @@ message Label {
 
 	bool disabled = 15;
 	int64 deleted = 16;
+
+	string source_channel = 17; // from specific channel
+	string source_channel_id = 18;
+	string source_id = 19;
+
+	int64 last_synced = 20;
 }
 
 message Labels {
@@ -1743,9 +1749,7 @@ message Tag {
 	int64 modified = 6;
 	string creator_id = 7;
 	string color = 8;
-
 	int64 last_used = 9;
-
 	string type = 10;
 }
 
