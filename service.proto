@@ -411,6 +411,8 @@ service FabikonService {
 	rpc ListFbPosts(Id) returns (header.FacebookPosts);
 	rpc GetFbPost(FacebookPost) returns (FacebookPost);
 	rpc SendEventToFacebook(header.Events) returns (header.Empty); // messenger, facebook_comment, instagram
+
+	rpc SyncUserLabel(header.User) returns (header.Empty);
 }
 
 service ZalokonService {

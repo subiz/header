@@ -79,6 +79,18 @@ message FbChangeValue {
 	optional string id = 32;
 	optional string text = 33;
 	optional string media_id = 34;
+	optional FbChangeUser user = 35; // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
+	optional FbCustomLabel label = 36;
+
+}
+
+message FbCustomLabel {
+	optional string id = 4;
+	optional string page_label_name = 5;
+}
+
+message FbChangeUser {
+	optional string id = 4;
 }
 
 message IgMedia {
