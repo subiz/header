@@ -6302,36 +6302,3 @@ message BusinessEmailAddresses {
 	string account_id = 2;
 	repeated BusinessEmailAddress business_email_addresses = 3;
 }
-
-message SuLimitChangeRequest {
-	string account_id = 2;
-	int64 index_incre = 3;
-
-	int64 created = 4;
-	string created_by = 5;
-
-	int64 su = 6;
-	string invoice_id = 7; // paid
-	float invoice_total = 8;
-}
-
-message Su {
-	string account_id = 2;
-	int64 su_limit = 3;
-	int64 su_used_sum = 4;
-}
-
-message SuUsedLog {
-	string account_id = 2;
-	int64 index_incre = 3;
-
-	int64 created = 4;
-	string created_by = 5;
-	int64 su_request = 6;
-	int64 su_useable = 7;
-	int64 su_useable_expire = 8;
-
-	int64 updated = 9;
-	int64 su_used = 10;
-	repeated CampaignMetric campaign_metrics = 11;
-}
