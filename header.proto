@@ -6162,7 +6162,7 @@ message Campaign {
 	repeated MarketingMessage messages = 15; // one success sent
 	OutboundCallCampaign outbound_call = 16;
 
-	string state = 18; // draft, active, finished, paused
+	string state = 18; // draft, pending, active, finished, paused
 
 	bool auto_clean = 17; // clear data after the campaign is finished or deleted
 
@@ -6178,6 +6178,8 @@ message Campaign {
 
 	bool timming_condition_enabled = 30;
 	TimmingCondition timming_condition = 31;
+
+	string base_segment_id = 32; // segment id
 }
 
 message OutboundCallCampaign {
