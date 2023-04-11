@@ -6152,6 +6152,7 @@ message Campaign {
 	repeated string segments = 11;
 	repeated string unsubscribed_segments = 12;
 
+	// string segment =
 	int64 progress = 13; // 1025 => 10.25%
 	// telesale: unit is number of phone numbers dialed
 	// broadcast: unit is number of users tried
@@ -6159,6 +6160,7 @@ message Campaign {
 	// journey: ?
 
 	repeated MarketingMessage messages = 15; // one success sent
+	OutboundCallCampaign outbound_call = 16;
 
 	string state = 18; // draft, active, finished, paused
 
@@ -6176,6 +6178,73 @@ message Campaign {
 
 	bool timming_condition_enabled = 30;
 	TimmingCondition timming_condition = 31;
+}
+
+message OutboundCallCampaign {
+	string script_quill_delta = 2;
+	repeated string members = 4;
+	string outcomes = 5;
+	string outbound_numbers = 6;
+	bool rotate_outbound_numbers = 7;
+}
+
+message ListOutboundCallRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+
+	string anchor = 4;
+	int64 limit = 5;
+
+	bool status = 7;
+	string assignee = 8;
+}
+
+message OutboundCallEntries {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+
+	repeated OutboundCallEntry entries = 4;
+
+	int64 total = 5;
+	string anchor = 6;
+}
+
+message OutboundCallEntry {
+	string campaign_id = 2;
+	string id = 4;
+	string user_id = 5;
+	string outcome = 6;
+	string assignee = 7;
+
+	string note = 10;
+	string caller = 11;
+	string called = 12;
+	string call_id = 13; // conversation id
+	repeated string other_call_ids = 14;
+
+	CallInfo call_info = 15;
+	int64 created = 16;
+
+	int64 callback_time = 17;
+
+	string status = 18; // pending, calling, called, appointed, removed
+}
+
+message ImportOutboundCallRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated User users = 4;
+	string on_duplicate = 6; //  empty == error, override, keep_both, skip
+}
+
+message ImportOutboundCallResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 num_success = 3;
+	repeated int64 error_indices = 5;
+	repeated string error_codes = 6;
 }
 
 message MarketingGoal {
