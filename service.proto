@@ -667,3 +667,9 @@ service Campion {
 	rpc RemoveOutboutCall(header.OutboundCallEntry) returns (header.Empty);
 	rpc ImportOutbountCalls(header.ImportOutboundCallRequest) returns (header.ImportLeadResponse);
 }
+
+service CreditMgr {
+	rpc ReportCreditSpend(header.CreditSpendReportRequest) returns (header.CreditSpendReportResponse);
+	rpc ListCreditSpendLog(header.CreditSpendLogRequest) returns (header.CreditSpendEntries);
+	rpc AddCredit(payment.Bill) returns (payment.Bill);
+}

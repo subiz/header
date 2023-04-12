@@ -6149,8 +6149,8 @@ message Campaign {
 	int64 updated = 9;
 	string updated_by = 10;
 
-	repeated string segments = 11;
-	repeated string unsubscribed_segments = 12;
+	// repeated string segments = 11;
+	// repeated string unsubscribed_segments = 12;
 
 	// string segment =
 	int64 progress = 13; // 1025 => 10.25%
@@ -6372,4 +6372,72 @@ message BusinessEmailAddresses {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated BusinessEmailAddress business_email_addresses = 3;
+}
+
+message CreditSpendEntry {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	int64 created = 4;
+	string service = 5;
+	string category = 6; // agent, zalo_zns, zalo_active_message
+
+	int64 quantity = 7;
+	CreditSendEntryData data = 8;
+}
+
+message CreditSendEntryDataAgent {
+	int64 total_agents = 1;
+	repeated string agents = 2;
+}
+
+message CreditSendEntryDataZaloZNS {
+	string oa_id = 3;
+	string message_id = 4; // from zalo
+	string template_id = 5;
+	string phone_number = 6;
+}
+
+message CreditSendEntryDataZaloActiveMessage {
+	string oa_id = 3;
+	string message_id = 4; // from zalo
+	string conversation_id = 5;
+	string event_id = 6;
+	string zalo_user_id = 7;
+}
+
+message CreditSendEntryData {
+	CreditSendEntryDataAgent agent = 2;
+	CreditSendEntryDataZaloZNS zalo_zns = 3;
+	CreditSendEntryDataZaloActiveMessage zalo_active_message = 4;
+}
+
+message CreditSpendReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 from_time = 4; // ms
+	string unit = 5; // hour, day, month
+	string service = 6; // just filter
+	int64 limit = 7; // default: 24, 30, 24
+}
+
+message CreditSpendReportResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	map<string, ReportResponse> spends = 3;
+}
+
+message CreditSpendLogRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 created_from = 4; // ms
+	string service = 6; // just filter
+	string category = 7; // just filter
+	int64 limit = 8; // max : 20
+}
+
+message CreditSpendEntries {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated CreditSpendEntry entries = 4;
 }
