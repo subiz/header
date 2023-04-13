@@ -4207,33 +4207,6 @@ message PriceRule {
 	int64 to_count = 10;
 }
 
-message InventoryProduct {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3; // generated
-
-	Product ref_product = 4;
-
-	string serial_number = 8;
-	string barcode = 9;
-	string order_id = 10;
-
-	string location = 11; // sold, wearhouse49, store424
-
-	repeated KV props = 14; // Color:red, Size: XXS, Scent:Fruity CPU:i5 Storage:128GB
-
-	int64 created = 20;
-	int64 updated = 21;
-	string created_by = 22;
-	string updated_by = 23;
-
-	string sold_currency = 24;
-	float sold_price = 25;
-	int64 fpv_sold_price = 26;
-
-	int64 expiry_date = 30;
-}
-
 message OrderItem {
 	string order_id = 3;
 	string id = 4;
@@ -5269,6 +5242,8 @@ message ProductsRequest {
 
 	string sku = 18;
 	string url = 19;
+
+	bool grouped = 20; // group sampe product_group_id into one
 }
 
 message KV {

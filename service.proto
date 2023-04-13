@@ -560,6 +560,7 @@ service Proder {
 	rpc UpdateProduct(header.Product) returns (header.Product);
 	rpc DeleteProduct(Id) returns (Empty);
 	rpc RestoreProduct(Id) returns (header.Product);
+	rpc ListProducts2(header.ProductsRequest) returns (header.Products);
 	rpc ListProducts(ProductsRequest) returns (header.Products);
 	rpc ListProductIds(Ids) returns (Ids);
 	rpc ListGroupedProducts(ProductsRequest) returns (header.Products);
