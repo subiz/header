@@ -5142,6 +5142,8 @@ message Product {
 	repeated MessageButton buttons = 66; // for message attachment
 
 	int64 view_duration_sec = 67; // for event content_view only
+
+	repeated string collections = 68;
 }
 
 message ProductInventory {
