@@ -5551,6 +5551,16 @@ message ImportLeadResponse {
 	repeated string error_codes = 6;
 }
 
+message ImportProductResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 num_success = 3;
+	repeated int64 error_indices = 5;
+	repeated string error_codes = 6;
+	int64 created = 7;
+	int64 updated = 8;
+}
+
 message Task {
 	common.Context ctx = 1;
 
