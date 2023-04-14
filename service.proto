@@ -561,11 +561,11 @@ service Proder {
 	rpc DeleteProduct(Id) returns (Empty);
 	rpc RestoreProduct(Id) returns (header.Product);
 	rpc ListProducts2(header.ProductsRequest) returns (header.Products);
-	rpc ListProducts(ProductsRequest) returns (header.Products);
-	rpc ListProductIds(Ids) returns (Ids);
-	rpc ListGroupedProducts(ProductsRequest) returns (header.Products);
-	rpc ImportProducts(header.Products) returns (header.Products);
-	rpc ImportProduct(header.Products) returns (header.ImportProductResponse);
+	rpc ListProducts(ProductsRequest) returns (header.Products); // remove
+	rpc ListProductIds(Ids) returns (Ids); // remove
+	rpc ListGroupedProducts(ProductsRequest) returns (header.Products); // remove
+	rpc ImportProducts(header.Products) returns (header.Products); // remove
+	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
 	rpc ListProductCollections(Ids) returns (header.ProductCollections);
 	rpc CreateProductCollection(ProductCollection) returns (ProductCollection);

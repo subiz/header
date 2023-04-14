@@ -5246,6 +5246,8 @@ message ProductsRequest {
 	string url = 19;
 
 	bool grouped = 20; // group sampe product_group_id into one
+
+	string source_id = 21;
 }
 
 message KV {
@@ -5551,6 +5553,12 @@ message ImportLeadResponse {
 	repeated string error_codes = 6;
 }
 
+message ImportProductRequest {
+	common.Context ctx = 1;
+	repeated Product products = 2;
+	bool dry_run = 5; // true to preview
+}
+
 message ImportProductResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -5559,6 +5567,8 @@ message ImportProductResponse {
 	repeated string error_codes = 6;
 	int64 created = 7;
 	int64 updated = 8;
+
+	repeated Product products = 9;
 }
 
 message Task {
