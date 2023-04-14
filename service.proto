@@ -559,7 +559,6 @@ service Proder {
 	rpc CreateProduct(header.Product) returns (header.Product);
 	rpc UpdateProduct(header.Product) returns (header.Product);
 	rpc DeleteProduct(Id) returns (Empty);
-	rpc RestoreProduct(Id) returns (header.Product);
 	rpc ListProducts2(header.ProductsRequest) returns (header.Products);
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
@@ -574,7 +573,6 @@ service Proder {
 	rpc DeleteProductFeed(Id) returns (Empty);
 
 	rpc ListProductCategories(Ids) returns (header.ProductCategories);
-	rpc ListProductProps(Ids) returns (header.ProductProps);
 
 	rpc ReadOrder(header.Id) returns (header.Order);
 	rpc CreateOrder(header.Order) returns (header.Order);
