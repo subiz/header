@@ -561,10 +561,6 @@ service Proder {
 	rpc DeleteProduct(Id) returns (Empty);
 	rpc RestoreProduct(Id) returns (header.Product);
 	rpc ListProducts2(header.ProductsRequest) returns (header.Products);
-	rpc ListProducts(ProductsRequest) returns (header.Products); // remove
-	rpc ListProductIds(Ids) returns (Ids); // remove
-	rpc ListGroupedProducts(ProductsRequest) returns (header.Products); // remove
-	rpc ImportProducts(header.Products) returns (header.Products); // remove
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
 	rpc ListProductCollections(Ids) returns (header.ProductCollections);
@@ -667,7 +663,7 @@ service Campion {
 	rpc ListOutboundCallEntries(header.ListOutboundCallRequest) returns (header.OutboundCallEntries);
 	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc RemoveOutboutCall(header.OutboundCallEntry) returns (header.Empty);
-	rpc ImportOutbountCalls(header.ImportOutboundCallRequest) returns (header.ImportLeadResponse);
+	rpc LockOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 }
 
 service CreditMgr {

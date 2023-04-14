@@ -803,18 +803,6 @@ message PageMetrics {
 	repeated PageMetric page_metrics = 2;
 }
 
-message ConcurrentUser {
-	int64 unix_day = 2;
-	int64 sum = 3;
-	int64 num = 4;
-	int64 highest = 5;
-}
-
-message ReportCCU {
-	string account_id = 2;
-	repeated ConcurrentUser ccus = 3;
-}
-
 message Events {
 	common.Context ctx = 1;
 	repeated Event events = 4;
@@ -5134,7 +5122,6 @@ message Product {
 	string source_id = 61;
 
 	bool has_inventory = 62; // share
-	repeated ProductInventory inventories = 63;
 
 	Tax tax = 64; // (shared)
 
@@ -5144,17 +5131,6 @@ message Product {
 	int64 view_duration_sec = 67; // for event content_view only
 
 	repeated string collections = 68;
-}
-
-message ProductInventory {
-	string pos_id = 4;
-	string barcode = 5;
-
-	float price = 6;
-	int64 fpv_price = 7;
-
-	int64 stock = 9; //
-	string currency = 10;
 }
 
 message ProductOption {
@@ -6197,8 +6173,6 @@ message Campaign {
 	Frequently frequency = 34;
 	MarketingGoal goal = 35;
 	CampaignExitCondition exit_when = 36;
-
-
 }
 
 message CampaignExitCondition {
@@ -6221,7 +6195,7 @@ message ListOutboundCallRequest {
 	string campaign_id = 3;
 
 	string anchor = 4;
-	int64 limit = 5;
+	int64 limit = 5; // could be negative
 
 	bool status = 7;
 	string assignee = 8;
@@ -6236,27 +6210,33 @@ message OutboundCallEntries {
 
 	int64 total = 5;
 	string anchor = 6;
+
+	// quick statistic
+	int64 num_open = 20;
+	int64 assigned = 21;
+	int64 total_open = 24;
 }
 
 message OutboundCallEntry {
-	string campaign_id = 2;
-	string id = 4;
-	string user_id = 5;
-	string outcome = 6;
-	string assignee = 7;
+	string account_id = 2;
+	string campaign_id = 3;
+	string to_number = 4;
+	string from_number = 5;
+	string user_id = 6; // from segment
+	string outcome = 7;
+	string assignee = 8;
 
 	string note = 10;
 	string caller = 11;
 	string called = 12;
 	string call_id = 13; // conversation id
 	repeated string other_call_ids = 14;
-
-	CallInfo call_info = 15;
-	int64 created = 16;
-
-	int64 callback_time = 17;
-
-	string status = 18; // pending, calling, called, appointed, removed
+	int64 duration_sec = 16; // ms
+	string hangup_code = 17;
+	int64 created = 18;
+	int64 callback_time = 19;
+	string status = 21; // pending, calling, called, appointed, removed
+	bool unsubscribed = 22;
 }
 
 message ImportOutboundCallRequest {
