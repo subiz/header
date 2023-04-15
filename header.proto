@@ -5041,13 +5041,9 @@ message Product {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	repeated Product other_variants = 4; // [2] [3]
-
 	string id = 3; // generated
+	repeated Product other_variants = 4; // [2] [3]
 	string product_group_id = 5; // iphone-6-plus
-	string left_product_id = 56; // only server
-	string right_product_id = 57; // only server
-
 	string title = 6; // deprecated // should be use for name
 
 	string url = 7; // (shared)
@@ -5131,6 +5127,7 @@ message Product {
 	int64 view_duration_sec = 67; // for event content_view only
 
 	repeated string collections = 68;
+	int64 num_variants = 69; // computed, readonly
 }
 
 message ProductOption {
@@ -5224,6 +5221,7 @@ message ProductsRequest {
 	bool grouped = 20; // group sampe product_group_id into one
 
 	string source_id = 21;
+	string variant_of = 22;
 }
 
 message KV {
