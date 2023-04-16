@@ -50,6 +50,15 @@ func TestAssignObject(t *testing.T) {
 	}
 }
 
+func TestAssignByte(t *testing.T) {
+	dst := &PhoneDevice{Id: "1", Name: "dst", Created: 1}
+	AssignJSONByte(dst, []byte(`{"id": "4", "created": 5}`))
+
+	if dst.Id != "4" || dst.Name != "dst" || dst.Created != 5 {
+		t.Error("should be eq")
+	}
+}
+
 func TestPartition(t *testing.T) {
 	shardNumber := int(crc32.ChecksumIEEE([]byte("acpxkgumifuoofoosble"))) % 10
 	fmt.Println(shardNumber)

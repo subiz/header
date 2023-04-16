@@ -477,6 +477,34 @@ type taxitem struct {
 	taxprice float32
 }
 
+// 3 unmarshal and 2 marshal, very inefficient but its work
+func AssignJSONByte(dst interface{}, body []byte) error {
+	input := map[string]any{}
+	if err := json.Unmarshal(body, &input); err != nil {
+		return err
+	}
+
+	dstbyte, err := json.Marshal(dst)
+	if err != nil {
+		return err
+	}
+	dstmap := map[string]any{}
+	if err := json.Unmarshal(dstbyte, &dstmap); err != nil {
+		return err
+	}
+
+	for k, v := range input {
+		dstmap[k] = v
+	}
+
+	dstbyte, err = json.Marshal(dstmap)
+	if err != nil {
+		return err
+	}
+
+	return json.Unmarshal(dstbyte, dst)
+}
+
 // like js Object.assign(dst, src)
 // dst and src must be same struct pointer
 // AssignObject(ag1, ag2, ["fullname", "email"])
