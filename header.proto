@@ -4715,6 +4715,10 @@ message OrderMetric {
 	int64 open_fpv_total_sum = 75; // derived
 	int64 unconfirmed_count = 76;
 	int64 unconfirmed_fpv_total_sum = 77; // derived
+
+	int64 product_category_bits = 80; // only system
+	string product_category_strings = 81; // only system
+	string category = 82;
 }
 
 message OrderMetricsRequest {
@@ -5125,8 +5129,6 @@ message Product {
 	repeated MessageButton buttons = 66; // for message attachment
 
 	int64 view_duration_sec = 67; // for event content_view only
-
-	repeated string collections = 68;
 	int64 num_variants = 69; // computed, readonly
 }
 
@@ -5582,6 +5584,7 @@ message Task {
 	repeated string associated_users = 26;
 	repeated string associated_orders = 27;
 	repeated string associated_conversations = 28;
+	string associated_call_campaign = 29; // campaign_id.number
 
 	repeated string watchers = 30; // (from JIRA) agents that follow the task, get notified
 
@@ -6452,4 +6455,9 @@ message CreditSpendEntries {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated CreditSpendEntry entries = 4;
+}
+
+// a campaign
+message Form {
+
 }
