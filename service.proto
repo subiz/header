@@ -580,7 +580,6 @@ service Proder {
 
 	rpc DeleteOrder(header.Id) returns (header.Empty); // soft delete, mark as deleted
 	rpc ListOrders(header.OrdersRequest) returns (header.Orders);
-	rpc CountOrders(header.OrdersRequest) returns (header.Orders); // remove
 	rpc CountOrders2(header.CountOrdersRequest) returns (header.CountOrdersResponse);
 	rpc ImportOrders(header.Orders) returns (header.Orders);
 
@@ -660,11 +659,19 @@ service Campion {
 	rpc ListOutboundCallEntries(header.ListOutboundCallRequest) returns (header.OutboundCallEntries);
 	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc RemoveOutboutCall(header.OutboundCallEntry) returns (header.Empty);
-	rpc LockOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 }
 
 service CreditMgr {
 	rpc ReportCreditSpend(header.CreditSpendReportRequest) returns (header.CreditSpendReportResponse);
 	rpc ListCreditSpendLog(header.CreditSpendLogRequest) returns (header.CreditSpendEntries);
 	rpc AddCredit(payment.Bill) returns (payment.Bill);
+}
+
+service FormMgr {
+	rpc ListForms(header.Id) returns (header.Forms);
+	rpc CreateForm(header.Form) returns (header.Form);
+	rpc UpdateForm(header.Form) returns (header.Form);
+	rpc DeleteForm(header.Id) returns (Empty);
+	rpc ReportForm(header.FormReportRequest) returns (header.FormReportResponse);
+	rpc ListFormSubmissions(header.ListFormSubmissionRequest) returns (header.FormSubmissions);
 }

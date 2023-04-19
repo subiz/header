@@ -895,6 +895,7 @@ message Data {
 	Campaign campaign = 103;
 
 	BusinessEmailAddresses business_email_address = 104;
+	FormSubmission form_submitted = 105;
 }
 
 message WebRTCMessage {
@@ -1669,8 +1670,8 @@ message Attachment {
 	AskInfomationAnswer ask_info_answer = 18;
 	//repeated string inputtype = 17;
 
-	MessageForm form = 20;
-	MessageFormSubmit form_submit = 21;
+	// MessageForm form = 20;
+	// MessageFormSubmit form_submit = 21;
 
 	repeated QuickReply quick_replies = 23;
 	bool lock_input = 24; // lock input while has quick replies
@@ -1697,6 +1698,7 @@ message QuickReply {
 	I18nString i18n_title = 6;
 }
 
+/*
 message MessageForm {
 	string title = 2;
 	string state = 3;
@@ -1709,6 +1711,7 @@ message MessageFormSubmit {
 	repeated MessageFormField fields = 3;
 	string state = 4;
 }
+
 
 message MessageFormField {
 	enum InputType {
@@ -1727,6 +1730,7 @@ message MessageFormField {
 	string answer = 8;
 	int64 answered = 9;
 }
+*/
 
 message Tag {
 	common.Context ctx = 1;
@@ -2566,6 +2570,9 @@ message WidgetSetting {
 	bool hide_close_button = 39;
 
 	int64 hide_agent_profile = 40;
+
+	// Form offline_form = 41;
+	// Form prechat_form = 42;
 }
 
 message WidgetField {
@@ -2854,10 +2861,10 @@ message CountdownComponent {
 	string timezone = 12; // +07:00 or empty => user timeone
 }
 
-message WebPluginFormField {
-	string key = 1;
+message FormField {
+	string key = 1; // first_name
 	string label_quill_delta = 2;
-	string label = 3;
+	string label = 3; // First Name
 	I18nString i18n_label = 14;
 
 	bool is_required = 4;
@@ -2869,22 +2876,81 @@ message WebPluginFormField {
 	string validate = 8; // phone, email, rating
 
 	bool randomize_option = 9;
-	message WebPluginFormFieldOption {
+	message FormFieldOption {
 		string label = 2;
 		I18nString i18n_label = 4;
 		string value = 3;
 	}
-	repeated WebPluginFormFieldOption options = 10;
+	repeated FormFieldOption options = 10;
 
 	string placeholder = 11;
 	I18nString i18n_placeholder = 15;
 
 	string value = 13;
+
+	bool is_hidden = 16;
 }
 
-message WebPluginForm {
+message FormSubmissions {
+	repeated FormSubmission form_submissions = 4;
+}
+
+message FormSubmission {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string form_id = 3;
+	string user_id = 4;
+
+	int64 submited_at = 5;
+	FormField values = 6;
+
+	// track submission source
+	string page_url = 7;
+}
+
+message Forms {
+
+	repeated Form forms = 4;
+}
+
+message Form {
 	// general stype
-	repeated WebPluginFormField fields = 1;
+	repeated FormField fields = 1; // convert to form group
+
+	// for widget
+	bool group_required = 2;
+	repeated WidgetGroup groups = 3;
+	string group_label = 4;
+
+	string title = 5;
+	bool enabled = 6;
+	bool end_conversation_after_submit = 7;
+	string enable_when = 8;
+	enum When {
+		all_agents_offline = 0;
+		out_of_bussiness_hour = 1;
+	}
+
+	bool question_required = 10;
+	string question_label = 11;
+
+	I18nString i18n_group_label = 12;
+	I18nString i18n_title = 13;
+	I18nString i18n_question_label = 14;
+
+	int64 created = 20;
+	string created_by = 21;
+	int64 updated = 22;
+	string updated_by = 23;
+
+	repeated FormGroup form_groups = 25;
+	string type = 26; // campaign, form, popup
+}
+
+message FormGroup {
+	string type = 4;
+	repeated FormField fields = 5;
 }
 
 message ButtonsComponent {
@@ -2908,7 +2974,7 @@ message WebPluginComponent {
 	TextComponent text = 5;
 	ButtonsComponent buttons = 6;
 	CountdownComponent countdown = 7;
-	WebPluginForm form = 8;
+	Form form = 8;
 	LinkComponent link = 9;
 	ImageComponent image = 10;
 	LineComponent line = 11;
@@ -4917,9 +4983,6 @@ message Order {
 	int64 assigned = 82;
 	repeated OrderPipelineStage stages = 83;
 	repeated Tag tags = 85;
-	int64 tag_bits = 86; // only system
-	string tag_strings = 87; // only system
-
 	string private_note = 88;
 }
 
@@ -6469,7 +6532,15 @@ message CreditSpendEntries {
 	repeated CreditSpendEntry entries = 4;
 }
 
-// a campaign
-message Form {
+message FormReportRequest {}
+message FormReportResponse {}
 
+
+message ListFormSubmissionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	int32 limit = 4;
+	string anchor = 5;
+	string category = 6; // comma separated
 }
