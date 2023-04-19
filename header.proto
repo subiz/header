@@ -4796,6 +4796,18 @@ message OrdersRequest {
 	string assigned_agent_id = 32;
 }
 
+message CountOrdersRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated OrdersRequest queries = 4;
+}
+
+message CountOrdersResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated int64 counts = 4;
+}
+
 message DownloadOrderRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
