@@ -231,6 +231,9 @@ enum RealtimeType {
 
 	campaign_updated = 229;
 	campaign_deleted = 230;
+
+	outbound_call_entry_updated = 231;
+	outbound_call_entry_deleted = 232;
 }
 
 message TextTransform {

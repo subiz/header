@@ -896,6 +896,7 @@ message Data {
 
 	BusinessEmailAddresses business_email_address = 104;
 	FormSubmission form_submitted = 105;
+	OutboundCallEntry outbound_call_entry = 106;
 }
 
 message WebRTCMessage {
@@ -2886,7 +2887,6 @@ message FormField {
 	I18nString i18n_placeholder = 15;
 
 	string value = 13;
-
 	bool is_hidden = 16;
 }
 
@@ -6256,9 +6256,8 @@ message CampaignExitCondition {
 }
 
 message OutboundCallCampaign {
-	string script_quill_delta = 2;
 	repeated string members = 4;
-	string outcomes = 5;
+	// string outcomes = 5;
 	string outbound_numbers = 6;
 	bool rotate_outbound_numbers = 7;
 
@@ -6277,6 +6276,9 @@ message ListOutboundCallRequest {
 	string assignee = 8;
 	string query = 9;
 	string order_by = 10; // created
+
+	repeated string to_numbers = 12;
+	repeated int64 last_modifieds = 13;
 }
 
 message OutboundCallEntries {
@@ -6305,13 +6307,15 @@ message OutboundCallEntry {
 	string caller = 11;
 	string called = 12;
 	string call_id = 13; // conversation id
-	repeated string other_call_ids = 14;
+	repeated string other_call_ids = 15;
+	string callback_task_id = 16;
 	int64 created = 18;
 	int64 callback_time = 19;
 	string status = 21; // open, calling, called, appointed, deleted
 	bool unsubscribed = 22;
 	FormSubmission form_submit = 23; // dont return to client
 	string form_submit_id = 24;
+	int64 updated = 25;
 }
 
 message ImportOutboundCallRequest {
