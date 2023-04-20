@@ -35,10 +35,6 @@ message Ids {
 	int32 limit = 7;
 }
 
-message Messages {
-	repeated Message messages = 2;
-}
-
 message Notifications {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -934,74 +930,6 @@ message ListEventTypeRequest {
 	int64 to_hour = 4;
 	string category = 5;
 	string keyword = 6;
-}
-
-// deprecating
-message UserSession {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	string id = 4;
-
-	Event start_event = 5;
-	Event latest_event = 6;
-
-	string ip = 7;
-	string city_name = 8;            // derived from ip
-	string country_name = 9;         // derived from ip
-	string continent_code = 10;      // derived from ip
-	float latitude = 12;             // derived from ip
-	float longitude = 13;            // derived from ip
-	string postal_code = 14;         // derived from ip
-
-	string timezone = 16;
-
-	string isp = 17;                 // derived from ip
-	string continent_name = 18;      // derived from ip
-	string country_code = 19;        // derived from ip
-
-	string platform = 20;
-
-	string device_type = 21;         // filled
-	enum DeviceType {
-		unknown = 0;
-		mobile = 1;
-		tablet = 2;
-		desktop = 3;
-	}
-
-	string browser_name = 22;        // filled
-	string language = 23;
-	string user_agent = 24;
-	string screen_resolution = 25;
-
-	string ga_client_id = 26;
-	repeated string ga_tracking_ids = 27;
-	enum AdsNetwork {
-		google_adwords = 0;
-	}
-	string ads_network = 28;
-
-	repeated SessionCampaign campaigns = 29;
-
-	string referrer = 32;
-	string destination_referrer = 38;
-	enum Source {
-		direct = 0;
-		referring = 1;
-		organic = 2;
-		social = 3;
-		advertising = 4;
-	}
-	string source = 33;
-
-	Event latest_content_view = 34; // read only, do not persist
-	int64 total_content_views = 35; // read only, do not persist
-
-	// float lead_score = 36;
-	int64 time_on_site = 37;
-	string latest_page_url = 40;
-	string latest_page_title = 41;
 }
 
 message StartRequest {
@@ -2870,7 +2798,7 @@ message FormField {
 	bool is_required = 4;
 
 	// so front end dont have to download attribute definitions
-	// text, phone, email, rating, multiple-choice, single-choice, dropdown, checkbox
+	// text, phone, email, rating, multiple-choice, single-choice, dropdown, checkbox, number
 	string type = 5;
 
 	string validate = 8; // phone, email, rating
@@ -6551,4 +6479,50 @@ message ListFormSubmissionRequest {
 	int32 limit = 4;
 	string anchor = 5;
 	string category = 6; // comma separated
+}
+
+message OutboundCallReport {
+	// int64 data_point
+	// int64 total = 3;
+
+	repeated string labels = 2; // failed, goal_reached
+	repeated float points = 3; //  12    , 14
+	repeated float point = 4;
+}
+
+message OutboundCallReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string agent_id = 3;
+	string result = 4; // filter by status
+
+	repeated string dim = 5; // calls, talk_sec, result
+	repeated string agg = 6; // count, sum, avg
+	repeated string group_by = 7; // empty (time), result, agent
+
+	// some examples:
+	//   calls agg(count) group_by(time) => bar chart: total calls by times
+	//   calls agg(sum) group_by(*) => Number: total number of calls
+	//   calls agg(count) group_by(result) => pie chart: total number of calls by result
+
+	int64 from_hour = 8;
+	int64 to_hour = 9;
+
+	string range = 10; // hour, day
+	string timezone = 11; // +07:00
+}
+
+message OutboundCallByAgentReport {
+	repeated OutboundCallAgentReport agent_reports = 4;
+}
+
+message OutboundCallAgentReport {
+	string agent_id = 3;
+	int64 total_assigned_calls = 4;
+	int64 total_called = 5;
+	int64 num_goal_reached = 6;
+	int64 num_wrong_number = 7;
+	int64 total_talk_sec = 20;
+	int64 avg_talk_sec = 21;
 }

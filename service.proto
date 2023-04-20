@@ -660,6 +660,8 @@ service Campion {
 	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc GetCallEntry(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc RemoveOutboutCall(header.OutboundCallEntry) returns (header.Empty);
+	rpc ReportOutboundCallByAgents(header.Id) returns(header.OutboundCallByAgentReport);
+	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallByAgentReport);
 }
 
 service CreditMgr {
