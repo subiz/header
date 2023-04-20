@@ -56,3 +56,39 @@ message SiteWeeklyReport {
 
 	repeated string statuses = 5; // up down missing
 }
+
+message Email {
+	common.Context ctx = 1;
+	string from = 3;
+	//string to = 4;
+	string subject = 5;
+	string body = 6;
+	map<string, string> header = 7;
+	repeated EmailAttachment attachments = 8; // s3 links
+	repeated string to = 9;
+	repeated string cc = 10;
+	repeated string bcc = 11;
+	string encoding = 12;
+}
+
+message EmailAttachment {
+	string url = 2;
+	string name = 3;
+	string mimetype = 4;
+}
+
+message EmailBlocks {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated EmailBlock email_blocks = 3;
+	string anchor = 4;
+	int64 total = 5;
+}
+
+message EmailBlock {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	int64 created = 4;
+	string created_by = 5;
+}

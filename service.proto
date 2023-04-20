@@ -4,6 +4,7 @@ package header;
 
 option go_package = "github.com/subiz/header";
 import "payment.proto";
+import "email.proto";
 import "noti5.proto";
 import "account.proto";
 import "header.proto";
@@ -112,8 +113,8 @@ service AccountMgr {
 	rpc SendGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
 	rpc EnterGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
 
-	rpc ListEmailBlocks(Ids) returns (header.EmailBlocks);
-	rpc CreateEmailBlock(header.EmailBlock) returns (header.EmailBlock);
+	rpc ListEmailBlocks(Ids) returns (EmailBlocks);
+	rpc CreateEmailBlock(EmailBlock) returns (EmailBlock);
 	rpc DeleteEmailBlock(Id) returns (Empty);
 
 	rpc UpdateAgentPresence (account.Presence) returns (account.Presence);

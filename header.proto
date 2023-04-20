@@ -3431,26 +3431,6 @@ message WebhookTestResult {
 	int64 latency = 17; // seconds
 }
 
-message Email {
-	common.Context ctx = 1;
-	string from = 3;
-	//string to = 4;
-	string subject = 5;
-	string body = 6;
-	map<string, string> header = 7;
-	repeated EmailAttachment attachments = 8; // s3 links
-	repeated string to = 9;
-	repeated string cc = 10;
-	repeated string bcc = 11;
-	string encoding = 12;
-}
-
-message EmailAttachment {
-	string url = 2;
-	string name = 3;
-	string mimetype = 4;
-}
-
 message FileHeader {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -5793,26 +5773,6 @@ message ConversationModalPicked {
 	string view_id = 7;
 }
 
-message EmailBlocks {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated EmailBlock email_blocks = 3;
-	string anchor = 4;
-	int64 total = 5;
-}
-
-message EmailBlock {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	int64 created = 4;
-	string created_by = 5;
-}
-
-message HourEventMeta {
-	int64 count = 5;
-}
-
 message FacebookPageRegister {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6226,39 +6186,27 @@ message OutboundCallEntries {
 }
 
 message OutboundCallEntry {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+
 	string to_number = 4;
 	string from_number = 5;
 	string user_id = 6; // from segment
-	string outcome = 7; // sucess, unanswered, wrong_number
-	string assignee = 8;
+	string status = 7; // open(empty), machine, noanswer, refused, wrong_number, scheduled, answered, hostile, deleted
+	bool goal_reached = 8;
+	string assignee = 9;
+	string created_by = 10;
 
 	string caller = 11;
 	string called = 12;
 	string call_id = 13; // conversation id
 	repeated string other_call_ids = 15;
-	string callback_task_id = 16;
+	string task_id = 16;
 	int64 created = 18;
-	int64 callback_time = 19;
-	string status = 21; // open, calling, called, appointed, deleted
-	bool unsubscribed = 22;
-	FormSubmission form_submit = 23; // dont return to client
-	string form_submit_id = 24;
+	int64 scheduled_in = 19;
+	FormSubmission form_submission = 23; // dont return to client
 	int64 updated = 25;
-}
-
-message ImportOutboundCallRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated User users = 4;
-	string on_duplicate = 6; //  empty == error, override, keep_both, skip
-}
-
-message ImportOutboundCallResponse {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 num_success = 3;
-	repeated int64 error_indices = 5;
-	repeated string error_codes = 6;
 }
 
 message MarketingGoal {
@@ -6482,12 +6430,12 @@ message ListFormSubmissionRequest {
 }
 
 message OutboundCallReport {
-	// int64 data_point
-	// int64 total = 3;
+	common.Context ctx = 1;
+	string account_id = 2;
 
-	repeated string labels = 2; // failed, goal_reached
-	repeated float points = 3; //  12    , 14
-	repeated float point = 4;
+	repeated string labels = 3; // failed, goal_reached
+	repeated float points = 4; //  12    , 14
+	repeated float point = 5;
 }
 
 message OutboundCallReportRequest {
@@ -6495,22 +6443,23 @@ message OutboundCallReportRequest {
 	string account_id = 2;
 
 	string agent_id = 3;
-	string result = 4; // filter by status
+	string status = 4; // filter by status
+	string goal_reached = 5; // empty, yes, no
 
-	repeated string dim = 5; // calls, talk_sec, result
-	repeated string agg = 6; // count, sum, avg
-	repeated string group_by = 7; // empty (time), result, agent
+	repeated string dim = 6; // calls, talk_sec, status
+	repeated string agg = 7; // count, sum, avg
+	repeated string group_by = 8; // empty (time), status, agent
 
 	// some examples:
 	//   calls agg(count) group_by(time) => bar chart: total calls by times
 	//   calls agg(sum) group_by(*) => Number: total number of calls
-	//   calls agg(count) group_by(result) => pie chart: total number of calls by result
+	//   calls agg(count) group_by(status) => pie chart: total number of calls by status
 
-	int64 from_hour = 8;
-	int64 to_hour = 9;
+	int64 from_hour = 9;
+	int64 to_hour = 10;
 
-	string range = 10; // hour, day
-	string timezone = 11; // +07:00
+	string range = 11; // hour, day
+	string timezone = 12; // +07:00
 }
 
 message OutboundCallByAgentReport {
