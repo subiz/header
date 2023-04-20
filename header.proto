@@ -2831,7 +2831,7 @@ message FormSubmission {
 
 	string id = 5;
 
-	int64 submited_at = 6;
+	int64 submitted_at = 6;
 	FormField values = 7;
 
 	// track submission source
@@ -6198,9 +6198,10 @@ message OutboundCallEntry {
 	string assignee = 9;
 	string created_by = 10;
 
-	string caller = 11;
-	string called = 12;
-	string call_id = 13; // conversation id
+	int64 call_sec = 11; // sec
+	string caller = 12;
+	int64 called = 13;
+	string call_id = 14; // conversation id
 	repeated string other_call_ids = 15;
 	string task_id = 16;
 	int64 created = 18;
@@ -6435,43 +6436,51 @@ message OutboundCallReport {
 
 	repeated string labels = 3; // failed, goal_reached
 	repeated float points = 4; //  12    , 14
-	repeated float point = 5;
+	float total = 5;
 }
 
 message OutboundCallReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
+	string campaign_id = 3;
 
-	string agent_id = 3;
-	string status = 4; // filter by status
-	string goal_reached = 5; // empty, yes, no
+	string agent_id = 4;
+	string status = 5; // filter by status
+	string goal_reached = 6; // empty, yes, no
 
-	repeated string dim = 6; // calls, talk_sec, status
-	repeated string agg = 7; // count, sum, avg
-	repeated string group_by = 8; // empty (time), status, agent
+	string dim = 7; // call, call_sec
+	string agg = 8; // count, sum, avg
+	string group_by = 9; // hour (empty), day, status, agent,
 
 	// some examples:
 	//   calls agg(count) group_by(time) => bar chart: total calls by times
 	//   calls agg(sum) group_by(*) => Number: total number of calls
 	//   calls agg(count) group_by(status) => pie chart: total number of calls by status
 
-	int64 from_hour = 9;
-	int64 to_hour = 10;
+	int64 from_hour = 10;
+	int64 to_hour = 11;
 
-	string range = 11; // hour, day
-	string timezone = 12; // +07:00
+	string range = 12; // hour, day
+	string timezone = 13; // +07:00
 }
 
 message OutboundCallByAgentReport {
+	common.Context ctx = 1;
+	string account_id = 2;
 	repeated OutboundCallAgentReport agent_reports = 4;
+	OutboundCallAgentReport all = 5;
 }
 
 message OutboundCallAgentReport {
 	string agent_id = 3;
 	int64 total_assigned_calls = 4;
-	int64 total_called = 5;
-	int64 num_goal_reached = 6;
-	int64 num_wrong_number = 7;
-	int64 total_talk_sec = 20;
-	int64 avg_talk_sec = 21;
+	int64 num_calls = 5;
+	int64 num_goal_reacheds = 6;
+	int64 total_call_sec = 7;
+	int64 avg_call_sec = 8;
+
+	int64 num_failed_calls = 9; // machine, refused, wrong_number
+	int64 num_wrong_numbers = 10;
+	int64 num_answered_calls = 11;
+	int64 num_hostile_calls = 12;
 }
