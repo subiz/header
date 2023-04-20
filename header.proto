@@ -6484,3 +6484,7 @@ message OutboundCallAgentReport {
 	int64 num_answered_calls = 11;
 	int64 num_hostile_calls = 12;
 }
+
+message HourEventMeta {
+	int64 count = 5;
+}
