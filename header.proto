@@ -1712,7 +1712,6 @@ message MessageFormSubmit {
 	string state = 4;
 }
 
-
 message MessageFormField {
 	enum InputType {
 		text = 0;
@@ -2902,11 +2901,15 @@ message FormSubmission {
 	string form_id = 3;
 	string user_id = 4;
 
-	int64 submited_at = 5;
-	FormField values = 6;
+	string id = 5;
+
+	int64 submited_at = 6;
+	FormField values = 7;
 
 	// track submission source
-	string page_url = 7;
+	string page_url = 8;
+	string source_campaign_id = 9;
+	string source_campaign_number = 10;
 }
 
 message Forms {
@@ -2951,6 +2954,8 @@ message Form {
 message FormGroup {
 	string type = 4;
 	repeated FormField fields = 5;
+	string title = 10;
+	I18nString i18n_title = 11;
 }
 
 message ButtonsComponent {
@@ -6256,6 +6261,8 @@ message OutboundCallCampaign {
 	string outcomes = 5;
 	string outbound_numbers = 6;
 	bool rotate_outbound_numbers = 7;
+
+	Form form = 8;
 }
 
 message ListOutboundCallRequest {
@@ -6266,8 +6273,10 @@ message ListOutboundCallRequest {
 	string anchor = 4;
 	int64 limit = 5; // could be negative
 
-	bool status = 7;
+	string status = 7;
 	string assignee = 8;
+	string query = 9;
+	string order_by = 10; // created
 }
 
 message OutboundCallEntries {
@@ -6277,35 +6286,32 @@ message OutboundCallEntries {
 
 	repeated OutboundCallEntry entries = 4;
 
-	int64 total = 5;
-	string anchor = 6;
+	int64 total = 5; // total matched the query
 
 	// quick statistic
-	int64 num_open = 20;
-	int64 assigned = 21;
+	int64 num_open_assigned = 20;
+	int64 num_assigned = 21;
 	int64 total_open = 24;
+	int64 total_all = 25;
 }
 
 message OutboundCallEntry {
-	string account_id = 2;
-	string campaign_id = 3;
 	string to_number = 4;
 	string from_number = 5;
 	string user_id = 6; // from segment
-	string outcome = 7;
+	string outcome = 7; // sucess, unanswered, wrong_number
 	string assignee = 8;
 
-	string note = 10;
 	string caller = 11;
 	string called = 12;
 	string call_id = 13; // conversation id
 	repeated string other_call_ids = 14;
-	int64 duration_sec = 16; // ms
-	string hangup_code = 17;
 	int64 created = 18;
 	int64 callback_time = 19;
-	string status = 21; // pending, calling, called, appointed, removed
+	string status = 21; // open, calling, called, appointed, deleted
 	bool unsubscribed = 22;
+	FormSubmission form_submit = 23; // dont return to client
+	string form_submit_id = 24;
 }
 
 message ImportOutboundCallRequest {
@@ -6534,8 +6540,6 @@ message CreditSpendEntries {
 
 message FormReportRequest {}
 message FormReportResponse {}
-
-
 message ListFormSubmissionRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
