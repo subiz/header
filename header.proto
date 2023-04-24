@@ -4035,6 +4035,9 @@ message FileUrlDownloadRequest {
 
 	string type_hint = 8; // must from trusted source
 	string extension = 9; // xlsx, jped
+
+	int64 max_height = 10;
+	int64 max_width = 11;
 }
 
 message PushNoti {
