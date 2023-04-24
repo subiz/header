@@ -6150,6 +6150,11 @@ message OutboundCallCampaign {
 	bool rotate_outbound_numbers = 7;
 
 	Form form = 8;
+	bool enable_recording = 9;
+
+	int32 max_retries = 10;
+	int32 max_call_duration_sec = 11; // default 1800
+	int64 sec_between_retries = 12; // 300 = 5 min
 }
 
 message ListOutboundCallRequest {
@@ -6208,6 +6213,7 @@ message OutboundCallEntry {
 	int64 scheduled_in = 19;
 	FormSubmission form_submission = 23; // dont return to client
 	int64 updated = 25;
+	int64 num_attempt = 26;
 }
 
 message MarketingGoal {
