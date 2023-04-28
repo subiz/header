@@ -520,19 +520,6 @@ service Notibox {
 	rpc MarkReadNotiTopic(Id) returns (Empty);
 }
 
-// watchhttp services
-service Watchhttp {
-	rpc CreateWebpage(header.Webpage) returns (header.Webpage);
-	rpc DeleteWebpage(Id) returns (Empty);
-	rpc ListWebpages(Id) returns (header.Webpages);
-	rpc UpdateWebpage(header.Webpage) returns (header.Webpage);
-	rpc ReadWebpage(Id) returns (header.Webpage);
-	rpc ListRecentWebpageChecks(header.RecentWebpageCheckRequest) returns (header.WebpageChecks);
-	rpc ReadWebpageCheck(header.WebpageCheckRequest) returns (header.WebpageCheck);
-	rpc ReportWebpageChecks(header.WebpageReportRequest) returns (header.WebpageReportDataSet);
-	rpc SummaryWebpageChecks(header.WebpageReportRequest) returns (header.WebpageChecks);
-}
-
 // holap services
 service Holap {
 	rpc AppendAgentSet(account.Agent) returns (Empty);

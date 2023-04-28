@@ -198,6 +198,7 @@ message SegmentMeta {
 	repeated string texts = 7;
 	int64 created = 10;
 	int64 updated = 11;
+	string fetch_id = 12;
 }
 
 message User {

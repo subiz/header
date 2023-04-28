@@ -1,4 +1,4 @@
-FROM golang:1.18
+FROM golang:1.20
 
 WORKDIR /tmp
 
@@ -15,11 +15,11 @@ RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # install protobuf v21.12
-RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protoc-21.12-linux-x86_64.zip -O protoc.zip
+RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v22.3/protoc-22.3-linux-x86_64.zip -O protoc.zip
 RUN unzip protoc.zip
 
 # install protoc gengo
-RUN go install github.com/golang/protobuf/protoc-gen-go@v1.5.2
+RUN go install github.com/golang/protobuf/protoc-gen-go@v1.5.3
 
 ENV PROTOC=/tmp/bin/protoc
 
