@@ -268,14 +268,28 @@ message TextCondition {
 	bool accent_sensitive = 31;
 }
 
+message EventConditionFilter {
+	string id = 3;
+	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
+	string type = 5;
+
+	TextCondition text = 6;
+	BoolCondition boolean = 8;
+	FloatCondition number = 9;
+	DatetimeCondition datetime = 10;
+}
+
 message EventCondition {
 	string type = 2; // attribute_updated, form_submitted, page_viewed
 	string ui_type = 4; // form, page, purchase, email
 
 	// created
-	bool inverse = 5; // have not been performanced
+	bool inverse = 5; // have not been performed
 	int32 at_least = 6; // have been performanced at_least [___] times
 	DatetimeCondition created = 7;
+
+	repeated EventConditionFilter filters = 8;
+	// field: price, operator eq, value 5
 }
 
 message BoolCondition {

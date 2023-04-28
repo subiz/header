@@ -659,8 +659,8 @@ service Campion {
 
 	rpc ListOutboundCallEntries(header.ListOutboundCallRequest) returns (header.OutboundCallEntries);
 	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
-	rpc GetCallEntry(header.OutboundCallEntry) returns (header.OutboundCallEntry);
-	rpc RemoveOutboutCall(header.OutboundCallEntry) returns (header.Empty);
+	rpc GetOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
+	rpc RemoveOutboudCall(header.OutboundCallEntry) returns (header.Empty);
 	rpc ReportOutboundCallByAgents(header.OutboundCallReportRequest) returns(header.OutboundCallByAgentReport);
 	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallReport);
 }

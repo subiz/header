@@ -192,6 +192,14 @@ message CallSetting {
 	int64 limit_call_time_sec = 33;
 }
 
+message SegmentMeta {
+	string segment_id = 5;
+	string text = 6;
+	repeated string texts = 7;
+	int64 created = 10;
+	int64 updated = 11;
+}
+
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -232,6 +240,7 @@ message User {
 	string deleted_by = 73;
 
 	repeated UserCampaign campaigns = 74;
+	repeated SegmentMeta segment_metas = 75;
 }
 
 message UserAds {
@@ -1911,6 +1920,8 @@ message Trigger {
 	int64 inactivity_sec = 8; // 50s
 	int64 after_pageview_sec = 9; // 50s
 	bool disabled = 10;
+
+	repeated EventConditionFilter event_attributes = 11;
 }
 
 message BotCondition {
@@ -6134,6 +6145,7 @@ message Campaign {
 	string base_segment_id = 32; // segment id
 
 	Trigger trigger = 33;
+	UserViewCondition trigger_condition = 37;
 
 	Frequently frequency = 34;
 	MarketingGoal goal = 35;

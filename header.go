@@ -344,13 +344,6 @@ func checkAccess(scopes []string, perm string) bool {
 	return true
 }
 
-func LimitLength(str string, limit int) string {
-	if len(str) < limit {
-		return str
-	}
-	return str[:limit]
-}
-
 // []string{"all", "agent"}, "conversation:r tag:wr" => true
 // []string{"agent"}, "tag:wr" => false
 func CheckAccess(realScopes, authorizedScopes []string, perm string) bool {
@@ -665,13 +658,6 @@ func ContainString(ss []string, s string) bool {
 		}
 	}
 	return false
-}
-
-func firstN(s string, n int) string {
-	if len(s) > n {
-		return s[:n]
-	}
-	return s
 }
 
 func GetUserDisplayName(u *User) string {
