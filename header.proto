@@ -6174,6 +6174,7 @@ message OutboundCallEntry {
 	FormSubmission submission = 23; // dont return to client
 	int64 updated = 25;
 	int64 num_attempts = 26;
+	bool do_not_call = 27;
 }
 
 message MarketingGoal {
