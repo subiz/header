@@ -2788,7 +2788,7 @@ message FormSubmission {
 	string id = 5;
 
 	int64 submitted_at = 6;
-	FormField values = 7;
+	repeated FormField values = 7;
 
 	// track submission source
 	string page_url = 8;
