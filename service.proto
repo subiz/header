@@ -208,7 +208,6 @@ service LiveMgr {
 	rpc SearchLocations(header.LocationParams) returns (header.Locations);
 	rpc FilterActiveUsers(header.UserInfoParams) returns (header.Users);
 
-	rpc TopEvents(header.EventParams) returns (header.Events);
 	rpc TopLocations(Id) returns (header.LocationMetrics);
 	rpc TopPages(Id) returns (header.PageMetrics);
 	rpc TopSources(Id) returns (header.SourceMetrics);
@@ -261,7 +260,6 @@ service ConversationMgr {
 	rpc TerminateBot(header.BotTerminated) returns (header.Event);
 
 	rpc SendMessage(header.Event) returns (header.Event);
-	rpc SendOmniChannelMessage(header.SendOmniChannelMessageRequest) returns (header.Event);
 	rpc UpdateMessage(header.Event) returns (header.Event);
 	rpc PinMessage(header.Event) returns (header.Empty);
 	rpc UnpinMessage(header.Event) returns (header.Empty);
@@ -534,7 +532,6 @@ service Holap {
 	rpc ListConversationIds(header.ConversationMetricsRequest) returns (header.Conversations);
 	rpc ReportAgent(header.AgentMetricsRequest) returns (header.AgentMetrics);
 	rpc ListChannelTouchpoints(header.Ids) returns (header.Ids);
-	rpc ReportUserEvent(header.UserEventMetricsRequest) returns (header.UserEventMetrics);
 	rpc UpdateOrder(header.Order) returns (Empty);
 	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders);
 	rpc ReportCall(header.CallMetricsRequest) returns (header.CallMetrics);

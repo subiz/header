@@ -475,29 +475,10 @@ message DeleteNoteRequest {
 	string id = 4;
 }
 
-// TODO move params to common
-message IntParams {
-	int64 eq = 2;
-	int64 neq = 3;
-	int64 gt = 4;
-	int64 gte = 5;
-	int64 lt = 6;
-	int64 lte = 7;
-}
-
 message StringParams {
 	string eq = 2;
 	repeated string in = 3;
 	string contain = 4;
-}
-
-message IdParams {
-	string id = 2;
-	repeated string ids = 3;
-}
-
-message Params {
-	repeated string args = 2;
 }
 
 message Location {
@@ -532,6 +513,11 @@ message Page {
 	string url = 4;
 }
 
+message IdParams {
+	string id = 2;
+	repeated string ids = 3;
+}
+
 message UserInfoParams {
 	string account_id = 15;
 	string signature = 2;
@@ -544,21 +530,14 @@ message UserInfoParams {
 	IdParams page_id = 8;
 	IdParams location_id = 7;
 
-	IntParams view_count = 9;
-	IntParams duration = 10;
+	// IntParams view_count = 9;
+	// IntParams duration = 10;
 
 	// location params
 	StringParams country_code = 11;
 	StringParams continent_code = 12;
 	StringParams url = 13;
-	IntParams time_on_site = 14;
-}
-
-enum HaveBeen {
-	unknown = 0;
-	increase = 1;
-	decrease = 2;
-	immutable = 3;
+	// IntParams time_on_site = 14;
 }
 
 enum PK {
@@ -577,28 +556,6 @@ message Key {
 	string order_comment_id = 6;
 	string task_id = 7;
 	string task_comment_id = 8;
-}
-
-message UserEventMetric {
-	string account_id = 2;
-	string user_id = 3;
-	int64 created_hour = 4;
-	string date = 5; // derived
-
-	int64 event_count = 20;
-}
-
-message UserEventMetrics {
-	repeated UserEventMetric metrics = 2;
-}
-
-message UserEventMetricsRequest {
-	string account_id = 2;
-	string user_id = 3;
-	int64 created_hour_from = 4;
-	int64 created_hour_to = 5;
-	int32 tz = 6;
-	string dim = 7;
 }
 
 message UserMetric {
@@ -912,11 +869,6 @@ message WebRTCMessage {
 	string ice_candidate = 5;
 	string connection_id = 6;
 	string device_id = 7;
-}
-
-message EventParams {
-	string type = 2;
-	string account_id = 3;
 }
 
 message ListUserEventsRequest {
@@ -5939,19 +5891,6 @@ message ZnsRequest {
 	string template_id = 5;
 	string tracking_id = 6;
 	map<string, string> template_data = 7;
-}
-
-message SendOmniChannelMessageRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	// user
-	string id = 3;
-	string channel = 5;
-	string channel_source = 6;
-	string profile_id = 7;
-
-	repeated Event messages = 8;
 }
 
 message EventType {
