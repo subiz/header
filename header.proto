@@ -2770,6 +2770,8 @@ message FormField {
 
 	string value = 13;
 	bool is_hidden = 16;
+
+	string linked_user_attribute = 17;
 }
 
 message FormSubmissions {
