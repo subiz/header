@@ -260,6 +260,7 @@ service ConversationMgr {
 	rpc TerminateBot(header.BotTerminated) returns (header.Event);
 
 	rpc SendMessage(header.Event) returns (header.Event);
+	rpc SendOmniChannelMessage(header.SendOmniChannelMessageRequest) returns (header.Event);
 	rpc UpdateMessage(header.Event) returns (header.Event);
 	rpc PinMessage(header.Event) returns (header.Empty);
 	rpc UnpinMessage(header.Event) returns (header.Empty);

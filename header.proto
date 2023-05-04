@@ -192,15 +192,6 @@ message CallSetting {
 	int64 limit_call_time_sec = 33;
 }
 
-message SegmentMeta {
-	string segment_id = 5;
-	string text = 6;
-	repeated string texts = 7;
-	int64 created = 10;
-	int64 updated = 11;
-	string fetch_id = 12;
-}
-
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -241,7 +232,6 @@ message User {
 	string deleted_by = 73;
 
 	repeated UserCampaign campaigns = 74;
-	repeated SegmentMeta segment_metas = 75;
 }
 
 message UserAds {
@@ -5891,6 +5881,19 @@ message ZnsRequest {
 	string template_id = 5;
 	string tracking_id = 6;
 	map<string, string> template_data = 7;
+}
+
+message SendOmniChannelMessageRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	// user
+	string id = 3;
+	string channel = 5;
+	string channel_source = 6;
+	string profile_id = 7;
+
+	repeated Event messages = 8;
 }
 
 message EventType {
