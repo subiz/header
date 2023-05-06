@@ -1341,8 +1341,8 @@ message Message {
 	string conversation_id = 14;
 	string task_id = 27;
 	string id = 11;
-	string text = 2;
-
+	string text = 2; // plaintext
+	string content = 50; // original content (markdown, html ...)
 	string format = 3; // plaintext, html, markdown, delta
 	repeated Attachment attachments = 4;
 	repeated KV fields = 10;
@@ -1429,12 +1429,14 @@ message MessagePong {
 		remove_hide = 18;
 		open = 19; // email opened
 		unseen = 20;
+		clicked = 21; // email clicked
 	}
 	string type = 4;
 
 	int64 created = 5;
 	string ack_error = 6; // used in ack
 	int64 count = 7;
+	string url = 8; // for clicked
 }
 
 message MessageButton {
@@ -1464,31 +1466,6 @@ message MessageButton {
 	I18nString i18n_title = 19;
 }
 
-message AskInfomationAnswer {
-	string message_id = 2;
-	string answer = 3;
-}
-
-message AskInfomation {
-	string question = 2;
-	string input_type = 3;
-	string key = 4; // user.name user.phone
-	string answer = 5;
-	int64 answered = 6;
-	enum InputType {
-		phone = 0;
-		email = 1;
-		text = 2;
-		password = 3;
-		number = 4;
-		date = 5;
-		color = 6;
-		location = 7;
-		time = 8;
-		url = 9;
-	}
-}
-
 message GenericElementTemplate {
 	string title = 2;
 	string image_url = 3;
@@ -1509,8 +1486,6 @@ enum AttachmentType {
 	preview = 4;
 	button = 5;
 	input = 6;
-	ask_info_form = 7;
-	ask_info_form_answer = 8;
 	form = 9;
 	form_submit = 10;
 	fallback = 11;
@@ -1547,8 +1522,8 @@ message Attachment {
 	string pretext = 11;
 
 	repeated MessageButton buttons = 16;
-	AskInfomation ask_info = 17;
-	AskInfomationAnswer ask_info_answer = 18;
+	// AskInfomation ask_info = 17;
+	// AskInfomationAnswer ask_info_answer = 18;
 	//repeated string inputtype = 17;
 
 	// MessageForm form = 20;
@@ -6044,7 +6019,7 @@ message Campaign {
 
 	int64 audient_count = 19; // number of user in segments, read-only
 	int64 impression_count = 20;
-	int64 goal_reached = 21;
+	int64 goal_reached_count = 21;
 
 	int64 sent_message_budget = 22;
 	int64 sent_message_budget_spent = 23; // set by campaign
@@ -6178,14 +6153,10 @@ message CampaignSendLogEntry {
 	string account_id = 2;
 	string campaign_id = 3;
 
-	int64 index_incre = 4; // remove
 	string message_id = 5; // key
-	Touchpoint touchpoint = 6; // remove
 	string user_id = 7;
 	string primary_user_id = 8;
-	int64 piece_index_incre = 9; // remove
 	string conversation_id = 10;
-	repeated string event_ids = 11; // remove
 	string send_error = 12;
 	int64 created = 13; // ms
 
@@ -6198,6 +6169,8 @@ message CampaignSendLogEntry {
 	int64 delivered_at = 26;
 
 	int64 sent_count = 28;
+
+	int64 last_tried = 29;
 }
 
 message CampaignSendLog {
@@ -6206,6 +6179,7 @@ message CampaignSendLog {
 	string campaign_id = 3;
 	repeated CampaignSendLogEntry entries = 4;
 	string anchor = 5;
+	int64 total = 6;
 }
 
 message CampaignSendLogRequest {
@@ -6457,4 +6431,15 @@ message OutboundCallAgentReport {
 
 message HourEventMeta {
 	int64 count = 5;
+}
+
+message LinkData {
+	string account_id = 2;
+	string campaign_id = 3;
+	string user_id = 4;
+	string conversation_id = 5;
+	string message_id = 6;
+	string service = 10; // email
+	string original_url = 11;
+	string payload = 12;
 }
