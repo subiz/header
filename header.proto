@@ -3351,45 +3351,12 @@ message WebhookTestResult {
 	int64 latency = 17; // seconds
 }
 
-message FileHeader {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string name = 3;
-	string type = 4;
-	int64 size = 5;
-	string md5 = 6;
-	string description = 7;
-
-	string content_disposition = 8; // inline || attachment
-
-	// metadata
-	int64 uploaded = 20;
-	string full_url = 21;
-	string mime_type = 22;
-	int64 downloaded = 23;
-
-	string bucket = 24;
-	int64 ttl = 25;
-
-	// for image file
-	int64 width = 26;
-	int64 height = 27;
-	int64 avatar_size = 28;
-	int64 avatar_offset = 29;
-}
-
 message PresignResult {
 	common.Context ctx = 1;
 	string account_id = 3;
 	string url = 4;
 	string id = 6;
 	string signed_url = 5;
-}
-
-message FileRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
 }
 
 message File {
@@ -3426,6 +3393,14 @@ message File {
 
 	int64 ttl = 22; // created + 3 months
 	int64 deleted = 23;
+
+	string category = 27; // call_recorded, product_image, ... for reporting
+
+	// metadata
+	int64 uploaded = 28;
+	string full_url = 29;
+	string mime_type = 30;
+	int64 downloaded = 31;
 }
 
 message BotTerminated {
@@ -3937,6 +3912,8 @@ message FileUrlDownloadRequest {
 
 	int64 max_height = 10;
 	int64 max_width = 11;
+
+	string category = 12;
 }
 
 message PushNoti {
@@ -6273,11 +6250,15 @@ message CreditSpendEntry {
 	string account_id = 2;
 	string id = 3;
 	int64 created = 4;
-	string service = 5;
-	string category = 6; // agent, zalo_zns, zalo_active_message
+	string service = 5; // file
+	string category = 6; // agent, zalo_zns, zalo_active_message, image
 
 	int64 quantity = 7;
 	CreditSendEntryData data = 8;
+}
+
+message CreditSendEntryDataId {
+	string id = 2;
 }
 
 message CreditSendEntryDataAgent {
@@ -6311,6 +6292,7 @@ message CreditSendEntryData {
 	CreditSendEntryDataZaloZNS zalo_zns = 3;
 	CreditSendEntryDataZaloActiveMessage zalo_active_message = 4;
 	CreditSendEntryDataEmail email = 5;
+	CreditSendEntryDataId file = 6;
 }
 
 message CreditSpendReportRequest {
