@@ -436,6 +436,8 @@ service MailkonService {
 	rpc ListBusinessEmailAddresses(header.Id) returns (header.BusinessEmailAddresses);
 	rpc UpsertBusinessEmailAddress(header.BusinessEmailAddress) returns (header.BusinessEmailAddress);
 	rpc DeleteBusinessEmailAddress(header.Id) returns (header.Empty);
+
+	rpc TrackLink(header.LinkData) returns (header.Empty);
 }
 
 // widget services

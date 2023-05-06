@@ -6434,6 +6434,7 @@ message HourEventMeta {
 }
 
 message LinkData {
+	common.Context ctx = 1;
 	string account_id = 2;
 	string campaign_id = 3;
 	string user_id = 4;
@@ -6442,4 +6443,8 @@ message LinkData {
 	string service = 10; // email
 	string original_url = 11;
 	string payload = 12;
+
+	int64 created = 13;
+	string type = 14; // click, tracking
+	common.Device device = 15;
 }
