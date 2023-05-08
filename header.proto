@@ -921,6 +921,9 @@ message StartRequest {
 	string sip_provider = 40;
 	string call_id = 42;
 	string call_diversion = 43;
+
+	string campaign_id = 44;
+	string outbound_call_entry_id = 45;
 }
 
 message PresencesRequest {
@@ -1272,6 +1275,9 @@ message Conversation {
 	string traffic_ads_network = 61; // google_adwords
 	common.SessionCampaign traffic_utm = 62;
 	string traffic_referrer = 63;
+
+	string campaign_id = 64;
+	string outbound_call_entry_id = 65;
 }
 
 message CallInfo {
@@ -1313,7 +1319,6 @@ message CallInfo {
 
 	string call_id = 26;
 	string diversion_number = 27;
-
 	string transfer_to = 28;
 }
 
@@ -5697,6 +5702,9 @@ message CallDriverRequest {
 	bool is_missed = 23; // tell driver to mark this call as missed (e.g: out of business hour)
 
 	int64 limit_call_time_sec = 26;
+
+	string campaign_id = 27;
+	string outbound_call_entry_id = 28;
 }
 
 message CallDriverResponse {
