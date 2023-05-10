@@ -3403,7 +3403,7 @@ message File {
 
 	// metadata
 	int64 uploaded = 28;
-	string full_url = 29;
+	string gcs_url = 29;
 }
 
 message BotTerminated {
