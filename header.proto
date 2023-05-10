@@ -1347,7 +1347,7 @@ message Message {
 	string task_id = 27;
 	string id = 11;
 	string text = 2; // plaintext
-	string content = 50; // original content (markdown, html ...)
+	string plaintext = 50; // plaintext representation
 	string format = 3; // plaintext, html, markdown, delta
 	repeated Attachment attachments = 4;
 	repeated KV fields = 10;
@@ -3404,8 +3404,6 @@ message File {
 	// metadata
 	int64 uploaded = 28;
 	string full_url = 29;
-	string mime_type = 30;
-	int64 downloaded = 31;
 }
 
 message BotTerminated {
@@ -6139,7 +6137,7 @@ message CampaignSendLogEntry {
 	string account_id = 2;
 	string campaign_id = 3;
 
-	string message_id = 5; // key
+	string message_id = 5; // key marketing message id
 	string user_id = 7;
 	string primary_user_id = 8;
 	string conversation_id = 10;
@@ -6157,6 +6155,7 @@ message CampaignSendLogEntry {
 	int64 sent_count = 28;
 
 	int64 last_tried = 29;
+	int64 sub_sent_count = 30;
 }
 
 message CampaignSendLog {

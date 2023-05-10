@@ -621,7 +621,7 @@ func NormEmail(email string) string {
 
 func Phone(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
-		return r == ',' || r == ';'
+		return r == ',' || r == ';' || r == '/' || r == '\\'
 	})
 
 	phones := []string{}

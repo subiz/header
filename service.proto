@@ -330,14 +330,6 @@ service TagMgr {
 	rpc GetTag(Id) returns (header.Tag);
 }
 
-// file services
-service FileMgr {
-	rpc Presign(header.File) returns (header.PresignResult);
-	rpc Uploaded(header.Id) returns (header.File);
-	rpc DownloadFileUrl(header.FileUrlDownloadRequest) returns (header.File);
-	rpc FileAvatar(header.File) returns (header.File);
-}
-
 // noti5 services
 service Noti5Service {
 	rpc ReadNotificationSetting(Id) returns (noti5.Setting);
