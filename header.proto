@@ -6144,7 +6144,7 @@ message CampaignSendLogEntry {
 	string send_error = 12;
 	int64 created = 13; // ms
 
-	string status = 14; // sending, sent, failed
+	string status = 14; // sending, sent, failed, success
 	Event payload = 15;
 	int64 clicked_at = 17;
 	int64 goal_reached_at = 20;
@@ -6156,6 +6156,8 @@ message CampaignSendLogEntry {
 
 	int64 last_tried = 29;
 	int64 sub_sent_count = 30;
+
+	bool no_retry = 31; // read only
 }
 
 message CampaignSendLog {
