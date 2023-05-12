@@ -6,6 +6,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/keepalive"
 )
 
 func DeltaToPlainText(delta string) string {
@@ -761,4 +765,16 @@ func Fnv32(key string) uint32 {
 		hash ^= uint32(key[i])
 	}
 	return hash
+}
+
+func DialGrpc(service string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	opts = append([]grpc.DialOption{}, opts...)
+	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	// opts = append(opts, sgrpc.WithCache())
+	opts = append(opts, grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`))
+	opts = append(opts, grpc.WithKeepaliveParams(keepalive.ClientParameters{
+		Time:    time.Duration(20) * time.Second,
+		Timeout: time.Duration(20) * time.Second,
+	}))
+	return grpc.Dial(service, opts...)
 }
