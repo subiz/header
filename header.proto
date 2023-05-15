@@ -5994,12 +5994,12 @@ message Campaign {
 	// triggered: number of message
 	// journey: ?
 
-	repeated MarketingMessage messages = 15; // one success sent
+	repeated MarketingMessage messages = 15;
 	OutboundCallCampaign outbound_call = 16;
 
-	string state = 18; // draft, pending, active, finished, paused
+	string state = 18; // pause (default), pending(waiting to be scheduled), active, finished (by system), stopped (by agent)
 
-	bool auto_clean = 17; // clear data after the campaign is finished or deleted
+	// bool auto_clean = 17; // clear data after the campaign is finished or deleted
 
 	int64 audient_count = 19; // number of user in segments, read-only
 	int64 impression_count = 20;

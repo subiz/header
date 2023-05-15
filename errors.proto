@@ -33,16 +33,11 @@ enum E {
 	resource_not_found = 6;
 	access_deny = 7;
 
-	account_not_found = 9;
 	invalid_credential  = 10;
 	http_call_error  = 11;
-	agent_group_not_found  = 12;
 	invalid_conversation_id = 13;
-	agent_not_found = 15;
-	facebook_page_not_found = 16;
 	invalid_refresh_token = 17;
 	wrong_password = 18;
-	agent_is_not_active = 19;
 	invalid_token = 20;
 	invalid_message_size = 21;
 	invalid_payload_size = 22;
@@ -51,20 +46,12 @@ enum E {
 
 	wrong_signature = 27;
 
-	invalid_account_id = 29;
-	invalid_target_id = 30;
-	invalid_note_id = 31;
-	invalid_user_id = 32;
-
-	user_not_found = 33;
-	// automation_not_found = 34;
 	invalid_attribute_value = 35;
 	invalid_attribute_key = 36;
 	invalid_attribute_name = 37;
 	invalid_attribute_type = 38;
 
 	too_many_attribute = 39;
-	attribute_not_found = 40;
 	invalid_agent_id = 41;
 	invalid_note_target_id = 42;
 
@@ -79,13 +66,9 @@ enum E {
 	invalid_amount = 50;
 	inactive_promotion_referral_program = 51;
 
-	plan_not_found = 52;
-	invoice_not_found = 53;
 	invalid_stripe_info = 54;
-	subscription_not_found = 55;
 	invalid_plan = 56;
 
-	promotion_not_found = 57;
 	invalid_promotion = 58;
 
 	invalid_email = 59;
@@ -106,17 +89,13 @@ enum E {
 	invalid_stripe_customer_id = 73;
 	invalid_stripe_token = 74;
 	stripe_call_failed = 75;
-	invalid_bill_id = 76;
 	invalid_invoice_id = 77;
-	invalid_id = 78;
-	payment_method_not_found = 79;
 	invalid_invoice_duedate = 80;
 	filestore_error = 81;
 	invalid_country = 82;
 	invalid_referrer_code = 83;
 	invalid_oauth_scope = 84;
 
-	invalid_label_id = 85;
 	invalid_label_name = 86;
 	invalid_label_color = 87;
 	invalid_label_description = 88;
@@ -130,11 +109,9 @@ enum E {
 	invalid_file = 93;
 	endchat_bot_setting_after_any_message_too_low = 94;
 	endchat_bot_setting_after_any_message_too_high = 95;
-	template_message_key_not_found = 96;
 	template_message_not_is_creator = 97;
 
 	product_failed = 98;
-	product_not_found = 99;
 
 	order_not_found = 100;
 	invalid_base_currency = 101;
@@ -272,7 +249,6 @@ enum E {
 	running_campaign = 245;
 
 	// SERVER ERROR
-	undefined = 5001; // unknown error
 	not_implemented = 5002;
 	database_error = 5003;
 	invalid_json = 5008; // json payload is broken
