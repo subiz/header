@@ -6180,21 +6180,21 @@ message CampaignSendLogRequest {
 	string user_id = 7;
 }
 
-message CampaignMetric {
+message BroadcastCampaignMetrics {
+	message BroadcastCampaignMetric {
+		string channel = 5;
+		int64 clicked_count = 6;
+		int64 sent_count = 7;
+		int64 delivered_count = 8;
+		int64 received_count = 9;
+		int64 seen_count = 10;
+		int64 error_count = 11;
+	}
+
+	common.Context ctx = 1;
 	string account_id = 2;
 	string campaign_id = 3;
-	int64 deliver_at = 4;
-	string channel = 5;
-
-	int64 sent_count = 20;
-	int64 readonly_count = 24;
-	int64 success_sent_count = 21;
-	int64 user_seen_count = 22;
-	int64 user_receive_count = 23;
-}
-
-message CampaignMetrics {
-	repeated CampaignMetric metrics = 2;
+	repeated BroadcastCampaignMetric metrics = 4;
 }
 
 message VerificationResult {

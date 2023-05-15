@@ -632,7 +632,7 @@ service CampaignMgr {
 	rpc DeleteCampaign(Id) returns (Empty);
 	rpc OnEvent(header.Event) returns (Empty);
 	rpc ListCampaignSendLog(header.CampaignSendLogRequest) returns (header.CampaignSendLog);
-	rpc ReportCampaign(Id) returns (header.CampaignMetrics);
+	rpc ReportBroadcastCampaign(Id) returns (header.BroadcastCampaignMetrics);
 
 	rpc ListOutboundCallEntries(header.ListOutboundCallRequest) returns (header.OutboundCallEntries);
 	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);

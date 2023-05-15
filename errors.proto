@@ -29,13 +29,11 @@ enum E {
 	TeminateBot = 4000003;
 
 	// 1000 -> 4000: user error
-	missing_account_id = 3;
 	resource_not_found = 6;
 	access_deny = 7;
 
 	invalid_credential  = 10;
 	http_call_error  = 11;
-	invalid_conversation_id = 13;
 	invalid_refresh_token = 17;
 	wrong_password = 18;
 	invalid_token = 20;
@@ -138,7 +136,6 @@ enum E {
 
 	invalid_css = 116;
 	invalid_report_range = 117;
-	tempfile_error = 118;
 	invalid_goal_status = 119;
 
 	user_is_not_in_the_conversation = 120;
@@ -192,13 +189,8 @@ enum E {
 	conversation_modal_not_found = 171;
 	invalid_conversation_modal_url = 172;
 	invalid_conversation_modal_key = 173;
-
-	conversation_automation_not_found = 174;
-
 	sendgrid_error = 176;
-
 	too_many_events = 177;
-
 	too_many_number = 178;
 	too_many_phone_device = 179;
 	phone_device_not_found = 180;
@@ -225,7 +217,6 @@ enum E {
 	apple_login_error = 201;
 	wrong_shard = 202;
 
-	webrtc_failed = 203;
 	out_of_port = 204;
 
 	call_not_found = 205;
@@ -250,13 +241,9 @@ enum E {
 
 	// SERVER ERROR
 	not_implemented = 5002;
-	database_error = 5003;
-	invalid_json = 5008; // json payload is broken
-	invalid_proto = 5004;  // protobuf message is broken
 	facebook_call_failed = 5023;
 	invalid_facebook_access_token  = 5024;
 	subiz_call_failed = 5025;
-	data_corrupted = 5028;
 	invalid_google_auth_response = 5071;
 	pdf_generate_failed = 5072;
 }
