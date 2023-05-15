@@ -6139,8 +6139,8 @@ message CampaignSendLogEntry {
 
 	string message_id = 5; // key marketing message id
 	string user_id = 7;
-	string primary_user_id = 8;
-	string conversation_id = 10;
+	string event_id = 8;
+	string channel = 10;
 	string send_error = 12;
 	int64 created = 13; // ms
 

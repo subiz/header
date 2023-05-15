@@ -24,10 +24,6 @@ enum E {
 	InvoicePaidEmail = 110578;
 	AccountAgentJoinedEmail = 110579;
 
-	BotSynced = 4000001;
-	StartBot = 4000002;
-	TeminateBot = 4000003;
-
 	// 1000 -> 4000: user error
 	resource_not_found = 6;
 	access_deny = 7;
@@ -89,7 +85,6 @@ enum E {
 	stripe_call_failed = 75;
 	invalid_invoice_id = 77;
 	invalid_invoice_duedate = 80;
-	filestore_error = 81;
 	invalid_country = 82;
 	invalid_referrer_code = 83;
 	invalid_oauth_scope = 84;
@@ -103,8 +98,6 @@ enum E {
 	limit_reached = 90;
 	invalid_time_range = 91;
 
-	empty_file = 92;
-	invalid_file = 93;
 	endchat_bot_setting_after_any_message_too_low = 94;
 	endchat_bot_setting_after_any_message_too_high = 95;
 	template_message_not_is_creator = 97;
@@ -150,7 +143,7 @@ enum E {
 	leaver_is_the_last_one_in_conversation = 130;
 	invalid_conversation_state = 131;
 	caller_is_not_leaver = 132;
-	conversation_not_found = 133;
+
 	too_many_fields = 134;
 	too_many_attachments = 135;
 	unknown_message_format = 136;

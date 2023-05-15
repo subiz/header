@@ -65,11 +65,6 @@ enum RealtimeType {
 	message_template_updated = 72;
 	message_template_deleted = 73;
 
-	live_act_user_num = 82;
-	live_top_source = 83;
-	live_top_location = 84;
-	live_top_page = 85;
-
 	agent_notification_created = 88;
 	agent_notification_read = 114;
 	agent_notibox_read = 115;
