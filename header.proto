@@ -807,7 +807,7 @@ message Data {
 	// UserAlias user_alias = 45;
 	Conversion conversion = 47;
 	Site site = 52;
-	WebpageCheck webpage_check = 53;
+	// WebpageCheck webpage_check = 53;
 	LangMessage language_message = 54;
 	Label label = 55;
 	UserView user_view = 56;
@@ -2208,16 +2208,6 @@ message ActionUpdateUserSegments {
 	repeated string remove_segments = 3;
 }
 
-message Metric {
-	repeated Metric submetrics = 5;
-	int64 date_dim = 2;
-	string object_type = 3; // all if empty
-	int64 count = 4;
-	int64 object_count = 6;
-	int64 lead_count = 7;
-	int64 user_sent_count = 8;
-}
-
 message ReportBotRequest {
 	string account_id = 2;
 	string bot_id = 3;
@@ -2226,6 +2216,15 @@ message ReportBotRequest {
 }
 
 message ReportBotResponse {
+	message Metric {
+		repeated Metric submetrics = 5;
+		int64 date_dim = 2;
+		string object_type = 3; // all if empty
+		int64 count = 4;
+		int64 object_count = 6;
+		int64 lead_count = 7;
+		int64 user_sent_count = 8;
+	}
 	repeated Metric metrics = 2;
 }
 
@@ -2252,15 +2251,6 @@ message BotrunMetrics {
 	repeated BotrunMetric metrics = 2;
 }
 
-message ActionrunMetric {
-	int64 actionrun_count = 2;
-	string account_id = 3;
-	string bot_id = 4;
-	string action_id = 5;
-	int64 created_hour = 6;
-	string date = 7; // derived
-}
-
 message ActionrunMetricsRequest {
 	string dim = 2;
 	int32 tz = 3;
@@ -2271,6 +2261,14 @@ message ActionrunMetricsRequest {
 }
 
 message ActionrunMetrics {
+	message ActionrunMetric {
+		int64 actionrun_count = 2;
+		string account_id = 3;
+		string bot_id = 4;
+		string action_id = 5;
+		int64 created_hour = 6;
+		string date = 7; // derived
+	}
 	repeated ActionrunMetric metrics = 2;
 }
 
@@ -3208,11 +3206,6 @@ message UploadedImages {
 	repeated UploadedImage images = 2;
 }
 
-message Clients {
-	common.Context ctx = 1;
-	repeated Client clients = 2;
-}
-
 enum ChannelType {
 	subiz = 0;
 	email = 1;
@@ -3223,49 +3216,6 @@ enum ChannelType {
 	call = 6;
 	instagram = 7;
 	instagram_comment = 8;
-}
-
-message Client {
-	common.Context ctx = 1;
-	string id = 3;
-	// secret used to authorize client with oauth2 server
-	string secret = 4;
-	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
-	string logo_url = 5;
-	string account_id = 6;
-	// IsVerified will be true if client is verified by the authority
-	bool is_verified = 8;
-	int64 verified = 9;
-	// List of URLs which client must register for oauth redirection
-	string redirect_uri = 10;
-	string type = 11;
-	enum Type {
-		app = 0;
-		connector = 1;
-		bot = 3;
-	}
-	string name = 12;
-	string display_name = 13;
-	// Version number of the client.
-	string version = 14;
-	bool is_enabled = 15;
-	int64 created = 17;
-	int64 modified = 18;
-	string webhook_uri = 20;
-	repeated string events = 19; // subscribed event
-
-	// for connector only
-	string channel_type = 21;
-
-	string availability_uri = 22;
-	string ping_uri = 23;
-	bool is_internal = 24;
-	string unsubscribe_uri = 25;
-	repeated string scopes = 26;
-
-	string bot_default_job_title = 28;
-	string bot_default_fullname = 29;
-	bool bot_is_supervisor = 30;
 }
 
 message Webhooks {
@@ -3647,108 +3597,6 @@ message UserOrderConfirmation {
 	string status = 6; // confirmed || cancelled
 
 	string conversation_id = 7;
-}
-
-message Webpage {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string url = 4;
-	int64 modified = 5; // update when url|method|headers|payload updated
-	int64 created = 6;
-	string creator = 7;
-	bool is_disabled = 8;
-	int64 last_check_at = 9;
-	string method = 10;
-	repeated KV headers = 11;
-	string payload = 12;
-	string state = 13;
-	enum State {
-		up = 0;
-		down = 2;
-		missing = 3;
-	}
-	string must_contain = 14;
-	// string name = 15;
-
-	repeated string subscribers = 19; // agent id
-
-	repeated WebpageReportDataPoint reports = 18; // report of last 14 days
-
-	int64 check_interval = 20;
-
-	string title = 22;
-	string favicon = 24;
-	int64 last_fetch = 25;
-}
-
-message Webpages {
-	common.Context ctx = 1;
-	repeated Webpage webpages = 2;
-}
-
-message WebpageCheck {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string webpage_id = 3;
-	int32 id = 4;
-	string url = 5;
-	string method = 6;
-	repeated KV request_headers = 7;
-	string request_payload = 8;
-	repeated KV response_headers = 9;
-	string response_body = 10;
-	string status = 11;
-	int32 status_code = 12;
-	int64 begin_at = 13;
-	int64 end_at = 14;
-	repeated string errs = 15;
-	int32 request_payload_len = 16; // derived
-	int32 response_body_len = 17; // derived
-	string must_contain = 18;
-	string state = 19; // up down missing
-	string resolved_ip = 20;
-}
-
-message RecentWebpageCheckRequest {
-	common.Context ctx = 1;
-	string webpage_id = 2;
-	int32 limit = 3;
-}
-
-message WebpageChecks {
-	common.Context ctx = 1;
-	repeated WebpageCheck checks = 2;
-}
-
-message WebpageCheckRequest {
-	common.Context ctx = 1;
-	string webpage_id = 2;
-	int32 id = 3;
-}
-
-message WebpageReportDataSet {
-	repeated WebpageReportDataPoint points = 2;
-}
-
-message WebpageReportRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string webpage_id = 3;
-	int64 day = 4;
-	string unit = 5; // day, month
-	int64 from_day = 6;
-	int64 to_day = 7;
-}
-
-message WebpageReportDataPoint {
-	int64 day = 2;
-	int64 total_uptime_sec = 3;
-	int64 total_downtime_sec = 4;
-	// float avg_response_time = 5; // sec
-	// int64 num_check = 6;
-	int64 num_downtime = 7;
-	// int64 total_missing_sec = 8;
 }
 
 message Urls {
@@ -5145,9 +4993,9 @@ message Taxes {
 }
 
 message Error {
-	string description = 2; // remove, prefer i18n message
-	int32 class = 4; // http-code, should be derived from code
-	string stack = 5; // remove
+	// string description = 2; // remove, prefer i18n message
+	// int32 class = 4; // http-code, should be derived from code
+	// string stack = 5; // remove
 	string code = 7; // should be general database_error, access_deny
 	// string sub_code = 8;
 	string number = 12; // unique, or hash of stack 4930543478 for grouping error
