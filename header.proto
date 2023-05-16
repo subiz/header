@@ -1339,6 +1339,9 @@ message Conversations {
 	int64 last_modified = 7;
 }
 
+// html: <b>xin chao</b>&nbsp;{{customer.name}}
+// plaintext: xin chao {{customer.name}}
+// markdown:  *xin chao* {{customer.name}}
 message Message {
 	common.Context ctx = 1;
 	string account_id = 5;
@@ -1346,8 +1349,9 @@ message Message {
 	string conversation_id = 14;
 	string task_id = 27;
 	string id = 11;
-	string text = 2; // plaintext
-	string plaintext = 50; // plaintext representation
+	string text = 2; // plaintext or template
+	bool use_template = 51;
+	string plaintext = 50;
 	string format = 3; // plaintext, html, markdown, delta
 	repeated Attachment attachments = 4;
 	repeated KV fields = 10;
@@ -1358,8 +1362,8 @@ message Message {
 	// used for reaction and delivery status, could be ignore
 	repeated MessagePong pongs = 17;
 
-	string quill_delta = 20;
-	I18nString i18n_quill_delta = 21; // for template
+	string quill_delta = 20; // deprecated
+	I18nString i18n_quill_delta = 21; // rename to i18n_text
 
 	bool is_private = 22;
 
@@ -6211,19 +6215,6 @@ message VerificationResult {
 	string txt_domain_key_record_value = 10;
 
 	bool verified = 12;
-}
-
-message CompileDeltaRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	string quill_delta = 3;
-	I18nString i18n_quill_delta = 4; // for template
-	string format = 5; // html, plaintext, markdown
-}
-
-message CompileDeltaResponse {
-	// string
 }
 
 message BusinessEmailAddress {
