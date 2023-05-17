@@ -5960,12 +5960,12 @@ message MarketingGoal {
 	int64 disabled = 3;
 	string type = 4; // delivered, open, reply
 
-	EventCondition event_condition = 5; // enter_segment, page_viewed
+	EventCondition event_condition = 5; // enter_segment, leave_segment, page_viewed
 
 	// 1 week of [receiving,opening,clicking] any delivery
 
 	// timming condition
-	int64 time_after_delivery = 6;
+	int64 time_limit_sec = 6;
 	string delivery_type = 7; // receiving, opening, clicked
 }
 
@@ -6278,4 +6278,9 @@ message LinkData {
 	int64 created = 13;
 	string type = 14; // click, tracking
 	common.Device device = 15;
+}
+
+enum E {
+	Sub = 0;
+	database_error  = 10;
 }

@@ -7,6 +7,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/subiz/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/keepalive"
@@ -777,4 +778,22 @@ func DialGrpc(service string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
 		Timeout: time.Duration(60) * time.Second,
 	}))
 	return grpc.Dial(service, opts...)
+}
+
+func E400(err error, code E, v ...interface{}) error {
+	field := log.M{}
+	for i, vv := range v {
+		field[strconv.Itoa(i)] = vv
+	}
+
+	return log.Error(err, field, log.E_invalid_input, log.E(code.String()))
+}
+
+func E500(err error, code E, v ...interface{}) error {
+	field := log.M{}
+	for i, vv := range v {
+		field[strconv.Itoa(i)] = vv
+	}
+
+	return log.Error(err, field, log.E_internal, log.E(code.String()))
 }
