@@ -3675,7 +3675,7 @@ message CountTouchpointResponse {
 	message TouchpointCount {
 		string channel = 2;
 		string source = 3;
-		string id = 4;
+		// string id = 4;
 		int64 count = 5;
 	}
 	repeated TouchpointCount counts = 4;
@@ -3699,6 +3699,16 @@ message SuggestLeadFieldResponse {
 	repeated bool booleans = 12;
 	repeated string datetimes = 13;
 	repeated int64 points = 14;
+}
+
+message UsersRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	UserViewCondition condition = 3;
+	repeated string ignore_uids = 4;
+
+	repeated string user_ids = 5;
 }
 
 message UserQueryBody {
@@ -5858,9 +5868,9 @@ message Campaign {
 	repeated MarketingMessage messages = 15;
 	OutboundCallCampaign outbound_call = 16;
 
-	string state = 18; // pause (default), pending(waiting to be scheduled), active, finished (by system), stopped (by agent)
+	string state = 18; //  pause (default), pending(waiting to be scheduled), active, finished (by system), stopped (by agent)
 
-	// bool auto_clean = 17; // clear data after the campaign is finished or deleted
+	bool is_building_audient = 17; // clear data after the campaign is finished or deleted
 
 	int64 audient_count = 19; // number of user in segments, read-only
 	int64 impression_count = 20;
@@ -5885,6 +5895,8 @@ message Campaign {
 	CampaignExitCondition exit_when = 36;
 
 	JourneyNode journey_root = 38;
+
+	UsersRequest audient_request = 39; // write only when create
 }
 
 message CampaignExitCondition {

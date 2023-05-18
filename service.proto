@@ -156,7 +156,7 @@ service UserMgr {
 	rpc ListSegments(Id) returns (header.Segments);
 	rpc ListUsers(header.ListUserRequest) returns (header.Users);
 	rpc ListSegmentUserIds(header.ListUserRequest) returns (header.Ids); // deprecating
-	rpc ListAllSegmentUsers(header.ListUserRequest) returns (header.Users);
+	rpc ListAllSegmentUsers(header.ListUserRequest) returns (header.Users); // deprecating
 	rpc AddToSegment(header.SegmentUsers) returns (Empty);
 	rpc RemoveFromSegment(header.SegmentUsers) returns (Empty);
 
@@ -198,7 +198,8 @@ service UserMgr {
 	rpc UpdateEventType(header.EventType) returns (header.EventType);
 	rpc LinkTask(header.Task) returns (header.Empty);
 
-	rpc CountUserTouchpoints(header.UserQueryBody) returns (header.CountTouchpointResponse);
+	rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse);
+	rpc ListUserProfiles(header.UsersRequest) returns (header.Users);
 }
 
 service LiveMgr {
