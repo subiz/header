@@ -6041,6 +6041,13 @@ message BroadcastCampaignMetrics {
 		int64 received_count = 9;
 		int64 seen_count = 10;
 		int64 error_count = 11;
+
+		int64 duplicate_sent_count = 13;
+		int64 duplicate_clicked_count = 14;
+		int64 duplicate_delivered_count = 15;
+		int64 duplicate_received_count = 16;
+		int64 duplicate_seen_count = 17;
+		int64 duplicate_error_count = 18;
 	}
 
 	common.Context ctx = 1;
