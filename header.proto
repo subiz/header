@@ -2103,12 +2103,6 @@ message BotAction {
 	ActionCreateTask create_task = 35;
 	ActionSendChatTranscript send_chat_transcript = 36;
 	ActionUpdateUserSegments update_user_segments = 37;
-
-	ActionWaitUntil wait_until = 38;
-
-}
-
-message ActionWaitUntil {
 }
 
 message ActionCreateTask {
@@ -5828,7 +5822,7 @@ message Campaign {
 	string description = 5;
 	string objective = 14;
 
-	string type = 6; // telesale, broadcast, triggered, journey
+	string type = 6; // telesale, broadcast, triggered, workflow
 
 	int64 created = 7;
 	string created_by = 8;
@@ -5874,6 +5868,8 @@ message Campaign {
 	Frequently frequency = 34;
 	MarketingGoal goal = 35;
 	CampaignExitCondition exit_when = 36;
+
+	JourneyNode journey_root = 38;
 }
 
 message CampaignExitCondition {
@@ -6283,4 +6279,54 @@ message LinkData {
 enum E {
 	Sub = 0;
 	database_error  = 10;
+}
+
+message JourneyNode {
+	string id = 4; // point to campaign action id
+	repeated string childrens = 5; // point to campaign action ids
+}
+
+message CampaignAction {
+	string account_id = 2;
+	string campaign_id = 3; //
+	string id = 4;
+	string name = 5;
+	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state, send_message
+
+	ActionJump jump = 15;
+	ActionSendHttp send_http = 17;
+	ActionAskQuestion ask_question = 18;
+	AssignRequest assign = 19;
+
+	int64 delay_sec = 20; // max 20sec
+	ActionUpdateConversation update_conversation = 21;
+	bytes internal_state = 30;
+	ActionUpdateUser update_user = 31;
+	ActionUpdateUserLabels update_user_labels = 32;
+	ActionConfirmOrder confirm_order = 34;
+	ActionCreateTask create_task = 35;
+	ActionSendChatTranscript send_chat_transcript = 36;
+	ActionUpdateUserSegments update_user_segments = 37;
+
+	ActionWaitUntil wait_until = 38;
+	ActionBranching branching = 39;
+}
+
+message ActionWaitUntil {
+	// event happend
+	// specifict ime
+
+	// timeout
+	int64 timeout_sec = 10;
+}
+
+message ActionBranch {
+	string branch_id = 4;
+	string name = 12;
+	UserViewCondition condition = 2;
+}
+
+message ActionBranching {
+	// repeated WorkflowBranch branches = 3;
+
 }
