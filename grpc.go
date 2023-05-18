@@ -388,3 +388,11 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 		return conn
 	}
 }
+
+func NewShardServer(port, shards int) *grpc.Server {
+	return grpc.NewServer(grpc.KeepaliveParams(
+		keepalive.ServerParameters{
+			MaxConnectionAge: time.Duration(20) * time.Second,
+		},
+	), grpc.UnaryInterceptor(NewStatefulSetShardInterceptor(port, shards)))
+}

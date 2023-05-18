@@ -6280,6 +6280,8 @@ enum E {
 	Sub = 0;
 	database_error = 10;
 	http_call_error  = 11;
+	invalid_credential = 12;
+
 	invalid_refresh_token = 17;
 	wrong_password = 18;
 	invalid_token = 20;
@@ -6379,6 +6381,7 @@ enum E {
 	invalid_report_range = 117;
 	invalid_goal_status = 119;
 
+	user_is_banned = 11111;
 	user_is_not_in_the_conversation = 120;
 	invalid_integration = 121;
 	invalid_message_type = 122;
