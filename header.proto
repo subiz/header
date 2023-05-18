@@ -6286,6 +6286,8 @@ enum E {
 	invalid_message_size = 21;
 	invalid_payload_size = 22;
 
+	access_deny = 23;
+	invalid_json = 24;
 	invalid_attribute_value = 35;
 	invalid_attribute_key = 36;
 	invalid_attribute_name = 37;

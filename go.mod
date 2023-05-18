@@ -3,7 +3,7 @@ module github.com/subiz/header
 go 1.20
 
 require (
-	github.com/subiz/log v0.0.22
+	github.com/subiz/log v0.0.28
 	google.golang.org/grpc v1.55.0
 	google.golang.org/protobuf v1.30.0
 )

@@ -2,16 +2,12 @@ package header
 
 import (
 	"encoding/json"
-	"fmt"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/subiz/log"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
-	"google.golang.org/grpc/keepalive"
 )
 
 func DeltaToPlainText(delta string) string {
@@ -772,26 +768,6 @@ func Fnv32(key string) uint32 {
 		hash ^= uint32(key[i])
 	}
 	return hash
-}
-
-func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
-	opts = append([]grpc.DialOption{}, opts...)
-	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	// opts = append(opts, sgrpc.WithCache())
-	opts = append(opts, grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`))
-	opts = append(opts, grpc.WithKeepaliveParams(keepalive.ClientParameters{
-		Time:    time.Duration(10) * time.Second,
-		Timeout: time.Duration(60) * time.Second,
-	}))
-	for {
-		conn, err := grpc.Dial(service, opts...)
-		if err != nil {
-			fmt.Println("CANNOT CONNECT TO", service, ". Err", err, ". Retry in 5s...")
-			time.Sleep(5 * time.Second)
-			continue
-		}
-		return conn
-	}
 }
 
 func E400(err error, code E, v ...interface{}) error {
