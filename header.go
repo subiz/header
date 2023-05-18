@@ -2,6 +2,7 @@ package header
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"strconv"
 	"strings"
@@ -773,7 +774,7 @@ func Fnv32(key string) uint32 {
 	return hash
 }
 
-func DialGrpc(service string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 	opts = append([]grpc.DialOption{}, opts...)
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	// opts = append(opts, sgrpc.WithCache())
@@ -782,7 +783,15 @@ func DialGrpc(service string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
 		Time:    time.Duration(10) * time.Second,
 		Timeout: time.Duration(60) * time.Second,
 	}))
-	return grpc.Dial(service, opts...)
+	for {
+		conn, err := grpc.Dial(service, opts...)
+		if err != nil {
+			fmt.Println("CANNOT CONNECT TO", service, ". Err", err, ". Retry in 5s...")
+			time.Sleep(5 * time.Second)
+			continue
+		}
+		return conn
+	}
 }
 
 func E400(err error, code E, v ...interface{}) error {

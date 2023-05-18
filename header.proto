@@ -6278,7 +6278,7 @@ message LinkData {
 
 enum E {
 	Sub = 0;
-	invalid_credential  = 10;
+	database_error = 10;
 	http_call_error  = 11;
 	invalid_refresh_token = 17;
 	wrong_password = 18;
