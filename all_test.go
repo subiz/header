@@ -10,6 +10,22 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+func TestNormEmail(t *testing.T) {
+	testcases := []struct {
+		in  string
+		out string
+	}{
+		{"", ""},
+		{"thanhpk@live.com, thanhpk@live.com 't@.com'", "thanhpk@live.com,thanhpk@live.com,t@.com"},
+	}
+
+	for i, tc := range testcases {
+		if tc.out != NormEmail(tc.in) {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, NormPhone(tc.in))
+		}
+	}
+}
+
 func TestNormPhone(t *testing.T) {
 	testcases := []struct {
 		in  string

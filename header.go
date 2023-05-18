@@ -572,7 +572,7 @@ func AssignObject(dst, src interface{}, fields []string) {
 //	Vietnamese customers
 func NormPhone(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
-		return r == ',' || r == ';'
+		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
 	})
 
 	phones := []string{}
@@ -607,18 +607,23 @@ func NormPhone(phone string) string {
 //	Vietnamese customers
 func NormEmail(email string) string {
 	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
-		return r == ',' || r == ';'
+		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
 	})
 
 	emails := []string{}
 	for _, email := range emailsplit {
-		email = strings.ToLower(strings.TrimSpace(email))
+		arr := make([]rune, 0)
+		for _, r := range email {
+			if r != '"' && r != '\'' {
+				arr = append(arr, r)
+			}
+		}
+		email = string(arr)
+		email = strings.ToLower(email)
 		if email == "" {
 			continue
 		}
-		if len(email) > 320 {
-			email = Substring(email, 0, 320)
-		}
+		email = Substring(email, 0, 320)
 		emails = append(emails, email)
 	}
 	return strings.Join(emails, ",")
