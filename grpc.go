@@ -126,19 +126,17 @@ func FromGrpcCtx(ctx context.Context) *common.Context {
 	return pctx
 }
 
-func RecoverInterceptor(ctx context.Context, req interface{}, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (ret interface{}, err error) {
+func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (ret interface{}, err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			e, ok := r.(error)
-			if ok {
-				err = log.EServer(e)
+			if e, ok := r.(error); ok {
+				err = log.EServer(e, log.M{"_function_name": info.FullMethod, "__skip_stack": 1}) // wrap error
 			} else {
-				err = log.EServer(nil, log.M{"base": e})
+				err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": info.FullMethod, "__skip_stack": 1})
 			}
 		}
 	}()
-	ret, err = handler(ctx, req)
-	return ret, err
+	return handler(ctx, req)
 }
 
 func WithErrorStack() grpc.DialOption {
@@ -234,11 +232,10 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 	return func(ctx context.Context, in interface{}, sinfo *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (out interface{}, err error) {
 		defer func() {
 			if r := recover(); r != nil {
-				e, ok := r.(error)
-				if ok {
-					err = log.EServer(e)
+				if e, ok := r.(error); ok {
+					err = log.EServer(e, log.M{"_function_name": sinfo.FullMethod, "__skip_stack": 1}) // wrap error
 				} else {
-					err = log.EServer(nil, log.M{"base": e})
+					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod, "__skip_stack": 1})
 				}
 			}
 		}()
