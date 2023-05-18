@@ -3668,6 +3668,19 @@ message UserView {
 	repeated string viewers = 27;
 }
 
+message CountTouchpointResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	message TouchpointCount {
+		string channel = 2;
+		string source = 3;
+		string id = 4;
+		int64 count = 5;
+	}
+	repeated TouchpointCount counts = 4;
+}
+
 message SuggestLeadFieldRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -3690,6 +3703,7 @@ message SuggestLeadFieldResponse {
 
 message UserQueryBody {
 	common.Context ctx = 1;
+	string account_id = 2;
 	UserViewCondition condition = 3;
 	account.Account account = 4;
 	map<string, AttributeDefinition> def = 5;

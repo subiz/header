@@ -198,8 +198,7 @@ service UserMgr {
 	rpc UpdateEventType(header.EventType) returns (header.EventType);
 	rpc LinkTask(header.Task) returns (header.Empty);
 
-
-	// rpc CompileDelta(header.CompileDeltaRequest) return (header.CompileDeltaResponse);
+	rpc CountUserTouchpoints(header.UserQueryBody) returns (header.CountTouchpointResponse);
 }
 
 service LiveMgr {
