@@ -5897,6 +5897,10 @@ message Campaign {
 	JourneyNode journey_root = 38;
 
 	UsersRequest audient_request = 39; // write only when create
+
+	int64 broadcast_first_sent_at = 40;
+	int64 broadcast_recent_sent_at = 41;
+	int64 broadcast_finished_at = 42;
 }
 
 message CampaignExitCondition {
