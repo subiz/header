@@ -394,11 +394,11 @@ func NewShardServer(port, shards int) *grpc.Server {
 	), grpc.UnaryInterceptor(NewStatefulSetShardInterceptor(port, shards)))
 }
 
-func NewServer(port, shards int) *grpc.Server {
+func NewServer() *grpc.Server {
 	return grpc.NewServer(grpc.UnaryInterceptor(RecoverInterceptor),
 		grpc.KeepaliveParams(
 			keepalive.ServerParameters{
 				MaxConnectionAge: time.Duration(20) * time.Second,
 			},
-		), grpc.UnaryInterceptor(NewStatefulSetShardInterceptor(port, shards)))
+		))
 }

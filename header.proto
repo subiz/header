@@ -6574,3 +6574,46 @@ message ActionBranching {
 	// repeated WorkflowBranch branches = 3;
 
 }
+
+message Client {
+	common.Context ctx = 1;
+	string id = 3;
+	// secret used to authorize client with oauth2 server
+	string secret = 4;
+	// LogoUrl is url to logo of the client, should be 256x256 and lessthan 256KB
+	string logo_url = 5;
+	string account_id = 6;
+	// IsVerified will be true if client is verified by the authority
+	bool is_verified = 8;
+	int64 verified = 9;
+	// List of URLs which client must register for oauth redirection
+	string redirect_uri = 10;
+	string type = 11;
+	enum Type {
+		app = 0;
+		connector = 1;
+		bot = 3;
+	}
+	string name = 12;
+	string display_name = 13;
+	// Version number of the client.
+	string version = 14;
+	bool is_enabled = 15;
+	int64 created = 17;
+	int64 modified = 18;
+	string webhook_uri = 20;
+	repeated string events = 19; // subscribed event
+
+	// for connector only
+	string channel_type = 21;
+
+	string availability_uri = 22;
+	string ping_uri = 23;
+	bool is_internal = 24;
+	string unsubscribe_uri = 25;
+	repeated string scopes = 26;
+
+	string bot_default_job_title = 28;
+	string bot_default_fullname = 29;
+	bool bot_is_supervisor = 30;
+}
