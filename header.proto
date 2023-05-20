@@ -1388,6 +1388,14 @@ message Message {
 
 	map<string, string> zns_template_default_data = 44; // zns-only
 	map<string, string> zns_template_data_field = 45; // zns-only
+
+	// facebook: ACCOUNT_UPDATE, CONFIRMED_EVENT_UPDATE, CUSTOMER_FEEDBACK, HUMAN_AGENT, POST_PURCHASE_UPDATE
+	// https://developers.facebook.com/docs/messenger-platform/reference/send-api/
+
+	// zalo: CUSTOMER_SERVICE, TRANSACTIONAL, PROMOTION
+	// https://developers.zalo.me/changelog/thong-bao-cap-nhat-phan-loai-tin-nhan-cua-zalo-official-account-7241
+	string message_tag = 46;
+
 }
 
 message MessageReferral {
@@ -5848,7 +5856,6 @@ message Campaign {
 	string objective = 14;
 
 	string type = 6; // telesale, broadcast, triggered, workflow
-
 	int64 created = 7;
 	string created_by = 8;
 
@@ -5901,6 +5908,8 @@ message Campaign {
 	int64 broadcast_first_sent_at = 40;
 	int64 broadcast_recent_sent_at = 41;
 	int64 broadcast_finished_at = 42;
+
+	string purpose = 43; // CUSTOMER_SUPPORT, TRANSACTION, PROMOTION
 }
 
 message CampaignExitCondition {
