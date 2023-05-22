@@ -199,7 +199,7 @@ service UserMgr {
 	rpc LinkTask(header.Task) returns (header.Empty);
 
 	rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse);
-	rpc ListUserProfiles(header.UsersRequest) returns (header.Users);
+	rpc ListUserIds(header.UsersRequest) returns (header.Ids);
 }
 
 service LiveMgr {
