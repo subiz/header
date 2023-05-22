@@ -633,164 +633,6 @@ func (x *EmailAttachment) GetMimetype() string {
 	return ""
 }
 
-type EmailBlocks struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Ctx         *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId   string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	EmailBlocks []*EmailBlock   `protobuf:"bytes,3,rep,name=email_blocks,json=emailBlocks,proto3" json:"email_blocks,omitempty"`
-	Anchor      string          `protobuf:"bytes,4,opt,name=anchor,proto3" json:"anchor,omitempty"`
-	Total       int64           `protobuf:"varint,5,opt,name=total,proto3" json:"total,omitempty"`
-}
-
-func (x *EmailBlocks) Reset() {
-	*x = EmailBlocks{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_email_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *EmailBlocks) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EmailBlocks) ProtoMessage() {}
-
-func (x *EmailBlocks) ProtoReflect() protoreflect.Message {
-	mi := &file_email_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EmailBlocks.ProtoReflect.Descriptor instead.
-func (*EmailBlocks) Descriptor() ([]byte, []int) {
-	return file_email_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *EmailBlocks) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *EmailBlocks) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *EmailBlocks) GetEmailBlocks() []*EmailBlock {
-	if x != nil {
-		return x.EmailBlocks
-	}
-	return nil
-}
-
-func (x *EmailBlocks) GetAnchor() string {
-	if x != nil {
-		return x.Anchor
-	}
-	return ""
-}
-
-func (x *EmailBlocks) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-type EmailBlock struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id        string          `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Created   int64           `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy string          `protobuf:"bytes,5,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-}
-
-func (x *EmailBlock) Reset() {
-	*x = EmailBlock{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_email_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *EmailBlock) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*EmailBlock) ProtoMessage() {}
-
-func (x *EmailBlock) ProtoReflect() protoreflect.Message {
-	mi := &file_email_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use EmailBlock.ProtoReflect.Descriptor instead.
-func (*EmailBlock) Descriptor() ([]byte, []int) {
-	return file_email_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *EmailBlock) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *EmailBlock) GetAccountId() string {
-	if x != nil {
-		return x.AccountId
-	}
-	return ""
-}
-
-func (x *EmailBlock) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *EmailBlock) GetCreated() int64 {
-	if x != nil {
-		return x.Created
-	}
-	return 0
-}
-
-func (x *EmailBlock) GetCreatedBy() string {
-	if x != nil {
-		return x.CreatedBy
-	}
-	return ""
-}
-
 var File_email_proto protoreflect.FileDescriptor
 
 var file_email_proto_rawDesc = []byte{
@@ -888,30 +730,9 @@ var file_email_proto_rawDesc = []byte{
 	0x75, 0x72, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x69, 0x6d, 0x65, 0x74,
 	0x79, 0x70, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x69, 0x6d, 0x65, 0x74,
-	0x79, 0x70, 0x65, 0x22, 0xb4, 0x01, 0x0a, 0x0b, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x42, 0x6c, 0x6f,
-	0x63, 0x6b, 0x73, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78,
-	0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f,
-	0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x35, 0x0a, 0x0c, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x5f, 0x62,
-	0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x52,
-	0x0b, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x73, 0x12, 0x16, 0x0a, 0x06,
-	0x61, 0x6e, 0x63, 0x68, 0x6f, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x6e,
-	0x63, 0x68, 0x6f, 0x72, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x05, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x22, 0x97, 0x01, 0x0a, 0x0a, 0x45,
-	0x6d, 0x61, 0x69, 0x6c, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e,
-	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a, 0x0a,
-	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
-	0x5f, 0x62, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74,
-	0x65, 0x64, 0x42, 0x79, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x79, 0x70, 0x65, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -926,7 +747,7 @@ func file_email_proto_rawDescGZIP() []byte {
 	return file_email_proto_rawDescData
 }
 
-var file_email_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_email_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_email_proto_goTypes = []interface{}{
 	(*SiteUpEmail)(nil),           // 0: header.SiteUpEmail
 	(*SiteDownEmail)(nil),         // 1: header.SiteDownEmail
@@ -934,27 +755,22 @@ var file_email_proto_goTypes = []interface{}{
 	(*SiteWeeklyReport)(nil),      // 3: header.SiteWeeklyReport
 	(*Email)(nil),                 // 4: header.Email
 	(*EmailAttachment)(nil),       // 5: header.EmailAttachment
-	(*EmailBlocks)(nil),           // 6: header.EmailBlocks
-	(*EmailBlock)(nil),            // 7: header.EmailBlock
-	nil,                           // 8: header.Email.HeaderEntry
-	(*common.Context)(nil),        // 9: common.Context
+	nil,                           // 6: header.Email.HeaderEntry
+	(*common.Context)(nil),        // 7: common.Context
 }
 var file_email_proto_depIdxs = []int32{
-	9,  // 0: header.SiteUpEmail.ctx:type_name -> common.Context
-	9,  // 1: header.SiteDownEmail.ctx:type_name -> common.Context
-	9,  // 2: header.SiteWeeklyReportEmail.ctx:type_name -> common.Context
-	3,  // 3: header.SiteWeeklyReportEmail.sites:type_name -> header.SiteWeeklyReport
-	9,  // 4: header.Email.ctx:type_name -> common.Context
-	8,  // 5: header.Email.header:type_name -> header.Email.HeaderEntry
-	5,  // 6: header.Email.attachments:type_name -> header.EmailAttachment
-	9,  // 7: header.EmailBlocks.ctx:type_name -> common.Context
-	7,  // 8: header.EmailBlocks.email_blocks:type_name -> header.EmailBlock
-	9,  // 9: header.EmailBlock.ctx:type_name -> common.Context
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	7, // 0: header.SiteUpEmail.ctx:type_name -> common.Context
+	7, // 1: header.SiteDownEmail.ctx:type_name -> common.Context
+	7, // 2: header.SiteWeeklyReportEmail.ctx:type_name -> common.Context
+	3, // 3: header.SiteWeeklyReportEmail.sites:type_name -> header.SiteWeeklyReport
+	7, // 4: header.Email.ctx:type_name -> common.Context
+	6, // 5: header.Email.header:type_name -> header.Email.HeaderEntry
+	5, // 6: header.Email.attachments:type_name -> header.EmailAttachment
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_email_proto_init() }
@@ -1035,30 +851,6 @@ func file_email_proto_init() {
 				return nil
 			}
 		}
-		file_email_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EmailBlocks); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_email_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EmailBlock); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1066,7 +858,7 @@ func file_email_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_email_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

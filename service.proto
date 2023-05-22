@@ -4,7 +4,6 @@ package header;
 
 option go_package = "github.com/subiz/header";
 import "payment.proto";
-import "email.proto";
 import "noti5.proto";
 import "account.proto";
 import "header.proto";
@@ -110,10 +109,6 @@ service AccountMgr {
 	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (header.IntegratedShipping);
 	rpc SendGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
 	rpc EnterGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
-
-	rpc ListEmailBlocks(Ids) returns (EmailBlocks);
-	rpc CreateEmailBlock(EmailBlock) returns (EmailBlock);
-	rpc DeleteEmailBlock(Id) returns (Empty);
 
 	rpc UpdateAgentPresence (account.Presence) returns (account.Presence);
 	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
@@ -415,9 +410,6 @@ service ZalokonService {
 
 service MailkonService {
 	rpc SendEmail(header.Events) returns (header.Empty); // mailkon
-	// rpc ListBlockedEmails(Id) returns (Empty);
-	// rpc BlockEmail(Id) returns (Empty);
-	// rpc UnblockEmail(Id) returns (Empty);
 
 	rpc CreateEmailIdentity(header.Integration) returns (header.Integration);
 	rpc DeleteEmailIdentity(header.Integration) returns (Empty); // send SES email to user
@@ -430,6 +422,10 @@ service MailkonService {
 	rpc DeleteBusinessEmailAddress(header.Id) returns (header.Empty);
 
 	rpc TrackLink(header.LinkData) returns (header.Empty);
+
+	rpc LookupBouncedEmail(Id) returns (BouncedEmail);
+	rpc UpsertBouncedEmail(BouncedEmail) returns (BouncedEmail);
+	rpc DeleteBouncedEmail(Id) returns (Empty);
 }
 
 // widget services

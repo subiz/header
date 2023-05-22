@@ -76,19 +76,3 @@ message EmailAttachment {
 	string name = 3;
 	string mimetype = 4;
 }
-
-message EmailBlocks {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated EmailBlock email_blocks = 3;
-	string anchor = 4;
-	int64 total = 5;
-}
-
-message EmailBlock {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	int64 created = 4;
-	string created_by = 5;
-}

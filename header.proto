@@ -1350,7 +1350,7 @@ message Message {
 	string task_id = 27;
 	string id = 11;
 	string text = 2; // plaintext or template
-	bool use_template = 51;
+	bool is_template = 51;
 	string plaintext = 50;
 	string format = 3; // plaintext, html, markdown, delta
 	repeated Attachment attachments = 4;
@@ -1392,10 +1392,9 @@ message Message {
 	// facebook: ACCOUNT_UPDATE, CONFIRMED_EVENT_UPDATE, CUSTOMER_FEEDBACK, HUMAN_AGENT, POST_PURCHASE_UPDATE
 	// https://developers.facebook.com/docs/messenger-platform/reference/send-api/
 
-	// zalo: CUSTOMER_SERVICE, TRANSACTIONAL, PROMOTION
+	// zalo: CUSTOMER_SUPPORT, TRANSACTIONAL, PROMOTION
 	// https://developers.zalo.me/changelog/thong-bao-cap-nhat-phan-loai-tin-nhan-cua-zalo-official-account-7241
 	string message_tag = 46;
-
 }
 
 message MessageReferral {
@@ -6629,4 +6628,14 @@ message Client {
 	string bot_default_job_title = 28;
 	string bot_default_fullname = 29;
 	bool bot_is_supervisor = 30;
+}
+
+message BouncedEmail {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // email address
+	int64 created = 4;
+	string created_by = 5; // system
+	string bounce_type = 6; // soft, hard
+	int64 last_bounced = 7;
 }
