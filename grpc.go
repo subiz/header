@@ -140,11 +140,18 @@ func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 }
 
 func WithErrorStack() grpc.DialOption {
-	return grpc.WithUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
-		err := invoker(ctx, method, req, reply, cc, opts...)
+	return grpc.WithUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				err = log.EServer(err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method, "__skip_stack": "3"})
+			}
+		}()
+
+		err = invoker(ctx, method, req, reply, cc, opts...)
 		if err == nil {
 			return nil
 		}
+
 		grpcerr, ok := status.FromError(err)
 		if !ok {
 			// very strange error
