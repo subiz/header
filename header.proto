@@ -6052,8 +6052,8 @@ message CampaignSendLogEntry {
 	repeated string tried_profiles = 32; // server only
 	string duplicate_of = 33;
 
-	int64 unsubscribed = 34;
-	int64 spamreported = 35;
+	int64 unsubscribed_at = 34;
+	int64 spamreported_at = 35;
 }
 
 message CampaignSendLog {
@@ -6085,7 +6085,7 @@ message BroadcastCampaignMetrics {
 		int64 received_count = 9;
 		int64 seen_count = 10;
 		int64 error_count = 11;
-		int64 ubsubscribed_count = 12;
+		int64 unsubscribed_count = 12;
 
 		int64 duplicate_sent_count = 13;
 		int64 duplicate_clicked_count = 14;
@@ -6618,7 +6618,6 @@ message BouncedEmail {
 	int64 last_bounced = 7;
 }
 
-
 message BlockedEmail {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6642,4 +6641,7 @@ message Response {
 
 	BlockedEmail blocked_email = 10;
 	repeated BlockedEmail blocked_emails = 11;
+
+	BouncedEmail bounced_email = 12;
+	repeated BouncedEmail bounced_emails = 13;
 }

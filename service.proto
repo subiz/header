@@ -424,12 +424,12 @@ service MailkonService {
 	rpc TrackLink(header.LinkData) returns (Response);
 
 	rpc ListSampleBouncedEmails(Id) returns (Response);
-	rpc LookupBouncedEmail(Id) returns (Response);
-	rpc UpsertBouncedEmail(BouncedEmail) returns (Response);
+	rpc LookupBouncedEmail(Id) returns (BouncedEmail);
+	rpc UpsertBouncedEmail(BouncedEmail) returns (BouncedEmail);
 	rpc DeleteBouncedEmail(Id) returns (Response);
 
 	rpc ListSampleBlockedEmails(Id) returns (Response);
-	rpc LookupBlockedEmail(Id) returns (Response);
+	rpc LookupBlockedEmail(Id) returns (BlockedEmail);
 	rpc UpsertBlockedEmail(BouncedEmail) returns (Response);
 	rpc UnblockEmail(Id) returns (Response);
 }
