@@ -6608,13 +6608,6 @@ message ActionBranching {
 
 }
 
-message BouncedEmails {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated BouncedEmail emails = 3;
-	int64 total = 4;
-}
-
 message BouncedEmail {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6623,4 +6616,30 @@ message BouncedEmail {
 	string created_by = 5; // system
 	string bounce_type = 6; // soft, hard
 	int64 last_bounced = 7;
+}
+
+
+message BlockedEmail {
+	common.Context ctx = 1;
+	string account_id = 2;
+	Error error = 3;
+
+	string id = 4; // email address
+	int64 created = 5;
+	string created_by = 6; // system
+	string email_type = 7; // domain, address
+	int64 last_blocked = 8;
+}
+
+message Response {
+	common.Context ctx = 1;
+	string account_id = 2;
+	Error error = 3;
+
+	int64 total = 5;
+	string next_anchor = 6;
+	string prev_anchor = 7;
+
+	BlockedEmail blocked_email = 10;
+	repeated BlockedEmail blocked_emails = 11;
 }

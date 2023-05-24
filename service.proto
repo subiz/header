@@ -421,17 +421,17 @@ service MailkonService {
 	rpc UpsertBusinessEmailAddress(header.BusinessEmailAddress) returns (header.BusinessEmailAddress);
 	rpc DeleteBusinessEmailAddress(header.Id) returns (header.Empty);
 
-	rpc TrackLink(header.LinkData) returns (header.Empty);
+	rpc TrackLink(header.LinkData) returns (Response);
 
-	rpc ListSampleBouncedEmails(Id) returns (BouncedEmails);
-	rpc LookupBouncedEmail(Id) returns (BouncedEmail);
-	rpc UpsertBouncedEmail(BouncedEmail) returns (BouncedEmail);
-	rpc DeleteBouncedEmail(Id) returns (Empty);
+	rpc ListSampleBouncedEmails(Id) returns (Response);
+	rpc LookupBouncedEmail(Id) returns (Response);
+	rpc UpsertBouncedEmail(BouncedEmail) returns (Response);
+	rpc DeleteBouncedEmail(Id) returns (Response);
 
-	rpc ListSampleBlockedEmails(Id) returns (BouncedEmails);
-	rpc LookupBlockedEmail(Id) returns (BouncedEmail);
-	rpc UpsertBlockedEmail(BouncedEmail) returns (BouncedEmail);
-	rpc UnblockEmail(Id) returns (Empty);
+	rpc ListSampleBlockedEmails(Id) returns (Response);
+	rpc LookupBlockedEmail(Id) returns (Response);
+	rpc UpsertBlockedEmail(BouncedEmail) returns (Response);
+	rpc UnblockEmail(Id) returns (Response);
 }
 
 // widget services
