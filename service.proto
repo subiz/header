@@ -423,9 +423,15 @@ service MailkonService {
 
 	rpc TrackLink(header.LinkData) returns (header.Empty);
 
+	rpc ListSampleBouncedEmails(Id) returns (BouncedEmails);
 	rpc LookupBouncedEmail(Id) returns (BouncedEmail);
 	rpc UpsertBouncedEmail(BouncedEmail) returns (BouncedEmail);
 	rpc DeleteBouncedEmail(Id) returns (Empty);
+
+	rpc ListSampleBlockedEmails(Id) returns (BouncedEmails);
+	rpc LookupBlockedEmail(Id) returns (BouncedEmail);
+	rpc UpsertBlockedEmail(BouncedEmail) returns (BouncedEmail);
+	rpc UnblockEmail(Id) returns (Empty);
 }
 
 // widget services

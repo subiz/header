@@ -94,11 +94,6 @@ func TestUnpack(t *testing.T) {
 	fmt.Println(string(out))
 }
 
-func TestDeltaToPlainText(t *testing.T) {
-	out := DeltaToPlainText(`{"ops":[{"insert":"xin choa "},{"insert":{"mention":{"fullname":"Trang Nguyễn","id":"agqnjeturduiovlkyn"}}},{"insert":" day la mot emoji "},{"insert":{"emoji":"neutral"}},{"insert":"\n"}]}`)
-	println(out)
-}
-
 func TestLang(t *testing.T) {
 	str := &I18NString{
 		En_US: "tieng anh",

@@ -10,64 +10,6 @@ import (
 	"github.com/subiz/log"
 )
 
-func DeltaToPlainText(delta string) string {
-	del := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(delta), &del); err != nil {
-		return ""
-	}
-
-	if del["ops"] == nil {
-		return ""
-	}
-
-	deltas, ok := del["ops"].([]interface{})
-	if !ok {
-		return ""
-	}
-
-	output := ""
-	for _, itemi := range deltas {
-		item, ok := itemi.(map[string]interface{})
-		if !ok {
-			continue
-		}
-
-		if item["insert"] == nil {
-			continue
-		}
-
-		// is text
-		if str, ok := item["insert"].(string); ok {
-			output += str
-			continue
-		}
-
-		obj, ok := item["insert"].(map[string]interface{})
-		if !ok {
-			continue
-		}
-
-		// is emoji
-		if obj["emoji"] != nil {
-			code, _ := obj["emoji"].(string)
-			output += ":" + code + ":"
-			continue
-		}
-
-		// is mention
-		if obj["mention"] != nil {
-			mention, ok := obj["mention"].(map[string]interface{})
-			if !ok {
-				continue
-			}
-			fullname, _ := mention["fullname"].(string)
-			output += "@" + fullname
-			continue
-		}
-	}
-	return output
-}
-
 func GetTimeAttr(u *User, key string) (time.Time, bool) {
 	key = strings.ToLower(strings.TrimSpace(key))
 	has := false

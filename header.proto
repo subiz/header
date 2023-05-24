@@ -6608,6 +6608,13 @@ message ActionBranching {
 
 }
 
+message BouncedEmails {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated BouncedEmail emails = 3;
+	int64 total = 4;
+}
+
 message BouncedEmail {
 	common.Context ctx = 1;
 	string account_id = 2;
