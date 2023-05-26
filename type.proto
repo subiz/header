@@ -306,10 +306,11 @@ message FloatCondition {
 }
 
 message DatetimeCondition {
-	// relative: in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
+	// relative: is_empty, in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
 	// absolute: before, after, between, outside
 	string op = 2;
 
+	bool has_value = 5;
 	// repeated FloatTransform transforms = 3;
 	// repeated int64 hour_of_day
 
@@ -322,4 +323,7 @@ message DatetimeCondition {
 	// relative, minute
 	int64 last = 17; // 1440 => last 24h sec
 	int64 before_ago = 18; // 365*86400 sec
+
+	int64 after_now = 19;
+	int64 before_now = 20;
 }

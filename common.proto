@@ -37,10 +37,9 @@ message Device {
 	string source_referrer = 11;
 	repeated string ga_tracking_ids = 12;
 	string page_url = 13;
+
 	string page_title = 14;
-
 	string ga_client_id = 15;
-
 	string city_name = 18;            // derived from ip
 	string country_name = 19;         // derived from ip
 	string continent_code = 20;      // derived from ip

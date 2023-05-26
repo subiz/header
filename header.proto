@@ -3746,6 +3746,7 @@ message UserViewCondition {
 	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	string type = 5;
 
+
 	TextCondition text = 6;
 	BoolCondition boolean = 8;
 	FloatCondition number = 9;
@@ -5674,7 +5675,7 @@ message RecentCallRecord {
 	bool is_internal = 14;
 }
 
-message ZaloUserInfoRequest {
+message ZaloUserRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string oa_id = 3;
@@ -5863,14 +5864,9 @@ message Campaign {
 	int64 updated = 9;
 	string updated_by = 10;
 
-	// repeated string segments = 11;
-	// repeated string unsubscribed_segments = 12;
-
-	// string segment =
 	int64 progress = 13; // 1025 => 10.25%
 	// telesale: unit is number of phone numbers dialed
 	// broadcast: unit is number of users tried
-	// triggered: number of message
 	// journey: ?
 
 	repeated MarketingMessage messages = 15;
@@ -6531,15 +6527,12 @@ enum E {
 	invalid_task_watchers = 216;
 	invalid_segment_name =  240;
 	invalid_segment_description =  241;
-	segment_not_found = 242;
 	cannot_manually_add_user_to_nonmanual_segment = 243;
 	cannot_edit_system_segment = 244;
 
 	running_campaign = 245;
 
 	// SERVER ERROR
-	not_implemented = 5002;
-	facebook_call_failed = 5023;
 	invalid_facebook_access_token  = 5024;
 	subiz_call_failed = 5025;
 	invalid_google_auth_response = 5071;
@@ -6563,7 +6556,6 @@ message CampaignAction {
 	ActionAskQuestion ask_question = 18;
 	AssignRequest assign = 19;
 
-	int64 delay_sec = 20; // max 20sec
 	ActionUpdateConversation update_conversation = 21;
 	bytes internal_state = 30;
 	ActionUpdateUser update_user = 31;
@@ -6573,10 +6565,10 @@ message CampaignAction {
 	ActionSendChatTranscript send_chat_transcript = 36;
 	ActionUpdateUserSegments update_user_segments = 37;
 
-	ActionWaitUntil wait_until = 38;
+	ActionWait wait = 38;
+
 	ActionBranching branching = 39;
 	ActionPercentageSplit percentage_split = 40;
-	ActionDelay delay = 41;
 }
 
 message ActionPercentageSplit {
@@ -6584,17 +6576,42 @@ message ActionPercentageSplit {
 	repeated int64 percentages = 4; // 1234 -> 12.34%
 }
 
-message ActionDelay {
-	string unit = 3; // second, minute, hour, week
-	int64 value = 4;
-}
 
-message ActionWaitUntil {
+message ActionWait {
 	// event happend: open mail, tag conversation
 	// specific time: birthday?
 
 	// timeout
-	int64 timeout_sec = 10;
+
+
+	// type = event
+	// event.type = message_sent
+	// and - event.data.message.id == {{message[3].id}}
+	//     - event.data.message.text is phone
+
+	// type = specific date
+	// date = {{user.birthday}} | {{order.checkin}}
+	// date - <=  oder.checkout
+	//        >=  order.checkin (variable)
+
+	// type = timeout
+
+	int64 timeout_sec = 3; // second, minute, hour, week
+
+	repeated ActionWaitBranch branches = 4;
+
+	// wait till 2 day before birthday
+	string specific_date = 5; // user.birthday
+	string specific_date_plus_sec = 6; // -86400
+
+	// ActionBranch branches = 8;
+}
+
+message ActionWaitBranch {
+	repeated string types = 3; // specific date / event
+	UserViewCondition date_condition = 4;
+	bool first_time_trigger = 5;
+
 }
 
 message ActionBranch {
@@ -6644,4 +6661,24 @@ message Response {
 
 	BouncedEmail bounced_email = 12;
 	repeated BouncedEmail bounced_emails = 13;
+}
+
+message Email {
+	common.Context ctx = 1;
+	string from = 3;
+	//string to = 4;
+	string subject = 5;
+	string body = 6;
+	map<string, string> header = 7;
+	repeated EmailAttachment attachments = 8; // s3 links
+	repeated string to = 9;
+	repeated string cc = 10;
+	repeated string bcc = 11;
+	string encoding = 12;
+}
+
+message EmailAttachment {
+	string url = 2;
+	string name = 3;
+	string mimetype = 4;
 }

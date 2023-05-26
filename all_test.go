@@ -76,7 +76,7 @@ func TestAssignByte(t *testing.T) {
 }
 
 func TestPartition(t *testing.T) {
-	shardNumber := int(crc32.ChecksumIEEE([]byte("acpxkgumifuoofoosble"))) % 10
+	shardNumber := int(crc32.ChecksumIEEE([]byte("acriviayfmabzskstrpq"))) % 4
 	fmt.Println(shardNumber)
 }
 
