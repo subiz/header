@@ -5908,6 +5908,9 @@ message Campaign {
 	int64 broadcast_finished_at = 42;
 
 	string purpose = 43; // CUSTOMER_SUPPORT, TRANSACTION, PROMOTION
+
+	int64 broadcast_delivered_count = 44;
+	int64 broadcast_read_count = 45;
 }
 
 message CampaignExitCondition {
