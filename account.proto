@@ -36,6 +36,7 @@ message DashboardAgent {
 
 	optional string on_call = 31;
 	optional int64 last_close_task_notification = 32;
+	optional int64 order_seen = 33;
 }
 
 message Agent {

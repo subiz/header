@@ -4496,6 +4496,7 @@ message Orders {
 	int64 total = 6;
 
 	int64 fpv_total_value = 7; // sum of all order total (money)
+	int64 num_untouch = 9;
 }
 
 message OrdersRequest {
@@ -4687,12 +4688,16 @@ message OrderAgent {
 	int64 noti_muted = 5;
 	int64 seen = 6;
 	int64 commented = 7;
+	int64 assigned = 8;
+	// khi nao do:
+	// + duoc assign vao nhung chua xem
 }
 
 enum OrderStatusCode {
 	open = 0;  // đơn mới
+
 	canceled = 1; // đơn hàng đã chốt thua
-	closed = 2; // đơn hàng đã chốt thắng
+	closed = 2; // đơn hàng đã chốt thắng accepted, confirm
 	unconfirmed = 3; // unagreement between a company and a customer
 
 	delivery_success = 25;
@@ -5890,7 +5895,7 @@ message Campaign {
 	bool timming_condition_enabled = 30;
 	TimmingCondition timming_condition = 31;
 
-	string base_segment_id = 32; // segment id
+	// string base_segment_id = 32; // segment id
 
 	Trigger trigger = 33;
 	UserViewCondition trigger_condition = 37;
