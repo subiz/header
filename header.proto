@@ -6671,6 +6671,13 @@ message Response {
 
 	BouncedEmail bounced_email = 12;
 	repeated BouncedEmail bounced_emails = 13;
+
+	ZaloCallConsent zalo_call_consent = 14;
+}
+
+message ZaloCallConsent {
+	int64 code = 2;
+  I18nString message = 4;
 }
 
 message Email {
