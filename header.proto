@@ -5904,7 +5904,7 @@ message Campaign {
 	MarketingGoal goal = 35;
 	CampaignExitCondition exit_when = 36;
 
-	JourneyNode journey_root = 38;
+	JourneyTreeNode journey_root = 38;
 
 	UsersRequest audient_request = 39; // write only when create
 
@@ -6547,9 +6547,9 @@ enum E {
 	pdf_generate_failed = 5072;
 }
 
-message JourneyNode {
+message JourneyTreeNode {
 	string id = 4; // point to campaign action id
-	repeated string childrens = 5; // point to campaign action ids
+	repeated JourneyTreeNode childrens = 5; // point to campaign action ids
 }
 
 message CampaignAction {
@@ -6583,7 +6583,6 @@ message ActionPercentageSplit {
 	repeated string paths = 3;
 	repeated int64 percentages = 4; // 1234 -> 12.34%
 }
-
 
 message ActionWait {
 	// event happend: open mail, tag conversation

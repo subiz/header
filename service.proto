@@ -406,6 +406,7 @@ service ZalokonService {
 	rpc RequestZaloUserInfo(header.ZaloUserRequest) returns (header.Empty);
 	rpc RequestZaloUserToMakeCall(header.ZaloUserRequest) returns (header.Empty);
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
+	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);
 	rpc SendZNS(header.ZnsRequest) returns (header.Event);
 }
 
@@ -424,14 +425,12 @@ service MailkonService {
 
 	rpc TrackLink(header.LinkData) returns (Response);
 
-	rpc ListSampleBouncedEmails(Id) returns (Response);
-	rpc LookupBouncedEmail(Id) returns (BouncedEmail);
+	rpc ListBouncedEmails(BouncedEmail) returns (Response);
 	rpc UpsertBouncedEmail(BouncedEmail) returns (BouncedEmail);
 	rpc DeleteBouncedEmail(Id) returns (Response);
 
-	rpc ListSampleBlockedEmails(Id) returns (Response);
-	rpc LookupBlockedEmail(Id) returns (BlockedEmail);
-	rpc UpsertBlockedEmail(BouncedEmail) returns (Response);
+	rpc ListBlockedEmails(BlockedEmail) returns (Response);
+	rpc BlockEmail(BlockedEmail) returns (Response);
 	rpc UnblockEmail(Id) returns (Response);
 }
 

@@ -57,6 +57,12 @@ message ResponseData {
 	ResponseQuota quota = 6;
 }
 
+message ConsentResponse {
+	int32 error = 2;
+	string message = 3;
+	int64 expired_time = 14;
+}
+
 message Response {
 	int32 error = 2;
 	string message = 3;
