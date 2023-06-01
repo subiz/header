@@ -5684,7 +5684,10 @@ message ZaloUserRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string oa_id = 3;
-	string user_id = 4;
+	string user_id = 4; // could be phone
+
+	int64 reason_code = 5;
+	string call_type = 6; // default audio
 }
 
 message ZnsRequest {
