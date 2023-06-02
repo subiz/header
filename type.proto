@@ -261,6 +261,18 @@ message TextCondition {
 
 	bool case_sensitive = 30;
 	bool accent_sensitive = 31;
+
+	repeated string eq_var = 40;
+	repeated string neq_var = 47;
+	repeated string start_with_var = 48;
+	repeated string end_with_var = 49;
+	repeated string contain_var = 50;
+	string regex_var = 52;
+
+	repeated string not_contain_var = 53;
+	repeated string not_start_with_var = 55;
+	repeated string not_end_with_var = 56;
+	repeated string contain_all_varr = 58;
 }
 
 message EventConditionFilter {

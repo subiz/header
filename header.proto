@@ -1647,6 +1647,8 @@ message SearchTemplate {
 	int32 limit = 3;
 	string account_id = 5;
 	string order_by = 6; // latest_picked
+
+	bool is_template = 8;
 }
 
 message Templates {
@@ -5898,8 +5900,6 @@ message Campaign {
 	bool timming_condition_enabled = 30;
 	TimmingCondition timming_condition = 31;
 
-	// string base_segment_id = 32; // segment id
-
 	Trigger trigger = 33;
 	UserViewCondition trigger_condition = 37;
 
@@ -6588,51 +6588,22 @@ message ActionPercentageSplit {
 }
 
 message ActionWait {
-	// event happend: open mail, tag conversation
-	// specific time: birthday?
-
-	// timeout
-
-
-	// type = event
-	// event.type = message_sent
-	// and - event.data.message.id == {{message[3].id}}
-	//     - event.data.message.text is phone
-
-	// type = specific date
-	// date = {{user.birthday}} | {{order.checkin}}
-	// date - <=  oder.checkout
-	//        >=  order.checkin (variable)
-
-	// type = timeout
-
-	int64 timeout_sec = 3; // second, minute, hour, week
-
-	repeated ActionWaitBranch branches = 4;
-
-	// wait till 2 day before birthday
-	string specific_date = 5; // user.birthday
-	string specific_date_plus_sec = 6; // -86400
-
-	// ActionBranch branches = 8;
+	repeated CampaignBranch branches = 4;
+	string timeout_node_id = 5;
+	int64 timeout = 6;
+	string timeout_unit = 8; // second, minute, hour, week
 }
 
-message ActionWaitBranch {
-	repeated string types = 3; // specific date / event
-	UserViewCondition date_condition = 4;
-	bool first_time_trigger = 5;
-
-}
-
-message ActionBranch {
-	string branch_id = 4;
-	string name = 12;
-	UserViewCondition condition = 2;
+message CampaignBranch {
+	string ui_type = 2;
+	repeated string event_types = 3; // "scheduled", "user_info_updated"
+	UserViewCondition condition = 4;
+	string node_id = 5;
 }
 
 message ActionBranching {
-	// repeated WorkflowBranch branches = 3;
-
+	repeated CampaignBranch branches = 4;
+	string else_node_id = 5;
 }
 
 message BouncedEmail {
@@ -6698,4 +6669,18 @@ message EmailAttachment {
 	string url = 2;
 	string name = 3;
 	string mimetype = 4;
+}
+
+
+message JourneySession {
+	string id = 4;
+	repeated string history = 5;
+	string current_action_id = 6;
+	string hint_next_action_id = 7;
+
+	map<string, string> KV = 8;
+
+	int64 exited = 9;
+	int64 started = 10;
+	string exit_code = 12;
 }
