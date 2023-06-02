@@ -2299,6 +2299,9 @@ message Frequently {
 	bool once_per_user = 2;
 	bool once_per_session = 3;
 	int64 interval_sec = 4; // dont do twice between those seconds
+
+	bool enabled = 5;
+	bool is_recurring = 6; // false -> once ever
 }
 
 ////////////////////
@@ -5877,7 +5880,6 @@ message Campaign {
 	int64 progress = 13; // 1025 => 10.25%
 	// telesale: unit is number of phone numbers dialed
 	// broadcast: unit is number of users tried
-	// journey: ?
 
 	repeated MarketingMessage messages = 15;
 	OutboundCallCampaign outbound_call = 16;
@@ -5900,14 +5902,14 @@ message Campaign {
 	bool timming_condition_enabled = 30;
 	TimmingCondition timming_condition = 31;
 
-	Trigger trigger = 33;
+	repeated string trigger_event_types = 33; //
 	UserViewCondition trigger_condition = 37;
 
-	Frequently frequency = 34;
-	MarketingGoal goal = 35;
-	CampaignExitCondition exit_when = 36;
+	Frequently workflow_frequency = 34;
+	WorkflowGoal workflow_goal = 35;
+	WorkflowExitCondition workflow_exit_when = 36;
 
-	JourneyTreeNode journey_root = 38;
+	WorkflowNode workflow_root = 38;
 
 	UsersRequest audient_request = 39; // write only when create
 
@@ -5919,12 +5921,15 @@ message Campaign {
 
 	int64 broadcast_delivered_count = 44;
 	int64 broadcast_read_count = 45;
+
+	int64 workflow_processing_count = 47;
+	int64 workflow_processed_count = 48;
 }
 
-message CampaignExitCondition {
+message WorkflowExitCondition {
 	// or condition
 	bool goal_reached = 2;
-	bool filter_unmatched = 3;
+	bool trigger_unmatched = 3;
 }
 
 message OutboundCallCampaign {
@@ -6001,17 +6006,16 @@ message OutboundCallEntry {
 	bool do_not_call = 27;
 }
 
-message MarketingGoal {
+message WorkflowGoal {
 	int64 disabled = 3;
-	string type = 4; // delivered, open, reply
+	string ui_type = 4; 	// 1 week of [receiving,opening,clicking] any delivery
 
-	EventCondition event_condition = 5; // enter_segment, leave_segment, page_viewed
-
-	// 1 week of [receiving,opening,clicking] any delivery
+	string event_type = 5; // "scheduled", "user_info_updated"
+	UserViewCondition condition = 6;
 
 	// timming condition
-	int64 time_limit_sec = 6;
-	string delivery_type = 7; // receiving, opening, clicked
+	int64 time_limit = 8;
+	string time_limit_unit = 9;
 }
 
 message MarketingMessage {
@@ -6550,12 +6554,12 @@ enum E {
 	pdf_generate_failed = 5072;
 }
 
-message JourneyTreeNode {
+message WorkflowNode {
 	string id = 4; // point to campaign action id
-	repeated JourneyTreeNode childrens = 5; // point to campaign action ids
+	repeated WorkflowNode childrens = 5; // point to campaign action ids
 }
 
-message CampaignAction {
+message WorkflowAction {
 	string account_id = 2;
 	string campaign_id = 3; //
 	string id = 4;
@@ -6671,8 +6675,7 @@ message EmailAttachment {
 	string mimetype = 4;
 }
 
-
-message JourneySession {
+message WorkflowSession {
 	string id = 4;
 	repeated string history = 5;
 	string current_action_id = 6;
