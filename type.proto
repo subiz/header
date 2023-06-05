@@ -229,6 +229,8 @@ enum RealtimeType {
 
 	outbound_call_entry_updated = 231;
 	outbound_call_entry_deleted = 232;
+
+	workflow_pump = 233; // internal use only
 }
 
 message TextTransform {

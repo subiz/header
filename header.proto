@@ -772,7 +772,7 @@ message Event {
 	int64 created = 8;
 	int64 updated = 10;
 	string type = 9;
-	string session_id = 12; // TODO: remove
+	string session_id = 12; // extra id for many purpose
 	common.By by = 50;
 	Touchpoint touchpoint = 52;
 	Data data = 20;
@@ -850,6 +850,8 @@ message Data {
 	BusinessEmailAddresses business_email_address = 104;
 	FormSubmission form_submitted = 105;
 	OutboundCallEntry outbound_call_entry = 106;
+
+	WorkflowPump workflow_pump = 107;
 }
 
 message WebRTCMessage {
@@ -1528,7 +1530,6 @@ message Attachment {
  	string thumbnail_url = 4;
 	string name = 5;
 	string description = 6;
-	//string data = 7; // for custom data
 	int32 length = 15;
 	int32 size = 13; // byte
 
@@ -1561,6 +1562,7 @@ message Attachment {
 
 	File file = 34;
 	string content_id = 35;
+	string disposition = 36; // for custom data
 
 	// 	string template_type = 36; // for zalo: request_user_info
 }
@@ -2300,8 +2302,8 @@ message Frequently {
 	bool once_per_session = 3;
 	int64 interval_sec = 4; // dont do twice between those seconds
 
-	bool enabled = 5;
-	bool is_recurring = 6; // false -> once ever
+	bool enabled = 5; // false -> once per user
+	bool is_recurring = 6; // false -> once ever || true -> multiple time or one user
 }
 
 ////////////////////
@@ -6686,4 +6688,9 @@ message WorkflowSession {
 	int64 exited = 9;
 	int64 started = 10;
 	string exit_code = 12;
+}
+
+message WorkflowPump {
+	string workflow_id = 3;
+	string session_id = 4;
 }

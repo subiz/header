@@ -7,6 +7,7 @@ import (
 	"hash/crc32"
 	"testing"
 
+	pb "github.com/subiz/header/account"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -64,6 +65,17 @@ func TestAssignObject(t *testing.T) {
 	if dst.Id != "1" || dst.Name != "src" || dst.Created != 1 {
 		t.Error("should be eq 2")
 	}
+}
+
+func TestAssignAgent(t *testing.T) {
+	pS := func(s string) *string {
+		return &s
+	}
+
+	dst := &pb.Agent{Id: pS("1"), Fullname: pS("dst"), AvatarUrl: pS("http://dst.com")}
+	src := &pb.Agent{Id: pS("1"), Fullname: pS("src"), AvatarUrl: pS("http://src.com")}
+	AssignObject(dst, src, []string{"avatar_url"})
+	fmt.Println("D", dst)
 }
 
 func TestAssignByte(t *testing.T) {
