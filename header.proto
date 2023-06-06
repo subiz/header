@@ -6700,11 +6700,11 @@ message WorkflowPump {
 
 message SchedulerTask {
 	common.Context ctx = 1;
-	// string account_id = 2;
+	string account_id = 2;
 	string id = 4;
-	string sec = 5;
+	int64 sec = 5;
 	bytes payload = 6;
 	string topic = 7;
 	int32 partition = 8;
-	int32 key = 9;
+	string key = 9;
 }

@@ -660,6 +660,6 @@ service FormMgr {
 }
 
 service Scheduler {
-	rpc RegisterTask(header.SchedulerTask) returns (Response);
+	rpc RegisterTask(header.SchedulerTask) returns (SchedulerTask);
 	rpc UnregisterTask(header.SchedulerTask) returns (Response);
 }
