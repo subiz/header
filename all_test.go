@@ -11,6 +11,37 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+func TestObjectPath(t *testing.T) {
+	testcases := []struct {
+		in   any
+		path string
+		val  any
+	}{
+		//{nil, "", nil},
+		//{nil, "abc", nil},
+		//{map[string]any{"user": map[string]string{"fullname": "thanh"}}, "user.fullname", "thanh"},
+		{map[string]any{"user": []any{map[string]string{"fullname": "thanh"}}}, "user.0.fullname", "thanh"},
+		//{map[string]any{"user": []any{nil, map[string]string{"fullname": "thanh"}}}, "user.1.fullname", "thanh"},
+	}
+
+	for i, tc := range testcases {
+		interf := ObjectPath(tc.in, tc.path)
+		if interf == nil && tc.val == nil {
+			continue
+		}
+
+		if interf != nil && tc.val == nil || interf == nil && tc.val != nil {
+			t.Errorf("WRONG AT TEST #%d, expect %v, got %v", i+1, tc.val, interf)
+			continue
+		}
+
+		// !nil
+		if fmt.Sprintf("%v", interf) != fmt.Sprintf("%v", tc.val) {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.val, interf)
+		}
+	}
+}
+
 func TestNormEmail(t *testing.T) {
 	testcases := []struct {
 		in  string

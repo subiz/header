@@ -116,7 +116,7 @@ var action = {
     condition: {
       all: [
         {
-          key: "order.fields[key=checkin]",
+          key: `order.fields.key=43.`,
           type: "date",
           date: {
             op: "before_now",
@@ -132,9 +132,9 @@ var action = {
 
 // Wait until last email sent is read
 var action = {
-  name: "wait until the last email is read",
+  name: "wait until the last email is read or clicked",
   type: "wait",
-		wait: {
+  wait: {
     event_types: ["message_pong"],
     branches: [
       {
@@ -150,12 +150,24 @@ var action = {
               },
             },
             {
-              key: "event.data.message.pongs.#.type",
-              type: "text",
-              text: {
-                op: "eq",
-                eq: "message_read",
-              },
+              one: [
+                {
+                  key: `event.data.message.pongs.type="message_read".type`,
+                  type: "text",
+                  text: {
+                    op: "eq",
+                    eq: "message_read",
+                  },
+                },
+                {
+                  key: `event.data.message.pongs.type="message_clicked".type`,
+                  type: "text",
+                  text: {
+                    op: "eq",
+                    eq: "message_received",
+                  },
+                },
+              ],
             },
           ],
         },

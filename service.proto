@@ -658,3 +658,8 @@ service FormMgr {
 	rpc ReportForm(header.FormReportRequest) returns (header.FormReportResponse);
 	rpc ListFormSubmissions(header.ListFormSubmissionRequest) returns (header.FormSubmissions);
 }
+
+service Scheduler {
+	rpc RegisterTask(header.SchedulerTask) returns (Response);
+	rpc UnregisterTask(header.SchedulerTask) returns (Response);
+}

@@ -5904,7 +5904,7 @@ message Campaign {
 	bool timming_condition_enabled = 30;
 	TimmingCondition timming_condition = 31;
 
-	repeated string trigger_event_types = 33; //
+	repeated string trigger_event_types = 33; // scheduled, user_info_updated
 	UserViewCondition trigger_condition = 37;
 
 	Frequently workflow_frequency = 34;
@@ -6091,6 +6091,7 @@ message CampaignSendLogRequest {
 
 message BroadcastCampaignMetrics {
 	message BroadcastCampaignMetric {
+		string message_id = 4; // for detailed metric
 		string channel = 5;
 		int64 clicked_count = 6;
 		int64 sent_count = 7;
@@ -6114,6 +6115,7 @@ message BroadcastCampaignMetrics {
 	string account_id = 2;
 	string campaign_id = 3;
 	repeated BroadcastCampaignMetric metrics = 4;
+	repeated BroadcastCampaignMetric per_message_metrics = 5;
 }
 
 message EmailSenderVerificationResult {
@@ -6693,4 +6695,16 @@ message WorkflowSession {
 message WorkflowPump {
 	string workflow_id = 3;
 	string session_id = 4;
+}
+
+
+message SchedulerTask {
+	common.Context ctx = 1;
+	// string account_id = 2;
+	string id = 4;
+	string sec = 5;
+	bytes payload = 6;
+	string topic = 7;
+	int32 partition = 8;
+	int32 key = 9;
 }
