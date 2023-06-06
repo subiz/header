@@ -594,9 +594,17 @@ service Proder {
 	rpc UnfollowOrder(header.Id) returns (Empty);
 	rpc TagOrder(header.TagRequest) returns (Empty);
 	rpc UntagOrder(header.TagRequest) returns (Empty);
+
+	rpc ReadPipeline(header.Id) returns (header.Pipeline);
+	rpc CreatePipeline(header.Pipeline) returns (header.Pipeline);
+	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
+	rpc DeletePipeline(Id) returns (Empty);
+	rpc ListPipelines(Ids) returns (header.Pipelines);
+	rpc DeletePipelineStage(header.PipelineStage) returns (Empty);
+	rpc PreselectPipeline(Id) returns (header.Pipeline);
 }
 
-service Apiece {
+service TaskMgr {
 	rpc ReadTask(header.Id) returns (header.Task);
 	rpc CreateTask(header.Task) returns (header.Task);
 	rpc UpdateTask(header.Task) returns (header.Task);
@@ -612,14 +620,6 @@ service Apiece {
 	rpc EditTaskComment(header.Event) returns (header.Event);
 	rpc DeleteTaskComment(header.Key) returns (header.Event);
 	rpc ListTaskComments(header.Id) returns (header.TaskHistoryEntries);
-
-	rpc ReadPipeline(header.Id) returns (header.Pipeline);
-	rpc CreatePipeline(header.Pipeline) returns (header.Pipeline);
-	rpc UpdatePipeline(header.Pipeline) returns (header.Pipeline);
-	rpc DeletePipeline(Id) returns (Empty);
-	rpc ListPipelines(Ids) returns (header.Pipelines);
-	rpc DeletePipelineStage(header.PipelineStage) returns (Empty);
-	rpc PreselectPipeline(Id) returns (header.Pipeline);
 }
 
 service Speex {

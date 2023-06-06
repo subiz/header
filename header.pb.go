@@ -43995,7 +43995,7 @@ type UserSegment struct {
 	UserId    string          `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	SegmentId string          `protobuf:"bytes,4,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
 	Created   int64           `protobuf:"varint,5,opt,name=created,proto3" json:"created,omitempty"`
-	By        string          `protobuf:"bytes,8,opt,name=by,proto3" json:"by,omitempty"`
+	By        string          `protobuf:"bytes,8,opt,name=by,proto3" json:"by,omitempty"` // manually
 }
 
 func (x *UserSegment) Reset() {

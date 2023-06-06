@@ -5842,7 +5842,7 @@ message UserSegment {
 	string user_id = 3;
 	string segment_id = 4;
 	int64 created = 5;
-	string by = 8;
+	string by = 8; // manually
 }
 
 message Campaigns {
