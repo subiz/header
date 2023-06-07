@@ -1451,6 +1451,9 @@ message MessagePong {
 		bounced = 22; // email bounced
 		spamreport = 24; // email bounced
 		unsubscribed = 25; // email bounced
+
+		care = 30;
+		remove_care = 31;
 	}
 	string type = 4;
 
@@ -5911,7 +5914,7 @@ message Campaign {
 	WorkflowGoal workflow_goal = 35;
 	WorkflowExitCondition workflow_exit_when = 36;
 
-	WorkflowNode workflow_root = 38;
+	WorkflowAction workflow_root = 38;
 
 	UsersRequest audient_request = 39; // write only when create
 
@@ -6352,7 +6355,6 @@ enum E {
 	invalid_credential = 12;
 
 	invalid_refresh_token = 17;
-	wrong_password = 18;
 	invalid_token = 20;
 	invalid_message_size = 21;
 	invalid_payload_size = 22;
@@ -6365,10 +6367,8 @@ enum E {
 	invalid_attribute_type = 38;
 
 	too_many_attribute = 39;
-	invalid_agent_id = 41;
 	invalid_note_target_id = 42;
 
-	invalid_event_id = 43;
 	invalid_content_type = 44;
 	parse_query_failed = 45;
 	domain_is_not_whitelisted = 46;
@@ -6432,16 +6432,12 @@ enum E {
 	dead_poll_connection = 105;
 	connection_not_found = 106;
 
-	pos_not_found = 107;
 	too_many_pos = 108;
-
-	tax_not_found = 109;
 	too_many_tax = 110;
 
 	too_many_shipping_address = 111;
 	shipping_address_not_found = 112;
 
-	message_not_found = 113;
 	expired_access_token = 114;
 
 	too_many_payment_method = 115;
@@ -6480,13 +6476,9 @@ enum E {
 	pipeline_stage_not_found = 145;
 	invalid_order_status = 146;
 
-	marker_not_found = 147;
 	invalid_product_category = 148;
 	invalid_product_visibility = 149;
-	invalid_product_id = 150;
-	shortcut_not_found = 151;
 	file_system_error = 152;
-	cannot_connect = 153;
 	zalo_call_error = 154;
 
 	invalid_integration_state = 155;
@@ -6506,7 +6498,6 @@ enum E {
 	too_many_events = 177;
 	too_many_number = 178;
 	too_many_phone_device = 179;
-	phone_device_not_found = 180;
 	sip_server_error = 181;
 
 	invalid_phone_device_state = 182;
@@ -6546,28 +6537,20 @@ enum E {
 	invalid_task_watchers = 216;
 	invalid_segment_name =  240;
 	invalid_segment_description =  241;
-	cannot_manually_add_user_to_nonmanual_segment = 243;
 	cannot_edit_system_segment = 244;
 
-	running_campaign = 245;
-
 	// SERVER ERROR
-	invalid_facebook_access_token  = 5024;
 	subiz_call_failed = 5025;
 	invalid_google_auth_response = 5071;
 	pdf_generate_failed = 5072;
 }
 
-message WorkflowNode {
-	string id = 4; // point to campaign action id
-	repeated WorkflowNode childrens = 5; // point to campaign action ids
-}
-
 message WorkflowAction {
 	string account_id = 2;
-	string campaign_id = 3; //
+	string workflow_id = 3;
 	string id = 4;
 	string name = 5;
+	string next_action_id = 6;
 	string type = 9; // send_email, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message
 
 	ActionJump jump = 15;
@@ -6597,7 +6580,7 @@ message ActionPercentageSplit {
 
 message ActionWait {
 	repeated CampaignBranch branches = 4;
-	string timeout_node_id = 5;
+	string timeout_action_id = 5;
 	int64 timeout = 6;
 	string timeout_unit = 8; // second, minute, hour, week
 }

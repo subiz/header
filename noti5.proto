@@ -18,6 +18,9 @@ message Subscription {
 	optional bool lead_created = 13;
 	optional int64 task_updated = 14;
 	optional int64 new_assigned_order = 15;
+
+	optional int64 lead_assigned = 16;
+	optional int64 segment_joined = 17;
 }
 
 message Setting {

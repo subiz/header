@@ -202,3 +202,39 @@ var action = {
     ],
   },
 };
+
+// DESIGN
+// Next Execution Pointer (NEP)
+// NEP trỏ đến action mà engine sẽ thực hiện ở lần breath in tiếp theo
+// + Ban đầu: NEP sẽ trỏ tới root action của workflow
+// + Khi breath in, engine sẽ thực thi action mà NEP đang trỏ
+// + Sau khi thực hiện xong. NEP sẽ trỏ tới action tiếp theo
+//   Có 4 loại action quyết định việc chọn NEP
+//   1. Action thông thường: NEP sẽ được đưa tới action liền kế tiếp. Ví dụ: cập-nhật-thông-tin-user, gắn-tag-hội-thoại, gửi-tin-nhắn
+//   2. Action branch: Có nhiều hơn 1 action liền kề, engine sẽ kiểm tra từng điều kiện và chuyển NEP tới nhánh đầu tiên thỏa mãn
+//   3. Action do-waiting: Sẽ kiểm tra event vào, nếu không thỏa mãn, NEP sẽ không thay đổi
+//   4. Action jump, end, restart: Chuyển NEP tới action quy định trong nội dung action, có thể là nhảy tới một action bất kỳ, quay lại action root hoặc kết thúc
+
+
+// Cách expand action:
+// Một số action là tổ hợp của các action đơn vị. Hiện tại chỉ có action Wait là tổ hợp của 
+// ID của action là một chữ số. Ví dụ: "14", "15" hoặc "18"
+// Khi expand, ID sẽ được nối vào action parent ID bằng ký tự "/". Như vậy ID có thể có dạng 
+// "1", "1/2", "1/2/3" hoặc "1/2/3/4"
+// Cách expand:
+// 1. Chuyển ID thành mảng "1/2/3/4" -> ["1", "2", "3", "4"]
+// 2. kiểm tra kiểu của "1". Nếu là wait thì gọi expand("wait"). Hàm này sẽ trả về một map các node con. Giả sử
+//    { "1" => action1, "2" => action2}
+// 3. Kiểm tra kiểu của node con "2". Nếu là kafka thì gọi expand("kafka"). Hàm sẽ trả về map node con khác. Giả sử
+//    { "1" => actiona1, "2" => actiona2, "3" => actiona3, "4" => actiona4}
+// 4. Kiểm tra kiểu của node cháy "3". Nếu là xyz thì gọi expand("xyz"). Hàm sẽ trả về map node con khác. Giả sử
+//    { "1" => action1}
+// 5. Nếu có node 4 thì thực hiện node 4, nếu ko có node 4 thì là dữ liệu đã hỏng, thoát ngay với exit code là expansion-failed
+
+// Hành động đợi wait
+// Đây là hành động phức tạp nhất
+// Wait được expand ra làm 2 hành động nhỏ hơn
+// 1. wait-canary/1, sẽ đọc nội dung của action, tìm ra các effect-events và đặt các scheduler cần thiết
+// 2. do-wating/2, đóng vai trò sensor, nhận event breath in. Nếu là effect events thì gọi hàm giống wait-canary/1 để đặt các scheduler mới
+//    nếu là execution-event  thì kiểm tra điều kiện trong branch. Nếu đúng thì thực thi, không thì thôi 
+ 
