@@ -38,9 +38,8 @@ func WithShardRedirect() grpc.DialOption {
 	// list of current shard worker addresses (order is important)
 	addrs := []string{}
 
-	f := func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+	f := func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 		lock.Lock()
-
 		// has data learned from last request
 		if len(addrs) > 0 {
 			// looking for shard key in header or account_id field in parameter
@@ -88,7 +87,7 @@ func WithShardRedirect() grpc.DialOption {
 		}
 		return err
 	}
-	return grpc.WithUnaryInterceptor(f)
+	return grpc.WithChainUnaryInterceptor(f)
 }
 
 func ToGrpcCtx(pctx *common.Context) context.Context {
@@ -140,7 +139,7 @@ func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 }
 
 func WithErrorStack() grpc.DialOption {
-	return grpc.WithUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
+	return grpc.WithChainUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
 		defer func() {
 			if r := recover(); r != nil {
 				err = log.EServer(err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method, "__skip_stack": "3"})
@@ -398,7 +397,7 @@ func NewShardServer(port, shards int) *grpc.Server {
 		keepalive.ServerParameters{
 			MaxConnectionAge: time.Duration(20) * time.Second,
 		},
-	), grpc.UnaryInterceptor(NewStatefulSetShardInterceptor(port, shards)))
+	), grpc.ChainUnaryInterceptor(NewStatefulSetShardInterceptor(port, shards)))
 }
 
 func NewServer() *grpc.Server {
