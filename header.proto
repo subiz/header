@@ -4506,6 +4506,7 @@ message Orders {
 	int64 total = 6;
 
 	int64 fpv_total_value = 7; // sum of all order total (money)
+	float total_value = 8;
 	int64 num_untouch = 9;
 }
 
