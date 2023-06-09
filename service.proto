@@ -3,6 +3,7 @@ syntax = "proto3";
 package header;
 
 option go_package = "github.com/subiz/header";
+import "credit.proto";
 import "payment.proto";
 import "noti5.proto";
 import "account.proto";
@@ -643,9 +644,15 @@ service CampaignMgr {
 }
 
 service CreditMgr {
+	rpc TrySpendCredit(header.CreditSpendEntry) returns (header.TrySpendCreditResponse);
 	rpc ReportCreditSpend(header.CreditSpendReportRequest) returns (header.CreditSpendReportResponse);
 	rpc ListCreditSpendLog(header.CreditSpendLogRequest) returns (header.CreditSpendEntries);
-	rpc AddCredit(payment.Bill) returns (payment.Bill);
+	rpc AddBill(payment.Bill) returns (payment.Bill); // only subiz
+
+	rpc ListCredits(header.Id) returns (header.Response); // credit
+	rpc AddCredit(header.Credit) returns (header.Response); // credit
+	rpc DeleteCredit(header.Id) returns (header.Response); // empty
+	rpc UpdateCredit(header.Credit) returns (header.Response); // credit
 }
 
 service FormMgr {

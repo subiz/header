@@ -4,6 +4,7 @@ package header;
 
 option go_package = "github.com/subiz/header";
 
+import "credit.proto";
 import "common.proto";
 import "account.proto";
 import "type.proto";
@@ -5899,8 +5900,8 @@ message Campaign {
 	int64 impression_count = 20;
 	int64 goal_reached_count = 21;
 
-	int64 sent_message_budget = 22;
-	int64 sent_message_budget_spent = 23; // set by campaign
+	int64 budget_fpv = 22; // set by campaign
+	int64 budget_spent_fpv = 23;
 
 	string locale = 28; // can be auto
 	repeated string locales = 29;
@@ -5930,6 +5931,8 @@ message Campaign {
 
 	int64 workflow_processing_count = 47;
 	int64 workflow_processed_count = 48;
+
+	string credit_id = 49;
 }
 
 message WorkflowExitCondition {
@@ -6161,86 +6164,6 @@ message BusinessEmailAddresses {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated BusinessEmailAddress business_email_addresses = 3;
-}
-
-message CreditSpendEntry {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	int64 created = 4;
-	string service = 5; // file
-	string category = 6; // agent, zalo_zns, zalo_active_message, image
-
-	int64 quantity = 7;
-	CreditSendEntryData data = 8;
-}
-
-message CreditSendEntryDataId {
-	string id = 2;
-}
-
-message CreditSendEntryDataAgent {
-	int64 total_agents = 1;
-	repeated string agents = 2;
-}
-
-message CreditSendEntryDataEmail {
-	string from = 3;
-	string to = 4;
-	string email_id = 5;
-}
-
-message CreditSendEntryDataZaloZNS {
-	string oa_id = 3;
-	string message_id = 4; // from zalo
-	string template_id = 5;
-	string phone_number = 6;
-}
-
-message CreditSendEntryDataZaloActiveMessage {
-	string oa_id = 3;
-	string message_id = 4; // from zalo
-	string conversation_id = 5;
-	string event_id = 6;
-	string zalo_user_id = 7;
-}
-
-message CreditSendEntryData {
-	CreditSendEntryDataAgent agent = 2;
-	CreditSendEntryDataZaloZNS zalo_zns = 3;
-	CreditSendEntryDataZaloActiveMessage zalo_active_message = 4;
-	CreditSendEntryDataEmail email = 5;
-	CreditSendEntryDataId file = 6;
-}
-
-message CreditSpendReportRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 from_time = 4; // ms
-	string unit = 5; // hour, day, month
-	string service = 6; // just filter
-	int64 limit = 7; // default: 24, 30, 24
-}
-
-message CreditSpendReportResponse {
-	common.Context ctx = 1;
-	string account_id = 2;
-	map<string, ReportResponse> spends = 3;
-}
-
-message CreditSpendLogRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 created_from = 4; // ms
-	string service = 6; // just filter
-	string category = 7; // just filter
-	int64 limit = 8; // max : 20
-}
-
-message CreditSpendEntries {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated CreditSpendEntry entries = 4;
 }
 
 message FormReportRequest {}
@@ -6636,6 +6559,8 @@ message Response {
 	repeated BouncedEmail bounced_emails = 13;
 
 	ZaloCallConsent zalo_call_consent = 14;
+	Credit credit = 15;
+	repeated Credit credits = 16;
 }
 
 message ZaloCallConsent {
@@ -6691,4 +6616,10 @@ message SchedulerTask {
 	string topic = 7;
 	int32 partition = 8;
 	string key = 9;
+}
+
+message CreditSpendReportResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	map<string, ReportResponse> spends = 3;
 }

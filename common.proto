@@ -11,6 +11,9 @@ message Context {
 	string sub_topic = 11;
 	// list of used fields in the object
 	repeated string fields = 21;
+
+	string from_service = 22; // campaign, bot
+	string from_srevice_id = 23; // cp329023
 }
 
 message Device {

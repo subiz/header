@@ -138,6 +138,8 @@ message Bill {
 	optional string payment_method = 10;
 	optional int32 year = 11;
 	optional string description = 12;
+
+	optional string credit_id = 15;
 }
 
 message Note {
@@ -191,6 +193,8 @@ message Invoice {
 	optional float payment_made = 24;
 	optional Subscription current_sub = 25; // optional
 	optional Plan current_plan = 26; // optional
+
+	optional string credit_id = 27;
 }
 
 message AgentInvoiceItem {
