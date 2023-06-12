@@ -142,6 +142,13 @@ message Bill {
 	optional string credit_id = 15;
 }
 
+message Bills {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string credit_id = 3;
+	repeated Bill bills = 5;
+}
+
 message Note {
 	optional common.Context ctx = 1;
 	optional string message = 4;

@@ -647,7 +647,8 @@ service CreditMgr {
 	rpc TrySpendCredit(header.CreditSpendEntry) returns (header.TrySpendCreditResponse);
 	rpc ReportCreditSpend(header.CreditSpendReportRequest) returns (header.CreditSpendReportResponse);
 	rpc ListCreditSpendLog(header.CreditSpendLogRequest) returns (header.CreditSpendEntries);
-	rpc AddBill(payment.Bill) returns (payment.Bill); // only subiz
+
+	rpc ListBills(header.Id) returns (payment.Bills);
 
 	rpc ListCredits(header.Id) returns (header.Response); // credit
 	rpc AddCredit(header.Credit) returns (header.Response); // credit

@@ -6616,9 +6616,3 @@ message SchedulerTask {
 	int32 partition = 8;
 	string key = 9;
 }
-
-message CreditSpendReportResponse {
-	common.Context ctx = 1;
-	string account_id = 2;
-	map<string, ReportResponse> spends = 3;
-}

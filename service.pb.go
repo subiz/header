@@ -1625,9 +1625,9 @@ var file_service_proto_rawDesc = []byte{
 	0x72, 0x65, 0x64, 0x69, 0x74, 0x53, 0x70, 0x65, 0x6e, 0x64, 0x4c, 0x6f, 0x67, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x72,
 	0x65, 0x64, 0x69, 0x74, 0x53, 0x70, 0x65, 0x6e, 0x64, 0x45, 0x6e, 0x74, 0x72, 0x69, 0x65, 0x73,
-	0x12, 0x27, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x42, 0x69, 0x6c, 0x6c, 0x12, 0x0d, 0x2e, 0x70, 0x61,
-	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x42, 0x69, 0x6c, 0x6c, 0x1a, 0x0d, 0x2e, 0x70, 0x61, 0x79,
-	0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x42, 0x69, 0x6c, 0x6c, 0x12, 0x2b, 0x0a, 0x0b, 0x4c, 0x69, 0x73,
+	0x12, 0x27, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74, 0x42, 0x69, 0x6c, 0x6c, 0x73, 0x12, 0x0a, 0x2e,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0e, 0x2e, 0x70, 0x61, 0x79, 0x6d,
+	0x65, 0x6e, 0x74, 0x2e, 0x42, 0x69, 0x6c, 0x6c, 0x73, 0x12, 0x2b, 0x0a, 0x0b, 0x4c, 0x69, 0x73,
 	0x74, 0x43, 0x72, 0x65, 0x64, 0x69, 0x74, 0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
 	0x72, 0x2e, 0x49, 0x64, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d, 0x0a, 0x09, 0x41, 0x64, 0x64, 0x43, 0x72, 0x65,
@@ -1949,9 +1949,10 @@ var file_service_proto_goTypes = []interface{}{
 	(*TrySpendCreditResponse)(nil),            // 272: header.TrySpendCreditResponse
 	(*CreditSpendReportResponse)(nil),         // 273: header.CreditSpendReportResponse
 	(*CreditSpendEntries)(nil),                // 274: header.CreditSpendEntries
-	(*Forms)(nil),                             // 275: header.Forms
-	(*FormReportResponse)(nil),                // 276: header.FormReportResponse
-	(*FormSubmissions)(nil),                   // 277: header.FormSubmissions
+	(*payment.Bills)(nil),                     // 275: payment.Bills
+	(*Forms)(nil),                             // 276: header.Forms
+	(*FormReportResponse)(nil),                // 277: header.FormReportResponse
+	(*FormSubmissions)(nil),                   // 278: header.FormSubmissions
 }
 var file_service_proto_depIdxs = []int32{
 	0,   // 0: header.RateLimit.SyncRateLimit:input_type -> header.RateLimitSyncRequest
@@ -2399,7 +2400,7 @@ var file_service_proto_depIdxs = []int32{
 	158, // 442: header.CreditMgr.TrySpendCredit:input_type -> header.CreditSpendEntry
 	159, // 443: header.CreditMgr.ReportCreditSpend:input_type -> header.CreditSpendReportRequest
 	160, // 444: header.CreditMgr.ListCreditSpendLog:input_type -> header.CreditSpendLogRequest
-	79,  // 445: header.CreditMgr.AddBill:input_type -> payment.Bill
+	4,   // 445: header.CreditMgr.ListBills:input_type -> header.Id
 	4,   // 446: header.CreditMgr.ListCredits:input_type -> header.Id
 	161, // 447: header.CreditMgr.AddCredit:input_type -> header.Credit
 	4,   // 448: header.CreditMgr.DeleteCredit:input_type -> header.Id
@@ -2857,17 +2858,17 @@ var file_service_proto_depIdxs = []int32{
 	272, // 900: header.CreditMgr.TrySpendCredit:output_type -> header.TrySpendCreditResponse
 	273, // 901: header.CreditMgr.ReportCreditSpend:output_type -> header.CreditSpendReportResponse
 	274, // 902: header.CreditMgr.ListCreditSpendLog:output_type -> header.CreditSpendEntries
-	79,  // 903: header.CreditMgr.AddBill:output_type -> payment.Bill
+	275, // 903: header.CreditMgr.ListBills:output_type -> payment.Bills
 	226, // 904: header.CreditMgr.ListCredits:output_type -> header.Response
 	226, // 905: header.CreditMgr.AddCredit:output_type -> header.Response
 	226, // 906: header.CreditMgr.DeleteCredit:output_type -> header.Response
 	226, // 907: header.CreditMgr.UpdateCredit:output_type -> header.Response
-	275, // 908: header.FormMgr.ListForms:output_type -> header.Forms
+	276, // 908: header.FormMgr.ListForms:output_type -> header.Forms
 	162, // 909: header.FormMgr.CreateForm:output_type -> header.Form
 	162, // 910: header.FormMgr.UpdateForm:output_type -> header.Form
 	51,  // 911: header.FormMgr.DeleteForm:output_type -> header.Empty
-	276, // 912: header.FormMgr.ReportForm:output_type -> header.FormReportResponse
-	277, // 913: header.FormMgr.ListFormSubmissions:output_type -> header.FormSubmissions
+	277, // 912: header.FormMgr.ReportForm:output_type -> header.FormReportResponse
+	278, // 913: header.FormMgr.ListFormSubmissions:output_type -> header.FormSubmissions
 	165, // 914: header.Scheduler.RegisterTask:output_type -> header.SchedulerTask
 	226, // 915: header.Scheduler.UnregisterTask:output_type -> header.Response
 	458, // [458:916] is the sub-list for method output_type
@@ -19810,7 +19811,7 @@ type CreditMgrClient interface {
 	TrySpendCredit(ctx context.Context, in *CreditSpendEntry, opts ...grpc.CallOption) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(ctx context.Context, in *CreditSpendReportRequest, opts ...grpc.CallOption) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(ctx context.Context, in *CreditSpendLogRequest, opts ...grpc.CallOption) (*CreditSpendEntries, error)
-	AddBill(ctx context.Context, in *payment.Bill, opts ...grpc.CallOption) (*payment.Bill, error)
+	ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Bills, error)
 	ListCredits(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	AddCredit(ctx context.Context, in *Credit, opts ...grpc.CallOption) (*Response, error)
 	DeleteCredit(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
@@ -19852,9 +19853,9 @@ func (c *creditMgrClient) ListCreditSpendLog(ctx context.Context, in *CreditSpen
 	return out, nil
 }
 
-func (c *creditMgrClient) AddBill(ctx context.Context, in *payment.Bill, opts ...grpc.CallOption) (*payment.Bill, error) {
-	out := new(payment.Bill)
-	err := c.cc.Invoke(ctx, "/header.CreditMgr/AddBill", in, out, opts...)
+func (c *creditMgrClient) ListBills(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Bills, error) {
+	out := new(payment.Bills)
+	err := c.cc.Invoke(ctx, "/header.CreditMgr/ListBills", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -19902,7 +19903,7 @@ type CreditMgrServer interface {
 	TrySpendCredit(context.Context, *CreditSpendEntry) (*TrySpendCreditResponse, error)
 	ReportCreditSpend(context.Context, *CreditSpendReportRequest) (*CreditSpendReportResponse, error)
 	ListCreditSpendLog(context.Context, *CreditSpendLogRequest) (*CreditSpendEntries, error)
-	AddBill(context.Context, *payment.Bill) (*payment.Bill, error)
+	ListBills(context.Context, *Id) (*payment.Bills, error)
 	ListCredits(context.Context, *Id) (*Response, error)
 	AddCredit(context.Context, *Credit) (*Response, error)
 	DeleteCredit(context.Context, *Id) (*Response, error)
@@ -19922,8 +19923,8 @@ func (*UnimplementedCreditMgrServer) ReportCreditSpend(context.Context, *CreditS
 func (*UnimplementedCreditMgrServer) ListCreditSpendLog(context.Context, *CreditSpendLogRequest) (*CreditSpendEntries, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCreditSpendLog not implemented")
 }
-func (*UnimplementedCreditMgrServer) AddBill(context.Context, *payment.Bill) (*payment.Bill, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddBill not implemented")
+func (*UnimplementedCreditMgrServer) ListBills(context.Context, *Id) (*payment.Bills, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBills not implemented")
 }
 func (*UnimplementedCreditMgrServer) ListCredits(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCredits not implemented")
@@ -19996,20 +19997,20 @@ func _CreditMgr_ListCreditSpendLog_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _CreditMgr_AddBill_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(payment.Bill)
+func _CreditMgr_ListBills_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CreditMgrServer).AddBill(ctx, in)
+		return srv.(CreditMgrServer).ListBills(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.CreditMgr/AddBill",
+		FullMethod: "/header.CreditMgr/ListBills",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CreditMgrServer).AddBill(ctx, req.(*payment.Bill))
+		return srv.(CreditMgrServer).ListBills(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -20103,8 +20104,8 @@ var _CreditMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _CreditMgr_ListCreditSpendLog_Handler,
 		},
 		{
-			MethodName: "AddBill",
-			Handler:    _CreditMgr_AddBill_Handler,
+			MethodName: "ListBills",
+			Handler:    _CreditMgr_ListBills_Handler,
 		},
 		{
 			MethodName: "ListCredits",

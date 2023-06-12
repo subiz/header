@@ -43,7 +43,7 @@ message CreditSpendEntry {
 	string account_id = 2;
 	string id = 3;
 	int64 created = 4;
-	string service = 5; // file (sub-category)
+	string service = 5; // remove file (sub-category)
 	string category = 6; // agent, zalo_zns, zalo_active_message, image
 
 	int64 quantity = 7;
@@ -122,7 +122,6 @@ message CreditSpendEntries {
 	repeated CreditSpendEntry entries = 4;
 }
 
-
 message TrySpendCreditResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -134,4 +133,16 @@ message TrySpendCreditResponse {
 	int64 balance_fpv = 6;
 
 	bool allow = 7;
+}
+
+message CreditSpendReportResponseData {
+	string item_id = 3;
+	repeated int64 data = 4; // by time
+}
+
+message CreditSpendReportResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string credit_id = 3;
+	repeated CreditSpendReportResponseData datas = 4;
 }

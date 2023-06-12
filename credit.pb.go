@@ -253,7 +253,7 @@ type CreditSpendEntry struct {
 	AccountId   string               `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Id          string               `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Created     int64                `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"`
-	Service     string               `protobuf:"bytes,5,opt,name=service,proto3" json:"service,omitempty"`   // file (sub-category)
+	Service     string               `protobuf:"bytes,5,opt,name=service,proto3" json:"service,omitempty"`   // remove file (sub-category)
 	Category    string               `protobuf:"bytes,6,opt,name=category,proto3" json:"category,omitempty"` // agent, zalo_zns, zalo_active_message, image
 	Quantity    int64                `protobuf:"varint,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	Data        *CreditSendEntryData `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`
@@ -1129,6 +1129,132 @@ func (x *TrySpendCreditResponse) GetAllow() bool {
 	return false
 }
 
+type CreditSpendReportResponseData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ItemId string  `protobuf:"bytes,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	Data   []int64 `protobuf:"varint,4,rep,packed,name=data,proto3" json:"data,omitempty"` // by time
+}
+
+func (x *CreditSpendReportResponseData) Reset() {
+	*x = CreditSpendReportResponseData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_credit_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreditSpendReportResponseData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreditSpendReportResponseData) ProtoMessage() {}
+
+func (x *CreditSpendReportResponseData) ProtoReflect() protoreflect.Message {
+	mi := &file_credit_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreditSpendReportResponseData.ProtoReflect.Descriptor instead.
+func (*CreditSpendReportResponseData) Descriptor() ([]byte, []int) {
+	return file_credit_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *CreditSpendReportResponseData) GetItemId() string {
+	if x != nil {
+		return x.ItemId
+	}
+	return ""
+}
+
+func (x *CreditSpendReportResponseData) GetData() []int64 {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+type CreditSpendReportResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context                  `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string                           `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	CreditId  string                           `protobuf:"bytes,3,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
+	Datas     []*CreditSpendReportResponseData `protobuf:"bytes,4,rep,name=datas,proto3" json:"datas,omitempty"`
+}
+
+func (x *CreditSpendReportResponse) Reset() {
+	*x = CreditSpendReportResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_credit_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreditSpendReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreditSpendReportResponse) ProtoMessage() {}
+
+func (x *CreditSpendReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_credit_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreditSpendReportResponse.ProtoReflect.Descriptor instead.
+func (*CreditSpendReportResponse) Descriptor() ([]byte, []int) {
+	return file_credit_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *CreditSpendReportResponse) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *CreditSpendReportResponse) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *CreditSpendReportResponse) GetCreditId() string {
+	if x != nil {
+		return x.CreditId
+	}
+	return ""
+}
+
+func (x *CreditSpendReportResponse) GetDatas() []*CreditSpendReportResponseData {
+	if x != nil {
+		return x.Datas
+	}
+	return nil
+}
+
 var File_credit_proto protoreflect.FileDescriptor
 
 var file_credit_proto_rawDesc = []byte{
@@ -1305,9 +1431,25 @@ var file_credit_proto_rawDesc = []byte{
 	0x61, 0x6e, 0x63, 0x65, 0x5f, 0x66, 0x70, 0x76, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a,
 	0x62, 0x61, 0x6c, 0x61, 0x6e, 0x63, 0x65, 0x46, 0x70, 0x76, 0x12, 0x14, 0x0a, 0x05, 0x61, 0x6c,
 	0x6c, 0x6f, 0x77, 0x18, 0x07, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x61, 0x6c, 0x6c, 0x6f, 0x77,
-	0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73,
-	0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x22, 0x4c, 0x0a, 0x1d, 0x43, 0x72, 0x65, 0x64, 0x69, 0x74, 0x53, 0x70, 0x65, 0x6e, 0x64, 0x52,
+	0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74,
+	0x61, 0x12, 0x17, 0x0a, 0x07, 0x69, 0x74, 0x65, 0x6d, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x69, 0x74, 0x65, 0x6d, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x18, 0x04, 0x20, 0x03, 0x28, 0x03, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22, 0xb7,
+	0x01, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x64, 0x69, 0x74, 0x53, 0x70, 0x65, 0x6e, 0x64, 0x52, 0x65,
+	0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x03,
+	0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12,
+	0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1b,
+	0x0a, 0x09, 0x63, 0x72, 0x65, 0x64, 0x69, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x08, 0x63, 0x72, 0x65, 0x64, 0x69, 0x74, 0x49, 0x64, 0x12, 0x3b, 0x0a, 0x05, 0x64,
+	0x61, 0x74, 0x61, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x2e, 0x43, 0x72, 0x65, 0x64, 0x69, 0x74, 0x53, 0x70, 0x65, 0x6e, 0x64, 0x52,
+	0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x44, 0x61, 0x74,
+	0x61, 0x52, 0x05, 0x64, 0x61, 0x74, 0x61, 0x73, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1322,7 +1464,7 @@ func file_credit_proto_rawDescGZIP() []byte {
 	return file_credit_proto_rawDescData
 }
 
-var file_credit_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_credit_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_credit_proto_goTypes = []interface{}{
 	(*Credit)(nil),                               // 0: header.Credit
 	(*CreditSnapshoot)(nil),                      // 1: header.CreditSnapshoot
@@ -1337,28 +1479,32 @@ var file_credit_proto_goTypes = []interface{}{
 	(*CreditSpendLogRequest)(nil),                // 10: header.CreditSpendLogRequest
 	(*CreditSpendEntries)(nil),                   // 11: header.CreditSpendEntries
 	(*TrySpendCreditResponse)(nil),               // 12: header.TrySpendCreditResponse
-	(*common.Context)(nil),                       // 13: common.Context
+	(*CreditSpendReportResponseData)(nil),        // 13: header.CreditSpendReportResponseData
+	(*CreditSpendReportResponse)(nil),            // 14: header.CreditSpendReportResponse
+	(*common.Context)(nil),                       // 15: common.Context
 }
 var file_credit_proto_depIdxs = []int32{
-	13, // 0: header.Credit.ctx:type_name -> common.Context
-	13, // 1: header.CreditSnapshoot.ctx:type_name -> common.Context
-	13, // 2: header.CreditSpendEntry.ctx:type_name -> common.Context
+	15, // 0: header.Credit.ctx:type_name -> common.Context
+	15, // 1: header.CreditSnapshoot.ctx:type_name -> common.Context
+	15, // 2: header.CreditSpendEntry.ctx:type_name -> common.Context
 	8,  // 3: header.CreditSpendEntry.data:type_name -> header.CreditSendEntryData
 	4,  // 4: header.CreditSendEntryData.agent:type_name -> header.CreditSendEntryDataAgent
 	6,  // 5: header.CreditSendEntryData.zalo_zns:type_name -> header.CreditSendEntryDataZaloZNS
 	7,  // 6: header.CreditSendEntryData.zalo_active_message:type_name -> header.CreditSendEntryDataZaloActiveMessage
 	5,  // 7: header.CreditSendEntryData.email:type_name -> header.CreditSendEntryDataEmail
 	3,  // 8: header.CreditSendEntryData.file:type_name -> header.CreditSendEntryDataId
-	13, // 9: header.CreditSpendReportRequest.ctx:type_name -> common.Context
-	13, // 10: header.CreditSpendLogRequest.ctx:type_name -> common.Context
-	13, // 11: header.CreditSpendEntries.ctx:type_name -> common.Context
+	15, // 9: header.CreditSpendReportRequest.ctx:type_name -> common.Context
+	15, // 10: header.CreditSpendLogRequest.ctx:type_name -> common.Context
+	15, // 11: header.CreditSpendEntries.ctx:type_name -> common.Context
 	2,  // 12: header.CreditSpendEntries.entries:type_name -> header.CreditSpendEntry
-	13, // 13: header.TrySpendCreditResponse.ctx:type_name -> common.Context
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	15, // 13: header.TrySpendCreditResponse.ctx:type_name -> common.Context
+	15, // 14: header.CreditSpendReportResponse.ctx:type_name -> common.Context
+	13, // 15: header.CreditSpendReportResponse.datas:type_name -> header.CreditSpendReportResponseData
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_credit_proto_init() }
@@ -1523,6 +1669,30 @@ func file_credit_proto_init() {
 				return nil
 			}
 		}
+		file_credit_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreditSpendReportResponseData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_credit_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreditSpendReportResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1530,7 +1700,7 @@ func file_credit_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_credit_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
