@@ -338,6 +338,14 @@ message DatetimeCondition {
 	int64 last = 17; // 1440 => last 24h sec
 	int64 before_ago = 18; // 365*86400 sec
 
-	int64 after_now = 19;
-	int64 before_now = 20;
+	string after_var = 19; // user.attr[key=birthday]
+	string before_var = 20;
+
+	int64 after_var_sec = 21; // 86400
+	int64 before_var_sec = 22;
+
+	int64 after_relative_sec = 24;
+	int64 before_relative_sec = 25;
+
+	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
 }

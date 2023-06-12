@@ -1,26 +1,4 @@
-var date = {
-  type: "date",
 
-  // all
-  date: [
-    {
-      op: "lte",
-      lte: 328248942,
-    },
-    {
-      op: "lte_variable",
-      lte_variable: "user.birthday",
-    },
-    {
-      op: "lte_variable",
-      lte_variable: "order.checkout",
-    },
-    {
-      op: "gte_variable",
-      gte_variable: "order.checkin",
-    },
-  ],
-};
 
 var event = {
   type: "event",
@@ -50,16 +28,14 @@ var action = {
   wait: {
     branches: [
       {
-        ui_type: "until N day",
-        event_types: ["scheduled"],
+        ui_type: "until",
         condition: {
           all: [
             {
-              key: "action.last_run",
-              date: {
-                op: "before_now",
-                before_now: N,
-                unit: "day", // default ms
+              key: "now",
+              datetime: {
+                op: "after_relative",
+                after_realtive_sec: 86400,
               },
             },
           ],
@@ -85,12 +61,13 @@ var action = {
         condition: {
           all: [
             {
-              key: "user.birthday",
+              key: "now",
               type: "date",
-              date: {
-                op: "after_now",
-                after_now: N,
-                unit: "day",
+              datetime: {
+                op: "after_var",
+                after_var: `user.attributes.#(key=="birthday").value`,
+                var_format: "2006-01-02T15:04:05Z07:00", // could set to auto
+                after_var_sec: N * 86400,
               },
             },
           ],
@@ -111,22 +88,23 @@ var action = {
   name: "wait 1 day after checkin but do not cross 2 day",
   type: "wait",
   wait: {
-    ui_type: "wait",
-    event_types: ["scheduled", "order_updated", "order_created"],
-    condition: {
-      all: [
-        {
-          key: `order.fields.key=43.`,
+    branches: [{
+      event_types: ["scheduled", "order_updated", "order_created"],
+      ui_type: "wait",
+      condition: {
+        all: [{
+          key: 'now',
           type: "date",
           date: {
-            op: "before_now",
-            before_now: 1,
-            before_now_max: 2,
-            unit: "day",
+            op: "after_var",
+            after_var: `order.fields.#(key="checkin").value`,
+            var_format: 'unix_sec', // unix_milli, rfc3999
+            after_var_sec: 86400,
+            max_after_var_sec: 172800,
           },
-        },
-      ],
-    },
+        }],
+      },
+    }],
   },
 };
 
@@ -135,9 +113,9 @@ var action = {
   name: "wait until the last email is read or clicked",
   type: "wait",
   wait: {
-    event_types: ["message_pong"],
     branches: [
       {
+        event_types: ["message_pong"],
         ui_type: "till message read",
         conditions: {
           all: [
@@ -146,13 +124,13 @@ var action = {
               type: "text",
               text: {
                 op: "eq_var",
-                eq_variable: "actions.a434.messages.434.result.event.id",
+                eq_variable: "_result.actions.a434.messages.434.event.id",
               },
             },
             {
               one: [
                 {
-                  key: `event.data.message.pongs.type="message_read".type`,
+                  key: `_event.data.message.pongs.#(type=="message_read")#.type`,
                   type: "text",
                   text: {
                     op: "eq",
@@ -160,7 +138,7 @@ var action = {
                   },
                 },
                 {
-                  key: `event.data.message.pongs.type="message_clicked".type`,
+                  key: `_event.data.message.pongs.#(type=="message_clicked")#.type`,
                   type: "text",
                   text: {
                     op: "eq",
@@ -176,14 +154,14 @@ var action = {
   },
 };
 
-// Wait until an new order is placed
+// Wait until a random new order is placed
 var action = {
   name: "wait until a new order is placed",
   type: "wait",
   wait: {
-    event_types: ["order_created"],
     branches: [
       {
+        event_types: ["order_created"],
         ui_type: "",
         node_id: "next",
         condition: {
@@ -237,4 +215,4 @@ var action = {
 // 1. wait-canary/1, sẽ đọc nội dung của action, tìm ra các effect-events và đặt các scheduler cần thiết
 // 2. do-wating/2, đóng vai trò sensor, nhận event breath in. Nếu là effect events thì gọi hàm giống wait-canary/1 để đặt các scheduler mới
 //    nếu là execution-event  thì kiểm tra điều kiện trong branch. Nếu đúng thì thực thi, không thì thôi 
- 
+
