@@ -321,7 +321,6 @@ func CalcTotalOrder(order *Order) {
 
 		item.Total = price
 		item.FpvTotal = int64(price * order.CurrencyRate * 1000000)
-
 		subtotal += price
 	}
 

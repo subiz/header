@@ -140,6 +140,7 @@ message Bill {
 	optional string description = 12;
 
 	optional string credit_id = 15;
+	optional string status = 16;
 }
 
 message Bills {

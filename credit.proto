@@ -12,10 +12,10 @@ message Credit {
 	string id = 3;
 
 	string name = 4;
-	int64 balance_fpv = 5; // fpv
+	int64 fpv_balance = 5; // fpv
 
-	int64 credit_limit_fpv = 7; // 0 - 40 only set by subiz
-	int64 tax_fpv = 8; // 1000 -> 10%
+	int64 fpv_credit_limit = 7; // 0 - 40 only set by subiz
+	int64 fpv_tax = 8; // 1000 -> 10%
 
 	int64 created = 9;
 	string created_by = 10;
@@ -117,12 +117,14 @@ message CreditSpendLogRequest {
 	string service_id = 8; // filter by source
 
 	int64 limit = 10; // max : 20
+	string anchor = 11;
 }
 
 message CreditSpendEntries {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated CreditSpendEntry entries = 4;
+	string next_anchor = 5;
 }
 
 message TrySpendCreditResponse {
@@ -131,8 +133,6 @@ message TrySpendCreditResponse {
 	string credit_id = 3;
 
 	string service_id = 4;
-
-	int64 total_spend_fpv = 5;
 	int64 balance_fpv = 6;
 
 	bool allow = 7;
