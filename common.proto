@@ -14,6 +14,7 @@ message Context {
 
 	string from_service = 22; // campaign, bot
 	string from_srevice_id = 23; // cp329023
+	string credit_id = 24;
 }
 
 message Device {

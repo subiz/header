@@ -50,10 +50,13 @@ message CreditSpendEntry {
 	CreditSendEntryData data = 8;
 	string credit_id = 9;
 
-	int64 price_fpv = 10;
+	int64 fpv_unit_price = 10;
 
 	string service_id = 12; // cp4348934
 	string service_type = 13; // campaign, bot, popup
+
+	string item = 14;
+	string item_id = 15;
 }
 
 message CreditSendEntryDataId {
