@@ -35,6 +35,7 @@ service Map {
 }
 
 service AccountMgr {
+	rpc SearchAccount(header.Id) returns (header.Response);
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc GetGroup(Id) returns (header.AgentGroup);
@@ -335,11 +336,6 @@ service Noti5Service {
 	rpc AddToken(noti5.Token) returns (Empty);
 	rpc RemoveToken(noti5.Token) returns (Empty);
 	rpc CheckTokenExists(noti5.Token) returns (Empty);
-}
-
-// payment services
-service SubizInternalPaymentMgr {
-	rpc CreateBill(payment.Bill) returns (payment.Bill);
 }
 
 service PaymentMgr {
@@ -648,12 +644,14 @@ service CreditMgr {
 	rpc ReportCreditSpend(header.CreditSpendReportRequest) returns (header.CreditSpendReportResponse);
 	rpc ListCreditSpendLog(header.CreditSpendLogRequest) returns (header.CreditSpendEntries);
 
-	rpc ListBills(header.Id) returns (payment.Bills);
-
 	rpc ListCredits(header.Id) returns (header.Response); // credit
 	rpc AddCredit(header.Credit) returns (header.Response); // credit
 	rpc DeleteCredit(header.Id) returns (header.Response); // empty
 	rpc UpdateCredit(header.Credit) returns (header.Response); // credit
+
+	rpc ListBills(header.Id) returns (payment.Bills);
+	rpc CreateBill(payment.Bill) returns (payment.Bill); // subiz only
+	rpc UpdateBill(payment.Bill) returns (payment.Bill);
 }
 
 service FormMgr {

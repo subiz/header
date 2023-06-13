@@ -6561,6 +6561,9 @@ message Response {
 	ZaloCallConsent zalo_call_consent = 14;
 	Credit credit = 15;
 	repeated Credit credits = 16;
+
+	account.Account account = 17;
+	repeated account.Account accounts = 18;
 }
 
 message ZaloCallConsent {

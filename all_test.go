@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	pb "github.com/subiz/header/account"
+	payment "github.com/subiz/header/payment"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -124,17 +125,25 @@ func TestPartition(t *testing.T) {
 }
 
 func TestUnpack(t *testing.T) {
-	str := "1a196576726977616f686f646a686e787a6f71776668686f67757940b7dde7bc94304a0e636f6e74656e745f766965776564a2013f323d3a3b68747470733a2f2f6170702e737562697a2e636f6d2e766e2f636f6e766f3f7569643d2d266369643d63737269767a71716b706b666b726d726c78920353121a1a184f4f697a56576f51554570533652497444704d2b32413d3d1a297573616371717665626a69667768626c7763616762665f6167717176666a6e6a647177726778706863220a636c737562697a617069"
+	str := "221d537562697a204c6976652043686174205374616e6461726420506c616e2a4c55706772616465205374616e64617264205061636b616765202d2035204167656e7473202d2036206d6f6e7468732066726f6d2031332f30362f3230323320746f2030342f31302f3230323345ae479b434a212a1f10051a087374616e64617264280632087374616e6461726440a89ab39c8b3155ae479b43"
 
 	bs, err := hex.DecodeString(str)
 	if err != nil {
 		panic(err)
 	}
 
-	ev := &Event{}
+	ev := &payment.InvoiceItem{}
 	proto.Unmarshal(bs, ev)
 	out, _ := json.Marshal(ev)
+
 	fmt.Println(string(out))
+
+	desc := "Upgrade Standard Package - 5 Agents - 6 months from 13/06/2023 to 05/12/2023"
+	ev.Description = &desc
+	b, _ := proto.Marshal(ev)
+	str = hex.EncodeToString(b)
+
+	fmt.Println("STR", string(str))
 }
 
 func TestLang(t *testing.T) {
