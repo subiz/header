@@ -3,7 +3,6 @@ syntax = "proto3";
 package header;
 
 option go_package = "github.com/subiz/header";
-import "credit.proto";
 import "payment.proto";
 import "noti5.proto";
 import "account.proto";
@@ -339,7 +338,7 @@ service Noti5Service {
 }
 
 service PaymentMgr {
-	rpc SearchSub(account.SearchSubRequest) returns (account.AccSubs);
+	rpc SearchSub(account.SearchSubRequest) returns (AccSubs);
 	rpc Purchase(payment.Subscription) returns (payment.Invoice);
 	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription);
 	rpc GetSubscription(Id) returns (payment.Subscription);
@@ -648,10 +647,6 @@ service CreditMgr {
 	rpc AddCredit(header.Credit) returns (header.Response); // credit
 	rpc DeleteCredit(header.Id) returns (header.Response); // empty
 	rpc UpdateCredit(header.Credit) returns (header.Response); // credit
-
-	rpc ListBills(header.Id) returns (payment.Bills);
-	rpc CreateBill(payment.Bill) returns (payment.Bill); // subiz only
-	rpc UpdateBill(payment.Bill) returns (payment.Bill);
 }
 
 service FormMgr {

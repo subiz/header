@@ -322,19 +322,6 @@ message SyncPublicHolidaysRequest {
 	optional string lang = 3;
 }
 
-message AccSub {
-	optional string id = 2;
-	optional Account account = 3;
-	optional payment.Subscription subscription = 4;
-	repeated Agent agents = 5;
-	optional string stringify = 6;
-}
-
-message AccSubs {
-	repeated AccSub accsub = 2;
-	optional string anchor = 4;
-}
-
 message SearchSubRequest {
 	optional common.Context ctx = 1;
 	optional string query = 4;

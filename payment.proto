@@ -143,13 +143,6 @@ message Bill {
 	optional string status = 16;
 }
 
-message Bills {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string credit_id = 3;
-	repeated Bill bills = 5;
-}
-
 message Note {
 	optional common.Context ctx = 1;
 	optional string message = 4;
@@ -158,6 +151,7 @@ message Note {
 }
 
 message Invoices {
+	optional common.Context ctx = 1;
 	repeated Invoice invoices = 2;
 	optional string account_id = 3;
 	optional string anchor = 4;
@@ -167,6 +161,8 @@ message ListInvoiceRequest {
 	optional common.Context ctx = 1;
 	optional string anchor = 4;
 	optional string account_id = 5;
+
+	optional string credit_id = 6;
 }
 
 message Invoice {
