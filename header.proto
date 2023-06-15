@@ -6779,7 +6779,7 @@ message AccSub {
 	repeated account.Agent agents = 5;
 	string stringify = 6;
 	int64 num_open_invoices = 7;
-	repeated  Credit credits = 8;
+	repeated Credit credits = 8;
 }
 
 message AccSubs {

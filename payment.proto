@@ -178,10 +178,8 @@ message Invoice {
 	enum State {
 		draft = 0;
 		open = 1;
-		overdue = 2;
 		paid = 3;
 		void = 4;
-		queueing = 5;
 	}
 	optional string state = 10;
 	optional int64 created = 11;
@@ -225,6 +223,9 @@ message PlanInvoiceItem {
 	optional uint32 old_agent_count = 10;
 }
 
+message MarketingInvoiceItem {
+}
+
 message InvoiceItem {
 	optional string headline = 4;
 	optional string description = 5;
@@ -235,6 +236,7 @@ message InvoiceItem {
 		optional RenewInvoiceItem renew = 2;
 		optional AgentInvoiceItem agent = 3;
 		optional PlanInvoiceItem plan = 5;
+		optional MarketingInvoiceItem marketing = 6;
 	}
 	optional Data data = 9;
 	optional float total_price = 10;	// = (* quantity price)
