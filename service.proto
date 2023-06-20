@@ -34,7 +34,6 @@ service Map {
 }
 
 service AccountMgr {
-	rpc SearchAccount(header.Id) returns (header.Response);
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc GetGroup(Id) returns (header.AgentGroup);
