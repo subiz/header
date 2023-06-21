@@ -458,6 +458,10 @@ message UserRequest {
 	string channel = 5;
 	string channel_source = 6;
 	string profile_id = 7;
+
+	string label_source_channel = 9; // from specific channel
+	string label_source_channel_id = 10;
+	string label_source_id = 11;
 }
 
 message ListNotesRequest {
