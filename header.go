@@ -570,7 +570,7 @@ func NormEmail(email string) string {
 	}
 
 	if len(out) > 0 {
-		out = out[:len(email)-1] // remove last ,
+		out = out[:len(out)-1] // remove last ,
 	}
 	return out
 }

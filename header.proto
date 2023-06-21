@@ -3759,7 +3759,6 @@ message UserViewCondition {
 	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	string type = 5;
 
-
 	TextCondition text = 6;
 	BoolCondition boolean = 8;
 	FloatCondition number = 9;
