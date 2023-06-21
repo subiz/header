@@ -299,6 +299,12 @@ message UserLabel {
 
 	string by = 3;
 	int64 at = 5; // ms
+
+	string name = 6;
+
+	string source_channel = 17; // from specific channel
+	string source_channel_id = 18;
+	string source_id = 19;
 }
 
 message Label {
@@ -5259,7 +5265,6 @@ message TasksRequest {
 
 	string supervisor = 25; // task.supervisor = supervisor && task.assignee != supervisor
 	repeated string assignees = 26;
-	repeated string not_assignees = 27;
 	string is_pinned = 28; // yes/no
 	string watcher = 29;
 
