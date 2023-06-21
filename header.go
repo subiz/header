@@ -548,7 +548,7 @@ func NormEmail(email string) string {
 		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
 	})
 
-	emails := []string{}
+	emails := map[string]bool{}
 	for _, email := range emailsplit {
 		arr := make([]rune, 0)
 		for _, r := range email {
@@ -562,9 +562,17 @@ func NormEmail(email string) string {
 			continue
 		}
 		email = Substring(email, 0, 320)
-		emails = append(emails, email)
+		emails[email] = true
 	}
-	return strings.Join(emails, ",")
+	out := ""
+	for em := range emails {
+		out += em + ","
+	}
+
+	if len(out) > 0 {
+		out = out[:len(email)-1] // remove last ,
+	}
+	return out
 }
 
 func Phone(phone string) string {
