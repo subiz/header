@@ -6007,7 +6007,7 @@ message OutboundCallEntry {
 	string number = 4; // , ; or / delimeter
 	string from_number = 5;
 	string user_id = 6; // from segment // primary
-	string status = 7; // open(empty), calling, cancel, noanswer (busy), failed (wrong_number or congestion), answered, deleted
+	string status = 7; // open(empty), cancel, noanswer (busy), failed (wrong_number or congestion), answered, deleted
 	bool goal_reached = 8;
 	string assignee = 9;
 	string created_by = 10;
@@ -6024,6 +6024,8 @@ message OutboundCallEntry {
 	int64 updated = 25;
 	int64 num_attempts = 26;
 	bool do_not_call = 27;
+
+	string call_status = 28; // empty, calling, ended
 }
 
 message WorkflowGoal {
