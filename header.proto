@@ -6626,8 +6626,6 @@ message SchedulerTask {
 	string key = 9;
 }
 
-
-
 message Credit {
 	common.Context ctx = 1;
 	string account_id = 2;

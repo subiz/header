@@ -6,12 +6,6 @@ option go_package = "github.com/subiz/header/payment";
 
 import "common.proto";
 
-enum Currency {
-	usd = 0;
-	vnd = 1;
-	brl = 2;
-}
-
 message ListCommentsRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -141,6 +135,7 @@ message Bill {
 
 	optional string credit_id = 15;
 	optional string status = 16;
+	optional string currency = 17;
 }
 
 message Note {
@@ -197,6 +192,7 @@ message Invoice {
 	optional Plan current_plan = 26; // optional
 
 	optional string credit_id = 27;
+	optional string currency = 28; // VND
 }
 
 message AgentInvoiceItem {
