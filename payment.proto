@@ -535,6 +535,7 @@ message String {
 
 message PayRequest {
 	optional common.Context ctx = 1;
+	optional string credit_id = 3;
 	optional string account_id = 8;
 	repeated string invoice_ids = 6;
 	optional string description = 7;
