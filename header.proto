@@ -351,14 +351,6 @@ message Users {
 	string anchor = 9;
 }
 
-message SessionCampaign {
-	string name = 2;
-	string source = 3;
-	string medium = 4;
-	string term = 5;
-	string content = 6;
-}
-
 message AttributeDefinitionListItem {
 	// value
 	string value = 4; // cannot be changed
@@ -6007,7 +5999,7 @@ message OutboundCallEntry {
 	string number = 4; // , ; or / delimeter
 	string from_number = 5;
 	string user_id = 6; // from segment // primary
-	string status = 7; // empty, calling, answered, noanswer (busy), failed (wrong_number or congestion), cancel
+	string status = 7; // empty, calling, answered, noanswer (busy), failed (wrong_number or congestion), cancel, deleted
 	bool goal_reached = 8;
 	string assignee = 9;
 	string created_by = 10;
@@ -6017,7 +6009,7 @@ message OutboundCallEntry {
 	int64 called = 13;
 	string call_id = 14; // conversation id
 	repeated string other_call_ids = 15;
-	string task_id = 16;
+	string next_call_id = 16; // realtime only
 	int64 created = 18;
 	int64 scheduled_in = 19;
 	FormSubmission submission = 23; // dont return to client
