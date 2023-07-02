@@ -74,7 +74,7 @@ message ListNotiRequest {
 message Attribute {
 	string key = 4;
 	int64 modified = 8;
-	// string modified_by = 5;
+	string by_type = 5;
 
 	string value = 9; // json encode primary value
 	string text = 10;
@@ -99,6 +99,10 @@ message Attribute {
 		push = 5; // add a new value (for array) // unique
 	}
 	string action = 18;
+
+	string channel = 21; // sync from channel
+	string channel_source = 22;
+	string channel_profile = 23;
 }
 
 message PhoneDevices {
@@ -224,7 +228,7 @@ message User {
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
 	repeated UserSegment segments = 66; // read-only
 	repeated User secondaries = 67; // read-only
-	map<string, UserConversationTag> conversation_tags = 68; // read-only
+	// map<string, UserConversationTag> conversation_tags = 68; // read-only
 	repeated UserAds ads = 70; // read-only
 
 	string first_web_domain = 71; // holap only
@@ -301,6 +305,7 @@ message UserLabel {
 	int64 at = 5; // ms
 
 	string name = 6;
+	string title = 7; // use instead of name
 
 	string source_channel = 17; // from specific channel
 	string source_channel_id = 18;
@@ -403,6 +408,8 @@ message AttributeDefinition {
 
 	int64 archived = 26;
 	int64 usage = 27; // number of user has this attribute
+
+	bool prevent_auto_override = 30;
 }
 
 message AttributeDefinitions {
