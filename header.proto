@@ -211,7 +211,6 @@ message User {
 	// string type = 47; // empty = visitor, lead, customer, deleted
 	string primary_id = 49; // rename to customer_id
 	repeated string secondary_ids = 50;
-
 	string profile_id = 52; // user-id
 	string channel_source = 53; // pvcombank require verification
 	string channel = 54; // account => require verification, acc logo
@@ -230,8 +229,6 @@ message User {
 	repeated User secondaries = 67; // read-only
 	// map<string, UserConversationTag> conversation_tags = 68; // read-only
 	repeated UserAds ads = 70; // read-only
-
-	string first_web_domain = 71; // holap only
 
 	int64 deleted = 72;
 	string deleted_by = 73;
@@ -6026,6 +6023,8 @@ message OutboundCallEntry {
 
 	string note = 28; // max 1024
 	int64 reattempt_at = 29;
+
+	int64 total_call_sec = 30;
 }
 
 message WorkflowGoal {
@@ -6190,33 +6189,6 @@ message ListFormSubmissionRequest {
 	string category = 6; // comma separated
 }
 
-message OutboundCallReport {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	repeated string labels = 3; // failed, goal_reached
-	repeated float points = 4; //  12    , 14
-	float total = 5;
-	float avg = 6;
-}
-
-// {dim: call, agent_id, from_hour, to_hour }
-// => {points: [3,4,5,6,7,8,...], total: 43}
-
-// {dim: call, goal_reached, agent_id, from_hour, to_hour }
-// => {points: [3,4,5,6,7,8,...], total: 12}
-
-// {dim: call_sec, agent_id }
-// => {points: [...], total: 43, avg: 12 }
-
-// {dim: call, agg_by: status}
-// => {labels: [open, failed, answer, hostile], points: [12,31,32,43, 12]}
-
-// {dim: field:f1, agg_by: answer } (text)
-// => {labels: [open, no_answer, answered], points: [12, 32, 12]}
-
-// {dim: field:f3, agg_by: answer }
-// => {labels: [open, no_answer, answer1, answer2], points: [12, 32, 12, 23]}
 message OutboundCallReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6225,15 +6197,6 @@ message OutboundCallReportRequest {
 	string agent_id = 4;
 	string goal_reached = 6; // empty, yes, no
 
-	string dim = 7; // call, call_sec, field:f1
-	// string agg = 8; // sum, avg
-	string agg_by = 9; // hour (empty), day, status, agent, answer
-
-	// some examples:
-	//   calls agg(count) group_by(time) => bar chart: total calls by times
-	//   calls agg(sum) group_by(*) => Number: total number of calls
-	//   calls agg(count) group_by(status) => pie chart: total number of calls by status
-
 	int64 from_hour = 10;
 	int64 to_hour = 11;
 
@@ -6241,28 +6204,47 @@ message OutboundCallReportRequest {
 	string timezone = 13; // +07:00
 }
 
-message OutboundCallByAgentReport {
+message OutboundCallReportResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
-	repeated OutboundCallAgentReport agent_reports = 4;
-	OutboundCallAgentReport all = 5;
+
+	int64 total_call = 5;
+	int64 total_called = 6;
+
+	int64 num_goal_reached = 7;
+	int64 percent_goal_reached = 8; // 50%(5000), 24,34% (2434)
+
+	int64 num_anser_calls = 9;
+	int64 num_noanswer_calls = 10;
+	int64 num_do_not_calls = 11;
+
+	int64 total_call_sec = 12;
+	int64 avg_call_sec = 13; // 20.7sec => 2070
+
+	repeated int64 num_call_datapoints = 14;
+	repeated int64 num_goal_reach_call_datapoints = 15;
+
+	repeated OutboundCallAgentReport agents = 16;
+	repeated OutboundCallSurveyReport surveys = 17;
+}
+
+message OutboundCallSurveyReport {
+	string question_key = 3;
+
+	repeated int64 datapoints = 4;
+	repeated string labels = 5;
 }
 
 message OutboundCallAgentReport {
 	string agent_id = 3;
-	// int64 total_assigned_calls = 4;
 	int64 num_calls = 5;
 	int64 num_goal_reacheds = 6;
 	int64 total_call_sec = 7;
 	int64 avg_call_sec = 8;
 
-	int64 num_machine_calls = 9;
+	int64 num_anser_calls = 9;
 	int64 num_noanswer_calls = 10;
-	int64 num_refused_calls = 11;
-	int64 num_wrong_numbers = 12;
-	int64 num_scheduled_numbers = 13;
-	int64 num_answered_calls = 14;
-	int64 num_hostile_calls = 15;
+	int64 num_do_not_calls = 11;
 }
 
 message HourEventMeta {

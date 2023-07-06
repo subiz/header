@@ -124,7 +124,6 @@ service UserMgr {
 	rpc DeleteUser(Id) returns (Empty);
 
 	rpc CreateUser(header.User) returns (Id);
-	rpc UpdateUser(header.User) returns (Id);
 	rpc UpdateUser2(header.User) returns (header.User);
 
 	rpc RemoveUser(header.Id) returns (header.Empty);
@@ -635,11 +634,8 @@ service CampaignMgr {
 	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc GetOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc RemoveOutboudCall(header.OutboundCallEntry) returns (header.Empty);
-	rpc ReportOutboundCallByAgents(header.OutboundCallReportRequest) returns(header.OutboundCallByAgentReport);
-	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallReport);
-
+	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallReportResponse);
 	rpc FindNextCall(Id) returns (header.OutboundCallEntry);
-
 }
 
 service CreditMgr {
