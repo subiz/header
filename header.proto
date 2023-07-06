@@ -208,7 +208,7 @@ message User {
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
 	// bool is_lead = 43;
-	// string type = 47; // empty = visitor, lead, customer, deleted
+	string type = 47; // empty = visitor, contact
 	string primary_id = 49; // rename to customer_id
 	repeated string secondary_ids = 50;
 	string profile_id = 52; // user-id
@@ -234,6 +234,11 @@ message User {
 	string deleted_by = 73;
 
 	repeated UserCampaign campaigns = 74;
+	repeated string related_ids = 75;
+
+	string merge_by = 76;
+	string merge_by_type = 77;
+	string merged_at = 78;
 }
 
 message UserAds {
@@ -770,6 +775,10 @@ message Events {
 	int64 total = 2;
 	string anchor = 3;
 	int64 last_modified = 5;
+
+	// for realtime
+	string sequential_token = 6;
+	string host = 7;
 }
 
 message Event {

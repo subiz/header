@@ -381,6 +381,8 @@ service PaymentMgr {
 // pubsub services
 service Pubsub {
 	rpc Publish(header.PublishMessage) returns (Empty);
+	rpc Poll(Id) returns (Events);
+	rpc Subs(RealtimeSubscription) returns (RealtimeSubscription);
 }
 
 service FabikonService {
