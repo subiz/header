@@ -775,10 +775,6 @@ message Events {
 	int64 total = 2;
 	string anchor = 3;
 	int64 last_modified = 5;
-
-	// for realtime
-	string sequential_token = 6;
-	string host = 7;
 }
 
 message Event {
@@ -2331,13 +2327,20 @@ message Frequently {
 ////////////////////
 message RealtimeSubscription {
 	common.Context ctx = 1;
-	string initial_token = 2;
-	repeated string events = 3;
+	string account_id = 2;
+	string connection_id = 3;
 
-	string host = 5; // notify client about the wrong host
+	string initial_token = 4;
+	repeated string events = 5;
+
+	string host = 6; // notify client about the wrong host
 }
 
 message PollResult {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string connection_id = 3;
+
 	repeated Event events = 4;
 	string sequential_token = 6;
 
