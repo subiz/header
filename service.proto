@@ -381,7 +381,7 @@ service PaymentMgr {
 // pubsub services
 service Pubsub {
 	rpc Publish(PublishMessage) returns (Empty); // deprecate
-	rpc Fire(PublishMessage) returns (Empty);
+	rpc Fire(PsMessage) returns (Empty);
 	rpc Poll(RealtimeSubscription) returns (PollResult);
 	rpc Subscribe(RealtimeSubscription) returns (RealtimeSubscription);
 }
