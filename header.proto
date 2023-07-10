@@ -2367,16 +2367,6 @@ message RealtimeToken {
 	int64 package_size = 9;
 }
 
-message PublishMessage {
-	common.Context ctx = 1;
-
-	repeated string topics = 2; // remove
-	bytes payload = 4; // remove
-
-	string account_id = 5; // remove
-	bool not_urgent = 6;
-}
-
 message PsMessage {
 	common.Context ctx = 1;
 	string account_id = 2;
