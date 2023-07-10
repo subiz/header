@@ -83,6 +83,7 @@ message Attribute {
 	string datetime = 13;
 	repeated string list = 14; // remove [a,b,c]
 	// repeated Attribute revisions = 15;
+
 	repeated string other_values = 20;
 
 	string type = 16; // read-only
@@ -103,6 +104,9 @@ message Attribute {
 	string channel = 21; // sync from channel
 	string channel_source = 22;
 	string channel_profile = 23;
+
+	string label = 24; // home, work
+	repeated Attribute others = 25;
 }
 
 message PhoneDevices {
