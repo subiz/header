@@ -375,6 +375,7 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 	opts = append([]grpc.DialOption{}, opts...)
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	// opts = append(opts, sgrpc.WithCache())
+	opts = append(opts, grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(50*1024*1024)))
 	opts = append(opts, WithErrorStack())
 	opts = append(opts, grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`))
 	opts = append(opts, grpc.WithKeepaliveParams(keepalive.ClientParameters{

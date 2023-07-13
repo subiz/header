@@ -100,13 +100,7 @@ message Attribute {
 		push = 5; // add a new value (for array) // unique
 	}
 	string action = 18;
-
-	string channel = 21; // sync from channel
-	string channel_source = 22;
-	string channel_profile = 23;
-
-	string label = 24; // home, work
-	repeated Attribute others = 25;
+	repeated string other_labels = 24; // home, work for other value
 }
 
 message PhoneDevices {
@@ -205,7 +199,6 @@ message User {
 	common.Context ctx = 1;
 	string id = 3;
 	string account_id = 4;
-	// repeated string aliases = 5;
 	repeated Attribute attributes = 18;
 
 	// UserSession session = 40; // deprecating
@@ -214,7 +207,7 @@ message User {
 	// bool is_lead = 43;
 	// string type = 47; // empty = guest - contact
 	string primary_id = 49; // rename to customer_id
-	repeated string secondary_ids = 50; // reduce usage
+	repeated string secondary_ids = 50;
 	string profile_id = 52; // user-id
 	string channel_source = 53; // pvcombank require verification
 	string channel = 54; // account => require verification, acc logo
@@ -240,8 +233,7 @@ message User {
 	repeated UserCampaign campaigns = 74;
 	repeated RelatedUser relateds = 75;
 
-	string merge_by = 76;
-	string merge_by_type = 77;
+	string merged_by = 76;
 	string merged_at = 78;
 }
 
