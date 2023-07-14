@@ -868,6 +868,7 @@ message Data {
 	OutboundCallEntry outbound_call_entry = 106;
 
 	WorkflowPump workflow_pump = 107;
+	OutboundCallUpdateEvent outbound_call_update = 108;
 }
 
 message WebRTCMessage {
@@ -6796,4 +6797,13 @@ message AccSubs {
 	common.Context ctx = 1;
 	repeated AccSub accsub = 2;
 	string anchor = 4;
+}
+
+message OutboundCallUpdateEvent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	int64 total_entries = 4; // 301
+	int64 total_completed_entries = 5;
+	repeated OutboundCallAgentReport agents = 6;
 }
