@@ -194,6 +194,9 @@ service UserMgr {
 	rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse);
 	rpc ListUserIds(header.UsersRequest) returns (header.Ids);
 	rpc ListUserIdWithPhones(header.UsersRequest) returns (header.Users);
+
+	rpc ListRelatedUsers(header.Id) returns (header.RelatedUsers);
+	rpc RemoveRelatedUsers(header.RelatedUser) returns (header.Empty);
 }
 
 service LiveMgr {

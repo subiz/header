@@ -76,12 +76,12 @@ message Attribute {
 	int64 modified = 8;
 	string by_type = 5;
 
-	string value = 9; // json encode primary value
+	// string value = 9; // json encode primary value
 	string text = 10;
 	double number = 11;
 	bool boolean = 12;
 	string datetime = 13;
-	repeated string list = 14; // remove [a,b,c]
+	// repeated string list = 14; // remove [a,b,c]
 	// repeated Attribute revisions = 15;
 
 	repeated string other_values = 20;
@@ -204,8 +204,6 @@ message User {
 	// UserSession session = 40; // deprecating
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
-	// bool is_lead = 43;
-	// string type = 47; // empty = guest - contact
 	string primary_id = 49; // rename to customer_id
 	repeated string secondary_ids = 50;
 	string profile_id = 52; // user-id
@@ -231,17 +229,27 @@ message User {
 	string deleted_by = 73;
 
 	repeated UserCampaign campaigns = 74;
-	repeated RelatedUser relateds = 75;
 
 	string merged_by = 76;
 	string merged_at = 78;
 }
 
+message RelatedUsers {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated RelatedUser releated_users = 9;
+}
+
 message RelatedUser {
-	string with_user_id = 4;
-	string suggested_by = 5;
-	string suggested_by_type = 6;
+	string from_user_id = 4;
+	string with_user_id = 5;
+
+	string suggested_by = 6;
+	string suggested_by_type = 7;
 	string suggested_reason = 8; // same_email, same_phone
+
+	User user = 9; // read only
 }
 
 message UserAds {
