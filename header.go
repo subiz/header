@@ -42,7 +42,7 @@ func GetAttr(u *User, key string, typ string) interface{} {
 		case AttributeDefinition_boolean.String():
 			return a.GetBoolean()
 		case "list":
-			return a.GetList()
+			return a.GetOtherValues()
 		case AttributeDefinition_datetime.String():
 			t, err := time.Parse(time.RFC3339Nano, a.GetDatetime())
 			if err != nil {
@@ -80,7 +80,10 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 		a.Boolean = v
 	case "list":
 		ss, _ := val.([]string)
-		a.List = ss
+		if len(ss) > 0 {
+			a.OtherValues = ss[1:]
+			a.Text = ss[0]
+		}
 	case AttributeDefinition_datetime.String():
 		t, _ := val.(time.Time)
 		a.Datetime = t.Format(time.RFC3339)
@@ -90,8 +93,12 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 			continue
 		}
 
-		i.Text, i.Number, i.Boolean, i.Datetime, i.List =
-			a.Text, a.Number, a.Boolean, a.Datetime, a.List
+		i.Text, i.Number, i.Boolean, i.Datetime =
+			a.Text, a.Number, a.Boolean, a.Datetime
+		if typ == "list" {
+			i.OtherValues = a.OtherValues
+		}
+
 		return
 	}
 
@@ -135,7 +142,10 @@ func UpdateAttr(u *User, key string, typ string, val interface{}, action string)
 		a.Boolean = v
 	case "list":
 		ss, _ := val.([]string)
-		a.List = ss
+		if len(ss) > 0 {
+			a.OtherValues = ss[1:]
+			a.Text = ss[0]
+		}
 	case AttributeDefinition_datetime.String(), "date", "time":
 		var d time.Time
 		switch t := val.(type) {
