@@ -6265,9 +6265,12 @@ message OutboundCallAgentReport {
 	int64 total_call_sec = 7;
 	int64 avg_call_sec = 8;
 
-	int64 num_anser_calls = 9;
+	int64 num_answer_calls = 9;
 	int64 num_noanswer_calls = 10;
 	int64 num_do_not_calls = 11;
+
+	int64 num_today_calls = 12;
+	int64 num_today_goal_reacheds = 13;
 }
 
 message HourEventMeta {
@@ -6811,7 +6814,7 @@ message OutboundCallUpdateEvent {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string campaign_id = 3;
-	int64 total_entries = 4; // 301
-	int64 total_completed_entries = 5;
+	int64 total_calls = 4; // 301
+	int64 total_completed_calls = 5;
 	repeated OutboundCallAgentReport agents = 6;
 }
