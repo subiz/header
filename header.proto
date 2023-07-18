@@ -1424,6 +1424,7 @@ message Message {
 	string message_tag = 46;
 
 	I18nString i18n_text = 47;
+	string template_id = 48;
 }
 
 message MessageReferral {
@@ -2160,7 +2161,11 @@ message ActionCreateTask {
 
 	string title_quill_delta = 9;
 	string note_quill_delta = 10;
+
 	int64 priority = 11; // task.priority
+
+	string title_template = 12;
+	string note_template = 13;
 }
 
 message ActionConfirmOrder {

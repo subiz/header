@@ -125,6 +125,7 @@ service UserMgr {
 
 	rpc CreateUser(header.User) returns (Id);
 	rpc UpdateUser2(header.User) returns (header.User);
+	rpc UpdateUser(header.User) returns (header.User); // new
 
 	rpc RemoveUser(header.Id) returns (header.Empty);
 	rpc RestoreUser(header.Id) returns (header.Empty);
