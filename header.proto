@@ -123,7 +123,7 @@ message PhoneDevice {
 	// phone calls to (from) this device will be considered being dialed to owner and (by) those agents
 	repeated string bind_to_agents = 10;
 
-	string type = 11; // webphone, appphone, webcall
+	string type = 11; // webphone, webcall
 
 	string name = 12;
 	string description = 13;
@@ -134,7 +134,7 @@ message PhoneDevice {
 	string driver = 16; // subiz stringee
 
 	int64 disabled = 17;
-
+	string transport_protocol = 18; // default=udp, tcp
 	// int64 extension = 18; // auto-increasement 5001, 5002, 5003
 
 	int64 updated = 30;
