@@ -6823,3 +6823,15 @@ message OutboundCallUpdateEvent {
 	int64 total_completed_calls = 5;
 	repeated OutboundCallAgentReport agents = 6;
 }
+message DocumentPartTerm {
+	common.Context ctx = 1;
+ 	int64 part_ID=2;
+	repeated string terms=3;
+}
+message DocIndexRequestFillTerm {
+	common.Context ctx = 1;
+	string type=2;
+	string document_id=3;
+	int64 part_ID=4;
+	string Content=5;
+}

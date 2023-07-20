@@ -30,17 +30,17 @@ func ObjectPath(object interface{}, keyWithDots string) interface{} {
 			if v.Kind() == reflect.Slice {
 				found := false
 				/*
-				for _, item := range v {
-					ks := strings.Split(key, "=")
-					subkey := ks[0]
-					var js any
-					json.Unmarshal(byte(strings.Join(ks[1], "=")), &js)
-					subval := ObjectPath(v, subkey)
-					if subval == subjson {
-						found = true
-						break
+					for _, item := range v {
+						ks := strings.Split(key, "=")
+						subkey := ks[0]
+						var js any
+						json.Unmarshal(byte(strings.Join(ks[1], "=")), &js)
+						subval := ObjectPath(v, subkey)
+						if subval == subjson {
+							found = true
+							break
+						}
 					}
-				}
 				*/
 				if found {
 					continue
