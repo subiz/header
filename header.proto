@@ -6825,13 +6825,17 @@ message OutboundCallUpdateEvent {
 }
 message DocumentPartTerm {
 	common.Context ctx = 1;
- 	int64 part_ID=2;
-	repeated string terms=3;
+	map<int64,TermsDay > part_terms = 5;
+}
+message TermsDay {
+	common.Context ctx = 1;
+	repeated string terms=2;
+    int64 day=3;
 }
 message DocIndexRequestFillTerm {
 	common.Context ctx = 1;
 	string type=2;
 	string document_id=3;
-	int64 part_ID=4;
-	string Content=5;
+	int64 part_id=4;
+	string content=5;
 }
