@@ -126,6 +126,7 @@ service UserMgr {
 	rpc CreateUser(header.User) returns (Id);
 	rpc UpdateUser2(header.User) returns (header.User);
 	rpc UpdateUser(header.User) returns (header.User); // new
+	rpc TryUpdateUser(header.User) returns (header.User); // new
 
 	rpc RemoveUser(header.Id) returns (header.Empty);
 	rpc RestoreUser(header.Id) returns (header.Empty);
@@ -178,7 +179,6 @@ service UserMgr {
 	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse);
 
 	rpc ListSecondaryUsers(Id) returns (Users);
-	rpc RecommendRelatedUsers(Id) returns (Users);
 
 	rpc LinkProductUrl(header.Product) returns (header.Product);
 
