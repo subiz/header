@@ -546,25 +546,6 @@ func NormPhone(phone string) string {
 	return strings.Join(phones, ",")
 }
 
-func Norm1Phone(phone string) string {
-	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
-		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
-	})
-
-	phone = phonesplit[0]
-	arr := make([]rune, 0)
-	for _, r := range phone {
-		if r >= '0' && r <= '9' {
-			arr = append(arr, r)
-		}
-	}
-	phone = string(arr)
-	if strings.HasPrefix(phone, "0") {
-		phone = "84" + phone[1:]
-	}
-	return phone
-}
-
 // NormPhone converts an user input phone number to
 // standalized phone number
 // (84)35 9423 423 => 0359423423
@@ -605,8 +586,16 @@ func NormEmail(email string) string {
 	return out
 }
 
-func Norm1Email(email string) string {
+func Email(email string) string {
 	email = strings.TrimSpace(email)
+	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
+		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
+	})
+
+	if email == "" {
+		return ""
+	}
+
 	em, _ := mail.ParseAddress(email)
 	if em == nil {
 		return ""
@@ -615,9 +604,6 @@ func Norm1Email(email string) string {
 	if email == "" {
 		return ""
 	}
-	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
-		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
-	})
 
 	email = emailsplit[0]
 	arr := make([]rune, 0)
@@ -640,34 +626,21 @@ func Norm1Email(email string) string {
 
 func Phone(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
-		return r == ',' || r == ';' || r == '/' || r == '\\'
+		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
 	})
 
-	phones := []string{}
-	for _, phone := range phonesplit {
-		arr := make([]rune, 0)
-		for _, r := range phone {
-			if r >= '0' && r <= '9' {
-				arr = append(arr, r)
-			}
-		}
-		number := string(arr)
-		if number != "" {
-			phones = append(phones, number)
+	phone = phonesplit[0]
+	arr := make([]rune, 0)
+	for _, r := range phone {
+		if r >= '0' && r <= '9' {
+			arr = append(arr, r)
 		}
 	}
-
-	if len(phones) == 0 {
-		return ""
+	phone = string(arr)
+	if strings.HasPrefix(phone, "0") {
+		phone = "84" + phone[1:]
 	}
-
-	// remove 84
-	for i, phone := range phones {
-		if strings.HasPrefix(phone, "0") {
-			phones[i] = "84" + phone[1:]
-		}
-	}
-	return phones[0]
+	return phone
 }
 
 func ContainString(ss []string, s string) bool {
