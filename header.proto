@@ -5979,6 +5979,7 @@ message Campaign {
 	int64 workflow_processed_count = 48;
 
 	string credit_id = 49;
+	int64 state_updated_at =50; //only save time user (agent,accout) updated
 }
 
 message WorkflowExitCondition {
