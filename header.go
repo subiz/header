@@ -586,7 +586,7 @@ func NormEmail(email string) string {
 	return out
 }
 
-func Email(email string) string {
+func EmailAddress(email string) string {
 	email = strings.TrimSpace(email)
 	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
 		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
@@ -624,7 +624,7 @@ func Email(email string) string {
 	return Substring(email, 0, 320)
 }
 
-func Phone(phone string) string {
+func PhoneNumber(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
 		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
 	})

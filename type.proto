@@ -216,9 +216,6 @@ enum RealtimeType {
 
 	user_lifecycle_stage_changed = 221;
 
-	user_linked = 222;
-	user_unlinked = 223;
-
 	event_type_updated = 225;
 
 	segment_updated = 226;
