@@ -2,6 +2,7 @@ package header
 
 import (
 	"encoding/json"
+	"net/mail"
 	"reflect"
 	"strconv"
 	"strings"
@@ -545,6 +546,25 @@ func NormPhone(phone string) string {
 	return strings.Join(phones, ",")
 }
 
+func Norm1Phone(phone string) string {
+	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
+		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
+	})
+
+	phone = phonesplit[0]
+	arr := make([]rune, 0)
+	for _, r := range phone {
+		if r >= '0' && r <= '9' {
+			arr = append(arr, r)
+		}
+	}
+	phone = string(arr)
+	if strings.HasPrefix(phone, "0") {
+		phone = "84" + phone[1:]
+	}
+	return phone
+}
+
 // NormPhone converts an user input phone number to
 // standalized phone number
 // (84)35 9423 423 => 0359423423
@@ -583,6 +603,39 @@ func NormEmail(email string) string {
 		out = out[:len(out)-1] // remove last ,
 	}
 	return out
+}
+
+func Norm1Email(email string) string {
+	email = strings.TrimSpace(email)
+	em, _ := mail.ParseAddress(email)
+	if em == nil {
+		return ""
+	}
+	email = em.Address
+	if email == "" {
+		return ""
+	}
+	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
+		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
+	})
+
+	email = emailsplit[0]
+	arr := make([]rune, 0)
+	for _, r := range email {
+		if r != '"' && r != '\'' {
+			arr = append(arr, r)
+		}
+	}
+	email = strings.ToLower(string(arr))
+
+	// RF3696: That limit is a maximum of 64 characters (octets)
+	// in the "local part" (before the "@") and a maximum of 255 characters
+	// (octets) in the domain part (after the "@") for a total length of 320
+	// characters. However, there is a restriction in RFC 2821 on the length of an
+	// address in MAIL and RCPT commands of 256 characters.  Since addresses
+	// that do not fit in those fields are not normally useful, the upper
+	// limit on address lengths should normally be considered to be 256.
+	return Substring(email, 0, 320)
 }
 
 func Phone(phone string) string {
