@@ -1101,6 +1101,7 @@ message TimmingCondition {
 	string business_hour = 3; // [in, notIn] if this is true, ignore all other timming conditions
 	repeated string days_of_week = 2; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	repeated int32 minute_of_days = 4; // pair [0-4] [6-9]
+	int64 end_time=5;
 }
 
 message ChannelCondition {
