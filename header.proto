@@ -361,9 +361,10 @@ message TryUpdateUserResult {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string code = 4;  // ok, dupplicated
+	string code = 4;  // ok, duplicated
 	repeated User users = 8;
-	repeated string dupplicated_fields = 9;
+	repeated string duplicated_fields = 9;
+	repeated string duplicated_values = 10;
 }
 
 message Users {

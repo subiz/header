@@ -605,7 +605,11 @@ func EmailAddress(email string) string {
 		return ""
 	}
 
-	email = emailsplit[0]
+	if len(emailsplit) > 0 {
+		email = emailsplit[0]
+	} else {
+		return ""
+	}
 	arr := make([]rune, 0)
 	for _, r := range email {
 		if r != '"' && r != '\'' {
@@ -628,7 +632,9 @@ func PhoneNumber(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
 		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
 	})
-
+	if len(phonesplit) == 0 {
+		return ""
+	}
 	phone = phonesplit[0]
 	arr := make([]rune, 0)
 	for _, r := range phone {

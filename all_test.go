@@ -3,6 +3,7 @@ package header
 import (
 	"encoding/hex"
 	"encoding/json"
+	"strings"
 	"fmt"
 	"hash/crc32"
 	"testing"
@@ -82,6 +83,30 @@ func TestNormPhone(t *testing.T) {
 	}
 }
 
+func TestPhoneNumber(t *testing.T) {
+	testcases := []struct {
+		in  string
+		out string
+	}{
+		{"", ""},
+		{"(84)35 9423 423", "84359423423"},
+		{"(+84)35.9423 423", "84359423423"},
+		{"(84)35 9423 423,+843630985", "84359423423"},
+		{",,,", ""},
+		{",,123123123,", "123123123"},
+		{",,,", ""},
+		{"abc@gmail.com", ""},
+		{"245abc@gmail.com", "245"},
+		{",;84123123123,", "84123123123"},
+	}
+
+	for i, tc := range testcases {
+		if tc.out != PhoneNumber(tc.in) {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, PhoneNumber(tc.in))
+		}
+	}
+}
+
 func TestAssignObject(t *testing.T) {
 	dst := &PhoneDevice{Id: "1", Name: "dst", Created: 1}
 	src := &PhoneDevice{Id: "2", Name: "src", Created: 2}
@@ -126,22 +151,23 @@ func TestPartition(t *testing.T) {
 }
 
 func TestUnpack(t *testing.T) {
-	str := "121461637268637073706c79687478736561767371771a15706c72726f7266746672647a70756c7a61736f76742085caefd48b31380142421a401a1331343936393631393937393839353333383834221462326163623533363764366239633331633537652a06323339353936320b38343936383932373137304a096d61726b6574696e675080f3e89301621261677268637073706c796874727570766e7772037a6e737a06323339353936"
+	str := "0x121461637268637073706c79687478736561767371771a15706c72726f7266746672647a70756c7a61736f76742085caefd48b31380142421a401a1331343936393631393937393839353333383834221462326163623533363764366239633331633537652a06323339353936320b38343936383932373137304a096d61726b6574696e675080f3e89301621261677268637073706c796874727570766e7772037a6e737a06323339353936"
+	str = strings.TrimPrefix(str, "0x")
 
 	bs, err := hex.DecodeString(str)
 	if err != nil {
 		panic(err)
 	}
 
-	ev := &CreditSpendEntry{}
+	ev := &User{}
 	proto.Unmarshal(bs, ev)
 	out, _ := json.Marshal(ev)
 
 	fmt.Println(string(out))
-	b, _ := proto.Marshal(ev)
-	str = hex.EncodeToString(b)
+	// b, _ := proto.Marshal(ev)
+	// str = hex.EncodeToString(b)
 
-	fmt.Println("STR", string(str))
+	// fmt.Println("STR", string(str))
 }
 
 func TestLang(t *testing.T) {
