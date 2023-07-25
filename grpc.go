@@ -54,12 +54,7 @@ func WithShardRedirect() grpc.DialOption {
 				host := addrs[shardNumber]
 				co, ok := conn[host]
 				if !ok {
-					var err error
-					co, err = grpc.Dial(host, grpc.WithTransportCredentials(insecure.NewCredentials()))
-					if err != nil {
-						lock.Unlock()
-						return err
-					}
+					co = DialGrpc(host)
 					conn[host] = co
 				}
 				lock.Unlock()
@@ -154,7 +149,7 @@ func WithErrorStack() grpc.DialOption {
 		grpcerr, ok := status.FromError(err)
 		if !ok {
 			// very strange error
-			return log.EServiceUnavailable(err, log.M{"grpc_code": "nono", "function_name": method, "__skip_stack": "2"}) // report
+			return log.EServiceUnavailable(err, log.M{"grpc_code": "nono", "_function_name": method, "__skip_stack": "2"}) // report
 		}
 
 		ourerr := log.FromString(grpcerr.Message())
@@ -164,7 +159,7 @@ func WithErrorStack() grpc.DialOption {
 
 		switch grpcerr.Code() {
 		case codes.Unavailable:
-			return log.EServiceUnavailable(err, log.M{"grpc_code": grpcerr.Code().String(), "function_name": method, "__skip_stack": "3"}) // report
+			return log.EServiceUnavailable(err, log.M{"grpc_code": grpcerr.Code().String(), "_function_name": method, "__skip_stack": "3"}) // report
 		default:
 			// good grpc err but not our error
 			// codes.Internal
@@ -298,12 +293,7 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		cc, ok := conn[host]
 
 		if !ok {
-			var err error
-			cc, err = grpc.Dial(host, grpc.WithTransportCredentials(insecure.NewCredentials()))
-			if err != nil {
-				lock.Unlock()
-				return nil, err
-			}
+			cc = DialGrpc(host)
 			conn[host] = cc
 		}
 
