@@ -205,6 +205,7 @@ message User {
 	// UserSession session = 40; // deprecating
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
+	string type = 47; // empty = guest - lead - contact
 	string primary_id = 49; // rename to customer_id
 	repeated string secondary_ids = 50;
 	string profile_id = 52; // user-id
@@ -233,6 +234,7 @@ message User {
 
 	string merged_by = 76;
 	int64 merged = 77;
+	string merged_reason = 78; // same_email, same_phone, same_record_id
 }
 
 message RelatedUsers {
