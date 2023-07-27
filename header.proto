@@ -6858,10 +6858,11 @@ message DocPartSearchResponse{
 }
 message DocPartIndexRequest{
 	common.Context ctx=1;
-	string collection_id=2;
-	string account_id=3;
-	string document_id=4;
-	string part_id=5;
-	string content=6;
+	string type=2;
+	string collection_id=3;
+	string account_id=4;
+	string document_id=5;
+	string part_id=6;
+	string content=7;
 
 }
