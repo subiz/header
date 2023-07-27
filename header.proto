@@ -6846,7 +6846,7 @@ message DocPartSearchRequest{
 	int64 limit=5;
 	int64 day_anchor=6;
 }
-message DocPartSearchResponse{
+message DocPartSearchResult{
 	common.Context ctx=1;
 	string term=2;
 	string collection_id=3;
@@ -6855,6 +6855,10 @@ message DocPartSearchResponse{
 	string doc_id=6;
 	string part_id=7;
 	string part_origin=8;
+}
+message DocPartSearchResponse{
+	common.Context ctx=1;
+	repeated DocPartSearchResult search_result=2;
 }
 message DocPartIndexRequest{
 	common.Context ctx=1;
