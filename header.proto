@@ -6838,19 +6838,30 @@ message OutboundCallUpdateEvent {
 	int64 total_completed_calls = 5;
 	repeated OutboundCallAgentReport agents = 6;
 }
-message DocumentPartTerm {
-	common.Context ctx = 1;
-	map<int64,TermsDay > part_terms = 5;
+message DocPartSearchRequest{
+	common.Context ctx=1;
+	string term=2;
+	string account_id=3;
+	string collection_id=4;
+	int64 limit=5;
+	int64 day_anchor=6;
 }
-message TermsDay {
-	common.Context ctx = 1;
-	repeated string terms=2;
-    int64 day=3;
+message DocPartSearchResponse{
+	common.Context ctx=1;
+	string term=2;
+	string collection_id=3;
+	string account_id=4;
+	int64 activate=5;
+	string doc_id=6;
+	string part_id=7;
+	string part_origin=8;
 }
-message DocIndexRequestFillTerm {
-	common.Context ctx = 1;
-	string type=2;
-	string document_id=3;
-	int64 part_id=4;
-	string content=5;
+message DocPartIndexRequest{
+	common.Context ctx=1;
+	string collection_id=2;
+	string account_id=3;
+	string document_id=4;
+	string part_id=5;
+	string content=6;
+
 }
