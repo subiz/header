@@ -245,6 +245,8 @@ message RelatedUsers {
 }
 
 message RelatedUser {
+	common.Context ctx = 1;
+	string account_id = 2;
 	string from_user_id = 4;
 	string with_user_id = 5;
 
