@@ -19,7 +19,10 @@ service Search {
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc AddOwner(header.DocIndexRequest) returns (header.Empty);
 }
-
+service DocSearch {
+	rpc Index(header.DocPartIndexRequest) returns (header.Empty);
+	rpc Search(header.DocPartSearchRequest) returns (header.DocPartSearchResponse);
+}
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);
 	rpc LookupAddress(Id) returns (Address);
