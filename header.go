@@ -596,20 +596,22 @@ func EmailAddress(email string) string {
 		return ""
 	}
 
-	em, _ := mail.ParseAddress(email)
-	if em == nil {
-		return ""
-	}
-	email = em.Address
-	if email == "" {
-		return ""
-	}
-
 	if len(emailsplit) > 0 {
 		email = emailsplit[0]
 	} else {
 		return ""
 	}
+
+	em, _ := mail.ParseAddress(email)
+	if em == nil {
+		return ""
+	}
+
+	email = em.Address
+	if email == "" {
+		return ""
+	}
+
 	arr := make([]rune, 0)
 	for _, r := range email {
 		if r != '"' && r != '\'' {

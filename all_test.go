@@ -3,9 +3,9 @@ package header
 import (
 	"encoding/hex"
 	"encoding/json"
-	"strings"
 	"fmt"
 	"hash/crc32"
+	"strings"
 	"testing"
 
 	pb "github.com/subiz/header/account"
@@ -59,6 +59,23 @@ func TestNormEmail(t *testing.T) {
 	}
 }
 
+func TestEmailAddress(t *testing.T) {
+	testcases := []struct {
+		in  string
+		out string
+	}{
+		{"", ""},
+		{"thanhpk@live.com, thanhpk@live.com 't@.com'", "thanhpk@live.com"},
+		{"thanhpk@live.com,xxx@gmail.com", "thanhpk@live.com"},
+	}
+
+	for i, tc := range testcases {
+		if tc.out != EmailAddress(tc.in) {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, NormPhone(tc.in))
+		}
+	}
+}
+
 func TestNormPhone(t *testing.T) {
 	testcases := []struct {
 		in  string
@@ -95,7 +112,7 @@ func TestPhoneNumber(t *testing.T) {
 		{",,,", ""},
 		{",,123123123,", "123123123"},
 		{",,,", ""},
-		{"abc@gmail.com", ""},
+		{"abc@gmail.com,45", ""},
 		{"245abc@gmail.com", "245"},
 		{",;84123123123,", "84123123123"},
 	}
