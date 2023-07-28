@@ -6866,13 +6866,4 @@ message DocPartSearchResponse{
 	common.Context ctx=1;
 	repeated DocPartSearchResult search_result=2;
 }
-message DocPartIndexRequest{
-	common.Context ctx=1;
-	string type=2;
-	string collection_id=3;
-	string account_id=4;
-	string document_id=5;
-	string part_id=6;
-	string content=7;
-	int64 day=8;
-}
+
