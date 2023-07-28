@@ -6870,5 +6870,5 @@ message DocPartIndexRequest{
 	string document_id=5;
 	string part_id=6;
 	string content=7;
-
+	int64 day=8;
 }
