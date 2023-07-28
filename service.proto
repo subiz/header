@@ -138,7 +138,6 @@ service UserMgr {
 	rpc ReadOrCreateUserByContactProfile(Id) returns (header.User);
 	rpc MatchUsers(Ids) returns (header.Users);
 
-	// rpc MatchPhoneNumbers(PhoneNumbers) returns (header.Users);
 	rpc BanUser(Id) returns (header.User);
 	rpc UnbanUser(Id) returns (header.User);
 
@@ -200,7 +199,6 @@ service UserMgr {
 
 	rpc ListRelatedUsers(header.Id) returns (header.RelatedUsers);
 	rpc RemoveRelatedUsers(header.RelatedUser) returns (header.Empty);
-
 	rpc SearchUsers(header.DocSearchRequest) returns (header.DocSearchResponse);
 }
 

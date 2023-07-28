@@ -34,6 +34,10 @@ message Ids {
 	repeated int64 last_modifieds = 5; // ms
 	string anchor = 6;
 	int32 limit = 7;
+
+	repeated string phones = 8; // match by phone identifier
+	repeated string emails = 9; // match by email identifier
+	repeated string record_ids = 10; // match by record identifier
 }
 
 message Notifications {
@@ -5498,7 +5502,7 @@ message DocIndexRequest {
 	bool is_id = 10; // hint for not indexing using tokenize
 	int64 day = 8; // unix day for doc, used to order more recent document
 	bool is_phone = 11;
-
+	bool is_email = 12;
 	repeated string owners = 9;
 }
 

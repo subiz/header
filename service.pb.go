@@ -5972,7 +5972,6 @@ type UserMgrClient interface {
 	ReadUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	ReadOrCreateUserByContactProfile(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	MatchUsers(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Users, error)
-	// rpc MatchPhoneNumbers(PhoneNumbers) returns (header.Users);
 	BanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	UnbanUser(ctx context.Context, in *Id, opts ...grpc.CallOption) (*User, error)
 	LookupByPhone(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Users, error)
@@ -6557,7 +6556,6 @@ type UserMgrServer interface {
 	ReadUser(context.Context, *Id) (*User, error)
 	ReadOrCreateUserByContactProfile(context.Context, *Id) (*User, error)
 	MatchUsers(context.Context, *Ids) (*Users, error)
-	// rpc MatchPhoneNumbers(PhoneNumbers) returns (header.Users);
 	BanUser(context.Context, *Id) (*User, error)
 	UnbanUser(context.Context, *Id) (*User, error)
 	LookupByPhone(context.Context, *Id) (*Users, error)
