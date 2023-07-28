@@ -190,8 +190,8 @@ service UserMgr {
 
 	rpc ImportLead(header.ImportLeadRequest) returns (header.ImportLeadResponse);
 
-	rpc ListEventTypes(header.ListEventTypeRequest) returns (header.EventTypes);
-	rpc UpdateEventType(header.EventType) returns (header.EventType);
+	// rpc ListEventTypes(header.ListEventTypeRequest) returns (header.EventTypes);
+	// rpc UpdateEventType(header.EventType) returns (header.EventType);
 	rpc LinkTask(header.Task) returns (header.Empty);
 
 	rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse);
@@ -200,6 +200,8 @@ service UserMgr {
 
 	rpc ListRelatedUsers(header.Id) returns (header.RelatedUsers);
 	rpc RemoveRelatedUsers(header.RelatedUser) returns (header.Empty);
+
+	rpc SearchUsers(header.DocSearchRequest) returns (header.DocSearchResponse);
 }
 
 service LiveMgr {
