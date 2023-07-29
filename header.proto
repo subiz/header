@@ -6846,17 +6846,14 @@ message OutboundCallUpdateEvent {
 }
 
 message DocPartSearchResult{
-	common.Context ctx=1;
-	string term=2;
-	string collection_id=3;
-	string account_id=4;
-	int64 activate=5;
-	string doc_id=6;
-	string part_id=7;
-	string part_origin=8;
+	common.Context ctx=1;	
+	int64  activated_at=2;
+	string doc_id=3;
+	string part_id=4;
+	string part_origin=5;
 }
 message DocPartSearchResponse{
 	common.Context ctx=1;
-	repeated DocPartSearchResult search_result=2;
+	repeated DocPartSearchResult search_results=2;
 }
 
