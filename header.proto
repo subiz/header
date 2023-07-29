@@ -5515,10 +5515,10 @@ message DocSearchRequest {
 	string anchor = 6;
 
 	int64 limit = 7;
-
 	repeated string include_parts = 8; // only include those parts
 	bool doc_distinct = 9; // distinct document
 	repeated string include_owners = 10;
+	int64 day_anchor=11;
 }
 
 message DocHit {
@@ -6844,14 +6844,7 @@ message OutboundCallUpdateEvent {
 	int64 total_completed_calls = 5;
 	repeated OutboundCallAgentReport agents = 6;
 }
-message DocPartSearchRequest{
-	common.Context ctx=1;
-	string term=2;
-	string account_id=3;
-	string collection_id=4;
-	int64 limit=5;
-	int64 day_anchor=6;
-}
+
 message DocPartSearchResult{
 	common.Context ctx=1;
 	string term=2;
