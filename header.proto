@@ -6855,5 +6855,6 @@ message DocPartSearchResult{
 message DocPartSearchResponse{
 	common.Context ctx=1;
 	repeated DocPartSearchResult search_results=2;
+	string anchor = 3;
 }
 
