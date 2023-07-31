@@ -376,6 +376,7 @@ message TryUpdateUserResult {
 }
 
 message Users {
+
 	repeated User users = 1;
 	repeated Error errors = 2;
 	string signature = 3;
@@ -386,6 +387,7 @@ message Users {
 	repeated string sorted_values = 8;
 
 	string anchor = 9;
+	repeated User secondaries = 10;
 }
 
 message AttributeDefinitionListItem {

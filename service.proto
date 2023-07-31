@@ -604,6 +604,8 @@ service Proder {
 	rpc DeletePipelineStage(header.PipelineStage) returns (Empty);
 	rpc PreselectPipeline(Id) returns (header.Pipeline);
 	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders);
+
+	rpc MoveOrderToPrimary(header.Ids) returns (Empty);
 }
 
 service TaskMgr {
