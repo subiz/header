@@ -20,7 +20,7 @@ service Search {
 	rpc AddOwner(header.DocIndexRequest) returns (header.Empty);
 }
 service DocSearch {
-	rpc Index(header.DocIndexRequest) returns (header.Empty);
+	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc Search(header.DocSearchRequest) returns (header.DocPartSearchResponse);
 }
 service Map {
