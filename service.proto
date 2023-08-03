@@ -21,7 +21,9 @@ service Search {
 }
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
+	rpc IndexUser(header.DocIndexRequest) returns (header.Empty);
 	rpc Search(header.DocSearchRequest) returns (header.DocPartSearchResponse);
+	rpc SearchTest(header.DocSearchRequest) returns (header.DocSearchResponse);
 }
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);

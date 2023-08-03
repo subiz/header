@@ -5506,6 +5506,7 @@ message DocIndexRequest {
 	bool is_phone = 11;
 	bool is_email = 12;
 	repeated string owners = 9;
+	string primary_document_id=13;
 }
 
 message DocSearchRequest {
