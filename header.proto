@@ -5527,7 +5527,6 @@ message DocSearchRequest {
 message DocHit {
 	string document_id = 3;
 	string part = 4;
-
 	string avatar_url = 5;
 	string name = 6;
 
@@ -5541,6 +5540,7 @@ message DocHit {
 	string user_id = 12; // for convo
 	repeated string origin=13;
 	repeated string all_part=14;
+	DocHit second_doc=15;
 }
 
 message DocSearchResponse {
