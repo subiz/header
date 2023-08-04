@@ -52,6 +52,7 @@ service AccountMgr {
 	rpc GetInvitation(account.Token) returns (account.Agent);
 	rpc InviteAgent(account.Agent) returns (account.Agent); // allow to call multiple time
 	rpc GetAgent(Id) returns (account.Agent);
+	rpc LookupAgentById(Id) returns (account.Agent);
 	rpc ConfirmAccount(account.Token) returns (account.Account);
 	rpc GetAccount(Id) returns (account.Account);
 	rpc UpdateAccount(account.Account) returns (account.Account);
