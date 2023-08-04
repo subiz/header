@@ -2939,7 +2939,7 @@ message SocialButtonsComponent {
 
 message Popup {
 	string position = 2; // top, bottom       fullscreen, center, middle-left, middle-center, top-left, very-bottom, verry-top, halfway-top, halfway-bottom
-	string type = 3; // bar, modal
+	string type = 3; // bar, modal, form
 
 	bool animation = 5;
 
@@ -2955,6 +2955,17 @@ message Popup {
 	string theme = 17; // plain, light, paper, bold
 
 	repeated PopupPage pages = 20;
+	// bool allow_multiple_submissions = 21;
+
+	// chuyen form submit thanh hoi thoa
+	bool conversion_to_new_conversation = 22;
+	// user x submit form DSLKJFLKSDJF
+	// ho ten: asldkj lkasdf
+	// sdt: asldf lajsd flk
+	// emil: 09283409
+
+	repeated string tags = 23;
+	string container_query_selector = 24;
 }
 
 message LinkComponent {
@@ -6851,7 +6862,7 @@ message OutboundCallUpdateEvent {
 }
 
 message DocPartSearchResult{
-	common.Context ctx=1;	
+	common.Context ctx=1;
 	int64  activated_at=2;
 	string doc_id=3;
 	string part_id=4;
@@ -6862,4 +6873,3 @@ message DocPartSearchResponse{
 	repeated DocPartSearchResult search_results=2;
 	string anchor = 3;
 }
-
