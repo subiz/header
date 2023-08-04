@@ -5540,7 +5540,7 @@ message DocHit {
 	string user_id = 12; // for convo
 	repeated string origin=13;
 	repeated string all_part=14;
-	DocHit second_doc=15;
+	DocHit secondary_doc=15;
 }
 
 message DocSearchResponse {
