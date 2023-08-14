@@ -281,13 +281,6 @@ message UserAds {
 	string content = 6; // logolink, textlink
 }
 
-message UserConversationTag {
-	repeated string conversation_ids = 3;
-	string tag = 4;
-	int64 created = 5;
-	int64 count = 6;
-}
-
 message UserLifecycleStage {
 	string stage = 5; // id
 	int64 duration = 6; // ms
@@ -6059,6 +6052,7 @@ message OutboundCallEntries {
 	// quick statistic
 	int64 num_open_assigned = 20;
 	int64 num_assigned = 21;
+	int64 num_goal_reached = 22;
 	int64 total_open = 24;
 	int64 total_all = 25;
 }
@@ -6080,7 +6074,6 @@ message OutboundCallEntry {
 	string caller = 12;
 	int64 called = 13;
 	string call_id = 14; // conversation id
-	repeated string other_call_ids = 15;
 	string next_call_id = 16; // realtime only
 	int64 created = 18;
 	int64 scheduled_in = 19;
