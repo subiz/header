@@ -5549,9 +5549,10 @@ message DocHit {
 	string phone = 10;
 	string email = 11;
 	string user_id = 12; // for convo
-	repeated string origin=13;
-	repeated string all_part=14;
+	string origin=13;
+	User user=14;        //for primary user
 	DocHit secondary_doc=15;
+
 }
 
 message DocSearchResponse {
