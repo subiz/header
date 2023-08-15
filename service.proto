@@ -19,12 +19,14 @@ service Search {
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc AddOwner(header.DocIndexRequest) returns (header.Empty);
 }
+
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
-	rpc IndexUser(header.DocIndexRequest) returns (header.Empty);
+	// rpc IndexUser(header.DocIndexRequest) returns (header.Empty);
 	rpc Search(header.DocSearchRequest) returns (header.DocPartSearchResponse);
 	rpc SearchTest(header.DocSearchRequest) returns (header.DocSearchResponse);
 }
+
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);
 	rpc LookupAddress(Id) returns (Address);
@@ -305,6 +307,7 @@ service ConversationMgr {
 	rpc ListMyRecentCalls(Id) returns (RecentCallRecords);
 	// sync, called from fabikon
 	rpc SaveMessage(header.Event) returns (header.Event);
+	rpc ApplyMessage(header.Event) returns (header.Event);
 }
 
 service TemplateMgr {
