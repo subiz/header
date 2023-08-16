@@ -103,6 +103,7 @@ message Attribute {
 		delete = 4; // delete specific elemnt match the value
 
 		push = 5; // add a new value (for array) // unique
+		unshift = 6;
 	}
 	string action = 18;
 	repeated string other_labels = 24; // home, work for other value

@@ -2,14 +2,344 @@ package header
 
 import (
 	"encoding/json"
+	"math"
 	"net/mail"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
 
+	cpb "github.com/subiz/header/common"
 	"github.com/subiz/log"
 )
+
+var updateTable = map[string]bool{
+	"user-user":      true,
+	"user-agent":     false,
+	"user-connector": false,
+	"user-system":    false,
+
+	"agent-user":      true,
+	"agent-agent":     true,
+	"agent-connector": true,
+	"agent-system":    true,
+
+	"system-user":      true,
+	"system-agent":     true,
+	"system-connector": true,
+	"system-system":    true,
+
+	"connector-user":      true,
+	"connector-agent":     false,
+	"connector-connector": true,
+	"connector-system":    true,
+}
+
+func CanUpdate(byType string, oldType string) bool {
+	if byType == cpb.Type_subiz.String() {
+		byType = "system"
+	} else if byType == cpb.Type_agent.String() {
+		byType = "agent"
+	} else if byType == cpb.Type_connector.String() {
+		byType = "connector"
+	} else {
+		byType = "user"
+	}
+
+	if oldType == cpb.Type_subiz.String() {
+		oldType = "system"
+	} else if oldType == cpb.Type_agent.String() {
+		oldType = "agent"
+	} else if oldType == cpb.Type_connector.String() {
+		oldType = "connector"
+	} else {
+		oldType = "user"
+	}
+
+	return updateTable[byType+"-"+oldType]
+}
+
+// make value in prop primary if existed
+func MakePrimaryValue(user *User, prop string, value string) {
+	if value == "" {
+		return
+	}
+	for _, attr := range user.Attributes {
+		if attr.Key != prop {
+			continue
+		}
+		if attr.Text == value {
+			return // already primary
+		}
+
+		if attr.Text == "" {
+			attr.Text = value
+			return
+		}
+
+		found := false
+		newOtherValues := []string{}
+		for _, val := range attr.OtherValues {
+			if val == value {
+				found = true
+				continue
+			}
+
+			// dont dup attr.Text
+			if val == attr.Text {
+				continue
+			}
+
+			newOtherValues = append(newOtherValues, val)
+		}
+
+		if !found {
+			return
+		}
+		attr.OtherValues = append([]string{attr.Text}, newOtherValues...)
+		attr.Text = value
+		return
+	}
+}
+
+func cleanOtherValues(attr *Attribute) {
+	newOtherValues := []string{} // do not init nil
+	for _, val := range attr.OtherValues {
+		val = strings.TrimSpace(val)
+		if val == "" {
+			continue
+		}
+		if val == attr.Text {
+			continue
+		}
+		newOtherValues = append(newOtherValues, val)
+	}
+	// other values should be unique
+	attr.OtherValues = Unique(newOtherValues)
+}
+
+// PushOtherValues adds newvalue to attr.OtherValues
+// also, it keeps the size of attr.OtherValues in check, it will remove old data
+// if the size is too big. The max size is 5KB
+func PushOtherValues(attr *Attribute, newvalue string) {
+	const maxSize = 5024
+
+	// this value is too big, cannot push in
+	if len(newvalue) > maxSize {
+		attr.OtherValues = Unique(attr.OtherValues)
+		return
+	}
+
+	if newvalue == "" {
+		return
+	}
+
+	attr.OtherValues = Unique(append(attr.OtherValues, newvalue))
+
+	nOtherValues := len(attr.OtherValues)
+	if nOtherValues == 0 || nOtherValues == 1 {
+		return
+	}
+
+	size := 0
+	nKeep := 0
+	for i := nOtherValues - 1; i >= 0; i-- {
+		val := attr.OtherValues[i]
+		if size+len(val)+len(newvalue) > maxSize {
+			// cannot add must break
+			break
+		}
+		nKeep++
+		size += len(val)
+	}
+	attr.OtherValues = attr.OtherValues[nOtherValues-nKeep:]
+}
+
+func IsSameAttr(def *AttributeDefinition, a, b *Attribute) bool {
+	typ := def.GetType()
+	if typ == "" {
+		typ = "text"
+	}
+
+	if a.OtherValues == nil && b.OtherValues != nil {
+		return false
+	}
+
+	// check other value
+	if b.OtherValues != nil {
+		if len(a.OtherValues) != len(b.OtherValues) {
+			return false
+		}
+
+		for i := range a.OtherValues {
+			if a.OtherValues[i] != b.OtherValues[i] {
+				return false
+			}
+		}
+	}
+
+	if typ == "text" {
+		return a.Text == b.Text
+	}
+
+	if typ == "number" {
+		return math.Abs(a.Number-b.Number) <= 0.0000003
+	}
+
+	if typ == "boolean" {
+		return a.Boolean == b.Boolean
+	}
+
+	if typ == "datetime" {
+		return a.Datetime == b.Datetime
+	}
+
+	return false
+}
+
+func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Attribute) (updatedUser bool) {
+	if attr.GetAction() == "noop" {
+		return false
+	}
+
+	if attr.GetKey() == "" || user == nil || defM == nil {
+		return false
+	}
+	by := attr.By
+	bytype := attr.ByType
+	// find the oldprop
+	isBySystem := bytype == cpb.Type_subiz.String()
+	isManually := bytype == cpb.Type_agent.String()
+	isByConnector := bytype == cpb.Type_connector.String()
+	isByCollector := !isByConnector && !isBySystem && !isManually // (bot, widget, user)
+
+	def := defM[attr.Key]
+	// undefined attribute, ignore
+	if def == nil {
+		return false
+	}
+	if def.IsSystem && def.IsReadonly {
+		if isManually || isByCollector {
+			return false
+		}
+	}
+	isEmpty := false
+	if def.Type == "text" {
+		isEmpty = attr.Text == ""
+	}
+	if def.Type == "datetime" {
+		isEmpty = attr.Datetime == ""
+	}
+	action := attr.GetAction()
+	if action == "" {
+		action = Attribute_upsert.String()
+	}
+	var oldattr *Attribute
+	for _, a := range user.Attributes {
+		if SameKey(a.Key, attr.Key) {
+			oldattr = a
+			break
+		}
+	}
+
+	if oldattr == nil {
+		oldattr = &Attribute{Key: attr.Key}
+		if def.IsSystem && def.IsReadonly {
+			oldattr.ByType = cpb.Type_subiz.String()
+		}
+		user.Attributes = append(user.Attributes, oldattr)
+		updatedUser = true
+	}
+
+	canWrite := CanUpdate(bytype, oldattr.GetByType())
+
+	// user can only push
+	if action == Attribute_unshift.String() && (isByCollector || isByConnector) {
+		action = Attribute_push.String()
+	}
+
+	// allow to push even user
+	if action == Attribute_push.String() || action == Attribute_unshift.String() {
+		canWrite = true
+	}
+
+	oldIsEmpty := ((def.Type == "text" && oldattr.GetText() == "") || (def.Type == "datetime" && oldattr.GetDatetime() == "") || oldattr == nil)
+	if oldIsEmpty {
+		canWrite = true
+	}
+
+	if def.PreventAutoOverride && !oldIsEmpty && isByCollector {
+		canWrite = false
+	}
+
+	if canWrite && action == Attribute_delete.String() {
+		oldattr.Text = ""
+		oldattr.Number = 0
+		oldattr.Boolean = false
+		oldattr.Datetime = ""
+		oldattr.OtherValues = []string{}
+		oldattr.Modified = attr.Modified
+		if oldattr.Modified == 0 {
+			oldattr.Modified = time.Now().UnixMilli()
+		}
+		oldattr.By = by
+		oldattr.ByType = bytype
+		updatedUser = true
+		return
+	}
+
+	if isEmpty {
+		return
+	}
+
+	if !canWrite || IsSameAttr(def, oldattr, attr) {
+		return
+	}
+
+	if action == Attribute_push.String() { // text only
+		if oldattr.Text != "" {
+			PushOtherValues(oldattr, attr.Text)
+		} else {
+			oldattr.Text = attr.Text
+		}
+		cleanOtherValues(oldattr)
+		oldattr.Modified = attr.Modified
+		if oldattr.Modified == 0 {
+			oldattr.Modified = time.Now().UnixMilli()
+		}
+		oldattr.By = by
+		oldattr.ByType = bytype
+		updatedUser = true
+	} else if action == "unshift" { // text only
+		if oldattr.Text != "" {
+			PushOtherValues(oldattr, oldattr.Text)
+		}
+		oldattr.Text = attr.Text
+		cleanOtherValues(oldattr)
+		oldattr.Modified = attr.Modified
+		if oldattr.Modified == 0 {
+			oldattr.Modified = time.Now().UnixMilli()
+		}
+		oldattr.By = by
+		oldattr.ByType = bytype
+		updatedUser = true
+	} else {
+		if (action == Attribute_insert.String() && oldIsEmpty) || action != Attribute_insert.String() {
+			if attr.OtherValues != nil {
+				oldattr.OtherValues = attr.OtherValues
+			}
+			oldattr.Text, oldattr.Number, oldattr.Boolean, oldattr.Datetime = attr.Text, attr.Number, attr.Boolean, attr.Datetime
+			oldattr.Modified = attr.Modified
+			if oldattr.Modified == 0 {
+				oldattr.Modified = time.Now().UnixMilli()
+			}
+			oldattr.By = by
+			oldattr.ByType = bytype
+			updatedUser = true
+		}
+	}
+	return updatedUser
+}
 
 func GetTimeAttr(u *User, key string) (time.Time, bool) {
 	key = strings.ToLower(strings.TrimSpace(key))
@@ -779,4 +1109,43 @@ func E500(err error, code E, v ...interface{}) error {
 	}
 
 	return log.Error(err, field, log.E_internal, log.E(code.String()))
+}
+
+func GetUserType(u *User) string {
+	if u == nil {
+		return ""
+	}
+	if u.Type == "contact" {
+		return "contact"
+	}
+
+	typ := u.GetType()
+	if u.Channel == "account" || u.Channel == "import" || u.Channel == "call" || u.Channel == "email" {
+		typ = "lead"
+	}
+
+	stage := strings.TrimSpace(GetTextAttr(u, "lifecycle_stage"))
+	if stage != "" {
+		typ = "lead"
+	}
+
+	for _, attr := range u.GetAttributes() {
+		if attr.Key == "emails" && attr.Text != "" {
+			return "contact"
+		}
+
+		if attr.Key == "phones" && attr.Text != "" {
+			return "contact"
+		}
+
+		if attr.Key == "record_id" && attr.Text != "" {
+			return "contact"
+		}
+	}
+
+	if u.PrimaryId != "" && u.PrimaryId != u.Id {
+		return "lead"
+	}
+
+	return typ
 }
