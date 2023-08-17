@@ -122,6 +122,9 @@ service AccountMgr {
 	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
 
 	rpc NewID(header.Id) returns (header.Id);
+
+	rpc LockLogin(header.Id) returns (header.Id); // accid
+	rpc UnlockLogin(header.Id) returns (header.Id);
 }
 
 // user services
