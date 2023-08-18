@@ -212,7 +212,7 @@ message User {
 	repeated UserLabel labels = 42;
 	string type = 47; // empty = guest - lead - contact
 	string primary_id = 49; // rename to customer_id
-	repeated string secondary_ids = 50;
+	// repeated string secondary_ids = 50;
 	string profile_id = 52; // user-id
 	string channel_source = 53; // pvcombank require verification
 	string channel = 54; // account => require verification, acc logo
@@ -370,7 +370,6 @@ message TryUpdateUserResult {
 }
 
 message Users {
-
 	repeated User users = 1;
 	repeated Error errors = 2;
 	string signature = 3;
@@ -6865,6 +6864,7 @@ message DocPartSearchResult{
 	string part_id=4;
 	string part_origin=5;
 }
+
 message DocPartSearchResponse{
 	common.Context ctx=1;
 	repeated DocPartSearchResult search_results=2;
