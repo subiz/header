@@ -85,7 +85,8 @@ message Attribute {
 	string text = 10;
 	double number = 11;
 	bool boolean = 12;
-	string datetime = 13;
+	string datetime = 13; // deprecated
+	int64 time = 25;
 	// repeated string list = 14; // remove [a,b,c]
 	// repeated Attribute revisions = 15;
 

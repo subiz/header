@@ -204,8 +204,6 @@ service UserMgr {
 	rpc ListUserIds(header.UsersRequest) returns (header.Ids);
 	rpc ListUserIdWithPhones(header.UsersRequest) returns (header.Users);
 
-	rpc ListRelatedUsers(header.Id) returns (header.RelatedUsers);
-	rpc RemoveRelatedUsers(header.RelatedUser) returns (header.Empty);
 	rpc SearchUsers(header.DocSearchRequest) returns (header.DocSearchResponse);
 }
 
