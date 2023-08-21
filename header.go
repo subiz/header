@@ -375,7 +375,7 @@ func GetAttr(u *User, key string, typ string) interface{} {
 		case "list":
 			return a.GetOtherValues()
 		case AttributeDefinition_datetime.String():
-			t, err := time.Parse(time.RFC3339Nano, a.GetDatetime())
+			t, err := time.Parse(time.RFC3339, a.GetDatetime())
 			if err != nil {
 				return time.Now()
 			}
@@ -430,27 +430,6 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 			i.OtherValues = a.OtherValues
 		}
 
-		return
-	}
-
-	u.Attributes = append(u.Attributes, a)
-}
-
-func SetTextAttr(u *User, key string, val string) {
-	key = strings.ToLower(strings.TrimSpace(key))
-	if u == nil || key == "" {
-		return
-	}
-
-	a := &Attribute{}
-	a.Key = key
-	a.Text = val
-	for _, i := range u.GetAttributes() {
-		if !SameKey(i.GetKey(), key) {
-			continue
-		}
-
-		i.Text = a.Text
 		return
 	}
 
