@@ -1324,6 +1324,8 @@ message Conversation {
 
 	string campaign_id = 64;
 	string outbound_call_entry_id = 65;
+
+	FormSubmission form_submission = 66;
 }
 
 message CallInfo {
