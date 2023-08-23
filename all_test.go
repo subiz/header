@@ -168,7 +168,7 @@ func TestPartition(t *testing.T) {
 }
 
 func TestUnpack(t *testing.T) {
-	str := "0x121461637268637073706c79687478736561767371771a15706c72726f7266746672647a70756c7a61736f76742085caefd48b31380142421a401a1331343936393631393937393839353333383834221462326163623533363764366239633331633537652a06323339353936320b38343936383932373137304a096d61726b6574696e675080f3e89301621261677268637073706c796874727570766e7772037a6e737a06323339353936"
+	str := "0x1214616370786b67756d6966756f6f666f6f73626c651a075061636b6167652a046c69737432085374616e646172643207416476616e63653205547269616c3204467265653a077061636b61676548fba0cbede0305a126167716d77667975656870757a7065686d767801820100920105726164696f9a011722087374616e646172643a00420943c6a12062e1baa36e9a01172208616476616e6365643a0042094ec3a26e672063616f9a01162205747269616c3a00420b44c3b96e67207468e1bbad9a01152204667265653a00420b4d69e1bb856e207068c3adaa010c47c3b3692063c6b0e1bb9b63c001fcefc787eb2dca011261676f6868776766757869746d7969663339"
 	str = strings.TrimPrefix(str, "0x")
 
 	bs, err := hex.DecodeString(str)
@@ -176,7 +176,7 @@ func TestUnpack(t *testing.T) {
 		panic(err)
 	}
 
-	ev := &User{}
+	ev := &AttributeDefinition{}
 	proto.Unmarshal(bs, ev)
 	out, _ := json.Marshal(ev)
 
@@ -217,15 +217,6 @@ func TestAllLang(t *testing.T) {
 func TestPerm(t *testing.T) {
 	fmt.Println("D", checkAccess([]string{"all"}, "phone_device:w"))
 	fmt.Println("A", checkAccess([]string{"view_others", "agent", "account_setting"}, "phone_device:w"))
-}
-
-func TestUpdateUser(t *testing.T) {
-	user := &User{}
-	UpdateAttr(user, "fullname", "string", "thanh", "upsert")
-	UpdateAttr(user, "fullname", "string", "dao", "upsert")
-	UpdateAttr(user, "fullname", "stringd", "thanh", "upsert") // invalid
-	b, _ := json.Marshal(user)
-	fmt.Println(string(b))
 }
 
 func TestUserViewCondition(t *testing.T) {
