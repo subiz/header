@@ -406,6 +406,8 @@ service FabikonService {
 
 	rpc RemoveFbUserLabel(header.User) returns (header.Empty);
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
+
+	rpc GenerateRefLink(header.Id) returns (header.Id);
 }
 
 service ZalokonService {

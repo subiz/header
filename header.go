@@ -1060,3 +1060,24 @@ func GetUserType(u *User) string {
 
 	return typ
 }
+
+func SetTextAttr(u *User, key string, val string) {
+	key = strings.ToLower(strings.TrimSpace(key))
+	if u == nil || key == "" {
+		return
+	}
+
+	a := &Attribute{}
+	a.Key = key
+	a.Text = val
+	for _, i := range u.GetAttributes() {
+		if !SameKey(i.GetKey(), key) {
+			continue
+		}
+
+		i.Text = a.Text
+		return
+	}
+
+	u.Attributes = append(u.Attributes, a)
+}
