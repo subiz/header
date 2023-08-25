@@ -1503,6 +1503,7 @@ message MessagePong {
 
 		care = 30;
 		remove_care = 31;
+		ref = 33;
 	}
 	string type = 4;
 
@@ -1510,6 +1511,9 @@ message MessagePong {
 	string ack_error = 6; // used in ack
 	int64 count = 7;
 	string url = 8; // for clicked
+	string ref_user_id = 9;
+	string ref_psid = 10;
+	string ref_link = 11;
 }
 
 message MessageButton {
@@ -6862,5 +6866,3 @@ message OutboundCallUpdateEvent {
 	int64 total_completed_calls = 5;
 	repeated OutboundCallAgentReport agents = 6;
 }
-
-
