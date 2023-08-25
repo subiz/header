@@ -22,7 +22,7 @@ service Search {
 
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
-	rpc Search(header.DocSearchRequest) returns (header.DocPartSearchResponse);
+	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
 }
 
 service Map {
