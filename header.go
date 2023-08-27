@@ -1031,16 +1031,17 @@ func GetUserType(u *User) string {
 	}
 
 	typ := u.GetType()
-	if u.Channel == "account" || u.Channel == "import" || u.Channel == "call" || u.Channel == "email" {
-		typ = "lead"
-	}
-
-	stage := strings.TrimSpace(GetTextAttr(u, "lifecycle_stage"))
-	if stage != "" {
+	if u.Channel == "account" || u.Channel == "import" || u.Channel == "call" || u.Channel == "email" || u.Channel == "facebook" || u.Channel == "zalo" || u.Channel == "instagram" {
 		typ = "lead"
 	}
 
 	for _, attr := range u.GetAttributes() {
+		if attr.Key == "lifecycle_stage" {
+			if attr.Text != "" {
+				typ = "lead"
+			}
+		}
+
 		if attr.Key == "emails" && attr.Text != "" {
 			return "contact"
 		}
