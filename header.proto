@@ -914,16 +914,6 @@ message Data {
 
 	WorkflowPump workflow_pump = 107;
 	OutboundCallUpdateEvent outbound_call_update = 108;
-	FacebookThread facebook_thread = 109;
-}
-
-message FacebookThread {
-	string source = 4; // short link
-	string ref_user_id = 9;
-	string ref_psid = 10;
-	string ref_link = 11;
-	string ref_conversation_id = 12;
-	string page_id = 13;
 }
 
 message WebRTCMessage {
@@ -1489,6 +1479,10 @@ message MessageReferral {
 	string ad_id = 6;
 	string referer_uri = 7;
 	bool is_guest_user = 8;
+
+	string ref_user_id = 9;
+	string ref_psid = 10;
+	string ref_link = 11;
 }
 
 message AdsContextData {
