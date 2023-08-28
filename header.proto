@@ -1483,6 +1483,7 @@ message MessageReferral {
 	string ref_user_id = 9;
 	string ref_psid = 10;
 	string ref_link = 11;
+	string ref_conversation_id = 12;
 }
 
 message AdsContextData {
