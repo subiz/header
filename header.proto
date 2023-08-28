@@ -1484,6 +1484,7 @@ message MessageReferral {
 	string ref_psid = 10;
 	string ref_link = 11;
 	string ref_conversation_id = 12;
+	string ref_page_id = 13;
 }
 
 message AdsContextData {
