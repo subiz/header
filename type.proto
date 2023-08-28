@@ -230,6 +230,8 @@ enum RealtimeType {
 	workflow_pump = 233; // internal use only
 
 	outbound_call_updated = 234;
+
+	facebook_thread_opened = 235;
 }
 
 message TextTransform {

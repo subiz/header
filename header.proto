@@ -607,6 +607,29 @@ message UserMetrics {
 	repeated UserMetric metrics = 2;
 }
 
+message UserReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	// string credit_id = 3;
+	int64 from_time = 4; // ms
+	string unit = 5; // hour, day, month
+	int64 limit = 8; // default: 24, 30, 24
+}
+
+message UserReportEntry {
+	string category = 5;
+	string category_id = 6;
+	repeated int64 datapoint = 7;
+}
+
+message UserReportResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+  repeated UserReportEntry user = 5;
+	repeated UserReportEntry lead = 6;
+}
+
 message UserMetricsRequest {
 	string account_id = 2;
 	int64 created_hour_from = 3;
@@ -891,6 +914,16 @@ message Data {
 
 	WorkflowPump workflow_pump = 107;
 	OutboundCallUpdateEvent outbound_call_update = 108;
+	FacebookThread facebook_thread = 109;
+}
+
+message FacebookThread {
+	string source = 4; // short link
+	string ref_user_id = 9;
+	string ref_psid = 10;
+	string ref_link = 11;
+	string ref_conversation_id = 12;
+	string page_id = 13;
 }
 
 message WebRTCMessage {

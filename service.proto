@@ -203,6 +203,7 @@ service UserMgr {
 	rpc ListUserIdWithPhones(header.UsersRequest) returns (header.Users);
 
 	rpc SearchUsers(header.DocSearchRequest) returns (header.DocSearchResponse);
+	rpc ReportUser(header.UserReportRequest) returns (header.UserReportResponse);
 }
 
 service LiveMgr {
