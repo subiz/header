@@ -6895,3 +6895,11 @@ message OutboundCallUpdateEvent {
 	int64 total_completed_calls = 5;
 	repeated OutboundCallAgentReport agents = 6;
 }
+
+message String {
+	string str=1;
+}
+
+message Number {
+	int64 number=1;
+}

@@ -25,6 +25,12 @@ service DocSearch {
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
 }
 
+service NumberRegistry {
+	rpc Compact(String) returns (Number);
+	rpc Uncompact(Number) returns (String);
+}
+
+
 service Map {
 	rpc Predict(AddressAutocompleteRequest) returns (AddressAutocompleteResponses);
 	rpc LookupAddress(Id) returns (Address);
