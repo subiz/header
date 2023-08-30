@@ -5581,10 +5581,11 @@ message DocHit {
 	string phone = 10;
 	string email = 11;
 	string user_id = 12; // for convo
-	string origin=13;
-	User user=14;        //for primary user
-	DocHit secondary_doc=15;
+	string origin = 13;
+	User user = 14;        //for primary user
+	DocHit secondary_doc = 15;
 
+	string user_type = 16;
 }
 
 message DocSearchResponse {
