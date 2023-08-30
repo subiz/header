@@ -6898,9 +6898,9 @@ message OutboundCallUpdateEvent {
 }
 
 message String {
-	string str=1;
+	string str = 1;
 }
 
 message Number {
-	int64 number=1;
+	int64 number = 1;
 }
