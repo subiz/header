@@ -597,9 +597,10 @@ message UserReportRequest {
 	repeated string metrics = 9; // category.cactegory_id all.
 	// all.*
 	// graph:all.-  exact
-	// channel.facebook.~ graph of user channel facebook
-	// channel.facebook.~ graph of user channel facebook
-	// count:channel_source.zalo.*
+	// channel.facebook graph of user channel facebook
+	// channel.facebook graph of user channel facebook
+	// countexact:channel_source.zalo
+	// count:channel_source.zalo
 	//    zalo.oa1: 20
 	//    zalo.oa2: 21
 	// graph:channel.facebook
@@ -607,10 +608,9 @@ message UserReportRequest {
 }
 
 message UserReportEntry {
-	string category = 5;
-	string category_id = 6;
 	repeated int64 datapoint = 7;
 	int64 count = 8;
+	map<string, int64> category_ids = 9;
 	string metric = 10;
 }
 
