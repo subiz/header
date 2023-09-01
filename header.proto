@@ -242,26 +242,6 @@ message User {
 	string merged_reason = 78; // same_email, same_phone, same_record_id
 }
 
-message RelatedUsers {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	repeated RelatedUser related_users = 9;
-}
-
-message RelatedUser {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string from_user_id = 4;
-	string with_user_id = 5;
-
-	string suggested_by = 6;
-	string suggested_by_type = 7;
-	string suggested_reason = 8; // same_email, same_phone
-
-	User user = 9; // read only
-}
-
 message UserAds {
 	string provider = 3; // facebook, google
 
@@ -614,20 +594,32 @@ message UserReportRequest {
 	int64 from_time = 4; // ms
 	string unit = 5; // hour, day, month
 	int64 limit = 8; // default: 24, 30, 24
+	repeated string metrics = 9; // category.cactegory_id all.
+	// all.*
+	// graph:all.-  exact
+	// channel.facebook.~ graph of user channel facebook
+	// channel.facebook.~ graph of user channel facebook
+	// count:channel_source.zalo.*
+	//    zalo.oa1: 20
+	//    zalo.oa2: 21
+	// graph:channel.facebook
+	// count:ref_source
 }
 
 message UserReportEntry {
 	string category = 5;
 	string category_id = 6;
 	repeated int64 datapoint = 7;
+	int64 count = 8;
+	string metric = 10;
 }
 
 message UserReportResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-  repeated UserReportEntry user = 5;
-	repeated UserReportEntry lead = 6;
+  repeated UserReportEntry users = 5;
+	repeated UserReportEntry leads = 6;
 }
 
 message UserMetricsRequest {
