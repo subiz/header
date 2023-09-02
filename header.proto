@@ -3695,6 +3695,7 @@ message FacebookPost {
 	string full_picture = 12;
 	string story = 13;
 	FacebookPostAttachemnts attachments = 14;
+	string updated_time = 15;
 }
 
 message UserOrderConfirmation {
