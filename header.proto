@@ -6879,6 +6879,10 @@ message AccSubs {
 	common.Context ctx = 1;
 	repeated AccSub accsub = 2;
 	string anchor = 4;
+	int64 total_trial = 5;
+	int64 total_standard = 6;
+	int64 total_advanced = 7;
+	int64 total = 8;
 }
 
 message OutboundCallUpdateEvent {
