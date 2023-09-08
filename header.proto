@@ -5543,6 +5543,7 @@ message DocIndexRequest {
 	bool is_email = 12;
 	repeated string owners = 9;
 	string primary_document_id=13;
+	int64 sec = 14; // unix sec for doc, used to order more recent document
 }
 
 message DocSearchRequest {
