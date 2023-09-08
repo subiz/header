@@ -1383,6 +1383,7 @@ message CallInfo {
 	string call_id = 26;
 	string diversion_number = 27;
 	string transfer_to = 28;
+
 }
 
 message Rating {
@@ -3467,6 +3468,9 @@ message File {
 	// metadata
 	int64 uploaded = 28;
 	string gcs_url = 29;
+
+	string status = 30; // uploading
+	string error_code = 31;
 }
 
 message BotTerminated {
