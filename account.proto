@@ -39,6 +39,7 @@ message DashboardAgent {
 	optional int64 order_seen = 33;
 
 	map<string,string> segment_order_by = 34;
+	map<string,string> user_view_display_field = 35;
 }
 
 message Agent {
