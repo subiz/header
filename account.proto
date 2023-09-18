@@ -159,7 +159,6 @@ message Account {
 	optional bool currency_locked = 42;
 
 	optional int64 login_locked = 43;
-	optional int64 expired = 44;
 	optional bool is_warn_popup = 45;
 }
 

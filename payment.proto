@@ -88,7 +88,6 @@ message Plan {
 	optional float price = 4; // usd
 	enum Type {
 		trial = 0;
-		free = 1;
 		standard = 2;
 		advanced = 3;
 	}
@@ -119,6 +118,7 @@ message Subscription {
 	optional int64 ended = 45;
 
 	optional bool trusted = 46;
+	optional int64 churned = 47;
 }
 
 message Bill {
