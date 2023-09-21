@@ -232,6 +232,7 @@ message WarnInactiveEmail {
 	optional int64 days_before_inactive = 11;
 	optional string account_name = 12;
 	optional string plan = 13;
+	optional int64 num_contacts = 14;
 }
 
 message InvoiceEmail {
