@@ -248,8 +248,6 @@ service ConversationMgr {
 	rpc Typing(Id) returns (Empty); // deprecated
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
-	rpc SearchConvos(header.SearchRequest) returns (header.Conversations); // deprecated
-
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
 	rpc UpdateConversationMember(header.ConversationMember) returns (Empty);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
