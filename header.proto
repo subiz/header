@@ -3471,6 +3471,9 @@ message File {
 
 	string status = 30; // uploading
 	string error_code = 31;
+
+	string image_1024 = 32;
+	string image_512 = 33;
 }
 
 message BotTerminated {
