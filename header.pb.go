@@ -45612,30 +45612,32 @@ type OutboundCallEntry struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx          *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId    string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	CampaignId   string          `protobuf:"bytes,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
-	Number       string          `protobuf:"bytes,4,opt,name=number,proto3" json:"number,omitempty"` // , ; or / delimeter
-	FromNumber   string          `protobuf:"bytes,5,opt,name=from_number,json=fromNumber,proto3" json:"from_number,omitempty"`
-	UserId       string          `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // from segment // primary
-	Status       string          `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`               // empty, calling, answered, noanswer (busy), failed (wrong_number or congestion), cancel, deleted
-	GoalReached  bool            `protobuf:"varint,8,opt,name=goal_reached,json=goalReached,proto3" json:"goal_reached,omitempty"`
-	Assignee     string          `protobuf:"bytes,9,opt,name=assignee,proto3" json:"assignee,omitempty"`
-	CreatedBy    string          `protobuf:"bytes,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	CallSec      int64           `protobuf:"varint,11,opt,name=call_sec,json=callSec,proto3" json:"call_sec,omitempty"` // sec
-	Caller       string          `protobuf:"bytes,12,opt,name=caller,proto3" json:"caller,omitempty"`
-	Called       int64           `protobuf:"varint,13,opt,name=called,proto3" json:"called,omitempty"`
-	CallId       string          `protobuf:"bytes,14,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`               // conversation id
-	NextCallId   string          `protobuf:"bytes,16,opt,name=next_call_id,json=nextCallId,proto3" json:"next_call_id,omitempty"` // realtime only
-	Created      int64           `protobuf:"varint,18,opt,name=created,proto3" json:"created,omitempty"`
-	ScheduledIn  int64           `protobuf:"varint,19,opt,name=scheduled_in,json=scheduledIn,proto3" json:"scheduled_in,omitempty"`
-	Submission   *FormSubmission `protobuf:"bytes,23,opt,name=submission,proto3" json:"submission,omitempty"` // dont return to client
-	Updated      int64           `protobuf:"varint,25,opt,name=updated,proto3" json:"updated,omitempty"`
-	NumAttempts  int64           `protobuf:"varint,26,opt,name=num_attempts,json=numAttempts,proto3" json:"num_attempts,omitempty"`
-	DoNotCall    bool            `protobuf:"varint,27,opt,name=do_not_call,json=doNotCall,proto3" json:"do_not_call,omitempty"`
-	Note         string          `protobuf:"bytes,28,opt,name=note,proto3" json:"note,omitempty"` // max 1024
-	ReattemptAt  int64           `protobuf:"varint,29,opt,name=reattempt_at,json=reattemptAt,proto3" json:"reattempt_at,omitempty"`
-	TotalCallSec int64           `protobuf:"varint,30,opt,name=total_call_sec,json=totalCallSec,proto3" json:"total_call_sec,omitempty"`
+	Ctx            *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId      string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	CampaignId     string          `protobuf:"bytes,3,opt,name=campaign_id,json=campaignId,proto3" json:"campaign_id,omitempty"`
+	Number         string          `protobuf:"bytes,4,opt,name=number,proto3" json:"number,omitempty"` // , ; or / delimeter
+	FromNumber     string          `protobuf:"bytes,5,opt,name=from_number,json=fromNumber,proto3" json:"from_number,omitempty"`
+	UserId         string          `protobuf:"bytes,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // from segment // primary
+	Status         string          `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`               // (last call status, read only) empty, calling, answered, noanswer (busy), failed (wrong_number or congestion), cancel, deleted
+	GoalReached    bool            `protobuf:"varint,8,opt,name=goal_reached,json=goalReached,proto3" json:"goal_reached,omitempty"`
+	Assignee       string          `protobuf:"bytes,9,opt,name=assignee,proto3" json:"assignee,omitempty"`
+	CreatedBy      string          `protobuf:"bytes,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	CallSec        int64           `protobuf:"varint,11,opt,name=call_sec,json=callSec,proto3" json:"call_sec,omitempty"` // sec
+	Caller         string          `protobuf:"bytes,12,opt,name=caller,proto3" json:"caller,omitempty"`
+	Called         int64           `protobuf:"varint,13,opt,name=called,proto3" json:"called,omitempty"`
+	CallId         string          `protobuf:"bytes,14,opt,name=call_id,json=callId,proto3" json:"call_id,omitempty"`               // conversation id
+	NextCallId     string          `protobuf:"bytes,16,opt,name=next_call_id,json=nextCallId,proto3" json:"next_call_id,omitempty"` // realtime only
+	Created        int64           `protobuf:"varint,18,opt,name=created,proto3" json:"created,omitempty"`
+	ScheduledIn    int64           `protobuf:"varint,19,opt,name=scheduled_in,json=scheduledIn,proto3" json:"scheduled_in,omitempty"`
+	Submission     *FormSubmission `protobuf:"bytes,23,opt,name=submission,proto3" json:"submission,omitempty"` // dont return to client
+	Updated        int64           `protobuf:"varint,25,opt,name=updated,proto3" json:"updated,omitempty"`
+	NumAttempts    int64           `protobuf:"varint,26,opt,name=num_attempts,json=numAttempts,proto3" json:"num_attempts,omitempty"`
+	DoNotCall      bool            `protobuf:"varint,27,opt,name=do_not_call,json=doNotCall,proto3" json:"do_not_call,omitempty"`
+	Note           string          `protobuf:"bytes,28,opt,name=note,proto3" json:"note,omitempty"` // max 1024
+	ReattemptAt    int64           `protobuf:"varint,29,opt,name=reattempt_at,json=reattemptAt,proto3" json:"reattempt_at,omitempty"`
+	TotalCallSec   int64           `protobuf:"varint,30,opt,name=total_call_sec,json=totalCallSec,proto3" json:"total_call_sec,omitempty"`
+	State          string          `protobuf:"bytes,31,opt,name=state,proto3" json:"state,omitempty"` // open, called, goal
+	StateUpdatedBy string          `protobuf:"bytes,32,opt,name=state_updated_by,json=stateUpdatedBy,proto3" json:"state_updated_by,omitempty"`
 }
 
 func (x *OutboundCallEntry) Reset() {
@@ -45836,6 +45838,20 @@ func (x *OutboundCallEntry) GetTotalCallSec() int64 {
 		return x.TotalCallSec
 	}
 	return 0
+}
+
+func (x *OutboundCallEntry) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *OutboundCallEntry) GetStateUpdatedBy() string {
+	if x != nil {
+		return x.StateUpdatedBy
+	}
+	return ""
 }
 
 type WorkflowGoal struct {
@@ -59624,7 +59640,7 @@ var file_header_proto_rawDesc = []byte{
 	0x74, 0x61, 0x6c, 0x5f, 0x6f, 0x70, 0x65, 0x6e, 0x18, 0x18, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09,
 	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x4f, 0x70, 0x65, 0x6e, 0x12, 0x1b, 0x0a, 0x09, 0x74, 0x6f, 0x74,
 	0x61, 0x6c, 0x5f, 0x61, 0x6c, 0x6c, 0x18, 0x19, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x74, 0x6f,
-	0x74, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x22, 0xf3, 0x05, 0x0a, 0x11, 0x4f, 0x75, 0x74, 0x62, 0x6f,
+	0x74, 0x61, 0x6c, 0x41, 0x6c, 0x6c, 0x22, 0xb3, 0x06, 0x0a, 0x11, 0x4f, 0x75, 0x74, 0x62, 0x6f,
 	0x75, 0x6e, 0x64, 0x43, 0x61, 0x6c, 0x6c, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x21, 0x0a, 0x03,
 	0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d,
 	0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12,
@@ -59671,7 +59687,11 @@ var file_header_proto_rawDesc = []byte{
 	0x5f, 0x61, 0x74, 0x18, 0x1d, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0b, 0x72, 0x65, 0x61, 0x74, 0x74,
 	0x65, 0x6d, 0x70, 0x74, 0x41, 0x74, 0x12, 0x24, 0x0a, 0x0e, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f,
 	0x63, 0x61, 0x6c, 0x6c, 0x5f, 0x73, 0x65, 0x63, 0x18, 0x1e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c,
-	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x43, 0x61, 0x6c, 0x6c, 0x53, 0x65, 0x63, 0x22, 0xe2, 0x01, 0x0a,
+	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x43, 0x61, 0x6c, 0x6c, 0x53, 0x65, 0x63, 0x12, 0x14, 0x0a, 0x05,
+	0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x1f, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61,
+	0x74, 0x65, 0x12, 0x28, 0x0a, 0x10, 0x73, 0x74, 0x61, 0x74, 0x65, 0x5f, 0x75, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x64, 0x5f, 0x62, 0x79, 0x18, 0x20, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x73, 0x74,
+	0x61, 0x74, 0x65, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x42, 0x79, 0x22, 0xe2, 0x01, 0x0a,
 	0x0c, 0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x47, 0x6f, 0x61, 0x6c, 0x12, 0x1a, 0x0a,
 	0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x08, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x17, 0x0a, 0x07, 0x75, 0x69, 0x5f,
