@@ -6073,7 +6073,7 @@ message OutboundCallCampaign {
 		least_unfinished_agent = 7;
 		least_called_agent = 8;
 	}
-	string strategy = 13;
+	string assign_strategy = 13;
 	map<string, int64> agent_weight = 14; // ag245 -> 2445 => 24.45%
 }
 
@@ -6118,6 +6118,17 @@ message OutboundCallEntries {
 	int64 num_goal_reached = 22;
 	int64 total_open = 24;
 	int64 total_all = 25;
+}
+
+message ImportOutboundCallEntryRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+
+	repeated OutboundCallEntry entries = 5;
+
+	string assign_strategy = 13;  // weight
+	map<string, int64> agent_weight = 14; // agduc -> 5 => 24.45%
 }
 
 message OutboundCallEntry {
@@ -6328,6 +6339,15 @@ message OutboundCallReportRequest {
 
 	string range = 12; // hour, day
 	string timezone = 13; // +07:00
+}
+
+message ImportOutboundCallEntryResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	int64 num_success = 4;
+	repeated int64 error_indices = 5;
+	repeated string error_codes = 6;
 }
 
 message OutboundCallReportResponse {
