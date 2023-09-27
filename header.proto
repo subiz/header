@@ -6044,6 +6044,7 @@ message Campaign {
 
 	string credit_id = 49;
 	int64 state_updated_at =50; //only save time user (agent,accout) updated
+
 }
 
 message WorkflowExitCondition {
@@ -6064,6 +6065,16 @@ message OutboundCallCampaign {
 	int32 max_retries = 10;
 	int32 max_call_duration_sec = 11; // default 1800
 	int64 sec_between_retries = 12; // 300 = 5 min
+
+	enum AssignStrategy {
+		unassigned = 0 ; // empty
+		roundrobin = 1;
+		weight = 6;
+		least_unfinished_agent = 7;
+		least_called_agent = 8;
+	}
+	string strategy = 13;
+	map<string, int64> agent_weight = 14; // ag245 -> 2445 => 24.45%
 }
 
 message ListOutboundCallRequest {
@@ -6074,13 +6085,22 @@ message ListOutboundCallRequest {
 	string anchor = 4;
 	int64 limit = 5; // could be negative
 
+	string state = 6;
 	string status = 7;
-	string assignee = 8;
+	string assignee = 8; // empty = all , unassigned, agid
 	string query = 9;
 	string order_by = 10; // created
 
 	repeated string user_ids = 12;
 	repeated int64 last_modifieds = 13;
+
+	UserViewCondition condition = 14;
+
+	repeated string numbers = 15;
+	repeated string exclude_numbers = 16;
+
+	string strategy = 17; // unassigned
+	map<string, int64> agent_weight = 18; // ag245 -> 2445 => 24.45%
 }
 
 message OutboundCallEntries {

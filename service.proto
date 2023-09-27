@@ -649,7 +649,8 @@ service CampaignMgr {
 	rpc GetOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc RemoveOutboudCall(header.OutboundCallEntry) returns (header.Empty);
 	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallReportResponse);
-	rpc FindNextCall(Id) returns (header.OutboundCallEntry);
+	// rpc FindNextCall(Id) returns (header.OutboundCallEntry);
+	rpc ReassignOutboundCall(ListOutboundCallRequest) returns (header.Empty);
 }
 
 service CreditMgr {
