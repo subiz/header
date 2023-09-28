@@ -6054,6 +6054,7 @@ message WorkflowExitCondition {
 }
 
 message OutboundCallCampaign {
+	repeated string managers = 3;
 	repeated string members = 4;
 	// string outcomes = 5;
 	string outbound_numbers = 6;
@@ -6126,7 +6127,7 @@ message ImportOutboundCallEntryRequest {
 	string campaign_id = 3;
 
 	repeated OutboundCallEntry entries = 5;
-
+	string on_duplicate = 6; //  override, skip
 	string assign_strategy = 13;  // weight
 	map<string, int64> agent_weight = 14; // agduc -> 5 => 24.45%
 }

@@ -1,9 +1,11 @@
 package header
 
 import (
+	hexa "encoding/hex"
 	"encoding/json"
 	"math"
 	"net/mail"
+	"net/url"
 	"reflect"
 	"strconv"
 	"strings"
@@ -1081,4 +1083,96 @@ func SetTextAttr(u *User, key string, val string) {
 	}
 
 	u.Attributes = append(u.Attributes, a)
+}
+
+func ReportExtractor(user *User, firstContentView *Event) map[string]bool {
+	keys := map[string]bool{}
+	keys["all.-"] = true
+	keys["channel."+Hex(user.Channel)] = true              // touchpoint
+	if user.Channel != "email" && user.Channel != "call" { // zalo, instagram
+		keys["channel_source."+Hex(user.Channel+"."+user.ChannelSource)] = true //
+	}
+
+	if user.Channel == "call" {
+		keys["call_isp."+Hex(GetPhoneISP(user.ProfileId))] = true //
+	}
+
+	if user.Channel != "subiz" {
+		return keys
+	}
+
+	// device.Source = com.GetSourceFromRef2(adsum, device.SourceReferrer, device.Referrer)
+	dev := firstContentView.GetBy().GetDevice()
+	if uurl, _ := url.Parse(firstContentView.GetData().GetProduct().GetUrl()); uurl != nil {
+		domain := uurl.Hostname()
+		domain = strings.TrimPrefix(domain, "www.")
+		if domain != "" {
+			keys["domain."+Hex(domain)] = true
+		}
+		keys["path."+Hex(domain+uurl.Path)] = true
+	}
+
+	if dev.GetUtm().GetSource() != "" {
+		keys["utm_source."+Hex(dev.GetUtm().GetSource())] = true
+	}
+
+	if dev.GetUtm().GetName() != "" {
+		keys["utm_campaign."+Hex(dev.GetUtm().GetName())] = true
+	}
+
+	if uurl, _ := url.Parse(firstContentView.GetBy().GetDevice().GetSourceReferrer()); uurl != nil {
+		refdomain := uurl.Hostname()
+		refdomain = strings.TrimPrefix(refdomain, "www.")
+		if refdomain != "" {
+			keys["ref_domain."+Hex(refdomain)] = true
+		}
+	}
+
+	if dev.GetSource() != "" {
+		keys["source."+Hex(dev.GetSource())] = true
+	}
+	return keys
+}
+
+func Hex(str string) string {
+	return hexa.EncodeToString([]byte(str))
+}
+
+func UnHex(str string) string {
+	out, _ := hexa.DecodeString(str)
+	return string(out)
+}
+
+func GetPhoneISP(number string) string {
+	first3 := ""
+	if len(number) < 5 {
+		return "other"
+	}
+	if number[0] == '8' && number[1] == '4' {
+		first3 = "0" + number[2:4]
+	} else if number[0] == '0' {
+		first3 = "0" + number[1:3]
+	}
+	if first3 == "059" || first3 == "099" {
+		return "Gmobile"
+	}
+	if first3 == "056" || first3 == "058" || first3 == "092" {
+		return "Vietnammobile"
+	}
+	if first3 == "070" || first3 == "079" || first3 == "077" || first3 == "076" || first3 == "078" || first3 == "090" || first3 == "093" || first3 == "089" {
+		return "Mobifone"
+	}
+
+	if first3 == "087" {
+		return "Itelecom"
+	}
+
+	if first3 == "083" || first3 == "084" || first3 == " 085" || first3 == " 081" || first3 == " 082" || first3 == " 088" || first3 == " 091" || first3 == " 094" {
+		return "Vinaphone"
+	}
+
+	if first3 == "032" || first3 == "033" || first3 == "034" || first3 == "035" || first3 == "036" || first3 == "037" || first3 == "038" || first3 == "039" || first3 == "096" || first3 == "097" || first3 == "098" || first3 == "086" {
+		return "Viettel"
+	}
+	return "other"
 }
