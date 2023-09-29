@@ -19578,7 +19578,6 @@ type CampaignMgrClient interface {
 	GetOutboundCall(ctx context.Context, in *OutboundCallEntry, opts ...grpc.CallOption) (*OutboundCallEntry, error)
 	RemoveOutboudCall(ctx context.Context, in *OutboundCallEntry, opts ...grpc.CallOption) (*Empty, error)
 	ReportOutboundCalls(ctx context.Context, in *OutboundCallReportRequest, opts ...grpc.CallOption) (*OutboundCallReportResponse, error)
-	// rpc FindNextCall(Id) returns (header.OutboundCallEntry);
 	ReassignOutboundCall(ctx context.Context, in *ListOutboundCallRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
@@ -19741,7 +19740,6 @@ type CampaignMgrServer interface {
 	GetOutboundCall(context.Context, *OutboundCallEntry) (*OutboundCallEntry, error)
 	RemoveOutboudCall(context.Context, *OutboundCallEntry) (*Empty, error)
 	ReportOutboundCalls(context.Context, *OutboundCallReportRequest) (*OutboundCallReportResponse, error)
-	// rpc FindNextCall(Id) returns (header.OutboundCallEntry);
 	ReassignOutboundCall(context.Context, *ListOutboundCallRequest) (*Empty, error)
 }
 

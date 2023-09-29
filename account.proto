@@ -5,7 +5,6 @@ package account;
 option go_package = "github.com/subiz/header/account";
 
 import "common.proto";
-import "payment.proto";
 
 message DashboardAgent {
 	optional int64 tour_guide_web_showed = 6;
@@ -60,7 +59,6 @@ message Agent {
 		male = 1;
 		female = 2;
 	}
-
 	optional string gender = 12;
 	optional string avatar_url = 13;
 	optional string lang = 14;
@@ -137,7 +135,6 @@ message Account {
 	optional string lang = 23;
 	//optional string referer_from = 24;
 	optional string timezone = 26;
-	optional payment.Limit limit = 25;
 	optional string country = 27;
 
 	optional string date_format = 29;

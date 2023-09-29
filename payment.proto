@@ -62,29 +62,13 @@ message PaymentMethod {
 	optional int64 charged = 11;
 }
 
-message Limit {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-	optional uint32 max_automations = 4;
-	// optional uint32 max_conversations = 6;
-	optional uint32 max_segments = 7;
-	optional uint32 max_agents = 8;
-	optional bool can_buy_agent = 10;
-
-	optional uint32 automation_webhook_quota = 12;
-	optional uint32 automation_email_quota = 13;
-	optional uint32 automation_message_quota = 14;
-
-	optional uint32 max_rules = 16;
-}
-
 message Plans {
 	repeated Plan plans = 2;
 }
 
 message Plan {
 	optional string name = 2;
-	optional Limit limit = 3;
+	// optional Limit limit = 3;
 	optional float price = 4; // usd
 	enum Type {
 		trial = 0;
@@ -111,7 +95,7 @@ message Subscription {
 	optional string referral_by = 29; // account_id
 	optional Customer customer = 31;
 	optional string primary_payment_method = 32;
-	optional Limit limit = 42;
+	// optional Limit limit = 42;
 	optional int32 v3_state = 43;
 
 	optional bool auto_charge = 44;
