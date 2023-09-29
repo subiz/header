@@ -646,7 +646,7 @@ service CampaignMgr {
 
 	rpc ListOutboundCallEntries(header.ListOutboundCallRequest) returns (header.OutboundCallEntries);
 	rpc UpdateOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
-	rpc ImportOutboundCall(header.ImportOutboundCallEntryRequest) returns (header.Empty);
+	rpc ImportOutboundCall(header.ImportOutboundCallEntryRequest) returns (header.ImportOutboundCallEntryResponse);
 	rpc GetOutboundCall(header.OutboundCallEntry) returns (header.OutboundCallEntry);
 	rpc RemoveOutboudCall(header.OutboundCallEntry) returns (header.Empty);
 	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallReportResponse);

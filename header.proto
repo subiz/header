@@ -1217,6 +1217,7 @@ message ConversationMember {
 	int64 last_mentioned = 30; // ms
 
 	string invite_reason = 34;
+	int64 total_messages = 35;
 }
 
 message ListConversationsRequest {
@@ -1341,6 +1342,13 @@ message Conversation {
 	string outbound_call_entry_id = 65;
 
 	FormSubmission form_submission = 66;
+	string mark_as_spam_by = 67;
+	bool is_spam = 68;
+	int64 sentiment_score = 69;
+}
+
+message ConversationMetadata {
+
 }
 
 message CallInfo {
@@ -3851,6 +3859,7 @@ message UserCountBody {
 	repeated string ignore_uids = 7;
 }
 
+
 message UserViewCondition {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6097,8 +6106,8 @@ message ListOutboundCallRequest {
 
 	UserViewCondition condition = 14;
 
-	repeated string numbers = 15;
-	repeated string exclude_numbers = 16;
+	// repeated string numbers = 15;
+	repeated string exclude_user_ids = 16;
 
 	string strategy = 17; // unassigned
 	map<string, int64> agent_weight = 18; // ag245 -> 2445 => 24.45%
