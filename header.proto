@@ -6106,7 +6106,7 @@ message ListOutboundCallRequest {
 
 	UserViewCondition condition = 14;
 
-	// repeated string numbers = 15;
+	//repeated string numbers = 15;
 	repeated string exclude_user_ids = 16;
 
 	string strategy = 17; // unassigned
