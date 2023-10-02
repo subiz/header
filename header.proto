@@ -6965,3 +6965,27 @@ message Number {
 	int64 number = 1;
 	string version =2; //version 2 is version for convo
 }
+
+message ConvoReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 from_hour = 3;
+	int64 to_hour = 4;
+	string metric = 5;
+	string unit = 6;
+	UserViewCondition condition = 7; 
+}
+
+message ConvoReportRespone {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated ConvoReportEntry conversation_count = 3;
+	repeated ConvoReportEntry new_user_conversation = 4;
+	
+}
+
+message ConvoReportEntry {
+	repeated int64 datapoint = 1;
+	int64 count = 2;
+	map<string, int64> category_ids = 3;
+}
