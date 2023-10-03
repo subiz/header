@@ -536,6 +536,7 @@ service Holap {
 	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders); // remove
 	rpc ReportCall(header.CallMetricsRequest) returns (header.CallMetrics);
 	rpc ListCallIds(header.CallMetricsRequest) returns (header.Conversations);
+	rpc ReportConversation2(header.ConvoReportRequest) returns (header.ConvoReportRespone);
 }
 
 // proder services
