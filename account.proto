@@ -156,7 +156,11 @@ message Account {
 	optional bool currency_locked = 42;
 
 	optional int64 login_locked = 43;
-	optional bool is_warn_popup = 45;
+	optional UserAttributeSetting attribute_setting = 46;
+}
+
+message UserAttributeSetting {
+	repeated string basic_fields = 3;
 }
 
 message Feature {

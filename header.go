@@ -1121,8 +1121,7 @@ func ReportExtractor(user *User, firstContentView *Event) map[string]bool {
 	}
 
 	if uurl, _ := url.Parse(firstContentView.GetBy().GetDevice().GetSourceReferrer()); uurl != nil {
-		refdomain := uurl.Hostname()
-		refdomain = strings.TrimPrefix(refdomain, "www.")
+		refdomain := RefineRefDomain(uurl.Hostname())
 		if refdomain != "" {
 			keys["ref_domain."+Hex(refdomain)] = true
 		}
@@ -1132,6 +1131,56 @@ func ReportExtractor(user *User, firstContentView *Event) map[string]bool {
 		keys["source."+Hex(dev.GetSource())] = true
 	}
 	return keys
+}
+
+func RefineRefDomain(refdomain string) string {
+	refdomain = strings.TrimPrefix(refdomain, "www.")
+	refdomain = strings.TrimPrefix(refdomain, "m.")
+
+	// facebook
+	if strings.HasSuffix(refdomain, ".facebook.com") {
+		refdomain = "facebook.com"
+	}
+	if strings.HasSuffix(refdomain, ".coccoc.com") {
+		refdomain = "coccoc.com"
+	}
+	if strings.Contains(refdomain, "yahoo.co") {
+		// yahoo.co.jp, yahoo.com.vn
+		return "yahoo.com"
+	}
+
+	if strings.HasPrefix(refdomain, "yahoo.") {
+		// yahoo.jp
+		return "yahoo.com"
+	}
+
+	if strings.Contains(refdomain, "google.co") {
+		// google.com.au
+		refdomain = "google.com"
+	}
+	if strings.HasPrefix(refdomain, "google.") {
+		// google.ca
+		return "google.com"
+	}
+
+	if strings.HasSuffix(refdomain, ".doubleclick.net") {
+		refdomain = "doubleclick.net"
+	}
+	if strings.HasSuffix(refdomain, ".messenger.com") {
+		refdomain = "facebook.com"
+	}
+
+	if strings.HasSuffix(refdomain, ".googlesyndication.com") {
+		// fd662a7a3f921c440915d527e1165132.safeframe.googlesyndication.com
+		refdomain = "googlesyndication.com"
+	}
+
+	if strings.HasPrefix(refdomain, ".ampproject.net.") {
+		// d-1700324721198241007.ampproject.net
+		return "ampproject.net"
+	}
+
+	return refdomain
 }
 
 func Hex(str string) string {
