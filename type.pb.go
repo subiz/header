@@ -622,7 +622,7 @@ type TextCondition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Op              string           `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"`
+	Op              string           `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"` // end_with
 	Transforms      []*TextTransform `protobuf:"bytes,3,rep,name=transforms,proto3" json:"transforms,omitempty"`
 	HasValue        bool             `protobuf:"varint,4,opt,name=has_value,json=hasValue,proto3" json:"has_value,omitempty"` // true or false
 	Empty           bool             `protobuf:"varint,5,opt,name=empty,proto3" json:"empty,omitempty"`                       // true or false

@@ -241,7 +241,7 @@ message FloatTransform {
 }
 
 message TextCondition {
-	string op = 2;
+	string op = 2; // end_with
 	repeated TextTransform transforms = 3;
 
 	bool has_value = 4; // true or false

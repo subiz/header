@@ -3557,6 +3557,8 @@ message LoginSession {
 
 	int64 ttls = 21; // seconds, apikey only
 	string note = 23;
+
+	bool inspect = 24;
 }
 
 message SearchRequest {
@@ -6973,7 +6975,7 @@ message ConvoReportRequest {
 	int64 to_hour = 4;
 	repeated string metrics = 5;
 	string unit = 6;
-	UserViewCondition condition = 7; 
+	UserViewCondition condition = 7;
 	account.BusinessHours business_hours = 8;
 	string tz = 9;
 }

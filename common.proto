@@ -89,6 +89,8 @@ message Credential {
 	// for user-access token
 	string profile_id = 11;
 	string agent_access_token_id = 12;
+
+	bool inspect = 13;
 }
 
 enum Type {
