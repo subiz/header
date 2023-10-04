@@ -1134,6 +1134,10 @@ func ReportExtractor(user *User, firstContentView *Event) map[string]bool {
 }
 
 func RefineRefDomain(refdomain string) string {
+	if refdomain == "" {
+		return ""
+	}
+
 	refdomain = strings.TrimPrefix(refdomain, "www.")
 	refdomain = strings.TrimPrefix(refdomain, "m.")
 
