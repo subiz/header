@@ -6974,8 +6974,8 @@ message ConvoReportRequest {
 	int64 from_hour = 3;
 	int64 to_hour = 4;
 	repeated string metrics = 5;
-	string unit = 6;
-	repeated UserViewCondition condition = 7;
+	repeated string units = 6;
+	repeated UserViewCondition conditions = 7;
 	account.Account account = 8;
 }
 
@@ -6987,8 +6987,7 @@ message ConvoReportRespone {
 }
 
 message ConvoReportEntry {
-	repeated int64 datapoint = 1;
-	int64 count = 2;
-	map<string, int64> category_ids = 3;
-	string metric = 10;
+	repeated int64 datapoints = 1;
+	repeated string labels = 2;
+	string metric = 3;
 }
