@@ -6173,7 +6173,7 @@ message OutboundCallEntry {
 	int64 reattempt_at = 29;
 
 	int64 total_call_sec = 30;
-	string state = 31; // open, called, goal
+	string state = 31; // open, called, goal, deleted
 	string state_updated_by = 32;
 }
 
@@ -6407,6 +6407,9 @@ message OutboundCallAgentReport {
 
 	int64 num_today_calls = 12;
 	int64 num_today_goal_reacheds = 13;
+
+	int64 num_assigned_calls = 14; // total call assigned to specific agent
+	int64 num_open_calls = 15; // total open call for specific agent
 }
 
 message HourEventMeta {
