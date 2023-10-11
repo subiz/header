@@ -6152,8 +6152,8 @@ message OutboundCallEntry {
 	string number = 4; // , ; or / delimeter
 	string from_number = 5;
 	string user_id = 6; // from segment // primary
-	string status = 7; // (last call status, read only) empty, calling, answered, noanswer (busy), failed (wrong_number or congestion), cancel, deleted
-	bool goal_reached = 8;
+	string last_call_status = 7; // (last call status, read only) empty, calling, answered, noanswer (busy), failed (wrong_number or congestion), cancel, deleted
+	// bool goal_reached = 8;
 	string assignee = 9;
 	string created_by = 10;
 
@@ -6161,7 +6161,7 @@ message OutboundCallEntry {
 	string caller = 12;
 	int64 called = 13;
 	string call_id = 14; // conversation id
-	string next_call_id = 16; // realtime only
+	// string next_call_id = 16; // realtime only
 	int64 created = 18;
 	int64 scheduled_in = 19;
 	FormSubmission submission = 23; // dont return to client
