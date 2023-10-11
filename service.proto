@@ -17,6 +17,7 @@ service RateLimit {
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
+	rpc ReportConversation(header.ConvoReportRequest) returns (header.ConvoReportRespone);
 }
 
 service NumberRegistry {
@@ -536,7 +537,6 @@ service Holap {
 	rpc ReportOrder(header.OrderMetricsRequest) returns (header.Orders); // remove
 	rpc ReportCall(header.CallMetricsRequest) returns (header.CallMetrics);
 	rpc ListCallIds(header.CallMetricsRequest) returns (header.Conversations);
-	rpc ReportConversation2(header.ConvoReportRequest) returns (header.ConvoReportRespone);
 }
 
 // proder services
