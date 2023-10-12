@@ -6991,9 +6991,12 @@ message ConvoReportRequest {
 
 message ConvoReportRespone {
 	common.Context ctx = 1;
-	repeated int64 datapoints = 2;
-	repeated string labels = 3;
-	string metric = 4;
+	repeated ConvoReportEntry metrics = 2;
 }
 
+message ConvoReportEntry {
+	repeated int64 datapoints = 1;
+	repeated string labels = 2;
+	string metric = 3;
+}
 
