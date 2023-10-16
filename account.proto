@@ -89,9 +89,9 @@ message Agent {
 	optional string client_id = 34; // ID of bot
 
 	optional bool is_supervisor = 35;
-	optional int64 last_ping = 36;
+	// optional int64 last_ping = 36;
 
-	optional int64 last_token_requested = 37;
+	// optional int64 last_token_requested = 37;
 	optional Presence last_seen = 38;
 
 	optional DashboardAgent dashboard_setting = 40;
@@ -141,7 +141,7 @@ message Account {
 	optional BusinessHours business_hours = 30;
 	optional string referrer_from = 31;
 
-	optional int64 last_token_requested = 32;  // todo: remove
+	// optional int64 last_token_requested = 32;  // todo: remove
 
 	optional LeadSetting lead_setting = 33;
 	repeated string web_domains = 34;
