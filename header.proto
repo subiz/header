@@ -6113,6 +6113,8 @@ message ListOutboundCallRequest {
 
 	string strategy = 17; // unassigned
 	map<string, int64> agent_weight = 18; // ag245 -> 2445 => 24.45%
+
+	bool id_only = 19;
 }
 
 message OutboundCallEntries {
