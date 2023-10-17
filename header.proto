@@ -23,6 +23,7 @@ message Id {
 	string channel = 5;
 	string channel_source = 6;
 	string profile_id = 7;
+	string by_agent = 8;
 }
 
 message Ids {
