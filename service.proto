@@ -46,6 +46,8 @@ service AccountMgr {
 	rpc UpdatePassword(account.NewPassword) returns (account.Agent);
 	rpc UpdateAgent(account.Agent) returns (account.Agent);
 	rpc DeleteAgent(Id) returns (account.Agent);
+	rpc DeleteAccount(Id) returns (account.Account);
+	rpc UpdateStateAccount(Id) returns (account.Account);
 	rpc RequestChangeEmail(account.Agent) returns (Empty);// require password
 	rpc ConfirmChangeEmail(account.Token) returns (account.Agent);
 	rpc AcceptInvitation(account.NewPassword) returns (account.Agent);
