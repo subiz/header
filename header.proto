@@ -6986,7 +6986,7 @@ message ConvoReportRequest {
 	int64 from_hour = 3;
 	int64 to_hour = 4;
 	repeated string metrics = 5;
-	repeated string units = 6;
+	repeated string group_bys = 6;
 	repeated UserViewCondition conditions = 7;
 	account.Account account = 8;
 }
