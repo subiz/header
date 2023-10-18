@@ -157,7 +157,7 @@ message Account {
 
 	optional int64 login_locked = 43;
 	optional UserAttributeSetting user_attribute_setting = 46;
-	optional string deleted_by_agent=47;
+	optional string deleted_by_agent = 47;
 }
 
 message UserAttributeSetting {

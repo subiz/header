@@ -121,7 +121,7 @@ var file_service_proto_rawDesc = []byte{
 	0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x2d, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41,
 	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
 	0x49, 0x64, 0x1a, 0x10, 0x2e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x41, 0x63, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x38, 0x0a, 0x12, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x74,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x38, 0x0a, 0x12, 0x53, 0x75, 0x62, 0x69, 0x7a, 0x55, 0x70, 0x64,
 	0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x10, 0x2e, 0x61, 0x63, 0x63,
 	0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x1a, 0x10, 0x2e, 0x61,
 	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x2e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x33,
@@ -2018,7 +2018,7 @@ var file_service_proto_depIdxs = []int32{
 	12,  // 20: header.AccountMgr.UpdateAgent:input_type -> account.Agent
 	7,   // 21: header.AccountMgr.DeleteAgent:input_type -> header.Id
 	7,   // 22: header.AccountMgr.DeleteAccount:input_type -> header.Id
-	13,  // 23: header.AccountMgr.UpdateStateAccount:input_type -> account.Account
+	13,  // 23: header.AccountMgr.SubizUpdateAccount:input_type -> account.Account
 	12,  // 24: header.AccountMgr.RequestChangeEmail:input_type -> account.Agent
 	14,  // 25: header.AccountMgr.ConfirmChangeEmail:input_type -> account.Token
 	11,  // 26: header.AccountMgr.AcceptInvitation:input_type -> account.NewPassword
@@ -2486,7 +2486,7 @@ var file_service_proto_depIdxs = []int32{
 	12,  // 488: header.AccountMgr.UpdateAgent:output_type -> account.Agent
 	12,  // 489: header.AccountMgr.DeleteAgent:output_type -> account.Agent
 	13,  // 490: header.AccountMgr.DeleteAccount:output_type -> account.Account
-	13,  // 491: header.AccountMgr.UpdateStateAccount:output_type -> account.Account
+	13,  // 491: header.AccountMgr.SubizUpdateAccount:output_type -> account.Account
 	53,  // 492: header.AccountMgr.RequestChangeEmail:output_type -> header.Empty
 	12,  // 493: header.AccountMgr.ConfirmChangeEmail:output_type -> account.Agent
 	12,  // 494: header.AccountMgr.AcceptInvitation:output_type -> account.Agent
@@ -3667,7 +3667,7 @@ type AccountMgrClient interface {
 	UpdateAgent(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*account.Agent, error)
 	DeleteAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Agent, error)
 	DeleteAccount(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Account, error)
-	UpdateStateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error)
+	SubizUpdateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error)
 	RequestChangeEmail(ctx context.Context, in *account.Agent, opts ...grpc.CallOption) (*Empty, error)
 	ConfirmChangeEmail(ctx context.Context, in *account.Token, opts ...grpc.CallOption) (*account.Agent, error)
 	AcceptInvitation(ctx context.Context, in *account.NewPassword, opts ...grpc.CallOption) (*account.Agent, error)
@@ -3811,9 +3811,9 @@ func (c *accountMgrClient) DeleteAccount(ctx context.Context, in *Id, opts ...gr
 	return out, nil
 }
 
-func (c *accountMgrClient) UpdateStateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error) {
+func (c *accountMgrClient) SubizUpdateAccount(ctx context.Context, in *account.Account, opts ...grpc.CallOption) (*account.Account, error) {
 	out := new(account.Account)
-	err := c.cc.Invoke(ctx, "/header.AccountMgr/UpdateStateAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.AccountMgr/SubizUpdateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -4370,7 +4370,7 @@ type AccountMgrServer interface {
 	UpdateAgent(context.Context, *account.Agent) (*account.Agent, error)
 	DeleteAgent(context.Context, *Id) (*account.Agent, error)
 	DeleteAccount(context.Context, *Id) (*account.Account, error)
-	UpdateStateAccount(context.Context, *account.Account) (*account.Account, error)
+	SubizUpdateAccount(context.Context, *account.Account) (*account.Account, error)
 	RequestChangeEmail(context.Context, *account.Agent) (*Empty, error)
 	ConfirmChangeEmail(context.Context, *account.Token) (*account.Agent, error)
 	AcceptInvitation(context.Context, *account.NewPassword) (*account.Agent, error)
@@ -4462,8 +4462,8 @@ func (*UnimplementedAccountMgrServer) DeleteAgent(context.Context, *Id) (*accoun
 func (*UnimplementedAccountMgrServer) DeleteAccount(context.Context, *Id) (*account.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
 }
-func (*UnimplementedAccountMgrServer) UpdateStateAccount(context.Context, *account.Account) (*account.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateStateAccount not implemented")
+func (*UnimplementedAccountMgrServer) SubizUpdateAccount(context.Context, *account.Account) (*account.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubizUpdateAccount not implemented")
 }
 func (*UnimplementedAccountMgrServer) RequestChangeEmail(context.Context, *account.Agent) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RequestChangeEmail not implemented")
@@ -4794,20 +4794,20 @@ func _AccountMgr_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountMgr_UpdateStateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AccountMgr_SubizUpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(account.Account)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountMgrServer).UpdateStateAccount(ctx, in)
+		return srv.(AccountMgrServer).SubizUpdateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.AccountMgr/UpdateStateAccount",
+		FullMethod: "/header.AccountMgr/SubizUpdateAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountMgrServer).UpdateStateAccount(ctx, req.(*account.Account))
+		return srv.(AccountMgrServer).SubizUpdateAccount(ctx, req.(*account.Account))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5929,8 +5929,8 @@ var _AccountMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _AccountMgr_DeleteAccount_Handler,
 		},
 		{
-			MethodName: "UpdateStateAccount",
-			Handler:    _AccountMgr_UpdateStateAccount_Handler,
+			MethodName: "SubizUpdateAccount",
+			Handler:    _AccountMgr_SubizUpdateAccount_Handler,
 		},
 		{
 			MethodName: "RequestChangeEmail",
