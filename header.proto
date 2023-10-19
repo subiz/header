@@ -6390,6 +6390,8 @@ message OutboundCallReportResponse {
 
 	repeated int64 num_new_call_datapoints = 18;
 	int64 total_new_call = 19;
+
+	repeated int64 accumulate_open_call_datapoints = 20;
 }
 
 message OutboundCallSurveyReport {
