@@ -23,7 +23,6 @@ message Id {
 	string channel = 5;
 	string channel_source = 6;
 	string profile_id = 7;
-	string by_agent = 8;
 }
 
 message Ids {
@@ -2195,7 +2194,7 @@ message BotAction {
 	ActionAskQuestion ask_question = 18;
 	AssignRequest assign = 19;
 
-	int64 delay_sec = 20; // max 20sec
+	int64 delay_sec = 20; // max 60sec
 	ActionUpdateConversation update_conversation = 21;
 	bytes internal_state = 30;
 	ActionUpdateUser update_user = 31;
@@ -6388,6 +6387,9 @@ message OutboundCallReportResponse {
 
 	repeated OutboundCallAgentReport agents = 16;
 	repeated OutboundCallSurveyReport surveys = 17;
+
+	repeated int64 num_new_call_datapoints = 18;
+	int64 total_new_call = 19;
 }
 
 message OutboundCallSurveyReport {
@@ -7002,4 +7004,3 @@ message ConvoReportEntry {
 	repeated string labels = 2;
 	string metric = 3;
 }
-
