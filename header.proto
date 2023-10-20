@@ -1343,7 +1343,7 @@ message Conversation {
 
 	FormSubmission form_submission = 66;
 	string marked_as_spam_by = 67;
-	bool marked_as_spam = 68;
+	int64 marked_as_spam = 68;
 	int64 sentiment_score = 69;
 }
 
