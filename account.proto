@@ -39,6 +39,8 @@ message DashboardAgent {
 
 	map<string,string> segment_order_by = 34;
 	map<string,string> user_view_display_field = 35;
+
+	optional int64 debug_log_collected = 36;
 }
 
 message Agent {
