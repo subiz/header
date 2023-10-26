@@ -17,7 +17,7 @@ service RateLimit {
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
-	rpc ReportConversation(header.ConvoReportRequest) returns (header.ConvoReportRespone);
+	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 }
 
 service NumberRegistry {
