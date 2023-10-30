@@ -7007,3 +7007,7 @@ message ConvoReportEntry {
 	repeated string labels = 2;
 	string metric = 3;
 }
+
+message ConvosB {
+	repeated bytes arr_convos =1;
+}
