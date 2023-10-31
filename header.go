@@ -282,13 +282,13 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 	}
 
 	if isByConnector {
-		oldattr.ConnectorValue = AttributeValue(attr)
+		oldattr.ConnectorValue = AttributeValue(defM, attr)
 		oldattr.Modified = time.Now().UnixMilli()
 		updatedUser = true
 	}
 
 	if isByUser {
-		oldattr.UserValue = AttributeValue(attr)
+		oldattr.UserValue = AttributeValue(defM, attr)
 		oldattr.Modified = time.Now().UnixMilli()
 		updatedUser = true
 	}
