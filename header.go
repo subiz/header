@@ -199,6 +199,32 @@ func IsSameAttr(def *AttributeDefinition, a, b *Attribute) bool {
 	return false
 }
 
+func AttributeValue(defM map[string]*AttributeDefinition, attr *Attribute) string {
+	def := defM[attr.Key]
+	// undefined attribute, ignore
+	if def == nil {
+		return attr.Text
+	}
+
+	if def.Type == "datetime" {
+		return attr.Datetime
+	}
+
+	if attr.Type == "boolean" {
+		if attr.Boolean {
+			return "true"
+		}
+		return "false"
+	}
+
+	if attr.Type == "number" {
+		return strconv.FormatFloat(attr.Number, 'f', -1, 64)
+	}
+
+	// if def.Type == "text" || def.Type == "list" || def.Type == "" {
+	return attr.Text
+}
+
 func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Attribute) (updatedUser bool) {
 	if attr.GetAction() == "noop" {
 		return false
@@ -213,15 +239,17 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 	isBySystem := bytype == cpb.Type_subiz.String()
 	isManually := bytype == cpb.Type_agent.String()
 	isByConnector := bytype == cpb.Type_connector.String()
-	isByCollector := !isByConnector && !isBySystem && !isManually // (bot, widget, user)
+	isByUser := !isByConnector && !isBySystem && !isManually // (bot, widget, user)
 
 	def := defM[attr.Key]
 	// undefined attribute, ignore
 	if def == nil {
 		return false
 	}
+
+	// only allow subiz to update system read-only field
 	if def.IsSystem && def.IsReadonly {
-		if isManually || isByCollector {
+		if isManually || isByUser {
 			return false
 		}
 	}
@@ -253,10 +281,22 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 		updatedUser = true
 	}
 
+	if isByConnector {
+		oldattr.ConnectorValue = AttributeValue(attr)
+		oldattr.Modified = time.Now().UnixMilli()
+		updatedUser = true
+	}
+
+	if isByUser {
+		oldattr.UserValue = AttributeValue(attr)
+		oldattr.Modified = time.Now().UnixMilli()
+		updatedUser = true
+	}
+
 	canWrite := CanUpdate(bytype, oldattr.GetByType())
 
 	// user can only push
-	if action == Attribute_unshift.String() && (isByCollector || isByConnector) {
+	if action == Attribute_unshift.String() && (isByUser || isByConnector) {
 		action = Attribute_push.String()
 	}
 
@@ -270,7 +310,7 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 		canWrite = true
 	}
 
-	if def.PreventAutoOverride && !oldIsEmpty && isByCollector {
+	if def.PreventAutoOverride && !oldIsEmpty && isByUser {
 		canWrite = false
 	}
 

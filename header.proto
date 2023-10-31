@@ -106,7 +106,10 @@ message Attribute {
 		unshift = 6;
 	}
 	string action = 18;
-	repeated string other_labels = 24; // home, work for other value
+	repeated string other_labels = 24; // home, work, for other value
+
+	string connector_value = 25; // value of connector
+	string user_value = 26;
 }
 
 message PhoneDevices {
@@ -1650,6 +1653,20 @@ message Attachment {
 	string content_id = 35;
 	string disposition = 36; // for custom data
 
+	string file_id = 40;
+	string md5 = 41;
+
+	// for audio file only
+	repeated float audio_waveform = 43;
+
+	// for video and audio
+	int64 duration = 44; // sec
+
+	// for image file
+	int64 width = 45;
+	int64 height = 46;
+	int64 thumbnail_width = 48;
+	int64 thumbnail_height = 49;
 	// 	string template_type = 36; // for zalo: request_user_info
 }
 
