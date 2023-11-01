@@ -7025,7 +7025,3 @@ message ConvoReportEntry {
 	string metric = 3;
 	map<string, int64> touchpointM = 4; //map source --> channel=>  only for transform output 
 }
-
-message ConvosB {
-	repeated bytes arr_convos =1;
-}
