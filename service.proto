@@ -18,6 +18,7 @@ service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
+	rpc ListConversationIds(header.ConversationMetricsRequest) returns (header.Conversations);
 }
 
 service NumberRegistry {
