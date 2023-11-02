@@ -7012,6 +7012,8 @@ message ConvoReportRequest {
 	repeated string group_bys = 6;
 	repeated UserViewCondition conditions = 7;
 	account.Account account = 8;
+	string anchor = 9;
+	int32 limit = 10;
 }
 
 message ConvoReportRespone {
