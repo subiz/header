@@ -32,7 +32,7 @@ message OfficialAccount {
 	string package_name = 25;
 	string package_valid_through_date = 26;
 	string package_auto_renew_date = 27;
-	string linked_ZCA = 28;
+	string linkedZCA = 28;
 }
 
 message ZaloUser {
