@@ -1853,6 +1853,16 @@ message Integration {
 	string email_sender_zip = 57;
 
 	string email_sender_nickname = 58;
+
+	int64 zalo_type = 60;
+	bool zalo_is_verified = 61;
+	string zalo_oa_alias = 62;
+	string zalo_cate_name = 63;
+	int64 zalo_num_follower = 64;
+	string zalo_package_name = 65;
+	string zalo_package_valid_through_date = 66;
+	string zalo_package_auto_renew_date = 67;
+	string zalo_linkedZCA = 68;
 }
 
 message TagRequest {
@@ -7025,5 +7035,5 @@ message ConvoReportEntry {
 	repeated int64 datapoints = 1;
 	repeated string labels = 2;
 	string metric = 3;
-	map<string, string> touchpointM = 4; //map source --> channel=>  only for transform output 
+	map<string, string> touchpointM = 4; //map source --> channel=>  only for transform output
 }
