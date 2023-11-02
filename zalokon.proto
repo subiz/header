@@ -23,6 +23,16 @@ message OfficialAccount {
 	int64 last_called = 17;
 	int64 last_refresh_token_error_at = 18;
 	int64 access_token_expired_at = 19;
+
+	int64 oa_type = 20;
+	bool is_verified = 21;
+	string oa_alias = 22;
+	string cate_name = 23;
+	int64 num_follower = 24;
+	string package_name = 25;
+	string package_valid_through_date = 26;
+	string package_auto_renew_date = 27;
+	string linked_ZCA = 28;
 }
 
 message ZaloUser {
