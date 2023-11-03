@@ -3627,6 +3627,7 @@ message FbFanpageSetting {
 
 	FbCommentSetting general_comment_setting = 5;
 	FbCommentSetting specific_post_comment_setting = 6;
+	repeated FbCommentSetting post_comment_settings = 7;
 
 	int64 updated = 9;
 	string platform = 10; // default facebook. Could be instagram
