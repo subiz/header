@@ -3663,6 +3663,8 @@ message FbCommentSetting {
 	repeated string keywords = 10; // comment
 	repeated string post_ids = 11; // post
 	repeated string hashtags = 12; // post (contain #)
+
+	repeated FacebookPost posts = 13; // read only
 }
 
 message FacebookPosts {
