@@ -7029,7 +7029,7 @@ message ConvoReportRequest {
 	int32 limit = 10;
 }
 
-message ConvoReportRespone {
+message ConvoReportResponse {
 	common.Context ctx = 1;
 	repeated ConvoReportEntry metrics = 2;
 }
