@@ -1892,6 +1892,7 @@ message AssignRequest {
 	string action_id = 12;
 
 	repeated string fallback_agents = 13;
+	Event start_event = 14;
 }
 
 message EndchatConnectorSetting {
