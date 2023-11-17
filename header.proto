@@ -1294,7 +1294,7 @@ message Conversation {
 
 	Event last_internal_message_sent = 27;
 	Event last_message_sent = 23;          // no internal
-	Event last_event = 26;                 // no internal // remove
+	// Event last_event = 26;                 // no internal // remove
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -1322,13 +1322,12 @@ message Conversation {
 	Event matched_event = 45; // for search only
 
 	string locale = 46;
-	repeated string agent_sent_ids = 47; // holap derived
 	int64 first_replied_duration = 48; // holap derived
-	string channel = 49; // holap derived
-	string channel_touchpoint = 50; // holap derived
+	// string channel = 49;
+	// string channel_touchpoint = 50;
 	bool is_private = 51;
 
-	string avatar_url = 52;
+	string avatar_url = 52; // for private conversation
 	bool is_returned = 54; // for report new vs. old
 
 	CallInfo call = 55;
@@ -1348,10 +1347,6 @@ message Conversation {
 	string marked_as_spam_by = 67;
 	int64 marked_as_spam = 68;
 	int64 sentiment_score = 69;
-}
-
-message ConversationMetadata {
-
 }
 
 message CallInfo {
@@ -1394,7 +1389,6 @@ message CallInfo {
 	string call_id = 26;
 	string diversion_number = 27;
 	string transfer_to = 28;
-
 }
 
 message Rating {

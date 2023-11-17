@@ -225,6 +225,7 @@ func AttributeValue(defM map[string]*AttributeDefinition, attr *Attribute) strin
 	return attr.Text
 }
 
+// system => only coin
 func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Attribute) (updatedUser bool) {
 	if attr.GetAction() == "noop" {
 		return false
@@ -233,6 +234,13 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 	if attr.GetKey() == "" || user == nil || defM == nil {
 		return false
 	}
+
+	def := defM[attr.Key]
+	// undefined attribute, ignore
+	if def == nil {
+		return false
+	}
+
 	by := attr.By
 	bytype := attr.ByType
 	// find the oldprop
@@ -240,12 +248,6 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 	isManually := bytype == cpb.Type_agent.String()
 	isByConnector := bytype == cpb.Type_connector.String()
 	isByUser := !isByConnector && !isBySystem && !isManually // (bot, widget, user)
-
-	def := defM[attr.Key]
-	// undefined attribute, ignore
-	if def == nil {
-		return false
-	}
 
 	// only allow subiz to update system read-only field
 	if def.IsSystem && def.IsReadonly {
@@ -266,7 +268,7 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 	}
 	var oldattr *Attribute
 	for _, a := range user.Attributes {
-		if SameKey(a.Key, attr.Key) {
+		if a.Key == attr.Key {
 			oldattr = a
 			break
 		}
