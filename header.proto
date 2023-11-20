@@ -7034,5 +7034,4 @@ message ConvoReportEntry {
 	repeated int64 datapoints = 1;
 	repeated string labels = 2;
 	string metric = 3;
-	map<string, string> touchpointM = 4; //map source --> channel=>  only for transform output
 }
