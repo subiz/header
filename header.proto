@@ -1322,9 +1322,10 @@ message Conversation {
 	Event matched_event = 45; // for search only
 
 	string locale = 46;
-	int64 first_replied_duration = 48; // holap derived
-	// string channel = 49;
-	// string channel_touchpoint = 50;
+	repeated string agent_sent_ids = 47;
+	int64 first_replied_duration = 48; 
+	string channel = 49;
+	string channel_touchpoint = 50;
 	bool is_private = 51;
 
 	string avatar_url = 52; // for private conversation
