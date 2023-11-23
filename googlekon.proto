@@ -1,0 +1,63 @@
+syntax = "proto2";
+
+package googlekon;
+
+option go_package = "github.com/subiz/header/googlekon";
+
+message GGReview {
+	optional string name = 1;
+	optional string review_id = 2;
+	optional GGReviewer reviewer = 3;
+
+    enum Rating {
+		star_rating_unspecified = 0; 
+		one = 1;
+		two = 2;
+		three = 3;
+        four = 4;
+        five = 5; 
+	}
+
+
+	optional string star_rating = 4; //rating
+	optional string comment = 5;
+	optional int64 create_time = 6;
+	optional int64 update_time = 7;
+	optional GGReviewReply review_rely = 8;
+}
+
+message GGReviewer {
+    optional string profile_photo_url= 1;
+	optional string display_name = 2;
+	optional bool is_anonymous = 3;
+}
+
+message GGReviewReply {
+    optional string comment = 1;
+	optional string update_time = 2;
+}
+
+message GGListReviews {
+    repeated GGReview reviews = 1;
+	optional float avarage_rating = 2;
+    optional int32 total_review_count = 3;
+    optional string next_page_token = 4;
+}
+
+message GGReviewsRequest {
+    repeated string location_names = 1; 
+    optional int32 page_size = 2;
+    optional string page_token = 3;
+    optional string order_by = 4; 
+    optional bool ignore_rating_only_reviews =5 ; 
+}
+
+message GGReviewsInLocations {
+	repeated GGLocationReview location_reviews = 1;
+	optional string next_page_token = 2;
+}
+
+message GGLocationReview {
+	optional string name = 1;
+	optional GGReview review =2;
+}
