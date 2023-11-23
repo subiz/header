@@ -29,8 +29,6 @@ message Ids {
 	common.Context ctx = 1;
 	string account_id = 2;
 	repeated string ids = 3;
-	// repeated string signatures = 4; // can remove
-
 	repeated int64 last_modifieds = 5; // ms
 	string anchor = 6;
 	int32 limit = 7;
@@ -86,8 +84,6 @@ message Attribute {
 	double number = 11;
 	bool boolean = 12;
 	string datetime = 13;
-	// repeated string list = 14; // remove [a,b,c]
-	// repeated Attribute revisions = 15;
 
 	repeated string other_values = 20;
 
@@ -437,25 +433,16 @@ message Note {
 	int64 created = 7;
 	int64 updated = 8;
 	string target_id = 9; // user_id
+
+	string original_user_id = 10; // added when merge
+	string created_by = 11;
+	string updated_by = 12;
 }
 
 message Notes {
 	common.Context ctx = 1;
 	repeated Note notes = 3;
 	string anchor = 4;
-}
-
-message UserNote {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string user_id = 4;
-
-	string text = 6;
-	int64 created = 7;
-	int64 updated = 8;
-	string created_by = 9;
-	string updated_by = 10;
 }
 
 message UserRequest {
@@ -825,6 +812,7 @@ message Event {
 	string user_id = 2;
 	string id = 3;
 	string account_id = 4;
+	string original_user_id = 5; // added when merge
 	int64 created = 8;
 	int64 updated = 10;
 	string type = 9;
@@ -1323,7 +1311,7 @@ message Conversation {
 
 	string locale = 46;
 	repeated string agent_sent_ids = 47;
-	int64 first_replied_duration = 48; 
+	int64 first_replied_duration = 48;
 	string channel = 49;
 	string channel_touchpoint = 50;
 	bool is_private = 51;
@@ -4126,6 +4114,7 @@ message Address {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string user_id = 3;
+	string original_user_id = 50;
 	string id = 4;
 	string fullname = 5;
 	string email = 6;
