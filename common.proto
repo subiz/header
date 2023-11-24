@@ -86,7 +86,7 @@ message PackedDevice {
 	int64 timezone = 8; // hash
 	int64 language = 9;
 	int64 referrer = 10; // hash, referer of api.subiz.com.vn (the current page that user is viewing)
-	int64 type = 11; // 0 - 1 - 2 -3
+	int32 type = 11; // 0 - 1 - 2 -3
 
 	// referrer of referrer
 	// for example: user go to google.com then click a link to company.com, a request
@@ -97,7 +97,7 @@ message PackedDevice {
 	int64 page_url = 13;
 	int64 page_title = 14;
 	int64 ads_network = 15; // google_adwords
-	int64 source = 16;
+	int32 source = 16;
 	PackedSessionCampaign utm = 17;
 }
 
