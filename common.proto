@@ -6,7 +6,6 @@ option go_package = "github.com/subiz/header/common";
 
 message Context {
 	Credential credential = 6;
-	PackedDevice packed_by_device = 9;
 	Device by_device = 10;
 	// for kafka
 	string sub_topic = 11;
@@ -16,6 +15,11 @@ message Context {
 	string from_service = 22; // campaign, bot
 	string from_service_id = 23; // cp329023
 	string credit_id = 24;
+}
+
+message Uint128 {
+	uint64 lo = 1;
+	uint64 hi = 2;
 }
 
 message Device {
@@ -40,11 +44,11 @@ message Device {
 	// will be sent to api.subiz.com.vn
 	// referer will be 'company.com' and source_referer will be 'google.com'
 	string source_referrer = 11;
-	repeated string ga_tracking_ids = 12;
+	// repeated string ga_tracking_ids = 12;
 	string page_url = 13;
 
 	string page_title = 14;
-	string ga_client_id = 15;
+	// string ga_client_id = 15;
 	string city_name = 18;            // derived from ip
 	string country_name = 19;         // derived from ip
 	string continent_code = 20;      // derived from ip
@@ -61,34 +65,40 @@ message Device {
 	string ads_network = 33; // google_adwords
 	string source = 34;  // direct, referring, organic, social, advertising
 
+	enum SourceType {
+		direct = 0;
+		referring = 1;
+		organic = 2;
+		social = 3;
+		advertising = 4;
+	}
+
 	SessionCampaign utm = 36;
 }
 
 message PackedDevice {
-	string ip = 3;
-	int64 user_agent = 4; // hash
-	int64 screen_resolution = 5;
-	int64 timezone = 6; // hash
-	int64 language = 7;
-	int64 referrer = 8; // hash, referer of api.subiz.com.vn (the current page that user is viewing)
-	int64 type = 9; // 0 - 1 - 2 -3
-	int64 platform = 10;
+	uint32 IPv4 = 3;
+	uint64 IPv6_lo = 4;
+	uint64 IPv6_hi = 5;
+
+	int64 user_agent = 6; // hash
+	int64 screen_resolution = 7;
+	int64 timezone = 8; // hash
+	int64 language = 9;
+	int64 referrer = 10; // hash, referer of api.subiz.com.vn (the current page that user is viewing)
+	int64 type = 11; // 0 - 1 - 2 -3
 
 	// referrer of referrer
 	// for example: user go to google.com then click a link to company.com, a request
 	// will be sent to api.subiz.com.vn
 	// referer will be 'company.com' and source_referer will be 'google.com'
-	int64 source_referrer = 11;
+	int64 source_referrer = 12;
 	// repeated string ga_tracking_ids = 12;
 	int64 page_url = 13;
-
 	int64 page_title = 14;
-	// string ga_client_id = 15;
-
-	int64 ads_network = 33; // google_adwords
-	int64 source = 34;  // direct, referring, organic, social, advertising
-
-	SessionCampaign utm = 36;
+	int64 ads_network = 15; // google_adwords
+	int64 source = 16;
+	PackedSessionCampaign utm = 17;
 }
 
 message Credential {
@@ -129,4 +139,13 @@ message SessionCampaign {
 	string term = 5;
 	string content = 6;
 	string id = 7;
+}
+
+message PackedSessionCampaign {
+	int64 name = 2;
+	int64 source = 3;
+	int64 medium = 4;
+	int64 term = 5;
+	int64 content = 6;
+	int64 id = 7;
 }

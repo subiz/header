@@ -1020,6 +1020,10 @@ func Unique(slice []string) []string {
 }
 
 func Substring(s string, start int, end int) string {
+	if s == "" {
+		return ""
+	}
+
 	if start == 0 && end >= len(s) {
 		return s
 	}
