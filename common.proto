@@ -6,6 +6,7 @@ option go_package = "github.com/subiz/header/common";
 
 message Context {
 	Credential credential = 6;
+	PackedDevice packed_by_device = 9;
 	Device by_device = 10;
 	// for kafka
 	string sub_topic = 11;
@@ -60,18 +61,34 @@ message Device {
 	string ads_network = 33; // google_adwords
 	string source = 34;  // direct, referring, organic, social, advertising
 
-	repeated SessionCampaign campaigns = 35;
 	SessionCampaign utm = 36;
 }
 
-message By {
-	Device device = 2;
+message PackedDevice {
+	string ip = 3;
+	int64 user_agent = 4; // hash
+	int64 screen_resolution = 5;
+	int64 timezone = 6; // hash
+	int64 language = 7;
+	int64 referrer = 8; // hash, referer of api.subiz.com.vn (the current page that user is viewing)
+	int64 type = 9; // 0 - 1 - 2 -3
+	int64 platform = 10;
 
-	string id = 3;
-	string client_id = 4;
-	string type = 6; // agent, user, bot, dummy
-	string display_id = 7;
-	string display_type = 8; // agent, user, bot
+	// referrer of referrer
+	// for example: user go to google.com then click a link to company.com, a request
+	// will be sent to api.subiz.com.vn
+	// referer will be 'company.com' and source_referer will be 'google.com'
+	int64 source_referrer = 11;
+	// repeated string ga_tracking_ids = 12;
+	int64 page_url = 13;
+
+	int64 page_title = 14;
+	// string ga_client_id = 15;
+
+	int64 ads_network = 33; // google_adwords
+	int64 source = 34;  // direct, referring, organic, social, advertising
+
+	SessionCampaign utm = 36;
 }
 
 message Credential {
