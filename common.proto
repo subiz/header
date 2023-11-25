@@ -118,6 +118,7 @@ message Credential {
 	string agent_access_token_id = 12;
 
 	bool inspect = 13;
+	string client_type = 14; // dashboard, widget, bot id
 }
 
 enum Type {

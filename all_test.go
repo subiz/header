@@ -12,6 +12,7 @@ import (
 	"time"
 
 	pb "github.com/subiz/header/account"
+	cpb "github.com/subiz/header/common"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -401,140 +402,171 @@ func isEqualUserAttribute(usera, userb []*Attribute) bool {
 	return true
 }
 
-func TestUpdateUserAttribute_Normal(t *testing.T) {
+func TestUpdateUserAttribute(t *testing.T) {
 	now := time.Now().UnixMilli()
 	usid := "us123"
 	var testcases = []struct {
 		name  string
+		cred  *cpb.Credential
 		attrs []*Attribute
 		attr  *Attribute
 		out   []*Attribute
 	}{
-		{name: "empty", attrs: []*Attribute{}, attr: &Attribute{}, out: []*Attribute{}},
+		{name: "empty", cred: &cpb.Credential{Type: cpb.Type_unknown}, attrs: []*Attribute{}, attr: &Attribute{}, out: []*Attribute{}},
 		{
 			name:  "userbot update userbot",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: usid},
 			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
-			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: usid},
+			attr:  &Attribute{Key: "fullname", Text: "giang"},
 			out:   []*Attribute{{Key: "fullname", ByType: "user", By: usid, UserValue: "giang", Text: "giang", Modified: now}},
 		}, {
 			name:  "userbot update userbot (no override)",
 			attrs: []*Attribute{{Key: "address", Text: "Ha noi"}},
-			attr:  &Attribute{Key: "address", Text: "Ha tay", ByType: "user", By: usid},
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: usid},
+			attr:  &Attribute{Key: "address", Text: "Ha tay"},
 			out:   []*Attribute{{Key: "address", Text: "Ha noi", UserValue: "Ha tay", Modified: now}}, // address is override prevented
 		}, {
 			name:  "userbot update userbot empty (no override)",
 			attrs: []*Attribute{{Key: "address"}},
-			attr:  &Attribute{Key: "address", Text: "Ha tay", ByType: "user", By: ""},
-			out:   []*Attribute{{Key: "address", ByType: "user", Text: "Ha tay", Modified: now}}, // address is override prevented but is empty => accept write from user
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us99"},
+			attr:  &Attribute{Key: "address", Text: "Ha tay"},
+			out:   []*Attribute{{Key: "address", By: "us99", ByType: "user", Text: "Ha tay", Modified: now}}, // address is override prevented but is empty => accept write from user
 		}, {
 			name:  "userbot update agent",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us99", ClientId: "bot12"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
-			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: "bot12"},
+			attr:  &Attribute{Key: "fullname", Text: "giang"},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
 		}, {
 			name:  "userbot update connector",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us98"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
-			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: ""},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: "us123"}, // fake user id
 			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
 		}, {
 			name:  "userbot update system",
+			cred:  &cpb.Credential{Type: cpb.Type_bot, Issuer: "bot", ClientId: "bot"}, // deprecated bot
+			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
+		}, {
+			name:  "userbot update system",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us4", ClientId: "bot"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: ""},
 			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
 		}, {
 			name:  "system update on empty by type",
+			cred:  &cpb.Credential{Type: cpb.Type_subiz, Issuer: "system"},
 			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "subiz", By: ""},
 			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "giang", Modified: now}},
 		}, {
 			name:  "system update on system attribute",
+			cred:  &cpb.Credential{Type: cpb.Type_subiz, Issuer: "system"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "subiz", By: ""},
 			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "giang", Modified: now}},
 		}, {
-
 			name:  "system update on read only",
+			cred:  &cpb.Credential{Type: cpb.Type_subiz, Issuer: "system"},
 			attrs: []*Attribute{{Key: "created", ByType: "subiz", Datetime: "444"}},
 			attr:  &Attribute{Key: "created", Datetime: "3333", ByType: "subiz", By: ""},
 			out:   []*Attribute{{Key: "created", ByType: "subiz", Datetime: "3333", Modified: now}},
 		}, {
 			name:  "system update on agent",
+			cred:  &cpb.Credential{Type: cpb.Type_subiz, Issuer: "system"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "subiz", By: ""},
 			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "giang", Modified: now}},
 		}, {
 			name:  "update on empty by type",
+			cred:  &cpb.Credential{Type: cpb.Type_unknown},
 			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "", By: usid},
-			out:   []*Attribute{{Key: "fullname", Text: "giang", Modified: now, UserValue: "giang", By: usid}},
+			out:   []*Attribute{{Key: "fullname", Text: "thanh"}},
 		}, {
 			name:  "agent update on system ",
+			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "agent", By: "ag123"},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "giang", Modified: now, By: "ag123"}},
 		}, {
 			name:  "agent update on agent",
 			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
+			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "agent", By: "ag123"},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "giang", Modified: now, By: "ag123"}},
 		}, {
 			name:  "agent update on connector",
 			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
+			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "agent", By: "ag123"},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "giang", Modified: now, By: "ag123"}},
 		}, {
 			name:  "agent update on system by type readonly",
+			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
 			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
-			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "Agent", By: ""},
+			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "agent", By: ""},
 			out:   []*Attribute{{Key: "created", Datetime: "123"}},
 		}, {
 			name:  "connector update on system ",
+			cred:  &cpb.Credential{Type: cpb.Type_connector, Issuer: "fabikon", ClientId: "fabikon"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: "fabikon"},
 			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "giang", Modified: now, ConnectorValue: "giang", By: "fabikon"}},
 		}, {
 			name:  "connector update on agent",
+			cred:  &cpb.Credential{Type: cpb.Type_connector, Issuer: "fabikon", ClientId: "fabikon"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: ""},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh", ConnectorValue: "giang", Modified: now}},
 		},
 		{
 			name:  "connector update on empty agent",
+			cred:  &cpb.Credential{Type: cpb.Type_connector, Issuer: "fabikon", ClientId: "fabikon"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: ""}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: ""},
 			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "giang", ConnectorValue: "giang", Modified: now}},
 		}, {
 			name:  "connector update on connect",
+			cred:  &cpb.Credential{Type: cpb.Type_connector, Issuer: "fabikon", ClientId: "fabikon"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
-			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: ""},
-			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "giang", ConnectorValue: "giang", Modified: now}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: "fabikon"},
+			out:   []*Attribute{{Key: "fullname", By: "fabikon", ByType: "connector", Text: "giang", ConnectorValue: "giang", Modified: now}},
 		}, {
 			name:  "connector update on system by type readonly",
+			cred:  &cpb.Credential{Type: cpb.Type_connector, Issuer: "fabikon", ClientId: "fabikon"},
 			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
-			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "connector", By: ""},
-			out:   []*Attribute{{Key: "created", Datetime: "12344", ByType: "connector", ConnectorValue: "12344", Modified: now}},
+			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "connector", By: "fabikon"},
+			out:   []*Attribute{{Key: "created", Datetime: "12344", By: "fabikon", ByType: "connector", ConnectorValue: "12344", Modified: now}},
 		}, {
 			name:  "system update on system by type",
+			cred:  &cpb.Credential{Type: cpb.Type_subiz, Issuer: "system"},
 			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
 			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "agent", By: ""},
 			out:   []*Attribute{{Key: "created", Datetime: "123"}},
 		}, {
 			name:  "bot update on system by type",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: usid, ClientId: "bot"},
 			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
 			attr:  &Attribute{Key: "created", Datetime: "456", ByType: "bot", By: ""},
 			out:   []*Attribute{{Key: "created", Datetime: "123"}},
 		}, {
 			name:  "user update on agent",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: usid}, // deprecated bot
 			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
-			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: "us123"},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: usid},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh", UserValue: "giang", Modified: now}},
 		}, {
 			name:  "invalid bot update on empty",
+			cred:  &cpb.Credential{Type: cpb.Type_bot, Issuer: "bot", ClientId: "bot"}, // deprecated bot
 			attrs: []*Attribute{{Key: "fullname"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: "bot1"},
 			out:   []*Attribute{{Key: "fullname", ByType: "bot", Text: "giang", By: "bot1", Modified: now}},
 		}, {
 			name:  "invalid bot credential",
+			cred:  &cpb.Credential{Type: cpb.Type_bot, Issuer: "bot", ClientId: "bot"}, // deprecated bot
 			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: "b1"}, // invalid
 			out:   []*Attribute{{Key: "fullname", Text: "thanh"}},
@@ -542,6 +574,7 @@ func TestUpdateUserAttribute_Normal(t *testing.T) {
 		{
 			name:  "normal",
 			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi HuongGiang"}},
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: usid},
 			attr:  &Attribute{Key: "emails", By: usid, ByType: "user", Text: "giangbth@gmail.com"},
 			out: []*Attribute{
 				{Key: "fullname", Text: "Bui Thi HuongGiang"},
@@ -556,12 +589,14 @@ func TestUpdateUserAttribute_Normal(t *testing.T) {
 		},
 		{
 			name:  "user update on primary",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us567"},
 			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "user", UserValue: "Bui"}},
 			attr:  &Attribute{Key: "fullname", By: "us567", ByType: "user", Text: "Giang"},
 			out:   []*Attribute{{Key: "fullname", ByType: "user", Text: "Bui Thi Huong Giang", UserValue: "Bui"}},
 		},
 		{
 			name:  "user push on primary",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us567"},
 			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}},
 			attr:  &Attribute{Key: "fullname", By: "us567", ByType: "user", Text: "Giang", Action: "push"},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "Bui Thi Huong Giang", UserValue: "Bui"}},
@@ -573,7 +608,12 @@ func TestUpdateUserAttribute_Normal(t *testing.T) {
 				continue
 			}*/
 		user := &User{Id: usid, Attributes: tc.attrs}
-		UpdateAttribute(DEFS, user, tc.attr, now)
+		cred := tc.cred
+		if cred == nil {
+			panic("CRED MUST NOT BE EXPLICIT WHEN TEST: " + tc.name)
+			// if you just dont care about cred, make it explicit: cred = &cpb.Credential{Type: cpb.Type_unknown}
+		}
+		UpdateAttribute(cred, DEFS, user, tc.attr, now)
 		if !isEqualUserAttribute(user.Attributes, tc.out) {
 			actual, _ := json.Marshal(user.Attributes)
 			expected, _ := json.Marshal(tc.out)

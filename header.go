@@ -237,7 +237,7 @@ func AttributeValue(defM map[string]*AttributeDefinition, attr *Attribute) strin
 }
 
 // system => only coin
-func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Attribute, now int64) (updatedUser bool) {
+func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition, user *User, attr *Attribute, now int64) (updatedUser bool) {
 	if attr.GetKey() == "" || user == nil || defM == nil || attr.GetAction() == "noop" {
 		return false
 	}
@@ -245,6 +245,12 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 	def := defM[attr.Key]
 	if def == nil {
 		return false // ignore undefined attribute
+	}
+
+	// dont trust user
+	if cred.GetType() == cpb.Type_user || cred.GetType() == cpb.Type_unknown {
+		attr.By = cred.GetIssuer()
+		attr.ByType = cpb.Type_user.String()
 	}
 
 	byId, bytype := attr.By, attr.ByType
