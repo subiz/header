@@ -5,8 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/crc32"
+	"math"
+	"sort"
 	"strings"
 	"testing"
+	"time"
 
 	pb "github.com/subiz/header/account"
 	"google.golang.org/protobuf/proto"
@@ -169,7 +172,7 @@ func TestPartition(t *testing.T) {
 }
 
 func TestUnpack(t *testing.T) {
-	str := "0x12126373727563616f7a6a6d626a62787a6b6e611a14616372737a666d6172766f6972676474677467773a4c1a047573657222157573727563616f7a63776e67617161797a616e756e62086f627365727665728201121a1031363937353132343037313738383738a001f6fdc8a1ae31a801f6fdc8a1ae316a301a1132333839393738373339323939383136322a0866616365626f6f6bba0110313639373531323430373137383837389801c5a4e69cae31b00197e6dda806ba0193031a1965767275636a7a656665627569706b6863646f75666f6879642214616372737a666d6172766f69726764746774677740c5a4e69cae314a0c6d6573736167655f73656e74a201a4021aa1021a09706c61696e74657874229701120a696d6167652f6a7065671a7568747470733a2f2f7663646e2e737562697a2d63646e2e636f6d2f66696c652f376666643765396266303535653136633332653037373132316364623831613932326265313131323531393132643130336134363164333632653732336639385f616372737a666d6172766f6972676474677467772a08756e7469746c6564620466696c6568a9b814526612085f666162696b6f6e1a5a226d5f373445445a4858367346553673425f475647614752533771764356566c6e31455f52364b495a5a63677676524244675f36364d6b7058704e6f6d515a4a43653463693043346572436677794a665848654767444e4c772272126373727563616f7a6a6d626a62787a6b6e619203221a10313639373531323430373137383837382207666162696b6f6e320564756d6d79d80298f8b2a3ae31"
+	str := "0x1215757372766b696c6b71706c737877696e736a76776c40c196c289c0314a0e636f6e74656e745f766965776564a20120321e320838343737363037323a0838343838393534324a0838343737363037329203471a15757372766b696c6b71706c737877696e736a76776c4a2e18d3fb84a30730c8e7c42838e28ea32848a2d0af065087dcb028580160e4bdbc286887dcb0287088a9b628800102"
 	str = strings.TrimPrefix(str, "0x")
 
 	bs, err := hex.DecodeString(str)
@@ -177,7 +180,7 @@ func TestUnpack(t *testing.T) {
 		panic(err)
 	}
 
-	ev := &Conversation{}
+	ev := &Event{}
 	proto.Unmarshal(bs, ev)
 	out, _ := json.Marshal(ev)
 
@@ -292,4 +295,289 @@ func TestUserViewCondition(t *testing.T) {
 
 	b, _ := json.Marshal(condition)
 	fmt.Println("OUT", string(b))
+}
+
+var DEFS = map[string]*AttributeDefinition{
+	"fullname": &AttributeDefinition{Name: "Fullname", Key: "fullname", Type: "text", IsSystem: true},
+	"banned":   &AttributeDefinition{Name: "Banned", Key: "is_ban", Type: "boolean", IsSystem: true, IsReadonly: true},
+	"emails":   &AttributeDefinition{Name: "Email", Key: "emails", Type: "text", IsSystem: true},
+	"phones":   &AttributeDefinition{Name: "Phone", Key: "phones", Type: "text", IsSystem: true},
+	"lifecycle_stage": {
+		Type:   "text",
+		Select: "dropdown",
+		Items: []*AttributeDefinitionListItem{
+			{Value: "subscriber", I18NLabel: &I18NString{En_US: "Subscriber", Vi_VN: "Đã theo dõi"}, Label: "Đã theo dõi"},
+			{Value: "lead", I18NLabel: &I18NString{En_US: "Lead", Vi_VN: "Tiềm năng"}, Label: "Tiềm năng"},
+			{Value: "trial", I18NLabel: &I18NString{En_US: "Trial", Vi_VN: "Dùng thử"}, Label: "Dùng thử"},
+			{Value: "qualified lead", I18NLabel: &I18NString{En_US: "Sale Qualified", Vi_VN: "Chất lượng"}, Label: "Chất lượng"},
+			{Value: "opportunity", I18NLabel: &I18NString{En_US: "Opportunity", Vi_VN: "Cơ hội"}, Label: "Cơ hội"},
+			{Value: "customer", I18NLabel: &I18NString{En_US: "Customer", Vi_VN: "Khách hàng"}, Label: "Khách hàng"},
+		},
+		Key: "lifecycle_stage", IsSystem: true,
+	},
+	"created":   {Name: "Created", Type: "datetime", Key: "created", IsSystem: true, IsReadonly: true},
+	"rank":      {Name: "Rank", Type: "number", Key: "rank", IsSystem: true},
+	"record_id": {Name: "Record ID", Type: "text", Key: "record_id", IsSystem: true},
+	"address":   {Name: "Address", Type: "text", Key: "address", PreventAutoOverride: true},
+}
+
+func isEqualAttr(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+
+	sort.Strings(a)
+	sort.Strings(b)
+
+	ajs, _ := json.Marshal(a)
+	bjs, _ := json.Marshal(b)
+	return string(ajs) == string(bjs)
+}
+
+func isEqualUserAttribute(usera, userb []*Attribute) bool {
+	if len(usera) != len(userb) {
+		return false
+	}
+	for _, a := range usera {
+		found := false
+		for _, b := range userb {
+			if a.Key != b.Key {
+				continue
+			}
+			found = true
+			if a.Modified != b.Modified {
+				return false
+			}
+
+			if a.By != b.By {
+				return false
+			}
+
+			if a.ByType != b.ByType {
+				return false
+			}
+
+			if a.Text != b.Text {
+				return false
+			}
+
+			if a.Datetime != b.Datetime {
+				return false
+			}
+
+			if a.Boolean != b.Boolean {
+				return false
+			}
+
+			if math.Abs(a.Number-b.Number) > 0.00001 {
+				return false
+			}
+
+			if a.UserValue != b.UserValue {
+				return false
+			}
+			if a.ConnectorValue != b.ConnectorValue {
+				return false
+			}
+
+			if a.Action != b.Action {
+				return false
+			}
+
+			if !isEqualAttr(a.OtherLabels, b.OtherLabels) {
+				return false
+			}
+
+			if !isEqualAttr(a.OtherValues, b.OtherValues) {
+				return false
+			}
+		}
+
+		if !found {
+
+			return false
+		}
+	}
+	return true
+}
+
+func TestUpdateUserAttribute_Normal(t *testing.T) {
+	now := time.Now().UnixMilli()
+	usid := "us123"
+	var testcases = []struct {
+		name  string
+		attrs []*Attribute
+		attr  *Attribute
+		out   []*Attribute
+	}{
+		{name: "empty", attrs: []*Attribute{}, attr: &Attribute{}, out: []*Attribute{}},
+		{
+			name:  "userbot update userbot",
+			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: usid},
+			out:   []*Attribute{{Key: "fullname", ByType: "user", By: usid, UserValue: "giang", Text: "giang", Modified: now}},
+		}, {
+			name:  "userbot update userbot (no override)",
+			attrs: []*Attribute{{Key: "address", Text: "Ha noi"}},
+			attr:  &Attribute{Key: "address", Text: "Ha tay", ByType: "user", By: usid},
+			out:   []*Attribute{{Key: "address", Text: "Ha noi", UserValue: "Ha tay", Modified: now}}, // address is override prevented
+		}, {
+			name:  "userbot update userbot empty (no override)",
+			attrs: []*Attribute{{Key: "address"}},
+			attr:  &Attribute{Key: "address", Text: "Ha tay", ByType: "user", By: ""},
+			out:   []*Attribute{{Key: "address", ByType: "user", Text: "Ha tay", Modified: now}}, // address is override prevented but is empty => accept write from user
+		}, {
+			name:  "userbot update agent",
+			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: "bot12"},
+			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
+		}, {
+			name:  "userbot update connector",
+			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
+		}, {
+			name:  "userbot update system",
+			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
+		}, {
+			name:  "system update on empty by type",
+			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "subiz", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "giang", Modified: now}},
+		}, {
+			name:  "system update on system attribute",
+			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "subiz", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "giang", Modified: now}},
+		}, {
+
+			name:  "system update on read only",
+			attrs: []*Attribute{{Key: "created", ByType: "subiz", Datetime: "444"}},
+			attr:  &Attribute{Key: "created", Datetime: "3333", ByType: "subiz", By: ""},
+			out:   []*Attribute{{Key: "created", ByType: "subiz", Datetime: "3333", Modified: now}},
+		}, {
+			name:  "system update on agent",
+			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "subiz", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "subiz", Text: "giang", Modified: now}},
+		}, {
+			name:  "update on empty by type",
+			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "", By: usid},
+			out:   []*Attribute{{Key: "fullname", Text: "giang", Modified: now, UserValue: "giang", By: usid}},
+		}, {
+			name:  "agent update on system ",
+			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "agent", By: "ag123"},
+			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "giang", Modified: now, By: "ag123"}},
+		}, {
+			name:  "agent update on agent",
+			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "agent", By: "ag123"},
+			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "giang", Modified: now, By: "ag123"}},
+		}, {
+			name:  "agent update on connector",
+			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "agent", By: "ag123"},
+			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "giang", Modified: now, By: "ag123"}},
+		}, {
+			name:  "agent update on system by type readonly",
+			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
+			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "Agent", By: ""},
+			out:   []*Attribute{{Key: "created", Datetime: "123"}},
+		}, {
+			name:  "connector update on system ",
+			attrs: []*Attribute{{Key: "fullname", ByType: "subiz", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: "fabikon"},
+			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "giang", Modified: now, ConnectorValue: "giang", By: "fabikon"}},
+		}, {
+			name:  "connector update on agent",
+			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh", ConnectorValue: "giang", Modified: now}},
+		},
+		{
+			name:  "connector update on empty agent",
+			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: ""}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "giang", ConnectorValue: "giang", Modified: now}},
+		}, {
+			name:  "connector update on connect",
+			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "connector", By: ""},
+			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "giang", ConnectorValue: "giang", Modified: now}},
+		}, {
+			name:  "connector update on system by type readonly",
+			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
+			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "connector", By: ""},
+			out:   []*Attribute{{Key: "created", Datetime: "12344", ByType: "connector", ConnectorValue: "12344", Modified: now}},
+		}, {
+			name:  "system update on system by type",
+			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
+			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "agent", By: ""},
+			out:   []*Attribute{{Key: "created", Datetime: "123"}},
+		}, {
+			name:  "bot update on system by type",
+			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
+			attr:  &Attribute{Key: "created", Datetime: "456", ByType: "bot", By: ""},
+			out:   []*Attribute{{Key: "created", Datetime: "123"}},
+		}, {
+			name:  "user update on agent",
+			attrs: []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: "us123"},
+			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh", UserValue: "giang", Modified: now}},
+		}, {
+			name:  "invalid bot update on empty",
+			attrs: []*Attribute{{Key: "fullname"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: "bot1"},
+			out:   []*Attribute{{Key: "fullname", ByType: "bot", Text: "giang", By: "bot1", Modified: now}},
+		}, {
+			name:  "invalid bot credential",
+			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "bot", By: "b1"}, // invalid
+			out:   []*Attribute{{Key: "fullname", Text: "thanh"}},
+		},
+		{
+			name:  "normal",
+			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi HuongGiang"}},
+			attr:  &Attribute{Key: "emails", By: usid, ByType: "user", Text: "giangbth@gmail.com"},
+			out: []*Attribute{
+				{Key: "fullname", Text: "Bui Thi HuongGiang"},
+				{
+					Key:       "emails",
+					Modified:  now,
+					ByType:    "user",
+					Text:      "giangbth@gmail.com",
+					By:        usid,
+					UserValue: "giangbth@gmail.com",
+				}},
+		},
+		{
+			name:  "user update on primary",
+			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "user", UserValue: "Bui"}},
+			attr:  &Attribute{Key: "fullname", By: "us567", ByType: "user", Text: "Giang"},
+			out:   []*Attribute{{Key: "fullname", ByType: "user", Text: "Bui Thi Huong Giang", UserValue: "Bui"}},
+		},
+		{
+			name:  "user push on primary",
+			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}},
+			attr:  &Attribute{Key: "fullname", By: "us567", ByType: "user", Text: "Giang", Action: "push"},
+			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "Bui Thi Huong Giang", UserValue: "Bui"}},
+		},
+	}
+
+	for itc, tc := range testcases {
+		/*		if itc != 2 {
+				continue
+			}*/
+		user := &User{Id: usid, Attributes: tc.attrs}
+		UpdateAttribute(DEFS, user, tc.attr, now)
+		if !isEqualUserAttribute(user.Attributes, tc.out) {
+			actual, _ := json.Marshal(user.Attributes)
+			expected, _ := json.Marshal(tc.out)
+			t.Errorf("WRONG TESTCASE #%d: %s\nEXPECT: %s\nACTUAL: %s\n\n", itc+1, tc.name, string(expected), string(actual))
+		}
+	}
 }

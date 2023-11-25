@@ -21,6 +21,12 @@ var updateTable = map[string]bool{
 	"user-connector": false,
 	"user-system":    false,
 
+	// oser: other user, (user A is on of secondary users of B, if A update on B, A is oser)
+	"oser-user":      false,
+	"oser-agent":     false,
+	"oser-connector": false,
+	"oser-system":    false,
+
 	"agent-user":      true,
 	"agent-agent":     true,
 	"agent-connector": true,
@@ -37,7 +43,7 @@ var updateTable = map[string]bool{
 	"connector-system":    true,
 }
 
-func CanUpdate(byType string, oldType string) bool {
+func CanUpdate(userId string, byId string, byType string, oldType string) bool {
 	if byType == cpb.Type_subiz.String() {
 		byType = "system"
 	} else if byType == cpb.Type_agent.String() {
@@ -58,6 +64,11 @@ func CanUpdate(byType string, oldType string) bool {
 		oldType = "user"
 	}
 
+	if byType == "user" {
+		if byType != "" && userId != byId {
+			byType = "oser"
+		}
+	}
 	return updateTable[byType+"-"+oldType]
 }
 
@@ -226,24 +237,17 @@ func AttributeValue(defM map[string]*AttributeDefinition, attr *Attribute) strin
 }
 
 // system => only coin
-func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Attribute) (updatedUser bool) {
-	if attr.GetAction() == "noop" {
-		return false
-	}
-
-	if attr.GetKey() == "" || user == nil || defM == nil {
+func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Attribute, now int64) (updatedUser bool) {
+	if attr.GetKey() == "" || user == nil || defM == nil || attr.GetAction() == "noop" {
 		return false
 	}
 
 	def := defM[attr.Key]
-	// undefined attribute, ignore
 	if def == nil {
-		return false
+		return false // ignore undefined attribute
 	}
 
-	by := attr.By
-	bytype := attr.ByType
-	// find the oldprop
+	byId, bytype := attr.By, attr.ByType
 	isBySystem := bytype == cpb.Type_subiz.String()
 	isManually := bytype == cpb.Type_agent.String()
 	isByConnector := bytype == cpb.Type_connector.String()
@@ -255,6 +259,7 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 			return false
 		}
 	}
+
 	isEmpty := false
 	if def.Type == "text" {
 		isEmpty = attr.Text == ""
@@ -285,28 +290,17 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 
 	if isByConnector {
 		oldattr.ConnectorValue = AttributeValue(defM, attr)
-		oldattr.Modified = time.Now().UnixMilli()
+		oldattr.Modified = now
 		updatedUser = true
 	}
 
-	if isByUser {
+	if isByUser && byId == user.GetId() {
 		oldattr.UserValue = AttributeValue(defM, attr)
-		oldattr.Modified = time.Now().UnixMilli()
+		oldattr.Modified = now
 		updatedUser = true
 	}
 
-	canWrite := CanUpdate(bytype, oldattr.GetByType())
-
-	// user can only push
-	if action == Attribute_unshift.String() && (isByUser || isByConnector) {
-		action = Attribute_push.String()
-	}
-
-	// allow to push even user
-	if action == Attribute_push.String() || action == Attribute_unshift.String() {
-		canWrite = true
-	}
-
+	canWrite := CanUpdate(user.GetId(), byId, bytype, oldattr.GetByType())
 	oldIsEmpty := ((def.Type == "text" && oldattr.GetText() == "") || (def.Type == "datetime" && oldattr.GetDatetime() == "") || oldattr == nil)
 	if oldIsEmpty {
 		canWrite = true
@@ -324,9 +318,9 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 		oldattr.OtherValues = []string{}
 		oldattr.Modified = attr.Modified
 		if oldattr.Modified == 0 {
-			oldattr.Modified = time.Now().UnixMilli()
+			oldattr.Modified = now
 		}
-		oldattr.By = by
+		oldattr.By = byId
 		oldattr.ByType = bytype
 		updatedUser = true
 		return
@@ -349,9 +343,9 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 		cleanOtherValues(oldattr)
 		oldattr.Modified = attr.Modified
 		if oldattr.Modified == 0 {
-			oldattr.Modified = time.Now().UnixMilli()
+			oldattr.Modified = now
 		}
-		oldattr.By = by
+		oldattr.By = byId
 		oldattr.ByType = bytype
 		updatedUser = true
 	} else if action == "unshift" { // text only
@@ -362,9 +356,9 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 		cleanOtherValues(oldattr)
 		oldattr.Modified = attr.Modified
 		if oldattr.Modified == 0 {
-			oldattr.Modified = time.Now().UnixMilli()
+			oldattr.Modified = now
 		}
-		oldattr.By = by
+		oldattr.By = byId
 		oldattr.ByType = bytype
 		updatedUser = true
 	} else {
@@ -375,9 +369,9 @@ func UpdateAttribute(defM map[string]*AttributeDefinition, user *User, attr *Att
 			oldattr.Text, oldattr.Number, oldattr.Boolean, oldattr.Datetime = attr.Text, attr.Number, attr.Boolean, attr.Datetime
 			oldattr.Modified = attr.Modified
 			if oldattr.Modified == 0 {
-				oldattr.Modified = time.Now().UnixMilli()
+				oldattr.Modified = now
 			}
-			oldattr.By = by
+			oldattr.By = byId
 			oldattr.ByType = bytype
 			updatedUser = true
 		}
