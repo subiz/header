@@ -7012,6 +7012,14 @@ message Number {
 	string version =2; //version 2 is version for convo
 }
 
+message StrNumM {
+	map<string,int64> strsM = 1;
+}
+
+message NumStrM {
+	map<int64,string> numsM = 1;
+}
+
 message ConvoReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
