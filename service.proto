@@ -36,6 +36,7 @@ service DocSearch {
 service NumberRegistry {
 	rpc Compact(String) returns (Number);
 	rpc Uncompact(Number) returns (String);
+	rpc CompactM(StrNumM) returns (StrNumM);
 }
 
 service Map {
