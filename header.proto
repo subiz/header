@@ -717,6 +717,7 @@ message AgentMetricsRequest {
 	account.BusinessHours not_business_hours = 9;
 	int32 tz = 10;
 	string dim = 11;
+	repeated string tags = 12;
 }
 
 message CallMetric {
