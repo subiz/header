@@ -6769,19 +6769,23 @@ message ZaloCallConsent {
 message SendEmailRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	int64 created = 3;
-	int64 ttl_sec = 4;
-	string from = 5;
+	string request_id = 3;
+
+	int64 created = 4;
+	int64 ttl_sec = 5;
+	string from = 6;
 
 	string template = 7;
 	bytes data = 8;
 
 	string subject = 10;
 	repeated string to = 11;
+	string locale = 19; // for each to
+
 	repeated string cc = 12;
 	repeated string bcc = 13;
 	string encoding = 14;
-	string preheader = 15;
+	string preheader = 15; // for each to
 
 	map<string, string> header = 16;
 	repeated EmailAttachment attachments = 17; // s3 links
