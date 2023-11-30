@@ -6766,6 +6766,27 @@ message ZaloCallConsent {
   I18nString message = 4;
 }
 
+message SendEmailRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 created = 3;
+	int64 ttl_sec = 4;
+	string from = 5;
+
+	string template = 7;
+	bytes data = 8;
+
+	string subject = 10;
+	repeated string to = 11;
+	repeated string cc = 12;
+	repeated string bcc = 13;
+	string encoding = 14;
+	string preheader = 15;
+
+	map<string, string> header = 16;
+	repeated EmailAttachment attachments = 17; // s3 links
+}
+
 message Email {
 	common.Context ctx = 1;
 	string from = 3;
