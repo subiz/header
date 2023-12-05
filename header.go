@@ -806,7 +806,7 @@ func AssignObject(dst, src interface{}, fields []string) {
 //	Vietnamese customers
 func NormPhone(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
-		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
+		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
 	})
 
 	phones := []string{}
@@ -841,7 +841,7 @@ func NormPhone(phone string) string {
 //	Vietnamese customers
 func NormEmail(email string) string {
 	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
-		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
+		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
 	})
 
 	emails := map[string]bool{}
@@ -874,7 +874,7 @@ func NormEmail(email string) string {
 func EmailAddress(email string) string {
 	email = strings.TrimSpace(email)
 	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
-		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
+		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
 	})
 
 	if email == "" {
@@ -917,7 +917,7 @@ func EmailAddress(email string) string {
 
 func PhoneNumber(phone string) string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
-		return r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
+		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
 	})
 	if len(phonesplit) == 0 {
 		return ""
