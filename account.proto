@@ -41,6 +41,7 @@ message DashboardAgent {
 	map<string,string> user_view_display_field = 35;
 
 	optional int64 debug_log_collected = 36;
+	optional int64 web_notification_volume = 37; // 0 default, 100 loudest
 }
 
 message Agent {
