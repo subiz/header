@@ -308,7 +308,7 @@ service ConversationMgr {
 	rpc ReadPhoneDevice(header.Id) returns (header.PhoneDevice);
 
 	rpc TestNumber(header.Id) returns (header.Integration);
-	rpc ActiveNumber(header.Id) returns (header.Integration);
+	rpc ActiveNumber(header.Integration) returns (header.Integration);
 
 	rpc ListCallSettings(header.Id) returns (header.CallSettings);
 	rpc UpdateCallSetting(header.CallSetting) returns (header.CallSetting);
