@@ -3975,6 +3975,8 @@ message PushNoti {
 
 	string subtitle = 23;
 	string task_id = 24;
+
+	string sound_name = 25;
 }
 
 message InvoiceTemplate {

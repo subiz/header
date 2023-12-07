@@ -602,10 +602,11 @@ func TestUpdateUserAttribute(t *testing.T) {
 		},
 		{
 			name:  "update record id",
-			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
-			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}},
-			attr:  &Attribute{Key: "record_id", Text: "abc"},
-			out:   []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}, {Modified: now, Key: "record_id", Text: "abc", By: "ag123", ByType: "agent"}},
+			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "agrtbnxihehvemfrui"},
+			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"},
+			},
+			attr:  &Attribute{Key: "record_id", Modified: 1701936021404, Text: "bbbbb1701936017285", ByType: "agent", By: "agrtbnxihehvemfrui"},
+			out: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}, {Modified: now, Key: "record_id", Text: "abc", By: "ag123", ByType: "agent"}},
 		},
 		{
 			name:  "delete specific text value 1",
