@@ -254,6 +254,13 @@ func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition,
 	}
 
 	byId, bytype := attr.By, attr.ByType
+	if byId == "" {
+		byId = cred.GetIssuer()
+	}
+
+	if bytype == "" {
+		bytype = cred.GetType().String()
+	}
 	isBySystem := bytype == cpb.Type_subiz.String()
 	isManually := bytype == cpb.Type_agent.String()
 	isByConnector := bytype == cpb.Type_connector.String()
@@ -317,11 +324,47 @@ func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition,
 	}
 
 	if canWrite && action == Attribute_delete.String() {
+		if attr.Text != "" {
+			// remove specific value
+			vals := []string{}
+			if oldattr.Text != attr.Text {
+				vals = append(vals, oldattr.Text)
+			}
+
+			for _, v := range oldattr.OtherValues {
+				if v != attr.Text {
+					vals = append(vals, v)
+				}
+			}
+
+			if len(vals) > 0 {
+				oldattr.Text = vals[0]
+				vals = vals[1:]
+			}
+
+			oldattr.OtherValues = nil
+			if len(vals) > 0 {
+				oldattr.OtherValues = vals
+			}
+
+			oldattr.Number = 0
+			oldattr.Boolean = false
+			oldattr.Datetime = ""
+			oldattr.Modified = attr.Modified
+			if oldattr.Modified == 0 {
+				oldattr.Modified = now
+			}
+			oldattr.By = byId
+			oldattr.ByType = bytype
+			updatedUser = true
+			return
+		}
+
 		oldattr.Text = ""
 		oldattr.Number = 0
 		oldattr.Boolean = false
 		oldattr.Datetime = ""
-		oldattr.OtherValues = []string{}
+		oldattr.OtherValues = nil
 		oldattr.Modified = attr.Modified
 		if oldattr.Modified == 0 {
 			oldattr.Modified = now
@@ -377,6 +420,7 @@ func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition,
 			if oldattr.Modified == 0 {
 				oldattr.Modified = now
 			}
+
 			oldattr.By = byId
 			oldattr.ByType = bytype
 			updatedUser = true
@@ -473,7 +517,6 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 		if typ == "list" {
 			i.OtherValues = a.OtherValues
 		}
-
 		return
 	}
 
