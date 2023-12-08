@@ -336,17 +336,12 @@ func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition,
 					vals = append(vals, v)
 				}
 			}
-
-			if len(vals) > 0 {
-				oldattr.Text = vals[0]
-				vals = vals[1:]
-			}
-
+			oldattr.Text = ""
 			oldattr.OtherValues = nil
 			if len(vals) > 0 {
-				oldattr.OtherValues = vals
+				oldattr.Text = vals[0]
+				oldattr.OtherValues = vals[1:]
 			}
-
 			oldattr.Number = 0
 			oldattr.Boolean = false
 			oldattr.Datetime = ""

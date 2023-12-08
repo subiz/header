@@ -3582,6 +3582,7 @@ message LoginSession {
 	string note = 23;
 
 	bool inspect = 24;
+	string created_by = 25;
 }
 
 message SearchRequest {

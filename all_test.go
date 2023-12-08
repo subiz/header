@@ -603,10 +603,9 @@ func TestUpdateUserAttribute(t *testing.T) {
 		{
 			name:  "update record id",
 			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "agrtbnxihehvemfrui"},
-			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"},
-			},
-			attr:  &Attribute{Key: "record_id", Modified: 1701936021404, Text: "bbbbb1701936017285", ByType: "agent", By: "agrtbnxihehvemfrui"},
-			out: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}, {Modified: now, Key: "record_id", Text: "abc", By: "ag123", ByType: "agent"}},
+			attrs: []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}},
+			attr:  &Attribute{Key: "record_id", Modified: 1701936021404, Text: "abc", ByType: "agent", By: "ag123"},
+			out:   []*Attribute{{Key: "fullname", Text: "Bui Thi Huong Giang", ByType: "agent", UserValue: "Bui"}, {Modified: 1701936021404, Key: "record_id", Text: "abc", By: "ag123", ByType: "agent"}},
 		},
 		{
 			name:  "delete specific text value 1",
@@ -623,18 +622,25 @@ func TestUpdateUserAttribute(t *testing.T) {
 			out:   []*Attribute{{Key: "emails", ByType: "agent", Text: "subiz@gmail.com", Modified: now, By: "ag123"}},
 		},
 		{
-			name:  "delete specific all text value",
+			name:  "delete all text value",
 			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
 			attrs: []*Attribute{{Key: "emails", ByType: "subiz@gmail.com", Text: "thanh", OtherValues: []string{"abc@gmail.com"}}},
 			attr:  &Attribute{Key: "emails", Action: "delete"},
 			out:   []*Attribute{{Key: "emails", ByType: "agent", Modified: now, By: "ag123"}},
 		},
+		{
+			name:  "delete specific text value 3",
+			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
+			attrs: []*Attribute{{Key: "record_id", ByType: "subiz", Text: "aaaaa1702018539570"}, {Key: "emails", ByType: "agent", Text: "aaaaa1702018539570@gmail.com"}},
+			attr:  &Attribute{Key: "emails", Text: "aaaaa1702018539570@gmail.com", By: "system", ByType: "subiz", Action: "delete"},
+			out:   []*Attribute{{Key: "record_id", ByType: "subiz", Text: "aaaaa1702018539570"}, {Key: "emails", Modified: now, ByType: "subiz", By: "system"}},
+		},
 	}
 
 	for itc, tc := range testcases {
-		// if itc != 32 {
+		// if itc != 34 {
 		// continue
-		//}
+		// }
 		user := &User{Id: usid, Attributes: tc.attrs}
 		cred := tc.cred
 		if cred == nil {
