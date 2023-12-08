@@ -9,14 +9,9 @@ import "account.proto";
 import "header.proto";
 import "common.proto";
 import "zalokon.proto";
-import "googlekon.proto";
 
 service GooglekonService {
-	rpc DeleteRely(googlekon.GGReview) returns (header.Empty);
-	rpc GetReview(googlekon.GGReview) returns (googlekon.GGReview);
-	rpc ListReviews(googlekon.GGReviewsRequest) returns (googlekon.GGListReviews);
-	rpc UpdateRely(googlekon.GGReviewReply) returns (googlekon.GGReviewReply);
-	rpc ListReviewsLocations(googlekon.GGReviewsRequest) returns (googlekon.GGReviewsInLocations);
+	rpc SendEventToGoogle(header.Events) returns (header.Empty); 
 }
 
 service RateLimit {

@@ -4,10 +4,10 @@ package googlekon;
 
 option go_package = "github.com/subiz/header/googlekon";
 
-message GGReview {
+message GoogleReview {
 	optional string name = 1;
 	optional string review_id = 2;
-	optional GGReviewer reviewer = 3;
+	optional GoogleReviewer reviewer = 3;
 
     enum Rating {
 		star_rating_unspecified = 0; 
@@ -17,34 +17,32 @@ message GGReview {
         four = 4;
         five = 5; 
 	}
-
-
-	optional string star_rating = 4; //rating
+	optional Rating star_rating = 4; //rating
 	optional string comment = 5;
 	optional int64 create_time = 6;
 	optional int64 update_time = 7;
-	optional GGReviewReply review_rely = 8;
+	optional GoogleReviewReply review_rely = 8;
 }
 
-message GGReviewer {
+message GoogleReviewer {
     optional string profile_photo_url= 1;
 	optional string display_name = 2;
 	optional bool is_anonymous = 3;
 }
 
-message GGReviewReply {
+message GoogleReviewReply {
     optional string comment = 1;
 	optional string update_time = 2;
 }
 
-message GGListReviews {
-    repeated GGReview reviews = 1;
+message GoogleListReviews {
+    repeated GoogleReview reviews = 1;
 	optional float avarage_rating = 2;
     optional int32 total_review_count = 3;
     optional string next_page_token = 4;
 }
 
-message GGReviewsRequest {
+message GoogleReviewsRequest {
     repeated string location_names = 1; 
     optional int32 page_size = 2;
     optional string page_token = 3;
@@ -52,12 +50,288 @@ message GGReviewsRequest {
     optional bool ignore_rating_only_reviews =5 ; 
 }
 
-message GGReviewsInLocations {
-	repeated GGLocationReview location_reviews = 1;
+message GoogleReviewsInLocations {
+	repeated GoogleLocationReview location_reviews = 1;
 	optional string next_page_token = 2;
 }
 
-message GGLocationReview {
+message GoogleLocationReview {
 	optional string name = 1;
-	optional GGReview review =2;
+	optional GoogleReview review = 2;
+}
+
+message GoogleAccounts{
+	optional string name = 1;
+	optional string account_name = 2;
+	optional string primary_owner = 3; 
+	optional AccountType type = 4;
+	optional AccountRole role = 5;
+	optional VerificationState verification_state = 6;
+	optional VettedState vetted_state = 7;
+	optional string account_number = 8;
+	optional PermissionLevel permission_level = 9;
+	optional OrganizationInfo organization_info =10;
+    enum AccountType {
+		ACCOUNT_TYPE_UNSPECIFIED = 0;
+		PERSONAL = 1;
+		LOCATION_GROUP = 2;
+		USER_GROUP = 3;
+        ORGANIZATION =4;
+	}
+	enum AccountRole {
+		ACCOUNT_ROLE_UNSPECIFIED = 0;
+		PRIMARY_OWNER = 1;
+		OWNER = 2;
+		MANAGER = 3;
+		SITE_MANAGER= 4;
+	}
+	enum VerificationState {
+		VERIFICATION_STATE_UNSPECIFIED = 0;
+		VERIFIED = 1;
+		UNVERIFIED = 2;
+		VERIFICATION_REQUESTED = 3;
+
+	}
+	enum VettedState {
+		VETTED_STATE_UNSPECIFIED = 0;
+		NOT_VETTED = 1;
+		VETTED = 2;
+		INVALID =3;
+	}
+	enum PermissionLevel {
+		PERMISSION_LEVEL_UNSPECIFIED = 0;
+		OWNER_LEVEL = 1;
+		MEMBER_LEVEL = 2;
+	}
+}
+
+message OrganizationInfo {
+	optional string registerd_domain = 1; 
+	optional PostalAddress address = 2; 
+	optional string phone_number = 3;
+}
+
+message PostalAddress {
+	optional string revision = 1;
+	optional string region_code = 2;
+	optional string language_code = 3;
+	optional string postal_code = 4;
+	optional string sorting_code = 5;
+	optional string administrative_area = 6;
+	optional string locality = 7;
+	optional string sublocality = 8;
+	repeated string recipients = 9;
+	repeated string organization = 10;
+}
+
+message ListLocatins {
+	repeated Location locations = 1;
+	optional string next_page_token = 2;
+	optional int64 total_size = 3;
+}
+
+message Location {
+	optional string language_code = 1;
+	optional string store_code  = 2;
+	optional string title = 3;
+	optional PhoneNumbers phoneNumbers = 4;
+	optional Categories categories = 5;
+	optional string website_uri = 6;
+	optional SpecialHours special_hours = 7;
+	optional ServiceAreaBusiness service_area = 8;
+	optional string labels = 9;
+	optional AdWordsLocationExtensions ad_words_location_extensions = 10;
+	optional LatLng latlng = 11;
+	optional OpenInfo info = 12; 
+	optional Metadata metadata = 13;
+	optional Profile profile = 14;
+	optional RelationshipData relationship_data = 15;
+	repeated MoreHours more_hours = 16;
+	repeated ServiceItem service_items =17;
+	optional PostalAddress storefrontAddress =18;
+	optional string name = 19;
+}
+
+message PhoneNumbers {
+	optional string primary_phone = 1;
+	repeated string additional_phones = 2;
+}
+
+message Categories {
+	optional Category primary_category = 1;
+	repeated Category additional_categories = 2;
+}
+
+message Category {
+	optional string name = 1;
+	optional string display_name = 2;
+	repeated ServiceType service_type = 3;
+	repeated MoreHoursType more_hours_types =4;
+}
+
+message ServiceType {
+	optional string service_type_id = 1;
+	optional string display_name = 2;
+}
+
+message MoreHoursType {
+	optional string hours_type_id = 1;
+	optional string display_name = 2;
+	optional string localized_display_name = 3;
+}
+
+message BussinessHours {
+	repeated TimePeriod periods = 1;
+} 
+
+message TimePeriod {
+	optional DayOfWeek open_day = 1;
+	optional TimeOfDay open_time = 2;
+	optional DayOfWeek close_day = 3;
+	optional TimeOfDay close_time = 4;
+    enum DayOfWeek {
+		DAY_OF_WEEK_UNSPECIFIED = 0;
+		MONDAY = 1;
+		TUESDAY = 2;
+		WEDNESDAY = 3;
+		THURSDAY = 4;
+		FRIDAY = 5;
+		SATURDAY =6;
+		SUNDAY = 7;
+	}
+}
+
+message SpecialHours {
+	repeated SpecialHourPeriod special_hour_periods = 1;
+}
+
+message SpecialHourPeriod {
+	optional Date start_date = 1;
+	optional TimeOfDay open_time = 2;
+	optional Date end_date = 3;
+	optional TimeOfDay close_time = 4;
+	optional bool closed = 5;
+}
+
+message Date {
+	optional int64 year = 1;
+	optional int64 month = 2;
+	optional int64 day = 3; 
+}
+
+message TimeOfDay {
+	optional int64 hours = 1;
+	optional int64 minutes = 2;
+	optional int64 seconds = 3;
+	optional int64 nanos = 4;
+}
+
+message ServiceAreaBusiness {
+	optional BusinessType business_type = 1;
+	optional Places places = 2;
+	optional string region_code =3; 
+    enum BusinessType {
+		BUSINESS_TYPE_UNSPECIFIED = 0;
+		CUSTOMER_LOCATION_ONLY = 1;
+		CUSTOMER_AND_BUSINESS_LOCATION = 2;
+	}
+}
+
+message Places {
+	repeated PlaceInfo place_infos = 1;
+}
+
+message PlaceInfo {
+	optional string place_name = 1;
+	optional string place_id = 2;
+}
+
+message AdWordsLocationExtensions {
+	optional string ad_phone = 1;
+}
+
+message LatLng {
+	optional int64 latitude = 1;
+	optional int64 longitude = 2;
+}
+
+message OpenInfo{
+    optional OpenforBusiness status = 1;
+	enum OpenforBusiness {
+		OPEN_FOR_BUSINESS_UNSPECIFIED = 0;
+		OPEN = 1;
+		CLOSED_PERMANENTLY = 2;
+		CLOSED_TEMPORARILY = 3;
+	}
+	optional bool can_reopen = 2;
+	optional Date opening_date = 3;
+}
+
+message Metadata {
+	optional bool has_pending_edits = 1;
+	optional bool can_delete = 2;
+	optional bool can_operate_local_post = 3;
+	optional bool can_modify_service_list = 4;
+	optional bool can_have_food_menus = 5;
+	optional bool can_operate_health_data = 6;
+	optional bool can_operate_lodging_data= 7;
+	optional string place_id =8;
+	optional string duplicate_loaction =9;
+    optional string maps_uri = 10;
+	optional string new_review_uri = 11;
+	optional bool can_have_business_call =12 ;
+	optional bool has_voice_of_merchant =13;
+	optional bool has_google_updated = 14;
+}
+
+message Profile {
+	optional string description = 1;
+}
+message RelationshipData {
+	optional RelevantLocation parent_location = 1;
+	optional RelevantLocation children_loacation =2;
+	optional string parent_chain =3;
+}
+
+message RelevantLocation {
+	optional string Place_id =1;
+	optional RelationType relation_type =2;
+	enum RelationType{
+		RELATION_TYPE_UNSPECIFIED = 0;
+		DEPARTMENT_OF = 1;
+		INDEPENDENT_ESTABLISHMENT_IN = 2;
+	}
+}
+
+message MoreHours {
+	optional string hours_type_id = 1;
+	repeated TimePeriod periods = 2; 
+}
+
+message ServiceItem {
+    optional Money price = 1;
+	optional StructuredServiceItem structured_service_item = 2;
+	optional FreeFormServiceItem free_form_service_item = 3; 
+}
+
+message StructuredServiceItem {
+	optional string service_type_id = 1;
+	optional string description = 2;
+}
+
+message FreeFormServiceItem {
+	optional string category = 1;
+	optional Label label = 2; 
+}
+
+message Label {
+	optional string display_name = 1;
+	optional string description = 2;
+	optional string language_code = 3;
+}
+
+message Money {
+	optional string currency_code = 1;
+	optional string units = 2;
+	optional int64 nanos = 3;
 }
