@@ -71,6 +71,14 @@ message GoogleAccount{
 	optional string account_number = 8;
 	optional PermissionLevel permission_level = 9;
 	optional OrganizationInfo organization_info =10;
+	optional string account_id = 11;
+	optional string access_token = 12;
+	optional string refresh_token = 13;
+	optional int64 access_token_expired_at = 14;       
+	optional int64 authorized = 15;
+	optional int64 last_called = 16;
+	optional int64 last_refresh_token_at = 17;
+	optional int64 last_refresh_token_error_at = 18;
     enum AccountType {
 		ACCOUNT_TYPE_UNSPECIFIED = 0;
 		PERSONAL = 1;
