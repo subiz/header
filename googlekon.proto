@@ -141,6 +141,8 @@ message Locations {
 	repeated Location locations = 1;
 	optional string next_page_token = 2;
 	optional int64 total_size = 3;
+	optional string account_id = 4;
+	optional string google_id = 5;
 }
 
 message Location {
