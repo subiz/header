@@ -60,7 +60,7 @@ message GoogleLocationReview {
 	optional GoogleReview review = 2;
 }
 
-message GoogleAccounts{
+message GoogleAccount{
 	optional string name = 1;
 	optional string account_name = 2;
 	optional string primary_owner = 3; 
@@ -105,6 +105,11 @@ message GoogleAccounts{
 	}
 }
 
+message GoogleAccounts {
+	repeated GoogleAccount accounts = 1;
+	optional string next_page_token = 2;
+}
+
 message OrganizationInfo {
 	optional string registerd_domain = 1; 
 	optional PostalAddress address = 2; 
@@ -124,7 +129,7 @@ message PostalAddress {
 	repeated string organization = 10;
 }
 
-message ListLocatins {
+message Locations {
 	repeated Location locations = 1;
 	optional string next_page_token = 2;
 	optional int64 total_size = 3;
