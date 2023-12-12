@@ -133,8 +133,9 @@ message PostalAddress {
 	optional string administrative_area = 6;
 	optional string locality = 7;
 	optional string sublocality = 8;
-	repeated string recipients = 9;
-	repeated string organization = 10;
+    repeated string address_lines = 9;
+	repeated string recipients = 10;
+	repeated string organization = 11;
 }
 
 message Locations {
