@@ -156,7 +156,7 @@ message Location {
 	optional string labels = 9;
 	optional AdWordsLocationExtensions ad_words_location_extensions = 10;
 	optional LatLng latlng = 11;
-	optional OpenInfo info = 12; 
+	optional OpenInfo open_info = 12; 
 	optional Metadata metadata = 13;
 	optional Profile profile = 14;
 	optional RelationshipData relationship_data = 15;
@@ -166,6 +166,7 @@ message Location {
 	optional string name = 19;
 	optional string account_id = 20;
 	optional string google_id = 21;
+	optional BussinessHours regular_hours = 22;
 }
 
 message PhoneNumbers {
@@ -267,8 +268,8 @@ message AdWordsLocationExtensions {
 }
 
 message LatLng {
-	optional int64 latitude = 1;
-	optional int64 longitude = 2;
+	optional float latitude = 1;
+	optional float longitude = 2;
 }
 
 message OpenInfo{
