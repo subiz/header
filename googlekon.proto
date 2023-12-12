@@ -180,11 +180,11 @@ message Categories {
 message Category {
 	optional string name = 1;
 	optional string display_name = 2;
-	repeated ServiceTypes service_type = 3;
+	repeated ServiceType service_types = 3;
 	repeated MoreHoursType more_hours_types =4;
 }
 
-message ServiceTypes {
+message ServiceType {
 	optional string service_type_id = 1;
 	optional string display_name = 2;
 }
