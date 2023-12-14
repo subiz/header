@@ -4,63 +4,20 @@ package googlekon;
 
 option go_package = "github.com/subiz/header/googlekon";
 
-message GoogleReview {
-	optional string name = 1;
-	optional string review_id = 2;
-	optional GoogleReviewer reviewer = 3;
-
-    enum Rating {
-		star_rating_unspecified = 0; 
-		one = 1;
-		two = 2;
-		three = 3;
-        four = 4;
-        five = 5; 
-	}
-	optional string star_rating = 4; //rating
-	optional string comment = 5;
-	optional int64 create_time = 6;
-	optional int64 update_time = 7;
-	optional GoogleReviewReply review_rely = 8;
+message GoogleAccount {
+	optional string email = 1;
+    repeated BussinessProfileAccount linked_accounts = 2;
+	optional string access_token = 4;
+	optional string refresh_token = 5;
+	optional int64 access_token_expired_at = 6;       
+	optional int64 authorized = 7;
+	optional int64 last_called = 8;
+	optional int64 last_refresh_token_at = 9;
+	optional int64 last_refresh_token_error_at = 10;
+	optional int64 account_id = 11;
 }
 
-message GoogleReviewer {
-    optional string profile_photo_url= 1;
-	optional string display_name = 2;
-	optional bool is_anonymous = 3;
-}
-
-message GoogleReviewReply {
-    optional string comment = 1;
-	optional string update_time = 2;
-}
-
-message GoogleListReviews {
-    repeated GoogleReview reviews = 1;
-	optional float avarage_rating = 2;
-    optional int32 total_review_count = 3;
-    optional string next_page_token = 4;
-}
-
-message GoogleReviewsRequest {
-    repeated string location_names = 1; 
-    optional int32 page_size = 2;
-    optional string page_token = 3;
-    optional string order_by = 4; 
-    optional bool ignore_rating_only_reviews =5 ; 
-}
-
-message GoogleReviewsInLocations {
-	repeated GoogleLocationReview location_reviews = 1;
-	optional string next_page_token = 2;
-}
-
-message GoogleLocationReview {
-	optional string name = 1;
-	optional GoogleReview review = 2;
-}
-
-message GoogleAccount{
+message BussinessProfileAccount{
 	optional string name = 1;
 	optional string account_name = 2;
 	optional string primary_owner = 3; 
@@ -72,13 +29,6 @@ message GoogleAccount{
 	optional string permission_level = 9;
 	optional OrganizationInfo organization_info =10;
 	optional string account_id = 11;
-	optional string access_token = 12;
-	optional string refresh_token = 13;
-	optional int64 access_token_expired_at = 14;       
-	optional int64 authorized = 15;
-	optional int64 last_called = 16;
-	optional int64 last_refresh_token_at = 17;
-	optional int64 last_refresh_token_error_at = 18;
     enum AccountType {
 		ACCOUNT_TYPE_UNSPECIFIED = 0;
 		PERSONAL = 1;
@@ -113,8 +63,8 @@ message GoogleAccount{
 	}
 }
 
-message GoogleAccounts {
-	repeated GoogleAccount accounts = 1;
+message BussinessProfileAccounts {
+	repeated BussinessProfileAccount accounts = 1;
 	optional string next_page_token = 2;
 }
 
@@ -351,4 +301,83 @@ message Money {
 	optional string currency_code = 1;
 	optional string units = 2;
 	optional int64 nanos = 3;
+}
+
+//Cloud Pub/Sub notification settings for an bussiness profile account 
+message NotificationSettings {
+	optional string name = 1;
+	optional string pubsub_topic = 2;
+	optional string notification_type = 3;
+	enum NotificationType {
+		NOTIFICATION_TYPE_UNSPECIFIED = 0;
+		GOOGLE_UPDATE = 1;
+		NEW_REVIEW = 2;
+		UPDATED_REVIEW = 3;
+		NEW_CUSTOMER_MEDIA = 4;
+		NEW_QUESTION = 5;
+		UPDATED_QUESTION = 6;
+		NEW_ANSWER = 7;
+		UPDATED_ANSWER = 8;
+		DUPLICATE_LOCATION = 9;
+		VOICE_OF_MERCHANT_UPDATED = 10;
+	}
+}
+
+message Review {
+	optional string name = 1;
+	optional string review_id = 2;
+	optional Reviewer reviewer = 3;
+
+    enum Rating {
+		star_rating_unspecified = 0; 
+		one = 1;
+		two = 2;
+		three = 3;
+        four = 4;
+        five = 5; 
+	}
+	optional string star_rating = 4; //rating
+	optional string comment = 5;
+	optional int64 create_time = 6;
+	optional int64 update_time = 7;
+	optional ReviewReply review_rely = 8;
+}
+
+message Reviews {
+    repeated Review reviews = 1;
+	optional float avarage_rating = 2;
+    optional int32 total_review_count = 3;
+    optional string next_page_token = 4;
+}
+
+message Reviewer {
+    optional string profile_photo_url= 1;
+	optional string display_name = 2;
+	optional bool is_anonymous = 3;
+}
+
+message ReviewReply {
+    optional string comment = 1;
+	optional string update_time = 2;
+}
+
+message Request {
+    repeated string location_names = 1; 
+    optional int32 page_size = 2;
+    optional string page_token = 3;
+    optional string order_by = 4; 
+    optional bool ignore_rating_only_reviews = 5; 
+	optional string update_mask = 6;
+	optional string parent_account = 7;
+	optional string filter = 8;
+}
+
+message BatchGetReviews {
+	repeated LocationReview location_reviews = 1;
+	optional string next_page_token = 2;
+}
+
+message LocationReview {
+	optional string name = 1;
+	optional Review review = 2;
 }
