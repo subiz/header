@@ -14,7 +14,7 @@ message GoogleAccount {
 	optional int64 last_called = 8;
 	optional int64 last_refresh_token_at = 9;
 	optional int64 last_refresh_token_error_at = 10;
-	optional int64 account_id = 11;
+	optional string account_id = 11;
 }
 
 message BussinessProfileAccount{
