@@ -6,7 +6,7 @@ option go_package = "github.com/subiz/header/googlekon";
 
 message GoogleAccount {
 	optional string email = 1;
-    repeated BussinessProfileAccount linked_accounts = 2;
+    repeated string linked_bussiness_profile_id = 2;
 	optional string access_token = 4;
 	optional string refresh_token = 5;
 	optional int64 access_token_expired_at = 6;       
@@ -18,17 +18,18 @@ message GoogleAccount {
 }
 
 message BussinessProfileAccount{
-	optional string name = 1;
-	optional string account_name = 2;
-	optional string primary_owner = 3; 
-	optional string type = 4;
-	optional string role = 5;
+	optional string id = 1;
+	optional string name = 2;
+	optional string account_name = 3;
+	optional string primary_owner = 4; 
+	optional string type = 5;
 	optional string verification_state = 6;
 	optional string vetted_state = 7;
 	optional string account_number = 8;
 	optional string permission_level = 9;
 	optional OrganizationInfo organization_info =10;
 	optional string account_id = 11;
+	optional string role = 12;
     enum AccountType {
 		ACCOUNT_TYPE_UNSPECIFIED = 0;
 		PERSONAL = 1;
@@ -95,7 +96,7 @@ message Locations {
 }
 
 message Location {
-	optional string language_code = 1;
+	optional string id = 1;
 	optional string store_code  = 2;
 	optional string title = 3;
 	optional PhoneNumbers phoneNumbers = 4;
@@ -117,6 +118,7 @@ message Location {
 	optional string account_id = 20;
 	optional string google_id = 21;
 	optional BussinessHours regular_hours = 22;
+	optional string language_code = 23;
 }
 
 message PhoneNumbers {
@@ -324,7 +326,7 @@ message NotificationSettings {
 }
 
 message Review {
-	optional string name = 1;
+	optional string id = 1;
 	optional string review_id = 2;
 	optional Reviewer reviewer = 3;
 
@@ -341,6 +343,7 @@ message Review {
 	optional int64 create_time = 6;
 	optional int64 update_time = 7;
 	optional ReviewReply review_rely = 8;
+	optional string name = 9;
 }
 
 message Reviews {
@@ -378,6 +381,7 @@ message BatchGetReviews {
 }
 
 message LocationReview {
-	optional string name = 1;
-	optional Review review = 2;
+	optional string id = 1;
+	optional string name = 2;
+	optional Review review = 3;
 }
