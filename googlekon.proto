@@ -115,10 +115,10 @@ message Location {
 	repeated ServiceItem service_items =17;
 	optional PostalAddress storefrontAddress =18;
 	optional string name = 19;
-	optional string account_id = 20;
 	optional string google_id = 21;
 	optional BussinessHours regular_hours = 22;
 	optional string language_code = 23;
+	optional string email = 24;
 }
 
 message PhoneNumbers {
