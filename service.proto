@@ -144,9 +144,7 @@ service UserMgr {
 	rpc MergeUser(header.Users) returns (header.User);
 	rpc DetachUser(header.Id) returns (header.Empty);
 
-	rpc CreateUser(header.User) returns (Id);
 	rpc CreateUser2(header.User) returns (header.User);
-	rpc UpdateUser2(header.User) returns (header.User); // same, remove
 	rpc UpdateUser(header.User) returns (header.User);  // same
 	rpc TryUpdateUser(header.User) returns (header.TryUpdateUserResult); // new
 

@@ -206,7 +206,6 @@ message User {
 	string account_id = 4;
 	repeated Attribute attributes = 18;
 
-	// UserSession session = 40; // deprecating
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
 	string type = 47; // empty = guest - lead - contact
@@ -3505,6 +3504,7 @@ message File {
 
 	string image_1024 = 32;
 	string image_512 = 33;
+	string image_128 = 34;
 }
 
 message BotTerminated {
