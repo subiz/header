@@ -392,3 +392,9 @@ message Response {
 	optional string scope = 3;
 	optional string token_type = 4;
 }
+
+message GoogleNotiMessage {
+	optional string type = 1;
+	optional string location = 2;
+	optional string review = 3; 
+}
