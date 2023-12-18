@@ -1347,6 +1347,12 @@ message Conversation {
 	string marked_as_spam_by = 67;
 	int64 marked_as_spam = 68;
 	int64 sentiment_score = 69;
+	GoogleReview google_review = 70;
+}
+
+message GoogleReview { 
+	string review_id = 1;
+	string google_review_rating = 2;
 }
 
 message CallInfo {
