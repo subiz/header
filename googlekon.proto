@@ -385,3 +385,10 @@ message LocationReview {
 	optional string name = 2;
 	optional Review review = 3;
 }
+
+message Response {
+	optional string access_token = 1;
+	optional int32 expires_in = 2;
+	optional string scope = 3;
+	optional string token_type = 4;
+}
