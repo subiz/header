@@ -340,8 +340,8 @@ message Review {
 	}
 	optional string star_rating = 4; //rating
 	optional string comment = 5;
-	optional int64 create_time = 6;
-	optional int64 update_time = 7;
+	optional string create_time = 6;
+	optional string update_time = 7;
 	optional ReviewReply review_rely = 8;
 	optional string name = 9;
 	optional string location_id =10;
