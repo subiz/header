@@ -119,6 +119,7 @@ message Location {
 	optional BussinessHours regular_hours = 22;
 	optional string language_code = 23;
 	optional string email = 24;
+	optional string bussiness_profile_account_id = 25;
 }
 
 message PhoneNumbers {
