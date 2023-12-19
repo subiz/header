@@ -342,7 +342,7 @@ message Review {
 	optional string comment = 5;
 	optional string create_time = 6;
 	optional string update_time = 7;
-	optional ReviewReply review_rely = 8;
+	optional ReviewReply review_reply = 8;
 	optional string name = 9;
 	optional string location_id =10;
 }
