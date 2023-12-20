@@ -1,63 +1,63 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package googlekon;
 
 option go_package = "github.com/subiz/header/googlekon";
 
 message GoogleAccount {
-	optional string email = 1;
+	string email = 1;
     repeated string linked_bussiness_profile_id = 2;
-	optional string access_token = 4;
-	optional string refresh_token = 5;
-	optional int64 access_token_expired_at = 6;       
-	optional int64 authorized = 7;
-	optional int64 last_called = 8;
-	optional int64 last_refresh_token_at = 9;
-	optional int64 last_refresh_token_error_at = 10;
-	optional string account_id = 11;
+	string access_token = 4;
+	string refresh_token = 5;
+	int64 access_token_expired_at = 6;       
+	int64 authorized = 7;
+	int64 last_called = 8;
+	int64 last_refresh_token_at = 9;
+	int64 last_refresh_token_error_at = 10;
+	string account_id = 11;
 }
 
 message BussinessProfileAccount{
-	optional string bussiness_profile_id = 1;
-	optional string name = 2;
+	string bussiness_profile_id = 1;
+	string name = 2;
 }
 
 message BussinessProfileAccounts {
 	repeated BussinessProfileAccount accounts = 1;
-	optional string next_page_token = 2;
+	string next_page_token = 2;
 }
 
 message Locations {
 	repeated Location locations = 1;
-	optional string next_page_token = 2;
-	optional int64 total_size = 3;
+	string next_page_token = 2;
+	int64 total_size = 3;
 }
 
 message Location {
-	optional string location_id = 1;
-	optional string store_code  = 2;
-	optional string title = 3;
-	optional Metadata metadata = 4;
-	optional Profile profile = 5;
-	optional string account_id = 6;
-	optional string email = 7;
-	optional string bussiness_profile_account_id = 8;
-	optional string name = 9;
+	string location_id = 1;
+	string store_code  = 2;
+	string title = 3;
+	Metadata metadata = 4;
+	Profile profile = 5;
+	string account_id = 6;
+	string email = 7;
+	string bussiness_profile_account_id = 8;
+	string name = 9;
 }
 
 message Metadata {
-    optional string maps_uri = 10;
+    string maps_uri = 10;
 }
 
 message Profile {
-	optional string description = 1;
+	string description = 1;
 }
 
 //Cloud Pub/Sub notification settings for an bussiness profile account 
 message NotificationSettings {
-	optional string name = 1;
-	optional string pubsub_topic = 2;
-	optional string notification_type = 3;
+	string name = 1;
+	string pubsub_topic = 2;
+	string notification_type = 3;
 	enum NotificationType {
 		NOTIFICATION_TYPE_UNSPECIFIED = 0;
 		GOOGLE_UPDATE = 1;
@@ -74,8 +74,8 @@ message NotificationSettings {
 }
 
 message Review {
-	optional string review_id = 2;
-	optional Reviewer reviewer = 3;
+	string review_id = 2;
+	Reviewer reviewer = 3;
 
     enum Rating {
 		star_rating_unspecified = 0; 
@@ -85,53 +85,53 @@ message Review {
         four = 4;
         five = 5; 
 	}
-	optional string star_rating = 4; //rating
-	optional string comment = 5;
-	optional string create_time = 6;
-	optional string update_time = 7;
-	optional ReviewReply review_reply = 8;
-	optional string name = 9;
-	optional string location_id =10;
+	string star_rating = 4; //rating
+	string comment = 5;
+	string create_time = 6;
+	string update_time = 7;
+	ReviewReply review_reply = 8;
+	string name = 9;
+	string location_id =10;
 }
 
 message Reviews {
     repeated Review reviews = 1;
-	optional float avarage_rating = 2;
-    optional int32 total_review_count = 3;
-    optional string next_page_token = 4;
+	float avarage_rating = 2;
+    int32 total_review_count = 3;
+    string next_page_token = 4;
 }
 
 message Reviewer {
-    optional string profile_photo_url= 1;
-	optional string display_name = 2;
-	optional bool is_anonymous = 3;
+    string profile_photo_url= 1;
+	string display_name = 2;
+	bool is_anonymous = 3;
 }
 
 message ReviewReply {
-    optional string comment = 1;
-	optional string update_time = 2;
+    string comment = 1;
+	string update_time = 2;
 }
 
 message Request {
     repeated string location_names = 1; 
-    optional int32 page_size = 2;
-    optional string page_token = 3;
-    optional string order_by = 4; 
-    optional bool ignore_rating_only_reviews = 5; 
-	optional string update_mask = 6;
-	optional string parent_account = 7;
-	optional string filter = 8;
+    int32 page_size = 2;
+    string page_token = 3;
+    string order_by = 4; 
+    bool ignore_rating_only_reviews = 5; 
+	string update_mask = 6;
+	string parent_account = 7;
+	string filter = 8;
 }
 
 message Response {
-	optional string access_token = 1;
-	optional int32 expires_in = 2;
-	optional string scope = 3;
-	optional string token_type = 4;
+	string access_token = 1;
+	int32 expires_in = 2;
+	string scope = 3;
+	string token_type = 4;
 }
 
 message GoogleNotiMessage {
-	optional string type = 1;
-	optional string location = 2;
-	optional string review = 3; 
+	string type = 1;
+	string location = 2;
+	string review = 3; 
 }

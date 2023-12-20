@@ -88,16 +88,6 @@ func (x NotificationSettings_NotificationType) Number() protoreflect.EnumNumber 
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Do not use.
-func (x *NotificationSettings_NotificationType) UnmarshalJSON(b []byte) error {
-	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
-	if err != nil {
-		return err
-	}
-	*x = NotificationSettings_NotificationType(num)
-	return nil
-}
-
 // Deprecated: Use NotificationSettings_NotificationType.Descriptor instead.
 func (NotificationSettings_NotificationType) EnumDescriptor() ([]byte, []int) {
 	return file_googlekon_proto_rawDescGZIP(), []int{7, 0}
@@ -156,16 +146,6 @@ func (x Review_Rating) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Do not use.
-func (x *Review_Rating) UnmarshalJSON(b []byte) error {
-	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
-	if err != nil {
-		return err
-	}
-	*x = Review_Rating(num)
-	return nil
-}
-
 // Deprecated: Use Review_Rating.Descriptor instead.
 func (Review_Rating) EnumDescriptor() ([]byte, []int) {
 	return file_googlekon_proto_rawDescGZIP(), []int{8, 0}
@@ -176,16 +156,16 @@ type GoogleAccount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Email                    *string  `protobuf:"bytes,1,opt,name=email" json:"email,omitempty"`
-	LinkedBussinessProfileId []string `protobuf:"bytes,2,rep,name=linked_bussiness_profile_id,json=linkedBussinessProfileId" json:"linked_bussiness_profile_id,omitempty"`
-	AccessToken              *string  `protobuf:"bytes,4,opt,name=access_token,json=accessToken" json:"access_token,omitempty"`
-	RefreshToken             *string  `protobuf:"bytes,5,opt,name=refresh_token,json=refreshToken" json:"refresh_token,omitempty"`
-	AccessTokenExpiredAt     *int64   `protobuf:"varint,6,opt,name=access_token_expired_at,json=accessTokenExpiredAt" json:"access_token_expired_at,omitempty"`
-	Authorized               *int64   `protobuf:"varint,7,opt,name=authorized" json:"authorized,omitempty"`
-	LastCalled               *int64   `protobuf:"varint,8,opt,name=last_called,json=lastCalled" json:"last_called,omitempty"`
-	LastRefreshTokenAt       *int64   `protobuf:"varint,9,opt,name=last_refresh_token_at,json=lastRefreshTokenAt" json:"last_refresh_token_at,omitempty"`
-	LastRefreshTokenErrorAt  *int64   `protobuf:"varint,10,opt,name=last_refresh_token_error_at,json=lastRefreshTokenErrorAt" json:"last_refresh_token_error_at,omitempty"`
-	AccountId                *string  `protobuf:"bytes,11,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Email                    string   `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	LinkedBussinessProfileId []string `protobuf:"bytes,2,rep,name=linked_bussiness_profile_id,json=linkedBussinessProfileId,proto3" json:"linked_bussiness_profile_id,omitempty"`
+	AccessToken              string   `protobuf:"bytes,4,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken             string   `protobuf:"bytes,5,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	AccessTokenExpiredAt     int64    `protobuf:"varint,6,opt,name=access_token_expired_at,json=accessTokenExpiredAt,proto3" json:"access_token_expired_at,omitempty"`
+	Authorized               int64    `protobuf:"varint,7,opt,name=authorized,proto3" json:"authorized,omitempty"`
+	LastCalled               int64    `protobuf:"varint,8,opt,name=last_called,json=lastCalled,proto3" json:"last_called,omitempty"`
+	LastRefreshTokenAt       int64    `protobuf:"varint,9,opt,name=last_refresh_token_at,json=lastRefreshTokenAt,proto3" json:"last_refresh_token_at,omitempty"`
+	LastRefreshTokenErrorAt  int64    `protobuf:"varint,10,opt,name=last_refresh_token_error_at,json=lastRefreshTokenErrorAt,proto3" json:"last_refresh_token_error_at,omitempty"`
+	AccountId                string   `protobuf:"bytes,11,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 }
 
 func (x *GoogleAccount) Reset() {
@@ -221,8 +201,8 @@ func (*GoogleAccount) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoogleAccount) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
@@ -235,57 +215,57 @@ func (x *GoogleAccount) GetLinkedBussinessProfileId() []string {
 }
 
 func (x *GoogleAccount) GetAccessToken() string {
-	if x != nil && x.AccessToken != nil {
-		return *x.AccessToken
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
 
 func (x *GoogleAccount) GetRefreshToken() string {
-	if x != nil && x.RefreshToken != nil {
-		return *x.RefreshToken
+	if x != nil {
+		return x.RefreshToken
 	}
 	return ""
 }
 
 func (x *GoogleAccount) GetAccessTokenExpiredAt() int64 {
-	if x != nil && x.AccessTokenExpiredAt != nil {
-		return *x.AccessTokenExpiredAt
+	if x != nil {
+		return x.AccessTokenExpiredAt
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetAuthorized() int64 {
-	if x != nil && x.Authorized != nil {
-		return *x.Authorized
+	if x != nil {
+		return x.Authorized
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetLastCalled() int64 {
-	if x != nil && x.LastCalled != nil {
-		return *x.LastCalled
+	if x != nil {
+		return x.LastCalled
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetLastRefreshTokenAt() int64 {
-	if x != nil && x.LastRefreshTokenAt != nil {
-		return *x.LastRefreshTokenAt
+	if x != nil {
+		return x.LastRefreshTokenAt
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetLastRefreshTokenErrorAt() int64 {
-	if x != nil && x.LastRefreshTokenErrorAt != nil {
-		return *x.LastRefreshTokenErrorAt
+	if x != nil {
+		return x.LastRefreshTokenErrorAt
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
@@ -295,8 +275,8 @@ type BussinessProfileAccount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BussinessProfileId *string `protobuf:"bytes,1,opt,name=bussiness_profile_id,json=bussinessProfileId" json:"bussiness_profile_id,omitempty"`
-	Name               *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	BussinessProfileId string `protobuf:"bytes,1,opt,name=bussiness_profile_id,json=bussinessProfileId,proto3" json:"bussiness_profile_id,omitempty"`
+	Name               string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 }
 
 func (x *BussinessProfileAccount) Reset() {
@@ -332,15 +312,15 @@ func (*BussinessProfileAccount) Descriptor() ([]byte, []int) {
 }
 
 func (x *BussinessProfileAccount) GetBussinessProfileId() string {
-	if x != nil && x.BussinessProfileId != nil {
-		return *x.BussinessProfileId
+	if x != nil {
+		return x.BussinessProfileId
 	}
 	return ""
 }
 
 func (x *BussinessProfileAccount) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -350,8 +330,8 @@ type BussinessProfileAccounts struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts      []*BussinessProfileAccount `protobuf:"bytes,1,rep,name=accounts" json:"accounts,omitempty"`
-	NextPageToken *string                    `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
+	Accounts      []*BussinessProfileAccount `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	NextPageToken string                     `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *BussinessProfileAccounts) Reset() {
@@ -394,8 +374,8 @@ func (x *BussinessProfileAccounts) GetAccounts() []*BussinessProfileAccount {
 }
 
 func (x *BussinessProfileAccounts) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -405,9 +385,9 @@ type Locations struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Locations     []*Location `protobuf:"bytes,1,rep,name=locations" json:"locations,omitempty"`
-	NextPageToken *string     `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
-	TotalSize     *int64      `protobuf:"varint,3,opt,name=total_size,json=totalSize" json:"total_size,omitempty"`
+	Locations     []*Location `protobuf:"bytes,1,rep,name=locations,proto3" json:"locations,omitempty"`
+	NextPageToken string      `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	TotalSize     int64       `protobuf:"varint,3,opt,name=total_size,json=totalSize,proto3" json:"total_size,omitempty"`
 }
 
 func (x *Locations) Reset() {
@@ -450,15 +430,15 @@ func (x *Locations) GetLocations() []*Location {
 }
 
 func (x *Locations) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
 
 func (x *Locations) GetTotalSize() int64 {
-	if x != nil && x.TotalSize != nil {
-		return *x.TotalSize
+	if x != nil {
+		return x.TotalSize
 	}
 	return 0
 }
@@ -468,15 +448,15 @@ type Location struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LocationId                *string   `protobuf:"bytes,1,opt,name=location_id,json=locationId" json:"location_id,omitempty"`
-	StoreCode                 *string   `protobuf:"bytes,2,opt,name=store_code,json=storeCode" json:"store_code,omitempty"`
-	Title                     *string   `protobuf:"bytes,3,opt,name=title" json:"title,omitempty"`
-	Metadata                  *Metadata `protobuf:"bytes,4,opt,name=metadata" json:"metadata,omitempty"`
-	Profile                   *Profile  `protobuf:"bytes,5,opt,name=profile" json:"profile,omitempty"`
-	AccountId                 *string   `protobuf:"bytes,6,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Email                     *string   `protobuf:"bytes,7,opt,name=email" json:"email,omitempty"`
-	BussinessProfileAccountId *string   `protobuf:"bytes,8,opt,name=bussiness_profile_account_id,json=bussinessProfileAccountId" json:"bussiness_profile_account_id,omitempty"`
-	Name                      *string   `protobuf:"bytes,9,opt,name=name" json:"name,omitempty"`
+	LocationId                string    `protobuf:"bytes,1,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	StoreCode                 string    `protobuf:"bytes,2,opt,name=store_code,json=storeCode,proto3" json:"store_code,omitempty"`
+	Title                     string    `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Metadata                  *Metadata `protobuf:"bytes,4,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Profile                   *Profile  `protobuf:"bytes,5,opt,name=profile,proto3" json:"profile,omitempty"`
+	AccountId                 string    `protobuf:"bytes,6,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Email                     string    `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	BussinessProfileAccountId string    `protobuf:"bytes,8,opt,name=bussiness_profile_account_id,json=bussinessProfileAccountId,proto3" json:"bussiness_profile_account_id,omitempty"`
+	Name                      string    `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
 }
 
 func (x *Location) Reset() {
@@ -512,22 +492,22 @@ func (*Location) Descriptor() ([]byte, []int) {
 }
 
 func (x *Location) GetLocationId() string {
-	if x != nil && x.LocationId != nil {
-		return *x.LocationId
+	if x != nil {
+		return x.LocationId
 	}
 	return ""
 }
 
 func (x *Location) GetStoreCode() string {
-	if x != nil && x.StoreCode != nil {
-		return *x.StoreCode
+	if x != nil {
+		return x.StoreCode
 	}
 	return ""
 }
 
 func (x *Location) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
@@ -547,29 +527,29 @@ func (x *Location) GetProfile() *Profile {
 }
 
 func (x *Location) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
 
 func (x *Location) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
 
 func (x *Location) GetBussinessProfileAccountId() string {
-	if x != nil && x.BussinessProfileAccountId != nil {
-		return *x.BussinessProfileAccountId
+	if x != nil {
+		return x.BussinessProfileAccountId
 	}
 	return ""
 }
 
 func (x *Location) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -579,7 +559,7 @@ type Metadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MapsUri *string `protobuf:"bytes,10,opt,name=maps_uri,json=mapsUri" json:"maps_uri,omitempty"`
+	MapsUri string `protobuf:"bytes,10,opt,name=maps_uri,json=mapsUri,proto3" json:"maps_uri,omitempty"`
 }
 
 func (x *Metadata) Reset() {
@@ -615,8 +595,8 @@ func (*Metadata) Descriptor() ([]byte, []int) {
 }
 
 func (x *Metadata) GetMapsUri() string {
-	if x != nil && x.MapsUri != nil {
-		return *x.MapsUri
+	if x != nil {
+		return x.MapsUri
 	}
 	return ""
 }
@@ -626,7 +606,7 @@ type Profile struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Description *string `protobuf:"bytes,1,opt,name=description" json:"description,omitempty"`
+	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 }
 
 func (x *Profile) Reset() {
@@ -662,8 +642,8 @@ func (*Profile) Descriptor() ([]byte, []int) {
 }
 
 func (x *Profile) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.Description
 	}
 	return ""
 }
@@ -674,9 +654,9 @@ type NotificationSettings struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	PubsubTopic      *string `protobuf:"bytes,2,opt,name=pubsub_topic,json=pubsubTopic" json:"pubsub_topic,omitempty"`
-	NotificationType *string `protobuf:"bytes,3,opt,name=notification_type,json=notificationType" json:"notification_type,omitempty"`
+	Name             string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	PubsubTopic      string `protobuf:"bytes,2,opt,name=pubsub_topic,json=pubsubTopic,proto3" json:"pubsub_topic,omitempty"`
+	NotificationType string `protobuf:"bytes,3,opt,name=notification_type,json=notificationType,proto3" json:"notification_type,omitempty"`
 }
 
 func (x *NotificationSettings) Reset() {
@@ -712,22 +692,22 @@ func (*NotificationSettings) Descriptor() ([]byte, []int) {
 }
 
 func (x *NotificationSettings) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *NotificationSettings) GetPubsubTopic() string {
-	if x != nil && x.PubsubTopic != nil {
-		return *x.PubsubTopic
+	if x != nil {
+		return x.PubsubTopic
 	}
 	return ""
 }
 
 func (x *NotificationSettings) GetNotificationType() string {
-	if x != nil && x.NotificationType != nil {
-		return *x.NotificationType
+	if x != nil {
+		return x.NotificationType
 	}
 	return ""
 }
@@ -737,15 +717,15 @@ type Review struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ReviewId    *string      `protobuf:"bytes,2,opt,name=review_id,json=reviewId" json:"review_id,omitempty"`
-	Reviewer    *Reviewer    `protobuf:"bytes,3,opt,name=reviewer" json:"reviewer,omitempty"`
-	StarRating  *string      `protobuf:"bytes,4,opt,name=star_rating,json=starRating" json:"star_rating,omitempty"` //rating
-	Comment     *string      `protobuf:"bytes,5,opt,name=comment" json:"comment,omitempty"`
-	CreateTime  *string      `protobuf:"bytes,6,opt,name=create_time,json=createTime" json:"create_time,omitempty"`
-	UpdateTime  *string      `protobuf:"bytes,7,opt,name=update_time,json=updateTime" json:"update_time,omitempty"`
-	ReviewReply *ReviewReply `protobuf:"bytes,8,opt,name=review_reply,json=reviewReply" json:"review_reply,omitempty"`
-	Name        *string      `protobuf:"bytes,9,opt,name=name" json:"name,omitempty"`
-	LocationId  *string      `protobuf:"bytes,10,opt,name=location_id,json=locationId" json:"location_id,omitempty"`
+	ReviewId    string       `protobuf:"bytes,2,opt,name=review_id,json=reviewId,proto3" json:"review_id,omitempty"`
+	Reviewer    *Reviewer    `protobuf:"bytes,3,opt,name=reviewer,proto3" json:"reviewer,omitempty"`
+	StarRating  string       `protobuf:"bytes,4,opt,name=star_rating,json=starRating,proto3" json:"star_rating,omitempty"` //rating
+	Comment     string       `protobuf:"bytes,5,opt,name=comment,proto3" json:"comment,omitempty"`
+	CreateTime  string       `protobuf:"bytes,6,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`
+	UpdateTime  string       `protobuf:"bytes,7,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
+	ReviewReply *ReviewReply `protobuf:"bytes,8,opt,name=review_reply,json=reviewReply,proto3" json:"review_reply,omitempty"`
+	Name        string       `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
+	LocationId  string       `protobuf:"bytes,10,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
 }
 
 func (x *Review) Reset() {
@@ -781,8 +761,8 @@ func (*Review) Descriptor() ([]byte, []int) {
 }
 
 func (x *Review) GetReviewId() string {
-	if x != nil && x.ReviewId != nil {
-		return *x.ReviewId
+	if x != nil {
+		return x.ReviewId
 	}
 	return ""
 }
@@ -795,29 +775,29 @@ func (x *Review) GetReviewer() *Reviewer {
 }
 
 func (x *Review) GetStarRating() string {
-	if x != nil && x.StarRating != nil {
-		return *x.StarRating
+	if x != nil {
+		return x.StarRating
 	}
 	return ""
 }
 
 func (x *Review) GetComment() string {
-	if x != nil && x.Comment != nil {
-		return *x.Comment
+	if x != nil {
+		return x.Comment
 	}
 	return ""
 }
 
 func (x *Review) GetCreateTime() string {
-	if x != nil && x.CreateTime != nil {
-		return *x.CreateTime
+	if x != nil {
+		return x.CreateTime
 	}
 	return ""
 }
 
 func (x *Review) GetUpdateTime() string {
-	if x != nil && x.UpdateTime != nil {
-		return *x.UpdateTime
+	if x != nil {
+		return x.UpdateTime
 	}
 	return ""
 }
@@ -830,15 +810,15 @@ func (x *Review) GetReviewReply() *ReviewReply {
 }
 
 func (x *Review) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *Review) GetLocationId() string {
-	if x != nil && x.LocationId != nil {
-		return *x.LocationId
+	if x != nil {
+		return x.LocationId
 	}
 	return ""
 }
@@ -848,10 +828,10 @@ type Reviews struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Reviews          []*Review `protobuf:"bytes,1,rep,name=reviews" json:"reviews,omitempty"`
-	AvarageRating    *float32  `protobuf:"fixed32,2,opt,name=avarage_rating,json=avarageRating" json:"avarage_rating,omitempty"`
-	TotalReviewCount *int32    `protobuf:"varint,3,opt,name=total_review_count,json=totalReviewCount" json:"total_review_count,omitempty"`
-	NextPageToken    *string   `protobuf:"bytes,4,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
+	Reviews          []*Review `protobuf:"bytes,1,rep,name=reviews,proto3" json:"reviews,omitempty"`
+	AvarageRating    float32   `protobuf:"fixed32,2,opt,name=avarage_rating,json=avarageRating,proto3" json:"avarage_rating,omitempty"`
+	TotalReviewCount int32     `protobuf:"varint,3,opt,name=total_review_count,json=totalReviewCount,proto3" json:"total_review_count,omitempty"`
+	NextPageToken    string    `protobuf:"bytes,4,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
 
 func (x *Reviews) Reset() {
@@ -894,22 +874,22 @@ func (x *Reviews) GetReviews() []*Review {
 }
 
 func (x *Reviews) GetAvarageRating() float32 {
-	if x != nil && x.AvarageRating != nil {
-		return *x.AvarageRating
+	if x != nil {
+		return x.AvarageRating
 	}
 	return 0
 }
 
 func (x *Reviews) GetTotalReviewCount() int32 {
-	if x != nil && x.TotalReviewCount != nil {
-		return *x.TotalReviewCount
+	if x != nil {
+		return x.TotalReviewCount
 	}
 	return 0
 }
 
 func (x *Reviews) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -919,9 +899,9 @@ type Reviewer struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProfilePhotoUrl *string `protobuf:"bytes,1,opt,name=profile_photo_url,json=profilePhotoUrl" json:"profile_photo_url,omitempty"`
-	DisplayName     *string `protobuf:"bytes,2,opt,name=display_name,json=displayName" json:"display_name,omitempty"`
-	IsAnonymous     *bool   `protobuf:"varint,3,opt,name=is_anonymous,json=isAnonymous" json:"is_anonymous,omitempty"`
+	ProfilePhotoUrl string `protobuf:"bytes,1,opt,name=profile_photo_url,json=profilePhotoUrl,proto3" json:"profile_photo_url,omitempty"`
+	DisplayName     string `protobuf:"bytes,2,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	IsAnonymous     bool   `protobuf:"varint,3,opt,name=is_anonymous,json=isAnonymous,proto3" json:"is_anonymous,omitempty"`
 }
 
 func (x *Reviewer) Reset() {
@@ -957,22 +937,22 @@ func (*Reviewer) Descriptor() ([]byte, []int) {
 }
 
 func (x *Reviewer) GetProfilePhotoUrl() string {
-	if x != nil && x.ProfilePhotoUrl != nil {
-		return *x.ProfilePhotoUrl
+	if x != nil {
+		return x.ProfilePhotoUrl
 	}
 	return ""
 }
 
 func (x *Reviewer) GetDisplayName() string {
-	if x != nil && x.DisplayName != nil {
-		return *x.DisplayName
+	if x != nil {
+		return x.DisplayName
 	}
 	return ""
 }
 
 func (x *Reviewer) GetIsAnonymous() bool {
-	if x != nil && x.IsAnonymous != nil {
-		return *x.IsAnonymous
+	if x != nil {
+		return x.IsAnonymous
 	}
 	return false
 }
@@ -982,8 +962,8 @@ type ReviewReply struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Comment    *string `protobuf:"bytes,1,opt,name=comment" json:"comment,omitempty"`
-	UpdateTime *string `protobuf:"bytes,2,opt,name=update_time,json=updateTime" json:"update_time,omitempty"`
+	Comment    string `protobuf:"bytes,1,opt,name=comment,proto3" json:"comment,omitempty"`
+	UpdateTime string `protobuf:"bytes,2,opt,name=update_time,json=updateTime,proto3" json:"update_time,omitempty"`
 }
 
 func (x *ReviewReply) Reset() {
@@ -1019,15 +999,15 @@ func (*ReviewReply) Descriptor() ([]byte, []int) {
 }
 
 func (x *ReviewReply) GetComment() string {
-	if x != nil && x.Comment != nil {
-		return *x.Comment
+	if x != nil {
+		return x.Comment
 	}
 	return ""
 }
 
 func (x *ReviewReply) GetUpdateTime() string {
-	if x != nil && x.UpdateTime != nil {
-		return *x.UpdateTime
+	if x != nil {
+		return x.UpdateTime
 	}
 	return ""
 }
@@ -1037,14 +1017,14 @@ type Request struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LocationNames           []string `protobuf:"bytes,1,rep,name=location_names,json=locationNames" json:"location_names,omitempty"`
-	PageSize                *int32   `protobuf:"varint,2,opt,name=page_size,json=pageSize" json:"page_size,omitempty"`
-	PageToken               *string  `protobuf:"bytes,3,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
-	OrderBy                 *string  `protobuf:"bytes,4,opt,name=order_by,json=orderBy" json:"order_by,omitempty"`
-	IgnoreRatingOnlyReviews *bool    `protobuf:"varint,5,opt,name=ignore_rating_only_reviews,json=ignoreRatingOnlyReviews" json:"ignore_rating_only_reviews,omitempty"`
-	UpdateMask              *string  `protobuf:"bytes,6,opt,name=update_mask,json=updateMask" json:"update_mask,omitempty"`
-	ParentAccount           *string  `protobuf:"bytes,7,opt,name=parent_account,json=parentAccount" json:"parent_account,omitempty"`
-	Filter                  *string  `protobuf:"bytes,8,opt,name=filter" json:"filter,omitempty"`
+	LocationNames           []string `protobuf:"bytes,1,rep,name=location_names,json=locationNames,proto3" json:"location_names,omitempty"`
+	PageSize                int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageToken               string   `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
+	OrderBy                 string   `protobuf:"bytes,4,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	IgnoreRatingOnlyReviews bool     `protobuf:"varint,5,opt,name=ignore_rating_only_reviews,json=ignoreRatingOnlyReviews,proto3" json:"ignore_rating_only_reviews,omitempty"`
+	UpdateMask              string   `protobuf:"bytes,6,opt,name=update_mask,json=updateMask,proto3" json:"update_mask,omitempty"`
+	ParentAccount           string   `protobuf:"bytes,7,opt,name=parent_account,json=parentAccount,proto3" json:"parent_account,omitempty"`
+	Filter                  string   `protobuf:"bytes,8,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
 func (x *Request) Reset() {
@@ -1087,50 +1067,50 @@ func (x *Request) GetLocationNames() []string {
 }
 
 func (x *Request) GetPageSize() int32 {
-	if x != nil && x.PageSize != nil {
-		return *x.PageSize
+	if x != nil {
+		return x.PageSize
 	}
 	return 0
 }
 
 func (x *Request) GetPageToken() string {
-	if x != nil && x.PageToken != nil {
-		return *x.PageToken
+	if x != nil {
+		return x.PageToken
 	}
 	return ""
 }
 
 func (x *Request) GetOrderBy() string {
-	if x != nil && x.OrderBy != nil {
-		return *x.OrderBy
+	if x != nil {
+		return x.OrderBy
 	}
 	return ""
 }
 
 func (x *Request) GetIgnoreRatingOnlyReviews() bool {
-	if x != nil && x.IgnoreRatingOnlyReviews != nil {
-		return *x.IgnoreRatingOnlyReviews
+	if x != nil {
+		return x.IgnoreRatingOnlyReviews
 	}
 	return false
 }
 
 func (x *Request) GetUpdateMask() string {
-	if x != nil && x.UpdateMask != nil {
-		return *x.UpdateMask
+	if x != nil {
+		return x.UpdateMask
 	}
 	return ""
 }
 
 func (x *Request) GetParentAccount() string {
-	if x != nil && x.ParentAccount != nil {
-		return *x.ParentAccount
+	if x != nil {
+		return x.ParentAccount
 	}
 	return ""
 }
 
 func (x *Request) GetFilter() string {
-	if x != nil && x.Filter != nil {
-		return *x.Filter
+	if x != nil {
+		return x.Filter
 	}
 	return ""
 }
@@ -1140,10 +1120,10 @@ type Response struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccessToken *string `protobuf:"bytes,1,opt,name=access_token,json=accessToken" json:"access_token,omitempty"`
-	ExpiresIn   *int32  `protobuf:"varint,2,opt,name=expires_in,json=expiresIn" json:"expires_in,omitempty"`
-	Scope       *string `protobuf:"bytes,3,opt,name=scope" json:"scope,omitempty"`
-	TokenType   *string `protobuf:"bytes,4,opt,name=token_type,json=tokenType" json:"token_type,omitempty"`
+	AccessToken string `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	ExpiresIn   int32  `protobuf:"varint,2,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	Scope       string `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
+	TokenType   string `protobuf:"bytes,4,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
 }
 
 func (x *Response) Reset() {
@@ -1179,29 +1159,29 @@ func (*Response) Descriptor() ([]byte, []int) {
 }
 
 func (x *Response) GetAccessToken() string {
-	if x != nil && x.AccessToken != nil {
-		return *x.AccessToken
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
 
 func (x *Response) GetExpiresIn() int32 {
-	if x != nil && x.ExpiresIn != nil {
-		return *x.ExpiresIn
+	if x != nil {
+		return x.ExpiresIn
 	}
 	return 0
 }
 
 func (x *Response) GetScope() string {
-	if x != nil && x.Scope != nil {
-		return *x.Scope
+	if x != nil {
+		return x.Scope
 	}
 	return ""
 }
 
 func (x *Response) GetTokenType() string {
-	if x != nil && x.TokenType != nil {
-		return *x.TokenType
+	if x != nil {
+		return x.TokenType
 	}
 	return ""
 }
@@ -1211,9 +1191,9 @@ type GoogleNotiMessage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type     *string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Location *string `protobuf:"bytes,2,opt,name=location" json:"location,omitempty"`
-	Review   *string `protobuf:"bytes,3,opt,name=review" json:"review,omitempty"`
+	Type     string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Location string `protobuf:"bytes,2,opt,name=location,proto3" json:"location,omitempty"`
+	Review   string `protobuf:"bytes,3,opt,name=review,proto3" json:"review,omitempty"`
 }
 
 func (x *GoogleNotiMessage) Reset() {
@@ -1249,22 +1229,22 @@ func (*GoogleNotiMessage) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoogleNotiMessage) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
 
 func (x *GoogleNotiMessage) GetLocation() string {
-	if x != nil && x.Location != nil {
-		return *x.Location
+	if x != nil {
+		return x.Location
 	}
 	return ""
 }
 
 func (x *GoogleNotiMessage) GetReview() string {
-	if x != nil && x.Review != nil {
-		return *x.Review
+	if x != nil {
+		return x.Review
 	}
 	return ""
 }
@@ -1459,7 +1439,7 @@ var file_googlekon_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x42, 0x23, 0x5a, 0x21,
 	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a,
 	0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f,
-	0x6e,
+	0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
