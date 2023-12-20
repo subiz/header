@@ -44,6 +44,7 @@ message Location {
 	optional string bussiness_profile_account_id = 8;
 	optional string name = 9;
 	optional string website_uri = 10;
+	optional string state = 11;
 }
 
 message Metadata {
