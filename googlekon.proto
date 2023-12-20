@@ -42,6 +42,7 @@ message Location {
 	optional string account_id = 6;
 	optional string email = 7;
 	optional string bussiness_profile_account_id = 8;
+	optional string name = 9;
 }
 
 message Metadata {
