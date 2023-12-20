@@ -43,10 +43,24 @@ message Location {
 	optional string email = 7;
 	optional string bussiness_profile_account_id = 8;
 	optional string name = 9;
+	optional string website_uri = 10;
 }
 
 message Metadata {
+	optional bool has_pending_edits = 1;
+	optional bool can_delete = 2;
+	optional bool can_operate_local_post = 3;
+	optional bool can_modify_service_list = 4;
+	optional bool can_have_food_menus = 5;
+	optional bool can_operate_health_data = 6;
+	optional bool can_operate_lodging_data= 7;
+	optional string place_id =8;
+	optional string duplicate_loaction =9;
     optional string maps_uri = 10;
+	optional string new_review_uri = 11;
+	optional bool can_have_business_call =12 ;
+	optional bool has_voice_of_merchant =13;
+	optional bool has_google_updated = 14;
 }
 
 message Profile {
