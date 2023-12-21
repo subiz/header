@@ -1353,7 +1353,8 @@ message Conversation {
 
 message GoogleReview { 
 	string review_id = 1;
-	string google_review_rating = 2;
+	string rating_string = 2;
+	int32 rating = 3;
 }
 
 message CallInfo {
@@ -1864,6 +1865,14 @@ message Integration {
 	string zalo_package_valid_through_date = 66;
 	string zalo_package_auto_renew_date = 67;
 	string zalo_linkedZCA = 68;
+
+	// for google review
+	int32 google_review_average_rating = 70;
+	int64 google_review_total_review_count = 71;
+	string google_review_primary_phone = 72;
+	string google_review_address = 73; 
+	string google_review_description = 74;
+	string google_review_maps_uri = 75;
 }
 
 message TagRequest {
