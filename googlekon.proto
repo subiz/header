@@ -48,7 +48,7 @@ message Location {
 	optional PhoneNumbers phoneNumbers = 12;
 	optional float average_rating = 13;
 	optional int64 total_review_count = 14;
-	optional PostalAddress store_front_address = 15;
+	optional PostalAddress storefront_address = 15;
 }
 
 message PhoneNumbers {
