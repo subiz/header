@@ -48,7 +48,7 @@ message Location {
 	optional PhoneNumbers phoneNumbers = 12;
 	optional float average_rating = 13;
 	optional int64 total_review_count = 14;
-	optional PostalAddress store_front_address =15;
+	optional PostalAddress store_front_address = 15;
 }
 
 message PhoneNumbers {
@@ -68,6 +68,7 @@ message PostalAddress {
     repeated string address_lines = 9;
 	repeated string recipients = 10;
 	repeated string organization = 11;
+	optional string address = 12;
 }
 message Metadata {
 	optional bool has_pending_edits = 1;
