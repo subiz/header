@@ -20,6 +20,14 @@ message FacebookPage {
 	optional string linked_page_id = 11; // instagram <-> facebook
 	optional bool is_instagram = 12;
 	optional InstagramUser instagram_account = 13;
+
+	optional int64 last_success_request_at = 14;
+	optional int64 last_failed_request_at = 15;
+
+	optional int64 last_message_sent_success_at = 16;
+	optional int64 last_message_sent_failed_at = 17;
+
+	optional int64 last_token_expired_at = 18;
 }
 
 message FbWebhookEvent {
