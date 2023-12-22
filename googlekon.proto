@@ -173,3 +173,10 @@ message GoogleNotiMessage {
 	optional string location = 2;
 	optional string review = 3; 
 }
+
+message ListReviews{
+	repeated Review reviews = 1;
+	optional float average_rating = 2;
+	optional int64 total_review_count = 3;
+	optional string next_page_token = 4;
+}

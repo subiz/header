@@ -1611,6 +1611,77 @@ func (x *GoogleNotiMessage) GetReview() string {
 	return ""
 }
 
+type ListReviews struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Reviews          []*Review `protobuf:"bytes,1,rep,name=reviews" json:"reviews,omitempty"`
+	AverageRating    *float32  `protobuf:"fixed32,2,opt,name=average_rating,json=averageRating" json:"average_rating,omitempty"`
+	TotalReviewCount *int64    `protobuf:"varint,3,opt,name=total_review_count,json=totalReviewCount" json:"total_review_count,omitempty"`
+	NextPageToken    *string   `protobuf:"bytes,4,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
+}
+
+func (x *ListReviews) Reset() {
+	*x = ListReviews{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_googlekon_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListReviews) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListReviews) ProtoMessage() {}
+
+func (x *ListReviews) ProtoReflect() protoreflect.Message {
+	mi := &file_googlekon_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListReviews.ProtoReflect.Descriptor instead.
+func (*ListReviews) Descriptor() ([]byte, []int) {
+	return file_googlekon_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListReviews) GetReviews() []*Review {
+	if x != nil {
+		return x.Reviews
+	}
+	return nil
+}
+
+func (x *ListReviews) GetAverageRating() float32 {
+	if x != nil && x.AverageRating != nil {
+		return *x.AverageRating
+	}
+	return 0
+}
+
+func (x *ListReviews) GetTotalReviewCount() int64 {
+	if x != nil && x.TotalReviewCount != nil {
+		return *x.TotalReviewCount
+	}
+	return 0
+}
+
+func (x *ListReviews) GetNextPageToken() string {
+	if x != nil && x.NextPageToken != nil {
+		return *x.NextPageToken
+	}
+	return ""
+}
+
 var File_googlekon_proto protoreflect.FileDescriptor
 
 var file_googlekon_proto_rawDesc = []byte{
@@ -1886,9 +1957,21 @@ var file_googlekon_proto_rawDesc = []byte{
 	0x74, 0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
 	0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x06, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x42, 0x23, 0x5a, 0x21, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e,
+	0x52, 0x06, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x22, 0xb7, 0x01, 0x0a, 0x0b, 0x4c, 0x69, 0x73,
+	0x74, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x12, 0x2b, 0x0a, 0x07, 0x72, 0x65, 0x76, 0x69,
+	0x65, 0x77, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x52, 0x07, 0x72, 0x65,
+	0x76, 0x69, 0x65, 0x77, 0x73, 0x12, 0x25, 0x0a, 0x0e, 0x61, 0x76, 0x65, 0x72, 0x61, 0x67, 0x65,
+	0x5f, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x02, 0x52, 0x0d, 0x61,
+	0x76, 0x65, 0x72, 0x61, 0x67, 0x65, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x2c, 0x0a, 0x12,
+	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x5f, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x52,
+	0x65, 0x76, 0x69, 0x65, 0x77, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x26, 0x0a, 0x0f, 0x6e, 0x65,
+	0x78, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0d, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b,
+	0x65, 0x6e, 0x42, 0x23, 0x5a, 0x21, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e,
 }
 
 var (
@@ -1904,7 +1987,7 @@ func file_googlekon_proto_rawDescGZIP() []byte {
 }
 
 var file_googlekon_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_googlekon_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_googlekon_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_googlekon_proto_goTypes = []interface{}{
 	(NotificationSettings_NotificationType)(0), // 0: googlekon.NotificationSettings.NotificationType
 	(Review_Rating)(0),                         // 1: googlekon.Review.Rating
@@ -1925,6 +2008,7 @@ var file_googlekon_proto_goTypes = []interface{}{
 	(*Request)(nil),                            // 16: googlekon.Request
 	(*Response)(nil),                           // 17: googlekon.Response
 	(*GoogleNotiMessage)(nil),                  // 18: googlekon.GoogleNotiMessage
+	(*ListReviews)(nil),                        // 19: googlekon.ListReviews
 }
 var file_googlekon_proto_depIdxs = []int32{
 	3,  // 0: googlekon.BussinessProfileAccounts.accounts:type_name -> googlekon.BussinessProfileAccount
@@ -1936,11 +2020,12 @@ var file_googlekon_proto_depIdxs = []int32{
 	14, // 6: googlekon.Review.reviewer:type_name -> googlekon.Reviewer
 	15, // 7: googlekon.Review.review_reply:type_name -> googlekon.ReviewReply
 	12, // 8: googlekon.Reviews.reviews:type_name -> googlekon.Review
-	9,  // [9:9] is the sub-list for method output_type
-	9,  // [9:9] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	12, // 9: googlekon.ListReviews.reviews:type_name -> googlekon.Review
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_googlekon_proto_init() }
@@ -2153,6 +2238,18 @@ func file_googlekon_proto_init() {
 				return nil
 			}
 		}
+		file_googlekon_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListReviews); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2160,7 +2257,7 @@ func file_googlekon_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_googlekon_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   17,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
