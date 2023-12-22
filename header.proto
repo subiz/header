@@ -1867,7 +1867,7 @@ message Integration {
 	string zalo_linkedZCA = 68;
 
 	// for google review
-	int32 google_review_average_rating = 70;
+	float google_review_average_rating = 70;
 	int64 google_review_total_review_count = 71;
 	string google_review_primary_phone = 72;
 	string google_review_address = 73; 

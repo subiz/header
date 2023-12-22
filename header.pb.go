@@ -14691,12 +14691,12 @@ type Integration struct {
 	ZaloPackageAutoRenewDate    string `protobuf:"bytes,67,opt,name=zalo_package_auto_renew_date,json=zaloPackageAutoRenewDate,proto3" json:"zalo_package_auto_renew_date,omitempty"`
 	ZaloLinkedZCA               string `protobuf:"bytes,68,opt,name=zalo_linkedZCA,json=zaloLinkedZCA,proto3" json:"zalo_linkedZCA,omitempty"`
 	// for google review
-	GoogleReviewAverageRating    int32  `protobuf:"varint,70,opt,name=google_review_average_rating,json=googleReviewAverageRating,proto3" json:"google_review_average_rating,omitempty"`
-	GoogleReviewTotalReviewCount int64  `protobuf:"varint,71,opt,name=google_review_total_review_count,json=googleReviewTotalReviewCount,proto3" json:"google_review_total_review_count,omitempty"`
-	GoogleReviewPrimaryPhone     string `protobuf:"bytes,72,opt,name=google_review_primary_phone,json=googleReviewPrimaryPhone,proto3" json:"google_review_primary_phone,omitempty"`
-	GoogleReviewAddress          string `protobuf:"bytes,73,opt,name=google_review_address,json=googleReviewAddress,proto3" json:"google_review_address,omitempty"`
-	GoogleReviewDescription      string `protobuf:"bytes,74,opt,name=google_review_description,json=googleReviewDescription,proto3" json:"google_review_description,omitempty"`
-	GoogleReviewMapsUri          string `protobuf:"bytes,75,opt,name=google_review_maps_uri,json=googleReviewMapsUri,proto3" json:"google_review_maps_uri,omitempty"`
+	GoogleReviewAverageRating    float32 `protobuf:"fixed32,70,opt,name=google_review_average_rating,json=googleReviewAverageRating,proto3" json:"google_review_average_rating,omitempty"`
+	GoogleReviewTotalReviewCount int64   `protobuf:"varint,71,opt,name=google_review_total_review_count,json=googleReviewTotalReviewCount,proto3" json:"google_review_total_review_count,omitempty"`
+	GoogleReviewPrimaryPhone     string  `protobuf:"bytes,72,opt,name=google_review_primary_phone,json=googleReviewPrimaryPhone,proto3" json:"google_review_primary_phone,omitempty"`
+	GoogleReviewAddress          string  `protobuf:"bytes,73,opt,name=google_review_address,json=googleReviewAddress,proto3" json:"google_review_address,omitempty"`
+	GoogleReviewDescription      string  `protobuf:"bytes,74,opt,name=google_review_description,json=googleReviewDescription,proto3" json:"google_review_description,omitempty"`
+	GoogleReviewMapsUri          string  `protobuf:"bytes,75,opt,name=google_review_maps_uri,json=googleReviewMapsUri,proto3" json:"google_review_maps_uri,omitempty"`
 }
 
 func (x *Integration) Reset() {
@@ -15032,7 +15032,7 @@ func (x *Integration) GetZaloLinkedZCA() string {
 	return ""
 }
 
-func (x *Integration) GetGoogleReviewAverageRating() int32 {
+func (x *Integration) GetGoogleReviewAverageRating() float32 {
 	if x != nil {
 		return x.GoogleReviewAverageRating
 	}
@@ -55205,7 +55205,7 @@ var file_header_proto_rawDesc = []byte{
 	0x64, 0x5a, 0x43, 0x41, 0x18, 0x44, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x7a, 0x61, 0x6c, 0x6f,
 	0x4c, 0x69, 0x6e, 0x6b, 0x65, 0x64, 0x5a, 0x43, 0x41, 0x12, 0x3f, 0x0a, 0x1c, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x5f, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x5f, 0x61, 0x76, 0x65, 0x72, 0x61,
-	0x67, 0x65, 0x5f, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x46, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x67, 0x65, 0x5f, 0x72, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x46, 0x20, 0x01, 0x28, 0x02, 0x52,
 	0x19, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x41, 0x76, 0x65,
 	0x72, 0x61, 0x67, 0x65, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x46, 0x0a, 0x20, 0x67, 0x6f,
 	0x6f, 0x67, 0x6c, 0x65, 0x5f, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x5f, 0x74, 0x6f, 0x74, 0x61,

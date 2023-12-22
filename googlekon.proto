@@ -46,7 +46,7 @@ message Location {
 	optional string website_uri = 10;
 	optional string state = 11;
 	optional PhoneNumbers phoneNumbers = 12;
-	optional int32 average_rating = 13;
+	optional float average_rating = 13;
 	optional int64 total_review_count = 14;
 	optional PostalAddress store_front_address =15;
 }
