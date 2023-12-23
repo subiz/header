@@ -2245,6 +2245,12 @@ message BotAction {
 	ActionCreateTask create_task = 35;
 	ActionSendChatTranscript send_chat_transcript = 36;
 	ActionUpdateUserSegments update_user_segments = 37;
+	ActionRotateAgentInRule rotate_agent_in_rule = 38;
+}
+
+message ActionRotateAgentInRule {
+	string rule_id = 4;
+	repeated string alert_tags = 5;
 }
 
 message ActionCreateTask {
