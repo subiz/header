@@ -1351,10 +1351,12 @@ message Conversation {
 	GoogleReview google_review = 70;
 }
 
-message GoogleReview {
+message GoogleReview { 
 	string review_id = 1;
 	string rating_string = 2;
 	int32 rating = 3;
+	string reply_comment = 4;
+	int64 reply_updated = 5;
 }
 
 message CallInfo {
