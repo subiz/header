@@ -41,7 +41,7 @@ enum RealtimeType {
 
 	conversation_joined = 44; // event.data.conversation.memebers.0
 	conversation_invited = 45;
-	conversation_left =46 ;
+	conversation_left = 46 ;
 	conversation_tagged = 47;
 	conversation_untagged = 48;
 
@@ -230,6 +230,9 @@ enum RealtimeType {
 	workflow_pump = 233; // internal use only
 
 	outbound_call_updated = 234;
+
+	user_banned = 235; // banned_user
+	user_unbanned = 236; // banned_user
 }
 
 message TextTransform {

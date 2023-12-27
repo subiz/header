@@ -86,7 +86,7 @@ message Agent {
 	optional int64 modified = 25;
 
 	optional Account account = 28;
-	optional string country_code = 29;
+	// optional string country_code = 29;
 
 	optional int64 last_login = 32;
 
@@ -165,6 +165,24 @@ message Account {
 	optional int64 login_locked = 43;
 	optional UserAttributeSetting user_attribute_setting = 46;
 	optional string deleted_by_agent = 47;
+	optional InvoiceInfo invoice_info = 48;
+}
+
+message InvoiceInfo {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+
+	optional string company_name = 4;
+	optional string tax_code = 5;
+	optional string fullname = 6;
+	optional string phone = 7;
+	optional string email = 8;
+	optional string address = 9;
+
+	optional int64 disabled_invoice_email = 10;
+
+	optional int64 updated = 20;
+	optional string updated_by = 21;
 }
 
 message UserAttributeSetting {
@@ -183,6 +201,7 @@ message Feature {
 
 	optional int64 total_file_size = 11; // bytes
 	optional int64 total_call_log_size =  12; // bytes
+	optional int64 call_recording_ttl = 13; // sec
 }
 
 message WebpageMonitorSetting {

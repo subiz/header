@@ -908,6 +908,7 @@ message Data {
 
 	WorkflowPump workflow_pump = 107;
 	OutboundCallUpdateEvent outbound_call_update = 108;
+	BannedUser banned_user = 109;
 }
 
 message WebRTCMessage {
