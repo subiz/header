@@ -1358,6 +1358,7 @@ message GoogleReview {
 	int32 rating = 3;
 	string reply_comment = 4;
 	int64 reply_updated = 5;
+	bool is_removed = 6;
 }
 
 message CallInfo {
