@@ -424,6 +424,154 @@ func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition,
 	return updatedUser
 }
 
+func UpdateAttributeForce(cred *cpb.Credential, defM map[string]*AttributeDefinition, user *User, attr *Attribute, now int64) {
+	if attr.GetKey() == "" || user == nil || defM == nil || attr.GetAction() == "noop" {
+		return
+	}
+
+	def := defM[attr.Key]
+	if def == nil {
+		return // ignore undefined attribute
+	}
+
+	// dont trust user
+	if cred.GetType() == cpb.Type_user || cred.GetType() == cpb.Type_unknown {
+		attr.By = cred.GetIssuer()
+		attr.ByType = cpb.Type_user.String()
+	}
+
+	byId, bytype := attr.By, attr.ByType
+	if byId == "" {
+		byId = cred.GetIssuer()
+	}
+
+	if bytype == "" {
+		bytype = cred.GetType().String()
+	}
+	isBySystem := bytype == cpb.Type_subiz.String()
+	isManually := bytype == cpb.Type_agent.String()
+	isByConnector := bytype == cpb.Type_connector.String()
+	isByUser := !isByConnector && !isBySystem && !isManually // (bot, widget, user)
+
+	action := attr.GetAction()
+	if action == "" {
+		action = Attribute_upsert.String()
+	}
+	var oldattr *Attribute
+	for _, a := range user.Attributes {
+		if a.Key == attr.Key {
+			oldattr = a
+			break
+		}
+	}
+
+	if oldattr == nil {
+		oldattr = &Attribute{Key: attr.Key}
+		user.Attributes = append(user.Attributes, oldattr)
+	}
+
+	if isByConnector {
+		oldattr.ConnectorValue = AttributeValue(defM, attr)
+		oldattr.Modified = now
+	}
+
+	if isByUser && byId == user.GetId() {
+		oldattr.UserValue = AttributeValue(defM, attr)
+		oldattr.Modified = now
+	}
+
+
+	if action == Attribute_delete.String() {
+		if attr.Text != "" {
+			// remove specific value
+			vals := []string{}
+			if oldattr.Text != attr.Text {
+				vals = append(vals, oldattr.Text)
+			}
+
+			for _, v := range oldattr.OtherValues {
+				if v != attr.Text {
+					vals = append(vals, v)
+				}
+			}
+			oldattr.Text = ""
+			oldattr.OtherValues = nil
+			if len(vals) > 0 {
+				oldattr.Text = vals[0]
+				oldattr.OtherValues = vals[1:]
+			}
+			oldattr.Number = 0
+			oldattr.Boolean = false
+			oldattr.Datetime = ""
+			oldattr.Modified = attr.Modified
+			if oldattr.Modified == 0 {
+				oldattr.Modified = now
+			}
+			oldattr.By = byId
+			oldattr.ByType = bytype
+			return
+		}
+
+		oldattr.Text = ""
+		oldattr.Number = 0
+		oldattr.Boolean = false
+		oldattr.Datetime = ""
+		oldattr.OtherValues = nil
+		oldattr.Modified = attr.Modified
+		if oldattr.Modified == 0 {
+			oldattr.Modified = now
+		}
+		oldattr.By = byId
+		oldattr.ByType = bytype
+		return
+	}
+
+	if action == Attribute_push.String() { // text only
+		if oldattr.Text != "" {
+			PushOtherValues(oldattr, attr.Text)
+		} else {
+			oldattr.Text = attr.Text
+		}
+		cleanOtherValues(oldattr)
+		oldattr.Modified = attr.Modified
+		if oldattr.Modified == 0 {
+			oldattr.Modified = now
+		}
+		oldattr.By = byId
+		oldattr.ByType = bytype
+		return
+	} else if action == "unshift" { // text only
+		if oldattr.Text != "" {
+			PushOtherValues(oldattr, oldattr.Text)
+		}
+		oldattr.Text = attr.Text
+		cleanOtherValues(oldattr)
+		oldattr.Modified = attr.Modified
+		if oldattr.Modified == 0 {
+			oldattr.Modified = now
+		}
+		oldattr.By = byId
+		oldattr.ByType = bytype
+		return
+	} else {
+		oldIsEmpty := ((def.Type == "text" && oldattr.GetText() == "") || (def.Type == "datetime" && oldattr.GetDatetime() == "") || oldattr == nil)
+		if (action == Attribute_insert.String() && oldIsEmpty) || action != Attribute_insert.String() {
+			if attr.OtherValues != nil {
+				oldattr.OtherValues = attr.OtherValues
+			}
+			oldattr.Text, oldattr.Number, oldattr.Boolean, oldattr.Datetime = attr.Text, attr.Number, attr.Boolean, attr.Datetime
+			oldattr.Modified = attr.Modified
+			if oldattr.Modified == 0 {
+				oldattr.Modified = now
+			}
+
+			oldattr.By = byId
+			oldattr.ByType = bytype
+			return
+		}
+	}
+}
+
 func GetTimeAttr(u *User, key string) (time.Time, bool) {
 	key = strings.ToLower(strings.TrimSpace(key))
 	has := false
