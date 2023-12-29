@@ -149,6 +149,7 @@ message Reviewer {
 message ReviewReply {
     optional string comment = 1;
 	optional string update_time = 2;
+	optional string agent_id = 3;
 }
 
 message Request {
