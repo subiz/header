@@ -209,7 +209,7 @@ message User {
 	repeated string lead_owners = 41; // team
 	repeated UserLabel labels = 42;
 	string type = 47; // empty = guest - lead - contact
-	string primary_id = 49; // rename to customer_id
+	string primary_id = 49;
 	// repeated string secondary_ids = 50;
 	string profile_id = 52; // user-id
 	string channel_source = 53; // pvcombank require verification
@@ -572,10 +572,6 @@ message UserMetric {
 	int64 lead_count = 66;
 }
 
-message UserMetrics {
-	repeated UserMetric metrics = 2;
-}
-
 message UserReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -611,25 +607,6 @@ message UserReportResponse {
 	repeated UserReportEntry leads = 6;
 }
 
-message UserMetricsRequest {
-	string account_id = 2;
-	int64 created_hour_from = 3;
-	int64 created_hour_to = 4;
-	int64 seen_hour_from = 13;
-	int64 seen_hour_to = 14;
-	repeated string sources = 5;
-	repeated string channels = 6;
-	repeated string channel_touchpoints = 7;
-	repeated string first_interacts = 8;
-	repeated string session_sources = 15;
-	repeated string not_channels = 16;
-	account.BusinessHours business_hours = 17;
-	account.BusinessHours not_business_hours = 18;
-	int32 tz = 9;
-	string dim = 10;
-	string anchor = 11;
-	int32 limit = 12;
-}
 
 message ConversationMetric {
 	string account_id = 2;
@@ -642,12 +619,8 @@ message ConversationMetric {
 	int64 first_replied_duration = 10;
 	repeated string agent_ids = 11; // assigned
 	string agent_id = 18; // derived
-	int64 agent_id_bits = 19; // only system
-	string agent_id_strings = 20; // only system
 	repeated string agent_sent_ids = 12;
 	string date = 13; // derived
-	int64 tag_bits = 14; // only system
-	string tag_strings = 15; // only system
 	repeated string tags = 6;
 	string tag = 16; // derived
 	int64 latest_sent_hour = 17;
@@ -726,8 +699,6 @@ message CallMetric {
 	string direction = 5;
 	string phone = 6;
 	string agent_id = 7;
-	int64 tag_bits = 8; // only system
-	string tag_strings = 9; // only system
 	repeated string tags = 10;
 	string tag = 11; // derived
 	int64 call_count = 12;
@@ -1182,13 +1153,13 @@ message RouteResult {
 	string strategy = 3;
 	repeated string agent_ids = 4;
 	string group_id = 5;
-	string state = 6;
+	string state = 6; // ???
 	int64 assigned = 7; // ms
 
 	string bot_id = 8; // strategy == bot
 	string debug = 9;
 
-	string status = 10; // waiting_for_agent
+	string status = 10; // waiting_for_agent, assigned
 	string assigned_to = 11;
 }
 
@@ -1367,8 +1338,8 @@ message GoogleReview {
 }
 
 message ReviewReply {
-    string comment = 1;
-    int64  updated = 2;
+	string comment = 1;
+	int64  updated = 2;
 	string agent_id = 3;
 }
 
@@ -4631,8 +4602,6 @@ message OrderMetric {
 	string channel = 13;
 	string channel_touchpoint = 14;
 	string salesperson = 15;
-	int64 product_id_bits = 16; // only system
-	string product_id_strings = 17; // only system
 	repeated string product_ids = 18;
 	string product_id = 19; // derived
 	int64 created_hour = 20;
@@ -4653,8 +4622,6 @@ message OrderMetric {
 	int64 unconfirmed_count = 76;
 	int64 unconfirmed_fpv_total_sum = 77; // derived
 
-	int64 product_category_bits = 80; // only system
-	string product_category_strings = 81; // only system
 	string category = 82;
 }
 
@@ -4678,14 +4645,10 @@ message OrderMetricsRequest {
 	int64 created_hour_to = 26;
 }
 
-message DeleteDraftOrdersRequest {
-	int64 point_to = 3; // exclude
-}
-
 message Orders {
 	common.Context ctx = 1;
 
-	repeated OrderMetric metrics = 3;
+	// repeated OrderMetric metrics = 3;
 	repeated Order orders = 4;
 	string anchor = 5;
 	int64 total = 6;
@@ -6549,7 +6512,7 @@ enum E {
 
 	// invalid_email = 59;
 	invalid_date_format = 61;
-	prohibited_action = 62;
+	// prohibited_action = 62;
 
 	invalid_working_day = 63;
 	invalid_holiday = 64;
