@@ -1352,13 +1352,20 @@ message Conversation {
 	GoogleReview google_review = 70;
 }
 
-message GoogleReview {
+message GoogleReview { 
 	string review_id = 1;
 	string rating_string = 2;
 	int32 rating = 3;
-	string reply_comment = 4;
-	int64 reply_updated = 5;
-	bool is_removed = 6;
+	int64 created = 4;
+	int64 updated = 5;
+	ReviewReply review_rely = 8;
+	bool is_removed = 9;
+}
+
+message ReviewReply {
+    string comment = 1;
+    int64  updated = 2;
+	string agent_id = 3;
 }
 
 message CallInfo {
