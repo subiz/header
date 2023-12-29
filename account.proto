@@ -133,7 +133,7 @@ message Account {
 	}
 	optional string city = 14;
 	optional int32 zip_code = 16;
-	optional string tax_id = 17;
+	// optional string tax_id = 17;
 	optional string facebook = 18;
 	optional string twitter = 22;
 	optional string phone = 19;

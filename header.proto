@@ -1187,6 +1187,9 @@ message RouteResult {
 
 	string bot_id = 8; // strategy == bot
 	string debug = 9;
+
+	string status = 10; // waiting_for_agent
+	string assigned_to = 11;
 }
 
 message ConversationMember {
@@ -1301,6 +1304,7 @@ message Conversation {
 	int64 response_sec = 22;
 
 	RouteResult assigned_to = 30;
+	RouteResult reassigned_to = 71;
 
 	// string first_message = 31;
 	string subject = 32;
@@ -1352,7 +1356,7 @@ message Conversation {
 	GoogleReview google_review = 70;
 }
 
-message GoogleReview { 
+message GoogleReview {
 	string review_id = 1;
 	string rating_string = 2;
 	int32 rating = 3;
