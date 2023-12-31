@@ -5714,6 +5714,70 @@ message FacebookPageRegister {
 	repeated string receive_comments = 13; // page id that receive comment
 }
 
+message FacebookPage {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	int64 created = 4;
+	string picture_url = 5;
+	string name = 6;
+	string access_token = 7;
+	int64 updated = 8;
+	int64 last_facebook_hook = 9;
+
+	string state = 10; // activated || deleted || failed
+	int64 last_messenger_inbox = 11; // ms
+
+	string linked_page_id = 12; // instagram <-> facebook
+	bool is_instagram = 13;
+	InstagramUser instagram_account = 14;
+
+	int64 last_success_request_at = 15;
+	int64 last_failed_request_at = 16;
+
+	int64 last_message_sent_success_at = 17;
+	int64 last_message_sent_failed_at = 18;
+
+	int64 last_token_expired_at = 19;
+}
+
+message FacebookPageRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string access_token = 3;
+	string anchor = 4;
+}
+
+message FacebookPageLinkRequest {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string page_id = 4;
+}
+
+message FacebookPages {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated  FacebookPage facebook_pages = 3;
+}
+
+message InstagramUser {
+	common.Context ctx = 1;
+	string id = 4;
+	string username = 5;
+	string profile_picture_url = 6;
+	string name = 7;
+	int64 ig_id = 8;
+	int64 followers_count = 9;
+	int64 follows_count = 10;
+	int64 media_count = 11;
+	string website = 12;
+
+	bool is_verified_user = 13;
+	bool is_user_follow_business = 14;
+	bool is_business_follow_user = 15;
+	string profile_pic = 16;
+}
+
 message CallDriverRequest {
 	common.Context ctx = 1;
 	string account_id = 2;

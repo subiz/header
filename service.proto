@@ -11,7 +11,7 @@ import "common.proto";
 import "zalokon.proto";
 
 service GooglekonService {
-	rpc SendEventToGoogle(header.Events) returns (header.Empty); 
+	rpc SendEventToGoogle(header.Events) returns (header.Empty);
 }
 
 service RateLimit {
@@ -420,6 +420,8 @@ service FabikonService {
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
 
 	rpc GenerateRefLink(header.Id) returns (header.Id);
+	rpc UnlinkPageWithAccount(header.FacebookPageLinkRequest) returns (header.Empty);
+	rpc ListFacebookPages(header.Id) returns (header.FacebookPages);
 }
 
 service ZalokonService {
