@@ -15,7 +15,7 @@ message FacebookPage {
 	optional int64 last_facebook_hook = 9;
 
 	optional string state = 8; // activated || deleted || failed
-	optional int64 last_messenger_inbox = 10; // ms
+	// optional int64 last_messenger_inbox = 10; // ms
 
 	optional string linked_page_id = 11; // instagram <-> facebook
 	optional bool is_instagram = 12;
@@ -27,7 +27,8 @@ message FacebookPage {
 	optional int64 last_message_sent_success_at = 16;
 	optional int64 last_message_sent_failed_at = 17;
 
-	optional int64 last_token_expired_at = 18;
+	optional string token_status = 19; // '' || failed
+	optional int64 token_status_updated = 20;
 }
 
 message FbWebhookEvent {

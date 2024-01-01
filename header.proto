@@ -798,7 +798,7 @@ message Event {
 	int64 created = 8;
 	int64 updated = 10;
 	string type = 9;
-	string session_id = 12; // extra id for many purpose
+	string session_id = 12; // extra id for many purpose (idempotency key)
 	By by = 50;
 	Touchpoint touchpoint = 52;
 	Data data = 20;
@@ -1807,10 +1807,8 @@ message Integration {
 
 	int64 created = 11;
 	string integrated_by = 13;
-	int64 last_failed = 14;
+	// int64 last_failed = 14;
 	bool disabled = 15;
-	string sending_status = 17; // ok, failed
-	string receiving_status = 18; // ok, failed
 
 	string username = 19;
 	string linked_page_id = 20;
@@ -1860,8 +1858,12 @@ message Integration {
 	string google_review_description = 74;
 	string google_review_maps_uri = 75;
 
-	int64 last_event_received = 80;
-	int64 last_event_sent = 81;
+	string sending_status = 17; // ok, failed
+	// string receiving_status = 18; // ok, failed
+	int64 last_hook_received = 80;
+	int64 last_request_sent = 81;
+	string token_status = 83; // (ok | '') || 'expired' || warning (missing permission)
+	string token_status_updated = 84;
 }
 
 message TagRequest {
@@ -5726,7 +5728,7 @@ message FacebookPage {
 	int64 last_facebook_hook = 9;
 
 	string state = 10; // activated || deleted || failed
-	int64 last_messenger_inbox = 11; // ms
+	// int64 last_messenger_inbox = 11; // ms
 
 	string linked_page_id = 12; // instagram <-> facebook
 	bool is_instagram = 13;
@@ -5738,7 +5740,8 @@ message FacebookPage {
 	int64 last_message_sent_success_at = 17;
 	int64 last_message_sent_failed_at = 18;
 
-	int64 last_token_expired_at = 19;
+	string token_status = 20; // '' || failed
+	int64 token_status_updated = 21;
 }
 
 message FacebookPageRequest {
