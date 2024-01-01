@@ -420,7 +420,7 @@ service FabikonService {
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
 
 	rpc GenerateRefLink(header.Id) returns (header.Id);
-	rpc UnlinkPageWithAccount(header.FacebookPageLinkRequest) returns (header.Empty);
+	rpc LinkPageWithAccount(header.FacebookPageLinkRequest) returns (header.Empty);
 	rpc ListFacebookPages(header.Id) returns (header.FacebookPages);
 }
 
