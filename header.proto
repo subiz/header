@@ -1863,9 +1863,9 @@ message Integration {
 	int64 last_hook_received = 80;
 	int64 last_request_sent = 81;
 	string token_status = 83; // (ok | '') || 'expired' || warning (missing permission)
-	string token_status_updated = 84;
+	int64 token_status_updated = 84;
 
-	int64 facebook_comment_disabled = 85;
+	int64 comment_disabled = 85;
 }
 
 message TagRequest {
