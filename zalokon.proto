@@ -193,7 +193,7 @@ message Request {
 	string oa_id = 14;
 	string phone = 15;
 	string user_consent = 16;
-	string confirmed_time = 17;
+	// string confirmed_time = 17;
 	string expired_time = 18;
 	string request_type = 19;
 	string create_time = 20;
