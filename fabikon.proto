@@ -27,8 +27,12 @@ message FacebookPage {
 	optional int64 last_message_sent_success_at = 16;
 	optional int64 last_message_sent_failed_at = 17;
 
+
 	optional string token_status = 19; // '' || failed
 	optional int64 token_status_updated = 20;
+
+	optional string last_failed_url = 21;
+	optional string last_failed_body = 22;
 }
 
 message FbWebhookEvent {
@@ -390,6 +394,12 @@ message FacebookUser {
 	optional FbProfilePic picture = 9;
 	optional string email = 10;
 	optional string name = 11;
+}
+
+message FacebookGuestUser {
+	optional string id = 2;
+	optional string name = 3;
+	optional string picture = 9;
 }
 
 message InstagramUser {
