@@ -130,7 +130,7 @@ message Review {
 	optional ReviewReply review_reply = 8;
 	optional string name = 9;
 	optional string location_id =10;
-	optional string convo_id = 11;
+	optional string status = 11;
 }
 
 message Reviews {
