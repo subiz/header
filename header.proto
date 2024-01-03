@@ -1153,7 +1153,7 @@ message RouteResult {
 	string strategy = 3;
 	repeated string agent_ids = 4;
 	string group_id = 5;
-	string state = 6; // ???
+	// string state = 6; // ???
 	int64 assigned = 7; // ms
 
 	string bot_id = 8; // strategy == bot
@@ -1262,7 +1262,7 @@ message Conversation {
 	string state = 11; // converation state: pending, dialing, active, (routing||unassigned), congestion, ended
 	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
-	Integration integration = 18; // removing
+	Integration integration = 18; // removing after tet
 	int64 actived = 19;
 
 	// Message last_message = 20; // remove after update mobile app
