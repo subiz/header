@@ -45,12 +45,11 @@ enum RealtimeType {
 
 	conversation_tagged = 47;
 	conversation_untagged = 48;
-
-
 	integration_updated = 49;
 	integration_deleted = 50;
 
-	conversation_marked_as_spam_updated = 51; // event.data.conversation
+	conversation_spam_marked = 51; // event.data.conversation
+	conversation_spam_unmarked = 52; // event.data.conversation
 
 	conversation_typing = 54;
 	conversation_unassigned = 56;
