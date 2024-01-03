@@ -1335,7 +1335,7 @@ message GoogleReview {
 	int64 updated = 5;
 	ReviewReply review_rely = 8;
 	bool is_removed = 9;
-	string last_action_status = 10;
+	string comment = 10;
 }
 
 message ReviewReply {
