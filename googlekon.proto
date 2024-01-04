@@ -24,18 +24,18 @@ message BussinessProfileAccount{
 
 message BussinessProfileAccounts {
 	repeated BussinessProfileAccount accounts = 1;
-	optional string next_page_token = 2;
+	optional string nextPageToken = 2;
 }
 
 message Locations {
 	repeated Location locations = 1;
-	optional string next_page_token = 2;
-	optional int64 total_size = 3;
+	optional string nexPageToken = 2;
+	optional int64 totalSize = 3;
 }
 
 message Location {
-	optional string location_id = 1;
-	optional string store_code  = 2;
+	optional string locationId = 1;
+	optional string storeCode  = 2;
 	optional string title = 3;
 	optional Metadata metadata = 4;
 	optional Profile profile = 5;
@@ -43,76 +43,36 @@ message Location {
 	optional string email = 7;
 	optional string bussiness_profile_account_id = 8;
 	optional string name = 9;
-	optional string website_uri = 10;
+	optional string websiteUri = 10;
 	optional string state = 11;
 	optional PhoneNumbers phoneNumbers = 12;
-	optional float average_rating = 13;
-	optional int64 total_review_count = 14;
-	optional PostalAddress storefront_address = 15;
+	optional float averageRating = 13;
+	optional int64 totalReviewCount = 14;
+	optional PostalAddress storefrontAddress = 15;
 }
 
 message PhoneNumbers {
-	optional string primary_phone = 1;
-	repeated string additional_phones = 2;
+	optional string primaryPhone = 1;
+	repeated string additionalPhones = 2;
 }
 
 message PostalAddress {
-	optional string revision = 1;
-	optional string region_code = 2;
-	optional string language_code = 3;
-	optional string postal_code = 4;
-	optional string sorting_code = 5;
-	optional string administrative_area = 6;
+	optional string postalCode = 4;
 	optional string locality = 7;
 	optional string sublocality = 8;
-    repeated string address_lines = 9;
-	repeated string recipients = 10;
-	repeated string organization = 11;
+    repeated string addressLines = 9;
 	optional string address = 12;
 }
 message Metadata {
-	optional bool has_pending_edits = 1;
-	optional bool can_delete = 2;
-	optional bool can_operate_local_post = 3;
-	optional bool can_modify_service_list = 4;
-	optional bool can_have_food_menus = 5;
-	optional bool can_operate_health_data = 6;
-	optional bool can_operate_lodging_data= 7;
-	optional string place_id =8;
-	optional string duplicate_loaction =9;
-    optional string maps_uri = 10;
-	optional string new_review_uri = 11;
-	optional bool can_have_business_call =12 ;
-	optional bool has_voice_of_merchant =13;
-	optional bool has_google_updated = 14;
+    optional string mapsUri = 10;
 }
 
 message Profile {
 	optional string description = 1;
 }
 
-//Cloud Pub/Sub notification settings for an bussiness profile account 
-message NotificationSettings {
-	optional string name = 1;
-	optional string pubsub_topic = 2;
-	optional string notification_type = 3;
-	enum NotificationType {
-		NOTIFICATION_TYPE_UNSPECIFIED = 0;
-		GOOGLE_UPDATE = 1;
-		NEW_REVIEW = 2;
-		UPDATED_REVIEW = 3;
-		NEW_CUSTOMER_MEDIA = 4;
-		NEW_QUESTION = 5;
-		UPDATED_QUESTION = 6;
-		NEW_ANSWER = 7;
-		UPDATED_ANSWER = 8;
-		DUPLICATE_LOCATION = 9;
-		VOICE_OF_MERCHANT_UPDATED = 10;
-	}
-}
-
 message Review {
-	optional string review_id = 2;
+	optional string reviewId = 2;
 	optional Reviewer reviewer = 3;
 
     enum Rating {
@@ -123,44 +83,33 @@ message Review {
         four = 4;
         five = 5; 
 	}
-	optional string star_rating = 4; //rating
+	optional string starRating = 4; //rating
 	optional string comment = 5;
-	optional string create_time = 6;
-	optional string update_time = 7;
-	optional ReviewReply review_reply = 8;
+	optional string createTime = 6;
+	optional string updateTime = 7;
+	optional ReviewReply reviewReply = 8;
 	optional string name = 9;
-	optional string location_id =10;
+	optional string locationId =10;
 	optional string status = 11;
 }
 
 message Reviews {
     repeated Review reviews = 1;
-	optional float avarage_rating = 2;
-    optional int32 total_review_count = 3;
-    optional string next_page_token = 4;
+	optional float avarageRating = 2;
+    optional int32 totalReviewCount = 3;
+    optional string nextPageToken = 4;
 }
 
 message Reviewer {
-    optional string profile_photo_url= 1;
-	optional string display_name = 2;
-	optional bool is_anonymous = 3;
+    optional string profilePhotoUrl= 1;
+	optional string displayName = 2;
+	optional bool isAnonymous = 3;
 }
 
 message ReviewReply {
     optional string comment = 1;
-	optional string update_time = 2;
-	optional string agent_id = 3;
-}
-
-message Request {
-    repeated string location_names = 1; 
-    optional int32 page_size = 2;
-    optional string page_token = 3;
-    optional string order_by = 4; 
-    optional bool ignore_rating_only_reviews = 5; 
-	optional string update_mask = 6;
-	optional string parent_account = 7;
-	optional string filter = 8;
+	optional string updateTime = 2;
+	optional string agentId = 3;
 }
 
 message Response {
@@ -180,9 +129,9 @@ message GoogleNotiMessage {
 
 message ListReviews{
 	repeated Review reviews = 1;
-	optional float average_rating = 2;
-	optional int64 total_review_count = 3;
-	optional string next_page_token = 4;
+	optional float averageRating = 2;
+	optional int64 totalReviewCount = 3;
+	optional string nextPageToken = 4;
 }
 
 message Question {
@@ -216,3 +165,14 @@ message Answer {
 	optional string updateTime =6;
 }
 
+message ListQuestions{
+	repeated Question questions = 1;
+	optional int64 totalSize = 2;
+	optional string nextPageToken = 3;
+}
+
+message ListAnswers{
+	repeated Answer answers = 1;
+	optional int64 totalSize = 2;
+	optional string nextPageToken = 3;
+}
