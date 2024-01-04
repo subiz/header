@@ -29,7 +29,7 @@ message BussinessProfileAccounts {
 
 message Locations {
 	repeated Location locations = 1;
-	optional string nexPageToken = 2;
+	optional string nextPageToken = 2;
 	optional int64 totalSize = 3;
 }
 
