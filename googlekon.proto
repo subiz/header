@@ -34,7 +34,7 @@ message Locations {
 }
 
 message Location {
-	optional string locationId = 1;
+	optional string location_id = 1;
 	optional string storeCode  = 2;
 	optional string title = 3;
 	optional Metadata metadata = 4;
@@ -89,7 +89,7 @@ message Review {
 	optional string updateTime = 7;
 	optional ReviewReply reviewReply = 8;
 	optional string name = 9;
-	optional string locationId =10;
+	optional string location_id =10;
 	optional string status = 11;
 }
 
@@ -142,6 +142,9 @@ message Question {
 	optional string createTime = 5;
 	optional string updateTime = 6;
 	optional int64 totalAnswerCount = 7;
+	optional string question_id = 8;
+	optional string location_id = 10;
+	optional string status = 11;
 }
 
 message Author {
@@ -162,7 +165,11 @@ message Answer {
 	optional int64 upvoteCount = 3;
 	optional string text = 4;
 	optional string createTime = 5;
-	optional string updateTime =6;
+	optional string updateTime = 6;
+	optional string answer_id = 7;
+	optional string question_id = 8;
+	optional string location_id = 10;
+	optional string status = 11;
 }
 
 message ListQuestions{
