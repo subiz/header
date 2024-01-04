@@ -73,16 +73,6 @@ func (x Review_Rating) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Do not use.
-func (x *Review_Rating) UnmarshalJSON(b []byte) error {
-	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
-	if err != nil {
-		return err
-	}
-	*x = Review_Rating(num)
-	return nil
-}
-
 // Deprecated: Use Review_Rating.Descriptor instead.
 func (Review_Rating) EnumDescriptor() ([]byte, []int) {
 	return file_googlekon_proto_rawDescGZIP(), []int{9, 0}
@@ -135,16 +125,6 @@ func (x Author_AuthorType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Do not use.
-func (x *Author_AuthorType) UnmarshalJSON(b []byte) error {
-	num, err := protoimpl.X.UnmarshalJSONEnum(x.Descriptor(), b)
-	if err != nil {
-		return err
-	}
-	*x = Author_AuthorType(num)
-	return nil
-}
-
 // Deprecated: Use Author_AuthorType.Descriptor instead.
 func (Author_AuthorType) EnumDescriptor() ([]byte, []int) {
 	return file_googlekon_proto_rawDescGZIP(), []int{17, 0}
@@ -155,16 +135,16 @@ type GoogleAccount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Email                    *string  `protobuf:"bytes,1,opt,name=email" json:"email,omitempty"`
-	LinkedBussinessProfileId []string `protobuf:"bytes,2,rep,name=linked_bussiness_profile_id,json=linkedBussinessProfileId" json:"linked_bussiness_profile_id,omitempty"`
-	AccessToken              *string  `protobuf:"bytes,4,opt,name=access_token,json=accessToken" json:"access_token,omitempty"`
-	RefreshToken             *string  `protobuf:"bytes,5,opt,name=refresh_token,json=refreshToken" json:"refresh_token,omitempty"`
-	AccessTokenExpiredAt     *int64   `protobuf:"varint,6,opt,name=access_token_expired_at,json=accessTokenExpiredAt" json:"access_token_expired_at,omitempty"`
-	Authorized               *int64   `protobuf:"varint,7,opt,name=authorized" json:"authorized,omitempty"`
-	LastCalled               *int64   `protobuf:"varint,8,opt,name=last_called,json=lastCalled" json:"last_called,omitempty"`
-	LastRefreshTokenAt       *int64   `protobuf:"varint,9,opt,name=last_refresh_token_at,json=lastRefreshTokenAt" json:"last_refresh_token_at,omitempty"`
-	LastRefreshTokenErrorAt  *int64   `protobuf:"varint,10,opt,name=last_refresh_token_error_at,json=lastRefreshTokenErrorAt" json:"last_refresh_token_error_at,omitempty"`
-	AccountId                *string  `protobuf:"bytes,11,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
+	Email                    string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	LinkedBussinessProfileId string `protobuf:"bytes,4,opt,name=linked_bussiness_profile_id,json=linkedBussinessProfileId,proto3" json:"linked_bussiness_profile_id,omitempty"`
+	AccessToken              string `protobuf:"bytes,5,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	RefreshToken             string `protobuf:"bytes,6,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+	AccessTokenExpiredAt     int64  `protobuf:"varint,7,opt,name=access_token_expired_at,json=accessTokenExpiredAt,proto3" json:"access_token_expired_at,omitempty"`
+	Authorized               int64  `protobuf:"varint,8,opt,name=authorized,proto3" json:"authorized,omitempty"`
+	LastCalled               int64  `protobuf:"varint,9,opt,name=last_called,json=lastCalled,proto3" json:"last_called,omitempty"`
+	LastRefreshTokenAt       int64  `protobuf:"varint,10,opt,name=last_refresh_token_at,json=lastRefreshTokenAt,proto3" json:"last_refresh_token_at,omitempty"`
+	LastRefreshTokenErrorAt  int64  `protobuf:"varint,11,opt,name=last_refresh_token_error_at,json=lastRefreshTokenErrorAt,proto3" json:"last_refresh_token_error_at,omitempty"`
+	AccountId                string `protobuf:"bytes,12,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 }
 
 func (x *GoogleAccount) Reset() {
@@ -200,71 +180,71 @@ func (*GoogleAccount) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoogleAccount) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
 
-func (x *GoogleAccount) GetLinkedBussinessProfileId() []string {
+func (x *GoogleAccount) GetLinkedBussinessProfileId() string {
 	if x != nil {
 		return x.LinkedBussinessProfileId
 	}
-	return nil
+	return ""
 }
 
 func (x *GoogleAccount) GetAccessToken() string {
-	if x != nil && x.AccessToken != nil {
-		return *x.AccessToken
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
 
 func (x *GoogleAccount) GetRefreshToken() string {
-	if x != nil && x.RefreshToken != nil {
-		return *x.RefreshToken
+	if x != nil {
+		return x.RefreshToken
 	}
 	return ""
 }
 
 func (x *GoogleAccount) GetAccessTokenExpiredAt() int64 {
-	if x != nil && x.AccessTokenExpiredAt != nil {
-		return *x.AccessTokenExpiredAt
+	if x != nil {
+		return x.AccessTokenExpiredAt
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetAuthorized() int64 {
-	if x != nil && x.Authorized != nil {
-		return *x.Authorized
+	if x != nil {
+		return x.Authorized
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetLastCalled() int64 {
-	if x != nil && x.LastCalled != nil {
-		return *x.LastCalled
+	if x != nil {
+		return x.LastCalled
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetLastRefreshTokenAt() int64 {
-	if x != nil && x.LastRefreshTokenAt != nil {
-		return *x.LastRefreshTokenAt
+	if x != nil {
+		return x.LastRefreshTokenAt
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetLastRefreshTokenErrorAt() int64 {
-	if x != nil && x.LastRefreshTokenErrorAt != nil {
-		return *x.LastRefreshTokenErrorAt
+	if x != nil {
+		return x.LastRefreshTokenErrorAt
 	}
 	return 0
 }
 
 func (x *GoogleAccount) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
@@ -274,8 +254,8 @@ type BussinessProfileAccount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BussinessProfileId *string `protobuf:"bytes,1,opt,name=bussiness_profile_id,json=bussinessProfileId" json:"bussiness_profile_id,omitempty"`
-	Name               *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
+	BussinessProfileId string `protobuf:"bytes,3,opt,name=bussiness_profile_id,json=bussinessProfileId,proto3" json:"bussiness_profile_id,omitempty"`
+	Name               string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 }
 
 func (x *BussinessProfileAccount) Reset() {
@@ -311,15 +291,15 @@ func (*BussinessProfileAccount) Descriptor() ([]byte, []int) {
 }
 
 func (x *BussinessProfileAccount) GetBussinessProfileId() string {
-	if x != nil && x.BussinessProfileId != nil {
-		return *x.BussinessProfileId
+	if x != nil {
+		return x.BussinessProfileId
 	}
 	return ""
 }
 
 func (x *BussinessProfileAccount) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -329,8 +309,8 @@ type BussinessProfileAccounts struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Accounts      []*BussinessProfileAccount `protobuf:"bytes,1,rep,name=accounts" json:"accounts,omitempty"`
-	NextPageToken *string                    `protobuf:"bytes,2,opt,name=nextPageToken" json:"nextPageToken,omitempty"`
+	Accounts      []*BussinessProfileAccount `protobuf:"bytes,4,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	NextPageToken string                     `protobuf:"bytes,5,opt,name=nextPageToken,proto3" json:"nextPageToken,omitempty"`
 }
 
 func (x *BussinessProfileAccounts) Reset() {
@@ -373,8 +353,8 @@ func (x *BussinessProfileAccounts) GetAccounts() []*BussinessProfileAccount {
 }
 
 func (x *BussinessProfileAccounts) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -384,9 +364,9 @@ type Locations struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Locations     []*Location `protobuf:"bytes,1,rep,name=locations" json:"locations,omitempty"`
-	NextPageToken *string     `protobuf:"bytes,2,opt,name=nextPageToken" json:"nextPageToken,omitempty"`
-	TotalSize     *int64      `protobuf:"varint,3,opt,name=totalSize" json:"totalSize,omitempty"`
+	Locations     []*Location `protobuf:"bytes,3,rep,name=locations,proto3" json:"locations,omitempty"`
+	NextPageToken string      `protobuf:"bytes,5,opt,name=nextPageToken,proto3" json:"nextPageToken,omitempty"`
+	TotalSize     int64       `protobuf:"varint,6,opt,name=totalSize,proto3" json:"totalSize,omitempty"`
 }
 
 func (x *Locations) Reset() {
@@ -429,15 +409,15 @@ func (x *Locations) GetLocations() []*Location {
 }
 
 func (x *Locations) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
 
 func (x *Locations) GetTotalSize() int64 {
-	if x != nil && x.TotalSize != nil {
-		return *x.TotalSize
+	if x != nil {
+		return x.TotalSize
 	}
 	return 0
 }
@@ -447,21 +427,21 @@ type Location struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LocationId                *string        `protobuf:"bytes,1,opt,name=location_id,json=locationId" json:"location_id,omitempty"`
-	StoreCode                 *string        `protobuf:"bytes,2,opt,name=storeCode" json:"storeCode,omitempty"`
-	Title                     *string        `protobuf:"bytes,3,opt,name=title" json:"title,omitempty"`
-	Metadata                  *Metadata      `protobuf:"bytes,4,opt,name=metadata" json:"metadata,omitempty"`
-	Profile                   *Profile       `protobuf:"bytes,5,opt,name=profile" json:"profile,omitempty"`
-	AccountId                 *string        `protobuf:"bytes,6,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Email                     *string        `protobuf:"bytes,7,opt,name=email" json:"email,omitempty"`
-	BussinessProfileAccountId *string        `protobuf:"bytes,8,opt,name=bussiness_profile_account_id,json=bussinessProfileAccountId" json:"bussiness_profile_account_id,omitempty"`
-	Name                      *string        `protobuf:"bytes,9,opt,name=name" json:"name,omitempty"`
-	WebsiteUri                *string        `protobuf:"bytes,10,opt,name=websiteUri" json:"websiteUri,omitempty"`
-	State                     *string        `protobuf:"bytes,11,opt,name=state" json:"state,omitempty"`
-	PhoneNumbers              *PhoneNumbers  `protobuf:"bytes,12,opt,name=phoneNumbers" json:"phoneNumbers,omitempty"`
-	AverageRating             *float32       `protobuf:"fixed32,13,opt,name=averageRating" json:"averageRating,omitempty"`
-	TotalReviewCount          *int64         `protobuf:"varint,14,opt,name=totalReviewCount" json:"totalReviewCount,omitempty"`
-	StorefrontAddress         *PostalAddress `protobuf:"bytes,15,opt,name=storefrontAddress" json:"storefrontAddress,omitempty"`
+	LocationId                string         `protobuf:"bytes,3,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	StoreCode                 string         `protobuf:"bytes,4,opt,name=storeCode,proto3" json:"storeCode,omitempty"`
+	Title                     string         `protobuf:"bytes,5,opt,name=title,proto3" json:"title,omitempty"`
+	Metadata                  *Metadata      `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	Profile                   *Profile       `protobuf:"bytes,7,opt,name=profile,proto3" json:"profile,omitempty"`
+	AccountId                 string         `protobuf:"bytes,8,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Email                     string         `protobuf:"bytes,9,opt,name=email,proto3" json:"email,omitempty"`
+	BussinessProfileAccountId string         `protobuf:"bytes,10,opt,name=bussiness_profile_account_id,json=bussinessProfileAccountId,proto3" json:"bussiness_profile_account_id,omitempty"`
+	Name                      string         `protobuf:"bytes,12,opt,name=name,proto3" json:"name,omitempty"`
+	WebsiteUri                string         `protobuf:"bytes,13,opt,name=websiteUri,proto3" json:"websiteUri,omitempty"`
+	State                     string         `protobuf:"bytes,14,opt,name=state,proto3" json:"state,omitempty"`
+	PhoneNumbers              *PhoneNumbers  `protobuf:"bytes,15,opt,name=phoneNumbers,proto3" json:"phoneNumbers,omitempty"`
+	AverageRating             float32        `protobuf:"fixed32,16,opt,name=averageRating,proto3" json:"averageRating,omitempty"`
+	TotalReviewCount          int64          `protobuf:"varint,17,opt,name=totalReviewCount,proto3" json:"totalReviewCount,omitempty"`
+	StorefrontAddress         *PostalAddress `protobuf:"bytes,18,opt,name=storefrontAddress,proto3" json:"storefrontAddress,omitempty"`
 }
 
 func (x *Location) Reset() {
@@ -497,22 +477,22 @@ func (*Location) Descriptor() ([]byte, []int) {
 }
 
 func (x *Location) GetLocationId() string {
-	if x != nil && x.LocationId != nil {
-		return *x.LocationId
+	if x != nil {
+		return x.LocationId
 	}
 	return ""
 }
 
 func (x *Location) GetStoreCode() string {
-	if x != nil && x.StoreCode != nil {
-		return *x.StoreCode
+	if x != nil {
+		return x.StoreCode
 	}
 	return ""
 }
 
 func (x *Location) GetTitle() string {
-	if x != nil && x.Title != nil {
-		return *x.Title
+	if x != nil {
+		return x.Title
 	}
 	return ""
 }
@@ -532,43 +512,43 @@ func (x *Location) GetProfile() *Profile {
 }
 
 func (x *Location) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
+	if x != nil {
+		return x.AccountId
 	}
 	return ""
 }
 
 func (x *Location) GetEmail() string {
-	if x != nil && x.Email != nil {
-		return *x.Email
+	if x != nil {
+		return x.Email
 	}
 	return ""
 }
 
 func (x *Location) GetBussinessProfileAccountId() string {
-	if x != nil && x.BussinessProfileAccountId != nil {
-		return *x.BussinessProfileAccountId
+	if x != nil {
+		return x.BussinessProfileAccountId
 	}
 	return ""
 }
 
 func (x *Location) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *Location) GetWebsiteUri() string {
-	if x != nil && x.WebsiteUri != nil {
-		return *x.WebsiteUri
+	if x != nil {
+		return x.WebsiteUri
 	}
 	return ""
 }
 
 func (x *Location) GetState() string {
-	if x != nil && x.State != nil {
-		return *x.State
+	if x != nil {
+		return x.State
 	}
 	return ""
 }
@@ -581,15 +561,15 @@ func (x *Location) GetPhoneNumbers() *PhoneNumbers {
 }
 
 func (x *Location) GetAverageRating() float32 {
-	if x != nil && x.AverageRating != nil {
-		return *x.AverageRating
+	if x != nil {
+		return x.AverageRating
 	}
 	return 0
 }
 
 func (x *Location) GetTotalReviewCount() int64 {
-	if x != nil && x.TotalReviewCount != nil {
-		return *x.TotalReviewCount
+	if x != nil {
+		return x.TotalReviewCount
 	}
 	return 0
 }
@@ -606,8 +586,8 @@ type PhoneNumbers struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PrimaryPhone     *string  `protobuf:"bytes,1,opt,name=primaryPhone" json:"primaryPhone,omitempty"`
-	AdditionalPhones []string `protobuf:"bytes,2,rep,name=additionalPhones" json:"additionalPhones,omitempty"`
+	PrimaryPhone     string   `protobuf:"bytes,1,opt,name=primaryPhone,proto3" json:"primaryPhone,omitempty"`
+	AdditionalPhones []string `protobuf:"bytes,2,rep,name=additionalPhones,proto3" json:"additionalPhones,omitempty"`
 }
 
 func (x *PhoneNumbers) Reset() {
@@ -643,8 +623,8 @@ func (*PhoneNumbers) Descriptor() ([]byte, []int) {
 }
 
 func (x *PhoneNumbers) GetPrimaryPhone() string {
-	if x != nil && x.PrimaryPhone != nil {
-		return *x.PrimaryPhone
+	if x != nil {
+		return x.PrimaryPhone
 	}
 	return ""
 }
@@ -661,11 +641,11 @@ type PostalAddress struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PostalCode   *string  `protobuf:"bytes,4,opt,name=postalCode" json:"postalCode,omitempty"`
-	Locality     *string  `protobuf:"bytes,7,opt,name=locality" json:"locality,omitempty"`
-	Sublocality  *string  `protobuf:"bytes,8,opt,name=sublocality" json:"sublocality,omitempty"`
-	AddressLines []string `protobuf:"bytes,9,rep,name=addressLines" json:"addressLines,omitempty"`
-	Address      *string  `protobuf:"bytes,12,opt,name=address" json:"address,omitempty"`
+	PostalCode   string   `protobuf:"bytes,4,opt,name=postalCode,proto3" json:"postalCode,omitempty"`
+	Locality     string   `protobuf:"bytes,7,opt,name=locality,proto3" json:"locality,omitempty"`
+	Sublocality  string   `protobuf:"bytes,8,opt,name=sublocality,proto3" json:"sublocality,omitempty"`
+	AddressLines []string `protobuf:"bytes,9,rep,name=addressLines,proto3" json:"addressLines,omitempty"`
+	Address      string   `protobuf:"bytes,12,opt,name=address,proto3" json:"address,omitempty"`
 }
 
 func (x *PostalAddress) Reset() {
@@ -701,22 +681,22 @@ func (*PostalAddress) Descriptor() ([]byte, []int) {
 }
 
 func (x *PostalAddress) GetPostalCode() string {
-	if x != nil && x.PostalCode != nil {
-		return *x.PostalCode
+	if x != nil {
+		return x.PostalCode
 	}
 	return ""
 }
 
 func (x *PostalAddress) GetLocality() string {
-	if x != nil && x.Locality != nil {
-		return *x.Locality
+	if x != nil {
+		return x.Locality
 	}
 	return ""
 }
 
 func (x *PostalAddress) GetSublocality() string {
-	if x != nil && x.Sublocality != nil {
-		return *x.Sublocality
+	if x != nil {
+		return x.Sublocality
 	}
 	return ""
 }
@@ -729,8 +709,8 @@ func (x *PostalAddress) GetAddressLines() []string {
 }
 
 func (x *PostalAddress) GetAddress() string {
-	if x != nil && x.Address != nil {
-		return *x.Address
+	if x != nil {
+		return x.Address
 	}
 	return ""
 }
@@ -740,7 +720,7 @@ type Metadata struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MapsUri *string `protobuf:"bytes,10,opt,name=mapsUri" json:"mapsUri,omitempty"`
+	MapsUri string `protobuf:"bytes,10,opt,name=mapsUri,proto3" json:"mapsUri,omitempty"`
 }
 
 func (x *Metadata) Reset() {
@@ -776,8 +756,8 @@ func (*Metadata) Descriptor() ([]byte, []int) {
 }
 
 func (x *Metadata) GetMapsUri() string {
-	if x != nil && x.MapsUri != nil {
-		return *x.MapsUri
+	if x != nil {
+		return x.MapsUri
 	}
 	return ""
 }
@@ -787,7 +767,7 @@ type Profile struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Description *string `protobuf:"bytes,1,opt,name=description" json:"description,omitempty"`
+	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
 }
 
 func (x *Profile) Reset() {
@@ -823,8 +803,8 @@ func (*Profile) Descriptor() ([]byte, []int) {
 }
 
 func (x *Profile) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.Description
 	}
 	return ""
 }
@@ -834,16 +814,16 @@ type Review struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ReviewId    *string      `protobuf:"bytes,2,opt,name=reviewId" json:"reviewId,omitempty"`
-	Reviewer    *Reviewer    `protobuf:"bytes,3,opt,name=reviewer" json:"reviewer,omitempty"`
-	StarRating  *string      `protobuf:"bytes,4,opt,name=starRating" json:"starRating,omitempty"` //rating
-	Comment     *string      `protobuf:"bytes,5,opt,name=comment" json:"comment,omitempty"`
-	CreateTime  *string      `protobuf:"bytes,6,opt,name=createTime" json:"createTime,omitempty"`
-	UpdateTime  *string      `protobuf:"bytes,7,opt,name=updateTime" json:"updateTime,omitempty"`
-	ReviewReply *ReviewReply `protobuf:"bytes,8,opt,name=reviewReply" json:"reviewReply,omitempty"`
-	Name        *string      `protobuf:"bytes,9,opt,name=name" json:"name,omitempty"`
-	LocationId  *string      `protobuf:"bytes,10,opt,name=location_id,json=locationId" json:"location_id,omitempty"`
-	Status      *string      `protobuf:"bytes,11,opt,name=status" json:"status,omitempty"`
+	ReviewId    string       `protobuf:"bytes,2,opt,name=reviewId,proto3" json:"reviewId,omitempty"`
+	Reviewer    *Reviewer    `protobuf:"bytes,3,opt,name=reviewer,proto3" json:"reviewer,omitempty"`
+	StarRating  string       `protobuf:"bytes,4,opt,name=starRating,proto3" json:"starRating,omitempty"` //rating
+	Comment     string       `protobuf:"bytes,5,opt,name=comment,proto3" json:"comment,omitempty"`
+	CreateTime  string       `protobuf:"bytes,6,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	UpdateTime  string       `protobuf:"bytes,7,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
+	ReviewReply *ReviewReply `protobuf:"bytes,8,opt,name=reviewReply,proto3" json:"reviewReply,omitempty"`
+	Name        string       `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
+	LocationId  string       `protobuf:"bytes,10,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	Status      string       `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (x *Review) Reset() {
@@ -879,8 +859,8 @@ func (*Review) Descriptor() ([]byte, []int) {
 }
 
 func (x *Review) GetReviewId() string {
-	if x != nil && x.ReviewId != nil {
-		return *x.ReviewId
+	if x != nil {
+		return x.ReviewId
 	}
 	return ""
 }
@@ -893,29 +873,29 @@ func (x *Review) GetReviewer() *Reviewer {
 }
 
 func (x *Review) GetStarRating() string {
-	if x != nil && x.StarRating != nil {
-		return *x.StarRating
+	if x != nil {
+		return x.StarRating
 	}
 	return ""
 }
 
 func (x *Review) GetComment() string {
-	if x != nil && x.Comment != nil {
-		return *x.Comment
+	if x != nil {
+		return x.Comment
 	}
 	return ""
 }
 
 func (x *Review) GetCreateTime() string {
-	if x != nil && x.CreateTime != nil {
-		return *x.CreateTime
+	if x != nil {
+		return x.CreateTime
 	}
 	return ""
 }
 
 func (x *Review) GetUpdateTime() string {
-	if x != nil && x.UpdateTime != nil {
-		return *x.UpdateTime
+	if x != nil {
+		return x.UpdateTime
 	}
 	return ""
 }
@@ -928,22 +908,22 @@ func (x *Review) GetReviewReply() *ReviewReply {
 }
 
 func (x *Review) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
 
 func (x *Review) GetLocationId() string {
-	if x != nil && x.LocationId != nil {
-		return *x.LocationId
+	if x != nil {
+		return x.LocationId
 	}
 	return ""
 }
 
 func (x *Review) GetStatus() string {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -953,10 +933,10 @@ type Reviews struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Reviews          []*Review `protobuf:"bytes,1,rep,name=reviews" json:"reviews,omitempty"`
-	AvarageRating    *float32  `protobuf:"fixed32,2,opt,name=avarageRating" json:"avarageRating,omitempty"`
-	TotalReviewCount *int32    `protobuf:"varint,3,opt,name=totalReviewCount" json:"totalReviewCount,omitempty"`
-	NextPageToken    *string   `protobuf:"bytes,4,opt,name=nextPageToken" json:"nextPageToken,omitempty"`
+	Reviews          []*Review `protobuf:"bytes,1,rep,name=reviews,proto3" json:"reviews,omitempty"`
+	AvarageRating    float32   `protobuf:"fixed32,2,opt,name=avarageRating,proto3" json:"avarageRating,omitempty"`
+	TotalReviewCount int32     `protobuf:"varint,3,opt,name=totalReviewCount,proto3" json:"totalReviewCount,omitempty"`
+	NextPageToken    string    `protobuf:"bytes,4,opt,name=nextPageToken,proto3" json:"nextPageToken,omitempty"`
 }
 
 func (x *Reviews) Reset() {
@@ -999,22 +979,22 @@ func (x *Reviews) GetReviews() []*Review {
 }
 
 func (x *Reviews) GetAvarageRating() float32 {
-	if x != nil && x.AvarageRating != nil {
-		return *x.AvarageRating
+	if x != nil {
+		return x.AvarageRating
 	}
 	return 0
 }
 
 func (x *Reviews) GetTotalReviewCount() int32 {
-	if x != nil && x.TotalReviewCount != nil {
-		return *x.TotalReviewCount
+	if x != nil {
+		return x.TotalReviewCount
 	}
 	return 0
 }
 
 func (x *Reviews) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -1024,9 +1004,9 @@ type Reviewer struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProfilePhotoUrl *string `protobuf:"bytes,1,opt,name=profilePhotoUrl" json:"profilePhotoUrl,omitempty"`
-	DisplayName     *string `protobuf:"bytes,2,opt,name=displayName" json:"displayName,omitempty"`
-	IsAnonymous     *bool   `protobuf:"varint,3,opt,name=isAnonymous" json:"isAnonymous,omitempty"`
+	ProfilePhotoUrl string `protobuf:"bytes,1,opt,name=profilePhotoUrl,proto3" json:"profilePhotoUrl,omitempty"`
+	DisplayName     string `protobuf:"bytes,2,opt,name=displayName,proto3" json:"displayName,omitempty"`
+	IsAnonymous     bool   `protobuf:"varint,3,opt,name=isAnonymous,proto3" json:"isAnonymous,omitempty"`
 }
 
 func (x *Reviewer) Reset() {
@@ -1062,22 +1042,22 @@ func (*Reviewer) Descriptor() ([]byte, []int) {
 }
 
 func (x *Reviewer) GetProfilePhotoUrl() string {
-	if x != nil && x.ProfilePhotoUrl != nil {
-		return *x.ProfilePhotoUrl
+	if x != nil {
+		return x.ProfilePhotoUrl
 	}
 	return ""
 }
 
 func (x *Reviewer) GetDisplayName() string {
-	if x != nil && x.DisplayName != nil {
-		return *x.DisplayName
+	if x != nil {
+		return x.DisplayName
 	}
 	return ""
 }
 
 func (x *Reviewer) GetIsAnonymous() bool {
-	if x != nil && x.IsAnonymous != nil {
-		return *x.IsAnonymous
+	if x != nil {
+		return x.IsAnonymous
 	}
 	return false
 }
@@ -1087,9 +1067,9 @@ type ReviewReply struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Comment    *string `protobuf:"bytes,1,opt,name=comment" json:"comment,omitempty"`
-	UpdateTime *string `protobuf:"bytes,2,opt,name=updateTime" json:"updateTime,omitempty"`
-	AgentId    *string `protobuf:"bytes,3,opt,name=agentId" json:"agentId,omitempty"`
+	Comment    string `protobuf:"bytes,1,opt,name=comment,proto3" json:"comment,omitempty"`
+	UpdateTime string `protobuf:"bytes,2,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
+	AgentId    string `protobuf:"bytes,3,opt,name=agentId,proto3" json:"agentId,omitempty"`
 }
 
 func (x *ReviewReply) Reset() {
@@ -1125,22 +1105,22 @@ func (*ReviewReply) Descriptor() ([]byte, []int) {
 }
 
 func (x *ReviewReply) GetComment() string {
-	if x != nil && x.Comment != nil {
-		return *x.Comment
+	if x != nil {
+		return x.Comment
 	}
 	return ""
 }
 
 func (x *ReviewReply) GetUpdateTime() string {
-	if x != nil && x.UpdateTime != nil {
-		return *x.UpdateTime
+	if x != nil {
+		return x.UpdateTime
 	}
 	return ""
 }
 
 func (x *ReviewReply) GetAgentId() string {
-	if x != nil && x.AgentId != nil {
-		return *x.AgentId
+	if x != nil {
+		return x.AgentId
 	}
 	return ""
 }
@@ -1150,10 +1130,10 @@ type Response struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AccessToken *string `protobuf:"bytes,1,opt,name=access_token,json=accessToken" json:"access_token,omitempty"`
-	ExpiresIn   *int32  `protobuf:"varint,2,opt,name=expires_in,json=expiresIn" json:"expires_in,omitempty"`
-	Scope       *string `protobuf:"bytes,3,opt,name=scope" json:"scope,omitempty"`
-	TokenType   *string `protobuf:"bytes,4,opt,name=token_type,json=tokenType" json:"token_type,omitempty"`
+	AccessToken string `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	ExpiresIn   int32  `protobuf:"varint,2,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`
+	Scope       string `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
+	TokenType   string `protobuf:"bytes,4,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`
 }
 
 func (x *Response) Reset() {
@@ -1189,29 +1169,29 @@ func (*Response) Descriptor() ([]byte, []int) {
 }
 
 func (x *Response) GetAccessToken() string {
-	if x != nil && x.AccessToken != nil {
-		return *x.AccessToken
+	if x != nil {
+		return x.AccessToken
 	}
 	return ""
 }
 
 func (x *Response) GetExpiresIn() int32 {
-	if x != nil && x.ExpiresIn != nil {
-		return *x.ExpiresIn
+	if x != nil {
+		return x.ExpiresIn
 	}
 	return 0
 }
 
 func (x *Response) GetScope() string {
-	if x != nil && x.Scope != nil {
-		return *x.Scope
+	if x != nil {
+		return x.Scope
 	}
 	return ""
 }
 
 func (x *Response) GetTokenType() string {
-	if x != nil && x.TokenType != nil {
-		return *x.TokenType
+	if x != nil {
+		return x.TokenType
 	}
 	return ""
 }
@@ -1221,11 +1201,11 @@ type GoogleNotiMessage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type     *string `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Location *string `protobuf:"bytes,2,opt,name=location" json:"location,omitempty"`
-	Review   *string `protobuf:"bytes,3,opt,name=review" json:"review,omitempty"`
-	Question *string `protobuf:"bytes,4,opt,name=question" json:"question,omitempty"`
-	Answer   *string `protobuf:"bytes,5,opt,name=answer" json:"answer,omitempty"`
+	Type     string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	Location string `protobuf:"bytes,2,opt,name=location,proto3" json:"location,omitempty"`
+	Review   string `protobuf:"bytes,3,opt,name=review,proto3" json:"review,omitempty"`
+	Question string `protobuf:"bytes,4,opt,name=question,proto3" json:"question,omitempty"`
+	Answer   string `protobuf:"bytes,5,opt,name=answer,proto3" json:"answer,omitempty"`
 }
 
 func (x *GoogleNotiMessage) Reset() {
@@ -1261,36 +1241,36 @@ func (*GoogleNotiMessage) Descriptor() ([]byte, []int) {
 }
 
 func (x *GoogleNotiMessage) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
 
 func (x *GoogleNotiMessage) GetLocation() string {
-	if x != nil && x.Location != nil {
-		return *x.Location
+	if x != nil {
+		return x.Location
 	}
 	return ""
 }
 
 func (x *GoogleNotiMessage) GetReview() string {
-	if x != nil && x.Review != nil {
-		return *x.Review
+	if x != nil {
+		return x.Review
 	}
 	return ""
 }
 
 func (x *GoogleNotiMessage) GetQuestion() string {
-	if x != nil && x.Question != nil {
-		return *x.Question
+	if x != nil {
+		return x.Question
 	}
 	return ""
 }
 
 func (x *GoogleNotiMessage) GetAnswer() string {
-	if x != nil && x.Answer != nil {
-		return *x.Answer
+	if x != nil {
+		return x.Answer
 	}
 	return ""
 }
@@ -1300,10 +1280,10 @@ type ListReviews struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Reviews          []*Review `protobuf:"bytes,1,rep,name=reviews" json:"reviews,omitempty"`
-	AverageRating    *float32  `protobuf:"fixed32,2,opt,name=averageRating" json:"averageRating,omitempty"`
-	TotalReviewCount *int64    `protobuf:"varint,3,opt,name=totalReviewCount" json:"totalReviewCount,omitempty"`
-	NextPageToken    *string   `protobuf:"bytes,4,opt,name=nextPageToken" json:"nextPageToken,omitempty"`
+	Reviews          []*Review `protobuf:"bytes,1,rep,name=reviews,proto3" json:"reviews,omitempty"`
+	AverageRating    float32   `protobuf:"fixed32,2,opt,name=averageRating,proto3" json:"averageRating,omitempty"`
+	TotalReviewCount int64     `protobuf:"varint,3,opt,name=totalReviewCount,proto3" json:"totalReviewCount,omitempty"`
+	NextPageToken    string    `protobuf:"bytes,4,opt,name=nextPageToken,proto3" json:"nextPageToken,omitempty"`
 }
 
 func (x *ListReviews) Reset() {
@@ -1346,22 +1326,22 @@ func (x *ListReviews) GetReviews() []*Review {
 }
 
 func (x *ListReviews) GetAverageRating() float32 {
-	if x != nil && x.AverageRating != nil {
-		return *x.AverageRating
+	if x != nil {
+		return x.AverageRating
 	}
 	return 0
 }
 
 func (x *ListReviews) GetTotalReviewCount() int64 {
-	if x != nil && x.TotalReviewCount != nil {
-		return *x.TotalReviewCount
+	if x != nil {
+		return x.TotalReviewCount
 	}
 	return 0
 }
 
 func (x *ListReviews) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -1371,16 +1351,16 @@ type Question struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Author           *Author `protobuf:"bytes,2,opt,name=author" json:"author,omitempty"`
-	UpvoteCount      *int64  `protobuf:"varint,3,opt,name=upvoteCount" json:"upvoteCount,omitempty"`
-	Text             *string `protobuf:"bytes,4,opt,name=text" json:"text,omitempty"`
-	CreateTime       *string `protobuf:"bytes,5,opt,name=createTime" json:"createTime,omitempty"`
-	UpdateTime       *string `protobuf:"bytes,6,opt,name=updateTime" json:"updateTime,omitempty"`
-	TotalAnswerCount *int64  `protobuf:"varint,7,opt,name=totalAnswerCount" json:"totalAnswerCount,omitempty"`
-	QuestionId       *string `protobuf:"bytes,8,opt,name=question_id,json=questionId" json:"question_id,omitempty"`
-	LocationId       *string `protobuf:"bytes,10,opt,name=location_id,json=locationId" json:"location_id,omitempty"`
-	Status           *string `protobuf:"bytes,11,opt,name=status" json:"status,omitempty"`
+	Name             string  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Author           *Author `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
+	UpvoteCount      int64   `protobuf:"varint,3,opt,name=upvoteCount,proto3" json:"upvoteCount,omitempty"`
+	Text             string  `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
+	CreateTime       string  `protobuf:"bytes,5,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	UpdateTime       string  `protobuf:"bytes,6,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
+	TotalAnswerCount int64   `protobuf:"varint,7,opt,name=totalAnswerCount,proto3" json:"totalAnswerCount,omitempty"`
+	QuestionId       string  `protobuf:"bytes,8,opt,name=question_id,json=questionId,proto3" json:"question_id,omitempty"`
+	LocationId       string  `protobuf:"bytes,10,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	Status           string  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (x *Question) Reset() {
@@ -1416,8 +1396,8 @@ func (*Question) Descriptor() ([]byte, []int) {
 }
 
 func (x *Question) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -1430,57 +1410,57 @@ func (x *Question) GetAuthor() *Author {
 }
 
 func (x *Question) GetUpvoteCount() int64 {
-	if x != nil && x.UpvoteCount != nil {
-		return *x.UpvoteCount
+	if x != nil {
+		return x.UpvoteCount
 	}
 	return 0
 }
 
 func (x *Question) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.Text
 	}
 	return ""
 }
 
 func (x *Question) GetCreateTime() string {
-	if x != nil && x.CreateTime != nil {
-		return *x.CreateTime
+	if x != nil {
+		return x.CreateTime
 	}
 	return ""
 }
 
 func (x *Question) GetUpdateTime() string {
-	if x != nil && x.UpdateTime != nil {
-		return *x.UpdateTime
+	if x != nil {
+		return x.UpdateTime
 	}
 	return ""
 }
 
 func (x *Question) GetTotalAnswerCount() int64 {
-	if x != nil && x.TotalAnswerCount != nil {
-		return *x.TotalAnswerCount
+	if x != nil {
+		return x.TotalAnswerCount
 	}
 	return 0
 }
 
 func (x *Question) GetQuestionId() string {
-	if x != nil && x.QuestionId != nil {
-		return *x.QuestionId
+	if x != nil {
+		return x.QuestionId
 	}
 	return ""
 }
 
 func (x *Question) GetLocationId() string {
-	if x != nil && x.LocationId != nil {
-		return *x.LocationId
+	if x != nil {
+		return x.LocationId
 	}
 	return ""
 }
 
 func (x *Question) GetStatus() string {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -1490,9 +1470,9 @@ type Author struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DisplayName     *string `protobuf:"bytes,1,opt,name=displayName" json:"displayName,omitempty"`
-	ProfilePhotoUrl *string `protobuf:"bytes,2,opt,name=profilePhotoUrl" json:"profilePhotoUrl,omitempty"`
-	Type            *string `protobuf:"bytes,3,opt,name=type" json:"type,omitempty"`
+	DisplayName     string `protobuf:"bytes,1,opt,name=displayName,proto3" json:"displayName,omitempty"`
+	ProfilePhotoUrl string `protobuf:"bytes,2,opt,name=profilePhotoUrl,proto3" json:"profilePhotoUrl,omitempty"`
+	Type            string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
 }
 
 func (x *Author) Reset() {
@@ -1528,22 +1508,22 @@ func (*Author) Descriptor() ([]byte, []int) {
 }
 
 func (x *Author) GetDisplayName() string {
-	if x != nil && x.DisplayName != nil {
-		return *x.DisplayName
+	if x != nil {
+		return x.DisplayName
 	}
 	return ""
 }
 
 func (x *Author) GetProfilePhotoUrl() string {
-	if x != nil && x.ProfilePhotoUrl != nil {
-		return *x.ProfilePhotoUrl
+	if x != nil {
+		return x.ProfilePhotoUrl
 	}
 	return ""
 }
 
 func (x *Author) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.Type
 	}
 	return ""
 }
@@ -1553,16 +1533,16 @@ type Answer struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name        *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Author      *Author `protobuf:"bytes,2,opt,name=author" json:"author,omitempty"`
-	UpvoteCount *int64  `protobuf:"varint,3,opt,name=upvoteCount" json:"upvoteCount,omitempty"`
-	Text        *string `protobuf:"bytes,4,opt,name=text" json:"text,omitempty"`
-	CreateTime  *string `protobuf:"bytes,5,opt,name=createTime" json:"createTime,omitempty"`
-	UpdateTime  *string `protobuf:"bytes,6,opt,name=updateTime" json:"updateTime,omitempty"`
-	AnswerId    *string `protobuf:"bytes,7,opt,name=answer_id,json=answerId" json:"answer_id,omitempty"`
-	QuestionId  *string `protobuf:"bytes,8,opt,name=question_id,json=questionId" json:"question_id,omitempty"`
-	LocationId  *string `protobuf:"bytes,10,opt,name=location_id,json=locationId" json:"location_id,omitempty"`
-	Status      *string `protobuf:"bytes,11,opt,name=status" json:"status,omitempty"`
+	Name        string  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Author      *Author `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
+	UpvoteCount int64   `protobuf:"varint,3,opt,name=upvoteCount,proto3" json:"upvoteCount,omitempty"`
+	Text        string  `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`
+	CreateTime  string  `protobuf:"bytes,5,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	UpdateTime  string  `protobuf:"bytes,6,opt,name=updateTime,proto3" json:"updateTime,omitempty"`
+	AnswerId    string  `protobuf:"bytes,7,opt,name=answer_id,json=answerId,proto3" json:"answer_id,omitempty"`
+	QuestionId  string  `protobuf:"bytes,8,opt,name=question_id,json=questionId,proto3" json:"question_id,omitempty"`
+	LocationId  string  `protobuf:"bytes,10,opt,name=location_id,json=locationId,proto3" json:"location_id,omitempty"`
+	Status      string  `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
 }
 
 func (x *Answer) Reset() {
@@ -1598,8 +1578,8 @@ func (*Answer) Descriptor() ([]byte, []int) {
 }
 
 func (x *Answer) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -1612,57 +1592,57 @@ func (x *Answer) GetAuthor() *Author {
 }
 
 func (x *Answer) GetUpvoteCount() int64 {
-	if x != nil && x.UpvoteCount != nil {
-		return *x.UpvoteCount
+	if x != nil {
+		return x.UpvoteCount
 	}
 	return 0
 }
 
 func (x *Answer) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.Text
 	}
 	return ""
 }
 
 func (x *Answer) GetCreateTime() string {
-	if x != nil && x.CreateTime != nil {
-		return *x.CreateTime
+	if x != nil {
+		return x.CreateTime
 	}
 	return ""
 }
 
 func (x *Answer) GetUpdateTime() string {
-	if x != nil && x.UpdateTime != nil {
-		return *x.UpdateTime
+	if x != nil {
+		return x.UpdateTime
 	}
 	return ""
 }
 
 func (x *Answer) GetAnswerId() string {
-	if x != nil && x.AnswerId != nil {
-		return *x.AnswerId
+	if x != nil {
+		return x.AnswerId
 	}
 	return ""
 }
 
 func (x *Answer) GetQuestionId() string {
-	if x != nil && x.QuestionId != nil {
-		return *x.QuestionId
+	if x != nil {
+		return x.QuestionId
 	}
 	return ""
 }
 
 func (x *Answer) GetLocationId() string {
-	if x != nil && x.LocationId != nil {
-		return *x.LocationId
+	if x != nil {
+		return x.LocationId
 	}
 	return ""
 }
 
 func (x *Answer) GetStatus() string {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -1672,9 +1652,9 @@ type ListQuestions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Questions     []*Question `protobuf:"bytes,1,rep,name=questions" json:"questions,omitempty"`
-	TotalSize     *int64      `protobuf:"varint,2,opt,name=totalSize" json:"totalSize,omitempty"`
-	NextPageToken *string     `protobuf:"bytes,3,opt,name=nextPageToken" json:"nextPageToken,omitempty"`
+	Questions     []*Question `protobuf:"bytes,1,rep,name=questions,proto3" json:"questions,omitempty"`
+	TotalSize     int64       `protobuf:"varint,2,opt,name=totalSize,proto3" json:"totalSize,omitempty"`
+	NextPageToken string      `protobuf:"bytes,3,opt,name=nextPageToken,proto3" json:"nextPageToken,omitempty"`
 }
 
 func (x *ListQuestions) Reset() {
@@ -1717,15 +1697,15 @@ func (x *ListQuestions) GetQuestions() []*Question {
 }
 
 func (x *ListQuestions) GetTotalSize() int64 {
-	if x != nil && x.TotalSize != nil {
-		return *x.TotalSize
+	if x != nil {
+		return x.TotalSize
 	}
 	return 0
 }
 
 func (x *ListQuestions) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -1735,9 +1715,9 @@ type ListAnswers struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Answers       []*Answer `protobuf:"bytes,1,rep,name=answers" json:"answers,omitempty"`
-	TotalSize     *int64    `protobuf:"varint,2,opt,name=totalSize" json:"totalSize,omitempty"`
-	NextPageToken *string   `protobuf:"bytes,3,opt,name=nextPageToken" json:"nextPageToken,omitempty"`
+	Answers       []*Answer `protobuf:"bytes,1,rep,name=answers,proto3" json:"answers,omitempty"`
+	TotalSize     int64     `protobuf:"varint,2,opt,name=totalSize,proto3" json:"totalSize,omitempty"`
+	NextPageToken string    `protobuf:"bytes,3,opt,name=nextPageToken,proto3" json:"nextPageToken,omitempty"`
 }
 
 func (x *ListAnswers) Reset() {
@@ -1780,15 +1760,15 @@ func (x *ListAnswers) GetAnswers() []*Answer {
 }
 
 func (x *ListAnswers) GetTotalSize() int64 {
-	if x != nil && x.TotalSize != nil {
-		return *x.TotalSize
+	if x != nil {
+		return x.TotalSize
 	}
 	return 0
 }
 
 func (x *ListAnswers) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.NextPageToken
 	}
 	return ""
 }
@@ -1799,90 +1779,90 @@ var file_googlekon_proto_rawDesc = []byte{
 	0x0a, 0x0f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x12, 0x09, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x22, 0xb4, 0x03, 0x0a,
 	0x0d, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x14,
-	0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65,
+	0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65,
 	0x6d, 0x61, 0x69, 0x6c, 0x12, 0x3d, 0x0a, 0x1b, 0x6c, 0x69, 0x6e, 0x6b, 0x65, 0x64, 0x5f, 0x62,
 	0x75, 0x73, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
-	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x18, 0x6c, 0x69, 0x6e, 0x6b, 0x65,
+	0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x18, 0x6c, 0x69, 0x6e, 0x6b, 0x65,
 	0x64, 0x42, 0x75, 0x73, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c,
 	0x65, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x5f, 0x74, 0x6f,
-	0x6b, 0x65, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x63, 0x63, 0x65, 0x73,
+	0x6b, 0x65, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x63, 0x63, 0x65, 0x73,
 	0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73,
-	0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72,
+	0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72,
 	0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x35, 0x0a, 0x17, 0x61,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x65, 0x78, 0x70, 0x69,
-	0x72, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x14, 0x61, 0x63,
+	0x72, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x14, 0x61, 0x63,
 	0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x45, 0x78, 0x70, 0x69, 0x72, 0x65, 0x64,
 	0x41, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x65, 0x64,
-	0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a,
+	0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a,
 	0x65, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x63, 0x61, 0x6c, 0x6c, 0x65,
-	0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x6c, 0x61, 0x73, 0x74, 0x43, 0x61, 0x6c,
+	0x64, 0x18, 0x09, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x6c, 0x61, 0x73, 0x74, 0x43, 0x61, 0x6c,
 	0x6c, 0x65, 0x64, 0x12, 0x31, 0x0a, 0x15, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x72, 0x65, 0x66, 0x72,
-	0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20, 0x01,
+	0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x61, 0x74, 0x18, 0x0a, 0x20, 0x01,
 	0x28, 0x03, 0x52, 0x12, 0x6c, 0x61, 0x73, 0x74, 0x52, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54,
 	0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x74, 0x12, 0x3c, 0x0a, 0x1b, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x72,
 	0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x5f, 0x65, 0x72, 0x72,
-	0x6f, 0x72, 0x5f, 0x61, 0x74, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x17, 0x6c, 0x61, 0x73,
+	0x6f, 0x72, 0x5f, 0x61, 0x74, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x03, 0x52, 0x17, 0x6c, 0x61, 0x73,
 	0x74, 0x52, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x45, 0x72, 0x72,
 	0x6f, 0x72, 0x41, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
-	0x69, 0x64, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x69, 0x64, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x49, 0x64, 0x22, 0x5f, 0x0a, 0x17, 0x42, 0x75, 0x73, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73,
 	0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x30,
 	0x0a, 0x14, 0x62, 0x75, 0x73, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73, 0x5f, 0x70, 0x72, 0x6f, 0x66,
-	0x69, 0x6c, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x12, 0x62, 0x75,
+	0x69, 0x6c, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x12, 0x62, 0x75,
 	0x73, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x49, 0x64,
-	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x22, 0x80, 0x01, 0x0a, 0x18, 0x42, 0x75, 0x73, 0x73, 0x69, 0x6e, 0x65,
 	0x73, 0x73, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
-	0x73, 0x12, 0x3e, 0x0a, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x01, 0x20,
+	0x73, 0x12, 0x3e, 0x0a, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x04, 0x20,
 	0x03, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e,
 	0x42, 0x75, 0x73, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
 	0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
 	0x73, 0x12, 0x24, 0x0a, 0x0d, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b,
-	0x65, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61,
+	0x65, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61,
 	0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0x82, 0x01, 0x0a, 0x09, 0x4c, 0x6f, 0x63, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x31, 0x0a, 0x09, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
+	0x6e, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x13, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
 	0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6c,
 	0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x24, 0x0a, 0x0d, 0x6e, 0x65, 0x78, 0x74,
-	0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x0d, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x1c,
-	0x0a, 0x09, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0a, 0x09, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28,
 	0x03, 0x52, 0x09, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x53, 0x69, 0x7a, 0x65, 0x22, 0xd5, 0x04, 0x0a,
 	0x08, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1f, 0x0a, 0x0b, 0x6c, 0x6f, 0x63,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
 	0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x74,
-	0x6f, 0x72, 0x65, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73,
+	0x6f, 0x72, 0x65, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73,
 	0x74, 0x6f, 0x72, 0x65, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c,
-	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x2f,
-	0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b,
+	0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x2f,
+	0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x13, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x4d, 0x65, 0x74,
 	0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12,
-	0x2c, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b,
+	0x2c, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x12, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x50, 0x72, 0x6f,
 	0x66, 0x69, 0x6c, 0x65, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x12, 0x1d, 0x0a,
-	0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x14, 0x0a, 0x05,
-	0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61,
+	0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61,
 	0x69, 0x6c, 0x12, 0x3f, 0x0a, 0x1c, 0x62, 0x75, 0x73, 0x73, 0x69, 0x6e, 0x65, 0x73, 0x73, 0x5f,
 	0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
-	0x69, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x19, 0x62, 0x75, 0x73, 0x73, 0x69, 0x6e,
+	0x69, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x19, 0x62, 0x75, 0x73, 0x73, 0x69, 0x6e,
 	0x65, 0x73, 0x73, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
-	0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28,
+	0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x77, 0x65, 0x62, 0x73, 0x69,
-	0x74, 0x65, 0x55, 0x72, 0x69, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x77, 0x65, 0x62,
+	0x74, 0x65, 0x55, 0x72, 0x69, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x77, 0x65, 0x62,
 	0x73, 0x69, 0x74, 0x65, 0x55, 0x72, 0x69, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65,
-	0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x3b, 0x0a,
-	0x0c, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x18, 0x0c, 0x20,
+	0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x3b, 0x0a,
+	0x0c, 0x70, 0x68, 0x6f, 0x6e, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x18, 0x0f, 0x20,
 	0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e,
 	0x50, 0x68, 0x6f, 0x6e, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x52, 0x0c, 0x70, 0x68,
 	0x6f, 0x6e, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x12, 0x24, 0x0a, 0x0d, 0x61, 0x76,
-	0x65, 0x72, 0x61, 0x67, 0x65, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x0d, 0x20, 0x01, 0x28,
+	0x65, 0x72, 0x61, 0x67, 0x65, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x18, 0x10, 0x20, 0x01, 0x28,
 	0x02, 0x52, 0x0d, 0x61, 0x76, 0x65, 0x72, 0x61, 0x67, 0x65, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67,
 	0x12, 0x2a, 0x0a, 0x10, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x74, 0x6f, 0x74, 0x61,
+	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x11, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x74, 0x6f, 0x74, 0x61,
 	0x6c, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x46, 0x0a, 0x11,
 	0x73, 0x74, 0x6f, 0x72, 0x65, 0x66, 0x72, 0x6f, 0x6e, 0x74, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
-	0x73, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x73, 0x18, 0x12, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
 	0x6b, 0x6f, 0x6e, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x61, 0x6c, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
 	0x73, 0x52, 0x11, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x66, 0x72, 0x6f, 0x6e, 0x74, 0x41, 0x64, 0x64,
 	0x72, 0x65, 0x73, 0x73, 0x22, 0x5e, 0x0a, 0x0c, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x4e, 0x75, 0x6d,
@@ -2059,7 +2039,7 @@ var file_googlekon_proto_rawDesc = []byte{
 	0x0d, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x42, 0x23,
 	0x5a, 0x21, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62,
 	0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
-	0x6b, 0x6f, 0x6e,
+	0x6b, 0x6f, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (

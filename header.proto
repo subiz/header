@@ -1289,7 +1289,7 @@ message Conversation {
 	string agent_id = 40;
 	bool mute = 41; // true, false
 	bool read = 42; // true, false
-	bool watch = 44; // true
+	// bool watch = 44; // true
 
 	int64 hidden = 39;
 
@@ -1340,9 +1340,9 @@ message GoogleReview {
 }
 
 message Reviewer {
-    optional string profile_photo_url= 1;
-	optional string display_name = 2;
-	optional bool is_anonymous = 3;
+	string profile_photo_url= 1;
+	string display_name = 2;
+	bool is_anonymous = 3;
 }
 
 message ReviewReply {
@@ -1428,7 +1428,7 @@ message Message {
 	repeated KV fields = 10;
 
 	// string integration_id = 15; // deprecated, use event touchpoint
-	string user_id = 19; // new standard, removing chain
+	string user_id = 19;
 
 	// used for reaction and delivery status, could be ignore
 	repeated MessagePong pongs = 17;
@@ -1675,26 +1675,26 @@ message QuickReply {
 }
 
 /*
-message MessageForm {
+	message MessageForm {
 	string title = 2;
 	string state = 3;
 	repeated MessageFormField fields = 4;
 	string submit_url = 5;
-}
+	}
 
-message MessageFormSubmit {
+	message MessageFormSubmit {
 	string form_message_id = 2;
 	repeated MessageFormField fields = 3;
 	string state = 4;
-}
+	}
 
-message MessageFormField {
+	message MessageFormField {
 	enum InputType {
-		text = 0;
-		datetime = 1;
-		list = 2;
-		number = 3;
-		boolean = 4;
+	text = 0;
+	datetime = 1;
+	list = 2;
+	number = 3;
+	boolean = 4;
 	}
 	string input_type = 2;
 	repeated string items = 3;
@@ -1704,7 +1704,7 @@ message MessageFormField {
 	string name = 7;
 	string answer = 8;
 	int64 answered = 9;
-}
+	}
 */
 
 message Tag {
@@ -3381,7 +3381,7 @@ enum ChannelType {
 	instagram = 7;
 	instagram_comment = 8;
 	google_review = 9;
-	google_QnA = 10;
+	google_question = 10;
 }
 
 message Webhooks {
@@ -5883,11 +5883,11 @@ message TTSVoiceSelection {
 }
 
 message BusinessHour {
-	optional string weekday = 4; // empty
+	string weekday = 4; // empty
 	// or
-	optional int64 start_time = 5;
-	optional int64 end_time = 6;
-	optional string name = 7;
+	int64 start_time = 5;
+	int64 end_time = 6;
+	string name = 7;
 }
 
 message BusinessHours {
@@ -6574,8 +6574,6 @@ enum E {
 	too_many_attribute = 39;
 	invalid_note_target_id = 42;
 
-	invalid_content_type = 44;
-	parse_query_failed = 45;
 	domain_is_not_whitelisted = 46;
 	invalid_domain = 47;
 	ip_is_blocked = 48;
@@ -6586,8 +6584,6 @@ enum E {
 
 	invalid_stripe_info = 54;
 	invalid_plan = 56;
-
-	invalid_promotion = 58;
 
 	// invalid_email = 59;
 	invalid_date_format = 61;
@@ -6738,7 +6734,6 @@ enum E {
 	// SERVER ERROR
 	subiz_call_failed = 5025;
 	invalid_google_auth_response = 5071;
-	pdf_generate_failed = 5072;
 }
 
 message WorkflowAction {

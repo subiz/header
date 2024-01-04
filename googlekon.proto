@@ -1,158 +1,158 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package googlekon;
 
 option go_package = "github.com/subiz/header/googlekon";
 
 message GoogleAccount {
-	optional string email = 1;
-    repeated string linked_bussiness_profile_id = 2;
-	optional string access_token = 4;
-	optional string refresh_token = 5;
-	optional int64 access_token_expired_at = 6;       
-	optional int64 authorized = 7;
-	optional int64 last_called = 8;
-	optional int64 last_refresh_token_at = 9;
-	optional int64 last_refresh_token_error_at = 10;
-	optional string account_id = 11;
+	string email = 3;
+	string linked_bussiness_profile_id = 4;
+	string access_token = 5;
+	string refresh_token = 6;
+	int64 access_token_expired_at = 7;
+	int64 authorized = 8;
+	int64 last_called = 9;
+	int64 last_refresh_token_at = 10;
+	int64 last_refresh_token_error_at = 11;
+	string account_id = 12;
 }
 
-message BussinessProfileAccount{
-	optional string bussiness_profile_id = 1;
-	optional string name = 2;
+message BussinessProfileAccount {
+	string bussiness_profile_id = 3;
+	string name = 4;
 }
 
 message BussinessProfileAccounts {
-	repeated BussinessProfileAccount accounts = 1;
-	optional string nextPageToken = 2;
+	repeated BussinessProfileAccount accounts = 4;
+	string nextPageToken = 5;
 }
 
 message Locations {
-	repeated Location locations = 1;
-	optional string nextPageToken = 2;
-	optional int64 totalSize = 3;
+	repeated Location locations = 3;
+	string nextPageToken = 5;
+	int64 totalSize = 6;
 }
 
 message Location {
-	optional string location_id = 1;
-	optional string storeCode  = 2;
-	optional string title = 3;
-	optional Metadata metadata = 4;
-	optional Profile profile = 5;
-	optional string account_id = 6;
-	optional string email = 7;
-	optional string bussiness_profile_account_id = 8;
-	optional string name = 9;
-	optional string websiteUri = 10;
-	optional string state = 11;
-	optional PhoneNumbers phoneNumbers = 12;
-	optional float averageRating = 13;
-	optional int64 totalReviewCount = 14;
-	optional PostalAddress storefrontAddress = 15;
+	string location_id = 3;
+	string storeCode  = 4;
+	string title = 5;
+	Metadata metadata = 6;
+	Profile profile = 7;
+	string account_id = 8;
+	string email = 9;
+	string bussiness_profile_account_id = 10;
+	string name = 12;
+	string websiteUri = 13;
+	string state = 14;
+	PhoneNumbers phoneNumbers = 15;
+	float averageRating = 16;
+	int64 totalReviewCount = 17;
+	PostalAddress storefrontAddress = 18;
 }
 
 message PhoneNumbers {
-	optional string primaryPhone = 1;
+	string primaryPhone = 1;
 	repeated string additionalPhones = 2;
 }
 
 message PostalAddress {
-	optional string postalCode = 4;
-	optional string locality = 7;
-	optional string sublocality = 8;
-    repeated string addressLines = 9;
-	optional string address = 12;
+	string postalCode = 4;
+	string locality = 7;
+	string sublocality = 8;
+	repeated string addressLines = 9;
+	string address = 12;
 }
 message Metadata {
-    optional string mapsUri = 10;
+	string mapsUri = 10;
 }
 
 message Profile {
-	optional string description = 1;
+	string description = 1;
 }
 
 message Review {
-	optional string reviewId = 2;
-	optional Reviewer reviewer = 3;
+	string reviewId = 2;
+	Reviewer reviewer = 3;
 
-    enum Rating {
-		star_rating_unspecified = 0; 
+	enum Rating {
+		star_rating_unspecified = 0;
 		one = 1;
 		two = 2;
 		three = 3;
-        four = 4;
-        five = 5; 
+		four = 4;
+		five = 5;
 	}
-	optional string starRating = 4; //rating
-	optional string comment = 5;
-	optional string createTime = 6;
-	optional string updateTime = 7;
-	optional ReviewReply reviewReply = 8;
-	optional string name = 9;
-	optional string location_id =10;
-	optional string status = 11;
+	string starRating = 4; //rating
+	string comment = 5;
+	string createTime = 6;
+	string updateTime = 7;
+	ReviewReply reviewReply = 8;
+	string name = 9;
+	string location_id =10;
+	string status = 11;
 }
 
 message Reviews {
-    repeated Review reviews = 1;
-	optional float avarageRating = 2;
-    optional int32 totalReviewCount = 3;
-    optional string nextPageToken = 4;
+	repeated Review reviews = 1;
+	float avarageRating = 2;
+	int32 totalReviewCount = 3;
+	string nextPageToken = 4;
 }
 
 message Reviewer {
-    optional string profilePhotoUrl= 1;
-	optional string displayName = 2;
-	optional bool isAnonymous = 3;
+	string profilePhotoUrl = 1;
+	string displayName = 2;
+	bool isAnonymous = 3;
 }
 
 message ReviewReply {
-    optional string comment = 1;
-	optional string updateTime = 2;
-	optional string agentId = 3;
+	string comment = 1;
+	string updateTime = 2;
+	string agentId = 3;
 }
 
 message Response {
-	optional string access_token = 1;
-	optional int32 expires_in = 2;
-	optional string scope = 3;
-	optional string token_type = 4;
+	string access_token = 1;
+	int32 expires_in = 2;
+	string scope = 3;
+	string token_type = 4;
 }
 
 message GoogleNotiMessage {
-	optional string type = 1;
-	optional string location = 2;
-	optional string review = 3; 
-	optional string question = 4;
-	optional string answer = 5;
+	string type = 1;
+	string location = 2;
+	string review = 3;
+	string question = 4;
+	string answer = 5;
 }
 
 message ListReviews{
 	repeated Review reviews = 1;
-	optional float averageRating = 2;
-	optional int64 totalReviewCount = 3;
-	optional string nextPageToken = 4;
+	float averageRating = 2;
+	int64 totalReviewCount = 3;
+	string nextPageToken = 4;
 }
 
 message Question {
-	optional string name = 1;
-	optional Author author = 2;
-	optional int64 upvoteCount = 3;
-	optional string text = 4;
-	optional string createTime = 5;
-	optional string updateTime = 6;
-	optional int64 totalAnswerCount = 7;
-	optional string question_id = 8;
-	optional string location_id = 10;
-	optional string status = 11;
+	string name = 1;
+	Author author = 2;
+	int64 upvoteCount = 3;
+	string text = 4;
+	string createTime = 5;
+	string updateTime = 6;
+	int64 totalAnswerCount = 7;
+	string question_id = 8;
+	string location_id = 10;
+	string status = 11;
 }
 
 message Author {
-	optional string displayName = 1; 
-	optional string profilePhotoUrl = 2; 
-	optional string type = 3; 
+	string displayName = 1;
+	string profilePhotoUrl = 2;
+	string type = 3;
 	enum AuthorType {
-		AUTHOR_TYPE_UNSPECIFIED = 0; 
+		AUTHOR_TYPE_UNSPECIFIED = 0;
 		REGULAR_USER = 1;
 		LOCAL_GUIDE = 2;
 		MERCHANT = 3;
@@ -160,26 +160,26 @@ message Author {
 }
 
 message Answer {
-	optional string name = 1;
-	optional Author author = 2;
-	optional int64 upvoteCount = 3;
-	optional string text = 4;
-	optional string createTime = 5;
-	optional string updateTime = 6;
-	optional string answer_id = 7;
-	optional string question_id = 8;
-	optional string location_id = 10;
-	optional string status = 11;
+	string name = 1;
+	Author author = 2;
+	int64 upvoteCount = 3;
+	string text = 4;
+	string createTime = 5;
+	string updateTime = 6;
+	string answer_id = 7;
+	string question_id = 8;
+	string location_id = 10;
+	string status = 11;
 }
 
-message ListQuestions{
+message ListQuestions {
 	repeated Question questions = 1;
-	optional int64 totalSize = 2;
-	optional string nextPageToken = 3;
+	int64 totalSize = 2;
+	string nextPageToken = 3;
 }
 
-message ListAnswers{
+message ListAnswers {
 	repeated Answer answers = 1;
-	optional int64 totalSize = 2;
-	optional string nextPageToken = 3;
+	int64 totalSize = 2;
+	string nextPageToken = 3;
 }
