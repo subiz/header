@@ -145,13 +145,14 @@ message Question {
 	string question_id = 8;
 	string location_id = 10;
 	string status = 11;
-	repeated string subiz_answer_ids = 13;
+	string subiz_answer_id = 13;
 }
 
 message Author {
 	string displayName = 1;
 	string profilePhotoUrl = 2;
 	string type = 3;
+	string agent_id = 4;
 	enum AuthorType {
 		AUTHOR_TYPE_UNSPECIFIED = 0;
 		REGULAR_USER = 1;
