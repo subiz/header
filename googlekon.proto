@@ -145,6 +145,7 @@ message Question {
 	string question_id = 8;
 	string location_id = 10;
 	string status = 11;
+	repeated string subiz_answer_ids = 13;
 }
 
 message Author {
