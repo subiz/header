@@ -259,7 +259,7 @@ message GenericElement {
 	optional string item_url = 3;
 	optional string image_url = 4;
 	optional string subtitle = 5;
-	optional FbAction default_action = 6;
+	optional Button default_action = 6;
 	optional string id = 7; // fbproduct id
 	repeated Button buttons = 8;
 	optional int64 quantity = 9;
