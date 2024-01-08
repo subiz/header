@@ -145,14 +145,12 @@ message Question {
 	string question_id = 8;
 	string location_id = 10;
 	string status = 11;
-	string subiz_answer_id = 13;
 }
 
 message Author {
 	string displayName = 1;
 	string profilePhotoUrl = 2;
 	string type = 3;
-	string agent_id = 4;
 	enum AuthorType {
 		AUTHOR_TYPE_UNSPECIFIED = 0;
 		REGULAR_USER = 1;
@@ -184,4 +182,21 @@ message ListAnswers {
 	repeated Answer answers = 1;
 	int64 totalSize = 2;
 	string nextPageToken = 3;
+}
+
+message AgentInteractQuestion{
+	string question_id = 1;
+	string answer_id = 2;
+	string agent_id = 3;
+	string reply = 4;
+	int64 reply_updated = 5;
+	string event_id = 6;
+}
+
+message AgentInteractReview{
+	string review_id = 1;
+	string agent_id = 2;
+	string reply = 3;
+	int64 reply_updated = 4;
+	string event_id = 5;
 }
