@@ -1391,6 +1391,12 @@ message CallInfo {
 	string call_id = 26;
 	string diversion_number = 27;
 	string transfer_to = 28;
+
+	// debug
+	string hangup_by = 29; // agent - subiz - isp - user
+	string isp_user_agent = 30;
+	string isp_hangup_reason = 31;
+	string isp_call_id = 33;
 }
 
 message Rating {
