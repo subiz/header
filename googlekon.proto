@@ -191,6 +191,7 @@ message AgentInteractQuestion{
 	string reply = 4;
 	int64 reply_updated = 5;
 	string event_id = 6;
+	int64 updated = 7;
 }
 
 message AgentInteractReview{
@@ -199,4 +200,5 @@ message AgentInteractReview{
 	string reply = 3;
 	int64 reply_updated = 4;
 	string event_id = 5;
+	int64 updated = 6;
 }
