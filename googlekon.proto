@@ -6,7 +6,6 @@ option go_package = "github.com/subiz/header/googlekon";
 
 message GoogleAccount {
 	string email = 3;
-	string linked_bussiness_profile_id = 4;
 	string access_token = 5;
 	string refresh_token = 6;
 	int64 access_token_expired_at = 7;
@@ -17,23 +16,23 @@ message GoogleAccount {
 	string account_id = 12;
 }
 
-message BussinessProfileAccount {
-	string bussiness_profile_id = 3;
+message BusinessProfileAccount {
+	string business_profile_id = 3;
 	string name = 4;
 }
 
-message BussinessProfileAccounts {
-	repeated BussinessProfileAccount accounts = 4;
+message BusinessProfileAccounts {
+	repeated BusinessProfileAccount accounts = 4;
 	string nextPageToken = 5;
 }
 
-message BussinessLocations {
-	repeated BussinessLocation locations = 3;
+message BusinessLocations {
+	repeated BusinessLocation locations = 3;
 	string nextPageToken = 5;
 	int64 totalSize = 6;
 }
 
-message BussinessLocation {
+message BusinessLocation {
 	string location_id = 3;
 	string storeCode  = 4;
 	string title = 5;
@@ -41,7 +40,7 @@ message BussinessLocation {
 	Profile profile = 7;
 	string account_id = 8;
 	string email = 9;
-	string bussiness_profile_account_id = 10;
+	string business_profile_account_id = 10;
 	string name = 12;
 	string websiteUri = 13;
 	string state = 14;
@@ -91,7 +90,7 @@ message Review {
 	string updateTime = 7;
 	ReviewReply reviewReply = 8;
 	string name = 9;
-	string location_id =10;
+	string business_location_id =10;
 	string status = 11;
 }
 
@@ -145,8 +144,9 @@ message Question {
 	string updateTime = 6;
 	int64 totalAnswerCount = 7;
 	string question_id = 8;
-	string location_id = 10;
+	string business_location_id = 10;
 	string status = 11;
+	map<string,bool> answer_idsM = 12;
 }
 
 message Author {
@@ -170,7 +170,7 @@ message Answer {
 	string updateTime = 6;
 	string answer_id = 7;
 	string question_id = 8;
-	string location_id = 10;
+	string business_location_id = 10;
 	string status = 11;
 }
 
@@ -208,6 +208,7 @@ message AgentInteractReview {
 message Brand {
 	string name = 1;
 	string displayName = 2;
+	string brand_id = 3;
 }
 
 message Agent {
@@ -295,12 +296,12 @@ message ListAgents {
 message BrandLocation {
 	string name = 1;
 	string placeId = 2;
+	string location_id = 3;
 	string agent = 4;
 	string locationEntryPointConfigs = 5;
 	string defaultLocale = 8;
 	string listingId = 9;
-	string location_id = 10;
-	string bussiness_location_id = 11; 
+	string business_location_id = 11; 
 	string brand_id = 12;
 	string agent_id = 13;
 }
@@ -317,6 +318,8 @@ message AgentVerification {
     string name = 1;
     string verificationState = 2;
     AgentVerificationContact agentVerificationContact = 3;
+	string brand_id = 4;
+	string agent_id = 5;
 }
 
 message AgentVerificationContact {
@@ -330,11 +333,15 @@ message AgentVerificationContact {
 message BrandLocationVerification {
 	string name = 1;
 	string verificationState = 2;
+	string brand_id = 3;
+	string brand_location_id = 4;
 }
 
 message AgentLaunch {
 	string name = 1;
     BusinessMessagesLaunch businessMessages = 2;
+	string brand_id = 3;
+	string agent_id = 4;
 }
 
 message BusinessMessagesLaunch {
@@ -365,12 +372,14 @@ message BusinessMessagesEntryPointLaunch {
 
 message BrandLocationLaunch {
 	string name = 1;
+	string brand_id = 3;
+	string brand_location_id = 4;
 }
 
 message Message {
     string name = 1;
     string messageId = 2;
-    Representative representative = 3;
+	string conversationId = 3;
     repeated Suggestion suggestions = 4;
     string fallback = 5;
     bool containsRichText = 6;
@@ -379,6 +388,7 @@ message Message {
     string text = 7;
     Image image = 8;
     RichCard richCard = 9;
+	Representative representative = 10;
 }
 
 message Representative {
