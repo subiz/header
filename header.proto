@@ -3388,6 +3388,7 @@ enum ChannelType {
 	instagram_comment = 8;
 	google_review = 9;
 	google_question = 10;
+	google_message = 11;
 }
 
 message Webhooks {

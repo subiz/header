@@ -27,13 +27,13 @@ message BussinessProfileAccounts {
 	string nextPageToken = 5;
 }
 
-message Locations {
-	repeated Location locations = 3;
+message BussinessLocations {
+	repeated BussinessLocation locations = 3;
 	string nextPageToken = 5;
 	int64 totalSize = 6;
 }
 
-message Location {
+message BussinessLocation {
 	string location_id = 3;
 	string storeCode  = 4;
 	string title = 5;
@@ -64,7 +64,9 @@ message PostalAddress {
 	string address = 12;
 }
 message Metadata {
-	string mapsUri = 10;
+	string mapsUri = 1;
+    string placeId = 2;
+	bool hasGoogleUpdated = 3;
 }
 
 message Profile {
@@ -184,7 +186,7 @@ message ListAnswers {
 	string nextPageToken = 3;
 }
 
-message AgentInteractQuestion{
+message AgentInteractQuestion {
 	string question_id = 1;
 	string answer_id = 2;
 	string agent_id = 3;
@@ -194,11 +196,322 @@ message AgentInteractQuestion{
 	string anchor_updated = 7; // id+ updated
 }
 
-message AgentInteractReview{
+message AgentInteractReview {
 	string review_id = 1;
 	string agent_id = 2;
 	string reply = 3;
 	int64 reply_updated = 4;
 	string event_id = 5;
 	string anchor_updated = 6; // id+ updated
+}
+
+message Brand {
+	string name = 1;
+	string displayName = 2;
+}
+
+message Agent {
+	string name = 1;
+	string displayName = 2;
+	BusinessMessagesAgent businessMessagesAgent = 3;
+	string agent_id = 4;
+	string brand_id = 5;
+}
+
+message BusinessMessagesAgent {
+	string logoUrl = 1;
+	repeated BusinessMessagesEntryPointConfig entryPointConfigs = 2; 
+	map<string,ConversationalSetting> conversationalSettings = 3; 
+	string defaultLocale = 4;
+	SupportedAgentInteraction primaryAgentInteraction = 5;
+    repeated SupportedAgentInteraction additionalAgentInteractions = 6;
+}
+
+message BusinessMessagesEntryPointConfig {
+	string allowedEntryPoint = 1;
+	enum EntryPoint {
+		ENTRY_POINT_UNSPECIFIED = 0;
+		LOCATION = 1;
+		NON_LOCAL = 2;
+	}
+}
+
+message ConversationalSetting {
+    WelcomeMessage welcomeMessage = 1;
+}
+
+message WelcomeMessage {
+	string text = 1;
+}
+
+message SupportedAgentInteraction {
+	string interactionType = 1;
+	BotRepresentative botRepresentative = 2;
+	HumanRepresentative humanRepresentative = 3;
+    enum InteractionType {
+		INTERACTION_TYPE_UNSPECIFIED = 0;
+		BOT = 1;
+		HUMAN = 2;
+    }
+}
+
+message HumanRepresentative {
+	MessagingAvailability humanMessagingAvailability = 1;
+}
+
+message BotRepresentative {
+	MessagingAvailability botMessagingAvailability = 1;
+}
+
+message MessagingAvailability {
+	repeated Hours hours = 1;
+}
+
+message Hours {
+	TimeOfDay startTime = 1;
+	TimeOfDay endTime = 2;
+	string timeZone = 3;
+	string startDay = 4;
+	string endDay = 5;
+}
+
+message TimeOfDay {
+	int32 hours = 1;
+	int32 minutes = 2;
+	int32 seconds = 3;
+	int64 nanos = 4;
+}
+
+message ListBrands {
+	repeated Brand brands = 1;
+	string nextPageToken = 2;
+}
+
+message ListAgents {
+	repeated Agent agents = 1;
+	string nextPageToken = 2;
+}
+
+message BrandLocation {
+	string name = 1;
+	string placeId = 2;
+	string agent = 4;
+	string locationEntryPointConfigs = 5;
+	string defaultLocale = 8;
+	string listingId = 9;
+	string location_id = 10;
+	string bussiness_location_id = 11; 
+	string brand_id = 12;
+	string agent_id = 13;
+}
+
+enum VerificationState {
+	VERIFICATION_STATE_UNSPECIFIED = 0;
+	VERIFICATION_STATE_UNVERIFIED = 1;
+	VERIFICATION_STATE_PENDING = 2;
+	VERIFICATION_STATE_VERIFIED = 3;
+	VERIFICATION_STATE_SUSPENDED_IN_GMB = 4;
+}
+
+message AgentVerification {
+    string name = 1;
+    string verificationState = 2;
+    AgentVerificationContact agentVerificationContact = 3;
+}
+
+message AgentVerificationContact {
+    string partnerName = 1;               
+    string partnerEmailAddress = 2;
+    string brandContactName = 3;
+    string brandContactEmailAddress = 4;
+    string brandWebsiteUrl = 5;
+}
+
+message BrandLocationVerification {
+	string name = 1;
+	string verificationState = 2;
+}
+
+message AgentLaunch {
+	string name = 1;
+    BusinessMessagesLaunch businessMessages = 2;
+}
+
+message BusinessMessagesLaunch {
+	map<string,BusinessMessagesEntryPointLaunch> launchDetails = 3;
+}
+
+enum LaunchState {
+	LAUNCH_STATE_UNSPECIFIED = 0;
+	LAUNCH_STATE_UNLAUNCHED = 2;
+	LAUNCH_STATE_PENDING = 3;
+	LAUNCH_STATE_LAUNCHED = 4;
+	LAUNCH_STATE_REJECTED = 5;
+	LAUNCH_STATE_SUSPENDED = 6;
+	LAUNCH_STATE_PENDING_UNLAUNCH = 7;
+	LAUNCH_STATE_INVALID_IN_GMB = 8;
+}
+
+message BusinessMessagesEntryPointLaunch {
+	string entryPoint = 1;
+	string launchState = 2;
+	repeated string regionCodes = 3;
+	enum EntryPoint {
+		ENTRY_POINT_UNSPECIFIED	= 0;
+		LOCATION = 1;
+		NON_LOCAL = 2;
+	}
+}
+
+message BrandLocationLaunch {
+	string name = 1;
+}
+
+message Message {
+    string name = 1;
+    string messageId = 2;
+    Representative representative = 3;
+    repeated Suggestion suggestions = 4;
+    string fallback = 5;
+    bool containsRichText = 6;
+  
+    // Union field content can be only one of the following:
+    string text = 7;
+    Image image = 8;
+    RichCard richCard = 9;
+}
+
+message Representative {
+ 	string displayName = 1;
+    string avatarImage = 2;
+
+    // Union field representative can be only one of the following:
+    string representativeType = 3;
+	enum RepresentativeType {
+		REPRESENTATIVE_TYPE_UNSPECIFIED = 0;
+		BOT = 1;
+		HUMAN = 2;
+	}
+}
+
+message Image {
+	ContentInfo contentInfo = 1;
+}
+
+message ContentInfo {
+	string fileUrl = 1;
+    string thumbnailUrl = 2;
+    bool forceRefresh = 3;
+    string altText = 4;
+}
+
+message RichCard {
+	StandaloneCard standaloneCard = 1;
+	CarouselCard carouselCard = 2;
+}
+
+message StandaloneCard {
+	CardContent cardContent = 1;
+}
+
+message CardContent {
+	string title = 1;
+    string description = 2;
+    Media media = 3;
+    repeated Suggestion suggestions = 4;
+}
+
+message Media {
+	string height = 1;
+    // Union field content can be only one of the following:
+    ContentInfo contentInfo = 2;
+    enum Height {
+		HEIGHT_UNSPECIFIED = 0;
+		SHORT = 1;
+		MEDIUM = 2;
+		TALL = 3;
+	}
+}
+
+message Suggestion {
+	SuggestedReply reply = 1;
+	SuggestedAction action = 2;
+	LiveAgentRequest liveAgentRequest = 3;
+	AuthenticationRequest authenticationRequest = 4;
+}
+
+message SuggestedReply {
+	string text = 1;
+    string postbackData = 2;
+}
+
+message SuggestedAction {
+	string text = 1;
+    string postbackData = 2;
+
+    // Union field action can be only one of the following:
+    OpenUrlAction openUrlAction = 3;
+	DialAction dialAction = 4;
+}
+
+message OpenUrlAction {
+	string url = 1;
+}
+
+message DialAction {
+	string phoneNumber = 1; 
+}
+
+message LiveAgentRequest {
+
+}
+
+message AuthenticationRequest {
+	Oauth oauth = 1;
+}
+
+message Oauth {
+	string clientId = 1;
+    string codeChallenge = 2;
+    repeated string scopes = 3;
+    string codeChallengeMethod = 4;
+}
+
+message CarouselCard {
+	string cardWidth = 1;
+    repeated CardContent cardContents = 2;
+    enum CardWidth {
+		CARD_WIDTH_UNSPECIFIED = 0;
+		SMALL = 1;
+		MEDIUM = 2;
+	}
+}
+
+message Context {
+	string entryPoint = 1;
+	UserInfo userInfo = 2;
+    //Widget widget = 3;
+    string resolvedLocale = 4;
+    string customContext = 5;
+
+    // Union field place can be only one of the following:
+    string placeId = 6;
+    string nearPlaceId = 7;
+    // End of list of possible types for union field place.
+    enum EntryPoint {
+		ENTRY_POINT_UNSPECIFIED	= 0;
+		PLACESHEET = 2;
+		MAPS = 3;
+		FEATURED_SNIPPETS = 4;
+		SITELINKS = 5;
+		WEB_WIDGET = 6;
+		URL = 7;
+		LOCAL_PACK = 8;
+		PREVIEW = 9;
+	}
+}
+
+message UserInfo {
+	string displayName = 1;
+    string userDeviceLocale = 2;
 }
