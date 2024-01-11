@@ -209,6 +209,7 @@ message Brand {
 	string name = 1;
 	string displayName = 2;
 	string brand_id = 3;
+	string account_id = 4;
 }
 
 message Agent {
