@@ -525,3 +525,8 @@ message UserInfo {
 	string displayName = 1;
     string userDeviceLocale = 2;
 }
+
+message Verify {
+	string clientToken = 1;
+	string secret = 2;
+}
