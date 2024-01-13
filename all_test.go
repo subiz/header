@@ -57,7 +57,7 @@ func TestNormEmail(t *testing.T) {
 	}
 
 	for i, tc := range testcases {
-		if tc.out != NormEmail(tc.in) {
+		if tc.out != strings.Join(NormEmail(tc.in), ",") {
 			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, NormPhone(tc.in))
 		}
 	}
@@ -98,7 +98,7 @@ func TestNormPhone(t *testing.T) {
 	}
 
 	for i, tc := range testcases {
-		if tc.out != NormPhone(tc.in) {
+		if tc.out != strings.Join(NormPhone(tc.in), ",") {
 			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, NormPhone(tc.in))
 		}
 	}
@@ -187,7 +187,7 @@ func TestUnpack(t *testing.T) {
 	}
 
 	b, _ := proto.Marshal(ev)
-	fmt.Println("HEX", hex.EncodeToString(b)	)
+	fmt.Println("HEX", hex.EncodeToString(b))
 	out, _ := json.Marshal(ev)
 
 	fmt.Println(string(out))
@@ -322,6 +322,7 @@ var DEFS = map[string]*AttributeDefinition{
 		Key: "lifecycle_stage", IsSystem: true,
 	},
 	"created":   {Name: "Created", Type: "datetime", Key: "created", IsSystem: true, IsReadonly: true},
+	"seen":      {Name: "Seen", Type: "datetime", Key: "seen", IsSystem: true, IsReadonly: true},
 	"rank":      {Name: "Rank", Type: "number", Key: "rank", IsSystem: true},
 	"record_id": {Name: "Record ID", Type: "text", Key: "record_id", IsSystem: true},
 	"address":   {Name: "Address", Type: "text", Key: "address", PreventAutoOverride: true},
@@ -442,11 +443,17 @@ func TestUpdateUserAttribute(t *testing.T) {
 			attr:  &Attribute{Key: "fullname", Text: "giang"},
 			out:   []*Attribute{{Key: "fullname", ByType: "agent", Text: "thanh"}},
 		}, {
-			name:  "userbot update connector",
+			name:  "userbot update connector not correct user",
 			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us98"},
 			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
-			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: "us123"}, // fake user id
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: "us98"}, // fake user id
 			out:   []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
+		}, {
+			name:  "userbot update connector correct user",
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: usid},
+			attrs: []*Attribute{{Key: "fullname", ByType: "connector", Text: "thanh"}},
+			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "user", By: usid}, // fake user id
+			out:   []*Attribute{{Key: "fullname", Modified: now, ByType: "connector", Text: "thanh", UserValue: "giang"}},
 		}, {
 			name:  "userbot update system 1",
 			cred:  &cpb.Credential{Type: cpb.Type_bot, Issuer: "bot", ClientId: "bot"}, // deprecated bot
@@ -488,7 +495,7 @@ func TestUpdateUserAttribute(t *testing.T) {
 			cred:  &cpb.Credential{Type: cpb.Type_unknown},
 			attrs: []*Attribute{{Key: "fullname", Text: "thanh"}},
 			attr:  &Attribute{Key: "fullname", Text: "giang", ByType: "", By: usid},
-			out:   []*Attribute{{Key: "fullname", Text: "thanh"}},
+			out:   []*Attribute{{Modified: now, By: usid, ByType: cpb.Type_unknown.String(), Key: "fullname", Text: "giang", UserValue: "giang"}},
 		}, {
 			name:  "agent update on system ",
 			cred:  &cpb.Credential{Type: cpb.Type_agent, Issuer: "ag123"},
@@ -544,12 +551,13 @@ func TestUpdateUserAttribute(t *testing.T) {
 			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
 			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "connector", By: "fabikon"},
 			out:   []*Attribute{{Key: "created", Datetime: "12344", By: "fabikon", ByType: "connector", ConnectorValue: "12344", Modified: now}},
-		}, {
+		},
+		{
 			name:  "system update on system by type",
-			cred:  &cpb.Credential{Type: cpb.Type_subiz, Issuer: "system"},
-			attrs: []*Attribute{{Key: "created", Datetime: "123"}},
-			attr:  &Attribute{Key: "created", Datetime: "12344", ByType: "agent", By: ""},
-			out:   []*Attribute{{Key: "created", Datetime: "123"}},
+			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: "us123"},
+			attrs: []*Attribute{{Key: "seen", Datetime: "123", ByType: "subiz"}},
+			attr:  &Attribute{Key: "seen", Datetime: "12344", ByType: "subiz", By: "system"},
+			out:   []*Attribute{{Key: "seen", By: "system", Modified: now, Datetime: "12344", ByType: "subiz"}},
 		}, {
 			name:  "bot update on system by type",
 			cred:  &cpb.Credential{Type: cpb.Type_user, Issuer: usid, ClientId: "bot"},
@@ -643,9 +651,9 @@ func TestUpdateUserAttribute(t *testing.T) {
 	}
 
 	for itc, tc := range testcases {
-		// if itc != 34 {
-		// continue
-		// }
+		//if itc != 23 {
+		//continue
+		//}
 		user := &User{Id: usid, Attributes: tc.attrs}
 		cred := tc.cred
 		if cred == nil {

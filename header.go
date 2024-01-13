@@ -237,6 +237,7 @@ func AttributeValue(defM map[string]*AttributeDefinition, attr *Attribute) strin
 }
 
 // system => only coin
+// this function expects the parent pass in trusted data
 func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition, user *User, attr *Attribute, now int64) (updatedUser bool) {
 	if attr.GetKey() == "" || user == nil || defM == nil || attr.GetAction() == "noop" {
 		return false
@@ -245,12 +246,6 @@ func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition,
 	def := defM[attr.Key]
 	if def == nil {
 		return false // ignore undefined attribute
-	}
-
-	// dont trust user
-	if cred.GetType() == cpb.Type_user || cred.GetType() == cpb.Type_unknown {
-		attr.By = cred.GetIssuer()
-		attr.ByType = cpb.Type_user.String()
 	}
 
 	byId, bytype := attr.By, attr.ByType
@@ -341,6 +336,9 @@ func UpdateAttribute(cred *cpb.Credential, defM map[string]*AttributeDefinition,
 			if len(vals) > 0 {
 				oldattr.Text = vals[0]
 				oldattr.OtherValues = vals[1:]
+			}
+			if len(oldattr.OtherValues) == 0 {
+				oldattr.OtherValues = nil
 			}
 			oldattr.Number = 0
 			oldattr.Boolean = false
