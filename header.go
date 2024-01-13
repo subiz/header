@@ -480,7 +480,6 @@ func UpdateAttributeForce(cred *cpb.Credential, defM map[string]*AttributeDefini
 		oldattr.Modified = now
 	}
 
-
 	if action == Attribute_delete.String() {
 		if attr.Text != "" {
 			// remove specific value
@@ -990,7 +989,7 @@ func AssignObject(dst, src interface{}, fields []string) {
 //
 //	if the number starts with 84 => replace to 0 since we mostly serve
 //	Vietnamese customers
-func NormPhone(phone string) string {
+func NormPhone(phone string) []string {
 	phonesplit := strings.FieldsFunc(phone, func(r rune) bool {
 		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/'
 	})
@@ -1014,7 +1013,9 @@ func NormPhone(phone string) string {
 			phones[i] = "0" + phone[2:]
 		}
 	}
-	return strings.Join(phones, ",")
+
+	// strings.Join(phones, ",")
+	return phones
 }
 
 // NormPhone converts an user input phone number to
@@ -1025,7 +1026,7 @@ func NormPhone(phone string) string {
 //
 //	if the number starts with 84 => replace to 0 since we mostly serve
 //	Vietnamese customers
-func NormEmail(email string) string {
+func NormEmail(email string) []string {
 	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
 		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
 	})
@@ -1046,15 +1047,12 @@ func NormEmail(email string) string {
 		email = Substring(email, 0, 320)
 		emails[email] = true
 	}
-	out := ""
-	for em := range emails {
-		out += em + ","
-	}
 
-	if len(out) > 0 {
-		out = out[:len(out)-1] // remove last ,
+	ems := []string{}
+	for email := range emails {
+		ems = append(ems, email)
 	}
-	return out
+	return ems
 }
 
 func EmailAddress(email string) string {
@@ -1451,4 +1449,90 @@ func GetPhoneISP(number string) string {
 		return "Viettel"
 	}
 	return "other"
+}
+
+// getConversationIdFromEv lookups conversation id from *header.Event
+// it returns empty string "" if not found any conversation id
+// see automation-bot/utils.go for more details
+func GetConversationIdFromEv(e *Event) string {
+	switch e.GetType() {
+	case RealtimeType_message_sent.String(),
+		RealtimeType_message_updated.String(),
+		RealtimeType_message_pong.String(),
+		RealtimeType_message_referral.String():
+		return e.GetData().GetMessage().GetConversationId()
+	case RealtimeType_bot_terminated.String():
+		return e.GetData().GetBotTerminated().GetConversationId()
+	}
+
+	switch e.GetType() {
+	case RealtimeType_task_created.String(),
+		RealtimeType_task_updated.String():
+		if e.GetData().GetConversation().GetId() != "" {
+			return e.GetData().GetConversation().GetId()
+		}
+		task := e.GetData().GetTask()
+		if len(task.GetAssociatedConversations()) > 0 {
+			return task.AssociatedConversations[0]
+		}
+		return ""
+	case RealtimeType_call_answered.String(),
+		RealtimeType_call_rang.String(),
+		RealtimeType_call_transferred.String():
+		return e.GetData().GetCallInfo().GetConversationId()
+	}
+
+	// header.RealtimeType_conversation_state_updated.String(),
+	//header.RealtimeType_conversation_updated.String(),
+	//header.RealtimeType_conversation_joined.String(),
+	//header.RealtimeType_conversation_invited.String(),
+	//	header.RealtimeType_conversation_left.String(),
+	//header.RealtimeType_conversation_tagged.String(),
+	//header.RealtimeType_conversation_untagged.String(),
+	//header.RealtimeType_conversation_rating_requested.String(),
+	//header.RealtimeType_conversation_rated.String():
+	return e.GetData().GetConversation().GetId()
+}
+
+// setConversationIdFromEv lookups conversation id from *header.Event
+// it returns empty string "" if not found any conversation id
+func SetConversationId(e *Event, cid string) {
+	data := e.GetData()
+	if data == nil {
+		data = &Data{}
+	}
+	switch e.GetType() {
+	case RealtimeType_conversation_state_updated.String():
+	case RealtimeType_conversation_updated.String():
+	case RealtimeType_conversation_joined.String():
+	case RealtimeType_conversation_invited.String():
+	case RealtimeType_conversation_left.String():
+	case RealtimeType_conversation_tagged.String():
+	case RealtimeType_conversation_untagged.String():
+	case RealtimeType_conversation_spam_unmarked.String():
+	case RealtimeType_conversation_spam_marked.String():
+	case RealtimeType_conversation_rating_requested.String():
+	case RealtimeType_conversation_rated.String():
+	default:
+		switch e.GetType() {
+		case RealtimeType_message_updated.String():
+		case RealtimeType_message_pong.String():
+		case RealtimeType_message_sent.String():
+		case RealtimeType_message_referral.String():
+		default:
+			return
+		}
+		msg := data.GetMessage()
+		if msg == nil {
+			msg = &Message{}
+			data.Message = msg
+		}
+		msg.ConversationId = cid
+	}
+	convo := data.GetConversation()
+	if convo == nil {
+		convo = &Conversation{}
+		data.Conversation = convo
+	}
+	convo.Id = cid
 }

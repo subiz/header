@@ -27,7 +27,6 @@ message FacebookPage {
 	optional int64 last_message_sent_success_at = 16;
 	optional int64 last_message_sent_failed_at = 17;
 
-
 	optional string token_status = 19; // '' || failed
 	optional int64 token_status_updated = 20;
 

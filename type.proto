@@ -236,6 +236,8 @@ enum RealtimeType {
 
 	user_banned = 235; // banned_user
 	user_unbanned = 236; // banned_user
+
+	called = 238;
 }
 
 message TextTransform {
