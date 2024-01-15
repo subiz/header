@@ -238,6 +238,10 @@ enum RealtimeType {
 	user_unbanned = 236; // banned_user
 
 	called = 238;
+
+	payment_made = 239; // bill
+	logged_in = 240;
+
 }
 
 message TextTransform {

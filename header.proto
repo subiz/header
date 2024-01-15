@@ -4905,6 +4905,7 @@ message Bill {
 	string description = 21;
 
 	string picture_url = 22;
+	string currency = 23;
 }
 
 message CancellationCodes {
@@ -6657,7 +6658,7 @@ enum E {
 	invalid_event_type = 125;
 	remover_is_not_agent = 127;
 	user_is_the_last_one_in_conversation = 128;
-	conversation_ended = 129;
+	// conversation_ended = 129;
 	leaver_is_the_last_one_in_conversation = 130;
 	invalid_conversation_state = 131;
 	caller_is_not_leaver = 132;
