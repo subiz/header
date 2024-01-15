@@ -242,6 +242,10 @@ enum RealtimeType {
 	payment_made = 239; // bill
 	logged_in = 240;
 
+	zns_sent = 241;
+
+	channel_integrated = 242;
+	channel_removed = 243;
 }
 
 message TextTransform {
