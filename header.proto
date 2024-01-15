@@ -901,7 +901,7 @@ message ListUserEventsRequest {
 
 	string category = 9;
 	int32 limit_hour = 10;
-
+	int64 end_hour = 11;
 	string type = 12;
 }
 
