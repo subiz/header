@@ -218,6 +218,8 @@ message Agent {
 	BusinessMessagesAgent businessMessagesAgent = 3;
 	string agent_id = 4;
 	string brand_id = 5;
+	string account_id = 6;
+	string email = 7;
 }
 
 message BusinessMessagesAgent {
@@ -530,4 +532,30 @@ message UserInfo {
 message Verify {
 	string clientToken = 1;
 	string secret = 2;
+}
+
+message UserMessage {
+	string requestId = 1;
+    string conversationId = 2;
+	string customAgentId = 3;
+    string agent = 4; 
+	Context context = 5;
+    string sendTime = 6;
+	//DialogflowResponse dialogflowResponse = 7;
+
+    // Union field payload can be only one of the following:
+    Message message = 8;
+	//Receipts receipts = 9;
+
+	UserStatus userStatus = 10;
+	//SurveyResponse surveyResponse = 11;
+	//SuggestionResponse suggestionResponse = 12;
+	//AuthenticationResponse authenticationResponse = 13;
+}
+
+message UserStatus {
+	string createTime = 1;
+	// Union field status can be only one of the following:
+	bool isTyping = 2;
+	bool requestedLiveAgent = 3;
 }
