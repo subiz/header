@@ -545,7 +545,7 @@ message UserMessage {
 
     // Union field payload can be only one of the following:
     Message message = 8;
-	//Receipts receipts = 9;
+	Receipts receipts = 9;
 
 	UserStatus userStatus = 10;
 	//SurveyResponse surveyResponse = 11;
@@ -553,9 +553,37 @@ message UserMessage {
 	//AuthenticationResponse authenticationResponse = 13;
 }
 
+message Receipts {
+	repeated Receipt receipts = 1;
+    string createTime = 2;
+}
+
+message Receipt {
+	string message = 1;
+	string receiptType = 2;
+	enum ReceiptType {
+		RECEIPT_TYPE_UNSPECIFIED = 0;
+		DELIVERED = 1;
+		READ = 2;
+	}
+}
+
 message UserStatus {
 	string createTime = 1;
 	// Union field status can be only one of the following:
 	bool isTyping = 2;
 	bool requestedLiveAgent = 3;
+}
+
+message Event {
+	string name = 1;
+    string eventType = 2;
+    Representative representative = 3;
+    enum EventType {
+		EVENT_TYPE_UNSPECIFIED = 0;
+		TYPING_STARTED = 1; 
+		TYPING_STOPPED = 2;
+		REPRESENTATIVE_JOINED = 3;
+		REPRESENTATIVE_LEFT = 4;
+	}
 }

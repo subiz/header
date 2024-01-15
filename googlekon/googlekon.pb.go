@@ -614,6 +614,110 @@ func (Context_EntryPoint) EnumDescriptor() ([]byte, []int) {
 	return file_googlekon_proto_rawDescGZIP(), []int{62, 0}
 }
 
+type Receipt_ReceiptType int32
+
+const (
+	Receipt_RECEIPT_TYPE_UNSPECIFIED Receipt_ReceiptType = 0
+	Receipt_DELIVERED                Receipt_ReceiptType = 1
+	Receipt_READ                     Receipt_ReceiptType = 2
+)
+
+// Enum value maps for Receipt_ReceiptType.
+var (
+	Receipt_ReceiptType_name = map[int32]string{
+		0: "RECEIPT_TYPE_UNSPECIFIED",
+		1: "DELIVERED",
+		2: "READ",
+	}
+	Receipt_ReceiptType_value = map[string]int32{
+		"RECEIPT_TYPE_UNSPECIFIED": 0,
+		"DELIVERED":                1,
+		"READ":                     2,
+	}
+)
+
+func (x Receipt_ReceiptType) Enum() *Receipt_ReceiptType {
+	p := new(Receipt_ReceiptType)
+	*p = x
+	return p
+}
+
+func (x Receipt_ReceiptType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Receipt_ReceiptType) Descriptor() protoreflect.EnumDescriptor {
+	return file_googlekon_proto_enumTypes[11].Descriptor()
+}
+
+func (Receipt_ReceiptType) Type() protoreflect.EnumType {
+	return &file_googlekon_proto_enumTypes[11]
+}
+
+func (x Receipt_ReceiptType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Receipt_ReceiptType.Descriptor instead.
+func (Receipt_ReceiptType) EnumDescriptor() ([]byte, []int) {
+	return file_googlekon_proto_rawDescGZIP(), []int{67, 0}
+}
+
+type Event_EventType int32
+
+const (
+	Event_EVENT_TYPE_UNSPECIFIED Event_EventType = 0
+	Event_TYPING_STARTED         Event_EventType = 1
+	Event_TYPING_STOPPED         Event_EventType = 2
+	Event_REPRESENTATIVE_JOINED  Event_EventType = 3
+	Event_REPRESENTATIVE_LEFT    Event_EventType = 4
+)
+
+// Enum value maps for Event_EventType.
+var (
+	Event_EventType_name = map[int32]string{
+		0: "EVENT_TYPE_UNSPECIFIED",
+		1: "TYPING_STARTED",
+		2: "TYPING_STOPPED",
+		3: "REPRESENTATIVE_JOINED",
+		4: "REPRESENTATIVE_LEFT",
+	}
+	Event_EventType_value = map[string]int32{
+		"EVENT_TYPE_UNSPECIFIED": 0,
+		"TYPING_STARTED":         1,
+		"TYPING_STOPPED":         2,
+		"REPRESENTATIVE_JOINED":  3,
+		"REPRESENTATIVE_LEFT":    4,
+	}
+)
+
+func (x Event_EventType) Enum() *Event_EventType {
+	p := new(Event_EventType)
+	*p = x
+	return p
+}
+
+func (x Event_EventType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Event_EventType) Descriptor() protoreflect.EnumDescriptor {
+	return file_googlekon_proto_enumTypes[12].Descriptor()
+}
+
+func (Event_EventType) Type() protoreflect.EnumType {
+	return &file_googlekon_proto_enumTypes[12]
+}
+
+func (x Event_EventType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Event_EventType.Descriptor instead.
+func (Event_EventType) EnumDescriptor() ([]byte, []int) {
+	return file_googlekon_proto_rawDescGZIP(), []int{69, 0}
+}
+
 type GoogleAccount struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5150,7 +5254,8 @@ type UserMessage struct {
 	Context        *Context `protobuf:"bytes,5,opt,name=context,proto3" json:"context,omitempty"`
 	SendTime       string   `protobuf:"bytes,6,opt,name=sendTime,proto3" json:"sendTime,omitempty"` //DialogflowResponse dialogflowResponse = 7;
 	// Union field payload can be only one of the following:
-	Message    *Message    `protobuf:"bytes,8,opt,name=message,proto3" json:"message,omitempty"` //Receipts receipts = 9;
+	Message    *Message    `protobuf:"bytes,8,opt,name=message,proto3" json:"message,omitempty"`
+	Receipts   *Receipts   `protobuf:"bytes,9,opt,name=receipts,proto3" json:"receipts,omitempty"`
 	UserStatus *UserStatus `protobuf:"bytes,10,opt,name=userStatus,proto3" json:"userStatus,omitempty"`
 }
 
@@ -5235,11 +5340,128 @@ func (x *UserMessage) GetMessage() *Message {
 	return nil
 }
 
+func (x *UserMessage) GetReceipts() *Receipts {
+	if x != nil {
+		return x.Receipts
+	}
+	return nil
+}
+
 func (x *UserMessage) GetUserStatus() *UserStatus {
 	if x != nil {
 		return x.UserStatus
 	}
 	return nil
+}
+
+type Receipts struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Receipts   []*Receipt `protobuf:"bytes,1,rep,name=receipts,proto3" json:"receipts,omitempty"`
+	CreateTime string     `protobuf:"bytes,2,opt,name=createTime,proto3" json:"createTime,omitempty"`
+}
+
+func (x *Receipts) Reset() {
+	*x = Receipts{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_googlekon_proto_msgTypes[66]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Receipts) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Receipts) ProtoMessage() {}
+
+func (x *Receipts) ProtoReflect() protoreflect.Message {
+	mi := &file_googlekon_proto_msgTypes[66]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Receipts.ProtoReflect.Descriptor instead.
+func (*Receipts) Descriptor() ([]byte, []int) {
+	return file_googlekon_proto_rawDescGZIP(), []int{66}
+}
+
+func (x *Receipts) GetReceipts() []*Receipt {
+	if x != nil {
+		return x.Receipts
+	}
+	return nil
+}
+
+func (x *Receipts) GetCreateTime() string {
+	if x != nil {
+		return x.CreateTime
+	}
+	return ""
+}
+
+type Receipt struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Message     string `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	ReceiptType string `protobuf:"bytes,2,opt,name=receiptType,proto3" json:"receiptType,omitempty"`
+}
+
+func (x *Receipt) Reset() {
+	*x = Receipt{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_googlekon_proto_msgTypes[67]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Receipt) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Receipt) ProtoMessage() {}
+
+func (x *Receipt) ProtoReflect() protoreflect.Message {
+	mi := &file_googlekon_proto_msgTypes[67]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Receipt.ProtoReflect.Descriptor instead.
+func (*Receipt) Descriptor() ([]byte, []int) {
+	return file_googlekon_proto_rawDescGZIP(), []int{67}
+}
+
+func (x *Receipt) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *Receipt) GetReceiptType() string {
+	if x != nil {
+		return x.ReceiptType
+	}
+	return ""
 }
 
 type UserStatus struct {
@@ -5256,7 +5478,7 @@ type UserStatus struct {
 func (x *UserStatus) Reset() {
 	*x = UserStatus{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_googlekon_proto_msgTypes[66]
+		mi := &file_googlekon_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5269,7 +5491,7 @@ func (x *UserStatus) String() string {
 func (*UserStatus) ProtoMessage() {}
 
 func (x *UserStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_googlekon_proto_msgTypes[66]
+	mi := &file_googlekon_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5282,7 +5504,7 @@ func (x *UserStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserStatus.ProtoReflect.Descriptor instead.
 func (*UserStatus) Descriptor() ([]byte, []int) {
-	return file_googlekon_proto_rawDescGZIP(), []int{66}
+	return file_googlekon_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *UserStatus) GetCreateTime() string {
@@ -5304,6 +5526,69 @@ func (x *UserStatus) GetRequestedLiveAgent() bool {
 		return x.RequestedLiveAgent
 	}
 	return false
+}
+
+type Event struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name           string          `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	EventType      string          `protobuf:"bytes,2,opt,name=eventType,proto3" json:"eventType,omitempty"`
+	Representative *Representative `protobuf:"bytes,3,opt,name=representative,proto3" json:"representative,omitempty"`
+}
+
+func (x *Event) Reset() {
+	*x = Event{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_googlekon_proto_msgTypes[69]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Event) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Event) ProtoMessage() {}
+
+func (x *Event) ProtoReflect() protoreflect.Message {
+	mi := &file_googlekon_proto_msgTypes[69]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Event.ProtoReflect.Descriptor instead.
+func (*Event) Descriptor() ([]byte, []int) {
+	return file_googlekon_proto_rawDescGZIP(), []int{69}
+}
+
+func (x *Event) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Event) GetEventType() string {
+	if x != nil {
+		return x.EventType
+	}
+	return ""
+}
+
+func (x *Event) GetRepresentative() *Representative {
+	if x != nil {
+		return x.Representative
+	}
+	return nil
 }
 
 var File_googlekon_proto protoreflect.FileDescriptor
@@ -6052,7 +6337,7 @@ var file_googlekon_proto_rawDesc = []byte{
 	0x74, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6c,
 	0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x63,
 	0x72, 0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x63, 0x72, 0x65,
-	0x74, 0x22, 0xbe, 0x02, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x74, 0x22, 0xef, 0x02, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
 	0x65, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x12,
 	0x26, 0x0a, 0x0e, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49,
@@ -6068,18 +6353,52 @@ var file_googlekon_proto_rawDesc = []byte{
 	0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x65, 0x6e, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x2c, 0x0a,
 	0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x12,
 	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x35, 0x0a, 0x0a, 0x75,
-	0x73, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x15, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x55, 0x73, 0x65, 0x72,
-	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x22, 0x78, 0x0a, 0x0a, 0x55, 0x73, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65,
-	0x12, 0x1a, 0x0a, 0x08, 0x69, 0x73, 0x54, 0x79, 0x70, 0x69, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x08, 0x52, 0x08, 0x69, 0x73, 0x54, 0x79, 0x70, 0x69, 0x6e, 0x67, 0x12, 0x2e, 0x0a, 0x12,
-	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x4c, 0x69, 0x76, 0x65, 0x41, 0x67, 0x65,
-	0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x12, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x65, 0x64, 0x4c, 0x69, 0x76, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x2a, 0xc4, 0x01, 0x0a,
+	0x67, 0x65, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x2f, 0x0a, 0x08, 0x72,
+	0x65, 0x63, 0x65, 0x69, 0x70, 0x74, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x13, 0x2e,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x70,
+	0x74, 0x73, 0x52, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x70, 0x74, 0x73, 0x12, 0x35, 0x0a, 0x0a,
+	0x75, 0x73, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x15, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x0a, 0x75, 0x73, 0x65, 0x72, 0x53, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x22, 0x5a, 0x0a, 0x08, 0x52, 0x65, 0x63, 0x65, 0x69, 0x70, 0x74, 0x73, 0x12,
+	0x2e, 0x0a, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x70, 0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x12, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x52, 0x65,
+	0x63, 0x65, 0x69, 0x70, 0x74, 0x52, 0x08, 0x72, 0x65, 0x63, 0x65, 0x69, 0x70, 0x74, 0x73, 0x12,
+	0x1e, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x22,
+	0x8b, 0x01, 0x0a, 0x07, 0x52, 0x65, 0x63, 0x65, 0x69, 0x70, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x6d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x72, 0x65, 0x63, 0x65, 0x69, 0x70, 0x74,
+	0x54, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x72, 0x65, 0x63, 0x65,
+	0x69, 0x70, 0x74, 0x54, 0x79, 0x70, 0x65, 0x22, 0x44, 0x0a, 0x0b, 0x52, 0x65, 0x63, 0x65, 0x69,
+	0x70, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1c, 0x0a, 0x18, 0x52, 0x45, 0x43, 0x45, 0x49, 0x50,
+	0x54, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49,
+	0x45, 0x44, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x44, 0x45, 0x4c, 0x49, 0x56, 0x45, 0x52, 0x45,
+	0x44, 0x10, 0x01, 0x12, 0x08, 0x0a, 0x04, 0x52, 0x45, 0x41, 0x44, 0x10, 0x02, 0x22, 0x78, 0x0a,
+	0x0a, 0x55, 0x73, 0x65, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1e, 0x0a, 0x0a, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x69,
+	0x73, 0x54, 0x79, 0x70, 0x69, 0x6e, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x69,
+	0x73, 0x54, 0x79, 0x70, 0x69, 0x6e, 0x67, 0x12, 0x2e, 0x0a, 0x12, 0x72, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x65, 0x64, 0x4c, 0x69, 0x76, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x12, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x65, 0x64, 0x4c, 0x69,
+	0x76, 0x65, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x22, 0x82, 0x02, 0x0a, 0x05, 0x45, 0x76, 0x65, 0x6e,
+	0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x54, 0x79,
+	0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x54,
+	0x79, 0x70, 0x65, 0x12, 0x41, 0x0a, 0x0e, 0x72, 0x65, 0x70, 0x72, 0x65, 0x73, 0x65, 0x6e, 0x74,
+	0x61, 0x74, 0x69, 0x76, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x52, 0x65, 0x70, 0x72, 0x65, 0x73, 0x65, 0x6e,
+	0x74, 0x61, 0x74, 0x69, 0x76, 0x65, 0x52, 0x0e, 0x72, 0x65, 0x70, 0x72, 0x65, 0x73, 0x65, 0x6e,
+	0x74, 0x61, 0x74, 0x69, 0x76, 0x65, 0x22, 0x83, 0x01, 0x0a, 0x09, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x16, 0x45, 0x56, 0x45, 0x4e, 0x54, 0x5f, 0x54, 0x59,
+	0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00,
+	0x12, 0x12, 0x0a, 0x0e, 0x54, 0x59, 0x50, 0x49, 0x4e, 0x47, 0x5f, 0x53, 0x54, 0x41, 0x52, 0x54,
+	0x45, 0x44, 0x10, 0x01, 0x12, 0x12, 0x0a, 0x0e, 0x54, 0x59, 0x50, 0x49, 0x4e, 0x47, 0x5f, 0x53,
+	0x54, 0x4f, 0x50, 0x50, 0x45, 0x44, 0x10, 0x02, 0x12, 0x19, 0x0a, 0x15, 0x52, 0x45, 0x50, 0x52,
+	0x45, 0x53, 0x45, 0x4e, 0x54, 0x41, 0x54, 0x49, 0x56, 0x45, 0x5f, 0x4a, 0x4f, 0x49, 0x4e, 0x45,
+	0x44, 0x10, 0x03, 0x12, 0x17, 0x0a, 0x13, 0x52, 0x45, 0x50, 0x52, 0x45, 0x53, 0x45, 0x4e, 0x54,
+	0x41, 0x54, 0x49, 0x56, 0x45, 0x5f, 0x4c, 0x45, 0x46, 0x54, 0x10, 0x04, 0x2a, 0xc4, 0x01, 0x0a,
 	0x11, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61,
 	0x74, 0x65, 0x12, 0x22, 0x0a, 0x1e, 0x56, 0x45, 0x52, 0x49, 0x46, 0x49, 0x43, 0x41, 0x54, 0x49,
 	0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49,
@@ -6125,8 +6444,8 @@ func file_googlekon_proto_rawDescGZIP() []byte {
 	return file_googlekon_proto_rawDescData
 }
 
-var file_googlekon_proto_enumTypes = make([]protoimpl.EnumInfo, 11)
-var file_googlekon_proto_msgTypes = make([]protoimpl.MessageInfo, 70)
+var file_googlekon_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
+var file_googlekon_proto_msgTypes = make([]protoimpl.MessageInfo, 73)
 var file_googlekon_proto_goTypes = []interface{}{
 	(VerificationState)(0),                           // 0: googlekon.VerificationState
 	(LaunchState)(0),                                 // 1: googlekon.LaunchState
@@ -6139,141 +6458,149 @@ var file_googlekon_proto_goTypes = []interface{}{
 	(Media_Height)(0),                                // 8: googlekon.Media.Height
 	(CarouselCard_CardWidth)(0),                      // 9: googlekon.CarouselCard.CardWidth
 	(Context_EntryPoint)(0),                          // 10: googlekon.Context.EntryPoint
-	(*GoogleAccount)(nil),                            // 11: googlekon.GoogleAccount
-	(*BusinessProfileAccount)(nil),                   // 12: googlekon.BusinessProfileAccount
-	(*BusinessProfileAccounts)(nil),                  // 13: googlekon.BusinessProfileAccounts
-	(*BusinessLocations)(nil),                        // 14: googlekon.BusinessLocations
-	(*BusinessLocation)(nil),                         // 15: googlekon.BusinessLocation
-	(*PhoneNumbers)(nil),                             // 16: googlekon.PhoneNumbers
-	(*PostalAddress)(nil),                            // 17: googlekon.PostalAddress
-	(*Metadata)(nil),                                 // 18: googlekon.Metadata
-	(*Profile)(nil),                                  // 19: googlekon.Profile
-	(*Review)(nil),                                   // 20: googlekon.Review
-	(*Reviews)(nil),                                  // 21: googlekon.Reviews
-	(*Reviewer)(nil),                                 // 22: googlekon.Reviewer
-	(*ReviewReply)(nil),                              // 23: googlekon.ReviewReply
-	(*Response)(nil),                                 // 24: googlekon.Response
-	(*GoogleNotiMessage)(nil),                        // 25: googlekon.GoogleNotiMessage
-	(*ListReviews)(nil),                              // 26: googlekon.ListReviews
-	(*Question)(nil),                                 // 27: googlekon.Question
-	(*Author)(nil),                                   // 28: googlekon.Author
-	(*Answer)(nil),                                   // 29: googlekon.Answer
-	(*ListQuestions)(nil),                            // 30: googlekon.ListQuestions
-	(*ListAnswers)(nil),                              // 31: googlekon.ListAnswers
-	(*AgentInteractQuestion)(nil),                    // 32: googlekon.AgentInteractQuestion
-	(*AgentInteractReview)(nil),                      // 33: googlekon.AgentInteractReview
-	(*Brand)(nil),                                    // 34: googlekon.Brand
-	(*Agent)(nil),                                    // 35: googlekon.Agent
-	(*BusinessMessagesAgent)(nil),                    // 36: googlekon.BusinessMessagesAgent
-	(*BusinessMessagesEntryPointConfig)(nil),         // 37: googlekon.BusinessMessagesEntryPointConfig
-	(*ConversationalSetting)(nil),                    // 38: googlekon.ConversationalSetting
-	(*WelcomeMessage)(nil),                           // 39: googlekon.WelcomeMessage
-	(*SupportedAgentInteraction)(nil),                // 40: googlekon.SupportedAgentInteraction
-	(*HumanRepresentative)(nil),                      // 41: googlekon.HumanRepresentative
-	(*BotRepresentative)(nil),                        // 42: googlekon.BotRepresentative
-	(*MessagingAvailability)(nil),                    // 43: googlekon.MessagingAvailability
-	(*Hours)(nil),                                    // 44: googlekon.Hours
-	(*TimeOfDay)(nil),                                // 45: googlekon.TimeOfDay
-	(*ListBrands)(nil),                               // 46: googlekon.ListBrands
-	(*ListAgents)(nil),                               // 47: googlekon.ListAgents
-	(*BrandLocation)(nil),                            // 48: googlekon.BrandLocation
-	(*AgentVerification)(nil),                        // 49: googlekon.AgentVerification
-	(*AgentVerificationContact)(nil),                 // 50: googlekon.AgentVerificationContact
-	(*BrandLocationVerification)(nil),                // 51: googlekon.BrandLocationVerification
-	(*AgentLaunch)(nil),                              // 52: googlekon.AgentLaunch
-	(*BusinessMessagesLaunch)(nil),                   // 53: googlekon.BusinessMessagesLaunch
-	(*BusinessMessagesEntryPointLaunch)(nil),         // 54: googlekon.BusinessMessagesEntryPointLaunch
-	(*BrandLocationLaunch)(nil),                      // 55: googlekon.BrandLocationLaunch
-	(*Message)(nil),                                  // 56: googlekon.Message
-	(*Representative)(nil),                           // 57: googlekon.Representative
-	(*Image)(nil),                                    // 58: googlekon.Image
-	(*ContentInfo)(nil),                              // 59: googlekon.ContentInfo
-	(*RichCard)(nil),                                 // 60: googlekon.RichCard
-	(*StandaloneCard)(nil),                           // 61: googlekon.StandaloneCard
-	(*CardContent)(nil),                              // 62: googlekon.CardContent
-	(*Media)(nil),                                    // 63: googlekon.Media
-	(*Suggestion)(nil),                               // 64: googlekon.Suggestion
-	(*SuggestedReply)(nil),                           // 65: googlekon.SuggestedReply
-	(*SuggestedAction)(nil),                          // 66: googlekon.SuggestedAction
-	(*OpenUrlAction)(nil),                            // 67: googlekon.OpenUrlAction
-	(*DialAction)(nil),                               // 68: googlekon.DialAction
-	(*LiveAgentRequest)(nil),                         // 69: googlekon.LiveAgentRequest
-	(*AuthenticationRequest)(nil),                    // 70: googlekon.AuthenticationRequest
-	(*Oauth)(nil),                                    // 71: googlekon.Oauth
-	(*CarouselCard)(nil),                             // 72: googlekon.CarouselCard
-	(*Context)(nil),                                  // 73: googlekon.Context
-	(*UserInfo)(nil),                                 // 74: googlekon.UserInfo
-	(*Verify)(nil),                                   // 75: googlekon.Verify
-	(*UserMessage)(nil),                              // 76: googlekon.UserMessage
-	(*UserStatus)(nil),                               // 77: googlekon.UserStatus
-	nil,                                              // 78: googlekon.Question.AnswerIdsMEntry
-	nil,                                              // 79: googlekon.BusinessMessagesAgent.ConversationalSettingsEntry
-	nil,                                              // 80: googlekon.BusinessMessagesLaunch.LaunchDetailsEntry
+	(Receipt_ReceiptType)(0),                         // 11: googlekon.Receipt.ReceiptType
+	(Event_EventType)(0),                             // 12: googlekon.Event.EventType
+	(*GoogleAccount)(nil),                            // 13: googlekon.GoogleAccount
+	(*BusinessProfileAccount)(nil),                   // 14: googlekon.BusinessProfileAccount
+	(*BusinessProfileAccounts)(nil),                  // 15: googlekon.BusinessProfileAccounts
+	(*BusinessLocations)(nil),                        // 16: googlekon.BusinessLocations
+	(*BusinessLocation)(nil),                         // 17: googlekon.BusinessLocation
+	(*PhoneNumbers)(nil),                             // 18: googlekon.PhoneNumbers
+	(*PostalAddress)(nil),                            // 19: googlekon.PostalAddress
+	(*Metadata)(nil),                                 // 20: googlekon.Metadata
+	(*Profile)(nil),                                  // 21: googlekon.Profile
+	(*Review)(nil),                                   // 22: googlekon.Review
+	(*Reviews)(nil),                                  // 23: googlekon.Reviews
+	(*Reviewer)(nil),                                 // 24: googlekon.Reviewer
+	(*ReviewReply)(nil),                              // 25: googlekon.ReviewReply
+	(*Response)(nil),                                 // 26: googlekon.Response
+	(*GoogleNotiMessage)(nil),                        // 27: googlekon.GoogleNotiMessage
+	(*ListReviews)(nil),                              // 28: googlekon.ListReviews
+	(*Question)(nil),                                 // 29: googlekon.Question
+	(*Author)(nil),                                   // 30: googlekon.Author
+	(*Answer)(nil),                                   // 31: googlekon.Answer
+	(*ListQuestions)(nil),                            // 32: googlekon.ListQuestions
+	(*ListAnswers)(nil),                              // 33: googlekon.ListAnswers
+	(*AgentInteractQuestion)(nil),                    // 34: googlekon.AgentInteractQuestion
+	(*AgentInteractReview)(nil),                      // 35: googlekon.AgentInteractReview
+	(*Brand)(nil),                                    // 36: googlekon.Brand
+	(*Agent)(nil),                                    // 37: googlekon.Agent
+	(*BusinessMessagesAgent)(nil),                    // 38: googlekon.BusinessMessagesAgent
+	(*BusinessMessagesEntryPointConfig)(nil),         // 39: googlekon.BusinessMessagesEntryPointConfig
+	(*ConversationalSetting)(nil),                    // 40: googlekon.ConversationalSetting
+	(*WelcomeMessage)(nil),                           // 41: googlekon.WelcomeMessage
+	(*SupportedAgentInteraction)(nil),                // 42: googlekon.SupportedAgentInteraction
+	(*HumanRepresentative)(nil),                      // 43: googlekon.HumanRepresentative
+	(*BotRepresentative)(nil),                        // 44: googlekon.BotRepresentative
+	(*MessagingAvailability)(nil),                    // 45: googlekon.MessagingAvailability
+	(*Hours)(nil),                                    // 46: googlekon.Hours
+	(*TimeOfDay)(nil),                                // 47: googlekon.TimeOfDay
+	(*ListBrands)(nil),                               // 48: googlekon.ListBrands
+	(*ListAgents)(nil),                               // 49: googlekon.ListAgents
+	(*BrandLocation)(nil),                            // 50: googlekon.BrandLocation
+	(*AgentVerification)(nil),                        // 51: googlekon.AgentVerification
+	(*AgentVerificationContact)(nil),                 // 52: googlekon.AgentVerificationContact
+	(*BrandLocationVerification)(nil),                // 53: googlekon.BrandLocationVerification
+	(*AgentLaunch)(nil),                              // 54: googlekon.AgentLaunch
+	(*BusinessMessagesLaunch)(nil),                   // 55: googlekon.BusinessMessagesLaunch
+	(*BusinessMessagesEntryPointLaunch)(nil),         // 56: googlekon.BusinessMessagesEntryPointLaunch
+	(*BrandLocationLaunch)(nil),                      // 57: googlekon.BrandLocationLaunch
+	(*Message)(nil),                                  // 58: googlekon.Message
+	(*Representative)(nil),                           // 59: googlekon.Representative
+	(*Image)(nil),                                    // 60: googlekon.Image
+	(*ContentInfo)(nil),                              // 61: googlekon.ContentInfo
+	(*RichCard)(nil),                                 // 62: googlekon.RichCard
+	(*StandaloneCard)(nil),                           // 63: googlekon.StandaloneCard
+	(*CardContent)(nil),                              // 64: googlekon.CardContent
+	(*Media)(nil),                                    // 65: googlekon.Media
+	(*Suggestion)(nil),                               // 66: googlekon.Suggestion
+	(*SuggestedReply)(nil),                           // 67: googlekon.SuggestedReply
+	(*SuggestedAction)(nil),                          // 68: googlekon.SuggestedAction
+	(*OpenUrlAction)(nil),                            // 69: googlekon.OpenUrlAction
+	(*DialAction)(nil),                               // 70: googlekon.DialAction
+	(*LiveAgentRequest)(nil),                         // 71: googlekon.LiveAgentRequest
+	(*AuthenticationRequest)(nil),                    // 72: googlekon.AuthenticationRequest
+	(*Oauth)(nil),                                    // 73: googlekon.Oauth
+	(*CarouselCard)(nil),                             // 74: googlekon.CarouselCard
+	(*Context)(nil),                                  // 75: googlekon.Context
+	(*UserInfo)(nil),                                 // 76: googlekon.UserInfo
+	(*Verify)(nil),                                   // 77: googlekon.Verify
+	(*UserMessage)(nil),                              // 78: googlekon.UserMessage
+	(*Receipts)(nil),                                 // 79: googlekon.Receipts
+	(*Receipt)(nil),                                  // 80: googlekon.Receipt
+	(*UserStatus)(nil),                               // 81: googlekon.UserStatus
+	(*Event)(nil),                                    // 82: googlekon.Event
+	nil,                                              // 83: googlekon.Question.AnswerIdsMEntry
+	nil,                                              // 84: googlekon.BusinessMessagesAgent.ConversationalSettingsEntry
+	nil,                                              // 85: googlekon.BusinessMessagesLaunch.LaunchDetailsEntry
 }
 var file_googlekon_proto_depIdxs = []int32{
-	12, // 0: googlekon.BusinessProfileAccounts.accounts:type_name -> googlekon.BusinessProfileAccount
-	15, // 1: googlekon.BusinessLocations.locations:type_name -> googlekon.BusinessLocation
-	18, // 2: googlekon.BusinessLocation.metadata:type_name -> googlekon.Metadata
-	19, // 3: googlekon.BusinessLocation.profile:type_name -> googlekon.Profile
-	16, // 4: googlekon.BusinessLocation.phoneNumbers:type_name -> googlekon.PhoneNumbers
-	17, // 5: googlekon.BusinessLocation.storefrontAddress:type_name -> googlekon.PostalAddress
-	22, // 6: googlekon.Review.reviewer:type_name -> googlekon.Reviewer
-	23, // 7: googlekon.Review.reviewReply:type_name -> googlekon.ReviewReply
-	20, // 8: googlekon.Reviews.reviews:type_name -> googlekon.Review
-	20, // 9: googlekon.ListReviews.reviews:type_name -> googlekon.Review
-	28, // 10: googlekon.Question.author:type_name -> googlekon.Author
-	78, // 11: googlekon.Question.answer_idsM:type_name -> googlekon.Question.AnswerIdsMEntry
-	28, // 12: googlekon.Answer.author:type_name -> googlekon.Author
-	27, // 13: googlekon.ListQuestions.questions:type_name -> googlekon.Question
-	29, // 14: googlekon.ListAnswers.answers:type_name -> googlekon.Answer
-	36, // 15: googlekon.Agent.businessMessagesAgent:type_name -> googlekon.BusinessMessagesAgent
-	37, // 16: googlekon.BusinessMessagesAgent.entryPointConfigs:type_name -> googlekon.BusinessMessagesEntryPointConfig
-	79, // 17: googlekon.BusinessMessagesAgent.conversationalSettings:type_name -> googlekon.BusinessMessagesAgent.ConversationalSettingsEntry
-	40, // 18: googlekon.BusinessMessagesAgent.primaryAgentInteraction:type_name -> googlekon.SupportedAgentInteraction
-	40, // 19: googlekon.BusinessMessagesAgent.additionalAgentInteractions:type_name -> googlekon.SupportedAgentInteraction
-	39, // 20: googlekon.ConversationalSetting.welcomeMessage:type_name -> googlekon.WelcomeMessage
-	42, // 21: googlekon.SupportedAgentInteraction.botRepresentative:type_name -> googlekon.BotRepresentative
-	41, // 22: googlekon.SupportedAgentInteraction.humanRepresentative:type_name -> googlekon.HumanRepresentative
-	43, // 23: googlekon.HumanRepresentative.humanMessagingAvailability:type_name -> googlekon.MessagingAvailability
-	43, // 24: googlekon.BotRepresentative.botMessagingAvailability:type_name -> googlekon.MessagingAvailability
-	44, // 25: googlekon.MessagingAvailability.hours:type_name -> googlekon.Hours
-	45, // 26: googlekon.Hours.startTime:type_name -> googlekon.TimeOfDay
-	45, // 27: googlekon.Hours.endTime:type_name -> googlekon.TimeOfDay
-	34, // 28: googlekon.ListBrands.brands:type_name -> googlekon.Brand
-	35, // 29: googlekon.ListAgents.agents:type_name -> googlekon.Agent
-	50, // 30: googlekon.AgentVerification.agentVerificationContact:type_name -> googlekon.AgentVerificationContact
-	53, // 31: googlekon.AgentLaunch.businessMessages:type_name -> googlekon.BusinessMessagesLaunch
-	80, // 32: googlekon.BusinessMessagesLaunch.launchDetails:type_name -> googlekon.BusinessMessagesLaunch.LaunchDetailsEntry
-	64, // 33: googlekon.Message.suggestions:type_name -> googlekon.Suggestion
-	58, // 34: googlekon.Message.image:type_name -> googlekon.Image
-	60, // 35: googlekon.Message.richCard:type_name -> googlekon.RichCard
-	57, // 36: googlekon.Message.representative:type_name -> googlekon.Representative
-	59, // 37: googlekon.Image.contentInfo:type_name -> googlekon.ContentInfo
-	61, // 38: googlekon.RichCard.standaloneCard:type_name -> googlekon.StandaloneCard
-	72, // 39: googlekon.RichCard.carouselCard:type_name -> googlekon.CarouselCard
-	62, // 40: googlekon.StandaloneCard.cardContent:type_name -> googlekon.CardContent
-	63, // 41: googlekon.CardContent.media:type_name -> googlekon.Media
-	64, // 42: googlekon.CardContent.suggestions:type_name -> googlekon.Suggestion
-	59, // 43: googlekon.Media.contentInfo:type_name -> googlekon.ContentInfo
-	65, // 44: googlekon.Suggestion.reply:type_name -> googlekon.SuggestedReply
-	66, // 45: googlekon.Suggestion.action:type_name -> googlekon.SuggestedAction
-	69, // 46: googlekon.Suggestion.liveAgentRequest:type_name -> googlekon.LiveAgentRequest
-	70, // 47: googlekon.Suggestion.authenticationRequest:type_name -> googlekon.AuthenticationRequest
-	67, // 48: googlekon.SuggestedAction.openUrlAction:type_name -> googlekon.OpenUrlAction
-	68, // 49: googlekon.SuggestedAction.dialAction:type_name -> googlekon.DialAction
-	71, // 50: googlekon.AuthenticationRequest.oauth:type_name -> googlekon.Oauth
-	62, // 51: googlekon.CarouselCard.cardContents:type_name -> googlekon.CardContent
-	74, // 52: googlekon.Context.userInfo:type_name -> googlekon.UserInfo
-	73, // 53: googlekon.UserMessage.context:type_name -> googlekon.Context
-	56, // 54: googlekon.UserMessage.message:type_name -> googlekon.Message
-	77, // 55: googlekon.UserMessage.userStatus:type_name -> googlekon.UserStatus
-	38, // 56: googlekon.BusinessMessagesAgent.ConversationalSettingsEntry.value:type_name -> googlekon.ConversationalSetting
-	54, // 57: googlekon.BusinessMessagesLaunch.LaunchDetailsEntry.value:type_name -> googlekon.BusinessMessagesEntryPointLaunch
-	58, // [58:58] is the sub-list for method output_type
-	58, // [58:58] is the sub-list for method input_type
-	58, // [58:58] is the sub-list for extension type_name
-	58, // [58:58] is the sub-list for extension extendee
-	0,  // [0:58] is the sub-list for field type_name
+	14, // 0: googlekon.BusinessProfileAccounts.accounts:type_name -> googlekon.BusinessProfileAccount
+	17, // 1: googlekon.BusinessLocations.locations:type_name -> googlekon.BusinessLocation
+	20, // 2: googlekon.BusinessLocation.metadata:type_name -> googlekon.Metadata
+	21, // 3: googlekon.BusinessLocation.profile:type_name -> googlekon.Profile
+	18, // 4: googlekon.BusinessLocation.phoneNumbers:type_name -> googlekon.PhoneNumbers
+	19, // 5: googlekon.BusinessLocation.storefrontAddress:type_name -> googlekon.PostalAddress
+	24, // 6: googlekon.Review.reviewer:type_name -> googlekon.Reviewer
+	25, // 7: googlekon.Review.reviewReply:type_name -> googlekon.ReviewReply
+	22, // 8: googlekon.Reviews.reviews:type_name -> googlekon.Review
+	22, // 9: googlekon.ListReviews.reviews:type_name -> googlekon.Review
+	30, // 10: googlekon.Question.author:type_name -> googlekon.Author
+	83, // 11: googlekon.Question.answer_idsM:type_name -> googlekon.Question.AnswerIdsMEntry
+	30, // 12: googlekon.Answer.author:type_name -> googlekon.Author
+	29, // 13: googlekon.ListQuestions.questions:type_name -> googlekon.Question
+	31, // 14: googlekon.ListAnswers.answers:type_name -> googlekon.Answer
+	38, // 15: googlekon.Agent.businessMessagesAgent:type_name -> googlekon.BusinessMessagesAgent
+	39, // 16: googlekon.BusinessMessagesAgent.entryPointConfigs:type_name -> googlekon.BusinessMessagesEntryPointConfig
+	84, // 17: googlekon.BusinessMessagesAgent.conversationalSettings:type_name -> googlekon.BusinessMessagesAgent.ConversationalSettingsEntry
+	42, // 18: googlekon.BusinessMessagesAgent.primaryAgentInteraction:type_name -> googlekon.SupportedAgentInteraction
+	42, // 19: googlekon.BusinessMessagesAgent.additionalAgentInteractions:type_name -> googlekon.SupportedAgentInteraction
+	41, // 20: googlekon.ConversationalSetting.welcomeMessage:type_name -> googlekon.WelcomeMessage
+	44, // 21: googlekon.SupportedAgentInteraction.botRepresentative:type_name -> googlekon.BotRepresentative
+	43, // 22: googlekon.SupportedAgentInteraction.humanRepresentative:type_name -> googlekon.HumanRepresentative
+	45, // 23: googlekon.HumanRepresentative.humanMessagingAvailability:type_name -> googlekon.MessagingAvailability
+	45, // 24: googlekon.BotRepresentative.botMessagingAvailability:type_name -> googlekon.MessagingAvailability
+	46, // 25: googlekon.MessagingAvailability.hours:type_name -> googlekon.Hours
+	47, // 26: googlekon.Hours.startTime:type_name -> googlekon.TimeOfDay
+	47, // 27: googlekon.Hours.endTime:type_name -> googlekon.TimeOfDay
+	36, // 28: googlekon.ListBrands.brands:type_name -> googlekon.Brand
+	37, // 29: googlekon.ListAgents.agents:type_name -> googlekon.Agent
+	52, // 30: googlekon.AgentVerification.agentVerificationContact:type_name -> googlekon.AgentVerificationContact
+	55, // 31: googlekon.AgentLaunch.businessMessages:type_name -> googlekon.BusinessMessagesLaunch
+	85, // 32: googlekon.BusinessMessagesLaunch.launchDetails:type_name -> googlekon.BusinessMessagesLaunch.LaunchDetailsEntry
+	66, // 33: googlekon.Message.suggestions:type_name -> googlekon.Suggestion
+	60, // 34: googlekon.Message.image:type_name -> googlekon.Image
+	62, // 35: googlekon.Message.richCard:type_name -> googlekon.RichCard
+	59, // 36: googlekon.Message.representative:type_name -> googlekon.Representative
+	61, // 37: googlekon.Image.contentInfo:type_name -> googlekon.ContentInfo
+	63, // 38: googlekon.RichCard.standaloneCard:type_name -> googlekon.StandaloneCard
+	74, // 39: googlekon.RichCard.carouselCard:type_name -> googlekon.CarouselCard
+	64, // 40: googlekon.StandaloneCard.cardContent:type_name -> googlekon.CardContent
+	65, // 41: googlekon.CardContent.media:type_name -> googlekon.Media
+	66, // 42: googlekon.CardContent.suggestions:type_name -> googlekon.Suggestion
+	61, // 43: googlekon.Media.contentInfo:type_name -> googlekon.ContentInfo
+	67, // 44: googlekon.Suggestion.reply:type_name -> googlekon.SuggestedReply
+	68, // 45: googlekon.Suggestion.action:type_name -> googlekon.SuggestedAction
+	71, // 46: googlekon.Suggestion.liveAgentRequest:type_name -> googlekon.LiveAgentRequest
+	72, // 47: googlekon.Suggestion.authenticationRequest:type_name -> googlekon.AuthenticationRequest
+	69, // 48: googlekon.SuggestedAction.openUrlAction:type_name -> googlekon.OpenUrlAction
+	70, // 49: googlekon.SuggestedAction.dialAction:type_name -> googlekon.DialAction
+	73, // 50: googlekon.AuthenticationRequest.oauth:type_name -> googlekon.Oauth
+	64, // 51: googlekon.CarouselCard.cardContents:type_name -> googlekon.CardContent
+	76, // 52: googlekon.Context.userInfo:type_name -> googlekon.UserInfo
+	75, // 53: googlekon.UserMessage.context:type_name -> googlekon.Context
+	58, // 54: googlekon.UserMessage.message:type_name -> googlekon.Message
+	79, // 55: googlekon.UserMessage.receipts:type_name -> googlekon.Receipts
+	81, // 56: googlekon.UserMessage.userStatus:type_name -> googlekon.UserStatus
+	80, // 57: googlekon.Receipts.receipts:type_name -> googlekon.Receipt
+	59, // 58: googlekon.Event.representative:type_name -> googlekon.Representative
+	40, // 59: googlekon.BusinessMessagesAgent.ConversationalSettingsEntry.value:type_name -> googlekon.ConversationalSetting
+	56, // 60: googlekon.BusinessMessagesLaunch.LaunchDetailsEntry.value:type_name -> googlekon.BusinessMessagesEntryPointLaunch
+	61, // [61:61] is the sub-list for method output_type
+	61, // [61:61] is the sub-list for method input_type
+	61, // [61:61] is the sub-list for extension type_name
+	61, // [61:61] is the sub-list for extension extendee
+	0,  // [0:61] is the sub-list for field type_name
 }
 
 func init() { file_googlekon_proto_init() }
@@ -7075,7 +7402,43 @@ func file_googlekon_proto_init() {
 			}
 		}
 		file_googlekon_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Receipts); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_googlekon_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Receipt); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_googlekon_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserStatus); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_googlekon_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Event); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7092,8 +7455,8 @@ func file_googlekon_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_googlekon_proto_rawDesc,
-			NumEnums:      11,
-			NumMessages:   70,
+			NumEnums:      13,
+			NumMessages:   73,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
