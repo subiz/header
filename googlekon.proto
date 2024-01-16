@@ -220,6 +220,7 @@ message Agent {
 	string brand_id = 5;
 	string account_id = 6;
 	string email = 7;
+	string state = 8;
 }
 
 message BusinessMessagesAgent {
@@ -307,6 +308,7 @@ message BrandLocation {
 	string business_location_id = 11; 
 	string brand_id = 12;
 	string agent_id = 13;
+	string state = 14;
 }
 
 enum VerificationState {
@@ -375,6 +377,7 @@ message BusinessMessagesEntryPointLaunch {
 
 message BrandLocationLaunch {
 	string name = 1;
+	string launchState = 2;
 	string brand_id = 3;
 	string brand_location_id = 4;
 }
