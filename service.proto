@@ -216,6 +216,8 @@ service UserMgr {
 
 	rpc SearchUsers(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc ReportUser(header.UserReportRequest) returns (header.UserReportResponse);
+
+	rpc PreloadEvent(header.Ids) returns (Empty);
 }
 
 service LiveMgr {
@@ -258,7 +260,7 @@ service ConversationMgr {
 	rpc JoinConversation(header.ConversationMember) returns (Empty);
 	rpc LeftConversation(header.ConversationMember) returns (Empty);
 
-	rpc Typing(Id) returns (Empty); // deprecated
+	// rpc Typing(Id) returns (Empty); // deprecated
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);
