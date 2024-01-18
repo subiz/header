@@ -51,8 +51,6 @@ message Agent {
 
 	optional string fullname = 4;
 	optional string email = 5;
-	// repeated string emails = 6;
-	// repeated string phones = 7;
 	optional string phone = 8;
 	optional bool is_owner = 10;
 	optional string job_title = 11;
@@ -91,13 +89,12 @@ message Agent {
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
 
-	optional bool is_supervisor = 35;
+	optional bool is_supervisor = 35; // deprecated, add supervisor to scope
 
-	// optional int64 last_token_requested = 37;
 	optional Presence last_seen = 38;
 
 	optional DashboardAgent dashboard_setting = 40;
-	repeated string scopes = 41;
+	repeated string scopes = 41; // supervisor
 
 	optional string internal_name = 42;
 	optional int64 extension = 43; // 2343 3442

@@ -478,20 +478,18 @@ type Agent struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	Id        *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
-	AccountId *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"` // subiz only
-	Fullname  *string         `protobuf:"bytes,4,opt,name=fullname" json:"fullname,omitempty"`
-	Email     *string         `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`
-	// repeated string emails = 6;
-	// repeated string phones = 7;
-	Phone         *string `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"`
-	IsOwner       *bool   `protobuf:"varint,10,opt,name=is_owner,json=isOwner" json:"is_owner,omitempty"`
-	JobTitle      *string `protobuf:"bytes,11,opt,name=job_title,json=jobTitle" json:"job_title,omitempty"`
-	Gender        *string `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`
-	AvatarUrl     *string `protobuf:"bytes,13,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
-	AvatarUrl_128 *string `protobuf:"bytes,18,opt,name=avatar_url_128,json=avatarUrl128" json:"avatar_url_128,omitempty"`
-	Lang          *string `protobuf:"bytes,14,opt,name=lang" json:"lang,omitempty"`
+	Ctx           *common.Context `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
+	Id            *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
+	AccountId     *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"` // subiz only
+	Fullname      *string         `protobuf:"bytes,4,opt,name=fullname" json:"fullname,omitempty"`
+	Email         *string         `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`
+	Phone         *string         `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"`
+	IsOwner       *bool           `protobuf:"varint,10,opt,name=is_owner,json=isOwner" json:"is_owner,omitempty"`
+	JobTitle      *string         `protobuf:"bytes,11,opt,name=job_title,json=jobTitle" json:"job_title,omitempty"`
+	Gender        *string         `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`
+	AvatarUrl     *string         `protobuf:"bytes,13,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
+	AvatarUrl_128 *string         `protobuf:"bytes,18,opt,name=avatar_url_128,json=avatarUrl128" json:"avatar_url_128,omitempty"`
+	Lang          *string         `protobuf:"bytes,14,opt,name=lang" json:"lang,omitempty"`
 	// optional string location = 15;
 	Timezone          *string `protobuf:"bytes,16,opt,name=timezone" json:"timezone,omitempty"`
 	EncryptedPassword *string `protobuf:"bytes,17,opt,name=encrypted_password,json=encryptedPassword" json:"encrypted_password,omitempty"`
@@ -500,15 +498,14 @@ type Agent struct {
 	State             *string `protobuf:"bytes,22,opt,name=state" json:"state,omitempty"`
 	PasswordChanged   *int64  `protobuf:"varint,23,opt,name=password_changed,json=passwordChanged" json:"password_changed,omitempty"`
 	// optional int64 seen = 24;
-	Modified     *int64   `protobuf:"varint,25,opt,name=modified" json:"modified,omitempty"`
-	Account      *Account `protobuf:"bytes,28,opt,name=account" json:"account,omitempty"`                   // optional string country_code = 29;
-	Type         *string  `protobuf:"bytes,33,opt,name=type" json:"type,omitempty"`                         // bot or agent (default is agent)
-	ClientId     *string  `protobuf:"bytes,34,opt,name=client_id,json=clientId" json:"client_id,omitempty"` // ID of bot
-	IsSupervisor *bool    `protobuf:"varint,35,opt,name=is_supervisor,json=isSupervisor" json:"is_supervisor,omitempty"`
-	// optional int64 last_token_requested = 37;
+	Modified         *int64          `protobuf:"varint,25,opt,name=modified" json:"modified,omitempty"`
+	Account          *Account        `protobuf:"bytes,28,opt,name=account" json:"account,omitempty"`                                // optional string country_code = 29;
+	Type             *string         `protobuf:"bytes,33,opt,name=type" json:"type,omitempty"`                                      // bot or agent (default is agent)
+	ClientId         *string         `protobuf:"bytes,34,opt,name=client_id,json=clientId" json:"client_id,omitempty"`              // ID of bot
+	IsSupervisor     *bool           `protobuf:"varint,35,opt,name=is_supervisor,json=isSupervisor" json:"is_supervisor,omitempty"` // deprecated, add supervisor to scope
 	LastSeen         *Presence       `protobuf:"bytes,38,opt,name=last_seen,json=lastSeen" json:"last_seen,omitempty"`
 	DashboardSetting *DashboardAgent `protobuf:"bytes,40,opt,name=dashboard_setting,json=dashboardSetting" json:"dashboard_setting,omitempty"`
-	Scopes           []string        `protobuf:"bytes,41,rep,name=scopes" json:"scopes,omitempty"`
+	Scopes           []string        `protobuf:"bytes,41,rep,name=scopes" json:"scopes,omitempty"` // supervisor
 	InternalName     *string         `protobuf:"bytes,42,opt,name=internal_name,json=internalName" json:"internal_name,omitempty"`
 	Extension        *int64          `protobuf:"varint,43,opt,name=extension" json:"extension,omitempty"` // 2343 3442
 }

@@ -609,7 +609,6 @@ message UserReportResponse {
 	repeated UserReportEntry leads = 6;
 }
 
-
 message ConversationMetric {
 	string account_id = 2;
 	int64 created_hour = 3;
@@ -3923,7 +3922,6 @@ message UserCountBody {
 	repeated string ignore_uids = 7;
 }
 
-
 message UserViewCondition {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6655,9 +6653,9 @@ enum E {
 	user_is_not_in_the_conversation = 120;
 	invalid_integration = 121;
 	invalid_message_type = 122;
-	missing_pong = 123;
-	invalid_pong_type = 124;
-	invalid_event_type = 125;
+	// missing_pong = 123;
+	// invalid_pong_type = 124;
+	// invalid_event_type = 125;
 	remover_is_not_agent = 127;
 	user_is_the_last_one_in_conversation = 128;
 	// conversation_ended = 129;

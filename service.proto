@@ -137,6 +137,8 @@ service AccountMgr {
 
 	rpc LockLogin(header.Id) returns (header.Id); // accid
 	rpc UnlockLogin(header.Id) returns (header.Id);
+
+	rpc ListBills(header.Id) returns (payment.Bills);
 }
 
 // user services

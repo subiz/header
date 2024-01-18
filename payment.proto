@@ -139,6 +139,12 @@ message Bill {
 	optional string currency = 17;
 }
 
+message Bills {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	repeated Bill bills = 3;
+}
+
 message Note {
 	optional common.Context ctx = 1;
 	optional string message = 4;
