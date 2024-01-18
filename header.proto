@@ -415,6 +415,8 @@ message AttributeDefinition {
 	int64 usage = 27; // number of user has this attribute
 
 	bool prevent_auto_override = 30;
+
+	int64 code = 31; // crc32 hash of key
 }
 
 message AttributeDefinitions {

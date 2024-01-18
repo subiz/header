@@ -98,7 +98,8 @@ message Subscription {
 	optional string account_id = 3;
 	optional int64 created = 11;
 	optional string promotion_code = 4;
-	optional string name = 7;
+	// optional string name = 7;
+
 	optional int64 started = 5;
 	optional bool auto_renew = 9;
 
@@ -112,12 +113,12 @@ message Subscription {
 	optional Customer customer = 31;
 	optional string primary_payment_method = 32;
 	optional Limit limit = 42;
-	optional int32 v3_state = 43;
+	// optional int32 v3_state = 43;
 
 	optional bool auto_charge = 44;
 	optional int64 ended = 45;
 
-	optional bool trusted = 46;
+	// optional bool trusted = 46; // allow to spend more credit
 	optional int64 churned = 47;
 }
 

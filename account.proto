@@ -88,13 +88,10 @@ message Agent {
 	optional Account account = 28;
 	// optional string country_code = 29;
 
-	optional int64 last_login = 32;
-
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
 
 	optional bool is_supervisor = 35;
-	// optional int64 last_ping = 36;
 
 	// optional int64 last_token_requested = 37;
 	optional Presence last_seen = 38;
@@ -104,11 +101,6 @@ message Agent {
 
 	optional string internal_name = 42;
 	optional int64 extension = 43; // 2343 3442
-}
-
-message ResetPasswordRequest {
-	optional common.Context ctx = 1;
-	optional string email = 2;
 }
 
 message Account {
@@ -123,7 +115,6 @@ message Account {
 	optional int64 created = 8;
 	optional int64 confirmed = 9;
 	optional int64 modified = 10;
-	optional string slogan = 12;
 
 	//optional string referrer_id = 11;
 	enum State {
@@ -231,7 +222,7 @@ message CreateAccountRequest {
 
 message Agents {
 	optional common.Context ctx = 1;
-	repeated Agent Agents = 2;
+	repeated Agent agents = 2;
 }
 
 message NewPassword {
