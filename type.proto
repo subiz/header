@@ -246,6 +246,8 @@ enum RealtimeType {
 
 	channel_integrated = 242;
 	channel_removed = 243;
+
+	credit_updated = 244;
 }
 
 message TextTransform {

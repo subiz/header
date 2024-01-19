@@ -34,6 +34,9 @@ service NumberRegistry {
 	rpc Compact(String) returns (Number);
 	rpc Uncompact(Number) returns (String);
 	rpc CompactM(StrNumM) returns (StrNumM);
+
+	rpc Shorten(String) returns (Number);
+	rpc Lookup(Number) returns (String);
 }
 
 service Map {

@@ -881,6 +881,7 @@ message Data {
 	WorkflowPump workflow_pump = 107;
 	OutboundCallUpdateEvent outbound_call_update = 108;
 	BannedUser banned_user = 109;
+	Credit credit = 110;
 }
 
 message WebRTCMessage {
@@ -6926,7 +6927,8 @@ message Credit {
 	string id = 3;
 
 	string name = 4;
-	int64 fpv_balance = 5; // fpv
+	int64 fpv_balance = 5; // fpv - read-only
+	int64 fpv_capacity = 6; // fpv - readonly
 
 	int64 fpv_credit_limit = 7; // 0 - 40 only set by subiz
 	int64 fpv_tax = 8; // 1000 -> 10%
@@ -6941,8 +6943,9 @@ message Credit {
 	string billing_address = 14;
 	string billing_email = 15;
 	string tax_code = 16;
-
 	string currency = 18; // default USD, VND
+
+	int64 negative_at = 19;
 }
 
 message CreditSnapshoot {

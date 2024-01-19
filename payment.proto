@@ -113,13 +113,11 @@ message Subscription {
 	optional Customer customer = 31;
 	optional string primary_payment_method = 32;
 	optional Limit limit = 42;
-	// optional int32 v3_state = 43;
-
 	optional bool auto_charge = 44;
 	optional int64 ended = 45;
-
-	// optional bool trusted = 46; // allow to spend more credit
 	optional int64 churned = 47;
+
+	optional int64 fpv_credit_vnd = 48;
 }
 
 message Bill {
@@ -137,6 +135,9 @@ message Bill {
 	optional string credit_id = 15;
 	optional string status = 16;
 	optional string currency = 17;
+
+	optional string original_bank_transfer_note = 18;
+	optional string bank_transfer_note = 19;
 }
 
 message Bills {
