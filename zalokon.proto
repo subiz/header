@@ -243,6 +243,7 @@ message ZnsTemplate {
 	int64 createdTime = 14;
 
 	string oaId = 15;
+	string preview_text = 16;
 }
 
 message ZnsTemplates {

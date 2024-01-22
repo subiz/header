@@ -882,6 +882,7 @@ message Data {
 	OutboundCallUpdateEvent outbound_call_update = 108;
 	BannedUser banned_user = 109;
 	Credit credit = 110;
+	payment.Bill subiz_bill = 111;
 }
 
 message WebRTCMessage {
@@ -4907,6 +4908,12 @@ message Bill {
 
 	string picture_url = 22;
 	string currency = 23;
+
+	string original_bank_transfer_note = 18;
+	string bank_transfer_note = 19;
+	string order_ids = 20; // invocie_ids
+
+	string wallet_id = 24; // credit_id
 }
 
 message CancellationCodes {

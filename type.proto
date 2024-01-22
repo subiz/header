@@ -248,6 +248,7 @@ enum RealtimeType {
 	channel_removed = 243;
 
 	credit_updated = 244;
+	bill_updated = 245;
 }
 
 message TextTransform {
