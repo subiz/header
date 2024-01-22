@@ -207,6 +207,9 @@ message Invoice {
 
 	optional string credit_id = 27;
 	optional string currency = 28; // VND
+
+	optional int64 fpv_total_vnd = 29; // read only
+	optional int64 fpv_payment_made_vnd = 30; // read only
 }
 
 message AgentInvoiceItem {
@@ -285,14 +288,6 @@ message Customer {
 	optional BillingInfo billing_info = 6;
 }
 
-message FixedAmountPromotionCode {
-	optional float amount = 2;
-}
-
-message PercentPromotionCode {
-	optional float percent = 2;
-}
-
 message CreditCode {
 	optional float credit = 2;
 }
@@ -300,54 +295,6 @@ message CreditCode {
 message ReferralCreditCode {
 	optional string referrer_id = 2;
 	optional float credit = 3;
-}
-
-message PromotionCode {
-	optional common.Context ctx = 1;
-	optional string description = 3;
-
-	enum Type {
-		fixed_amount_promotion_code = 0; // TODO : Delete
-		percent_promotion_code = 1;
-		credit_code = 2;
-		referral_credit_code = 3;
-	}
-	optional string type = 6;
-
-	optional int32 redeem_count = 5;
-	optional string creator = 9;
-	optional int64 created = 10;
-	optional string code = 11;
-
-	message Data {
-		optional FixedAmountPromotionCode fixed_amount = 1; // TODO: Delete
-		optional PercentPromotionCode percent = 2;
-		optional CreditCode credit = 3;
-		optional ReferralCreditCode referral = 4;
-	}
-	optional Data data = 14;
-
-	optional int64 start = 16;
-	optional int64 end = 17;
-	optional string for_plan = 18;
-	optional string for_account_id = 19;
-	optional int32 max_redemptions = 20;
-	optional string addon = 21;
-	repeated string for_items = 23;
-	optional float min_amount = 24; //TODO: Delete
-	optional float max_amount = 25; //TODO: Delete
-	repeated string for_plans = 26;
-	repeated string for_account_ids = 27;
-	repeated string for_channels = 29;
-	optional bool is_deleted = 30;
-	//repeated int32 for_number_of_agents = 31;
-	repeated uint32 for_number_of_agents = 32;
-	optional string id = 33;
-}
-
-message PromotionCodeByCode{
-	optional string code = 1;
-	optional string id = 2;
 }
 
 message LogPromotionCodeUsed {
@@ -517,25 +464,6 @@ message SearchReferredRequest {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string agent_id = 3;
-}
-
-message PromotionCodes {
-	optional common.Context ctx = 1;
-	repeated PromotionCode promotion_codes = 2;
-	optional string anchor = 3;
-	optional int64 total = 4;
-}
-
-message PromotionCodeRequest {
-	optional common.Context ctx = 1;
-	optional string code = 2;
-	optional string account_id = 3;
-}
-
-message ListPromotionCodeRequest {
-	optional common.Context ctx = 1;
-	optional string anchor = 2;
-	optional int32 limit = 4;
 }
 
 message String {
