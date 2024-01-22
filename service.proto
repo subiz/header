@@ -9,9 +9,13 @@ import "account.proto";
 import "header.proto";
 import "common.proto";
 import "zalokon.proto";
+import "googlekon.proto";
 
 service GooglekonService {
 	rpc SendEventToGoogle(header.Events) returns (header.Empty);
+
+	rpc ReadGoogleLocationSetting(Id) returns (googlekon.GoogleLocationSetting);
+	rpc UpdateGoogleLocationSetting(googlekon.GoogleLocationSetting) returns (googlekon.GoogleLocationSetting);
 }
 
 service RateLimit {
