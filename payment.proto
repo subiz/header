@@ -548,6 +548,23 @@ message PayRequest {
 	optional string description = 7;
 	optional Contact CustomerInfo = 9;
 	optional float amount = 10;
+	optional int64 fpv_amount = 11;
+	optional string request_id = 12;
+	optional int64 created = 13;
+	optional string currency = 14; // VND or USD
+	optional string bank_account_id = 15;
+}
+
+message AutoPayRequest {
+	optional common.Context ctx = 1;
+	optional string account_id = 2;
+	optional string credit_id = 3;
+
+	optional string description = 7;
+	optional string bank_account_id = 8;
+	optional int64 created = 9;
+	optional int64 fpv_amount = 10; // 3_000_000_000_000 (3 tr)
+	optional string currency = 17; // VND or USD
 }
 
 message InvoiceCreatedEmail {
