@@ -141,6 +141,9 @@ message Bill {
 	optional int64 fpv_amount_vnd = 20;
 
 	optional string request_id = 21; // random id from client
+
+	optional string bank_account_id = 22;
+	optional string by_agent_id = 23;
 }
 
 message Bills {
@@ -553,12 +556,14 @@ message PayRequest {
 	optional int64 created = 13;
 	optional string currency = 14; // VND or USD
 	optional string bank_account_id = 15;
+	optional string by_agent_id = 16;
+	optional string method = 17; // bank_transfer
 }
 
 message AutoPayRequest {
 	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string credit_id = 3;
+	// optional string account_id = 2;
+	// optional string credit_id = 3;
 
 	optional string description = 7;
 	optional string bank_account_id = 8;

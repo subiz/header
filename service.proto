@@ -387,13 +387,6 @@ service PaymentMgr {
 	rpc TransferMoney(payment.PayRequest) returns (payment.Bill);
 	rpc ListLogs(payment.ListLogsRequest) returns (payment.Logs);
 
-	rpc CreatePromotionCode(payment.PromotionCode) returns (payment.PromotionCode);
-	rpc GetPromotionCode(payment.String) returns (payment.PromotionCode);
-	rpc UsePromotionCode(payment.PromotionCodeRequest) returns (Empty);
-	rpc ValidatePromotionCode(payment.PromotionCodeRequest) returns (payment.PromotionCode);
-	rpc ListPromotionCode(payment.ListPromotionCodeRequest) returns (payment.PromotionCodes);
-	rpc DeletePromotionCode(Id) returns (Empty);
-
 	rpc SearchReferral(payment.SearchReferredRequest) returns (payment.Referral);
 	rpc GetReferral(Id) returns (payment.Referral);
 	rpc ListTopReferral(Empty) returns (payment.ReferralResponse);
