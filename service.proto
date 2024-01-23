@@ -16,6 +16,7 @@ service GooglekonService {
 
 	rpc ReadGoogleLocationSetting(Id) returns (googlekon.GoogleLocationSetting);
 	rpc UpdateGoogleLocationSetting(googlekon.GoogleLocationSetting) returns (googlekon.GoogleLocationSetting);
+	rpc ListGoogleLocationSettings(Id) returns (googlekon.GoogleLocationSettings);
 }
 
 service RateLimit {

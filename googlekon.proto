@@ -593,6 +593,10 @@ message Event {
 }
 
 message GoogleLocationSetting {
+	repeated GoogleLocationSetting settings = 2;
+}
+
+message GoogleLocationSettings {
 	string account_id = 2;
 	string business_location_id = 3;
 
