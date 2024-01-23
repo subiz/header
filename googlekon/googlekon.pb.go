@@ -5623,7 +5623,7 @@ func (x *Event) GetRepresentative() *Representative {
 	return nil
 }
 
-type GoogleLocationSetting struct {
+type GoogleLocationSettings struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -5631,62 +5631,10 @@ type GoogleLocationSetting struct {
 	Settings []*GoogleLocationSetting `protobuf:"bytes,2,rep,name=settings,proto3" json:"settings,omitempty"`
 }
 
-func (x *GoogleLocationSetting) Reset() {
-	*x = GoogleLocationSetting{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_googlekon_proto_msgTypes[70]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GoogleLocationSetting) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GoogleLocationSetting) ProtoMessage() {}
-
-func (x *GoogleLocationSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_googlekon_proto_msgTypes[70]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GoogleLocationSetting.ProtoReflect.Descriptor instead.
-func (*GoogleLocationSetting) Descriptor() ([]byte, []int) {
-	return file_googlekon_proto_rawDescGZIP(), []int{70}
-}
-
-func (x *GoogleLocationSetting) GetSettings() []*GoogleLocationSetting {
-	if x != nil {
-		return x.Settings
-	}
-	return nil
-}
-
-type GoogleLocationSettings struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	AccountId             string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	BusinessLocationId    string                 `protobuf:"bytes,3,opt,name=business_location_id,json=businessLocationId,proto3" json:"business_location_id,omitempty"`
-	GoogleReviewSetting   *GoogleReviewSetting   `protobuf:"bytes,5,opt,name=google_review_setting,json=googleReviewSetting,proto3" json:"google_review_setting,omitempty"`
-	GoogleQuestionSetting *GoogleQuestionSetting `protobuf:"bytes,6,opt,name=google_question_setting,json=googleQuestionSetting,proto3" json:"google_question_setting,omitempty"`
-	GoogleMessageSetting  *GoogleMessageSetting  `protobuf:"bytes,7,opt,name=google_message_setting,json=googleMessageSetting,proto3" json:"google_message_setting,omitempty"`
-	Updated               int64                  `protobuf:"varint,9,opt,name=updated,proto3" json:"updated,omitempty"`
-}
-
 func (x *GoogleLocationSettings) Reset() {
 	*x = GoogleLocationSettings{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_googlekon_proto_msgTypes[71]
+		mi := &file_googlekon_proto_msgTypes[70]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5699,7 +5647,7 @@ func (x *GoogleLocationSettings) String() string {
 func (*GoogleLocationSettings) ProtoMessage() {}
 
 func (x *GoogleLocationSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_googlekon_proto_msgTypes[71]
+	mi := &file_googlekon_proto_msgTypes[70]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5712,45 +5660,97 @@ func (x *GoogleLocationSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GoogleLocationSettings.ProtoReflect.Descriptor instead.
 func (*GoogleLocationSettings) Descriptor() ([]byte, []int) {
+	return file_googlekon_proto_rawDescGZIP(), []int{70}
+}
+
+func (x *GoogleLocationSettings) GetSettings() []*GoogleLocationSetting {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
+type GoogleLocationSetting struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AccountId             string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	BusinessLocationId    string                 `protobuf:"bytes,3,opt,name=business_location_id,json=businessLocationId,proto3" json:"business_location_id,omitempty"`
+	GoogleReviewSetting   *GoogleReviewSetting   `protobuf:"bytes,5,opt,name=google_review_setting,json=googleReviewSetting,proto3" json:"google_review_setting,omitempty"`
+	GoogleQuestionSetting *GoogleQuestionSetting `protobuf:"bytes,6,opt,name=google_question_setting,json=googleQuestionSetting,proto3" json:"google_question_setting,omitempty"`
+	GoogleMessageSetting  *GoogleMessageSetting  `protobuf:"bytes,7,opt,name=google_message_setting,json=googleMessageSetting,proto3" json:"google_message_setting,omitempty"`
+	Updated               int64                  `protobuf:"varint,9,opt,name=updated,proto3" json:"updated,omitempty"`
+}
+
+func (x *GoogleLocationSetting) Reset() {
+	*x = GoogleLocationSetting{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_googlekon_proto_msgTypes[71]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GoogleLocationSetting) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GoogleLocationSetting) ProtoMessage() {}
+
+func (x *GoogleLocationSetting) ProtoReflect() protoreflect.Message {
+	mi := &file_googlekon_proto_msgTypes[71]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GoogleLocationSetting.ProtoReflect.Descriptor instead.
+func (*GoogleLocationSetting) Descriptor() ([]byte, []int) {
 	return file_googlekon_proto_rawDescGZIP(), []int{71}
 }
 
-func (x *GoogleLocationSettings) GetAccountId() string {
+func (x *GoogleLocationSetting) GetAccountId() string {
 	if x != nil {
 		return x.AccountId
 	}
 	return ""
 }
 
-func (x *GoogleLocationSettings) GetBusinessLocationId() string {
+func (x *GoogleLocationSetting) GetBusinessLocationId() string {
 	if x != nil {
 		return x.BusinessLocationId
 	}
 	return ""
 }
 
-func (x *GoogleLocationSettings) GetGoogleReviewSetting() *GoogleReviewSetting {
+func (x *GoogleLocationSetting) GetGoogleReviewSetting() *GoogleReviewSetting {
 	if x != nil {
 		return x.GoogleReviewSetting
 	}
 	return nil
 }
 
-func (x *GoogleLocationSettings) GetGoogleQuestionSetting() *GoogleQuestionSetting {
+func (x *GoogleLocationSetting) GetGoogleQuestionSetting() *GoogleQuestionSetting {
 	if x != nil {
 		return x.GoogleQuestionSetting
 	}
 	return nil
 }
 
-func (x *GoogleLocationSettings) GetGoogleMessageSetting() *GoogleMessageSetting {
+func (x *GoogleLocationSetting) GetGoogleMessageSetting() *GoogleMessageSetting {
 	if x != nil {
 		return x.GoogleMessageSetting
 	}
 	return nil
 }
 
-func (x *GoogleLocationSettings) GetUpdated() int64 {
+func (x *GoogleLocationSetting) GetUpdated() int64 {
 	if x != nil {
 		return x.Updated
 	}
@@ -6722,14 +6722,14 @@ var file_googlekon_proto_rawDesc = []byte{
 	0x44, 0x10, 0x02, 0x12, 0x19, 0x0a, 0x15, 0x52, 0x45, 0x50, 0x52, 0x45, 0x53, 0x45, 0x4e, 0x54,
 	0x41, 0x54, 0x49, 0x56, 0x45, 0x5f, 0x4a, 0x4f, 0x49, 0x4e, 0x45, 0x44, 0x10, 0x03, 0x12, 0x17,
 	0x0a, 0x13, 0x52, 0x45, 0x50, 0x52, 0x45, 0x53, 0x45, 0x4e, 0x54, 0x41, 0x54, 0x49, 0x56, 0x45,
-	0x5f, 0x4c, 0x45, 0x46, 0x54, 0x10, 0x04, 0x22, 0x55, 0x0a, 0x15, 0x47, 0x6f, 0x6f, 0x67, 0x6c,
+	0x5f, 0x4c, 0x45, 0x46, 0x54, 0x10, 0x04, 0x22, 0x56, 0x0a, 0x16, 0x47, 0x6f, 0x6f, 0x67, 0x6c,
 	0x65, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
-	0x12, 0x3c, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x02, 0x20, 0x03,
-	0x28, 0x0b, 0x32, 0x20, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e, 0x47,
-	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x22, 0x88,
-	0x03, 0x0a, 0x16, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63,
+	0x73, 0x12, 0x3c, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x02, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x6b, 0x6f, 0x6e, 0x2e,
+	0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65,
+	0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x22,
+	0x87, 0x03, 0x0a, 0x15, 0x47, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x63, 0x63,
 	0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61,
 	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x30, 0x0a, 0x14, 0x62, 0x75, 0x73, 0x69,
 	0x6e, 0x65, 0x73, 0x73, 0x5f, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64,
@@ -6898,8 +6898,8 @@ var file_googlekon_proto_goTypes = []interface{}{
 	(*Receipt)(nil),                                  // 80: googlekon.Receipt
 	(*UserStatus)(nil),                               // 81: googlekon.UserStatus
 	(*Event)(nil),                                    // 82: googlekon.Event
-	(*GoogleLocationSetting)(nil),                    // 83: googlekon.GoogleLocationSetting
-	(*GoogleLocationSettings)(nil),                   // 84: googlekon.GoogleLocationSettings
+	(*GoogleLocationSettings)(nil),                   // 83: googlekon.GoogleLocationSettings
+	(*GoogleLocationSetting)(nil),                    // 84: googlekon.GoogleLocationSetting
 	(*GoogleReviewSetting)(nil),                      // 85: googlekon.GoogleReviewSetting
 	(*GoogleQuestionSetting)(nil),                    // 86: googlekon.GoogleQuestionSetting
 	(*GoogleMessageSetting)(nil),                     // 87: googlekon.GoogleMessageSetting
@@ -6914,7 +6914,7 @@ var file_googlekon_proto_depIdxs = []int32{
 	21, // 3: googlekon.BusinessLocation.profile:type_name -> googlekon.Profile
 	18, // 4: googlekon.BusinessLocation.phoneNumbers:type_name -> googlekon.PhoneNumbers
 	19, // 5: googlekon.BusinessLocation.storefrontAddress:type_name -> googlekon.PostalAddress
-	83, // 6: googlekon.BusinessLocation.setting:type_name -> googlekon.GoogleLocationSetting
+	84, // 6: googlekon.BusinessLocation.setting:type_name -> googlekon.GoogleLocationSetting
 	24, // 7: googlekon.Review.reviewer:type_name -> googlekon.Reviewer
 	25, // 8: googlekon.Review.reviewReply:type_name -> googlekon.ReviewReply
 	22, // 9: googlekon.Reviews.reviews:type_name -> googlekon.Review
@@ -6968,10 +6968,10 @@ var file_googlekon_proto_depIdxs = []int32{
 	81, // 57: googlekon.UserMessage.userStatus:type_name -> googlekon.UserStatus
 	80, // 58: googlekon.Receipts.receipts:type_name -> googlekon.Receipt
 	59, // 59: googlekon.Event.representative:type_name -> googlekon.Representative
-	83, // 60: googlekon.GoogleLocationSetting.settings:type_name -> googlekon.GoogleLocationSetting
-	85, // 61: googlekon.GoogleLocationSettings.google_review_setting:type_name -> googlekon.GoogleReviewSetting
-	86, // 62: googlekon.GoogleLocationSettings.google_question_setting:type_name -> googlekon.GoogleQuestionSetting
-	87, // 63: googlekon.GoogleLocationSettings.google_message_setting:type_name -> googlekon.GoogleMessageSetting
+	84, // 60: googlekon.GoogleLocationSettings.settings:type_name -> googlekon.GoogleLocationSetting
+	85, // 61: googlekon.GoogleLocationSetting.google_review_setting:type_name -> googlekon.GoogleReviewSetting
+	86, // 62: googlekon.GoogleLocationSetting.google_question_setting:type_name -> googlekon.GoogleQuestionSetting
+	87, // 63: googlekon.GoogleLocationSetting.google_message_setting:type_name -> googlekon.GoogleMessageSetting
 	41, // 64: googlekon.GoogleMessageSetting.welcomeMessage:type_name -> googlekon.WelcomeMessage
 	40, // 65: googlekon.BusinessMessagesAgent.ConversationalSettingsEntry.value:type_name -> googlekon.ConversationalSetting
 	56, // 66: googlekon.BusinessMessagesLaunch.LaunchDetailsEntry.value:type_name -> googlekon.BusinessMessagesEntryPointLaunch
@@ -7829,7 +7829,7 @@ func file_googlekon_proto_init() {
 			}
 		}
 		file_googlekon_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GoogleLocationSetting); i {
+			switch v := v.(*GoogleLocationSettings); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7841,7 +7841,7 @@ func file_googlekon_proto_init() {
 			}
 		}
 		file_googlekon_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GoogleLocationSettings); i {
+			switch v := v.(*GoogleLocationSetting); i {
 			case 0:
 				return &v.state
 			case 1:

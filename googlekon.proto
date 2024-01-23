@@ -592,11 +592,11 @@ message Event {
 	}
 }
 
-message GoogleLocationSetting {
+message GoogleLocationSettings {
 	repeated GoogleLocationSetting settings = 2;
 }
 
-message GoogleLocationSettings {
+message GoogleLocationSetting {
 	string account_id = 2;
 	string business_location_id = 3;
 
