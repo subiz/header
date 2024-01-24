@@ -385,7 +385,6 @@ service PaymentMgr {
 	rpc DiffSubscriptions(payment.DiffSubRequest) returns (payment.Invoice);
 	rpc ListComments(payment.ListCommentsRequest) returns (payment.Comments);
 	rpc AddComment(payment.Comment) returns (payment.Comment);
-	rpc ListPlans(Empty) returns (payment.Plans);
 	rpc ExportInvoice(Id) returns (payment.String);
 	rpc ConvertInvoiceToHtml(payment.Invoice) returns (payment.String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);

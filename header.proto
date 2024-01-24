@@ -7049,6 +7049,8 @@ message CreditSpendLogRequest {
 	string category = 7; // just filter
 	string service_id = 8; // filter by source
 
+	string credit_id = 12;
+
 	int64 limit = 10; // max : 20
 	string anchor = 11;
 }
@@ -7161,4 +7163,66 @@ message ConvoReportEntry {
 	repeated string labels = 2;
 	string metric = 3;
 	map<string,bool> userReturnedM = 4;
+}
+
+
+message AutomationTrigger {
+	string type = 3; // conversation_assigned, conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
+
+	// campaign trigger:
+	// segment_enter
+	// user_event
+	// date
+	// form_submitted
+	// api -> https://api.subiz.com.vn/4.0/webhook/6b8e08786ca07809
+
+	string area_clicked_css_selector = 4; // .user_name #user
+	float scrolling_percentage = 6; // 0.55
+	int64 inactivity_sec = 8; // 50s
+	int64 after_pageview_sec = 9; // 50s
+	bool disabled = 10;
+
+	repeated EventConditionFilter event_attributes = 11;
+
+	string after_event_created = 39;
+	bool before_conversation_ended = 29;
+}
+
+// log?
+// error log
+message Automation {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string type = 4;
+	string name = 5;
+	string description = 6;
+	AutomationTrigger trigger = 7;
+
+	// condition
+	ChannelCondition channel_condition = 27;
+
+	// conversation condition
+	repeated string exclude_tags = 11; // dont run on those tag
+	repeated string exclude_fields = 12;
+
+	repeated string fields = 13;
+	repeated string tags = 14; // only run on
+
+	bool repeat = 15; // allow to run multiple time
+
+	repeated BotCondition conditions = 16;
+
+	UserViewCondition condition = 28;
+
+	repeated BotAction actions = 19;
+
+	string updated_by = 20;
+	int64 updated = 21;
+
+	string created_by = 22;
+	int64 created = 23; // ms
+	int64 disabled = 24;
+
+	int64 last_run_at = 26;
 }
