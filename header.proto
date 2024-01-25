@@ -883,6 +883,8 @@ message Data {
 	BannedUser banned_user = 109;
 	Credit credit = 110;
 	payment.Bill subiz_bill = 111;
+
+	Automation automation = 112;
 }
 
 message WebRTCMessage {
@@ -1058,9 +1060,7 @@ message Rule {
 	string name = 10;
 	string description = 11;
 	bool available_agents_only = 13; // strategy
-	// optional SCondition condition = 14;
 
-	// new condition
 	ChannelCondition channel_condition = 15;
 	TimmingCondition timming_condition = 16;
 	repeated UserAttributeCondition form_conditions = 30;
@@ -2068,6 +2068,8 @@ message BotCondition {
 
 	bool has_agent_online = 31;
 	bool has_conversation_member_online = 32;
+
+	ChannelCondition channel_condition = 33;
 }
 
 message OrderCondition {
@@ -6849,6 +6851,9 @@ message Response {
 
 	account.Account account = 17;
 	repeated account.Account accounts = 18;
+
+	Automation automation = 19;
+	repeated Automation automations = 20;
 }
 
 message ZaloCallConsent {
@@ -7167,29 +7172,89 @@ message ConvoReportEntry {
 
 
 message AutomationTrigger {
-	string type = 3; // conversation_assigned, conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
+	string ui_id = 3;
+	string id = 4;
+	string key = 5; // conversation_assigned, conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
 
-	// campaign trigger:
-	// segment_enter
-	// user_event
-	// date
-	// form_submitted
-	// api -> https://api.subiz.com.vn/4.0/webhook/6b8e08786ca07809
-
-	string area_clicked_css_selector = 4; // .user_name #user
-	float scrolling_percentage = 6; // 0.55
+	string area_clicked_css_selector = 6; // .user_name #user
+	float scrolling_percentage = 7; // 0.55
 	int64 inactivity_sec = 8; // 50s
 	int64 after_pageview_sec = 9; // 50s
-	bool disabled = 10;
 
-	repeated EventConditionFilter event_attributes = 11;
+	repeated string events = 10;
+	AutomationTimming timming = 11;
 
-	string after_event_created = 39;
-	bool before_conversation_ended = 29;
+	string object = 12; // order, user
+	string object_field = 13;  // fields[name='checkout']
+
+	AutomationCondition condition = 14;
 }
 
-// log?
-// error log
+message AutomationTimming {
+	// relative: is_empty, in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
+	// absolute: before, after, between, outside
+	string op = 4; //
+
+	string business_hour = 5; // [in, notIn] if this is true, ignore all other timming conditions
+	repeated string days_of_week = 6; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+	repeated int32 minute_of_days = 7; // pair [0-4] [6-9]
+	int64 end_time = 8;
+
+	int64 after = 11;
+	int64 before = 12;
+	repeated int64 between = 13;
+	repeated int64 outside = 14;
+
+	string after_var = 19; // user.attr[key=birthday]
+	string before_var = 20;
+
+	int64 duration_sec = 21; // 86400
+	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
+	repeated AutomationTimming all = 30;
+	repeated AutomationTimming or = 31;
+}
+
+message AutomationCondition {
+	string id = 2;
+	string key = 3;
+	ChannelCondition channel = 5;
+	TimmingCondition time = 6;
+
+	repeated UserAttributeCondition form_conditions = 7;
+
+	bool user_has_replied_before = 8; // new
+	repeated UserAttributeCondition user_conditions = 9;
+
+	repeated AutomationCondition all = 12; // preferred
+	repeated AutomationCondition one = 13;
+}
+
+message AutomationAction {
+	string account_id = 2;
+	string bot_id = 3; // could be pipeline automation id
+	string id = 4;
+	string name = 5;
+	bool recheck_condition = 6;
+
+	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state, send_message
+
+	ActionJump jump = 15;
+	ActionSendHttp send_http = 17;
+	ActionAskQuestion ask_question = 18;
+	AssignRequest assign = 19;
+
+	int64 delay_sec = 20; // max 60sec
+	ActionUpdateConversation update_conversation = 21;
+	bytes internal_state = 30;
+	ActionUpdateUser update_user = 31;
+	ActionUpdateUserLabels update_user_labels = 32;
+	ActionConfirmOrder confirm_order = 34;
+	ActionCreateTask create_task = 35;
+	ActionSendChatTranscript send_chat_transcript = 36;
+	ActionUpdateUserSegments update_user_segments = 37;
+	ActionRotateAgentInRule rotate_agent_in_rule = 38;
+}
+
 message Automation {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7197,32 +7262,17 @@ message Automation {
 	string type = 4;
 	string name = 5;
 	string description = 6;
-	AutomationTrigger trigger = 7;
 
-	// condition
-	ChannelCondition channel_condition = 27;
+	repeated AutomationTrigger triggers = 7; // or
+	repeated AutomationAction actions = 8;
 
-	// conversation condition
-	repeated string exclude_tags = 11; // dont run on those tag
-	repeated string exclude_fields = 12;
+	string updated_by = 9;
+	int64 updated = 10;
 
-	repeated string fields = 13;
-	repeated string tags = 14; // only run on
+	string created_by = 11;
+	int64 created = 12; // ms
+	int64 disabled = 13;
 
-	bool repeat = 15; // allow to run multiple time
-
-	repeated BotCondition conditions = 16;
-
-	UserViewCondition condition = 28;
-
-	repeated BotAction actions = 19;
-
-	string updated_by = 20;
-	int64 updated = 21;
-
-	string created_by = 22;
-	int64 created = 23; // ms
-	int64 disabled = 24;
-
-	int64 last_run_at = 26;
+	int64 last_run_at = 14;
+	int64 total_run_time = 15;
 }

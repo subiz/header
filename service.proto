@@ -252,6 +252,13 @@ service AttributeMgr {
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 }
 
+service AutomationMgr {
+	rpc ListAutomations(Id) returns (header.Response);
+	rpc UpdateAutomation(header.Automation) returns (header.Response);
+	rpc DeleteAutomation(Id) returns (Empty);
+	rpc ReadAutomation(Id) returns (header.Response);
+}
+
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
