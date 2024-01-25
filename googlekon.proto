@@ -66,7 +66,7 @@ message PostalAddress {
 message Metadata {
 	string mapsUri = 1;
     string placeId = 2;
-	bool hasGoogleUpdated = 3;
+	bool hasVoiceOfMerchant = 4;
 }
 
 message Profile {
