@@ -885,6 +885,8 @@ message Data {
 	payment.Bill subiz_bill = 111;
 
 	Automation automation = 112;
+
+	PushNoti desktop_notification = 113;
 }
 
 message WebRTCMessage {
@@ -7183,9 +7185,9 @@ message AutomationTrigger {
 
 	repeated string events = 10;
 	AutomationTimming timming = 11;
+	repeated string computed_events = 12; // internal
 
-	string object = 12; // order, user
-	string object_field = 13;  // fields[name='checkout']
+	string field = 13;  // order.fields[name='checkout']
 
 	AutomationCondition condition = 14;
 }
@@ -7205,10 +7207,15 @@ message AutomationTimming {
 	repeated int64 between = 13;
 	repeated int64 outside = 14;
 
+	// could use in same
 	string after_var = 19; // user.attr[key=birthday]
-	string before_var = 20;
+	string before_var = 20; // user.attr[key=birthday]
+	int64 var_duration = 21; // 86400
 
-	int64 duration_sec = 21; // 86400
+	// -----------------------------------.------------------------
+	//                            [+++++++++++++]
+	//                                [+++++++>
+	//                            <++++++++++]
 	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
 	repeated AutomationTimming all = 30;
 	repeated AutomationTimming or = 31;
@@ -7216,17 +7223,20 @@ message AutomationTimming {
 
 message AutomationCondition {
 	string id = 2;
-	string key = 3;
+	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	ChannelCondition channel = 5;
 	TimmingCondition time = 6;
 
-	repeated UserAttributeCondition form_conditions = 7;
+	string type = 7;
 
-	bool user_has_replied_before = 8; // new
-	repeated UserAttributeCondition user_conditions = 9;
+	BoolCondition boolean = 8;
+	FloatCondition number = 9;
+	DatetimeCondition datetime = 10;
+	EventCondition event = 11;
+	TextCondition text = 12;
 
-	repeated AutomationCondition all = 12; // preferred
-	repeated AutomationCondition one = 13;
+	repeated AutomationCondition all = 19; // preferred
+	repeated AutomationCondition one = 20;
 }
 
 message AutomationAction {
@@ -7275,4 +7285,28 @@ message Automation {
 
 	int64 last_run_at = 14;
 	int64 total_run_time = 15;
+}
+
+message AutomationEvent {
+	common.Context ctx = 1;
+	string user_id = 2;
+	string id = 3;
+	string account_id = 4;
+	// string original_user_id = 5; // added when merge
+	int64 created = 8;
+	int64 updated = 10;
+	string type = 9;
+	string session_id = 12; // extra id for many purpose (idempotency key)
+	By by = 50;
+	Touchpoint touchpoint = 52;
+	Data data = 20;
+	Data old_data = 21;
+	string object = 22;
+
+	Conversation conversation = 23;
+	Conversation old_conversation = 24;
+	Order order = 25;
+	Order old_order = 26;
+	User user = 27;
+	User old_user = 28;
 }

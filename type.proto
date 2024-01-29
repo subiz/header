@@ -251,6 +251,8 @@ enum RealtimeType {
 	automation_updated = 246;
 	automation_created = 247;
 	automation_deleted = 248;
+
+	desktop_notification_pushed = 249;
 }
 
 message TextTransform {
