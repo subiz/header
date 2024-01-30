@@ -49,6 +49,7 @@ message BusinessLocation {
 	int64 totalReviewCount = 17;
 	PostalAddress storefrontAddress = 18;
 	GoogleLocationSetting setting = 19;
+	int64 last_integrated = 20;
 }
 
 message PhoneNumbers {
@@ -63,6 +64,7 @@ message PostalAddress {
 	repeated string addressLines = 9;
 	string address = 12;
 }
+
 message Metadata {
 	string mapsUri = 1;
     string placeId = 2;
