@@ -210,7 +210,7 @@ message Invoice {
 
 	optional int64 fpv_total_vnd = 29; // read only
 	optional int64 fpv_payment_made_vnd = 30; // read only
-	optional bool is_not_gen_qr = 31; // not save in db
+	optional bool is_gen_qr = 31; // not save in db
 }
 
 message AgentInvoiceItem {
