@@ -80,6 +80,31 @@ func TestEmailAddress(t *testing.T) {
 	}
 }
 
+func TestVNPhone(t *testing.T) {
+	testcases := []struct {
+		in  string
+		out string
+	}{
+		{"", ""},
+		{"Sdt cua minh la (84)36 4821324", "84364821324"},
+		{"Sdt cua minh la (0)36 48213244. Goi nhe", ""},
+		{"Sdt cua minh la (0)36 4821324\n4. Goi nhe", "84364821324"},
+		{"Sdt cua minh la (036)4821324. Goi nhe", "84364821324"},
+		{"19009376 hoac 0363245542", "19009376;84363245542"},
+		{"1132345345 0363245542", "84363245542"},
+		{"teamview code va sdt la 1132 34543345 363245542", "84363245542"},
+		{"0966645643", "84966645643"},
+		{"966645643", "84966645643"},
+		{"966645643;", "84966645643"},
+	}
+
+	for i, tc := range testcases {
+		if tc.out != strings.Join(VNPhone(tc.in), ";") {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, strings.Join(VNPhone(tc.in), ";"))
+		}
+	}
+}
+
 func TestNormPhone(t *testing.T) {
 	testcases := []struct {
 		in  string
@@ -95,6 +120,7 @@ func TestNormPhone(t *testing.T) {
 		{"abc@gmail.com", ""},
 		{"245abc@gmail.com", ""},
 		{",;84123123123,", "0123123123"},
+
 	}
 
 	for i, tc := range testcases {

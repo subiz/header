@@ -1011,6 +1011,111 @@ func NormPhone(phone string) []string {
 	return phones
 }
 
+// VNPhone converts an user input string to
+// an standalized phone number. The number must be a valid vietnamese phone
+// number
+// "Xin chao, sdt cua minh la (84)35 9423 423 => 84359423423
+var acceptedVnPhoneCharacter = map[rune]bool{
+	'0': true,
+	'1': true,
+	'2': true,
+	'3': true,
+	'4': true,
+	'5': true,
+	'6': true,
+	'7': true,
+	'8': true,
+	'9': true,
+	'-': true, // 043-46345345
+	' ': true, // 036 48 435
+	',': true, // 036,4543
+	'.': true, // 04346345345
+	'(': true, // (036)435345345
+	')': true, // (036)435345345
+}
+
+var acceptedVnPhoneCharacterStrict = map[rune]bool{
+	'0': true,
+	'1': true,
+	'2': true,
+	'3': true,
+	'4': true,
+	'5': true,
+	'6': true,
+	'7': true,
+	'8': true,
+	'9': true,
+	'-': true, // 043-46345345
+	',': true, // 036,4543
+	'.': true, // 04346345345
+}
+
+func VNPhone(str string) []string {
+	phonesplit := strings.FieldsFunc(str, func(r rune) bool {
+		return !acceptedVnPhoneCharacter[r]
+	})
+
+	strictphonesplit := strings.FieldsFunc(str, func(r rune) bool {
+		return !acceptedVnPhoneCharacterStrict[r]
+	})
+
+	phonesplit = append(phonesplit, strictphonesplit...)
+
+	phones := map[string]bool{}
+	for _, phone := range phonesplit {
+		arr := make([]rune, 0)
+		for _, r := range phone {
+			if r >= '0' && r <= '9' {
+				arr = append(arr, r)
+			}
+		}
+		number := string(arr)
+		if number != "" {
+			phones[number] = true
+		}
+	}
+
+	validPhone := []string{}
+	for phone := range phones {
+		if len(phone) < 6 {
+			continue
+		}
+
+		if len(phone) > 20 {
+			continue
+		}
+
+		if strings.HasPrefix(phone, "1900") || strings.HasPrefix(phone, "1800") {
+			validPhone = append(validPhone, phone)
+			continue
+		}
+
+		// 364348593 => 0364348593
+		if len(phone) == 9 && phone[0] != 0 {
+			phone = "0" + phone
+		}
+
+		if strings.HasPrefix(phone, "0") {
+			phone = "84" + phone[1:]
+		}
+
+		if len(phone) != 11 {
+			continue
+		}
+
+		if strings.HasPrefix(phone, "84") {
+			if GetVietnamPhoneISP("0"+phone[2:]) != "other" {
+				// it is avalid vietnam phone
+				validPhone = append(validPhone, phone)
+				continue
+			}
+			continue
+		}
+		continue
+	}
+	return validPhone
+}
+
 // NormPhone converts an user input phone number to
 // standalized phone number
 // (84)35 9423 423 => 0359423423
@@ -1308,7 +1413,7 @@ func ReportExtractor(user *User, firstContentView *Event) map[string]bool {
 	}
 
 	if user.Channel == "call" {
-		keys["call_isp."+Hex(GetPhoneISP(user.ProfileId))] = true //
+		keys["call_isp."+Hex(GetVietnamPhoneISP(user.ProfileId))] = true //
 	}
 
 	if user.Channel != "subiz" {
@@ -1410,23 +1515,26 @@ func UnHex(str string) string {
 	return string(out)
 }
 
-func GetPhoneISP(number string) string {
-	first3 := ""
+func GetVietnamPhoneISP(number string) string {
+	first3, first4 := "", ""
 	if len(number) < 5 {
 		return "other"
 	}
 	if number[0] == '8' && number[1] == '4' {
 		first3 = "0" + number[2:4]
+		first4 = "0" + number[2:5]
 	} else if number[0] == '0' {
 		first3 = "0" + number[1:3]
+		first4 = "0" + number[1:4]
 	}
-	if first3 == "059" || first3 == "099" {
+	if first3 == "059" || first3 == "099" || first4 == "0199" {
 		return "Gmobile"
 	}
-	if first3 == "056" || first3 == "058" || first3 == "092" {
+	if first3 == "052" || first3 == "056" || first3 == "058" || first3 == "092" || first4 == "0182" || first4 == "0186" || first4 == "0188" {
 		return "Vietnammobile"
 	}
-	if first3 == "070" || first3 == "079" || first3 == "077" || first3 == "076" || first3 == "078" || first3 == "090" || first3 == "093" || first3 == "089" {
+	if first3 == "070" || first3 == "079" || first3 == "077" || first3 == "076" || first3 == "078" || first3 == "090" || first3 == "093" || first3 == "089" ||
+		first4 == "0120" || first4 == "0121" || first4 == "0122" || first4 == "0126" || first4 == "0128" {
 		return "Mobifone"
 	}
 
@@ -1434,11 +1542,13 @@ func GetPhoneISP(number string) string {
 		return "Itelecom"
 	}
 
-	if first3 == "083" || first3 == "084" || first3 == " 085" || first3 == " 081" || first3 == " 082" || first3 == " 088" || first3 == " 091" || first3 == " 094" {
+	if first3 == "083" || first3 == "084" || first3 == "085" || first3 == "081" || first3 == "082" || first3 == "088" || first3 == "091" || first3 == "094" ||
+		first4 == "0128" || first4 == "0123" || first4 == "0125" || first4 == "0127" || first4 == "0124" || first4 == "0126" || first4 == "0129" {
 		return "Vinaphone"
 	}
 
-	if first3 == "032" || first3 == "033" || first3 == "034" || first3 == "035" || first3 == "036" || first3 == "037" || first3 == "038" || first3 == "039" || first3 == "096" || first3 == "097" || first3 == "098" || first3 == "086" {
+	if first3 == "032" || first3 == "033" || first3 == "034" || first3 == "035" || first3 == "036" || first3 == "037" || first3 == "038" || first3 == "039" || first3 == "096" || first3 == "097" || first3 == "098" || first3 == "086" ||
+		first4 == "0169" || first4 == "0168" || first4 == "0167" || first4 == "0166" || first4 == "0165" || first4 == "0164" || first4 == "0163" || first4 == "0162" {
 		return "Viettel"
 	}
 	return "other"
