@@ -62,14 +62,14 @@ service AccountMgr {
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc GetGroup(Id) returns (header.AgentGroup);
 	rpc RequestPassword(Id) returns (Empty);
-	rpc UpdatePassword(account.NewPassword) returns (account.Agent);
+	rpc UpdatePassword(NewPassword) returns (account.Agent);
 	rpc UpdateAgent(account.Agent) returns (account.Agent);
 	rpc DeleteAgent(Id) returns (account.Agent);
 	rpc DeleteAccount(Id) returns (account.Account);
 	rpc SubizUpdateAccount(account.Account) returns (account.Account);
 	rpc RequestChangeEmail(account.Agent) returns (Empty);// require password
 	rpc ConfirmChangeEmail(account.Token) returns (account.Agent);
-	rpc AcceptInvitation(account.NewPassword) returns (account.Agent);
+	rpc AcceptInvitation(NewPassword) returns (account.Agent);
 	rpc GetInvitation(account.Token) returns (account.Agent);
 	rpc InviteAgent(account.Agent) returns (account.Agent); // allow to call multiple time
 	rpc GetAgent(Id) returns (account.Agent);
@@ -77,7 +77,7 @@ service AccountMgr {
 	rpc ConfirmAccount(account.Token) returns (account.Account);
 	rpc GetAccount(Id) returns (account.Account);
 	rpc UpdateAccount(account.Account) returns (account.Account);
-	rpc CreateAccount(account.CreateAccountRequest) returns (account.Account);
+	rpc CreateAccount(CreateAccountRequest) returns (account.Account);
 	rpc ListAgents(Id) returns (account.Agents);
 
 	rpc DeleteGroup(Id) returns (Empty);

@@ -573,7 +573,7 @@ func GetTimeAttr(u *User, key string) (time.Time, bool) {
 	key = strings.ToLower(strings.TrimSpace(key))
 	has := false
 	for _, a := range u.GetAttributes() {
-		if !SameKey(key, a.GetKey()) {
+		if key != a.GetKey() {
 			continue
 		}
 
@@ -590,7 +590,7 @@ func GetTimeAttr(u *User, key string) (time.Time, bool) {
 func GetAttr(u *User, key string, typ string) interface{} {
 	key = strings.ToLower(strings.TrimSpace(key))
 	for _, a := range u.GetAttributes() {
-		if !SameKey(key, a.GetKey()) {
+		if key != a.GetKey() {
 			continue
 		}
 		switch typ {
@@ -612,11 +612,6 @@ func GetAttr(u *User, key string, typ string) interface{} {
 		return nil
 	}
 	return nil
-}
-
-func SameKey(k1, k2 string) bool {
-	return strings.TrimSpace(strings.ToLower(k1)) ==
-		strings.TrimSpace(strings.ToLower(k2))
 }
 
 func SetAttr(u *User, key string, typ string, val interface{}) {
@@ -648,7 +643,7 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 		a.Datetime = t.Format(time.RFC3339)
 	}
 	for _, i := range u.GetAttributes() {
-		if !SameKey(i.GetKey(), key) {
+		if i.GetKey() != key {
 			continue
 		}
 
@@ -666,7 +661,7 @@ func SetAttr(u *User, key string, typ string, val interface{}) {
 func GetTextAttr(u *User, key string) string {
 	key = strings.ToLower(strings.TrimSpace(key))
 	for _, a := range u.GetAttributes() {
-		if !SameKey(key, a.GetKey()) {
+		if key != a.GetKey() {
 			continue
 		}
 		return a.GetText()
@@ -1293,7 +1288,7 @@ func SetTextAttr(u *User, key string, val string) {
 	a.Key = key
 	a.Text = val
 	for _, i := range u.GetAttributes() {
-		if !SameKey(i.GetKey(), key) {
+		if i.GetKey() != key {
 			continue
 		}
 

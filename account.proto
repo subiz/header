@@ -198,36 +198,13 @@ message WebpageMonitorSetting {
 
 message LeadSetting {
 	optional string assign_conversation_as_lead = 3; // assigned [default], joined
-}
-
-message CreateAccountRequest {
-	optional common.Context ctx = 1;
-	optional string fullname = 2;
-	optional string email = 3;
-	optional string lang = 4;
-	optional string password = 5;
-	optional string account_name = 6;
-	optional string account_url = 7;
-	optional string avatar_url = 8;
-	optional string timezone = 9;
-	optional string phone = 10;
-	optional string country_code = 11;
-	optional string referrer_from = 12;
-	optional string ga_client_id = 13;
-	optional string subiz_user_id = 16; // merge after registry
+	optional int64 auto_update_phone = 4;
+	optional int64 auto_update_email = 5;
 }
 
 message Agents {
 	optional common.Context ctx = 1;
 	repeated Agent agents = 2;
-}
-
-message NewPassword {
-	optional common.Context ctx = 1;
-	optional string token = 2;
-	optional string new_password = 3;
-	optional string old_password = 5;
-	optional string email = 8;
 }
 
 message Token {

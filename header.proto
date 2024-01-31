@@ -2679,6 +2679,7 @@ message WidgetChatButton {
 	bool default_style = 8;
 	string background_border_radius = 9;
 	bool hidden = 10;
+
 }
 
 message WidgetGreeting {
@@ -2687,6 +2688,8 @@ message WidgetGreeting {
 	string agent_id = 5;
 
 	I18nString greeting = 6;
+
+	bool mobile_disabled = 7;
 }
 
 ////////////// CAMPAIGN //////////////
@@ -7310,4 +7313,29 @@ message AutomationEvent {
 	Order old_order = 26;
 	User user = 27;
 	User old_user = 28;
+}
+
+message CreateAccountRequest {
+	common.Context ctx = 1;
+	string fullname = 2;
+	string email = 3;
+	string lang = 4;
+	string password = 5;
+	string account_name = 6;
+	string account_url = 7;
+	string avatar_url = 8;
+	string timezone = 9;
+	string phone = 10;
+	string country_code = 11;
+	string referrer_from = 12;
+	string ga_client_id = 13;
+	string subiz_user_id = 16; // merge after registry
+}
+
+message NewPassword {
+	common.Context ctx = 1;
+	string token = 2;
+	string new_password = 3;
+	string old_password = 5;
+	string email = 8;
 }
