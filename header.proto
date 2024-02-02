@@ -6860,6 +6860,9 @@ message Response {
 
 	Automation automation = 19;
 	repeated Automation automations = 20;
+
+	account.Agent agent = 21;
+	repeated account.Agent agents = 22;
 }
 
 message ZaloCallConsent {

@@ -78,7 +78,7 @@ service AccountMgr {
 	rpc GetAccount(Id) returns (account.Account);
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(CreateAccountRequest) returns (account.Account);
-	rpc ListAgents(Id) returns (account.Agents);
+	rpc ListAgents(Id) returns (header.Response);
 
 	rpc DeleteGroup(Id) returns (Empty);
 	rpc ListGroups(Id) returns (header.AgentGroups);

@@ -143,7 +143,7 @@ message Account {
 
 	optional Feature feature = 35;
 	optional Feature force_feature = 36; // only edit by subiz
-	optional WebpageMonitorSetting webpage_monitor_setting = 37;
+	// optional WebpageMonitorSetting webpage_monitor_setting = 37;
 
 	optional string locale = 39; // primary locale
 	repeated string supported_locales = 40; // default vi-VN and en-US
@@ -192,19 +192,10 @@ message Feature {
 	optional int64 call_recording_ttl = 13; // sec
 }
 
-message WebpageMonitorSetting {
-	optional bool weekly_report = 2;
-}
-
 message LeadSetting {
 	optional string assign_conversation_as_lead = 3; // assigned [default], joined
 	optional int64 auto_update_phone = 4;
 	optional int64 auto_update_email = 5;
-}
-
-message Agents {
-	optional common.Context ctx = 1;
-	repeated Agent agents = 2;
 }
 
 message Token {
