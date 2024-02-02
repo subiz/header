@@ -555,8 +555,20 @@ message UserMessage {
 
 	UserStatus userStatus = 10;
 	//SurveyResponse surveyResponse = 11;
-	//SuggestionResponse suggestionResponse = 12;
+	SuggestionResponse suggestionResponse = 12;
 	//AuthenticationResponse authenticationResponse = 13;
+}
+
+message SuggestionResponse{
+	string message = 1;
+    string postbackData = 2;
+    string createTime = 3;
+    string text = 4;
+    string type = 5;
+	enum SuggestionType {
+		ACTION = 0;
+		REPLY = 1;
+	}
 }
 
 message Receipts {
