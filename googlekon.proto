@@ -48,7 +48,6 @@ message BusinessLocation {
 	float averageRating = 16;
 	int64 totalReviewCount = 17;
 	PostalAddress storefrontAddress = 18;
-	GoogleLocationSetting setting = 19;
 	int64 last_integrated = 20;
 }
 
@@ -604,32 +603,4 @@ message Event {
 		REPRESENTATIVE_JOINED = 3;
 		REPRESENTATIVE_LEFT = 4;
 	}
-}
-
-message GoogleLocationSettings {
-	repeated GoogleLocationSetting settings = 2;
-}
-
-message GoogleLocationSetting {
-	string account_id = 2;
-	string business_location_id = 3;
-
-	GoogleReviewSetting google_review_setting = 5;
-	GoogleQuestionSetting google_question_setting = 6;
-	GoogleMessageSetting google_message_setting = 7;
-
-	int64 updated = 9;
-}
-
-message GoogleReviewSetting {
-	bool enabled = 1;
-}
-
-message GoogleQuestionSetting {
-	bool enabled = 1;
-}
-
-message GoogleMessageSetting {
-	bool enabled = 1;
-	WelcomeMessage welcomeMessage = 2;
 }
