@@ -3676,7 +3676,7 @@ message GoogleLocationSetting {
 message GoogleReviewSetting {
 	bool enabled = 1;
 	bool auto_reply = 4;
-	map<string, ReviewReply> repliesM = 5; //rating => reply
+	map<string, string> repliesM = 5; //rating => reply
 }
 
 message GoogleQuestionSetting {
