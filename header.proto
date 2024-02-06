@@ -3661,22 +3661,13 @@ message GoogleLocationSetting {
 	int64 updated = 9;
 }
 
-message SyncGoogleCondition {
-	int64 from_hour = 1;
-	int64 to_hour = 2;
-	int64 sync_hour = 3;
-	bool is_sync_sucess = 4; 
-}
-
 message GoogleReviewSetting {
 	bool enabled = 1;
-	SyncGoogleCondition condition = 2; 
 	map<string, string> repliesM = 5; //rating => reply
 }
 
 message GoogleQuestionSetting {
 	bool enabled = 1;
-	SyncGoogleCondition condition = 2;
 }
 
 message GoogleMessageSetting {
