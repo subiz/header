@@ -49,35 +49,6 @@ message BusinessLocation {
 	int64 totalReviewCount = 17;
 	PostalAddress storefrontAddress = 18;
 	int64 last_integrated = 20;
-	GoogleLocationSetting setting = 19;
-}
-
-message GoogleLocationSettings {
-	repeated GoogleLocationSetting settings = 2;
-}
-
-message GoogleLocationSetting {
-	string account_id = 2;
-	string business_location_id = 3;
-
-	GoogleReviewSetting google_review_setting = 5;
-	GoogleQuestionSetting google_question_setting = 6;
-	GoogleMessageSetting google_message_setting = 7;
-
-	int64 updated = 9;
-}
-
-message GoogleReviewSetting {
-	bool enabled = 1;
-}
-
-message GoogleQuestionSetting {
-	bool enabled = 1;
-}
-
-message GoogleMessageSetting {
-	bool enabled = 1;
-	WelcomeMessage welcomeMessage = 2;
 }
 
 message PhoneNumbers {

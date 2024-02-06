@@ -3661,32 +3661,26 @@ message GoogleLocationSetting {
 	int64 updated = 9;
 }
 
+message SyncGoogleCondition {
+	int64 from_hour = 1;
+	int64 to_hour = 2;
+	int64 sync_hour = 3;
+}
+
 message GoogleReviewSetting {
 	bool enabled = 1;
-	bool auto_reply = 4;
+	SyncGoogleCondition condition = 2; 
 	map<string, string> repliesM = 5; //rating => reply
 }
 
 message GoogleQuestionSetting {
 	bool enabled = 1;
-	bool auto_reply = 4;
-	repeated string answer = 5;
+	SyncGoogleCondition condition = 2;
 }
 
 message GoogleMessageSetting {
 	bool enabled = 1;
 	WelcomeMessage welcomeMessage = 2;
-
-	bool auto_inbox = 6;
-	Message message = 7;
-
-	bool custom_inbox_for_comments_contain_phone_email_or_address = 14;
-	Message message_for_comments_contain_phone_email_or_address = 15;
-
-	bool custom_inbox_for_comments_contain_keyword = 16;
-	Message message_for_comments_contain_keyword = 17;
-
-	repeated string keywords = 10; // comment
 }
 
 message WelcomeMessage {
