@@ -3665,6 +3665,7 @@ message SyncGoogleCondition {
 	int64 from_hour = 1;
 	int64 to_hour = 2;
 	int64 sync_hour = 3;
+	bool is_sync_sucess = 4; 
 }
 
 message GoogleReviewSetting {
