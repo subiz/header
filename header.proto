@@ -540,14 +540,6 @@ message UserInfoParams {
 	// IntParams time_on_site = 14;
 }
 
-enum PK {
-	id = 0;
-	account_id = 1;
-	domain = 2;
-	facebook_page_id = 3;
-	zalo_oa_id = 4;
-};
-
 message Key {
 	string account_id = 2;
 	string order_id = 3;
@@ -930,7 +922,7 @@ message StartRequest {
 	string conversation_id = 14;
 
 	User user = 25;
-	string integration_id = 26; // deprecated, use touchpoint
+	// string integration_id = 26; // deprecated, use touchpoint
 	string message = 30;
 	repeated ConversationMember members = 31;
 	string group_id = 32;
@@ -2563,11 +2555,9 @@ message WidgetSetting {
 	string widget_version = 3;
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
-	//  string css_url = 9; // old version
-	//  string custom_css_url = 10; // deprecated
+
 	int32 replytime = 11; // deprecated
-	//  string css = 12; // communication client to server
-	//  string style_url = 13;
+
 	// read-only, tell whether account is ready for chat or not
 	bool is_online = 14;
 	bool is_in_business_hour = 34;
@@ -2679,7 +2669,6 @@ message WidgetChatButton {
 	bool default_style = 8;
 	string background_border_radius = 9;
 	bool hidden = 10;
-
 }
 
 message WidgetGreeting {
@@ -3660,7 +3649,6 @@ message ExchangeRate {
 message GoogleLocationSettings {
 	repeated GoogleLocationSetting settings = 2;
 }
-
 
 message GoogleLocationSetting {
 	string account_id = 2;
@@ -7390,4 +7378,3 @@ message NewPassword {
 	string old_password = 5;
 	string email = 8;
 }
-
