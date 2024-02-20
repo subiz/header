@@ -363,6 +363,13 @@ func GetAccountId(ctx context.Context, message interface{}) string {
 	return accid
 }
 
+var prommetrics *grpcprom.ClientMetrics
+
+func init() {
+	prommetrics = grpcprom.NewClientMetrics(grpcprom.WithClientCounterOptions())
+	prometheus.MustRegister(prommetrics)
+}
+
 func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 	opts = append([]grpc.DialOption{}, opts...)
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -374,10 +381,7 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 		Time:    time.Duration(10) * time.Second,
 		Timeout: time.Duration(60) * time.Second,
 	}))
-
-	clMetrics := grpcprom.NewClientMetrics(grpcprom.WithClientCounterOptions(), grpcprom.WithClientHandlingTimeHistogram())
-	prometheus.MustRegister(clMetrics)
-	opts = append(opts, grpc.WithChainUnaryInterceptor(clMetrics.UnaryClientInterceptor()))
+	opts = append(opts, grpc.WithChainUnaryInterceptor(prommetrics.UnaryClientInterceptor()))
 	for {
 		conn, err := grpc.Dial(service, opts...)
 		if err != nil {
