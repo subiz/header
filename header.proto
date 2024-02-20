@@ -11,6 +11,14 @@ import "type.proto";
 import "noti5.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
 
+message KafkaMessage {
+	string account_id = 2;
+	string topic = 3;
+	int32 partition = 4;
+	int64 offset = 5;
+	bytes data = 6;
+	string consumer_group = 7;
+}
 message Empty {
 	common.Context ctx = 1;
 }
@@ -6885,6 +6893,8 @@ message Response {
 
 	account.Agent agent = 21;
 	repeated account.Agent agents = 22;
+
+	repeated AutomationLog automation_logs = 23;
 }
 
 message ZaloCallConsent {
@@ -7201,7 +7211,6 @@ message ConvoReportEntry {
 	map<string,bool> userReturnedM = 4;
 }
 
-
 message AutomationTrigger {
 	string ui_id = 3;
 	string id = 4;
@@ -7213,7 +7222,6 @@ message AutomationTrigger {
 	int64 after_pageview_sec = 9; // 50s
 
 	repeated string events = 10;
-	AutomationTimming timming = 11;
 	repeated string computed_events = 12; // internal
 
 	string field = 13;  // order.fields[name='checkout']
@@ -7246,15 +7254,12 @@ message AutomationTimming {
 	//                                [+++++++>
 	//                            <++++++++++]
 	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
-	repeated AutomationTimming all = 30;
-	repeated AutomationTimming or = 31;
 }
 
 message AutomationCondition {
 	string id = 2;
 	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	ChannelCondition channel = 5;
-	TimmingCondition time = 6;
 
 	string type = 7;
 
@@ -7263,6 +7268,7 @@ message AutomationCondition {
 	DatetimeCondition datetime = 10;
 	EventCondition event = 11;
 	TextCondition text = 12;
+	AutomationTimming timming = 13;
 
 	repeated AutomationCondition all = 19; // preferred
 	repeated AutomationCondition one = 20;
@@ -7294,6 +7300,20 @@ message AutomationAction {
 	ActionRotateAgentInRule rotate_agent_in_rule = 38;
 }
 
+message AutomationLogRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string automation_id = 3;
+
+	string object_id = 5;
+
+	string anchor = 6; // override start_hour
+	int64 limit = 7;
+
+	int64 start_hour = 8; // anchor must empty
+	string level = 9; // empty or error
+}
+
 message Automation {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7314,6 +7334,22 @@ message Automation {
 
 	int64 last_run_at = 14;
 	int64 total_run_time = 15;
+
+	int64 deleted = 16;
+}
+
+message AutomationLog {
+	string account_id = 2;
+	string automation_id = 3;
+	string id = 4;
+	int64 created = 5;
+	string level = 6;
+	string log_type = 7;
+
+	string user_id = 8;
+	string object_id = 9;
+
+	map<string,string> data = 10;
 }
 
 message AutomationEvent {

@@ -12,6 +12,8 @@ import (
 	"sync"
 	"time"
 
+	grpcprom "github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/subiz/header/common"
 	"github.com/subiz/log"
 	"google.golang.org/grpc"
@@ -372,6 +374,10 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 		Time:    time.Duration(10) * time.Second,
 		Timeout: time.Duration(60) * time.Second,
 	}))
+
+	clMetrics := grpcprom.NewClientMetrics(grpcprom.WithClientCounterOptions(), grpcprom.WithClientHandlingTimeHistogram())
+	prometheus.MustRegister(clMetrics)
+	opts = append(opts, grpc.WithChainUnaryInterceptor(clMetrics.UnaryClientInterceptor()))
 	for {
 		conn, err := grpc.Dial(service, opts...)
 		if err != nil {
