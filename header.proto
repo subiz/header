@@ -7409,8 +7409,16 @@ message Check {
 	int64 last_sample_at = 6;
 	repeated string failed_subchecks = 7;
 	repeated string failed_subchecks_duration = 8;
-	int64 started = 9; //manually
-	int64 ended = 10; //manually
+}
+
+message CheckManually {
+	string id = 2;
+	string name = 3;
+	string status = 5;
+	int64 started = 9; 
+	int64 ended = 10; 
+	int64 updated = 11;
+    string by = 12;
 }
 
 message CheckGraph {
