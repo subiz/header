@@ -7400,3 +7400,24 @@ message NewPassword {
 	string old_password = 5;
 	string email = 8;
 }
+
+message Check {
+	string id = 2;
+	string name = 3;
+	int64 interval_timeout = 4;
+	string status = 5;
+	string last_sample_at = 6;
+	repeated string failed_subchecks = 7;
+	repeated string failed_subchecks_duration = 8;
+}
+
+message CheckGraph {
+    repeated int64 labels = 1;
+	repeated CheckPoint datapoints = 2;
+}
+
+message CheckPoint {
+	string status = 1;
+	repeated string failed_subchecks = 2;
+	repeated int64 failed_subchecks_duration = 3;
+}
