@@ -7406,7 +7406,7 @@ message Check {
 	string name = 3;
 	int64 interval_timeout = 4;
 	string status = 5;
-	string last_sample_at = 6;
+	int64 last_sample_at = 6;
 	repeated string failed_subchecks = 7;
 	repeated string failed_subchecks_duration = 8;
 }
