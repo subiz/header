@@ -7401,6 +7401,10 @@ message NewPassword {
 	string email = 8;
 }
 
+message ListCheck {
+	repeated Check checks = 1;
+}
+
 message Check {
 	string id = 2;
 	string name = 3;
@@ -7409,6 +7413,7 @@ message Check {
 	int64 last_sample_at = 6;
 	repeated string failed_subchecks = 7;
 	repeated string failed_subchecks_duration = 8;
+	int64 weight = 10;
 }
 
 message CheckManually {
