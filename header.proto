@@ -7406,15 +7406,16 @@ message ListCheck {
 }
 
 message Check {
-	string id = 2;              //default
-	int64 weight = 10;          //default
-	int64 interval_timeout = 4; //default
+	string id = 2;              //const
+	int64 weight = 1;           //const
+	int64 interval_timeout = 4; //const
 
 	string name = 3;
 	string status = 5;
 	int64 last_sample_at = 6;
 	repeated string failed_subchecks = 7;
 	repeated string failed_subchecks_duration = 8;
+	int64 last_failed_since = 9;
 
 	//manually
 	int64 started = 12; 
