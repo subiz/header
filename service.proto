@@ -37,8 +37,8 @@ service DocSearch {
 	rpc ListCallIds(header.CallMetricsRequest) returns (header.Conversations);
 	rpc ReportAgent(header.AgentMetricsRequest) returns (header.AgentMetrics);
 	//healthcheck
-	rpc HealthCheckReport(header.ConvoReportRequest) returns (header.Empty);
-	rpc HealthCheckIndex(header.DocIndexRequest) returns (header.Empty);
+	rpc HealthCheckReport(header.Empty) returns (header.Empty);
+	rpc HealthCheckIndex(header.Empty) returns (header.Empty);
 }
 
 service NumberRegistry {
