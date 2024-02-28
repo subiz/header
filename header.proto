@@ -876,7 +876,7 @@ message Data {
 	Campaign campaign = 103;
 
 	BusinessEmailAddresses business_email_address = 104;
-	FormSubmission form_submitted = 105;
+	FormSubmission form_submission = 105;
 	OutboundCallEntry outbound_call_entry = 106;
 
 	WorkflowPump workflow_pump = 107;
@@ -888,6 +888,9 @@ message Data {
 	Automation automation = 112;
 
 	PushNoti desktop_notification = 113;
+
+	Ticket ticket = 114;
+	TicketType ticket_type = 115;
 }
 
 message WebRTCMessage {
@@ -1331,6 +1334,10 @@ message Conversation {
 	int64 marked_as_spam = 68;
 	int64 sentiment_score = 69;
 	GoogleReview google_review = 70;
+
+	Ticket tracker_ticket = 73;
+	Ticket customer_ticket = 74;
+	repeated Ticket back_office_tickets = 75;
 }
 
 message GoogleReview {
@@ -1894,6 +1901,8 @@ message TagRequest {
 	string conversation_id = 3;
 	string id = 4;
 	string order_id = 5;
+	string ticket_id = 6; // tkasdlfjasdf
+	string ticket_number = 7;  // SBZ-1234
 }
 
 message AssignRequest {
@@ -2933,7 +2942,7 @@ message FormSubmission {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string form_id = 3;
+	string form_id = 3; // widget_offline, widget_prechat
 	string user_id = 4;
 
 	string id = 5;
@@ -2948,7 +2957,6 @@ message FormSubmission {
 }
 
 message Forms {
-
 	repeated Form forms = 4;
 }
 
@@ -6895,6 +6903,12 @@ message Response {
 	repeated account.Agent agents = 22;
 
 	repeated AutomationLog automation_logs = 23;
+
+	Ticket ticket = 24;
+	repeated Ticket tickets = 25;
+
+	TicketType ticket_type = 26;
+	repeated TicketType ticket_types = 27;
 }
 
 message ZaloCallConsent {
@@ -7418,8 +7432,8 @@ message Check {
 	int64 last_failed_since = 9;
 
 	//manually
-	int64 started = 12; 
-	int64 ended = 13; 
+	int64 started = 12;
+	int64 ended = 13;
 	int64 updated = 14;
     string by = 15;
 }
@@ -7433,4 +7447,89 @@ message CheckPoint {
 	string status = 1;
 	repeated string failed_subchecks = 2;
 	repeated int64 failed_subchecks_duration = 3;
+}
+
+message TicketType {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string prefix = 3; // SBZ
+	string category = 4;
+	string name = 5;
+	string description = 6;
+	string group_id = 7;
+
+	string icon = 8; // emoji
+
+	repeated Attribute attributes = 9;
+	int64 archived = 10;
+
+	string created_by = 11;
+	string created = 12;
+
+	string updated_at = 13;
+	string updated = 14;
+}
+
+message Ticket {
+	common.Context ctx = 1;
+	string account_id = 2;
+	// string group_id = 3;
+	string id = 3;
+	string number = 4; // SBZ-23
+	string category = 5; // customer, back-office, tracker
+	string type = 6;
+
+	string dupplicated_of = 7;
+	repeated ConversationMember members = 8;
+
+	string content = 9; // html
+	repeated Attachment attachments = 10;
+
+	string priority = 11;
+	repeated Tag tags = 12;
+	int64 closed = 13;
+	string state = 14; // converation state: open, in-progress, closed
+	repeated User users = 15;
+	string reporter = 16;
+	string reporter_type = 17; // agent
+
+	string assignee = 18; // The id representing the admin assigned to the ticket.
+	string is_public = 19; // Whether or not the ticket is shared with the customer.
+
+	Touchpoint touchpoint = 20; // read-only copy from conversation touchpoint
+	Conversation conversation = 21; // main conversation
+	repeated string associated_conversations = 22;
+
+	Event last_internal_message_sent = 23;
+	string initial_by = 24; // agent_id || popup || user || bot
+
+	int64 response_sec = 25;
+
+	RouteResult assigned_to = 30;
+	RouteResult reassigned_to = 31;
+
+	// string first_message = 31;
+	string subject = 32;
+
+	repeated KV fields = 33;
+	repeated Rating ratings = 35;
+
+	string source = 36; // indicate where does the conversation happended (url)
+
+	Event matched_event = 45; // for search only
+
+	int64 first_replied_duration = 48;
+
+	string marked_as_spam_by = 67;
+	int64 marked_as_spam = 68;
+
+	int64 average_rating = 73;
+
+	// string user = 73;
+	int64 due_at = 74;
+
+	// repeated string tags = 79;
+	int64 created = 80;
+	int64 updated = 81;
+	int64 archived = 82;
 }
