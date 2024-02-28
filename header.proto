@@ -7415,40 +7415,6 @@ message NewPassword {
 	string email = 8;
 }
 
-message ListCheck {
-	repeated Check checks = 1;
-}
-
-message Check {
-	string id = 2;              //const
-	int64 weight = 1;           //const
-	int64 interval_timeout = 4; //const
-
-	string name = 3;
-	string status = 5;
-	int64 last_sample_at = 6;
-	repeated string failed_subchecks = 7;
-	repeated string failed_subchecks_duration = 8;
-	int64 last_failed_since = 9;
-
-	//manually
-	int64 started = 12;
-	int64 ended = 13;
-	int64 updated = 14;
-    string by = 15;
-}
-
-message CheckGraph {
-    repeated int64 labels = 1;
-	repeated CheckPoint datapoints = 2;
-}
-
-message CheckPoint {
-	string status = 1;
-	repeated string failed_subchecks = 2;
-	repeated int64 failed_subchecks_duration = 3;
-}
-
 message TicketType {
 	common.Context ctx = 1;
 	string account_id = 2;
