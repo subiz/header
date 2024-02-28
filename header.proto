@@ -3699,6 +3699,8 @@ message FbComment {
 	string comment = 2; // read only
 	string quill_delta = 3;
 	string image_url = 4;
+	string template = 5;
+	bool is_template = 6;
 }
 
 message FbFanpageSetting {
@@ -7498,4 +7500,13 @@ message Ticket {
 	int64 created = 80;
 	int64 updated = 81;
 	int64 archived = 82;
+}
+
+message TicketView {
+	common.Context ctx = 1;
+	string account_id = 2;
+	// string group_id = 3;
+	string id = 3;
+
+	UserViewCondition condition = 5;
 }
