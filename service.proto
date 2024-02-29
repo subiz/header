@@ -364,7 +364,7 @@ service TicketMgr {
 	rpc ListTickets(header.ListConversationsRequest) returns (Response);
 	rpc MatchTickets(Ids) returns (Response);
 
-	rpc PongTicketMessage(header.Event) returns (header.Event);
+	rpc PongTicketEvent(header.Event) returns (header.Event);
 
 	rpc TagTicket(header.TagRequest) returns (Empty);
 	rpc UntagTicket(header.TagRequest) returns (Empty);
@@ -372,8 +372,8 @@ service TicketMgr {
 	rpc JoinTicket(header.ConversationMember) returns (Empty);
 	rpc LeftTicket(header.ConversationMember) returns (Empty);
 
-	rpc SendTicketMessage(header.Event) returns (Response);
-	rpc UpdateTicketMessage(header.Event) returns (Response);
+	rpc SendTicketEvent(header.Event) returns (Response);
+	rpc UpdateTicketEvent(header.Event) returns (Response);
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (Response);
 }
 
