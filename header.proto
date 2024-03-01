@@ -7419,23 +7419,24 @@ message NewPassword {
 
 message TicketType {
 	common.Context ctx = 1;
-	string account_id = 2;
-	string prefix = 3; // SBZ
-	string category = 4;
-	string name = 5;
-	string description = 6;
-	string group_id = 7;
+	string id = 2;
+	string account_id = 3;
+	string prefix = 4; // SBZ
+	string category = 5;
+	string name = 6;
+	string description = 7;
+	string group_id = 8;
 
-	string icon = 8; // emoji
+	string icon = 9; // emoji
 
-	repeated Attribute attributes = 9;
-	int64 archived = 10;
+	repeated Attribute attributes = 10;
+	int64 archived = 11;
 
-	string created_by = 11;
-	string created = 12;
+	string created_by = 12;
+	string created = 13;
 
-	string updated_at = 13;
-	string updated = 14;
+	string updated_at = 14;
+	string updated = 15;
 }
 
 message Ticket {
@@ -7445,7 +7446,7 @@ message Ticket {
 	string id = 3;
 	string number = 4; // SBZ-23
 	string category = 5; // customer, back-office, tracker
-	string type = 6;
+	string type_id = 6;
 
 	string dupplicated_of = 7;
 	repeated ConversationMember members = 8;
