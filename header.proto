@@ -7186,12 +7186,14 @@ message OutboundCallUpdateEvent {
 
 message String {
 	string str = 1;
-	string version =2; //version 2 is version for convo
+	string version = 2; //version 2 is version for convo
+	string key = 3;
 }
 
 message Number {
 	int64 number = 1;
-	string version =2; //version 2 is version for convo
+	string version = 2; //version 2 is version for convo
+	string key = 3;
 }
 
 message StrNumM {
