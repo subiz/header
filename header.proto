@@ -1437,6 +1437,8 @@ message Message {
 	string account_id = 5;
 	string order_id = 6;
 	string conversation_id = 14;
+	string ticket_id = 15;
+
 	string task_id = 27;
 	string id = 11;
 	string text = 2; // plaintext or template
@@ -4061,8 +4063,8 @@ message PushNoti {
 
 	string subtitle = 23;
 	string task_id = 24;
-
 	string sound_name = 25;
+	string ios_badge = 26; // empty, 0, 1
 }
 
 message InvoiceTemplate {
@@ -5563,6 +5565,7 @@ message Task {
 
 	string title = 18;
 	string title_quill_delta = 19;
+
 	string note = 20;
 	string note_quill_delta = 21; // for template
 
@@ -5577,6 +5580,7 @@ message Task {
 	repeated string associated_users = 26;
 	repeated string associated_orders = 27;
 	repeated string associated_conversations = 28;
+
 	string associated_call_campaign = 29; // campaign_id.number
 
 	repeated string watchers = 30; // (from JIRA) agents that follow the task, get notified
@@ -7419,8 +7423,8 @@ message NewPassword {
 
 message TicketType {
 	common.Context ctx = 1;
-	string id = 2;
-	string account_id = 3;
+	string account_id = 2;
+	string id = 3;
 	string prefix = 4; // SBZ
 	string category = 5;
 	string name = 6;
@@ -7433,18 +7437,17 @@ message TicketType {
 	int64 archived = 11;
 
 	string created_by = 12;
-	string created = 13;
+	int64 created = 13;
 
-	string updated_at = 14;
-	string updated = 15;
+	string updated_by = 14;
+	int64 updated = 15;
 }
 
 message Ticket {
 	common.Context ctx = 1;
 	string account_id = 2;
 	// string group_id = 3;
-	string id = 3;
-	string number = 4; // SBZ-23
+	string id = 3; // 24, 25, 26...
 	string category = 5; // customer, back-office, tracker
 	string type_id = 6;
 
@@ -7507,6 +7510,5 @@ message TicketView {
 	string account_id = 2;
 	// string group_id = 3;
 	string id = 3;
-
 	UserViewCondition condition = 5;
 }
