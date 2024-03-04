@@ -51,7 +51,6 @@ service NumberRegistry {
 	rpc Lookup(Number) returns (String);
 
 	rpc NewID2(header.Id) returns (header.Id);
-
 }
 
 service Map {
@@ -355,15 +354,15 @@ service ConversationMgr {
 
 service TicketMgr {
 	// ticket type
-	rpc CreateTicketType(TicketType) returns (Response);
-	rpc UpdateTicketType(TicketType) returns (Response);
+	rpc CreateTicketType(TicketType) returns (TicketType);
+	rpc UpdateTicketType(TicketType) returns (TicketType);
 	rpc DeleteTicketType(Id) returns (Response);
 	rpc ListTicketTypes(Id) returns (Response);
-	rpc GetTicketType(Id) returns (Response);
+	rpc GetTicketType(Id) returns (TicketType);
 
-	rpc CreateTicket(header.Ticket) returns (Response);
-	rpc UpdateTicket(Id) returns (Response); // close, reassign
-	rpc GetTicket(Id) returns (Response);
+	rpc CreateTicket(header.Ticket) returns (header.Ticket);
+	rpc UpdateTicket(header.Ticket) returns (header.Ticket); // close, reassign
+	rpc GetTicket(Id) returns (header.Ticket);
 	rpc ListTickets(header.ListConversationsRequest) returns (Response);
 	rpc MatchTickets(Ids) returns (Response);
 

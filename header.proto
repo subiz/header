@@ -7425,7 +7425,6 @@ message TicketType {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string prefix = 4; // SBZ
 	string category = 5;
 	string name = 6;
 	string description = 7;
