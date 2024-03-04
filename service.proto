@@ -49,6 +49,9 @@ service NumberRegistry {
 
 	rpc Shorten(String) returns (Number);
 	rpc Lookup(Number) returns (String);
+
+	rpc NewID(header.Id) returns (header.Id);
+
 }
 
 service Map {
@@ -147,8 +150,6 @@ service AccountMgr {
 	rpc UpdateAgentPresence (account.Presence) returns (account.Presence);
 	rpc ListAgentPresences (Id) returns (account.Presences);
 	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
-
-	rpc NewID(header.Id) returns (header.Id);
 
 	rpc LockLogin(header.Id) returns (header.Id); // accid
 	rpc UnlockLogin(header.Id) returns (header.Id);
