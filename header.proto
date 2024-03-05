@@ -1275,11 +1275,7 @@ message Conversation {
 	Integration integration = 18; // removing after tet
 	int64 actived = 19;
 
-	// Message last_message = 20; // remove after update mobile app
-
-	Event last_internal_message_sent = 27;
 	Event last_message_sent = 23;          // no internal
-	// Event last_event = 26;                 // no internal // remove
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -1824,7 +1820,6 @@ message Integration {
 	string connector_type = 12; // see facebook, call
 	int64 integrated = 6; // first integrated
 	int64 last_integrated = 7;
-	// int64 updated = 7;
 
 	string state = 8;
 	enum State {
@@ -1896,6 +1891,7 @@ message Integration {
 	int64 token_status_updated = 84;
 
 	int64 comment_disabled = 85;
+	int64 modified = 86;
 }
 
 message TagRequest {
