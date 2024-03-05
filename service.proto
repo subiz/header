@@ -356,14 +356,15 @@ service TicketMgr {
 	// ticket type
 	rpc CreateTicketType(TicketType) returns (TicketType);
 	rpc UpdateTicketType(TicketType) returns (TicketType);
-	rpc DeleteTicketType(Id) returns (Response);
+	rpc DeleteTicketType(Id) returns (Empty);
 	rpc ListTicketTypes(Id) returns (Response);
 	rpc GetTicketType(Id) returns (TicketType);
 
 	rpc CreateTicket(header.Ticket) returns (header.Ticket);
 	rpc UpdateTicket(header.Ticket) returns (header.Ticket); // close, reassign
+	rpc DeleteTicket(Id) returns (Empty); // close, reassign
 	rpc GetTicket(Id) returns (header.Ticket);
-	rpc ListTickets(header.ListConversationsRequest) returns (Response);
+	rpc ListTickets(header.TicketView) returns (Response);
 	rpc MatchTickets(Ids) returns (Response);
 
 	rpc PongTicketEvent(header.Event) returns (header.Event);
@@ -374,9 +375,8 @@ service TicketMgr {
 	rpc JoinTicket(header.ConversationMember) returns (Empty);
 	rpc LeftTicket(header.ConversationMember) returns (Empty);
 
-	rpc SendTicketEvent(header.Event) returns (Response);
-	rpc UpdateTicketEvent(header.Event) returns (Response);
-	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (Response);
+	rpc SendTicketEvent(header.Event) returns (header.Event);
+	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
 }
 
 service TemplateMgr {

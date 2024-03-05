@@ -1177,6 +1177,7 @@ message ConversationMember {
 	string account_id = 2;
 	string type = 3; // type
 	string id = 4;
+	string ticket_id = 6;
 	string conversation_id = 13;
 	string last_page_view_url = 15;
 	string membership = 12;
@@ -1237,6 +1238,7 @@ message ListConversationEventsRequest {
 	string account_id = 2;
 	string conversation_id = 3;
 	string start_id = 4;
+	string ticket_id = 5;
 	int32 limit = 6;
 
 	string message_type = 15; // 'empty', file, image, link, pinned
@@ -7447,10 +7449,11 @@ message Ticket {
 	string account_id = 2;
 	// string group_id = 3;
 	string id = 3; // 24, 25, 26...
+	string title = 4;
 	string category = 5; // customer, back-office, tracker
 	string type_id = 6;
 
-	string dupplicated_of = 7;
+	string duplicate_of = 7;
 	repeated ConversationMember members = 8;
 
 	Message description = 10;
@@ -7467,7 +7470,7 @@ message Ticket {
 	string is_public = 19; // Whether or not the ticket is shared with the customer.
 
 	Touchpoint touchpoint = 20; // read-only copy from conversation touchpoint
-	Conversation conversation = 21; // main conversation
+	string conversation_id = 21; // main conversation
 	repeated string associated_conversations = 22;
 
 	Event last_internal_message_sent = 23;
