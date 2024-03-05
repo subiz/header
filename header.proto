@@ -817,7 +817,6 @@ message Data {
 	Notification notification = 14;
 	AgentGroup agent_group = 18;
 	Note note = 23;
-	// Ticket ticket = 24;
 	// Automation automation = 25;
 	Event event = 26;
 	// AutomationEvent automation_event = 30;
@@ -7427,7 +7426,8 @@ message TicketType {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string category = 5;
+	string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
+	string category = 5; // customer, back-office, tracker
 	string name = 6;
 	string description = 7;
 	string group_id = 8;
@@ -7447,10 +7447,10 @@ message TicketType {
 message Ticket {
 	common.Context ctx = 1;
 	string account_id = 2;
-	// string group_id = 3;
+
 	string id = 3; // 24, 25, 26...
 	string title = 4;
-	string category = 5; // customer, back-office, tracker
+	string category = 5; // readonly from type: customer, back-office, tracker
 	string type_id = 6;
 
 	string duplicate_of = 7;
@@ -7481,9 +7481,6 @@ message Ticket {
 	RouteResult assigned_to = 30;
 	RouteResult reassigned_to = 31;
 
-	// string first_message = 31;
-	string subject = 32;
-
 	repeated KV fields = 33;
 	repeated Rating ratings = 35;
 
@@ -7505,6 +7502,20 @@ message Ticket {
 	int64 created = 80;
 	int64 updated = 81;
 	int64 archived = 82;
+	Event last_event = 83;
+}
+
+message ListTicketRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string type = 5; // quick
+	string assignee = 6; // quick
+
+	UserViewCondition condition = 7;
+	string is_shorten = 8;
+	string order_by = 9; // updated, state, priority, created, due_date
+	string next_cursor = 10;
 }
 
 message TicketView {
@@ -7513,4 +7524,7 @@ message TicketView {
 	// string group_id = 3;
 	string id = 3;
 	UserViewCondition condition = 5;
+
+	repeated string columns = 6;
+	string order_by = 8; // updated, state, priority, created, due_date
 }

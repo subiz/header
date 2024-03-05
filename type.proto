@@ -253,6 +253,12 @@ enum RealtimeType {
 	automation_deleted = 248;
 
 	desktop_notification_pushed = 249;
+
+	ticket_updated = 250; // event.data.ticket
+	ticket_deleted = 251;
+
+	ticket_type_updated = 252; // event.data.ticket
+	ticket_type_deleted = 253;
 }
 
 message TextTransform {
