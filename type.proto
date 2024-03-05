@@ -259,6 +259,8 @@ enum RealtimeType {
 
 	ticket_type_updated = 252; // event.data.ticket
 	ticket_type_deleted = 253;
+
+	ticket_reassigned = 254;
 }
 
 message TextTransform {

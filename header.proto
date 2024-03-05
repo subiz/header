@@ -1275,7 +1275,11 @@ message Conversation {
 	Integration integration = 18; // removing after tet
 	int64 actived = 19;
 
+	// Message last_message = 20; // remove after update mobile app
+
+	Event last_internal_message_sent = 27;
 	Event last_message_sent = 23;          // no internal
+	// Event last_event = 26;                 // no internal // remove
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -1892,6 +1896,7 @@ message Integration {
 
 	int64 comment_disabled = 85;
 	int64 modified = 86;
+
 }
 
 message TagRequest {
@@ -6650,9 +6655,6 @@ enum E {
 	invalid_amount = 50;
 	inactive_promotion_referral_program = 51;
 
-	invalid_stripe_info = 54;
-	invalid_plan = 56;
-
 	// invalid_email = 59;
 	invalid_date_format = 61;
 	// prohibited_action = 62;
@@ -6787,7 +6789,6 @@ enum E {
 	bad_webrtc_track = 206;
 	invalid_webrtc_negotiation = 207;
 	bad_webrtc_connection = 208;
-	user_duplicated = 209;
 
 	invalid_task_title = 210;
 	invalid_task_note = 211;
