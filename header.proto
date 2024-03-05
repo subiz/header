@@ -4056,6 +4056,8 @@ message PushNoti {
 	string is_private = 14; // conversation is private
 
 	repeated By tos = 15;
+	repeated string ios_badges = 26; // empty, 0, 1
+
 	string request_id = 17;
 	string caller_number = 19;
 	string caller_name = 20;
@@ -4065,7 +4067,6 @@ message PushNoti {
 	string subtitle = 23;
 	string task_id = 24;
 	string sound_name = 25;
-	string ios_badge = 26; // empty, 0, 1
 }
 
 message InvoiceTemplate {
