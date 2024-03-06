@@ -4725,7 +4725,7 @@ message OrderMetricsRequest {
 message Orders {
 	common.Context ctx = 1;
 
-	// repeated OrderMetric metrics = 3;
+    repeated OrderMetric metrics = 3;
 	repeated Order orders = 4;
 	string anchor = 5;
 	int64 total = 6;
