@@ -7420,6 +7420,7 @@ message NewPassword {
 	string email = 8;
 }
 
+
 message TicketType {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7432,7 +7433,7 @@ message TicketType {
 
 	string icon = 9; // emoji
 
-	repeated Attribute attributes = 10;
+	AttributeDefinitions attr_defs = 10;
 	int64 archived = 11;
 
 	string created_by = 12;
@@ -7453,7 +7454,7 @@ message Ticket {
 
 	string duplicate_of = 7;
 	repeated ConversationMember members = 8;
-
+	repeated Attribute attributes = 9;
 	Message description = 10;
 
 	string priority = 11; // low, medium, high, urgent
@@ -7501,6 +7502,7 @@ message Ticket {
 	int64 updated = 81;
 	int64 archived = 82;
 	Event last_event = 83;
+	string updated_by = 84;
 }
 
 message ListTicketRequest {
@@ -7511,9 +7513,11 @@ message ListTicketRequest {
 	string assignee = 6; // quick
 
 	UserViewCondition condition = 7;
-	string is_shorten = 8;
+	bool is_shorten = 8;
 	string order_by = 9; // updated, state, priority, created, due_date
 	string next_cursor = 10;
+	string prev_cursor = 11;
+	int64 limit = 12;
 }
 
 message TicketView {
@@ -7523,6 +7527,6 @@ message TicketView {
 	string id = 3;
 	UserViewCondition condition = 5;
 
-	repeated string columns = 6;
+	repeated string fields = 6;
 	string order_by = 8; // updated, state, priority, created, due_date
 }

@@ -364,7 +364,7 @@ service TicketMgr {
 	rpc UpdateTicket(header.Ticket) returns (header.Ticket); // close, reassign
 	rpc DeleteTicket(Id) returns (Empty); // close, reassign
 	rpc GetTicket(Id) returns (header.Ticket);
-	rpc ListTickets(header.TicketView) returns (Response);
+	rpc ListTickets(header.ListTicketRequest) returns (Response);
 	rpc MatchTickets(Ids) returns (Response);
 
 	rpc PongTicketEvent(header.Event) returns (header.Event);
