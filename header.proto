@@ -6909,11 +6909,11 @@ message Response {
 
 	repeated AutomationLog automation_logs = 23;
 
-	Ticket ticket = 24;
 	repeated Ticket tickets = 25;
 
-	TicketType ticket_type = 26;
 	repeated TicketType ticket_types = 27;
+
+	repeated TicketView ticket_views = 29;
 }
 
 message ZaloCallConsent {
@@ -7453,7 +7453,7 @@ message Ticket {
 
 	string duplicate_of = 7;
 	repeated ConversationMember members = 8;
-	map<string, AttributeDefinition> attrM = 9;
+	map<string, Attribute> attrM = 9;
 	Message description = 10;
 
 	string priority = 11; // low, medium, high, urgent
