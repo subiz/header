@@ -7519,7 +7519,6 @@ message ListTicketRequest {
 	UserViewCondition condition = 7;
 	bool is_shorten = 8;
 	string order_by = 9; // updated, state, priority, created, due_date
-	string next_cursor = 10;
 	string prev_cursor = 11;
 	int64 limit = 12;
 }
@@ -7529,8 +7528,12 @@ message TicketView {
 	string account_id = 2;
 	// string group_id = 3;
 	string id = 3;
-	UserViewCondition condition = 5;
+	string agent_id = 4;
+	string type = 5; // quick
+	string assignee = 6; // quick
 
-	repeated string fields = 6;
-	string order_by = 8; // updated, state, priority, created, due_date
+	UserViewCondition condition = 7;
+
+	repeated string fields = 8;
+	string order_by = 9; // updated, state, priority, created, due_date
 }
