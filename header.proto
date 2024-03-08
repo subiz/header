@@ -1430,6 +1430,7 @@ message Conversations {
 	int64 last_modified = 7;
 }
 
+
 // html: <b>xin chao</b>&nbsp;{{customer.name}}
 // plaintext: xin chao {{customer.name}}
 // markdown:  *xin chao* {{customer.name}}
@@ -1457,6 +1458,8 @@ message Message {
 
 	string quill_delta = 20; // deprecated
 	I18nString i18n_quill_delta = 21; // rename to i18n_text
+
+
 
 	bool is_private = 22;
 
@@ -2148,6 +2151,8 @@ message Site {
 
 	string mobile_screenshoot_url = 13;
 	string desktop_screenshoot_url = 14;
+
+	int64 last_crawled = 15;
 }
 
 message Bot {
