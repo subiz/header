@@ -7519,8 +7519,17 @@ message ListTicketRequest {
 	UserViewCondition condition = 7;
 	bool is_shorten = 8;
 	string order_by = 9; // updated, state, priority, created, due_date
-	string prev_cursor = 11;
+	string next_cursor = 11;
 	int64 limit = 12;
+}
+
+message ViewMetric {
+	string view_id = 1;
+	string ticket_count = 2;
+}
+
+message ViewMetrics {
+	repeated ViewMetric metrics = 2;
 }
 
 message TicketView {

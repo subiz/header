@@ -372,6 +372,7 @@ service TicketMgr {
 	rpc DeleteTicketView(Id) returns (Empty); 
 	rpc GetTicketView(Id) returns (header.TicketView);
 	rpc ListTicketViews(Empty) returns (Response);
+	rpc CountTicketByViews(Empty) returns (Response);
 
 	rpc PongTicketEvent(header.Event) returns (header.Event);
 
