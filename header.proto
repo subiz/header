@@ -7437,7 +7437,7 @@ message TicketType {
 	string group_id = 8;
 
 	string icon = 9; // emoji
-	map<string, AttributeDefinition> defM = 10;
+	repeated AttributeDefinition defs = 10;
 	int64 archived = 11;
 
 	string created_by = 12;
@@ -7458,7 +7458,7 @@ message Ticket {
 
 	string duplicate_of = 7;
 	repeated ConversationMember members = 8;
-	map<string, Attribute> attrM = 9;
+	repeated Attribute attrs = 9;
 	Message description = 10;
 
 	string priority = 11; // low, medium, high, urgent
