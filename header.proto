@@ -7461,7 +7461,7 @@ message Ticket {
 	repeated Attribute attrs = 9;
 	Message description = 10;
 
-	
+
 	string priority = 11; // low, medium, high, urgent
 	repeated Tag tags = 12;
 	int64 closed = 13;
@@ -7539,12 +7539,36 @@ message TicketView {
 	string account_id = 2;
 	// string group_id = 3;
 	string id = 3;
-	string agent_id = 4;
-	string type = 5; // quick
-	string assignee = 6; // quick
+
+
+	repeated TicketViewMember members = 5;
+
+	string type = 6;
 
 	UserViewCondition condition = 7;
 
 	repeated string fields = 8;
 	string order_by = 9; // updated, state, priority, created, due_date
+
+	string created_by = 10;
+	int64 created = 11;
+
+	string updated_by = 12;
+	int64 updated = 13;
+
+	int64 count = 15;
+}
+
+message TicketViewMember  {
+	common.Context ctx = 1;
+	string account_id = 2;
+	// string group_id = 3;
+	string id = 3;
+	string view_id = 4;
+
+	string agent_id = 5;
+	string role = 6; // manager, triage, member (read cua chinh minh)
+	int64 unread_count = 7;
+
+	int64 joined_at = 9;
 }
