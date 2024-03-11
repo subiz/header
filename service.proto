@@ -372,7 +372,7 @@ service TicketMgr {
 	rpc DeleteTicketView(Id) returns (Empty);
 	rpc GetTicketView(Id) returns (header.TicketView);
 	rpc ListTicketViews(Empty) returns (Response);
-	rpc CountTicketsByView(Empty) returns (ViewMetrics);
+	rpc CountTickets(Empty) returns (Response);
 
 	rpc PongTicketEvent(header.Event) returns (header.Event);
 
@@ -385,8 +385,9 @@ service TicketMgr {
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
 
-	rpc AddMemberToView(header.TicketViewMember) returns (Response);
-	rpc RemoveMemberToView(header.TicketViewMember) returns (Response);
+	rpc AddMemberToView(header.TicketViewMember) returns (header.TicketViewMember);
+	rpc UpdateMemberToView(header.TicketViewMember) returns (header.TicketViewMember);
+	rpc RemoveMemberToView(header.TicketViewMember) returns (Empty);
 }
 
 service TemplateMgr {
