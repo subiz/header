@@ -7455,12 +7455,13 @@ message Ticket {
 	string title = 4;
 	string category = 5; // readonly from type: customer, back-office, tracker
 	string type_id = 6;
+	string prefix = 7; // max 3 character, lowercase: sbz, tec, ret
 
-	string duplicate_of = 7;
 	repeated ConversationMember members = 8;
 	repeated Attribute attrs = 9;
 	Message description = 10;
 
+	
 	string priority = 11; // low, medium, high, urgent
 	repeated Tag tags = 12;
 	int64 closed = 13;
@@ -7480,6 +7481,7 @@ message Ticket {
 	string initial_by = 24; // agent_id || popup || user || bot
 
 	int64 response_sec = 25;
+	string duplicate_of = 26;
 
 	RouteResult assigned_to = 30;
 	RouteResult reassigned_to = 31;
@@ -7525,7 +7527,7 @@ message ListTicketRequest {
 
 message ViewMetric {
 	string view_id = 1;
-	string ticket_count = 2;
+	int64 ticket_count = 2;
 }
 
 message ViewMetrics {
