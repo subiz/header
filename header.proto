@@ -7430,7 +7430,7 @@ message TicketTypeMember  {
 	string account_id = 2;
 	// string group_id = 3;
 	string id = 3;
-	string view_id = 4;
+	string type_id = 4;
 
 	string role = 6; // manager, triage, member (read cua chinh minh)
 
@@ -7517,7 +7517,7 @@ message Ticket {
 	// repeated string tags = 79;
 	int64 created = 80;
 	int64 updated = 81;
-	int64 archived = 82;
+	bool archived = 82;
 	Event last_event = 83;
 	string updated_by = 84;
 }
