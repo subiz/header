@@ -7541,7 +7541,7 @@ message TicketView {
 	string account_id = 2;
 	// string group_id = 3;
 	string id = 3;
-	
+    string title = 4;
 	repeated TicketViewMember members = 5;
 
 	string type = 6;
@@ -7556,6 +7556,7 @@ message TicketView {
 
 	string updated_by = 12;
 	int64 updated = 13;
+    string desciption = 14;
 
 	int64 count = 15;
 }
