@@ -7456,6 +7456,8 @@ message TicketType {
 
 	string updated_by = 14;
 	int64 updated = 15;
+
+	repeated TicketTypeMember members = 16;
 }
 
 message Ticket {
