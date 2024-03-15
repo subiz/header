@@ -156,6 +156,8 @@ service AccountMgr {
 	rpc UnlockLogin(header.Id) returns (header.Id);
 
 	rpc ListBills(header.Id) returns (payment.Bills);
+
+	rpc UpdateSegmentUserViewOrder(account.SegmentUserViewsOrder) returns (account.DashboardAgent);
 }
 
 // user services
@@ -262,13 +264,13 @@ service AttributeMgr {
 }
 
 service AutomationMgr {
-	rpc ListAutomations(Id) returns (header.Response);
-	rpc UpdateAutomation(header.Automation) returns (header.Response);
-	rpc CreateAutomation(header.Automation) returns (header.Response);
-	rpc DeleteAutomation(Id) returns (header.Response);
-	rpc ReadAutomation(Id) returns (header.Response);
+	rpc ListWorkflows(Id) returns (header.Response);
+	rpc UpdateWorkflow(Workflow) returns (header.Response);
+	rpc CreateWorkflow(Workflow) returns (header.Response);
+	rpc DeleteWorkflow(Id) returns (header.Response);
+	rpc ReadWorkflow(Id) returns (header.Response);
 
-	rpc ListAutomationLog(AutomationLogRequest) returns (Response);
+	rpc ListWorkflowLog(WorkflowLogRequest) returns (Response);
 	// rpc ManuallyPauseAutomation() return (Response); // for an user or conversation
 	// rpc ManuallyResumeAutomation() return (Response); // for user
 }

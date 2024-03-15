@@ -41,7 +41,6 @@ func WithShardRedirect() grpc.DialOption {
 	addrs := []string{}
 
 	f := func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
-		lock.Lock()
 		// has data learned from last request
 		if len(addrs) > 0 {
 			// looking for shard key in header or account_id field in parameter
@@ -56,31 +55,35 @@ func WithShardRedirect() grpc.DialOption {
 				host := addrs[shardNumber]
 				co, ok := conn[host]
 				if !ok {
-					co = DialGrpc(host)
-					conn[host] = co
+					lock.Lock()
+					if _, has := conn[host]; !has {
+						co = DialGrpc(host)
+						// copy on write
+						copyConn := make(map[string]*grpc.ClientConn)
+						for k, v := range conn {
+							copyConn[k] = v
+						}
+						copyConn[host] = co
+						conn = copyConn
+					}
+					lock.Unlock()
 				}
-				lock.Unlock()
 				var header metadata.MD // variable to store header and trailer
 				opts = append([]grpc.CallOption{grpc.Header(&header)}, opts...)
 				err := co.Invoke(ctx, method, req, reply, opts...)
 				if len(header["shard_addrs"]) > 0 {
-					lock.Lock()
 					addrs = header.Get("shard_addrs")
-					lock.Unlock()
 				}
 				return err
 			}
 		}
 
-		lock.Unlock()
 		// no sharding parameter, perform the request anyway
 		var header metadata.MD
 		opts = append([]grpc.CallOption{grpc.Header(&header)}, opts...)
 		err := invoker(ctx, method, req, reply, cc, opts...)
 		if len(header["shard_addrs"]) > 0 {
-			lock.Lock()
 			addrs = header.Get("shard_addrs")
-			lock.Unlock()
 		}
 		return err
 	}

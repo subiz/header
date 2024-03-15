@@ -817,7 +817,7 @@ message Data {
 	Notification notification = 14;
 	AgentGroup agent_group = 18;
 	Note note = 23;
-	// Automation automation = 25;
+	Workflow workflow = 25;
 	Event event = 26;
 	// AutomationEvent automation_event = 30;
 	// notibox.Notibox notibox = 32;
@@ -878,14 +878,12 @@ message Data {
 	FormSubmission form_submission = 105;
 	OutboundCallEntry outbound_call_entry = 106;
 
-	WorkflowPump workflow_pump = 107;
 	OutboundCallUpdateEvent outbound_call_update = 108;
 	BannedUser banned_user = 109;
 	Credit credit = 110;
 	payment.Bill subiz_bill = 111;
 
-	Automation automation = 112;
-
+	// Automation automation = 112;
 	PushNoti desktop_notification = 113;
 
 	Ticket ticket = 114;
@@ -4001,6 +3999,7 @@ message UserViewCondition {
 	repeated UserViewCondition one = 13;
 
 	bool deleted = 14;
+	string ui_type = 15;
 }
 
 message ReportResponse {
@@ -6848,6 +6847,21 @@ message ActionWait {
 	string timeout_action_id = 5;
 	int64 timeout = 6;
 	string timeout_unit = 8; // second, minute, hour, week
+
+	string type = 9; // date, days_of_week, attribute
+
+	// string days_of_week
+	// string time_of_day = 5; // 14:30
+
+	string operator = 10; //
+	// string time_of_day
+	// string month = 5; // user.attributes.#(key=="birthday").value
+	string day = 11; // user.attributes.#(key=="birthday").value
+	string attribute_format = 12;
+	string timezone = 13; // account, object
+
+	string timming = 14; //on-date, after-date, before-date
+	string delta_sec = 15; // 86400
 }
 
 message CampaignBranch {
@@ -6906,13 +6920,13 @@ message Response {
 	account.Account account = 17;
 	repeated account.Account accounts = 18;
 
-	Automation automation = 19;
-	repeated Automation automations = 20;
+	Workflow workflow = 19;
+	repeated Workflow workflows = 20;
 
 	account.Agent agent = 21;
 	repeated account.Agent agents = 22;
 
-	repeated AutomationLog automation_logs = 23;
+	repeated WorkflowLog automation_logs = 23;
 
 	repeated Ticket tickets = 25;
 
@@ -6982,11 +6996,6 @@ message WorkflowSession {
 	int64 exited = 9;
 	int64 started = 10;
 	string exit_code = 12;
-}
-
-message WorkflowPump {
-	string workflow_id = 3;
-	string session_id = 4;
 }
 
 message SchedulerTask {
@@ -7298,33 +7307,8 @@ message AutomationCondition {
 	repeated AutomationCondition one = 20;
 }
 
-message AutomationAction {
-	string account_id = 2;
-	string bot_id = 3; // could be pipeline automation id
-	string id = 4;
-	string name = 5;
-	bool recheck_condition = 6;
 
-	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state, send_message
-
-	ActionJump jump = 15;
-	ActionSendHttp send_http = 17;
-	ActionAskQuestion ask_question = 18;
-	AssignRequest assign = 19;
-
-	int64 delay_sec = 20; // max 60sec
-	ActionUpdateConversation update_conversation = 21;
-	bytes internal_state = 30;
-	ActionUpdateUser update_user = 31;
-	ActionUpdateUserLabels update_user_labels = 32;
-	ActionConfirmOrder confirm_order = 34;
-	ActionCreateTask create_task = 35;
-	ActionSendChatTranscript send_chat_transcript = 36;
-	ActionUpdateUserSegments update_user_segments = 37;
-	ActionRotateAgentInRule rotate_agent_in_rule = 38;
-}
-
-message AutomationLogRequest {
+message WorkflowLogRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string automation_id = 3;
@@ -7338,16 +7322,17 @@ message AutomationLogRequest {
 	string level = 9; // empty or error
 }
 
-message Automation {
+message Workflow {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string type = 4;
+	string object_type = 4; // user, ticket, order, conversation ...
+
 	string name = 5;
 	string description = 6;
 
 	repeated AutomationTrigger triggers = 7; // or
-	repeated AutomationAction actions = 8;
+	repeated WorkflowAction actions = 8;
 
 	string updated_by = 9;
 	int64 updated = 10;
@@ -7362,7 +7347,7 @@ message Automation {
 	int64 deleted = 16;
 }
 
-message AutomationLog {
+message WorkflowLog {
 	string account_id = 2;
 	string automation_id = 3;
 	string id = 4;
@@ -7441,7 +7426,7 @@ message TicketType {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
+	string prefix = 4;   // max 3 character, lowercase: sbz, tec, ret
 	string category = 5; // customer, back-office, tracker
 	string name = 6;
 	string description = 7;
@@ -7473,7 +7458,6 @@ message Ticket {
 	repeated ConversationMember members = 8;
 	repeated Attribute attrs = 9;
 	Message description = 10;
-
 
 	string priority = 11; // low, medium, high, urgent
 	repeated Tag tags = 12;
@@ -7543,14 +7527,14 @@ message TicketView {
 	string account_id = 2;
 	// string group_id = 3;
 	string id = 3;
-    string title = 4;
+	string title = 4;
 	repeated TicketViewMember members = 5;
 
 	string type = 6;
 
 	UserViewCondition condition = 7;
 
-	repeated string fields = 8;
+	repeated string fields = 8; // column // thu tu sap xep, danh sach cot
 	string order_by = 9; // updated, state, priority, created, due_date
 
 	string created_by = 10;
@@ -7558,12 +7542,12 @@ message TicketView {
 
 	string updated_by = 12;
 	int64 updated = 13;
-    string desciption = 14;
+	string desciption = 14;
 
 	int64 count = 15;
 }
 
-message TicketViewMember  {
+message TicketViewMember {
 	common.Context ctx = 1;
 	string account_id = 2;
 	// string group_id = 3;
@@ -7571,6 +7555,7 @@ message TicketViewMember  {
 	string view_id = 4;
 
 	string role = 6; // manager,  member (read cua chinh minh)
+
 	int64 read_count = 7;
 
 	int64 joined_at = 9;

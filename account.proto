@@ -42,6 +42,18 @@ message DashboardAgent {
 
 	optional int64 debug_log_collected = 36;
 	optional int64 web_notification_volume = 37; // 0 default, 100 loudest
+
+	map<string, string> segment_user_views_order = 38; // {sg_all: "unassigned,assigned"}
+}
+
+message SegmentUserViewsOrder {
+	optional common.Context ctx = 1;
+	optional string account_id = 2; // subiz only
+	optional string agent_id = 3;
+
+	optional string segment_id = 4;
+	repeated string view_ids = 5;
+	repeated string pinned_user_views = 6;
 }
 
 message Agent {
