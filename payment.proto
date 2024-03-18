@@ -76,7 +76,6 @@ message Limit {
 	optional uint32 automation_message_quota = 14;
 
 	optional uint32 max_rules = 16;
-	optional bool is_unlimited_agent = 17;
 }
 
 message Plans {
@@ -86,12 +85,19 @@ message Plans {
 message Plan {
 	optional string name = 2;
 	optional Limit limit = 3;
-	optional float price = 4; // usd
+	optional float price = 4; // deprecated
+	optional int64 fpv_price = 8; // usd
+	optional bool is_unlimited_agent = 5;
+	optional bool renewable = 6;
+
+	optional int64 inactive_days_after_churned = 7;
+
+	// cho phep renew
 	enum Type {
 		trial = 0;
 		standard = 2;
 		advanced = 3;
-		advanced_unlimited_agent = 4;
+		standard_unlimited_agent = 4;
 	}
 }
 
@@ -120,6 +126,7 @@ message Subscription {
 	optional int64 churned = 47;
 
 	optional int64 fpv_credit_vnd = 48;
+	optional int64 fpv_unlimited_agent_price = 49;
 }
 
 message Bill {
