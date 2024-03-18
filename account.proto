@@ -167,7 +167,7 @@ message Account {
 	optional string deleted_by_agent = 47;
 	optional InvoiceInfo invoice_info = 48;
 
-	optional int64 unlimited_agent_price = 49; 
+	optional float unlimited_agent_price = 49;  //USD
 }
 
 message InvoiceInfo {
