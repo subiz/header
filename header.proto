@@ -7183,7 +7183,8 @@ message AccSubs {
 	int64 total_trial = 5;
 	int64 total_standard = 6;
 	int64 total_advanced = 7;
-	int64 total = 8;
+	int64 total_advanced_unlimited_agent = 8;
+	int64 total = 9;
 }
 
 message OutboundCallUpdateEvent {

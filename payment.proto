@@ -90,6 +90,7 @@ message Plan {
 		trial = 0;
 		standard = 2;
 		advanced = 3;
+		advanced_unlimited_agent = 4;
 	}
 }
 
