@@ -166,6 +166,8 @@ message Account {
 	optional UserAttributeSetting user_attribute_setting = 46;
 	optional string deleted_by_agent = 47;
 	optional InvoiceInfo invoice_info = 48;
+
+	optional int64 unlimited_agent_price = 49; 
 }
 
 message InvoiceInfo {
