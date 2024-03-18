@@ -118,6 +118,8 @@ message Subscription {
 	optional int64 churned = 47;
 
 	optional int64 fpv_credit_vnd = 48;
+
+	optional int64 discount_program = 49; // 3_999_000_000_000 // vnd fpv
 }
 
 message Bill {
