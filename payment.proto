@@ -118,8 +118,6 @@ message Subscription {
 	optional int64 churned = 47;
 
 	optional int64 fpv_credit_vnd = 48;
-
-	optional int64 discount_program = 49; // 3_999_000_000_000 // vnd fpv
 }
 
 message Bill {
@@ -534,4 +532,11 @@ message PaidInvoiceEmail {
 	optional int64 created = 6;
 	optional string invoice_created = 8;
 	optional string invoice_link = 9;
+}
+
+message Package {
+	optional common.Context ctx = 1;
+	optional string name = 2;
+	optional bool is_unlimited_agent = 3;
+	optional int64 unit_price = 4;
 }
