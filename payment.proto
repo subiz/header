@@ -128,7 +128,7 @@ message PurchaseRequest {
 	optional int64 fpv_credit_vnd = 48;
 	optional int64 fpv_unlimited_agent_price = 49; // usd
 
-	optional bool generate_invoice = 50;
+	optional bool do_not_generate_invoice = 50;
 }
 
 message Subscription {
