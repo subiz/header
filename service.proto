@@ -433,7 +433,7 @@ service Noti5Service {
 service PaymentMgr {
 	rpc SearchSub(account.SearchSubRequest) returns (AccSubs);
 	rpc GetSub(header.Id) returns (AccSub);
-	rpc Purchase(payment.Subscription) returns (payment.Invoice);
+	rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice);
 	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription);
 	rpc GetSubscription(Id) returns (payment.Subscription);
 	rpc AddPaymentMethod(payment.PaymentMethod) returns (payment.PaymentMethod);
