@@ -384,14 +384,6 @@ service TicketMgr {
 
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
-
-	rpc AddMemberToView(header.TicketViewMember) returns (header.TicketViewMember);
-	rpc UpdateMemberToView(header.TicketViewMember) returns (header.TicketViewMember);
-	rpc RemoveMemberToView(header.TicketViewMember) returns (Empty);
-
-	rpc AddMemberToType(header.TicketTypeMember) returns (header.TicketTypeMember);
-	rpc UpdateMemberToType(header.TicketTypeMember) returns (header.TicketTypeMember);
-	rpc RemoveMemberToType(header.TicketTypeMember) returns (Empty);
 }
 
 service TemplateMgr {
