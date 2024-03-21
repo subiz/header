@@ -89,8 +89,8 @@ message Plan {
 	optional int64 fpv_price = 8; // usd
 	optional bool is_unlimited_agent = 5;
 	optional bool renewable = 6;
-
 	optional int64 inactive_days_after_churned = 7;
+    optional bool long_cycle_incentives = 9;
 
 	// cho phep renew
 	enum Type {
