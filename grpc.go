@@ -56,7 +56,7 @@ func WithShardRedirect() grpc.DialOption {
 				co, ok := conn[host]
 				if !ok {
 					lock.Lock()
-					if _, has := conn[host]; !has {
+					if co, ok = conn[host]; !ok {
 						co = DialGrpc(host)
 						// copy on write
 						copyConn := make(map[string]*grpc.ClientConn)

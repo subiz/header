@@ -54594,7 +54594,7 @@ type Ticket struct {
 	Priority                string                `protobuf:"bytes,11,opt,name=priority,proto3" json:"priority,omitempty"` // low, medium, high, urgent
 	Tags                    []*Tag                `protobuf:"bytes,12,rep,name=tags,proto3" json:"tags,omitempty"`
 	Closed                  int64                 `protobuf:"varint,13,opt,name=closed,proto3" json:"closed,omitempty"`
-	State                   string                `protobuf:"bytes,14,opt,name=state,proto3" json:"state,omitempty"` // new, open, closed
+	State                   string                `protobuf:"bytes,14,opt,name=state,proto3" json:"state,omitempty"` // unassigned, open, hold, closed
 	Users                   []*User               `protobuf:"bytes,15,rep,name=users,proto3" json:"users,omitempty"`
 	Reporter                string                `protobuf:"bytes,16,opt,name=reporter,proto3" json:"reporter,omitempty"`
 	ReporterType            string                `protobuf:"bytes,17,opt,name=reporter_type,json=reporterType,proto3" json:"reporter_type,omitempty"`       // agent

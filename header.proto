@@ -19,6 +19,7 @@ message KafkaMessage {
 	bytes data = 6;
 	string consumer_group = 7;
 }
+
 message Empty {
 	common.Context ctx = 1;
 }
@@ -7463,7 +7464,7 @@ message Ticket {
 	string priority = 11; // low, medium, high, urgent
 	repeated Tag tags = 12;
 	int64 closed = 13;
-	string state = 14; // new, open, closed
+	string state = 14; // unassigned, open, hold, closed
 	repeated User users = 15;
 	string reporter = 16;
 	string reporter_type = 17; // agent
