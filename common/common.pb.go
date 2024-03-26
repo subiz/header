@@ -1053,7 +1053,8 @@ type Limit struct {
 	AccountId      string   `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	MaxAutomations uint32   `protobuf:"varint,4,opt,name=max_automations,json=maxAutomations,proto3" json:"max_automations,omitempty"`
 	// optional uint32 max_conversations = 6;
-	MaxSegments            uint32 `protobuf:"varint,7,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
+	MaxSegments uint32 `protobuf:"varint,7,opt,name=max_segments,json=maxSegments,proto3" json:"max_segments,omitempty"`
+	// uint32 max_agents = 8;
 	CanBuyAgent            bool   `protobuf:"varint,10,opt,name=can_buy_agent,json=canBuyAgent,proto3" json:"can_buy_agent,omitempty"`
 	AutomationWebhookQuota uint32 `protobuf:"varint,12,opt,name=automation_webhook_quota,json=automationWebhookQuota,proto3" json:"automation_webhook_quota,omitempty"`
 	AutomationEmailQuota   uint32 `protobuf:"varint,13,opt,name=automation_email_quota,json=automationEmailQuota,proto3" json:"automation_email_quota,omitempty"`

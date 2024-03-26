@@ -100,7 +100,7 @@ message PurchaseRequest {
 	optional string plan = 17;
 
 	optional float credit = 27;
-	repeated Note notes = 28;
+	// repeated Note notes = 28;
 	optional string referral_by = 29; // account_id
 	optional Customer customer = 31;
 	optional string primary_payment_method = 32;
@@ -113,6 +113,8 @@ message PurchaseRequest {
 	optional int64 fpv_unlimited_agent_price = 49; // usd
 
 	optional bool do_not_generate_invoice = 50;
+
+	optional int64 num_agents = 51;
 }
 
 message Subscription {
@@ -141,6 +143,8 @@ message Subscription {
 
 	optional int64 fpv_credit_vnd = 48;
 	optional int64 fpv_unlimited_agent_price = 49; // usd
+
+	optional int64 num_agents = 50;
 }
 
 message Bill {
