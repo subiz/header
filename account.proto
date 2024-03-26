@@ -153,10 +153,6 @@ message Account {
 	optional LeadSetting lead_setting = 33;
 	repeated string web_domains = 34;
 
-	optional Feature feature = 35;
-	optional Feature force_feature = 36; // only edit by subiz
-	// optional WebpageMonitorSetting webpage_monitor_setting = 37;
-
 	optional string locale = 39; // primary locale
 	repeated string supported_locales = 40; // default vi-VN and en-US
 	optional string currency = 41; // VND or USD cannot change
@@ -187,21 +183,6 @@ message InvoiceInfo {
 
 message UserAttributeSetting {
 	repeated string basic_fields = 3;
-}
-
-message Feature {
-	optional bool webpage_monitor = 3;
-	optional bool webpage_audit = 4;
-	optional bool facebook = 5;
-	optional bool zalo = 6;
-	optional bool email = 7;
-	optional bool web_plugin = 8;
-	optional bool bot = 9;
-	optional string shop = 10; //   pending || active
-
-	optional int64 total_file_size = 11; // bytes
-	optional int64 total_call_log_size =  12; // bytes
-	optional int64 call_recording_ttl = 13; // sec
 }
 
 message LeadSetting {

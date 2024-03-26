@@ -435,11 +435,13 @@ service PaymentMgr {
 	rpc DeletePaymentMethod(Id) returns (Empty);
 	rpc ListPaymentMethods(Id) returns (payment.PaymentMethods);
 	rpc Pay(payment.PayRequest) returns (payment.Bill);
+
 	rpc CreateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc UpdateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc FilterInvoices(payment.ListInvoiceRequest) returns (payment.Invoices);
 	rpc DraftInvoice(payment.Subscription) returns (payment.Invoice);
 	rpc DiffSubscriptions(payment.DiffSubRequest) returns (payment.Invoice);
+
 	rpc ListComments(payment.ListCommentsRequest) returns (payment.Comments);
 	rpc AddComment(payment.Comment) returns (payment.Comment);
 	rpc ExportInvoice(Id) returns (payment.String);
