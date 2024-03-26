@@ -158,8 +158,6 @@ service AccountMgr {
 	rpc UnlockLogin(header.Id) returns (header.Id);
 
 	rpc ListBills(header.Id) returns (payment.Bills);
-
-	rpc UpdateSegmentUserViewOrder(account.SegmentUserViewsOrder) returns (account.DashboardAgent);
 }
 
 // user services

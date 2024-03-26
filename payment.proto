@@ -258,6 +258,7 @@ message PlanInvoiceItem {
 	optional int64 started = 8;
 	optional int32 day_left = 4;
 	optional uint32 old_agent_count = 10;
+	optional bool is_unlimited_agent = 11;
 }
 
 message MarketingInvoiceItem {
