@@ -460,12 +460,6 @@ message SearchInvoiceRequest {
 	optional int32 limit = 7;
 }
 
-message DiffSubRequest {
-	optional common.Context ctx = 1;
-	optional Subscription dst = 2;
-	optional Subscription src = 3;
-}
-
 message LogAccountReferredByTime{
 	optional string time = 1;
 	optional string referrer_account_id = 2;
