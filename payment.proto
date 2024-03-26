@@ -123,7 +123,7 @@ message Subscription {
 	// optional string name = 7;
 
 	optional int64 started = 5;
-	optional bool auto_renew = 9;
+	// optional bool auto_renew = 9;
 
 	optional uint32 billing_cycle_month = 15;
 	optional uint32 next_billing_cycle_month = 16;
