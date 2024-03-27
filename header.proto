@@ -7451,7 +7451,8 @@ message Ticket {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string id = 3; // 24, 25, 26...
+	string id = 3; 
+    string number = 27;  //SUB-1,SUB-2,...
 	string title = 4;
 	string category = 5; // readonly from type: customer, back-office, tracker
 	string type_id = 6;
