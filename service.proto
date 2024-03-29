@@ -489,6 +489,12 @@ service ZalokonService {
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
 	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);
 	rpc SendZNS(header.ZnsRequest) returns (header.Event);
+	
+	rpc CreateZaloApplication(ZaloApplication) returns (ZaloApplication);
+	rpc GetZaloApplication(Id) returns (ZaloApplication);
+	rpc UpdateZaloApplication(ZaloApplication) returns (ZaloApplication);
+	rpc DeleteZaloApplication(Id) returns (Empty);
+	rpc ListZaloApplications(Empty) returns (header.ZaloApplications);
 }
 
 service MailkonService {

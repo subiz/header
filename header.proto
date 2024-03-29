@@ -1880,6 +1880,7 @@ message Integration {
 	string zalo_package_valid_through_date = 66;
 	string zalo_package_auto_renew_date = 67;
 	string zalo_linkedZCA = 68;
+	string zns_client_id =69;
 
 	// for google review
 	float google_review_average_rating = 70;
@@ -1898,7 +1899,6 @@ message Integration {
 
 	int64 comment_disabled = 85;
 	int64 modified = 86;
-
 }
 
 message TagRequest {
@@ -6020,6 +6020,21 @@ message ZnsRequest {
 	string template_id = 5;
 	string tracking_id = 6;
 	map<string, string> template_data = 7;
+}
+
+message ZaloApplication {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string client_id = 3;
+	string secret = 4;
+	string status = 5;
+
+	//have same webhook_url
+	string webhook_url = 6;
+} 
+
+message ZaloApplications {
+	repeated ZaloApplication apps = 1;
 }
 
 message SendOmniChannelMessageRequest {
