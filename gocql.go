@@ -39,14 +39,14 @@ func ConnectDB(seeds []string, keyspace string) *gocql.Session {
 	cluster.QueryObserver = &queryObserver{}
 	cluster.Timeout = 30 * time.Second
 	cluster.ConnectTimeout = 30 * time.Second
-	cluster.Keyspace = "account"
+	cluster.Keyspace = keyspace
 	var err error
-	for {
+	for i := 0; i < 10; i++ {
 		if session, err = cluster.CreateSession(); err == nil {
-			break
+			return session
 		}
 		fmt.Println("cassandra", err, ". Retring after 5sec...")
 		time.Sleep(15 * time.Second)
 	}
-	return session
+	panic(err)
 }

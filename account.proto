@@ -44,17 +44,6 @@ message DashboardAgent {
 	optional int64 web_notification_volume = 37; // 0 default, 100 loudest
 
 	map<string, string> segment_user_views_order = 38; // {sg_all: "unassigned,assigned"}
-
-}
-
-message SegmentUserViewsOrder {
-	optional common.Context ctx = 1;
-	optional string account_id = 2; // subiz only
-	optional string agent_id = 3;
-
-	optional string segment_id = 4;
-	repeated string view_ids = 5;
-	repeated string pinned_user_views = 6;
 }
 
 message Agent {
@@ -66,7 +55,7 @@ message Agent {
 	optional string email = 5;
 	optional string phone = 8;
 	optional bool is_owner = 10;
-	optional string job_title = 11;
+	optional string job_title = 11; // deprecated
 
 	enum Gender {
 		unset = 0;
@@ -229,25 +218,11 @@ message SubscriptionUpgradedEmail {
 	optional int64 created = 6; // sec
 }
 
-message BillCreatedEmail {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 created = 6; // sec
-	repeated string invoice_ids = 8;
-	repeated string invoice_urls = 9;
-}
-
 message TrialEndingEmail {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional int64 created = 6; // sec
 	optional int64 ended = 7;
-}
-
-message DowngradedToFreeEmail {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 created = 6; // sec
 }
 
 message InviteEmail {
