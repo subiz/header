@@ -33,9 +33,9 @@ func (qo *queryObserver) ObserveQuery(ctx context.Context, q gocql.ObservedQuery
 	}
 }
 
-func ConnectDB() *gocql.Session {
+func ConnectDB(seeds []string, keyspace string) *gocql.Session {
 	var session *gocql.Session
-	cluster := gocql.NewCluster("db-0")
+	cluster := gocql.NewCluster(seeds...)
 	cluster.QueryObserver = &queryObserver{}
 	cluster.Timeout = 30 * time.Second
 	cluster.ConnectTimeout = 30 * time.Second

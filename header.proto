@@ -1274,8 +1274,6 @@ message Conversation {
 	Integration integration = 18; // removing after tet
 	int64 actived = 19;
 
-	// Message last_message = 20; // remove after update mobile app
-
 	Event last_internal_message_sent = 27;
 	Event last_message_sent = 23;          // no internal
 	// Event last_event = 26;                 // no internal // remove
@@ -1457,8 +1455,6 @@ message Message {
 
 	string quill_delta = 20; // deprecated
 	I18nString i18n_quill_delta = 21; // rename to i18n_text
-
-
 
 	bool is_private = 22;
 
@@ -2213,13 +2209,6 @@ message BotsRequest {
 	string query = 2; // (bot category: orders)
 	string anchor = 3;
 	string account_id = 4;
-}
-
-enum BotCategory {
-	users = 0;
-	systems = 1;
-	conversations = 2;
-	orders = 3;
 }
 
 enum BotActionType {
@@ -3448,7 +3437,7 @@ message Webhook {
 	int64 created = 20;
 	string creator = 21;
 	bool is_enabled = 22; // deprecated
-	bool is_protected = 23; // deprecated
+	// bool is_protected = 23; // deprecated
 
 	string avatar_url = 27; // favicon for the domain
 
@@ -3626,15 +3615,12 @@ message LoginSession {
 	common.Device device = 11;
 	int64 last_used = 12; // ms
 
-	int64 access_token_expired = 15; // should be long
-	int64 access_token_generated = 16; // ms
-
 	Location location = 17;
 
 	// use on realtime event only
 	string state = 18; // ended, created, updated
 
-	string type = 19; // session, apikey, admin
+	string type = 19; // session, apikey, admin(inspect)
 	string client_version = 20;
 
 	int64 ttls = 21; // seconds, apikey only
@@ -3962,24 +3948,6 @@ message UsersRequest {
 	repeated string ignore_uids = 4;
 
 	repeated string user_ids = 5;
-}
-
-message UserQueryBody {
-	common.Context ctx = 1;
-	string account_id = 2;
-	UserViewCondition condition = 3;
-	account.Account account = 4;
-	map<string, AttributeDefinition> def = 5;
-	repeated string ignore_uids = 7;
-	repeated UserViewCondition conditions = 8;
-}
-
-message UserCountBody {
-	common.Context ctx = 1;
-	account.Account account = 4;
-	map<string, AttributeDefinition> def = 5;
-	repeated UserViewCondition conditions = 6;
-	repeated string ignore_uids = 7;
 }
 
 message UserViewCondition {
@@ -4730,7 +4698,7 @@ message OrderMetricsRequest {
 message Orders {
 	common.Context ctx = 1;
 
-    repeated OrderMetric metrics = 3;
+	repeated OrderMetric metrics = 3;
 	repeated Order orders = 4;
 	string anchor = 5;
 	int64 total = 6;
@@ -6031,7 +5999,7 @@ message ZaloApplication {
 
 	//have same webhook_url
 	string webhook_url = 6;
-} 
+}
 
 message ZaloApplications {
 	repeated ZaloApplication apps = 1;
@@ -7466,8 +7434,8 @@ message Ticket {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string id = 3; 
-    string number = 27;  //SUB-1,SUB-2,...
+	string id = 3;
+	string number = 27;  //SUB-1,SUB-2,...
 	string title = 4;
 	string category = 5; // readonly from type: customer, back-office, tracker
 	string type_id = 6;

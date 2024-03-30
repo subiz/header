@@ -428,10 +428,6 @@ service PaymentMgr {
 	rpc Purchase(payment.PurchaseRequest) returns (payment.Invoice);
 	rpc UpdateSubscription(payment.Subscription) returns (payment.Subscription);
 	rpc GetSubscription(Id) returns (payment.Subscription);
-	rpc AddPaymentMethod(payment.PaymentMethod) returns (payment.PaymentMethod);
-	rpc UpdatePaymentMethod(payment.PaymentMethod) returns (payment.PaymentMethod);
-	rpc DeletePaymentMethod(Id) returns (Empty);
-	rpc ListPaymentMethods(Id) returns (payment.PaymentMethods);
 	rpc Pay(payment.PayRequest) returns (payment.Bill);
 
 	rpc CreateInvoice(payment.Invoice) returns (payment.Invoice);
@@ -489,7 +485,7 @@ service ZalokonService {
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
 	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);
 	rpc SendZNS(header.ZnsRequest) returns (header.Event);
-	
+
 	rpc CreateZaloApplication(ZaloApplication) returns (ZaloApplication);
 	rpc GetZaloApplication(Id) returns (ZaloApplication);
 	rpc UpdateZaloApplication(ZaloApplication) returns (ZaloApplication);

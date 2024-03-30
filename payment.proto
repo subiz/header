@@ -37,31 +37,6 @@ message Stripe {
 	optional string token = 4; // REST only
 }
 
-message PaymentMethods {
-	repeated PaymentMethod payment_methods = 2;
-}
-
-message PaymentMethod {
-	optional common.Context ctx = 1;
-	enum Type {
-		bank_transfer = 0;
-		credit_card = 1;
-	}
-
-	optional string type = 2;
-	optional string id = 3;
-	optional string account_id = 4;
-	enum State {
-		active = 0;
-		failed = 1;
-	}
-	optional string state = 5;
-	optional int64 created = 8;
-	optional Stripe stripe = 9;
-	optional string failed_message = 10;
-	optional int64 charged = 11;
-}
-
 message Plans {
 	repeated Plan plans = 2;
 }
