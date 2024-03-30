@@ -11,7 +11,7 @@ import (
 )
 
 var attempCount = promauto.NewCounterVec(prometheus.CounterOpts{
-	Name: "gocql_count",
+	Name: "gocql_count_2",
 	Help: "The total number of query attempts",
 }, []string{
 	"statement",
