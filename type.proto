@@ -259,20 +259,18 @@ enum RealtimeType {
 	ticket_deleted = 252;
 	ticket_tagged = 253;
 	ticket_untagged = 254;
-	ticket_comment_added = 255; // data.message
-	ticket_comment_deleted = 256; // data.message
-	ticket_comment_updated = 257; // data.message
+	message_deleted = 255;
 
 	ticket_joined = 258; // event.data.conversation.memebers.0
 	ticket_invited = 259;
 	ticket_left = 260;
 
-	//ticket_typing = 261;
+	ticket_typing = 261;
 	ticket_unassigned = 262;
 	ticket_assigned = 263;
 	ticket_reassigned = 264; 
 	ticket_viewing = 265;
-    //ticket_pong = 266; 
+    ticket_pong = 266; 
 
 	ticket_type_created = 267; 
 	ticket_type_updated = 268; 
