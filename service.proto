@@ -383,6 +383,9 @@ service TicketMgr {
 	rpc LeftTicket(header.ConversationMember) returns (Empty);
 
 	rpc SendTicketEvent(header.Event) returns (header.Event);
+	rpc UpdateTicketEvent(header.Event) returns (header.Event);
+	rpc DeleteTicketEvent(header.Event) returns (header.Event);
+	
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
 }
 
