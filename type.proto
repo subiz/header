@@ -259,26 +259,25 @@ enum RealtimeType {
 	ticket_deleted = 252;
 	ticket_tagged = 253;
 	ticket_untagged = 254;
-	message_deleted = 255;
+	ticket_comment_added = 259; // data.message
+	ticket_comment_deleted = 260; // data.message
+	ticket_comment_updated = 261; // data.message
+	ticket_joined = 262; // event.data.conversation.memebers.0
+	ticket_left = 264;
+	ticket_typing = 265;
+	ticket_unassigned = 266;
+	ticket_assigned = 267;
+	ticket_reassigned = 268; 
+    ticket_pong = 270; 
 
-	ticket_joined = 258; // event.data.conversation.memebers.0
-	ticket_invited = 259;
-	ticket_left = 260;
+	ticket_history_updated = 281;
 
-	ticket_typing = 261;
-	ticket_unassigned = 262;
-	ticket_assigned = 263;
-	ticket_reassigned = 264; 
-	ticket_viewing = 265;
-    ticket_pong = 266; 
+	ticket_type_created = 282; 
+	ticket_type_updated = 283; 
 
-	ticket_type_created = 267; 
-	ticket_type_updated = 268; 
-
-	ticket_view_created = 269; 
-	ticket_view_updated = 270; 
-	ticket_view_deleted = 271;
-
+	ticket_view_created = 284; 
+	ticket_view_updated = 285; 
+	ticket_view_deleted = 286;
 }
 
 message TextTransform {
