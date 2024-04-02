@@ -889,6 +889,7 @@ message Data {
 
 	Ticket ticket = 114;
 	TicketType ticket_type = 115;
+	TicketHistoryEntry ticket_history_entry = 116;
 }
 
 message WebRTCMessage {
@@ -7492,6 +7493,12 @@ message Ticket {
 	bool archived = 82;
 	Event last_event = 83;
 	string updated_by = 84;
+}
+
+message TicketHistoryEntry {
+	Event event = 2; // 1 core
+	Event ref_comment = 3;
+	string ticket_id = 4;
 }
 
 message ListTicketRequest {
