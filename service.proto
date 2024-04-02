@@ -240,6 +240,8 @@ service UserMgr {
 }
 
 service LiveMgr {
+	rpc ListLiveUsers(header.LiveUserViewCondition) returns (header.Users); // 30s
+
 	rpc SearchLocations(header.LocationParams) returns (header.Locations);
 	rpc FilterActiveUsers(header.UserInfoParams) returns (header.Users);
 

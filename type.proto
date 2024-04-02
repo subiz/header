@@ -254,8 +254,8 @@ enum RealtimeType {
 
 	desktop_notification_pushed = 249;
 
-	ticket_created = 250; 
-	ticket_updated = 251; 
+	ticket_created = 250;
+	ticket_updated = 251;
 	ticket_deleted = 252;
 	ticket_tagged = 253;
 	ticket_untagged = 254;
@@ -267,17 +267,18 @@ enum RealtimeType {
 	ticket_typing = 265;
 	ticket_unassigned = 266;
 	ticket_assigned = 267;
-	ticket_reassigned = 268; 
-    ticket_pong = 270; 
+	ticket_reassigned = 268;
+	ticket_pong = 270;
 
 	ticket_history_updated = 281;
 
-	ticket_type_created = 282; 
-	ticket_type_updated = 283; 
+	ticket_type_created = 282;
+	ticket_type_updated = 283;
 
-	ticket_view_created = 284; 
-	ticket_view_updated = 285; 
+	ticket_view_created = 284;
+	ticket_view_updated = 285;
 	ticket_view_deleted = 286;
+	live_users_updated = 255;
 }
 
 message TextTransform {

@@ -890,6 +890,7 @@ message Data {
 	Ticket ticket = 114;
 	TicketType ticket_type = 115;
 	TicketHistoryEntry ticket_history_entry = 116;
+	LiveUsers live_users = 117;
 }
 
 message WebRTCMessage {
@@ -7552,4 +7553,35 @@ message TicketViewMember {
 	int64 read_count = 7;
 
 	int64 joined_at = 9;
+}
+
+message LiveMetricEntry {
+	string key = 5;
+	int64 count = 6;
+}
+
+message LiveUserViewCondition {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string id = 4;
+	UserViewCondition condition = 5;
+	int64 limit = 6;
+}
+
+message LiveUsers {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string view_id = 3;
+	int64 total = 4;
+	repeated User users = 5;
+	repeated User removed_users = 6;
+	repeated LiveMetricEntry sources = 8;
+	repeated LiveMetricEntry paths = 9;
+	repeated LiveMetricEntry domains = 10;
+	repeated LiveMetricEntry referrings = 11;
+	repeated LiveMetricEntry utm_campaigns = 12;
+	repeated LiveMetricEntry utm_mediums = 13;
+	repeated LiveMetricEntry utm_source = 14;
+	repeated LiveMetricEntry countries = 15;
 }
