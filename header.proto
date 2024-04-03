@@ -7562,10 +7562,13 @@ message LiveUserView {
 	string id = 4;
 	UserViewCondition condition = 5;
 	int64 limit = 6;
-	int64 last_fetched = 7;
+	string order_by = 8;
 
 	int64 total = 10;
 	repeated string user_ids = 11; // top n user
 	map<string, int64> metrics = 12;
-	string order_by = 13;
+
+
+	int64 last_fetched = 20;
+	int64 last_committed = 21; // server only
 }

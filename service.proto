@@ -237,12 +237,13 @@ service UserMgr {
 
 	rpc SearchUsers(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc ReportUser(header.UserReportRequest) returns (header.UserReportResponse);
+
+	rpc FetchLiveUsers(header.LiveUserView) returns (header.LiveUserView); // 30s
+	rpc StopLiveUsers(header.Id) returns (header.Empty);
 }
 
 service LiveMgr {
-	rpc FetchLiveUsers(header.LiveUserView) returns (header.Users); // 30s
-	rpc StopLiveUsers(header.Id) returns (header.Empty);
-
+	// deprecated
 	rpc SearchLocations(header.LocationParams) returns (header.Locations);
 	rpc FilterActiveUsers(header.UserInfoParams) returns (header.Users);
 
