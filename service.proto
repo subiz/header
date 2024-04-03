@@ -240,7 +240,8 @@ service UserMgr {
 }
 
 service LiveMgr {
-	rpc ListLiveUsers(header.LiveUserViewCondition) returns (header.Users); // 30s
+	rpc FetchLiveUsers(header.LiveUserView) returns (header.Users); // 30s
+	rpc StopLiveUsers(header.Id) returns (header.Empty);
 
 	rpc SearchLocations(header.LocationParams) returns (header.Locations);
 	rpc FilterActiveUsers(header.UserInfoParams) returns (header.Users);
@@ -387,7 +388,7 @@ service TicketMgr {
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 	rpc UpdateTicketEvent(header.Event) returns (header.Event);
 	rpc DeleteTicketEvent(header.Event) returns (header.Event);
-	
+
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
 }
 

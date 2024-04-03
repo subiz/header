@@ -264,7 +264,7 @@ message UserAds {
 	bool is_guest_user = 4;
 
 	// google
-	string name = 16; // utm_campaign" may_sale, covid, gucci,
+	string name = 16; // utm_campaign may_sale, covid, gucci,
 	string medium = 17; // utm_medium: display, article, cpc, cpa, cpe, email, sms
 	string term = 18;
 	string content = 6; // logolink, textlink
@@ -890,7 +890,7 @@ message Data {
 	Ticket ticket = 114;
 	TicketType ticket_type = 115;
 	TicketHistoryEntry ticket_history_entry = 116;
-	LiveUsers live_users = 117;
+	LiveUserView live_user_view = 117;
 }
 
 message WebRTCMessage {
@@ -7555,33 +7555,17 @@ message TicketViewMember {
 	int64 joined_at = 9;
 }
 
-message LiveMetricEntry {
-	string key = 5;
-	int64 count = 6;
-}
-
-message LiveUserViewCondition {
+message LiveUserView {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
 	string id = 4;
 	UserViewCondition condition = 5;
 	int64 limit = 6;
-}
+	int64 last_fetched = 7;
 
-message LiveUsers {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string view_id = 3;
-	int64 total = 4;
-	repeated User users = 5;
-	repeated User removed_users = 6;
-	repeated LiveMetricEntry sources = 8;
-	repeated LiveMetricEntry paths = 9;
-	repeated LiveMetricEntry domains = 10;
-	repeated LiveMetricEntry referrings = 11;
-	repeated LiveMetricEntry utm_campaigns = 12;
-	repeated LiveMetricEntry utm_mediums = 13;
-	repeated LiveMetricEntry utm_source = 14;
-	repeated LiveMetricEntry countries = 15;
+	int64 total = 10;
+	repeated string user_ids = 11; // top n user
+	map<string, int64> metrics = 12;
+	string order_by = 13;
 }
