@@ -891,6 +891,7 @@ message Data {
 	TicketType ticket_type = 115;
 	TicketHistoryEntry ticket_history_entry = 116;
 	LiveUserView live_user_view = 117;
+	repeated TicketView views = 118;
 }
 
 message WebRTCMessage {
