@@ -1416,7 +1416,7 @@ message CallInfo {
 message Rating {
 	int64 rated = 35; // rated time ms
 	int32 rating = 36; // 1-poor 2 3-average 4 5-great
-	string rated_by = 37; // must be an user id
+	string rated_by = 37; // must be an user id for convo and agent id for ticket
 	bool no_rating = 38; // use dont want to rate
 	string comment = 39;
 	string ticket_id = 40;

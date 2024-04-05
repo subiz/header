@@ -12410,7 +12410,7 @@ type Rating struct {
 
 	Rated    int64  `protobuf:"varint,35,opt,name=rated,proto3" json:"rated,omitempty"`                       // rated time ms
 	Rating   int32  `protobuf:"varint,36,opt,name=rating,proto3" json:"rating,omitempty"`                     // 1-poor 2 3-average 4 5-great
-	RatedBy  string `protobuf:"bytes,37,opt,name=rated_by,json=ratedBy,proto3" json:"rated_by,omitempty"`     // must be an user id
+	RatedBy  string `protobuf:"bytes,37,opt,name=rated_by,json=ratedBy,proto3" json:"rated_by,omitempty"`     // must be an user id for convo and agent id for ticket
 	NoRating bool   `protobuf:"varint,38,opt,name=no_rating,json=noRating,proto3" json:"no_rating,omitempty"` // use dont want to rate
 	Comment  string `protobuf:"bytes,39,opt,name=comment,proto3" json:"comment,omitempty"`
 	TicketId string `protobuf:"bytes,40,opt,name=ticket_id,json=ticketId,proto3" json:"ticket_id,omitempty"`
