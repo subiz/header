@@ -385,6 +385,8 @@ service TicketMgr {
 
 	rpc JoinTicket(header.ConversationMember) returns (Empty);
 	rpc LeftTicket(header.ConversationMember) returns (Empty);
+	rpc RateTicket(header.Rating) returns (Empty);
+	rpc UnrateTicket(header.Rating) returns (Empty);
 
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 	rpc UpdateTicketEvent(header.Event) returns (header.Event);

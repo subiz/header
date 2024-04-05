@@ -1419,6 +1419,7 @@ message Rating {
 	string rated_by = 37; // must be an user id
 	bool no_rating = 38; // use dont want to rate
 	string comment = 39;
+	string ticket_id = 40;
 }
 
 message Conversations {
