@@ -7,9 +7,6 @@ option go_package = "github.com/subiz/header/account";
 import "common.proto";
 
 message DashboardAgent {
-	optional int64 tour_guide_web_showed = 6;
-	optional int64 tour_guide_getting_started_web_showed = 10;
-	optional int64 tour_guide_channel_installing_web_showed = 11;
 	optional int64 bot_build_showed = 12;
 	repeated string pinned_user_views = 13; // list of agents that pinned this view
 	repeated string user_view_display_fields = 14;
@@ -47,8 +44,9 @@ message DashboardAgent {
 
 	map<string, string> segment_user_views_order = 38; // {sg_all: "unassigned,assigned"}
 
-	optional int64 live_offline_sec = 42; // auto <30 -> 30s
-	optional int64 live_refresh_sec = 43; // auto <30 -> 30s
+	optional int64 live_keeping_after_offline_seconds = 42; // auto <30 -> 30s
+	optional int64 live_auto_refresh_seconds = 43; // auto <30 -> 30s
+	repeated string live_metrics = 44; // host, path, ip
 }
 
 message Agent {
@@ -103,7 +101,7 @@ message Agent {
 	optional DashboardAgent dashboard_setting = 40;
 	repeated string scopes = 41; // supervisor
 
-	optional string internal_name = 42;
+	// optional string internal_name = 42;
 	optional int64 extension = 43; // 2343 3442
 }
 
