@@ -240,6 +240,7 @@ service UserMgr {
 
 	rpc FetchLiveUsers(header.LiveUserView) returns (header.LiveUserView); // 30s
 	rpc StopLiveUsers(header.Id) returns (header.Empty);
+	rpc SuggestLiveFields(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse);
 }
 
 service LiveMgr {
