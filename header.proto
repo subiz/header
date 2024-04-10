@@ -7557,6 +7557,15 @@ message TicketViewMember {
 	int64 joined_at = 9;
 }
 
+message LiveViewMetric {
+	int64 count = 3;
+	int64 total = 4;
+
+	string city = 5;
+	string page_url = 6;
+	string page_title = 7;
+}
+
 message LiveUserView {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7568,7 +7577,7 @@ message LiveUserView {
 
 	int64 total = 10;
 	repeated string user_ids = 11; // top n user
-	map<string, int64> metrics = 12;
+	map<string, LiveViewMetric> metrics = 12;
 
 	int64 count = 14;
 	int64 last_fetched = 20;
