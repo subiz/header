@@ -7570,7 +7570,7 @@ message LiveUserView {
 	repeated string user_ids = 11; // top n user
 	map<string, int64> metrics = 12;
 
-
+	int64 count = 14;
 	int64 last_fetched = 20;
 	int64 last_committed = 21; // server only
 }
