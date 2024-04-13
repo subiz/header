@@ -2509,17 +2509,17 @@ message PsMessage {
 	bool not_urgent = 6;
 }
 
-// widget
+// widget -- deprecated
 message WidgetUserSetting {
 	common.Context ctx = 1;
 	account.Account account = 3;
 	repeated account.Agent agents = 5;
 	string account_id = 2; // subiz use only
-	User user = 4; // remove
+	// User user = 4; // remove
 	string user_id = 7; // subiz use only
 	string language = 6;
 	// bool send_transcript = 8;
-	WidgetSetting account_setting = 9;
+	// WidgetSetting account_setting = 9;
 	repeated Bot bots = 14;
 	repeated WebPlugin plugins = 15;
 
@@ -2528,8 +2528,8 @@ message WidgetUserSetting {
 
 	int64 last_modified = 22;
 
-	repeated Address addresses = 23;
-	repeated PaymentMethod payment_methods = 24;
+	// repeated Address addresses = 23;
+	// repeated PaymentMethod payment_methods = 24;
 	Location location = 25;
 
 	string device_type = 26;  // mobile desktop tablet
@@ -2548,6 +2548,9 @@ message AccountWeb {
 
 	repeated PaymentMethod payment_methods = 24;
 	Location location = 25;
+
+	string device_type = 26;  // mobile desktop tablet
+
 }
 
 message SocialLink {
