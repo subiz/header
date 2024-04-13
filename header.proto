@@ -2531,6 +2531,8 @@ message WidgetUserSetting {
 	repeated Address addresses = 23;
 	repeated PaymentMethod payment_methods = 24;
 	Location location = 25;
+
+	bool device_type = 26;  // mobile desktop tablet
 }
 
 message AccountWeb {
