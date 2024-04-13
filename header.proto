@@ -1367,7 +1367,7 @@ message Reviewer {
 
 message ReviewReply {
 	string comment = 1;
-	int64  updated = 2;
+	int64 updated = 2;
 	string agent_id = 3;
 }
 
@@ -1821,7 +1821,6 @@ message Integrations {
 	repeated Integration integrations = 3;
 }
 
-// rename to touchpoint
 message Integration {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -1833,7 +1832,7 @@ message Integration {
 	int64 integrated = 6; // first integrated
 	int64 last_integrated = 7;
 
-	string state = 8;
+	string state = 8; // more like status
 	enum State {
 		activated = 0; // activeated and insync
 		pending = 1;
@@ -1905,6 +1904,9 @@ message Integration {
 
 	int64 comment_disabled = 85;
 	int64 modified = 86;
+
+	int64 status_changed_at = 87;
+	string error_code = 88;
 }
 
 message TagRequest {
@@ -3656,11 +3658,10 @@ message SearchRequest {
 	repeated string agents = 10; // or
 
 	bool is_private = 11; // search in private convo only
-	bool only_header =  13;
+	bool only_header = 13;
 	string conversation_id = 14; // filter by conversation
 
 	string anchor = 15;
-
 	repeated string exclude_conversations = 16;
 }
 
@@ -4361,7 +4362,7 @@ message GHNOrderItem {
 
 message GHTKShippingData {
 	int64 deliver_work_shift = 10;
-	int64 pick_work_shift  = 11;
+	int64 pick_work_shift = 11;
 	string label_id = 13;
 	string expired = 14;
 	int64 value = 15; // gia tri dong bao hiem
@@ -4410,7 +4411,7 @@ message GHTKOrder {
 	string estimated_deliver_time = 30;
 	string deliver_date = 31;
 	int64 deliver_work_shift = 32;
-	int64 pick_work_shift  = 33;
+	int64 pick_work_shift = 33;
 	int32 storage_day = 34;
 
 	string pick_address_id = 61;
@@ -5833,7 +5834,7 @@ message FacebookPageLinkRequest {
 message FacebookPages {
 	common.Context ctx = 1;
 	string account_id = 2;
-	repeated  FacebookPage facebook_pages = 3;
+	repeated FacebookPage facebook_pages = 3;
 }
 
 message InstagramUser {
@@ -6799,8 +6800,8 @@ enum E {
 	invalid_task_assignee = 214;
 	invalid_task_supervisor = 215;
 	invalid_task_watchers = 216;
-	invalid_segment_name =  240;
-	invalid_segment_description =  241;
+	invalid_segment_name = 240;
+	invalid_segment_description = 241;
 	cannot_edit_system_segment = 244;
 
 	// SERVER ERROR

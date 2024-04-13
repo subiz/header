@@ -484,6 +484,9 @@ service FabikonService {
 	rpc GenerateRefLink(header.Id) returns (header.Id);
 	rpc LinkPageWithAccount(header.FacebookPageLinkRequest) returns (header.Empty);
 	rpc ListFacebookPages(header.Id) returns (header.FacebookPages);
+
+	// integrationid
+	rpc GetFacebookPage(header.Id) returns (header.Integration);
 }
 
 service ZalokonService {
