@@ -1143,6 +1143,12 @@ message ChannelCondition {
 
 	repeated string from_number_prefixes = 15;
 	repeated string not_from_number_prefixes = 16;
+
+	repeated string page_names = 18; // contains
+	repeated string not_page_names = 19; // contains
+
+	repeated string facebook_post_keywords = 20; // contains
+	repeated string not_facebook_page_keywords = 21; // contains
 }
 
 message LocationCondition {
