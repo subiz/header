@@ -32,6 +32,7 @@ message FacebookPage {
 
 	optional string last_failed_url = 21;
 	optional string last_failed_body = 22;
+	optional string integration_link_status = 23; // active, failed
 }
 
 message FbWebhookEvent {

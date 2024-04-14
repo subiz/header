@@ -33,6 +33,8 @@ message OfficialAccount {
 	string package_valid_through_date = 26;
 	string package_auto_renew_date = 27;
 	string linkedZCA = 28;
+
+	string integration_link_status = 29; // active, failed
 }
 
 message ZaloUser {
