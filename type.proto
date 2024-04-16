@@ -260,7 +260,7 @@ enum RealtimeType {
 	ticket_tagged = 253;
 	ticket_untagged = 254;
 	ticket_rated = 256;
-	ticket_unrated = 257;
+	ticket_priority_updated = 257;
 	ticket_state_updated = 258;
    
 	ticket_comment_added = 259; // data.message

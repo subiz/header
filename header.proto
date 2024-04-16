@@ -1314,7 +1314,7 @@ message CallInfo {
 message Rating {
 	int64 rated = 35; // rated time ms
 	int32 rating = 36; // 1-poor 2 3-average 4 5-great
-	string rated_by = 37; // must be an user id for convo and agent id for ticket
+	string rated_by = 37; // must be an user id 
 	bool no_rating = 38; // use dont want to rate
 	string comment = 39;
 	string ticket_id = 40;
@@ -3949,6 +3949,7 @@ message PushNoti {
 	string subtitle = 23;
 	string task_id = 24;
 	string sound_name = 25;
+	string ticket_id = 27;
 }
 
 message InvoiceTemplate {
@@ -7393,6 +7394,7 @@ message Ticket {
 	bool archived = 82;
 	Event last_event = 83;
 	string updated_by = 84;
+    string deleted = 85;
 }
 
 message TicketHistoryEntry {
