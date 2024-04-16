@@ -21,6 +21,8 @@ message Subscription {
 
 	optional int64 lead_assigned = 16;
 	optional int64 segment_joined = 17;
+
+	optional int64 ticket_updated = 18;
 }
 
 message Setting {
