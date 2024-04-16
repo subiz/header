@@ -484,12 +484,6 @@ message DeleteNoteRequest {
 	string id = 4;
 }
 
-message StringParams {
-	string eq = 2;
-	repeated string in = 3;
-	string contain = 4;
-}
-
 message Location {
 	string isp = 3;                 // filled
 	string continent_name = 4;      // filled
@@ -505,50 +499,6 @@ message Location {
 	string ip = 12;
 }
 
-message Locations {
-	repeated Location locations = 2;
-	repeated Error errors = 3;
-}
-
-message LocationParams {
-	string query = 2;
-	int64 limit = 3;
-	string account_id = 4;
-}
-
-message Page {
-	string id = 2;
-	string name = 3;
-	string url = 4;
-}
-
-message IdParams {
-	string id = 2;
-	repeated string ids = 3;
-}
-
-message UserInfoParams {
-	string account_id = 15;
-	string signature = 2;
-
-	int32 limit = 3;
-	int32 offset = 4;
-	string order_by = 5;
-
-	IdParams source = 6;
-	IdParams page_id = 8;
-	IdParams location_id = 7;
-
-	// IntParams view_count = 9;
-	// IntParams duration = 10;
-
-	// location params
-	StringParams country_code = 11;
-	StringParams continent_code = 12;
-	StringParams url = 13;
-	// IntParams time_on_site = 14;
-}
-
 message Key {
 	string account_id = 2;
 	string order_id = 3;
@@ -557,23 +507,6 @@ message Key {
 	string order_comment_id = 6;
 	string task_id = 7;
 	string task_comment_id = 8;
-}
-
-message UserMetric {
-	int64 active_user_num = 3; // live
-	string have_been = 5; // live
-
-	string account_id = 2;
-	int64 created_hour = 6;
-	string session_source = 7;
-	string channel = 8;
-	string channel_touchpoint = 9;
-	string first_interact = 10;
-	string date = 11; // derived
-	int64 seen_hour = 12;
-
-	int64 user_count = 65;
-	int64 lead_count = 66;
 }
 
 message UserReportRequest {
@@ -732,47 +665,6 @@ message CallMetricsRequest {
 	int32 limit = 14;
 }
 
-message SourceMetric {
-	string account_id = 2;
-	string source = 3; // direct, referring, organic,social, advertising
-	int64 active_user_num = 4;
-	string have_been = 5;
-}
-
-message LocationMetric {
-	string account_id = 2;
-	Location location = 3;
-	int64 active_user_num = 4;
-	string have_been = 5;
-}
-
-message PageMetric {
-	string account_id = 2;
-	Page page = 3;
-	int64 active_user_num = 4;
-	string have_been = 5;
-}
-
-message UserReport {
-	string account_id = 2;
-	UserMetric total_user = 3;
-	repeated SourceMetric top_source = 4;
-	repeated LocationMetric top_location = 5;
-	repeated PageMetric top_page = 6;
-}
-
-message SourceMetrics {
-	repeated SourceMetric source_metrics = 2;
-}
-
-message LocationMetrics {
-	repeated LocationMetric location_metrics = 2;
-}
-
-message PageMetrics {
-	repeated PageMetric page_metrics = 2;
-}
-
 message Events {
 	common.Context ctx = 1;
 	repeated Event events = 4;
@@ -826,7 +718,7 @@ message Data {
 	Rule rule = 36;
 	AttributeDefinition user_attribute = 37;
 	Tag tag = 38;
-	UserMetric total_user = 39;
+	// UserMetric total_user = 39;
 	Bot bot = 40;
 	BotRunResponse bot_run_response = 41;
 	Integration integration = 42;

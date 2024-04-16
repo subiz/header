@@ -244,14 +244,6 @@ service UserMgr {
 }
 
 service LiveMgr {
-	// deprecated
-	rpc SearchLocations(header.LocationParams) returns (header.Locations);
-	rpc FilterActiveUsers(header.UserInfoParams) returns (header.Users);
-
-	rpc TopLocations(Id) returns (header.LocationMetrics);
-	rpc TopPages(Id) returns (header.PageMetrics);
-	rpc TopSources(Id) returns (header.SourceMetrics);
-	rpc CountActiveUsers(Id) returns (header.UserMetric);
 	rpc Presences(header.PresencesRequest) returns (header.PresencesResponse);
 }
 
