@@ -3,6 +3,7 @@ package header
 import (
 	"context"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"hash/crc32"
 	"os"
@@ -168,7 +169,9 @@ func WithErrorStack() grpc.DialOption {
 		default:
 			// good grpc err but not our error
 			// codes.Internal
-			return log.EServer(err, log.M{"grpc_code": grpcerr.Code().String(), "_function_name": method, "__skip_stack": "3"}) // report
+			input, _ := json.Marshal(req)
+			cred := FromGrpcCtx(ctx).GetCredential()
+			return log.EServer(err, log.M{"grpc_code": grpcerr.Code().String(), "cred": cred, "input": string(input), "_function_name": method, "__skip_stack": "3"}) // report
 		}
 	})
 }

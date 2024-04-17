@@ -1175,7 +1175,7 @@ type BoolCondition struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Op string `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"` // has_value, true, false
+	Op string `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"` // has_value, true, false, any
 }
 
 func (x *BoolCondition) Reset() {

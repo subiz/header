@@ -262,7 +262,7 @@ enum RealtimeType {
 	ticket_rated = 256;
 	ticket_priority_updated = 257;
 	ticket_state_updated = 258;
-   
+
 	ticket_comment_added = 259; // data.message
 	ticket_comment_deleted = 260; // data.message
 	ticket_comment_updated = 261; // data.message
@@ -354,7 +354,7 @@ message EventCondition {
 }
 
 message BoolCondition {
-	string op = 2; // has_value, true, false
+	string op = 2; // has_value, true, false, any
 }
 
 message FloatCondition {
