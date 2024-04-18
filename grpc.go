@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"hash/crc32"
+	"io"
+	"net/http"
 	"os"
 	"reflect"
 	"strconv"
@@ -374,6 +376,76 @@ var prommetrics *grpcprom.ClientMetrics
 func init() {
 	prommetrics = grpcprom.NewClientMetrics(grpcprom.WithClientCounterOptions())
 	prometheus.MustRegister(prommetrics)
+
+	conf := &ServerConfig{}
+
+	// read fom file
+	if dat, _ := os.ReadFile(".server_config"); len(dat) > 0 {
+		json.Unmarshal(dat, conf)
+	}
+
+	makeSureServerConfiguation(conf)
+	_serverConfiguration = *conf
+	go func() {
+		for {
+			conf, err := fetchServerConfig()
+			if err == nil && conf != nil {
+				makeSureServerConfiguation(conf)
+				_serverConfiguration = *conf
+			}
+
+			time.Sleep(30 * time.Second)
+		}
+	}()
+}
+
+func fetchServerConfig() (*ServerConfig, error) {
+	resp, err := http.Get("https://config.subiz.net/subiz")
+	if err != nil {
+		return nil, log.EServer(err, log.M{"MSG": "CANNOT FETCH CONFIG"})
+	}
+
+	bodyBytes, _ := io.ReadAll(resp.Body)
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return nil, log.EServer(err, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG"})
+	}
+
+	conf := &ServerConfig{}
+	err = json.Unmarshal(bodyBytes, conf)
+	if err == nil {
+		return conf, nil
+	}
+	return nil, log.EServer(err, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG INVALIDJSON"})
+}
+
+func makeSureServerConfiguation(conf *ServerConfig) {
+	if conf == nil {
+		return
+	}
+	// make sure service config is good
+	if conf.Services == nil {
+		conf.Services = map[string]ServiceConfiguration{}
+	}
+	for _, s := range conf.Services {
+		s.PortStr = strconv.Itoa(int(s.Port))
+	}
+
+	if conf.StaggingAccounts == nil {
+		conf.StaggingAccounts = map[string]bool{}
+	}
+
+	if conf.ProductionAccounts == nil {
+		conf.ProductionAccounts = map[string]bool{}
+	}
+
+	if conf.DevelopmentAccounts == nil {
+		conf.DevelopmentAccounts = map[string]bool{}
+	}
+
+	if conf.XAccounts == nil {
+		conf.XAccounts = map[string]bool{}
+	}
 }
 
 func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
@@ -414,4 +486,62 @@ func NewServer() *grpc.Server {
 				MaxConnectionAge: time.Duration(20) * time.Second,
 			},
 		))
+}
+
+var (
+	dialLock             = &sync.Mutex{}
+	ticketClients        map[string]TicketMgrClient
+	_serverConfiguration ServerConfig
+)
+
+type ServiceConfiguration struct {
+	PortStr   string // must fill using port
+	Name      string `json:"name,omitempty"`
+	Port      int64  `json:"port,omitempty"`
+	NumShards int64  `json:"num_shards,omitempty"` // must >= 1
+}
+
+type ServerConfig struct {
+	Services            map[string]ServiceConfiguration `json:"services,omitempty"`
+	StaggingAccounts    map[string]bool                 `json:"stagging_accounts,omitempty"`
+	ProductionAccounts  map[string]bool                 `json:"production_accounts,omitempty"`
+	DevelopmentAccounts map[string]bool                 `json:"development_accounts,omitempty"`
+	XAccounts           map[string]bool                 `json:"x_accounts,omitempty"`
+}
+
+func GetTicketClient(accid string) TicketMgrClient {
+	const service = "ticket"
+	num := ""
+	if _serverConfiguration.XAccounts[accid] {
+		num = "x"
+	} else if _serverConfiguration.DevelopmentAccounts[accid] {
+		num = "dev"
+	} else if _serverConfiguration.StaggingAccounts[accid] {
+		num = "stg"
+	} else {
+		if numShard := _serverConfiguration.Services[service].NumShards; numShard > 0 {
+			num = strconv.Itoa(int(crc32.ChecksumIEEE([]byte(accid)) % uint32(numShard)))
+		}
+	}
+
+	serviceLocation := service + "-" + num + "." + service + ":" + _serverConfiguration.Services[service].PortStr
+	if client, has := ticketClients[serviceLocation]; has {
+		return client
+	}
+
+	dialLock.Lock()
+	// double check if someone already connected
+	if client, has := ticketClients[serviceLocation]; has {
+		dialLock.Unlock()
+		return client
+	}
+
+	client := NewTicketMgrClient(DialGrpc(serviceLocation))
+	newClients := map[string]TicketMgrClient{}
+	for loc, oldClient := range ticketClients {
+		newClients[loc] = oldClient
+	}
+	ticketClients = newClients
+	dialLock.Unlock()
+	return client
 }
