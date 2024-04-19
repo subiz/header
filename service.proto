@@ -376,6 +376,12 @@ service TicketMgr {
 	rpc JoinTicket(header.ConversationMember) returns (Empty);
 	rpc LeftTicket(header.ConversationMember) returns (Empty);
 
+	rpc ReadTickets(Ids) returns (Empty);
+	rpc UnReadTickets(Ids) returns (Empty);
+
+	rpc SnoozeTickets(Ids) returns (Empty);
+	rpc UnSnoozeTickets(Ids) returns (Empty);
+
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);

@@ -1085,6 +1085,7 @@ message ConversationMember {
 		left = 1;
 		observer = 2; // assigned
 		terminated = 3 ; // bot only
+		snooze = 4; // ticketonly
 	};
 	By invited_by = 16;
 
@@ -1105,6 +1106,8 @@ message ConversationMember {
 
 	string invite_reason = 34;
 	int64 total_messages = 35;
+	int64 read_at = 36;
+	int64 last_action_at = 37;
 }
 
 message ListConversationsRequest {
@@ -7392,7 +7395,7 @@ message Ticket {
 	int64 created = 80;
 	int64 updated = 81;
 	bool archived = 82;
-	Event last_event = 83;
+	Event last_event = 83;   // meanful event
 	string updated_by = 84;
     string deleted = 85;
 }
