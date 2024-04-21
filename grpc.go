@@ -377,9 +377,8 @@ func init() {
 	prommetrics = grpcprom.NewClientMetrics(grpcprom.WithClientCounterOptions())
 	prometheus.MustRegister(prommetrics)
 
+	return
 	conf := &ServerConfig{}
-
-	// read fom file
 	if dat, _ := os.ReadFile(".server_config"); len(dat) > 0 {
 		json.Unmarshal(dat, conf)
 	}
@@ -507,6 +506,10 @@ type ServerConfig struct {
 	ProductionAccounts  map[string]bool                 `json:"production_accounts,omitempty"`
 	DevelopmentAccounts map[string]bool                 `json:"development_accounts,omitempty"`
 	XAccounts           map[string]bool                 `json:"x_accounts,omitempty"`
+}
+
+func CheckShard(accid string) bool {
+	return false
 }
 
 func GetTicketClient(accid string) TicketMgrClient {
