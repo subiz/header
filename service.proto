@@ -559,7 +559,7 @@ service WidgetService {
 }
 
 // bizbot services
-service Bizbot {
+service BotMgr {
 	rpc ListBots(header.BotsRequest) returns (header.Bots);
 	rpc GetBot(Id) returns (header.Bot);
 	rpc UpdateBotRunState(header.Bot) returns (header.Bot);
@@ -575,6 +575,12 @@ service Bizbot {
 
 	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
 	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
+
+	// POST UploadTemplate
+	// list avaiable template
+	rpc ListBotTemplates(header.Id) returns (Response);
+	rpc UninstallBotTemplate(header.Id) returns (Response);
+	rpc InstallBotTemplate(header.Id) returns (Response);
 }
 
 // sendback services

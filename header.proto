@@ -1317,7 +1317,7 @@ message CallInfo {
 message Rating {
 	int64 rated = 35; // rated time ms
 	int32 rating = 36; // 1-poor 2 3-average 4 5-great
-	string rated_by = 37; // must be an user id 
+	string rated_by = 37; // must be an user id
 	bool no_rating = 38; // use dont want to rate
 	string comment = 39;
 	string ticket_id = 40;
@@ -2087,7 +2087,7 @@ message Bot {
 	string bot_state = 18; // active, inactive
 
 	int64 last_executed = 20; // ms
-	string bot_type = 21; // hello, lead, operator, pipeline_automation
+	string bot_type = 21; // hello, lead, operator, pipeline_automation, template
 	string action_hash = 22; // hex of sha1
 
 	string version = 23;
@@ -2102,6 +2102,8 @@ message Bot {
 
 	string pipeline = 30;
 	string pipeline_stage = 31; // for pipeline_stage
+
+	string bot_template_id = 32; // type=template
 }
 
 message Bots {
@@ -6822,6 +6824,8 @@ message Response {
 	repeated TicketType ticket_types = 27;
 
 	repeated TicketView ticket_views = 29;
+
+	repeated BotTemplate bot_templates = 30;
 }
 
 message ZaloCallConsent {
@@ -7484,4 +7488,33 @@ message LiveUserView {
 	int64 count = 14;
 	int64 last_fetched = 20;
 	int64 last_committed = 21; // server only
+}
+
+message BotTemplate {
+	common.Context ctx = 1;
+	string id = 2;
+	string name = 3;
+	string description = 4;
+	int64 version = 5; // current, must be
+	string logo_url = 6;
+	string poll_secret = 7;
+	int64 created = 8;
+	string author_name = 9;
+	string author_email = 10;
+	string webhook_url = 11; // http://bot.service:12434/events
+
+	// -- only when list template
+	int64 installed_at = 12;
+	int64 installed_version = 13;
+	string installed_by = 14;
+}
+
+message BotTemplateInstalled {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string template_id = 3;
+	int64 version = 4;
+	string status = 5; // active, deleted
+	int64 installed_at = 6;
+	string installed_by = 7;
 }
