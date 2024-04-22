@@ -2087,7 +2087,7 @@ message Bot {
 	string bot_state = 18; // active, inactive
 
 	int64 last_executed = 20; // ms
-	string bot_type = 21; // hello, lead, operator, pipeline_automation, template
+	string bot_type = 21; // hello, lead, operator, pipeline_automation, operation
 	string action_hash = 22; // hex of sha1
 
 	string version = 23;
@@ -2103,7 +2103,7 @@ message Bot {
 	string pipeline = 30;
 	string pipeline_stage = 31; // for pipeline_stage
 
-	string bot_template_id = 32; // type=template
+	string template_id = 32; // type=operation
 }
 
 message Bots {

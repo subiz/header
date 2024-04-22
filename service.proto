@@ -559,7 +559,7 @@ service WidgetService {
 }
 
 // bizbot services
-service BotMgr {
+service Bizbot {
 	rpc ListBots(header.BotsRequest) returns (header.Bots);
 	rpc GetBot(Id) returns (header.Bot);
 	rpc UpdateBotRunState(header.Bot) returns (header.Bot);

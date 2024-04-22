@@ -1361,7 +1361,7 @@ var file_service_proto_rawDesc = []byte{
 	0x73, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x42, 0x61, 0x63, 0x6b, 0x67, 0x72, 0x6f, 0x75, 0x6e,
 	0x64, 0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0c,
 	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x55, 0x72, 0x6c, 0x73, 0x32, 0xfa, 0x06, 0x0a,
-	0x06, 0x42, 0x6f, 0x74, 0x4d, 0x67, 0x72, 0x12, 0x2d, 0x0a, 0x08, 0x4c, 0x69, 0x73, 0x74, 0x42,
+	0x06, 0x42, 0x69, 0x7a, 0x62, 0x6f, 0x74, 0x12, 0x2d, 0x0a, 0x08, 0x4c, 0x69, 0x73, 0x74, 0x42,
 	0x6f, 0x74, 0x73, 0x12, 0x13, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x42, 0x6f, 0x74,
 	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
 	0x72, 0x2e, 0x42, 0x6f, 0x74, 0x73, 0x12, 0x21, 0x0a, 0x06, 0x47, 0x65, 0x74, 0x42, 0x6f, 0x74,
@@ -2475,23 +2475,23 @@ var file_service_proto_depIdxs = []int32{
 	1,   // 369: header.WidgetService.SearchImages:input_type -> header.Id
 	1,   // 370: header.WidgetService.ListNotifProfiles:input_type -> header.Id
 	1,   // 371: header.WidgetService.ListNotifBackgrounds:input_type -> header.Id
-	124, // 372: header.BotMgr.ListBots:input_type -> header.BotsRequest
-	1,   // 373: header.BotMgr.GetBot:input_type -> header.Id
-	125, // 374: header.BotMgr.UpdateBotRunState:input_type -> header.Bot
-	125, // 375: header.BotMgr.CreateBot:input_type -> header.Bot
-	125, // 376: header.BotMgr.UpdateBot:input_type -> header.Bot
-	1,   // 377: header.BotMgr.DeleteBot:input_type -> header.Id
-	126, // 378: header.BotMgr.OnEvent:input_type -> header.BotRunRequest
-	126, // 379: header.BotMgr.StartBot:input_type -> header.BotRunRequest
-	126, // 380: header.BotMgr.StopBot:input_type -> header.BotRunRequest
-	126, // 381: header.BotMgr.TryAction:input_type -> header.BotRunRequest
-	127, // 382: header.BotMgr.ReportBot2:input_type -> header.BotrunMetricsRequest
-	128, // 383: header.BotMgr.ReportAction:input_type -> header.ActionrunMetricsRequest
-	129, // 384: header.BotMgr.ListObjects:input_type -> header.ListObjectsRequest
-	130, // 385: header.BotMgr.ReportBot:input_type -> header.ReportBotRequest
-	1,   // 386: header.BotMgr.ListBotTemplates:input_type -> header.Id
-	1,   // 387: header.BotMgr.UninstallBotTemplate:input_type -> header.Id
-	1,   // 388: header.BotMgr.InstallBotTemplate:input_type -> header.Id
+	124, // 372: header.Bizbot.ListBots:input_type -> header.BotsRequest
+	1,   // 373: header.Bizbot.GetBot:input_type -> header.Id
+	125, // 374: header.Bizbot.UpdateBotRunState:input_type -> header.Bot
+	125, // 375: header.Bizbot.CreateBot:input_type -> header.Bot
+	125, // 376: header.Bizbot.UpdateBot:input_type -> header.Bot
+	1,   // 377: header.Bizbot.DeleteBot:input_type -> header.Id
+	126, // 378: header.Bizbot.OnEvent:input_type -> header.BotRunRequest
+	126, // 379: header.Bizbot.StartBot:input_type -> header.BotRunRequest
+	126, // 380: header.Bizbot.StopBot:input_type -> header.BotRunRequest
+	126, // 381: header.Bizbot.TryAction:input_type -> header.BotRunRequest
+	127, // 382: header.Bizbot.ReportBot2:input_type -> header.BotrunMetricsRequest
+	128, // 383: header.Bizbot.ReportAction:input_type -> header.ActionrunMetricsRequest
+	129, // 384: header.Bizbot.ListObjects:input_type -> header.ListObjectsRequest
+	130, // 385: header.Bizbot.ReportBot:input_type -> header.ReportBotRequest
+	1,   // 386: header.Bizbot.ListBotTemplates:input_type -> header.Id
+	1,   // 387: header.Bizbot.UninstallBotTemplate:input_type -> header.Id
+	1,   // 388: header.Bizbot.InstallBotTemplate:input_type -> header.Id
 	131, // 389: header.Sendback.CreateWebhook:input_type -> header.Webhook
 	1,   // 390: header.Sendback.PingWebhook:input_type -> header.Id
 	1,   // 391: header.Sendback.DeleteWebhook:input_type -> header.Id
@@ -2976,23 +2976,23 @@ var file_service_proto_depIdxs = []int32{
 	242, // 870: header.WidgetService.SearchImages:output_type -> header.UploadedImages
 	245, // 871: header.WidgetService.ListNotifProfiles:output_type -> header.NotifProfiles
 	246, // 872: header.WidgetService.ListNotifBackgrounds:output_type -> header.Urls
-	247, // 873: header.BotMgr.ListBots:output_type -> header.Bots
-	125, // 874: header.BotMgr.GetBot:output_type -> header.Bot
-	125, // 875: header.BotMgr.UpdateBotRunState:output_type -> header.Bot
-	125, // 876: header.BotMgr.CreateBot:output_type -> header.Bot
-	125, // 877: header.BotMgr.UpdateBot:output_type -> header.Bot
-	11,  // 878: header.BotMgr.DeleteBot:output_type -> header.Empty
-	11,  // 879: header.BotMgr.OnEvent:output_type -> header.Empty
-	11,  // 880: header.BotMgr.StartBot:output_type -> header.Empty
-	11,  // 881: header.BotMgr.StopBot:output_type -> header.Empty
-	11,  // 882: header.BotMgr.TryAction:output_type -> header.Empty
-	248, // 883: header.BotMgr.ReportBot2:output_type -> header.BotrunMetrics
-	249, // 884: header.BotMgr.ReportAction:output_type -> header.ActionrunMetrics
-	250, // 885: header.BotMgr.ListObjects:output_type -> header.ListObjectsResponse
-	251, // 886: header.BotMgr.ReportBot:output_type -> header.ReportBotResponse
-	180, // 887: header.BotMgr.ListBotTemplates:output_type -> header.Response
-	180, // 888: header.BotMgr.UninstallBotTemplate:output_type -> header.Response
-	180, // 889: header.BotMgr.InstallBotTemplate:output_type -> header.Response
+	247, // 873: header.Bizbot.ListBots:output_type -> header.Bots
+	125, // 874: header.Bizbot.GetBot:output_type -> header.Bot
+	125, // 875: header.Bizbot.UpdateBotRunState:output_type -> header.Bot
+	125, // 876: header.Bizbot.CreateBot:output_type -> header.Bot
+	125, // 877: header.Bizbot.UpdateBot:output_type -> header.Bot
+	11,  // 878: header.Bizbot.DeleteBot:output_type -> header.Empty
+	11,  // 879: header.Bizbot.OnEvent:output_type -> header.Empty
+	11,  // 880: header.Bizbot.StartBot:output_type -> header.Empty
+	11,  // 881: header.Bizbot.StopBot:output_type -> header.Empty
+	11,  // 882: header.Bizbot.TryAction:output_type -> header.Empty
+	248, // 883: header.Bizbot.ReportBot2:output_type -> header.BotrunMetrics
+	249, // 884: header.Bizbot.ReportAction:output_type -> header.ActionrunMetrics
+	250, // 885: header.Bizbot.ListObjects:output_type -> header.ListObjectsResponse
+	251, // 886: header.Bizbot.ReportBot:output_type -> header.ReportBotResponse
+	180, // 887: header.Bizbot.ListBotTemplates:output_type -> header.Response
+	180, // 888: header.Bizbot.UninstallBotTemplate:output_type -> header.Response
+	180, // 889: header.Bizbot.InstallBotTemplate:output_type -> header.Response
 	131, // 890: header.Sendback.CreateWebhook:output_type -> header.Webhook
 	252, // 891: header.Sendback.PingWebhook:output_type -> header.WebhookTestResult
 	11,  // 892: header.Sendback.DeleteWebhook:output_type -> header.Empty
@@ -17379,10 +17379,10 @@ var _WidgetService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "service.proto",
 }
 
-// BotMgrClient is the client API for BotMgr service.
+// BizbotClient is the client API for Bizbot service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type BotMgrClient interface {
+type BizbotClient interface {
 	ListBots(ctx context.Context, in *BotsRequest, opts ...grpc.CallOption) (*Bots, error)
 	GetBot(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Bot, error)
 	UpdateBotRunState(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Bot, error)
@@ -17404,169 +17404,169 @@ type BotMgrClient interface {
 	InstallBotTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
-type botMgrClient struct {
+type bizbotClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBotMgrClient(cc grpc.ClientConnInterface) BotMgrClient {
-	return &botMgrClient{cc}
+func NewBizbotClient(cc grpc.ClientConnInterface) BizbotClient {
+	return &bizbotClient{cc}
 }
 
-func (c *botMgrClient) ListBots(ctx context.Context, in *BotsRequest, opts ...grpc.CallOption) (*Bots, error) {
+func (c *bizbotClient) ListBots(ctx context.Context, in *BotsRequest, opts ...grpc.CallOption) (*Bots, error) {
 	out := new(Bots)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/ListBots", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ListBots", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) GetBot(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Bot, error) {
+func (c *bizbotClient) GetBot(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Bot, error) {
 	out := new(Bot)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/GetBot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/GetBot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) UpdateBotRunState(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Bot, error) {
+func (c *bizbotClient) UpdateBotRunState(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Bot, error) {
 	out := new(Bot)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/UpdateBotRunState", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/UpdateBotRunState", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) CreateBot(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Bot, error) {
+func (c *bizbotClient) CreateBot(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Bot, error) {
 	out := new(Bot)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/CreateBot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/CreateBot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) UpdateBot(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Bot, error) {
+func (c *bizbotClient) UpdateBot(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Bot, error) {
 	out := new(Bot)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/UpdateBot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/UpdateBot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) DeleteBot(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+func (c *bizbotClient) DeleteBot(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/DeleteBot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/DeleteBot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) OnEvent(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *bizbotClient) OnEvent(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/OnEvent", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/OnEvent", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) StartBot(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *bizbotClient) StartBot(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/StartBot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/StartBot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) StopBot(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *bizbotClient) StopBot(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/StopBot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/StopBot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) TryAction(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
+func (c *bizbotClient) TryAction(ctx context.Context, in *BotRunRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/TryAction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/TryAction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) ReportBot2(ctx context.Context, in *BotrunMetricsRequest, opts ...grpc.CallOption) (*BotrunMetrics, error) {
+func (c *bizbotClient) ReportBot2(ctx context.Context, in *BotrunMetricsRequest, opts ...grpc.CallOption) (*BotrunMetrics, error) {
 	out := new(BotrunMetrics)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/ReportBot2", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ReportBot2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) ReportAction(ctx context.Context, in *ActionrunMetricsRequest, opts ...grpc.CallOption) (*ActionrunMetrics, error) {
+func (c *bizbotClient) ReportAction(ctx context.Context, in *ActionrunMetricsRequest, opts ...grpc.CallOption) (*ActionrunMetrics, error) {
 	out := new(ActionrunMetrics)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/ReportAction", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ReportAction", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) ListObjects(ctx context.Context, in *ListObjectsRequest, opts ...grpc.CallOption) (*ListObjectsResponse, error) {
+func (c *bizbotClient) ListObjects(ctx context.Context, in *ListObjectsRequest, opts ...grpc.CallOption) (*ListObjectsResponse, error) {
 	out := new(ListObjectsResponse)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/ListObjects", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ListObjects", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error) {
+func (c *bizbotClient) ReportBot(ctx context.Context, in *ReportBotRequest, opts ...grpc.CallOption) (*ReportBotResponse, error) {
 	out := new(ReportBotResponse)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/ReportBot", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ReportBot", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) ListBotTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *bizbotClient) ListBotTemplates(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/ListBotTemplates", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/ListBotTemplates", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) UninstallBotTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *bizbotClient) UninstallBotTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/UninstallBotTemplate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/UninstallBotTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *botMgrClient) InstallBotTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+func (c *bizbotClient) InstallBotTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/header.BotMgr/InstallBotTemplate", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Bizbot/InstallBotTemplate", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BotMgrServer is the server API for BotMgr service.
-type BotMgrServer interface {
+// BizbotServer is the server API for Bizbot service.
+type BizbotServer interface {
 	ListBots(context.Context, *BotsRequest) (*Bots, error)
 	GetBot(context.Context, *Id) (*Bot, error)
 	UpdateBotRunState(context.Context, *Bot) (*Bot, error)
@@ -17588,443 +17588,443 @@ type BotMgrServer interface {
 	InstallBotTemplate(context.Context, *Id) (*Response, error)
 }
 
-// UnimplementedBotMgrServer can be embedded to have forward compatible implementations.
-type UnimplementedBotMgrServer struct {
+// UnimplementedBizbotServer can be embedded to have forward compatible implementations.
+type UnimplementedBizbotServer struct {
 }
 
-func (*UnimplementedBotMgrServer) ListBots(context.Context, *BotsRequest) (*Bots, error) {
+func (*UnimplementedBizbotServer) ListBots(context.Context, *BotsRequest) (*Bots, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBots not implemented")
 }
-func (*UnimplementedBotMgrServer) GetBot(context.Context, *Id) (*Bot, error) {
+func (*UnimplementedBizbotServer) GetBot(context.Context, *Id) (*Bot, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBot not implemented")
 }
-func (*UnimplementedBotMgrServer) UpdateBotRunState(context.Context, *Bot) (*Bot, error) {
+func (*UnimplementedBizbotServer) UpdateBotRunState(context.Context, *Bot) (*Bot, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBotRunState not implemented")
 }
-func (*UnimplementedBotMgrServer) CreateBot(context.Context, *Bot) (*Bot, error) {
+func (*UnimplementedBizbotServer) CreateBot(context.Context, *Bot) (*Bot, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBot not implemented")
 }
-func (*UnimplementedBotMgrServer) UpdateBot(context.Context, *Bot) (*Bot, error) {
+func (*UnimplementedBizbotServer) UpdateBot(context.Context, *Bot) (*Bot, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBot not implemented")
 }
-func (*UnimplementedBotMgrServer) DeleteBot(context.Context, *Id) (*Empty, error) {
+func (*UnimplementedBizbotServer) DeleteBot(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteBot not implemented")
 }
-func (*UnimplementedBotMgrServer) OnEvent(context.Context, *BotRunRequest) (*Empty, error) {
+func (*UnimplementedBizbotServer) OnEvent(context.Context, *BotRunRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnEvent not implemented")
 }
-func (*UnimplementedBotMgrServer) StartBot(context.Context, *BotRunRequest) (*Empty, error) {
+func (*UnimplementedBizbotServer) StartBot(context.Context, *BotRunRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartBot not implemented")
 }
-func (*UnimplementedBotMgrServer) StopBot(context.Context, *BotRunRequest) (*Empty, error) {
+func (*UnimplementedBizbotServer) StopBot(context.Context, *BotRunRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopBot not implemented")
 }
-func (*UnimplementedBotMgrServer) TryAction(context.Context, *BotRunRequest) (*Empty, error) {
+func (*UnimplementedBizbotServer) TryAction(context.Context, *BotRunRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryAction not implemented")
 }
-func (*UnimplementedBotMgrServer) ReportBot2(context.Context, *BotrunMetricsRequest) (*BotrunMetrics, error) {
+func (*UnimplementedBizbotServer) ReportBot2(context.Context, *BotrunMetricsRequest) (*BotrunMetrics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportBot2 not implemented")
 }
-func (*UnimplementedBotMgrServer) ReportAction(context.Context, *ActionrunMetricsRequest) (*ActionrunMetrics, error) {
+func (*UnimplementedBizbotServer) ReportAction(context.Context, *ActionrunMetricsRequest) (*ActionrunMetrics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportAction not implemented")
 }
-func (*UnimplementedBotMgrServer) ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error) {
+func (*UnimplementedBizbotServer) ListObjects(context.Context, *ListObjectsRequest) (*ListObjectsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListObjects not implemented")
 }
-func (*UnimplementedBotMgrServer) ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error) {
+func (*UnimplementedBizbotServer) ReportBot(context.Context, *ReportBotRequest) (*ReportBotResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportBot not implemented")
 }
-func (*UnimplementedBotMgrServer) ListBotTemplates(context.Context, *Id) (*Response, error) {
+func (*UnimplementedBizbotServer) ListBotTemplates(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBotTemplates not implemented")
 }
-func (*UnimplementedBotMgrServer) UninstallBotTemplate(context.Context, *Id) (*Response, error) {
+func (*UnimplementedBizbotServer) UninstallBotTemplate(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UninstallBotTemplate not implemented")
 }
-func (*UnimplementedBotMgrServer) InstallBotTemplate(context.Context, *Id) (*Response, error) {
+func (*UnimplementedBizbotServer) InstallBotTemplate(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InstallBotTemplate not implemented")
 }
 
-func RegisterBotMgrServer(s *grpc.Server, srv BotMgrServer) {
-	s.RegisterService(&_BotMgr_serviceDesc, srv)
+func RegisterBizbotServer(s *grpc.Server, srv BizbotServer) {
+	s.RegisterService(&_Bizbot_serviceDesc, srv)
 }
 
-func _BotMgr_ListBots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_ListBots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BotsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).ListBots(ctx, in)
+		return srv.(BizbotServer).ListBots(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/ListBots",
+		FullMethod: "/header.Bizbot/ListBots",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).ListBots(ctx, req.(*BotsRequest))
+		return srv.(BizbotServer).ListBots(ctx, req.(*BotsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_GetBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_GetBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).GetBot(ctx, in)
+		return srv.(BizbotServer).GetBot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/GetBot",
+		FullMethod: "/header.Bizbot/GetBot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).GetBot(ctx, req.(*Id))
+		return srv.(BizbotServer).GetBot(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_UpdateBotRunState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_UpdateBotRunState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Bot)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).UpdateBotRunState(ctx, in)
+		return srv.(BizbotServer).UpdateBotRunState(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/UpdateBotRunState",
+		FullMethod: "/header.Bizbot/UpdateBotRunState",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).UpdateBotRunState(ctx, req.(*Bot))
+		return srv.(BizbotServer).UpdateBotRunState(ctx, req.(*Bot))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_CreateBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_CreateBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Bot)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).CreateBot(ctx, in)
+		return srv.(BizbotServer).CreateBot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/CreateBot",
+		FullMethod: "/header.Bizbot/CreateBot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).CreateBot(ctx, req.(*Bot))
+		return srv.(BizbotServer).CreateBot(ctx, req.(*Bot))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_UpdateBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_UpdateBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Bot)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).UpdateBot(ctx, in)
+		return srv.(BizbotServer).UpdateBot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/UpdateBot",
+		FullMethod: "/header.Bizbot/UpdateBot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).UpdateBot(ctx, req.(*Bot))
+		return srv.(BizbotServer).UpdateBot(ctx, req.(*Bot))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_DeleteBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_DeleteBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).DeleteBot(ctx, in)
+		return srv.(BizbotServer).DeleteBot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/DeleteBot",
+		FullMethod: "/header.Bizbot/DeleteBot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).DeleteBot(ctx, req.(*Id))
+		return srv.(BizbotServer).DeleteBot(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_OnEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_OnEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BotRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).OnEvent(ctx, in)
+		return srv.(BizbotServer).OnEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/OnEvent",
+		FullMethod: "/header.Bizbot/OnEvent",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).OnEvent(ctx, req.(*BotRunRequest))
+		return srv.(BizbotServer).OnEvent(ctx, req.(*BotRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_StartBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_StartBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BotRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).StartBot(ctx, in)
+		return srv.(BizbotServer).StartBot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/StartBot",
+		FullMethod: "/header.Bizbot/StartBot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).StartBot(ctx, req.(*BotRunRequest))
+		return srv.(BizbotServer).StartBot(ctx, req.(*BotRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_StopBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_StopBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BotRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).StopBot(ctx, in)
+		return srv.(BizbotServer).StopBot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/StopBot",
+		FullMethod: "/header.Bizbot/StopBot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).StopBot(ctx, req.(*BotRunRequest))
+		return srv.(BizbotServer).StopBot(ctx, req.(*BotRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_TryAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_TryAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BotRunRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).TryAction(ctx, in)
+		return srv.(BizbotServer).TryAction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/TryAction",
+		FullMethod: "/header.Bizbot/TryAction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).TryAction(ctx, req.(*BotRunRequest))
+		return srv.(BizbotServer).TryAction(ctx, req.(*BotRunRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_ReportBot2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_ReportBot2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BotrunMetricsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).ReportBot2(ctx, in)
+		return srv.(BizbotServer).ReportBot2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/ReportBot2",
+		FullMethod: "/header.Bizbot/ReportBot2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).ReportBot2(ctx, req.(*BotrunMetricsRequest))
+		return srv.(BizbotServer).ReportBot2(ctx, req.(*BotrunMetricsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_ReportAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_ReportAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ActionrunMetricsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).ReportAction(ctx, in)
+		return srv.(BizbotServer).ReportAction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/ReportAction",
+		FullMethod: "/header.Bizbot/ReportAction",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).ReportAction(ctx, req.(*ActionrunMetricsRequest))
+		return srv.(BizbotServer).ReportAction(ctx, req.(*ActionrunMetricsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_ListObjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_ListObjects_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListObjectsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).ListObjects(ctx, in)
+		return srv.(BizbotServer).ListObjects(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/ListObjects",
+		FullMethod: "/header.Bizbot/ListObjects",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).ListObjects(ctx, req.(*ListObjectsRequest))
+		return srv.(BizbotServer).ListObjects(ctx, req.(*ListObjectsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_ReportBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_ReportBot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReportBotRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).ReportBot(ctx, in)
+		return srv.(BizbotServer).ReportBot(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/ReportBot",
+		FullMethod: "/header.Bizbot/ReportBot",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).ReportBot(ctx, req.(*ReportBotRequest))
+		return srv.(BizbotServer).ReportBot(ctx, req.(*ReportBotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_ListBotTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_ListBotTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).ListBotTemplates(ctx, in)
+		return srv.(BizbotServer).ListBotTemplates(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/ListBotTemplates",
+		FullMethod: "/header.Bizbot/ListBotTemplates",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).ListBotTemplates(ctx, req.(*Id))
+		return srv.(BizbotServer).ListBotTemplates(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_UninstallBotTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_UninstallBotTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).UninstallBotTemplate(ctx, in)
+		return srv.(BizbotServer).UninstallBotTemplate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/UninstallBotTemplate",
+		FullMethod: "/header.Bizbot/UninstallBotTemplate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).UninstallBotTemplate(ctx, req.(*Id))
+		return srv.(BizbotServer).UninstallBotTemplate(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BotMgr_InstallBotTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Bizbot_InstallBotTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BotMgrServer).InstallBotTemplate(ctx, in)
+		return srv.(BizbotServer).InstallBotTemplate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.BotMgr/InstallBotTemplate",
+		FullMethod: "/header.Bizbot/InstallBotTemplate",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BotMgrServer).InstallBotTemplate(ctx, req.(*Id))
+		return srv.(BizbotServer).InstallBotTemplate(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _BotMgr_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "header.BotMgr",
-	HandlerType: (*BotMgrServer)(nil),
+var _Bizbot_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Bizbot",
+	HandlerType: (*BizbotServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "ListBots",
-			Handler:    _BotMgr_ListBots_Handler,
+			Handler:    _Bizbot_ListBots_Handler,
 		},
 		{
 			MethodName: "GetBot",
-			Handler:    _BotMgr_GetBot_Handler,
+			Handler:    _Bizbot_GetBot_Handler,
 		},
 		{
 			MethodName: "UpdateBotRunState",
-			Handler:    _BotMgr_UpdateBotRunState_Handler,
+			Handler:    _Bizbot_UpdateBotRunState_Handler,
 		},
 		{
 			MethodName: "CreateBot",
-			Handler:    _BotMgr_CreateBot_Handler,
+			Handler:    _Bizbot_CreateBot_Handler,
 		},
 		{
 			MethodName: "UpdateBot",
-			Handler:    _BotMgr_UpdateBot_Handler,
+			Handler:    _Bizbot_UpdateBot_Handler,
 		},
 		{
 			MethodName: "DeleteBot",
-			Handler:    _BotMgr_DeleteBot_Handler,
+			Handler:    _Bizbot_DeleteBot_Handler,
 		},
 		{
 			MethodName: "OnEvent",
-			Handler:    _BotMgr_OnEvent_Handler,
+			Handler:    _Bizbot_OnEvent_Handler,
 		},
 		{
 			MethodName: "StartBot",
-			Handler:    _BotMgr_StartBot_Handler,
+			Handler:    _Bizbot_StartBot_Handler,
 		},
 		{
 			MethodName: "StopBot",
-			Handler:    _BotMgr_StopBot_Handler,
+			Handler:    _Bizbot_StopBot_Handler,
 		},
 		{
 			MethodName: "TryAction",
-			Handler:    _BotMgr_TryAction_Handler,
+			Handler:    _Bizbot_TryAction_Handler,
 		},
 		{
 			MethodName: "ReportBot2",
-			Handler:    _BotMgr_ReportBot2_Handler,
+			Handler:    _Bizbot_ReportBot2_Handler,
 		},
 		{
 			MethodName: "ReportAction",
-			Handler:    _BotMgr_ReportAction_Handler,
+			Handler:    _Bizbot_ReportAction_Handler,
 		},
 		{
 			MethodName: "ListObjects",
-			Handler:    _BotMgr_ListObjects_Handler,
+			Handler:    _Bizbot_ListObjects_Handler,
 		},
 		{
 			MethodName: "ReportBot",
-			Handler:    _BotMgr_ReportBot_Handler,
+			Handler:    _Bizbot_ReportBot_Handler,
 		},
 		{
 			MethodName: "ListBotTemplates",
-			Handler:    _BotMgr_ListBotTemplates_Handler,
+			Handler:    _Bizbot_ListBotTemplates_Handler,
 		},
 		{
 			MethodName: "UninstallBotTemplate",
-			Handler:    _BotMgr_UninstallBotTemplate_Handler,
+			Handler:    _Bizbot_UninstallBotTemplate_Handler,
 		},
 		{
 			MethodName: "InstallBotTemplate",
-			Handler:    _BotMgr_InstallBotTemplate_Handler,
+			Handler:    _Bizbot_InstallBotTemplate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
