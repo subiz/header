@@ -1802,6 +1802,17 @@ message Integration {
 
 	int64 status_changed_at = 87;
 	string error_code = 88;
+
+	bool sip_sends_auth = 90;
+	bool sip_sends_registrations = 91;
+	bool sip_accepts_auth = 92;
+	bool sip_accpets_registrations = 93;
+	string call_transport = 94; // udp
+	repeated string sip_remote_hosts = 95;
+	string call_outbound_username = 96;
+	string call_outbound_password = 97;
+	string call_allow = 98;  // !all,ulaw,alaw,g722
+	bool call_rtp_symmetrics = 99; // false
 }
 
 message TagRequest {
