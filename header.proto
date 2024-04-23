@@ -5797,6 +5797,8 @@ message CallDriverRequest {
 	string campaign_id = 27;
 	string outbound_call_entry_id = 28;
 	string by_agent_id = 29;
+
+	Integration integration = 30;
 }
 
 message CallDriverResponse {
