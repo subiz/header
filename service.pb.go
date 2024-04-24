@@ -923,12 +923,12 @@ var file_service_proto_rawDesc = []byte{
 	0x70, 0x74, 0x79, 0x12, 0x29, 0x0a, 0x0b, 0x52, 0x65, 0x61, 0x64, 0x54, 0x69, 0x63, 0x6b, 0x65,
 	0x74, 0x73, 0x12, 0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a,
 	0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2b,
-	0x0a, 0x0d, 0x55, 0x6e, 0x52, 0x65, 0x61, 0x64, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x12,
+	0x0a, 0x0d, 0x55, 0x6e, 0x72, 0x65, 0x61, 0x64, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x12,
 	0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x0d, 0x2e, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2b, 0x0a, 0x0d, 0x53,
 	0x6e, 0x6f, 0x6f, 0x7a, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x12, 0x0b, 0x2e, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2d, 0x0a, 0x0f, 0x55, 0x6e, 0x53, 0x6e,
+	0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2d, 0x0a, 0x0f, 0x55, 0x6e, 0x73, 0x6e,
 	0x6f, 0x6f, 0x7a, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x12, 0x0b, 0x2e, 0x68, 0x65,
 	0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
 	0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2f, 0x0a, 0x0f, 0x53, 0x65, 0x6e, 0x64, 0x54,
@@ -2356,9 +2356,9 @@ var file_service_proto_depIdxs = []int32{
 	66,  // 250: header.TicketMgr.JoinTicket:input_type -> header.ConversationMember
 	66,  // 251: header.TicketMgr.LeftTicket:input_type -> header.ConversationMember
 	16,  // 252: header.TicketMgr.ReadTickets:input_type -> header.Ids
-	16,  // 253: header.TicketMgr.UnReadTickets:input_type -> header.Ids
+	16,  // 253: header.TicketMgr.UnreadTickets:input_type -> header.Ids
 	16,  // 254: header.TicketMgr.SnoozeTickets:input_type -> header.Ids
-	16,  // 255: header.TicketMgr.UnSnoozeTickets:input_type -> header.Ids
+	16,  // 255: header.TicketMgr.UnsnoozeTickets:input_type -> header.Ids
 	48,  // 256: header.TicketMgr.SendTicketEvent:input_type -> header.Event
 	71,  // 257: header.TicketMgr.ListTicketEvents:input_type -> header.ListConversationEventsRequest
 	83,  // 258: header.TemplateMgr.CreateTemplate:input_type -> header.Template
@@ -2857,9 +2857,9 @@ var file_service_proto_depIdxs = []int32{
 	11,  // 751: header.TicketMgr.JoinTicket:output_type -> header.Empty
 	11,  // 752: header.TicketMgr.LeftTicket:output_type -> header.Empty
 	11,  // 753: header.TicketMgr.ReadTickets:output_type -> header.Empty
-	11,  // 754: header.TicketMgr.UnReadTickets:output_type -> header.Empty
+	11,  // 754: header.TicketMgr.UnreadTickets:output_type -> header.Empty
 	11,  // 755: header.TicketMgr.SnoozeTickets:output_type -> header.Empty
-	11,  // 756: header.TicketMgr.UnSnoozeTickets:output_type -> header.Empty
+	11,  // 756: header.TicketMgr.UnsnoozeTickets:output_type -> header.Empty
 	48,  // 757: header.TicketMgr.SendTicketEvent:output_type -> header.Event
 	0,   // 758: header.TicketMgr.ListTicketEvents:output_type -> header.Events
 	83,  // 759: header.TemplateMgr.CreateTemplate:output_type -> header.Template
@@ -11967,9 +11967,9 @@ type TicketMgrClient interface {
 	JoinTicket(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error)
 	LeftTicket(ctx context.Context, in *ConversationMember, opts ...grpc.CallOption) (*Empty, error)
 	ReadTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
-	UnReadTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
+	UnreadTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
 	SnoozeTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
-	UnSnoozeTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
+	UnsnoozeTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error)
 	SendTicketEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	ListTicketEvents(ctx context.Context, in *ListConversationEventsRequest, opts ...grpc.CallOption) (*Events, error)
 }
@@ -12171,9 +12171,9 @@ func (c *ticketMgrClient) ReadTickets(ctx context.Context, in *Ids, opts ...grpc
 	return out, nil
 }
 
-func (c *ticketMgrClient) UnReadTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error) {
+func (c *ticketMgrClient) UnreadTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.TicketMgr/UnReadTickets", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/UnreadTickets", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12189,9 +12189,9 @@ func (c *ticketMgrClient) SnoozeTickets(ctx context.Context, in *Ids, opts ...gr
 	return out, nil
 }
 
-func (c *ticketMgrClient) UnSnoozeTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error) {
+func (c *ticketMgrClient) UnsnoozeTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.TicketMgr/UnSnoozeTickets", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/UnsnoozeTickets", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12240,9 +12240,9 @@ type TicketMgrServer interface {
 	JoinTicket(context.Context, *ConversationMember) (*Empty, error)
 	LeftTicket(context.Context, *ConversationMember) (*Empty, error)
 	ReadTickets(context.Context, *Ids) (*Empty, error)
-	UnReadTickets(context.Context, *Ids) (*Empty, error)
+	UnreadTickets(context.Context, *Ids) (*Empty, error)
 	SnoozeTickets(context.Context, *Ids) (*Empty, error)
-	UnSnoozeTickets(context.Context, *Ids) (*Empty, error)
+	UnsnoozeTickets(context.Context, *Ids) (*Empty, error)
 	SendTicketEvent(context.Context, *Event) (*Event, error)
 	ListTicketEvents(context.Context, *ListConversationEventsRequest) (*Events, error)
 }
@@ -12314,14 +12314,14 @@ func (*UnimplementedTicketMgrServer) LeftTicket(context.Context, *ConversationMe
 func (*UnimplementedTicketMgrServer) ReadTickets(context.Context, *Ids) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadTickets not implemented")
 }
-func (*UnimplementedTicketMgrServer) UnReadTickets(context.Context, *Ids) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnReadTickets not implemented")
+func (*UnimplementedTicketMgrServer) UnreadTickets(context.Context, *Ids) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnreadTickets not implemented")
 }
 func (*UnimplementedTicketMgrServer) SnoozeTickets(context.Context, *Ids) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SnoozeTickets not implemented")
 }
-func (*UnimplementedTicketMgrServer) UnSnoozeTickets(context.Context, *Ids) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnSnoozeTickets not implemented")
+func (*UnimplementedTicketMgrServer) UnsnoozeTickets(context.Context, *Ids) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnsnoozeTickets not implemented")
 }
 func (*UnimplementedTicketMgrServer) SendTicketEvent(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendTicketEvent not implemented")
@@ -12712,20 +12712,20 @@ func _TicketMgr_ReadTickets_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TicketMgr_UnReadTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TicketMgr_UnreadTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ids)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TicketMgrServer).UnReadTickets(ctx, in)
+		return srv.(TicketMgrServer).UnreadTickets(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.TicketMgr/UnReadTickets",
+		FullMethod: "/header.TicketMgr/UnreadTickets",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).UnReadTickets(ctx, req.(*Ids))
+		return srv.(TicketMgrServer).UnreadTickets(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -12748,20 +12748,20 @@ func _TicketMgr_SnoozeTickets_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TicketMgr_UnSnoozeTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TicketMgr_UnsnoozeTickets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ids)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TicketMgrServer).UnSnoozeTickets(ctx, in)
+		return srv.(TicketMgrServer).UnsnoozeTickets(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.TicketMgr/UnSnoozeTickets",
+		FullMethod: "/header.TicketMgr/UnsnoozeTickets",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).UnSnoozeTickets(ctx, req.(*Ids))
+		return srv.(TicketMgrServer).UnsnoozeTickets(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -12891,16 +12891,16 @@ var _TicketMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _TicketMgr_ReadTickets_Handler,
 		},
 		{
-			MethodName: "UnReadTickets",
-			Handler:    _TicketMgr_UnReadTickets_Handler,
+			MethodName: "UnreadTickets",
+			Handler:    _TicketMgr_UnreadTickets_Handler,
 		},
 		{
 			MethodName: "SnoozeTickets",
 			Handler:    _TicketMgr_SnoozeTickets_Handler,
 		},
 		{
-			MethodName: "UnSnoozeTickets",
-			Handler:    _TicketMgr_UnSnoozeTickets_Handler,
+			MethodName: "UnsnoozeTickets",
+			Handler:    _TicketMgr_UnsnoozeTickets_Handler,
 		},
 		{
 			MethodName: "SendTicketEvent",
