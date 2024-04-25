@@ -7460,7 +7460,7 @@ message TicketView {
 	string desciption = 14;
 
 	int64 count = 15;
-	int64 last_event_at = 16;
+	Event last_event = 16;
 }
 
 message TicketViewMember {
