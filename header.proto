@@ -2077,8 +2077,6 @@ message Bot {
 	string avatar_url = 5;
 	string avatar_url_128 = 8;
 
-	string category = 6; // see BotCategory: users, orders
-
 	string state = 7; // like agent state: active, inactive, deleted
 
 	BotAction action = 9; // point to root action
@@ -7510,25 +7508,14 @@ message BotTemplate {
 	string name = 3;
 	string description = 4;
 	int64 version = 5; // current, must be
-	string logo_url = 6;
+	string avatar_url = 6;
 	string poll_secret = 7;
 	int64 created = 8;
 	string author_name = 9;
 	string author_email = 10;
 	string webhook_url = 11; // http://bot.service:12434/events
 
-	// -- only when list template
-	int64 installed_at = 12;
-	int64 installed_version = 13;
-	string installed_by = 14;
-}
+	string mode = 12; // development, production
 
-message BotTemplateInstalled {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string template_id = 3;
-	int64 version = 4;
-	string status = 5; // active, deleted
-	int64 installed_at = 6;
-	string installed_by = 7;
+	string test_account_id = 15;
 }
