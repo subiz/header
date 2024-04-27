@@ -7509,13 +7509,13 @@ message BotTemplate {
 	string description = 4;
 	int64 version = 5; // current, must be
 	string avatar_url = 6;
-	string poll_secret = 7;
+	string secret = 7;
 	int64 created = 8;
 	string author_name = 9;
 	string author_email = 10;
 	string webhook_url = 11; // http://bot.service:12434/events
 
 	string mode = 12; // development, production
-
+	int64 updated = 13;
 	string test_account_id = 15;
 }

@@ -575,12 +575,6 @@ service Bizbot {
 
 	rpc ListObjects(header.ListObjectsRequest) returns (header.ListObjectsResponse);
 	rpc ReportBot(header.ReportBotRequest) returns (header.ReportBotResponse);
-
-	// POST UploadTemplate
-	// list avaiable template
-	rpc ListBotTemplates(header.Id) returns (Response);
-	rpc UninstallBotTemplate(header.Id) returns (Response);
-	rpc InstallBotTemplate(header.Id) returns (Response);
 }
 
 // sendback services
