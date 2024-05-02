@@ -879,7 +879,6 @@ message BotRunRequest {
 	// require
 	string account_id = 2;
 	string bot_id = 3;
-	string object_type = 4; // conversations
 	string object_id = 5; // conversation_id
 
 	// user_id is inside this
@@ -906,7 +905,6 @@ message BotRunRequest {
 message BotRunResponse {
 	string account_id = 2;
 	string bot_id = 3;
-	string object_type = 4;
 	string object_id = 5;
 
 	string exec_bot_id = 8;
@@ -3502,6 +3500,8 @@ message BlacklistIP {
 	string ip = 4;
 	int64 created = 5;
 	string by = 6;
+	int64 expired_at = 7; // ms (max 1 year)
+	int64 num_blocked = 8;
 }
 
 message BannedUser {
@@ -7413,7 +7413,7 @@ message Ticket {
 	bool archived = 82;
 	Event last_event = 83;   // meanful event
 	string updated_by = 84;
-    string deleted = 85;
+	string deleted = 85;
 }
 
 message TicketHistoryEntry {
