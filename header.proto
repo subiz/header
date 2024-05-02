@@ -3502,6 +3502,7 @@ message BlacklistIP {
 	string by = 6;
 	int64 expired_at = 7; // ms (max 1 year)
 	int64 num_blocked = 8;
+	int64 last_blocked = 9;
 }
 
 message BannedUser {
