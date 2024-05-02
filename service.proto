@@ -30,7 +30,7 @@ service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc Index(header.DocIndexRequest) returns (header.Empty);
-	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
+	rpc Search(header.DocSearchRequest) returns (header.Ids);
 
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 	rpc Report(header.ConvoReportRequest) returns (header.ConvoReportResponse);
@@ -385,6 +385,8 @@ service TicketMgr {
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
+
+	rpc SearchTicket(header.DocSearchRequest) returns (Response);
 }
 
 service TemplateMgr {

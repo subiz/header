@@ -5593,7 +5593,8 @@ message DocSearchRequest {
 	repeated string include_parts = 8; // only include those parts
 	bool doc_distinct = 9; // distinct document
 	repeated string include_owners = 10;
-	int64 day_anchor=11;
+	int64 day_anchor = 11;
+	UserViewCondition condition = 12;
 }
 
 message DocHit {
@@ -7459,6 +7460,7 @@ message TicketView {
 
 	int64 count = 15;
 	Event last_event = 16;
+	int64 last_modified = 17;
 }
 
 message TicketViewMember {
