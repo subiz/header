@@ -385,8 +385,6 @@ service TicketMgr {
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
-
-	rpc SearchTicket(header.DocSearchRequest) returns (Response);
 }
 
 service TemplateMgr {

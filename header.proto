@@ -7435,6 +7435,8 @@ message ListTicketRequest {
 	string order_by = 9; // updated, state, priority, created, due_date
 	string next_cursor = 11;
 	int64 limit = 12;
+	
+	string query = 13;
 }
 
 message TicketView {
