@@ -5595,7 +5595,6 @@ message DocSearchRequest {
 	bool doc_distinct = 9; // distinct document
 	repeated string include_owners = 10;
 	int64 day_anchor = 11;
-	UserViewCondition condition = 12;
 }
 
 message DocHit {
@@ -7414,7 +7413,8 @@ message Ticket {
 	bool archived = 82;
 	Event last_event = 83;   // meanful event
 	string updated_by = 84;
-	string deleted = 85;
+	int64 deleted = 85;
+	int64 total_messages = 86;
 }
 
 message TicketHistoryEntry {
