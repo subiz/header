@@ -1639,3 +1639,14 @@ func SetConversationId(e *Event, cid string) {
 	}
 	convo.Id = cid
 }
+
+type IResourceGroup interface {
+	GetPermissions() []*ResourceGroupMember
+}
+
+// 1. Kiem tra quyen truc tiep tren Resource. Cho phep -> true
+// 2.
+// 3. Kiem tra quyen trong tat ca nhom cua Resource.
+// 3.1. Phan truc tiep. Cho phep -> true, Khong cho phep -> false
+// 3.2. Neu khong tim thay. Tim trong tat ca cac nhom. Neu mot nhom cho phep -> true
+// 4. return false

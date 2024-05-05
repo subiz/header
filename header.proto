@@ -1811,6 +1811,8 @@ message Integration {
 	string call_outbound_password = 97;
 	string call_allow = 98;  // !all,ulaw,alaw,g722
 	bool call_rtp_symmetrics = 99; // false
+
+	repeated ResourceGroupMember permissions = 100;
 }
 
 message TagRequest {
@@ -6032,13 +6034,15 @@ message Segment {
 
 	bool is_system = 27;
 
-	repeated string members = 29; // view only, add own member
-	repeated string managers = 30; // edit segment query, remove member
+	repeated string members = 29; // view only, add own member // deprecated by .permissions field
+	repeated string managers = 30; // edit segment query, remove member // deprecated by .permissions field
 
 	string source_type = 31; // campaign, popup, bot
 	string source_id = 32;
 	repeated string display_fields = 33;
 	string order_by = 34; // attr.username asc
+
+	repeated ResourceGroupMember permissions = 35;
 }
 
 message Segments {
@@ -7348,7 +7352,8 @@ message TicketType {
 	string updated_by = 14;
 	int64 updated = 15;
 
-	repeated TicketTypeMember members = 16;
+	repeated TicketTypeMember members = 16; // removing for .permissions field
+	repeated ResourceGroupMember permissions = 17;
 }
 
 message Ticket {
@@ -7435,7 +7440,7 @@ message ListTicketRequest {
 	string order_by = 9; // updated, state, priority, created, due_date
 	string next_cursor = 11;
 	int64 limit = 12;
-	
+
 	string query = 13;
 }
 
@@ -7523,4 +7528,19 @@ message BotTemplate {
 	string mode = 12; // development, production
 	int64 updated = 13;
 	string test_account_id = 15;
+}
+
+message ResourceGroupMember {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string resource_group_id = 3; // segment id or integration
+	string member_id = 4;
+	string member_type = 5; // group?
+
+	// c:create, r:read, R:read all, w:write, W:write all, d:delete, D:delete all, m:manage, e:export
+	// cRWd
+	string permission = 6;
+	int64 invited = 7;
+	int64 accepted = 8;
+	int64 joined = 9;
 }
