@@ -1650,3 +1650,13 @@ type IResourceGroup interface {
 // 3.1. Phan truc tiep. Cho phep -> true, Khong cho phep -> false
 // 3.2. Neu khong tim thay. Tim trong tat ca cac nhom. Neu mot nhom cho phep -> true
 // 4. return false
+
+// 00000000 00000000 00000000  00000000
+var READ int64 = 0x4 // 00000001
+var CREATE int64 = 0x8
+var UPDATE int64 = 0x2
+var DELETE int64 = 0x1
+var COMMENT int64 = 0x10 // 1crud
+var EXPORT int64 = 0x20  // 10crud
+var MANAGE int64 = 0x40  // 10crud
+var OTHER int64 = 0x8000 // 1000.0000 0000.0000

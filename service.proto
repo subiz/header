@@ -309,6 +309,9 @@ service ConversationMgr {
 	rpc Integrate(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
 
+	rpc UpdateIntegrationMember(ResourceGroupMember) returns (ResourceGroupMember);
+	rpc RemoveIntegrationMember(ResourceGroupMember) returns (header.Empty);
+
 	rpc UpdateRule(header.Rule) returns (header.Rule);
 	rpc CreateRule(header.Rule) returns (header.Rule);
 	rpc DeleteRule(Id) returns (Empty);
@@ -385,6 +388,9 @@ service TicketMgr {
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
+
+	rpc UpdateTicketTypeMember(ResourceGroupMember) returns (ResourceGroupMember);
+	rpc RemoveTicketTypeMember(ResourceGroupMember) returns (header.Empty);
 }
 
 service TemplateMgr {

@@ -7539,7 +7539,7 @@ message ResourceGroupMember {
 
 	// c:create, r:read, R:read all, w:write, W:write all, d:delete, D:delete all, m:manage, e:export
 	// cRWd
-	string permission = 6;
+	int64 permission = 10;
 	int64 invited = 7;
 	int64 accepted = 8;
 	int64 joined = 9;
