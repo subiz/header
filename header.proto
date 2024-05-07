@@ -7444,7 +7444,7 @@ message Ticket {
 	int64 deleted = 85;
 	int64 total_messages = 86;
 
-	bool error_code = 87; // access_deny, not_found
+	string error_code = 87; // access_deny, not_found
 }
 
 message TicketHistoryEntry {
