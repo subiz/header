@@ -5597,6 +5597,7 @@ message DocSearchRequest {
 	bool doc_distinct = 9; // distinct document
 	repeated string include_owners = 10;
 	int64 day_anchor = 11;
+	bool is_only_id= 12;
 }
 
 message DocHit {
