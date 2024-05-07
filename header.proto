@@ -7356,7 +7356,8 @@ message TicketType {
 
 	repeated TicketTypeMember members = 16; // removing for .permissions field
 	repeated ResourceGroupMember permissions = 17;
-	string template_id =18;
+	string template_id = 18;
+	string visibility = 19; // public, internal, limited
 }
 
 message TicketTemplate {
@@ -7372,7 +7373,7 @@ message TicketTemplate {
 	string type_id = 9;
 	Message message = 5;
 	string priority = 10;
-	string state = 11; 
+	string state = 11;
 	string assignee = 12;
 	repeated Tag tags = 13;
 	repeated Attribute attrs = 14;
@@ -7443,7 +7444,7 @@ message Ticket {
 	int64 deleted = 85;
 	int64 total_messages = 86;
 
-	bool unauthorized = 87;
+	bool error_code = 87; // access_deny, not_found
 }
 
 message TicketHistoryEntry {
@@ -7563,8 +7564,10 @@ message ResourceGroupMember {
 
 	// c:create, r:read, R:read all, w:write, W:write all, d:delete, D:delete all, m:manage, e:export
 	// cRWd
-	int64 permission = 10;
+	// int64 permission = 10; // computed from group setting and role
 	int64 invited = 7;
 	int64 accepted = 8;
 	int64 joined = 9;
+
+	string role = 11; // member, manager, admin, ...
 }
