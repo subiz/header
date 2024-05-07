@@ -7420,6 +7420,8 @@ message Ticket {
 	string updated_by = 84;
 	int64 deleted = 85;
 	int64 total_messages = 86;
+
+	bool unauthorized = 87;
 }
 
 message TicketHistoryEntry {

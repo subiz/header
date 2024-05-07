@@ -160,7 +160,6 @@ message Account {
 message InvoiceInfo {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
-
 	optional string company_name = 4;
 	optional string tax_code = 5;
 	optional string fullname = 6;
@@ -172,6 +171,7 @@ message InvoiceInfo {
 
 	optional int64 updated = 20;
 	optional string updated_by = 21;
+	optional string disabled = 22;
 }
 
 message UserAttributeSetting {
