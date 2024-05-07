@@ -359,8 +359,9 @@ service TicketMgr {
 	rpc GetTicketType(Id) returns (TicketType);
 
 	rpc CreateTicket(header.Ticket) returns (header.Ticket);
-	rpc UpdateTicket(header.Ticket) returns (header.Ticket); // close, reassign
-	rpc DeleteTicket(Id) returns (Empty); // close, reassign
+	rpc UpdateTicket(header.Ticket) returns (header.Ticket); 
+	rpc DeleteTicket(Id) returns (Empty); 
+	rpc RecoverTicket(Id) returns (Empty); 
 	rpc GetTicket(Id) returns (header.Ticket);
 	rpc ListTickets(header.ListTicketRequest) returns (Response);
 	rpc MatchTickets(Ids) returns (Response);
@@ -370,6 +371,12 @@ service TicketMgr {
 	rpc DeleteTicketView(Id) returns (Empty);
 	rpc GetTicketView(Id) returns (header.TicketView);
 	rpc ListTicketViews(Empty) returns (Response);
+
+	rpc CreateTicketTemplate(header.TicketTemplate) returns (header.TicketTemplate);
+	rpc UpdateTicketTemplate(header.TicketTemplate) returns (header.TicketTemplate);
+	rpc DeleteTicketTemplate(Id) returns (Empty);
+	rpc GetTicketTemplate(Id) returns (header.TicketTemplate);
+	rpc ListTicketTemplates(Empty) returns (Response);
 
 	rpc PongTicketEvent(header.Event) returns (header.Event);
 

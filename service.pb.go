@@ -863,7 +863,7 @@ var file_service_proto_rawDesc = []byte{
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x2c, 0x0a, 0x0c, 0x41,
 	0x70, 0x70, 0x6c, 0x79, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x0d, 0x2e, 0x68, 0x65,
 	0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x32, 0xdf, 0x0b, 0x0a, 0x09, 0x54, 0x69,
+	0x64, 0x65, 0x72, 0x2e, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x32, 0xbf, 0x0e, 0x0a, 0x09, 0x54, 0x69,
 	0x63, 0x6b, 0x65, 0x74, 0x4d, 0x67, 0x72, 0x12, 0x3a, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74,
 	0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x12, 0x2e, 0x68, 0x65,
 	0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x79, 0x70, 0x65, 0x1a,
@@ -886,31 +886,53 @@ var file_service_proto_rawDesc = []byte{
 	0x74, 0x1a, 0x0e, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65,
 	0x74, 0x12, 0x29, 0x0a, 0x0c, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65,
 	0x74, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e,
-	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x27, 0x0a, 0x09,
-	0x47, 0x65, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0e, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54,
-	0x69, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x3a, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x69, 0x63,
-	0x6b, 0x65, 0x74, 0x73, 0x12, 0x19, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x4c, 0x69,
-	0x73, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x2d, 0x0a, 0x0c, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
-	0x73, 0x12, 0x0b, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x10,
-	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x12, 0x3a, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
-	0x56, 0x69, 0x65, 0x77, 0x12, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69,
-	0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x1a, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x12, 0x3a, 0x0a, 0x10,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2a, 0x0a, 0x0d,
+	0x52, 0x65, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x0a, 0x2e,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64,
+	0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x27, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x54,
+	0x69, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49,
+	0x64, 0x1a, 0x0e, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65,
+	0x74, 0x12, 0x3a, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x73,
+	0x12, 0x19, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x69,
+	0x63, 0x6b, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x68, 0x65,
+	0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d, 0x0a,
+	0x0c, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x73, 0x12, 0x0b, 0x2e,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x73, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3a, 0x0a, 0x10,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77,
 	0x12, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
 	0x56, 0x69, 0x65, 0x77, 0x1a, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69,
-	0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x12, 0x2d, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x12, 0x0a, 0x2e, 0x68,
-	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x2f, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x54, 0x69,
+	0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x12, 0x3a, 0x0a, 0x10, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x12, 0x12, 0x2e, 0x68,
+	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77,
+	0x1a, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
+	0x56, 0x69, 0x65, 0x77, 0x12, 0x2d, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x69,
 	0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2e, 0x49, 0x64, 0x1a, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69,
-	0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x12, 0x32, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74,
-	0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x73, 0x12, 0x0d, 0x2e, 0x68, 0x65,
+	0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d,
+	0x70, 0x74, 0x79, 0x12, 0x2f, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
+	0x56, 0x69, 0x65, 0x77, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64,
+	0x1a, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
+	0x56, 0x69, 0x65, 0x77, 0x12, 0x32, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x69, 0x63, 0x6b,
+	0x65, 0x74, 0x56, 0x69, 0x65, 0x77, 0x73, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
+	0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x46, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65,
+	0x12, 0x16, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
+	0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x1a, 0x16, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
+	0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65,
+	0x12, 0x46, 0x0a, 0x14, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
+	0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x12, 0x16, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
+	0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65,
+	0x1a, 0x16, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74,
+	0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x12, 0x31, 0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65,
+	0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d, 0x2e, 0x68,
+	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x37, 0x0a, 0x11, 0x47,
+	0x65, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65,
+	0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x16, 0x2e, 0x68,
+	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x54, 0x65, 0x6d, 0x70,
+	0x6c, 0x61, 0x74, 0x65, 0x12, 0x36, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x69, 0x63, 0x6b,
+	0x65, 0x74, 0x54, 0x65, 0x6d, 0x70, 0x6c, 0x61, 0x74, 0x65, 0x73, 0x12, 0x0d, 0x2e, 0x68, 0x65,
 	0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61,
 	0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2f, 0x0a, 0x0f,
 	0x50, 0x6f, 0x6e, 0x67, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12,
@@ -1912,205 +1934,206 @@ var file_service_proto_goTypes = []interface{}{
 	(*Ticket)(nil),                            // 81: header.Ticket
 	(*ListTicketRequest)(nil),                 // 82: header.ListTicketRequest
 	(*TicketView)(nil),                        // 83: header.TicketView
-	(*Template)(nil),                          // 84: header.Template
-	(*SearchTemplate)(nil),                    // 85: header.SearchTemplate
-	(*ConversationModal)(nil),                 // 86: header.ConversationModal
-	(*ConversationModalPickRequest)(nil),      // 87: header.ConversationModalPickRequest
-	(*Tag)(nil),                               // 88: header.Tag
-	(*noti5.Setting)(nil),                     // 89: noti5.Setting
-	(*PushNoti)(nil),                          // 90: header.PushNoti
-	(*noti5.Token)(nil),                       // 91: noti5.Token
-	(*account.SearchSubRequest)(nil),          // 92: account.SearchSubRequest
-	(*payment.PurchaseRequest)(nil),           // 93: payment.PurchaseRequest
-	(*payment.Subscription)(nil),              // 94: payment.Subscription
-	(*payment.PayRequest)(nil),                // 95: payment.PayRequest
-	(*payment.Invoice)(nil),                   // 96: payment.Invoice
-	(*payment.ListInvoiceRequest)(nil),        // 97: payment.ListInvoiceRequest
-	(*payment.ListCommentsRequest)(nil),       // 98: payment.ListCommentsRequest
-	(*payment.Comment)(nil),                   // 99: payment.Comment
-	(*ExchangeRate)(nil),                      // 100: header.ExchangeRate
-	(*payment.ListLogsRequest)(nil),           // 101: payment.ListLogsRequest
-	(*payment.SearchReferredRequest)(nil),     // 102: payment.SearchReferredRequest
-	(*payment.Referral)(nil),                  // 103: payment.Referral
-	(*payment.LogPaidForAgentReferrer)(nil),   // 104: payment.LogPaidForAgentReferrer
-	(*PsMessage)(nil),                         // 105: header.PsMessage
-	(*RealtimeSubscription)(nil),              // 106: header.RealtimeSubscription
-	(*FbFanpageSetting)(nil),                  // 107: header.FbFanpageSetting
-	(*FacebookPost)(nil),                      // 108: header.FacebookPost
-	(*ZaloUserRequest)(nil),                   // 109: header.ZaloUserRequest
-	(*ZnsRequest)(nil),                        // 110: header.ZnsRequest
-	(*ZaloApplication)(nil),                   // 111: header.ZaloApplication
-	(*BusinessEmailAddress)(nil),              // 112: header.BusinessEmailAddress
-	(*LinkData)(nil),                          // 113: header.LinkData
-	(*BouncedEmail)(nil),                      // 114: header.BouncedEmail
-	(*BlockedEmail)(nil),                      // 115: header.BlockedEmail
-	(*WidgetSetting)(nil),                     // 116: header.WidgetSetting
-	(*Impression)(nil),                        // 117: header.Impression
-	(*Conversion)(nil),                        // 118: header.Conversion
-	(*UserCampaignStatus)(nil),                // 119: header.UserCampaignStatus
-	(*ReportCampaignRequest)(nil),             // 120: header.ReportCampaignRequest
-	(*ConversionRequest)(nil),                 // 121: header.ConversionRequest
-	(*UploadedImage)(nil),                     // 122: header.UploadedImage
-	(*WebPlugin)(nil),                         // 123: header.WebPlugin
-	(*ReportWebPluginRequest)(nil),            // 124: header.ReportWebPluginRequest
-	(*BotsRequest)(nil),                       // 125: header.BotsRequest
-	(*Bot)(nil),                               // 126: header.Bot
-	(*BotRunRequest)(nil),                     // 127: header.BotRunRequest
-	(*BotrunMetricsRequest)(nil),              // 128: header.BotrunMetricsRequest
-	(*ActionrunMetricsRequest)(nil),           // 129: header.ActionrunMetricsRequest
-	(*ListObjectsRequest)(nil),                // 130: header.ListObjectsRequest
-	(*ReportBotRequest)(nil),                  // 131: header.ReportBotRequest
-	(*Webhook)(nil),                           // 132: header.Webhook
-	(*RecentIndexDeliveryRequest)(nil),        // 133: header.RecentIndexDeliveryRequest
-	(*DeliveryRequest)(nil),                   // 134: header.DeliveryRequest
-	(*Notification)(nil),                      // 135: header.Notification
-	(*ListNotiRequest)(nil),                   // 136: header.ListNotiRequest
-	(*ProductsRequest)(nil),                   // 137: header.ProductsRequest
-	(*ImportProductRequest)(nil),              // 138: header.ImportProductRequest
-	(*ProductCollection)(nil),                 // 139: header.ProductCollection
-	(*ProductFeed)(nil),                       // 140: header.ProductFeed
-	(*OrdersRequest)(nil),                     // 141: header.OrdersRequest
-	(*CountOrdersRequest)(nil),                // 142: header.CountOrdersRequest
-	(*Orders)(nil),                            // 143: header.Orders
-	(*Bill)(nil),                              // 144: header.Bill
-	(*Key)(nil),                               // 145: header.Key
-	(*DownloadOrderRequest)(nil),              // 146: header.DownloadOrderRequest
-	(*AuthorizeShopeeRequest)(nil),            // 147: header.AuthorizeShopeeRequest
-	(*ShopeeSyncProductRequest)(nil),          // 148: header.ShopeeSyncProductRequest
-	(*GHTKOrder)(nil),                         // 149: header.GHTKOrder
-	(*GHNOrder2)(nil),                         // 150: header.GHNOrder2
-	(*ShippingInfo)(nil),                      // 151: header.ShippingInfo
-	(*Pipeline)(nil),                          // 152: header.Pipeline
-	(*PipelineStage)(nil),                     // 153: header.PipelineStage
-	(*OrderMetricsRequest)(nil),               // 154: header.OrderMetricsRequest
-	(*TasksRequest)(nil),                      // 155: header.TasksRequest
-	(*TTSVoiceSelection)(nil),                 // 156: header.TTSVoiceSelection
-	(*Campaign)(nil),                          // 157: header.Campaign
-	(*CampaignSendLogRequest)(nil),            // 158: header.CampaignSendLogRequest
-	(*ListOutboundCallRequest)(nil),           // 159: header.ListOutboundCallRequest
-	(*OutboundCallEntry)(nil),                 // 160: header.OutboundCallEntry
-	(*ImportOutboundCallEntryRequest)(nil),    // 161: header.ImportOutboundCallEntryRequest
-	(*OutboundCallReportRequest)(nil),         // 162: header.OutboundCallReportRequest
-	(*CreditSpendEntry)(nil),                  // 163: header.CreditSpendEntry
-	(*CreditSpendReportRequest)(nil),          // 164: header.CreditSpendReportRequest
-	(*CreditSpendLogRequest)(nil),             // 165: header.CreditSpendLogRequest
-	(*Credit)(nil),                            // 166: header.Credit
-	(*Form)(nil),                              // 167: header.Form
-	(*FormReportRequest)(nil),                 // 168: header.FormReportRequest
-	(*ListFormSubmissionRequest)(nil),         // 169: header.ListFormSubmissionRequest
-	(*SchedulerTask)(nil),                     // 170: header.SchedulerTask
-	(*GoogleLocationSettings)(nil),            // 171: header.GoogleLocationSettings
-	(*RateLimitSyncResponse)(nil),             // 172: header.RateLimitSyncResponse
-	(*DocSearchResponse)(nil),                 // 173: header.DocSearchResponse
-	(*ConversationMetrics)(nil),               // 174: header.ConversationMetrics
-	(*ConvoReportResponse)(nil),               // 175: header.ConvoReportResponse
-	(*Conversations)(nil),                     // 176: header.Conversations
-	(*CallMetrics)(nil),                       // 177: header.CallMetrics
-	(*AgentMetrics)(nil),                      // 178: header.AgentMetrics
-	(*AddressAutocompleteResponses)(nil),      // 179: header.AddressAutocompleteResponses
-	(*Addresses)(nil),                         // 180: header.Addresses
-	(*Response)(nil),                          // 181: header.Response
-	(*AgentGroups)(nil),                       // 182: header.AgentGroups
-	(*account.BusinessHours)(nil),             // 183: account.BusinessHours
-	(*LoginSessions)(nil),                     // 184: header.LoginSessions
-	(*Lang)(nil),                              // 185: header.Lang
-	(*Currency)(nil),                          // 186: header.Currency
-	(*Taxes)(nil),                             // 187: header.Taxes
-	(*ShippingPolicies)(nil),                  // 188: header.ShippingPolicies
-	(*CancellationCodes)(nil),                 // 189: header.CancellationCodes
-	(*PaymentMethods)(nil),                    // 190: header.PaymentMethods
-	(*IntegratedShippings)(nil),               // 191: header.IntegratedShippings
-	(*account.Presences)(nil),                 // 192: account.Presences
-	(*ReportResponse)(nil),                    // 193: header.ReportResponse
-	(*payment.Bills)(nil),                     // 194: payment.Bills
-	(*TryUpdateUserResult)(nil),               // 195: header.TryUpdateUserResult
-	(*UserViews)(nil),                         // 196: header.UserViews
-	(*Segments)(nil),                          // 197: header.Segments
-	(*Labels)(nil),                            // 198: header.Labels
-	(*ShippingAddresses)(nil),                 // 199: header.ShippingAddresses
-	(*SuggestLeadFieldResponse)(nil),          // 200: header.SuggestLeadFieldResponse
-	(*ImportLeadResponse)(nil),                // 201: header.ImportLeadResponse
-	(*CountTouchpointResponse)(nil),           // 202: header.CountTouchpointResponse
-	(*UserReportResponse)(nil),                // 203: header.UserReportResponse
-	(*PresencesResponse)(nil),                 // 204: header.PresencesResponse
-	(*Notes)(nil),                             // 205: header.Notes
-	(*AttributeDefinitions)(nil),              // 206: header.AttributeDefinitions
-	(*RouteResult)(nil),                       // 207: header.RouteResult
-	(*Integrations)(nil),                      // 208: header.Integrations
-	(*Route)(nil),                             // 209: header.Route
-	(*ConversationAutomations)(nil),           // 210: header.ConversationAutomations
-	(*PhoneDevices)(nil),                      // 211: header.PhoneDevices
-	(*CallSettings)(nil),                      // 212: header.CallSettings
-	(*BlockedNumbers)(nil),                    // 213: header.BlockedNumbers
-	(*GreetingAudios)(nil),                    // 214: header.GreetingAudios
-	(*RecentCallRecords)(nil),                 // 215: header.RecentCallRecords
-	(*Templates)(nil),                         // 216: header.Templates
-	(*ConversationModals)(nil),                // 217: header.ConversationModals
-	(*ConversationModalPicked)(nil),           // 218: header.ConversationModalPicked
-	(*Tags)(nil),                              // 219: header.Tags
-	(*AccSubs)(nil),                           // 220: header.AccSubs
-	(*AccSub)(nil),                            // 221: header.AccSub
-	(*payment.Bill)(nil),                      // 222: payment.Bill
-	(*payment.Invoices)(nil),                  // 223: payment.Invoices
-	(*payment.Comments)(nil),                  // 224: payment.Comments
-	(*payment.String)(nil),                    // 225: payment.String
-	(*payment.Logs)(nil),                      // 226: payment.Logs
-	(*payment.ReferralResponse)(nil),          // 227: payment.ReferralResponse
-	(*payment.LogAccountReferreds)(nil),       // 228: payment.LogAccountReferreds
-	(*payment.LogBillByAccountReferreds)(nil), // 229: payment.LogBillByAccountReferreds
-	(*payment.LogPaidForAgentReferrers)(nil),  // 230: payment.LogPaidForAgentReferrers
-	(*PollResult)(nil),                        // 231: header.PollResult
-	(*FbFanpageSettings)(nil),                 // 232: header.FbFanpageSettings
-	(*FacebookPosts)(nil),                     // 233: header.FacebookPosts
-	(*zalokon.ZnsTemplates)(nil),              // 234: zalokon.ZnsTemplates
-	(*ZaloApplications)(nil),                  // 235: header.ZaloApplications
-	(*EmailSenderVerificationResult)(nil),     // 236: header.EmailSenderVerificationResult
-	(*BusinessEmailAddresses)(nil),            // 237: header.BusinessEmailAddresses
-	(*WidgetUserSetting)(nil),                 // 238: header.WidgetUserSetting
-	(*AccountWeb)(nil),                        // 239: header.AccountWeb
-	(*ReportCampaignResponse)(nil),            // 240: header.ReportCampaignResponse
-	(*Conversions)(nil),                       // 241: header.Conversions
-	(*ConversionsExported)(nil),               // 242: header.ConversionsExported
-	(*UploadedImages)(nil),                    // 243: header.UploadedImages
-	(*WebPlugins)(nil),                        // 244: header.WebPlugins
-	(*ReportWebPluginResponse)(nil),           // 245: header.ReportWebPluginResponse
-	(*NotifProfiles)(nil),                     // 246: header.NotifProfiles
-	(*Urls)(nil),                              // 247: header.Urls
-	(*Bots)(nil),                              // 248: header.Bots
-	(*BotrunMetrics)(nil),                     // 249: header.BotrunMetrics
-	(*ActionrunMetrics)(nil),                  // 250: header.ActionrunMetrics
-	(*ListObjectsResponse)(nil),               // 251: header.ListObjectsResponse
-	(*ReportBotResponse)(nil),                 // 252: header.ReportBotResponse
-	(*WebhookTestResult)(nil),                 // 253: header.WebhookTestResult
-	(*Webhooks)(nil),                          // 254: header.Webhooks
-	(*WebhookDeliveries)(nil),                 // 255: header.WebhookDeliveries
-	(*WebhookDelivery)(nil),                   // 256: header.WebhookDelivery
-	(*Notifications)(nil),                     // 257: header.Notifications
-	(*Products)(nil),                          // 258: header.Products
-	(*ImportProductResponse)(nil),             // 259: header.ImportProductResponse
-	(*ProductCollections)(nil),                // 260: header.ProductCollections
-	(*ProductFeeds)(nil),                      // 261: header.ProductFeeds
-	(*ProductCategories)(nil),                 // 262: header.ProductCategories
-	(*CountOrdersResponse)(nil),               // 263: header.CountOrdersResponse
-	(*OrderHistoryEntries)(nil),               // 264: header.OrderHistoryEntries
-	(*File)(nil),                              // 265: header.File
-	(*ShopeeShop)(nil),                        // 266: header.ShopeeShop
-	(*ShopeeSyncProductResponse)(nil),         // 267: header.ShopeeSyncProductResponse
-	(*Pipelines)(nil),                         // 268: header.Pipelines
-	(*Tasks)(nil),                             // 269: header.Tasks
-	(*TaskHistoryEntries)(nil),                // 270: header.TaskHistoryEntries
-	(*Campaigns)(nil),                         // 271: header.Campaigns
-	(*CampaignSendLog)(nil),                   // 272: header.CampaignSendLog
-	(*BroadcastCampaignMetrics)(nil),          // 273: header.BroadcastCampaignMetrics
-	(*OutboundCallEntries)(nil),               // 274: header.OutboundCallEntries
-	(*ImportOutboundCallEntryResponse)(nil),   // 275: header.ImportOutboundCallEntryResponse
-	(*OutboundCallReportResponse)(nil),        // 276: header.OutboundCallReportResponse
-	(*TrySpendCreditResponse)(nil),            // 277: header.TrySpendCreditResponse
-	(*CreditSpendReportResponse)(nil),         // 278: header.CreditSpendReportResponse
-	(*CreditSpendEntries)(nil),                // 279: header.CreditSpendEntries
-	(*Forms)(nil),                             // 280: header.Forms
-	(*FormReportResponse)(nil),                // 281: header.FormReportResponse
-	(*FormSubmissions)(nil),                   // 282: header.FormSubmissions
+	(*TicketTemplate)(nil),                    // 84: header.TicketTemplate
+	(*Template)(nil),                          // 85: header.Template
+	(*SearchTemplate)(nil),                    // 86: header.SearchTemplate
+	(*ConversationModal)(nil),                 // 87: header.ConversationModal
+	(*ConversationModalPickRequest)(nil),      // 88: header.ConversationModalPickRequest
+	(*Tag)(nil),                               // 89: header.Tag
+	(*noti5.Setting)(nil),                     // 90: noti5.Setting
+	(*PushNoti)(nil),                          // 91: header.PushNoti
+	(*noti5.Token)(nil),                       // 92: noti5.Token
+	(*account.SearchSubRequest)(nil),          // 93: account.SearchSubRequest
+	(*payment.PurchaseRequest)(nil),           // 94: payment.PurchaseRequest
+	(*payment.Subscription)(nil),              // 95: payment.Subscription
+	(*payment.PayRequest)(nil),                // 96: payment.PayRequest
+	(*payment.Invoice)(nil),                   // 97: payment.Invoice
+	(*payment.ListInvoiceRequest)(nil),        // 98: payment.ListInvoiceRequest
+	(*payment.ListCommentsRequest)(nil),       // 99: payment.ListCommentsRequest
+	(*payment.Comment)(nil),                   // 100: payment.Comment
+	(*ExchangeRate)(nil),                      // 101: header.ExchangeRate
+	(*payment.ListLogsRequest)(nil),           // 102: payment.ListLogsRequest
+	(*payment.SearchReferredRequest)(nil),     // 103: payment.SearchReferredRequest
+	(*payment.Referral)(nil),                  // 104: payment.Referral
+	(*payment.LogPaidForAgentReferrer)(nil),   // 105: payment.LogPaidForAgentReferrer
+	(*PsMessage)(nil),                         // 106: header.PsMessage
+	(*RealtimeSubscription)(nil),              // 107: header.RealtimeSubscription
+	(*FbFanpageSetting)(nil),                  // 108: header.FbFanpageSetting
+	(*FacebookPost)(nil),                      // 109: header.FacebookPost
+	(*ZaloUserRequest)(nil),                   // 110: header.ZaloUserRequest
+	(*ZnsRequest)(nil),                        // 111: header.ZnsRequest
+	(*ZaloApplication)(nil),                   // 112: header.ZaloApplication
+	(*BusinessEmailAddress)(nil),              // 113: header.BusinessEmailAddress
+	(*LinkData)(nil),                          // 114: header.LinkData
+	(*BouncedEmail)(nil),                      // 115: header.BouncedEmail
+	(*BlockedEmail)(nil),                      // 116: header.BlockedEmail
+	(*WidgetSetting)(nil),                     // 117: header.WidgetSetting
+	(*Impression)(nil),                        // 118: header.Impression
+	(*Conversion)(nil),                        // 119: header.Conversion
+	(*UserCampaignStatus)(nil),                // 120: header.UserCampaignStatus
+	(*ReportCampaignRequest)(nil),             // 121: header.ReportCampaignRequest
+	(*ConversionRequest)(nil),                 // 122: header.ConversionRequest
+	(*UploadedImage)(nil),                     // 123: header.UploadedImage
+	(*WebPlugin)(nil),                         // 124: header.WebPlugin
+	(*ReportWebPluginRequest)(nil),            // 125: header.ReportWebPluginRequest
+	(*BotsRequest)(nil),                       // 126: header.BotsRequest
+	(*Bot)(nil),                               // 127: header.Bot
+	(*BotRunRequest)(nil),                     // 128: header.BotRunRequest
+	(*BotrunMetricsRequest)(nil),              // 129: header.BotrunMetricsRequest
+	(*ActionrunMetricsRequest)(nil),           // 130: header.ActionrunMetricsRequest
+	(*ListObjectsRequest)(nil),                // 131: header.ListObjectsRequest
+	(*ReportBotRequest)(nil),                  // 132: header.ReportBotRequest
+	(*Webhook)(nil),                           // 133: header.Webhook
+	(*RecentIndexDeliveryRequest)(nil),        // 134: header.RecentIndexDeliveryRequest
+	(*DeliveryRequest)(nil),                   // 135: header.DeliveryRequest
+	(*Notification)(nil),                      // 136: header.Notification
+	(*ListNotiRequest)(nil),                   // 137: header.ListNotiRequest
+	(*ProductsRequest)(nil),                   // 138: header.ProductsRequest
+	(*ImportProductRequest)(nil),              // 139: header.ImportProductRequest
+	(*ProductCollection)(nil),                 // 140: header.ProductCollection
+	(*ProductFeed)(nil),                       // 141: header.ProductFeed
+	(*OrdersRequest)(nil),                     // 142: header.OrdersRequest
+	(*CountOrdersRequest)(nil),                // 143: header.CountOrdersRequest
+	(*Orders)(nil),                            // 144: header.Orders
+	(*Bill)(nil),                              // 145: header.Bill
+	(*Key)(nil),                               // 146: header.Key
+	(*DownloadOrderRequest)(nil),              // 147: header.DownloadOrderRequest
+	(*AuthorizeShopeeRequest)(nil),            // 148: header.AuthorizeShopeeRequest
+	(*ShopeeSyncProductRequest)(nil),          // 149: header.ShopeeSyncProductRequest
+	(*GHTKOrder)(nil),                         // 150: header.GHTKOrder
+	(*GHNOrder2)(nil),                         // 151: header.GHNOrder2
+	(*ShippingInfo)(nil),                      // 152: header.ShippingInfo
+	(*Pipeline)(nil),                          // 153: header.Pipeline
+	(*PipelineStage)(nil),                     // 154: header.PipelineStage
+	(*OrderMetricsRequest)(nil),               // 155: header.OrderMetricsRequest
+	(*TasksRequest)(nil),                      // 156: header.TasksRequest
+	(*TTSVoiceSelection)(nil),                 // 157: header.TTSVoiceSelection
+	(*Campaign)(nil),                          // 158: header.Campaign
+	(*CampaignSendLogRequest)(nil),            // 159: header.CampaignSendLogRequest
+	(*ListOutboundCallRequest)(nil),           // 160: header.ListOutboundCallRequest
+	(*OutboundCallEntry)(nil),                 // 161: header.OutboundCallEntry
+	(*ImportOutboundCallEntryRequest)(nil),    // 162: header.ImportOutboundCallEntryRequest
+	(*OutboundCallReportRequest)(nil),         // 163: header.OutboundCallReportRequest
+	(*CreditSpendEntry)(nil),                  // 164: header.CreditSpendEntry
+	(*CreditSpendReportRequest)(nil),          // 165: header.CreditSpendReportRequest
+	(*CreditSpendLogRequest)(nil),             // 166: header.CreditSpendLogRequest
+	(*Credit)(nil),                            // 167: header.Credit
+	(*Form)(nil),                              // 168: header.Form
+	(*FormReportRequest)(nil),                 // 169: header.FormReportRequest
+	(*ListFormSubmissionRequest)(nil),         // 170: header.ListFormSubmissionRequest
+	(*SchedulerTask)(nil),                     // 171: header.SchedulerTask
+	(*GoogleLocationSettings)(nil),            // 172: header.GoogleLocationSettings
+	(*RateLimitSyncResponse)(nil),             // 173: header.RateLimitSyncResponse
+	(*DocSearchResponse)(nil),                 // 174: header.DocSearchResponse
+	(*ConversationMetrics)(nil),               // 175: header.ConversationMetrics
+	(*ConvoReportResponse)(nil),               // 176: header.ConvoReportResponse
+	(*Conversations)(nil),                     // 177: header.Conversations
+	(*CallMetrics)(nil),                       // 178: header.CallMetrics
+	(*AgentMetrics)(nil),                      // 179: header.AgentMetrics
+	(*AddressAutocompleteResponses)(nil),      // 180: header.AddressAutocompleteResponses
+	(*Addresses)(nil),                         // 181: header.Addresses
+	(*Response)(nil),                          // 182: header.Response
+	(*AgentGroups)(nil),                       // 183: header.AgentGroups
+	(*account.BusinessHours)(nil),             // 184: account.BusinessHours
+	(*LoginSessions)(nil),                     // 185: header.LoginSessions
+	(*Lang)(nil),                              // 186: header.Lang
+	(*Currency)(nil),                          // 187: header.Currency
+	(*Taxes)(nil),                             // 188: header.Taxes
+	(*ShippingPolicies)(nil),                  // 189: header.ShippingPolicies
+	(*CancellationCodes)(nil),                 // 190: header.CancellationCodes
+	(*PaymentMethods)(nil),                    // 191: header.PaymentMethods
+	(*IntegratedShippings)(nil),               // 192: header.IntegratedShippings
+	(*account.Presences)(nil),                 // 193: account.Presences
+	(*ReportResponse)(nil),                    // 194: header.ReportResponse
+	(*payment.Bills)(nil),                     // 195: payment.Bills
+	(*TryUpdateUserResult)(nil),               // 196: header.TryUpdateUserResult
+	(*UserViews)(nil),                         // 197: header.UserViews
+	(*Segments)(nil),                          // 198: header.Segments
+	(*Labels)(nil),                            // 199: header.Labels
+	(*ShippingAddresses)(nil),                 // 200: header.ShippingAddresses
+	(*SuggestLeadFieldResponse)(nil),          // 201: header.SuggestLeadFieldResponse
+	(*ImportLeadResponse)(nil),                // 202: header.ImportLeadResponse
+	(*CountTouchpointResponse)(nil),           // 203: header.CountTouchpointResponse
+	(*UserReportResponse)(nil),                // 204: header.UserReportResponse
+	(*PresencesResponse)(nil),                 // 205: header.PresencesResponse
+	(*Notes)(nil),                             // 206: header.Notes
+	(*AttributeDefinitions)(nil),              // 207: header.AttributeDefinitions
+	(*RouteResult)(nil),                       // 208: header.RouteResult
+	(*Integrations)(nil),                      // 209: header.Integrations
+	(*Route)(nil),                             // 210: header.Route
+	(*ConversationAutomations)(nil),           // 211: header.ConversationAutomations
+	(*PhoneDevices)(nil),                      // 212: header.PhoneDevices
+	(*CallSettings)(nil),                      // 213: header.CallSettings
+	(*BlockedNumbers)(nil),                    // 214: header.BlockedNumbers
+	(*GreetingAudios)(nil),                    // 215: header.GreetingAudios
+	(*RecentCallRecords)(nil),                 // 216: header.RecentCallRecords
+	(*Templates)(nil),                         // 217: header.Templates
+	(*ConversationModals)(nil),                // 218: header.ConversationModals
+	(*ConversationModalPicked)(nil),           // 219: header.ConversationModalPicked
+	(*Tags)(nil),                              // 220: header.Tags
+	(*AccSubs)(nil),                           // 221: header.AccSubs
+	(*AccSub)(nil),                            // 222: header.AccSub
+	(*payment.Bill)(nil),                      // 223: payment.Bill
+	(*payment.Invoices)(nil),                  // 224: payment.Invoices
+	(*payment.Comments)(nil),                  // 225: payment.Comments
+	(*payment.String)(nil),                    // 226: payment.String
+	(*payment.Logs)(nil),                      // 227: payment.Logs
+	(*payment.ReferralResponse)(nil),          // 228: payment.ReferralResponse
+	(*payment.LogAccountReferreds)(nil),       // 229: payment.LogAccountReferreds
+	(*payment.LogBillByAccountReferreds)(nil), // 230: payment.LogBillByAccountReferreds
+	(*payment.LogPaidForAgentReferrers)(nil),  // 231: payment.LogPaidForAgentReferrers
+	(*PollResult)(nil),                        // 232: header.PollResult
+	(*FbFanpageSettings)(nil),                 // 233: header.FbFanpageSettings
+	(*FacebookPosts)(nil),                     // 234: header.FacebookPosts
+	(*zalokon.ZnsTemplates)(nil),              // 235: zalokon.ZnsTemplates
+	(*ZaloApplications)(nil),                  // 236: header.ZaloApplications
+	(*EmailSenderVerificationResult)(nil),     // 237: header.EmailSenderVerificationResult
+	(*BusinessEmailAddresses)(nil),            // 238: header.BusinessEmailAddresses
+	(*WidgetUserSetting)(nil),                 // 239: header.WidgetUserSetting
+	(*AccountWeb)(nil),                        // 240: header.AccountWeb
+	(*ReportCampaignResponse)(nil),            // 241: header.ReportCampaignResponse
+	(*Conversions)(nil),                       // 242: header.Conversions
+	(*ConversionsExported)(nil),               // 243: header.ConversionsExported
+	(*UploadedImages)(nil),                    // 244: header.UploadedImages
+	(*WebPlugins)(nil),                        // 245: header.WebPlugins
+	(*ReportWebPluginResponse)(nil),           // 246: header.ReportWebPluginResponse
+	(*NotifProfiles)(nil),                     // 247: header.NotifProfiles
+	(*Urls)(nil),                              // 248: header.Urls
+	(*Bots)(nil),                              // 249: header.Bots
+	(*BotrunMetrics)(nil),                     // 250: header.BotrunMetrics
+	(*ActionrunMetrics)(nil),                  // 251: header.ActionrunMetrics
+	(*ListObjectsResponse)(nil),               // 252: header.ListObjectsResponse
+	(*ReportBotResponse)(nil),                 // 253: header.ReportBotResponse
+	(*WebhookTestResult)(nil),                 // 254: header.WebhookTestResult
+	(*Webhooks)(nil),                          // 255: header.Webhooks
+	(*WebhookDeliveries)(nil),                 // 256: header.WebhookDeliveries
+	(*WebhookDelivery)(nil),                   // 257: header.WebhookDelivery
+	(*Notifications)(nil),                     // 258: header.Notifications
+	(*Products)(nil),                          // 259: header.Products
+	(*ImportProductResponse)(nil),             // 260: header.ImportProductResponse
+	(*ProductCollections)(nil),                // 261: header.ProductCollections
+	(*ProductFeeds)(nil),                      // 262: header.ProductFeeds
+	(*ProductCategories)(nil),                 // 263: header.ProductCategories
+	(*CountOrdersResponse)(nil),               // 264: header.CountOrdersResponse
+	(*OrderHistoryEntries)(nil),               // 265: header.OrderHistoryEntries
+	(*File)(nil),                              // 266: header.File
+	(*ShopeeShop)(nil),                        // 267: header.ShopeeShop
+	(*ShopeeSyncProductResponse)(nil),         // 268: header.ShopeeSyncProductResponse
+	(*Pipelines)(nil),                         // 269: header.Pipelines
+	(*Tasks)(nil),                             // 270: header.Tasks
+	(*TaskHistoryEntries)(nil),                // 271: header.TaskHistoryEntries
+	(*Campaigns)(nil),                         // 272: header.Campaigns
+	(*CampaignSendLog)(nil),                   // 273: header.CampaignSendLog
+	(*BroadcastCampaignMetrics)(nil),          // 274: header.BroadcastCampaignMetrics
+	(*OutboundCallEntries)(nil),               // 275: header.OutboundCallEntries
+	(*ImportOutboundCallEntryResponse)(nil),   // 276: header.ImportOutboundCallEntryResponse
+	(*OutboundCallReportResponse)(nil),        // 277: header.OutboundCallReportResponse
+	(*TrySpendCreditResponse)(nil),            // 278: header.TrySpendCreditResponse
+	(*CreditSpendReportResponse)(nil),         // 279: header.CreditSpendReportResponse
+	(*CreditSpendEntries)(nil),                // 280: header.CreditSpendEntries
+	(*Forms)(nil),                             // 281: header.Forms
+	(*FormReportResponse)(nil),                // 282: header.FormReportResponse
+	(*FormSubmissions)(nil),                   // 283: header.FormSubmissions
 }
 var file_service_proto_depIdxs = []int32{
 	0,   // 0: header.GooglekonService.SendEventToGoogle:input_type -> header.Events
@@ -2354,771 +2377,783 @@ var file_service_proto_depIdxs = []int32{
 	81,  // 238: header.TicketMgr.CreateTicket:input_type -> header.Ticket
 	81,  // 239: header.TicketMgr.UpdateTicket:input_type -> header.Ticket
 	1,   // 240: header.TicketMgr.DeleteTicket:input_type -> header.Id
-	1,   // 241: header.TicketMgr.GetTicket:input_type -> header.Id
-	82,  // 242: header.TicketMgr.ListTickets:input_type -> header.ListTicketRequest
-	16,  // 243: header.TicketMgr.MatchTickets:input_type -> header.Ids
-	83,  // 244: header.TicketMgr.CreateTicketView:input_type -> header.TicketView
-	83,  // 245: header.TicketMgr.UpdateTicketView:input_type -> header.TicketView
-	1,   // 246: header.TicketMgr.DeleteTicketView:input_type -> header.Id
-	1,   // 247: header.TicketMgr.GetTicketView:input_type -> header.Id
-	11,  // 248: header.TicketMgr.ListTicketViews:input_type -> header.Empty
-	48,  // 249: header.TicketMgr.PongTicketEvent:input_type -> header.Event
-	65,  // 250: header.TicketMgr.TagTicket:input_type -> header.TagRequest
-	65,  // 251: header.TicketMgr.UntagTicket:input_type -> header.TagRequest
-	66,  // 252: header.TicketMgr.JoinTicket:input_type -> header.ConversationMember
-	66,  // 253: header.TicketMgr.LeftTicket:input_type -> header.ConversationMember
-	16,  // 254: header.TicketMgr.ReadTickets:input_type -> header.Ids
-	16,  // 255: header.TicketMgr.UnreadTickets:input_type -> header.Ids
-	16,  // 256: header.TicketMgr.SnoozeTickets:input_type -> header.Ids
-	16,  // 257: header.TicketMgr.UnsnoozeTickets:input_type -> header.Ids
-	48,  // 258: header.TicketMgr.SendTicketEvent:input_type -> header.Event
-	71,  // 259: header.TicketMgr.ListTicketEvents:input_type -> header.ListConversationEventsRequest
-	73,  // 260: header.TicketMgr.UpdateTicketTypeMember:input_type -> header.ResourceGroupMember
-	73,  // 261: header.TicketMgr.RemoveTicketTypeMember:input_type -> header.ResourceGroupMember
-	84,  // 262: header.TemplateMgr.CreateTemplate:input_type -> header.Template
-	84,  // 263: header.TemplateMgr.UpdateTemplate:input_type -> header.Template
-	1,   // 264: header.TemplateMgr.DeleteTemplate:input_type -> header.Id
-	1,   // 265: header.TemplateMgr.GetTemplate:input_type -> header.Id
-	85,  // 266: header.TemplateMgr.ListTemplates:input_type -> header.SearchTemplate
-	1,   // 267: header.TemplateMgr.PickTemplate:input_type -> header.Id
-	86,  // 268: header.TemplateMgr.CreateModal:input_type -> header.ConversationModal
-	86,  // 269: header.TemplateMgr.UpdateModal:input_type -> header.ConversationModal
-	1,   // 270: header.TemplateMgr.DeleteModal:input_type -> header.Id
-	1,   // 271: header.TemplateMgr.GetModal:input_type -> header.Id
-	1,   // 272: header.TemplateMgr.ListModals:input_type -> header.Id
-	87,  // 273: header.TemplateMgr.PickModal:input_type -> header.ConversationModalPickRequest
-	88,  // 274: header.TagMgr.CreateTag:input_type -> header.Tag
-	88,  // 275: header.TagMgr.UpdateTag:input_type -> header.Tag
-	1,   // 276: header.TagMgr.DeleteTag:input_type -> header.Id
-	1,   // 277: header.TagMgr.ListTags:input_type -> header.Id
-	1,   // 278: header.TagMgr.GetTag:input_type -> header.Id
-	1,   // 279: header.Noti5Service.ReadNotificationSetting:input_type -> header.Id
-	89,  // 280: header.Noti5Service.UpdateNotificationSetting:input_type -> noti5.Setting
-	90,  // 281: header.Noti5Service.Noti:input_type -> header.PushNoti
-	91,  // 282: header.Noti5Service.AddToken:input_type -> noti5.Token
-	91,  // 283: header.Noti5Service.RemoveToken:input_type -> noti5.Token
-	91,  // 284: header.Noti5Service.CheckTokenExists:input_type -> noti5.Token
-	92,  // 285: header.PaymentMgr.SearchSub:input_type -> account.SearchSubRequest
-	1,   // 286: header.PaymentMgr.GetSub:input_type -> header.Id
-	93,  // 287: header.PaymentMgr.Purchase:input_type -> payment.PurchaseRequest
-	94,  // 288: header.PaymentMgr.UpdateSubscription:input_type -> payment.Subscription
-	1,   // 289: header.PaymentMgr.GetSubscription:input_type -> header.Id
-	95,  // 290: header.PaymentMgr.Pay:input_type -> payment.PayRequest
-	96,  // 291: header.PaymentMgr.CreateInvoice:input_type -> payment.Invoice
-	96,  // 292: header.PaymentMgr.UpdateInvoice:input_type -> payment.Invoice
-	97,  // 293: header.PaymentMgr.FilterInvoices:input_type -> payment.ListInvoiceRequest
-	94,  // 294: header.PaymentMgr.DraftInvoice:input_type -> payment.Subscription
-	98,  // 295: header.PaymentMgr.ListComments:input_type -> payment.ListCommentsRequest
-	99,  // 296: header.PaymentMgr.AddComment:input_type -> payment.Comment
-	1,   // 297: header.PaymentMgr.ExportInvoice:input_type -> header.Id
-	96,  // 298: header.PaymentMgr.ConvertInvoiceToHtml:input_type -> payment.Invoice
-	100, // 299: header.PaymentMgr.GetExchangeRate:input_type -> header.ExchangeRate
-	95,  // 300: header.PaymentMgr.TransferMoney:input_type -> payment.PayRequest
-	101, // 301: header.PaymentMgr.ListLogs:input_type -> payment.ListLogsRequest
-	102, // 302: header.PaymentMgr.SearchReferral:input_type -> payment.SearchReferredRequest
-	1,   // 303: header.PaymentMgr.GetReferral:input_type -> header.Id
-	11,  // 304: header.PaymentMgr.ListTopReferral:input_type -> header.Empty
-	103, // 305: header.PaymentMgr.UpdateReferral:input_type -> payment.Referral
-	1,   // 306: header.PaymentMgr.ListAccountReferred:input_type -> header.Id
-	1,   // 307: header.PaymentMgr.ListBillByAccountReferred:input_type -> header.Id
-	1,   // 308: header.PaymentMgr.ListPaidForAgentReferrer:input_type -> header.Id
-	104, // 309: header.PaymentMgr.PaidForAgentReferrer:input_type -> payment.LogPaidForAgentReferrer
-	105, // 310: header.Pubsub.Fire:input_type -> header.PsMessage
-	106, // 311: header.Pubsub.Poll:input_type -> header.RealtimeSubscription
-	106, // 312: header.Pubsub.Subscribe:input_type -> header.RealtimeSubscription
-	1,   // 313: header.FabikonService.ReadFbFanpageSetting:input_type -> header.Id
-	107, // 314: header.FabikonService.UpdateFbFanpageSetting:input_type -> header.FbFanpageSetting
-	1,   // 315: header.FabikonService.ListFbFanpageSettings:input_type -> header.Id
-	1,   // 316: header.FabikonService.ListFbPosts:input_type -> header.Id
-	108, // 317: header.FabikonService.GetFbPost:input_type -> header.FacebookPost
-	0,   // 318: header.FabikonService.SendEventToFacebook:input_type -> header.Events
-	37,  // 319: header.FabikonService.RemoveFbUserLabel:input_type -> header.User
-	37,  // 320: header.FabikonService.AddFbUserLabel:input_type -> header.User
-	1,   // 321: header.FabikonService.GenerateRefLink:input_type -> header.Id
-	1,   // 322: header.ChannelConnector.GetIntegration:input_type -> header.Id
-	72,  // 323: header.ChannelConnector.UpdateIntegration:input_type -> header.Integration
-	0,   // 324: header.ZalokonService.SendEventToZalo:input_type -> header.Events
-	1,   // 325: header.ZalokonService.ListZnsTemplates:input_type -> header.Id
-	109, // 326: header.ZalokonService.RequestZaloUserInfo:input_type -> header.ZaloUserRequest
-	109, // 327: header.ZalokonService.RequestZaloUserToMakeCall:input_type -> header.ZaloUserRequest
-	109, // 328: header.ZalokonService.MakeSureZaloUser:input_type -> header.ZaloUserRequest
-	109, // 329: header.ZalokonService.GetZaloUserCallConsent:input_type -> header.ZaloUserRequest
-	110, // 330: header.ZalokonService.SendZNS:input_type -> header.ZnsRequest
-	111, // 331: header.ZalokonService.CreateZaloApplication:input_type -> header.ZaloApplication
-	1,   // 332: header.ZalokonService.GetZaloApplication:input_type -> header.Id
-	111, // 333: header.ZalokonService.UpdateZaloApplication:input_type -> header.ZaloApplication
-	1,   // 334: header.ZalokonService.DeleteZaloApplication:input_type -> header.Id
-	11,  // 335: header.ZalokonService.ListZaloApplications:input_type -> header.Empty
-	0,   // 336: header.MailkonService.SendEmail:input_type -> header.Events
-	72,  // 337: header.MailkonService.CreateEmailIdentity:input_type -> header.Integration
-	72,  // 338: header.MailkonService.DeleteEmailIdentity:input_type -> header.Integration
-	72,  // 339: header.MailkonService.ResendSenderVerificationEmail:input_type -> header.Integration
-	72,  // 340: header.MailkonService.VerifySenderDomain:input_type -> header.Integration
-	1,   // 341: header.MailkonService.ListBusinessEmailAddresses:input_type -> header.Id
-	112, // 342: header.MailkonService.UpsertBusinessEmailAddress:input_type -> header.BusinessEmailAddress
-	1,   // 343: header.MailkonService.DeleteBusinessEmailAddress:input_type -> header.Id
-	113, // 344: header.MailkonService.TrackLink:input_type -> header.LinkData
-	114, // 345: header.MailkonService.ListBouncedEmails:input_type -> header.BouncedEmail
-	114, // 346: header.MailkonService.UpsertBouncedEmail:input_type -> header.BouncedEmail
-	1,   // 347: header.MailkonService.DeleteBouncedEmail:input_type -> header.Id
-	115, // 348: header.MailkonService.ListBlockedEmails:input_type -> header.BlockedEmail
-	115, // 349: header.MailkonService.BlockEmail:input_type -> header.BlockedEmail
-	1,   // 350: header.MailkonService.UnblockEmail:input_type -> header.Id
-	1,   // 351: header.WidgetService.Read:input_type -> header.Id
-	116, // 352: header.WidgetService.Update:input_type -> header.WidgetSetting
-	1,   // 353: header.WidgetService.ReadUserSetting:input_type -> header.Id
-	1,   // 354: header.WidgetService.ReadAccountSetting:input_type -> header.Id
-	117, // 355: header.WidgetService.SubmitImpression:input_type -> header.Impression
-	118, // 356: header.WidgetService.SubmitConversion:input_type -> header.Conversion
-	119, // 357: header.WidgetService.SubmitUserCampaignStatus:input_type -> header.UserCampaignStatus
-	120, // 358: header.WidgetService.ReportCampaign:input_type -> header.ReportCampaignRequest
-	121, // 359: header.WidgetService.ListConversions:input_type -> header.ConversionRequest
-	121, // 360: header.WidgetService.ExportConversions:input_type -> header.ConversionRequest
-	122, // 361: header.WidgetService.UploadImage:input_type -> header.UploadedImage
-	1,   // 362: header.WidgetService.ListUploadedImage:input_type -> header.Id
-	122, // 363: header.WidgetService.DeleteUploadedImage:input_type -> header.UploadedImage
-	1,   // 364: header.WidgetService.ListWebPlugins:input_type -> header.Id
-	123, // 365: header.WidgetService.UpdateWebPlugin:input_type -> header.WebPlugin
-	123, // 366: header.WidgetService.UpdateWebPluginEnabled:input_type -> header.WebPlugin
-	123, // 367: header.WidgetService.CreateWebPlugin:input_type -> header.WebPlugin
-	1,   // 368: header.WidgetService.DeleteWebPlugin:input_type -> header.Id
-	123, // 369: header.WidgetService.UpdateWebPluginTemplate:input_type -> header.WebPlugin
-	1,   // 370: header.WidgetService.ListWebPluginTemplates:input_type -> header.Id
-	1,   // 371: header.WidgetService.DeleteWebPluginTemplate:input_type -> header.Id
-	124, // 372: header.WidgetService.ReportWebPlugin:input_type -> header.ReportWebPluginRequest
-	1,   // 373: header.WidgetService.SearchImages:input_type -> header.Id
-	1,   // 374: header.WidgetService.ListNotifProfiles:input_type -> header.Id
-	1,   // 375: header.WidgetService.ListNotifBackgrounds:input_type -> header.Id
-	125, // 376: header.Bizbot.ListBots:input_type -> header.BotsRequest
-	1,   // 377: header.Bizbot.GetBot:input_type -> header.Id
-	126, // 378: header.Bizbot.UpdateBotRunState:input_type -> header.Bot
-	126, // 379: header.Bizbot.CreateBot:input_type -> header.Bot
-	126, // 380: header.Bizbot.UpdateBot:input_type -> header.Bot
-	1,   // 381: header.Bizbot.DeleteBot:input_type -> header.Id
-	127, // 382: header.Bizbot.OnEvent:input_type -> header.BotRunRequest
-	127, // 383: header.Bizbot.StartBot:input_type -> header.BotRunRequest
-	127, // 384: header.Bizbot.StopBot:input_type -> header.BotRunRequest
-	127, // 385: header.Bizbot.TryAction:input_type -> header.BotRunRequest
-	128, // 386: header.Bizbot.ReportBot2:input_type -> header.BotrunMetricsRequest
-	129, // 387: header.Bizbot.ReportAction:input_type -> header.ActionrunMetricsRequest
-	130, // 388: header.Bizbot.ListObjects:input_type -> header.ListObjectsRequest
-	131, // 389: header.Bizbot.ReportBot:input_type -> header.ReportBotRequest
-	132, // 390: header.Sendback.CreateWebhook:input_type -> header.Webhook
-	1,   // 391: header.Sendback.PingWebhook:input_type -> header.Id
-	1,   // 392: header.Sendback.DeleteWebhook:input_type -> header.Id
-	1,   // 393: header.Sendback.ListWebhooks:input_type -> header.Id
-	1,   // 394: header.Sendback.ReadWebhook:input_type -> header.Id
-	132, // 395: header.Sendback.UpdateWebhook:input_type -> header.Webhook
-	1,   // 396: header.Sendback.UpdateWebhookSecret:input_type -> header.Id
-	133, // 397: header.Sendback.ListRecentIndexDeliveries:input_type -> header.RecentIndexDeliveryRequest
-	134, // 398: header.Sendback.GetDelivery:input_type -> header.DeliveryRequest
-	48,  // 399: header.Sendback.SendWebhookEvent:input_type -> header.Event
-	135, // 400: header.Notibox.SendNoti:input_type -> header.Notification
-	136, // 401: header.Notibox.ListNoties:input_type -> header.ListNotiRequest
-	1,   // 402: header.Notibox.MarkReadNoti:input_type -> header.Id
-	1,   // 403: header.Notibox.MarkReadNotiTopic:input_type -> header.Id
-	46,  // 404: header.Proder.ReadProduct:input_type -> header.Product
-	46,  // 405: header.Proder.CreateProduct:input_type -> header.Product
-	46,  // 406: header.Proder.UpdateProduct:input_type -> header.Product
-	1,   // 407: header.Proder.DeleteProduct:input_type -> header.Id
-	137, // 408: header.Proder.ListProducts2:input_type -> header.ProductsRequest
-	138, // 409: header.Proder.ImportProduct:input_type -> header.ImportProductRequest
-	16,  // 410: header.Proder.ListProductCollections:input_type -> header.Ids
-	139, // 411: header.Proder.CreateProductCollection:input_type -> header.ProductCollection
-	139, // 412: header.Proder.UpdateProductCollection:input_type -> header.ProductCollection
-	1,   // 413: header.Proder.DeleteProductCollection:input_type -> header.Id
-	1,   // 414: header.Proder.ListProductFeeds:input_type -> header.Id
-	140, // 415: header.Proder.CreateProductFeed:input_type -> header.ProductFeed
-	140, // 416: header.Proder.UpdateProductFeed:input_type -> header.ProductFeed
-	1,   // 417: header.Proder.DeleteProductFeed:input_type -> header.Id
-	16,  // 418: header.Proder.ListProductCategories:input_type -> header.Ids
-	1,   // 419: header.Proder.ReadOrder:input_type -> header.Id
-	29,  // 420: header.Proder.CreateOrder:input_type -> header.Order
-	29,  // 421: header.Proder.UpdateOrder:input_type -> header.Order
-	1,   // 422: header.Proder.DeleteOrder:input_type -> header.Id
-	141, // 423: header.Proder.ListOrders:input_type -> header.OrdersRequest
-	142, // 424: header.Proder.CountOrders2:input_type -> header.CountOrdersRequest
-	143, // 425: header.Proder.ImportOrders:input_type -> header.Orders
-	144, // 426: header.Proder.MakeOrderPayment:input_type -> header.Bill
-	145, // 427: header.Proder.DeleteOrderPayment:input_type -> header.Key
-	48,  // 428: header.Proder.AddOrderComment:input_type -> header.Event
-	48,  // 429: header.Proder.EditOrderComment:input_type -> header.Event
-	145, // 430: header.Proder.DeleteOrderComment:input_type -> header.Key
-	1,   // 431: header.Proder.ListOrderEvents:input_type -> header.Id
-	146, // 432: header.Proder.DownloadOrder:input_type -> header.DownloadOrderRequest
-	1,   // 433: header.Proder.GetShopeeAuthUrl:input_type -> header.Id
-	147, // 434: header.Proder.AuthorizeShopeeShop:input_type -> header.AuthorizeShopeeRequest
-	1,   // 435: header.Proder.DeauthorizeShopeeShop:input_type -> header.Id
-	148, // 436: header.Proder.SyncShopeeProducts:input_type -> header.ShopeeSyncProductRequest
-	149, // 437: header.Proder.GHTKShippingStatus:input_type -> header.GHTKOrder
-	150, // 438: header.Proder.GHNShippingStatus:input_type -> header.GHNOrder2
-	151, // 439: header.Proder.ShippingFee:input_type -> header.ShippingInfo
-	1,   // 440: header.Proder.ShipOrder:input_type -> header.Id
-	29,  // 441: header.Proder.UpdateShippingCode:input_type -> header.Order
-	1,   // 442: header.Proder.CancelShippingOrder:input_type -> header.Id
-	16,  // 443: header.Proder.PrintShippingOrders:input_type -> header.Ids
-	1,   // 444: header.Proder.SeenOrder:input_type -> header.Id
-	1,   // 445: header.Proder.FollowOrder:input_type -> header.Id
-	1,   // 446: header.Proder.UnfollowOrder:input_type -> header.Id
-	65,  // 447: header.Proder.TagOrder:input_type -> header.TagRequest
-	65,  // 448: header.Proder.UntagOrder:input_type -> header.TagRequest
-	1,   // 449: header.Proder.ReadPipeline:input_type -> header.Id
-	152, // 450: header.Proder.CreatePipeline:input_type -> header.Pipeline
-	152, // 451: header.Proder.UpdatePipeline:input_type -> header.Pipeline
-	1,   // 452: header.Proder.DeletePipeline:input_type -> header.Id
-	16,  // 453: header.Proder.ListPipelines:input_type -> header.Ids
-	153, // 454: header.Proder.DeletePipelineStage:input_type -> header.PipelineStage
-	1,   // 455: header.Proder.PreselectPipeline:input_type -> header.Id
-	154, // 456: header.Proder.ReportOrder:input_type -> header.OrderMetricsRequest
-	16,  // 457: header.Proder.MoveOrderToPrimary:input_type -> header.Ids
-	1,   // 458: header.TaskMgr.ReadTask:input_type -> header.Id
-	51,  // 459: header.TaskMgr.CreateTask:input_type -> header.Task
-	51,  // 460: header.TaskMgr.UpdateTask:input_type -> header.Task
-	1,   // 461: header.TaskMgr.DeleteTask:input_type -> header.Id
-	155, // 462: header.TaskMgr.ListTasks:input_type -> header.TasksRequest
-	1,   // 463: header.TaskMgr.SeenTask:input_type -> header.Id
-	1,   // 464: header.TaskMgr.CloseTaskReminder:input_type -> header.Id
-	1,   // 465: header.TaskMgr.MuteTask:input_type -> header.Id
-	1,   // 466: header.TaskMgr.UnmuteTask:input_type -> header.Id
-	48,  // 467: header.TaskMgr.AddTaskComment:input_type -> header.Event
-	48,  // 468: header.TaskMgr.EditTaskComment:input_type -> header.Event
-	145, // 469: header.TaskMgr.DeleteTaskComment:input_type -> header.Key
-	1,   // 470: header.TaskMgr.ListTaskComments:input_type -> header.Id
-	156, // 471: header.Speex.TextToSpeech:input_type -> header.TTSVoiceSelection
-	16,  // 472: header.CampaignMgr.ListCampaigns:input_type -> header.Ids
-	1,   // 473: header.CampaignMgr.ReadCampaign:input_type -> header.Id
-	157, // 474: header.CampaignMgr.CreateCampaign:input_type -> header.Campaign
-	157, // 475: header.CampaignMgr.UpdateCampaign:input_type -> header.Campaign
-	1,   // 476: header.CampaignMgr.DeleteCampaign:input_type -> header.Id
-	48,  // 477: header.CampaignMgr.OnEvent:input_type -> header.Event
-	158, // 478: header.CampaignMgr.ListCampaignSendLog:input_type -> header.CampaignSendLogRequest
-	1,   // 479: header.CampaignMgr.ReportBroadcastCampaign:input_type -> header.Id
-	159, // 480: header.CampaignMgr.ListOutboundCallEntries:input_type -> header.ListOutboundCallRequest
-	160, // 481: header.CampaignMgr.UpdateOutboundCall:input_type -> header.OutboundCallEntry
-	161, // 482: header.CampaignMgr.ImportOutboundCall:input_type -> header.ImportOutboundCallEntryRequest
-	160, // 483: header.CampaignMgr.GetOutboundCall:input_type -> header.OutboundCallEntry
-	160, // 484: header.CampaignMgr.RemoveOutboudCall:input_type -> header.OutboundCallEntry
-	162, // 485: header.CampaignMgr.ReportOutboundCalls:input_type -> header.OutboundCallReportRequest
-	159, // 486: header.CampaignMgr.ReassignOutboundCall:input_type -> header.ListOutboundCallRequest
-	163, // 487: header.CreditMgr.TrySpendCredit:input_type -> header.CreditSpendEntry
-	164, // 488: header.CreditMgr.ReportCreditSpend:input_type -> header.CreditSpendReportRequest
-	165, // 489: header.CreditMgr.ListCreditSpendLog:input_type -> header.CreditSpendLogRequest
-	1,   // 490: header.CreditMgr.ListCredits:input_type -> header.Id
-	166, // 491: header.CreditMgr.AddCredit:input_type -> header.Credit
-	1,   // 492: header.CreditMgr.DeleteCredit:input_type -> header.Id
-	166, // 493: header.CreditMgr.UpdateCredit:input_type -> header.Credit
-	1,   // 494: header.FormMgr.ListForms:input_type -> header.Id
-	167, // 495: header.FormMgr.CreateForm:input_type -> header.Form
-	167, // 496: header.FormMgr.UpdateForm:input_type -> header.Form
-	1,   // 497: header.FormMgr.DeleteForm:input_type -> header.Id
-	168, // 498: header.FormMgr.ReportForm:input_type -> header.FormReportRequest
-	169, // 499: header.FormMgr.ListFormSubmissions:input_type -> header.ListFormSubmissionRequest
-	170, // 500: header.Scheduler.RegisterTask:input_type -> header.SchedulerTask
-	170, // 501: header.Scheduler.UnregisterTask:input_type -> header.SchedulerTask
-	11,  // 502: header.GooglekonService.SendEventToGoogle:output_type -> header.Empty
-	2,   // 503: header.GooglekonService.ReadGoogleLocationSetting:output_type -> header.GoogleLocationSetting
-	2,   // 504: header.GooglekonService.UpdateGoogleLocationSetting:output_type -> header.GoogleLocationSetting
-	171, // 505: header.GooglekonService.ListGoogleLocationSettings:output_type -> header.GoogleLocationSettings
-	11,  // 506: header.KafkaConsumer.Consume:output_type -> header.Empty
-	172, // 507: header.RateLimit.SyncRateLimit:output_type -> header.RateLimitSyncResponse
-	11,  // 508: header.DocSearch.IndexConvo:output_type -> header.Empty
-	173, // 509: header.DocSearch.SearchConvos:output_type -> header.DocSearchResponse
-	11,  // 510: header.DocSearch.Index:output_type -> header.Empty
-	16,  // 511: header.DocSearch.Search:output_type -> header.Ids
-	174, // 512: header.DocSearch.ReportConversation:output_type -> header.ConversationMetrics
-	175, // 513: header.DocSearch.Report:output_type -> header.ConvoReportResponse
-	176, // 514: header.DocSearch.ListIds:output_type -> header.Conversations
-	176, // 515: header.DocSearch.ListConversationIds:output_type -> header.Conversations
-	177, // 516: header.DocSearch.ReportCall:output_type -> header.CallMetrics
-	176, // 517: header.DocSearch.ListCallIds:output_type -> header.Conversations
-	178, // 518: header.DocSearch.ReportAgent:output_type -> header.AgentMetrics
-	11,  // 519: header.DocSearch.HealthCheckReport:output_type -> header.Empty
-	11,  // 520: header.DocSearch.HealthCheckIndex:output_type -> header.Empty
-	13,  // 521: header.NumberRegistry.Compact:output_type -> header.Number
-	12,  // 522: header.NumberRegistry.Uncompact:output_type -> header.String
-	14,  // 523: header.NumberRegistry.CompactM:output_type -> header.StrNumM
-	13,  // 524: header.NumberRegistry.Shorten:output_type -> header.Number
-	12,  // 525: header.NumberRegistry.Lookup:output_type -> header.String
-	1,   // 526: header.NumberRegistry.NewID2:output_type -> header.Id
-	179, // 527: header.Map.Predict:output_type -> header.AddressAutocompleteResponses
-	27,  // 528: header.Map.LookupAddress:output_type -> header.Address
-	180, // 529: header.Map.PredictAddress:output_type -> header.Addresses
-	180, // 530: header.Map.ListDistricts:output_type -> header.Addresses
-	180, // 531: header.Map.ListProvinces:output_type -> header.Addresses
-	180, // 532: header.Map.ListWards:output_type -> header.Addresses
-	180, // 533: header.Map.ListStreets:output_type -> header.Addresses
-	180, // 534: header.Map.ListAddresses:output_type -> header.Addresses
-	27,  // 535: header.Map.ReadAddress:output_type -> header.Address
-	17,  // 536: header.AccountMgr.CreateGroup:output_type -> header.AgentGroup
-	17,  // 537: header.AccountMgr.UpdateGroup:output_type -> header.AgentGroup
-	17,  // 538: header.AccountMgr.GetGroup:output_type -> header.AgentGroup
-	11,  // 539: header.AccountMgr.RequestPassword:output_type -> header.Empty
-	19,  // 540: header.AccountMgr.UpdatePassword:output_type -> account.Agent
-	19,  // 541: header.AccountMgr.UpdateAgent:output_type -> account.Agent
-	19,  // 542: header.AccountMgr.DeleteAgent:output_type -> account.Agent
-	20,  // 543: header.AccountMgr.DeleteAccount:output_type -> account.Account
-	20,  // 544: header.AccountMgr.SubizUpdateAccount:output_type -> account.Account
-	11,  // 545: header.AccountMgr.RequestChangeEmail:output_type -> header.Empty
-	19,  // 546: header.AccountMgr.ConfirmChangeEmail:output_type -> account.Agent
-	19,  // 547: header.AccountMgr.AcceptInvitation:output_type -> account.Agent
-	19,  // 548: header.AccountMgr.GetInvitation:output_type -> account.Agent
-	19,  // 549: header.AccountMgr.InviteAgent:output_type -> account.Agent
-	19,  // 550: header.AccountMgr.GetAgent:output_type -> account.Agent
-	19,  // 551: header.AccountMgr.LookupAgentById:output_type -> account.Agent
-	20,  // 552: header.AccountMgr.ConfirmAccount:output_type -> account.Account
-	20,  // 553: header.AccountMgr.GetAccount:output_type -> account.Account
-	20,  // 554: header.AccountMgr.UpdateAccount:output_type -> account.Account
-	20,  // 555: header.AccountMgr.CreateAccount:output_type -> account.Account
-	181, // 556: header.AccountMgr.ListAgents:output_type -> header.Response
-	11,  // 557: header.AccountMgr.DeleteGroup:output_type -> header.Empty
-	182, // 558: header.AccountMgr.ListGroups:output_type -> header.AgentGroups
-	19,  // 559: header.AccountMgr.ChangeEmail:output_type -> account.Agent
-	183, // 560: header.AccountMgr.SyncPublicHolidays:output_type -> account.BusinessHours
-	19,  // 561: header.AccountMgr.TransferOwner:output_type -> account.Agent
-	24,  // 562: header.AccountMgr.CheckLoginSession:output_type -> header.LoginSession
-	184, // 563: header.AccountMgr.ListLoginSessions:output_type -> header.LoginSessions
-	184, // 564: header.AccountMgr.ListApiKeys:output_type -> header.LoginSessions
-	11,  // 565: header.AccountMgr.LogoutSession:output_type -> header.Empty
-	24,  // 566: header.AccountMgr.CreateApiKey:output_type -> header.LoginSession
-	185, // 567: header.AccountMgr.GetLanguage:output_type -> header.Lang
-	25,  // 568: header.AccountMgr.UpdateLanguage:output_type -> header.LangMessage
-	26,  // 569: header.AccountMgr.GetShopSetting:output_type -> header.ShopSetting
-	26,  // 570: header.AccountMgr.UpdateShopSetting:output_type -> header.ShopSetting
-	186, // 571: header.AccountMgr.ReadCurrency:output_type -> header.Currency
-	11,  // 572: header.AccountMgr.AutoSyncCurrency:output_type -> header.Empty
-	180, // 573: header.AccountMgr.ListShopAddresses:output_type -> header.Addresses
-	27,  // 574: header.AccountMgr.CreateShopAddress:output_type -> header.Address
-	27,  // 575: header.AccountMgr.UpdateShopAddress:output_type -> header.Address
-	11,  // 576: header.AccountMgr.DeleteShopAddress:output_type -> header.Empty
-	187, // 577: header.AccountMgr.ListTaxes:output_type -> header.Taxes
-	28,  // 578: header.AccountMgr.CreateTax:output_type -> header.Tax
-	28,  // 579: header.AccountMgr.UpdateTax:output_type -> header.Tax
-	11,  // 580: header.AccountMgr.DeleteTax:output_type -> header.Empty
-	188, // 581: header.AccountMgr.CheckShippingPolicy:output_type -> header.ShippingPolicies
-	188, // 582: header.AccountMgr.ListShippingPolicies:output_type -> header.ShippingPolicies
-	30,  // 583: header.AccountMgr.CreateShippingPolicy:output_type -> header.ShippingPolicy
-	30,  // 584: header.AccountMgr.UpdateShippingPolicy:output_type -> header.ShippingPolicy
-	11,  // 585: header.AccountMgr.DeleteShippingPolicy:output_type -> header.Empty
-	31,  // 586: header.AccountMgr.CreateCancellationCode:output_type -> header.CancellationCode
-	189, // 587: header.AccountMgr.ListCancellationCodes:output_type -> header.CancellationCodes
-	31,  // 588: header.AccountMgr.UpdateCancellationCode:output_type -> header.CancellationCode
-	11,  // 589: header.AccountMgr.MakeDefaultTax:output_type -> header.Empty
-	190, // 590: header.AccountMgr.ListPaymentMethods:output_type -> header.PaymentMethods
-	32,  // 591: header.AccountMgr.CreatePaymentMethod:output_type -> header.PaymentMethod
-	32,  // 592: header.AccountMgr.UpdatePaymentMethod:output_type -> header.PaymentMethod
-	11,  // 593: header.AccountMgr.DeletePaymentMethod:output_type -> header.Empty
-	11,  // 594: header.AccountMgr.MakeDefaultPaymentMethod:output_type -> header.Empty
-	191, // 595: header.AccountMgr.ListIntegratedShippingProviders:output_type -> header.IntegratedShippings
-	11,  // 596: header.AccountMgr.DeintegrateShippingProvider:output_type -> header.Empty
-	33,  // 597: header.AccountMgr.IntegrateShippingProvider:output_type -> header.IntegratedShipping
-	33,  // 598: header.AccountMgr.SendGHNAffiliateOTP:output_type -> header.IntegratedShipping
-	33,  // 599: header.AccountMgr.EnterGHNAffiliateOTP:output_type -> header.IntegratedShipping
-	34,  // 600: header.AccountMgr.UpdateAgentPresence:output_type -> account.Presence
-	192, // 601: header.AccountMgr.ListAgentPresences:output_type -> account.Presences
-	193, // 602: header.AccountMgr.ReportAvailibilities:output_type -> header.ReportResponse
-	1,   // 603: header.AccountMgr.NewID:output_type -> header.Id
-	1,   // 604: header.AccountMgr.LockLogin:output_type -> header.Id
-	1,   // 605: header.AccountMgr.UnlockLogin:output_type -> header.Id
-	194, // 606: header.AccountMgr.ListBills:output_type -> payment.Bills
-	37,  // 607: header.UserMgr.MergeUser:output_type -> header.User
-	11,  // 608: header.UserMgr.DetachUser:output_type -> header.Empty
-	37,  // 609: header.UserMgr.CreateUser2:output_type -> header.User
-	37,  // 610: header.UserMgr.UpdateUser:output_type -> header.User
-	195, // 611: header.UserMgr.TryUpdateUser:output_type -> header.TryUpdateUserResult
-	11,  // 612: header.UserMgr.RemoveUser:output_type -> header.Empty
-	11,  // 613: header.UserMgr.RestoreUser:output_type -> header.Empty
-	37,  // 614: header.UserMgr.ReadUser:output_type -> header.User
-	37,  // 615: header.UserMgr.ReadOrCreateUserByContactProfile:output_type -> header.User
-	36,  // 616: header.UserMgr.MatchUsers:output_type -> header.Users
-	37,  // 617: header.UserMgr.BanUser:output_type -> header.User
-	37,  // 618: header.UserMgr.UnbanUser:output_type -> header.User
-	36,  // 619: header.UserMgr.LookupByPhone:output_type -> header.Users
-	38,  // 620: header.UserMgr.UpdateView:output_type -> header.UserView
-	38,  // 621: header.UserMgr.CreateView:output_type -> header.UserView
-	11,  // 622: header.UserMgr.DeleteView:output_type -> header.Empty
-	38,  // 623: header.UserMgr.GetView:output_type -> header.UserView
-	196, // 624: header.UserMgr.ListViews:output_type -> header.UserViews
-	39,  // 625: header.UserMgr.UpdateSegment:output_type -> header.Segment
-	39,  // 626: header.UserMgr.CreateSegment:output_type -> header.Segment
-	11,  // 627: header.UserMgr.DeleteSegment:output_type -> header.Empty
-	39,  // 628: header.UserMgr.GetSegment:output_type -> header.Segment
-	197, // 629: header.UserMgr.ListSegments:output_type -> header.Segments
-	36,  // 630: header.UserMgr.ListUsers:output_type -> header.Users
-	11,  // 631: header.UserMgr.AddToSegment:output_type -> header.Empty
-	11,  // 632: header.UserMgr.RemoveFromSegment:output_type -> header.Empty
-	11,  // 633: header.UserMgr.UpdateUserCampaignStatus:output_type -> header.Empty
-	43,  // 634: header.UserMgr.UpsertLabel:output_type -> header.Label
-	11,  // 635: header.UserMgr.DeleteLabel:output_type -> header.Empty
-	198, // 636: header.UserMgr.ListLabels:output_type -> header.Labels
-	43,  // 637: header.UserMgr.GetLabel:output_type -> header.Label
-	11,  // 638: header.UserMgr.AddLeadOwner:output_type -> header.Empty
-	11,  // 639: header.UserMgr.RemoveLeadOwner:output_type -> header.Empty
-	11,  // 640: header.UserMgr.AddUserLabel:output_type -> header.Empty
-	11,  // 641: header.UserMgr.RemoveUserLabel:output_type -> header.Empty
-	11,  // 642: header.UserMgr.AddLeadConversionBy:output_type -> header.Empty
-	27,  // 643: header.UserMgr.CreateShippingAddress:output_type -> header.Address
-	27,  // 644: header.UserMgr.UpdateShippingAddress:output_type -> header.Address
-	11,  // 645: header.UserMgr.RemoveShippingAddress:output_type -> header.Empty
-	199, // 646: header.UserMgr.ListShippingAddress:output_type -> header.ShippingAddresses
-	11,  // 647: header.UserMgr.MakeDefaultShippingAddress:output_type -> header.Empty
-	36,  // 648: header.UserMgr.ListLeads:output_type -> header.Users
-	200, // 649: header.UserMgr.SuggestLeadField:output_type -> header.SuggestLeadFieldResponse
-	46,  // 650: header.UserMgr.LinkProductUrl:output_type -> header.Product
-	0,   // 651: header.UserMgr.ListUserEvents:output_type -> header.Events
-	48,  // 652: header.UserMgr.CreateUserEvent:output_type -> header.Event
-	49,  // 653: header.UserMgr.FillDevice:output_type -> common.Device
-	201, // 654: header.UserMgr.ImportLead:output_type -> header.ImportLeadResponse
-	11,  // 655: header.UserMgr.LinkTask:output_type -> header.Empty
-	202, // 656: header.UserMgr.CountUserProfiles:output_type -> header.CountTouchpointResponse
-	16,  // 657: header.UserMgr.ListUserIds:output_type -> header.Ids
-	36,  // 658: header.UserMgr.ListUserIdWithPhones:output_type -> header.Users
-	173, // 659: header.UserMgr.SearchUsers:output_type -> header.DocSearchResponse
-	203, // 660: header.UserMgr.ReportUser:output_type -> header.UserReportResponse
-	54,  // 661: header.UserMgr.FetchLiveUsers:output_type -> header.LiveUserView
-	11,  // 662: header.UserMgr.StopLiveUsers:output_type -> header.Empty
-	200, // 663: header.UserMgr.SuggestLiveFields:output_type -> header.SuggestLeadFieldResponse
-	204, // 664: header.UserMgr.Presences:output_type -> header.PresencesResponse
-	205, // 665: header.NoteMgr.ListNotes:output_type -> header.Notes
-	57,  // 666: header.NoteMgr.AddNote:output_type -> header.Note
-	57,  // 667: header.NoteMgr.UpdateNote:output_type -> header.Note
-	11,  // 668: header.NoteMgr.DeleteNote:output_type -> header.Empty
-	206, // 669: header.AttributeMgr.ListAttributeDefinitions:output_type -> header.AttributeDefinitions
-	59,  // 670: header.AttributeMgr.CreateAttributeDefinition:output_type -> header.AttributeDefinition
-	59,  // 671: header.AttributeMgr.UpdateAttributeDefinition:output_type -> header.AttributeDefinition
-	181, // 672: header.AutomationMgr.ListWorkflows:output_type -> header.Response
-	181, // 673: header.AutomationMgr.UpdateWorkflow:output_type -> header.Response
-	181, // 674: header.AutomationMgr.CreateWorkflow:output_type -> header.Response
-	181, // 675: header.AutomationMgr.DeleteWorkflow:output_type -> header.Response
-	181, // 676: header.AutomationMgr.ReadWorkflow:output_type -> header.Response
-	181, // 677: header.AutomationMgr.ListWorkflowLog:output_type -> header.Response
-	207, // 678: header.ConversationMgr.AssignRule:output_type -> header.RouteResult
-	48,  // 679: header.ConversationMgr.PongMessage:output_type -> header.Event
-	67,  // 680: header.ConversationMgr.StartConversation:output_type -> header.Conversation
-	67,  // 681: header.ConversationMgr.EndConversation:output_type -> header.Conversation
-	67,  // 682: header.ConversationMgr.GetConversation:output_type -> header.Conversation
-	176, // 683: header.ConversationMgr.ListConversations:output_type -> header.Conversations
-	176, // 684: header.ConversationMgr.MatchConversations:output_type -> header.Conversations
-	11,  // 685: header.ConversationMgr.TagConversation:output_type -> header.Empty
-	11,  // 686: header.ConversationMgr.UntagConversation:output_type -> header.Empty
-	11,  // 687: header.ConversationMgr.JoinConversation:output_type -> header.Empty
-	11,  // 688: header.ConversationMgr.LeftConversation:output_type -> header.Empty
-	67,  // 689: header.ConversationMgr.UpdateConversationInfo:output_type -> header.Conversation
-	11,  // 690: header.ConversationMgr.UpdateMuteConversation:output_type -> header.Empty
-	11,  // 691: header.ConversationMgr.UpdateConversationMember:output_type -> header.Empty
-	11,  // 692: header.ConversationMgr.UnwatchConversation:output_type -> header.Empty
-	11,  // 693: header.ConversationMgr.UnhiddenConversation:output_type -> header.Empty
-	68,  // 694: header.ConversationMgr.UpdateEndchatSetting:output_type -> header.EndchatSetting
-	68,  // 695: header.ConversationMgr.GetEndchatSetting:output_type -> header.EndchatSetting
-	48,  // 696: header.ConversationMgr.TerminateBot:output_type -> header.Event
-	48,  // 697: header.ConversationMgr.SendMessage:output_type -> header.Event
-	48,  // 698: header.ConversationMgr.SendOmniChannelMessage:output_type -> header.Event
-	48,  // 699: header.ConversationMgr.UpdateMessage:output_type -> header.Event
-	11,  // 700: header.ConversationMgr.PinMessage:output_type -> header.Empty
-	11,  // 701: header.ConversationMgr.UnpinMessage:output_type -> header.Empty
-	0,   // 702: header.ConversationMgr.ListEvents:output_type -> header.Events
-	11,  // 703: header.ConversationMgr.Deintegrate:output_type -> header.Empty
-	208, // 704: header.ConversationMgr.ListIntegrations:output_type -> header.Integrations
-	72,  // 705: header.ConversationMgr.Integrate:output_type -> header.Integration
-	72,  // 706: header.ConversationMgr.GetIntegration:output_type -> header.Integration
-	73,  // 707: header.ConversationMgr.UpdateIntegrationMember:output_type -> header.ResourceGroupMember
-	11,  // 708: header.ConversationMgr.RemoveIntegrationMember:output_type -> header.Empty
-	74,  // 709: header.ConversationMgr.UpdateRule:output_type -> header.Rule
-	74,  // 710: header.ConversationMgr.CreateRule:output_type -> header.Rule
-	11,  // 711: header.ConversationMgr.DeleteRule:output_type -> header.Empty
-	74,  // 712: header.ConversationMgr.ReadRule:output_type -> header.Rule
-	209, // 713: header.ConversationMgr.ListRules:output_type -> header.Route
-	210, // 714: header.ConversationMgr.ListConversationAutomations:output_type -> header.ConversationAutomations
-	75,  // 715: header.ConversationMgr.UpdateConversationAutomation:output_type -> header.ConversationAutomation
-	11,  // 716: header.ConversationMgr.DeleteConversationAutomation:output_type -> header.Empty
-	75,  // 717: header.ConversationMgr.ReadConversationAutomation:output_type -> header.ConversationAutomation
-	211, // 718: header.ConversationMgr.ListPhoneDevices:output_type -> header.PhoneDevices
-	76,  // 719: header.ConversationMgr.CreatePhoneDevice:output_type -> header.PhoneDevice
-	76,  // 720: header.ConversationMgr.UpdatePhoneDevice:output_type -> header.PhoneDevice
-	11,  // 721: header.ConversationMgr.DeletePhoneDevice:output_type -> header.Empty
-	76,  // 722: header.ConversationMgr.ReadPhoneDevice:output_type -> header.PhoneDevice
-	72,  // 723: header.ConversationMgr.TestNumber:output_type -> header.Integration
-	72,  // 724: header.ConversationMgr.ActiveNumber:output_type -> header.Integration
-	212, // 725: header.ConversationMgr.ListCallSettings:output_type -> header.CallSettings
-	77,  // 726: header.ConversationMgr.UpdateCallSetting:output_type -> header.CallSetting
-	78,  // 727: header.ConversationMgr.BlockNumber:output_type -> header.BlockedNumber
-	213, // 728: header.ConversationMgr.ListBlockedNumbers:output_type -> header.BlockedNumbers
-	11,  // 729: header.ConversationMgr.UnblockNumber:output_type -> header.Empty
-	214, // 730: header.ConversationMgr.ListGreetingAudio:output_type -> header.GreetingAudios
-	79,  // 731: header.ConversationMgr.CreateGreetingAudio:output_type -> header.GreetingAudio
-	67,  // 732: header.ConversationMgr.OriginateCall:output_type -> header.Conversation
-	215, // 733: header.ConversationMgr.ListMyRecentCalls:output_type -> header.RecentCallRecords
-	48,  // 734: header.ConversationMgr.SaveMessage:output_type -> header.Event
-	48,  // 735: header.ConversationMgr.ApplyMessage:output_type -> header.Event
-	80,  // 736: header.TicketMgr.CreateTicketType:output_type -> header.TicketType
-	80,  // 737: header.TicketMgr.UpdateTicketType:output_type -> header.TicketType
-	181, // 738: header.TicketMgr.ListTicketTypes:output_type -> header.Response
-	80,  // 739: header.TicketMgr.GetTicketType:output_type -> header.TicketType
-	81,  // 740: header.TicketMgr.CreateTicket:output_type -> header.Ticket
-	81,  // 741: header.TicketMgr.UpdateTicket:output_type -> header.Ticket
-	11,  // 742: header.TicketMgr.DeleteTicket:output_type -> header.Empty
-	81,  // 743: header.TicketMgr.GetTicket:output_type -> header.Ticket
-	181, // 744: header.TicketMgr.ListTickets:output_type -> header.Response
-	181, // 745: header.TicketMgr.MatchTickets:output_type -> header.Response
-	83,  // 746: header.TicketMgr.CreateTicketView:output_type -> header.TicketView
-	83,  // 747: header.TicketMgr.UpdateTicketView:output_type -> header.TicketView
-	11,  // 748: header.TicketMgr.DeleteTicketView:output_type -> header.Empty
-	83,  // 749: header.TicketMgr.GetTicketView:output_type -> header.TicketView
-	181, // 750: header.TicketMgr.ListTicketViews:output_type -> header.Response
-	48,  // 751: header.TicketMgr.PongTicketEvent:output_type -> header.Event
-	11,  // 752: header.TicketMgr.TagTicket:output_type -> header.Empty
-	11,  // 753: header.TicketMgr.UntagTicket:output_type -> header.Empty
-	11,  // 754: header.TicketMgr.JoinTicket:output_type -> header.Empty
-	11,  // 755: header.TicketMgr.LeftTicket:output_type -> header.Empty
-	11,  // 756: header.TicketMgr.ReadTickets:output_type -> header.Empty
-	11,  // 757: header.TicketMgr.UnreadTickets:output_type -> header.Empty
-	11,  // 758: header.TicketMgr.SnoozeTickets:output_type -> header.Empty
-	11,  // 759: header.TicketMgr.UnsnoozeTickets:output_type -> header.Empty
-	48,  // 760: header.TicketMgr.SendTicketEvent:output_type -> header.Event
-	0,   // 761: header.TicketMgr.ListTicketEvents:output_type -> header.Events
-	73,  // 762: header.TicketMgr.UpdateTicketTypeMember:output_type -> header.ResourceGroupMember
-	11,  // 763: header.TicketMgr.RemoveTicketTypeMember:output_type -> header.Empty
-	84,  // 764: header.TemplateMgr.CreateTemplate:output_type -> header.Template
-	84,  // 765: header.TemplateMgr.UpdateTemplate:output_type -> header.Template
-	11,  // 766: header.TemplateMgr.DeleteTemplate:output_type -> header.Empty
-	84,  // 767: header.TemplateMgr.GetTemplate:output_type -> header.Template
-	216, // 768: header.TemplateMgr.ListTemplates:output_type -> header.Templates
-	11,  // 769: header.TemplateMgr.PickTemplate:output_type -> header.Empty
-	86,  // 770: header.TemplateMgr.CreateModal:output_type -> header.ConversationModal
-	86,  // 771: header.TemplateMgr.UpdateModal:output_type -> header.ConversationModal
-	11,  // 772: header.TemplateMgr.DeleteModal:output_type -> header.Empty
-	86,  // 773: header.TemplateMgr.GetModal:output_type -> header.ConversationModal
-	217, // 774: header.TemplateMgr.ListModals:output_type -> header.ConversationModals
-	218, // 775: header.TemplateMgr.PickModal:output_type -> header.ConversationModalPicked
-	88,  // 776: header.TagMgr.CreateTag:output_type -> header.Tag
-	88,  // 777: header.TagMgr.UpdateTag:output_type -> header.Tag
-	11,  // 778: header.TagMgr.DeleteTag:output_type -> header.Empty
-	219, // 779: header.TagMgr.ListTags:output_type -> header.Tags
-	88,  // 780: header.TagMgr.GetTag:output_type -> header.Tag
-	89,  // 781: header.Noti5Service.ReadNotificationSetting:output_type -> noti5.Setting
-	89,  // 782: header.Noti5Service.UpdateNotificationSetting:output_type -> noti5.Setting
-	11,  // 783: header.Noti5Service.Noti:output_type -> header.Empty
-	11,  // 784: header.Noti5Service.AddToken:output_type -> header.Empty
-	11,  // 785: header.Noti5Service.RemoveToken:output_type -> header.Empty
-	11,  // 786: header.Noti5Service.CheckTokenExists:output_type -> header.Empty
-	220, // 787: header.PaymentMgr.SearchSub:output_type -> header.AccSubs
-	221, // 788: header.PaymentMgr.GetSub:output_type -> header.AccSub
-	96,  // 789: header.PaymentMgr.Purchase:output_type -> payment.Invoice
-	94,  // 790: header.PaymentMgr.UpdateSubscription:output_type -> payment.Subscription
-	94,  // 791: header.PaymentMgr.GetSubscription:output_type -> payment.Subscription
-	222, // 792: header.PaymentMgr.Pay:output_type -> payment.Bill
-	96,  // 793: header.PaymentMgr.CreateInvoice:output_type -> payment.Invoice
-	96,  // 794: header.PaymentMgr.UpdateInvoice:output_type -> payment.Invoice
-	223, // 795: header.PaymentMgr.FilterInvoices:output_type -> payment.Invoices
-	96,  // 796: header.PaymentMgr.DraftInvoice:output_type -> payment.Invoice
-	224, // 797: header.PaymentMgr.ListComments:output_type -> payment.Comments
-	99,  // 798: header.PaymentMgr.AddComment:output_type -> payment.Comment
-	225, // 799: header.PaymentMgr.ExportInvoice:output_type -> payment.String
-	225, // 800: header.PaymentMgr.ConvertInvoiceToHtml:output_type -> payment.String
-	100, // 801: header.PaymentMgr.GetExchangeRate:output_type -> header.ExchangeRate
-	222, // 802: header.PaymentMgr.TransferMoney:output_type -> payment.Bill
-	226, // 803: header.PaymentMgr.ListLogs:output_type -> payment.Logs
-	103, // 804: header.PaymentMgr.SearchReferral:output_type -> payment.Referral
-	103, // 805: header.PaymentMgr.GetReferral:output_type -> payment.Referral
-	227, // 806: header.PaymentMgr.ListTopReferral:output_type -> payment.ReferralResponse
-	103, // 807: header.PaymentMgr.UpdateReferral:output_type -> payment.Referral
-	228, // 808: header.PaymentMgr.ListAccountReferred:output_type -> payment.LogAccountReferreds
-	229, // 809: header.PaymentMgr.ListBillByAccountReferred:output_type -> payment.LogBillByAccountReferreds
-	230, // 810: header.PaymentMgr.ListPaidForAgentReferrer:output_type -> payment.LogPaidForAgentReferrers
-	11,  // 811: header.PaymentMgr.PaidForAgentReferrer:output_type -> header.Empty
-	11,  // 812: header.Pubsub.Fire:output_type -> header.Empty
-	231, // 813: header.Pubsub.Poll:output_type -> header.PollResult
-	106, // 814: header.Pubsub.Subscribe:output_type -> header.RealtimeSubscription
-	107, // 815: header.FabikonService.ReadFbFanpageSetting:output_type -> header.FbFanpageSetting
-	107, // 816: header.FabikonService.UpdateFbFanpageSetting:output_type -> header.FbFanpageSetting
-	232, // 817: header.FabikonService.ListFbFanpageSettings:output_type -> header.FbFanpageSettings
-	233, // 818: header.FabikonService.ListFbPosts:output_type -> header.FacebookPosts
-	108, // 819: header.FabikonService.GetFbPost:output_type -> header.FacebookPost
-	11,  // 820: header.FabikonService.SendEventToFacebook:output_type -> header.Empty
-	11,  // 821: header.FabikonService.RemoveFbUserLabel:output_type -> header.Empty
-	11,  // 822: header.FabikonService.AddFbUserLabel:output_type -> header.Empty
-	1,   // 823: header.FabikonService.GenerateRefLink:output_type -> header.Id
-	72,  // 824: header.ChannelConnector.GetIntegration:output_type -> header.Integration
-	72,  // 825: header.ChannelConnector.UpdateIntegration:output_type -> header.Integration
-	11,  // 826: header.ZalokonService.SendEventToZalo:output_type -> header.Empty
-	234, // 827: header.ZalokonService.ListZnsTemplates:output_type -> zalokon.ZnsTemplates
-	11,  // 828: header.ZalokonService.RequestZaloUserInfo:output_type -> header.Empty
-	11,  // 829: header.ZalokonService.RequestZaloUserToMakeCall:output_type -> header.Empty
-	11,  // 830: header.ZalokonService.MakeSureZaloUser:output_type -> header.Empty
-	181, // 831: header.ZalokonService.GetZaloUserCallConsent:output_type -> header.Response
-	48,  // 832: header.ZalokonService.SendZNS:output_type -> header.Event
-	111, // 833: header.ZalokonService.CreateZaloApplication:output_type -> header.ZaloApplication
-	111, // 834: header.ZalokonService.GetZaloApplication:output_type -> header.ZaloApplication
-	111, // 835: header.ZalokonService.UpdateZaloApplication:output_type -> header.ZaloApplication
-	11,  // 836: header.ZalokonService.DeleteZaloApplication:output_type -> header.Empty
-	235, // 837: header.ZalokonService.ListZaloApplications:output_type -> header.ZaloApplications
-	11,  // 838: header.MailkonService.SendEmail:output_type -> header.Empty
-	72,  // 839: header.MailkonService.CreateEmailIdentity:output_type -> header.Integration
-	11,  // 840: header.MailkonService.DeleteEmailIdentity:output_type -> header.Empty
-	11,  // 841: header.MailkonService.ResendSenderVerificationEmail:output_type -> header.Empty
-	236, // 842: header.MailkonService.VerifySenderDomain:output_type -> header.EmailSenderVerificationResult
-	237, // 843: header.MailkonService.ListBusinessEmailAddresses:output_type -> header.BusinessEmailAddresses
-	112, // 844: header.MailkonService.UpsertBusinessEmailAddress:output_type -> header.BusinessEmailAddress
-	11,  // 845: header.MailkonService.DeleteBusinessEmailAddress:output_type -> header.Empty
-	181, // 846: header.MailkonService.TrackLink:output_type -> header.Response
-	181, // 847: header.MailkonService.ListBouncedEmails:output_type -> header.Response
-	114, // 848: header.MailkonService.UpsertBouncedEmail:output_type -> header.BouncedEmail
-	181, // 849: header.MailkonService.DeleteBouncedEmail:output_type -> header.Response
-	181, // 850: header.MailkonService.ListBlockedEmails:output_type -> header.Response
-	181, // 851: header.MailkonService.BlockEmail:output_type -> header.Response
-	181, // 852: header.MailkonService.UnblockEmail:output_type -> header.Response
-	116, // 853: header.WidgetService.Read:output_type -> header.WidgetSetting
-	116, // 854: header.WidgetService.Update:output_type -> header.WidgetSetting
-	238, // 855: header.WidgetService.ReadUserSetting:output_type -> header.WidgetUserSetting
-	239, // 856: header.WidgetService.ReadAccountSetting:output_type -> header.AccountWeb
-	117, // 857: header.WidgetService.SubmitImpression:output_type -> header.Impression
-	118, // 858: header.WidgetService.SubmitConversion:output_type -> header.Conversion
-	119, // 859: header.WidgetService.SubmitUserCampaignStatus:output_type -> header.UserCampaignStatus
-	240, // 860: header.WidgetService.ReportCampaign:output_type -> header.ReportCampaignResponse
-	241, // 861: header.WidgetService.ListConversions:output_type -> header.Conversions
-	242, // 862: header.WidgetService.ExportConversions:output_type -> header.ConversionsExported
-	122, // 863: header.WidgetService.UploadImage:output_type -> header.UploadedImage
-	243, // 864: header.WidgetService.ListUploadedImage:output_type -> header.UploadedImages
-	11,  // 865: header.WidgetService.DeleteUploadedImage:output_type -> header.Empty
-	244, // 866: header.WidgetService.ListWebPlugins:output_type -> header.WebPlugins
-	123, // 867: header.WidgetService.UpdateWebPlugin:output_type -> header.WebPlugin
-	123, // 868: header.WidgetService.UpdateWebPluginEnabled:output_type -> header.WebPlugin
-	123, // 869: header.WidgetService.CreateWebPlugin:output_type -> header.WebPlugin
-	11,  // 870: header.WidgetService.DeleteWebPlugin:output_type -> header.Empty
-	123, // 871: header.WidgetService.UpdateWebPluginTemplate:output_type -> header.WebPlugin
-	244, // 872: header.WidgetService.ListWebPluginTemplates:output_type -> header.WebPlugins
-	11,  // 873: header.WidgetService.DeleteWebPluginTemplate:output_type -> header.Empty
-	245, // 874: header.WidgetService.ReportWebPlugin:output_type -> header.ReportWebPluginResponse
-	243, // 875: header.WidgetService.SearchImages:output_type -> header.UploadedImages
-	246, // 876: header.WidgetService.ListNotifProfiles:output_type -> header.NotifProfiles
-	247, // 877: header.WidgetService.ListNotifBackgrounds:output_type -> header.Urls
-	248, // 878: header.Bizbot.ListBots:output_type -> header.Bots
-	126, // 879: header.Bizbot.GetBot:output_type -> header.Bot
-	126, // 880: header.Bizbot.UpdateBotRunState:output_type -> header.Bot
-	126, // 881: header.Bizbot.CreateBot:output_type -> header.Bot
-	126, // 882: header.Bizbot.UpdateBot:output_type -> header.Bot
-	11,  // 883: header.Bizbot.DeleteBot:output_type -> header.Empty
-	11,  // 884: header.Bizbot.OnEvent:output_type -> header.Empty
-	11,  // 885: header.Bizbot.StartBot:output_type -> header.Empty
-	11,  // 886: header.Bizbot.StopBot:output_type -> header.Empty
-	11,  // 887: header.Bizbot.TryAction:output_type -> header.Empty
-	249, // 888: header.Bizbot.ReportBot2:output_type -> header.BotrunMetrics
-	250, // 889: header.Bizbot.ReportAction:output_type -> header.ActionrunMetrics
-	251, // 890: header.Bizbot.ListObjects:output_type -> header.ListObjectsResponse
-	252, // 891: header.Bizbot.ReportBot:output_type -> header.ReportBotResponse
-	132, // 892: header.Sendback.CreateWebhook:output_type -> header.Webhook
-	253, // 893: header.Sendback.PingWebhook:output_type -> header.WebhookTestResult
-	11,  // 894: header.Sendback.DeleteWebhook:output_type -> header.Empty
-	254, // 895: header.Sendback.ListWebhooks:output_type -> header.Webhooks
-	132, // 896: header.Sendback.ReadWebhook:output_type -> header.Webhook
-	132, // 897: header.Sendback.UpdateWebhook:output_type -> header.Webhook
-	132, // 898: header.Sendback.UpdateWebhookSecret:output_type -> header.Webhook
-	255, // 899: header.Sendback.ListRecentIndexDeliveries:output_type -> header.WebhookDeliveries
-	256, // 900: header.Sendback.GetDelivery:output_type -> header.WebhookDelivery
-	11,  // 901: header.Sendback.SendWebhookEvent:output_type -> header.Empty
-	11,  // 902: header.Notibox.SendNoti:output_type -> header.Empty
-	257, // 903: header.Notibox.ListNoties:output_type -> header.Notifications
-	11,  // 904: header.Notibox.MarkReadNoti:output_type -> header.Empty
-	11,  // 905: header.Notibox.MarkReadNotiTopic:output_type -> header.Empty
-	46,  // 906: header.Proder.ReadProduct:output_type -> header.Product
-	46,  // 907: header.Proder.CreateProduct:output_type -> header.Product
-	46,  // 908: header.Proder.UpdateProduct:output_type -> header.Product
-	11,  // 909: header.Proder.DeleteProduct:output_type -> header.Empty
-	258, // 910: header.Proder.ListProducts2:output_type -> header.Products
-	259, // 911: header.Proder.ImportProduct:output_type -> header.ImportProductResponse
-	260, // 912: header.Proder.ListProductCollections:output_type -> header.ProductCollections
-	139, // 913: header.Proder.CreateProductCollection:output_type -> header.ProductCollection
-	139, // 914: header.Proder.UpdateProductCollection:output_type -> header.ProductCollection
-	11,  // 915: header.Proder.DeleteProductCollection:output_type -> header.Empty
-	261, // 916: header.Proder.ListProductFeeds:output_type -> header.ProductFeeds
-	140, // 917: header.Proder.CreateProductFeed:output_type -> header.ProductFeed
-	140, // 918: header.Proder.UpdateProductFeed:output_type -> header.ProductFeed
-	11,  // 919: header.Proder.DeleteProductFeed:output_type -> header.Empty
-	262, // 920: header.Proder.ListProductCategories:output_type -> header.ProductCategories
-	29,  // 921: header.Proder.ReadOrder:output_type -> header.Order
-	29,  // 922: header.Proder.CreateOrder:output_type -> header.Order
-	29,  // 923: header.Proder.UpdateOrder:output_type -> header.Order
-	11,  // 924: header.Proder.DeleteOrder:output_type -> header.Empty
-	143, // 925: header.Proder.ListOrders:output_type -> header.Orders
-	263, // 926: header.Proder.CountOrders2:output_type -> header.CountOrdersResponse
-	143, // 927: header.Proder.ImportOrders:output_type -> header.Orders
-	48,  // 928: header.Proder.MakeOrderPayment:output_type -> header.Event
-	48,  // 929: header.Proder.DeleteOrderPayment:output_type -> header.Event
-	48,  // 930: header.Proder.AddOrderComment:output_type -> header.Event
-	48,  // 931: header.Proder.EditOrderComment:output_type -> header.Event
-	48,  // 932: header.Proder.DeleteOrderComment:output_type -> header.Event
-	264, // 933: header.Proder.ListOrderEvents:output_type -> header.OrderHistoryEntries
-	265, // 934: header.Proder.DownloadOrder:output_type -> header.File
-	1,   // 935: header.Proder.GetShopeeAuthUrl:output_type -> header.Id
-	266, // 936: header.Proder.AuthorizeShopeeShop:output_type -> header.ShopeeShop
-	11,  // 937: header.Proder.DeauthorizeShopeeShop:output_type -> header.Empty
-	267, // 938: header.Proder.SyncShopeeProducts:output_type -> header.ShopeeSyncProductResponse
-	11,  // 939: header.Proder.GHTKShippingStatus:output_type -> header.Empty
-	11,  // 940: header.Proder.GHNShippingStatus:output_type -> header.Empty
-	151, // 941: header.Proder.ShippingFee:output_type -> header.ShippingInfo
-	29,  // 942: header.Proder.ShipOrder:output_type -> header.Order
-	29,  // 943: header.Proder.UpdateShippingCode:output_type -> header.Order
-	29,  // 944: header.Proder.CancelShippingOrder:output_type -> header.Order
-	265, // 945: header.Proder.PrintShippingOrders:output_type -> header.File
-	11,  // 946: header.Proder.SeenOrder:output_type -> header.Empty
-	11,  // 947: header.Proder.FollowOrder:output_type -> header.Empty
-	11,  // 948: header.Proder.UnfollowOrder:output_type -> header.Empty
-	11,  // 949: header.Proder.TagOrder:output_type -> header.Empty
-	11,  // 950: header.Proder.UntagOrder:output_type -> header.Empty
-	152, // 951: header.Proder.ReadPipeline:output_type -> header.Pipeline
-	152, // 952: header.Proder.CreatePipeline:output_type -> header.Pipeline
-	152, // 953: header.Proder.UpdatePipeline:output_type -> header.Pipeline
-	11,  // 954: header.Proder.DeletePipeline:output_type -> header.Empty
-	268, // 955: header.Proder.ListPipelines:output_type -> header.Pipelines
-	11,  // 956: header.Proder.DeletePipelineStage:output_type -> header.Empty
-	152, // 957: header.Proder.PreselectPipeline:output_type -> header.Pipeline
-	143, // 958: header.Proder.ReportOrder:output_type -> header.Orders
-	11,  // 959: header.Proder.MoveOrderToPrimary:output_type -> header.Empty
-	51,  // 960: header.TaskMgr.ReadTask:output_type -> header.Task
-	51,  // 961: header.TaskMgr.CreateTask:output_type -> header.Task
-	51,  // 962: header.TaskMgr.UpdateTask:output_type -> header.Task
-	11,  // 963: header.TaskMgr.DeleteTask:output_type -> header.Empty
-	269, // 964: header.TaskMgr.ListTasks:output_type -> header.Tasks
-	11,  // 965: header.TaskMgr.SeenTask:output_type -> header.Empty
-	11,  // 966: header.TaskMgr.CloseTaskReminder:output_type -> header.Empty
-	11,  // 967: header.TaskMgr.MuteTask:output_type -> header.Empty
-	11,  // 968: header.TaskMgr.UnmuteTask:output_type -> header.Empty
-	48,  // 969: header.TaskMgr.AddTaskComment:output_type -> header.Event
-	48,  // 970: header.TaskMgr.EditTaskComment:output_type -> header.Event
-	48,  // 971: header.TaskMgr.DeleteTaskComment:output_type -> header.Event
-	270, // 972: header.TaskMgr.ListTaskComments:output_type -> header.TaskHistoryEntries
-	156, // 973: header.Speex.TextToSpeech:output_type -> header.TTSVoiceSelection
-	271, // 974: header.CampaignMgr.ListCampaigns:output_type -> header.Campaigns
-	157, // 975: header.CampaignMgr.ReadCampaign:output_type -> header.Campaign
-	157, // 976: header.CampaignMgr.CreateCampaign:output_type -> header.Campaign
-	157, // 977: header.CampaignMgr.UpdateCampaign:output_type -> header.Campaign
-	11,  // 978: header.CampaignMgr.DeleteCampaign:output_type -> header.Empty
-	11,  // 979: header.CampaignMgr.OnEvent:output_type -> header.Empty
-	272, // 980: header.CampaignMgr.ListCampaignSendLog:output_type -> header.CampaignSendLog
-	273, // 981: header.CampaignMgr.ReportBroadcastCampaign:output_type -> header.BroadcastCampaignMetrics
-	274, // 982: header.CampaignMgr.ListOutboundCallEntries:output_type -> header.OutboundCallEntries
-	160, // 983: header.CampaignMgr.UpdateOutboundCall:output_type -> header.OutboundCallEntry
-	275, // 984: header.CampaignMgr.ImportOutboundCall:output_type -> header.ImportOutboundCallEntryResponse
-	160, // 985: header.CampaignMgr.GetOutboundCall:output_type -> header.OutboundCallEntry
-	11,  // 986: header.CampaignMgr.RemoveOutboudCall:output_type -> header.Empty
-	276, // 987: header.CampaignMgr.ReportOutboundCalls:output_type -> header.OutboundCallReportResponse
-	11,  // 988: header.CampaignMgr.ReassignOutboundCall:output_type -> header.Empty
-	277, // 989: header.CreditMgr.TrySpendCredit:output_type -> header.TrySpendCreditResponse
-	278, // 990: header.CreditMgr.ReportCreditSpend:output_type -> header.CreditSpendReportResponse
-	279, // 991: header.CreditMgr.ListCreditSpendLog:output_type -> header.CreditSpendEntries
-	181, // 992: header.CreditMgr.ListCredits:output_type -> header.Response
-	181, // 993: header.CreditMgr.AddCredit:output_type -> header.Response
-	181, // 994: header.CreditMgr.DeleteCredit:output_type -> header.Response
-	181, // 995: header.CreditMgr.UpdateCredit:output_type -> header.Response
-	280, // 996: header.FormMgr.ListForms:output_type -> header.Forms
-	167, // 997: header.FormMgr.CreateForm:output_type -> header.Form
-	167, // 998: header.FormMgr.UpdateForm:output_type -> header.Form
-	11,  // 999: header.FormMgr.DeleteForm:output_type -> header.Empty
-	281, // 1000: header.FormMgr.ReportForm:output_type -> header.FormReportResponse
-	282, // 1001: header.FormMgr.ListFormSubmissions:output_type -> header.FormSubmissions
-	170, // 1002: header.Scheduler.RegisterTask:output_type -> header.SchedulerTask
-	181, // 1003: header.Scheduler.UnregisterTask:output_type -> header.Response
-	502, // [502:1004] is the sub-list for method output_type
-	0,   // [0:502] is the sub-list for method input_type
+	1,   // 241: header.TicketMgr.RecoverTicket:input_type -> header.Id
+	1,   // 242: header.TicketMgr.GetTicket:input_type -> header.Id
+	82,  // 243: header.TicketMgr.ListTickets:input_type -> header.ListTicketRequest
+	16,  // 244: header.TicketMgr.MatchTickets:input_type -> header.Ids
+	83,  // 245: header.TicketMgr.CreateTicketView:input_type -> header.TicketView
+	83,  // 246: header.TicketMgr.UpdateTicketView:input_type -> header.TicketView
+	1,   // 247: header.TicketMgr.DeleteTicketView:input_type -> header.Id
+	1,   // 248: header.TicketMgr.GetTicketView:input_type -> header.Id
+	11,  // 249: header.TicketMgr.ListTicketViews:input_type -> header.Empty
+	84,  // 250: header.TicketMgr.CreateTicketTemplate:input_type -> header.TicketTemplate
+	84,  // 251: header.TicketMgr.UpdateTicketTemplate:input_type -> header.TicketTemplate
+	1,   // 252: header.TicketMgr.DeleteTicketTemplate:input_type -> header.Id
+	1,   // 253: header.TicketMgr.GetTicketTemplate:input_type -> header.Id
+	11,  // 254: header.TicketMgr.ListTicketTemplates:input_type -> header.Empty
+	48,  // 255: header.TicketMgr.PongTicketEvent:input_type -> header.Event
+	65,  // 256: header.TicketMgr.TagTicket:input_type -> header.TagRequest
+	65,  // 257: header.TicketMgr.UntagTicket:input_type -> header.TagRequest
+	66,  // 258: header.TicketMgr.JoinTicket:input_type -> header.ConversationMember
+	66,  // 259: header.TicketMgr.LeftTicket:input_type -> header.ConversationMember
+	16,  // 260: header.TicketMgr.ReadTickets:input_type -> header.Ids
+	16,  // 261: header.TicketMgr.UnreadTickets:input_type -> header.Ids
+	16,  // 262: header.TicketMgr.SnoozeTickets:input_type -> header.Ids
+	16,  // 263: header.TicketMgr.UnsnoozeTickets:input_type -> header.Ids
+	48,  // 264: header.TicketMgr.SendTicketEvent:input_type -> header.Event
+	71,  // 265: header.TicketMgr.ListTicketEvents:input_type -> header.ListConversationEventsRequest
+	73,  // 266: header.TicketMgr.UpdateTicketTypeMember:input_type -> header.ResourceGroupMember
+	73,  // 267: header.TicketMgr.RemoveTicketTypeMember:input_type -> header.ResourceGroupMember
+	85,  // 268: header.TemplateMgr.CreateTemplate:input_type -> header.Template
+	85,  // 269: header.TemplateMgr.UpdateTemplate:input_type -> header.Template
+	1,   // 270: header.TemplateMgr.DeleteTemplate:input_type -> header.Id
+	1,   // 271: header.TemplateMgr.GetTemplate:input_type -> header.Id
+	86,  // 272: header.TemplateMgr.ListTemplates:input_type -> header.SearchTemplate
+	1,   // 273: header.TemplateMgr.PickTemplate:input_type -> header.Id
+	87,  // 274: header.TemplateMgr.CreateModal:input_type -> header.ConversationModal
+	87,  // 275: header.TemplateMgr.UpdateModal:input_type -> header.ConversationModal
+	1,   // 276: header.TemplateMgr.DeleteModal:input_type -> header.Id
+	1,   // 277: header.TemplateMgr.GetModal:input_type -> header.Id
+	1,   // 278: header.TemplateMgr.ListModals:input_type -> header.Id
+	88,  // 279: header.TemplateMgr.PickModal:input_type -> header.ConversationModalPickRequest
+	89,  // 280: header.TagMgr.CreateTag:input_type -> header.Tag
+	89,  // 281: header.TagMgr.UpdateTag:input_type -> header.Tag
+	1,   // 282: header.TagMgr.DeleteTag:input_type -> header.Id
+	1,   // 283: header.TagMgr.ListTags:input_type -> header.Id
+	1,   // 284: header.TagMgr.GetTag:input_type -> header.Id
+	1,   // 285: header.Noti5Service.ReadNotificationSetting:input_type -> header.Id
+	90,  // 286: header.Noti5Service.UpdateNotificationSetting:input_type -> noti5.Setting
+	91,  // 287: header.Noti5Service.Noti:input_type -> header.PushNoti
+	92,  // 288: header.Noti5Service.AddToken:input_type -> noti5.Token
+	92,  // 289: header.Noti5Service.RemoveToken:input_type -> noti5.Token
+	92,  // 290: header.Noti5Service.CheckTokenExists:input_type -> noti5.Token
+	93,  // 291: header.PaymentMgr.SearchSub:input_type -> account.SearchSubRequest
+	1,   // 292: header.PaymentMgr.GetSub:input_type -> header.Id
+	94,  // 293: header.PaymentMgr.Purchase:input_type -> payment.PurchaseRequest
+	95,  // 294: header.PaymentMgr.UpdateSubscription:input_type -> payment.Subscription
+	1,   // 295: header.PaymentMgr.GetSubscription:input_type -> header.Id
+	96,  // 296: header.PaymentMgr.Pay:input_type -> payment.PayRequest
+	97,  // 297: header.PaymentMgr.CreateInvoice:input_type -> payment.Invoice
+	97,  // 298: header.PaymentMgr.UpdateInvoice:input_type -> payment.Invoice
+	98,  // 299: header.PaymentMgr.FilterInvoices:input_type -> payment.ListInvoiceRequest
+	95,  // 300: header.PaymentMgr.DraftInvoice:input_type -> payment.Subscription
+	99,  // 301: header.PaymentMgr.ListComments:input_type -> payment.ListCommentsRequest
+	100, // 302: header.PaymentMgr.AddComment:input_type -> payment.Comment
+	1,   // 303: header.PaymentMgr.ExportInvoice:input_type -> header.Id
+	97,  // 304: header.PaymentMgr.ConvertInvoiceToHtml:input_type -> payment.Invoice
+	101, // 305: header.PaymentMgr.GetExchangeRate:input_type -> header.ExchangeRate
+	96,  // 306: header.PaymentMgr.TransferMoney:input_type -> payment.PayRequest
+	102, // 307: header.PaymentMgr.ListLogs:input_type -> payment.ListLogsRequest
+	103, // 308: header.PaymentMgr.SearchReferral:input_type -> payment.SearchReferredRequest
+	1,   // 309: header.PaymentMgr.GetReferral:input_type -> header.Id
+	11,  // 310: header.PaymentMgr.ListTopReferral:input_type -> header.Empty
+	104, // 311: header.PaymentMgr.UpdateReferral:input_type -> payment.Referral
+	1,   // 312: header.PaymentMgr.ListAccountReferred:input_type -> header.Id
+	1,   // 313: header.PaymentMgr.ListBillByAccountReferred:input_type -> header.Id
+	1,   // 314: header.PaymentMgr.ListPaidForAgentReferrer:input_type -> header.Id
+	105, // 315: header.PaymentMgr.PaidForAgentReferrer:input_type -> payment.LogPaidForAgentReferrer
+	106, // 316: header.Pubsub.Fire:input_type -> header.PsMessage
+	107, // 317: header.Pubsub.Poll:input_type -> header.RealtimeSubscription
+	107, // 318: header.Pubsub.Subscribe:input_type -> header.RealtimeSubscription
+	1,   // 319: header.FabikonService.ReadFbFanpageSetting:input_type -> header.Id
+	108, // 320: header.FabikonService.UpdateFbFanpageSetting:input_type -> header.FbFanpageSetting
+	1,   // 321: header.FabikonService.ListFbFanpageSettings:input_type -> header.Id
+	1,   // 322: header.FabikonService.ListFbPosts:input_type -> header.Id
+	109, // 323: header.FabikonService.GetFbPost:input_type -> header.FacebookPost
+	0,   // 324: header.FabikonService.SendEventToFacebook:input_type -> header.Events
+	37,  // 325: header.FabikonService.RemoveFbUserLabel:input_type -> header.User
+	37,  // 326: header.FabikonService.AddFbUserLabel:input_type -> header.User
+	1,   // 327: header.FabikonService.GenerateRefLink:input_type -> header.Id
+	1,   // 328: header.ChannelConnector.GetIntegration:input_type -> header.Id
+	72,  // 329: header.ChannelConnector.UpdateIntegration:input_type -> header.Integration
+	0,   // 330: header.ZalokonService.SendEventToZalo:input_type -> header.Events
+	1,   // 331: header.ZalokonService.ListZnsTemplates:input_type -> header.Id
+	110, // 332: header.ZalokonService.RequestZaloUserInfo:input_type -> header.ZaloUserRequest
+	110, // 333: header.ZalokonService.RequestZaloUserToMakeCall:input_type -> header.ZaloUserRequest
+	110, // 334: header.ZalokonService.MakeSureZaloUser:input_type -> header.ZaloUserRequest
+	110, // 335: header.ZalokonService.GetZaloUserCallConsent:input_type -> header.ZaloUserRequest
+	111, // 336: header.ZalokonService.SendZNS:input_type -> header.ZnsRequest
+	112, // 337: header.ZalokonService.CreateZaloApplication:input_type -> header.ZaloApplication
+	1,   // 338: header.ZalokonService.GetZaloApplication:input_type -> header.Id
+	112, // 339: header.ZalokonService.UpdateZaloApplication:input_type -> header.ZaloApplication
+	1,   // 340: header.ZalokonService.DeleteZaloApplication:input_type -> header.Id
+	11,  // 341: header.ZalokonService.ListZaloApplications:input_type -> header.Empty
+	0,   // 342: header.MailkonService.SendEmail:input_type -> header.Events
+	72,  // 343: header.MailkonService.CreateEmailIdentity:input_type -> header.Integration
+	72,  // 344: header.MailkonService.DeleteEmailIdentity:input_type -> header.Integration
+	72,  // 345: header.MailkonService.ResendSenderVerificationEmail:input_type -> header.Integration
+	72,  // 346: header.MailkonService.VerifySenderDomain:input_type -> header.Integration
+	1,   // 347: header.MailkonService.ListBusinessEmailAddresses:input_type -> header.Id
+	113, // 348: header.MailkonService.UpsertBusinessEmailAddress:input_type -> header.BusinessEmailAddress
+	1,   // 349: header.MailkonService.DeleteBusinessEmailAddress:input_type -> header.Id
+	114, // 350: header.MailkonService.TrackLink:input_type -> header.LinkData
+	115, // 351: header.MailkonService.ListBouncedEmails:input_type -> header.BouncedEmail
+	115, // 352: header.MailkonService.UpsertBouncedEmail:input_type -> header.BouncedEmail
+	1,   // 353: header.MailkonService.DeleteBouncedEmail:input_type -> header.Id
+	116, // 354: header.MailkonService.ListBlockedEmails:input_type -> header.BlockedEmail
+	116, // 355: header.MailkonService.BlockEmail:input_type -> header.BlockedEmail
+	1,   // 356: header.MailkonService.UnblockEmail:input_type -> header.Id
+	1,   // 357: header.WidgetService.Read:input_type -> header.Id
+	117, // 358: header.WidgetService.Update:input_type -> header.WidgetSetting
+	1,   // 359: header.WidgetService.ReadUserSetting:input_type -> header.Id
+	1,   // 360: header.WidgetService.ReadAccountSetting:input_type -> header.Id
+	118, // 361: header.WidgetService.SubmitImpression:input_type -> header.Impression
+	119, // 362: header.WidgetService.SubmitConversion:input_type -> header.Conversion
+	120, // 363: header.WidgetService.SubmitUserCampaignStatus:input_type -> header.UserCampaignStatus
+	121, // 364: header.WidgetService.ReportCampaign:input_type -> header.ReportCampaignRequest
+	122, // 365: header.WidgetService.ListConversions:input_type -> header.ConversionRequest
+	122, // 366: header.WidgetService.ExportConversions:input_type -> header.ConversionRequest
+	123, // 367: header.WidgetService.UploadImage:input_type -> header.UploadedImage
+	1,   // 368: header.WidgetService.ListUploadedImage:input_type -> header.Id
+	123, // 369: header.WidgetService.DeleteUploadedImage:input_type -> header.UploadedImage
+	1,   // 370: header.WidgetService.ListWebPlugins:input_type -> header.Id
+	124, // 371: header.WidgetService.UpdateWebPlugin:input_type -> header.WebPlugin
+	124, // 372: header.WidgetService.UpdateWebPluginEnabled:input_type -> header.WebPlugin
+	124, // 373: header.WidgetService.CreateWebPlugin:input_type -> header.WebPlugin
+	1,   // 374: header.WidgetService.DeleteWebPlugin:input_type -> header.Id
+	124, // 375: header.WidgetService.UpdateWebPluginTemplate:input_type -> header.WebPlugin
+	1,   // 376: header.WidgetService.ListWebPluginTemplates:input_type -> header.Id
+	1,   // 377: header.WidgetService.DeleteWebPluginTemplate:input_type -> header.Id
+	125, // 378: header.WidgetService.ReportWebPlugin:input_type -> header.ReportWebPluginRequest
+	1,   // 379: header.WidgetService.SearchImages:input_type -> header.Id
+	1,   // 380: header.WidgetService.ListNotifProfiles:input_type -> header.Id
+	1,   // 381: header.WidgetService.ListNotifBackgrounds:input_type -> header.Id
+	126, // 382: header.Bizbot.ListBots:input_type -> header.BotsRequest
+	1,   // 383: header.Bizbot.GetBot:input_type -> header.Id
+	127, // 384: header.Bizbot.UpdateBotRunState:input_type -> header.Bot
+	127, // 385: header.Bizbot.CreateBot:input_type -> header.Bot
+	127, // 386: header.Bizbot.UpdateBot:input_type -> header.Bot
+	1,   // 387: header.Bizbot.DeleteBot:input_type -> header.Id
+	128, // 388: header.Bizbot.OnEvent:input_type -> header.BotRunRequest
+	128, // 389: header.Bizbot.StartBot:input_type -> header.BotRunRequest
+	128, // 390: header.Bizbot.StopBot:input_type -> header.BotRunRequest
+	128, // 391: header.Bizbot.TryAction:input_type -> header.BotRunRequest
+	129, // 392: header.Bizbot.ReportBot2:input_type -> header.BotrunMetricsRequest
+	130, // 393: header.Bizbot.ReportAction:input_type -> header.ActionrunMetricsRequest
+	131, // 394: header.Bizbot.ListObjects:input_type -> header.ListObjectsRequest
+	132, // 395: header.Bizbot.ReportBot:input_type -> header.ReportBotRequest
+	133, // 396: header.Sendback.CreateWebhook:input_type -> header.Webhook
+	1,   // 397: header.Sendback.PingWebhook:input_type -> header.Id
+	1,   // 398: header.Sendback.DeleteWebhook:input_type -> header.Id
+	1,   // 399: header.Sendback.ListWebhooks:input_type -> header.Id
+	1,   // 400: header.Sendback.ReadWebhook:input_type -> header.Id
+	133, // 401: header.Sendback.UpdateWebhook:input_type -> header.Webhook
+	1,   // 402: header.Sendback.UpdateWebhookSecret:input_type -> header.Id
+	134, // 403: header.Sendback.ListRecentIndexDeliveries:input_type -> header.RecentIndexDeliveryRequest
+	135, // 404: header.Sendback.GetDelivery:input_type -> header.DeliveryRequest
+	48,  // 405: header.Sendback.SendWebhookEvent:input_type -> header.Event
+	136, // 406: header.Notibox.SendNoti:input_type -> header.Notification
+	137, // 407: header.Notibox.ListNoties:input_type -> header.ListNotiRequest
+	1,   // 408: header.Notibox.MarkReadNoti:input_type -> header.Id
+	1,   // 409: header.Notibox.MarkReadNotiTopic:input_type -> header.Id
+	46,  // 410: header.Proder.ReadProduct:input_type -> header.Product
+	46,  // 411: header.Proder.CreateProduct:input_type -> header.Product
+	46,  // 412: header.Proder.UpdateProduct:input_type -> header.Product
+	1,   // 413: header.Proder.DeleteProduct:input_type -> header.Id
+	138, // 414: header.Proder.ListProducts2:input_type -> header.ProductsRequest
+	139, // 415: header.Proder.ImportProduct:input_type -> header.ImportProductRequest
+	16,  // 416: header.Proder.ListProductCollections:input_type -> header.Ids
+	140, // 417: header.Proder.CreateProductCollection:input_type -> header.ProductCollection
+	140, // 418: header.Proder.UpdateProductCollection:input_type -> header.ProductCollection
+	1,   // 419: header.Proder.DeleteProductCollection:input_type -> header.Id
+	1,   // 420: header.Proder.ListProductFeeds:input_type -> header.Id
+	141, // 421: header.Proder.CreateProductFeed:input_type -> header.ProductFeed
+	141, // 422: header.Proder.UpdateProductFeed:input_type -> header.ProductFeed
+	1,   // 423: header.Proder.DeleteProductFeed:input_type -> header.Id
+	16,  // 424: header.Proder.ListProductCategories:input_type -> header.Ids
+	1,   // 425: header.Proder.ReadOrder:input_type -> header.Id
+	29,  // 426: header.Proder.CreateOrder:input_type -> header.Order
+	29,  // 427: header.Proder.UpdateOrder:input_type -> header.Order
+	1,   // 428: header.Proder.DeleteOrder:input_type -> header.Id
+	142, // 429: header.Proder.ListOrders:input_type -> header.OrdersRequest
+	143, // 430: header.Proder.CountOrders2:input_type -> header.CountOrdersRequest
+	144, // 431: header.Proder.ImportOrders:input_type -> header.Orders
+	145, // 432: header.Proder.MakeOrderPayment:input_type -> header.Bill
+	146, // 433: header.Proder.DeleteOrderPayment:input_type -> header.Key
+	48,  // 434: header.Proder.AddOrderComment:input_type -> header.Event
+	48,  // 435: header.Proder.EditOrderComment:input_type -> header.Event
+	146, // 436: header.Proder.DeleteOrderComment:input_type -> header.Key
+	1,   // 437: header.Proder.ListOrderEvents:input_type -> header.Id
+	147, // 438: header.Proder.DownloadOrder:input_type -> header.DownloadOrderRequest
+	1,   // 439: header.Proder.GetShopeeAuthUrl:input_type -> header.Id
+	148, // 440: header.Proder.AuthorizeShopeeShop:input_type -> header.AuthorizeShopeeRequest
+	1,   // 441: header.Proder.DeauthorizeShopeeShop:input_type -> header.Id
+	149, // 442: header.Proder.SyncShopeeProducts:input_type -> header.ShopeeSyncProductRequest
+	150, // 443: header.Proder.GHTKShippingStatus:input_type -> header.GHTKOrder
+	151, // 444: header.Proder.GHNShippingStatus:input_type -> header.GHNOrder2
+	152, // 445: header.Proder.ShippingFee:input_type -> header.ShippingInfo
+	1,   // 446: header.Proder.ShipOrder:input_type -> header.Id
+	29,  // 447: header.Proder.UpdateShippingCode:input_type -> header.Order
+	1,   // 448: header.Proder.CancelShippingOrder:input_type -> header.Id
+	16,  // 449: header.Proder.PrintShippingOrders:input_type -> header.Ids
+	1,   // 450: header.Proder.SeenOrder:input_type -> header.Id
+	1,   // 451: header.Proder.FollowOrder:input_type -> header.Id
+	1,   // 452: header.Proder.UnfollowOrder:input_type -> header.Id
+	65,  // 453: header.Proder.TagOrder:input_type -> header.TagRequest
+	65,  // 454: header.Proder.UntagOrder:input_type -> header.TagRequest
+	1,   // 455: header.Proder.ReadPipeline:input_type -> header.Id
+	153, // 456: header.Proder.CreatePipeline:input_type -> header.Pipeline
+	153, // 457: header.Proder.UpdatePipeline:input_type -> header.Pipeline
+	1,   // 458: header.Proder.DeletePipeline:input_type -> header.Id
+	16,  // 459: header.Proder.ListPipelines:input_type -> header.Ids
+	154, // 460: header.Proder.DeletePipelineStage:input_type -> header.PipelineStage
+	1,   // 461: header.Proder.PreselectPipeline:input_type -> header.Id
+	155, // 462: header.Proder.ReportOrder:input_type -> header.OrderMetricsRequest
+	16,  // 463: header.Proder.MoveOrderToPrimary:input_type -> header.Ids
+	1,   // 464: header.TaskMgr.ReadTask:input_type -> header.Id
+	51,  // 465: header.TaskMgr.CreateTask:input_type -> header.Task
+	51,  // 466: header.TaskMgr.UpdateTask:input_type -> header.Task
+	1,   // 467: header.TaskMgr.DeleteTask:input_type -> header.Id
+	156, // 468: header.TaskMgr.ListTasks:input_type -> header.TasksRequest
+	1,   // 469: header.TaskMgr.SeenTask:input_type -> header.Id
+	1,   // 470: header.TaskMgr.CloseTaskReminder:input_type -> header.Id
+	1,   // 471: header.TaskMgr.MuteTask:input_type -> header.Id
+	1,   // 472: header.TaskMgr.UnmuteTask:input_type -> header.Id
+	48,  // 473: header.TaskMgr.AddTaskComment:input_type -> header.Event
+	48,  // 474: header.TaskMgr.EditTaskComment:input_type -> header.Event
+	146, // 475: header.TaskMgr.DeleteTaskComment:input_type -> header.Key
+	1,   // 476: header.TaskMgr.ListTaskComments:input_type -> header.Id
+	157, // 477: header.Speex.TextToSpeech:input_type -> header.TTSVoiceSelection
+	16,  // 478: header.CampaignMgr.ListCampaigns:input_type -> header.Ids
+	1,   // 479: header.CampaignMgr.ReadCampaign:input_type -> header.Id
+	158, // 480: header.CampaignMgr.CreateCampaign:input_type -> header.Campaign
+	158, // 481: header.CampaignMgr.UpdateCampaign:input_type -> header.Campaign
+	1,   // 482: header.CampaignMgr.DeleteCampaign:input_type -> header.Id
+	48,  // 483: header.CampaignMgr.OnEvent:input_type -> header.Event
+	159, // 484: header.CampaignMgr.ListCampaignSendLog:input_type -> header.CampaignSendLogRequest
+	1,   // 485: header.CampaignMgr.ReportBroadcastCampaign:input_type -> header.Id
+	160, // 486: header.CampaignMgr.ListOutboundCallEntries:input_type -> header.ListOutboundCallRequest
+	161, // 487: header.CampaignMgr.UpdateOutboundCall:input_type -> header.OutboundCallEntry
+	162, // 488: header.CampaignMgr.ImportOutboundCall:input_type -> header.ImportOutboundCallEntryRequest
+	161, // 489: header.CampaignMgr.GetOutboundCall:input_type -> header.OutboundCallEntry
+	161, // 490: header.CampaignMgr.RemoveOutboudCall:input_type -> header.OutboundCallEntry
+	163, // 491: header.CampaignMgr.ReportOutboundCalls:input_type -> header.OutboundCallReportRequest
+	160, // 492: header.CampaignMgr.ReassignOutboundCall:input_type -> header.ListOutboundCallRequest
+	164, // 493: header.CreditMgr.TrySpendCredit:input_type -> header.CreditSpendEntry
+	165, // 494: header.CreditMgr.ReportCreditSpend:input_type -> header.CreditSpendReportRequest
+	166, // 495: header.CreditMgr.ListCreditSpendLog:input_type -> header.CreditSpendLogRequest
+	1,   // 496: header.CreditMgr.ListCredits:input_type -> header.Id
+	167, // 497: header.CreditMgr.AddCredit:input_type -> header.Credit
+	1,   // 498: header.CreditMgr.DeleteCredit:input_type -> header.Id
+	167, // 499: header.CreditMgr.UpdateCredit:input_type -> header.Credit
+	1,   // 500: header.FormMgr.ListForms:input_type -> header.Id
+	168, // 501: header.FormMgr.CreateForm:input_type -> header.Form
+	168, // 502: header.FormMgr.UpdateForm:input_type -> header.Form
+	1,   // 503: header.FormMgr.DeleteForm:input_type -> header.Id
+	169, // 504: header.FormMgr.ReportForm:input_type -> header.FormReportRequest
+	170, // 505: header.FormMgr.ListFormSubmissions:input_type -> header.ListFormSubmissionRequest
+	171, // 506: header.Scheduler.RegisterTask:input_type -> header.SchedulerTask
+	171, // 507: header.Scheduler.UnregisterTask:input_type -> header.SchedulerTask
+	11,  // 508: header.GooglekonService.SendEventToGoogle:output_type -> header.Empty
+	2,   // 509: header.GooglekonService.ReadGoogleLocationSetting:output_type -> header.GoogleLocationSetting
+	2,   // 510: header.GooglekonService.UpdateGoogleLocationSetting:output_type -> header.GoogleLocationSetting
+	172, // 511: header.GooglekonService.ListGoogleLocationSettings:output_type -> header.GoogleLocationSettings
+	11,  // 512: header.KafkaConsumer.Consume:output_type -> header.Empty
+	173, // 513: header.RateLimit.SyncRateLimit:output_type -> header.RateLimitSyncResponse
+	11,  // 514: header.DocSearch.IndexConvo:output_type -> header.Empty
+	174, // 515: header.DocSearch.SearchConvos:output_type -> header.DocSearchResponse
+	11,  // 516: header.DocSearch.Index:output_type -> header.Empty
+	16,  // 517: header.DocSearch.Search:output_type -> header.Ids
+	175, // 518: header.DocSearch.ReportConversation:output_type -> header.ConversationMetrics
+	176, // 519: header.DocSearch.Report:output_type -> header.ConvoReportResponse
+	177, // 520: header.DocSearch.ListIds:output_type -> header.Conversations
+	177, // 521: header.DocSearch.ListConversationIds:output_type -> header.Conversations
+	178, // 522: header.DocSearch.ReportCall:output_type -> header.CallMetrics
+	177, // 523: header.DocSearch.ListCallIds:output_type -> header.Conversations
+	179, // 524: header.DocSearch.ReportAgent:output_type -> header.AgentMetrics
+	11,  // 525: header.DocSearch.HealthCheckReport:output_type -> header.Empty
+	11,  // 526: header.DocSearch.HealthCheckIndex:output_type -> header.Empty
+	13,  // 527: header.NumberRegistry.Compact:output_type -> header.Number
+	12,  // 528: header.NumberRegistry.Uncompact:output_type -> header.String
+	14,  // 529: header.NumberRegistry.CompactM:output_type -> header.StrNumM
+	13,  // 530: header.NumberRegistry.Shorten:output_type -> header.Number
+	12,  // 531: header.NumberRegistry.Lookup:output_type -> header.String
+	1,   // 532: header.NumberRegistry.NewID2:output_type -> header.Id
+	180, // 533: header.Map.Predict:output_type -> header.AddressAutocompleteResponses
+	27,  // 534: header.Map.LookupAddress:output_type -> header.Address
+	181, // 535: header.Map.PredictAddress:output_type -> header.Addresses
+	181, // 536: header.Map.ListDistricts:output_type -> header.Addresses
+	181, // 537: header.Map.ListProvinces:output_type -> header.Addresses
+	181, // 538: header.Map.ListWards:output_type -> header.Addresses
+	181, // 539: header.Map.ListStreets:output_type -> header.Addresses
+	181, // 540: header.Map.ListAddresses:output_type -> header.Addresses
+	27,  // 541: header.Map.ReadAddress:output_type -> header.Address
+	17,  // 542: header.AccountMgr.CreateGroup:output_type -> header.AgentGroup
+	17,  // 543: header.AccountMgr.UpdateGroup:output_type -> header.AgentGroup
+	17,  // 544: header.AccountMgr.GetGroup:output_type -> header.AgentGroup
+	11,  // 545: header.AccountMgr.RequestPassword:output_type -> header.Empty
+	19,  // 546: header.AccountMgr.UpdatePassword:output_type -> account.Agent
+	19,  // 547: header.AccountMgr.UpdateAgent:output_type -> account.Agent
+	19,  // 548: header.AccountMgr.DeleteAgent:output_type -> account.Agent
+	20,  // 549: header.AccountMgr.DeleteAccount:output_type -> account.Account
+	20,  // 550: header.AccountMgr.SubizUpdateAccount:output_type -> account.Account
+	11,  // 551: header.AccountMgr.RequestChangeEmail:output_type -> header.Empty
+	19,  // 552: header.AccountMgr.ConfirmChangeEmail:output_type -> account.Agent
+	19,  // 553: header.AccountMgr.AcceptInvitation:output_type -> account.Agent
+	19,  // 554: header.AccountMgr.GetInvitation:output_type -> account.Agent
+	19,  // 555: header.AccountMgr.InviteAgent:output_type -> account.Agent
+	19,  // 556: header.AccountMgr.GetAgent:output_type -> account.Agent
+	19,  // 557: header.AccountMgr.LookupAgentById:output_type -> account.Agent
+	20,  // 558: header.AccountMgr.ConfirmAccount:output_type -> account.Account
+	20,  // 559: header.AccountMgr.GetAccount:output_type -> account.Account
+	20,  // 560: header.AccountMgr.UpdateAccount:output_type -> account.Account
+	20,  // 561: header.AccountMgr.CreateAccount:output_type -> account.Account
+	182, // 562: header.AccountMgr.ListAgents:output_type -> header.Response
+	11,  // 563: header.AccountMgr.DeleteGroup:output_type -> header.Empty
+	183, // 564: header.AccountMgr.ListGroups:output_type -> header.AgentGroups
+	19,  // 565: header.AccountMgr.ChangeEmail:output_type -> account.Agent
+	184, // 566: header.AccountMgr.SyncPublicHolidays:output_type -> account.BusinessHours
+	19,  // 567: header.AccountMgr.TransferOwner:output_type -> account.Agent
+	24,  // 568: header.AccountMgr.CheckLoginSession:output_type -> header.LoginSession
+	185, // 569: header.AccountMgr.ListLoginSessions:output_type -> header.LoginSessions
+	185, // 570: header.AccountMgr.ListApiKeys:output_type -> header.LoginSessions
+	11,  // 571: header.AccountMgr.LogoutSession:output_type -> header.Empty
+	24,  // 572: header.AccountMgr.CreateApiKey:output_type -> header.LoginSession
+	186, // 573: header.AccountMgr.GetLanguage:output_type -> header.Lang
+	25,  // 574: header.AccountMgr.UpdateLanguage:output_type -> header.LangMessage
+	26,  // 575: header.AccountMgr.GetShopSetting:output_type -> header.ShopSetting
+	26,  // 576: header.AccountMgr.UpdateShopSetting:output_type -> header.ShopSetting
+	187, // 577: header.AccountMgr.ReadCurrency:output_type -> header.Currency
+	11,  // 578: header.AccountMgr.AutoSyncCurrency:output_type -> header.Empty
+	181, // 579: header.AccountMgr.ListShopAddresses:output_type -> header.Addresses
+	27,  // 580: header.AccountMgr.CreateShopAddress:output_type -> header.Address
+	27,  // 581: header.AccountMgr.UpdateShopAddress:output_type -> header.Address
+	11,  // 582: header.AccountMgr.DeleteShopAddress:output_type -> header.Empty
+	188, // 583: header.AccountMgr.ListTaxes:output_type -> header.Taxes
+	28,  // 584: header.AccountMgr.CreateTax:output_type -> header.Tax
+	28,  // 585: header.AccountMgr.UpdateTax:output_type -> header.Tax
+	11,  // 586: header.AccountMgr.DeleteTax:output_type -> header.Empty
+	189, // 587: header.AccountMgr.CheckShippingPolicy:output_type -> header.ShippingPolicies
+	189, // 588: header.AccountMgr.ListShippingPolicies:output_type -> header.ShippingPolicies
+	30,  // 589: header.AccountMgr.CreateShippingPolicy:output_type -> header.ShippingPolicy
+	30,  // 590: header.AccountMgr.UpdateShippingPolicy:output_type -> header.ShippingPolicy
+	11,  // 591: header.AccountMgr.DeleteShippingPolicy:output_type -> header.Empty
+	31,  // 592: header.AccountMgr.CreateCancellationCode:output_type -> header.CancellationCode
+	190, // 593: header.AccountMgr.ListCancellationCodes:output_type -> header.CancellationCodes
+	31,  // 594: header.AccountMgr.UpdateCancellationCode:output_type -> header.CancellationCode
+	11,  // 595: header.AccountMgr.MakeDefaultTax:output_type -> header.Empty
+	191, // 596: header.AccountMgr.ListPaymentMethods:output_type -> header.PaymentMethods
+	32,  // 597: header.AccountMgr.CreatePaymentMethod:output_type -> header.PaymentMethod
+	32,  // 598: header.AccountMgr.UpdatePaymentMethod:output_type -> header.PaymentMethod
+	11,  // 599: header.AccountMgr.DeletePaymentMethod:output_type -> header.Empty
+	11,  // 600: header.AccountMgr.MakeDefaultPaymentMethod:output_type -> header.Empty
+	192, // 601: header.AccountMgr.ListIntegratedShippingProviders:output_type -> header.IntegratedShippings
+	11,  // 602: header.AccountMgr.DeintegrateShippingProvider:output_type -> header.Empty
+	33,  // 603: header.AccountMgr.IntegrateShippingProvider:output_type -> header.IntegratedShipping
+	33,  // 604: header.AccountMgr.SendGHNAffiliateOTP:output_type -> header.IntegratedShipping
+	33,  // 605: header.AccountMgr.EnterGHNAffiliateOTP:output_type -> header.IntegratedShipping
+	34,  // 606: header.AccountMgr.UpdateAgentPresence:output_type -> account.Presence
+	193, // 607: header.AccountMgr.ListAgentPresences:output_type -> account.Presences
+	194, // 608: header.AccountMgr.ReportAvailibilities:output_type -> header.ReportResponse
+	1,   // 609: header.AccountMgr.NewID:output_type -> header.Id
+	1,   // 610: header.AccountMgr.LockLogin:output_type -> header.Id
+	1,   // 611: header.AccountMgr.UnlockLogin:output_type -> header.Id
+	195, // 612: header.AccountMgr.ListBills:output_type -> payment.Bills
+	37,  // 613: header.UserMgr.MergeUser:output_type -> header.User
+	11,  // 614: header.UserMgr.DetachUser:output_type -> header.Empty
+	37,  // 615: header.UserMgr.CreateUser2:output_type -> header.User
+	37,  // 616: header.UserMgr.UpdateUser:output_type -> header.User
+	196, // 617: header.UserMgr.TryUpdateUser:output_type -> header.TryUpdateUserResult
+	11,  // 618: header.UserMgr.RemoveUser:output_type -> header.Empty
+	11,  // 619: header.UserMgr.RestoreUser:output_type -> header.Empty
+	37,  // 620: header.UserMgr.ReadUser:output_type -> header.User
+	37,  // 621: header.UserMgr.ReadOrCreateUserByContactProfile:output_type -> header.User
+	36,  // 622: header.UserMgr.MatchUsers:output_type -> header.Users
+	37,  // 623: header.UserMgr.BanUser:output_type -> header.User
+	37,  // 624: header.UserMgr.UnbanUser:output_type -> header.User
+	36,  // 625: header.UserMgr.LookupByPhone:output_type -> header.Users
+	38,  // 626: header.UserMgr.UpdateView:output_type -> header.UserView
+	38,  // 627: header.UserMgr.CreateView:output_type -> header.UserView
+	11,  // 628: header.UserMgr.DeleteView:output_type -> header.Empty
+	38,  // 629: header.UserMgr.GetView:output_type -> header.UserView
+	197, // 630: header.UserMgr.ListViews:output_type -> header.UserViews
+	39,  // 631: header.UserMgr.UpdateSegment:output_type -> header.Segment
+	39,  // 632: header.UserMgr.CreateSegment:output_type -> header.Segment
+	11,  // 633: header.UserMgr.DeleteSegment:output_type -> header.Empty
+	39,  // 634: header.UserMgr.GetSegment:output_type -> header.Segment
+	198, // 635: header.UserMgr.ListSegments:output_type -> header.Segments
+	36,  // 636: header.UserMgr.ListUsers:output_type -> header.Users
+	11,  // 637: header.UserMgr.AddToSegment:output_type -> header.Empty
+	11,  // 638: header.UserMgr.RemoveFromSegment:output_type -> header.Empty
+	11,  // 639: header.UserMgr.UpdateUserCampaignStatus:output_type -> header.Empty
+	43,  // 640: header.UserMgr.UpsertLabel:output_type -> header.Label
+	11,  // 641: header.UserMgr.DeleteLabel:output_type -> header.Empty
+	199, // 642: header.UserMgr.ListLabels:output_type -> header.Labels
+	43,  // 643: header.UserMgr.GetLabel:output_type -> header.Label
+	11,  // 644: header.UserMgr.AddLeadOwner:output_type -> header.Empty
+	11,  // 645: header.UserMgr.RemoveLeadOwner:output_type -> header.Empty
+	11,  // 646: header.UserMgr.AddUserLabel:output_type -> header.Empty
+	11,  // 647: header.UserMgr.RemoveUserLabel:output_type -> header.Empty
+	11,  // 648: header.UserMgr.AddLeadConversionBy:output_type -> header.Empty
+	27,  // 649: header.UserMgr.CreateShippingAddress:output_type -> header.Address
+	27,  // 650: header.UserMgr.UpdateShippingAddress:output_type -> header.Address
+	11,  // 651: header.UserMgr.RemoveShippingAddress:output_type -> header.Empty
+	200, // 652: header.UserMgr.ListShippingAddress:output_type -> header.ShippingAddresses
+	11,  // 653: header.UserMgr.MakeDefaultShippingAddress:output_type -> header.Empty
+	36,  // 654: header.UserMgr.ListLeads:output_type -> header.Users
+	201, // 655: header.UserMgr.SuggestLeadField:output_type -> header.SuggestLeadFieldResponse
+	46,  // 656: header.UserMgr.LinkProductUrl:output_type -> header.Product
+	0,   // 657: header.UserMgr.ListUserEvents:output_type -> header.Events
+	48,  // 658: header.UserMgr.CreateUserEvent:output_type -> header.Event
+	49,  // 659: header.UserMgr.FillDevice:output_type -> common.Device
+	202, // 660: header.UserMgr.ImportLead:output_type -> header.ImportLeadResponse
+	11,  // 661: header.UserMgr.LinkTask:output_type -> header.Empty
+	203, // 662: header.UserMgr.CountUserProfiles:output_type -> header.CountTouchpointResponse
+	16,  // 663: header.UserMgr.ListUserIds:output_type -> header.Ids
+	36,  // 664: header.UserMgr.ListUserIdWithPhones:output_type -> header.Users
+	174, // 665: header.UserMgr.SearchUsers:output_type -> header.DocSearchResponse
+	204, // 666: header.UserMgr.ReportUser:output_type -> header.UserReportResponse
+	54,  // 667: header.UserMgr.FetchLiveUsers:output_type -> header.LiveUserView
+	11,  // 668: header.UserMgr.StopLiveUsers:output_type -> header.Empty
+	201, // 669: header.UserMgr.SuggestLiveFields:output_type -> header.SuggestLeadFieldResponse
+	205, // 670: header.UserMgr.Presences:output_type -> header.PresencesResponse
+	206, // 671: header.NoteMgr.ListNotes:output_type -> header.Notes
+	57,  // 672: header.NoteMgr.AddNote:output_type -> header.Note
+	57,  // 673: header.NoteMgr.UpdateNote:output_type -> header.Note
+	11,  // 674: header.NoteMgr.DeleteNote:output_type -> header.Empty
+	207, // 675: header.AttributeMgr.ListAttributeDefinitions:output_type -> header.AttributeDefinitions
+	59,  // 676: header.AttributeMgr.CreateAttributeDefinition:output_type -> header.AttributeDefinition
+	59,  // 677: header.AttributeMgr.UpdateAttributeDefinition:output_type -> header.AttributeDefinition
+	182, // 678: header.AutomationMgr.ListWorkflows:output_type -> header.Response
+	182, // 679: header.AutomationMgr.UpdateWorkflow:output_type -> header.Response
+	182, // 680: header.AutomationMgr.CreateWorkflow:output_type -> header.Response
+	182, // 681: header.AutomationMgr.DeleteWorkflow:output_type -> header.Response
+	182, // 682: header.AutomationMgr.ReadWorkflow:output_type -> header.Response
+	182, // 683: header.AutomationMgr.ListWorkflowLog:output_type -> header.Response
+	208, // 684: header.ConversationMgr.AssignRule:output_type -> header.RouteResult
+	48,  // 685: header.ConversationMgr.PongMessage:output_type -> header.Event
+	67,  // 686: header.ConversationMgr.StartConversation:output_type -> header.Conversation
+	67,  // 687: header.ConversationMgr.EndConversation:output_type -> header.Conversation
+	67,  // 688: header.ConversationMgr.GetConversation:output_type -> header.Conversation
+	177, // 689: header.ConversationMgr.ListConversations:output_type -> header.Conversations
+	177, // 690: header.ConversationMgr.MatchConversations:output_type -> header.Conversations
+	11,  // 691: header.ConversationMgr.TagConversation:output_type -> header.Empty
+	11,  // 692: header.ConversationMgr.UntagConversation:output_type -> header.Empty
+	11,  // 693: header.ConversationMgr.JoinConversation:output_type -> header.Empty
+	11,  // 694: header.ConversationMgr.LeftConversation:output_type -> header.Empty
+	67,  // 695: header.ConversationMgr.UpdateConversationInfo:output_type -> header.Conversation
+	11,  // 696: header.ConversationMgr.UpdateMuteConversation:output_type -> header.Empty
+	11,  // 697: header.ConversationMgr.UpdateConversationMember:output_type -> header.Empty
+	11,  // 698: header.ConversationMgr.UnwatchConversation:output_type -> header.Empty
+	11,  // 699: header.ConversationMgr.UnhiddenConversation:output_type -> header.Empty
+	68,  // 700: header.ConversationMgr.UpdateEndchatSetting:output_type -> header.EndchatSetting
+	68,  // 701: header.ConversationMgr.GetEndchatSetting:output_type -> header.EndchatSetting
+	48,  // 702: header.ConversationMgr.TerminateBot:output_type -> header.Event
+	48,  // 703: header.ConversationMgr.SendMessage:output_type -> header.Event
+	48,  // 704: header.ConversationMgr.SendOmniChannelMessage:output_type -> header.Event
+	48,  // 705: header.ConversationMgr.UpdateMessage:output_type -> header.Event
+	11,  // 706: header.ConversationMgr.PinMessage:output_type -> header.Empty
+	11,  // 707: header.ConversationMgr.UnpinMessage:output_type -> header.Empty
+	0,   // 708: header.ConversationMgr.ListEvents:output_type -> header.Events
+	11,  // 709: header.ConversationMgr.Deintegrate:output_type -> header.Empty
+	209, // 710: header.ConversationMgr.ListIntegrations:output_type -> header.Integrations
+	72,  // 711: header.ConversationMgr.Integrate:output_type -> header.Integration
+	72,  // 712: header.ConversationMgr.GetIntegration:output_type -> header.Integration
+	73,  // 713: header.ConversationMgr.UpdateIntegrationMember:output_type -> header.ResourceGroupMember
+	11,  // 714: header.ConversationMgr.RemoveIntegrationMember:output_type -> header.Empty
+	74,  // 715: header.ConversationMgr.UpdateRule:output_type -> header.Rule
+	74,  // 716: header.ConversationMgr.CreateRule:output_type -> header.Rule
+	11,  // 717: header.ConversationMgr.DeleteRule:output_type -> header.Empty
+	74,  // 718: header.ConversationMgr.ReadRule:output_type -> header.Rule
+	210, // 719: header.ConversationMgr.ListRules:output_type -> header.Route
+	211, // 720: header.ConversationMgr.ListConversationAutomations:output_type -> header.ConversationAutomations
+	75,  // 721: header.ConversationMgr.UpdateConversationAutomation:output_type -> header.ConversationAutomation
+	11,  // 722: header.ConversationMgr.DeleteConversationAutomation:output_type -> header.Empty
+	75,  // 723: header.ConversationMgr.ReadConversationAutomation:output_type -> header.ConversationAutomation
+	212, // 724: header.ConversationMgr.ListPhoneDevices:output_type -> header.PhoneDevices
+	76,  // 725: header.ConversationMgr.CreatePhoneDevice:output_type -> header.PhoneDevice
+	76,  // 726: header.ConversationMgr.UpdatePhoneDevice:output_type -> header.PhoneDevice
+	11,  // 727: header.ConversationMgr.DeletePhoneDevice:output_type -> header.Empty
+	76,  // 728: header.ConversationMgr.ReadPhoneDevice:output_type -> header.PhoneDevice
+	72,  // 729: header.ConversationMgr.TestNumber:output_type -> header.Integration
+	72,  // 730: header.ConversationMgr.ActiveNumber:output_type -> header.Integration
+	213, // 731: header.ConversationMgr.ListCallSettings:output_type -> header.CallSettings
+	77,  // 732: header.ConversationMgr.UpdateCallSetting:output_type -> header.CallSetting
+	78,  // 733: header.ConversationMgr.BlockNumber:output_type -> header.BlockedNumber
+	214, // 734: header.ConversationMgr.ListBlockedNumbers:output_type -> header.BlockedNumbers
+	11,  // 735: header.ConversationMgr.UnblockNumber:output_type -> header.Empty
+	215, // 736: header.ConversationMgr.ListGreetingAudio:output_type -> header.GreetingAudios
+	79,  // 737: header.ConversationMgr.CreateGreetingAudio:output_type -> header.GreetingAudio
+	67,  // 738: header.ConversationMgr.OriginateCall:output_type -> header.Conversation
+	216, // 739: header.ConversationMgr.ListMyRecentCalls:output_type -> header.RecentCallRecords
+	48,  // 740: header.ConversationMgr.SaveMessage:output_type -> header.Event
+	48,  // 741: header.ConversationMgr.ApplyMessage:output_type -> header.Event
+	80,  // 742: header.TicketMgr.CreateTicketType:output_type -> header.TicketType
+	80,  // 743: header.TicketMgr.UpdateTicketType:output_type -> header.TicketType
+	182, // 744: header.TicketMgr.ListTicketTypes:output_type -> header.Response
+	80,  // 745: header.TicketMgr.GetTicketType:output_type -> header.TicketType
+	81,  // 746: header.TicketMgr.CreateTicket:output_type -> header.Ticket
+	81,  // 747: header.TicketMgr.UpdateTicket:output_type -> header.Ticket
+	11,  // 748: header.TicketMgr.DeleteTicket:output_type -> header.Empty
+	11,  // 749: header.TicketMgr.RecoverTicket:output_type -> header.Empty
+	81,  // 750: header.TicketMgr.GetTicket:output_type -> header.Ticket
+	182, // 751: header.TicketMgr.ListTickets:output_type -> header.Response
+	182, // 752: header.TicketMgr.MatchTickets:output_type -> header.Response
+	83,  // 753: header.TicketMgr.CreateTicketView:output_type -> header.TicketView
+	83,  // 754: header.TicketMgr.UpdateTicketView:output_type -> header.TicketView
+	11,  // 755: header.TicketMgr.DeleteTicketView:output_type -> header.Empty
+	83,  // 756: header.TicketMgr.GetTicketView:output_type -> header.TicketView
+	182, // 757: header.TicketMgr.ListTicketViews:output_type -> header.Response
+	84,  // 758: header.TicketMgr.CreateTicketTemplate:output_type -> header.TicketTemplate
+	84,  // 759: header.TicketMgr.UpdateTicketTemplate:output_type -> header.TicketTemplate
+	11,  // 760: header.TicketMgr.DeleteTicketTemplate:output_type -> header.Empty
+	84,  // 761: header.TicketMgr.GetTicketTemplate:output_type -> header.TicketTemplate
+	182, // 762: header.TicketMgr.ListTicketTemplates:output_type -> header.Response
+	48,  // 763: header.TicketMgr.PongTicketEvent:output_type -> header.Event
+	11,  // 764: header.TicketMgr.TagTicket:output_type -> header.Empty
+	11,  // 765: header.TicketMgr.UntagTicket:output_type -> header.Empty
+	11,  // 766: header.TicketMgr.JoinTicket:output_type -> header.Empty
+	11,  // 767: header.TicketMgr.LeftTicket:output_type -> header.Empty
+	11,  // 768: header.TicketMgr.ReadTickets:output_type -> header.Empty
+	11,  // 769: header.TicketMgr.UnreadTickets:output_type -> header.Empty
+	11,  // 770: header.TicketMgr.SnoozeTickets:output_type -> header.Empty
+	11,  // 771: header.TicketMgr.UnsnoozeTickets:output_type -> header.Empty
+	48,  // 772: header.TicketMgr.SendTicketEvent:output_type -> header.Event
+	0,   // 773: header.TicketMgr.ListTicketEvents:output_type -> header.Events
+	73,  // 774: header.TicketMgr.UpdateTicketTypeMember:output_type -> header.ResourceGroupMember
+	11,  // 775: header.TicketMgr.RemoveTicketTypeMember:output_type -> header.Empty
+	85,  // 776: header.TemplateMgr.CreateTemplate:output_type -> header.Template
+	85,  // 777: header.TemplateMgr.UpdateTemplate:output_type -> header.Template
+	11,  // 778: header.TemplateMgr.DeleteTemplate:output_type -> header.Empty
+	85,  // 779: header.TemplateMgr.GetTemplate:output_type -> header.Template
+	217, // 780: header.TemplateMgr.ListTemplates:output_type -> header.Templates
+	11,  // 781: header.TemplateMgr.PickTemplate:output_type -> header.Empty
+	87,  // 782: header.TemplateMgr.CreateModal:output_type -> header.ConversationModal
+	87,  // 783: header.TemplateMgr.UpdateModal:output_type -> header.ConversationModal
+	11,  // 784: header.TemplateMgr.DeleteModal:output_type -> header.Empty
+	87,  // 785: header.TemplateMgr.GetModal:output_type -> header.ConversationModal
+	218, // 786: header.TemplateMgr.ListModals:output_type -> header.ConversationModals
+	219, // 787: header.TemplateMgr.PickModal:output_type -> header.ConversationModalPicked
+	89,  // 788: header.TagMgr.CreateTag:output_type -> header.Tag
+	89,  // 789: header.TagMgr.UpdateTag:output_type -> header.Tag
+	11,  // 790: header.TagMgr.DeleteTag:output_type -> header.Empty
+	220, // 791: header.TagMgr.ListTags:output_type -> header.Tags
+	89,  // 792: header.TagMgr.GetTag:output_type -> header.Tag
+	90,  // 793: header.Noti5Service.ReadNotificationSetting:output_type -> noti5.Setting
+	90,  // 794: header.Noti5Service.UpdateNotificationSetting:output_type -> noti5.Setting
+	11,  // 795: header.Noti5Service.Noti:output_type -> header.Empty
+	11,  // 796: header.Noti5Service.AddToken:output_type -> header.Empty
+	11,  // 797: header.Noti5Service.RemoveToken:output_type -> header.Empty
+	11,  // 798: header.Noti5Service.CheckTokenExists:output_type -> header.Empty
+	221, // 799: header.PaymentMgr.SearchSub:output_type -> header.AccSubs
+	222, // 800: header.PaymentMgr.GetSub:output_type -> header.AccSub
+	97,  // 801: header.PaymentMgr.Purchase:output_type -> payment.Invoice
+	95,  // 802: header.PaymentMgr.UpdateSubscription:output_type -> payment.Subscription
+	95,  // 803: header.PaymentMgr.GetSubscription:output_type -> payment.Subscription
+	223, // 804: header.PaymentMgr.Pay:output_type -> payment.Bill
+	97,  // 805: header.PaymentMgr.CreateInvoice:output_type -> payment.Invoice
+	97,  // 806: header.PaymentMgr.UpdateInvoice:output_type -> payment.Invoice
+	224, // 807: header.PaymentMgr.FilterInvoices:output_type -> payment.Invoices
+	97,  // 808: header.PaymentMgr.DraftInvoice:output_type -> payment.Invoice
+	225, // 809: header.PaymentMgr.ListComments:output_type -> payment.Comments
+	100, // 810: header.PaymentMgr.AddComment:output_type -> payment.Comment
+	226, // 811: header.PaymentMgr.ExportInvoice:output_type -> payment.String
+	226, // 812: header.PaymentMgr.ConvertInvoiceToHtml:output_type -> payment.String
+	101, // 813: header.PaymentMgr.GetExchangeRate:output_type -> header.ExchangeRate
+	223, // 814: header.PaymentMgr.TransferMoney:output_type -> payment.Bill
+	227, // 815: header.PaymentMgr.ListLogs:output_type -> payment.Logs
+	104, // 816: header.PaymentMgr.SearchReferral:output_type -> payment.Referral
+	104, // 817: header.PaymentMgr.GetReferral:output_type -> payment.Referral
+	228, // 818: header.PaymentMgr.ListTopReferral:output_type -> payment.ReferralResponse
+	104, // 819: header.PaymentMgr.UpdateReferral:output_type -> payment.Referral
+	229, // 820: header.PaymentMgr.ListAccountReferred:output_type -> payment.LogAccountReferreds
+	230, // 821: header.PaymentMgr.ListBillByAccountReferred:output_type -> payment.LogBillByAccountReferreds
+	231, // 822: header.PaymentMgr.ListPaidForAgentReferrer:output_type -> payment.LogPaidForAgentReferrers
+	11,  // 823: header.PaymentMgr.PaidForAgentReferrer:output_type -> header.Empty
+	11,  // 824: header.Pubsub.Fire:output_type -> header.Empty
+	232, // 825: header.Pubsub.Poll:output_type -> header.PollResult
+	107, // 826: header.Pubsub.Subscribe:output_type -> header.RealtimeSubscription
+	108, // 827: header.FabikonService.ReadFbFanpageSetting:output_type -> header.FbFanpageSetting
+	108, // 828: header.FabikonService.UpdateFbFanpageSetting:output_type -> header.FbFanpageSetting
+	233, // 829: header.FabikonService.ListFbFanpageSettings:output_type -> header.FbFanpageSettings
+	234, // 830: header.FabikonService.ListFbPosts:output_type -> header.FacebookPosts
+	109, // 831: header.FabikonService.GetFbPost:output_type -> header.FacebookPost
+	11,  // 832: header.FabikonService.SendEventToFacebook:output_type -> header.Empty
+	11,  // 833: header.FabikonService.RemoveFbUserLabel:output_type -> header.Empty
+	11,  // 834: header.FabikonService.AddFbUserLabel:output_type -> header.Empty
+	1,   // 835: header.FabikonService.GenerateRefLink:output_type -> header.Id
+	72,  // 836: header.ChannelConnector.GetIntegration:output_type -> header.Integration
+	72,  // 837: header.ChannelConnector.UpdateIntegration:output_type -> header.Integration
+	11,  // 838: header.ZalokonService.SendEventToZalo:output_type -> header.Empty
+	235, // 839: header.ZalokonService.ListZnsTemplates:output_type -> zalokon.ZnsTemplates
+	11,  // 840: header.ZalokonService.RequestZaloUserInfo:output_type -> header.Empty
+	11,  // 841: header.ZalokonService.RequestZaloUserToMakeCall:output_type -> header.Empty
+	11,  // 842: header.ZalokonService.MakeSureZaloUser:output_type -> header.Empty
+	182, // 843: header.ZalokonService.GetZaloUserCallConsent:output_type -> header.Response
+	48,  // 844: header.ZalokonService.SendZNS:output_type -> header.Event
+	112, // 845: header.ZalokonService.CreateZaloApplication:output_type -> header.ZaloApplication
+	112, // 846: header.ZalokonService.GetZaloApplication:output_type -> header.ZaloApplication
+	112, // 847: header.ZalokonService.UpdateZaloApplication:output_type -> header.ZaloApplication
+	11,  // 848: header.ZalokonService.DeleteZaloApplication:output_type -> header.Empty
+	236, // 849: header.ZalokonService.ListZaloApplications:output_type -> header.ZaloApplications
+	11,  // 850: header.MailkonService.SendEmail:output_type -> header.Empty
+	72,  // 851: header.MailkonService.CreateEmailIdentity:output_type -> header.Integration
+	11,  // 852: header.MailkonService.DeleteEmailIdentity:output_type -> header.Empty
+	11,  // 853: header.MailkonService.ResendSenderVerificationEmail:output_type -> header.Empty
+	237, // 854: header.MailkonService.VerifySenderDomain:output_type -> header.EmailSenderVerificationResult
+	238, // 855: header.MailkonService.ListBusinessEmailAddresses:output_type -> header.BusinessEmailAddresses
+	113, // 856: header.MailkonService.UpsertBusinessEmailAddress:output_type -> header.BusinessEmailAddress
+	11,  // 857: header.MailkonService.DeleteBusinessEmailAddress:output_type -> header.Empty
+	182, // 858: header.MailkonService.TrackLink:output_type -> header.Response
+	182, // 859: header.MailkonService.ListBouncedEmails:output_type -> header.Response
+	115, // 860: header.MailkonService.UpsertBouncedEmail:output_type -> header.BouncedEmail
+	182, // 861: header.MailkonService.DeleteBouncedEmail:output_type -> header.Response
+	182, // 862: header.MailkonService.ListBlockedEmails:output_type -> header.Response
+	182, // 863: header.MailkonService.BlockEmail:output_type -> header.Response
+	182, // 864: header.MailkonService.UnblockEmail:output_type -> header.Response
+	117, // 865: header.WidgetService.Read:output_type -> header.WidgetSetting
+	117, // 866: header.WidgetService.Update:output_type -> header.WidgetSetting
+	239, // 867: header.WidgetService.ReadUserSetting:output_type -> header.WidgetUserSetting
+	240, // 868: header.WidgetService.ReadAccountSetting:output_type -> header.AccountWeb
+	118, // 869: header.WidgetService.SubmitImpression:output_type -> header.Impression
+	119, // 870: header.WidgetService.SubmitConversion:output_type -> header.Conversion
+	120, // 871: header.WidgetService.SubmitUserCampaignStatus:output_type -> header.UserCampaignStatus
+	241, // 872: header.WidgetService.ReportCampaign:output_type -> header.ReportCampaignResponse
+	242, // 873: header.WidgetService.ListConversions:output_type -> header.Conversions
+	243, // 874: header.WidgetService.ExportConversions:output_type -> header.ConversionsExported
+	123, // 875: header.WidgetService.UploadImage:output_type -> header.UploadedImage
+	244, // 876: header.WidgetService.ListUploadedImage:output_type -> header.UploadedImages
+	11,  // 877: header.WidgetService.DeleteUploadedImage:output_type -> header.Empty
+	245, // 878: header.WidgetService.ListWebPlugins:output_type -> header.WebPlugins
+	124, // 879: header.WidgetService.UpdateWebPlugin:output_type -> header.WebPlugin
+	124, // 880: header.WidgetService.UpdateWebPluginEnabled:output_type -> header.WebPlugin
+	124, // 881: header.WidgetService.CreateWebPlugin:output_type -> header.WebPlugin
+	11,  // 882: header.WidgetService.DeleteWebPlugin:output_type -> header.Empty
+	124, // 883: header.WidgetService.UpdateWebPluginTemplate:output_type -> header.WebPlugin
+	245, // 884: header.WidgetService.ListWebPluginTemplates:output_type -> header.WebPlugins
+	11,  // 885: header.WidgetService.DeleteWebPluginTemplate:output_type -> header.Empty
+	246, // 886: header.WidgetService.ReportWebPlugin:output_type -> header.ReportWebPluginResponse
+	244, // 887: header.WidgetService.SearchImages:output_type -> header.UploadedImages
+	247, // 888: header.WidgetService.ListNotifProfiles:output_type -> header.NotifProfiles
+	248, // 889: header.WidgetService.ListNotifBackgrounds:output_type -> header.Urls
+	249, // 890: header.Bizbot.ListBots:output_type -> header.Bots
+	127, // 891: header.Bizbot.GetBot:output_type -> header.Bot
+	127, // 892: header.Bizbot.UpdateBotRunState:output_type -> header.Bot
+	127, // 893: header.Bizbot.CreateBot:output_type -> header.Bot
+	127, // 894: header.Bizbot.UpdateBot:output_type -> header.Bot
+	11,  // 895: header.Bizbot.DeleteBot:output_type -> header.Empty
+	11,  // 896: header.Bizbot.OnEvent:output_type -> header.Empty
+	11,  // 897: header.Bizbot.StartBot:output_type -> header.Empty
+	11,  // 898: header.Bizbot.StopBot:output_type -> header.Empty
+	11,  // 899: header.Bizbot.TryAction:output_type -> header.Empty
+	250, // 900: header.Bizbot.ReportBot2:output_type -> header.BotrunMetrics
+	251, // 901: header.Bizbot.ReportAction:output_type -> header.ActionrunMetrics
+	252, // 902: header.Bizbot.ListObjects:output_type -> header.ListObjectsResponse
+	253, // 903: header.Bizbot.ReportBot:output_type -> header.ReportBotResponse
+	133, // 904: header.Sendback.CreateWebhook:output_type -> header.Webhook
+	254, // 905: header.Sendback.PingWebhook:output_type -> header.WebhookTestResult
+	11,  // 906: header.Sendback.DeleteWebhook:output_type -> header.Empty
+	255, // 907: header.Sendback.ListWebhooks:output_type -> header.Webhooks
+	133, // 908: header.Sendback.ReadWebhook:output_type -> header.Webhook
+	133, // 909: header.Sendback.UpdateWebhook:output_type -> header.Webhook
+	133, // 910: header.Sendback.UpdateWebhookSecret:output_type -> header.Webhook
+	256, // 911: header.Sendback.ListRecentIndexDeliveries:output_type -> header.WebhookDeliveries
+	257, // 912: header.Sendback.GetDelivery:output_type -> header.WebhookDelivery
+	11,  // 913: header.Sendback.SendWebhookEvent:output_type -> header.Empty
+	11,  // 914: header.Notibox.SendNoti:output_type -> header.Empty
+	258, // 915: header.Notibox.ListNoties:output_type -> header.Notifications
+	11,  // 916: header.Notibox.MarkReadNoti:output_type -> header.Empty
+	11,  // 917: header.Notibox.MarkReadNotiTopic:output_type -> header.Empty
+	46,  // 918: header.Proder.ReadProduct:output_type -> header.Product
+	46,  // 919: header.Proder.CreateProduct:output_type -> header.Product
+	46,  // 920: header.Proder.UpdateProduct:output_type -> header.Product
+	11,  // 921: header.Proder.DeleteProduct:output_type -> header.Empty
+	259, // 922: header.Proder.ListProducts2:output_type -> header.Products
+	260, // 923: header.Proder.ImportProduct:output_type -> header.ImportProductResponse
+	261, // 924: header.Proder.ListProductCollections:output_type -> header.ProductCollections
+	140, // 925: header.Proder.CreateProductCollection:output_type -> header.ProductCollection
+	140, // 926: header.Proder.UpdateProductCollection:output_type -> header.ProductCollection
+	11,  // 927: header.Proder.DeleteProductCollection:output_type -> header.Empty
+	262, // 928: header.Proder.ListProductFeeds:output_type -> header.ProductFeeds
+	141, // 929: header.Proder.CreateProductFeed:output_type -> header.ProductFeed
+	141, // 930: header.Proder.UpdateProductFeed:output_type -> header.ProductFeed
+	11,  // 931: header.Proder.DeleteProductFeed:output_type -> header.Empty
+	263, // 932: header.Proder.ListProductCategories:output_type -> header.ProductCategories
+	29,  // 933: header.Proder.ReadOrder:output_type -> header.Order
+	29,  // 934: header.Proder.CreateOrder:output_type -> header.Order
+	29,  // 935: header.Proder.UpdateOrder:output_type -> header.Order
+	11,  // 936: header.Proder.DeleteOrder:output_type -> header.Empty
+	144, // 937: header.Proder.ListOrders:output_type -> header.Orders
+	264, // 938: header.Proder.CountOrders2:output_type -> header.CountOrdersResponse
+	144, // 939: header.Proder.ImportOrders:output_type -> header.Orders
+	48,  // 940: header.Proder.MakeOrderPayment:output_type -> header.Event
+	48,  // 941: header.Proder.DeleteOrderPayment:output_type -> header.Event
+	48,  // 942: header.Proder.AddOrderComment:output_type -> header.Event
+	48,  // 943: header.Proder.EditOrderComment:output_type -> header.Event
+	48,  // 944: header.Proder.DeleteOrderComment:output_type -> header.Event
+	265, // 945: header.Proder.ListOrderEvents:output_type -> header.OrderHistoryEntries
+	266, // 946: header.Proder.DownloadOrder:output_type -> header.File
+	1,   // 947: header.Proder.GetShopeeAuthUrl:output_type -> header.Id
+	267, // 948: header.Proder.AuthorizeShopeeShop:output_type -> header.ShopeeShop
+	11,  // 949: header.Proder.DeauthorizeShopeeShop:output_type -> header.Empty
+	268, // 950: header.Proder.SyncShopeeProducts:output_type -> header.ShopeeSyncProductResponse
+	11,  // 951: header.Proder.GHTKShippingStatus:output_type -> header.Empty
+	11,  // 952: header.Proder.GHNShippingStatus:output_type -> header.Empty
+	152, // 953: header.Proder.ShippingFee:output_type -> header.ShippingInfo
+	29,  // 954: header.Proder.ShipOrder:output_type -> header.Order
+	29,  // 955: header.Proder.UpdateShippingCode:output_type -> header.Order
+	29,  // 956: header.Proder.CancelShippingOrder:output_type -> header.Order
+	266, // 957: header.Proder.PrintShippingOrders:output_type -> header.File
+	11,  // 958: header.Proder.SeenOrder:output_type -> header.Empty
+	11,  // 959: header.Proder.FollowOrder:output_type -> header.Empty
+	11,  // 960: header.Proder.UnfollowOrder:output_type -> header.Empty
+	11,  // 961: header.Proder.TagOrder:output_type -> header.Empty
+	11,  // 962: header.Proder.UntagOrder:output_type -> header.Empty
+	153, // 963: header.Proder.ReadPipeline:output_type -> header.Pipeline
+	153, // 964: header.Proder.CreatePipeline:output_type -> header.Pipeline
+	153, // 965: header.Proder.UpdatePipeline:output_type -> header.Pipeline
+	11,  // 966: header.Proder.DeletePipeline:output_type -> header.Empty
+	269, // 967: header.Proder.ListPipelines:output_type -> header.Pipelines
+	11,  // 968: header.Proder.DeletePipelineStage:output_type -> header.Empty
+	153, // 969: header.Proder.PreselectPipeline:output_type -> header.Pipeline
+	144, // 970: header.Proder.ReportOrder:output_type -> header.Orders
+	11,  // 971: header.Proder.MoveOrderToPrimary:output_type -> header.Empty
+	51,  // 972: header.TaskMgr.ReadTask:output_type -> header.Task
+	51,  // 973: header.TaskMgr.CreateTask:output_type -> header.Task
+	51,  // 974: header.TaskMgr.UpdateTask:output_type -> header.Task
+	11,  // 975: header.TaskMgr.DeleteTask:output_type -> header.Empty
+	270, // 976: header.TaskMgr.ListTasks:output_type -> header.Tasks
+	11,  // 977: header.TaskMgr.SeenTask:output_type -> header.Empty
+	11,  // 978: header.TaskMgr.CloseTaskReminder:output_type -> header.Empty
+	11,  // 979: header.TaskMgr.MuteTask:output_type -> header.Empty
+	11,  // 980: header.TaskMgr.UnmuteTask:output_type -> header.Empty
+	48,  // 981: header.TaskMgr.AddTaskComment:output_type -> header.Event
+	48,  // 982: header.TaskMgr.EditTaskComment:output_type -> header.Event
+	48,  // 983: header.TaskMgr.DeleteTaskComment:output_type -> header.Event
+	271, // 984: header.TaskMgr.ListTaskComments:output_type -> header.TaskHistoryEntries
+	157, // 985: header.Speex.TextToSpeech:output_type -> header.TTSVoiceSelection
+	272, // 986: header.CampaignMgr.ListCampaigns:output_type -> header.Campaigns
+	158, // 987: header.CampaignMgr.ReadCampaign:output_type -> header.Campaign
+	158, // 988: header.CampaignMgr.CreateCampaign:output_type -> header.Campaign
+	158, // 989: header.CampaignMgr.UpdateCampaign:output_type -> header.Campaign
+	11,  // 990: header.CampaignMgr.DeleteCampaign:output_type -> header.Empty
+	11,  // 991: header.CampaignMgr.OnEvent:output_type -> header.Empty
+	273, // 992: header.CampaignMgr.ListCampaignSendLog:output_type -> header.CampaignSendLog
+	274, // 993: header.CampaignMgr.ReportBroadcastCampaign:output_type -> header.BroadcastCampaignMetrics
+	275, // 994: header.CampaignMgr.ListOutboundCallEntries:output_type -> header.OutboundCallEntries
+	161, // 995: header.CampaignMgr.UpdateOutboundCall:output_type -> header.OutboundCallEntry
+	276, // 996: header.CampaignMgr.ImportOutboundCall:output_type -> header.ImportOutboundCallEntryResponse
+	161, // 997: header.CampaignMgr.GetOutboundCall:output_type -> header.OutboundCallEntry
+	11,  // 998: header.CampaignMgr.RemoveOutboudCall:output_type -> header.Empty
+	277, // 999: header.CampaignMgr.ReportOutboundCalls:output_type -> header.OutboundCallReportResponse
+	11,  // 1000: header.CampaignMgr.ReassignOutboundCall:output_type -> header.Empty
+	278, // 1001: header.CreditMgr.TrySpendCredit:output_type -> header.TrySpendCreditResponse
+	279, // 1002: header.CreditMgr.ReportCreditSpend:output_type -> header.CreditSpendReportResponse
+	280, // 1003: header.CreditMgr.ListCreditSpendLog:output_type -> header.CreditSpendEntries
+	182, // 1004: header.CreditMgr.ListCredits:output_type -> header.Response
+	182, // 1005: header.CreditMgr.AddCredit:output_type -> header.Response
+	182, // 1006: header.CreditMgr.DeleteCredit:output_type -> header.Response
+	182, // 1007: header.CreditMgr.UpdateCredit:output_type -> header.Response
+	281, // 1008: header.FormMgr.ListForms:output_type -> header.Forms
+	168, // 1009: header.FormMgr.CreateForm:output_type -> header.Form
+	168, // 1010: header.FormMgr.UpdateForm:output_type -> header.Form
+	11,  // 1011: header.FormMgr.DeleteForm:output_type -> header.Empty
+	282, // 1012: header.FormMgr.ReportForm:output_type -> header.FormReportResponse
+	283, // 1013: header.FormMgr.ListFormSubmissions:output_type -> header.FormSubmissions
+	171, // 1014: header.Scheduler.RegisterTask:output_type -> header.SchedulerTask
+	182, // 1015: header.Scheduler.UnregisterTask:output_type -> header.Response
+	508, // [508:1016] is the sub-list for method output_type
+	0,   // [0:508] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
 	0,   // [0:0] is the sub-list for extension extendee
 	0,   // [0:0] is the sub-list for field type_name
@@ -12037,6 +12072,7 @@ type TicketMgrClient interface {
 	CreateTicket(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	UpdateTicket(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	DeleteTicket(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	RecoverTicket(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	GetTicket(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Ticket, error)
 	ListTickets(ctx context.Context, in *ListTicketRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchTickets(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
@@ -12045,6 +12081,11 @@ type TicketMgrClient interface {
 	DeleteTicketView(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	GetTicketView(ctx context.Context, in *Id, opts ...grpc.CallOption) (*TicketView, error)
 	ListTicketViews(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
+	CreateTicketTemplate(ctx context.Context, in *TicketTemplate, opts ...grpc.CallOption) (*TicketTemplate, error)
+	UpdateTicketTemplate(ctx context.Context, in *TicketTemplate, opts ...grpc.CallOption) (*TicketTemplate, error)
+	DeleteTicketTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	GetTicketTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*TicketTemplate, error)
+	ListTicketTemplates(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
 	PongTicketEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	TagTicket(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
 	UntagTicket(ctx context.Context, in *TagRequest, opts ...grpc.CallOption) (*Empty, error)
@@ -12131,6 +12172,15 @@ func (c *ticketMgrClient) DeleteTicket(ctx context.Context, in *Id, opts ...grpc
 	return out, nil
 }
 
+func (c *ticketMgrClient) RecoverTicket(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/RecoverTicket", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *ticketMgrClient) GetTicket(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Ticket, error) {
 	out := new(Ticket)
 	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetTicket", in, out, opts...)
@@ -12197,6 +12247,51 @@ func (c *ticketMgrClient) GetTicketView(ctx context.Context, in *Id, opts ...grp
 func (c *ticketMgrClient) ListTicketViews(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
 	err := c.cc.Invoke(ctx, "/header.TicketMgr/ListTicketViews", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) CreateTicketTemplate(ctx context.Context, in *TicketTemplate, opts ...grpc.CallOption) (*TicketTemplate, error) {
+	out := new(TicketTemplate)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/CreateTicketTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) UpdateTicketTemplate(ctx context.Context, in *TicketTemplate, opts ...grpc.CallOption) (*TicketTemplate, error) {
+	out := new(TicketTemplate)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/UpdateTicketTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) DeleteTicketTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/DeleteTicketTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) GetTicketTemplate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*TicketTemplate, error) {
+	out := new(TicketTemplate)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetTicketTemplate", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *ticketMgrClient) ListTicketTemplates(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
+	out := new(Response)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/ListTicketTemplates", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12330,6 +12425,7 @@ type TicketMgrServer interface {
 	CreateTicket(context.Context, *Ticket) (*Ticket, error)
 	UpdateTicket(context.Context, *Ticket) (*Ticket, error)
 	DeleteTicket(context.Context, *Id) (*Empty, error)
+	RecoverTicket(context.Context, *Id) (*Empty, error)
 	GetTicket(context.Context, *Id) (*Ticket, error)
 	ListTickets(context.Context, *ListTicketRequest) (*Response, error)
 	MatchTickets(context.Context, *Ids) (*Response, error)
@@ -12338,6 +12434,11 @@ type TicketMgrServer interface {
 	DeleteTicketView(context.Context, *Id) (*Empty, error)
 	GetTicketView(context.Context, *Id) (*TicketView, error)
 	ListTicketViews(context.Context, *Empty) (*Response, error)
+	CreateTicketTemplate(context.Context, *TicketTemplate) (*TicketTemplate, error)
+	UpdateTicketTemplate(context.Context, *TicketTemplate) (*TicketTemplate, error)
+	DeleteTicketTemplate(context.Context, *Id) (*Empty, error)
+	GetTicketTemplate(context.Context, *Id) (*TicketTemplate, error)
+	ListTicketTemplates(context.Context, *Empty) (*Response, error)
 	PongTicketEvent(context.Context, *Event) (*Event, error)
 	TagTicket(context.Context, *TagRequest) (*Empty, error)
 	UntagTicket(context.Context, *TagRequest) (*Empty, error)
@@ -12378,6 +12479,9 @@ func (*UnimplementedTicketMgrServer) UpdateTicket(context.Context, *Ticket) (*Ti
 func (*UnimplementedTicketMgrServer) DeleteTicket(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicket not implemented")
 }
+func (*UnimplementedTicketMgrServer) RecoverTicket(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RecoverTicket not implemented")
+}
 func (*UnimplementedTicketMgrServer) GetTicket(context.Context, *Id) (*Ticket, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
 }
@@ -12401,6 +12505,21 @@ func (*UnimplementedTicketMgrServer) GetTicketView(context.Context, *Id) (*Ticke
 }
 func (*UnimplementedTicketMgrServer) ListTicketViews(context.Context, *Empty) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTicketViews not implemented")
+}
+func (*UnimplementedTicketMgrServer) CreateTicketTemplate(context.Context, *TicketTemplate) (*TicketTemplate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTicketTemplate not implemented")
+}
+func (*UnimplementedTicketMgrServer) UpdateTicketTemplate(context.Context, *TicketTemplate) (*TicketTemplate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicketTemplate not implemented")
+}
+func (*UnimplementedTicketMgrServer) DeleteTicketTemplate(context.Context, *Id) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTicketTemplate not implemented")
+}
+func (*UnimplementedTicketMgrServer) GetTicketTemplate(context.Context, *Id) (*TicketTemplate, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTicketTemplate not implemented")
+}
+func (*UnimplementedTicketMgrServer) ListTicketTemplates(context.Context, *Empty) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTicketTemplates not implemented")
 }
 func (*UnimplementedTicketMgrServer) PongTicketEvent(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PongTicketEvent not implemented")
@@ -12572,6 +12691,24 @@ func _TicketMgr_DeleteTicket_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TicketMgr_RecoverTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).RecoverTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/RecoverTicket",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).RecoverTicket(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TicketMgr_GetTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -12712,6 +12849,96 @@ func _TicketMgr_ListTicketViews_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TicketMgrServer).ListTicketViews(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_CreateTicketTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TicketTemplate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).CreateTicketTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/CreateTicketTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).CreateTicketTemplate(ctx, req.(*TicketTemplate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_UpdateTicketTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TicketTemplate)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).UpdateTicketTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/UpdateTicketTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).UpdateTicketTemplate(ctx, req.(*TicketTemplate))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_DeleteTicketTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).DeleteTicketTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/DeleteTicketTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).DeleteTicketTemplate(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_GetTicketTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).GetTicketTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/GetTicketTemplate",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).GetTicketTemplate(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TicketMgr_ListTicketTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketMgrServer).ListTicketTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/header.TicketMgr/ListTicketTemplates",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketMgrServer).ListTicketTemplates(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -12983,6 +13210,10 @@ var _TicketMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _TicketMgr_DeleteTicket_Handler,
 		},
 		{
+			MethodName: "RecoverTicket",
+			Handler:    _TicketMgr_RecoverTicket_Handler,
+		},
+		{
 			MethodName: "GetTicket",
 			Handler:    _TicketMgr_GetTicket_Handler,
 		},
@@ -13013,6 +13244,26 @@ var _TicketMgr_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTicketViews",
 			Handler:    _TicketMgr_ListTicketViews_Handler,
+		},
+		{
+			MethodName: "CreateTicketTemplate",
+			Handler:    _TicketMgr_CreateTicketTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateTicketTemplate",
+			Handler:    _TicketMgr_UpdateTicketTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteTicketTemplate",
+			Handler:    _TicketMgr_DeleteTicketTemplate_Handler,
+		},
+		{
+			MethodName: "GetTicketTemplate",
+			Handler:    _TicketMgr_GetTicketTemplate_Handler,
+		},
+		{
+			MethodName: "ListTicketTemplates",
+			Handler:    _TicketMgr_ListTicketTemplates_Handler,
 		},
 		{
 			MethodName: "PongTicketEvent",

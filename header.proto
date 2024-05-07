@@ -6842,6 +6842,8 @@ message Response {
 	repeated TicketView ticket_views = 29;
 
 	repeated BotTemplate bot_templates = 30;
+
+	repeated TicketTemplate ticket_templates = 31;
 }
 
 message ZaloCallConsent {
@@ -7354,6 +7356,26 @@ message TicketType {
 
 	repeated TicketTypeMember members = 16; // removing for .permissions field
 	repeated ResourceGroupMember permissions = 17;
+	string template_id =18;
+}
+
+message TicketTemplate {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string title = 4;
+	int64 created = 6;
+	int64 updated = 7;
+	string creator = 8;
+
+	//template data
+	string type_id = 9;
+	Message message = 5;
+	string priority = 10;
+	string state = 11; 
+	string assignee = 12;
+	repeated Tag tags = 13;
+	repeated Attribute attrs = 14;
 }
 
 message Ticket {
@@ -7375,7 +7397,7 @@ message Ticket {
 	repeated Tag tags = 12;
 	int64 closed = 13;
 	string state = 14; // unassigned, open, hold, closed
-	repeated User users = 15;
+	repeated User users = 15; //only save primary user
 	string reporter = 16;
 	string reporter_type = 17; // agent
 
