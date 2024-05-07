@@ -171,7 +171,7 @@ message InvoiceInfo {
 
 	optional int64 updated = 20;
 	optional string updated_by = 21;
-	optional string disabled = 22;
+	optional int64 disabled = 22;
 }
 
 message UserAttributeSetting {
