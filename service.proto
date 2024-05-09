@@ -80,6 +80,8 @@ service AccountMgr {
 	rpc SubizUpdateAccount(account.Account) returns (account.Account);
 	rpc RequestChangeEmail(account.Agent) returns (Empty);// require password
 	rpc ConfirmChangeEmail(account.Token) returns (account.Agent);
+	rpc UpdateAgentPermission(account.Agent) returns (account.Agent);
+	rpc GetAgentPermission(Id) returns (account.Agent);
 	rpc AcceptInvitation(NewPassword) returns (account.Agent);
 	rpc GetInvitation(account.Token) returns (account.Agent);
 	rpc InviteAgent(account.Agent) returns (account.Agent); // allow to call multiple time
@@ -359,9 +361,9 @@ service TicketMgr {
 	rpc GetTicketType(Id) returns (TicketType);
 
 	rpc CreateTicket(header.Ticket) returns (header.Ticket);
-	rpc UpdateTicket(header.Ticket) returns (header.Ticket); 
-	rpc DeleteTicket(Id) returns (Empty); 
-	rpc RecoverTicket(Id) returns (Empty); 
+	rpc UpdateTicket(header.Ticket) returns (header.Ticket);
+	rpc DeleteTicket(Id) returns (Empty);
+	rpc RecoverTicket(Id) returns (Empty);
 	rpc GetTicket(Id) returns (header.Ticket);
 	rpc ListTickets(header.ListTicketRequest) returns (Response);
 	rpc MatchTickets(Ids) returns (Response);
