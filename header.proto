@@ -7355,8 +7355,8 @@ message TicketType {
 	string updated_by = 14;
 	int64 updated = 15;
 
-	repeated TicketTypeMember members = 16; // removing for .permissions field
-	repeated ResourceGroupMember permissions = 17;
+	//repeated TicketTypeMember members = 16; // removing for .permissions field
+	repeated ResourceGroupMember permissions = 16;
 	string template_id = 18;
 	string visibility = 19; // public, internal, limited
 }
@@ -7559,8 +7559,8 @@ message BotTemplate {
 message ResourceGroupMember {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string resource_group_id = 3; // segment id or integration
-	string member_id = 4;
+	string resource_group_id = 4; // segment id or integration
+	string member_id = 3;
 	string member_type = 5; // group?
 
 	// c:create, r:read, R:read all, w:write, W:write all, d:delete, D:delete all, m:manage, e:export
@@ -7570,5 +7570,5 @@ message ResourceGroupMember {
 	int64 accepted = 8;
 	int64 joined = 9;
 
-	string role = 11; // member, manager, admin, ...
+	string role = 6; // member, manager, admin, ...
 }
