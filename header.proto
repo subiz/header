@@ -7323,18 +7323,6 @@ message NewPassword {
 	string email = 8;
 }
 
-message TicketTypeMember  {
-	common.Context ctx = 1;
-	string account_id = 2;
-	// string group_id = 3;
-	string id = 3;
-	string type_id = 4;
-
-	string role = 6; // manager, triage, member (read cua chinh minh)
-
-	int64 joined_at = 9;
-}
-
 message TicketType {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7355,8 +7343,7 @@ message TicketType {
 	string updated_by = 14;
 	int64 updated = 15;
 
-	//repeated TicketTypeMember members = 16; // removing for .permissions field
-	repeated ResourceGroupMember permissions = 16;
+	repeated ResourceGroupMember members = 16;
 	string template_id = 18;
 	string visibility = 19; // public, internal, limited
 }
