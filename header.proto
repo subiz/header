@@ -7343,7 +7343,7 @@ message TicketType {
 	string updated_by = 14;
 	int64 updated = 15;
 
-	repeated ResourceGroupMember members = 16;
+	repeated ResourceGroupMember permissions = 16;
 	string template_id = 18;
 	string visibility = 19; // public, internal, limited
 }
