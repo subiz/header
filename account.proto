@@ -103,11 +103,6 @@ message Agent {
 
 	// optional string internal_name = 42;
 	optional int64 extension = 43; // 2343 3442
-
-	repeated string permissions = 44; // admin owner use-popup create-popup
-	repeated string lead_permissions = 45; // group -> role
-  repeated string conversation_permissions = 46; // [groupid]-[manager]
-  repeated string ticket_permissions = 47;
 }
 
 message Account {

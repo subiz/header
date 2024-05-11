@@ -80,8 +80,6 @@ service AccountMgr {
 	rpc SubizUpdateAccount(account.Account) returns (account.Account);
 	rpc RequestChangeEmail(account.Agent) returns (Empty);// require password
 	rpc ConfirmChangeEmail(account.Token) returns (account.Agent);
-	rpc UpdateAgentPermission(account.Agent) returns (account.Agent);
-	rpc GetAgentPermission(Id) returns (account.Agent);
 	rpc AcceptInvitation(NewPassword) returns (account.Agent);
 	rpc GetInvitation(account.Token) returns (account.Agent);
 	rpc InviteAgent(account.Agent) returns (account.Agent); // allow to call multiple time
