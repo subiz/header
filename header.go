@@ -669,8 +669,10 @@ func GetTextAttr(u *User, key string) string {
 	return ""
 }
 
+// deprecated
 var Scopes = makeScopeMap()
 
+// deprecated
 func makeScopeMap() map[string]string {
 	// scope => permission
 	var m = map[string]string{}
@@ -686,6 +688,33 @@ func makeScopeMap() map[string]string {
 	m["crm"] = m["account:r webhook:wr user:rw"]
 	m["all"] = m["subiz"]
 	return m
+}
+
+// scope name -> perm -> bool
+//
+//	example: {
+//	 "agent": {"account:read": true, ...},
+//	 "account:read": {"account:read": true},
+//	}
+var ScopeM = map[string]map[string]bool{}
+
+func init() {
+	for scope, m := range makeScopeMap2() {
+		for _, k := range strings.Split(m, " ") {
+			if k == "" {
+				continue
+			}
+			if ScopeM[scope] == nil {
+				ScopeM[scope] = map[string]bool{}
+			}
+			ScopeM[scope][k] = true
+
+			if ScopeM[k] == nil {
+				ScopeM[k] = map[string]bool{}
+			}
+			ScopeM[k][k] = true
+		}
+	}
 }
 
 // updated perm
@@ -707,6 +736,7 @@ func makeScopeMap2() map[string]string {
 	return m
 }
 
+// deprecated
 func prettyPerm(perm string) string {
 	perms := strings.FieldsFunc(perm, func(r rune) bool {
 		return r == ' ' || r == ';' || r == ',' || r == '\n' || r == '\t'
@@ -744,6 +774,7 @@ func prettyPerm(perm string) string {
 	return strings.TrimSpace(out)
 }
 
+// deprecated
 // []string{"all", "agent"}, "conversation:r tag:wr" => true
 // []string{"agent"}, "tag:wr" => false
 func checkAccess(scopes []string, perm string) bool {
@@ -781,6 +812,7 @@ func checkAccess(scopes []string, perm string) bool {
 	return true
 }
 
+// deprecated
 // []string{"all", "agent"}, "conversation:r tag:wr" => true
 // []string{"agent"}, "tag:wr" => false
 func CheckAccess(realScopes, authorizedScopes []string, perm string) bool {
@@ -1660,12 +1692,6 @@ func SetConversationId(e *Event, cid string) {
 }
 
 type IResourceGroup interface {
+	GetId() string
 	GetPermissions() []*ResourceGroupMember
 }
-
-// 1. Kiem tra quyen truc tiep tren Resource. Cho phep -> true
-// 2.
-// 3. Kiem tra quyen trong tat ca nhom cua Resource.
-// 3.1. Phan truc tiep. Cho phep -> true, Khong cho phep -> false
-// 3.2. Neu khong tim thay. Tim trong tat ca cac nhom. Neu mot nhom cho phep -> true
-// 4. return false
