@@ -717,22 +717,42 @@ func init() {
 	}
 }
 
+type ObjectAction string
+
+const READ ObjectAction = "read"
+const INVITE ObjectAction = "invite" // member
+const WRITE ObjectAction = "write"
+const DELETE ObjectAction = "delete"
+
+type ObjectType string
+
+const TICKET ObjectType = "ticket"
+const TICKET_TYPE ObjectType = "ticket_type"
+const TICKET_TEMPLATE ObjectType = "ticket_template"
+const ACCOUNT ObjectType = "account"
+const CONVERSATION ObjectType = "conversation"
+
 // updated perm
 func makeScopeMap2() map[string]string {
 	// scope => permission
 	var m = map[string]string{}
-	m["agent"] = "account:read conversation:readown conversation:writeown agent_group:read rule:read integration:read message_template:read message_template:writeown tag:real whitelist:read whitelist:write widget:read subscription:read invoice:read user:readown user:writeown attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:write lang:read user_label:read user_view:read user_view:writeown order:read order:writeown shop_setting:read conversation_modal:read conversation_automation:read phone_device:readown call_setting:read greeting_audio:read ticket:readown product:read ticket_type:read user:readunassigned order:readunassigned segment:read segment:writeown user_view:writeown user_view:read ticket_template:read ticket_template:writeown"
+	m["agent"] = "account:read conversation:read:own conversation:write:own agent_group:read rule:read integration:read message_template:read message_template:write:own tag:real whitelist:read whitelist:write widget:read subscription:read invoice:read user:readown user:write:own attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:write lang:read user_label:read user_view:read user_view:write:own order:read order:write:own shop_setting:read conversation_modal:read conversation_automation:read phone_device:read:own call_setting:read greeting_audio:read ticket:readown product:read ticket_type:read ticket_type:write:own user:read:unassigned order:read:unassigned segment:read segment:write:own user_view:write:own user_view:read ticket_template:read ticket_template:write:own ticket:invite:own ticket:removemember:own"
 	m["view_other_convos"] = "conversation:read"
 	m["view_others"] = "conversation:read user:read order:read ticket:read"
 	m["export_user"] = "user:export" // export
 
-	m["account_setting"] = m["agent"] + " account:write agent:write agent_group:write rule:write integration:write message_template:write tag:write widget:write attribute:write bot:write conversation_setting:write web_plugin:write webhook:read webhook:write lang:write user_label:write shop_setting:write conversation_modal:write conversation_automation:write phone_device:read phone_device:write call_setting:write greeting_audio:write ticket:write order:write product:write product:delete order:delete ticket_type:write ticket:delete user_view:write segment:write ticket_template:write"
+	m["account_setting"] = m["agent"] + " account:write agent:write agent_group:write rule:write integration:write message_template:write tag:write widget:write attribute:write bot:write conversation_setting:write web_plugin:write webhook:read webhook:write lang:write user_label:write shop_setting:write conversation_modal:write conversation_automation:write phone_device:read phone_device:write call_setting:write greeting_audio:write ticket:write order:write product:write product:delete order:delete ticket_type:write ticket:delete user_view:write segment:write ticket_template:write ticket:invite"
 
 	m["account_manage"] = m["account_setting"] + "account:write agent_group:write agent:write subscription:write payment_method:read payment_method:write"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
 	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:write"
 	m["crm"] = m["account:read webhook:read webhook:write user:read user:write"]
 	m["all"] = m["subiz"]
+
+	// secondary scopes (use for resource type only)
+	m["ticket_type_member"] = "ticket:read ticket:write"
+	m["ticket_type_manager"] = m["ticket_type_member"] + " ticket_type:write"
+
 	return m
 }
 
