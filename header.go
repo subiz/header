@@ -721,7 +721,8 @@ type ObjectAction string
 
 const READ ObjectAction = "read"
 const INVITE ObjectAction = "invite" // member
-const WRITE ObjectAction = "write"
+const UPDATE ObjectAction = "update"
+const CREATE ObjectAction = "create"
 const DELETE ObjectAction = "delete"
 
 type ObjectType string
@@ -731,27 +732,54 @@ const TICKET_TYPE ObjectType = "ticket_type"
 const TICKET_TEMPLATE ObjectType = "ticket_template"
 const ACCOUNT ObjectType = "account"
 const CONVERSATION ObjectType = "conversation"
+const AGENT_GROUP ObjectType = "agent_group"
+const RULE ObjectType = "rule"
+const INTEGRATION ObjectType = "integration"
+const MESSAGETEMPLATE ObjectType = "message_template"
+const TAG ObjectType = "tag"
+const WEB_PLUGIN ObjectType = "web_plugin"
+const FILE ObjectType = "file"
+const LANG ObjectType = "lang"
+const USER_LABEL ObjectType = "user_label"
+const USER_VIEW ObjectType = "user_view"
+const ORDER ObjectType = "order"
+const SHOP_SETTING ObjectType = "shop_setting"
+const CONVERSATION_MODAL ObjectType = "conversation_modal"
+const CONVERSATION_SETTING ObjectType = "conversation_setting"
+const CONVERSATION_AUTOMATION ObjectType = "conversation_automation"
+const PHONE_DEVICE = "phone_device"
+const CALL_SETTING ObjectType = "call_setting"
+const GREETING_AUDIO ObjectType = "greeting_audio"
+const PRODUCT ObjectType = "product"
+const USER ObjectType = "user"
+const SEGMENT ObjectType = "segment"
+const WHITELIST ObjectType = "whitelist"
+const SUBSCRIPTION ObjectType = "subscription"
+const INVOICE ObjectType = "invoice"
+const BOT ObjectType = "bot"
+const ATTRIBUTE ObjectType = "attribute"
+const AGENT ObjectType = "agent"
 
 // updated perm
 func makeScopeMap2() map[string]string {
 	// scope => permission
 	var m = map[string]string{}
-	m["agent"] = "account:read conversation:read:own conversation:write:own agent_group:read rule:read integration:read message_template:read message_template:write:own tag:real whitelist:read whitelist:write widget:read subscription:read invoice:read user:readown user:write:own attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:write lang:read user_label:read user_view:read user_view:write:own order:read order:write:own shop_setting:read conversation_modal:read conversation_automation:read phone_device:read:own call_setting:read greeting_audio:read ticket:readown product:read ticket_type:read ticket_type:write:own user:read:unassigned order:read:unassigned segment:read segment:write:own user_view:write:own user_view:read ticket_template:read ticket_template:write:own ticket:invite:own ticket:removemember:own"
+	m["agent"] = "account:read conversation:read:own conversation:create conversation:update:own agent_group:read rule:read integration:read message_template:read message_template:update:own message_template:create tag:read" + " whitelist:read whitelist:update whitelist:create widget:read subscription:read invoice:read user:read:own user:update:own user:create user:read:unassigned user:update:unassigned attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:create file:update lang:read user_label:read user_view:update:own user_view:create user_view:read user_view:update:own order:create order:read:unassigned order:read order:update:own shop_setting:read conversation_modal:read conversation_automation:read phone_device:read:own call_setting:read greeting_audio:read ticket:create ticket:invite:own ticket:update:own ticket:read:own product:create product:update:own product:read ticket_type:read segment:read segment:update:own segment:create ticket_template:create ticket_template:read ticket_template:update:own "
 	m["view_other_convos"] = "conversation:read"
 	m["view_others"] = "conversation:read user:read order:read ticket:read"
 	m["export_user"] = "user:export" // export
 
-	m["account_setting"] = m["agent"] + " account:write agent:write agent_group:write rule:write integration:write message_template:write tag:write widget:write attribute:write bot:write conversation_setting:write web_plugin:write webhook:read webhook:write lang:write user_label:write shop_setting:write conversation_modal:write conversation_automation:write phone_device:read phone_device:write call_setting:write greeting_audio:write ticket:write order:write product:write product:delete order:delete ticket_type:write ticket:delete user_view:write segment:write ticket_template:write ticket:invite"
+	m["account_setting"] = m["agent"] + " account:update agent:update agent:create agent_group:update agent_group:create rule:update rule:create integration:update integration:create message_template:update tag:update tag:create widget:update attribute:update attribute:create bot:update bot:create conversation_setting:update web_plugin:update web_plugin:create webhook:read webhook:update lang:create lang:update user_label:create user_label:update shop_setting:update shop_setting:create conversation_modal:update conversation_modal:create conversation_automation:update conversation_automation:create phone_device:read phone_device:create phone_device:update call_setting:update greeting_audio:create greeting_audio:update ticket:update order:update product:update product:delete order:delete ticket_type:create ticket_type:update ticket:delete user_view:update segment:update ticket_template:update ticket:invite user:update file:delete"
 
-	m["account_manage"] = m["account_setting"] + "account:write agent_group:write agent:write subscription:write payment_method:read payment_method:write"
+	m["account_manage"] = m["account_setting"] + "account:update agent_group:update agent:update subscription:update payment_method:read payment_method:update"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
-	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:write"
-	m["crm"] = m["account:read webhook:read webhook:write user:read user:write"]
+	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:update"
+	m["crm"] = m["account:read webhook:read webhook:update user:read user:update"]
 	m["all"] = m["subiz"]
 
 	// secondary scopes (use for resource type only)
-	m["ticket_type_member"] = "ticket:read ticket:write"
-	m["ticket_type_manager"] = m["ticket_type_member"] + " ticket_type:write"
+	m["ticket_type_member"] = "ticket:read ticket:update ticket:invite"
+	m["ticket_type_manager"] = m["ticket_type_member"] + " ticket_type:update"
 
 	return m
 }
