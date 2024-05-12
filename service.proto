@@ -456,15 +456,6 @@ service PaymentMgr {
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc TransferMoney(payment.PayRequest) returns (payment.Bill);
 	rpc ListLogs(payment.ListLogsRequest) returns (payment.Logs);
-
-	rpc SearchReferral(payment.SearchReferredRequest) returns (payment.Referral);
-	rpc GetReferral(Id) returns (payment.Referral);
-	rpc ListTopReferral(Empty) returns (payment.ReferralResponse);
-	rpc UpdateReferral(payment.Referral) returns (payment.Referral);
-	rpc ListAccountReferred(Id) returns (payment.LogAccountReferreds);
-	rpc ListBillByAccountReferred(Id) returns (payment.LogBillByAccountReferreds);
-	rpc ListPaidForAgentReferrer(Id) returns (payment.LogPaidForAgentReferrers);
-	rpc PaidForAgentReferrer(payment.LogPaidForAgentReferrer) returns (Empty);
 }
 
 // pubsub services
