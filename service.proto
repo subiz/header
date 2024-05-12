@@ -119,7 +119,7 @@ service AccountMgr {
 	rpc UpdateShopAddress(header.Address) returns (header.Address);
 	rpc DeleteShopAddress(Id) returns (Empty);
 
-	rpc ListTaxes(Id) returns (header.Taxes);
+	rpc ListTaxes(Id) returns (header.Response);
 	rpc CreateTax(header.Tax) returns (header.Tax);
 	rpc UpdateTax(header.Tax) returns (header.Tax);
 	rpc DeleteTax(Id) returns (Empty);

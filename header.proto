@@ -238,16 +238,18 @@ message User {
 	repeated UserSegment segments = 66; // read-only
 	repeated User secondaries = 67; // read-only
 	// map<string, UserConversationTag> conversation_tags = 68; // read-only
-	repeated UserAds ads = 70; // read-only
+	// repeated UserAds ads = 70; // read-only
 
 	int64 deleted = 72;
 	string deleted_by = 73;
 
-	repeated UserCampaign campaigns = 74;
+	// repeated UserCampaign campaigns = 74;
 
 	string merged_by = 76;
 	int64 merged = 77;
 	string merged_reason = 78; // same_email, same_phone, same_record_id
+
+	Error error = 79;
 }
 
 message UserAds {
@@ -1238,6 +1240,8 @@ message Conversation {
 	Ticket tracker_ticket = 73;
 	Ticket customer_ticket = 74;
 	repeated Ticket back_office_tickets = 75;
+
+	Error error = 80;
 }
 
 message GoogleReview {
@@ -4796,6 +4800,7 @@ message Order {
 	repeated OrderPipelineStage stages = 83;
 	repeated Tag tags = 85;
 	string private_note = 88;
+	Error error = 90;
 }
 
 message OrderPipelineStage {
@@ -5162,16 +5167,7 @@ message Tax {
 	bool hidden = 17;
 }
 
-message Taxes {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated Tax taxes = 3;
-}
-
 message Error {
-	// string description = 2; // remove, prefer i18n message
-	// int32 class = 4; // http-code, should be derived from code
-	// string stack = 5; // remove
 	string code = 7; // should be general database_error, access_deny
 	// string sub_code = 8;
 	string number = 12; // unique, or hash of stack 4930543478 for grouping error
@@ -6845,6 +6841,8 @@ message Response {
 	repeated BotTemplate bot_templates = 30;
 
 	repeated TicketTemplate ticket_templates = 31;
+
+	repeated Tax taxes = 32;
 }
 
 message ZaloCallConsent {
@@ -7346,6 +7344,8 @@ message TicketType {
 	repeated ResourceGroupMember permissions = 16;
 	string template_id = 18;
 	string visibility = 19; // public, internal, limited
+
+	Error error = 20;
 }
 
 message TicketTemplate {
@@ -7365,6 +7365,8 @@ message TicketTemplate {
 	string assignee = 12;
 	repeated Tag tags = 13;
 	repeated Attribute attrs = 14;
+
+	Error error = 15;
 }
 
 message Ticket {
@@ -7432,7 +7434,7 @@ message Ticket {
 	int64 deleted = 85;
 	int64 total_messages = 86;
 
-	string error_code = 87; // access_deny, not_found
+	Error error = 87; // access_deny, not_found
 }
 
 message TicketHistoryEntry {

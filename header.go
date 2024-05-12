@@ -764,7 +764,10 @@ const AGENT ObjectType = "agent"
 func makeScopeMap2() map[string]string {
 	// scope => permission
 	var m = map[string]string{}
-	m["agent"] = "account:read conversation:read:own conversation:create conversation:update:own agent_group:read rule:read integration:read message_template:read message_template:update:own message_template:create tag:read" + " whitelist:read whitelist:update whitelist:create widget:read subscription:read invoice:read user:read:own user:update:own user:create user:read:unassigned user:update:unassigned attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:create file:update lang:read user_label:read user_view:update:own user_view:create user_view:read user_view:update:own order:create order:read:unassigned order:read order:update:own shop_setting:read conversation_modal:read conversation_automation:read phone_device:read:own call_setting:read greeting_audio:read ticket:create ticket:invite:own ticket:update:own ticket:read:own product:create product:update:own product:read ticket_type:read segment:read segment:update:own segment:create ticket_template:create ticket_template:read ticket_template:update:own "
+	m["agent"] = "account:read conversation:read:own conversation:create conversation:update:own agent_group:read rule:read integration:read message_template:read message_template:update:own message_template:create tag:read" +
+		" whitelist:read whitelist:update whitelist:create widget:read subscription:read invoice:read user:read:own user:update:own user:create user:read:unassigned user:update:unassigned attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:create file:update lang:read user_label:read user_view:update:own user_view:create user_view:read user_view:update:own" +
+		" order:create order:read:unassigned order:read order:update:own shop_setting:read conversation_modal:read conversation_automation:read phone_device:read:own call_setting:read greeting_audio:read" +
+		" ticket:invite:own ticket:update:own ticket:read:own product:create product:update:own product:read ticket_type:read segment:read segment:update:own segment:create ticket_template:create ticket_template:read ticket_template:update:own "
 	m["view_other_convos"] = "conversation:read"
 	m["view_others"] = "conversation:read user:read order:read ticket:read"
 	m["export_user"] = "user:export" // export
@@ -778,7 +781,7 @@ func makeScopeMap2() map[string]string {
 	m["all"] = m["subiz"]
 
 	// secondary scopes (use for resource type only)
-	m["ticket_type_member"] = "ticket:read ticket:update ticket:invite"
+	m["ticket_type_member"] = "ticket:create ticket:read ticket:update ticket:invite"
 	m["ticket_type_manager"] = m["ticket_type_member"] + " ticket_type:update"
 
 	return m
