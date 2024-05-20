@@ -296,89 +296,10 @@ message CreditCode {
 	optional float credit = 2;
 }
 
-message ReferralCreditCode {
-	optional string referrer_id = 2;
-	optional float credit = 3;
-}
-
 message LogPromotionCodeUsed {
 	optional string code = 1;
 	optional string account_id = 2;
 	optional int64 created = 3;
-}
-
-message Referral {
-	optional common.Context ctx = 1;
-	optional string agent_id = 2;
-	optional string account_id = 3;
-	enum Status {
-		active = 0; // duoc phep refer nguoi khac
-		inactive = 1;
-	}
-	optional string status = 5;
-	optional float earning = 6;
-	optional float commission_rate = 7;
-	optional int64 created = 9;
-
-	optional string bank_name = 11;
-	optional string bank_account_number = 12;
-	optional string bank_branch = 14;
-	optional string bank_fullname = 15;
-	optional string referrer_id = 16;
-	optional float minimum_payment = 17;
-	optional int32 number_of_refer = 18;
-	optional int32 number_of_refer_by_day = 19;
-}
-
-message AgentByReferId {
-	optional string referrer_id = 1;
-	optional string account_id = 2;
-	optional string agent_id = 3;
-}
-
-message LogAccountReferred {
-	optional string referrer_id = 1;
-	optional string account_id = 2;
-	optional int64 created = 3;
-	optional string referrer_account_id = 4;
-	optional string referrer_agent_id = 5;
-}
-
-message LogAccountReferreds{
-	optional common.Context ctx = 1;
-	repeated LogAccountReferred log_account_referreds = 2;
-}
-
-message LogBillByAccountReferred {
-	optional string referrer_id = 1;
-	optional string account_id = 2;
-	optional float commission_rate = 3;
-	optional float amount = 4;
-	optional int64 created = 5;
-	optional string bill_id = 6;
-	optional int32 year = 7;
-	optional string referrer_account_id = 8;
-	optional string referrer_agent_id = 9;
-}
-
-message LogBillByAccountReferreds {
-	optional common.Context ctx = 1;
-	repeated LogBillByAccountReferred log_bill_by_account_referreds = 2;
-}
-
-message LogPaidForAgentReferrer {
-	optional common.Context ctx = 1;
-	optional string referrer_id = 2;
-	optional float amount = 3;
-	optional int64 created = 5;
-	optional string referrer_account_id = 6;
-	optional string referrer_agent_id = 7;
-	optional string transaction_id = 8;
-}
-
-message LogPaidForAgentReferrers {
-	optional common.Context ctx = 1;
-	repeated LogPaidForAgentReferrer log_paid_for_agent_referrers = 2;
 }
 
 message ListLogsRequest {
@@ -433,35 +354,6 @@ message SearchInvoiceRequest {
 	optional string anchor = 5;
 	optional string state = 6;
 	optional int32 limit = 7;
-}
-
-message LogAccountReferredByTime{
-	optional string time = 1;
-	optional string referrer_account_id = 2;
-	optional string referrer_agent_id = 3;
-	optional string account_id = 4;
-	optional int64 created = 5;
-}
-
-message NumberOfReferByAgent {
-	optional string agent_id = 1;
-	optional string account_id = 2;
-	optional float earning = 3;
-	optional int32 number_of_refer = 4;
-	optional int32 number_of_recent_refer = 5;
-	optional string referrer_id = 6;
-	optional string status = 7;
-}
-
-message ReferralResponse {
-	optional common.Context ctx = 1;
-	repeated NumberOfReferByAgent top_referrals = 2;
-}
-
-message SearchReferredRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string agent_id = 3;
 }
 
 message String {

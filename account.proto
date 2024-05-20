@@ -70,7 +70,6 @@ message Agent {
 	optional string avatar_url_128 = 18;
 
 	optional string lang = 14;
-	// optional string location = 15;
 	optional string timezone = 16;
 	optional string encrypted_password = 17;
 	optional int64 joined = 20;
@@ -85,11 +84,9 @@ message Agent {
 
 	optional string state = 22;
 	optional int64 password_changed = 23;
-	// optional int64 seen = 24;
 	optional int64 modified = 25;
 
 	optional Account account = 28;
-	// optional string country_code = 29;
 
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
@@ -213,12 +210,6 @@ message InvoiceEmail {
 	repeated string invoice_ids = 8;
 	repeated string invoice_urls = 9;
 	repeated int32 overdue_days = 10;
-}
-
-message SubscriptionUpgradedEmail {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int64 created = 6; // sec
 }
 
 message TrialEndingEmail {

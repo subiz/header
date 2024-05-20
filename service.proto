@@ -196,8 +196,6 @@ service UserMgr {
 	rpc AddToSegment(header.SegmentUsers) returns (Empty);
 	rpc RemoveFromSegment(header.SegmentUsers) returns (Empty);
 
-	rpc UpdateUserCampaignStatus(header.UserCampaign) returns (Empty);
-
 	rpc UpsertLabel(header.Label) returns (header.Label);
 	rpc DeleteLabel(Id) returns (Empty);
 	rpc ListLabels(Id) returns (header.Labels);
