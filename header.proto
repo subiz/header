@@ -1127,7 +1127,7 @@ message ListConversationsRequest {
 
 	string state = 14;
 
-	bool is_private = 15; // for agent only
+	bool ticket_included = 15; // for agent only
 	bool id_only = 16; // internal usage
 
 	string touchpoint_channel = 17;
@@ -1153,11 +1153,6 @@ enum ConvoState {
 	active = 6; // convo
 	ended = 8; // convo
 	pending = 9; // ticket and convo
-
-	all = 10; // ticket
-	// open = 11;  ticket
-	resolved = 13; // ticket
-	// closed = 14; // ticket
 
 	waiting_for_reply = 15; // waiting for reply
 	dialing = 16;
@@ -1188,7 +1183,6 @@ message Conversation {
 	RouteResult assigned_to = 30;
 	RouteResult reassigned_to = 71;
 
-	// string first_message = 31;
 	string subject = 32;
 
 	repeated KV fields = 33;
@@ -1237,10 +1231,7 @@ message Conversation {
 	int64 sentiment_score = 69;
 	GoogleReview google_review = 70;
 
-	Ticket tracker_ticket = 73;
-	Ticket customer_ticket = 74;
-	repeated Ticket back_office_tickets = 75;
-
+	repeated string ticket_ids = 76;
 	Error error = 80;
 }
 
