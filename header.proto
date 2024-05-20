@@ -7448,6 +7448,7 @@ message ListTicketRequest {
 	int64 limit = 12;
 
 	string query = 13;
+	bool header_only = 14;
 }
 
 message TicketView {
