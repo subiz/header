@@ -7454,9 +7454,6 @@ message TicketView {
 	int64 updated = 13;
 	string desciption = 14;
 
-	int64 count = 15;
-	Event last_event = 16;
-	int64 last_modified = 17;
 }
 
 message TicketViewMember {
@@ -7466,11 +7463,13 @@ message TicketViewMember {
 	string id = 3;
 	string view_id = 4;
 
-	string role = 6; // manager,  member (read cua chinh minh)
+	string role = 6; 
 
-	int64 read_count = 7;
-
+	int64 count = 7;
+	
 	int64 joined_at = 9;
+	Event last_event = 10;
+	int64 last_modified = 11;
 }
 
 message LiveViewMetric {
