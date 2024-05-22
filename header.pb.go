@@ -31,7 +31,7 @@ const (
 	ConvoState_unassigned        ConvoState = 0  // convo
 	ConvoState_active            ConvoState = 6  // convo
 	ConvoState_ended             ConvoState = 8  // convo
-	ConvoState_pending           ConvoState = 9  // ticket and convo
+	ConvoState_pending           ConvoState = 9  // waiting for user
 	ConvoState_waiting_for_reply ConvoState = 15 // waiting for reply
 	ConvoState_dialing           ConvoState = 16
 	ConvoState_congestion        ConvoState = 17
@@ -9979,7 +9979,7 @@ type ConversationMember struct {
 	LastMentioned   int64           `protobuf:"varint,30,opt,name=last_mentioned,json=lastMentioned,proto3" json:"last_mentioned,omitempty"` // ms
 	InviteReason    string          `protobuf:"bytes,34,opt,name=invite_reason,json=inviteReason,proto3" json:"invite_reason,omitempty"`
 	TotalMessages   int64           `protobuf:"varint,35,opt,name=total_messages,json=totalMessages,proto3" json:"total_messages,omitempty"`
-	ReadAt          int64           `protobuf:"varint,36,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"`
+	ReadAt          int64           `protobuf:"varint,36,opt,name=read_at,json=readAt,proto3" json:"read_at,omitempty"` // ticket
 	LastActionAt    int64           `protobuf:"varint,37,opt,name=last_action_at,json=lastActionAt,proto3" json:"last_action_at,omitempty"`
 }
 
@@ -10472,15 +10472,14 @@ type Conversation struct {
 	Actived                 int64                 `protobuf:"varint,19,opt,name=actived,proto3" json:"actived,omitempty"`
 	LastInternalMessageSent *Event                `protobuf:"bytes,27,opt,name=last_internal_message_sent,json=lastInternalMessageSent,proto3" json:"last_internal_message_sent,omitempty"`
 	LastMessageSent         *Event                `protobuf:"bytes,23,opt,name=last_message_sent,json=lastMessageSent,proto3" json:"last_message_sent,omitempty"` // no internal
-	// Event last_event = 26;                 // no internal // remove
-	InitialBy    string       `protobuf:"bytes,25,opt,name=initial_by,json=initialBy,proto3" json:"initial_by,omitempty"` // agent_id || popup || user || bot
-	ResponseSec  int64        `protobuf:"varint,22,opt,name=response_sec,json=responseSec,proto3" json:"response_sec,omitempty"`
-	AssignedTo   *RouteResult `protobuf:"bytes,30,opt,name=assigned_to,json=assignedTo,proto3" json:"assigned_to,omitempty"`
-	ReassignedTo *RouteResult `protobuf:"bytes,71,opt,name=reassigned_to,json=reassignedTo,proto3" json:"reassigned_to,omitempty"`
-	Subject      string       `protobuf:"bytes,32,opt,name=subject,proto3" json:"subject,omitempty"`
-	Fields       []*KV        `protobuf:"bytes,33,rep,name=fields,proto3" json:"fields,omitempty"`
-	Ratings      []*Rating    `protobuf:"bytes,35,rep,name=ratings,proto3" json:"ratings,omitempty"`
-	Source       string       `protobuf:"bytes,36,opt,name=source,proto3" json:"source,omitempty"` // indicate where does the conversation happended (url)
+	InitialBy               string                `protobuf:"bytes,25,opt,name=initial_by,json=initialBy,proto3" json:"initial_by,omitempty"`                     // agent_id || popup || user || bot
+	ResponseSec             int64                 `protobuf:"varint,22,opt,name=response_sec,json=responseSec,proto3" json:"response_sec,omitempty"`
+	AssignedTo              *RouteResult          `protobuf:"bytes,30,opt,name=assigned_to,json=assignedTo,proto3" json:"assigned_to,omitempty"`
+	ReassignedTo            *RouteResult          `protobuf:"bytes,71,opt,name=reassigned_to,json=reassignedTo,proto3" json:"reassigned_to,omitempty"`
+	Subject                 string                `protobuf:"bytes,32,opt,name=subject,proto3" json:"subject,omitempty"`
+	Fields                  []*KV                 `protobuf:"bytes,33,rep,name=fields,proto3" json:"fields,omitempty"`
+	Ratings                 []*Rating             `protobuf:"bytes,35,rep,name=ratings,proto3" json:"ratings,omitempty"`
+	Source                  string                `protobuf:"bytes,36,opt,name=source,proto3" json:"source,omitempty"` // indicate where does the conversation happended (url)
 	// my field
 	AgentId              string    `protobuf:"bytes,40,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
 	Mute                 bool      `protobuf:"varint,41,opt,name=mute,proto3" json:"mute,omitempty"` // true, false

@@ -1106,7 +1106,7 @@ message ConversationMember {
 
 	string invite_reason = 34;
 	int64 total_messages = 35;
-	int64 read_at = 36;
+	int64 read_at = 36; // ticket
 	int64 last_action_at = 37;
 }
 
@@ -1152,7 +1152,7 @@ enum ConvoState {
 	unassigned = 0; // convo
 	active = 6; // convo
 	ended = 8; // convo
-	pending = 9; // ticket and convo
+	pending = 9; // waiting for user
 
 	waiting_for_reply = 15; // waiting for reply
 	dialing = 16;
@@ -1175,7 +1175,6 @@ message Conversation {
 
 	Event last_internal_message_sent = 27;
 	Event last_message_sent = 23;          // no internal
-	// Event last_event = 26;                 // no internal // remove
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -1325,7 +1324,6 @@ message Conversations {
 	repeated Error errors = 6;
 	int64 last_modified = 7;
 }
-
 
 // html: <b>xin chao</b>&nbsp;{{customer.name}}
 // plaintext: xin chao {{customer.name}}
@@ -1984,11 +1982,8 @@ message BotCondition {
 
 	// offline
 	bool offline = 25; // only run when there is no online agent
-
 	bool returning_visitor = 26;
-
 	bool user_is_a_contact = 27; // has a way to re-connnect to user (email or phone)
-
 	OrderCondition order = 28; // order
 
 	repeated string conversation_tags = 29;
@@ -2460,7 +2455,6 @@ message AccountWeb {
 	Location location = 25;
 
 	string device_type = 26;  // mobile desktop tablet
-
 }
 
 message SocialLink {
@@ -6798,42 +6792,28 @@ message Response {
 	common.Context ctx = 1;
 	string account_id = 2;
 	Error error = 3;
-
 	int64 total = 5;
 	string next_anchor = 6;
 	string prev_anchor = 7;
-
 	BlockedEmail blocked_email = 10;
 	repeated BlockedEmail blocked_emails = 11;
-
 	BouncedEmail bounced_email = 12;
 	repeated BouncedEmail bounced_emails = 13;
-
 	ZaloCallConsent zalo_call_consent = 14;
 	Credit credit = 15;
 	repeated Credit credits = 16;
-
 	account.Account account = 17;
 	repeated account.Account accounts = 18;
-
 	Workflow workflow = 19;
 	repeated Workflow workflows = 20;
-
 	account.Agent agent = 21;
 	repeated account.Agent agents = 22;
-
 	repeated WorkflowLog automation_logs = 23;
-
 	repeated Ticket tickets = 25;
-
 	repeated TicketType ticket_types = 27;
-
 	repeated TicketView ticket_views = 29;
-
 	repeated BotTemplate bot_templates = 30;
-
 	repeated TicketTemplate ticket_templates = 31;
-
 	repeated Tax taxes = 32;
 }
 
