@@ -165,19 +165,19 @@ service UserMgr {
 	rpc MergeUser(header.Users) returns (header.User);
 	rpc DetachUser(header.Id) returns (header.Empty);
 
-	rpc CreateUser2(header.User) returns (header.User);
-	rpc UpdateUser(header.User) returns (header.User);  // same
-	rpc TryUpdateUser(header.User) returns (header.TryUpdateUserResult); // new
+	rpc CreateUser2(header.User) returns (header.User); // ok
+	rpc UpdateUser(header.User) returns (header.User);  // ok
+	rpc TryUpdateUser(header.User) returns (header.TryUpdateUserResult); // ok
 
-	rpc RemoveUser(header.Id) returns (header.Empty);
-	rpc RestoreUser(header.Id) returns (header.Empty);
+	rpc RemoveUser(header.Id) returns (header.Empty); // ok
+	rpc RestoreUser(header.Id) returns (header.Empty); // ok
 
-	rpc ReadUser(Id) returns (header.User);
+	rpc ReadUser(Id) returns (header.User); // ok
 	rpc ReadOrCreateUserByContactProfile(Id) returns (header.User);
-	rpc MatchUsers(Ids) returns (header.Users);
+	rpc MatchUsers(Ids) returns (header.Users); // ok
 
-	rpc BanUser(Id) returns (header.User);
-	rpc UnbanUser(Id) returns (header.User);
+	rpc BanUser(Id) returns (header.User); // ok
+	rpc UnbanUser(Id) returns (header.User); // ok
 
 	rpc LookupByPhone(Id) returns (header.Users);
 
@@ -213,25 +213,19 @@ service UserMgr {
 	rpc RemoveShippingAddress(Address) returns (Empty);
 	rpc ListShippingAddress(Id) returns (ShippingAddresses);
 	rpc MakeDefaultShippingAddress(Address) returns (Empty);
-
-	rpc ListLeads(header.UserView) returns (header.Users);
-	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse);
-
-	rpc LinkProductUrl(header.Product) returns (header.Product);
-
-	rpc ListUserEvents(header.ListUserEventsRequest) returns (header.Events);
-	rpc CreateUserEvent(header.Event) returns (header.Event);
+	rpc ListLeads(header.UserView) returns (header.Users); // ok
+	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse); // ok
+	rpc LinkProductUrl(header.Product) returns (header.Product); // ok
+	rpc ListUserEvents(header.ListUserEventsRequest) returns (header.Events); // ok
+	rpc CreateUserEvent(header.Event) returns (header.Event); // ok
 	rpc FillDevice(common.Device) returns (common.Device);
-
 	rpc ImportLead(header.ImportLeadRequest) returns (header.ImportLeadResponse);
 
-	// rpc ListEventTypes(header.ListEventTypeRequest) returns (header.EventTypes);
-	// rpc UpdateEventType(header.EventType) returns (header.EventType);
 	rpc LinkTask(header.Task) returns (header.Empty);
 
-	rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse);
-	rpc ListUserIds(header.UsersRequest) returns (header.Ids);
-	rpc ListUserIdWithPhones(header.UsersRequest) returns (header.Users);
+	rpc CountUserProfiles(header.UsersRequest) returns (header.CountTouchpointResponse); // ok
+	rpc ListUserIds(header.UsersRequest) returns (header.Ids); // ok
+	rpc ListUserIdWithPhones(header.UsersRequest) returns (header.Users); // ok
 
 	rpc SearchUsers(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc ReportUser(header.UserReportRequest) returns (header.UserReportResponse);
@@ -240,6 +234,9 @@ service UserMgr {
 	rpc StopLiveUsers(header.Id) returns (header.Empty);
 	rpc SuggestLiveFields(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse);
 	rpc Presences(header.PresencesRequest) returns (header.PresencesResponse);
+
+	rpc UpdateSegmentMember(ResourceGroupMember) returns (ResourceGroupMember);
+	rpc RemoveSegmentMember(ResourceGroupMember) returns (header.Empty);
 }
 
 service NoteMgr {
