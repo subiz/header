@@ -761,6 +761,7 @@ const BOT ObjectType = "bot"
 const LIVE ObjectType = "live"
 const ATTRIBUTE ObjectType = "attribute"
 const AGENT ObjectType = "agent"
+const WIDGET ObjectType = "widget"
 
 // updated perm
 func makeScopeMap2() map[string]string {
@@ -774,7 +775,7 @@ func makeScopeMap2() map[string]string {
 	m["view_others"] = "live:read conversation:read user:read order:read ticket:read"
 	m["export_user"] = "user:export" // export
 
-	m["account_setting"] = m["agent"] + " ticket:read user:read user:delete live:read auto_segment:create account:update agent:update agent:create agent_group:delete agent_group:update agent_group:create rule:update rule:create integration:update integration:create message_template:update tag:update tag:create widget:update attribute:update attribute:create bot:update bot:delete bot:create conversation_setting:update web_plugin:update web_plugin:create webhook:read webhook:update lang:create lang:update user_label:create user_label:update shop_setting:update shop_setting:create conversation_modal:update conversation_modal:create conversation_automation:update conversation_automation:create phone_device:read phone_device:create phone_device:update phone_device:delete call_setting:update greeting_audio:create greeting_audio:update greeting_audio:delete ticket:update order:read order:update product:update product:delete order:delete ticket_type:create ticket_type:update ticket:delete user_view:update segment:update ticket_template:update ticket:invite user:update file:delete"
+	m["account_setting"] = m["agent"] + " ticket:read user:read user:delete live:read auto_segment:create account:update agent:update agent:create agent_group:delete agent_group:update agent_group:create rule:update rule:create integration:update integration:create message_template:update tag:update tag:create widget:update attribute:update attribute:create bot:update bot:delete bot:create conversation_setting:update web_plugin:update web_plugin:create web_plugin:delete webhook:read webhook:update lang:create lang:update user_label:create user_label:update shop_setting:update shop_setting:create conversation_modal:update conversation_modal:create conversation_automation:update conversation_automation:create phone_device:read phone_device:create phone_device:update phone_device:delete call_setting:update greeting_audio:create greeting_audio:update greeting_audio:delete ticket:update order:read order:update product:update product:delete order:delete ticket_type:create ticket_type:update ticket:delete user_view:update segment:update ticket_template:update ticket:invite user:update file:delete"
 
 	m["account_manage"] = m["account_setting"] + " account:update agent_group:update agent:update subscription:update payment_method:read payment_method:update"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
