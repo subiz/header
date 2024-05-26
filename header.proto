@@ -433,8 +433,6 @@ message AttributeDefinition {
 	int64 usage = 27; // number of user has this attribute
 
 	bool prevent_auto_override = 30;
-
-	int64 code = 31; // crc32 hash of key
 }
 
 message AttributeDefinitions {
@@ -5981,25 +5979,6 @@ message EventTypes {
 	EventType event_types = 3;
 }
 
-message ListUserRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string segment_id = 3;
-	UserViewCondition condition = 4; // attr.username asc
-	string order_by = 5;
-	int64 offset = 6;
-	int64 limit = 10;
-
-	string anchor = 11;
-	repeated string fields = 12;
-
-	int64 partition = 13;
-	repeated string ignore_ids = 14;
-
-	repeated string segments = 15;
-	repeated string exclude_segments = 16;
-}
-
 message Segment {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7469,10 +7448,10 @@ message TicketViewMember {
 	string id = 3;
 	string view_id = 4;
 
-	string role = 6; 
+	string role = 6;
 
 	int64 count = 7;
-	
+
 	int64 joined_at = 9;
 	Event last_event = 10;
 	int64 last_modified = 11;

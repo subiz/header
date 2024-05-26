@@ -97,7 +97,6 @@ message Agent {
 
 	optional DashboardAgent dashboard_setting = 40;
 	repeated string scopes = 41; // supervisor
-
 	// optional string internal_name = 42;
 	optional int64 extension = 43; // 2343 3442
 }

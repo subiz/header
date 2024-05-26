@@ -781,7 +781,7 @@ func makeScopeMap2() map[string]string {
 	m["account_manage"] = m["account_setting"] + " account:update agent_group:update agent:update subscription:update payment_method:read payment_method:update"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
 	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:update"
-	m["crm"] = m["account:read webhook:read webhook:update webhook:create webhook:delete user:read user:update"]
+	m["crm"] = "account:read webhook:read webhook:update webhook:create webhook:delete user:read user:update"
 	m["all"] = m["subiz"]
 
 	// secondary scopes (use for resource type only)
