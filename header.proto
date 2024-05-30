@@ -3415,6 +3415,14 @@ message WebhookTestResult {
 	int64 latency = 17; // seconds
 }
 
+message BackOffSleepWebhookEmail {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string webhook_id = 3;
+	string webhook_url = 4;
+	int64 started = 5;
+}
+
 message PresignResult {
 	common.Context ctx = 1;
 	string account_id = 3;
@@ -7516,3 +7524,4 @@ message ResourceGroupMember {
 	string role = 6; // member, manager, admin, ...
 	repeated string scopes = 10;
 }
+
