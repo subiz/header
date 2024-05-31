@@ -986,6 +986,9 @@ message Rule {
 
 	repeated string supervisors = 24;
 	RingingSetting call = 25;
+
+	string convert_incoming_email_to_ticket = 31; // ticket type
+	string convert_missed_call_to_ticket = 32;
 }
 
 message RingingSetting {
@@ -7524,4 +7527,3 @@ message ResourceGroupMember {
 	string role = 6; // member, manager, admin, ...
 	repeated string scopes = 10;
 }
-
