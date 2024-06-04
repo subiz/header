@@ -399,7 +399,7 @@ service TicketMgr {
 	rpc ListSLAPolicies(header.Empty) returns (Response);
 	rpc GetSLAPolicy(Id) returns (Response);
 
-	rpc ListTicketSLAViolations(header.Empty) returns (Response);
+	rpc ListTicketSLAViolations(header.Id) returns (Response);
 }
 
 service TemplateMgr {
