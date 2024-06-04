@@ -7595,3 +7595,37 @@ message SLATarget {
 	int64 resolution_sec = 8;
 	bool escalation = 9;
 }
+
+message Article {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	Message description = 5;
+	string state = 6; //public ,draft
+	string category_id = 7;
+	bool is_index = 8;
+	int64 updated = 9;
+	string updated_by = 10;
+	int64 created = 11;
+	string created_by = 12;
+	string public_url = 13;
+	string gcs_url = 14;
+	string bucket = 15;
+	string lastest_version = 16; // 1,2,3,..
+	string lastest_public_version = 17;
+}
+
+message ArticleCategory {
+	common.Context ctx = 1;
+	string id = 2;
+	string account_id = 3;
+	string title = 4;
+	string parent_id = 5; 
+	repeated string parent_ids = 6; //make sure not have a circle 
+	int64 updated = 7;
+	string updated_by = 8;
+	int64 created = 9;
+	string created_by = 10;
+	string public_url = 11;
+}
