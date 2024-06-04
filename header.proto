@@ -790,6 +790,7 @@ message Data {
 	TicketHistoryEntry ticket_history_entry = 116;
 	LiveUserView live_user_view = 117;
 	TicketView ticket_view = 118;
+	SLAPolicy sla_policy = 119;
 }
 
 message WebRTCMessage {
@@ -6814,6 +6815,9 @@ message Response {
 	repeated BotTemplate bot_templates = 30;
 	repeated TicketTemplate ticket_templates = 31;
 	repeated Tax taxes = 32;
+	repeated SLAPolicy sla_policies = 33;
+	SLAPolicy sla_policy = 34;
+	repeated SLAViolation sla_violations = 35;
 }
 
 message ZaloCallConsent {
@@ -7396,6 +7400,13 @@ message Ticket {
 	// string user = 73;
 	int64 due_at = 74;
 
+	string sla_policy = 75;
+
+	int64 first_response_due = 76; // 0 -> dont use // sec
+	int64 every_response_due = 77; // sec
+	int64 resolution_due = 78; // sec
+	int64 num_sla_violated = 79;
+
 	// repeated string tags = 79;
 	int64 created = 80;
 	int64 updated = 81;
@@ -7406,6 +7417,20 @@ message Ticket {
 	int64 total_messages = 86;
 
 	Error error = 87; // access_deny, not_found
+}
+
+message SLAViolation {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string ticket_id = 3;
+	int64 violation_at = 4;
+	string sla_policy = 5;
+	string priority = 6;
+
+	string target = 7; //  first_response, every_response_min, resolution_min = 8;
+	int64 required_sec = 8;
+	int64 actual_sec = 9;
 }
 
 message TicketHistoryEntry {
@@ -7529,4 +7554,41 @@ message ResourceGroupMember {
 
 	string role = 6; // member, manager, admin, ...
 	repeated string scopes = 10;
+}
+
+message SLAPolicy {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string name = 4;
+	string description = 5;
+
+	int32 priority = 6;
+	SLATarget normal_priority_target = 7;
+	SLATarget high_priority_target = 8;
+	SLATarget urgent_priority_target = 9;
+
+	int64 disabled = 12;
+	int64 updated = 13;
+	string updated_by = 14;
+	int64 created = 15;
+	string created_by = 16;
+
+	ChannelCondition channel_condition = 20;
+	TimmingCondition timming_condition = 21;
+	repeated UserAttributeCondition form_conditions = 22;
+	bool user_has_replied_before = 23; // new
+	repeated UserAttributeCondition user_conditions = 24;
+	bool when_offline = 25; // only run when there is no online agent
+	repeated string ticket_types = 26; // only apply for these ticket type
+}
+
+message SLATarget {
+	string sla_policy = 3;
+	string priority = 5;
+	int64 first_response_sec = 6; // 0 -> dont use
+	int64 every_response_sec = 7;
+	int64 resolution_sec = 8;
+	bool escalation = 9;
 }
