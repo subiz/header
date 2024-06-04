@@ -1156,6 +1156,8 @@ message ListConversationEventsRequest {
 
 	string message_type = 15; // 'empty', file, image, link, pinned
 	bool is_private = 7;
+
+	string by_type_only = 8;
 }
 
 enum ConvoState {
@@ -7403,12 +7405,12 @@ message Ticket {
 	string sla_policy = 75;
 
 	int64 first_response_due = 76; // 0 -> dont use // sec
-	int64 every_response_due = 77; // sec
-	int64 resolution_due = 78; // sec
+	int64 every_response_due = 77; // sec 20'
+	int64 resolution_due = 78; // sec 1 ngay
 
-	int64 num_sla_first_response_violated = 88;
-	int64 num_sla_every_response_violated = 89;
-	int64 num_sla_resolution_violated = 90;
+	int64 first_response_sla_violated = 88;
+	int64 num_every_response_sla_violated = 89;
+	int64 resolution_sla_violated = 90;
 
 	// repeated string tags = 79;
 	int64 created = 80;
