@@ -283,6 +283,10 @@ enum RealtimeType {
 	ticket_view_updated = 285;
 	ticket_view_deleted = 286;
 	live_users_updated = 255;
+
+	sla_policy_created = 287;
+	sla_policy_updated = 288;
+	sla_policy_deleted = 289;
 }
 
 message TextTransform {
