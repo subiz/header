@@ -287,6 +287,8 @@ enum RealtimeType {
 	sla_policy_created = 287;
 	sla_policy_updated = 288;
 	sla_policy_deleted = 289;
+
+	knowledge_base_updated = 290;
 }
 
 message TextTransform {

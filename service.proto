@@ -745,3 +745,8 @@ service Scheduler {
 	rpc RegisterTask(header.SchedulerTask) returns (SchedulerTask);
 	rpc UnregisterTask(header.SchedulerTask) returns (Response);
 }
+
+service KB {
+	rpc UpdateKnowledgeBase(KnowledgeBase) returns (KnowledgeBase);
+	rpc GetKnowledgeBase(Id) returns (Response);
+}

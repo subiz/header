@@ -791,6 +791,7 @@ message Data {
 	LiveUserView live_user_view = 117;
 	TicketView ticket_view = 118;
 	SLAPolicy sla_policy = 119;
+	KnowledgeBase knowledged_base = 120;
 }
 
 message WebRTCMessage {
@@ -1157,7 +1158,7 @@ message ListConversationEventsRequest {
 	string message_type = 15; // 'empty', file, image, link, pinned
 	bool is_private = 7;
 
-	string by_type_only = 8;
+	bool by_type_only = 8;
 }
 
 enum ConvoState {
@@ -6820,6 +6821,7 @@ message Response {
 	repeated SLAPolicy sla_policies = 33;
 	SLAPolicy sla_policy = 34;
 	repeated SLAViolation sla_violations = 35;
+	KnowledgeBase knowledge_base = 36;
 }
 
 message ZaloCallConsent {
@@ -7602,9 +7604,9 @@ message Article {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string name = 4;
+	I18nString title = 4;
 	Message description = 5;
-	string state = 6; //public ,draft
+	string state = 6; // public ,draft
 	string category_id = 7;
 	bool is_index = 8;
 	int64 updated = 9;
@@ -7622,12 +7624,54 @@ message ArticleCategory {
 	common.Context ctx = 1;
 	string id = 2;
 	string account_id = 3;
-	string title = 4;
-	string parent_id = 5; 
-	repeated string parent_ids = 6; //make sure not have a circle 
-	int64 updated = 7;
-	string updated_by = 8;
-	int64 created = 9;
-	string created_by = 10;
-	string public_url = 11;
+
+	I18nString title = 4;
+	I18nString description = 6;
+
+	string parent_id = 7;
+	repeated string parent_ids = 8; //make sure not have a circle
+	int64 updated = 9;
+	string updated_by = 10;
+	int64 created = 11;
+	string created_by = 12;
+	string public_url = 13;
+}
+
+message KnowledgeBase {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string name = 3;
+	File logo = 4;
+
+	string public_domain = 5; // abc.com
+	string access = 6; // public-and-private, private-only
+
+	string crawler_access = 7; // block, allow
+
+	string locale = 8; // can be auto
+	repeated string locales = 9;
+
+	File favikon = 10;
+
+	TicketType ticket_type = 11;
+	int64 disabled_related_articles = 12;
+
+	int64 disabled_feedback = 13;
+	KnowledgeBasePageStyle home_page = 15;
+	KnowledgeBasePageStyle article_page = 16;
+	KnowledgeBasePageStyle category_page = 17;
+
+	int64 updated = 20;
+	string updated_by = 21;
+
+	string status = 22; // deploying, ready
+}
+
+message KnowledgeBasePageStyle {
+	string site_font_family = 5;
+	string body_font_family = 6;
+	string toc_font_family = 7;
+	string breadcrumb_font_family = 8;
+	string main_color = 10;
+	string secondary_color = 11;
 }
