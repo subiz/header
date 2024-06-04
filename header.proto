@@ -7405,7 +7405,10 @@ message Ticket {
 	int64 first_response_due = 76; // 0 -> dont use // sec
 	int64 every_response_due = 77; // sec
 	int64 resolution_due = 78; // sec
-	int64 num_sla_violated = 79;
+
+	int64 num_sla_first_response_violated = 88;
+	int64 num_sla_every_response_violated = 89;
+	int64 num_sla_resolution_violated = 90;
 
 	// repeated string tags = 79;
 	int64 created = 80;
