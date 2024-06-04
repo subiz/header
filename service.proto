@@ -397,6 +397,7 @@ service TicketMgr {
 	rpc UpdateSLAPolicy(header.SLAPolicy) returns (Response);
 	rpc DeleteSLAPolicy(header.SLAPolicy) returns (Response);
 	rpc ListSLAPolicies(header.Id) returns (Response);
+	rpc GetSLAPolicy(header.SLAPolicy) returns (Response);
 
 	rpc ListTicketSLAViolations(header.Id) returns (Response);
 }
