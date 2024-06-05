@@ -29,8 +29,11 @@ service RateLimit {
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
-	rpc Index(header.DocIndexRequest) returns (header.Empty);
-	rpc Search(header.DocSearchRequest) returns (header.Ids);
+	rpc Index(header.DocIndexRequest) returns (header.Empty); //index change text
+	rpc Search(header.DocSearchRequest) returns (header.Ids); //search only id
+
+	rpc Search2(header.DocSearchRequest) returns (header.DocSearchResponse); //search all
+	rpc Index2(header.DocIndexRequest) returns (header.Empty); //index static text
 
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 	rpc Report(header.ConvoReportRequest) returns (header.ConvoReportResponse);
@@ -749,4 +752,15 @@ service Scheduler {
 service KB {
 	rpc UpdateKnowledgeBase(KnowledgeBase) returns (KnowledgeBase);
 	rpc GetKnowledgeBase(Id) returns (Response);
+
+	rpc CreateArticle(header.Article) returns (header.Article);
+	rpc UpdateArticle(header.Article) returns (header.Article);
+	rpc DeleteArticle(Id) returns (Empty);
+	rpc GetArticle(Id) returns (header.Article);
+
+	rpc CreateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
+	rpc UpdateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
+	rpc DeleteArticleCategory(Id) returns (Empty);
+	rpc GetArticleCategory(Id) returns (header.ArticleCategory);
+	rpc ListArticleCategoryies(Empty) returns (Response);
 }

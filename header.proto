@@ -5621,8 +5621,8 @@ message DocHit {
 	string origin = 13;
 	User user = 14;        //for primary user
 	DocHit secondary_doc = 15;
-
 	string user_type = 16;
+	Article article = 17;
 }
 
 message DocSearchResponse {
@@ -6822,6 +6822,8 @@ message Response {
 	SLAPolicy sla_policy = 34;
 	repeated SLAViolation sla_violations = 35;
 	KnowledgeBase knowledge_base = 36;
+	repeated Article articles = 37;
+	repeated ArticleCategory article_categories = 38;
 }
 
 message ZaloCallConsent {
@@ -7607,7 +7609,7 @@ message Article {
 	I18nString title = 4;
 	Message description = 5;
 	string state = 6; // public ,draft
-	string category_id = 7;
+	string category = 7; 
 	bool is_index = 8;
 	int64 updated = 9;
 	string updated_by = 10;
@@ -7635,6 +7637,7 @@ message ArticleCategory {
 	int64 created = 11;
 	string created_by = 12;
 	string public_url = 13;
+	string article = 14;
 }
 
 message KnowledgeBase {
