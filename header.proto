@@ -7639,7 +7639,7 @@ message ArticleCategory {
 	string public_url = 13;
 	string article = 14;
 	repeated Article articles = 15; // just for report
-	repeated ArticleCategory article_Categories = 16; // just for report
+	repeated ArticleCategory article_categories = 16; // just for report
 }
 
 message KnowledgeBase {

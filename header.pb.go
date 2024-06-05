@@ -55722,21 +55722,21 @@ type ArticleCategory struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ctx                *common.Context    `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	Id                 string             `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
-	AccountId          string             `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Title              *I18NString        `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
-	Description        *I18NString        `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	ParentId           string             `protobuf:"bytes,7,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
-	ParentIds          []string           `protobuf:"bytes,8,rep,name=parent_ids,json=parentIds,proto3" json:"parent_ids,omitempty"` //make sure not have a circle
-	Updated            int64              `protobuf:"varint,9,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy          string             `protobuf:"bytes,10,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Created            int64              `protobuf:"varint,11,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy          string             `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	PublicUrl          string             `protobuf:"bytes,13,opt,name=public_url,json=publicUrl,proto3" json:"public_url,omitempty"`
-	Article            string             `protobuf:"bytes,14,opt,name=article,proto3" json:"article,omitempty"`
-	Articles           []*Article         `protobuf:"bytes,15,rep,name=articles,proto3" json:"articles,omitempty"`                                            // just for report
-	Article_Categories []*ArticleCategory `protobuf:"bytes,16,rep,name=article_Categories,json=articleCategories,proto3" json:"article_Categories,omitempty"` // just for report
+	Ctx               *common.Context    `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Id                string             `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	AccountId         string             `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Title             *I18NString        `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	Description       *I18NString        `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	ParentId          string             `protobuf:"bytes,7,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	ParentIds         []string           `protobuf:"bytes,8,rep,name=parent_ids,json=parentIds,proto3" json:"parent_ids,omitempty"` //make sure not have a circle
+	Updated           int64              `protobuf:"varint,9,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy         string             `protobuf:"bytes,10,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Created           int64              `protobuf:"varint,11,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy         string             `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	PublicUrl         string             `protobuf:"bytes,13,opt,name=public_url,json=publicUrl,proto3" json:"public_url,omitempty"`
+	Article           string             `protobuf:"bytes,14,opt,name=article,proto3" json:"article,omitempty"`
+	Articles          []*Article         `protobuf:"bytes,15,rep,name=articles,proto3" json:"articles,omitempty"`                                            // just for report
+	ArticleCategories []*ArticleCategory `protobuf:"bytes,16,rep,name=article_categories,json=articleCategories,proto3" json:"article_categories,omitempty"` // just for report
 }
 
 func (x *ArticleCategory) Reset() {
@@ -55869,9 +55869,9 @@ func (x *ArticleCategory) GetArticles() []*Article {
 	return nil
 }
 
-func (x *ArticleCategory) GetArticle_Categories() []*ArticleCategory {
+func (x *ArticleCategory) GetArticleCategories() []*ArticleCategory {
 	if x != nil {
-		return x.Article_Categories
+		return x.ArticleCategories
 	}
 	return nil
 }
@@ -67320,7 +67320,7 @@ var file_header_proto_rawDesc = []byte{
 	0x65, 0x12, 0x2b, 0x0a, 0x08, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x18, 0x0f, 0x20,
 	0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x41, 0x72, 0x74,
 	0x69, 0x63, 0x6c, 0x65, 0x52, 0x08, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x73, 0x12, 0x46,
-	0x0a, 0x12, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x5f, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
+	0x0a, 0x12, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x5f, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f,
 	0x72, 0x69, 0x65, 0x73, 0x18, 0x10, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x68, 0x65, 0x61,
 	0x64, 0x65, 0x72, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67,
 	0x6f, 0x72, 0x79, 0x52, 0x11, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x43, 0x61, 0x74, 0x65,
@@ -69199,7 +69199,7 @@ var file_header_proto_depIdxs = []int32{
 	530, // 946: header.ArticleCategory.title:type_name -> header.I18nString
 	530, // 947: header.ArticleCategory.description:type_name -> header.I18nString
 	497, // 948: header.ArticleCategory.articles:type_name -> header.Article
-	498, // 949: header.ArticleCategory.article_Categories:type_name -> header.ArticleCategory
+	498, // 949: header.ArticleCategory.article_categories:type_name -> header.ArticleCategory
 	529, // 950: header.KnowledgeBase.ctx:type_name -> common.Context
 	240, // 951: header.KnowledgeBase.logo:type_name -> header.File
 	240, // 952: header.KnowledgeBase.favikon:type_name -> header.File
