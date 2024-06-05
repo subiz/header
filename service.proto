@@ -29,11 +29,12 @@ service RateLimit {
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
-	rpc Index(header.DocIndexRequest) returns (header.Empty); //index change text
-	rpc Search(header.DocSearchRequest) returns (header.Ids); //search only id
 
-	rpc Search2(header.DocSearchRequest) returns (header.DocSearchResponse); //search all
-	rpc Index2(header.DocIndexRequest) returns (header.Empty); //index static text
+	rpc Index(header.DocIndexRequest) returns (header.Empty); //index change text
+	rpc IndexStatic(header.DocIndexRequest) returns (header.Empty); //index static text
+
+	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
+	rpc SearchIds(header.DocSearchRequest) returns (header.Ids); 
 
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 	rpc Report(header.ConvoReportRequest) returns (header.ConvoReportResponse);
