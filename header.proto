@@ -7620,6 +7620,7 @@ message Article {
 	string bucket = 15;
 	string lastest_version = 16; // 1,2,3,..
 	string lastest_public_version = 17;
+	string kb = 18;
 }
 
 message ArticleCategory {
