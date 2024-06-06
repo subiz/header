@@ -132,7 +132,7 @@ func RecoverInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySe
 	defer func() {
 		if r := recover(); r != nil {
 			if e, ok := r.(error); ok {
-				err = log.EServer(e, true, log.M{"_function_name": info.FullMethod, "__skip_stack": 1}) // wrap error
+				err = log.ERetry(e, log.M{"_function_name": info.FullMethod, "__skip_stack": 1}) // wrap error
 			} else {
 				err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": info.FullMethod, "__skip_stack": 1})
 			}
@@ -145,7 +145,7 @@ func WithErrorStack() grpc.DialOption {
 	return grpc.WithChainUnaryInterceptor(func(ctx context.Context, method string, req interface{}, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) (err error) {
 		defer func() {
 			if r := recover(); r != nil {
-				err = log.EServer(err, true, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method, "__skip_stack": "3"})
+				err = log.ERetry(err, log.M{"grpc_code": codes.Canceled.String(), "_function_name": method, "__skip_stack": "3"})
 			}
 		}()
 
@@ -173,7 +173,7 @@ func WithErrorStack() grpc.DialOption {
 			// codes.Internal
 			input, _ := json.Marshal(req)
 			cred := FromGrpcCtx(ctx).GetCredential()
-			return log.EServer(err, true, log.M{"grpc_code": grpcerr.Code().String(), "cred": cred, "input": string(input), "_function_name": method, "__skip_stack": "3"}) // report
+			return log.ERetry(err, log.M{"grpc_code": grpcerr.Code().String(), "cred": cred, "input": string(input), "_function_name": method, "__skip_stack": "3"}) // report
 		}
 	})
 }
@@ -244,7 +244,7 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		defer func() {
 			if r := recover(); r != nil {
 				if e, ok := r.(error); ok {
-					err = log.EServer(e, true, log.M{"_function_name": sinfo.FullMethod, "__skip_stack": 1}) // wrap error
+					err = log.ERetry(e, log.M{"_function_name": sinfo.FullMethod, "__skip_stack": 1}) // wrap error
 				} else {
 					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod, "__skip_stack": 1})
 				}
@@ -401,13 +401,13 @@ func init() {
 func fetchServerConfig() (*ServerConfig, error) {
 	resp, err := http.Get("https://config.subiz.net/subiz")
 	if err != nil {
-		return nil, log.EServer(err, true, log.M{"MSG": "CANNOT FETCH CONFIG"})
+		return nil, log.ERetry(err, log.M{"MSG": "CANNOT FETCH CONFIG"})
 	}
 
 	bodyBytes, _ := io.ReadAll(resp.Body)
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		return nil, log.EServer(err, true, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG"})
+		return nil, log.ERetry(err, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG"})
 	}
 
 	conf := &ServerConfig{}
@@ -415,7 +415,7 @@ func fetchServerConfig() (*ServerConfig, error) {
 	if err == nil {
 		return conf, nil
 	}
-	return nil, log.EServer(err, true, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG INVALIDJSON"})
+	return nil, log.ERetry(err, log.M{"_payload": bodyBytes, "MSG": "CANNOT FETCH CONFIG INVALIDJSON"})
 }
 
 func makeSureServerConfiguation(conf *ServerConfig) {
