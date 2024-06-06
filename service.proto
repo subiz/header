@@ -751,8 +751,11 @@ service Scheduler {
 }
 
 service KB {
-	rpc UpdateKnowledgeBase(KnowledgeBase) returns (KnowledgeBase);
-	rpc GetKnowledgeBase(Id) returns (Response);
+	rpc CreateKnowledgeBase(header.KnowledgeBase) returns (header.KnowledgeBase);
+	rpc UpdateKnowledgeBase(header.KnowledgeBase) returns (header.KnowledgeBase);
+	rpc DeleteKnowledgeBase(Id) returns (Empty);
+	rpc GetKnowledgeBase(Id) returns (header.KnowledgeBase);
+	rpc ListKnowledgeBases(Empty) returns (Response);
 
 	rpc CreateArticle(header.Article) returns (header.Article);
 	rpc UpdateArticle(header.Article) returns (header.Article);

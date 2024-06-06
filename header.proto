@@ -5587,6 +5587,7 @@ message DocIndexRequest {
 	repeated string owners = 9;
 	string primary_document_id=13;
 	int64 sec = 14; // unix sec for doc, used to order more recent document
+	string locale = 15;
 }
 
 message DocSearchRequest {
@@ -6826,6 +6827,7 @@ message Response {
 	KnowledgeBase knowledge_base = 36;
 	repeated Article articles = 37;
 	repeated ArticleCategory article_categories = 38;
+	repeated KnowledgeBase knowledge_bases = 39;
 }
 
 message ZaloCallConsent {
