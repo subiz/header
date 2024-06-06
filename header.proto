@@ -33,6 +33,7 @@ message Id {
 	string channel_source = 6;
 	string profile_id = 7;
 	bool is_gen_qr = 8;
+	string version = 9;
 }
 
 message Ids {
