@@ -1840,7 +1840,7 @@ var file_service_proto_rawDesc = []byte{
 	0x39, 0x0a, 0x0e, 0x55, 0x6e, 0x72, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x54, 0x61, 0x73,
 	0x6b, 0x12, 0x15, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x64,
 	0x75, 0x6c, 0x65, 0x72, 0x54, 0x61, 0x73, 0x6b, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xf8, 0x04, 0x0a, 0x02, 0x4b,
+	0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xf7, 0x04, 0x0a, 0x02, 0x4b,
 	0x42, 0x12, 0x43, 0x0a, 0x13, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4b, 0x6e, 0x6f, 0x77, 0x6c,
 	0x65, 0x64, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x12, 0x15, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
 	0x72, 0x2e, 0x4b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x1a,
@@ -1876,13 +1876,13 @@ var file_service_proto_rawDesc = []byte{
 	0x39, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x43, 0x61, 0x74,
 	0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49,
 	0x64, 0x1a, 0x17, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x63,
-	0x6c, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x39, 0x0a, 0x16, 0x4c, 0x69,
+	0x6c, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x38, 0x0a, 0x15, 0x4c, 0x69,
 	0x73, 0x74, 0x41, 0x72, 0x74, 0x69, 0x63, 0x6c, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
-	0x79, 0x69, 0x65, 0x73, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d,
-	0x70, 0x74, 0x79, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x65, 0x73, 0x12, 0x0d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70,
+	0x74, 0x79, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_service_proto_goTypes = []interface{}{
@@ -2684,7 +2684,7 @@ var file_service_proto_depIdxs = []int32{
 	170, // 515: header.KB.UpdateArticleCategory:input_type -> header.ArticleCategory
 	1,   // 516: header.KB.DeleteArticleCategory:input_type -> header.Id
 	1,   // 517: header.KB.GetArticleCategory:input_type -> header.Id
-	11,  // 518: header.KB.ListArticleCategoryies:input_type -> header.Empty
+	11,  // 518: header.KB.ListArticleCategories:input_type -> header.Empty
 	11,  // 519: header.GooglekonService.SendEventToGoogle:output_type -> header.Empty
 	2,   // 520: header.GooglekonService.ReadGoogleLocationSetting:output_type -> header.GoogleLocationSetting
 	2,   // 521: header.GooglekonService.UpdateGoogleLocationSetting:output_type -> header.GoogleLocationSetting
@@ -3203,7 +3203,7 @@ var file_service_proto_depIdxs = []int32{
 	170, // 1034: header.KB.UpdateArticleCategory:output_type -> header.ArticleCategory
 	11,  // 1035: header.KB.DeleteArticleCategory:output_type -> header.Empty
 	170, // 1036: header.KB.GetArticleCategory:output_type -> header.ArticleCategory
-	181, // 1037: header.KB.ListArticleCategoryies:output_type -> header.Response
+	181, // 1037: header.KB.ListArticleCategories:output_type -> header.Response
 	519, // [519:1038] is the sub-list for method output_type
 	0,   // [0:519] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
@@ -22746,7 +22746,7 @@ type KBClient interface {
 	UpdateArticleCategory(ctx context.Context, in *ArticleCategory, opts ...grpc.CallOption) (*ArticleCategory, error)
 	DeleteArticleCategory(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	GetArticleCategory(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ArticleCategory, error)
-	ListArticleCategoryies(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
+	ListArticleCategories(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
 }
 
 type kBClient struct {
@@ -22847,9 +22847,9 @@ func (c *kBClient) GetArticleCategory(ctx context.Context, in *Id, opts ...grpc.
 	return out, nil
 }
 
-func (c *kBClient) ListArticleCategoryies(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
+func (c *kBClient) ListArticleCategories(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/header.KB/ListArticleCategoryies", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.KB/ListArticleCategories", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -22868,7 +22868,7 @@ type KBServer interface {
 	UpdateArticleCategory(context.Context, *ArticleCategory) (*ArticleCategory, error)
 	DeleteArticleCategory(context.Context, *Id) (*Empty, error)
 	GetArticleCategory(context.Context, *Id) (*ArticleCategory, error)
-	ListArticleCategoryies(context.Context, *Empty) (*Response, error)
+	ListArticleCategories(context.Context, *Empty) (*Response, error)
 }
 
 // UnimplementedKBServer can be embedded to have forward compatible implementations.
@@ -22905,8 +22905,8 @@ func (*UnimplementedKBServer) DeleteArticleCategory(context.Context, *Id) (*Empt
 func (*UnimplementedKBServer) GetArticleCategory(context.Context, *Id) (*ArticleCategory, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetArticleCategory not implemented")
 }
-func (*UnimplementedKBServer) ListArticleCategoryies(context.Context, *Empty) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListArticleCategoryies not implemented")
+func (*UnimplementedKBServer) ListArticleCategories(context.Context, *Empty) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListArticleCategories not implemented")
 }
 
 func RegisterKBServer(s *grpc.Server, srv KBServer) {
@@ -23093,20 +23093,20 @@ func _KB_GetArticleCategory_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _KB_ListArticleCategoryies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _KB_ListArticleCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(KBServer).ListArticleCategoryies(ctx, in)
+		return srv.(KBServer).ListArticleCategories(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.KB/ListArticleCategoryies",
+		FullMethod: "/header.KB/ListArticleCategories",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(KBServer).ListArticleCategoryies(ctx, req.(*Empty))
+		return srv.(KBServer).ListArticleCategories(ctx, req.(*Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -23156,8 +23156,8 @@ var _KB_serviceDesc = grpc.ServiceDesc{
 			Handler:    _KB_GetArticleCategory_Handler,
 		},
 		{
-			MethodName: "ListArticleCategoryies",
-			Handler:    _KB_ListArticleCategoryies_Handler,
+			MethodName: "ListArticleCategories",
+			Handler:    _KB_ListArticleCategories_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

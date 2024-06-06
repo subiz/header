@@ -763,5 +763,5 @@ service KB {
 	rpc UpdateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
 	rpc DeleteArticleCategory(Id) returns (Empty);
 	rpc GetArticleCategory(Id) returns (header.ArticleCategory);
-	rpc ListArticleCategoryies(Empty) returns (Response);
+	rpc ListArticleCategories(Empty) returns (Response);
 }
