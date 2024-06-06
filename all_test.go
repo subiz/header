@@ -250,11 +250,6 @@ func TestAllLang(t *testing.T) {
 	fmt.Println(a)
 }
 
-func TestPerm(t *testing.T) {
-	fmt.Println("D", checkAccess([]string{"all"}, "phone_device:w"))
-	fmt.Println("A", checkAccess([]string{"view_others", "agent", "account_setting"}, "phone_device:w"))
-}
-
 func TestUserViewCondition(t *testing.T) {
 	// submit ít nhất 2 form dang-ky trong vòng 5 ngày (trường company-size trong form phải > 20 người)
 	// không chạy với cus id là 243

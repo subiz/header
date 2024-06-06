@@ -460,7 +460,7 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 	}))
 	opts = append(opts, grpc.WithChainUnaryInterceptor(prommetrics.UnaryClientInterceptor()))
 	for {
-		conn, err := grpc.Dial(service, opts...)
+		conn, err := grpc.NewClient(service, opts...)
 		if err != nil {
 			fmt.Println("CANNOT CONNECT TO", service, ". Err", err, ". Retry in 5s...")
 			time.Sleep(5 * time.Second)

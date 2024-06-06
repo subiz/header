@@ -669,27 +669,6 @@ func GetTextAttr(u *User, key string) string {
 	return ""
 }
 
-// deprecated
-var Scopes = makeScopeMap()
-
-// deprecated
-func makeScopeMap() map[string]string {
-	// scope => permission
-	var m = map[string]string{}
-	m["agent"] = "account:r conversation:rw agent_group:r rule:r integration:r message_template:rw other_message_template:r tag:r whitelist:wr widget:r subscription:r invoice:r user:rw attribute:r facebook:r google:r bot:r agent:r conversation_setting:r web_plugin:r file:wr webpage:r lang:r user_label:r user_view:rw order:rw shop_setting:r conversation_modal:r conversation_automation:r phone_device:r call_setting:r greeting_audio:r"
-	m["view_other_convos"] = "other_conversation:r"
-	m["view_others"] = "other_conversation:r other_lead:r other_order:r"
-	m["export_user"] = "user:e" // export
-
-	m["account_setting"] = m["agent"] + " account:w agent:w agent_group:w rule:w integration:w other_message_template:rw tag:w widget:w attribute:w facebook:w google:w bot:w conversation_setting:w web_plugin:wr webhook:wr webpage:w lang:w user_label:w shop_setting:w conversation_modal:w conversation_automation:w phone_device:rw call_setting:rw greeting_audio:rw"
-	m["account_manage"] = m["account_setting"] + "account:w agent_group:wr agent:w subscription:rw payment_method:rw"
-	m["owner"] = m["account_manage"] + " " + m["account_setting"]
-	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " payment:w"
-	m["crm"] = m["account:r webhook:wr user:rw"]
-	m["all"] = m["subiz"]
-	return m
-}
-
 // scope name -> perm -> bool
 //
 //	example: {
@@ -756,12 +735,12 @@ const SEGMENT ObjectType = "segment"
 const AUTO_SEGMENT ObjectType = "auto_segment"
 const WHITELIST ObjectType = "whitelist"
 const SUBSCRIPTION ObjectType = "subscription"
+
 // const INVOICE ObjectType = "invoice"
 const BOT ObjectType = "bot"
 const LIVE ObjectType = "live"
 const ATTRIBUTE ObjectType = "attribute"
 const AGENT ObjectType = "agent"
-const WIDGET ObjectType = "widget"
 const WEBHOOK ObjectType = "webhook"
 const SLA_POLICY ObjectType = "sla_policy"
 const KNOWLEGE_BASE ObjectType = "knowledge_base"
@@ -774,14 +753,14 @@ func makeScopeMap2() map[string]string {
 	// scope => permission
 	var m = map[string]string{}
 	m["agent"] = "account:read conversation:read:own conversation:create conversation:update:own agent_group:read rule:read integration:read message_template:read message_template:update:own mesasge_template:delete:own message_template:create tag:read user:delete:own knowledge_base:read article:read" +
-		" whitelist:read whitelist:update whitelist:delete whitelist:create widget:read subscription:read user:read:own user:update:own user:create user:read:unassigned user:update:unassigned attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:create file:update lang:read user_label:read user_view:update:own user_view:create user_view:read user_view:update:own" +
+		" whitelist:read whitelist:update whitelist:delete whitelist:create subscription:read user:read:own user:update:own user:create user:read:unassigned user:update:unassigned attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:create file:update lang:read user_label:read user_view:update:own user_view:create user_view:read user_view:update:own" +
 		" order:create order:read:unassigned order:read order:update:own shop_setting:read conversation_modal:read conversation_automation:read phone_device:read:own phone_device:update:own call_setting:read greeting_audio:read " +
 		" ticket:invite:own ticket:update:own ticket:read:own product:create product:update:own product:read ticket_type:read segment:read segment:update:own segment:create ticket_template:create ticket_template:read ticket_template:update:own sla_policy:read live:read "
 	m["view_other_convos"] = "conversation:read"
 	m["view_others"] = " live:read conversation:read user:read order:read ticket:read "
 	m["export_user"] = "user:export" // export
 
-	m["account_setting"] = m["agent"] + " ticket:read user:read user:delete live:read auto_segment:create account:update agent:update agent:create agent_group:delete agent_group:update agent_group:create rule:delete rule:update rule:create integration:delete integration:update integration:create message_template:delete message_template:update tag:delete tag:update tag:create widget:update attribute:update attribute:create bot:update bot:delete bot:create conversation_setting:update web_plugin:update web_plugin:create web_plugin:delete webhook:read webhook:update webhook:create webhook:delete lang:create lang:update user_label:create user_label:update shop_setting:update shop_setting:create conversation_modal:update conversation_modal:create conversation_automation:update conversation_automation:create phone_device:read phone_device:create phone_device:update phone_device:delete call_setting:update greeting_audio:create greeting_audio:update greeting_audio:delete ticket:update order:read order:update product:update product:delete order:delete ticket_type:create ticket_type:update ticket:delete user_view:update segment:update ticket_template:update ticket:invite user:update file:delete sla_policy:update sla_policy:delete sla_policy:create knowledge_base:update knowledge_base:create knowledge_base:delete article:create article:delete article:update "
+	m["account_setting"] = m["agent"] + " ticket:read user:read user:delete live:read auto_segment:create account:update agent:update agent:create agent_group:delete agent_group:update agent_group:create rule:delete rule:update rule:create integration:delete integration:update integration:create message_template:delete message_template:update tag:delete tag:update tag:create attribute:update attribute:create bot:update bot:delete bot:create conversation_setting:update web_plugin:update web_plugin:create web_plugin:delete webhook:read webhook:update webhook:create webhook:delete lang:create lang:update user_label:create user_label:update shop_setting:update shop_setting:create conversation_modal:update conversation_modal:create conversation_automation:update conversation_automation:create phone_device:read phone_device:create phone_device:update phone_device:delete call_setting:update greeting_audio:create greeting_audio:update greeting_audio:delete ticket:update order:read order:update product:update product:delete order:delete ticket_type:create ticket_type:update ticket:delete user_view:update segment:update ticket_template:update ticket:invite user:update file:delete sla_policy:update sla_policy:delete sla_policy:create knowledge_base:update knowledge_base:create knowledge_base:delete article:create article:delete article:update "
 
 	m["account_manage"] = m["account_setting"] + " report:read account:update agent_group:update agent:update subscription:update payment_method:read payment_method:update"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
@@ -795,89 +774,6 @@ func makeScopeMap2() map[string]string {
 	m["segment_member"] = "user:read user:update user:invite"
 	m["segment_manager"] = m["segment_member"] + " segment:update"
 	return m
-}
-
-// deprecated
-func prettyPerm(perm string) string {
-	perms := strings.FieldsFunc(perm, func(r rune) bool {
-		return r == ' ' || r == ';' || r == ',' || r == '\n' || r == '\t'
-	})
-	permM := make(map[string]string)
-	for _, p := range perms {
-		p = strings.TrimSpace(p)
-
-		psplit := strings.Split(p, ":")
-		if len(psplit) != 2 {
-			continue
-		}
-		permM[psplit[0]] += psplit[1]
-	}
-
-	out := ""
-	for k, v := range permM {
-		ppp := ""
-		if strings.Contains(v, "w") {
-			ppp += "w"
-		}
-		if strings.Contains(v, "r") {
-			ppp += "r"
-		}
-		if strings.Contains(v, "e") {
-			ppp += "e"
-		}
-		if strings.Contains(v, "p") {
-			ppp += "p"
-		}
-		if ppp != "" {
-			out += strings.TrimSpace(k) + ":" + ppp + " "
-		}
-	}
-	return strings.TrimSpace(out)
-}
-
-// deprecated
-// []string{"all", "agent"}, "conversation:r tag:wr" => true
-// []string{"agent"}, "tag:wr" => false
-func checkAccess(scopes []string, perm string) bool {
-	// make availabe perm map by joining all permision in scopes
-	availableperm := make(map[string]string) // {"conversation" => "cr", "user" => "u"}
-	joinperm := ""
-	for _, scope := range scopes {
-		joinperm += " " + Scopes[strings.TrimSpace(scope)]
-	}
-
-	joinperm = prettyPerm(joinperm)
-	joinpermsplit := strings.Split(joinperm, " ")
-	for _, joinpermitem := range joinpermsplit {
-		joinpermitemsplit := strings.Split(joinpermitem, ":")
-		if len(joinpermitemsplit) != 2 {
-			continue
-		}
-		availableperm[joinpermitemsplit[0]] = joinpermitemsplit[1]
-	}
-
-	perm = prettyPerm(perm)
-	perms := strings.Split(perm, " ")
-	for _, p := range perms {
-		ps := strings.Split(p, ":") // conversation:rw
-		if len(ps) != 2 {
-			continue
-		}
-
-		for _, p := range ps[1] {
-			if !strings.Contains(availableperm[ps[0]], string(p)) {
-				return false
-			}
-		}
-	}
-	return true
-}
-
-// deprecated
-// []string{"all", "agent"}, "conversation:r tag:wr" => true
-// []string{"agent"}, "tag:wr" => false
-func CheckAccess(realScopes, authorizedScopes []string, perm string) bool {
-	return checkAccess(realScopes, perm) && checkAccess(authorizedScopes, perm)
 }
 
 func CalcTotalOrder(order *Order) {
