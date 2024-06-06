@@ -7694,3 +7694,18 @@ message KnowledgeBasePageStyle {
 	string main_color = 10;
 	string secondary_color = 11;
 }
+
+message ListArticleRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string kb = 3;
+	string category = 4; //
+
+	string query = 5;
+	string locale = 6; // vi-VN, en-US
+
+	string anchor = 8;
+	int32 limit = 9;
+
+	bool shorten = 10;
+}

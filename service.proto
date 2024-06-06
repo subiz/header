@@ -34,7 +34,7 @@ service DocSearch {
 	rpc IndexStatic(header.DocIndexRequest) returns (header.Empty); //index static text
 
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
-	rpc SearchIds(header.DocSearchRequest) returns (header.Ids); 
+	rpc SearchIds(header.DocSearchRequest) returns (header.Ids);
 
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 	rpc Report(header.ConvoReportRequest) returns (header.ConvoReportResponse);
@@ -761,6 +761,7 @@ service KB {
 	rpc UpdateArticle(header.Article) returns (header.Article);
 	rpc DeleteArticle(Id) returns (Empty);
 	rpc GetArticle(Id) returns (header.Article);
+	rpc ListArticles(header.ListArticleRequest) returns (header.Response);
 
 	rpc CreateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
 	rpc UpdateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
