@@ -1121,6 +1121,7 @@ message ConversationMember {
 	int64 total_messages = 35;
 	int64 read_at = 36; // ticket
 	int64 last_action_at = 37;
+	string is_subscribed = 38; // "", off, on
 }
 
 message ListConversationsRequest {
@@ -7567,6 +7568,7 @@ message ResourceGroupMember {
 
 	string role = 6; // member, manager, admin, ...
 	repeated string scopes = 10;
+	string is_subscribed = 11;
 }
 
 message SLAPolicy {
@@ -7577,7 +7579,7 @@ message SLAPolicy {
 	string name = 4;
 	string description = 5;
 
-	int32 priority = 6;
+	int32 number_of = 6; //stt
 	SLATarget normal_priority_target = 7;
 	SLATarget high_priority_target = 8;
 	SLATarget urgent_priority_target = 9;
@@ -7628,7 +7630,7 @@ message Article {
 	string latest_version = 17; // 1,2,3,..
 	string public_version = 18;
 
-	int64 number_of = 19; // stt
+	int32 number_of = 19; // stt
 }
 
 message ArticleCategory {
