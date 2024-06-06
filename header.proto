@@ -7609,22 +7609,26 @@ message SLATarget {
 message Article {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
-	I18nString title = 4;
-	Message description = 5;
-	string state = 6; // public ,draft
-	string category = 7; 
-	bool is_index = 8;
-	int64 updated = 9;
-	string updated_by = 10;
-	int64 created = 11;
-	string created_by = 12;
-	string public_url = 13;
-	string gcs_url = 14;
-	string bucket = 15;
-	string lastest_version = 16; // 1,2,3,..
-	string lastest_public_version = 17;
-	string kb = 18;
+
+	string kb = 3;
+	string category = 4;
+	string id = 5;
+
+	I18nString title = 6;
+	Message description = 7;
+
+	bool is_public = 8;
+
+	int64 updated = 10;
+	string updated_by = 11;
+	int64 created = 12;
+	string created_by = 13;
+	string public_url = 14;
+
+	string latest_version = 17; // 1,2,3,..
+	string public_version = 18;
+
+	int64 number_of = 19; // stt
 }
 
 message ArticleCategory {
@@ -7635,16 +7639,21 @@ message ArticleCategory {
 	I18nString title = 4;
 	I18nString description = 6;
 
-	string parent_id = 7;
-	repeated string parent_ids = 8; //make sure not have a circle
+	string parent_category = 7;
+	// repeated string parent_ids = 8; //make sure not have a circle
 	int64 updated = 9;
 	string updated_by = 10;
 	int64 created = 11;
 	string created_by = 12;
 	string public_url = 13;
-	string article = 14;
-	repeated Article articles = 15; // just for report
+
+	string main_article = 14;
+	// string toc_article = 14;
+	// repeated Article articles = 15; // just for report
 	repeated ArticleCategory article_categories = 16; // just for report
+
+	int64 priority = 17;
+	string kb = 18;
 }
 
 message KnowledgeBase {
