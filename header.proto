@@ -971,6 +971,7 @@ message Rule {
 	TimmingCondition timming_condition = 16;
 	repeated UserAttributeCondition form_conditions = 30;
 
+	string returning_visitor = 35; // new, returning, empty
 	bool user_has_replied_before = 18; // new
 	repeated UserAttributeCondition user_conditions = 19;
 	repeated string lead_owners = 20;
