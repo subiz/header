@@ -387,8 +387,8 @@ service TicketMgr {
 	rpc ReadTickets(Ids) returns (Empty);
 	rpc UnreadTickets(Ids) returns (Empty);
 
-	rpc SnoozeTickets(Ids) returns (Empty);
-	rpc UnsnoozeTickets(Ids) returns (Empty);
+	rpc SubscribedTickets(Ids) returns (Empty);
+	rpc UnSubscribedTickets(Ids) returns (Empty);
 
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 
