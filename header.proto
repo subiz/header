@@ -7705,6 +7705,7 @@ message ListArticleRequest {
 
 	string query = 5;
 	string locale = 6; // vi-VN, en-US
+    string order_by = 7;
 
 	string anchor = 8;
 	int32 limit = 9;
