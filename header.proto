@@ -7686,7 +7686,11 @@ message KnowledgeBase {
 	int64 updated = 20;
 	string updated_by = 21;
 
-	string status = 22; // deploying, ready
+	int64 rebuild_trigger_at = 22;
+	int64 rebuild_done_at = 23;
+	string status = 24; // deploying, ready
+	Job last_job = 25;
+	string last_job_id = 26;
 }
 
 message KnowledgeBasePageStyle {
@@ -7706,10 +7710,26 @@ message ListArticleRequest {
 
 	string query = 5;
 	string locale = 6; // vi-VN, en-US
-    string order_by = 7;
+	string order_by = 7;
 
 	string anchor = 8;
 	int32 limit = 9;
 
 	bool shorten = 10;
+}
+
+message Job {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	string description = 5;
+	string category = 6;
+	int64 timeout_sec = 7;
+	string created = 8;
+	int64 force_ended = 9;
+	string ended = 10;
+	string status = 11; // uploading...
+	string status_updated = 12;
+	bytes output = 13;
 }
