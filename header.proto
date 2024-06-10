@@ -1099,7 +1099,6 @@ message ConversationMember {
 		left = 1;
 		observer = 2; // assigned
 		terminated = 3 ; // bot only
-		snooze = 4; // ticketonly
 	};
 	By invited_by = 16;
 
