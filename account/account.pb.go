@@ -515,9 +515,9 @@ type Agent struct {
 	PasswordChanged   *int64          `protobuf:"varint,23,opt,name=password_changed,json=passwordChanged" json:"password_changed,omitempty"`
 	Modified          *int64          `protobuf:"varint,25,opt,name=modified" json:"modified,omitempty"`
 	Account           *Account        `protobuf:"bytes,28,opt,name=account" json:"account,omitempty"`
-	Type              *string         `protobuf:"bytes,33,opt,name=type" json:"type,omitempty"`                                      // bot or agent (default is agent)
-	ClientId          *string         `protobuf:"bytes,34,opt,name=client_id,json=clientId" json:"client_id,omitempty"`              // ID of bot
-	IsSupervisor      *bool           `protobuf:"varint,35,opt,name=is_supervisor,json=isSupervisor" json:"is_supervisor,omitempty"` // deprecated, add supervisor to scope
+	Type              *string         `protobuf:"bytes,33,opt,name=type" json:"type,omitempty"`                         // bot or agent (default is agent)
+	ClientId          *string         `protobuf:"bytes,34,opt,name=client_id,json=clientId" json:"client_id,omitempty"` // ID of bot
+	IsSupervisor      *bool           `protobuf:"varint,35,opt,name=is_supervisor,json=isSupervisor" json:"is_supervisor,omitempty"`
 	LastSeen          *Presence       `protobuf:"bytes,38,opt,name=last_seen,json=lastSeen" json:"last_seen,omitempty"`
 	DashboardSetting  *DashboardAgent `protobuf:"bytes,40,opt,name=dashboard_setting,json=dashboardSetting" json:"dashboard_setting,omitempty"`
 	Scopes            []string        `protobuf:"bytes,41,rep,name=scopes" json:"scopes,omitempty"` // supervisor

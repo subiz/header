@@ -91,7 +91,7 @@ message Agent {
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
 
-	optional bool is_supervisor = 35; // deprecated, add supervisor to scope
+	optional bool is_supervisor = 35;
 
 	optional Presence last_seen = 38;
 

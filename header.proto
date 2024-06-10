@@ -7663,23 +7663,24 @@ message ArticleCategory {
 message KnowledgeBase {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string name = 3;
-	File logo = 4;
+	string id = 3;
+	string name = 4;
+	File logo = 5;
 
-	string public_domain = 5; // abc.com
-	string access = 6; // public-and-private, private-only
+	string public_domain = 6; // abc.com
+	string access = 7; // public-and-private, private-only
 
-	string crawler_access = 7; // block, allow
+	string crawler_access = 8; // block, allow
 
-	string locale = 8; // can be auto
-	repeated string locales = 9;
+	string locale = 9; // can be auto
+	repeated string locales = 10;
 
-	File favikon = 10;
+	File favikon = 11;
 
-	TicketType ticket_type = 11;
-	int64 disabled_related_articles = 12;
+	TicketType ticket_type = 12;
+	int64 disabled_related_articles = 13;
 
-	int64 disabled_feedback = 13;
+	int64 disabled_feedback = 14;
 	KnowledgeBasePageStyle home_page = 15;
 	KnowledgeBasePageStyle article_page = 16;
 	KnowledgeBasePageStyle category_page = 17;
@@ -7692,6 +7693,7 @@ message KnowledgeBase {
 	string status = 24; // deploying, ready
 	Job last_job = 25;
 	string last_job_id = 26;
+	int64 version = 28;
 }
 
 message KnowledgeBasePageStyle {
@@ -7727,10 +7729,10 @@ message Job {
 	string description = 5;
 	string category = 6;
 	int64 timeout_sec = 7;
-	string created = 8;
+	int64 created = 8;
 	int64 force_ended = 9;
-	string ended = 10;
+	int64 ended = 10;
 	string status = 11; // uploading...
-	string status_updated = 12;
+	int64 status_updated = 12;
 	bytes output = 13;
 }
