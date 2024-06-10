@@ -7435,6 +7435,11 @@ message Ticket {
 	string created_by = 91;
 }
 
+message SLAViolations {
+	common.Context ctx = 1;
+	repeated SLAViolation violations = 2;
+}
+
 message SLAViolation {
 	common.Context ctx = 1;
 	string account_id = 2;
