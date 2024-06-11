@@ -7432,6 +7432,9 @@ message Ticket {
 
 	Error error = 87; // access_deny, not_found
 	string created_by = 91;
+
+	int64 actual_first_response = 92;
+	int64 actual_last_response = 93;
 }
 
 message SLAViolations {
