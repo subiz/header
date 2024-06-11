@@ -397,11 +397,11 @@ service TicketMgr {
 	rpc UpdateTicketTypeMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveTicketTypeMember(ResourceGroupMember) returns (header.Empty);
 
-	rpc CreateSLAPolicy(header.SLAPolicy) returns (Response);
-	rpc UpdateSLAPolicy(header.SLAPolicy) returns (Response);
-	rpc DeleteSLAPolicy(header.Id) returns (Response);
+	rpc CreateSLAPolicy(header.SLAPolicy) returns (header.SLAPolicy);
+	rpc UpdateSLAPolicy(header.SLAPolicy) returns (header.SLAPolicy);
+	rpc DeleteSLAPolicy(header.Id) returns (Empty);
 	rpc ListSLAPolicies(header.Empty) returns (Response);
-	rpc GetSLAPolicy(Id) returns (Response);
+	rpc GetSLAPolicy(Id) returns (header.SLAPolicy);
 
 	rpc ListTicketSLAViolations(header.Id) returns (Response);
 }
