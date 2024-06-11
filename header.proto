@@ -7575,7 +7575,7 @@ message ResourceGroupMember {
 	int64 accepted = 8;
 	int64 joined = 9;
 
-	string role = 6; // member, manager, admin, ...
+	string role = 6; // reviewer, member, manager, admin, ...
 	repeated string scopes = 10;
 	string is_subscribed = 11;
 }
@@ -7640,6 +7640,14 @@ message Article {
 	string public_version = 18;
 
 	int32 number_of = 19; // stt
+
+	string published_by = 20;
+	string published = 21;
+
+	I18nString draft_title = 22;
+	Message draft_description = 23;
+
+	int64 deleted = 24;
 }
 
 message ArticleCategory {
@@ -7689,18 +7697,30 @@ message KnowledgeBase {
 
 	int64 disabled_feedback = 14;
 	KnowledgeBasePageStyle home_page = 15;
-	KnowledgeBasePageStyle article_page = 16;
+	KnowledgeBaseArticlePageSetting article_page = 16;
 	KnowledgeBasePageStyle category_page = 17;
 
 	int64 updated = 20;
 	string updated_by = 21;
 
-	int64 rebuild_trigger_at = 22;
-	int64 rebuild_done_at = 23;
-	string status = 24; // deploying, ready
-	Job last_job = 25;
+	int64 build_trigger_at = 22;
+	int64 build_done_at = 23;
+	string build_status = 24; // deploying, ready
+	// Job last_job = 25;
 	string last_job_id = 26;
+
 	int64 version = 28;
+
+	repeated ResourceGroupMember permissions = 30;
+}
+
+message KnowledgeBaseArticlePageSetting {
+
+	KnowledgeBasePageStyle style = 2;
+	int64 show_author = 3;
+	int64 show_last_update = 4;
+	int64 show_table_of_content = 5;
+
 }
 
 message KnowledgeBasePageStyle {
@@ -7742,4 +7762,6 @@ message Job {
 	string status = 11; // uploading...
 	int64 status_updated = 12;
 	bytes output = 13;
+	int64 last_ping_ms = 14;
+
 }
