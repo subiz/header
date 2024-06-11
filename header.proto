@@ -7436,7 +7436,10 @@ message Ticket {
 
 message SLAViolations {
 	common.Context ctx = 1;
-	repeated SLAViolation violations = 2;
+	string account_id = 2;
+	string ticket_id = 3;
+	repeated SLAViolation violations = 4;
+	
 }
 
 message SLAViolation {
