@@ -91,7 +91,7 @@ message Agent {
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
 
-	optional bool is_supervisor = 35;
+	optional bool is_supervisor = 35; // auto add live:read conversation:read user:read order:read ticket:read
 
 	optional Presence last_seen = 38;
 
