@@ -1147,6 +1147,8 @@ message ListConversationsRequest {
 	string touchpoint_channel = 17;
 	string touchpoint_source = 18;
 	string touchpoint_id = 19;
+
+	bool ticket_id_only = 20;
 }
 
 message ListConversationEventsRequest {
@@ -7714,12 +7716,10 @@ message KnowledgeBase {
 
 	int64 build_trigger_at = 32;
 	int64 build_done_at = 33;
-	string build_status = 34; // deploying, ready
+	string build_status = 34; // deploying, ready, failed
 	// Job last_job = 25;
 	string last_job_id = 36;
-
 	int64 version = 38;
-
 }
 
 message KnowledgeBaseArticlePageSetting {
@@ -7765,9 +7765,8 @@ message Job {
 	int64 created = 8;
 	int64 force_ended = 9;
 	int64 ended = 10;
-	string status = 11; // uploading...
+	string status = 11; // ended, uploading...
 	int64 status_updated = 12;
 	bytes output = 13;
 	int64 last_ping_ms = 14;
-
 }
