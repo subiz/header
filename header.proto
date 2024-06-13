@@ -296,7 +296,7 @@ message Touchpoint {
 	string account_id = 2;
 	string id = 3; // psid, igsid, zalo id or comment id
 
-	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, call, sms
+	string channel = 5; // facebook , facebook_comment, instagram, instagram_comment, call, sms, zalo
 	repeated KV fields = 8;
 
 	string linked_page_id = 24; // instagram
@@ -7442,7 +7442,7 @@ message SLAViolations {
 	string account_id = 2;
 	string ticket_id = 3;
 	repeated SLAViolation violations = 4;
-	
+
 }
 
 message SLAViolation {
@@ -7480,6 +7480,8 @@ message ListTicketRequest {
 
 	string query = 13;
 	bool header_only = 14;
+
+	Touchpoint touchpoint = 15;
 }
 
 message TicketView {
@@ -7682,48 +7684,47 @@ message KnowledgeBase {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string name = 4;
-	File logo = 5;
+	I18nString name = 4;
+	I18nString description = 5;
+	File logo = 6;
 
-	string public_domain = 6; // abc.com
-	string access = 7; // public-and-private, private-only
+	string public_domain = 7; // abc.com
+	string access = 8; // public-and-private, private-only
 
-	string crawler_access = 8; // block, allow
+	string crawler_access = 9; // block, allow
 
-	string locale = 9; // can be auto
-	repeated string locales = 10;
+	string locale = 10; // can be auto
+	repeated string locales = 11;
 
-	File favikon = 11;
+	File favikon = 12;
 
-	TicketType ticket_type = 12;
-	int64 disabled_related_articles = 13;
+	TicketType ticket_type = 13;
+	int64 disabled_related_articles = 14;
+	repeated ResourceGroupMember permissions = 15;
 
-	int64 disabled_feedback = 14;
-	KnowledgeBasePageStyle home_page = 15;
-	KnowledgeBaseArticlePageSetting article_page = 16;
-	KnowledgeBasePageStyle category_page = 17;
+	int64 disabled_feedback = 20;
+	KnowledgeBasePageStyle home_page = 21;
+	KnowledgeBaseArticlePageSetting article_page = 22;
+	KnowledgeBasePageStyle category_page = 23;
 
-	int64 updated = 20;
-	string updated_by = 21;
+	int64 updated = 30;
+	string updated_by = 31;
 
-	int64 build_trigger_at = 22;
-	int64 build_done_at = 23;
-	string build_status = 24; // deploying, ready
+	int64 build_trigger_at = 32;
+	int64 build_done_at = 33;
+	string build_status = 34; // deploying, ready
 	// Job last_job = 25;
-	string last_job_id = 26;
+	string last_job_id = 36;
 
-	int64 version = 28;
+	int64 version = 38;
 
-	repeated ResourceGroupMember permissions = 30;
 }
 
 message KnowledgeBaseArticlePageSetting {
-
 	KnowledgeBasePageStyle style = 2;
 	int64 show_author = 3;
 	int64 show_last_update = 4;
 	int64 show_table_of_content = 5;
-
 }
 
 message KnowledgeBasePageStyle {
