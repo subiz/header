@@ -793,6 +793,8 @@ message Data {
 	TicketView ticket_view = 118;
 	SLAPolicy sla_policy = 119;
 	KnowledgeBase knowledged_base = 120;
+	ArticleCategory article_category = 121;
+	Article article = 122;
 }
 
 message WebRTCMessage {
@@ -7720,6 +7722,9 @@ message KnowledgeBase {
 	// Job last_job = 25;
 	string last_job_id = 36;
 	int64 version = 38;
+
+	int64 num_categories = 40;
+	int64 num_articles = 41;
 }
 
 message KnowledgeBaseArticlePageSetting {
