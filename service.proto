@@ -755,7 +755,7 @@ service KB {
 	rpc UpdateKnowledgeBase(header.KnowledgeBase) returns (header.KnowledgeBase);
 	rpc DeleteKnowledgeBase(Id) returns (Empty);
 	rpc GetKnowledgeBase(Id) returns (header.KnowledgeBase);
-	rpc ListKnowledgeBases(Empty) returns (Response);
+	rpc ListKnowledgeBases(Id) returns (Response);
 
 	rpc CreateArticle(header.Article) returns (header.Article);
 	rpc UpdateArticle(header.Article) returns (header.Article);
@@ -767,5 +767,5 @@ service KB {
 	rpc UpdateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
 	rpc DeleteArticleCategory(Id) returns (Empty);
 	rpc GetArticleCategory(Id) returns (header.ArticleCategory);
-	rpc ListArticleCategories(Empty) returns (Response);
+	rpc ListArticleCategories(Id) returns (Response);
 }
