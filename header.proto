@@ -7463,6 +7463,7 @@ message SLAViolation {
 	string target = 7; //  first_response, every_response_min, resolution_min = 8;
 	int64 required_sec = 8;
 	int64 actual_sec = 9;
+	int64 required_due = 10;
 }
 
 message TicketHistoryEntry {
