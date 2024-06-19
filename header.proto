@@ -797,6 +797,19 @@ message Data {
 	Article article = 122;
 }
 
+message ConversationMeta {
+	string id = 3;
+	int64 actived = 4;
+	bool is_replied = 5;
+	string user_id = 6;
+	bool is_read = 7;
+	string state = 8;
+	string tags = 9;
+	Touchpoint touchpoint = 10;
+	repeated string associated_conversations = 11;
+	bool is_hidden = 12;
+}
+
 message WebRTCMessage {
 	string negotiation_id = 2;
 	string offer = 3;
@@ -1129,13 +1142,10 @@ message ConversationMember {
 message ListConversationsRequest {
 	common.Context ctx = 1;
 	string account_id = 3;
-	//	 string state = 4; // empty or unassigned
 	string member_id = 8; // ignore
-	//  string group_by = 9;
 	string integration_id = 10; // deprecated
 	string user_id = 11;
 	int32 limit = 5;
-	string anchor = 6;
 
 	string agent_id = 12; // list conversations of agent
 
@@ -1151,6 +1161,8 @@ message ListConversationsRequest {
 	string touchpoint_id = 19;
 
 	bool ticket_id_only = 20;
+
+	string chunk_crc32 = 22; // c1-hash1-c2-hash2-c3-hash3-c4
 }
 
 message ListConversationEventsRequest {
@@ -5182,6 +5194,7 @@ message Tax {
 }
 
 message Error {
+	int64 id = 4;
 	string code = 7; // should be general database_error, access_deny
 	// string sub_code = 8;
 	string number = 12; // unique, or hash of stack 4930543478 for grouping error
@@ -6803,6 +6816,7 @@ message Response {
 	common.Context ctx = 1;
 	string account_id = 2;
 	Error error = 3;
+	int64 last_modified = 4;
 	int64 total = 5;
 	string next_anchor = 6;
 	string prev_anchor = 7;
@@ -6833,6 +6847,9 @@ message Response {
 	repeated Article articles = 37;
 	repeated ArticleCategory article_categories = 38;
 	repeated KnowledgeBase knowledge_bases = 39;
+
+	repeated Conversation conversations = 123;
+	repeated ConversationMeta converation_metas = 124;
 }
 
 message ZaloCallConsent {
