@@ -23,6 +23,8 @@ message Subscription {
 	optional int64 segment_joined = 17;
 
 	optional int64 ticket_updated = 18;
+
+	repeated string ticket_updates = 19; // member, reporter, mentions, assignee
 }
 
 message Setting {
