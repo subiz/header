@@ -6854,10 +6854,12 @@ message Response {
 	repeated KnowledgeBase knowledge_bases = 39;
 
 	repeated Conversation conversations = 123;
-	repeated ConversationMeta converation_metas = 124;
+	repeated ConversationMeta conversation_metas = 124;
 
 	repeated GreetingAudio greeting_audios = 125;
 	GreetingAudio greeting_audio = 126;
+
+	string topic = 127;
 }
 
 message ZaloCallConsent {
@@ -7805,20 +7807,30 @@ message Job {
 	int64 last_ping_ms = 14;
 }
 
-message BlockMark {
-	string type = 5;
-}
-
-message BlockAttribute {
-	int64 value = 2;
-}
-
 message Block {
-	string type = 5;
+	string type = 5; // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table
 	repeated Block content = 6;
 	string text = 7;
-	repeated BlockMark marks = 8;
-	map<string,string> attrs = 9;
-	bool inline = 10;
-	bool whitespace = 11;
+
+	Style style = 99; // inline style
+	int64 level = 100; // 1 2 3 4 5 6 7
+	string title = 101;
+	string alt_text = 103;
+	File image = 104;
+
+	bool bold = 106;
+	bool italic = 107;
+	bool underline = 108;
+	bool strikethrough = 109;
+
+	int64 list_item_order = 110;
+
+	string href = 111;
+
+	bool inline = 112;
+
+	int64 colspan = 114;
+	int64 rowspan = 115;
+	int64 colwidth = 116;
+	map<string,string> attrs = 200;
 }
