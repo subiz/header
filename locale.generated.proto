@@ -139,6 +139,7 @@ message I18nString {
 	string custom = 250;
   string key = 251;
 }
+
 message Price {
 	string currency = 2;
 	int64 FPV = 3; // fixed point arithmetic value, see https://en.wikipedia.org/wiki/Fixed-point_arithmetic

@@ -1162,7 +1162,9 @@ message ListConversationsRequest {
 
 	bool ticket_id_only = 20;
 
-	string chunk_crc32 = 22; // c1-hash1-c2-hash2-c3-hash3-c4
+	// string chunk_crc32 = 22; // c1-hash1-c2-hash2-c3-hash3-c4
+	int64 from_ms = 21;
+	int64 to_ms = 22;
 }
 
 message ListConversationEventsRequest {
@@ -7657,6 +7659,7 @@ message Article {
 	I18nString title = 6;
 	Message description = 7;
 
+	map<string, Block> i18n_content = 9;
 	bool is_public = 8;
 
 	int64 updated = 10;
@@ -7677,6 +7680,8 @@ message Article {
 	Message draft_description = 23;
 
 	int64 deleted = 24;
+
+	Block block = 25;
 }
 
 message ArticleCategory {
@@ -7792,4 +7797,22 @@ message Job {
 	int64 status_updated = 12;
 	bytes output = 13;
 	int64 last_ping_ms = 14;
+}
+
+message BlockMark {
+	string type = 5;
+}
+
+message BlockAttribute {
+	int64 value = 2;
+}
+
+message Block {
+	string type = 5;
+	repeated Block content = 6;
+	string text = 7;
+	repeated BlockMark marks = 8;
+	map<string,string> attrs = 9;
+	bool inline = 10;
+	bool whitespace = 11;
 }

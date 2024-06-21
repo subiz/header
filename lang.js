@@ -183,9 +183,9 @@ let allCurrencyCodes = [
   "XAU",
   "XPD",
   "XPT",
-  "XAG"
+  "XAG",
 ];
-allCurrencyCodes = lo.uniqBy(allCurrencyCodes, e => e);
+allCurrencyCodes = lo.uniqBy(allCurrencyCodes, (e) => e);
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -195,11 +195,14 @@ function toGoLocale(locale) {
   return capitalizeFirstLetter(locale.replace("-", "_"));
 }
 
-let curm = `
+let curm =
+  `
 var AllCurrency = map[string]bool{
-` + allCurrencyCodes.map(code => `	"`+code+`": true,`).join('\n') + `
+` +
+  allCurrencyCodes.map((code) => `	"` + code + `": true,`).join("\n") +
+  `
 }
-`
+`;
 
 let localem = `
 var LocaleM = map[string]bool{
@@ -234,8 +237,8 @@ message I18nString {`;
 var i = 10;
 var s = lo
   .map(langmap, (_, k) => k)
-  .filter(k => k.indexOf("-") >= 0)
-  .map(k => {
+  .filter((k) => k.indexOf("-") >= 0)
+  .map((k) => {
     i++;
 
     gocode += `	if locale == "${k}" {
@@ -262,7 +265,9 @@ var s = lo
 localem += "}\n";
 gocode +=
   `	return fallback
-}` + localem + curm;
+}` +
+  localem +
+  curm;
 gocodeallstring += `	return out
 }`;
 
@@ -285,7 +290,7 @@ func CalcFPV(price *Price, code string) int64 {
 	if cur != "" {
 ` +
   allCurrencyCodes
-    .map(code => {
+    .map((code) => {
       return (
         `
 		if cur == "` +
@@ -303,7 +308,7 @@ func CalcFPV(price *Price, code string) int64 {
 	// unknow currency codd => fallback to the first non-zero
 ` +
   allCurrencyCodes
-    .map(code => {
+    .map((code) => {
       return (
         `
 	if price.Get` +
@@ -327,7 +332,7 @@ func SetCurrency(price *Price, code string, value float32) {
 	}
 ` +
   allCurrencyCodes
-    .map(code => {
+    .map((code) => {
       return (
         `
 	if cur == "` +
@@ -351,6 +356,7 @@ let protoAllCurCodeStr = allCurrencyCodes
 
 let curProto =
   `
+
 message Price {
 	string currency = 2;
 	int64 FPV = 3; // fixed point arithmetic value, see https://en.wikipedia.org/wiki/Fixed-point_arithmetic
@@ -363,6 +369,6 @@ proto += curProto;
 
 fs.writeFileSync(
   "/src/locale.generated.go",
-  gocode + gocodeallstring + curencySource
+  gocode + gocodeallstring + curencySource,
 );
 fs.writeFileSync("/src/locale.generated.proto", proto);

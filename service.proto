@@ -340,6 +340,7 @@ service ConversationMgr {
 
 	rpc ListGreetingAudio(Id) returns (GreetingAudios);
 	rpc CreateGreetingAudio(GreetingAudio) returns (GreetingAudio);
+	rpc UpdateGreetingAudio(GreetingAudio) returns (Response);
 
 	// try to make an outbound call from subiz
 	rpc OriginateCall(StartRequest) returns (Conversation);
