@@ -1162,9 +1162,8 @@ message ListConversationsRequest {
 
 	bool ticket_id_only = 20;
 
-	// string chunk_crc32 = 22; // c1-hash1-c2-hash2-c3-hash3-c4
-	int64 from_ms = 21;
-	int64 to_ms = 22;
+	int64 min_actived_ms = 21;
+	int64 max_actived_ms = 22;
 }
 
 message ListConversationEventsRequest {
@@ -3318,6 +3317,9 @@ message GreetingAudio {
 	string text = 13; // could be text or ssml, for indexing purpose only
 
 	File file = 14;
+
+	int64 updated = 15;
+	string updated_by = 16;
 }
 
 message UploadedImage {
@@ -6822,6 +6824,7 @@ message Response {
 	int64 total = 5;
 	string next_anchor = 6;
 	string prev_anchor = 7;
+	string e_tag = 8;
 	BlockedEmail blocked_email = 10;
 	repeated BlockedEmail blocked_emails = 11;
 	BouncedEmail bounced_email = 12;
@@ -6852,6 +6855,9 @@ message Response {
 
 	repeated Conversation conversations = 123;
 	repeated ConversationMeta converation_metas = 124;
+
+	repeated GreetingAudio greeting_audios = 125;
+	GreetingAudio greeting_audio = 126;
 }
 
 message ZaloCallConsent {
