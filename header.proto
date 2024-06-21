@@ -7808,7 +7808,7 @@ message Job {
 }
 
 message Block {
-	string type = 5; // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table
+	string type = 5; // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table, horizontal_rule, blockquote, link
 	repeated Block content = 6;
 	string text = 7;
 

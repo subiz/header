@@ -57025,7 +57025,7 @@ type Block struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type          string            `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"` // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table
+	Type          string            `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"` // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table, horizontal_rule, blockquote, link
 	Content       []*Block          `protobuf:"bytes,6,rep,name=content,proto3" json:"content,omitempty"`
 	Text          string            `protobuf:"bytes,7,opt,name=text,proto3" json:"text,omitempty"`
 	Style         *Style            `protobuf:"bytes,99,opt,name=style,proto3" json:"style,omitempty"`   // inline style
