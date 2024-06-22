@@ -795,6 +795,8 @@ message Data {
 	KnowledgeBase knowledged_base = 120;
 	ArticleCategory article_category = 121;
 	Article article = 122;
+
+	ConversationMeta conversation_meta = 123;
 }
 
 message ConversationMeta {
@@ -6860,6 +6862,10 @@ message Response {
 	GreetingAudio greeting_audio = 126;
 
 	string topic = 127;
+
+	repeated User users = 128;
+	User user = 129;
+	Event event = 130;
 }
 
 message ZaloCallConsent {

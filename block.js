@@ -1,3 +1,4 @@
+// ko co attrs va marks
 var p = {
   type: "paragraph",
   content: [
