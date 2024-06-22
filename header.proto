@@ -7453,10 +7453,12 @@ message Ticket {
 	int64 first_response_due = 76; // 0 -> dont use // sec
 	int64 every_response_due = 77; // sec 20'
 	int64 resolution_due = 78; // sec 1 ngay
+	int64 peoredic_update_due = 79;
 
 	int64 first_response_sla_violated = 88;
 	int64 num_every_response_sla_violated = 89;
 	int64 resolution_sla_violated = 90;
+	int64 peoredic_update_sla_violated = 95;
 
 	// repeated string tags = 79;
 	int64 created = 80;
@@ -7474,6 +7476,12 @@ message Ticket {
 	int64 actual_last_response = 93;
 
 	string source_id = 94; // zoho.203948.123098123
+	bool is_hold = 96;
+	int64 total_hold = 97;
+
+	int64 actual_user_first_response = 98;
+	int64 actual_user_last_response = 99;
+	
 }
 
 message SLAViolations {
@@ -7493,7 +7501,7 @@ message SLAViolation {
 	string sla_policy = 5;
 	string priority = 6;
 
-	string target = 7; //  first_response, every_response_min, resolution_min = 8;
+	string target = 7; //  first_response_sec, every_response_sec, resolution_sec, peoredic_update_sec = 79; = 8;
 	int64 required_sec = 8;
 	int64 actual_sec = 9;
 	int64 actual_at = 10;
@@ -7660,6 +7668,7 @@ message SLATarget {
 	int64 every_response_sec = 7;
 	int64 resolution_sec = 8;
 	bool escalation = 9;
+	int64 peoredic_update_sec = 10;
 }
 
 message Article {
