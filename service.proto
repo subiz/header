@@ -650,6 +650,7 @@ service Proder {
 	rpc EditOrderComment(header.Event) returns (header.Event);
 	rpc DeleteOrderComment(header.Key) returns (header.Event);
 	rpc ListOrderEvents(header.Id) returns (header.OrderHistoryEntries);
+	rpc ListOrderPayments(header.PaymentsRequest) returns (header.Events);
 
 	rpc DownloadOrder(header.DownloadOrderRequest) returns (header.File);
 	rpc GetShopeeAuthUrl(header.Id) returns (header.Id);

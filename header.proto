@@ -4683,9 +4683,6 @@ message OrdersRequest {
 	int64 due_date_hour_to = 21;
 	int64 issue_hour_from = 22;
 	int64 issue_hour_to = 23;
-	int64 payment_hour_from = 34;
-	int64 payment_hour_to = 35;
-
 	bool include_deleted = 7;
 
 	int32 limit = 8;
@@ -4710,7 +4707,18 @@ message OrdersRequest {
 	string pipeline = 30;
 	string pipeline_stage = 31;
 	string assigned_agent_id = 32;
-	bool include_payment_history = 36;
+}
+
+message PaymentsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	int32 limit = 5;
+	string anchor = 6;
+	int32 offset = 7;
+	repeated string order_ids = 8;
 }
 
 message CountOrdersRequest {
@@ -4836,7 +4844,6 @@ message Order {
 	repeated Tag tags = 85;
 	string private_note = 88;
 	Error error = 90;
-	repeated OrderHistoryEntry entries = 91; // just for report
 }
 
 message OrderPipelineStage {
