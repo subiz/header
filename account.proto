@@ -218,33 +218,6 @@ message TrialEndingEmail {
 	optional int64 ended = 7;
 }
 
-message InviteEmail {
-	optional common.Context ctx = 1;
-	optional string to = 2;
-	optional string account_id = 3;
-	optional string sender_id = 4;
-	optional int64 expired_in = 5;
-	optional string token = 6;
-
-	optional string fullname = 9;
-	optional string sender_name = 10;
-	optional string account_name = 11;
-	optional string account_logo_url = 12;
-	optional string from = 14;
-}
-
-message ResetPasswordEmail {
-	optional common.Context ctx = 1;
-	optional string from = 2;
-	optional string to = 3;
-	// ExpiredIn is a RFC3339 time string indicates when token will be expired
-	optional int64 expired_in = 4;
-	optional string token = 5;
-	optional string account_id = 6;
-	optional string agent_id = 7;
-	optional string agent_name = 8;
-}
-
 message BusinessHours {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;

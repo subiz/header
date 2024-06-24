@@ -7871,3 +7871,45 @@ message Block {
 	int64 colwidth = 116;
 	map<string,string> attrs = 200;
 }
+
+message TicketUpdatedNotiEmail {
+	common.Context ctx = 1;
+	string to = 2;
+	string account_id = 3;
+
+	int64 total_assigned_tickets = 4;
+	repeated Ticket assigned_tickets = 5;
+
+	int64 total_updated_events = 6;
+	repeated Event updated_events = 7;
+
+	int64 total_new_tickets = 8;
+	repeated Ticket new_tickets = 9;
+}
+
+message ResetPasswordEmail {
+	common.Context ctx = 1;
+	string from = 2;
+	string to = 3;
+	// ExpiredIn is a RFC3339 time string indicates when token will be expired
+	int64 expired_in = 4;
+	string token = 5;
+	string account_id = 6;
+	string agent_id = 7;
+	string agent_name = 8;
+}
+
+message InviteEmail {
+	common.Context ctx = 1;
+	string to = 2;
+	string account_id = 3;
+	string sender_id = 4;
+	int64 expired_in = 5;
+	string token = 6;
+
+	string fullname = 9;
+	string sender_name = 10;
+	string account_name = 11;
+	string account_logo_url = 12;
+	string from = 14;
+}
