@@ -150,10 +150,24 @@ message Bill {
 	optional string by_agent_id = 23;
 }
 
+message BillsRequest {
+	optional string account_id = 1;
+	optional int64 created_hour_from = 2;
+	optional int64 created_hour_to = 3;
+	optional int32 limit = 4;
+	optional string anchor = 5;
+	optional int32 offset = 6;
+	repeated string order_ids = 7;
+}
+
 message Bills {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	repeated Bill bills = 3;
+	optional int64 total = 4;
+	optional string anchor = 5;
+	optional int64 offset = 6;
+	optional int64 last_modified = 7;
 }
 
 message Note {

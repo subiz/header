@@ -4709,18 +4709,6 @@ message OrdersRequest {
 	string assigned_agent_id = 32;
 }
 
-message PaymentsRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	int64 created_hour_from = 3;
-	int64 created_hour_to = 4;
-	int32 limit = 5;
-	string anchor = 6;
-	int32 offset = 7;
-	repeated string order_ids = 8;
-}
-
 message CountOrdersRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
