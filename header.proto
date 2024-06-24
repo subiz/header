@@ -4683,6 +4683,8 @@ message OrdersRequest {
 	int64 due_date_hour_to = 21;
 	int64 issue_hour_from = 22;
 	int64 issue_hour_to = 23;
+	int64 payment_hour_from = 34;
+	int64 payment_hour_to = 35;
 
 	bool include_deleted = 7;
 
@@ -4708,6 +4710,7 @@ message OrdersRequest {
 	string pipeline = 30;
 	string pipeline_stage = 31;
 	string assigned_agent_id = 32;
+	bool include_payment_history = 36;
 }
 
 message CountOrdersRequest {
@@ -4833,6 +4836,7 @@ message Order {
 	repeated Tag tags = 85;
 	string private_note = 88;
 	Error error = 90;
+	repeated OrderHistoryEntry entries = 91; // just for report
 }
 
 message OrderPipelineStage {
@@ -7458,7 +7462,7 @@ message Ticket {
 	int64 first_response_sla_violated = 88;
 	int64 num_every_response_sla_violated = 89;
 	int64 resolution_sla_violated = 90;
-	int64 peoredic_update_sla_violated = 95;
+	int64 num_peoredic_update_sla_violated = 95;
 
 	// repeated string tags = 79;
 	int64 created = 80;
@@ -7481,6 +7485,7 @@ message Ticket {
 
 	int64 actual_user_first_response = 98;
 	int64 actual_user_last_response = 99;
+	
 	
 }
 
