@@ -717,7 +717,7 @@ message Data {
 	Notification notification = 14;
 	AgentGroup agent_group = 18;
 	Note note = 23;
-	Workflow workflow = 25;
+	Automation automation = 25;
 	Event event = 26;
 	// AutomationEvent automation_event = 30;
 	// notibox.Notibox notibox = 32;
@@ -4888,7 +4888,7 @@ message BillsRequest {
 	int32 offset = 6;
 	repeated string order_ids = 7;
 	string order_by = 8;
-	
+
 }
 
 message Bills {
@@ -6169,7 +6169,7 @@ message Campaign {
 	WorkflowGoal workflow_goal = 35;
 	WorkflowExitCondition workflow_exit_when = 36;
 
-	WorkflowAction workflow_root = 38;
+	AutomationAction workflow_root = 38;
 
 	UsersRequest audient_request = 39; // write only when create
 
@@ -6750,7 +6750,7 @@ enum E {
 	invalid_google_auth_response = 5071;
 }
 
-message WorkflowAction {
+message AutomationAction {
 	string account_id = 2;
 	string workflow_id = 3;
 	string id = 4;
@@ -6857,8 +6857,8 @@ message Response {
 	repeated Credit credits = 16;
 	account.Account account = 17;
 	repeated account.Account accounts = 18;
-	Workflow workflow = 19;
-	repeated Workflow workflows = 20;
+	Automation Automation = 19;
+	repeated Automation automations = 20;
 	account.Agent agent = 21;
 	repeated account.Agent agents = 22;
 	repeated WorkflowLog automation_logs = 23;
@@ -7202,19 +7202,10 @@ message ConvoReportEntry {
 message AutomationTrigger {
 	string ui_id = 3;
 	string id = 4;
-	string key = 5; // conversation_assigned, conversation_start, area_clicked (web only), scrolling_percentage (web only), inactivity_duration (web only), after_pageview (web only), after_js_event (web only)
 
-	string area_clicked_css_selector = 6; // .user_name #user
-	float scrolling_percentage = 7; // 0.55
-	int64 inactivity_sec = 8; // 50s
-	int64 after_pageview_sec = 9; // 50s
-
-	repeated string events = 10;
+	repeated string events = 10; // ticket_updateds, ticket_created
 	repeated string computed_events = 12; // internal
-
 	string field = 13;  // order.fields[name='checkout']
-
-	AutomationCondition condition = 14;
 }
 
 message AutomationTimming {
@@ -7262,7 +7253,6 @@ message AutomationCondition {
 	repeated AutomationCondition one = 20;
 }
 
-
 message WorkflowLogRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7277,43 +7267,45 @@ message WorkflowLogRequest {
 	string level = 9; // empty or error
 }
 
-message Workflow {
+message Automation {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
-	string object_type = 4; // user, ticket, order, conversation ...
+	string workflow_id = 3;
+	string id = 4;
+	// string object_type = 5; // user, ticket, order, conversation ...
 
 	string name = 5;
 	string description = 6;
 
 	repeated AutomationTrigger triggers = 7; // or
-	repeated WorkflowAction actions = 8;
+	AutomationCondition condition = 8;
+	repeated AutomationAction actions = 9;
 
-	string updated_by = 9;
-	int64 updated = 10;
+	string updated_by = 12;
+	int64 updated = 13;
 
-	string created_by = 11;
-	int64 created = 12; // ms
-	int64 disabled = 13;
+	string created_by = 14;
+	int64 created = 15; // ms
 
-	int64 last_run_at = 14;
-	int64 total_run_time = 15;
+	int64 disabled = 16;
 
-	int64 deleted = 16;
+	int64 last_run_at = 18;
+	int64 total_run_time = 19;
+	int64 deleted = 20;
 }
 
 message WorkflowLog {
 	string account_id = 2;
-	string automation_id = 3;
-	string id = 4;
-	int64 created = 5;
-	string level = 6;
-	string log_type = 7;
+	string workflow_id = 3;
+	string automation_id = 4;
+	string id = 5;
+	int64 created = 10;
+	string level = 11;
+	string log_type = 12;
 
-	string user_id = 8;
-	string object_id = 9;
-
-	map<string,string> data = 10;
+	string user_id = 13;
+	string object_id = 14;
+	map<string,string> data = 15;
 }
 
 message AutomationEvent {
@@ -7390,6 +7382,32 @@ message TicketType {
 	string visibility = 19; // public, internal, limited
 
 	Error error = 20;
+
+	TicketAutoReply auto_reply = 22;
+	TicketSatisfaction satisfaction = 23;
+}
+
+message TicketSatisfaction {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ticket_type = 3;
+	int64 disabled = 4;
+
+	string position = 5; // empty, above_signature, below_signature
+	string style = 6; // empty, smileys, labels
+	Message question = 7; // customize
+
+	// int64 comment_
+	// bool open_ticket_on_comment
+}
+
+message TicketAutoReply {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ticket_type = 3;
+	int64 disabled = 4;
+	Message body = 5;
+  string timming = 6; // empty , "outside_business_hours"
 }
 
 message TicketTemplate {
@@ -7501,7 +7519,7 @@ message Ticket {
 	int64 total_hold = 97;
 
 	int64 actual_user_first_response = 98;
-	int64 actual_user_last_response = 99;	
+	int64 actual_user_last_response = 99;
 }
 
 message SLAViolations {
