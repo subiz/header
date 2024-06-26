@@ -148,6 +148,7 @@ message Bill {
 
 	optional string bank_account_id = 22;
 	optional string by_agent_id = 23;
+	optional int64 paid_at = 24;
 }
 
 message Bills {

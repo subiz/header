@@ -4888,8 +4888,8 @@ enum OrderStatusCode {
 
 message BillsRequest {
 	string account_id = 1;
-	int64 created_hour_from = 2;
-	int64 created_hour_to = 3;
+	int64 from_hour = 2;
+	int64 to_hour = 3;
 	int32 limit = 4;
 	string anchor = 5;
 	int32 offset = 6;
