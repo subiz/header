@@ -1014,6 +1014,10 @@ message Rule {
 
 	int64 create_ticket_on_missed_call = 33;
 	string missed_call_ticket_type = 34; // tech issue
+
+	string type = 36; // convo, ticket
+	string ticket_type = 37;
+	repeated string priorities = 38;
 }
 
 message RingingSetting {
@@ -1804,6 +1808,8 @@ message Integration {
 	string email_sender_zip = 57;
 
 	string email_sender_nickname = 58;
+	bool convert_incomming_email_to_ticket = 59;
+	string ticket_type_id = 101;
 
 	int64 zalo_type = 60;
 	bool zalo_is_verified = 61;
@@ -6897,6 +6903,8 @@ message Response {
 	Event event = 130;
 
 	Rating rating = 131;
+	Rule rule = 132;
+	repeated Rule rules = 133;
 }
 
 message ZaloCallConsent {
@@ -7395,11 +7403,7 @@ message TicketType {
 
 	TicketAutoReply auto_reply = 22;
 	TicketSatisfaction satisfaction = 23;
-	repeated string email_channels = 24;
-}
-
-message TicketFeeback {
-
+	// repeated string email_channels = 24;
 }
 
 message TicketSatisfaction {
@@ -7445,6 +7449,8 @@ message TicketTemplate {
 
 	Error error = 15;
 }
+
+
 
 message Ticket {
 	common.Context ctx = 1;
