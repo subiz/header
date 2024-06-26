@@ -797,6 +797,7 @@ message Data {
 	Article article = 122;
 
 	ConversationMeta conversation_meta = 123;
+	Rating rating = 124;
 }
 
 message ConversationMeta {
@@ -1343,6 +1344,12 @@ message CallInfo {
 }
 
 message Rating {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string target_conversation_id = 5;
+	string target_message_id = 6;
+
 	int64 rated = 35; // rated time ms
 	int32 rating = 36; // 1-poor 2 3-average 4 5-great
 	string rated_by = 37; // must be an user id
@@ -6887,6 +6894,8 @@ message Response {
 	repeated User users = 128;
 	User user = 129;
 	Event event = 130;
+
+	Rating rating = 131;
 }
 
 message ZaloCallConsent {
@@ -7385,6 +7394,11 @@ message TicketType {
 
 	TicketAutoReply auto_reply = 22;
 	TicketSatisfaction satisfaction = 23;
+	repeated string email_channels = 24;
+}
+
+message TicketFeeback {
+
 }
 
 message TicketSatisfaction {

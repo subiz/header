@@ -406,6 +406,7 @@ service TicketMgr {
 	rpc GetSLAPolicy(Id) returns (header.SLAPolicy);
 
 	rpc ListTicketSLAViolations(header.Id) returns (Response);
+	rpc RateTicket(header.Rating) returns (Response);
 }
 
 service TemplateMgr {
