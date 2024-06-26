@@ -4933,6 +4933,7 @@ message Bill {
 	string order_ids = 20; // invocie_ids
 
 	string wallet_id = 24; // credit_id
+	int64 paid_at = 25;
 }
 
 message CancellationCodes {
