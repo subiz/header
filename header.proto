@@ -6473,6 +6473,9 @@ message BusinessEmailAddress {
 
 	int64 inbound_disabled = 14;
 	int64 outbound_disabled = 15;
+
+	bool convert_to_ticket = 16;
+	string ticket_type_id = 17;
 }
 
 message BusinessEmailAddresses {
@@ -7768,8 +7771,6 @@ message Article {
 	Message draft_description = 23;
 
 	int64 deleted = 24;
-
-	Block block = 25;
 }
 
 message ArticleCategory {
