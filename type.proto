@@ -118,6 +118,9 @@ enum RealtimeType {
 	rule_updated = 123;
 	rule_deleted = 124;
 
+	ticket_rule_updated = 125;
+	ticket_rule_deleted = 126;
+
 	product_updated = 130;
 	product_deleted = 131;
 

@@ -798,6 +798,7 @@ message Data {
 
 	ConversationMeta conversation_meta = 123;
 	Rating rating = 124;
+	Rule ticket_rule = 125;
 }
 
 message ConversationMeta {
@@ -1019,6 +1020,7 @@ message Rule {
 	string ticket_type = 37;
 	repeated string priorities = 38;
 	string sla_policy = 39;
+	int64 apply_sla_policy = 40;
 }
 
 message RingingSetting {
@@ -6906,6 +6908,9 @@ message Response {
 	Rating rating = 131;
 	Rule rule = 132;
 	repeated Rule rules = 133;
+
+	Rule ticket_rule = 134;
+	repeated Rule ticket_rules = 135;
 }
 
 message ZaloCallConsent {
@@ -7450,8 +7455,6 @@ message TicketTemplate {
 
 	Error error = 15;
 }
-
-
 
 message Ticket {
 	common.Context ctx = 1;
