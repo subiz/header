@@ -7589,7 +7589,7 @@ message ListTicketRequest {
 	bool header_only = 14;
 
 	Touchpoint touchpoint = 15;
-	bool include_deleted = 16;
+	bool is_deleted = 16;
 }
 
 message TicketView {
