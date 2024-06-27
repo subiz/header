@@ -357,6 +357,7 @@ service TicketMgr {
 	rpc UpdateTicketType(TicketType) returns (TicketType);
 	rpc ListTicketTypes(Id) returns (Response);
 	rpc GetTicketType(Id) returns (TicketType);
+	rpc DeleteTicketType(Id) returns (Empty);
 
 	rpc CreateTicket(header.Ticket) returns (header.Ticket);
 	rpc UpdateTicket(header.Ticket) returns (header.Ticket);

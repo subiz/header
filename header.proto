@@ -1018,6 +1018,7 @@ message Rule {
 	string type = 36; // convo, ticket
 	string ticket_type = 37;
 	repeated string priorities = 38;
+	string sla_policy = 39;
 }
 
 message RingingSetting {
@@ -7719,6 +7720,7 @@ message SLAPolicy {
 	repeated UserAttributeCondition user_conditions = 24;
 	bool when_offline = 25; // only run when there is no online agent
 	repeated string ticket_types = 26; // only apply for these ticket type
+	string type_id = 27;
 }
 
 message SLATarget {
