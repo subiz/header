@@ -1808,7 +1808,7 @@ message Integration {
 	string email_sender_zip = 57;
 
 	string email_sender_nickname = 58;
-	bool convert_incomming_email_to_ticket = 59;
+	bool convert_to_ticket = 59;
 	string ticket_type_id = 101;
 
 	int64 zalo_type = 60;
