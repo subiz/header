@@ -7532,15 +7532,15 @@ message Ticket {
 	Error error = 87; // access_deny, not_found
 	string created_by = 91;
 
-	int64 actual_agent_first_response = 92;
-	int64 actual_agent_last_response = 93;
+	int64 agent_first_mess_at = 92;
+	int64 agent_last_mess_at = 93;
 
 	string source_id = 94; // zoho.203948.123098123
 	bool is_hold = 96;
 	int64 total_hold = 97;
 
-	int64 actual_user_first_response = 98;
-	int64 actual_user_last_response = 99;
+	int64 user_first_mess_at = 98;
+	int64 user_last_mess_at = 99;
 }
 
 message SLAViolations {
