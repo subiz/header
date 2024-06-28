@@ -547,7 +547,7 @@ message UserReportResponse {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-  repeated UserReportEntry users = 5;
+	repeated UserReportEntry users = 5;
 	repeated UserReportEntry leads = 6;
 }
 
@@ -1040,7 +1040,7 @@ message RingingSetting {
 	GreetingAudio menu_message = 16; // the audio plays while waiting for user to press key
 	GreetingAudio invalid_option_message = 17; // url when typing into empty option
 	repeated Rule menu_options = 18;
-  Rule menu_fallback = 19;
+	Rule menu_fallback = 19;
 
 	int64 agent_ring_timeout_sec = 20; // -1 forever, 0 auto, ... n sec
 }
@@ -1070,7 +1070,7 @@ message ChannelCondition {
 	// for email only
 	repeated string email_tos = 10; // contains
 	repeated string email_froms = 11; // contains
-	repeated string email_subjects = 12;  // contains
+	repeated string email_subjects = 12; // contains
 
 	repeated string from_number_prefixes = 15;
 	repeated string not_from_number_prefixes = 16;
@@ -1811,7 +1811,7 @@ message Integration {
 	string email_sender_zip = 57;
 
 	string email_sender_nickname = 58;
-	bool convert_to_ticket = 59;
+	bool convert_missed_call_to_ticket = 59;
 	string ticket_type_id = 101;
 
 	int64 zalo_type = 60;
@@ -6918,7 +6918,7 @@ message Response {
 
 message ZaloCallConsent {
 	int64 code = 2;
-  I18nString message = 4;
+	I18nString message = 4;
 }
 
 message SendEmailRequest {
@@ -7423,7 +7423,7 @@ message TicketSatisfaction {
 
 	string position = 5; // empty, above_signature, below_signature
 	string style = 6; // empty, smileys, labels
-	Message question = 7; // customize
+	Block question = 7; // customize
 
 	// int64 comment_
 	// bool open_ticket_on_comment
@@ -7434,8 +7434,9 @@ message TicketAutoReply {
 	string account_id = 2;
 	string ticket_type = 3;
 	int64 disabled = 4;
-	Message body = 5;
-  string timming = 6; // empty , "outside_business_hours"
+	string timming = 5; // empty , "outside_business_hours"
+	Block body = 6;
+	Block title = 7;
 }
 
 message TicketTemplate {
