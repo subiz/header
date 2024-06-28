@@ -267,3 +267,10 @@ var image = {
     height: 100,
   },
 };
+
+// dynamic field
+var dynamicfield = {
+  attrs: { id: "bafwpjphbvtucvgt", value: "Giới tính", key: "user.gender" },
+  text: "user.gender",
+  type: "dynamic-field",
+};

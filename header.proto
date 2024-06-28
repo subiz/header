@@ -1389,8 +1389,9 @@ message Message {
 	string text = 2; // plaintext or template
 	bool is_template = 51;
 	string plaintext = 50;
-	string format = 3; // plaintext, html, markdown, delta
+	string format = 3; // plaintext, html, markdown, delta, block
 	repeated Attachment attachments = 4;
+	Block block = 7;
 	repeated KV fields = 10;
 
 	// string integration_id = 15; // deprecated, use event touchpoint
@@ -1401,6 +1402,7 @@ message Message {
 
 	string quill_delta = 20; // deprecated
 	I18nString i18n_quill_delta = 21; // rename to i18n_text
+	map<string, Block> i18n_block = 23;
 
 	bool is_private = 22;
 
