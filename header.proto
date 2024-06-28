@@ -7425,8 +7425,8 @@ message TicketSatisfaction {
 	string style = 6; // empty, smileys, labels
 	Block question = 7; // customize
 
-	// int64 comment_
-	// bool open_ticket_on_comment
+	int64 allow_comment = 8;
+	int64 open_ticket_on_comment = 9;
 }
 
 message TicketAutoReply {
