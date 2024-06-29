@@ -6,6 +6,7 @@ require (
 	github.com/gocql/gocql v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/prometheus v1.0.1
 	github.com/prometheus/client_golang v1.19.1
+	github.com/subiz/goutils v0.1.19
 	github.com/subiz/log v0.0.63
 	google.golang.org/grpc v1.64.0
 	google.golang.org/protobuf v1.34.2

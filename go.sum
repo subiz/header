@@ -48,6 +48,8 @@ github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
+github.com/subiz/goutils v0.1.19 h1:i5dYsO0uoolSfK1I6Ua8aZDTDE8CyjH1QzfUKgwF2TM=
+github.com/subiz/goutils v0.1.19/go.mod h1:SM3Rz9RYZs2vHc6yqfpHwIxwWPCpSNVfJ9K/orEvDr8=
 github.com/subiz/log v0.0.59 h1:F8Wy4E6flgKyJVxtcgjQv3L26ILq+NRJoI6g9MAiIow=
 github.com/subiz/log v0.0.59/go.mod h1:NX1WqHvkg/v2m+jqpGZK9epaTw+knZZVBnZOeAzBQHI=
 github.com/subiz/log v0.0.63 h1:wyKq+tFbALMP2L3JkcCOtEcegCqKNXYKudqZbhYcPrU=

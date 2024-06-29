@@ -120,7 +120,6 @@ func TestNormPhone(t *testing.T) {
 		{"abc@gmail.com", ""},
 		{"245abc@gmail.com", ""},
 		{",;84123123123,", "0123123123"},
-
 	}
 
 	for i, tc := range testcases {
@@ -688,4 +687,283 @@ func TestUpdateUserAttribute(t *testing.T) {
 			t.Errorf("WRONG TESTCASE #%d: %s\nEXPECT: %s\nACTUAL: %s\nDIFF:%s\n\n", itc+1, tc.name, string(expected), string(actual), diff)
 		}
 	}
+}
+
+func TestDeltaToBlock(t *testing.T) {
+	testcases := []struct {
+		delta  string
+		expect Block
+	}{
+		{
+			delta:  "",
+			expect: Block{},
+		},
+		{
+			delta:  `ops:[]}`, // invalid json
+			expect: Block{},
+		},
+		{
+			delta:  `{ops:[]}`,
+			expect: Block{},
+		},
+		{
+			delta:  `{ops:{}}`,
+			expect: Block{},
+		},
+		{
+			delta: `{"ops":[
+       {"insert":"Cam on ban https://dayladau.com/"},
+       {"insert": {"dynamicField": {"key":"conversation.id"}}},
+       {"insert": {"mention": {"fullname":"thanh"}}},
+       {"insert":" nhe"}
+    ]}`,
+			expect: Block{
+				Type: "paragraph",
+				Content: []*Block{{
+					Type: "text",
+					Text: "Cam on ban https://dayladau.com/",
+				}, {
+					Type: "dynamic-field",
+					Text: "conversation.id",
+					Attrs: map[string]string{
+						"key": "conversation.id",
+					},
+				}, {
+					Type: "mention-agent",
+					Text: "@thanh",
+				}, {
+					Type: "text",
+					Text: " nhe",
+				}},
+			},
+		},
+		{
+			delta: `{"ops":[
+       {"insert":"Cam on"}
+    ]}`,
+			expect: Block{Type: "text", Text: "Cam on"},
+		},
+		{
+			delta:  `[{"insert":"Cam on"}]`,
+			expect: Block{Type: "text", Text: "Cam on"},
+		},
+	}
+
+	for k, tc := range testcases {
+		out := DeltaToBlock(tc.delta)
+		outb, _ := json.Marshal(out)
+		expectb, _ := json.Marshal(tc.expect)
+		if string(outb) != string(expectb) {
+			t.Errorf("SHOULD EQ %d, EXPECTED %s, got %s", k, string(expectb), string(outb))
+		}
+	}
+}
+
+
+
+/*
+func TestHTMLToBlock(t *testing.T) {
+	testcases := []struct {
+		html   string
+		expect Block
+	}{
+		{
+			html:   "",
+			expect: Block{},
+		},
+		{html: `
+<p class="sbz_lexical_paragraph" dir="ltr">
+	<i><em class="sbz_lexical_text__italic" style="white-space: pre-wrap">Thanh</em></i
+	><span style="white-space: pre-wrap"> </span
+	><b><strong class="sbz_lexical_text__bold" style="white-space: pre-wrap">Test</strong></b
+	><span style="white-space: pre-wrap"> </span
+	><b><strong class="sbz_lexical_text__bold" style="white-space: pre-wrap">day </strong></b
+	><i
+		><b><strong class="sbz_lexical_text__bold sbz_lexical_text__italic" style="white-space: pre-wrap">du</strong></b></i
+	><b><strong class="sbz_lexical_text__bold" style="white-space: pre-wrap"> cac</strong></b
+	><span style="white-space: pre-wrap"> yeu to</span>
+</p>
+<ol>
+	<li value="1"><span style="white-space: pre-wrap">Mot</span></li>
+	<li value="2"><span style="white-space: pre-wrap">Hia</span></li>
+</ol>
+<p class="sbz_lexical_paragraph" dir="ltr">
+	<span style="white-space: pre-wrap">link </span
+	><a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+		><span style="white-space: pre-wrap">google.com</span></a
+	>
+</p>
+<ul>
+	<li value="1"><span style="white-space: pre-wrap">A</span></li>
+	<li value="2"><span style="white-space: pre-wrap">B</span></li>
+</ul>
+<p class="sbz_lexical_paragraph" dir="ltr">
+	<span data-mention="true" data-mention-agent-id="agrkzpvpefuglbnjly">@Trang Lê</span
+	><span style="white-space: pre-wrap"> metion</span>
+</p>
+<p class="sbz_lexical_paragraph"><br /></p>
+<p class="sbz_lexical_paragraph" dir="ltr">
+	<img
+		src="https://vcdn.subiz-cdn.com/file/97b63a62051b4d9b10dd105e7f80144fc8f7817031a84e103c328318d02b9bd6_acpxkgumifuoofoosble"
+		alt="image.png"
+		width="209"
+		height="inherit"
+	/>
+</p>
+<p class="sbz_lexical_paragraph" dir="ltr">
+	<span style="white-space: pre-wrap">anh</span>
+</p>
+`,
+			expect: Block{
+				Type:  "paragraph",
+				Class: "sbz_lexical_text__italic",
+				Content: []*Block{{
+					Type: "paragraph",
+					Content: []*Block{{
+						Type:   "text",
+						Italic: true,
+						Style:  &Style{WhiteSpace: "pre-wrap"},
+						Class:  "sbz_lexical_text__italic",
+						Text:   "Thanh",
+					}, {
+						Type:  "text",
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Text:  " ",
+					}, {
+						Type:  "text",
+						Bold:  true,
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Class: "sbz_lexical_text__bold",
+						Text:  "Test",
+					}, {
+						Type:  "text",
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Text:  " ",
+					}, {
+						Type:  "text",
+						Bold:  true,
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Class: "sbz_lexical_text__bold",
+						Text:  "day ",
+					}, {
+						Type:   "text",
+						Italic: true,
+						Bold:   true,
+						Style:  &Style{WhiteSpace: "pre-wrap"},
+						Class:  "sbz_lexical_text__bold sbz_lexical_text__italic",
+						Text:   "du",
+					}, {
+						Type:  "text",
+						Bold:  true,
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Class: "sbz_lexical_text__bold",
+						Text:  " cac",
+					}, {
+						Type:  "text",
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Text:  " yeu to",
+					},
+					},
+				}, {
+					Type: "ordered_list",
+					Content: []*Block{{
+						Type:    "list_item",
+						Content: []*Block{{
+							// Type:
+						}},
+					}},
+				}},
+			},
+		},
+	}
+
+	for k, tc := range testcases {
+		// out := DeltaToBlock(tc.html)
+		outb, _ := json.Marshal(out)
+		expectb, _ := json.Marshal(tc.expect)
+		if string(outb) != string(expectb) {
+			t.Errorf("SHOULD EQ %d, EXPECTED %s, got %s", k, string(expectb), string(outb))
+		}
+	}
+}
+*/
+//
+
+func TestCompileBlock(t *testing.T) {
+	data := map[string]string{
+		"conversation_id": "234",
+		"account_id":      "acpxkgumifuoofoosble",
+		"user.fullname":   "Bick Ngok",
+	}
+	block := DeltaToBlock(`{"ops":[{"insert":{"dynamicField":{"key":"user.fullname"}}},{"insert":" ơi mình thấy bạn có hỏi cụ thể như vậy chắc bạn cũng đang có dự định đặt phòng rồi.\nVậy nếu thông tin phòng mình gửi chưa hợp với bạn thì có thể chia sẻ thêm thông tin với mình để mình có thể giúp đỡ bạn được tốt hơn ko ạ?\nBạn còn đang băn khoăn về giá hay decor thế ạ? 😉"}]}`)
+	fmt.Println("BLOCK", block)
+	CompileBlock(block, data)
+	out := BlockToPlainText(block)
+	fmt.Println("OUT", out)
+}
+
+
+func TestBlockToHTML(t *testing.T) {
+	block := &Block{
+				Type:  "paragraph",
+				Class: "sbz_lexical_text__italic",
+				Content: []*Block{{
+					Type: "paragraph",
+					Content: []*Block{{
+						Type:   "text",
+						Italic: true,
+						Style:  &Style{WhiteSpace: "pre-wrap"},
+						Class:  "sbz_lexical_text__italic",
+						Text:   "Thanh",
+					}, {
+						Type:  "text",
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Text:  " ",
+					}, {
+						Type:  "text",
+						Bold:  true,
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Class: "sbz_lexical_text__bold",
+						Text:  "Test",
+					}, {
+						Type:  "text",
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Text:  " ",
+					}, {
+						Type:  "text",
+						Bold:  true,
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Class: "sbz_lexical_text__bold",
+						Text:  "day ",
+					}, {
+						Type:   "text",
+						Italic: true,
+						Bold:   true,
+						Style:  &Style{WhiteSpace: "pre-wrap"},
+						Class:  "sbz_lexical_text__bold sbz_lexical_text__italic",
+						Text:   "du",
+					}, {
+						Type:  "text",
+						Bold:  true,
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Class: "sbz_lexical_text__bold",
+						Text:  " cac",
+					}, {
+						Type:  "text",
+						Style: &Style{WhiteSpace: "pre-wrap"},
+						Text:  " yeu&><p>to",
+					},
+					},
+				}, {
+					Type: "ordered_list",
+					Content: []*Block{{
+						Type:    "list_item",
+						Content: []*Block{{
+							// Type:
+						}},
+					}},
+				}},
+			}
+	html := BlockToHTML(block)
+	fmt.Println("OUT", html)
 }

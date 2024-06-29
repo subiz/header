@@ -7910,6 +7910,9 @@ message Block {
 	repeated Block content = 6;
 	string text = 7;
 
+	////	string code = 20; // emoji code
+
+	string class = 98;
 	Style style = 99; // inline style
 	int64 level = 100; // 1 2 3 4 5 6 7
 	string title = 101;
@@ -7919,7 +7922,7 @@ message Block {
 	bool bold = 106;
 	bool italic = 107;
 	bool underline = 108;
-	bool strikethrough = 109;
+	bool strike_through = 109;
 
 	int64 list_item_order = 110;
 

@@ -3,6 +3,7 @@ package header
 import (
 	hexa "encoding/hex"
 	"encoding/json"
+	"html"
 	"math"
 	"net/mail"
 	"net/url"
@@ -1653,4 +1654,417 @@ func SetConversationId(e *Event, cid string) {
 type IResourceGroup interface {
 	GetId() string
 	GetPermissions() []*ResourceGroupMember
+}
+
+func DeltaToBlock(delta string) *Block {
+	delta = strings.TrimSpace(delta)
+	if delta == "" {
+		return &Block{}
+	}
+
+	deltab := []byte(delta)
+	var deltas = []any{}
+	m := map[string]any{}
+	json.Unmarshal(deltab, &m)
+	if ops, has := m["ops"]; has {
+		deltas, _ = ops.([]any)
+	} else {
+		json.Unmarshal(deltab, &deltas)
+	}
+
+	if len(deltas) == 0 {
+		return &Block{}
+	}
+
+	blocks := []*Block{}
+	for _, delta := range deltas {
+		if delta == nil {
+			continue
+		}
+		block := &Block{Type: "text"}
+		dt := delta.(map[string]any)
+		if dt == nil {
+			continue
+		}
+
+		if attri := dt["attributes"]; attri != nil {
+			attrs, _ := attri.(map[string]any)
+			if attrs != nil {
+				if _, has := attrs["italic"]; has {
+					block.Italic = true
+				}
+				if _, has := attrs["bold"]; has {
+					block.Bold = true
+				}
+				if _, has := attrs["underline"]; has {
+					block.Underline = true
+				}
+			}
+		}
+		inserti := dt["insert"]
+		if inserti == nil {
+			continue
+		}
+
+		switch v := inserti.(type) {
+		case string:
+			block.Text = v
+		case map[string]any:
+			if emoji, has := v["emoji"]; has {
+				block.Type = "emoji"
+				emojicode, _ := emoji.(string)
+				block.Attrs = map[string]string{"code": emojicode}
+				break
+			}
+
+			if dynamicField, has := v["dynamicField"]; has {
+				// block.Attrs = map[string]string{"code": emojicode}
+				if dynamicField == nil {
+					break
+				}
+
+				df, _ := dynamicField.(map[string]any)
+				if df == nil {
+					break
+				}
+
+				keyi := df["key"]
+				if keyi == nil {
+					break
+				}
+				key, _ := keyi.(string)
+
+				block.Type = "dynamic-field"
+				block.Text = key
+
+				block.Attrs = map[string]string{}
+				for k, v := range df {
+					block.Attrs[k], _ = v.(string)
+				}
+				break
+			}
+
+			if mentioni, has := v["mention"]; has {
+				// block.Attrs = map[string]string{"code": emojicode}
+				if mentioni == nil {
+					break
+				}
+
+				df, _ := mentioni.(map[string]any)
+				if df == nil {
+					break
+				}
+
+				mentiontype := "agent"
+				if typi := df["type"]; typi != nil {
+					mentiontype, _ = typi.(string)
+				}
+
+				var mentionid string
+				if mentionidi := df["id"]; mentionidi != nil {
+					mentionid, _ = mentionidi.(string)
+				}
+
+				var mentionfullname string
+				if fullnamei := df["fullname"]; fullnamei != nil {
+					mentionfullname, _ = fullnamei.(string)
+				}
+
+				if mentiontype == "agent" {
+					block.Type = "mention-agent"
+				}
+
+				block.Text = "@" + mentionid
+				if mentionid == "" {
+					block.Text = "@" + mentionfullname
+				}
+				break
+			}
+		}
+
+		blocks = append(blocks, block)
+	}
+
+	if len(blocks) == 0 {
+		return &Block{}
+	}
+
+	if len(blocks) == 1 {
+		return blocks[0]
+	}
+
+	return &Block{Type: "paragraph", Content: blocks}
+}
+
+func CompileBlock(block *Block, data map[string]string) {
+	if block == nil {
+		return
+	}
+	if block.Type == "dynamic-field" {
+		if len(block.Attrs) == 0 {
+			return
+		}
+		key := block.Attrs["key"]
+		key = strings.ToLower(strings.TrimSpace(key))
+		if key == "" {
+			return
+		}
+		value := data[key]
+		if value == "" && strings.HasPrefix(key, "user") && block.Attrs["text"] != "" {
+			value = block.Attrs["text"]
+		}
+
+		if value == "" {
+			value = block.Attrs["fallback"]
+		}
+
+		block.Type = "text"
+		block.Text = value
+		return
+	}
+	for _, block := range block.GetContent() {
+		CompileBlock(block, data)
+	}
+}
+
+func BlockToPlainText(block *Block) string {
+	if block == nil {
+		return ""
+	}
+	out := ""
+	if block.Type == "bullet_list" || block.Type == "ordered_list" {
+		for i, item := range block.GetContent() {
+			prefix := "\n* "
+			if block.Type == "ordered_list" {
+				prefix = strconv.Itoa(i) + "\n. "
+			}
+			out += prefix + strings.TrimSpace(BlockToPlainText(item))
+		}
+		return out
+	}
+
+	if block.Type == "heading" || block.Type == "paragraph" {
+		out += "\n"
+	}
+
+	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "mention-agent" || block.Type == "dynamic-field" {
+		return out + block.Text
+	}
+
+	if block.Type == "horizontal_rule" {
+		return out + "\n---\n"
+	}
+
+	if block.Type == "emoji" {
+		var code string
+		if len(block.Attrs) > 0 {
+			code = block.Attrs["code"]
+		}
+		if code == "" {
+			code = block.Text
+		}
+
+		if code == "" {
+			return out
+		}
+		return out + EmojiM[":"+code+":"]
+	}
+
+	for _, block := range block.GetContent() {
+		out += BlockToPlainText(block)
+	}
+	return out
+}
+
+func BlockToHTML(block *Block) string {
+	return eleToHTML(blockToEle(block))
+}
+
+func eleToHTML(root *sanitiziedHTMLElement) string {
+	if root == nil {
+		return ""
+	}
+	out := "<" + root.Tag
+
+	if root.ExtraTag != "" {
+		out += "><" + root.ExtraTag
+	}
+	if root.Style != "" {
+		out += " style=\"" + root.Style + "\""
+	}
+
+	if root.Class != "" {
+		out += " class=\"" + root.Class + "\""
+	}
+
+	for k, v := range root.Attrs {
+		out += " " + k + "=\"" + v + "\""
+	}
+
+	if len(root.Content) == 0 {
+		out += ">" + root.Text
+	} else {
+		out += ">"
+		for _, child := range root.Content {
+			out += eleToHTML(child)
+		}
+	}
+	if root.ExtraTag != "" {
+		out += "</" + root.ExtraTag + ">"
+	}
+	out += "</" + root.Tag + ">"
+	return out
+}
+
+type sanitiziedHTMLElement struct {
+	Tag      string
+	ExtraTag string
+	Content  []*sanitiziedHTMLElement
+	Style    string
+	Text     string
+	Attrs    map[string]string
+	Class    string
+}
+
+func blockToEle(block *Block) *sanitiziedHTMLElement {
+	if block == nil {
+		return nil
+	}
+	ele := &sanitiziedHTMLElement{}
+	ele.Style = ""
+	if block.Style != nil {
+		b, _ := json.Marshal(block.Style)
+		m := map[string]string{}
+		json.Unmarshal(b, &m)
+		for k, v := range m {
+			ele.Style += html.EscapeString(k) + ": " + html.EscapeString(v) + ";"
+		}
+	}
+
+	if block.Title != "" {
+		ele.Attrs["title"] = html.EscapeString(block.Title)
+	}
+	if block.Href != "" {
+		ele.Attrs["href"] = html.EscapeString(block.Href)
+	}
+
+	ele.Class = html.EscapeString(block.Class)
+	ele.Attrs = map[string]string{}
+	for k, v := range block.Attrs {
+		ele.Attrs[html.EscapeString(k)] = html.EscapeString(v)
+	}
+	if block.Type == "bullet_list" || block.Type == "ordered_list" {
+		if block.Type == "bullet_list" {
+			ele.Tag = "ol"
+		} else {
+			ele.Tag = "ul"
+		}
+	}
+
+	if block.Type == "list_item" {
+		ele.Tag = "li"
+	}
+
+	if block.Type == "heading" {
+		level := "1"
+		if block.Level < 1 {
+			block.Level = 1
+		}
+
+		if block.Level > 6 {
+			block.Level = 6
+		}
+		strconv.Itoa(int(block.Level))
+		ele.Tag = "h" + level
+	}
+
+	if block.Type == "paragraph" {
+		ele.Tag = "p"
+	}
+
+	ele.Text = html.EscapeString(block.Text)
+	if block.Type == "" || block.Type == "text" || block.Type == "dynamic-field" {
+		ele.Tag = "span"
+		if block.Bold {
+			ele.Tag = "b"
+		}
+		if block.Italic {
+			if ele.Tag == "b" {
+				ele.ExtraTag = "em"
+			} else {
+				ele.Tag = "em"
+			}
+		}
+
+		if block.Underline {
+			ele.Style += "text-decoration:underline;"
+		}
+
+		if block.Strikethrough {
+			ele.Style += "text-decoration: line-through;"
+		}
+	}
+
+	if block.Type == "link" {
+		ele.Tag = "a"
+	}
+
+	if block.Type == "mention-agent" {
+		ele.Tag = "span"
+	}
+
+	if block.Type == "horizontal_rule" {
+		ele.Tag = "hr"
+	}
+
+	if block.Type == "emoji" {
+		var code string
+		if len(block.Attrs) > 0 {
+			code = block.Attrs["code"]
+		}
+		if code == "" {
+			code = block.Text
+		}
+
+		if code != "" {
+			ele.Text = EmojiM[":"+code+":"]
+		}
+	}
+
+	if block.Type == "table" {
+	}
+
+	var contents []*sanitiziedHTMLElement
+	for _, block := range block.GetContent() {
+		contents = append(contents, blockToEle(block))
+	}
+	ele.Content = contents
+	return ele
+}
+
+var EmojiM = map[string]string{
+	":like:":                "👍",
+	":unlike:":              "👎",
+	":wink:":                "😉",
+	":tongue-out:":          "😛",
+	":tired:":               "😫",
+	":surprised:":           "😲",
+	":smiling:":             "😊",
+	":sleepy:":              "😴 ",
+	":sad:":                 "😔",
+	":neutral:":             "😐",
+	":heart-eyes:":          "😍",
+	":grinning:":            "😀",
+	":crying:":              "😭",
+	":confused:":            "😕",
+	":angry:":               "😠",
+	":emoji--disappointed:": "😞",
+	":smile:":               "😊",
+	":open_mouth:":          "😮",
+	":tired_face:":          "😫",
+	":stuck_out_tongue:":    "😛",
+	":moyai:":               "🗿",
+	":thumbsdown:":          "👎",
+	":dislike:":             "👎",
+	":thumbsup:":            "👍",
 }

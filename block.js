@@ -277,4 +277,10 @@ var dynamicfield = {
 var emoji = {
   attrs: { code: "angry" },
   type: "emoji",
+  text: "angry",
+};
+
+var mention = {
+  type: "mention-agent",
+  text: "@all",
 };
