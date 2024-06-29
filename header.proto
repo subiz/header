@@ -1402,6 +1402,7 @@ message Message {
 
 	string quill_delta = 20; // deprecated
 	I18nString i18n_quill_delta = 21; // rename to i18n_text
+
 	map<string, Block> i18n_block = 23;
 
 	bool is_private = 22;
@@ -2251,6 +2252,9 @@ message ActionCreateTask {
 
 	string title_template = 12;
 	string note_template = 13;
+
+	Block title_block = 15;
+	Block note_block = 16;
 }
 
 message ActionConfirmOrder {
@@ -2290,7 +2294,9 @@ message ActionSendHttp {
 	string method = 4;
 	repeated KV header = 5;
 	string quill_delta = 6; // body
+
 	bool response_as_messages = 7;
+	Block block = 8;
 }
 
 message ActionAskQuestion {
@@ -2663,7 +2669,7 @@ message WidgetGreeting {
 
 ////////////// CAMPAIGN //////////////
 message CampaignNotification {
-	//  email.Email email = 1;
+	//email.Email email = 1;
 	bool enabled = 2;
 	string sender_id = 4;
 	string from = 5;
@@ -2738,6 +2744,8 @@ message TextComponent {
 	I18nString i18n_html = 5; // do not edit, generated from quill_delta
 	string quill_delta = 3;
 	I18nString i18n_quill_delta = 4;
+	Block block = 7;
+	map<string,Block> i18n_block = 8;
 }
 
 message LineComponent {}
@@ -2771,8 +2779,11 @@ message Notif {
 	// server returns only for client
 	repeated NotifProfile profiles = 6;
 
-	string title_quill_delta = 9; // markdown
-	I18nString i18n_title_quill_delta = 22;
+	string title_quill_delta = 9; // markdown, deprecated
+	I18nString i18n_title_quill_delta = 22; // deprecated
+
+	Block title_block = 25;
+	map<string,Block> i18n_title_block = 26;
 
 	Style title_style = 10;
 
@@ -3674,6 +3685,7 @@ message FbComment {
 	string image_url = 4;
 	string template = 5;
 	bool is_template = 6;
+	Block block = 7;
 }
 
 message FbFanpageSetting {
@@ -5105,6 +5117,9 @@ message Product {
 
 	int64 view_duration_sec = 67; // for event content_view only
 	int64 num_variants = 69; // computed, readonly
+
+	map<string,Block> i18n_description_block = 70; // (shared) server generated
+	map<string,Block> i18n_long_description_block = 71; // (shared)
 }
 
 message ProductOption {
@@ -5578,6 +5593,9 @@ message Task {
 	// does change task.last_modified
 	int64 last_modified = 48;
 	string number = 49;
+
+	Block note_block = 51; // for template
+	Block title_block = 52;
 }
 
 message TaskMember {
@@ -7257,10 +7275,6 @@ message AutomationTimming {
 	string before_var = 20; // user.attr[key=birthday]
 	int64 var_duration = 21; // 86400
 
-	// -----------------------------------.------------------------
-	//                            [+++++++++++++]
-	//                                [+++++++>
-	//                            <++++++++++]
 	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
 }
 
@@ -7390,7 +7404,7 @@ message TicketType {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string prefix = 4;   // max 3 character, lowercase: sbz, tec, ret
+	string prefix = 4; // max 3 character, lowercase: sbz, tec, ret
 	string category = 5; // customer, back-office, tracker
 	string name = 6;
 	string description = 7;
@@ -7467,7 +7481,7 @@ message Ticket {
 	string account_id = 2;
 
 	string id = 3;
-	string number = 27;  //SUB-1,SUB-2,...
+	string number = 27; //SUB-1,SUB-2,...
 	string title = 4;
 	string category = 5; // readonly from type: customer, back-office, tracker
 	string type_id = 6;
@@ -7570,7 +7584,7 @@ message SLAViolation {
 	string sla_policy = 5;
 	string priority = 6;
 
-	string target = 7; //  first_response_sec, every_response_sec, resolution_sec, peoredic_update_sec = 79; = 8;
+	string target = 7; // first_response_sec, every_response_sec, resolution_sec, peoredic_update_sec = 79; = 8;
 	int64 required_sec = 8;
 	int64 actual_sec = 9;
 	int64 actual_at = 10;
