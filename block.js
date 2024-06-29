@@ -247,9 +247,8 @@ let section = {
       text: "High",
     },
     {
-      type: "plain_text",
-      emoji: true,
-      text: "Silly",
+      attrs: { code: "angry" },
+      type: "emoji",
     },
   ],
 };
@@ -273,4 +272,9 @@ var dynamicfield = {
   attrs: { id: "bafwpjphbvtucvgt", value: "Giới tính", key: "user.gender" },
   text: "user.gender",
   type: "dynamic-field",
+};
+
+var emoji = {
+  attrs: { code: "angry" },
+  type: "emoji",
 };

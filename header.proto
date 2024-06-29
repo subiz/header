@@ -7421,7 +7421,7 @@ message TicketSatisfaction {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string ticket_type = 3;
-	int64 disabled = 4;
+	int64 enabled = 4;
 
 	string position = 5; // empty, above_signature, below_signature
 	string style = 6; // empty, smileys, labels
@@ -7435,7 +7435,7 @@ message TicketAutoReply {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string ticket_type = 3;
-	int64 disabled = 4;
+	int64 enabled = 4;
 	string timming = 5; // empty , "outside_business_hours"
 	Block body = 6;
 	Block title = 7;
