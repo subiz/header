@@ -246,6 +246,7 @@ enum RealtimeType {
 	called = 238;
 
 	payment_made = 239; // bill
+	payment_updated = 237; // bill
 	logged_in = 240;
 
 	zns_sent = 241;

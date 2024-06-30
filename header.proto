@@ -4945,9 +4945,11 @@ message Bill {
 	int64 created = 7;
 
 	string method = 8; // manually
-
 	float amount = 12;
 	int64 fpv_amount = 13;
+
+	float old_amount = 14;
+	int64 fpv_old_amount = 15;
 
 	string description = 21;
 

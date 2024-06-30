@@ -1809,16 +1809,26 @@ func CompileBlock(block *Block, data map[string]string) {
 		if key == "" {
 			return
 		}
-		value := data[key]
+		value, has := data[key]
+		if !has {
+			if block.Text == "" {
+				// do not change type since we are not able to compile it
+				block.Text = block.Attrs["text"]
+			}
+			if block.Text == "" {
+				block.Text = block.Attrs["fallback"]
+			}
+			return
+		}
+
 		if value == "" && strings.HasPrefix(key, "user") && block.Attrs["text"] != "" {
 			value = block.Attrs["text"]
 		}
-
 		if value == "" {
 			value = block.Attrs["fallback"]
 		}
 
-		block.Type = "text"
+		// block.Type = "text"
 		block.Text = value
 		return
 	}

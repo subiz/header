@@ -759,8 +759,6 @@ func TestDeltaToBlock(t *testing.T) {
 	}
 }
 
-
-
 /*
 func TestHTMLToBlock(t *testing.T) {
 	testcases := []struct {
@@ -902,68 +900,99 @@ func TestCompileBlock(t *testing.T) {
 	fmt.Println("OUT", out)
 }
 
+func TestCompileBlock2(t *testing.T) {
+	data := map[string]string{
+		"conversation_id": "234",
+		"account_id":      "acpxkgumifuoofoosble",
+		"user.fullname":   "Bick Ngok",
+	}
+	block := &Block{
+		Type: "paragraph",
+		Content: []*Block{{
+			Type:  "dynamic-field",
+			Attrs: map[string]string{"key": "conversation_id"},
+		}, {
+			Type:  "dynamic-field",
+			Attrs: map[string]string{"key": "user.fullname"},
+		}, {
+			Type:  "dynamic-field",
+			Attrs: map[string]string{"key": "cvid"},
+		},{
+			Type:  "dynamic-field",
+			Attrs: map[string]string{"key": "huh"},
+		}},
+	}
+	CompileBlock(block, data)
+	fmt.Println("OUT1c", block)
+	CompileBlock(block, map[string]string{
+		"user.fullname": "thanh",
+		"cvid":          "4",
+	})
+	out := BlockToPlainText(block)
+	fmt.Println("OUT", out)
+}
 
 func TestBlockToHTML(t *testing.T) {
 	block := &Block{
-				Type:  "paragraph",
-				Class: "sbz_lexical_text__italic",
+		Type:  "paragraph",
+		Class: "sbz_lexical_text__italic",
+		Content: []*Block{{
+			Type: "paragraph",
+			Content: []*Block{{
+				Type:   "text",
+				Italic: true,
+				Style:  &Style{WhiteSpace: "pre-wrap"},
+				Class:  "sbz_lexical_text__italic",
+				Text:   "Thanh",
+			}, {
+				Type:  "text",
+				Style: &Style{WhiteSpace: "pre-wrap"},
+				Text:  " ",
+			}, {
+				Type:  "text",
+				Bold:  true,
+				Style: &Style{WhiteSpace: "pre-wrap"},
+				Class: "sbz_lexical_text__bold",
+				Text:  "Test",
+			}, {
+				Type:  "text",
+				Style: &Style{WhiteSpace: "pre-wrap"},
+				Text:  " ",
+			}, {
+				Type:  "text",
+				Bold:  true,
+				Style: &Style{WhiteSpace: "pre-wrap"},
+				Class: "sbz_lexical_text__bold",
+				Text:  "day ",
+			}, {
+				Type:   "text",
+				Italic: true,
+				Bold:   true,
+				Style:  &Style{WhiteSpace: "pre-wrap"},
+				Class:  "sbz_lexical_text__bold sbz_lexical_text__italic",
+				Text:   "du",
+			}, {
+				Type:  "text",
+				Bold:  true,
+				Style: &Style{WhiteSpace: "pre-wrap"},
+				Class: "sbz_lexical_text__bold",
+				Text:  " cac",
+			}, {
+				Type:  "text",
+				Style: &Style{WhiteSpace: "pre-wrap"},
+				Text:  " yeu&><p>to",
+			},
+			},
+		}, {
+			Type: "ordered_list",
+			Content: []*Block{{
+				Type:    "list_item",
 				Content: []*Block{{
-					Type: "paragraph",
-					Content: []*Block{{
-						Type:   "text",
-						Italic: true,
-						Style:  &Style{WhiteSpace: "pre-wrap"},
-						Class:  "sbz_lexical_text__italic",
-						Text:   "Thanh",
-					}, {
-						Type:  "text",
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Text:  " ",
-					}, {
-						Type:  "text",
-						Bold:  true,
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Class: "sbz_lexical_text__bold",
-						Text:  "Test",
-					}, {
-						Type:  "text",
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Text:  " ",
-					}, {
-						Type:  "text",
-						Bold:  true,
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Class: "sbz_lexical_text__bold",
-						Text:  "day ",
-					}, {
-						Type:   "text",
-						Italic: true,
-						Bold:   true,
-						Style:  &Style{WhiteSpace: "pre-wrap"},
-						Class:  "sbz_lexical_text__bold sbz_lexical_text__italic",
-						Text:   "du",
-					}, {
-						Type:  "text",
-						Bold:  true,
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Class: "sbz_lexical_text__bold",
-						Text:  " cac",
-					}, {
-						Type:  "text",
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Text:  " yeu&><p>to",
-					},
-					},
-				}, {
-					Type: "ordered_list",
-					Content: []*Block{{
-						Type:    "list_item",
-						Content: []*Block{{
-							// Type:
-						}},
-					}},
+					// Type:
 				}},
-			}
+			}},
+		}},
+	}
 	html := BlockToHTML(block)
 	fmt.Println("OUT", html)
 }
