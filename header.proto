@@ -4956,6 +4956,7 @@ message Bill {
 	string original_bank_transfer_note = 18;
 	string bank_transfer_note = 19;
 	string order_ids = 20; // invocie_ids
+	string conversation_ids = 26;
 
 	string wallet_id = 24; // credit_id
 	int64 paid_at = 25;
