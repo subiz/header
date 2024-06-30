@@ -2000,7 +2000,7 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 			ele.Style += "text-decoration:underline;"
 		}
 
-		if block.Strikethrough {
+		if block.StrikeThrough {
 			ele.Style += "text-decoration: line-through;"
 		}
 	}
@@ -2067,4 +2067,17 @@ var EmojiM = map[string]string{
 	":thumbsdown:":          "👎",
 	":dislike:":             "👎",
 	":thumbsup:":            "👍",
+}
+
+func MapBlock(block *Block, predicate func(block *Block)) {
+	if block == nil {
+		return
+	}
+	predicate(block)
+	for _, content := range block.GetContent() {
+		if content == nil {
+			continue
+		}
+		predicate(content)
+	}
 }
