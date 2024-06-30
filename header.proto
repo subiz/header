@@ -4940,7 +4940,8 @@ message Bill {
 	string order_id = 4;
 
 	string user_id = 5;
-	string by = 6;
+	string created_by = 6;
+	string created_by_type = 10;
 	int64 created = 7;
 
 	string method = 8; // manually
@@ -4956,9 +4957,14 @@ message Bill {
 	string original_bank_transfer_note = 18;
 	string bank_transfer_note = 19;
 	string order_ids = 20; // invocie_ids
+	string conversation_ids = 26;
 
 	string wallet_id = 24; // credit_id
-	int64 paid_at = 25;
+	int64 paid_at = 25; // can modified
+
+	string updated_by = 27;
+	int64 updated = 28;
+	string updated_by_type = 29;
 }
 
 message CancellationCodes {

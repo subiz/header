@@ -653,9 +653,7 @@ service Proder {
 
 	// fire order_updated, order_event_updated
 	rpc MakeOrderPayment(header.Bill) returns (header.Event);
-	rpc DeleteOrderPayment(header.Key) returns (header.Event);
-
-	rpc MakePurchase(header.Bill) returns (header.Event);
+	rpc UpdatePurchase(header.Bill) returns (header.Event);
 	rpc CancelPurchase(header.Bill) returns (header.Event);
 
 	rpc AddOrderComment(header.Event) returns (header.Event);
