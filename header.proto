@@ -1861,6 +1861,8 @@ message Integration {
 	bool call_rtp_symmetrics = 99; // false
 
 	repeated ResourceGroupMember permissions = 100;
+
+	bool sync_conversion_disabled = 102;
 }
 
 message TagRequest {

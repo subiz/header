@@ -143,6 +143,10 @@ enum RealtimeType {
 
 	order_payment_made = 145; // data.bill
 	order_payment_deleted = 146; // data.bill
+
+	purchased = 144; // data.bill
+	purchase_canceled = 148; // data.bill
+
 	order_status_updated = 147; // data.order_status
 
 	order_comment_added = 149; // data.message
