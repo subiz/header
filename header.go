@@ -1883,7 +1883,7 @@ func BlockToPlainText(block *Block) string {
 	for _, block := range block.GetContent() {
 		out += BlockToPlainText(block)
 	}
-	return out
+	return strings.TrimSpace(out)
 }
 
 func BlockToHTML(block *Block) string {
