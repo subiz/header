@@ -1838,6 +1838,10 @@ func CompileBlock(block *Block, data map[string]string) {
 }
 
 func BlockToPlainText(block *Block) string {
+	return strings.TrimSpace(blockToPlainText(block))
+}
+
+func blockToPlainText(block *Block) string {
 	if block == nil {
 		return ""
 	}
@@ -1848,7 +1852,7 @@ func BlockToPlainText(block *Block) string {
 			if block.Type == "ordered_list" {
 				prefix = strconv.Itoa(i) + "\n. "
 			}
-			out += prefix + strings.TrimSpace(BlockToPlainText(item))
+			out += prefix + strings.TrimSpace(blockToPlainText(item))
 		}
 		return out
 	}
@@ -1881,9 +1885,9 @@ func BlockToPlainText(block *Block) string {
 	}
 
 	for _, block := range block.GetContent() {
-		out += BlockToPlainText(block)
+		out += blockToPlainText(block)
 	}
-	return strings.TrimSpace(out)
+	return out
 }
 
 func BlockToHTML(block *Block) string {
@@ -1951,6 +1955,7 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 		}
 	}
 
+	ele.Attrs = map[string]string{}
 	if block.Title != "" {
 		ele.Attrs["title"] = html.EscapeString(block.Title)
 	}
@@ -1959,7 +1964,6 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 	}
 
 	ele.Class = html.EscapeString(block.Class)
-	ele.Attrs = map[string]string{}
 	for k, v := range block.Attrs {
 		ele.Attrs[html.EscapeString(k)] = html.EscapeString(v)
 	}
@@ -1976,7 +1980,6 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 	}
 
 	if block.Type == "heading" {
-		level := "1"
 		if block.Level < 1 {
 			block.Level = 1
 		}
@@ -1984,8 +1987,7 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 		if block.Level > 6 {
 			block.Level = 6
 		}
-		strconv.Itoa(int(block.Level))
-		ele.Tag = "h" + level
+		ele.Tag = "h" + strconv.Itoa(int(block.Level))
 	}
 
 	if block.Type == "paragraph" {

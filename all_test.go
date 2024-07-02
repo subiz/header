@@ -894,10 +894,11 @@ func TestCompileBlock(t *testing.T) {
 		"user.fullname":   "Bick Ngok",
 	}
 	block := DeltaToBlock(`{"ops":[{"insert":{"dynamicField":{"key":"user.fullname"}}},{"insert":" ơi mình thấy bạn có hỏi cụ thể như vậy chắc bạn cũng đang có dự định đặt phòng rồi.\nVậy nếu thông tin phòng mình gửi chưa hợp với bạn thì có thể chia sẻ thêm thông tin với mình để mình có thể giúp đỡ bạn được tốt hơn ko ạ?\nBạn còn đang băn khoăn về giá hay decor thế ạ? 😉"}]}`)
-	fmt.Println("BLOCK", block)
+	b, _ := json.Marshal(block)
+	fmt.Println("BLOCK", string(b))
 	CompileBlock(block, data)
 	out := BlockToPlainText(block)
-	fmt.Println("OUT", out)
+	fmt.Println("OUT", out, data)
 }
 
 func TestCompileBlock2(t *testing.T) {

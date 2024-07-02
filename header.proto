@@ -1863,6 +1863,8 @@ message Integration {
 	repeated ResourceGroupMember permissions = 100;
 
 	bool sync_conversion_disabled = 102;
+
+	string user_segment = 103;
 }
 
 message TagRequest {

@@ -235,6 +235,7 @@ let link = {
   href: "https://gemini.google.com/",
   title: "Gemini",
   text: "https://gemini.google.com/",
+  target: "_blank",
 };
 
 let section = {
@@ -284,3 +285,16 @@ var mention = {
   type: "mention-agent",
   text: "@all",
 };
+
+// ma yeu cau cua ban la {{ticket.number}}
+
+var title = {
+		type: "paragraph",
+		content: [{
+				type: 'text',
+				text: 'ma yeu cau cua ban la',
+		}, {
+				type: 'dynamic-field',
+				text: "ticket.number",
+		}],
+}
