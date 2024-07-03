@@ -2745,8 +2745,8 @@ message WebPlugin {
 message TextComponent {
 	string html = 2; // do not edit, generated from quill_delta
 	I18nString i18n_html = 5; // do not edit, generated from quill_delta
-	string quill_delta = 3;
-	I18nString i18n_quill_delta = 4;
+	string quill_delta = 3; // deprecated
+	I18nString i18n_quill_delta = 4; // depreaceted
 	Block block = 7;
 	map<string,Block> i18n_block = 8;
 }
@@ -2797,7 +2797,7 @@ message Notif {
 	repeated string message_quill_deltas = 11; // depreacted
 	repeated I18nString i18n_message_quill_deltas = 23; // depreacted
 
-	repeated string message_blocks = 27; // markdown
+	repeated Block message_blocks = 27; // markdown
 	repeated I18nBlock i18n_message_blocks = 28;
 
 	Style message_style = 12;
@@ -2889,7 +2889,7 @@ message CountdownComponent {
 
 message FormField {
 	string key = 1; // first_name
-	string label_quill_delta = 2;
+	// string label_quill_delta = 2;
 	string label = 3; // First Name
 	I18nString i18n_label = 14;
 
@@ -3056,7 +3056,7 @@ message Popup {
 }
 
 message LinkComponent {
-	string quill_delta = 2;
+	// string quill_delta = 2;
 	string text = 3;
 	string url = 4;
 }
