@@ -2249,13 +2249,10 @@ message ActionCreateTask {
 	int64 due_at = 6;
 	int64 due_after = 8;
 
-	string title_quill_delta = 9;
-	string note_quill_delta = 10;
+	string title_quill_delta = 9; // deprecated, use title_blcok
+	string note_quill_delta = 10; // deprecated, use note_block
 
 	int64 priority = 11; // task.priority
-
-	string title_template = 12;
-	string note_template = 13;
 
 	Block title_block = 15;
 	Block note_block = 16;
@@ -2297,7 +2294,7 @@ message ActionSendHttp {
 	// string payload = 3;
 	string method = 4;
 	repeated KV header = 5;
-	string quill_delta = 6; // body
+	string quill_delta = 6; // body, deprecated
 
 	bool response_as_messages = 7;
 	Block block = 8;
@@ -2584,6 +2581,7 @@ message WidgetSetting {
 
 	int64 hide_agent_profile = 40;
 
+	int64 show_agent_typing = 43;
 	// Form offline_form = 41;
 	// Form prechat_form = 42;
 }
@@ -5561,8 +5559,8 @@ message Task {
 
 	string assignee = 17; // empty == unassigned
 
-	string title = 18;
-	string title_quill_delta = 19;
+	string title = 18; // deprecated, use note_block
+	string title_quill_delta = 19; // deprecated, use title_block
 
 	string note = 20;
 	string note_quill_delta = 21; // for template
