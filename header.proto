@@ -1865,7 +1865,7 @@ message Integration {
 
 	bool sync_conversion_disabled = 102;
 
-	string user_segment = 103;
+	string lead_agent_group = 103;
 }
 
 message TagRequest {
@@ -2776,6 +2776,10 @@ message NotifProfile {
 	string address = 11;
 }
 
+message I18nBlock {
+	map<string, Block> i18n = 5;
+}
+
 message Notif {
 	repeated string profile_tags = 4; // female, male office, location, random
 	repeated string custom_avatar_urls = 5;
@@ -2790,8 +2794,11 @@ message Notif {
 
 	Style title_style = 10;
 
-	repeated string message_quill_deltas = 11; // markdown
-	repeated I18nString i18n_message_quill_deltas = 23;
+	repeated string message_quill_deltas = 11; // depreacted
+	repeated I18nString i18n_message_quill_deltas = 23; // depreacted
+
+	repeated string message_blocks = 27; // markdown
+	repeated I18nBlock i18n_message_blocks = 28;
 
 	Style message_style = 12;
 
