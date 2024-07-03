@@ -1363,6 +1363,7 @@ message Rating {
 	bool no_rating = 38; // use dont want to rate
 	string comment = 39;
 	string ticket_id = 40;
+	string encrypted_rating = 41;
 }
 
 message Conversations {
