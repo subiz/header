@@ -7633,6 +7633,7 @@ message ListTicketRequest {
 
 	Touchpoint touchpoint = 15;
 	bool is_deleted = 16;
+	string view_id = 17; // quick
 }
 
 message TicketView {
@@ -7657,6 +7658,7 @@ message TicketView {
 	int64 updated = 13;
 	string desciption = 14;
 	bool is_deleted = 15;
+	repeated string precompute_tkids = 16;
 }
 
 message TicketViewMember {
