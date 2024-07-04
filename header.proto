@@ -2786,16 +2786,16 @@ message Notif {
 	// server returns only for client
 	repeated NotifProfile profiles = 6;
 
-	string title_quill_delta = 9; // markdown, deprecated
-	I18nString i18n_title_quill_delta = 22; // deprecated
+	// string title_quill_delta = 9; // markdown, deprecated
+	// I18nString i18n_title_quill_delta = 22; // deprecated
 
 	Block title_block = 25;
 	map<string,Block> i18n_title_block = 26;
 
 	Style title_style = 10;
 
-	repeated string message_quill_deltas = 11; // depreacted
-	repeated I18nString i18n_message_quill_deltas = 23; // depreacted
+	// repeated string message_quill_deltas = 11; // depreacted
+	// repeated I18nString i18n_message_quill_deltas = 23; // depreacted
 
 	repeated Block message_blocks = 27; // markdown
 	repeated I18nBlock i18n_message_blocks = 28;

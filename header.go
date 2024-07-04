@@ -1793,7 +1793,7 @@ func DeltaToBlock(delta string) *Block {
 		return blocks[0]
 	}
 
-	return &Block{Type: "paragraph", Content: blocks}
+	return &Block{Type: "div", Content: blocks}
 }
 
 func CompileBlock(block *Block, data map[string]string) {
@@ -1857,7 +1857,7 @@ func blockToPlainText(block *Block) string {
 		return out
 	}
 
-	if block.Type == "heading" || block.Type == "paragraph" {
+	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
 		out += "\n"
 	}
 
@@ -1992,6 +1992,10 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 
 	if block.Type == "paragraph" {
 		ele.Tag = "p"
+	}
+
+	if block.Type == "div" {
+		ele.Tag = "div"
 	}
 
 	ele.Text = html.EscapeString(block.Text)

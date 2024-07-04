@@ -1,4 +1,16 @@
-// ko co attrs va marks
+var textbold = {
+  type: "text",
+  text: "Xin chao",
+  bold: true,
+};
+
+var boldAndItalic = {
+  type: "text",
+  text: "Xin chao",
+  bold: true,
+  italic: true,
+};
+
 var p = {
   type: "paragraph",
   content: [
@@ -14,17 +26,29 @@ var p = {
   ],
 };
 
-var bold = {
-  type: "text",
-  text: "Xin chao",
-  bold: true,
-};
-
-var boldAndItalic = {
-  type: "text",
-  text: "Xin chao",
-  bold: true,
-  italic: true,
+var div = {
+  type: "div",
+  content: [
+    {
+      type: "paragraph",
+      content: [
+        {
+          type: "text",
+          text: "Xin chao",
+        },
+        {
+          type: "text",
+          text: "Subiz",
+          bold: true,
+        },
+      ],
+    },
+    {
+      type: "text",
+      text: "Subiz",
+      bold: true,
+    },
+  ],
 };
 
 var css = {
@@ -289,12 +313,15 @@ var mention = {
 // ma yeu cau cua ban la {{ticket.number}}
 
 var title = {
-		type: "paragraph",
-		content: [{
-				type: 'text',
-				text: 'ma yeu cau cua ban la',
-		}, {
-				type: 'dynamic-field',
-				text: "ticket.number",
-		}],
-}
+  type: "paragraph",
+  content: [
+    {
+      type: "text",
+      text: "ma yeu cau cua ban la",
+    },
+    {
+      type: "dynamic-field",
+      text: "ticket.number",
+    },
+  ],
+};
