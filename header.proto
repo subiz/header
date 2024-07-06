@@ -1866,6 +1866,7 @@ message Integration {
 	bool sync_conversion_disabled = 102;
 
 	string lead_agent_group = 103;
+	WooCommerce woo_commerce = 104;
 }
 
 message TagRequest {
@@ -7997,4 +7998,14 @@ message InviteEmail {
 	string account_name = 11;
 	string account_logo_url = 12;
 	string from = 14;
+}
+
+message WooCommerce {
+	string base_url = 5; // https://demo.subiz.net/wp-json/wc/v3
+	string consumer_secret = 6;
+	string consumer_key = 7;
+
+	string product = 8; // fetch, push sync, none
+	string order = 9; // fetch, push, sync, none
+	string customer = 10; // fetch, none
 }
