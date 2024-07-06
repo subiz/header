@@ -1866,6 +1866,14 @@ message Integration {
 	bool sync_conversion_disabled = 102;
 
 	string lead_agent_group = 103;
+
+	string woocommerce_base_url = 104; // https://demo.subiz.net/wp-json/wc/v3
+	string woocommerce_consumer_secret = 106;
+	string woocommerce_consumer_key = 107;
+
+	string woocommerce_product = 108; // fetch, sync, none
+	string woocommerce_order = 109; // fetch, sync, none
+	string woocommerce_customer = 110; // fetch, none
 }
 
 message TagRequest {
