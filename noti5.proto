@@ -25,6 +25,8 @@ message Subscription {
 	optional int64 ticket_updated = 18;
 
 	repeated string ticket_updates = 19; // member, reporter, mentions, assignee
+
+	optional int64 weekly_report_email_disabled = 20;
 }
 
 message Setting {
