@@ -410,6 +410,7 @@ service TicketMgr {
 
 	rpc ListTicketSLAViolations(header.Id) returns (Response);
 	rpc RateTicket(header.Rating) returns (Response);
+	rpc CheckRateTicket(header.Id) returns (Empty);
 
 	rpc UpdateTicketRule(Rule) returns (Response);
 	rpc CreateTicketRule(Rule) returns (Response);
