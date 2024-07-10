@@ -417,6 +417,8 @@ service TicketMgr {
 	rpc DeleteTicketRule(Id) returns (Empty);
 	rpc ReadTicketRule(Id) returns (Response);
 	rpc ListTicketRules(Id) returns (Response);
+
+    rpc GetTicketIdsByConvoId(Id) returns (header.Ids);
 }
 
 service TemplateMgr {
