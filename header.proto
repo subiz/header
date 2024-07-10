@@ -1364,8 +1364,8 @@ message Rating {
 	string comment = 39;
 	string ticket_id = 40;
 	string encrypted_token = 41;
-	
-	Block question = 42; 
+
+	Block question = 42;
 	int64 allow_comment = 43;
 }
 
@@ -1917,6 +1917,7 @@ message EndchatConnectorSetting {
 	int64 after_inactivity_mins = 6;
 	bool enabled = 11;
 	bool custom = 12;
+	int64 skip_if_last_sender_is_user = 13; // agent or bot
 }
 
 message EndchatSetting {
