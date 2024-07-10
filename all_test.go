@@ -918,7 +918,7 @@ func TestCompileBlock2(t *testing.T) {
 		}, {
 			Type:  "dynamic-field",
 			Attrs: map[string]string{"key": "cvid"},
-		},{
+		}, {
 			Type:  "dynamic-field",
 			Attrs: map[string]string{"key": "huh"},
 		}},
@@ -993,6 +993,72 @@ func TestBlockToHTML(t *testing.T) {
 				}},
 			}},
 		}},
+	}
+	html := BlockToHTML(block)
+	fmt.Println("OUT", html)
+}
+
+func TestBlockToHTML2(t *testing.T) {
+	token := "123"
+	block := &Block{
+		Type: "div",
+		Content: []*Block{
+			&Block{
+				Type: "paragraph",
+				Content: []*Block{{
+					Type:  "link",
+					Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=5&token=" + token,
+					Title: "Great",
+					Bold:  true,
+					Attrs: map[string]string{"target": "_blank"},
+					Style: &Style{MarginRight: "10px"},
+					Content: []*Block{{
+						Type:    "image",
+						AltText: "Bad",
+						Image: &File{
+							Url:    "https://storage.googleapis.com/sbz-email/images/69cb57d14c5a511589b60e2e509d7843_great.png",
+							Width:  32,
+							Height: 32,
+						},
+						Title: "Không tốt",
+					}},
+				}, {
+					Type:  "link",
+					Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=3&token=" + token,
+					Title: "Okay",
+					Bold:  true,
+					Attrs: map[string]string{"target": "_blank"},
+					Style: &Style{MarginRight: "10px"},
+					Content: []*Block{{
+						Type:    "image",
+						AltText: "Bad",
+						Image: &File{
+							Url:    "https://storage.googleapis.com/sbz-email/images/1b4b9334afcc26ba6e15ac4c793e0b26_okay.png",
+							Width:  32,
+							Height: 32,
+						},
+						Title: "Không tốt",
+					}},
+				}, {
+					Type:  "link",
+					Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=1&token=" + token,
+					Title: "Okay",
+					Bold:  true,
+					Attrs: map[string]string{"target": "_blank"},
+					Content: []*Block{{
+						Type:    "image",
+						AltText: "Bad",
+						Image: &File{
+							Url:    "https://storage.googleapis.com/sbz-email/images/5eb693ff94eee781bf5af00e728151f3_bad.png",
+							Width:  32,
+							Height: 32,
+						},
+						Title: "Không tốt",
+					}},
+				},
+				},
+			},
+		},
 	}
 	html := BlockToHTML(block)
 	fmt.Println("OUT", html)

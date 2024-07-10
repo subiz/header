@@ -1947,7 +1947,7 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 	ele := &sanitiziedHTMLElement{}
 	ele.Style = ""
 	if block.Style != nil {
-		b, _ := json.Marshal(block.Style)
+		b, _ := json.Marshal(StyleToString(block.Style))
 		m := map[string]string{}
 		json.Unmarshal(b, &m)
 		for k, v := range m {
@@ -2096,4 +2096,172 @@ func MapBlock(block *Block, predicate func(block *Block)) {
 		}
 		predicate(content)
 	}
+}
+
+func StyleToString(style *Style) map[string]string {
+	var out = map[string]string{}
+	if style.BorderRadius != "" {
+		out["border-radius"] = style.BorderRadius
+	}
+	if style.FontFamily != "" {
+		out["font-family"] = style.FontFamily
+	}
+	if style.Color != "" {
+		out["color"] = style.Color
+	}
+	if style.Background != "" {
+		out["background"] = style.Background
+	}
+	if style.TextAlign != "" {
+		out["text-align"] = style.TextAlign
+	}
+	if style.TextTransform != "" {
+		out["text-transform"] = style.TextTransform
+	}
+	if style.FontStyle != "" {
+		out["font-style"] = style.FontStyle
+	}
+	if style.FontWeight != "" {
+		out["font-weight"] = style.FontWeight
+	}
+	if style.Width != "" {
+		out["width"] = style.Width
+	}
+	if style.MaxWidth != "" {
+		out["max-width"] = style.MaxWidth
+	}
+	if style.Height != "" {
+		out["height"] = style.Height
+	}
+	if style.MaxHeight != "" {
+		out["max-height"] = style.MaxHeight
+	}
+	if style.PaddingLeft != "" {
+		out["padding-left"] = style.PaddingLeft
+	}
+	if style.PaddingRight != "" {
+		out["padding-right"] = style.PaddingRight
+	}
+	if style.PaddingTop != "" {
+		out["padding-top"] = style.PaddingTop
+	}
+	if style.PaddingBottom != "" {
+		out["padding-bottom"] = style.PaddingBottom
+	}
+	if style.MarginLeft != "" {
+		out["margin-left"] = style.MarginLeft
+	}
+	if style.MarginRight != "" {
+		out["margin-right"] = style.MarginRight
+	}
+	if style.MarginTop != "" {
+		out["margin-top"] = style.MarginTop
+	}
+	if style.MarginBottom != "" {
+		out["margin-bottom"] = style.MarginBottom
+	}
+	if style.Position != "" {
+		out["position"] = style.Position
+	}
+	if style.ObjectFit != "" {
+		out["object-fit"] = style.ObjectFit
+	}
+	if style.LineHeight != "" {
+		out["line-height"] = style.LineHeight
+	}
+	if style.BackgroundPosition != "" {
+		out["background-position"] = style.BackgroundPosition
+	}
+	if style.Left != "" {
+		out["left"] = style.Left
+	}
+	if style.Right != "" {
+		out["right"] = style.Right
+	}
+	if style.Top != "" {
+		out["top"] = style.Top
+	}
+	if style.Bottom != "" {
+		out["bottom"] = style.Bottom
+	}
+	if style.Opacity != "" {
+		out["opacity"] = style.Opacity
+	}
+	if style.Rotate != "" {
+		out["rotate"] = style.Rotate
+	}
+	// filter
+	if style.Blur != "" {
+		out["blur"] = style.Blur
+	}
+	if style.Grayscale != "" {
+		out["grayscale"] = style.Grayscale
+	}
+	if style.Overlay != "" {
+		out["overlay"] = style.Overlay
+	}
+	if style.OverlayOpacity != "" {
+		out["overlay-opacity"] = style.OverlayOpacity
+	}
+	if style.Flex != "" {
+		out["flex"] = style.Flex
+	}
+	if style.FlexDirection != "" {
+		out["flex-direction"] = style.FlexDirection
+	}
+	if style.FlexShrink != "" {
+		out["flex-shrink"] = style.FlexShrink
+	}
+	if style.AlignItems != "" {
+		out["align-items"] = style.AlignItems
+	}
+	if style.JustifyContent != "" {
+		out["justify-content"] = style.JustifyContent
+	}
+	if style.Transform != "" {
+		out["transform"] = style.Transform
+	}
+	if style.FontSize != "" {
+		out["font-size"] = style.FontSize
+	}
+	if style.ZIndex != "" {
+		out["z-index"] = style.ZIndex
+	}
+	if style.BorderBottom != "" {
+		out["border-bottom"] = style.BorderBottom
+	}
+	if style.BorderLeft != "" {
+		out["border-left"] = style.BorderLeft
+	}
+	if style.BorderTop != "" {
+		out["border-top"] = style.BorderTop
+	}
+	if style.BorderRight != "" {
+		out["border-right"] = style.BorderRight
+	}
+	if style.Border != "" {
+		out["border"] = style.Border
+	}
+	if style.BoxShadow != "" {
+		out["box-shadow"] = style.BoxShadow
+	}
+	if style.Overflow != "" {
+		out["overflow"] = style.Overflow
+	}
+	if style.OverflowX != "" {
+		out["overflow-x"] = style.OverflowX
+	}
+	if style.OverflowY != "" {
+		out["overflow-y"] = style.OverflowY
+	}
+	if style.WhiteSpace != "" {
+		out["white-space"] = style.WhiteSpace
+	}
+	if style.UserSelect != "" {
+		out["user-select"] = style.UserSelect
+	}
+	if style.PointerEvents != "" {
+		out["pointer-events"] = style.PointerEvents
+	}
+	return out
 }
