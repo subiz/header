@@ -1028,9 +1028,9 @@ var file_service_proto_rawDesc = []byte{
 	0x0a, 0x0a, 0x52, 0x61, 0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x12, 0x0e, 0x2e, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x1a, 0x10, 0x2e, 0x68,
 	0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d,
-	0x0a, 0x10, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x45, 0x78, 0x69, 0x73,
-	0x74, 0x73, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0d,
-	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x12, 0x32, 0x0a,
+	0x0a, 0x0f, 0x47, 0x65, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x52, 0x61, 0x74, 0x69, 0x6e,
+	0x67, 0x12, 0x0a, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x49, 0x64, 0x1a, 0x0e, 0x2e,
+	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x61, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x32, 0x0a,
 	0x10, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x74, 0x52, 0x75, 0x6c,
 	0x65, 0x12, 0x0c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x75, 0x6c, 0x65, 0x1a,
 	0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
@@ -2490,7 +2490,7 @@ var file_service_proto_depIdxs = []int32{
 	1,   // 278: header.TicketMgr.GetSLAPolicy:input_type -> header.Id
 	1,   // 279: header.TicketMgr.ListTicketSLAViolations:input_type -> header.Id
 	84,  // 280: header.TicketMgr.RateTicket:input_type -> header.Rating
-	1,   // 281: header.TicketMgr.CheckTokenExists:input_type -> header.Id
+	1,   // 281: header.TicketMgr.GetTicketRating:input_type -> header.Id
 	72,  // 282: header.TicketMgr.UpdateTicketRule:input_type -> header.Rule
 	72,  // 283: header.TicketMgr.CreateTicketRule:input_type -> header.Rule
 	1,   // 284: header.TicketMgr.DeleteTicketRule:input_type -> header.Id
@@ -3022,7 +3022,7 @@ var file_service_proto_depIdxs = []int32{
 	83,  // 810: header.TicketMgr.GetSLAPolicy:output_type -> header.SLAPolicy
 	183, // 811: header.TicketMgr.ListTicketSLAViolations:output_type -> header.Response
 	183, // 812: header.TicketMgr.RateTicket:output_type -> header.Response
-	11,  // 813: header.TicketMgr.CheckTokenExists:output_type -> header.Empty
+	84,  // 813: header.TicketMgr.GetTicketRating:output_type -> header.Rating
 	183, // 814: header.TicketMgr.UpdateTicketRule:output_type -> header.Response
 	183, // 815: header.TicketMgr.CreateTicketRule:output_type -> header.Response
 	11,  // 816: header.TicketMgr.DeleteTicketRule:output_type -> header.Empty
@@ -12404,7 +12404,7 @@ type TicketMgrClient interface {
 	GetSLAPolicy(ctx context.Context, in *Id, opts ...grpc.CallOption) (*SLAPolicy, error)
 	ListTicketSLAViolations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	RateTicket(ctx context.Context, in *Rating, opts ...grpc.CallOption) (*Response, error)
-	CheckTokenExists(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	GetTicketRating(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Rating, error)
 	UpdateTicketRule(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Response, error)
 	CreateTicketRule(ctx context.Context, in *Rule, opts ...grpc.CallOption) (*Response, error)
 	DeleteTicketRule(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -12798,9 +12798,9 @@ func (c *ticketMgrClient) RateTicket(ctx context.Context, in *Rating, opts ...gr
 	return out, nil
 }
 
-func (c *ticketMgrClient) CheckTokenExists(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error) {
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/header.TicketMgr/CheckTokenExists", in, out, opts...)
+func (c *ticketMgrClient) GetTicketRating(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Rating, error) {
+	out := new(Rating)
+	err := c.cc.Invoke(ctx, "/header.TicketMgr/GetTicketRating", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12897,7 +12897,7 @@ type TicketMgrServer interface {
 	GetSLAPolicy(context.Context, *Id) (*SLAPolicy, error)
 	ListTicketSLAViolations(context.Context, *Id) (*Response, error)
 	RateTicket(context.Context, *Rating) (*Response, error)
-	CheckTokenExists(context.Context, *Id) (*Empty, error)
+	GetTicketRating(context.Context, *Id) (*Rating, error)
 	UpdateTicketRule(context.Context, *Rule) (*Response, error)
 	CreateTicketRule(context.Context, *Rule) (*Response, error)
 	DeleteTicketRule(context.Context, *Id) (*Empty, error)
@@ -13035,8 +13035,8 @@ func (*UnimplementedTicketMgrServer) ListTicketSLAViolations(context.Context, *I
 func (*UnimplementedTicketMgrServer) RateTicket(context.Context, *Rating) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RateTicket not implemented")
 }
-func (*UnimplementedTicketMgrServer) CheckTokenExists(context.Context, *Id) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckTokenExists not implemented")
+func (*UnimplementedTicketMgrServer) GetTicketRating(context.Context, *Id) (*Rating, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTicketRating not implemented")
 }
 func (*UnimplementedTicketMgrServer) UpdateTicketRule(context.Context, *Rule) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTicketRule not implemented")
@@ -13814,20 +13814,20 @@ func _TicketMgr_RateTicket_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TicketMgr_CheckTokenExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TicketMgr_GetTicketRating_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TicketMgrServer).CheckTokenExists(ctx, in)
+		return srv.(TicketMgrServer).GetTicketRating(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.TicketMgr/CheckTokenExists",
+		FullMethod: "/header.TicketMgr/GetTicketRating",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TicketMgrServer).CheckTokenExists(ctx, req.(*Id))
+		return srv.(TicketMgrServer).GetTicketRating(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -14095,8 +14095,8 @@ var _TicketMgr_serviceDesc = grpc.ServiceDesc{
 			Handler:    _TicketMgr_RateTicket_Handler,
 		},
 		{
-			MethodName: "CheckTokenExists",
-			Handler:    _TicketMgr_CheckTokenExists_Handler,
+			MethodName: "GetTicketRating",
+			Handler:    _TicketMgr_GetTicketRating_Handler,
 		},
 		{
 			MethodName: "UpdateTicketRule",
