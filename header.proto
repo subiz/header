@@ -1364,6 +1364,9 @@ message Rating {
 	string comment = 39;
 	string ticket_id = 40;
 	string encrypted_token = 41;
+	
+	Block question = 42; 
+	int64 allow_comment = 43;
 }
 
 message Conversations {
