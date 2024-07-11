@@ -1502,6 +1502,7 @@ message MessagePong {
 		bounced = 22; // email bounced
 		spamreport = 24; // email bounced
 		unsubscribed = 25; // email bounced
+		email_rating = 26; // email rating
 
 		care = 30;
 		remove_care = 31;
@@ -1516,6 +1517,7 @@ message MessagePong {
 	string ref_user_id = 9;
 	string ref_psid = 10;
 	string ref_link = 11;
+	int32 rating = 12;
 }
 
 message MessageButton {
