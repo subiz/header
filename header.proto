@@ -1518,6 +1518,7 @@ message MessagePong {
 	string ref_psid = 10;
 	string ref_link = 11;
 	int32 rating = 12;
+	string comment = 13;
 }
 
 message MessageButton {
