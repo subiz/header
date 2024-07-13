@@ -29,6 +29,11 @@ message Subscription {
 	optional int64 weekly_report_email_disabled = 20;
 }
 
+message TicketTypeSubscription {
+	optional string ticket_type = 4;
+	repeated string topics = 5; // sla_before_breach, sla_breached, ticket_updated
+}
+
 message Setting {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -40,6 +45,8 @@ message Setting {
 	optional Subscription mobile = 10;
 	optional Subscription email = 11;
 	optional Subscription instant = 15; // web
+
+	repeated TicketTypeSubscription ticket_types = 16;
 
 	optional DoNotDisturb do_not_disturb = 12;
 	optional int64 instant_mute_until = 14;

@@ -1002,62 +1002,35 @@ func TestBlockToHTML2(t *testing.T) {
 	token := "123"
 	block := &Block{
 		Type: "div",
-		Content: []*Block{
-			&Block{
-				Type: "paragraph",
-				Content: []*Block{{
-					Type:  "link",
-					Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=5&token=" + token,
-					Title: "Great",
-					Bold:  true,
-					Attrs: map[string]string{"target": "_blank"},
-					Style: &Style{MarginRight: "10px"},
-					Content: []*Block{{
-						Type:    "image",
-						AltText: "Bad",
-						Image: &File{
-							Url:    "https://storage.googleapis.com/sbz-email/images/69cb57d14c5a511589b60e2e509d7843_great.png",
-							Width:  32,
-							Height: 32,
-						},
-						Title: "Không tốt",
-					}},
-				}, {
-					Type:  "link",
-					Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=3&token=" + token,
-					Title: "Okay",
-					Bold:  true,
-					Attrs: map[string]string{"target": "_blank"},
-					Style: &Style{MarginRight: "10px"},
-					Content: []*Block{{
-						Type:    "image",
-						AltText: "Bad",
-						Image: &File{
-							Url:    "https://storage.googleapis.com/sbz-email/images/1b4b9334afcc26ba6e15ac4c793e0b26_okay.png",
-							Width:  32,
-							Height: 32,
-						},
-						Title: "Không tốt",
-					}},
-				}, {
-					Type:  "link",
-					Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=1&token=" + token,
-					Title: "Okay",
-					Bold:  true,
-					Attrs: map[string]string{"target": "_blank"},
-					Content: []*Block{{
-						Type:    "image",
-						AltText: "Bad",
-						Image: &File{
-							Url:    "https://storage.googleapis.com/sbz-email/images/5eb693ff94eee781bf5af00e728151f3_bad.png",
-							Width:  32,
-							Height: 32,
-						},
-						Title: "Không tốt",
-					}},
-				},
-				},
+		Content: []*Block{{
+			Type: "paragraph",
+			Content: []*Block{{
+				Type:  "link",
+				Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=5&token=" + token,
+				Title: "Great",
+				Text:  "Tuyệt vời",
+				Bold:  true,
+				Attrs: map[string]string{"target": "_blank"},
+				Style: &Style{MarginRight: "10px", Color: "#11B936"},
+			}, {
+				Type:  "link",
+				Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=3&token=" + token,
+				Title: "Okay",
+				Text:  "Tốt",
+				Bold:  true,
+				Attrs: map[string]string{"target": "_blank"},
+				Style: &Style{MarginRight: "10px", Color: "#787878"},
+			}, {
+				Type:  "link",
+				Href:  "https://app.subiz.com.vn/ticket-satisfaction-survey?rating=1&token=" + token,
+				Title: "Not good",
+				Text:  "Không tốt",
+				Bold:  true,
+				Style: &Style{Color: "#E81A1A"},
+				Attrs: map[string]string{"target": "_blank"},
 			},
+			},
+		},
 		},
 	}
 	html := BlockToHTML(block)

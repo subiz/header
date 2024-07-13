@@ -207,19 +207,18 @@ type DashboardAgent struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	BotBuildShowed          *int64   `protobuf:"varint,12,opt,name=bot_build_showed,json=botBuildShowed" json:"bot_build_showed,omitempty"`
-	PinnedUserViews         []string `protobuf:"bytes,13,rep,name=pinned_user_views,json=pinnedUserViews" json:"pinned_user_views,omitempty"` // list of agents that pinned this view
-	UserViewDisplayFields   []string `protobuf:"bytes,14,rep,name=user_view_display_fields,json=userViewDisplayFields" json:"user_view_display_fields,omitempty"`
-	UserViewOrderBy         []string `protobuf:"bytes,15,rep,name=user_view_order_by,json=userViewOrderBy" json:"user_view_order_by,omitempty"` // +attr:fullname, -attr:email
-	OrderDisplayFields      []string `protobuf:"bytes,16,rep,name=order_display_fields,json=orderDisplayFields" json:"order_display_fields,omitempty"`
-	OrderDisplayOrderBy     []string `protobuf:"bytes,17,rep,name=order_display_order_by,json=orderDisplayOrderBy" json:"order_display_order_by,omitempty"`
-	DefaultPos              *string  `protobuf:"bytes,18,opt,name=default_pos,json=defaultPos" json:"default_pos,omitempty"`
-	DefaultShippingProvider *string  `protobuf:"bytes,19,opt,name=default_shipping_provider,json=defaultShippingProvider" json:"default_shipping_provider,omitempty"`
-	OrderFilter             *string  `protobuf:"bytes,20,opt,name=order_filter,json=orderFilter" json:"order_filter,omitempty"` // json
-	ConversationSeen        *int64   `protobuf:"varint,21,opt,name=conversation_seen,json=conversationSeen" json:"conversation_seen,omitempty"`
-	PriceFunction           *string  `protobuf:"bytes,22,opt,name=price_function,json=priceFunction" json:"price_function,omitempty"`
-	UserInfoFields          []string `protobuf:"bytes,23,rep,name=user_info_fields,json=userInfoFields" json:"user_info_fields,omitempty"`
-	// optional int64 order_feature_requested = 24; // 0, -1: allow to use, xyz: requested
+	BotBuildShowed                 *int64            `protobuf:"varint,12,opt,name=bot_build_showed,json=botBuildShowed" json:"bot_build_showed,omitempty"`
+	PinnedUserViews                []string          `protobuf:"bytes,13,rep,name=pinned_user_views,json=pinnedUserViews" json:"pinned_user_views,omitempty"` // list of agents that pinned this view
+	UserViewDisplayFields          []string          `protobuf:"bytes,14,rep,name=user_view_display_fields,json=userViewDisplayFields" json:"user_view_display_fields,omitempty"`
+	UserViewOrderBy                []string          `protobuf:"bytes,15,rep,name=user_view_order_by,json=userViewOrderBy" json:"user_view_order_by,omitempty"` // +attr:fullname, -attr:email
+	OrderDisplayFields             []string          `protobuf:"bytes,16,rep,name=order_display_fields,json=orderDisplayFields" json:"order_display_fields,omitempty"`
+	OrderDisplayOrderBy            []string          `protobuf:"bytes,17,rep,name=order_display_order_by,json=orderDisplayOrderBy" json:"order_display_order_by,omitempty"`
+	DefaultPos                     *string           `protobuf:"bytes,18,opt,name=default_pos,json=defaultPos" json:"default_pos,omitempty"`
+	DefaultShippingProvider        *string           `protobuf:"bytes,19,opt,name=default_shipping_provider,json=defaultShippingProvider" json:"default_shipping_provider,omitempty"`
+	OrderFilter                    *string           `protobuf:"bytes,20,opt,name=order_filter,json=orderFilter" json:"order_filter,omitempty"` // json
+	ConversationSeen               *int64            `protobuf:"varint,21,opt,name=conversation_seen,json=conversationSeen" json:"conversation_seen,omitempty"`
+	PriceFunction                  *string           `protobuf:"bytes,22,opt,name=price_function,json=priceFunction" json:"price_function,omitempty"`
+	UserInfoFields                 []string          `protobuf:"bytes,23,rep,name=user_info_fields,json=userInfoFields" json:"user_info_fields,omitempty"`
 	LastCallDevice                 *string           `protobuf:"bytes,25,opt,name=last_call_device,json=lastCallDevice" json:"last_call_device,omitempty"`
 	LastCallNumber                 *string           `protobuf:"bytes,26,opt,name=last_call_number,json=lastCallNumber" json:"last_call_number,omitempty"`
 	MuteCallUntil                  *int64            `protobuf:"varint,27,opt,name=mute_call_until,json=muteCallUntil" json:"mute_call_until,omitempty"` // ms

@@ -6529,6 +6529,8 @@ message BusinessEmailAddress {
 
 	bool convert_to_ticket = 16;
 	string ticket_type_id = 17;
+
+	string provider = 18; // gmail
 }
 
 message BusinessEmailAddresses {
@@ -7591,7 +7593,7 @@ message Ticket {
 
 	int64 agent_first_response_at = 92;
 	int64 agent_last_response_at = 93;
-	int64 agent_second_last_response_at = 103; 
+	int64 agent_second_last_response_at = 103;
 
 	string source_id = 94; // zoho.203948.123098123
 	bool is_hold = 96;
@@ -7599,7 +7601,7 @@ message Ticket {
 
 	int64 user_first_response_at = 98;
 	int64 user_last_response_at = 99;
-	map<string,ConversationMember> memberM = 100; //just for compacted ticket 
+	map<string,ConversationMember> memberM = 100; //just for compacted ticket
 	string peoredic_update_enable = 101; // on/off
 	string every_response_enable = 102; // on/off
 }
@@ -7783,6 +7785,7 @@ message SLAPolicy {
 	bool when_offline = 25; // only run when there is no online agent
 	repeated string ticket_types = 26; // only apply for these ticket type
 	string type_id = 27;
+
 }
 
 message SLATarget {
@@ -7988,6 +7991,12 @@ message TicketUpdatedNotiEmail {
 
 	int64 total_new_tickets = 8;
 	repeated Ticket new_tickets = 9;
+
+	int64 total_high_risk_slas = 10;
+	repeated Ticket high_risk_sla_tickets = 11;
+
+	int64 total_breached_slas = 12;
+	repeated Ticket breached_sla_tickets = 13;
 }
 
 message ResetPasswordEmail {
