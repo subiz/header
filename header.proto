@@ -7591,6 +7591,7 @@ message Ticket {
 
 	int64 agent_first_response_at = 92;
 	int64 agent_last_response_at = 93;
+	int64 agent_second_last_response_at = 103; 
 
 	string source_id = 94; // zoho.203948.123098123
 	bool is_hold = 96;
