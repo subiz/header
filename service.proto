@@ -72,6 +72,17 @@ service Map {
 	rpc ReadAddress(Id) returns (Address);
 }
 
+service RefererMgr {
+	rpc ListReferrerPayouts(Id) returns (account.RefererPayoutBills);
+	rpc PayReferrer(Id) returns (account.RefererPayoutBill);
+	rpc ListReferredCustomers(Id) returns (account.ReferredCustomers);
+	rpc ListReferredInvoices(Id) returns (account.ReferredInvoices);
+	rpc GetReferrerAccount(Id) returns (account.ReferrerAccount);
+	// rpc CreateReferrerAccount(header.Id) returns (ReferrerAccount);
+	rpc UpdateReferrerAccount(account.ReferrerAccount) returns (account.ReferrerAccount); // name
+	rpc ReportReferrerEearning(account.ReferrerEarningReportRequest) returns (account.ReferrerEarningReportResponse);
+}
+
 service AccountMgr {
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
@@ -164,6 +175,7 @@ service AccountMgr {
 	rpc UnlockLogin(header.Id) returns (header.Id);
 
 	rpc ListBills(header.Id) returns (payment.Bills);
+
 }
 
 // user services

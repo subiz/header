@@ -284,3 +284,103 @@ message Presence {
 	optional string viewing_product_sku = 14;  // presence_update user with product linked
 	optional string viewing_product_title = 15;
 }
+
+message RefererPayoutBill {
+	optional common.Context ctx = 1;
+	optional string ref_id = 3;
+	optional string for_account_id = 4;
+
+	optional string id = 5;
+
+	optional string created_by = 6;
+	optional string created_by_type = 10;
+	optional int64 created = 7;
+
+	optional float amount = 12;
+	optional int64 fpv_amount = 13;
+
+	optional string description = 21;
+
+	optional string picture_url = 22;
+	optional string currency = 23;
+
+	optional string original_bank_transfer_note = 18;
+	optional string bank_transfer_note = 19;
+}
+
+message RefererPayoutBills {
+	optional common.Context ctx = 1;
+	optional string ref_id = 3;
+	repeated RefererPayoutBill bills = 4;
+}
+
+message ReferredCustomer {
+	optional common.Context ctx = 1;
+	optional string ref_id = 3;
+	optional string for_account_id = 4;
+	optional string owner_email = 5;
+	optional string account_name = 6;
+	optional string account_logo = 7;
+	optional int64 registered = 8;
+	optional int64 plan = 9;
+	optional int64 last_actived_month = 10;
+	optional int64 last_payment = 11;
+	optional int64 fpv_commission = 12;
+}
+
+message ReferredCustomers {
+	optional common.Context ctx = 1;
+	optional string ref_id = 3;
+	repeated ReferredCustomer customers = 4;
+}
+
+message ReferredInvoice {
+	optional common.Context ctx = 1;
+	optional string ref_id = 3;
+	optional string for_account_id = 4;
+	optional string owner_email = 5;
+	optional string account_name = 6;
+	optional string account_logo = 7;
+	optional int64 registered = 8;
+	// optional int64 plan = 9;
+	// optional int64 last_actived_month = 10;
+	// optional int64 last_payment = 11;
+	optional int64 fpv_commission = 12;
+
+	optional int64 for_invoice_id = 13;
+	optional int64 fpv_amount = 14;
+	optional int64 created = 15;
+}
+
+message ReferredInvoices {
+	optional common.Context ctx = 1;
+	optional string ref_id = 3;
+	repeated ReferredInvoice invoices = 4;
+}
+
+message ReferrerAccount {
+	optional common.Context ctx = 1;
+	optional string ref_id = 3; // accid
+	optional string name = 4;
+	optional string email = 5;
+	optional string balanced = 6;
+	optional int64 fpv_total_earning = 7;
+	optional int64 fpv_earning_this_month = 8;
+	optional int64 fpv_earning_this_week = 9;
+	optional int64 fpv_balance = 10;
+	optional int64 updated = 11;
+}
+
+message ReferrerEarningReportResponse {
+	optional common.Context ctx = 1;
+	optional string ref_id = 2;
+	optional int64 total_earning = 5;
+	repeated int64 earning_datapoints = 6;
+}
+
+message ReferrerEarningReportRequest {
+	optional common.Context ctx = 1;
+	optional string ref_id = 2;
+	optional int64 from_hour = 3;
+	optional int64 to_hour = 4;
+}
