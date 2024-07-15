@@ -73,11 +73,12 @@ service Map {
 }
 
 service RefererMgr {
-	rpc ListReferrerPayouts(Id) returns (account.RefererPayoutBills);
-	rpc PayReferrer(account.RefererPayoutBill) returns (account.RefererPayoutBill);
+	rpc ListReferrerPayouts(Id) returns (account.ReferrerPayoutBills);
+	rpc PayReferrer(account.ReferrerPayoutBill) returns (account.ReferrerPayoutBill);
 	rpc ListReferredCustomers(Id) returns (account.ReferredCustomers);
 	rpc ListReferredInvoices(Id) returns (account.ReferredInvoices);
 	rpc GetReferrerAgent(Id) returns (account.ReferrerAgent);
+	rpc ListPayoutReferrerAgent(Id) returns (account.ReferrerAgent);
 }
 
 service AccountMgr {

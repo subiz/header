@@ -285,7 +285,7 @@ message Presence {
 	optional string viewing_product_title = 15;
 }
 
-message RefererPayoutBill {
+message ReferrerPayoutBill {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3;
 	optional string for_account_id = 4;
@@ -308,10 +308,10 @@ message RefererPayoutBill {
 	optional string bank_transfer_note = 19;
 }
 
-message RefererPayoutBills {
+message ReferrerPayoutBills {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3;
-	repeated RefererPayoutBill bills = 4;
+	repeated ReferrerPayoutBill referrer_payout_bills = 4;
 }
 
 message ReferredCustomer {
@@ -331,7 +331,7 @@ message ReferredCustomer {
 message ReferredCustomers {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3;
-	repeated ReferredCustomer customers = 4;
+	repeated ReferredCustomer referred_customers = 4;
 }
 
 message ReferredInvoice {
@@ -363,4 +363,10 @@ message ReferrerAgent {
 	optional int64 fpv_earning_this_month = 8;
 	optional int64 fpv_balance = 10;
 	optional int64 modified = 25;
+	optional int64 last_payout = 11;
+}
+
+message ReferrerAgents {
+	optional common.Context ctx = 1;
+	repeated ReferrerAgents referrer_agents = 4;
 }
