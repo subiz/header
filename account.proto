@@ -368,5 +368,5 @@ message ReferrerAgent {
 
 message ReferrerAgents {
 	optional common.Context ctx = 1;
-	repeated ReferrerAgents referrer_agents = 4;
+	repeated ReferrerAgent referrer_agents = 4;
 }

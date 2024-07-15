@@ -78,7 +78,7 @@ service RefererMgr {
 	rpc ListReferredCustomers(Id) returns (account.ReferredCustomers);
 	rpc ListReferredInvoices(Id) returns (account.ReferredInvoices);
 	rpc GetReferrerAgent(Id) returns (account.ReferrerAgent);
-	rpc ListPayoutReferrerAgent(Id) returns (account.ReferrerAgent);
+	rpc ListPayoutReferrerAgents(Id) returns (account.ReferrerAgents);
 }
 
 service AccountMgr {
