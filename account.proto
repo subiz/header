@@ -128,7 +128,7 @@ message Account {
 	optional string address = 20;
 	optional string url = 21;
 	optional string lang = 23;
-	//optional string referer_from = 24;
+	// optional string referer_from = 24;
 	optional string timezone = 26;
 	optional string country = 27;
 
@@ -323,9 +323,9 @@ message ReferredCustomer {
 	optional string logo = 7;
 	optional int64 registered = 8;
 	optional string state = 9;
-	optional int64 last_actived_month = 10;
-	optional int64 last_payment = 11;
+	optional int64 last_invoice = 11;
 	optional int64 fpv_commission = 12;
+	optional int64 fpv_total_earning = 14;
 }
 
 message ReferredCustomers {
@@ -344,7 +344,7 @@ message ReferredInvoice {
 	optional int64 registered = 8;
 
 	optional int64 fpv_commission = 12;
-	optional int64 for_invoice_id = 13;
+	optional string for_invoice_id = 13;
 	optional int64 fpv_amount = 14;
 	optional int64 created = 15;
 }
@@ -363,19 +363,4 @@ message ReferrerAgent {
 	optional int64 fpv_earning_this_month = 8;
 	optional int64 fpv_balance = 10;
 	optional int64 modified = 25;
-	optional Presence last_seen = 38;
-}
-
-message ReferrerEarningReportResponse {
-	optional common.Context ctx = 1;
-	optional string ref_id = 2;
-	optional int64 total_earning = 5;
-	repeated int64 earning_datapoints = 6;
-}
-
-message ReferrerEarningReportRequest {
-	optional common.Context ctx = 1;
-	optional string ref_id = 2;
-	optional int64 from_hour = 3;
-	optional int64 to_hour = 4;
 }
