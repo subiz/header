@@ -319,10 +319,10 @@ message ReferredCustomer {
 	optional string ref_id = 3;
 	optional string for_account_id = 4;
 	optional string owner_email = 5;
-	optional string account_name = 6;
-	optional string account_logo = 7;
+	optional string name = 6;
+	optional string logo = 7;
 	optional int64 registered = 8;
-	optional int64 plan = 9;
+	optional string state = 9;
 	optional int64 last_actived_month = 10;
 	optional int64 last_payment = 11;
 	optional int64 fpv_commission = 12;
@@ -342,11 +342,8 @@ message ReferredInvoice {
 	optional string account_name = 6;
 	optional string account_logo = 7;
 	optional int64 registered = 8;
-	// optional int64 plan = 9;
-	// optional int64 last_actived_month = 10;
-	// optional int64 last_payment = 11;
-	optional int64 fpv_commission = 12;
 
+	optional int64 fpv_commission = 12;
 	optional int64 for_invoice_id = 13;
 	optional int64 fpv_amount = 14;
 	optional int64 created = 15;
@@ -358,17 +355,15 @@ message ReferredInvoices {
 	repeated ReferredInvoice invoices = 4;
 }
 
-message ReferrerAccount {
+message ReferrerAgent {
 	optional common.Context ctx = 1;
-	optional string ref_id = 3; // accid
-	optional string name = 4;
-	optional string email = 5;
-	optional string balanced = 6;
+	optional string ref_id = 3; // agid
+
 	optional int64 fpv_total_earning = 7;
 	optional int64 fpv_earning_this_month = 8;
-	optional int64 fpv_earning_this_week = 9;
 	optional int64 fpv_balance = 10;
-	optional int64 updated = 11;
+	optional int64 modified = 25;
+	optional Presence last_seen = 38;
 }
 
 message ReferrerEarningReportResponse {
