@@ -80,6 +80,7 @@ service RefererMgr {
 	rpc GetReferrerAgent(Id) returns (account.ReferrerAgent);
 	rpc ListPayoutReferrerAgents(Id) returns (account.ReferrerAgents);
 	rpc RefererAccount(Id) returns (Empty);
+	rpc UpdateReferrerAgent(account.ReferrerAgent) returns (account.ReferrerAgent);
 }
 
 service AccountMgr {
