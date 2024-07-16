@@ -120,7 +120,6 @@ message Subscription {
 	optional int64 fpv_unlimited_agent_price = 49; // usd
 
 	optional int64 num_agents = 50;
-
 	optional int64 use_ticket = 51;
 }
 

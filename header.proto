@@ -7793,7 +7793,6 @@ message SLAPolicy {
 	bool when_offline = 25; // only run when there is no online agent
 	repeated string ticket_types = 26; // only apply for these ticket type
 	string type_id = 27;
-
 }
 
 message SLATarget {
@@ -7977,7 +7976,6 @@ message Block {
 	int64 list_item_order = 110;
 
 	string href = 111;
-
 	bool inline = 112;
 
 	int64 colspan = 114;

@@ -288,7 +288,7 @@ message Presence {
 message ReferrerPayoutBill {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3;
-	optional string for_account_id = 4;
+	// optional string for_account_id = 4;
 
 	optional string id = 5;
 
@@ -360,7 +360,7 @@ message ReferredInvoices {
 message ReferrerAgent {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3; // agid
-
+	optional Agent agent = 4;
 	optional int64 fpv_total_earning = 7;
 	optional int64 fpv_earning_this_month = 8;
 	optional int64 fpv_balance = 10;
