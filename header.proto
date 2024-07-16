@@ -799,6 +799,7 @@ message Data {
 	ConversationMeta conversation_meta = 123;
 	Rating rating = 124;
 	Rule ticket_rule = 125;
+	SLAViolation violation = 126;
 }
 
 message ConversationMeta {
