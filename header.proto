@@ -1144,6 +1144,7 @@ message ConversationMember {
 
 	string invite_reason = 34;
 	int64 total_messages = 35;
+	int64 last_action_at = 37;
 	string is_subscribed = 38; // "", off, on
 }
 
@@ -7611,7 +7612,6 @@ message ReceiptMember{
 	string id = 3;
 	int64 last_mentioned = 4; // ms
 	int64 read_at = 5; // ticket
-	int64 last_action_at = 6;
 }
 
 message SLAViolations {
