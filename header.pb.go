@@ -54104,7 +54104,7 @@ type CreateAccountRequest struct {
 	Timezone     string          `protobuf:"bytes,9,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	Phone        string          `protobuf:"bytes,10,opt,name=phone,proto3" json:"phone,omitempty"`
 	CountryCode  string          `protobuf:"bytes,11,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
-	ReferrerFrom string          `protobuf:"bytes,12,opt,name=referrer_from,json=referrerFrom,proto3" json:"referrer_from,omitempty"`
+	ReferrerFrom string          `protobuf:"bytes,12,opt,name=referrer_from,json=referrerFrom,proto3" json:"referrer_from,omitempty"` // from cookie
 	GaClientId   string          `protobuf:"bytes,13,opt,name=ga_client_id,json=gaClientId,proto3" json:"ga_client_id,omitempty"`
 	SubizUserId  string          `protobuf:"bytes,16,opt,name=subiz_user_id,json=subizUserId,proto3" json:"subiz_user_id,omitempty"` // merge after registry
 }

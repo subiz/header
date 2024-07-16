@@ -2535,7 +2535,7 @@ type ReferredInvoice struct {
 	AccountName   *string         `protobuf:"bytes,6,opt,name=account_name,json=accountName" json:"account_name,omitempty"`
 	AccountLogo   *string         `protobuf:"bytes,7,opt,name=account_logo,json=accountLogo" json:"account_logo,omitempty"`
 	Registered    *int64          `protobuf:"varint,8,opt,name=registered" json:"registered,omitempty"`
-	FpvCommission *int64          `protobuf:"varint,12,opt,name=fpv_commission,json=fpvCommission" json:"fpv_commission,omitempty"`
+	FpvCommission *int64          `protobuf:"varint,12,opt,name=fpv_commission,json=fpvCommission" json:"fpv_commission,omitempty"` // 100.000
 	ForInvoiceId  *string         `protobuf:"bytes,13,opt,name=for_invoice_id,json=forInvoiceId" json:"for_invoice_id,omitempty"`
 	FpvAmount     *int64          `protobuf:"varint,14,opt,name=fpv_amount,json=fpvAmount" json:"fpv_amount,omitempty"`
 	Created       *int64          `protobuf:"varint,15,opt,name=created" json:"created,omitempty"`
@@ -2713,6 +2713,8 @@ func (x *ReferredInvoices) GetInvoices() []*ReferredInvoice {
 	return nil
 }
 
+// float(15.500) -> * 1000_000 -> float pointer value
+// 0.01 $ -> 0.01 * 1000000 = 10000
 type ReferrerAgent struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

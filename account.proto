@@ -343,7 +343,7 @@ message ReferredInvoice {
 	optional string account_logo = 7;
 	optional int64 registered = 8;
 
-	optional int64 fpv_commission = 12;
+	optional int64 fpv_commission = 12; // 100.000
 	optional string for_invoice_id = 13;
 	optional int64 fpv_amount = 14;
 	optional int64 created = 15;
@@ -355,6 +355,8 @@ message ReferredInvoices {
 	repeated ReferredInvoice invoices = 4;
 }
 
+// float(15.500) -> * 1000_000 -> float pointer value
+// 0.01 $ -> 0.01 * 1000000 = 10000
 message ReferrerAgent {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3; // agid
