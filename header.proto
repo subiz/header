@@ -1141,12 +1141,9 @@ message ConversationMember {
 	bool off_notification = 28;
 
 	int64 hidden = 29; // ms
-	int64 last_mentioned = 30; // ms
 
 	string invite_reason = 34;
 	int64 total_messages = 35;
-	int64 read_at = 36; // ticket
-	int64 last_action_at = 37;
 	string is_subscribed = 38; // "", off, on
 }
 
