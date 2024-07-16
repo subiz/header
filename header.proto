@@ -7605,6 +7605,16 @@ message Ticket {
 	map<string,ConversationMember> memberM = 100; //just for compacted ticket
 	string peoredic_update_enable = 101; // on/off
 	string every_response_enable = 102; // on/off
+	repeated ReceiptMember read_receipts = 104;
+}
+
+message ReceiptMember{
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	int64 last_mentioned = 4; // ms
+	int64 read_at = 5; // ticket
+	int64 last_action_at = 6;
 }
 
 message SLAViolations {
