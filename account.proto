@@ -366,7 +366,8 @@ message ReferrerAgent {
 	optional int64 modified = 25; // read-only
 	optional int64 last_payout = 11; // read-only
 
-	optional int64 active_subs = 13; // read-only
+	optional int64 paying_customers = 13; // read-only
+	optional int64 total_customers = 14; // read-only
 
 	optional string bank_name = 15;
 	optional string bank_account_name = 16;
