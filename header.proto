@@ -8032,3 +8032,28 @@ message InviteEmail {
 	string account_logo_url = 12;
 	string from = 14;
 }
+
+message AgentProfile {
+	common.Context ctx = 1;
+	string id = 2;
+
+	string fullname = 4;
+	string email = 5;
+	string phone = 8;
+	File avatar = 13;
+	string lang = 14;
+	string timezone = 16;
+	string encrypted_password = 17;
+	int64 created = 20;
+	enum ProfileState {
+		pending = 0; // waiting for confirmation
+		active = 1;
+		inactive = 2;
+		deleted = 3;
+	}
+
+	string state = 22;
+	int64 password_changed = 23;
+	int64 modified = 25;
+	account.Presence last_seen = 38;
+}

@@ -54,8 +54,8 @@ message Agent {
 	optional string account_id = 3; // subiz only
 
 	optional string fullname = 4;
-	optional string email = 5;
-	optional string phone = 8;
+	optional string email = 5; // reflect from agent profile
+	optional string phone = 8; // reflect form agent profile
 	optional bool is_owner = 10;
 	optional string job_title = 11; // deprecated
 
@@ -82,7 +82,7 @@ message Agent {
 	}
 
 	optional string state = 22;
-	optional int64 password_changed = 23;
+	optional int64 password_changed = 23; // reflect from agent profile
 	optional int64 modified = 25;
 
 	optional Account account = 28;
@@ -367,10 +367,9 @@ message ReferrerAgent {
 	optional int64 last_payout = 11; // read-only
 
 	optional int64 active_subs = 13; // read-only
-	optional int64 paying_subs = 14; // read-only
 
 	optional string bank_name = 15;
-	optional string bank_number = 16;
+	optional string bank_account_name = 16;
 	optional string bank_account_number = 17;
 	optional int64 bank_info_modified_at = 18;
 }

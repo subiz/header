@@ -4,8 +4,24 @@ package common;
 
 option go_package = "github.com/subiz/header/common";
 
+message ProfileCredential {
+	string id = 3;
+	Type type = 4; // should be agent, user or connector
+	// Permission perm = 6;
+	string client_id = 7;
+	repeated string scopes = 8;
+
+	// for x-signed-key
+	repeated string signed_objects = 9;
+	string signed_type = 10;
+
+	bool inspect = 13;
+	string client_type = 14; // dashboard, widget, bot id
+}
+
 message Context {
 	Credential credential = 6;
+	ProfileCredential profile_credential = 7;
 	Device by_device = 10;
 	// for kafka
 	// string sub_topic = 11;
