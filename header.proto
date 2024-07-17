@@ -7612,6 +7612,7 @@ message ReceiptMember{
 	string id = 3;
 	int64 last_mentioned = 4; // ms
 	int64 read_at = 5; // ticket
+	string is_subscribed = 6; // off, ""
 }
 
 message SLAViolations {
