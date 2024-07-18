@@ -447,6 +447,7 @@ service TicketMgr {
     rpc ReportTicket(header.ConvoReportRequest) returns (header.ConvoReportResponse);
 	rpc ReportSlaViolations(header.ConvoReportRequest) returns (header.ConvoReportResponse);
 	rpc ReportRating(header.ConvoReportRequest) returns (header.ConvoReportResponse);
+	
 	//internal only
     rpc GetTicketIdsByConvoId(Id) returns (header.Ids);
 }
