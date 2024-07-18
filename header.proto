@@ -2628,6 +2628,7 @@ message WidgetField {
 message WidgetGroup {
 	string id = 1;
 	string name = 2;
+	map<string,string> i18n_name = 3;
 }
 
 message WidgetForm {
@@ -3618,7 +3619,7 @@ message LoginSession {
 	string client_id = 4; // application id
 	string id = 5; // crc32 code of refresh_token
 
-	string kind = 6; // should be agent, connector or bot
+	string kind = 6; // should be agent, connector, bot or profile
 
 	// should be the same as access_token, since we dont want to use refresh token
 	string refresh_token = 7;
@@ -3635,7 +3636,7 @@ message LoginSession {
 	// use on realtime event only
 	string state = 18; // ended, created, updated
 
-	string type = 19; // session, apikey, admin(inspect)
+	string type = 19; // session, apikey, admin(inspect), profile
 	string client_version = 20;
 
 	int64 ttls = 21; // seconds, apikey only
@@ -6968,6 +6969,8 @@ message Response {
 
 	Rule ticket_rule = 134;
 	repeated Rule ticket_rules = 135;
+
+	AgentProfile agent_profile = 136;
 }
 
 message ZaloCallConsent {
@@ -8035,24 +8038,32 @@ message InviteEmail {
 message AgentProfile {
 	common.Context ctx = 1;
 	string id = 2;
+	string default_account_id = 3; // default
 
 	string fullname = 4;
-	string email = 5;
-	string phone = 8;
+	string email = 5; // primary
+	string phone = 8; // primary
 	File avatar = 13;
 	string lang = 14;
 	string timezone = 16;
 	string encrypted_password = 17;
 	int64 created = 20;
 	enum ProfileState {
-		pending = 0; // waiting for confirmation
-		active = 1;
-		inactive = 2;
-		deleted = 3;
+		active = 0;
+		inactive = 1;
+		deleted = 2;
 	}
 
+	int64 email_confirmed = 21; // email
 	string state = 22;
 	int64 password_changed = 23;
 	int64 modified = 25;
 	account.Presence last_seen = 38;
+	string referrer_by = 39;
+}
+
+message AgentJoinRequest {
+}
+
+message AgentInvitation {
 }
