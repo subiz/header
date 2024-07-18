@@ -7277,7 +7277,6 @@ message ConvoReportEntry {
 	repeated int64 datapoints = 1;
 	repeated string labels = 2;
 	string metric = 3;
-	map<string,bool> userReturnedM = 4;
 }
 
 message AutomationTrigger {

@@ -429,6 +429,9 @@ service TicketMgr {
 	rpc ReadTicketRule(Id) returns (Response);
 	rpc ListTicketRules(Id) returns (Response);
 
+    rpc Report(header.ConvoReportRequest) returns (header.ConvoReportResponse);
+
+	//internal only
     rpc GetTicketIdsByConvoId(Id) returns (header.Ids);
 }
 
