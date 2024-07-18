@@ -7665,6 +7665,7 @@ message ListTicketRequest {
 	Touchpoint touchpoint = 15;
 	bool is_deleted = 16;
 	string view_id = 17; // quick
+	bool is_count_only = 18;
 }
 
 message TicketView {
