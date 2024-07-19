@@ -84,16 +84,18 @@ service RefererMgr {
 }
 
 service AccountMgr {
-	rpc GenerateInviteLink(header.Id) returns (header.Id);
-	rpc CheckInviteLink(header.Id) returns (header.InvitationLinkData); // -> account id
+	rpc InviteEmails(header.Id) returns (header.Empty);
+	rpc GetInviteLink(header.Id) returns (header.Id);
+	rpc RegenerateInviteLink(header.Id) returns (header.Id);
+	rpc CheckInviteLink(header.Id) returns (header.InvitationLink);
 	rpc JoinAccount(header.JoinAccountRequest) returns (header.Response);
 	rpc RequestOTP(header.Id) returns (header.Empty);
-	rpc LoginUsingOTP(header.Id) returns (header.Response);
+	rpc LoginUsingOTP(LoginRequest) returns (header.Response);
 	rpc CheckEmailUsed(header.Id) returns (header.Response);
 	rpc UpdateAgentProfile(header.AgentProfile) returns (header.Response);
 	rpc GetAgentProfile(Id) returns (header.Response);
 	rpc ListAgentProfileAccounts(Id) returns (header.Response);
-	rpc Login(Id) returns (LoginSession);
+	rpc Login(LoginRequest) returns (LoginSession);
 
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
@@ -440,12 +442,12 @@ service TicketMgr {
 	rpc ReadTicketRule(Id) returns (Response);
 	rpc ListTicketRules(Id) returns (Response);
 
-    rpc ReportTicket(header.ConvoReportRequest) returns (header.ConvoReportResponse);
+	rpc ReportTicket(header.ConvoReportRequest) returns (header.ConvoReportResponse);
 	rpc ReportSlaViolations(header.ConvoReportRequest) returns (header.ConvoReportResponse);
 	rpc ReportRating(header.ConvoReportRequest) returns (header.ConvoReportResponse);
-	
+
 	//internal only
-    rpc GetTicketIdsByConvoId(Id) returns (header.Ids);
+	rpc GetTicketIdsByConvoId(Id) returns (header.Ids);
 }
 
 service TemplateMgr {

@@ -8029,7 +8029,7 @@ message OTPEmail {
 	// ExpiredIn is a RFC3339 time string indicates when token will be expired
 	int64 expired_in = 4;
 	string otp = 5;
-	string account_id = 6;
+
 	string agent_id = 7;
 	string agent_name = 8;
 }
@@ -8051,6 +8051,11 @@ message InviteEmail {
 	string link = 15; // new
 }
 
+message LoginRequest {
+	string username = 4;
+	string password = 5;
+}
+
 message AgentProfile {
 	common.Context ctx = 1;
 	string id = 2;
@@ -8062,7 +8067,7 @@ message AgentProfile {
 	File avatar = 13;
 	string lang = 14;
 	string timezone = 16;
-	string encrypted_password = 17;
+	// string encrypted_password = 17;
 	int64 created = 20;
 	enum ProfileState {
 		active = 0;
@@ -8078,13 +8083,7 @@ message AgentProfile {
 	string referrer_by = 39;
 }
 
-message AgentJoinRequest {
-}
-
-message AgentInvitation {
-}
-
-message InvitationLinkData {
+message InvitationLink {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string account_name = 3;

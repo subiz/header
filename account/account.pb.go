@@ -498,9 +498,9 @@ type Agent struct {
 	Id                *string         `protobuf:"bytes,2,opt,name=id" json:"id,omitempty"`
 	AccountId         *string         `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"` // subiz only
 	Fullname          *string         `protobuf:"bytes,4,opt,name=fullname" json:"fullname,omitempty"`
-	Email             *string         `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"` // reflect from agent profile
-	Phone             *string         `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"` // reflect form agent profile
-	IsOwner           *bool           `protobuf:"varint,10,opt,name=is_owner,json=isOwner" json:"is_owner,omitempty"`
+	Email             *string         `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`                        // reflect from agent profile
+	Phone             *string         `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"`                        // reflect form agent profile
+	IsOwner           *bool           `protobuf:"varint,10,opt,name=is_owner,json=isOwner" json:"is_owner,omitempty"`   // remove
 	JobTitle          *string         `protobuf:"bytes,11,opt,name=job_title,json=jobTitle" json:"job_title,omitempty"` // deprecated
 	Gender            *string         `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`
 	AvatarUrl         *string         `protobuf:"bytes,13,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
@@ -516,7 +516,7 @@ type Agent struct {
 	Account           *Account        `protobuf:"bytes,28,opt,name=account" json:"account,omitempty"`
 	Type              *string         `protobuf:"bytes,33,opt,name=type" json:"type,omitempty"`                                      // bot or agent (default is agent)
 	ClientId          *string         `protobuf:"bytes,34,opt,name=client_id,json=clientId" json:"client_id,omitempty"`              // ID of bot
-	IsSupervisor      *bool           `protobuf:"varint,35,opt,name=is_supervisor,json=isSupervisor" json:"is_supervisor,omitempty"` // auto add live:read conversation:read user:read order:read ticket:read
+	IsSupervisor      *bool           `protobuf:"varint,35,opt,name=is_supervisor,json=isSupervisor" json:"is_supervisor,omitempty"` // remove auto add live:read conversation:read user:read order:read ticket:read
 	LastSeen          *Presence       `protobuf:"bytes,38,opt,name=last_seen,json=lastSeen" json:"last_seen,omitempty"`
 	DashboardSetting  *DashboardAgent `protobuf:"bytes,40,opt,name=dashboard_setting,json=dashboardSetting" json:"dashboard_setting,omitempty"`
 	Scopes            []string        `protobuf:"bytes,41,rep,name=scopes" json:"scopes,omitempty"` // supervisor

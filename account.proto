@@ -56,7 +56,7 @@ message Agent {
 	optional string fullname = 4;
 	optional string email = 5; // reflect from agent profile
 	optional string phone = 8; // reflect form agent profile
-	optional bool is_owner = 10;
+	optional bool is_owner = 10; // remove
 	optional string job_title = 11; // deprecated
 
 	enum Gender {
@@ -90,7 +90,7 @@ message Agent {
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
 
-	optional bool is_supervisor = 35; // auto add live:read conversation:read user:read order:read ticket:read
+	optional bool is_supervisor = 35; // remove auto add live:read conversation:read user:read order:read ticket:read
 
 	optional Presence last_seen = 38;
 
