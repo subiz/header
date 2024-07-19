@@ -8022,19 +8022,33 @@ message ResetPasswordEmail {
 	string agent_name = 8;
 }
 
+message OTPEmail {
+	common.Context ctx = 1;
+	string from = 2;
+	string to = 3;
+	// ExpiredIn is a RFC3339 time string indicates when token will be expired
+	int64 expired_in = 4;
+	string otp = 5;
+	string account_id = 6;
+	string agent_id = 7;
+	string agent_name = 8;
+}
+
 message InviteEmail {
 	common.Context ctx = 1;
 	string to = 2;
 	string account_id = 3;
 	string sender_id = 4;
 	int64 expired_in = 5;
-	string token = 6;
+	string token = 6; // deprecated
 
 	string fullname = 9;
 	string sender_name = 10;
 	string account_name = 11;
 	string account_logo_url = 12;
 	string from = 14;
+
+	string link = 15; // new
 }
 
 message AgentProfile {
@@ -8068,4 +8082,23 @@ message AgentJoinRequest {
 }
 
 message AgentInvitation {
+}
+
+message InvitationLinkData {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string account_name = 3;
+	File account_logo = 4;
+	int64 expired_at = 5;
+	int64 created = 7;
+	repeated string scopes = 8;
+}
+
+message JoinAccountRequest {
+	common.Context ctx = 1;
+	string link = 4;
+	string email = 5;
+	string fullname = 6;
+	string password = 7;
+	string phone = 8;
 }

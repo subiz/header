@@ -84,20 +84,16 @@ service RefererMgr {
 }
 
 service AccountMgr {
-	// agent profile
-	/*
-	rpc RegisterAgentProfile(header.AgentProfile) returns (header.Response);
+	rpc GenerateInviteLink(header.Id) returns (header.Id);
+	rpc CheckInviteLink(header.Id) returns (header.InvitationLinkData); // -> account id
+	rpc JoinAccount(header.JoinAccountRequest) returns (header.Response);
+	rpc RequestOTP(header.Id) returns (header.Empty);
+	rpc LoginUsingOTP(header.Id) returns (header.Response);
+	rpc CheckEmailUsed(header.Id) returns (header.Response);
 	rpc UpdateAgentProfile(header.AgentProfile) returns (header.Response);
 	rpc GetAgentProfile(Id) returns (header.Response);
-	rpc ListAgentProfileAccounts(Id) returns (header.Response); //
+	rpc ListAgentProfileAccounts(Id) returns (header.Response);
 	rpc Login(Id) returns (LoginSession);
-
-	rpc CreateInvitationCode(Id) returns (Id);
-	rpc GetInvitationCode(Id) returns (Id);
-	rpc ApproveJoinRequest(Id) returns ();
-	rpc RejectJoinRequest(Id) returns ();
-	rpc ListJoinRequests(Id) retruns (header.Response);
-	*/
 
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
