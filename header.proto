@@ -7269,6 +7269,7 @@ message ConvoReportRequest {
 	account.Account account = 8;
 	string anchor = 9;
 	int32 limit = 10;
+	bool is_include_count_before = 11;
 }
 
 message ConvoReportResponse {
