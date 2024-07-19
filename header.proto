@@ -8091,6 +8091,8 @@ message InvitationLink {
 	int64 expired_at = 5;
 	int64 created = 7;
 	repeated string scopes = 8;
+	string for_email = 9;
+	string code = 10;
 }
 
 message JoinAccountRequest {
@@ -8100,4 +8102,7 @@ message JoinAccountRequest {
 	string fullname = 6;
 	string password = 7;
 	string phone = 8;
+	string lang = 9;
+	string timezone = 10;
+	string referrer_by = 11;
 }

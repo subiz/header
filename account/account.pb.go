@@ -507,7 +507,7 @@ type Agent struct {
 	AvatarUrl_128     *string         `protobuf:"bytes,18,opt,name=avatar_url_128,json=avatarUrl128" json:"avatar_url_128,omitempty"`
 	Lang              *string         `protobuf:"bytes,14,opt,name=lang" json:"lang,omitempty"`
 	Timezone          *string         `protobuf:"bytes,16,opt,name=timezone" json:"timezone,omitempty"`
-	EncryptedPassword *string         `protobuf:"bytes,17,opt,name=encrypted_password,json=encryptedPassword" json:"encrypted_password,omitempty"`
+	EncryptedPassword *string         `protobuf:"bytes,17,opt,name=encrypted_password,json=encryptedPassword" json:"encrypted_password,omitempty"` // removing
 	Joined            *int64          `protobuf:"varint,20,opt,name=joined" json:"joined,omitempty"`
 	InvitedBy         *string         `protobuf:"bytes,21,opt,name=invited_by,json=invitedBy" json:"invited_by,omitempty"`
 	State             *string         `protobuf:"bytes,22,opt,name=state" json:"state,omitempty"`

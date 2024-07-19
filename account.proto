@@ -70,7 +70,7 @@ message Agent {
 
 	optional string lang = 14;
 	optional string timezone = 16;
-	optional string encrypted_password = 17;
+	optional string encrypted_password = 17; // removing
 	optional int64 joined = 20;
 	optional string invited_by = 21;
 
