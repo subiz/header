@@ -6971,6 +6971,7 @@ message Response {
 	repeated Rule ticket_rules = 135;
 
 	AgentProfile agent_profile = 136;
+	LoginSession login_session = 137;
 }
 
 message ZaloCallConsent {

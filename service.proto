@@ -95,7 +95,7 @@ service AccountMgr {
 	rpc UpdateAgentProfile(header.AgentProfile) returns (header.Response);
 	rpc GetAgentProfile(Id) returns (header.Response);
 	rpc ListAgentProfileAccounts(Id) returns (header.Response);
-	rpc Login(LoginRequest) returns (LoginSession);
+	rpc Login(LoginRequest) returns (header.Response);
 
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
