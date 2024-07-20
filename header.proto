@@ -7640,6 +7640,7 @@ message SLAViolation {
 	int64 required_sec = 8;
 	int64 actual_sec = 9;
 	int64 actual_at = 10;
+	Ticket ticket = 11; //just for report
 }
 
 message TicketHistoryEntry {
