@@ -1352,7 +1352,6 @@ message CallInfo {
 message Rating {
 	common.Context ctx = 1;
 	string account_id = 2;
-    string id = 3;
 
 	string target_conversation_id = 5;
 	string target_message_id = 6;
@@ -7606,7 +7605,7 @@ message Ticket {
 
 	int64 user_first_response_at = 98;
 	int64 user_last_response_at = 99;
-	map<string,ConversationMember> memberM = 100; //just for compacted ticket
+	//map<string,ConversationMember> memberM = 100; //just for compacted ticket
 	string peoredic_update_enable = 101; // on/off
 	string every_response_enable = 102; // on/off
 	repeated ReceiptMember read_receipts = 104;
