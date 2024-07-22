@@ -1355,6 +1355,7 @@ message Rating {
 
 	string target_conversation_id = 5;
 	string target_message_id = 6;
+	string target_issuer_id = 7;
 
 	int64 rated = 35; // rated time ms
 	int32 rating = 36; // 1-poor 2 3-average 4 5-great
