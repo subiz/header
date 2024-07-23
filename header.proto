@@ -1141,6 +1141,7 @@ message ConversationMember {
 	bool off_notification = 28;
 
 	int64 hidden = 29; // ms
+	int64 last_mentioned = 30; // ms
 
 	string invite_reason = 34;
 	int64 total_messages = 35;
