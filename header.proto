@@ -6974,6 +6974,8 @@ message Response {
 
 	AgentProfile agent_profile = 136;
 	LoginSession login_session = 137;
+	PromotionCode promotion_code = 138;
+	repeated PromotionCode promotion_codes = 139;
 }
 
 message ZaloCallConsent {
@@ -8108,4 +8110,37 @@ message JoinAccountRequest {
 	string lang = 9;
 	string timezone = 10;
 	string referrer_by = 11;
+}
+
+message PromotionCode {
+	common.Context ctx = 1;
+	string account_id = 2; // for account only
+	string agent_id = 3; // for agent only
+
+	string program = 4; // for grouping
+	string name = 5;
+	string code = 6;
+	string description = 7;
+
+	int64 percent_fpv = 10;
+	int64 amount_fpv = 11;
+	string price_type = 12; // amount, percent
+
+	string created_by = 13;
+	int64 created = 14;
+	int64 updated = 15;
+	string updated_by = 16;
+	string status = 17; // publish draft, used
+
+	int64 min_price_fpv = 20;
+	int64 max_price_fpv = 21;
+	int64 valid_from = 22; // ms
+	int64 expired_at = 23; // ms
+
+	int64 quatity = 24;
+	int64 num_used = 25;
+  repeated string account_ids = 26; // only for these account
+	int64 max_usages_per_account = 27;
+
+	int64 min_total_invoice_fpv = 28; // invoice.total
 }

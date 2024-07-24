@@ -188,6 +188,15 @@ service AccountMgr {
 	rpc UnlockLogin(header.Id) returns (header.Id);
 
 	rpc ListBills(header.Id) returns (payment.Bills);
+
+	// promotion code
+	rpc ListPromotionCodes(header.Id) returns (header.Response);
+	rpc UpdatePromotionCode(header.PromotionCode) returns (header.Response);
+	rpc CreatePromotionCode(header.PromotionCode) returns (header.Response);
+	rpc CheckPromotionCode(header.Id) returns (header.Response);
+	rpc SubizListPromotionCodes(header.Id) returns (header.Response);
+	rpc ListPromotionCodeUsages(header.Id) returns (header.Response);
+	// rpc ReportPromotionCodeUsage(header.Id)
 }
 
 // user services
