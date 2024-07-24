@@ -8115,10 +8115,10 @@ message JoinAccountRequest {
 
 message PromotionCode {
 	common.Context ctx = 1;
-	string account_id = 2; // for account only
+	// string account_id = 2; // for account only
 	string agent_id = 3; // for agent only
 
-	string program = 4; // for grouping
+	string parent_code = 4; // for grouping
 	string name = 5;
 	string code = 6;
 	string description = 7;
@@ -8126,6 +8126,7 @@ message PromotionCode {
 	int64 percent_fpv = 10;
 	int64 amount_fpv = 11;
 	string price_type = 12; // amount, percent
+	int64 max_amount_fpv = 18;
 
 	string created_by = 13;
 	int64 created = 14;
@@ -8142,6 +8143,14 @@ message PromotionCode {
 	int64 num_used = 25;
   repeated string account_ids = 26; // only for these account
 	int64 limit_usages_per_account = 27; // 0 = 1
+
+	// statistic
+	int64 total_price_used_fpv = 30;
+	int64 total_code_used = 31;
+	int64 d30_code_used = 32;
+	int64 d30_price_used_fpv = 33;
+	repeated int64 d30_code_useds = 34;
+	int64 last_used = 35;
 }
 
 message PromotionCheckResult {

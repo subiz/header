@@ -196,7 +196,6 @@ service AccountMgr {
 	rpc CheckPromotionCode(payment.Invoice) returns (header.Response);
 	rpc SubizListPromotionCodes(header.Id) returns (header.Response);
 	rpc ListPromotionCodeUsages(header.Id) returns (header.Response); // invoices in this year // filter by program
-	// rpc ReportPromotionProgram(header.Id) returns (header.Response); // invoice in this year invoices , total money saved
 }
 
 // user services
