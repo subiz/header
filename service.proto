@@ -84,7 +84,7 @@ service RefererMgr {
 }
 
 service AccountMgr {
-	rpc InviteEmails(header.Id) returns (header.Empty);
+	rpc InviteEmails(header.InviteRequest) returns (header.Empty);
 	rpc GetInviteLink(header.Id) returns (header.Id);
 	rpc RegenerateInviteLink(header.Id) returns (header.Id);
 	rpc CheckInviteLink(header.Id) returns (header.InvitationLink);
@@ -197,7 +197,7 @@ service AccountMgr {
 	rpc GetPromotionCode(header.Id) returns (header.Response);
 	rpc SubizListPromotionCodes(header.Id) returns (header.Response);
 	rpc ListReferrerPromotionCodes(header.Id) returns (header.Response);
-	rpc ListPromotionCodeUsages(header.Id) returns (header.Response); // invoices in this year // filter by program
+	rpc ListPromotionCodeUsages(header.Id) returns (header.PromotionCodeUsage); // invoices in this year // filter by program
 }
 
 // user services
@@ -385,6 +385,8 @@ service ConversationMgr {
 	// sync, called from fabikon
 	rpc SaveMessage(header.Event) returns (header.Event);
 	rpc ApplyMessage(header.Event) returns (header.Event);
+
+	rpc CountAgentUnreadMessages(header.Id) returns (header.Response);
 }
 
 service TicketMgr {
