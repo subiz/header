@@ -8151,6 +8151,10 @@ message PromotionCode {
 	int64 d30_price_used_fpv = 33;
 	repeated int64 d30_code_useds = 34;
 	int64 last_used = 35;
+
+	string referrer_agent_id = 36;
+	bool is_recurring = 37;
+	// string type = 37; // recurring, referrer
 }
 
 message PromotionCheckResult {

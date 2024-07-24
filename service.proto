@@ -194,7 +194,9 @@ service AccountMgr {
 	rpc UpdatePromotionCode(header.PromotionCode) returns (header.Response);
 	rpc CreatePromotionCode(header.PromotionCode) returns (header.Response);
 	rpc CheckPromotionCode(payment.Invoice) returns (header.Response);
+	rpc GetPromotionCode(header.Id) returns (header.Response);
 	rpc SubizListPromotionCodes(header.Id) returns (header.Response);
+	rpc ListReferrerPromotionCodes(header.Id) returns (header.Response);
 	rpc ListPromotionCodeUsages(header.Id) returns (header.Response); // invoices in this year // filter by program
 }
 
