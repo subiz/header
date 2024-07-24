@@ -193,10 +193,10 @@ service AccountMgr {
 	rpc ListPromotionCodes(header.Id) returns (header.Response);
 	rpc UpdatePromotionCode(header.PromotionCode) returns (header.Response);
 	rpc CreatePromotionCode(header.PromotionCode) returns (header.Response);
-	rpc CheckPromotionCode(header.Id) returns (header.Response);
+	rpc CheckPromotionCode(payment.Invoice) returns (header.Response);
 	rpc SubizListPromotionCodes(header.Id) returns (header.Response);
-	rpc ListPromotionCodeUsages(header.Id) returns (header.Response);
-	// rpc ReportPromotionCodeUsage(header.Id)
+	rpc ListPromotionCodeUsages(header.Id) returns (header.Response); // invoices in this year // filter by program
+	// rpc ReportPromotionProgram(header.Id) returns (header.Response); // invoice in this year invoices , total money saved
 }
 
 // user services

@@ -6976,6 +6976,7 @@ message Response {
 	LoginSession login_session = 137;
 	PromotionCode promotion_code = 138;
 	repeated PromotionCode promotion_codes = 139;
+	PromotionCheckResult promotion_check_result = 140;
 }
 
 message ZaloCallConsent {
@@ -8132,15 +8133,18 @@ message PromotionCode {
 	string updated_by = 16;
 	string status = 17; // publish draft, used
 
-	int64 min_price_fpv = 20;
-	int64 max_price_fpv = 21;
+	int64 min_price_fpv = 20; // invoice.total
+	int64 max_price_fpv = 21; // invoice.total
 	int64 valid_from = 22; // ms
 	int64 expired_at = 23; // ms
 
 	int64 quatity = 24;
 	int64 num_used = 25;
   repeated string account_ids = 26; // only for these account
-	int64 max_usages_per_account = 27;
+	int64 limit_usages_per_account = 27; // 0 = 1
+}
 
-	int64 min_total_invoice_fpv = 28; // invoice.total
+message PromotionCheckResult {
+	bool valid = 5;
+	repeated string failed_reasons = 6; // expired.234234
 }
