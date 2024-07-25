@@ -7613,6 +7613,11 @@ message Ticket {
 	string peoredic_update_enable = 101; // on/off
 	string every_response_enable = 102; // on/off
 	repeated ReceiptMember read_receipts = 104;
+
+	int64 last_high_risk_first_response_due = 105; 
+	int64 last_high_risk_every_response_due = 106; 
+	int64 last_high_risk_resolution_due = 107; 
+	int64 last_high_risk_peoredic_update_due = 108;
 }
 
 message ReceiptMember{
