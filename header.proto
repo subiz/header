@@ -6977,6 +6977,8 @@ message Response {
 	PromotionCode promotion_code = 138;
 	repeated PromotionCode promotion_codes = 139;
 	PromotionCheckResult promotion_check_result = 140;
+
+	repeated Rating ratings = 141;
 }
 
 message ZaloCallConsent {
