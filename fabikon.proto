@@ -42,17 +42,17 @@ message FacebookPage {
 	optional string integration_link_status = 23; // active, failed
 
 	optional int64 last_conversion_synced = 24;
-	// optional int64 sync_conversion_disabled = 25;
+	optional int64 sync_conversion_disabled = 25;
 
-	optional string instagram_business_access_token = 26;
-	optional string facebook_business_access_token = 27;
+	optional string business_access_token = 26;
+	optional string business_access_token_status = 27;
+	optional int64 business_access_token_status_updated = 33;
 
-	optional string meta_business_ads_access_token = 29;
-	optional string meta_business_ads_access_token_status = 30;
-	optional int64 mte_business_ads_access_token_status_updated = 31;
+	optional string ads_access_token = 29;
+	optional string ads_access_token_status = 30;
+	optional int64 ads_access_token_status_updated = 31;
 
 	optional string dataset_id = 28;
-
 	optional bool is_business = 32;
 }
 

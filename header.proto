@@ -1870,7 +1870,6 @@ message Integration {
 
 	repeated ResourceGroupMember permissions = 100;
 
-	bool sync_conversion_disabled = 102; // meta
 
 	string lead_agent_group = 103;
 
@@ -1883,6 +1882,9 @@ message Integration {
 	string woocommerce_customer = 110; // fetch, none
 
 	bool meta_is_business = 120; // meta, sync from facebook
+	bool meta_dataset_id = 121;
+	int64 sync_conversion_disabled = 122; // meta
+
 }
 
 message TagRequest {
