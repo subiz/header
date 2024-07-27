@@ -154,6 +154,7 @@ message Account {
 
 	optional string plan = 49; // readonly
 	optional int64 num_unreads = 50;
+	optional string agent_state = 51;
 }
 
 message InvoiceInfo {
