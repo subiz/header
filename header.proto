@@ -1882,6 +1882,7 @@ message Integration {
 	bool meta_is_business = 120; // meta, sync from facebook
 	bool meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
+	string meta_scope = 123;
 }
 
 message TagRequest {
