@@ -36,6 +36,8 @@ message FacebookPage {
 
 	optional string token_status = 19; // '' || failed
 	optional int64 token_status_updated = 20;
+	optional string token_scope = 29; // empty=page, business, ads
+	optional int64 token_updated = 30;
 
 	optional string last_failed_url = 21;
 	optional string last_failed_body = 22;
@@ -43,14 +45,6 @@ message FacebookPage {
 
 	optional int64 last_conversion_synced = 24;
 	optional int64 sync_conversion_disabled = 25;
-
-	optional string business_access_token = 26;
-	optional string business_access_token_status = 27;
-	optional int64 business_access_token_status_updated = 33;
-
-	optional string ads_access_token = 29;
-	optional string ads_access_token_status = 30;
-	optional int64 ads_access_token_status_updated = 31;
 
 	optional string dataset_id = 28;
 	optional bool is_business = 32;

@@ -1869,8 +1869,6 @@ message Integration {
 	bool call_rtp_symmetrics = 99; // false
 
 	repeated ResourceGroupMember permissions = 100;
-
-
 	string lead_agent_group = 103;
 
 	string woocommerce_base_url = 104; // https://demo.subiz.net/wp-json/wc/v3
@@ -1884,7 +1882,6 @@ message Integration {
 	bool meta_is_business = 120; // meta, sync from facebook
 	bool meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
-
 }
 
 message TagRequest {
