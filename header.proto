@@ -7613,7 +7613,7 @@ message Ticket {
 
 	int64 user_first_response_at = 98;
 	int64 user_last_response_at = 99;
-	//map<string,ConversationMember> memberM = 100; //just for compacted ticket
+	map<string,ConversationMember> memberM = 100; //just for compacted ticket
 	string peoredic_update_enable = 101; // on/off
 	string every_response_enable = 102; // on/off
 	repeated ReceiptMember read_receipts = 104;
