@@ -199,8 +199,6 @@ type Context struct {
 
 	Credential *Credential `protobuf:"bytes,6,opt,name=credential,proto3" json:"credential,omitempty"`
 	ByDevice   *Device     `protobuf:"bytes,10,opt,name=by_device,json=byDevice,proto3" json:"by_device,omitempty"`
-	// for kafka
-	// string sub_topic = 11;
 	// list of used fields in the object
 	Fields        []string `protobuf:"bytes,21,rep,name=fields,proto3" json:"fields,omitempty"`
 	FromService   string   `protobuf:"bytes,22,opt,name=from_service,json=fromService,proto3" json:"from_service,omitempty"`         // campaign, bot

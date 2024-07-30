@@ -21,7 +21,8 @@ message DashboardAgent {
 	repeated string user_info_fields = 23;
 
 	optional string last_call_device = 25;
-	optional string last_call_number = 26;
+	optional string last_call_number = 26; // main number
+	optional string outbound_numbers_picker = 46; // ''=last samenet random
 
 	optional int64 mute_call_until = 27; // ms
 	optional int64 webphone_disabled = 28;
