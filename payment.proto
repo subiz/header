@@ -6,12 +6,6 @@ option go_package = "github.com/subiz/header/payment";
 
 import "common.proto";
 
-message ListCommentsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional string topic_id = 3;
-}
-
 message Comments {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
@@ -76,9 +70,9 @@ message PurchaseRequest {
 
 	optional float credit = 27;
 	// repeated Note notes = 28;
-	optional string referral_by = 29; // account_id
-	optional Customer customer = 31;
-	optional string primary_payment_method = 32;
+	// optional string referral_by = 29; // account_id
+	// optional Customer customer = 31;
+	// optional string primary_payment_method = 32;
 	optional common.Limit limit = 42;
 	optional bool auto_charge = 44;
 	optional int64 ended = 45;
@@ -107,10 +101,10 @@ message Subscription {
 	optional string plan = 17;
 
 	optional float credit = 27;
-	repeated Note notes = 28;
-	optional string referral_by = 29; // account_id
-	optional Customer customer = 31;
-	optional string primary_payment_method = 32;
+	// repeated Note notes = 28;
+	// optional string referral_by = 29; // account_id
+	// optional Customer customer = 31;
+	// optional string primary_payment_method = 32;
 	optional common.Limit limit = 42;
 	optional bool auto_charge = 44;
 	optional int64 ended = 45;
@@ -130,7 +124,7 @@ message Bill {
 	optional float amount = 5;
 	repeated string invoice_ids = 6;
 	optional int64 created = 7;
-	optional Contact customer_info = 8;
+	// optional Contact customer_info = 8;
 	optional string payment_method = 10; // auto
 	optional int32 year = 11;
 	optional string description = 12;
@@ -269,32 +263,6 @@ message BillingInfo {
 	optional string country_code = 5;
 }
 
-message Contact {
-	optional common.Context ctx = 1;
-	optional string name = 2;
-	optional string email = 3;
-	optional string phone = 4;
-	optional string job_title = 5;
-
-	enum Title {
-		mr = 0;
-		ms = 1;
-		mrs = 2;
-		dr = 3;
-	}
-	optional string title = 6;
-	optional bool primary = 7;
-}
-
-message Customer {
-	optional string id = 2;
-	optional string account_id = 3;
-
-	repeated Contact contacts = 4;
-	optional int64 created = 5;
-	optional BillingInfo billing_info = 6;
-}
-
 message CreditCode {
 	optional float credit = 2;
 }
@@ -370,7 +338,7 @@ message PayRequest {
 	optional string account_id = 8;
 	repeated string invoice_ids = 6;
 	optional string description = 7;
-	optional Contact CustomerInfo = 9;
+	// optional Contact CustomerInfo = 9;
 	optional float amount = 10;
 	optional int64 fpv_amount = 11;
 	optional string request_id = 12;

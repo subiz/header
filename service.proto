@@ -513,7 +513,7 @@ service PaymentMgr {
 	rpc FilterInvoices(payment.ListInvoiceRequest) returns (payment.Invoices);
 	rpc DraftInvoice(payment.Subscription) returns (payment.Invoice);
 
-	rpc ListComments(payment.ListCommentsRequest) returns (payment.Comments);
+	rpc ListComments(Id) returns (payment.Comments);
 	rpc AddComment(payment.Comment) returns (payment.Comment);
 	rpc ExportInvoice(Id) returns (payment.String);
 	rpc ConvertInvoiceToHtml(payment.Invoice) returns (payment.String);

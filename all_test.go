@@ -16,6 +16,13 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+func TestToGrpcCtx(t *testing.T) {
+	ctx := FromGrpcCtx(ToGrpcCtx(&cpb.Context{Credential: &cpb.Credential{Issuer: "thanh"}}))
+	if ctx.GetCredential().GetIssuer() != "thanh" {
+		t.Errorf("should eq")
+	}
+}
+
 func TestObjectPath(t *testing.T) {
 	testcases := []struct {
 		in   any
