@@ -1,5 +1,5 @@
 var lo = require("lodash");
-var langmap = require("langmap");
+var langmap = require("@subiz/langmap");
 const fs = require("fs");
 
 // 2021 Nov 2 from https://www.six-group.com/en/products-services/financial-information/data-standards.html

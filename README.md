@@ -3,7 +3,7 @@
 
 ## Build docker image subiz/protobuild
 ```sh
-docker build  -t live360vn/protobuild:2.6 .
+docker build --progress=plain -t live360vn/protobuild:2.8 . && ./build.sh
 ```
 
 ### Merge

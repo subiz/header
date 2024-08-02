@@ -53,13 +53,13 @@ message I18nString {
 	string fa_IR = 55; // Persian
 	string fb_LT = 56; // Leet
 	string fi_FI = 57; // Finnish
-	string fo_FO = 58; // Faroese
+	string fo_FO = 58; // Faroese (Faroe Islands)
 	string fr_CA = 59; // French (Canada)
 	string fr_FR = 60; // French (France)
 	string fr_BE = 61; // French (Belgium)
 	string fr_CH = 62; // French (Switzerland)
 	string fy_NL = 63; // Frisian (West)
-	string ga_IE = 64; // Irish (Gaelic)
+	string ga_IE = 64; // Irish
 	string gl_ES = 65; // Galician
 	string gn_PY = 66; // Guarani
 	string gu_IN = 67; // Gujarati
@@ -68,11 +68,11 @@ message I18nString {
 	string hi_IN = 70; // Hindi
 	string hr_HR = 71; // Croatian
 	string hu_HU = 72; // Hungarian
-	string hy_AM = 73; // Armenian
+	string hy_AM = 73; // Armenian (Armenia)
 	string id_ID = 74; // Indonesian
 	string is_IS = 75; // Icelandic (Iceland)
 	string it_IT = 76; // Italian
-	string ja_JP = 77; // Japanese
+	string ja_JP = 77; // Japanese (Japan)
 	string jv_ID = 78; // Javanese
 	string ka_GE = 79; // Georgian
 	string kk_KZ = 80; // Kazakh
@@ -136,6 +136,9 @@ message I18nString {
 	string zh_SG = 138; // Chinese Simplified (Singapore)
 	string zh_TW = 139; // Chinese Traditional (Taiwan)
 	string zu_ZA = 140; // Zulu
+	string lo_LA = 141; // Lao
+	string aa_ER = 142; // Afar
+	string en_SG = 143; // English (Singapore)
 	string custom = 250;
   string key = 251;
 }

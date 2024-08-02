@@ -213,7 +213,7 @@ message Invoice {
 
 	optional int64 fpv_discount_vnd = 34; // read only
 	optional int64 fpv_subtotal_vnd = 35; // read only
-	optional int64 fpv_promotion_vnd = 36; // read only
+	// optional int64 fpv_promotion_vnd = 36; // read only
 }
 
 message AgentInvoiceItem {

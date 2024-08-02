@@ -918,6 +918,27 @@ func GetI18n(str *I18NString, locale, fallback string) string {
 		return str.Zu_ZA
 	}
 
+	if locale == "lo-LA" {
+		if str.Lo_LA == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
+		}
+		return str.Lo_LA
+	}
+
+	if locale == "aa-ER" {
+		if str.Aa_ER == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
+		}
+		return str.Aa_ER
+	}
+
+	if locale == "en-SG" {
+		if str.En_SG == "" && fallback != locale && fallback != "" {
+			return GetI18n(str, fallback, fallback)
+		}
+		return str.En_SG
+	}
+
 	return fallback
 }
 var LocaleM = map[string]bool{
@@ -1051,6 +1072,9 @@ var LocaleM = map[string]bool{
 	"zh-SG": true,
 	"zh-TW": true,
 	"zu-ZA": true,
+	"lo-LA": true,
+	"aa-ER": true,
+	"en-SG": true,
 }
 
 var AllCurrency = map[string]bool{
@@ -1757,6 +1781,18 @@ func GetAllI18ns(str *I18NString) []string {
 
 	if strings.TrimSpace(str.Zu_ZA) != "" {
 		out = append(out, str.Zu_ZA)
+	}
+
+	if strings.TrimSpace(str.Lo_LA) != "" {
+		out = append(out, str.Lo_LA)
+	}
+
+	if strings.TrimSpace(str.Aa_ER) != "" {
+		out = append(out, str.Aa_ER)
+	}
+
+	if strings.TrimSpace(str.En_SG) != "" {
+		out = append(out, str.En_SG)
 	}
 
 	return out
