@@ -39,12 +39,12 @@ message Plan {
 	optional string name = 2;
 	optional common.Limit limit = 3;
 	optional float price = 4; // deprecated
-	optional int64 fpv_price = 8; // usd
+	optional int64 fpv_price = 8; // usd // permonth
 	optional bool is_unlimited_agent = 5;
 	optional bool renewable = 6;
 	optional int64 inactive_days_after_churned = 7;
-	optional bool long_cycle_incentives = 9;
-
+	optional bool long_billing_cycle_discount = 9;
+	optional int64 mininum_billing_cycle_month = 10;
 	// cho phep renew
 	enum Type {
 		trial = 0;
@@ -210,6 +210,10 @@ message Invoice {
 	optional bool is_gen_qr = 31; // not save in db
 	optional string created_by = 32; // system
 	optional int64 promotion_code_price_fpv = 33; // system
+
+	optional int64 fpv_discount_vnd = 34; // read only
+	optional int64 fpv_subtotal_vnd = 35; // read only
+	optional int64 fpv_promotion_vnd = 36; // read only
 }
 
 message AgentInvoiceItem {
@@ -246,6 +250,7 @@ message InvoiceItem {
 	optional string invoice_id = 6; // remove
 	optional int32 quantity = 7;
 	optional float price = 8; // per unit
+
 	message Data {
 		optional RenewInvoiceItem renew = 2;
 		optional AgentInvoiceItem agent = 3;
@@ -254,6 +259,10 @@ message InvoiceItem {
 	}
 	optional Data data = 9;
 	optional float total_price = 10;	// = (* quantity price)
+
+	optional int64 fpv_price_vnd = 11;
+	optional int64 fpv_total_price_vnd = 12;
+	optional int64 fpv_discount_vnd = 13;
 }
 
 message BillingInfo {
