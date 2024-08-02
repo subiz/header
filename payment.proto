@@ -210,6 +210,10 @@ message Invoice {
 	optional bool is_gen_qr = 31; // not save in db
 	optional string created_by = 32; // system
 	optional int64 promotion_code_price_fpv = 33; // system
+
+	optional int64 fpv_discount_vnd = 34; // read only
+	optional int64 fpv_subtotal_vnd = 35; // read only
+	optional int64 fpv_promotion_vnd = 36; // read only
 }
 
 message AgentInvoiceItem {
