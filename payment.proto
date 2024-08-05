@@ -115,6 +115,8 @@ message Subscription {
 
 	optional int64 num_agents = 50;
 	optional int64 use_ticket = 51;
+
+	optional string last_recurring_promotion_code = 52;
 }
 
 message Bill {
@@ -214,6 +216,9 @@ message Invoice {
 	optional int64 fpv_discount_vnd = 34; // read only
 	optional int64 fpv_subtotal_vnd = 35; // read only
 	// optional int64 fpv_promotion_vnd = 36; // read only
+	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
+	optional int64 fpv_referrer_commission_vnd = 36; // hidden
+	optional string referrer_agent_id = 37;
 }
 
 message AgentInvoiceItem {
