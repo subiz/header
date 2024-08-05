@@ -1275,6 +1275,7 @@ message Conversation {
 
 	repeated string associated_tickets = 76;
 	repeated string associated_conversations = 77;
+	Ticket ticket = 78; // main ticket, sync state and tag
 	Error error = 80;
 }
 

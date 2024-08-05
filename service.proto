@@ -387,6 +387,8 @@ service ConversationMgr {
 	rpc ApplyMessage(header.Event) returns (header.Event);
 
 	rpc CountAgentUnreadMessages(header.Id) returns (header.Response);
+	rpc AttachTicket(header.Conversation) returns (header.Response);
+	rpc DetachTicket(header.Conversation) returns (header.Response);
 }
 
 service TicketMgr {
