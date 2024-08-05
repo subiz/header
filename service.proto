@@ -190,14 +190,13 @@ service AccountMgr {
 	rpc ListBills(header.Id) returns (payment.Bills);
 
 	// promotion code
-	rpc ListPromotionCodes(header.Id) returns (header.Response);
-	rpc UpdatePromotionCode(header.PromotionCode) returns (header.Response);
-	rpc CreatePromotionCode(header.PromotionCode) returns (header.Response);
+	rpc ListPromotionPrograms(header.Id) returns (header.Response);
+	rpc ListPromotionCodesOfProgram(header.Id) returns (header.Response);
+	rpc ListPromotionCodesOfAgent(header.Id) returns (header.Response);
+	rpc UpsertPromotionCode(header.PromotionCode) returns (header.Response);
 	rpc CheckPromotionCode(payment.Invoice) returns (header.Response);
 	rpc GetPromotionCode(header.Id) returns (header.Response);
-	rpc SubizListPromotionCodes(header.Id) returns (header.Response);
-	rpc ListReferrerPromotionCodes(header.Id) returns (header.Response);
-	rpc ListPromotionCodeUsages(header.Id) returns (header.PromotionCodeUsage); // invoices in this year // filter by program
+	rpc ListPromotionProgramInvoices(header.Id) returns (header.PromotionCodeUsage); // invoices in this year // filter by program
 }
 
 // user services
