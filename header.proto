@@ -1243,7 +1243,6 @@ message Conversation {
 	int64 updated = 43;
 
 	Event matched_event = 45; // for search only
-
 	string locale = 46;
 	repeated string agent_sent_ids = 47;
 	int64 first_replied_duration = 48;

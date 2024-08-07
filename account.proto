@@ -1,4 +1,4 @@
-syntax = "proto2";
+ syntax = "proto2";
 
 package account;
 
@@ -304,14 +304,12 @@ message ReferrerPayoutBill {
 	optional string created_by_type = 10;
 	optional int64 created = 7;
 
-	optional float amount = 12;
+	// optional float amount = 12;
 	optional int64 fpv_amount = 13;
 
 	optional string description = 21;
-
 	optional string picture_url = 22;
 	optional string currency = 23;
-
 	optional string original_bank_transfer_note = 18;
 	optional string bank_transfer_note = 19;
 }
