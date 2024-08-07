@@ -68,7 +68,7 @@ message PurchaseRequest {
 	optional uint32 next_billing_cycle_month = 16;
 	optional string plan = 17;
 
-	optional float credit = 27;
+	// optional float credit = 27;
 	// repeated Note notes = 28;
 	// optional string referral_by = 29; // account_id
 	// optional Customer customer = 31;
@@ -141,6 +141,7 @@ message Bill {
 
 	optional string bank_account_id = 22;
 	optional string by_agent_id = 23;
+	optional int64 fpv_amount_usd = 24;
 }
 
 message Bills {
@@ -175,7 +176,7 @@ message Invoice {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
 	optional string id = 3;
-	optional float amount_due = 4;
+	// optional float amount_due = 4;
 	optional string promotion_code = 5;
 	optional string description = 6;
 	optional BillingInfo billing_info = 8;
@@ -217,6 +218,12 @@ message Invoice {
 	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
 	optional int64 fpv_referrer_commission_vnd = 36; // hidden
 	optional string referrer_agent_id = 37;
+
+	optional int64 fpv_subtotal_usd = 38;
+	optional int64 fpv_tax_percent = 39;
+	optional int64 fpv_tax_usd = 40;
+	optional int64 fpv_total_usd = 41;
+	optional int64 fpv_payment_made_usd = 42;
 }
 
 message AgentInvoiceItem {
@@ -242,6 +249,7 @@ message PlanInvoiceItem {
 	optional int32 day_left = 4;
 	optional uint32 old_agent_count = 10;
 	optional bool is_unlimited_agent = 11;
+	optional int64 fpv_save_percentage = 12;
 }
 
 message MarketingInvoiceItem {
@@ -266,6 +274,10 @@ message InvoiceItem {
 	optional int64 fpv_price_vnd = 11;
 	optional int64 fpv_total_price_vnd = 12;
 	optional int64 fpv_discount_vnd = 13;
+
+	optional int64 fpv_price_usd = 15;
+	optional int64 fpv_total_price_usd = 16;
+	optional int64 fpv_discount_usd = 17;
 }
 
 message BillingInfo {
@@ -273,10 +285,6 @@ message BillingInfo {
 	optional string address = 3;
 	optional string vat = 4;
 	optional string country_code = 5;
-}
-
-message CreditCode {
-	optional float credit = 2;
 }
 
 message LogPromotionCodeUsed {
@@ -351,7 +359,7 @@ message PayRequest {
 	repeated string invoice_ids = 6;
 	optional string description = 7;
 	// optional Contact CustomerInfo = 9;
-	optional float amount = 10;
+	optional float amount = 10; // deprecated
 	optional int64 fpv_amount = 11;
 	optional string request_id = 12;
 	optional int64 created = 13;
