@@ -359,6 +359,8 @@ message PayRequest {
 	optional string bank_account_id = 15;
 	optional string by_agent_id = 16;
 	optional string method = 17; // bank_transfer
+
+	optional string payment_method_id = 18;
 }
 
 message AutoPayRequest {

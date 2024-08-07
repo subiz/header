@@ -172,7 +172,7 @@ service AccountMgr {
 	rpc DeletePaymentMethod(Id) returns (Empty);
 	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
 
-	rpc ListSubizPaymentMethods(Id) returns (header.SubizPaymentMethod);
+	rpc ListSubizPaymentMethods(Id) returns (header.Response);
 	rpc CreateSubizPaymentMethod(header.SubizPaymentMethod) returns (header.Response);
 	rpc UpdateSubizPaymentMethod(header.SubizPaymentMethod) returns (header.Response);
 	rpc DeleteSubizPaymentMethod(Id) returns (Empty);

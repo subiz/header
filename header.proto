@@ -8252,7 +8252,12 @@ message SubizPaymentMethod {
 	int64 created = 8;
 	string created_by = 9;
 	int64 updated = 10;
-	string udpated_by = 11;
+	string updated_by = 11;
 	Stripe stripe = 12;
 	int64 auto_charged = 13;
+
+	string last_failed_message = 14;
+	int64 last_failed_charged = 15;
+	int64 last_success_charged = 16;
+	int64 last_charge_attempted = 17;
 }
