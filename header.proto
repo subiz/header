@@ -8236,6 +8236,7 @@ message Stripe {
 	string card_last4 = 2;
 	string customer_id = 3;
 	string token = 4; // REST only
+	string payment_method_id = 5;
 }
 
 message SubizPaymentMethod {
