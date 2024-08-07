@@ -156,6 +156,8 @@ message Account {
 	optional string plan = 49; // readonly
 	optional int64 num_unreads = 50;
 	optional string agent_state = 51;
+
+	optional string primary_payment_method = 52; // bank_transfer
 }
 
 message InvoiceInfo {
@@ -330,7 +332,7 @@ message ReferredCustomer {
 	optional int64 registered = 8;
 	optional string state = 9;
 	optional int64 last_invoice = 11;
-	optional int64 fpv_commission = 12;
+	// optional int64 fpv_commission = 12;
 	optional int64 fpv_total_earning = 14;
 }
 

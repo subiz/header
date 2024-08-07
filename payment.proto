@@ -90,7 +90,7 @@ message Subscription {
 	optional common.Context ctx = 1;
 	optional string account_id = 3;
 	optional int64 created = 11;
-	optional string promotion_code = 4;
+	optional string promotion_code = 4; // last recurring promotion code
 	// optional string name = 7;
 
 	optional int64 started = 5;
@@ -98,7 +98,7 @@ message Subscription {
 
 	optional uint32 billing_cycle_month = 15;
 	optional uint32 next_billing_cycle_month = 16;
-	optional string plan = 17;
+	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom
 
 	optional float credit = 27;
 	// repeated Note notes = 28;
@@ -106,17 +106,15 @@ message Subscription {
 	// optional Customer customer = 31;
 	// optional string primary_payment_method = 32;
 	optional common.Limit limit = 42;
-	optional bool auto_charge = 44;
+	// optional bool auto_charge = 44;
 	optional int64 ended = 45;
 	optional int64 churned = 47;
 
 	optional int64 fpv_credit_vnd = 48;
-	optional int64 fpv_unlimited_agent_price = 49; // usd
+	optional int64 fpv_unlimited_agent_price = 49; // usd, custom price
 
 	optional int64 num_agents = 50;
 	optional int64 use_ticket = 51;
-
-	optional string last_recurring_promotion_code = 52;
 }
 
 message Bill {

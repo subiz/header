@@ -6983,6 +6983,9 @@ message Response {
 
 	repeated Rating ratings = 141;
 	repeated PromotionProgram promotion_programs = 142;
+
+	SubizPaymentMethod subiz_payment_method = 143;
+	repeated SubizPaymentMethod subiz_payment_methods = 144;
 }
 
 message ZaloCallConsent {
@@ -8160,7 +8163,7 @@ message PromotionCode {
 	repeated string account_ids = 26; // only for these account
 	int64 limit_usages_per_account = 27; // 0 = 1
 
-	bool only_for_unreferred_account = 28;
+	// bool only_for_unreferred_account = 28;
 
 	// statistic
 	int64 total_price_used_fpv = 30;
@@ -8204,7 +8207,7 @@ message PromotionProgram {
 	repeated string account_ids = 26; // only for these account
 	int64 limit_usages_per_account = 27; // 0 = 1
 
-	bool only_for_unreferred_account = 28;
+	// bool only_for_unreferred_account = 28;
 	// statistic
 	int64 total_price_used_fpv = 30;
 	int64 total_code_used = 31;
@@ -8227,4 +8230,29 @@ message PromotionCheckResult {
 message PromotionCodeUsage {
 	common.Context ctx = 1;
 	repeated payment.Invoice invoices = 4;
+}
+
+message Stripe {
+	string card_last4 = 2;
+	string customer_id = 3;
+	string token = 4; // REST only
+}
+
+message SubizPaymentMethod {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	enum Type {
+		bank_transfer = 0;
+		credit_card = 1;
+	}
+	string type = 4;
+	string status = 5; // active, inactive
+	int64 created = 8;
+	string created_by = 9;
+	int64 updated = 10;
+	string udpated_by = 11;
+	Stripe stripe = 12;
+	int64 auto_charged = 13;
 }

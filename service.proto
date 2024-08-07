@@ -172,6 +172,12 @@ service AccountMgr {
 	rpc DeletePaymentMethod(Id) returns (Empty);
 	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
 
+	rpc ListSubizPaymentMethods(Id) returns (header.SubizPaymentMethod);
+	rpc CreateSubizPaymentMethod(header.SubizPaymentMethod) returns (header.Response);
+	rpc UpdateSubizPaymentMethod(header.SubizPaymentMethod) returns (header.Response);
+	rpc DeleteSubizPaymentMethod(Id) returns (Empty);
+	rpc MakeDefaultSubizPaymentMethod(Id) returns (Empty);
+
 	rpc ListIntegratedShippingProviders(Ids) returns (header.IntegratedShippings);
 	rpc DeintegrateShippingProvider(header.IntegratedShipping) returns (Empty);
 	rpc IntegrateShippingProvider(header.IntegratedShipping) returns (header.IntegratedShipping);
@@ -190,8 +196,8 @@ service AccountMgr {
 	rpc ListBills(header.Id) returns (payment.Bills);
 
 	// promotion code
-	rpc ListPromotionPrograms(header.Id) returns (header.Response);
-	rpc ListPromotionCodesOfProgram(header.Id) returns (header.Response);
+	rpc ListPromotionPrograms(header.Id) returns (header.Response); // allow search by code
+	rpc ListPromotionCodesOfProgram(header.Id) returns (header.Response); // allow search programid.keyword
 	rpc ListPromotionCodesOfAgent(header.Id) returns (header.Response);
 	rpc UpsertPromotionCode(header.PromotionCode) returns (header.Response);
 	rpc CheckPromotionCode(payment.Invoice) returns (header.Response);

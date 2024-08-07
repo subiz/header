@@ -48,6 +48,8 @@ message FacebookPage {
 
 	optional string dataset_id = 28;
 	optional bool is_business = 32;
+
+	optional string system_user_token = 33;
 }
 
 message FbWebhookEvent {
