@@ -8232,18 +8232,11 @@ message PromotionCodeUsage {
 	repeated payment.Invoice invoices = 4;
 }
 
-message Stripe {
-	string card_last4 = 2;
-	string customer_id = 3;
-	string token = 4; // REST only
-	string payment_method_id = 5;
-}
-
 message SubizPaymentMethod {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-
+	string name = 7;
 	enum Type {
 		bank_transfer = 0;
 		credit_card = 1;
@@ -8254,11 +8247,14 @@ message SubizPaymentMethod {
 	string created_by = 9;
 	int64 updated = 10;
 	string updated_by = 11;
-	Stripe stripe = 12;
 	int64 auto_charged = 13;
 
 	string last_failed_message = 14;
 	int64 last_failed_charged = 15;
 	int64 last_success_charged = 16;
 	int64 last_charge_attempted = 17;
+
+	string stripe_payment_method_id = 18;
+	string stripe_customer_id = 19;
+	string last4 = 20;
 }

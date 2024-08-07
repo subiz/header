@@ -517,6 +517,8 @@ service PaymentMgr {
 	rpc GetSubscription(Id) returns (payment.Subscription);
 	rpc Pay(payment.PayRequest) returns (payment.Bill);
 
+	rpc RequestCreditCardPay(payment.PayRequest) returns (payment.Bill); // by customer
+
 	rpc CreateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc UpdateInvoice(payment.Invoice) returns (payment.Invoice);
 	rpc FilterInvoices(payment.ListInvoiceRequest) returns (payment.Invoices);
