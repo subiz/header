@@ -206,6 +206,7 @@ service AccountMgr {
 
 	rpc CreateStripeCheckoutSession(header.Id) returns (header.Id);
 	rpc OnStripeEvent(header.StripeWebhookEvent) returns (header.Empty);
+	rpc LookupStripePaymentMethod(header.Id) returns (header.Response);
 }
 
 // user services
