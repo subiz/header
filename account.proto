@@ -296,16 +296,14 @@ message Presence {
 message ReferrerPayoutBill {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3;
-	// optional string for_account_id = 4;
-
 	optional string id = 5;
-
 	optional string created_by = 6;
 	optional string created_by_type = 10;
 	optional int64 created = 7;
 
-	// optional float amount = 12;
-	optional int64 fpv_amount = 13;
+	optional float amount = 12;
+	optional int64 fpv_amount_usd = 13;
+	optional int64 fpv_amount_vnd = 14;
 
 	optional string description = 21;
 	optional string picture_url = 22;
@@ -331,7 +329,8 @@ message ReferredCustomer {
 	optional string state = 9;
 	optional int64 last_bill = 11;
 	// optional int64 fpv_commission = 12;
-	optional int64 fpv_total_earning = 14;
+	optional int64 fpv_total_earning_vnd = 14;
+	optional int64 fpv_total_earning_usd = 15;
 }
 
 message ReferredCustomers {
@@ -349,13 +348,12 @@ message ReferredBill {
 	optional string account_logo = 7;
 	optional int64 registered = 8;
 	optional int64 fpv_commission = 12; // 100.000
-	optional string for_invoice_id = 13; // deprecated
+	optional string bill_id = 13;
 
-	optional int64 fpv_amount = 14;
+	optional int64 fpv_amount_vnd = 14;
+	optional int64 fpv_amount_usd = 16;
 	optional int64 created = 15;
-
-	optional string bill_id = 16;
-	optional int64 currency = 17; // USD, VND
+	optional string currency = 17; // USD, VND
 }
 
 message ReferredBills {
@@ -370,9 +368,11 @@ message ReferrerAgent {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3; // agid
 	optional Agent agent = 4; // read-only
-	optional int64 fpv_total_earning = 7; // read-only vnd
-	optional int64 fpv_earning_this_month = 8; // read-only vnd
-	optional int64 fpv_balance = 10; // read-only // vnd
+	optional int64 fpv_total_earning_vnd = 7; // read-only vnd
+	optional int64 fpv_earning_this_month_vnd = 8; // read-only vnd
+	optional int64 fpv_total_earning_usd = 20; // read-only vnd
+	optional int64 fpv_earning_this_month_usd = 21; // read-only vnd
+	optional int64 fpv_balance_vnd = 10; // read-only // vnd
 	optional int64 fpv_balance_usd = 12; // read-only // vnd
 	optional int64 modified = 25; // read-only
 	optional int64 last_payout = 11; // read-only
