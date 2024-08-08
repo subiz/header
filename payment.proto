@@ -211,7 +211,9 @@ message Invoice {
 	optional int64 promotion_code_price_fpv = 33; // system
 
 	optional int64 fpv_discount_vnd = 34; // read only
+
 	optional int64 fpv_subtotal_vnd = 35; // read only
+
 	// optional int64 fpv_promotion_vnd = 36; // read only
 	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
 	// optional int64 fpv_referrer_commission_vnd = 36; // hidden
@@ -222,6 +224,7 @@ message Invoice {
 	optional int64 fpv_tax_usd = 40;
 	optional int64 fpv_total_usd = 41;
 	optional int64 fpv_payment_made_usd = 42;
+	optional int64 fpv_discount_usd = 43; // read only
 }
 
 message AgentInvoiceItem {
@@ -235,6 +238,7 @@ message RenewInvoiceItem {
 	optional uint32 billing_cycle_month = 4;
 	optional uint32 agent_count = 5;
 	optional int64 from_time = 6;
+	optional int64 fpv_save_percentage = 7;
 }
 
 message PlanInvoiceItem {
@@ -242,7 +246,7 @@ message PlanInvoiceItem {
 	optional uint32 billing_cycle_month = 5;
 	optional string old_plan = 6;
 	optional string new_plan = 3;
-	optional float save_percentage = 9;
+	optional float save_percentage = 9; // remove
 	optional int64 started = 8;
 	optional int32 day_left = 4;
 	optional uint32 old_agent_count = 10;
