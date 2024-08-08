@@ -136,6 +136,10 @@ message Bill {
 	optional string bank_account_id = 22;
 	optional string by_agent_id = 23;
 	optional int64 fpv_amount_usd = 24;
+
+	optional int64 fpv_referrer_commission_vnd = 36; // hidden
+	optional string referrer_agent_id = 37;
+	optional int64 fpv_referrer_commission_usd = 38; // hidden
 }
 
 message Bills {
@@ -210,8 +214,8 @@ message Invoice {
 	optional int64 fpv_subtotal_vnd = 35; // read only
 	// optional int64 fpv_promotion_vnd = 36; // read only
 	// optional int64 fpv_promocode_commission_vnd = 36; // hidden
-	optional int64 fpv_referrer_commission_vnd = 36; // hidden
-	optional string referrer_agent_id = 37;
+	// optional int64 fpv_referrer_commission_vnd = 36; // hidden
+	// optional string referrer_agent_id = 37;
 
 	optional int64 fpv_subtotal_usd = 38;
 	optional int64 fpv_tax_percent = 39;
@@ -362,7 +366,7 @@ message PayRequest {
 	optional string by_agent_id = 16;
 	optional string method = 17; // bank_transfer
 
-	optional string payment_method_id = 18;
+	optional string payment_method = 18;
 }
 
 message AutoPayRequest {
