@@ -329,7 +329,7 @@ message ReferredCustomer {
 	optional string logo = 7;
 	optional int64 registered = 8;
 	optional string state = 9;
-	optional int64 last_invoice = 11;
+	optional int64 last_bill = 11;
 	// optional int64 fpv_commission = 12;
 	optional int64 fpv_total_earning = 14;
 }
@@ -340,7 +340,7 @@ message ReferredCustomers {
 	repeated ReferredCustomer referred_customers = 4;
 }
 
-message ReferredInvoice {
+message ReferredBill {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3;
 	optional string for_account_id = 4;
@@ -349,15 +349,19 @@ message ReferredInvoice {
 	optional string account_logo = 7;
 	optional int64 registered = 8;
 	optional int64 fpv_commission = 12; // 100.000
-	optional string for_invoice_id = 13;
+	optional string for_invoice_id = 13; // deprecated
+
 	optional int64 fpv_amount = 14;
 	optional int64 created = 15;
+
+	optional string bill_id = 16;
+	optional int64 currency = 17; // USD, VND
 }
 
-message ReferredInvoices {
+message ReferredBills {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3;
-	repeated ReferredInvoice invoices = 4;
+	repeated ReferredBill bills = 4;
 }
 
 // float(15.500) -> * 1000_000 -> float pointer value
@@ -366,9 +370,10 @@ message ReferrerAgent {
 	optional common.Context ctx = 1;
 	optional string ref_id = 3; // agid
 	optional Agent agent = 4; // read-only
-	optional int64 fpv_total_earning = 7; // read-only
-	optional int64 fpv_earning_this_month = 8; // read-only
-	optional int64 fpv_balance = 10; // read-only
+	optional int64 fpv_total_earning = 7; // read-only vnd
+	optional int64 fpv_earning_this_month = 8; // read-only vnd
+	optional int64 fpv_balance = 10; // read-only // vnd
+	optional int64 fpv_balance_usd = 12; // read-only // vnd
 	optional int64 modified = 25; // read-only
 	optional int64 last_payout = 11; // read-only
 
@@ -379,7 +384,7 @@ message ReferrerAgent {
 	optional string bank_account_name = 16;
 	optional string bank_account_number = 17;
 	optional int64 bank_info_modified_at = 18;
-	optional int64 fpv_commission = 19; // 10_000
+	optional int64 fpv_commission = 19; // 100_000
 }
 
 message ReferrerAgents {

@@ -76,7 +76,7 @@ service RefererMgr {
 	rpc ListReferrerPayouts(Id) returns (account.ReferrerPayoutBills);
 	rpc PayReferrer(account.ReferrerPayoutBill) returns (account.ReferrerPayoutBill);
 	rpc ListReferredCustomers(Id) returns (account.ReferredCustomers);
-	rpc ListReferredInvoices(Id) returns (account.ReferredInvoices);
+	rpc ListReferredInvoices(Id) returns (account.ReferredBills);
 	rpc GetReferrerAgent(Id) returns (account.ReferrerAgent);
 	rpc ListPayoutReferrerAgents(Id) returns (account.ReferrerAgents);
 	rpc RefererAccount(Id) returns (Empty);
@@ -113,7 +113,7 @@ service AccountMgr {
 	rpc InviteAgent(account.Agent) returns (account.Agent); // allow to call multiple time
 	rpc GetAgent(Id) returns (account.Agent);
 	rpc LookupAgentById(Id) returns (account.Agent);
-	rpc ConfirmAccount(account.Token) returns (account.Account);
+	// rpc ConfirmAccount(account.Token) returns (account.Account);
 	rpc GetAccount(Id) returns (account.Account);
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(CreateAccountRequest) returns (account.Account);
@@ -173,7 +173,6 @@ service AccountMgr {
 	rpc MakeDefaultPaymentMethod(Id) returns (Empty);
 
 	rpc ListSubizPaymentMethods(Id) returns (header.Response);
-	rpc CreateSubizPaymentMethod(header.SubizPaymentMethod) returns (header.Response);
 	rpc UpdateSubizPaymentMethod(header.SubizPaymentMethod) returns (header.Response);
 	rpc DeleteSubizPaymentMethod(Id) returns (Empty);
 	rpc MakeDefaultSubizPaymentMethod(Id) returns (Empty);
