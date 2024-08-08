@@ -305,7 +305,8 @@ message ReferrerPayoutBill {
 	optional int64 created = 7;
 
 	// optional float amount = 12;
-	optional int64 fpv_amount = 13;
+	optional int64 fpv_amount_usd = 13;
+	optional int64 fpv_amount_vnd = 14;
 
 	optional string description = 21;
 	optional string picture_url = 22;
