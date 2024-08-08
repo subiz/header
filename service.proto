@@ -76,7 +76,7 @@ service RefererMgr {
 	rpc ListReferrerPayouts(Id) returns (account.ReferrerPayoutBills);
 	rpc PayReferrer(account.ReferrerPayoutBill) returns (account.ReferrerPayoutBill);
 	rpc ListReferredCustomers(Id) returns (account.ReferredCustomers);
-	rpc ListReferredInvoices(Id) returns (account.ReferredBills);
+	rpc ListReferredBills(Id) returns (account.ReferredBills);
 	rpc GetReferrerAgent(Id) returns (account.ReferrerAgent);
 	rpc ListPayoutReferrerAgents(Id) returns (account.ReferrerAgents);
 	rpc RefererAccount(Id) returns (Empty);
@@ -525,7 +525,9 @@ service PaymentMgr {
 	rpc ExportInvoice(Id) returns (payment.String);
 	rpc ConvertInvoiceToHtml(payment.Invoice) returns (payment.String);
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
-	rpc TransferMoney(payment.PayRequest) returns (payment.Bill);
+	rpc TransferMoney(payment.PayRequest) returns (payment.Bill); // only subiz
+
+	rpc AddCredit(payment.PayRequest) returns (Empty);
 	rpc ListLogs(payment.ListLogsRequest) returns (payment.Logs);
 }
 
