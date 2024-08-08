@@ -205,6 +205,7 @@ service AccountMgr {
 	rpc ListPromotionProgramInvoices(header.Id) returns (header.PromotionCodeUsage); // invoices in this year // filter by program
 
 	rpc CreateStripeCheckoutSession(header.Id) returns (header.Id);
+	rpc OnStripeEvent(header.StripeWebhookEvent) returns (header.Empty);
 }
 
 // user services

@@ -8257,3 +8257,8 @@ message SubizPaymentMethod {
 	string stripe_customer_id = 19;
 	string last4 = 20;
 }
+
+message StripeWebhookEvent {
+	int64 created = 3;
+	bytes body = 4;
+}
