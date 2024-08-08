@@ -8255,6 +8255,7 @@ message SubizPaymentMethod {
 
 	string stripe_payment_method_id = 18;
 	string stripe_customer_id = 19;
+	string stripe_mode = 21; // dev
 	string last4 = 20;
 }
 
