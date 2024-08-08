@@ -8262,4 +8262,5 @@ message StripeWebhookEvent {
 	int64 created = 3;
 	bytes body = 4;
 	string signature = 5;
+	string mode = 6; // test
 }
