@@ -8145,6 +8145,7 @@ message PromotionCode {
 	int64 amount_fpv = 11;
 	string price_type = 12; // amount, percent
 	int64 max_amount_fpv = 18;
+	string currency = 19; // USD VND
 
 	string created_by = 13;
 	int64 created = 14;
@@ -8162,7 +8163,6 @@ message PromotionCode {
 	repeated string account_ids = 26; // only for these account
 	int64 limit_usages_per_account = 27; // 0 = 1
 
-	// bool only_for_unreferred_account = 28;
 
 	// statistic
 	int64 total_price_used_fpv = 30;
@@ -8173,9 +8173,6 @@ message PromotionCode {
 	int64 last_used = 35;
 
 	string referrer_agent_id = 36;
-	// bool is_recurring = 37;
-	// int64 referrer_agent_commission_percent_fpv = 38;
-	// string type = 37; // recurring, referrer
 }
 
 message PromotionProgram {
@@ -8189,6 +8186,7 @@ message PromotionProgram {
 	int64 amount_fpv = 11;
 	string price_type = 12; // amount, percent
 	int64 max_amount_fpv = 18;
+	string currency = 19;
 
 	string created_by = 13;
 	int64 created = 14;
@@ -8217,8 +8215,6 @@ message PromotionProgram {
 
 	// string referrer_agent_id = 36;
 	bool is_recurring = 37;
-	// int64 referrer_agent_commission_percent_fpv = 38;
-	// string type = 37; // recurring, referrer
 }
 
 message PromotionCheckResult {
@@ -8236,10 +8232,7 @@ message SubizPaymentMethod {
 	string account_id = 2;
 	string id = 3;
 	string name = 7;
-	enum Type {
-		bank_transfer = 0;
-		credit_card = 1;
-	}
+
 	string type = 4;
 	string status = 5; // active, inactive
 	int64 created = 8;
@@ -8256,7 +8249,13 @@ message SubizPaymentMethod {
 	string stripe_payment_method_id = 18;
 	string stripe_customer_id = 19;
 	string stripe_mode = 21; // dev
+
 	string last4 = 20;
+	string display_brand = 22;
+	string owner_name = 23;
+	string brand = 24;
+	int64 exp_month = 26;
+	int64 exp_year = 27;
 }
 
 message StripeWebhookEvent {
