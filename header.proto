@@ -8163,13 +8163,12 @@ message PromotionCode {
 	repeated string account_ids = 26; // only for these account
 	int64 limit_usages_per_account = 27; // 0 = 1
 
-
 	// statistic
-	int64 total_price_used_fpv = 30;
-	int64 total_code_used = 31;
-	int64 d30_code_used = 32;
-	int64 d30_price_used_fpv = 33;
-	repeated int64 d30_code_useds = 34;
+	// int64 total_price_used_fpv = 30;
+	// int64 total_code_used = 31;
+	// int64 d30_code_used = 32;
+	// int64 d30_price_used_fpv = 33;
+	// repeated int64 d30_code_useds = 34;
 	int64 last_used = 35;
 
 	string referrer_agent_id = 36;
@@ -8220,6 +8219,10 @@ message PromotionProgram {
 message PromotionCheckResult {
 	bool valid = 5;
 	repeated string failed_reasons = 6; // expired.234234
+	int64 percent_fpv = 10;
+	int64 fpv_amount_vnd = 11;
+	int64 fpv_amount_usd = 12;
+	string price_type = 13; // amount, percent
 }
 
 message PromotionCodeUsage {
