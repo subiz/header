@@ -7,7 +7,7 @@ option go_package = "github.com/subiz/header/account";
 import "common.proto";
 
 message DashboardAgent {
-	optional int64 bot_build_showed = 12;
+	// optional int64 bot_build_showed = 12;
 	repeated string pinned_user_views = 13; // list of agents that pinned this view
 	repeated string user_view_display_fields = 14;
 	repeated string user_view_order_by = 15; // +attr:fullname, -attr:email
@@ -99,7 +99,6 @@ message Agent {
 	repeated string scopes = 41; // supervisor
 	// optional string internal_name = 42;
 	optional int64 extension = 43; // 2343 3442
-	optional int64 email_confirmed = 44;
 }
 
 message Account {

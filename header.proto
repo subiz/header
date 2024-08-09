@@ -8234,7 +8234,7 @@ message SubizPaymentMethod {
 	string name = 7;
 
 	string type = 4;
-	string status = 5; // active, inactive
+	string status = 5; // active, invalid, inactive
 	int64 created = 8;
 	string created_by = 9;
 	int64 updated = 10;
@@ -8256,6 +8256,9 @@ message SubizPaymentMethod {
 	string brand = 24;
 	int64 exp_month = 26;
 	int64 exp_year = 27;
+
+	bool auto_chargeable = 28;
+	int64 num_failed_attempts = 29;
 }
 
 message StripeWebhookEvent {
