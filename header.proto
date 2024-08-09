@@ -697,8 +697,9 @@ message Event {
 	string id = 3;
 	string account_id = 4;
 	string primary_user_id = 5; // added when merge
-	int64 created = 8;
+	int64 created = 8; // time that event submited (created) to subiz
 	int64 updated = 10;
+	int64 event_time = 11; // actual time that event created, empty -> fallback to created
 	string type = 9;
 	string session_id = 12; // extra id for many purpose (idempotency key)
 	By by = 50;
