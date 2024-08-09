@@ -45,7 +45,10 @@ message Plan {
 		standard = 2;
 		advanced = 3;
 		standard_unlimited_agent = 4;
+		custom = 5;
 	}
+	optional int64 fpv_price_usd = 11; // usd // permonth
+	optional int64 fpv_price_vnd = 12; // usd // permonth
 }
 
 message PurchaseRequest {
