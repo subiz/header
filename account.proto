@@ -87,10 +87,8 @@ message Agent {
 	optional int64 modified = 25;
 
 	optional Account account = 28;
-
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
-
 	optional bool is_supervisor = 35; // remove auto add live:read conversation:read user:read order:read ticket:read
 
 	optional Presence last_seen = 38;

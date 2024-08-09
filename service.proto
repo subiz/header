@@ -528,7 +528,7 @@ service PaymentMgr {
 	rpc TransferMoney(payment.PayRequest) returns (payment.Bill); // only subiz
 
 	rpc AddCredit(payment.PayRequest) returns (Empty);
-	rpc ListLogs(payment.ListLogsRequest) returns (payment.Logs);
+	rpc ListPaymentLogs(Id) returns (payment.Logs);
 }
 
 // pubsub services

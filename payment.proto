@@ -298,17 +298,9 @@ message LogPromotionCodeUsed {
 	optional int64 created = 3;
 }
 
-message ListLogsRequest {
-	optional common.Context ctx = 1;
-	optional string account_id = 2;
-	optional int32 limit = 3;
-	optional string anchor = 4;
-}
-
 message Logs {
 	optional common.Context ctx = 1;
 	repeated Log logs = 5;
-	optional string anchor = 4;
 }
 
 message Log {
