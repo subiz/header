@@ -95,7 +95,9 @@ message Subscription {
 
 	optional uint32 billing_cycle_month = 15;
 	optional uint32 next_billing_cycle_month = 16;
+
 	optional string plan = 17; // trial, standard, standard_unlmited, advanced, custom
+	optional string next_plan = 18;
 
 	optional float credit = 27;
 	// repeated Note notes = 28;
@@ -109,9 +111,11 @@ message Subscription {
 
 	optional int64 fpv_credit_vnd = 48;
 	optional int64 fpv_unlimited_agent_price = 49; // usd, custom price
+	optional int64 fpv_next_unlimited_agent_price = 53; // usd, custom price
 
 	optional int64 num_agents = 50;
 	optional int64 use_ticket = 51;
+	optional int64 next_num_agents = 52;
 }
 
 message Bill {
