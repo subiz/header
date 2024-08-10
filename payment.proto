@@ -65,21 +65,14 @@ message PurchaseRequest {
 	optional uint32 next_billing_cycle_month = 16;
 	optional string plan = 17;
 
-	// optional float credit = 27;
-	// repeated Note notes = 28;
-	// optional string referral_by = 29; // account_id
-	// optional Customer customer = 31;
 	optional string payment_method = 32;
 	optional common.Limit limit = 42;
 	optional bool auto_charge = 44;
 	optional int64 ended = 45;
-	optional int64 churned = 47;
+	// optional int64 churned = 47;
 
-	optional int64 fpv_credit_vnd = 48;
+	// optional int64 fpv_credit_vnd = 48;
 	optional int64 fpv_unlimited_agent_price = 49; // usd
-
-	optional bool do_not_generate_invoice = 50;
-
 	optional int64 num_agents = 51;
 }
 
@@ -88,11 +81,8 @@ message Subscription {
 	optional string account_id = 3;
 	optional int64 created = 11;
 	optional string promotion_code = 4; // last recurring promotion code
-	// optional string name = 7;
 
-	optional int64 started = 5;
-	// optional bool auto_renew = 9;
-
+	optional int64 started = 5; // ms
 	optional uint32 billing_cycle_month = 15;
 	optional uint32 next_billing_cycle_month = 16;
 
@@ -100,18 +90,13 @@ message Subscription {
 	optional string next_plan = 18;
 
 	optional float credit = 27;
-	// repeated Note notes = 28;
-	// optional string referral_by = 29; // account_id
-	// optional Customer customer = 31;
-	// optional string primary_payment_method = 32;
 	optional common.Limit limit = 42;
-	// optional bool auto_charge = 44;
 	optional int64 ended = 45;
 	optional int64 churned = 47;
 
 	optional int64 fpv_credit_vnd = 48;
-	optional int64 fpv_unlimited_agent_price = 49; // usd, custom price
-	optional int64 fpv_next_unlimited_agent_price = 53; // usd, custom price
+	optional int64 fpv_unlimited_agent_price = 49; // usd, custom price, only edited by subiz
+	optional int64 fpv_next_unlimited_agent_price = 53; // usd, custom price only edited by subiz
 
 	optional int64 num_agents = 50;
 	optional int64 use_ticket = 51;
@@ -122,7 +107,7 @@ message Bill {
 	optional common.Context ctx = 1;
 	optional string id = 3;
 	optional string account_id = 4;
-	optional float amount = 5;
+	// optional float amount = 5;
 	repeated string invoice_ids = 6;
 	optional int64 created = 7;
 	// optional Contact customer_info = 8;
@@ -296,12 +281,6 @@ message BillingInfo {
 	optional string country_code = 5;
 }
 
-message LogPromotionCodeUsed {
-	optional string code = 1;
-	optional string account_id = 2;
-	optional int64 created = 3;
-}
-
 message Logs {
 	optional common.Context ctx = 1;
 	repeated Log logs = 5;
@@ -338,14 +317,6 @@ message Log {
 	optional string description = 5;
 	optional string account_id = 6;
 	optional int32 month = 7;
-}
-
-message SearchInvoiceRequest {
-	optional common.Context ctx = 1;
-	optional string query = 4;
-	optional string anchor = 5;
-	optional string state = 6;
-	optional int32 limit = 7;
 }
 
 message String {

@@ -168,7 +168,6 @@ message InvoiceInfo {
 	optional string address = 9;
 
 	optional int64 disabled_invoice_email = 10;
-
 	optional int64 updated = 20;
 	optional string updated_by = 21;
 	optional int64 disabled = 22;
