@@ -6156,6 +6156,7 @@ message Segment {
 	string order_by = 34; // attr.username asc
 
 	repeated ResourceGroupMember permissions = 35;
+	int32 dynamic_pos = 36; //rebuild when start server
 }
 
 message Segments {
