@@ -176,6 +176,9 @@ message PhoneDevice {
 
 	string private_host = 42;
 	string user_agent = 43;
+
+	string outbound_numbers_picker = 46; // ''=last samenet random
+	string outbound_numbers = 47;
 }
 
 message CallSettings {
@@ -1135,6 +1138,7 @@ message ConversationMember {
 	int64 seen_at = 20;
 	int64 received_at = 21;
 	int64 last_sent = 23; // timestamp
+	int64 last_sent_event_time = 39; // true time sent timestamp
 	int64 call_answered = 24;
 	int64 call_rang = 25;
 
@@ -1218,7 +1222,7 @@ message Conversation {
 	int64 actived = 19;
 
 	Event last_internal_message_sent = 27;
-	Event last_message_sent = 23;          // no internal
+	Event last_message_sent = 23;		      // no internal
 	string initial_by = 25; // agent_id || popup || user || bot
 
 	int64 response_sec = 22;
@@ -4872,7 +4876,7 @@ message Order {
 	float total_tax = 65; // computed, override value
 	int64 fpv_total_tax = 66; // computed, override value
 
-	// account currency /order currency  (E.g: order currency: VND, acc currency: USD, => currency_rate = 1/20k = 0.00005)
+	// account currency /order currency (E.g: order currency: VND, acc currency: USD, => currency_rate = 1/20k = 0.00005)
 	float currency_rate = 67;
 	int64 paid_at = 68; // complete paid
 	string first_paid_order_id = 69;

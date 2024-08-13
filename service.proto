@@ -342,8 +342,8 @@ service ConversationMgr {
 	rpc SendMessage(header.Event) returns (header.Event);
 	rpc SendOmniChannelMessage(header.SendOmniChannelMessageRequest) returns (header.Event);
 	rpc UpdateMessage(header.Event) returns (header.Event);
-	rpc PinMessage(header.Event) returns (header.Empty);
-	rpc UnpinMessage(header.Event) returns (header.Empty);
+	// rpc PinMessage(header.Event) returns (header.Empty);
+	// rpc UnpinMessage(header.Event) returns (header.Empty);
 	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
 
 	rpc Deintegrate(Id) returns (Empty);
