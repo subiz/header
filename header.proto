@@ -178,7 +178,7 @@ message PhoneDevice {
 	string user_agent = 43;
 
 	string outbound_numbers_picker = 46; // ''=last samenet random
-	string outbound_numbers = 47;
+	repeated string outbound_numbers = 47;
 }
 
 message CallSettings {
