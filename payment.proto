@@ -235,7 +235,8 @@ message RenewInvoiceItem {
 
 message ReservedPlanInvoiceItem {
 	optional string old_plan = 3;
-	optional string old_agent_count = 4;
+	optional int64 old_agent_count = 4;
+	optional int64 old_billing_cycle_month = 5;
 	// optional bool old_is_unlimited_agent = 5;
 	// optional int64 old_fpv_save_percentage = 6;
 	optional int32 day_left = 7;
