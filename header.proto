@@ -6991,6 +6991,8 @@ message Response {
 
 	SubizPaymentMethod subiz_payment_method = 143;
 	repeated SubizPaymentMethod subiz_payment_methods = 144;
+
+	ProfileEmailUsage profile_email_usage = 145;
 }
 
 message ZaloCallConsent {
@@ -8104,6 +8106,7 @@ message AgentProfile {
 	string state = 22;
 	int64 password_changed = 23;
 	int64 modified = 25;
+	int64 first_logged_in = 26;
 	account.Presence last_seen = 38;
 	string referrer_by = 39;
 }
@@ -8118,6 +8121,12 @@ message InvitationLink {
 	repeated string scopes = 8;
 	string for_email = 9;
 	string code = 10;
+}
+
+message ProfileEmailUsage {
+	common.Context ctx = 1;
+	bool email_used = 2;
+	bool first_login = 3;
 }
 
 message InviteRequest {

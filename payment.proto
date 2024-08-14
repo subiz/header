@@ -233,11 +233,11 @@ message RenewInvoiceItem {
 	optional int64 fpv_save_percentage = 7;
 }
 
-message RefundPlanInvoiceItem {
+message ReservedPlanInvoiceItem {
 	optional string old_plan = 3;
 	optional string old_agent_count = 4;
-	optional bool old_is_unlimited_agent = 5;
-	optional int64 old_fpv_save_percentage = 6;
+	// optional bool old_is_unlimited_agent = 5;
+	// optional int64 old_fpv_save_percentage = 6;
 	optional int32 day_left = 7;
 	optional int64 old_started = 8;
 	optional int64 old_ended = 9;
@@ -271,7 +271,7 @@ message InvoiceItem {
 		optional AgentInvoiceItem agent = 3;
 		optional PlanInvoiceItem plan = 5;
 		optional MarketingInvoiceItem marketing = 6;
-		optional RefundPlanInvoiceItem refund_plan = 7;
+		optional ReservedPlanInvoiceItem reserved_plan = 7;
 	}
 	optional Data data = 9;
 	optional float total_price = 10;	// = (* quantity price)
@@ -290,6 +290,8 @@ message BillingInfo {
 	optional string address = 3;
 	optional string vat = 4;
 	optional string country_code = 5;
+	optional string country = 6;
+	optional string email = 7;
 }
 
 message Logs {
