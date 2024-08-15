@@ -53,7 +53,7 @@ service NumberRegistry {
 	rpc Uncompact(Number) returns (String);
 	rpc CompactM(StrNumM) returns (StrNumM);
 
-	rpc Shorten(String) returns (Number);
+	// rpc Shorten(String) returns (Number);
 
 	rpc ShortenPayment(String) returns (String);
 	rpc LookupPayment(String) returns (String);
@@ -113,7 +113,8 @@ service AccountMgr {
 	// rpc ConfirmChangeEmail(account.Token) returns (account.Agent);
 	// rpc AcceptInvitation(NewPassword) returns (account.Agent);
 	// rpc GetInvitation(account.Token) returns (account.Agent);
-	// rpc InviteAgent(account.Agent) returns (account.Agent); // allow to call multiple time
+
+	rpc CreateAgent(account.Agent) returns (account.Agent); // allow to call multiple time
 	rpc GetAgent(Id) returns (account.Agent);
 	rpc LookupAgentById(Id) returns (account.Agent);
 	// rpc ConfirmAccount(account.Token) returns (account.Account);
