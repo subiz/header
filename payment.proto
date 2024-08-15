@@ -217,6 +217,8 @@ message Invoice {
 	optional int64 fpv_total_usd = 41;
 	optional int64 fpv_payment_made_usd = 42;
 	optional int64 fpv_discount_usd = 43; // read only
+
+	optional string payment_num = 45;
 }
 
 message AgentInvoiceItem {

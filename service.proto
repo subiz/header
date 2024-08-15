@@ -54,6 +54,10 @@ service NumberRegistry {
 	rpc CompactM(StrNumM) returns (StrNumM);
 
 	rpc Shorten(String) returns (Number);
+
+	rpc ShortenPayment(String) returns (String);
+	rpc LookupPayment(String) returns (String);
+
 	rpc Lookup(Number) returns (String);
 
 	rpc NewID2(header.Id) returns (header.Id);
