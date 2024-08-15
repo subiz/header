@@ -257,6 +257,7 @@ message PlanInvoiceItem {
 	optional uint32 old_agent_count = 10;
 	optional bool is_unlimited_agent = 11;
 	optional int64 fpv_save_percentage = 12;
+	optional int64 ended = 13;
 }
 
 message MarketingInvoiceItem {
