@@ -47,6 +47,7 @@ message DashboardAgent {
 	optional int64 live_keeping_after_offline_seconds = 42; // auto <30 -> 30s
 	optional int64 live_auto_refresh_seconds = 43; // auto <30 -> 30s
 	repeated string live_metrics = 44; // host, path, ip
+	optional string default_ticket_view_id = 45;
 }
 
 message Agent {
