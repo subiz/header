@@ -110,7 +110,7 @@ message Account {
 	optional string owner_id = 6;
 	optional string state = 7;
 	optional int64 created = 8;
-	optional int64 confirmed = 9;
+	// optional int64 confirmed = 9;
 	optional int64 modified = 10;
 
 	//optional string referrer_id = 11;

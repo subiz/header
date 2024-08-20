@@ -29,6 +29,11 @@ message Plans {
 	repeated Plan plans = 2;
 }
 
+message DiffSubRequest {
+	optional Subscription old_subscription = 4;
+	optional Subscription new_subscription = 5;
+}
+
 message Plan {
 	optional string name = 2;
 	optional common.Limit limit = 3;
@@ -243,8 +248,8 @@ message ReservedPlanInvoiceItem {
 	optional int64 old_billing_cycle_month = 5;
 	// optional bool old_is_unlimited_agent = 5;
 	// optional int64 old_fpv_save_percentage = 6;
-	optional int32 day_left = 7;
-	optional int64 old_started = 8;
+	// optional int32 day_left = 7;
+	optional int64 old_started = 8; // now (not sub.started)
 	optional int64 old_ended = 9;
 }
 
@@ -259,7 +264,7 @@ message PlanInvoiceItem {
 	optional uint32 old_agent_count = 10;
 	optional bool is_unlimited_agent = 11;
 	optional int64 fpv_save_percentage = 12;
-	optional int64 ended = 13;
+	optional int64 ended = 13; // most trusted
 }
 
 message MarketingInvoiceItem {
