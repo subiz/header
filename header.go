@@ -1800,6 +1800,13 @@ func CompileBlock(block *Block, data map[string]string) {
 	if block == nil {
 		return
 	}
+	if data["user.display_name"] == "" && data["user.fullname"] != "" {
+		data["user.display_name"] = data["user.fullname"]
+	}
+	if data["user.display_name"] != "" && data["user.fullname"] == "" {
+		data["user.fullname"] = data["user.display_name"]
+	}
+
 	if block.Type == "dynamic-field" {
 		if len(block.Attrs) == 0 {
 			return
