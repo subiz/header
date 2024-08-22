@@ -598,6 +598,8 @@ message ConversationMetricsRequest {
 	repeated string agent_sent_ids = 14; // and
 	int64 first_replied_duration_gt = 15;
 	int64 send_duration_sum_gt = 21;
+	int64 first_replied_duration_lte = 22;
+	string first_replied_duration_of = 23;
 	repeated string not_channels = 18;
 	account.BusinessHours business_hours = 19;
 	account.BusinessHours not_business_hours = 20;
