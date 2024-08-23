@@ -182,6 +182,7 @@ message FbReferral {
 	optional string ad_id = 6;
 	optional string referer_uri = 7;
 	optional bool is_guest_user = 8;
+	optional FbProduct product = 9;
 }
 
 message FbMessage {
@@ -199,11 +200,8 @@ message FbMessage {
 	optional bool is_deleted = 13;
 	optional ReplyTo reply_to = 14;
 
-	optional FbMessageRef referral = 15;
-}
-
-message FbMessageRef {
-	optional FbProduct product = 2;
+	// optional FbMessageRef referral = 15;
+	optional FbReferral referral = 16;
 }
 
 message ReplyTo {
@@ -306,7 +304,8 @@ message FbPayload {
 	optional FbProducts product = 19;
 
 	optional string title = 20;
-	// optional string sticker_id = 21; must be int64
+	// optional string sticker_id = 21;
+	// optional string reel_video_id = 21;
 }
 
 message FbProducts {
