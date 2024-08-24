@@ -679,7 +679,15 @@ func GetTextAttr(u *User, key string) string {
 //	}
 var ScopeM = map[string]map[string]bool{}
 
+func _setPrimaryScope(k string) {
+	if ScopeM[k] == nil {
+		ScopeM[k] = map[string]bool{}
+	}
+	ScopeM[k][k] = true
+}
+
 func init() {
+	objM := map[string]bool{} // list of object
 	for scope, m := range makeScopeMap2() {
 		for _, k := range strings.Split(m, " ") {
 			if k == "" {
@@ -689,12 +697,46 @@ func init() {
 				ScopeM[scope] = map[string]bool{}
 			}
 			ScopeM[scope][k] = true
-
-			if ScopeM[k] == nil {
-				ScopeM[k] = map[string]bool{}
-			}
-			ScopeM[k][k] = true
+			objM[strings.Split(k, ":")[0]] = true // ticket, ticket_type, account...
 		}
+	}
+
+	for obj := range objM {
+		_setPrimaryScope(obj + ":read")
+		_setPrimaryScope(obj + ":read:all")
+		_setPrimaryScope(obj + ":read:own")
+		_setPrimaryScope(obj + ":read:unassigned")
+		_setPrimaryScope(obj + ":read:none")
+
+		_setPrimaryScope(obj + ":import")
+		_setPrimaryScope(obj + ":import:all")
+		_setPrimaryScope(obj + ":import:own")
+		_setPrimaryScope(obj + ":import:unassigned")
+		_setPrimaryScope(obj + ":import:none")
+
+		_setPrimaryScope(obj + ":invite")
+		_setPrimaryScope(obj + ":invite:all")
+		_setPrimaryScope(obj + ":invite:own")
+		_setPrimaryScope(obj + ":invite:unassigned")
+		_setPrimaryScope(obj + ":invite:none")
+
+		_setPrimaryScope(obj + ":update")
+		_setPrimaryScope(obj + ":update:all")
+		_setPrimaryScope(obj + ":update:own")
+		_setPrimaryScope(obj + ":update:unassigned")
+		_setPrimaryScope(obj + ":update:none")
+
+		_setPrimaryScope(obj + ":create")
+		_setPrimaryScope(obj + ":create:all")
+		_setPrimaryScope(obj + ":create:own")
+		_setPrimaryScope(obj + ":create:unassigned")
+		_setPrimaryScope(obj + ":create:none")
+
+		_setPrimaryScope(obj + ":delete")
+		_setPrimaryScope(obj + ":delete:all")
+		_setPrimaryScope(obj + ":delete:own")
+		_setPrimaryScope(obj + ":delete:unassigned")
+		_setPrimaryScope(obj + ":delete:none")
 	}
 }
 
