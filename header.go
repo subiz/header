@@ -14,6 +14,7 @@ import (
 
 	cpb "github.com/subiz/header/common"
 	"github.com/subiz/log"
+	"google.golang.org/protobuf/proto"
 )
 
 var updateTable = map[string]bool{
@@ -926,13 +927,17 @@ func AssignJSONByte(dst interface{}, body []byte) error {
 	return json.Unmarshal(dstbyte, dst)
 }
 
-// like js Object.assign(dst, src)
-// dst and src must be same struct pointer
-// AssignObject(ag1, ag2, ["fullname", "email"])
-func AssignObject(dst, src interface{}, fields []string) {
-	if dst == nil || src == nil {
-		return
+// Assign(ag1, ag2, ["fullname", "email"])
+func Assign(dst, src proto.Message, fields, skipfields []string) proto.Message {
+	if dst == nil {
+		return src
 	}
+
+	if src == nil {
+		return dst
+	}
+
+	dst = proto.Clone(dst)
 	var srcValueOf reflect.Value
 	var srcTypeOf reflect.Type
 	if reflect.TypeOf(src).Kind() == reflect.Ptr {
@@ -950,10 +955,10 @@ func AssignObject(dst, src interface{}, fields []string) {
 	}
 
 	if reflect.ValueOf(dst).IsNil() || reflect.ValueOf(src).IsNil() {
-		return
+		return dst
 	}
 	if dstTypeOf != srcTypeOf {
-		return
+		return dst
 	}
 
 	for i := 0; i < srcValueOf.NumField(); i++ {
@@ -964,18 +969,14 @@ func AssignObject(dst, src interface{}, fields []string) {
 		}
 
 		// skip if not field that user interested in
-		canskip := false
-		if len(fields) > 0 {
-			canskip = true
-			for _, field := range fields {
-				if field == jsonname {
-					canskip = false
-					break
-				}
-			}
-		}
-		if canskip {
+		if ContainString(skipfields, jsonname) {
 			continue
+		}
+
+		if len(fields) > 0 {
+			if !ContainString(fields, jsonname) {
+				continue
+			}
 		}
 
 		if !dstValueOf.Field(i).CanSet() {
@@ -983,6 +984,7 @@ func AssignObject(dst, src interface{}, fields []string) {
 		}
 		dstValueOf.Field(i).Set(srcValueOf.Field(i))
 	}
+	return dst
 }
 
 // NormPhone converts an user input phone number to
@@ -1230,6 +1232,22 @@ func PhoneNumber(phone string) string {
 }
 
 func ContainString(ss []string, s string) bool {
+	if len(ss) == 0 {
+		return false
+	}
+
+	if len(ss) == 1 {
+		return ss[0] == s
+	}
+
+	if len(ss) == 2 {
+		return ss[0] == s || ss[1] == s
+	}
+
+	if len(ss) == 3 {
+		return ss[0] == s || ss[1] == s || ss[2] == s
+	}
+
 	for _, i := range ss {
 		if s == i {
 			return true
