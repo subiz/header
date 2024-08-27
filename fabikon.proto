@@ -150,6 +150,13 @@ message FbMessaging {
 	optional FbReferral referral = 11;
 	optional string tag = 12; // HUMAN_AGENT
 	optional IgReaction reaction = 13;
+	optional FbMessageEdit message_edit = 14;
+}
+
+message FbMessageEdit {
+	optional string mid = 4;
+	optional string text = 5;
+	optional int64 num_edit = 6;
 }
 
 message IgReaction {
