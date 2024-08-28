@@ -112,6 +112,12 @@ message FbChangeValue {
 	optional FbChangeUser user = 35; // https://developers.facebook.com/docs/messenger-platform/identity/custom-labels/?locale=vi_VN
 	optional FbCustomLabel label = 36;
 
+	// leadgen
+	optional string leadgen_id = 40;
+	optional string page_id = 41;
+	optional string form_id = 42;
+	optional string adgroup_id = 43;
+	optional string ad_id = 44;
 }
 
 message FbCustomLabel {
@@ -494,6 +500,25 @@ message FbConversations {
 	optional Error error = 1;
 	repeated FbConversation data = 3;
 	optional FbPaging paging = 4;
+}
+
+message FbLeads {
+	optional Error error = 1;
+	repeated FbLead data = 3;
+	optional FbPaging paging = 4;
+}
+
+message FbFieldData {
+	optional string name = 3;
+	repeated string values = 4;
+}
+
+message FbLead {
+	optional string created_time = 10;
+	optional string id = 11;
+	optional string ad_id = 12;
+	optional string form_id = 13;
+	repeated FbFieldData field_data = 14;
 }
 
 message FbConversation {

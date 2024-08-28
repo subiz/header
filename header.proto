@@ -1452,6 +1452,10 @@ message Message {
 
 	I18nString i18n_text = 47;
 	string template_id = 48;
+
+	int64 edited = 52;
+	int64 deleted = 53;
+	string deleted_by = 54;
 }
 
 message MessageReferral {
