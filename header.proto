@@ -725,7 +725,7 @@ message Data {
 	Notification notification = 14;
 	AgentGroup agent_group = 18;
 	Note note = 23;
-	Automation automation = 25;
+	Workflow workflow = 25;
 	Event event = 26;
 	// AutomationEvent automation_event = 30;
 	// notibox.Notibox notibox = 32;
@@ -2330,6 +2330,14 @@ message ActionSendHttp {
 
 	bool response_as_messages = 7;
 	Block block = 8;
+}
+
+message ActionSendMessage {
+	string channel = 3;
+	string channel_source = 4;
+	repeated Message messages = 5;
+	string conversation_id = 6; // template
+	string tos = 7; // template
 }
 
 message ActionAskQuestion {
@@ -6258,8 +6266,6 @@ message Campaign {
 	WorkflowGoal workflow_goal = 35;
 	WorkflowExitCondition workflow_exit_when = 36;
 
-	AutomationAction workflow_root = 38;
-
 	UsersRequest audient_request = 39; // write only when create
 
 	int64 broadcast_first_sent_at = 40;
@@ -6796,16 +6802,12 @@ enum E {
 	invalid_conversation_modal_url = 172;
 	invalid_conversation_modal_key = 173;
 	sendgrid_error = 176;
-	too_many_events = 177;
-	too_many_number = 178;
-	too_many_phone_device = 179;
 	sip_server_error = 181;
 
 	invalid_phone_device_state = 182;
 
 	invalid_call_state = 190;
 	number_is_blocked = 191;
-	number_is_not_active = 192;
 
 	number_is_registered = 193;
 	number_is_not_bounded = 194;
@@ -6844,13 +6846,13 @@ enum E {
 	invalid_google_auth_response = 5071;
 }
 
-message AutomationAction {
+message WorkflowAction {
 	string account_id = 2;
 	string workflow_id = 3;
 	string id = 4;
 	string name = 5;
 	string next_action_id = 6;
-	string type = 9; // send_email, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message
+	string type = 9; // send_email, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message, goal
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6870,6 +6872,7 @@ message AutomationAction {
 
 	ActionBranching branching = 39;
 	ActionPercentageSplit percentage_split = 40;
+	ActionSendMessage send_message = 41;
 }
 
 message ActionPercentageSplit {
@@ -6877,26 +6880,44 @@ message ActionPercentageSplit {
 	repeated int64 percentages = 4; // 1234 -> 12.34%
 }
 
+message ActionWaitBranch {
+	string type = 9; // date, max_time, event (segment, message), attribute
+
+	string ui_type = 4; // message
+
+	int64 max_time_sec = 5;
+	string max_time_unit = 6; // for ui only, second, minute, hour, week
+
+	int64 date_sec = 7;
+
+	string event_type = 10;
+	WorkflowCondition condition =  11;
+	// eg. email read: message_
+	// eg. last zns_read (last step id is 4)
+	// { event_type=message_pong, event.data.message.fields[atm_step=4] }
+	// eg. any zns read
+	// { event_type=message_pong, event.data.message.fields[atm_step=4] }
+
+	// eg: 5min before checkin
+	// {delta_sec: 300, attribute_path: order.fields[key=checkin]
+	int64 delta_sec = 15; // 86400
+	string delta_unit = 16; // for ui only
+	int64 attribute = 17;
+	string date_op = 18; // first_of_the_day, first_of_the_month
+	string date_format = 19; // unix rfc3999
+
+	string next_action_id = 20;
+}
+
 message ActionWait {
-	repeated CampaignBranch branches = 4;
-	string timeout_action_id = 5;
-	int64 timeout = 6;
-	string timeout_unit = 8; // second, minute, hour, week
+	repeated ActionWaitBranch branches = 3;
 
-	string type = 9; // date, days_of_week, attribute
+	int64 max_time_enabled = 4;
+	int64 max_time_sec = 5;
+	string max_time_unit = 6; // for ui only, second, minute, hour, week
 
-	// string days_of_week
-	// string time_of_day = 5; // 14:30
-
-	string operator = 10; //
-	// string time_of_day
-	// string month = 5; // user.attributes.#(key=="birthday").value
-	string day = 11; // user.attributes.#(key=="birthday").value
-	string attribute_format = 12;
-	string timezone = 13; // account, object
-
-	string timming = 14; //on-date, after-date, before-date
-	string delta_sec = 15; // 86400
+	int64 date_sec = 7;
+	string max_time_next_action_id = 13;
 }
 
 message CampaignBranch {
@@ -6951,11 +6972,11 @@ message Response {
 	repeated Credit credits = 16;
 	account.Account account = 17;
 	repeated account.Account accounts = 18;
-	Automation Automation = 19;
-	repeated Automation automations = 20;
+	Workflow workflow = 19;
+	repeated Workflow workflows = 20;
 	account.Agent agent = 21;
 	repeated account.Agent agents = 22;
-	repeated WorkflowLog automation_logs = 23;
+	repeated WorkflowLog workflow_logs = 23;
 	repeated Ticket tickets = 25;
 	repeated TicketType ticket_types = 27;
 	repeated TicketView ticket_views = 29;
@@ -7055,16 +7076,24 @@ message EmailAttachment {
 }
 
 message WorkflowSession {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+
 	string id = 4;
 	repeated string history = 5;
-	string current_action_id = 6;
+	string action_id = 6; // current
 	string hint_next_action_id = 7;
 
 	map<string, string> KV = 8;
 
-	int64 exited = 9;
+	int64 ended = 9;
 	int64 started = 10;
+	int64 waited = 11;
 	string exit_code = 12;
+	string status = 13; // runing, waiting, ended
+	int64 goal_reached = 14;
+	int64 term = 15;
 }
 
 message SchedulerTask {
@@ -7314,16 +7343,17 @@ message ConvoReportEntry {
 	string metric = 3;
 }
 
-message AutomationTrigger {
+message WorkflowTrigger {
 	string ui_id = 3;
 	string id = 4;
 
-	repeated string events = 10; // ticket_updateds, ticket_created
-	repeated string computed_events = 12; // internal
-	string field = 13;  // order.fields[name='checkout']
+	repeated string events = 10; // ticket_updated, ticket_created
+	string object_id = 13;
+
+	WorkflowCondition condition = 14;
 }
 
-message AutomationTimming {
+message WorkflowTimming {
 	// relative: is_empty, in_business_hour, non_business_hour, today, yesterday, last_week, this_week, last_month, this_month, last, before_ago
 	// absolute: before, after, between, outside
 	string op = 4; //
@@ -7346,7 +7376,7 @@ message AutomationTimming {
 	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
 }
 
-message AutomationCondition {
+message WorkflowCondition {
 	string id = 2;
 	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	ChannelCondition channel = 5;
@@ -7358,16 +7388,16 @@ message AutomationCondition {
 	DatetimeCondition datetime = 10;
 	EventCondition event = 11;
 	TextCondition text = 12;
-	AutomationTimming timming = 13;
+	WorkflowTimming timming = 13;
 
-	repeated AutomationCondition all = 19; // preferred
-	repeated AutomationCondition one = 20;
+	repeated WorkflowCondition all = 19; // preferred
+	repeated WorkflowCondition one = 20;
 }
 
 message WorkflowLogRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string automation_id = 3;
+	string workflow_id = 3;
 
 	string object_id = 5;
 
@@ -7378,19 +7408,20 @@ message WorkflowLogRequest {
 	string level = 9; // empty or error
 }
 
-message Automation {
+message Workflow {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string workflow_id = 3;
-	string id = 4;
+	string id = 3;
 	// string object_type = 5; // user, ticket, order, conversation ...
 
 	string name = 5;
 	string description = 6;
 
-	repeated AutomationTrigger triggers = 7; // or
-	AutomationCondition condition = 8;
-	repeated AutomationAction actions = 9;
+	repeated WorkflowTrigger triggers = 7; // or
+	WorkflowCondition condition = 8;
+	repeated WorkflowAction actions = 9;
+
+	string start_action_id = 10;
 
 	string updated_by = 12;
 	int64 updated = 13;
@@ -7408,7 +7439,6 @@ message Automation {
 message WorkflowLog {
 	string account_id = 2;
 	string workflow_id = 3;
-	string automation_id = 4;
 	string id = 5;
 	int64 created = 10;
 	string level = 11;

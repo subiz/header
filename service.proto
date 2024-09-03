@@ -304,10 +304,10 @@ service AttributeMgr {
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 }
 
-service AutomationMgr {
+service WorkflowMgr {
 	rpc ListWorkflows(Id) returns (header.Response);
-	rpc UpdateWorkflow(Automation) returns (header.Response);
-	rpc CreateWorkflow(Automation) returns (header.Response);
+	rpc UpdateWorkflow(Workflow) returns (header.Response);
+	rpc CreateWorkflow(Workflow) returns (header.Response);
 	rpc DeleteWorkflow(Id) returns (header.Response);
 	rpc ReadWorkflow(Id) returns (header.Response);
 
