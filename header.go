@@ -1291,6 +1291,14 @@ func ContainString(ss []string, s string) bool {
 		return ss[0] == s || ss[1] == s || ss[2] == s
 	}
 
+	if len(ss) == 4 {
+		return ss[0] == s || ss[1] == s || ss[2] == s || ss[3] == s
+	}
+
+	if len(ss) == 5 {
+		return ss[0] == s || ss[1] == s || ss[2] == s || ss[3] == s || ss[4] == s
+	}
+
 	for _, i := range ss {
 		if s == i {
 			return true

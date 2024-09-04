@@ -808,6 +808,7 @@ message Data {
 	Rating rating = 124;
 	Rule ticket_rule = 125;
 	SLAViolation violation = 126;
+	WorkflowPulse workflow_pulse = 127; // workflow_pulsed
 }
 
 message ConversationMeta {
@@ -7052,10 +7053,16 @@ message WorkflowSession {
 	int64 ended = 9;
 	int64 created = 10;
 	int64 waited = 11;
-	string exit_code = 12;
-	string status = 13; // runing, waiting, ended
-	int64 goal_reached = 14;
-	int64 term = 15;
+	string exit_code = 12; // action_not_found.
+	string status = 13; // running, waiting, ended
+	int64 first_goal_reached = 14;
+	int64 goal_reached = 15;
+	int64 term = 16;
+
+	// string obj_type = 16; get from workflow object type
+	string obj_id = 17; // for this obj
+
+	int64 num_actions = 18; // number of action executed
 }
 
 message SchedulerTask {
@@ -7331,11 +7338,11 @@ message WorkflowTimming {
 	repeated int64 outside = 14;
 
 	// could use in same
-	string after_var = 19; // user.attr[key=birthday]
-	string before_var = 20; // user.attr[key=birthday]
-	int64 var_duration = 21; // 86400
+	// string after_var = 19; // user.attr[key=birthday]
+	// string before_var = 20; // user.attr[key=birthday]
+	// int64 var_duration = 21; // 86400
 
-	string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
+	// string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
 }
 
 message WorkflowCondition {
@@ -7374,7 +7381,7 @@ message Workflow {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	// string object_type = 5; // user, ticket, order, conversation ...
+	string object_type = 4; // user, ticket, order, conversation ...
 
 	string name = 5;
 	string description = 6;
@@ -7433,6 +7440,8 @@ message AutomationEvent {
 	Order old_order = 26;
 	User user = 27;
 	User old_user = 28;
+	Ticket ticket = 29;
+	Ticket old_ticket = 30;
 }
 
 message CreateAccountRequest {
@@ -8285,4 +8294,11 @@ message StripeWebhookEvent {
 	bytes body = 4;
 	string signature = 5;
 	string mode = 6; // test
+}
+
+message WorkflowPulse {
+	string workflow_id = 6;
+	int64 term = 7;
+	string session_id = 8;
+	string action_id = 9;
 }

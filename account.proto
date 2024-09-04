@@ -71,7 +71,6 @@ message Agent {
 
 	optional string lang = 14;
 	optional string timezone = 16;
-	optional string encrypted_password = 17; // removing
 	optional int64 joined = 20;
 	optional string invited_by = 21;
 
@@ -89,12 +88,11 @@ message Agent {
 	optional Account account = 28;
 	optional string type = 33; // bot or agent (default is agent)
 	optional string client_id = 34; // ID of bot
-	optional bool is_supervisor = 35; // remove auto add live:read conversation:read user:read order:read ticket:read
 
 	optional Presence last_seen = 38;
 
 	optional DashboardAgent dashboard_setting = 40;
-	repeated string scopes = 41; // supervisor
+	repeated string scopes = 41; // owner, supervisor
 	// optional string internal_name = 42;
 	optional int64 extension = 43; // 2343 3442
 }

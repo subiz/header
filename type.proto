@@ -302,6 +302,10 @@ enum RealtimeType {
 	article_deleted = 293;
 	article_category_updated = 294;
 	article_category_deleted = 295;
+
+	workflow_updated = 300; // workflow
+	workflow_deleted = 301; // workflow
+	workflow_pulsed = 302; // workflow_pulse
 }
 
 message TextTransform {
