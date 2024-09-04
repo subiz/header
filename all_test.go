@@ -76,13 +76,14 @@ func TestEmailAddress(t *testing.T) {
 		out string
 	}{
 		{"", ""},
+		{"thánhpk@live.com, thanhpk@live.com 't@.com'", "thanhpk@live.com"},
 		{"thanhpk@live.com, thanhpk@live.com 't@.com'", "thanhpk@live.com"},
 		{"thanhpk@live.com,xxx@gmail.com", "thanhpk@live.com"},
 	}
 
 	for i, tc := range testcases {
 		if tc.out != EmailAddress(tc.in) {
-			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, NormPhone(tc.in))
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, EmailAddress(tc.in))
 		}
 	}
 }
@@ -163,16 +164,15 @@ func TestPhoneNumber(t *testing.T) {
 func TestAssignObject(t *testing.T) {
 	dst := &PhoneDevice{Id: "1", Name: "dst", Created: 1}
 	src := &PhoneDevice{Id: "2", Name: "src", Created: 2}
-	AssignObject(dst, src, []string{"name"})
+	dst = Assign(dst, src, []string{"name"}, nil).(*PhoneDevice)
 
 	if dst.Id != "1" || dst.Name != "src" || dst.Created != 1 {
 		t.Error("should be eq")
 	}
 
-	AssignObject(dst, nil, []string{"name"})
+	dst = Assign(dst, nil, []string{"name"}, nil).(*PhoneDevice)
 	src = nil
-	AssignObject(dst, src, []string{"name"})
-
+	dst = Assign(dst, src, []string{"name"}, nil).(*PhoneDevice)
 	if dst.Id != "1" || dst.Name != "src" || dst.Created != 1 {
 		t.Error("should be eq 2")
 	}
@@ -185,7 +185,7 @@ func TestAssignAgent(t *testing.T) {
 
 	dst := &pb.Agent{Id: pS("1"), Fullname: pS("dst"), AvatarUrl: pS("http://dst.com")}
 	src := &pb.Agent{Id: pS("1"), Fullname: pS("src"), AvatarUrl: pS("http://src.com")}
-	AssignObject(dst, src, []string{"avatar_url"})
+	dst = Assign(dst, src, []string{"avatar_url"}, nil).(*pb.Agent)
 	fmt.Println("D", dst)
 }
 

@@ -6676,48 +6676,29 @@ enum E {
 	Sub = 0;
 	// database_error = 10;
 	http_call_error  = 11;
-	invalid_credential = 12;
 
 	invalid_token = 20;
 	invalid_message_size = 21;
 	invalid_payload_size = 22;
 
-	// access_deny = 23;
-	// invalid_json = 24;
 	invalid_attribute_value = 35;
 	invalid_attribute_key = 36;
 	invalid_attribute_name = 37;
 	invalid_attribute_type = 38;
 
-	too_many_attribute = 39;
-	invalid_note_target_id = 42;
-
 	domain_is_not_whitelisted = 46;
 	invalid_domain = 47;
-	ip_is_blocked = 48;
 
-	invalid_transaction_id = 49;
 	invalid_amount = 50;
-	inactive_promotion_referral_program = 51;
 
-	// invalid_email = 59;
+
 	invalid_date_format = 61;
-	// prohibited_action = 62;
 
 	invalid_working_day = 63;
 	invalid_holiday = 64;
 
-	// password_too_weak = 65;
-	invalid_fullname = 66;
-	invalid_password = 67;
-	invalid_token_type = 68;
-	invalid_invoice_template = 69;
-	invoice_template_compile_failed = 70;
-
-	invalid_stripe_customer_id = 73;
 	invalid_stripe_token = 74;
 	stripe_call_failed = 75;
-	invalid_invoice_id = 77;
 	invalid_invoice_duedate = 80;
 	invalid_country = 82;
 	invalid_referrer_code = 83;
@@ -6745,24 +6726,12 @@ enum E {
 	invalid_poll_token = 104;
 	dead_poll_connection = 105;
 
-	too_many_pos = 108;
-	too_many_tax = 110;
-
-	too_many_shipping_address = 111;
-
-	too_many_payment_method = 115;
-
 	invalid_css = 116;
 	invalid_report_range = 117;
 	invalid_goal_status = 119;
 
-	// user_is_banned = 11111;
 	user_is_not_in_the_conversation = 120;
-	invalid_integration = 121;
 	invalid_message_type = 122;
-	// missing_pong = 123;
-	// invalid_pong_type = 124;
-	// invalid_event_type = 125;
 	remover_is_not_agent = 127;
 	user_is_the_last_one_in_conversation = 128;
 	// conversation_ended = 129;
@@ -6780,8 +6749,6 @@ enum E {
 	too_many_requests = 141;
 	order_readonly = 142;
 
-	too_many_shipping_policy = 144;
-
 	invalid_order_status = 146;
 
 	invalid_product_category = 148;
@@ -6789,10 +6756,7 @@ enum E {
 	file_system_error = 152;
 	zalo_call_error = 154;
 
-	invalid_integration_state = 155;
-
 	message_too_large = 156;
-	invalid_message_id = 157;
 	attachment_too_large = 158;
 	field_too_long = 159;
 
@@ -6812,13 +6776,11 @@ enum E {
 	number_is_registered = 193;
 	number_is_not_bounded = 194;
 
-	too_many_greeting_audio = 195;
 	file_too_large = 196;
 	unsupported_file_type = 197;
 
 	invalid_sip_provider = 198; // fpt, itel
 
-	too_many_agent = 199;
 	duplicated_extension = 200;
 
 	apple_login_error = 201;
@@ -7081,14 +7043,14 @@ message WorkflowSession {
 	string workflow_id = 3;
 
 	string id = 4;
-	repeated string history = 5;
+	// repeated string history = 5;
 	string action_id = 6; // current
 	string hint_next_action_id = 7;
 
 	map<string, string> KV = 8;
 
 	int64 ended = 9;
-	int64 started = 10;
+	int64 created = 10;
 	int64 waited = 11;
 	string exit_code = 12;
 	string status = 13; // runing, waiting, ended
