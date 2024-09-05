@@ -306,6 +306,7 @@ enum RealtimeType {
 	workflow_updated = 300; // workflow
 	workflow_deleted = 301; // workflow
 	workflow_pulsed = 302; // workflow_pulse
+	workflow_timeup = 303; // workflow_pulse
 }
 
 message TextTransform {

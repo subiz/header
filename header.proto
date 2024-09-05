@@ -809,6 +809,7 @@ message Data {
 	Rule ticket_rule = 125;
 	SLAViolation violation = 126;
 	WorkflowPulse workflow_pulse = 127; // workflow_pulsed
+	WorkflowTimeup workflow_timeup = 128; // workflow_timeup
 }
 
 message ConversationMeta {
@@ -6810,8 +6811,8 @@ enum E {
 }
 
 message WorkflowAction {
-	string account_id = 2;
-	string workflow_id = 3;
+	// string account_id = 2;
+	// string workflow_id = 3;
 	string id = 4;
 	string name = 5;
 	string next_action_id = 6;
@@ -6831,7 +6832,7 @@ message WorkflowAction {
 	ActionSendChatTranscript send_chat_transcript = 36;
 	ActionUpdateUserSegments update_user_segments = 37;
 
-	ActionWait wait = 38;
+	repeated ActionWaitBranch wait_branches = 38;
 
 	ActionBranching branching = 39;
 	ActionPercentageSplit percentage_split = 40;
@@ -6839,19 +6840,13 @@ message WorkflowAction {
 }
 
 message ActionPercentageSplit {
-	repeated string paths = 3;
+	repeated string action_ids = 3;
 	repeated int64 percentages = 4; // 1234 -> 12.34%
 }
 
 message ActionWaitBranch {
-	string type = 9; // date, max_time, event (segment, message), attribute
-
+	string wait_for = 3; // second, date, event (segment, message), attribute
 	string ui_type = 4; // message
-
-	int64 max_time_sec = 5;
-	string max_time_unit = 6; // for ui only, second, minute, hour, week
-
-	int64 date_sec = 7;
 
 	string event_type = 10;
 	WorkflowCondition condition =  11;
@@ -6869,30 +6864,21 @@ message ActionWaitBranch {
 	string date_op = 18; // first_of_the_day, first_of_the_month
 	string date_format = 19; // unix rfc3999
 
+	int64 sec = 21; // wait_for=sec
+	int64 date_sec = 23; // wait_for=date
 	string next_action_id = 20;
 }
 
-message ActionWait {
-	repeated ActionWaitBranch branches = 3;
-
-	int64 max_time_enabled = 4;
-	int64 max_time_sec = 5;
-	string max_time_unit = 6; // for ui only, second, minute, hour, week
-
-	int64 date_sec = 7;
-	string max_time_next_action_id = 13;
-}
-
-message CampaignBranch {
+message ActionBranchingBranch {
 	string ui_type = 2;
-	repeated string event_types = 3; // "scheduled", "user_info_updated"
+	// repeated string event_types = 3; // "scheduled", "user_info_updated"
 	UserViewCondition condition = 4;
-	string node_id = 5;
+	string next_action_id = 5;
 }
 
 message ActionBranching {
-	repeated CampaignBranch branches = 4;
-	string else_node_id = 5;
+	repeated ActionBranchingBranch branches = 4;
+	string else_action_id = 5;
 }
 
 message BouncedEmail {
@@ -7040,29 +7026,25 @@ message EmailAttachment {
 
 message WorkflowSession {
 	common.Context ctx = 1;
-	string account_id = 2;
-	string workflow_id = 3;
+	// string account_id = 2;
+	// string workflow_id = 3;
 
 	string id = 4;
 	// repeated string history = 5;
-	string action_id = 6; // current
-	string hint_next_action_id = 7;
+	string action_id = 6; // current executing
 
 	map<string, string> KV = 8;
 
 	int64 ended = 9;
 	int64 created = 10;
-	int64 waited = 11;
+	int64 last_waited = 11;
 	string exit_code = 12; // action_not_found.
 	string status = 13; // running, waiting, ended
 	int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
 	int64 term = 16;
 
-	// string obj_type = 16; get from workflow object type
 	string obj_id = 17; // for this obj
-
-	int64 num_actions = 18; // number of action executed
 }
 
 message SchedulerTask {
@@ -8301,4 +8283,12 @@ message WorkflowPulse {
 	int64 term = 7;
 	string session_id = 8;
 	string action_id = 9;
+}
+
+message WorkflowTimeup {
+	string workflow_id = 6;
+	int64 term = 7;
+	string session_id = 8;
+	string action_id = 9;
+	int64 timeup_sec = 10;
 }
