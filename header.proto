@@ -712,6 +712,8 @@ message Event {
 	By by = 50;
 	Touchpoint touchpoint = 52;
 	Data data = 20;
+	Data old = 53;
+	Data ref = 54;
 }
 
 message Data {
@@ -6860,7 +6862,7 @@ message ActionWaitBranch {
 	// {delta_sec: 300, attribute_path: order.fields[key=checkin]
 	int64 delta_sec = 15; // 86400
 	string delta_unit = 16; // for ui only
-	int64 attribute = 17;
+	string attribute = 17;
 	string date_op = 18; // first_of_the_day, first_of_the_month
 	string date_format = 19; // unix rfc3999
 
@@ -7370,7 +7372,7 @@ message Workflow {
 
 	repeated WorkflowTrigger triggers = 7; // or
 	WorkflowCondition condition = 8;
-	repeated WorkflowAction actions = 9;
+	map<string,WorkflowAction> actions = 9;
 
 	string start_action_id = 10;
 
@@ -7398,32 +7400,6 @@ message WorkflowLog {
 	string user_id = 13;
 	string object_id = 14;
 	map<string,string> data = 15;
-}
-
-message AutomationEvent {
-	common.Context ctx = 1;
-	string user_id = 2;
-	string id = 3;
-	string account_id = 4;
-	// string original_user_id = 5; // added when merge
-	int64 created = 8;
-	int64 updated = 10;
-	string type = 9;
-	string session_id = 12; // extra id for many purpose (idempotency key)
-	By by = 50;
-	Touchpoint touchpoint = 52;
-	Data data = 20;
-	Data old_data = 21;
-	string object = 22;
-
-	Conversation conversation = 23;
-	Conversation old_conversation = 24;
-	Order order = 25;
-	Order old_order = 26;
-	User user = 27;
-	User old_user = 28;
-	Ticket ticket = 29;
-	Ticket old_ticket = 30;
 }
 
 message CreateAccountRequest {
