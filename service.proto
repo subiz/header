@@ -53,12 +53,8 @@ service NumberRegistry {
 	rpc Uncompact(Number) returns (String);
 	rpc CompactM(StrNumM) returns (StrNumM);
 
-	// rpc Shorten(String) returns (Number);
-
 	rpc ShortenPayment(String) returns (String);
 	rpc LookupPayment(String) returns (String);
-
-	rpc Lookup(Number) returns (String);
 
 	rpc NewID2(header.Id) returns (header.Id);
 }
@@ -109,15 +105,11 @@ service AccountMgr {
 	rpc DeleteAgent(Id) returns (account.Agent);
 	rpc DeleteAccount(Id) returns (account.Account);
 	rpc SubizUpdateAccount(account.Account) returns (account.Account);
-	// rpc RequestChangeEmail(account.Agent) returns (Empty);// require password
-	// rpc ConfirmChangeEmail(account.Token) returns (account.Agent);
-	// rpc AcceptInvitation(NewPassword) returns (account.Agent);
-	// rpc GetInvitation(account.Token) returns (account.Agent);
 
 	rpc CreateAgent(account.Agent) returns (account.Agent); // allow to call multiple time
 	rpc GetAgent(Id) returns (account.Agent);
 	rpc LookupAgentById(Id) returns (account.Agent);
-	// rpc ConfirmAccount(account.Token) returns (account.Account);
+
 	rpc GetAccount(Id) returns (account.Account);
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(CreateAccountRequest) returns (account.Account);
