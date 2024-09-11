@@ -2340,8 +2340,8 @@ message ActionSendMessage {
 	string channel = 3;
 	string channel_source = 4;
 	repeated Message messages = 5;
-	string conversation_id = 6; // template
-	string tos = 7; // template
+	string touchpoint_id = 6; // template
+	repeated string tos = 7; // template
 }
 
 message ActionAskQuestion {
