@@ -7564,12 +7564,12 @@ message Ticket {
 	int64 first_response_due = 76; // 0 -> dont use // sec
 	int64 every_response_due = 77; // sec 20'
 	int64 resolution_due = 78; // sec 1 ngay
-	int64 peoredic_update_due = 79;
+	int64 periodic_update_due = 79;
 
 	// int64 first_response_sla_violated = 88;
 	// int64 num_every_response_sla_violated = 89;
 	// int64 resolution_sla_violated = 90;
-	// int64 num_peoredic_update_sla_violated = 95;
+	// int64 num_periodic_update_sla_violated = 95;
 
 	// repeated string tags = 79;
 	int64 created = 80;
@@ -7594,19 +7594,19 @@ message Ticket {
 	int64 user_first_response_at = 98;
 	int64 user_last_response_at = 99;
 	map<string,ConversationMember> memberM = 100; //just for compacted ticket
-	string peoredic_update_enable = 101; // on/off
-	string every_response_enable = 102; // on/off
+	// string periodic_update_enable = 101; // on/off
+	// string every_response_enable = 102; // on/off
 	repeated ReceiptMember read_receipts = 104;
 
 	int64 last_high_risk_first_response_due = 105;
 	int64 last_high_risk_every_response_due = 106;
 	int64 last_high_risk_resolution_due = 107;
-	int64 last_high_risk_peoredic_update_due = 108;
+	int64 last_high_risk_periodic_update_due = 108;
 
-	string first_response_sla_state = 109;   // violated, done, not_apply, in_process
+	string first_response_sla_state = 109;   // violated, done, not_apply, in_process, wait
 	string every_response_sla_state = 110;
 	string resolution_sla_state = 111;
-	string peoredic_update_sla_state = 112; 
+	string periodic_update_sla_state = 112; 
 }
 
 message ReceiptMember{
@@ -7635,7 +7635,7 @@ message SLAViolation {
 	string sla_policy = 5;
 	string priority = 6;
 
-	string target = 7; // first_response_sec, every_response_sec, resolution_sec, peoredic_update_sec = 79; = 8;
+	string target = 7; // first_response_sec, every_response_sec, resolution_sec, periodic_update_sec = 79; = 8;
 	int64 required_sec = 8;
 	int64 actual_sec = 9;
 	int64 actual_at = 10;
@@ -7808,7 +7808,7 @@ message SLATarget {
 	int64 every_response_sec = 7;
 	int64 resolution_sec = 8;
 	bool escalation = 9;
-	int64 peoredic_update_sec = 10;
+	int64 periodic_update_sec = 10;
 }
 
 message Article {
