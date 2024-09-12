@@ -7616,6 +7616,7 @@ message ReceiptMember{
 	int64 last_mentioned = 4; // ms
 	int64 read_at = 5; // ticket
 	string is_subscribed = 6; // off, ""
+	string last_mentioned_event_id = 7; // for tracking, list important ev of agent
 }
 
 message SLAViolations {
