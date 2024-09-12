@@ -439,6 +439,7 @@ service TicketMgr {
 	rpc SendTicketEvent(header.Event) returns (header.Event);
 
 	rpc ListTicketEvents(header.ListConversationEventsRequest) returns (header.Events);
+	rpc ListImportantTicketEvents(header.Id) returns (header.Events);
 
 	rpc UpdateTicketTypeMember(ResourceGroupMember) returns (ResourceGroupMember);
 	rpc RemoveTicketTypeMember(ResourceGroupMember) returns (header.Empty);
