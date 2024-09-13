@@ -1912,6 +1912,21 @@ message TagRequest {
 	string ticket_number = 7;  // SBZ-1234
 }
 
+message ListWorkflowRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+
+	string status = 4;
+}
+
+message WorkflowSessionId {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	string session_id = 4;
+}
+
 message AssignRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7041,7 +7056,7 @@ message WorkflowSession {
 	int64 created = 10;
 	int64 last_waited = 11;
 	string exit_code = 12; // action_not_found.
-	string status = 13; // running, waiting, ended
+	string status = 13; // creating, running, waiting, ended, paused
 	int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
 	int64 term = 16;
@@ -7606,7 +7621,7 @@ message Ticket {
 	string first_response_sla_state = 109;   // violated, done, not_apply, in_process, wait
 	string every_response_sla_state = 110;
 	string resolution_sla_state = 111;
-	string periodic_update_sla_state = 112; 
+	string periodic_update_sla_state = 112;
 }
 
 message ReceiptMember{
@@ -8102,6 +8117,7 @@ message ProfileEmailUsage {
 	common.Context ctx = 1;
 	bool email_used = 2;
 	bool first_login = 3;
+	string fullname = 4;
 }
 
 message InviteRequest {

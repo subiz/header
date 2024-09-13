@@ -303,9 +303,14 @@ service WorkflowMgr {
 	rpc DeleteWorkflow(Id) returns (header.Response);
 	rpc ReadWorkflow(Id) returns (header.Response);
 
-	rpc ListWorkflowLog(WorkflowLogRequest) returns (Response);
-	// rpc ManuallyPauseAutomation() return (Response); // for an user or conversation
-	// rpc ManuallyResumeAutomation() return (Response); // for user
+	rpc ListWorkflowAuditLog(Id) returns (Response);
+	rpc PauseWorkflowSession(WorkflowSessionId) returns (Response); // for an user or conversation
+	rpc ResumeWorkflowSession(WorkflowSessionId) returns (Response); // for user
+
+	rpc GetWorkflowSession(Id) returns (header.Response);
+	rpc ListWorkflowSessions(ListWorkflowRequest) returns (header.Response);
+	rpc ListWorkflowSessionLogs(ListWorkflowRequest) returns (header.Response);
+
 }
 
 service ConversationMgr {
