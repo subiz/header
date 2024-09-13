@@ -7298,6 +7298,7 @@ message ConvoReportRequest {
 	string anchor = 9;
 	int32 limit = 10;
 	bool is_include_count_before = 11;
+	string first_replied_duration_of = 12;
 }
 
 message ConvoReportResponse {
