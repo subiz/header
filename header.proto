@@ -8304,7 +8304,7 @@ message AndroidNotificationRequest {
 	string idempotency_key = 6;
 
 	repeated AndroidNotification android_notifications = 10;
-	AndroidDevice device = 11;
+	AndroidDevice android_device = 11;
 }
 
 message AndroidNotification {
@@ -8316,7 +8316,6 @@ message AndroidNotification {
 	int64 created = 8; // in db
 	int64 delivered = 9;
 	string channel = 10;
-	string visibility = 11;
 }
 
 message AndroidDevice {
@@ -8329,7 +8328,7 @@ message AndroidDevice {
 	string app_version = 10;
 	int64 battery_percentage = 11; // 80/100
 	string build_model = 12;
-	string build_product = 13;
+	string brand = 13;
 	string build_device = 14;
 	string os_version = 15;
 	string sdk_version = 16;
