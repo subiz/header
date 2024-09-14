@@ -8292,3 +8292,31 @@ message WorkflowTimeup {
 	string action_id = 9;
 	int64 timeup_sec = 10;
 }
+
+message AndroidNotifications {
+	string device_id = 3;
+	string auth_token = 4;
+	repeated AndroidNotification android_notifications = 5;
+}
+
+message AndroidNotification {
+	string device_id = 3;
+	string id = 4;
+	string package_name = 5;
+	string title = 6;
+	string text = 7;
+	int64 created = 8;
+}
+
+message AndroidDevice {
+	string id = 3;
+	string name = 4;
+	string auth_token = 5;
+	string status = 6;
+	int64 last_ping = 8;
+	string last_ping_ip = 9;
+	int64 battery_percentage = 10; // 80/100
+	string model = 11;
+	int64 created = 12;
+	int64 disabled = 13;
+}

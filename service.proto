@@ -844,3 +844,8 @@ service KB {
 	rpc GetArticleCategory(Id) returns (header.ArticleCategory);
 	rpc ListArticleCategories(Id) returns (Response);
 }
+
+service AndroidNotificationMgr {
+	rpc PushNotifications(AndroidNotifications) returns (Response);
+	rpc PingDevice(AndroidDevice) returns (Response);
+}
