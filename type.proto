@@ -307,6 +307,9 @@ enum RealtimeType {
 	workflow_deleted = 301; // workflow
 	workflow_pulsed = 302; // workflow_pulse
 	workflow_timeup = 303; // workflow_pulse
+
+	bank_account_updated = 304;
+	bank_account_deleted = 305;
 }
 
 message TextTransform {

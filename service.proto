@@ -203,6 +203,13 @@ service AccountMgr {
 	rpc OnStripeEvent(header.StripeWebhookEvent) returns (header.Empty);
 	rpc LookupStripePaymentMethod(header.Id) returns (header.Response);
 	rpc DiffSubscription(payment.DiffSubRequest) returns (payment.Invoice);
+
+	rpc AddBankAccount(header.BankAccount) returns (Response);
+	rpc UpdateBankAccount(header.BankAccount) returns (Response);
+	rpc DeleteBankAccount(header.BankAccount) returns (Response);
+	rpc ListBankAccounts(header.Id) returns (Response);
+
+	rpc GenerateBankTransferRequest(header.BankTransferRequest) returns (Response);
 }
 
 // user services

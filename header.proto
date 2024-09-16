@@ -812,6 +812,7 @@ message Data {
 	SLAViolation violation = 126;
 	WorkflowPulse workflow_pulse = 127; // workflow_pulsed
 	WorkflowTimeup workflow_timeup = 128; // workflow_timeup
+	BankAccount bank_account = 129;
 }
 
 message ConversationMeta {
@@ -6989,6 +6990,9 @@ message Response {
 	repeated SubizPaymentMethod subiz_payment_methods = 144;
 
 	ProfileEmailUsage profile_email_usage = 145;
+	BankAccount bank_account = 146;
+	repeated BankAccount bank_accounts = 147;
+	BankTransferRequest bank_transfer_request = 148;
 }
 
 message ZaloCallConsent {
@@ -8334,4 +8338,44 @@ message AndroidDevice {
 	string sdk_version = 16;
 	int64 created = 17;
 	int64 disabled = 18;
+}
+
+message BankAccount {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string bank_bin = 3;
+	string account_number = 4;
+	string account_name = 5;
+
+	int64 verified = 7;
+	int64 fpv_verified_amount = 10;
+	string verified_note = 11;
+
+	int64 last_transfered = 12;
+	int64 last_transfer_amount = 13;
+
+	int64 disabled = 14;
+}
+
+message BankTransferRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string code = 3;
+	string agent_id = 4;
+
+	string bank_bin = 5;
+	string amount = 6;
+	string country_code = 7;
+	bool one_time = 8;
+
+	string extra_note = 9;
+	string internal_note = 10;
+
+	int64 created = 12;
+
+	string conversation_id = 13;
+	string user_id = 14;
+	string order_ids = 15;
+	bool gen_qr_code = 16;
+	string qr_code = 17;
 }
