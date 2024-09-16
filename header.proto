@@ -8355,6 +8355,13 @@ message BankAccount {
 	int64 last_transfer_amount = 13;
 
 	int64 disabled = 14;
+	string disabled_by = 15;
+
+	int64 created = 16;
+	string created_by = 18;
+
+	int64 updated = 19;
+	string updated_by = 20;
 }
 
 message BankTransferRequest {
@@ -8364,18 +8371,20 @@ message BankTransferRequest {
 	string agent_id = 4;
 
 	string bank_bin = 5;
-	string amount = 6;
-	string country_code = 7;
+	int64 fpv_amount = 6;
+	string country_code = 7; // VN
 	bool one_time = 8;
+	string currency = 9; // VND, USD
+	string account_number = 10;
+	string extra_note = 11;
+	string internal_note = 12;
 
-	string extra_note = 9;
-	string internal_note = 10;
+	int64 created = 13;
 
-	int64 created = 12;
-
-	string conversation_id = 13;
-	string user_id = 14;
-	string order_ids = 15;
-	bool gen_qr_code = 16;
-	string qr_code = 17;
+	string conversation_id = 14;
+	string user_id = 15;
+	repeated string order_ids = 16;
+	bool gen_viet_qr_code = 18;
+	string viet_qr_image = 19;
+	string zalo_bank_transfer_text = 20;
 }
