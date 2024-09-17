@@ -7320,8 +7320,21 @@ message ConvoReportEntry {
 }
 
 message WorkflowTrigger {
+	// user_wait_for_reply: Khách đang đợi phản hồi sau X giây
+	// agent_wait_for_reply: Agent đợi phản hồi sau X giây
+	// still_unchanged_ticket_state: Ticket không thay đổi trạng thái sau X giây
+	// still_unassigned_ticket: Ticket không được asign sau X giây
+	// still_unchanged_ticket_label
+	// before_ticket_sla_breached
+	// before_ticket_due_date
+	// after_ticket_sla_breached
+	// after_ticket_due_date
+	// still_unchanged_user_label
+	// still_opened_conversation
 	string ui_id = 3;
 	string id = 4;
+
+	int64 ui_wait_sec = 5;
 
 	repeated string events = 10; // ticket_updated, ticket_created
 	string object_id = 13;
@@ -7394,10 +7407,14 @@ message Workflow {
 	string description = 6;
 
 	repeated WorkflowTrigger triggers = 7; // or
+	repeated WorkflowTrigger computed_triggers = 27; // or
+
 	WorkflowCondition condition = 8;
 	map<string,WorkflowAction> actions = 9;
+	map<string,WorkflowAction> computed_actions = 29;
 
 	string start_action_id = 10;
+	string computed_start_action_id = 30;
 
 	string updated_by = 12;
 	int64 updated = 13;
