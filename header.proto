@@ -5302,7 +5302,7 @@ message KV {
 	repeated KV kvs = 6;
 	Block value_block  = 7;
 	repeated Block value_blocks  = 8;
-	string value_type = 9; //block, block, blocks
+	string value_type = 9; //static, block, blocks
 }
 
 message ProductCategories {
@@ -7335,6 +7335,7 @@ message WorkflowTrigger {
 	string id = 4;
 
 	int64 ui_wait_sec = 5;
+	string ui_sla_target = 6;
 
 	repeated string events = 10; // ticket_updated, ticket_created
 	string object_id = 13;
