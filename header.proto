@@ -5300,7 +5300,7 @@ message KV {
 	int64 key_id = 4;
 	int64 value_id = 5;
 	repeated KV kvs = 6;
-	Block value_block = 7;
+	bool is_query = 7;
 }
 
 message ProductCategories {
