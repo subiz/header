@@ -141,8 +141,10 @@ enum RealtimeType {
 
 	shipping_address_updated = 142;
 
-	order_payment_made = 145; // data.bill
-	order_payment_deleted = 146; // data.bill
+	order_payment_made = 145; // data.bill deprecated
+	order_payment_deleted = 146; // data.bill // deprecated
+
+	payment_deleted = 143; // data.bill like order payment _deleted
 
 	purchased = 144; // data.bill
 	purchase_canceled = 148; // data.bill
@@ -310,6 +312,12 @@ enum RealtimeType {
 
 	bank_account_updated = 304;
 	bank_account_deleted = 305;
+
+	segment_joined = 306;
+	segment_left = 307;
+
+	label_added = 309;
+	label_removed = 310; //
 }
 
 message TextTransform {
