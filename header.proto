@@ -2268,7 +2268,7 @@ message BotAction {
 	// first action require trigger
 	repeated NextBotAction nexts = 8;
 
-	string type = 9; // send_email, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state, send_message
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, sleep, send_webhook, create_task, update_order_state, send_message
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -2285,6 +2285,11 @@ message BotAction {
 	ActionSendChatTranscript send_chat_transcript = 36;
 	ActionUpdateUserSegments update_user_segments = 37;
 	ActionRotateAgentInRule rotate_agent_in_rule = 38;
+	ActionSendZns send_sns = 39;
+}
+
+message ActionSendZns {
+	ZnsRequest request = 1;
 }
 
 message ActionRotateAgentInRule {
