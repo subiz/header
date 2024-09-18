@@ -2285,11 +2285,6 @@ message BotAction {
 	ActionSendChatTranscript send_chat_transcript = 36;
 	ActionUpdateUserSegments update_user_segments = 37;
 	ActionRotateAgentInRule rotate_agent_in_rule = 38;
-	ActionSendZns send_sns = 39;
-}
-
-message ActionSendZns {
-	ZnsRequest request = 1;
 }
 
 message ActionRotateAgentInRule {
@@ -6842,7 +6837,7 @@ message WorkflowAction {
 	string id = 4;
 	string name = 5;
 	string next_action_id = 6;
-	string type = 9; // send_email, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message, goal
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message, goal
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6863,6 +6858,11 @@ message WorkflowAction {
 	ActionBranching branching = 39;
 	ActionPercentageSplit percentage_split = 40;
 	ActionSendMessage send_message = 41;
+	ActionSendZns send_zns = 42;
+}
+
+message ActionSendZns {
+	ZnsRequest request = 1;
 }
 
 message ActionPercentageSplit {
