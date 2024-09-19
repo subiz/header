@@ -4615,6 +4615,7 @@ message Bill {
 	string created_by = 6;
 	string created_by_type = 10;
 	int64 created = 7;
+	BankTransferRequest bank_transfer_request = 9;
 
 	string method = 8; // manually
 	float amount = 12;
@@ -7980,6 +7981,8 @@ message BankTransferRequest {
 	int64 created = 13;
 
 	string conversation_id = 14;
+	Touchpoint touchpoint = 21;
+
 	string user_id = 15;
 	repeated string order_ids = 16;
 	bool gen_viet_qr_code = 18;
