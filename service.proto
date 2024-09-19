@@ -7,6 +7,7 @@ import "payment.proto";
 import "noti5.proto";
 import "account.proto";
 import "header.proto";
+import "request.proto";
 import "common.proto";
 import "zalokon.proto";
 
@@ -311,7 +312,7 @@ service WorkflowMgr {
 	rpc GetWorkflow(Workflow) returns (Response); // account_id, id, version=0 -> latest
 
 	rpc ListWorkflowVersions(Id) returns (Response); // workflows
-	rpc StartWorkflowSesssion(WorkflowSession) returns (Response); // session
+	rpc StartWorkflowSesssion(StartWorkflowSessionRequest) returns (Response); // workflow_session
 
 	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
 	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);

@@ -1,0 +1,509 @@
+syntax = "proto3";
+
+package header;
+
+option go_package = "github.com/subiz/header";
+
+import "common.proto";
+import "account.proto";
+
+message UserReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	// string credit_id = 3;
+	int64 from_time = 4; // ms
+	string unit = 5; // hour, day, month
+	int64 limit = 8; // default: 24, 30, 24
+	repeated string metrics = 9; // category.cactegory_id all.
+	// all.*
+	// graph:all.-  exact
+	// channel.facebook graph of user channel facebook
+	// channel.facebook graph of user channel facebook
+	// countexact:channel_source.zalo
+	// count:channel_source.zalo
+	//    zalo.oa1: 20
+	//    zalo.oa2: 21
+	// graph:channel.facebook
+	// count:ref_source
+}
+
+message ConversationMetricsRequest {
+	string account_id = 2;
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	int64 latest_sent_hour_from = 16;
+	int64 latest_sent_hour_to = 17;
+	repeated string channels = 5;
+	repeated string channel_touchpoints = 6;
+	repeated int32 ratings = 8;
+	repeated string tags = 7; // and
+	repeated string agent_ids = 9; // and
+	repeated string agent_sent_ids = 14; // and
+	int64 first_replied_duration_gt = 15;
+	int64 send_duration_sum_gt = 21;
+	int64 first_replied_duration_lte = 22;
+	string first_replied_duration_of = 23;
+	repeated string not_channels = 18;
+	account.BusinessHours business_hours = 19;
+	account.BusinessHours not_business_hours = 20;
+	int32 tz = 10;
+	string dim = 11;
+	string anchor = 12;
+	int32 limit = 13;
+}
+
+message AgentMetricsRequest {
+	string account_id = 2;
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	repeated string agent_ids = 5;
+	repeated string channels = 6;
+	repeated string not_channels = 7;
+	account.BusinessHours business_hours = 8;
+	account.BusinessHours not_business_hours = 9;
+	int32 tz = 10;
+	string dim = 11;
+	repeated string tags = 12;
+}
+
+message CallMetricsRequest {
+	string account_id = 2;
+	int64 created_hour_from = 3;
+	int64 created_hour_to = 4;
+	repeated string agent_ids = 5;
+	repeated string phones = 6;
+	string direction = 7;
+	repeated string tags = 8;
+	account.BusinessHours business_hours = 11;
+	account.BusinessHours not_business_hours = 12;
+	int32 tz = 9;
+	string dim = 10;
+
+	int64 call_duration_sum_gt = 15;
+	string anchor = 13;
+	int32 limit = 14;
+}
+
+message ListUserEventsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3; // could be empty, but type must set
+	string query = 4;
+	string anchor = 5;
+	int32 limit = 6; // hour
+
+	string category = 9;
+	int32 limit_hour = 10;
+	int64 end_hour = 11;
+	string type = 12;
+}
+
+message ListEventTypeRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 from_hour = 3;
+	int64 to_hour = 4;
+	string category = 5;
+	string keyword = 6;
+}
+
+message PresencesRequest {
+	common.Context ctx = 1;
+	repeated string user_ids = 2;
+	string account_id = 3;
+}
+
+message ListNotiRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	int32 limit = 4;
+	string anchor = 5;
+	string category = 6; // comma separated
+}
+
+message UserRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string object_id = 4;
+
+	string channel = 5;
+	string channel_source = 6;
+	string profile_id = 7;
+
+	string label_source_channel = 9;
+	string label_source_channel_id = 10;
+	string label_source_id = 11;
+	string label_name = 12;
+}
+
+message ListNotesRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+}
+
+message DeleteNoteRequest {
+	string account_id = 2;
+	string target_id = 3;
+	string id = 4;
+}
+
+message UpdateWorkflowSessionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	string session_id = 4;
+	string command = 5; // pause, stop, retry, resume
+}
+
+message ListWorkflowLogRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	string session_id = 4;
+	string object_id = 5;
+
+	int64 limit = 6;
+	string anchor = 7;
+}
+
+message BotsRequest {
+	common.Context ctx = 1;
+	string query = 2; // (bot category: orders)
+	string anchor = 3;
+	string account_id = 4;
+}
+
+message ReportBotRequest {
+	string account_id = 2;
+	string bot_id = 3;
+	int64 day_from = 4;
+	int64 day_to = 5;
+}
+
+message ActionrunMetricsRequest {
+	string dim = 2;
+	int32 tz = 3;
+	string account_id = 4;
+	string bot_id = 5;
+	int64 created_hour_from = 6;
+	int64 created_hour_to = 7;
+}
+
+message BotrunMetricsRequest {
+	string dim = 2;
+	int32 tz = 3;
+	string account_id = 4;
+	string bot_id = 5;
+	int64 created_hour_from = 6;
+	int64 created_hour_to = 7;
+}
+
+message ListObjectsRequest {
+	string account_id = 2;
+	string bot_id = 3;
+	int64 created_hour_from = 8;
+	int64 created_hour_to = 9;
+	string anchor = 6;
+	int32 limit = 7;
+
+	int64 day_from = 4;
+	int64 day_to = 5;
+}
+
+message ConversionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string campaign_id = 3;
+	string anchor = 4;
+	int32 limit = 5;
+
+	int32 from_hour = 7;
+	int32 to_hour = 8;
+	string web_plugin_id = 9;
+}
+
+message ReportCampaignRequest {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string campaign_id = 4;
+	int32 from_hour = 5;
+	int32 to_hour = 6;
+	string range = 7;
+	enum Range {
+		hour = 0; // default
+		day = 1;
+	}
+	int32 tz = 8;
+}
+
+message ReportWebPluginRequest {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string web_plugin_id = 4;
+	int32 from_hour = 5;
+	int32 to_hour = 6;
+	string range = 7;
+	enum Range {
+		hour = 0; // default
+		day = 1;
+	}
+	int32 tz = 8;
+}
+
+message WebPluginConversionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string web_plugin_id = 3;
+	int64 unix_day_from = 5;
+	int64 unix_day_to = 6;
+	string anchor = 8;
+	int32 limit = 9;
+}
+
+message SearchLocationsRequest {
+	common.Context ctx = 1;
+	string query = 2;
+	int64 limit = 4;
+}
+
+message RecentIndexDeliveryRequest {
+	common.Context ctx = 1;
+	string webhook_id = 2;
+	int32 limit = 3;
+}
+
+message DeliveryRequest {
+	common.Context ctx = 1;
+	string webhook_id = 2;
+	int32 id = 3;
+}
+
+message SearchRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string query = 4;
+
+	int32 limit = 5;
+	string agent_id = 8; // search my user of agent
+	repeated string labels = 9; // or
+	repeated string agents = 10; // or
+
+	bool is_private = 11; // search in private convo only
+	bool only_header = 13;
+	string conversation_id = 14; // filter by conversation
+
+	string anchor = 15;
+	repeated string exclude_conversations = 16;
+}
+
+message AvailibilityReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string from = 5; // try date --rfc-3339=seconds date in rfc 333
+	// seconds standard. E.g: 2019-03-07T10:42:01+07:00
+	string range = 8;
+	enum Range {
+		hour = 0;
+		day = 1;
+		month = 2;
+	}
+	int32 number_of_points = 13;
+}
+
+message FileUrlDownloadRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string url = 3;
+
+	int64 max_size = 4;
+	string type_prefix = 5;
+	int64 timeout = 6; // ms
+	string user_agent = 7; // control client user-agent while download
+
+	string type_hint = 8; // must from trusted source
+	string extension = 9; // xlsx, jped
+
+	int64 max_height = 10;
+	int64 max_width = 11;
+
+	string category = 12;
+}
+
+message OrderMetricsRequest {
+	string dim = 2;
+	int32 tz = 3;
+	string account_id = 10;
+	int64 issue_hour_from = 11;
+	int64 issue_hour_to = 12;
+	int64 paid_hour_from = 13;
+	int64 paid_hour_to = 14;
+	repeated string channels = 15;
+	repeated string not_channels = 16;
+	repeated string channel_touchpoints = 17;
+	repeated string product_ids = 18; // and
+	repeated string salesperson = 19; // and, agent ids
+	repeated string pos_ids = 20;
+	account.BusinessHours business_hours = 23;
+	account.BusinessHours not_business_hours = 24;
+	int64 created_hour_from = 25;
+	int64 created_hour_to = 26;
+}
+
+message OrdersRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string user_id = 3; // list order by user
+	string status = 4; // list order by status
+
+	int64 created_hour_from = 5;
+	int64 created_hour_to = 6;
+	int64 due_date_hour_from = 20;
+	int64 due_date_hour_to = 21;
+	int64 issue_hour_from = 22;
+	int64 issue_hour_to = 23;
+	bool include_deleted = 7;
+
+	int32 limit = 8;
+	string anchor = 9;
+	int32 offset = 18;
+	string dim = 17;
+	string order_by = 19;
+
+	repeated string ids = 10;
+	repeated int64 modifieds = 11;
+	string query = 12;
+	bool is_draft = 13;
+	string payment_status = 14;
+	repeated string pos_ids = 15;
+	repeated string salesperson = 16; // agent ids
+	repeated string statuses = 24;
+	repeated string not_statuses = 25;
+	repeated string shipping_statuses = 26;
+	repeated string not_shipping_statuses = 27;
+	repeated string tags = 33; // and
+
+	string pipeline = 30;
+	string pipeline_stage = 31;
+	string assigned_agent_id = 32;
+}
+
+message CountOrdersRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated OrdersRequest queries = 4;
+}
+
+message WorkflowReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	int64 from_hour = 6;
+	int64 to_hour = 7;
+
+	// session_started, goal_reached, session_error, any_action, message_sent, message_sent_facebook, message_sent_email, message_sent_zns, assign
+	repeated string action_types = 8;
+}
+
+message AuthorizeShopeeRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string code = 3;
+	int64 shop_id = 4;
+	string main_account_id = 5;
+}
+
+message ShopeeSyncProductRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 shop_id = 3;
+	int64 offset = 4;
+	int64 page_size = 5;
+	string status = 6;
+
+	string mode = 8; // override, append only
+}
+
+message AddressAutocompleteRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string keyword = 3;
+	string language = 4;
+	repeated string countries = 5;
+}
+
+message TasksRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated string associated_tickets = 4;
+	repeated string associated_users = 5;
+	repeated string associated_orders = 7;
+	repeated string associated_conversations = 9;
+
+	int64 created_hour_from = 10;
+	int64 created_hour_to = 11;
+	int64 due_date_hour_from = 12;
+	int64 due_date_hour_to = 13;
+
+	string assignee = 14;
+	int64 priority = 15;
+	string status = 16;
+
+	int32 limit = 20;
+	string anchor = 21;
+	int32 offset = 22;
+	string order_by = 30;
+
+	repeated string ids = 23;
+	repeated int64 last_modifieds = 24; // ms
+
+	string supervisor = 25; // task.supervisor = supervisor && task.assignee != supervisor
+	repeated string assignees = 26;
+	string is_pinned = 28; // yes/no
+	string watcher = 29;
+
+	bool shorten = 31; // only return pinned, watchers, title, assignee, supervisor, actived, duedate and title
+}
+
+message DocIndexRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string collection = 3;
+	string document_id = 4;
+	string part = 5;
+	string content = 6;
+
+	bool is_name = 7; // hint for better name search
+	bool is_id = 10; // hint for not indexing using tokenize
+	int64 day = 8; // unix day for doc, used to order more recent document
+	bool is_phone = 11;
+	bool is_email = 12;
+	repeated string owners = 9;
+	string primary_document_id=13;
+	int64 sec = 14; // unix sec for doc, used to order more recent document
+	string locale = 15;
+}
+
+message DocSearchRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string collection = 3;
+
+	string query = 5;
+	string anchor = 6;
+
+	int64 limit = 7;
+	repeated string include_parts = 8; // only include those parts
+	bool doc_distinct = 9; // distinct document
+	repeated string include_owners = 10;
+	int64 day_anchor = 11;
+	bool is_only_id= 12;
+	string locale = 13;
+	bool is_shorten = 14;
+}
