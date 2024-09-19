@@ -11,15 +11,6 @@ import "type.proto";
 import "noti5.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
 
-message KafkaMessage {
-	string account_id = 2;
-	string topic = 3;
-	int32 partition = 4;
-	int64 offset = 5;
-	bytes data = 6;
-	string consumer_group = 7;
-}
-
 message Empty {
 	common.Context ctx = 1;
 }

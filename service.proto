@@ -19,10 +19,6 @@ service GooglekonService {
 	rpc ListGoogleLocationSettings(Id) returns (GoogleLocationSettings);
 }
 
-service KafkaConsumer {
-	rpc Consume(KafkaMessage) returns (Empty);
-}
-
 service RateLimit {
 	rpc SyncRateLimit(RateLimitSyncRequest) returns (RateLimitSyncResponse);
 }
