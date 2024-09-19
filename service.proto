@@ -311,11 +311,11 @@ service WorkflowMgr {
 	rpc GetWorkflow(Workflow) returns (Response); // account_id, id, version=0 -> latest
 
 	rpc ListWorkflowVersions(Id) returns (Response); // workflows
-	rpc StartSesssion(WorkflowSession) returns (Response); // session
+	rpc StartWorkflowSesssion(WorkflowSession) returns (Response); // session
 
-	rpc GetWorkflowSession(Id) returns (Response);
+	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
 	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);
-	rpc ListWorkflowSessions(ListWorkflowRequest) returns (Response);
+	rpc ListWorkflowSessions(ListWorkflowSessionRequest) returns (Response);
 	rpc ListWorkflowLogs(ListWorkflowLogRequest) returns (Response); // workflow_log
 	rpc ReportWorkflow(WorkflowReportRequest) returns (Response); // workflow_counts
 }

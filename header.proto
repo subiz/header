@@ -1913,7 +1913,7 @@ message TagRequest {
 	string ticket_number = 7;  // SBZ-1234
 }
 
-message ListWorkflowRequest {
+message ListWorkflowSessionRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string workflow_id = 3;
@@ -2497,7 +2497,6 @@ message Frequently {
 	bool is_recurring = 6; // false -> once ever || true -> multiple time or one user
 }
 
-////////////////////
 message RealtimeSubscription {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6252,7 +6251,7 @@ message Campaign {
 	string description = 5;
 	string objective = 14;
 
-	string type = 6; // telesale, broadcast, triggered, workflow
+	string type = 6; // telesale, broadcast, triggered
 	int64 created = 7;
 	string created_by = 8;
 
@@ -6289,10 +6288,6 @@ message Campaign {
 	repeated string trigger_event_types = 33; // scheduled, user_info_updated
 	UserViewCondition trigger_condition = 37;
 
-	Frequently workflow_frequency = 34;
-	WorkflowGoal workflow_goal = 35;
-	WorkflowExitCondition workflow_exit_when = 36;
-
 	UsersRequest audient_request = 39; // write only when create
 
 	int64 broadcast_first_sent_at = 40;
@@ -6303,19 +6298,16 @@ message Campaign {
 
 	int64 broadcast_delivered_count = 44;
 	int64 broadcast_read_count = 45;
-
-	int64 workflow_processing_count = 47;
-	int64 workflow_processed_count = 48;
-
 	string credit_id = 49;
 	int64 state_updated_at =50; //only save time user (agent,accout) updated
-
 }
 
 message WorkflowExitCondition {
 	// or condition
 	bool goal_reached = 2;
 	bool trigger_unmatched = 3;
+
+	WorkflowCondition condition = 4;
 }
 
 message OutboundCallCampaign {
@@ -6433,18 +6425,6 @@ message OutboundCallEntry {
 	string state_updated_by = 32;
 
 	int64 done_at = 33;
-}
-
-message WorkflowGoal {
-	int64 disabled = 3;
-	string ui_type = 4; 	// 1 week of [receiving,opening,clicking] any delivery
-
-	string event_type = 5; // "scheduled", "user_info_updated"
-	UserViewCondition condition = 6;
-
-	// timming condition
-	int64 time_limit = 8;
-	string time_limit_unit = 9;
 }
 
 message MarketingMessage {
@@ -7336,6 +7316,17 @@ message ConvoReportEntry {
 	string metric = 3;
 }
 
+message WorkflowGoal {
+	int64 disabled = 3;
+	string ui_type = 4; 	// 1 week of [receiving,opening,clicking] any delivery
+
+	string event_type = 5; // "scheduled", "user_info_updated"
+	UserViewCondition condition = 6;
+
+	// timming condition
+	int64 time_limit_sec = 8;
+}
+
 message WorkflowTrigger {
 	// user_wait_for_reply: Khách đang đợi phản hồi sau X giây
 	// agent_wait_for_reply: Agent đợi phản hồi sau X giây
@@ -7428,8 +7419,10 @@ message Workflow {
 	repeated WorkflowTrigger computed_triggers = 27; // or
 
 	WorkflowCondition condition = 8;
-	map<string,WorkflowAction> actions = 9;
-	map<string,WorkflowAction> computed_actions = 29;
+	WorkflowCondition computed_condition = 11;
+
+	map<string, WorkflowAction> actions = 9;
+	map<string, WorkflowAction> computed_actions = 29;
 
 	string start_action_id = 10;
 	string computed_start_action_id = 30;
@@ -7444,6 +7437,12 @@ message Workflow {
 	int64 deleted = 20;
 
 	int64 version = 17;
+
+	string recurring_mode = 18; // empty = one_time, debounce, throttle
+	int64 recurring_interval_sec = 28;
+
+	WorkflowGoal goal = 19;
+	WorkflowExitCondition exit_when = 26;
 
 	// report
 	int64 last_action_at = 21;
