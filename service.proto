@@ -304,20 +304,20 @@ service AttributeMgr {
 }
 
 service WorkflowMgr {
-	rpc ListWorkflows(Id) returns (header.Response);
-	rpc UpdateWorkflow(Workflow) returns (header.Response);
-	rpc CreateWorkflow(Workflow) returns (header.Response);
-	rpc DeleteWorkflow(Id) returns (header.Response);
-	rpc ReadWorkflow(Id) returns (header.Response);
+	rpc ListWorkflows(Id) returns (Response);
+	rpc UpdateWorkflow(Workflow) returns (Response);
+	rpc CreateWorkflow(Workflow) returns (Response);
+	rpc DeleteWorkflow(Id) returns (Response);
+	rpc GetWorkflow(Workflow) returns (Response); // account_id, id, version=0 -> latest
 
-	rpc ListWorkflowAuditLog(Id) returns (Response);
-	rpc PauseWorkflowSession(WorkflowSessionId) returns (Response); // for an user or conversation
-	rpc ResumeWorkflowSession(WorkflowSessionId) returns (Response); // for user
+	rpc ListWorkflowVersions(Id) returns (Response); // workflows
+	rpc StartSesssion(WorkflowSession) returns (Response); // session
 
-	rpc GetWorkflowSession(Id) returns (header.Response);
-	rpc ListWorkflowSessions(ListWorkflowRequest) returns (header.Response);
-	rpc ListWorkflowSessionLogs(ListWorkflowRequest) returns (header.Response);
-
+	rpc GetWorkflowSession(Id) returns (Response);
+	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);
+	rpc ListWorkflowSessions(ListWorkflowRequest) returns (Response);
+	rpc ListWorkflowLogs(ListWorkflowLogRequest) returns (Response); // workflow_log
+	rpc ReportWorkflow(WorkflowReportRequest) returns (Response); // workflow_counts
 }
 
 service ConversationMgr {

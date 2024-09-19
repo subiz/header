@@ -156,7 +156,7 @@ enum RealtimeType {
 	order_comment_updated = 151; // data.message
 
 	order_history_updated = 152;
-	user_order_confirmed = 153;
+	order_confirmed = 153;
 
 	order_tagged = 217;
 	order_untagged = 218;
@@ -318,6 +318,10 @@ enum RealtimeType {
 
 	label_added = 309;
 	label_removed = 310; //
+
+	order_draft_updated = 311;
+	order_draft_deleted = 312;
+	order_canceled = 313;
 }
 
 message TextTransform {

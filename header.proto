@@ -1918,7 +1918,11 @@ message ListWorkflowRequest {
 	string account_id = 2;
 	string workflow_id = 3;
 
-	string status = 4;
+	string status = 4; // error
+	int64 limit = 5;
+
+	string start_hour = 6;
+	string anchor = 7; // anchor will override start_hour
 }
 
 message WorkflowSessionId {
@@ -7001,6 +7005,7 @@ message Response {
 	BankAccount bank_account = 146;
 	repeated BankAccount bank_accounts = 147;
 	BankTransferRequest bank_transfer_request = 148;
+	repeated WorkflowCount workflow_counts = 149;
 }
 
 message ZaloCallConsent {
@@ -7068,12 +7073,16 @@ message WorkflowSession {
 	int64 created = 10;
 	int64 last_waited = 11;
 	string exit_code = 12; // action_not_found.
-	string status = 13; // creating, running, waiting, ended, paused
+	string status = 13; // creating, running, waiting, ended, paused, error
 	int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
 	int64 term = 16;
 
 	string obj_id = 17; // for this obj
+	int64 version = 18;
+
+	int64 last_error_at = 19;
+	string error_code = 20; //
 }
 
 message SchedulerTask {
@@ -7429,23 +7438,43 @@ message Workflow {
 	int64 created = 15; // ms
 
 	int64 disabled = 16;
-
-	int64 last_run_at = 18;
-	int64 total_run_time = 19;
 	int64 deleted = 20;
+
+	// report
+	int64 last_action_at = 21;
+	int64 last_session_id = 22;
+	int64 num_running_sessions = 23;
+	int64 num_unresolve_error_sessions = 24;
+	int64 total_sessions = 25;
 }
 
 message WorkflowLog {
-	string account_id = 2;
-	string workflow_id = 3;
+	common.Context ctx = 1;
 	string id = 5;
-	int64 created = 10;
-	string level = 11;
-	string log_type = 12;
+	string session_id = 6;
+	int64 created = 7;
+	string type = 8; // start_session, message_sent
+	int64 workflow_version = 9;
 
+	string object_id = 10;
+
+	// extra data
+	string conversation_id = 11;
+	string message_id = 12;
 	string user_id = 13;
-	string object_id = 14;
-	map<string,string> data = 15;
+	string order_id = 14;
+	string event_id = 15;
+	string log_id = 16;
+
+	map<string,string> data = 17;
+
+	string message_channel = 18;
+	string message_touchpoint = 19;
+	string message_touchpoint_id = 20;
+
+	string message_text = 21;
+
+	string message_assign_tos = 22;
 }
 
 message CreateAccountRequest {
@@ -8413,4 +8442,44 @@ message BankTransferRequest {
 	bool gen_viet_qr_code = 18;
 	string viet_qr_image = 19;
 	string zalo_bank_transfer_text = 20;
+}
+
+message WorkflowReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	int64 from_hour = 6;
+	int64 to_hour = 7;
+
+	// session_started, goal_reached, session_error, any_action, message_sent, message_sent_facebook, message_sent_email, message_sent_zns, assign
+	repeated string action_types = 8;
+}
+
+message WorkflowCount {
+	// string account_id = 4;
+	// string workflow_id = 5;
+
+  string range = 6;
+	string action_type = 7;
+	repeated int64 datapoints = 8;
+	repeated string labels = 9;
+}
+
+message UpdateWorkflowSessionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	string session_id = 4;
+	string command = 5; // pause, stop, retry, resume
+}
+
+message ListWorkflowLogRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	string session_id = 4;
+	string object_id = 5;
+
+	int64 limit = 6;
+	string anchor = 7;
 }

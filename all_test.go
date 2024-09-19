@@ -13,6 +13,7 @@ import (
 
 	pb "github.com/subiz/header/account"
 	cpb "github.com/subiz/header/common"
+	ppb "github.com/subiz/header/payment"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -204,8 +205,16 @@ func TestPartition(t *testing.T) {
 	fmt.Println(shardNumber)
 }
 
+func TestPack(t *testing.T) {
+	ev := &ppb.Invoice{}
+	json.Unmarshal([]byte(`{"account_id":"acsbkyfhmwxsmmamrfnj","id":"icsclchaeaopzwlobggxc","due_date":0,"state":"paid","created":1726627068975,"items":[{"quantity":1,"price":182.87546,"data":{"plan":{"agent_count":100,"billing_cycle_month":12,"old_plan":"standard","new_plan":"standard_unlimited_agent","save_percentage":1,"started":1726627068975,"day_left":79,"old_agent_count":1,"fpv_save_percentage":1000000,"ended":1758163068000}},"total_price":182.87546,"fpv_price_vnd":3994000031744,"fpv_total_price_vnd":3994000031744,"fpv_discount_vnd":0,"fpv_price_usd":182875456,"fpv_total_price_usd":182875456,"fpv_discount_usd":0},{"quantity":1,"price":-29.665369,"data":{"reserved_plan":{"old_plan":"standard","old_agent_count":1,"old_billing_cycle_month":3,"old_started":1726627068975,"old_ended":1733468818000}},"total_price":-29.665369,"fpv_price_vnd":-647891648512,"fpv_total_price_vnd":-647891648512,"fpv_price_usd":-29665370,"fpv_total_price_usd":-29665370}],"subtotal":153.21008,"total":153.21008,"updated":1726632356893,"payment_made":153.21008,"current_sub":{"account_id":"acsbkyfhmwxsmmamrfnj","created":1722934647779,"promotion_code":"","started":1725606418165,"billing_cycle_month":3,"next_billing_cycle_month":3,"plan":"standard","next_plan":"standard","credit":0.000019073486,"limit":{},"ended":1733468818000,"churned":0,"fpv_credit_vnd":416564,"fpv_unlimited_agent_price":182875452,"fpv_next_unlimited_agent_price":182875452,"num_agents":1,"use_ticket":0,"next_num_agents":1},"currency":"USD","fpv_total_vnd":3346108147200,"fpv_payment_made_vnd":3346108147200,"fpv_subtotal_vnd":3346108252160,"fpv_subtotal_usd":153210080,"fpv_total_usd":153210080,"fpv_payment_made_usd":153210080}
+`), ev)
+	b, _ := proto.Marshal(ev)
+	fmt.Println("HEX", hex.EncodeToString(b))
+}
+
 func TestUnpack(t *testing.T) {
-	str := "0x22157373736367796c7579766b78716e7064626161617432013550b5f7e7809e326a0772756e6e696e678001018a011575737362647077756768646575736c6b7162716762"
+	str := "0x1214616373626b7966686d7778736d6d616d72666e6a1a15696373636c63686165616f707a776c6f6267677863480052047061696458aff8f897a03262713801451ee036434a452a4310641a187374616e646172645f756e6c696d697465645f6167656e74204f280c32087374616e6461726440aff8f897a0324d0000803f500160c0843d68e0c8bdd59533551ee03643588080d0e79e74608080d0e79e74680078c0ea99578001c0ea99578801006259380145ad52edc14a1e3a1c1a087374616e646172642001280340f5ada1b19c3248d094acd6b93255ad52edc158808098b592edffffff0160808098b592edffffff0178a6afedf1ffffffffff018001a6afedf1ffffffffff0175c83519438d01c835194390019dd8bb9aa032c501c8351943ca016f1a14616373626b7966686d7778736d6d616d72666e6a220028f5ada1b19c3258e3b7a1b7923278038001038a01087374616e646172649201087374616e64617264dd010000a037d20200e802d094acd6b932f802008003b4b6198803bcea9957900301980300a00301a803bcea9957e20103555344e80180ccd99cb161f00180ccd99cb16198028080e09cb161b002e0998749c802e0998749d002e0998749"
 	str = strings.TrimPrefix(str, "0x")
 
 	bs, err := hex.DecodeString(str)
@@ -213,7 +222,7 @@ func TestUnpack(t *testing.T) {
 		panic(err)
 	}
 
-	ev := &WorkflowSession{}
+	ev := &ppb.Invoice{}
 	if err := proto.Unmarshal(bs, ev); err != nil {
 		fmt.Println("ERR", err)
 	}
