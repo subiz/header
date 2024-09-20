@@ -6965,32 +6965,28 @@ message Workflow {
 
 message WorkflowLog {
 	common.Context ctx = 1;
-	string id = 5;
-	string session_id = 6;
+	string wf_id = 2;
+	string session_id = 3;
+	string  id = 4;
+	string action_type = 5; // start_session, message_sent
+    string action_id = 6;
 	int64 created = 7;
-	string type = 8; // start_session, message_sent
-	int64 workflow_version = 9;
-
-	string object_id = 10;
+	int64 workflow_version = 8;
+	string object_id = 9;
+	map<string,string> data = 10;
+	Event event = 11;
 
 	// extra data
-	string conversation_id = 11;
-	string message_id = 12;
-	string user_id = 13;
-	string order_id = 14;
-	string event_id = 15;
-	string log_id = 16;
-
-	map<string,string> data = 17;
-
-	string message_channel = 18;
-	string message_touchpoint_source = 19;
-	string message_touchpoint_id = 20;
-
-	string message_text = 21;
-
-	string message_assign_tos = 22;
-	Event event = 23;
+	string conversation_id = 12;
+	string message_id = 13;
+	string user_id = 14;
+	string order_id = 15;
+	string event_id = 16;
+	string message_channel = 17;
+	string message_touchpoint_source = 18;
+	string message_touchpoint_id = 19;
+	string message_text = 20;
+	string message_assign_tos = 21;
 }
 
 message CreateAccountRequest {
