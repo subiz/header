@@ -1210,6 +1210,8 @@ message CallInfo {
 	string isp_user_agent = 30;
 	string isp_hangup_reason = 31;
 	string isp_call_id = 33;
+
+	string webcall_id = 34;
 }
 
 message Rating {
