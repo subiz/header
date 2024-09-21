@@ -160,7 +160,7 @@ func WithErrorStack() grpc.DialOption {
 			return log.EServiceUnavailable(err, log.M{"grpc_code": "nono", "_function_name": method, "__skip_stack": "2"}) // report
 		}
 
-		ourerr := log.FromString(grpcerr.Message())
+		ourerr := log.UnmarshalError([]byte(grpcerr.Message()))
 		if ourerr != nil {
 			return log.WrapStack(ourerr, 2)
 		}
