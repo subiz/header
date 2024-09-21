@@ -6490,6 +6490,7 @@ message Response {
 	repeated BankAccount bank_accounts = 147;
 	BankTransferRequest bank_transfer_request = 148;
 	repeated WorkflowCount workflow_counts = 149;
+	repeated Integration integrations = 150;
 }
 
 message ZaloCallConsent {

@@ -103,7 +103,7 @@ service AccountMgr {
 	rpc DeleteAccount(Id) returns (account.Account);
 	rpc SubizUpdateAccount(account.Account) returns (account.Account);
 
-	rpc CreateAgent(account.Agent) returns (account.Agent); // allow to call multiple time
+	rpc CreateAgent(CreateAgentRequest) returns (account.Agent); // allow to call multiple time
 	rpc GetAgent(Id) returns (account.Agent);
 	rpc LookupAgentById(Id) returns (account.Agent);
 
@@ -354,7 +354,9 @@ service ConversationMgr {
 	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
 
 	rpc Deintegrate(Id) returns (Empty);
-	rpc ListIntegrations(Id) returns (header.Integrations);
+	rpc ListIntegrations(Id) returns (header.Integrations); // deprecated
+	rpc ListIntegrations2(Id) returns (header.Response);
+
 	rpc Integrate(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
 

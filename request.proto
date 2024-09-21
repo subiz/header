@@ -507,3 +507,24 @@ message DocSearchRequest {
 	string locale = 13;
 	bool is_shorten = 14;
 }
+
+message CreateAgentRequest {
+	common.Context ctx = 1;
+	string account_id = 3; // subiz only
+
+	string fullname = 4;
+	string email = 5; // reflect from agent profile
+	string phone = 8; // reflect form agent profile
+	string job_title = 11; // deprecated
+
+	string avatar_url = 13;
+	string avatar_url_128 = 18;
+
+	string lang = 14;
+	string timezone = 16;
+	string state = 22; // active default
+	string initial_password = 23;
+	// DashboardAgent dashboard_setting = 40;
+	repeated string scopes = 41; // owner, supervisor
+	optional int64 extension = 43; // 2343 3442
+}
