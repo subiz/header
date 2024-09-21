@@ -703,6 +703,9 @@ message ConversationMeta {
 	Touchpoint touchpoint = 10;
 	repeated string associated_conversations = 11;
 	bool is_hidden = 12;
+	Event event = 13;
+
+	repeated Conversation releated_conversations = 14;
 }
 
 message WebRTCMessage {
@@ -991,6 +994,8 @@ message ListConversationsRequest {
 
 	int64 min_actived_ms = 21;
 	int64 max_actived_ms = 22;
+
+	bool user_event_included = 23;
 }
 
 message ListConversationEventsRequest {

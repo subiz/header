@@ -402,7 +402,8 @@ service ConversationMgr {
 	rpc SaveMessage(header.Event) returns (header.Event);
 	rpc ApplyMessage(header.Event) returns (header.Event);
 
-	rpc CountAgentUnreadMessages(header.Id) returns (header.Response);
+	rpc ReadUserEvent(header.Id) returns (Response); // mark as read
+	rpc CountAgentUnreadMessages(header.Id) returns (Response);
 }
 
 service TicketMgr {
