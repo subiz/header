@@ -407,6 +407,7 @@ message WorkflowReportRequest {
 
 	// session_started, goal_reached, session_error, any_action, message_sent, message_sent_facebook, message_sent_email, message_sent_zns, assign
 	repeated string action_types = 8;
+	string unit = 9; // hour, day
 }
 
 message AuthorizeShopeeRequest {
