@@ -6898,7 +6898,7 @@ message WorkflowCondition {
 	string id = 2;
 	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	ChannelCondition channel = 5;
-
+    bool is_changed = 6;
 	string type = 7;
 
 	BoolCondition boolean = 8;
