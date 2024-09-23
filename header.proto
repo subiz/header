@@ -1773,12 +1773,11 @@ message ListWorkflowSessionRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string workflow_id = 3;
-
-	string status = 4; // error
-	int64 limit = 5;
-
-	string start_hour = 6;
-	string anchor = 7; // anchor will override start_hour
+	int64 from_hour = 4;
+	int64 to_hour = 5;
+	string status = 6; // error
+	int64 limit = 7;
+	string anchor = 8;
 }
 
 message WorkflowSessionId {
