@@ -6966,7 +6966,7 @@ message Workflow {
 
 	// report
 	int64 last_action_at = 21;
-	int64 last_session_id = 22;
+	string last_session_id = 22;
 	int64 num_active_sessions = 23;
 	int64 num_unresolve_error_sessions = 24;
 	int64 total_sessions = 25;

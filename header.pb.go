@@ -50129,11 +50129,11 @@ type Workflow struct {
 	Goal                  *WorkflowGoal              `protobuf:"bytes,19,opt,name=goal,proto3" json:"goal,omitempty"`
 	ExitWhen              *WorkflowExitCondition     `protobuf:"bytes,26,opt,name=exit_when,json=exitWhen,proto3" json:"exit_when,omitempty"`
 	// report
-	LastActionAt              int64 `protobuf:"varint,21,opt,name=last_action_at,json=lastActionAt,proto3" json:"last_action_at,omitempty"`
-	LastSessionId             int64 `protobuf:"varint,22,opt,name=last_session_id,json=lastSessionId,proto3" json:"last_session_id,omitempty"`
-	NumActiveSessions         int64 `protobuf:"varint,23,opt,name=num_active_sessions,json=numActiveSessions,proto3" json:"num_active_sessions,omitempty"`
-	NumUnresolveErrorSessions int64 `protobuf:"varint,24,opt,name=num_unresolve_error_sessions,json=numUnresolveErrorSessions,proto3" json:"num_unresolve_error_sessions,omitempty"`
-	TotalSessions             int64 `protobuf:"varint,25,opt,name=total_sessions,json=totalSessions,proto3" json:"total_sessions,omitempty"`
+	LastActionAt              int64  `protobuf:"varint,21,opt,name=last_action_at,json=lastActionAt,proto3" json:"last_action_at,omitempty"`
+	LastSessionId             string `protobuf:"bytes,22,opt,name=last_session_id,json=lastSessionId,proto3" json:"last_session_id,omitempty"`
+	NumActiveSessions         int64  `protobuf:"varint,23,opt,name=num_active_sessions,json=numActiveSessions,proto3" json:"num_active_sessions,omitempty"`
+	NumUnresolveErrorSessions int64  `protobuf:"varint,24,opt,name=num_unresolve_error_sessions,json=numUnresolveErrorSessions,proto3" json:"num_unresolve_error_sessions,omitempty"`
+	TotalSessions             int64  `protobuf:"varint,25,opt,name=total_sessions,json=totalSessions,proto3" json:"total_sessions,omitempty"`
 }
 
 func (x *Workflow) Reset() {
@@ -50350,11 +50350,11 @@ func (x *Workflow) GetLastActionAt() int64 {
 	return 0
 }
 
-func (x *Workflow) GetLastSessionId() int64 {
+func (x *Workflow) GetLastSessionId() string {
 	if x != nil {
 		return x.LastSessionId
 	}
-	return 0
+	return ""
 }
 
 func (x *Workflow) GetNumActiveSessions() int64 {
@@ -68369,7 +68369,7 @@ var file_header_proto_rawDesc = []byte{
 	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x61, 0x74, 0x18, 0x15, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x0c, 0x6c, 0x61, 0x73, 0x74, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x74, 0x12, 0x26, 0x0a,
 	0x0f, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64,
-	0x18, 0x16, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x53, 0x65, 0x73, 0x73,
+	0x18, 0x16, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x53, 0x65, 0x73, 0x73,
 	0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2e, 0x0a, 0x13, 0x6e, 0x75, 0x6d, 0x5f, 0x61, 0x63, 0x74,
 	0x69, 0x76, 0x65, 0x5f, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x17, 0x20, 0x01,
 	0x28, 0x03, 0x52, 0x11, 0x6e, 0x75, 0x6d, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x53, 0x65, 0x73,
