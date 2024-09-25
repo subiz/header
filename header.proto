@@ -706,7 +706,7 @@ message ConversationMeta {
 	bool is_hidden = 12;
 	Event event = 13;
 
-	repeated ConversationMeta relateds = 14;
+	// repeated ConversationMeta relateds = 14;
 	string extra_data = 15;
 	string ticket_id = 17;
 }
