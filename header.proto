@@ -107,6 +107,7 @@ message Attribute {
 	string user_value = 26;
 }
 
+// deprecated
 message PhoneDevices {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -707,6 +708,7 @@ message ConversationMeta {
 
 	repeated ConversationMeta relateds = 14;
 	string extra_data = 15;
+	string ticket_id = 17;
 }
 
 message WebRTCMessage {
@@ -968,49 +970,6 @@ message ConversationMember {
 	int64 total_messages = 35;
 	int64 last_action_at = 37;
 	string is_subscribed = 38; // "", off, on
-}
-
-message ListConversationsRequest {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string member_id = 8; // ignore
-	string integration_id = 10; // deprecated
-	string user_id = 11;
-	int32 limit = 5;
-
-	string agent_id = 12; // list conversations of agent
-
-	repeated string user_ids = 13; // for live, only return id and state
-
-	string state = 14;
-
-	bool ticket_included = 15; // for agent only
-	bool id_only = 16; // internal usage
-
-	string touchpoint_channel = 17;
-	string touchpoint_source = 18;
-	string touchpoint_id = 19;
-
-	bool ticket_id_only = 20;
-
-	int64 min_actived_ms = 21;
-	int64 max_actived_ms = 22;
-
-	bool user_event_included = 23;
-}
-
-message ListConversationEventsRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string conversation_id = 3;
-	string start_id = 4;
-	string ticket_id = 5;
-	int32 limit = 6;
-
-	string message_type = 15; // 'empty', file, image, link, pinned
-	bool is_private = 7;
-
-	bool by_type_only = 8;
 }
 
 message StartRequest {
@@ -1767,17 +1726,6 @@ message TagRequest {
 	string order_id = 5;
 	string ticket_id = 6; // tkasdlfjasdf
 	string ticket_number = 7;  // SBZ-1234
-}
-
-message ListWorkflowSessionRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string workflow_id = 3;
-	int64 from_hour = 4;
-	int64 to_hour = 5;
-	string status = 6; // error
-	int64 limit = 7;
-	string anchor = 8;
 }
 
 message WorkflowSessionId {
@@ -6498,6 +6446,8 @@ message Response {
 	BankTransferRequest bank_transfer_request = 148;
 	repeated WorkflowCount workflow_counts = 149;
 	repeated Integration integrations = 150;
+
+	repeated PhoneDevice phone_devices = 151;
 }
 
 message ZaloCallConsent {

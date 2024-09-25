@@ -334,6 +334,8 @@ service ConversationMgr {
 	rpc JoinConversation(header.ConversationMember) returns (Empty);
 	rpc LeftConversation(header.ConversationMember) returns (Empty);
 
+	rpc MarkReadTopic(header.Id) returns (Empty);
+
 	rpc UpdateConversationInfo(header.Conversation) returns (header.Conversation);
 
 	rpc UpdateMuteConversation(header.Conversation) returns (Empty);

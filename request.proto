@@ -529,3 +529,57 @@ message CreateAgentRequest {
 	repeated string scopes = 41; // owner, supervisor
 	optional int64 extension = 43; // 2343 3442
 }
+
+message ListConversationsRequest {
+	common.Context ctx = 1;
+	string account_id = 3;
+	string member_id = 8; // ignore
+	string integration_id = 10; // deprecated
+	string user_id = 11;
+	int32 limit = 5;
+
+	string agent_id = 12; // list conversations of agent
+
+	repeated string user_ids = 13; // for live, only return id and state
+
+	string state = 14;
+
+	bool ticket_included = 15; // for agent only
+	bool id_only = 16; // internal usage
+
+	string touchpoint_channel = 17;
+	string touchpoint_source = 18;
+	string touchpoint_id = 19;
+
+	bool ticket_id_only = 20;
+
+	int64 min_actived_ms = 21;
+	int64 max_actived_ms = 22;
+
+	bool user_event_included = 23;
+}
+
+message ListConversationEventsRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string start_id = 4;
+	string ticket_id = 5;
+	int32 limit = 6;
+
+	string message_type = 15; // 'empty', file, image, link, pinned
+	bool is_private = 7;
+
+	bool by_type_only = 8;
+}
+
+message ListWorkflowSessionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	int64 from_hour = 4;
+	int64 to_hour = 5;
+	string status = 6; // error
+	int64 limit = 7;
+	string anchor = 8;
+}
