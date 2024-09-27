@@ -6500,6 +6500,7 @@ message WorkflowSession {
 	string error_code = 20; //
 	int64 num_attempts = 21;
 	int64 reattempt_at = 22;
+	Event event_cause_error = 23;
 }
 
 message StartWorkflowSessionRequest {
