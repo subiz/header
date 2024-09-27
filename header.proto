@@ -7848,6 +7848,7 @@ message BankAccount {
 	string bank_bin = 3;
 	string account_number = 4;
 	string account_name = 5;
+	string id = 6; // bankbin + account number
 
 	int64 verified = 7;
 	int64 fpv_verified_amount = 10;
