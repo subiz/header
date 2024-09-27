@@ -6370,7 +6370,7 @@ message Response {
 	repeated account.Agent agents = 22;
 	repeated WorkflowLog workflow_logs = 23;
 	repeated WorkflowSession workflow_sessions = 24;
-	repeated WorkflowSession workflow_session = 26;
+	WorkflowSession workflow_session = 26;
 	repeated Ticket tickets = 25;
 	repeated TicketType ticket_types = 27;
 	repeated TicketView ticket_views = 29;
