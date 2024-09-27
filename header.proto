@@ -4962,31 +4962,6 @@ message SubstringIndex {
 	int32 length = 4;
 }
 
-message RateLimitSyncRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated RateLimitEntity new_entities = 4;
-}
-
-message RateLimitSyncResponse {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated RateLimitEntity entities = 4;
-}
-
-message RateLimitEntity {
-	string configkey = 2;
-	int64 window_sec = 3;
-	int64 capacity = 5;
-	repeated RateLimitWindow windows = 6;
-}
-
-message RateLimitWindow {
-	string key = 3;
-	int64 timestamp = 4;
-	int64 usage = 5;
-}
-
 message PipelineStage {
 	string pipeline = 20;
 	string id = 3; // gen by client

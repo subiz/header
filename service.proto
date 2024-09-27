@@ -19,10 +19,6 @@ service GooglekonService {
 	rpc ListGoogleLocationSettings(Id) returns (GoogleLocationSettings);
 }
 
-service RateLimit {
-	rpc SyncRateLimit(RateLimitSyncRequest) returns (RateLimitSyncResponse);
-}
-
 service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
@@ -96,7 +92,6 @@ service AccountMgr {
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc GetGroup(Id) returns (header.AgentGroup);
-	rpc RequestPassword(Id) returns (Empty);
 	rpc UpdatePassword(NewPassword) returns (account.Agent);
 	rpc UpdateAgent(account.Agent) returns (account.Agent);
 	rpc DeleteAgent(Id) returns (account.Agent);
@@ -356,7 +351,6 @@ service ConversationMgr {
 	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
 
 	rpc Deintegrate(Id) returns (Empty);
-	rpc ListIntegrations(Id) returns (header.Integrations); // deprecated
 	rpc ListIntegrations2(Id) returns (header.Response);
 
 	rpc Integrate(header.Integration) returns (header.Integration);
