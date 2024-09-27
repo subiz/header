@@ -6275,11 +6275,13 @@ message WorkflowAction {
 	ActionBranching branching = 39;
 	ActionPercentageSplit percentage_split = 40;
 	ActionSendMessage send_message = 41;
-	ActionSendZns send_zns = 42;
+	ActionSendHttpReq send_http_req = 42; 
 }
 
-message ActionSendZns {
-	ZnsRequest request = 1;
+message ActionSendHttpReq {
+    string webhook_url = 1;
+	repeated string objects_send = 2; // user, conversation, ....
+	string idempotency_id = 3; //extra id for many purpose
 }
 
 message ActionPercentageSplit {
