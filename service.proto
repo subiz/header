@@ -200,6 +200,7 @@ service AccountMgr {
 	rpc UpdateBankAccount(header.BankAccount) returns (Response);
 	rpc DeleteBankAccount(header.BankAccount) returns (Response);
 	rpc ListBankAccounts(header.Id) returns (Response);
+	rpc VerifyBankAccount(header.Id) returns (Response); // subiz only
 
 	rpc GenerateBankTransferRequest(header.BankTransferRequest) returns (Response);
 }
