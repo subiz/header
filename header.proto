@@ -6279,7 +6279,7 @@ message WorkflowAction {
 }
 
 message ActionSendHttpReq {
-    string webhook_url = 1;
+    string webhook_id = 1;
 	repeated string objects_send = 2; // user, conversation, ....
 	string idempotency_id = 3; //extra id for many purpose
 }
