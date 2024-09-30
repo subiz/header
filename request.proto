@@ -583,3 +583,14 @@ message ListWorkflowSessionRequest {
 	int64 limit = 7;
 	string anchor = 8;
 }
+
+message BillsRequest {
+	string account_id = 1;
+	int64 from_hour = 2;
+	int64 to_hour = 3;
+	int32 limit = 4;
+	string anchor = 5;
+	int32 offset = 6;
+	repeated string order_ids = 7;
+	string order_by = 8;
+}

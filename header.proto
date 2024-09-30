@@ -1596,12 +1596,6 @@ message BotPostback {
 	string status = 13; // confirmed || cancelled
 }
 
-message Integrations {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated Integration integrations = 3;
-}
-
 message Integration {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -1935,12 +1929,6 @@ message UserAttributeCondition {
 	string key = 2;
 	string operator = 3;
 	string value = 4;
-}
-
-message Sites {
-	common.Context ctx = 1;
-	string account_id = 2; // web, messenger, zalo
-	repeated Site sites = 3;
 }
 
 message VisitProductSiteRequest {
@@ -4539,18 +4527,6 @@ enum OrderStatusCode {
 	not_required = 30;
 }
 
-message BillsRequest {
-	string account_id = 1;
-	int64 from_hour = 2;
-	int64 to_hour = 3;
-	int32 limit = 4;
-	string anchor = 5;
-	int32 offset = 6;
-	repeated string order_ids = 7;
-	string order_by = 8;
-
-}
-
 message Bills {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -5595,12 +5571,6 @@ message EventType {
 	string assignee = 35;
 }
 
-message EventTypes {
-	common.Context ctx = 1;
-	string account_id = 2;
-	EventType event_types = 3;
-}
-
 message Segment {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6130,9 +6100,6 @@ enum E {
 	domain_is_not_whitelisted = 46;
 	invalid_domain = 47;
 
-	invalid_amount = 50;
-
-
 	invalid_date_format = 61;
 
 	invalid_working_day = 63;
@@ -6280,7 +6247,7 @@ message WorkflowAction {
 }
 
 message ActionSendHttpReq {
-    string webhook_id = 1;
+	string webhook_id = 1;
 	repeated string objects_send = 2; // user, conversation, ....
 	string idempotency_id = 3; //extra id for many purpose
 }
@@ -6295,7 +6262,7 @@ message ActionWaitBranch {
 	string ui_type = 4; // message
 
 	string event_type = 10;
-	WorkflowCondition condition =  11;
+	WorkflowCondition condition = 11;
 	// eg. email read: message_
 	// eg. last zns_read (last step id is 4)
 	// { event_type=message_pong, event.data.message.fields[atm_step=4] }
@@ -6427,6 +6394,8 @@ message Response {
 	repeated Integration integrations = 150;
 
 	repeated PhoneDevice phone_devices = 151;
+
+	repeated EventType event_types = 152;
 }
 
 message ZaloCallConsent {
@@ -6827,7 +6796,7 @@ message WorkflowCondition {
 	string id = 2;
 	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
 	ChannelCondition channel = 5;
-    bool is_changed = 6;
+	bool is_changed = 6;
 	string type = 7;
 
 	BoolCondition boolean = 8;
@@ -6906,7 +6875,7 @@ message WorkflowLog {
 	common.Context ctx = 1;
 	string wf_id = 2;
 	string session_id = 3;
-	string  id = 4;
+	string id = 4;
 	string action_type = 5; // start_session, message_sent
 	string action_id = 6;
 	int64 created = 7;
@@ -7101,7 +7070,7 @@ message Ticket {
 	int64 created = 80;
 	int64 updated = 81;
 	bool archived = 82;
-	Event last_event = 83;   // meanful event
+	Event last_event = 83; // meanful event
 	string updated_by = 84;
 	int64 deleted = 85;
 	int64 total_messages = 86;
@@ -7129,7 +7098,7 @@ message Ticket {
 	int64 last_high_risk_resolution_due = 107;
 	int64 last_high_risk_periodic_update_due = 108;
 
-	string first_response_sla_state = 109;   // violated, done, not_apply, in_process, wait
+	string first_response_sla_state = 109; // violated, done, not_apply, in_process, wait
 	string every_response_sla_state = 110;
 	string resolution_sla_state = 111;
 	string periodic_update_sla_state = 112;
@@ -7875,7 +7844,7 @@ message WorkflowCount {
 	// string account_id = 4;
 	// string workflow_id = 5;
 
-  string range = 6;
+	string range = 6;
 	string action_type = 7;
 	repeated int64 datapoints = 8;
 	repeated string labels = 9;

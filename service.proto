@@ -566,7 +566,7 @@ service ChannelConnector {
 service ZalokonService {
 	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
 	rpc ListZnsTemplates(Id) returns (zalokon.ZnsTemplates);
-	rpc RequestZaloUserInfo(header.ZaloUserRequest) returns (header.Empty);
+	// rpc RequestZaloUserInfo(header.ZaloUserRequest) returns (header.Empty);
 	rpc RequestZaloUserToMakeCall(header.ZaloUserRequest) returns (header.Empty);
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
 	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);
