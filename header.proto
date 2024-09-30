@@ -592,6 +592,7 @@ message Event {
 	Data data = 20;
 	Data old = 53;
 	Data ref = 54;
+	// repeated EventField fields = 55;
 }
 
 message Data {
@@ -2600,7 +2601,7 @@ message NotifProfile {
 }
 
 message I18nBlock {
-	map<string, Block> i18n = 5;
+	map<string, Block> i18n = 5; // ja_JP, en_US, en_ES, vi_VN
 }
 
 message Notif {
@@ -6275,7 +6276,7 @@ message WorkflowAction {
 	ActionBranching branching = 39;
 	ActionPercentageSplit percentage_split = 40;
 	ActionSendMessage send_message = 41;
-	ActionSendHttpReq send_http_req = 42; 
+	ActionSendHttpReq send_http_req = 42;
 }
 
 message ActionSendHttpReq {
@@ -6898,6 +6899,7 @@ message Workflow {
 	int64 num_active_sessions = 23;
 	int64 num_unresolve_error_sessions = 24;
 	int64 total_sessions = 25;
+	int64 num_goal_reached_sessions = 31;
 }
 
 message WorkflowLog {
@@ -6906,7 +6908,7 @@ message WorkflowLog {
 	string session_id = 3;
 	string  id = 4;
 	string action_type = 5; // start_session, message_sent
-    string action_id = 6;
+	string action_id = 6;
 	int64 created = 7;
 	int64 workflow_version = 8;
 	string object_id = 9;
