@@ -7401,10 +7401,12 @@ message KnowledgeBase {
 	string build_status = 34; // deploying, ready, failed
 	// Job last_job = 25;
 	string last_job_id = 36;
-	int64 version = 38;
+	string last_sucess_job_id = 42;
 
 	int64 num_categories = 40;
 	int64 num_articles = 41;
+
+	string template = 43; // default
 }
 
 message KnowledgeBaseArticlePageSetting {
