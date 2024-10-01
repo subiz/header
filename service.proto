@@ -833,11 +833,12 @@ service KB {
 	rpc GetKnowledgeBase(Id) returns (header.KnowledgeBase);
 	rpc ListKnowledgeBases(Id) returns (Response);
 
-	rpc CreateArticle(header.Article) returns (header.Article);
-	rpc UpdateArticle(header.Article) returns (header.Article);
-	rpc DeleteArticle(Id) returns (Empty);
-	rpc GetArticle(Id) returns (header.Article);
-	rpc ListArticles(header.ListArticleRequest) returns (header.Response);
+	rpc CreateArticle(header.Article) returns (Response);
+	rpc UpdateArticle(header.Article) returns (Response);
+	rpc DeleteArticle(Id) returns (Response);
+	rpc GetArticle(Article) returns (Response);
+	rpc ListArticles(header.ListArticleRequest) returns (Response);
+	rpc ListArticleHistories(Id) returns (Response);
 
 	rpc CreateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
 	rpc UpdateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);

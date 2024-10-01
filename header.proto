@@ -6355,6 +6355,9 @@ message Response {
 	repeated ArticleCategory article_categories = 38;
 	repeated KnowledgeBase knowledge_bases = 39;
 
+	Article article = 40;
+	ArticleCategory article_category = 41;
+
 	repeated Conversation conversations = 123;
 	repeated ConversationMeta conversation_metas = 124;
 
@@ -7314,31 +7317,33 @@ message Article {
 	string kb = 3;
 	string category = 4;
 	string id = 5;
+	string version = 23;
 
 	I18nString title = 6;
-	Message description = 7;
+	// Message description = 7;
 
 	map<string, Block> i18n_content = 9;
 	bool is_public = 8;
 
+	// shared
 	int64 updated = 10;
 	string updated_by = 11;
 	int64 created = 12;
 	string created_by = 13;
 	string public_url = 14;
-
 	string latest_version = 17; // 1,2,3,..
-	string public_version = 18;
+	string published_version = 18;
+	string shadow_updated = 25;
+	string shadow_author = 26;
 
 	int32 number_of = 19; // stt
 
 	string published_by = 20;
 	string published = 21;
-
-	I18nString draft_title = 22;
-	Message draft_description = 23;
-
 	int64 deleted = 24;
+
+	string version_created = 27;
+	string version_created_by = 28;
 }
 
 message ArticleCategory {
@@ -7424,22 +7429,6 @@ message KnowledgeBasePageStyle {
 	string breadcrumb_font_family = 8;
 	string main_color = 10;
 	string secondary_color = 11;
-}
-
-message ListArticleRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string kb = 3;
-	string category = 4; //
-
-	string query = 5;
-	string locale = 6; // vi-VN, en-US
-	string order_by = 7;
-
-	string anchor = 8;
-	int32 limit = 9;
-
-	bool shorten = 10;
 }
 
 message Job {
