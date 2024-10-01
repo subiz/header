@@ -11,6 +11,39 @@ var boldAndItalic = {
   italic: true,
 };
 
+var underline = {
+  type: "text",
+  text: "Xin chao",
+  underline: true,
+};
+
+var strikethough = {
+  type: "text",
+  text: "Xin chao",
+  strike: true,
+};
+
+var code = {
+  type: "text",
+  text: "Xin chao",
+  code: true,
+};
+
+var pre = {
+  type: "pre",
+  content: [
+    {
+      type: "text",
+      text: "Xin chao",
+    },
+    {
+      type: "text",
+      text: "Subiz",
+      bold: true,
+    },
+  ],
+};
+
 var p = {
   type: "paragraph",
   content: [

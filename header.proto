@@ -7396,15 +7396,18 @@ message KnowledgeBase {
 	int64 updated = 30;
 	string updated_by = 31;
 
-	int64 build_trigger_at = 32;
-	int64 build_done_at = 33;
-	string build_status = 34; // deploying, ready, failed
-	// Job last_job = 25;
+	int64 last_build_at = 32;
+	int64 last_build_done_at = 33;
+	string last_build_status = 34; // deploying, ready, failed
 	string last_job_id = 36;
-	int64 version = 38;
+	int64 last_build_id = 44;
+	int64 last_success_build_id = 45;
+	int64 last_success_build_at = 46;
 
 	int64 num_categories = 40;
 	int64 num_articles = 41;
+
+	string template = 43; // default
 }
 
 message KnowledgeBaseArticlePageSetting {
