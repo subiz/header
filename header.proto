@@ -7310,6 +7310,13 @@ message SLATarget {
 	int64 periodic_update_sec = 10;
 }
 
+message ArticleSEOSetting {
+	map<string, string> page_title = 5;
+	map<string, string> meta_description = 6;
+	map<string, string> social_title = 7;
+	map<string, string> social_description = 8;
+}
+
 message Article {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7319,8 +7326,9 @@ message Article {
 	string id = 5;
 	string version = 23;
 
-	I18nString title = 6;
-	// Message description = 7;
+	// I18nString title = 6;
+	map<string, string> i18n_title = 30;
+	ArticleSEOSetting seo_setting = 31;
 
 	map<string, Block> i18n_content = 9;
 	bool is_public = 8;
@@ -7334,7 +7342,7 @@ message Article {
 	string latest_version = 17; // 1,2,3,..
 	string published_version = 18;
 	string shadow_updated = 25;
-	string shadow_author = 26;
+	string author = 26;
 
 	int32 number_of = 19; // stt
 
@@ -7344,6 +7352,8 @@ message Article {
 
 	string version_created = 27;
 	string version_created_by = 28;
+
+	string slug = 29;
 }
 
 message ArticleCategory {

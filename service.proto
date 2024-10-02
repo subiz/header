@@ -827,23 +827,23 @@ service Scheduler {
 }
 
 service KB {
-	rpc CreateKnowledgeBase(header.KnowledgeBase) returns (header.KnowledgeBase);
-	rpc UpdateKnowledgeBase(header.KnowledgeBase) returns (header.KnowledgeBase);
-	rpc DeleteKnowledgeBase(Id) returns (Empty);
-	rpc GetKnowledgeBase(Id) returns (header.KnowledgeBase);
+	rpc CreateKnowledgeBase(KnowledgeBase) returns (Response);
+	rpc UpdateKnowledgeBase(KnowledgeBase) returns (Response);
+	rpc DeleteKnowledgeBase(Id) returns (Response);
+	rpc GetKnowledgeBase(Id) returns (Response);
 	rpc ListKnowledgeBases(Id) returns (Response);
 
-	rpc CreateArticle(header.Article) returns (Response);
-	rpc UpdateArticle(header.Article) returns (Response);
+	rpc CreateArticle(Article) returns (Response);
+	rpc UpdateArticle(Article) returns (Response);
 	rpc DeleteArticle(Id) returns (Response);
 	rpc GetArticle(Article) returns (Response);
-	rpc ListArticles(header.ListArticleRequest) returns (Response);
-	rpc ListArticleHistories(Id) returns (Response);
+	rpc ListArticles(ListArticleRequest) returns (Response);
+	rpc ListArticleVersions(Article) returns (Response);
 
-	rpc CreateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
-	rpc UpdateArticleCategory(header.ArticleCategory) returns (header.ArticleCategory);
-	rpc DeleteArticleCategory(Id) returns (Empty);
-	rpc GetArticleCategory(Id) returns (header.ArticleCategory);
+	rpc CreateArticleCategory(ArticleCategory) returns (Response);
+	rpc UpdateArticleCategory(ArticleCategory) returns (Response);
+	rpc DeleteArticleCategory(Id) returns (Response);
+	rpc GetArticleCategory(Id) returns (Response);
 	rpc ListArticleCategories(Id) returns (Response);
 }
 
