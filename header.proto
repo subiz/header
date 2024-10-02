@@ -6456,8 +6456,7 @@ message WorkflowSession {
 
 	string id = 4;
 	// repeated string history = 5;
-	string action_id = 6; // current executing
-
+	WorkflowAction action = 7; //current executing
 	map<string, string> KV = 8;
 
 	int64 ended = 9;
@@ -6477,6 +6476,7 @@ message WorkflowSession {
 	int64 num_attempts = 21;
 	int64 reattempt_at = 22;
 	Event event_cause_error = 23;
+	int64 workflow_version = 24;
 }
 
 message StartWorkflowSessionRequest {
