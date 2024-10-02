@@ -7348,13 +7348,14 @@ message Article {
 	int32 number_of = 19; // stt
 
 	string published_by = 20;
-	string published = 21;
+	int64 published = 21;
 	int64 deleted = 24;
 
-	string version_created = 27;
+	int64 version_created = 27;
 	string version_created_by = 28;
 
-	string slug = 29;
+	map<string, string> i18n_slug = 29;
+	string source_id = 32; // unique
 }
 
 message ArticleCategory {
@@ -7362,8 +7363,11 @@ message ArticleCategory {
 	string id = 2;
 	string account_id = 3;
 
-	I18nString title = 4;
-	I18nString description = 6;
+	I18nString title = 4; //// depreacted
+	I18nString description = 6; // depreacted
+
+	map<string, string> i18n_title = 21;
+	map<string, string> i18n_description = 22;
 
 	string parent_category = 7;
 	// repeated string parent_ids = 8; //make sure not have a circle
@@ -7380,6 +7384,8 @@ message ArticleCategory {
 
 	int64 priority = 17;
 	string kb = 18;
+
+	map<string, string> i18n_slug = 20;
 }
 
 message KnowledgeBase {
