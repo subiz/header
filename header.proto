@@ -6456,7 +6456,8 @@ message WorkflowSession {
 
 	string id = 4;
 	// repeated string history = 5;
-	WorkflowAction action = 7; //current executing
+	string action_id = 6; // current executing
+	WorkflowAction action = 7; // only recompute when list, not save in db
 	map<string, string> KV = 8;
 
 	int64 ended = 9;
