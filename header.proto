@@ -6887,6 +6887,8 @@ message WorkflowLog {
 	string object_id = 9;
 	map<string,string> data = 10;
 	Event event = 11;
+	By by = 30;
+
 
 	// extra data
 	string conversation_id = 12;
