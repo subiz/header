@@ -23,11 +23,12 @@ service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
 
-	rpc Index(header.DocIndexRequest) returns (header.Empty); //index change text
-	rpc IndexStatic(header.DocIndexRequest) returns (header.Empty); //index static text
-
+	rpc Index(header.DocIndexRequest) returns (header.Empty); 
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc SearchIds(header.DocSearchRequest) returns (header.Ids);
+
+	rpc IndexByLocale(header.DocIndexRequest) returns (header.Empty);
+	rpc SearchByLocale(header.DocIndexRequest) returns (header.Empty);
 
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 	rpc Report(header.ConvoReportRequest) returns (header.ConvoReportResponse);
@@ -839,6 +840,7 @@ service KB {
 	rpc GetArticle(Article) returns (Response);
 	rpc ListArticles(ListArticleRequest) returns (Response);
 	rpc ListArticleVersions(Article) returns (Response);
+	rpc SearchArticles(SearchArticleRequest) returns (DocSearchResponse);
 
 	rpc CreateArticleCategory(ArticleCategory) returns (Response);
 	rpc UpdateArticleCategory(ArticleCategory) returns (Response);

@@ -601,13 +601,21 @@ message ListArticleRequest {
 	string account_id = 2;
 	string kb = 3;
 	string category = 4; //
-
-	string query = 5;
-	string locale = 6; // vi-VN, en-US
 	string order_by = 7;
-
 	string anchor = 8;
 	int32 limit = 9;
-
 	bool shorten = 10;
 }
+
+message SearchArticleRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string kb = 3;
+	string category = 4; //
+
+	string query = 5;
+	string locale = 6; // vi_VN, en_US
+	string anchor = 8;
+	int32 limit = 9;
+}
+

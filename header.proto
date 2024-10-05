@@ -5203,6 +5203,9 @@ message DocHit {
 	DocHit secondary_doc = 15;
 	string user_type = 16;
 	Article article = 17;
+	Block description_block = 18;
+    Block part_block = 19;
+	string type = 20;
 }
 
 message DocSearchResponse {
