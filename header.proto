@@ -5211,6 +5211,7 @@ message DocSearchResponse {
 
 	repeated DocHit hits = 4;
 	string anchor = 5;
+	string query_match = 6;
 }
 
 message ArticleHit {
