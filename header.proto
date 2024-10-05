@@ -5204,8 +5204,6 @@ message DocHit {
 	string user_type = 16;
 	Article article = 17;
 	Block description_block = 18;
-    Block part_block = 19;
-	string type = 20;
 }
 
 message DocSearchResponse {
@@ -5213,6 +5211,23 @@ message DocSearchResponse {
 
 	repeated DocHit hits = 4;
 	string anchor = 5;
+}
+
+message ArticleHit {
+	string id = 1;
+	string type = 2; //article, article_category
+	Block title_block = 3;
+	Block description_block = 4;
+	Block content_block = 5;
+
+	string anchor = 6;
+}
+
+message ArticleSearchResponse {
+	common.Context ctx = 1;
+
+	repeated ArticleHit hits = 2;
+	string anchor = 3;
 }
 
 message AccessToken {

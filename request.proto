@@ -615,6 +615,7 @@ message SearchArticleRequest {
 
 	string query = 5;
 	string locale = 6; // vi_VN, en_US
+	string order_by = 7;
 	string anchor = 8;
 	int32 limit = 9;
 }
