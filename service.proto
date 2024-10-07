@@ -838,6 +838,14 @@ service KB {
 	rpc ListArticles(ListArticleRequest) returns (Response);
 	rpc ListArticleVersions(Article) returns (Response);
 	rpc SearchArticles(SearchArticleRequest) returns (ArticleSearchResponse);
+	rpc TagArticle(header.TagRequest) returns (Empty);
+	rpc UntagArticle(header.TagRequest) returns (Empty);
+
+	rpc CreateTag(header.Tag) returns (header.Tag);
+	rpc UpdateTag(header.Tag) returns (header.Tag);
+	rpc DeleteTag(Id) returns (Empty);
+	rpc ListTags(Id) returns (header.Tags);
+	rpc GetTag(Id) returns (header.Tag);
 
 	rpc CreateArticleCategory(ArticleCategory) returns (Response);
 	rpc UpdateArticleCategory(ArticleCategory) returns (Response);

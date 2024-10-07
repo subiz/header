@@ -7349,8 +7349,9 @@ message Article {
 	string kb = 3;
 	string category = 4;
 	string id = 5;
-	string version = 23;
+	repeated Tag tags = 7;
 
+	string version = 23;
 	// I18nString title = 6;
 	map<string, string> i18n_title = 30;
 	ArticleSEOSetting seo_setting = 31;
