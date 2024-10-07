@@ -38,6 +38,7 @@ message Ids {
 	repeated string phones = 8; // match by phone identifier
 	repeated string emails = 9; // match by email identifier
 	repeated string record_ids = 10; // match by record identifier
+	string query_match = 11; //for search
 }
 
 message Notifications {
@@ -5229,6 +5230,7 @@ message ArticleSearchResponse {
 
 	repeated ArticleHit hits = 2;
 	string anchor = 3;
+	string query_match = 4;
 }
 
 message AccessToken {
