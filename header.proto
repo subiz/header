@@ -3151,6 +3151,7 @@ enum ChannelType {
 	google_review = 9;
 	google_question = 10;
 	google_message = 11;
+	zns = 12;
 }
 
 message Webhooks {
