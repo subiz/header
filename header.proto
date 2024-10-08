@@ -7349,7 +7349,7 @@ message Article {
 	string kb = 3;
 	string category = 4;
 	string id = 5;
-	repeated Tag tags = 7;
+	repeated ArticleTopic topics = 7;
 
 	string version = 23;
 	// I18nString title = 6;
@@ -7411,6 +7411,30 @@ message ArticleCategory {
 	string kb = 18;
 
 	map<string, string> i18n_slug = 20;
+}
+
+message ArticleTopic {
+	common.Context ctx = 1;
+	string id = 2;
+	string account_id = 3;
+	string title = 4;
+	string color = 5;
+	int64 created = 8;
+	int64 updated = 9;
+	string created_by = 10;
+	string updated_by = 11;
+}
+
+message ArticleTopics {
+	common.Context ctx = 1;
+	repeated ArticleTopic topics = 2;
+}
+
+message ArticleTopicRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string article_id = 3;
+	string id = 4;
 }
 
 message KnowledgeBase {
