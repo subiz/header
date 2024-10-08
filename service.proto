@@ -23,7 +23,7 @@ service DocSearch {
 	rpc IndexConvo(header.DocIndexRequest) returns (header.Empty);
 	rpc SearchConvos(header.DocSearchRequest) returns (header.DocSearchResponse);
 
-	rpc Index(header.DocIndexRequest) returns (header.Empty); 
+	rpc Index(header.DocIndexRequest) returns (header.Empty);
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
 	rpc SearchIds(header.DocSearchRequest) returns (header.Ids);
 
@@ -336,6 +336,9 @@ service ConversationMgr {
 	rpc UpdateConversationMember(header.ConversationMember) returns (Empty);
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
 	rpc UnhiddenConversation(header.Conversation) returns (Empty);
+
+	rpc DismissConversation(header.Conversation) returns (Empty);
+	rpc ReconsiderConversation(header.Conversation) returns (Empty);
 
 	rpc UpdateEndchatSetting(header.EndchatSetting) returns (header.EndchatSetting);
 	rpc GetEndchatSetting(Id) returns (header.EndchatSetting);

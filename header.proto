@@ -711,6 +711,8 @@ message ConversationMeta {
 	// repeated ConversationMeta relateds = 14;
 	string extra_data = 15;
 	string ticket_id = 17;
+
+	bool is_dismissed = 19;
 }
 
 message WebRTCMessage {
@@ -1066,7 +1068,7 @@ message Conversation {
 	bool mute = 41; // true, false
 	bool read = 42; // true, false
 	// bool watch = 44; // true
-	bool is_done = 38;
+	bool is_dismissed = 38;
 	int64 hidden = 39;
 
 	int64 updated = 43;
