@@ -7443,7 +7443,7 @@ message ArticleTopic {
 	common.Context ctx = 1;
 	string id = 2;
 	string account_id = 3;
-	string title = 4;
+	map<string, string> title = 4;
 	string color = 5;
 	int64 created = 8;
 	int64 updated = 9;
