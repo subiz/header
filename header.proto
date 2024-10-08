@@ -1066,7 +1066,7 @@ message Conversation {
 	bool mute = 41; // true, false
 	bool read = 42; // true, false
 	// bool watch = 44; // true
-
+	bool is_done = 38;
 	int64 hidden = 39;
 
 	int64 updated = 43;
@@ -1088,7 +1088,8 @@ message Conversation {
 	CallDriverRequest call_request = 56;
 
 	string traffic_source = 60;  // direct, referring, organic, social, advertising
-	string traffic_ads_network = 61; // google_adwords
+	string traffic_ads_network = 61; // google_adwords, facebook
+	string traffic_ads_id = 59; // ads id
 	common.SessionCampaign traffic_utm = 62;
 	string traffic_referrer = 63;
 
@@ -1104,6 +1105,8 @@ message Conversation {
 	repeated string associated_tickets = 76;
 	repeated string associated_conversations = 77;
 	Ticket ticket = 78; // main ticket, sync state and tag
+
+	string primary_bot = 79;
 	Error error = 80;
 }
 
@@ -7445,7 +7448,7 @@ message KnowledgeBase {
 	I18nString description = 5;
 	File logo = 6;
 
-	string public_domain = 7; // abc.com
+	string base = 7; // https://company.com/docs
 	string access = 8; // public-and-private, private-only
 
 	string crawler_access = 9; // block, allow
