@@ -833,6 +833,7 @@ service KB {
 	rpc DeleteKnowledgeBase(Id) returns (Response);
 	rpc GetKnowledgeBase(Id) returns (Response);
 	rpc ListKnowledgeBases(Id) returns (Response);
+	rpc ListKnowledgeBaseEvents(header.ListKnowledgeBaseEventRequest) returns (header.Events);
 
 	rpc CreateArticle(Article) returns (Response);
 	rpc UpdateArticle(Article) returns (Response);
