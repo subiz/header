@@ -7490,6 +7490,8 @@ message KnowledgeBase {
 	KnowledgeBaseArticlePageSetting article_page = 22;
 	KnowledgeBasePageStyle category_page = 23;
 
+	int64 created = 28;
+	string created_by = 29;
 	int64 updated = 30;
 	string updated_by = 31;
 
