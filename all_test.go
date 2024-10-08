@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"hash/crc32"
 	"math"
+	"os"
 	"sort"
 	"strings"
 	"testing"
@@ -705,6 +706,20 @@ func TestUpdateUserAttribute(t *testing.T) {
 	}
 }
 
+func TestBlockToHtml(t *testing.T) {
+	jsonb, _ := os.ReadFile("./block_sample.json")
+	htmlb, _ := os.ReadFile("./block_sample.html")
+
+	block := &Block{}
+	json.Unmarshal(jsonb, block)
+
+	html := BlockToHTML(block)
+	html = strings.TrimSpace(html)
+	if html != strings.TrimSpace(string(htmlb)) {
+		t.Error("SHOULDEQ", string(htmlb), "\n", html)
+	}
+}
+
 func TestDeltaToBlock(t *testing.T) {
 	testcases := []struct {
 		delta  string
@@ -774,134 +789,6 @@ func TestDeltaToBlock(t *testing.T) {
 		}
 	}
 }
-
-/*
-func TestHTMLToBlock(t *testing.T) {
-	testcases := []struct {
-		html   string
-		expect Block
-	}{
-		{
-			html:   "",
-			expect: Block{},
-		},
-		{html: `
-<p class="sbz_lexical_paragraph" dir="ltr">
-	<i><em class="sbz_lexical_text__italic" style="white-space: pre-wrap">Thanh</em></i
-	><span style="white-space: pre-wrap"> </span
-	><b><strong class="sbz_lexical_text__bold" style="white-space: pre-wrap">Test</strong></b
-	><span style="white-space: pre-wrap"> </span
-	><b><strong class="sbz_lexical_text__bold" style="white-space: pre-wrap">day </strong></b
-	><i
-		><b><strong class="sbz_lexical_text__bold sbz_lexical_text__italic" style="white-space: pre-wrap">du</strong></b></i
-	><b><strong class="sbz_lexical_text__bold" style="white-space: pre-wrap"> cac</strong></b
-	><span style="white-space: pre-wrap"> yeu to</span>
-</p>
-<ol>
-	<li value="1"><span style="white-space: pre-wrap">Mot</span></li>
-	<li value="2"><span style="white-space: pre-wrap">Hia</span></li>
-</ol>
-<p class="sbz_lexical_paragraph" dir="ltr">
-	<span style="white-space: pre-wrap">link </span
-	><a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
-		><span style="white-space: pre-wrap">google.com</span></a
-	>
-</p>
-<ul>
-	<li value="1"><span style="white-space: pre-wrap">A</span></li>
-	<li value="2"><span style="white-space: pre-wrap">B</span></li>
-</ul>
-<p class="sbz_lexical_paragraph" dir="ltr">
-	<span data-mention="true" data-mention-agent-id="agrkzpvpefuglbnjly">@Trang Lê</span
-	><span style="white-space: pre-wrap"> metion</span>
-</p>
-<p class="sbz_lexical_paragraph"><br /></p>
-<p class="sbz_lexical_paragraph" dir="ltr">
-	<img
-		src="https://vcdn.subiz-cdn.com/file/97b63a62051b4d9b10dd105e7f80144fc8f7817031a84e103c328318d02b9bd6_acpxkgumifuoofoosble"
-		alt="image.png"
-		width="209"
-		height="inherit"
-	/>
-</p>
-<p class="sbz_lexical_paragraph" dir="ltr">
-	<span style="white-space: pre-wrap">anh</span>
-</p>
-`,
-			expect: Block{
-				Type:  "paragraph",
-				Class: "sbz_lexical_text__italic",
-				Content: []*Block{{
-					Type: "paragraph",
-					Content: []*Block{{
-						Type:   "text",
-						Italic: true,
-						Style:  &Style{WhiteSpace: "pre-wrap"},
-						Class:  "sbz_lexical_text__italic",
-						Text:   "Thanh",
-					}, {
-						Type:  "text",
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Text:  " ",
-					}, {
-						Type:  "text",
-						Bold:  true,
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Class: "sbz_lexical_text__bold",
-						Text:  "Test",
-					}, {
-						Type:  "text",
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Text:  " ",
-					}, {
-						Type:  "text",
-						Bold:  true,
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Class: "sbz_lexical_text__bold",
-						Text:  "day ",
-					}, {
-						Type:   "text",
-						Italic: true,
-						Bold:   true,
-						Style:  &Style{WhiteSpace: "pre-wrap"},
-						Class:  "sbz_lexical_text__bold sbz_lexical_text__italic",
-						Text:   "du",
-					}, {
-						Type:  "text",
-						Bold:  true,
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Class: "sbz_lexical_text__bold",
-						Text:  " cac",
-					}, {
-						Type:  "text",
-						Style: &Style{WhiteSpace: "pre-wrap"},
-						Text:  " yeu to",
-					},
-					},
-				}, {
-					Type: "ordered_list",
-					Content: []*Block{{
-						Type:    "list_item",
-						Content: []*Block{{
-							// Type:
-						}},
-					}},
-				}},
-			},
-		},
-	}
-
-	for k, tc := range testcases {
-		// out := DeltaToBlock(tc.html)
-		outb, _ := json.Marshal(out)
-		expectb, _ := json.Marshal(tc.expect)
-		if string(outb) != string(expectb) {
-			t.Errorf("SHOULD EQ %d, EXPECTED %s, got %s", k, string(expectb), string(outb))
-		}
-	}
-}
-*/
-//
 
 func TestCompileBlock(t *testing.T) {
 	data := map[string]string{
@@ -1011,7 +898,9 @@ func TestBlockToHTML(t *testing.T) {
 		}},
 	}
 	html := BlockToHTML(block)
-	fmt.Println("OUT", html)
+	if strings.Trimspace(html) != `<p class="sbz_lexical_text__italic"><p><em style="white-space: pre-wrap;" class="sbz_lexical_text__italic">Thanh</em><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">Test</b><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">day </b><b><em style="white-space: pre-wrap;" class="sbz_lexical_text__bold sbz_lexical_text__italic">du</em></b><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold"> cac</b><span style="white-space: pre-wrap;"> yeu&amp;&gt;&lt;p&gt;to</span></p><ul><li><span></span></li></ul></p>` {
+		t.Errorf("SHOULDBEEQ")
+	}
 }
 
 func TestBlockToHTML2(t *testing.T) {
@@ -1050,5 +939,7 @@ func TestBlockToHTML2(t *testing.T) {
 		},
 	}
 	html := BlockToHTML(block)
-	fmt.Println("OUT", html)
+	if strings.TrimSpace(html) != `<div><p><a style="color: #11B936;margin-right: 10px;"href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=5&amp;token=123" target="_blank" title="Great">Tuyệt vời</a><a style="color: #787878;margin-right: 10px;"href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=3&amp;token=123" target="_blank" title="Okay">Tốt</a><a style="color: #E81A1A;"href="https://app.subiz.com.vn/ticket-satisfaction-survey?rating=1&amp;token=123" target="_blank" title="Not good">Không tốt</a></p></div>` {
+		t.Errorf("SHOULDBEEQ")
+	}
 }

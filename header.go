@@ -8,6 +8,7 @@ import (
 	"net/mail"
 	"net/url"
 	"reflect"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -1988,9 +1989,13 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 		out += " class=\"" + root.Class + "\""
 	}
 
+	attrs := []string{}
 	for k, v := range root.Attrs {
-		out += " " + k + "=\"" + v + "\""
+		attrs = append(attrs, k+"=\""+v+"\"")
 	}
+
+	sort.Strings(attrs)
+	out += strings.Join(attrs, " ")
 
 	if len(root.Content) == 0 {
 		out += ">" + root.Text
@@ -2075,6 +2080,19 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 		ele.Tag = "div"
 	}
 
+	if block.Type == "image" {
+		ele.Tag = "img"
+		ele.Attrs["src"] = block.GetImage().GetUrl()
+
+		if block.GetImage().GetWidth() > 0 {
+			ele.Attrs["width"] = strconv.Itoa(int(block.GetImage().GetWidth()))
+		}
+
+		if block.GetImage().GetHeight() > 0 {
+			ele.Attrs["height"] = strconv.Itoa(int(block.GetImage().GetHeight()))
+		}
+	}
+
 	ele.Text = html.EscapeString(block.Text)
 	if block.Type == "" || block.Type == "text" || block.Type == "dynamic-field" {
 		ele.Tag = "span"
@@ -2108,6 +2126,10 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 
 	if block.Type == "horizontal_rule" {
 		ele.Tag = "hr"
+	}
+
+	if block.Type == "hard_break" {
+		ele.Tag = "br"
 	}
 
 	if block.Type == "emoji" {

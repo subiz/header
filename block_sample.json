@@ -1,0 +1,179 @@
+{
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "text", "text": "Xin chào bạn " },
+        {
+          "type": "dynamic-field",
+          "text": "Kiều Thanh",
+          "attrs": {
+            "id": "yqdudlxvmjpclafes",
+            "key": "user.fullname",
+            "value": "Họ tên"
+          }
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Cửa sổ chat hoạt động như một lễ tân chào đón khách truy cập website và giúp khách hàng dễ dàng liên hệ hỗ trợ."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "hard_break" },
+        {
+          "type": "text",
+          "text": "Bạn đổi mới cửa sổ chat đẹp sẽ tạo được ấn tượng ban đầu với khách hàng, phát triển hình ảnh thương hiệu uy tín và thúc đẩy khách nhắn tin mua hàng."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "hard_break" },
+        {
+          "type": "link",
+          "text": "CHỈNH SỬA NGAY CỬA SỔ CHAT WEBSITE",
+          "href": "https://app.subiz.com.vn/chatbox/design"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "image",
+          "image": {
+            "url": "https://vcdn.subiz-cdn.com/file/0cb3d423644cd9b6f265f16cf73d9c1b154f59e28be01edd28ea461403126274_acpxkgumifuoofoosble",
+            "width": 100,
+            "height": 100
+          }
+        }
+      ]
+    },
+    { "type": "paragraph" },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Các thay đổi cần thiết cho cửa sổ chat:",
+          "bold": true
+        }
+      ]
+    },
+    {
+      "type": "bullet_list",
+      "content": [
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Đổi màu sắc hài hòa với màu website"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Đổi ảnh nút chat thu hút khách chú ý đến"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Sửa lời chào đón khách hàng thân thiện"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Sửa nội dung tiêu đề kêu gọi khách hành động"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "list_item",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Sử dụng bảng hỏi thông tin khách trước khi chat"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "text", "text": "Bạn cần thêm hỗ trợ tư vấn, " },
+        {
+          "type": "link",
+          "text": "vui lòng nhắn ngay Zalo Subiz nhé",
+          "href": "https://zalo.me/935022139843821727"
+        },
+        { "type": "text", "text": "." }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        { "type": "hard_break" },
+        { "type": "text", "text": "Trân trọng cảm ơn." }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "Hoa Ta" }]
+    },
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "@Subiz.com.vn" }]
+    },
+    {
+      "type": "paragraph",
+      "content": [{ "type": "text", "text": "024.7302.1368" }]
+    }
+  ]
+}

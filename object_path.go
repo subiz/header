@@ -1,7 +1,6 @@
 package header
 
 import (
-	"fmt"
 	"reflect"
 	"strings"
 )
@@ -19,9 +18,6 @@ func ObjectPath(object interface{}, keyWithDots string) interface{} {
 		for v.Kind() == reflect.Interface {
 			v = v.Elem()
 		}
-
-		fmt.Println("KKKKK", key, "KIND", v.Kind())
-
 		for v.Kind() == reflect.Ptr {
 			v = v.Elem()
 		}
