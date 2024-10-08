@@ -6187,8 +6187,6 @@ enum E {
 
 	invalid_css = 116;
 	invalid_report_range = 117;
-	invalid_goal_status = 119;
-
 	user_is_not_in_the_conversation = 120;
 	invalid_message_type = 122;
 	remover_is_not_agent = 127;
@@ -6242,7 +6240,6 @@ enum E {
 
 	duplicated_extension = 200;
 
-	apple_login_error = 201;
 	wrong_shard = 202;
 
 	out_of_port = 204;
@@ -6264,7 +6261,6 @@ enum E {
 
 	// SERVER ERROR
 	subiz_call_failed = 5025;
-	invalid_google_auth_response = 5071;
 }
 
 message WorkflowAction {
@@ -6328,7 +6324,7 @@ message ActionWaitBranch {
 	string date_op = 18; // first_of_the_day, first_of_the_month
 	string date_format = 19; // unix rfc3999
 
-	int64 sec = 21; // wait_for=sec
+	int64 sec = 21; // wait_for=duration
 	string next_action_id = 20;
 }
 
