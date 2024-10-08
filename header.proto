@@ -1869,7 +1869,7 @@ message Trigger {
 message BotCondition {
 	// url, browser, location, returning_visitor, device_type, referer, source, user_attribute,
 	// timming, integration_id, offline, user_is_a_contact, order, conversation_tags
-	// agent_online, conversation_member_online
+	// agent_online, conversation_member_online, url_path
 	string key = 1;
 
 	enum Source {
@@ -1908,6 +1908,9 @@ message BotCondition {
 
 	repeated LocationCondition locations = 14; // or
 	repeated LocationCondition exclude_locations = 15; // or
+
+	repeated string url_paths = 16; // url_path, url_term, url_medium, ... (or only)
+	repeated string exclude_url_paths = 17; // url_path (or only)
 
 	// timming
 	string business_hour = 20; // [in, notIn] if this is true, ignore all other timming conditions
