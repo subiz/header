@@ -600,7 +600,8 @@ message ListArticleRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string kb = 3;
-	string category = 4; //
+	string category = 4; 
+	string topic = 5 ;
 	string order_by = 7;
 	string anchor = 8;
 	int32 limit = 9;

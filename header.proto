@@ -6285,7 +6285,7 @@ message ActionPercentageSplit {
 }
 
 message ActionWaitBranch {
-	string wait_for = 3; // second, date, event (segment, message), attribute
+	string wait_for = 3; // duration, milestone, event (segment, message), attribute
 	string ui_type = 4; // message
 
 	string event_type = 10;
@@ -6305,7 +6305,6 @@ message ActionWaitBranch {
 	string date_format = 19; // unix rfc3999
 
 	int64 sec = 21; // wait_for=sec
-	int64 date_sec = 23; // wait_for=date
 	string next_action_id = 20;
 }
 
