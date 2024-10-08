@@ -7753,6 +7753,8 @@ message PromotionCode {
 	int64 last_used = 35;
 
 	string referrer_agent_id = 36;
+
+	string require_package = 37;
 }
 
 message PromotionProgram {
@@ -7795,6 +7797,8 @@ message PromotionProgram {
 
 	// string referrer_agent_id = 36;
 	bool is_recurring = 37;
+
+	string require_package = 38;
 }
 
 message PromotionCheckResult {
