@@ -850,6 +850,22 @@ message Rule {
 	int64 apply_sla_policy = 40;
 }
 
+message FacebookCondition {
+	bool enabled = 4;
+	bool from_ads = 5;
+	repeated string ads_ids = 6;
+	repeated string post_ids = 7;
+
+	repeated string not_ads_ids = 8;
+	repeated string not_post_ids = 9;
+
+	repeated string page_names = 10; // contains
+	repeated string not_page_names = 11; // contains
+
+	repeated string facebook_post_keywords = 12; // contains
+	repeated string not_facebook_page_keywords = 13; // contains
+}
+
 message RingingSetting {
 	GreetingAudio greeting_message = 4;
 	GreetingAudio missed_message = 5;
@@ -894,6 +910,9 @@ message ChannelCondition {
 	repeated string not_page_urls = 6;
 	repeated string device_types = 7; // desktop, mobile, tablet
 
+	repeated string page_paths = 8;
+	repeated string not_page_paths = 9;
+
 	// for email only
 	repeated string email_tos = 10; // contains
 	repeated string email_froms = 11; // contains
@@ -907,6 +926,8 @@ message ChannelCondition {
 
 	repeated string facebook_post_keywords = 20; // contains
 	repeated string not_facebook_page_keywords = 21; // contains
+
+	FacebookCondition facebook = 17;
 }
 
 message LocationCondition {
