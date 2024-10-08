@@ -965,7 +965,7 @@ message ConversationMember {
 	string id = 4;
 	string ticket_id = 6;
 	string conversation_id = 13;
-	string last_page_view_url = 15;
+	// string last_page_view_url = 15;
 	string membership = 12;
 	enum State {
 		active = 0;
@@ -3730,7 +3730,7 @@ message PushNoti {
 	string sender_id = 9; // caller id
 	string sender_type = 10;
 	string icon_url = 11;
-	string last_page_view_url = 12;
+	// string last_page_view_url = 12; // deprecated
 	string type = 13; // type of event message_sent ...
 	string is_private = 14; // conversation is private
 
@@ -3747,6 +3747,8 @@ message PushNoti {
 	string task_id = 24;
 	string sound_name = 25;
 	string ticket_id = 27;
+
+	bool is_first_user_message = 28;
 }
 
 message InvoiceTemplate {
