@@ -6534,7 +6534,6 @@ message StartWorkflowSessionRequest {
 	string workflow_id = 3;
 	string action_id = 4; // current executing
 
-	WorkflowAction action = 6; // for testing specific action
 	//string status = 13; // creating, running, waiting, ended, paused, error
 	string obj_id = 17; // for this obj
 }
