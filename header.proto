@@ -7726,7 +7726,7 @@ message PromotionCode {
 	// string description = 7;
 
 	int64 percent_fpv = 10;
-	int64 amount_fpv = 11;
+	int64 amount_fpv = 11; //
 	string price_type = 12; // amount, percent
 	int64 max_amount_fpv = 18;
 	string currency = 19; // USD VND
@@ -7758,6 +7758,7 @@ message PromotionCode {
 	string referrer_agent_id = 36;
 
 	string require_package = 37;
+	bool for_invoice = 39;
 }
 
 message PromotionProgram {
@@ -7803,6 +7804,8 @@ message PromotionProgram {
 
 	string require_package = 38;
 	int64 num_codes = 39;
+
+	bool for_invoice = 40;
 }
 
 message PromotionCheckResult {
