@@ -678,7 +678,6 @@ func TestUpdateUserAttribute(t *testing.T) {
 func TestBlockToHtml(t *testing.T) {
 	jsonb, _ := os.ReadFile("./block_sample.json")
 	htmlb, _ := os.ReadFile("./block_sample.html")
-
 	block := &Block{}
 	json.Unmarshal(jsonb, block)
 
@@ -867,7 +866,7 @@ func TestBlockToHTML(t *testing.T) {
 		}},
 	}
 	html := BlockToHTML(block)
-	if strings.Trimspace(html) != `<p class="sbz_lexical_text__italic"><p><em style="white-space: pre-wrap;" class="sbz_lexical_text__italic">Thanh</em><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">Test</b><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">day </b><b><em style="white-space: pre-wrap;" class="sbz_lexical_text__bold sbz_lexical_text__italic">du</em></b><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold"> cac</b><span style="white-space: pre-wrap;"> yeu&amp;&gt;&lt;p&gt;to</span></p><ul><li><span></span></li></ul></p>` {
+	if strings.TrimSpace(html) != `<p class="sbz_lexical_text__italic"><p><em style="white-space: pre-wrap;" class="sbz_lexical_text__italic">Thanh</em><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">Test</b><span style="white-space: pre-wrap;"> </span><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold">day </b><b><em style="white-space: pre-wrap;" class="sbz_lexical_text__bold sbz_lexical_text__italic">du</em></b><b style="white-space: pre-wrap;" class="sbz_lexical_text__bold"> cac</b><span style="white-space: pre-wrap;"> yeu&amp;&gt;&lt;p&gt;to</span></p><ul><li><span></span></li></ul></p>` {
 		t.Errorf("SHOULDBEEQ")
 	}
 }

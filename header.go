@@ -1995,7 +1995,9 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 	}
 
 	sort.Strings(attrs)
-	out += strings.Join(attrs, " ")
+	if len(attrs) > 0 {
+		out += " " + strings.Join(attrs, " ")
+	}
 
 	if len(root.Content) == 0 {
 		out += ">" + root.Text
