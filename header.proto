@@ -6532,9 +6532,10 @@ message StartWorkflowSessionRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string workflow_id = 3;
-	string action_id = 6; // current executing
+	string action_id = 4; // current executing
 
-	string status = 13; // creating, running, waiting, ended, paused, error
+	WorkflowAction action = 6; // for testing specific action
+	//string status = 13; // creating, running, waiting, ended, paused, error
 	string obj_id = 17; // for this obj
 }
 
