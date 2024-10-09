@@ -137,6 +137,8 @@ message Bill {
 	optional int64 fpv_referrer_commission_vnd = 36; // hidden
 	optional string referrer_agent_id = 37;
 	optional int64 fpv_referrer_commission_usd = 38; // hidden
+
+	optional string promotion_code = 39;
 }
 
 message Bills {

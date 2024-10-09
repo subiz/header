@@ -188,6 +188,7 @@ service AccountMgr {
 	rpc CheckPromotionCode(payment.Invoice) returns (header.Response);
 	rpc GetPromotionCode(header.Id) returns (header.Response);
 	rpc DeletePromotionCode(header.Id) returns (header.Response);
+	rpc RedeemPromotionCode(header.RedeemRequest) returns (header.Response);
 	rpc ListPromotionProgramInvoices(header.Id) returns (header.PromotionCodeUsage); // invoices in this year // filter by program
 
 	rpc CreateStripeCheckoutSession(header.Id) returns (header.Id);

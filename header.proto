@@ -7801,6 +7801,7 @@ message PromotionProgram {
 	bool is_recurring = 37;
 
 	string require_package = 38;
+	int64 num_codes = 39;
 }
 
 message PromotionCheckResult {
