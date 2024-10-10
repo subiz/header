@@ -5759,13 +5759,6 @@ message Campaign {
 	int64 state_updated_at =50; //only save time user (agent,accout) updated
 }
 
-message WorkflowExitCondition {
-	bool goal_reached = 2;
-	bool trigger_unmatched = 3;
-
-	WorkflowCondition condition = 4;
-}
-
 message OutboundCallCampaign {
 	repeated string managers = 3;
 	repeated string members = 4;
@@ -6911,7 +6904,7 @@ message Workflow {
 	int64 recurring_interval_sec = 28;
 
 	WorkflowGoal goal = 19;
-	WorkflowExitCondition exit_when = 26;
+	WorkflowCondition exit_when = 26;
 
 	// report
 	int64 last_action_at = 21;
