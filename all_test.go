@@ -686,6 +686,17 @@ func TestBlockToHtml(t *testing.T) {
 	if html != strings.TrimSpace(string(htmlb)) {
 		t.Error("SHOULDEQ", string(htmlb), "\n", html)
 	}
+
+	jsonb, _ = os.ReadFile("./block_sample2.json")
+	htmlb, _ = os.ReadFile("./block_sample2.html")
+	block = &Block{}
+	json.Unmarshal(jsonb, block)
+
+	html = BlockToHTML(block)
+	html = strings.TrimSpace(html)
+	if html != strings.TrimSpace(string(htmlb)) {
+		t.Error("SHOULDEQ", string(htmlb), "\n", html)
+	}
 }
 
 func TestDeltaToBlock(t *testing.T) {

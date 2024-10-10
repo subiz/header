@@ -1999,6 +1999,10 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 		out += " " + strings.Join(attrs, " ")
 	}
 
+	if selftClosingTag[root.Tag] {
+		return out + "/>"
+	}
+
 	if len(root.Content) == 0 {
 		out += ">" + root.Text
 	} else {
@@ -2013,6 +2017,8 @@ func eleToHTML(root *sanitiziedHTMLElement) string {
 	out += "</" + root.Tag + ">"
 	return out
 }
+
+var selftClosingTag = map[string]bool{"br": true, "img": true, "hr": true}
 
 type sanitiziedHTMLElement struct {
 	Tag      string
@@ -2053,9 +2059,9 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 	}
 	if block.Type == "bullet_list" || block.Type == "ordered_list" {
 		if block.Type == "bullet_list" {
-			ele.Tag = "ol"
-		} else {
 			ele.Tag = "ul"
+		} else {
+			ele.Tag = "ol"
 		}
 	}
 
