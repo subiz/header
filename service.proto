@@ -303,7 +303,7 @@ service WorkflowMgr {
 	rpc DeleteWorkflow(Id) returns (Response);
 	rpc GetWorkflow(Workflow) returns (Response); // account_id, id, version=0 -> latest
 
-	rpc ListWorkflowVersions(Id) returns (Response); // workflows
+	rpc ListWorkflowVersions(ListVersions) returns (Response); // workflows
 	rpc StartWorkflowSesssion(StartWorkflowSessionRequest) returns (Response); // workflow_session
 
 	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
@@ -842,7 +842,7 @@ service KB {
 	rpc DeleteArticle(Id) returns (Response);
 	rpc GetArticle(Article) returns (Response);
 	rpc ListArticles(ListArticleRequest) returns (Response);
-	rpc ListArticleVersions(Article) returns (Response);
+	rpc ListArticleVersions(ListVersions) returns (Response);
 	rpc SearchArticles(SearchArticleRequest) returns (ArticleSearchResponse);
 	rpc AddTopicToArticle(header.ArticleTopicRequest) returns (Empty);
 	rpc RemoveTopicFromArticle(header.ArticleTopicRequest) returns (Empty);

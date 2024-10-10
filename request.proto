@@ -627,3 +627,11 @@ message RedeemRequest {
 
 	string code = 3;
 }
+
+message ListVersions {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string anchor = 4;
+	int64 limit = 5;
+}
