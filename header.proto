@@ -5760,7 +5760,6 @@ message Campaign {
 }
 
 message WorkflowExitCondition {
-	// or condition
 	bool goal_reached = 2;
 	bool trigger_unmatched = 3;
 
@@ -6787,14 +6786,14 @@ message ConvoReportEntry {
 }
 
 message WorkflowGoal {
+	string action_id = 1;
 	int64 disabled = 3;
-	string ui_type = 4; 	// 1 week of [receiving,opening,clicking] any delivery
-
 	string event_type = 5; // "scheduled", "user_info_updated"
-	UserViewCondition condition = 6;
+	WorkflowCondition condition = 6;
 
-	// timming condition
-	int64 time_limit_sec = 8;
+	// string ui_type = 4; 	// 1 week of [receiving,opening,clicking] any delivery
+	// // timming condition
+	// int64 time_limit_sec = 8;
 }
 
 message WorkflowTrigger {
