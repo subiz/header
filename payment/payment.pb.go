@@ -841,7 +841,7 @@ type Subscription struct {
 	Limit                      *common.Limit   `protobuf:"bytes,42,opt,name=limit" json:"limit,omitempty"`
 	Ended                      *int64          `protobuf:"varint,45,opt,name=ended" json:"ended,omitempty"`
 	Churned                    *int64          `protobuf:"varint,47,opt,name=churned" json:"churned,omitempty"`
-	FpvCreditVnd               *int64          `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`
+	FpvCreditVnd               *int64          `protobuf:"varint,48,opt,name=fpv_credit_vnd,json=fpvCreditVnd" json:"fpv_credit_vnd,omitempty"`                                               // translate from credit, do not store in db
 	FpvUnlimitedAgentPrice     *int64          `protobuf:"varint,49,opt,name=fpv_unlimited_agent_price,json=fpvUnlimitedAgentPrice" json:"fpv_unlimited_agent_price,omitempty"`               // usd, custom price, only edited by subiz
 	FpvNextUnlimitedAgentPrice *int64          `protobuf:"varint,53,opt,name=fpv_next_unlimited_agent_price,json=fpvNextUnlimitedAgentPrice" json:"fpv_next_unlimited_agent_price,omitempty"` // usd, custom price only edited by subiz
 	NumAgents                  *int64          `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`

@@ -7812,6 +7812,7 @@ message PromotionCheckResult {
 message PromotionCodeUsage {
 	common.Context ctx = 1;
 	repeated payment.Invoice invoices = 4;
+	repeated payment.Invoice bills = 5;
 }
 
 message SubizPaymentMethod {

@@ -99,7 +99,7 @@ message Subscription {
 	optional int64 ended = 45;
 	optional int64 churned = 47;
 
-	optional int64 fpv_credit_vnd = 48;
+	optional int64 fpv_credit_vnd = 48; // translate from credit, do not store in db
 	optional int64 fpv_unlimited_agent_price = 49; // usd, custom price, only edited by subiz
 	optional int64 fpv_next_unlimited_agent_price = 53; // usd, custom price only edited by subiz
 
