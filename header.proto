@@ -2419,7 +2419,7 @@ message WidgetField {
 message WidgetGroup {
 	string id = 1;
 	string name = 2;
-	map<string,string> i18n_name = 3;
+	map<string, string> i18n_name = 3;
 }
 
 message WidgetForm {
@@ -2596,7 +2596,7 @@ message Notif {
 	// I18nString i18n_title_quill_delta = 22; // deprecated
 
 	Block title_block = 25;
-	map<string,Block> i18n_title_block = 26;
+	map<string, Block> i18n_title_block = 26;
 
 	Style title_style = 10;
 
@@ -6094,8 +6094,6 @@ message LinkData {
 
 enum E {
 	Sub = 0;
-	// database_error = 10;
-	http_call_error  = 11;
 
 	invalid_token = 20;
 	invalid_message_size = 21;
@@ -6127,21 +6125,16 @@ enum E {
 
 	invalid_user_view_name = 89;
 
-	limit_reached = 90;
 	invalid_time_range = 91;
 
 	endchat_bot_setting_after_any_message_too_low = 94;
 	endchat_bot_setting_after_any_message_too_high = 95;
 	template_message_not_is_creator = 97;
 
-	product_failed = 98;
-
 	invalid_base_currency = 101;
 	invalid_currency = 102;
 
 	invalid_url = 103;
-	invalid_poll_token = 104;
-	dead_poll_connection = 105;
 
 	invalid_css = 116;
 	invalid_report_range = 117;
@@ -6151,17 +6144,13 @@ enum E {
 	user_is_the_last_one_in_conversation = 128;
 	// conversation_ended = 129;
 	leaver_is_the_last_one_in_conversation = 130;
-	invalid_conversation_state = 131;
 	caller_is_not_leaver = 132;
 
 	too_many_fields = 134;
 	too_many_attachments = 135;
-	unknown_message_format = 136;
 	invalid_field_size = 137;
 	shopee_call_error = 138;
 	unauthorized_shopee_shop = 139;
-	invalid_ratelimit_config = 140;
-	too_many_requests = 141;
 	order_readonly = 142;
 
 	invalid_order_status = 146;
@@ -6169,13 +6158,9 @@ enum E {
 	invalid_product_category = 148;
 	invalid_product_visibility = 149;
 	file_system_error = 152;
-	zalo_call_error = 154;
 
 	message_too_large = 156;
-	attachment_too_large = 158;
 	field_too_long = 159;
-
-	request_timeout = 160;
 
 	invalid_conversation_modal_secret = 170;
 	invalid_conversation_modal_url = 172;
@@ -6200,13 +6185,6 @@ enum E {
 
 	wrong_shard = 202;
 
-	out_of_port = 204;
-
-	// call_not_found = 205;
-	bad_webrtc_track = 206;
-	invalid_webrtc_negotiation = 207;
-	bad_webrtc_connection = 208;
-
 	invalid_task_title = 210;
 	invalid_task_note = 211;
 	invalid_task_status = 213;
@@ -6217,8 +6195,6 @@ enum E {
 	invalid_segment_description = 241;
 	cannot_edit_system_segment = 244;
 
-	// SERVER ERROR
-	subiz_call_failed = 5025;
 }
 
 message WorkflowAction {
