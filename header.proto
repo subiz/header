@@ -1100,9 +1100,9 @@ message Conversation {
 	int64 first_replied_duration = 48;
 	string channel = 49;
 	string channel_touchpoint = 50;
-	bool is_private = 51;
+	// bool is_private = 51;
 
-	string avatar_url = 52; // for private conversation
+	// string avatar_url = 52; // for private conversation
 	bool is_returned = 54; // for report new vs. old
 
 	CallInfo call = 55;
@@ -1131,6 +1131,8 @@ message Conversation {
 
 	string primary_bot = 79;
 	Error error = 80;
+
+	string access = 82; // default=public, private
 }
 
 message GoogleReview {
@@ -1236,9 +1238,6 @@ message Conversations {
 	int64 last_modified = 7;
 }
 
-// html: <b>xin chao</b>&nbsp;{{customer.name}}
-// plaintext: xin chao {{customer.name}}
-// markdown:  *xin chao* {{customer.name}}
 message Message {
 	common.Context ctx = 1;
 	string account_id = 5;
@@ -1389,7 +1388,6 @@ message MessageButton {
 		url_button = 2;
 		postback_button = 3;
 		call_button = 5;
-		widget_ask_desktop_notify_button = 6;
 		widget_ask_contact_info_button = 7;
 	}
 
@@ -1511,39 +1509,6 @@ message QuickReply {
 	string image_url = 5;
 	I18nString i18n_title = 6;
 }
-
-/*
-	message MessageForm {
-	string title = 2;
-	string state = 3;
-	repeated MessageFormField fields = 4;
-	string submit_url = 5;
-	}
-
-	message MessageFormSubmit {
-	string form_message_id = 2;
-	repeated MessageFormField fields = 3;
-	string state = 4;
-	}
-
-	message MessageFormField {
-	enum InputType {
-	text = 0;
-	datetime = 1;
-	list = 2;
-	number = 3;
-	boolean = 4;
-	}
-	string input_type = 2;
-	repeated string items = 3;
-	string state = 4;
-	string title = 5;
-	string image_url = 6;
-	string name = 7;
-	string answer = 8;
-	int64 answered = 9;
-	}
-*/
 
 message Tag {
 	common.Context ctx = 1;
@@ -1824,7 +1789,6 @@ message ConversationAutomation {
 	repeated string tags = 14; // only run on
 
 	bool repeat = 15; // allow to run multiple time
-
 
 	repeated BotCondition conditions = 16;
 	// AwayMessageAutomation away_message = 11;
