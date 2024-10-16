@@ -311,7 +311,7 @@ service WorkflowMgr {
 	rpc ListWorkflowSessions(ListWorkflowSessionRequest) returns (Response);
 	rpc ListWorkflowLogs(ListWorkflowLogRequest) returns (Response); // workflow_log
 	rpc ReportWorkflow(WorkflowReportRequest) returns (Response); // workflow_counts
-	rpc RunWorkflowAction(RunWorkflowActionRequest) returns (WorkflowAction); 
+	rpc RunWorkflowAction(RunWorkflowActionRequest) returns (Response); 
 }
 
 service ConversationMgr {
