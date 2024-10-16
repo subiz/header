@@ -6227,6 +6227,14 @@ message WorkflowAction {
 	ActionSendHttpReq send_http_req = 42;
 }
 
+message RunWorkflowActionRequest {
+	WorkflowAction action = 1;
+	User user = 2;
+	Conversation convo = 3;
+	Order order = 4;
+	Ticket ticket = 5;
+}
+
 message ActionSendHttpReq {
 	string webhook_id = 1;
 	repeated string objects_send = 2; // user, conversation, ....
