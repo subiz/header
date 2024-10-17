@@ -340,6 +340,8 @@ service ConversationMgr {
 	rpc UnwatchConversation(header.Conversation) returns (Empty);
 	rpc UnhiddenConversation(header.Conversation) returns (Empty);
 
+	rpc UnsentMessage(header.Event) returns (header.Event);
+
 	rpc DismissConversation(header.Conversation) returns (Empty);
 	rpc ReconsiderConversation(header.Conversation) returns (Empty);
 
