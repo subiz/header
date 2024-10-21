@@ -5201,6 +5201,8 @@ message DocHit {
 	string user_type = 16;
 	Article article = 17;
 	Block description_block = 18;
+	map<string,string> query_matchM = 19; // query => part
+	int64 score = 20;
 }
 
 message DocSearchResponse {
