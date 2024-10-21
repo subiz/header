@@ -1703,6 +1703,9 @@ message Integration {
 	string meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
 	string meta_scope = 123;
+
+	string connector_status = 124; // active, missing_source, bad_token, invalid_integration, invalid_integration, inactive_account
+	string connector_status_updated = 126;
 }
 
 message TagRequest {
