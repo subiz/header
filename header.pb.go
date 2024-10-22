@@ -37849,24 +37849,24 @@ type DocHit struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	DocumentId       string            `protobuf:"bytes,3,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
-	Part             string            `protobuf:"bytes,4,opt,name=part,proto3" json:"part,omitempty"`
-	AvatarUrl        string            `protobuf:"bytes,5,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Name             string            `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Updated          int64             `protobuf:"varint,7,opt,name=updated,proto3" json:"updated,omitempty"`
-	Description      string            `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
-	IntegrationId    string            `protobuf:"bytes,9,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"` // for convo
-	Phone            string            `protobuf:"bytes,10,opt,name=phone,proto3" json:"phone,omitempty"`
-	Email            string            `protobuf:"bytes,11,opt,name=email,proto3" json:"email,omitempty"`
-	UserId           string            `protobuf:"bytes,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // for convo
-	Origin           string            `protobuf:"bytes,13,opt,name=origin,proto3" json:"origin,omitempty"`
-	User             *User             `protobuf:"bytes,14,opt,name=user,proto3" json:"user,omitempty"` //for primary user
-	SecondaryDoc     *DocHit           `protobuf:"bytes,15,opt,name=secondary_doc,json=secondaryDoc,proto3" json:"secondary_doc,omitempty"`
-	UserType         string            `protobuf:"bytes,16,opt,name=user_type,json=userType,proto3" json:"user_type,omitempty"`
-	Article          *Article          `protobuf:"bytes,17,opt,name=article,proto3" json:"article,omitempty"`
-	DescriptionBlock *Block            `protobuf:"bytes,18,opt,name=description_block,json=descriptionBlock,proto3" json:"description_block,omitempty"`
-	QueryMatchM      map[string]string `protobuf:"bytes,19,rep,name=query_matchM,json=queryMatchM,proto3" json:"query_matchM,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // query => part
-	Score            int64             `protobuf:"varint,20,opt,name=score,proto3" json:"score,omitempty"`
+	DocumentId       string          `protobuf:"bytes,3,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
+	Part             string          `protobuf:"bytes,4,opt,name=part,proto3" json:"part,omitempty"`
+	AvatarUrl        string          `protobuf:"bytes,5,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Name             string          `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Updated          int64           `protobuf:"varint,7,opt,name=updated,proto3" json:"updated,omitempty"`
+	Description      string          `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
+	IntegrationId    string          `protobuf:"bytes,9,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"` // for convo
+	Phone            string          `protobuf:"bytes,10,opt,name=phone,proto3" json:"phone,omitempty"`
+	Email            string          `protobuf:"bytes,11,opt,name=email,proto3" json:"email,omitempty"`
+	UserId           string          `protobuf:"bytes,12,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // for convo
+	Origin           string          `protobuf:"bytes,13,opt,name=origin,proto3" json:"origin,omitempty"`
+	User             *User           `protobuf:"bytes,14,opt,name=user,proto3" json:"user,omitempty"` //for primary user
+	SecondaryDoc     *DocHit         `protobuf:"bytes,15,opt,name=secondary_doc,json=secondaryDoc,proto3" json:"secondary_doc,omitempty"`
+	UserType         string          `protobuf:"bytes,16,opt,name=user_type,json=userType,proto3" json:"user_type,omitempty"`
+	Article          *Article        `protobuf:"bytes,17,opt,name=article,proto3" json:"article,omitempty"`
+	DescriptionBlock *Block          `protobuf:"bytes,18,opt,name=description_block,json=descriptionBlock,proto3" json:"description_block,omitempty"`
+	QueryMatchM      map[string]bool `protobuf:"bytes,19,rep,name=query_matchM,json=queryMatchM,proto3" json:"query_matchM,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"` // part_query
+	Score            int64           `protobuf:"varint,20,opt,name=score,proto3" json:"score,omitempty"`
 }
 
 func (x *DocHit) Reset() {
@@ -38013,7 +38013,7 @@ func (x *DocHit) GetDescriptionBlock() *Block {
 	return nil
 }
 
-func (x *DocHit) GetQueryMatchM() map[string]string {
+func (x *DocHit) GetQueryMatchM() map[string]bool {
 	if x != nil {
 		return x.QueryMatchM
 	}
@@ -65890,7 +65890,7 @@ var file_header_proto_rawDesc = []byte{
 	0x65, 0x1a, 0x3e, 0x0a, 0x10, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4d, 0x61, 0x74, 0x63, 0x68, 0x4d,
 	0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38,
 	0x01, 0x22, 0x93, 0x01, 0x0a, 0x11, 0x44, 0x6f, 0x63, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f,
