@@ -1212,6 +1212,7 @@ message CallInfo {
 message Rating {
 	common.Context ctx = 1;
 	string account_id = 2;
+	string id = 3;
 
 	string target_conversation_id = 5;
 	string target_message_id = 6;
