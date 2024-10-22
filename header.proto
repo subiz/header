@@ -5221,6 +5221,7 @@ message ArticleHit {
 	Block content_block = 5;
 
 	string anchor = 6;
+	string slug = 7;
 }
 
 message ArticleSearchResponse {
