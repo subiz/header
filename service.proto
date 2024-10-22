@@ -25,7 +25,7 @@ service DocSearch {
 
 	rpc Index(header.DocIndexRequest) returns (header.Empty);
 	rpc Search(header.DocSearchRequest) returns (header.DocSearchResponse);
-	rpc SearchIds(header.DocSearchRequest) returns (header.Ids);
+	rpc SearchIds(header.DocSearchRequest) returns (header.DocSearchResponse);
 
 	rpc ReportConversation(header.ConversationMetricsRequest) returns (header.ConversationMetrics);
 	rpc Report(header.ConvoReportRequest) returns (header.ConvoReportResponse);
