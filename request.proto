@@ -508,6 +508,7 @@ message DocSearchRequest {
 	bool is_only_id= 12;
 	string locale = 13;
 	bool is_shorten = 14;
+	int64 from_month = 15; 
 }
 
 message CreateAgentRequest {
