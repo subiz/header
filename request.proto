@@ -638,3 +638,11 @@ message ListVersions {
 	int64 limit = 5;
 	string locale = 6;
 }
+
+message ArticleReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 from_hour = 3;
+	int64 to_hour = 4;
+	bool is_only_count = 13;
+}
