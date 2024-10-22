@@ -607,6 +607,7 @@ message ListArticleRequest {
 	string anchor = 8;
 	int32 limit = 9;
 	bool shorten = 10;
+	string locale = 11; // vi-VN or vi_VN or vi
 }
 
 message SearchArticleRequest {
@@ -616,7 +617,7 @@ message SearchArticleRequest {
 	string category = 4; //
 
 	string query = 5;
-	string locale = 6; // vi_VN, en_US
+	string locale = 6; // vi_VN, en_US - required
 	string order_by = 7;
 	string anchor = 8;
 	int32 limit = 9;
@@ -635,4 +636,5 @@ message ListVersions {
 	string id = 3;
 	string anchor = 4;
 	int64 limit = 5;
+	string locale = 6;
 }

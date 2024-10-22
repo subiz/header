@@ -7352,6 +7352,46 @@ message Article {
 	string source_id = 32; // unique
 }
 
+message Document {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string kb = 3;
+	string category = 4;
+	string id = 5;
+	string locale = 6;
+	repeated ArticleTopic topics = 7; // shared
+
+	// I18nString title = 6;
+	string title = 8;
+	Block content = 9;
+
+	ArticleSEOSetting seo_setting = 10; // shared
+
+	int64 updated = 11;
+	string updated_by = 12;
+	int64 created = 13;
+	string created_by = 14;
+	string public_url = 15;
+	string latest_version = 17; // 1,2,3,..
+	string published_version = 18;
+	string shadow_updated = 25;
+	string author = 26;
+
+	int32 number_of = 19; // stt // shared
+
+	string published_by = 20;
+	int64 published = 21;
+	int64 deleted = 24;
+
+	int64 version_created = 27;
+	string version_created_by = 28;
+	string version = 23;
+
+	string slug = 29;
+	string source_id = 32; // shared-unique
+}
+
 message ArticleCategory {
 	common.Context ctx = 1;
 	string id = 2;
