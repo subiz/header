@@ -853,16 +853,6 @@ service KB {
 	rpc ViewArticle(header.Id) returns (Response);
 	rpc ReportArticle(ReportCountRequest) returns (Response); // report_counts
 
-	rpc CreateDocument(Document) returns (Response);
-	rpc UpdateDocument(Document) returns (Response);
-	rpc DeleteDocument(Id) returns (Response);
-	rpc GetDocument(Document) returns (Response);
-	rpc ListDocuments(ListArticleRequest) returns (Response);
-	rpc ListDocumentVersions(ListVersions) returns (Response);
-	rpc SearchDocument(SearchArticleRequest) returns (ArticleSearchResponse);
-	rpc AddTopicToDocument(header.ArticleTopicRequest) returns (Empty);
-	rpc RemoveTopicFromDocument(header.ArticleTopicRequest) returns (Empty);
-
 	rpc CreateArticleTopic(header.ArticleTopic) returns (header.ArticleTopic);
 	rpc UpdateArticleTopic(header.ArticleTopic) returns (header.ArticleTopic);
 	rpc DeleteArticleTopic(Id) returns (Empty);
