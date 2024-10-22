@@ -508,7 +508,7 @@ message DocSearchRequest {
 	bool is_only_id= 12;
 	string locale = 13;
 	bool is_shorten = 14;
-	int64 from_month = 15; 
+	int64 from_month = 15;
 }
 
 message CreateAgentRequest {
@@ -639,6 +639,7 @@ message ListVersions {
 	string locale = 6;
 }
 
+<<<<<<< HEAD
 message ReportCountRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -648,3 +649,13 @@ message ReportCountRequest {
 	repeated string event_types = 8;
 	string unit = 9; // hour, day
 }
+=======
+message CounterReportRequest {
+	common.Context ctx = 1;
+	string time_series = 3;
+	int64 from_hour = 5;
+	string range = 6; // hour, day
+	string tz = 7; // +00:07
+	int64 limit = 8;
+}
+>>>>>>> 242b6d3 (clean)

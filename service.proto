@@ -870,3 +870,7 @@ service AndroidNotificationMgr {
 	rpc PushAndroidNotifications(AndroidNotificationRequest) returns (Response);
 	rpc PingAndroidDevice(AndroidNotificationRequest) returns (Response);
 }
+
+service Counter {
+	rpc Report(CounterReportRequest) returns (Response);
+}

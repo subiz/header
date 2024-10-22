@@ -586,14 +586,28 @@ message Event {
 	int64 created = 8; // time that event submited (created) to subiz
 	int64 updated = 10;
 	int64 event_time = 11; // actual time that event created, empty -> fallback to created
-	string type = 9;
+	string type = 9; // alway lowercase, custom_* for custom event purchase
 	string session_id = 12; // extra id for many purpose (idempotency key)
 	By by = 50;
 	Touchpoint touchpoint = 52;
 	Data data = 20;
 	Data old = 53;
 	Data ref = 54;
-	// repeated EventField fields = 55;
+	repeated EventField metadata = 55;
+}
+
+message EventField {
+	string key = 2;
+	string type = 3;
+
+	string string = 4;
+	int64 int_number = 5;
+	double number = 6;
+	bool bool = 7;
+	string url = 8;
+	string label = 9;
+
+	repeated EventField list = 20;
 }
 
 message Data {
@@ -7954,4 +7968,40 @@ message BankTransferRequest {
 	bool gen_viet_qr_code = 18;
 	string viet_qr_image = 19;
 	string zalo_bank_transfer_text = 20;
+}
+
+message ReportUserEventEntry {
+	string timestamp = 2; // ms (24h)
+	string event_type = 3;
+	string event_count = 4;
+}
+
+message ReportUserEventRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+
+	string timezone = 5;
+	string start_ms = 6;
+}
+
+message ReportUserEventResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+
+	repeated ReportUserEventEntry entries = 5;
+}
+
+message CounterReportResponse {
+	common.Context ctx = 1;
+	string time_series = 3;
+	int64 data_points = 5;
+}
+
+message CounterDataPoint {
+	repeated string time_series = 4;
+	string id = 3;
+	int64 created = 4; // ms
+	int64 count = 5;
 }
