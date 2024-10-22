@@ -851,8 +851,8 @@ service KB {
 	rpc RemoveTopicFromArticle(header.ArticleTopicRequest) returns (Empty);
 	rpc RateArticle(header.Rating) returns (Response);
 	rpc ViewArticle(header.Id) returns (Response);
-	rpc ReportRatings(header.ArticleReportRequest) returns (header.ConvoReportResponse);
-	rpc ReportPageView(header.ArticleReportRequest) returns (header.ConvoReportResponse);
+	rpc ReportRatings(header.ConvoReportRequest) returns (header.ConvoReportResponse);
+	rpc ReportPageView(header.ConvoReportRequest) returns (header.ConvoReportResponse);
 
 	rpc CreateDocument(Document) returns (Response);
 	rpc UpdateDocument(Document) returns (Response);
