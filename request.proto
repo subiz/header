@@ -639,7 +639,6 @@ message ListVersions {
 	string locale = 6;
 }
 
-<<<<<<< HEAD
 message ReportCountRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -649,7 +648,7 @@ message ReportCountRequest {
 	repeated string event_types = 8;
 	string unit = 9; // hour, day
 }
-=======
+
 message CounterReportRequest {
 	common.Context ctx = 1;
 	string time_series = 3;
@@ -658,4 +657,3 @@ message CounterReportRequest {
 	string tz = 7; // +00:07
 	int64 limit = 8;
 }
->>>>>>> 242b6d3 (clean)

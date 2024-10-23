@@ -7999,8 +7999,9 @@ message CounterReportResponse {
 	int64 data_points = 5;
 }
 
+// needed for kafka
 message CounterDataPoint {
-	repeated string time_series = 4;
+	repeated string time_series = 2;
 	string id = 3;
 	int64 created = 4; // ms
 	int64 count = 5;
