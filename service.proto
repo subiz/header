@@ -48,6 +48,7 @@ service NumberRegistry {
 	rpc LookupPayment(String) returns (String);
 
 	rpc NewID2(header.Id) returns (header.Id);
+	rpc GetLastID(header.Id) returns (header.Id);
 }
 
 service Map {

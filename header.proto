@@ -7356,7 +7356,7 @@ message Article {
 	int64 created = 12;
 	string created_by = 13;
 	string public_url = 14;
-	string latest_version = 17; // 1,2,3,..
+	// string latest_version = 17; // 1,2,3,..
 	string public_version = 18;
 	string shadow_updated = 25;
 	string author = 26;
@@ -7394,6 +7394,7 @@ message Article {
 	//   published -> draft        | change published_version to ''
 	//   inprogress-> review       |
 	//   inprogress-> published    | change published_version=version
+	//   inprogress-> draft        | onlyif old.published_version == '', change published_version to ''
 	//
 	string state = 36; // read-only draft, published, review, inprogress
 }
