@@ -7344,7 +7344,7 @@ message Article {
 	string id = 5;
 	repeated ArticleTopic topics = 7;
 
-	string version = 23;
+	string version = 23; // current version
 	map<string, string> i18n_title = 30;
 	ArticleSEOSetting seo_setting = 31;
 
@@ -7357,7 +7357,7 @@ message Article {
 	string created_by = 13;
 	string public_url = 14;
 	string latest_version = 17; // 1,2,3,..
-	string published_version = 18;
+	string public_version = 18;
 	string shadow_updated = 25;
 	string author = 26;
 
@@ -7375,6 +7375,27 @@ message Article {
 	int64 num_upvote = 33;
 	int64 num_downvote = 34;
 	int64 num_pageview = 35;
+
+	// # when update (title | content | checkout an article (CheckoutArticle)) we must reset state to '' and
+	//   re-computed state using this formular:
+	//     published_version == ''             -> draft
+	//     published_version == latest_version -> published
+	//     publised_version != latest_version  -> inprogress
+	//     never                               -> review
+	//
+	// # when MANUALLY update state, only allow this
+	//   old       -> new          | note
+	//   ----------++--------------+------------------------------------------
+	//   draft     -> review       |
+	//   draft     -> published    | change published_version=version
+	//   review    -> inprogress   | onlyif old.published_version != ''
+	//   review    -> draft        | onlyif old.published_version == '', change published_version to ''
+	//   review    -> published    | change published_version=version
+	//   published -> draft        | change published_version to ''
+	//   inprogress-> review       |
+	//   inprogress-> published    | change published_version=version
+	//
+	string state = 36; // read-only draft, published, review, inprogress
 }
 
 message ArticleCategory {

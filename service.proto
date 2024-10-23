@@ -852,6 +852,8 @@ service KB {
 	rpc RateArticle(header.Rating) returns (Response);
 	rpc ViewArticle(header.Id) returns (Response);
 	rpc ReportArticle(ReportCountRequest) returns (Response); // report_counts
+	// rpc UpdateArticleState(Article) returns (Response); state
+	// rpc CheckoutArticle(Article) returns (Response); version
 
 	rpc CreateArticleTopic(header.ArticleTopic) returns (header.ArticleTopic);
 	rpc UpdateArticleTopic(header.ArticleTopic) returns (header.ArticleTopic);
