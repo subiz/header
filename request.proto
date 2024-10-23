@@ -652,8 +652,8 @@ message ReportCountRequest {
 message CounterReportRequest {
 	common.Context ctx = 1;
 	string time_series = 3;
-	int64 from_hour = 5;
-	string range = 6; // hour, day
+	int64 from_sec = 5;
+	string range = 6; // min, hour, day
 	string tz = 7; // +00:07
 	int64 limit = 8;
 }

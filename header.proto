@@ -7996,7 +7996,7 @@ message ReportUserEventResponse {
 message CounterReportResponse {
 	common.Context ctx = 1;
 	string time_series = 3;
-	int64 data_points = 5;
+	repeated int64 data_points = 5;
 }
 
 // needed for kafka
