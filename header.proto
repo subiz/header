@@ -6392,6 +6392,13 @@ message Response {
 	repeated PhoneDevice phone_devices = 151;
 
 	repeated EventType event_types = 152;
+	repeated ReportCount report_counts = 153;
+}
+
+message ReportCount {
+	string type = 7;
+	repeated int64 datapoints = 8;
+	repeated string labels = 9;
 }
 
 message ZaloCallConsent {

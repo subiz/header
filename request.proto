@@ -638,3 +638,13 @@ message ListVersions {
 	int64 limit = 5;
 	string locale = 6;
 }
+
+message ReportCountRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	int64 from_hour = 6;
+	int64 to_hour = 7;
+	repeated string event_types = 8;
+	string unit = 9; // hour, day
+}
