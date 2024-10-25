@@ -813,7 +813,7 @@ func makeScopeMap2() map[string]string {
 
 	m["account_manage"] = m["account_setting"] + " account:update agent_group:update agent:update subscription:update payment_method:read payment_method:update ticket_type:delete"
 	m["owner"] = m["account_manage"] + " " + m["account_setting"]
-	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " accmgr:update"
+	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " accmgr:update accmgr:read"
 	m["all"] = m["subiz"]
 
 	// secondary scopes (use for resource type only)
