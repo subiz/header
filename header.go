@@ -1,6 +1,7 @@
 package header
 
 import (
+	_ "embed"
 	hexa "encoding/hex"
 	"encoding/json"
 	"html"
@@ -17,6 +18,9 @@ import (
 	"github.com/subiz/log"
 	"google.golang.org/protobuf/proto"
 )
+
+//go:embed perm.json
+var permJSON string
 
 var updateTable = map[string]bool{
 	"user-user":      true,
@@ -687,19 +691,54 @@ func _setPrimaryScope(k string) {
 	ScopeM[k][k] = true
 }
 
-func init() {
-	objM := map[string]bool{} // list of object
-	for scope, m := range makeScopeMap2() {
-		for _, k := range strings.Split(m, " ") {
-			if k == "" {
-				continue
-			}
-			if ScopeM[scope] == nil {
-				ScopeM[scope] = map[string]bool{}
-			}
-			ScopeM[scope][k] = true
-			objM[strings.Split(k, ":")[0]] = true // ticket, ticket_type, account...
+type PermStruct struct {
+	Scope string
+	Perm  map[string]string
+}
+
+func expandScope(permfile map[string]*PermStruct, scope string) {
+	permStruct := permfile[scope]
+
+	if ScopeM[scope] == nil {
+		ScopeM[scope] = map[string]bool{}
+	}
+	for _, subScope := range strings.Split(permStruct.Scope, " ") {
+		if subScope == "" {
+			continue
 		}
+		expandScope(permfile, subScope)
+		for k, v := range ScopeM[subScope] {
+			ScopeM[scope][k] = v
+		}
+	}
+}
+
+func init() {
+	permfile := map[string]*PermStruct{}
+	if err := json.Unmarshal([]byte(permJSON), &permfile); err != nil {
+		panic(err)
+	}
+	objM := map[string]bool{} // list of object
+	for scope, p := range permfile {
+		if ScopeM[scope] == nil {
+			ScopeM[scope] = map[string]bool{}
+		}
+		for obj, str := range p.Perm {
+			for _, k := range strings.Split(str, " ") {
+				if k == "" {
+					continue
+				}
+				if ScopeM[scope] == nil {
+					ScopeM[scope] = map[string]bool{}
+				}
+				ScopeM[scope][obj+":"+k] = true
+				objM[obj] = true // ticket, ticket_type, account...
+			}
+		}
+	}
+
+	for scope := range permfile {
+		expandScope(permfile, scope)
 	}
 
 	for obj := range objM {
@@ -758,6 +797,7 @@ const TICKET_TEMPLATE ObjectType = "ticket_template"
 const ACCOUNT ObjectType = "account"
 const CONVERSATION ObjectType = "conversation"
 const AGENT_GROUP ObjectType = "agent_group"
+const CALL_CAMPAIGN ObjectType = "call_campaign"
 const RULE ObjectType = "rule"
 const INTEGRATION ObjectType = "integration"
 const MESSAGETEMPLATE ObjectType = "message_template"
@@ -795,35 +835,6 @@ const KNOWLEGE_BASE ObjectType = "knowledge_base"
 const ARTICLE ObjectType = "article"
 const ACCMGR ObjectType = "accmgr"
 const REPORT ObjectType = "report"
-
-// updated perm
-func makeScopeMap2() map[string]string {
-	// scope => permission
-	var m = map[string]string{}
-	m["agent"] = "account:read conversation:read:own conversation:create conversation:update:own agent_group:read rule:read integration:read message_template:read message_template:update:own mesasge_template:delete:own message_template:create tag:read user:delete:own knowledge_base:read article:read bank_account:read " +
-		" whitelist:read whitelist:update whitelist:delete whitelist:create subscription:read user:read:own user:update:own user:create  attribute:read bot:read agent:read conversation_setting:read web_plugin:read file:read file:create file:update lang:read user_label:read user_view:update:own user_view:create user_view:read user_view:update:own" +
-		" order:create  order:read order:update:own shop_setting:read conversation_modal:read conversation_automation:read phone_device:read:own phone_device:update:own call_setting:read greeting_audio:read " +
-		" ticket:invite:own ticket:update:own ticket:read:own product:create product:update:own product:read ticket_type:read segment:read segment:update:own segment:create ticket_template:create ticket_template:read ticket_template:update:own sla_policy:read live:read "
-	m["view_other_convos"] = "conversation:read"
-	m["view_others"] = " live:read conversation:read user:read order:read ticket:read "
-	m["supervisor"] = " live:read conversation:read user:read order:read ticket:read report:read "
-	m["export_user"] = "user:export" // export
-
-	m["account_setting"] = m["view_other_convos"] + " " + m["agent"] + " report:read ticket:read user:read user:delete live:read auto_segment:create account:update agent:update agent:delete agent:create agent_group:delete agent_group:update agent_group:create rule:delete rule:update rule:create integration:delete integration:update integration:create message_template:delete message_template:update tag:delete tag:update tag:create attribute:update attribute:create bot:update bot:delete bot:create conversation_setting:update web_plugin:update web_plugin:create web_plugin:delete webhook:read webhook:update webhook:create webhook:delete lang:create lang:update user_label:create user_label:update user_label:delete shop_setting:update shop_setting:create conversation_modal:update conversation_modal:create conversation_automation:update conversation_automation:create phone_device:read phone_device:create phone_device:update phone_device:delete call_setting:update greeting_audio:create greeting_audio:update greeting_audio:delete ticket:update order:read order:update product:update product:delete order:delete ticket_type:create ticket_type:update ticket:delete user_view:update segment:update ticket_template:update ticket:invite user:update file:delete sla_policy:update sla_policy:delete sla_policy:create knowledge_base:update knowledge_base:create knowledge_base:delete article:create article:delete article:update order:import order:export user:export segment:delete workflow:update workflow:create workflow:delete workflow:read bank_account:update bank_account:delete "
-
-	m["account_manage"] = m["account_setting"] + " account:update agent_group:update agent:update subscription:update payment_method:read payment_method:update ticket_type:delete"
-	m["owner"] = m["account_manage"] + " " + m["account_setting"]
-	m["subiz"] = m["account_manage"] + " " + m["account_setting"] + " accmgr:update accmgr:read"
-	m["all"] = m["subiz"]
-
-	// secondary scopes (use for resource type only)
-	m["ticket_type_member"] = "ticket:create ticket:read ticket:update ticket:invite"
-	m["ticket_type_manager"] = m["ticket_type_member"] + " ticket_type:update"
-
-	m["segment_member"] = "user:read user:update user:invite"
-	m["segment_manager"] = m["segment_member"] + " segment:update"
-	return m
-}
 
 func CalcTotalOrder(order *Order) {
 	subtotal := float32(0)

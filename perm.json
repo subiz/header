@@ -1,0 +1,149 @@
+{
+  "agent": {
+    "perm": {
+      "call_campaign": "read",
+      "account": "read",
+      "conversation": "create read:own update:own",
+      "agent_group": "read",
+      "rule": "read",
+      "integration": "read",
+      "message_template": "read update:own delete:own create",
+      "tag": "read",
+      "knowledge_base": "read",
+      "article": "read",
+      "bank_account": "read",
+      "whitelist": "read update delete create",
+      "subscription": "read",
+      "user": "read:own update:own create delete:own",
+      "attribute": "read",
+      "bot": "read",
+      "agent": "read",
+      "conversation_setting": "read",
+      "web_plugin": "read",
+      "file": "read create update",
+      "lang": "read",
+      "user_label": "read",
+      "user_view": "update:own create read update:own",
+      "order": "create read update:own",
+      "shop_setting": "read",
+      "conversation_modal": "read",
+      "conversation_automation": "read",
+      "phone_device": "update:own read:own",
+      "call_setting": "read",
+      "greeting_audio": "read",
+      "ticket": "invite:own update:own read:own",
+      "product": "create update:own read",
+      "ticket_type": "read",
+      "segment": "update:own create read",
+      "ticket_template": "create read update:own",
+      "sla_policy": "read",
+      "live": "read"
+    }
+  },
+  "view_other_convos": {
+    "perm": {
+      "conversation": "read"
+    }
+  },
+  "view_others": {
+    "perm": {
+      "live": "read",
+      "conversation": "read",
+      "user": "read",
+      "order": "read",
+      "ticket": "read"
+    }
+  },
+  "supervisor": {
+    "perm": {
+      "live": "read",
+      "conversation": "read",
+      "user": "read",
+      "order": "read",
+      "ticket": "read",
+      "report": "read"
+    }
+  },
+  "export_user": {
+    "perm": {
+      "user": "export"
+    }
+  },
+
+  "account_setting": {
+    "scope": "view_other_convos agent",
+    "perm": {
+      "call_campaign": "create update delete",
+      "knowledge_base": "update create delete",
+      "report": "read",
+      "article": "create delete update",
+      "ticket": "read update delete invite",
+      "user": "read update delete export",
+      "live": "read",
+      "auto_segment": "create",
+      "bank_account": "create update delete",
+      "account": "update",
+      "agent": "update delete create",
+      "agent_group": "delete update create",
+      "rule": "delete update create",
+      "integration": "delete update create",
+      "message_template": "update delete",
+      "tag": "update create delete",
+      "attribute": "create update",
+      "bot": "create delete update",
+      "conversation_setting": "update",
+      "web_plugin": "update create delete",
+      "webhook": "read update create delete",
+      "lang": "create update",
+      "user_label": "update delete create",
+      "shop_setting": "create update",
+      "conversation_modal": "create update",
+      "conversation_automation": "update create",
+      "phone_device": "read create update delete",
+      "call_setting": "update",
+      "greeting_audio": "create update delete",
+      "order": "update read delete export import",
+      "product": "update delete",
+      "ticket_type": "create update",
+      "user_view": "update",
+      "segment": "delete update",
+      "ticket_template": "update",
+      "file": "delete",
+      "sla_policy": "create delete update",
+      "workflow": "update create delete read"
+    }
+  },
+  "account_manage": {
+    "scope": "account_setting",
+    "perm": {
+      "account": "update",
+      "agent_group": "update",
+      "agent": "update",
+      "subscription": "update",
+      "payment_method": "read update",
+      "ticket_type": "delete"
+    }
+  },
+  "owner": { "scope": "account_manage account_setting" },
+  "subiz": {
+    "scope": "account_manage account_setting",
+    "perm": { "accmgr": "read update" }
+  },
+  "all": { "scope": "subiz" },
+  "ticket_type_member": {
+    "perm": {
+      "ticket": "create read update invite"
+    }
+  },
+  "ticket_type_manager": {
+    "scope": "ticket_type_member",
+    "perm": { "ticket_type": "update" }
+  },
+  "segment_member": {
+    "perm": { "user": "read update invite" }
+  },
+  "segment_manager": {
+    "scope": "segment_member",
+    "perm": { "segment": "update" }
+  }
+}
