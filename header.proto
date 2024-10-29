@@ -707,6 +707,7 @@ message Data {
 	WorkflowPulse workflow_pulse = 127; // workflow_pulsed
 	WorkflowTimeup workflow_timeup = 128; // workflow_timeup
 	BankAccount bank_account = 129;
+	ArticleTopic article_topic = 130;
 }
 
 message ConversationMeta {
