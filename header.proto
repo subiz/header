@@ -6299,13 +6299,12 @@ message ActionWaitBranch {
 
 	int64 sec = 21; // wait_for=duration
 	string next_action_id = 20;
-	ActionBranching branching = 22;
 }
 
 message ActionBranchingBranch {
 	string ui_type = 2;
 	// repeated string event_types = 3; // "scheduled", "user_info_updated"
-	UserViewCondition condition = 4;
+	WorkflowCondition condition = 4;
 	string next_action_id = 5;
 }
 
