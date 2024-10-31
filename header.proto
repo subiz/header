@@ -6246,13 +6246,12 @@ message WorkflowAction {
 	ActionSendMessage send_message = 41;
 	ActionSendHttpReq send_http_req = 42;
 	ActionSendTranscript send_transcript = 43;
-	ActionFollowUp follow_up = 44;
+	ActionWaitMessage wait_message = 44;
 }
 
-message ActionFollowUp {
+message ActionWaitMessage {
 	int64 wait_sec = 1;
 	WorkflowCondition condition = 2;
-	Block message = 3;
 }
 
 message ActionSendTranscript {
