@@ -6246,6 +6246,13 @@ message WorkflowAction {
 	ActionSendMessage send_message = 41;
 	ActionSendHttpReq send_http_req = 42;
 	ActionSendTranscript send_transcript = 43;
+	ActionFollowUp follow_up = 44;
+}
+
+message ActionFollowUp {
+	int64 wait_sec = 1;
+	WorkflowCondition condition = 2;
+	Block message = 3;
 }
 
 message ActionSendTranscript {
@@ -6781,24 +6788,16 @@ message WorkflowTrigger {
 	// after_ticket_due_date
 	// still_unchanged_user_label
 	// still_opened_conversation
-	// follow_up_conversation
 	string ui_id = 3;
 	string id = 4;
 
 	int64 ui_wait_sec = 5;
 	string ui_sla_target = 6;
-	repeated FollowUpAction flow_up = 7; //specific for uid follow_up_conversation
 
 	repeated string events = 10; // ticket_updated, ticket_created
 	string object_id = 13;
 
 	WorkflowCondition condition = 14;
-}
-
-message FollowUpAction {
-	int64 wait_sec = 1;
-	WorkflowCondition condition = 2;
-	Block message = 3;
 }
 
 message WorkflowTimming {
