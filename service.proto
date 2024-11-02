@@ -204,6 +204,7 @@ service AccountMgr {
 	rpc VerifyBankAccount(header.Id) returns (Response); // subiz only
 
 	rpc GenerateBankTransferRequest(header.BankTransferRequest) returns (Response);
+	rpc GenerateQrCodeRequest(header.GenQrCodeRequest) returns (QrCode);
 }
 
 // user services

@@ -8005,6 +8005,27 @@ message BankTransferRequest {
 	string zalo_bank_transfer_text = 20;
 }
 
+message GenQrCodeRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	bool one_time = 3;
+	string service_type = 4;
+	int64 fpv_amount = 5;
+	string bank_bin = 6;
+	string account_number = 7;
+	string note = 8;
+	string currency = 9; // VND, USD
+	string country_code = 10; // VN
+}
+
+message QrCode{
+	common.Context ctx = 1;
+	string account_id = 2;
+	string qr_image = 3; // base 64
+	string qr_code = 4; 
+}
+
 message ReportUserEventEntry {
 	string timestamp = 2; // ms (24h)
 	string event_type = 3;
