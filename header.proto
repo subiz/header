@@ -6264,7 +6264,7 @@ message ActionCreateOrder {
 	string private_note = 17;
 	string phone = 18;
 	string item_product_source_id = 19;
-	int64 item_quality = 20;
+	string item_quantity = 20;
 }
 
 message ActionWaitMessage {
