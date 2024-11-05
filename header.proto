@@ -6224,7 +6224,7 @@ message WorkflowAction {
 	string name = 5;
 	string next_action_id = 6;
 	bool is_ignore_old_event = 7;
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message, goal
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message, goal, create_order
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6248,6 +6248,23 @@ message WorkflowAction {
 	ActionSendHttpReq send_http_req = 42;
 	ActionSendTranscript send_transcript = 43;
 	ActionWaitMessage wait_message = 44;
+	ActionCreateOrder create_order = 45;
+}
+
+message ActionCreateOrder {
+	string note = 7; // public note
+	string status = 10;
+	// repeated OrderItem items = 11;
+
+	string salesperson = 12;
+	string user_id = 13;
+	string pipeline = 14;
+	string pipeline_stage = 15;
+	repeated string tags = 16;
+	string private_note = 17;
+	string phone = 18;
+	string item_product_source_id = 19;
+	int64 item_quality = 20;
 }
 
 message ActionWaitMessage {
