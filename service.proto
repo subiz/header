@@ -878,4 +878,5 @@ service AndroidNotificationMgr {
 
 service Counter {
 	rpc Report(CounterReportRequest) returns (CounterReportResponse);
+	rpc Count(CounterReportRequest) returns (CounterReportResponse);	
 }

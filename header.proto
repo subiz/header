@@ -8077,5 +8077,8 @@ message CounterDataPoint {
 	repeated string time_series = 2;
 	string id = 3;
 	int64 created = 4; // ms
-	int64 count = 5;
+	int64 count = 5; // deprecated
+
+	int64 id_created = 6; // ms
+	repeated int64 counts = 7;
 }
