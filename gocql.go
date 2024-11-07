@@ -3,6 +3,7 @@ package header
 import (
 	"context"
 	"fmt"
+	"os"
 	"strings"
 	"time"
 
@@ -11,11 +12,25 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
+var _hostname string
+
+func init() {
+	_hostname, _ = os.Hostname()
+	_hostname = strings.Split(_hostname, "-")[0]
+}
+
 var attempCount = promauto.NewCounterVec(prometheus.CounterOpts{
 	Name: "gocql_count_3",
 	Help: "The total number of query attempts",
 }, []string{
 	"statement", "type",
+})
+
+var opsBandwidth = promauto.NewCounterVec(prometheus.CounterOpts{
+	Name: "gocql_bandwidth",
+	Help: "Gocql bandwidth",
+}, []string{
+	"host",
 })
 
 var attempErrorCount = promauto.NewCounterVec(prometheus.CounterOpts{
@@ -41,10 +56,17 @@ func (qo *queryObserver) ObserveQuery(ctx context.Context, q gocql.ObservedQuery
 	}
 }
 
+type frameObserver struct{}
+
+func (qo *frameObserver) ObserveFrameHeader(ctx context.Context, h gocql.ObservedFrameHeader) {
+	opsBandwidth.WithLabelValues(_hostname).Add(float64(h.Length))
+}
+
 func ConnectDB(seeds []string, keyspace string) *gocql.Session {
 	var session *gocql.Session
 	cluster := gocql.NewCluster(seeds...)
 	cluster.QueryObserver = &queryObserver{}
+	cluster.FrameHeaderObserver = &frameObserver{}
 	cluster.Timeout = 30 * time.Second
 	cluster.ConnectTimeout = 30 * time.Second
 	cluster.Keyspace = keyspace
