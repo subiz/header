@@ -8069,6 +8069,7 @@ message ReportUserEventResponse {
 message CounterReportResponse {
 	common.Context ctx = 1;
 	string time_series = 3;
+	string metric = 4;
 	repeated int64 counts = 5;
 }
 
@@ -8081,4 +8082,11 @@ message CounterDataPoint {
 
 	int64 id_created = 6; // ms
 	repeated int64 counts = 7;
+}
+
+message MetricCounterEntry {
+	string metric = 1;
+	string key = 2; 
+	int64 created = 3; // ms
+	bool checked = 4;
 }
