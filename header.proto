@@ -6437,6 +6437,8 @@ message Response {
 
 	repeated EventType event_types = 152;
 	repeated ReportCount report_counts = 153;
+	Site site = 156;
+	repeated Site sites = 157;
 }
 
 message ReportCount {

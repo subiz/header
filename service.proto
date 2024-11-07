@@ -647,6 +647,11 @@ service WidgetService {
 	rpc SearchImages(Id) returns (header.UploadedImages);
 	rpc ListNotifProfiles(Id) returns (header.NotifProfiles);
 	rpc ListNotifBackgrounds(Id) returns (header.Urls);
+
+	rpc ListSites(Id) returns (header.Response);
+	rpc DeleteSite(Id) returns (header.Empty);
+	rpc CreateSite(Site) returns (header.Response);
+	rpc VerifySite(Site) returns (header.Response);
 }
 
 // bizbot services
