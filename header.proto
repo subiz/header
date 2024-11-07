@@ -8085,8 +8085,8 @@ message CounterDataPoint {
 }
 
 message MetricCounterEntry {
-	string metric = 1;
-	string key = 2; 
+	repeated string metric = 1;
+	repeated string key = 2; 
 	int64 created = 3; // ms
-	bool checked = 4;
+	repeated bool checked = 4; //len(checked) = len (metric)
 }
