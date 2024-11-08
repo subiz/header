@@ -518,7 +518,6 @@ message CreateAgentRequest {
 	string fullname = 4;
 	string email = 5; // reflect from agent profile
 	string phone = 8; // reflect form agent profile
-	string job_title = 11; // deprecated
 
 	string avatar_url = 13;
 	string avatar_url_128 = 18;

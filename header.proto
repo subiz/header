@@ -1020,7 +1020,6 @@ message StartRequest {
 	string conversation_id = 14;
 
 	User user = 25;
-	// string integration_id = 26; // deprecated, use touchpoint
 	string message = 30;
 	repeated ConversationMember members = 31;
 	string group_id = 32;
@@ -1272,7 +1271,6 @@ message Message {
 	Block block = 7;
 	repeated KV fields = 10;
 
-	// string integration_id = 15; // deprecated, use event touchpoint
 	string user_id = 19;
 
 	// used for reaction and delivery status, could be ignore
@@ -2303,11 +2301,8 @@ message WidgetUserSetting {
 	account.Account account = 3;
 	repeated account.Agent agents = 5;
 	string account_id = 2; // subiz use only
-	// User user = 4; // remove
 	string user_id = 7; // subiz use only
 	string language = 6;
-	// bool send_transcript = 8;
-	// WidgetSetting account_setting = 9;
 	repeated Bot bots = 14;
 	repeated WebPlugin plugins = 15;
 
@@ -6177,7 +6172,6 @@ enum E {
 
 	invalid_product_category = 148;
 	invalid_product_visibility = 149;
-	file_system_error = 152;
 
 	message_too_large = 156;
 	field_too_long = 159;
@@ -7436,8 +7430,8 @@ message ArticleCategory {
 	string id = 2;
 	string account_id = 3;
 
-	I18nString title = 4; //// depreacted
-	I18nString description = 6; // depreacted
+	// I18nString title = 4; //// depreacted
+	// I18nString description = 6; // depreacted
 
 	map<string, string> i18n_title = 21;
 	map<string, string> i18n_description = 22;
@@ -8042,7 +8036,7 @@ message QrCode{
 	common.Context ctx = 1;
 	string account_id = 2;
 	string qr_image = 3; // base 64
-	string qr_code = 4; 
+	string qr_code = 4;
 }
 
 message ReportUserEventEntry {
@@ -8084,11 +8078,4 @@ message CounterDataPoint {
 
 	int64 id_created = 6; // ms
 	repeated int64 counts = 7;
-}
-
-message MetricCounterEntry {
-	repeated string metrics = 1;
-	string key = 2; 
-	int64 created = 3; // ms
-	repeated bool is_checks = 4; //len(checkeds) = len (metrics)
 }

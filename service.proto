@@ -109,7 +109,7 @@ service AccountMgr {
 	rpc DeleteGroup(Id) returns (Empty);
 	rpc ListGroups(Id) returns (header.AgentGroups);
 
-	rpc ChangeEmail(account.Agent) returns (account.Agent);
+	rpc SbzChangeEmail(header.AgentProfile) returns (header.AgentProfile);  // subiz only
 	rpc SyncPublicHolidays(account.SyncPublicHolidaysRequest) returns (account.BusinessHours);
 	rpc TransferOwner(Id) returns (account.Agent);
 
@@ -883,7 +883,7 @@ service AndroidNotificationMgr {
 
 service Counter {
 	rpc Report(CounterReportRequest) returns (CounterReportResponse);
-	rpc Count(CounterReportRequest) returns (CounterReportResponse);	
+	rpc Count(CounterReportRequest) returns (CounterReportResponse);
 	rpc ReportMetric(CounterReportRequest) returns (CounterReportResponse);
-	rpc CountMetric(CounterReportRequest) returns (CounterReportResponse);	
+	rpc CountMetric(CounterReportRequest) returns (CounterReportResponse);
 }
