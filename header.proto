@@ -6433,6 +6433,9 @@ message Response {
 	repeated ReportCount report_counts = 153;
 	Site site = 156;
 	repeated Site sites = 157;
+
+	AttributeDefinition attribute_definition = 160;
+	repeated AttributeDefinition attribute_definitions = 161;
 }
 
 message ReportCount {
@@ -6495,7 +6498,6 @@ message WorkflowSession {
 	common.Context ctx = 1;
 
 	string id = 4;
-	// repeated string history = 5;
 	string action_id = 6; // current executing
 	WorkflowAction action = 7; // only recompute when list, not save in db
 	map<string, string> KV = 8;

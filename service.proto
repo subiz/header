@@ -293,7 +293,8 @@ service NoteMgr {
 }
 
 service AttributeMgr {
-	rpc ListAttributeDefinitions(Empty) returns (header.AttributeDefinitions);
+	rpc ListAttributeDefinitions(Empty) returns (header.AttributeDefinitions); // deprecated
+	rpc ListAttributeDefinitions2(Id) returns (header.Response);
 	rpc CreateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 	rpc UpdateAttributeDefinition(header.AttributeDefinition) returns (header.AttributeDefinition);
 }
@@ -379,7 +380,7 @@ service ConversationMgr {
 	rpc DeleteConversationAutomation(Id) returns (Empty);
 	rpc ReadConversationAutomation(Id) returns (header.ConversationAutomation);
 
-	rpc ListPhoneDevices(header.Id) returns (header.PhoneDevices);
+	rpc ListPhoneDevices(header.Id) returns (header.Response);
 	rpc CreatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
 	rpc UpdatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
 	rpc DeletePhoneDevice(header.Id) returns (Empty);
@@ -409,6 +410,7 @@ service ConversationMgr {
 	rpc ApplyMessage(header.Event) returns (header.Event);
 
 	rpc CountAgentUnreadMessages(header.Id) returns (Response);
+	rpc OnWebUserCreated(header.Id) returns (header.Empty);
 }
 
 service TicketMgr {
