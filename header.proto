@@ -6217,7 +6217,6 @@ message WorkflowAction {
 	string id = 4;
 	string name = 5;
 	string next_action_id = 6;
-	bool is_ignore_old_event = 7;
 	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message, goal, create_order
 
 	ActionJump jump = 15;
@@ -6311,6 +6310,7 @@ message ActionWaitBranch {
 
 	int64 sec = 21; // wait_for=duration
 	string next_action_id = 20;
+	ActionBranching branching = 22;
 }
 
 message ActionBranchingBranch {
