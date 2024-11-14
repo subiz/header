@@ -1757,7 +1757,9 @@ message AssignRequest {
 
 	repeated string fallback_agents = 13;
 	Event start_event = 14;
-	bool is_assign_one_agent = 15;
+	bool remove_other_agents = 15;
+	bool disable_fallback = 16;
+
 }
 
 message EndchatConnectorSetting {
