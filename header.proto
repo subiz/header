@@ -863,6 +863,7 @@ message Rule {
 	repeated string priorities = 38;
 	string sla_policy = 39;
 	int64 apply_sla_policy = 40;
+	bool remove_other_agents = 41;
 }
 
 message FacebookCondition {
