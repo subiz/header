@@ -207,6 +207,12 @@ service AccountMgr {
 	rpc GenerateQrCodeRequest(header.GenQrCodeRequest) returns (QrCode);
 }
 
+service UserCache {
+	rpc ListLeads(header.UserView) returns (Response); // ok
+	rpc CountLeads(header.UserView) returns (Response); // ok
+	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse); // ok
+}
+
 // user services
 service UserMgr {
 	rpc MergeUser(header.Users) returns (header.User);
