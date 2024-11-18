@@ -6935,18 +6935,15 @@ message WorkflowLog {
 	Event event = 11;
 	By by = 30;
 
-
 	// extra data
 	string conversation_id = 12;
-	string message_id = 13;
+	repeated string message_ids = 13;
 	string user_id = 14;
 	string order_id = 15;
 	string event_id = 16;
-	string message_channel = 17;
-	string message_touchpoint_source = 18;
-	string message_touchpoint_id = 19;
-	string message_text = 20;
-	string message_assign_tos = 21;
+	string ticket_id = 17;
+	
+	repeated string assign_tos = 21;
 }
 
 message CreateAccountRequest {
