@@ -168,7 +168,7 @@ message ListWorkflowLogRequest {
 
 	int64 limit = 6;
 	string anchor = 7;
-	bool is_include_wait = 8;
+	bool is_include_internal_log = 8;
 }
 
 message BotsRequest {
