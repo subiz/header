@@ -2218,7 +2218,7 @@ var file_service_proto_rawDesc = []byte{
 	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x41, 0x6e, 0x64, 0x72, 0x6f, 0x69, 0x64, 0x4e,
 	0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x1a, 0x10, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x32, 0xaf, 0x02, 0x0a, 0x07, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72,
+	0x6f, 0x6e, 0x73, 0x65, 0x32, 0xa5, 0x02, 0x0a, 0x07, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72,
 	0x12, 0x45, 0x0a, 0x06, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x12, 0x1c, 0x2e, 0x68, 0x65, 0x61,
 	0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
@@ -2227,19 +2227,18 @@ var file_service_proto_rawDesc = []byte{
 	0x12, 0x1c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65,
 	0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d,
 	0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52,
-	0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a,
-	0x0c, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x12, 0x1c, 0x2e,
+	0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x46, 0x0a,
+	0x07, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x32, 0x12, 0x1c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65,
+	0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e,
+	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x45, 0x0a, 0x06, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x32, 0x12,
+	0x1c, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72,
+	0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e,
 	0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65,
-	0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f,
-	0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4a, 0x0a, 0x0b, 0x43, 0x6f,
-	0x75, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x72, 0x69, 0x63, 0x12, 0x1c, 0x2e, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x72, 0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
-	0x2e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x65, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x72, 0x74, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65,
-	0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x70, 0x6f, 0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x19, 0x5a, 0x17,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a,
+	0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_service_proto_goTypes = []interface{}{
@@ -3170,8 +3169,8 @@ var file_service_proto_depIdxs = []int32{
 	196, // 609: header.AndroidNotificationMgr.PingAndroidDevice:input_type -> header.AndroidNotificationRequest
 	197, // 610: header.Counter.Report:input_type -> header.CounterReportRequest
 	197, // 611: header.Counter.Count:input_type -> header.CounterReportRequest
-	197, // 612: header.Counter.ReportMetric:input_type -> header.CounterReportRequest
-	197, // 613: header.Counter.CountMetric:input_type -> header.CounterReportRequest
+	197, // 612: header.Counter.Report2:input_type -> header.CounterReportRequest
+	197, // 613: header.Counter.Count2:input_type -> header.CounterReportRequest
 	9,   // 614: header.GooglekonService.SendEventToGoogle:output_type -> header.Empty
 	2,   // 615: header.GooglekonService.ReadGoogleLocationSetting:output_type -> header.GoogleLocationSetting
 	2,   // 616: header.GooglekonService.UpdateGoogleLocationSetting:output_type -> header.GoogleLocationSetting
@@ -3784,8 +3783,8 @@ var file_service_proto_depIdxs = []int32{
 	212, // 1223: header.AndroidNotificationMgr.PingAndroidDevice:output_type -> header.Response
 	312, // 1224: header.Counter.Report:output_type -> header.CounterReportResponse
 	312, // 1225: header.Counter.Count:output_type -> header.CounterReportResponse
-	312, // 1226: header.Counter.ReportMetric:output_type -> header.CounterReportResponse
-	312, // 1227: header.Counter.CountMetric:output_type -> header.CounterReportResponse
+	312, // 1226: header.Counter.Report2:output_type -> header.CounterReportResponse
+	312, // 1227: header.Counter.Count2:output_type -> header.CounterReportResponse
 	614, // [614:1228] is the sub-list for method output_type
 	0,   // [0:614] is the sub-list for method input_type
 	0,   // [0:0] is the sub-list for extension type_name
@@ -27075,8 +27074,8 @@ var _AndroidNotificationMgr_serviceDesc = grpc.ServiceDesc{
 type CounterClient interface {
 	Report(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
 	Count(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
-	ReportMetric(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
-	CountMetric(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
+	Report2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
+	Count2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
 }
 
 type counterClient struct {
@@ -27105,18 +27104,18 @@ func (c *counterClient) Count(ctx context.Context, in *CounterReportRequest, opt
 	return out, nil
 }
 
-func (c *counterClient) ReportMetric(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error) {
+func (c *counterClient) Report2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error) {
 	out := new(CounterReportResponse)
-	err := c.cc.Invoke(ctx, "/header.Counter/ReportMetric", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Counter/Report2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *counterClient) CountMetric(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error) {
+func (c *counterClient) Count2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error) {
 	out := new(CounterReportResponse)
-	err := c.cc.Invoke(ctx, "/header.Counter/CountMetric", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/header.Counter/Count2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -27127,8 +27126,8 @@ func (c *counterClient) CountMetric(ctx context.Context, in *CounterReportReques
 type CounterServer interface {
 	Report(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
 	Count(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
-	ReportMetric(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
-	CountMetric(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
+	Report2(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
+	Count2(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
 }
 
 // UnimplementedCounterServer can be embedded to have forward compatible implementations.
@@ -27141,11 +27140,11 @@ func (*UnimplementedCounterServer) Report(context.Context, *CounterReportRequest
 func (*UnimplementedCounterServer) Count(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
 }
-func (*UnimplementedCounterServer) ReportMetric(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReportMetric not implemented")
+func (*UnimplementedCounterServer) Report2(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Report2 not implemented")
 }
-func (*UnimplementedCounterServer) CountMetric(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CountMetric not implemented")
+func (*UnimplementedCounterServer) Count2(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Count2 not implemented")
 }
 
 func RegisterCounterServer(s *grpc.Server, srv CounterServer) {
@@ -27188,38 +27187,38 @@ func _Counter_Count_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Counter_ReportMetric_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Counter_Report2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CounterReportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CounterServer).ReportMetric(ctx, in)
+		return srv.(CounterServer).Report2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Counter/ReportMetric",
+		FullMethod: "/header.Counter/Report2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CounterServer).ReportMetric(ctx, req.(*CounterReportRequest))
+		return srv.(CounterServer).Report2(ctx, req.(*CounterReportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Counter_CountMetric_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Counter_Count2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CounterReportRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CounterServer).CountMetric(ctx, in)
+		return srv.(CounterServer).Count2(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/header.Counter/CountMetric",
+		FullMethod: "/header.Counter/Count2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CounterServer).CountMetric(ctx, req.(*CounterReportRequest))
+		return srv.(CounterServer).Count2(ctx, req.(*CounterReportRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -27237,12 +27236,12 @@ var _Counter_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Counter_Count_Handler,
 		},
 		{
-			MethodName: "ReportMetric",
-			Handler:    _Counter_ReportMetric_Handler,
+			MethodName: "Report2",
+			Handler:    _Counter_Report2_Handler,
 		},
 		{
-			MethodName: "CountMetric",
-			Handler:    _Counter_CountMetric_Handler,
+			MethodName: "Count2",
+			Handler:    _Counter_Count2_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
