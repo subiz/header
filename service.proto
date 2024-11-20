@@ -211,6 +211,8 @@ service UserCache {
 	rpc ListLeads(header.UserView) returns (Response); // ok
 	rpc CountLeads(header.UserView) returns (Response); // ok
 	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse); // ok
+	rpc ListPhones(header.UserView) returns (Response);
+	rpc CountUsers(header.UserViews) returns (CounterDataPoint);
 }
 
 // user services
