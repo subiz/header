@@ -3643,6 +3643,10 @@ message UserView {
 
 	repeated string display_fields = 26;
 	repeated string viewers = 27;
+
+	repeated string ignores = 28;
+
+	bool deleted = 29;
 }
 
 message CountTouchpointResponse {
@@ -6942,7 +6946,7 @@ message WorkflowLog {
 	string order_id = 15;
 	string event_id = 16;
 	string ticket_id = 17;
-	
+
 	repeated string assign_tos = 21;
 }
 
@@ -7984,6 +7988,7 @@ message SuggestLeadFieldRequest {
 
 	string key = 5; // id, keyword, lead_owner attr.fullname
 }
+
 message UsersRequest {
 	common.Context ctx = 1;
 	string account_id = 2;

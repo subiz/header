@@ -208,9 +208,12 @@ service AccountMgr {
 }
 
 service UserCache {
-	rpc ListLeads(header.UserView) returns (Response); // ok
-	rpc CountLeads(header.UserView) returns (Response); // ok
+	rpc ListLeads(header.UserView) returns (Response);
+	rpc ListLeadIds(header.UserView) returns (Response);
+	rpc CountLeads(header.UserView) returns (Response);
 	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse); // ok
+	rpc ListPhones(header.UserView) returns (Response);
+	rpc CountUsers(header.UserViews) returns (CounterDataPoint);
 }
 
 // user services
