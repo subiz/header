@@ -6917,8 +6917,6 @@ message Workflow {
 	WorkflowCondition exit_when = 26;
 
 	// report
-	int64 last_action_at = 21;
-	string last_session_id = 22;
 	int64 num_active_sessions = 23;
 	int64 num_unresolve_error_sessions = 24;
 	int64 total_sessions = 25;
@@ -8073,7 +8071,6 @@ message ReportUserEventResponse {
 message CounterReportResponse {
 	common.Context ctx = 1;
 	string time_series = 3;
-	string metric = 4;
 	repeated int64 counts = 5;
 }
 
@@ -8086,4 +8083,24 @@ message CounterDataPoint {
 
 	int64 id_created = 6; // ms
 	repeated int64 counts = 7;
+}
+
+message SetupFeatureStatus {
+	common.Context ctx = 1;
+	string account_id = 2;
+	enum Status {
+		ignore = 0;
+		set = 1;
+		unset = 2;
+	}
+    string chat_window = 3;
+	string bot_greeting = 4;
+	string popup = 5;
+	string subiz_live = 6;
+	string integrate_facebook = 7;
+	string facebook_auto_setting = 8;
+	string integrate_zalo_oa = 9;
+	string integrate_call = 10;
+	string add_agent = 11;
+	string create_rule = 12;
 }

@@ -653,7 +653,6 @@ message CounterReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string time_series = 3;
-	string metric = 4;
 	int64 from_sec = 5;
 	string range = 6; // min, hour, day
 	string tz = 7; // +00:07
