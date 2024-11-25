@@ -106,6 +106,14 @@ message Attribute {
 
 	string connector_value = 25; // value of connector
 	string user_value = 26;
+
+	repeated RelatedValue related_values = 21;
+}
+
+message RelatedValue {
+	string user_id = 4;
+	string reason = 5;
+	string value = 6;
 }
 
 // deprecated
@@ -3632,7 +3640,7 @@ message UserView {
 	bool is_public = 9;
 	string name = 10;
 
-	int64 total = 11;
+	// int64 total = 11;
 
 	int32 offset = 20;
 	int32 limit = 21;
