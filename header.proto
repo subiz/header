@@ -7517,6 +7517,7 @@ message KnowledgeBase {
 	KnowledgeBasePageStyle home_page = 21;
 	KnowledgeBaseArticlePageSetting article_page = 22;
 	KnowledgeBasePageStyle category_page = 23;
+	repeated KnowledgeBasePageCustomDomain domains = 24;
 
 	int64 created = 28;
 	string created_by = 29;
@@ -7535,6 +7536,13 @@ message KnowledgeBase {
 	int64 num_articles = 41;
 
 	string template = 43; // default
+}
+
+message KnowledgeBasePageCustomDomain {
+	string domain = 4;
+	string path = 5;
+	string status = 6;
+	string status_updated = 7;
 }
 
 message KnowledgeBaseArticlePageSetting {
