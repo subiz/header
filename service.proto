@@ -324,8 +324,8 @@ service WorkflowMgr {
 	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
 	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);
 	rpc ListWorkflowSessions(ListWorkflowSessionRequest) returns (Response);
-	rpc ListRelatedSessions(ListWorkflowLogRequest) returns (Response); 
-	
+	rpc ListRelatedSessions(ListWorkflowLogRequest) returns (Response);
+
 	rpc ListWorkflowLogs(ListWorkflowLogRequest) returns (Response); // workflow_log
 	rpc ReportWorkflow(WorkflowReportRequest) returns (Response); // workflow_counts
 	rpc RunWorkflowAction(RunWorkflowActionRequest) returns (Response);
@@ -890,6 +890,8 @@ service KB {
 	rpc DeleteArticleCategory(Id) returns (Response);
 	rpc GetArticleCategory(Id) returns (Response);
 	rpc ListArticleCategories(Id) returns (Response);
+
+	rpc CheckKbHandle(Id) returns (Response);
 }
 
 service AndroidNotificationMgr {
