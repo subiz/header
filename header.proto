@@ -7499,7 +7499,6 @@ message KnowledgeBase {
 	I18nString description = 5;
 	File logo = 6;
 
-	string base = 7; // https://company.com/docs
 	string access = 8; // public-and-private, private-only
 
 	string crawler_access = 9; // block, allow
@@ -7517,6 +7516,7 @@ message KnowledgeBase {
 	KnowledgeBasePageStyle home_page = 21;
 	KnowledgeBaseArticlePageSetting article_page = 22;
 	KnowledgeBasePageStyle category_page = 23;
+	KnowledgeBasePageCustomDomain domain = 24;
 
 	int64 created = 28;
 	string created_by = 29;
@@ -7535,6 +7535,14 @@ message KnowledgeBase {
 	int64 num_articles = 41;
 
 	string template = 43; // default
+}
+
+message KnowledgeBasePageCustomDomain {
+	string default_path = 3;
+	string domain = 4;
+	string domain_path = 5;
+	string dns_status = 6;
+	string dns_status_updated = 7;
 }
 
 message KnowledgeBaseArticlePageSetting {
