@@ -7464,6 +7464,8 @@ message ArticleCategory {
 	string kb = 18;
 
 	map<string, string> i18n_slug = 20;
+	string icon_name = 23;
+	string background_color = 24;
 }
 
 message ArticleTopic {
@@ -7498,7 +7500,7 @@ message KnowledgeBase {
 	I18nString name = 4;
 	I18nString description = 5;
 	File logo = 6;
-	string handle = 7;
+	string handle = 7; // luc
 	string access = 8; // public-and-private, private-only
 
 	string crawler_access = 9; // block, allow
@@ -7520,7 +7522,7 @@ message KnowledgeBase {
 	string custom_domain = 24;
 	string custom_path = 25;
 	string custom_domain_dns_status = 26;
-	string custom_domain_dns_status_updated = 27;
+	int64 custom_domain_dns_status_updated = 27;
 
 	int64 created = 28;
 	string created_by = 29;
