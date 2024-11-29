@@ -7498,8 +7498,8 @@ message KnowledgeBase {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	I18nString name = 4;
-	I18nString description = 5;
+	I18nString name = 4; // deprecated
+	I18nString description = 5; // deprecated
 	File logo = 6;
 	string handle = 7; // luc a-z 0 9 - _
 	string access = 8; // public-and-private, private-only
@@ -7514,6 +7514,9 @@ message KnowledgeBase {
 	TicketType ticket_type = 13;
 	int64 disabled_related_articles = 14;
 	repeated ResourceGroupMember permissions = 15;
+
+	map<string,string> i18n_title = 16;
+	map<string,string> i18n_description = 17;
 
 	int64 disabled_feedback = 20;
 	KnowledgeBasePageStyle home_page = 21;
