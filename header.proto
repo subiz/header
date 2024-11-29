@@ -7462,7 +7462,6 @@ message ArticleCategory {
 	// repeated Article articles = 15; // just for report
 	repeated ArticleCategory article_categories = 16; // just for report
 
-	int64 priority = 17; // depreacated
 	string kb = 18;
 
 	map<string, string> i18n_slug = 20;
@@ -8140,5 +8139,5 @@ message ArticleNode {
 	string id = 4;
 	string type = 5; // article, category
 	map<string, string> i18n_title = 6;
-	repeated ArticleNode childs = 7;
+	repeated ArticleNode children = 7;
 }
