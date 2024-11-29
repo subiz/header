@@ -892,6 +892,7 @@ service KB {
 	rpc ListArticleCategories(Id) returns (Response);
 
 	rpc CheckKbHandle(Id) returns (Response);
+	rpc UpdateArticleTree(ArticleNode) returns (Response);
 }
 
 service AndroidNotificationMgr {

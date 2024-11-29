@@ -714,6 +714,7 @@ message Data {
 	WorkflowTimeup workflow_timeup = 128; // workflow_timeup
 	BankAccount bank_account = 129;
 	ArticleTopic article_topic = 130;
+	ArticleNode article_node = 131;
 }
 
 message ConversationMeta {
@@ -6450,6 +6451,7 @@ message Response {
 
 	AttributeDefinition attribute_definition = 160;
 	repeated AttributeDefinition attribute_definitions = 161;
+	ArticleNode article_node = 162;
 }
 
 message ReportCount {
@@ -7460,7 +7462,7 @@ message ArticleCategory {
 	// repeated Article articles = 15; // just for report
 	repeated ArticleCategory article_categories = 16; // just for report
 
-	int64 priority = 17;
+	int64 priority = 17; // depreacated
 	string kb = 18;
 
 	map<string, string> i18n_slug = 20;
@@ -7500,7 +7502,7 @@ message KnowledgeBase {
 	I18nString name = 4;
 	I18nString description = 5;
 	File logo = 6;
-	string handle = 7; // luc
+	string handle = 7; // luc a-z 0 9 - _
 	string access = 8; // public-and-private, private-only
 
 	string crawler_access = 9; // block, allow
@@ -7521,7 +7523,7 @@ message KnowledgeBase {
 
 	string custom_domain = 24;
 	string custom_path = 25;
-	string custom_domain_dns_status = 26;
+	string custom_domain_dns_status = 26; // success, failed
 	int64 custom_domain_dns_status_updated = 27;
 
 	int64 created = 28;
@@ -8129,4 +8131,14 @@ message RelationUpdate {
 	string from_user = 7;
 	string to_user = 8;
 	string reason = 9;
+}
+
+message ArticleNode {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string kb = 3;
+	string id = 4;
+	string type = 5; // article, category
+	map<string, string> i18n_title = 6;
+	repeated ArticleNode childs = 7;
 }
