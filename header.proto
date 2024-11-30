@@ -667,7 +667,6 @@ message Data {
 	TaskHistoryEntry task_history_entry = 74;
 	OrderPipelineStage order_pipeline_stage = 75;
 	ConversationModal conversation_modal = 76;
-	ConversationAutomation conversation_automation = 77;
 	PhoneDevice phone_device = 78;
 	CallSetting call_setting = 79;
 	BlockedNumber blocked_number = 91;
@@ -1789,52 +1788,6 @@ message EndchatSetting {
 
 	bool send_transcript = 7;
 	repeated string send_transcript_tos = 8;
-}
-
-message ConversationAutomations {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated ConversationAutomation conversation_automations = 3;
-}
-
-message ConversationAutomation {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string type = 4; // endchat
-	string name = 5;
-	string description = 6;
-	repeated string channel_types = 7;
-	ChannelCondition channel_condition = 27;
-	string avatar_url = 9;
-
-	repeated string exclude_tags = 11; // dont run on those tag
-	repeated string exclude_fields = 12;
-
-	repeated string fields = 13;
-	repeated string tags = 14; // only run on
-
-	bool repeat = 15; // allow to run multiple time
-
-	repeated BotCondition conditions = 16;
-	// AwayMessageAutomation away_message = 11;
-	// AwayMessageAutomation away_message = 11;
-
-	// trigger
-	int64 after_last_sent_ms = 17;
-	repeated string after_last_sent_by_type = 18; // agent, user
-	bool before_conversation_ended = 29;
-	UserViewCondition condition = 28;
-	repeated BotAction actions = 19;
-
-	string updated_by = 20;
-	int64 updated = 21;
-
-	string created_by = 22;
-	int64 created = 23; // ms
-	int64 disabled = 24;
-
-	int64 last_run_at = 26;
 }
 
 message Trigger {
@@ -7443,9 +7396,6 @@ message ArticleCategory {
 	string id = 2;
 	string account_id = 3;
 
-	// I18nString title = 4; //// depreacted
-	// I18nString description = 6; // depreacted
-
 	map<string, string> i18n_title = 21;
 	map<string, string> i18n_description = 22;
 
@@ -7561,17 +7511,6 @@ message KnowledgeBasePageStyle {
 	string breadcrumb_font_family = 8;
 	string main_color = 10;
 	string secondary_color = 11;
-}
-
-message ListKnowledgeBaseEventRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string kb_id = 3;
-	int64 from_hour = 4;
-	int64 to_hour = 5;
-	string event_type = 6;
-	string by = 7;
-	string anchor = 8;
 }
 
 message Job {

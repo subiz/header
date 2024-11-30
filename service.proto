@@ -389,11 +389,6 @@ service ConversationMgr {
 	rpc ReadRule(Id) returns (header.Rule);
 	rpc ListRules(Id) returns (header.Route);
 
-	rpc ListConversationAutomations(Id) returns (header.ConversationAutomations);
-	rpc UpdateConversationAutomation(header.ConversationAutomation) returns (header.ConversationAutomation);
-	rpc DeleteConversationAutomation(Id) returns (Empty);
-	rpc ReadConversationAutomation(Id) returns (header.ConversationAutomation);
-
 	rpc ListPhoneDevices(header.Id) returns (header.Response);
 	rpc CreatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);
 	rpc UpdatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);

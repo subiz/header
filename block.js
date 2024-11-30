@@ -339,8 +339,8 @@ var emoji = {
 };
 
 var mention = {
-  type: "mention-agent",
-  text: "@all",
+  attrs: { id: "all", name: "Tất cả" },
+  type: "mention",
 };
 
 // ma yeu cau cua ban la {{ticket.number}}

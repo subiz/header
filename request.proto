@@ -658,3 +658,14 @@ message CounterReportRequest {
 	string tz = 7; // +00:07
 	int64 limit = 8;
 }
+
+message ListKnowledgeBaseEventRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string kb_id = 3;
+	int64 from_hour = 4;
+	int64 to_hour = 5;
+	string event_type = 6;
+	string by = 7;
+	string anchor = 8;
+}

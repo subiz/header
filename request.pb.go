@@ -5526,6 +5526,109 @@ func (x *CounterReportRequest) GetLimit() int64 {
 	return 0
 }
 
+type ListKnowledgeBaseEventRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx       *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	KbId      string          `protobuf:"bytes,3,opt,name=kb_id,json=kbId,proto3" json:"kb_id,omitempty"`
+	FromHour  int64           `protobuf:"varint,4,opt,name=from_hour,json=fromHour,proto3" json:"from_hour,omitempty"`
+	ToHour    int64           `protobuf:"varint,5,opt,name=to_hour,json=toHour,proto3" json:"to_hour,omitempty"`
+	EventType string          `protobuf:"bytes,6,opt,name=event_type,json=eventType,proto3" json:"event_type,omitempty"`
+	By        string          `protobuf:"bytes,7,opt,name=by,proto3" json:"by,omitempty"`
+	Anchor    string          `protobuf:"bytes,8,opt,name=anchor,proto3" json:"anchor,omitempty"`
+}
+
+func (x *ListKnowledgeBaseEventRequest) Reset() {
+	*x = ListKnowledgeBaseEventRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_request_proto_msgTypes[49]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListKnowledgeBaseEventRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListKnowledgeBaseEventRequest) ProtoMessage() {}
+
+func (x *ListKnowledgeBaseEventRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[49]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListKnowledgeBaseEventRequest.ProtoReflect.Descriptor instead.
+func (*ListKnowledgeBaseEventRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetKbId() string {
+	if x != nil {
+		return x.KbId
+	}
+	return ""
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetFromHour() int64 {
+	if x != nil {
+		return x.FromHour
+	}
+	return 0
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetToHour() int64 {
+	if x != nil {
+		return x.ToHour
+	}
+	return 0
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetEventType() string {
+	if x != nil {
+		return x.EventType
+	}
+	return ""
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetBy() string {
+	if x != nil {
+		return x.By
+	}
+	return ""
+}
+
+func (x *ListKnowledgeBaseEventRequest) GetAnchor() string {
+	if x != nil {
+		return x.Anchor
+	}
+	return ""
+}
+
 var File_request_proto protoreflect.FileDescriptor
 
 var file_request_proto_rawDesc = []byte{
@@ -6443,9 +6546,25 @@ var file_request_proto_rawDesc = []byte{
 	0x05, 0x72, 0x61, 0x6e, 0x67, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x72, 0x61,
 	0x6e, 0x67, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x74, 0x7a, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x02, 0x74, 0x7a, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x08, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65,
-	0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x28, 0x03, 0x52, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x22, 0xf3, 0x01, 0x0a, 0x1d, 0x4c, 0x69,
+	0x73, 0x74, 0x4b, 0x6e, 0x6f, 0x77, 0x6c, 0x65, 0x64, 0x67, 0x65, 0x42, 0x61, 0x73, 0x65, 0x45,
+	0x76, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63,
+	0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
+	0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d,
+	0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x13, 0x0a,
+	0x05, 0x6b, 0x62, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6b, 0x62,
+	0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x72, 0x6f, 0x6d, 0x5f, 0x68, 0x6f, 0x75, 0x72, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x66, 0x72, 0x6f, 0x6d, 0x48, 0x6f, 0x75, 0x72, 0x12,
+	0x17, 0x0a, 0x07, 0x74, 0x6f, 0x5f, 0x68, 0x6f, 0x75, 0x72, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x06, 0x74, 0x6f, 0x48, 0x6f, 0x75, 0x72, 0x12, 0x1d, 0x0a, 0x0a, 0x65, 0x76, 0x65, 0x6e,
+	0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x76,
+	0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x62, 0x79, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x62, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6e, 0x63, 0x68, 0x6f,
+	0x72, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x6e, 0x63, 0x68, 0x6f, 0x72, 0x42,
+	0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75,
+	0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -6461,7 +6580,7 @@ func file_request_proto_rawDescGZIP() []byte {
 }
 
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 49)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
 var file_request_proto_goTypes = []interface{}{
 	(ReportCampaignRequest_Range)(0),      // 0: header.ReportCampaignRequest.Range
 	(ReportWebPluginRequest_Range)(0),     // 1: header.ReportWebPluginRequest.Range
@@ -6515,63 +6634,65 @@ var file_request_proto_goTypes = []interface{}{
 	(*ListVersions)(nil),                  // 49: header.ListVersions
 	(*ReportCountRequest)(nil),            // 50: header.ReportCountRequest
 	(*CounterReportRequest)(nil),          // 51: header.CounterReportRequest
-	(*common.Context)(nil),                // 52: common.Context
-	(*account.BusinessHours)(nil),         // 53: account.BusinessHours
+	(*ListKnowledgeBaseEventRequest)(nil), // 52: header.ListKnowledgeBaseEventRequest
+	(*common.Context)(nil),                // 53: common.Context
+	(*account.BusinessHours)(nil),         // 54: account.BusinessHours
 }
 var file_request_proto_depIdxs = []int32{
-	52, // 0: header.UserReportRequest.ctx:type_name -> common.Context
-	53, // 1: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
-	53, // 2: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	53, // 3: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
-	53, // 4: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	53, // 5: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
-	53, // 6: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	52, // 7: header.ListUserEventsRequest.ctx:type_name -> common.Context
-	52, // 8: header.ListEventTypeRequest.ctx:type_name -> common.Context
-	52, // 9: header.PresencesRequest.ctx:type_name -> common.Context
-	52, // 10: header.ListNotiRequest.ctx:type_name -> common.Context
-	52, // 11: header.UserRequest.ctx:type_name -> common.Context
-	52, // 12: header.ListNotesRequest.ctx:type_name -> common.Context
-	52, // 13: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
-	52, // 14: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
-	52, // 15: header.BotsRequest.ctx:type_name -> common.Context
-	52, // 16: header.ConversionRequest.ctx:type_name -> common.Context
-	52, // 17: header.ReportCampaignRequest.ctx:type_name -> common.Context
-	52, // 18: header.ReportWebPluginRequest.ctx:type_name -> common.Context
-	52, // 19: header.WebPluginConversionRequest.ctx:type_name -> common.Context
-	52, // 20: header.SearchLocationsRequest.ctx:type_name -> common.Context
-	52, // 21: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
-	52, // 22: header.DeliveryRequest.ctx:type_name -> common.Context
-	52, // 23: header.SearchRequest.ctx:type_name -> common.Context
-	52, // 24: header.AvailibilityReportRequest.ctx:type_name -> common.Context
-	52, // 25: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
-	53, // 26: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
-	53, // 27: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	52, // 28: header.OrdersRequest.ctx:type_name -> common.Context
-	52, // 29: header.CountOrdersRequest.ctx:type_name -> common.Context
+	53, // 0: header.UserReportRequest.ctx:type_name -> common.Context
+	54, // 1: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
+	54, // 2: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	54, // 3: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
+	54, // 4: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	54, // 5: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
+	54, // 6: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	53, // 7: header.ListUserEventsRequest.ctx:type_name -> common.Context
+	53, // 8: header.ListEventTypeRequest.ctx:type_name -> common.Context
+	53, // 9: header.PresencesRequest.ctx:type_name -> common.Context
+	53, // 10: header.ListNotiRequest.ctx:type_name -> common.Context
+	53, // 11: header.UserRequest.ctx:type_name -> common.Context
+	53, // 12: header.ListNotesRequest.ctx:type_name -> common.Context
+	53, // 13: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
+	53, // 14: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
+	53, // 15: header.BotsRequest.ctx:type_name -> common.Context
+	53, // 16: header.ConversionRequest.ctx:type_name -> common.Context
+	53, // 17: header.ReportCampaignRequest.ctx:type_name -> common.Context
+	53, // 18: header.ReportWebPluginRequest.ctx:type_name -> common.Context
+	53, // 19: header.WebPluginConversionRequest.ctx:type_name -> common.Context
+	53, // 20: header.SearchLocationsRequest.ctx:type_name -> common.Context
+	53, // 21: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
+	53, // 22: header.DeliveryRequest.ctx:type_name -> common.Context
+	53, // 23: header.SearchRequest.ctx:type_name -> common.Context
+	53, // 24: header.AvailibilityReportRequest.ctx:type_name -> common.Context
+	53, // 25: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
+	54, // 26: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
+	54, // 27: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	53, // 28: header.OrdersRequest.ctx:type_name -> common.Context
+	53, // 29: header.CountOrdersRequest.ctx:type_name -> common.Context
 	32, // 30: header.CountOrdersRequest.queries:type_name -> header.OrdersRequest
-	52, // 31: header.WorkflowReportRequest.ctx:type_name -> common.Context
-	52, // 32: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
-	52, // 33: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
-	52, // 34: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
-	52, // 35: header.TasksRequest.ctx:type_name -> common.Context
-	52, // 36: header.DocIndexRequest.ctx:type_name -> common.Context
-	52, // 37: header.DocSearchRequest.ctx:type_name -> common.Context
-	52, // 38: header.CreateAgentRequest.ctx:type_name -> common.Context
-	52, // 39: header.ListConversationsRequest.ctx:type_name -> common.Context
-	52, // 40: header.ListConversationEventsRequest.ctx:type_name -> common.Context
-	52, // 41: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
-	52, // 42: header.ListArticleRequest.ctx:type_name -> common.Context
-	52, // 43: header.SearchArticleRequest.ctx:type_name -> common.Context
-	52, // 44: header.RedeemRequest.ctx:type_name -> common.Context
-	52, // 45: header.ListVersions.ctx:type_name -> common.Context
-	52, // 46: header.ReportCountRequest.ctx:type_name -> common.Context
-	52, // 47: header.CounterReportRequest.ctx:type_name -> common.Context
-	48, // [48:48] is the sub-list for method output_type
-	48, // [48:48] is the sub-list for method input_type
-	48, // [48:48] is the sub-list for extension type_name
-	48, // [48:48] is the sub-list for extension extendee
-	0,  // [0:48] is the sub-list for field type_name
+	53, // 31: header.WorkflowReportRequest.ctx:type_name -> common.Context
+	53, // 32: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
+	53, // 33: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
+	53, // 34: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
+	53, // 35: header.TasksRequest.ctx:type_name -> common.Context
+	53, // 36: header.DocIndexRequest.ctx:type_name -> common.Context
+	53, // 37: header.DocSearchRequest.ctx:type_name -> common.Context
+	53, // 38: header.CreateAgentRequest.ctx:type_name -> common.Context
+	53, // 39: header.ListConversationsRequest.ctx:type_name -> common.Context
+	53, // 40: header.ListConversationEventsRequest.ctx:type_name -> common.Context
+	53, // 41: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
+	53, // 42: header.ListArticleRequest.ctx:type_name -> common.Context
+	53, // 43: header.SearchArticleRequest.ctx:type_name -> common.Context
+	53, // 44: header.RedeemRequest.ctx:type_name -> common.Context
+	53, // 45: header.ListVersions.ctx:type_name -> common.Context
+	53, // 46: header.ReportCountRequest.ctx:type_name -> common.Context
+	53, // 47: header.CounterReportRequest.ctx:type_name -> common.Context
+	53, // 48: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
+	49, // [49:49] is the sub-list for method output_type
+	49, // [49:49] is the sub-list for method input_type
+	49, // [49:49] is the sub-list for extension type_name
+	49, // [49:49] is the sub-list for extension extendee
+	0,  // [0:49] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -7168,6 +7289,18 @@ func file_request_proto_init() {
 				return nil
 			}
 		}
+		file_request_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListKnowledgeBaseEventRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_request_proto_msgTypes[38].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -7176,7 +7309,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_request_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   49,
+			NumMessages:   50,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

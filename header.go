@@ -811,7 +811,6 @@ const ORDER ObjectType = "order"
 const SHOP_SETTING ObjectType = "shop_setting"
 const CONVERSATION_MODAL ObjectType = "conversation_modal"
 const CONVERSATION_SETTING ObjectType = "conversation_setting"
-const CONVERSATION_AUTOMATION ObjectType = "conversation_automation"
 const PHONE_DEVICE = "phone_device"
 const CALL_SETTING ObjectType = "call_setting"
 const GREETING_AUDIO ObjectType = "greeting_audio"
@@ -1950,8 +1949,19 @@ func blockToPlainText(block *Block) string {
 		out += "\n"
 	}
 
-	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "mention-agent" || block.Type == "dynamic-field" {
+	if block.Type == "" || block.Type == "text" || block.Type == "link" || block.Type == "dynamic-field" {
 		return out + block.Text
+	}
+
+	if block.Type == "mention-agent" || block.Type == "mention-agent" {
+		var name = ""
+		if attrs := block.GetAttrs(); attrs != nil {
+			name = attrs["name"]
+			if name == "" {
+				name = attrs["id"]
+			}
+		}
+		return out + "@" + name
 	}
 
 	if block.Type == "horizontal_rule" {
@@ -2212,7 +2222,7 @@ func MapBlock(block *Block, predicate func(block *Block)) {
 		if content == nil {
 			continue
 		}
-		predicate(content)
+		MapBlock(content, predicate)
 	}
 }
 
