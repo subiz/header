@@ -1288,7 +1288,7 @@ message Message {
 
 	map<string, Block> i18n_block = 23;
 
-	bool is_private = 22;
+	// bool is_private = 22;
 
 	// bool is_pinned = 24;
 	int64 pinned = 25;
@@ -4814,8 +4814,8 @@ message KV {
 	int64 key_id = 4;
 	int64 value_id = 5;
 	repeated KV kvs = 6;
-	Block value_block  = 7;
-	repeated Block value_blocks  = 8;
+	Block value_block = 7;
+	repeated Block value_blocks = 8;
 	string value_type = 9; //static, block, blocks
 }
 
@@ -4999,7 +4999,7 @@ message ImportLeadRequest {
 	string account_id = 2;
 	repeated User users = 4;
 	string primary_attribute_key = 5; // remove
-	string on_duplicate = 6; //  empty == error, override, keep_both, skip
+	string on_duplicate = 6; //	empty == error, override, keep_both, skip
 	string add_to_segment = 7;
 }
 
@@ -6185,7 +6185,7 @@ message WorkflowAction {
 	string id = 4;
 	string name = 5;
 	string next_action_id = 6;
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition,  send_webhook, create_task, update_order_state, send_message, goal, create_order
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6210,6 +6210,42 @@ message WorkflowAction {
 	ActionSendTranscript send_transcript = 43;
 	ActionWaitMessage wait_message = 44;
 	ActionCreateOrder create_order = 45;
+
+	// kv.chatgpt_thread_id
+	ActionLLMBranching llm_branching = 50;
+	// ActionLLMRewriteQuery llm_rewrite_query = 51;
+	ActionLLM llm = 52;
+	// ActionSearchProduct search_product = 53;
+	ActionRAG rag = 54;
+
+	// system.last_user_message
+	// system.last_output
+	string output_variable = 101; // plain text
+}
+
+message ActionRAG {
+	// first rewrite the query
+}
+
+message LLMClassifyBranch {
+	string classify_instruction = 3;
+	string action_id = 5;
+}
+
+message ActionLLMBranching {
+	string model = 5;
+	string system_instruction = 6; // phan loai {variable} vao nhung mau duoi day
+
+	repeated LLMClassifyBranch branches = 7;
+	string default_action_id = 8;
+}
+
+message ActionLLM {
+	string model = 5; // chatgpt-4
+	Block system_instruction = 6;
+	int64 temperature = 7; // 10000 * 10000
+	int64 max_token = 8;
+	bool conversation_history = 9; // inject chat history to system instructionë
 }
 
 message ActionCreateOrder {
@@ -6230,11 +6266,12 @@ message ActionCreateOrder {
 
 message ActionWaitMessage {
 	int64 wait_sec = 1;
+	// debounce??
 	WorkflowCondition condition = 2;
 }
 
 message ActionSendTranscript {
-    repeated string tos_email = 1; // support send email
+	repeated string tos_email = 1; // support send email
 }
 
 message RunWorkflowActionRequest {
@@ -6882,6 +6919,9 @@ message Workflow {
 	int64 num_unresolve_error_sessions = 24;
 	int64 total_sessions = 25;
 	int64 num_goal_reached_sessions = 31;
+
+	File avatar = 32;
+	string format = 33; // empty, chatbot
 }
 
 message WorkflowLog {
@@ -6907,31 +6947,6 @@ message WorkflowLog {
 	string ticket_id = 17;
 
 	repeated string assign_tos = 21;
-}
-
-message CreateAccountRequest {
-	common.Context ctx = 1;
-	string fullname = 2;
-	string email = 3;
-	string lang = 4;
-	string password = 5;
-	string account_name = 6;
-	string account_url = 7;
-	string avatar_url = 8;
-	string timezone = 9;
-	string phone = 10;
-	string country_code = 11;
-	string referrer_from = 12; // from cookie
-	string ga_client_id = 13;
-	string subiz_user_id = 16; // merge after registry
-}
-
-message NewPassword {
-	common.Context ctx = 1;
-	string token = 2;
-	string new_password = 3;
-	string old_password = 5;
-	string email = 8;
 }
 
 message TicketType {
@@ -7116,7 +7131,7 @@ message Ticket {
 	string periodic_update_sla_state = 112;
 }
 
-message ReceiptMember{
+message ReceiptMember {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
@@ -7131,7 +7146,6 @@ message SLAViolations {
 	string account_id = 2;
 	string ticket_id = 3;
 	repeated SLAViolation violations = 4;
-
 }
 
 message SLAViolation {
@@ -7386,7 +7400,7 @@ message Article {
 	//   published -> draft        | change published_version to ''
 	//   inprogress-> review       |
 	//   inprogress-> published    | change published_version=version
-	//   inprogress-> draft        | onlyif old.published_version == '', change published_version to ''
+	//   inprogress-> draft        n| onlyif old.published_version == '', change published_version to ''
 	//
 	string state = 36; // read-only draft, published, review, inprogress
 }

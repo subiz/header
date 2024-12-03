@@ -254,9 +254,6 @@ enum RealtimeType {
 
 	credit_updated = 244;
 	subiz_bill_updated = 245;
-	automation_updated = 246;
-	automation_created = 247;
-	automation_deleted = 248;
 
 	desktop_notification_pushed = 249;
 

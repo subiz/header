@@ -669,3 +669,28 @@ message ListKnowledgeBaseEventRequest {
 	string by = 7;
 	string anchor = 8;
 }
+
+message CreateAccountRequest {
+	common.Context ctx = 1;
+	string fullname = 2;
+	string email = 3;
+	string lang = 4;
+	string password = 5;
+	string account_name = 6;
+	string account_url = 7;
+	string avatar_url = 8;
+	string timezone = 9;
+	string phone = 10;
+	string country_code = 11;
+	string referrer_from = 12; // from cookie
+	string ga_client_id = 13;
+	string subiz_user_id = 16; // merge after registry
+}
+
+message NewPassword {
+	common.Context ctx = 1;
+	string token = 2;
+	string new_password = 3;
+	string old_password = 5;
+	string email = 8;
+}

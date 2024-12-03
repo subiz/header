@@ -5629,6 +5629,236 @@ func (x *ListKnowledgeBaseEventRequest) GetAnchor() string {
 	return ""
 }
 
+type CreateAccountRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx          *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Fullname     string          `protobuf:"bytes,2,opt,name=fullname,proto3" json:"fullname,omitempty"`
+	Email        string          `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Lang         string          `protobuf:"bytes,4,opt,name=lang,proto3" json:"lang,omitempty"`
+	Password     string          `protobuf:"bytes,5,opt,name=password,proto3" json:"password,omitempty"`
+	AccountName  string          `protobuf:"bytes,6,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
+	AccountUrl   string          `protobuf:"bytes,7,opt,name=account_url,json=accountUrl,proto3" json:"account_url,omitempty"`
+	AvatarUrl    string          `protobuf:"bytes,8,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Timezone     string          `protobuf:"bytes,9,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Phone        string          `protobuf:"bytes,10,opt,name=phone,proto3" json:"phone,omitempty"`
+	CountryCode  string          `protobuf:"bytes,11,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	ReferrerFrom string          `protobuf:"bytes,12,opt,name=referrer_from,json=referrerFrom,proto3" json:"referrer_from,omitempty"` // from cookie
+	GaClientId   string          `protobuf:"bytes,13,opt,name=ga_client_id,json=gaClientId,proto3" json:"ga_client_id,omitempty"`
+	SubizUserId  string          `protobuf:"bytes,16,opt,name=subiz_user_id,json=subizUserId,proto3" json:"subiz_user_id,omitempty"` // merge after registry
+}
+
+func (x *CreateAccountRequest) Reset() {
+	*x = CreateAccountRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_request_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateAccountRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAccountRequest) ProtoMessage() {}
+
+func (x *CreateAccountRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAccountRequest.ProtoReflect.Descriptor instead.
+func (*CreateAccountRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *CreateAccountRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *CreateAccountRequest) GetFullname() string {
+	if x != nil {
+		return x.Fullname
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetLang() string {
+	if x != nil {
+		return x.Lang
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetAccountName() string {
+	if x != nil {
+		return x.AccountName
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetAccountUrl() string {
+	if x != nil {
+		return x.AccountUrl
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetTimezone() string {
+	if x != nil {
+		return x.Timezone
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetPhone() string {
+	if x != nil {
+		return x.Phone
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetCountryCode() string {
+	if x != nil {
+		return x.CountryCode
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetReferrerFrom() string {
+	if x != nil {
+		return x.ReferrerFrom
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetGaClientId() string {
+	if x != nil {
+		return x.GaClientId
+	}
+	return ""
+}
+
+func (x *CreateAccountRequest) GetSubizUserId() string {
+	if x != nil {
+		return x.SubizUserId
+	}
+	return ""
+}
+
+type NewPassword struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ctx         *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	Token       string          `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
+	NewPassword string          `protobuf:"bytes,3,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
+	OldPassword string          `protobuf:"bytes,5,opt,name=old_password,json=oldPassword,proto3" json:"old_password,omitempty"`
+	Email       string          `protobuf:"bytes,8,opt,name=email,proto3" json:"email,omitempty"`
+}
+
+func (x *NewPassword) Reset() {
+	*x = NewPassword{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_request_proto_msgTypes[51]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NewPassword) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NewPassword) ProtoMessage() {}
+
+func (x *NewPassword) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[51]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NewPassword.ProtoReflect.Descriptor instead.
+func (*NewPassword) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *NewPassword) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *NewPassword) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
+func (x *NewPassword) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
+}
+
+func (x *NewPassword) GetOldPassword() string {
+	if x != nil {
+		return x.OldPassword
+	}
+	return ""
+}
+
+func (x *NewPassword) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
 var File_request_proto protoreflect.FileDescriptor
 
 var file_request_proto_rawDesc = []byte{
@@ -6561,10 +6791,48 @@ var file_request_proto_rawDesc = []byte{
 	0x74, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x65, 0x76,
 	0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x62, 0x79, 0x18, 0x07, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x02, 0x62, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6e, 0x63, 0x68, 0x6f,
-	0x72, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x6e, 0x63, 0x68, 0x6f, 0x72, 0x42,
-	0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75,
-	0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x72, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x6e, 0x63, 0x68, 0x6f, 0x72, 0x22,
+	0xbe, 0x03, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43,
+	0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1a, 0x0a, 0x08, 0x66,
+	0x75, 0x6c, 0x6c, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66,
+	0x75, 0x6c, 0x6c, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x12, 0x0a,
+	0x04, 0x6c, 0x61, 0x6e, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6c, 0x61, 0x6e,
+	0x67, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x21, 0x0a,
+	0x0c, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x06, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4e, 0x61, 0x6d, 0x65,
+	0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x75, 0x72, 0x6c, 0x18,
+	0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x55, 0x72,
+	0x6c, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x76, 0x61, 0x74, 0x61, 0x72, 0x5f, 0x75, 0x72, 0x6c, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x76, 0x61, 0x74, 0x61, 0x72, 0x55, 0x72, 0x6c,
+	0x12, 0x1a, 0x0a, 0x08, 0x74, 0x69, 0x6d, 0x65, 0x7a, 0x6f, 0x6e, 0x65, 0x18, 0x09, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x74, 0x69, 0x6d, 0x65, 0x7a, 0x6f, 0x6e, 0x65, 0x12, 0x14, 0x0a, 0x05,
+	0x70, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x70, 0x68, 0x6f,
+	0x6e, 0x65, 0x12, 0x21, 0x0a, 0x0c, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72, 0x79, 0x5f, 0x63, 0x6f,
+	0x64, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x72,
+	0x79, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x72, 0x65, 0x66, 0x65, 0x72, 0x72, 0x65,
+	0x72, 0x5f, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65,
+	0x66, 0x65, 0x72, 0x72, 0x65, 0x72, 0x46, 0x72, 0x6f, 0x6d, 0x12, 0x20, 0x0a, 0x0c, 0x67, 0x61,
+	0x5f, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0a, 0x67, 0x61, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x22, 0x0a, 0x0d,
+	0x73, 0x75, 0x62, 0x69, 0x7a, 0x5f, 0x75, 0x73, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x10, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0b, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x55, 0x73, 0x65, 0x72, 0x49, 0x64,
+	0x22, 0xa2, 0x01, 0x0a, 0x0b, 0x4e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
+	0x12, 0x21, 0x0a, 0x03, 0x63, 0x74, 0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e,
+	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03,
+	0x63, 0x74, 0x78, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x21, 0x0a, 0x0c, 0x6e, 0x65, 0x77,
+	0x5f, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0b, 0x6e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x21, 0x0a, 0x0c,
+	0x6f, 0x6c, 0x64, 0x5f, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0b, 0x6f, 0x6c, 0x64, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12,
+	0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
+	0x65, 0x6d, 0x61, 0x69, 0x6c, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -6580,7 +6848,7 @@ func file_request_proto_rawDescGZIP() []byte {
 }
 
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_request_proto_goTypes = []interface{}{
 	(ReportCampaignRequest_Range)(0),      // 0: header.ReportCampaignRequest.Range
 	(ReportWebPluginRequest_Range)(0),     // 1: header.ReportWebPluginRequest.Range
@@ -6635,64 +6903,68 @@ var file_request_proto_goTypes = []interface{}{
 	(*ReportCountRequest)(nil),            // 50: header.ReportCountRequest
 	(*CounterReportRequest)(nil),          // 51: header.CounterReportRequest
 	(*ListKnowledgeBaseEventRequest)(nil), // 52: header.ListKnowledgeBaseEventRequest
-	(*common.Context)(nil),                // 53: common.Context
-	(*account.BusinessHours)(nil),         // 54: account.BusinessHours
+	(*CreateAccountRequest)(nil),          // 53: header.CreateAccountRequest
+	(*NewPassword)(nil),                   // 54: header.NewPassword
+	(*common.Context)(nil),                // 55: common.Context
+	(*account.BusinessHours)(nil),         // 56: account.BusinessHours
 }
 var file_request_proto_depIdxs = []int32{
-	53, // 0: header.UserReportRequest.ctx:type_name -> common.Context
-	54, // 1: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
-	54, // 2: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	54, // 3: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
-	54, // 4: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	54, // 5: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
-	54, // 6: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	53, // 7: header.ListUserEventsRequest.ctx:type_name -> common.Context
-	53, // 8: header.ListEventTypeRequest.ctx:type_name -> common.Context
-	53, // 9: header.PresencesRequest.ctx:type_name -> common.Context
-	53, // 10: header.ListNotiRequest.ctx:type_name -> common.Context
-	53, // 11: header.UserRequest.ctx:type_name -> common.Context
-	53, // 12: header.ListNotesRequest.ctx:type_name -> common.Context
-	53, // 13: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
-	53, // 14: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
-	53, // 15: header.BotsRequest.ctx:type_name -> common.Context
-	53, // 16: header.ConversionRequest.ctx:type_name -> common.Context
-	53, // 17: header.ReportCampaignRequest.ctx:type_name -> common.Context
-	53, // 18: header.ReportWebPluginRequest.ctx:type_name -> common.Context
-	53, // 19: header.WebPluginConversionRequest.ctx:type_name -> common.Context
-	53, // 20: header.SearchLocationsRequest.ctx:type_name -> common.Context
-	53, // 21: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
-	53, // 22: header.DeliveryRequest.ctx:type_name -> common.Context
-	53, // 23: header.SearchRequest.ctx:type_name -> common.Context
-	53, // 24: header.AvailibilityReportRequest.ctx:type_name -> common.Context
-	53, // 25: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
-	54, // 26: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
-	54, // 27: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	53, // 28: header.OrdersRequest.ctx:type_name -> common.Context
-	53, // 29: header.CountOrdersRequest.ctx:type_name -> common.Context
+	55, // 0: header.UserReportRequest.ctx:type_name -> common.Context
+	56, // 1: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
+	56, // 2: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	56, // 3: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
+	56, // 4: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	56, // 5: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
+	56, // 6: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	55, // 7: header.ListUserEventsRequest.ctx:type_name -> common.Context
+	55, // 8: header.ListEventTypeRequest.ctx:type_name -> common.Context
+	55, // 9: header.PresencesRequest.ctx:type_name -> common.Context
+	55, // 10: header.ListNotiRequest.ctx:type_name -> common.Context
+	55, // 11: header.UserRequest.ctx:type_name -> common.Context
+	55, // 12: header.ListNotesRequest.ctx:type_name -> common.Context
+	55, // 13: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
+	55, // 14: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
+	55, // 15: header.BotsRequest.ctx:type_name -> common.Context
+	55, // 16: header.ConversionRequest.ctx:type_name -> common.Context
+	55, // 17: header.ReportCampaignRequest.ctx:type_name -> common.Context
+	55, // 18: header.ReportWebPluginRequest.ctx:type_name -> common.Context
+	55, // 19: header.WebPluginConversionRequest.ctx:type_name -> common.Context
+	55, // 20: header.SearchLocationsRequest.ctx:type_name -> common.Context
+	55, // 21: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
+	55, // 22: header.DeliveryRequest.ctx:type_name -> common.Context
+	55, // 23: header.SearchRequest.ctx:type_name -> common.Context
+	55, // 24: header.AvailibilityReportRequest.ctx:type_name -> common.Context
+	55, // 25: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
+	56, // 26: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
+	56, // 27: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	55, // 28: header.OrdersRequest.ctx:type_name -> common.Context
+	55, // 29: header.CountOrdersRequest.ctx:type_name -> common.Context
 	32, // 30: header.CountOrdersRequest.queries:type_name -> header.OrdersRequest
-	53, // 31: header.WorkflowReportRequest.ctx:type_name -> common.Context
-	53, // 32: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
-	53, // 33: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
-	53, // 34: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
-	53, // 35: header.TasksRequest.ctx:type_name -> common.Context
-	53, // 36: header.DocIndexRequest.ctx:type_name -> common.Context
-	53, // 37: header.DocSearchRequest.ctx:type_name -> common.Context
-	53, // 38: header.CreateAgentRequest.ctx:type_name -> common.Context
-	53, // 39: header.ListConversationsRequest.ctx:type_name -> common.Context
-	53, // 40: header.ListConversationEventsRequest.ctx:type_name -> common.Context
-	53, // 41: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
-	53, // 42: header.ListArticleRequest.ctx:type_name -> common.Context
-	53, // 43: header.SearchArticleRequest.ctx:type_name -> common.Context
-	53, // 44: header.RedeemRequest.ctx:type_name -> common.Context
-	53, // 45: header.ListVersions.ctx:type_name -> common.Context
-	53, // 46: header.ReportCountRequest.ctx:type_name -> common.Context
-	53, // 47: header.CounterReportRequest.ctx:type_name -> common.Context
-	53, // 48: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
-	49, // [49:49] is the sub-list for method output_type
-	49, // [49:49] is the sub-list for method input_type
-	49, // [49:49] is the sub-list for extension type_name
-	49, // [49:49] is the sub-list for extension extendee
-	0,  // [0:49] is the sub-list for field type_name
+	55, // 31: header.WorkflowReportRequest.ctx:type_name -> common.Context
+	55, // 32: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
+	55, // 33: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
+	55, // 34: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
+	55, // 35: header.TasksRequest.ctx:type_name -> common.Context
+	55, // 36: header.DocIndexRequest.ctx:type_name -> common.Context
+	55, // 37: header.DocSearchRequest.ctx:type_name -> common.Context
+	55, // 38: header.CreateAgentRequest.ctx:type_name -> common.Context
+	55, // 39: header.ListConversationsRequest.ctx:type_name -> common.Context
+	55, // 40: header.ListConversationEventsRequest.ctx:type_name -> common.Context
+	55, // 41: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
+	55, // 42: header.ListArticleRequest.ctx:type_name -> common.Context
+	55, // 43: header.SearchArticleRequest.ctx:type_name -> common.Context
+	55, // 44: header.RedeemRequest.ctx:type_name -> common.Context
+	55, // 45: header.ListVersions.ctx:type_name -> common.Context
+	55, // 46: header.ReportCountRequest.ctx:type_name -> common.Context
+	55, // 47: header.CounterReportRequest.ctx:type_name -> common.Context
+	55, // 48: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
+	55, // 49: header.CreateAccountRequest.ctx:type_name -> common.Context
+	55, // 50: header.NewPassword.ctx:type_name -> common.Context
+	51, // [51:51] is the sub-list for method output_type
+	51, // [51:51] is the sub-list for method input_type
+	51, // [51:51] is the sub-list for extension type_name
+	51, // [51:51] is the sub-list for extension extendee
+	0,  // [0:51] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -7301,6 +7573,30 @@ func file_request_proto_init() {
 				return nil
 			}
 		}
+		file_request_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateAccountRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_request_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*NewPassword); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_request_proto_msgTypes[38].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -7309,7 +7605,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_request_proto_rawDesc,
 			NumEnums:      3,
-			NumMessages:   50,
+			NumMessages:   52,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
