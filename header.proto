@@ -6228,14 +6228,13 @@ message ActionRAG {
 }
 
 message LLMClassifyBranch {
-	string classify_instruction = 3;
+	WorkflowCondition condition = 4;
 	string action_id = 5;
 }
 
 message ActionLLMBranching {
 	string model = 5;
 	string system_instruction = 6; // phan loai {variable} vao nhung mau duoi day
-
 	repeated LLMClassifyBranch branches = 7;
 	string default_action_id = 8;
 }
