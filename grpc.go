@@ -32,7 +32,7 @@ const (
 	CtxKey = "pcontext"
 )
 
-// WithShardRedirect2 creates a dial option that learns on "shard_addrs" reponse
+// WithShardRedirect creates a dial option that learns on "shard_addrs" reponse
 // header to send requests to correct shard
 // see https://www.notion.so/Shard-service-c002bcb0b00c47669bce547be646cd9f
 // for the overall design
@@ -56,12 +56,15 @@ func WithShardRedirect() grpc.DialOption {
 			if pkey != "" {
 				// finding the shard number
 				var host string
+
 				if stgaddr != "" && IsStagging(pkey) {
 					host = stgaddr
 				} else {
-					shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
+					// shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
+					shardNumber := GetAccShard(pkey, len(addrs))
 					host = addrs[shardNumber]
 				}
+
 				co, ok := conn[host]
 				if !ok {
 					lock.Lock()
@@ -391,11 +394,7 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		}
 
 		// find the correct shard
-		parindex := int(crc32.ChecksumIEEE([]byte(pkey))) % shards
-		if IsStagging(pkey) {
-			parindex = shards // the last host
-		}
-
+		parindex := GetAccShard(pkey, shards)
 		// process if this is the correct shard
 		if int(parindex) == ordinal_num {
 			return handler(ctx, in)
@@ -423,8 +422,8 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		}
 
 		header := metadata.New(nil)
-		header.Set("shard_addrs", hosts[:len(hosts)-1]...)
-		header.Set("stg_shard_addrs", hosts[len(hosts)-1])
+		header.Set("shard_addrs", hosts[:shards]...)
+		header.Set("stg_shard_addrs", hosts[shards])
 		grpc.SendHeader(ctx, header)
 
 		// use cache host connection or create a new one
@@ -646,8 +645,27 @@ type ServerConfig struct {
 	XAccounts           map[string]bool                 `json:"x_accounts,omitempty"`
 }
 
-func CheckShard(accid string) bool {
-	return false
+func GetHostShard(shard int) int {
+	hostname, _ := os.Hostname()
+	sp := strings.Split(hostname, "-")
+	if len(sp) < 2 {
+		panic("invalid hostname" + hostname)
+	}
+	ordinal := sp[len(sp)-1]
+	pari64, _ := strconv.ParseInt(ordinal, 10, 0)
+	ordinal_num := int(pari64)
+	if len(sp) > 2 && sp[len(sp)-2] == "stg" {
+		return shard
+	}
+	return ordinal_num
+}
+
+func GetAccShard(accid string, shard int) int {
+	if IsStagging(accid) {
+		return shard
+	}
+
+	return int(crc32.ChecksumIEEE([]byte(accid))) % shard
 }
 
 func IsStagging(accid string) bool {
