@@ -41,12 +41,6 @@ func updateHostMemory(memM map[string]string, key string, host string) map[strin
 	return newMem
 }
 
-func guestHost(key string, addrs []string) string {
-	// shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
-	shardNumber := GetAccShard(key, len(addrs))
-	return addrs[shardNumber]
-}
-
 // WithShardRedirect creates a dial option that learns on "shard_addrs" reponse
 // header to send requests to correct shard
 // see https://www.notion.so/Shard-service-c002bcb0b00c47669bce547be646cd9f
@@ -72,7 +66,9 @@ func WithShardRedirect() grpc.DialOption {
 			host := memoryM[pkey]
 			// finding the shard number
 			if host == "" {
-				host = guestHost(pkey, addrs)
+				// guest host
+				shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
+				host = addrs[shardNumber]
 			}
 
 			co, ok := conn[host]
@@ -112,6 +108,7 @@ func WithShardRedirect() grpc.DialOption {
 		if len(header["shard_addrs"]) > 0 {
 			addrs = header.Get("shard_addrs")
 		}
+
 		if pkey != "" && len(header["correct_addr"]) > 0 {
 			lock.Lock()
 			correctHost := header.Get("correct_addr")[0]
@@ -294,7 +291,6 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 		}
 
 		// find the correct shard
-
 		parindex := int(crc32.ChecksumIEEE([]byte(pkey))) % numShard
 
 		// process if this is the correct shard
