@@ -32,6 +32,21 @@ const (
 	CtxKey = "pcontext"
 )
 
+func updateHostMemory(memM map[string]string, key string, host string) map[string]string {
+	newMem := map[string]string{}
+	for k, v := range memM {
+		newMem[k] = v
+	}
+	newMem[key] = host
+	return newMem
+}
+
+func guestHost(key string, addrs []string) string {
+	// shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
+	shardNumber := GetAccShard(key, len(addrs))
+	return addrs[shardNumber]
+}
+
 // WithShardRedirect creates a dial option that learns on "shard_addrs" reponse
 // header to send requests to correct shard
 // see https://www.notion.so/Shard-service-c002bcb0b00c47669bce547be646cd9f
@@ -42,52 +57,52 @@ func WithShardRedirect() grpc.DialOption {
 	conn := make(map[string]*grpc.ClientConn)
 	// list of current shard worker addresses (order is important)
 	addrs := []string{}
-	var stgaddr string
+	memoryM := map[string]string{}
 
 	f := func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+		// looking for shard key in header or account_id field in parameter
+		md, _ := metadata.FromOutgoingContext(ctx)
+		pkey := strings.Join(md["shard_key"], "")
+		if pkey == "" {
+			pkey = GetAccountId(ctx, req)
+		}
+
 		// has data learned from last request
-		if len(addrs) > 0 {
-			// looking for shard key in header or account_id field in parameter
-			md, _ := metadata.FromOutgoingContext(ctx)
-			pkey := strings.Join(md["shard_key"], "")
-			if pkey == "" {
-				pkey = GetAccountId(ctx, req)
+		if len(addrs) > 0 && pkey != "" {
+			host := memoryM[pkey]
+			// finding the shard number
+			if host == "" {
+				host = guestHost(pkey, addrs)
 			}
-			if pkey != "" {
-				// finding the shard number
-				var host string
 
-				if stgaddr != "" && IsStagging(pkey) {
-					host = stgaddr
-				} else {
-					// shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
-					shardNumber := GetAccShard(pkey, len(addrs))
-					host = addrs[shardNumber]
-				}
-
-				co, ok := conn[host]
-				if !ok {
-					lock.Lock()
-					if co, ok = conn[host]; !ok {
-						co = DialGrpc(host)
-						// copy on write
-						copyConn := make(map[string]*grpc.ClientConn)
-						for k, v := range conn {
-							copyConn[k] = v
-						}
-						copyConn[host] = co
-						conn = copyConn
+			co, ok := conn[host]
+			if !ok {
+				lock.Lock()
+				if co, ok = conn[host]; !ok {
+					co = DialGrpc(host)
+					// copy on write
+					copyConn := make(map[string]*grpc.ClientConn)
+					for k, v := range conn {
+						copyConn[k] = v
 					}
-					lock.Unlock()
+					copyConn[host] = co
+					conn = copyConn
 				}
-				var header metadata.MD // variable to store header and trailer
-				opts = append([]grpc.CallOption{grpc.Header(&header)}, opts...)
-				err := co.Invoke(ctx, method, req, reply, opts...)
-				if len(header["shard_addrs"]) > 0 {
-					addrs = header.Get("shard_addrs")
-				}
-				return err
+				lock.Unlock()
 			}
+			var header metadata.MD // variable to store header and trailer
+			opts = append([]grpc.CallOption{grpc.Header(&header)}, opts...)
+			err := co.Invoke(ctx, method, req, reply, opts...)
+			if len(header["shard_addrs"]) > 0 {
+				addrs = header.Get("shard_addrs")
+			}
+			if pkey != "" && len(header["correct_addr"]) > 0 {
+				lock.Lock()
+				correctHost := header.Get("correct_addr")[0]
+				memoryM = updateHostMemory(memoryM, pkey, correctHost)
+				lock.Unlock()
+			}
+			return err
 		}
 
 		// no sharding parameter, perform the request anyway
@@ -97,8 +112,11 @@ func WithShardRedirect() grpc.DialOption {
 		if len(header["shard_addrs"]) > 0 {
 			addrs = header.Get("shard_addrs")
 		}
-		if len(header["stg_shard_addrs"]) > 0 {
-			stgaddr = header.Get("stg_shard_addrs")[0]
+		if pkey != "" && len(header["correct_addr"]) > 0 {
+			lock.Lock()
+			correctHost := header.Get("correct_addr")[0]
+			memoryM = updateHostMemory(memoryM, pkey, correctHost)
+			lock.Unlock()
 		}
 		return err
 	}
@@ -411,19 +429,20 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		// this happend when total_shards is not consistent between servers. We will wait for
 		// 5 secs and then proxy one more time. Hoping that the consistent will be resolved
 		justRedirect := len(strings.Join(md["shard_redirected"], "")) > 0
+		header := metadata.New(nil)
 		extraHeader := metadata.New(nil)
 		if justRedirect {
 			// mark the the request have been proxied twice
 			extraHeader.Set("shard_redirected_2", "true")
+			header.Set("correct_addr", hosts[parindex])
 			time.Sleep(5 * time.Second)
 		} else {
 			// mark the the request have been proxied once
 			extraHeader.Set("shard_redirected", "true")
+			header.Set("correct_addr", hosts[parindex])
 		}
 
-		header := metadata.New(nil)
 		header.Set("shard_addrs", hosts[:shards]...)
-		header.Set("stg_shard_addrs", hosts[shards])
 		grpc.SendHeader(ctx, header)
 
 		// use cache host connection or create a new one
