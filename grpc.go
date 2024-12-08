@@ -79,7 +79,7 @@ func WithShardRedirect() grpc.DialOption {
 			ordinal := sp[len(sp)-1]
 			name := strings.Join(sp[0:len(sp)-1], "-")
 			pari64, _ := strconv.ParseInt(ordinal, 10, 0)
-			newMaxHost = int(pari64)
+			newMaxHost = int(pari64) + 1
 			if maxHost < newMaxHost {
 				maxHost = newMaxHost
 				newHosts := make([]string, maxHost)
@@ -462,24 +462,25 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 		// this happend when total_shards is not consistent between servers. We will wait for
 		// 5 secs and then proxy one more time. Hoping that the consistent will be resolved
 		justRedirect := len(strings.Join(md["shard_redirected"], "")) > 0
-		header := metadata.New(nil)
 		extraHeader := metadata.New(nil)
+		host := hosts[parindex]
+
 		if justRedirect {
 			// mark the the request have been proxied twice
 			extraHeader.Set("shard_redirected_2", "true")
-			header.Set("correct_addr", hosts[parindex])
+			header := metadata.New(nil)
+			header.Set("correct_addr", host)
+			grpc.SendHeader(ctx, header)
 			time.Sleep(5 * time.Second)
 		} else {
 			// mark the the request have been proxied once
 			extraHeader.Set("shard_redirected", "true")
-			header.Set("correct_addr", hosts[parindex])
+			header := metadata.New(nil)
+			header.Set("correct_addr", host)
+			grpc.SendHeader(ctx, header)
 		}
 
-		header.Set("shard_addrs", hosts[:shards]...)
-		grpc.SendHeader(ctx, header)
-
 		// use cache host connection or create a new one
-		host := hosts[parindex]
 		lock.Lock()
 		cc, ok := conn[host]
 
