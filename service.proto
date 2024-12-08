@@ -88,6 +88,7 @@ service AccountMgr {
 	rpc GetAgentProfile(Id) returns (header.Response);
 	rpc ListAgentProfileAccounts(Id) returns (header.Response);
 	rpc Login(LoginRequest) returns (header.Response);
+	rpc OldLogin(LoginRequest) returns (header.Response);
 	rpc CreateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc UpdateGroup(header.AgentGroup) returns (header.AgentGroup);
 	rpc GetGroup(Id) returns (header.AgentGroup);

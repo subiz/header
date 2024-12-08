@@ -32,7 +32,7 @@ const (
 	CtxKey = "pcontext"
 )
 
-// WithShardRedirect creates a dial option that learns on "shard_addrs" reponse
+// WithShardRedirect2 creates a dial option that learns on "shard_addrs" reponse
 // header to send requests to correct shard
 // see https://www.notion.so/Shard-service-c002bcb0b00c47669bce547be646cd9f
 // for the overall design
@@ -42,6 +42,7 @@ func WithShardRedirect() grpc.DialOption {
 	conn := make(map[string]*grpc.ClientConn)
 	// list of current shard worker addresses (order is important)
 	addrs := []string{}
+	var stgaddr string
 
 	f := func(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 		// has data learned from last request
@@ -54,8 +55,13 @@ func WithShardRedirect() grpc.DialOption {
 			}
 			if pkey != "" {
 				// finding the shard number
-				shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
-				host := addrs[shardNumber]
+				var host string
+				if stgaddr != "" && IsStagging(pkey) {
+					host = stgaddr
+				} else {
+					shardNumber := int(crc32.ChecksumIEEE([]byte(pkey))) % len(addrs)
+					host = addrs[shardNumber]
+				}
 				co, ok := conn[host]
 				if !ok {
 					lock.Lock()
@@ -87,6 +93,9 @@ func WithShardRedirect() grpc.DialOption {
 		err := invoker(ctx, method, req, reply, cc, opts...)
 		if len(header["shard_addrs"]) > 0 {
 			addrs = header.Get("shard_addrs")
+		}
+		if len(header["stg_shard_addrs"]) > 0 {
+			stgaddr = header.Get("stg_shard_addrs")[0]
 		}
 		return err
 	}
@@ -318,6 +327,127 @@ func NewServerShardInterceptor(serviceAddrs []string, id int) grpc.UnaryServerIn
 	}
 }
 
+// NewShardInterceptor2 makes a GRPC server intercepter that can be used for sharding
+// see https://www.notion.so/Shard-service-c002bcb0b00c47669bce547be646cd9f
+// for more details about the design
+func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerInterceptor {
+	hostname, _ := os.Hostname()
+	sp := strings.Split(hostname, "-")
+	if len(sp) < 2 {
+		panic("invalid hostname" + hostname)
+	}
+
+	hosts := make([]string, 0)
+	for i := 0; i < shards; i++ {
+		// convo-${i}.convo:{port}
+		hosts = append(hosts, sp[0]+"-"+strconv.Itoa(i)+"."+sp[0]+":"+strconv.Itoa(grpcport))
+	}
+
+	ordinal := sp[len(sp)-1]
+	pari64, _ := strconv.ParseInt(ordinal, 10, 0)
+	ordinal_num := int(pari64)
+	servicename := strings.Join(sp[:len(sp)-1], "-")
+	if len(sp) > 2 && sp[len(sp)-2] == "stg" {
+		ordinal = "stg-0"
+		// is staging node
+		servicename = strings.Join(sp[:len(sp)-2], "-")
+		ordinal_num = shards // point to the last node
+	}
+	// convo-stg-0.convo:{port}
+	hosts = append(hosts, sp[0]+"-stg-0."+servicename+":"+strconv.Itoa(grpcport))
+
+	// in order to proxy (forward) the request to another grpc host,
+	// we must have an output object of the request's method (so we can marshal the response).
+	// we are going to build a map of returning type for all methods of the server. And do it
+	// only once time for each method name right before the first request.
+	returnedTypeM := make(map[string]reflect.Type)
+
+	// GRPC connections to shard workers
+	// mapping worker address (user-2.user:8080) to a GRPC connection
+	lock := &sync.Mutex{}
+	conn := make(map[string]*grpc.ClientConn)
+
+	return func(ctx context.Context, in interface{}, sinfo *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (out interface{}, err error) {
+		defer func() {
+			if r := recover(); r != nil {
+				if e, ok := r.(error); ok {
+					err = log.ERetry(e, log.M{"_function_name": sinfo.FullMethod, "__skip_stack": 1}) // wrap error
+				} else {
+					err = log.EServiceUnavailable(nil, log.M{"base": r, "_function_name": sinfo.FullMethod, "__skip_stack": 1})
+				}
+			}
+		}()
+
+		// looking for shard_key in header or in account_id parameter
+		md, _ := metadata.FromIncomingContext(ctx)
+		pkey := strings.Join(md["shard_key"], "")
+
+		if pkey == "" {
+			pkey = GetAccountId(ctx, in)
+			if pkey == "" {
+				// no sharding parameter, perform the request anyway
+				return handler(ctx, in)
+			}
+		}
+
+		// find the correct shard
+		parindex := int(crc32.ChecksumIEEE([]byte(pkey))) % shards
+		if IsStagging(pkey) {
+			parindex = shards // the last host
+		}
+
+		// process if this is the correct shard
+		if int(parindex) == ordinal_num {
+			return handler(ctx, in)
+		}
+
+		// the request have been proxied two times. We give up to prevent looping
+		redirectOfRedirect := len(strings.Join(md["shard_redirected_2"], "")) > 0
+		if redirectOfRedirect {
+			return nil, status.Errorf(codes.Internal, "Sharding inconsistent")
+		}
+
+		// the request just have been proxied and still
+		// doesn't arrived to the correct host
+		// this happend when total_shards is not consistent between servers. We will wait for
+		// 5 secs and then proxy one more time. Hoping that the consistent will be resolved
+		justRedirect := len(strings.Join(md["shard_redirected"], "")) > 0
+		extraHeader := metadata.New(nil)
+		if justRedirect {
+			// mark the the request have been proxied twice
+			extraHeader.Set("shard_redirected_2", "true")
+			time.Sleep(5 * time.Second)
+		} else {
+			// mark the the request have been proxied once
+			extraHeader.Set("shard_redirected", "true")
+		}
+
+		header := metadata.New(nil)
+		header.Set("shard_addrs", hosts[:len(hosts)-1]...)
+		header.Set("stg_shard_addrs", hosts[len(hosts)-1])
+		grpc.SendHeader(ctx, header)
+
+		// use cache host connection or create a new one
+		host := hosts[parindex]
+		lock.Lock()
+		cc, ok := conn[host]
+
+		if !ok {
+			cc = DialGrpc(host)
+			conn[host] = cc
+		}
+
+		// making a map of returning type for all methods of the server
+		returntype := returnedTypeM[sinfo.FullMethod]
+		if returntype == nil {
+			returntype = getReturnType(sinfo.Server, sinfo.FullMethod)
+			returnedTypeM[sinfo.FullMethod] = returntype
+		}
+		lock.Unlock()
+		return forward(cc, sinfo.FullMethod, returntype, ctx, in, extraHeader)
+	}
+}
+
 // getReturnType returns the return types for a GRPC method
 // the method name should be full method name (i.e., /package.service/method)
 // For example, with handler
@@ -478,6 +608,14 @@ func NewShardServer(port, shards int) *grpc.Server {
 	), grpc.ChainUnaryInterceptor(NewStatefulSetShardInterceptor(port, shards)))
 }
 
+func NewShardServer2(port, shards int) *grpc.Server {
+	return grpc.NewServer(grpc.KeepaliveParams(
+		keepalive.ServerParameters{
+			MaxConnectionAge: time.Duration(20) * time.Second,
+		},
+	), grpc.ChainUnaryInterceptor(NewServerShardInterceptor2(port, shards)))
+}
+
 func NewServer() *grpc.Server {
 	return grpc.NewServer(grpc.UnaryInterceptor(RecoverInterceptor),
 		grpc.KeepaliveParams(
@@ -512,39 +650,6 @@ func CheckShard(accid string) bool {
 	return false
 }
 
-func GetTicketClient(accid string) TicketMgrClient {
-	const service = "ticket"
-	num := ""
-	if _serverConfiguration.XAccounts[accid] {
-		num = "x"
-	} else if _serverConfiguration.DevelopmentAccounts[accid] {
-		num = "dev"
-	} else if _serverConfiguration.StaggingAccounts[accid] {
-		num = "stg"
-	} else {
-		if numShard := _serverConfiguration.Services[service].NumShards; numShard > 0 {
-			num = strconv.Itoa(int(crc32.ChecksumIEEE([]byte(accid)) % uint32(numShard)))
-		}
-	}
-
-	serviceLocation := service + "-" + num + "." + service + ":" + _serverConfiguration.Services[service].PortStr
-	if client, has := ticketClients[serviceLocation]; has {
-		return client
-	}
-
-	dialLock.Lock()
-	// double check if someone already connected
-	if client, has := ticketClients[serviceLocation]; has {
-		dialLock.Unlock()
-		return client
-	}
-
-	client := NewTicketMgrClient(DialGrpc(serviceLocation))
-	newClients := map[string]TicketMgrClient{}
-	for loc, oldClient := range ticketClients {
-		newClients[loc] = oldClient
-	}
-	ticketClients = newClients
-	dialLock.Unlock()
-	return client
+func IsStagging(accid string) bool {
+	return accid == "acpxkgumifuoofoosble" || accid == "acqsulrowbxiugvginhw"
 }
