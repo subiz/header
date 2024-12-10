@@ -1545,6 +1545,9 @@ message Tag {
 	int64 last_used = 9;
 	string type = 10;
 	string description = 11;
+	int64 auto_tag_enabled = 12;
+	int64 updated = 14;
+	string updated_by = 15;
 }
 
 message TemplateData {
@@ -6443,6 +6446,8 @@ message Response {
 	AttributeDefinition attribute_definition = 160;
 	repeated AttributeDefinition attribute_definitions = 161;
 	ArticleNode article_node = 162;
+	Tag tag = 163;
+	repeated Tag tags = 164;
 }
 
 message ReportCount {
@@ -6527,6 +6532,10 @@ message WorkflowSession {
 	int64 reattempt_at = 22;
 	Event event_cause_error = 23;
 	int64 workflow_version = 24;
+
+	int64 last_action_at = 25; // not waited
+	int64 num_executed_actions = 26;
+	Event last_message_sent = 27;
 }
 
 message StartWorkflowSessionRequest {
@@ -6924,6 +6933,8 @@ message Workflow {
 
 	File avatar = 32;
 	string format = 33; // empty, chatbot
+
+	bool is_system = 34; // auto assign tag, auto end chat
 }
 
 message WorkflowLog {
