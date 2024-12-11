@@ -2098,6 +2098,8 @@ message ActionUpdateConversation {
 
 	repeated KV fields = 5;
 	repeated string remove_fields = 6;
+	string tags_query = 7;
+	string untags_query = 8;
 }
 
 message ActionJump {
