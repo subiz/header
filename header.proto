@@ -6926,7 +6926,6 @@ message Workflow {
 
 	WorkflowGoal goal = 19;
 	WorkflowCondition exit_when = 26;
-
 	// report
 	int64 num_active_sessions = 23;
 	int64 num_unresolve_error_sessions = 24;
@@ -6938,6 +6937,16 @@ message Workflow {
 
 	bool is_system = 34; // auto assign tag, auto end chat
 	int64 exit_when_not_match_trigger = 35;
+	repeated KvSetting setting = 36;
+}
+
+message KvSetting {
+	string key = 1;
+	repeated string event_type = 2;
+	string query = 3;
+	string action = 4; // replace , append 
+	string type = 5;
+	bool is_array = 6;  // only support array for int, string
 }
 
 message WorkflowLog {
