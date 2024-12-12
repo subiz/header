@@ -6937,12 +6937,12 @@ message Workflow {
 
 	bool is_system = 34; // auto assign tag, auto end chat
 	int64 exit_when_not_match_trigger = 35;
-	repeated KvSetting setting = 36;
+	repeated KvSetting kv_settings = 36;
 }
 
 message KvSetting {
 	string key = 1;
-	repeated string event_type = 2;
+	repeated string event_types = 2;
 	string query = 3;
 	string action = 4; // replace , append 
 	string type = 5;
