@@ -6937,6 +6937,7 @@ message Workflow {
 	string format = 33; // empty, chatbot
 
 	bool is_system = 34; // auto assign tag, auto end chat
+	int64 exit_when_not_match_trigger = 35;
 }
 
 message WorkflowLog {
