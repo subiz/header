@@ -6180,7 +6180,6 @@ enum E {
 	invalid_segment_name = 240;
 	invalid_segment_description = 241;
 	cannot_edit_system_segment = 244;
-
 }
 
 message WorkflowAction {
@@ -6190,7 +6189,7 @@ message WorkflowAction {
 	string name = 5;
 	string next_action_id = 6;
 	string scope = 7; // computed
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6226,6 +6225,12 @@ message WorkflowAction {
 	// system.last_user_message
 	// system.last_output
 	string output_variable = 101; // plain text
+	ActionStartThread start_thread = 102;
+}
+
+message ActionStartThread {
+	string thread_id = 3;
+	string action_id = 4;
 }
 
 message ActionRAG {
@@ -6506,6 +6511,16 @@ message EmailAttachment {
 	string mimetype = 4;
 }
 
+message WorkflowThread {
+	int64 term = 5;
+	string status = 6;
+	int64 created = 7;
+	int64 ended = 8;
+	int64 last_waited = 9;
+	string exit_code = 10;
+	string action_id = 11;
+}
+
 message WorkflowSession {
 	common.Context ctx = 1;
 
@@ -6516,22 +6531,22 @@ message WorkflowSession {
 
 	int64 ended = 9;
 	int64 created = 10;
-	int64 last_waited = 11;
+	int64 last_waited = 11; // deprecated
 	string exit_code = 12; // action_not_found.
 	string status = 13; // creating, running, waiting, ended, paused, error
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
-	int64 term = 16;
-	map<string, int64> terms = 18; // thread id -> term
-
+	int64 term = 16; // deprecated
+	map<int64, WorkflowThread> threads = 18; // thread id -> term
+	// int64 last_waited = 11;
 	string obj_id = 17; // for this obj
 	// int64 version = 18;
 
 	int64 last_error_at = 19;
 	string error_code = 20; //
-	int64 num_attempts = 21;
-	int64 reattempt_at = 22;
-	Event event_cause_error = 23;
+	// int64 num_attempts = 21;
+	// int64 reattempt_at = 22;
+	// Event event_cause_error = 23;
 	int64 workflow_version = 24;
 
 	int64 last_action_at = 25; // not wait
@@ -6944,7 +6959,7 @@ message KvSetting {
 	string key = 1;
 	repeated string event_types = 2;
 	string query = 3;
-	string action = 4; // replace , append 
+	string action = 4; // replace , append
 	string type = 5;
 	bool is_array = 6;  // only support array for int, string
 }
