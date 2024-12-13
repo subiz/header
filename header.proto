@@ -73,7 +73,6 @@ message Notification {
 	repeated Notification sample_others = 18;
 }
 
-// splice
 message Attribute {
 	string key = 4;
 	int64 modified = 8;
@@ -630,8 +629,6 @@ message Data {
 	Note note = 23;
 	Workflow workflow = 25;
 	Event event = 26;
-	// AutomationEvent automation_event = 30;
-	// notibox.Notibox notibox = 32;
 	noti5.Setting notification_setting = 34;
 	Rule rule = 36;
 	AttributeDefinition user_attribute = 37;
@@ -6525,6 +6522,7 @@ message WorkflowSession {
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
 	int64 term = 16;
+	map<string, int64> terms = 18; // thread id -> term
 
 	string obj_id = 17; // for this obj
 	// int64 version = 18;
@@ -6536,8 +6534,8 @@ message WorkflowSession {
 	Event event_cause_error = 23;
 	int64 workflow_version = 24;
 
-	int64 last_action_at = 25; // not waited
-	int64 num_executed_actions = 26;
+	int64 last_action_at = 25; // not wait
+	int64 num_executed_actions = 26; // not wait, goto, branching (meaningfull)
 	Event last_message_sent = 27;
 }
 
@@ -6549,6 +6547,7 @@ message StartWorkflowSessionRequest {
 
 	//string status = 13; // creating, running, waiting, ended, paused, error
 	string obj_id = 17; // for this obj
+	string thread_id = 18;
 }
 
 message SchedulerTask {
@@ -6973,6 +6972,7 @@ message WorkflowLog {
 	string ticket_id = 17;
 
 	repeated string assign_tos = 21;
+	string thread_id = 22;
 }
 
 message TicketType {
@@ -7885,6 +7885,7 @@ message WorkflowPulse {
 	int64 term = 7;
 	string session_id = 8;
 	string action_id = 9;
+	string thread_id = 10;
 }
 
 message WorkflowTimeup {
@@ -7893,6 +7894,7 @@ message WorkflowTimeup {
 	string session_id = 8;
 	string action_id = 9;
 	int64 timeup_sec = 10;
+	string thread_id = 11;
 }
 
 message AndroidNotificationRequest {

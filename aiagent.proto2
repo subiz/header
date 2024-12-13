@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package header;
+
+option go_package = "github.com/subiz/header";
+
+import "common.proto";
+import "account.proto";
+import "payment.proto";
+import "type.proto";
+import "noti5.proto";
+import "locale.generated.proto"; // run node lang.js to generate this file
+
+message SupervisorAIAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string fullname = 4; // Q/A bot
+	string description = 5; // dung de tra loi cac cau hoi thuong gap cua subiz
+
+	bool is_supervisor = 9;
+	// Can mo ta: agent lam viec gi
+	string supervisor_prompt = 10;
+	string workflow_id = 7; // wfaiagnt1
+
+	repeated SubAgentAgent sub_agents = 11;
+	repeated SupervisorRule rules = 12;
+}
+
+message AIAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string fullname = 4; // Q/A bot
+	string description = 5; // dung de tra loi cac cau hoi thuong gap cua subiz
+
+	string chatgpt_assistant_id = 6;
+	string workflow_id = 7;
+
+	string current_action_id = 8;
+	// check (tin nhan dau tien?)
+}
+
+message SubAgentAgent {
+	string ai_agent_id = 4;
+	int64 stickiness = 5;
+	int64 bias = 6;
+aa
+	string intent_prompt = 7;
+}
+
+message SupervisorRule  {
+	// condition
+	// ouput: agent id
+
+	// neu {user.content_view.referer ... }
+	// and so luong tin nhan trong hoi thoai < 3
+	// thi giao cho bot-chat-nham
+}
+
+/*
+	Mình muốn phản ánh về chính sách phục vụ kh sau bán hàng của MediaMart chưa được tốt tại đianj bàn Sơn la, ggd mình mua Máy náu và làm sữa hạt đa năng Roler, nhưng không may máy bị trục chặc không làm sữa hạt được nữa, vẫn đang trong thời gian bảo hành, mình mang ra cửa hàng đến mấy tháng nay, mình hỏi rất nhiều lần lúc thì các bạn bán hàng đổi cho lý do này kia, song giờ lại nói đang chờ linh kiện thay thế. nói trung là không thể chấp nhận được với việc làm vô trách nhiệm của các bạn nhân viên. vậy cho mình hỏi đến bao giờ thì máy nấu và làm sữa hạt nhà mình sẽ sửa song.
+
+	la sao nhi? -> bot-chat-nham?
+	toi van khong hieu
+	*.
