@@ -6545,10 +6545,8 @@ message WorkflowSession {
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
 	int64 term = 16; // deprecated
-	map<int64, WorkflowThread> threads = 18; // thread id -> term
-	// int64 last_waited = 11;
+	map<string, WorkflowThread> threads = 18; // thread id -> term
 	string obj_id = 17; // for this obj
-	// int64 version = 18;
 
 	int64 last_error_at = 19;
 	string error_code = 20; //

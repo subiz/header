@@ -47481,13 +47481,12 @@ type WorkflowSession struct {
 	ExitCode   string            `protobuf:"bytes,12,opt,name=exit_code,json=exitCode,proto3" json:"exit_code,omitempty"`        // action_not_found.
 	Status     string            `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`                            // creating, running, waiting, ended, paused, error
 	// int64 first_goal_reached = 14;
-	GoalReached int64                     `protobuf:"varint,15,opt,name=goal_reached,json=goalReached,proto3" json:"goal_reached,omitempty"`
-	Term        int64                     `protobuf:"varint,16,opt,name=term,proto3" json:"term,omitempty"`                                                                                               // deprecated
-	Threads     map[int64]*WorkflowThread `protobuf:"bytes,18,rep,name=threads,proto3" json:"threads,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // thread id -> term
-	// int64 last_waited = 11;
-	ObjId       string `protobuf:"bytes,17,opt,name=obj_id,json=objId,proto3" json:"obj_id,omitempty"` // for this obj
-	LastErrorAt int64  `protobuf:"varint,19,opt,name=last_error_at,json=lastErrorAt,proto3" json:"last_error_at,omitempty"`
-	ErrorCode   string `protobuf:"bytes,20,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"` //
+	GoalReached int64                      `protobuf:"varint,15,opt,name=goal_reached,json=goalReached,proto3" json:"goal_reached,omitempty"`
+	Term        int64                      `protobuf:"varint,16,opt,name=term,proto3" json:"term,omitempty"`                                                                                              // deprecated
+	Threads     map[string]*WorkflowThread `protobuf:"bytes,18,rep,name=threads,proto3" json:"threads,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // thread id -> term
+	ObjId       string                     `protobuf:"bytes,17,opt,name=obj_id,json=objId,proto3" json:"obj_id,omitempty"`                                                                                // for this obj
+	LastErrorAt int64                      `protobuf:"varint,19,opt,name=last_error_at,json=lastErrorAt,proto3" json:"last_error_at,omitempty"`
+	ErrorCode   string                     `protobuf:"bytes,20,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"` //
 	// int64 num_attempts = 21;
 	// int64 reattempt_at = 22;
 	// Event event_cause_error = 23;
@@ -47613,7 +47612,7 @@ func (x *WorkflowSession) GetTerm() int64 {
 	return 0
 }
 
-func (x *WorkflowSession) GetThreads() map[int64]*WorkflowThread {
+func (x *WorkflowSession) GetThreads() map[string]*WorkflowThread {
 	if x != nil {
 		return x.Threads
 	}
@@ -69652,7 +69651,7 @@ var file_header_proto_rawDesc = []byte{
 	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
 	0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x1a, 0x52, 0x0a, 0x0c, 0x54, 0x68, 0x72, 0x65, 0x61, 0x64,
 	0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x2c, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x2c, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
 	0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x54, 0x68, 0x72, 0x65, 0x61, 0x64, 0x52,
 	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xd1, 0x01, 0x0a, 0x1b, 0x53,
