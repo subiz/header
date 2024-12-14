@@ -6214,6 +6214,7 @@ message WorkflowAction {
 	ActionSendTranscript send_transcript = 43;
 	ActionWaitMessage wait_message = 44;
 	ActionCreateOrder create_order = 45;
+	ActionAskInfo ask_info = 46;
 
 	// kv.chatgpt_thread_id
 	ActionLLMBranching llm_branching = 50;
@@ -6231,6 +6232,13 @@ message WorkflowAction {
 message ActionStartThread {
 	string thread_id = 3;
 	string action_id = 4;
+}
+
+message ActionAskInfo {
+	string type_info = 1; // email, phone ,...
+	string reason = 2;
+	string description = 3;
+	string necessary_level = 4; // Not_important, should_have, important
 }
 
 message ActionRAG {
