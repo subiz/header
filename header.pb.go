@@ -6670,26 +6670,25 @@ type Data struct {
 	BannedUser           *BannedUser              `protobuf:"bytes,109,opt,name=banned_user,json=bannedUser,proto3" json:"banned_user,omitempty"`
 	Credit               *Credit                  `protobuf:"bytes,110,opt,name=credit,proto3" json:"credit,omitempty"`
 	SubizBill            *payment.Bill            `protobuf:"bytes,111,opt,name=subiz_bill,json=subizBill,proto3" json:"subiz_bill,omitempty"`
-	// Automation automation = 112;
-	DesktopNotification *PushNoti           `protobuf:"bytes,113,opt,name=desktop_notification,json=desktopNotification,proto3" json:"desktop_notification,omitempty"`
-	Ticket              *Ticket             `protobuf:"bytes,114,opt,name=ticket,proto3" json:"ticket,omitempty"`
-	TicketType          *TicketType         `protobuf:"bytes,115,opt,name=ticket_type,json=ticketType,proto3" json:"ticket_type,omitempty"`
-	TicketHistoryEntry  *TicketHistoryEntry `protobuf:"bytes,116,opt,name=ticket_history_entry,json=ticketHistoryEntry,proto3" json:"ticket_history_entry,omitempty"`
-	LiveUserView        *LiveUserView       `protobuf:"bytes,117,opt,name=live_user_view,json=liveUserView,proto3" json:"live_user_view,omitempty"`
-	TicketView          *TicketView         `protobuf:"bytes,118,opt,name=ticket_view,json=ticketView,proto3" json:"ticket_view,omitempty"`
-	SlaPolicy           *SLAPolicy          `protobuf:"bytes,119,opt,name=sla_policy,json=slaPolicy,proto3" json:"sla_policy,omitempty"`
-	KnowledgedBase      *KnowledgeBase      `protobuf:"bytes,120,opt,name=knowledged_base,json=knowledgedBase,proto3" json:"knowledged_base,omitempty"`
-	ArticleCategory     *ArticleCategory    `protobuf:"bytes,121,opt,name=article_category,json=articleCategory,proto3" json:"article_category,omitempty"`
-	Article             *Article            `protobuf:"bytes,122,opt,name=article,proto3" json:"article,omitempty"`
-	ConversationMeta    *ConversationMeta   `protobuf:"bytes,123,opt,name=conversation_meta,json=conversationMeta,proto3" json:"conversation_meta,omitempty"`
-	Rating              *Rating             `protobuf:"bytes,124,opt,name=rating,proto3" json:"rating,omitempty"`
-	TicketRule          *Rule               `protobuf:"bytes,125,opt,name=ticket_rule,json=ticketRule,proto3" json:"ticket_rule,omitempty"`
-	Violation           *SLAViolation       `protobuf:"bytes,126,opt,name=violation,proto3" json:"violation,omitempty"`
-	WorkflowPulse       *WorkflowPulse      `protobuf:"bytes,127,opt,name=workflow_pulse,json=workflowPulse,proto3" json:"workflow_pulse,omitempty"`    // workflow_pulsed
-	WorkflowTimeup      *WorkflowTimeup     `protobuf:"bytes,128,opt,name=workflow_timeup,json=workflowTimeup,proto3" json:"workflow_timeup,omitempty"` // workflow_timeup
-	BankAccount         *BankAccount        `protobuf:"bytes,129,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
-	ArticleTopic        *ArticleTopic       `protobuf:"bytes,130,opt,name=article_topic,json=articleTopic,proto3" json:"article_topic,omitempty"`
-	ArticleNode         *ArticleNode        `protobuf:"bytes,131,opt,name=article_node,json=articleNode,proto3" json:"article_node,omitempty"`
+	DesktopNotification  *PushNoti                `protobuf:"bytes,113,opt,name=desktop_notification,json=desktopNotification,proto3" json:"desktop_notification,omitempty"`
+	Ticket               *Ticket                  `protobuf:"bytes,114,opt,name=ticket,proto3" json:"ticket,omitempty"`
+	TicketType           *TicketType              `protobuf:"bytes,115,opt,name=ticket_type,json=ticketType,proto3" json:"ticket_type,omitempty"`
+	TicketHistoryEntry   *TicketHistoryEntry      `protobuf:"bytes,116,opt,name=ticket_history_entry,json=ticketHistoryEntry,proto3" json:"ticket_history_entry,omitempty"`
+	LiveUserView         *LiveUserView            `protobuf:"bytes,117,opt,name=live_user_view,json=liveUserView,proto3" json:"live_user_view,omitempty"`
+	TicketView           *TicketView              `protobuf:"bytes,118,opt,name=ticket_view,json=ticketView,proto3" json:"ticket_view,omitempty"`
+	SlaPolicy            *SLAPolicy               `protobuf:"bytes,119,opt,name=sla_policy,json=slaPolicy,proto3" json:"sla_policy,omitempty"`
+	KnowledgedBase       *KnowledgeBase           `protobuf:"bytes,120,opt,name=knowledged_base,json=knowledgedBase,proto3" json:"knowledged_base,omitempty"`
+	ArticleCategory      *ArticleCategory         `protobuf:"bytes,121,opt,name=article_category,json=articleCategory,proto3" json:"article_category,omitempty"`
+	Article              *Article                 `protobuf:"bytes,122,opt,name=article,proto3" json:"article,omitempty"`
+	ConversationMeta     *ConversationMeta        `protobuf:"bytes,123,opt,name=conversation_meta,json=conversationMeta,proto3" json:"conversation_meta,omitempty"`
+	Rating               *Rating                  `protobuf:"bytes,124,opt,name=rating,proto3" json:"rating,omitempty"`
+	TicketRule           *Rule                    `protobuf:"bytes,125,opt,name=ticket_rule,json=ticketRule,proto3" json:"ticket_rule,omitempty"`
+	Violation            *SLAViolation            `protobuf:"bytes,126,opt,name=violation,proto3" json:"violation,omitempty"`
+	WorkflowPulse        *WorkflowPulse           `protobuf:"bytes,127,opt,name=workflow_pulse,json=workflowPulse,proto3" json:"workflow_pulse,omitempty"`    // workflow_pulsed
+	WorkflowTimeup       *WorkflowTimeup          `protobuf:"bytes,128,opt,name=workflow_timeup,json=workflowTimeup,proto3" json:"workflow_timeup,omitempty"` // workflow_timeup
+	BankAccount          *BankAccount             `protobuf:"bytes,129,opt,name=bank_account,json=bankAccount,proto3" json:"bank_account,omitempty"`
+	ArticleTopic         *ArticleTopic            `protobuf:"bytes,130,opt,name=article_topic,json=articleTopic,proto3" json:"article_topic,omitempty"`
+	ArticleNode          *ArticleNode             `protobuf:"bytes,131,opt,name=article_node,json=articleNode,proto3" json:"article_node,omitempty"`
 }
 
 func (x *Data) Reset() {
@@ -47375,6 +47374,7 @@ type WorkflowThread struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	Id         string `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
 	Term       int64  `protobuf:"varint,5,opt,name=term,proto3" json:"term,omitempty"`
 	Status     string `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	Created    int64  `protobuf:"varint,7,opt,name=created,proto3" json:"created,omitempty"`
@@ -47414,6 +47414,13 @@ func (x *WorkflowThread) ProtoReflect() protoreflect.Message {
 // Deprecated: Use WorkflowThread.ProtoReflect.Descriptor instead.
 func (*WorkflowThread) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{386}
+}
+
+func (x *WorkflowThread) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 func (x *WorkflowThread) GetTerm() int64 {
@@ -47481,13 +47488,12 @@ type WorkflowSession struct {
 	ExitCode   string            `protobuf:"bytes,12,opt,name=exit_code,json=exitCode,proto3" json:"exit_code,omitempty"`        // action_not_found.
 	Status     string            `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`                            // creating, running, waiting, ended, paused, error
 	// int64 first_goal_reached = 14;
-	GoalReached int64                     `protobuf:"varint,15,opt,name=goal_reached,json=goalReached,proto3" json:"goal_reached,omitempty"`
-	Term        int64                     `protobuf:"varint,16,opt,name=term,proto3" json:"term,omitempty"`                                                                                               // deprecated
-	Threads     map[int64]*WorkflowThread `protobuf:"bytes,18,rep,name=threads,proto3" json:"threads,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // thread id -> term
-	// int64 last_waited = 11;
-	ObjId       string `protobuf:"bytes,17,opt,name=obj_id,json=objId,proto3" json:"obj_id,omitempty"` // for this obj
-	LastErrorAt int64  `protobuf:"varint,19,opt,name=last_error_at,json=lastErrorAt,proto3" json:"last_error_at,omitempty"`
-	ErrorCode   string `protobuf:"bytes,20,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"` //
+	GoalReached int64                      `protobuf:"varint,15,opt,name=goal_reached,json=goalReached,proto3" json:"goal_reached,omitempty"`
+	Term        int64                      `protobuf:"varint,16,opt,name=term,proto3" json:"term,omitempty"`                                                                                              // deprecated
+	Threads     map[string]*WorkflowThread `protobuf:"bytes,18,rep,name=threads,proto3" json:"threads,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"` // thread id -> term
+	ObjId       string                     `protobuf:"bytes,17,opt,name=obj_id,json=objId,proto3" json:"obj_id,omitempty"`                                                                                // for this obj
+	LastErrorAt int64                      `protobuf:"varint,19,opt,name=last_error_at,json=lastErrorAt,proto3" json:"last_error_at,omitempty"`
+	ErrorCode   string                     `protobuf:"bytes,20,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"` //
 	// int64 num_attempts = 21;
 	// int64 reattempt_at = 22;
 	// Event event_cause_error = 23;
@@ -47613,7 +47619,7 @@ func (x *WorkflowSession) GetTerm() int64 {
 	return 0
 }
 
-func (x *WorkflowSession) GetThreads() map[int64]*WorkflowThread {
+func (x *WorkflowSession) GetThreads() map[string]*WorkflowThread {
 	if x != nil {
 		return x.Threads
 	}
@@ -69588,8 +69594,9 @@ var file_header_proto_rawDesc = []byte{
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x12, 0x12, 0x0a, 0x04, 0x6e,
 	0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
 	0x1a, 0x0a, 0x08, 0x6d, 0x69, 0x6d, 0x65, 0x74, 0x79, 0x70, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x08, 0x6d, 0x69, 0x6d, 0x65, 0x74, 0x79, 0x70, 0x65, 0x22, 0xc7, 0x01, 0x0a, 0x0e,
-	0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x54, 0x68, 0x72, 0x65, 0x61, 0x64, 0x12, 0x12,
+	0x09, 0x52, 0x08, 0x6d, 0x69, 0x6d, 0x65, 0x74, 0x79, 0x70, 0x65, 0x22, 0xd7, 0x01, 0x0a, 0x0e,
+	0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x54, 0x68, 0x72, 0x65, 0x61, 0x64, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12,
 	0x0a, 0x04, 0x74, 0x65, 0x72, 0x6d, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x74, 0x65,
 	0x72, 0x6d, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x06, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72,
@@ -69652,7 +69659,7 @@ var file_header_proto_rawDesc = []byte{
 	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
 	0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x1a, 0x52, 0x0a, 0x0c, 0x54, 0x68, 0x72, 0x65, 0x61, 0x64,
 	0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x03, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x2c, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x2c, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75,
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72,
 	0x2e, 0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x54, 0x68, 0x72, 0x65, 0x61, 0x64, 0x52,
 	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xd1, 0x01, 0x0a, 0x1b, 0x53,

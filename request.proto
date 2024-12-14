@@ -157,6 +157,7 @@ message UpdateWorkflowSessionRequest {
 	string session_id = 4;
 	string command = 5; // pause, stop, retry, resume
 	string next_action_id = 6; // only valid for command resume
+	string thread_id = 7;
 }
 
 message ListWorkflowLogRequest {
