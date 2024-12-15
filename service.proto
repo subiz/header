@@ -320,7 +320,7 @@ service WorkflowMgr {
 	rpc GetWorkflow(Workflow) returns (Response); // account_id, id, version=0 -> latest
 
 	rpc ListWorkflowVersions(ListVersions) returns (Response); // workflows
-	rpc StartWorkflowSesssion(StartWorkflowSessionRequest) returns (Response); // workflow_session
+	rpc StartWorkflowSession(StartWorkflowSessionRequest) returns (Response); // workflow_session
 
 	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
 	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);

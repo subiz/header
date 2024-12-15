@@ -6103,12 +6103,9 @@ enum E {
 	invalid_invoice_duedate = 80;
 	invalid_country = 82;
 	invalid_referrer_code = 83;
-	invalid_oauth_scope = 84;
-
 	invalid_label_name = 86;
 	invalid_label_color = 87;
 	invalid_label_description = 88;
-
 	invalid_user_view_name = 89;
 
 	invalid_time_range = 91;
@@ -6165,10 +6162,7 @@ enum E {
 	unsupported_file_type = 197;
 
 	invalid_sip_provider = 198; // fpt, itel
-
 	duplicated_extension = 200;
-
-	wrong_shard = 202;
 
 	invalid_task_title = 210;
 	invalid_task_note = 211;
@@ -6177,18 +6171,17 @@ enum E {
 	invalid_task_supervisor = 215;
 	invalid_task_watchers = 216;
 	invalid_segment_name = 240;
-	invalid_segment_description = 241;
 	cannot_edit_system_segment = 244;
 }
 
 message WorkflowAction {
-	// string account_id = 2;
-	// string workflow_id = 3;
 	string id = 4;
 	string name = 5;
 	string next_action_id = 6;
+	string on_error = 10; // action id or: "continue", "empty" -> end
+
 	string scope = 7; // computed
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6196,7 +6189,6 @@ message WorkflowAction {
 	AssignRequest assign = 19;
 
 	ActionUpdateConversation update_conversation = 21;
-	bytes internal_state = 30;
 	ActionUpdateUser update_user = 31;
 	ActionUpdateUserLabels update_user_labels = 32;
 	ActionConfirmOrder confirm_order = 34;
@@ -6226,6 +6218,7 @@ message WorkflowAction {
 	// system.last_output
 	string output_variable = 101; // plain text
 	ActionStartThread start_thread = 102;
+
 }
 
 message ActionStartThread {
@@ -6527,6 +6520,7 @@ message WorkflowThread {
 	int64 last_waited = 9;
 	string exit_code = 10;
 	string action_id = 11;
+	string last_error_at = 12;
 }
 
 message WorkflowSession {
@@ -6541,7 +6535,7 @@ message WorkflowSession {
 	int64 created = 10;
 	int64 last_waited = 11; // deprecated
 	string exit_code = 12; // action_not_found.
-	string status = 13; // creating, running, waiting, ended, paused, error
+	string status = 13; // creating, running, waiting, ended,  error
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
 	int64 term = 16; // deprecated
@@ -6549,7 +6543,7 @@ message WorkflowSession {
 	string obj_id = 17; // for this obj
 
 	int64 last_error_at = 19;
-	string error_code = 20; //
+	// string error_code = 20; //
 	// int64 num_attempts = 21;
 	// int64 reattempt_at = 22;
 	// Event event_cause_error = 23;
