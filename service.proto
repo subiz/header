@@ -209,6 +209,7 @@ service AccountMgr {
 
 	rpc GetSetupFeatureStatus(header.Id) returns (SetupFeatureStatus);
 	rpc UpdateSetupFeatureStatus(SetupFeatureStatus) returns (SetupFeatureStatus);
+	rpc ListActiveAccountIds(header.Id) returns (Response);
 }
 
 service UserCache {
