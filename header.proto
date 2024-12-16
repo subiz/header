@@ -6986,6 +6986,7 @@ message WorkflowLog {
 
 	repeated string assign_tos = 21;
 	string thread_id = 22;
+	string stack = 23;
 }
 
 message TicketType {
