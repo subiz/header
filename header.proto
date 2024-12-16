@@ -6522,6 +6522,7 @@ message WorkflowThread {
 	string exit_code = 10;
 	string action_id = 11;
 	int64 last_error_at = 12;
+	int64 last_action_at = 13;
 }
 
 message WorkflowSession {
