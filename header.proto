@@ -8290,16 +8290,25 @@ message AIDataSourceEntry {
 	string answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
-	File file = 9;
+	bool expand_link_disabled = 9;
 
-	string status = 10; // crawling, uploading, success
-	string description = 11;
+	File file = 10;
+
+	string status = 11; // crawling, uploading, success
+	string description = 12;
 	// int64 num_tokens = 12;
 	int64 created = 13;
 	string created_by = 14;
 
-	string first_crawled_at = 16;
+	int64 updated = 15;
+	string updated_by = 16;
+
+	string first_crawled_at = 17;
 	string crawl_status_code = 18; // pending_extraction, pending_decision
 	int64 last_crawled_at = 19;
-	string openai_file_id = 20;
+	string discovered_by = 20; // entry-id
+
+	string openai_file_id = 21;
+	int64 openai_file_uploaded = 22;
+	string openai_file_uploaded_status = 23;
 }
