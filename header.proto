@@ -8171,7 +8171,6 @@ message SupervisorAIAgent {
 	string description = 5; // dung de tra loi cac cau hoi thuong gap cua subiz
 
 	bool is_supervisor = 9;
-
 }
 
 message AIAgent {
@@ -8193,7 +8192,7 @@ message AIAgent {
 }
 
 message FlowSetting {
-	string answer = 14; 
+	string answer = 14;
 }
 
 message SupervisorAgentSetting {
@@ -8216,11 +8215,38 @@ message QnAAgentSetting {
 	repeated string knowledge_source = 19;
 	bool context_guard = 20;
 	string context_guard_message = 21;
+
+	// internal
+	repeated string chatgpt_vector_stores = 22;
+	OpenAIVectorStore openai_vector_store = 23;
+}
+
+message OpenAIVectorStoreFileCount {
+	int64 in_progress = 4;
+	int64 completed = 5;
+	int64 failed = 6;
+	int64 cancelled = 7;
+	int64 total = 8;
+}
+
+message OpenAIVectorStore {
+	string id = 2;
+	string object = 3;
+	string created_at = 4;
+	string name = 5;
+	int64 bytes = 6;
+	OpenAIVectorStoreFileCount file_counts = 7;
+
+	int64 synced = 10;
+	string sync_status = 11;
+	string sync_error = 12;
 }
 
 message AIIntent {
 	string description = 4;
 	string examples = 5; // new line delimiter
+	int64 edited = 6;
+	int64 edited_by = 7;
 }
 
 message SubAIAgent {
@@ -8266,13 +8292,14 @@ message AIDataSourceEntry {
 	string url = 8; // https://subiz.com.vn
 	File file = 9;
 
-	string status = 10; // success
+	string status = 10; // crawling, uploading, success
 	string description = 11;
-	int64 num_tokens = 12;
+	// int64 num_tokens = 12;
 	int64 created = 13;
 	string created_by = 14;
-	int64 last_trained = 15;
-	int64 auto_retrain = 16;
-	string retrain_status = 17;
-	string crawl_status = 18; // pending_extraction, pending_decision
+
+	string first_crawled_at = 16;
+	string crawl_status_code = 18; // pending_extraction, pending_decision
+	int64 last_crawled_at = 19;
+	string openai_file_id = 20;
 }
