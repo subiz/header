@@ -8206,6 +8206,7 @@ message SupervisorAgentSetting {
 }
 
 message QnAAgentSetting {
+	string prompt = 6;
 	int64 use_all_data_source = 7;
 	repeated string data_sources = 8; //
 
