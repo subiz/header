@@ -8183,18 +8183,17 @@ message AIAgent {
 	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
 	string avatar_url = 7;
 
-
 	string provider = 8; // openai
 	string chatgpt_assistant_id = 9; // if use open ai chatgpt
-
 	string template = 10; // qna, supervisor, flow
-	// string workflow_id = 7;
-
-	// string current_action_id = 11;
-
-
+	string workflow_id = 11;
 	SupervisorAgentSetting supervisor_setting = 12;
 	QnAAgentSetting qna_setting = 13;
+	FlowSetting flow_setting = 15;
+}
+
+message FlowSetting {
+	string answer = 14; 
 }
 
 message SupervisorAgentSetting {
