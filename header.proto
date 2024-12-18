@@ -8149,3 +8149,75 @@ message ArticleNode {
 	map<string, string> i18n_title = 6;
 	repeated ArticleNode children = 7;
 }
+
+message SupervisorAIAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string fullname = 4; // Q/A bot
+	string description = 5; // dung de tra loi cac cau hoi thuong gap cua subiz
+
+	bool is_supervisor = 9;
+
+}
+
+message AIAgent {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
+	string fullname = 4; // Q/A bot
+	File avatar = 5;
+	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
+
+	string provider = 8; // openai
+	string chatgpt_assistant_id = 9; // if use open ai chatgpt
+
+	string template = 10; // qna, supervisor, flow
+	// string workflow_id = 7;
+
+	// string current_action_id = 11;
+
+	SupervisorAgentSetting supervisor_setting = 12;
+	QnAAgentSetting qna_setting = 13;
+}
+
+message SupervisorAgentSetting {
+	// Can mo ta: agent lam viec gi
+	string supervisor_prompt = 10;
+	string workflow_id = 7; // wfaiagnt1
+
+	repeated SubAIAgent sub_agents = 11;
+	repeated SupervisorRule rules = 12;
+}
+
+message QnAAgentSetting {
+	string token_limit = 9; // short, balanced, long
+	int64 temperature = 10; // 50% -> 50
+
+	repeated string knowledge_source = 19;
+	bool context_guard = 20;
+	string context_guard_message = 21;
+}
+
+message AIIntent {
+	string description = 4;
+	string examples = 5; // new line delimiter
+}
+
+message SubAIAgent {
+	string ai_agent_id = 4;
+	int64 stickiness = 5;
+	int64 bias = 6;
+	repeated AIIntent intent = 7;
+}
+
+message SupervisorRule  {
+	// condition
+	// ouput: agent id
+
+	// neu {user.content_view.referer ... }
+	// and so luong tin nhan trong hoi thoai < 3
+	// thi giao cho bot-chat-nham
+}
