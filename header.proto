@@ -8281,6 +8281,16 @@ message AIDataSource {
 	string created_by = 14;
 }
 
+message CrawlResponse {
+	string url = 3;
+	string status_code = 4;
+	bytes body = 5;
+	int64 created = 6;
+	repeated string childrens = 7;
+	string md5_hash = 8;
+	Error error = 100;
+}
+
 message AIDataSourceEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8303,10 +8313,9 @@ message AIDataSourceEntry {
 	int64 updated = 15;
 	string updated_by = 16;
 
-	string first_crawled_at = 17;
 	string crawl_status_code = 18; // pending_extraction, pending_decision
 	int64 last_crawled_at = 19;
-	string discovered_by = 20; // entry-id
+	string referer_entry_id = 20;
 
 	string openai_file_id = 21;
 	int64 openai_file_uploaded = 22;

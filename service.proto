@@ -918,3 +918,8 @@ service Counter {
 	rpc Report2(CounterReportRequest) returns (CounterReportResponse);
 	rpc Count2(CounterReportRequest) returns (CounterReportResponse);
 }
+
+// internal
+service Crawler {
+	rpc Crawl(Id) returns (CrawlResponse); // cached
+}
