@@ -6228,9 +6228,19 @@ message ActionStartThread {
 
 message ActionAskInfo {
 	string type_info = 1; // email, phone ,...
-	string reason = 2;
+	// string reason = 2;
 	string description = 3;
-	string necessary_level = 4; // Not_important, should_have, important
+	string required_level = 4; // required, should_have, optional
+
+	string on_collected = 7; // next-action-id
+	string on_uncollected = 8;  // next-action-id
+	// 1. xac nhan la khach co dang noi voi component ko?
+	// 2. khach dang noi voi component.
+	// 2.1 khach da cho -> goi on_collected
+	// 2.2 khach chua cho -> cu tra loi bang llm
+	// 2.3 khach nhat dinh ko cho -> goi on_uncollected
+	// 3. khach ko dang noi voi component (component ko hieu) -> goi on_unhandled
+	string on_unhandled = 9; // next-action-id
 }
 
 message ActionRAG {
