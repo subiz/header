@@ -711,6 +711,9 @@ message Data {
 	BankAccount bank_account = 129;
 	ArticleTopic article_topic = 130;
 	ArticleNode article_node = 131;
+	AIDataSourceEntry ai_data_source_entry = 132;
+	AIDataSource ai_data_source = 133;
+	AIAgent ai_agent = 134;
 }
 
 message ConversationMeta {
@@ -6464,6 +6467,15 @@ message Response {
 	Tag tag = 163;
 	repeated Tag tags = 164;
 	repeated string ids = 165;
+
+	repeated AIDataSourceEntry ai_data_source_entries = 166;
+	AIDataSourceEntry ai_data_source_entry = 167;
+
+	repeated AIDataSource ai_data_sources = 168;
+	AIDataSource ai_data_source = 169;
+
+	repeated AIAgent ai_agents = 170;
+	AIAgent ai_agent = 171;
 }
 
 message ReportCount {
@@ -8166,10 +8178,11 @@ message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-
 	string fullname = 4; // Q/A bot
 	File avatar = 5;
 	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
+	string avatar_url = 7;
+
 
 	string provider = 8; // openai
 	string chatgpt_assistant_id = 9; // if use open ai chatgpt
@@ -8178,6 +8191,7 @@ message AIAgent {
 	// string workflow_id = 7;
 
 	// string current_action_id = 11;
+
 
 	SupervisorAgentSetting supervisor_setting = 12;
 	QnAAgentSetting qna_setting = 13;
@@ -8193,6 +8207,9 @@ message SupervisorAgentSetting {
 }
 
 message QnAAgentSetting {
+	int64 use_all_data_source = 7;
+	repeated string data_sources = 8; //
+
 	string token_limit = 9; // short, balanced, long
 	int64 temperature = 10; // 50% -> 50
 
@@ -8220,4 +8237,42 @@ message SupervisorRule  {
 	// neu {user.content_view.referer ... }
 	// and so luong tin nhan trong hoi thoai < 3
 	// thi giao cho bot-chat-nham
+}
+
+message AIDataSource {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 6;
+	string description = 7;
+	int64 disabled = 8;
+
+	string num_entries = 9;
+	string num_trainings = 10;
+	string num_pendings = 11;
+
+	string created = 13;
+	string created_by = 14;
+}
+
+message AIDataSourceEntry {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string data_source_id = 4;
+	string type = 5; // qa, file, url
+	string answer = 6;
+	string question = 7;
+	string url = 8; // https://subiz.com.vn
+	File file = 9;
+
+	string status = 10; // success
+	string description = 11;
+	int64 num_tokens = 12;
+	int64 created = 13;
+	string created_by = 14;
+	int64 last_trained = 15;
+	int64 auto_retrain = 16;
+	string retrain_status = 17;
+	string crawl_status = 18; // pending_extraction, pending_decision
 }
