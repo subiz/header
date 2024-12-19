@@ -701,3 +701,13 @@ message CrawlUrlRequest {
 	string url = 2;
 	string last_md5 = 3;
 }
+
+message ListAIDataEntryRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string group_id = 3;
+
+	string keyword = 4;
+	int64 offset = 5;
+	int64 limit = 6;
+}

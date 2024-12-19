@@ -337,16 +337,16 @@ service WorkflowMgr {
 	rpc UpdateAIAgent(AIAgent) returns (Response);
 	rpc GetAIAgent(Id) returns (Response);
 	rpc DeleteAIAgent(Id) returns (Response);
-	rpc ListAIDataSource(Id) returns (Response);
-	rpc CreateAIDataSource(AIDataSource) returns (Response);
-	rpc UpdateAIDataSource(AIDataSource) returns (Response);
-	rpc DeleteAIDataSource(Id) returns (Empty);
-	rpc CreateAIDataSourceEntry(AIDataSourceEntry) returns (Response);
-	rpc ListAIDataSourceEntry(Id) returns (Response);
-	rpc GetAIDataSourceEntry(Id) returns (Response);
-	rpc UpdateAIDataSourceEntry(AIDataSourceEntry) returns (Response);
-	rpc DeleteAIDataSourceEntry(Id) returns (Empty);
-	rpc CrawlDataSourceEntry(Id) returns (Response);
+	rpc ListAIDataGroup(Id) returns (Response);
+	rpc CreateAIDataGroup(AIDataGroup) returns (Response);
+	rpc UpdateAIDataGroup(AIDataGroup) returns (Response);
+	rpc DeleteAIDatagroup(Id) returns (Empty);
+	rpc CreateAIDataEntry(AIDataEntry) returns (Response);
+	rpc ListAIDataEntry(ListAIDataEntryRequest) returns (Response);
+	rpc GetAIDataEntry(Id) returns (Response);
+	rpc UpdateAIDataEntry(AIDataEntry) returns (Response);
+	rpc DeleteAIDataEntry(Id) returns (Empty);
+	rpc CrawlDataEntry(Id) returns (Response);
 }
 
 service ConversationMgr {

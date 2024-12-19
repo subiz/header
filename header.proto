@@ -711,8 +711,8 @@ message Data {
 	BankAccount bank_account = 129;
 	ArticleTopic article_topic = 130;
 	ArticleNode article_node = 131;
-	AIDataSourceEntry ai_data_source_entry = 132;
-	AIDataSource ai_data_source = 133;
+	AIDataEntry ai_data_entry = 132;
+	AIDataGroup ai_data_group = 133;
 	AIAgent ai_agent = 134;
 }
 
@@ -6469,11 +6469,11 @@ message Response {
 	repeated Tag tags = 164;
 	repeated string ids = 165;
 
-	repeated AIDataSourceEntry ai_data_source_entries = 166;
-	AIDataSourceEntry ai_data_source_entry = 167;
+	repeated AIDataEntry ai_data_entries = 166;
+	AIDataEntry ai_data_entry = 167;
 
-	repeated AIDataSource ai_data_sources = 168;
-	AIDataSource ai_data_source = 169;
+	repeated AIDataGroup ai_data_groups = 168;
+	AIDataGroup ai_data_group = 169;
 
 	repeated AIAgent ai_agents = 170;
 	AIAgent ai_agent = 171;
@@ -8266,7 +8266,7 @@ message SupervisorRule  {
 	// thi giao cho bot-chat-nham
 }
 
-message AIDataSource {
+message AIDataGroup {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
@@ -8292,11 +8292,11 @@ message CrawlResponse {
 	string content_type = 9;
 }
 
-message AIDataSourceEntry {
+message AIDataEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string data_source_id = 4;
+	repeated string group_ids = 4;
 	string type = 5; // qa, file, url
 	string answer = 6;
 	string question = 7;
