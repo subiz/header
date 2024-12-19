@@ -695,3 +695,9 @@ message NewPassword {
 	string old_password = 5;
 	string email = 8;
 }
+
+message CrawlUrlRequest {
+	common.Context ctx = 1;
+	string url = 2;
+	string last_md5 = 3;
+}

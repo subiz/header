@@ -346,6 +346,7 @@ service WorkflowMgr {
 	rpc GetAIDataSourceEntry(Id) returns (Response);
 	rpc UpdateAIDataSourceEntry(AIDataSourceEntry) returns (Response);
 	rpc DeleteAIDataSourceEntry(Id) returns (Empty);
+	rpc CrawlDataSourceEntry(Id) returns (Response);
 }
 
 service ConversationMgr {
@@ -921,5 +922,5 @@ service Counter {
 
 // internal
 service Crawler {
-	rpc Crawl(Id) returns (CrawlResponse); // cached
+	rpc Crawl(CrawlUrlRequest) returns (CrawlResponse); // cached
 }

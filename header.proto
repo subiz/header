@@ -8304,20 +8304,25 @@ message AIDataSourceEntry {
 
 	File file = 10;
 
-	string status = 11; // crawling, uploading, success
-	string description = 12;
+	// url only
+	string num_sub_links = 11;
+	string last_crawled = 12;
+	string crawling_status = 13; // crawling, done
+	string crawl_status_code = 14;
+	int64 crawl_depth = 15; // 2 default
+	string referer_entry_id = 16;
+
+	string status = 17; // crawling, uploading, success
+	string description = 18;
 	// int64 num_tokens = 12;
-	int64 created = 13;
-	string created_by = 14;
+	int64 created = 19;
+	string created_by = 20;
 
-	int64 updated = 15;
-	string updated_by = 16;
+	int64 updated = 21;
+	string updated_by = 22;
+	string md5_sum = 23;
 
-	string crawl_status_code = 18; // pending_extraction, pending_decision
-	int64 last_crawled_at = 19;
-	string referer_entry_id = 20;
-
-	string openai_file_id = 21;
-	int64 openai_file_uploaded = 22;
-	string openai_file_uploaded_status = 23;
+	string openai_file_id = 26;
+	int64 openai_file_uploaded = 27;
+	string openai_file_uploaded_status = 28; // uploading. .updating, ready
 }
