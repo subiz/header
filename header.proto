@@ -6263,6 +6263,7 @@ message ActionLLMBranching {
 }
 
 message ActionLLM {
+	string openai_assistant_id = 4;
 	string model = 5; // chatgpt-4
 	Block system_instruction = 6;
 	int64 temperature = 7; // 10000 * 10000
