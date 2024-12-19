@@ -8283,12 +8283,12 @@ message AIDataSource {
 
 message CrawlResponse {
 	string url = 3;
-	string status_code = 4;
+	int64 status_code = 4;
 	bytes body = 5;
 	int64 created = 6;
-	repeated string childrens = 7;
+	repeated string links = 7;
 	string md5_hash = 8;
-	Error error = 100;
+	string content_type = 9;
 }
 
 message AIDataSourceEntry {
@@ -8325,4 +8325,6 @@ message AIDataSourceEntry {
 	string openai_file_id = 26;
 	int64 openai_file_uploaded = 27;
 	string openai_file_uploaded_status = 28; // uploading. .updating, ready
+
+	int64 num_upload_failed = 30;
 }
