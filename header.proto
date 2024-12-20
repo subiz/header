@@ -8213,34 +8213,20 @@ message QnAAgentSetting {
 	string token_limit = 9; // short, balanced, long
 	int64 temperature = 10; // 50% -> 50
 
-	repeated string knowledge_source = 19;
-	bool context_guard = 20;
-	string context_guard_message = 21;
+	repeated string data_groups = 19;
+	repeated int64 data_group_last_file_modified = 20;
+
+	int64 num_training_in_progress = 21;
+	int64 num_training_failed = 22;
+	int64 total_training_files = 23;
+
+	string training_status = 24;
+
+	bool context_guard = 25;
+	string context_guard_message = 26;
 
 	// internal
-	repeated string chatgpt_vector_stores = 22;
-	OpenAIVectorStore openai_vector_store = 23;
-}
-
-message OpenAIVectorStoreFileCount {
-	int64 in_progress = 4;
-	int64 completed = 5;
-	int64 failed = 6;
-	int64 cancelled = 7;
-	int64 total = 8;
-}
-
-message OpenAIVectorStore {
-	string id = 2;
-	string object = 3;
-	string created_at = 4;
-	string name = 5;
-	int64 bytes = 6;
-	OpenAIVectorStoreFileCount file_counts = 7;
-
-	int64 synced = 10;
-	string sync_status = 11;
-	string sync_error = 12;
+	string chatgpt_vector_store_id = 27;
 }
 
 message AIIntent {
@@ -8280,6 +8266,8 @@ message AIDataGroup {
 
 	string created = 13;
 	string created_by = 14;
+
+	int64 last_file_modified = 16;
 }
 
 message CrawlResponse {
@@ -8297,6 +8285,7 @@ message AIDataEntry {
 	string account_id = 2;
 	string id = 3;
 	repeated string group_ids = 4;
+
 	string type = 5; // qa, file, url
 	string answer = 6;
 	string question = 7;
@@ -8326,6 +8315,13 @@ message AIDataEntry {
 	string openai_file_id = 26;
 	int64 openai_file_uploaded = 27;
 	string openai_file_uploaded_status = 28; // uploading. .updating, ready
+	// int64 num_upload_failed = 30;
+	map<string, AIDataEntryTrainStatus> training_status = 31; // agent_id -> status
+}
 
-	int64 num_upload_failed = 30;
+message AIDataEntryTrainStatus {
+	string status = 3; // completed
+	string openai_file_id = 4;
+	string openai_vector_store_file_id = 5;
+	string openai_vector_store_id = 6;
 }

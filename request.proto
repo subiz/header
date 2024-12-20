@@ -710,4 +710,6 @@ message ListAIDataEntryRequest {
 	string keyword = 4;
 	int64 offset = 5;
 	int64 limit = 6;
+	string type = 7;
+	string referer_id = 8;
 }

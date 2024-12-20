@@ -316,10 +316,10 @@ enum RealtimeType {
 	order_draft_deleted = 312;
 	order_canceled = 313;
 
-	ai_data_source_entry_updated = 314;
-	ai_data_source_entry_deleted = 315;
-	ai_data_source_updated = 316;
-	ai_data_source_deleted = 317;
+	ai_data_entry_updated = 314;
+	ai_data_entry_deleted = 315;
+	ai_data_group_updated = 316;
+	ai_data_group_deleted = 317;
 	ai_agent_updated = 318;
 	ai_agent_deleted = 319;
 }
