@@ -8220,8 +8220,7 @@ message QnAAgentSetting {
 	int64 num_training_failed = 22;
 	int64 total_training_files = 23;
 
-	string training_status = 24;
-
+	// string training_status = 24;
 	bool context_guard = 25;
 	string context_guard_message = 26;
 
@@ -8302,7 +8301,7 @@ message AIDataEntry {
 	int64 crawl_depth = 15; // 2 default
 	string referer_entry_id = 16;
 
-	string status = 17; // crawling, uploading, success
+	string status = 17; // (training status) crawling, training, ready
 	string description = 18;
 	// int64 num_tokens = 12;
 	int64 created = 19;
@@ -8314,14 +8313,16 @@ message AIDataEntry {
 
 	string openai_file_id = 26;
 	int64 openai_file_uploaded = 27;
-	string openai_file_uploaded_status = 28; // uploading. .updating, ready
+	string openai_file_uploaded_status = 28; // uploading, complete
+	string openai_vector_store_file_id = 29;
 	// int64 num_upload_failed = 30;
-	map<string, AIDataEntryTrainStatus> training_status = 31; // agent_id -> status
+	map<string, AIDataEntryTrainStatus> training_statuses = 31; // agent_id -> status
+	int64 deleted = 32;
 }
 
 message AIDataEntryTrainStatus {
-	string status = 3; // completed
+	// string status = 3; // completed
 	string openai_file_id = 4;
-	string openai_vector_store_file_id = 5;
-	string openai_vector_store_id = 6;
+	int64 openai_vector_store_file_added = 5;
+	// string openai_vector_store_file_id = 5;
 }
