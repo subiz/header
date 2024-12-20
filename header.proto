@@ -8302,8 +8302,9 @@ message AIDataEntry {
 	int64 crawl_status_code = 14;
 	int64 crawl_depth = 15; // 2 default
 	string referer_entry_id = 16;
+	string referer_entry_id_last_crawled = 33;
 
-	string status = 17; // (training status) crawling, training, ready
+	string status = 17; // (training status) pending, crawling, training, ready, unlinked
 	string description = 18;
 	// int64 num_tokens = 12;
 	int64 created = 19;
@@ -8315,9 +8316,7 @@ message AIDataEntry {
 
 	string openai_file_id = 26;
 	int64 openai_file_uploaded = 27;
-	string openai_file_uploaded_status = 28; // uploading, complete
 	string openai_vector_store_file_id = 29;
-	// int64 num_upload_failed = 30;
 	map<string, AIDataEntryTrainStatus> training_statuses = 31; // agent_id -> status
 	int64 deleted = 32;
 }
