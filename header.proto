@@ -6184,6 +6184,7 @@ message WorkflowAction {
 	string on_error = 10; // action id or: "continue", "empty" -> end
 
 	string scope = 7; // computed
+	bool is_sync_message = 8; //valid for ation wait
 	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint
 
 	ActionJump jump = 15;
@@ -6221,7 +6222,6 @@ message WorkflowAction {
 	// system.last_output
 	string output_variable = 101; // plain text
 	ActionStartThread start_thread = 102;
-
 }
 
 message ActionStartThread {
@@ -6975,7 +6975,6 @@ message Workflow {
 	bool is_system = 34; // auto assign tag, auto end chat
 	int64 exit_when_not_match_trigger = 35;
 	repeated KvSetting kv_settings = 36;
-	bool is_sync_message = 37; 
 }
 
 message KvSetting {
