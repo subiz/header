@@ -6573,6 +6573,7 @@ message WorkflowSession {
 	int64 last_action_at = 25; // not wait
 	int64 num_executed_actions = 26; // not wait, goto, branching (meaningfull)
 	Event last_message_sent = 27;
+	string last_sync_message_id = 28;
 }
 
 message StartWorkflowSessionRequest {
@@ -6974,6 +6975,7 @@ message Workflow {
 	bool is_system = 34; // auto assign tag, auto end chat
 	int64 exit_when_not_match_trigger = 35;
 	repeated KvSetting kv_settings = 36;
+	bool is_sync_message = 37; 
 }
 
 message KvSetting {
