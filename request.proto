@@ -708,11 +708,11 @@ message ListAIDataEntryRequest {
 	string group_id = 3;
 
 	string keyword = 4;
-	int64 offset = 5; // deprecated
 	string anchor = 9;
 	int64 limit = 6;
 	string type = 7;
 	string referer_id = 8;
+	string status = 10;
 }
 
 message CampaignSendLogRequest {

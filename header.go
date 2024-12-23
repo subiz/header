@@ -821,6 +821,8 @@ const AUTO_SEGMENT ObjectType = "auto_segment"
 const WHITELIST ObjectType = "whitelist"
 const SUBSCRIPTION ObjectType = "subscription"
 const WORKFLOW ObjectType = "workflow"
+const AI_DATA ObjectType = "ai_data"
+const AI_AGENT ObjectType = "ai_agent"
 const BANK_ACCOUNT ObjectType = "bank_account"
 
 // const INVOICE ObjectType = "invoice"
