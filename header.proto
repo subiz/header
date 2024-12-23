@@ -5887,17 +5887,6 @@ message CampaignSendLog {
 	int64 total = 6;
 }
 
-message CampaignSendLogRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string campaign_id = 3;
-	string anchor = 4;
-	int32 limit = 5;
-
-	string status = 6;
-	string user_id = 7;
-}
-
 message BroadcastCampaignMetrics {
 	message BroadcastCampaignMetric {
 		string message_id = 4; // for detailed metric
@@ -6559,7 +6548,7 @@ message WorkflowSession {
 
 	int64 ended = 9;
 	int64 created = 10;
-	int64 last_waited = 11; // deprecated
+	int64 last_waited = 11; // depr ecated
 	string exit_code = 12; // action_not_found.
 	string status = 13; // creating, running, waiting, ended, error
 	// int64 first_goal_reached = 14;
@@ -8285,7 +8274,7 @@ message AIDataEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	repeated string group_ids = 4;
+	string group_id = 4;
 
 	string type = 5; // qa, file, url
 	string answer = 6;
@@ -8302,7 +8291,7 @@ message AIDataEntry {
 	int64 crawl_status_code = 14;
 	int64 crawl_depth = 15; // 2 default
 	string referer_entry_id = 16;
-	string referer_entry_id_last_crawled = 33;
+	int64 referer_entry_id_last_crawled = 33;
 
 	string status = 17; // (training status) pending, crawling, training, ready, unlinked
 	string description = 18;
