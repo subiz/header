@@ -6258,7 +6258,7 @@ message ActionLLM {
 	int64 temperature = 7; // 10000 * 10000
 	int64 max_token = 8;
 	bool conversation_history = 9; // inject chat history to system instructionë
-	bool file_search = 10;
+	string chatgpt_vector_store_id = 10;
 }
 
 message ActionCreateOrder {
@@ -8198,7 +8198,7 @@ message SupervisorAgentSetting {
 
 message QnAAgentSetting {
 	string prompt = 6;
-	int64 use_all_data_source = 7;
+	int64 use_custom_data_source = 7;
 	repeated string data_sources = 8; //
 
 	string token_limit = 9; // short, balanced, long
