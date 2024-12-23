@@ -8230,7 +8230,7 @@ message SubAIAgent {
 	string ai_agent_id = 4;
 	int64 stickiness = 5;
 	int64 bias = 6;
-	repeated AIIntent intent = 7;
+	repeated AIIntent intents = 7;
 }
 
 message SupervisorRule  {
@@ -8276,7 +8276,7 @@ message AIDataEntry {
 	string id = 3;
 	string group_id = 4;
 
-	string type = 5; // qa, file, url
+	string type = 5; // qa, file, website
 	string answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
@@ -8313,6 +8313,6 @@ message AIDataEntry {
 message AIDataEntryTrainStatus {
 	// string status = 3; // completed
 	string openai_file_id = 4;
-	int64 openai_vector_store_file_added = 5;
+	// int64 openai_vector_store_file_added = 5;
 	// string openai_vector_store_file_id = 5;
 }
