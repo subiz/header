@@ -8181,8 +8181,7 @@ message AIAgent {
 	SupervisorAgentSetting supervisor_setting = 12;
 	QnAAgentSetting qna_setting = 13;
 	FlowSetting flow_setting = 15;
-
-
+	HumanHandoverSetting human_handover = 16;
 }
 
 message FlowSetting {
@@ -8223,6 +8222,13 @@ message QnAAgentSetting {
 	repeated AIFunction functions = 28;
 }
 
+message HumanHandoverSetting {
+	int64 disabled = 10;
+	Block message = 11; // message to be sent to user when human agent request detected
+	repeated Rule rules = 12;
+	Rule assign_to = 13;
+}
+
 message JSONSchema {
 	string title = 2;
 	string type = 3; // string, number, object, array, boolean, null
@@ -8236,8 +8242,10 @@ message JSONSchema {
 }
 
 message AIFunction {
-	string name = 2; // create order
-	string description = 3;
+	string id = 3;
+	string name = 4; // create order
+	string description = 5;
+	// assign agent
 	/*
 This function creates an Order. The input parameters will be defined based on extracted information from conversation context. It will return order object in a JSON format.
 The returned fields are:
@@ -8245,11 +8253,12 @@ The returned fields are:
 - order_number: Number of the order
 - created: timestamp at the moment order is created
 */
-	string url = 4;
-	string method = 5;
-	repeated KV header = 6;
-	string parameter_description = 8;
-	JSONSchema parameter = 9;
+	string url = 6;
+	string method = 7;
+	repeated KV header = 8;
+	string parameter_description = 9;
+	JSONSchema parameter = 10;
+	int64 disabled = 11;
 	/* JSON schema
 {
 	"type": "object",
@@ -8358,6 +8367,7 @@ message AIDataEntry {
 	string openai_vector_store_file_id = 29;
 	map<string, AIDataEntryTrainStatus> training_statuses = 31; // agent_id -> status
 	int64 deleted = 32;
+	int64 modified = 34;
 }
 
 message AIDataEntryTrainStatus {
