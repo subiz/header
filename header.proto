@@ -8294,19 +8294,20 @@ message SupervisorRule  {
 message AIDataGroup {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
+	string id = 3; // empty -> default, kb
 	string name = 6;
 	string description = 7;
-	int64 disabled = 8;
+	// int64 disabled = 8;
 
-	string num_entries = 9;
-	string num_trainings = 10;
-	string num_pendings = 11;
+	int64 num_entries = 9;
+	int64 num_trainings = 10;
+	int64 num_pendings = 11;
 
-	string created = 13;
+	int64 created = 13;
 	string created_by = 14;
-
+	string type = 15; // system, kb
 	int64 last_file_modified = 16;
+	int64 modified = 17;
 }
 
 message CrawlResponse {
