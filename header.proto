@@ -8181,6 +8181,8 @@ message AIAgent {
 	SupervisorAgentSetting supervisor_setting = 12;
 	QnAAgentSetting qna_setting = 13;
 	FlowSetting flow_setting = 15;
+
+
 }
 
 message FlowSetting {
@@ -8217,6 +8219,53 @@ message QnAAgentSetting {
 
 	// internal
 	string chatgpt_vector_store_id = 27;
+
+	repeated AIFunction functions = 28;
+}
+
+message JSONSchema {
+	string title = 2;
+	string type = 3; // string, number, object, array, boolean, null
+	string description = 5;
+	map<string, JSONSchema> properties = 6;
+	JSONSchema items = 7; // used for type array
+	int64 minItems = 8;
+	bool uniqueItems = 9;
+	int64 exclusiveMinimum = 10;
+	repeated string required = 11;
+}
+
+message AIFunction {
+	string name = 2; // create order
+	string description = 3;
+	/*
+This function creates an Order. The input parameters will be defined based on extracted information from conversation context. It will return order object in a JSON format.
+The returned fields are:
+- order_id: ID of the order
+- order_number: Number of the order
+- created: timestamp at the moment order is created
+*/
+	string url = 4;
+	string method = 5;
+	repeated KV header = 6;
+	string parameter_description = 8;
+	JSONSchema parameter = 9;
+	/* JSON schema
+{
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string",
+			"description": "name of the customer"
+		},
+		"email": {
+			"type": "string",
+			"description": "Email of the user"
+		}
+  },
+	"required": ["email"]
+}
+*/
 }
 
 message AIIntent {
