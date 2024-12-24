@@ -347,6 +347,7 @@ service WorkflowMgr {
 	rpc UpdateAIDataEntry(AIDataEntry) returns (Response);
 	rpc DeleteAIDataEntry(Id) returns (Empty);
 	rpc CrawlDataEntry(Id) returns (Response);
+	rpc MatchDataEntries(Ids) returns (Response);
 }
 
 service ConversationMgr {
