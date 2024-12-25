@@ -337,6 +337,7 @@ service WorkflowMgr {
 	rpc UpdateAIAgent(AIAgent) returns (Response);
 	rpc GetAIAgent(Id) returns (Response);
 	rpc DeleteAIAgent(Id) returns (Response);
+	rpc RunTestAiAgent(RunTestAiAgentRequest) returns (Empty); // workflow_session
 	rpc ListAIDataGroup(Id) returns (Response);
 	rpc CreateAIDataGroup(AIDataGroup) returns (Response);
 	rpc UpdateAIDataGroup(AIDataGroup) returns (Response);

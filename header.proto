@@ -6577,6 +6577,13 @@ message StartWorkflowSessionRequest {
 	string thread_id = 18;
 }
 
+message RunTestAiAgentRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ai_agent = 3;
+	string conversation_id = 4;
+}
+
 message SchedulerTask {
 	common.Context ctx = 1;
 	string account_id = 2;
