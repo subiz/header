@@ -724,4 +724,9 @@ message CampaignSendLogRequest {
 
 	string status = 6;
 	string user_id = 7;
+
+	int64 seen_at_gt = 8;
+	int64 clicked_at_gt = 9;
+	int64 received_at_gt = 10;
+	int64 delivered_at_gt = 11;
 }
