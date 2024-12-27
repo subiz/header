@@ -6564,6 +6564,7 @@ message WorkflowSession {
 	int64 num_executed_actions = 26; // not wait, goto, branching (meaningfull)
 	Event last_message_sent = 27;
 	string last_sync_message_id = 28;
+	string last_llm_message_id = 29;
 }
 
 message StartWorkflowSessionRequest {
