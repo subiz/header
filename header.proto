@@ -8371,16 +8371,16 @@ message AIDataEntry {
 
 	// string openai_file_id = 26;
 	// int64 openai_file_uploaded = 27;
-	// string openai_vector_store_file_id = 29;
-	// map<string, AIDataEntryTrainStatus> training_statuses = 31; // agent_id -> status
+	string vector_store_file_id = 29;
+	map<string, AIDataEntryTrainStatus> training_statuses = 31; // agent_id -> status
 	int64 deleted = 32;
 	int64 modified = 34;
-	int64 last_trained = 35;
+	int64 last_trained = 35; // successfully saved to vector store
 }
 
 message AIDataEntryTrainStatus {
-	// string status = 3; // completed
-	string openai_file_id = 4;
+	string status = 3; // chunking, completed
+	string vector_store_file_id = 4;
 	// int64 openai_vector_store_file_added = 5;
 	// string openai_vector_store_file_id = 5;
 }
