@@ -6205,7 +6205,7 @@ message WorkflowAction {
 	// ActionLLMRewriteQuery llm_rewrite_query = 51;
 	ActionLLM llm = 52;
 	// ActionSearchProduct search_product = 53;
-	ActionRAG rag = 54;
+	// ActionRAG rag = 54;
 
 	// system.last_user_message
 	// system.last_output
@@ -6235,10 +6235,6 @@ message ActionAskInfo {
 	string on_unhandled = 9; // next-action-id
 }
 
-message ActionRAG {
-	// first rewrite the query
-}
-
 message LLMClassifyBranch {
 	WorkflowCondition condition = 4;
 	string action_id = 5;
@@ -6252,13 +6248,13 @@ message ActionLLMBranching {
 }
 
 message ActionLLM {
-	// string openai_assistant_id = 4;
+	string system_instruction = 4;
 	string model = 5; // chatgpt-4
-	Block system_instruction = 6;
+	Block system_instruction_block = 6; // dynamic prompt
 	int64 temperature = 7; // 10000 * 10000
 	int64 max_token = 8;
 	bool conversation_history = 9; // inject chat history to system instructionë
-	string chatgpt_vector_store_id = 10;
+	// string chatgpt_vector_store_id = 10;
 	repeated AIFunction functions = 11; // function calling
 }
 
@@ -8191,6 +8187,12 @@ message AIAgent {
 	QnAAgentSetting qna_setting = 13;
 	FlowSetting flow_setting = 15;
 	HumanHandoverSetting human_handover = 16;
+
+	int64 created = 17;
+	string created_by = 18;
+
+	int64 updated = 19;
+	string updated_by = 20;
 }
 
 message FlowSetting {
@@ -8198,16 +8200,21 @@ message FlowSetting {
 }
 
 message SupervisorAgentSetting {
+	string model = 5;  // gpt-4o-mini-2024-07-18
+
 	// Can mo ta: agent lam viec gi
 	string supervisor_prompt = 10;
-	string workflow_id = 7; // wfaiagnt1
+	// string workflow_id = 7; // wfaiagnt1
 
 	repeated SubAIAgent sub_agents = 11;
 	repeated SupervisorRule rules = 12;
 }
 
 message QnAAgentSetting {
+	string model = 5;  // gpt-4o-mini-2024-07-18
 	string prompt = 6;
+
+	// for rag context
 	int64 use_custom_data_source = 7;
 	repeated string data_sources = 8; //
 
@@ -8223,12 +8230,12 @@ message QnAAgentSetting {
 
 	// string training_status = 24;
 	bool context_guard = 25;
-	string context_guard_message = 26;
+	Block context_guard_message = 26;
 
-	// internal
-	string chatgpt_vector_store_id = 27;
+	// string chatgpt_vector_store_id = 27;
 
 	repeated AIFunction functions = 28;
+	HumanHandoverSetting human_handover = 29;
 }
 
 message HumanHandoverSetting {
@@ -8248,13 +8255,14 @@ message JSONSchema {
 	bool uniqueItems = 9;
 	int64 exclusiveMinimum = 10;
 	repeated string required = 11;
+	bool additionalProperties = 12;
 }
 
 message AIFunction {
 	string id = 3;
 	string name = 4; // create order
 	string description = 5;
-	string appended_prompt = 12;
+	string additional_prompt = 12;
 	// assign agent
 	/*
 This function creates an Order. The input parameters will be defined based on extracted information from conversation context. It will return order object in a JSON format.
@@ -8264,9 +8272,8 @@ The returned fields are:
 - created: timestamp at the moment order is created
 */
 	string url = 6;
-	string method = 7;
-	repeated KV header = 8;
-	string parameter_description = 9;
+	string method = 7; // GET, POST, DELETE
+	repeated KV headers = 8;
 	JSONSchema parameters = 10;
 	int64 disabled = 11;
 	/* JSON schema
