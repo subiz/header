@@ -8180,13 +8180,14 @@ message AIAgent {
 	string avatar_url = 7;
 
 	string provider = 8; // openai
-	string chatgpt_assistant_id = 9; // if use open ai chatgpt
-	string template = 10; // qna, supervisor, flow
+	// string chatgpt_assistant_id = 9; // if use open ai chatgpt
+	string template = 10; // fixed, qna, supervisor, flow
 	string workflow_id = 11;
 	SupervisorAgentSetting supervisor_setting = 12;
 	QnAAgentSetting qna_setting = 13;
-	FlowSetting flow_setting = 15;
+	FlowAgentSetting flow_setting = 15;
 	HumanHandoverSetting human_handover = 16;
+	FixedAgentSetting fixed_setting = 21;
 
 	int64 created = 17;
 	string created_by = 18;
@@ -8195,8 +8196,11 @@ message AIAgent {
 	string updated_by = 20;
 }
 
-message FlowSetting {
-	string answer = 14;
+message FixedAgentSetting {
+	Block answer = 14;
+}
+
+message FlowAgentSetting {
 }
 
 message SupervisorAgentSetting {
