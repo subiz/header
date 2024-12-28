@@ -729,4 +729,8 @@ message CampaignSendLogRequest {
 	int64 clicked_at_gt = 9;
 	int64 received_at_gt = 10;
 	int64 delivered_at_gt = 11;
+	int64 seen_at_lte = 12;
+	int64 clicked_at_lte = 13;
+	int64 received_at_lte = 14;
+	int64 delivered_at_lte = 15;
 }
