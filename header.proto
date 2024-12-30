@@ -6337,6 +6337,8 @@ message ActionWaitBranch {
 	string else_action_id = 23; // if condition does not match -> call this
 
 	ActionBranching branching = 22; // deprecated: use else, remove after tet
+
+	ActionSetVariable set_variable = 24; // save variable if match condition
 }
 
 message ActionBranchingBranch {
