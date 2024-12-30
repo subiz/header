@@ -6211,6 +6211,14 @@ message WorkflowAction {
 	// system.last_output
 	string output_variable = 101; // plain text
 	ActionStartThread start_thread = 102;
+	ActionSetVariable set_variable = 103;
+}
+
+message ActionSetVariable {
+	string name = 3; // variable name: a, b, c
+	string value = 4; // json: [] "string", 0, true, false, 123, undefined, null
+	string var_value = 5;
+	string operator = 6; // inc, dec, pop, not, append, prepend, set, unset, shift
 }
 
 message ActionStartThread {
@@ -6304,11 +6312,12 @@ message ActionPercentageSplit {
 }
 
 message ActionWaitBranch {
-	string wait_for = 3; // duration, milestone, event (segment, message), attribute
+	string wait_for = 3; // (empty -> just check the condition) duration, milestone, event (segment, message), attribute
 	string ui_type = 4; // message
 
 	string event_type = 10;
 	WorkflowCondition condition = 11;
+
 	// eg. email read: message_
 	// eg. last zns_read (last step id is 4)
 	// { event_type=message_pong, event.data.message.fields[atm_step=4] }
@@ -6324,8 +6333,10 @@ message ActionWaitBranch {
 	string date_format = 19; // unix rfc3999
 
 	int64 sec = 21; // wait_for=duration
-	string next_action_id = 20;
-	ActionBranching branching = 22;
+	string next_action_id = 20; // if condition  match -> call this
+	string else_action_id = 23; // if condition does not match -> call this
+
+	ActionBranching branching = 22; // deprecated: use else, remove after tet
 }
 
 message ActionBranchingBranch {
@@ -6541,16 +6552,16 @@ message WorkflowSession {
 	string id = 4;
 	string action_id = 6; // current executing
 	WorkflowAction action = 7; // only recompute when list, not save in db
-	map<string, string> KV = 8;
+	map<string, string> KV = 8; // deprecated remove after tet
 
 	int64 ended = 9;
 	int64 created = 10;
-	int64 last_waited = 11; // depr ecated
+	int64 last_waited = 11; // deprecated remove after tet
 	string exit_code = 12; // action_not_found.
 	string status = 13; // creating, running, waiting, ended, error
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
-	int64 term = 16; // deprecated
+	int64 term = 16; // deprecated remove after tet
 	map<string, WorkflowThread> threads = 18; // thread id -> term
 	string obj_id = 17; // for this obj
 
@@ -6891,7 +6902,9 @@ message WorkflowTimming {
 
 message WorkflowCondition {
 	string id = 2;
-	string key = 4; // event, id, keyword, lead_owner attr:fullname segment user_label
+	// event, id, keyword, lead_owner attr:fullname segment user_label
+	string key = 4;
+
 	ChannelCondition channel = 5;
 	bool is_changed = 6;
 	string type = 7;
