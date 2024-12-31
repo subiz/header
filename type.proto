@@ -408,6 +408,14 @@ message FloatCondition {
 	repeated double neq = 11;
 	repeated double in_range = 13;
 	repeated double not_in_range = 14;
+
+	repeated double eq_var = 15;
+	repeated double neq_var = 16;
+
+	double gt_var = 17;
+	double gte_var = 18;
+	double lt_var = 19;
+	double lte_var = 20;
 }
 
 message DatetimeCondition {
