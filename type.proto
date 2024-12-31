@@ -409,13 +409,13 @@ message FloatCondition {
 	repeated double in_range = 13;
 	repeated double not_in_range = 14;
 
-	repeated double eq_var = 15;
-	repeated double neq_var = 16;
+	repeated string eq_var = 15;
+	repeated string neq_var = 16;
 
-	double gt_var = 17;
-	double gte_var = 18;
-	double lt_var = 19;
-	double lte_var = 20;
+	string gt_var = 17;
+	string gte_var = 18;
+	string lt_var = 19;
+	string lte_var = 20;
 }
 
 message DatetimeCondition {
