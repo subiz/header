@@ -6212,6 +6212,7 @@ message WorkflowAction {
 	string output_variable = 101; // plain text
 	ActionStartThread start_thread = 102;
 	ActionSetVariable set_variable = 103;
+
 }
 
 message ActionSetVariable {
@@ -8212,7 +8213,7 @@ message AIAgent {
 }
 
 message FixedAgentSetting {
-	Block answer = 14;
+	Message answer = 14;
 }
 
 message FlowAgentSetting {
@@ -8249,7 +8250,7 @@ message QnAAgentSetting {
 
 	// string training_status = 24;
 	bool context_guard = 25;
-	Block context_guard_message = 26;
+	Message context_guard_message = 26;
 
 	// string chatgpt_vector_store_id = 27;
 
@@ -8259,7 +8260,7 @@ message QnAAgentSetting {
 
 message HumanHandoverSetting {
 	int64 disabled = 10;
-	Block message = 11; // message to be sent to user when human agent request detected
+	Message message = 11; // message to be sent to user when human agent request detected
 	repeated Rule rules = 12;
 	Rule assign_to = 13;
 }

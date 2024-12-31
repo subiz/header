@@ -1955,7 +1955,7 @@ func blockToPlainText(block *Block) string {
 		return out + block.Text
 	}
 
-	if block.Type == "mention-agent" || block.Type == "mention-agent" {
+	if block.Type == "mention-agent" || block.Type == "mention" {
 		var name = ""
 		if attrs := block.GetAttrs(); attrs != nil {
 			name = attrs["name"]
