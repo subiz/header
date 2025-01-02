@@ -574,6 +574,8 @@ message ListConversationEventsRequest {
 	bool is_private = 7;
 
 	bool by_type_only = 8;
+
+	int64 max_chars = 9;
 }
 
 message ListWorkflowSessionRequest {

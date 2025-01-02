@@ -343,6 +343,8 @@ message Log {
 	optional string description = 5;
 	optional string account_id = 6;
 	optional int32 month = 7;
+	optional string stack = 9;
+	optional string ref_ctx = 10;
 }
 
 message String {
