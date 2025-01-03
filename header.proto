@@ -8197,7 +8197,7 @@ message AIAgent {
 	string provider = 8; // openai
 	// string chatgpt_assistant_id = 9; // if use open ai chatgpt
 	string template = 10; // fixed, qna, supervisor, flow
-	string workflow_id = 11;
+	// string workflow_id = 11;
 	SupervisorAgentSetting supervisor_setting = 12;
 	QnAAgentSetting qna_setting = 13;
 	FlowAgentSetting flow_setting = 15;

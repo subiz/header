@@ -351,10 +351,11 @@ service WorkflowMgr {
 	rpc MatchDataEntries(Ids) returns (Response);
 
 	rpc ListAIResponseSources(AiResponseSourceRequest) returns (Response);
-
-	rpc ListAISuggestion(AiQnaSuggestionRequest) returns (Response);
+	// rpc FlagAIResponse()
+	rpc ListAISuggestions(AiQnaSuggestionRequest) returns (Response);
 	rpc UpdateAIQnASuggestion(AiQnASuggestion) returns (Response);
 	rpc ReadAIQnASuggestion(Id) returns (Response);
+	rpc DeleteAIQnASuggestion(Id) returns (Empty);
 }
 
 service ConversationMgr {
