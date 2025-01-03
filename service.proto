@@ -349,6 +349,12 @@ service WorkflowMgr {
 	rpc DeleteAIDataEntry(Id) returns (Empty);
 	rpc CrawlDataEntry(Id) returns (Response);
 	rpc MatchDataEntries(Ids) returns (Response);
+
+	rpc ListAIResponseSources(AiResponseSourceRequest) returns (Response);
+
+	rpc ListAISuggestion(AiQnaSuggestionRequest) returns (Response);
+	rpc UpdateAIQnASuggestion(AiQnASuggestion) returns (Response);
+	rpc ReadAIQnASuggestion(Id) returns (Response);
 }
 
 service ConversationMgr {

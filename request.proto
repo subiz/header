@@ -736,3 +736,21 @@ message CampaignSendLogRequest {
 	int64 received_at_lte = 14;
 	int64 delivered_at_lte = 15;
 }
+
+message AiQnaSuggestionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ai_agent_id = 4;
+
+	int64 limit = 5;
+	string anchor = 6;
+	string status = 7;
+}
+
+message AiResponseSourceRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string ai_agent_id = 4;
+	string message_id = 5;
+}

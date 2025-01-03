@@ -6471,6 +6471,11 @@ message Response {
 
 	repeated AIAgent ai_agents = 170;
 	AIAgent ai_agent = 171;
+
+	AiQnASuggestion ai_qna_suggestion = 172;
+	repeated AiQnASuggestion ai_qna_suggestions = 173;
+
+	repeated AiResponseSource ai_response_sources = 174;
 }
 
 message ReportCount {
@@ -8366,7 +8371,7 @@ message AIDataEntry {
 	string group_id = 4;
 
 	string type = 5; // qa, file, website
-	string answer = 6;
+	Message answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
 	bool expand_link_disabled = 9;
@@ -8408,4 +8413,36 @@ message AIDataEntryTrainStatus {
 	string vector_store_file_id = 4;
 	// int64 openai_vector_store_file_added = 5;
 	// string openai_vector_store_file_id = 5;
+}
+
+message AiResponseSource {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string message_id = 4;
+	string ai_data_entry_id = 5;
+	string chunk = 6;
+	int64 score = 7;
+	int64 created = 8;
+
+	AIDataEntry ai_data_entry = 9; // optional
+}
+
+message AiQnASuggestion {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string ai_agent_id = 4;
+	string message_id = 5;
+	string id = 6;
+	string group_id = 7;
+
+	string query = 10;
+
+	Message answer = 11;
+	int64 flagged = 12;
+	string status = 13; // pending, accept
+	int64 created = 14;
+	int64 read_at = 15;
+	string read_by = 16;
 }
