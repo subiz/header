@@ -1770,7 +1770,6 @@ message AssignRequest {
 	Event start_event = 14;
 	bool remove_other_agents = 15;
 	bool disable_fallback = 16;
-
 }
 
 message EndchatConnectorSetting {
@@ -6212,7 +6211,6 @@ message WorkflowAction {
 	string output_variable = 101; // plain text
 	ActionStartThread start_thread = 102;
 	ActionSetVariable set_variable = 103;
-
 }
 
 message ActionSetVariable {
@@ -6335,11 +6333,6 @@ message ActionWaitBranch {
 
 	int64 sec = 21; // wait_for=duration
 	string next_action_id = 20; // if condition  match -> call this
-	string else_action_id = 23; // if condition does not match -> call this
-
-	ActionBranching branching = 22; // deprecated: use else, remove after tet
-
-	ActionSetVariable set_variable = 24; // save variable if match condition
 }
 
 message ActionBranchingBranch {
