@@ -6378,6 +6378,7 @@ message Response {
 	string next_anchor = 6;
 	string prev_anchor = 7;
 	string e_tag = 8;
+	int64 total_hits = 9;
 	BlockedEmail blocked_email = 10;
 	repeated BlockedEmail blocked_emails = 11;
 	BouncedEmail bounced_email = 12;
@@ -8418,8 +8419,7 @@ message AIDataEntryTrainStatus {
 message AiResponseSource {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string conversation_id = 3;
-	string message_id = 4;
+	string call_id = 4;
 	string ai_data_entry_id = 5;
 	string chunk = 6;
 	int64 score = 7;

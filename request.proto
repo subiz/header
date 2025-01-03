@@ -745,12 +745,11 @@ message AiQnaSuggestionRequest {
 	int64 limit = 5;
 	string anchor = 6;
 	string status = 7;
+	string query = 8;
 }
 
 message AiResponseSourceRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string conversation_id = 3;
-	string ai_agent_id = 4;
-	string message_id = 5;
+	string call_id = 3;
 }
