@@ -2117,6 +2117,7 @@ message ActionSendHttp {
 
 	bool response_as_messages = 7;
 	Block block = 8;
+	bool continue_on_error = 9;
 }
 
 message ActionSendMessage {
