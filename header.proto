@@ -8419,14 +8419,16 @@ message AIDataEntryTrainStatus {
 
 message AiResponseSource {
 	common.Context ctx = 1;
-	string account_id = 2;
+	// string account_id = 2;
 	string call_id = 4;
-	string ai_data_entry_id = 5;
-	string chunk = 6;
+	string data_entry_id = 5;
+	string chunk = 6; // original
 	int64 score = 7;
 	int64 created = 8;
 
-	AIDataEntry ai_data_entry = 9; // optional
+	AIDataEntry data_entry = 9; // optional
+	string data_entry_file_id = 10;
+	string embed_chunk = 11;
 }
 
 message AiQnASuggestion {
