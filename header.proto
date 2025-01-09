@@ -8404,15 +8404,13 @@ message AIDataEntry {
 	string referer_entry_id = 16;
 	int64 referer_entry_id_last_crawled = 33;
 
-	string status = 17; // (training status) pending, crawling, training, ready, unlinked
-	string description = 18;
-	// int64 num_tokens = 12;
+	string status = 17; // (training status) pending, crawling, training, ready, unlinked, token-limit
 	int64 created = 19;
 	string created_by = 20;
 
 	int64 updated = 21;
 	string updated_by = 22;
-	// string md5_sum = 23;
+	string md5_sum = 23;
 
 	// string openai_file_id = 26;
 	// int64 openai_file_uploaded = 27;
@@ -8426,7 +8424,6 @@ message AIDataEntry {
 
 	int64 num_characters = 36;
 	int64 num_chunks = 37;
-	repeated AIDataChunk chunks = 40;
 }
 
 message AIDataEntryTrainStatus {
