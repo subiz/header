@@ -6478,6 +6478,8 @@ message Response {
 	repeated AiQnASuggestion ai_qna_suggestions = 173;
 
 	repeated AiResponseSource ai_response_sources = 174;
+
+	repeated AIDataChunk ai_data_chunks = 175;
 }
 
 message ReportCount {
@@ -8366,6 +8368,18 @@ message CrawlResponse {
 	string content_type = 9;
 }
 
+message AIDataChunk {
+	common.Context ctx = 1;
+
+	string ai_data_entry_id = 3;
+	string file_id = 4;
+	string id = 5;
+	repeated double vector = 6;
+	string original_chunk = 7;
+	string embeded_chunk = 8;
+	int64 num_tokens = 9;
+}
+
 message AIDataEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8407,7 +8421,11 @@ message AIDataEntry {
 	int64 modified = 34;
 	int64 last_trained = 35; // successfully saved to vector store
 
-	int64 num_tokens = 36;
+	string title = 38; // title for url, file name for file
+
+	int64 num_characters = 36;
+	int64 num_chunks = 37;
+	repeated AIDataChunk chunks = 40;
 }
 
 message AIDataEntryTrainStatus {

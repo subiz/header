@@ -346,8 +346,10 @@ service WorkflowMgr {
 	rpc ListAIDataEntry(ListAIDataEntryRequest) returns (Response);
 	rpc GetAIDataEntry(Id) returns (Response);
 	rpc UpdateAIDataEntry(AIDataEntry) returns (Response);
+	rpc ListAIDataEntryChunks(Id) returns (Response);
+
+	rpc RetrainAIDataEntry(Id) returns (Response);
 	rpc DeleteAIDataEntry(Id) returns (Empty);
-	rpc CrawlDataEntry(Id) returns (Response);
 	rpc MatchDataEntries(Ids) returns (Response);
 
 	rpc ListAIResponseSources(AiResponseSourceRequest) returns (Response);
