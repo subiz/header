@@ -8366,6 +8366,7 @@ message CrawlResponse {
 	repeated string links = 7;
 	string md5_hash = 8;
 	string content_type = 9;
+	string title = 10;
 }
 
 message AIDataChunk {
@@ -8377,7 +8378,7 @@ message AIDataChunk {
 	repeated double vector = 6;
 	string original_chunk = 7;
 	string embeded_chunk = 8;
-	int64 num_tokens = 9;
+	int64 num_characters = 9;
 }
 
 message AIDataEntry {
@@ -8411,7 +8412,7 @@ message AIDataEntry {
 
 	int64 updated = 21;
 	string updated_by = 22;
-	string md5_sum = 23;
+	// string md5_sum = 23;
 
 	// string openai_file_id = 26;
 	// int64 openai_file_uploaded = 27;
