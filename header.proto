@@ -3274,7 +3274,7 @@ message File {
 	string image_128 = 34;
 
 	string text_url = 35;
-	string num_characters = 36;
+	int64 num_characters = 36;
 }
 
 message BotTerminated {
