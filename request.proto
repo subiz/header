@@ -334,6 +334,7 @@ message FileUrlDownloadRequest {
 	int64 max_width = 11;
 
 	string category = 12;
+	int64 force = 13;
 }
 
 message OrderMetricsRequest {

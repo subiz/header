@@ -3239,7 +3239,7 @@ message File {
 	string id = 11;
 	string content_disposition = 12; // inline (for printing) || attachment (download)
 	int64 last_access_at = 13;
-	string bucket = 14;
+	// string bucket = 14;
 
 	// for audio file only
 	repeated float audio_waveform = 15;
@@ -3263,7 +3263,7 @@ message File {
 	string category = 27; // call_recorded, product_image, ... for reporting
 
 	// metadata
-	int64 uploaded = 28;
+	// int64 uploaded = 28;
 	string gcs_url = 29;
 
 	string status = 30; // uploading
@@ -4866,7 +4866,7 @@ message Error {
 	// int64 level = 13; // 0:ERROR, FATAL,	ERROR, WARN,
 	map<string, string> fields = 15;
 	map<string, string> _hidden = 16;
-	I18nString message = 17;
+	map<string, string> message = 18;
 }
 
 message ShopeeShop {
@@ -6476,6 +6476,8 @@ message Response {
 	repeated AiResponseSource ai_response_sources = 174;
 
 	repeated AIDataChunk ai_data_chunks = 175;
+	File file = 176;
+	repeated File files = 177;
 }
 
 message ReportCount {

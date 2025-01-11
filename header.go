@@ -2395,3 +2395,17 @@ func StyleToString(style *Style) map[string]string {
 	}
 	return out
 }
+
+func ToErr(err *Error) *log.AError {
+	if err == nil {
+		return nil
+	}
+	return &log.AError{
+		Id:      err.Id,
+		Code:    err.Code,
+		Number:  err.Number,
+		Fields:  err.Fields,
+		XHidden: err.XHidden,
+		Message: err.Message,
+	}
+}
