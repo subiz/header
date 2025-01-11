@@ -66,12 +66,12 @@ message Agent {
 		male = 1;
 		female = 2;
 	}
-	optional string gender = 12;
+	optional string gender = 12; // reflect from agent profile
 	optional string avatar_url = 13;
 	optional string avatar_url_128 = 18;
 
-	optional string lang = 14;
-	optional string timezone = 16;
+	optional string lang = 14; // reflect from agent profile
+	optional string timezone = 16; // reflect from agent profile
 	optional int64 joined = 20;
 	optional string invited_by = 21;
 

@@ -509,11 +509,11 @@ type Agent struct {
 	Email            *string         `protobuf:"bytes,5,opt,name=email" json:"email,omitempty"`                        // reflect from agent profile
 	Phone            *string         `protobuf:"bytes,8,opt,name=phone" json:"phone,omitempty"`                        // reflect form agent profile
 	JobTitle         *string         `protobuf:"bytes,11,opt,name=job_title,json=jobTitle" json:"job_title,omitempty"` // deprecated
-	Gender           *string         `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`
+	Gender           *string         `protobuf:"bytes,12,opt,name=gender" json:"gender,omitempty"`                     // reflect from agent profile
 	AvatarUrl        *string         `protobuf:"bytes,13,opt,name=avatar_url,json=avatarUrl" json:"avatar_url,omitempty"`
 	AvatarUrl_128    *string         `protobuf:"bytes,18,opt,name=avatar_url_128,json=avatarUrl128" json:"avatar_url_128,omitempty"`
-	Lang             *string         `protobuf:"bytes,14,opt,name=lang" json:"lang,omitempty"`
-	Timezone         *string         `protobuf:"bytes,16,opt,name=timezone" json:"timezone,omitempty"`
+	Lang             *string         `protobuf:"bytes,14,opt,name=lang" json:"lang,omitempty"`         // reflect from agent profile
+	Timezone         *string         `protobuf:"bytes,16,opt,name=timezone" json:"timezone,omitempty"` // reflect from agent profile
 	Joined           *int64          `protobuf:"varint,20,opt,name=joined" json:"joined,omitempty"`
 	InvitedBy        *string         `protobuf:"bytes,21,opt,name=invited_by,json=invitedBy" json:"invited_by,omitempty"`
 	State            *string         `protobuf:"bytes,22,opt,name=state" json:"state,omitempty"`
