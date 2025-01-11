@@ -3272,6 +3272,9 @@ message File {
 	string image_1024 = 32;
 	string image_512 = 33;
 	string image_128 = 34;
+
+	string text_url = 35;
+	string num_characters = 36;
 }
 
 message BotTerminated {
@@ -6073,7 +6076,6 @@ message LinkData {
 enum E {
 	Sub = 0;
 
-	invalid_token = 20;
 	invalid_message_size = 21;
 	invalid_payload_size = 22;
 
@@ -6106,9 +6108,6 @@ enum E {
 	endchat_bot_setting_after_any_message_too_high = 95;
 	template_message_not_is_creator = 97;
 
-	invalid_base_currency = 101;
-	invalid_currency = 102;
-
 	invalid_url = 103;
 
 	invalid_css = 116;
@@ -6139,13 +6138,10 @@ enum E {
 	invalid_conversation_modal_secret = 170;
 	invalid_conversation_modal_url = 172;
 	invalid_conversation_modal_key = 173;
-	sendgrid_error = 176;
-	sip_server_error = 181;
 
 	invalid_phone_device_state = 182;
 
 	invalid_call_state = 190;
-	number_is_blocked = 191;
 
 	number_is_registered = 193;
 	number_is_not_bounded = 194;
