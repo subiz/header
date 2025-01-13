@@ -160,7 +160,9 @@ func WithShardRedirect() grpc.DialOption {
 func ToGrpcCtx(pctx *common.Context) context.Context {
 	data, err := proto.Marshal(pctx)
 	if err != nil {
-		panic(fmt.Sprintf("unable to marshal cred, %v", pctx))
+		// maybe invalid unicode character
+		// panic(fmt.Sprintf("unable to marshal cred, %v ", pctx))
+		return context.Background()
 	}
 	cred64 := base64.StdEncoding.EncodeToString(data)
 	return metadata.NewOutgoingContext(

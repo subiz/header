@@ -322,7 +322,7 @@ service WorkflowMgr {
 
 	rpc ListWorkflowVersions(ListVersions) returns (Response); // workflows
 	rpc StartWorkflowSession(StartWorkflowSessionRequest) returns (Response); // workflow_session
-
+	rpc MatchWorkflows(Ids) returns (Response);
 	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
 	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);
 	rpc ListWorkflowSessions(ListWorkflowSessionRequest) returns (Response);
@@ -336,6 +336,7 @@ service WorkflowMgr {
 	rpc CreateAIAgent(AIAgent) returns (Response);
 	rpc UpdateAIAgent(AIAgent) returns (Response);
 	rpc GetAIAgent(Id) returns (Response);
+	rpc MatchAIAgent(Ids) returns (Response);
 	rpc DeleteAIAgent(Id) returns (Response);
 	rpc RunTestAiAgent(RunTestAiAgentRequest) returns (Empty); // workflow_session
 	rpc ListAIDataGroup(Id) returns (Response);
@@ -357,6 +358,7 @@ service WorkflowMgr {
 	rpc ListAISuggestions(AiQnaSuggestionRequest) returns (Response);
 	rpc UpdateAIQnASuggestion(AiQnASuggestion) returns (Response);
 	rpc ReadAIQnASuggestion(Id) returns (Response);
+	rpc MatchAIQnASuggestion(Id) returns (Response);
 	rpc DeleteAIQnASuggestion(Id) returns (Empty);
 }
 

@@ -8417,7 +8417,10 @@ message AIDataEntry {
 	map<string, AIDataEntryTrainStatus> training_statuses = 31; // agent_id -> status
 	int64 deleted = 32;
 	int64 modified = 34;
-	int64 last_trained = 35; // successfully saved to vector store
+	int64 last_success_trained = 35; // successfully saved to vector store
+	int64 last_failed_trained = 39;
+	int64 train_attempted = 40;
+	int64 train_requested = 41;
 
 	string title = 38; // title for url, file name for file
 
