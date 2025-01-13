@@ -8366,6 +8366,7 @@ message CrawlResponse {
 	string md5_hash = 8;
 	string content_type = 9;
 	string title = 10;
+	int64 num_characters = 11;
 }
 
 message AIDataChunk {

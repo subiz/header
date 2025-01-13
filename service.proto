@@ -358,7 +358,7 @@ service WorkflowMgr {
 	rpc ListAISuggestions(AiQnaSuggestionRequest) returns (Response);
 	rpc UpdateAIQnASuggestion(AiQnASuggestion) returns (Response);
 	rpc ReadAIQnASuggestion(Id) returns (Response);
-	rpc MatchAIQnASuggestion(Id) returns (Response);
+	rpc MatchAIQnASuggestion(Ids) returns (Response);
 	rpc DeleteAIQnASuggestion(Id) returns (Empty);
 }
 
