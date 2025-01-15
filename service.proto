@@ -607,6 +607,8 @@ service FabikonService {
 	rpc RemoveFbUserLabel(header.User) returns (header.Empty);
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
 	rpc GenerateRefLink(header.Id) returns (header.Id);
+
+	rpc SyncAdsFlow(header.FacebookAdsFlow) returns (header.Id);
 }
 
 service ChannelConnector {

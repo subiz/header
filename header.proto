@@ -776,6 +776,7 @@ message BotRunRequest {
 	Event event = 11;
 	string bot_trigger_type = 12;
 	string lang = 17;
+	bool skip_first_message = 19; // internal
 }
 
 message BotRunResponse {
@@ -1986,6 +1987,7 @@ message Bot {
 	string pipeline_stage = 31; // for pipeline_stage
 
 	string template_id = 32; // type=operation
+	string facebook_ads_flow = 33;
 }
 
 message Bots {
@@ -8467,4 +8469,13 @@ message AiQnASuggestion {
 	int64 created = 14;
 	int64 read_at = 15;
 	string read_by = 16;
+}
+
+message FacebookAdsFlow {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	Message message = 5;
+	repeated string eligible_platforms = 6; //  messenger,instagram
 }

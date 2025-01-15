@@ -2409,3 +2409,9 @@ func ToErr(err *Error) *log.AError {
 		Message: err.Message,
 	}
 }
+
+// return valid utf8 string
+func CleanString(str string) string {
+	str = strings.Join(strings.Split(str, "\000"), "")
+	return strings.ToValidUTF8(str, "")
+}
