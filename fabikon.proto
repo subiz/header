@@ -591,3 +591,12 @@ message FbConversationMessage {
 	optional FbProfileData to = 6;
 	optional FbConversationMessageAttachemnts attachments = 7;
 }
+
+message FacebookAdsFlow {
+	optional string id = 5;
+	optional string name = 6;
+	optional FbMessage welcome_message = 7;
+	repeated string eligible_platforms = 8; //  messenger,instagram
+	optional bool is_used_in_ad = 10; // fb
+	optional string last_update_time = 11; // fb
+}

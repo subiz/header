@@ -1155,6 +1155,8 @@ message Conversation {
 	Error error = 80;
 
 	string access = 82; // default=public, private
+
+	MessageReferral referrer = 83;
 }
 
 message GoogleReview {
@@ -1987,7 +1989,6 @@ message Bot {
 	string pipeline_stage = 31; // for pipeline_stage
 
 	string template_id = 32; // type=operation
-	string facebook_ads_flow = 33;
 }
 
 message Bots {
@@ -8474,8 +8475,14 @@ message AiQnASuggestion {
 message FacebookAdsFlow {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string id = 3;
-	string name = 4;
-	Message message = 5;
-	repeated string eligible_platforms = 6; //  messenger,instagram
+	string bot_id = 3;
+	string page_id = 4;
+	string flow_id = 5;
+	string name = 6;
+	Message welcome_message = 7;
+	repeated string eligible_platforms = 8; //  messenger,instagram
+	int64 updated = 9;
+
+	// bool is_used_in_ad = 10; // fb
+	// string last_update_time = 11; // fb
 }
