@@ -3530,6 +3530,7 @@ message FacebookPost {
 	string story = 13;
 	FacebookPostAttachemnts attachments = 14;
 	string updated_time = 15;
+	int64 updated = 16;
 }
 
 message UserOrderConfirmation {
