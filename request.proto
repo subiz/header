@@ -755,3 +755,12 @@ message AiResponseSourceRequest {
 	string account_id = 2;
 	string call_id = 3;
 }
+
+message FacebookPostRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string page_id = 3;
+	string keyword = 4;
+	bool is_hidden = 8;
+	bool is_published = 9;
+}

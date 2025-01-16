@@ -3524,7 +3524,7 @@ message FacebookPost {
 
 	bool is_hidden = 8;
 	bool is_published = 9;
-	string permalink_url = 10;
+	string permalink_url = 10; // cleaned as id
 	string status_type = 11;
 	string full_picture = 12;
 	string story = 13;
@@ -6481,6 +6481,9 @@ message Response {
 	repeated AIDataChunk ai_data_chunks = 175;
 	File file = 176;
 	repeated File files = 177;
+
+	repeated FacebookPost facebook_posts = 178;
+	FacebookPost facebook_post = 179;
 }
 
 message ReportCount {

@@ -603,6 +603,11 @@ service FabikonService {
 	rpc ListFbFanpageSettings(Id) returns (header.FbFanpageSettings);
 
 	rpc ListFbPosts(Id) returns (header.FacebookPosts);
+
+	rpc ListFacebookPosts(FacebookPostRequest) returns (Response);
+	rpc MatchFacebookPosts(Ids) returns (Response);
+	rpc ResyncFacebookPost(Id) returns (Response);
+
 	rpc GetFbPost(FacebookPost) returns (FacebookPost);
 	rpc RemoveFbUserLabel(header.User) returns (header.Empty);
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
