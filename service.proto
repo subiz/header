@@ -456,6 +456,9 @@ service ConversationMgr {
 
 	rpc CountAgentUnreadMessages(header.Id) returns (Response);
 	rpc OnWebUserCreated(header.Id) returns (header.Empty);
+
+	rpc OnBotUpdated(header.Bot) returns (Response);
+	rpc OnBotDeleted(header.Id) returns (Response);
 }
 
 service TicketMgr {
