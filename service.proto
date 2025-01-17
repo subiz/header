@@ -418,7 +418,12 @@ service ConversationMgr {
 	rpc CreateRule(header.Rule) returns (header.Rule);
 	rpc DeleteRule(Id) returns (Empty);
 	rpc ReadRule(Id) returns (header.Rule);
-	rpc ListRules(Id) returns (header.Route);
+	rpc ListRules(Id) returns (header.Route); // deprecated
+
+	rpc MatchRule(header.Ids) returns (Response);
+	rpc ListRules2(Id) returns (Response);
+	rpc GetRuleOrder(Id) returns (RuleOrder);
+	rpc UpdateRuleOrder(RuleOrder) returns  (RuleOrder);
 
 	rpc ListPhoneDevices(header.Id) returns (header.Response);
 	rpc CreatePhoneDevice(header.PhoneDevice) returns (header.PhoneDevice);

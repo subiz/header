@@ -6389,7 +6389,7 @@ type FacebookPostRequest struct {
 
 	Ctx         *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId   string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	PageId      string          `protobuf:"bytes,3,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"`
+	PageId      string          `protobuf:"bytes,3,opt,name=page_id,json=pageId,proto3" json:"page_id,omitempty"` // "," delimiter
 	Query       string          `protobuf:"bytes,4,opt,name=query,proto3" json:"query,omitempty"`
 	IsHidden    bool            `protobuf:"varint,8,opt,name=is_hidden,json=isHidden,proto3" json:"is_hidden,omitempty"`
 	IsPublished bool            `protobuf:"varint,9,opt,name=is_published,json=isPublished,proto3" json:"is_published,omitempty"`

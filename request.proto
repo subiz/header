@@ -759,7 +759,7 @@ message AiResponseSourceRequest {
 message FacebookPostRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string page_id = 3;
+	string page_id = 3; // "," delimiter
 	string query = 4;
 	bool is_hidden = 8;
 	bool is_published = 9;

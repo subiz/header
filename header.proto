@@ -871,6 +871,8 @@ message Rule {
 	string sla_policy = 39;
 	int64 apply_sla_policy = 40;
 	bool remove_other_agents = 41;
+
+	string source = 42; // bot, fanpage, call_setting
 }
 
 message FacebookCondition {
@@ -915,7 +917,7 @@ message TimmingCondition {
 	string business_hour = 3; // [in, notIn] if this is true, ignore all other timming conditions
 	repeated string days_of_week = 2; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	repeated int32 minute_of_days = 4; // pair [0-4] [6-9]
-	int64 end_time = 5;
+	int64 end_time = 5; // ?
 }
 
 message ChannelCondition {
@@ -8489,4 +8491,11 @@ message FacebookAdsFlow {
 
 	// bool is_used_in_ad = 10; // fb
 	// string last_update_time = 11; // fb
+}
+
+message RuleOrder {
+	common.Context ctx = 1;
+	string account_id = 2;
+	repeated string rules = 3;
+	repeated string call_rules = 4;
 }
