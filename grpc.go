@@ -100,6 +100,28 @@ func WithShardRedirect() grpc.DialOption {
 			pkey = GetAccountId(ctx, req)
 		}
 
+		if len(addrs) == 0 && pkey != "" && IsStagging(pkey) && !isNormalService(cc.Target()) {
+			host := staggingTarget(cc.Target())
+			co, ok := conn[host]
+			if !ok {
+				lock.Lock()
+				if co, ok = conn[host]; !ok {
+					co = DialGrpc(host)
+					// copy on write
+					copyConn := make(map[string]*grpc.ClientConn)
+					for k, v := range conn {
+						copyConn[k] = v
+					}
+					copyConn[host] = co
+					conn = copyConn
+				}
+				lock.Unlock()
+			}
+			var header metadata.MD // variable to store header and trailer
+			opts = append([]grpc.CallOption{grpc.Header(&header)}, opts...)
+			return co.Invoke(ctx, method, req, reply, opts...)
+		}
+
 		// has data learned from last request
 		if len(addrs) > 0 && pkey != "" {
 			host := memoryM[pkey]
@@ -725,4 +747,42 @@ func GetAccShard(accid string, shard int) int {
 
 func IsStagging(accid string) bool {
 	return accid == "acpxkgumifuoofoosble" || accid == "acqsulrowbxiugvginhw"
+}
+
+// target: convo-0.convo:18021 -> convo-stg-0.convo:18021
+func staggingTarget(target string) string {
+	if target == "" {
+		return ""
+	}
+	targets := strings.Split(target, ":")
+	port := ""
+	host := target
+	if len(targets) > 1 {
+		host = targets[0]
+		port = ":" + targets[1]
+	}
+
+	hosts := strings.Split(host, ".")
+	service := host
+	if len(host) > 1 {
+		service = hosts[len(hosts)-1]
+	}
+	return service + "-stg-0." + service + port
+}
+
+func isNormalService(target string) bool {
+	return strings.Contains(target, "account") ||
+		strings.Contains(target, "bizbot") ||
+		strings.Contains(target, "counter") ||
+		strings.Contains(target, "email") ||
+		strings.Contains(target, "fabikon") ||
+		strings.Contains(target, "googlekon") ||
+		strings.Contains(target, "zalokon") ||
+		strings.Contains(target, "mailkon") ||
+		strings.Contains(target, "map") ||
+		strings.Contains(target, "numreg") ||
+		strings.Contains(target, "realtime") ||
+		strings.Contains(target, "scheduler") ||
+		strings.Contains(target, "speex") ||
+		strings.Contains(target, "tim")
 }

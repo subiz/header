@@ -18,6 +18,26 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+func TestStagginTarget(t *testing.T) {
+	testcases := []struct {
+		in  string
+		out string
+	}{
+		{"", ""},
+		{"convo:18021", "convo-stg-0.convo:18021"},
+		{"convo.convo:18021", "convo-stg-0.convo:18021"},
+		{"convo-0.convo:18021", "convo-stg-0.convo:18021"},
+		{"convo-stg-0.convo:18021", "convo-stg-0.convo:18021"},
+	}
+
+	for i, tc := range testcases {
+		actual := staggingTarget(tc.in)
+		if tc.out != actual {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, actual)
+		}
+	}
+}
+
 func TestToGrpcCtx(t *testing.T) {
 	ctx := FromGrpcCtx(ToGrpcCtx(&cpb.Context{Credential: &cpb.Credential{Issuer: "thanh"}}))
 	if ctx.GetCredential().GetIssuer() != "thanh" {

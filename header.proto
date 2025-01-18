@@ -3377,7 +3377,7 @@ message GoogleLocationSetting {
 
 	GoogleReviewSetting google_review_setting = 5;
 	GoogleQuestionSetting google_question_setting = 6;
-	GoogleMessageSetting google_message_setting = 7;
+	// GoogleMessageSetting google_message_setting = 7;
 
 	int64 updated = 9;
 }
@@ -3391,14 +3391,14 @@ message GoogleQuestionSetting {
 	bool enabled = 1;
 }
 
-message GoogleMessageSetting {
-	bool enabled = 1;
-	WelcomeMessage welcomeMessage = 2;
-}
+// message GoogleMessageSetting {
+//	bool enabled = 1;
+//	WelcomeMessage welcomeMessage = 2;
+//}
 
-message WelcomeMessage {
-	string text = 1;
-}
+//message WelcomeMessage {
+//	string text = 1;
+//}
 
 message FbComment {
 	string comment = 2; // read only
