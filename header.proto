@@ -6093,8 +6093,6 @@ enum E {
 	domain_is_not_whitelisted = 46;
 	invalid_domain = 47;
 
-	invalid_date_format = 61;
-
 	invalid_working_day = 63;
 	invalid_holiday = 64;
 
@@ -6102,11 +6100,6 @@ enum E {
 	stripe_call_failed = 75;
 	invalid_invoice_duedate = 80;
 	invalid_country = 82;
-	invalid_referrer_code = 83;
-	invalid_label_name = 86;
-	invalid_label_color = 87;
-	invalid_label_description = 88;
-	invalid_user_view_name = 89;
 
 	invalid_time_range = 91;
 
@@ -6129,7 +6122,6 @@ enum E {
 	too_many_fields = 134;
 	too_many_attachments = 135;
 	invalid_field_size = 137;
-	shopee_call_error = 138;
 	unauthorized_shopee_shop = 139;
 	order_readonly = 142;
 
@@ -6157,14 +6149,6 @@ enum E {
 
 	invalid_sip_provider = 198; // fpt, itel
 	duplicated_extension = 200;
-
-	invalid_task_title = 210;
-	invalid_task_note = 211;
-	invalid_task_status = 213;
-	invalid_task_assignee = 214;
-	invalid_task_supervisor = 215;
-	invalid_task_watchers = 216;
-	invalid_segment_name = 240;
 	cannot_edit_system_segment = 244;
 }
 

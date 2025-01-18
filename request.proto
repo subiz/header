@@ -768,3 +768,17 @@ message FacebookPostRequest {
 	string anchor = 11;
 	// string channel = 10; // facebook, instagram
 }
+
+message ListRuleRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string keyword  = 3;
+	string assigned_to = 4; // "," delimiter
+	string channel = 5;  // "," delimiter
+
+	string integration_id = 6; // "," delimiter
+
+	int64 limit = 10;
+	string anchor = 11;
+}

@@ -421,7 +421,7 @@ service ConversationMgr {
 	rpc ListRules(Id) returns (header.Route); // deprecated
 
 	rpc MatchRule(header.Ids) returns (Response);
-	rpc ListRules2(Id) returns (Response);
+	rpc ListRules2(ListRuleRequest) returns (Response);
 	rpc GetRuleOrder(Id) returns (RuleOrder);
 	rpc UpdateRuleOrder(RuleOrder) returns  (RuleOrder);
 
