@@ -600,6 +600,7 @@ message Event {
 	Data ref = 54;
 	repeated EventField metadata = 55;
 	string webhook_id = 56; // webhook id listen this event
+	string source_event_id = 57; // for sync event, can be used like idempotency key
 }
 
 message EventField {
