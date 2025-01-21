@@ -115,14 +115,6 @@ message RelatedValue {
 	string value = 6;
 }
 
-// deprecated
-message PhoneDevices {
-	common.Context ctx = 1;
-	string account_id = 2;
-
-	repeated PhoneDevice phone_devices = 3;
-}
-
 message PhoneDevice {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -846,7 +838,7 @@ message Rule {
 	repeated string lead_owners = 20;
 	string call_menu_key = 28;
 
-	bool when_offline = 21; // only run when there is no online agent
+	// bool when_offline = 21; // only run when there is no online agent
 
 	string has_agent_replied = 26; // "" -> no use, none, all, agents      | dont use
 	repeated string last_replied_agents = 27; // empty =                   | dont use
@@ -965,11 +957,6 @@ message LocationCondition {
 
 	string province = 5;
 	repeated string districts = 6;
-}
-
-message Route {
-	common.Context ctx = 1;
-	repeated Rule rules = 2;
 }
 
 message RouteResult {
@@ -2320,7 +2307,7 @@ message WidgetSetting {
 	repeated account.Agent agents = 7;
 	repeated string agent_ids = 8; // subiz only
 
-	int32 replytime = 11; // deprecated
+	// int32 replytime = 11; // deprecated
 
 	// read-only, tell whether account is ready for chat or not
 	bool is_online = 14;
@@ -3118,11 +3105,6 @@ enum ChannelType {
 	zns = 12;
 }
 
-message Webhooks {
-	common.Context ctx = 1;
-	repeated Webhook webhooks = 2;
-}
-
 message WebhookSecret {
 	string secret = 3;
 	int64 expired = 5;
@@ -3673,7 +3655,6 @@ message PushNoti {
 	string sender_id = 9; // caller id
 	string sender_type = 10;
 	string icon_url = 11;
-	// string last_page_view_url = 12; // deprecated
 	string type = 13; // type of event message_sent ...
 	string is_private = 14; // conversation is private
 
@@ -6451,6 +6432,7 @@ message Response {
 	FacebookPost facebook_post = 179;
 
 	repeated Template templates = 180;
+	repeated Webhook webhooks = 181;
 }
 
 message ReportCount {
@@ -6528,16 +6510,13 @@ message WorkflowSession {
 	string id = 4;
 	string action_id = 6; // current executing
 	WorkflowAction action = 7; // only recompute when list, not save in db
-	map<string, string> KV = 8; // deprecated remove after tet
 
 	int64 ended = 9;
 	int64 created = 10;
-	int64 last_waited = 11; // deprecated remove after tet
 	string exit_code = 12; // action_not_found.
 	string status = 13; // creating, running, waiting, ended, error
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
-	int64 term = 16; // deprecated remove after tet
 	map<string, WorkflowThread> threads = 18; // thread id -> term
 	string obj_id = 17; // for this obj
 

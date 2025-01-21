@@ -106,6 +106,7 @@ service AccountMgr {
 	rpc UpdateAccount(account.Account) returns (account.Account);
 	rpc CreateAccount(CreateAccountRequest) returns (account.Account);
 	rpc ListAgents(Id) returns (header.Response);
+	rpc MatchAgent(Ids) returns (header.Response);
 
 	rpc DeleteGroup(Id) returns (Empty);
 	rpc ListGroups(Id) returns (header.AgentGroups);
@@ -419,7 +420,6 @@ service ConversationMgr {
 	rpc CreateRule(header.Rule) returns (header.Rule);
 	rpc DeleteRule(Id) returns (Empty);
 	rpc ReadRule(Id) returns (header.Rule);
-	rpc ListRules(Id) returns (header.Route); // deprecated
 
 	rpc MatchRule(header.Ids) returns (Response);
 	rpc ListRules2(ListRuleRequest) returns (Response);
@@ -738,7 +738,8 @@ service Sendback {
 	rpc CreateWebhook(header.Webhook) returns (header.Webhook);
 	rpc PingWebhook(Id) returns (header.WebhookTestResult);
 	rpc DeleteWebhook(Id) returns (Empty);
-	rpc ListWebhooks(Id) returns (header.Webhooks);
+	rpc ListWebhooks(Id) returns (header.Response);
+	rpc MatchWebhook(Ids) returns (header.Response);
 	rpc ReadWebhook(Id) returns (header.Webhook);
 	rpc UpdateWebhook(header.Webhook) returns (header.Webhook);
 	rpc UpdateWebhookSecret(Id) returns (header.Webhook);
