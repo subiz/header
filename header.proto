@@ -1590,18 +1590,6 @@ message SearchTemplate {
 	bool is_template = 8;
 }
 
-message Templates {
-	common.Context ctx = 1;
-	repeated Template templates = 2;
-	string anchor = 3;
-	int64 total = 4;
-}
-
-message Tags {
-	common.Context ctx = 1;
-	repeated Tag tags = 4;
-}
-
 message Postback {
 	string event_id = 4;
 	string payload = 5;
@@ -1738,16 +1726,6 @@ message Integration {
 	string meta_dataset_id = 121;
 	int64 sync_conversion_disabled = 122; // meta
 	string meta_scope = 123;
-}
-
-message TagRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string conversation_id = 3;
-	string id = 4;
-	string order_id = 5;
-	string ticket_id = 6; // tkasdlfjasdf
-	string ticket_number = 7;  // SBZ-1234
 }
 
 message WorkflowSessionId {
@@ -6136,9 +6114,6 @@ enum E {
 	invalid_product_category = 148;
 	invalid_product_visibility = 149;
 
-	message_too_large = 156;
-	field_too_long = 159;
-
 	invalid_conversation_modal_secret = 170;
 	invalid_conversation_modal_url = 172;
 	invalid_conversation_modal_key = 173;
@@ -6149,9 +6124,6 @@ enum E {
 
 	number_is_registered = 193;
 	number_is_not_bounded = 194;
-
-	file_too_large = 196;
-	unsupported_file_type = 197;
 
 	invalid_sip_provider = 198; // fpt, itel
 	duplicated_extension = 200;
@@ -6477,6 +6449,8 @@ message Response {
 
 	repeated FacebookPost facebook_posts = 178;
 	FacebookPost facebook_post = 179;
+
+	repeated Template templates = 180;
 }
 
 message ReportCount {

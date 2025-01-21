@@ -7,6 +7,16 @@ option go_package = "github.com/subiz/header";
 import "common.proto";
 import "account.proto";
 
+message TagRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string id = 4;
+	string order_id = 5;
+	string ticket_id = 6; // tkasdlfjasdf
+	string ticket_number = 7;  // SBZ-1234
+}
+
 message UserReportRequest {
 	common.Context ctx = 1;
 	string account_id = 2;

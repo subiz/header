@@ -406,7 +406,8 @@ service ConversationMgr {
 	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
 
 	rpc Deintegrate(Id) returns (Empty);
-	rpc ListIntegrations2(Id) returns (header.Response);
+	rpc ListIntegrations2(Id) returns (Response);
+	rpc MatchIntegration(header.Ids) returns (Response);
 
 	rpc Integrate(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
@@ -542,7 +543,8 @@ service TemplateMgr {
 	rpc UpdateTemplate(header.Template) returns (header.Template);
 	rpc DeleteTemplate(Id) returns (Empty);
 	rpc GetTemplate(Id) returns (header.Template);
-	rpc ListTemplates(header.SearchTemplate) returns (header.Templates);
+	rpc ListTemplates(header.SearchTemplate) returns (Response);
+	rpc MatchTemplates(header.Ids) returns (Response);
 	rpc PickTemplate(Id) returns (Empty);
 
 	rpc CreateModal(header.ConversationModal) returns (header.ConversationModal);
@@ -557,8 +559,9 @@ service TagMgr {
 	rpc CreateTag(header.Tag) returns (header.Tag);
 	rpc UpdateTag(header.Tag) returns (header.Tag);
 	rpc DeleteTag(Id) returns (Empty);
-	rpc ListTags(Id) returns (header.Tags);
+	rpc ListTags(Id) returns (Response);
 	rpc GetTag(Id) returns (header.Tag);
+	rpc MatchTag(header.Ids) returns (Response);
 }
 
 // noti5 services
