@@ -774,10 +774,10 @@ message ListRuleRequest {
 	string account_id = 2;
 
 	string keyword  = 3;
-	string assigned_to = 4; // "," delimiter
-	string channel = 5;  // "," delimiter
+	string assigned_to = 4;
+	string channel = 5;
 
-	string integration_id = 6; // "," delimiter
+	string integration_id = 6;
 
 	int64 limit = 10;
 	string anchor = 11;

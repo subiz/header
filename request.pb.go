@@ -6493,9 +6493,9 @@ type ListRuleRequest struct {
 	Ctx           *common.Context `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	AccountId     string          `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	Keyword       string          `protobuf:"bytes,3,opt,name=keyword,proto3" json:"keyword,omitempty"`
-	AssignedTo    string          `protobuf:"bytes,4,opt,name=assigned_to,json=assignedTo,proto3" json:"assigned_to,omitempty"`          // "," delimiter
-	Channel       string          `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel,omitempty"`                                  // "," delimiter
-	IntegrationId string          `protobuf:"bytes,6,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"` // "," delimiter
+	AssignedTo    string          `protobuf:"bytes,4,opt,name=assigned_to,json=assignedTo,proto3" json:"assigned_to,omitempty"`
+	Channel       string          `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel,omitempty"`
+	IntegrationId string          `protobuf:"bytes,6,opt,name=integration_id,json=integrationId,proto3" json:"integration_id,omitempty"`
 	Limit         int64           `protobuf:"varint,10,opt,name=limit,proto3" json:"limit,omitempty"`
 	Anchor        string          `protobuf:"bytes,11,opt,name=anchor,proto3" json:"anchor,omitempty"`
 }

@@ -919,6 +919,9 @@ message TimmingCondition {
 	repeated string days_of_week = 2; // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 	repeated int32 minute_of_days = 4; // pair [0-4] [6-9]
 	int64 end_time = 5; // ?
+
+	// offline
+	string agent_online = 6; // online, offline, both
 }
 
 message ChannelCondition {
@@ -1275,7 +1278,7 @@ message Message {
 	string ticket_id = 15;
 
 	string task_id = 27;
-	string id = 11;
+	string id = 11; // event id or event_source id
 	string text = 2; // plaintext or template
 	bool is_template = 51;
 	string plaintext = 50;
@@ -1971,6 +1974,8 @@ message Bot {
 
 	repeated BotCondition conditions = 16;
 	repeated string channels = 17; // default: all channel
+
+	Rule condition = 33;
 
 	string bot_state = 18; // active, inactive
 
