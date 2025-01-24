@@ -110,6 +110,8 @@ service AccountMgr {
 
 	rpc DeleteGroup(Id) returns (Empty);
 	rpc ListGroups(Id) returns (header.AgentGroups);
+	rpc ListGroups2(Id) returns (header.Response);
+	rpc MatchGroup(Ids) returns (header.Response);
 
 	rpc SbzChangeEmail(header.AgentProfile) returns (header.AgentProfile);  // subiz only
 	rpc SyncPublicHolidays(account.SyncPublicHolidaysRequest) returns (account.BusinessHours);

@@ -19,6 +19,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/subiz/header/common"
 	"github.com/subiz/log"
+	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
@@ -665,6 +666,8 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 		Timeout: time.Duration(60) * time.Second,
 	}))
 	opts = append(opts, grpc.WithChainUnaryInterceptor(prommetrics.UnaryClientInterceptor()))
+	opts = append(grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
+
 	for {
 		conn, err := grpc.NewClient(service, opts...)
 		if err != nil {
@@ -677,28 +680,37 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 }
 
 func NewUnstgShardServer(port, shards int) *grpc.Server {
-	return grpc.NewServer(grpc.KeepaliveParams(
-		keepalive.ServerParameters{
-			MaxConnectionAge: time.Duration(20) * time.Second,
-		},
-	), grpc.ChainUnaryInterceptor(newStatefulSetShardInterceptor(port, shards)))
+	return grpc.NewServer(
+		grpc.KeepaliveParams(
+			keepalive.ServerParameters{
+				MaxConnectionAge: time.Duration(20) * time.Second,
+			}),
+		grpc.StatsHandler(otelgrpc.NewServerHandler()),
+		grpc.ChainUnaryInterceptor(newStatefulSetShardInterceptor(port, shards)),
+	)
 }
 
 func NewShardServer2(port, shards int) *grpc.Server {
-	return grpc.NewServer(grpc.KeepaliveParams(
-		keepalive.ServerParameters{
-			MaxConnectionAge: time.Duration(20) * time.Second,
-		},
-	), grpc.ChainUnaryInterceptor(NewServerShardInterceptor2(shards, port)))
-}
-
-func NewServer() *grpc.Server {
-	return grpc.NewServer(grpc.UnaryInterceptor(RecoverInterceptor),
+	return grpc.NewServer(
 		grpc.KeepaliveParams(
 			keepalive.ServerParameters{
 				MaxConnectionAge: time.Duration(20) * time.Second,
 			},
-		))
+		),
+		grpc.StatsHandler(otelgrpc.NewServerHandler()),
+		grpc.ChainUnaryInterceptor(NewServerShardInterceptor2(shards, port)))
+}
+
+func NewServer() *grpc.Server {
+	return grpc.NewServer(
+		grpc.UnaryInterceptor(RecoverInterceptor),
+		grpc.KeepaliveParams(
+			keepalive.ServerParameters{
+				MaxConnectionAge: time.Duration(20) * time.Second,
+			},
+		),
+		grpc.StatsHandler(otelgrpc.NewServerHandler()),
+	)
 }
 
 var (
