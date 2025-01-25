@@ -4829,15 +4829,27 @@ message Tax {
 	bool hidden = 17;
 }
 
+message ErrorAttribute {
+	string key = 3;
+	string value = 4; // jsonified
+	string type = 5; // string, number, boolean, array, bytes, object, time
+}
+
 message Error {
-	int64 id = 4;
+	int64 id = 4; // unused
 	string code = 7; // should be general database_error, access_deny
 	// string sub_code = 8;
 	string number = 12; // unique, or hash of stack 4930543478 for grouping error
 	// int64 level = 13; // 0:ERROR, FATAL,	ERROR, WARN,
-	map<string, string> fields = 15;
-	map<string, string> _hidden = 16;
+	map<string, string> fields = 15; // deprecated
+	map<string, string> _hidden = 16; // deprecated
+
 	map<string, string> message = 18;
+	map<string, ErrorAttribute> attrs = 19;
+	map<string, ErrorAttribute> _hidden_attrs = 20;
+
+	string _stack = 21;
+	string trace_id = 22;
 }
 
 message ShopeeShop {
