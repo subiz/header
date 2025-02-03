@@ -666,7 +666,7 @@ func DialGrpc(service string, opts ...grpc.DialOption) *grpc.ClientConn {
 		Timeout: time.Duration(60) * time.Second,
 	}))
 	opts = append(opts, grpc.WithChainUnaryInterceptor(prommetrics.UnaryClientInterceptor()))
-	opts = append(grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
+	opts = append(opts, grpc.WithStatsHandler(otelgrpc.NewClientHandler()))
 
 	for {
 		conn, err := grpc.NewClient(service, opts...)
