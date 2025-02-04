@@ -89,9 +89,37 @@ message Noti {
 	// int64 severity = 13; // 0: not important, 1 important;
 	string category = 14; // user, order
 
-	int64 ttls = 16; // 0 -> instant
-	int64 total_others = 17;
-	repeated Notification sample_others = 18;
+	// int64 ttls = 16; // 0 -> instant
+	// int64 total_others = 17;
+	// repeated Notification sample_others = 18;
+
+	// extra info
+	string request_id = 21;
+	string caller_number = 22;
+	string caller_name = 23;
+	string caller_avatar_url = 24;
+
+	string subtitle = 26;
+	string task_id = 27;
+	string sound_name = 28;
+	string ticket_id = 29;
+
+	bool is_first_user_message = 30;
+
+	string user_id = 31; // to user
+	string device_id = 32; // to device id
+
+	string platform = 33; // mobile, desktop, ios_voip
+	string title = 34;
+	string body = 35;
+	string conversation_id = 36;
+	string sender_id = 37; // caller id
+	string sender_type = 38;
+	string icon_url = 39;
+	string is_private = 40; // conversation is private
+
+	repeated By tos = 41;
+	repeated string ios_badges = 42; // empty, 0, 1
 }
 
 message Attribute {
@@ -3695,8 +3723,6 @@ message PushNoti {
 	string ticket_id = 27;
 
 	bool is_first_user_message = 28;
-
-	Noti notification = 29;
 }
 
 message InvoiceTemplate {
@@ -6471,6 +6497,8 @@ message Response {
 	repeated Webhook webhooks = 181;
 	repeated Noti notifications = 182;
 	int64 num_unseen_notifications = 183;
+
+	NotiSetting notification_setting = 184;
 }
 
 message ReportCount {
@@ -8479,4 +8507,75 @@ message RuleOrder {
 	string account_id = 2;
 	repeated string rules = 3;
 	repeated string call_rules = 4;
+}
+
+message NotiSubscription {
+	bool new_message = 3;
+	bool user_created = 6;
+	bool user_returned = 7;
+	bool campaign_user_converted = 8;
+	bool user_opened_email = 9;
+	int32 delay = 10;
+	bool private_message = 11;
+	bool zalo_oa_followed = 12;
+	bool lead_created = 13;
+	int64 task_updated = 14;
+	int64 new_assigned_order = 15;
+
+	int64 lead_assigned = 16;
+	int64 segment_joined = 17;
+
+	int64 ticket_updated = 18;
+
+	repeated string ticket_updates = 19; // member, reporter, mentions, assignee
+
+	int64 weekly_report_email_disabled = 20;
+}
+
+message TicketTypeSubscription {
+	string ticket_type = 4;
+	repeated string topics = 5; // sla_before_breach, sla_breached, ticket_updated
+}
+
+message NotiSetting {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+
+	int64 updated = 8;
+
+	NotiSubscription web = 9; // desktop
+	NotiSubscription mobile = 10;
+	NotiSubscription email = 11;
+	NotiSubscription instant = 15; // web
+
+	repeated TicketTypeSubscription ticket_types = 16;
+
+	DoNotDisturb do_not_disturb = 12;
+	int64 instant_mute_until = 14;
+}
+
+message DoNotDisturb {
+	int64 daily_from = 2; // min
+	int64 daily_to = 3; // min
+	bool enable_daily = 5; // enable daily
+	int64 until = 4; // ms
+}
+
+message PushToken {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string user_id = 3;
+	string user_type = 4;
+	string fcm_token = 5;
+	string device_id = 6;
+	string platform = 7; // desktop, mobile, ios_voip
+	enum Platform {
+		desktop = 0;
+		mobile = 1;
+		ios_voip = 2;
+	}
+	int64 created = 8;
+	repeated string topics = 9;
+	string access_token = 10;
 }

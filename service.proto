@@ -566,18 +566,6 @@ service TagMgr {
 	rpc MatchTag(header.Ids) returns (Response);
 }
 
-// noti5 services
-service Noti5Service {
-	rpc ReadNotificationSetting(Id) returns (noti5.Setting);
-	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
-
-	rpc Noti(header.PushNoti) returns (Empty);
-
-	rpc AddToken(noti5.Token) returns (Empty);
-	rpc RemoveToken(noti5.Token) returns (Empty);
-	rpc CheckTokenExists(noti5.Token) returns (Empty);
-}
-
 service PaymentMgr {
 	rpc ListPlans(Id) returns (payment.Plans);
 	rpc SearchSub(account.SearchSubRequest) returns (AccSubs);
@@ -751,7 +739,19 @@ service Sendback {
 	rpc SendWebhookEvent(header.Event) returns (Empty);
 }
 
-// notibox services
+// deprecated (use NotiMgr)
+service Noti5Service {
+	rpc ReadNotificationSetting(Id) returns (noti5.Setting);
+	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
+
+	rpc Noti(header.PushNoti) returns (Empty);
+
+	rpc AddToken(noti5.Token) returns (Empty);
+	rpc RemoveToken(noti5.Token) returns (Empty);
+	rpc CheckTokenExists(noti5.Token) returns (Empty);
+}
+
+// deprecated (use NotiMgr)
 service Notibox {
 	rpc SendNoti(header.Notification) returns (Empty);
 	rpc ListNoties(header.ListNotiRequest) returns (header.Notifications); // depreacted
@@ -760,19 +760,20 @@ service Notibox {
 }
 
 service NotiMgr {
-	rpc ReadNotificationSetting(Id) returns (noti5.Setting);
-	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
+	rpc GetNotificationSetting(Id) returns (header.Response);
+	rpc UpdateNotificationSetting(NotiSetting) returns (header.Response);
 
-	rpc PushNoti(header.PushNoti) returns (Empty);
+	rpc PushNoti(header.Noti) returns (Empty);
 
-	rpc AddToken(noti5.Token) returns (Empty);
-	rpc RemoveToken(noti5.Token) returns (Empty);
-	rpc CheckTokenExists(noti5.Token) returns (Empty);
+	rpc AddToken(PushToken) returns (Empty);
+	rpc RemoveToken(PushToken) returns (Empty);
+	rpc CheckTokenExists(PushToken) returns (Empty);
 
 	rpc MarkReadNoti(Id) returns (Empty);
 	rpc ListNotifications(header.ListNotiRequest) returns (header.Response);
 	rpc MarkUnreadNoti(Id) returns (Empty);
 	rpc MarkOpenNoti(Id) returns (Empty);
+	rpc DeleteNotification(Id) returns (Empty);
 }
 
 // proder services
