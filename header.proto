@@ -8,7 +8,6 @@ import "common.proto";
 import "account.proto";
 import "payment.proto";
 import "type.proto";
-import "noti5.proto";
 import "locale.generated.proto"; // run node lang.js to generate this file
 
 message Empty {
@@ -39,38 +38,6 @@ message Ids {
 	repeated string emails = 9; // match by email identifier
 	repeated string record_ids = 10; // match by record identifier
 	string query_match = 11; //for search
-}
-
-message Notifications {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated Notification notifications = 4;
-	// int64 severity = 5; // 0: not important, 1 important;
-	string next_anchor = 6;
-	int64 last_seen = 7;
-	int64 unread = 8;
-}
-
-message Notification {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string agent_id = 3;
-	string id = 4;
-
-	string topic = 10;
-	string type = 5; // type
-	string data = 8; // json
-	int64 created = 6; // ms
-	bool is_read = 9;
-
-	bool is_instant = 12; // just display and disappear, no persit
-	// int64 severity = 13; // 0: not important, 1 important;
-	string category = 14; // user, order
-	int64 checkpoint = 15;
-
-	int64 ttls = 16; // 0 -> instant
-	int64 total_others = 17;
-	repeated Notification sample_others = 18;
 }
 
 message Noti {
@@ -666,13 +633,13 @@ message Data {
 	Product product = 6;
 	account.Presence presence = 8;
 	User user = 10;
-	Notification notification = 14;
+	Noti notification = 14;
 	Noti noti = 15;
 	AgentGroup agent_group = 18;
 	Note note = 23;
 	Workflow workflow = 25;
 	Event event = 26;
-	noti5.Setting notification_setting = 34;
+	NotiSetting notification_setting = 34;
 	Rule rule = 36;
 	AttributeDefinition user_attribute = 37;
 	Tag tag = 38;
@@ -733,7 +700,7 @@ message Data {
 	Credit credit = 110;
 	payment.Bill subiz_bill = 111;
 
-	PushNoti desktop_notification = 113;
+	Noti desktop_notification = 113;
 
 	Ticket ticket = 114;
 	TicketType ticket_type = 115;
@@ -3690,39 +3657,6 @@ message ReportResponse {
 	string from = 3;
 	string range = 4;
 	repeated int64 data = 5;
-}
-
-message PushNoti {
-	common.Context ctx = 1;
-	string account_id = 3;
-	string user_id = 4; // to user
-	string device_id = 16; // to device id
-
-	string platform = 5; // mobile, desktop, ios_voip
-	string title = 6;
-	string body = 7;
-	string conversation_id = 8;
-	string sender_id = 9; // caller id
-	string sender_type = 10;
-	string icon_url = 11;
-	string type = 13; // type of event message_sent ...
-	string is_private = 14; // conversation is private
-
-	repeated By tos = 15;
-	repeated string ios_badges = 26; // empty, 0, 1
-
-	string request_id = 17;
-	string caller_number = 19;
-	string caller_name = 20;
-	string caller_avatar_url = 21;
-	int64 created = 22;
-
-	string subtitle = 23;
-	string task_id = 24;
-	string sound_name = 25;
-	string ticket_id = 27;
-
-	bool is_first_user_message = 28;
 }
 
 message InvoiceTemplate {
