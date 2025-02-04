@@ -763,7 +763,7 @@ service NotiMgr {
 	rpc ReadNotificationSetting(Id) returns (noti5.Setting);
 	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
 
-	rpc PushNoti(header.PushNoti) returns (Empty);
+	rpc PushNoti(header.Noti) returns (Empty);
 
 	rpc AddToken(noti5.Token) returns (Empty);
 	rpc RemoveToken(noti5.Token) returns (Empty);

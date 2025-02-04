@@ -92,6 +92,33 @@ message Noti {
 	int64 ttls = 16; // 0 -> instant
 	int64 total_others = 17;
 	repeated Notification sample_others = 18;
+
+	// extra info
+	string request_id = 21;
+	string caller_number = 22;
+	string caller_name = 23;
+	string caller_avatar_url = 24;
+
+	string subtitle = 26;
+	string task_id = 27;
+	string sound_name = 28;
+	string ticket_id = 29;
+
+	bool is_first_user_message = 30;
+
+	string device_id = 32; // to device id
+
+	string platform = 33; // mobile, desktop, ios_voip
+	string title = 34;
+	string body = 35;
+	string conversation_id = 36;
+	string sender_id = 37; // caller id
+	string sender_type = 38;
+	string icon_url = 39;
+	string is_private = 40; // conversation is private
+
+	repeated By tos = 41;
+	repeated string ios_badges = 42; // empty, 0, 1
 }
 
 message Attribute {
@@ -3695,8 +3722,6 @@ message PushNoti {
 	string ticket_id = 27;
 
 	bool is_first_user_message = 28;
-
-	Noti notification = 29;
 }
 
 message InvoiceTemplate {
