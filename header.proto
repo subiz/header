@@ -6433,6 +6433,7 @@ message Response {
 	int64 num_unseen_notifications = 183;
 
 	NotiSetting notification_setting = 184;
+	repeated AgentGroup agent_groups = 185;
 }
 
 message ReportCount {
