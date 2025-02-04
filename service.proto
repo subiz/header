@@ -754,9 +754,25 @@ service Sendback {
 // notibox services
 service Notibox {
 	rpc SendNoti(header.Notification) returns (Empty);
-	rpc ListNoties(header.ListNotiRequest) returns (header.Notifications);
+	rpc ListNoties(header.ListNotiRequest) returns (header.Notifications); // depreacted
 	rpc MarkReadNoti(Id) returns (Empty);
-	rpc MarkReadNotiTopic(Id) returns (Empty);
+	rpc MarkReadNotiTopic(Id) returns (Empty); // deprecated
+}
+
+service NotiMgr {
+	rpc ReadNotificationSetting(Id) returns (noti5.Setting);
+	rpc UpdateNotificationSetting(noti5.Setting) returns (noti5.Setting);
+
+	rpc PushNoti(header.PushNoti) returns (Empty);
+
+	rpc AddToken(noti5.Token) returns (Empty);
+	rpc RemoveToken(noti5.Token) returns (Empty);
+	rpc CheckTokenExists(noti5.Token) returns (Empty);
+
+	rpc MarkReadNoti(Id) returns (Empty);
+	rpc ListNotifications(header.ListNotiRequest) returns (header.Response);
+	rpc MarkUnreadNoti(Id) returns (Empty);
+	rpc MarkOpenNoti(Id) returns (Empty);
 }
 
 // proder services

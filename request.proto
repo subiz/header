@@ -130,6 +130,7 @@ message ListNotiRequest {
 	int32 limit = 4;
 	string anchor = 5;
 	string category = 6; // comma separated
+	string read = 7; // empty=all,  unread
 }
 
 message UserRequest {

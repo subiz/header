@@ -73,6 +73,27 @@ message Notification {
 	repeated Notification sample_others = 18;
 }
 
+message Noti {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	string id = 4;
+
+	string topic = 10; // for grouping
+	string type = 5; // type
+	string data = 8; // json
+	int64 created = 6; // ms
+	int64 read_at = 19;
+
+	bool is_instant = 12; // just display and disappear, no persit
+	// int64 severity = 13; // 0: not important, 1 important;
+	string category = 14; // user, order
+
+	int64 ttls = 16; // 0 -> instant
+	int64 total_others = 17;
+	repeated Notification sample_others = 18;
+}
+
 message Attribute {
 	string key = 4;
 	int64 modified = 8;
@@ -618,6 +639,7 @@ message Data {
 	account.Presence presence = 8;
 	User user = 10;
 	Notification notification = 14;
+	Noti noti = 15;
 	AgentGroup agent_group = 18;
 	Note note = 23;
 	Workflow workflow = 25;
@@ -3673,6 +3695,8 @@ message PushNoti {
 	string ticket_id = 27;
 
 	bool is_first_user_message = 28;
+
+	Noti notification = 29;
 }
 
 message InvoiceTemplate {
@@ -6445,6 +6469,8 @@ message Response {
 
 	repeated Template templates = 180;
 	repeated Webhook webhooks = 181;
+	repeated Noti notifications = 182;
+	int64 num_unseen_notifications = 183;
 }
 
 message ReportCount {
