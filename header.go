@@ -1434,7 +1434,7 @@ func E400(err error, code E, v ...interface{}) error {
 		field[strconv.Itoa(i)] = vv
 	}
 
-	return log.Error(err, field, log.E_invalid_input, log.E(code.String()))
+	return log.Error3(err, field, log.E_invalid_input, log.E(code.String()))
 }
 
 func GetUserType(u *User) string {
