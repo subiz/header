@@ -14,6 +14,9 @@ message Context {
 	string from_service = 22; // campaign, bot
 	string from_service_id = 23; // cp329023
 	string credit_id = 24;
+
+	string trace_id = 25;
+	string span_id = 26;
 }
 
 message Uint128 {

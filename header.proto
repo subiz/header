@@ -217,6 +217,8 @@ message CallSetting {
 	bool allow_direct_extension_calling = 32;
 
 	int64 limit_call_time_sec = 33;
+	string limit_outgoing_call = 36; // "", agents, not_agents
+	repeated string outgoing_call_agents =  37;
 }
 
 message User {
@@ -3118,7 +3120,6 @@ enum ChannelType {
 	instagram_comment = 8;
 	google_review = 9;
 	google_question = 10;
-	google_message = 11;
 	zns = 12;
 }
 
@@ -5378,6 +5379,7 @@ message BlockedNumbers {
 	repeated BlockedNumber blocked_numbers = 3;
 }
 
+// incomming call
 message BlockedNumber {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6057,13 +6059,6 @@ enum E {
 	invalid_working_day = 63;
 	invalid_holiday = 64;
 
-	invalid_stripe_token = 74;
-	stripe_call_failed = 75;
-	invalid_invoice_duedate = 80;
-	invalid_country = 82;
-
-	invalid_time_range = 91;
-
 	endchat_bot_setting_after_any_message_too_low = 94;
 	endchat_bot_setting_after_any_message_too_high = 95;
 	template_message_not_is_creator = 97;
@@ -6083,7 +6078,6 @@ enum E {
 	too_many_fields = 134;
 	too_many_attachments = 135;
 	invalid_field_size = 137;
-	unauthorized_shopee_shop = 139;
 	order_readonly = 142;
 
 	invalid_order_status = 146;
@@ -6094,8 +6088,6 @@ enum E {
 	invalid_conversation_modal_secret = 170;
 	invalid_conversation_modal_url = 172;
 	invalid_conversation_modal_key = 173;
-
-	invalid_phone_device_state = 182;
 
 	invalid_call_state = 190;
 
