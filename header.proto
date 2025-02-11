@@ -218,7 +218,7 @@ message CallSetting {
 
 	int64 limit_call_time_sec = 33;
 	string limit_outgoing_call = 36; // "", agents, not_agents
-	repeated string outgoing_call_agents =  37;
+	repeated string outgoing_call_agents = 37;
 }
 
 message User {
@@ -807,7 +807,7 @@ message Rule {
 	common.Context ctx = 1;
 	string id = 2;
 	string account_id = 3;
-	int32 priority = 4;
+	// int32 priority = 4;
 	enum AssignStrategy {
 		all_agents = 0;
 		agentgroup = 2;
@@ -1000,13 +1000,12 @@ message ConversationMember {
 	string id = 4;
 	string ticket_id = 6;
 	string conversation_id = 13;
-	// string last_page_view_url = 15;
 	string membership = 12;
 	enum State {
 		active = 0;
 		left = 1;
 		observer = 2; // assigned
-		terminated = 3 ; // bot only
+		terminated = 3; // bot only
 	};
 	By invited_by = 16;
 
@@ -6534,7 +6533,7 @@ message StartWorkflowSessionRequest {
 	string thread_id = 18;
 }
 
-message RunTestAiAgentRequest {
+message RunAiAgentRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string ai_agent = 3;
@@ -8156,6 +8155,8 @@ message AIAgent {
 
 	int64 updated = 19;
 	string updated_by = 20;
+
+	string state = 22;// active, inactive
 }
 
 message FixedAgentSetting {
