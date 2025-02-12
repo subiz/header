@@ -849,11 +849,12 @@ message Rule {
 
 	ChannelCondition channel_condition = 15;
 	TimmingCondition timming_condition = 16;
-	repeated UserAttributeCondition form_conditions = 30;
+	repeated Condition form_conditions = 30;
 
 	string returning_visitor = 35; // new, returning, empty
 	bool user_has_replied_before = 18; // new
-	repeated UserAttributeCondition user_conditions = 19;
+	repeated Condition user_conditions = 19;
+	repeated Condition user_start_content_view_conditions = 43;
 	repeated string lead_owners = 20;
 	string call_menu_key = 28;
 
@@ -1856,7 +1857,7 @@ message BotCondition {
 	repeated int32 minutes_of_day = 22; // pair [0-4] [6-9]
 
 	// user
-	UserAttributeCondition user = 23; // user_attribute
+	Condition user = 23; // user_attribute
 
 	repeated string integration_ids = 24; // optional for subiz and email
 
@@ -1893,8 +1894,8 @@ message OrderCondition {
 	repeated LocationCondition exclude_shipping = 11;
 }
 
-message UserAttributeCondition {
-	string key = 2;
+message Condition {
+	string key = 2; // start_content_view.by.device.source
 	string operator = 3;
 	string value = 4;
 }
@@ -7335,9 +7336,9 @@ message SLAPolicy {
 
 	ChannelCondition channel_condition = 20;
 	TimmingCondition timming_condition = 21;
-	repeated UserAttributeCondition form_conditions = 22;
+	repeated Condition form_conditions = 22;
 	bool user_has_replied_before = 23; // new
-	repeated UserAttributeCondition user_conditions = 24;
+	repeated Condition user_conditions = 24;
 	bool when_offline = 25; // only run when there is no online agent
 	repeated string ticket_types = 26; // only apply for these ticket type
 	string type_id = 27;
