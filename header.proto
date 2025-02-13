@@ -726,6 +726,7 @@ message Data {
 	AIDataEntry ai_data_entry = 132;
 	AIDataGroup ai_data_group = 133;
 	AIAgent ai_agent = 134;
+	ZNSTemplate zns_template = 135;
 }
 
 message ConversationMeta {
@@ -5474,21 +5475,6 @@ message ZnsRequest {
 	map<string, string> template_data = 7;
 }
 
-message ZaloApplication {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string client_id = 3;
-	string secret = 4;
-	string status = 5;
-
-	//have same webhook_url
-	string webhook_url = 6;
-}
-
-message ZaloApplications {
-	repeated ZaloApplication apps = 1;
-}
-
 message SendOmniChannelMessageRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6426,6 +6412,12 @@ message Response {
 
 	NotiSetting notification_setting = 184;
 	repeated AgentGroup agent_groups = 185;
+
+	repeated ZNSTemplate zns_templates = 186;
+	ZNSTemplate zns_template = 187;
+
+	repeated ZNSMedia zns_medias = 188;
+	ZNSMedia zns_media = 189;
 }
 
 message ReportCount {
@@ -6495,6 +6487,7 @@ message WorkflowThread {
 	string action_id = 11;
 	int64 last_error_at = 12;
 	int64 last_action_at = 13;
+	int64 should_wake = 14; // debug only
 }
 
 message WorkflowSession {
@@ -8507,4 +8500,173 @@ message PushToken {
 	int64 created = 8;
 	repeated string topics = 9;
 	string access_token = 10;
+}
+
+message ZNSTemplateParam {
+	string type = 3;
+	string name = 4;
+	string sample_value = 5;
+}
+
+message ZNSTemplateLayoutComponentItem {
+	string bank_code = 6;
+	string account_name =  7;
+	string account_number = 8;
+	string amount = 10;
+	string note = 11;
+
+	string name = 12;
+	string condition = 13;
+	string voucher_code = 14;
+	string start_date = 15;
+	string end_date = 16;
+	int64 display_code = 17;
+	int64 row_type = 18;
+
+	string value = 20;
+	string title = 21;
+}
+
+message ZNSTemplateLayoutComponentButton {
+	string content = 3;
+	int64 type = 4;
+	string title = 5;
+}
+
+message ZNSTemplateLayoutComponentButtons {
+	repeated ZNSTemplateLayoutComponentButton items = 2;
+}
+
+message ZNSTemplateLayoutComponentTableRow {
+	string title = 5;
+	string value = 6;
+	int64 row_type = 7;
+}
+
+message ZNSTemplateLayoutComponentTable {
+	repeated ZNSTemplateLayoutComponentTableRow rows = 4;
+}
+
+message ZNSTemplateLayoutComponentImageItem {
+	string type = 3;
+	string media_id = 5;
+}
+
+message ZNSTemplateLayoutComponentImages {
+	repeated ZNSTemplateLayoutComponentImageItem items = 4;
+}
+
+message ZNSTemplateLayoutComponentLogo {
+	ZNSTemplateLayoutComponentImageItem light = 4;
+	ZNSTemplateLayoutComponentImageItem dark = 5;
+
+}
+message ZNSTemplateLayoutComponent {
+	ZNSTemplateLayoutComponentImages IMAGES = 4;
+	ZNSTemplateLayoutComponentLogo LOGO = 5;
+
+	ZNSTemplateLayoutComponentItem TITLE = 6;
+	ZNSTemplateLayoutComponentItem PARAGRAPH = 7;
+	ZNSTemplateLayoutComponentItem OTP = 8;
+	ZNSTemplateLayoutComponentItem VOUCHER = 9;
+	ZNSTemplateLayoutComponentItem PAYMENT = 10;
+	ZNSTemplateLayoutComponentButtons BUTTONS = 11;
+	ZNSTemplateLayoutComponentTable TABLE = 12;
+}
+
+message ZNSTemplateComponents {
+	repeated ZNSTemplateLayoutComponent components = 4;
+}
+
+message ZNSTemplateLayout {
+	ZNSTemplateComponents header = 3;
+	ZNSTemplateComponents body = 4;
+	ZNSTemplateComponents footer = 5;
+}
+
+message ZNSTemplateRequest {
+	string template_id = 9;
+	string template_name = 10;
+	string template_type = 11; // 1
+	string template_tag = 12;
+	ZNSTemplateLayout layout = 13;
+	repeated ZNSTemplateParam params = 15;
+	string note = 16;
+	string tracking_id = 17;
+}
+
+message ZNSTemplate {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string oa_id = 3;
+	string id = 5; // same as .template.tempalteId
+
+	ZNSTemplateRequest request = 6;
+	ZnsTemplate template = 7;
+
+	int64 created = 8;
+	string created_by = 9;
+
+	int64 zalo_updated = 11;
+
+	int64 updated = 12;
+	string updated_by = 13;
+}
+
+message ZnsTemplate {
+	int64 templateId = 2;
+	string templateName = 3;
+	string status = 4;
+	repeated ZNSParamDefinition listParams = 5;
+	int64 timeout = 6;
+	string previewUrl = 7;
+	string templateQuality = 8;
+	string templateTag = 9;
+	string price = 10;
+	bool applyTemplateQuota = 11;
+	string templateDailyQuota = 12;
+	string templateRemainingQuota = 13;
+	int64 createdTime = 14;
+	string oaId = 15;
+	string preview_text = 16;
+
+	repeated ZNSButton listButtons = 17;
+}
+
+message ZNSButton {
+	int64 type = 3;
+	string title = 4;
+	string content = 5;
+}
+
+message ZNSParamDefinition {
+	string name = 2;
+	bool require = 3;
+	string type = 4;
+	int32 maxLength = 5;
+	int32 minLength = 6;
+	bool acceptNull = 7;
+}
+
+// 400x96 px
+// jQuy định về Logo (Xem chi tiết):
+// Định dạng: PNG
+// Kích thước: 400x96 px
+// Quy định về hình ảnh (Xem chi tiết):
+// Định dạng: JPG, PNG
+// Tỉ lệ: 16:9
+// File upload định dạng JPG hoặc PNG, có dung lượng tối đa 500 KB.
+message ZNSMedia {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string oa_id = 3;
+	string id = 4; // == zalo media_id
+	File file = 5;
+	int64 created = 6;
+	string created_by = 7;
+}
+
+// deprecated
+message ZnsTemplates {
+	repeated ZnsTemplate templates = 2;
 }

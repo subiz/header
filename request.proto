@@ -784,7 +784,7 @@ message ListRuleRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 
-	string keyword  = 3;
+	string keyword = 3;
 	string assigned_to = 4;
 	string channel = 5;
 
@@ -792,4 +792,17 @@ message ListRuleRequest {
 
 	int64 limit = 10;
 	string anchor = 11;
+}
+
+message ListZNSTemplateRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string oa_id = 3;
+	string type = 4;
+	string keyword = 5;
+
+	string status = 6;
+	int64 limit = 7;
+	string anchor = 8;
 }

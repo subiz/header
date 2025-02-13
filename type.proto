@@ -322,6 +322,9 @@ enum RealtimeType {
 	ai_data_group_deleted = 317;
 	ai_agent_updated = 318;
 	ai_agent_deleted = 319;
+
+	zns_template_created = 320;
+	zns_template_updated = 321;
 }
 
 message TextTransform {

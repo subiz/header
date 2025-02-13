@@ -8,7 +8,6 @@ import "account.proto";
 import "header.proto";
 import "request.proto";
 import "common.proto";
-import "zalokon.proto";
 
 service GooglekonService {
 	rpc SendEventToGoogle(header.Events) returns (header.Empty);
@@ -628,18 +627,21 @@ service ChannelConnector {
 
 service ZalokonService {
 	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
-	rpc ListZnsTemplates(Id) returns (zalokon.ZnsTemplates);
-	// rpc RequestZaloUserInfo(header.ZaloUserRequest) returns (header.Empty);
+	rpc ListZnsTemplates(Id) returns (header.ZnsTemplates); // deprecated
 	rpc RequestZaloUserToMakeCall(header.ZaloUserRequest) returns (header.Empty);
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
 	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);
 	rpc SendZNS(header.ZnsRequest) returns (header.Event);
 
-	// rpc CreateZaloApplication(ZaloApplication) returns (ZaloApplication);
-	// rpc GetZaloApplication(Id) returns (ZaloApplication);
-	// rpc UpdateZaloApplication(ZaloApplication) returns (ZaloApplication);
-	// rpc DeleteZaloApplication(Id) returns (Empty);
-	// rpc ListZaloApplications(Empty) returns (header.ZaloApplications);
+	rpc CreateZNSTemplate(header.ZNSTemplate) returns (Response);
+	rpc UpdateZNSTemplate(header.ZNSTemplate) returns (Response);
+	rpc ListZNSTemplates(ListZNSTemplateRequest) returns (header.Response);
+	rpc MatchZNSTemplates(Ids) returns (header.Response);
+
+	rpc ListZNSMedias(ListZNSTemplateRequest) returns (header.Response); // oa id
+	rpc MatchZNSMedias(Ids) returns (header.Response);
+	rpc CreateZNSMedia(ZNSMedia) returns (Response);
+	rpc DeleteZNSMedia(Id) returns (Empty);
 }
 
 service MailkonService {
