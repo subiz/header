@@ -684,7 +684,7 @@ message Data {
 	CallDriverRequest call_request = 93; // only use for wait-for-key in call channel
 	GreetingAudio greeting_audio = 94;
 	RecentCallRecord recent_call_record = 95;
-	string ice_candidate = 96; // remove
+	// string ice_candidate = 96; // remove
 	WebRTCMessage webrtc_message = 97;
 	// LinkedUser linked_user = 98;
 	EventType event_type = 99;
@@ -2577,9 +2577,6 @@ message Notif {
 	map<string, Block> i18n_title_block = 26;
 
 	Style title_style = 10;
-
-	// repeated string message_quill_deltas = 11; // depreacted
-	// repeated I18nString i18n_message_quill_deltas = 23; // depreacted
 
 	repeated Block message_blocks = 27; // markdown
 	repeated I18nBlock i18n_message_blocks = 28;
@@ -6093,7 +6090,7 @@ message WorkflowAction {
 
 	string scope = 7; // computed
 	bool is_sync_message = 8; //valid for ation wait
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_worfklow
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6131,6 +6128,13 @@ message WorkflowAction {
 	string output_variable = 101; // plain text
 	ActionStartThread start_thread = 102;
 	ActionSetVariable set_variable = 103;
+	ActionCallWorkflow call_workflow = 104;
+}
+
+// this action push to stack
+message ActionCallWorkflow {
+	string workflow_id = 4;
+	string action_id = 5; // optional
 }
 
 message ActionSetVariable {
@@ -6485,9 +6489,19 @@ message WorkflowThread {
 	int64 last_waited = 9;
 	string exit_code = 10;
 	string action_id = 11;
+	string workflow_id = 15; // wf for actionid, could be difference with session.workflow since we allow function call
 	int64 last_error_at = 12;
 	int64 last_action_at = 13;
-	int64 should_wake = 14; // debug only
+}
+
+message WorkflowStack {
+	repeated WorkflowStackItem calls = 4; // [wfid.actionid]
+}
+
+message WorkflowStackItem {
+	string workflow_id = 4;
+	string action_id = 5;
+	int64 at = 6;
 }
 
 message WorkflowSession {
@@ -6504,6 +6518,7 @@ message WorkflowSession {
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
 	map<string, WorkflowThread> threads = 18; // thread id -> term
+	map<string, WorkflowStack> stacks = 20; // thread id -> stack
 	string obj_id = 17; // for this obj
 
 	int64 last_error_at = 19;
@@ -7874,6 +7889,9 @@ message WorkflowPulse {
 	string session_id = 8;
 	string action_id = 9;
 	string thread_id = 10;
+
+	string workflow_action_id = 11; // could be difference with workflow_id id since we allow function call
+
 }
 
 message WorkflowTimeup {
@@ -8665,9 +8683,4 @@ message ZNSMedia {
 	File file = 5;
 	int64 created = 6;
 	string created_by = 7;
-}
-
-// deprecated
-message ZnsTemplates {
-	repeated ZnsTemplate templates = 2;
 }

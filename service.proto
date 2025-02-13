@@ -605,14 +605,10 @@ service FabikonService {
 	rpc ReadFbFanpageSetting(Id) returns (header.FbFanpageSetting);
 	rpc UpdateFbFanpageSetting(header.FbFanpageSetting) returns (header.FbFanpageSetting);
 	rpc ListFbFanpageSettings(Id) returns (header.FbFanpageSettings);
-
-	rpc ListFbPosts(Id) returns (header.FacebookPosts);
-
 	rpc ListFacebookPosts(FacebookPostRequest) returns (Response);
 	rpc MatchFacebookPosts(Ids) returns (Response);
 	rpc ResyncFacebookPost(Id) returns (Response);
 
-	rpc GetFbPost(FacebookPost) returns (FacebookPost);
 	rpc RemoveFbUserLabel(header.User) returns (header.Empty);
 	rpc AddFbUserLabel(header.User) returns (header.Empty);
 	rpc GenerateRefLink(header.Id) returns (header.Id);
@@ -627,7 +623,7 @@ service ChannelConnector {
 
 service ZalokonService {
 	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
-	rpc ListZnsTemplates(Id) returns (header.ZnsTemplates); // deprecated
+	// rpc ListZnsTemplates(Id) returns (header.ZnsTemplates); // deprecated
 	rpc RequestZaloUserToMakeCall(header.ZaloUserRequest) returns (header.Empty);
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
 	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);
