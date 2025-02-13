@@ -112,7 +112,8 @@
       "ticket_template": "update",
       "file": "delete",
       "sla_policy": "create delete update",
-      "workflow": "update create delete read"
+      "workflow": "update create delete read",
+      "zns_template": "update create delete read"
     }
   },
   "account_manage": {

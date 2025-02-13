@@ -8606,17 +8606,18 @@ message ZNSTemplate {
 
 	int64 created = 8;
 	string created_by = 9;
+	int64 modified = 10;
 
-	int64 zalo_updated = 11;
-
-	int64 updated = 12;
-	string updated_by = 13;
+	int64 zalo_requested = 12;
+	string zalo_requested_by = 13;
+	string zalo_status_reason = 14;
+	int64 zalo_status_updated = 15;
 }
 
 message ZnsTemplate {
-	int64 templateId = 2;
+	string templateId = 2;
 	string templateName = 3;
-	string status = 4;
+	string status = 4; // ENABLE, PENDING_REVIEW, DELETE, REJECT, DISABLE
 	repeated ZNSParamDefinition listParams = 5;
 	int64 timeout = 6;
 	string previewUrl = 7;

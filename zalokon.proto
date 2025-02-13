@@ -67,6 +67,16 @@ message ResponseData {
 	string attachment_id = 4;
 	string user_id = 5;
 	ResponseQuota quota = 6;
+	string media_id = 7;
+
+	string template_id = 10;
+	string template_name = 11;
+	int64 template_type = 12;
+	string status = 13;
+	int64 tag = 14;
+	string price = 15;
+	int64 timeout = 17;
+	string preview_url=  18;
 }
 
 message ConsentResponse {
@@ -180,12 +190,13 @@ message Message {
 // oa_send_file: OA gửi tin nhắn đính kèm file
 // user_received_message: người dùng nhận tin nhắn từ Official Account
 // user_seen_message: người dùng xem tin nhắn từ Official Account
+// change_template_status
 message Request {
 	Sender sender = 2;
 	Sender recipient = 3;
 	string event_name = 4;
 	string app_id = 5;
-	string timestamp = 6;
+	string timestamp = 6; // 1724921480327
 	string user_id_by_app = 8;
 	Info info = 9;
 	Message message = 10;
@@ -199,6 +210,15 @@ message Request {
 	string expired_time = 18;
 	string request_type = 19;
 	string create_time = 20;
+
+	string template_id = 21;
+	ZNSTemplateStatus status = 22;
+	string reason = 23;
+}
+
+message ZNSTemplateStatus {
+	string prev_status = 4;
+	string new_status = 5;
 }
 
 message ZlFollower {
