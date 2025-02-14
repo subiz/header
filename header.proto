@@ -8566,7 +8566,7 @@ message ZNSTemplateLayoutComponentTable {
 }
 
 message ZNSTemplateLayoutComponentImageItem {
-	string type = 3;
+	string type = 3; // IMAGE
 	string media_id = 5;
 }
 
@@ -8606,7 +8606,7 @@ message ZNSTemplateRequest {
 	string template_id = 9;
 	string template_name = 10;
 	string template_type = 11; // 1
-	string template_tag = 12;
+	string tag = 12;
 	ZNSTemplateLayout layout = 13;
 	repeated ZNSTemplateParam params = 15;
 	string note = 16;
