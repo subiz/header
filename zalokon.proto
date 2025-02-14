@@ -69,15 +69,16 @@ message ResponseData {
 	ResponseQuota quota = 6;
 	string media_id = 7;
 
-	string template_id = 10;
+	int64 template_id = 10;
 	string template_name = 11;
 	int64 template_type = 12;
 	string status = 13;
 	int64 tag = 14;
-	string price = 15;
+	int64 price = 15;
 	int64 timeout = 17;
 	string preview_url=  18;
 }
+// {"data":{"oa_id":"935022139843821727","template_name":"Sample ZNS template (Test)","template_status":"PENDING_REVIEW","price":300,"preview_url":"https://account.zalo.cloud/znspreview/RsPcVWEAM-6z9ofcb0lAlQ==","template_id":407444,"template_type":2,"tag":1,"app_id":"899912034629887500","timeout":15000},"error":0,"message":"Success"}
 
 message ConsentResponse {
 	int32 error = 2;
