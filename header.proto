@@ -5470,6 +5470,8 @@ message ZnsRequest {
 	string template_id = 5;
 	string tracking_id = 6;
 	map<string, string> template_data = 7;
+
+	string mode = 8; // development
 }
 
 message SendOmniChannelMessageRequest {
@@ -8605,7 +8607,7 @@ message ZNSTemplateLayout {
 message ZNSTemplateRequest {
 	string template_id = 9;
 	string template_name = 10;
-	string template_type = 11; // 1
+	string template_type = 11; // 1 ZNS tùy chỉnh, 2 ZNS xác thực, 3 ZNS yêu cầu thanh toán, 4 ZNS voucher, 5 ZNS Đánh giá dịch vụ
 	string tag = 12;
 	ZNSTemplateLayout layout = 13;
 	repeated ZNSTemplateParam params = 15;
@@ -8633,7 +8635,7 @@ message ZNSTemplate {
 }
 
 message ZnsTemplate {
-	string templateId = 2;
+	int64 templateId = 2;
 	string templateName = 3;
 	string status = 4; // ENABLE, PENDING_REVIEW, DELETE, REJECT, DISABLE
 	repeated ZNSParamDefinition listParams = 5;
