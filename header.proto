@@ -727,6 +727,7 @@ message Data {
 	AIDataGroup ai_data_group = 133;
 	AIAgent ai_agent = 134;
 	ZNSTemplate zns_template = 135;
+	ZNSMedia zns_media = 136;
 }
 
 message ConversationMeta {
@@ -8685,4 +8686,6 @@ message ZNSMedia {
 	File file = 5;
 	int64 created = 6;
 	string created_by = 7;
+
+	string image_type = 8; // logo_light, logo_dark
 }

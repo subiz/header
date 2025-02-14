@@ -325,6 +325,9 @@ enum RealtimeType {
 
 	zns_template_created = 320;
 	zns_template_updated = 321;
+
+	zns_media_created = 322;
+	zns_media_updated = 323;
 }
 
 message TextTransform {
