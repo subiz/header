@@ -728,6 +728,7 @@ message Data {
 	AIAgent ai_agent = 134;
 	ZNSTemplate zns_template = 135;
 	ZNSMedia zns_media = 136;
+	EmailSignature email_signature = 137;
 }
 
 message ConversationMeta {
@@ -1674,6 +1675,7 @@ message Integration {
 
 	string email_sender_nickname = 58;
 	bool convert_missed_call_to_ticket = 59;
+	EmailSignature email_signature = 124; // just save do not manage, for email only
 	string ticket_type_id = 101;
 
 	int64 zalo_type = 60;
@@ -1685,7 +1687,7 @@ message Integration {
 	string zalo_package_valid_through_date = 66;
 	string zalo_package_auto_renew_date = 67;
 	string zalo_linkedZCA = 68;
-	string zns_client_id =69;
+	string zns_client_id = 69;
 
 	// for google review
 	float google_review_average_rating = 70;
@@ -6425,6 +6427,9 @@ message Response {
 
 	repeated ZNSMedia zns_medias = 188;
 	ZNSMedia zns_media = 189;
+
+	repeated EmailSignature email_signatures = 190;
+	EmailSignature email_signature = 191;
 }
 
 message ReportCount {
@@ -8688,4 +8693,18 @@ message ZNSMedia {
 	string created_by = 7;
 
 	string image_type = 8; // logo_light, logo_dark
+}
+
+message EmailSignature {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string created_by = 4;
+	int64 created = 5;
+	string updated_by = 6;
+	int64 updated = 7;
+
+	string name = 10;
+	Block block = 11;
+	repeated string shares = 12; // all, only me, list of agent id
 }

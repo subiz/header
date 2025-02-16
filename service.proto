@@ -211,6 +211,7 @@ service AccountMgr {
 	rpc GetSetupFeatureStatus(header.Id) returns (SetupFeatureStatus);
 	rpc UpdateSetupFeatureStatus(SetupFeatureStatus) returns (SetupFeatureStatus);
 	rpc ListActiveAccountIds(header.Id) returns (Response);
+
 }
 
 service UserCache {
@@ -465,6 +466,12 @@ service ConversationMgr {
 
 	rpc OnBotUpdated(header.Bot) returns (Response);
 	rpc OnBotDeleted(header.Id) returns (Response);
+
+	rpc ListEmailSignatures(ListEmailSignatureRequest) returns (header.Response); // oa id
+	rpc MatchEmailSignatures(Ids) returns (header.Response);
+	rpc CreateEmailSignature(EmailSignature) returns (Response);
+	rpc UpdatedEmailSignature(EmailSignature) returns (Response);
+	rpc DeleteEmailSignature(Id) returns (Empty);
 }
 
 service TicketMgr {
@@ -622,8 +629,8 @@ service ChannelConnector {
 }
 
 service ZalokonService {
-	rpc SendEventToZalo(header.Events) returns (header.Empty); // zalo
-	// rpc ListZnsTemplates(Id) returns (header.ZnsTemplates); // deprecated
+	rpc SendEventToZalo(header.Events) returns (Empty); // zalo
+
 	rpc RequestZaloUserToMakeCall(header.ZaloUserRequest) returns (header.Empty);
 	rpc MakeSureZaloUser(header.ZaloUserRequest) returns (header.Empty);
 	rpc GetZaloUserCallConsent(header.ZaloUserRequest) returns (header.Response);

@@ -806,3 +806,13 @@ message ListZNSTemplateRequest {
 	int64 limit = 7;
 	string anchor = 8;
 }
+
+message ListEmailSignatureRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string agent_id = 3; // of agent
+
+	int64 limit = 7;
+	string anchor = 8;
+}

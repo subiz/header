@@ -328,6 +328,10 @@ enum RealtimeType {
 
 	zns_media_created = 322;
 	zns_media_updated = 323;
+
+	email_signature_created = 325;
+	email_signature_updated = 326;
+	email_signature_deleted = 327;
 }
 
 message TextTransform {
