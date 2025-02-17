@@ -826,7 +826,7 @@ message CreditSpendReportRequest {
 	string item = 6; // just filter
 	string item_id = 7;
 	int64 limit = 8; // default: 24, 30, 24
-	string service = 9;
+	string service_id = 9;
 }
 
 message CreditSpendLogRequest {
@@ -834,7 +834,7 @@ message CreditSpendLogRequest {
 	string account_id = 2;
 	int64 created_from = 4; // ms
 	string keyword = 5;
-	string service = 6; // just filter
+	string service_id = 6; // just filter
 	string item = 7; // just filter
 	string item_id = 8; // filter by source
 
