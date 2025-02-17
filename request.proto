@@ -816,3 +816,29 @@ message ListEmailSignatureRequest {
 	int64 limit = 7;
 	string anchor = 8;
 }
+
+message CreditSpendReportRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string credit_id = 3;
+	int64 from_time = 4; // ms
+	string unit = 5; // hour, day, month
+	string item = 6; // just filter
+	string item_id = 7;
+	int64 limit = 8; // default: 24, 30, 24
+}
+
+message CreditSpendLogRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 created_from = 4; // ms
+	string keyword = 5;
+	// string service = 6; // just filter
+	string item = 7; // just filter
+	string item_id = 8; // filter by source
+
+	string credit_id = 12;
+
+	int64 limit = 10; // max : 20
+	string anchor = 11;
+}

@@ -6615,45 +6615,58 @@ message CreditSpendEntry {
 	string account_id = 2;
 	string id = 3;
 	int64 created = 4;
-	string service = 5; // remove file (sub-category)
-	string category = 6; // agent, zalo_zns, zalo_active_message, image
+	// string service = 5; // remove file (sub-category)
+	// string category = 6; // agent, zalo_zns, zalo_active_message, image
 
 	int64 quantity = 7;
-	CreditSendEntryData data = 8;
+	CreditEntryData data = 8;
 	string credit_id = 9;
 
 	int64 fpv_unit_price = 10;
 
-	string service_id = 12; // cp4348934
-	string service_type = 13; // campaign, bot, popup
+	// string from_service_id = 12; //
+	// string from_service_type = 13; // campaign, bot, popup
 
-	string item = 14;
-	string item_id = 15;
+	string item = 14; // like product: zns, call
+	string item_id = 15; // product id
+
+	string by_agent_id = 16;
+	string by_automation_id = 17;
+	string by_campaign_id = 18;
 }
 
-message CreditSendEntryDataId {
+message CreditEntryDataId {
 	string id = 2;
 }
 
-message CreditSendEntryDataAgent {
+message CreditEntryDataAgent {
 	int64 total_agents = 1;
 	repeated string agents = 2;
 }
 
-message CreditSendEntryDataEmail {
+message CreditEntryDataEmail {
 	string from = 3;
 	string to = 4;
 	string email_id = 5;
+	string conversation_id = 6;
 }
 
-message CreditSendEntryDataZaloZNS {
+message CreditEntryDataZaloZNS {
 	string oa_id = 3;
 	string message_id = 4; // from zalo
 	string template_id = 5;
 	string phone_number = 6;
 }
 
-message CreditSendEntryDataZaloActiveMessage {
+message CreditEntryDataZaloRequestCall {
+	string oa_id = 3;
+	// string message_id = 4; // from zalo
+	// string template_id = 5;
+	string reason_code = 4;
+	string phone_number = 6;
+}
+
+message CreditEntryDataZaloActiveMessage {
 	string oa_id = 3;
 	string message_id = 4; // from zalo
 	string conversation_id = 5;
@@ -6661,37 +6674,13 @@ message CreditSendEntryDataZaloActiveMessage {
 	string zalo_user_id = 7;
 }
 
-message CreditSendEntryData {
-	CreditSendEntryDataAgent agent = 2;
-	CreditSendEntryDataZaloZNS zalo_zns = 3;
-	CreditSendEntryDataZaloActiveMessage zalo_active_message = 4;
-	CreditSendEntryDataEmail email = 5;
-	CreditSendEntryDataId file = 6;
-}
-
-message CreditSpendReportRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string credit_id = 3;
-	int64 from_time = 4; // ms
-	string unit = 5; // hour, day, month
-	string service = 6; // just filter
-	string service_id = 7;
-	int64 limit = 8; // default: 24, 30, 24
-}
-
-message CreditSpendLogRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	int64 created_from = 4; // ms
-	string service = 6; // just filter
-	string category = 7; // just filter
-	string service_id = 8; // filter by source
-
-	string credit_id = 12;
-
-	int64 limit = 10; // max : 20
-	string anchor = 11;
+message CreditEntryData {
+	CreditEntryDataAgent agent = 2;
+	CreditEntryDataZaloZNS zalo_zns = 3;
+	CreditEntryDataZaloActiveMessage zalo_active_message = 4;
+	CreditEntryDataEmail email = 5;
+	CreditEntryDataId file = 6;
+	CreditEntryDataZaloRequestCall zalo_request_call = 7;
 }
 
 message CreditSpendEntries {
