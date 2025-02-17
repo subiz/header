@@ -6615,8 +6615,6 @@ message CreditSpendEntry {
 	string account_id = 2;
 	string id = 3;
 	int64 created = 4;
-	// string service = 5; // remove file (sub-category)
-	// string category = 6; // agent, zalo_zns, zalo_active_message, image
 
 	int64 quantity = 7;
 	CreditEntryData data = 8;
@@ -6624,15 +6622,13 @@ message CreditSpendEntry {
 
 	int64 fpv_unit_price = 10;
 
-	// string from_service_id = 12; //
-	// string from_service_type = 13; // campaign, bot, popup
+	string service_id = 12; //
+	string service_type = 13; // campaign, bot, popup
 
 	string item = 14; // like product: zns, call
 	string item_id = 15; // product id
 
 	string by_agent_id = 16;
-	string by_automation_id = 17;
-	string by_campaign_id = 18;
 }
 
 message CreditEntryDataId {
