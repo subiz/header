@@ -42,15 +42,16 @@ message Ids {
 
 message NotiData {
 	// for campaign
-	int64 progress = 5;
+	int64 campaign_progress = 5; // 50 -> 50%
 	string campaign_id = 6;
 	string campaign_type = 7; // zns, email
-	string zns_name = 1;
-	string total_customers = 8;
-	int64 start_at = 9;
-	int64 ended_at = 10;
-	int64 total_error = 11;
-	string cancelled_by = 12;
+	string campaign_name = 8;
+	int64 campaign_total_customers = 9;
+	int64 campaign_start_at = 10;
+	int64 campaign_state_updated_at = 11;
+	int64 campaign_num_errors = 12;
+	string campaign_cancelled_by = 13;
+	string campaign_status = 14; // pending, active, cancelled, completed
 }
 
 // push noti
@@ -5627,9 +5628,7 @@ message UserCampaign {
 message Campaign {
 	common.Context ctx = 1;
 	string account_id = 2;
-
 	string id = 3;
-
 	string name = 4;
 	string description = 5;
 	string objective = 14;
@@ -5648,7 +5647,7 @@ message Campaign {
 	repeated MarketingMessage messages = 15;
 	OutboundCallCampaign outbound_call = 16;
 
-	string state = 18; //  pause (default),  active
+	string state = 18; //  pause (default),  active, cancelled
 
 	bool is_building_audient = 17; // clear data after the campaign is finished or deleted
 	// bool is_completed = 18;
@@ -5682,8 +5681,10 @@ message Campaign {
 	int64 broadcast_delivered_count = 44;
 	int64 broadcast_read_count = 45;
 	string credit_id = 49;
-	int64 state_updated_at = 50; //only save time user (agent,accout) updated
-
+	int64 state_updated_at = 50; // only save time user (agent,accout) updated
+	string state_updated_by = 52;
+	int64 num_errors = 53;
+	int64 from_page = 54; // lead
 }
 
 message OutboundCallCampaign {
