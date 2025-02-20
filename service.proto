@@ -468,9 +468,9 @@ service ConversationMgr {
 	rpc OnBotDeleted(header.Id) returns (Response);
 
 	rpc ListEmailSignatures(ListEmailSignatureRequest) returns (header.Response); // oa id
-	rpc MatchEmailSignatures(Ids) returns (header.Response);
+	rpc MatchEmailSignatures(Ids) returns (Response);
 	rpc CreateEmailSignature(EmailSignature) returns (Response);
-	rpc UpdatedEmailSignature(EmailSignature) returns (Response);
+	rpc UpdateEmailSignature(EmailSignature) returns (Response);
 	rpc DeleteEmailSignature(Id) returns (Empty);
 }
 

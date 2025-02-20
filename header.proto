@@ -42,7 +42,7 @@ message Ids {
 
 message NotiData {
 	// for campaign
-	int64 campaign_progress = 5; // 50 -> 50%
+	int64 campaign_progress = 5; // 5012 -> 50.12%
 	string campaign_id = 6;
 	string campaign_type = 7; // zns, email
 	string campaign_name = 8;
@@ -60,7 +60,7 @@ message Noti {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
-	string id = 4;
+	string id = 4; // same as topic
 	string action = 7; // use only when send ('', 'update')
 
 	NotiData meta = 9;
@@ -71,7 +71,6 @@ message Noti {
 	int64 read_at = 19;
 
 	bool is_instant = 12; // @deprecated just display and disappear, no persit
-	// int64 severity = 13; // 0: not important, 1 important;
 	string category = 14; // @depreacted user, order, broadcast
 
 	// extra info
@@ -5684,7 +5683,7 @@ message Campaign {
 	string credit_id = 49;
 	int64 state_updated_at = 50; // only save time user (agent,accout) updated
 	string state_updated_by = 52;
-	int64 from_page = 54; // lead
+	string from_page = 54; // lead
 }
 
 message OutboundCallCampaign {
@@ -8704,7 +8703,9 @@ message EmailSignature {
 	string updated_by = 6;
 	int64 updated = 7;
 
+	string default_for_integration_id = 8;
 	string name = 10;
 	Block block = 11;
 	repeated string shares = 12; // all, only me, list of agent id
+	bool disabled = 13;
 }
