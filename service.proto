@@ -466,12 +466,6 @@ service ConversationMgr {
 
 	rpc OnBotUpdated(header.Bot) returns (Response);
 	rpc OnBotDeleted(header.Id) returns (Response);
-
-	rpc ListEmailSignatures(ListEmailSignatureRequest) returns (header.Response); // oa id
-	rpc MatchEmailSignatures(Ids) returns (Response);
-	rpc CreateEmailSignature(EmailSignature) returns (Response);
-	rpc UpdateEmailSignature(EmailSignature) returns (Response);
-	rpc DeleteEmailSignature(Id) returns (Empty);
 }
 
 service TicketMgr {
@@ -665,6 +659,12 @@ service MailkonService {
 	rpc ListBouncedEmails(BouncedEmail) returns (Response);
 	rpc UpsertBouncedEmail(BouncedEmail) returns (BouncedEmail);
 	rpc DeleteBouncedEmail(Id) returns (Response);
+
+	rpc ListEmailSignatures(ListEmailSignatureRequest) returns (header.Response); // oa id
+	rpc MatchEmailSignatures(Ids) returns (Response);
+	rpc CreateEmailSignature(EmailSignature) returns (Response);
+	rpc UpdateEmailSignature(EmailSignature) returns (Response);
+	rpc DeleteEmailSignature(Id) returns (Empty);
 
 	rpc ListBlockedEmails(BlockedEmail) returns (Response);
 	rpc BlockEmail(BlockedEmail) returns (Response);

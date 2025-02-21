@@ -1688,7 +1688,6 @@ message Integration {
 
 	string email_sender_nickname = 58;
 	bool convert_missed_call_to_ticket = 59;
-	EmailSignature email_signature = 124; // just save do not manage, for email only
 	string ticket_type_id = 101;
 
 	int64 zalo_type = 60;
@@ -5919,7 +5918,7 @@ message BusinessEmailAddress {
 	string updated_by = 11;
 	int64 updated = 12;
 
-	string email_signature = 13;
+	// string email_signature = 13;
 
 	int64 inbound_disabled = 14;
 	int64 outbound_disabled = 15;
@@ -5928,6 +5927,8 @@ message BusinessEmailAddress {
 	string ticket_type_id = 17;
 
 	string provider = 18; // gmail
+
+	EmailSignature signature = 19;
 }
 
 message BusinessEmailAddresses {
@@ -8703,7 +8704,7 @@ message EmailSignature {
 	string updated_by = 6;
 	int64 updated = 7;
 
-	string default_for_integration_id = 8;
+	string default_for_business_address = 8;
 	string name = 10;
 	Block block = 11;
 	string html = 14;
