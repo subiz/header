@@ -8706,6 +8706,7 @@ message EmailSignature {
 	string default_for_integration_id = 8;
 	string name = 10;
 	Block block = 11;
+	string html = 14;
 	repeated string shares = 12; // all, only me, list of agent id
 	bool disabled = 13;
 }
