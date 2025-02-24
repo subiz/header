@@ -250,7 +250,7 @@ message ReservedPlanInvoiceItem {
 	optional int64 old_billing_cycle_month = 5;
 	// optional bool old_is_unlimited_agent = 5;
 	// optional int64 old_fpv_save_percentage = 6;
-	// optional int32 day_left = 7;
+	optional int32 day_left = 7;
 	optional int64 old_started = 8; // now (not sub.started)
 	optional int64 old_ended = 9;
 }
