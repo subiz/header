@@ -42,7 +42,7 @@ message Ids {
 
 message NotiData {
 	// for campaign
-	int64 campaign_progress = 5; // 5012 -> 50.12%
+	// int64 campaign_progress = 5; // 5012 -> 50.12%
 	string campaign_id = 6;
 	string campaign_type = 7; // zns, email
 	string campaign_name = 8;
@@ -50,6 +50,7 @@ message NotiData {
 	int64 campaign_start_at = 10;
 	int64 campaign_state_updated_at = 11;
 	int64 campaign_num_errors = 12;
+	int64 campaign_num_sents = 15;
 	string campaign_cancelled_by = 13;
 	string campaign_status = 14; //  active, pause, completed
 }
