@@ -5655,7 +5655,7 @@ message Campaign {
 	// bool is_completed = 18;
 
 	int64 audient_count = 19; // number of user in segments, read-only
-	int64 impression_count = 20;
+	int64 impression_count = 20; // @deprecated, use broadcast_send_count
 	int64 goal_reached_count = 21;
 
 	int64 budget_fpv = 22; // set by campaign
@@ -5683,6 +5683,8 @@ message Campaign {
 	int64 broadcast_delivered_count = 44;
 	int64 broadcast_read_count = 45;
 	int64 broadcast_failed_count = 53;
+	int64 broadcast_ack_count = 55;
+	int64 broadcast_sent_count = 56;
 	string credit_id = 49;
 	int64 state_updated_at = 50; // only save time user (agent,accout) updated
 	string state_updated_by = 52;
@@ -6445,6 +6447,9 @@ message Response {
 
 	repeated EmailSignature email_signatures = 190;
 	EmailSignature email_signature = 191;
+
+	repeated Campaign campaigns = 192;
+	Campaigns campaign = 193;
 }
 
 message ReportCount {
