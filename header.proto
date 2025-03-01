@@ -5823,13 +5823,9 @@ message MarketingMessage {
 
 message CampaignSendLogEntry {
 	common.Context ctx = 1;
-	// string account_id = 2;
-	// string campaign_id = 3;
-
 	string last_message_id = 5; // key marketing message id
 	string user_id = 7;
 	string source_event_id = 8;
-	// string last_channel = 10; // latest tried channel
 	string last_profile_id = 11; // latest tried profile id
 
 	string send_error = 12;
@@ -5843,21 +5839,16 @@ message CampaignSendLogEntry {
 
 	int64 clicked_at = 17;
 	int64 goal_reached_at = 20;
-	int64 seen_at = 22;
+	int64 seen_at = 22; // from pong
+	int64 ack_at = 23; // from pong (conversation ack back)
 	int64 sent_at = 24;
-	int64 delivered_at = 26;
-
-	// int64 sent_count = 28;
-
-	int64 last_tried = 29;
+	int64 delivered_at = 26; // from pong
 
 	repeated string tried_profiles = 32; // server only
-
 	int64 unsubscribed_at = 34;
 	int64 spamreported_at = 35;
 
 	int64 attempt_index = 39;
-	int64 pong_index = 40;
 }
 
 message CampaignSendLog {
