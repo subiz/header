@@ -1338,7 +1338,7 @@ message Message {
 
 	string zns_phone = 40; // zns-only
 	string zns_template_id = 41; // zns-only
-	string zns_tracking_id = 42; // zns-only
+	// string zns_tracking_id = 42; // zns-only
 	map<string, string> zns_template_data = 43; // zns-only
 
 	map<string, string> zns_template_default_data = 44; // zns-only
@@ -1358,8 +1358,7 @@ message Message {
 	int64 deleted = 53;
 	string deleted_by = 54;
 
-	string campaign_id = 56; // this is a mark that the message is from campaign id
-	// string source_event_id = 57; // for pong
+	string source_event_id = 57; // for pong
 }
 
 message MessageReferral {
@@ -1437,6 +1436,7 @@ message MessagePong {
 	string ref_link = 11;
 	int32 rating = 12;
 	string comment = 13;
+	string zns_message_id = 14;
 }
 
 message MessageButton {
