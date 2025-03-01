@@ -1357,6 +1357,9 @@ message Message {
 	int64 edited = 52;
 	int64 deleted = 53;
 	string deleted_by = 54;
+
+	string campaign_id = 56; // this is a mark that the message is from campaign id
+	// string source_event_id = 57; // for pong
 }
 
 message MessageReferral {
@@ -5820,36 +5823,41 @@ message MarketingMessage {
 
 message CampaignSendLogEntry {
 	common.Context ctx = 1;
-	string account_id = 2;
-	string campaign_id = 3;
+	// string account_id = 2;
+	// string campaign_id = 3;
 
-	string message_id = 5; // key marketing message id
+	string last_message_id = 5; // key marketing message id
 	string user_id = 7;
-	string event_id = 8;
-	string channel = 10; // latest tried channel
-	string profile_id = 11; // latest tried profile id
+	string source_event_id = 8;
+	// string last_channel = 10; // latest tried channel
+	string last_profile_id = 11; // latest tried profile id
 
 	string send_error = 12;
 	int64 created = 13; // ms
 
-	string status = 14; // sending, sent, failed, success
-	Event payload = 15;
+	// "", sending(remove),
+	// sent,
+	// failed: (got pong from user-end)
+	// success: -> delivered, seen (got pong from user-end)
+	string status = 14;
+
 	int64 clicked_at = 17;
 	int64 goal_reached_at = 20;
 	int64 seen_at = 22;
-	int64 received_at = 24;
+	int64 sent_at = 24;
 	int64 delivered_at = 26;
 
-	int64 sent_count = 28;
+	// int64 sent_count = 28;
 
 	int64 last_tried = 29;
 
-	bool no_retry = 31; // read only
 	repeated string tried_profiles = 32; // server only
-	string duplicate_of = 33;
 
 	int64 unsubscribed_at = 34;
 	int64 spamreported_at = 35;
+
+	int64 attempt_index = 39;
+	int64 pong_index = 40;
 }
 
 message CampaignSendLog {
