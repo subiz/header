@@ -5670,6 +5670,8 @@ message Campaign {
 	int64 state_updated_at = 50; // only save time user (agent,accout) updated
 	string state_updated_by = 52;
 	string from_page = 54; // lead
+
+	int64 modified = 57;
 }
 
 message OutboundCallCampaign {
@@ -8244,33 +8246,33 @@ message AIFunction {
 	string additional_prompt = 12;
 	// assign agent
 	/*
-This function creates an Order. The input parameters will be defined based on extracted information from conversation context. It will return order object in a JSON format.
-The returned fields are:
-- order_id: ID of the order
-- order_number: Number of the order
-- created: timestamp at the moment order is created
-*/
+		This function creates an Order. The input parameters will be defined based on extracted information from conversation context. It will return order object in a JSON format.
+		The returned fields are:
+		- order_id: ID of the order
+		- order_number: Number of the order
+		- created: timestamp at the moment order is created
+	*/
 	string url = 6;
 	string method = 7; // GET, POST, DELETE
 	repeated KV headers = 8;
 	JSONSchema parameters = 10;
 	int64 disabled = 11;
 	/* JSON schema
-{
-	"type": "object",
-	"properties": {
-		"name": {
-			"type": "string",
-			"description": "name of the customer"
-		},
-		"email": {
-			"type": "string",
-			"description": "Email of the user"
-		}
-  },
-	"required": ["email"]
-}
-*/
+		 {
+		 "type": "object",
+		 "properties": {
+		 "name": {
+		 "type": "string",
+		 "description": "name of the customer"
+		 },
+		 "email": {
+		 "type": "string",
+		 "description": "Email of the user"
+		 }
+		 },
+		 "required": ["email"]
+		 }
+	*/
 }
 
 message AIIntent {

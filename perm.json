@@ -77,7 +77,7 @@
     "scope": "view_other_convos agent",
     "perm": {
       "call_campaign": "create update delete",
-      "campaign": "create update delete",
+      "campaign": "read create update delete",
       "knowledge_base": "update create delete",
       "report": "read",
       "article": "create delete update",
