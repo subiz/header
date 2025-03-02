@@ -162,7 +162,22 @@ message Attachment {
 message Message {
 	string text = 3;
 	string msg_id = 4;
-	string payload = 5;
+
+	// { event_name: "oa_send_template", app_id: "..203462..", sender: { id: "..5926309.." }, recipient: { id: "..4840.." },
+  // message: {
+	// payload: {
+	//  checksum: "1665f6fdafa",
+	//link_url:
+	//    "https://zinst-stc.zdn.vn/static/3m/13507/20250303/U5HXR5yoKZauDafQSZ9VMZX3ULbLQquvGIr7Md59PYrsUN5dTab2I3bDGM5XDp9hKIrjC4nKRp5GU3LOTcrgHsfIQabPRpDpDrWjL64sHcP5QsbLD5S?data=html",
+	//  zinstant_id: "templateId=13507",
+	//  text: "Trung tâm xúc tiến..",
+	//},
+	// msg_id: "..5c153377618..",
+  // },
+  // timestamp: "1740936482759",
+	// }
+	// string payload = 5; // sometime it text!, sometime its object
+
 	string title = 9;
 
 	repeated string msg_ids = 6;
