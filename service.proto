@@ -865,10 +865,11 @@ service Speex {
 }
 
 service CampaignMgr {
-	rpc ListCampaigns(Ids) returns (header.Campaigns);
-	rpc ReadCampaign(Id) returns (header.Campaign);
-	rpc CreateCampaign(header.Campaign) returns (header.Campaign);
-	rpc UpdateCampaign(header.Campaign) returns (header.Campaign);
+	rpc ListCampaigns(Ids) returns (header.Response);
+	rpc ReadCampaign(Id) returns (header.Response);
+	rpc CreateCampaign(header.Campaign) returns (header.Response);
+	rpc UpdateCampaign(header.Campaign) returns (header.Response);
+	rpc MatchCampaigns(Ids) returns (header.Response);
 	rpc DeleteCampaign(Id) returns (Empty);
 	rpc OnEvent(header.Event) returns (Empty);
 	rpc ListCampaignSendLog(header.CampaignSendLogRequest) returns (header.CampaignSendLog);

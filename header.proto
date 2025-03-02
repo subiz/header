@@ -50,9 +50,10 @@ message NotiData {
 	int64 campaign_start_at = 10;
 	int64 campaign_state_updated_at = 11;
 	int64 campaign_num_errors = 12;
-	int64 campaign_num_sents = 15;
-	string campaign_cancelled_by = 13;
-	string campaign_status = 14; //  active, pause, completed
+	int64 campaign_num_acks = 15;
+	int64 campaign_num_success = 16;
+	string campaign_cancelled_by = 17;
+	string campaign_status = 18; //  active, pause, completed
 }
 
 // push noti
@@ -1320,9 +1321,6 @@ message Message {
 
 	map<string, Block> i18n_block = 23;
 
-	// bool is_private = 22;
-
-	// bool is_pinned = 24;
 	int64 pinned = 25;
 	string pinned_by = 26;
 
@@ -5610,23 +5608,6 @@ message UserSegment {
 	string by = 8; // manually
 }
 
-message Campaigns {
-	common.Context ctx = 1;
-	string account_id = 2;
-	repeated Campaign campaigns = 3;
-	string anchor = 4;
-	int64 total = 5;
-}
-
-message UserCampaign {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string user_id = 3;
-	string campaign_id = 4;
-	int64 created = 5;
-	string status = 6;
-}
-
 message Campaign {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -5845,10 +5826,13 @@ message CampaignSendLogEntry {
 	int64 ack_at = 23; // from pong (conversation ack back)
 	int64 sent_at = 24;
 	int64 delivered_at = 26; // from pong
+	int64 bounced_at = 27; // from pong
+	string duplicate_of_user = 28;
+	string duplicate_of_message = 29;
 
 	repeated string tried_profiles = 32; // server only
-	int64 unsubscribed_at = 34;
-	int64 spamreported_at = 35;
+	int64 unsubscribed_at = 34; // from pong
+	int64 spam_reported_at = 35; // from pong
 
 	int64 attempt_index = 39;
 }
@@ -5873,15 +5857,18 @@ message BroadcastCampaignMetrics {
 		int64 seen_count = 10;
 		int64 error_count = 11;
 		int64 unsubscribed_count = 12;
+		int64 spam_reported_count = 13;
+		int64 bounced_count = 14;
 
-		int64 duplicate_sent_count = 13;
-		int64 duplicate_clicked_count = 14;
-		int64 duplicate_delivered_count = 15;
-		int64 duplicate_received_count = 16;
-		int64 duplicate_seen_count = 17;
-		int64 duplicate_error_count = 18;
-
-		int64 spamreport_count = 19;
+		int64 duplicate_sent_count = 20;
+		int64 duplicate_clicked_count = 21;
+		int64 duplicate_delivered_count = 22;
+		int64 duplicate_received_count = 23;
+		int64 duplicate_seen_count = 24;
+		int64 duplicate_error_count = 25;
+		int64 duplicate_unsubscribed_count = 26;
+		int64 duplicate_spam_reported_count = 27;
+		int64 duplicate_bounced_count = 28;
 	}
 
 	common.Context ctx = 1;
@@ -6449,7 +6436,7 @@ message Response {
 	EmailSignature email_signature = 191;
 
 	repeated Campaign campaigns = 192;
-	Campaigns campaign = 193;
+	Campaign campaign = 193;
 }
 
 message ReportCount {
