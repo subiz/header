@@ -6140,6 +6140,23 @@ message WorkflowAction {
 	ActionStartThread start_thread = 102;
 	ActionSetVariable set_variable = 103;
 	ActionCallWorkflow call_workflow = 104;
+	ActionAssignLead assign_lead = 105;
+}
+
+message ActionAssignLead {
+
+	// all_agents = 0;
+	// agentgroup = 2;
+	// agents = 3; // == ordered
+	// most_recent = 4;
+	// roundrobin_all_agents = 5;
+	// roundrobin_agents = 6;
+
+	// random_agents = 21;
+	// most_idle_agents = 22;
+
+	string strategy = 5;
+	repeated string assign_tos = 6;
 }
 
 // this action push to stack
