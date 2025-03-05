@@ -882,6 +882,8 @@ service CampaignMgr {
 	rpc RemoveOutboudCall(header.OutboundCallEntry) returns (header.Empty);
 	rpc ReportOutboundCalls(header.OutboundCallReportRequest) returns(header.OutboundCallReportResponse);
 	rpc ReassignOutboundCall(ListOutboundCallRequest) returns (header.Empty);
+
+	rpc SendTestMessage(TestMessageRequest) returns (header.Response);
 }
 
 service CreditMgr {
