@@ -5672,6 +5672,8 @@ message Campaign {
 	string from_page = 54; // lead
 
 	int64 modified = 57;
+
+	int64 total_credit_spend_fpv = 58;
 }
 
 message OutboundCallCampaign {
@@ -8649,6 +8651,8 @@ message ZNSTemplate {
 	string zalo_requested_by = 13;
 	string zalo_status_reason = 14;
 	int64 zalo_status_updated = 15;
+
+	int64 total_credit_spend_fpv = 16;
 }
 
 message ZnsTemplate {
