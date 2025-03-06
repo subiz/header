@@ -895,7 +895,7 @@ service CreditMgr {
 	rpc AddCredit(header.Credit) returns (header.Response); // credit
 	rpc DeleteCredit(header.Id) returns (header.Response); // empty
 	rpc UpdateCredit(header.Credit) returns (header.Response); // credit
-
+	rpc MatchCredits(Ids) returns (header.Response);
 	rpc GetTotalCreditSpend(header.Id) returns (header.Response);
 }
 
