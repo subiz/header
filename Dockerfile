@@ -1,4 +1,4 @@
-FROM golang:1.23.0
+FROM golang:1.24.0
 WORKDIR /tmp
 RUN apt update && apt install -y unzip curl
 
@@ -16,7 +16,8 @@ RUN wget https://github.com/protocolbuffers/protobuf/releases/download/v28.3/pro
 RUN unzip protoc.zip
 
 # install protoc gengo
-RUN go install github.com/golang/protobuf/protoc-gen-go@v1.5.4
+RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.5
+RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.5.1
 
 ENV PROTOC=/tmp/bin/protoc
 
