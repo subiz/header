@@ -23,7 +23,7 @@ for i in `ls -R`; do
 
 	if [[ $i == *".proto" ]]; then
 		printf "\033[0;90m["%d"] compiling %s %s \033[0;31m\n" $TOTAL $LAST_DIR /$i
-		$PROTOC -I/tmp/include -I. --go_out=plugins=grpc:. --proto_path=./  $LAST_DIR/$i &
+		$PROTOC -I/tmp/include -I. --go_out=. --go-grpc_out=. --proto_path=./  $LAST_DIR/$i &
 
 		ALLPROTO="$ALLPROTO $LAST_DIR/$i"
 		let "TOTAL += 1"

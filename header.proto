@@ -6458,6 +6458,8 @@ message Response {
 
 	repeated Campaign campaigns = 192;
 	Campaign campaign = 193;
+
+	CreditUsage credit_usage = 194;
 }
 
 message ReportCount {
@@ -6780,12 +6782,12 @@ message OutboundCallUpdateEvent {
 
 message String {
 	string str = 1;
-	string version =2; //version 2 is version for convo
+	string version = 2; //version 2 is version for convo
 }
 
 message Number {
 	int64 number = 1;
-	string version =2; //version 2 is version for convo
+	string version = 2; //version 2 is version for convo
 }
 
 message StrNumM {
@@ -8656,6 +8658,7 @@ message ZNSTemplate {
 	int64 zalo_status_updated = 15;
 
 	int64 total_credit_spend_fpv = 16;
+	int64 total_sent = 17;
 }
 
 message ZnsTemplate {
@@ -8740,4 +8743,12 @@ message TestMessageRequest {
 	string to_user_id = 6;
 	string to_phone_number = 7;
 	string to_email_addrses = 8;
+}
+
+message CreditUsage {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string credit_id = 4;
+	int64 fpv_total_spent = 10;
+	int64 fpv_total_quatity = 11;
 }

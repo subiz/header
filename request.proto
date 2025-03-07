@@ -544,7 +544,7 @@ message CreateAgentRequest {
 	string initial_password = 23;
 	// DashboardAgent dashboard_setting = 40;
 	repeated string scopes = 41; // owner, supervisor
-	optional int64 extension = 43; // 2343 3442
+	int64 extension = 43; // 2343 3442
 }
 
 message ListConversationsRequest {

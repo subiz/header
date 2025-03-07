@@ -185,21 +185,6 @@ message Token {
 	optional string account_id = 4;
 }
 
-message WarnInactiveEmail {
-	optional common.Context ctx = 1;
-	optional string from = 8;
-	optional string to = 2;
-	optional string account_id = 3;
-	optional string owner_id = 4;
-	optional string owner_name = 7;
-	optional string owner_email = 9;
-	optional int64 inactive_date = 10; // in ms
-	optional int64 days_before_inactive = 11;
-	optional string account_name = 12;
-	optional string plan = 13;
-	optional int64 num_contacts = 14;
-}
-
 message InvoiceEmail {
 	optional common.Context ctx = 1;
 	optional string account_id = 2;
