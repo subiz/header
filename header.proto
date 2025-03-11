@@ -1704,8 +1704,8 @@ message Integration {
 	string zalo_linkedZCA = 68;
 	ZaloOAZNSQuota zalo_zns_quota = 130;
 	repeated string zalo_zns_template_tags = 131;
-	int64 zalo_oa_zns_current_quality = 132;
-	int64 zalo_oa_zns_7_day_quality = 133;
+	string zalo_zns_current_quality = 132; // HIGH, MEDIUM, LOW, UNDEFINED
+	string zalo_zns_7_day_quality = 133;
 
 	// for google review
 	float google_review_average_rating = 70;
