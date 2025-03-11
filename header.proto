@@ -1435,6 +1435,7 @@ message MessagePong {
 	int32 rating = 12;
 	string comment = 13;
 	string zns_message_id = 14;
+	Error error = 15; // use this instead of ack_error
 }
 
 message MessageButton {
@@ -1701,7 +1702,10 @@ message Integration {
 	string zalo_package_valid_through_date = 66;
 	string zalo_package_auto_renew_date = 67;
 	string zalo_linkedZCA = 68;
-	string zns_client_id = 69;
+	ZaloOAZNSQuota zalo_zns_quota = 130;
+	repeated string zalo_zns_template_tags = 131;
+	int64 zalo_oa_zns_current_quality = 132;
+	int64 zalo_oa_7_day_quality = 133;
 
 	// for google review
 	float google_review_average_rating = 70;
@@ -8637,6 +8641,16 @@ message ZNSTemplateRequest {
 	repeated ZNSTemplateParam params = 15;
 	string note = 16;
 	string tracking_id = 17;
+}
+
+message ZaloOAZNSQuota {
+	int64 daily_quota = 4;
+	int64 remaining_quota = 5;
+	int64 daily_quotaPromotion = 6;
+	int64 remaining_quota_promotion = 7;
+	int64 monthly_promotion_quota = 8;
+	int64 remaining_monthly_promotion_quota = 9;
+	int64 estimated_next_month_promotion_quota = 10;
 }
 
 message ZNSTemplate {

@@ -2413,6 +2413,19 @@ func ToErr(err *Error) *log.AError {
 	}
 }
 
+func FromErr(err *log.AError) *Error {
+	if err == nil {
+		return nil
+	}
+	return &Error{
+		Id:      err.Id,
+		Code:    err.Code,
+		Number:  err.Number,
+		Fields:  err.Fields,
+		Message: err.Message,
+	}
+}
+
 // return valid utf8 string
 func CleanString(str string) string {
 	str = strings.Join(strings.Split(str, "\000"), "")
