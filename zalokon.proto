@@ -36,10 +36,10 @@ message OfficialAccount {
 
 	string integration_link_status = 29; // active, failed
 
-	ZaloOAZNSQuota zalo_zns_quota = 130;
-	repeated string zalo_zns_template_tags = 31;
-	int64 zalo_oa_zns_current_quality = 32;
-	int64 zalo_oa_7_day_quality = 33;
+	ZaloOAZNSQuota zns_quota = 130;
+	repeated string zns_template_tags = 31;
+	int64 zns_current_quality = 32;
+	int64 zns_7_day_quality = 33;
 }
 
 message ZaloOAZNSQuota {
