@@ -6969,6 +6969,8 @@ message Workflow {
 	bool is_system = 34; // auto assign tag, auto end chat
 	int64 exit_when_not_match_trigger = 35;
 	repeated KvSetting kv_settings = 36;
+
+	int64 total_credit_spend_fpv = 37;
 }
 
 message KvSetting {

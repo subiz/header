@@ -35,6 +35,21 @@ message OfficialAccount {
 	string linkedZCA = 28;
 
 	string integration_link_status = 29; // active, failed
+
+	ZaloOAZNSQuota zalo_zns_quota = 130;
+	repeated string zalo_zns_template_tags = 31;
+	int64 zalo_oa_zns_current_quality = 32;
+	int64 zalo_oa_7_day_quality = 33;
+}
+
+message ZaloOAZNSQuota {
+	int64 dailyQuota = 4;
+	int64 remainingQuota = 5;
+	int64 dailyQuotaPromotion = 6;
+	int64 remainingQuotaPromotion = 7;
+	int64 monthlyPromotionQuota = 8;
+	int64 remainingMonthlyPromotionQuota = 9;
+	int64 estimatedNextMonthPromotionQuota = 10;
 }
 
 message ZaloUser {
@@ -76,7 +91,15 @@ message ResponseData {
 	int64 tag = 14;
 	int64 price = 15;
 	int64 timeout = 17;
-	string preview_url=  18;
+	string preview_url = 18;
+
+	int64 dailyQuota = 40;
+	int64 remainingQuota = 41;
+	int64 dailyQuotaPromotion = 42;
+	int64 remainingQuotaPromotion = 43;
+	int64 monthlyPromotionQuota = 44;
+	int64 remainingMonthlyPromotionQuota = 45;
+	int64 estimatedNextMonthPromotionQuota = 46;
 }
 // {"data":{"oa_id":"935022139843821727","template_name":"Sample ZNS template (Test)","template_status":"PENDING_REVIEW","price":300,"preview_url":"https://account.zalo.cloud/znspreview/RsPcVWEAM-6z9ofcb0lAlQ==","template_id":407444,"template_type":2,"tag":1,"app_id":"899912034629887500","timeout":15000},"error":0,"message":"Success"}
 
