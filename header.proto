@@ -744,7 +744,6 @@ message Data {
 	ZNSTemplate zns_template = 135;
 	ZNSMedia zns_media = 136;
 	EmailSignature email_signature = 137;
-	AIBot ai_bot = 138;
 }
 
 message ConversationMeta {
@@ -6109,7 +6108,7 @@ message WorkflowAction {
 
 	string scope = 7; // computed
 	bool is_sync_message = 8; //valid for ation wait
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_worfklow
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6466,9 +6465,6 @@ message Response {
 	Campaign campaign = 193;
 
 	CreditUsage credit_usage = 194;
-
-	repeated AIBot ai_bots = 196;
-	AIBot ai_bot = 197;
 }
 
 message ReportCount {
@@ -8173,52 +8169,6 @@ message SupervisorAIAgent {
 	bool is_supervisor = 9;
 }
 
-message AIBot {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-	string fullname = 4; // Q/A bot
-	File avatar = 5;
-	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
-	string avatar_url = 7;
-
-	string model = 8; // gpt-4o-mini-2024-07-18
-
-	repeated SubAIAgent sub_agents = 9;
-	string prompt = 10;
-
-	// for rag context
-	int64 use_custom_data_source = 11;
-	repeated string data_sources = 12; //
-
-	string token_limit = 13; // short, balanced, long
-	int64 temperature = 14; // 50% -> 50
-
-	repeated string data_groups = 15;
-	repeated int64 data_group_last_file_modified = 16;
-
-	int64 num_training_in_progress = 17;
-	int64 num_training_failed = 18;
-	int64 total_training_files = 19;
-
-	// string training_status = 24;
-	int64 context_guard = 22;
-	Message context_guard_message = 23;
-	repeated AIFunction functions = 24;
-	HumanHandoverSetting human_handover = 25;
-	Message fixed_answer = 26;
-
-	int64 created = 30;
-	string created_by = 31;
-
-	int64 updated = 32;
-	string updated_by = 33;
-
-	int64 modified = 34;
-
-	string state = 35; // active, inactive
-}
-
 message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8234,7 +8184,6 @@ message AIAgent {
 	// string workflow_id = 11;
 	SupervisorAgentSetting supervisor_setting = 12;
 	QnAAgentSetting qna_setting = 13;
-	FlowAgentSetting flow_setting = 15;
 	HumanHandoverSetting human_handover = 16;
 	FixedAgentSetting fixed_setting = 21;
 
@@ -8245,13 +8194,38 @@ message AIAgent {
 	string updated_by = 20;
 
 	string state = 22;// active, inactive
+
+	string model = 23; // gpt-4o-mini-2024-07-18
+	repeated SubAIAgent sub_agents = 24;
+	string prompt = 25;
+
+	// for rag context
+	int64 use_custom_data_source = 26;
+	repeated string data_sources = 27; //
+
+	string token_limit = 28; // short, balanced, long
+	int64 temperature = 29; // 50% -> 50
+
+	repeated string data_groups = 30;
+	repeated int64 data_group_last_file_modified = 31;
+
+	int64 num_training_in_progress = 32;
+	int64 num_training_failed = 33;
+	int64 total_training_files = 34;
+
+	// string training_status = 24;
+	int64 context_guard = 35;
+	Message context_guard_message = 36;
+	repeated AIFunction functions = 37;
+	Message unabled_to_answer_message = 38;
+	Message error_message = 40;
+
+	int64 modified = 41;
+	int64 version = 42;
 }
 
 message FixedAgentSetting {
 	Message answer = 14;
-}
-
-message FlowAgentSetting {
 }
 
 message SupervisorAgentSetting {
