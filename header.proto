@@ -2120,6 +2120,7 @@ message ActionUpdateConversation {
 message ActionJump {
 	string action_id = 2;
 	bool to_first_action = 3;
+	string action_id_var = 4;
 }
 
 message ActionSwitchLanguage {
@@ -6148,6 +6149,7 @@ message WorkflowAction {
 	ActionSetVariable set_variable = 103;
 	ActionCallWorkflow call_workflow = 104;
 	ActionAssignLead assign_lead = 105;
+	string output_error_variable = 106;
 }
 
 message ActionAssignLead {
@@ -6172,11 +6174,23 @@ message ActionCallWorkflow {
 	string action_id = 5; // optional
 }
 
+// name = operator(arg1, arg2, arg3)
+// $agid = pop($parent) -> name=$agid, operator=pop, arg1=$parent
 message ActionSetVariable {
 	string name = 3; // variable name: a, b, c
-	string value = 4; // json: [] "string", 0, true, false, 123, undefined, null
-	string var_value = 5;
-	string operator = 6; // inc, dec, pop, not, append, prepend, set, unset, shift
+	string value = 4; // json: [] "string", 0, true, false, 123, undefined, null, @depreacted, use arg1
+	string var_value = 5; // @depreacted, use var_arg1
+
+	string method = 6; // assign==set==default, inc, dec, pop, not, append, prepend, set, unset, shift
+
+	string arg1 = 10; // json: [] "string", 0, true, false, 123, undefined, null
+	string var_arg1 = 11; // json: [] "string", 0, true, false, 123, undefined, null
+
+	string arg2 = 14;
+	string var_arg2 = 15;
+
+	string arg3 = 16;
+	string var_arg3 = 17;
 }
 
 message ActionStartThread {
@@ -6222,6 +6236,7 @@ message ActionLLM {
 	bool conversation_history = 9; // inject chat history to system instructionë
 	// string chatgpt_vector_store_id = 10;
 	repeated AIFunction functions = 11; // function calling
+	int64 timeout_sec = 12;
 }
 
 message ActionCreateOrder {
