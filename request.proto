@@ -845,3 +845,17 @@ message CreditSpendLogRequest {
 	int64 limit = 10; // max : 20
 	string anchor = 11;
 }
+
+message RunAiAgentRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ai_agent = 3;
+	string conversation_id = 4;
+}
+
+message RunAIBotRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ai_bot = 3;
+	string conversation_id = 4;
+}
