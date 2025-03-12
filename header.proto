@@ -6178,13 +6178,10 @@ message ActionCallWorkflow {
 // $agid = pop($parent) -> name=$agid, operator=pop, arg1=$parent
 message ActionSetVariable {
 	string name = 3; // variable name: a, b, c
-	string value = 4; // json: [] "string", 0, true, false, 123, undefined, null, @depreacted, use arg1
-	string var_value = 5; // @depreacted, use var_arg1
+	string arg1 = 4; // json: [] "string", 0, true, false, 123, undefined, null
+	string var_arg1 = 5;
 
-	string method = 6; // assign==set==default, inc, dec, pop, not, append, prepend, set, unset, shift
-
-	string arg1 = 10; // json: [] "string", 0, true, false, 123, undefined, null
-	string var_arg1 = 11; // json: [] "string", 0, true, false, 123, undefined, null
+	string method = 6; // assign==set==default, inc, dec, pop, not, append, prepend, set, unset, shift, parsejson
 
 	string arg2 = 14;
 	string var_arg2 = 15;
@@ -6237,6 +6234,15 @@ message ActionLLM {
 	// string chatgpt_vector_store_id = 10;
 	repeated AIFunction functions = 11; // function calling
 	int64 timeout_sec = 12;
+
+	string response_format = 13; // json_schema
+	LLMResponseJSONSchemaFormat json_schema = 14;
+}
+
+message LLMResponseJSONSchemaFormat {
+	string name = 4;
+	bool strict = 5;
+	JSONSchema schema = 6;
 }
 
 message ActionCreateOrder {
