@@ -6178,15 +6178,15 @@ message ActionCallWorkflow {
 // $agid = pop($parent) -> name=$agid, operator=pop, arg1=$parent
 message ActionSetVariable {
 	string name = 3; // variable name: a, b, c
-	string arg1 = 4; // json: [] "string", 0, true, false, 123, undefined, null
+	string arg1 = 4; // // a valid JSON, json: [] "string", 0, true, false, 123, undefined, null
 	string var_arg1 = 5;
 
-	string method = 6; // assign==set==default, inc, dec, pop, not, append, prepend, set, unset, shift, parsejson
+	string method = 6; // assign==set==default, inc, dec, pop, not, append, prepend, set, unset, shift, parse_json
 
-	string arg2 = 14;
+	string arg2 = 14; // a valid JSON
 	string var_arg2 = 15;
 
-	string arg3 = 16;
+	string arg3 = 16; // a valid JSON
 	string var_arg3 = 17;
 }
 
@@ -8179,17 +8179,6 @@ message ArticleNode {
 	repeated ArticleNode children = 7;
 }
 
-message SupervisorAIAgent {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string id = 3;
-
-	string fullname = 4; // Q/A bot
-	string description = 5; // dung de tra loi cac cau hoi thuong gap cua subiz
-
-	bool is_supervisor = 9;
-}
-
 message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8201,12 +8190,12 @@ message AIAgent {
 
 	string provider = 8; // openai
 	// string chatgpt_assistant_id = 9; // if use open ai chatgpt
-	string template = 10; // fixed, qna, supervisor, flow
+	// string template = 10; // fixed, qna, supervisor, flow
 	// string workflow_id = 11;
-	SupervisorAgentSetting supervisor_setting = 12;
-	QnAAgentSetting qna_setting = 13;
+	// SupervisorAgentSetting supervisor_setting = 12;
+	// QnAAgentSetting qna_setting = 13;
 	HumanHandoverSetting human_handover = 16;
-	FixedAgentSetting fixed_setting = 21;
+	// FixedAgentSetting fixed_setting = 21;
 
 	int64 created = 17;
 	string created_by = 18;
@@ -8217,7 +8206,7 @@ message AIAgent {
 	string state = 22;// active, inactive
 
 	string model = 23; // gpt-4o-mini-2024-07-18
-	repeated SubAIAgent sub_agents = 24;
+	repeated string sub_agents = 24;
 	string prompt = 25;
 
 	// for rag context
@@ -8243,49 +8232,9 @@ message AIAgent {
 
 	int64 modified = 41;
 	int64 version = 42;
-}
 
-message FixedAgentSetting {
-	Message answer = 14;
-}
-
-message SupervisorAgentSetting {
-	string model = 5;  // gpt-4o-mini-2024-07-18
-
-	// Can mo ta: agent lam viec gi
-	string supervisor_prompt = 10;
-	// string workflow_id = 7; // wfaiagnt1
-
-	repeated SubAIAgent sub_agents = 11;
-	repeated SupervisorRule rules = 12;
-}
-
-message QnAAgentSetting {
-	string model = 5;  // gpt-4o-mini-2024-07-18
-	string prompt = 6;
-
-	// for rag context
-	int64 use_custom_data_source = 7;
-	repeated string data_sources = 8; //
-
-	string token_limit = 9; // short, balanced, long
-	int64 temperature = 10; // 50% -> 50
-
-	repeated string data_groups = 19;
-	repeated int64 data_group_last_file_modified = 20;
-
-	int64 num_training_in_progress = 21;
-	int64 num_training_failed = 22;
-	int64 total_training_files = 23;
-
-	// string training_status = 24;
-	bool context_guard = 25;
-	Message context_guard_message = 26;
-
-	// string chatgpt_vector_store_id = 27;
-
-	repeated AIFunction functions = 28;
-	HumanHandoverSetting human_handover = 29;
+	string transfer_prompt = 43;
+	string generated_intent = 44;
 }
 
 message HumanHandoverSetting {
@@ -8306,6 +8255,7 @@ message JSONSchema {
 	int64 exclusiveMinimum = 10;
 	repeated string required = 11;
 	bool additionalProperties = 12;
+	repeated string enum = 13;
 }
 
 message AIFunction {
