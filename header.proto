@@ -6635,20 +6635,6 @@ message Credit {
 	int64 negative_at = 19;
 }
 
-message CreditSnapshoot {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string credit_id = 3;
-
-	int64 unix_hour = 4;
-
-	int64 balance_fpv = 6;
-
-	int64 max_rule_usage = 10;
-	// Free tier remain
-	int64 rules = 20; // per month
-}
-
 message CreditSpendEntry {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -6664,8 +6650,10 @@ message CreditSpendEntry {
 	string service_id = 12; //
 	string service_type = 13; // campaign, bot, popup
 
-	string item = 14; // like product: zns, call
+	string item = 14; // type of product used, e.g: zns, call, llm
 	string item_id = 15; // product id
+
+	repeated string tags = 18; // indexing [model.23048234, conversation.2304823904]
 
 	string by_agent_id = 16;
 }
@@ -6716,6 +6704,28 @@ message CreditEntryData {
 	CreditEntryDataEmail email = 5;
 	CreditEntryDataId file = 6;
 	CreditEntryDataZaloRequestCall zalo_request_call = 7;
+	CreditEntryDataLLMCompletion llm_completion = 8;
+	CreditEntryDataTextEmbedding text_embedding = 9;
+}
+
+message CreditEntryDataLLMCompletion {
+	string purpose = 4; // chat, chunking
+	string model = 6; // gpt-4o-mini-2024-07-18, gemini-2.0-flash
+	string conversation_id = 8; // optional
+	string prompt = 9; // top 100
+	string output = 10; // top 100
+	int64 prompt_length = 11;
+	int64 output_length = 12;
+
+	int64 prompt_tokens = 14;
+	int64 completion_tokens = 15;
+	int64 total_tokens = 16;
+}
+
+message CreditEntryDataTextEmbedding {
+	string text = 4; // top 100 character
+	string model = 6; // text-embedding-3-small
+	int64 length = 8;
 }
 
 message CreditSpendEntries {
