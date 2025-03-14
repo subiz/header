@@ -8665,6 +8665,8 @@ message ZNSTemplate {
 
 	int64 total_credit_spend_fpv = 16;
 	int64 total_sent = 17;
+
+	int64 unit_price_fpv = 18;
 }
 
 message ZnsTemplate {
