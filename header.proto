@@ -6136,8 +6136,6 @@ message WorkflowAction {
 	ActionAskInfo ask_info = 46;
 
 	// kv.chatgpt_thread_id
-	ActionLLMBranching llm_branching = 50;
-	// ActionLLMRewriteQuery llm_rewrite_query = 51;
 	ActionLLM llm = 52;
 	// ActionSearchProduct search_product = 53;
 	// ActionRAG rag = 54;
@@ -6212,20 +6210,9 @@ message ActionAskInfo {
 	string on_unhandled = 9; // next-action-id
 }
 
-message LLMClassifyBranch {
-	WorkflowCondition condition = 4;
-	string action_id = 5;
-}
-
-message ActionLLMBranching {
-	string model = 5;
-	string system_instruction = 6; // phan loai {variable} vao nhung mau duoi day
-	repeated LLMClassifyBranch branches = 7;
-	string default_action_id = 8;
-}
-
 message ActionLLM {
 	string system_instruction = 4;
+	string provider = 3; // chatgpt (default), gemini
 	string model = 5; // chatgpt-4
 	Block system_instruction_block = 6; // dynamic prompt
 	int64 temperature = 7; // 10000 * 10000
