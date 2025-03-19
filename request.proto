@@ -851,11 +851,5 @@ message RunAiAgentRequest {
 	string account_id = 2;
 	string ai_agent = 3;
 	string conversation_id = 4;
-}
-
-message RunAIBotRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string ai_bot = 3;
-	string conversation_id = 4;
+	int64 ai_agent_version = 5; // 0 -> latest
 }

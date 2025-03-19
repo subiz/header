@@ -6963,6 +6963,7 @@ message Workflow {
 	int64 deleted = 20;
 
 	int64 version = 17;
+	int64 active_version = 21;
 
 	string recurring_mode = 18; // empty = one_time, debounce, throttle
 	int64 recurring_interval_sec = 28;
@@ -8232,6 +8233,7 @@ message AIAgent {
 
 	string transfer_prompt = 43;
 	string generated_intent = 44;
+	int64 active_version = 45;
 }
 
 message HumanHandoverSetting {

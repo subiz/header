@@ -9213,7 +9213,6 @@ type WorkflowMgrClient interface {
 	GetAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchAIAgent(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	// rpc RunTestAiAgent(RunTestAiAgentRequest) returns (Empty); // workflow_session
 	StartAiAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListAIDataGroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateAIDataGroup(ctx context.Context, in *AIDataGroup, opts ...grpc.CallOption) (*Response, error)
@@ -9669,7 +9668,6 @@ type WorkflowMgrServer interface {
 	GetAIAgent(context.Context, *Id) (*Response, error)
 	MatchAIAgent(context.Context, *Ids) (*Response, error)
 	DeleteAIAgent(context.Context, *Id) (*Response, error)
-	// rpc RunTestAiAgent(RunTestAiAgentRequest) returns (Empty); // workflow_session
 	StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
 	ListAIDataGroup(context.Context, *Id) (*Response, error)
 	CreateAIDataGroup(context.Context, *AIDataGroup) (*Response, error)
