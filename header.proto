@@ -1048,6 +1048,8 @@ message ConversationMember {
 	int64 total_messages = 35;
 	int64 last_action_at = 37;
 	string is_subscribed = 38; // "", off, on
+
+	string invite_code = 40; // for debug only
 }
 
 message StartRequest {
@@ -1185,7 +1187,6 @@ message Conversation {
 	Error error = 80;
 
 	string access = 82; // default=public, private
-
 	MessageReferral referrer = 83;
 }
 

@@ -852,6 +852,7 @@ message RunAiAgentRequest {
 	string ai_agent = 3;
 	string conversation_id = 4;
 	int64 ai_agent_version = 5; // 0 -> latest
+	string invite_code = 6;
 }
 
 message StartWorkflowSessionRequest {
