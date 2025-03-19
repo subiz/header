@@ -853,3 +853,15 @@ message RunAiAgentRequest {
 	string conversation_id = 4;
 	int64 ai_agent_version = 5; // 0 -> latest
 }
+
+message StartWorkflowSessionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	string action_id = 4; // current executing
+
+	//string status = 13; // creating, running, waiting, ended, paused, error
+	string obj_id = 17; // for this obj
+	string thread_id = 18;
+	int64 version = 19; // workflow version
+}

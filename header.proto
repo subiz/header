@@ -6582,17 +6582,6 @@ message WorkflowSession {
 	string last_llm_message_id = 29;
 }
 
-message StartWorkflowSessionRequest {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string workflow_id = 3;
-	string action_id = 4; // current executing
-
-	//string status = 13; // creating, running, waiting, ended, paused, error
-	string obj_id = 17; // for this obj
-	string thread_id = 18;
-}
-
 message SchedulerTask {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -7936,7 +7925,6 @@ message WorkflowPulse {
 	string thread_id = 10;
 
 	string workflow_action_id = 11; // could be difference with workflow_id id since we allow function call
-
 }
 
 message WorkflowTimeup {
