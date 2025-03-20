@@ -1048,8 +1048,6 @@ message ConversationMember {
 	int64 total_messages = 35;
 	int64 last_action_at = 37;
 	string is_subscribed = 38; // "", off, on
-
-	string invite_code = 40; // for debug only
 }
 
 message StartRequest {
@@ -8175,14 +8173,7 @@ message AIAgent {
 	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
 	string avatar_url = 7;
 
-	string provider = 8; // openai
-	// string chatgpt_assistant_id = 9; // if use open ai chatgpt
-	// string template = 10; // fixed, qna, supervisor, flow
-	// string workflow_id = 11;
-	// SupervisorAgentSetting supervisor_setting = 12;
-	// QnAAgentSetting qna_setting = 13;
 	HumanHandoverSetting human_handover = 16;
-	// FixedAgentSetting fixed_setting = 21;
 
 	int64 created = 17;
 	string created_by = 18;
@@ -8196,21 +8187,9 @@ message AIAgent {
 	repeated string sub_agents = 24;
 	string prompt = 25;
 
-	// for rag context
-	int64 use_custom_data_source = 26;
-	repeated string data_sources = 27; //
-
 	string token_limit = 28; // short, balanced, long
 	int64 temperature = 29; // 50% -> 50
 
-	repeated string data_groups = 30;
-	repeated int64 data_group_last_file_modified = 31;
-
-	int64 num_training_in_progress = 32;
-	int64 num_training_failed = 33;
-	int64 total_training_files = 34;
-
-	// string training_status = 24;
 	int64 context_guard = 35;
 	Message context_guard_message = 36;
 	repeated AIFunction functions = 37;
@@ -8221,8 +8200,23 @@ message AIAgent {
 	int64 version = 42;
 
 	string transfer_prompt = 43;
-	string generated_intent = 44;
+	string generated_intent = 44; // read-only
 	int64 active_version = 45;
+
+	AIDataStore active_data_store = 46;
+	AIDataStore draft_data_store = 47;
+}
+
+message AIDataStore {
+	string scope = 4; // none, all, partial
+	repeated string data_sources = 5; // group id and entry id
+
+	string store_id = 6; // subiz generated
+	string training_store_id = 7; // subiz generated
+	int64 training_started = 8;
+	int64 training_ended = 9;
+	int64 total_files = 10;
+	int64 ready_files = 11;
 }
 
 message HumanHandoverSetting {
@@ -8264,21 +8258,16 @@ message AIFunction {
 	repeated KV headers = 8;
 	JSONSchema parameters = 10;
 	int64 disabled = 11;
-	/* JSON schema
-		 {
-		 "type": "object",
-		 "properties": {
-		 "name": {
-		 "type": "string",
-		 "description": "name of the customer"
-		 },
-		 "email": {
-		 "type": "string",
-		 "description": "Email of the user"
-		 }
-		 },
-		 "required": ["email"]
-		 }
+	/*
+		JSON schema
+		{
+		"type": "object",
+		"properties": {
+		"name": {"type": "string","description": "name of the customer"},
+		"email": {"type": "string","description": "Email of the user"}
+		},
+		"required": ["email"]
+		}
 	*/
 }
 
@@ -8295,15 +8284,6 @@ message SubAIAgent {
 	int64 bias = 6;
 	repeated AIIntent intents = 7;
 	string ai_bot_id = 8;
-}
-
-message SupervisorRule  {
-	// condition
-	// ouput: agent id
-
-	// neu {user.content_view.referer ... }
-	// and so luong tin nhan trong hoi thoai < 3
-	// thi giao cho bot-chat-nham
 }
 
 message AIDataGroup {
