@@ -355,7 +355,6 @@ service WorkflowMgr {
 	rpc MatchDataEntries(Ids) returns (Response);
 
 	rpc ListAIResponseSources(AiResponseSourceRequest) returns (Response);
-	// rpc FlagAIResponse()
 	rpc ListAISuggestions(AiQnaSuggestionRequest) returns (Response);
 	rpc UpdateAIQnASuggestion(AiQnASuggestion) returns (Response);
 	rpc ReadAIQnASuggestion(Id) returns (Response);
@@ -363,6 +362,7 @@ service WorkflowMgr {
 	rpc DeleteAIQnASuggestion(Id) returns (Empty);
 
 	rpc ListAIAgentSpans(LLMSpansRequest) returns (Response);
+	rpc ListAIAgentTraces(LLMTracesRequest) returns (Response);
 }
 
 service ConversationMgr {
