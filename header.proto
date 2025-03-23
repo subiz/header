@@ -6553,6 +6553,7 @@ message WorkflowThread {
 	string workflow_id = 15; // wf for actionid, could be difference with session.workflow since we allow function call
 	int64 last_error_at = 12;
 	int64 last_action_at = 13;
+	string last_trace_id = 14;
 }
 
 message WorkflowStack {
@@ -8006,6 +8007,8 @@ message WorkflowPulse {
 	string thread_id = 10;
 
 	string workflow_action_id = 11; // could be difference with workflow_id id since we allow function call
+	string trace_id = 12;
+	string span_id = 13;
 }
 
 message WorkflowTimeup {
@@ -8015,6 +8018,9 @@ message WorkflowTimeup {
 	string action_id = 9;
 	int64 timeup_sec = 10;
 	string thread_id = 11;
+
+	string trace_id = 12;
+	string span_id = 13;
 }
 
 message AndroidNotificationRequest {
