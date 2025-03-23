@@ -363,6 +363,8 @@ service WorkflowMgr {
 	rpc DeleteAIQnASuggestion(Id) returns (Empty);
 
 	rpc ListAIAgentSpans(LLMSpansRequest) returns (Response);
+	rpc ListAIAgentTraces(LLMTracesRequest) returns (Response);
+	rpc ListAIAgentConversationTraces(LLMTracesRequest) returns (Response);
 }
 
 service ConversationMgr {

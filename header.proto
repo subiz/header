@@ -6114,7 +6114,7 @@ message WorkflowAction {
 
 	string scope = 7; // computed
 	bool is_async = 8; // just go, dont care about revalid for ation wait
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_trace
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6140,7 +6140,6 @@ message WorkflowAction {
 	ActionCreateOrder create_order = 45;
 	ActionAskInfo ask_info = 46;
 
-	// kv.chatgpt_thread_id
 	ActionLLM llm = 52;
 	// ActionSearchProduct search_product = 53;
 	// ActionRAG rag = 54;
@@ -6153,8 +6152,13 @@ message WorkflowAction {
 	ActionCallWorkflow call_workflow = 104;
 	ActionAssignLead assign_lead = 105;
 	ActionSendTyping send_typing = 107;
+	ActionStartTrace start_trace = 108;
 
 	string output_error_variable = 106;
+}
+
+message ActionStartTrace {
+	string id_var = 3; // event_id
 }
 
 message ActionAssignLead {
@@ -6219,14 +6223,13 @@ message ActionAskInfo {
 
 message ActionLLM {
 	string system_instruction = 4;
-	string provider = 3; // chatgpt (default), gemini
 	string model = 5; // chatgpt-4
 	Block system_instruction_block = 6; // dynamic prompt
 	int64 temperature = 7; // 10000 * 10000
 	int64 top_p = 15; // *100000
 	int64 max_token = 8;
 	bool conversation_history = 9; // inject chat history to system instructionë
-	// string chatgpt_vector_store_id = 10;
+
 	repeated AIFunction functions = 11; // function calling
 	int64 timeout_sec = 12;
 
@@ -6483,6 +6486,8 @@ message Response {
 	CreditUsage credit_usage = 194;
 
 	repeated AIAgentSpan ai_agent_spans = 195;
+
+	repeated AIAgentTrace ai_agent_traces = 196;
 }
 
 message ReportCount {
@@ -7026,7 +7031,27 @@ message RAGDocument {
 	string embed_chunk = 11;
 }
 
+message AIAgentTrace {
+	string trace_id = 3;
+	int64 started = 4;
+	int64 total_spans = 5;
+	string input_message_id = 6;
+	string conversation_id = 7;
+	string ouput_message_id = 8;
+
+	string input = 9;
+	string output = 10;
+
+	int64 feedback_at = 11;
+	int64 feedback = 12; // 1 positive, -1 negative
+	int64 workflow_version = 13;
+	int64 total_tokens = 14;
+	int64 duration = 15; // ms
+	int64 created = 16;
+}
+
 message AIAgentSpan {
+	string trace_id = 3;
 	string span_id = 4;
 	int64 started = 5;
 	int64 ended = 6;
@@ -8293,6 +8318,13 @@ message AIAgent {
 	int64 active_version = 45;
 
 	AIDataStore data_store = 47;
+
+	// report
+	int64 credit_spend_last_7days_fpv = 50;
+	int64 total_credit_spend_fpv = 51;
+
+	int64 chat_last_7days = 52;
+	int64 total_chats = 53;
 }
 
 message AIDataStore {
@@ -8369,10 +8401,9 @@ message AIIntent {
 
 message SubAIAgent {
 	string ai_agent_id = 4;
-	int64 stickiness = 5;
-	int64 bias = 6;
+	// int64 stickiness = 5;
+	// int64 bias = 6;
 	repeated AIIntent intents = 7;
-	string ai_bot_id = 8;
 }
 
 message AIDataGroup {
