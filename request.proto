@@ -866,3 +866,12 @@ message StartWorkflowSessionRequest {
 	string thread_id = 18;
 	int64 version = 19; // workflow version
 }
+
+message LLMSpansRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3; // agent_id
+	string session_id = 4;
+	string trace_id = 5;
+	string span_id = 6; // could be empty for filtering
+}

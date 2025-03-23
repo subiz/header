@@ -9186,6 +9186,7 @@ const (
 	WorkflowMgr_ReadAIQnASuggestion_FullMethodName   = "/header.WorkflowMgr/ReadAIQnASuggestion"
 	WorkflowMgr_MatchAIQnASuggestion_FullMethodName  = "/header.WorkflowMgr/MatchAIQnASuggestion"
 	WorkflowMgr_DeleteAIQnASuggestion_FullMethodName = "/header.WorkflowMgr/DeleteAIQnASuggestion"
+	WorkflowMgr_ListAIAgentSpans_FullMethodName      = "/header.WorkflowMgr/ListAIAgentSpans"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9233,6 +9234,7 @@ type WorkflowMgrClient interface {
 	ReadAIQnASuggestion(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchAIQnASuggestion(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIQnASuggestion(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
+	ListAIAgentSpans(ctx context.Context, in *LLMSpansRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type workflowMgrClient struct {
@@ -9643,6 +9645,16 @@ func (c *workflowMgrClient) DeleteAIQnASuggestion(ctx context.Context, in *Id, o
 	return out, nil
 }
 
+func (c *workflowMgrClient) ListAIAgentSpans(ctx context.Context, in *LLMSpansRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgentSpans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkflowMgrServer is the server API for WorkflowMgr service.
 // All implementations must embed UnimplementedWorkflowMgrServer
 // for forward compatibility.
@@ -9688,6 +9700,7 @@ type WorkflowMgrServer interface {
 	ReadAIQnASuggestion(context.Context, *Id) (*Response, error)
 	MatchAIQnASuggestion(context.Context, *Ids) (*Response, error)
 	DeleteAIQnASuggestion(context.Context, *Id) (*Empty, error)
+	ListAIAgentSpans(context.Context, *LLMSpansRequest) (*Response, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -9817,6 +9830,9 @@ func (UnimplementedWorkflowMgrServer) MatchAIQnASuggestion(context.Context, *Ids
 }
 func (UnimplementedWorkflowMgrServer) DeleteAIQnASuggestion(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAIQnASuggestion not implemented")
+}
+func (UnimplementedWorkflowMgrServer) ListAIAgentSpans(context.Context, *LLMSpansRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAIAgentSpans not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -10559,6 +10575,24 @@ func _WorkflowMgr_DeleteAIQnASuggestion_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_ListAIAgentSpans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LLMSpansRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).ListAIAgentSpans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_ListAIAgentSpans_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).ListAIAgentSpans(ctx, req.(*LLMSpansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkflowMgr_ServiceDesc is the grpc.ServiceDesc for WorkflowMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -10725,6 +10759,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAIQnASuggestion",
 			Handler:    _WorkflowMgr_DeleteAIQnASuggestion_Handler,
+		},
+		{
+			MethodName: "ListAIAgentSpans",
+			Handler:    _WorkflowMgr_ListAIAgentSpans_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

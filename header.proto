@@ -2137,6 +2137,12 @@ message ActionSendHttp {
 	bool continue_on_error = 9;
 }
 
+message ActionSendTyping {
+  Message message = 4; // extra message
+	// repeated KV data = 9;
+	// string key = 10;
+}
+
 message ActionSendMessage {
 	string channel = 3;
 	string channel_source = 4;
@@ -6107,8 +6113,8 @@ message WorkflowAction {
 	string on_error = 10; // action id or: "continue", "empty" -> end
 
 	string scope = 7; // computed
-	bool is_sync_message = 8; //valid for ation wait
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow
+	bool is_async = 8; // just go, dont care about revalid for ation wait
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6146,6 +6152,8 @@ message WorkflowAction {
 	ActionSetVariable set_variable = 103;
 	ActionCallWorkflow call_workflow = 104;
 	ActionAssignLead assign_lead = 105;
+	ActionSendTyping send_typing = 107;
+
 	string output_error_variable = 106;
 }
 
@@ -6215,6 +6223,7 @@ message ActionLLM {
 	string model = 5; // chatgpt-4
 	Block system_instruction_block = 6; // dynamic prompt
 	int64 temperature = 7; // 10000 * 10000
+	int64 top_p = 15; // *100000
 	int64 max_token = 8;
 	bool conversation_history = 9; // inject chat history to system instructionë
 	// string chatgpt_vector_store_id = 10;
@@ -6472,6 +6481,8 @@ message Response {
 	Campaign campaign = 193;
 
 	CreditUsage credit_usage = 194;
+
+	repeated AIAgentSpan ai_agent_spans = 195;
 }
 
 message ReportCount {
@@ -6983,6 +6994,72 @@ message KvSetting {
 	bool is_array = 6;  // only support array for int, string
 }
 
+message LLMToolCalled {
+	string type = 4; // function_call, message
+	string status = 5; // completed
+	string name = 6; // transfer_to_history_tutor
+	string id = 7; // fc_67dcda987f9881919507ee94ff0e62150383ade9cf9a9f3a
+	string call_id = 8; // call_p91wu5fTWWetoL90RyiDKHFX
+	string arguments = 9;
+
+	string error = 10;
+	string output = 11;
+
+	int64 called = 13;
+	int64 ended = 14;
+	repeated RAGDocument context_chunks = 15;
+
+	int64 http_code = 16;
+	repeated string assigned_tos = 17; // system_human_handoff
+}
+
+message LLMChatHistoryEntry {
+	string role = 3;
+	string message = 4;
+}
+
+message RAGDocument {
+	string data_entry_id = 5;
+	string chunk = 6; // original
+	int64 score = 7;
+	string embed_chunk = 11;
+}
+
+message AIAgentSpan {
+	string span_id = 4;
+	int64 started = 5;
+	int64 ended = 6;
+
+	// input
+	string type = 7; // agent_main, agent_triage
+	string instruction = 8;
+	int64 max_output_tokens = 9;
+	string model = 10;
+	// int64 parallel_tool_calls = 7;
+	string status = 11; // completed
+	int64 temperature = 12;
+	int64 top_p = 13;
+
+	string tool_choice = 14; // auto
+	repeated AIFunction tools = 15; // function calling
+	string response_format_type = 16; // json_schema
+	LLMResponseJSONSchemaFormat response_format = 17;
+
+	repeated LLMChatHistoryEntry chat_history = 18;
+
+	repeated LLMToolCalled tool_calleds = 19;
+
+	string output = 20;
+
+	string explain = 21;
+	string command = 22; // text, escalate, transfer
+	string to_id = 23;
+
+	// usage
+	int64 input_tokens = 30; // ok
+	int64 output_tokens = 31; // ok
+}
+
 message WorkflowLog {
 	common.Context ctx = 1;
 	string wf_id = 2;
@@ -7008,6 +7085,11 @@ message WorkflowLog {
 	repeated string assign_tos = 21;
 	string thread_id = 22;
 	string stack = 23;
+
+	string trace_id = 32;
+	string span_id = 33;
+	string parent_span_id = 34;
+	string span_type = 35;
 }
 
 message TicketType {
@@ -8193,6 +8275,7 @@ message AIAgent {
 	int64 context_guard = 35;
 	Message context_guard_message = 36;
 	repeated AIFunction functions = 37;
+
 	Message unabled_to_answer_message = 38;
 	Message error_message = 40;
 
@@ -8240,8 +8323,7 @@ message JSONSchema {
 }
 
 message AIFunction {
-	string id = 3;
-	string name = 4; // create order
+	string name = 4; // create order, system_human_handoff, system_get_more_information
 	string description = 5;
 	string additional_prompt = 12;
 	// assign agent
@@ -8268,6 +8350,8 @@ message AIFunction {
 		"required": ["email"]
 		}
 	*/
+
+	// CreateTicketFunction sys_create_ticket = 12;
 }
 
 message AIIntent {
@@ -8320,7 +8404,6 @@ message AIDataChunk {
 	common.Context ctx = 1;
 
 	string ai_data_entry_id = 3;
-	string file_id = 4;
 	string id = 5;
 	repeated double vector = 6;
 	string original_chunk = 7;
@@ -8383,7 +8466,6 @@ message AiResponseSource {
 	int64 created = 8;
 
 	AIDataEntry data_entry = 9; // optional
-	string data_entry_file_id = 10;
 	string embed_chunk = 11;
 }
 
