@@ -7043,7 +7043,7 @@ message AIAgentTrace {
 	int64 total_spans = 5;
 	string input_message_id = 6;
 	string conversation_id = 7;
-	string ouput_message_id = 8;
+	string output_message_id = 8;
 
 	string input = 9;
 	string output = 10;
