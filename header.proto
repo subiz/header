@@ -8399,7 +8399,14 @@ message AIFunction {
 		}
 	*/
 
-	// CreateTicketFunction sys_create_ticket = 12;
+	CreateTicketFunction system_create_ticket = 14;
+}
+
+message CreateTicketFunction {
+	string title = 3; // prompt
+	string description = 4; // prompt
+	string type_id = 5;
+	string due_at = 6;
 }
 
 message AIIntent {
