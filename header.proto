@@ -8335,6 +8335,14 @@ message AIAgent {
 
 	int64 chat_last_7days = 52;
 	int64 total_chats = 53;
+
+	string job_title = 69;
+	repeated string channels = 70; // default: all channel
+
+	int64 last_executed = 71; // ms
+	string bot_type = 72; // hello, lead, operator, pipeline_automation, operation, ai
+	// int64 count_lead_in_last_7_days = 25;
+	// int64 count_conv_in_last_7_days = 26;
 }
 
 message AIDataStore {
@@ -8373,7 +8381,7 @@ message JSONSchema {
 message AIFunction {
 	string name = 4; // create order, system_human_handoff, system_get_more_information
 	string description = 5;
-	string additional_prompt = 12;
+	//string additional_prompt = 12;
 	// assign agent
 	/*
 		This function creates an Order. The input parameters will be defined based on extracted information from conversation context. It will return order object in a JSON format.
@@ -8399,7 +8407,16 @@ message AIFunction {
 		}
 	*/
 
+	string type = 12; // empty=remote, system_function, automation
+	string run_mode = 13; // sync, async, throttle, debounce
 	CreateTicketFunction system_create_ticket = 14;
+	AutomationFunction workflow_action = 15;
+}
+
+message AutomationFunction {
+	WorkflowCondition condition = 5; // key=number_of_user_messages
+	map<string, WorkflowAction> actions = 9;
+	map<string, WorkflowAction> computed_actions = 29;
 }
 
 message CreateTicketFunction {
