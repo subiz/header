@@ -6241,6 +6241,9 @@ message ActionLLM {
 
 	string response_format = 13; // json_schema
 	LLMResponseJSONSchemaFormat json_schema = 14;
+
+	string on_error = 16;
+	string on_refusal = 17;
 }
 
 message LLMResponseJSONSchemaFormat {
@@ -8336,7 +8339,7 @@ message AIAgent {
 	int64 chat_last_7days = 52;
 	int64 total_chats = 53;
 
-	string job_title = 69;
+	// string job_title = 69;
 	repeated string channels = 70; // default: all channel
 
 	int64 last_executed = 71; // ms
@@ -8379,6 +8382,8 @@ message JSONSchema {
 }
 
 message AIFunction {
+	// return 204 to stop the bot from response
+
 	string name = 4; // create order, system_human_handoff, system_get_more_information
 	string description = 5;
 
