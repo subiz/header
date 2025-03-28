@@ -887,3 +887,10 @@ message LLMTracesRequest {
 	int64 limit = 10;
 	string anchor = 11;
 }
+
+message SuggestAIDataEntryRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string conversation_id = 3;
+	string event_id = 4;
+}

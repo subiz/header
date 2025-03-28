@@ -1174,7 +1174,7 @@ message Conversation {
 	FormSubmission form_submission = 66;
 	string marked_as_spam_by = 67;
 	int64 marked_as_spam = 68;
-	int64 sentiment_score = 69;
+	int64 sentiment_score = 69; //
 	GoogleReview google_review = 70;
 
 	repeated string associated_tickets = 76;
@@ -6242,7 +6242,6 @@ message ActionLLM {
 	string response_format = 13; // json_schema
 	LLMResponseJSONSchemaFormat json_schema = 14;
 
-	string on_error = 16;
 	string on_refusal = 17;
 }
 
@@ -8564,6 +8563,10 @@ message AiQnASuggestion {
 	int64 created = 14;
 	int64 read_at = 15;
 	string read_by = 16;
+
+	// when search for suggestion
+	int64 ai_data_entry_score = 20;
+	string ai_data_entry_id = 21; // optional
 }
 
 message FacebookAdsFlow {

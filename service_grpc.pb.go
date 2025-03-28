@@ -9169,6 +9169,7 @@ const (
 	WorkflowMgr_DeleteAIAgent_FullMethodName         = "/header.WorkflowMgr/DeleteAIAgent"
 	WorkflowMgr_StartAiAgent_FullMethodName          = "/header.WorkflowMgr/StartAiAgent"
 	WorkflowMgr_ListAIDataGroup_FullMethodName       = "/header.WorkflowMgr/ListAIDataGroup"
+	WorkflowMgr_SuggestAIDataEntry_FullMethodName    = "/header.WorkflowMgr/SuggestAIDataEntry"
 	WorkflowMgr_CreateAIDataGroup_FullMethodName     = "/header.WorkflowMgr/CreateAIDataGroup"
 	WorkflowMgr_UpdateAIDataGroup_FullMethodName     = "/header.WorkflowMgr/UpdateAIDataGroup"
 	WorkflowMgr_DeleteAIDatagroup_FullMethodName     = "/header.WorkflowMgr/DeleteAIDatagroup"
@@ -9217,6 +9218,7 @@ type WorkflowMgrClient interface {
 	DeleteAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	StartAiAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListAIDataGroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateAIDataGroup(ctx context.Context, in *AIDataGroup, opts ...grpc.CallOption) (*Response, error)
 	UpdateAIDataGroup(ctx context.Context, in *AIDataGroup, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIDatagroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -9476,6 +9478,16 @@ func (c *workflowMgrClient) ListAIDataGroup(ctx context.Context, in *Id, opts ..
 	return out, nil
 }
 
+func (c *workflowMgrClient) SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_SuggestAIDataEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *workflowMgrClient) CreateAIDataGroup(ctx context.Context, in *AIDataGroup, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
@@ -9693,6 +9705,7 @@ type WorkflowMgrServer interface {
 	DeleteAIAgent(context.Context, *Id) (*Response, error)
 	StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
 	ListAIDataGroup(context.Context, *Id) (*Response, error)
+	SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error)
 	CreateAIDataGroup(context.Context, *AIDataGroup) (*Response, error)
 	UpdateAIDataGroup(context.Context, *AIDataGroup) (*Response, error)
 	DeleteAIDatagroup(context.Context, *Id) (*Empty, error)
@@ -9790,6 +9803,9 @@ func (UnimplementedWorkflowMgrServer) StartAiAgent(context.Context, *RunAiAgentR
 }
 func (UnimplementedWorkflowMgrServer) ListAIDataGroup(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAIDataGroup not implemented")
+}
+func (UnimplementedWorkflowMgrServer) SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SuggestAIDataEntry not implemented")
 }
 func (UnimplementedWorkflowMgrServer) CreateAIDataGroup(context.Context, *AIDataGroup) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAIDataGroup not implemented")
@@ -10283,6 +10299,24 @@ func _WorkflowMgr_ListAIDataGroup_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_SuggestAIDataEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SuggestAIDataEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).SuggestAIDataEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_SuggestAIDataEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).SuggestAIDataEntry(ctx, req.(*SuggestAIDataEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _WorkflowMgr_CreateAIDataGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AIDataGroup)
 	if err := dec(in); err != nil {
@@ -10723,6 +10757,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAIDataGroup",
 			Handler:    _WorkflowMgr_ListAIDataGroup_Handler,
+		},
+		{
+			MethodName: "SuggestAIDataEntry",
+			Handler:    _WorkflowMgr_SuggestAIDataEntry_Handler,
 		},
 		{
 			MethodName: "CreateAIDataGroup",
