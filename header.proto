@@ -6463,6 +6463,7 @@ message Response {
 	repeated AiQnASuggestion ai_qna_suggestions = 173;
 
 	repeated AiResponseSource ai_response_sources = 174;
+	AiResponseSource ai_response_source = 158;
 
 	repeated AIDataChunk ai_data_chunks = 175;
 	File file = 176;

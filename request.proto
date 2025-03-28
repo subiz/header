@@ -893,4 +893,5 @@ message SuggestAIDataEntryRequest {
 	string account_id = 2;
 	string conversation_id = 3;
 	string event_id = 4;
+	string ai_agent_id = 5;
 }
