@@ -6771,6 +6771,7 @@ message CreditSpendReportResponse {
 	string account_id = 2;
 	string credit_id = 3;
 	repeated CreditSpendReportResponseData datas = 4;
+	int64 spend_fpv = 6;
 }
 
 message AccSub {
@@ -8336,8 +8337,11 @@ message AIAgent {
 	int64 credit_spend_last_7days_fpv = 50;
 	int64 total_credit_spend_fpv = 51;
 
-	int64 chat_last_7days = 52;
-	int64 total_chats = 53;
+	int64 conversation_last_7days = 52;
+	int64 total_conversations = 53;
+
+	int64 goal_reached_last_7days = 54;
+	int64 total_goal_reacheds = 55;
 
 	// string job_title = 69;
 	repeated string channels = 70; // default: all channel

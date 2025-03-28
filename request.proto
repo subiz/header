@@ -829,6 +829,7 @@ message CreditSpendReportRequest {
 	string item_id = 7;
 	int64 limit = 8; // default: 24, 30, 24
 	string service_id = 9;
+	bool count_only = 10;
 }
 
 message CreditSpendLogRequest {
