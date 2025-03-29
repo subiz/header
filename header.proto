@@ -6120,7 +6120,7 @@ message WorkflowAction {
 
 	string scope = 7; // computed
 	bool is_async = 8; // just go, dont care about revalid for ation wait
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_trace
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_scope, end_scope
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6158,13 +6158,14 @@ message WorkflowAction {
 	ActionCallWorkflow call_workflow = 104;
 	ActionAssignLead assign_lead = 105;
 	ActionSendTyping send_typing = 107;
-	ActionStartTrace start_trace = 108;
+	ActionStartScope start_scope = 108;
 
 	string output_error_variable = 106;
 }
 
-message ActionStartTrace {
+message ActionStartScope {
 	string id_var = 3; // event_id
+	string on_exception = 4; // unhandled error
 }
 
 message ActionAssignLead {
@@ -6568,6 +6569,9 @@ message WorkflowThread {
 	int64 last_error_at = 12;
 	int64 last_action_at = 13;
 	string last_trace_id = 14;
+	string start_scope_id = 16;
+	string catch_action_id = 17; // set on start-scope
+	int64 is_on_exception = 18; // clear on start-scope
 }
 
 message WorkflowStack {
