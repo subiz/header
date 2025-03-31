@@ -196,10 +196,10 @@ message ReportAIAgentRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string agent_id = 3;
-	int64 start_hour_at = 4;
-	int64 range = 5; // hour, day
+	int64 start_hour = 4;
+	string range = 5; // hour, day
 	int64 limit = 6;
-	int64 tz = 7;
+	int64 tz = 7; // do not use
 
 	string metric = 8; // conversations, messages, thumbup_messages, thumbdown_messages, sentiment_neutral_messages, sentiment_positive_messages, sentiment_negative_messages
 }

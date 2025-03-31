@@ -532,6 +532,7 @@ message AIAgentReportResponse {
 	string account_id = 2;
 
 	repeated AIAgentReportMetric metrics = 5;
+	int64 total = 6;
 }
 
 message ConversationMetric {
@@ -1435,6 +1436,8 @@ message MessagePong {
 		spamreport = 24; // email bounced
 		unsubscribed = 25; // email bounced
 		email_rating = 26; // email rating
+		dislike = 27;
+		remove_dislike = 28;
 
 		care = 30;
 		remove_care = 31;
@@ -6172,7 +6175,6 @@ message WorkflowAction {
 	ActionSendTyping send_typing = 107;
 	ActionStartScope start_scope = 108;
 	ActionAIAgentTrack ai_agent_track = 109;
-
 	string output_error_variable = 106;
 }
 
