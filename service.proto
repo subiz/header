@@ -469,6 +469,7 @@ service ConversationMgr {
 
 	rpc OnBotUpdated(header.Bot) returns (Response);
 	rpc OnBotDeleted(header.Id) returns (Response);
+	rpc OnUserCreated(header.Id) returns (Response); // async
 }
 
 service TicketMgr {
