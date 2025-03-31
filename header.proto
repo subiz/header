@@ -522,6 +522,18 @@ message UserReportResponse {
 	repeated UserReportEntry leads = 6;
 }
 
+message AIAgentReportMetric {
+	int64 created_hour = 4;
+	int64 count = 5;
+}
+
+message AIAgentReportResponse {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	repeated AIAgentReportMetric metrics = 5;
+}
+
 message ConversationMetric {
 	string account_id = 2;
 	int64 created_hour = 3;
@@ -6159,6 +6171,7 @@ message WorkflowAction {
 	ActionAssignLead assign_lead = 105;
 	ActionSendTyping send_typing = 107;
 	ActionStartScope start_scope = 108;
+	ActionAIAgentTrack ai_agent_track = 109;
 
 	string output_error_variable = 106;
 }
@@ -8895,4 +8908,15 @@ message SendSubizZNSTestRequest {
 	string phone = 4;
 	string template_id = 5;
 	repeated ZNSTemplateParam params = 6;
+}
+
+message ActionAIAgentTrack {
+	string is_missing_source = 3;
+	string event_id = 4;
+	string is_unhandled = 5; // unable to handle
+	string is_refused = 6;  // guardrail, refuse
+	// string rating = 9;
+	int64 input_tokens = 10;
+	int64 output_tokens = 11;
+	string status = 12; // success, error
 }

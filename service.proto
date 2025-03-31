@@ -364,6 +364,8 @@ service WorkflowMgr {
 
 	rpc ListAIAgentSpans(LLMSpansRequest) returns (Response);
 	rpc ListAIAgentTraces(LLMTracesRequest) returns (Response);
+
+	rpc ReportAIAgent(ReportAIAgentRequest) returns (AIAgentReportResponse);
 }
 
 service ConversationMgr {
