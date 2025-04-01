@@ -8310,6 +8310,14 @@ message ArticleNode {
 	repeated ArticleNode children = 7;
 }
 
+message AIAgentGuardrail {
+	string id = 3;
+	string name = 4;
+	string type = 5; // input | output
+	string instruction = 6;
+	bool resoning = 7;
+}
+
 message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8319,6 +8327,7 @@ message AIAgent {
 	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
 	string avatar_url = 7;
 
+	repeated AIAgentGuardrail guardrails = 8;
 	HumanHandoverSetting human_handover = 16;
 
 	int64 created = 17;
