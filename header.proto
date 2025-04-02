@@ -793,6 +793,59 @@ message PresencesResponse {
 	repeated string focused_user_ids = 3;
 }
 
+message StartWorkflowSessionRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string workflow_id = 3;
+	string action_id = 4; // current executing
+
+	//string status = 13; // creating, running, waiting, ended, paused, error
+	string obj_id = 17; // for this obj
+	string thread_id = 18;
+	int64 version = 19; // workflow version
+
+	string user_id = 5;
+	string conversation_id = 6;
+
+	// optional
+	string mode = 7;
+	Bot bot = 8;
+	BotAction action = 9;
+
+	// internal use only
+	string bot_run_type = 10;
+	int32 index = 11;
+
+	// payload
+	Event event = 12;
+	string lang = 13;
+	bool skip_first_message = 14; // internal
+}
+
+message RunAiAgentRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string ai_agent = 3;
+	string conversation_id = 4;
+	int64 ai_agent_version = 5; // 0 -> latest
+	string invite_code = 6;
+
+	// optional
+	string mode = 7;
+	Bot bot = 8;
+	BotAction action = 9;
+
+	// internal use only
+	string bot_run_type = 10;
+	int32 index = 11;
+
+	// payload
+	Event event = 12;
+	string lang = 13;
+	bool skip_first_message = 14; // internal
+}
+
+// @deprecated
 message BotRunRequest {
 	common.Context ctx = 1;
 	// require

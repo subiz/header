@@ -9190,6 +9190,7 @@ const (
 	WorkflowMgr_ListAIAgentSpans_FullMethodName      = "/header.WorkflowMgr/ListAIAgentSpans"
 	WorkflowMgr_ListAIAgentTraces_FullMethodName     = "/header.WorkflowMgr/ListAIAgentTraces"
 	WorkflowMgr_ReportAIAgent_FullMethodName         = "/header.WorkflowMgr/ReportAIAgent"
+	WorkflowMgr_TryWorkflowAction_FullMethodName     = "/header.WorkflowMgr/TryWorkflowAction"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9240,6 +9241,7 @@ type WorkflowMgrClient interface {
 	ListAIAgentSpans(ctx context.Context, in *LLMSpansRequest, opts ...grpc.CallOption) (*Response, error)
 	ListAIAgentTraces(ctx context.Context, in *LLMTracesRequest, opts ...grpc.CallOption) (*Response, error)
 	ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error)
+	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type workflowMgrClient struct {
@@ -9690,6 +9692,16 @@ func (c *workflowMgrClient) ReportAIAgent(ctx context.Context, in *ReportAIAgent
 	return out, nil
 }
 
+func (c *workflowMgrClient) TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WorkflowMgr_TryWorkflowAction_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkflowMgrServer is the server API for WorkflowMgr service.
 // All implementations must embed UnimplementedWorkflowMgrServer
 // for forward compatibility.
@@ -9738,6 +9750,7 @@ type WorkflowMgrServer interface {
 	ListAIAgentSpans(context.Context, *LLMSpansRequest) (*Response, error)
 	ListAIAgentTraces(context.Context, *LLMTracesRequest) (*Response, error)
 	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
+	TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -9879,6 +9892,9 @@ func (UnimplementedWorkflowMgrServer) ListAIAgentTraces(context.Context, *LLMTra
 }
 func (UnimplementedWorkflowMgrServer) ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportAIAgent not implemented")
+}
+func (UnimplementedWorkflowMgrServer) TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TryWorkflowAction not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -10693,6 +10709,24 @@ func _WorkflowMgr_ReportAIAgent_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_TryWorkflowAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartWorkflowSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).TryWorkflowAction(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_TryWorkflowAction_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).TryWorkflowAction(ctx, req.(*StartWorkflowSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkflowMgr_ServiceDesc is the grpc.ServiceDesc for WorkflowMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -10876,6 +10910,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "ReportAIAgent",
 			Handler:    _WorkflowMgr_ReportAIAgent_Handler,
 		},
+		{
+			MethodName: "TryWorkflowAction",
+			Handler:    _WorkflowMgr_TryWorkflowAction_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service.proto",
@@ -10949,7 +10987,6 @@ const (
 	ConversationMgr_OnWebUserCreated_FullMethodName         = "/header.ConversationMgr/OnWebUserCreated"
 	ConversationMgr_OnBotUpdated_FullMethodName             = "/header.ConversationMgr/OnBotUpdated"
 	ConversationMgr_OnBotDeleted_FullMethodName             = "/header.ConversationMgr/OnBotDeleted"
-	ConversationMgr_OnUserCreated_FullMethodName            = "/header.ConversationMgr/OnUserCreated"
 )
 
 // ConversationMgrClient is the client API for ConversationMgr service.
@@ -11027,7 +11064,6 @@ type ConversationMgrClient interface {
 	OnWebUserCreated(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	OnBotUpdated(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Response, error)
 	OnBotDeleted(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
-	OnUserCreated(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 }
 
 type conversationMgrClient struct {
@@ -11708,16 +11744,6 @@ func (c *conversationMgrClient) OnBotDeleted(ctx context.Context, in *Id, opts .
 	return out, nil
 }
 
-func (c *conversationMgrClient) OnUserCreated(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, ConversationMgr_OnUserCreated_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ConversationMgrServer is the server API for ConversationMgr service.
 // All implementations must embed UnimplementedConversationMgrServer
 // for forward compatibility.
@@ -11793,7 +11819,6 @@ type ConversationMgrServer interface {
 	OnWebUserCreated(context.Context, *Id) (*Empty, error)
 	OnBotUpdated(context.Context, *Bot) (*Response, error)
 	OnBotDeleted(context.Context, *Id) (*Response, error)
-	OnUserCreated(context.Context, *Id) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
 
@@ -12004,9 +12029,6 @@ func (UnimplementedConversationMgrServer) OnBotUpdated(context.Context, *Bot) (*
 }
 func (UnimplementedConversationMgrServer) OnBotDeleted(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnBotDeleted not implemented")
-}
-func (UnimplementedConversationMgrServer) OnUserCreated(context.Context, *Id) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OnUserCreated not implemented")
 }
 func (UnimplementedConversationMgrServer) mustEmbedUnimplementedConversationMgrServer() {}
 func (UnimplementedConversationMgrServer) testEmbeddedByValue()                         {}
@@ -13235,24 +13257,6 @@ func _ConversationMgr_OnBotDeleted_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ConversationMgr_OnUserCreated_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Id)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ConversationMgrServer).OnUserCreated(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ConversationMgr_OnUserCreated_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).OnUserCreated(ctx, req.(*Id))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ConversationMgr_ServiceDesc is the grpc.ServiceDesc for ConversationMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -13527,10 +13531,6 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OnBotDeleted",
 			Handler:    _ConversationMgr_OnBotDeleted_Handler,
-		},
-		{
-			MethodName: "OnUserCreated",
-			Handler:    _ConversationMgr_OnUserCreated_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

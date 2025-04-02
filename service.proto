@@ -366,6 +366,8 @@ service WorkflowMgr {
 	rpc ListAIAgentTraces(LLMTracesRequest) returns (Response);
 
 	rpc ReportAIAgent(ReportAIAgentRequest) returns (AIAgentReportResponse);
+
+	rpc TryWorkflowAction(header.StartWorkflowSessionRequest) returns (Empty);
 }
 
 service ConversationMgr {
@@ -469,7 +471,6 @@ service ConversationMgr {
 
 	rpc OnBotUpdated(header.Bot) returns (Response);
 	rpc OnBotDeleted(header.Id) returns (Response);
-	rpc OnUserCreated(header.Id) returns (Response); // async
 }
 
 service TicketMgr {
