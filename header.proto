@@ -2243,7 +2243,7 @@ message ActionAskQuestion {
 	bool use_resume_message = 17;
 
 	// retry forever
-	int32 retry = 18; // TODO: remove != 1 => 0 retry, 1 retry forever
+	// int32 retry = 18; // TODO: remove != 1 => 0 retry, 1 retry forever
 
 	// if user doesn't reply in this amount of time => failed
 	// only active if value > 0
@@ -2252,6 +2252,7 @@ message ActionAskQuestion {
 	string branch_on_failed = 20; // empty => retry forever
 
 	repeated string next_action_ids = 21; // for graph
+	string on_retry = 22;
 }
 
 message ActionUpdateUser {
