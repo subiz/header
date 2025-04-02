@@ -8382,13 +8382,30 @@ message AIAgent {
 	// int64 count_lead_in_last_7_days = 25;
 	// int64 count_conv_in_last_7_days = 26;
 
-	BotAction init_action = 60; // point to root action
-	repeated Trigger triggers = 61;
-	Frequently initiative_frequency = 62;
-	repeated string sites = 63;
+	InitBot init_flow = 60;
 
 	string locale = 64; // can be auto
 	repeated string locales = 65;
+}
+
+message InitBot {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 disabled = 4;
+	BotAction action = 9; // point to root action
+
+	repeated Trigger triggers = 14;
+	Frequently initiative_frequency = 15;
+
+	repeated BotCondition conditions = 16;
+	repeated string channels = 17; // default: all channel
+
+	Rule condition = 33;
+	string action_hash = 22; // hex of sha1
+
+	repeated string sites = 27;
+	string locale = 28; // can be auto
+	repeated string locales = 29;
 }
 
 message AIDataStore {
