@@ -2085,8 +2085,8 @@ message BotAction {
 	ActionConfirmOrder confirm_order = 34;
 	ActionCreateTask create_task = 35;
 	ActionSendChatTranscript send_chat_transcript = 36;
-	ActionUpdateUserSegments update_user_segments = 37;
-	ActionRotateAgentInRule rotate_agent_in_rule = 38;
+	// ActionUpdateUserSegments update_user_segments = 37;
+	// ActionRotateAgentInRule rotate_agent_in_rule = 38;
 }
 
 message ActionRotateAgentInRule {
@@ -6182,6 +6182,7 @@ message WorkflowAction {
 message ActionStartScope {
 	string id_var = 3; // event_id
 	string on_exception = 4; // unhandled error
+	string on_success = 5;
 }
 
 message ActionAssignLead {
@@ -6588,7 +6589,7 @@ message WorkflowThread {
 	int64 last_action_at = 13;
 	string last_trace_id = 14;
 	string start_scope_id = 16;
-	string catch_action_id = 17; // set on start-scope
+	// string catch_action_id = 17; // set on start-scope
 	int64 is_on_exception = 18; // clear on start-scope
 }
 
