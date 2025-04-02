@@ -738,7 +738,8 @@ func GetHostShard(shard int) int {
 	hostname, _ := os.Hostname()
 	sp := strings.Split(hostname, "-")
 	if len(sp) < 2 {
-		panic("invalid hostname" + hostname)
+		fmt.Println("invalid hostname: " + hostname)
+		sp = []string{"", "stg", "0"} // fake staging
 	}
 	ordinal := sp[len(sp)-1]
 	pari64, _ := strconv.ParseInt(ordinal, 10, 0)

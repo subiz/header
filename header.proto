@@ -2190,7 +2190,6 @@ message ActionAskQuestion {
 	bool use_resume_message = 17;
 
 	// retry forever
-
 	int32 retry = 18; // TODO: remove != 1 => 0 retry, 1 retry forever
 
 	// if user doesn't reply in this amount of time => failed
@@ -2198,6 +2197,8 @@ message ActionAskQuestion {
 	int64 user_reply_timeout = 19;
 
 	string branch_on_failed = 20; // empty => retry forever
+
+	repeated string next_action_ids = 21; // for graph
 }
 
 message ActionUpdateUser {
@@ -6259,6 +6260,8 @@ message ActionLLM {
 	LLMResponseJSONSchemaFormat json_schema = 14;
 
 	string on_refusal = 17;
+
+	string tracking_purpose = 18;
 }
 
 message LLMResponseJSONSchemaFormat {
@@ -8314,7 +8317,7 @@ message AIAgentGuardrail {
 	string id = 3;
 	string name = 4;
 	string type = 5; // input | output
-	string instruction = 6;
+	string instruction = 6; // contain infant word
 	bool resoning = 7;
 }
 
@@ -8378,6 +8381,14 @@ message AIAgent {
 	string bot_type = 72; // hello, lead, operator, pipeline_automation, operation, ai
 	// int64 count_lead_in_last_7_days = 25;
 	// int64 count_conv_in_last_7_days = 26;
+
+	BotAction init_action = 60; // point to root action
+	repeated Trigger triggers = 61;
+	Frequently initiative_frequency = 62;
+	repeated string sites = 63;
+
+	string locale = 64; // can be auto
+	repeated string locales = 65;
 }
 
 message AIDataStore {
