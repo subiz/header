@@ -8398,7 +8398,7 @@ message AIAgent {
 
 	string model = 23; // gpt-4o-mini-2024-07-18
 	repeated string sub_agents = 24;
-	string prompt = 25;
+	// string prompt = 25;
 
 	string token_limit = 28; // short, balanced, long
 	int64 temperature = 29; // 50% -> 50
@@ -8415,6 +8415,7 @@ message AIAgent {
 
 	string transfer_prompt = 43;
 	string generated_intent = 44; // read-only
+	string generated_refuse_message = 46;
 	int64 active_version = 45;
 
 	AIDataStore data_store = 47;
@@ -8437,26 +8438,20 @@ message AIAgent {
 	// int64 count_lead_in_last_7_days = 25;
 	// int64 count_conv_in_last_7_days = 26;
 
-	InitBot init_flow = 60;
+	InitFlow init_flow = 60;
 
 	string locale = 64; // can be auto
 	repeated string locales = 65;
 }
 
-message InitBot {
-	common.Context ctx = 1;
-	string account_id = 2;
+message InitFlow {
+	// common.Context ctx = 1;
+	// string account_id = 2;
 	int64 disabled = 4;
 	BotAction action = 9; // point to root action
 
 	repeated Trigger triggers = 14;
 	Frequently initiative_frequency = 15;
-
-	repeated BotCondition conditions = 16;
-	repeated string channels = 17; // default: all channel
-
-	Rule condition = 33;
-	string action_hash = 22; // hex of sha1
 
 	repeated string sites = 27;
 	string locale = 28; // can be auto

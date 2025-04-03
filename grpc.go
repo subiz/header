@@ -413,7 +413,8 @@ func NewServerShardInterceptor2(shards, grpcport int) grpc.UnaryServerIntercepto
 	hostname, _ := os.Hostname()
 	sp := strings.Split(hostname, "-")
 	if len(sp) < 2 {
-		panic("invalid hostname" + hostname)
+		fmt.Println("invalid hostname: " + hostname)
+		sp = []string{"", "stg", "0"} // fake staging
 	}
 
 	hosts := make([]string, 0)
