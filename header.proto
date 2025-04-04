@@ -8417,6 +8417,7 @@ message AIAgent {
 
 	string transfer_prompt = 43;
 	string generated_intent = 44; // read-only
+	string intent_hash = 48; // skip regenerate intent
 	string generated_refuse_message = 46;
 	int64 active_version = 45;
 
