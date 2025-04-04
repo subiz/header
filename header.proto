@@ -8458,6 +8458,8 @@ message InitFlow {
 	repeated string sites = 27;
 	string locale = 28; // can be auto
 	repeated string locales = 29;
+
+	Rule rule = 30;
 }
 
 message AIDataStore {

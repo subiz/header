@@ -471,6 +471,7 @@ service ConversationMgr {
 
 	rpc OnBotUpdated(header.Bot) returns (Response);
 	rpc OnBotDeleted(header.Id) returns (Response);
+	rpc OnAIAgentUpdated(header.AIAgent) returns (Response); // update rule
 }
 
 service TicketMgr {
