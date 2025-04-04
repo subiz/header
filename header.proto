@@ -8397,7 +8397,9 @@ message AIAgent {
 	string state = 22;// active, inactive
 
 	string model = 23; // gpt-4o-mini-2024-07-18
-	repeated string sub_agents = 24;
+	// repeated string sub_agents = 24;
+	repeated AIAgent sub_agents = 25;
+
 	// string prompt = 25;
 
 	string token_limit = 28; // short, balanced, long
@@ -8548,13 +8550,6 @@ message AIIntent {
 	string examples = 5; // new line delimiter
 	int64 edited = 6;
 	int64 edited_by = 7;
-}
-
-message SubAIAgent {
-	string ai_agent_id = 4;
-	// int64 stickiness = 5;
-	// int64 bias = 6;
-	repeated AIIntent intents = 7;
 }
 
 message AIDataGroup {
