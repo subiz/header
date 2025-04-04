@@ -6306,6 +6306,7 @@ message ActionLLM {
 	int64 temperature = 7; // 10000 * 10000
 	int64 top_p = 15; // *100000
 	int64 max_token = 8;
+
 	bool conversation_history = 9; // inject chat history to system instructionë
 
 	repeated AIFunction functions = 11; // function calling
@@ -6317,6 +6318,8 @@ message ActionLLM {
 	string on_refusal = 17;
 
 	string tracking_purpose = 18;
+	string tool_choice = 19; // auto (default), required, function
+	AIFunction tool_choice_function = 20;
 }
 
 message LLMResponseJSONSchemaFormat {
