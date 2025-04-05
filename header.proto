@@ -6307,7 +6307,8 @@ message ActionLLM {
 	int64 top_p = 15; // *100000
 	int64 max_token = 8;
 
-	bool conversation_history = 9; // inject chat history to system instructionë
+	bool skip_conversation_history = 9; // do not inject chat history to system instruction
+	bool agent_view_conversation_history = 10; // filter msg that does not belong to current agent
 
 	repeated AIFunction functions = 11; // function calling
 	int64 timeout_sec = 12;

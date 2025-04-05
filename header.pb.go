@@ -44228,24 +44228,25 @@ func (x *ActionAskInfo) GetOnUnhandled() string {
 }
 
 type ActionLLM struct {
-	state                  protoimpl.MessageState       `protogen:"open.v1"`
-	SystemInstruction      string                       `protobuf:"bytes,4,opt,name=system_instruction,json=systemInstruction,proto3" json:"system_instruction,omitempty"`
-	Model                  string                       `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`                                                                   // chatgpt-4
-	SystemInstructionBlock *Block                       `protobuf:"bytes,6,opt,name=system_instruction_block,json=systemInstructionBlock,proto3" json:"system_instruction_block,omitempty"` // dynamic prompt
-	Temperature            int64                        `protobuf:"varint,7,opt,name=temperature,proto3" json:"temperature,omitempty"`                                                      // 10000 * 10000
-	TopP                   int64                        `protobuf:"varint,15,opt,name=top_p,json=topP,proto3" json:"top_p,omitempty"`                                                       // *100000
-	MaxToken               int64                        `protobuf:"varint,8,opt,name=max_token,json=maxToken,proto3" json:"max_token,omitempty"`
-	ConversationHistory    bool                         `protobuf:"varint,9,opt,name=conversation_history,json=conversationHistory,proto3" json:"conversation_history,omitempty"` // inject chat history to system instructionë
-	Functions              []*AIFunction                `protobuf:"bytes,11,rep,name=functions,proto3" json:"functions,omitempty"`                                                // function calling
-	TimeoutSec             int64                        `protobuf:"varint,12,opt,name=timeout_sec,json=timeoutSec,proto3" json:"timeout_sec,omitempty"`
-	ResponseFormat         string                       `protobuf:"bytes,13,opt,name=response_format,json=responseFormat,proto3" json:"response_format,omitempty"` // json_schema
-	JsonSchema             *LLMResponseJSONSchemaFormat `protobuf:"bytes,14,opt,name=json_schema,json=jsonSchema,proto3" json:"json_schema,omitempty"`
-	OnRefusal              string                       `protobuf:"bytes,17,opt,name=on_refusal,json=onRefusal,proto3" json:"on_refusal,omitempty"`
-	TrackingPurpose        string                       `protobuf:"bytes,18,opt,name=tracking_purpose,json=trackingPurpose,proto3" json:"tracking_purpose,omitempty"`
-	ToolChoice             string                       `protobuf:"bytes,19,opt,name=tool_choice,json=toolChoice,proto3" json:"tool_choice,omitempty"` // auto (default), required, function
-	ToolChoiceFunction     *AIFunction                  `protobuf:"bytes,20,opt,name=tool_choice_function,json=toolChoiceFunction,proto3" json:"tool_choice_function,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                        protoimpl.MessageState       `protogen:"open.v1"`
+	SystemInstruction            string                       `protobuf:"bytes,4,opt,name=system_instruction,json=systemInstruction,proto3" json:"system_instruction,omitempty"`
+	Model                        string                       `protobuf:"bytes,5,opt,name=model,proto3" json:"model,omitempty"`                                                                   // chatgpt-4
+	SystemInstructionBlock       *Block                       `protobuf:"bytes,6,opt,name=system_instruction_block,json=systemInstructionBlock,proto3" json:"system_instruction_block,omitempty"` // dynamic prompt
+	Temperature                  int64                        `protobuf:"varint,7,opt,name=temperature,proto3" json:"temperature,omitempty"`                                                      // 10000 * 10000
+	TopP                         int64                        `protobuf:"varint,15,opt,name=top_p,json=topP,proto3" json:"top_p,omitempty"`                                                       // *100000
+	MaxToken                     int64                        `protobuf:"varint,8,opt,name=max_token,json=maxToken,proto3" json:"max_token,omitempty"`
+	SkipConversationHistory      bool                         `protobuf:"varint,9,opt,name=skip_conversation_history,json=skipConversationHistory,proto3" json:"skip_conversation_history,omitempty"`                   // do not inject chat history to system instruction
+	AgentViewConversationHistory bool                         `protobuf:"varint,10,opt,name=agent_view_conversation_history,json=agentViewConversationHistory,proto3" json:"agent_view_conversation_history,omitempty"` // filter msg that does not belong to current agent
+	Functions                    []*AIFunction                `protobuf:"bytes,11,rep,name=functions,proto3" json:"functions,omitempty"`                                                                                // function calling
+	TimeoutSec                   int64                        `protobuf:"varint,12,opt,name=timeout_sec,json=timeoutSec,proto3" json:"timeout_sec,omitempty"`
+	ResponseFormat               string                       `protobuf:"bytes,13,opt,name=response_format,json=responseFormat,proto3" json:"response_format,omitempty"` // json_schema
+	JsonSchema                   *LLMResponseJSONSchemaFormat `protobuf:"bytes,14,opt,name=json_schema,json=jsonSchema,proto3" json:"json_schema,omitempty"`
+	OnRefusal                    string                       `protobuf:"bytes,17,opt,name=on_refusal,json=onRefusal,proto3" json:"on_refusal,omitempty"`
+	TrackingPurpose              string                       `protobuf:"bytes,18,opt,name=tracking_purpose,json=trackingPurpose,proto3" json:"tracking_purpose,omitempty"`
+	ToolChoice                   string                       `protobuf:"bytes,19,opt,name=tool_choice,json=toolChoice,proto3" json:"tool_choice,omitempty"` // auto (default), required, function
+	ToolChoiceFunction           *AIFunction                  `protobuf:"bytes,20,opt,name=tool_choice_function,json=toolChoiceFunction,proto3" json:"tool_choice_function,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ActionLLM) Reset() {
@@ -44320,9 +44321,16 @@ func (x *ActionLLM) GetMaxToken() int64 {
 	return 0
 }
 
-func (x *ActionLLM) GetConversationHistory() bool {
+func (x *ActionLLM) GetSkipConversationHistory() bool {
 	if x != nil {
-		return x.ConversationHistory
+		return x.SkipConversationHistory
+	}
+	return false
+}
+
+func (x *ActionLLM) GetAgentViewConversationHistory() bool {
+	if x != nil {
+		return x.AgentViewConversationHistory
 	}
 	return false
 }
@@ -73897,7 +73905,7 @@ var file_header_proto_rawDesc = string([]byte{
 	0x74, 0x65, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6f, 0x6e, 0x55, 0x6e, 0x63,
 	0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x65, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x6f, 0x6e, 0x5f, 0x75,
 	0x6e, 0x68, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x64, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
-	0x6f, 0x6e, 0x55, 0x6e, 0x68, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x64, 0x22, 0x93, 0x05, 0x0a, 0x09,
+	0x6f, 0x6e, 0x55, 0x6e, 0x68, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x64, 0x22, 0xe3, 0x05, 0x0a, 0x09,
 	0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x4c, 0x4d, 0x12, 0x2d, 0x0a, 0x12, 0x73, 0x79, 0x73,
 	0x74, 0x65, 0x6d, 0x5f, 0x69, 0x6e, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18,
 	0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x11, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x49, 0x6e, 0x73,
@@ -73912,9 +73920,14 @@ var file_header_proto_rawDesc = string([]byte{
 	0x6d, 0x70, 0x65, 0x72, 0x61, 0x74, 0x75, 0x72, 0x65, 0x12, 0x13, 0x0a, 0x05, 0x74, 0x6f, 0x70,
 	0x5f, 0x70, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x74, 0x6f, 0x70, 0x50, 0x12, 0x1b,
 	0x0a, 0x09, 0x6d, 0x61, 0x78, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x08, 0x20, 0x01, 0x28,
-	0x03, 0x52, 0x08, 0x6d, 0x61, 0x78, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x31, 0x0a, 0x14, 0x63,
-	0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x68, 0x69, 0x73, 0x74,
-	0x6f, 0x72, 0x79, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x13, 0x63, 0x6f, 0x6e, 0x76, 0x65,
+	0x03, 0x52, 0x08, 0x6d, 0x61, 0x78, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x3a, 0x0a, 0x19, 0x73,
+	0x6b, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x68, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x17,
+	0x73, 0x6b, 0x69, 0x70, 0x43, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79, 0x12, 0x45, 0x0a, 0x1f, 0x61, 0x67, 0x65, 0x6e, 0x74,
+	0x5f, 0x76, 0x69, 0x65, 0x77, 0x5f, 0x63, 0x6f, 0x6e, 0x76, 0x65, 0x72, 0x73, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x5f, 0x68, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x1c, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x56, 0x69, 0x65, 0x77, 0x43, 0x6f, 0x6e, 0x76, 0x65,
 	0x72, 0x73, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x48, 0x69, 0x73, 0x74, 0x6f, 0x72, 0x79, 0x12, 0x30,
 	0x0a, 0x09, 0x66, 0x75, 0x6e, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x0b, 0x20, 0x03, 0x28,
 	0x0b, 0x32, 0x12, 0x2e, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x2e, 0x41, 0x49, 0x46, 0x75, 0x6e,
