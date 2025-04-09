@@ -453,6 +453,10 @@ message AttributeDefinition {
 	bool prevent_auto_override = 30;
 
 	int64 _no = 31;
+
+	int64 auto_collect = 32; // auto collect in chat history
+	string auto_collect_prompt = 33;
+	string auto_collect_format_endpoint = 34; // http, ?input=
 }
 
 message AttributeDefinitions {
