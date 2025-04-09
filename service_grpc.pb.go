@@ -10988,6 +10988,7 @@ const (
 	ConversationMgr_OnBotUpdated_FullMethodName             = "/header.ConversationMgr/OnBotUpdated"
 	ConversationMgr_OnBotDeleted_FullMethodName             = "/header.ConversationMgr/OnBotDeleted"
 	ConversationMgr_OnAIAgentUpdated_FullMethodName         = "/header.ConversationMgr/OnAIAgentUpdated"
+	ConversationMgr_NotifyHuman_FullMethodName              = "/header.ConversationMgr/NotifyHuman"
 )
 
 // ConversationMgrClient is the client API for ConversationMgr service.
@@ -11066,6 +11067,8 @@ type ConversationMgrClient interface {
 	OnBotUpdated(ctx context.Context, in *Bot, opts ...grpc.CallOption) (*Response, error)
 	OnBotDeleted(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	OnAIAgentUpdated(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
+	// for ai agent to notify human
+	NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 }
 
 type conversationMgrClient struct {
@@ -11756,6 +11759,16 @@ func (c *conversationMgrClient) OnAIAgentUpdated(ctx context.Context, in *AIAgen
 	return out, nil
 }
 
+func (c *conversationMgrClient) NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Event)
+	err := c.cc.Invoke(ctx, ConversationMgr_NotifyHuman_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConversationMgrServer is the server API for ConversationMgr service.
 // All implementations must embed UnimplementedConversationMgrServer
 // for forward compatibility.
@@ -11832,6 +11845,8 @@ type ConversationMgrServer interface {
 	OnBotUpdated(context.Context, *Bot) (*Response, error)
 	OnBotDeleted(context.Context, *Id) (*Response, error)
 	OnAIAgentUpdated(context.Context, *AIAgent) (*Response, error)
+	// for ai agent to notify human
+	NotifyHuman(context.Context, *Event) (*Event, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
 
@@ -12045,6 +12060,9 @@ func (UnimplementedConversationMgrServer) OnBotDeleted(context.Context, *Id) (*R
 }
 func (UnimplementedConversationMgrServer) OnAIAgentUpdated(context.Context, *AIAgent) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnAIAgentUpdated not implemented")
+}
+func (UnimplementedConversationMgrServer) NotifyHuman(context.Context, *Event) (*Event, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NotifyHuman not implemented")
 }
 func (UnimplementedConversationMgrServer) mustEmbedUnimplementedConversationMgrServer() {}
 func (UnimplementedConversationMgrServer) testEmbeddedByValue()                         {}
@@ -13291,6 +13309,24 @@ func _ConversationMgr_OnAIAgentUpdated_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ConversationMgr_NotifyHuman_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).NotifyHuman(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_NotifyHuman_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).NotifyHuman(ctx, req.(*Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ConversationMgr_ServiceDesc is the grpc.ServiceDesc for ConversationMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -13569,6 +13605,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OnAIAgentUpdated",
 			Handler:    _ConversationMgr_OnAIAgentUpdated_Handler,
+		},
+		{
+			MethodName: "NotifyHuman",
+			Handler:    _ConversationMgr_NotifyHuman_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

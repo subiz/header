@@ -777,6 +777,7 @@ message ConversationMeta {
 	string ticket_id = 17;
 
 	bool is_dismissed = 19;
+	int64 human_notified = 20;
 }
 
 message WebRTCMessage {
@@ -800,6 +801,7 @@ message StartWorkflowSessionRequest {
 	string action_id = 4; // current executing
 
 	//string status = 13; // creating, running, waiting, ended, paused, error
+	string start_action_id = 15;
 	string obj_id = 17; // for this obj
 	string thread_id = 18;
 	int64 version = 19; // workflow version
@@ -843,6 +845,9 @@ message RunAiAgentRequest {
 	Event event = 12;
 	string lang = 13;
 	bool skip_first_message = 14; // internal
+
+	bool skip_init_flow = 15;
+	int64 ai_agent_index = 16;
 }
 
 // @deprecated
@@ -1202,6 +1207,7 @@ message Conversation {
 
 	string source = 36; // indicate where does the conversation happended (url)
 
+	int64 human_notified = 72;
 	// my field
 	string agent_id = 40;
 	bool mute = 41; // true, false
@@ -7889,7 +7895,7 @@ message InviteEmail {
 	string account_id = 3;
 	string sender_id = 4;
 	int64 expired_in = 5;
-	string token = 6; // deprecated
+	// string token = 6; // deprecated
 
 	string fullname = 9;
 	string sender_name = 10;
