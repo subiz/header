@@ -109,7 +109,7 @@ message Attribute {
 	int64 modified = 8;
 	string by_type = 5;
 
-	// string value = 9; // json encode primary value
+	string value = 9; // json encode primary value
 	string text = 10;
 	double number = 11;
 	bool boolean = 12;
@@ -6317,6 +6317,7 @@ message ActionLLM {
 	int64 top_p = 15; // *100000
 	int64 max_token = 8;
 
+	int64 history_entry_limit = 21;
 	bool skip_conversation_history = 9; // do not inject chat history to system instruction
 	bool agent_view_conversation_history = 10; // filter msg that does not belong to current agent
 

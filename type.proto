@@ -332,6 +332,8 @@ enum RealtimeType {
 	email_signature_created = 325;
 	email_signature_updated = 326;
 	email_signature_deleted = 327;
+
+	attribute_collected = 328;
 }
 
 message TextTransform {
