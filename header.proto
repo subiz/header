@@ -527,6 +527,7 @@ message UserReportResponse {
 }
 
 message AIAgentReportMetric {
+	string group_by = 6; // sentiment
 	int64 created_hour = 4;
 	int64 count = 5;
 }
