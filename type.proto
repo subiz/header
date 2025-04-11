@@ -334,6 +334,7 @@ enum RealtimeType {
 	email_signature_deleted = 327;
 
 	attribute_collected = 328;
+	llm_tool_called = 329;
 }
 
 message TextTransform {

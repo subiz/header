@@ -762,6 +762,7 @@ message Data {
 	ZNSTemplate zns_template = 135;
 	ZNSMedia zns_media = 136;
 	EmailSignature email_signature = 137;
+	LLMToolCall llm_tool_call = 138;
 }
 
 message ConversationMeta {
@@ -7107,7 +7108,7 @@ message KvSetting {
 	bool is_array = 6;  // only support array for int, string
 }
 
-message LLMToolCalled {
+message LLMToolCall {
 	string type = 4; // function_call, message
 	string status = 5; // completed
 	string name = 6; // transfer_to_history_tutor
@@ -7124,11 +7125,15 @@ message LLMToolCalled {
 
 	int64 http_code = 16;
 	repeated string assigned_tos = 17; // system_human_handoff
+
+	// tracking
+	string conversation_id = 18;
 }
 
 message LLMChatHistoryEntry {
 	string role = 3;
 	string message = 4;
+	LLMToolCall tool = 5;
 }
 
 message RAGDocument {
@@ -7179,7 +7184,7 @@ message AIAgentSpan {
 	LLMResponseJSONSchemaFormat response_format = 17;
 
 	repeated LLMChatHistoryEntry chat_history = 18;
-	repeated LLMToolCalled tool_calleds = 19;
+	repeated LLMToolCall tool_calls = 19;
 
 	string output = 20;
 
