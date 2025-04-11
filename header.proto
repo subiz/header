@@ -1869,6 +1869,7 @@ message AssignRequest {
 	Event start_event = 14;
 	bool remove_other_agents = 15;
 	bool disable_fallback = 16;
+	string prompt = 18;
 }
 
 message EndchatConnectorSetting {
@@ -8520,8 +8521,9 @@ message JSONSchema {
 message AIFunction {
 	// return 204 to stop the bot from response
 
-	string name = 4; // create order, system_human_handoff, system_get_more_information
-	string description = 5;
+	string name = 4; // create order, system_human_handoff, system_get_more_information, system_update
+	string display_name = 17;
+	string description = 5; // prompt
 
 	// string additional_prompt = 12;
 	// assign agent
@@ -8554,6 +8556,13 @@ message AIFunction {
 	string run_mode = 13; // sync, async, throttle, debounce
 	CreateTicketFunction system_create_ticket = 14;
 	AutomationFunction workflow_action = 15;
+	UpdateUserInformation update_information = 16;
+	AssignRequest assign_agent = 18;
+}
+
+message UpdateUserInformation {
+	string attribute_key = 4;
+	string prompt = 5;
 }
 
 message AutomationFunction {
