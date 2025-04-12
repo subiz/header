@@ -9168,6 +9168,7 @@ const (
 	WorkflowMgr_MatchAIAgent_FullMethodName          = "/header.WorkflowMgr/MatchAIAgent"
 	WorkflowMgr_DeleteAIAgent_FullMethodName         = "/header.WorkflowMgr/DeleteAIAgent"
 	WorkflowMgr_StartAiAgent_FullMethodName          = "/header.WorkflowMgr/StartAiAgent"
+	WorkflowMgr_StopAIAgent_FullMethodName           = "/header.WorkflowMgr/StopAIAgent"
 	WorkflowMgr_ListAIDataGroup_FullMethodName       = "/header.WorkflowMgr/ListAIDataGroup"
 	WorkflowMgr_SuggestAIDataEntry_FullMethodName    = "/header.WorkflowMgr/SuggestAIDataEntry"
 	WorkflowMgr_CreateAIDataGroup_FullMethodName     = "/header.WorkflowMgr/CreateAIDataGroup"
@@ -9219,6 +9220,7 @@ type WorkflowMgrClient interface {
 	MatchAIAgent(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	DeleteAIAgent(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	StartAiAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error)
+	StopAIAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListAIDataGroup(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	SuggestAIDataEntry(ctx context.Context, in *SuggestAIDataEntryRequest, opts ...grpc.CallOption) (*Response, error)
 	CreateAIDataGroup(ctx context.Context, in *AIDataGroup, opts ...grpc.CallOption) (*Response, error)
@@ -9466,6 +9468,16 @@ func (c *workflowMgrClient) StartAiAgent(ctx context.Context, in *RunAiAgentRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Empty)
 	err := c.cc.Invoke(ctx, WorkflowMgr_StartAiAgent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) StopAIAgent(ctx context.Context, in *RunAiAgentRequest, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, WorkflowMgr_StopAIAgent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -9728,6 +9740,7 @@ type WorkflowMgrServer interface {
 	MatchAIAgent(context.Context, *Ids) (*Response, error)
 	DeleteAIAgent(context.Context, *Id) (*Response, error)
 	StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
+	StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error)
 	ListAIDataGroup(context.Context, *Id) (*Response, error)
 	SuggestAIDataEntry(context.Context, *SuggestAIDataEntryRequest) (*Response, error)
 	CreateAIDataGroup(context.Context, *AIDataGroup) (*Response, error)
@@ -9826,6 +9839,9 @@ func (UnimplementedWorkflowMgrServer) DeleteAIAgent(context.Context, *Id) (*Resp
 }
 func (UnimplementedWorkflowMgrServer) StartAiAgent(context.Context, *RunAiAgentRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartAiAgent not implemented")
+}
+func (UnimplementedWorkflowMgrServer) StopAIAgent(context.Context, *RunAiAgentRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopAIAgent not implemented")
 }
 func (UnimplementedWorkflowMgrServer) ListAIDataGroup(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAIDataGroup not implemented")
@@ -10309,6 +10325,24 @@ func _WorkflowMgr_StartAiAgent_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WorkflowMgrServer).StartAiAgent(ctx, req.(*RunAiAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_StopAIAgent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RunAiAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).StopAIAgent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_StopAIAgent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).StopAIAgent(ctx, req.(*RunAiAgentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -10821,6 +10855,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "StartAiAgent",
 			Handler:    _WorkflowMgr_StartAiAgent_Handler,
+		},
+		{
+			MethodName: "StopAIAgent",
+			Handler:    _WorkflowMgr_StopAIAgent_Handler,
 		},
 		{
 			MethodName: "ListAIDataGroup",

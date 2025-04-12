@@ -59743,40 +59743,39 @@ func (x *AIAgentGuardrail) GetResoning() bool {
 }
 
 type AIAgent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Fullname      string                 `protobuf:"bytes,4,opt,name=fullname,proto3" json:"fullname,omitempty"` // Q/A bot
-	Avatar        *File                  `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Description   string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // dung de tra loi cac cau hoi thuong gap cua subiz
-	AvatarUrl     string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Guardrails    []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
-	HumanHandover *HumanHandoverSetting  `protobuf:"bytes,16,opt,name=human_handover,json=humanHandover,proto3" json:"human_handover,omitempty"`
-	Created       int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated       int64                  `protobuf:"varint,19,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy     string                 `protobuf:"bytes,20,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	State         string                 `protobuf:"bytes,22,opt,name=state,proto3" json:"state,omitempty"` // active, inactive
-	Model         string                 `protobuf:"bytes,23,opt,name=model,proto3" json:"model,omitempty"` // gpt-4o-mini-2024-07-18
-	// repeated string sub_agents = 24;
-	SubAgents              []*AIAgent    `protobuf:"bytes,25,rep,name=sub_agents,json=subAgents,proto3" json:"sub_agents,omitempty"`
-	TokenLimit             string        `protobuf:"bytes,28,opt,name=token_limit,json=tokenLimit,proto3" json:"token_limit,omitempty"` // short, balanced, long
-	ContextGuard           int64         `protobuf:"varint,35,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`
-	ContextGuardMessage    *Message      `protobuf:"bytes,36,opt,name=context_guard_message,json=contextGuardMessage,proto3" json:"context_guard_message,omitempty"`
-	Functions              []*AIFunction `protobuf:"bytes,37,rep,name=functions,proto3" json:"functions,omitempty"`
-	UnabledToAnswerMessage *Message      `protobuf:"bytes,38,opt,name=unabled_to_answer_message,json=unabledToAnswerMessage,proto3" json:"unabled_to_answer_message,omitempty"`
-	ErrorMessage           *Message      `protobuf:"bytes,40,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
-	Modified               int64         `protobuf:"varint,41,opt,name=modified,proto3" json:"modified,omitempty"`
-	Version                int64         `protobuf:"varint,42,opt,name=version,proto3" json:"version,omitempty"`
-	TransferPrompt         string        `protobuf:"bytes,43,opt,name=transfer_prompt,json=transferPrompt,proto3" json:"transfer_prompt,omitempty"`
-	GeneratedDescription   string        `protobuf:"bytes,44,opt,name=generated_description,json=generatedDescription,proto3" json:"generated_description,omitempty"` // read-only
-	GeneratedName          string        `protobuf:"bytes,49,opt,name=generated_name,json=generatedName,proto3" json:"generated_name,omitempty"`
-	GeneratedTopics        []string      `protobuf:"bytes,39,rep,name=generated_topics,json=generatedTopics,proto3" json:"generated_topics,omitempty"`
-	GeneratedHash          string        `protobuf:"bytes,48,opt,name=generated_hash,json=generatedHash,proto3" json:"generated_hash,omitempty"` // skip regenerate intent
-	GeneratedRefuseMessage string        `protobuf:"bytes,46,opt,name=generated_refuse_message,json=generatedRefuseMessage,proto3" json:"generated_refuse_message,omitempty"`
-	ActiveVersion          int64         `protobuf:"varint,45,opt,name=active_version,json=activeVersion,proto3" json:"active_version,omitempty"`
-	DataStore              *AIDataStore  `protobuf:"bytes,47,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                    *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId              string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id                     string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Fullname               string                 `protobuf:"bytes,4,opt,name=fullname,proto3" json:"fullname,omitempty"` // Q/A bot
+	Avatar                 *File                  `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Description            string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // dung de tra loi cac cau hoi thuong gap cua subiz
+	AvatarUrl              string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Guardrails             []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
+	HumanHandover          *HumanHandoverSetting  `protobuf:"bytes,16,opt,name=human_handover,json=humanHandover,proto3" json:"human_handover,omitempty"`
+	Created                int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy              string                 `protobuf:"bytes,18,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated                int64                  `protobuf:"varint,19,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy              string                 `protobuf:"bytes,20,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	State                  string                 `protobuf:"bytes,22,opt,name=state,proto3" json:"state,omitempty"` // active, inactive
+	Model                  string                 `protobuf:"bytes,23,opt,name=model,proto3" json:"model,omitempty"` // gpt-4o-mini-2024-07-18
+	SubAgents              []*AIAgent             `protobuf:"bytes,25,rep,name=sub_agents,json=subAgents,proto3" json:"sub_agents,omitempty"`
+	TokenLimit             string                 `protobuf:"bytes,28,opt,name=token_limit,json=tokenLimit,proto3" json:"token_limit,omitempty"` // short, balanced, long
+	ContextGuard           int64                  `protobuf:"varint,35,opt,name=context_guard,json=contextGuard,proto3" json:"context_guard,omitempty"`
+	ContextGuardMessage    *Message               `protobuf:"bytes,36,opt,name=context_guard_message,json=contextGuardMessage,proto3" json:"context_guard_message,omitempty"`
+	Functions              []*AIFunction          `protobuf:"bytes,37,rep,name=functions,proto3" json:"functions,omitempty"`
+	UnabledToAnswerMessage *Message               `protobuf:"bytes,38,opt,name=unabled_to_answer_message,json=unabledToAnswerMessage,proto3" json:"unabled_to_answer_message,omitempty"`
+	ErrorMessage           *Message               `protobuf:"bytes,40,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	Modified               int64                  `protobuf:"varint,41,opt,name=modified,proto3" json:"modified,omitempty"`
+	Version                int64                  `protobuf:"varint,42,opt,name=version,proto3" json:"version,omitempty"`
+	TransferPrompt         string                 `protobuf:"bytes,43,opt,name=transfer_prompt,json=transferPrompt,proto3" json:"transfer_prompt,omitempty"`
+	GeneratedDescription   string                 `protobuf:"bytes,44,opt,name=generated_description,json=generatedDescription,proto3" json:"generated_description,omitempty"` // read-only
+	GeneratedName          string                 `protobuf:"bytes,49,opt,name=generated_name,json=generatedName,proto3" json:"generated_name,omitempty"`
+	GeneratedTopics        []string               `protobuf:"bytes,39,rep,name=generated_topics,json=generatedTopics,proto3" json:"generated_topics,omitempty"`
+	GeneratedHash          string                 `protobuf:"bytes,48,opt,name=generated_hash,json=generatedHash,proto3" json:"generated_hash,omitempty"` // skip regenerate intent
+	GeneratedRefuseMessage string                 `protobuf:"bytes,46,opt,name=generated_refuse_message,json=generatedRefuseMessage,proto3" json:"generated_refuse_message,omitempty"`
+	ActiveVersion          int64                  `protobuf:"varint,45,opt,name=active_version,json=activeVersion,proto3" json:"active_version,omitempty"`
+	DataStore              *AIDataStore           `protobuf:"bytes,47,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`
 	// report
 	CreditSpendLast_7DaysFpv int64 `protobuf:"varint,50,opt,name=credit_spend_last_7days_fpv,json=creditSpendLast7daysFpv,proto3" json:"credit_spend_last_7days_fpv,omitempty"`
 	TotalCreditSpendFpv      int64 `protobuf:"varint,51,opt,name=total_credit_spend_fpv,json=totalCreditSpendFpv,proto3" json:"total_credit_spend_fpv,omitempty"`

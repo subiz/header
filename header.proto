@@ -8425,10 +8425,8 @@ message AIAgent {
 	string state = 22; // active, inactive
 
 	string model = 23; // gpt-4o-mini-2024-07-18
-	// repeated string sub_agents = 24;
-	repeated AIAgent sub_agents = 25;
 
-	// string prompt = 25;
+	repeated AIAgent sub_agents = 25;
 
 	string token_limit = 28; // short, balanced, long
 	// int64 temperature = 29; // 50% -> 50
