@@ -8419,7 +8419,7 @@ message AIAgent {
 	int64 updated = 19;
 	string updated_by = 20;
 
-	string state = 22;// active, inactive
+	string state = 22; // active, inactive
 
 	string model = 23; // gpt-4o-mini-2024-07-18
 	// repeated string sub_agents = 24;
@@ -8428,7 +8428,7 @@ message AIAgent {
 	// string prompt = 25;
 
 	string token_limit = 28; // short, balanced, long
-	int64 temperature = 29; // 50% -> 50
+	// int64 temperature = 29; // 50% -> 50
 
 	int64 context_guard = 35;
 	Message context_guard_message = 36;
@@ -8464,7 +8464,7 @@ message AIAgent {
 	repeated string channels = 70; // default: all channel
 
 	int64 last_executed = 71; // ms
-	string bot_type = 72; // hello, lead, operator, pipeline_automation, operation, ai
+	// string bot_type = 72; // hello, lead, operator, pipeline_automation, operation, ai
 	// int64 count_lead_in_last_7_days = 25;
 	// int64 count_conv_in_last_7_days = 26;
 
@@ -8488,6 +8488,8 @@ message InitFlow {
 	repeated string locales = 29;
 
 	Rule rule = 30;
+
+	int64 stop_when_flow_ended = 31; // stop ai agent when init flow end
 }
 
 message AIDataStore {
