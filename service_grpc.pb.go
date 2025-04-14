@@ -9192,6 +9192,7 @@ const (
 	WorkflowMgr_ListAIAgentTraces_FullMethodName     = "/header.WorkflowMgr/ListAIAgentTraces"
 	WorkflowMgr_ReportAIAgent_FullMethodName         = "/header.WorkflowMgr/ReportAIAgent"
 	WorkflowMgr_TryWorkflowAction_FullMethodName     = "/header.WorkflowMgr/TryWorkflowAction"
+	WorkflowMgr_ListAIAgentMessages_FullMethodName   = "/header.WorkflowMgr/ListAIAgentMessages"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9244,6 +9245,7 @@ type WorkflowMgrClient interface {
 	ListAIAgentTraces(ctx context.Context, in *LLMTracesRequest, opts ...grpc.CallOption) (*Response, error)
 	ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error)
 	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
+	ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type workflowMgrClient struct {
@@ -9714,6 +9716,16 @@ func (c *workflowMgrClient) TryWorkflowAction(ctx context.Context, in *StartWork
 	return out, nil
 }
 
+func (c *workflowMgrClient) ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_ListAIAgentMessages_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkflowMgrServer is the server API for WorkflowMgr service.
 // All implementations must embed UnimplementedWorkflowMgrServer
 // for forward compatibility.
@@ -9764,6 +9776,7 @@ type WorkflowMgrServer interface {
 	ListAIAgentTraces(context.Context, *LLMTracesRequest) (*Response, error)
 	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
 	TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error)
+	ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -9911,6 +9924,9 @@ func (UnimplementedWorkflowMgrServer) ReportAIAgent(context.Context, *ReportAIAg
 }
 func (UnimplementedWorkflowMgrServer) TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TryWorkflowAction not implemented")
+}
+func (UnimplementedWorkflowMgrServer) ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAIAgentMessages not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -10761,6 +10777,24 @@ func _WorkflowMgr_TryWorkflowAction_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_ListAIAgentMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAIAgentMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).ListAIAgentMessages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_ListAIAgentMessages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).ListAIAgentMessages(ctx, req.(*ListAIAgentMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkflowMgr_ServiceDesc is the grpc.ServiceDesc for WorkflowMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -10952,6 +10986,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "TryWorkflowAction",
 			Handler:    _WorkflowMgr_TryWorkflowAction_Handler,
 		},
+		{
+			MethodName: "ListAIAgentMessages",
+			Handler:    _WorkflowMgr_ListAIAgentMessages_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service.proto",
@@ -10986,6 +11024,7 @@ const (
 	ConversationMgr_SendOmniChannelMessage_FullMethodName   = "/header.ConversationMgr/SendOmniChannelMessage"
 	ConversationMgr_UpdateMessage_FullMethodName            = "/header.ConversationMgr/UpdateMessage"
 	ConversationMgr_ListEvents_FullMethodName               = "/header.ConversationMgr/ListEvents"
+	ConversationMgr_ReadConvoEvent_FullMethodName           = "/header.ConversationMgr/ReadConvoEvent"
 	ConversationMgr_Deintegrate_FullMethodName              = "/header.ConversationMgr/Deintegrate"
 	ConversationMgr_ListIntegrations2_FullMethodName        = "/header.ConversationMgr/ListIntegrations2"
 	ConversationMgr_MatchIntegration_FullMethodName         = "/header.ConversationMgr/MatchIntegration"
@@ -11063,6 +11102,7 @@ type ConversationMgrClient interface {
 	// rpc PinMessage(header.Event) returns (header.Empty);
 	// rpc UnpinMessage(header.Event) returns (header.Empty);
 	ListEvents(ctx context.Context, in *ListConversationEventsRequest, opts ...grpc.CallOption) (*Events, error)
+	ReadConvoEvent(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Response, error)
 	Deintegrate(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListIntegrations2(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	MatchIntegration(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
@@ -11391,6 +11431,16 @@ func (c *conversationMgrClient) ListEvents(ctx context.Context, in *ListConversa
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Events)
 	err := c.cc.Invoke(ctx, ConversationMgr_ListEvents_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ReadConvoEvent(ctx context.Context, in *Message, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_ReadConvoEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -11841,6 +11891,7 @@ type ConversationMgrServer interface {
 	// rpc PinMessage(header.Event) returns (header.Empty);
 	// rpc UnpinMessage(header.Event) returns (header.Empty);
 	ListEvents(context.Context, *ListConversationEventsRequest) (*Events, error)
+	ReadConvoEvent(context.Context, *Message) (*Response, error)
 	Deintegrate(context.Context, *Id) (*Empty, error)
 	ListIntegrations2(context.Context, *Id) (*Response, error)
 	MatchIntegration(context.Context, *Ids) (*Response, error)
@@ -11978,6 +12029,9 @@ func (UnimplementedConversationMgrServer) UpdateMessage(context.Context, *Event)
 }
 func (UnimplementedConversationMgrServer) ListEvents(context.Context, *ListConversationEventsRequest) (*Events, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListEvents not implemented")
+}
+func (UnimplementedConversationMgrServer) ReadConvoEvent(context.Context, *Message) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadConvoEvent not implemented")
 }
 func (UnimplementedConversationMgrServer) Deintegrate(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Deintegrate not implemented")
@@ -12623,6 +12677,24 @@ func _ConversationMgr_ListEvents_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).ListEvents(ctx, req.(*ListConversationEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ReadConvoEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Message)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ReadConvoEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_ReadConvoEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ReadConvoEvent(ctx, req.(*Message))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -13483,6 +13555,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListEvents",
 			Handler:    _ConversationMgr_ListEvents_Handler,
+		},
+		{
+			MethodName: "ReadConvoEvent",
+			Handler:    _ConversationMgr_ReadConvoEvent_Handler,
 		},
 		{
 			MethodName: "Deintegrate",

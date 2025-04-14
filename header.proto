@@ -6503,6 +6503,7 @@ message Response {
 	repeated User users = 128;
 	User user = 129;
 	Event event = 130;
+	repeated Event events = 120;
 
 	Rating rating = 131;
 	Rule rule = 132;

@@ -370,6 +370,8 @@ service WorkflowMgr {
 	rpc ReportAIAgent(ReportAIAgentRequest) returns (AIAgentReportResponse);
 
 	rpc TryWorkflowAction(header.StartWorkflowSessionRequest) returns (Empty);
+
+	rpc ListAIAgentMessages(ListAIAgentMessageRequest) returns (Response);
 }
 
 service ConversationMgr {
@@ -414,6 +416,7 @@ service ConversationMgr {
 	// rpc PinMessage(header.Event) returns (header.Empty);
 	// rpc UnpinMessage(header.Event) returns (header.Empty);
 	rpc ListEvents(header.ListConversationEventsRequest) returns (header.Events);
+	rpc ReadConvoEvent(header.Message) returns (header.Response);
 
 	rpc Deintegrate(Id) returns (Empty);
 	rpc ListIntegrations2(Id) returns (Response);

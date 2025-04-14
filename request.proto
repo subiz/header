@@ -192,6 +192,28 @@ message BotsRequest {
 	string account_id = 4;
 }
 
+
+message ListAIAgentMessageRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	int64 from_ms = 4;
+	int64 to_ms = 6;
+	string anchor = 5; // hour, day
+
+	bool count_only = 7;
+
+	string rating = 8; // '' | thumb_up | thumb_down
+	bool is_missing_source = 10;
+	bool is_refused = 11;
+
+	int64 version = 20;
+
+	string channel = 22;
+	string channel_source = 23;
+	string channel_id = 24;
+}
+
 message ReportAIAgentRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
