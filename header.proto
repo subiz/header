@@ -1392,7 +1392,7 @@ message Message {
 	repeated KV fields = 10;
 
 	string user_id = 19;
-
+	string to_conversation_id = 26;
 	// used for reaction and delivery status, could be ignore
 	repeated MessagePong pongs = 17;
 
@@ -1400,9 +1400,6 @@ message Message {
 	I18nString i18n_quill_delta = 21; // rename to i18n_text
 
 	map<string, Block> i18n_block = 23;
-
-	int64 pinned = 25;
-	string pinned_by = 26;
 
 	string comment_id = 28; // for fb or instagram
 	string idempotency_key = 29;
@@ -1438,8 +1435,7 @@ message Message {
 
 	string source_event_id = 57; // for pong
 
-	int64 input_llm_tokens = 58;
-	int64 output_llm_tokens = 59;
+	int64 total_credit_fpv = 58;
 }
 
 message MessageReferral {
