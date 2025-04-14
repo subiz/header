@@ -7134,9 +7134,12 @@ message LLMToolCall {
 }
 
 message LLMChatHistoryEntry {
-	string role = 3;
-	string message = 4;
+	string role = 3; // user | agent
+	string content = 4;
 	LLMToolCall tool = 5;
+
+	// extra field in the message
+	map<string, string> fields = 7; // key -> jsonified value. eg "by_agent_id": "\"ag1\""
 }
 
 message RAGDocument {
