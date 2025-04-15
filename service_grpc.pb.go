@@ -11148,7 +11148,7 @@ type ConversationMgrClient interface {
 	OnAIAgentUpdated(ctx context.Context, in *AIAgent, opts ...grpc.CallOption) (*Response, error)
 	// for ai agent to notify human
 	NotifyHuman(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
-	ReportMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error)
+	ReportMessages(ctx context.Context, in *ReportConvoMessageRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type conversationMgrClient struct {
@@ -11859,7 +11859,7 @@ func (c *conversationMgrClient) NotifyHuman(ctx context.Context, in *Event, opts
 	return out, nil
 }
 
-func (c *conversationMgrClient) ReportMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *conversationMgrClient) ReportMessages(ctx context.Context, in *ReportConvoMessageRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, ConversationMgr_ReportMessages_FullMethodName, in, out, cOpts...)
@@ -11948,7 +11948,7 @@ type ConversationMgrServer interface {
 	OnAIAgentUpdated(context.Context, *AIAgent) (*Response, error)
 	// for ai agent to notify human
 	NotifyHuman(context.Context, *Event) (*Event, error)
-	ReportMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
+	ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error)
 	mustEmbedUnimplementedConversationMgrServer()
 }
 
@@ -12169,7 +12169,7 @@ func (UnimplementedConversationMgrServer) OnAIAgentUpdated(context.Context, *AIA
 func (UnimplementedConversationMgrServer) NotifyHuman(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NotifyHuman not implemented")
 }
-func (UnimplementedConversationMgrServer) ReportMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error) {
+func (UnimplementedConversationMgrServer) ReportMessages(context.Context, *ReportConvoMessageRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportMessages not implemented")
 }
 func (UnimplementedConversationMgrServer) mustEmbedUnimplementedConversationMgrServer() {}
@@ -13454,7 +13454,7 @@ func _ConversationMgr_NotifyHuman_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _ConversationMgr_ReportMessages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAIAgentMessageRequest)
+	in := new(ReportConvoMessageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -13466,7 +13466,7 @@ func _ConversationMgr_ReportMessages_Handler(srv interface{}, ctx context.Contex
 		FullMethod: ConversationMgr_ReportMessages_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationMgrServer).ReportMessages(ctx, req.(*ListAIAgentMessageRequest))
+		return srv.(ConversationMgrServer).ReportMessages(ctx, req.(*ReportConvoMessageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

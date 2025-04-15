@@ -1436,6 +1436,7 @@ message Message {
 	string source_event_id = 57; // for pong
 
 	int64 total_credit_fpv = 58;
+	int64 sentiment_score = 60;
 }
 
 message MessageReferral {

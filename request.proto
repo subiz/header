@@ -211,6 +211,24 @@ message ListAIAgentMessageRequest {
 	string channel = 22;
 	string channel_source = 23;
 	string channel_id = 24;
+
+}
+
+message ReportConvoMessageRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string agent_id = 3;
+	int64 from_ms = 4;
+	int64 to_ms = 6;
+	string anchor = 5; // hour, day
+
+	bool count_only = 7;
+
+	string sentiment = 20; // "", negative | positive | neutral
+
+	string channel = 22;
+	string channel_source = 23;
+	string channel_id = 24;
 }
 
 message ReportAIAgentRequest {
