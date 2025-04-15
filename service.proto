@@ -480,6 +480,8 @@ service ConversationMgr {
 
 	// for ai agent to notify human
 	rpc NotifyHuman(header.Event) returns (header.Event);
+
+	rpc ReportMessages(ListAIAgentMessageRequest) returns (Response);
 }
 
 service TicketMgr {

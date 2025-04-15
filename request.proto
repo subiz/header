@@ -192,7 +192,6 @@ message BotsRequest {
 	string account_id = 4;
 }
 
-
 message ListAIAgentMessageRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
