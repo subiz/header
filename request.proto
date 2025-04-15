@@ -240,8 +240,10 @@ message ReportAIAgentRequest {
 	int64 limit = 6;
 	int64 tz = 7; // do not use
 
-	string metric = 8; // conversations, messages, thumbup_messages, thumbdown_messages, sentiment_neutral_messages, sentiment_positive_messages, sentiment_negative_messages
+	string metric = 8; // conversations, messages, leads
 	string group_by = 9; // sentiment
+
+	string anchor = 10;
 }
 
 message ReportBotRequest {

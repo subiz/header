@@ -372,6 +372,7 @@ service WorkflowMgr {
 	rpc TryWorkflowAction(header.StartWorkflowSessionRequest) returns (Empty);
 
 	rpc ListAIAgentMessages(ListAIAgentMessageRequest) returns (Response);
+	rpc ListConvertedLeads(ReportAIAgentRequest) returns (Response);
 }
 
 service ConversationMgr {

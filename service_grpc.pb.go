@@ -9193,6 +9193,7 @@ const (
 	WorkflowMgr_ReportAIAgent_FullMethodName         = "/header.WorkflowMgr/ReportAIAgent"
 	WorkflowMgr_TryWorkflowAction_FullMethodName     = "/header.WorkflowMgr/TryWorkflowAction"
 	WorkflowMgr_ListAIAgentMessages_FullMethodName   = "/header.WorkflowMgr/ListAIAgentMessages"
+	WorkflowMgr_ListConvertedLeads_FullMethodName    = "/header.WorkflowMgr/ListConvertedLeads"
 )
 
 // WorkflowMgrClient is the client API for WorkflowMgr service.
@@ -9246,6 +9247,7 @@ type WorkflowMgrClient interface {
 	ReportAIAgent(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*AIAgentReportResponse, error)
 	TryWorkflowAction(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListAIAgentMessages(ctx context.Context, in *ListAIAgentMessageRequest, opts ...grpc.CallOption) (*Response, error)
+	ListConvertedLeads(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type workflowMgrClient struct {
@@ -9726,6 +9728,16 @@ func (c *workflowMgrClient) ListAIAgentMessages(ctx context.Context, in *ListAIA
 	return out, nil
 }
 
+func (c *workflowMgrClient) ListConvertedLeads(ctx context.Context, in *ReportAIAgentRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_ListConvertedLeads_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WorkflowMgrServer is the server API for WorkflowMgr service.
 // All implementations must embed UnimplementedWorkflowMgrServer
 // for forward compatibility.
@@ -9777,6 +9789,7 @@ type WorkflowMgrServer interface {
 	ReportAIAgent(context.Context, *ReportAIAgentRequest) (*AIAgentReportResponse, error)
 	TryWorkflowAction(context.Context, *StartWorkflowSessionRequest) (*Empty, error)
 	ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error)
+	ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error)
 	mustEmbedUnimplementedWorkflowMgrServer()
 }
 
@@ -9927,6 +9940,9 @@ func (UnimplementedWorkflowMgrServer) TryWorkflowAction(context.Context, *StartW
 }
 func (UnimplementedWorkflowMgrServer) ListAIAgentMessages(context.Context, *ListAIAgentMessageRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAIAgentMessages not implemented")
+}
+func (UnimplementedWorkflowMgrServer) ListConvertedLeads(context.Context, *ReportAIAgentRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConvertedLeads not implemented")
 }
 func (UnimplementedWorkflowMgrServer) mustEmbedUnimplementedWorkflowMgrServer() {}
 func (UnimplementedWorkflowMgrServer) testEmbeddedByValue()                     {}
@@ -10795,6 +10811,24 @@ func _WorkflowMgr_ListAIAgentMessages_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WorkflowMgr_ListConvertedLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportAIAgentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).ListConvertedLeads(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_ListConvertedLeads_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).ListConvertedLeads(ctx, req.(*ReportAIAgentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WorkflowMgr_ServiceDesc is the grpc.ServiceDesc for WorkflowMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -10989,6 +11023,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAIAgentMessages",
 			Handler:    _WorkflowMgr_ListAIAgentMessages_Handler,
+		},
+		{
+			MethodName: "ListConvertedLeads",
+			Handler:    _WorkflowMgr_ListConvertedLeads_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
