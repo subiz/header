@@ -7138,6 +7138,9 @@ message LLMChatHistoryEntry {
 
 	// extra field in the message
 	map<string, string> fields = 7; // key -> jsonified value. eg "by_agent_id": "\"ag1\""
+
+	// for testing
+	int64 timeout = 8; // ms
 }
 
 message RAGDocument {
