@@ -236,8 +236,10 @@ message ReportAIAgentRequest {
 	string account_id = 2;
 	string agent_id = 3;
 	int64 start_hour = 4;
+	int64 to_hour = 11;
 	string range = 5; // hour, day
-	int64 limit = 6;
+	int64 limit = 6; //
+
 	int64 tz = 7; // do not use
 
 	string metric = 8; // conversations, messages, leads
