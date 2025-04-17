@@ -2109,7 +2109,6 @@ enum BotActionType {
 	update_user = 13;
 	assign = 14;
 	send_http = 15;
-	switch_language = 16;
 	ask_question = 18;
 	end_bot = 19;
 	update_user_labels = 20;
@@ -2206,9 +2205,6 @@ message ActionJump {
 	string action_id_var = 4;
 }
 
-message ActionSwitchLanguage {
-}
-
 message ActionSendHttp {
 	string url = 2;
 	// string payload = 3;
@@ -2233,6 +2229,7 @@ message ActionSendMessage {
 	repeated Message messages = 5;
 	string touchpoint_id = 6; // template
 	repeated string tos = 7; // template
+	bool typing = 8; // send typing before each messages
 }
 
 message ActionAskQuestion {
