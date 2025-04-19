@@ -2445,29 +2445,26 @@ var skipuserfields = map[string]bool{
 
 func TruncateConversation(convo *Conversation) {
 	convo.Tags = nil
-	convo.Integration = nil
 	if convo.LastMessageSent != nil {
 		if convo.LastMessageSent.By != nil {
 			convo.LastMessageSent.By.Device = nil
 		}
 	}
+	convo.Subject = ""
 	convo.ResponseSec = 0
+	convo.Integration = nil
+	convo.AssignedTo = nil
+	convo.ReassignedTo = nil
+	convo.Fields = nil
+	convo.HumanNotified = 0
+	newmems := []*ConversationMember{}
 	for _, mem := range convo.GetMembers() {
 		if mem.Membership != "active" {
 			continue
 		}
-		mem.InvitedBy = nil
-		mem.Membership = ""
-		mem.ConversationId = ""
-		mem.JoinedAt = 0
-		mem.FirstMessageAt = 0
-		mem.SeenAt = 0
-		mem.ReceivedAt = 0
-		mem.LastSent = 0
-		mem.LastSentEventTime = 0
-		mem.InviteReason = ""
-		mem.TotalMessages = 0
+		newmems = append(newmems, &ConversationMember{Id: mem.Id, Type: mem.Type, Membership: mem.Membership})
 	}
+	convo.Members = newmems
 }
 
 func TruncateUser(user *User) {
