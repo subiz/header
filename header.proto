@@ -2403,12 +2403,15 @@ message AccountWeb {
 
 	repeated Bot bots = 14;
 	repeated WebPlugin plugins = 15;
-	int64 last_modified = 22;
+	// int64 last_modified = 22;
 
 	repeated PaymentMethod payment_methods = 24;
 	Location location = 25;
 
 	string device_type = 26;  // mobile desktop tablet
+
+	bool is_in_business_hour = 28;
+	bool is_online = 29;
 }
 
 message SocialLink {
