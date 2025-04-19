@@ -2431,3 +2431,46 @@ func CleanString(str string) string {
 	str = strings.Join(strings.Split(str, "\000"), "")
 	return strings.ToValidUTF8(str, "")
 }
+
+var skipuserfields = map[string]bool{
+	"owner":           true,
+	"modified":        true,
+	"seen":            true,
+	"lead_source":     true,
+	"lead_at":         true,
+	"lifecycle_stage": true,
+	"related_email":   true,
+	"first_interact":  true,
+}
+
+func TruncateUser(user *User) {
+	user.LeadOwners = nil
+	user.LeadConversionBys = nil
+	user.FirstContentView = nil
+	user.LatestContentView = nil
+	user.StartContentView = nil
+	user.Segments = nil
+	user.LifecycleStages = nil
+	user.Labels = nil
+	user.Merged = 0
+	user.MergedReason = ""
+	user.PrimaryId = ""
+
+	newuserattributes := []*Attribute{}
+	for _, attr := range user.Attributes {
+		if skipuserfields[attr.Key] {
+			continue
+		}
+
+		if attr.Key != "created" && attr.Key != "fullname" && attr.Key != "focused" {
+			if attr.UserValue == "" {
+				continue
+			}
+		}
+		attr.Modified = 0
+		attr.ByType = ""
+		attr.By = ""
+		newuserattributes = append(newuserattributes, attr)
+	}
+	user.Attributes = newuserattributes
+}
