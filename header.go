@@ -2443,6 +2443,33 @@ var skipuserfields = map[string]bool{
 	"first_interact":  true,
 }
 
+func TruncateConversation(convo *Conversation) {
+	convo.Tags = nil
+	convo.Integration = nil
+	if convo.LastMessageSent != nil {
+		if convo.LastMessageSent.By != nil {
+			convo.LastMessageSent.By.Device = nil
+		}
+	}
+	convo.ResponseSec = 0
+	for _, mem := range convo.GetMembers() {
+		if mem.Membership != "active" {
+			continue
+		}
+		mem.InvitedBy = nil
+		mem.Membership = ""
+		mem.ConversationId = ""
+		mem.JoinedAt = 0
+		mem.FirstMessageAt = 0
+		mem.SeenAt = 0
+		mem.ReceivedAt = 0
+		mem.LastSent = 0
+		mem.LastSentEventTime = 0
+		mem.InviteReason = ""
+		mem.TotalMessages = 0
+	}
+}
+
 func TruncateUser(user *User) {
 	user.LeadOwners = nil
 	user.LeadConversionBys = nil
