@@ -931,3 +931,9 @@ message SuggestAIDataEntryRequest {
 	string event_id = 4;
 	string ai_agent_id = 5;
 }
+
+message ListAgentOnlineRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	int64 ping_after_ms = 3;
+}

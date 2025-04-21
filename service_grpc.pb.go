@@ -2021,6 +2021,7 @@ const (
 	AccountMgr_EnterGHNAffiliateOTP_FullMethodName            = "/header.AccountMgr/EnterGHNAffiliateOTP"
 	AccountMgr_UpdateAgentPresence_FullMethodName             = "/header.AccountMgr/UpdateAgentPresence"
 	AccountMgr_ListAgentPresences_FullMethodName              = "/header.AccountMgr/ListAgentPresences"
+	AccountMgr_ListAgentOnlines_FullMethodName                = "/header.AccountMgr/ListAgentOnlines"
 	AccountMgr_ReportAvailibilities_FullMethodName            = "/header.AccountMgr/ReportAvailibilities"
 	AccountMgr_NewID_FullMethodName                           = "/header.AccountMgr/NewID"
 	AccountMgr_LockLogin_FullMethodName                       = "/header.AccountMgr/LockLogin"
@@ -2137,6 +2138,7 @@ type AccountMgrClient interface {
 	EnterGHNAffiliateOTP(ctx context.Context, in *IntegratedShipping, opts ...grpc.CallOption) (*IntegratedShipping, error)
 	UpdateAgentPresence(ctx context.Context, in *account.Presence, opts ...grpc.CallOption) (*account.Presence, error)
 	ListAgentPresences(ctx context.Context, in *Id, opts ...grpc.CallOption) (*account.Presences, error)
+	ListAgentOnlines(ctx context.Context, in *ListAgentOnlineRequest, opts ...grpc.CallOption) (*account.Presences, error)
 	ReportAvailibilities(ctx context.Context, in *AvailibilityReportRequest, opts ...grpc.CallOption) (*ReportResponse, error)
 	NewID(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	LockLogin(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
@@ -2986,6 +2988,16 @@ func (c *accountMgrClient) ListAgentPresences(ctx context.Context, in *Id, opts 
 	return out, nil
 }
 
+func (c *accountMgrClient) ListAgentOnlines(ctx context.Context, in *ListAgentOnlineRequest, opts ...grpc.CallOption) (*account.Presences, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(account.Presences)
+	err := c.cc.Invoke(ctx, AccountMgr_ListAgentOnlines_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *accountMgrClient) ReportAvailibilities(ctx context.Context, in *AvailibilityReportRequest, opts ...grpc.CallOption) (*ReportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReportResponse)
@@ -3352,6 +3364,7 @@ type AccountMgrServer interface {
 	EnterGHNAffiliateOTP(context.Context, *IntegratedShipping) (*IntegratedShipping, error)
 	UpdateAgentPresence(context.Context, *account.Presence) (*account.Presence, error)
 	ListAgentPresences(context.Context, *Id) (*account.Presences, error)
+	ListAgentOnlines(context.Context, *ListAgentOnlineRequest) (*account.Presences, error)
 	ReportAvailibilities(context.Context, *AvailibilityReportRequest) (*ReportResponse, error)
 	NewID(context.Context, *Id) (*Id, error)
 	LockLogin(context.Context, *Id) (*Id, error)
@@ -3633,6 +3646,9 @@ func (UnimplementedAccountMgrServer) UpdateAgentPresence(context.Context, *accou
 }
 func (UnimplementedAccountMgrServer) ListAgentPresences(context.Context, *Id) (*account.Presences, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAgentPresences not implemented")
+}
+func (UnimplementedAccountMgrServer) ListAgentOnlines(context.Context, *ListAgentOnlineRequest) (*account.Presences, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAgentOnlines not implemented")
 }
 func (UnimplementedAccountMgrServer) ReportAvailibilities(context.Context, *AvailibilityReportRequest) (*ReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportAvailibilities not implemented")
@@ -5197,6 +5213,24 @@ func _AccountMgr_ListAgentPresences_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountMgr_ListAgentOnlines_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAgentOnlineRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).ListAgentOnlines(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_ListAgentOnlines_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).ListAgentOnlines(ctx, req.(*ListAgentOnlineRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AccountMgr_ReportAvailibilities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AvailibilityReportRequest)
 	if err := dec(in); err != nil {
@@ -6031,6 +6065,10 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAgentPresences",
 			Handler:    _AccountMgr_ListAgentPresences_Handler,
+		},
+		{
+			MethodName: "ListAgentOnlines",
+			Handler:    _AccountMgr_ListAgentOnlines_Handler,
 		},
 		{
 			MethodName: "ReportAvailibilities",

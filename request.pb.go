@@ -7592,6 +7592,66 @@ func (x *SuggestAIDataEntryRequest) GetAiAgentId() string {
 	return ""
 }
 
+type ListAgentOnlineRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	PingAfterMs   int64                  `protobuf:"varint,3,opt,name=ping_after_ms,json=pingAfterMs,proto3" json:"ping_after_ms,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAgentOnlineRequest) Reset() {
+	*x = ListAgentOnlineRequest{}
+	mi := &file_request_proto_msgTypes[70]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAgentOnlineRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAgentOnlineRequest) ProtoMessage() {}
+
+func (x *ListAgentOnlineRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[70]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAgentOnlineRequest.ProtoReflect.Descriptor instead.
+func (*ListAgentOnlineRequest) Descriptor() ([]byte, []int) {
+	return file_request_proto_rawDescGZIP(), []int{70}
+}
+
+func (x *ListAgentOnlineRequest) GetCtx() *common.Context {
+	if x != nil {
+		return x.Ctx
+	}
+	return nil
+}
+
+func (x *ListAgentOnlineRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
+func (x *ListAgentOnlineRequest) GetPingAfterMs() int64 {
+	if x != nil {
+		return x.PingAfterMs
+	}
+	return 0
+}
+
 var File_request_proto protoreflect.FileDescriptor
 
 var file_request_proto_rawDesc = string([]byte{
@@ -8870,6 +8930,14 @@ var file_request_proto_rawDesc = string([]byte{
 	0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x49, 0x64,
 	0x12, 0x1e, 0x0a, 0x0b, 0x61, 0x69, 0x5f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18,
 	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x69, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x49, 0x64,
+	0x22, 0x7e, 0x0a, 0x16, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x4f, 0x6e, 0x6c,
+	0x69, 0x6e, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x21, 0x0a, 0x03, 0x63, 0x74,
+	0x78, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
+	0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x52, 0x03, 0x63, 0x74, 0x78, 0x12, 0x1d, 0x0a,
+	0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x22, 0x0a, 0x0d,
+	0x70, 0x69, 0x6e, 0x67, 0x5f, 0x61, 0x66, 0x74, 0x65, 0x72, 0x5f, 0x6d, 0x73, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x0b, 0x70, 0x69, 0x6e, 0x67, 0x41, 0x66, 0x74, 0x65, 0x72, 0x4d, 0x73,
 	0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73,
 	0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x33,
@@ -8888,7 +8956,7 @@ func file_request_proto_rawDescGZIP() []byte {
 }
 
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 70)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 71)
 var file_request_proto_goTypes = []any{
 	(ReportCampaignRequest_Range)(0),      // 0: header.ReportCampaignRequest.Range
 	(ReportWebPluginRequest_Range)(0),     // 1: header.ReportWebPluginRequest.Range
@@ -8963,84 +9031,86 @@ var file_request_proto_goTypes = []any{
 	(*LLMSpansRequest)(nil),               // 70: header.LLMSpansRequest
 	(*LLMTracesRequest)(nil),              // 71: header.LLMTracesRequest
 	(*SuggestAIDataEntryRequest)(nil),     // 72: header.SuggestAIDataEntryRequest
-	(*common.Context)(nil),                // 73: common.Context
-	(*account.BusinessHours)(nil),         // 74: account.BusinessHours
+	(*ListAgentOnlineRequest)(nil),        // 73: header.ListAgentOnlineRequest
+	(*common.Context)(nil),                // 74: common.Context
+	(*account.BusinessHours)(nil),         // 75: account.BusinessHours
 }
 var file_request_proto_depIdxs = []int32{
-	73, // 0: header.TagRequest.ctx:type_name -> common.Context
-	73, // 1: header.UserReportRequest.ctx:type_name -> common.Context
-	74, // 2: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
-	74, // 3: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	74, // 4: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
-	74, // 5: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	74, // 6: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
-	74, // 7: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	73, // 8: header.ListUserEventsRequest.ctx:type_name -> common.Context
-	73, // 9: header.ListEventTypeRequest.ctx:type_name -> common.Context
-	73, // 10: header.PresencesRequest.ctx:type_name -> common.Context
-	73, // 11: header.ListNotiRequest.ctx:type_name -> common.Context
-	73, // 12: header.UserRequest.ctx:type_name -> common.Context
-	73, // 13: header.ListNotesRequest.ctx:type_name -> common.Context
-	73, // 14: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
-	73, // 15: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
-	73, // 16: header.BotsRequest.ctx:type_name -> common.Context
-	73, // 17: header.ListAIAgentMessageRequest.ctx:type_name -> common.Context
-	73, // 18: header.ReportConvoMessageRequest.ctx:type_name -> common.Context
-	73, // 19: header.ReportAIAgentRequest.ctx:type_name -> common.Context
-	73, // 20: header.ConversionRequest.ctx:type_name -> common.Context
-	73, // 21: header.ReportCampaignRequest.ctx:type_name -> common.Context
-	73, // 22: header.ReportWebPluginRequest.ctx:type_name -> common.Context
-	73, // 23: header.WebPluginConversionRequest.ctx:type_name -> common.Context
-	73, // 24: header.SearchLocationsRequest.ctx:type_name -> common.Context
-	73, // 25: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
-	73, // 26: header.DeliveryRequest.ctx:type_name -> common.Context
-	73, // 27: header.SearchRequest.ctx:type_name -> common.Context
-	73, // 28: header.AvailibilityReportRequest.ctx:type_name -> common.Context
-	73, // 29: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
-	74, // 30: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
-	74, // 31: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
-	73, // 32: header.OrdersRequest.ctx:type_name -> common.Context
-	73, // 33: header.CountOrdersRequest.ctx:type_name -> common.Context
+	74, // 0: header.TagRequest.ctx:type_name -> common.Context
+	74, // 1: header.UserReportRequest.ctx:type_name -> common.Context
+	75, // 2: header.ConversationMetricsRequest.business_hours:type_name -> account.BusinessHours
+	75, // 3: header.ConversationMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	75, // 4: header.AgentMetricsRequest.business_hours:type_name -> account.BusinessHours
+	75, // 5: header.AgentMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	75, // 6: header.CallMetricsRequest.business_hours:type_name -> account.BusinessHours
+	75, // 7: header.CallMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	74, // 8: header.ListUserEventsRequest.ctx:type_name -> common.Context
+	74, // 9: header.ListEventTypeRequest.ctx:type_name -> common.Context
+	74, // 10: header.PresencesRequest.ctx:type_name -> common.Context
+	74, // 11: header.ListNotiRequest.ctx:type_name -> common.Context
+	74, // 12: header.UserRequest.ctx:type_name -> common.Context
+	74, // 13: header.ListNotesRequest.ctx:type_name -> common.Context
+	74, // 14: header.UpdateWorkflowSessionRequest.ctx:type_name -> common.Context
+	74, // 15: header.ListWorkflowLogRequest.ctx:type_name -> common.Context
+	74, // 16: header.BotsRequest.ctx:type_name -> common.Context
+	74, // 17: header.ListAIAgentMessageRequest.ctx:type_name -> common.Context
+	74, // 18: header.ReportConvoMessageRequest.ctx:type_name -> common.Context
+	74, // 19: header.ReportAIAgentRequest.ctx:type_name -> common.Context
+	74, // 20: header.ConversionRequest.ctx:type_name -> common.Context
+	74, // 21: header.ReportCampaignRequest.ctx:type_name -> common.Context
+	74, // 22: header.ReportWebPluginRequest.ctx:type_name -> common.Context
+	74, // 23: header.WebPluginConversionRequest.ctx:type_name -> common.Context
+	74, // 24: header.SearchLocationsRequest.ctx:type_name -> common.Context
+	74, // 25: header.RecentIndexDeliveryRequest.ctx:type_name -> common.Context
+	74, // 26: header.DeliveryRequest.ctx:type_name -> common.Context
+	74, // 27: header.SearchRequest.ctx:type_name -> common.Context
+	74, // 28: header.AvailibilityReportRequest.ctx:type_name -> common.Context
+	74, // 29: header.FileUrlDownloadRequest.ctx:type_name -> common.Context
+	75, // 30: header.OrderMetricsRequest.business_hours:type_name -> account.BusinessHours
+	75, // 31: header.OrderMetricsRequest.not_business_hours:type_name -> account.BusinessHours
+	74, // 32: header.OrdersRequest.ctx:type_name -> common.Context
+	74, // 33: header.CountOrdersRequest.ctx:type_name -> common.Context
 	36, // 34: header.CountOrdersRequest.queries:type_name -> header.OrdersRequest
-	73, // 35: header.WorkflowReportRequest.ctx:type_name -> common.Context
-	73, // 36: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
-	73, // 37: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
-	73, // 38: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
-	73, // 39: header.TasksRequest.ctx:type_name -> common.Context
-	73, // 40: header.DocIndexRequest.ctx:type_name -> common.Context
-	73, // 41: header.DocSearchRequest.ctx:type_name -> common.Context
-	73, // 42: header.CreateAgentRequest.ctx:type_name -> common.Context
-	73, // 43: header.ListConversationsRequest.ctx:type_name -> common.Context
-	73, // 44: header.ListConversationEventsRequest.ctx:type_name -> common.Context
-	73, // 45: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
-	73, // 46: header.ListArticleRequest.ctx:type_name -> common.Context
-	73, // 47: header.SearchArticleRequest.ctx:type_name -> common.Context
-	73, // 48: header.RedeemRequest.ctx:type_name -> common.Context
-	73, // 49: header.ListVersions.ctx:type_name -> common.Context
-	73, // 50: header.ReportCountRequest.ctx:type_name -> common.Context
-	73, // 51: header.CounterReportRequest.ctx:type_name -> common.Context
-	73, // 52: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
-	73, // 53: header.CreateAccountRequest.ctx:type_name -> common.Context
-	73, // 54: header.NewPassword.ctx:type_name -> common.Context
-	73, // 55: header.CrawlUrlRequest.ctx:type_name -> common.Context
-	73, // 56: header.ListAIDataEntryRequest.ctx:type_name -> common.Context
-	73, // 57: header.CampaignSendLogRequest.ctx:type_name -> common.Context
-	73, // 58: header.AiQnaSuggestionRequest.ctx:type_name -> common.Context
-	73, // 59: header.AiResponseSourceRequest.ctx:type_name -> common.Context
-	73, // 60: header.FacebookPostRequest.ctx:type_name -> common.Context
-	73, // 61: header.ListRuleRequest.ctx:type_name -> common.Context
-	73, // 62: header.ListZNSTemplateRequest.ctx:type_name -> common.Context
-	73, // 63: header.ListEmailSignatureRequest.ctx:type_name -> common.Context
-	73, // 64: header.CreditSpendReportRequest.ctx:type_name -> common.Context
-	73, // 65: header.CreditSpendLogRequest.ctx:type_name -> common.Context
-	73, // 66: header.LLMSpansRequest.ctx:type_name -> common.Context
-	73, // 67: header.LLMTracesRequest.ctx:type_name -> common.Context
-	73, // 68: header.SuggestAIDataEntryRequest.ctx:type_name -> common.Context
-	69, // [69:69] is the sub-list for method output_type
-	69, // [69:69] is the sub-list for method input_type
-	69, // [69:69] is the sub-list for extension type_name
-	69, // [69:69] is the sub-list for extension extendee
-	0,  // [0:69] is the sub-list for field type_name
+	74, // 35: header.WorkflowReportRequest.ctx:type_name -> common.Context
+	74, // 36: header.AuthorizeShopeeRequest.ctx:type_name -> common.Context
+	74, // 37: header.ShopeeSyncProductRequest.ctx:type_name -> common.Context
+	74, // 38: header.AddressAutocompleteRequest.ctx:type_name -> common.Context
+	74, // 39: header.TasksRequest.ctx:type_name -> common.Context
+	74, // 40: header.DocIndexRequest.ctx:type_name -> common.Context
+	74, // 41: header.DocSearchRequest.ctx:type_name -> common.Context
+	74, // 42: header.CreateAgentRequest.ctx:type_name -> common.Context
+	74, // 43: header.ListConversationsRequest.ctx:type_name -> common.Context
+	74, // 44: header.ListConversationEventsRequest.ctx:type_name -> common.Context
+	74, // 45: header.ListWorkflowSessionRequest.ctx:type_name -> common.Context
+	74, // 46: header.ListArticleRequest.ctx:type_name -> common.Context
+	74, // 47: header.SearchArticleRequest.ctx:type_name -> common.Context
+	74, // 48: header.RedeemRequest.ctx:type_name -> common.Context
+	74, // 49: header.ListVersions.ctx:type_name -> common.Context
+	74, // 50: header.ReportCountRequest.ctx:type_name -> common.Context
+	74, // 51: header.CounterReportRequest.ctx:type_name -> common.Context
+	74, // 52: header.ListKnowledgeBaseEventRequest.ctx:type_name -> common.Context
+	74, // 53: header.CreateAccountRequest.ctx:type_name -> common.Context
+	74, // 54: header.NewPassword.ctx:type_name -> common.Context
+	74, // 55: header.CrawlUrlRequest.ctx:type_name -> common.Context
+	74, // 56: header.ListAIDataEntryRequest.ctx:type_name -> common.Context
+	74, // 57: header.CampaignSendLogRequest.ctx:type_name -> common.Context
+	74, // 58: header.AiQnaSuggestionRequest.ctx:type_name -> common.Context
+	74, // 59: header.AiResponseSourceRequest.ctx:type_name -> common.Context
+	74, // 60: header.FacebookPostRequest.ctx:type_name -> common.Context
+	74, // 61: header.ListRuleRequest.ctx:type_name -> common.Context
+	74, // 62: header.ListZNSTemplateRequest.ctx:type_name -> common.Context
+	74, // 63: header.ListEmailSignatureRequest.ctx:type_name -> common.Context
+	74, // 64: header.CreditSpendReportRequest.ctx:type_name -> common.Context
+	74, // 65: header.CreditSpendLogRequest.ctx:type_name -> common.Context
+	74, // 66: header.LLMSpansRequest.ctx:type_name -> common.Context
+	74, // 67: header.LLMTracesRequest.ctx:type_name -> common.Context
+	74, // 68: header.SuggestAIDataEntryRequest.ctx:type_name -> common.Context
+	74, // 69: header.ListAgentOnlineRequest.ctx:type_name -> common.Context
+	70, // [70:70] is the sub-list for method output_type
+	70, // [70:70] is the sub-list for method input_type
+	70, // [70:70] is the sub-list for extension type_name
+	70, // [70:70] is the sub-list for extension extendee
+	0,  // [0:70] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -9054,7 +9124,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   70,
+			NumMessages:   71,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

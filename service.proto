@@ -173,7 +173,9 @@ service AccountMgr {
 	rpc EnterGHNAffiliateOTP(header.IntegratedShipping) returns (header.IntegratedShipping);
 
 	rpc UpdateAgentPresence (account.Presence) returns (account.Presence);
-	rpc ListAgentPresences (Id) returns (account.Presences);
+	rpc ListAgentPresences (Id) returns (account.Presences); // @deprecated internal only
+	rpc ListAgentOnlines (ListAgentOnlineRequest) returns (account.Presences); // internal only
+
 	rpc ReportAvailibilities(AvailibilityReportRequest) returns (ReportResponse);
 
 	rpc NewID(header.Id) returns (header.Id);
