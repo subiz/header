@@ -2452,17 +2452,21 @@ func TruncateConversation(convo *Conversation) {
 	}
 	convo.Subject = ""
 	convo.ResponseSec = 0
-	convo.Integration = nil
 	convo.AssignedTo = nil
 	convo.ReassignedTo = nil
 	convo.Fields = nil
 	convo.HumanNotified = 0
 	newmems := []*ConversationMember{}
 	for _, mem := range convo.GetMembers() {
-		if mem.Membership != "active" {
+		if mem.Membership != "active" && mem.GetType() != "user" {
 			continue
 		}
-		newmems = append(newmems, &ConversationMember{Id: mem.Id, Type: mem.Type, Membership: mem.Membership})
+		m := &ConversationMember{Id: mem.Id, Type: mem.Type, Membership: mem.Membership, LastSent: mem.LastSent}
+		if mem.GetType() == "user" {
+			m.SeenAt = mem.SeenAt
+		}
+		newmems = append(newmems, m)
+
 	}
 	convo.Members = newmems
 }

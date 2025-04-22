@@ -1194,7 +1194,7 @@ message Conversation {
 	string state = 11; // converation state: pending, dialing, active, (routing||unassigned), congestion, ended
 	Touchpoint touchpoint = 13; // where does the conversation happend, replace integration and chain
 
-	Integration integration = 18; // removing after tet
+	// Integration integration = 18; // removing after tet
 	int64 actived = 19;
 
 	Event last_internal_message_sent = 27;
@@ -1461,6 +1461,11 @@ message AdsContextData {
 	string ad_title = 7;
 	string video_url = 8;
 	string product_id = 9;
+
+	// repeated string releated_post_ids = 10; // subiz only, multiple post point to same video
+	// prof:
+	// https://www.facebook.com/738773424955656/videos/1019599936278960
+	// https://www.facebook.com/738773424955656/videos/1215325756825312
 }
 
 message InstagramStory {
@@ -2870,6 +2875,8 @@ message Form {
 
 	repeated FormGroup form_groups = 25;
 	string type = 26; // campaign, form, popup
+
+	repeated Block content = 27;
 }
 
 message FormGroup {
@@ -7837,11 +7844,17 @@ message Job {
 }
 
 message Block {
-	string type = 5; // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table, horizontal_rule, blockquote, link
+	string id = 4;
+	string type = 5; // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table, horizontal_rule, blockquote, link, select
 	repeated Block content = 6;
 	string text = 7;
 
 	////	string code = 20; // emoji code
+
+	string for = 21; // for label
+	string name = 22; // for input
+	string value = 23; // for option
+	bool required = 24;
 
 	string class = 98;
 	Style style = 99; // inline style
