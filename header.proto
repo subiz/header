@@ -2796,6 +2796,7 @@ message FormField {
 
 	// so front end dont have to download attribute definitions
 	// text, phone, email, rating, multiple-choice, single-choice, dropdown, checkbox, number
+	// label
 	string type = 5;
 
 	string validate = 8; // phone, email, rating
@@ -2815,6 +2816,8 @@ message FormField {
 	bool is_hidden = 16;
 
 	string linked_user_attribute = 17;
+
+	repeated Block content = 18;
 }
 
 message FormSubmissions {
@@ -2876,7 +2879,7 @@ message Form {
 	repeated FormGroup form_groups = 25;
 	string type = 26; // campaign, form, popup
 
-	repeated Block content = 27;
+	repeated Block components = 27;
 }
 
 message FormGroup {
@@ -7019,6 +7022,7 @@ message WorkflowTimming {
 	// string var_format = 28; // default unix_sec, 2006-01-02T15:04:05Z07:00
 }
 
+// when update new fields, must check cleanTemperalCond func in automation/utils.go
 message WorkflowCondition {
 	string id = 2;
 	// event, id, keyword, lead_owner attr:fullname segment user_label
@@ -7846,15 +7850,35 @@ message Job {
 message Block {
 	string id = 4;
 	string type = 5; // paragraph, heading, text, image, code, bullet_list, ordered_list, list_item, table_cell, table_row, table, horizontal_rule, blockquote, link, select
+	// type = input, button
 	repeated Block content = 6;
 	string text = 7;
 
 	////	string code = 20; // emoji code
 
 	string for = 21; // for label
-	string name = 22; // for input
-	string value = 23; // for option
-	bool required = 24;
+	/* {
+        "type": "input",
+        "key": "fullname",
+        "default_value": "234",
+        "linked_attribute": "email",
+        "placeholder": "123098123",
+        "label": "Họ và tên",
+        "input_type": "text",
+        "is_required": true
+      },
+	*/
+	string label = 25;
+	string input_type = 26; //
+	bool is_required = 27;
+	string key = 28;
+	string linked_attribute = 29;
+	string place_holder = 30;
+	message InputOption {
+		string label = 2;
+		string value = 3;
+	}
+	repeated InputOption input_options = 31;
 
 	string class = 98;
 	Style style = 99; // inline style
@@ -7876,6 +7900,7 @@ message Block {
 	int64 colspan = 114;
 	int64 rowspan = 115;
 	int64 colwidth = 116;
+
 	map<string,string> attrs = 200;
 }
 
@@ -8583,6 +8608,17 @@ message AIFunction {
 	AutomationFunction workflow_action = 15;
 	UpdateUserInformation update_information = 16;
 	AssignRequest assign_agent = 18;
+
+	ScheduleAppointment system_schedule_appointment = 19;
+}
+
+message ScheduleAppointment {
+	repeated Block components = 27;
+
+	string title = 3; // prompt
+	string description = 4; // prompt
+	string type_id = 5;
+	string due_at = 6;
 }
 
 message UpdateUserInformation {
