@@ -26504,18 +26504,20 @@ const (
 	FormMgr_DeleteForm_FullMethodName          = "/header.FormMgr/DeleteForm"
 	FormMgr_ReportForm_FullMethodName          = "/header.FormMgr/ReportForm"
 	FormMgr_ListFormSubmissions_FullMethodName = "/header.FormMgr/ListFormSubmissions"
+	FormMgr_SubmitForm_FullMethodName          = "/header.FormMgr/SubmitForm"
 )
 
 // FormMgrClient is the client API for FormMgr service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FormMgrClient interface {
-	ListForms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Forms, error)
-	CreateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Form, error)
-	UpdateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Form, error)
+	ListForms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	CreateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error)
+	UpdateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error)
 	DeleteForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*FormReportResponse, error)
-	ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*FormSubmissions, error)
+	ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*Response, error)
+	SubmitForm(ctx context.Context, in *FormSubmission, opts ...grpc.CallOption) (*FormSubmission, error)
 }
 
 type formMgrClient struct {
@@ -26526,9 +26528,9 @@ func NewFormMgrClient(cc grpc.ClientConnInterface) FormMgrClient {
 	return &formMgrClient{cc}
 }
 
-func (c *formMgrClient) ListForms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Forms, error) {
+func (c *formMgrClient) ListForms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Forms)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, FormMgr_ListForms_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -26536,9 +26538,9 @@ func (c *formMgrClient) ListForms(ctx context.Context, in *Id, opts ...grpc.Call
 	return out, nil
 }
 
-func (c *formMgrClient) CreateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Form, error) {
+func (c *formMgrClient) CreateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Form)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, FormMgr_CreateForm_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -26546,9 +26548,9 @@ func (c *formMgrClient) CreateForm(ctx context.Context, in *Form, opts ...grpc.C
 	return out, nil
 }
 
-func (c *formMgrClient) UpdateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Form, error) {
+func (c *formMgrClient) UpdateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Form)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, FormMgr_UpdateForm_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -26576,10 +26578,20 @@ func (c *formMgrClient) ReportForm(ctx context.Context, in *FormReportRequest, o
 	return out, nil
 }
 
-func (c *formMgrClient) ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*FormSubmissions, error) {
+func (c *formMgrClient) ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FormSubmissions)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, FormMgr_ListFormSubmissions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *formMgrClient) SubmitForm(ctx context.Context, in *FormSubmission, opts ...grpc.CallOption) (*FormSubmission, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FormSubmission)
+	err := c.cc.Invoke(ctx, FormMgr_SubmitForm_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -26590,12 +26602,13 @@ func (c *formMgrClient) ListFormSubmissions(ctx context.Context, in *ListFormSub
 // All implementations must embed UnimplementedFormMgrServer
 // for forward compatibility.
 type FormMgrServer interface {
-	ListForms(context.Context, *Id) (*Forms, error)
-	CreateForm(context.Context, *Form) (*Form, error)
-	UpdateForm(context.Context, *Form) (*Form, error)
+	ListForms(context.Context, *Id) (*Response, error)
+	CreateForm(context.Context, *Form) (*Response, error)
+	UpdateForm(context.Context, *Form) (*Response, error)
 	DeleteForm(context.Context, *Id) (*Empty, error)
 	ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error)
-	ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*FormSubmissions, error)
+	ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*Response, error)
+	SubmitForm(context.Context, *FormSubmission) (*FormSubmission, error)
 	mustEmbedUnimplementedFormMgrServer()
 }
 
@@ -26606,13 +26619,13 @@ type FormMgrServer interface {
 // pointer dereference when methods are called.
 type UnimplementedFormMgrServer struct{}
 
-func (UnimplementedFormMgrServer) ListForms(context.Context, *Id) (*Forms, error) {
+func (UnimplementedFormMgrServer) ListForms(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListForms not implemented")
 }
-func (UnimplementedFormMgrServer) CreateForm(context.Context, *Form) (*Form, error) {
+func (UnimplementedFormMgrServer) CreateForm(context.Context, *Form) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateForm not implemented")
 }
-func (UnimplementedFormMgrServer) UpdateForm(context.Context, *Form) (*Form, error) {
+func (UnimplementedFormMgrServer) UpdateForm(context.Context, *Form) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateForm not implemented")
 }
 func (UnimplementedFormMgrServer) DeleteForm(context.Context, *Id) (*Empty, error) {
@@ -26621,8 +26634,11 @@ func (UnimplementedFormMgrServer) DeleteForm(context.Context, *Id) (*Empty, erro
 func (UnimplementedFormMgrServer) ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportForm not implemented")
 }
-func (UnimplementedFormMgrServer) ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*FormSubmissions, error) {
+func (UnimplementedFormMgrServer) ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFormSubmissions not implemented")
+}
+func (UnimplementedFormMgrServer) SubmitForm(context.Context, *FormSubmission) (*FormSubmission, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitForm not implemented")
 }
 func (UnimplementedFormMgrServer) mustEmbedUnimplementedFormMgrServer() {}
 func (UnimplementedFormMgrServer) testEmbeddedByValue()                 {}
@@ -26753,6 +26769,24 @@ func _FormMgr_ListFormSubmissions_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FormMgr_SubmitForm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FormSubmission)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormMgrServer).SubmitForm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FormMgr_SubmitForm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormMgrServer).SubmitForm(ctx, req.(*FormSubmission))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FormMgr_ServiceDesc is the grpc.ServiceDesc for FormMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -26783,6 +26817,10 @@ var FormMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListFormSubmissions",
 			Handler:    _FormMgr_ListFormSubmissions_Handler,
+		},
+		{
+			MethodName: "SubmitForm",
+			Handler:    _FormMgr_SubmitForm_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

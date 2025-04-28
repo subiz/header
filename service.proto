@@ -919,12 +919,13 @@ service CreditMgr {
 }
 
 service FormMgr {
-	rpc ListForms(header.Id) returns (header.Forms);
-	rpc CreateForm(header.Form) returns (header.Form);
-	rpc UpdateForm(header.Form) returns (header.Form);
+	rpc ListForms(header.Id) returns (header.Response);
+	rpc CreateForm(header.Form) returns (header.Response);
+	rpc UpdateForm(header.Form) returns (header.Response);
 	rpc DeleteForm(header.Id) returns (Empty);
 	rpc ReportForm(header.FormReportRequest) returns (header.FormReportResponse);
-	rpc ListFormSubmissions(header.ListFormSubmissionRequest) returns (header.FormSubmissions);
+	rpc ListFormSubmissions(header.ListFormSubmissionRequest) returns (header.Response);
+	rpc SubmitForm(header.FormSubmission) returns (header.FormSubmission);
 }
 
 service Scheduler {

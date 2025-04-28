@@ -763,6 +763,7 @@ message Data {
 	ZNSMedia zns_media = 136;
 	EmailSignature email_signature = 137;
 	LLMToolCall llm_tool_call = 138;
+	Form form = 139;
 }
 
 message ConversationMeta {
@@ -1606,12 +1607,6 @@ message Attachment {
 	string pretext = 11;
 
 	repeated MessageButton buttons = 16;
-	// AskInfomation ask_info = 17;
-	// AskInfomationAnswer ask_info_answer = 18;
-	//repeated string inputtype = 17;
-
-	// MessageForm form = 20;
-	// MessageFormSubmit form_submit = 21;
 
 	repeated QuickReply quick_replies = 23;
 	bool lock_input = 24; // lock input while has quick replies
@@ -2816,12 +2811,6 @@ message FormField {
 	bool is_hidden = 16;
 
 	string linked_user_attribute = 17;
-
-	repeated Block content = 18;
-}
-
-message FormSubmissions {
-	repeated FormSubmission form_submissions = 4;
 }
 
 message FormSubmission {
@@ -2830,63 +2819,59 @@ message FormSubmission {
 
 	string form_id = 3; // widget_offline, widget_prechat
 	string user_id = 4;
+	string conversation_id = 11;
 
 	string id = 5;
 
-	int64 submitted_at = 6;
+	int64 submitted_at = 6; // ms
 	repeated FormField values = 7;
 
 	// track submission source
 	string page_url = 8;
 	string source_campaign_id = 9;
 	string source_campaign_number = 10;
-}
 
-message Forms {
-	repeated Form forms = 4;
+	common.Device device = 12;
 }
 
 message Form {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+
 	// general stype
-	repeated FormField fields = 1; // convert to form group
+	// repeated FormField fields = 5; // convert to form group
+	string service_id = 5;
+	string service_type = 6;
 
 	// for widget
-	bool group_required = 2;
-	repeated WidgetGroup groups = 3;
-	string group_label = 4;
+	bool group_required = 12;
+	repeated WidgetGroup groups = 13;
+	string group_label = 14;
 
-	string title = 5;
-	bool enabled = 6;
-	bool end_conversation_after_submit = 7;
-	string enable_when = 8;
+	string title = 15;
+	bool enabled = 16;
+	bool end_conversation_after_submit = 17;
+	string enable_when = 18;
 	enum When {
 		all_agents_offline = 0;
 		out_of_bussiness_hour = 1;
 	}
+	bool question_required = 20;
+	string question_label = 21;
 
-	bool question_required = 10;
-	string question_label = 11;
+	I18nString i18n_group_label = 22;
+	I18nString i18n_title = 23;
+	I18nString i18n_question_label = 24;
 
-	I18nString i18n_group_label = 12;
-	I18nString i18n_title = 13;
-	I18nString i18n_question_label = 14;
+	int64 created = 30;
+	string created_by = 31;
+	int64 updated = 32;
+	string updated_by = 33;
 
-	int64 created = 20;
-	string created_by = 21;
-	int64 updated = 22;
-	string updated_by = 23;
-
-	repeated FormGroup form_groups = 25;
 	string type = 26; // campaign, form, popup
 
 	repeated Block components = 27;
-}
-
-message FormGroup {
-	string type = 4;
-	repeated FormField fields = 5;
-	string title = 10;
-	I18nString i18n_title = 11;
 }
 
 message ButtonsComponent {
@@ -6042,13 +6027,15 @@ message BusinessEmailAddresses {
 
 message FormReportRequest {}
 message FormReportResponse {}
+
 message ListFormSubmissionRequest {
 	common.Context ctx = 1;
 	string account_id = 2;
-	string agent_id = 3;
+	string form_id = 3;
 	int32 limit = 4;
 	string anchor = 5;
-	string category = 6; // comma separated
+	// string category = 6; // comma separated
+	string keyword = 8; // for searching
 }
 
 message OutboundCallReportRequest {
@@ -6601,8 +6588,10 @@ message Response {
 	CreditUsage credit_usage = 194;
 
 	repeated AIAgentSpan ai_agent_spans = 195;
-
 	repeated AIAgentTrace ai_agent_traces = 196;
+	repeated FormSubmission form_submissions = 197;
+	repeated Form forms = 198;
+	Form form = 199;
 }
 
 message ReportCount {
@@ -8469,6 +8458,7 @@ message AIAgent {
 	string model = 23; // gpt-4o-mini-2024-07-18
 
 	repeated AIAgent sub_agents = 25;
+	repeated string form_ids = 27; // readonly
 
 	string token_limit = 28; // short, balanced, long
 	// int64 temperature = 29; // 50% -> 50
@@ -8613,12 +8603,11 @@ message AIFunction {
 }
 
 message ScheduleAppointment {
-	repeated Block components = 27;
-
 	string title = 3; // prompt
 	string description = 4; // prompt
-	string type_id = 5;
+	string ticket_type_id = 5;
 	string due_at = 6;
+	Form form = 7;
 }
 
 message UpdateUserInformation {
@@ -8695,7 +8684,7 @@ message AIDataEntry {
 	string id = 3;
 	string group_id = 4;
 
-	string type = 5; // qa, file, website
+	string type = 5; // qa, file, website, text (for testing)
 	Message answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
