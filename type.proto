@@ -335,6 +335,11 @@ enum RealtimeType {
 
 	attribute_collected = 328;
 	llm_tool_called = 329;
+
+	form_submitted = 339;
+	form_updated = 340;
+	form_created = 341;
+	form_deleted = 342;
 }
 
 message TextTransform {

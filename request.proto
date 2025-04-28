@@ -937,3 +937,19 @@ message ListAgentOnlineRequest {
 	string account_id = 2;
 	int64 ping_after_ms = 3;
 }
+
+message GenerateFormTokenRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string form_id = 3; // widget_offline, widget_prechat
+	string user_id = 5;
+	string conversation_id = 6;
+	string event_id = 7;
+	int64 attachment_index = 8;
+	string channel = 9;
+	string channel_source = 10;
+	string channel_id = 11;
+
+	int64 expired = 13;
+}

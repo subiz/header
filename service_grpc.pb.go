@@ -26498,13 +26498,16 @@ var CreditMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FormMgr_ListForms_FullMethodName           = "/header.FormMgr/ListForms"
-	FormMgr_CreateForm_FullMethodName          = "/header.FormMgr/CreateForm"
-	FormMgr_UpdateForm_FullMethodName          = "/header.FormMgr/UpdateForm"
-	FormMgr_DeleteForm_FullMethodName          = "/header.FormMgr/DeleteForm"
-	FormMgr_ReportForm_FullMethodName          = "/header.FormMgr/ReportForm"
-	FormMgr_ListFormSubmissions_FullMethodName = "/header.FormMgr/ListFormSubmissions"
-	FormMgr_SubmitForm_FullMethodName          = "/header.FormMgr/SubmitForm"
+	FormMgr_ListForms_FullMethodName              = "/header.FormMgr/ListForms"
+	FormMgr_CreateForm_FullMethodName             = "/header.FormMgr/CreateForm"
+	FormMgr_GetForm_FullMethodName                = "/header.FormMgr/GetForm"
+	FormMgr_UpdateForm_FullMethodName             = "/header.FormMgr/UpdateForm"
+	FormMgr_DeleteForm_FullMethodName             = "/header.FormMgr/DeleteForm"
+	FormMgr_ReportForm_FullMethodName             = "/header.FormMgr/ReportForm"
+	FormMgr_ListFormSubmissions_FullMethodName    = "/header.FormMgr/ListFormSubmissions"
+	FormMgr_SubmitForm_FullMethodName             = "/header.FormMgr/SubmitForm"
+	FormMgr_CheckFormFromAuthToken_FullMethodName = "/header.FormMgr/CheckFormFromAuthToken"
+	FormMgr_GenerateFormLink_FullMethodName       = "/header.FormMgr/GenerateFormLink"
 )
 
 // FormMgrClient is the client API for FormMgr service.
@@ -26513,11 +26516,14 @@ const (
 type FormMgrClient interface {
 	ListForms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error)
+	GetForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error)
 	DeleteForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*FormReportResponse, error)
 	ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*Response, error)
 	SubmitForm(ctx context.Context, in *FormSubmission, opts ...grpc.CallOption) (*FormSubmission, error)
+	CheckFormFromAuthToken(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	GenerateFormLink(ctx context.Context, in *GenerateFormTokenRequest, opts ...grpc.CallOption) (*Id, error)
 }
 
 type formMgrClient struct {
@@ -26542,6 +26548,16 @@ func (c *formMgrClient) CreateForm(ctx context.Context, in *Form, opts ...grpc.C
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, FormMgr_CreateForm_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *formMgrClient) GetForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FormMgr_GetForm_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -26598,17 +26614,40 @@ func (c *formMgrClient) SubmitForm(ctx context.Context, in *FormSubmission, opts
 	return out, nil
 }
 
+func (c *formMgrClient) CheckFormFromAuthToken(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FormMgr_CheckFormFromAuthToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *formMgrClient) GenerateFormLink(ctx context.Context, in *GenerateFormTokenRequest, opts ...grpc.CallOption) (*Id, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Id)
+	err := c.cc.Invoke(ctx, FormMgr_GenerateFormLink_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FormMgrServer is the server API for FormMgr service.
 // All implementations must embed UnimplementedFormMgrServer
 // for forward compatibility.
 type FormMgrServer interface {
 	ListForms(context.Context, *Id) (*Response, error)
 	CreateForm(context.Context, *Form) (*Response, error)
+	GetForm(context.Context, *Id) (*Response, error)
 	UpdateForm(context.Context, *Form) (*Response, error)
 	DeleteForm(context.Context, *Id) (*Empty, error)
 	ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error)
 	ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*Response, error)
 	SubmitForm(context.Context, *FormSubmission) (*FormSubmission, error)
+	CheckFormFromAuthToken(context.Context, *Id) (*Response, error)
+	GenerateFormLink(context.Context, *GenerateFormTokenRequest) (*Id, error)
 	mustEmbedUnimplementedFormMgrServer()
 }
 
@@ -26625,6 +26664,9 @@ func (UnimplementedFormMgrServer) ListForms(context.Context, *Id) (*Response, er
 func (UnimplementedFormMgrServer) CreateForm(context.Context, *Form) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateForm not implemented")
 }
+func (UnimplementedFormMgrServer) GetForm(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetForm not implemented")
+}
 func (UnimplementedFormMgrServer) UpdateForm(context.Context, *Form) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateForm not implemented")
 }
@@ -26639,6 +26681,12 @@ func (UnimplementedFormMgrServer) ListFormSubmissions(context.Context, *ListForm
 }
 func (UnimplementedFormMgrServer) SubmitForm(context.Context, *FormSubmission) (*FormSubmission, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitForm not implemented")
+}
+func (UnimplementedFormMgrServer) CheckFormFromAuthToken(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckFormFromAuthToken not implemented")
+}
+func (UnimplementedFormMgrServer) GenerateFormLink(context.Context, *GenerateFormTokenRequest) (*Id, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateFormLink not implemented")
 }
 func (UnimplementedFormMgrServer) mustEmbedUnimplementedFormMgrServer() {}
 func (UnimplementedFormMgrServer) testEmbeddedByValue()                 {}
@@ -26693,6 +26741,24 @@ func _FormMgr_CreateForm_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FormMgrServer).CreateForm(ctx, req.(*Form))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FormMgr_GetForm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormMgrServer).GetForm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FormMgr_GetForm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormMgrServer).GetForm(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26787,6 +26853,42 @@ func _FormMgr_SubmitForm_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FormMgr_CheckFormFromAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormMgrServer).CheckFormFromAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FormMgr_CheckFormFromAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormMgrServer).CheckFormFromAuthToken(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FormMgr_GenerateFormLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateFormTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormMgrServer).GenerateFormLink(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FormMgr_GenerateFormLink_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormMgrServer).GenerateFormLink(ctx, req.(*GenerateFormTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // FormMgr_ServiceDesc is the grpc.ServiceDesc for FormMgr service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -26801,6 +26903,10 @@ var FormMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateForm",
 			Handler:    _FormMgr_CreateForm_Handler,
+		},
+		{
+			MethodName: "GetForm",
+			Handler:    _FormMgr_GetForm_Handler,
 		},
 		{
 			MethodName: "UpdateForm",
@@ -26821,6 +26927,14 @@ var FormMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SubmitForm",
 			Handler:    _FormMgr_SubmitForm_Handler,
+		},
+		{
+			MethodName: "CheckFormFromAuthToken",
+			Handler:    _FormMgr_CheckFormFromAuthToken_Handler,
+		},
+		{
+			MethodName: "GenerateFormLink",
+			Handler:    _FormMgr_GenerateFormLink_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

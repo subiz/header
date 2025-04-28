@@ -6,6 +6,7 @@
       "call_campaign": "read",
       "conversation": "create read:own update:own",
       "campaign": "create:own update:own read:own",
+      "form": "create:own update:own read:own",
       "ai_data": "read",
       "ai_agent": "read",
       "rule": "read",
@@ -78,6 +79,7 @@
     "perm": {
       "call_campaign": "create update delete",
       "campaign": "read create update delete",
+      "form": "read create update delete",
       "knowledge_base": "update create delete",
       "report": "read",
       "article": "create delete update",

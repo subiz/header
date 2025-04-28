@@ -1588,7 +1588,7 @@ enum AttachmentType {
 }
 
 message Attachment {
-	string type = 12;
+	string type = 12; // form, form_submission
 	// file
 	string mimetype = 2;
 	string url = 3;
@@ -1638,6 +1638,9 @@ message Attachment {
 	int64 thumbnail_width = 48;
 	int64 thumbnail_height = 49;
 	// 	string template_type = 36; // for zalo: request_user_info
+
+	Form form = 50;
+	FormSubmission form_submission = 51;
 }
 
 message QuickReply {
@@ -2819,8 +2822,6 @@ message FormSubmission {
 
 	string form_id = 3; // widget_offline, widget_prechat
 	string user_id = 4;
-	string conversation_id = 11;
-
 	string id = 5;
 
 	int64 submitted_at = 6; // ms
@@ -2832,6 +2833,11 @@ message FormSubmission {
 	string source_campaign_number = 10;
 
 	common.Device device = 12;
+	string conversation_id = 11;
+	string form_message_id = 13;
+	int64 form_attachment_index = 14;
+
+	string auth_token = 15;
 }
 
 message Form {
@@ -6592,6 +6598,7 @@ message Response {
 	repeated FormSubmission form_submissions = 197;
 	repeated Form forms = 198;
 	Form form = 199;
+	FormSubmission form_submission = 200;
 }
 
 message ReportCount {
@@ -8607,7 +8614,8 @@ message ScheduleAppointment {
 	string description = 4; // prompt
 	string ticket_type_id = 5;
 	string due_at = 6;
-	Form form = 7;
+	string form_id = 7; // unique, never change
+	repeated Block components = 8;
 }
 
 message UpdateUserInformation {
