@@ -2880,6 +2880,47 @@ message Form {
 	repeated Block components = 27;
 }
 
+message OldForm {
+	// general stype
+	repeated FormField fields = 1; // convert to form group
+
+	// for widget
+	bool group_required = 2;
+	repeated WidgetGroup groups = 3;
+	string group_label = 4;
+
+	string title = 5;
+	bool enabled = 6;
+	bool end_conversation_after_submit = 7;
+	string enable_when = 8;
+	enum When {
+		all_agents_offline = 0;
+		out_of_bussiness_hour = 1;
+	}
+
+	bool question_required = 10;
+	string question_label = 11;
+
+	I18nString i18n_group_label = 12;
+	I18nString i18n_title = 13;
+	I18nString i18n_question_label = 14;
+
+	int64 created = 20;
+	string created_by = 21;
+	int64 updated = 22;
+	string updated_by = 23;
+
+	repeated FormGroup form_groups = 25;
+	string type = 26; // campaign, form, popup
+}
+
+message FormGroup {
+	string type = 4;
+	repeated FormField fields = 5;
+	string title = 10;
+	I18nString i18n_title = 11;
+}
+
 message ButtonsComponent {
 	bool primary_enabled = 2;
 	repeated PopupButtonAction primary_actions = 3;
@@ -2901,7 +2942,7 @@ message WebPluginComponent {
 	TextComponent text = 5;
 	ButtonsComponent buttons = 6;
 	CountdownComponent countdown = 7;
-	Form form = 8;
+	OldForm form = 8;
 	LinkComponent link = 9;
 	ImageComponent image = 10;
 	LineComponent line = 11;
@@ -7856,15 +7897,15 @@ message Block {
 
 	string for = 21; // for label
 	/* {
-        "type": "input",
-        "key": "fullname",
-        "default_value": "234",
-        "linked_attribute": "email",
-        "placeholder": "123098123",
-        "label": "Họ và tên",
-        "input_type": "text",
-        "is_required": true
-      },
+		 "type": "input",
+		 "key": "fullname",
+		 "default_value": "234",
+		 "linked_attribute": "email",
+		 "placeholder": "123098123",
+		 "label": "Họ và tên",
+		 "input_type": "text",
+		 "is_required": true
+		 },
 	*/
 	string label = 25;
 	string input_type = 26; //
