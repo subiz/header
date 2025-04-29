@@ -6323,6 +6323,7 @@ message ActionLLM {
 	int64 top_p = 15; // *100000
 	int64 max_token = 8;
 
+	bool use_user_attribute = 24;
 	bool packed_history = 22;
 	int64 history_entry_limit = 21;
 	bool skip_conversation_history = 9; // do not inject chat history to system instruction
@@ -7148,6 +7149,7 @@ message LLMChatHistoryEntry {
 
 	// for testing
 	int64 timeout = 8; // ms
+	repeated Attachment attachments = 9;
 }
 
 message RAGDocument {
