@@ -2882,17 +2882,22 @@ message Form {
 	string type = 26; // campaign, form, popup
 
 	repeated Block components = 27;
+	File logo = 35;
+	string brand_url = 36;
+	string success_url = 37;
 
-	string brand_logo_url = 35;
-	string brand_redirect_url = 36;
-	string primary_color = 37;
-	string background_color = 38;
-	Style header_style = 39;
-	Style text_style = 40;
-	Style input_style = 41;
+	string success_title = 38;
+	string success_subtext = 39;
 
-	string ticket_type_id = 42;
-	string ticket_due_at = 43;
+	string primary_color = 40;
+	string background_color = 41;
+	File background_image = 42;
+	Style header_style = 43;
+	Style text_style = 44;
+	Style input_style = 45;
+
+	string ticket_type_id = 46;
+	string ticket_due_at = 47;
 }
 
 message OldForm {
