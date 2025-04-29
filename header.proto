@@ -2233,6 +2233,9 @@ message ActionSendMessage {
 	string touchpoint_id = 6; // template
 	repeated string tos = 7; // template
 	bool typing = 8; // send typing before each messages
+
+	string from_variable = 10;
+	repeated KV extra_fields = 11;
 }
 
 message ActionAskQuestion {
