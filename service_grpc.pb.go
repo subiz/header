@@ -26502,6 +26502,7 @@ const (
 	FormMgr_CreateForm_FullMethodName             = "/header.FormMgr/CreateForm"
 	FormMgr_GetForm_FullMethodName                = "/header.FormMgr/GetForm"
 	FormMgr_UpdateForm_FullMethodName             = "/header.FormMgr/UpdateForm"
+	FormMgr_MatchForm_FullMethodName              = "/header.FormMgr/MatchForm"
 	FormMgr_DeleteForm_FullMethodName             = "/header.FormMgr/DeleteForm"
 	FormMgr_ReportForm_FullMethodName             = "/header.FormMgr/ReportForm"
 	FormMgr_ListFormSubmissions_FullMethodName    = "/header.FormMgr/ListFormSubmissions"
@@ -26518,6 +26519,7 @@ type FormMgrClient interface {
 	CreateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error)
 	GetForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	UpdateForm(ctx context.Context, in *Form, opts ...grpc.CallOption) (*Response, error)
+	MatchForm(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
 	DeleteForm(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ReportForm(ctx context.Context, in *FormReportRequest, opts ...grpc.CallOption) (*FormReportResponse, error)
 	ListFormSubmissions(ctx context.Context, in *ListFormSubmissionRequest, opts ...grpc.CallOption) (*Response, error)
@@ -26568,6 +26570,16 @@ func (c *formMgrClient) UpdateForm(ctx context.Context, in *Form, opts ...grpc.C
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, FormMgr_UpdateForm_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *formMgrClient) MatchForm(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, FormMgr_MatchForm_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -26642,6 +26654,7 @@ type FormMgrServer interface {
 	CreateForm(context.Context, *Form) (*Response, error)
 	GetForm(context.Context, *Id) (*Response, error)
 	UpdateForm(context.Context, *Form) (*Response, error)
+	MatchForm(context.Context, *Ids) (*Response, error)
 	DeleteForm(context.Context, *Id) (*Empty, error)
 	ReportForm(context.Context, *FormReportRequest) (*FormReportResponse, error)
 	ListFormSubmissions(context.Context, *ListFormSubmissionRequest) (*Response, error)
@@ -26669,6 +26682,9 @@ func (UnimplementedFormMgrServer) GetForm(context.Context, *Id) (*Response, erro
 }
 func (UnimplementedFormMgrServer) UpdateForm(context.Context, *Form) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateForm not implemented")
+}
+func (UnimplementedFormMgrServer) MatchForm(context.Context, *Ids) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MatchForm not implemented")
 }
 func (UnimplementedFormMgrServer) DeleteForm(context.Context, *Id) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteForm not implemented")
@@ -26777,6 +26793,24 @@ func _FormMgr_UpdateForm_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FormMgrServer).UpdateForm(ctx, req.(*Form))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FormMgr_MatchForm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ids)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FormMgrServer).MatchForm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FormMgr_MatchForm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FormMgrServer).MatchForm(ctx, req.(*Ids))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -26911,6 +26945,10 @@ var FormMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateForm",
 			Handler:    _FormMgr_UpdateForm_Handler,
+		},
+		{
+			MethodName: "MatchForm",
+			Handler:    _FormMgr_MatchForm_Handler,
 		},
 		{
 			MethodName: "DeleteForm",
