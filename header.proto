@@ -2847,6 +2847,7 @@ message Form {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
+	string description = 4;
 
 	// general stype
 	// repeated FormField fields = 5; // convert to form group
@@ -2881,6 +2882,17 @@ message Form {
 	string type = 26; // campaign, form, popup
 
 	repeated Block components = 27;
+
+	string brand_logo_url = 35;
+	string brand_redirect_url = 36;
+	string primary_color = 37;
+	string background_color = 38;
+	Style header_style = 39;
+	Style text_style = 40;
+	Style input_style = 41;
+
+	string ticket_type_id = 42;
+	string ticket_due_at = 43;
 }
 
 message OldForm {
@@ -8652,16 +8664,7 @@ message AIFunction {
 	UpdateUserInformation update_information = 16;
 	AssignRequest assign_agent = 18;
 
-	ScheduleAppointment system_schedule_appointment = 19;
-}
-
-message ScheduleAppointment {
-	string title = 3; // prompt
-	string description = 4; // prompt
-	string ticket_type_id = 5;
-	string due_at = 6;
-	string form_id = 7; // unique, never change
-	repeated Block components = 8;
+	Form system_schedule_appointment = 19;
 }
 
 message UpdateUserInformation {
