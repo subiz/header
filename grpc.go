@@ -735,15 +735,22 @@ type ServerConfig struct {
 	XAccounts           map[string]bool                 `json:"x_accounts,omitempty"`
 }
 
+// the correct hostname shoule be {name}-{number}, for example user-1, convo-4, convo-stg-0
+// other hostname like yourname, mymac.local, 192.168.71.102.non-exists.ptr.local, will be treated as local-stg-0
 func GetHostShard(shard int) int {
 	hostname, _ := os.Hostname()
 	sp := strings.Split(hostname, "-")
 	if len(sp) < 2 {
-		fmt.Println("invalid hostname: " + hostname)
-		sp = []string{"", "stg", "0"} // fake staging
+		// not statefulset hostname, eg: mymac
+		sp = []string{"local", "stg", "0"} // fake staging
 	}
 	ordinal := sp[len(sp)-1]
-	pari64, _ := strconv.ParseInt(ordinal, 10, 0)
+	pari64, err := strconv.ParseInt(ordinal, 10, 0)
+	if err != nil {
+		// not statefulset hostname, eg: 192.168.71.102.non-exists.ptr.local
+		sp = []string{"local", "stg", "0"} // fake staging
+		pari64 = 0
+	}
 	ordinal_num := int(pari64)
 	if len(sp) > 2 && sp[len(sp)-2] == "stg" {
 		return shard
