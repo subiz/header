@@ -953,3 +953,19 @@ message GenerateFormTokenRequest {
 
 	int64 expired = 13;
 }
+
+message ConvertProductRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string file_id = 3;
+}
+
+message FilterProductRequest {
+	common.Context ctx = 1;
+	string account_id = 2;
+
+	string category_id = 4; // required
+	string cel_expression = 5; // filter
+	string sort_by = 6;
+	int64 limit = 7;
+}

@@ -4761,13 +4761,37 @@ message OrderHistoryEntries {
 	int64 last_modified = 5;
 }
 
+// [from-date -> to-date]
+message ProductValidity {
+	string from_date = 4; // yyyy-mm-dd. eg: 2025-04-30
+	string to_date = 5;
+}
+
+message PromotionProgram {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+	string description = 5;
+	repeated string products = 15;
+	int64 start_ms = 16;
+	int64 end_ms = 17;
+	string discount_type = 18; // percentage, fixed_amount, fixed_price
+	int64 discount_value_fpv = 19;
+	string status = 20; // active, inactive, expired, draft
+	int64 created = 21;
+	string created_by = 22;
+	int64 updated = 23;
+	string updated_by = 24;
+}
+
 message Product {
 	common.Context ctx = 1;
 	string account_id = 2;
 
 	string id = 3; // generated
 	repeated Product other_variants = 4; // [2] [3]
-	string product_group_id = 5; // iphone-6-plus
+	string product_group_id = 5; // iphone-6-plus // parent id
 	string title = 6; // deprecated // should be use for name
 
 	string url = 7; // (shared)
@@ -4782,7 +4806,7 @@ message Product {
 	I18nString i18n_long_description_quill_delta = 13; // (shared)
 	string long_description = 15; // (shared)
 
-	repeated KV props = 14; // future replacement for props
+	repeated ProductAttribute props = 14;
 
 	string mobile_url = 17; // (shared)
 
@@ -4853,6 +4877,12 @@ message Product {
 
 	map<string,Block> i18n_description_block = 70; // (shared) server generated
 	map<string,Block> i18n_long_description_block = 71; // (shared)
+
+	repeated File attachments = 80;
+
+	string category_id = 81;
+
+	ProductValidity validity = 82;
 }
 
 message ProductOption {
@@ -4860,13 +4890,6 @@ message ProductOption {
 	string name = 4;
 	repeated string values = 5;
 	bool is_mandatory = 6;
-}
-
-message Products {
-	common.Context ctx = 1;
-	repeated Product products = 2;
-	string anchor = 3;
-	int64 total = 4;
 }
 
 message GoogleSheetProductFeed {
@@ -4958,6 +4981,40 @@ message KV {
 	Block value_block = 7;
 	repeated Block value_blocks = 8;
 	string value_type = 9; //static, block, blocks
+}
+
+message ProductAttribute {
+	string key = 2;
+	string value = 3;
+
+	string attribute_id = 5; // definition id
+
+	repeated string values = 4;
+	string range = 6; // "5000-10000", - delimiter
+
+	string unit = 7;
+}
+
+message ProductAttributeDefinition {
+	string id = 9;
+	string name = 10;
+	map<string, string> i18n_name = 11;
+	string description = 12;
+	message Value {
+		string id = 4;
+		string value = 5;
+		map<string, string> i18n_value = 6;
+	}
+	string type = 13; // number, text, dropdown
+	repeated Value values = 15;
+}
+
+message ProductCategory {
+	string id = 4;
+	string name = 5; // english name
+	map<string, string> i18n_name = 6;
+	string description = 7;
+	repeated string attributes = 8;
 }
 
 message ProductCategories {
@@ -6585,7 +6642,7 @@ message Response {
 	PromotionCheckResult promotion_check_result = 140;
 
 	repeated Rating ratings = 141;
-	repeated PromotionProgram promotion_programs = 142;
+	repeated SubizPromotionProgram subiz_promotion_programs = 142;
 
 	SubizPaymentMethod subiz_payment_method = 143;
 	repeated SubizPaymentMethod subiz_payment_methods = 144;
@@ -6661,6 +6718,10 @@ message Response {
 	repeated Form forms = 198;
 	Form form = 199;
 	FormSubmission form_submission = 200;
+
+	repeated Product products = 202;
+
+	repeated PromotionProgram promotion_programs = 203;
 }
 
 message ReportCount {
@@ -8141,7 +8202,7 @@ message PromotionCode {
 	bool for_invoice = 39;
 }
 
-message PromotionProgram {
+message SubizPromotionProgram {
 	common.Context ctx = 1;
 	string id = 3;
 	string name = 5;
@@ -8597,7 +8658,7 @@ message InitFlow {
 
 message AIDataStore {
 	string scope = 4; // none, all, partial
-	repeated string data_sources = 5; // group id and entry id
+	repeated string data_sources = 5; // group id and entry id, could have product id (product id must start with pd.)
 
 	string store_id = 6; // subiz generated
 	string training_store_id = 7; // subiz generated
