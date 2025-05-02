@@ -4995,18 +4995,9 @@ message ProductAttribute {
 	string unit = 7;
 }
 
-message ProductAttributeDefinition {
-	string id = 9;
-	string name = 10;
-	map<string, string> i18n_name = 11;
-	string description = 12;
-	message Value {
-		string id = 4;
-		string value = 5;
-		map<string, string> i18n_value = 6;
-	}
-	string type = 13; // number, text, dropdown
-	repeated Value values = 15;
+message ProductCategoryBuildQueryExample{
+	repeated LLMChatHistoryEntry history = 4;
+	string output = 5;
 }
 
 message ProductCategory {
@@ -5014,7 +5005,10 @@ message ProductCategory {
 	string name = 5; // english name
 	map<string, string> i18n_name = 6;
 	string description = 7;
-	repeated string attributes = 8;
+	map<string, JSONSchema> attributes = 8;
+
+	repeated string _attr_refs = 10; // internal use only
+	repeated ProductCategoryBuildQueryExample _build_query_examples = 11; // internal use only
 }
 
 message ProductCategories {
