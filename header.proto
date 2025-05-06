@@ -2891,7 +2891,7 @@ message Form {
 
 	string primary_color = 40;
 	string background_color = 41;
-	File background_image = 42;
+	File cover_image = 42;
 	Style header_style = 43;
 	Style text_style = 44;
 	Style input_style = 45;
@@ -3437,6 +3437,8 @@ message File {
 
 	string text_url = 35;
 	int64 num_characters = 36;
+
+	string visibility = 38; // public(default), private
 }
 
 message BotTerminated {
@@ -4883,6 +4885,34 @@ message Product {
 	string category_id = 81;
 
 	ProductValidity validity = 82;
+
+	repeated File files = 83;
+	repeated ProductNote notes = 84;
+}
+
+message ProductNote {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string product_id = 3;
+	string id = 4;
+
+	string visibility = 5; // private, public
+	Block content = 8;
+
+	int64 expired = 9;
+
+	string created_by = 10;
+	int64 created = 11;
+	string updated_by = 12;
+	int64 updated = 13;
+
+	int64 modified = 14;
+
+	// learning status
+	string md5sum = 15;
+
+	repeated string trained_chunks = 16; // read only
+	string trained_md5sum = 17; // read only
 }
 
 message ProductOption {
@@ -8651,6 +8681,7 @@ message InitFlow {
 }
 
 message AIDataStore {
+	string agent_id = 3;
 	string scope = 4; // none, all, partial
 	repeated string data_sources = 5; // group id and entry id, could have product id (product id must start with pd.)
 
@@ -8787,10 +8818,10 @@ message AIDataChunk {
 	common.Context ctx = 1;
 
 	string ai_data_entry_id = 3;
-	string id = 5;
+	string id = 5; // md5 of embedded_chunk
 	repeated double vector = 6;
 	string original_chunk = 7;
-	string embeded_chunk = 8;
+	string embedded_chunk = 8;
 	int64 num_characters = 9;
 	string model = 10;
 }
@@ -8801,14 +8832,14 @@ message AIDataEntry {
 	string id = 3;
 	string group_id = 4;
 
-	string type = 5; // qa, file, website, text (for testing)
+	string type = 5; // qa, file, website, product, text (for testing)
 	Message answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
 	bool expand_link_disabled = 9;
 
 	File file = 10;
-
+	Product product = 18;
 	// url only
 	int64 num_sub_links = 11;
 	int64 last_crawled = 12;
@@ -8825,13 +8856,13 @@ message AIDataEntry {
 	int64 updated = 21;
 	string updated_by = 22;
 	string md5 = 23;
-	string trained_md5 = 24;
+	string chunked_md5 = 24;
 
 	int64 deleted = 32;
 	int64 modified = 34;
-	int64 last_success_trained = 35; // successfully saved to vector store
-	int64 last_failed_trained = 39;
-	int64 train_attempted = 40;
+	int64 last_success_chunked = 35; // successfully saved to vector store
+	int64 last_failed_chunked = 39;
+	int64 chunk_attempted = 40;
 
 	string title = 38; // title for url, file name for file
 
