@@ -8025,6 +8025,11 @@ message Block {
 	}
 	repeated InputOption input_options = 31;
 
+	string validation = 32; // none, email, phone, date, link, number, regex
+	string validation_regex = 33;
+	bool is_hidden = 34;
+	string value = 35;
+
 	string class = 98;
 	Style style = 99; // inline style
 	int64 level = 100; // 1 2 3 4 5 6 7
