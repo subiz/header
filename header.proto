@@ -4808,7 +4808,8 @@ message Product {
 	I18nString i18n_long_description_quill_delta = 13; // (shared)
 	string long_description = 15; // (shared)
 
-	repeated ProductAttribute props = 14;
+	repeated KV props = 14;
+	repeated ProductAttribute attrs = 55;
 
 	string mobile_url = 17; // (shared)
 
@@ -8817,7 +8818,7 @@ message CrawlResponse {
 message AIDataChunk {
 	common.Context ctx = 1;
 
-	string ai_data_entry_id = 3;
+	// string ai_data_entry_id = 3;
 	string id = 5; // md5 of embedded_chunk
 	repeated double vector = 6;
 	string original_chunk = 7;
