@@ -968,4 +968,7 @@ message FilterProductRequest {
 	string cel_expression = 5; // filter
 	string sort_by = 6;
 	int64 limit = 7;
+
+	repeated string only_product_ids = 8;
+	repeated string exclude_products = 9;
 }

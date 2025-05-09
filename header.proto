@@ -115,6 +115,8 @@ message Attribute {
 	bool boolean = 12;
 	string datetime = 13;
 
+	string var = 22; // variable name
+
 	repeated string other_values = 20;
 
 	string type = 16; // read-only
@@ -4889,6 +4891,14 @@ message Product {
 
 	repeated File files = 83;
 	repeated ProductNote notes = 84;
+
+	int64 purchase_deadline = 85; // no available for sale after this ms
+
+	string availability_url = 86; // (shared)
+	int64 disable_availability_fetch = 87;
+	string last_availability_fetched = 88; // ms
+	string last_availability_status = 89;	 // success | failed
+	string last_availability_error = 90;	// 500
 }
 
 message ProductNote {
@@ -6349,7 +6359,7 @@ message WorkflowAction {
 
 	string scope = 7; // computed
 	bool is_async = 8; // just go, dont care about revalid for ation wait
-	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_scope, end_scope
+	string type = 9; // send_email, send_zns, tag, convert_to_ticket, condition, send_webhook, create_task, update_order_state, send_message, goal, create_order, start_thread, save_checkpoint, load_checkpoint, call_workflow, send_typing, start_scope, end_scope, terminate_bot
 
 	ActionJump jump = 15;
 	ActionSendHttp send_http = 17;
@@ -6390,6 +6400,15 @@ message WorkflowAction {
 	ActionStartScope start_scope = 108;
 	ActionAIAgentTrack ai_agent_track = 109;
 	string output_error_variable = 106;
+
+	ActionTerminateBot terminate_bot = 110;
+}
+
+message ActionTerminateBot {
+	// read only
+	string bot_id = 3;
+	string session_id = 4;
+	int64 workflow_version = 5;
 }
 
 message ActionStartScope {
