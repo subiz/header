@@ -6865,8 +6865,7 @@ message WorkflowSession {
 	string status = 13; // creating, running, waiting, ended, error
 	// int64 first_goal_reached = 14;
 	int64 goal_reached = 15;
-	map<string, WorkflowThread> threads = 18; // thread id -> term
-	map<string, WorkflowStack> stacks = 20; // thread id -> stack
+	map<string, WorkflowThread> threads = 18; // thread id -> term, remove after 10 June, 2025
 	string obj_id = 17; // for this obj
 
 	int64 last_error_at = 19;
@@ -6875,8 +6874,9 @@ message WorkflowSession {
 	int64 last_action_at = 25; // not wait
 	int64 num_executed_actions = 26; // not wait, goto, branching (meaningfull)
 	Event last_message_sent = 27;
-	string last_sync_message_id = 28;
-	string last_llm_message_id = 29;
+
+	int64 num_active_threads = 30;
+	int64 thread_counter = 31;
 }
 
 message SchedulerTask {
