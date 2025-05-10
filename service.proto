@@ -326,6 +326,7 @@ service WorkflowMgr {
 	rpc ListWorkflowVersions(ListVersions) returns (Response); // workflows
 	rpc StartWorkflowSession(StartWorkflowSessionRequest) returns (Response); // workflow_session
 	rpc MatchWorkflows(Ids) returns (Response);
+	rpc PumpWorkflowSession(WorkflowPulse) returns (Response); // save stuck session
 	rpc GetWorkflowSession(WorkflowSessionId) returns (Response);
 	rpc UpdateWorkflowSession(UpdateWorkflowSessionRequest) returns (Response);
 	rpc ListWorkflowSessions(ListWorkflowSessionRequest) returns (Response);

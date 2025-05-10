@@ -9192,6 +9192,7 @@ const (
 	WorkflowMgr_ListWorkflowVersions_FullMethodName  = "/header.WorkflowMgr/ListWorkflowVersions"
 	WorkflowMgr_StartWorkflowSession_FullMethodName  = "/header.WorkflowMgr/StartWorkflowSession"
 	WorkflowMgr_MatchWorkflows_FullMethodName        = "/header.WorkflowMgr/MatchWorkflows"
+	WorkflowMgr_PumpWorkflowSession_FullMethodName   = "/header.WorkflowMgr/PumpWorkflowSession"
 	WorkflowMgr_GetWorkflowSession_FullMethodName    = "/header.WorkflowMgr/GetWorkflowSession"
 	WorkflowMgr_UpdateWorkflowSession_FullMethodName = "/header.WorkflowMgr/UpdateWorkflowSession"
 	WorkflowMgr_ListWorkflowSessions_FullMethodName  = "/header.WorkflowMgr/ListWorkflowSessions"
@@ -9246,6 +9247,7 @@ type WorkflowMgrClient interface {
 	ListWorkflowVersions(ctx context.Context, in *ListVersions, opts ...grpc.CallOption) (*Response, error)
 	StartWorkflowSession(ctx context.Context, in *StartWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchWorkflows(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Response, error)
+	PumpWorkflowSession(ctx context.Context, in *WorkflowPulse, opts ...grpc.CallOption) (*Response, error)
 	GetWorkflowSession(ctx context.Context, in *WorkflowSessionId, opts ...grpc.CallOption) (*Response, error)
 	UpdateWorkflowSession(ctx context.Context, in *UpdateWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
 	ListWorkflowSessions(ctx context.Context, in *ListWorkflowSessionRequest, opts ...grpc.CallOption) (*Response, error)
@@ -9370,6 +9372,16 @@ func (c *workflowMgrClient) MatchWorkflows(ctx context.Context, in *Ids, opts ..
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, WorkflowMgr_MatchWorkflows_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *workflowMgrClient) PumpWorkflowSession(ctx context.Context, in *WorkflowPulse, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, WorkflowMgr_PumpWorkflowSession_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -9788,6 +9800,7 @@ type WorkflowMgrServer interface {
 	ListWorkflowVersions(context.Context, *ListVersions) (*Response, error)
 	StartWorkflowSession(context.Context, *StartWorkflowSessionRequest) (*Response, error)
 	MatchWorkflows(context.Context, *Ids) (*Response, error)
+	PumpWorkflowSession(context.Context, *WorkflowPulse) (*Response, error)
 	GetWorkflowSession(context.Context, *WorkflowSessionId) (*Response, error)
 	UpdateWorkflowSession(context.Context, *UpdateWorkflowSessionRequest) (*Response, error)
 	ListWorkflowSessions(context.Context, *ListWorkflowSessionRequest) (*Response, error)
@@ -9861,6 +9874,9 @@ func (UnimplementedWorkflowMgrServer) StartWorkflowSession(context.Context, *Sta
 }
 func (UnimplementedWorkflowMgrServer) MatchWorkflows(context.Context, *Ids) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MatchWorkflows not implemented")
+}
+func (UnimplementedWorkflowMgrServer) PumpWorkflowSession(context.Context, *WorkflowPulse) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PumpWorkflowSession not implemented")
 }
 func (UnimplementedWorkflowMgrServer) GetWorkflowSession(context.Context, *WorkflowSessionId) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWorkflowSession not implemented")
@@ -10143,6 +10159,24 @@ func _WorkflowMgr_MatchWorkflows_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WorkflowMgrServer).MatchWorkflows(ctx, req.(*Ids))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WorkflowMgr_PumpWorkflowSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WorkflowPulse)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WorkflowMgrServer).PumpWorkflowSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WorkflowMgr_PumpWorkflowSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WorkflowMgrServer).PumpWorkflowSession(ctx, req.(*WorkflowPulse))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -10905,6 +10939,10 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MatchWorkflows",
 			Handler:    _WorkflowMgr_MatchWorkflows_Handler,
+		},
+		{
+			MethodName: "PumpWorkflowSession",
+			Handler:    _WorkflowMgr_PumpWorkflowSession_Handler,
 		},
 		{
 			MethodName: "GetWorkflowSession",
