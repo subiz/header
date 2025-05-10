@@ -1003,3 +1003,9 @@ service Counter {
 service Crawler {
 	rpc Crawl(CrawlUrlRequest) returns (CrawlResponse); // cached
 }
+
+service Marker {
+	rpc Mark(MarkRequest) returns (MarkerState); //
+	rpc Commit(CommitRequest) returns (MarkerState);
+	rpc ListMarkers(MarkRequest) returns (Markers);
+}

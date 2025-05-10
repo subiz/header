@@ -972,3 +972,15 @@ message FilterProductRequest {
 	repeated string only_product_ids = 8;
 	repeated string exclude_products = 9;
 }
+
+message MarkRequest {
+	string topic = 4;
+	int32 partition = 5;
+	repeated int64 offsets = 6;
+}
+
+message CommitRequest {
+	string topic = 4;
+	int32 partition = 5;
+	int64 offset = 6;
+}

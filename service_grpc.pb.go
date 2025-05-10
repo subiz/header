@@ -29127,3 +29127,181 @@ var Crawler_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service.proto",
 }
+
+const (
+	Marker_Mark_FullMethodName        = "/header.Marker/Mark"
+	Marker_Commit_FullMethodName      = "/header.Marker/Commit"
+	Marker_ListMarkers_FullMethodName = "/header.Marker/ListMarkers"
+)
+
+// MarkerClient is the client API for Marker service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type MarkerClient interface {
+	Mark(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*MarkerState, error)
+	Commit(ctx context.Context, in *CommitRequest, opts ...grpc.CallOption) (*MarkerState, error)
+	ListMarkers(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*Markers, error)
+}
+
+type markerClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewMarkerClient(cc grpc.ClientConnInterface) MarkerClient {
+	return &markerClient{cc}
+}
+
+func (c *markerClient) Mark(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*MarkerState, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MarkerState)
+	err := c.cc.Invoke(ctx, Marker_Mark_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *markerClient) Commit(ctx context.Context, in *CommitRequest, opts ...grpc.CallOption) (*MarkerState, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MarkerState)
+	err := c.cc.Invoke(ctx, Marker_Commit_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *markerClient) ListMarkers(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*Markers, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Markers)
+	err := c.cc.Invoke(ctx, Marker_ListMarkers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// MarkerServer is the server API for Marker service.
+// All implementations must embed UnimplementedMarkerServer
+// for forward compatibility.
+type MarkerServer interface {
+	Mark(context.Context, *MarkRequest) (*MarkerState, error)
+	Commit(context.Context, *CommitRequest) (*MarkerState, error)
+	ListMarkers(context.Context, *MarkRequest) (*Markers, error)
+	mustEmbedUnimplementedMarkerServer()
+}
+
+// UnimplementedMarkerServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedMarkerServer struct{}
+
+func (UnimplementedMarkerServer) Mark(context.Context, *MarkRequest) (*MarkerState, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Mark not implemented")
+}
+func (UnimplementedMarkerServer) Commit(context.Context, *CommitRequest) (*MarkerState, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Commit not implemented")
+}
+func (UnimplementedMarkerServer) ListMarkers(context.Context, *MarkRequest) (*Markers, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMarkers not implemented")
+}
+func (UnimplementedMarkerServer) mustEmbedUnimplementedMarkerServer() {}
+func (UnimplementedMarkerServer) testEmbeddedByValue()                {}
+
+// UnsafeMarkerServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to MarkerServer will
+// result in compilation errors.
+type UnsafeMarkerServer interface {
+	mustEmbedUnimplementedMarkerServer()
+}
+
+func RegisterMarkerServer(s grpc.ServiceRegistrar, srv MarkerServer) {
+	// If the following call pancis, it indicates UnimplementedMarkerServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Marker_ServiceDesc, srv)
+}
+
+func _Marker_Mark_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MarkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarkerServer).Mark(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Marker_Mark_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarkerServer).Mark(ctx, req.(*MarkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Marker_Commit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CommitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarkerServer).Commit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Marker_Commit_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarkerServer).Commit(ctx, req.(*CommitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Marker_ListMarkers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MarkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MarkerServer).ListMarkers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Marker_ListMarkers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MarkerServer).ListMarkers(ctx, req.(*MarkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Marker_ServiceDesc is the grpc.ServiceDesc for Marker service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Marker_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Marker",
+	HandlerType: (*MarkerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Mark",
+			Handler:    _Marker_Mark_Handler,
+		},
+		{
+			MethodName: "Commit",
+			Handler:    _Marker_Commit_Handler,
+		},
+		{
+			MethodName: "ListMarkers",
+			Handler:    _Marker_ListMarkers_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
