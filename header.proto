@@ -8615,6 +8615,20 @@ message AIAgentGuardrail {
 	bool resoning = 7;
 }
 
+message AIAgentRule {
+	string id = 3;
+	string name = 4;
+	string hook = 5; // '', before_reply, after_reply
+
+	repeated WorkflowTrigger triggers = 7; // or
+	repeated WorkflowTrigger computed_triggers = 8; // or
+
+	map<string, WorkflowAction> actions = 9;
+	map<string, WorkflowAction> computed_actions = 10;
+
+	Frequently frequency = 15;
+}
+
 message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8625,6 +8639,7 @@ message AIAgent {
 	string avatar_url = 7;
 
 	repeated AIAgentGuardrail guardrails = 8;
+	repeated AIAgentRule rules = 9;
 	HumanHandoverSetting human_handover = 16;
 
 	int64 created = 17;
@@ -8685,6 +8700,7 @@ message AIAgent {
 
 	string locale = 64; // can be auto
 	repeated string locales = 65;
+
 }
 
 message InitFlow {
