@@ -974,12 +974,14 @@ message FilterProductRequest {
 }
 
 message MarkRequest {
+	common.Context ctx = 1;
 	string topic = 4;
 	int32 partition = 5;
 	repeated int64 offsets = 6;
 }
 
 message CommitRequest {
+	common.Context ctx = 1;
 	string topic = 4;
 	int32 partition = 5;
 	int64 offset = 6;

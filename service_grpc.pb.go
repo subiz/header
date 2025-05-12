@@ -29138,8 +29138,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MarkerClient interface {
-	Mark(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*MarkerState, error)
-	Commit(ctx context.Context, in *CommitRequest, opts ...grpc.CallOption) (*MarkerState, error)
+	Mark(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*Empty, error)
+	Commit(ctx context.Context, in *CommitRequest, opts ...grpc.CallOption) (*Empty, error)
 	ListMarkers(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*Markers, error)
 }
 
@@ -29151,9 +29151,9 @@ func NewMarkerClient(cc grpc.ClientConnInterface) MarkerClient {
 	return &markerClient{cc}
 }
 
-func (c *markerClient) Mark(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*MarkerState, error) {
+func (c *markerClient) Mark(ctx context.Context, in *MarkRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MarkerState)
+	out := new(Empty)
 	err := c.cc.Invoke(ctx, Marker_Mark_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -29161,9 +29161,9 @@ func (c *markerClient) Mark(ctx context.Context, in *MarkRequest, opts ...grpc.C
 	return out, nil
 }
 
-func (c *markerClient) Commit(ctx context.Context, in *CommitRequest, opts ...grpc.CallOption) (*MarkerState, error) {
+func (c *markerClient) Commit(ctx context.Context, in *CommitRequest, opts ...grpc.CallOption) (*Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MarkerState)
+	out := new(Empty)
 	err := c.cc.Invoke(ctx, Marker_Commit_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -29185,8 +29185,8 @@ func (c *markerClient) ListMarkers(ctx context.Context, in *MarkRequest, opts ..
 // All implementations must embed UnimplementedMarkerServer
 // for forward compatibility.
 type MarkerServer interface {
-	Mark(context.Context, *MarkRequest) (*MarkerState, error)
-	Commit(context.Context, *CommitRequest) (*MarkerState, error)
+	Mark(context.Context, *MarkRequest) (*Empty, error)
+	Commit(context.Context, *CommitRequest) (*Empty, error)
 	ListMarkers(context.Context, *MarkRequest) (*Markers, error)
 	mustEmbedUnimplementedMarkerServer()
 }
@@ -29198,10 +29198,10 @@ type MarkerServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMarkerServer struct{}
 
-func (UnimplementedMarkerServer) Mark(context.Context, *MarkRequest) (*MarkerState, error) {
+func (UnimplementedMarkerServer) Mark(context.Context, *MarkRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Mark not implemented")
 }
-func (UnimplementedMarkerServer) Commit(context.Context, *CommitRequest) (*MarkerState, error) {
+func (UnimplementedMarkerServer) Commit(context.Context, *CommitRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Commit not implemented")
 }
 func (UnimplementedMarkerServer) ListMarkers(context.Context, *MarkRequest) (*Markers, error) {

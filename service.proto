@@ -1005,7 +1005,7 @@ service Crawler {
 }
 
 service Marker {
-	rpc Mark(MarkRequest) returns (MarkerState); //
-	rpc Commit(CommitRequest) returns (MarkerState);
+	rpc Mark(MarkRequest) returns (Empty); //
+	rpc Commit(CommitRequest) returns (Empty);
 	rpc ListMarkers(MarkRequest) returns (Markers);
 }

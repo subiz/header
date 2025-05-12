@@ -9279,10 +9279,4 @@ message ActionAIAgentTrack {
 
 message Markers {
 	repeated int64 offsets = 4;
-	int64 first_offset = 5;
-}
-
-message MarkerState {
-	int64 first_offset = 5;
-	int64 last_offset = 6;
 }
