@@ -8793,10 +8793,20 @@ message AIFunction {
 	string run_mode = 13; // sync, async, throttle, debounce
 	CreateTicketFunction system_create_ticket = 14;
 	AutomationFunction workflow_action = 15;
-	UpdateUserInformation update_information = 16;
+	UpdateUserInformation update_information = 16; // deprecated
+	CollectUserInformation collect_user_information = 20;
 	AssignRequest assign_agent = 18;
 
 	Form system_schedule_appointment = 19;
+}
+
+message CollectInfomationAttribute {
+	string attribute_key = 4;
+	string description = 5;
+}
+
+message CollectUserInformation {
+	repeated CollectInfomationAttribute attributes = 4;
 }
 
 message UpdateUserInformation {
