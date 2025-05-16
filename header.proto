@@ -6595,6 +6595,10 @@ message ActionBranchingBranch {
 	// repeated string event_types = 3; // "scheduled", "user_info_updated"
 	WorkflowCondition condition = 4;
 	string next_action_id = 5;
+
+	string next_action_id_var = 6;
+	string next_action_id_suffix = 7;
+	string next_action_id_prefix = 8;
 }
 
 message ActionBranching {
