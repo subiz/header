@@ -7188,7 +7188,7 @@ message WorkflowTimming {
 // when update new fields, must check cleanTemperalCond func in automation/utils.go
 message WorkflowCondition {
 	string id = 2;
-	// event, id, keyword, lead_owner attr:fullname segment user_label
+	// event, id, keyword, lead_owner attr:fullname segment user_label, intent
 	string key = 4;
 
 	ChannelCondition channel = 5;
@@ -7382,6 +7382,8 @@ message AIAgentSpan {
 	// usage
 	int64 input_tokens = 30; // ok
 	int64 output_tokens = 31; // ok
+
+	string override_rule = 32;
 }
 
 message WorkflowLog {
@@ -8629,6 +8631,15 @@ message AIAgentRule {
 	Frequently frequency = 15;
 }
 
+message AIAgentOverrideRule {
+	string id = 3;
+	string name = 4;
+	string action = 5; // '' == assign
+	string agent_id = 6;
+	WorkflowCondition condition = 14;
+	int64 disabled = 15;
+}
+
 message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
@@ -8701,6 +8712,8 @@ message AIAgent {
 	string locale = 64; // can be auto
 	repeated string locales = 65;
 
+	repeated AIAgentOverrideRule override_rules = 66;
+	repeated AIIntent intents = 67; // only the root
 }
 
 message InitFlow {
@@ -8828,8 +8841,9 @@ message CreateTicketFunction {
 }
 
 message AIIntent {
+	string name = 3; // unique
 	string description = 4;
-	string examples = 5; // new line delimiter
+	repeated string examples = 5; // new line delimiter
 	int64 edited = 6;
 	int64 edited_by = 7;
 }
