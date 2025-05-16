@@ -42,7 +42,8 @@
       "segment": "update:own create read",
       "ticket_template": "create read update:own",
       "sla_policy": "read",
-      "live": "read"
+      "live": "read",
+      "zns_template": "read"
     }
   },
   "view_other_convos": {
