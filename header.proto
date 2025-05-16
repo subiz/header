@@ -2208,6 +2208,8 @@ message ActionJump {
 	string action_id = 2;
 	bool to_first_action = 3;
 	string action_id_var = 4;
+	string action_id_var_prefix = 5;
+	string action_id_var_suffix = 6;
 }
 
 message ActionSendHttp {
@@ -6402,6 +6404,12 @@ message WorkflowAction {
 	string output_error_variable = 106;
 
 	ActionTerminateBot terminate_bot = 110;
+	ActionCheckOverrideRules check_override_rules = 111;
+}
+
+message ActionCheckOverrideRules {
+	string on_assign = 4;
+	string output_assigned_agent_variable = 5;
 }
 
 message ActionTerminateBot {
