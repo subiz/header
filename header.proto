@@ -1128,6 +1128,8 @@ message ConversationMember {
 	int64 total_messages = 35;
 	int64 last_action_at = 37;
 	string is_subscribed = 38; // "", off, on
+
+	string workflow_session_id = 40;
 }
 
 message StartRequest {
@@ -1874,7 +1876,7 @@ message AssignRequest {
 	bool disable_fallback = 16;
 	string prompt = 18;
 
-	bool skip_bot = 19;
+	bool human_only = 19; // dont expect rule to return a bot
 }
 
 message EndchatConnectorSetting {
@@ -2242,6 +2244,9 @@ message ActionSendMessage {
 
 	string from_variable = 10;
 	repeated KV extra_fields = 11;
+
+	bool use_llm = 14;
+	ActionLLM llm = 15;
 }
 
 message ActionAskQuestion {
@@ -6891,6 +6896,9 @@ message WorkflowSession {
 
 	int64 num_active_threads = 30;
 	int64 thread_counter = 31;
+
+	int64 llm_total_spend_fpv = 32;
+	int64 llm_spend_limit_fpv = 33;
 }
 
 message SchedulerTask {
@@ -7207,7 +7215,7 @@ message WorkflowCondition {
 
 	ChannelCondition channel = 5;
 	bool is_changed = 6;
-	string type = 7;
+	string type = 7; // boolean, number, datetime, event, text, timming, llm
 
 	BoolCondition boolean = 8;
 	FloatCondition number = 9;
@@ -7215,9 +7223,35 @@ message WorkflowCondition {
 	EventCondition event = 11;
 	TextCondition text = 12;
 	WorkflowTimming timming = 13;
+	LLMCondition llm = 14;
 
 	repeated WorkflowCondition all = 19; // preferred
 	repeated WorkflowCondition one = 20;
+}
+
+message LLMCondition {
+	string system_instruction = 4;
+	string model = 5; // chatgpt-4
+	Block system_instruction_block = 6; // dynamic prompt
+	int64 temperature = 7; // 10000 * 10000
+	int64 top_p = 15; // *100000
+
+	bool use_user_attribute = 24;
+	bool packed_history = 22;
+	int64 history_entry_limit = 21;
+	bool skip_conversation_history = 9; // do not inject chat history to system instruction
+
+	repeated AIFunction functions = 11; // function calling
+	int64 timeout_sec = 12;
+
+	string response_format = 13; // json_schema
+	LLMResponseJSONSchemaFormat json_schema = 14;
+
+	string on_refusal = 17;
+
+	string tracking_purpose = 18;
+	string tool_choice = 19; // auto (default), required, function
+	AIFunction tool_choice_function = 20;
 }
 
 message WorkflowLogRequest {
@@ -8571,7 +8605,7 @@ message CounterReportResponse {
 // needed for kafka
 message CounterDataPoint {
 	repeated string time_series = 2;
-	string id = 3;
+	string id = 3; // ts
 	int64 created = 4; // ms
 	int64 count = 5; // deprecated
 
@@ -8728,6 +8762,9 @@ message AIAgent {
 
 	repeated AIAgentOverrideRule override_rules = 66;
 	repeated AIIntent intents = 67; // only the root
+
+	Message llm_limit_message = 68;
+	int64 llm_spend_limit_fpv = 72;
 }
 
 message InitFlow {

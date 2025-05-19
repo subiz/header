@@ -28807,10 +28807,8 @@ var AndroidNotificationMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	Counter_Report_FullMethodName  = "/header.Counter/Report"
-	Counter_Count_FullMethodName   = "/header.Counter/Count"
-	Counter_Report2_FullMethodName = "/header.Counter/Report2"
-	Counter_Count2_FullMethodName  = "/header.Counter/Count2"
+	Counter_Report_FullMethodName = "/header.Counter/Report"
+	Counter_Count_FullMethodName  = "/header.Counter/Count"
 )
 
 // CounterClient is the client API for Counter service.
@@ -28819,8 +28817,6 @@ const (
 type CounterClient interface {
 	Report(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
 	Count(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
-	Report2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
-	Count2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error)
 }
 
 type counterClient struct {
@@ -28851,34 +28847,12 @@ func (c *counterClient) Count(ctx context.Context, in *CounterReportRequest, opt
 	return out, nil
 }
 
-func (c *counterClient) Report2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CounterReportResponse)
-	err := c.cc.Invoke(ctx, Counter_Report2_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *counterClient) Count2(ctx context.Context, in *CounterReportRequest, opts ...grpc.CallOption) (*CounterReportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CounterReportResponse)
-	err := c.cc.Invoke(ctx, Counter_Count2_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // CounterServer is the server API for Counter service.
 // All implementations must embed UnimplementedCounterServer
 // for forward compatibility.
 type CounterServer interface {
 	Report(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
 	Count(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
-	Report2(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
-	Count2(context.Context, *CounterReportRequest) (*CounterReportResponse, error)
 	mustEmbedUnimplementedCounterServer()
 }
 
@@ -28894,12 +28868,6 @@ func (UnimplementedCounterServer) Report(context.Context, *CounterReportRequest)
 }
 func (UnimplementedCounterServer) Count(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Count not implemented")
-}
-func (UnimplementedCounterServer) Report2(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Report2 not implemented")
-}
-func (UnimplementedCounterServer) Count2(context.Context, *CounterReportRequest) (*CounterReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Count2 not implemented")
 }
 func (UnimplementedCounterServer) mustEmbedUnimplementedCounterServer() {}
 func (UnimplementedCounterServer) testEmbeddedByValue()                 {}
@@ -28958,42 +28926,6 @@ func _Counter_Count_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Counter_Report2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CounterReportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CounterServer).Report2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Counter_Report2_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CounterServer).Report2(ctx, req.(*CounterReportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Counter_Count2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CounterReportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CounterServer).Count2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Counter_Count2_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CounterServer).Count2(ctx, req.(*CounterReportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Counter_ServiceDesc is the grpc.ServiceDesc for Counter service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -29008,14 +28940,6 @@ var Counter_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Count",
 			Handler:    _Counter_Count_Handler,
-		},
-		{
-			MethodName: "Report2",
-			Handler:    _Counter_Report2_Handler,
-		},
-		{
-			MethodName: "Count2",
-			Handler:    _Counter_Count2_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
