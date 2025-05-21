@@ -669,6 +669,7 @@ message Data {
 	Conversation conversation = 4;
 	Product product = 6;
 	account.Presence presence = 8;
+	repeated account.Presence presences = 9;
 	User user = 10;
 	Noti notification = 14;
 	Noti noti = 15;
