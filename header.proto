@@ -6397,7 +6397,6 @@ message WorkflowAction {
 
 	ActionLLM llm = 52;
 	// ActionSearchProduct search_product = 53;
-	// ActionRAG rag = 54;
 
 	// system.last_user_message
 	// system.last_output
@@ -6520,6 +6519,8 @@ message ActionLLM {
 	AIFunction tool_choice_function = 20;
 
 	bool stop_after_function_call = 23; // only call function without completion
+
+	bool use_rag = 25;
 }
 
 message LLMResponseJSONSchemaFormat {
