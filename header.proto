@@ -4612,6 +4612,8 @@ message Order {
 	repeated Tag tags = 85;
 	string private_note = 88;
 	Error error = 90;
+
+	string source_id = 91; // order source, can use to replace id
 }
 
 message OrderPipelineStage {
@@ -4704,6 +4706,8 @@ message Bill {
 	string updated_by = 27;
 	int64 updated = 28;
 	string updated_by_type = 29;
+
+	string source_id = 30; // bill source, can use to replace id
 }
 
 message CancellationCodes {
@@ -9356,4 +9360,8 @@ message ActionAIAgentTrack {
 
 message Markers {
 	repeated int64 offsets = 4;
+}
+
+message UserDataSource {
+
 }
