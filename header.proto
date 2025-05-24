@@ -4289,7 +4289,7 @@ message ShippingInfo {
 	string cancelled_by = 50;
 
 	string fee_payer = 51; // shop, user
-	bool no_auto_create_bill_on_delivered = 52;
+	// bool no_auto_create_bill_on_delivered = 52;
 	string bill_id = 53;
 
 	int64 submitted_at = 54;
@@ -6791,6 +6791,11 @@ message Response {
 	repeated Product products = 202;
 
 	repeated PromotionProgram promotion_programs = 203;
+
+	repeated Bill bills = 204;
+	repeated Order orders = 205;
+	Bill bill = 206;
+	Order order = 207;
 }
 
 message ReportCount {

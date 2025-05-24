@@ -22670,7 +22670,7 @@ type ProderClient interface {
 	EditOrderComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	DeleteOrderComment(ctx context.Context, in *Key, opts ...grpc.CallOption) (*Event, error)
 	ListOrderEvents(ctx context.Context, in *Id, opts ...grpc.CallOption) (*OrderHistoryEntries, error)
-	ListOrderBills(ctx context.Context, in *BillsRequest, opts ...grpc.CallOption) (*Bills, error)
+	ListOrderBills(ctx context.Context, in *BillsRequest, opts ...grpc.CallOption) (*Response, error)
 	DownloadOrder(ctx context.Context, in *DownloadOrderRequest, opts ...grpc.CallOption) (*File, error)
 	GetShopeeAuthUrl(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Id, error)
 	AuthorizeShopeeShop(ctx context.Context, in *AuthorizeShopeeRequest, opts ...grpc.CallOption) (*ShopeeShop, error)
@@ -23067,9 +23067,9 @@ func (c *proderClient) ListOrderEvents(ctx context.Context, in *Id, opts ...grpc
 	return out, nil
 }
 
-func (c *proderClient) ListOrderBills(ctx context.Context, in *BillsRequest, opts ...grpc.CallOption) (*Bills, error) {
+func (c *proderClient) ListOrderBills(ctx context.Context, in *BillsRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Bills)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_ListOrderBills_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -23380,7 +23380,7 @@ type ProderServer interface {
 	EditOrderComment(context.Context, *Event) (*Event, error)
 	DeleteOrderComment(context.Context, *Key) (*Event, error)
 	ListOrderEvents(context.Context, *Id) (*OrderHistoryEntries, error)
-	ListOrderBills(context.Context, *BillsRequest) (*Bills, error)
+	ListOrderBills(context.Context, *BillsRequest) (*Response, error)
 	DownloadOrder(context.Context, *DownloadOrderRequest) (*File, error)
 	GetShopeeAuthUrl(context.Context, *Id) (*Id, error)
 	AuthorizeShopeeShop(context.Context, *AuthorizeShopeeRequest) (*ShopeeShop, error)
@@ -23525,7 +23525,7 @@ func (UnimplementedProderServer) DeleteOrderComment(context.Context, *Key) (*Eve
 func (UnimplementedProderServer) ListOrderEvents(context.Context, *Id) (*OrderHistoryEntries, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrderEvents not implemented")
 }
-func (UnimplementedProderServer) ListOrderBills(context.Context, *BillsRequest) (*Bills, error) {
+func (UnimplementedProderServer) ListOrderBills(context.Context, *BillsRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrderBills not implemented")
 }
 func (UnimplementedProderServer) DownloadOrder(context.Context, *DownloadOrderRequest) (*File, error) {
