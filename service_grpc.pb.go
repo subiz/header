@@ -22663,9 +22663,9 @@ type ProderClient interface {
 	CountOrders2(ctx context.Context, in *CountOrdersRequest, opts ...grpc.CallOption) (*CountOrdersResponse, error)
 	ImportOrders(ctx context.Context, in *Orders, opts ...grpc.CallOption) (*Orders, error)
 	// fire order_updated, order_event_updated
-	MakeOrderPayment(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Event, error)
-	UpdatePurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Event, error)
-	CancelPurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Event, error)
+	MakeOrderPayment(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Response, error)
+	UpdatePurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Response, error)
+	CancelPurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Response, error)
 	AddOrderComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	EditOrderComment(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	DeleteOrderComment(ctx context.Context, in *Key, opts ...grpc.CallOption) (*Event, error)
@@ -22997,9 +22997,9 @@ func (c *proderClient) ImportOrders(ctx context.Context, in *Orders, opts ...grp
 	return out, nil
 }
 
-func (c *proderClient) MakeOrderPayment(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Event, error) {
+func (c *proderClient) MakeOrderPayment(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Event)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_MakeOrderPayment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -23007,9 +23007,9 @@ func (c *proderClient) MakeOrderPayment(ctx context.Context, in *Bill, opts ...g
 	return out, nil
 }
 
-func (c *proderClient) UpdatePurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Event, error) {
+func (c *proderClient) UpdatePurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Event)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_UpdatePurchase_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -23017,9 +23017,9 @@ func (c *proderClient) UpdatePurchase(ctx context.Context, in *Bill, opts ...grp
 	return out, nil
 }
 
-func (c *proderClient) CancelPurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Event, error) {
+func (c *proderClient) CancelPurchase(ctx context.Context, in *Bill, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Event)
+	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_CancelPurchase_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -23373,9 +23373,9 @@ type ProderServer interface {
 	CountOrders2(context.Context, *CountOrdersRequest) (*CountOrdersResponse, error)
 	ImportOrders(context.Context, *Orders) (*Orders, error)
 	// fire order_updated, order_event_updated
-	MakeOrderPayment(context.Context, *Bill) (*Event, error)
-	UpdatePurchase(context.Context, *Bill) (*Event, error)
-	CancelPurchase(context.Context, *Bill) (*Event, error)
+	MakeOrderPayment(context.Context, *Bill) (*Response, error)
+	UpdatePurchase(context.Context, *Bill) (*Response, error)
+	CancelPurchase(context.Context, *Bill) (*Response, error)
 	AddOrderComment(context.Context, *Event) (*Event, error)
 	EditOrderComment(context.Context, *Event) (*Event, error)
 	DeleteOrderComment(context.Context, *Key) (*Event, error)
@@ -23504,13 +23504,13 @@ func (UnimplementedProderServer) CountOrders2(context.Context, *CountOrdersReque
 func (UnimplementedProderServer) ImportOrders(context.Context, *Orders) (*Orders, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportOrders not implemented")
 }
-func (UnimplementedProderServer) MakeOrderPayment(context.Context, *Bill) (*Event, error) {
+func (UnimplementedProderServer) MakeOrderPayment(context.Context, *Bill) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MakeOrderPayment not implemented")
 }
-func (UnimplementedProderServer) UpdatePurchase(context.Context, *Bill) (*Event, error) {
+func (UnimplementedProderServer) UpdatePurchase(context.Context, *Bill) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePurchase not implemented")
 }
-func (UnimplementedProderServer) CancelPurchase(context.Context, *Bill) (*Event, error) {
+func (UnimplementedProderServer) CancelPurchase(context.Context, *Bill) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelPurchase not implemented")
 }
 func (UnimplementedProderServer) AddOrderComment(context.Context, *Event) (*Event, error) {

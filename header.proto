@@ -4595,7 +4595,7 @@ message Order {
 	// account currency /order currency (E.g: order currency: VND, acc currency: USD, => currency_rate = 1/20k = 0.00005)
 	float currency_rate = 67;
 	int64 paid_at = 68; // complete paid
-	string first_paid_order_id = 69;
+	// string first_paid_order_id = 69;
 
 	string user_confirmation = 70; // confirmed || rejected
 	int64 user_confirmed = 84; // ms

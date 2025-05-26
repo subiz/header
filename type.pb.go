@@ -156,113 +156,114 @@ const (
 	RealtimeType_phone_device_deleted               RealtimeType = 193
 	RealtimeType_call_setting_updated               RealtimeType = 194
 	// call_status_updated = 200; // answer, hang_up, dial_timeout, ringing, forward
-	RealtimeType_call_answered                RealtimeType = 195 // call_info
-	RealtimeType_call_wait_key_timeout        RealtimeType = 196 // conversation
-	RealtimeType_blocked_number_updated       RealtimeType = 201
-	RealtimeType_blocked_number_deleted       RealtimeType = 202
-	RealtimeType_greeting_audio_updated       RealtimeType = 203
-	RealtimeType_lead_created                 RealtimeType = 204
-	RealtimeType_call_rang                    RealtimeType = 205 // call_info
-	RealtimeType_message_referral             RealtimeType = 206 // message
-	RealtimeType_recent_call_updated          RealtimeType = 207 // agent
-	RealtimeType_webrtc_candidate_added       RealtimeType = 210
-	RealtimeType_call_invited                 RealtimeType = 211
-	RealtimeType_call_ended                   RealtimeType = 212
-	RealtimeType_call_joined                  RealtimeType = 213
-	RealtimeType_call_left                    RealtimeType = 214
-	RealtimeType_call_ringing                 RealtimeType = 215
-	RealtimeType_call_transferred             RealtimeType = 216
-	RealtimeType_agent_on_call_status_changed RealtimeType = 220
-	RealtimeType_user_lifecycle_stage_changed RealtimeType = 221
-	RealtimeType_event_type_updated           RealtimeType = 225
-	RealtimeType_segment_updated              RealtimeType = 226
-	RealtimeType_segment_deleted              RealtimeType = 227
-	RealtimeType_campaign_updated             RealtimeType = 229
-	RealtimeType_campaign_deleted             RealtimeType = 230
-	RealtimeType_outbound_call_entry_updated  RealtimeType = 231
-	RealtimeType_outbound_call_entry_deleted  RealtimeType = 232
-	RealtimeType_workflow_pump                RealtimeType = 233 // internal use only
-	RealtimeType_outbound_call_updated        RealtimeType = 234
-	RealtimeType_user_banned                  RealtimeType = 235 // banned_user
-	RealtimeType_user_unbanned                RealtimeType = 236 // banned_user
-	RealtimeType_called                       RealtimeType = 238
-	RealtimeType_payment_made                 RealtimeType = 239 // bill
-	RealtimeType_payment_updated              RealtimeType = 237 // bill
-	RealtimeType_logged_in                    RealtimeType = 240
-	RealtimeType_zns_sent                     RealtimeType = 241
-	RealtimeType_channel_integrated           RealtimeType = 242
-	RealtimeType_channel_removed              RealtimeType = 243
-	RealtimeType_credit_updated               RealtimeType = 244
-	RealtimeType_subiz_bill_updated           RealtimeType = 245
-	RealtimeType_desktop_notification_pushed  RealtimeType = 249
-	RealtimeType_ticket_created               RealtimeType = 250
-	RealtimeType_ticket_updated               RealtimeType = 251
-	RealtimeType_ticket_deleted               RealtimeType = 252
-	RealtimeType_ticket_tagged                RealtimeType = 253
-	RealtimeType_ticket_untagged              RealtimeType = 254
-	RealtimeType_ticket_rated                 RealtimeType = 256
-	RealtimeType_ticket_priority_updated      RealtimeType = 257
-	RealtimeType_ticket_state_updated         RealtimeType = 258
-	RealtimeType_ticket_comment_added         RealtimeType = 259 // data.message
-	RealtimeType_ticket_comment_deleted       RealtimeType = 260 // data.message
-	RealtimeType_ticket_comment_updated       RealtimeType = 261 // data.message
-	RealtimeType_ticket_joined                RealtimeType = 262 // event.data.conversation.memebers.0
-	RealtimeType_ticket_left                  RealtimeType = 264
-	RealtimeType_ticket_typing                RealtimeType = 265
-	RealtimeType_ticket_unassigned            RealtimeType = 266
-	RealtimeType_ticket_assigned              RealtimeType = 267
-	RealtimeType_ticket_reassigned            RealtimeType = 268
-	RealtimeType_ticket_pong                  RealtimeType = 270
-	RealtimeType_ticket_history_updated       RealtimeType = 281
-	RealtimeType_ticket_type_created          RealtimeType = 282
-	RealtimeType_ticket_type_updated          RealtimeType = 283
-	RealtimeType_ticket_view_created          RealtimeType = 284
-	RealtimeType_ticket_view_updated          RealtimeType = 285
-	RealtimeType_ticket_view_deleted          RealtimeType = 286
-	RealtimeType_live_users_updated           RealtimeType = 255
-	RealtimeType_sla_policy_created           RealtimeType = 287
-	RealtimeType_sla_policy_updated           RealtimeType = 288
-	RealtimeType_sla_policy_deleted           RealtimeType = 289
-	RealtimeType_knowledge_base_updated       RealtimeType = 290
-	RealtimeType_knowledge_base_deleted       RealtimeType = 291
-	RealtimeType_article_updated              RealtimeType = 292
-	RealtimeType_article_deleted              RealtimeType = 293
-	RealtimeType_article_category_updated     RealtimeType = 294
-	RealtimeType_article_category_deleted     RealtimeType = 295
-	RealtimeType_workflow_updated             RealtimeType = 300 // workflow
-	RealtimeType_workflow_deleted             RealtimeType = 301 // workflow
-	RealtimeType_workflow_pulsed              RealtimeType = 302 // workflow_pulse
-	RealtimeType_workflow_timeup              RealtimeType = 303 // workflow_pulse
-	RealtimeType_bank_account_updated         RealtimeType = 304
-	RealtimeType_bank_account_deleted         RealtimeType = 305
-	RealtimeType_segment_joined               RealtimeType = 306
-	RealtimeType_segment_left                 RealtimeType = 307
-	RealtimeType_label_added                  RealtimeType = 309
-	RealtimeType_label_removed                RealtimeType = 310 //
-	RealtimeType_order_draft_updated          RealtimeType = 311
-	RealtimeType_order_draft_deleted          RealtimeType = 312
-	RealtimeType_order_canceled               RealtimeType = 313
-	RealtimeType_ai_data_entry_updated        RealtimeType = 314
-	RealtimeType_ai_data_entry_deleted        RealtimeType = 315
-	RealtimeType_ai_data_group_updated        RealtimeType = 316
-	RealtimeType_ai_data_group_deleted        RealtimeType = 317
-	RealtimeType_ai_agent_updated             RealtimeType = 318
-	RealtimeType_ai_agent_deleted             RealtimeType = 319
-	RealtimeType_zns_template_created         RealtimeType = 320
-	RealtimeType_zns_template_updated         RealtimeType = 321
-	RealtimeType_zns_media_created            RealtimeType = 322
-	RealtimeType_zns_media_updated            RealtimeType = 323
-	RealtimeType_email_signature_created      RealtimeType = 325
-	RealtimeType_email_signature_updated      RealtimeType = 326
-	RealtimeType_email_signature_deleted      RealtimeType = 327
-	RealtimeType_attribute_collected          RealtimeType = 328
-	RealtimeType_llm_tool_called              RealtimeType = 329
-	RealtimeType_form_submitted               RealtimeType = 339
-	RealtimeType_form_updated                 RealtimeType = 340
-	RealtimeType_form_created                 RealtimeType = 341
-	RealtimeType_form_deleted                 RealtimeType = 342
-	RealtimeType_facebook_event_lead_sent     RealtimeType = 343
-	RealtimeType_facebook_event_purchase_sent RealtimeType = 344
+	RealtimeType_call_answered                   RealtimeType = 195 // call_info
+	RealtimeType_call_wait_key_timeout           RealtimeType = 196 // conversation
+	RealtimeType_blocked_number_updated          RealtimeType = 201
+	RealtimeType_blocked_number_deleted          RealtimeType = 202
+	RealtimeType_greeting_audio_updated          RealtimeType = 203
+	RealtimeType_lead_created                    RealtimeType = 204
+	RealtimeType_call_rang                       RealtimeType = 205 // call_info
+	RealtimeType_message_referral                RealtimeType = 206 // message
+	RealtimeType_recent_call_updated             RealtimeType = 207 // agent
+	RealtimeType_webrtc_candidate_added          RealtimeType = 210
+	RealtimeType_call_invited                    RealtimeType = 211
+	RealtimeType_call_ended                      RealtimeType = 212
+	RealtimeType_call_joined                     RealtimeType = 213
+	RealtimeType_call_left                       RealtimeType = 214
+	RealtimeType_call_ringing                    RealtimeType = 215
+	RealtimeType_call_transferred                RealtimeType = 216
+	RealtimeType_agent_on_call_status_changed    RealtimeType = 220
+	RealtimeType_user_lifecycle_stage_changed    RealtimeType = 221
+	RealtimeType_event_type_updated              RealtimeType = 225
+	RealtimeType_segment_updated                 RealtimeType = 226
+	RealtimeType_segment_deleted                 RealtimeType = 227
+	RealtimeType_campaign_updated                RealtimeType = 229
+	RealtimeType_campaign_deleted                RealtimeType = 230
+	RealtimeType_outbound_call_entry_updated     RealtimeType = 231
+	RealtimeType_outbound_call_entry_deleted     RealtimeType = 232
+	RealtimeType_workflow_pump                   RealtimeType = 233 // internal use only
+	RealtimeType_outbound_call_updated           RealtimeType = 234
+	RealtimeType_user_banned                     RealtimeType = 235 // banned_user
+	RealtimeType_user_unbanned                   RealtimeType = 236 // banned_user
+	RealtimeType_called                          RealtimeType = 238
+	RealtimeType_payment_made                    RealtimeType = 239 // bill
+	RealtimeType_payment_updated                 RealtimeType = 237 // bill
+	RealtimeType_logged_in                       RealtimeType = 240
+	RealtimeType_zns_sent                        RealtimeType = 241
+	RealtimeType_channel_integrated              RealtimeType = 242
+	RealtimeType_channel_removed                 RealtimeType = 243
+	RealtimeType_credit_updated                  RealtimeType = 244
+	RealtimeType_subiz_bill_updated              RealtimeType = 245
+	RealtimeType_desktop_notification_pushed     RealtimeType = 249
+	RealtimeType_ticket_created                  RealtimeType = 250
+	RealtimeType_ticket_updated                  RealtimeType = 251
+	RealtimeType_ticket_deleted                  RealtimeType = 252
+	RealtimeType_ticket_tagged                   RealtimeType = 253
+	RealtimeType_ticket_untagged                 RealtimeType = 254
+	RealtimeType_ticket_rated                    RealtimeType = 256
+	RealtimeType_ticket_priority_updated         RealtimeType = 257
+	RealtimeType_ticket_state_updated            RealtimeType = 258
+	RealtimeType_ticket_comment_added            RealtimeType = 259 // data.message
+	RealtimeType_ticket_comment_deleted          RealtimeType = 260 // data.message
+	RealtimeType_ticket_comment_updated          RealtimeType = 261 // data.message
+	RealtimeType_ticket_joined                   RealtimeType = 262 // event.data.conversation.memebers.0
+	RealtimeType_ticket_left                     RealtimeType = 264
+	RealtimeType_ticket_typing                   RealtimeType = 265
+	RealtimeType_ticket_unassigned               RealtimeType = 266
+	RealtimeType_ticket_assigned                 RealtimeType = 267
+	RealtimeType_ticket_reassigned               RealtimeType = 268
+	RealtimeType_ticket_pong                     RealtimeType = 270
+	RealtimeType_ticket_history_updated          RealtimeType = 281
+	RealtimeType_ticket_type_created             RealtimeType = 282
+	RealtimeType_ticket_type_updated             RealtimeType = 283
+	RealtimeType_ticket_view_created             RealtimeType = 284
+	RealtimeType_ticket_view_updated             RealtimeType = 285
+	RealtimeType_ticket_view_deleted             RealtimeType = 286
+	RealtimeType_live_users_updated              RealtimeType = 255
+	RealtimeType_sla_policy_created              RealtimeType = 287
+	RealtimeType_sla_policy_updated              RealtimeType = 288
+	RealtimeType_sla_policy_deleted              RealtimeType = 289
+	RealtimeType_knowledge_base_updated          RealtimeType = 290
+	RealtimeType_knowledge_base_deleted          RealtimeType = 291
+	RealtimeType_article_updated                 RealtimeType = 292
+	RealtimeType_article_deleted                 RealtimeType = 293
+	RealtimeType_article_category_updated        RealtimeType = 294
+	RealtimeType_article_category_deleted        RealtimeType = 295
+	RealtimeType_workflow_updated                RealtimeType = 300 // workflow
+	RealtimeType_workflow_deleted                RealtimeType = 301 // workflow
+	RealtimeType_workflow_pulsed                 RealtimeType = 302 // workflow_pulse
+	RealtimeType_workflow_timeup                 RealtimeType = 303 // workflow_pulse
+	RealtimeType_bank_account_updated            RealtimeType = 304
+	RealtimeType_bank_account_deleted            RealtimeType = 305
+	RealtimeType_segment_joined                  RealtimeType = 306
+	RealtimeType_segment_left                    RealtimeType = 307
+	RealtimeType_label_added                     RealtimeType = 309
+	RealtimeType_label_removed                   RealtimeType = 310 //
+	RealtimeType_order_draft_updated             RealtimeType = 311
+	RealtimeType_order_draft_deleted             RealtimeType = 312
+	RealtimeType_order_canceled                  RealtimeType = 313
+	RealtimeType_ai_data_entry_updated           RealtimeType = 314
+	RealtimeType_ai_data_entry_deleted           RealtimeType = 315
+	RealtimeType_ai_data_group_updated           RealtimeType = 316
+	RealtimeType_ai_data_group_deleted           RealtimeType = 317
+	RealtimeType_ai_agent_updated                RealtimeType = 318
+	RealtimeType_ai_agent_deleted                RealtimeType = 319
+	RealtimeType_zns_template_created            RealtimeType = 320
+	RealtimeType_zns_template_updated            RealtimeType = 321
+	RealtimeType_zns_media_created               RealtimeType = 322
+	RealtimeType_zns_media_updated               RealtimeType = 323
+	RealtimeType_email_signature_created         RealtimeType = 325
+	RealtimeType_email_signature_updated         RealtimeType = 326
+	RealtimeType_email_signature_deleted         RealtimeType = 327
+	RealtimeType_attribute_collected             RealtimeType = 328
+	RealtimeType_llm_tool_called                 RealtimeType = 329
+	RealtimeType_form_submitted                  RealtimeType = 339
+	RealtimeType_form_updated                    RealtimeType = 340
+	RealtimeType_form_created                    RealtimeType = 341
+	RealtimeType_form_deleted                    RealtimeType = 342
+	RealtimeType_facebook_event_lead_sent        RealtimeType = 343
+	RealtimeType_facebook_event_purchase_sent    RealtimeType = 344
+	RealtimeType_facebook_event_add_to_cart_sent RealtimeType = 345
 )
 
 // Enum value maps for RealtimeType.
@@ -505,6 +506,7 @@ var (
 		342: "form_deleted",
 		343: "facebook_event_lead_sent",
 		344: "facebook_event_purchase_sent",
+		345: "facebook_event_add_to_cart_sent",
 	}
 	RealtimeType_value = map[string]int32{
 		"a":                                  0,
@@ -744,6 +746,7 @@ var (
 		"form_deleted":                       342,
 		"facebook_event_lead_sent":           343,
 		"facebook_event_purchase_sent":       344,
+		"facebook_event_add_to_cart_sent":    345,
 	}
 )
 
@@ -1819,7 +1822,7 @@ var file_type_proto_rawDesc = string([]byte{
 	0x76, 0x65, 0x5f, 0x73, 0x65, 0x63, 0x18, 0x19, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x62, 0x65,
 	0x66, 0x6f, 0x72, 0x65, 0x52, 0x65, 0x6c, 0x61, 0x74, 0x69, 0x76, 0x65, 0x53, 0x65, 0x63, 0x12,
 	0x1d, 0x0a, 0x0a, 0x76, 0x61, 0x72, 0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x1c, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x76, 0x61, 0x72, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x2a, 0xa7,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x76, 0x61, 0x72, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x2a, 0xcd,
 	0x2d, 0x0a, 0x0c, 0x52, 0x65, 0x61, 0x6c, 0x74, 0x69, 0x6d, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12,
 	0x05, 0x0a, 0x01, 0x61, 0x10, 0x00, 0x12, 0x13, 0x0a, 0x0f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x5f, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x10, 0x0b, 0x12, 0x17, 0x0a, 0x13, 0x61,
@@ -2182,9 +2185,12 @@ var file_type_proto_rawDesc = string([]byte{
 	0x6f, 0x6b, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x65,
 	0x6e, 0x74, 0x10, 0xd7, 0x02, 0x12, 0x21, 0x0a, 0x1c, 0x66, 0x61, 0x63, 0x65, 0x62, 0x6f, 0x6f,
 	0x6b, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x70, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65,
-	0x5f, 0x73, 0x65, 0x6e, 0x74, 0x10, 0xd8, 0x02, 0x42, 0x19, 0x5a, 0x17, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62, 0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61,
-	0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x5f, 0x73, 0x65, 0x6e, 0x74, 0x10, 0xd8, 0x02, 0x12, 0x24, 0x0a, 0x1f, 0x66, 0x61, 0x63, 0x65,
+	0x62, 0x6f, 0x6f, 0x6b, 0x5f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x5f, 0x61, 0x64, 0x64, 0x5f, 0x74,
+	0x6f, 0x5f, 0x63, 0x61, 0x72, 0x74, 0x5f, 0x73, 0x65, 0x6e, 0x74, 0x10, 0xd9, 0x02, 0x42, 0x19,
+	0x5a, 0x17, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x73, 0x75, 0x62,
+	0x69, 0x7a, 0x2f, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 })
 
 var (
