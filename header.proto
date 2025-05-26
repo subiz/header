@@ -4525,7 +4525,7 @@ message Order {
 	int64 due_date = 8;
 	string due_date_term = 9; // net30 net7
 
-	// new; closed; canceled
+	// open; closed; canceled
 	//  (see OrderStatusCode)
 	string status = 10;
 	int64 closed = 14; // close or canceled time
@@ -6416,6 +6416,13 @@ message WorkflowAction {
 
 	ActionTerminateBot terminate_bot = 110;
 	ActionCheckOverrideRules check_override_rules = 111;
+	ActionSendFacebookConversion send_facebook_conversion = 112;
+}
+
+message ActionSendFacebookConversion {
+	string type = 3; // lead, purchase
+
+	Bill bill = 4;
 }
 
 message ActionCheckOverrideRules {

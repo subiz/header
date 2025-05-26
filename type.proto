@@ -340,6 +340,9 @@ enum RealtimeType {
 	form_updated = 340;
 	form_created = 341;
 	form_deleted = 342;
+
+	facebook_event_lead_sent = 343;
+	facebook_event_purchase_sent = 344;
 }
 
 message TextTransform {
