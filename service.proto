@@ -768,6 +768,16 @@ service Sendback {
 	rpc SendWebhookEvent(header.Event) returns (Empty);
 }
 
+service Emitter {
+	rpc CreateEventDestination(header.EventDestination) returns (header.Response);
+	rpc UpdateEventDestination(header.EventDestination) returns (header.Response);
+	rpc DeleteEventDestination(header.Id) returns (header.Response);
+	rpc ListEventDestinations(header.Id) returns (header.Response);
+	rpc GetEventDestination(header.Id) returns (header.Response);
+
+	rpc EmitEvent(header.Event) returns (Empty);
+}
+
 service NotiMgr {
 	rpc GetNotificationSetting(Id) returns (header.Response);
 	rpc UpdateNotificationSetting(NotiSetting) returns (header.Response);

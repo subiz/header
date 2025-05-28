@@ -22080,6 +22080,298 @@ var Sendback_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	Emitter_CreateEventDestination_FullMethodName = "/header.Emitter/CreateEventDestination"
+	Emitter_UpdateEventDestination_FullMethodName = "/header.Emitter/UpdateEventDestination"
+	Emitter_DeleteEventDestination_FullMethodName = "/header.Emitter/DeleteEventDestination"
+	Emitter_ListEventDestinations_FullMethodName  = "/header.Emitter/ListEventDestinations"
+	Emitter_GetEventDestination_FullMethodName    = "/header.Emitter/GetEventDestination"
+	Emitter_EmitEvent_FullMethodName              = "/header.Emitter/EmitEvent"
+)
+
+// EmitterClient is the client API for Emitter service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type EmitterClient interface {
+	CreateEventDestination(ctx context.Context, in *EventDestination, opts ...grpc.CallOption) (*Response, error)
+	UpdateEventDestination(ctx context.Context, in *EventDestination, opts ...grpc.CallOption) (*Response, error)
+	DeleteEventDestination(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	ListEventDestinations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	GetEventDestination(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
+	EmitEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Empty, error)
+}
+
+type emitterClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewEmitterClient(cc grpc.ClientConnInterface) EmitterClient {
+	return &emitterClient{cc}
+}
+
+func (c *emitterClient) CreateEventDestination(ctx context.Context, in *EventDestination, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Emitter_CreateEventDestination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emitterClient) UpdateEventDestination(ctx context.Context, in *EventDestination, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Emitter_UpdateEventDestination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emitterClient) DeleteEventDestination(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Emitter_DeleteEventDestination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emitterClient) ListEventDestinations(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Emitter_ListEventDestinations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emitterClient) GetEventDestination(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Emitter_GetEventDestination_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *emitterClient) EmitEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, Emitter_EmitEvent_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// EmitterServer is the server API for Emitter service.
+// All implementations must embed UnimplementedEmitterServer
+// for forward compatibility.
+type EmitterServer interface {
+	CreateEventDestination(context.Context, *EventDestination) (*Response, error)
+	UpdateEventDestination(context.Context, *EventDestination) (*Response, error)
+	DeleteEventDestination(context.Context, *Id) (*Response, error)
+	ListEventDestinations(context.Context, *Id) (*Response, error)
+	GetEventDestination(context.Context, *Id) (*Response, error)
+	EmitEvent(context.Context, *Event) (*Empty, error)
+	mustEmbedUnimplementedEmitterServer()
+}
+
+// UnimplementedEmitterServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedEmitterServer struct{}
+
+func (UnimplementedEmitterServer) CreateEventDestination(context.Context, *EventDestination) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateEventDestination not implemented")
+}
+func (UnimplementedEmitterServer) UpdateEventDestination(context.Context, *EventDestination) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateEventDestination not implemented")
+}
+func (UnimplementedEmitterServer) DeleteEventDestination(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteEventDestination not implemented")
+}
+func (UnimplementedEmitterServer) ListEventDestinations(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListEventDestinations not implemented")
+}
+func (UnimplementedEmitterServer) GetEventDestination(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEventDestination not implemented")
+}
+func (UnimplementedEmitterServer) EmitEvent(context.Context, *Event) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EmitEvent not implemented")
+}
+func (UnimplementedEmitterServer) mustEmbedUnimplementedEmitterServer() {}
+func (UnimplementedEmitterServer) testEmbeddedByValue()                 {}
+
+// UnsafeEmitterServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to EmitterServer will
+// result in compilation errors.
+type UnsafeEmitterServer interface {
+	mustEmbedUnimplementedEmitterServer()
+}
+
+func RegisterEmitterServer(s grpc.ServiceRegistrar, srv EmitterServer) {
+	// If the following call pancis, it indicates UnimplementedEmitterServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Emitter_ServiceDesc, srv)
+}
+
+func _Emitter_CreateEventDestination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventDestination)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmitterServer).CreateEventDestination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Emitter_CreateEventDestination_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmitterServer).CreateEventDestination(ctx, req.(*EventDestination))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Emitter_UpdateEventDestination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventDestination)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmitterServer).UpdateEventDestination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Emitter_UpdateEventDestination_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmitterServer).UpdateEventDestination(ctx, req.(*EventDestination))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Emitter_DeleteEventDestination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmitterServer).DeleteEventDestination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Emitter_DeleteEventDestination_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmitterServer).DeleteEventDestination(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Emitter_ListEventDestinations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmitterServer).ListEventDestinations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Emitter_ListEventDestinations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmitterServer).ListEventDestinations(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Emitter_GetEventDestination_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmitterServer).GetEventDestination(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Emitter_GetEventDestination_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmitterServer).GetEventDestination(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Emitter_EmitEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Event)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EmitterServer).EmitEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Emitter_EmitEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EmitterServer).EmitEvent(ctx, req.(*Event))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Emitter_ServiceDesc is the grpc.ServiceDesc for Emitter service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Emitter_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Emitter",
+	HandlerType: (*EmitterServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateEventDestination",
+			Handler:    _Emitter_CreateEventDestination_Handler,
+		},
+		{
+			MethodName: "UpdateEventDestination",
+			Handler:    _Emitter_UpdateEventDestination_Handler,
+		},
+		{
+			MethodName: "DeleteEventDestination",
+			Handler:    _Emitter_DeleteEventDestination_Handler,
+		},
+		{
+			MethodName: "ListEventDestinations",
+			Handler:    _Emitter_ListEventDestinations_Handler,
+		},
+		{
+			MethodName: "GetEventDestination",
+			Handler:    _Emitter_GetEventDestination_Handler,
+		},
+		{
+			MethodName: "EmitEvent",
+			Handler:    _Emitter_EmitEvent_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	NotiMgr_GetNotificationSetting_FullMethodName    = "/header.NotiMgr/GetNotificationSetting"
 	NotiMgr_UpdateNotificationSetting_FullMethodName = "/header.NotiMgr/UpdateNotificationSetting"
 	NotiMgr_PushNoti_FullMethodName                  = "/header.NotiMgr/PushNoti"

@@ -643,23 +643,28 @@ message Event {
 	Data data = 20;
 	Data old = 53;
 	Data ref = 54;
-	repeated EventField metadata = 55;
+	// repeated EventField metadata = 55;
 	string webhook_id = 56; // webhook id listen this event
 	string source_event_id = 57; // for sync event, can be used like idempotency key
+	map<string, EventField> custom_data = 58;
 }
 
 message EventField {
 	string key = 2;
-	string type = 3;
+	string type = 3; // string, number, integer, object, array, boolean, null, url, timestamp
 
 	string string = 4;
-	int64 int_number = 5;
+	int64 integer = 5;
 	double number = 6;
-	bool bool = 7;
+	bool boolean = 7;
 	string url = 8;
 	string label = 9;
+	string timestamp = 10; // rfc3999
+	string object = 11;
 
-	repeated EventField list = 20;
+	string value = 12; // read-only, jsonified
+
+	repeated EventField array = 20;
 }
 
 message Data {
@@ -767,6 +772,9 @@ message Data {
 	EmailSignature email_signature = 137;
 	LLMToolCall llm_tool_call = 138;
 	Form form = 139;
+
+	EventDestination event_destination = 140;
+	repeated EventDestination event_destinations = 141;
 }
 
 message ConversationMeta {
@@ -3312,6 +3320,56 @@ message WebhookSecret {
 	string secret = 3;
 	int64 expired = 5;
 	int64 created = 6;
+}
+
+message EventFilter {
+	repeated string events = 10; // ticket_updated, ticket_created
+	WorkflowCondition condition = 14;
+}
+
+message EventDestination {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3;
+	string name = 4;
+
+	repeated EventFilter filters = 5;
+	bool is_system = 6;
+
+	int64 is_disabled = 8;
+
+	int64 updated = 9; // update when url, events or secret updated
+	int64 created = 10;
+	string created_by = 11;
+	string updated_by = 12;
+
+	int64 total_deliveries_in_last_7_days = 30;
+	int64 total_failed_deliveries_in_last_7_days = 31;
+	int64 last_delivery_at = 34;
+	int64 last_success_delivery_at = 35;
+
+	string type = 19; // webhook, facebook_conversion_api
+	Webhook webhook = 20;
+	FacebookConversionAPI facebook_conversion_api = 21;
+
+	string order_key_path = 22;
+	repeated DataMapping mappings = 23;
+}
+
+message DataMapping {
+	string from_path = 3;
+	string to_path = 4;
+	string value = 5;
+	string fallback_value = 6;
+}
+
+message FacebookConversionAPI {
+	string dataset = 4;
+	// mapping
+	string event_name = 6;
+	int64 event_time = 7;
+	string event_id = 8; // path (start with =)
+
 }
 
 message Webhook {
