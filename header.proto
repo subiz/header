@@ -8490,6 +8490,7 @@ message WorkflowPulse {
 	string workflow_action_id = 11; // could be difference with workflow_id id since we allow function call
 	string trace_id = 12;
 	string span_id = 13;
+	int64 workflow_version = 15;
 }
 
 message WorkflowTimeup {
@@ -8502,6 +8503,7 @@ message WorkflowTimeup {
 
 	string trace_id = 12;
 	string span_id = 13;
+	int64 workflow_version = 15;
 }
 
 message AndroidNotificationRequest {

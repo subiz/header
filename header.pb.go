@@ -59758,6 +59758,7 @@ type WorkflowPulse struct {
 	WorkflowActionId string                 `protobuf:"bytes,11,opt,name=workflow_action_id,json=workflowActionId,proto3" json:"workflow_action_id,omitempty"` // could be difference with workflow_id id since we allow function call
 	TraceId          string                 `protobuf:"bytes,12,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	SpanId           string                 `protobuf:"bytes,13,opt,name=span_id,json=spanId,proto3" json:"span_id,omitempty"`
+	WorkflowVersion  int64                  `protobuf:"varint,15,opt,name=workflow_version,json=workflowVersion,proto3" json:"workflow_version,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -59848,18 +59849,26 @@ func (x *WorkflowPulse) GetSpanId() string {
 	return ""
 }
 
+func (x *WorkflowPulse) GetWorkflowVersion() int64 {
+	if x != nil {
+		return x.WorkflowVersion
+	}
+	return 0
+}
+
 type WorkflowTimeup struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	WorkflowId    string                 `protobuf:"bytes,6,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
-	Term          int64                  `protobuf:"varint,7,opt,name=term,proto3" json:"term,omitempty"`
-	SessionId     string                 `protobuf:"bytes,8,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	ActionId      string                 `protobuf:"bytes,9,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
-	TimeupSec     int64                  `protobuf:"varint,10,opt,name=timeup_sec,json=timeupSec,proto3" json:"timeup_sec,omitempty"`
-	ThreadId      string                 `protobuf:"bytes,11,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
-	TraceId       string                 `protobuf:"bytes,12,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
-	SpanId        string                 `protobuf:"bytes,13,opt,name=span_id,json=spanId,proto3" json:"span_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	WorkflowId      string                 `protobuf:"bytes,6,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
+	Term            int64                  `protobuf:"varint,7,opt,name=term,proto3" json:"term,omitempty"`
+	SessionId       string                 `protobuf:"bytes,8,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	ActionId        string                 `protobuf:"bytes,9,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
+	TimeupSec       int64                  `protobuf:"varint,10,opt,name=timeup_sec,json=timeupSec,proto3" json:"timeup_sec,omitempty"`
+	ThreadId        string                 `protobuf:"bytes,11,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	TraceId         string                 `protobuf:"bytes,12,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	SpanId          string                 `protobuf:"bytes,13,opt,name=span_id,json=spanId,proto3" json:"span_id,omitempty"`
+	WorkflowVersion int64                  `protobuf:"varint,15,opt,name=workflow_version,json=workflowVersion,proto3" json:"workflow_version,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *WorkflowTimeup) Reset() {
@@ -59946,6 +59955,13 @@ func (x *WorkflowTimeup) GetSpanId() string {
 		return x.SpanId
 	}
 	return ""
+}
+
+func (x *WorkflowTimeup) GetWorkflowVersion() int64 {
+	if x != nil {
+		return x.WorkflowVersion
+	}
+	return 0
 }
 
 type AndroidNotificationRequest struct {
@@ -74939,7 +74955,7 @@ const file_header_proto_rawDesc = "" +
 	"\acreated\x18\x03 \x01(\x03R\acreated\x12\x12\n" +
 	"\x04body\x18\x04 \x01(\fR\x04body\x12\x1c\n" +
 	"\tsignature\x18\x05 \x01(\tR\tsignature\x12\x12\n" +
-	"\x04mode\x18\x06 \x01(\tR\x04mode\"\xff\x01\n" +
+	"\x04mode\x18\x06 \x01(\tR\x04mode\"\xaa\x02\n" +
 	"\rWorkflowPulse\x12\x1f\n" +
 	"\vworkflow_id\x18\x06 \x01(\tR\n" +
 	"workflowId\x12\x12\n" +
@@ -74951,7 +74967,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\tR\bthreadId\x12,\n" +
 	"\x12workflow_action_id\x18\v \x01(\tR\x10workflowActionId\x12\x19\n" +
 	"\btrace_id\x18\f \x01(\tR\atraceId\x12\x17\n" +
-	"\aspan_id\x18\r \x01(\tR\x06spanId\"\xf1\x01\n" +
+	"\aspan_id\x18\r \x01(\tR\x06spanId\x12)\n" +
+	"\x10workflow_version\x18\x0f \x01(\x03R\x0fworkflowVersion\"\x9c\x02\n" +
 	"\x0eWorkflowTimeup\x12\x1f\n" +
 	"\vworkflow_id\x18\x06 \x01(\tR\n" +
 	"workflowId\x12\x12\n" +
@@ -74964,7 +74981,8 @@ const file_header_proto_rawDesc = "" +
 	" \x01(\x03R\ttimeupSec\x12\x1b\n" +
 	"\tthread_id\x18\v \x01(\tR\bthreadId\x12\x19\n" +
 	"\btrace_id\x18\f \x01(\tR\atraceId\x12\x17\n" +
-	"\aspan_id\x18\r \x01(\tR\x06spanId\"\xce\x02\n" +
+	"\aspan_id\x18\r \x01(\tR\x06spanId\x12)\n" +
+	"\x10workflow_version\x18\x0f \x01(\x03R\x0fworkflowVersion\"\xce\x02\n" +
 	"\x1aAndroidNotificationRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1b\n" +
 	"\tdevice_id\x18\x03 \x01(\tR\bdeviceId\x12\x1d\n" +
