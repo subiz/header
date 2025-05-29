@@ -6188,24 +6188,19 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	UserCache_ListLeads_FullMethodName        = "/header.UserCache/ListLeads"
-	UserCache_ListLeadIds_FullMethodName      = "/header.UserCache/ListLeadIds"
-	UserCache_CountLeads_FullMethodName       = "/header.UserCache/CountLeads"
 	UserCache_SuggestLeadField_FullMethodName = "/header.UserCache/SuggestLeadField"
-	UserCache_ListPhones_FullMethodName       = "/header.UserCache/ListPhones"
-	UserCache_CountUsers_FullMethodName       = "/header.UserCache/CountUsers"
+	UserCache_ListLeads_FullMethodName        = "/header.UserCache/ListLeads"
+	UserCache_CountLeads_FullMethodName       = "/header.UserCache/CountLeads"
 )
 
 // UserCacheClient is the client API for UserCache service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserCacheClient interface {
-	ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
-	ListLeadIds(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
-	CountLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
+	// rpc ListLeadIds(header.UserView) returns (Response);
 	SuggestLeadField(ctx context.Context, in *SuggestLeadFieldRequest, opts ...grpc.CallOption) (*SuggestLeadFieldResponse, error)
-	ListPhones(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
-	CountUsers(ctx context.Context, in *UserViews, opts ...grpc.CallOption) (*CounterDataPoint, error)
+	ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
+	CountLeads(ctx context.Context, in *UserViews, opts ...grpc.CallOption) (*CounterDataPoint, error)
 }
 
 type userCacheClient struct {
@@ -6214,36 +6209,6 @@ type userCacheClient struct {
 
 func NewUserCacheClient(cc grpc.ClientConnInterface) UserCacheClient {
 	return &userCacheClient{cc}
-}
-
-func (c *userCacheClient) ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_ListLeads_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userCacheClient) ListLeadIds(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_ListLeadIds_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *userCacheClient) CountLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_CountLeads_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *userCacheClient) SuggestLeadField(ctx context.Context, in *SuggestLeadFieldRequest, opts ...grpc.CallOption) (*SuggestLeadFieldResponse, error) {
@@ -6256,20 +6221,20 @@ func (c *userCacheClient) SuggestLeadField(ctx context.Context, in *SuggestLeadF
 	return out, nil
 }
 
-func (c *userCacheClient) ListPhones(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error) {
+func (c *userCacheClient) ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_ListPhones_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UserCache_ListLeads_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userCacheClient) CountUsers(ctx context.Context, in *UserViews, opts ...grpc.CallOption) (*CounterDataPoint, error) {
+func (c *userCacheClient) CountLeads(ctx context.Context, in *UserViews, opts ...grpc.CallOption) (*CounterDataPoint, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CounterDataPoint)
-	err := c.cc.Invoke(ctx, UserCache_CountUsers_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UserCache_CountLeads_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -6280,12 +6245,10 @@ func (c *userCacheClient) CountUsers(ctx context.Context, in *UserViews, opts ..
 // All implementations must embed UnimplementedUserCacheServer
 // for forward compatibility.
 type UserCacheServer interface {
-	ListLeads(context.Context, *UserView) (*Response, error)
-	ListLeadIds(context.Context, *UserView) (*Response, error)
-	CountLeads(context.Context, *UserView) (*Response, error)
+	// rpc ListLeadIds(header.UserView) returns (Response);
 	SuggestLeadField(context.Context, *SuggestLeadFieldRequest) (*SuggestLeadFieldResponse, error)
-	ListPhones(context.Context, *UserView) (*Response, error)
-	CountUsers(context.Context, *UserViews) (*CounterDataPoint, error)
+	ListLeads(context.Context, *UserView) (*Response, error)
+	CountLeads(context.Context, *UserViews) (*CounterDataPoint, error)
 	mustEmbedUnimplementedUserCacheServer()
 }
 
@@ -6296,23 +6259,14 @@ type UserCacheServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserCacheServer struct{}
 
-func (UnimplementedUserCacheServer) ListLeads(context.Context, *UserView) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListLeads not implemented")
-}
-func (UnimplementedUserCacheServer) ListLeadIds(context.Context, *UserView) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListLeadIds not implemented")
-}
-func (UnimplementedUserCacheServer) CountLeads(context.Context, *UserView) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CountLeads not implemented")
-}
 func (UnimplementedUserCacheServer) SuggestLeadField(context.Context, *SuggestLeadFieldRequest) (*SuggestLeadFieldResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SuggestLeadField not implemented")
 }
-func (UnimplementedUserCacheServer) ListPhones(context.Context, *UserView) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPhones not implemented")
+func (UnimplementedUserCacheServer) ListLeads(context.Context, *UserView) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLeads not implemented")
 }
-func (UnimplementedUserCacheServer) CountUsers(context.Context, *UserViews) (*CounterDataPoint, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CountUsers not implemented")
+func (UnimplementedUserCacheServer) CountLeads(context.Context, *UserViews) (*CounterDataPoint, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CountLeads not implemented")
 }
 func (UnimplementedUserCacheServer) mustEmbedUnimplementedUserCacheServer() {}
 func (UnimplementedUserCacheServer) testEmbeddedByValue()                   {}
@@ -6335,60 +6289,6 @@ func RegisterUserCacheServer(s grpc.ServiceRegistrar, srv UserCacheServer) {
 	s.RegisterService(&UserCache_ServiceDesc, srv)
 }
 
-func _UserCache_ListLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserView)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).ListLeads(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_ListLeads_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).ListLeads(ctx, req.(*UserView))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserCache_ListLeadIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserView)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).ListLeadIds(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_ListLeadIds_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).ListLeadIds(ctx, req.(*UserView))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _UserCache_CountLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserView)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserCacheServer).CountLeads(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserCache_CountLeads_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).CountLeads(ctx, req.(*UserView))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _UserCache_SuggestLeadField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SuggestLeadFieldRequest)
 	if err := dec(in); err != nil {
@@ -6407,38 +6307,38 @@ func _UserCache_SuggestLeadField_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserCache_ListPhones_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserCache_ListLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UserView)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserCacheServer).ListPhones(ctx, in)
+		return srv.(UserCacheServer).ListLeads(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserCache_ListPhones_FullMethodName,
+		FullMethod: UserCache_ListLeads_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).ListPhones(ctx, req.(*UserView))
+		return srv.(UserCacheServer).ListLeads(ctx, req.(*UserView))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserCache_CountUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserCache_CountLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UserViews)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserCacheServer).CountUsers(ctx, in)
+		return srv.(UserCacheServer).CountLeads(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserCache_CountUsers_FullMethodName,
+		FullMethod: UserCache_CountLeads_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).CountUsers(ctx, req.(*UserViews))
+		return srv.(UserCacheServer).CountLeads(ctx, req.(*UserViews))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6451,28 +6351,16 @@ var UserCache_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserCacheServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListLeads",
-			Handler:    _UserCache_ListLeads_Handler,
-		},
-		{
-			MethodName: "ListLeadIds",
-			Handler:    _UserCache_ListLeadIds_Handler,
-		},
-		{
-			MethodName: "CountLeads",
-			Handler:    _UserCache_CountLeads_Handler,
-		},
-		{
 			MethodName: "SuggestLeadField",
 			Handler:    _UserCache_SuggestLeadField_Handler,
 		},
 		{
-			MethodName: "ListPhones",
-			Handler:    _UserCache_ListPhones_Handler,
+			MethodName: "ListLeads",
+			Handler:    _UserCache_ListLeads_Handler,
 		},
 		{
-			MethodName: "CountUsers",
-			Handler:    _UserCache_CountUsers_Handler,
+			MethodName: "CountLeads",
+			Handler:    _UserCache_CountLeads_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -3854,6 +3854,9 @@ message UserView {
 	repeated string ignores = 28;
 
 	bool deleted = 29;
+
+	// for listing
+	string attribute = 30;
 }
 
 message CountTouchpointResponse {

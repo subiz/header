@@ -27480,6 +27480,8 @@ type UserView struct {
 	Viewers       []string               `protobuf:"bytes,27,rep,name=viewers,proto3" json:"viewers,omitempty"`
 	Ignores       []string               `protobuf:"bytes,28,rep,name=ignores,proto3" json:"ignores,omitempty"`
 	Deleted       bool                   `protobuf:"varint,29,opt,name=deleted,proto3" json:"deleted,omitempty"`
+	// for listing
+	Attribute     string `protobuf:"bytes,30,opt,name=attribute,proto3" json:"attribute,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -27645,6 +27647,13 @@ func (x *UserView) GetDeleted() bool {
 		return x.Deleted
 	}
 	return false
+}
+
+func (x *UserView) GetAttribute() string {
+	if x != nil {
+		return x.Attribute
+	}
+	return ""
 }
 
 type CountTouchpointResponse struct {
@@ -71020,7 +71029,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12&\n" +
-	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\xab\x04\n" +
+	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\xc9\x04\n" +
 	"\bUserView\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71044,7 +71053,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0edisplay_fields\x18\x1a \x03(\tR\rdisplayFields\x12\x18\n" +
 	"\aviewers\x18\x1b \x03(\tR\aviewers\x12\x18\n" +
 	"\aignores\x18\x1c \x03(\tR\aignores\x12\x18\n" +
-	"\adeleted\x18\x1d \x01(\bR\adeleted\"\xff\x01\n" +
+	"\adeleted\x18\x1d \x01(\bR\adeleted\x12\x1c\n" +
+	"\tattribute\x18\x1e \x01(\tR\tattribute\"\xff\x01\n" +
 	"\x17CountTouchpointResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
