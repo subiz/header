@@ -220,6 +220,10 @@ service UserCache {
 	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse); // ok
 	rpc ListLeads(header.UserView) returns (Response);
 	rpc CountLeads(header.UserViews) returns (CounterDataPoint);
+
+	rpc UpdateUser(User) returns (Response);
+	rpc AddUserToSegment(header.SegmentUsersRequest) returns (Response);
+	rpc RemoveUserFromSegment(header.SegmentUsersRequest) returns (Response);
 }
 
 // user services

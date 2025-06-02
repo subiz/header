@@ -52460,10 +52460,11 @@ type LLMChatHistoryEntry struct {
 	// extra field in the message
 	Fields map[string]string `protobuf:"bytes,7,rep,name=fields,proto3" json:"fields,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // key -> jsonified value. eg "by_agent_id": "\"ag1\""
 	// for testing
-	Timeout       int64         `protobuf:"varint,8,opt,name=timeout,proto3" json:"timeout,omitempty"` // ms
-	Attachments   []*Attachment `protobuf:"bytes,9,rep,name=attachments,proto3" json:"attachments,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Timeout              int64         `protobuf:"varint,8,opt,name=timeout,proto3" json:"timeout,omitempty"` // ms
+	Attachments          []*Attachment `protobuf:"bytes,9,rep,name=attachments,proto3" json:"attachments,omitempty"`
+	MoreExpectedContents []string      `protobuf:"bytes,10,rep,name=more_expected_contents,json=moreExpectedContents,proto3" json:"more_expected_contents,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *LLMChatHistoryEntry) Reset() {
@@ -52534,6 +52535,13 @@ func (x *LLMChatHistoryEntry) GetTimeout() int64 {
 func (x *LLMChatHistoryEntry) GetAttachments() []*Attachment {
 	if x != nil {
 		return x.Attachments
+	}
+	return nil
+}
+
+func (x *LLMChatHistoryEntry) GetMoreExpectedContents() []string {
+	if x != nil {
+		return x.MoreExpectedContents
 	}
 	return nil
 }
@@ -73997,14 +74005,16 @@ const file_header_proto_rawDesc = "" +
 	"\x0econtext_chunks\x18\x0f \x03(\v2\x13.header.RAGDocumentR\rcontextChunks\x12\x1b\n" +
 	"\thttp_code\x18\x10 \x01(\x03R\bhttpCode\x12!\n" +
 	"\fassigned_tos\x18\x11 \x03(\tR\vassignedTos\x12'\n" +
-	"\x0fconversation_id\x18\x12 \x01(\tR\x0econversationId\"\xb8\x02\n" +
+	"\x0fconversation_id\x18\x12 \x01(\tR\x0econversationId\"\xee\x02\n" +
 	"\x13LLMChatHistoryEntry\x12\x12\n" +
 	"\x04role\x18\x03 \x01(\tR\x04role\x12\x18\n" +
 	"\acontent\x18\x04 \x01(\tR\acontent\x12'\n" +
 	"\x04tool\x18\x05 \x01(\v2\x13.header.LLMToolCallR\x04tool\x12?\n" +
 	"\x06fields\x18\a \x03(\v2'.header.LLMChatHistoryEntry.FieldsEntryR\x06fields\x12\x18\n" +
 	"\atimeout\x18\b \x01(\x03R\atimeout\x124\n" +
-	"\vattachments\x18\t \x03(\v2\x12.header.AttachmentR\vattachments\x1a9\n" +
+	"\vattachments\x18\t \x03(\v2\x12.header.AttachmentR\vattachments\x124\n" +
+	"\x16more_expected_contents\x18\n" +
+	" \x03(\tR\x14moreExpectedContents\x1a9\n" +
 	"\vFieldsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"~\n" +

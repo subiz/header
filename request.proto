@@ -986,3 +986,9 @@ message CommitRequest {
 	int32 partition = 5;
 	int64 offset = 6;
 }
+
+message SegmentUsersRequest {
+	common.Context ctx = 1;
+	string segment_id = 4;
+	repeated string user_ids = 5;
+}

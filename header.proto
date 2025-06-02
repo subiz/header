@@ -7443,6 +7443,7 @@ message LLMChatHistoryEntry {
 	// for testing
 	int64 timeout = 8; // ms
 	repeated Attachment attachments = 9;
+	repeated string more_expected_contents = 10;
 }
 
 message RAGDocument {
