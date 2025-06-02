@@ -3892,7 +3892,7 @@ message UserViewCondition {
 	string type = 5;
 
 	TextCondition text = 6;
-	BoolCondition boolean = 8;
+	BooleanCondition boolean = 8;
 	FloatCondition number = 9;
 	DatetimeCondition datetime = 10;
 	EventCondition event = 11;
@@ -7296,7 +7296,7 @@ message WorkflowCondition {
 	bool is_changed = 6;
 	string type = 7; // boolean, number, datetime, event, text, timming, llm
 
-	BoolCondition boolean = 8;
+	BooleanCondition boolean = 8;
 	FloatCondition number = 9;
 	DatetimeCondition datetime = 10;
 	EventCondition event = 11;
@@ -9439,5 +9439,4 @@ message Markers {
 }
 
 message UserDataSource {
-
 }

@@ -1115,7 +1115,7 @@ type EventConditionFilter struct {
 	Key           string                 `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"` // event, id, keyword, lead_owner attr:fullname segment user_label
 	Type          string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
 	Text          *TextCondition         `protobuf:"bytes,6,opt,name=text,proto3" json:"text,omitempty"`
-	Boolean       *BoolCondition         `protobuf:"bytes,8,opt,name=boolean,proto3" json:"boolean,omitempty"`
+	Boolean       *BooleanCondition      `protobuf:"bytes,8,opt,name=boolean,proto3" json:"boolean,omitempty"`
 	Number        *FloatCondition        `protobuf:"bytes,9,opt,name=number,proto3" json:"number,omitempty"`
 	Datetime      *DatetimeCondition     `protobuf:"bytes,10,opt,name=datetime,proto3" json:"datetime,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1180,7 +1180,7 @@ func (x *EventConditionFilter) GetText() *TextCondition {
 	return nil
 }
 
-func (x *EventConditionFilter) GetBoolean() *BoolCondition {
+func (x *EventConditionFilter) GetBoolean() *BooleanCondition {
 	if x != nil {
 		return x.Boolean
 	}
@@ -1286,27 +1286,27 @@ func (x *EventCondition) GetFilters() []*EventConditionFilter {
 	return nil
 }
 
-type BoolCondition struct {
+type BooleanCondition struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Op            string                 `protobuf:"bytes,2,opt,name=op,proto3" json:"op,omitempty"` // has_value, true, false, any
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *BoolCondition) Reset() {
-	*x = BoolCondition{}
+func (x *BooleanCondition) Reset() {
+	*x = BooleanCondition{}
 	mi := &file_type_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *BoolCondition) String() string {
+func (x *BooleanCondition) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*BoolCondition) ProtoMessage() {}
+func (*BooleanCondition) ProtoMessage() {}
 
-func (x *BoolCondition) ProtoReflect() protoreflect.Message {
+func (x *BooleanCondition) ProtoReflect() protoreflect.Message {
 	mi := &file_type_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1318,12 +1318,12 @@ func (x *BoolCondition) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BoolCondition.ProtoReflect.Descriptor instead.
-func (*BoolCondition) Descriptor() ([]byte, []int) {
+// Deprecated: Use BooleanCondition.ProtoReflect.Descriptor instead.
+func (*BooleanCondition) Descriptor() ([]byte, []int) {
 	return file_type_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *BoolCondition) GetOp() string {
+func (x *BooleanCondition) GetOp() string {
 	if x != nil {
 		return x.Op
 	}
@@ -1714,13 +1714,13 @@ const file_type_proto_rawDesc = "" +
 	"\x0fnot_contain_var\x185 \x03(\tR\rnotContainVar\x12+\n" +
 	"\x12not_start_with_var\x187 \x03(\tR\x0fnotStartWithVar\x12'\n" +
 	"\x10not_end_with_var\x188 \x03(\tR\rnotEndWithVar\x12(\n" +
-	"\x10contain_all_varr\x18: \x03(\tR\x0econtainAllVarr\"\x8f\x02\n" +
+	"\x10contain_all_varr\x18: \x03(\tR\x0econtainAllVarr\"\x92\x02\n" +
 	"\x14EventConditionFilter\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x10\n" +
 	"\x03key\x18\x04 \x01(\tR\x03key\x12\x12\n" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12)\n" +
-	"\x04text\x18\x06 \x01(\v2\x15.header.TextConditionR\x04text\x12/\n" +
-	"\aboolean\x18\b \x01(\v2\x15.header.BoolConditionR\aboolean\x12.\n" +
+	"\x04text\x18\x06 \x01(\v2\x15.header.TextConditionR\x04text\x122\n" +
+	"\aboolean\x18\b \x01(\v2\x18.header.BooleanConditionR\aboolean\x12.\n" +
 	"\x06number\x18\t \x01(\v2\x16.header.FloatConditionR\x06number\x125\n" +
 	"\bdatetime\x18\n" +
 	" \x01(\v2\x19.header.DatetimeConditionR\bdatetime\"\xdf\x01\n" +
@@ -1730,8 +1730,8 @@ const file_type_proto_rawDesc = "" +
 	"\ainverse\x18\x05 \x01(\bR\ainverse\x12\x19\n" +
 	"\bat_least\x18\x06 \x01(\x05R\aatLeast\x123\n" +
 	"\acreated\x18\a \x01(\v2\x19.header.DatetimeConditionR\acreated\x126\n" +
-	"\afilters\x18\b \x03(\v2\x1c.header.EventConditionFilterR\afilters\"\x1f\n" +
-	"\rBoolCondition\x12\x0e\n" +
+	"\afilters\x18\b \x03(\v2\x1c.header.EventConditionFilterR\afilters\"\"\n" +
+	"\x10BooleanCondition\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\"\xa8\x03\n" +
 	"\x0eFloatCondition\x12\x0e\n" +
 	"\x02op\x18\x02 \x01(\tR\x02op\x126\n" +
@@ -2040,14 +2040,14 @@ var file_type_proto_goTypes = []any{
 	(*TextCondition)(nil),        // 3: header.TextCondition
 	(*EventConditionFilter)(nil), // 4: header.EventConditionFilter
 	(*EventCondition)(nil),       // 5: header.EventCondition
-	(*BoolCondition)(nil),        // 6: header.BoolCondition
+	(*BooleanCondition)(nil),     // 6: header.BooleanCondition
 	(*FloatCondition)(nil),       // 7: header.FloatCondition
 	(*DatetimeCondition)(nil),    // 8: header.DatetimeCondition
 }
 var file_type_proto_depIdxs = []int32{
 	1, // 0: header.TextCondition.transforms:type_name -> header.TextTransform
 	3, // 1: header.EventConditionFilter.text:type_name -> header.TextCondition
-	6, // 2: header.EventConditionFilter.boolean:type_name -> header.BoolCondition
+	6, // 2: header.EventConditionFilter.boolean:type_name -> header.BooleanCondition
 	7, // 3: header.EventConditionFilter.number:type_name -> header.FloatCondition
 	8, // 4: header.EventConditionFilter.datetime:type_name -> header.DatetimeCondition
 	8, // 5: header.EventCondition.created:type_name -> header.DatetimeCondition

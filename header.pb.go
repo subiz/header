@@ -27816,7 +27816,7 @@ type UserViewCondition struct {
 	Key           string                 `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"` // event, id, keyword, lead_owner attr:fullname segment user_label
 	Type          string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
 	Text          *TextCondition         `protobuf:"bytes,6,opt,name=text,proto3" json:"text,omitempty"`
-	Boolean       *BoolCondition         `protobuf:"bytes,8,opt,name=boolean,proto3" json:"boolean,omitempty"`
+	Boolean       *BooleanCondition      `protobuf:"bytes,8,opt,name=boolean,proto3" json:"boolean,omitempty"`
 	Number        *FloatCondition        `protobuf:"bytes,9,opt,name=number,proto3" json:"number,omitempty"`
 	Datetime      *DatetimeCondition     `protobuf:"bytes,10,opt,name=datetime,proto3" json:"datetime,omitempty"`
 	Event         *EventCondition        `protobuf:"bytes,11,opt,name=event,proto3" json:"event,omitempty"`
@@ -27900,7 +27900,7 @@ func (x *UserViewCondition) GetText() *TextCondition {
 	return nil
 }
 
-func (x *UserViewCondition) GetBoolean() *BoolCondition {
+func (x *UserViewCondition) GetBoolean() *BooleanCondition {
 	if x != nil {
 		return x.Boolean
 	}
@@ -51481,7 +51481,7 @@ type WorkflowCondition struct {
 	Channel       *ChannelCondition    `protobuf:"bytes,5,opt,name=channel,proto3" json:"channel,omitempty"`
 	IsChanged     bool                 `protobuf:"varint,6,opt,name=is_changed,json=isChanged,proto3" json:"is_changed,omitempty"`
 	Type          string               `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"` // boolean, number, datetime, event, text, timming, llm
-	Boolean       *BoolCondition       `protobuf:"bytes,8,opt,name=boolean,proto3" json:"boolean,omitempty"`
+	Boolean       *BooleanCondition    `protobuf:"bytes,8,opt,name=boolean,proto3" json:"boolean,omitempty"`
 	Number        *FloatCondition      `protobuf:"bytes,9,opt,name=number,proto3" json:"number,omitempty"`
 	Datetime      *DatetimeCondition   `protobuf:"bytes,10,opt,name=datetime,proto3" json:"datetime,omitempty"`
 	Event         *EventCondition      `protobuf:"bytes,11,opt,name=event,proto3" json:"event,omitempty"`
@@ -51559,7 +51559,7 @@ func (x *WorkflowCondition) GetType() string {
 	return ""
 }
 
-func (x *WorkflowCondition) GetBoolean() *BoolCondition {
+func (x *WorkflowCondition) GetBoolean() *BooleanCondition {
 	if x != nil {
 		return x.Boolean
 	}
@@ -71081,7 +71081,7 @@ const file_header_proto_rawDesc = "" +
 	"\anumbers\x18\v \x03(\x01R\anumbers\x12\x1a\n" +
 	"\bbooleans\x18\f \x03(\bR\bbooleans\x12\x1c\n" +
 	"\tdatetimes\x18\r \x03(\tR\tdatetimes\x12\x16\n" +
-	"\x06points\x18\x0e \x03(\x03R\x06points\"\x89\x04\n" +
+	"\x06points\x18\x0e \x03(\x03R\x06points\"\x8c\x04\n" +
 	"\x11UserViewCondition\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71089,8 +71089,8 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x10\n" +
 	"\x03key\x18\x04 \x01(\tR\x03key\x12\x12\n" +
 	"\x04type\x18\x05 \x01(\tR\x04type\x12)\n" +
-	"\x04text\x18\x06 \x01(\v2\x15.header.TextConditionR\x04text\x12/\n" +
-	"\aboolean\x18\b \x01(\v2\x15.header.BoolConditionR\aboolean\x12.\n" +
+	"\x04text\x18\x06 \x01(\v2\x15.header.TextConditionR\x04text\x122\n" +
+	"\aboolean\x18\b \x01(\v2\x18.header.BooleanConditionR\aboolean\x12.\n" +
 	"\x06number\x18\t \x01(\v2\x16.header.FloatConditionR\x06number\x125\n" +
 	"\bdatetime\x18\n" +
 	" \x01(\v2\x19.header.DatetimeConditionR\bdatetime\x12,\n" +
@@ -73881,15 +73881,15 @@ const file_header_proto_rawDesc = "" +
 	"\x05after\x18\v \x01(\x03R\x05after\x12\x16\n" +
 	"\x06before\x18\f \x01(\x03R\x06before\x12\x18\n" +
 	"\abetween\x18\r \x03(\x03R\abetween\x12\x18\n" +
-	"\aoutside\x18\x0e \x03(\x03R\aoutside\"\xc2\x04\n" +
+	"\aoutside\x18\x0e \x03(\x03R\aoutside\"\xc5\x04\n" +
 	"\x11WorkflowCondition\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x10\n" +
 	"\x03key\x18\x04 \x01(\tR\x03key\x122\n" +
 	"\achannel\x18\x05 \x01(\v2\x18.header.ChannelConditionR\achannel\x12\x1d\n" +
 	"\n" +
 	"is_changed\x18\x06 \x01(\bR\tisChanged\x12\x12\n" +
-	"\x04type\x18\a \x01(\tR\x04type\x12/\n" +
-	"\aboolean\x18\b \x01(\v2\x15.header.BoolConditionR\aboolean\x12.\n" +
+	"\x04type\x18\a \x01(\tR\x04type\x122\n" +
+	"\aboolean\x18\b \x01(\v2\x18.header.BooleanConditionR\aboolean\x12.\n" +
 	"\x06number\x18\t \x01(\v2\x16.header.FloatConditionR\x06number\x125\n" +
 	"\bdatetime\x18\n" +
 	" \x01(\v2\x19.header.DatetimeConditionR\bdatetime\x12,\n" +
@@ -76627,7 +76627,7 @@ var file_header_proto_goTypes = []any{
 	(*EventConditionFilter)(nil),   // 661: header.EventConditionFilter
 	(*FloatCondition)(nil),         // 662: header.FloatCondition
 	(*TextCondition)(nil),          // 663: header.TextCondition
-	(*BoolCondition)(nil),          // 664: header.BoolCondition
+	(*BooleanCondition)(nil),       // 664: header.BooleanCondition
 	(*DatetimeCondition)(nil),      // 665: header.DatetimeCondition
 	(*EventCondition)(nil),         // 666: header.EventCondition
 	(*payment.Subscription)(nil),   // 667: payment.Subscription
@@ -77169,7 +77169,7 @@ var file_header_proto_depIdxs = []int32{
 	652,  // 532: header.SuggestLeadFieldResponse.ctx:type_name -> common.Context
 	652,  // 533: header.UserViewCondition.ctx:type_name -> common.Context
 	663,  // 534: header.UserViewCondition.text:type_name -> header.TextCondition
-	664,  // 535: header.UserViewCondition.boolean:type_name -> header.BoolCondition
+	664,  // 535: header.UserViewCondition.boolean:type_name -> header.BooleanCondition
 	662,  // 536: header.UserViewCondition.number:type_name -> header.FloatCondition
 	665,  // 537: header.UserViewCondition.datetime:type_name -> header.DatetimeCondition
 	666,  // 538: header.UserViewCondition.event:type_name -> header.EventCondition
@@ -77643,7 +77643,7 @@ var file_header_proto_depIdxs = []int32{
 	456,  // 1006: header.WorkflowGoal.condition:type_name -> header.WorkflowCondition
 	456,  // 1007: header.WorkflowTrigger.condition:type_name -> header.WorkflowCondition
 	86,   // 1008: header.WorkflowCondition.channel:type_name -> header.ChannelCondition
-	664,  // 1009: header.WorkflowCondition.boolean:type_name -> header.BoolCondition
+	664,  // 1009: header.WorkflowCondition.boolean:type_name -> header.BooleanCondition
 	662,  // 1010: header.WorkflowCondition.number:type_name -> header.FloatCondition
 	665,  // 1011: header.WorkflowCondition.datetime:type_name -> header.DatetimeCondition
 	666,  // 1012: header.WorkflowCondition.event:type_name -> header.EventCondition

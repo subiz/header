@@ -989,6 +989,7 @@ message CommitRequest {
 
 message SegmentUsersRequest {
 	common.Context ctx = 1;
+	string account_id = 3;
 	string segment_id = 4;
 	repeated string user_ids = 5;
 }

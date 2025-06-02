@@ -396,7 +396,7 @@ message EventConditionFilter {
 	string type = 5;
 
 	TextCondition text = 6;
-	BoolCondition boolean = 8;
+	BooleanCondition boolean = 8;
 	FloatCondition number = 9;
 	DatetimeCondition datetime = 10;
 }
@@ -414,7 +414,7 @@ message EventCondition {
 	// field: price, operator eq, value 5
 }
 
-message BoolCondition {
+message BooleanCondition {
 	string op = 2; // has_value, true, false, any
 }
 

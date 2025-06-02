@@ -8075,6 +8075,7 @@ func (x *CommitRequest) GetOffset() int64 {
 type SegmentUsersRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId     string                 `protobuf:"bytes,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	SegmentId     string                 `protobuf:"bytes,4,opt,name=segment_id,json=segmentId,proto3" json:"segment_id,omitempty"`
 	UserIds       []string               `protobuf:"bytes,5,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -8116,6 +8117,13 @@ func (x *SegmentUsersRequest) GetCtx() *common.Context {
 		return x.Ctx
 	}
 	return nil
+}
+
+func (x *SegmentUsersRequest) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
 }
 
 func (x *SegmentUsersRequest) GetSegmentId() string {
@@ -9020,9 +9028,11 @@ const file_request_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x14\n" +
 	"\x05topic\x18\x04 \x01(\tR\x05topic\x12\x1c\n" +
 	"\tpartition\x18\x05 \x01(\x05R\tpartition\x12\x16\n" +
-	"\x06offset\x18\x06 \x01(\x03R\x06offset\"r\n" +
+	"\x06offset\x18\x06 \x01(\x03R\x06offset\"\x91\x01\n" +
 	"\x13SegmentUsersRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
+	"\n" +
+	"account_id\x18\x03 \x01(\tR\taccountId\x12\x1d\n" +
 	"\n" +
 	"segment_id\x18\x04 \x01(\tR\tsegmentId\x12\x19\n" +
 	"\buser_ids\x18\x05 \x03(\tR\auserIdsB\x19Z\x17github.com/subiz/headerb\x06proto3"
