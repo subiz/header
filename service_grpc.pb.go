@@ -6188,12 +6188,12 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	UserCache_SuggestLeadField_FullMethodName      = "/header.UserCache/SuggestLeadField"
-	UserCache_ListLeads_FullMethodName             = "/header.UserCache/ListLeads"
-	UserCache_CountLeads_FullMethodName            = "/header.UserCache/CountLeads"
-	UserCache_UpdateUser_FullMethodName            = "/header.UserCache/UpdateUser"
-	UserCache_AddUserToSegment_FullMethodName      = "/header.UserCache/AddUserToSegment"
-	UserCache_RemoveUserFromSegment_FullMethodName = "/header.UserCache/RemoveUserFromSegment"
+	UserCache_SuggestLeadField_FullMethodName       = "/header.UserCache/SuggestLeadField"
+	UserCache_ListLeads_FullMethodName              = "/header.UserCache/ListLeads"
+	UserCache_CountLeads_FullMethodName             = "/header.UserCache/CountLeads"
+	UserCache_UpdateUser_FullMethodName             = "/header.UserCache/UpdateUser"
+	UserCache_AddUsersToSegment_FullMethodName      = "/header.UserCache/AddUsersToSegment"
+	UserCache_RemoveUsersFromSegment_FullMethodName = "/header.UserCache/RemoveUsersFromSegment"
 )
 
 // UserCacheClient is the client API for UserCache service.
@@ -6205,8 +6205,8 @@ type UserCacheClient interface {
 	ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Response, error)
 	CountLeads(ctx context.Context, in *UserViews, opts ...grpc.CallOption) (*CounterDataPoint, error)
 	UpdateUser(ctx context.Context, in *User, opts ...grpc.CallOption) (*Response, error)
-	AddUserToSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error)
-	RemoveUserFromSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error)
+	AddUsersToSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error)
+	RemoveUsersFromSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error)
 }
 
 type userCacheClient struct {
@@ -6257,20 +6257,20 @@ func (c *userCacheClient) UpdateUser(ctx context.Context, in *User, opts ...grpc
 	return out, nil
 }
 
-func (c *userCacheClient) AddUserToSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *userCacheClient) AddUsersToSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_AddUserToSegment_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UserCache_AddUsersToSegment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userCacheClient) RemoveUserFromSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *userCacheClient) RemoveUsersFromSegment(ctx context.Context, in *SegmentUsersRequest, opts ...grpc.CallOption) (*Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
-	err := c.cc.Invoke(ctx, UserCache_RemoveUserFromSegment_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, UserCache_RemoveUsersFromSegment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -6286,8 +6286,8 @@ type UserCacheServer interface {
 	ListLeads(context.Context, *UserView) (*Response, error)
 	CountLeads(context.Context, *UserViews) (*CounterDataPoint, error)
 	UpdateUser(context.Context, *User) (*Response, error)
-	AddUserToSegment(context.Context, *SegmentUsersRequest) (*Response, error)
-	RemoveUserFromSegment(context.Context, *SegmentUsersRequest) (*Response, error)
+	AddUsersToSegment(context.Context, *SegmentUsersRequest) (*Response, error)
+	RemoveUsersFromSegment(context.Context, *SegmentUsersRequest) (*Response, error)
 	mustEmbedUnimplementedUserCacheServer()
 }
 
@@ -6310,11 +6310,11 @@ func (UnimplementedUserCacheServer) CountLeads(context.Context, *UserViews) (*Co
 func (UnimplementedUserCacheServer) UpdateUser(context.Context, *User) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
-func (UnimplementedUserCacheServer) AddUserToSegment(context.Context, *SegmentUsersRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddUserToSegment not implemented")
+func (UnimplementedUserCacheServer) AddUsersToSegment(context.Context, *SegmentUsersRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUsersToSegment not implemented")
 }
-func (UnimplementedUserCacheServer) RemoveUserFromSegment(context.Context, *SegmentUsersRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveUserFromSegment not implemented")
+func (UnimplementedUserCacheServer) RemoveUsersFromSegment(context.Context, *SegmentUsersRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveUsersFromSegment not implemented")
 }
 func (UnimplementedUserCacheServer) mustEmbedUnimplementedUserCacheServer() {}
 func (UnimplementedUserCacheServer) testEmbeddedByValue()                   {}
@@ -6409,38 +6409,38 @@ func _UserCache_UpdateUser_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserCache_AddUserToSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserCache_AddUsersToSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SegmentUsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserCacheServer).AddUserToSegment(ctx, in)
+		return srv.(UserCacheServer).AddUsersToSegment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserCache_AddUserToSegment_FullMethodName,
+		FullMethod: UserCache_AddUsersToSegment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).AddUserToSegment(ctx, req.(*SegmentUsersRequest))
+		return srv.(UserCacheServer).AddUsersToSegment(ctx, req.(*SegmentUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserCache_RemoveUserFromSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _UserCache_RemoveUsersFromSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SegmentUsersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserCacheServer).RemoveUserFromSegment(ctx, in)
+		return srv.(UserCacheServer).RemoveUsersFromSegment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserCache_RemoveUserFromSegment_FullMethodName,
+		FullMethod: UserCache_RemoveUsersFromSegment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserCacheServer).RemoveUserFromSegment(ctx, req.(*SegmentUsersRequest))
+		return srv.(UserCacheServer).RemoveUsersFromSegment(ctx, req.(*SegmentUsersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6469,12 +6469,114 @@ var UserCache_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserCache_UpdateUser_Handler,
 		},
 		{
-			MethodName: "AddUserToSegment",
-			Handler:    _UserCache_AddUserToSegment_Handler,
+			MethodName: "AddUsersToSegment",
+			Handler:    _UserCache_AddUsersToSegment_Handler,
 		},
 		{
-			MethodName: "RemoveUserFromSegment",
-			Handler:    _UserCache_RemoveUserFromSegment_Handler,
+			MethodName: "RemoveUsersFromSegment",
+			Handler:    _UserCache_RemoveUsersFromSegment_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
+	Crash_Crash_FullMethodName = "/header.Crash/Crash"
+)
+
+// CrashClient is the client API for Crash service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type CrashClient interface {
+	Crash(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error)
+}
+
+type crashClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewCrashClient(cc grpc.ClientConnInterface) CrashClient {
+	return &crashClient{cc}
+}
+
+func (c *crashClient) Crash(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Crash_Crash_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// CrashServer is the server API for Crash service.
+// All implementations must embed UnimplementedCrashServer
+// for forward compatibility.
+type CrashServer interface {
+	Crash(context.Context, *Empty) (*Response, error)
+	mustEmbedUnimplementedCrashServer()
+}
+
+// UnimplementedCrashServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedCrashServer struct{}
+
+func (UnimplementedCrashServer) Crash(context.Context, *Empty) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Crash not implemented")
+}
+func (UnimplementedCrashServer) mustEmbedUnimplementedCrashServer() {}
+func (UnimplementedCrashServer) testEmbeddedByValue()               {}
+
+// UnsafeCrashServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CrashServer will
+// result in compilation errors.
+type UnsafeCrashServer interface {
+	mustEmbedUnimplementedCrashServer()
+}
+
+func RegisterCrashServer(s grpc.ServiceRegistrar, srv CrashServer) {
+	// If the following call pancis, it indicates UnimplementedCrashServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&Crash_ServiceDesc, srv)
+}
+
+func _Crash_Crash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CrashServer).Crash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Crash_Crash_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CrashServer).Crash(ctx, req.(*Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Crash_ServiceDesc is the grpc.ServiceDesc for Crash service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Crash_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.Crash",
+	HandlerType: (*CrashServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Crash",
+			Handler:    _Crash_Crash_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
