@@ -283,6 +283,8 @@ service UserMgr {
 	rpc ListShippingAddress(Id) returns (ShippingAddresses);
 	rpc MakeDefaultShippingAddress(Address) returns (Empty);
 	rpc ListLeads(header.UserView) returns (header.Users); // ok
+	rpc ListLeads2(header.UserView) returns (header.Users); // ok
+
 	rpc SuggestLeadField(header.SuggestLeadFieldRequest) returns (header.SuggestLeadFieldResponse); // ok
 	rpc LinkProductUrl(header.Product) returns (header.Product); // ok
 	rpc ListUserEvents(header.ListUserEventsRequest) returns (header.Events); // ok

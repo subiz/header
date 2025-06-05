@@ -6624,6 +6624,7 @@ const (
 	UserMgr_ListShippingAddress_FullMethodName              = "/header.UserMgr/ListShippingAddress"
 	UserMgr_MakeDefaultShippingAddress_FullMethodName       = "/header.UserMgr/MakeDefaultShippingAddress"
 	UserMgr_ListLeads_FullMethodName                        = "/header.UserMgr/ListLeads"
+	UserMgr_ListLeads2_FullMethodName                       = "/header.UserMgr/ListLeads2"
 	UserMgr_SuggestLeadField_FullMethodName                 = "/header.UserMgr/SuggestLeadField"
 	UserMgr_LinkProductUrl_FullMethodName                   = "/header.UserMgr/LinkProductUrl"
 	UserMgr_ListUserEvents_FullMethodName                   = "/header.UserMgr/ListUserEvents"
@@ -6690,6 +6691,7 @@ type UserMgrClient interface {
 	ListShippingAddress(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ShippingAddresses, error)
 	MakeDefaultShippingAddress(ctx context.Context, in *Address, opts ...grpc.CallOption) (*Empty, error)
 	ListLeads(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Users, error)
+	ListLeads2(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Users, error)
 	SuggestLeadField(ctx context.Context, in *SuggestLeadFieldRequest, opts ...grpc.CallOption) (*SuggestLeadFieldResponse, error)
 	LinkProductUrl(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
 	ListUserEvents(ctx context.Context, in *ListUserEventsRequest, opts ...grpc.CallOption) (*Events, error)
@@ -7118,6 +7120,16 @@ func (c *userMgrClient) ListLeads(ctx context.Context, in *UserView, opts ...grp
 	return out, nil
 }
 
+func (c *userMgrClient) ListLeads2(ctx context.Context, in *UserView, opts ...grpc.CallOption) (*Users, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Users)
+	err := c.cc.Invoke(ctx, UserMgr_ListLeads2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userMgrClient) SuggestLeadField(ctx context.Context, in *SuggestLeadFieldRequest, opts ...grpc.CallOption) (*SuggestLeadFieldResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SuggestLeadFieldResponse)
@@ -7344,6 +7356,7 @@ type UserMgrServer interface {
 	ListShippingAddress(context.Context, *Id) (*ShippingAddresses, error)
 	MakeDefaultShippingAddress(context.Context, *Address) (*Empty, error)
 	ListLeads(context.Context, *UserView) (*Users, error)
+	ListLeads2(context.Context, *UserView) (*Users, error)
 	SuggestLeadField(context.Context, *SuggestLeadFieldRequest) (*SuggestLeadFieldResponse, error)
 	LinkProductUrl(context.Context, *Product) (*Product, error)
 	ListUserEvents(context.Context, *ListUserEventsRequest) (*Events, error)
@@ -7491,6 +7504,9 @@ func (UnimplementedUserMgrServer) MakeDefaultShippingAddress(context.Context, *A
 }
 func (UnimplementedUserMgrServer) ListLeads(context.Context, *UserView) (*Users, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListLeads not implemented")
+}
+func (UnimplementedUserMgrServer) ListLeads2(context.Context, *UserView) (*Users, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLeads2 not implemented")
 }
 func (UnimplementedUserMgrServer) SuggestLeadField(context.Context, *SuggestLeadFieldRequest) (*SuggestLeadFieldResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SuggestLeadField not implemented")
@@ -8287,6 +8303,24 @@ func _UserMgr_ListLeads_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserMgr_ListLeads2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserView)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserMgrServer).ListLeads2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserMgr_ListLeads2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserMgrServer).ListLeads2(ctx, req.(*UserView))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserMgr_SuggestLeadField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SuggestLeadFieldRequest)
 	if err := dec(in); err != nil {
@@ -8777,6 +8811,10 @@ var UserMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListLeads",
 			Handler:    _UserMgr_ListLeads_Handler,
+		},
+		{
+			MethodName: "ListLeads2",
+			Handler:    _UserMgr_ListLeads2_Handler,
 		},
 		{
 			MethodName: "SuggestLeadField",
