@@ -8857,6 +8857,7 @@ message InitFlow {
 
 	repeated Trigger triggers = 14;
 	Frequently initiative_frequency = 15;
+	repeated BotCondition conditions = 16;
 
 	repeated string sites = 27;
 	string locale = 28; // can be auto

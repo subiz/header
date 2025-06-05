@@ -173,7 +173,7 @@ message UserAttributeSetting {
 }
 
 message LeadSetting {
-	optional string assign_conversation_as_lead = 3; // assigned [default], joined, none (do no thing)
+	optional string assign_conversation_as_lead = 3; // all_assigned, assigned [default], joined, none (do no thing)
 	optional int64 auto_update_phone = 4;
 	optional int64 auto_update_email = 5;
 }

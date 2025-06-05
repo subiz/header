@@ -224,7 +224,6 @@ service UserCache {
 	rpc UpdateUser(User) returns (Response);
 	rpc AddUsersToSegment(header.SegmentUsersRequest) returns (Response);
 	rpc RemoveUsersFromSegment(header.SegmentUsersRequest) returns (Response);
-
 }
 
 service Crash {

@@ -1235,7 +1235,7 @@ func (x *UserAttributeSetting) GetBasicFields() []string {
 
 type LeadSetting struct {
 	state                    protoimpl.MessageState `protogen:"open.v1"`
-	AssignConversationAsLead *string                `protobuf:"bytes,3,opt,name=assign_conversation_as_lead,json=assignConversationAsLead" json:"assign_conversation_as_lead,omitempty"` // assigned [default], joined, none (do no thing)
+	AssignConversationAsLead *string                `protobuf:"bytes,3,opt,name=assign_conversation_as_lead,json=assignConversationAsLead" json:"assign_conversation_as_lead,omitempty"` // all_assigned, assigned [default], joined, none (do no thing)
 	AutoUpdatePhone          *int64                 `protobuf:"varint,4,opt,name=auto_update_phone,json=autoUpdatePhone" json:"auto_update_phone,omitempty"`
 	AutoUpdateEmail          *int64                 `protobuf:"varint,5,opt,name=auto_update_email,json=autoUpdateEmail" json:"auto_update_email,omitempty"`
 	unknownFields            protoimpl.UnknownFields
