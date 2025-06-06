@@ -767,7 +767,7 @@ func GetAccShard(accid string, shard int) int {
 }
 
 func IsStagging(accid string) bool {
-	return accid == "acpxkgumifuoofoosble" || accid == "acqsulrowbxiugvginhw"
+	return accid == "" || accid == "acpxkgumifuoofoosble" || accid == "acqsulrowbxiugvginhw"
 }
 
 // target: convo-0.convo:18021 -> convo-stg-0.convo:18021

@@ -866,6 +866,8 @@ message RunAiAgentRequest {
 
 	bool skip_init_flow = 15;
 	int64 ai_agent_index = 16;
+
+	Event last_message_sent = 17;
 }
 
 // @deprecated
