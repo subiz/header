@@ -9020,7 +9020,8 @@ message AIDataChunk {
 
 	// string ai_data_entry_id = 3;
 	string id = 5; // md5 of embedded_chunk
-	repeated double vector = 6;
+	repeated double vector2 = 6;
+	repeated float vector = 11;
 	string original_chunk = 7;
 	string embedded_chunk = 8;
 	int64 num_characters = 9;

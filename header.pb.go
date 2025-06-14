@@ -63697,7 +63697,8 @@ type AIDataChunk struct {
 	Ctx   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	// string ai_data_entry_id = 3;
 	Id            string    `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"` // md5 of embedded_chunk
-	Vector        []float64 `protobuf:"fixed64,6,rep,packed,name=vector,proto3" json:"vector,omitempty"`
+	Vector2       []float64 `protobuf:"fixed64,6,rep,packed,name=vector2,proto3" json:"vector2,omitempty"`
+	Vector        []float32 `protobuf:"fixed32,11,rep,packed,name=vector,proto3" json:"vector,omitempty"`
 	OriginalChunk string    `protobuf:"bytes,7,opt,name=original_chunk,json=originalChunk,proto3" json:"original_chunk,omitempty"`
 	EmbeddedChunk string    `protobuf:"bytes,8,opt,name=embedded_chunk,json=embeddedChunk,proto3" json:"embedded_chunk,omitempty"`
 	NumCharacters int64     `protobuf:"varint,9,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
@@ -63750,7 +63751,14 @@ func (x *AIDataChunk) GetId() string {
 	return ""
 }
 
-func (x *AIDataChunk) GetVector() []float64 {
+func (x *AIDataChunk) GetVector2() []float64 {
+	if x != nil {
+		return x.Vector2
+	}
+	return nil
+}
+
+func (x *AIDataChunk) GetVector() []float32 {
 	if x != nil {
 		return x.Vector
 	}
@@ -75452,11 +75460,12 @@ const file_header_proto_rawDesc = "" +
 	"\fcontent_type\x18\t \x01(\tR\vcontentType\x12\x14\n" +
 	"\x05title\x18\n" +
 	" \x01(\tR\x05title\x12%\n" +
-	"\x0enum_characters\x18\v \x01(\x03R\rnumCharacters\"\xe3\x01\n" +
+	"\x0enum_characters\x18\v \x01(\x03R\rnumCharacters\"\xfd\x01\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
-	"\x02id\x18\x05 \x01(\tR\x02id\x12\x16\n" +
-	"\x06vector\x18\x06 \x03(\x01R\x06vector\x12%\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\x12\x18\n" +
+	"\avector2\x18\x06 \x03(\x01R\avector2\x12\x16\n" +
+	"\x06vector\x18\v \x03(\x02R\x06vector\x12%\n" +
 	"\x0eoriginal_chunk\x18\a \x01(\tR\roriginalChunk\x12%\n" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
