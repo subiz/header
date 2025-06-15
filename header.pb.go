@@ -62629,16 +62629,16 @@ func (x *InitFlow) GetStopWhenFlowEnded() int64 {
 }
 
 type AIDataStore struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	AgentId         string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	DataEntries     []string               `protobuf:"bytes,5,rep,name=data_entries,json=dataEntries,proto3" json:"data_entries,omitempty"` // group id and entry id, could have product id (product id must start with pd.)
-	TrainedMd5      string                 `protobuf:"bytes,6,opt,name=trained_md5,json=trainedMd5,proto3" json:"trained_md5,omitempty"`    // subiz generated
-	Md5             string                 `protobuf:"bytes,7,opt,name=md5,proto3" json:"md5,omitempty"`                                    // subiz generated
-	TrainingStarted int64                  `protobuf:"varint,8,opt,name=training_started,json=trainingStarted,proto3" json:"training_started,omitempty"`
-	TrainingEnded   int64                  `protobuf:"varint,9,opt,name=training_ended,json=trainingEnded,proto3" json:"training_ended,omitempty"`
-	TotalCharacters int64                  `protobuf:"varint,10,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
-	Status          string                 `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // training  || ready
-	PendingEntries  int64                  `protobuf:"varint,20,opt,name=pending_entries,json=pendingEntries,proto3" json:"pending_entries,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	AgentId     string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
+	DataEntries []string               `protobuf:"bytes,5,rep,name=data_entries,json=dataEntries,proto3" json:"data_entries,omitempty"` // group id and entry id, could have product id (product id must start with pd.)
+	// string trained_md5 = 6; // subiz generated
+	Md5             string `protobuf:"bytes,7,opt,name=md5,proto3" json:"md5,omitempty"` // subiz generated
+	TrainingStarted int64  `protobuf:"varint,8,opt,name=training_started,json=trainingStarted,proto3" json:"training_started,omitempty"`
+	TrainingEnded   int64  `protobuf:"varint,9,opt,name=training_ended,json=trainingEnded,proto3" json:"training_ended,omitempty"`
+	TotalCharacters int64  `protobuf:"varint,10,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
+	Status          string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // training  || ready
+	PendingEntries  int64  `protobuf:"varint,20,opt,name=pending_entries,json=pendingEntries,proto3" json:"pending_entries,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -62685,13 +62685,6 @@ func (x *AIDataStore) GetDataEntries() []string {
 		return x.DataEntries
 	}
 	return nil
-}
-
-func (x *AIDataStore) GetTrainedMd5() string {
-	if x != nil {
-		return x.TrainedMd5
-	}
-	return ""
 }
 
 func (x *AIDataStore) GetMd5() string {
@@ -63697,7 +63690,6 @@ type AIDataChunk struct {
 	Ctx   *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
 	// string ai_data_entry_id = 3;
 	Id            string    `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"` // md5 of embedded_chunk
-	Vector2       []float64 `protobuf:"fixed64,6,rep,packed,name=vector2,proto3" json:"vector2,omitempty"`
 	Vector        []float32 `protobuf:"fixed32,11,rep,packed,name=vector,proto3" json:"vector,omitempty"`
 	OriginalChunk string    `protobuf:"bytes,7,opt,name=original_chunk,json=originalChunk,proto3" json:"original_chunk,omitempty"`
 	EmbeddedChunk string    `protobuf:"bytes,8,opt,name=embedded_chunk,json=embeddedChunk,proto3" json:"embedded_chunk,omitempty"`
@@ -63749,13 +63741,6 @@ func (x *AIDataChunk) GetId() string {
 		return x.Id
 	}
 	return ""
-}
-
-func (x *AIDataChunk) GetVector2() []float64 {
-	if x != nil {
-		return x.Vector2
-	}
-	return nil
 }
 
 func (x *AIDataChunk) GetVector() []float32 {
@@ -63826,7 +63811,8 @@ type AIDataEntry struct {
 	LastSuccessChunked        int64  `protobuf:"varint,35,opt,name=last_success_chunked,json=lastSuccessChunked,proto3" json:"last_success_chunked,omitempty"` // successfully saved to vector store
 	LastFailedChunked         int64  `protobuf:"varint,39,opt,name=last_failed_chunked,json=lastFailedChunked,proto3" json:"last_failed_chunked,omitempty"`
 	ChunkAttempted            int64  `protobuf:"varint,40,opt,name=chunk_attempted,json=chunkAttempted,proto3" json:"chunk_attempted,omitempty"`
-	Title                     string `protobuf:"bytes,38,opt,name=title,proto3" json:"title,omitempty"` // title for url, file name for file
+	LastChunkDuration         int64  `protobuf:"varint,41,opt,name=last_chunk_duration,json=lastChunkDuration,proto3" json:"last_chunk_duration,omitempty"` // ms
+	Title                     string `protobuf:"bytes,38,opt,name=title,proto3" json:"title,omitempty"`                                                     // title for url, file name for file
 	NumCharacters             int64  `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	NumChunks                 int64  `protobuf:"varint,37,opt,name=num_chunks,json=numChunks,proto3" json:"num_chunks,omitempty"`
 	unknownFields             protoimpl.UnknownFields
@@ -64069,6 +64055,13 @@ func (x *AIDataEntry) GetLastFailedChunked() int64 {
 func (x *AIDataEntry) GetChunkAttempted() int64 {
 	if x != nil {
 		return x.ChunkAttempted
+	}
+	return 0
+}
+
+func (x *AIDataEntry) GetLastChunkDuration() int64 {
+	if x != nil {
+		return x.LastChunkDuration
 	}
 	return 0
 }
@@ -75343,12 +75336,10 @@ const file_header_proto_rawDesc = "" +
 	"\x06locale\x18\x1c \x01(\tR\x06locale\x12\x18\n" +
 	"\alocales\x18\x1d \x03(\tR\alocales\x12 \n" +
 	"\x04rule\x18\x1e \x01(\v2\f.header.RuleR\x04rule\x12/\n" +
-	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\xbc\x02\n" +
+	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\x9b\x02\n" +
 	"\vAIDataStore\x12\x19\n" +
 	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12!\n" +
-	"\fdata_entries\x18\x05 \x03(\tR\vdataEntries\x12\x1f\n" +
-	"\vtrained_md5\x18\x06 \x01(\tR\n" +
-	"trainedMd5\x12\x10\n" +
+	"\fdata_entries\x18\x05 \x03(\tR\vdataEntries\x12\x10\n" +
 	"\x03md5\x18\a \x01(\tR\x03md5\x12)\n" +
 	"\x10training_started\x18\b \x01(\x03R\x0ftrainingStarted\x12%\n" +
 	"\x0etraining_ended\x18\t \x01(\x03R\rtrainingEnded\x12)\n" +
@@ -75460,17 +75451,16 @@ const file_header_proto_rawDesc = "" +
 	"\fcontent_type\x18\t \x01(\tR\vcontentType\x12\x14\n" +
 	"\x05title\x18\n" +
 	" \x01(\tR\x05title\x12%\n" +
-	"\x0enum_characters\x18\v \x01(\x03R\rnumCharacters\"\xfd\x01\n" +
+	"\x0enum_characters\x18\v \x01(\x03R\rnumCharacters\"\xe3\x01\n" +
 	"\vAIDataChunk\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
-	"\x02id\x18\x05 \x01(\tR\x02id\x12\x18\n" +
-	"\avector2\x18\x06 \x03(\x01R\avector2\x12\x16\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\x12\x16\n" +
 	"\x06vector\x18\v \x03(\x02R\x06vector\x12%\n" +
 	"\x0eoriginal_chunk\x18\a \x01(\tR\roriginalChunk\x12%\n" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
-	" \x01(\tR\x05model\"\xe7\b\n" +
+	" \x01(\tR\x05model\"\x97\t\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75507,7 +75497,8 @@ const file_header_proto_rawDesc = "" +
 	"\bmodified\x18\" \x01(\x03R\bmodified\x120\n" +
 	"\x14last_success_chunked\x18# \x01(\x03R\x12lastSuccessChunked\x12.\n" +
 	"\x13last_failed_chunked\x18' \x01(\x03R\x11lastFailedChunked\x12'\n" +
-	"\x0fchunk_attempted\x18( \x01(\x03R\x0echunkAttempted\x12\x14\n" +
+	"\x0fchunk_attempted\x18( \x01(\x03R\x0echunkAttempted\x12.\n" +
+	"\x13last_chunk_duration\x18) \x01(\x03R\x11lastChunkDuration\x12\x14\n" +
 	"\x05title\x18& \x01(\tR\x05title\x12%\n" +
 	"\x0enum_characters\x18$ \x01(\x03R\rnumCharacters\x12\x1d\n" +
 	"\n" +
