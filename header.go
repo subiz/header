@@ -2483,7 +2483,6 @@ func TruncateUser(user *User) {
 	user.FirstContentView = nil
 	user.LatestContentView = nil
 	user.StartContentView = nil
-	user.Segments = nil
 	user.LifecycleStages = nil
 	user.Labels = nil
 	user.Merged = 0

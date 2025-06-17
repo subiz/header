@@ -238,6 +238,20 @@ message CallSetting {
 	repeated string outgoing_call_agents = 37;
 }
 
+message LeadOwner {
+	string agent_id = 5;
+	int64 last_seen = 6;
+	int64 assigned = 8;
+	string assigned_by = 9;
+}
+
+message UserLeadOwner {
+	common.Context ctx = 1;
+	string account_id = 2;
+	string id = 3; // userid
+	repeated LeadOwner lead_owners = 6;
+}
+
 message User {
 	common.Context ctx = 1;
 	string id = 3;
@@ -263,7 +277,7 @@ message User {
 	int64 updated = 60;
 
 	repeated UserLifecycleStage lifecycle_stages = 61; // read-only
-	repeated UserSegment segments = 66; // read-only // deprecated
+	// repeated UserSegment segments = 66; // read-only // deprecated
 	repeated User secondaries = 67; // read-only // deprecated
 	// map<string, UserConversationTag> conversation_tags = 68; // read-only
 	// repeated UserAds ads = 70; // read-only
@@ -9311,6 +9325,7 @@ message ZNSTemplate {
 	string id = 5; // same as .template.tempalteId
 
 	string name = 20;
+	int64 hidden = 21; // hide not used zns
 	ZNSTemplateRequest request = 6;
 	ZnsTemplate template = 7;
 
