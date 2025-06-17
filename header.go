@@ -1952,6 +1952,10 @@ func blockToPlainText(block *Block) string {
 		return out
 	}
 
+	if block.Type == "image" {
+		out += "\n" + block.GetImage().GetUrl()
+	}
+
 	if block.Type == "heading" || block.Type == "paragraph" || block.Type == "div" {
 		out += "\n"
 	}

@@ -823,6 +823,11 @@ func TestCompileBlock2(t *testing.T) {
 		}, {
 			Type:  "dynamic-field",
 			Attrs: map[string]string{"key": "huh"},
+		}, {
+			Type: "image",
+			Image: &File{
+				Url: "https://subiz.com.vn/logo.png",
+			},
 		}},
 	}
 	CompileBlock(block, data)

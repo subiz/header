@@ -9310,6 +9310,7 @@ message ZNSTemplate {
 	string oa_id = 3;
 	string id = 5; // same as .template.tempalteId
 
+	string name = 20;
 	ZNSTemplateRequest request = 6;
 	ZnsTemplate template = 7;
 

@@ -66027,6 +66027,7 @@ type ZNSTemplate struct {
 	AccountId           string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	OaId                string                 `protobuf:"bytes,3,opt,name=oa_id,json=oaId,proto3" json:"oa_id,omitempty"`
 	Id                  string                 `protobuf:"bytes,5,opt,name=id,proto3" json:"id,omitempty"` // same as .template.tempalteId
+	Name                string                 `protobuf:"bytes,20,opt,name=name,proto3" json:"name,omitempty"`
 	Request             *ZNSTemplateRequest    `protobuf:"bytes,6,opt,name=request,proto3" json:"request,omitempty"`
 	Template            *ZnsTemplate           `protobuf:"bytes,7,opt,name=template,proto3" json:"template,omitempty"`
 	Created             int64                  `protobuf:"varint,8,opt,name=created,proto3" json:"created,omitempty"`
@@ -66097,6 +66098,13 @@ func (x *ZNSTemplate) GetOaId() string {
 func (x *ZNSTemplate) GetId() string {
 	if x != nil {
 		return x.Id
+	}
+	return ""
+}
+
+func (x *ZNSTemplate) GetName() string {
+	if x != nil {
+		return x.Name
 	}
 	return ""
 }
@@ -75694,13 +75702,14 @@ const file_header_proto_rawDesc = "" +
 	"\x17monthly_promotion_quota\x18\b \x01(\x03R\x15monthlyPromotionQuota\x12I\n" +
 	"!remaining_monthly_promotion_quota\x18\t \x01(\x03R\x1eremainingMonthlyPromotionQuota\x12N\n" +
 	"$estimated_next_month_promotion_quota\x18\n" +
-	" \x01(\x03R estimatedNextMonthPromotionQuota\"\xdb\x04\n" +
+	" \x01(\x03R estimatedNextMonthPromotionQuota\"\xef\x04\n" +
 	"\vZNSTemplate\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12\x13\n" +
 	"\x05oa_id\x18\x03 \x01(\tR\x04oaId\x12\x0e\n" +
-	"\x02id\x18\x05 \x01(\tR\x02id\x124\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x14 \x01(\tR\x04name\x124\n" +
 	"\arequest\x18\x06 \x01(\v2\x1a.header.ZNSTemplateRequestR\arequest\x12/\n" +
 	"\btemplate\x18\a \x01(\v2\x13.header.ZnsTemplateR\btemplate\x12\x18\n" +
 	"\acreated\x18\b \x01(\x03R\acreated\x12\x1d\n" +
