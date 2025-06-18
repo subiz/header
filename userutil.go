@@ -1,0 +1,955 @@
+package header
+
+import (
+	"encoding/json"
+	"strconv"
+	"math"
+	"regexp"
+	"strings"
+	"time"
+	"unicode"
+
+	apb "github.com/subiz/header/account"
+	"github.com/thanhpk/ascii"
+)
+
+const Tolerance = 0.000001
+const TRUEB = byte('t')
+const FALSEB = byte('f')
+
+const STRDELIMITER = "\000"
+const RUNEDELIMITER = '\000'
+
+func applyTextTransform(str string, transforms []*TextTransform) string {
+	if len(transforms) == 0 {
+		return str
+	}
+
+	transform := transforms[0]
+	if transform.GetName() == "nospace" {
+		str = SpaceStringsBuilder(str)
+	}
+
+	if transform.GetName() == "trim" {
+		str = strings.TrimSpace(str)
+	}
+
+	if transform.GetName() == "lower_case" {
+		str = strings.ToLower(str)
+	}
+
+	if transform.GetName() == "upper_case" {
+		str = strings.ToUpper(str)
+	}
+
+	return applyTextTransform(str, transforms[1:])
+}
+
+func applyFloatTransform(fl float64, transforms []*FloatTransform) float64 {
+	return fl
+}
+
+func EvaluateText(has bool, str string, cond *TextCondition) bool {
+	if len(cond.GetTransforms()) > 0 {
+		str = applyTextTransform(str, cond.GetTransforms())
+	}
+	if !cond.GetCaseSensitive() {
+		str = strings.ToLower(str)
+	}
+	if !cond.GetAccentSensitive() {
+		str = ascii.Convert(str)
+	}
+
+	switch cond.GetOp() {
+	case "any":
+		return true
+	case "has_value":
+		return has && str != ""
+	case "is_empty":
+		return strings.TrimSpace(str) == ""
+	case "eq":
+		if len(cond.GetEq()) == 0 {
+			return true
+		}
+		if !has {
+			return false
+		}
+		for _, cs := range cond.GetEq() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			if strings.TrimSpace(str) == strings.TrimSpace(cs) {
+				return true
+			}
+		}
+		return false
+	case "neq":
+		if len(cond.GetNeq()) == 0 {
+			return true
+		}
+
+		for _, cs := range cond.GetNeq() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			if strings.TrimSpace(str) == strings.TrimSpace(cs) {
+				return false
+			}
+		}
+		return true
+	case "regex":
+		if !has {
+			return false
+		}
+
+		regexp.MatchString(cond.GetRegex(), str)
+	case "start_with":
+		if !has {
+			return false
+		}
+		for _, cs := range cond.GetStartWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+				return true
+			}
+		}
+		return false
+
+	case "end_with":
+		if !has {
+			return false
+		}
+		for _, cs := range cond.GetEndWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			if strings.HasSuffix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+				return true
+			}
+		}
+		return false
+	case "contain":
+		if !has {
+			return false
+		}
+		for _, cs := range cond.GetContain() {
+			if strings.Contains(str, cs) {
+				return true
+			}
+		}
+		return false
+	case "not_contain":
+		if !has {
+			return false
+		}
+		for _, cs := range cond.GetNotContain() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			if strings.Contains(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+				return false
+			}
+		}
+		return true
+	case "not_start_with":
+		if !has {
+			return false
+		}
+		for _, cs := range cond.GetNotStartWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+				return false
+			}
+		}
+		return true
+	case "not_end_with":
+		if !has {
+			return false
+		}
+		for _, cs := range cond.GetEndWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			if strings.HasSuffix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+				return false
+			}
+		}
+		return true
+	default:
+		return true
+	}
+
+	return true
+}
+
+func EvaluateTexts(strs []string, cond *TextCondition) bool {
+	if len(cond.GetTransforms()) > 0 {
+		for i, str := range strs {
+			strs[i] = applyTextTransform(str, cond.GetTransforms())
+		}
+	}
+
+	if !cond.GetCaseSensitive() {
+		for i, str := range strs {
+			strs[i] = strings.ToLower(str)
+		}
+	}
+	if !cond.GetAccentSensitive() {
+		for i, str := range strs {
+			strs[i] = ascii.Convert(str)
+		}
+	}
+
+	switch cond.GetOp() {
+	case "any":
+		return true
+	case "has_value":
+		return len(strs) == 0
+	case "is_empty":
+		return len(strs) == 0
+	case "eq":
+		if len(cond.GetEq()) == 0 {
+			return true
+		}
+		for _, cs := range cond.GetEq() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			for _, str := range strs {
+
+				if strings.TrimSpace(str) == strings.TrimSpace(cs) {
+					return true
+				}
+			}
+		}
+		return false
+	case "neq":
+		if len(cond.GetNeq()) == 0 {
+			return true
+		}
+
+		for _, cs := range cond.GetNeq() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			for _, str := range strs {
+				if strings.TrimSpace(str) == strings.TrimSpace(cs) {
+					return false
+				}
+			}
+		}
+		return true
+	case "regex":
+		for _, str := range strs {
+			if b, _ := regexp.MatchString(cond.GetRegex(), str); b {
+				return true
+			}
+		}
+		return false
+	case "start_with":
+		for _, cs := range cond.GetStartWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			for _, str := range strs {
+				if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+					return true
+				}
+			}
+		}
+		return false
+
+	case "end_with":
+		for _, cs := range cond.GetEndWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			for _, str := range strs {
+				if strings.HasSuffix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+					return true
+				}
+			}
+		}
+		return false
+	case "contain":
+		for _, cs := range cond.GetContain() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			for _, str := range strs {
+				if strings.Contains(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+					return true
+				}
+			}
+		}
+		return false
+	case "not_contain":
+		for _, cs := range cond.GetNotContain() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			for _, str := range strs {
+				if strings.Contains(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+					return false
+				}
+			}
+		}
+		return true
+	case "not_start_with":
+		for _, cs := range cond.GetNotStartWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			for _, str := range strs {
+				if strings.HasPrefix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+					return false
+				}
+			}
+		}
+		return true
+	case "not_end_with":
+
+		for _, cs := range cond.GetEndWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			for _, str := range strs {
+				if strings.HasSuffix(strings.TrimSpace(str), strings.TrimSpace(cs)) {
+					return false
+				}
+			}
+		}
+		return true
+	default:
+		return true
+	}
+
+	return true
+}
+
+func EvaluateFloat(found bool, fl float64, cond *FloatCondition) bool {
+	fl = applyFloatTransform(fl, cond.GetTransforms())
+
+	switch cond.GetOp() {
+	case "has_value":
+		if !cond.GetHasValue() {
+			return !found
+		}
+		return found
+
+	case "is_empty":
+		return !found
+	case "eq":
+		if len(cond.GetEq()) == 0 {
+			return true
+		}
+		for _, cf := range cond.GetEq() {
+			if math.Abs(cf-fl) < Tolerance {
+				return true
+			}
+		}
+		return false
+
+	case "neq":
+		if len(cond.GetNeq()) == 0 {
+			return true
+		}
+		for _, cf := range cond.GetNeq() {
+			if math.Abs(cf-fl) < Tolerance {
+				return false
+			}
+		}
+		return true
+	case "gt":
+		return fl > cond.GetGt()
+	case "lt":
+		return fl <= cond.GetLt()
+	case "gte":
+		return fl >= cond.GetLte() || math.Abs(fl-cond.GetGte()) < Tolerance
+	case "lte":
+		return fl <= cond.GetLte() || math.Abs(fl-cond.GetLte()) < Tolerance
+	case "in_range":
+		if len(cond.GetInRange()) < 2 {
+			return false
+		}
+		return cond.GetInRange()[0] <= fl && fl <= cond.GetInRange()[1]
+	case "not_in_range":
+		if len(cond.GetNotInRange()) < 2 {
+			return false
+		}
+		return fl <= cond.GetNotInRange()[0] || cond.GetNotInRange()[1] <= fl
+	}
+
+	return true
+}
+
+func EvaluateBool(found, boo bool, cond *BooleanCondition) bool {
+	switch cond.GetOp() {
+	// apply transform first
+	case "has_value":
+		return found
+	case "true", "t":
+		return boo
+	case "false", "f":
+		return !boo
+	}
+	return true
+}
+
+func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *DatetimeCondition) bool {
+	t := time.Unix(unixms/1000, 0)
+
+	switch cond.GetOp() {
+	case "any":
+		return true
+	case "unset":
+		return !found
+	case "has_value":
+		return found
+	// apply transform first
+	case "in_business_hour":
+		inbusinesshours, _ := DuringBusinessHour(acc.GetBusinessHours(), t, acc.GetTimezone())
+		return inbusinesshours
+	case "non_business_hour":
+		inbusinesshours, _ := DuringBusinessHour(acc.GetBusinessHours(), t, acc.GetTimezone())
+		return !inbusinesshours
+	case "today":
+		utc := time.Now().UTC()
+		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location())
+		endoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 23, 59, 59, 0, utc.Location())
+
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		tzsec := int64(h*3600 + m*60)
+		if startoftheday.Unix()-tzsec <= t.Unix() && t.Unix() <= endoftheday.Unix()-tzsec {
+			return true
+		}
+		return false
+	case "date_last_30mins":
+		now := time.Now().Unix()
+		last30mins := now - 1800
+		return last30mins <= t.Unix() && t.Unix() <= now
+	case "date_last_2hours":
+		now := time.Now().Unix()
+		last2hours := now - 7200
+		return last2hours <= t.Unix() && t.Unix() <= now
+	case "date_last_24h":
+		now := time.Now().Unix()
+		last1days := now - 86400
+		return last1days <= t.Unix() && t.Unix() <= now
+	case "date_last_7days":
+		now := time.Now().Unix()
+		last7days := now - 7*86400
+		return last7days <= t.Unix() && t.Unix() <= now
+	case "date_last_30days":
+		now := time.Now().Unix()
+		last30days := now - 30*86400
+		return last30days <= t.Unix() && t.Unix() <= now
+	case "yesterday":
+		utc := time.Now().UTC()
+		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location()).Unix()
+		startofyesterday := startoftheday - 86400
+
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		tzsec := int64(h*3600 + m*60)
+		return startofyesterday-tzsec <= t.Unix() && t.Unix() <= startoftheday-tzsec
+	case "last_week":
+		utc := time.Now().UTC()
+		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location())
+		weekday := int64(startoftheday.Weekday())
+		weekday--
+		if weekday == -1 {
+			weekday = 7
+		}
+		startoftheweek := time.Unix(startoftheday.Unix()-weekday*86400, 0)
+		endoftheweek := time.Unix(startoftheday.Unix()*(7-weekday)*86400+86400, 0)
+		// endoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 23, 59, 59, 0, utc.Location())
+
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		tzsec := int64(h*3600 + m*60)
+		if startoftheweek.Unix()-604800-tzsec <= t.Unix() && t.Unix() <= endoftheweek.Unix()-604800-tzsec { // 604800 is to move back 7 day
+			return true
+		}
+		return false
+	case "this_week":
+		utc := time.Now().UTC()
+		startoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 0, 0, 0, 0, utc.Location())
+		weekday := int64(startoftheday.Weekday())
+		weekday--
+		if weekday == -1 {
+			weekday = 7
+		}
+		startoftheweek := time.Unix(startoftheday.Unix()-weekday*86400, 0)
+		endoftheweek := time.Unix(startoftheday.Unix()*(7-weekday)*86400+86400, 0)
+		// endoftheday := time.Date(utc.Year(), utc.Month(), utc.Day(), 23, 59, 59, 0, utc.Location())
+
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		tzsec := int64(h*3600 + m*60)
+		if startoftheweek.Unix()-tzsec <= t.Unix() && t.Unix() <= endoftheweek.Unix()-tzsec { // 604800 is to move back 7 day
+			return true
+		}
+		return false
+	case "last_month":
+		utc := time.Now().UTC()
+		endOfMonth := time.Date(utc.Year(), utc.Month(), 1, 0, 0, 0, 0, utc.Location())
+		endOfMonth = endOfMonth.AddDate(0, 0, -1)
+
+		startOfMonth := time.Date(endOfMonth.Year(), endOfMonth.Month(), 1, 0, 0, 0, 0, utc.Location())
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		tzsec := int64(h*3600 + m*60)
+		if startOfMonth.Unix()-tzsec <= t.Unix() && t.Unix() <= endOfMonth.Unix()-tzsec {
+			return true
+		}
+		return false
+	case "this_month":
+		utc := time.Now().UTC()
+		firstOfMonth := time.Date(utc.Year(), utc.Month(), 1, 0, 0, 0, 0, utc.Location())
+		lastOfMonth := firstOfMonth.AddDate(0, 1, -1)
+
+		h, m, _ := SplitTzOffset(acc.GetTimezone())
+		tzsec := int64(h*3600 + m*60)
+		if firstOfMonth.Unix()-tzsec <= t.Unix() && t.Unix() <= lastOfMonth.Unix()-tzsec {
+			return true
+		}
+		return false
+	case "last":
+		a := time.Now().Unix() - cond.GetLast()
+		b := time.Now().Unix()
+		return a <= t.Unix() && t.Unix() <= b
+	case "before_ago":
+		return t.Unix() < time.Now().Unix()-cond.GetBeforeAgo()
+	case "days_of_week":
+		for _, weekday := range cond.GetDaysOfWeek() {
+			if strings.EqualFold(weekday, t.Weekday().String()) {
+				return true
+			}
+		}
+		return false
+	case "after":
+		return time.Unix(cond.GetAfter()/1000, 0).Unix() <= t.Unix()
+	case "before":
+		return t.Unix() <= time.Unix(cond.GetBefore()/1000, 0).Unix()
+	case "between":
+		if len(cond.GetBetween()) != 2 {
+			return true
+		}
+		a := cond.GetBetween()[0] / 1000
+		b := cond.GetBetween()[1] / 1000
+		return a <= t.Unix() && t.Unix() <= b
+	case "outside":
+		if len(cond.GetOutside()) != 2 {
+			return true
+		}
+		a := cond.GetOutside()[0] / 1000
+		b := cond.GetOutside()[1] / 1000
+		return t.Unix() <= a || b <= t.Unix()
+	}
+	return true
+}
+
+func RsCheck(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
+	if len(cond.GetOne()) > 0 {
+		for _, c := range cond.GetOne() {
+			if RsCheck(acc, u, c, deleted) {
+				return true
+			}
+		}
+		return false
+	}
+
+	if len(cond.GetAll()) > 0 {
+		for _, c := range cond.GetAll() {
+			if !RsCheck(acc, u, c, deleted) {
+				return false
+			}
+		}
+		return true
+	}
+	return evaluateSingleCond(acc, u, cond, deleted)
+}
+
+func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
+	if deleted && u.Deleted == 0 {
+		return false
+	}
+
+	if !deleted && u.Deleted > 0 {
+		return false
+	}
+
+	if cond.GetKey() == "id" {
+		id := u.GetId()
+		return EvaluateText(true, id, cond.GetText())
+	}
+
+	if cond.GetKey() == "channel" {
+		return EvaluateText(true, u.Channel, cond.GetText())
+	}
+
+	if cond.GetKey() == "channel_source" {
+		return EvaluateText(true, u.ChannelSource, cond.GetText())
+	}
+
+	if cond.GetKey() == "keyword" && len(cond.GetText().GetContain()) > 0 { // email phone or name
+		// remove space
+		keyword := ascii.Convert(SpaceStringsBuilder(strings.ToLower(cond.GetText().GetContain()[0])))
+
+		for _, attr := range u.Attributes {
+			if attr.Text != "" {
+				if strings.Contains(ascii.Convert(strings.ToLower(SpaceStringsBuilder(attr.Text))), keyword) {
+					return true
+				}
+			}
+		}
+
+		return strings.Contains(strings.TrimSpace(strings.ToLower(u.Id)), keyword)
+	}
+
+	if cond.GetKey() == "lead_owners" {
+		for _, owner := range u.GetLeadOwners() {
+			if EvaluateText(true, owner, cond.GetText()) {
+				return true
+			}
+		}
+
+		if len(u.GetLeadOwners()) == 0 {
+			if EvaluateText(false, "", cond.Text) {
+				return true
+			}
+		}
+		return false
+	}
+
+	if cond.GetKey() == "lead_conversion_bys" {
+		for _, by := range u.GetLeadConversionBys() {
+			if EvaluateText(true, by, cond.GetText()) {
+				return true
+			}
+		}
+
+		if len(u.GetLeadConversionBys()) == 0 {
+			if EvaluateText(false, "", cond.Text) {
+				return true
+			}
+		}
+		return false
+	}
+
+	if cond.GetKey() == "start_content_view:by:device:ip" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetIp(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:language" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetLanguage(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:page_title" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetPageTitle(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:page_url" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetPageUrl(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:platform" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetPlatform(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:referrer" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetReferrer(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:screen_resolution" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetScreenResolution(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:source" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetSource(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:type" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetType(), cond.Text)
+	}
+	if cond.GetKey() == "start_content_view:by:device:user_agent" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetUserAgent(), cond.Text)
+	}
+
+	if cond.GetKey() == "start_content_view:by:device:utm:name" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetUtm().GetName(), cond.Text)
+	}
+
+	if cond.GetKey() == "start_content_view:by:device:utm:source" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetUtm().GetSource(), cond.Text)
+	}
+
+	if cond.GetKey() == "start_content_view:by:device:utm:medium" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetUtm().GetMedium(), cond.Text)
+	}
+
+	if cond.GetKey() == "start_content_view:by:device:utm:term" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetUtm().GetTerm(), cond.Text)
+	}
+
+	if cond.GetKey() == "start_content_view:by:device:utm:content" {
+		return EvaluateText(u.StartContentView != nil, u.GetStartContentView().GetBy().GetDevice().GetUtm().GetContent(), cond.Text)
+	}
+
+	if cond.GetKey() == "first_content_view:by:device:ip" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetIp(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:language" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetLanguage(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:page_title" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetPageTitle(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:page_url" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetPageUrl(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:platform" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetPlatform(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:referrer" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetReferrer(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:screen_resolution" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetScreenResolution(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:source" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetSource(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:type" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetType(), cond.Text)
+	}
+	if cond.GetKey() == "first_content_view:by:device:user_agent" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetUserAgent(), cond.Text)
+	}
+
+	if cond.GetKey() == "first_content_view:by:device:utm:name" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetUtm().GetName(), cond.Text)
+	}
+
+	if cond.GetKey() == "first_content_view:by:device:utm:source" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetUtm().GetSource(), cond.Text)
+	}
+
+	if cond.GetKey() == "first_content_view:by:device:utm:medium" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetUtm().GetMedium(), cond.Text)
+	}
+
+	if cond.GetKey() == "first_content_view:by:device:utm:term" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetUtm().GetTerm(), cond.Text)
+	}
+
+	if cond.GetKey() == "first_content_view:by:device:utm:content" {
+		return EvaluateText(u.FirstContentView != nil, u.GetFirstContentView().GetBy().GetDevice().GetUtm().GetContent(), cond.Text)
+	}
+
+	if cond.GetKey() == "labels" {
+		labels := []string{}
+		for _, label := range u.Labels {
+			labels = append(labels, label.Label)
+		}
+
+		return EvaluateTexts(labels, cond.Text)
+	}
+
+	if strings.HasPrefix(cond.GetKey(), "attr:") || strings.HasPrefix(cond.GetKey(), "attr.") {
+		key := cond.GetKey()[5:]
+
+		defType := cond.GetType()
+		if defType == "list" || defType == "" {
+			defType = "text"
+		}
+		text, num, date, boo, found := FindAttr(u, key, defType)
+		if defType == "text" {
+			return EvaluateText(found, text, cond.GetText())
+		}
+
+		if defType == "number" {
+			return EvaluateFloat(found, num, cond.GetNumber())
+		}
+		if defType == "boolean" {
+			return EvaluateBool(found, boo, cond.GetBoolean())
+		}
+		if defType == "datetime" { // consider number in ms
+			return EvaluateDatetime(acc, found, date, cond.Datetime)
+		}
+	}
+	return true
+}
+
+func FindAttr(u *User, key string, typ string) (string, float64, int64, bool, bool) {
+	for _, a := range u.Attributes {
+		if a.Key != key {
+			continue
+		}
+		t, err := time.Parse(time.RFC3339, a.GetDatetime())
+		if err != nil {
+			t = time.Unix(0, 0)
+		}
+
+		text := a.Text
+		return text, a.Number, t.UnixMilli(), a.Boolean, true
+	}
+	return "", 0, 0, false, false
+}
+
+func SpaceStringsBuilder(str string) string {
+	var b strings.Builder
+	b.Grow(len(str))
+	for _, ch := range str {
+		if !unicode.IsSpace(ch) {
+			b.WriteRune(ch)
+		}
+	}
+	return b.String()
+}
+
+func GetTimeAttr(u *User, key string) (time.Time, bool) {
+	key = strings.ToLower(strings.TrimSpace(key))
+	has := false
+	for _, a := range u.GetAttributes() {
+		if key != a.GetKey() {
+			continue
+		}
+
+		has = true
+		t, err := time.Parse(time.RFC3339, a.GetDatetime())
+		if err == nil {
+			return t, has
+		}
+	}
+
+	return time.Unix(0, 0), has
+}
+
+func GetAttr(u *User, key string, typ string) interface{} {
+	key = strings.ToLower(strings.TrimSpace(key))
+	for _, a := range u.GetAttributes() {
+		if key != a.GetKey() {
+			continue
+		}
+		switch typ {
+		case AttributeDefinition_text.String():
+			return a.GetText()
+		case AttributeDefinition_number.String():
+			return a.GetNumber()
+		case AttributeDefinition_boolean.String():
+			return a.GetBoolean()
+		case "list":
+			return a.GetOtherValues()
+		case AttributeDefinition_datetime.String():
+			t, err := time.Parse(time.RFC3339, a.GetDatetime())
+			if err != nil {
+				return time.Now()
+			}
+			return t
+		}
+		return nil
+	}
+	return nil
+}
+
+func SetAttr(u *User, key string, typ string, val interface{}) {
+	key = strings.ToLower(strings.TrimSpace(key))
+	if u == nil || val == nil || key == "" || typ == "" {
+		return
+	}
+	a := &Attribute{}
+	a.Key = key
+	switch typ {
+	case AttributeDefinition_text.String():
+		v, _ := val.(string)
+		a.Text = v
+	case AttributeDefinition_number.String():
+		vb, _ := json.Marshal(val)
+		v, _ := strconv.ParseFloat(string(vb), 64)
+		a.Number = v
+	case AttributeDefinition_boolean.String():
+		v, _ := val.(bool)
+		a.Boolean = v
+	case "list":
+		ss, _ := val.([]string)
+		if len(ss) > 0 {
+			a.OtherValues = ss[1:]
+			a.Text = ss[0]
+		}
+	case AttributeDefinition_datetime.String():
+		t, _ := val.(time.Time)
+		a.Datetime = t.Format(time.RFC3339)
+	}
+	for _, i := range u.GetAttributes() {
+		if i.GetKey() != key {
+			continue
+		}
+
+		i.Text, i.Number, i.Boolean, i.Datetime =
+			a.Text, a.Number, a.Boolean, a.Datetime
+		if typ == "list" {
+			i.OtherValues = a.OtherValues
+		}
+		return
+	}
+
+	u.Attributes = append(u.Attributes, a)
+}
+
+func GetTextAttr(u *User, key string) string {
+	key = strings.ToLower(strings.TrimSpace(key))
+	for _, a := range u.GetAttributes() {
+		if key != a.GetKey() {
+			continue
+		}
+		return a.GetText()
+	}
+	return ""
+}
