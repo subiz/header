@@ -3873,6 +3873,8 @@ message UserView {
 
 	// for listing
 	string attribute = 30;
+
+	bool keep_secondary = 31; // return secondary, do not transform to primary
 }
 
 message CountTouchpointResponse {
@@ -5906,8 +5908,10 @@ message Segment {
 
 	string type = 7; // manual vs auto
 	int64 fetching_progress = 8; // 0 -> 100%
+
 	int64 last_fetched = 9;
 	string fetch_session_id = 10;
+	Error fetch_error = 11;
 
 	int64 total = 19;
 	int64 created = 20;
@@ -5919,7 +5923,7 @@ message Segment {
 	bool is_system = 27;
 
 	repeated string members = 29; // view only, add own member // deprecated by .permissions field
-	repeated string managers = 30; // edit segment query, remove member // deprecated by .permissions field
+	repeated string managers = 30;// edit segment query, remove member // deprecated by .permissions field
 
 	string source_type = 31; // campaign, popup, bot
 	string source_id = 32;
@@ -5927,7 +5931,6 @@ message Segment {
 	string order_by = 34; // attr.username asc
 
 	repeated ResourceGroupMember permissions = 35;
-	int32 dynamic_pos = 36; //rebuild when start server
 }
 
 message Segments {
