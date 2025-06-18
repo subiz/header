@@ -954,7 +954,7 @@ func GetTextAttr(u *User, key string) string {
 	return ""
 }
 
-func NormalizeCond(cond *header.UserViewCondition) {
+func NormalizeCond(cond *UserViewCondition) {
 	if len(cond.GetOne()) > 0 {
 		for _, c := range cond.GetOne() {
 			NormalizeCond(c)
@@ -970,9 +970,9 @@ func NormalizeCond(cond *header.UserViewCondition) {
 	NormalizeTextCond(cond.Text)
 }
 
-func NormalizeTextCond(cond *header.TextCondition) {
+func NormalizeTextCond(cond *TextCondition) {
 	if cond == nil {
-		return nil
+		return
 	}
 	switch cond.GetOp() {
 	case "eq":
@@ -1057,5 +1057,5 @@ func NormalizeTextCond(cond *header.TextCondition) {
 			cond.NotEndWith[i] = strings.TrimSpace(cs)
 		}
 	}
-	return cond
+	return
 }
