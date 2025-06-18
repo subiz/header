@@ -2,9 +2,9 @@ package header
 
 import (
 	"encoding/json"
-	"strconv"
 	"math"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 	"unicode"
@@ -952,4 +952,110 @@ func GetTextAttr(u *User, key string) string {
 		return a.GetText()
 	}
 	return ""
+}
+
+func NormalizeCond(cond *header.UserViewCondition) {
+	if len(cond.GetOne()) > 0 {
+		for _, c := range cond.GetOne() {
+			NormalizeCond(c)
+		}
+	}
+
+	if len(cond.GetAll()) > 0 {
+		for _, c := range cond.GetAll() {
+			NormalizeCond(c)
+		}
+	}
+
+	NormalizeTextCond(cond.Text)
+}
+
+func NormalizeTextCond(cond *header.TextCondition) {
+	if cond == nil {
+		return nil
+	}
+	switch cond.GetOp() {
+	case "eq":
+		for i, cs := range cond.GetEq() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			cond.Eq[i] = strings.TrimSpace(cs)
+		}
+	case "neq":
+		for i, cs := range cond.GetNeq() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			cond.Neq[i] = strings.TrimSpace(cs)
+		}
+	case "start_with":
+		for i, cs := range cond.GetStartWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			cond.StartWith[i] = strings.TrimSpace(cs)
+		}
+	case "end_with":
+		for i, cs := range cond.GetEndWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			cond.EndWith[i] = strings.TrimSpace(cs)
+		}
+	case "contain":
+		for i, cs := range cond.GetContain() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			cond.Contain[i] = strings.TrimSpace(cs)
+		}
+	case "not_contain":
+		for i, cs := range cond.GetNotContain() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			cond.NotContain[i] = strings.TrimSpace(cs)
+		}
+	case "not_start_with":
+		for i, cs := range cond.GetNotStartWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+			cond.NotStartWith[i] = strings.TrimSpace(cs)
+		}
+	case "not_end_with":
+		for i, cs := range cond.GetEndWith() {
+			if !cond.GetCaseSensitive() {
+				cs = strings.ToLower(cs)
+			}
+			if !cond.GetAccentSensitive() {
+				cs = ascii.Convert(cs)
+			}
+
+			cond.NotEndWith[i] = strings.TrimSpace(cs)
+		}
+	}
+	return cond
 }
