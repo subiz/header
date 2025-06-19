@@ -27616,7 +27616,6 @@ type UserView struct {
 	DisplayFields []string               `protobuf:"bytes,26,rep,name=display_fields,json=displayFields,proto3" json:"display_fields,omitempty"`
 	Viewers       []string               `protobuf:"bytes,27,rep,name=viewers,proto3" json:"viewers,omitempty"`
 	Ignores       []string               `protobuf:"bytes,28,rep,name=ignores,proto3" json:"ignores,omitempty"`
-	Deleted       bool                   `protobuf:"varint,29,opt,name=deleted,proto3" json:"deleted,omitempty"`
 	// for listing
 	Attribute     string `protobuf:"bytes,30,opt,name=attribute,proto3" json:"attribute,omitempty"`
 	KeepSecondary bool   `protobuf:"varint,31,opt,name=keep_secondary,json=keepSecondary,proto3" json:"keep_secondary,omitempty"` // return secondary, do not transform to primary
@@ -27778,13 +27777,6 @@ func (x *UserView) GetIgnores() []string {
 		return x.Ignores
 	}
 	return nil
-}
-
-func (x *UserView) GetDeleted() bool {
-	if x != nil {
-		return x.Deleted
-	}
-	return false
 }
 
 func (x *UserView) GetAttribute() string {
@@ -71204,7 +71196,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x02 \x01(\tR\taccountId\x12&\n" +
-	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\xf0\x04\n" +
+	"\x05views\x18\x04 \x03(\v2\x10.header.UserViewR\x05views\"\xd6\x04\n" +
 	"\bUserView\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71227,8 +71219,7 @@ const file_header_proto_rawDesc = "" +
 	"\tis_system\x18\x19 \x01(\bR\bisSystem\x12%\n" +
 	"\x0edisplay_fields\x18\x1a \x03(\tR\rdisplayFields\x12\x18\n" +
 	"\aviewers\x18\x1b \x03(\tR\aviewers\x12\x18\n" +
-	"\aignores\x18\x1c \x03(\tR\aignores\x12\x18\n" +
-	"\adeleted\x18\x1d \x01(\bR\adeleted\x12\x1c\n" +
+	"\aignores\x18\x1c \x03(\tR\aignores\x12\x1c\n" +
 	"\tattribute\x18\x1e \x01(\tR\tattribute\x12%\n" +
 	"\x0ekeep_secondary\x18\x1f \x01(\bR\rkeepSecondary\"\xff\x01\n" +
 	"\x17CountTouchpointResponse\x12!\n" +

@@ -440,7 +440,7 @@ func EvaluateFloat(found bool, fl float64, cond *FloatCondition) bool {
 	return true
 }
 
-func EvaluateBool(found, boo bool, cond *BooleanCondition) bool {
+func EvaluateBoolean(found, boo bool, cond *BooleanCondition) bool {
 	switch cond.GetOp() {
 	// apply transform first
 	case "has_value":
@@ -603,6 +603,27 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 	return true
 }
 
+func HasDeletedCond(cond *UserViewCondition) bool {
+	if len(cond.GetOne()) > 0 {
+		for _, c := range cond.GetOne() {
+			if HasDeletedCond(c) {
+				return true
+			}
+		}
+		return false
+	}
+
+	if len(cond.GetAll()) > 0 {
+		for _, c := range cond.GetAll() {
+			if HasDeletedCond(c) {
+				return true
+			}
+		}
+		return false
+	}
+	return cond.GetKey() == "deleted" && cond.GetBoolean().GetOp() == "true"
+}
+
 func RsCheck(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
 	if len(cond.GetOne()) > 0 {
 		for _, c := range cond.GetOne() {
@@ -631,6 +652,11 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 
 	if !deleted && u.Deleted > 0 {
 		return false
+	}
+
+	if cond.GetKey() == "is_primary" {
+		isprimary := u.GetPrimaryId() == "" || u.GetPrimaryId() == u.GetId()
+		return EvaluateBoolean(true, isprimary, cond.GetBoolean())
 	}
 
 	if cond.GetKey() == "id" {
@@ -818,7 +844,7 @@ func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, dele
 			return EvaluateFloat(found, num, cond.GetNumber())
 		}
 		if defType == "boolean" {
-			return EvaluateBool(found, boo, cond.GetBoolean())
+			return EvaluateBoolean(found, boo, cond.GetBoolean())
 		}
 		if defType == "datetime" { // consider number in ms
 			return EvaluateDatetime(acc, found, date, cond.Datetime)
