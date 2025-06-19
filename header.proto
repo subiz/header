@@ -5922,9 +5922,6 @@ message Segment {
 
 	bool is_system = 27;
 
-	repeated string members = 29; // view only, add own member // deprecated by .permissions field
-	repeated string managers = 30;// edit segment query, remove member // deprecated by .permissions field
-
 	string source_type = 31; // campaign, popup, bot
 	string source_id = 32;
 	repeated string display_fields = 33;

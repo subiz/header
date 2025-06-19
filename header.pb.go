@@ -41908,8 +41908,6 @@ type Segment struct {
 	UpdatedBy        string                 `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
 	Disabled         int64                  `protobuf:"varint,24,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	IsSystem         bool                   `protobuf:"varint,27,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
-	Members          []string               `protobuf:"bytes,29,rep,name=members,proto3" json:"members,omitempty"`                         // view only, add own member // deprecated by .permissions field
-	Managers         []string               `protobuf:"bytes,30,rep,name=managers,proto3" json:"managers,omitempty"`                       // edit segment query, remove member // deprecated by .permissions field
 	SourceType       string                 `protobuf:"bytes,31,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"` // campaign, popup, bot
 	SourceId         string                 `protobuf:"bytes,32,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
 	DisplayFields    []string               `protobuf:"bytes,33,rep,name=display_fields,json=displayFields,proto3" json:"display_fields,omitempty"`
@@ -42073,20 +42071,6 @@ func (x *Segment) GetIsSystem() bool {
 		return x.IsSystem
 	}
 	return false
-}
-
-func (x *Segment) GetMembers() []string {
-	if x != nil {
-		return x.Members
-	}
-	return nil
-}
-
-func (x *Segment) GetManagers() []string {
-	if x != nil {
-		return x.Managers
-	}
-	return nil
 }
 
 func (x *Segment) GetSourceType() string {
@@ -72960,7 +72944,7 @@ const file_header_proto_rawDesc = "" +
 	"\barchived\x18  \x01(\x03R\barchived\x12\x1a\n" +
 	"\bpriority\x18! \x01(\x03R\bpriority\x12\x1a\n" +
 	"\breporter\x18\" \x01(\tR\breporter\x12\x1a\n" +
-	"\bassignee\x18# \x01(\tR\bassignee\"\xbe\x06\n" +
+	"\bassignee\x18# \x01(\tR\bassignee\"\x88\x06\n" +
 	"\aSegment\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72984,9 +72968,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12\x1a\n" +
 	"\bdisabled\x18\x18 \x01(\x03R\bdisabled\x12\x1b\n" +
-	"\tis_system\x18\x1b \x01(\bR\bisSystem\x12\x18\n" +
-	"\amembers\x18\x1d \x03(\tR\amembers\x12\x1a\n" +
-	"\bmanagers\x18\x1e \x03(\tR\bmanagers\x12\x1f\n" +
+	"\tis_system\x18\x1b \x01(\bR\bisSystem\x12\x1f\n" +
 	"\vsource_type\x18\x1f \x01(\tR\n" +
 	"sourceType\x12\x1b\n" +
 	"\tsource_id\x18  \x01(\tR\bsourceId\x12%\n" +

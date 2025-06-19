@@ -992,4 +992,5 @@ message SegmentUsersRequest {
 	string account_id = 3;
 	string segment_id = 4;
 	repeated string user_ids = 5;
+	int64 created = 6;
 }
