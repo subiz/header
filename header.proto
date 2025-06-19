@@ -5918,7 +5918,7 @@ message Segment {
 	string created_by = 21;
 	int64 updated = 22;
 	string updated_by = 23;
-	int64 disabled = 24;
+	// int64 disabled = 24;
 
 	bool is_system = 27;
 

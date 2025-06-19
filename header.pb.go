@@ -41905,8 +41905,7 @@ type Segment struct {
 	Created          int64                  `protobuf:"varint,20,opt,name=created,proto3" json:"created,omitempty"`
 	CreatedBy        string                 `protobuf:"bytes,21,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	Updated          int64                  `protobuf:"varint,22,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy        string                 `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Disabled         int64                  `protobuf:"varint,24,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	UpdatedBy        string                 `protobuf:"bytes,23,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"` // int64 disabled = 24;
 	IsSystem         bool                   `protobuf:"varint,27,opt,name=is_system,json=isSystem,proto3" json:"is_system,omitempty"`
 	SourceType       string                 `protobuf:"bytes,31,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"` // campaign, popup, bot
 	SourceId         string                 `protobuf:"bytes,32,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
@@ -42057,13 +42056,6 @@ func (x *Segment) GetUpdatedBy() string {
 		return x.UpdatedBy
 	}
 	return ""
-}
-
-func (x *Segment) GetDisabled() int64 {
-	if x != nil {
-		return x.Disabled
-	}
-	return 0
 }
 
 func (x *Segment) GetIsSystem() bool {
@@ -72944,7 +72936,7 @@ const file_header_proto_rawDesc = "" +
 	"\barchived\x18  \x01(\x03R\barchived\x12\x1a\n" +
 	"\bpriority\x18! \x01(\x03R\bpriority\x12\x1a\n" +
 	"\breporter\x18\" \x01(\tR\breporter\x12\x1a\n" +
-	"\bassignee\x18# \x01(\tR\bassignee\"\x88\x06\n" +
+	"\bassignee\x18# \x01(\tR\bassignee\"\xec\x05\n" +
 	"\aSegment\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72966,8 +72958,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x15 \x01(\tR\tcreatedBy\x12\x18\n" +
 	"\aupdated\x18\x16 \x01(\x03R\aupdated\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12\x1a\n" +
-	"\bdisabled\x18\x18 \x01(\x03R\bdisabled\x12\x1b\n" +
+	"updated_by\x18\x17 \x01(\tR\tupdatedBy\x12\x1b\n" +
 	"\tis_system\x18\x1b \x01(\bR\bisSystem\x12\x1f\n" +
 	"\vsource_type\x18\x1f \x01(\tR\n" +
 	"sourceType\x12\x1b\n" +
