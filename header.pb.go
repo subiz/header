@@ -47391,6 +47391,7 @@ type Response struct {
 	Orders                 []*Order                 `protobuf:"bytes,205,rep,name=orders,proto3" json:"orders,omitempty"`
 	Bill                   *Bill                    `protobuf:"bytes,206,opt,name=bill,proto3" json:"bill,omitempty"`
 	Order                  *Order                   `protobuf:"bytes,207,opt,name=order,proto3" json:"order,omitempty"`
+	SegmentJoineds         []int64                  `protobuf:"varint,208,rep,packed,name=segment_joineds,json=segmentJoineds,proto3" json:"segment_joineds,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -48275,6 +48276,13 @@ func (x *Response) GetBill() *Bill {
 func (x *Response) GetOrder() *Order {
 	if x != nil {
 		return x.Order
+	}
+	return nil
+}
+
+func (x *Response) GetSegmentJoineds() []int64 {
+	if x != nil {
+		return x.SegmentJoineds
 	}
 	return nil
 }
@@ -73586,7 +73594,7 @@ const file_header_proto_rawDesc = "" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
 	"email_type\x18\a \x01(\tR\temailType\x12!\n" +
-	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\xdd2\n" +
+	"\flast_blocked\x18\b \x01(\x03R\vlastBlocked\"\x873\n" +
 	"\bResponse\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73718,7 +73726,8 @@ const file_header_proto_rawDesc = "" +
 	"\x05bills\x18\xcc\x01 \x03(\v2\f.header.BillR\x05bills\x12&\n" +
 	"\x06orders\x18\xcd\x01 \x03(\v2\r.header.OrderR\x06orders\x12!\n" +
 	"\x04bill\x18\xce\x01 \x01(\v2\f.header.BillR\x04bill\x12$\n" +
-	"\x05order\x18\xcf\x01 \x01(\v2\r.header.OrderR\x05order\"Y\n" +
+	"\x05order\x18\xcf\x01 \x01(\v2\r.header.OrderR\x05order\x12(\n" +
+	"\x0fsegment_joineds\x18\xd0\x01 \x03(\x03R\x0esegmentJoineds\"Y\n" +
 	"\vReportCount\x12\x12\n" +
 	"\x04type\x18\a \x01(\tR\x04type\x12\x1e\n" +
 	"\n" +

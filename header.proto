@@ -6883,6 +6883,8 @@ message Response {
 	repeated Order orders = 205;
 	Bill bill = 206;
 	Order order = 207;
+
+	repeated int64 segment_joineds = 208;
 }
 
 message ReportCount {
