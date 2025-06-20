@@ -603,10 +603,10 @@ func EvaluateDatetime(acc *apb.Account, found bool, unixms int64, cond *Datetime
 	return true
 }
 
-func RsCheck(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
+func RsCheck(acc *apb.Account, u *User, cond *UserViewCondition) bool {
 	if len(cond.GetOne()) > 0 {
 		for _, c := range cond.GetOne() {
-			if RsCheck(acc, u, c, deleted) {
+			if RsCheck(acc, u, c) {
 				return true
 			}
 		}
@@ -615,24 +615,19 @@ func RsCheck(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) b
 
 	if len(cond.GetAll()) > 0 {
 		for _, c := range cond.GetAll() {
-			if !RsCheck(acc, u, c, deleted) {
+			if !RsCheck(acc, u, c) {
 				return false
 			}
 		}
 		return true
 	}
-	return evaluateSingleCond(acc, u, cond, deleted)
+	return evaluateSingleCond(acc, u, cond)
 }
 
-func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition, deleted bool) bool {
-	if deleted && u.Deleted == 0 {
-		return false
+func evaluateSingleCond(acc *apb.Account, u *User, cond *UserViewCondition) bool {
+	if cond.GetKey() == "deleted" {
+		return EvaluateBool(true, u.Deleted > 0, cond.GetBoolean())
 	}
-
-	if !deleted && u.Deleted > 0 {
-		return false
-	}
-
 	if cond.GetKey() == "id" {
 		id := u.GetId()
 		return EvaluateText(true, id, cond.GetText())
