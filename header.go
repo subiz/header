@@ -9,6 +9,7 @@ import (
 	"net/mail"
 	"net/url"
 	"reflect"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -1090,6 +1091,10 @@ func VNPhone(str string) []string {
 	return validPhone
 }
 
+const emailRegex = `([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})`
+
+var emailre = regexp.MustCompile(emailRegex)
+
 // NormPhone converts an user input phone number to
 // standalized phone number
 // (84)35 9423 423 => 0359423423
@@ -1098,26 +1103,35 @@ func VNPhone(str string) []string {
 //
 //	if the number starts with 84 => replace to 0 since we mostly serve
 //	Vietnamese customers
-func NormEmail(email string) []string {
+func ExtractEmails(email string) []string {
 	emailsplit := strings.FieldsFunc(email, func(r rune) bool {
 		return r == '\000' || r == ',' || r == ';' || r == '\n' || r == '\\' || r == '/' || r == ' '
 	})
 
 	emails := map[string]bool{}
 	for _, email := range emailsplit {
-		arr := make([]rune, 0)
-		for _, r := range email {
-			if r != '"' && r != '\'' {
-				arr = append(arr, r)
+		// Find all matches
+		foundems := emailre.FindAllString(email, -1)
+		for _, email := range foundems {
+			em, _ := mail.ParseAddress(email)
+			if em == nil {
+				continue
 			}
+			email = em.Address
+			arr := make([]rune, 0)
+			for _, r := range email {
+				if r != '"' && r != '\'' {
+					arr = append(arr, r)
+				}
+			}
+			email = string(arr)
+			email = strings.ToLower(email)
+			if email == "" {
+				continue
+			}
+			email = Substring(email, 0, 320)
+			emails[email] = true
 		}
-		email = string(arr)
-		email = strings.ToLower(email)
-		if email == "" {
-			continue
-		}
-		email = Substring(email, 0, 320)
-		emails[email] = true
 	}
 
 	ems := []string{}

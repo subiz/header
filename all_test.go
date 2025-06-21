@@ -45,18 +45,22 @@ func TestToGrpcCtx(t *testing.T) {
 	}
 }
 
-func TestNormEmail(t *testing.T) {
+func TestNormEmail1(t *testing.T) {
 	testcases := []struct {
 		in  string
 		out string
 	}{
 		{"", ""},
-		{"thanhpk@live.com, thanhpk@live.com 't@.com'", "thanhpk@live.com,thanhpk@live.com,t@.com"},
+		{"Get started", ""},
+		{"thanhpk@live.com, thanhpk@live.com 't@a.com', b@.com", "thanhpk@live.com,t@a.com"},
+		{"Here (thanhpk@live.com)", "thanhpk@live.com"},
+		{"OK <thanhpk@live.com>", "thanhpk@live.com"},
 	}
 
 	for i, tc := range testcases {
-		if tc.out != strings.Join(NormEmail(tc.in), ",") {
-			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, NormPhone(tc.in))
+		actual := strings.Join(NormEmail(tc.in), ",")
+		if tc.out != actual {
+			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, actual)
 		}
 	}
 }
