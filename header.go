@@ -2395,7 +2395,7 @@ func TruncateUser(user *User) {
 		}
 
 		if attr.Key != "created" && attr.Key != "fullname" && attr.Key != "focused" {
-			if attr.UserValue == "" {
+			if attr.UserValue == "" && !strings.HasPrefix(attr.By, "us") {
 				continue
 			}
 		}
