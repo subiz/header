@@ -18038,6 +18038,108 @@ var Pubsub_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	RealtimePublisher_Subscribe_FullMethodName = "/header.RealtimePublisher/Subscribe"
+)
+
+// RealtimePublisherClient is the client API for RealtimePublisher service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type RealtimePublisherClient interface {
+	Subscribe(ctx context.Context, in *RealtimeSubscription, opts ...grpc.CallOption) (*Empty, error)
+}
+
+type realtimePublisherClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewRealtimePublisherClient(cc grpc.ClientConnInterface) RealtimePublisherClient {
+	return &realtimePublisherClient{cc}
+}
+
+func (c *realtimePublisherClient) Subscribe(ctx context.Context, in *RealtimeSubscription, opts ...grpc.CallOption) (*Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, RealtimePublisher_Subscribe_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// RealtimePublisherServer is the server API for RealtimePublisher service.
+// All implementations must embed UnimplementedRealtimePublisherServer
+// for forward compatibility.
+type RealtimePublisherServer interface {
+	Subscribe(context.Context, *RealtimeSubscription) (*Empty, error)
+	mustEmbedUnimplementedRealtimePublisherServer()
+}
+
+// UnimplementedRealtimePublisherServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedRealtimePublisherServer struct{}
+
+func (UnimplementedRealtimePublisherServer) Subscribe(context.Context, *RealtimeSubscription) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Subscribe not implemented")
+}
+func (UnimplementedRealtimePublisherServer) mustEmbedUnimplementedRealtimePublisherServer() {}
+func (UnimplementedRealtimePublisherServer) testEmbeddedByValue()                           {}
+
+// UnsafeRealtimePublisherServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RealtimePublisherServer will
+// result in compilation errors.
+type UnsafeRealtimePublisherServer interface {
+	mustEmbedUnimplementedRealtimePublisherServer()
+}
+
+func RegisterRealtimePublisherServer(s grpc.ServiceRegistrar, srv RealtimePublisherServer) {
+	// If the following call pancis, it indicates UnimplementedRealtimePublisherServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&RealtimePublisher_ServiceDesc, srv)
+}
+
+func _RealtimePublisher_Subscribe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RealtimeSubscription)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(RealtimePublisherServer).Subscribe(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: RealtimePublisher_Subscribe_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(RealtimePublisherServer).Subscribe(ctx, req.(*RealtimeSubscription))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// RealtimePublisher_ServiceDesc is the grpc.ServiceDesc for RealtimePublisher service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var RealtimePublisher_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "header.RealtimePublisher",
+	HandlerType: (*RealtimePublisherServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "Subscribe",
+			Handler:    _RealtimePublisher_Subscribe_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
 	FabikonService_ReadFbFanpageSetting_FullMethodName   = "/header.FabikonService/ReadFbFanpageSetting"
 	FabikonService_UpdateFbFanpageSetting_FullMethodName = "/header.FabikonService/UpdateFbFanpageSetting"
 	FabikonService_ListFbFanpageSettings_FullMethodName  = "/header.FabikonService/ListFbFanpageSettings"

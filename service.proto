@@ -630,6 +630,10 @@ service Pubsub {
 	rpc Subscribe(RealtimeSubscription) returns (RealtimeSubscription);
 }
 
+service RealtimePublisher {
+	rpc Subscribe(RealtimeSubscription) returns (Empty);
+}
+
 service FabikonService {
 	rpc ReadFbFanpageSetting(Id) returns (header.FbFanpageSetting);
 	rpc UpdateFbFanpageSetting(header.FbFanpageSetting) returns (header.FbFanpageSetting);

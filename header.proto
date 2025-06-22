@@ -4902,9 +4902,9 @@ message Product {
 	string long_description = 15; // (shared)
 
 	repeated KV props = 14;
-	repeated ProductAttribute attrs = 55;
+	// repeated ProductAttribute attrs = 55;
 
-	string mobile_url = 17; // (shared)
+	// string mobile_url = 17; // (shared)
 
 	// app_link = 11; // mobile deep link
 
@@ -4971,8 +4971,8 @@ message Product {
 	int64 view_duration_sec = 67; // for event content_view only
 	int64 num_variants = 69; // computed, readonly
 
-	map<string,Block> i18n_description_block = 70; // (shared) server generated
-	map<string,Block> i18n_long_description_block = 71; // (shared)
+	map<string, Block> i18n_description_block = 70; // (shared) server generated
+	map<string, Block> i18n_long_description_block = 71; // (shared)
 
 	repeated File attachments = 80;
 
@@ -4980,8 +4980,9 @@ message Product {
 
 	ProductValidity validity = 82;
 
-	repeated File files = 83;
-	repeated ProductNote notes = 84;
+	// repeated File files = 83;
+	// repeated ProductNote notes = 84;
+	repeated string urls = 91;
 
 	int64 purchase_deadline = 85; // no available for sale after this ms
 
@@ -4990,31 +4991,6 @@ message Product {
 	string last_availability_fetched = 88; // ms
 	string last_availability_status = 89;	 // success | failed
 	string last_availability_error = 90;	// 500
-}
-
-message ProductNote {
-	common.Context ctx = 1;
-	string account_id = 2;
-	string product_id = 3;
-	string id = 4;
-
-	string visibility = 5; // private, public
-	Block content = 8;
-
-	int64 expired = 9;
-
-	string created_by = 10;
-	int64 created = 11;
-	string updated_by = 12;
-	int64 updated = 13;
-
-	int64 modified = 14;
-
-	// learning status
-	string md5sum = 15;
-
-	repeated string trained_chunks = 16; // read only
-	string trained_md5sum = 17; // read only
 }
 
 message ProductOption {
@@ -5116,10 +5092,10 @@ message KV {
 }
 
 message ProductAttribute {
-	string key = 2;
+	string key = 2; // attribute id from category.json
 	string value = 3;
 
-	string attribute_id = 5; // definition id
+	// string attribute_id = 5; // definition id
 
 	repeated string values = 4;
 	string range = 6; // "5000-10000", - delimiter
@@ -5127,7 +5103,7 @@ message ProductAttribute {
 	string unit = 7;
 }
 
-message ProductCategoryBuildQueryExample{
+message ProductCategoryBuildQueryExample {
 	repeated LLMChatHistoryEntry history = 4;
 	string output = 5;
 }
@@ -9052,9 +9028,11 @@ message AIDataEntry {
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
 	bool expand_link_disabled = 9;
-
 	File file = 10;
 	Product product = 18;
+	repeated ProductAttribute product_attrs = 42; // llm-generated
+	map<string, AIDataEntry> product_url_status = 43;
+
 	// url only
 	int64 num_sub_links = 11;
 	int64 last_crawled = 12;
