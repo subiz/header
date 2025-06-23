@@ -4953,11 +4953,15 @@ message Product {
 	string sku = 49;
 	string barcode = 50;
 
+	float market_price = 45;
+
 	float price = 51;
 	int64 fpv_price = 52; // (readonly from client)
 
 	repeated PriceRule price_rules = 54; // (shared)
 	int64 stock = 60; //
+
+	repeated ProductStock stocks = 63;
 
 	string source_id = 61;
 
@@ -4991,6 +4995,30 @@ message Product {
 	string last_availability_fetched = 88; // ms
 	string last_availability_status = 89;	 // success | failed
 	string last_availability_error = 90;	// 500
+
+	repeated ProductOffer offers = 92;
+}
+
+message ProductStock {
+	string pos_id = 4;
+	int64 stock = 5;
+}
+
+message ProductOffer {
+	common.Context ctx = 1;
+
+	string account_id = 2;
+	string id = 3;
+	string source_id = 4;
+	string title = 5;
+	string type = 6;
+	float price = 7;
+	int64 price_fpv = 8;
+	int64 price_valid_until = 10; // unix ms
+	int64 price_valid_from = 11; // unix ms
+	string description = 19;
+	string image_url = 20;
+	int64 quantity = 21;
 }
 
 message ProductOption {
@@ -5023,7 +5051,7 @@ message ProductFeed {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string type = 4; // google sheet, shopee, website json ld
+	string type = 4; // google sheet, shopee, website json ld, api
 
 	// google sheet
 	ShopeeProductFeed shopee = 5;
@@ -6856,6 +6884,9 @@ message Response {
 	Order order = 207;
 
 	repeated int64 segment_joineds = 208;
+
+	ProductOffer product_offer = 210;
+	repeated ProductOffer product_offers = 211;
 }
 
 message ReportCount {
