@@ -35862,6 +35862,7 @@ type ProductsRequest struct {
 	Grouped              bool     `protobuf:"varint,20,opt,name=grouped,proto3" json:"grouped,omitempty"` // group sampe product_group_id into one
 	SourceId             string   `protobuf:"bytes,21,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
 	VariantOf            string   `protobuf:"bytes,22,opt,name=variant_of,json=variantOf,proto3" json:"variant_of,omitempty"`
+	ETag                 string   `protobuf:"bytes,23,opt,name=e_tag,json=eTag,proto3" json:"e_tag,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -36039,6 +36040,13 @@ func (x *ProductsRequest) GetSourceId() string {
 func (x *ProductsRequest) GetVariantOf() string {
 	if x != nil {
 		return x.VariantOf
+	}
+	return ""
+}
+
+func (x *ProductsRequest) GetETag() string {
+	if x != nil {
+		return x.ETag
 	}
 	return ""
 }
@@ -72255,7 +72263,7 @@ const file_header_proto_rawDesc = "" +
 	"\x10last_fetch_error\x18\x1a \x01(\tR\x0elastFetchError\x12*\n" +
 	"\x11last_fetch_status\x18\x1b \x01(\tR\x0flastFetchStatus\x12.\n" +
 	"\x13last_sucess_fetched\x18\x1e \x01(\x03R\x11lastSucessFetched\x12\x1a\n" +
-	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\"\xfd\x04\n" +
+	"\bdisabled\x18\x1f \x01(\x03R\bdisabled\"\x92\x05\n" +
 	"\x0fProductsRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -72283,7 +72291,8 @@ const file_header_proto_rawDesc = "" +
 	"\agrouped\x18\x14 \x01(\bR\agrouped\x12\x1b\n" +
 	"\tsource_id\x18\x15 \x01(\tR\bsourceId\x12\x1d\n" +
 	"\n" +
-	"variant_of\x18\x16 \x01(\tR\tvariantOf\"\xfd\x01\n" +
+	"variant_of\x18\x16 \x01(\tR\tvariantOf\x12\x13\n" +
+	"\x05e_tag\x18\x17 \x01(\tR\x04eTag\"\xfd\x01\n" +
 	"\x02KV\x12\x10\n" +
 	"\x03key\x18\x02 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x03 \x01(\tR\x05value\x12\x15\n" +

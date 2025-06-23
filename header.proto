@@ -5106,6 +5106,8 @@ message ProductsRequest {
 
 	string source_id = 21;
 	string variant_of = 22;
+
+	string e_tag = 23;
 }
 
 message KV {

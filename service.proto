@@ -814,6 +814,7 @@ service Proder {
 	rpc UpdateProduct(header.Product) returns (header.Product);
 	rpc DeleteProduct(Id) returns (Empty);
 	rpc ListProducts2(header.ProductsRequest) returns (header.Response);
+	rpc ListAllProductIds(header.ProductsRequest) returns (header.Response);
 	rpc ImportProduct(header.ImportProductRequest) returns (header.ImportProductResponse);
 
 	rpc GetProductOffer(header.Id) returns (header.Response);
@@ -823,7 +824,7 @@ service Proder {
 	rpc ListProductOffers(header.Id) returns (header.Response);
 
 	rpc CreateProductFromFile(header.ConvertProductRequest) returns (header.Response);
-	rpc FilterProduct2(header.FilterProductRequest) returns (header.Response);
+	// rpc FilterProduct2(header.FilterProductRequest) returns (header.Response);
 
 	rpc ListPromotionPrograms(Id) returns (header.Response);
 	rpc CreatePromotionProgram(header.PromotionProgram) returns (header.Response);

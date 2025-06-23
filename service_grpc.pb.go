@@ -23103,6 +23103,7 @@ const (
 	Proder_UpdateProduct_FullMethodName           = "/header.Proder/UpdateProduct"
 	Proder_DeleteProduct_FullMethodName           = "/header.Proder/DeleteProduct"
 	Proder_ListProducts2_FullMethodName           = "/header.Proder/ListProducts2"
+	Proder_ListAllProductIds_FullMethodName       = "/header.Proder/ListAllProductIds"
 	Proder_ImportProduct_FullMethodName           = "/header.Proder/ImportProduct"
 	Proder_GetProductOffer_FullMethodName         = "/header.Proder/GetProductOffer"
 	Proder_CreateProductOffer_FullMethodName      = "/header.Proder/CreateProductOffer"
@@ -23110,7 +23111,6 @@ const (
 	Proder_DeleteProductOffer_FullMethodName      = "/header.Proder/DeleteProductOffer"
 	Proder_ListProductOffers_FullMethodName       = "/header.Proder/ListProductOffers"
 	Proder_CreateProductFromFile_FullMethodName   = "/header.Proder/CreateProductFromFile"
-	Proder_FilterProduct2_FullMethodName          = "/header.Proder/FilterProduct2"
 	Proder_ListPromotionPrograms_FullMethodName   = "/header.Proder/ListPromotionPrograms"
 	Proder_CreatePromotionProgram_FullMethodName  = "/header.Proder/CreatePromotionProgram"
 	Proder_UpdatePromotionProgram_FullMethodName  = "/header.Proder/UpdatePromotionProgram"
@@ -23179,6 +23179,7 @@ type ProderClient interface {
 	UpdateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
 	DeleteProduct(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListProducts2(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
+	ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
 	ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error)
 	GetProductOffer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductOffer(ctx context.Context, in *ProductOffer, opts ...grpc.CallOption) (*Response, error)
@@ -23186,7 +23187,6 @@ type ProderClient interface {
 	DeleteProductOffer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListProductOffers(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductFromFile(ctx context.Context, in *ConvertProductRequest, opts ...grpc.CallOption) (*Response, error)
-	FilterProduct2(ctx context.Context, in *FilterProductRequest, opts ...grpc.CallOption) (*Response, error)
 	ListPromotionPrograms(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreatePromotionProgram(ctx context.Context, in *PromotionProgram, opts ...grpc.CallOption) (*Response, error)
 	UpdatePromotionProgram(ctx context.Context, in *PromotionProgram, opts ...grpc.CallOption) (*Response, error)
@@ -23303,6 +23303,16 @@ func (c *proderClient) ListProducts2(ctx context.Context, in *ProductsRequest, o
 	return out, nil
 }
 
+func (c *proderClient) ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, Proder_ListAllProductIds_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *proderClient) ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ImportProductResponse)
@@ -23367,16 +23377,6 @@ func (c *proderClient) CreateProductFromFile(ctx context.Context, in *ConvertPro
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Response)
 	err := c.cc.Invoke(ctx, Proder_CreateProductFromFile_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *proderClient) FilterProduct2(ctx context.Context, in *FilterProductRequest, opts ...grpc.CallOption) (*Response, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
-	err := c.cc.Invoke(ctx, Proder_FilterProduct2_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -23944,6 +23944,7 @@ type ProderServer interface {
 	UpdateProduct(context.Context, *Product) (*Product, error)
 	DeleteProduct(context.Context, *Id) (*Empty, error)
 	ListProducts2(context.Context, *ProductsRequest) (*Response, error)
+	ListAllProductIds(context.Context, *ProductsRequest) (*Response, error)
 	ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error)
 	GetProductOffer(context.Context, *Id) (*Response, error)
 	CreateProductOffer(context.Context, *ProductOffer) (*Response, error)
@@ -23951,7 +23952,6 @@ type ProderServer interface {
 	DeleteProductOffer(context.Context, *Id) (*Empty, error)
 	ListProductOffers(context.Context, *Id) (*Response, error)
 	CreateProductFromFile(context.Context, *ConvertProductRequest) (*Response, error)
-	FilterProduct2(context.Context, *FilterProductRequest) (*Response, error)
 	ListPromotionPrograms(context.Context, *Id) (*Response, error)
 	CreatePromotionProgram(context.Context, *PromotionProgram) (*Response, error)
 	UpdatePromotionProgram(context.Context, *PromotionProgram) (*Response, error)
@@ -24033,6 +24033,9 @@ func (UnimplementedProderServer) DeleteProduct(context.Context, *Id) (*Empty, er
 func (UnimplementedProderServer) ListProducts2(context.Context, *ProductsRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProducts2 not implemented")
 }
+func (UnimplementedProderServer) ListAllProductIds(context.Context, *ProductsRequest) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAllProductIds not implemented")
+}
 func (UnimplementedProderServer) ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportProduct not implemented")
 }
@@ -24053,9 +24056,6 @@ func (UnimplementedProderServer) ListProductOffers(context.Context, *Id) (*Respo
 }
 func (UnimplementedProderServer) CreateProductFromFile(context.Context, *ConvertProductRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProductFromFile not implemented")
-}
-func (UnimplementedProderServer) FilterProduct2(context.Context, *FilterProductRequest) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FilterProduct2 not implemented")
 }
 func (UnimplementedProderServer) ListPromotionPrograms(context.Context, *Id) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPromotionPrograms not implemented")
@@ -24333,6 +24333,24 @@ func _Proder_ListProducts2_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Proder_ListAllProductIds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProderServer).ListAllProductIds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Proder_ListAllProductIds_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProderServer).ListAllProductIds(ctx, req.(*ProductsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Proder_ImportProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ImportProductRequest)
 	if err := dec(in); err != nil {
@@ -24455,24 +24473,6 @@ func _Proder_CreateProductFromFile_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ProderServer).CreateProductFromFile(ctx, req.(*ConvertProductRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Proder_FilterProduct2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FilterProductRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ProderServer).FilterProduct2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Proder_FilterProduct2_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProderServer).FilterProduct2(ctx, req.(*FilterProductRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -25495,6 +25495,10 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Proder_ListProducts2_Handler,
 		},
 		{
+			MethodName: "ListAllProductIds",
+			Handler:    _Proder_ListAllProductIds_Handler,
+		},
+		{
 			MethodName: "ImportProduct",
 			Handler:    _Proder_ImportProduct_Handler,
 		},
@@ -25521,10 +25525,6 @@ var Proder_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateProductFromFile",
 			Handler:    _Proder_CreateProductFromFile_Handler,
-		},
-		{
-			MethodName: "FilterProduct2",
-			Handler:    _Proder_FilterProduct2_Handler,
 		},
 		{
 			MethodName: "ListPromotionPrograms",
