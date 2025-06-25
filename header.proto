@@ -9070,7 +9070,7 @@ message AIDataEntry {
 
 	string product_category_id = 44;
 	repeated ProductAttribute product_attrs = 42; // llm-generated
-	// map<string, AIDataEntry> product_url_status = 43;
+	AIDataStore data_store = 43; // read-only
 
 	// url only
 	int64 num_sub_links = 11;
