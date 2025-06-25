@@ -38,6 +38,8 @@ message Ids {
 	repeated string emails = 9; // match by email identifier
 	repeated string record_ids = 10; // match by record identifier
 	string query_match = 11; //for search
+
+	string e_tag = 12;
 }
 
 message NotiData {
@@ -9068,9 +9070,11 @@ message AIDataEntry {
 	File file = 10;
 	Product product = 18;
 
+	// llm generated
 	string product_category_id = 44;
-	repeated ProductAttribute product_attrs = 42; // llm-generated
-	AIDataStore data_store = 43; // read-only
+	repeated ProductAttribute product_attrs = 42;
+
+	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
 
 	// url only
 	int64 num_sub_links = 11;

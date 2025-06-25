@@ -2273,6 +2273,7 @@ type Ids struct {
 	Emails        []string               `protobuf:"bytes,9,rep,name=emails,proto3" json:"emails,omitempty"`                            // match by email identifier
 	RecordIds     []string               `protobuf:"bytes,10,rep,name=record_ids,json=recordIds,proto3" json:"record_ids,omitempty"`    // match by record identifier
 	QueryMatch    string                 `protobuf:"bytes,11,opt,name=query_match,json=queryMatch,proto3" json:"query_match,omitempty"` //for search
+	ETag          string                 `protobuf:"bytes,12,opt,name=e_tag,json=eTag,proto3" json:"e_tag,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2373,6 +2374,13 @@ func (x *Ids) GetRecordIds() []string {
 func (x *Ids) GetQueryMatch() string {
 	if x != nil {
 		return x.QueryMatch
+	}
+	return ""
+}
+
+func (x *Ids) GetETag() string {
+	if x != nil {
+		return x.ETag
 	}
 	return ""
 }
@@ -63955,9 +63963,10 @@ type AIDataEntry struct {
 	ExpandLinkDisabled bool                   `protobuf:"varint,9,opt,name=expand_link_disabled,json=expandLinkDisabled,proto3" json:"expand_link_disabled,omitempty"`
 	File               *File                  `protobuf:"bytes,10,opt,name=file,proto3" json:"file,omitempty"`
 	Product            *Product               `protobuf:"bytes,18,opt,name=product,proto3" json:"product,omitempty"`
-	ProductCategoryId  string                 `protobuf:"bytes,44,opt,name=product_category_id,json=productCategoryId,proto3" json:"product_category_id,omitempty"`
-	ProductAttrs       []*ProductAttribute    `protobuf:"bytes,42,rep,name=product_attrs,json=productAttrs,proto3" json:"product_attrs,omitempty"` // llm-generated
-	DataStore          *AIDataStore           `protobuf:"bytes,43,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`          // read-only
+	// llm generated
+	ProductCategoryId string              `protobuf:"bytes,44,opt,name=product_category_id,json=productCategoryId,proto3" json:"product_category_id,omitempty"`
+	ProductAttrs      []*ProductAttribute `protobuf:"bytes,42,rep,name=product_attrs,json=productAttrs,proto3" json:"product_attrs,omitempty"`
+	DataStore         *AIDataStore        `protobuf:"bytes,43,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"` // read-only, for product only when search infomation about a specific product
 	// url only
 	NumSubLinks               int64  `protobuf:"varint,11,opt,name=num_sub_links,json=numSubLinks,proto3" json:"num_sub_links,omitempty"`
 	LastCrawled               int64  `protobuf:"varint,12,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
@@ -68145,7 +68154,7 @@ const file_header_proto_rawDesc = "" +
 	"\n" +
 	"profile_id\x18\a \x01(\tR\tprofileId\x12\x1a\n" +
 	"\tis_gen_qr\x18\b \x01(\bR\aisGenQr\x12\x18\n" +
-	"\aversion\x18\t \x01(\tR\aversion\"\x9e\x02\n" +
+	"\aversion\x18\t \x01(\tR\aversion\"\xb3\x02\n" +
 	"\x03Ids\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -68160,7 +68169,8 @@ const file_header_proto_rawDesc = "" +
 	"record_ids\x18\n" +
 	" \x03(\tR\trecordIds\x12\x1f\n" +
 	"\vquery_match\x18\v \x01(\tR\n" +
-	"queryMatch\"\x81\x04\n" +
+	"queryMatch\x12\x13\n" +
+	"\x05e_tag\x18\f \x01(\tR\x04eTag\"\x81\x04\n" +
 	"\bNotiData\x12\x1f\n" +
 	"\vcampaign_id\x18\x06 \x01(\tR\n" +
 	"campaignId\x12#\n" +

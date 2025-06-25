@@ -874,15 +874,15 @@ const file_service_proto_rawDesc = "" +
 	"\fMarkOpenNoti\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12/\n" +
 	"\x12DeleteNotification\x12\n" +
-	".header.Id\x1a\r.header.Empty2\xbf\x1d\n" +
+	".header.Id\x1a\r.header.Empty2\xba\x1d\n" +
 	"\x06Proder\x12/\n" +
 	"\vReadProduct\x12\x0f.header.Product\x1a\x0f.header.Product\x121\n" +
 	"\rCreateProduct\x12\x0f.header.Product\x1a\x0f.header.Product\x121\n" +
 	"\rUpdateProduct\x12\x0f.header.Product\x1a\x0f.header.Product\x12*\n" +
 	"\rDeleteProduct\x12\n" +
 	".header.Id\x1a\r.header.Empty\x12:\n" +
-	"\rListProducts2\x12\x17.header.ProductsRequest\x1a\x10.header.Response\x12>\n" +
-	"\x11ListAllProductIds\x12\x17.header.ProductsRequest\x1a\x10.header.Response\x12L\n" +
+	"\rListProducts2\x12\x17.header.ProductsRequest\x1a\x10.header.Response\x129\n" +
+	"\x11ListAllProductIds\x12\x17.header.ProductsRequest\x1a\v.header.Ids\x12L\n" +
 	"\rImportProduct\x12\x1c.header.ImportProductRequest\x1a\x1d.header.ImportProductResponse\x12/\n" +
 	"\x0fGetProductOffer\x12\n" +
 	".header.Id\x1a\x10.header.Response\x12<\n" +
@@ -2741,7 +2741,7 @@ var file_service_proto_depIdxs = []int32{
 	60,  // 1282: header.Proder.UpdateProduct:output_type -> header.Product
 	9,   // 1283: header.Proder.DeleteProduct:output_type -> header.Empty
 	248, // 1284: header.Proder.ListProducts2:output_type -> header.Response
-	248, // 1285: header.Proder.ListAllProductIds:output_type -> header.Response
+	14,  // 1285: header.Proder.ListAllProductIds:output_type -> header.Ids
 	313, // 1286: header.Proder.ImportProduct:output_type -> header.ImportProductResponse
 	248, // 1287: header.Proder.GetProductOffer:output_type -> header.Response
 	248, // 1288: header.Proder.CreateProductOffer:output_type -> header.Response

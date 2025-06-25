@@ -23217,7 +23217,7 @@ type ProderClient interface {
 	UpdateProduct(ctx context.Context, in *Product, opts ...grpc.CallOption) (*Product, error)
 	DeleteProduct(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
 	ListProducts2(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
-	ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error)
+	ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Ids, error)
 	ImportProduct(ctx context.Context, in *ImportProductRequest, opts ...grpc.CallOption) (*ImportProductResponse, error)
 	GetProductOffer(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	CreateProductOffer(ctx context.Context, in *ProductOffer, opts ...grpc.CallOption) (*Response, error)
@@ -23341,9 +23341,9 @@ func (c *proderClient) ListProducts2(ctx context.Context, in *ProductsRequest, o
 	return out, nil
 }
 
-func (c *proderClient) ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Response, error) {
+func (c *proderClient) ListAllProductIds(ctx context.Context, in *ProductsRequest, opts ...grpc.CallOption) (*Ids, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Response)
+	out := new(Ids)
 	err := c.cc.Invoke(ctx, Proder_ListAllProductIds_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -23982,7 +23982,7 @@ type ProderServer interface {
 	UpdateProduct(context.Context, *Product) (*Product, error)
 	DeleteProduct(context.Context, *Id) (*Empty, error)
 	ListProducts2(context.Context, *ProductsRequest) (*Response, error)
-	ListAllProductIds(context.Context, *ProductsRequest) (*Response, error)
+	ListAllProductIds(context.Context, *ProductsRequest) (*Ids, error)
 	ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error)
 	GetProductOffer(context.Context, *Id) (*Response, error)
 	CreateProductOffer(context.Context, *ProductOffer) (*Response, error)
@@ -24071,7 +24071,7 @@ func (UnimplementedProderServer) DeleteProduct(context.Context, *Id) (*Empty, er
 func (UnimplementedProderServer) ListProducts2(context.Context, *ProductsRequest) (*Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListProducts2 not implemented")
 }
-func (UnimplementedProderServer) ListAllProductIds(context.Context, *ProductsRequest) (*Response, error) {
+func (UnimplementedProderServer) ListAllProductIds(context.Context, *ProductsRequest) (*Ids, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAllProductIds not implemented")
 }
 func (UnimplementedProderServer) ImportProduct(context.Context, *ImportProductRequest) (*ImportProductResponse, error) {
