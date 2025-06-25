@@ -388,6 +388,7 @@ service WorkflowMgr {
 
 service ConversationMgr {
 	rpc AssignRule(header.AssignRequest) returns (header.RouteResult);
+	rpc ReassignConversation(header.Id) returns (header.RouteResult);
 	rpc PongMessage(header.Event) returns (header.Event);
 
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);

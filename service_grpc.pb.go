@@ -11253,6 +11253,7 @@ var WorkflowMgr_ServiceDesc = grpc.ServiceDesc{
 
 const (
 	ConversationMgr_AssignRule_FullMethodName               = "/header.ConversationMgr/AssignRule"
+	ConversationMgr_ReassignConversation_FullMethodName     = "/header.ConversationMgr/ReassignConversation"
 	ConversationMgr_PongMessage_FullMethodName              = "/header.ConversationMgr/PongMessage"
 	ConversationMgr_StartConversation_FullMethodName        = "/header.ConversationMgr/StartConversation"
 	ConversationMgr_EndConversation_FullMethodName          = "/header.ConversationMgr/EndConversation"
@@ -11330,6 +11331,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ConversationMgrClient interface {
 	AssignRule(ctx context.Context, in *AssignRequest, opts ...grpc.CallOption) (*RouteResult, error)
+	ReassignConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*RouteResult, error)
 	PongMessage(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	StartConversation(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*Conversation, error)
 	EndConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Conversation, error)
@@ -11419,6 +11421,16 @@ func (c *conversationMgrClient) AssignRule(ctx context.Context, in *AssignReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RouteResult)
 	err := c.cc.Invoke(ctx, ConversationMgr_AssignRule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) ReassignConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*RouteResult, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RouteResult)
+	err := c.cc.Invoke(ctx, ConversationMgr_ReassignConversation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12130,6 +12142,7 @@ func (c *conversationMgrClient) ReportMessages(ctx context.Context, in *ReportCo
 // for forward compatibility.
 type ConversationMgrServer interface {
 	AssignRule(context.Context, *AssignRequest) (*RouteResult, error)
+	ReassignConversation(context.Context, *Id) (*RouteResult, error)
 	PongMessage(context.Context, *Event) (*Event, error)
 	StartConversation(context.Context, *StartRequest) (*Conversation, error)
 	EndConversation(context.Context, *Id) (*Conversation, error)
@@ -12217,6 +12230,9 @@ type UnimplementedConversationMgrServer struct{}
 
 func (UnimplementedConversationMgrServer) AssignRule(context.Context, *AssignRequest) (*RouteResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignRule not implemented")
+}
+func (UnimplementedConversationMgrServer) ReassignConversation(context.Context, *Id) (*RouteResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReassignConversation not implemented")
 }
 func (UnimplementedConversationMgrServer) PongMessage(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PongMessage not implemented")
@@ -12463,6 +12479,24 @@ func _ConversationMgr_AssignRule_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).AssignRule(ctx, req.(*AssignRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_ReassignConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).ReassignConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_ReassignConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).ReassignConversation(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -13737,6 +13771,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AssignRule",
 			Handler:    _ConversationMgr_AssignRule_Handler,
+		},
+		{
+			MethodName: "ReassignConversation",
+			Handler:    _ConversationMgr_ReassignConversation_Handler,
 		},
 		{
 			MethodName: "PongMessage",

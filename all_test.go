@@ -58,7 +58,7 @@ func TestNormEmail1(t *testing.T) {
 	}
 
 	for i, tc := range testcases {
-		actual := strings.Join(NormEmail(tc.in), ",")
+		actual := strings.Join(ExtractEmails(tc.in), ",")
 		if tc.out != actual {
 			t.Errorf("WRONG AT TEST #%d, expect %s, got %s", i+1, tc.out, actual)
 		}
@@ -194,7 +194,7 @@ func TestAssignByte(t *testing.T) {
 }
 
 func TestPartition(t *testing.T) {
-	fmt.Println("PAR", Fnv32("ussiwvwmomyfuxmukwhpw")%50)
+	fmt.Println("PAR", Fnv32("ussensgzjfmfzyosincii")%50)
 	shardNumber := int(crc32.ChecksumIEEE([]byte("acriviayfmabzskstrpq"))) % 4
 	fmt.Println(shardNumber)
 }

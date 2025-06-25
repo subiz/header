@@ -4980,13 +4980,13 @@ message Product {
 
 	repeated File attachments = 80;
 
-	string category_id = 81;
+	// string category_id = 81;
 
 	ProductValidity validity = 82;
 
 	// repeated File files = 83;
 	// repeated ProductNote notes = 84;
-	repeated string urls = 91;
+	// repeated string urls = 91;
 
 	int64 purchase_deadline = 85; // no available for sale after this ms
 
@@ -4997,6 +4997,8 @@ message Product {
 	string last_availability_error = 90;	// 500
 
 	repeated ProductOffer offers = 92;
+
+	Error error = 100;
 }
 
 message ProductStock {
@@ -5123,7 +5125,7 @@ message KV {
 
 message ProductAttribute {
 	string key = 2; // attribute id from category.json
-	string value = 3;
+	string value = 3; // jsonified
 
 	// string attribute_id = 5; // definition id
 
@@ -9032,10 +9034,12 @@ message CrawlResponse {
 	bytes body = 5;
 	int64 created = 6;
 	repeated string links = 7;
-	string md5_hash = 8;
+	string md5sum = 8;
 	string content_type = 9;
 	string title = 10;
 	int64 num_characters = 11;
+
+	Product product = 12;
 }
 
 message AIDataChunk {
@@ -9063,8 +9067,10 @@ message AIDataEntry {
 	bool expand_link_disabled = 9;
 	File file = 10;
 	Product product = 18;
+
+	string product_category_id = 44;
 	repeated ProductAttribute product_attrs = 42; // llm-generated
-	map<string, AIDataEntry> product_url_status = 43;
+	// map<string, AIDataEntry> product_url_status = 43;
 
 	// url only
 	int64 num_sub_links = 11;
