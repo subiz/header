@@ -1914,7 +1914,7 @@ func blockToPlainText(block *Block) string {
 }
 
 func BlockToHTML(block *Block) string {
-	return eleToHTML(blockToEle(block))
+	return eleToHTML(blockToEle(nil, block))
 }
 
 func eleToHTML(root *sanitiziedHTMLElement) string {
@@ -1975,7 +1975,7 @@ type sanitiziedHTMLElement struct {
 	Class    string
 }
 
-func blockToEle(block *Block) *sanitiziedHTMLElement {
+func blockToEle(parent, block *Block) *sanitiziedHTMLElement {
 	if block == nil {
 		return nil
 	}
@@ -2044,6 +2044,10 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 		if block.GetImage().GetHeight() > 0 {
 			ele.Attrs["height"] = strconv.Itoa(int(block.GetImage().GetHeight()))
 		}
+
+		if block.GetAltText() != "" {
+			ele.Attrs["alt"] = strings.TrimSpace(block.GetAltText())
+		}
 	}
 
 	ele.Text = html.EscapeString(block.Text)
@@ -2100,11 +2104,23 @@ func blockToEle(block *Block) *sanitiziedHTMLElement {
 	}
 
 	if block.Type == "table" {
+		ele.Tag = "table"
+	}
+
+	if block.Type == "table_row" {
+		ele.Tag = "tr"
+	}
+
+	if block.Type == "table_cell" {
+		ele.Tag = "td"
+		if parent.GetLevel() >= 1 {
+			ele.Tag = "th"
+		}
 	}
 
 	var contents []*sanitiziedHTMLElement
-	for _, block := range block.GetContent() {
-		contents = append(contents, blockToEle(block))
+	for _, child := range block.GetContent() {
+		contents = append(contents, blockToEle(block, child))
 	}
 	ele.Content = contents
 	return ele

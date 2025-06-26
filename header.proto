@@ -8898,15 +8898,15 @@ message InitFlow {
 }
 
 message AIDataStore {
-	string agent_id = 3;
+	// string agent_id = 3;
 	repeated string data_entries = 5; // group id and entry id, could have product id (product id must start with pd.)
 
 	// string trained_md5 = 6; // subiz generated
 	string md5 = 7; // subiz generated
-	int64 training_started = 8;
+	// int64 training_started = 8;
 	int64 training_ended = 9;
 	int64 total_characters = 10;
-	string status = 12; // training  || ready
+	string status = 12; // training || ready
 	int64 pending_entries = 20;
 }
 

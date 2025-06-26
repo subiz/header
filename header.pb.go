@@ -62793,15 +62793,15 @@ func (x *InitFlow) GetStopWhenFlowEnded() int64 {
 }
 
 type AIDataStore struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	AgentId     string                 `protobuf:"bytes,3,opt,name=agent_id,json=agentId,proto3" json:"agent_id,omitempty"`
-	DataEntries []string               `protobuf:"bytes,5,rep,name=data_entries,json=dataEntries,proto3" json:"data_entries,omitempty"` // group id and entry id, could have product id (product id must start with pd.)
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// string agent_id = 3;
+	DataEntries []string `protobuf:"bytes,5,rep,name=data_entries,json=dataEntries,proto3" json:"data_entries,omitempty"` // group id and entry id, could have product id (product id must start with pd.)
 	// string trained_md5 = 6; // subiz generated
-	Md5             string `protobuf:"bytes,7,opt,name=md5,proto3" json:"md5,omitempty"` // subiz generated
-	TrainingStarted int64  `protobuf:"varint,8,opt,name=training_started,json=trainingStarted,proto3" json:"training_started,omitempty"`
+	Md5 string `protobuf:"bytes,7,opt,name=md5,proto3" json:"md5,omitempty"` // subiz generated
+	// int64 training_started = 8;
 	TrainingEnded   int64  `protobuf:"varint,9,opt,name=training_ended,json=trainingEnded,proto3" json:"training_ended,omitempty"`
 	TotalCharacters int64  `protobuf:"varint,10,opt,name=total_characters,json=totalCharacters,proto3" json:"total_characters,omitempty"`
-	Status          string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // training  || ready
+	Status          string `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"` // training || ready
 	PendingEntries  int64  `protobuf:"varint,20,opt,name=pending_entries,json=pendingEntries,proto3" json:"pending_entries,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -62837,13 +62837,6 @@ func (*AIDataStore) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{508}
 }
 
-func (x *AIDataStore) GetAgentId() string {
-	if x != nil {
-		return x.AgentId
-	}
-	return ""
-}
-
 func (x *AIDataStore) GetDataEntries() []string {
 	if x != nil {
 		return x.DataEntries
@@ -62856,13 +62849,6 @@ func (x *AIDataStore) GetMd5() string {
 		return x.Md5
 	}
 	return ""
-}
-
-func (x *AIDataStore) GetTrainingStarted() int64 {
-	if x != nil {
-		return x.TrainingStarted
-	}
-	return 0
 }
 
 func (x *AIDataStore) GetTrainingEnded() int64 {
@@ -75555,12 +75541,10 @@ const file_header_proto_rawDesc = "" +
 	"\x06locale\x18\x1c \x01(\tR\x06locale\x12\x18\n" +
 	"\alocales\x18\x1d \x03(\tR\alocales\x12 \n" +
 	"\x04rule\x18\x1e \x01(\v2\f.header.RuleR\x04rule\x12/\n" +
-	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\x9b\x02\n" +
-	"\vAIDataStore\x12\x19\n" +
-	"\bagent_id\x18\x03 \x01(\tR\aagentId\x12!\n" +
+	"\x14stop_when_flow_ended\x18\x1f \x01(\x03R\x11stopWhenFlowEnded\"\xd5\x01\n" +
+	"\vAIDataStore\x12!\n" +
 	"\fdata_entries\x18\x05 \x03(\tR\vdataEntries\x12\x10\n" +
-	"\x03md5\x18\a \x01(\tR\x03md5\x12)\n" +
-	"\x10training_started\x18\b \x01(\x03R\x0ftrainingStarted\x12%\n" +
+	"\x03md5\x18\a \x01(\tR\x03md5\x12%\n" +
 	"\x0etraining_ended\x18\t \x01(\x03R\rtrainingEnded\x12)\n" +
 	"\x10total_characters\x18\n" +
 	" \x01(\x03R\x0ftotalCharacters\x12\x16\n" +
