@@ -28310,23 +28310,27 @@ func (x *InvoiceTemplate) GetI18NSignature() *I18NString {
 }
 
 type ShopSetting struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Ctx               *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId         string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	OtherCurrencies   []*Currency            `protobuf:"bytes,6,rep,name=other_currencies,json=otherCurrencies,proto3" json:"other_currencies,omitempty"`
-	Updated           int64                  `protobuf:"varint,8,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy         string                 `protobuf:"bytes,9,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Addresses         []*Address             `protobuf:"bytes,18,rep,name=addresses,proto3" json:"addresses,omitempty"`
-	Taxes             []*Tax                 `protobuf:"bytes,11,rep,name=taxes,proto3" json:"taxes,omitempty"`
-	PaymentMethods    []*PaymentMethod       `protobuf:"bytes,12,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
-	InvoiceTemplate   *InvoiceTemplate       `protobuf:"bytes,13,opt,name=invoice_template,json=invoiceTemplate,proto3" json:"invoice_template,omitempty"`
-	DueDateTerm       string                 `protobuf:"bytes,14,opt,name=due_date_term,json=dueDateTerm,proto3" json:"due_date_term,omitempty"`
-	ShopeeShops       []*ShopeeShop          `protobuf:"bytes,15,rep,name=shopee_shops,json=shopeeShops,proto3" json:"shopee_shops,omitempty"` // read only
-	Shippings         []*IntegratedShipping  `protobuf:"bytes,16,rep,name=shippings,proto3" json:"shippings,omitempty"`
-	ShippingPolicies  []*ShippingPolicy      `protobuf:"bytes,17,rep,name=shipping_policies,json=shippingPolicies,proto3" json:"shipping_policies,omitempty"`
-	CancellationCodes []*CancellationCode    `protobuf:"bytes,19,rep,name=cancellation_codes,json=cancellationCodes,proto3" json:"cancellation_codes,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                      *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId                string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	OtherCurrencies          []*Currency            `protobuf:"bytes,6,rep,name=other_currencies,json=otherCurrencies,proto3" json:"other_currencies,omitempty"`
+	Updated                  int64                  `protobuf:"varint,8,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy                string                 `protobuf:"bytes,9,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Addresses                []*Address             `protobuf:"bytes,18,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	Taxes                    []*Tax                 `protobuf:"bytes,11,rep,name=taxes,proto3" json:"taxes,omitempty"`
+	PaymentMethods           []*PaymentMethod       `protobuf:"bytes,12,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
+	InvoiceTemplate          *InvoiceTemplate       `protobuf:"bytes,13,opt,name=invoice_template,json=invoiceTemplate,proto3" json:"invoice_template,omitempty"`
+	DueDateTerm              string                 `protobuf:"bytes,14,opt,name=due_date_term,json=dueDateTerm,proto3" json:"due_date_term,omitempty"`
+	ShopeeShops              []*ShopeeShop          `protobuf:"bytes,15,rep,name=shopee_shops,json=shopeeShops,proto3" json:"shopee_shops,omitempty"` // read only
+	Shippings                []*IntegratedShipping  `protobuf:"bytes,16,rep,name=shippings,proto3" json:"shippings,omitempty"`
+	ShippingPolicies         []*ShippingPolicy      `protobuf:"bytes,17,rep,name=shipping_policies,json=shippingPolicies,proto3" json:"shipping_policies,omitempty"`
+	CancellationCodes        []*CancellationCode    `protobuf:"bytes,19,rep,name=cancellation_codes,json=cancellationCodes,proto3" json:"cancellation_codes,omitempty"`
+	ShopAddressFetchUrl      string                 `protobuf:"bytes,20,opt,name=shop_address_fetch_url,json=shopAddressFetchUrl,proto3" json:"shop_address_fetch_url,omitempty"`
+	ShopAddressFetchSelector string                 `protobuf:"bytes,21,opt,name=shop_address_fetch_selector,json=shopAddressFetchSelector,proto3" json:"shop_address_fetch_selector,omitempty"`
+	ShopAddressFetchAt       int64                  `protobuf:"varint,22,opt,name=shop_address_fetch_at,json=shopAddressFetchAt,proto3" json:"shop_address_fetch_at,omitempty"`
+	ShopAddressFetchStatus   int64                  `protobuf:"varint,23,opt,name=shop_address_fetch_status,json=shopAddressFetchStatus,proto3" json:"shop_address_fetch_status,omitempty"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ShopSetting) Reset() {
@@ -28455,6 +28459,34 @@ func (x *ShopSetting) GetCancellationCodes() []*CancellationCode {
 		return x.CancellationCodes
 	}
 	return nil
+}
+
+func (x *ShopSetting) GetShopAddressFetchUrl() string {
+	if x != nil {
+		return x.ShopAddressFetchUrl
+	}
+	return ""
+}
+
+func (x *ShopSetting) GetShopAddressFetchSelector() string {
+	if x != nil {
+		return x.ShopAddressFetchSelector
+	}
+	return ""
+}
+
+func (x *ShopSetting) GetShopAddressFetchAt() int64 {
+	if x != nil {
+		return x.ShopAddressFetchAt
+	}
+	return 0
+}
+
+func (x *ShopSetting) GetShopAddressFetchStatus() int64 {
+	if x != nil {
+		return x.ShopAddressFetchStatus
+	}
+	return 0
 }
 
 type Addresses struct {
@@ -50149,6 +50181,7 @@ func (x *CreditEntryData) GetTextEmbedding() *CreditEntryDataTextEmbedding {
 
 type CreditEntryDataLLMCompletion struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
+	TraceId          string                 `protobuf:"bytes,3,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
 	Purpose          string                 `protobuf:"bytes,4,opt,name=purpose,proto3" json:"purpose,omitempty"`                                     // chat, chunking
 	Model            string                 `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"`                                         // gpt-4o-mini-2024-07-18, gemini-2.0-flash
 	ConversationId   string                 `protobuf:"bytes,8,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"` // optional
@@ -50191,6 +50224,13 @@ func (x *CreditEntryDataLLMCompletion) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreditEntryDataLLMCompletion.ProtoReflect.Descriptor instead.
 func (*CreditEntryDataLLMCompletion) Descriptor() ([]byte, []int) {
 	return file_header_proto_rawDescGZIP(), []int{407}
+}
+
+func (x *CreditEntryDataLLMCompletion) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
 }
 
 func (x *CreditEntryDataLLMCompletion) GetPurpose() string {
@@ -71349,7 +71389,7 @@ const file_header_proto_rawDesc = "" +
 	"\atagline\x18\x11 \x01(\tR\atagline\x125\n" +
 	"\fi18n_tagline\x18\x12 \x01(\v2\x12.header.I18nStringR\vi18nTagline\x12\x1c\n" +
 	"\tsignature\x18\x13 \x01(\tR\tsignature\x129\n" +
-	"\x0ei18n_signature\x18\x14 \x01(\v2\x12.header.I18nStringR\ri18nSignature\"\xbe\x05\n" +
+	"\x0ei18n_signature\x18\x14 \x01(\v2\x12.header.I18nStringR\ri18nSignature\"\xa0\a\n" +
 	"\vShopSetting\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71366,7 +71406,11 @@ const file_header_proto_rawDesc = "" +
 	"\fshopee_shops\x18\x0f \x03(\v2\x12.header.ShopeeShopR\vshopeeShops\x128\n" +
 	"\tshippings\x18\x10 \x03(\v2\x1a.header.IntegratedShippingR\tshippings\x12C\n" +
 	"\x11shipping_policies\x18\x11 \x03(\v2\x16.header.ShippingPolicyR\x10shippingPolicies\x12G\n" +
-	"\x12cancellation_codes\x18\x13 \x03(\v2\x18.header.CancellationCodeR\x11cancellationCodes\"|\n" +
+	"\x12cancellation_codes\x18\x13 \x03(\v2\x18.header.CancellationCodeR\x11cancellationCodes\x123\n" +
+	"\x16shop_address_fetch_url\x18\x14 \x01(\tR\x13shopAddressFetchUrl\x12=\n" +
+	"\x1bshop_address_fetch_selector\x18\x15 \x01(\tR\x18shopAddressFetchSelector\x121\n" +
+	"\x15shop_address_fetch_at\x18\x16 \x01(\x03R\x12shopAddressFetchAt\x129\n" +
+	"\x19shop_address_fetch_status\x18\x17 \x01(\x03R\x16shopAddressFetchStatus\"|\n" +
 	"\tAddresses\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -73956,8 +74000,9 @@ const file_header_proto_rawDesc = "" +
 	"\x04file\x18\x06 \x01(\v2\x19.header.CreditEntryDataIdR\x04file\x12R\n" +
 	"\x11zalo_request_call\x18\a \x01(\v2&.header.CreditEntryDataZaloRequestCallR\x0fzaloRequestCall\x12K\n" +
 	"\x0ellm_completion\x18\b \x01(\v2$.header.CreditEntryDataLLMCompletionR\rllmCompletion\x12K\n" +
-	"\x0etext_embedding\x18\t \x01(\v2$.header.CreditEntryDataTextEmbeddingR\rtextEmbedding\"\xe6\x02\n" +
-	"\x1cCreditEntryDataLLMCompletion\x12\x18\n" +
+	"\x0etext_embedding\x18\t \x01(\v2$.header.CreditEntryDataTextEmbeddingR\rtextEmbedding\"\x81\x03\n" +
+	"\x1cCreditEntryDataLLMCompletion\x12\x19\n" +
+	"\btrace_id\x18\x03 \x01(\tR\atraceId\x12\x18\n" +
 	"\apurpose\x18\x04 \x01(\tR\apurpose\x12\x14\n" +
 	"\x05model\x18\x06 \x01(\tR\x05model\x12'\n" +
 	"\x0fconversation_id\x18\b \x01(\tR\x0econversationId\x12\x16\n" +

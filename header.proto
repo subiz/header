@@ -3971,6 +3971,11 @@ message ShopSetting {
 	repeated ShippingPolicy shipping_policies = 17;
 
 	repeated CancellationCode cancellation_codes = 19;
+
+	string shop_address_fetch_url = 20;
+	string shop_address_fetch_selector = 21;
+	int64 shop_address_fetch_at = 22;
+	int64 shop_address_fetch_status = 23;
 }
 
 message Addresses {
@@ -7125,6 +7130,7 @@ message CreditEntryData {
 }
 
 message CreditEntryDataLLMCompletion {
+	string trace_id = 3;
 	string purpose = 4; // chat, chunking
 	string model = 6; // gpt-4o-mini-2024-07-18, gemini-2.0-flash
 	string conversation_id = 8; // optional
