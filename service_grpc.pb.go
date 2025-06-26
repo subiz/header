@@ -1986,6 +1986,7 @@ const (
 	AccountMgr_UpdateLanguage_FullMethodName                  = "/header.AccountMgr/UpdateLanguage"
 	AccountMgr_GetShopSetting_FullMethodName                  = "/header.AccountMgr/GetShopSetting"
 	AccountMgr_UpdateShopSetting_FullMethodName               = "/header.AccountMgr/UpdateShopSetting"
+	AccountMgr_RefetchShopAddress_FullMethodName              = "/header.AccountMgr/RefetchShopAddress"
 	AccountMgr_ReadCurrency_FullMethodName                    = "/header.AccountMgr/ReadCurrency"
 	AccountMgr_AutoSyncCurrency_FullMethodName                = "/header.AccountMgr/AutoSyncCurrency"
 	AccountMgr_ListShopAddresses_FullMethodName               = "/header.AccountMgr/ListShopAddresses"
@@ -2102,6 +2103,7 @@ type AccountMgrClient interface {
 	UpdateLanguage(ctx context.Context, in *LangMessage, opts ...grpc.CallOption) (*LangMessage, error)
 	GetShopSetting(ctx context.Context, in *Id, opts ...grpc.CallOption) (*ShopSetting, error)
 	UpdateShopSetting(ctx context.Context, in *ShopSetting, opts ...grpc.CallOption) (*ShopSetting, error)
+	RefetchShopAddress(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ReadCurrency(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Currency, error)
 	// internal
 	AutoSyncCurrency(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Empty, error)
@@ -2632,6 +2634,16 @@ func (c *accountMgrClient) UpdateShopSetting(ctx context.Context, in *ShopSettin
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ShopSetting)
 	err := c.cc.Invoke(ctx, AccountMgr_UpdateShopSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountMgrClient) RefetchShopAddress(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, AccountMgr_RefetchShopAddress_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3328,6 +3340,7 @@ type AccountMgrServer interface {
 	UpdateLanguage(context.Context, *LangMessage) (*LangMessage, error)
 	GetShopSetting(context.Context, *Id) (*ShopSetting, error)
 	UpdateShopSetting(context.Context, *ShopSetting) (*ShopSetting, error)
+	RefetchShopAddress(context.Context, *Id) (*Response, error)
 	ReadCurrency(context.Context, *Id) (*Currency, error)
 	// internal
 	AutoSyncCurrency(context.Context, *Id) (*Empty, error)
@@ -3541,6 +3554,9 @@ func (UnimplementedAccountMgrServer) GetShopSetting(context.Context, *Id) (*Shop
 }
 func (UnimplementedAccountMgrServer) UpdateShopSetting(context.Context, *ShopSetting) (*ShopSetting, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateShopSetting not implemented")
+}
+func (UnimplementedAccountMgrServer) RefetchShopAddress(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RefetchShopAddress not implemented")
 }
 func (UnimplementedAccountMgrServer) ReadCurrency(context.Context, *Id) (*Currency, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadCurrency not implemented")
@@ -4579,6 +4595,24 @@ func _AccountMgr_UpdateShopSetting_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AccountMgrServer).UpdateShopSetting(ctx, req.(*ShopSetting))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountMgr_RefetchShopAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountMgrServer).RefetchShopAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountMgr_RefetchShopAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountMgrServer).RefetchShopAddress(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5925,6 +5959,10 @@ var AccountMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateShopSetting",
 			Handler:    _AccountMgr_UpdateShopSetting_Handler,
+		},
+		{
+			MethodName: "RefetchShopAddress",
+			Handler:    _AccountMgr_RefetchShopAddress_Handler,
 		},
 		{
 			MethodName: "ReadCurrency",

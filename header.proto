@@ -3976,6 +3976,7 @@ message ShopSetting {
 	string shop_address_fetch_selector = 21;
 	int64 shop_address_fetch_at = 22;
 	int64 shop_address_fetch_status = 23;
+	string shop_address_fetch_msg = 24;
 }
 
 message Addresses {
@@ -6898,6 +6899,8 @@ message Response {
 
 	ProductOffer product_offer = 210;
 	repeated ProductOffer product_offers = 211;
+
+	repeated Address addresses = 222;
 }
 
 message ReportCount {
