@@ -64041,6 +64041,7 @@ type AIDataEntry struct {
 	Title                     string `protobuf:"bytes,38,opt,name=title,proto3" json:"title,omitempty"`                                                     // title for url, file name for file
 	NumCharacters             int64  `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
 	NumChunks                 int64  `protobuf:"varint,37,opt,name=num_chunks,json=numChunks,proto3" json:"num_chunks,omitempty"`
+	FpvChunkingCost           int64  `protobuf:"varint,45,opt,name=fpv_chunking_cost,json=fpvChunkingCost,proto3" json:"fpv_chunking_cost,omitempty"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -64330,6 +64331,13 @@ func (x *AIDataEntry) GetNumCharacters() int64 {
 func (x *AIDataEntry) GetNumChunks() int64 {
 	if x != nil {
 		return x.NumChunks
+	}
+	return 0
+}
+
+func (x *AIDataEntry) GetFpvChunkingCost() int64 {
+	if x != nil {
+		return x.FpvChunkingCost
 	}
 	return 0
 }
@@ -75736,7 +75744,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
-	" \x01(\tR\x05model\"\xba\n" +
+	" \x01(\tR\x05model\"\xe6\n" +
 	"\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
@@ -75783,7 +75791,8 @@ const file_header_proto_rawDesc = "" +
 	"\x05title\x18& \x01(\tR\x05title\x12%\n" +
 	"\x0enum_characters\x18$ \x01(\x03R\rnumCharacters\x12\x1d\n" +
 	"\n" +
-	"num_chunks\x18% \x01(\x03R\tnumChunks\"\x8d\x02\n" +
+	"num_chunks\x18% \x01(\x03R\tnumChunks\x12*\n" +
+	"\x11fpv_chunking_cost\x18- \x01(\x03R\x0ffpvChunkingCost\"\x8d\x02\n" +
 	"\x10AiResponseSource\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x17\n" +
 	"\acall_id\x18\x04 \x01(\tR\x06callId\x12\"\n" +

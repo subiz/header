@@ -9115,6 +9115,8 @@ message AIDataEntry {
 
 	int64 num_characters = 36;
 	int64 num_chunks = 37;
+
+	int64 fpv_chunking_cost = 45;
 }
 
 message AiResponseSource {
