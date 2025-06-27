@@ -28310,28 +28310,29 @@ func (x *InvoiceTemplate) GetI18NSignature() *I18NString {
 }
 
 type ShopSetting struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	Ctx                      *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId                string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	OtherCurrencies          []*Currency            `protobuf:"bytes,6,rep,name=other_currencies,json=otherCurrencies,proto3" json:"other_currencies,omitempty"`
-	Updated                  int64                  `protobuf:"varint,8,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy                string                 `protobuf:"bytes,9,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Addresses                []*Address             `protobuf:"bytes,18,rep,name=addresses,proto3" json:"addresses,omitempty"`
-	Taxes                    []*Tax                 `protobuf:"bytes,11,rep,name=taxes,proto3" json:"taxes,omitempty"`
-	PaymentMethods           []*PaymentMethod       `protobuf:"bytes,12,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
-	InvoiceTemplate          *InvoiceTemplate       `protobuf:"bytes,13,opt,name=invoice_template,json=invoiceTemplate,proto3" json:"invoice_template,omitempty"`
-	DueDateTerm              string                 `protobuf:"bytes,14,opt,name=due_date_term,json=dueDateTerm,proto3" json:"due_date_term,omitempty"`
-	ShopeeShops              []*ShopeeShop          `protobuf:"bytes,15,rep,name=shopee_shops,json=shopeeShops,proto3" json:"shopee_shops,omitempty"` // read only
-	Shippings                []*IntegratedShipping  `protobuf:"bytes,16,rep,name=shippings,proto3" json:"shippings,omitempty"`
-	ShippingPolicies         []*ShippingPolicy      `protobuf:"bytes,17,rep,name=shipping_policies,json=shippingPolicies,proto3" json:"shipping_policies,omitempty"`
-	CancellationCodes        []*CancellationCode    `protobuf:"bytes,19,rep,name=cancellation_codes,json=cancellationCodes,proto3" json:"cancellation_codes,omitempty"`
-	ShopAddressFetchUrl      string                 `protobuf:"bytes,20,opt,name=shop_address_fetch_url,json=shopAddressFetchUrl,proto3" json:"shop_address_fetch_url,omitempty"`
-	ShopAddressFetchSelector string                 `protobuf:"bytes,21,opt,name=shop_address_fetch_selector,json=shopAddressFetchSelector,proto3" json:"shop_address_fetch_selector,omitempty"`
-	ShopAddressFetchAt       int64                  `protobuf:"varint,22,opt,name=shop_address_fetch_at,json=shopAddressFetchAt,proto3" json:"shop_address_fetch_at,omitempty"`
-	ShopAddressFetchStatus   int64                  `protobuf:"varint,23,opt,name=shop_address_fetch_status,json=shopAddressFetchStatus,proto3" json:"shop_address_fetch_status,omitempty"`
-	ShopAddressFetchMsg      string                 `protobuf:"bytes,24,opt,name=shop_address_fetch_msg,json=shopAddressFetchMsg,proto3" json:"shop_address_fetch_msg,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                          *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId                    string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	OtherCurrencies              []*Currency            `protobuf:"bytes,6,rep,name=other_currencies,json=otherCurrencies,proto3" json:"other_currencies,omitempty"`
+	Updated                      int64                  `protobuf:"varint,8,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy                    string                 `protobuf:"bytes,9,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Addresses                    []*Address             `protobuf:"bytes,18,rep,name=addresses,proto3" json:"addresses,omitempty"`
+	Taxes                        []*Tax                 `protobuf:"bytes,11,rep,name=taxes,proto3" json:"taxes,omitempty"`
+	PaymentMethods               []*PaymentMethod       `protobuf:"bytes,12,rep,name=payment_methods,json=paymentMethods,proto3" json:"payment_methods,omitempty"`
+	InvoiceTemplate              *InvoiceTemplate       `protobuf:"bytes,13,opt,name=invoice_template,json=invoiceTemplate,proto3" json:"invoice_template,omitempty"`
+	DueDateTerm                  string                 `protobuf:"bytes,14,opt,name=due_date_term,json=dueDateTerm,proto3" json:"due_date_term,omitempty"`
+	ShopeeShops                  []*ShopeeShop          `protobuf:"bytes,15,rep,name=shopee_shops,json=shopeeShops,proto3" json:"shopee_shops,omitempty"` // read only
+	Shippings                    []*IntegratedShipping  `protobuf:"bytes,16,rep,name=shippings,proto3" json:"shippings,omitempty"`
+	ShippingPolicies             []*ShippingPolicy      `protobuf:"bytes,17,rep,name=shipping_policies,json=shippingPolicies,proto3" json:"shipping_policies,omitempty"`
+	CancellationCodes            []*CancellationCode    `protobuf:"bytes,19,rep,name=cancellation_codes,json=cancellationCodes,proto3" json:"cancellation_codes,omitempty"`
+	ShopAddressFetchUrl          string                 `protobuf:"bytes,20,opt,name=shop_address_fetch_url,json=shopAddressFetchUrl,proto3" json:"shop_address_fetch_url,omitempty"`
+	ShopAddressFetchSelector     string                 `protobuf:"bytes,21,opt,name=shop_address_fetch_selector,json=shopAddressFetchSelector,proto3" json:"shop_address_fetch_selector,omitempty"`
+	ShopAddressFetchAt           int64                  `protobuf:"varint,22,opt,name=shop_address_fetch_at,json=shopAddressFetchAt,proto3" json:"shop_address_fetch_at,omitempty"`
+	ShopAddressFetchStatus       int64                  `protobuf:"varint,23,opt,name=shop_address_fetch_status,json=shopAddressFetchStatus,proto3" json:"shop_address_fetch_status,omitempty"`
+	ShopAddressFetchMsg          string                 `protobuf:"bytes,24,opt,name=shop_address_fetch_msg,json=shopAddressFetchMsg,proto3" json:"shop_address_fetch_msg,omitempty"`
+	ShopAddressAutoFetchDisabled int64                  `protobuf:"varint,25,opt,name=shop_address_auto_fetch_disabled,json=shopAddressAutoFetchDisabled,proto3" json:"shop_address_auto_fetch_disabled,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ShopSetting) Reset() {
@@ -28495,6 +28496,13 @@ func (x *ShopSetting) GetShopAddressFetchMsg() string {
 		return x.ShopAddressFetchMsg
 	}
 	return ""
+}
+
+func (x *ShopSetting) GetShopAddressAutoFetchDisabled() int64 {
+	if x != nil {
+		return x.ShopAddressAutoFetchDisabled
+	}
+	return 0
 }
 
 type Addresses struct {
@@ -71405,7 +71413,7 @@ const file_header_proto_rawDesc = "" +
 	"\atagline\x18\x11 \x01(\tR\atagline\x125\n" +
 	"\fi18n_tagline\x18\x12 \x01(\v2\x12.header.I18nStringR\vi18nTagline\x12\x1c\n" +
 	"\tsignature\x18\x13 \x01(\tR\tsignature\x129\n" +
-	"\x0ei18n_signature\x18\x14 \x01(\v2\x12.header.I18nStringR\ri18nSignature\"\xd5\a\n" +
+	"\x0ei18n_signature\x18\x14 \x01(\v2\x12.header.I18nStringR\ri18nSignature\"\x9d\b\n" +
 	"\vShopSetting\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71427,7 +71435,8 @@ const file_header_proto_rawDesc = "" +
 	"\x1bshop_address_fetch_selector\x18\x15 \x01(\tR\x18shopAddressFetchSelector\x121\n" +
 	"\x15shop_address_fetch_at\x18\x16 \x01(\x03R\x12shopAddressFetchAt\x129\n" +
 	"\x19shop_address_fetch_status\x18\x17 \x01(\x03R\x16shopAddressFetchStatus\x123\n" +
-	"\x16shop_address_fetch_msg\x18\x18 \x01(\tR\x13shopAddressFetchMsg\"|\n" +
+	"\x16shop_address_fetch_msg\x18\x18 \x01(\tR\x13shopAddressFetchMsg\x12F\n" +
+	" shop_address_auto_fetch_disabled\x18\x19 \x01(\x03R\x1cshopAddressAutoFetchDisabled\"|\n" +
 	"\tAddresses\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
