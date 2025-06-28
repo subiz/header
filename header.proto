@@ -3503,18 +3503,13 @@ message File {
 	string thumbnail_url = 19;
 	int64 thumbnail_width = 20;
 	int64 thumbnail_height = 21;
-	// int64 avatar_size = 24;
-	// int64 avatar_offset = 25;
-	// string avatar_url = 26;
 
 	int64 ttl = 22; // created + 3 months
 	int64 deleted = 23;
 
 	string category = 27; // call_recorded, product_image, ... for reporting
 
-	// metadata
-	// int64 uploaded = 28;
-	string gcs_url = 29;
+	string gcs_url = 29; // example: acrtvsvgrvecksycsble/802b2cd6014f0546c36e3fa198ef27dadbc8b174573a267eca6d352dd8982067
 
 	string status = 30; // uploading
 	string error_code = 31;
@@ -3527,6 +3522,7 @@ message File {
 	int64 num_characters = 36;
 
 	string visibility = 38; // public(default), private
+	int64 r2_uploaded = 39; // ms
 }
 
 message BotTerminated {
@@ -3640,15 +3636,6 @@ message GoogleReviewSetting {
 message GoogleQuestionSetting {
 	bool enabled = 1;
 }
-
-// message GoogleMessageSetting {
-//	bool enabled = 1;
-//	WelcomeMessage welcomeMessage = 2;
-//}
-
-//message WelcomeMessage {
-//	string text = 1;
-//}
 
 message FbComment {
 	string comment = 2; // read only
@@ -9095,7 +9082,7 @@ message AIDataEntry {
 	string referer_entry_id = 16;
 	int64 referer_entry_id_last_crawled = 33;
 
-	string status = 17; // (training status) pending, crawling, training, ready, unlinked, token-limit
+	string status = 17; // pending, crawling, training, ready, unlinked, token-limit
 	int64 created = 19;
 	string created_by = 20;
 
@@ -9104,7 +9091,7 @@ message AIDataEntry {
 	string md5 = 23;
 	string chunked_md5 = 24;
 
-	int64 deleted = 32;
+	// int64 deleted = 32;
 	int64 modified = 34;
 	int64 last_success_chunked = 35; // successfully saved to vector store
 	int64 last_failed_chunked = 39;

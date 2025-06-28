@@ -24851,20 +24851,19 @@ type File struct {
 	ThumbnailHeight int64  `protobuf:"varint,21,opt,name=thumbnail_height,json=thumbnailHeight,proto3" json:"thumbnail_height,omitempty"`
 	Ttl             int64  `protobuf:"varint,22,opt,name=ttl,proto3" json:"ttl,omitempty"` // created + 3 months
 	Deleted         int64  `protobuf:"varint,23,opt,name=deleted,proto3" json:"deleted,omitempty"`
-	Category        string `protobuf:"bytes,27,opt,name=category,proto3" json:"category,omitempty"` // call_recorded, product_image, ... for reporting
-	// metadata
-	// int64 uploaded = 28;
-	GcsUrl        string `protobuf:"bytes,29,opt,name=gcs_url,json=gcsUrl,proto3" json:"gcs_url,omitempty"`
-	Status        string `protobuf:"bytes,30,opt,name=status,proto3" json:"status,omitempty"` // uploading
-	ErrorCode     string `protobuf:"bytes,31,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"`
-	Image_1024    string `protobuf:"bytes,32,opt,name=image_1024,json=image1024,proto3" json:"image_1024,omitempty"`
-	Image_512     string `protobuf:"bytes,33,opt,name=image_512,json=image512,proto3" json:"image_512,omitempty"`
-	Image_128     string `protobuf:"bytes,34,opt,name=image_128,json=image128,proto3" json:"image_128,omitempty"`
-	TextUrl       string `protobuf:"bytes,35,opt,name=text_url,json=textUrl,proto3" json:"text_url,omitempty"`
-	NumCharacters int64  `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
-	Visibility    string `protobuf:"bytes,38,opt,name=visibility,proto3" json:"visibility,omitempty"` // public(default), private
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Category        string `protobuf:"bytes,27,opt,name=category,proto3" json:"category,omitempty"`           // call_recorded, product_image, ... for reporting
+	GcsUrl          string `protobuf:"bytes,29,opt,name=gcs_url,json=gcsUrl,proto3" json:"gcs_url,omitempty"` // example: acrtvsvgrvecksycsble/802b2cd6014f0546c36e3fa198ef27dadbc8b174573a267eca6d352dd8982067
+	Status          string `protobuf:"bytes,30,opt,name=status,proto3" json:"status,omitempty"`               // uploading
+	ErrorCode       string `protobuf:"bytes,31,opt,name=error_code,json=errorCode,proto3" json:"error_code,omitempty"`
+	Image_1024      string `protobuf:"bytes,32,opt,name=image_1024,json=image1024,proto3" json:"image_1024,omitempty"`
+	Image_512       string `protobuf:"bytes,33,opt,name=image_512,json=image512,proto3" json:"image_512,omitempty"`
+	Image_128       string `protobuf:"bytes,34,opt,name=image_128,json=image128,proto3" json:"image_128,omitempty"`
+	TextUrl         string `protobuf:"bytes,35,opt,name=text_url,json=textUrl,proto3" json:"text_url,omitempty"`
+	NumCharacters   int64  `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
+	Visibility      string `protobuf:"bytes,38,opt,name=visibility,proto3" json:"visibility,omitempty"`                    // public(default), private
+	R2Uploaded      int64  `protobuf:"varint,39,opt,name=r2_uploaded,json=r2Uploaded,proto3" json:"r2_uploaded,omitempty"` // ms
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *File) Reset() {
@@ -25119,6 +25118,13 @@ func (x *File) GetVisibility() string {
 		return x.Visibility
 	}
 	return ""
+}
+
+func (x *File) GetR2Uploaded() int64 {
+	if x != nil {
+		return x.R2Uploaded
+	}
+	return 0
 }
 
 type BotTerminated struct {
@@ -64018,33 +64024,33 @@ type AIDataEntry struct {
 	ProductAttrs      []*ProductAttribute `protobuf:"bytes,42,rep,name=product_attrs,json=productAttrs,proto3" json:"product_attrs,omitempty"`
 	DataStore         *AIDataStore        `protobuf:"bytes,43,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"` // read-only, for product only when search infomation about a specific product
 	// url only
-	NumSubLinks               int64    `protobuf:"varint,11,opt,name=num_sub_links,json=numSubLinks,proto3" json:"num_sub_links,omitempty"`
-	LastCrawled               int64    `protobuf:"varint,12,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
-	CrawlingStatus            string   `protobuf:"bytes,13,opt,name=crawling_status,json=crawlingStatus,proto3" json:"crawling_status,omitempty"` // crawling, done
-	CrawlStatusCode           int64    `protobuf:"varint,14,opt,name=crawl_status_code,json=crawlStatusCode,proto3" json:"crawl_status_code,omitempty"`
-	CrawlDepth                int64    `protobuf:"varint,15,opt,name=crawl_depth,json=crawlDepth,proto3" json:"crawl_depth,omitempty"` // 2 default
-	RefererEntryId            string   `protobuf:"bytes,16,opt,name=referer_entry_id,json=refererEntryId,proto3" json:"referer_entry_id,omitempty"`
-	RefererEntryIdLastCrawled int64    `protobuf:"varint,33,opt,name=referer_entry_id_last_crawled,json=refererEntryIdLastCrawled,proto3" json:"referer_entry_id_last_crawled,omitempty"`
-	Status                    string   `protobuf:"bytes,17,opt,name=status,proto3" json:"status,omitempty"` // (training status) pending, crawling, training, ready, unlinked, token-limit
-	Created                   int64    `protobuf:"varint,19,opt,name=created,proto3" json:"created,omitempty"`
-	CreatedBy                 string   `protobuf:"bytes,20,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	Updated                   int64    `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
-	UpdatedBy                 string   `protobuf:"bytes,22,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	Md5                       string   `protobuf:"bytes,23,opt,name=md5,proto3" json:"md5,omitempty"`
-	ChunkedMd5                string   `protobuf:"bytes,24,opt,name=chunked_md5,json=chunkedMd5,proto3" json:"chunked_md5,omitempty"`
-	Deleted                   int64    `protobuf:"varint,32,opt,name=deleted,proto3" json:"deleted,omitempty"`
-	Modified                  int64    `protobuf:"varint,34,opt,name=modified,proto3" json:"modified,omitempty"`
-	LastSuccessChunked        int64    `protobuf:"varint,35,opt,name=last_success_chunked,json=lastSuccessChunked,proto3" json:"last_success_chunked,omitempty"` // successfully saved to vector store
-	LastFailedChunked         int64    `protobuf:"varint,39,opt,name=last_failed_chunked,json=lastFailedChunked,proto3" json:"last_failed_chunked,omitempty"`
-	ChunkAttempted            int64    `protobuf:"varint,40,opt,name=chunk_attempted,json=chunkAttempted,proto3" json:"chunk_attempted,omitempty"`
-	LastChunkDuration         int64    `protobuf:"varint,41,opt,name=last_chunk_duration,json=lastChunkDuration,proto3" json:"last_chunk_duration,omitempty"` // ms
-	Title                     string   `protobuf:"bytes,38,opt,name=title,proto3" json:"title,omitempty"`                                                     // title for url, file name for file
-	NumCharacters             int64    `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
-	NumChunks                 int64    `protobuf:"varint,37,opt,name=num_chunks,json=numChunks,proto3" json:"num_chunks,omitempty"`
-	FpvChunkingCost           int64    `protobuf:"varint,45,opt,name=fpv_chunking_cost,json=fpvChunkingCost,proto3" json:"fpv_chunking_cost,omitempty"`
-	UsedBys                   []string `protobuf:"bytes,46,rep,name=used_bys,json=usedBys,proto3" json:"used_bys,omitempty"` // computed by referrer by any active (or latest) agent
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	NumSubLinks               int64  `protobuf:"varint,11,opt,name=num_sub_links,json=numSubLinks,proto3" json:"num_sub_links,omitempty"`
+	LastCrawled               int64  `protobuf:"varint,12,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
+	CrawlingStatus            string `protobuf:"bytes,13,opt,name=crawling_status,json=crawlingStatus,proto3" json:"crawling_status,omitempty"` // crawling, done
+	CrawlStatusCode           int64  `protobuf:"varint,14,opt,name=crawl_status_code,json=crawlStatusCode,proto3" json:"crawl_status_code,omitempty"`
+	CrawlDepth                int64  `protobuf:"varint,15,opt,name=crawl_depth,json=crawlDepth,proto3" json:"crawl_depth,omitempty"` // 2 default
+	RefererEntryId            string `protobuf:"bytes,16,opt,name=referer_entry_id,json=refererEntryId,proto3" json:"referer_entry_id,omitempty"`
+	RefererEntryIdLastCrawled int64  `protobuf:"varint,33,opt,name=referer_entry_id_last_crawled,json=refererEntryIdLastCrawled,proto3" json:"referer_entry_id_last_crawled,omitempty"`
+	Status                    string `protobuf:"bytes,17,opt,name=status,proto3" json:"status,omitempty"` // pending, crawling, training, ready, unlinked, token-limit
+	Created                   int64  `protobuf:"varint,19,opt,name=created,proto3" json:"created,omitempty"`
+	CreatedBy                 string `protobuf:"bytes,20,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	Updated                   int64  `protobuf:"varint,21,opt,name=updated,proto3" json:"updated,omitempty"`
+	UpdatedBy                 string `protobuf:"bytes,22,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	Md5                       string `protobuf:"bytes,23,opt,name=md5,proto3" json:"md5,omitempty"`
+	ChunkedMd5                string `protobuf:"bytes,24,opt,name=chunked_md5,json=chunkedMd5,proto3" json:"chunked_md5,omitempty"`
+	// int64 deleted = 32;
+	Modified           int64    `protobuf:"varint,34,opt,name=modified,proto3" json:"modified,omitempty"`
+	LastSuccessChunked int64    `protobuf:"varint,35,opt,name=last_success_chunked,json=lastSuccessChunked,proto3" json:"last_success_chunked,omitempty"` // successfully saved to vector store
+	LastFailedChunked  int64    `protobuf:"varint,39,opt,name=last_failed_chunked,json=lastFailedChunked,proto3" json:"last_failed_chunked,omitempty"`
+	ChunkAttempted     int64    `protobuf:"varint,40,opt,name=chunk_attempted,json=chunkAttempted,proto3" json:"chunk_attempted,omitempty"`
+	LastChunkDuration  int64    `protobuf:"varint,41,opt,name=last_chunk_duration,json=lastChunkDuration,proto3" json:"last_chunk_duration,omitempty"` // ms
+	Title              string   `protobuf:"bytes,38,opt,name=title,proto3" json:"title,omitempty"`                                                     // title for url, file name for file
+	NumCharacters      int64    `protobuf:"varint,36,opt,name=num_characters,json=numCharacters,proto3" json:"num_characters,omitempty"`
+	NumChunks          int64    `protobuf:"varint,37,opt,name=num_chunks,json=numChunks,proto3" json:"num_chunks,omitempty"`
+	FpvChunkingCost    int64    `protobuf:"varint,45,opt,name=fpv_chunking_cost,json=fpvChunkingCost,proto3" json:"fpv_chunking_cost,omitempty"`
+	UsedBys            []string `protobuf:"bytes,46,rep,name=used_bys,json=usedBys,proto3" json:"used_bys,omitempty"` // computed by referrer by any active (or latest) agent
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *AIDataEntry) Reset() {
@@ -64271,13 +64277,6 @@ func (x *AIDataEntry) GetChunkedMd5() string {
 		return x.ChunkedMd5
 	}
 	return ""
-}
-
-func (x *AIDataEntry) GetDeleted() int64 {
-	if x != nil {
-		return x.Deleted
-	}
-	return 0
 }
 
 func (x *AIDataEntry) GetModified() int64 {
@@ -71063,7 +71062,7 @@ const file_header_proto_rawDesc = "" +
 	"\x03url\x18\x04 \x01(\tR\x03url\x12\x0e\n" +
 	"\x02id\x18\x06 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
-	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xa2\a\n" +
+	"signed_url\x18\x05 \x01(\tR\tsignedUrl\"\xc3\a\n" +
 	"\x04File\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -71102,7 +71101,9 @@ const file_header_proto_rawDesc = "" +
 	"\x0enum_characters\x18$ \x01(\x03R\rnumCharacters\x12\x1e\n" +
 	"\n" +
 	"visibility\x18& \x01(\tR\n" +
-	"visibility\"\xdf\x02\n" +
+	"visibility\x12\x1f\n" +
+	"\vr2_uploaded\x18' \x01(\x03R\n" +
+	"r2Uploaded\"\xdf\x02\n" +
 	"\rBotTerminated\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75752,7 +75753,8 @@ const file_header_proto_rawDesc = "" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
-	" \x01(\tR\x05model\"\x81\v\n" +
+	" \x01(\tR\x05model\"\xe7\n" +
+	"\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75788,8 +75790,7 @@ const file_header_proto_rawDesc = "" +
 	"updated_by\x18\x16 \x01(\tR\tupdatedBy\x12\x10\n" +
 	"\x03md5\x18\x17 \x01(\tR\x03md5\x12\x1f\n" +
 	"\vchunked_md5\x18\x18 \x01(\tR\n" +
-	"chunkedMd5\x12\x18\n" +
-	"\adeleted\x18  \x01(\x03R\adeleted\x12\x1a\n" +
+	"chunkedMd5\x12\x1a\n" +
 	"\bmodified\x18\" \x01(\x03R\bmodified\x120\n" +
 	"\x14last_success_chunked\x18# \x01(\x03R\x12lastSuccessChunked\x12.\n" +
 	"\x13last_failed_chunked\x18' \x01(\x03R\x11lastFailedChunked\x12'\n" +
