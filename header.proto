@@ -1564,6 +1564,7 @@ message MessageButton {
 		postback_button = 3;
 		call_button = 5;
 		widget_ask_contact_info_button = 7;
+		quickreply_button = 8;
 	}
 
 	string type = 2;
@@ -1580,7 +1581,10 @@ message MessageButton {
 	string phone_number = 16;
 	string webview_size = 18; // fb
 
-	I18nString i18n_title = 19;
+	I18nString old_i18n_title = 19; // @deprecated
+	map<string,string> i18n_title = 20;
+
+	string reply_message = 21;
 }
 
 message GenericElementTemplate {
@@ -8770,7 +8774,9 @@ message AIAgentGuardrail {
 	string name = 4;
 	string type = 5; // input | output
 	string instruction = 6; // contain infant word
-	bool resoning = 7;
+	bool reasoning = 7; // ?
+
+	string action = 8; // alway | never
 }
 
 message AIAgentRule {
@@ -8796,15 +8802,31 @@ message AIAgentOverrideRule {
 	int64 disabled = 15;
 }
 
+message AIAgentGoal {
+	string name = 3;
+	string topics = 4;
+
+	int64 disabled = 5;
+
+	WorkflowCondition qualify_rule = 6;
+
+	repeated AIFunction actions = 7;
+	repeated AIFunction unqualified_actions = 8;
+}
+
 message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string fullname = 4; // Q/A bot
+	string fullname = 4;
 	File avatar = 5;
 	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
 	string avatar_url = 7;
 
+	string job_title = 11;
+	string tone = 12; // casual, friendly, professional
+
+	repeated AIAgentGoal goals = 10;
 	repeated AIAgentGuardrail guardrails = 8;
 	repeated AIAgentRule rules = 9;
 	HumanHandoverSetting human_handover = 16;
