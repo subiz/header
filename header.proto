@@ -1564,6 +1564,7 @@ message MessageButton {
 		postback_button = 3;
 		call_button = 5;
 		widget_ask_contact_info_button = 7;
+		quickreply_button = 8;
 	}
 
 	string type = 2;
@@ -1580,7 +1581,10 @@ message MessageButton {
 	string phone_number = 16;
 	string webview_size = 18; // fb
 
-	I18nString i18n_title = 19;
+	I18nString old_i18n_title = 19; // @deprecated
+	map<string,string> i18n_title = 20;
+
+	string reply_message = 21;
 }
 
 message GenericElementTemplate {
@@ -7335,9 +7339,11 @@ message WorkflowCondition {
 }
 
 message LLMCondition {
-	string system_instruction = 4;
+	string op = 2; // '' = true, true, false, any
+
+	string instruction = 4;
 	string model = 5; // chatgpt-4
-	Block system_instruction_block = 6; // dynamic prompt
+	Block instruction_block = 6; // dynamic prompt
 	int64 temperature = 7; // 10000 * 10000
 	int64 top_p = 15; // *100000
 
@@ -7357,6 +7363,7 @@ message LLMCondition {
 	string tracking_purpose = 18;
 	string tool_choice = 19; // auto (default), required, function
 	AIFunction tool_choice_function = 20;
+
 }
 
 message WorkflowLogRequest {
@@ -7913,7 +7920,7 @@ message ResourceGroupMember {
 	int64 accepted = 8;
 	int64 joined = 9;
 
-	string role = 6; // reviewer, member, manager, admin, ...
+	// string role = 6; // reviewer, member, manager, admin, ...
 	repeated string scopes = 10;
 	string is_subscribed = 11;
 }
@@ -8770,43 +8777,45 @@ message AIAgentGuardrail {
 	string name = 4;
 	string type = 5; // input | output
 	string instruction = 6; // contain infant word
-	bool resoning = 7;
-}
+	bool reasoning = 7; // ?
 
-message AIAgentRule {
-	string id = 3;
-	string name = 4;
-	string hook = 5; // '', before_reply, after_reply
-
-	repeated WorkflowTrigger triggers = 7; // or
-	repeated WorkflowTrigger computed_triggers = 8; // or
-
-	map<string, WorkflowAction> actions = 9;
-	map<string, WorkflowAction> computed_actions = 10;
-
-	Frequently frequency = 15;
+	string action = 8; // alway | never
 }
 
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign
-	string agent_id = 6;
+	string action = 5; // '' == assign, remind, function
+
+	repeated AIFunction functions = 9; // use when action = function
+
+	string instruction = 7; // use when action = remind
+
+	string hook = 8; // '' = before_reply, after_reply
+	string agent_id = 6; // use when action = assign
+
+	repeated AIIntent intents = 13;
 	WorkflowCondition condition = 14;
 	int64 disabled = 15;
+	bool is_agent_default = 16; // default for agent id
+
+	Frequently frequently = 17; // once or always
+	repeated string for_agent_ids = 18; // empty -> all-agent
 }
 
 message AIAgent {
 	common.Context ctx = 1;
 	string account_id = 2;
 	string id = 3;
-	string fullname = 4; // Q/A bot
+	string fullname = 4;
 	File avatar = 5;
 	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
 	string avatar_url = 7;
 
+	string job_title = 11;
+	string tone = 12; // casual, friendly, professional
+
 	repeated AIAgentGuardrail guardrails = 8;
-	repeated AIAgentRule rules = 9;
 	HumanHandoverSetting human_handover = 16;
 
 	int64 created = 17;
@@ -8868,11 +8877,14 @@ message AIAgent {
 	string locale = 64; // can be auto
 	repeated string locales = 65;
 
-	repeated AIAgentOverrideRule override_rules = 66;
-	repeated AIIntent intents = 67; // only the root
+	repeated AIAgentOverrideRule override_rules = 66; // only root
 
 	Message llm_limit_message = 68;
 	int64 llm_spend_limit_fpv = 72;
+
+	string follow_up_instruction = 73;
+	string generated_follow_up_instruction = 74;
+	int64 disabled_follow_up = 75;
 }
 
 message InitFlow {
@@ -8931,7 +8943,7 @@ message JSONSchema {
 message AIFunction {
 	// return 204 to stop the bot from response
 
-	string name = 4; // create order, system_human_handoff, system_get_more_information, system_update
+	string name = 4; // create order, system_human_handoff, system_get_more_information, system_update, record_user_preference
 	string display_name = 17;
 	string description = 5; // prompt
 
@@ -8962,15 +8974,27 @@ message AIFunction {
 		}
 	*/
 
-	string type = 12; // empty=remote, system, workflow
+	string type = 12; // empty=remote, system, workflow, remember_user_info, procedure
 	string run_mode = 13; // sync, async, throttle, debounce
 	CreateTicketFunction system_create_ticket = 14;
-	AutomationFunction workflow_action = 15;
+	AutomationFunction workflow = 15;
 	UpdateUserInformation update_information = 16; // deprecated
 	CollectUserInformation collect_user_information = 20;
 	AssignRequest assign_agent = 18;
 
 	Form system_schedule_appointment = 19;
+
+	bool stop_after_called = 30;
+
+	RecordUserPreference record_user_preference = 21;
+
+	// prom
+	string instruction = 22; // dung de tra loi cac cau hoi thuong gap cua subiz
+	repeated AIFunction functions = 23;
+}
+
+message RecordUserPreference {
+	string name = 5;
 }
 
 message CollectInfomationAttribute {
