@@ -8787,7 +8787,7 @@ message AIAgentGuardrail {
 message AIAgentOverrideRule {
 	string id = 3;
 	string name = 4;
-	string action = 5; // '' == assign, remind, function
+	string action = 5; // '' == assign, remind, function, human_handoff
 
 	repeated AIFunction functions = 9; // use when action = function
 
@@ -8803,6 +8803,10 @@ message AIAgentOverrideRule {
 
 	Frequently frequently = 17; // once or always
 	repeated string for_agent_ids = 18; // empty -> all-agent
+
+	// human handoff
+	repeated Rule rules = 12;
+	Rule assign_to = 11;
 }
 
 message AIAgent {
@@ -8998,6 +9002,7 @@ message AIFunction {
 
 message RecordUserPreference {
 	string name = 5;
+	string description = 6;
 }
 
 message CollectInfomationAttribute {
