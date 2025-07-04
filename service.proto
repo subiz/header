@@ -437,6 +437,7 @@ service ConversationMgr {
 	rpc MatchIntegration(header.Ids) returns (Response);
 
 	rpc Integrate(header.Integration) returns (header.Integration);
+	rpc UpsertIntegration(header.Integration) returns (header.Integration);
 	rpc GetIntegration(Id) returns (header.Integration);
 
 	rpc UpdateIntegrationMember(ResourceGroupMember) returns (ResourceGroupMember);
