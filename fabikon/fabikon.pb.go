@@ -109,8 +109,9 @@ type FacebookPage struct {
 	DatasetId                *string                `protobuf:"bytes,28,opt,name=dataset_id,json=datasetId" json:"dataset_id,omitempty"`
 	IsBusiness               *bool                  `protobuf:"varint,32,opt,name=is_business,json=isBusiness" json:"is_business,omitempty"`
 	SystemUserToken          *string                `protobuf:"bytes,33,opt,name=system_user_token,json=systemUserToken" json:"system_user_token,omitempty"`
-	State                    *string                `protobuf:"bytes,34,opt,name=state" json:"state,omitempty"`                                            // replicated of integration.state
-	CommentDisabled          *string                `protobuf:"bytes,35,opt,name=comment_disabled,json=commentDisabled" json:"comment_disabled,omitempty"` // replicated of integration.comment_disabled
+	State                    *string                `protobuf:"bytes,34,opt,name=state" json:"state,omitempty"`                                             // replicated of integration.state
+	CommentDisabled          *int64                 `protobuf:"varint,35,opt,name=comment_disabled,json=commentDisabled" json:"comment_disabled,omitempty"` // replicated of integration.comment_disabled
+	LastSyncFromConvo        *int64                 `protobuf:"varint,36,opt,name=last_sync_from_convo,json=lastSyncFromConvo" json:"last_sync_from_convo,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -334,11 +335,18 @@ func (x *FacebookPage) GetState() string {
 	return ""
 }
 
-func (x *FacebookPage) GetCommentDisabled() string {
+func (x *FacebookPage) GetCommentDisabled() int64 {
 	if x != nil && x.CommentDisabled != nil {
 		return *x.CommentDisabled
 	}
-	return ""
+	return 0
+}
+
+func (x *FacebookPage) GetLastSyncFromConvo() int64 {
+	if x != nil && x.LastSyncFromConvo != nil {
+		return *x.LastSyncFromConvo
+	}
+	return 0
 }
 
 type FbWebhookEvent struct {
@@ -5425,7 +5433,7 @@ const file_fabikon_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x17\n" +
 	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12\x0e\n" +
-	"\x02id\x18\x04 \x01(\tR\x02id\"\xf9\b\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\"\xaa\t\n" +
 	"\fFacebookPage\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x0e\n" +
@@ -5459,7 +5467,8 @@ const file_fabikon_proto_rawDesc = "" +
 	"isBusiness\x12*\n" +
 	"\x11system_user_token\x18! \x01(\tR\x0fsystemUserToken\x12\x14\n" +
 	"\x05state\x18\" \x01(\tR\x05state\x12)\n" +
-	"\x10comment_disabled\x18# \x01(\tR\x0fcommentDisabled\"P\n" +
+	"\x10comment_disabled\x18# \x01(\x03R\x0fcommentDisabled\x12/\n" +
+	"\x14last_sync_from_convo\x18$ \x01(\x03R\x11lastSyncFromConvo\"P\n" +
 	"\x0eFbWebhookEvent\x12\x16\n" +
 	"\x06object\x18\x02 \x01(\tR\x06object\x12&\n" +
 	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entry\"\xbe\x01\n" +

@@ -52,7 +52,8 @@ message FacebookPage {
 	optional string system_user_token = 33;
 
 	optional string state = 34; // replicated of integration.state
-	optional string comment_disabled = 35; // replicated of integration.comment_disabled
+	optional int64 comment_disabled = 35; // replicated of integration.comment_disabled
+	optional int64 last_sync_from_convo = 36;
 }
 
 message FbWebhookEvent {
