@@ -62340,8 +62340,10 @@ type AIAgent struct {
 	Avatar                 *File                  `protobuf:"bytes,5,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	Description            string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` // dung de tra loi cac cau hoi thuong gap cua subiz
 	AvatarUrl              string                 `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	JobTitle               string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"`
-	Tone                   string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"` // casual, friendly, professional
+	Brand                  string                 `protobuf:"bytes,9,opt,name=brand,proto3" json:"brand,omitempty"`
+	BrandDescription       string                 `protobuf:"bytes,10,opt,name=brand_description,json=brandDescription,proto3" json:"brand_description,omitempty"`
+	JobTitle               string                 `protobuf:"bytes,11,opt,name=job_title,json=jobTitle,proto3" json:"job_title,omitempty"` // customer_support, sale
+	Tone                   string                 `protobuf:"bytes,12,opt,name=tone,proto3" json:"tone,omitempty"`                         // casual, friendly, professional
 	Guardrails             []*AIAgentGuardrail    `protobuf:"bytes,8,rep,name=guardrails,proto3" json:"guardrails,omitempty"`
 	HumanHandover          *HumanHandoverSetting  `protobuf:"bytes,16,opt,name=human_handover,json=humanHandover,proto3" json:"human_handover,omitempty"`
 	Created                int64                  `protobuf:"varint,17,opt,name=created,proto3" json:"created,omitempty"`
@@ -62467,6 +62469,20 @@ func (x *AIAgent) GetDescription() string {
 func (x *AIAgent) GetAvatarUrl() string {
 	if x != nil {
 		return x.AvatarUrl
+	}
+	return ""
+}
+
+func (x *AIAgent) GetBrand() string {
+	if x != nil {
+		return x.Brand
+	}
+	return ""
+}
+
+func (x *AIAgent) GetBrandDescription() string {
+	if x != nil {
+		return x.BrandDescription
 	}
 	return ""
 }
@@ -75696,7 +75712,7 @@ const file_header_proto_rawDesc = "" +
 	"frequently\x12\"\n" +
 	"\rfor_agent_ids\x18\x12 \x03(\tR\vforAgentIds\x12\"\n" +
 	"\x05rules\x18\f \x03(\v2\f.header.RuleR\x05rules\x12)\n" +
-	"\tassign_to\x18\v \x01(\v2\f.header.RuleR\bassignTo\"\xd3\x11\n" +
+	"\tassign_to\x18\v \x01(\v2\f.header.RuleR\bassignTo\"\x96\x12\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75706,7 +75722,10 @@ const file_header_proto_rawDesc = "" +
 	"\x06avatar\x18\x05 \x01(\v2\f.header.FileR\x06avatar\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
-	"avatar_url\x18\a \x01(\tR\tavatarUrl\x12\x1b\n" +
+	"avatar_url\x18\a \x01(\tR\tavatarUrl\x12\x14\n" +
+	"\x05brand\x18\t \x01(\tR\x05brand\x12+\n" +
+	"\x11brand_description\x18\n" +
+	" \x01(\tR\x10brandDescription\x12\x1b\n" +
 	"\tjob_title\x18\v \x01(\tR\bjobTitle\x12\x12\n" +
 	"\x04tone\x18\f \x01(\tR\x04tone\x128\n" +
 	"\n" +

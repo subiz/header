@@ -8818,7 +8818,10 @@ message AIAgent {
 	string description = 6; // dung de tra loi cac cau hoi thuong gap cua subiz
 	string avatar_url = 7;
 
-	string job_title = 11;
+	string brand = 9;
+	string brand_description = 10;
+
+	string job_title = 11; // customer_support, sale
 	string tone = 12; // casual, friendly, professional
 
 	repeated AIAgentGuardrail guardrails = 8;

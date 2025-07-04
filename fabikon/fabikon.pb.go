@@ -105,10 +105,12 @@ type FacebookPage struct {
 	LastFailedUrl            *string                `protobuf:"bytes,21,opt,name=last_failed_url,json=lastFailedUrl" json:"last_failed_url,omitempty"`
 	LastFailedBody           *string                `protobuf:"bytes,22,opt,name=last_failed_body,json=lastFailedBody" json:"last_failed_body,omitempty"` // optional string integration_link_status = 23; // active, failed // remove
 	LastConversionSynced     *int64                 `protobuf:"varint,24,opt,name=last_conversion_synced,json=lastConversionSynced" json:"last_conversion_synced,omitempty"`
-	SyncConversionDisabled   *int64                 `protobuf:"varint,25,opt,name=sync_conversion_disabled,json=syncConversionDisabled" json:"sync_conversion_disabled,omitempty"`
+	SyncConversionDisabled   *int64                 `protobuf:"varint,25,opt,name=sync_conversion_disabled,json=syncConversionDisabled" json:"sync_conversion_disabled,omitempty"` // replicated of integration.sync_conversation_disabled
 	DatasetId                *string                `protobuf:"bytes,28,opt,name=dataset_id,json=datasetId" json:"dataset_id,omitempty"`
 	IsBusiness               *bool                  `protobuf:"varint,32,opt,name=is_business,json=isBusiness" json:"is_business,omitempty"`
 	SystemUserToken          *string                `protobuf:"bytes,33,opt,name=system_user_token,json=systemUserToken" json:"system_user_token,omitempty"`
+	State                    *string                `protobuf:"bytes,34,opt,name=state" json:"state,omitempty"`                                            // replicated of integration.state
+	CommentDisabled          *string                `protobuf:"bytes,35,opt,name=comment_disabled,json=commentDisabled" json:"comment_disabled,omitempty"` // replicated of integration.comment_disabled
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -321,6 +323,20 @@ func (x *FacebookPage) GetIsBusiness() bool {
 func (x *FacebookPage) GetSystemUserToken() string {
 	if x != nil && x.SystemUserToken != nil {
 		return *x.SystemUserToken
+	}
+	return ""
+}
+
+func (x *FacebookPage) GetState() string {
+	if x != nil && x.State != nil {
+		return *x.State
+	}
+	return ""
+}
+
+func (x *FacebookPage) GetCommentDisabled() string {
+	if x != nil && x.CommentDisabled != nil {
+		return *x.CommentDisabled
 	}
 	return ""
 }
@@ -5409,7 +5425,7 @@ const file_fabikon_proto_rawDesc = "" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x17\n" +
 	"\apage_id\x18\x03 \x01(\tR\x06pageId\x12\x0e\n" +
-	"\x02id\x18\x04 \x01(\tR\x02id\"\xb8\b\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id\"\xf9\b\n" +
 	"\fFacebookPage\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12\x0e\n" +
@@ -5441,7 +5457,9 @@ const file_fabikon_proto_rawDesc = "" +
 	"dataset_id\x18\x1c \x01(\tR\tdatasetId\x12\x1f\n" +
 	"\vis_business\x18  \x01(\bR\n" +
 	"isBusiness\x12*\n" +
-	"\x11system_user_token\x18! \x01(\tR\x0fsystemUserToken\"P\n" +
+	"\x11system_user_token\x18! \x01(\tR\x0fsystemUserToken\x12\x14\n" +
+	"\x05state\x18\" \x01(\tR\x05state\x12)\n" +
+	"\x10comment_disabled\x18# \x01(\tR\x0fcommentDisabled\"P\n" +
 	"\x0eFbWebhookEvent\x12\x16\n" +
 	"\x06object\x18\x02 \x01(\tR\x06object\x12&\n" +
 	"\x05entry\x18\x03 \x03(\v2\x10.fabikon.FbEntryR\x05entry\"\xbe\x01\n" +
