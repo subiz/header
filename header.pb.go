@@ -1136,7 +1136,7 @@ type Integration_State int32
 const (
 	Integration_activated Integration_State = 0 // activeated and insync
 	Integration_pending   Integration_State = 1
-	Integration_failed    Integration_State = 2 // unlinked, connector khoong nhan ket noi
+	Integration_failed    Integration_State = 2 // unlinked, connector khong nhan ket noi
 	Integration_deleted   Integration_State = 3
 )
 
@@ -62362,15 +62362,15 @@ type AIAgent struct {
 	ErrorMessage           *Message               `protobuf:"bytes,40,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	Modified               int64                  `protobuf:"varint,41,opt,name=modified,proto3" json:"modified,omitempty"`
 	Version                int64                  `protobuf:"varint,42,opt,name=version,proto3" json:"version,omitempty"`
-	TransferPrompt         string                 `protobuf:"bytes,43,opt,name=transfer_prompt,json=transferPrompt,proto3" json:"transfer_prompt,omitempty"`
-	GeneratedDescription   string                 `protobuf:"bytes,44,opt,name=generated_description,json=generatedDescription,proto3" json:"generated_description,omitempty"` // read-only
-	GeneratedName          string                 `protobuf:"bytes,49,opt,name=generated_name,json=generatedName,proto3" json:"generated_name,omitempty"`
-	GeneratedTopics        []string               `protobuf:"bytes,39,rep,name=generated_topics,json=generatedTopics,proto3" json:"generated_topics,omitempty"`
-	GeneratedIntent        *AIIntent              `protobuf:"bytes,56,opt,name=generated_intent,json=generatedIntent,proto3" json:"generated_intent,omitempty"`
-	GeneratedHash          string                 `protobuf:"bytes,48,opt,name=generated_hash,json=generatedHash,proto3" json:"generated_hash,omitempty"` // skip regenerate intent
-	GeneratedRefuseMessage string                 `protobuf:"bytes,46,opt,name=generated_refuse_message,json=generatedRefuseMessage,proto3" json:"generated_refuse_message,omitempty"`
-	ActiveVersion          int64                  `protobuf:"varint,45,opt,name=active_version,json=activeVersion,proto3" json:"active_version,omitempty"` // only root
-	DataStore              *AIDataStore           `protobuf:"bytes,47,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`
+	// string transfer_prompt = 43;
+	GeneratedDescription string `protobuf:"bytes,44,opt,name=generated_description,json=generatedDescription,proto3" json:"generated_description,omitempty"` // read-only
+	GeneratedGoal        string `protobuf:"bytes,49,opt,name=generated_goal,json=generatedGoal,proto3" json:"generated_goal,omitempty"`
+	// repeated string generated_topics = 39;
+	GeneratedIntent        *AIIntent    `protobuf:"bytes,56,opt,name=generated_intent,json=generatedIntent,proto3" json:"generated_intent,omitempty"`
+	GeneratedHash          string       `protobuf:"bytes,48,opt,name=generated_hash,json=generatedHash,proto3" json:"generated_hash,omitempty"` // skip regenerate intent
+	GeneratedRefuseMessage string       `protobuf:"bytes,46,opt,name=generated_refuse_message,json=generatedRefuseMessage,proto3" json:"generated_refuse_message,omitempty"`
+	ActiveVersion          int64        `protobuf:"varint,45,opt,name=active_version,json=activeVersion,proto3" json:"active_version,omitempty"` // only root
+	DataStore              *AIDataStore `protobuf:"bytes,47,opt,name=data_store,json=dataStore,proto3" json:"data_store,omitempty"`
 	// report
 	CreditSpendLast_7DaysFpv int64 `protobuf:"varint,50,opt,name=credit_spend_last_7days_fpv,json=creditSpendLast7daysFpv,proto3" json:"credit_spend_last_7days_fpv,omitempty"`
 	TotalCreditSpendFpv      int64 `protobuf:"varint,51,opt,name=total_credit_spend_fpv,json=totalCreditSpendFpv,proto3" json:"total_credit_spend_fpv,omitempty"`
@@ -62627,13 +62627,6 @@ func (x *AIAgent) GetVersion() int64 {
 	return 0
 }
 
-func (x *AIAgent) GetTransferPrompt() string {
-	if x != nil {
-		return x.TransferPrompt
-	}
-	return ""
-}
-
 func (x *AIAgent) GetGeneratedDescription() string {
 	if x != nil {
 		return x.GeneratedDescription
@@ -62641,18 +62634,11 @@ func (x *AIAgent) GetGeneratedDescription() string {
 	return ""
 }
 
-func (x *AIAgent) GetGeneratedName() string {
+func (x *AIAgent) GetGeneratedGoal() string {
 	if x != nil {
-		return x.GeneratedName
+		return x.GeneratedGoal
 	}
 	return ""
-}
-
-func (x *AIAgent) GetGeneratedTopics() []string {
-	if x != nil {
-		return x.GeneratedTopics
-	}
-	return nil
 }
 
 func (x *AIAgent) GetGeneratedIntent() *AIIntent {
@@ -75712,7 +75698,7 @@ const file_header_proto_rawDesc = "" +
 	"frequently\x12\"\n" +
 	"\rfor_agent_ids\x18\x12 \x03(\tR\vforAgentIds\x12\"\n" +
 	"\x05rules\x18\f \x03(\v2\f.header.RuleR\x05rules\x12)\n" +
-	"\tassign_to\x18\v \x01(\v2\f.header.RuleR\bassignTo\"\x96\x12\n" +
+	"\tassign_to\x18\v \x01(\v2\f.header.RuleR\bassignTo\"\xc2\x11\n" +
 	"\aAIAgent\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -75751,11 +75737,9 @@ const file_header_proto_rawDesc = "" +
 	"\x19unabled_to_answer_message\x18& \x01(\v2\x0f.header.MessageR\x16unabledToAnswerMessage\x124\n" +
 	"\rerror_message\x18( \x01(\v2\x0f.header.MessageR\ferrorMessage\x12\x1a\n" +
 	"\bmodified\x18) \x01(\x03R\bmodified\x12\x18\n" +
-	"\aversion\x18* \x01(\x03R\aversion\x12'\n" +
-	"\x0ftransfer_prompt\x18+ \x01(\tR\x0etransferPrompt\x123\n" +
+	"\aversion\x18* \x01(\x03R\aversion\x123\n" +
 	"\x15generated_description\x18, \x01(\tR\x14generatedDescription\x12%\n" +
-	"\x0egenerated_name\x181 \x01(\tR\rgeneratedName\x12)\n" +
-	"\x10generated_topics\x18' \x03(\tR\x0fgeneratedTopics\x12;\n" +
+	"\x0egenerated_goal\x181 \x01(\tR\rgeneratedGoal\x12;\n" +
 	"\x10generated_intent\x188 \x01(\v2\x10.header.AIIntentR\x0fgeneratedIntent\x12%\n" +
 	"\x0egenerated_hash\x180 \x01(\tR\rgeneratedHash\x128\n" +
 	"\x18generated_refuse_message\x18. \x01(\tR\x16generatedRefuseMessage\x12%\n" +
