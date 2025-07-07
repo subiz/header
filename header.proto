@@ -9105,7 +9105,7 @@ message AIDataEntry {
 	string id = 3;
 	string group_id = 4;
 
-	string type = 5; // qa, file, website, product, text (for testing)
+	string type = 5; // qa, file, website, product, text (for testing), instruction
 	Message answer = 6;
 	string question = 7;
 	string url = 8; // https://subiz.com.vn
@@ -9151,6 +9151,11 @@ message AIDataEntry {
 
 	int64 fpv_chunking_cost = 45;
 	repeated string used_bys = 46; // computed by referrer by any active (or latest) agent
+
+	repeated AIFunction functions = 50; // for type=instruction
+	string instruction = 51; // type=instruction
+	AIIntent intent = 52; // instruction trigger
+	WorkflowCondition condition = 53; // instruction condition
 }
 
 message AiResponseSource {
