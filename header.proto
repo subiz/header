@@ -5149,6 +5149,17 @@ message ProductCategory {
 
 	repeated string _attr_refs = 10; // internal use only
 	repeated ProductCategoryBuildQueryExample _build_query_examples = 11; // internal use only
+	repeated string looking_for_keywords = 12;
+	string industry = 13;
+	repeated string terms = 14;
+	repeated ProductCategoryExtractExample keyword_extract_examples = 15;
+}
+
+message ProductCategoryExtractExample {
+	string history = 4;
+	repeated string includes = 5;
+	repeated string excludes = 6;
+	string explain = 7;
 }
 
 message ProductCategories {
