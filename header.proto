@@ -9117,6 +9117,7 @@ message AIDataEntry {
 	// llm generated
 	string product_category_id = 44;
 	repeated ProductAttribute product_attrs = 42;
+	repeated KV product_extra_props = 32;
 
 	AIDataStore data_store = 43; // read-only, for product only when search infomation about a specific product
 
