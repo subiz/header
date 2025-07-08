@@ -6892,6 +6892,7 @@ message Response {
 	FormSubmission form_submission = 200;
 
 	repeated Product products = 202;
+	Product product = 201;
 
 	repeated PromotionProgram promotion_programs = 203;
 
