@@ -6824,6 +6824,7 @@ message Response {
 	BankTransferRequest bank_transfer_request = 148;
 	repeated WorkflowCount workflow_counts = 149;
 	repeated Integration integrations = 150;
+	Integration integration = 154;
 
 	repeated PhoneDevice phone_devices = 151;
 
