@@ -11296,6 +11296,7 @@ const (
 	ConversationMgr_StartConversation_FullMethodName        = "/header.ConversationMgr/StartConversation"
 	ConversationMgr_EndConversation_FullMethodName          = "/header.ConversationMgr/EndConversation"
 	ConversationMgr_GetConversation_FullMethodName          = "/header.ConversationMgr/GetConversation"
+	ConversationMgr_GetFullConversation_FullMethodName      = "/header.ConversationMgr/GetFullConversation"
 	ConversationMgr_ListConversations_FullMethodName        = "/header.ConversationMgr/ListConversations"
 	ConversationMgr_ListConversations2_FullMethodName       = "/header.ConversationMgr/ListConversations2"
 	ConversationMgr_MatchConversations_FullMethodName       = "/header.ConversationMgr/MatchConversations"
@@ -11375,6 +11376,7 @@ type ConversationMgrClient interface {
 	StartConversation(ctx context.Context, in *StartRequest, opts ...grpc.CallOption) (*Conversation, error)
 	EndConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Conversation, error)
 	GetConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Conversation, error)
+	GetFullConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error)
 	ListConversations(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*Conversations, error)
 	ListConversations2(ctx context.Context, in *ListConversationsRequest, opts ...grpc.CallOption) (*Response, error)
 	MatchConversations(ctx context.Context, in *Ids, opts ...grpc.CallOption) (*Conversations, error)
@@ -11511,6 +11513,16 @@ func (c *conversationMgrClient) GetConversation(ctx context.Context, in *Id, opt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Conversation)
 	err := c.cc.Invoke(ctx, ConversationMgr_GetConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *conversationMgrClient) GetFullConversation(ctx context.Context, in *Id, opts ...grpc.CallOption) (*Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Response)
+	err := c.cc.Invoke(ctx, ConversationMgr_GetFullConversation_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -12197,6 +12209,7 @@ type ConversationMgrServer interface {
 	StartConversation(context.Context, *StartRequest) (*Conversation, error)
 	EndConversation(context.Context, *Id) (*Conversation, error)
 	GetConversation(context.Context, *Id) (*Conversation, error)
+	GetFullConversation(context.Context, *Id) (*Response, error)
 	ListConversations(context.Context, *ListConversationsRequest) (*Conversations, error)
 	ListConversations2(context.Context, *ListConversationsRequest) (*Response, error)
 	MatchConversations(context.Context, *Ids) (*Conversations, error)
@@ -12296,6 +12309,9 @@ func (UnimplementedConversationMgrServer) EndConversation(context.Context, *Id) 
 }
 func (UnimplementedConversationMgrServer) GetConversation(context.Context, *Id) (*Conversation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConversation not implemented")
+}
+func (UnimplementedConversationMgrServer) GetFullConversation(context.Context, *Id) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFullConversation not implemented")
 }
 func (UnimplementedConversationMgrServer) ListConversations(context.Context, *ListConversationsRequest) (*Conversations, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListConversations not implemented")
@@ -12623,6 +12639,24 @@ func _ConversationMgr_GetConversation_Handler(srv interface{}, ctx context.Conte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ConversationMgrServer).GetConversation(ctx, req.(*Id))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ConversationMgr_GetFullConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Id)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationMgrServer).GetFullConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ConversationMgr_GetFullConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationMgrServer).GetFullConversation(ctx, req.(*Id))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -13863,6 +13897,10 @@ var ConversationMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetConversation",
 			Handler:    _ConversationMgr_GetConversation_Handler,
+		},
+		{
+			MethodName: "GetFullConversation",
+			Handler:    _ConversationMgr_GetFullConversation_Handler,
 		},
 		{
 			MethodName: "ListConversations",

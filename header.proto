@@ -6786,6 +6786,7 @@ message Response {
 	Article article = 40;
 	ArticleCategory article_category = 41;
 
+	Conversation conversation = 42;
 	repeated Conversation conversations = 123;
 	repeated ConversationMeta conversation_metas = 124;
 
@@ -6824,6 +6825,7 @@ message Response {
 	BankTransferRequest bank_transfer_request = 148;
 	repeated WorkflowCount workflow_counts = 149;
 	repeated Integration integrations = 150;
+	Integration integration = 154;
 
 	repeated PhoneDevice phone_devices = 151;
 

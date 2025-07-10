@@ -395,6 +395,7 @@ service ConversationMgr {
 	rpc StartConversation(header.StartRequest) returns (header.Conversation);
 	rpc EndConversation(Id) returns (header.Conversation);
 	rpc GetConversation(Id) returns (header.Conversation);
+	rpc GetFullConversation(Id) returns (header.Response);
 	rpc ListConversations(header.ListConversationsRequest) returns (header.Conversations);
 	rpc ListConversations2(header.ListConversationsRequest) returns (Response);
 	rpc MatchConversations(Ids) returns (header.Conversations);
