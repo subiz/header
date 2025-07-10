@@ -4975,8 +4975,7 @@ message Product {
 	int64 view_duration_sec = 67; // for event content_view only
 	int64 num_variants = 69; // computed, readonly
 
-	map<string, Block> i18n_description_block = 70; // (shared) server generated
-	map<string, Block> i18n_long_description_block = 71; // (shared)
+	map<string, Block> i18n_description_block = 70; // (shared) long description generated
 
 	repeated File attachments = 80;
 
@@ -8854,6 +8853,9 @@ message AIAgent {
 
 	string token_limit = 28; // short, balanced, long
 	// int64 temperature = 29; // 50% -> 50
+
+	string first_person_pronoun = 30; // personal pronoun: em
+	string second_person_pronoun = 31; // anh/chi
 
 	int64 context_guard = 35;
 	Message context_guard_message = 36;
