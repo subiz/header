@@ -827,6 +827,8 @@ type Subscription struct {
 	NumAgents                  *int64                 `protobuf:"varint,50,opt,name=num_agents,json=numAgents" json:"num_agents,omitempty"`
 	UseTicket                  *int64                 `protobuf:"varint,51,opt,name=use_ticket,json=useTicket" json:"use_ticket,omitempty"`
 	NextNumAgents              *int64                 `protobuf:"varint,52,opt,name=next_num_agents,json=nextNumAgents" json:"next_num_agents,omitempty"`
+	UnlimitedAiSpending        *int64                 `protobuf:"varint,54,opt,name=unlimited_ai_spending,json=unlimitedAiSpending" json:"unlimited_ai_spending,omitempty"`
+	FpvCreditUsd               *int64                 `protobuf:"varint,55,opt,name=fpv_credit_usd,json=fpvCreditUsd" json:"fpv_credit_usd,omitempty"` // soft
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -990,6 +992,20 @@ func (x *Subscription) GetUseTicket() int64 {
 func (x *Subscription) GetNextNumAgents() int64 {
 	if x != nil && x.NextNumAgents != nil {
 		return *x.NextNumAgents
+	}
+	return 0
+}
+
+func (x *Subscription) GetUnlimitedAiSpending() int64 {
+	if x != nil && x.UnlimitedAiSpending != nil {
+		return *x.UnlimitedAiSpending
+	}
+	return 0
+}
+
+func (x *Subscription) GetFpvCreditUsd() int64 {
+	if x != nil && x.FpvCreditUsd != nil {
+		return *x.FpvCreditUsd
 	}
 	return 0
 }
@@ -3463,7 +3479,7 @@ const file_payment_proto_rawDesc = "" +
 	"\x05ended\x18- \x01(\x03R\x05ended\x129\n" +
 	"\x19fpv_unlimited_agent_price\x181 \x01(\x03R\x16fpvUnlimitedAgentPrice\x12\x1d\n" +
 	"\n" +
-	"num_agents\x183 \x01(\x03R\tnumAgents\"\xbd\x05\n" +
+	"num_agents\x183 \x01(\x03R\tnumAgents\"\x97\x06\n" +
 	"\fSubscription\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -3486,7 +3502,9 @@ const file_payment_proto_rawDesc = "" +
 	"num_agents\x182 \x01(\x03R\tnumAgents\x12\x1d\n" +
 	"\n" +
 	"use_ticket\x183 \x01(\x03R\tuseTicket\x12&\n" +
-	"\x0fnext_num_agents\x184 \x01(\x03R\rnextNumAgents\"\x9a\x06\n" +
+	"\x0fnext_num_agents\x184 \x01(\x03R\rnextNumAgents\x122\n" +
+	"\x15unlimited_ai_spending\x186 \x01(\x03R\x13unlimitedAiSpending\x12$\n" +
+	"\x0efpv_credit_usd\x187 \x01(\x03R\ffpvCreditUsd\"\x9a\x06\n" +
 	"\x04Bill\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x0e\n" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x1d\n" +
