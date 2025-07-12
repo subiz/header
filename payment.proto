@@ -272,12 +272,13 @@ message PlanInvoiceItem {
 }
 
 message MarketingInvoiceItem {
+	optional int64 expired = 4;
 }
 
 message InvoiceItem {
 	optional string headline = 4;
 	optional string description = 5;
-	optional string invoice_id = 6; // remove
+	// optional string invoice_id = 6; // remove
 	optional int32 quantity = 7;
 	optional float price = 8; // per unit
 
@@ -288,6 +289,7 @@ message InvoiceItem {
 		optional MarketingInvoiceItem marketing = 6;
 		optional ReservedPlanInvoiceItem reserved_plan = 7;
 	}
+	optional string type = 18;
 	optional Data data = 9;
 	optional float total_price = 10;	// = (* quantity price)
 

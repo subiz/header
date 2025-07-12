@@ -2189,6 +2189,7 @@ func (x *PlanInvoiceItem) GetEnded() int64 {
 
 type MarketingInvoiceItem struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Expired       *int64                 `protobuf:"varint,4,opt,name=expired" json:"expired,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2223,21 +2224,29 @@ func (*MarketingInvoiceItem) Descriptor() ([]byte, []int) {
 	return file_payment_proto_rawDescGZIP(), []int{17}
 }
 
+func (x *MarketingInvoiceItem) GetExpired() int64 {
+	if x != nil && x.Expired != nil {
+		return *x.Expired
+	}
+	return 0
+}
+
 type InvoiceItem struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Headline         *string                `protobuf:"bytes,4,opt,name=headline" json:"headline,omitempty"`
-	Description      *string                `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
-	InvoiceId        *string                `protobuf:"bytes,6,opt,name=invoice_id,json=invoiceId" json:"invoice_id,omitempty"` // remove
-	Quantity         *int32                 `protobuf:"varint,7,opt,name=quantity" json:"quantity,omitempty"`
-	Price            *float32               `protobuf:"fixed32,8,opt,name=price" json:"price,omitempty"` // per unit
-	Data             *InvoiceItem_Data      `protobuf:"bytes,9,opt,name=data" json:"data,omitempty"`
-	TotalPrice       *float32               `protobuf:"fixed32,10,opt,name=total_price,json=totalPrice" json:"total_price,omitempty"` // = (* quantity price)
-	FpvPriceVnd      *int64                 `protobuf:"varint,11,opt,name=fpv_price_vnd,json=fpvPriceVnd" json:"fpv_price_vnd,omitempty"`
-	FpvTotalPriceVnd *int64                 `protobuf:"varint,12,opt,name=fpv_total_price_vnd,json=fpvTotalPriceVnd" json:"fpv_total_price_vnd,omitempty"`
-	FpvDiscountVnd   *int64                 `protobuf:"varint,13,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`
-	FpvPriceUsd      *int64                 `protobuf:"varint,15,opt,name=fpv_price_usd,json=fpvPriceUsd" json:"fpv_price_usd,omitempty"`
-	FpvTotalPriceUsd *int64                 `protobuf:"varint,16,opt,name=fpv_total_price_usd,json=fpvTotalPriceUsd" json:"fpv_total_price_usd,omitempty"`
-	FpvDiscountUsd   *int64                 `protobuf:"varint,17,opt,name=fpv_discount_usd,json=fpvDiscountUsd" json:"fpv_discount_usd,omitempty"`
+	state       protoimpl.MessageState `protogen:"open.v1"`
+	Headline    *string                `protobuf:"bytes,4,opt,name=headline" json:"headline,omitempty"`
+	Description *string                `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
+	// optional string invoice_id = 6; // remove
+	Quantity         *int32            `protobuf:"varint,7,opt,name=quantity" json:"quantity,omitempty"`
+	Price            *float32          `protobuf:"fixed32,8,opt,name=price" json:"price,omitempty"` // per unit
+	Type             *string           `protobuf:"bytes,18,opt,name=type" json:"type,omitempty"`
+	Data             *InvoiceItem_Data `protobuf:"bytes,9,opt,name=data" json:"data,omitempty"`
+	TotalPrice       *float32          `protobuf:"fixed32,10,opt,name=total_price,json=totalPrice" json:"total_price,omitempty"` // = (* quantity price)
+	FpvPriceVnd      *int64            `protobuf:"varint,11,opt,name=fpv_price_vnd,json=fpvPriceVnd" json:"fpv_price_vnd,omitempty"`
+	FpvTotalPriceVnd *int64            `protobuf:"varint,12,opt,name=fpv_total_price_vnd,json=fpvTotalPriceVnd" json:"fpv_total_price_vnd,omitempty"`
+	FpvDiscountVnd   *int64            `protobuf:"varint,13,opt,name=fpv_discount_vnd,json=fpvDiscountVnd" json:"fpv_discount_vnd,omitempty"`
+	FpvPriceUsd      *int64            `protobuf:"varint,15,opt,name=fpv_price_usd,json=fpvPriceUsd" json:"fpv_price_usd,omitempty"`
+	FpvTotalPriceUsd *int64            `protobuf:"varint,16,opt,name=fpv_total_price_usd,json=fpvTotalPriceUsd" json:"fpv_total_price_usd,omitempty"`
+	FpvDiscountUsd   *int64            `protobuf:"varint,17,opt,name=fpv_discount_usd,json=fpvDiscountUsd" json:"fpv_discount_usd,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -2286,13 +2295,6 @@ func (x *InvoiceItem) GetDescription() string {
 	return ""
 }
 
-func (x *InvoiceItem) GetInvoiceId() string {
-	if x != nil && x.InvoiceId != nil {
-		return *x.InvoiceId
-	}
-	return ""
-}
-
 func (x *InvoiceItem) GetQuantity() int32 {
 	if x != nil && x.Quantity != nil {
 		return *x.Quantity
@@ -2305,6 +2307,13 @@ func (x *InvoiceItem) GetPrice() float32 {
 		return *x.Price
 	}
 	return 0
+}
+
+func (x *InvoiceItem) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
 }
 
 func (x *InvoiceItem) GetData() *InvoiceItem_Data {
@@ -3640,15 +3649,15 @@ const file_payment_proto_rawDesc = "" +
 	" \x01(\rR\roldAgentCount\x12,\n" +
 	"\x12is_unlimited_agent\x18\v \x01(\bR\x10isUnlimitedAgent\x12.\n" +
 	"\x13fpv_save_percentage\x18\f \x01(\x03R\x11fpvSavePercentage\x12\x14\n" +
-	"\x05ended\x18\r \x01(\x03R\x05ended\"\x16\n" +
-	"\x14MarketingInvoiceItem\"\x83\x06\n" +
+	"\x05ended\x18\r \x01(\x03R\x05ended\"0\n" +
+	"\x14MarketingInvoiceItem\x12\x18\n" +
+	"\aexpired\x18\x04 \x01(\x03R\aexpired\"\xf8\x05\n" +
 	"\vInvoiceItem\x12\x1a\n" +
 	"\bheadline\x18\x04 \x01(\tR\bheadline\x12 \n" +
-	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1d\n" +
-	"\n" +
-	"invoice_id\x18\x06 \x01(\tR\tinvoiceId\x12\x1a\n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
 	"\bquantity\x18\a \x01(\x05R\bquantity\x12\x14\n" +
-	"\x05price\x18\b \x01(\x02R\x05price\x12-\n" +
+	"\x05price\x18\b \x01(\x02R\x05price\x12\x12\n" +
+	"\x04type\x18\x12 \x01(\tR\x04type\x12-\n" +
 	"\x04data\x18\t \x01(\v2\x19.payment.InvoiceItem.DataR\x04data\x12\x1f\n" +
 	"\vtotal_price\x18\n" +
 	" \x01(\x02R\n" +

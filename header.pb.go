@@ -49743,23 +49743,24 @@ func (x *Credit) GetNegativeAt() int64 {
 }
 
 type CreditSpendEntry struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ctx           *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
-	AccountId     string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
-	Id            string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Created       int64                  `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"`
-	Quantity      int64                  `protobuf:"varint,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	Data          *CreditEntryData       `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`
-	CreditId      string                 `protobuf:"bytes,9,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
-	FpvUnitPrice  int64                  `protobuf:"varint,10,opt,name=fpv_unit_price,json=fpvUnitPrice,proto3" json:"fpv_unit_price,omitempty"`
-	ServiceId     string                 `protobuf:"bytes,12,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`       //
-	ServiceType   string                 `protobuf:"bytes,13,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"` // campaign, bot, popup
-	Item          string                 `protobuf:"bytes,14,opt,name=item,proto3" json:"item,omitempty"`                                  // type of product used, e.g: zns, call, llm
-	ItemId        string                 `protobuf:"bytes,15,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`                // product id
-	Tags          []string               `protobuf:"bytes,18,rep,name=tags,proto3" json:"tags,omitempty"`                                  // indexing [model.23048234, conversation.2304823904]
-	ByAgentId     string                 `protobuf:"bytes,16,opt,name=by_agent_id,json=byAgentId,proto3" json:"by_agent_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Ctx                 *common.Context        `protobuf:"bytes,1,opt,name=ctx,proto3" json:"ctx,omitempty"`
+	AccountId           string                 `protobuf:"bytes,2,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Id                  string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
+	Created             int64                  `protobuf:"varint,4,opt,name=created,proto3" json:"created,omitempty"`
+	Quantity            int64                  `protobuf:"varint,7,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Data                *CreditEntryData       `protobuf:"bytes,8,opt,name=data,proto3" json:"data,omitempty"`
+	CreditId            string                 `protobuf:"bytes,9,opt,name=credit_id,json=creditId,proto3" json:"credit_id,omitempty"`
+	FpvUnitPrice        int64                  `protobuf:"varint,10,opt,name=fpv_unit_price,json=fpvUnitPrice,proto3" json:"fpv_unit_price,omitempty"`
+	FpvRegularUnitPrice int64                  `protobuf:"varint,11,opt,name=fpv_regular_unit_price,json=fpvRegularUnitPrice,proto3" json:"fpv_regular_unit_price,omitempty"` //
+	ServiceId           string                 `protobuf:"bytes,12,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`                                    //
+	ServiceType         string                 `protobuf:"bytes,13,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"`                              // campaign, bot, popup
+	Item                string                 `protobuf:"bytes,14,opt,name=item,proto3" json:"item,omitempty"`                                                               // type of product used, e.g: zns, call, llm
+	ItemId              string                 `protobuf:"bytes,15,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`                                             // product id
+	Tags                []string               `protobuf:"bytes,18,rep,name=tags,proto3" json:"tags,omitempty"`                                                               // indexing [model.23048234, conversation.2304823904]
+	ByAgentId           string                 `protobuf:"bytes,16,opt,name=by_agent_id,json=byAgentId,proto3" json:"by_agent_id,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *CreditSpendEntry) Reset() {
@@ -49844,6 +49845,13 @@ func (x *CreditSpendEntry) GetCreditId() string {
 func (x *CreditSpendEntry) GetFpvUnitPrice() int64 {
 	if x != nil {
 		return x.FpvUnitPrice
+	}
+	return 0
+}
+
+func (x *CreditSpendEntry) GetFpvRegularUnitPrice() int64 {
+	if x != nil {
+		return x.FpvRegularUnitPrice
 	}
 	return 0
 }
@@ -74311,7 +74319,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0efpv_total_paid\x18\x15 \x01(\x03R\ffpvTotalPaid\x12\x1a\n" +
 	"\bmodified\x18\x16 \x01(\x03R\bmodified\x12\x1f\n" +
 	"\vnegative_at\x18\x13 \x01(\x03R\n" +
-	"negativeAt\"\xad\x03\n" +
+	"negativeAt\"\xe2\x03\n" +
 	"\x10CreditSpendEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74322,7 +74330,8 @@ const file_header_proto_rawDesc = "" +
 	"\x04data\x18\b \x01(\v2\x17.header.CreditEntryDataR\x04data\x12\x1b\n" +
 	"\tcredit_id\x18\t \x01(\tR\bcreditId\x12$\n" +
 	"\x0efpv_unit_price\x18\n" +
-	" \x01(\x03R\ffpvUnitPrice\x12\x1d\n" +
+	" \x01(\x03R\ffpvUnitPrice\x123\n" +
+	"\x16fpv_regular_unit_price\x18\v \x01(\x03R\x13fpvRegularUnitPrice\x12\x1d\n" +
 	"\n" +
 	"service_id\x18\f \x01(\tR\tserviceId\x12!\n" +
 	"\fservice_type\x18\r \x01(\tR\vserviceType\x12\x12\n" +
