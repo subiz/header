@@ -7043,7 +7043,6 @@ message Credit {
 
 	string name = 4;
 	int64 fpv_balance = 5; // fpv - read-only = fpv_total_paid - fpv_total_spend
-	int64 fpv_capacity = 6; // fpv - readonly
 
 	int64 fpv_credit_limit = 7; // 0 - 40 only set by subiz
 	int64 fpv_tax = 8; // 1000 -> 10%
@@ -7062,8 +7061,7 @@ message Credit {
 	int64 fpv_total_spent = 20; // fpv - read-only
 	int64 fpv_total_paid = 21; // fpv - read-only
 	int64 modified = 22;
-
-	int64 negative_at = 19;
+	// int64 negative_at = 19;
 }
 
 message CreditSpendEntry {

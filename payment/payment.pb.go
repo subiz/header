@@ -3221,130 +3221,6 @@ func (x *PaidInvoiceEmail) GetInvoiceLink() string {
 	return ""
 }
 
-type FreeTierPolicy struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Ctx             *common.Context        `protobuf:"bytes,1,opt,name=ctx" json:"ctx,omitempty"`
-	AccountId       *string                `protobuf:"bytes,3,opt,name=account_id,json=accountId" json:"account_id,omitempty"`
-	Service         *string                `protobuf:"bytes,4,opt,name=service" json:"service,omitempty"`
-	Category        *string                `protobuf:"bytes,5,opt,name=category" json:"category,omitempty"` // agent, zalo_zns, zalo_active_message, image
-	FromHour        *int64                 `protobuf:"varint,6,opt,name=from_hour,json=fromHour" json:"from_hour,omitempty"`
-	ToHour          *int64                 `protobuf:"varint,7,opt,name=to_hour,json=toHour" json:"to_hour,omitempty"`
-	Type            *string                `protobuf:"bytes,8,opt,name=type" json:"type,omitempty"` // per-hour vs total
-	CreatedBy       *int64                 `protobuf:"varint,9,opt,name=created_by,json=createdBy" json:"created_by,omitempty"`
-	Created         *int64                 `protobuf:"varint,10,opt,name=created" json:"created,omitempty"`
-	CapacityPerHour *int64                 `protobuf:"varint,11,opt,name=capacity_per_hour,json=capacityPerHour" json:"capacity_per_hour,omitempty"`
-	TotalCapacity   *int64                 `protobuf:"varint,12,opt,name=total_capacity,json=totalCapacity" json:"total_capacity,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
-}
-
-func (x *FreeTierPolicy) Reset() {
-	*x = FreeTierPolicy{}
-	mi := &file_payment_proto_msgTypes[29]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FreeTierPolicy) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FreeTierPolicy) ProtoMessage() {}
-
-func (x *FreeTierPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[29]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FreeTierPolicy.ProtoReflect.Descriptor instead.
-func (*FreeTierPolicy) Descriptor() ([]byte, []int) {
-	return file_payment_proto_rawDescGZIP(), []int{29}
-}
-
-func (x *FreeTierPolicy) GetCtx() *common.Context {
-	if x != nil {
-		return x.Ctx
-	}
-	return nil
-}
-
-func (x *FreeTierPolicy) GetAccountId() string {
-	if x != nil && x.AccountId != nil {
-		return *x.AccountId
-	}
-	return ""
-}
-
-func (x *FreeTierPolicy) GetService() string {
-	if x != nil && x.Service != nil {
-		return *x.Service
-	}
-	return ""
-}
-
-func (x *FreeTierPolicy) GetCategory() string {
-	if x != nil && x.Category != nil {
-		return *x.Category
-	}
-	return ""
-}
-
-func (x *FreeTierPolicy) GetFromHour() int64 {
-	if x != nil && x.FromHour != nil {
-		return *x.FromHour
-	}
-	return 0
-}
-
-func (x *FreeTierPolicy) GetToHour() int64 {
-	if x != nil && x.ToHour != nil {
-		return *x.ToHour
-	}
-	return 0
-}
-
-func (x *FreeTierPolicy) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
-	}
-	return ""
-}
-
-func (x *FreeTierPolicy) GetCreatedBy() int64 {
-	if x != nil && x.CreatedBy != nil {
-		return *x.CreatedBy
-	}
-	return 0
-}
-
-func (x *FreeTierPolicy) GetCreated() int64 {
-	if x != nil && x.Created != nil {
-		return *x.Created
-	}
-	return 0
-}
-
-func (x *FreeTierPolicy) GetCapacityPerHour() int64 {
-	if x != nil && x.CapacityPerHour != nil {
-		return *x.CapacityPerHour
-	}
-	return 0
-}
-
-func (x *FreeTierPolicy) GetTotalCapacity() int64 {
-	if x != nil && x.TotalCapacity != nil {
-		return *x.TotalCapacity
-	}
-	return 0
-}
-
 type InvoiceItem_Data struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
 	Renew         *RenewInvoiceItem        `protobuf:"bytes,2,opt,name=renew" json:"renew,omitempty"`
@@ -3358,7 +3234,7 @@ type InvoiceItem_Data struct {
 
 func (x *InvoiceItem_Data) Reset() {
 	*x = InvoiceItem_Data{}
-	mi := &file_payment_proto_msgTypes[30]
+	mi := &file_payment_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3370,7 +3246,7 @@ func (x *InvoiceItem_Data) String() string {
 func (*InvoiceItem_Data) ProtoMessage() {}
 
 func (x *InvoiceItem_Data) ProtoReflect() protoreflect.Message {
-	mi := &file_payment_proto_msgTypes[30]
+	mi := &file_payment_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3784,22 +3660,7 @@ const file_payment_proto_rawDesc = "" +
 	"invoice_id\x18\x05 \x01(\tR\tinvoiceId\x12\x18\n" +
 	"\acreated\x18\x06 \x01(\x03R\acreated\x12'\n" +
 	"\x0finvoice_created\x18\b \x01(\tR\x0einvoiceCreated\x12!\n" +
-	"\finvoice_link\x18\t \x01(\tR\vinvoiceLink\"\xde\x02\n" +
-	"\x0eFreeTierPolicy\x12!\n" +
-	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
-	"\n" +
-	"account_id\x18\x03 \x01(\tR\taccountId\x12\x18\n" +
-	"\aservice\x18\x04 \x01(\tR\aservice\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\x12\x1b\n" +
-	"\tfrom_hour\x18\x06 \x01(\x03R\bfromHour\x12\x17\n" +
-	"\ato_hour\x18\a \x01(\x03R\x06toHour\x12\x12\n" +
-	"\x04type\x18\b \x01(\tR\x04type\x12\x1d\n" +
-	"\n" +
-	"created_by\x18\t \x01(\x03R\tcreatedBy\x12\x18\n" +
-	"\acreated\x18\n" +
-	" \x01(\x03R\acreated\x12*\n" +
-	"\x11capacity_per_hour\x18\v \x01(\x03R\x0fcapacityPerHour\x12%\n" +
-	"\x0etotal_capacity\x18\f \x01(\x03R\rtotalCapacityB!Z\x1fgithub.com/subiz/header/payment"
+	"\finvoice_link\x18\t \x01(\tR\vinvoiceLinkB!Z\x1fgithub.com/subiz/header/payment"
 
 var (
 	file_payment_proto_rawDescOnce sync.Once
@@ -3814,7 +3675,7 @@ func file_payment_proto_rawDescGZIP() []byte {
 }
 
 var file_payment_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
+var file_payment_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_payment_proto_goTypes = []any{
 	(Plan_Type)(0),                  // 0: payment.Plan.Type
 	(Invoice_State)(0),              // 1: payment.Invoice.State
@@ -3848,58 +3709,56 @@ var file_payment_proto_goTypes = []any{
 	(*TrialEndingEmail)(nil),        // 29: payment.TrialEndingEmail
 	(*UpdatePlanEmail)(nil),         // 30: payment.UpdatePlanEmail
 	(*PaidInvoiceEmail)(nil),        // 31: payment.PaidInvoiceEmail
-	(*FreeTierPolicy)(nil),          // 32: payment.FreeTierPolicy
-	(*InvoiceItem_Data)(nil),        // 33: payment.InvoiceItem.Data
-	(*common.Context)(nil),          // 34: common.Context
-	(*common.Limit)(nil),            // 35: common.Limit
+	(*InvoiceItem_Data)(nil),        // 32: payment.InvoiceItem.Data
+	(*common.Context)(nil),          // 33: common.Context
+	(*common.Limit)(nil),            // 34: common.Limit
 }
 var file_payment_proto_depIdxs = []int32{
-	34, // 0: payment.Comments.ctx:type_name -> common.Context
+	33, // 0: payment.Comments.ctx:type_name -> common.Context
 	4,  // 1: payment.Comments.comments:type_name -> payment.Comment
-	34, // 2: payment.Comment.ctx:type_name -> common.Context
+	33, // 2: payment.Comment.ctx:type_name -> common.Context
 	7,  // 3: payment.Plans.plans:type_name -> payment.Plan
 	9,  // 4: payment.DiffSubRequest.old_subscription:type_name -> payment.Subscription
 	9,  // 5: payment.DiffSubRequest.new_subscription:type_name -> payment.Subscription
-	35, // 6: payment.Plan.limit:type_name -> common.Limit
-	34, // 7: payment.PurchaseRequest.ctx:type_name -> common.Context
-	35, // 8: payment.PurchaseRequest.limit:type_name -> common.Limit
-	34, // 9: payment.Subscription.ctx:type_name -> common.Context
-	35, // 10: payment.Subscription.limit:type_name -> common.Limit
-	34, // 11: payment.Bill.ctx:type_name -> common.Context
-	34, // 12: payment.Bills.ctx:type_name -> common.Context
+	34, // 6: payment.Plan.limit:type_name -> common.Limit
+	33, // 7: payment.PurchaseRequest.ctx:type_name -> common.Context
+	34, // 8: payment.PurchaseRequest.limit:type_name -> common.Limit
+	33, // 9: payment.Subscription.ctx:type_name -> common.Context
+	34, // 10: payment.Subscription.limit:type_name -> common.Limit
+	33, // 11: payment.Bill.ctx:type_name -> common.Context
+	33, // 12: payment.Bills.ctx:type_name -> common.Context
 	10, // 13: payment.Bills.bills:type_name -> payment.Bill
-	34, // 14: payment.Note.ctx:type_name -> common.Context
-	34, // 15: payment.Invoices.ctx:type_name -> common.Context
+	33, // 14: payment.Note.ctx:type_name -> common.Context
+	33, // 15: payment.Invoices.ctx:type_name -> common.Context
 	15, // 16: payment.Invoices.invoices:type_name -> payment.Invoice
-	34, // 17: payment.ListInvoiceRequest.ctx:type_name -> common.Context
-	34, // 18: payment.Invoice.ctx:type_name -> common.Context
+	33, // 17: payment.ListInvoiceRequest.ctx:type_name -> common.Context
+	33, // 18: payment.Invoice.ctx:type_name -> common.Context
 	22, // 19: payment.Invoice.billing_info:type_name -> payment.BillingInfo
 	21, // 20: payment.Invoice.items:type_name -> payment.InvoiceItem
 	12, // 21: payment.Invoice.notes:type_name -> payment.Note
 	9,  // 22: payment.Invoice.current_sub:type_name -> payment.Subscription
 	7,  // 23: payment.Invoice.current_plan:type_name -> payment.Plan
-	33, // 24: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
-	34, // 25: payment.Logs.ctx:type_name -> common.Context
+	32, // 24: payment.InvoiceItem.data:type_name -> payment.InvoiceItem.Data
+	33, // 25: payment.Logs.ctx:type_name -> common.Context
 	24, // 26: payment.Logs.logs:type_name -> payment.Log
-	34, // 27: payment.Log.ctx:type_name -> common.Context
-	34, // 28: payment.String.ctx:type_name -> common.Context
-	34, // 29: payment.PayRequest.ctx:type_name -> common.Context
-	34, // 30: payment.AutoPayRequest.ctx:type_name -> common.Context
-	34, // 31: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
-	34, // 32: payment.TrialEndingEmail.ctx:type_name -> common.Context
-	34, // 33: payment.UpdatePlanEmail.ctx:type_name -> common.Context
-	34, // 34: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
-	34, // 35: payment.FreeTierPolicy.ctx:type_name -> common.Context
-	17, // 36: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
-	16, // 37: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
-	19, // 38: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
-	20, // 39: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
-	18, // 40: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedPlanInvoiceItem
-	41, // [41:41] is the sub-list for method output_type
-	41, // [41:41] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	33, // 27: payment.Log.ctx:type_name -> common.Context
+	33, // 28: payment.String.ctx:type_name -> common.Context
+	33, // 29: payment.PayRequest.ctx:type_name -> common.Context
+	33, // 30: payment.AutoPayRequest.ctx:type_name -> common.Context
+	33, // 31: payment.InvoiceCreatedEmail.ctx:type_name -> common.Context
+	33, // 32: payment.TrialEndingEmail.ctx:type_name -> common.Context
+	33, // 33: payment.UpdatePlanEmail.ctx:type_name -> common.Context
+	33, // 34: payment.PaidInvoiceEmail.ctx:type_name -> common.Context
+	17, // 35: payment.InvoiceItem.Data.renew:type_name -> payment.RenewInvoiceItem
+	16, // 36: payment.InvoiceItem.Data.agent:type_name -> payment.AgentInvoiceItem
+	19, // 37: payment.InvoiceItem.Data.plan:type_name -> payment.PlanInvoiceItem
+	20, // 38: payment.InvoiceItem.Data.marketing:type_name -> payment.MarketingInvoiceItem
+	18, // 39: payment.InvoiceItem.Data.reserved_plan:type_name -> payment.ReservedPlanInvoiceItem
+	40, // [40:40] is the sub-list for method output_type
+	40, // [40:40] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_payment_proto_init() }
@@ -3913,7 +3772,7 @@ func file_payment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_payment_proto_rawDesc), len(file_payment_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   31,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

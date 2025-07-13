@@ -419,22 +419,3 @@ message PaidInvoiceEmail {
 	optional string invoice_created = 8;
 	optional string invoice_link = 9;
 }
-
-message FreeTierPolicy {
-	optional common.Context ctx = 1;
-	optional string account_id = 3;
-
-	optional string service = 4;
-	optional string category = 5; // agent, zalo_zns, zalo_active_message, image
-
-	optional int64 from_hour = 6;
-	optional int64 to_hour = 7;
-
-	optional string type = 8; // per-hour vs total
-
-	optional int64 created_by = 9;
-	optional int64 created = 10;
-
-	optional int64 capacity_per_hour = 11;
-	optional int64 total_capacity = 12;
-}

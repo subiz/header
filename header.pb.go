@@ -49545,7 +49545,6 @@ type Credit struct {
 	Id             string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	Name           string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	FpvBalance     int64                  `protobuf:"varint,5,opt,name=fpv_balance,json=fpvBalance,proto3" json:"fpv_balance,omitempty"`               // fpv - read-only = fpv_total_paid - fpv_total_spend
-	FpvCapacity    int64                  `protobuf:"varint,6,opt,name=fpv_capacity,json=fpvCapacity,proto3" json:"fpv_capacity,omitempty"`            // fpv - readonly
 	FpvCreditLimit int64                  `protobuf:"varint,7,opt,name=fpv_credit_limit,json=fpvCreditLimit,proto3" json:"fpv_credit_limit,omitempty"` // 0 - 40 only set by subiz
 	FpvTax         int64                  `protobuf:"varint,8,opt,name=fpv_tax,json=fpvTax,proto3" json:"fpv_tax,omitempty"`                           // 1000 -> 10%
 	Created        int64                  `protobuf:"varint,9,opt,name=created,proto3" json:"created,omitempty"`
@@ -49559,8 +49558,7 @@ type Credit struct {
 	Currency       string                 `protobuf:"bytes,18,opt,name=currency,proto3" json:"currency,omitempty"`                                   // default USD, VND
 	FpvTotalSpent  int64                  `protobuf:"varint,20,opt,name=fpv_total_spent,json=fpvTotalSpent,proto3" json:"fpv_total_spent,omitempty"` // fpv - read-only
 	FpvTotalPaid   int64                  `protobuf:"varint,21,opt,name=fpv_total_paid,json=fpvTotalPaid,proto3" json:"fpv_total_paid,omitempty"`    // fpv - read-only
-	Modified       int64                  `protobuf:"varint,22,opt,name=modified,proto3" json:"modified,omitempty"`
-	NegativeAt     int64                  `protobuf:"varint,19,opt,name=negative_at,json=negativeAt,proto3" json:"negative_at,omitempty"`
+	Modified       int64                  `protobuf:"varint,22,opt,name=modified,proto3" json:"modified,omitempty"`                                  // int64 negative_at = 19;
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -49626,13 +49624,6 @@ func (x *Credit) GetName() string {
 func (x *Credit) GetFpvBalance() int64 {
 	if x != nil {
 		return x.FpvBalance
-	}
-	return 0
-}
-
-func (x *Credit) GetFpvCapacity() int64 {
-	if x != nil {
-		return x.FpvCapacity
 	}
 	return 0
 }
@@ -49731,13 +49722,6 @@ func (x *Credit) GetFpvTotalPaid() int64 {
 func (x *Credit) GetModified() int64 {
 	if x != nil {
 		return x.Modified
-	}
-	return 0
-}
-
-func (x *Credit) GetNegativeAt() int64 {
-	if x != nil {
-		return x.NegativeAt
 	}
 	return 0
 }
@@ -74291,7 +74275,7 @@ const file_header_proto_rawDesc = "" +
 	"\tpartition\x18\b \x01(\x05R\tpartition\x12\x10\n" +
 	"\x03key\x18\t \x01(\tR\x03key\x12\x12\n" +
 	"\x04host\x18\n" +
-	" \x01(\tR\x04host\"\x9a\x05\n" +
+	" \x01(\tR\x04host\"\xd6\x04\n" +
 	"\x06Credit\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74299,8 +74283,7 @@ const file_header_proto_rawDesc = "" +
 	"\x02id\x18\x03 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x1f\n" +
 	"\vfpv_balance\x18\x05 \x01(\x03R\n" +
-	"fpvBalance\x12!\n" +
-	"\ffpv_capacity\x18\x06 \x01(\x03R\vfpvCapacity\x12(\n" +
+	"fpvBalance\x12(\n" +
 	"\x10fpv_credit_limit\x18\a \x01(\x03R\x0efpvCreditLimit\x12\x17\n" +
 	"\afpv_tax\x18\b \x01(\x03R\x06fpvTax\x12\x18\n" +
 	"\acreated\x18\t \x01(\x03R\acreated\x12\x1d\n" +
@@ -74317,9 +74300,7 @@ const file_header_proto_rawDesc = "" +
 	"\bcurrency\x18\x12 \x01(\tR\bcurrency\x12&\n" +
 	"\x0ffpv_total_spent\x18\x14 \x01(\x03R\rfpvTotalSpent\x12$\n" +
 	"\x0efpv_total_paid\x18\x15 \x01(\x03R\ffpvTotalPaid\x12\x1a\n" +
-	"\bmodified\x18\x16 \x01(\x03R\bmodified\x12\x1f\n" +
-	"\vnegative_at\x18\x13 \x01(\x03R\n" +
-	"negativeAt\"\xe2\x03\n" +
+	"\bmodified\x18\x16 \x01(\x03R\bmodified\"\xe2\x03\n" +
 	"\x10CreditSpendEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
