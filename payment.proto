@@ -277,6 +277,10 @@ message MarketingInvoiceItem {
 	optional int64 expired = 4;
 }
 
+message NoVATInvoiceItem {
+	optional int64 expired = 4;
+}
+
 message InvoiceItem {
 	optional string headline = 4;
 	optional string description = 5;
@@ -290,6 +294,7 @@ message InvoiceItem {
 		optional PlanInvoiceItem plan = 5;
 		optional MarketingInvoiceItem marketing = 6;
 		optional ReservedPlanInvoiceItem reserved_plan = 7;
+		optional NoVATInvoiceItem novat = 8;
 	}
 	optional string type = 18;
 	optional Data data = 9;
