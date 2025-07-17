@@ -17201,7 +17201,6 @@ const (
 	PaymentMgr_ConvertInvoiceToHtml_FullMethodName = "/header.PaymentMgr/ConvertInvoiceToHtml"
 	PaymentMgr_GetExchangeRate_FullMethodName      = "/header.PaymentMgr/GetExchangeRate"
 	PaymentMgr_TransferMoney_FullMethodName        = "/header.PaymentMgr/TransferMoney"
-	PaymentMgr_AddCredit_FullMethodName            = "/header.PaymentMgr/AddCredit"
 	PaymentMgr_ListPaymentLogs_FullMethodName      = "/header.PaymentMgr/ListPaymentLogs"
 )
 
@@ -17226,7 +17225,7 @@ type PaymentMgrClient interface {
 	ConvertInvoiceToHtml(ctx context.Context, in *payment.Invoice, opts ...grpc.CallOption) (*payment.String, error)
 	GetExchangeRate(ctx context.Context, in *ExchangeRate, opts ...grpc.CallOption) (*ExchangeRate, error)
 	TransferMoney(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*payment.Bill, error)
-	AddCredit(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*Empty, error)
+	// rpc AddCredit(payment.PayRequest) returns (Empty);
 	ListPaymentLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Logs, error)
 }
 
@@ -17408,16 +17407,6 @@ func (c *paymentMgrClient) TransferMoney(ctx context.Context, in *payment.PayReq
 	return out, nil
 }
 
-func (c *paymentMgrClient) AddCredit(ctx context.Context, in *payment.PayRequest, opts ...grpc.CallOption) (*Empty, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Empty)
-	err := c.cc.Invoke(ctx, PaymentMgr_AddCredit_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *paymentMgrClient) ListPaymentLogs(ctx context.Context, in *Id, opts ...grpc.CallOption) (*payment.Logs, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(payment.Logs)
@@ -17449,7 +17438,7 @@ type PaymentMgrServer interface {
 	ConvertInvoiceToHtml(context.Context, *payment.Invoice) (*payment.String, error)
 	GetExchangeRate(context.Context, *ExchangeRate) (*ExchangeRate, error)
 	TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error)
-	AddCredit(context.Context, *payment.PayRequest) (*Empty, error)
+	// rpc AddCredit(payment.PayRequest) returns (Empty);
 	ListPaymentLogs(context.Context, *Id) (*payment.Logs, error)
 	mustEmbedUnimplementedPaymentMgrServer()
 }
@@ -17511,9 +17500,6 @@ func (UnimplementedPaymentMgrServer) GetExchangeRate(context.Context, *ExchangeR
 }
 func (UnimplementedPaymentMgrServer) TransferMoney(context.Context, *payment.PayRequest) (*payment.Bill, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferMoney not implemented")
-}
-func (UnimplementedPaymentMgrServer) AddCredit(context.Context, *payment.PayRequest) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCredit not implemented")
 }
 func (UnimplementedPaymentMgrServer) ListPaymentLogs(context.Context, *Id) (*payment.Logs, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPaymentLogs not implemented")
@@ -17845,24 +17831,6 @@ func _PaymentMgr_TransferMoney_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PaymentMgr_AddCredit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(payment.PayRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PaymentMgrServer).AddCredit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PaymentMgr_AddCredit_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PaymentMgrServer).AddCredit(ctx, req.(*payment.PayRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _PaymentMgr_ListPaymentLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Id)
 	if err := dec(in); err != nil {
@@ -17955,10 +17923,6 @@ var PaymentMgr_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TransferMoney",
 			Handler:    _PaymentMgr_TransferMoney_Handler,
-		},
-		{
-			MethodName: "AddCredit",
-			Handler:    _PaymentMgr_AddCredit_Handler,
 		},
 		{
 			MethodName: "ListPaymentLogs",

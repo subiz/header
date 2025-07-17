@@ -9154,6 +9154,7 @@ message AIDataEntry {
 	int64 num_characters = 36;
 	int64 num_chunks = 37;
 
+	int64 fpv_last_chunking_cost = 47;
 	int64 fpv_chunking_cost = 45;
 	repeated string used_bys = 46; // computed by referrer by any active (or latest) agent
 

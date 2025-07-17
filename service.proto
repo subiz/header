@@ -622,7 +622,7 @@ service PaymentMgr {
 	rpc GetExchangeRate(ExchangeRate) returns (ExchangeRate);
 	rpc TransferMoney(payment.PayRequest) returns (payment.Bill); // only subiz
 
-	rpc AddCredit(payment.PayRequest) returns (Empty);
+	// rpc AddCredit(payment.PayRequest) returns (Empty);
 	rpc ListPaymentLogs(Id) returns (payment.Logs);
 }
 
