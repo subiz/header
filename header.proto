@@ -7151,6 +7151,7 @@ message CreditEntryDataLLMCompletion {
 	int64 prompt_tokens = 14;
 	int64 completion_tokens = 15;
 	int64 total_tokens = 16;
+	int64 cached_tokens = 17;
 }
 
 message CreditEntryDataTextEmbedding {

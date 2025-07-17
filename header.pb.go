@@ -50365,6 +50365,7 @@ type CreditEntryDataLLMCompletion struct {
 	PromptTokens     int64                  `protobuf:"varint,14,opt,name=prompt_tokens,json=promptTokens,proto3" json:"prompt_tokens,omitempty"`
 	CompletionTokens int64                  `protobuf:"varint,15,opt,name=completion_tokens,json=completionTokens,proto3" json:"completion_tokens,omitempty"`
 	TotalTokens      int64                  `protobuf:"varint,16,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
+	CachedTokens     int64                  `protobuf:"varint,17,opt,name=cached_tokens,json=cachedTokens,proto3" json:"cached_tokens,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -50472,6 +50473,13 @@ func (x *CreditEntryDataLLMCompletion) GetCompletionTokens() int64 {
 func (x *CreditEntryDataLLMCompletion) GetTotalTokens() int64 {
 	if x != nil {
 		return x.TotalTokens
+	}
+	return 0
+}
+
+func (x *CreditEntryDataLLMCompletion) GetCachedTokens() int64 {
+	if x != nil {
+		return x.CachedTokens
 	}
 	return 0
 }
@@ -74366,7 +74374,7 @@ const file_header_proto_rawDesc = "" +
 	"\x04file\x18\x06 \x01(\v2\x19.header.CreditEntryDataIdR\x04file\x12R\n" +
 	"\x11zalo_request_call\x18\a \x01(\v2&.header.CreditEntryDataZaloRequestCallR\x0fzaloRequestCall\x12K\n" +
 	"\x0ellm_completion\x18\b \x01(\v2$.header.CreditEntryDataLLMCompletionR\rllmCompletion\x12K\n" +
-	"\x0etext_embedding\x18\t \x01(\v2$.header.CreditEntryDataTextEmbeddingR\rtextEmbedding\"\x81\x03\n" +
+	"\x0etext_embedding\x18\t \x01(\v2$.header.CreditEntryDataTextEmbeddingR\rtextEmbedding\"\xa6\x03\n" +
 	"\x1cCreditEntryDataLLMCompletion\x12\x19\n" +
 	"\btrace_id\x18\x03 \x01(\tR\atraceId\x12\x18\n" +
 	"\apurpose\x18\x04 \x01(\tR\apurpose\x12\x14\n" +
@@ -74379,7 +74387,8 @@ const file_header_proto_rawDesc = "" +
 	"\routput_length\x18\f \x01(\x03R\foutputLength\x12#\n" +
 	"\rprompt_tokens\x18\x0e \x01(\x03R\fpromptTokens\x12+\n" +
 	"\x11completion_tokens\x18\x0f \x01(\x03R\x10completionTokens\x12!\n" +
-	"\ftotal_tokens\x18\x10 \x01(\x03R\vtotalTokens\"`\n" +
+	"\ftotal_tokens\x18\x10 \x01(\x03R\vtotalTokens\x12#\n" +
+	"\rcached_tokens\x18\x11 \x01(\x03R\fcachedTokens\"`\n" +
 	"\x1cCreditEntryDataTextEmbedding\x12\x12\n" +
 	"\x04text\x18\x04 \x01(\tR\x04text\x12\x14\n" +
 	"\x05model\x18\x06 \x01(\tR\x05model\x12\x16\n" +
