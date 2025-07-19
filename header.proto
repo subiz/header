@@ -7080,7 +7080,7 @@ message CreditSpendEntry {
 	string service_id = 12; //
 	string service_type = 13; // campaign, bot, popup
 
-	string item = 14; // type of product used, e.g: zns, call, llm
+	string item = 14; // type of product used, e.g: zns, call, llm, textembedding
 	string item_id = 15; // product id
 
 	repeated string tags = 18; // indexing [model.23048234, conversation.2304823904]
@@ -7155,9 +7155,15 @@ message CreditEntryDataLLMCompletion {
 }
 
 message CreditEntryDataTextEmbedding {
-	string text = 4; // top 100 character
+	string text = 4; // top 100 characters
 	string model = 6; // text-embedding-3-small
 	int64 length = 8;
+
+	string trace_id = 3;
+	string purpose = 5; // chat, chunking
+	string conversation_id = 9; // optional
+
+	int64 total_tokens = 16;
 }
 
 message CreditSpendEntries {

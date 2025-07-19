@@ -49739,7 +49739,7 @@ type CreditSpendEntry struct {
 	FpvRegularUnitPrice int64                  `protobuf:"varint,11,opt,name=fpv_regular_unit_price,json=fpvRegularUnitPrice,proto3" json:"fpv_regular_unit_price,omitempty"` //
 	ServiceId           string                 `protobuf:"bytes,12,opt,name=service_id,json=serviceId,proto3" json:"service_id,omitempty"`                                    //
 	ServiceType         string                 `protobuf:"bytes,13,opt,name=service_type,json=serviceType,proto3" json:"service_type,omitempty"`                              // campaign, bot, popup
-	Item                string                 `protobuf:"bytes,14,opt,name=item,proto3" json:"item,omitempty"`                                                               // type of product used, e.g: zns, call, llm
+	Item                string                 `protobuf:"bytes,14,opt,name=item,proto3" json:"item,omitempty"`                                                               // type of product used, e.g: zns, call, llm, textembedding
 	ItemId              string                 `protobuf:"bytes,15,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`                                             // product id
 	Tags                []string               `protobuf:"bytes,18,rep,name=tags,proto3" json:"tags,omitempty"`                                                               // indexing [model.23048234, conversation.2304823904]
 	ByAgentId           string                 `protobuf:"bytes,16,opt,name=by_agent_id,json=byAgentId,proto3" json:"by_agent_id,omitempty"`
@@ -50485,12 +50485,16 @@ func (x *CreditEntryDataLLMCompletion) GetCachedTokens() int64 {
 }
 
 type CreditEntryDataTextEmbedding struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Text          string                 `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`   // top 100 character
-	Model         string                 `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"` // text-embedding-3-small
-	Length        int64                  `protobuf:"varint,8,opt,name=length,proto3" json:"length,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Text           string                 `protobuf:"bytes,4,opt,name=text,proto3" json:"text,omitempty"`   // top 100 characters
+	Model          string                 `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"` // text-embedding-3-small
+	Length         int64                  `protobuf:"varint,8,opt,name=length,proto3" json:"length,omitempty"`
+	TraceId        string                 `protobuf:"bytes,3,opt,name=trace_id,json=traceId,proto3" json:"trace_id,omitempty"`
+	Purpose        string                 `protobuf:"bytes,5,opt,name=purpose,proto3" json:"purpose,omitempty"`                                     // chat, chunking
+	ConversationId string                 `protobuf:"bytes,9,opt,name=conversation_id,json=conversationId,proto3" json:"conversation_id,omitempty"` // optional
+	TotalTokens    int64                  `protobuf:"varint,16,opt,name=total_tokens,json=totalTokens,proto3" json:"total_tokens,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CreditEntryDataTextEmbedding) Reset() {
@@ -50540,6 +50544,34 @@ func (x *CreditEntryDataTextEmbedding) GetModel() string {
 func (x *CreditEntryDataTextEmbedding) GetLength() int64 {
 	if x != nil {
 		return x.Length
+	}
+	return 0
+}
+
+func (x *CreditEntryDataTextEmbedding) GetTraceId() string {
+	if x != nil {
+		return x.TraceId
+	}
+	return ""
+}
+
+func (x *CreditEntryDataTextEmbedding) GetPurpose() string {
+	if x != nil {
+		return x.Purpose
+	}
+	return ""
+}
+
+func (x *CreditEntryDataTextEmbedding) GetConversationId() string {
+	if x != nil {
+		return x.ConversationId
+	}
+	return ""
+}
+
+func (x *CreditEntryDataTextEmbedding) GetTotalTokens() int64 {
+	if x != nil {
+		return x.TotalTokens
 	}
 	return 0
 }
@@ -74396,11 +74428,15 @@ const file_header_proto_rawDesc = "" +
 	"\rprompt_tokens\x18\x0e \x01(\x03R\fpromptTokens\x12+\n" +
 	"\x11completion_tokens\x18\x0f \x01(\x03R\x10completionTokens\x12!\n" +
 	"\ftotal_tokens\x18\x10 \x01(\x03R\vtotalTokens\x12#\n" +
-	"\rcached_tokens\x18\x11 \x01(\x03R\fcachedTokens\"`\n" +
+	"\rcached_tokens\x18\x11 \x01(\x03R\fcachedTokens\"\xe1\x01\n" +
 	"\x1cCreditEntryDataTextEmbedding\x12\x12\n" +
 	"\x04text\x18\x04 \x01(\tR\x04text\x12\x14\n" +
 	"\x05model\x18\x06 \x01(\tR\x05model\x12\x16\n" +
-	"\x06length\x18\b \x01(\x03R\x06length\"\xab\x01\n" +
+	"\x06length\x18\b \x01(\x03R\x06length\x12\x19\n" +
+	"\btrace_id\x18\x03 \x01(\tR\atraceId\x12\x18\n" +
+	"\apurpose\x18\x05 \x01(\tR\apurpose\x12'\n" +
+	"\x0fconversation_id\x18\t \x01(\tR\x0econversationId\x12!\n" +
+	"\ftotal_tokens\x18\x10 \x01(\x03R\vtotalTokens\"\xab\x01\n" +
 	"\x12CreditSpendEntries\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
