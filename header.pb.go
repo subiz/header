@@ -64296,6 +64296,7 @@ type AIDataEntry struct {
 	NumSubLinks               int64  `protobuf:"varint,11,opt,name=num_sub_links,json=numSubLinks,proto3" json:"num_sub_links,omitempty"`
 	LastCrawled               int64  `protobuf:"varint,12,opt,name=last_crawled,json=lastCrawled,proto3" json:"last_crawled,omitempty"`
 	CrawlingStatus            string `protobuf:"bytes,13,opt,name=crawling_status,json=crawlingStatus,proto3" json:"crawling_status,omitempty"` // crawling, done
+	CrawlingError             string `protobuf:"bytes,25,opt,name=crawling_error,json=crawlingError,proto3" json:"crawling_error,omitempty"`    // crawling, done
 	CrawlStatusCode           int64  `protobuf:"varint,14,opt,name=crawl_status_code,json=crawlStatusCode,proto3" json:"crawl_status_code,omitempty"`
 	CrawlDepth                int64  `protobuf:"varint,15,opt,name=crawl_depth,json=crawlDepth,proto3" json:"crawl_depth,omitempty"` // 2 default
 	RefererEntryId            string `protobuf:"bytes,16,opt,name=referer_entry_id,json=refererEntryId,proto3" json:"referer_entry_id,omitempty"`
@@ -64479,6 +64480,13 @@ func (x *AIDataEntry) GetLastCrawled() int64 {
 func (x *AIDataEntry) GetCrawlingStatus() string {
 	if x != nil {
 		return x.CrawlingStatus
+	}
+	return ""
+}
+
+func (x *AIDataEntry) GetCrawlingError() string {
+	if x != nil {
+		return x.CrawlingError
 	}
 	return ""
 }
@@ -76094,7 +76102,7 @@ const file_header_proto_rawDesc = "" +
 	"\x0eembedded_chunk\x18\b \x01(\tR\rembeddedChunk\x12%\n" +
 	"\x0enum_characters\x18\t \x01(\x03R\rnumCharacters\x12\x14\n" +
 	"\x05model\x18\n" +
-	" \x01(\tR\x05model\"\x8f\r\n" +
+	" \x01(\tR\x05model\"\xb6\r\n" +
 	"\vAIDataEntry\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -76117,7 +76125,8 @@ const file_header_proto_rawDesc = "" +
 	"data_store\x18+ \x01(\v2\x13.header.AIDataStoreR\tdataStore\x12\"\n" +
 	"\rnum_sub_links\x18\v \x01(\x03R\vnumSubLinks\x12!\n" +
 	"\flast_crawled\x18\f \x01(\x03R\vlastCrawled\x12'\n" +
-	"\x0fcrawling_status\x18\r \x01(\tR\x0ecrawlingStatus\x12*\n" +
+	"\x0fcrawling_status\x18\r \x01(\tR\x0ecrawlingStatus\x12%\n" +
+	"\x0ecrawling_error\x18\x19 \x01(\tR\rcrawlingError\x12*\n" +
 	"\x11crawl_status_code\x18\x0e \x01(\x03R\x0fcrawlStatusCode\x12\x1f\n" +
 	"\vcrawl_depth\x18\x0f \x01(\x03R\n" +
 	"crawlDepth\x12(\n" +
