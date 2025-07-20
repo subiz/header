@@ -43008,6 +43008,7 @@ type CustomAudienceBatchRequest struct {
 	AudienceId    string                 `protobuf:"bytes,5,opt,name=audience_id,json=audienceId,proto3" json:"audience_id,omitempty"`
 	Session       *MetaSyncBatchSession  `protobuf:"bytes,6,opt,name=session,proto3" json:"session,omitempty"`
 	Users         []*User                `protobuf:"bytes,7,rep,name=users,proto3" json:"users,omitempty"`
+	UserIds       []string               `protobuf:"bytes,8,rep,name=user_ids,json=userIds,proto3" json:"user_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -43080,6 +43081,13 @@ func (x *CustomAudienceBatchRequest) GetSession() *MetaSyncBatchSession {
 func (x *CustomAudienceBatchRequest) GetUsers() []*User {
 	if x != nil {
 		return x.Users
+	}
+	return nil
+}
+
+func (x *CustomAudienceBatchRequest) GetUserIds() []string {
+	if x != nil {
+		return x.UserIds
 	}
 	return nil
 }
@@ -74592,7 +74600,7 @@ const file_header_proto_rawDesc = "" +
 	"\x13num_invalid_entries\x18\a \x01(\x03R\x11numInvalidEntries\x12\x1a\n" +
 	"\bresponse\x18\b \x01(\tR\bresponse\x12\x1f\n" +
 	"\vstatus_code\x18\t \x01(\x03R\n" +
-	"statusCode\"\xff\x01\n" +
+	"statusCode\"\x9a\x02\n" +
 	"\x1aCustomAudienceBatchRequest\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +
@@ -74601,7 +74609,8 @@ const file_header_proto_rawDesc = "" +
 	"\vaudience_id\x18\x05 \x01(\tR\n" +
 	"audienceId\x126\n" +
 	"\asession\x18\x06 \x01(\v2\x1c.header.MetaSyncBatchSessionR\asession\x12\"\n" +
-	"\x05users\x18\a \x03(\v2\f.header.UserR\x05users\"y\n" +
+	"\x05users\x18\a \x03(\v2\f.header.UserR\x05users\x12\x19\n" +
+	"\buser_ids\x18\b \x03(\tR\auserIds\"y\n" +
 	"\bSegments\x12!\n" +
 	"\x03ctx\x18\x01 \x01(\v2\x0f.common.ContextR\x03ctx\x12\x1d\n" +
 	"\n" +

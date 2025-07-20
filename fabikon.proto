@@ -394,6 +394,7 @@ message FbPageEntry {
 	optional string id = 5;
 	optional string access_token = 6;
 	optional InstagramUser instagram_business_account = 7;
+	optional MetaBusiness business = 8;
 }
 
 message FbCursors {

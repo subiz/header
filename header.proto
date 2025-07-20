@@ -6048,6 +6048,7 @@ message CustomAudienceBatchRequest {
 	string audience_id = 5;
 	MetaSyncBatchSession session = 6;
 	repeated User users = 7;
+	repeated string user_ids = 8;
 }
 
 message Segments {

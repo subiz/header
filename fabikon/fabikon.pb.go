@@ -3367,6 +3367,7 @@ type FbPageEntry struct {
 	Id                       *string                `protobuf:"bytes,5,opt,name=id" json:"id,omitempty"`
 	AccessToken              *string                `protobuf:"bytes,6,opt,name=access_token,json=accessToken" json:"access_token,omitempty"`
 	InstagramBusinessAccount *InstagramUser         `protobuf:"bytes,7,opt,name=instagram_business_account,json=instagramBusinessAccount" json:"instagram_business_account,omitempty"`
+	Business                 *MetaBusiness          `protobuf:"bytes,8,opt,name=business" json:"business,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -3432,6 +3433,13 @@ func (x *FbPageEntry) GetAccessToken() string {
 func (x *FbPageEntry) GetInstagramBusinessAccount() *InstagramUser {
 	if x != nil {
 		return x.InstagramBusinessAccount
+	}
+	return nil
+}
+
+func (x *FbPageEntry) GetBusiness() *MetaBusiness {
+	if x != nil {
+		return x.Business
 	}
 	return nil
 }
@@ -5801,13 +5809,14 @@ const file_fabikon_proto_rawDesc = "" +
 	"\rFbPagePicture\x12.\n" +
 	"\x04data\x18\x02 \x01(\v2\x1a.fabikon.FbPagePictureDataR\x04data\"%\n" +
 	"\x11FbPagePictureData\x12\x10\n" +
-	"\x03url\x18\x02 \x01(\tR\x03url\"\xdc\x01\n" +
+	"\x03url\x18\x02 \x01(\tR\x03url\"\x8f\x02\n" +
 	"\vFbPageEntry\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x120\n" +
 	"\apicture\x18\x03 \x01(\v2\x16.fabikon.FbPagePictureR\apicture\x12\x0e\n" +
 	"\x02id\x18\x05 \x01(\tR\x02id\x12!\n" +
 	"\faccess_token\x18\x06 \x01(\tR\vaccessToken\x12T\n" +
-	"\x1ainstagram_business_account\x18\a \x01(\v2\x16.fabikon.InstagramUserR\x18instagramBusinessAccount\"9\n" +
+	"\x1ainstagram_business_account\x18\a \x01(\v2\x16.fabikon.InstagramUserR\x18instagramBusinessAccount\x121\n" +
+	"\bbusiness\x18\b \x01(\v2\x15.fabikon.MetaBusinessR\bbusiness\"9\n" +
 	"\tFbCursors\x12\x16\n" +
 	"\x06before\x18\x02 \x01(\tR\x06before\x12\x14\n" +
 	"\x05after\x18\x03 \x01(\tR\x05after\"L\n" +
@@ -6115,42 +6124,43 @@ var file_fabikon_proto_depIdxs = []int32{
 	39, // 42: fabikon.FbPagePicture.data:type_name -> fabikon.FbPagePictureData
 	38, // 43: fabikon.FbPageEntry.picture:type_name -> fabikon.FbPagePicture
 	48, // 44: fabikon.FbPageEntry.instagram_business_account:type_name -> fabikon.InstagramUser
-	41, // 45: fabikon.FbPaging.cursors:type_name -> fabikon.FbCursors
-	40, // 46: fabikon.FbPageRet.data:type_name -> fabikon.FbPageEntry
-	42, // 47: fabikon.FbPageRet.paging:type_name -> fabikon.FbPaging
-	44, // 48: fabikon.FbProfilePic.Data:type_name -> fabikon.FbProfilePicData
-	45, // 49: fabikon.FacebookUser.picture:type_name -> fabikon.FbProfilePic
-	53, // 50: fabikon.FbResponse.error:type_name -> fabikon.Error
-	57, // 51: fabikon.FbPage.conversations:type_name -> fabikon.FbConversations
-	53, // 52: fabikon.FbConversations.error:type_name -> fabikon.Error
-	61, // 53: fabikon.FbConversations.data:type_name -> fabikon.FbConversation
-	42, // 54: fabikon.FbConversations.paging:type_name -> fabikon.FbPaging
-	53, // 55: fabikon.FbLeads.error:type_name -> fabikon.Error
-	60, // 56: fabikon.FbLeads.data:type_name -> fabikon.FbLead
-	42, // 57: fabikon.FbLeads.paging:type_name -> fabikon.FbPaging
-	59, // 58: fabikon.FbLead.field_data:type_name -> fabikon.FbFieldData
-	62, // 59: fabikon.FbConversation.participants:type_name -> fabikon.FbProfiles
-	62, // 60: fabikon.FbConversation.senders:type_name -> fabikon.FbProfiles
-	53, // 61: fabikon.FbProfiles.error:type_name -> fabikon.Error
-	64, // 62: fabikon.FbProfiles.data:type_name -> fabikon.FbProfile
-	42, // 63: fabikon.FbProfiles.paging:type_name -> fabikon.FbPaging
-	64, // 64: fabikon.FbProfileData.data:type_name -> fabikon.FbProfile
-	53, // 65: fabikon.FbConversationMessageAttachemnts.error:type_name -> fabikon.Error
-	66, // 66: fabikon.FbConversationMessageAttachemnts.data:type_name -> fabikon.FbConversationMessageAttachment
-	42, // 67: fabikon.FbConversationMessageAttachemnts.paging:type_name -> fabikon.FbPaging
-	67, // 68: fabikon.FbConversationMessageAttachment.image_data:type_name -> fabikon.FbImageData
-	53, // 69: fabikon.FbConversationMessages.error:type_name -> fabikon.Error
-	69, // 70: fabikon.FbConversationMessages.data:type_name -> fabikon.FbConversationMessage
-	42, // 71: fabikon.FbConversationMessages.paging:type_name -> fabikon.FbPaging
-	64, // 72: fabikon.FbConversationMessage.from:type_name -> fabikon.FbProfile
-	63, // 73: fabikon.FbConversationMessage.to:type_name -> fabikon.FbProfileData
-	65, // 74: fabikon.FbConversationMessage.attachments:type_name -> fabikon.FbConversationMessageAttachemnts
-	18, // 75: fabikon.FacebookAdsFlow.welcome_message:type_name -> fabikon.FbMessage
-	76, // [76:76] is the sub-list for method output_type
-	76, // [76:76] is the sub-list for method input_type
-	76, // [76:76] is the sub-list for extension type_name
-	76, // [76:76] is the sub-list for extension extendee
-	0,  // [0:76] is the sub-list for field type_name
+	1,  // 45: fabikon.FbPageEntry.business:type_name -> fabikon.MetaBusiness
+	41, // 46: fabikon.FbPaging.cursors:type_name -> fabikon.FbCursors
+	40, // 47: fabikon.FbPageRet.data:type_name -> fabikon.FbPageEntry
+	42, // 48: fabikon.FbPageRet.paging:type_name -> fabikon.FbPaging
+	44, // 49: fabikon.FbProfilePic.Data:type_name -> fabikon.FbProfilePicData
+	45, // 50: fabikon.FacebookUser.picture:type_name -> fabikon.FbProfilePic
+	53, // 51: fabikon.FbResponse.error:type_name -> fabikon.Error
+	57, // 52: fabikon.FbPage.conversations:type_name -> fabikon.FbConversations
+	53, // 53: fabikon.FbConversations.error:type_name -> fabikon.Error
+	61, // 54: fabikon.FbConversations.data:type_name -> fabikon.FbConversation
+	42, // 55: fabikon.FbConversations.paging:type_name -> fabikon.FbPaging
+	53, // 56: fabikon.FbLeads.error:type_name -> fabikon.Error
+	60, // 57: fabikon.FbLeads.data:type_name -> fabikon.FbLead
+	42, // 58: fabikon.FbLeads.paging:type_name -> fabikon.FbPaging
+	59, // 59: fabikon.FbLead.field_data:type_name -> fabikon.FbFieldData
+	62, // 60: fabikon.FbConversation.participants:type_name -> fabikon.FbProfiles
+	62, // 61: fabikon.FbConversation.senders:type_name -> fabikon.FbProfiles
+	53, // 62: fabikon.FbProfiles.error:type_name -> fabikon.Error
+	64, // 63: fabikon.FbProfiles.data:type_name -> fabikon.FbProfile
+	42, // 64: fabikon.FbProfiles.paging:type_name -> fabikon.FbPaging
+	64, // 65: fabikon.FbProfileData.data:type_name -> fabikon.FbProfile
+	53, // 66: fabikon.FbConversationMessageAttachemnts.error:type_name -> fabikon.Error
+	66, // 67: fabikon.FbConversationMessageAttachemnts.data:type_name -> fabikon.FbConversationMessageAttachment
+	42, // 68: fabikon.FbConversationMessageAttachemnts.paging:type_name -> fabikon.FbPaging
+	67, // 69: fabikon.FbConversationMessageAttachment.image_data:type_name -> fabikon.FbImageData
+	53, // 70: fabikon.FbConversationMessages.error:type_name -> fabikon.Error
+	69, // 71: fabikon.FbConversationMessages.data:type_name -> fabikon.FbConversationMessage
+	42, // 72: fabikon.FbConversationMessages.paging:type_name -> fabikon.FbPaging
+	64, // 73: fabikon.FbConversationMessage.from:type_name -> fabikon.FbProfile
+	63, // 74: fabikon.FbConversationMessage.to:type_name -> fabikon.FbProfileData
+	65, // 75: fabikon.FbConversationMessage.attachments:type_name -> fabikon.FbConversationMessageAttachemnts
+	18, // 76: fabikon.FacebookAdsFlow.welcome_message:type_name -> fabikon.FbMessage
+	77, // [77:77] is the sub-list for method output_type
+	77, // [77:77] is the sub-list for method input_type
+	77, // [77:77] is the sub-list for extension type_name
+	77, // [77:77] is the sub-list for extension extendee
+	0,  // [0:77] is the sub-list for field type_name
 }
 
 func init() { file_fabikon_proto_init() }
